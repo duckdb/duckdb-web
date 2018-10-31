@@ -1,0 +1,31 @@
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 30.214360s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|      FILTER      |
+|       0.02s      |
+|        108       |
+--------------------
+--------------------                    --------------------
+| NESTED_LOOP_JOIN |                    |   HASH_GROUP_BY  |
+|       0.49s      |                    |       0.08s      |
+|        997       |                    |        996       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||      FILTER      |
+|       0.01s      ||       0.00s      ||      10.91s      |
+|      913408      ||        204       ||       30809      |
+------------------------------------------------------------
+                    ----------------------------------------
+                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+                    |       0.00s      ||      18.08s      |
+                    |      200000      ||    5981588764    |
+                    ----------------------------------------
+
