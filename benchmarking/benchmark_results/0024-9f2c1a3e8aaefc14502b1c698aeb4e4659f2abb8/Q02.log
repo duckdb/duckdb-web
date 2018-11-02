@@ -1,0 +1,56 @@
+<<Query Profiling Information>>
+select  s_acctbal,  s_name,  n_name,  p_partkey,  p_mfgr,  s_address,  s_phone,  s_comment from  part,  supplier,  partsupp,  nation,  region where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and p_size = 15  and p_type like '%BRASS'  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  and ps_supplycost = (  select  min(ps_supplycost)  from  partsupp,  supplier,  nation,  region  where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  ) order by  s_acctbal desc,  n_name,  s_name,  p_partkey limit 100; 
+<<Timing>>
+Total Time: 30.178924s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|      FILTER      |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       0.00s      |                                                                                |       0.00s      |
+|         1        |                                                                                |         0        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||      FILTER      |
+|       0.00s      |                                                            |       0.00s      ||      24.32s      |
+|         7        |                                                            |         1        ||         0        |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     ||   CROSS_PRODUCT  |
+|       0.08s      |                                        |       0.00s      ||       0.00s      ||       3.96s      |
+|         7        |                                        |        25        ||         5        ||     71723325     |
+--------------------                                        ------------------------------------------------------------
+--------------------                    --------------------                                        --------------------                                        --------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     |                                        |   CROSS_PRODUCT  |                                        |     SEQ_SCAN     |
+|       0.00s      |                    |       0.00s      |                                        |       0.12s      |                                        |       0.15s      |
+|       16384      |                    |      800000      |                                        |     14344675     |                                        |      2868935     |
+--------------------                    --------------------                                        --------------------                                        --------------------
+----------------------------------------                                                            --------------------                    --------------------
+|      FILTER      ||     SEQ_SCAN     |                                                            |   CROSS_PRODUCT  |                    |     SEQ_SCAN     |
+|       0.00s      ||       0.00s      |                                                            |       0.00s      |                    |       0.00s      |
+|         3        ||       6144       |                                                            |      574464      |                    |       14025      |
+----------------------------------------                                                            --------------------                    --------------------
+--------------------                                                                                ----------------------------------------
+|     SEQ_SCAN     |                                                                                |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      |                                                                                |       0.00s      ||       0.00s      |
+|       1024       |                                                                                |       1024       ||       1024       |
+--------------------                                                                                ----------------------------------------
+

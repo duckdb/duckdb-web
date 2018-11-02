@@ -1,0 +1,21 @@
+---------
+|| Q05 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 5 ]: 
+Chunk - [2 Columns]
+- VARCHAR: 5 = [ INDONESIA, VIETNAM, CHINA, INDIA, JAPAN]
+- DECIMAL: 5 = [ 55502041.169700, 55295086.996700, 53724494.256600, 52035512.000200, 45410175.695400]
+
+Expected answer [could not parse]:
+n_name   |revenue     
+INDONESIA  |55502041.17
+VIETNAM   |55295087.00
+CHINA   |53724494.26
+INDIA   |52035512.00
+JAPAN   |45410175.70
+
+
