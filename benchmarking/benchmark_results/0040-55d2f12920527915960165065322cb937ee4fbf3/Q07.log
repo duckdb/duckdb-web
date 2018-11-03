@@ -1,0 +1,78 @@
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 1.880961s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|        81        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|        81        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       5924       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.09s      |
+|       5924       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.31s      |
+|      1828450     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.31s      |                                                                                |       0.00s      |
+|      1828450     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.32s      |                                                            |       0.00s      |
+|      1828450     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.43s      |                                        |       0.00s      |
+|      1828450     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.30s      |                    |       0.01s      |
+|      1828450     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.03s      |
+|       10000      ||      1828450     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.04s      |
+                    |      6001215     |
+                    --------------------
+
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 81 ]: 
+Chunk - [4 Columns]
+- VARCHAR: 81 = [ FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY]
+- VARCHAR: 81 = [ GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE]
+- BIGINT: 81 = [ 0, 1168, 1995, 1995, 1996, 1996, 2337, 7912, 10423, 10515, 11635, 11972, 12933, 15500, 17158, 19720, 21271, 21436, 21453, 21489, 21780, 22597, 24933, 25867, 27119, 28982, 32146, 32260, 1077217552, 1077217552, 1077217552, 1077217552, 1115528080, 1115528080, 1115528080, 1115528080, 1119020976, 1119020976, 1119020976, 1119020976, 1861133984, 0, 1168, 1995, 1995, 1996, 1996, 2337, 7912, 10423, 10515, 11635, 11972, 12933, 13351, 15500, 17158, 19720, 21271, 21436, 21453, 21489, 21780, 22597, 24933, 25867, 27119, 28982, 32146, 32260, 1077217552, 1077217552, 1077217552, 1115528080, 1115528080, 1115528080, 1115528080, 1119020976, 1119020976, 1119020976, 1861133984]
+- DECIMAL: 81 = [ 21661778.626200, 161488.090200, 862908.221200, 135650.749000, 1026834.974500, 142521.537900, 256954.510700, 75913.315600, 371213.360900, 315728.888400, 56585.649600, 214004.067800, 151604.800700, 177163.785600, 152053.028600, 106472.082400, 197894.137900, 205451.438100, 157379.547600, 271895.159300, 156892.148600, 183749.126600, 138101.279700, 111801.350600, 346529.879500, 206156.498000, 31255.722000, 162957.777900, 8739421.721000, 61529.305500, 31044.060000, 8914195.944200, 18950.220000, 61883.248000, 8808562.467300, 10435162.247900, 8569076.934400, 129090.134700, 55247.586000, 10764116.839200, 24645595.577900, 20775084.690700, 199432.777500, 397238.883600, 117023.717500, 1764.240000, 548232.731400, 83406.163500, 126158.173600, 241966.566000, 103434.715400, 108263.050100, 54501.149600, 235387.902200, 117438.860400, 71444.700000, 229957.110200, 70309.568000, 66394.048000, 303794.684300, 11425.741600, 226074.508100, 129621.045400, 184149.088700, 233416.811800, 92464.139800, 15146.880000, 352762.227200, 156038.396000, 188261.574500, 7337646.516300, 10545645.652600, 70822.604000, 53823.081600, 8081725.983100, 8803130.051100, 49731.192000, 8074538.056200, 64885.744400, 9572047.617100, 26957705.048600]
+
+Expected answer:
+Chunk - [4 Columns]
+- VARCHAR: 4 = [ FRANCE   , FRANCE   , GERMANY   , GERMANY   ]
+- VARCHAR: 4 = [ GERMANY   , GERMANY   , FRANCE   , FRANCE   ]
+- BIGINT: 4 = [ 1995, 1996, 1995, 1996]
+- DECIMAL: 4 = [ 54639732.730000, 54633083.310000, 52531746.670000, 52520549.020000]
+
+Different sizes: 81 vs 4

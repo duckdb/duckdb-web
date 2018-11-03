@@ -1,0 +1,105 @@
+<<Query Profiling Information>>
+SELECT * FROM integers ORDER BY i
+<<Timing>>
+Total Time: 0.095337s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.09s      |
+|      100000      |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|      100000      |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      100000      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers ORDER BY i
+<<Timing>>
+Total Time: 0.093827s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.09s      |
+|      100000      |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|      100000      |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      100000      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers ORDER BY i
+<<Timing>>
+Total Time: 0.094789s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.09s      |
+|      100000      |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|      100000      |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      100000      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers ORDER BY i
+<<Timing>>
+Total Time: 0.093904s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.09s      |
+|      100000      |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|      100000      |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      100000      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers ORDER BY i
+<<Timing>>
+Total Time: 0.094561s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.09s      |
+|      100000      |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|      100000      |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      100000      |
+--------------------
+
