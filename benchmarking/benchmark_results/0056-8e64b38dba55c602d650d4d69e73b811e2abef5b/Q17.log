@@ -1,0 +1,155 @@
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 6.701326s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       5.79s      |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.43s      |                    |       0.42s      |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       0.03s      ||       0.00s      ||       0.02s      |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.00s      |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 6.700799s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       5.78s      |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.43s      |                    |       0.42s      |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       0.03s      ||       0.00s      ||       0.02s      |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.00s      |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 6.701896s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       5.79s      |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.43s      |                    |       0.42s      |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       0.03s      ||       0.00s      ||       0.02s      |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.00s      |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 6.714478s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       5.79s      |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.43s      |                    |       0.43s      |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       0.03s      ||       0.00s      ||       0.02s      |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.00s      |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 6.700246s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       5.78s      |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.43s      |                    |       0.42s      |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       0.03s      ||       0.00s      ||       0.02s      |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.00s      |
+                    |      200000      |
+                    --------------------
+
