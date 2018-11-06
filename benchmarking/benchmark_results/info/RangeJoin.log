@@ -1,0 +1,2 @@
+RangeJoin - [micro]
+Runs the following query: "SELECT * FROM integers a, integers b WHERE (a.i / 5) > b.j;" on 10000000 rows
