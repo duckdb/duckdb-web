@@ -1,0 +1,330 @@
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 3.191553s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.09s      |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       0.09s      |                                                                                                                        |       0.00s      |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.08s      |                                                                                                    |       0.00s      ||       0.00s      |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.08s      |                                                                                |       0.00s      |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.25s      |                                                            |       0.00s      |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       2.38s      |                                        |       0.01s      |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.11s      |                    |       0.04s      ||       0.01s      |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|       0.00s      ||       0.01s      |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 3.188578s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.09s      |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       0.09s      |                                                                                                                        |       0.00s      |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.08s      |                                                                                                    |       0.00s      ||       0.00s      |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.08s      |                                                                                |       0.00s      |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.25s      |                                                            |       0.00s      |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       2.38s      |                                        |       0.01s      |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.11s      |                    |       0.04s      ||       0.01s      |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|       0.00s      ||       0.01s      |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 3.174700s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.09s      |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       0.09s      |                                                                                                                        |       0.00s      |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.07s      |                                                                                                    |       0.00s      ||       0.00s      |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.08s      |                                                                                |       0.00s      |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.25s      |                                                            |       0.00s      |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       2.38s      |                                        |       0.01s      |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.11s      |                    |       0.04s      ||       0.01s      |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|       0.00s      ||       0.01s      |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 3.181238s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.08s      |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       0.09s      |                                                                                                                        |       0.00s      |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.07s      |                                                                                                    |       0.00s      ||       0.00s      |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.08s      |                                                                                |       0.00s      |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.25s      |                                                            |       0.00s      |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       2.38s      |                                        |       0.01s      |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.11s      |                    |       0.04s      ||       0.01s      |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|       0.00s      ||       0.01s      |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 3.170336s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.09s      |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       0.09s      |                                                                                                                        |       0.00s      |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.07s      |                                                                                                    |       0.00s      ||       0.00s      |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.08s      |                                                                                |       0.00s      |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.25s      |                                                            |       0.00s      |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       2.37s      |                                        |       0.01s      |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.11s      |                    |       0.04s      ||       0.01s      |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|       0.00s      ||       0.01s      |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.00s      |
+|      200000      |
+--------------------
+
