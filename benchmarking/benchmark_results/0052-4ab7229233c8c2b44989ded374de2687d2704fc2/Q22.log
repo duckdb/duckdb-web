@@ -1,0 +1,46 @@
+<<Query Profiling Information>>
+select  cntrycode,  count(*) as numcust,  sum(c_acctbal) as totacctbal from  (  select  substring(c_phone from 1 for 2) as cntrycode,  c_acctbal  from  customer  where  substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  and c_acctbal > (  select  avg(c_acctbal)  from  customer  where  c_acctbal > 0.00  and substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  )  and not exists (  select  *  from  orders  where  o_custkey = c_custkey  )  ) as custsale group by  cntrycode order by  cntrycode; 
+<<Timing>>
+Total Time: 30.217721s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|        619       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.03s      |
+|        619       |
+--------------------
+--------------------                    --------------------
+| NESTED_LOOP_JOIN |                    |    PROJECTION    |
+|       0.01s      |                    |       0.00s      |
+|       1795       |                    |       1179       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||   HASH_GROUP_BY  ||      FILTER      |
+|       0.00s      ||       0.00s      ||       2.20s      |
+|       4209       ||         1        ||       1179       |
+------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       0.00s      ||       0.01s      ||      27.81s      |
+|       15360      ||       38120      ||    1070584096    |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.00s      |
+                    |      150000      |
+                    --------------------
+
