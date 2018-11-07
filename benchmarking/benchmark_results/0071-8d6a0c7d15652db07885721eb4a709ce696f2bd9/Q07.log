@@ -1,0 +1,305 @@
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 1.977823s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         4        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         4        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       5924       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.09s      |
+|       5924       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.34s      |
+|      1828450     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.32s      |                                                                                |       0.00s      |
+|      1828450     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.34s      |                                                            |       0.00s      |
+|      1828450     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.45s      |                                        |       0.00s      |
+|      1828450     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.32s      |                    |       0.01s      |
+|      1828450     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.03s      |
+|       10000      ||      1828450     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.04s      |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 1.982495s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         4        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         4        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       5924       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.09s      |
+|       5924       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.34s      |
+|      1828450     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.32s      |                                                                                |       0.00s      |
+|      1828450     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.34s      |                                                            |       0.00s      |
+|      1828450     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.45s      |                                        |       0.00s      |
+|      1828450     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.32s      |                    |       0.01s      |
+|      1828450     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.03s      |
+|       10000      ||      1828450     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.04s      |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 1.984749s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         4        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         4        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       5924       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.09s      |
+|       5924       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.34s      |
+|      1828450     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.33s      |                                                                                |       0.00s      |
+|      1828450     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.34s      |                                                            |       0.00s      |
+|      1828450     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.45s      |                                        |       0.00s      |
+|      1828450     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.32s      |                    |       0.01s      |
+|      1828450     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.03s      |
+|       10000      ||      1828450     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.04s      |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 1.987490s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         4        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         4        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       5924       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.09s      |
+|       5924       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.34s      |
+|      1828450     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.32s      |                                                                                |       0.00s      |
+|      1828450     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.34s      |                                                            |       0.00s      |
+|      1828450     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.45s      |                                        |       0.00s      |
+|      1828450     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.32s      |                    |       0.01s      |
+|      1828450     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.03s      |
+|       10000      ||      1828450     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.04s      |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 1.990654s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         4        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         4        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       5924       |
+--------------------
+--------------------
+|      FILTER      |
+|       0.09s      |
+|       5924       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.34s      |
+|      1828450     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       0.32s      |                                                                                |       0.00s      |
+|      1828450     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       0.34s      |                                                            |       0.00s      |
+|      1828450     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.45s      |                                        |       0.00s      |
+|      1828450     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.32s      |                    |       0.01s      |
+|      1828450     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.03s      |
+|       10000      ||      1828450     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.04s      |
+                    |      6001215     |
+                    --------------------
+

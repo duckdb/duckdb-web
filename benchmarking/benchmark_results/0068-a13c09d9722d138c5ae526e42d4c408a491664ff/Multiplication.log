@@ -1,0 +1,80 @@
+<<Query Profiling Information>>
+SELECT (i * j) * (i * j) * (i * j) * (i * j) FROM integers
+<<Timing>>
+Total Time: 0.081655s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.04s      |
+|     10000000     |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.03s      |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT (i * j) * (i * j) * (i * j) * (i * j) FROM integers
+<<Timing>>
+Total Time: 0.083624s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.04s      |
+|     10000000     |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.03s      |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT (i * j) * (i * j) * (i * j) * (i * j) FROM integers
+<<Timing>>
+Total Time: 0.082016s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.04s      |
+|     10000000     |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.03s      |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT (i * j) * (i * j) * (i * j) * (i * j) FROM integers
+<<Timing>>
+Total Time: 0.083294s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.04s      |
+|     10000000     |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.03s      |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT (i * j) * (i * j) * (i * j) * (i * j) FROM integers
+<<Timing>>
+Total Time: 0.081956s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.04s      |
+|     10000000     |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|       0.03s      |
+|     10000000     |
+--------------------
+

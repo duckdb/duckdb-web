@@ -1,0 +1,51 @@
+<<Query Profiling Information>>
+select  s_name,  s_address from  supplier,  nation where  s_suppkey in (  select  ps_suppkey  from  partsupp  where  ps_partkey in (  select  p_partkey  from  part  where  p_name like 'forest%'  )  and ps_availqty > (  select  0.5 * sum(l_quantity)  from  lineitem  where  l_partkey = ps_partkey  and l_suppkey = ps_suppkey  and l_shipdate >= cast('1994-01-01' as date)  and l_shipdate < cast ('1995-01-01' as date)  )  )  and s_nationkey = n_nationkey  and n_name = 'CANADA' order by  s_name; 
+<<Timing>>
+Total Time: 30.212737s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.00s      |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.02s      |
+|         0        |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |    PROJECTION    |
+|       0.00s      |                    |       0.00s      |
+|         0        |                    |       4693       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      || NESTED_LOOP_JOIN |
+|       0.00s      ||       0.00s      ||      29.90s      |
+|         0        ||         0        ||       4693       |
+------------------------------------------------------------
+                    ----------------------------------------                    --------------------
+                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+                    |       0.00s      ||       0.06s      |                    |       0.15s      |
+                    |         0        ||       6852       |                    |      543210      |
+                    ----------------------------------------                    --------------------
+                                        ------------------------------------------------------------
+                                        |     SEQ_SCAN     ||    PROJECTION    ||      FILTER      |
+                                        |       0.00s      ||       0.00s      ||       0.03s      |
+                                        |      651264      ||       2127       ||      909455      |
+                                        ------------------------------------------------------------
+                                                            ----------------------------------------
+                                                            |      FILTER      ||     SEQ_SCAN     |
+                                                            |       0.00s      ||       0.03s      |
+                                                            |       2127       ||      6001215     |
+                                                            ----------------------------------------
+                                                            --------------------
+                                                            |     SEQ_SCAN     |
+                                                            |       0.00s      |
+                                                            |      200000      |
+                                                            --------------------
+

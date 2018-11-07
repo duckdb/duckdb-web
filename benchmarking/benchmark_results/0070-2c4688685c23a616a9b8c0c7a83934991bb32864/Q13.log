@@ -1,0 +1,49 @@
+<<Query Profiling Information>>
+select  c_count,  count(*) as custdist from  (  select  c_custkey,  count(o_orderkey)  from  customer left outer join orders on  c_custkey = o_custkey  and o_comment not like '%special%requests%'  group by  c_custkey  ) as c_orders (c_custkey, c_count) group by  c_count order by  custdist desc,  c_count desc; 
+<<Timing>>
+Total Time: 0.805275s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.00s      |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.09s      |
+|      150000      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.35s      |
+|      1533923     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.34s      |
+|      150000      ||      1483918     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.02s      |
+                    |      1500000     |
+                    --------------------
+
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 2 ]: 
+Chunk - [2 Columns]
+- BIGINT: 2 = [ 1, 0]
+- BIGINT: 2 = [ 131748, 18252]
+
+Expected answer:
+Chunk - [2 Columns]
+- BIGINT: 42 = [ 0, 9, 10, 11, 8, 12, 13, 19, 7, 17, 18, 20, 15, 14, 16, 21, 22, 6, 23, 24, 25, 5, 26, 27, 4, 28, 29, 3, 30, 31, 32, 2, 33, 34, 35, 1, 36, 38, 37, 40, 41, 39]
+- BIGINT: 42 = [ 50005, 6641, 6532, 6014, 5937, 5639, 5024, 4793, 4687, 4587, 4529, 4516, 4505, 4446, 4273, 4190, 3623, 3265, 3225, 2742, 2086, 1948, 1612, 1179, 1007, 893, 593, 415, 376, 226, 148, 134, 75, 50, 37, 17, 14, 5, 5, 4, 2, 1]
+
+Different sizes: 2 vs 42
