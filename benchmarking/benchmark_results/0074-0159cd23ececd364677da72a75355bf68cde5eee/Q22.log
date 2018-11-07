@@ -1,0 +1,205 @@
+<<Query Profiling Information>>
+select  cntrycode,  count(*) as numcust,  sum(c_acctbal) as totacctbal from  (  select  substring(c_phone from 1 for 2) as cntrycode,  c_acctbal  from  customer  where  substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  and c_acctbal > (  select  avg(c_acctbal)  from  customer  where  c_acctbal > 0.00  and substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  )  and not exists (  select  *  from  orders  where  o_custkey = c_custkey  )  ) as custsale group by  cntrycode order by  cntrycode; 
+<<Timing>>
+Total Time: 0.156581s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         7        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         7        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.01s      |                    |       0.00s      |
+|       14086      |                    |         1        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||   HASH_GROUP_BY  ||      FILTER      |
+|       0.01s      ||       0.06s      ||       0.01s      |
+|       42015      ||       99996      ||       38120      |
+------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.04s      ||       0.00s      |
+|      150000      ||      1500000     ||      150000      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  cntrycode,  count(*) as numcust,  sum(c_acctbal) as totacctbal from  (  select  substring(c_phone from 1 for 2) as cntrycode,  c_acctbal  from  customer  where  substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  and c_acctbal > (  select  avg(c_acctbal)  from  customer  where  c_acctbal > 0.00  and substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  )  and not exists (  select  *  from  orders  where  o_custkey = c_custkey  )  ) as custsale group by  cntrycode order by  cntrycode; 
+<<Timing>>
+Total Time: 0.157319s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         7        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         7        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.01s      |                    |       0.00s      |
+|       14086      |                    |         1        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||   HASH_GROUP_BY  ||      FILTER      |
+|       0.01s      ||       0.06s      ||       0.01s      |
+|       42015      ||       99996      ||       38120      |
+------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.04s      ||       0.00s      |
+|      150000      ||      1500000     ||      150000      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  cntrycode,  count(*) as numcust,  sum(c_acctbal) as totacctbal from  (  select  substring(c_phone from 1 for 2) as cntrycode,  c_acctbal  from  customer  where  substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  and c_acctbal > (  select  avg(c_acctbal)  from  customer  where  c_acctbal > 0.00  and substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  )  and not exists (  select  *  from  orders  where  o_custkey = c_custkey  )  ) as custsale group by  cntrycode order by  cntrycode; 
+<<Timing>>
+Total Time: 0.157366s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         7        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         7        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.01s      |                    |       0.00s      |
+|       14086      |                    |         1        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||   HASH_GROUP_BY  ||      FILTER      |
+|       0.01s      ||       0.06s      ||       0.01s      |
+|       42015      ||       99996      ||       38120      |
+------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.05s      ||       0.00s      |
+|      150000      ||      1500000     ||      150000      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  cntrycode,  count(*) as numcust,  sum(c_acctbal) as totacctbal from  (  select  substring(c_phone from 1 for 2) as cntrycode,  c_acctbal  from  customer  where  substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  and c_acctbal > (  select  avg(c_acctbal)  from  customer  where  c_acctbal > 0.00  and substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  )  and not exists (  select  *  from  orders  where  o_custkey = c_custkey  )  ) as custsale group by  cntrycode order by  cntrycode; 
+<<Timing>>
+Total Time: 0.156313s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         7        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         7        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.01s      |                    |       0.00s      |
+|       14086      |                    |         1        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||   HASH_GROUP_BY  ||      FILTER      |
+|       0.01s      ||       0.06s      ||       0.01s      |
+|       42015      ||       99996      ||       38120      |
+------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.04s      ||       0.00s      |
+|      150000      ||      1500000     ||      150000      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  cntrycode,  count(*) as numcust,  sum(c_acctbal) as totacctbal from  (  select  substring(c_phone from 1 for 2) as cntrycode,  c_acctbal  from  customer  where  substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  and c_acctbal > (  select  avg(c_acctbal)  from  customer  where  c_acctbal > 0.00  and substring(c_phone from 1 for 2) in  ('13', '31', '23', '29', '30', '18', '17')  )  and not exists (  select  *  from  orders  where  o_custkey = c_custkey  )  ) as custsale group by  cntrycode order by  cntrycode; 
+<<Timing>>
+Total Time: 0.156414s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         7        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         7        |
+--------------------
+--------------------
+|    PROJECTION    |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       0.01s      |
+|       6384       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       0.01s      |                    |       0.00s      |
+|       14086      |                    |         1        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||   HASH_GROUP_BY  ||      FILTER      |
+|       0.01s      ||       0.06s      ||       0.01s      |
+|       42015      ||       99996      ||       38120      |
+------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.04s      ||       0.00s      |
+|      150000      ||      1500000     ||      150000      |
+------------------------------------------------------------
+

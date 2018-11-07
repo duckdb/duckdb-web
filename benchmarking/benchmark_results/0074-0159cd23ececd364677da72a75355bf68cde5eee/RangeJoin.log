@@ -1,0 +1,105 @@
+<<Query Profiling Information>>
+SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;
+<<Timing>>
+Total Time: 19.152222s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.98s      |
+|      3098113     |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|      16.59s      |
+|      3098113     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.00s      |
+|      100000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;
+<<Timing>>
+Total Time: 19.412517s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.99s      |
+|      3098113     |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|      16.86s      |
+|      3098113     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.00s      |
+|      100000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;
+<<Timing>>
+Total Time: 19.511109s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.99s      |
+|      3098113     |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|      16.87s      |
+|      3098113     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.00s      |
+|      100000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;
+<<Timing>>
+Total Time: 19.435467s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.98s      |
+|      3098113     |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|      16.88s      |
+|      3098113     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.00s      |
+|      100000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;
+<<Timing>>
+Total Time: 19.451981s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|       0.98s      |
+|      3098113     |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|      16.88s      |
+|      3098113     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.00s      ||       0.00s      |
+|      100000      ||      100000      |
+----------------------------------------
+
