@@ -1,0 +1,255 @@
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 0.985832s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.05s      |
+|       7243       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |      FILTER      |
+|       0.05s      |                                                                                |       0.00s      |
+|       36236      |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.16s      |                                                            |       0.00s      ||       0.00s      |
+|       36236      |                                                            |        25        ||         5        |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.61s      |                                        |       0.00s      |
+|      910519      |                                        |       10000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.04s      |                    |       0.04s      |
+|      227597      |                    |      6001215     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.01s      |
+|      150000      ||      227597      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.01s      |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 0.984754s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.05s      |
+|       7243       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |      FILTER      |
+|       0.05s      |                                                                                |       0.00s      |
+|       36236      |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.16s      |                                                            |       0.00s      ||       0.00s      |
+|       36236      |                                                            |        25        ||         5        |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.61s      |                                        |       0.00s      |
+|      910519      |                                        |       10000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.04s      |                    |       0.04s      |
+|      227597      |                    |      6001215     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.01s      |
+|      150000      ||      227597      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.01s      |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 0.986021s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.05s      |
+|       7243       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |      FILTER      |
+|       0.05s      |                                                                                |       0.00s      |
+|       36236      |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.16s      |                                                            |       0.00s      ||       0.00s      |
+|       36236      |                                                            |        25        ||         5        |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.61s      |                                        |       0.00s      |
+|      910519      |                                        |       10000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.04s      |                    |       0.04s      |
+|      227597      |                    |      6001215     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.01s      |
+|      150000      ||      227597      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.01s      |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 0.983011s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.05s      |
+|       7243       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |      FILTER      |
+|       0.05s      |                                                                                |       0.00s      |
+|       36236      |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.16s      |                                                            |       0.00s      ||       0.00s      |
+|       36236      |                                                            |        25        ||         5        |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.61s      |                                        |       0.00s      |
+|      910519      |                                        |       10000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.04s      |                    |       0.04s      |
+|      227597      |                    |      6001215     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.01s      |
+|      150000      ||      227597      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.01s      |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 0.988139s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|       0.00s      |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|       0.01s      |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       0.05s      |
+|       7243       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |      FILTER      |
+|       0.05s      |                                                                                |       0.00s      |
+|       36236      |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       0.16s      |                                                            |       0.00s      ||       0.00s      |
+|       36236      |                                                            |        25        ||         5        |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       0.61s      |                                        |       0.00s      |
+|      910519      |                                        |       10000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       0.04s      |                    |       0.04s      |
+|      227597      |                    |      6001215     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|       0.00s      ||       0.01s      |
+|      150000      ||      227597      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       0.01s      |
+                    |      1500000     |
+                    --------------------
+
