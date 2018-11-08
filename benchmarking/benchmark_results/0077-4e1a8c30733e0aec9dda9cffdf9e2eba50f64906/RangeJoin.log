@@ -1,0 +1,24 @@
+<<Query Profiling Information>>
+SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;
+<<Timing>>
+Total Time: 0.000681s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|    i / 1000)>j   |
+|      (0.00s)     |
+|         1        |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     integers     ||     integers     |
+|      (0.00s)     ||      (0.00s)     |
+|       1024       ||      100000      |
+----------------------------------------
+
+INCORRECT RESULT: Computed vector length does not match expected length!
