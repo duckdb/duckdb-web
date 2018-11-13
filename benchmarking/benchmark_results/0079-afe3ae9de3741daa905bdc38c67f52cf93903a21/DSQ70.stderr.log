@@ -1,0 +1,6 @@
+-----------
+|| DSQ70 ||
+-----------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Referenced column "ship_carriers" not found in FROM clause!
