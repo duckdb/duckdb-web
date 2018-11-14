@@ -1,0 +1,310 @@
+<<Query Profiling Information>>
+SELECT sum(ws_ext_discount_amt) AS "Excess Discount Amount" FROM web_sales, item, date_dim WHERE i_manufact_id = 350 AND i_item_sk = ws_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk AND ws_ext_discount_amt > (SELECT 1.3 * avg(ws_ext_discount_amt) FROM web_sales, date_dim WHERE ws_item_sk = i_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk ) ORDER BY sum(ws_ext_discount_amt) LIMIT 100;
+<<Timing>>
+Total Time: 0.127791s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+| ws_ext_discount_ |
+|      amt>#0      |
+|   i_item_sk=#1   |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |   HASH_GROUP_BY  |
+|  ws_sold_date_sk |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.00s)     |                                        |      (0.00s)     |
+|        29        |                                        |       8192       |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |
+|    ws_item_sk    |                    |     d_date <     ||  ws_sold_date_sk |
+|    =i_item_sk    |                    |   = 2000-04-26   ||    =d_date_sk    |
+|                  |                    |   CAST[VARCHAR]  ||                  |
+|                  |                    |     (d_date)     ||                  |
+|                  |                    |   >= 2000-01-27  ||                  |
+|      (0.05s)     |                    |      (0.01s)     ||      (0.05s)     |
+|        876       |                    |        91        ||       20710      |
+--------------------                    ----------------------------------------
+----------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     ||      FILTER      |
+|     web_sales    ||   i_manufact_id  ||     date_dim     ||     web_sales    ||     d_date <     |
+|                  ||       = 350      ||                  ||                  ||   = 2000-04-26   |
+|                  ||                  ||                  ||                  ||   CAST[VARCHAR]  |
+|                  ||                  ||                  ||                  ||     (d_date)     |
+|                  ||                  ||                  ||                  ||   >= 2000-01-27  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.01s)     |
+|      719384      ||        25        ||       73049      ||      719384      ||        91        |
+----------------------------------------------------------------------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |       item       |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       18000      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT sum(ws_ext_discount_amt) AS "Excess Discount Amount" FROM web_sales, item, date_dim WHERE i_manufact_id = 350 AND i_item_sk = ws_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk AND ws_ext_discount_amt > (SELECT 1.3 * avg(ws_ext_discount_amt) FROM web_sales, date_dim WHERE ws_item_sk = i_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk ) ORDER BY sum(ws_ext_discount_amt) LIMIT 100;
+<<Timing>>
+Total Time: 0.128733s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+| ws_ext_discount_ |
+|      amt>#0      |
+|   i_item_sk=#1   |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |   HASH_GROUP_BY  |
+|  ws_sold_date_sk |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.00s)     |                                        |      (0.00s)     |
+|        29        |                                        |       8192       |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |
+|    ws_item_sk    |                    |     d_date <     ||  ws_sold_date_sk |
+|    =i_item_sk    |                    |   = 2000-04-26   ||    =d_date_sk    |
+|                  |                    |   CAST[VARCHAR]  ||                  |
+|                  |                    |     (d_date)     ||                  |
+|                  |                    |   >= 2000-01-27  ||                  |
+|      (0.05s)     |                    |      (0.01s)     ||      (0.05s)     |
+|        876       |                    |        91        ||       20710      |
+--------------------                    ----------------------------------------
+----------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     ||      FILTER      |
+|     web_sales    ||   i_manufact_id  ||     date_dim     ||     web_sales    ||     d_date <     |
+|                  ||       = 350      ||                  ||                  ||   = 2000-04-26   |
+|                  ||                  ||                  ||                  ||   CAST[VARCHAR]  |
+|                  ||                  ||                  ||                  ||     (d_date)     |
+|                  ||                  ||                  ||                  ||   >= 2000-01-27  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.01s)     |
+|      719384      ||        25        ||       73049      ||      719384      ||        91        |
+----------------------------------------------------------------------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |       item       |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       18000      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT sum(ws_ext_discount_amt) AS "Excess Discount Amount" FROM web_sales, item, date_dim WHERE i_manufact_id = 350 AND i_item_sk = ws_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk AND ws_ext_discount_amt > (SELECT 1.3 * avg(ws_ext_discount_amt) FROM web_sales, date_dim WHERE ws_item_sk = i_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk ) ORDER BY sum(ws_ext_discount_amt) LIMIT 100;
+<<Timing>>
+Total Time: 0.128083s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+| ws_ext_discount_ |
+|      amt>#0      |
+|   i_item_sk=#1   |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |   HASH_GROUP_BY  |
+|  ws_sold_date_sk |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.00s)     |                                        |      (0.00s)     |
+|        29        |                                        |       8192       |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |
+|    ws_item_sk    |                    |     d_date <     ||  ws_sold_date_sk |
+|    =i_item_sk    |                    |   = 2000-04-26   ||    =d_date_sk    |
+|                  |                    |   CAST[VARCHAR]  ||                  |
+|                  |                    |     (d_date)     ||                  |
+|                  |                    |   >= 2000-01-27  ||                  |
+|      (0.05s)     |                    |      (0.01s)     ||      (0.05s)     |
+|        876       |                    |        91        ||       20710      |
+--------------------                    ----------------------------------------
+----------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     ||      FILTER      |
+|     web_sales    ||   i_manufact_id  ||     date_dim     ||     web_sales    ||     d_date <     |
+|                  ||       = 350      ||                  ||                  ||   = 2000-04-26   |
+|                  ||                  ||                  ||                  ||   CAST[VARCHAR]  |
+|                  ||                  ||                  ||                  ||     (d_date)     |
+|                  ||                  ||                  ||                  ||   >= 2000-01-27  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.01s)     |
+|      719384      ||        25        ||       73049      ||      719384      ||        91        |
+----------------------------------------------------------------------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |       item       |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       18000      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT sum(ws_ext_discount_amt) AS "Excess Discount Amount" FROM web_sales, item, date_dim WHERE i_manufact_id = 350 AND i_item_sk = ws_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk AND ws_ext_discount_amt > (SELECT 1.3 * avg(ws_ext_discount_amt) FROM web_sales, date_dim WHERE ws_item_sk = i_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk ) ORDER BY sum(ws_ext_discount_amt) LIMIT 100;
+<<Timing>>
+Total Time: 0.128464s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+| ws_ext_discount_ |
+|      amt>#0      |
+|   i_item_sk=#1   |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |   HASH_GROUP_BY  |
+|  ws_sold_date_sk |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.00s)     |                                        |      (0.00s)     |
+|        29        |                                        |       8192       |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |
+|    ws_item_sk    |                    |     d_date <     ||  ws_sold_date_sk |
+|    =i_item_sk    |                    |   = 2000-04-26   ||    =d_date_sk    |
+|                  |                    |   CAST[VARCHAR]  ||                  |
+|                  |                    |     (d_date)     ||                  |
+|                  |                    |   >= 2000-01-27  ||                  |
+|      (0.05s)     |                    |      (0.01s)     ||      (0.05s)     |
+|        876       |                    |        91        ||       20710      |
+--------------------                    ----------------------------------------
+----------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     ||      FILTER      |
+|     web_sales    ||   i_manufact_id  ||     date_dim     ||     web_sales    ||     d_date <     |
+|                  ||       = 350      ||                  ||                  ||   = 2000-04-26   |
+|                  ||                  ||                  ||                  ||   CAST[VARCHAR]  |
+|                  ||                  ||                  ||                  ||     (d_date)     |
+|                  ||                  ||                  ||                  ||   >= 2000-01-27  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.01s)     |
+|      719384      ||        25        ||       73049      ||      719384      ||        91        |
+----------------------------------------------------------------------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |       item       |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       18000      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT sum(ws_ext_discount_amt) AS "Excess Discount Amount" FROM web_sales, item, date_dim WHERE i_manufact_id = 350 AND i_item_sk = ws_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk AND ws_ext_discount_amt > (SELECT 1.3 * avg(ws_ext_discount_amt) FROM web_sales, date_dim WHERE ws_item_sk = i_item_sk AND d_date BETWEEN '2000-01-27' AND cast('2000-04-26' AS date) AND d_date_sk = ws_sold_date_sk ) ORDER BY sum(ws_ext_discount_amt) LIMIT 100;
+<<Timing>>
+Total Time: 0.128365s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+| ws_ext_discount_ |
+|      amt>#0      |
+|   i_item_sk=#1   |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |   HASH_GROUP_BY  |
+|  ws_sold_date_sk |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.00s)     |                                        |      (0.00s)     |
+|        29        |                                        |       8192       |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |
+|    ws_item_sk    |                    |     d_date <     ||  ws_sold_date_sk |
+|    =i_item_sk    |                    |   = 2000-04-26   ||    =d_date_sk    |
+|                  |                    |   CAST[VARCHAR]  ||                  |
+|                  |                    |     (d_date)     ||                  |
+|                  |                    |   >= 2000-01-27  ||                  |
+|      (0.05s)     |                    |      (0.01s)     ||      (0.05s)     |
+|        876       |                    |        91        ||       20710      |
+--------------------                    ----------------------------------------
+----------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     ||      FILTER      |
+|     web_sales    ||   i_manufact_id  ||     date_dim     ||     web_sales    ||     d_date <     |
+|                  ||       = 350      ||                  ||                  ||   = 2000-04-26   |
+|                  ||                  ||                  ||                  ||   CAST[VARCHAR]  |
+|                  ||                  ||                  ||                  ||     (d_date)     |
+|                  ||                  ||                  ||                  ||   >= 2000-01-27  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.01s)     |
+|      719384      ||        25        ||       73049      ||      719384      ||        91        |
+----------------------------------------------------------------------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |       item       |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       18000      |                                        |       73049      |
+                    --------------------                                        --------------------
+
