@@ -1,0 +1,215 @@
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 4.821497s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|   CAST[DECIMAL]  |
+|  (l_quantity)<#0 |
+|   p_partkey=#1   |
+|      (3.96s)     |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       INNER      |                    |                  |
+|     l_partkey    |                    |                  |
+|    =p_partkey    |                    |                  |
+|      (0.45s)     |                    |      (0.35s)     |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|     lineitem     ||    p_container   ||     lineitem     |
+|                  ||     = MED BOX    ||                  |
+|                  ||     p_brand      ||                  |
+|                  ||    = Brand#23    ||                  |
+|      (0.03s)     ||      (0.00s)     ||      (0.02s)     |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       part       |
+                    |      (0.00s)     |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 4.820770s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|   CAST[DECIMAL]  |
+|  (l_quantity)<#0 |
+|   p_partkey=#1   |
+|      (3.96s)     |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       INNER      |                    |                  |
+|     l_partkey    |                    |                  |
+|    =p_partkey    |                    |                  |
+|      (0.45s)     |                    |      (0.35s)     |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|     lineitem     ||    p_container   ||     lineitem     |
+|                  ||     = MED BOX    ||                  |
+|                  ||     p_brand      ||                  |
+|                  ||    = Brand#23    ||                  |
+|      (0.03s)     ||      (0.00s)     ||      (0.02s)     |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       part       |
+                    |      (0.00s)     |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 4.815375s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|   CAST[DECIMAL]  |
+|  (l_quantity)<#0 |
+|   p_partkey=#1   |
+|      (3.95s)     |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       INNER      |                    |                  |
+|     l_partkey    |                    |                  |
+|    =p_partkey    |                    |                  |
+|      (0.45s)     |                    |      (0.35s)     |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|     lineitem     ||    p_container   ||     lineitem     |
+|                  ||     = MED BOX    ||                  |
+|                  ||     p_brand      ||                  |
+|                  ||    = Brand#23    ||                  |
+|      (0.03s)     ||      (0.00s)     ||      (0.02s)     |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       part       |
+                    |      (0.00s)     |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 4.809716s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|   CAST[DECIMAL]  |
+|  (l_quantity)<#0 |
+|   p_partkey=#1   |
+|      (3.95s)     |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       INNER      |                    |                  |
+|     l_partkey    |                    |                  |
+|    =p_partkey    |                    |                  |
+|      (0.45s)     |                    |      (0.35s)     |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|     lineitem     ||    p_container   ||     lineitem     |
+|                  ||     = MED BOX    ||                  |
+|                  ||     p_brand      ||                  |
+|                  ||    = Brand#23    ||                  |
+|      (0.03s)     ||      (0.00s)     ||      (0.02s)     |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       part       |
+                    |      (0.00s)     |
+                    |      200000      |
+                    --------------------
+
+<<Query Profiling Information>>
+select  sum(l_extendedprice) / 7.0 as avg_yearly from  lineitem,  part where  p_partkey = l_partkey  and p_brand = 'Brand#23'  and p_container = 'MED BOX'  and l_quantity < (  select  0.2 * avg(l_quantity)  from  lineitem  where  l_partkey = p_partkey  ); 
+<<Timing>>
+Total Time: 4.826058s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|   CAST[DECIMAL]  |
+|  (l_quantity)<#0 |
+|   p_partkey=#1   |
+|      (3.97s)     |
+|        588       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |   HASH_GROUP_BY  |
+|       INNER      |                    |                  |
+|     l_partkey    |                    |                  |
+|    =p_partkey    |                    |                  |
+|      (0.45s)     |                    |      (0.35s)     |
+|       6088       |                    |      200000      |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|     lineitem     ||    p_container   ||     lineitem     |
+|                  ||     = MED BOX    ||                  |
+|                  ||     p_brand      ||                  |
+|                  ||    = Brand#23    ||                  |
+|      (0.03s)     ||      (0.00s)     ||      (0.02s)     |
+|      6001215     ||        204       ||      6001215     |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       part       |
+                    |      (0.00s)     |
+                    |      200000      |
+                    --------------------
+
