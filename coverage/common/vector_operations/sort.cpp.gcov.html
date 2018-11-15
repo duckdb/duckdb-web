@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 54a33b0 - common/vector_operations/sort.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">common/vector_operations</a> - sort.cpp<span style="font-size: 80%;"> (source / <a href="sort.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 54a33b0</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">109</td>
+            <td class="headerCovTableEntry">653</td>
+            <td class="headerCovTableEntryLo">16.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-15 14:30:38</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntryLo">11.6 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===--------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : // sort.cpp
+<span class="lineNum">       3 </span>            : // Description: This file contains the implementation of the sort operator
+<span class="lineNum">       4 </span>            : //===--------------------------------------------------------------------===//
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : #include &quot;common/exception.hpp&quot;
+<span class="lineNum">       7 </span>            : #include &quot;common/operator/comparison_operators.hpp&quot;
+<span class="lineNum">       8 </span>            : #include &quot;common/vector_operations/vector_operations.hpp&quot;
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : using namespace duckdb;
+<span class="lineNum">      11 </span>            : using namespace std;
+<a name="12"><span class="lineNum">      12 </span>            : </a>
+<span class="lineNum">      13 </span>            : template &lt;class T, class OP, bool HAS_NULL&gt;
+<span class="lineNum">      14 </span><span class="lineCov">          1 : static sel_t templated_quicksort_initial(T *data, nullmask_t &amp;mask,</span>
+<span class="lineNum">      15 </span>            :                                          sel_t result[], size_t count) {
+<span class="lineNum">      16 </span>            :         // select pivot
+<span class="lineNum">      17 </span><span class="lineCov">          1 :         sel_t pivot = 0;</span>
+<span class="lineNum">      18 </span><span class="lineCov">          1 :         sel_t low = 0, high = count - 1;</span>
+<span class="lineNum">      19 </span>            :         if (HAS_NULL) {
+<span class="lineNum">      20 </span>            :                 // set pivot to a not-null value
+<span class="lineNum">      21 </span><span class="lineCov">          1 :                 while (pivot &lt; count &amp;&amp; mask[pivot]) {</span>
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :                         pivot++;</span>
+<span class="lineNum">      23 </span>            :                 }
+<span class="lineNum">      24 </span><span class="lineCov">          1 :                 if (pivot == count) {</span>
+<span class="lineNum">      25 </span>            :                         // everything is NULL
+<span class="lineNum">      26 </span>            :                         // array is already sorted!
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :                         for (size_t i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 :                                 result[i] = i;</span>
+<span class="lineNum">      29 </span>            :                         }
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :                         return (sel_t)-1;</span>
+<span class="lineNum">      31 </span>            :                 }
+<span class="lineNum">      32 </span>            :         }
+<span class="lineNum">      33 </span>            :         // now insert elements
+<span class="lineNum">      34 </span><span class="lineCov">       1024 :         for (size_t i = 1; i &lt; count; i++) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       1023 :                 if (OP::Operation(data[i], data[pivot]) || (HAS_NULL &amp;&amp; mask[i])) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">        340 :                         result[low++] = i;</span>
+<span class="lineNum">      37 </span>            :                 } else {
+<span class="lineNum">      38 </span><span class="lineCov">        683 :                         result[high--] = i;</span>
+<span class="lineNum">      39 </span>            :                 }
+<span class="lineNum">      40 </span>            :         }
+<span class="lineNum">      41 </span><span class="lineCov">          1 :         assert(low == high);</span>
+<span class="lineNum">      42 </span><span class="lineCov">          1 :         result[low] = pivot;</span>
+<span class="lineNum">      43 </span><span class="lineCov">          1 :         return low;</span>
+<span class="lineNum">      44 </span>            : }
+<a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 : </span></a>
+<span class="lineNum">      46 </span>            : template &lt;class T, class OP, bool HAS_NULL&gt;
+<span class="lineNum">      47 </span>            : static void templated_quicksort_inplace(T *data, nullmask_t &amp;mask,
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                                         sel_t result[], sel_t left,</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                                         sel_t right) {</span>
+<span class="lineNum">      50 </span>            :         if (left &gt;= right) {
+<span class="lineNum">      51 </span>            :                 return;
+<span class="lineNum">      52 </span>            :         }
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            :         sel_t middle = left + (right - left) / 2;
+<span class="lineNum">      55 </span>            :         if (HAS_NULL &amp;&amp; mask[result[middle]]) {
+<span class="lineNum">      56 </span>            :                 middle = left;
+<span class="lineNum">      57 </span>            :                 // set pivot to a not-null value
+<span class="lineNum">      58 </span>            :                 while (middle &lt; right &amp;&amp; mask[result[middle]]) {
+<span class="lineNum">      59 </span>            :                         middle++;
+<span class="lineNum">      60 </span>            :                 }
+<span class="lineNum">      61 </span>            :                 if (middle == right) {
+<span class="lineNum">      62 </span>            :                         // array is sorted already!
+<span class="lineNum">      63 </span>            :                         // everything is NULL
+<span class="lineNum">      64 </span>            :                         return;
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :         sel_t pivot = result[middle];</span>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :         // move the mid point value to the front.</span>
+<span class="lineNum">      70 </span>            :         sel_t i = left + 1;
+<span class="lineNum">      71 </span>            :         sel_t j = right;
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      73 </span><span class="lineNoCov">          0 :         std::swap(result[middle], result[left]);</span>
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 :         while (i &lt;= j) {</span>
+<span class="lineNum">      75 </span>            :                 while (i &lt;= j &amp;&amp; (OP::Operation(data[result[i]], data[pivot]) ||
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                                   (HAS_NULL &amp;&amp; mask[result[i]]))) {</span>
+<span class="lineNum">      77 </span>            :                         i++;
+<span class="lineNum">      78 </span>            :                 }
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :                 while (i &lt;= j &amp;&amp; OP::Operation(data[pivot], data[result[j]]) &amp;&amp;</span>
+<span class="lineNum">      81 </span>            :                        (!HAS_NULL || !mask[result[i]])) {
+<span class="lineNum">      82 </span>            :                         j--;
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      85 </span>            :                 if (i &lt; j) {
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :                         std::swap(result[i], result[j]);</span>
+<span class="lineNum">      87 </span>            :                 }
+<span class="lineNum">      88 </span>            :         }
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :         std::swap(result[i - 1], result[left]);</span>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :         sel_t part = i - 1;</span>
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :         templated_quicksort_inplace&lt;T, OP, HAS_NULL&gt;(data, mask, result, left,</span>
+<span class="lineNum">      93 </span>            :                                                      part - 1);
+<span class="lineNum">      94 </span>            :         templated_quicksort_inplace&lt;T, OP, HAS_NULL&gt;(data, mask, result, part + 1,
+<span class="lineNum">      95 </span>            :                                                      right);
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 : }</span>
+<a name="97"><span class="lineNum">      97 </span><span class="lineNoCov">          0 : </span></a>
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 : template &lt;class T, class OP, bool HAS_NULL&gt;</span>
+<span class="lineNum">      99 </span>            : void templated_quicksort(T *data, nullmask_t &amp;nullmask, size_t count,
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :                          sel_t result[]) {</span>
+<span class="lineNum">     101 </span>            :         auto part = templated_quicksort_initial&lt;T, OP, HAS_NULL&gt;(data, nullmask,
+<span class="lineNum">     102 </span>            :                                                                  result, count);
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :         if (part &gt; count) {</span>
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     106 </span>            :         templated_quicksort_inplace&lt;T, OP, HAS_NULL&gt;(data, nullmask, result, 0,
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :                                                      part);</span>
+<span class="lineNum">     108 </span>            :         templated_quicksort_inplace&lt;T, OP, HAS_NULL&gt;(data, nullmask, result,
+<span class="lineNum">     109 </span>            :                                                      part + 1, count - 1);
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 : }</span>
+<a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 : </span></a>
+<span class="lineNum">     112 </span>            : template &lt;class T, class OP&gt;
+<span class="lineNum">     113 </span>            : static void templated_quicksort(Vector &amp;vector, sel_t result[]) {
+<span class="lineNum">     114 </span>            :         if (vector.count == 0)
+<span class="lineNum">     115 </span>            :                 return;
+<span class="lineNum">     116 </span>            :         auto data = (T *)vector.data;
+<span class="lineNum">     117 </span>            :         if (vector.nullmask.any()) {
+<span class="lineNum">     118 </span>            :                 // quicksort with nulls
+<span class="lineNum">     119 </span>            :                 templated_quicksort&lt;T, OP, true&gt;(data, vector.nullmask, vector.count,
+<span class="lineNum">     120 </span>            :                                                  result);
+<span class="lineNum">     121 </span>            :         } else {
+<span class="lineNum">     122 </span>            :                 // quicksort without nulls
+<span class="lineNum">     123 </span>            :                 templated_quicksort&lt;T, OP, false&gt;(data, vector.nullmask, vector.count,
+<span class="lineNum">     124 </span>            :                                                   result);
+<span class="lineNum">     125 </span>            :         }
+<a name="126"><span class="lineNum">     126 </span>            : }</a>
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     128 </span><span class="lineNoCov">          0 : void VectorOperations::Sort(Vector &amp;vector, sel_t result[]) {</span>
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :         if (vector.sel_vector) {</span>
+<span class="lineNum">     130 </span>            :                 throw Exception(
+<span class="lineNum">     131 </span><span class="lineNoCov">          0 :                     &quot;Cannot sort a vector with a sel_vector, call Flatten() first&quot;);</span>
+<span class="lineNum">     132 </span>            :         }
+<span class="lineNum">     133 </span>            :         // now we order
+<span class="lineNum">     134 </span><span class="lineNoCov">          0 :         switch (vector.type) {</span>
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
+<span class="lineNum">     136 </span><span class="lineNoCov">          0 :                 templated_quicksort&lt;int8_t, operators::LessThanEquals&gt;(vector, result);</span>
+<span class="lineNum">     137 </span>            :                 break;
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
+<span class="lineNum">     139 </span>            :                 templated_quicksort&lt;int16_t, operators::LessThanEquals&gt;(vector, result);
+<span class="lineNum">     140 </span>            :                 break;
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :         case TypeId::DATE:</span>
+<span class="lineNum">     142 </span><span class="lineNoCov">          0 :         case TypeId::INTEGER:</span>
+<span class="lineNum">     143 </span>            :                 templated_quicksort&lt;int32_t, operators::LessThanEquals&gt;(vector, result);
+<span class="lineNum">     144 </span>            :                 break;
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :         case TypeId::TIMESTAMP:</span>
+<span class="lineNum">     146 </span><span class="lineNoCov">          0 :         case TypeId::BIGINT:</span>
+<span class="lineNum">     147 </span>            :                 templated_quicksort&lt;int64_t, operators::LessThanEquals&gt;(vector, result);
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     149 </span>            :         case TypeId::DECIMAL:
+<span class="lineNum">     150 </span>            :                 templated_quicksort&lt;double, operators::LessThanEquals&gt;(vector, result);
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     152 </span><span class="lineNoCov">          0 :         case TypeId::VARCHAR:</span>
+<span class="lineNum">     153 </span>            :                 templated_quicksort&lt;const char *, operators::LessThanEquals&gt;(vector,
+<span class="lineNum">     154 </span><span class="lineNoCov">          0 :                                                                              result);</span>
+<span class="lineNum">     155 </span>            :                 break;
+<span class="lineNum">     156 </span>            :         default:
+<span class="lineNum">     157 </span>            :                 throw NotImplementedException(&quot;Unimplemented type for sort&quot;);
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
