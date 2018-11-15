@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 48be6eb - function/table_function/pragma_table_info.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">function/table_function</a> - pragma_table_info.cpp<span style="font-size: 80%;"> (source / <a href="pragma_table_info.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 48be6eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntryHi">93.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-15 13:37:24</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : </a>
+<span class="lineNum">       2 </span>            : #include &quot;function/table_function/pragma_table_info.hpp&quot;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &quot;catalog/catalog.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;common/exception.hpp&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &quot;main/client_context.hpp&quot;
+<span class="lineNum">       8 </span>            : #include &quot;main/database.hpp&quot;
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : using namespace std;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : namespace duckdb {
+<span class="lineNum">      13 </span>            : namespace function {
+<a name="14"><span class="lineNum">      14 </span>            : </a>
+<span class="lineNum">      15 </span>            : struct PragmaTableFunctionData : public TableFunctionData {
+<span class="lineNum">      16 </span><span class="lineCov">          8 :         PragmaTableFunctionData() : entry(nullptr), offset(0) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">          8 :         }</span>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            :         TableCatalogEntry *entry;
+<span class="lineNum">      20 </span>            :         size_t offset;
+<a name="21"><span class="lineNum">      21 </span>            : };</a>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          8 : TableFunctionData *pragma_table_info_init(ClientContext &amp;context) {</span>
+<span class="lineNum">      24 </span>            :         // initialize the function data structure
+<span class="lineNum">      25 </span><span class="lineCov">          8 :         return new PragmaTableFunctionData();</span>
+<a name="26"><span class="lineNum">      26 </span>            : }</a>
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span><span class="lineCov">         15 : void pragma_table_info(ClientContext &amp;context, DataChunk &amp;input,</span>
+<span class="lineNum">      29 </span>            :                        DataChunk &amp;output, TableFunctionData *dataptr) {
+<span class="lineNum">      30 </span><span class="lineCov">         15 :         auto &amp;data = *((PragmaTableFunctionData *)dataptr);</span>
+<span class="lineNum">      31 </span><span class="lineCov">         15 :         if (!data.entry) {</span>
+<span class="lineNum">      32 </span>            :                 // first call: load the entry from the catalog
+<span class="lineNum">      33 </span><span class="lineCov">          8 :                 if (input.size() != 1) {</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Expected a single table name as input&quot;);</span>
+<span class="lineNum">      35 </span>            :                 }
+<span class="lineNum">      36 </span><span class="lineCov">          8 :                 if (input.column_count != 1 || input.data[0].type != TypeId::VARCHAR) {</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Expected a single table name as input&quot;);</span>
+<span class="lineNum">      38 </span>            :                 }
+<span class="lineNum">      39 </span><span class="lineCov">         24 :                 auto table_name = input.data[0].GetValue(0).str_value;</span>
+<span class="lineNum">      40 </span>            :                 // look up the table name in the catalog
+<span class="lineNum">      41 </span><span class="lineCov">          8 :                 auto &amp;catalog = context.db.catalog;</span>
+<span class="lineNum">      42 </span><span class="lineCov">         11 :                 data.entry = catalog.GetTable(context.ActiveTransaction(),</span>
+<span class="lineNum">      43 </span>            :                                               DEFAULT_SCHEMA, table_name);
+<span class="lineNum">      44 </span>            :         }
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineCov">         14 :         if (data.offset &gt;= data.entry-&gt;columns.size()) {</span>
+<span class="lineNum">      47 </span>            :                 // finished returning values
+<span class="lineNum">      48 </span><span class="lineCov">          7 :                 return;</span>
+<span class="lineNum">      49 </span>            :         }
+<span class="lineNum">      50 </span>            :         // start returning values
+<span class="lineNum">      51 </span>            :         // either fill up the chunk or return all the remaining columns
+<span class="lineNum">      52 </span>            :         size_t next =
+<span class="lineNum">      53 </span><span class="lineCov">          7 :             min(data.offset + STANDARD_VECTOR_SIZE, data.entry-&gt;columns.size());</span>
+<span class="lineNum">      54 </span><span class="lineCov">          7 :         size_t output_count = next - data.offset;</span>
+<span class="lineNum">      55 </span><span class="lineCov">         49 :         for (size_t j = 0; j &lt; output.column_count; j++) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">         42 :                 output.data[j].count = output_count;</span>
+<span class="lineNum">      57 </span>            :         }
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span><span class="lineCov">         19 :         for (size_t i = data.offset; i &lt; next; i++) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">         12 :                 auto index = i - data.offset;</span>
+<span class="lineNum">      61 </span><span class="lineCov">         12 :                 auto &amp;column = data.entry-&gt;columns[i];</span>
+<span class="lineNum">      62 </span>            :                 // return values:
+<span class="lineNum">      63 </span>            :                 // &quot;cid&quot;, TypeId::INTEGER
+<span class="lineNum">      64 </span><span class="lineCov">         12 :                 output.data[0].SetValue(index, Value::INTEGER(column.oid));</span>
+<span class="lineNum">      65 </span>            :                 // &quot;name&quot;, TypeId::VARCHAR
+<span class="lineNum">      66 </span><span class="lineCov">         12 :                 output.data[1].SetValue(index, Value(column.name));</span>
+<span class="lineNum">      67 </span>            :                 // &quot;type&quot;, TypeId::VARCHAR
+<span class="lineNum">      68 </span><span class="lineCov">         12 :                 output.data[2].SetValue(index, Value(TypeIdToString(column.type)));</span>
+<span class="lineNum">      69 </span>            :                 // &quot;notnull&quot;, TypeId::BOOLEAN
+<span class="lineNum">      70 </span>            :                 // FIXME: look at constraints
+<span class="lineNum">      71 </span><span class="lineCov">         12 :                 output.data[3].SetValue(index, Value::BOOLEAN(false));</span>
+<span class="lineNum">      72 </span>            :                 // &quot;dflt_value&quot;, TypeId::BOOLEAN
+<span class="lineNum">      73 </span><span class="lineCov">         12 :                 output.data[4].SetValue(index, Value::BOOLEAN(column.has_default));</span>
+<span class="lineNum">      74 </span>            :                 // &quot;pk&quot;, TypeId::BOOLEAN
+<span class="lineNum">      75 </span>            :                 // FIXME: look at constraints
+<span class="lineNum">      76 </span><span class="lineCov">         12 :                 output.data[5].SetValue(index, Value::BOOLEAN(false));</span>
+<span class="lineNum">      77 </span>            :         }
+<span class="lineNum">      78 </span><span class="lineCov">          7 :         data.offset = next;</span>
+<span class="lineNum">      79 </span>            : }
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span>            : } // namespace function
+<span class="lineNum">      82 </span>            : } // namespace duckdb
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

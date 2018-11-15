@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 48be6eb - common/vector_operations/comparison_operators.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">common/vector_operations</a> - comparison_operators.cpp<span style="font-size: 80%;"> (source / <a href="comparison_operators.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 48be6eb</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">103</td>
+            <td class="headerCovTableEntry">216</td>
+            <td class="headerCovTableEntryLo">47.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-15 13:37:24</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===--------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : // comparison_operators.cpp
+<span class="lineNum">       3 </span>            : // Description: This file contains the implementation of the comparison
+<span class="lineNum">       4 </span>            : // operations == != &gt;= &lt;= &gt; &lt;
+<span class="lineNum">       5 </span>            : //===--------------------------------------------------------------------===//
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &quot;common/operator/comparison_operators.hpp&quot;
+<span class="lineNum">       8 </span>            : #include &quot;common/vector_operations/binary_loops.hpp&quot;
+<span class="lineNum">       9 </span>            : #include &quot;common/vector_operations/vector_operations.hpp&quot;
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : using namespace duckdb;
+<a name="12"><span class="lineNum">      12 </span>            : using namespace std;</a>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">       2151 : inline void COMPARISON_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">       2151 :         if (left.type != right.type) {</span>
+<span class="lineNum">      16 </span>            :                 throw TypeMismatchException(left.type, right.type,
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 :                                             &quot;left and right types must be the same&quot;);</span>
+<span class="lineNum">      18 </span>            :         }
+<span class="lineNum">      19 </span><span class="lineCov">       2151 :         if (result.type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">      20 </span>            :                 throw InvalidTypeException(result.type,
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :                                            &quot;result of comparison must be boolean&quot;);</span>
+<span class="lineNum">      22 </span>            :         }
+<span class="lineNum">      23 </span><span class="lineCov">       2164 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp;</span>
+<span class="lineNum">      24 </span><span class="lineCov">         13 :             left.count != right.count) {</span>
+<span class="lineNum">      25 </span>            :                 throw Exception(&quot;Cardinality exception: left and right cannot have &quot;
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :                                 &quot;different cardinalities&quot;);</span>
+<span class="lineNum">      27 </span>            :         }
+<span class="lineNum">      28 </span><span class="lineCov">       2151 : }</span>
+<a name="29"><span class="lineNum">      29 </span>            : </a>
+<span class="lineNum">      30 </span>            : template &lt;class OP&gt;
+<span class="lineNum">      31 </span><span class="lineCov">       2151 : static void templated_boolean_operation(Vector &amp;left, Vector &amp;right,</span>
+<span class="lineNum">      32 </span>            :                                         Vector &amp;result) {
+<span class="lineNum">      33 </span><span class="lineCov">       2151 :         COMPARISON_TYPE_CHECK(left, right, result);</span>
+<span class="lineNum">      34 </span>            :         // the inplace loops take the result as the last parameter
+<span class="lineNum">      35 </span><span class="lineCov">       2151 :         switch (left.type) {</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :         case TypeId::BOOLEAN:</span>
+<span class="lineNum">      37 </span>            :         case TypeId::TINYINT:
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int8_t, int8_t, bool, OP&gt;(left, right, result);</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int16_t, int16_t, bool, OP&gt;(left, right, result);</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">      43 </span><span class="lineCov">       2135 :         case TypeId::DATE:</span>
+<span class="lineNum">      44 </span>            :         case TypeId::INTEGER:
+<span class="lineNum">      45 </span><span class="lineCov">       2135 :                 templated_binary_loop&lt;int32_t, int32_t, bool, OP&gt;(left, right, result);</span>
+<span class="lineNum">      46 </span><span class="lineCov">       2135 :                 break;</span>
+<span class="lineNum">      47 </span><span class="lineCov">          2 :         case TypeId::TIMESTAMP:</span>
+<span class="lineNum">      48 </span>            :         case TypeId::BIGINT:
+<span class="lineNum">      49 </span><span class="lineCov">          2 :                 templated_binary_loop&lt;int64_t, int64_t, bool, OP&gt;(left, right, result);</span>
+<span class="lineNum">      50 </span><span class="lineCov">          2 :                 break;</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;uint64_t, uint64_t, bool, OP&gt;(left, right,</span>
+<span class="lineNum">      53 </span>            :                                                                     result);
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :         case TypeId::DECIMAL:</span>
+<span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;double, double, bool, OP&gt;(left, right, result);</span>
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">      58 </span><span class="lineCov">         14 :         case TypeId::VARCHAR:</span>
+<span class="lineNum">      59 </span><span class="lineCov">         14 :                 templated_binary_loop&lt;const char *, const char *, bool, OP, true&gt;(</span>
+<span class="lineNum">      60 </span>            :                     left, right, result);
+<span class="lineNum">      61 </span><span class="lineCov">         14 :                 break;</span>
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(left.type, &quot;Invalid type for addition&quot;);</span>
+<span class="lineNum">      64 </span>            :         }
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">       2151 : }</span></a>
+<span class="lineNum">      66 </span><span class="lineCov">         41 : </span>
+<span class="lineNum">      67 </span>            : void VectorOperations::Equals(Vector &amp;left, Vector &amp;right, Vector &amp;result) {
+<span class="lineNum">      68 </span><span class="lineCov">         41 :         templated_boolean_operation&lt;operators::Equals&gt;(left, right, result);</span>
+<a name="69"><span class="lineNum">      69 </span>            : }</a>
+<span class="lineNum">      70 </span><span class="lineCov">         41 : </span>
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 : void VectorOperations::NotEquals(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      72 </span>            :         templated_boolean_operation&lt;operators::NotEquals&gt;(left, right, result);
+<a name="73"><span class="lineNum">      73 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 : void VectorOperations::GreaterThanEquals(Vector &amp;left, Vector &amp;right,</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                                          Vector &amp;result) {</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :         templated_boolean_operation&lt;operators::GreaterThanEquals&gt;(left, right,</span>
+<span class="lineNum">      78 </span><span class="lineCov">         40 :                                                                   result);</span>
+<a name="79"><span class="lineNum">      79 </span>            : }</a>
+<span class="lineNum">      80 </span><span class="lineCov">         40 : </span>
+<span class="lineNum">      81 </span><span class="lineCov">         40 : void VectorOperations::LessThanEquals(Vector &amp;left, Vector &amp;right,</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :                                       Vector &amp;result) {</span>
+<span class="lineNum">      83 </span>            :         templated_boolean_operation&lt;operators::LessThanEquals&gt;(left, right, result);
+<a name="84"><span class="lineNum">      84 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 : void VectorOperations::GreaterThan(Vector &amp;left, Vector &amp;right,</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                                    Vector &amp;result) {</span>
+<span class="lineNum">      88 </span>            :         templated_boolean_operation&lt;operators::GreaterThan&gt;(left, right, result);
+<a name="89"><span class="lineNum">      89 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 : void VectorOperations::LessThan(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :         templated_boolean_operation&lt;operators::LessThan&gt;(left, right, result);</span>
+<span class="lineNum">      93 </span><span class="lineCov">          1 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
