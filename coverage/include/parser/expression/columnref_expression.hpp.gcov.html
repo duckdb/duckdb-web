@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report be19ad4 - include/parser/expression/columnref_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 155ab55 - include/parser/expression/columnref_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report be19ad4</td>
+            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">33</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 15:51:45</td>
+            <td class="headerValue">2018-11-15 20:44:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -125,9 +125,9 @@
 <span class="lineNum">      63 </span>            :                 return table_name;
 <a name="64"><span class="lineNum">      64 </span>            :         }</a>
 <span class="lineNum">      65 </span>            : 
-<span class="lineNum">      66 </span><span class="lineCov">      22402 :         virtual void Accept(SQLNodeVisitor *v) override {</span>
-<span class="lineNum">      67 </span><span class="lineCov">      22402 :                 v-&gt;Visit(*this);</span>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">      22401 :         }</span></a>
+<span class="lineNum">      66 </span><span class="lineCov">      22405 :         virtual void Accept(SQLNodeVisitor *v) override {</span>
+<span class="lineNum">      67 </span><span class="lineCov">      22405 :                 v-&gt;Visit(*this);</span>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">      22404 :         }</span></a>
 <span class="lineNum">      69 </span>            : 
 <span class="lineNum">      70 </span><span class="lineCov">        267 :         virtual std::string GetName() override {</span>
 <a name="71"><span class="lineNum">      71 </span><span class="lineCov">        267 :                 return !alias.empty() ? alias : column_name;</span></a>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report be19ad4 - include/common/types/vector.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 155ab55 - include/common/types/vector.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report be19ad4</td>
+            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 15:51:45</td>
+            <td class="headerValue">2018-11-15 20:44:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -152,9 +152,9 @@
 <span class="lineNum">      90 </span><span class="lineCov">     342341 :                 return nullmask[sel_vector ? sel_vector[index] : index];</span>
 <a name="91"><span class="lineNum">      91 </span>            :         }</a>
 <span class="lineNum">      92 </span>            :         //! Sets the value at the specified index to NULL
-<span class="lineNum">      93 </span><span class="lineCov">      78760 :         inline void SetNull(size_t index, bool null) {</span>
-<span class="lineNum">      94 </span><span class="lineCov">      78760 :                 nullmask[sel_vector ? sel_vector[index] : index] = null;</span>
-<span class="lineNum">      95 </span><span class="lineCov">      78760 :         }</span>
+<span class="lineNum">      93 </span><span class="lineCov">      78759 :         inline void SetNull(size_t index, bool null) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">      78759 :                 nullmask[sel_vector ? sel_vector[index] : index] = null;</span>
+<span class="lineNum">      95 </span><span class="lineCov">      78759 :         }</span>
 <span class="lineNum">      96 </span>            :         //! Sets the value of the vector at the specified index to the specified
 <span class="lineNum">      97 </span>            :         //! string. Can only be used for VARCHAR vectors
 <span class="lineNum">      98 </span>            :         void SetStringValue(size_t index, const char *value);
@@ -183,8 +183,8 @@
 <span class="lineNum">     121 </span>            : 
 <a name="122"><span class="lineNum">     122 </span>            :         //! Returns true the vector holds only a single constant value and does not</a>
 <span class="lineNum">     123 </span>            :         //! have a selection vector
-<span class="lineNum">     124 </span><span class="lineCov">      76977 :         bool IsConstant() {</span>
-<span class="lineNum">     125 </span><span class="lineCov">      76977 :                 return count == 1 &amp;&amp; !sel_vector;</span>
+<span class="lineNum">     124 </span><span class="lineCov">      76975 :         bool IsConstant() {</span>
+<span class="lineNum">     125 </span><span class="lineCov">      76975 :                 return count == 1 &amp;&amp; !sel_vector;</span>
 <span class="lineNum">     126 </span>            :         }
 <span class="lineNum">     127 </span>            : 
 <span class="lineNum">     128 </span>            : #ifdef DEBUG

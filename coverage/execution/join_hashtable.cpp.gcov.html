@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report be19ad4 - execution/join_hashtable.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 155ab55 - execution/join_hashtable.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report be19ad4</td>
+            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">236</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 15:51:45</td>
+            <td class="headerValue">2018-11-15 20:44:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
@@ -82,8 +82,8 @@
 <span class="lineNum">      20 </span><span class="lineCov">         44 :         for (size_t i = 0; i &lt; key_types.size(); i++) {</span>
 <span class="lineNum">      21 </span><span class="lineCov">         23 :                 key_size += GetTypeIdSize(key_types[i]);</span>
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">         59 :         for (size_t i = 0; i &lt; build_types.size(); i++) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">         38 :                 build_size += GetTypeIdSize(build_types[i]);</span>
+<span class="lineNum">      23 </span><span class="lineCov">         60 :         for (size_t i = 0; i &lt; build_types.size(); i++) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">         39 :                 build_size += GetTypeIdSize(build_types[i]);</span>
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span><span class="lineCov">         21 :         tuple_size = key_size + build_size;</span>
 <span class="lineNum">      27 </span><span class="lineCov">         21 :         entry_size = tuple_size + sizeof(void *);</span>
