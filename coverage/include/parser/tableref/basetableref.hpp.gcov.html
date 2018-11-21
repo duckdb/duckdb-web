@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 155ab55 - include/parser/tableref/basetableref.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 08700d7 - include/parser/tableref/basetableref.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
+            <td class="headerValue">DuckDB Code Coverage Report 08700d7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 20:44:35</td>
+            <td class="headerValue">2018-11-21 22:20:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -79,14 +79,14 @@
 <span class="lineNum">      17 </span>            : //! Represents a TableReference to a base table in the schema
 <a name="18"><span class="lineNum">      18 </span>            : class BaseTableRef : public TableRef {</a>
 <span class="lineNum">      19 </span>            :   public:
-<span class="lineNum">      20 </span><span class="lineCov">      28016 :         BaseTableRef()</span>
-<span class="lineNum">      21 </span><span class="lineCov">      28016 :             : TableRef(TableReferenceType::BASE_TABLE),</span>
-<span class="lineNum">      22 </span><span class="lineCov">      28016 :               schema_name(DEFAULT_SCHEMA) {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      28016 :         }</span></a>
+<span class="lineNum">      20 </span><span class="lineCov">      28052 :         BaseTableRef()</span>
+<span class="lineNum">      21 </span><span class="lineCov">      28052 :             : TableRef(TableReferenceType::BASE_TABLE),</span>
+<span class="lineNum">      22 </span><span class="lineCov">      28052 :               schema_name(DEFAULT_SCHEMA) {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      28052 :         }</span></a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">       6844 :         virtual void Accept(SQLNodeVisitor *v) override {</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       6844 :                 v-&gt;Visit(*this);</span></a>
-<span class="lineNum">      27 </span><span class="lineCov">       6838 :         }</span>
+<span class="lineNum">      25 </span><span class="lineCov">       6904 :         virtual void Accept(SQLNodeVisitor *v) override {</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       6904 :                 v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">       6898 :         }</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :         virtual bool Equals(const TableRef *other_) override {</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 if (!TableRef::Equals(other_)) {</span>
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                         return false;</span>

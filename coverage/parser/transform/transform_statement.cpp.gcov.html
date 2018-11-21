@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 155ab55 - parser/transform/transform_statement.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 08700d7 - parser/transform/transform_statement.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
+            <td class="headerValue">DuckDB Code Coverage Report 08700d7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">263</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 20:44:35</td>
+            <td class="headerValue">2018-11-21 22:20:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -136,9 +136,9 @@
 <span class="lineNum">      74 </span>            : 
 <a name="75"><span class="lineNum">      75 </span>            : using namespace postgres;</a>
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">       1653 : bool TransformGroupBy(List *group, vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;result) {</span>
-<span class="lineNum">      78 </span><span class="lineCov">       1653 :         if (!group) {</span>
-<span class="lineNum">      79 </span><span class="lineCov">       1628 :                 return false;</span>
+<span class="lineNum">      77 </span><span class="lineCov">       1678 : bool TransformGroupBy(List *group, vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;result) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">       1678 :         if (!group) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">       1653 :                 return false;</span>
 <span class="lineNum">      80 </span>            :         }
 <span class="lineNum">      81 </span>            : 
 <span class="lineNum">      82 </span><span class="lineCov">         50 :         for (auto node = group-&gt;head; node != nullptr; node = node-&gt;next) {</span>
@@ -148,27 +148,27 @@
 <span class="lineNum">      86 </span><span class="lineCov">         25 :         return true;</span>
 <a name="87"><span class="lineNum">      87 </span>            : }</a>
 <span class="lineNum">      88 </span>            : 
-<span class="lineNum">      89 </span><span class="lineCov">       1653 : bool TransformOrderBy(List *order, OrderByDescription &amp;result) {</span>
-<span class="lineNum">      90 </span><span class="lineCov">       1653 :         if (!order) {</span>
-<span class="lineNum">      91 </span><span class="lineCov">       1586 :                 return false;</span>
+<span class="lineNum">      89 </span><span class="lineCov">       1678 : bool TransformOrderBy(List *order, OrderByDescription &amp;result) {</span>
+<span class="lineNum">      90 </span><span class="lineCov">       1678 :         if (!order) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">       1606 :                 return false;</span>
 <span class="lineNum">      92 </span>            :         }
 <span class="lineNum">      93 </span>            : 
-<span class="lineNum">      94 </span><span class="lineCov">        143 :         for (auto node = order-&gt;head; node != nullptr; node = node-&gt;next) {</span>
-<span class="lineNum">      95 </span><span class="lineCov">         76 :                 Node *temp = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
-<span class="lineNum">      96 </span><span class="lineCov">         76 :                 if (temp-&gt;type == T_SortBy) {</span>
-<span class="lineNum">      97 </span><span class="lineCov">         76 :                         OrderByNode ordernode;</span>
-<span class="lineNum">      98 </span><span class="lineCov">         76 :                         SortBy *sort = reinterpret_cast&lt;SortBy *&gt;(temp);</span>
-<span class="lineNum">      99 </span><span class="lineCov">         76 :                         Node *target = sort-&gt;node;</span>
-<span class="lineNum">     100 </span><span class="lineCov">         76 :                         if (sort-&gt;sortby_dir == SORTBY_ASC ||</span>
-<span class="lineNum">     101 </span><span class="lineCov">         76 :                             sort-&gt;sortby_dir == SORTBY_DEFAULT) {</span>
-<span class="lineNum">     102 </span><span class="lineCov">         67 :                                 ordernode.type = OrderType::ASCENDING;</span>
+<span class="lineNum">      94 </span><span class="lineCov">        153 :         for (auto node = order-&gt;head; node != nullptr; node = node-&gt;next) {</span>
+<span class="lineNum">      95 </span><span class="lineCov">         81 :                 Node *temp = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
+<span class="lineNum">      96 </span><span class="lineCov">         81 :                 if (temp-&gt;type == T_SortBy) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">         81 :                         OrderByNode ordernode;</span>
+<span class="lineNum">      98 </span><span class="lineCov">         81 :                         SortBy *sort = reinterpret_cast&lt;SortBy *&gt;(temp);</span>
+<span class="lineNum">      99 </span><span class="lineCov">         81 :                         Node *target = sort-&gt;node;</span>
+<span class="lineNum">     100 </span><span class="lineCov">         81 :                         if (sort-&gt;sortby_dir == SORTBY_ASC ||</span>
+<span class="lineNum">     101 </span><span class="lineCov">         81 :                             sort-&gt;sortby_dir == SORTBY_DEFAULT) {</span>
+<span class="lineNum">     102 </span><span class="lineCov">         72 :                                 ordernode.type = OrderType::ASCENDING;</span>
 <span class="lineNum">     103 </span><span class="lineCov">          9 :                         } else if (sort-&gt;sortby_dir == SORTBY_DESC) {</span>
 <span class="lineNum">     104 </span><span class="lineCov">          9 :                                 ordernode.type = OrderType::DESCENDING;</span>
 <span class="lineNum">     105 </span>            :                         } else {
 <span class="lineNum">     106 </span><span class="lineNoCov">          0 :                                 throw NotImplementedException(&quot;Unimplemented order by type&quot;);</span>
 <span class="lineNum">     107 </span>            :                         }
-<span class="lineNum">     108 </span><span class="lineCov">         76 :                         ordernode.expression = TransformExpression(target);</span>
-<span class="lineNum">     109 </span><span class="lineCov">         76 :                         if (ordernode.expression-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
+<span class="lineNum">     108 </span><span class="lineCov">         81 :                         ordernode.expression = TransformExpression(target);</span>
+<span class="lineNum">     109 </span><span class="lineCov">         81 :                         if (ordernode.expression-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
 <span class="lineNum">     110 </span>            :                                 auto constant = reinterpret_cast&lt;ConstantExpression *&gt;(
 <span class="lineNum">     111 </span><span class="lineCov">          7 :                                     ordernode.expression.get());</span>
 <span class="lineNum">     112 </span><span class="lineCov">          7 :                                 if (TypeIsIntegral(constant-&gt;value.type)) {</span>
@@ -179,31 +179,31 @@
 <span class="lineNum">     117 </span><span class="lineNoCov">          0 :                                         continue;</span>
 <span class="lineNum">     118 </span>            :                                 }
 <span class="lineNum">     119 </span>            :                         }
-<span class="lineNum">     120 </span><span class="lineCov">        152 :                         result.orders.push_back(</span>
-<span class="lineNum">     121 </span><span class="lineCov">        152 :                             OrderByNode(ordernode.type, move(ordernode.expression)));</span>
+<span class="lineNum">     120 </span><span class="lineCov">        162 :                         result.orders.push_back(</span>
+<span class="lineNum">     121 </span><span class="lineCov">        162 :                             OrderByNode(ordernode.type, move(ordernode.expression)));</span>
 <span class="lineNum">     122 </span>            :                 } else {
 <span class="lineNum">     123 </span>            :                         throw NotImplementedException(&quot;ORDER BY list member type %d\n&quot;,
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 :                                                       temp-&gt;type);</span>
 <span class="lineNum">     125 </span>            :                 }
 <span class="lineNum">     126 </span>            :         }
-<span class="lineNum">     127 </span><span class="lineCov">         67 :         return true;</span>
+<span class="lineNum">     127 </span><span class="lineCov">         72 :         return true;</span>
 <a name="128"><span class="lineNum">     128 </span>            : }</a>
 <span class="lineNum">     129 </span>            : 
-<span class="lineNum">     130 </span><span class="lineCov">       1675 : unique_ptr&lt;SelectStatement&gt; TransformSelect(Node *node) {</span>
-<span class="lineNum">     131 </span><span class="lineCov">       1675 :         SelectStmt *stmt = reinterpret_cast&lt;SelectStmt *&gt;(node);</span>
-<span class="lineNum">     132 </span><span class="lineCov">       1675 :         switch (stmt-&gt;op) {</span>
-<span class="lineNum">     133 </span><span class="lineCov">       1653 :         case SETOP_NONE: {</span>
-<span class="lineNum">     134 </span><span class="lineCov">       3306 :                 auto result = make_unique&lt;SelectStatement&gt;();</span>
-<span class="lineNum">     135 </span><span class="lineCov">       1653 :                 result-&gt;select_distinct = stmt-&gt;distinctClause != NULL ? true : false;</span>
-<span class="lineNum">     136 </span><span class="lineCov">       1653 :                 if (!TransformExpressionList(stmt-&gt;targetList, result-&gt;select_list)) {</span>
+<span class="lineNum">     130 </span><span class="lineCov">       1700 : unique_ptr&lt;SelectStatement&gt; TransformSelect(Node *node) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">       1700 :         SelectStmt *stmt = reinterpret_cast&lt;SelectStmt *&gt;(node);</span>
+<span class="lineNum">     132 </span><span class="lineCov">       1700 :         switch (stmt-&gt;op) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">       1678 :         case SETOP_NONE: {</span>
+<span class="lineNum">     134 </span><span class="lineCov">       3356 :                 auto result = make_unique&lt;SelectStatement&gt;();</span>
+<span class="lineNum">     135 </span><span class="lineCov">       1678 :                 result-&gt;select_distinct = stmt-&gt;distinctClause != NULL ? true : false;</span>
+<span class="lineNum">     136 </span><span class="lineCov">       1678 :                 if (!TransformExpressionList(stmt-&gt;targetList, result-&gt;select_list)) {</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :                         return nullptr;</span>
 <span class="lineNum">     138 </span>            :                 }
-<span class="lineNum">     139 </span><span class="lineCov">       1653 :                 result-&gt;from_table = TransformFrom(stmt-&gt;fromClause);</span>
-<span class="lineNum">     140 </span><span class="lineCov">       1653 :                 TransformGroupBy(stmt-&gt;groupClause, result-&gt;groupby.groups);</span>
-<span class="lineNum">     141 </span><span class="lineCov">       1653 :                 result-&gt;groupby.having = TransformExpression(stmt-&gt;havingClause);</span>
-<span class="lineNum">     142 </span><span class="lineCov">       1653 :                 TransformOrderBy(stmt-&gt;sortClause, result-&gt;orderby);</span>
-<span class="lineNum">     143 </span><span class="lineCov">       1653 :                 result-&gt;where_clause = TransformExpression(stmt-&gt;whereClause);</span>
-<span class="lineNum">     144 </span><span class="lineCov">       1653 :                 if (stmt-&gt;limitCount) {</span>
+<span class="lineNum">     139 </span><span class="lineCov">       1678 :                 result-&gt;from_table = TransformFrom(stmt-&gt;fromClause);</span>
+<span class="lineNum">     140 </span><span class="lineCov">       1678 :                 TransformGroupBy(stmt-&gt;groupClause, result-&gt;groupby.groups);</span>
+<span class="lineNum">     141 </span><span class="lineCov">       1678 :                 result-&gt;groupby.having = TransformExpression(stmt-&gt;havingClause);</span>
+<span class="lineNum">     142 </span><span class="lineCov">       1678 :                 TransformOrderBy(stmt-&gt;sortClause, result-&gt;orderby);</span>
+<span class="lineNum">     143 </span><span class="lineCov">       1678 :                 result-&gt;where_clause = TransformExpression(stmt-&gt;whereClause);</span>
+<span class="lineNum">     144 </span><span class="lineCov">       1678 :                 if (stmt-&gt;limitCount) {</span>
 <span class="lineNum">     145 </span><span class="lineCov">         12 :                         result-&gt;limit.limit =</span>
 <span class="lineNum">     146 </span><span class="lineCov">          6 :                             reinterpret_cast&lt;A_Const *&gt;(stmt-&gt;limitCount)-&gt;val.val.ival;</span>
 <span class="lineNum">     147 </span><span class="lineCov">          6 :                         result-&gt;limit.offset =</span>
@@ -212,7 +212,7 @@
 <span class="lineNum">     150 </span><span class="lineCov">          5 :                                 : reinterpret_cast&lt;A_Const *&gt;(stmt-&gt;limitOffset)</span>
 <span class="lineNum">     151 </span>            :                                       -&gt;val.val.ival;
 <span class="lineNum">     152 </span>            :                 }
-<span class="lineNum">     153 </span><span class="lineCov">       1653 :                 return result;</span>
+<span class="lineNum">     153 </span><span class="lineCov">       1678 :                 return result;</span>
 <span class="lineNum">     154 </span>            :         }
 <span class="lineNum">     155 </span><span class="lineCov">         22 :         case SETOP_UNION: {</span>
 <span class="lineNum">     156 </span><span class="lineCov">         22 :                 stmt-&gt;larg-&gt;sortClause = stmt-&gt;sortClause;</span>
@@ -301,93 +301,93 @@
 <span class="lineNum">     239 </span>            :         }
 <a name="240"><span class="lineNum">     240 </span>            : }</a>
 <span class="lineNum">     241 </span>            : 
-<span class="lineNum">     242 </span><span class="lineCov">      24589 : unique_ptr&lt;InsertStatement&gt; TransformInsert(Node *node) {</span>
-<span class="lineNum">     243 </span><span class="lineCov">      24589 :         InsertStmt *stmt = reinterpret_cast&lt;InsertStmt *&gt;(node);</span>
-<span class="lineNum">     244 </span><span class="lineCov">      24589 :         assert(stmt);</span>
+<span class="lineNum">     242 </span><span class="lineCov">      24595 : unique_ptr&lt;InsertStatement&gt; TransformInsert(Node *node) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">      24595 :         InsertStmt *stmt = reinterpret_cast&lt;InsertStmt *&gt;(node);</span>
+<span class="lineNum">     244 </span><span class="lineCov">      24595 :         assert(stmt);</span>
 <span class="lineNum">     245 </span>            : 
-<span class="lineNum">     246 </span><span class="lineCov">      24589 :         auto result = make_unique&lt;InsertStatement&gt;();</span>
+<span class="lineNum">     246 </span><span class="lineCov">      24595 :         auto result = make_unique&lt;InsertStatement&gt;();</span>
 <span class="lineNum">     247 </span>            : 
 <span class="lineNum">     248 </span>            :         // first check if there are any columns specified
-<span class="lineNum">     249 </span><span class="lineCov">      24589 :         if (stmt-&gt;cols) {</span>
+<span class="lineNum">     249 </span><span class="lineCov">      24595 :         if (stmt-&gt;cols) {</span>
 <span class="lineNum">     250 </span><span class="lineCov">         18 :                 for (ListCell *c = stmt-&gt;cols-&gt;head; c != NULL; c = lnext(c)) {</span>
 <span class="lineNum">     251 </span><span class="lineCov">         13 :                         ResTarget *target = (ResTarget *)(c-&gt;data.ptr_value);</span>
 <span class="lineNum">     252 </span><span class="lineCov">         13 :                         result-&gt;columns.push_back(std::string(target-&gt;name));</span>
 <span class="lineNum">     253 </span>            :                 }
 <span class="lineNum">     254 </span>            :         }
 <span class="lineNum">     255 </span>            : 
-<span class="lineNum">     256 </span><span class="lineCov">      24589 :         auto select_stmt = reinterpret_cast&lt;SelectStmt *&gt;(stmt-&gt;selectStmt);</span>
-<span class="lineNum">     257 </span><span class="lineCov">      24589 :         if (select_stmt-&gt;fromClause) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">      24595 :         auto select_stmt = reinterpret_cast&lt;SelectStmt *&gt;(stmt-&gt;selectStmt);</span>
+<span class="lineNum">     257 </span><span class="lineCov">      24595 :         if (select_stmt-&gt;fromClause) {</span>
 <span class="lineNum">     258 </span>            :                 // insert from select statement
 <span class="lineNum">     259 </span><span class="lineCov">          5 :                 result-&gt;select_statement = TransformSelect(stmt-&gt;selectStmt);</span>
 <span class="lineNum">     260 </span>            :         } else {
 <span class="lineNum">     261 </span>            :                 // simple set of values
-<span class="lineNum">     262 </span><span class="lineCov">      24584 :                 assert(select_stmt-&gt;valuesLists);</span>
+<span class="lineNum">     262 </span><span class="lineCov">      24590 :                 assert(select_stmt-&gt;valuesLists);</span>
 <span class="lineNum">     263 </span>            : 
 <span class="lineNum">     264 </span>            :                 // transform the insert list
-<span class="lineNum">     265 </span><span class="lineCov">      24584 :                 auto list = select_stmt-&gt;valuesLists;</span>
-<span class="lineNum">     266 </span><span class="lineCov">      50365 :                 for (auto value_list = list-&gt;head; value_list != NULL;</span>
-<span class="lineNum">     267 </span><span class="lineCov">      25781 :                      value_list = value_list-&gt;next) {</span>
-<span class="lineNum">     268 </span><span class="lineCov">      25781 :                         List *target = (List *)(value_list-&gt;data.ptr_value);</span>
+<span class="lineNum">     265 </span><span class="lineCov">      24590 :                 auto list = select_stmt-&gt;valuesLists;</span>
+<span class="lineNum">     266 </span><span class="lineCov">      50389 :                 for (auto value_list = list-&gt;head; value_list != NULL;</span>
+<span class="lineNum">     267 </span><span class="lineCov">      25799 :                      value_list = value_list-&gt;next) {</span>
+<span class="lineNum">     268 </span><span class="lineCov">      25799 :                         List *target = (List *)(value_list-&gt;data.ptr_value);</span>
 <span class="lineNum">     269 </span>            : 
-<span class="lineNum">     270 </span><span class="lineCov">      51562 :                         vector&lt;unique_ptr&lt;Expression&gt;&gt; insert_values;</span>
-<span class="lineNum">     271 </span><span class="lineCov">      25781 :                         if (!TransformExpressionList(target, insert_values)) {</span>
+<span class="lineNum">     270 </span><span class="lineCov">      51598 :                         vector&lt;unique_ptr&lt;Expression&gt;&gt; insert_values;</span>
+<span class="lineNum">     271 </span><span class="lineCov">      25799 :                         if (!TransformExpressionList(target, insert_values)) {</span>
 <span class="lineNum">     272 </span><span class="lineNoCov">          0 :                                 throw ParserException(&quot;Could not parse expression list!&quot;);</span>
 <span class="lineNum">     273 </span>            :                         }
-<span class="lineNum">     274 </span><span class="lineCov">      25781 :                         if (result-&gt;values.size() &gt; 0) {</span>
-<span class="lineNum">     275 </span><span class="lineCov">       1197 :                                 if (result-&gt;values[0].size() != insert_values.size()) {</span>
+<span class="lineNum">     274 </span><span class="lineCov">      25799 :                         if (result-&gt;values.size() &gt; 0) {</span>
+<span class="lineNum">     275 </span><span class="lineCov">       1209 :                                 if (result-&gt;values[0].size() != insert_values.size()) {</span>
 <span class="lineNum">     276 </span>            :                                         throw ParserException(
 <span class="lineNum">     277 </span><span class="lineNoCov">          0 :                                             &quot;Insert VALUES lists must all be the same length&quot;);</span>
 <span class="lineNum">     278 </span>            :                                 }
 <span class="lineNum">     279 </span>            :                         }
-<span class="lineNum">     280 </span><span class="lineCov">      25781 :                         result-&gt;values.push_back(move(insert_values));</span>
+<span class="lineNum">     280 </span><span class="lineCov">      25799 :                         result-&gt;values.push_back(move(insert_values));</span>
 <span class="lineNum">     281 </span>            :                 }
 <span class="lineNum">     282 </span>            :         }
 <span class="lineNum">     283 </span>            : 
-<span class="lineNum">     284 </span><span class="lineCov">      49178 :         auto ref = TransformRangeVar(stmt-&gt;relation);</span>
-<span class="lineNum">     285 </span><span class="lineCov">      24589 :         auto &amp;table = *reinterpret_cast&lt;BaseTableRef *&gt;(ref.get());</span>
-<span class="lineNum">     286 </span><span class="lineCov">      24589 :         result-&gt;table = table.table_name;</span>
-<span class="lineNum">     287 </span><span class="lineCov">      24589 :         result-&gt;schema = table.schema_name;</span>
-<span class="lineNum">     288 </span><span class="lineCov">      49178 :         return result;</span>
+<span class="lineNum">     284 </span><span class="lineCov">      49190 :         auto ref = TransformRangeVar(stmt-&gt;relation);</span>
+<span class="lineNum">     285 </span><span class="lineCov">      24595 :         auto &amp;table = *reinterpret_cast&lt;BaseTableRef *&gt;(ref.get());</span>
+<span class="lineNum">     286 </span><span class="lineCov">      24595 :         result-&gt;table = table.table_name;</span>
+<span class="lineNum">     287 </span><span class="lineCov">      24595 :         result-&gt;schema = table.schema_name;</span>
+<span class="lineNum">     288 </span><span class="lineCov">      49190 :         return result;</span>
 <a name="289"><span class="lineNum">     289 </span>            : }</a>
 <span class="lineNum">     290 </span>            : 
-<span class="lineNum">     291 </span><span class="lineCov">        115 : unique_ptr&lt;CreateTableStatement&gt; TransformCreateTable(Node *node) {</span>
-<span class="lineNum">     292 </span><span class="lineCov">        115 :         auto stmt = reinterpret_cast&lt;CreateStmt *&gt;(node);</span>
-<span class="lineNum">     293 </span><span class="lineCov">        115 :         assert(stmt);</span>
-<span class="lineNum">     294 </span><span class="lineCov">        115 :         auto result = make_unique&lt;CreateTableStatement&gt;();</span>
-<span class="lineNum">     295 </span><span class="lineCov">        115 :         auto &amp;info = *result-&gt;info.get();</span>
+<span class="lineNum">     291 </span><span class="lineCov">        121 : unique_ptr&lt;CreateTableStatement&gt; TransformCreateTable(Node *node) {</span>
+<span class="lineNum">     292 </span><span class="lineCov">        121 :         auto stmt = reinterpret_cast&lt;CreateStmt *&gt;(node);</span>
+<span class="lineNum">     293 </span><span class="lineCov">        121 :         assert(stmt);</span>
+<span class="lineNum">     294 </span><span class="lineCov">        121 :         auto result = make_unique&lt;CreateTableStatement&gt;();</span>
+<span class="lineNum">     295 </span><span class="lineCov">        121 :         auto &amp;info = *result-&gt;info.get();</span>
 <span class="lineNum">     296 </span>            : 
-<span class="lineNum">     297 </span><span class="lineCov">        115 :         if (stmt-&gt;inhRelations) {</span>
+<span class="lineNum">     297 </span><span class="lineCov">        121 :         if (stmt-&gt;inhRelations) {</span>
 <span class="lineNum">     298 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;inherited relations not implemented&quot;);</span>
 <span class="lineNum">     299 </span>            :         }
-<span class="lineNum">     300 </span><span class="lineCov">        115 :         assert(stmt-&gt;relation);</span>
+<span class="lineNum">     300 </span><span class="lineCov">        121 :         assert(stmt-&gt;relation);</span>
 <span class="lineNum">     301 </span>            : 
-<span class="lineNum">     302 </span><span class="lineCov">        115 :         if (stmt-&gt;relation-&gt;schemaname) {</span>
+<span class="lineNum">     302 </span><span class="lineCov">        121 :         if (stmt-&gt;relation-&gt;schemaname) {</span>
 <span class="lineNum">     303 </span><span class="lineCov">          6 :                 info.schema = stmt-&gt;relation-&gt;schemaname;</span>
 <span class="lineNum">     304 </span>            :         }
-<span class="lineNum">     305 </span><span class="lineCov">        115 :         info.table = stmt-&gt;relation-&gt;relname;</span>
-<span class="lineNum">     306 </span><span class="lineCov">        115 :         info.if_not_exists = stmt-&gt;if_not_exists;</span>
-<span class="lineNum">     307 </span><span class="lineCov">        115 :         assert(stmt-&gt;tableElts);</span>
+<span class="lineNum">     305 </span><span class="lineCov">        121 :         info.table = stmt-&gt;relation-&gt;relname;</span>
+<span class="lineNum">     306 </span><span class="lineCov">        121 :         info.if_not_exists = stmt-&gt;if_not_exists;</span>
+<span class="lineNum">     307 </span><span class="lineCov">        121 :         assert(stmt-&gt;tableElts);</span>
 <span class="lineNum">     308 </span>            : 
-<span class="lineNum">     309 </span><span class="lineCov">        318 :         for (auto c = stmt-&gt;tableElts-&gt;head; c != NULL; c = lnext(c)) {</span>
-<span class="lineNum">     310 </span><span class="lineCov">        205 :                 auto node = reinterpret_cast&lt;Node *&gt;(c-&gt;data.ptr_value);</span>
-<span class="lineNum">     311 </span><span class="lineCov">        205 :                 switch (node-&gt;type) {</span>
-<span class="lineNum">     312 </span><span class="lineCov">        203 :                 case T_ColumnDef: {</span>
-<span class="lineNum">     313 </span><span class="lineCov">        203 :                         auto cdef = (ColumnDef *)c-&gt;data.ptr_value;</span>
-<span class="lineNum">     314 </span><span class="lineCov">        203 :                         char *name = (reinterpret_cast&lt;value *&gt;(</span>
-<span class="lineNum">     315 </span><span class="lineCov">        203 :                                           cdef-&gt;typeName-&gt;names-&gt;tail-&gt;data.ptr_value)</span>
+<span class="lineNum">     309 </span><span class="lineCov">        340 :         for (auto c = stmt-&gt;tableElts-&gt;head; c != NULL; c = lnext(c)) {</span>
+<span class="lineNum">     310 </span><span class="lineCov">        221 :                 auto node = reinterpret_cast&lt;Node *&gt;(c-&gt;data.ptr_value);</span>
+<span class="lineNum">     311 </span><span class="lineCov">        221 :                 switch (node-&gt;type) {</span>
+<span class="lineNum">     312 </span><span class="lineCov">        219 :                 case T_ColumnDef: {</span>
+<span class="lineNum">     313 </span><span class="lineCov">        219 :                         auto cdef = (ColumnDef *)c-&gt;data.ptr_value;</span>
+<span class="lineNum">     314 </span><span class="lineCov">        219 :                         char *name = (reinterpret_cast&lt;value *&gt;(</span>
+<span class="lineNum">     315 </span><span class="lineCov">        219 :                                           cdef-&gt;typeName-&gt;names-&gt;tail-&gt;data.ptr_value)</span>
 <span class="lineNum">     316 </span>            :                                           -&gt;val.str);
-<span class="lineNum">     317 </span><span class="lineCov">        203 :                         auto centry =</span>
-<span class="lineNum">     318 </span><span class="lineCov">        812 :                             ColumnDefinition(cdef-&gt;colname, TransformStringToTypeId(name));</span>
+<span class="lineNum">     317 </span><span class="lineCov">        219 :                         auto centry =</span>
+<span class="lineNum">     318 </span><span class="lineCov">        876 :                             ColumnDefinition(cdef-&gt;colname, TransformStringToTypeId(name));</span>
 <span class="lineNum">     319 </span>            : 
-<span class="lineNum">     320 </span><span class="lineCov">        203 :                         if (cdef-&gt;constraints) {</span>
+<span class="lineNum">     320 </span><span class="lineCov">        219 :                         if (cdef-&gt;constraints) {</span>
 <span class="lineNum">     321 </span><span class="lineCov">         30 :                                 for (auto constr = cdef-&gt;constraints-&gt;head; constr != nullptr;</span>
 <span class="lineNum">     322 </span><span class="lineCov">         14 :                                      constr = constr-&gt;next) {</span>
 <span class="lineNum">     323 </span><span class="lineCov">         18 :                                         info.constraints.push_back(TransformConstraint(</span>
 <span class="lineNum">     324 </span>            :                                             constr, centry, info.columns.size()));
 <span class="lineNum">     325 </span>            :                                 }
 <span class="lineNum">     326 </span>            :                         }
-<span class="lineNum">     327 </span><span class="lineCov">        201 :                         info.columns.push_back(centry);</span>
-<span class="lineNum">     328 </span><span class="lineCov">        201 :                         break;</span>
+<span class="lineNum">     327 </span><span class="lineCov">        217 :                         info.columns.push_back(centry);</span>
+<span class="lineNum">     328 </span><span class="lineCov">        217 :                         break;</span>
 <span class="lineNum">     329 </span>            :                 }
 <span class="lineNum">     330 </span><span class="lineCov">          2 :                 case T_Constraint: {</span>
 <span class="lineNum">     331 </span><span class="lineCov">          2 :                         info.constraints.push_back(TransformConstraint(c));</span>
@@ -397,7 +397,7 @@
 <span class="lineNum">     335 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;ColumnDef type not handled yet&quot;);</span>
 <span class="lineNum">     336 </span>            :                 }
 <span class="lineNum">     337 </span>            :         }
-<span class="lineNum">     338 </span><span class="lineCov">        113 :         return result;</span>
+<span class="lineNum">     338 </span><span class="lineCov">        119 :         return result;</span>
 <a name="339"><span class="lineNum">     339 </span>            : }</a>
 <span class="lineNum">     340 </span>            : 
 <span class="lineNum">     341 </span><span class="lineCov">          8 : unique_ptr&lt;CreateSchemaStatement&gt; TransformCreateSchema(Node *node) {</span>

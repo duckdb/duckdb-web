@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 155ab55 - storage/storage_chunk.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 08700d7 - storage/storage_chunk.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
+            <td class="headerValue">DuckDB Code Coverage Report 08700d7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">31</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 20:44:35</td>
+            <td class="headerValue">2018-11-21 22:20:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -74,30 +74,30 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">        120 : StorageChunk::StorageChunk(DataTable &amp;_table, size_t start)</span>
-<span class="lineNum">      16 </span><span class="lineCov">        120 :     : table(_table), count(0), start(start), read_count(0) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">        120 :         auto &amp;table_columns = table.table.columns;</span>
-<span class="lineNum">      18 </span><span class="lineCov">        120 :         columns.resize(table_columns.size());</span>
-<span class="lineNum">      19 </span><span class="lineCov">        120 :         size_t tuple_size = 0;</span>
-<span class="lineNum">      20 </span><span class="lineCov">        336 :         for (auto &amp;column : table_columns) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">        216 :                 tuple_size += GetTypeIdSize(column.type);</span>
+<span class="lineNum">      15 </span><span class="lineCov">        126 : StorageChunk::StorageChunk(DataTable &amp;_table, size_t start)</span>
+<span class="lineNum">      16 </span><span class="lineCov">        126 :     : table(_table), count(0), start(start), read_count(0) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">        126 :         auto &amp;table_columns = table.table.columns;</span>
+<span class="lineNum">      18 </span><span class="lineCov">        126 :         columns.resize(table_columns.size());</span>
+<span class="lineNum">      19 </span><span class="lineCov">        126 :         size_t tuple_size = 0;</span>
+<span class="lineNum">      20 </span><span class="lineCov">        358 :         for (auto &amp;column : table_columns) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">        232 :                 tuple_size += GetTypeIdSize(column.type);</span>
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">        120 :         owned_data = unique_ptr&lt;char[]&gt;(new char[tuple_size * STORAGE_CHUNK_SIZE]);</span>
-<span class="lineNum">      24 </span><span class="lineCov">        120 :         char *dataptr = owned_data.get();</span>
-<span class="lineNum">      25 </span><span class="lineCov">        336 :         for (size_t i = 0; i &lt; table_columns.size(); i++) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">        216 :                 columns[i] = dataptr;</span>
-<span class="lineNum">      27 </span><span class="lineCov">        216 :                 dataptr += GetTypeIdSize(table_columns[i].type) * STORAGE_CHUNK_SIZE;</span>
+<span class="lineNum">      23 </span><span class="lineCov">        126 :         owned_data = unique_ptr&lt;char[]&gt;(new char[tuple_size * STORAGE_CHUNK_SIZE]);</span>
+<span class="lineNum">      24 </span><span class="lineCov">        126 :         char *dataptr = owned_data.get();</span>
+<span class="lineNum">      25 </span><span class="lineCov">        358 :         for (size_t i = 0; i &lt; table_columns.size(); i++) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">        232 :                 columns[i] = dataptr;</span>
+<span class="lineNum">      27 </span><span class="lineCov">        232 :                 dataptr += GetTypeIdSize(table_columns[i].type) * STORAGE_CHUNK_SIZE;</span>
 <span class="lineNum">      28 </span>            :         }
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        120 : }</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        126 : }</span></a>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">      37961 : void StorageChunk::Cleanup(VersionInformation *info) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">      37961 :         size_t entry = info-&gt;prev.entry;</span>
-<span class="lineNum">      33 </span><span class="lineCov">      37961 :         version_pointers[entry] = info-&gt;next;</span>
-<span class="lineNum">      34 </span><span class="lineCov">      37961 :         if (version_pointers[entry]) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">      37979 : void StorageChunk::Cleanup(VersionInformation *info) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">      37979 :         size_t entry = info-&gt;prev.entry;</span>
+<span class="lineNum">      33 </span><span class="lineCov">      37979 :         version_pointers[entry] = info-&gt;next;</span>
+<span class="lineNum">      34 </span><span class="lineCov">      37979 :         if (version_pointers[entry]) {</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 version_pointers[entry]-&gt;prev.entry = entry;</span>
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :                 version_pointers[entry]-&gt;chunk = this;</span>
 <span class="lineNum">      37 </span>            :         }
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">      37961 : }</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">      37979 : }</span></a>
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span><span class="lineCov">        113 : void StorageChunk::Undo(VersionInformation *info) {</span>
 <span class="lineNum">      41 </span><span class="lineCov">        113 :         size_t entry = info-&gt;prev.entry;</span>

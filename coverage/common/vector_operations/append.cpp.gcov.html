@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 155ab55 - common/vector_operations/append.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 08700d7 - common/vector_operations/append.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 155ab55</td>
+            <td class="headerValue">DuckDB Code Coverage Report 08700d7</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">66</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-15 20:44:35</td>
+            <td class="headerValue">2018-11-21 22:20:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -73,28 +73,28 @@
 <span class="lineNum">      11 </span>            : using namespace std;
 <a name="12"><span class="lineNum">      12 </span>            : </a>
 <span class="lineNum">      13 </span>            : template &lt;class T&gt;
-<span class="lineNum">      14 </span><span class="lineCov">       7584 : static void append_function(T *__restrict source, T *__restrict target,</span>
+<span class="lineNum">      14 </span><span class="lineCov">       7664 : static void append_function(T *__restrict source, T *__restrict target,</span>
 <span class="lineNum">      15 </span>            :                             size_t count, sel_t *__restrict sel_vector,
 <span class="lineNum">      16 </span>            :                             nullmask_t &amp;nullmask, size_t right_offset) {
-<span class="lineNum">      17 </span><span class="lineCov">       7584 :         target += right_offset;</span>
-<span class="lineNum">      18 </span><span class="lineCov">       7584 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">       7664 :         target += right_offset;</span>
+<span class="lineNum">      18 </span><span class="lineCov">       7664 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      19 </span>            :                 target[k] = source[i];
 <span class="lineNum">      20 </span>            :                 if (IsNullValue&lt;T&gt;(target[k])) {
 <span class="lineNum">      21 </span>            :                         nullmask[right_offset + k] = true;
 <span class="lineNum">      22 </span>            :                 }
 <span class="lineNum">      23 </span>            :         });
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       7584 : }</span></a>
-<span class="lineNum">      25 </span><span class="lineCov">         50 : </span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       7664 : }</span></a>
+<span class="lineNum">      25 </span><span class="lineCov">         70 : </span>
 <span class="lineNum">      26 </span>            : template &lt;class T&gt; static void append_loop(Vector &amp;left, Vector &amp;right) {
 <span class="lineNum">      27 </span>            :         auto ldata = (T *)left.data;
-<span class="lineNum">      28 </span><span class="lineCov">         50 :         auto rdata = (T *)right.data;</span>
-<span class="lineNum">      29 </span><span class="lineCov">         50 :         append_function(ldata, rdata, left.count, left.sel_vector, right.nullmask,</span>
+<span class="lineNum">      28 </span><span class="lineCov">         70 :         auto rdata = (T *)right.data;</span>
+<span class="lineNum">      29 </span><span class="lineCov">         70 :         append_function(ldata, rdata, left.count, left.sel_vector, right.nullmask,</span>
 <span class="lineNum">      30 </span>            :                         right.count);
 <span class="lineNum">      31 </span>            :         right.count += left.count;
 <a name="32"><span class="lineNum">      32 </span>            : }</a>
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span>            : void VectorOperations::AppendFromStorage(Vector &amp;source, Vector &amp;target) {
-<span class="lineNum">      35 </span><span class="lineCov">         50 :         if (source.count == 0)</span>
+<span class="lineNum">      35 </span><span class="lineCov">         70 :         if (source.count == 0)</span>
 <span class="lineNum">      36 </span><span class="lineCov">       3054 :                 return;</span>
 <span class="lineNum">      37 </span>            : 
 <span class="lineNum">      38 </span>            :         if (source.count + target.count &gt; STANDARD_VECTOR_SIZE) {
@@ -128,7 +128,7 @@
 <span class="lineNum">      66 </span>            :                 break;
 <span class="lineNum">      67 </span>            :         default:
 <span class="lineNum">      68 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for copy&quot;);</span>
-<span class="lineNum">      69 </span><span class="lineCov">       4479 :         }</span>
+<span class="lineNum">      69 </span><span class="lineCov">       4539 :         }</span>
 <span class="lineNum">      70 </span>            : }
 </pre>
       </td>
