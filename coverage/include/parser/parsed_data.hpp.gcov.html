@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 08700d7 - include/parser/parsed_data.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">include/parser</a> - parsed_data.hpp<span style="font-size: 80%;"> (source / <a href="parsed_data.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 08700d7</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntryLo">65.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-22 17:11:08</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : //
+<span class="lineNum">       3 </span>            : //                         DuckDB
+<span class="lineNum">       4 </span>            : //
+<span class="lineNum">       5 </span>            : // parser/parsed_data.hpp
+<span class="lineNum">       6 </span>            : //
+<span class="lineNum">       7 </span>            : // Author: Mark Raasveldt
+<span class="lineNum">       8 </span>            : //
+<span class="lineNum">       9 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #pragma once
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : #include &quot;common/internal_types.hpp&quot;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : #include &quot;function/function.hpp&quot;
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : #include &quot;parser/column_definition.hpp&quot;
+<span class="lineNum">      18 </span>            : #include &quot;parser/constraint.hpp&quot;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : namespace duckdb {
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            : struct CreateTableInformation {
+<span class="lineNum">      23 </span>            :         //! Schema name to insert to
+<span class="lineNum">      24 </span>            :         std::string schema;
+<span class="lineNum">      25 </span>            :         //! Table name to insert to
+<span class="lineNum">      26 </span>            :         std::string table;
+<span class="lineNum">      27 </span>            :         //! List of columns of the table
+<span class="lineNum">      28 </span>            :         std::vector&lt;ColumnDefinition&gt; columns;
+<span class="lineNum">      29 </span>            :         //! List of constraints on the table
+<span class="lineNum">      30 </span>            :         std::vector&lt;std::unique_ptr&lt;Constraint&gt;&gt; constraints;
+<span class="lineNum">      31 </span>            :         //! Ignore if the entry already exists, instead of failing
+<a name="32"><span class="lineNum">      32 </span>            :         bool if_not_exists = false;</a>
+<span class="lineNum">      33 </span>            : 
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">        129 :         CreateTableInformation() : schema(DEFAULT_SCHEMA), if_not_exists(false) {</span></a>
+<span class="lineNum">      35 </span><span class="lineCov">        129 :         }</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :         CreateTableInformation(std::string schema, std::string table,</span>
+<span class="lineNum">      37 </span>            :                                std::vector&lt;ColumnDefinition&gt; columns)
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :             : schema(schema), table(table), columns(columns), if_not_exists(false) {</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">      40 </span>            : };
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : struct DropTableInformation {
+<span class="lineNum">      43 </span>            :         //! Schema name to drop from
+<span class="lineNum">      44 </span>            :         std::string schema;
+<span class="lineNum">      45 </span>            :         //! Table name to drop
+<span class="lineNum">      46 </span>            :         std::string table;
+<span class="lineNum">      47 </span>            :         //! Ignore if the entry does not exist instead of failing
+<span class="lineNum">      48 </span>            :         bool if_exists = false;
+<span class="lineNum">      49 </span>            :         //! Cascade drop (drop all dependents instead of throwing an error if there
+<span class="lineNum">      50 </span>            :         //! are any)
+<a name="51"><span class="lineNum">      51 </span>            :         bool cascade = false;</a>
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span><span class="lineCov">         14 :         DropTableInformation()</span>
+<span class="lineNum">      54 </span><span class="lineCov">         14 :             : schema(DEFAULT_SCHEMA), if_exists(false), cascade(false) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">         14 :         }</span>
+<span class="lineNum">      56 </span>            : };
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            : struct AlterTableInformation {
+<span class="lineNum">      59 </span>            :         //! Schema name to alter to
+<span class="lineNum">      60 </span>            :         std::string schema;
+<span class="lineNum">      61 </span>            :         //! Table name to alter to
+<span class="lineNum">      62 </span>            :         std::string table;
+<span class="lineNum">      63 </span>            :         //! List of columns of the table
+<span class="lineNum">      64 </span>            :         std::vector&lt;ColumnDefinition&gt; new_columns;
+<span class="lineNum">      65 </span>            :         // TODO: List of constrains
+<span class="lineNum">      66 </span>            :         //! List of constraints on the table
+<span class="lineNum">      67 </span>            :         // std::vector&lt;std::unique_ptr&lt;Constraint&gt;&gt; constraints;
+<span class="lineNum">      68 </span>            :         //! Ignore if the entry already exists, instead of failing
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span>            :         //! Ignore if the entry does not exist instead of failing
+<span class="lineNum">      71 </span>            :         bool if_exists = false;
+<span class="lineNum">      72 </span>            :         //! Cascade drop (drop all dependents instead of throwing an error if there
+<span class="lineNum">      73 </span>            :         //! are any)
+<a name="74"><span class="lineNum">      74 </span>            :         bool cascade = false;</a>
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :         AlterTableInformation()</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :             : schema(DEFAULT_SCHEMA), if_exists(false), cascade(false) {</span>
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">      79 </span>            :         AlterTableInformation(std::string schema, std::string table,
+<span class="lineNum">      80 </span>            :                               std::vector&lt;ColumnDefinition&gt; columns)
+<span class="lineNum">      81 </span>            :             : schema(schema), table(table), new_columns(columns), if_exists(false),
+<span class="lineNum">      82 </span>            :               cascade(false) {
+<span class="lineNum">      83 </span>            :         }
+<span class="lineNum">      84 </span>            : };
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            : struct CreateSchemaInformation {
+<span class="lineNum">      87 </span>            :         //! Schema name to create
+<span class="lineNum">      88 </span>            :         std::string schema;
+<span class="lineNum">      89 </span>            :         //! Ignore if the entry already exists, instead of failing
+<a name="90"><span class="lineNum">      90 </span>            :         bool if_not_exists = false;</a>
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span><span class="lineCov">        114 :         CreateSchemaInformation() : if_not_exists(false) {</span>
+<span class="lineNum">      93 </span><span class="lineCov">        114 :         }</span>
+<span class="lineNum">      94 </span>            : };
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            : struct DropSchemaInformation {
+<span class="lineNum">      97 </span>            :         //! Schema name to drop
+<span class="lineNum">      98 </span>            :         std::string schema;
+<span class="lineNum">      99 </span>            :         //! Ignore if the entry does not exist instead of failing
+<span class="lineNum">     100 </span>            :         bool if_exists = false;
+<span class="lineNum">     101 </span>            :         //! Cascade drop (drop all dependents instead of throwing an error if there
+<span class="lineNum">     102 </span>            :         //! are any)
+<a name="103"><span class="lineNum">     103 </span>            :         bool cascade = false;</a>
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span><span class="lineCov">          9 :         DropSchemaInformation() : if_exists(false), cascade(false) {</span>
+<span class="lineNum">     106 </span><span class="lineCov">          9 :         }</span>
+<span class="lineNum">     107 </span>            : };
+<span class="lineNum">     108 </span>            : 
+<span class="lineNum">     109 </span>            : struct CreateTableFunctionInformation {
+<span class="lineNum">     110 </span>            :         //! Schema name
+<span class="lineNum">     111 </span>            :         std::string schema;
+<span class="lineNum">     112 </span>            :         //! Function name
+<span class="lineNum">     113 </span>            :         std::string name;
+<span class="lineNum">     114 </span>            :         //! Replace function if it already exists instead of failing
+<span class="lineNum">     115 </span>            :         bool or_replace = false;
+<span class="lineNum">     116 </span>            :         //! List of return columns
+<span class="lineNum">     117 </span>            :         std::vector&lt;ColumnDefinition&gt; return_values;
+<span class="lineNum">     118 </span>            :         //! Input arguments
+<span class="lineNum">     119 </span>            :         std::vector&lt;TypeId&gt; arguments;
+<span class="lineNum">     120 </span>            :         //! Initialize function pointer
+<span class="lineNum">     121 </span>            :         table_function_init_t init;
+<span class="lineNum">     122 </span>            :         //! The function pointer
+<span class="lineNum">     123 </span>            :         table_function_t function;
+<span class="lineNum">     124 </span>            :         //! Final function pointer
+<a name="125"><span class="lineNum">     125 </span>            :         table_function_final_t final;</a>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span><span class="lineCov">        208 :         CreateTableFunctionInformation()</span>
+<span class="lineNum">     128 </span><span class="lineCov">        208 :             : schema(DEFAULT_SCHEMA), or_replace(false) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">        208 :         }</span>
+<span class="lineNum">     130 </span>            : };
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span>            : struct DropTableFunctionInformation {
+<span class="lineNum">     133 </span>            :         //! Schema name to drop from
+<span class="lineNum">     134 </span>            :         std::string schema;
+<span class="lineNum">     135 </span>            :         //! Table function name to drop
+<span class="lineNum">     136 </span>            :         std::string name;
+<span class="lineNum">     137 </span>            :         //! Ignore if the entry does not exist instead of failing
+<span class="lineNum">     138 </span>            :         bool if_exists = false;
+<span class="lineNum">     139 </span>            :         //! Cascade drop (drop all dependents instead of throwing an error if there
+<span class="lineNum">     140 </span>            :         //! are any)
+<span class="lineNum">     141 </span>            :         bool cascade = false;
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span>            :         DropTableFunctionInformation()
+<span class="lineNum">     144 </span>            :             : schema(DEFAULT_SCHEMA), if_exists(false), cascade(false) {
+<span class="lineNum">     145 </span>            :         }
+<span class="lineNum">     146 </span>            : };
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            : struct CreateScalarFunctionInformation {
+<span class="lineNum">     149 </span>            :         //! Schema name
+<span class="lineNum">     150 </span>            :         std::string schema;
+<span class="lineNum">     151 </span>            :         //! Function name
+<span class="lineNum">     152 </span>            :         std::string name;
+<span class="lineNum">     153 </span>            :         //! Replace function if it already exists instead of failing
+<span class="lineNum">     154 </span>            :         bool or_replace = false;
+<span class="lineNum">     155 </span>            :         //! The main scalar function to execute
+<span class="lineNum">     156 </span>            :         scalar_function_t function;
+<span class="lineNum">     157 </span>            :         //! Function that checks whether or not a set of arguments matches
+<span class="lineNum">     158 </span>            :         matches_argument_function_t matches;
+<span class="lineNum">     159 </span>            :         //! Function that gives the return type of the function given the input
+<span class="lineNum">     160 </span>            :         //! arguments
+<a name="161"><span class="lineNum">     161 </span>            :         get_return_type_function_t return_type;</a>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">        416 :         CreateScalarFunctionInformation()</span>
+<span class="lineNum">     164 </span><span class="lineCov">        416 :             : schema(DEFAULT_SCHEMA), or_replace(false) {</span>
+<span class="lineNum">     165 </span><span class="lineCov">        416 :         }</span>
+<span class="lineNum">     166 </span>            : };
+<span class="lineNum">     167 </span>            : 
+<span class="lineNum">     168 </span>            : struct CreateIndexInformation {
+<span class="lineNum">     169 </span>            :         //! Schema name to insert to
+<span class="lineNum">     170 </span>            :         std::string schema;
+<span class="lineNum">     171 </span>            :         //! Table name to insert to
+<span class="lineNum">     172 </span>            :         std::string table;
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span>            :         ////! The columns that are indexed
+<span class="lineNum">     175 </span>            :         std::vector&lt;std::string&gt; indexed_columns;
+<span class="lineNum">     176 </span>            :         ////! Index Type (e.g., B+-tree, Skip-List, ...)
+<span class="lineNum">     177 </span>            :         IndexType index_type;
+<span class="lineNum">     178 </span>            :         ////! Name of the Index
+<span class="lineNum">     179 </span>            :         std::string index_name;
+<span class="lineNum">     180 </span>            :         ////! If it is an unique index
+<span class="lineNum">     181 </span>            :         bool unique = false;
+<span class="lineNum">     182 </span>            : 
+<span class="lineNum">     183 </span>            :         //! Ignore if the entry already exists, instead of failing
+<a name="184"><span class="lineNum">     184 </span>            :         bool if_not_exists = false;</a>
+<span class="lineNum">     185 </span>            : 
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :         CreateIndexInformation() : schema(DEFAULT_SCHEMA), if_not_exists(false) {</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     188 </span>            :         CreateIndexInformation(std::string schema, std::string table,
+<span class="lineNum">     189 </span>            :                                std::vector&lt;std::string&gt; indexed_columns,
+<span class="lineNum">     190 </span>            :                                IndexType index_type, std::string index_name,
+<span class="lineNum">     191 </span>            :                                bool unique)
+<span class="lineNum">     192 </span>            :             : schema(schema), table(table), indexed_columns(indexed_columns),
+<span class="lineNum">     193 </span>            :               index_type(index_type), index_name(index_name), if_not_exists(false) {
+<span class="lineNum">     194 </span>            :         }
+<span class="lineNum">     195 </span>            : };
+<span class="lineNum">     196 </span>            : 
+<span class="lineNum">     197 </span>            : } // namespace duckdb
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
