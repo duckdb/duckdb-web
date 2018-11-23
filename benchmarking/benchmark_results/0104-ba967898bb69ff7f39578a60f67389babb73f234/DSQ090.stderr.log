@@ -1,0 +1,6 @@
+------------
+|| DSQ090 ||
+------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Ambiguous reference to column name "total_sum" (use: "results_rollup.total_sum" or "results.total_sum")
