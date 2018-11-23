@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8ae54f6 - execution/operator/physical_nested_loop_join_inner.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 1d95558 - execution/operator/physical_nested_loop_join_inner.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8ae54f6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 1d95558</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">2138</td>
+            <td class="headerCovTableEntry">2181</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 07:38:07</td>
+            <td class="headerValue">2018-11-23 13:48:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -91,358 +91,363 @@
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :         auto rdata = (T *)right.data;</span>
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :         size_t result_count = 0;</span>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span>            :         // FIXME: this only needs to be done once per vector instead of once per call
-<span class="lineNum">      33 </span>            :         // create a selection vector that disqualifies any entries with NULL from qualifying
-<span class="lineNum">      34 </span>            :         // because NULL never matches anything
-<span class="lineNum">      35 </span><span class="lineNoCov">          0 :         sel_t left_null_vector[STANDARD_VECTOR_SIZE], right_null_vector[STANDARD_VECTOR_SIZE];</span>
-<span class="lineNum">      36 </span><span class="lineNoCov">          0 :         size_t left_count = 0, right_count = 0;</span>
-<span class="lineNum">      37 </span><span class="lineNoCov">          0 :         sel_t *left_sel_vector = nullptr, *right_sel_vector = nullptr;</span>
-<span class="lineNum">      38 </span><span class="lineNoCov">          0 :         if (left.nullmask.any()) {</span>
-<span class="lineNum">      39 </span><span class="lineNoCov">          0 :                 VectorOperations::Exec(left.sel_vector, left.count, [&amp;](size_t i, size_t k) {</span>
-<span class="lineNum">      40 </span>            :                         if (!left.nullmask[i]) {
-<span class="lineNum">      41 </span>            :                                 left_null_vector[left_count++] = i;
-<span class="lineNum">      42 </span>            :                         }
-<span class="lineNum">      43 </span>            :                 });
-<span class="lineNum">      44 </span>            :         } else {
-<span class="lineNum">      45 </span><span class="lineNoCov">          0 :                 left_count = left.count;</span>
-<span class="lineNum">      46 </span>            :         }
-<span class="lineNum">      47 </span><span class="lineNoCov">          0 :         if (right.nullmask.any()) {</span>
-<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                 VectorOperations::Exec(right.sel_vector, right.count, [&amp;](size_t i, size_t k) {</span>
-<span class="lineNum">      49 </span>            :                         if (!right.nullmask[i]) {
-<span class="lineNum">      50 </span>            :                                 right_null_vector[right_count++] = i;
-<span class="lineNum">      51 </span>            :                         }
-<span class="lineNum">      52 </span>            :                 });
-<span class="lineNum">      53 </span>            :         } else {
-<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 right_count = right.count;</span>
-<span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineNoCov">          0 :         for(; rpos &lt; right_count; rpos++) {</span>
-<span class="lineNum">      57 </span><span class="lineNoCov">          0 :                 size_t right_position = right_sel_vector ? right_sel_vector[rpos] : rpos;</span>
-<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 for(; lpos &lt; left_count; lpos++) {</span>
-<span class="lineNum">      59 </span><span class="lineNoCov">          0 :                         size_t left_position = left_sel_vector ? left_sel_vector[lpos] : lpos;</span>
-<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                         if (OP::Operation(ldata[left_position], rdata[right_position])) {</span>
-<span class="lineNum">      61 </span>            :                                 // emit tuple
-<span class="lineNum">      62 </span><span class="lineNoCov">          0 :                                 lvector[result_count] = left_position;</span>
-<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                                 rvector[result_count] = right_position;</span>
-<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                                 result_count++;</span>
-<span class="lineNum">      65 </span><span class="lineNoCov">          0 :                                 if (result_count == STANDARD_VECTOR_SIZE) {</span>
-<span class="lineNum">      66 </span>            :                                         // out of space!
-<span class="lineNum">      67 </span><span class="lineNoCov">          0 :                                         return result_count;</span>
-<span class="lineNum">      68 </span>            :                                 }
-<span class="lineNum">      69 </span>            :                         }
-<span class="lineNum">      70 </span>            :                 }
-<span class="lineNum">      71 </span><span class="lineNoCov">          0 :                 lpos = 0;</span>
-<span class="lineNum">      72 </span>            :         }
-<span class="lineNum">      73 </span><span class="lineNoCov">          0 :         return result_count;</span>
-<span class="lineNum">      74 </span>            : }
-<a name="75"><span class="lineNum">      75 </span><span class="lineNoCov">          0 : </span></a>
-<span class="lineNum">      76 </span>            : template &lt;class OP&gt;
-<span class="lineNum">      77 </span>            : static size_t nested_loop_join_operator(Vector &amp;left, Vector &amp;right,
-<span class="lineNum">      78 </span><span class="lineNoCov">          0 :                                         size_t &amp;lpos, size_t &amp;rpos,</span>
-<span class="lineNum">      79 </span><span class="lineNoCov">          0 :                                         sel_t lvector[], sel_t rvector[]) {</span>
-<span class="lineNum">      80 </span><span class="lineNoCov">          0 :         assert(left.type == right.type);</span>
-<span class="lineNum">      81 </span>            :         switch (left.type) {
-<span class="lineNum">      82 </span>            :         case TypeId::BOOLEAN:
-<span class="lineNum">      83 </span>            :         case TypeId::TINYINT:
-<span class="lineNum">      84 </span>            :                 return templated_nested_loop_join&lt;int8_t, OP&gt;(left, right, lpos, rpos,
-<span class="lineNum">      85 </span><span class="lineNoCov">          0 :                                                               lvector, rvector);</span>
-<span class="lineNum">      86 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
-<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_join&lt;int16_t, OP&gt;(left, right, lpos, rpos,</span>
-<span class="lineNum">      88 </span><span class="lineNoCov">          0 :                                                                lvector, rvector);</span>
-<span class="lineNum">      89 </span><span class="lineNoCov">          0 :         case TypeId::DATE:</span>
-<span class="lineNum">      90 </span>            :         case TypeId::INTEGER:
-<span class="lineNum">      91 </span>            :                 return templated_nested_loop_join&lt;int32_t, OP&gt;(left, right, lpos, rpos,
-<span class="lineNum">      92 </span>            :                                                                lvector, rvector);
-<span class="lineNum">      93 </span>            :         case TypeId::TIMESTAMP:
-<span class="lineNum">      94 </span>            :         case TypeId::BIGINT:
-<span class="lineNum">      95 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_join&lt;int64_t, OP&gt;(left, right, lpos, rpos,</span>
-<span class="lineNum">      96 </span>            :                                                                lvector, rvector);
-<span class="lineNum">      97 </span><span class="lineNoCov">          0 :         case TypeId::DECIMAL:</span>
-<span class="lineNum">      98 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_join&lt;double, OP&gt;(left, right, lpos, rpos,</span>
-<span class="lineNum">      99 </span>            :                                                               lvector, rvector);
-<span class="lineNum">     100 </span>            :         case TypeId::POINTER:
-<span class="lineNum">     101 </span>            :                 return templated_nested_loop_join&lt;uint64_t, OP&gt;(left, right, lpos, rpos,
-<span class="lineNum">     102 </span>            :                                                                 lvector, rvector);
-<span class="lineNum">     103 </span>            :         case TypeId::VARCHAR:
-<span class="lineNum">     104 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_join&lt;const char *, OP&gt;(</span>
-<span class="lineNum">     105 </span>            :                     left, right, lpos, rpos, lvector, rvector);
-<span class="lineNum">     106 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     107 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for join!&quot;);</span>
-<span class="lineNum">     108 </span><span class="lineNoCov">          0 :         }</span>
-<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 : }</span></a>
-<span class="lineNum">     110 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     111 </span>            : size_t nested_loop_join(ExpressionType op, Vector &amp;left, Vector &amp;right,
-<span class="lineNum">     112 </span><span class="lineNoCov">          0 :                         size_t &amp;lpos, size_t &amp;rpos, sel_t lvector[],</span>
-<span class="lineNum">     113 </span><span class="lineNoCov">          0 :                         sel_t rvector[]) {</span>
-<span class="lineNum">     114 </span><span class="lineNoCov">          0 :         if (lpos &gt;= left.count || rpos &gt;= right.count) {</span>
-<span class="lineNum">     115 </span><span class="lineNoCov">          0 :                 return 0;</span>
-<span class="lineNum">     116 </span>            :         }
-<span class="lineNum">     117 </span><span class="lineNoCov">          0 :         // should be flattened before</span>
-<span class="lineNum">     118 </span>            :         assert(!right.sel_vector);
-<span class="lineNum">     119 </span>            :         switch (op) {
-<span class="lineNum">     120 </span>            :         case ExpressionType::COMPARE_EQUAL:
-<span class="lineNum">     121 </span><span class="lineNoCov">          0 :                 return nested_loop_join_operator&lt;operators::Equals&gt;(</span>
-<span class="lineNum">     122 </span>            :                     left, right, lpos, rpos, lvector, rvector);
-<span class="lineNum">     123 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_NOTEQUAL:</span>
-<span class="lineNum">     124 </span>            :                 return nested_loop_join_operator&lt;operators::NotEquals&gt;(
-<span class="lineNum">     125 </span><span class="lineNoCov">          0 :                     left, right, lpos, rpos, lvector, rvector);</span>
-<span class="lineNum">     126 </span>            :         case ExpressionType::COMPARE_LESSTHAN:
-<span class="lineNum">     127 </span>            :                 return nested_loop_join_operator&lt;operators::LessThan&gt;(
-<span class="lineNum">     128 </span><span class="lineNoCov">          0 :                     left, right, lpos, rpos, lvector, rvector);</span>
-<span class="lineNum">     129 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_GREATERTHAN:</span>
-<span class="lineNum">     130 </span><span class="lineNoCov">          0 :                 return nested_loop_join_operator&lt;operators::GreaterThan&gt;(</span>
-<span class="lineNum">     131 </span>            :                     left, right, lpos, rpos, lvector, rvector);
-<span class="lineNum">     132 </span>            :         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
-<span class="lineNum">     133 </span>            :                 return nested_loop_join_operator&lt;operators::LessThanEquals&gt;(
-<span class="lineNum">     134 </span>            :                     left, right, lpos, rpos, lvector, rvector);
-<span class="lineNum">     135 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:</span>
-<span class="lineNum">     136 </span><span class="lineNoCov">          0 :                 return nested_loop_join_operator&lt;operators::GreaterThanEquals&gt;(</span>
-<span class="lineNum">     137 </span><span class="lineNoCov">          0 :                     left, right, lpos, rpos, lvector, rvector);</span>
-<span class="lineNum">     138 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     139 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(</span>
-<span class="lineNum">     140 </span>            :                     &quot;Unimplemented comparison type for join!&quot;);
-<span class="lineNum">     141 </span>            :         }
-<span class="lineNum">     142 </span>            : }
-<a name="143"><span class="lineNum">     143 </span>            : </a>
-<span class="lineNum">     144 </span>            : template &lt;class T, class OP&gt;
-<span class="lineNum">     145 </span><span class="lineNoCov">          0 : static size_t templated_nested_loop_comparison(Vector &amp;left, Vector &amp;right,</span>
-<span class="lineNum">     146 </span>            :                                                sel_t lvector[], sel_t rvector[],
-<span class="lineNum">     147 </span><span class="lineNoCov">          0 :                                                size_t count) {</span>
-<span class="lineNum">     148 </span><span class="lineNoCov">          0 :         assert(count &gt; 0);</span>
-<span class="lineNum">     149 </span>            : 
-<span class="lineNum">     150 </span>            :         // should be flattened before
-<span class="lineNum">     151 </span>            :         assert(!left.sel_vector &amp;&amp; !right.sel_vector);
-<span class="lineNum">     152 </span>            :         auto ldata = (T *)left.data;
-<span class="lineNum">     153 </span>            :         auto rdata = (T *)right.data;
-<span class="lineNum">     154 </span><span class="lineNoCov">          0 :         size_t result_count = 0;</span>
-<span class="lineNum">     155 </span>            :         for (size_t i = 0; i &lt; count; i++) {
-<span class="lineNum">     156 </span><span class="lineNoCov">          0 :                 if (!left.nullmask[lvector[i]] &amp;&amp; !right.nullmask[rvector[i]] &amp;&amp;</span>
-<span class="lineNum">     157 </span><span class="lineNoCov">          0 :                     OP::Operation(ldata[lvector[i]], rdata[rvector[i]])) {</span>
-<span class="lineNum">     158 </span><span class="lineNoCov">          0 :                         lvector[result_count] = lvector[i];</span>
-<span class="lineNum">     159 </span><span class="lineNoCov">          0 :                         rvector[result_count] = rvector[i];</span>
-<span class="lineNum">     160 </span><span class="lineNoCov">          0 :                         result_count++;</span>
-<span class="lineNum">     161 </span>            :                 }
-<span class="lineNum">     162 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     163 </span><span class="lineNoCov">          0 :         return result_count;</span>
-<span class="lineNum">     164 </span><span class="lineNoCov">          0 : }</span>
-<a name="165"><span class="lineNum">     165 </span><span class="lineNoCov">          0 : </span></a>
-<span class="lineNum">     166 </span>            : template &lt;class OP&gt;
-<span class="lineNum">     167 </span><span class="lineNoCov">          0 : static size_t nested_loop_comparison_operator(Vector &amp;l, Vector &amp;r,</span>
-<span class="lineNum">     168 </span>            :                                               sel_t lvector[], sel_t rvector[],
-<span class="lineNum">     169 </span>            :                                               size_t count) {
-<span class="lineNum">     170 </span>            :         assert(l.type == r.type);
-<span class="lineNum">     171 </span><span class="lineNoCov">          0 :         switch (l.type) {</span>
-<span class="lineNum">     172 </span>            :         case TypeId::BOOLEAN:
-<span class="lineNum">     173 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
-<span class="lineNum">     174 </span>            :                 return templated_nested_loop_comparison&lt;int8_t, OP&gt;(l, r, lvector,
-<span class="lineNum">     175 </span><span class="lineNoCov">          0 :                                                                     rvector, count);</span>
-<span class="lineNum">     176 </span>            :         case TypeId::SMALLINT:
-<span class="lineNum">     177 </span>            :                 return templated_nested_loop_comparison&lt;int16_t, OP&gt;(l, r, lvector,
-<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                                                                      rvector, count);</span>
-<span class="lineNum">     179 </span><span class="lineNoCov">          0 :         case TypeId::DATE:</span>
-<span class="lineNum">     180 </span><span class="lineNoCov">          0 :         case TypeId::INTEGER:</span>
-<span class="lineNum">     181 </span>            :                 return templated_nested_loop_comparison&lt;int32_t, OP&gt;(l, r, lvector,
-<span class="lineNum">     182 </span>            :                                                                      rvector, count);
-<span class="lineNum">     183 </span>            :         case TypeId::TIMESTAMP:
-<span class="lineNum">     184 </span>            :         case TypeId::BIGINT:
-<span class="lineNum">     185 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;int64_t, OP&gt;(l, r, lvector,</span>
-<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                                                                      rvector, count);</span>
-<span class="lineNum">     187 </span><span class="lineNoCov">          0 :         case TypeId::DECIMAL:</span>
-<span class="lineNum">     188 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;double, OP&gt;(l, r, lvector,</span>
-<span class="lineNum">     189 </span><span class="lineNoCov">          0 :                                                                     rvector, count);</span>
-<span class="lineNum">     190 </span>            :         case TypeId::POINTER:
-<span class="lineNum">     191 </span>            :                 return templated_nested_loop_comparison&lt;uint64_t, OP&gt;(l, r, lvector,
-<span class="lineNum">     192 </span>            :                                                                       rvector, count);
-<span class="lineNum">     193 </span>            :         case TypeId::VARCHAR:
-<span class="lineNum">     194 </span>            :                 return templated_nested_loop_comparison&lt;const char *, OP&gt;(
-<span class="lineNum">     195 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
-<span class="lineNum">     196 </span>            :         default:
-<span class="lineNum">     197 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for join!&quot;);</span>
-<span class="lineNum">     198 </span><span class="lineNoCov">          0 :         }</span>
-<a name="199"><span class="lineNum">     199 </span>            : }</a>
-<span class="lineNum">     200 </span>            : 
-<span class="lineNum">     201 </span>            : size_t nested_loop_comparison(ExpressionType op, Vector &amp;l, Vector &amp;r,
-<span class="lineNum">     202 </span>            :                               sel_t lvector[], sel_t rvector[], size_t count) {
-<span class="lineNum">     203 </span>            :         switch (op) {
-<span class="lineNum">     204 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_EQUAL:</span>
-<span class="lineNum">     205 </span>            :                 return nested_loop_comparison_operator&lt;operators::Equals&gt;(
-<span class="lineNum">     206 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
-<span class="lineNum">     207 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_NOTEQUAL:</span>
-<span class="lineNum">     208 </span><span class="lineNoCov">          0 :                 return nested_loop_comparison_operator&lt;operators::NotEquals&gt;(</span>
-<span class="lineNum">     209 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
-<span class="lineNum">     210 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_LESSTHAN:</span>
-<span class="lineNum">     211 </span>            :                 return nested_loop_comparison_operator&lt;operators::LessThan&gt;(
-<span class="lineNum">     212 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
-<span class="lineNum">     213 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_GREATERTHAN:</span>
-<span class="lineNum">     214 </span><span class="lineNoCov">          0 :                 return nested_loop_comparison_operator&lt;operators::GreaterThan&gt;(</span>
-<span class="lineNum">     215 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
-<span class="lineNum">     216 </span>            :         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
-<span class="lineNum">     217 </span><span class="lineNoCov">          0 :                 return nested_loop_comparison_operator&lt;operators::LessThanEquals&gt;(</span>
-<span class="lineNum">     218 </span>            :                     l, r, lvector, rvector, count);
-<span class="lineNum">     219 </span>            :         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:
-<span class="lineNum">     220 </span>            :                 return nested_loop_comparison_operator&lt;operators::GreaterThanEquals&gt;(
-<span class="lineNum">     221 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
-<span class="lineNum">     222 </span>            :         default:
-<span class="lineNum">     223 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(</span>
-<span class="lineNum">     224 </span>            :                     &quot;Unimplemented comparison type for join!&quot;);
-<span class="lineNum">     225 </span><span class="lineNoCov">          0 :         }</span>
-<a name="226"><span class="lineNum">     226 </span>            : }</a>
-<span class="lineNum">     227 </span>            : 
-<span class="lineNum">     228 </span><span class="lineNoCov">          0 : void PhysicalNestedLoopJoinInner::_GetChunk(ClientContext &amp;context,</span>
-<span class="lineNum">     229 </span><span class="lineNoCov">          0 :                                             DataChunk &amp;chunk,</span>
-<span class="lineNum">     230 </span><span class="lineNoCov">          0 :                                             PhysicalOperatorState *state_) {</span>
-<span class="lineNum">     231 </span>            :         assert(type == JoinType::INNER);
-<span class="lineNum">     232 </span>            : 
-<span class="lineNum">     233 </span>            :         auto state =
-<span class="lineNum">     234 </span>            :             reinterpret_cast&lt;PhysicalNestedLoopJoinInnerOperatorState *&gt;(state_);
-<span class="lineNum">     235 </span><span class="lineNoCov">          0 :         chunk.Reset();</span>
-<span class="lineNum">     236 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     237 </span><span class="lineNoCov">          0 :         // first we fully materialize the right child, if we haven't done that yet</span>
-<span class="lineNum">     238 </span><span class="lineNoCov">          0 :         if (state-&gt;right_chunks.column_count() == 0) {</span>
-<span class="lineNum">     239 </span><span class="lineNoCov">          0 :                 vector&lt;TypeId&gt; condition_types;</span>
-<span class="lineNum">     240 </span>            :                 for (auto &amp;cond : conditions) {
-<span class="lineNum">     241 </span>            :                         assert(cond.left-&gt;return_type == cond.right-&gt;return_type);
-<span class="lineNum">     242 </span>            :                         condition_types.push_back(cond.left-&gt;return_type);
-<span class="lineNum">     243 </span>            :                 }
-<span class="lineNum">     244 </span>            : 
-<span class="lineNum">     245 </span><span class="lineNoCov">          0 :                 auto right_state = children[1]-&gt;GetOperatorState(state-&gt;parent);</span>
-<span class="lineNum">     246 </span>            :                 auto types = children[1]-&gt;GetTypes();
-<span class="lineNum">     247 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     248 </span><span class="lineNoCov">          0 :                 DataChunk new_chunk, right_condition;</span>
-<span class="lineNum">     249 </span>            :                 new_chunk.Initialize(types);
-<span class="lineNum">     250 </span>            :                 right_condition.Initialize(condition_types);
-<span class="lineNum">     251 </span>            :                 do {
-<span class="lineNum">     252 </span>            :                         children[1]-&gt;GetChunk(context, new_chunk, right_state.get());
-<span class="lineNum">     253 </span>            :                         if (new_chunk.size() == 0) {
-<span class="lineNum">     254 </span><span class="lineNoCov">          0 :                                 break;</span>
-<span class="lineNum">     255 </span>            :                         }
-<span class="lineNum">     256 </span><span class="lineNoCov">          0 :                         // resolve the join expression of the right side</span>
-<span class="lineNum">     257 </span><span class="lineNoCov">          0 :                         ExpressionExecutor executor(new_chunk, context);</span>
-<span class="lineNum">     258 </span><span class="lineNoCov">          0 :                         for (size_t i = 0; i &lt; conditions.size(); i++) {</span>
-<span class="lineNum">     259 </span><span class="lineNoCov">          0 :                                 executor.ExecuteExpression(conditions[i].right.get(),</span>
-<span class="lineNum">     260 </span><span class="lineNoCov">          0 :                                                            right_condition.data[i]);</span>
-<span class="lineNum">     261 </span>            :                         }
-<span class="lineNum">     262 </span><span class="lineNoCov">          0 :                         state-&gt;right_data.Append(new_chunk);</span>
-<span class="lineNum">     263 </span><span class="lineNoCov">          0 :                         state-&gt;right_chunks.Append(right_condition);</span>
-<span class="lineNum">     264 </span><span class="lineNoCov">          0 :                 } while (new_chunk.size() &gt; 0);</span>
-<span class="lineNum">     265 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     266 </span>            :                 if (state-&gt;right_chunks.count == 0) {
-<span class="lineNum">     267 </span><span class="lineNoCov">          0 :                         return;</span>
-<span class="lineNum">     268 </span>            :                 }
-<span class="lineNum">     269 </span>            :                 // initialize the chunks for the join conditions
-<span class="lineNum">     270 </span>            :                 state-&gt;left_join_condition.Initialize(condition_types);
-<span class="lineNum">     271 </span><span class="lineNoCov">          0 :                 state-&gt;right_chunk = state-&gt;right_chunks.chunks.size() - 1;</span>
-<span class="lineNum">     272 </span>            :                 state-&gt;right_tuple =
-<span class="lineNum">     273 </span><span class="lineNoCov">          0 :                     state-&gt;right_chunks.chunks[state-&gt;right_chunk]-&gt;size();</span>
-<span class="lineNum">     274 </span>            :         }
-<span class="lineNum">     275 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     276 </span>            :         if (state-&gt;right_chunk &gt;= state-&gt;right_chunks.chunks.size()) {
-<span class="lineNum">     277 </span>            :                 return;
-<span class="lineNum">     278 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     279 </span><span class="lineNoCov">          0 :         // now that we have fully materialized the right child</span>
-<span class="lineNum">     280 </span><span class="lineNoCov">          0 :         // we have to perform the nested loop join</span>
-<span class="lineNum">     281 </span>            : 
-<span class="lineNum">     282 </span>            :         do {
-<span class="lineNum">     283 </span>            :                 // first check if we have to move to the next child on the right isde
-<span class="lineNum">     284 </span>            :                 assert(state-&gt;right_chunk &lt; state-&gt;right_chunks.chunks.size());
-<span class="lineNum">     285 </span><span class="lineNoCov">          0 :                 if (state-&gt;right_tuple &gt;=</span>
-<span class="lineNum">     286 </span><span class="lineNoCov">          0 :                     state-&gt;right_chunks.chunks[state-&gt;right_chunk]-&gt;size()) {</span>
-<span class="lineNum">     287 </span><span class="lineNoCov">          0 :                         // we exhausted the chunk on the right</span>
-<span class="lineNum">     288 </span><span class="lineNoCov">          0 :                         state-&gt;right_chunk++;</span>
-<span class="lineNum">     289 </span><span class="lineNoCov">          0 :                         if (state-&gt;right_chunk &gt;= state-&gt;right_chunks.chunks.size()) {</span>
-<span class="lineNum">     290 </span>            :                                 // we exhausted all right chunks!
-<span class="lineNum">     291 </span>            :                                 // move to the next left chunk
-<span class="lineNum">     292 </span>            :                                 children[0]-&gt;GetChunk(context, state-&gt;child_chunk,
-<span class="lineNum">     293 </span>            :                                                       state-&gt;child_state.get());
-<span class="lineNum">     294 </span>            :                                 if (state-&gt;child_chunk.size() == 0) {
-<span class="lineNum">     295 </span><span class="lineNoCov">          0 :                                         return;</span>
-<span class="lineNum">     296 </span>            :                                 }
-<span class="lineNum">     297 </span><span class="lineNoCov">          0 :                                 state-&gt;child_chunk.Flatten();</span>
-<span class="lineNum">     298 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     299 </span>            :                                 state-&gt;right_chunk = 0;
-<span class="lineNum">     300 </span>            : 
-<span class="lineNum">     301 </span>            :                                 // resolve the left join condition for the current chunk
-<span class="lineNum">     302 </span>            :                                 state-&gt;left_join_condition.Reset();
-<span class="lineNum">     303 </span>            :                                 ExpressionExecutor executor(state-&gt;child_chunk, context);
-<span class="lineNum">     304 </span><span class="lineNoCov">          0 :                                 executor.Execute(</span>
-<span class="lineNum">     305 </span>            :                                     state-&gt;left_join_condition,
-<span class="lineNum">     306 </span><span class="lineNoCov">          0 :                                     [&amp;](size_t i) { return conditions[i].left.get(); },</span>
-<span class="lineNum">     307 </span><span class="lineNoCov">          0 :                                     conditions.size());</span>
-<span class="lineNum">     308 </span><span class="lineNoCov">          0 :                         }</span>
-<span class="lineNum">     309 </span><span class="lineNoCov">          0 :                         // move to the start of this chunk</span>
-<span class="lineNum">     310 </span><span class="lineNoCov">          0 :                         state-&gt;left_tuple = 0;</span>
-<span class="lineNum">     311 </span>            :                         state-&gt;right_tuple = 0;
-<span class="lineNum">     312 </span><span class="lineNoCov">          0 :                 }</span>
-<span class="lineNum">     313 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     314 </span><span class="lineNoCov">          0 :                 auto &amp;left_chunk = state-&gt;child_chunk;</span>
-<span class="lineNum">     315 </span><span class="lineNoCov">          0 :                 auto &amp;right_chunk = *state-&gt;right_chunks.chunks[state-&gt;right_chunk];</span>
-<span class="lineNum">     316 </span>            :                 auto &amp;right_data = *state-&gt;right_data.chunks[state-&gt;right_chunk];
-<span class="lineNum">     317 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     318 </span>            :                 // sanity check, this went wrong before
-<span class="lineNum">     319 </span>            :                 left_chunk.Verify();
-<span class="lineNum">     320 </span>            :                 right_chunk.Verify();
-<span class="lineNum">     321 </span><span class="lineNoCov">          0 :                 right_data.Verify();</span>
-<span class="lineNum">     322 </span>            : 
-<span class="lineNum">     323 </span><span class="lineNoCov">          0 :                 // now perform the join</span>
-<span class="lineNum">     324 </span>            : 
-<span class="lineNum">     325 </span><span class="lineNoCov">          0 :                 // first we create a selection vector from the first condition</span>
-<span class="lineNum">     326 </span>            :                 // here we do a nested loop join
-<span class="lineNum">     327 </span>            :                 sel_t lvector[STANDARD_VECTOR_SIZE], rvector[STANDARD_VECTOR_SIZE];
-<span class="lineNum">     328 </span><span class="lineNoCov">          0 :                 size_t match_count = 0;</span>
-<span class="lineNum">     329 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     330 </span><span class="lineNoCov">          0 :                 match_count = nested_loop_join(conditions[0].comparison,</span>
-<span class="lineNum">     331 </span>            :                                                state-&gt;left_join_condition.data[0],
-<span class="lineNum">     332 </span>            :                                                right_chunk.data[0], state-&gt;left_tuple,
-<span class="lineNum">     333 </span>            :                                                state-&gt;right_tuple, lvector, rvector);
-<span class="lineNum">     334 </span>            : 
-<span class="lineNum">     335 </span><span class="lineNoCov">          0 :                 // now resolve the rest of the conditions</span>
-<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                 for (size_t i = 1; i &lt; conditions.size(); i++) {</span>
-<span class="lineNum">     337 </span><span class="lineNoCov">          0 :                         // for all the matches we have obtained</span>
-<span class="lineNum">     338 </span><span class="lineNoCov">          0 :                         // we perform the comparisons</span>
-<span class="lineNum">     339 </span><span class="lineNoCov">          0 :                         if (match_count == 0) {</span>
-<span class="lineNum">     340 </span>            :                                 break;
-<span class="lineNum">     341 </span>            :                         }
-<span class="lineNum">     342 </span>            :                         // get the vectors to compare
-<span class="lineNum">     343 </span>            :                         Vector &amp;l = state-&gt;left_join_condition.data[i];
-<span class="lineNum">     344 </span>            :                         Vector &amp;r = right_chunk.data[i];
-<span class="lineNum">     345 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     346 </span>            :                         // now perform the actual comparisons
-<span class="lineNum">     347 </span><span class="lineNoCov">          0 :                         match_count = nested_loop_comparison(conditions[i].comparison, l, r,</span>
-<span class="lineNum">     348 </span><span class="lineNoCov">          0 :                                                              lvector, rvector, match_count);</span>
-<span class="lineNum">     349 </span>            :                 }
+<span class="lineNum">      32 </span>            :         // FIXME: this only needs to be done once per vector instead of once per
+<span class="lineNum">      33 </span>            :         // call create a selection vector that disqualifies any entries with NULL
+<span class="lineNum">      34 </span>            :         // from qualifying because NULL never matches anything
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :         sel_t left_null_vector[STANDARD_VECTOR_SIZE],</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :             right_null_vector[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :         size_t left_count = 0, right_count = 0;</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :         sel_t *left_sel_vector = nullptr, *right_sel_vector = nullptr;</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :         if (left.nullmask.any()) {</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :                 VectorOperations::Exec(left.sel_vector, left.count,</span>
+<span class="lineNum">      41 </span>            :                                        [&amp;](size_t i, size_t k) {
+<span class="lineNum">      42 </span>            :                                                if (!left.nullmask[i]) {
+<span class="lineNum">      43 </span>            :                                                        left_null_vector[left_count++] = i;
+<span class="lineNum">      44 </span>            :                                                }
+<span class="lineNum">      45 </span>            :                                        });
+<span class="lineNum">      46 </span>            :         } else {
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :                 left_count = left.count;</span>
+<span class="lineNum">      48 </span>            :         }
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :         if (right.nullmask.any()) {</span>
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :                 VectorOperations::Exec(right.sel_vector, right.count,</span>
+<span class="lineNum">      51 </span>            :                                        [&amp;](size_t i, size_t k) {
+<span class="lineNum">      52 </span>            :                                                if (!right.nullmask[i]) {
+<span class="lineNum">      53 </span>            :                                                        right_null_vector[right_count++] = i;
+<span class="lineNum">      54 </span>            :                                                }
+<span class="lineNum">      55 </span>            :                                        });
+<span class="lineNum">      56 </span>            :         } else {
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :                 right_count = right.count;</span>
+<span class="lineNum">      58 </span>            :         }
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :         for (; rpos &lt; right_count; rpos++) {</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                 size_t right_position =</span>
+<span class="lineNum">      61 </span>            :                     right_sel_vector ? right_sel_vector[rpos] : rpos;
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :                 for (; lpos &lt; left_count; lpos++) {</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                         size_t left_position =</span>
+<span class="lineNum">      64 </span>            :                             left_sel_vector ? left_sel_vector[lpos] : lpos;
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :                         if (OP::Operation(ldata[left_position], rdata[right_position])) {</span>
+<span class="lineNum">      66 </span>            :                                 // emit tuple
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :                                 lvector[result_count] = left_position;</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :                                 rvector[result_count] = right_position;</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :                                 result_count++;</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :                                 if (result_count == STANDARD_VECTOR_SIZE) {</span>
+<span class="lineNum">      71 </span>            :                                         // out of space!
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :                                         return result_count;</span>
+<span class="lineNum">      73 </span>            :                                 }
+<span class="lineNum">      74 </span>            :                         }
+<span class="lineNum">      75 </span>            :                 }
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                 lpos = 0;</span>
+<span class="lineNum">      77 </span>            :         }
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 :         return result_count;</span>
+<span class="lineNum">      79 </span>            : }
+<a name="80"><span class="lineNum">      80 </span><span class="lineNoCov">          0 : </span></a>
+<span class="lineNum">      81 </span>            : template &lt;class OP&gt;
+<span class="lineNum">      82 </span>            : static size_t nested_loop_join_operator(Vector &amp;left, Vector &amp;right,
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :                                         size_t &amp;lpos, size_t &amp;rpos,</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :                                         sel_t lvector[], sel_t rvector[]) {</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :         assert(left.type == right.type);</span>
+<span class="lineNum">      86 </span>            :         switch (left.type) {
+<span class="lineNum">      87 </span>            :         case TypeId::BOOLEAN:
+<span class="lineNum">      88 </span>            :         case TypeId::TINYINT:
+<span class="lineNum">      89 </span>            :                 return templated_nested_loop_join&lt;int8_t, OP&gt;(left, right, lpos, rpos,
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :                                                               lvector, rvector);</span>
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_join&lt;int16_t, OP&gt;(left, right, lpos, rpos,</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :                                                                lvector, rvector);</span>
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :         case TypeId::DATE:</span>
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :         case TypeId::INTEGER:</span>
+<span class="lineNum">      96 </span>            :                 return templated_nested_loop_join&lt;int32_t, OP&gt;(left, right, lpos, rpos,
+<span class="lineNum">      97 </span>            :                                                                lvector, rvector);
+<span class="lineNum">      98 </span>            :         case TypeId::TIMESTAMP:
+<span class="lineNum">      99 </span>            :         case TypeId::BIGINT:
+<span class="lineNum">     100 </span>            :                 return templated_nested_loop_join&lt;int64_t, OP&gt;(left, right, lpos, rpos,
+<span class="lineNum">     101 </span>            :                                                                lvector, rvector);
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :         case TypeId::DECIMAL:</span>
+<span class="lineNum">     103 </span>            :                 return templated_nested_loop_join&lt;double, OP&gt;(left, right, lpos, rpos,
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :                                                               lvector, rvector);</span>
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
+<span class="lineNum">     106 </span>            :                 return templated_nested_loop_join&lt;uint64_t, OP&gt;(left, right, lpos, rpos,
+<span class="lineNum">     107 </span>            :                                                                 lvector, rvector);
+<span class="lineNum">     108 </span>            :         case TypeId::VARCHAR:
+<span class="lineNum">     109 </span>            :                 return templated_nested_loop_join&lt;const char *, OP&gt;(
+<span class="lineNum">     110 </span>            :                     left, right, lpos, rpos, lvector, rvector);
+<span class="lineNum">     111 </span>            :         default:
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for join!&quot;);</span>
+<span class="lineNum">     113 </span>            :         }
+<a name="114"><span class="lineNum">     114 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     116 </span>            : size_t nested_loop_join(ExpressionType op, Vector &amp;left, Vector &amp;right,
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :                         size_t &amp;lpos, size_t &amp;rpos, sel_t lvector[],</span>
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :                         sel_t rvector[]) {</span>
+<span class="lineNum">     119 </span>            :         if (lpos &gt;= left.count || rpos &gt;= right.count) {
+<span class="lineNum">     120 </span><span class="lineNoCov">          0 :                 return 0;</span>
+<span class="lineNum">     121 </span>            :         }
+<span class="lineNum">     122 </span><span class="lineNoCov">          0 :         // should be flattened before</span>
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :         assert(!right.sel_vector);</span>
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :         switch (op) {</span>
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_EQUAL:</span>
+<span class="lineNum">     126 </span>            :                 return nested_loop_join_operator&lt;operators::Equals&gt;(
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 :                     left, right, lpos, rpos, lvector, rvector);</span>
+<span class="lineNum">     128 </span>            :         case ExpressionType::COMPARE_NOTEQUAL:
+<span class="lineNum">     129 </span>            :                 return nested_loop_join_operator&lt;operators::NotEquals&gt;(
+<span class="lineNum">     130 </span>            :                     left, right, lpos, rpos, lvector, rvector);
+<span class="lineNum">     131 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_LESSTHAN:</span>
+<span class="lineNum">     132 </span>            :                 return nested_loop_join_operator&lt;operators::LessThan&gt;(
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :                     left, right, lpos, rpos, lvector, rvector);</span>
+<span class="lineNum">     134 </span>            :         case ExpressionType::COMPARE_GREATERTHAN:
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :                 return nested_loop_join_operator&lt;operators::GreaterThan&gt;(</span>
+<span class="lineNum">     136 </span>            :                     left, right, lpos, rpos, lvector, rvector);
+<span class="lineNum">     137 </span>            :         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :                 return nested_loop_join_operator&lt;operators::LessThanEquals&gt;(</span>
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :                     left, right, lpos, rpos, lvector, rvector);</span>
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:</span>
+<span class="lineNum">     141 </span>            :                 return nested_loop_join_operator&lt;operators::GreaterThanEquals&gt;(
+<span class="lineNum">     142 </span>            :                     left, right, lpos, rpos, lvector, rvector);
+<span class="lineNum">     143 </span>            :         default:
+<span class="lineNum">     144 </span>            :                 throw NotImplementedException(
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :                     &quot;Unimplemented comparison type for join!&quot;);</span>
+<span class="lineNum">     146 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 : }</span>
+<a name="148"><span class="lineNum">     148 </span><span class="lineNoCov">          0 : </span></a>
+<span class="lineNum">     149 </span><span class="lineNoCov">          0 : template &lt;class T, class OP&gt;</span>
+<span class="lineNum">     150 </span><span class="lineNoCov">          0 : static size_t templated_nested_loop_comparison(Vector &amp;left, Vector &amp;right,</span>
+<span class="lineNum">     151 </span>            :                                                sel_t lvector[], sel_t rvector[],
+<span class="lineNum">     152 </span>            :                                                size_t count) {
+<span class="lineNum">     153 </span>            :         assert(count &gt; 0);
+<span class="lineNum">     154 </span>            : 
+<span class="lineNum">     155 </span>            :         // should be flattened before
+<span class="lineNum">     156 </span>            :         assert(!left.sel_vector &amp;&amp; !right.sel_vector);
+<span class="lineNum">     157 </span><span class="lineNoCov">          0 :         auto ldata = (T *)left.data;</span>
+<span class="lineNum">     158 </span>            :         auto rdata = (T *)right.data;
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 :         size_t result_count = 0;</span>
+<span class="lineNum">     160 </span><span class="lineNoCov">          0 :         for (size_t i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">     161 </span>            :                 if (!left.nullmask[lvector[i]] &amp;&amp; !right.nullmask[rvector[i]] &amp;&amp;
+<span class="lineNum">     162 </span>            :                     OP::Operation(ldata[lvector[i]], rdata[rvector[i]])) {
+<span class="lineNum">     163 </span>            :                         lvector[result_count] = lvector[i];
+<span class="lineNum">     164 </span>            :                         rvector[result_count] = rvector[i];
+<span class="lineNum">     165 </span>            :                         result_count++;
+<span class="lineNum">     166 </span>            :                 }
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     168 </span>            :         return result_count;
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 : }</span>
+<a name="170"><span class="lineNum">     170 </span><span class="lineNoCov">          0 : </span></a>
+<span class="lineNum">     171 </span>            : template &lt;class OP&gt;
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 : static size_t nested_loop_comparison_operator(Vector &amp;l, Vector &amp;r,</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                                               sel_t lvector[], sel_t rvector[],</span>
+<span class="lineNum">     174 </span>            :                                               size_t count) {
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :         assert(l.type == r.type);</span>
+<span class="lineNum">     176 </span>            :         switch (l.type) {
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :         case TypeId::BOOLEAN:</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;int8_t, OP&gt;(l, r, lvector,</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :                                                                     rvector, count);</span>
+<span class="lineNum">     181 </span>            :         case TypeId::SMALLINT:
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;int16_t, OP&gt;(l, r, lvector,</span>
+<span class="lineNum">     183 </span>            :                                                                      rvector, count);
+<span class="lineNum">     184 </span>            :         case TypeId::DATE:
+<span class="lineNum">     185 </span>            :         case TypeId::INTEGER:
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;int32_t, OP&gt;(l, r, lvector,</span>
+<span class="lineNum">     187 </span>            :                                                                      rvector, count);
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :         case TypeId::TIMESTAMP:</span>
+<span class="lineNum">     189 </span>            :         case TypeId::BIGINT:
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;int64_t, OP&gt;(l, r, lvector,</span>
+<span class="lineNum">     191 </span>            :                                                                      rvector, count);
+<span class="lineNum">     192 </span>            :         case TypeId::DECIMAL:
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :                 return templated_nested_loop_comparison&lt;double, OP&gt;(l, r, lvector,</span>
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :                                                                     rvector, count);</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
+<span class="lineNum">     196 </span>            :                 return templated_nested_loop_comparison&lt;uint64_t, OP&gt;(l, r, lvector,
+<span class="lineNum">     197 </span>            :                                                                       rvector, count);
+<span class="lineNum">     198 </span>            :         case TypeId::VARCHAR:
+<span class="lineNum">     199 </span>            :                 return templated_nested_loop_comparison&lt;const char *, OP&gt;(
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for join!&quot;);</span>
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :         }</span>
+<a name="204"><span class="lineNum">     204 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     206 </span>            : size_t nested_loop_comparison(ExpressionType op, Vector &amp;l, Vector &amp;r,
+<span class="lineNum">     207 </span>            :                               sel_t lvector[], sel_t rvector[], size_t count) {
+<span class="lineNum">     208 </span>            :         switch (op) {
+<span class="lineNum">     209 </span>            :         case ExpressionType::COMPARE_EQUAL:
+<span class="lineNum">     210 </span>            :                 return nested_loop_comparison_operator&lt;operators::Equals&gt;(
+<span class="lineNum">     211 </span>            :                     l, r, lvector, rvector, count);
+<span class="lineNum">     212 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_NOTEQUAL:</span>
+<span class="lineNum">     213 </span>            :                 return nested_loop_comparison_operator&lt;operators::NotEquals&gt;(
+<span class="lineNum">     214 </span><span class="lineNoCov">          0 :                     l, r, lvector, rvector, count);</span>
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_LESSTHAN:</span>
+<span class="lineNum">     216 </span>            :                 return nested_loop_comparison_operator&lt;operators::LessThan&gt;(
+<span class="lineNum">     217 </span>            :                     l, r, lvector, rvector, count);
+<span class="lineNum">     218 </span>            :         case ExpressionType::COMPARE_GREATERTHAN:
+<span class="lineNum">     219 </span>            :                 return nested_loop_comparison_operator&lt;operators::GreaterThan&gt;(
+<span class="lineNum">     220 </span>            :                     l, r, lvector, rvector, count);
+<span class="lineNum">     221 </span>            :         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :                 return nested_loop_comparison_operator&lt;operators::LessThanEquals&gt;(</span>
+<span class="lineNum">     223 </span>            :                     l, r, lvector, rvector, count);
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:</span>
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 :                 return nested_loop_comparison_operator&lt;operators::GreaterThanEquals&gt;(</span>
+<span class="lineNum">     226 </span>            :                     l, r, lvector, rvector, count);
+<span class="lineNum">     227 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     228 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(</span>
+<span class="lineNum">     229 </span>            :                     &quot;Unimplemented comparison type for join!&quot;);
+<span class="lineNum">     230 </span><span class="lineNoCov">          0 :         }</span>
+<a name="231"><span class="lineNum">     231 </span>            : }</a>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 : void PhysicalNestedLoopJoinInner::_GetChunk(ClientContext &amp;context,</span>
+<span class="lineNum">     234 </span><span class="lineNoCov">          0 :                                             DataChunk &amp;chunk,</span>
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :                                             PhysicalOperatorState *state_) {</span>
+<span class="lineNum">     236 </span>            :         assert(type == JoinType::INNER);
+<span class="lineNum">     237 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     238 </span>            :         auto state =
+<span class="lineNum">     239 </span>            :             reinterpret_cast&lt;PhysicalNestedLoopJoinInnerOperatorState *&gt;(state_);
+<span class="lineNum">     240 </span>            :         chunk.Reset();
+<span class="lineNum">     241 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     242 </span>            :         // first we fully materialize the right child, if we haven't done that yet
+<span class="lineNum">     243 </span><span class="lineNoCov">          0 :         if (state-&gt;right_chunks.column_count() == 0) {</span>
+<span class="lineNum">     244 </span>            :                 vector&lt;TypeId&gt; condition_types;
+<span class="lineNum">     245 </span><span class="lineNoCov">          0 :                 for (auto &amp;cond : conditions) {</span>
+<span class="lineNum">     246 </span>            :                         assert(cond.left-&gt;return_type == cond.right-&gt;return_type);
+<span class="lineNum">     247 </span>            :                         condition_types.push_back(cond.left-&gt;return_type);
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     249 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     250 </span><span class="lineNoCov">          0 :                 auto right_state = children[1]-&gt;GetOperatorState(state-&gt;parent);</span>
+<span class="lineNum">     251 </span>            :                 auto types = children[1]-&gt;GetTypes();
+<span class="lineNum">     252 </span>            : 
+<span class="lineNum">     253 </span>            :                 DataChunk new_chunk, right_condition;
+<span class="lineNum">     254 </span>            :                 new_chunk.Initialize(types);
+<span class="lineNum">     255 </span><span class="lineNoCov">          0 :                 right_condition.Initialize(condition_types);</span>
+<span class="lineNum">     256 </span><span class="lineNoCov">          0 :                 do {</span>
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :                         children[1]-&gt;GetChunk(context, new_chunk, right_state.get());</span>
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :                         if (new_chunk.size() == 0) {</span>
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 :                                 break;</span>
+<span class="lineNum">     260 </span><span class="lineNoCov">          0 :                         }</span>
+<span class="lineNum">     261 </span>            :                         // resolve the join expression of the right side
+<span class="lineNum">     262 </span>            :                         ExpressionExecutor executor(new_chunk, context);
+<span class="lineNum">     263 </span>            :                         for (size_t i = 0; i &lt; conditions.size(); i++) {
+<span class="lineNum">     264 </span>            :                                 executor.ExecuteExpression(conditions[i].right.get(),
+<span class="lineNum">     265 </span>            :                                                            right_condition.data[i]);
+<span class="lineNum">     266 </span>            :                         }
+<span class="lineNum">     267 </span><span class="lineNoCov">          0 :                         state-&gt;right_data.Append(new_chunk);</span>
+<span class="lineNum">     268 </span>            :                         state-&gt;right_chunks.Append(right_condition);
+<span class="lineNum">     269 </span><span class="lineNoCov">          0 :                 } while (new_chunk.size() &gt; 0);</span>
+<span class="lineNum">     270 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     271 </span>            :                 if (state-&gt;right_chunks.count == 0) {
+<span class="lineNum">     272 </span>            :                         return;
+<span class="lineNum">     273 </span>            :                 }
+<span class="lineNum">     274 </span>            :                 // initialize the chunks for the join conditions
+<span class="lineNum">     275 </span>            :                 state-&gt;left_join_condition.Initialize(condition_types);
+<span class="lineNum">     276 </span>            :                 state-&gt;right_chunk = state-&gt;right_chunks.chunks.size() - 1;
+<span class="lineNum">     277 </span><span class="lineNoCov">          0 :                 state-&gt;right_tuple =</span>
+<span class="lineNum">     278 </span>            :                     state-&gt;right_chunks.chunks[state-&gt;right_chunk]-&gt;size();
+<span class="lineNum">     279 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     280 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     281 </span>            :         if (state-&gt;right_chunk &gt;= state-&gt;right_chunks.chunks.size()) {
+<span class="lineNum">     282 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     283 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     284 </span>            :         // now that we have fully materialized the right child
+<span class="lineNum">     285 </span><span class="lineNoCov">          0 :         // we have to perform the nested loop join</span>
+<span class="lineNum">     286 </span>            : 
+<span class="lineNum">     287 </span><span class="lineNoCov">          0 :         do {</span>
+<span class="lineNum">     288 </span><span class="lineNoCov">          0 :                 // first check if we have to move to the next child on the right isde</span>
+<span class="lineNum">     289 </span><span class="lineNoCov">          0 :                 assert(state-&gt;right_chunk &lt; state-&gt;right_chunks.chunks.size());</span>
+<span class="lineNum">     290 </span><span class="lineNoCov">          0 :                 if (state-&gt;right_tuple &gt;=</span>
+<span class="lineNum">     291 </span>            :                     state-&gt;right_chunks.chunks[state-&gt;right_chunk]-&gt;size()) {
+<span class="lineNum">     292 </span><span class="lineNoCov">          0 :                         // we exhausted the chunk on the right</span>
+<span class="lineNum">     293 </span>            :                         state-&gt;right_chunk++;
+<span class="lineNum">     294 </span>            :                         if (state-&gt;right_chunk &gt;= state-&gt;right_chunks.chunks.size()) {
+<span class="lineNum">     295 </span>            :                                 // we exhausted all right chunks!
+<span class="lineNum">     296 </span><span class="lineNoCov">          0 :                                 // move to the next left chunk</span>
+<span class="lineNum">     297 </span>            :                                 children[0]-&gt;GetChunk(context, state-&gt;child_chunk,
+<span class="lineNum">     298 </span><span class="lineNoCov">          0 :                                                       state-&gt;child_state.get());</span>
+<span class="lineNum">     299 </span>            :                                 if (state-&gt;child_chunk.size() == 0) {
+<span class="lineNum">     300 </span><span class="lineNoCov">          0 :                                         return;</span>
+<span class="lineNum">     301 </span>            :                                 }
+<span class="lineNum">     302 </span>            :                                 state-&gt;child_chunk.Flatten();
+<span class="lineNum">     303 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     304 </span><span class="lineNoCov">          0 :                                 state-&gt;right_chunk = 0;</span>
+<span class="lineNum">     305 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     306 </span>            :                                 // resolve the left join condition for the current chunk
+<span class="lineNum">     307 </span>            :                                 state-&gt;left_join_condition.Reset();
+<span class="lineNum">     308 </span>            :                                 ExpressionExecutor executor(state-&gt;child_chunk, context);
+<span class="lineNum">     309 </span>            :                                 executor.Execute(
+<span class="lineNum">     310 </span><span class="lineNoCov">          0 :                                     state-&gt;left_join_condition,</span>
+<span class="lineNum">     311 </span><span class="lineNoCov">          0 :                                     [&amp;](size_t i) { return conditions[i].left.get(); },</span>
+<span class="lineNum">     312 </span><span class="lineNoCov">          0 :                                     conditions.size());</span>
+<span class="lineNum">     313 </span><span class="lineNoCov">          0 :                         }</span>
+<span class="lineNum">     314 </span><span class="lineNoCov">          0 :                         // move to the start of this chunk</span>
+<span class="lineNum">     315 </span><span class="lineNoCov">          0 :                         state-&gt;left_tuple = 0;</span>
+<span class="lineNum">     316 </span>            :                         state-&gt;right_tuple = 0;
+<span class="lineNum">     317 </span>            :                 }
+<span class="lineNum">     318 </span>            : 
+<span class="lineNum">     319 </span>            :                 auto &amp;left_chunk = state-&gt;child_chunk;
+<span class="lineNum">     320 </span>            :                 auto &amp;right_chunk = *state-&gt;right_chunks.chunks[state-&gt;right_chunk];
+<span class="lineNum">     321 </span>            :                 auto &amp;right_data = *state-&gt;right_data.chunks[state-&gt;right_chunk];
+<span class="lineNum">     322 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     323 </span>            :                 // sanity check, this went wrong before
+<span class="lineNum">     324 </span><span class="lineNoCov">          0 :                 left_chunk.Verify();</span>
+<span class="lineNum">     325 </span><span class="lineNoCov">          0 :                 right_chunk.Verify();</span>
+<span class="lineNum">     326 </span>            :                 right_data.Verify();
+<span class="lineNum">     327 </span>            : 
+<span class="lineNum">     328 </span>            :                 // now perform the join
+<span class="lineNum">     329 </span>            : 
+<span class="lineNum">     330 </span>            :                 // first we create a selection vector from the first condition
+<span class="lineNum">     331 </span>            :                 // here we do a nested loop join
+<span class="lineNum">     332 </span><span class="lineNoCov">          0 :                 sel_t lvector[STANDARD_VECTOR_SIZE], rvector[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     333 </span>            :                 size_t match_count = 0;
+<span class="lineNum">     334 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     335 </span><span class="lineNoCov">          0 :                 match_count = nested_loop_join(conditions[0].comparison,</span>
+<span class="lineNum">     336 </span>            :                                                state-&gt;left_join_condition.data[0],
+<span class="lineNum">     337 </span><span class="lineNoCov">          0 :                                                right_chunk.data[0], state-&gt;left_tuple,</span>
+<span class="lineNum">     338 </span><span class="lineNoCov">          0 :                                                state-&gt;right_tuple, lvector, rvector);</span>
+<span class="lineNum">     339 </span>            : 
+<span class="lineNum">     340 </span><span class="lineNoCov">          0 :                 // now resolve the rest of the conditions</span>
+<span class="lineNum">     341 </span>            :                 for (size_t i = 1; i &lt; conditions.size(); i++) {
+<span class="lineNum">     342 </span><span class="lineNoCov">          0 :                         // for all the matches we have obtained</span>
+<span class="lineNum">     343 </span><span class="lineNoCov">          0 :                         // we perform the comparisons</span>
+<span class="lineNum">     344 </span><span class="lineNoCov">          0 :                         if (match_count == 0) {</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :                                 break;</span>
+<span class="lineNum">     346 </span>            :                         }
+<span class="lineNum">     347 </span><span class="lineNoCov">          0 :                         // get the vectors to compare</span>
+<span class="lineNum">     348 </span>            :                         Vector &amp;l = state-&gt;left_join_condition.data[i];
+<span class="lineNum">     349 </span>            :                         Vector &amp;r = right_chunk.data[i];
 <span class="lineNum">     350 </span>            : 
-<span class="lineNum">     351 </span>            :                 // we have finished resolving the join conditions
-<span class="lineNum">     352 </span>            :                 if (match_count == 0) {
-<span class="lineNum">     353 </span>            :                         // if there are no results, move on
-<span class="lineNum">     354 </span><span class="lineNoCov">          0 :                         continue;</span>
-<span class="lineNum">     355 </span>            :                 }
-<span class="lineNum">     356 </span><span class="lineNoCov">          0 :                 // we have matching tuples!</span>
-<span class="lineNum">     357 </span><span class="lineNoCov">          0 :                 // construct the result</span>
-<span class="lineNum">     358 </span><span class="lineNoCov">          0 :                 // create a reference to the chunk on the left side</span>
-<span class="lineNum">     359 </span><span class="lineNoCov">          0 :                 for (size_t i = 0; i &lt; state-&gt;child_chunk.column_count; i++) {</span>
-<span class="lineNum">     360 </span><span class="lineNoCov">          0 :                         chunk.data[i].Reference(state-&gt;child_chunk.data[i]);</span>
-<span class="lineNum">     361 </span>            :                         chunk.data[i].count = match_count;
-<span class="lineNum">     362 </span><span class="lineNoCov">          0 :                         chunk.data[i].sel_vector = lvector;</span>
-<span class="lineNum">     363 </span><span class="lineNoCov">          0 :                         chunk.data[i].Flatten();</span>
-<span class="lineNum">     364 </span><span class="lineNoCov">          0 :                 }</span>
-<span class="lineNum">     365 </span><span class="lineNoCov">          0 :                 // now create a reference to the chunk on the right side</span>
-<span class="lineNum">     366 </span>            :                 for (size_t i = 0; i &lt; right_data.column_count; i++) {
-<span class="lineNum">     367 </span><span class="lineNoCov">          0 :                         size_t chunk_entry = state-&gt;child_chunk.column_count + i;</span>
-<span class="lineNum">     368 </span>            :                         chunk.data[chunk_entry].Reference(right_data.data[i]);
-<span class="lineNum">     369 </span>            :                         chunk.data[chunk_entry].count = match_count;
-<span class="lineNum">     370 </span>            :                         chunk.data[chunk_entry].sel_vector = rvector;
-<span class="lineNum">     371 </span><span class="lineNoCov">          0 :                         chunk.data[chunk_entry].Flatten();</span>
-<span class="lineNum">     372 </span>            :                 }
-<span class="lineNum">     373 </span><span class="lineNoCov">          0 :                 chunk.sel_vector = nullptr;</span>
-<span class="lineNum">     374 </span>            :         } while (chunk.size() == 0);
-<a name="375"><span class="lineNum">     375 </span><span class="lineNoCov">          0 : }</span></a>
-<span class="lineNum">     376 </span>            : 
-<span class="lineNum">     377 </span>            : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalNestedLoopJoinInner::GetOperatorState(
-<span class="lineNum">     378 </span><span class="lineNoCov">          0 :     ExpressionExecutor *parent_executor) {</span>
-<span class="lineNum">     379 </span><span class="lineNoCov">          0 :         return make_unique&lt;PhysicalNestedLoopJoinInnerOperatorState&gt;(</span>
-<span class="lineNum">     380 </span><span class="lineNoCov">          0 :             children[0].get(), children[1].get(), parent_executor);</span>
-<span class="lineNum">     381 </span>            : }
-<span class="lineNum">     382 </span>            : 
-<span class="lineNum">     383 </span>            : } // namespace duckdb
+<span class="lineNum">     351 </span><span class="lineNoCov">          0 :                         // now perform the actual comparisons</span>
+<span class="lineNum">     352 </span>            :                         match_count = nested_loop_comparison(conditions[i].comparison, l, r,
+<span class="lineNum">     353 </span><span class="lineNoCov">          0 :                                                              lvector, rvector, match_count);</span>
+<span class="lineNum">     354 </span>            :                 }
+<span class="lineNum">     355 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     356 </span>            :                 // we have finished resolving the join conditions
+<span class="lineNum">     357 </span>            :                 if (match_count == 0) {
+<span class="lineNum">     358 </span><span class="lineNoCov">          0 :                         // if there are no results, move on</span>
+<span class="lineNum">     359 </span><span class="lineNoCov">          0 :                         continue;</span>
+<span class="lineNum">     360 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     361 </span>            :                 // we have matching tuples!
+<span class="lineNum">     362 </span>            :                 // construct the result
+<span class="lineNum">     363 </span>            :                 // create a reference to the chunk on the left side
+<span class="lineNum">     364 </span>            :                 for (size_t i = 0; i &lt; state-&gt;child_chunk.column_count; i++) {
+<span class="lineNum">     365 </span><span class="lineNoCov">          0 :                         chunk.data[i].Reference(state-&gt;child_chunk.data[i]);</span>
+<span class="lineNum">     366 </span><span class="lineNoCov">          0 :                         chunk.data[i].count = match_count;</span>
+<span class="lineNum">     367 </span><span class="lineNoCov">          0 :                         chunk.data[i].sel_vector = lvector;</span>
+<span class="lineNum">     368 </span><span class="lineNoCov">          0 :                         chunk.data[i].Flatten();</span>
+<span class="lineNum">     369 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :                 // now create a reference to the chunk on the right side</span>
+<span class="lineNum">     371 </span>            :                 for (size_t i = 0; i &lt; right_data.column_count; i++) {
+<span class="lineNum">     372 </span>            :                         size_t chunk_entry = state-&gt;child_chunk.column_count + i;
+<span class="lineNum">     373 </span>            :                         chunk.data[chunk_entry].Reference(right_data.data[i]);
+<span class="lineNum">     374 </span>            :                         chunk.data[chunk_entry].count = match_count;
+<span class="lineNum">     375 </span>            :                         chunk.data[chunk_entry].sel_vector = rvector;
+<span class="lineNum">     376 </span>            :                         chunk.data[chunk_entry].Flatten();
+<span class="lineNum">     377 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     378 </span>            :                 chunk.sel_vector = nullptr;
+<span class="lineNum">     379 </span><span class="lineNoCov">          0 :         } while (chunk.size() == 0);</span>
+<a name="380"><span class="lineNum">     380 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     381 </span>            : 
+<span class="lineNum">     382 </span>            : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalNestedLoopJoinInner::GetOperatorState(
+<span class="lineNum">     383 </span>            :     ExpressionExecutor *parent_executor) {
+<span class="lineNum">     384 </span>            :         return make_unique&lt;PhysicalNestedLoopJoinInnerOperatorState&gt;(
+<span class="lineNum">     385 </span>            :             children[0].get(), children[1].get(), parent_executor);
+<span class="lineNum">     386 </span>            : }
+<span class="lineNum">     387 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     388 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

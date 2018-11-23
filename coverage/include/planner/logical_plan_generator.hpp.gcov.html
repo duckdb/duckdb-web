@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8ae54f6 - include/planner/logical_plan_generator.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 1d95558 - include/planner/logical_plan_generator.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8ae54f6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 1d95558</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 07:38:07</td>
+            <td class="headerValue">2018-11-23 13:48:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -89,31 +89,31 @@
 <span class="lineNum">      27 </span>            : //! statement
 <a name="28"><span class="lineNum">      28 </span>            : class LogicalPlanGenerator : public SQLNodeVisitor {</a>
 <span class="lineNum">      29 </span>            :   public:
-<span class="lineNum">      30 </span><span class="lineCov">      28378 :         LogicalPlanGenerator(ClientContext &amp;context, BindContext &amp;bind_context,</span>
+<span class="lineNum">      30 </span><span class="lineCov">      28428 :         LogicalPlanGenerator(ClientContext &amp;context, BindContext &amp;bind_context,</span>
 <span class="lineNum">      31 </span>            :                              bool is_subquery)
-<span class="lineNum">      32 </span><span class="lineCov">      28378 :             : is_subquery(is_subquery), require_row_id(false), context(context),</span>
-<span class="lineNum">      33 </span><span class="lineCov">      28378 :               bind_context(bind_context) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">      28378 :         }</span>
+<span class="lineNum">      32 </span><span class="lineCov">      28428 :             : is_subquery(is_subquery), require_row_id(false), context(context),</span>
+<span class="lineNum">      33 </span><span class="lineCov">      28428 :               bind_context(bind_context) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">      28428 :         }</span>
 <span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span>            :         void Visit(SelectStatement &amp;statement);
-<span class="lineNum">      37 </span>            :         void Visit(InsertStatement &amp;statement);
-<span class="lineNum">      38 </span>            :         void Visit(CopyStatement &amp;statement);
-<span class="lineNum">      39 </span>            :         void Visit(DeleteStatement &amp;statement);
-<span class="lineNum">      40 </span>            :         void Visit(UpdateStatement &amp;statement);
-<span class="lineNum">      41 </span>            :         void Visit(CreateTableStatement &amp;statement);
+<span class="lineNum">      36 </span>            :         std::unique_ptr&lt;SQLStatement&gt; Visit(SelectStatement &amp;statement);
+<span class="lineNum">      37 </span>            :         std::unique_ptr&lt;SQLStatement&gt; Visit(InsertStatement &amp;statement);
+<span class="lineNum">      38 </span>            :         std::unique_ptr&lt;SQLStatement&gt; Visit(CopyStatement &amp;statement);
+<span class="lineNum">      39 </span>            :         std::unique_ptr&lt;SQLStatement&gt; Visit(DeleteStatement &amp;statement);
+<span class="lineNum">      40 </span>            :         std::unique_ptr&lt;SQLStatement&gt; Visit(UpdateStatement &amp;statement);
+<span class="lineNum">      41 </span>            :         std::unique_ptr&lt;SQLStatement&gt; Visit(CreateTableStatement &amp;statement);
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span>            :         void Visit(AggregateExpression &amp;expr);
-<span class="lineNum">      44 </span>            :         void Visit(ComparisonExpression &amp;expr);
-<span class="lineNum">      45 </span>            :         void Visit(CaseExpression &amp;expr);
-<span class="lineNum">      46 </span>            :         void Visit(ConjunctionExpression &amp;expr);
-<span class="lineNum">      47 </span>            :         void Visit(OperatorExpression &amp;expr);
-<span class="lineNum">      48 </span>            :         void Visit(SubqueryExpression &amp;expr);
+<span class="lineNum">      43 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(AggregateExpression &amp;expr);
+<span class="lineNum">      44 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ComparisonExpression &amp;expr);
+<span class="lineNum">      45 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(CaseExpression &amp;expr);
+<span class="lineNum">      46 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ConjunctionExpression &amp;expr);
+<span class="lineNum">      47 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(OperatorExpression &amp;expr);
+<span class="lineNum">      48 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(SubqueryExpression &amp;expr);
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span>            :         void Visit(BaseTableRef &amp;expr);
-<span class="lineNum">      51 </span>            :         void Visit(CrossProductRef &amp;expr);
-<span class="lineNum">      52 </span>            :         void Visit(JoinRef &amp;expr);
-<span class="lineNum">      53 </span>            :         void Visit(SubqueryRef &amp;expr);
-<span class="lineNum">      54 </span>            :         void Visit(TableFunction &amp;expr);
+<span class="lineNum">      50 </span>            :         std::unique_ptr&lt;TableRef&gt; Visit(BaseTableRef &amp;expr);
+<span class="lineNum">      51 </span>            :         std::unique_ptr&lt;TableRef&gt; Visit(CrossProductRef &amp;expr);
+<span class="lineNum">      52 </span>            :         std::unique_ptr&lt;TableRef&gt; Visit(JoinRef &amp;expr);
+<span class="lineNum">      53 </span>            :         std::unique_ptr&lt;TableRef&gt; Visit(SubqueryRef &amp;expr);
+<span class="lineNum">      54 </span>            :         std::unique_ptr&lt;TableRef&gt; Visit(TableFunction &amp;expr);
 <span class="lineNum">      55 </span>            : 
 <span class="lineNum">      56 </span>            :         void Print() {
 <span class="lineNum">      57 </span>            :                 root-&gt;Print();

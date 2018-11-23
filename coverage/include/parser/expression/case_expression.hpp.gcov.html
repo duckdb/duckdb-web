@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8ae54f6 - include/parser/expression/case_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 1d95558 - include/parser/expression/case_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8ae54f6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 1d95558</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 07:38:07</td>
+            <td class="headerValue">2018-11-23 13:48:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -73,32 +73,33 @@
 <span class="lineNum">      11 </span>            : #pragma once
 <span class="lineNum">      12 </span>            : 
 <span class="lineNum">      13 </span>            : #include &quot;parser/expression.hpp&quot;
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span>            : namespace duckdb {
-<span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span>            : class CaseExpression : public Expression {
-<span class="lineNum">      18 </span>            :   public:
-<a name="19"><span class="lineNum">      19 </span>            :         // this expression has 3 children, the test and the result if the test</a>
-<span class="lineNum">      20 </span>            :         // evaluates to 1 and the result if it does not
-<span class="lineNum">      21 </span><span class="lineCov">         40 :         CaseExpression() : Expression(ExpressionType::OPERATOR_CASE_EXPR) {</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">         40 :         }</span></a>
-<span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">        156 :         virtual void Accept(SQLNodeVisitor *v) override {</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">        156 :                 v-&gt;Visit(*this);</span></a>
-<span class="lineNum">      26 </span><span class="lineCov">        156 :         }</span>
-<span class="lineNum">      27 </span><span class="lineCov">          5 :         virtual ExpressionClass GetExpressionClass() override {</span>
-<span class="lineNum">      28 </span><span class="lineCov">          5 :                 return ExpressionClass::CASE;</span>
-<span class="lineNum">      29 </span>            :         }
-<span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span>            :         virtual std::unique_ptr&lt;Expression&gt; Copy() override;
-<span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span>            :         //! Deserializes a blob back into an CaseExpression
-<span class="lineNum">      34 </span>            :         static std::unique_ptr&lt;Expression&gt;
-<span class="lineNum">      35 </span>            :         Deserialize(ExpressionDeserializeInformation *info, Deserializer &amp;source);
-<span class="lineNum">      36 </span>            : 
-<span class="lineNum">      37 </span>            :         virtual void ResolveType() override;
-<span class="lineNum">      38 </span>            : };
-<span class="lineNum">      39 </span>            : } // namespace duckdb
+<span class="lineNum">      14 </span>            : #include &quot;parser/sql_node_visitor.hpp&quot;
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            : namespace duckdb {
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : class CaseExpression : public Expression {
+<span class="lineNum">      19 </span>            :   public:
+<a name="20"><span class="lineNum">      20 </span>            :         // this expression has 3 children, the test and the result if the test</a>
+<span class="lineNum">      21 </span>            :         // evaluates to 1 and the result if it does not
+<span class="lineNum">      22 </span><span class="lineCov">         40 :         CaseExpression() : Expression(ExpressionType::OPERATOR_CASE_EXPR) {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         40 :         }</span></a>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span><span class="lineCov">        156 :         virtual std::unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        156 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      27 </span>            :         }
+<span class="lineNum">      28 </span><span class="lineCov">          5 :         virtual ExpressionClass GetExpressionClass() override {</span>
+<span class="lineNum">      29 </span><span class="lineCov">          5 :                 return ExpressionClass::CASE;</span>
+<span class="lineNum">      30 </span>            :         }
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :         virtual std::unique_ptr&lt;Expression&gt; Copy() override;
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            :         //! Deserializes a blob back into an CaseExpression
+<span class="lineNum">      35 </span>            :         static std::unique_ptr&lt;Expression&gt;
+<span class="lineNum">      36 </span>            :         Deserialize(ExpressionDeserializeInformation *info, Deserializer &amp;source);
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span>            :         virtual void ResolveType() override;
+<span class="lineNum">      39 </span>            : };
+<span class="lineNum">      40 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

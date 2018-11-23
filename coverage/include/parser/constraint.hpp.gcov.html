@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8ae54f6 - include/parser/constraint.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 1d95558 - include/parser/constraint.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8ae54f6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 1d95558</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 07:38:07</td>
+            <td class="headerValue">2018-11-23 13:48:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntryLo">50.0 %</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -75,29 +75,27 @@
 <span class="lineNum">      13 </span>            : #include &quot;common/internal_types.hpp&quot;
 <span class="lineNum">      14 </span>            : #include &quot;common/printable.hpp&quot;
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span>            : #include &quot;parser/sql_node_visitor.hpp&quot;
+<span class="lineNum">      16 </span>            : namespace duckdb {
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span>            : namespace duckdb {
-<span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span>            : //! Constraint is the base class of any type of table constraint.
-<a name="21"><span class="lineNum">      21 </span>            : class Constraint : public Printable {</a>
-<a name="22"><span class="lineNum">      22 </span>            :   public:</a>
-<span class="lineNum">      23 </span><span class="lineCov">         19 :         Constraint(ConstraintType type) : type(type){};</span>
-<span class="lineNum">      24 </span><span class="lineCov">         19 :         virtual ~Constraint() {</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         19 :         }</span></a>
-<span class="lineNum">      26 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">      27 </span><span class="lineNoCov">          0 :         virtual void Accept(SQLNodeVisitor *) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">         19 :         }</span>
-<span class="lineNum">      29 </span><span class="lineCov">         19 : </span>
-<span class="lineNum">      30 </span>            :         ConstraintType type;
-<span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span>            :         //! Serializes a Constraint to a stand-alone binary blob
-<span class="lineNum">      33 </span>            :         virtual void Serialize(Serializer &amp;serializer);
-<span class="lineNum">      34 </span>            :         //! Deserializes a blob back into a Constraint, returns NULL if
-<span class="lineNum">      35 </span>            :         //! deserialization is not possible
-<span class="lineNum">      36 </span>            :         static std::unique_ptr&lt;Constraint&gt; Deserialize(Deserializer &amp;source);
-<span class="lineNum">      37 </span>            : };
-<span class="lineNum">      38 </span>            : } // namespace duckdb
+<span class="lineNum">      18 </span>            : class SQLNodeVisitor;
+<span class="lineNum">      19 </span>            : //! Constraint is the base class of any type of table constraint.
+<a name="20"><span class="lineNum">      20 </span>            : class Constraint : public Printable {</a>
+<a name="21"><span class="lineNum">      21 </span>            :   public:</a>
+<span class="lineNum">      22 </span><span class="lineCov">         19 :         Constraint(ConstraintType type) : type(type){};</span>
+<span class="lineNum">      23 </span><span class="lineCov">         19 :         virtual ~Constraint() {</span>
+<span class="lineNum">      24 </span><span class="lineCov">         19 :         }</span>
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :         virtual std::unique_ptr&lt;Constraint&gt; Accept(SQLNodeVisitor *) = 0;</span>
+<span class="lineNum">      27 </span><span class="lineCov">         19 : </span>
+<span class="lineNum">      28 </span><span class="lineCov">         19 :         ConstraintType type;</span>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :         //! Serializes a Constraint to a stand-alone binary blob
+<span class="lineNum">      31 </span>            :         virtual void Serialize(Serializer &amp;serializer);
+<span class="lineNum">      32 </span>            :         //! Deserializes a blob back into a Constraint, returns NULL if
+<span class="lineNum">      33 </span>            :         //! deserialization is not possible
+<span class="lineNum">      34 </span>            :         static std::unique_ptr&lt;Constraint&gt; Deserialize(Deserializer &amp;source);
+<span class="lineNum">      35 </span>            : };
+<span class="lineNum">      36 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

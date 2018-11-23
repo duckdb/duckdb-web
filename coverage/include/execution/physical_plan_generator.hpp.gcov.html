@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8ae54f6 - include/execution/physical_plan_generator.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 1d95558 - include/execution/physical_plan_generator.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8ae54f6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 1d95558</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 07:38:07</td>
+            <td class="headerValue">2018-11-23 13:48:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -90,10 +90,10 @@
 <span class="lineNum">      28 </span>            : //! logical query plan
 <a name="29"><span class="lineNum">      29 </span>            : class PhysicalPlanGenerator : public LogicalOperatorVisitor {</a>
 <span class="lineNum">      30 </span>            :   public:
-<span class="lineNum">      31 </span><span class="lineCov">      28240 :         PhysicalPlanGenerator(ClientContext &amp;context,</span>
+<span class="lineNum">      31 </span><span class="lineCov">      28248 :         PhysicalPlanGenerator(ClientContext &amp;context,</span>
 <span class="lineNum">      32 </span>            :                               PhysicalPlanGenerator *parent = nullptr)
-<span class="lineNum">      33 </span><span class="lineCov">      28240 :             : parent(parent), context(context) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">      28240 :         }</span>
+<span class="lineNum">      33 </span><span class="lineCov">      28248 :             : parent(parent), context(context) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">      28248 :         }</span>
 <span class="lineNum">      35 </span>            :         using LogicalOperatorVisitor::Visit;
 <span class="lineNum">      36 </span>            : 
 <span class="lineNum">      37 </span>            :         bool CreatePlan(std::unique_ptr&lt;LogicalOperator&gt; logical);
@@ -123,7 +123,7 @@
 <span class="lineNum">      61 </span>            :         virtual void Visit(LogicalTableFunction &amp;expr);
 <span class="lineNum">      62 </span>            :         virtual void Visit(LogicalPruneColumns &amp;expr);
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span>            :         virtual void Visit(SubqueryExpression &amp;expr);
+<span class="lineNum">      64 </span>            :         virtual std::unique_ptr&lt;Expression&gt; Visit(SubqueryExpression &amp;expr);
 <span class="lineNum">      65 </span>            : 
 <span class="lineNum">      66 </span>            :         void Print() {
 <span class="lineNum">      67 </span>            :                 plan-&gt;Print();

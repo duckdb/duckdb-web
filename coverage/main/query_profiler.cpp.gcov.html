@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8ae54f6 - main/query_profiler.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 1d95558 - main/query_profiler.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8ae54f6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 1d95558</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 07:38:07</td>
+            <td class="headerValue">2018-11-23 13:48:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -72,9 +72,9 @@
 <span class="lineNum">      10 </span>            : constexpr size_t REMAINING_RENDER_WIDTH = TREE_RENDER_WIDTH - 2;
 <a name="11"><span class="lineNum">      11 </span>            : constexpr size_t MAX_EXTRA_LINES = 10;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">      28524 : void QueryProfiler::StartQuery(string query) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">      28524 :         if (!enabled)</span>
-<span class="lineNum">      15 </span><span class="lineCov">      28524 :                 return;</span>
+<span class="lineNum">      13 </span><span class="lineCov">      28532 : void QueryProfiler::StartQuery(string query) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      28532 :         if (!enabled)</span>
+<span class="lineNum">      15 </span><span class="lineCov">      28532 :                 return;</span>
 <span class="lineNum">      16 </span>            : 
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :         this-&gt;query = query;</span>
 <span class="lineNum">      18 </span><span class="lineNoCov">          0 :         tree_map.clear();</span>
@@ -84,16 +84,16 @@
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :         main_query.Start();</span>
 <a name="23"><span class="lineNum">      23 </span>            : }</a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">      28225 : void QueryProfiler::EndQuery() {</span>
-<span class="lineNum">      26 </span><span class="lineCov">      28225 :         if (!enabled)</span>
-<span class="lineNum">      27 </span><span class="lineCov">      28225 :                 return;</span>
+<span class="lineNum">      25 </span><span class="lineCov">      28233 : void QueryProfiler::EndQuery() {</span>
+<span class="lineNum">      26 </span><span class="lineCov">      28233 :         if (!enabled)</span>
+<span class="lineNum">      27 </span><span class="lineCov">      28233 :                 return;</span>
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :         main_query.End();</span>
 <a name="30"><span class="lineNum">      30 </span>            : }</a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">      79798 : void QueryProfiler::StartOperator(PhysicalOperator *phys_op) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">      79798 :         if (!enabled)</span>
-<span class="lineNum">      34 </span><span class="lineCov">      79798 :                 return;</span>
+<span class="lineNum">      32 </span><span class="lineCov">      79889 : void QueryProfiler::StartOperator(PhysicalOperator *phys_op) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      79889 :         if (!enabled)</span>
+<span class="lineNum">      34 </span><span class="lineCov">      79889 :                 return;</span>
 <span class="lineNum">      35 </span>            : 
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :         if (!root) {</span>
 <span class="lineNum">      37 </span>            :                 // start of execution: create operator tree
@@ -122,9 +122,9 @@
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 :         op.Start();</span>
 <a name="61"><span class="lineNum">      61 </span>            : }</a>
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">      79762 : void QueryProfiler::EndOperator(DataChunk &amp;chunk) {</span>
-<span class="lineNum">      64 </span><span class="lineCov">      79762 :         if (!enabled)</span>
-<span class="lineNum">      65 </span><span class="lineCov">      79762 :                 return;</span>
+<span class="lineNum">      63 </span><span class="lineCov">      79853 : void QueryProfiler::EndOperator(DataChunk &amp;chunk) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">      79853 :         if (!enabled)</span>
+<span class="lineNum">      65 </span><span class="lineCov">      79853 :                 return;</span>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span>            :         // finish timing for the current element
 <span class="lineNum">      68 </span><span class="lineNoCov">          0 :         op.End();</span>
