@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7610bfe - common/types/statistics.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b92dbf6 - common/types/statistics.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7610bfe</td>
+            <td class="headerValue">DuckDB Code Coverage Report b92dbf6</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">151</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 15:06:18</td>
+            <td class="headerValue">2018-11-24 16:03:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -71,24 +71,24 @@
 <span class="lineNum">       9 </span>            : using namespace std;
 <a name="10"><span class="lineNum">      10 </span>            : </a>
 <span class="lineNum">      11 </span>            : #ifdef DEBUG
-<span class="lineNum">      12 </span><span class="lineCov">     654159 : void Statistics::Verify(Vector &amp;vector) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">     654159 :         if (!has_stats || vector.count == 0)</span>
-<span class="lineNum">      14 </span><span class="lineCov">     283111 :                 return;</span>
+<span class="lineNum">      12 </span><span class="lineCov">     654173 : void Statistics::Verify(Vector &amp;vector) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">     654173 :         if (!has_stats || vector.count == 0)</span>
+<span class="lineNum">      14 </span><span class="lineCov">     283113 :                 return;</span>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">     371048 :         if (!can_have_null) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">     103406 :                 assert(!VectorOperations::HasNull(vector));</span>
+<span class="lineNum">      16 </span><span class="lineCov">     371060 :         if (!can_have_null) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">     103418 :                 assert(!VectorOperations::HasNull(vector));</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">     371048 :         if (!min.is_null) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">     671932 :                 Value actual_min = VectorOperations::Min(vector);</span>
-<span class="lineNum">      21 </span><span class="lineCov">     335966 :                 assert(actual_min.is_null ||</span>
+<span class="lineNum">      19 </span><span class="lineCov">     371060 :         if (!min.is_null) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     671956 :                 Value actual_min = VectorOperations::Min(vector);</span>
+<span class="lineNum">      21 </span><span class="lineCov">     335978 :                 assert(actual_min.is_null ||</span>
 <span class="lineNum">      22 </span>            :                        ValueOperations::LessThanEquals(min, actual_min));
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">     371048 :         if (!max.is_null) {</span>
-<span class="lineNum">      25 </span><span class="lineCov">     671932 :                 Value actual_max = VectorOperations::Max(vector);</span>
-<span class="lineNum">      26 </span><span class="lineCov">     335966 :                 assert(actual_max.is_null ||</span>
+<span class="lineNum">      24 </span><span class="lineCov">     371060 :         if (!max.is_null) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">     671956 :                 Value actual_max = VectorOperations::Max(vector);</span>
+<span class="lineNum">      26 </span><span class="lineCov">     335978 :                 assert(actual_max.is_null ||</span>
 <span class="lineNum">      27 </span>            :                        ValueOperations::GreaterThanEquals(max, actual_max));
 <span class="lineNum">      28 </span>            :         }
-<span class="lineNum">      29 </span><span class="lineCov">     371048 :         if (type == TypeId::VARCHAR) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">     371060 :         if (type == TypeId::VARCHAR) {</span>
 <span class="lineNum">      30 </span><span class="lineCov">        446 :                 Value actual_max_strlen = VectorOperations::MaximumStringLength(vector);</span>
 <span class="lineNum">      31 </span><span class="lineCov">        223 :                 Value stats_max_strlen =</span>
 <span class="lineNum">      32 </span><span class="lineCov">        446 :                     Value::Numeric(actual_max_strlen.type, maximum_string_length);</span>
@@ -98,58 +98,58 @@
 <span class="lineNum">      36 </span>            : }
 <a name="37"><span class="lineNum">      37 </span>            : #endif</a>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">      40223 : Statistics::Statistics(Value value)</span>
-<span class="lineNum">      40 </span><span class="lineCov">      40223 :     : has_stats(true), can_have_null(value.is_null), min(value), max(value),</span>
+<span class="lineNum">      39 </span><span class="lineCov">      40231 : Statistics::Statistics(Value value)</span>
+<span class="lineNum">      40 </span><span class="lineCov">      40231 :     : has_stats(true), can_have_null(value.is_null), min(value), max(value),</span>
 <span class="lineNum">      41 </span>            : 
 <span class="lineNum">      42 </span>            :       maximum_string_length(
-<span class="lineNum">      43 </span><span class="lineCov">      40223 :           value.type == TypeId::VARCHAR ? value.str_value.size() : 0),</span>
-<span class="lineNum">      44 </span><span class="lineCov">      40223 :       type(value.type), maximum_count(1) {</span>
-<span class="lineNum">      45 </span><span class="lineCov">      40223 :         if (TypeIsIntegral(value.type) &amp;&amp; value.type != TypeId::BIGINT) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">      40231 :           value.type == TypeId::VARCHAR ? value.str_value.size() : 0),</span>
+<span class="lineNum">      44 </span><span class="lineCov">      40231 :       type(value.type), maximum_count(1) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">      40231 :         if (TypeIsIntegral(value.type) &amp;&amp; value.type != TypeId::BIGINT) {</span>
 <span class="lineNum">      46 </span>            :                 // upcast to biggest integral type
-<span class="lineNum">      47 </span><span class="lineCov">      40076 :                 max = min = value.CastAs(TypeId::BIGINT);</span>
+<span class="lineNum">      47 </span><span class="lineCov">      40082 :                 max = min = value.CastAs(TypeId::BIGINT);</span>
 <span class="lineNum">      48 </span>            :         }
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">      40223 : }</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">      40231 : }</span></a>
 <span class="lineNum">      50 </span>            : 
-<span class="lineNum">      51 </span><span class="lineCov">      37442 : void Statistics::Update(Vector &amp;new_vector) {</span>
-<span class="lineNum">      52 </span><span class="lineCov">      37442 :         assert(type == new_vector.type);</span>
-<span class="lineNum">      53 </span><span class="lineCov">      37442 :         if (!can_have_null) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      37218 :                 can_have_null = VectorOperations::HasNull(new_vector);</span>
+<span class="lineNum">      51 </span><span class="lineCov">      37444 : void Statistics::Update(Vector &amp;new_vector) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">      37444 :         assert(type == new_vector.type);</span>
+<span class="lineNum">      53 </span><span class="lineCov">      37444 :         if (!can_have_null) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      37220 :                 can_have_null = VectorOperations::HasNull(new_vector);</span>
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">      37442 :         if (TypeIsNumeric(type)) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">      74814 :                 Value new_min = VectorOperations::Min(new_vector);</span>
-<span class="lineNum">      58 </span><span class="lineCov">      74814 :                 Value new_max = VectorOperations::Max(new_vector);</span>
+<span class="lineNum">      56 </span><span class="lineCov">      37444 :         if (TypeIsNumeric(type)) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">      74818 :                 Value new_min = VectorOperations::Min(new_vector);</span>
+<span class="lineNum">      58 </span><span class="lineCov">      74818 :                 Value new_max = VectorOperations::Max(new_vector);</span>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">      37407 :                 if (TypeIsIntegral(new_min.type) &amp;&amp; new_min.type != TypeId::BIGINT) {</span>
-<span class="lineNum">      61 </span><span class="lineCov">      37407 :                         new_min = new_min.CastAs(TypeId::BIGINT);</span>
-<span class="lineNum">      62 </span><span class="lineCov">      37407 :                         new_max = new_max.CastAs(TypeId::BIGINT);</span>
+<span class="lineNum">      60 </span><span class="lineCov">      37409 :                 if (TypeIsIntegral(new_min.type) &amp;&amp; new_min.type != TypeId::BIGINT) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">      37408 :                         new_min = new_min.CastAs(TypeId::BIGINT);</span>
+<span class="lineNum">      62 </span><span class="lineCov">      37408 :                         new_max = new_max.CastAs(TypeId::BIGINT);</span>
 <span class="lineNum">      63 </span>            :                 }
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">      37407 :                 if (!has_stats) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">        210 :                         min = new_min;</span>
-<span class="lineNum">      67 </span><span class="lineCov">        210 :                         max = new_max;</span>
+<span class="lineNum">      65 </span><span class="lineCov">      37409 :                 if (!has_stats) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">        212 :                         min = new_min;</span>
+<span class="lineNum">      67 </span><span class="lineCov">        212 :                         max = new_max;</span>
 <span class="lineNum">      68 </span>            :                 } else {
 <span class="lineNum">      69 </span><span class="lineCov">      37197 :                         ValueOperations::Min(min, new_min, min);</span>
 <span class="lineNum">      70 </span><span class="lineCov">      37197 :                         ValueOperations::Max(max, new_max, max);</span>
 <span class="lineNum">      71 </span>            :                 }
 <span class="lineNum">      72 </span>            :         }
-<span class="lineNum">      73 </span><span class="lineCov">      37442 :         if (type == TypeId::VARCHAR) {</span>
+<span class="lineNum">      73 </span><span class="lineCov">      37444 :         if (type == TypeId::VARCHAR) {</span>
 <span class="lineNum">      74 </span><span class="lineCov">         35 :                 Value new_max_strlen =</span>
 <span class="lineNum">      75 </span><span class="lineCov">         35 :                     VectorOperations::MaximumStringLength(new_vector);</span>
 <span class="lineNum">      76 </span><span class="lineCov">         35 :                 maximum_string_length =</span>
 <span class="lineNum">      77 </span><span class="lineCov">         35 :                     std::max(maximum_string_length, new_max_strlen.value_.pointer);</span>
 <span class="lineNum">      78 </span>            :         }
-<span class="lineNum">      79 </span><span class="lineCov">      37442 :         maximum_count += new_vector.count;</span>
-<span class="lineNum">      80 </span><span class="lineCov">      37442 :         has_stats = true;</span>
-<a name="81"><span class="lineNum">      81 </span><span class="lineCov">      37442 : }</span></a>
+<span class="lineNum">      79 </span><span class="lineCov">      37444 :         maximum_count += new_vector.count;</span>
+<span class="lineNum">      80 </span><span class="lineCov">      37444 :         has_stats = true;</span>
+<a name="81"><span class="lineNum">      81 </span><span class="lineCov">      37444 : }</span></a>
 <span class="lineNum">      82 </span>            : 
-<span class="lineNum">      83 </span><span class="lineCov">     329420 : void Statistics::Reset() {</span>
-<span class="lineNum">      84 </span><span class="lineCov">     329420 :         has_stats = false;</span>
-<span class="lineNum">      85 </span><span class="lineCov">     329420 :         can_have_null = false;</span>
-<span class="lineNum">      86 </span><span class="lineCov">     329420 :         min = Value();</span>
-<span class="lineNum">      87 </span><span class="lineCov">     329420 :         max = Value();</span>
-<span class="lineNum">      88 </span><span class="lineCov">     329420 :         maximum_string_length = 0;</span>
-<span class="lineNum">      89 </span><span class="lineCov">     329420 :         maximum_count = 0;</span>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">     329420 : }</span></a>
+<span class="lineNum">      83 </span><span class="lineCov">     329443 : void Statistics::Reset() {</span>
+<span class="lineNum">      84 </span><span class="lineCov">     329443 :         has_stats = false;</span>
+<span class="lineNum">      85 </span><span class="lineCov">     329443 :         can_have_null = false;</span>
+<span class="lineNum">      86 </span><span class="lineCov">     329443 :         min = Value();</span>
+<span class="lineNum">      87 </span><span class="lineCov">     329443 :         max = Value();</span>
+<span class="lineNum">      88 </span><span class="lineCov">     329443 :         maximum_string_length = 0;</span>
+<span class="lineNum">      89 </span><span class="lineCov">     329443 :         maximum_count = 0;</span>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">     329443 : }</span></a>
 <span class="lineNum">      91 </span>            : 
 <span class="lineNum">      92 </span><span class="lineCov">      52174 : bool Statistics::FitsInType(TypeId type) {</span>
 <span class="lineNum">      93 </span><span class="lineCov">      52174 :         if (!TypeIsIntegral(type)) {</span>

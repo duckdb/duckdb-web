@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7610bfe - parser/expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b92dbf6 - parser/expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7610bfe</td>
+            <td class="headerValue">DuckDB Code Coverage Report b92dbf6</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">87</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-23 15:06:18</td>
+            <td class="headerValue">2018-11-24 16:03:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -69,21 +69,21 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">     957784 : void Expression::AcceptChildren(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    1807223 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">    1698878 :                 auto accept_res = children[i]-&gt;Accept(v);</span>
-<span class="lineNum">      13 </span><span class="lineCov">     849439 :                 if (accept_res) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">     957856 : void Expression::AcceptChildren(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    1807343 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    1698974 :                 auto accept_res = children[i]-&gt;Accept(v);</span>
+<span class="lineNum">      13 </span><span class="lineCov">     849487 :                 if (accept_res) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         children[i] = move(accept_res);</span>
 <span class="lineNum">      15 </span>            :                 }
 <span class="lineNum">      16 </span>            :         }
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">     957784 : }</span></a>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">     957856 : }</span></a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">     148837 : bool Expression::IsAggregate() {</span>
-<span class="lineNum">      20 </span><span class="lineCov">     148837 :         bool is_aggregate = false;</span>
-<span class="lineNum">      21 </span><span class="lineCov">     275975 :         for (auto &amp;child : children) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">     127138 :                 is_aggregate |= child-&gt;IsAggregate();</span>
+<span class="lineNum">      19 </span><span class="lineCov">     148855 : bool Expression::IsAggregate() {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     148855 :         bool is_aggregate = false;</span>
+<span class="lineNum">      21 </span><span class="lineCov">     276005 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">     127150 :                 is_aggregate |= child-&gt;IsAggregate();</span>
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">     148837 :         return is_aggregate;</span>
+<span class="lineNum">      24 </span><span class="lineCov">     148855 :         return is_aggregate;</span>
 <a name="25"><span class="lineNum">      25 </span>            : }</a>
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span><span class="lineCov">         11 : bool Expression::IsScalar() {</span>
