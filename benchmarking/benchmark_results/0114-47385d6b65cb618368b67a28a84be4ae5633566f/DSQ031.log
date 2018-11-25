@@ -1,0 +1,535 @@
+<<Query Profiling Information>>
+SELECT * FROM (SELECT avg(ss_list_price) B1_LP, count(ss_list_price) B1_CNT, count(DISTINCT ss_list_price) B1_CNTD FROM store_sales WHERE ss_quantity BETWEEN 0 AND 5 AND (ss_list_price BETWEEN 8 AND 8+10 OR ss_coupon_amt BETWEEN 459 AND 459+1000 OR ss_wholesale_cost BETWEEN 57 AND 57+20)) B1, (SELECT avg(ss_list_price) B2_LP, count(ss_list_price) B2_CNT, count(DISTINCT ss_list_price) B2_CNTD FROM store_sales WHERE ss_quantity BETWEEN 6 AND 10 AND (ss_list_price BETWEEN 90 AND 90+10 OR ss_coupon_amt BETWEEN 2323 AND 2323+1000 OR ss_wholesale_cost BETWEEN 31 AND 31+20)) B2, (SELECT avg(ss_list_price) B3_LP, count(ss_list_price) B3_CNT, count(DISTINCT ss_list_price) B3_CNTD FROM store_sales WHERE ss_quantity BETWEEN 11 AND 15 AND (ss_list_price BETWEEN 142 AND 142+10 OR ss_coupon_amt BETWEEN 12214 AND 12214+1000 OR ss_wholesale_cost BETWEEN 79 AND 79+20)) B3, (SELECT avg(ss_list_price) B4_LP, count(ss_list_price) B4_CNT, count(DISTINCT ss_list_price) B4_CNTD FROM store_sales WHERE ss_quantity BETWEEN 16 AND 20 AND (ss_list_price BETWEEN 135 AND 135+10 OR ss_coupon_amt BETWEEN 6071 AND 6071+1000 OR ss_wholesale_cost BETWEEN 38 AND 38+20)) B4, (SELECT avg(ss_list_price) B5_LP, count(ss_list_price) B5_CNT, count(DISTINCT ss_list_price) B5_CNTD FROM store_sales WHERE ss_quantity BETWEEN 21 AND 25 AND (ss_list_price BETWEEN 122 AND 122+10 OR ss_coupon_amt BETWEEN 836 AND 836+1000 OR ss_wholesale_cost BETWEEN 17 AND 17+20)) B5, (SELECT avg(ss_list_price) B6_LP, count(ss_list_price) B6_CNT, count(DISTINCT ss_list_price) B6_CNTD FROM store_sales WHERE ss_quantity BETWEEN 26 AND 30 AND (ss_list_price BETWEEN 154 AND 154+10 OR ss_coupon_amt BETWEEN 7326 AND 7326+1000 OR ss_wholesale_cost BETWEEN 7 AND 7+20)) B6 LIMIT 100;
+<<Timing>>
+Total Time: 0.635870s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   CROSS_PRODUCT  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                --------------------
+|   CROSS_PRODUCT  |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.01s)     |
+|         1        |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |   HASH_GROUP_BY  ||      FILTER      |
+|                  |                                                            |                  ||     OR(OR(AND    |
+|                  |                                                            |                  ||  ((ss_list_price |
+|                  |                                                            |                  ||      >= 154.     |
+|                  |                                                            |                  ||     000000),     |
+|                  |                                                            |                  ||   (ss_list_price |
+|                  |                                                            |                  ||      <= 164.     |
+|                  |                                                            |                  ||     000000))     |
+|                  |                                                            |                  || , AND((ss_coupon |
+|                  |                                                            |                  ||     _amt >=      |
+|                  |                                                            |                  ||     7326.000     |
+|      (0.00s)     |                                                            |      (0.01s)     ||      (0.07s)     |
+|         1        |                                                            |         1        ||       32263      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------
+|   CROSS_PRODUCT  |                                        |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                                        |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                                        |                  ||  ((ss_list_price ||                  |
+|                  |                                        |                  ||      >= 122.     ||                  |
+|                  |                                        |                  ||     000000),     ||                  |
+|                  |                                        |                  ||   (ss_list_price ||                  |
+|                  |                                        |                  ||      <= 132.     ||                  |
+|                  |                                        |                  ||     000000))     ||                  |
+|                  |                                        |                  || , AND((ss_coupon ||                  |
+|                  |                                        |                  ||     _amt >=      ||                  |
+|                  |                                        |                  ||     836.0000     ||                  |
+|      (0.00s)     |                                        |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                                        |         1        ||       39053      ||      2880404     |
+--------------------                                        ------------------------------------------------------------
+--------------------                    ------------------------------------------------------------
+|   CROSS_PRODUCT  |                    |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                    |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                    |                  ||  ((ss_list_price ||                  |
+|                  |                    |                  ||      >= 135.     ||                  |
+|                  |                    |                  ||     000000),     ||                  |
+|                  |                    |                  ||   (ss_list_price ||                  |
+|                  |                    |                  ||      <= 145.     ||                  |
+|                  |                    |                  ||     000000))     ||                  |
+|                  |                    |                  || , AND((ss_coupon ||                  |
+|                  |                    |                  ||     _amt >=      ||                  |
+|                  |                    |                  ||     6071.000     ||                  |
+|      (0.00s)     |                    |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                    |         1        ||       34124      ||      2880404     |
+--------------------                    ------------------------------------------------------------
+--------------------------------------------------------------------------------
+|   HASH_GROUP_BY  ||   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  ||                  ||     OR(OR(AND    ||    store_sales   |
+|                  ||                  ||  ((ss_list_price ||                  |
+|                  ||                  ||      >= 142.     ||                  |
+|                  ||                  ||     000000),     ||                  |
+|                  ||                  ||   (ss_list_price ||                  |
+|                  ||                  ||      <= 152.     ||                  |
+|                  ||                  ||     000000))     ||                  |
+|                  ||                  || , AND((ss_coupon ||                  |
+|                  ||                  ||     _amt >=      ||                  |
+|                  ||                  ||     12214.00     ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.08s)     ||      (0.02s)     |
+|         1        ||         1        ||       30290      ||      2880404     |
+--------------------------------------------------------------------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+|     OR(OR(AND    ||     OR(OR(AND    ||    store_sales   |
+|  ((ss_list_price ||  ((ss_list_price ||                  |
+|      >= 8.00     ||      >= 90.0     ||                  |
+| 0000), (ss_list_ ||     00000),      ||                  |
+|     price <=     ||  (ss_list_price  ||                  |
+|      18.0000     ||      <= 100.     ||                  |
+|     00)), AND    ||     000000))     ||                  |
+|  ((ss_coupon_amt || , AND((ss_coupon ||                  |
+|      >= 459.     ||     _amt >=      ||                  |
+|     000000),     ||     2323.000     ||                  |
+|      (0.08s)     ||      (0.08s)     ||      (0.02s)     |
+|       39368      ||       38144      ||      2880404     |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||    store_sales   |
+|      (0.02s)     ||      (0.02s)     |
+|      2880404     ||      2880404     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM (SELECT avg(ss_list_price) B1_LP, count(ss_list_price) B1_CNT, count(DISTINCT ss_list_price) B1_CNTD FROM store_sales WHERE ss_quantity BETWEEN 0 AND 5 AND (ss_list_price BETWEEN 8 AND 8+10 OR ss_coupon_amt BETWEEN 459 AND 459+1000 OR ss_wholesale_cost BETWEEN 57 AND 57+20)) B1, (SELECT avg(ss_list_price) B2_LP, count(ss_list_price) B2_CNT, count(DISTINCT ss_list_price) B2_CNTD FROM store_sales WHERE ss_quantity BETWEEN 6 AND 10 AND (ss_list_price BETWEEN 90 AND 90+10 OR ss_coupon_amt BETWEEN 2323 AND 2323+1000 OR ss_wholesale_cost BETWEEN 31 AND 31+20)) B2, (SELECT avg(ss_list_price) B3_LP, count(ss_list_price) B3_CNT, count(DISTINCT ss_list_price) B3_CNTD FROM store_sales WHERE ss_quantity BETWEEN 11 AND 15 AND (ss_list_price BETWEEN 142 AND 142+10 OR ss_coupon_amt BETWEEN 12214 AND 12214+1000 OR ss_wholesale_cost BETWEEN 79 AND 79+20)) B3, (SELECT avg(ss_list_price) B4_LP, count(ss_list_price) B4_CNT, count(DISTINCT ss_list_price) B4_CNTD FROM store_sales WHERE ss_quantity BETWEEN 16 AND 20 AND (ss_list_price BETWEEN 135 AND 135+10 OR ss_coupon_amt BETWEEN 6071 AND 6071+1000 OR ss_wholesale_cost BETWEEN 38 AND 38+20)) B4, (SELECT avg(ss_list_price) B5_LP, count(ss_list_price) B5_CNT, count(DISTINCT ss_list_price) B5_CNTD FROM store_sales WHERE ss_quantity BETWEEN 21 AND 25 AND (ss_list_price BETWEEN 122 AND 122+10 OR ss_coupon_amt BETWEEN 836 AND 836+1000 OR ss_wholesale_cost BETWEEN 17 AND 17+20)) B5, (SELECT avg(ss_list_price) B6_LP, count(ss_list_price) B6_CNT, count(DISTINCT ss_list_price) B6_CNTD FROM store_sales WHERE ss_quantity BETWEEN 26 AND 30 AND (ss_list_price BETWEEN 154 AND 154+10 OR ss_coupon_amt BETWEEN 7326 AND 7326+1000 OR ss_wholesale_cost BETWEEN 7 AND 7+20)) B6 LIMIT 100;
+<<Timing>>
+Total Time: 0.607021s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   CROSS_PRODUCT  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                --------------------
+|   CROSS_PRODUCT  |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.01s)     |
+|         1        |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |   HASH_GROUP_BY  ||      FILTER      |
+|                  |                                                            |                  ||     OR(OR(AND    |
+|                  |                                                            |                  ||  ((ss_list_price |
+|                  |                                                            |                  ||      >= 154.     |
+|                  |                                                            |                  ||     000000),     |
+|                  |                                                            |                  ||   (ss_list_price |
+|                  |                                                            |                  ||      <= 164.     |
+|                  |                                                            |                  ||     000000))     |
+|                  |                                                            |                  || , AND((ss_coupon |
+|                  |                                                            |                  ||     _amt >=      |
+|                  |                                                            |                  ||     7326.000     |
+|      (0.00s)     |                                                            |      (0.01s)     ||      (0.07s)     |
+|         1        |                                                            |         1        ||       32263      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------
+|   CROSS_PRODUCT  |                                        |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                                        |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                                        |                  ||  ((ss_list_price ||                  |
+|                  |                                        |                  ||      >= 122.     ||                  |
+|                  |                                        |                  ||     000000),     ||                  |
+|                  |                                        |                  ||   (ss_list_price ||                  |
+|                  |                                        |                  ||      <= 132.     ||                  |
+|                  |                                        |                  ||     000000))     ||                  |
+|                  |                                        |                  || , AND((ss_coupon ||                  |
+|                  |                                        |                  ||     _amt >=      ||                  |
+|                  |                                        |                  ||     836.0000     ||                  |
+|      (0.00s)     |                                        |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                                        |         1        ||       39053      ||      2880404     |
+--------------------                                        ------------------------------------------------------------
+--------------------                    ------------------------------------------------------------
+|   CROSS_PRODUCT  |                    |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                    |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                    |                  ||  ((ss_list_price ||                  |
+|                  |                    |                  ||      >= 135.     ||                  |
+|                  |                    |                  ||     000000),     ||                  |
+|                  |                    |                  ||   (ss_list_price ||                  |
+|                  |                    |                  ||      <= 145.     ||                  |
+|                  |                    |                  ||     000000))     ||                  |
+|                  |                    |                  || , AND((ss_coupon ||                  |
+|                  |                    |                  ||     _amt >=      ||                  |
+|                  |                    |                  ||     6071.000     ||                  |
+|      (0.00s)     |                    |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                    |         1        ||       34124      ||      2880404     |
+--------------------                    ------------------------------------------------------------
+--------------------------------------------------------------------------------
+|   HASH_GROUP_BY  ||   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  ||                  ||     OR(OR(AND    ||    store_sales   |
+|                  ||                  ||  ((ss_list_price ||                  |
+|                  ||                  ||      >= 142.     ||                  |
+|                  ||                  ||     000000),     ||                  |
+|                  ||                  ||   (ss_list_price ||                  |
+|                  ||                  ||      <= 152.     ||                  |
+|                  ||                  ||     000000))     ||                  |
+|                  ||                  || , AND((ss_coupon ||                  |
+|                  ||                  ||     _amt >=      ||                  |
+|                  ||                  ||     12214.00     ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        ||         1        ||       30290      ||      2880404     |
+--------------------------------------------------------------------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+|     OR(OR(AND    ||     OR(OR(AND    ||    store_sales   |
+|  ((ss_list_price ||  ((ss_list_price ||                  |
+|      >= 8.00     ||      >= 90.0     ||                  |
+| 0000), (ss_list_ ||     00000),      ||                  |
+|     price <=     ||  (ss_list_price  ||                  |
+|      18.0000     ||      <= 100.     ||                  |
+|     00)), AND    ||     000000))     ||                  |
+|  ((ss_coupon_amt || , AND((ss_coupon ||                  |
+|      >= 459.     ||     _amt >=      ||                  |
+|     000000),     ||     2323.000     ||                  |
+|      (0.07s)     ||      (0.07s)     ||      (0.02s)     |
+|       39368      ||       38144      ||      2880404     |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||    store_sales   |
+|      (0.02s)     ||      (0.02s)     |
+|      2880404     ||      2880404     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM (SELECT avg(ss_list_price) B1_LP, count(ss_list_price) B1_CNT, count(DISTINCT ss_list_price) B1_CNTD FROM store_sales WHERE ss_quantity BETWEEN 0 AND 5 AND (ss_list_price BETWEEN 8 AND 8+10 OR ss_coupon_amt BETWEEN 459 AND 459+1000 OR ss_wholesale_cost BETWEEN 57 AND 57+20)) B1, (SELECT avg(ss_list_price) B2_LP, count(ss_list_price) B2_CNT, count(DISTINCT ss_list_price) B2_CNTD FROM store_sales WHERE ss_quantity BETWEEN 6 AND 10 AND (ss_list_price BETWEEN 90 AND 90+10 OR ss_coupon_amt BETWEEN 2323 AND 2323+1000 OR ss_wholesale_cost BETWEEN 31 AND 31+20)) B2, (SELECT avg(ss_list_price) B3_LP, count(ss_list_price) B3_CNT, count(DISTINCT ss_list_price) B3_CNTD FROM store_sales WHERE ss_quantity BETWEEN 11 AND 15 AND (ss_list_price BETWEEN 142 AND 142+10 OR ss_coupon_amt BETWEEN 12214 AND 12214+1000 OR ss_wholesale_cost BETWEEN 79 AND 79+20)) B3, (SELECT avg(ss_list_price) B4_LP, count(ss_list_price) B4_CNT, count(DISTINCT ss_list_price) B4_CNTD FROM store_sales WHERE ss_quantity BETWEEN 16 AND 20 AND (ss_list_price BETWEEN 135 AND 135+10 OR ss_coupon_amt BETWEEN 6071 AND 6071+1000 OR ss_wholesale_cost BETWEEN 38 AND 38+20)) B4, (SELECT avg(ss_list_price) B5_LP, count(ss_list_price) B5_CNT, count(DISTINCT ss_list_price) B5_CNTD FROM store_sales WHERE ss_quantity BETWEEN 21 AND 25 AND (ss_list_price BETWEEN 122 AND 122+10 OR ss_coupon_amt BETWEEN 836 AND 836+1000 OR ss_wholesale_cost BETWEEN 17 AND 17+20)) B5, (SELECT avg(ss_list_price) B6_LP, count(ss_list_price) B6_CNT, count(DISTINCT ss_list_price) B6_CNTD FROM store_sales WHERE ss_quantity BETWEEN 26 AND 30 AND (ss_list_price BETWEEN 154 AND 154+10 OR ss_coupon_amt BETWEEN 7326 AND 7326+1000 OR ss_wholesale_cost BETWEEN 7 AND 7+20)) B6 LIMIT 100;
+<<Timing>>
+Total Time: 0.607602s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   CROSS_PRODUCT  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                --------------------
+|   CROSS_PRODUCT  |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.01s)     |
+|         1        |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |   HASH_GROUP_BY  ||      FILTER      |
+|                  |                                                            |                  ||     OR(OR(AND    |
+|                  |                                                            |                  ||  ((ss_list_price |
+|                  |                                                            |                  ||      >= 154.     |
+|                  |                                                            |                  ||     000000),     |
+|                  |                                                            |                  ||   (ss_list_price |
+|                  |                                                            |                  ||      <= 164.     |
+|                  |                                                            |                  ||     000000))     |
+|                  |                                                            |                  || , AND((ss_coupon |
+|                  |                                                            |                  ||     _amt >=      |
+|                  |                                                            |                  ||     7326.000     |
+|      (0.00s)     |                                                            |      (0.01s)     ||      (0.07s)     |
+|         1        |                                                            |         1        ||       32263      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------
+|   CROSS_PRODUCT  |                                        |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                                        |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                                        |                  ||  ((ss_list_price ||                  |
+|                  |                                        |                  ||      >= 122.     ||                  |
+|                  |                                        |                  ||     000000),     ||                  |
+|                  |                                        |                  ||   (ss_list_price ||                  |
+|                  |                                        |                  ||      <= 132.     ||                  |
+|                  |                                        |                  ||     000000))     ||                  |
+|                  |                                        |                  || , AND((ss_coupon ||                  |
+|                  |                                        |                  ||     _amt >=      ||                  |
+|                  |                                        |                  ||     836.0000     ||                  |
+|      (0.00s)     |                                        |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                                        |         1        ||       39053      ||      2880404     |
+--------------------                                        ------------------------------------------------------------
+--------------------                    ------------------------------------------------------------
+|   CROSS_PRODUCT  |                    |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                    |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                    |                  ||  ((ss_list_price ||                  |
+|                  |                    |                  ||      >= 135.     ||                  |
+|                  |                    |                  ||     000000),     ||                  |
+|                  |                    |                  ||   (ss_list_price ||                  |
+|                  |                    |                  ||      <= 145.     ||                  |
+|                  |                    |                  ||     000000))     ||                  |
+|                  |                    |                  || , AND((ss_coupon ||                  |
+|                  |                    |                  ||     _amt >=      ||                  |
+|                  |                    |                  ||     6071.000     ||                  |
+|      (0.00s)     |                    |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                    |         1        ||       34124      ||      2880404     |
+--------------------                    ------------------------------------------------------------
+--------------------------------------------------------------------------------
+|   HASH_GROUP_BY  ||   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  ||                  ||     OR(OR(AND    ||    store_sales   |
+|                  ||                  ||  ((ss_list_price ||                  |
+|                  ||                  ||      >= 142.     ||                  |
+|                  ||                  ||     000000),     ||                  |
+|                  ||                  ||   (ss_list_price ||                  |
+|                  ||                  ||      <= 152.     ||                  |
+|                  ||                  ||     000000))     ||                  |
+|                  ||                  || , AND((ss_coupon ||                  |
+|                  ||                  ||     _amt >=      ||                  |
+|                  ||                  ||     12214.00     ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        ||         1        ||       30290      ||      2880404     |
+--------------------------------------------------------------------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+|     OR(OR(AND    ||     OR(OR(AND    ||    store_sales   |
+|  ((ss_list_price ||  ((ss_list_price ||                  |
+|      >= 8.00     ||      >= 90.0     ||                  |
+| 0000), (ss_list_ ||     00000),      ||                  |
+|     price <=     ||  (ss_list_price  ||                  |
+|      18.0000     ||      <= 100.     ||                  |
+|     00)), AND    ||     000000))     ||                  |
+|  ((ss_coupon_amt || , AND((ss_coupon ||                  |
+|      >= 459.     ||     _amt >=      ||                  |
+|     000000),     ||     2323.000     ||                  |
+|      (0.07s)     ||      (0.07s)     ||      (0.02s)     |
+|       39368      ||       38144      ||      2880404     |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||    store_sales   |
+|      (0.02s)     ||      (0.02s)     |
+|      2880404     ||      2880404     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM (SELECT avg(ss_list_price) B1_LP, count(ss_list_price) B1_CNT, count(DISTINCT ss_list_price) B1_CNTD FROM store_sales WHERE ss_quantity BETWEEN 0 AND 5 AND (ss_list_price BETWEEN 8 AND 8+10 OR ss_coupon_amt BETWEEN 459 AND 459+1000 OR ss_wholesale_cost BETWEEN 57 AND 57+20)) B1, (SELECT avg(ss_list_price) B2_LP, count(ss_list_price) B2_CNT, count(DISTINCT ss_list_price) B2_CNTD FROM store_sales WHERE ss_quantity BETWEEN 6 AND 10 AND (ss_list_price BETWEEN 90 AND 90+10 OR ss_coupon_amt BETWEEN 2323 AND 2323+1000 OR ss_wholesale_cost BETWEEN 31 AND 31+20)) B2, (SELECT avg(ss_list_price) B3_LP, count(ss_list_price) B3_CNT, count(DISTINCT ss_list_price) B3_CNTD FROM store_sales WHERE ss_quantity BETWEEN 11 AND 15 AND (ss_list_price BETWEEN 142 AND 142+10 OR ss_coupon_amt BETWEEN 12214 AND 12214+1000 OR ss_wholesale_cost BETWEEN 79 AND 79+20)) B3, (SELECT avg(ss_list_price) B4_LP, count(ss_list_price) B4_CNT, count(DISTINCT ss_list_price) B4_CNTD FROM store_sales WHERE ss_quantity BETWEEN 16 AND 20 AND (ss_list_price BETWEEN 135 AND 135+10 OR ss_coupon_amt BETWEEN 6071 AND 6071+1000 OR ss_wholesale_cost BETWEEN 38 AND 38+20)) B4, (SELECT avg(ss_list_price) B5_LP, count(ss_list_price) B5_CNT, count(DISTINCT ss_list_price) B5_CNTD FROM store_sales WHERE ss_quantity BETWEEN 21 AND 25 AND (ss_list_price BETWEEN 122 AND 122+10 OR ss_coupon_amt BETWEEN 836 AND 836+1000 OR ss_wholesale_cost BETWEEN 17 AND 17+20)) B5, (SELECT avg(ss_list_price) B6_LP, count(ss_list_price) B6_CNT, count(DISTINCT ss_list_price) B6_CNTD FROM store_sales WHERE ss_quantity BETWEEN 26 AND 30 AND (ss_list_price BETWEEN 154 AND 154+10 OR ss_coupon_amt BETWEEN 7326 AND 7326+1000 OR ss_wholesale_cost BETWEEN 7 AND 7+20)) B6 LIMIT 100;
+<<Timing>>
+Total Time: 0.608452s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   CROSS_PRODUCT  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                --------------------
+|   CROSS_PRODUCT  |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.01s)     |
+|         1        |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |   HASH_GROUP_BY  ||      FILTER      |
+|                  |                                                            |                  ||     OR(OR(AND    |
+|                  |                                                            |                  ||  ((ss_list_price |
+|                  |                                                            |                  ||      >= 154.     |
+|                  |                                                            |                  ||     000000),     |
+|                  |                                                            |                  ||   (ss_list_price |
+|                  |                                                            |                  ||      <= 164.     |
+|                  |                                                            |                  ||     000000))     |
+|                  |                                                            |                  || , AND((ss_coupon |
+|                  |                                                            |                  ||     _amt >=      |
+|                  |                                                            |                  ||     7326.000     |
+|      (0.00s)     |                                                            |      (0.01s)     ||      (0.07s)     |
+|         1        |                                                            |         1        ||       32263      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------
+|   CROSS_PRODUCT  |                                        |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                                        |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                                        |                  ||  ((ss_list_price ||                  |
+|                  |                                        |                  ||      >= 122.     ||                  |
+|                  |                                        |                  ||     000000),     ||                  |
+|                  |                                        |                  ||   (ss_list_price ||                  |
+|                  |                                        |                  ||      <= 132.     ||                  |
+|                  |                                        |                  ||     000000))     ||                  |
+|                  |                                        |                  || , AND((ss_coupon ||                  |
+|                  |                                        |                  ||     _amt >=      ||                  |
+|                  |                                        |                  ||     836.0000     ||                  |
+|      (0.00s)     |                                        |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                                        |         1        ||       39053      ||      2880404     |
+--------------------                                        ------------------------------------------------------------
+--------------------                    ------------------------------------------------------------
+|   CROSS_PRODUCT  |                    |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                    |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                    |                  ||  ((ss_list_price ||                  |
+|                  |                    |                  ||      >= 135.     ||                  |
+|                  |                    |                  ||     000000),     ||                  |
+|                  |                    |                  ||   (ss_list_price ||                  |
+|                  |                    |                  ||      <= 145.     ||                  |
+|                  |                    |                  ||     000000))     ||                  |
+|                  |                    |                  || , AND((ss_coupon ||                  |
+|                  |                    |                  ||     _amt >=      ||                  |
+|                  |                    |                  ||     6071.000     ||                  |
+|      (0.00s)     |                    |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                    |         1        ||       34124      ||      2880404     |
+--------------------                    ------------------------------------------------------------
+--------------------------------------------------------------------------------
+|   HASH_GROUP_BY  ||   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  ||                  ||     OR(OR(AND    ||    store_sales   |
+|                  ||                  ||  ((ss_list_price ||                  |
+|                  ||                  ||      >= 142.     ||                  |
+|                  ||                  ||     000000),     ||                  |
+|                  ||                  ||   (ss_list_price ||                  |
+|                  ||                  ||      <= 152.     ||                  |
+|                  ||                  ||     000000))     ||                  |
+|                  ||                  || , AND((ss_coupon ||                  |
+|                  ||                  ||     _amt >=      ||                  |
+|                  ||                  ||     12214.00     ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        ||         1        ||       30290      ||      2880404     |
+--------------------------------------------------------------------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+|     OR(OR(AND    ||     OR(OR(AND    ||    store_sales   |
+|  ((ss_list_price ||  ((ss_list_price ||                  |
+|      >= 8.00     ||      >= 90.0     ||                  |
+| 0000), (ss_list_ ||     00000),      ||                  |
+|     price <=     ||  (ss_list_price  ||                  |
+|      18.0000     ||      <= 100.     ||                  |
+|     00)), AND    ||     000000))     ||                  |
+|  ((ss_coupon_amt || , AND((ss_coupon ||                  |
+|      >= 459.     ||     _amt >=      ||                  |
+|     000000),     ||     2323.000     ||                  |
+|      (0.07s)     ||      (0.07s)     ||      (0.02s)     |
+|       39368      ||       38144      ||      2880404     |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||    store_sales   |
+|      (0.02s)     ||      (0.02s)     |
+|      2880404     ||      2880404     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT * FROM (SELECT avg(ss_list_price) B1_LP, count(ss_list_price) B1_CNT, count(DISTINCT ss_list_price) B1_CNTD FROM store_sales WHERE ss_quantity BETWEEN 0 AND 5 AND (ss_list_price BETWEEN 8 AND 8+10 OR ss_coupon_amt BETWEEN 459 AND 459+1000 OR ss_wholesale_cost BETWEEN 57 AND 57+20)) B1, (SELECT avg(ss_list_price) B2_LP, count(ss_list_price) B2_CNT, count(DISTINCT ss_list_price) B2_CNTD FROM store_sales WHERE ss_quantity BETWEEN 6 AND 10 AND (ss_list_price BETWEEN 90 AND 90+10 OR ss_coupon_amt BETWEEN 2323 AND 2323+1000 OR ss_wholesale_cost BETWEEN 31 AND 31+20)) B2, (SELECT avg(ss_list_price) B3_LP, count(ss_list_price) B3_CNT, count(DISTINCT ss_list_price) B3_CNTD FROM store_sales WHERE ss_quantity BETWEEN 11 AND 15 AND (ss_list_price BETWEEN 142 AND 142+10 OR ss_coupon_amt BETWEEN 12214 AND 12214+1000 OR ss_wholesale_cost BETWEEN 79 AND 79+20)) B3, (SELECT avg(ss_list_price) B4_LP, count(ss_list_price) B4_CNT, count(DISTINCT ss_list_price) B4_CNTD FROM store_sales WHERE ss_quantity BETWEEN 16 AND 20 AND (ss_list_price BETWEEN 135 AND 135+10 OR ss_coupon_amt BETWEEN 6071 AND 6071+1000 OR ss_wholesale_cost BETWEEN 38 AND 38+20)) B4, (SELECT avg(ss_list_price) B5_LP, count(ss_list_price) B5_CNT, count(DISTINCT ss_list_price) B5_CNTD FROM store_sales WHERE ss_quantity BETWEEN 21 AND 25 AND (ss_list_price BETWEEN 122 AND 122+10 OR ss_coupon_amt BETWEEN 836 AND 836+1000 OR ss_wholesale_cost BETWEEN 17 AND 17+20)) B5, (SELECT avg(ss_list_price) B6_LP, count(ss_list_price) B6_CNT, count(DISTINCT ss_list_price) B6_CNTD FROM store_sales WHERE ss_quantity BETWEEN 26 AND 30 AND (ss_list_price BETWEEN 154 AND 154+10 OR ss_coupon_amt BETWEEN 7326 AND 7326+1000 OR ss_wholesale_cost BETWEEN 7 AND 7+20)) B6 LIMIT 100;
+<<Timing>>
+Total Time: 0.622624s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   CROSS_PRODUCT  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                --------------------
+|   CROSS_PRODUCT  |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.01s)     |
+|         1        |                                                                                |         1        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |   HASH_GROUP_BY  ||      FILTER      |
+|                  |                                                            |                  ||     OR(OR(AND    |
+|                  |                                                            |                  ||  ((ss_list_price |
+|                  |                                                            |                  ||      >= 154.     |
+|                  |                                                            |                  ||     000000),     |
+|                  |                                                            |                  ||   (ss_list_price |
+|                  |                                                            |                  ||      <= 164.     |
+|                  |                                                            |                  ||     000000))     |
+|                  |                                                            |                  || , AND((ss_coupon |
+|                  |                                                            |                  ||     _amt >=      |
+|                  |                                                            |                  ||     7326.000     |
+|      (0.00s)     |                                                            |      (0.01s)     ||      (0.07s)     |
+|         1        |                                                            |         1        ||       32263      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------
+|   CROSS_PRODUCT  |                                        |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                                        |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                                        |                  ||  ((ss_list_price ||                  |
+|                  |                                        |                  ||      >= 122.     ||                  |
+|                  |                                        |                  ||     000000),     ||                  |
+|                  |                                        |                  ||   (ss_list_price ||                  |
+|                  |                                        |                  ||      <= 132.     ||                  |
+|                  |                                        |                  ||     000000))     ||                  |
+|                  |                                        |                  || , AND((ss_coupon ||                  |
+|                  |                                        |                  ||     _amt >=      ||                  |
+|                  |                                        |                  ||     836.0000     ||                  |
+|      (0.00s)     |                                        |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                                        |         1        ||       39053      ||      2880404     |
+--------------------                                        ------------------------------------------------------------
+--------------------                    ------------------------------------------------------------
+|   CROSS_PRODUCT  |                    |   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  |                    |                  ||     OR(OR(AND    ||    store_sales   |
+|                  |                    |                  ||  ((ss_list_price ||                  |
+|                  |                    |                  ||      >= 135.     ||                  |
+|                  |                    |                  ||     000000),     ||                  |
+|                  |                    |                  ||   (ss_list_price ||                  |
+|                  |                    |                  ||      <= 145.     ||                  |
+|                  |                    |                  ||     000000))     ||                  |
+|                  |                    |                  || , AND((ss_coupon ||                  |
+|                  |                    |                  ||     _amt >=      ||                  |
+|                  |                    |                  ||     6071.000     ||                  |
+|      (0.00s)     |                    |      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        |                    |         1        ||       34124      ||      2880404     |
+--------------------                    ------------------------------------------------------------
+--------------------------------------------------------------------------------
+|   HASH_GROUP_BY  ||   HASH_GROUP_BY  ||      FILTER      ||     SEQ_SCAN     |
+|                  ||                  ||     OR(OR(AND    ||    store_sales   |
+|                  ||                  ||  ((ss_list_price ||                  |
+|                  ||                  ||      >= 142.     ||                  |
+|                  ||                  ||     000000),     ||                  |
+|                  ||                  ||   (ss_list_price ||                  |
+|                  ||                  ||      <= 152.     ||                  |
+|                  ||                  ||     000000))     ||                  |
+|                  ||                  || , AND((ss_coupon ||                  |
+|                  ||                  ||     _amt >=      ||                  |
+|                  ||                  ||     12214.00     ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.07s)     ||      (0.02s)     |
+|         1        ||         1        ||       30290      ||      2880404     |
+--------------------------------------------------------------------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+|     OR(OR(AND    ||     OR(OR(AND    ||    store_sales   |
+|  ((ss_list_price ||  ((ss_list_price ||                  |
+|      >= 8.00     ||      >= 90.0     ||                  |
+| 0000), (ss_list_ ||     00000),      ||                  |
+|     price <=     ||  (ss_list_price  ||                  |
+|      18.0000     ||      <= 100.     ||                  |
+|     00)), AND    ||     000000))     ||                  |
+|  ((ss_coupon_amt || , AND((ss_coupon ||                  |
+|      >= 459.     ||     _amt >=      ||                  |
+|     000000),     ||     2323.000     ||                  |
+|      (0.07s)     ||      (0.07s)     ||      (0.02s)     |
+|       39368      ||       38144      ||      2880404     |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||    store_sales   |
+|      (0.02s)     ||      (0.02s)     |
+|      2880404     ||      2880404     |
+----------------------------------------
+
