@@ -1,0 +1,6 @@
+------------
+|| DSQ062 ||
+------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Subquery "ss_items" does not have a column named "item_id"
