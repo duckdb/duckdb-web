@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b92dbf6 - include/parser/expression/constant_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 26a5f86 - include/parser/expression/constant_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b92dbf6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 26a5f86</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-24 16:03:47</td>
+            <td class="headerValue">2018-11-25 12:46:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -80,15 +80,15 @@
 <span class="lineNum">      18 </span>            : //! Represents a constant value in the query
 <a name="19"><span class="lineNum">      19 </span>            : class ConstantExpression : public Expression {</a>
 <span class="lineNum">      20 </span>            :   public:
-<span class="lineNum">      21 </span><span class="lineCov">        113 :         ConstantExpression()</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">        113 :             : Expression(ExpressionType::VALUE_CONSTANT, TypeId::INTEGER), value() {</span></a>
-<span class="lineNum">      23 </span><span class="lineCov">        113 :         }</span>
-<span class="lineNum">      24 </span><span class="lineCov">      92330 :         ConstantExpression(Value val)</span>
-<span class="lineNum">      25 </span><span class="lineCov">      92330 :             : Expression(ExpressionType::VALUE_CONSTANT, val.type), value(val) {</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">      92330 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">        115 :         ConstantExpression()</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">        115 :             : Expression(ExpressionType::VALUE_CONSTANT, TypeId::INTEGER), value() {</span></a>
+<span class="lineNum">      23 </span><span class="lineCov">        115 :         }</span>
+<span class="lineNum">      24 </span><span class="lineCov">      92342 :         ConstantExpression(Value val)</span>
+<span class="lineNum">      25 </span><span class="lineCov">      92342 :             : Expression(ExpressionType::VALUE_CONSTANT, val.type), value(val) {</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">      92342 :         }</span></a>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">     441983 :         virtual std::unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">     441983 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      28 </span><span class="lineCov">     442053 :         virtual std::unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">     442053 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      30 </span>            :         }
 <span class="lineNum">      31 </span><span class="lineCov">         25 :         virtual ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      32 </span><span class="lineCov">         25 :                 return ExpressionClass::CONSTANT;</span>
