@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report f745df7 - include/execution/operator/physical_table_scan.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 441eaae - include/execution/operator/physical_table_scan.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report f745df7</td>
+            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 16:54:51</td>
+            <td class="headerValue">2018-11-26 17:00:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -81,38 +81,40 @@
 <span class="lineNum">      19 </span>            : //! Represents a scan of a base table
 <a name="20"><span class="lineNum">      20 </span>            : class PhysicalTableScan : public PhysicalOperator {</a>
 <span class="lineNum">      21 </span>            :   public:
-<span class="lineNum">      22 </span><span class="lineCov">      13243 :         PhysicalTableScan(DataTable &amp;table, std::vector&lt;column_t&gt; column_ids)</span>
-<span class="lineNum">      23 </span><span class="lineCov">      13243 :             : PhysicalOperator(PhysicalOperatorType::SEQ_SCAN), table(table),</span>
-<span class="lineNum">      24 </span><span class="lineCov">      13243 :               column_ids(column_ids) {</span>
-<span class="lineNum">      25 </span><span class="lineCov">      13243 :         }</span>
-<span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span>            :         DataTable &amp;table;
-<span class="lineNum">      28 </span>            :         std::vector&lt;column_t&gt; column_ids;
-<span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span>            :         std::vector&lt;std::string&gt; GetNames() override;
-<span class="lineNum">      31 </span>            :         std::vector&lt;TypeId&gt; GetTypes() override;
-<span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span>            :         void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk,
-<span class="lineNum">      34 </span>            :                        PhysicalOperatorState *state) override;
-<span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span>            :         std::string ExtraRenderInformation() override;
+<span class="lineNum">      22 </span><span class="lineCov">      13251 :         PhysicalTableScan(TableCatalogEntry &amp;tableref, DataTable &amp;table,</span>
+<span class="lineNum">      23 </span>            :                           std::vector&lt;column_t&gt; column_ids)
+<span class="lineNum">      24 </span><span class="lineCov">      13251 :             : PhysicalOperator(PhysicalOperatorType::SEQ_SCAN), tableref(tableref),</span>
+<span class="lineNum">      25 </span><span class="lineCov">      13251 :               table(table), column_ids(column_ids) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">      13251 :         }</span>
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            :         TableCatalogEntry &amp;tableref;
+<span class="lineNum">      29 </span>            :         DataTable &amp;table;
+<span class="lineNum">      30 </span>            :         std::vector&lt;column_t&gt; column_ids;
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :         std::vector&lt;std::string&gt; GetNames() override;
+<span class="lineNum">      33 </span>            :         std::vector&lt;TypeId&gt; GetTypes() override;
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :         void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk,
+<span class="lineNum">      36 </span>            :                        PhysicalOperatorState *state) override;
 <span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span>            :         std::unique_ptr&lt;PhysicalOperatorState&gt;
-<span class="lineNum">      39 </span>            :         GetOperatorState(ExpressionExecutor *parent_executor) override;
-<span class="lineNum">      40 </span>            : };
-<span class="lineNum">      41 </span>            : 
-<a name="42"><span class="lineNum">      42 </span>            : class PhysicalTableScanOperatorState : public PhysicalOperatorState {</a>
-<span class="lineNum">      43 </span>            :   public:
-<span class="lineNum">      44 </span><span class="lineCov">      67355 :         PhysicalTableScanOperatorState(DataTable &amp;table,</span>
-<span class="lineNum">      45 </span>            :                                        ExpressionExecutor *parent_executor)
-<span class="lineNum">      46 </span><span class="lineCov">      67355 :             : PhysicalOperatorState(nullptr, parent_executor) {</span>
-<span class="lineNum">      47 </span><span class="lineCov">      67355 :                 table.InitializeScan(scan_offset);</span>
-<span class="lineNum">      48 </span><span class="lineCov">      67355 :         }</span>
-<span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span>            :         //! The current position in the scan
-<span class="lineNum">      51 </span>            :         ScanStructure scan_offset;
-<span class="lineNum">      52 </span>            : };
-<span class="lineNum">      53 </span>            : } // namespace duckdb
+<span class="lineNum">      38 </span>            :         std::string ExtraRenderInformation() override;
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span>            :         std::unique_ptr&lt;PhysicalOperatorState&gt;
+<span class="lineNum">      41 </span>            :         GetOperatorState(ExpressionExecutor *parent_executor) override;
+<span class="lineNum">      42 </span>            : };
+<span class="lineNum">      43 </span>            : 
+<a name="44"><span class="lineNum">      44 </span>            : class PhysicalTableScanOperatorState : public PhysicalOperatorState {</a>
+<span class="lineNum">      45 </span>            :   public:
+<span class="lineNum">      46 </span><span class="lineCov">      67363 :         PhysicalTableScanOperatorState(DataTable &amp;table,</span>
+<span class="lineNum">      47 </span>            :                                        ExpressionExecutor *parent_executor)
+<span class="lineNum">      48 </span><span class="lineCov">      67363 :             : PhysicalOperatorState(nullptr, parent_executor) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">      67363 :                 table.InitializeScan(scan_offset);</span>
+<span class="lineNum">      50 </span><span class="lineCov">      67363 :         }</span>
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            :         //! The current position in the scan
+<span class="lineNum">      53 </span>            :         ScanStructure scan_offset;
+<span class="lineNum">      54 </span>            : };
+<span class="lineNum">      55 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report f745df7 - common/string_util.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 441eaae - common/string_util.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report f745df7</td>
+            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">28</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 16:54:51</td>
+            <td class="headerValue">2018-11-26 17:00:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -195,11 +195,11 @@
 <span class="lineNum">     133 </span><span class="lineCov">      74509 :         return (copy);</span>
 <a name="134"><span class="lineNum">     134 </span>            : }</a>
 <span class="lineNum">     135 </span>            : 
-<span class="lineNum">     136 </span><span class="lineCov">       9757 : std::string StringUtil::Lower(const std::string &amp;str) {</span>
-<span class="lineNum">     137 </span><span class="lineCov">       9757 :         std::string copy(str);</span>
+<span class="lineNum">     136 </span><span class="lineCov">       9765 : std::string StringUtil::Lower(const std::string &amp;str) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">       9765 :         std::string copy(str);</span>
 <span class="lineNum">     138 </span>            :         std::transform(copy.begin(), copy.end(), copy.begin(),
-<span class="lineNum">     139 </span><span class="lineCov">       9757 :                        [](unsigned char c) { return std::tolower(c); });</span>
-<span class="lineNum">     140 </span><span class="lineCov">       9757 :         return (copy);</span>
+<span class="lineNum">     139 </span><span class="lineCov">       9765 :                        [](unsigned char c) { return std::tolower(c); });</span>
+<span class="lineNum">     140 </span><span class="lineCov">       9765 :         return (copy);</span>
 <a name="141"><span class="lineNum">     141 </span>            : }</a>
 <span class="lineNum">     142 </span>            : 
 <span class="lineNum">     143 </span><span class="lineCov">          5 : std::string StringUtil::Format(const std::string fmt_str, ...) {</span>
@@ -224,20 +224,20 @@
 <span class="lineNum">     162 </span><span class="lineCov">         10 :         return std::string(formatted.get());</span>
 <a name="163"><span class="lineNum">     163 </span>            : }</a>
 <span class="lineNum">     164 </span>            : 
-<span class="lineNum">     165 </span><span class="lineCov">         44 : std::string StringUtil::VFormat(const std::string fmt_str, va_list args) {</span>
-<span class="lineNum">     166 </span><span class="lineCov">         44 :         va_list args_copy;</span>
+<span class="lineNum">     165 </span><span class="lineCov">         52 : std::string StringUtil::VFormat(const std::string fmt_str, va_list args) {</span>
+<span class="lineNum">     166 </span><span class="lineCov">         52 :         va_list args_copy;</span>
 <span class="lineNum">     167 </span>            : 
-<span class="lineNum">     168 </span><span class="lineCov">         88 :         std::unique_ptr&lt;char[]&gt; formatted;</span>
+<span class="lineNum">     168 </span><span class="lineCov">        104 :         std::unique_ptr&lt;char[]&gt; formatted;</span>
 <span class="lineNum">     169 </span>            :         // make a copy of the args as we can only use it once
-<span class="lineNum">     170 </span><span class="lineCov">         44 :         va_copy(args_copy, args);</span>
+<span class="lineNum">     170 </span><span class="lineCov">         52 :         va_copy(args_copy, args);</span>
 <span class="lineNum">     171 </span>            : 
 <span class="lineNum">     172 </span>            :         // first get the amount of characters we need
-<span class="lineNum">     173 </span><span class="lineCov">         44 :         const auto n = vsnprintf(nullptr, 0, fmt_str.c_str(), args) + 1;</span>
+<span class="lineNum">     173 </span><span class="lineCov">         52 :         const auto n = vsnprintf(nullptr, 0, fmt_str.c_str(), args) + 1;</span>
 <span class="lineNum">     174 </span>            : 
 <span class="lineNum">     175 </span>            :         // now allocate the string and do the actual printing
-<span class="lineNum">     176 </span><span class="lineCov">         44 :         formatted.reset(new char[n]);</span>
-<span class="lineNum">     177 </span><span class="lineCov">         44 :         (void)vsnprintf(&amp;formatted[0], n, fmt_str.c_str(), args_copy);</span>
-<span class="lineNum">     178 </span><span class="lineCov">         88 :         return std::string(formatted.get());</span>
+<span class="lineNum">     176 </span><span class="lineCov">         52 :         formatted.reset(new char[n]);</span>
+<span class="lineNum">     177 </span><span class="lineCov">         52 :         (void)vsnprintf(&amp;formatted[0], n, fmt_str.c_str(), args_copy);</span>
+<span class="lineNum">     178 </span><span class="lineCov">        104 :         return std::string(formatted.get());</span>
 <a name="179"><span class="lineNum">     179 </span>            : }</a>
 <span class="lineNum">     180 </span>            : 
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 : std::vector&lt;std::string&gt; StringUtil::Split(const std::string &amp;input,</span>

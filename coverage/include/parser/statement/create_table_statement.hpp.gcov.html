@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report f745df7 - include/parser/statement/create_table_statement.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 441eaae - include/parser/statement/create_table_statement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report f745df7</td>
+            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">11</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 16:54:51</td>
+            <td class="headerValue">2018-11-26 17:00:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -82,21 +82,21 @@
 <span class="lineNum">      20 </span>            : 
 <a name="21"><span class="lineNum">      21 </span>            : class CreateTableStatement : public SQLStatement {</a>
 <span class="lineNum">      22 </span>            :   public:
-<span class="lineNum">      23 </span><span class="lineCov">        155 :         CreateTableStatement()</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">        155 :             : SQLStatement(StatementType::CREATE_TABLE),</span></a>
-<span class="lineNum">      25 </span><span class="lineCov">        155 :               info(make_unique&lt;CreateTableInformation&gt;()){};</span>
-<span class="lineNum">      26 </span><span class="lineCov">        310 :         virtual ~CreateTableStatement() {</span>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">        310 :         }</span></a>
-<span class="lineNum">      28 </span><span class="lineCov">        155 : </span>
-<span class="lineNum">      29 </span><span class="lineCov">        155 :         virtual std::string ToString() const {</span>
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">        155 :                 return &quot;CREATE TABLE&quot;;</span></a>
-<span class="lineNum">      31 </span><span class="lineCov">        155 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">        159 :         CreateTableStatement()</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">        159 :             : SQLStatement(StatementType::CREATE_TABLE),</span></a>
+<span class="lineNum">      25 </span><span class="lineCov">        159 :               info(make_unique&lt;CreateTableInformation&gt;()){};</span>
+<span class="lineNum">      26 </span><span class="lineCov">        318 :         virtual ~CreateTableStatement() {</span>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">        318 :         }</span></a>
+<span class="lineNum">      28 </span><span class="lineCov">        159 : </span>
+<span class="lineNum">      29 </span><span class="lineCov">        159 :         virtual std::string ToString() const {</span>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">        159 :                 return &quot;CREATE TABLE&quot;;</span></a>
+<span class="lineNum">      31 </span><span class="lineCov">        159 :         }</span>
 <span class="lineNum">      32 </span>            :         virtual std::unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 return v-&gt;Visit(*this);</span>
 <a name="34"><span class="lineNum">      34 </span><span class="lineNoCov">          0 :         }</span></a>
 <span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span><span class="lineCov">        306 :         virtual bool Equals(const SQLStatement *other_) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">        306 :                 if (!SQLStatement::Equals(other_)) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">        314 :         virtual bool Equals(const SQLStatement *other_) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">        314 :                 if (!SQLStatement::Equals(other_)) {</span>
 <span class="lineNum">      38 </span>            :                         return false;
 <span class="lineNum">      39 </span>            :                 }
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Equality not implemented!&quot;);</span>

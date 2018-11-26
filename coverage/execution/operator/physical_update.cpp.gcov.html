@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report f745df7 - execution/operator/physical_update.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 441eaae - execution/operator/physical_update.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report f745df7</td>
+            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">32</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 16:54:51</td>
+            <td class="headerValue">2018-11-26 17:00:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -111,7 +111,7 @@
 <span class="lineNum">      49 </span>            :                     [&amp;](size_t i) -&gt; Expression * {
 <span class="lineNum">      50 </span>            :                             if (expressions[i]-&gt;type == ExpressionType::VALUE_DEFAULT) {
 <span class="lineNum">      51 </span>            :                                     // we resolve default expressions separately
-<span class="lineNum">      52 </span>            :                                     auto &amp;column = table.table.columns[columns[i]];
+<span class="lineNum">      52 </span>            :                                     auto &amp;column = tableref.columns[columns[i]];
 <span class="lineNum">      53 </span>            :                                     update_chunk.data[i].count = state-&gt;child_chunk.size();
 <span class="lineNum">      54 </span>            :                                     VectorOperations::Set(update_chunk.data[i],
 <span class="lineNum">      55 </span>            :                                                           column.default_value);
@@ -122,7 +122,7 @@
 <span class="lineNum">      60 </span>            :                     expressions.size());
 <span class="lineNum">      61 </span><span class="lineCov">       2021 :                 update_chunk.sel_vector = state-&gt;child_chunk.sel_vector;</span>
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">       2021 :                 table.Update(context, row_ids, columns, update_chunk);</span>
+<span class="lineNum">      63 </span><span class="lineCov">       2021 :                 table.Update(tableref, context, row_ids, columns, update_chunk);</span>
 <span class="lineNum">      64 </span><span class="lineCov">       2013 :                 updated_count += state-&gt;child_chunk.size();</span>
 <span class="lineNum">      65 </span><span class="lineCov">       2013 :         }</span>
 <span class="lineNum">      66 </span>            : 
