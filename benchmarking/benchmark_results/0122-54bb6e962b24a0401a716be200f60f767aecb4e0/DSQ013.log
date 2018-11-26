@@ -1,0 +1,435 @@
+<<Query Profiling Information>>
+SELECT avg(ss_quantity) , avg(ss_ext_sales_price) , avg(ss_ext_wholesale_cost) , sum(ss_ext_wholesale_cost) FROM store_sales , store , customer_demographics , household_demographics , customer_address , date_dim WHERE s_store_sk = ss_store_sk AND ss_sold_date_sk = d_date_sk AND d_year = 2001 and((ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'M' AND cd_education_status = 'Advanced Degree' AND ss_sales_price BETWEEN 100.00 AND 150.00 AND hd_dep_count = 3) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'S' AND cd_education_status = 'College' AND ss_sales_price BETWEEN 50.00 AND 100.00 AND hd_dep_count = 1 ) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'W' AND cd_education_status = '2 yr Degree' AND ss_sales_price BETWEEN 150.00 AND 200.00 AND hd_dep_count = 1)) and((ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('TX', 'OH', 'TX') AND ss_net_profit BETWEEN 100 AND 200) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('OR', 'NM', 'KY') AND ss_net_profit BETWEEN 150 AND 300) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('VA', 'TX', 'MS') AND ss_net_profit BETWEEN 50 AND 250)) ;
+<<Timing>>
+Total Time: 1.186958s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         4        |
+--------------------
+--------------------                                                                                --------------------
+|      FILTER      |                                                                                |      FILTER      |
+|     OR(OR(AND    |                                                                                |   d_year = 2001  |
+|   (IN(ca_state   |                                                                                |                  |
+|     , TX, OH     |                                                                                |                  |
+|    , TX), AND    |                                                                                |                  |
+|  ((ss_net_profit |                                                                                |                  |
+|      >= 100.     |                                                                                |                  |
+|     000000),     |                                                                                |                  |
+|   (ss_net_profit |                                                                                |                  |
+|      <= 200.     |                                                                                |                  |
+|     000000)))    |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        46        |                                                                                |        365       |
+--------------------                                                                                --------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |     date_dim     |
+|    ss_addr_sk    |                                                                                |                  |
+|  =ca_address_sk  |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|       2468       |                                                                                |       73049      |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|      FILTER      |                                                            |      FILTER      |
+|     OR(OR(AND    |                                                            |    ca_country    |
+|     (AND(AND     |                                                            |  = United States |
+| ((cd_marital_sta |                                                            |                  |
+|     tus = M)     |                                                            |                  |
+| , (cd_education_ |                                                            |                  |
+|     status =     |                                                            |                  |
+|      Advanced    |                                                            |                  |
+|      Degree))    |                                                            |                  |
+| , AND((ss_sales_ |                                                            |                  |
+|     price >=     |                                                            |                  |
+|      (0.29s)     |                                                            |      (0.00s)     |
+|       2468       |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            | customer_address |
+|    ss_hdemo_sk   |                                                            |                  |
+|    =hd_demo_sk   |                                                            |                  |
+|      (0.28s)     |                                                            |      (0.00s)     |
+|      2880404     |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        | household_demogr |
+|    ss_cdemo_sk   |                                        |      aphics      |
+|    =cd_demo_sk   |                                        |                  |
+|      (0.47s)     |                                        |      (0.00s)     |
+|      2880404     |                                        |       7200       |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    | customer_demogra |
+|    ss_store_sk   |                    |       phics      |
+|    =s_store_sk   |                    |                  |
+|      (0.06s)     |                    |      (0.02s)     |
+|      2880404     |                    |      1920800     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||       store      |
+|      (0.03s)     ||      (0.00s)     |
+|      2880404     ||        12        |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT avg(ss_quantity) , avg(ss_ext_sales_price) , avg(ss_ext_wholesale_cost) , sum(ss_ext_wholesale_cost) FROM store_sales , store , customer_demographics , household_demographics , customer_address , date_dim WHERE s_store_sk = ss_store_sk AND ss_sold_date_sk = d_date_sk AND d_year = 2001 and((ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'M' AND cd_education_status = 'Advanced Degree' AND ss_sales_price BETWEEN 100.00 AND 150.00 AND hd_dep_count = 3) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'S' AND cd_education_status = 'College' AND ss_sales_price BETWEEN 50.00 AND 100.00 AND hd_dep_count = 1 ) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'W' AND cd_education_status = '2 yr Degree' AND ss_sales_price BETWEEN 150.00 AND 200.00 AND hd_dep_count = 1)) and((ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('TX', 'OH', 'TX') AND ss_net_profit BETWEEN 100 AND 200) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('OR', 'NM', 'KY') AND ss_net_profit BETWEEN 150 AND 300) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('VA', 'TX', 'MS') AND ss_net_profit BETWEEN 50 AND 250)) ;
+<<Timing>>
+Total Time: 1.179730s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         4        |
+--------------------
+--------------------                                                                                --------------------
+|      FILTER      |                                                                                |      FILTER      |
+|     OR(OR(AND    |                                                                                |   d_year = 2001  |
+|   (IN(ca_state   |                                                                                |                  |
+|     , TX, OH     |                                                                                |                  |
+|    , TX), AND    |                                                                                |                  |
+|  ((ss_net_profit |                                                                                |                  |
+|      >= 100.     |                                                                                |                  |
+|     000000),     |                                                                                |                  |
+|   (ss_net_profit |                                                                                |                  |
+|      <= 200.     |                                                                                |                  |
+|     000000)))    |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        46        |                                                                                |        365       |
+--------------------                                                                                --------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |     date_dim     |
+|    ss_addr_sk    |                                                                                |                  |
+|  =ca_address_sk  |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|       2468       |                                                                                |       73049      |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|      FILTER      |                                                            |      FILTER      |
+|     OR(OR(AND    |                                                            |    ca_country    |
+|     (AND(AND     |                                                            |  = United States |
+| ((cd_marital_sta |                                                            |                  |
+|     tus = M)     |                                                            |                  |
+| , (cd_education_ |                                                            |                  |
+|     status =     |                                                            |                  |
+|      Advanced    |                                                            |                  |
+|      Degree))    |                                                            |                  |
+| , AND((ss_sales_ |                                                            |                  |
+|     price >=     |                                                            |                  |
+|      (0.29s)     |                                                            |      (0.00s)     |
+|       2468       |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            | customer_address |
+|    ss_hdemo_sk   |                                                            |                  |
+|    =hd_demo_sk   |                                                            |                  |
+|      (0.28s)     |                                                            |      (0.00s)     |
+|      2880404     |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        | household_demogr |
+|    ss_cdemo_sk   |                                        |      aphics      |
+|    =cd_demo_sk   |                                        |                  |
+|      (0.47s)     |                                        |      (0.00s)     |
+|      2880404     |                                        |       7200       |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    | customer_demogra |
+|    ss_store_sk   |                    |       phics      |
+|    =s_store_sk   |                    |                  |
+|      (0.06s)     |                    |      (0.02s)     |
+|      2880404     |                    |      1920800     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||       store      |
+|      (0.03s)     ||      (0.00s)     |
+|      2880404     ||        12        |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT avg(ss_quantity) , avg(ss_ext_sales_price) , avg(ss_ext_wholesale_cost) , sum(ss_ext_wholesale_cost) FROM store_sales , store , customer_demographics , household_demographics , customer_address , date_dim WHERE s_store_sk = ss_store_sk AND ss_sold_date_sk = d_date_sk AND d_year = 2001 and((ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'M' AND cd_education_status = 'Advanced Degree' AND ss_sales_price BETWEEN 100.00 AND 150.00 AND hd_dep_count = 3) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'S' AND cd_education_status = 'College' AND ss_sales_price BETWEEN 50.00 AND 100.00 AND hd_dep_count = 1 ) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'W' AND cd_education_status = '2 yr Degree' AND ss_sales_price BETWEEN 150.00 AND 200.00 AND hd_dep_count = 1)) and((ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('TX', 'OH', 'TX') AND ss_net_profit BETWEEN 100 AND 200) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('OR', 'NM', 'KY') AND ss_net_profit BETWEEN 150 AND 300) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('VA', 'TX', 'MS') AND ss_net_profit BETWEEN 50 AND 250)) ;
+<<Timing>>
+Total Time: 1.188340s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         4        |
+--------------------
+--------------------                                                                                --------------------
+|      FILTER      |                                                                                |      FILTER      |
+|     OR(OR(AND    |                                                                                |   d_year = 2001  |
+|   (IN(ca_state   |                                                                                |                  |
+|     , TX, OH     |                                                                                |                  |
+|    , TX), AND    |                                                                                |                  |
+|  ((ss_net_profit |                                                                                |                  |
+|      >= 100.     |                                                                                |                  |
+|     000000),     |                                                                                |                  |
+|   (ss_net_profit |                                                                                |                  |
+|      <= 200.     |                                                                                |                  |
+|     000000)))    |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        46        |                                                                                |        365       |
+--------------------                                                                                --------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |     date_dim     |
+|    ss_addr_sk    |                                                                                |                  |
+|  =ca_address_sk  |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|       2468       |                                                                                |       73049      |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|      FILTER      |                                                            |      FILTER      |
+|     OR(OR(AND    |                                                            |    ca_country    |
+|     (AND(AND     |                                                            |  = United States |
+| ((cd_marital_sta |                                                            |                  |
+|     tus = M)     |                                                            |                  |
+| , (cd_education_ |                                                            |                  |
+|     status =     |                                                            |                  |
+|      Advanced    |                                                            |                  |
+|      Degree))    |                                                            |                  |
+| , AND((ss_sales_ |                                                            |                  |
+|     price >=     |                                                            |                  |
+|      (0.28s)     |                                                            |      (0.00s)     |
+|       2468       |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            | customer_address |
+|    ss_hdemo_sk   |                                                            |                  |
+|    =hd_demo_sk   |                                                            |                  |
+|      (0.28s)     |                                                            |      (0.00s)     |
+|      2880404     |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        | household_demogr |
+|    ss_cdemo_sk   |                                        |      aphics      |
+|    =cd_demo_sk   |                                        |                  |
+|      (0.48s)     |                                        |      (0.00s)     |
+|      2880404     |                                        |       7200       |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    | customer_demogra |
+|    ss_store_sk   |                    |       phics      |
+|    =s_store_sk   |                    |                  |
+|      (0.06s)     |                    |      (0.02s)     |
+|      2880404     |                    |      1920800     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||       store      |
+|      (0.03s)     ||      (0.00s)     |
+|      2880404     ||        12        |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT avg(ss_quantity) , avg(ss_ext_sales_price) , avg(ss_ext_wholesale_cost) , sum(ss_ext_wholesale_cost) FROM store_sales , store , customer_demographics , household_demographics , customer_address , date_dim WHERE s_store_sk = ss_store_sk AND ss_sold_date_sk = d_date_sk AND d_year = 2001 and((ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'M' AND cd_education_status = 'Advanced Degree' AND ss_sales_price BETWEEN 100.00 AND 150.00 AND hd_dep_count = 3) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'S' AND cd_education_status = 'College' AND ss_sales_price BETWEEN 50.00 AND 100.00 AND hd_dep_count = 1 ) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'W' AND cd_education_status = '2 yr Degree' AND ss_sales_price BETWEEN 150.00 AND 200.00 AND hd_dep_count = 1)) and((ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('TX', 'OH', 'TX') AND ss_net_profit BETWEEN 100 AND 200) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('OR', 'NM', 'KY') AND ss_net_profit BETWEEN 150 AND 300) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('VA', 'TX', 'MS') AND ss_net_profit BETWEEN 50 AND 250)) ;
+<<Timing>>
+Total Time: 1.180246s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         4        |
+--------------------
+--------------------                                                                                --------------------
+|      FILTER      |                                                                                |      FILTER      |
+|     OR(OR(AND    |                                                                                |   d_year = 2001  |
+|   (IN(ca_state   |                                                                                |                  |
+|     , TX, OH     |                                                                                |                  |
+|    , TX), AND    |                                                                                |                  |
+|  ((ss_net_profit |                                                                                |                  |
+|      >= 100.     |                                                                                |                  |
+|     000000),     |                                                                                |                  |
+|   (ss_net_profit |                                                                                |                  |
+|      <= 200.     |                                                                                |                  |
+|     000000)))    |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        46        |                                                                                |        365       |
+--------------------                                                                                --------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |     date_dim     |
+|    ss_addr_sk    |                                                                                |                  |
+|  =ca_address_sk  |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|       2468       |                                                                                |       73049      |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|      FILTER      |                                                            |      FILTER      |
+|     OR(OR(AND    |                                                            |    ca_country    |
+|     (AND(AND     |                                                            |  = United States |
+| ((cd_marital_sta |                                                            |                  |
+|     tus = M)     |                                                            |                  |
+| , (cd_education_ |                                                            |                  |
+|     status =     |                                                            |                  |
+|      Advanced    |                                                            |                  |
+|      Degree))    |                                                            |                  |
+| , AND((ss_sales_ |                                                            |                  |
+|     price >=     |                                                            |                  |
+|      (0.29s)     |                                                            |      (0.00s)     |
+|       2468       |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            | customer_address |
+|    ss_hdemo_sk   |                                                            |                  |
+|    =hd_demo_sk   |                                                            |                  |
+|      (0.28s)     |                                                            |      (0.00s)     |
+|      2880404     |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        | household_demogr |
+|    ss_cdemo_sk   |                                        |      aphics      |
+|    =cd_demo_sk   |                                        |                  |
+|      (0.47s)     |                                        |      (0.00s)     |
+|      2880404     |                                        |       7200       |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    | customer_demogra |
+|    ss_store_sk   |                    |       phics      |
+|    =s_store_sk   |                    |                  |
+|      (0.06s)     |                    |      (0.02s)     |
+|      2880404     |                    |      1920800     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||       store      |
+|      (0.03s)     ||      (0.00s)     |
+|      2880404     ||        12        |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT avg(ss_quantity) , avg(ss_ext_sales_price) , avg(ss_ext_wholesale_cost) , sum(ss_ext_wholesale_cost) FROM store_sales , store , customer_demographics , household_demographics , customer_address , date_dim WHERE s_store_sk = ss_store_sk AND ss_sold_date_sk = d_date_sk AND d_year = 2001 and((ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'M' AND cd_education_status = 'Advanced Degree' AND ss_sales_price BETWEEN 100.00 AND 150.00 AND hd_dep_count = 3) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'S' AND cd_education_status = 'College' AND ss_sales_price BETWEEN 50.00 AND 100.00 AND hd_dep_count = 1 ) OR (ss_hdemo_sk=hd_demo_sk AND cd_demo_sk = ss_cdemo_sk AND cd_marital_status = 'W' AND cd_education_status = '2 yr Degree' AND ss_sales_price BETWEEN 150.00 AND 200.00 AND hd_dep_count = 1)) and((ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('TX', 'OH', 'TX') AND ss_net_profit BETWEEN 100 AND 200) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('OR', 'NM', 'KY') AND ss_net_profit BETWEEN 150 AND 300) OR (ss_addr_sk = ca_address_sk AND ca_country = 'United States' AND ca_state IN ('VA', 'TX', 'MS') AND ss_net_profit BETWEEN 50 AND 250)) ;
+<<Timing>>
+Total Time: 1.197459s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         4        |
+--------------------
+--------------------                                                                                --------------------
+|      FILTER      |                                                                                |      FILTER      |
+|     OR(OR(AND    |                                                                                |   d_year = 2001  |
+|   (IN(ca_state   |                                                                                |                  |
+|     , TX, OH     |                                                                                |                  |
+|    , TX), AND    |                                                                                |                  |
+|  ((ss_net_profit |                                                                                |                  |
+|      >= 100.     |                                                                                |                  |
+|     000000),     |                                                                                |                  |
+|   (ss_net_profit |                                                                                |                  |
+|      <= 200.     |                                                                                |                  |
+|     000000)))    |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        46        |                                                                                |        365       |
+--------------------                                                                                --------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |     date_dim     |
+|    ss_addr_sk    |                                                                                |                  |
+|  =ca_address_sk  |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|       2468       |                                                                                |       73049      |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|      FILTER      |                                                            |      FILTER      |
+|     OR(OR(AND    |                                                            |    ca_country    |
+|     (AND(AND     |                                                            |  = United States |
+| ((cd_marital_sta |                                                            |                  |
+|     tus = M)     |                                                            |                  |
+| , (cd_education_ |                                                            |                  |
+|     status =     |                                                            |                  |
+|      Advanced    |                                                            |                  |
+|      Degree))    |                                                            |                  |
+| , AND((ss_sales_ |                                                            |                  |
+|     price >=     |                                                            |                  |
+|      (0.29s)     |                                                            |      (0.00s)     |
+|       2468       |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            | customer_address |
+|    ss_hdemo_sk   |                                                            |                  |
+|    =hd_demo_sk   |                                                            |                  |
+|      (0.29s)     |                                                            |      (0.00s)     |
+|      2880404     |                                                            |       50000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        | household_demogr |
+|    ss_cdemo_sk   |                                        |      aphics      |
+|    =cd_demo_sk   |                                        |                  |
+|      (0.48s)     |                                        |      (0.00s)     |
+|      2880404     |                                        |       7200       |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    | customer_demogra |
+|    ss_store_sk   |                    |       phics      |
+|    =s_store_sk   |                    |                  |
+|      (0.06s)     |                    |      (0.02s)     |
+|      2880404     |                    |      1920800     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||       store      |
+|      (0.03s)     ||      (0.00s)     |
+|      2880404     ||        12        |
+----------------------------------------
+
