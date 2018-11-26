@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 47385d6 - include/parser/expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2dddb0e - include/parser/expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 47385d6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2dddb0e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">31</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-25 15:31:58</td>
+            <td class="headerValue">2018-11-26 08:34:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -169,7 +169,7 @@
 <span class="lineNum">     107 </span>            :                 return this-&gt;Equals(&amp;rhs);
 <span class="lineNum">     108 </span>            :         }
 <span class="lineNum">     109 </span>            : 
-<a name="110"><span class="lineNum">     110 </span>            :         virtual std::string ToString() const override;</a>
+<a name="110"><span class="lineNum">     110 </span>            :         std::string ToString() const override;</a>
 <span class="lineNum">     111 </span>            : 
 <span class="lineNum">     112 </span><span class="lineCov">      16626 :         virtual std::string GetName() {</span>
 <span class="lineNum">     113 </span><span class="lineCov">      33386 :                 return !alias.empty() ? alias : &quot;Unknown&quot;;</span>

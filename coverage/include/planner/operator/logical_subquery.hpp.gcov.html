@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 47385d6 - include/planner/operator/logical_subquery.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2dddb0e - include/planner/operator/logical_subquery.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 47385d6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2dddb0e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-25 15:31:58</td>
+            <td class="headerValue">2018-11-26 08:34:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -91,7 +91,7 @@
 <span class="lineNum">      29 </span>            :         size_t table_index;
 <a name="30"><span class="lineNum">      30 </span>            :         size_t column_count;</a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">       1202 :         virtual void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      32 </span><span class="lineCov">       1202 :         void Accept(LogicalOperatorVisitor *v) override {</span>
 <span class="lineNum">      33 </span><span class="lineCov">       1202 :                 v-&gt;Visit(*this);</span>
 <span class="lineNum">      34 </span><span class="lineCov">       1202 :         }</span>
 <span class="lineNum">      35 </span>            : };
