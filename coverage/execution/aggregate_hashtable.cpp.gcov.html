@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c6b5d78 - execution/aggregate_hashtable.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report e7b2455 - execution/aggregate_hashtable.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c6b5d78</td>
+            <td class="headerValue">DuckDB Code Coverage Report e7b2455</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">182</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 10:03:35</td>
+            <td class="headerValue">2018-11-26 11:17:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -73,78 +73,78 @@
 <span class="lineNum">      11 </span>            : using namespace duckdb;
 <a name="12"><span class="lineNum">      12 </span>            : using namespace std;</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">      51335 : SuperLargeHashTable::SuperLargeHashTable(size_t initial_capacity,</span>
+<span class="lineNum">      14 </span><span class="lineCov">      51474 : SuperLargeHashTable::SuperLargeHashTable(size_t initial_capacity,</span>
 <span class="lineNum">      15 </span>            :                                          vector&lt;TypeId&gt; group_types,
 <span class="lineNum">      16 </span>            :                                          vector&lt;TypeId&gt; payload_types,
 <span class="lineNum">      17 </span>            :                                          vector&lt;ExpressionType&gt; aggregate_types,
-<span class="lineNum">      18 </span><span class="lineCov">      51335 :                                          bool parallel)</span>
+<span class="lineNum">      18 </span><span class="lineCov">      51474 :                                          bool parallel)</span>
 <span class="lineNum">      19 </span>            :     : group_serializer(group_types), aggregate_types(aggregate_types),
 <span class="lineNum">      20 </span>            :       group_types(group_types), payload_types(payload_types), payload_width(0),
-<span class="lineNum">      21 </span><span class="lineCov">      51335 :       capacity(0), entries(0), data(nullptr), max_chain(0), parallel(parallel) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">      51474 :       capacity(0), entries(0), data(nullptr), max_chain(0), parallel(parallel) {</span>
 <span class="lineNum">      22 </span>            :         // HT tuple layout is as follows:
 <span class="lineNum">      23 </span>            :         // [FLAG][NULLMASK][GROUPS][PAYLOAD][COUNT]
 <span class="lineNum">      24 </span>            :         // [FLAG] is the state of the tuple in memory
 <span class="lineNum">      25 </span>            :         // [GROUPS] is the groups
 <span class="lineNum">      26 </span>            :         // [PAYLOAD] is the payload (i.e. the aggregates)
 <span class="lineNum">      27 </span>            :         // [COUNT] is an 8-byte count for each element
-<span class="lineNum">      28 </span><span class="lineCov">     120183 :         for (auto type : payload_types) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">      68848 :                 payload_width += GetTypeIdSize(type);</span>
+<span class="lineNum">      28 </span><span class="lineCov">     120618 :         for (auto type : payload_types) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">      69144 :                 payload_width += GetTypeIdSize(type);</span>
 <span class="lineNum">      30 </span>            :         }
-<span class="lineNum">      31 </span><span class="lineCov">      51335 :         empty_payload_data = unique_ptr&lt;uint8_t[]&gt;(new uint8_t[payload_width]);</span>
+<span class="lineNum">      31 </span><span class="lineCov">      51474 :         empty_payload_data = unique_ptr&lt;uint8_t[]&gt;(new uint8_t[payload_width]);</span>
 <span class="lineNum">      32 </span>            :         // initialize the aggregates to the NULL value
-<span class="lineNum">      33 </span><span class="lineCov">      51335 :         auto pointer = empty_payload_data.get();</span>
-<span class="lineNum">      34 </span><span class="lineCov">     120183 :         for (size_t i = 0; i &lt; payload_types.size(); i++) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      51474 :         auto pointer = empty_payload_data.get();</span>
+<span class="lineNum">      34 </span><span class="lineCov">     120618 :         for (size_t i = 0; i &lt; payload_types.size(); i++) {</span>
 <span class="lineNum">      35 </span>            :                 // counts are zero initialized, all other aggregates NULL
 <span class="lineNum">      36 </span>            :                 // initialized
-<span class="lineNum">      37 </span><span class="lineCov">      68848 :                 auto type = payload_types[i];</span>
-<span class="lineNum">      38 </span><span class="lineCov">      68848 :                 if (aggregate_types[i] == ExpressionType::AGGREGATE_COUNT ||</span>
-<span class="lineNum">      39 </span><span class="lineCov">     120199 :                     aggregate_types[i] == ExpressionType::AGGREGATE_COUNT_DISTINCT ||</span>
-<span class="lineNum">      40 </span><span class="lineCov">      51351 :                     aggregate_types[i] == ExpressionType::AGGREGATE_COUNT_STAR) {</span>
-<span class="lineNum">      41 </span><span class="lineCov">      51270 :                         memset(pointer, 0, GetTypeIdSize(type));</span>
+<span class="lineNum">      37 </span><span class="lineCov">      69144 :                 auto type = payload_types[i];</span>
+<span class="lineNum">      38 </span><span class="lineCov">      69144 :                 if (aggregate_types[i] == ExpressionType::AGGREGATE_COUNT ||</span>
+<span class="lineNum">      39 </span><span class="lineCov">     120757 :                     aggregate_types[i] == ExpressionType::AGGREGATE_COUNT_DISTINCT ||</span>
+<span class="lineNum">      40 </span><span class="lineCov">      51613 :                     aggregate_types[i] == ExpressionType::AGGREGATE_COUNT_STAR) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">      51323 :                         memset(pointer, 0, GetTypeIdSize(type));</span>
 <span class="lineNum">      42 </span>            :                 } else {
-<span class="lineNum">      43 </span><span class="lineCov">      17578 :                         SetNullValue(pointer, type);</span>
+<span class="lineNum">      43 </span><span class="lineCov">      17821 :                         SetNullValue(pointer, type);</span>
 <span class="lineNum">      44 </span>            :                 }
-<span class="lineNum">      45 </span><span class="lineCov">      68848 :                 pointer += GetTypeIdSize(type);</span>
+<span class="lineNum">      45 </span><span class="lineCov">      69144 :                 pointer += GetTypeIdSize(type);</span>
 <span class="lineNum">      46 </span>            :         }
 <span class="lineNum">      47 </span>            : 
 <span class="lineNum">      48 </span>            :         // FIXME: this always creates this vector, even if no distinct if present.
 <span class="lineNum">      49 </span>            :         // it likely does not matter.
-<span class="lineNum">      50 </span><span class="lineCov">      51335 :         distinct_hashes.resize(aggregate_types.size());</span>
+<span class="lineNum">      50 </span><span class="lineCov">      51474 :         distinct_hashes.resize(aggregate_types.size());</span>
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span>            :         // create additional hash tables for distinct aggrs
-<span class="lineNum">      53 </span><span class="lineCov">     120183 :         for (size_t i = 0; i &lt; aggregate_types.size(); i++) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      68848 :                 switch (aggregate_types[i]) {</span>
-<span class="lineNum">      55 </span><span class="lineCov">          5 :                 case ExpressionType::AGGREGATE_COUNT_DISTINCT:</span>
+<span class="lineNum">      53 </span><span class="lineCov">     120618 :         for (size_t i = 0; i &lt; aggregate_types.size(); i++) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      69144 :                 switch (aggregate_types[i]) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">         13 :                 case ExpressionType::AGGREGATE_COUNT_DISTINCT:</span>
 <span class="lineNum">      56 </span>            :                 case ExpressionType::AGGREGATE_SUM_DISTINCT: {
 <span class="lineNum">      57 </span>            :                         // group types plus aggr return type
-<span class="lineNum">      58 </span><span class="lineCov">         10 :                         vector&lt;TypeId&gt; distinct_group_types(group_types);</span>
-<span class="lineNum">      59 </span><span class="lineCov">         10 :                         vector&lt;TypeId&gt; distinct_payload_types;</span>
-<span class="lineNum">      60 </span><span class="lineCov">         10 :                         vector&lt;ExpressionType&gt; distinct_aggregate_types;</span>
-<span class="lineNum">      61 </span><span class="lineCov">          5 :                         distinct_group_types.push_back(payload_types[i]);</span>
-<span class="lineNum">      62 </span><span class="lineCov">         10 :                         distinct_hashes[i] = make_unique&lt;SuperLargeHashTable&gt;(</span>
+<span class="lineNum">      58 </span><span class="lineCov">         26 :                         vector&lt;TypeId&gt; distinct_group_types(group_types);</span>
+<span class="lineNum">      59 </span><span class="lineCov">         26 :                         vector&lt;TypeId&gt; distinct_payload_types;</span>
+<span class="lineNum">      60 </span><span class="lineCov">         26 :                         vector&lt;ExpressionType&gt; distinct_aggregate_types;</span>
+<span class="lineNum">      61 </span><span class="lineCov">         13 :                         distinct_group_types.push_back(payload_types[i]);</span>
+<span class="lineNum">      62 </span><span class="lineCov">         26 :                         distinct_hashes[i] = make_unique&lt;SuperLargeHashTable&gt;(</span>
 <span class="lineNum">      63 </span>            :                             initial_capacity, distinct_group_types, distinct_payload_types,
-<span class="lineNum">      64 </span><span class="lineCov">          5 :                             distinct_aggregate_types);</span>
-<span class="lineNum">      65 </span><span class="lineCov">          5 :                         break;</span>
+<span class="lineNum">      64 </span><span class="lineCov">         13 :                             distinct_aggregate_types);</span>
+<span class="lineNum">      65 </span><span class="lineCov">         13 :                         break;</span>
 <span class="lineNum">      66 </span>            :                 }
-<span class="lineNum">      67 </span><span class="lineCov">      68843 :                 default:</span>
+<span class="lineNum">      67 </span><span class="lineCov">      69131 :                 default:</span>
 <span class="lineNum">      68 </span>            :                         // nothing
-<span class="lineNum">      69 </span><span class="lineCov">      68843 :                         break;</span>
+<span class="lineNum">      69 </span><span class="lineCov">      69131 :                         break;</span>
 <span class="lineNum">      70 </span>            :                 }
 <span class="lineNum">      71 </span>            :         }
 <span class="lineNum">      72 </span>            : 
-<span class="lineNum">      73 </span><span class="lineCov">      51335 :         tuple_size = FLAG_SIZE + (group_serializer.TupleSize() + payload_width);</span>
-<span class="lineNum">      74 </span><span class="lineCov">      51335 :         Resize(initial_capacity);</span>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">      51335 : }</span></a>
+<span class="lineNum">      73 </span><span class="lineCov">      51474 :         tuple_size = FLAG_SIZE + (group_serializer.TupleSize() + payload_width);</span>
+<span class="lineNum">      74 </span><span class="lineCov">      51474 :         Resize(initial_capacity);</span>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">      51474 : }</span></a>
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">      51335 : SuperLargeHashTable::~SuperLargeHashTable() {</span>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">      51335 : }</span></a>
+<span class="lineNum">      77 </span><span class="lineCov">      51474 : SuperLargeHashTable::~SuperLargeHashTable() {</span>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">      51474 : }</span></a>
 <span class="lineNum">      79 </span>            : 
-<span class="lineNum">      80 </span><span class="lineCov">      85322 : void SuperLargeHashTable::Resize(size_t size) {</span>
-<span class="lineNum">      81 </span><span class="lineCov">      85322 :         if (size &lt;= capacity) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">      85467 : void SuperLargeHashTable::Resize(size_t size) {</span>
+<span class="lineNum">      81 </span><span class="lineCov">      85467 :         if (size &lt;= capacity) {</span>
 <span class="lineNum">      82 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cannot downsize a hash table!&quot;);</span>
 <span class="lineNum">      83 </span>            :         }
 <span class="lineNum">      84 </span>            : 
-<span class="lineNum">      85 </span><span class="lineCov">      85322 :         if (entries &gt; 0) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">      85467 :         if (entries &gt; 0) {</span>
 <span class="lineNum">      86 </span><span class="lineNoCov">          0 :                 DataChunk groups;</span>
 <span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 DataChunk payload;</span>
 <span class="lineNum">      88 </span><span class="lineNoCov">          0 :                 size_t position = 0;</span>
@@ -172,33 +172,33 @@
 <span class="lineNum">     110 </span><span class="lineNoCov">          0 :                 this-&gt;capacity = new_table-&gt;capacity;</span>
 <span class="lineNum">     111 </span><span class="lineNoCov">          0 :                 this-&gt;max_chain = new_table-&gt;max_chain;</span>
 <span class="lineNum">     112 </span>            :         } else {
-<span class="lineNum">     113 </span><span class="lineCov">      85322 :                 data = new uint8_t[size * tuple_size];</span>
-<span class="lineNum">     114 </span><span class="lineCov">      85322 :                 owned_data = unique_ptr&lt;uint8_t[]&gt;(data);</span>
-<span class="lineNum">     115 </span><span class="lineCov">  122257738 :                 for (size_t i = 0; i &lt; size; i++) {</span>
-<span class="lineNum">     116 </span><span class="lineCov">  122172416 :                         data[i * tuple_size] = EMPTY_CELL;</span>
+<span class="lineNum">     113 </span><span class="lineCov">      85467 :                 data = new uint8_t[size * tuple_size];</span>
+<span class="lineNum">     114 </span><span class="lineCov">      85467 :                 owned_data = unique_ptr&lt;uint8_t[]&gt;(data);</span>
+<span class="lineNum">     115 </span><span class="lineCov">  122412507 :                 for (size_t i = 0; i &lt; size; i++) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">  122327040 :                         data[i * tuple_size] = EMPTY_CELL;</span>
 <span class="lineNum">     117 </span>            :                 }
 <span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span><span class="lineCov">      85322 :                 capacity = size;</span>
+<span class="lineNum">     119 </span><span class="lineCov">      85467 :                 capacity = size;</span>
 <span class="lineNum">     120 </span>            :         }
-<a name="121"><span class="lineNum">     121 </span><span class="lineCov">      85322 : }</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">      85467 : }</span></a>
 <span class="lineNum">     122 </span>            : 
-<span class="lineNum">     123 </span><span class="lineCov">      44247 : void SuperLargeHashTable::AddChunk(DataChunk &amp;groups, DataChunk &amp;payload,</span>
+<span class="lineNum">     123 </span><span class="lineCov">      44253 : void SuperLargeHashTable::AddChunk(DataChunk &amp;groups, DataChunk &amp;payload,</span>
 <span class="lineNum">     124 </span>            :                                    bool resize) {
-<span class="lineNum">     125 </span><span class="lineCov">      44247 :         if (groups.size() == 0) {</span>
+<span class="lineNum">     125 </span><span class="lineCov">      44253 :         if (groups.size() == 0) {</span>
 <span class="lineNum">     126 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">     127 </span>            :         }
 <span class="lineNum">     128 </span>            : 
-<span class="lineNum">     129 </span><span class="lineCov">      88494 :         StaticVector&lt;uint64_t&gt; addresses;</span>
-<span class="lineNum">     130 </span><span class="lineCov">      88494 :         StaticVector&lt;bool&gt; new_group_dummy;</span>
+<span class="lineNum">     129 </span><span class="lineCov">      88506 :         StaticVector&lt;uint64_t&gt; addresses;</span>
+<span class="lineNum">     130 </span><span class="lineCov">      88506 :         StaticVector&lt;bool&gt; new_group_dummy;</span>
 <span class="lineNum">     131 </span>            : 
-<span class="lineNum">     132 </span><span class="lineCov">      44247 :         FindOrCreateGroups(groups, addresses, new_group_dummy);</span>
+<span class="lineNum">     132 </span><span class="lineCov">      44253 :         FindOrCreateGroups(groups, addresses, new_group_dummy);</span>
 <span class="lineNum">     133 </span>            : 
 <span class="lineNum">     134 </span>            :         // now every cell has an entry
 <span class="lineNum">     135 </span>            :         // update the aggregates
-<span class="lineNum">     136 </span><span class="lineCov">     132741 :         Vector one(Value::BIGINT(1));</span>
-<span class="lineNum">     137 </span><span class="lineCov">      44247 :         size_t payload_idx = 0;</span>
+<span class="lineNum">     136 </span><span class="lineCov">     132759 :         Vector one(Value::BIGINT(1));</span>
+<span class="lineNum">     137 </span><span class="lineCov">      44253 :         size_t payload_idx = 0;</span>
 <span class="lineNum">     138 </span>            : 
-<span class="lineNum">     139 </span><span class="lineCov">     105997 :         for (size_t aggr_idx = 0; aggr_idx &lt; aggregate_types.size(); aggr_idx++) {</span>
+<span class="lineNum">     139 </span><span class="lineCov">     106003 :         for (size_t aggr_idx = 0; aggr_idx &lt; aggregate_types.size(); aggr_idx++) {</span>
 <span class="lineNum">     140 </span><span class="lineCov">      61750 :                 assert(payload.column_count &gt; payload_idx);</span>
 <span class="lineNum">     141 </span><span class="lineCov">      61750 :                 if (resize) {</span>
 <span class="lineNum">     142 </span>            :                         // in resize just set the values
@@ -311,70 +311,70 @@
 <span class="lineNum">     249 </span>            : 
 <a name="250"><span class="lineNum">     250 </span>            : // this is to support distinct aggregations where we need to record whether we</a>
 <span class="lineNum">     251 </span>            : // have already seen a value for a group
-<span class="lineNum">     252 </span><span class="lineCov">      44251 : void SuperLargeHashTable::FindOrCreateGroups(DataChunk &amp;groups,</span>
+<span class="lineNum">     252 </span><span class="lineCov">      44257 : void SuperLargeHashTable::FindOrCreateGroups(DataChunk &amp;groups,</span>
 <span class="lineNum">     253 </span>            :                                              Vector &amp;addresses,
 <span class="lineNum">     254 </span>            :                                              Vector &amp;new_group) {
 <span class="lineNum">     255 </span>            :         // resize at 50% capacity, also need to fit the entire vector
-<span class="lineNum">     256 </span><span class="lineCov">      44251 :         if (entries &gt; capacity / 2 || capacity - entries &lt;= STANDARD_VECTOR_SIZE) {</span>
-<span class="lineNum">     257 </span><span class="lineCov">      33987 :                 Resize(capacity * 2);</span>
+<span class="lineNum">     256 </span><span class="lineCov">      44257 :         if (entries &gt; capacity / 2 || capacity - entries &lt;= STANDARD_VECTOR_SIZE) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">      33993 :                 Resize(capacity * 2);</span>
 <span class="lineNum">     258 </span>            :         }
 <span class="lineNum">     259 </span>            : 
 <span class="lineNum">     260 </span>            :         // we need to be able to fit at least one vector of data
-<span class="lineNum">     261 </span><span class="lineCov">      44251 :         assert(capacity - entries &gt; STANDARD_VECTOR_SIZE);</span>
-<span class="lineNum">     262 </span><span class="lineCov">      44251 :         assert(new_group.type == TypeId::BOOLEAN);</span>
-<span class="lineNum">     263 </span><span class="lineCov">      44251 :         assert(addresses.type == TypeId::POINTER);</span>
+<span class="lineNum">     261 </span><span class="lineCov">      44257 :         assert(capacity - entries &gt; STANDARD_VECTOR_SIZE);</span>
+<span class="lineNum">     262 </span><span class="lineCov">      44257 :         assert(new_group.type == TypeId::BOOLEAN);</span>
+<span class="lineNum">     263 </span><span class="lineCov">      44257 :         assert(addresses.type == TypeId::POINTER);</span>
 <span class="lineNum">     264 </span>            : 
-<span class="lineNum">     265 </span><span class="lineCov">      44251 :         new_group.sel_vector = groups.data[0].sel_vector;</span>
+<span class="lineNum">     265 </span><span class="lineCov">      44257 :         new_group.sel_vector = groups.data[0].sel_vector;</span>
 <span class="lineNum">     266 </span>            : 
-<span class="lineNum">     267 </span><span class="lineCov">      44251 :         groups.Hash(addresses);</span>
+<span class="lineNum">     267 </span><span class="lineCov">      44257 :         groups.Hash(addresses);</span>
 <span class="lineNum">     268 </span>            : 
-<span class="lineNum">     269 </span><span class="lineCov">      44251 :         assert(addresses.sel_vector == groups.sel_vector);</span>
-<span class="lineNum">     270 </span><span class="lineCov">      44251 :         assert(addresses.type == TypeId::POINTER);</span>
+<span class="lineNum">     269 </span><span class="lineCov">      44257 :         assert(addresses.sel_vector == groups.sel_vector);</span>
+<span class="lineNum">     270 </span><span class="lineCov">      44257 :         assert(addresses.type == TypeId::POINTER);</span>
 <span class="lineNum">     271 </span>            :         // list of addresses for the tuples
-<span class="lineNum">     272 </span><span class="lineCov">      44251 :         auto data_pointers = (uint8_t **)addresses.data;</span>
+<span class="lineNum">     272 </span><span class="lineCov">      44257 :         auto data_pointers = (uint8_t **)addresses.data;</span>
 <span class="lineNum">     273 </span>            :         // now compute the entry in the table based on the hash using a modulo
 <span class="lineNum">     274 </span>            :         // multiply the position by the tuple size and add the base address
-<span class="lineNum">     275 </span><span class="lineCov">      44251 :         VectorOperations::ExecType&lt;uint64_t&gt;(</span>
+<span class="lineNum">     275 </span><span class="lineCov">      44257 :         VectorOperations::ExecType&lt;uint64_t&gt;(</span>
 <span class="lineNum">     276 </span>            :             addresses, [&amp;](uint64_t element, size_t i, size_t k) {
 <span class="lineNum">     277 </span>            :                     data_pointers[i] = data + ((element % capacity) * tuple_size);
 <span class="lineNum">     278 </span>            :             });
 <span class="lineNum">     279 </span>            : 
-<span class="lineNum">     280 </span><span class="lineCov">      44251 :         assert(addresses.sel_vector == groups.sel_vector);</span>
-<span class="lineNum">     281 </span><span class="lineCov">      44251 :         if (parallel) {</span>
+<span class="lineNum">     280 </span><span class="lineCov">      44257 :         assert(addresses.sel_vector == groups.sel_vector);</span>
+<span class="lineNum">     281 </span><span class="lineCov">      44257 :         if (parallel) {</span>
 <span class="lineNum">     282 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Parallel HT not implemented&quot;);</span>
 <span class="lineNum">     283 </span>            :         }
 <span class="lineNum">     284 </span>            : 
-<span class="lineNum">     285 </span><span class="lineCov">      44251 :         auto group_width = group_serializer.TupleSize();</span>
+<span class="lineNum">     285 </span><span class="lineCov">      44257 :         auto group_width = group_serializer.TupleSize();</span>
 <span class="lineNum">     286 </span>            : 
 <span class="lineNum">     287 </span>            :         // serialize the elements from the group to a tuple-wide format
-<span class="lineNum">     288 </span><span class="lineCov">      44251 :         uint8_t group_data[STANDARD_VECTOR_SIZE][group_width];</span>
-<span class="lineNum">     289 </span><span class="lineCov">      44251 :         uint8_t *group_elements[STANDARD_VECTOR_SIZE];</span>
-<span class="lineNum">     290 </span><span class="lineCov">     847225 :         for (size_t i = 0; i &lt; groups.size(); i++) {</span>
-<span class="lineNum">     291 </span><span class="lineCov">     802974 :                 group_elements[i] = group_data[i];</span>
+<span class="lineNum">     288 </span><span class="lineCov">      44257 :         uint8_t group_data[STANDARD_VECTOR_SIZE][group_width];</span>
+<span class="lineNum">     289 </span><span class="lineCov">      44257 :         uint8_t *group_elements[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     290 </span><span class="lineCov">     847237 :         for (size_t i = 0; i &lt; groups.size(); i++) {</span>
+<span class="lineNum">     291 </span><span class="lineCov">     802980 :                 group_elements[i] = group_data[i];</span>
 <span class="lineNum">     292 </span>            :         }
-<span class="lineNum">     293 </span><span class="lineCov">      44251 :         group_serializer.Serialize(groups, group_elements);</span>
+<span class="lineNum">     293 </span><span class="lineCov">      44257 :         group_serializer.Serialize(groups, group_elements);</span>
 <span class="lineNum">     294 </span>            : 
 <span class="lineNum">     295 </span>            :         // now we actually access the base table
-<span class="lineNum">     296 </span><span class="lineCov">     847225 :         for (size_t i = 0; i &lt; addresses.count; i++) {</span>
+<span class="lineNum">     296 </span><span class="lineCov">     847237 :         for (size_t i = 0; i &lt; addresses.count; i++) {</span>
 <span class="lineNum">     297 </span>            :                 // place this tuple in the hash table
-<span class="lineNum">     298 </span><span class="lineCov">     802974 :                 size_t index = addresses.sel_vector ? addresses.sel_vector[i] : i;</span>
-<span class="lineNum">     299 </span><span class="lineCov">     802974 :                 auto entry = data_pointers[index];</span>
-<span class="lineNum">     300 </span><span class="lineCov">     802974 :                 assert(entry &gt;= data &amp;&amp; entry &lt; data + capacity * tuple_size);</span>
+<span class="lineNum">     298 </span><span class="lineCov">     802980 :                 size_t index = addresses.sel_vector ? addresses.sel_vector[i] : i;</span>
+<span class="lineNum">     299 </span><span class="lineCov">     802980 :                 auto entry = data_pointers[index];</span>
+<span class="lineNum">     300 </span><span class="lineCov">     802980 :                 assert(entry &gt;= data &amp;&amp; entry &lt; data + capacity * tuple_size);</span>
 <span class="lineNum">     301 </span>            : 
-<span class="lineNum">     302 </span><span class="lineCov">     802974 :                 size_t chain = 0;</span>
+<span class="lineNum">     302 </span><span class="lineCov">     802980 :                 size_t chain = 0;</span>
 <span class="lineNum">     303 </span>            :                 do {
 <span class="lineNum">     304 </span>            :                         // check if the group is the actual group for this tuple or if it is
 <span class="lineNum">     305 </span>            :                         // empty otherwise we have to do linear probing
-<span class="lineNum">     306 </span><span class="lineCov">     802977 :                         if (*entry == EMPTY_CELL) {</span>
+<span class="lineNum">     306 </span><span class="lineCov">     802983 :                         if (*entry == EMPTY_CELL) {</span>
 <span class="lineNum">     307 </span>            :                                 // cell is empty; zero initialize the aggregates and add an
 <span class="lineNum">     308 </span>            :                                 // entry
-<span class="lineNum">     309 </span><span class="lineCov">      34041 :                                 *entry = FULL_CELL;</span>
-<span class="lineNum">     310 </span><span class="lineCov">      34041 :                                 memcpy(entry + FLAG_SIZE, group_elements[i], group_width);</span>
-<span class="lineNum">     311 </span><span class="lineCov">      68082 :                                 memcpy(entry + FLAG_SIZE + group_width,</span>
-<span class="lineNum">     312 </span><span class="lineCov">      34041 :                                        empty_payload_data.get(), payload_width);</span>
-<span class="lineNum">     313 </span><span class="lineCov">      34041 :                                 entries++;</span>
-<span class="lineNum">     314 </span><span class="lineCov">      34041 :                                 new_group.data[index] = 1;</span>
-<span class="lineNum">     315 </span><span class="lineCov">      34041 :                                 break;</span>
+<span class="lineNum">     309 </span><span class="lineCov">      34047 :                                 *entry = FULL_CELL;</span>
+<span class="lineNum">     310 </span><span class="lineCov">      34047 :                                 memcpy(entry + FLAG_SIZE, group_elements[i], group_width);</span>
+<span class="lineNum">     311 </span><span class="lineCov">      68094 :                                 memcpy(entry + FLAG_SIZE + group_width,</span>
+<span class="lineNum">     312 </span><span class="lineCov">      34047 :                                        empty_payload_data.get(), payload_width);</span>
+<span class="lineNum">     313 </span><span class="lineCov">      34047 :                                 entries++;</span>
+<span class="lineNum">     314 </span><span class="lineCov">      34047 :                                 new_group.data[index] = 1;</span>
+<span class="lineNum">     315 </span><span class="lineCov">      34047 :                                 break;</span>
 <span class="lineNum">     316 </span>            :                         }
 <span class="lineNum">     317 </span><span class="lineCov">    3075744 :                         if (group_serializer.Compare(group_elements[i],</span>
 <span class="lineNum">     318 </span><span class="lineCov">     768936 :                                                      entry + FLAG_SIZE) == 0) {</span>
@@ -392,52 +392,52 @@
 <span class="lineNum">     330 </span>            :                 } while (true);
 <span class="lineNum">     331 </span>            : 
 <span class="lineNum">     332 </span>            :                 // update the address pointer with the final position
-<span class="lineNum">     333 </span><span class="lineCov">     802974 :                 data_pointers[index] = entry + FLAG_SIZE + group_width;</span>
-<span class="lineNum">     334 </span><span class="lineCov">     802974 :                 max_chain = max(chain, max_chain);</span>
-<span class="lineNum">     335 </span><span class="lineCov">      44251 :         }</span>
-<a name="336"><span class="lineNum">     336 </span><span class="lineCov">      44251 : }</span></a>
+<span class="lineNum">     333 </span><span class="lineCov">     802980 :                 data_pointers[index] = entry + FLAG_SIZE + group_width;</span>
+<span class="lineNum">     334 </span><span class="lineCov">     802980 :                 max_chain = max(chain, max_chain);</span>
+<span class="lineNum">     335 </span><span class="lineCov">      44257 :         }</span>
+<a name="336"><span class="lineNum">     336 </span><span class="lineCov">      44257 : }</span></a>
 <span class="lineNum">     337 </span>            : 
-<span class="lineNum">     338 </span><span class="lineCov">      52420 : size_t SuperLargeHashTable::Scan(size_t &amp;scan_position, DataChunk &amp;groups,</span>
+<span class="lineNum">     338 </span><span class="lineCov">      52539 : size_t SuperLargeHashTable::Scan(size_t &amp;scan_position, DataChunk &amp;groups,</span>
 <span class="lineNum">     339 </span>            :                                  DataChunk &amp;result) {
 <span class="lineNum">     340 </span>            :         uint8_t *ptr;
-<span class="lineNum">     341 </span><span class="lineCov">      52420 :         uint8_t *start = data + scan_position;</span>
-<span class="lineNum">     342 </span><span class="lineCov">      52420 :         uint8_t *end = data + capacity * tuple_size;</span>
-<span class="lineNum">     343 </span><span class="lineCov">      52420 :         if (start &gt;= end)</span>
-<span class="lineNum">     344 </span><span class="lineCov">       1090 :                 return 0;</span>
+<span class="lineNum">     341 </span><span class="lineCov">      52539 :         uint8_t *start = data + scan_position;</span>
+<span class="lineNum">     342 </span><span class="lineCov">      52539 :         uint8_t *end = data + capacity * tuple_size;</span>
+<span class="lineNum">     343 </span><span class="lineCov">      52539 :         if (start &gt;= end)</span>
+<span class="lineNum">     344 </span><span class="lineCov">       1096 :                 return 0;</span>
 <span class="lineNum">     345 </span>            : 
-<span class="lineNum">     346 </span><span class="lineCov">     102660 :         Vector addresses(TypeId::POINTER, true, false);</span>
-<span class="lineNum">     347 </span><span class="lineCov">      51330 :         auto data_pointers = (uint8_t **)addresses.data;</span>
+<span class="lineNum">     346 </span><span class="lineCov">     102886 :         Vector addresses(TypeId::POINTER, true, false);</span>
+<span class="lineNum">     347 </span><span class="lineCov">      51443 :         auto data_pointers = (uint8_t **)addresses.data;</span>
 <span class="lineNum">     348 </span>            : 
 <span class="lineNum">     349 </span>            :         // scan the table for full cells starting from the scan position
-<span class="lineNum">     350 </span><span class="lineCov">      51330 :         size_t entry = 0;</span>
-<span class="lineNum">     351 </span><span class="lineCov">   87411842 :         for (ptr = start; ptr &lt; end &amp;&amp; entry &lt; STANDARD_VECTOR_SIZE;</span>
-<span class="lineNum">     352 </span><span class="lineCov">   87360512 :              ptr += tuple_size) {</span>
-<span class="lineNum">     353 </span><span class="lineCov">   87360512 :                 if (*ptr == FULL_CELL) {</span>
+<span class="lineNum">     350 </span><span class="lineCov">      51443 :         size_t entry = 0;</span>
+<span class="lineNum">     351 </span><span class="lineCov">   87533811 :         for (ptr = start; ptr &lt; end &amp;&amp; entry &lt; STANDARD_VECTOR_SIZE;</span>
+<span class="lineNum">     352 </span><span class="lineCov">   87482368 :              ptr += tuple_size) {</span>
+<span class="lineNum">     353 </span><span class="lineCov">   87482368 :                 if (*ptr == FULL_CELL) {</span>
 <span class="lineNum">     354 </span>            :                         // found entry
-<span class="lineNum">     355 </span><span class="lineCov">      34031 :                         data_pointers[entry++] = ptr + FLAG_SIZE;</span>
+<span class="lineNum">     355 </span><span class="lineCov">      34037 :                         data_pointers[entry++] = ptr + FLAG_SIZE;</span>
 <span class="lineNum">     356 </span>            :                 }
 <span class="lineNum">     357 </span>            :         }
-<span class="lineNum">     358 </span><span class="lineCov">      51330 :         if (entry == 0) {</span>
-<span class="lineNum">     359 </span><span class="lineCov">      17347 :                 return 0;</span>
+<span class="lineNum">     358 </span><span class="lineCov">      51443 :         if (entry == 0) {</span>
+<span class="lineNum">     359 </span><span class="lineCov">      17454 :                 return 0;</span>
 <span class="lineNum">     360 </span>            :         }
-<span class="lineNum">     361 </span><span class="lineCov">      33983 :         addresses.count = entry;</span>
+<span class="lineNum">     361 </span><span class="lineCov">      33989 :         addresses.count = entry;</span>
 <span class="lineNum">     362 </span>            :         // fetch the group columns
-<span class="lineNum">     363 </span><span class="lineCov">      67976 :         for (size_t i = 0; i &lt; groups.column_count; i++) {</span>
-<span class="lineNum">     364 </span><span class="lineCov">      33993 :                 auto &amp;column = groups.data[i];</span>
-<span class="lineNum">     365 </span><span class="lineCov">      33993 :                 column.count = entry;</span>
-<span class="lineNum">     366 </span><span class="lineCov">      33993 :                 VectorOperations::Gather::Set(addresses, column);</span>
-<span class="lineNum">     367 </span><span class="lineCov">      33993 :                 VectorOperations::AddInPlace(addresses, GetTypeIdSize(column.type));</span>
+<span class="lineNum">     363 </span><span class="lineCov">      68004 :         for (size_t i = 0; i &lt; groups.column_count; i++) {</span>
+<span class="lineNum">     364 </span><span class="lineCov">      34015 :                 auto &amp;column = groups.data[i];</span>
+<span class="lineNum">     365 </span><span class="lineCov">      34015 :                 column.count = entry;</span>
+<span class="lineNum">     366 </span><span class="lineCov">      34015 :                 VectorOperations::Gather::Set(addresses, column);</span>
+<span class="lineNum">     367 </span><span class="lineCov">      34015 :                 VectorOperations::AddInPlace(addresses, GetTypeIdSize(column.type));</span>
 <span class="lineNum">     368 </span>            :         }
 <span class="lineNum">     369 </span>            : 
-<span class="lineNum">     370 </span><span class="lineCov">      85474 :         for (size_t i = 0; i &lt; aggregate_types.size(); i++) {</span>
+<span class="lineNum">     370 </span><span class="lineCov">      85480 :         for (size_t i = 0; i &lt; aggregate_types.size(); i++) {</span>
 <span class="lineNum">     371 </span><span class="lineCov">      51491 :                 auto &amp;target = result.data[i];</span>
 <span class="lineNum">     372 </span><span class="lineCov">      51491 :                 target.count = entry;</span>
 <span class="lineNum">     373 </span>            : 
 <span class="lineNum">     374 </span><span class="lineCov">      51491 :                 VectorOperations::Gather::Set(addresses, target);</span>
 <span class="lineNum">     375 </span><span class="lineCov">      51491 :                 VectorOperations::AddInPlace(addresses, GetTypeIdSize(target.type));</span>
 <span class="lineNum">     376 </span>            :         }
-<span class="lineNum">     377 </span><span class="lineCov">      33983 :         scan_position = ptr - data;</span>
-<span class="lineNum">     378 </span><span class="lineCov">      33983 :         return entry;</span>
+<span class="lineNum">     377 </span><span class="lineCov">      33989 :         scan_position = ptr - data;</span>
+<span class="lineNum">     378 </span><span class="lineCov">      33989 :         return entry;</span>
 <span class="lineNum">     379 </span>            : }
 </pre>
       </td>

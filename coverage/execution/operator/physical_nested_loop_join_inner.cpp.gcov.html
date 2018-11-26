@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c6b5d78 - execution/operator/physical_nested_loop_join_inner.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report e7b2455 - execution/operator/physical_nested_loop_join_inner.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c6b5d78</td>
+            <td class="headerValue">DuckDB Code Coverage Report e7b2455</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">78</td>
+            <td class="headerCovTableEntry">107</td>
             <td class="headerCovTableEntry">2353</td>
-            <td class="headerCovTableEntryLo">3.3 %</td>
+            <td class="headerCovTableEntryLo">4.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 10:03:35</td>
+            <td class="headerValue">2018-11-26 11:17:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntry">101</td>
-            <td class="headerCovTableEntryLo">3.0 %</td>
+            <td class="headerCovTableEntryLo">5.9 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -74,14 +74,14 @@
 <span class="lineNum">      12 </span>            : 
 <a name="13"><span class="lineNum">      13 </span>            : namespace duckdb {</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineNoCov">          0 : PhysicalNestedLoopJoinInner::PhysicalNestedLoopJoinInner(</span>
+<span class="lineNum">      15 </span><span class="lineCov">          2 : PhysicalNestedLoopJoinInner::PhysicalNestedLoopJoinInner(</span>
 <span class="lineNum">      16 </span>            :     unique_ptr&lt;PhysicalOperator&gt; left, unique_ptr&lt;PhysicalOperator&gt; right,
-<span class="lineNum">      17 </span><span class="lineNoCov">          0 :     vector&lt;JoinCondition&gt; cond, JoinType join_type)</span>
-<span class="lineNum">      18 </span><span class="lineNoCov">          0 :     : PhysicalJoin(PhysicalOperatorType::NESTED_LOOP_JOIN, move(cond),</span>
-<span class="lineNum">      19 </span><span class="lineNoCov">          0 :                    join_type) {</span>
-<span class="lineNum">      20 </span><span class="lineNoCov">          0 :         children.push_back(move(left));</span>
-<span class="lineNum">      21 </span><span class="lineNoCov">          0 :         children.push_back(move(right));</span>
-<span class="lineNum">      22 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">      17 </span><span class="lineCov">          2 :     vector&lt;JoinCondition&gt; cond, JoinType join_type)</span>
+<span class="lineNum">      18 </span><span class="lineCov">          2 :     : PhysicalJoin(PhysicalOperatorType::NESTED_LOOP_JOIN, move(cond),</span>
+<span class="lineNum">      19 </span><span class="lineCov">          4 :                    join_type) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">          2 :         children.push_back(move(left));</span>
+<span class="lineNum">      21 </span><span class="lineCov">          2 :         children.push_back(move(right));</span>
+<span class="lineNum">      22 </span><span class="lineCov">          2 : }</span>
 <a name="23"><span class="lineNum">      23 </span>            : </a>
 <span class="lineNum">      24 </span>            : template &lt;class T, class OP&gt;
 <span class="lineNum">      25 </span><span class="lineCov">        621 : static size_t templated_nested_loop_join(Vector &amp;left, Vector &amp;right,</span>

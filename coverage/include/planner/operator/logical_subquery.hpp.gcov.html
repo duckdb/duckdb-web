@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c6b5d78 - include/planner/operator/logical_subquery.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report e7b2455 - include/planner/operator/logical_subquery.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c6b5d78</td>
+            <td class="headerValue">DuckDB Code Coverage Report e7b2455</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 10:03:35</td>
+            <td class="headerValue">2018-11-26 11:17:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -82,18 +82,18 @@
 <span class="lineNum">      20 </span>            : //! into the actual subquery).
 <a name="21"><span class="lineNum">      21 </span>            : class LogicalSubquery : public LogicalOperator {</a>
 <span class="lineNum">      22 </span>            :   public:
-<span class="lineNum">      23 </span><span class="lineCov">        607 :         LogicalSubquery(size_t table_index, size_t column_count)</span>
-<span class="lineNum">      24 </span><span class="lineCov">        607 :             : LogicalOperator(LogicalOperatorType::SUBQUERY),</span>
-<span class="lineNum">      25 </span><span class="lineCov">        607 :               table_index(table_index), column_count(column_count) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">        607 :                 referenced_tables.insert(table_index);</span>
-<span class="lineNum">      27 </span><span class="lineCov">        607 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">        745 :         LogicalSubquery(size_t table_index, size_t column_count)</span>
+<span class="lineNum">      24 </span><span class="lineCov">        745 :             : LogicalOperator(LogicalOperatorType::SUBQUERY),</span>
+<span class="lineNum">      25 </span><span class="lineCov">        745 :               table_index(table_index), column_count(column_count) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">        745 :                 referenced_tables.insert(table_index);</span>
+<span class="lineNum">      27 </span><span class="lineCov">        745 :         }</span>
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span>            :         size_t table_index;
 <a name="30"><span class="lineNum">      30 </span>            :         size_t column_count;</a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">       1208 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      33 </span><span class="lineCov">       1208 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      34 </span><span class="lineCov">       1208 :         }</span>
+<span class="lineNum">      32 </span><span class="lineCov">       1484 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      33 </span><span class="lineCov">       1484 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      34 </span><span class="lineCov">       1484 :         }</span>
 <span class="lineNum">      35 </span>            : };
 <span class="lineNum">      36 </span>            : } // namespace duckdb
 </pre>

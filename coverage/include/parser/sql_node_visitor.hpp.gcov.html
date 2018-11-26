@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c6b5d78 - include/parser/sql_node_visitor.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report e7b2455 - include/parser/sql_node_visitor.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c6b5d78</td>
+            <td class="headerValue">DuckDB Code Coverage Report e7b2455</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">26</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 10:03:35</td>
+            <td class="headerValue">2018-11-26 11:17:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -120,7 +120,7 @@
 <span class="lineNum">      58 </span>            : //! visited.
 <a name="59"><span class="lineNum">      59 </span>            : class SQLNodeVisitor {</a>
 <span class="lineNum">      60 </span>            :   public:
-<a name="61"><span class="lineNum">      61 </span><span class="lineCov">     334956 :         virtual ~SQLNodeVisitor(){};</span></a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">     335920 :         virtual ~SQLNodeVisitor(){};</span></a>
 <span class="lineNum">      62 </span>            : 
 <span class="lineNum">      63 </span><span class="lineNoCov">          0 :         virtual std::unique_ptr&lt;SQLStatement&gt; Visit(CopyStatement &amp;) {</span>
 <a name="64"><span class="lineNum">      64 </span><span class="lineNoCov">          0 :                 return nullptr;</span></a>
@@ -170,8 +170,8 @@
 <span class="lineNum">     108 </span>            :         virtual std::unique_ptr&lt;Expression&gt; Visit(StarExpression &amp;expr);
 <a name="109"><span class="lineNum">     109 </span>            :         virtual std::unique_ptr&lt;Expression&gt; Visit(SubqueryExpression &amp;expr);</a>
 <span class="lineNum">     110 </span>            : 
-<span class="lineNum">     111 </span><span class="lineCov">          1 :         virtual std::unique_ptr&lt;Constraint&gt; Visit(NotNullConstraint &amp;expr) {</span>
-<span class="lineNum">     112 </span><span class="lineCov">          1 :                 return nullptr;</span>
+<span class="lineNum">     111 </span><span class="lineCov">         47 :         virtual std::unique_ptr&lt;Constraint&gt; Visit(NotNullConstraint &amp;expr) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">         47 :                 return nullptr;</span>
 <a name="113"><span class="lineNum">     113 </span>            :         };</a>
 <span class="lineNum">     114 </span>            :         virtual std::unique_ptr&lt;Constraint&gt; Visit(CheckConstraint &amp;expr);
 <span class="lineNum">     115 </span><span class="lineCov">         11 :         virtual std::unique_ptr&lt;Constraint&gt; Visit(ParsedConstraint &amp;expr) {</span>
@@ -190,15 +190,15 @@
 <span class="lineNum">     128 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <a name="129"><span class="lineNum">     129 </span>            :         };</a>
 <span class="lineNum">     130 </span>            : 
-<span class="lineNum">     131 </span><span class="lineCov">     182291 :         template &lt;class T&gt; void AcceptChild(std::unique_ptr&lt;T&gt; *accept) {</span>
-<span class="lineNum">     132 </span><span class="lineCov">     182291 :                 assert(accept);</span>
-<span class="lineNum">     133 </span><span class="lineCov">     364575 :                 auto accept_res = (*accept)-&gt;Accept(this);</span>
-<span class="lineNum">     134 </span><span class="lineCov">     182284 :                 if (accept_res) {</span>
-<span class="lineNum">     135 </span><span class="lineCov">         17 :                         (*accept) = std::unique_ptr&lt;T&gt;((T *)accept_res.release());</span>
+<span class="lineNum">     131 </span><span class="lineCov">     187556 :         template &lt;class T&gt; void AcceptChild(std::unique_ptr&lt;T&gt; *accept) {</span>
+<span class="lineNum">     132 </span><span class="lineCov">     187556 :                 assert(accept);</span>
+<span class="lineNum">     133 </span><span class="lineCov">     375105 :                 auto accept_res = (*accept)-&gt;Accept(this);</span>
+<span class="lineNum">     134 </span><span class="lineCov">     187549 :                 if (accept_res) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">         72 :                         (*accept) = std::unique_ptr&lt;T&gt;((T *)accept_res.release());</span>
 <span class="lineNum">     136 </span>            :                 }
-<span class="lineNum">     137 </span><span class="lineCov">     182284 :         }</span>
-<span class="lineNum">     138 </span><span class="lineCov">         23 : };</span>
-<span class="lineNum">     139 </span><span class="lineCov">         23 : } // namespace duckdb</span>
+<span class="lineNum">     137 </span><span class="lineCov">     187549 :         }</span>
+<span class="lineNum">     138 </span><span class="lineCov">         78 : };</span>
+<span class="lineNum">     139 </span><span class="lineCov">         78 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>
