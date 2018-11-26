@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 441eaae - parser/transform/transform_statement.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d6ad023 - parser/transform/transform_statement.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
+            <td class="headerValue">DuckDB Code Coverage Report d6ad023</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">319</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 17:00:20</td>
+            <td class="headerValue">2018-11-26 17:09:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">17</td>
@@ -606,19 +606,19 @@
 <span class="lineNum">     544 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="545"><span class="lineNum">     545 </span>            : }</a>
 <span class="lineNum">     546 </span>            : 
-<span class="lineNum">     547 </span><span class="lineCov">          6 : unique_ptr&lt;CopyStatement&gt; TransformCopy(Node *node) {</span>
-<span class="lineNum">     548 </span><span class="lineCov">         18 :         const string kDelimiterTok = &quot;delimiter&quot;;</span>
-<span class="lineNum">     549 </span><span class="lineCov">         18 :         const string kFormatTok = &quot;format&quot;;</span>
-<span class="lineNum">     550 </span><span class="lineCov">         18 :         const string kQuoteTok = &quot;quote&quot;;</span>
-<span class="lineNum">     551 </span><span class="lineCov">         18 :         const string kEscapeTok = &quot;escape&quot;;</span>
+<span class="lineNum">     547 </span><span class="lineCov">          7 : unique_ptr&lt;CopyStatement&gt; TransformCopy(Node *node) {</span>
+<span class="lineNum">     548 </span><span class="lineCov">         21 :         const string kDelimiterTok = &quot;delimiter&quot;;</span>
+<span class="lineNum">     549 </span><span class="lineCov">         21 :         const string kFormatTok = &quot;format&quot;;</span>
+<span class="lineNum">     550 </span><span class="lineCov">         21 :         const string kQuoteTok = &quot;quote&quot;;</span>
+<span class="lineNum">     551 </span><span class="lineCov">         21 :         const string kEscapeTok = &quot;escape&quot;;</span>
 <span class="lineNum">     552 </span>            : 
-<span class="lineNum">     553 </span><span class="lineCov">          6 :         CopyStmt *stmt = reinterpret_cast&lt;CopyStmt *&gt;(node);</span>
-<span class="lineNum">     554 </span><span class="lineCov">          6 :         assert(stmt);</span>
-<span class="lineNum">     555 </span><span class="lineCov">          6 :         auto result = make_unique&lt;CopyStatement&gt;();</span>
-<span class="lineNum">     556 </span><span class="lineCov">          6 :         result-&gt;file_path = stmt-&gt;filename;</span>
-<span class="lineNum">     557 </span><span class="lineCov">          6 :         result-&gt;is_from = stmt-&gt;is_from;</span>
+<span class="lineNum">     553 </span><span class="lineCov">          7 :         CopyStmt *stmt = reinterpret_cast&lt;CopyStmt *&gt;(node);</span>
+<span class="lineNum">     554 </span><span class="lineCov">          7 :         assert(stmt);</span>
+<span class="lineNum">     555 </span><span class="lineCov">          7 :         auto result = make_unique&lt;CopyStatement&gt;();</span>
+<span class="lineNum">     556 </span><span class="lineCov">          7 :         result-&gt;file_path = stmt-&gt;filename;</span>
+<span class="lineNum">     557 </span><span class="lineCov">          7 :         result-&gt;is_from = stmt-&gt;is_from;</span>
 <span class="lineNum">     558 </span>            : 
-<span class="lineNum">     559 </span><span class="lineCov">          6 :         if (stmt-&gt;attlist) {</span>
+<span class="lineNum">     559 </span><span class="lineCov">          7 :         if (stmt-&gt;attlist) {</span>
 <span class="lineNum">     560 </span><span class="lineCov">          6 :                 for (auto n = stmt-&gt;attlist-&gt;head; n != nullptr; n = n-&gt;next) {</span>
 <span class="lineNum">     561 </span><span class="lineCov">          4 :                         auto target = reinterpret_cast&lt;ResTarget *&gt;(n-&gt;data.ptr_value);</span>
 <span class="lineNum">     562 </span><span class="lineCov">          4 :                         if (target-&gt;name) {</span>
@@ -627,13 +627,13 @@
 <span class="lineNum">     565 </span>            :                 }
 <span class="lineNum">     566 </span>            :         }
 <span class="lineNum">     567 </span>            : 
-<span class="lineNum">     568 </span><span class="lineCov">          6 :         if (stmt-&gt;relation) {</span>
-<span class="lineNum">     569 </span><span class="lineCov">         10 :                 auto ref = TransformRangeVar(stmt-&gt;relation);</span>
-<span class="lineNum">     570 </span><span class="lineCov">          5 :                 if (result-&gt;is_from) {</span>
+<span class="lineNum">     568 </span><span class="lineCov">          7 :         if (stmt-&gt;relation) {</span>
+<span class="lineNum">     569 </span><span class="lineCov">         12 :                 auto ref = TransformRangeVar(stmt-&gt;relation);</span>
+<span class="lineNum">     570 </span><span class="lineCov">          6 :                 if (result-&gt;is_from) {</span>
 <span class="lineNum">     571 </span>            :                         // copy file into table
-<span class="lineNum">     572 </span><span class="lineCov">          3 :                         auto &amp;table = *reinterpret_cast&lt;BaseTableRef *&gt;(ref.get());</span>
-<span class="lineNum">     573 </span><span class="lineCov">          3 :                         result-&gt;table = table.table_name;</span>
-<span class="lineNum">     574 </span><span class="lineCov">          3 :                         result-&gt;schema = table.schema_name;</span>
+<span class="lineNum">     572 </span><span class="lineCov">          4 :                         auto &amp;table = *reinterpret_cast&lt;BaseTableRef *&gt;(ref.get());</span>
+<span class="lineNum">     573 </span><span class="lineCov">          4 :                         result-&gt;table = table.table_name;</span>
+<span class="lineNum">     574 </span><span class="lineCov">          4 :                         result-&gt;schema = table.schema_name;</span>
 <span class="lineNum">     575 </span>            :                 } else {
 <span class="lineNum">     576 </span>            :                         // copy table into file, generate SELECT * FROM table;
 <span class="lineNum">     577 </span><span class="lineCov">          4 :                         auto statement = make_unique&lt;SelectStatement&gt;();</span>
@@ -653,39 +653,39 @@
 <span class="lineNum">     591 </span>            :         }
 <span class="lineNum">     592 </span>            : 
 <span class="lineNum">     593 </span>            :         // Handle options
-<span class="lineNum">     594 </span><span class="lineCov">          6 :         if (stmt-&gt;options) {</span>
-<span class="lineNum">     595 </span><span class="lineCov">          1 :                 ListCell *cell = nullptr;</span>
-<span class="lineNum">     596 </span><span class="lineCov">          2 :                 for_each_cell(cell, stmt-&gt;options-&gt;head) {</span>
-<span class="lineNum">     597 </span><span class="lineCov">          1 :                         auto *def_elem = reinterpret_cast&lt;DefElem *&gt;(cell-&gt;data.ptr_value);</span>
+<span class="lineNum">     594 </span><span class="lineCov">          7 :         if (stmt-&gt;options) {</span>
+<span class="lineNum">     595 </span><span class="lineCov">          2 :                 ListCell *cell = nullptr;</span>
+<span class="lineNum">     596 </span><span class="lineCov">          4 :                 for_each_cell(cell, stmt-&gt;options-&gt;head) {</span>
+<span class="lineNum">     597 </span><span class="lineCov">          2 :                         auto *def_elem = reinterpret_cast&lt;DefElem *&gt;(cell-&gt;data.ptr_value);</span>
 <span class="lineNum">     598 </span>            : 
 <span class="lineNum">     599 </span>            :                         // Check delimiter
-<span class="lineNum">     600 </span><span class="lineCov">          1 :                         if (def_elem-&gt;defname == kDelimiterTok) {</span>
-<span class="lineNum">     601 </span><span class="lineCov">          1 :                                 auto *delimiter_val = reinterpret_cast&lt;value *&gt;(def_elem-&gt;arg);</span>
-<span class="lineNum">     602 </span><span class="lineCov">          1 :                                 result-&gt;delimiter = *delimiter_val-&gt;val.str;</span>
+<span class="lineNum">     600 </span><span class="lineCov">          2 :                         if (def_elem-&gt;defname == kDelimiterTok) {</span>
+<span class="lineNum">     601 </span><span class="lineCov">          2 :                                 auto *delimiter_val = reinterpret_cast&lt;value *&gt;(def_elem-&gt;arg);</span>
+<span class="lineNum">     602 </span><span class="lineCov">          2 :                                 result-&gt;delimiter = *delimiter_val-&gt;val.str;</span>
 <span class="lineNum">     603 </span>            :                         }
 <span class="lineNum">     604 </span>            : 
 <span class="lineNum">     605 </span>            :                         // Check format
-<span class="lineNum">     606 </span><span class="lineCov">          1 :                         if (def_elem-&gt;defname == kFormatTok) {</span>
+<span class="lineNum">     606 </span><span class="lineCov">          2 :                         if (def_elem-&gt;defname == kFormatTok) {</span>
 <span class="lineNum">     607 </span><span class="lineNoCov">          0 :                                 auto *format_val = reinterpret_cast&lt;value *&gt;(def_elem-&gt;arg);</span>
 <span class="lineNum">     608 </span><span class="lineNoCov">          0 :                                 result-&gt;format =</span>
 <span class="lineNum">     609 </span><span class="lineNoCov">          0 :                                     StringToExternalFileFormat(format_val-&gt;val.str);</span>
 <span class="lineNum">     610 </span>            :                         }
 <span class="lineNum">     611 </span>            : 
 <span class="lineNum">     612 </span>            :                         // Check quote
-<span class="lineNum">     613 </span><span class="lineCov">          1 :                         if (def_elem-&gt;defname == kQuoteTok) {</span>
+<span class="lineNum">     613 </span><span class="lineCov">          2 :                         if (def_elem-&gt;defname == kQuoteTok) {</span>
 <span class="lineNum">     614 </span><span class="lineNoCov">          0 :                                 auto *quote_val = reinterpret_cast&lt;value *&gt;(def_elem-&gt;arg);</span>
 <span class="lineNum">     615 </span><span class="lineNoCov">          0 :                                 result-&gt;quote = *quote_val-&gt;val.str;</span>
 <span class="lineNum">     616 </span>            :                         }
 <span class="lineNum">     617 </span>            : 
 <span class="lineNum">     618 </span>            :                         // Check escape
-<span class="lineNum">     619 </span><span class="lineCov">          1 :                         if (def_elem-&gt;defname == kEscapeTok) {</span>
+<span class="lineNum">     619 </span><span class="lineCov">          2 :                         if (def_elem-&gt;defname == kEscapeTok) {</span>
 <span class="lineNum">     620 </span><span class="lineNoCov">          0 :                                 auto *escape_val = reinterpret_cast&lt;value *&gt;(def_elem-&gt;arg);</span>
 <span class="lineNum">     621 </span><span class="lineNoCov">          0 :                                 result-&gt;escape = *escape_val-&gt;val.str;</span>
 <span class="lineNum">     622 </span>            :                         }
 <span class="lineNum">     623 </span>            :                 }
 <span class="lineNum">     624 </span>            :         }
 <span class="lineNum">     625 </span>            : 
-<span class="lineNum">     626 </span><span class="lineCov">         12 :         return result;</span>
+<span class="lineNum">     626 </span><span class="lineCov">         14 :         return result;</span>
 <a name="627"><span class="lineNum">     627 </span>            : }</a>
 <span class="lineNum">     628 </span>            : 
 <span class="lineNum">     629 </span><span class="lineCov">        262 : unique_ptr&lt;TransactionStatement&gt; TransformTransaction(Node *node) {</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 441eaae - storage/data_table.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d6ad023 - storage/data_table.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
+            <td class="headerValue">DuckDB Code Coverage Report d6ad023</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">211</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 17:00:20</td>
+            <td class="headerValue">2018-11-26 17:09:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -134,9 +134,9 @@
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :         return nullptr;</span>
 <a name="73"><span class="lineNum">      73 </span>            : }</a>
 <span class="lineNum">      74 </span>            : 
-<span class="lineNum">      75 </span><span class="lineCov">      26729 : void DataTable::VerifyConstraints(TableCatalogEntry &amp;table,</span>
+<span class="lineNum">      75 </span><span class="lineCov">      26730 : void DataTable::VerifyConstraints(TableCatalogEntry &amp;table,</span>
 <span class="lineNum">      76 </span>            :                                   ClientContext &amp;context, DataChunk &amp;chunk) {
-<span class="lineNum">      77 </span><span class="lineCov">      26791 :         for (auto &amp;constraint : table.constraints) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">      26792 :         for (auto &amp;constraint : table.constraints) {</span>
 <span class="lineNum">      78 </span><span class="lineCov">         71 :                 switch (constraint-&gt;type) {</span>
 <span class="lineNum">      79 </span><span class="lineCov">          7 :                 case ConstraintType::NOT_NULL: {</span>
 <span class="lineNum">      80 </span>            :                         auto &amp;not_null =
@@ -189,24 +189,24 @@
 <span class="lineNum">     127 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Constraint type not implemented!&quot;);</span>
 <span class="lineNum">     128 </span>            :                 }
 <span class="lineNum">     129 </span>            :         }
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">      26720 : }</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">      26721 : }</span></a>
 <span class="lineNum">     131 </span>            : 
-<span class="lineNum">     132 </span><span class="lineCov">      24708 : void DataTable::Append(TableCatalogEntry &amp;table, ClientContext &amp;context,</span>
+<span class="lineNum">     132 </span><span class="lineCov">      24709 : void DataTable::Append(TableCatalogEntry &amp;table, ClientContext &amp;context,</span>
 <span class="lineNum">     133 </span>            :                        DataChunk &amp;chunk) {
-<span class="lineNum">     134 </span><span class="lineCov">      24708 :         if (chunk.size() == 0) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">      24709 :         if (chunk.size() == 0) {</span>
 <span class="lineNum">     135 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">     136 </span>            :         }
-<span class="lineNum">     137 </span><span class="lineCov">      24708 :         if (chunk.column_count != table.columns.size()) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">      24709 :         if (chunk.column_count != table.columns.size()) {</span>
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :                 throw CatalogException(&quot;Mismatch in column count for append&quot;);</span>
 <span class="lineNum">     139 </span>            :         }
 <span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span><span class="lineCov">      24708 :         chunk.Verify();</span>
-<span class="lineNum">     142 </span><span class="lineCov">      24708 :         VerifyConstraints(table, context, chunk);</span>
+<span class="lineNum">     141 </span><span class="lineCov">      24709 :         chunk.Verify();</span>
+<span class="lineNum">     142 </span><span class="lineCov">      24709 :         VerifyConstraints(table, context, chunk);</span>
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">      24700 :         auto last_chunk = tail_chunk;</span>
+<span class="lineNum">     144 </span><span class="lineCov">      24701 :         auto last_chunk = tail_chunk;</span>
 <span class="lineNum">     145 </span>            :         do {
-<span class="lineNum">     146 </span><span class="lineCov">      24700 :                 last_chunk-&gt;GetExclusiveLock();</span>
-<span class="lineNum">     147 </span><span class="lineCov">      24700 :                 if (last_chunk != tail_chunk) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">      24701 :                 last_chunk-&gt;GetExclusiveLock();</span>
+<span class="lineNum">     147 </span><span class="lineCov">      24701 :                 if (last_chunk != tail_chunk) {</span>
 <span class="lineNum">     148 </span>            :                         // new chunk was added, have to obtain lock of last chunk
 <span class="lineNum">     149 </span><span class="lineNoCov">          0 :                         last_chunk-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :                         last_chunk = tail_chunk;</span>
@@ -214,53 +214,53 @@
 <span class="lineNum">     152 </span>            :                 }
 <span class="lineNum">     153 </span>            :         } while (false);
 <span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span><span class="lineCov">      49400 :         StringHeap heap;</span>
-<span class="lineNum">     156 </span><span class="lineCov">      24700 :         chunk.MoveStringsToHeap(heap);</span>
+<span class="lineNum">     155 </span><span class="lineCov">      49402 :         StringHeap heap;</span>
+<span class="lineNum">     156 </span><span class="lineCov">      24701 :         chunk.MoveStringsToHeap(heap);</span>
 <span class="lineNum">     157 </span>            : 
 <span class="lineNum">     158 </span>            :         // we have an exclusive lock on the last chunk
 <span class="lineNum">     159 </span>            :         // now we can append the elements
 <span class="lineNum">     160 </span>            : 
 <span class="lineNum">     161 </span>            :         // first we handle any PRIMARY KEY and UNIQUE constraints
-<span class="lineNum">     162 </span><span class="lineCov">      24700 :         auto error =</span>
-<span class="lineNum">     163 </span><span class="lineCov">      24700 :             UniqueIndex::Append(context.ActiveTransaction(), indexes, chunk,</span>
-<span class="lineNum">     164 </span><span class="lineCov">      49400 :                                 last_chunk-&gt;start + last_chunk-&gt;count);</span>
-<span class="lineNum">     165 </span><span class="lineCov">      24700 :         if (!error.empty()) {</span>
+<span class="lineNum">     162 </span><span class="lineCov">      24701 :         auto error =</span>
+<span class="lineNum">     163 </span><span class="lineCov">      24701 :             UniqueIndex::Append(context.ActiveTransaction(), indexes, chunk,</span>
+<span class="lineNum">     164 </span><span class="lineCov">      49402 :                                 last_chunk-&gt;start + last_chunk-&gt;count);</span>
+<span class="lineNum">     165 </span><span class="lineCov">      24701 :         if (!error.empty()) {</span>
 <span class="lineNum">     166 </span><span class="lineCov">          9 :                 last_chunk-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">     167 </span><span class="lineCov">          9 :                 throw ConstraintException(error);</span>
 <span class="lineNum">     168 </span>            :         }
 <span class="lineNum">     169 </span>            : 
 <span class="lineNum">     170 </span>            :         // update the statistics with the new data
-<span class="lineNum">     171 </span><span class="lineCov">      60135 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
-<span class="lineNum">     172 </span><span class="lineCov">      70888 :                 lock_guard&lt;mutex&gt; stats_lock(statistics_locks[i]);</span>
-<span class="lineNum">     173 </span><span class="lineCov">      35444 :                 statistics[i].Update(chunk.data[i]);</span>
+<span class="lineNum">     171 </span><span class="lineCov">      60139 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
+<span class="lineNum">     172 </span><span class="lineCov">      70894 :                 lock_guard&lt;mutex&gt; stats_lock(statistics_locks[i]);</span>
+<span class="lineNum">     173 </span><span class="lineCov">      35447 :                 statistics[i].Update(chunk.data[i]);</span>
 <span class="lineNum">     174 </span>            :         }
 <span class="lineNum">     175 </span>            : 
-<span class="lineNum">     176 </span><span class="lineCov">      24691 :         Transaction &amp;transaction = context.ActiveTransaction();</span>
+<span class="lineNum">     176 </span><span class="lineCov">      24692 :         Transaction &amp;transaction = context.ActiveTransaction();</span>
 <span class="lineNum">     177 </span>            : 
 <span class="lineNum">     178 </span>            :         // first copy as much as can fit into the current chunk
 <span class="lineNum">     179 </span>            :         size_t current_count =
-<span class="lineNum">     180 </span><span class="lineCov">      24691 :             min(STORAGE_CHUNK_SIZE - last_chunk-&gt;count, chunk.size());</span>
-<span class="lineNum">     181 </span><span class="lineCov">      24691 :         if (current_count &gt; 0) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">      24692 :             min(STORAGE_CHUNK_SIZE - last_chunk-&gt;count, chunk.size());</span>
+<span class="lineNum">     181 </span><span class="lineCov">      24692 :         if (current_count &gt; 0) {</span>
 <span class="lineNum">     182 </span>            :                 // in the undo buffer, create entries with the &quot;deleted&quot; flag for each
 <span class="lineNum">     183 </span>            :                 // tuple so other transactions see the deleted entries before these
 <span class="lineNum">     184 </span>            :                 // changes are committed
-<span class="lineNum">     185 </span><span class="lineCov">      24691 :                 transaction.PushDeletedEntries(</span>
+<span class="lineNum">     185 </span><span class="lineCov">      24692 :                 transaction.PushDeletedEntries(</span>
 <span class="lineNum">     186 </span>            :                     last_chunk-&gt;count, current_count, last_chunk,
-<span class="lineNum">     187 </span><span class="lineCov">      24691 :                     last_chunk-&gt;version_pointers + last_chunk-&gt;count);</span>
+<span class="lineNum">     187 </span><span class="lineCov">      24692 :                     last_chunk-&gt;version_pointers + last_chunk-&gt;count);</span>
 <span class="lineNum">     188 </span>            :                 // now insert the elements into the vector
-<span class="lineNum">     189 </span><span class="lineCov">      60135 :                 for (size_t i = 0; i &lt; chunk.column_count; i++) {</span>
+<span class="lineNum">     189 </span><span class="lineCov">      60139 :                 for (size_t i = 0; i &lt; chunk.column_count; i++) {</span>
 <span class="lineNum">     190 </span>            :                         char *target =
-<span class="lineNum">     191 </span><span class="lineCov">      35444 :                             last_chunk-&gt;columns[i] +</span>
-<span class="lineNum">     192 </span><span class="lineCov">      35444 :                             last_chunk-&gt;count * GetTypeIdSize(table.columns[i].type);</span>
-<span class="lineNum">     193 </span><span class="lineCov">      35444 :                         VectorOperations::CopyToStorage(chunk.data[i], target, 0,</span>
+<span class="lineNum">     191 </span><span class="lineCov">      35447 :                             last_chunk-&gt;columns[i] +</span>
+<span class="lineNum">     192 </span><span class="lineCov">      35447 :                             last_chunk-&gt;count * GetTypeIdSize(table.columns[i].type);</span>
+<span class="lineNum">     193 </span><span class="lineCov">      35447 :                         VectorOperations::CopyToStorage(chunk.data[i], target, 0,</span>
 <span class="lineNum">     194 </span>            :                                                         current_count);
 <span class="lineNum">     195 </span>            :                 }
 <span class="lineNum">     196 </span>            :                 // now increase the count of the chunk
-<span class="lineNum">     197 </span><span class="lineCov">      24691 :                 last_chunk-&gt;count += current_count;</span>
+<span class="lineNum">     197 </span><span class="lineCov">      24692 :                 last_chunk-&gt;count += current_count;</span>
 <span class="lineNum">     198 </span>            :         }
 <span class="lineNum">     199 </span>            : 
 <span class="lineNum">     200 </span>            :         // check if we need to append more entries
-<span class="lineNum">     201 </span><span class="lineCov">      24691 :         if (current_count != chunk.size()) {</span>
+<span class="lineNum">     201 </span><span class="lineCov">      24692 :         if (current_count != chunk.size()) {</span>
 <span class="lineNum">     202 </span>            :                 // we need to append more entries
 <span class="lineNum">     203 </span>            :                 // first create a new chunk and lock it
 <span class="lineNum">     204 </span><span class="lineNoCov">          0 :                 auto new_chunk = make_unique&lt;StorageChunk&gt;(</span>
@@ -286,9 +286,9 @@
 <span class="lineNum">     224 </span><span class="lineNoCov">          0 :                 new_chunk_pointer-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">     225 </span>            :         }
 <span class="lineNum">     226 </span>            :         // after a successful append move the strings to the chunk
-<span class="lineNum">     227 </span><span class="lineCov">      24691 :         last_chunk-&gt;string_heap.MergeHeap(heap);</span>
+<span class="lineNum">     227 </span><span class="lineCov">      24692 :         last_chunk-&gt;string_heap.MergeHeap(heap);</span>
 <span class="lineNum">     228 </span>            :         // everything has been appended: release lock
-<span class="lineNum">     229 </span><span class="lineCov">      24691 :         last_chunk-&gt;ReleaseExclusiveLock();</span>
+<span class="lineNum">     229 </span><span class="lineCov">      24692 :         last_chunk-&gt;ReleaseExclusiveLock();</span>
 <a name="230"><span class="lineNum">     230 </span>            : }</a>
 <span class="lineNum">     231 </span>            : 
 <span class="lineNum">     232 </span><span class="lineCov">         16 : void DataTable::Delete(TableCatalogEntry &amp;table, ClientContext &amp;context,</span>

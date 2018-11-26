@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 441eaae - include/common/helper.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d6ad023 - include/common/helper.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
+            <td class="headerValue">DuckDB Code Coverage Report d6ad023</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">49</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 17:00:20</td>
+            <td class="headerValue">2018-11-26 17:09:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">74</td>
@@ -77,19 +77,19 @@
 <span class="lineNum">      15 </span>            : #include &lt;sstream&gt;
 <a name="16"><span class="lineNum">      16 </span>            : </a>
 <span class="lineNum">      17 </span>            : template &lt;typename T, typename... Args&gt;
-<span class="lineNum">      18 </span><span class="lineCov">    1394343 : std::unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">    1394345 :         return std::unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      18 </span><span class="lineCov">    1394367 : std::unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">    1394369 :         return std::unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
 <span class="lineNum">      20 </span>            : }
 <a name="21"><span class="lineNum">      21 </span><span class="lineCov">        569 : </span></a>
 <span class="lineNum">      22 </span><span class="lineCov">        569 : template &lt;typename S, typename T, typename... Args&gt;</span>
-<span class="lineNum">      23 </span><span class="lineCov">     474545 : std::unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">     476193 :         return std::unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      23 </span><span class="lineCov">     474559 : std::unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">     476207 :         return std::unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
 <span class="lineNum">      25 </span><span class="lineCov">       1648 : }</span>
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span><span class="lineCov">        536 : template &lt;class T&gt; inline bool in_bounds(int64_t value) {</span>
 <span class="lineNum">      28 </span><span class="lineCov">        536 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp;</span>
-<span class="lineNum">      29 </span><span class="lineCov">      67574 :                value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
-<span class="lineNum">      30 </span><span class="lineCov">     101364 : }</span>
+<span class="lineNum">      29 </span><span class="lineCov">      67576 :                value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
+<span class="lineNum">      30 </span><span class="lineCov">     101367 : }</span>
 </pre>
       </td>
     </tr>

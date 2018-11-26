@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 441eaae - include/optimizer/rule.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d6ad023 - include/optimizer/rule.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
+            <td class="headerValue">DuckDB Code Coverage Report d6ad023</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">126</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 17:00:20</td>
+            <td class="headerValue">2018-11-26 17:09:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">27</td>
@@ -99,10 +99,10 @@
 <span class="lineNum">      37 </span>            :                 LogicalOperator *op;
 <a name="38"><span class="lineNum">      38 </span>            :                 Expression *expr;</a>
 <span class="lineNum">      39 </span>            :         } value;
-<span class="lineNum">      40 </span><span class="lineCov">     569263 :         AbstractOperator(LogicalOperator *op)</span>
-<span class="lineNum">      41 </span><span class="lineCov">     569263 :             : type(AbstractOperatorType::LOGICAL_OPERATOR) {</span>
-<span class="lineNum">      42 </span><span class="lineCov">     569263 :                 value.op = op;</span>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">     569263 :         }</span></a>
+<span class="lineNum">      40 </span><span class="lineCov">     569266 :         AbstractOperator(LogicalOperator *op)</span>
+<span class="lineNum">      41 </span><span class="lineCov">     569266 :             : type(AbstractOperatorType::LOGICAL_OPERATOR) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">     569266 :                 value.op = op;</span>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">     569266 :         }</span></a>
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span><span class="lineCov">     599877 :         AbstractOperator(Expression *expr)</span>
 <span class="lineNum">      46 </span><span class="lineCov">     599877 :             : type(AbstractOperatorType::ABSTRACT_EXPRESSION) {</span>
@@ -149,10 +149,10 @@
 <span class="lineNum">      87 </span>            :         typedef AbstractOperator *pointer;
 <a name="88"><span class="lineNum">      88 </span>            :         typedef std::forward_iterator_tag iterator_category;</a>
 <span class="lineNum">      89 </span>            :         typedef int difference_type;
-<span class="lineNum">      90 </span><span class="lineCov">     416794 :         AbstractOperatorIterator(LogicalOperator *root, size_t op_index = 0,</span>
-<span class="lineNum">      91 </span><span class="lineCov">     416794 :                                  size_t expr_index = 0) {</span>
-<span class="lineNum">      92 </span><span class="lineCov">     416794 :                 nodes.push(Node(root, op_index, expr_index));</span>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">     416794 :         }</span></a>
+<span class="lineNum">      90 </span><span class="lineCov">     416796 :         AbstractOperatorIterator(LogicalOperator *root, size_t op_index = 0,</span>
+<span class="lineNum">      91 </span><span class="lineCov">     416796 :                                  size_t expr_index = 0) {</span>
+<span class="lineNum">      92 </span><span class="lineCov">     416796 :                 nodes.push(Node(root, op_index, expr_index));</span>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">     416796 :         }</span></a>
 <span class="lineNum">      94 </span>            : 
 <span class="lineNum">      95 </span><span class="lineCov">     679188 :         void Next() {</span>
 <span class="lineNum">      96 </span><span class="lineCov">     679188 :                 auto &amp;child = nodes.top();</span>
@@ -203,13 +203,13 @@
 <span class="lineNum">     141 </span>            :         pointer operator-&gt;() {
 <a name="142"><span class="lineNum">     142 </span>            :                 return &amp;nodes.top().node;</a>
 <span class="lineNum">     143 </span>            :         }
-<span class="lineNum">     144 </span><span class="lineCov">     381286 :         bool operator==(const self_type &amp;rhs) {</span>
-<span class="lineNum">     145 </span><span class="lineCov">     381286 :                 return nodes.size() == rhs.nodes.size() &amp;&amp;</span>
-<span class="lineNum">     146 </span><span class="lineCov">     416317 :                        nodes.top().op_index == rhs.nodes.top().op_index &amp;&amp;</span>
-<a name="147"><span class="lineNum">     147 </span><span class="lineCov">     416317 :                        nodes.top().expr_index == rhs.nodes.top().expr_index;</span></a>
+<span class="lineNum">     144 </span><span class="lineCov">     381287 :         bool operator==(const self_type &amp;rhs) {</span>
+<span class="lineNum">     145 </span><span class="lineCov">     381287 :                 return nodes.size() == rhs.nodes.size() &amp;&amp;</span>
+<span class="lineNum">     146 </span><span class="lineCov">     416319 :                        nodes.top().op_index == rhs.nodes.top().op_index &amp;&amp;</span>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">     416319 :                        nodes.top().expr_index == rhs.nodes.top().expr_index;</span></a>
 <span class="lineNum">     148 </span>            :         }
-<span class="lineNum">     149 </span><span class="lineCov">     381286 :         bool operator!=(const self_type &amp;rhs) {</span>
-<span class="lineNum">     150 </span><span class="lineCov">     381286 :                 return !(*this == rhs);</span>
+<span class="lineNum">     149 </span><span class="lineCov">     381287 :         bool operator!=(const self_type &amp;rhs) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">     381287 :                 return !(*this == rhs);</span>
 <a name="151"><span class="lineNum">     151 </span>            :         }</a>
 <span class="lineNum">     152 </span>            : 
 <span class="lineNum">     153 </span><span class="lineCov">       1174 :         void replace(std::unique_ptr&lt;LogicalOperator&gt; new_op) {</span>
@@ -249,10 +249,10 @@
 <span class="lineNum">     187 </span>            :                 size_t op_index;
 <a name="188"><span class="lineNum">     188 </span>            :                 size_t expr_index;</a>
 <span class="lineNum">     189 </span>            : 
-<span class="lineNum">     190 </span><span class="lineCov">     465433 :                 Node(LogicalOperator *op, size_t op_index, size_t expr_index)</span>
-<span class="lineNum">     191 </span><span class="lineCov">     465433 :                     : node(AbstractOperator(op)), op_index(op_index),</span>
-<span class="lineNum">     192 </span><span class="lineCov">     465433 :                       expr_index(expr_index) {</span>
-<a name="193"><span class="lineNum">     193 </span><span class="lineCov">     465433 :                 }</span></a>
+<span class="lineNum">     190 </span><span class="lineCov">     465435 :                 Node(LogicalOperator *op, size_t op_index, size_t expr_index)</span>
+<span class="lineNum">     191 </span><span class="lineCov">     465435 :                     : node(AbstractOperator(op)), op_index(op_index),</span>
+<span class="lineNum">     192 </span><span class="lineCov">     465435 :                       expr_index(expr_index) {</span>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">     465435 :                 }</span></a>
 <span class="lineNum">     194 </span>            : 
 <span class="lineNum">     195 </span><span class="lineCov">     286976 :                 Node(Expression *expr, size_t expr_index)</span>
 <span class="lineNum">     196 </span><span class="lineCov">     286976 :                     : node(AbstractOperator(expr)), op_index(0),</span>
@@ -267,22 +267,22 @@
 <span class="lineNum">     205 </span>            :         std::vector&lt;std::unique_ptr&lt;AbstractRuleNode&gt;&gt; children;
 <a name="206"><span class="lineNum">     206 </span>            :         ChildPolicy child_policy;</a>
 <span class="lineNum">     207 </span>            : 
-<span class="lineNum">     208 </span><span class="lineCov">     677703 :         AbstractRuleNode() : child_policy(ChildPolicy::ANY) {</span>
-<a name="209"><span class="lineNum">     209 </span><span class="lineCov">     677703 :         }</span></a>
+<span class="lineNum">     208 </span><span class="lineCov">     677723 :         AbstractRuleNode() : child_policy(ChildPolicy::ANY) {</span>
+<a name="209"><span class="lineNum">     209 </span><span class="lineCov">     677723 :         }</span></a>
 <span class="lineNum">     210 </span>            :         virtual bool Matches(AbstractOperator &amp;rel) = 0;
-<span class="lineNum">     211 </span><span class="lineCov">     677703 :         virtual ~AbstractRuleNode() {</span>
-<span class="lineNum">     212 </span><span class="lineCov">     677703 :         }</span>
+<span class="lineNum">     211 </span><span class="lineCov">     677723 :         virtual ~AbstractRuleNode() {</span>
+<span class="lineNum">     212 </span><span class="lineCov">     677723 :         }</span>
 <span class="lineNum">     213 </span><span class="lineNoCov">          0 : };</span>
 <span class="lineNum">     214 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     215 </span><span class="lineCov">     677703 : class ExpressionNodeSet : public AbstractRuleNode {</span>
-<a name="216"><span class="lineNum">     216 </span><span class="lineCov">     677703 :   public:</span></a>
+<span class="lineNum">     215 </span><span class="lineCov">     677723 : class ExpressionNodeSet : public AbstractRuleNode {</span>
+<a name="216"><span class="lineNum">     216 </span><span class="lineCov">     677723 :   public:</span></a>
 <span class="lineNum">     217 </span>            :         std::vector&lt;ExpressionType&gt; types;
 <a name="218"><span class="lineNum">     218 </span>            :         ExpressionNodeSet(std::vector&lt;ExpressionType&gt; types) : types(types) {</a>
 <span class="lineNum">     219 </span>            :         }
 <span class="lineNum">     220 </span>            :         virtual bool Matches(AbstractOperator &amp;rel) {
 <span class="lineNum">     221 </span>            :                 return rel.type == AbstractOperatorType::ABSTRACT_EXPRESSION &amp;&amp;
-<span class="lineNum">     222 </span><span class="lineCov">     101363 :                        std::find(types.begin(), types.end(), rel.value.expr-&gt;type) !=</span>
-<span class="lineNum">     223 </span><span class="lineCov">     101363 :                            types.end();</span>
+<span class="lineNum">     222 </span><span class="lineCov">     101366 :                        std::find(types.begin(), types.end(), rel.value.expr-&gt;type) !=</span>
+<span class="lineNum">     223 </span><span class="lineCov">     101366 :                            types.end();</span>
 <span class="lineNum">     224 </span><span class="lineCov">     398977 :         }</span>
 <span class="lineNum">     225 </span><span class="lineCov">    1039883 : };</span>
 <span class="lineNum">     226 </span><span class="lineCov">     640906 : </span>
@@ -293,8 +293,8 @@
 <span class="lineNum">     231 </span>            :         }
 <span class="lineNum">     232 </span>            :         virtual bool Matches(AbstractOperator &amp;rel) {
 <span class="lineNum">     233 </span>            :                 return rel.type == AbstractOperatorType::ABSTRACT_EXPRESSION &amp;&amp;
-<span class="lineNum">     234 </span><span class="lineCov">     237491 :                        rel.value.expr-&gt;type == type;</span>
-<span class="lineNum">     235 </span><span class="lineCov">     237491 :         }</span>
+<span class="lineNum">     234 </span><span class="lineCov">     237498 :                        rel.value.expr-&gt;type == type;</span>
+<span class="lineNum">     235 </span><span class="lineCov">     237498 :         }</span>
 <span class="lineNum">     236 </span><span class="lineCov">     827169 : };</span>
 <span class="lineNum">     237 </span><span class="lineCov">    1540940 : </span>
 <a name="238"><span class="lineNum">     238 </span><span class="lineCov">    1540940 : class ComparisonNodeType : public AbstractRuleNode {</span></a>
@@ -303,8 +303,8 @@
 <span class="lineNum">     241 </span>            :         }
 <span class="lineNum">     242 </span>            :         virtual bool Matches(AbstractOperator &amp;rel) {
 <span class="lineNum">     243 </span>            :                 return rel.type == AbstractOperatorType::ABSTRACT_EXPRESSION &amp;&amp;
-<span class="lineNum">     244 </span><span class="lineCov">      34277 :                        rel.value.expr-&gt;type &gt;= ExpressionType::COMPARE_BOUNDARY_START &amp;&amp;</span>
-<span class="lineNum">     245 </span><span class="lineCov">      34277 :                        rel.value.expr-&gt;type &lt;= ExpressionType::COMPARE_BOUNDARY_END;</span>
+<span class="lineNum">     244 </span><span class="lineCov">      34278 :                        rel.value.expr-&gt;type &gt;= ExpressionType::COMPARE_BOUNDARY_START &amp;&amp;</span>
+<span class="lineNum">     245 </span><span class="lineCov">      34278 :                        rel.value.expr-&gt;type &lt;= ExpressionType::COMPARE_BOUNDARY_END;</span>
 <span class="lineNum">     246 </span><span class="lineCov">      30294 :         }</span>
 <span class="lineNum">     247 </span><span class="lineCov">      48950 : };</span>
 <span class="lineNum">     248 </span><span class="lineCov">      48268 : </span>
@@ -346,8 +346,8 @@
 <span class="lineNum">     284 </span>            :         }
 <span class="lineNum">     285 </span>            :         virtual bool Matches(AbstractOperator &amp;rel) {
 <span class="lineNum">     286 </span>            :                 return rel.type == AbstractOperatorType::LOGICAL_OPERATOR &amp;&amp;
-<span class="lineNum">     287 </span><span class="lineCov">     236995 :                        rel.value.op-&gt;type == type;</span>
-<span class="lineNum">     288 </span><span class="lineCov">     236995 :         }</span>
+<span class="lineNum">     287 </span><span class="lineCov">     237002 :                        rel.value.op-&gt;type == type;</span>
+<span class="lineNum">     288 </span><span class="lineCov">     237002 :         }</span>
 <span class="lineNum">     289 </span><span class="lineCov">    2075888 : };</span>
 <span class="lineNum">     290 </span><span class="lineCov">    2429736 : </span>
 <span class="lineNum">     291 </span><span class="lineCov">    2429736 : class LogicalNodeAny : public AbstractRuleNode {</span>
@@ -374,7 +374,7 @@
 <span class="lineNum">     312 </span>            :         }
 <span class="lineNum">     313 </span><span class="lineNoCov">          0 : };</span>
 <span class="lineNum">     314 </span>            : 
-<span class="lineNum">     315 </span><span class="lineCov">     304082 : } // namespace duckdb</span>
+<span class="lineNum">     315 </span><span class="lineCov">     304091 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>

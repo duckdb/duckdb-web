@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 441eaae - common/internal_types.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d6ad023 - common/internal_types.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 441eaae</td>
+            <td class="headerValue">DuckDB Code Coverage Report d6ad023</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">126</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 17:00:20</td>
+            <td class="headerValue">2018-11-26 17:09:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -221,8 +221,8 @@
 <span class="lineNum">     159 </span><span class="lineNoCov">          0 :         return &quot;INVALID&quot;;</span>
 <a name="160"><span class="lineNum">     160 </span>            : }</a>
 <span class="lineNum">     161 </span>            : 
-<span class="lineNum">     162 </span><span class="lineCov">    3097207 : size_t GetTypeIdSize(TypeId type) {</span>
-<span class="lineNum">     163 </span><span class="lineCov">    3097207 :         switch (type) {</span>
+<span class="lineNum">     162 </span><span class="lineCov">    3097224 : size_t GetTypeIdSize(TypeId type) {</span>
+<span class="lineNum">     163 </span><span class="lineCov">    3097224 :         switch (type) {</span>
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :         case TypeId::PARAMETER_OFFSET:</span>
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :                 return sizeof(uint64_t);</span>
 <span class="lineNum">     166 </span><span class="lineCov">     135038 :         case TypeId::BOOLEAN:</span>
@@ -231,10 +231,10 @@
 <span class="lineNum">     169 </span><span class="lineCov">     240313 :                 return sizeof(int8_t);</span>
 <span class="lineNum">     170 </span><span class="lineCov">         44 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">     171 </span><span class="lineCov">         44 :                 return sizeof(int16_t);</span>
-<span class="lineNum">     172 </span><span class="lineCov">    1613743 :         case TypeId::INTEGER:</span>
-<span class="lineNum">     173 </span><span class="lineCov">    1613743 :                 return sizeof(int32_t);</span>
-<span class="lineNum">     174 </span><span class="lineCov">     904365 :         case TypeId::BIGINT:</span>
-<span class="lineNum">     175 </span><span class="lineCov">     904365 :                 return sizeof(int64_t);</span>
+<span class="lineNum">     172 </span><span class="lineCov">    1613749 :         case TypeId::INTEGER:</span>
+<span class="lineNum">     173 </span><span class="lineCov">    1613749 :                 return sizeof(int32_t);</span>
+<span class="lineNum">     174 </span><span class="lineCov">     904373 :         case TypeId::BIGINT:</span>
+<span class="lineNum">     175 </span><span class="lineCov">     904373 :                 return sizeof(int64_t);</span>
 <span class="lineNum">     176 </span><span class="lineCov">     116413 :         case TypeId::DECIMAL:</span>
 <span class="lineNum">     177 </span><span class="lineCov">     116413 :                 return sizeof(double);</span>
 <span class="lineNum">     178 </span><span class="lineCov">      76292 :         case TypeId::POINTER:</span>
@@ -243,8 +243,8 @@
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :                 return sizeof(int64_t);</span>
 <span class="lineNum">     182 </span><span class="lineCov">        836 :         case TypeId::DATE:</span>
 <span class="lineNum">     183 </span><span class="lineCov">        836 :                 return sizeof(int32_t);</span>
-<span class="lineNum">     184 </span><span class="lineCov">      10163 :         case TypeId::VARCHAR:</span>
-<span class="lineNum">     185 </span><span class="lineCov">      10163 :                 return sizeof(void *);</span>
+<span class="lineNum">     184 </span><span class="lineCov">      10166 :         case TypeId::VARCHAR:</span>
+<span class="lineNum">     185 </span><span class="lineCov">      10166 :                 return sizeof(void *);</span>
 <span class="lineNum">     186 </span><span class="lineNoCov">          0 :         case TypeId::VARBINARY:</span>
 <span class="lineNum">     187 </span><span class="lineNoCov">          0 :                 return sizeof(void *);</span>
 <span class="lineNum">     188 </span><span class="lineNoCov">          0 :         case TypeId::ARRAY:</span>
@@ -608,14 +608,14 @@
 <span class="lineNum">     546 </span>            :         return IndexType::INVALID;
 <a name="547"><span class="lineNum">     547 </span>            : }</a>
 <span class="lineNum">     548 </span>            : 
-<span class="lineNum">     549 </span><span class="lineCov">     308434 : bool TypeIsConstantSize(TypeId type) {</span>
-<a name="550"><span class="lineNum">     550 </span><span class="lineCov">     308434 :         return type &lt; TypeId::VARCHAR;</span></a>
+<span class="lineNum">     549 </span><span class="lineCov">     308436 : bool TypeIsConstantSize(TypeId type) {</span>
+<a name="550"><span class="lineNum">     550 </span><span class="lineCov">     308436 :         return type &lt; TypeId::VARCHAR;</span></a>
 <span class="lineNum">     551 </span>            : }
-<span class="lineNum">     552 </span><span class="lineCov">     708572 : bool TypeIsIntegral(TypeId type) {</span>
-<a name="553"><span class="lineNum">     553 </span><span class="lineCov">     708572 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::TIMESTAMP;</span></a>
+<span class="lineNum">     552 </span><span class="lineCov">     708580 : bool TypeIsIntegral(TypeId type) {</span>
+<a name="553"><span class="lineNum">     553 </span><span class="lineCov">     708580 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::TIMESTAMP;</span></a>
 <span class="lineNum">     554 </span>            : }
-<span class="lineNum">     555 </span><span class="lineCov">    2050841 : bool TypeIsNumeric(TypeId type) {</span>
-<a name="556"><span class="lineNum">     556 </span><span class="lineCov">    2050841 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::DECIMAL;</span></a>
+<span class="lineNum">     555 </span><span class="lineCov">    2050850 : bool TypeIsNumeric(TypeId type) {</span>
+<a name="556"><span class="lineNum">     556 </span><span class="lineCov">    2050850 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::DECIMAL;</span></a>
 <span class="lineNum">     557 </span>            : }
 <span class="lineNum">     558 </span><span class="lineCov">         20 : bool TypeIsInteger(TypeId type) {</span>
 <span class="lineNum">     559 </span><span class="lineCov">         20 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::BIGINT;</span>
