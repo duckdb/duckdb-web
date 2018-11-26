@@ -1,0 +1,510 @@
+<<Query Profiling Information>>
+WITH ssales AS (SELECT c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size, sum(ss_net_paid) netpaid FROM store_sales, store_returns, store, item, customer, customer_address WHERE ss_ticket_number = sr_ticket_number AND ss_item_sk = sr_item_sk AND ss_customer_sk = c_customer_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND c_current_addr_sk = ca_address_sk AND c_birth_country <> upper(ca_country) AND s_zip = ca_zip AND s_market_id=8 GROUP BY c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size) SELECT c_last_name, c_first_name, s_store_name, sum(netpaid) paid FROM ssales WHERE i_color = 'peach' GROUP BY c_last_name, c_first_name, s_store_name HAVING sum(netpaid) > (SELECT 0.05*avg(netpaid) FROM ssales) ORDER BY c_last_name, c_first_name, s_store_name ;
+<<Timing>>
+Total Time: 1.253528s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|       #3>#0      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |         1        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|      FILTER      |                                                                                                    |   HASH_GROUP_BY  |
+|  i_color = peach |                                                                                                    |                  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |     HASH_JOIN    |
+|                  |                                                                                                    |       INNER      |
+|                  |                                                                                                    |   s_zip=ca_zip   |
+|                  |                                                                                                    | c_current_addr_s |
+|                  |                                                                                                    |  k=ca_address_sk |
+|                  |                                                                                                    |  c_birth_country |
+|                  |                                                                                                    |    !=FUNCTION    |
+|                  |                                                                                                    |    (ca_country   |
+|      (0.00s)     |                                                                                                    |      (0.18s)     |
+|        78        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                                    |     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                                    |       INNER      |                                                                                | customer_address |
+|   s_zip=ca_zip   |                                                                                                    |  ss_customer_sk  |                                                                                |                  |
+| c_current_addr_s |                                                                                                    |  =c_customer_sk  |                                                                                |                  |
+|  k=ca_address_sk |                                                                                                    |                  |                                                                                |                  |
+|  c_birth_country |                                                                                                    |                  |                                                                                |                  |
+|    !=FUNCTION    |                                                                                                    |                  |                                                                                |                  |
+|    (ca_country   |                                                                                                    |                  |                                                                                |                  |
+|      (0.18s)     |                                                                                                    |      (0.15s)     |                                                                                |      (0.00s)     |
+|        78        |                                                                                                    |       96051      |                                                                                |       50000      |
+--------------------                                                                                                    --------------------                                                                                --------------------
+--------------------                                                                                ----------------------------------------                                                            --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                                                | customer_address ||       INNER      |                                                            |     customer     |
+|  ss_customer_sk  |                                                                                |                  ||    ss_item_sk    |                                                            |                  |
+|  =c_customer_sk  |                                                                                |                  ||    =i_item_sk    |                                                            |                  |
+|      (0.15s)     |                                                                                |      (0.00s)     ||      (0.08s)     |                                                            |      (0.00s)     |
+|       96051      |                                                                                |       50000      ||       96051      |                                                            |      100000      |
+--------------------                                                                                ----------------------------------------                                                            --------------------
+--------------------                                                            --------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |                    |     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |                    |       INNER      |                                        |       item       |
+|    ss_item_sk    |                                                            |                  |                    |    ss_store_sk   |                                        |                  |
+|    =i_item_sk    |                                                            |                  |                    |    =s_store_sk   |                                        |                  |
+|      (0.08s)     |                                                            |      (0.00s)     |                    |      (0.05s)     |                                        |      (0.00s)     |
+|       96051      |                                                            |      100000      |                    |       96051      |                                        |       18000      |
+--------------------                                                            --------------------                    --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                                        |       item       |                                        |       INNER      |                    |  s_market_id = 8 |
+|    ss_store_sk   |                                        |                  |                                        |    ss_item_sk    |                    |                  |
+|    =s_store_sk   |                                        |                  |                                        |    =sr_item_sk   |                    |                  |
+|                  |                                        |                  |                                        | ss_ticket_number |                    |                  |
+|                  |                                        |                  |                                        | =sr_ticket_numbe |                    |                  |
+|                  |                                        |                  |                                        |         r        |                    |                  |
+|      (0.05s)     |                                        |      (0.00s)     |                                        |      (0.14s)     |                    |      (0.00s)     |
+|       96051      |                                        |       18000      |                                        |      287867      |                    |         3        |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                    |      FILTER      |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                    |  s_market_id = 8 |                                                            |    store_sales   ||   store_returns  ||       store      |
+|    ss_item_sk    |                    |                  |                                                            |                  ||                  ||                  |
+|    =sr_item_sk   |                    |                  |                                                            |                  ||                  ||                  |
+| ss_ticket_number |                    |                  |                                                            |                  ||                  ||                  |
+| =sr_ticket_numbe |                    |                  |                                                            |                  ||                  ||                  |
+|         r        |                    |                  |                                                            |                  ||                  ||                  |
+|      (0.14s)     |                    |      (0.00s)     |                                                            |      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      287867      |                    |         3        |                                                            |      2880404     ||      287867      ||        12        |
+--------------------                    --------------------                                                            ------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||   store_returns  ||       store      |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||      287867      ||        12        |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+WITH ssales AS (SELECT c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size, sum(ss_net_paid) netpaid FROM store_sales, store_returns, store, item, customer, customer_address WHERE ss_ticket_number = sr_ticket_number AND ss_item_sk = sr_item_sk AND ss_customer_sk = c_customer_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND c_current_addr_sk = ca_address_sk AND c_birth_country <> upper(ca_country) AND s_zip = ca_zip AND s_market_id=8 GROUP BY c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size) SELECT c_last_name, c_first_name, s_store_name, sum(netpaid) paid FROM ssales WHERE i_color = 'peach' GROUP BY c_last_name, c_first_name, s_store_name HAVING sum(netpaid) > (SELECT 0.05*avg(netpaid) FROM ssales) ORDER BY c_last_name, c_first_name, s_store_name ;
+<<Timing>>
+Total Time: 1.258031s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|       #3>#0      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |         1        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|      FILTER      |                                                                                                    |   HASH_GROUP_BY  |
+|  i_color = peach |                                                                                                    |                  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |     HASH_JOIN    |
+|                  |                                                                                                    |       INNER      |
+|                  |                                                                                                    |   s_zip=ca_zip   |
+|                  |                                                                                                    | c_current_addr_s |
+|                  |                                                                                                    |  k=ca_address_sk |
+|                  |                                                                                                    |  c_birth_country |
+|                  |                                                                                                    |    !=FUNCTION    |
+|                  |                                                                                                    |    (ca_country   |
+|      (0.00s)     |                                                                                                    |      (0.18s)     |
+|        78        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                                    |     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                                    |       INNER      |                                                                                | customer_address |
+|   s_zip=ca_zip   |                                                                                                    |  ss_customer_sk  |                                                                                |                  |
+| c_current_addr_s |                                                                                                    |  =c_customer_sk  |                                                                                |                  |
+|  k=ca_address_sk |                                                                                                    |                  |                                                                                |                  |
+|  c_birth_country |                                                                                                    |                  |                                                                                |                  |
+|    !=FUNCTION    |                                                                                                    |                  |                                                                                |                  |
+|    (ca_country   |                                                                                                    |                  |                                                                                |                  |
+|      (0.18s)     |                                                                                                    |      (0.15s)     |                                                                                |      (0.00s)     |
+|        78        |                                                                                                    |       96051      |                                                                                |       50000      |
+--------------------                                                                                                    --------------------                                                                                --------------------
+--------------------                                                                                ----------------------------------------                                                            --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                                                | customer_address ||       INNER      |                                                            |     customer     |
+|  ss_customer_sk  |                                                                                |                  ||    ss_item_sk    |                                                            |                  |
+|  =c_customer_sk  |                                                                                |                  ||    =i_item_sk    |                                                            |                  |
+|      (0.15s)     |                                                                                |      (0.00s)     ||      (0.08s)     |                                                            |      (0.00s)     |
+|       96051      |                                                                                |       50000      ||       96051      |                                                            |      100000      |
+--------------------                                                                                ----------------------------------------                                                            --------------------
+--------------------                                                            --------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |                    |     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |                    |       INNER      |                                        |       item       |
+|    ss_item_sk    |                                                            |                  |                    |    ss_store_sk   |                                        |                  |
+|    =i_item_sk    |                                                            |                  |                    |    =s_store_sk   |                                        |                  |
+|      (0.08s)     |                                                            |      (0.00s)     |                    |      (0.05s)     |                                        |      (0.00s)     |
+|       96051      |                                                            |      100000      |                    |       96051      |                                        |       18000      |
+--------------------                                                            --------------------                    --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                                        |       item       |                                        |       INNER      |                    |  s_market_id = 8 |
+|    ss_store_sk   |                                        |                  |                                        |    ss_item_sk    |                    |                  |
+|    =s_store_sk   |                                        |                  |                                        |    =sr_item_sk   |                    |                  |
+|                  |                                        |                  |                                        | ss_ticket_number |                    |                  |
+|                  |                                        |                  |                                        | =sr_ticket_numbe |                    |                  |
+|                  |                                        |                  |                                        |         r        |                    |                  |
+|      (0.05s)     |                                        |      (0.00s)     |                                        |      (0.14s)     |                    |      (0.00s)     |
+|       96051      |                                        |       18000      |                                        |      287867      |                    |         3        |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                    |      FILTER      |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                    |  s_market_id = 8 |                                                            |    store_sales   ||   store_returns  ||       store      |
+|    ss_item_sk    |                    |                  |                                                            |                  ||                  ||                  |
+|    =sr_item_sk   |                    |                  |                                                            |                  ||                  ||                  |
+| ss_ticket_number |                    |                  |                                                            |                  ||                  ||                  |
+| =sr_ticket_numbe |                    |                  |                                                            |                  ||                  ||                  |
+|         r        |                    |                  |                                                            |                  ||                  ||                  |
+|      (0.14s)     |                    |      (0.00s)     |                                                            |      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      287867      |                    |         3        |                                                            |      2880404     ||      287867      ||        12        |
+--------------------                    --------------------                                                            ------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||   store_returns  ||       store      |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||      287867      ||        12        |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+WITH ssales AS (SELECT c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size, sum(ss_net_paid) netpaid FROM store_sales, store_returns, store, item, customer, customer_address WHERE ss_ticket_number = sr_ticket_number AND ss_item_sk = sr_item_sk AND ss_customer_sk = c_customer_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND c_current_addr_sk = ca_address_sk AND c_birth_country <> upper(ca_country) AND s_zip = ca_zip AND s_market_id=8 GROUP BY c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size) SELECT c_last_name, c_first_name, s_store_name, sum(netpaid) paid FROM ssales WHERE i_color = 'peach' GROUP BY c_last_name, c_first_name, s_store_name HAVING sum(netpaid) > (SELECT 0.05*avg(netpaid) FROM ssales) ORDER BY c_last_name, c_first_name, s_store_name ;
+<<Timing>>
+Total Time: 1.256143s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|       #3>#0      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |         1        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|      FILTER      |                                                                                                    |   HASH_GROUP_BY  |
+|  i_color = peach |                                                                                                    |                  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |     HASH_JOIN    |
+|                  |                                                                                                    |       INNER      |
+|                  |                                                                                                    |   s_zip=ca_zip   |
+|                  |                                                                                                    | c_current_addr_s |
+|                  |                                                                                                    |  k=ca_address_sk |
+|                  |                                                                                                    |  c_birth_country |
+|                  |                                                                                                    |    !=FUNCTION    |
+|                  |                                                                                                    |    (ca_country   |
+|      (0.00s)     |                                                                                                    |      (0.18s)     |
+|        78        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                                    |     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                                    |       INNER      |                                                                                | customer_address |
+|   s_zip=ca_zip   |                                                                                                    |  ss_customer_sk  |                                                                                |                  |
+| c_current_addr_s |                                                                                                    |  =c_customer_sk  |                                                                                |                  |
+|  k=ca_address_sk |                                                                                                    |                  |                                                                                |                  |
+|  c_birth_country |                                                                                                    |                  |                                                                                |                  |
+|    !=FUNCTION    |                                                                                                    |                  |                                                                                |                  |
+|    (ca_country   |                                                                                                    |                  |                                                                                |                  |
+|      (0.18s)     |                                                                                                    |      (0.15s)     |                                                                                |      (0.00s)     |
+|        78        |                                                                                                    |       96051      |                                                                                |       50000      |
+--------------------                                                                                                    --------------------                                                                                --------------------
+--------------------                                                                                ----------------------------------------                                                            --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                                                | customer_address ||       INNER      |                                                            |     customer     |
+|  ss_customer_sk  |                                                                                |                  ||    ss_item_sk    |                                                            |                  |
+|  =c_customer_sk  |                                                                                |                  ||    =i_item_sk    |                                                            |                  |
+|      (0.15s)     |                                                                                |      (0.00s)     ||      (0.08s)     |                                                            |      (0.00s)     |
+|       96051      |                                                                                |       50000      ||       96051      |                                                            |      100000      |
+--------------------                                                                                ----------------------------------------                                                            --------------------
+--------------------                                                            --------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |                    |     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |                    |       INNER      |                                        |       item       |
+|    ss_item_sk    |                                                            |                  |                    |    ss_store_sk   |                                        |                  |
+|    =i_item_sk    |                                                            |                  |                    |    =s_store_sk   |                                        |                  |
+|      (0.08s)     |                                                            |      (0.00s)     |                    |      (0.05s)     |                                        |      (0.00s)     |
+|       96051      |                                                            |      100000      |                    |       96051      |                                        |       18000      |
+--------------------                                                            --------------------                    --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                                        |       item       |                                        |       INNER      |                    |  s_market_id = 8 |
+|    ss_store_sk   |                                        |                  |                                        |    ss_item_sk    |                    |                  |
+|    =s_store_sk   |                                        |                  |                                        |    =sr_item_sk   |                    |                  |
+|                  |                                        |                  |                                        | ss_ticket_number |                    |                  |
+|                  |                                        |                  |                                        | =sr_ticket_numbe |                    |                  |
+|                  |                                        |                  |                                        |         r        |                    |                  |
+|      (0.05s)     |                                        |      (0.00s)     |                                        |      (0.14s)     |                    |      (0.00s)     |
+|       96051      |                                        |       18000      |                                        |      287867      |                    |         3        |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                    |      FILTER      |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                    |  s_market_id = 8 |                                                            |    store_sales   ||   store_returns  ||       store      |
+|    ss_item_sk    |                    |                  |                                                            |                  ||                  ||                  |
+|    =sr_item_sk   |                    |                  |                                                            |                  ||                  ||                  |
+| ss_ticket_number |                    |                  |                                                            |                  ||                  ||                  |
+| =sr_ticket_numbe |                    |                  |                                                            |                  ||                  ||                  |
+|         r        |                    |                  |                                                            |                  ||                  ||                  |
+|      (0.14s)     |                    |      (0.00s)     |                                                            |      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      287867      |                    |         3        |                                                            |      2880404     ||      287867      ||        12        |
+--------------------                    --------------------                                                            ------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||   store_returns  ||       store      |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||      287867      ||        12        |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+WITH ssales AS (SELECT c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size, sum(ss_net_paid) netpaid FROM store_sales, store_returns, store, item, customer, customer_address WHERE ss_ticket_number = sr_ticket_number AND ss_item_sk = sr_item_sk AND ss_customer_sk = c_customer_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND c_current_addr_sk = ca_address_sk AND c_birth_country <> upper(ca_country) AND s_zip = ca_zip AND s_market_id=8 GROUP BY c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size) SELECT c_last_name, c_first_name, s_store_name, sum(netpaid) paid FROM ssales WHERE i_color = 'peach' GROUP BY c_last_name, c_first_name, s_store_name HAVING sum(netpaid) > (SELECT 0.05*avg(netpaid) FROM ssales) ORDER BY c_last_name, c_first_name, s_store_name ;
+<<Timing>>
+Total Time: 1.252115s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|       #3>#0      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |         1        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|      FILTER      |                                                                                                    |   HASH_GROUP_BY  |
+|  i_color = peach |                                                                                                    |                  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |     HASH_JOIN    |
+|                  |                                                                                                    |       INNER      |
+|                  |                                                                                                    |   s_zip=ca_zip   |
+|                  |                                                                                                    | c_current_addr_s |
+|                  |                                                                                                    |  k=ca_address_sk |
+|                  |                                                                                                    |  c_birth_country |
+|                  |                                                                                                    |    !=FUNCTION    |
+|                  |                                                                                                    |    (ca_country   |
+|      (0.00s)     |                                                                                                    |      (0.18s)     |
+|        78        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                                    |     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                                    |       INNER      |                                                                                | customer_address |
+|   s_zip=ca_zip   |                                                                                                    |  ss_customer_sk  |                                                                                |                  |
+| c_current_addr_s |                                                                                                    |  =c_customer_sk  |                                                                                |                  |
+|  k=ca_address_sk |                                                                                                    |                  |                                                                                |                  |
+|  c_birth_country |                                                                                                    |                  |                                                                                |                  |
+|    !=FUNCTION    |                                                                                                    |                  |                                                                                |                  |
+|    (ca_country   |                                                                                                    |                  |                                                                                |                  |
+|      (0.18s)     |                                                                                                    |      (0.15s)     |                                                                                |      (0.00s)     |
+|        78        |                                                                                                    |       96051      |                                                                                |       50000      |
+--------------------                                                                                                    --------------------                                                                                --------------------
+--------------------                                                                                ----------------------------------------                                                            --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                                                | customer_address ||       INNER      |                                                            |     customer     |
+|  ss_customer_sk  |                                                                                |                  ||    ss_item_sk    |                                                            |                  |
+|  =c_customer_sk  |                                                                                |                  ||    =i_item_sk    |                                                            |                  |
+|      (0.15s)     |                                                                                |      (0.00s)     ||      (0.08s)     |                                                            |      (0.00s)     |
+|       96051      |                                                                                |       50000      ||       96051      |                                                            |      100000      |
+--------------------                                                                                ----------------------------------------                                                            --------------------
+--------------------                                                            --------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |                    |     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |                    |       INNER      |                                        |       item       |
+|    ss_item_sk    |                                                            |                  |                    |    ss_store_sk   |                                        |                  |
+|    =i_item_sk    |                                                            |                  |                    |    =s_store_sk   |                                        |                  |
+|      (0.08s)     |                                                            |      (0.00s)     |                    |      (0.05s)     |                                        |      (0.00s)     |
+|       96051      |                                                            |      100000      |                    |       96051      |                                        |       18000      |
+--------------------                                                            --------------------                    --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                                        |       item       |                                        |       INNER      |                    |  s_market_id = 8 |
+|    ss_store_sk   |                                        |                  |                                        |    ss_item_sk    |                    |                  |
+|    =s_store_sk   |                                        |                  |                                        |    =sr_item_sk   |                    |                  |
+|                  |                                        |                  |                                        | ss_ticket_number |                    |                  |
+|                  |                                        |                  |                                        | =sr_ticket_numbe |                    |                  |
+|                  |                                        |                  |                                        |         r        |                    |                  |
+|      (0.05s)     |                                        |      (0.00s)     |                                        |      (0.14s)     |                    |      (0.00s)     |
+|       96051      |                                        |       18000      |                                        |      287867      |                    |         3        |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                    |      FILTER      |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                    |  s_market_id = 8 |                                                            |    store_sales   ||   store_returns  ||       store      |
+|    ss_item_sk    |                    |                  |                                                            |                  ||                  ||                  |
+|    =sr_item_sk   |                    |                  |                                                            |                  ||                  ||                  |
+| ss_ticket_number |                    |                  |                                                            |                  ||                  ||                  |
+| =sr_ticket_numbe |                    |                  |                                                            |                  ||                  ||                  |
+|         r        |                    |                  |                                                            |                  ||                  ||                  |
+|      (0.14s)     |                    |      (0.00s)     |                                                            |      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      287867      |                    |         3        |                                                            |      2880404     ||      287867      ||        12        |
+--------------------                    --------------------                                                            ------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||   store_returns  ||       store      |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||      287867      ||        12        |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+WITH ssales AS (SELECT c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size, sum(ss_net_paid) netpaid FROM store_sales, store_returns, store, item, customer, customer_address WHERE ss_ticket_number = sr_ticket_number AND ss_item_sk = sr_item_sk AND ss_customer_sk = c_customer_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND c_current_addr_sk = ca_address_sk AND c_birth_country <> upper(ca_country) AND s_zip = ca_zip AND s_market_id=8 GROUP BY c_last_name, c_first_name, s_store_name, ca_state, s_state, i_color, i_current_price, i_manager_id, i_units, i_size) SELECT c_last_name, c_first_name, s_store_name, sum(netpaid) paid FROM ssales WHERE i_color = 'peach' GROUP BY c_last_name, c_first_name, s_store_name HAVING sum(netpaid) > (SELECT 0.05*avg(netpaid) FROM ssales) ORDER BY c_last_name, c_first_name, s_store_name ;
+<<Timing>>
+Total Time: 1.256721s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+| NESTED_LOOP_JOIN |
+|       INNER      |
+|       #3>#0      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |         1        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|      FILTER      |                                                                                                    |   HASH_GROUP_BY  |
+|  i_color = peach |                                                                                                    |                  |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|         1        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|   HASH_GROUP_BY  |                                                                                                    |     HASH_JOIN    |
+|                  |                                                                                                    |       INNER      |
+|                  |                                                                                                    |   s_zip=ca_zip   |
+|                  |                                                                                                    | c_current_addr_s |
+|                  |                                                                                                    |  k=ca_address_sk |
+|                  |                                                                                                    |  c_birth_country |
+|                  |                                                                                                    |    !=FUNCTION    |
+|                  |                                                                                                    |    (ca_country   |
+|      (0.00s)     |                                                                                                    |      (0.18s)     |
+|        78        |                                                                                                    |        78        |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                                    |     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                                    |       INNER      |                                                                                | customer_address |
+|   s_zip=ca_zip   |                                                                                                    |  ss_customer_sk  |                                                                                |                  |
+| c_current_addr_s |                                                                                                    |  =c_customer_sk  |                                                                                |                  |
+|  k=ca_address_sk |                                                                                                    |                  |                                                                                |                  |
+|  c_birth_country |                                                                                                    |                  |                                                                                |                  |
+|    !=FUNCTION    |                                                                                                    |                  |                                                                                |                  |
+|    (ca_country   |                                                                                                    |                  |                                                                                |                  |
+|      (0.18s)     |                                                                                                    |      (0.15s)     |                                                                                |      (0.00s)     |
+|        78        |                                                                                                    |       96051      |                                                                                |       50000      |
+--------------------                                                                                                    --------------------                                                                                --------------------
+--------------------                                                                                ----------------------------------------                                                            --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                                                | customer_address ||       INNER      |                                                            |     customer     |
+|  ss_customer_sk  |                                                                                |                  ||    ss_item_sk    |                                                            |                  |
+|  =c_customer_sk  |                                                                                |                  ||    =i_item_sk    |                                                            |                  |
+|      (0.15s)     |                                                                                |      (0.00s)     ||      (0.08s)     |                                                            |      (0.00s)     |
+|       96051      |                                                                                |       50000      ||       96051      |                                                            |      100000      |
+--------------------                                                                                ----------------------------------------                                                            --------------------
+--------------------                                                            --------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |                    |     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |                    |       INNER      |                                        |       item       |
+|    ss_item_sk    |                                                            |                  |                    |    ss_store_sk   |                                        |                  |
+|    =i_item_sk    |                                                            |                  |                    |    =s_store_sk   |                                        |                  |
+|      (0.08s)     |                                                            |      (0.00s)     |                    |      (0.05s)     |                                        |      (0.00s)     |
+|       96051      |                                                            |      100000      |                    |       96051      |                                        |       18000      |
+--------------------                                                            --------------------                    --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                                        |       item       |                                        |       INNER      |                    |  s_market_id = 8 |
+|    ss_store_sk   |                                        |                  |                                        |    ss_item_sk    |                    |                  |
+|    =s_store_sk   |                                        |                  |                                        |    =sr_item_sk   |                    |                  |
+|                  |                                        |                  |                                        | ss_ticket_number |                    |                  |
+|                  |                                        |                  |                                        | =sr_ticket_numbe |                    |                  |
+|                  |                                        |                  |                                        |         r        |                    |                  |
+|      (0.05s)     |                                        |      (0.00s)     |                                        |      (0.14s)     |                    |      (0.00s)     |
+|       96051      |                                        |       18000      |                                        |      287867      |                    |         3        |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                    |      FILTER      |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                    |  s_market_id = 8 |                                                            |    store_sales   ||   store_returns  ||       store      |
+|    ss_item_sk    |                    |                  |                                                            |                  ||                  ||                  |
+|    =sr_item_sk   |                    |                  |                                                            |                  ||                  ||                  |
+| ss_ticket_number |                    |                  |                                                            |                  ||                  ||                  |
+| =sr_ticket_numbe |                    |                  |                                                            |                  ||                  ||                  |
+|         r        |                    |                  |                                                            |                  ||                  ||                  |
+|      (0.14s)     |                    |      (0.00s)     |                                                            |      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      287867      |                    |         3        |                                                            |      2880404     ||      287867      ||        12        |
+--------------------                    --------------------                                                            ------------------------------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    store_sales   ||   store_returns  ||       store      |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||      287867      ||        12        |
+------------------------------------------------------------
+

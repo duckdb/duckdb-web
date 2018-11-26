@@ -1,0 +1,6 @@
+------------
+|| DSQ062 ||
+------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Ambiguous reference to column name "item_id" (use: "ws_items.item_id" or "ss_items.item_id")
