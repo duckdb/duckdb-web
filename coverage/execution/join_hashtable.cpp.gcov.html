@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report caddd27 - execution/join_hashtable.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report c6b5d78 - execution/join_hashtable.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report caddd27</td>
+            <td class="headerValue">DuckDB Code Coverage Report c6b5d78</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">290</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-26 08:47:19</td>
+            <td class="headerValue">2018-11-26 10:03:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -72,81 +72,81 @@
 <span class="lineNum">      10 </span>            : 
 <a name="11"><span class="lineNum">      11 </span>            : using ScanStructure = JoinHashTable::ScanStructure;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">         39 : JoinHashTable::JoinHashTable(std::vector&lt;JoinCondition&gt; &amp;conditions,</span>
+<span class="lineNum">      13 </span><span class="lineCov">         40 : JoinHashTable::JoinHashTable(std::vector&lt;JoinCondition&gt; &amp;conditions,</span>
 <span class="lineNum">      14 </span>            :                              std::vector&lt;TypeId&gt; build_types, JoinType type,
-<span class="lineNum">      15 </span><span class="lineCov">         39 :                              size_t initial_capacity, bool parallel)</span>
+<span class="lineNum">      15 </span><span class="lineCov">         40 :                              size_t initial_capacity, bool parallel)</span>
 <span class="lineNum">      16 </span>            :     : build_serializer(build_types), build_types(build_types), equality_size(0),
 <span class="lineNum">      17 </span>            :       condition_size(0), build_size(0), tuple_size(0), join_type(type),
-<span class="lineNum">      18 </span><span class="lineCov">         39 :       capacity(0), count(0), parallel(parallel) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">         99 :         for (auto &amp;condition : conditions) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">         60 :                 assert(condition.left-&gt;return_type == condition.right-&gt;return_type);</span>
-<span class="lineNum">      21 </span><span class="lineCov">         60 :                 auto type = condition.left-&gt;return_type;</span>
-<span class="lineNum">      22 </span><span class="lineCov">         60 :                 auto type_size = GetTypeIdSize(type);</span>
-<span class="lineNum">      23 </span><span class="lineCov">         60 :                 if (condition.comparison == ExpressionType::COMPARE_EQUAL) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">         40 :       capacity(0), count(0), parallel(parallel) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">        101 :         for (auto &amp;condition : conditions) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">         61 :                 assert(condition.left-&gt;return_type == condition.right-&gt;return_type);</span>
+<span class="lineNum">      21 </span><span class="lineCov">         61 :                 auto type = condition.left-&gt;return_type;</span>
+<span class="lineNum">      22 </span><span class="lineCov">         61 :                 auto type_size = GetTypeIdSize(type);</span>
+<span class="lineNum">      23 </span><span class="lineCov">         61 :                 if (condition.comparison == ExpressionType::COMPARE_EQUAL) {</span>
 <span class="lineNum">      24 </span>            :                         // all equality conditions should be at the front
 <span class="lineNum">      25 </span>            :                         // all other conditions at the back
 <span class="lineNum">      26 </span>            :                         // this assert checks that
-<span class="lineNum">      27 </span><span class="lineCov">         42 :                         assert(equality_types.size() == condition_types.size());</span>
-<span class="lineNum">      28 </span><span class="lineCov">         42 :                         equality_types.push_back(type);</span>
-<span class="lineNum">      29 </span><span class="lineCov">         42 :                         equality_size += type_size;</span>
+<span class="lineNum">      27 </span><span class="lineCov">         43 :                         assert(equality_types.size() == condition_types.size());</span>
+<span class="lineNum">      28 </span><span class="lineCov">         43 :                         equality_types.push_back(type);</span>
+<span class="lineNum">      29 </span><span class="lineCov">         43 :                         equality_size += type_size;</span>
 <span class="lineNum">      30 </span>            :                 }
-<span class="lineNum">      31 </span><span class="lineCov">         60 :                 predicates.push_back(condition.comparison);</span>
+<span class="lineNum">      31 </span><span class="lineCov">         61 :                 predicates.push_back(condition.comparison);</span>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">         60 :                 condition_types.push_back(type);</span>
-<span class="lineNum">      34 </span><span class="lineCov">         60 :                 condition_size += type_size;</span>
+<span class="lineNum">      33 </span><span class="lineCov">         61 :                 condition_types.push_back(type);</span>
+<span class="lineNum">      34 </span><span class="lineCov">         61 :                 condition_size += type_size;</span>
 <span class="lineNum">      35 </span>            :         }
 <span class="lineNum">      36 </span>            :         // at least one equality is necessary
-<span class="lineNum">      37 </span><span class="lineCov">         39 :         assert(equality_types.size() &gt; 0);</span>
-<span class="lineNum">      38 </span><span class="lineCov">         39 :         equality_serializer.Initialize(equality_types);</span>
-<span class="lineNum">      39 </span><span class="lineCov">         39 :         condition_serializer.Initialize(condition_types);</span>
+<span class="lineNum">      37 </span><span class="lineCov">         40 :         assert(equality_types.size() &gt; 0);</span>
+<span class="lineNum">      38 </span><span class="lineCov">         40 :         equality_serializer.Initialize(equality_types);</span>
+<span class="lineNum">      39 </span><span class="lineCov">         40 :         condition_serializer.Initialize(condition_types);</span>
 <span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">         39 :         if (type == JoinType::ANTI || type == JoinType::SEMI) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">         40 :         if (type == JoinType::ANTI || type == JoinType::SEMI) {</span>
 <span class="lineNum">      42 </span>            :                 // for ANTI and SEMI join, we only need to store the keys
 <span class="lineNum">      43 </span><span class="lineCov">         15 :                 build_size = 0;</span>
 <span class="lineNum">      44 </span>            :         } else {
 <span class="lineNum">      45 </span>            :                 // otherwise we need to store the entire build side for reconstruction
 <span class="lineNum">      46 </span>            :                 // purposes
-<span class="lineNum">      47 </span><span class="lineCov">         72 :                 for (size_t i = 0; i &lt; build_types.size(); i++) {</span>
-<span class="lineNum">      48 </span><span class="lineCov">         48 :                         build_size += GetTypeIdSize(build_types[i]);</span>
+<span class="lineNum">      47 </span><span class="lineCov">         74 :                 for (size_t i = 0; i &lt; build_types.size(); i++) {</span>
+<span class="lineNum">      48 </span><span class="lineCov">         49 :                         build_size += GetTypeIdSize(build_types[i]);</span>
 <span class="lineNum">      49 </span>            :                 }
 <span class="lineNum">      50 </span>            :         }
-<span class="lineNum">      51 </span><span class="lineCov">         39 :         tuple_size = condition_size + build_size;</span>
-<span class="lineNum">      52 </span><span class="lineCov">         39 :         entry_size = tuple_size + sizeof(void *);</span>
-<span class="lineNum">      53 </span><span class="lineCov">         39 :         Resize(initial_capacity);</span>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         39 : }</span></a>
+<span class="lineNum">      51 </span><span class="lineCov">         40 :         tuple_size = condition_size + build_size;</span>
+<span class="lineNum">      52 </span><span class="lineCov">         40 :         entry_size = tuple_size + sizeof(void *);</span>
+<span class="lineNum">      53 </span><span class="lineCov">         40 :         Resize(initial_capacity);</span>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         40 : }</span></a>
 <span class="lineNum">      55 </span>            : 
-<span class="lineNum">      56 </span><span class="lineCov">         46 : void JoinHashTable::InsertHashes(Vector &amp;hashes, uint8_t *key_locations[]) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">         46 :         assert(hashes.type == TypeId::POINTER);</span>
-<span class="lineNum">      58 </span><span class="lineCov">         46 :         hashes.Flatten();</span>
+<span class="lineNum">      56 </span><span class="lineCov">         47 : void JoinHashTable::InsertHashes(Vector &amp;hashes, uint8_t *key_locations[]) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">         47 :         assert(hashes.type == TypeId::POINTER);</span>
+<span class="lineNum">      58 </span><span class="lineCov">         47 :         hashes.Flatten();</span>
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span>            :         // use modulo to get position in array (FIXME: can be done more efficiently)
-<span class="lineNum">      61 </span><span class="lineCov">         46 :         VectorOperations::ModuloInPlace(hashes, capacity);</span>
+<span class="lineNum">      61 </span><span class="lineCov">         47 :         VectorOperations::ModuloInPlace(hashes, capacity);</span>
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">         46 :         auto pointers = hashed_pointers.get();</span>
-<span class="lineNum">      64 </span><span class="lineCov">         46 :         auto indices = (uint64_t *)hashes.data;</span>
+<span class="lineNum">      63 </span><span class="lineCov">         47 :         auto pointers = hashed_pointers.get();</span>
+<span class="lineNum">      64 </span><span class="lineCov">         47 :         auto indices = (uint64_t *)hashes.data;</span>
 <span class="lineNum">      65 </span>            :         // now fill in the entries
-<span class="lineNum">      66 </span><span class="lineCov">      10378 :         for (size_t i = 0; i &lt; hashes.count; i++) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">      10332 :                 auto index = indices[i];</span>
+<span class="lineNum">      66 </span><span class="lineCov">      10380 :         for (size_t i = 0; i &lt; hashes.count; i++) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">      10333 :                 auto index = indices[i];</span>
 <span class="lineNum">      68 </span>            :                 // set prev in current key to the value (NOTE: this will be nullptr if
 <span class="lineNum">      69 </span>            :                 // there is none)
-<span class="lineNum">      70 </span><span class="lineCov">      10332 :                 auto prev_pointer = (uint8_t **)(key_locations[i] + tuple_size);</span>
-<span class="lineNum">      71 </span><span class="lineCov">      10332 :                 *prev_pointer = pointers[index];</span>
+<span class="lineNum">      70 </span><span class="lineCov">      10333 :                 auto prev_pointer = (uint8_t **)(key_locations[i] + tuple_size);</span>
+<span class="lineNum">      71 </span><span class="lineCov">      10333 :                 *prev_pointer = pointers[index];</span>
 <span class="lineNum">      72 </span>            : 
 <span class="lineNum">      73 </span>            :                 // set pointer to current tuple
-<span class="lineNum">      74 </span><span class="lineCov">      10332 :                 pointers[index] = key_locations[i];</span>
+<span class="lineNum">      74 </span><span class="lineCov">      10333 :                 pointers[index] = key_locations[i];</span>
 <span class="lineNum">      75 </span>            :         }
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">         46 : }</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">         47 : }</span></a>
 <span class="lineNum">      77 </span>            : 
-<span class="lineNum">      78 </span><span class="lineCov">         39 : void JoinHashTable::Resize(size_t size) {</span>
-<span class="lineNum">      79 </span><span class="lineCov">         39 :         if (size &lt;= capacity) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">         40 : void JoinHashTable::Resize(size_t size) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">         40 :         if (size &lt;= capacity) {</span>
 <span class="lineNum">      80 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cannot downsize a hash table!&quot;);</span>
 <span class="lineNum">      81 </span>            :         }
-<span class="lineNum">      82 </span><span class="lineCov">         39 :         capacity = size;</span>
+<span class="lineNum">      82 </span><span class="lineCov">         40 :         capacity = size;</span>
 <span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span><span class="lineCov">         39 :         hashed_pointers = unique_ptr&lt;uint8_t *[]&gt;(new uint8_t *[capacity]);</span>
-<span class="lineNum">      85 </span><span class="lineCov">         39 :         memset(hashed_pointers.get(), 0, capacity * sizeof(uint8_t *));</span>
+<span class="lineNum">      84 </span><span class="lineCov">         40 :         hashed_pointers = unique_ptr&lt;uint8_t *[]&gt;(new uint8_t *[capacity]);</span>
+<span class="lineNum">      85 </span><span class="lineCov">         40 :         memset(hashed_pointers.get(), 0, capacity * sizeof(uint8_t *));</span>
 <span class="lineNum">      86 </span>            : 
-<span class="lineNum">      87 </span><span class="lineCov">         39 :         if (count &gt; 0) {</span>
+<span class="lineNum">      87 </span><span class="lineCov">         40 :         if (count &gt; 0) {</span>
 <span class="lineNum">      88 </span>            :                 // we have entries, need to rehash the pointers
 <span class="lineNum">      89 </span>            :                 // first reset all chain pointers to the nullptr
 <span class="lineNum">      90 </span>            :                 // we could do this by actually following the chains in the
@@ -203,135 +203,135 @@
 <span class="lineNum">     141 </span><span class="lineNoCov">          0 :                         node = node-&gt;prev.get();</span>
 <span class="lineNum">     142 </span>            :                 }
 <span class="lineNum">     143 </span>            :         }
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         39 : }</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         40 : }</span></a>
 <span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span><span class="lineCov">         85 : void JoinHashTable::Hash(DataChunk &amp;keys, Vector &amp;hashes) {</span>
-<span class="lineNum">     147 </span><span class="lineCov">         85 :         VectorOperations::Hash(keys.data[0], hashes);</span>
-<span class="lineNum">     148 </span><span class="lineCov">         91 :         for (size_t i = 1; i &lt; equality_types.size(); i++) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">         87 : void JoinHashTable::Hash(DataChunk &amp;keys, Vector &amp;hashes) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">         87 :         VectorOperations::Hash(keys.data[0], hashes);</span>
+<span class="lineNum">     148 </span><span class="lineCov">         93 :         for (size_t i = 1; i &lt; equality_types.size(); i++) {</span>
 <span class="lineNum">     149 </span><span class="lineCov">          6 :                 VectorOperations::CombineHash(hashes, keys.data[i]);</span>
 <span class="lineNum">     150 </span>            :         }
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         85 : }</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         87 : }</span></a>
 <span class="lineNum">     152 </span>            : 
-<span class="lineNum">     153 </span><span class="lineCov">         46 : void JoinHashTable::Build(DataChunk &amp;keys, DataChunk &amp;payload) {</span>
-<span class="lineNum">     154 </span><span class="lineCov">         46 :         assert(keys.size() == payload.size());</span>
+<span class="lineNum">     153 </span><span class="lineCov">         47 : void JoinHashTable::Build(DataChunk &amp;keys, DataChunk &amp;payload) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">         47 :         assert(keys.size() == payload.size());</span>
 <span class="lineNum">     155 </span>            :         // resize at 50% capacity, also need to fit the entire vector
-<span class="lineNum">     156 </span><span class="lineCov">         46 :         if (parallel) {</span>
+<span class="lineNum">     156 </span><span class="lineCov">         47 :         if (parallel) {</span>
 <span class="lineNum">     157 </span><span class="lineNoCov">          0 :                 parallel_lock.lock();</span>
 <span class="lineNum">     158 </span>            :         }
-<span class="lineNum">     159 </span><span class="lineCov">         46 :         if (count + keys.size() &gt; capacity / 2) {</span>
+<span class="lineNum">     159 </span><span class="lineCov">         47 :         if (count + keys.size() &gt; capacity / 2) {</span>
 <span class="lineNum">     160 </span><span class="lineNoCov">          0 :                 Resize(capacity * 2);</span>
 <span class="lineNum">     161 </span>            :         }
-<span class="lineNum">     162 </span><span class="lineCov">         46 :         count += keys.size();</span>
-<span class="lineNum">     163 </span><span class="lineCov">         46 :         if (parallel) {</span>
+<span class="lineNum">     162 </span><span class="lineCov">         47 :         count += keys.size();</span>
+<span class="lineNum">     163 </span><span class="lineCov">         47 :         if (parallel) {</span>
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :                 parallel_lock.unlock();</span>
 <span class="lineNum">     165 </span>            :         }
 <span class="lineNum">     166 </span>            : 
 <span class="lineNum">     167 </span>            :         // get the locations of where to serialize the keys and payload columns
-<span class="lineNum">     168 </span><span class="lineCov">         46 :         uint8_t *key_locations[STANDARD_VECTOR_SIZE];</span>
-<span class="lineNum">     169 </span><span class="lineCov">         46 :         uint8_t *tuple_locations[STANDARD_VECTOR_SIZE];</span>
-<span class="lineNum">     170 </span><span class="lineCov">         92 :         auto node = make_unique&lt;Node&gt;(entry_size, keys.size());</span>
-<span class="lineNum">     171 </span><span class="lineCov">         46 :         auto dataptr = node-&gt;data.get();</span>
-<span class="lineNum">     172 </span><span class="lineCov">      10378 :         for (size_t i = 0; i &lt; keys.size(); i++) {</span>
+<span class="lineNum">     168 </span><span class="lineCov">         47 :         uint8_t *key_locations[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     169 </span><span class="lineCov">         47 :         uint8_t *tuple_locations[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     170 </span><span class="lineCov">         94 :         auto node = make_unique&lt;Node&gt;(entry_size, keys.size());</span>
+<span class="lineNum">     171 </span><span class="lineCov">         47 :         auto dataptr = node-&gt;data.get();</span>
+<span class="lineNum">     172 </span><span class="lineCov">      10380 :         for (size_t i = 0; i &lt; keys.size(); i++) {</span>
 <span class="lineNum">     173 </span>            :                 // key is stored at the start
-<span class="lineNum">     174 </span><span class="lineCov">      10332 :                 key_locations[i] = dataptr;</span>
+<span class="lineNum">     174 </span><span class="lineCov">      10333 :                 key_locations[i] = dataptr;</span>
 <span class="lineNum">     175 </span>            :                 // after that the build-side tuple is stored
-<span class="lineNum">     176 </span><span class="lineCov">      10332 :                 tuple_locations[i] = dataptr + condition_size;</span>
-<span class="lineNum">     177 </span><span class="lineCov">      10332 :                 dataptr += entry_size;</span>
+<span class="lineNum">     176 </span><span class="lineCov">      10333 :                 tuple_locations[i] = dataptr + condition_size;</span>
+<span class="lineNum">     177 </span><span class="lineCov">      10333 :                 dataptr += entry_size;</span>
 <span class="lineNum">     178 </span>            :         }
-<span class="lineNum">     179 </span><span class="lineCov">         46 :         node-&gt;count = keys.size();</span>
+<span class="lineNum">     179 </span><span class="lineCov">         47 :         node-&gt;count = keys.size();</span>
 <span class="lineNum">     180 </span>            : 
 <span class="lineNum">     181 </span>            :         // serialize the values to these locations
 <span class="lineNum">     182 </span>            :         // we serialize all the condition variables here
-<span class="lineNum">     183 </span><span class="lineCov">         46 :         condition_serializer.Serialize(keys, key_locations);</span>
-<span class="lineNum">     184 </span><span class="lineCov">         46 :         if (build_size &gt; 0) {</span>
-<span class="lineNum">     185 </span><span class="lineCov">         33 :                 build_serializer.Serialize(payload, tuple_locations);</span>
+<span class="lineNum">     183 </span><span class="lineCov">         47 :         condition_serializer.Serialize(keys, key_locations);</span>
+<span class="lineNum">     184 </span><span class="lineCov">         47 :         if (build_size &gt; 0) {</span>
+<span class="lineNum">     185 </span><span class="lineCov">         34 :                 build_serializer.Serialize(payload, tuple_locations);</span>
 <span class="lineNum">     186 </span>            :         }
 <span class="lineNum">     187 </span>            : 
 <span class="lineNum">     188 </span>            :         // hash the keys and obtain an entry in the list
 <span class="lineNum">     189 </span>            :         // note that we only hash the keys used in the equality comparison
-<span class="lineNum">     190 </span><span class="lineCov">         92 :         StaticVector&lt;uint64_t&gt; hashes;</span>
-<span class="lineNum">     191 </span><span class="lineCov">         46 :         Hash(keys, hashes);</span>
+<span class="lineNum">     190 </span><span class="lineCov">         94 :         StaticVector&lt;uint64_t&gt; hashes;</span>
+<span class="lineNum">     191 </span><span class="lineCov">         47 :         Hash(keys, hashes);</span>
 <span class="lineNum">     192 </span>            : 
-<span class="lineNum">     193 </span><span class="lineCov">         46 :         if (parallel) {</span>
+<span class="lineNum">     193 </span><span class="lineCov">         47 :         if (parallel) {</span>
 <span class="lineNum">     194 </span>            :                 // obtain lock
 <span class="lineNum">     195 </span><span class="lineNoCov">          0 :                 parallel_lock.lock();</span>
 <span class="lineNum">     196 </span>            :         }
-<span class="lineNum">     197 </span><span class="lineCov">         46 :         InsertHashes(hashes, key_locations);</span>
+<span class="lineNum">     197 </span><span class="lineCov">         47 :         InsertHashes(hashes, key_locations);</span>
 <span class="lineNum">     198 </span>            :         // store the new node as the head
-<span class="lineNum">     199 </span><span class="lineCov">         46 :         node-&gt;prev = move(head);</span>
-<span class="lineNum">     200 </span><span class="lineCov">         46 :         head = move(node);</span>
-<span class="lineNum">     201 </span><span class="lineCov">         46 :         if (parallel) {</span>
+<span class="lineNum">     199 </span><span class="lineCov">         47 :         node-&gt;prev = move(head);</span>
+<span class="lineNum">     200 </span><span class="lineCov">         47 :         head = move(node);</span>
+<span class="lineNum">     201 </span><span class="lineCov">         47 :         if (parallel) {</span>
 <span class="lineNum">     202 </span><span class="lineNoCov">          0 :                 parallel_lock.unlock();</span>
 <span class="lineNum">     203 </span>            :         }
 <span class="lineNum">     204 </span>            : 
 <span class="lineNum">     205 </span>            :         // finally move strings to the string heap
-<span class="lineNum">     206 </span><span class="lineCov">         46 :         keys.MoveStringsToHeap(string_heap);</span>
-<span class="lineNum">     207 </span><span class="lineCov">         46 :         if (build_size &gt; 0) {</span>
-<span class="lineNum">     208 </span><span class="lineCov">         33 :                 payload.MoveStringsToHeap(string_heap);</span>
+<span class="lineNum">     206 </span><span class="lineCov">         47 :         keys.MoveStringsToHeap(string_heap);</span>
+<span class="lineNum">     207 </span><span class="lineCov">         47 :         if (build_size &gt; 0) {</span>
+<span class="lineNum">     208 </span><span class="lineCov">         34 :                 payload.MoveStringsToHeap(string_heap);</span>
 <span class="lineNum">     209 </span>            :         }
-<a name="210"><span class="lineNum">     210 </span><span class="lineCov">         46 : }</span></a>
+<a name="210"><span class="lineNum">     210 </span><span class="lineCov">         47 : }</span></a>
 <span class="lineNum">     211 </span>            : 
-<span class="lineNum">     212 </span><span class="lineCov">         39 : unique_ptr&lt;ScanStructure&gt; JoinHashTable::Probe(DataChunk &amp;keys) {</span>
-<span class="lineNum">     213 </span><span class="lineCov">         39 :         assert(!keys.sel_vector); // should be flattened before</span>
+<span class="lineNum">     212 </span><span class="lineCov">         40 : unique_ptr&lt;ScanStructure&gt; JoinHashTable::Probe(DataChunk &amp;keys) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">         40 :         assert(!keys.sel_vector); // should be flattened before</span>
 <span class="lineNum">     214 </span>            :         // scan structure
-<span class="lineNum">     215 </span><span class="lineCov">         39 :         auto ss = make_unique&lt;ScanStructure&gt;(*this);</span>
+<span class="lineNum">     215 </span><span class="lineCov">         40 :         auto ss = make_unique&lt;ScanStructure&gt;(*this);</span>
 <span class="lineNum">     216 </span>            :         // first hash all the keys to do the lookup
-<span class="lineNum">     217 </span><span class="lineCov">         78 :         StaticVector&lt;uint64_t&gt; hashes;</span>
-<span class="lineNum">     218 </span><span class="lineCov">         39 :         Hash(keys, hashes);</span>
+<span class="lineNum">     217 </span><span class="lineCov">         80 :         StaticVector&lt;uint64_t&gt; hashes;</span>
+<span class="lineNum">     218 </span><span class="lineCov">         40 :         Hash(keys, hashes);</span>
 <span class="lineNum">     219 </span>            : 
 <span class="lineNum">     220 </span>            :         // use modulo to get index in array
-<span class="lineNum">     221 </span><span class="lineCov">         39 :         VectorOperations::ModuloInPlace(hashes, capacity);</span>
+<span class="lineNum">     221 </span><span class="lineCov">         40 :         VectorOperations::ModuloInPlace(hashes, capacity);</span>
 <span class="lineNum">     222 </span>            : 
 <span class="lineNum">     223 </span>            :         // now create the initial pointers from the hashes
-<span class="lineNum">     224 </span><span class="lineCov">         39 :         auto ptrs = (uint8_t **)ss-&gt;pointers.data;</span>
-<span class="lineNum">     225 </span><span class="lineCov">         39 :         auto indices = (uint64_t *)hashes.data;</span>
-<span class="lineNum">     226 </span><span class="lineCov">        146 :         for (size_t i = 0; i &lt; hashes.count; i++) {</span>
-<span class="lineNum">     227 </span><span class="lineCov">        107 :                 auto index = indices[i];</span>
-<span class="lineNum">     228 </span><span class="lineCov">        107 :                 ptrs[i] = hashed_pointers[index];</span>
+<span class="lineNum">     224 </span><span class="lineCov">         40 :         auto ptrs = (uint8_t **)ss-&gt;pointers.data;</span>
+<span class="lineNum">     225 </span><span class="lineCov">         40 :         auto indices = (uint64_t *)hashes.data;</span>
+<span class="lineNum">     226 </span><span class="lineCov">        148 :         for (size_t i = 0; i &lt; hashes.count; i++) {</span>
+<span class="lineNum">     227 </span><span class="lineCov">        108 :                 auto index = indices[i];</span>
+<span class="lineNum">     228 </span><span class="lineCov">        108 :                 ptrs[i] = hashed_pointers[index];</span>
 <span class="lineNum">     229 </span>            :         }
-<span class="lineNum">     230 </span><span class="lineCov">         39 :         ss-&gt;pointers.count = hashes.count;</span>
+<span class="lineNum">     230 </span><span class="lineCov">         40 :         ss-&gt;pointers.count = hashes.count;</span>
 <span class="lineNum">     231 </span>            : 
-<span class="lineNum">     232 </span><span class="lineCov">         39 :         switch (join_type) {</span>
+<span class="lineNum">     232 </span><span class="lineCov">         40 :         switch (join_type) {</span>
 <span class="lineNum">     233 </span><span class="lineCov">         16 :         case JoinType::SEMI:</span>
 <span class="lineNum">     234 </span>            :         case JoinType::ANTI:
 <span class="lineNum">     235 </span>            :         case JoinType::LEFT:
 <span class="lineNum">     236 </span>            :                 // initialize all tuples with found_match to false
 <span class="lineNum">     237 </span><span class="lineCov">         16 :                 memset(ss-&gt;found_match, 0, sizeof(ss-&gt;found_match));</span>
-<span class="lineNum">     238 </span><span class="lineCov">         39 :         case JoinType::INNER: {</span>
+<span class="lineNum">     238 </span><span class="lineCov">         40 :         case JoinType::INNER: {</span>
 <span class="lineNum">     239 </span>            :                 // create the selection vector linking to only non-empty entries
-<span class="lineNum">     240 </span><span class="lineCov">         39 :                 size_t count = 0;</span>
-<span class="lineNum">     241 </span><span class="lineCov">        146 :                 for (size_t i = 0; i &lt; ss-&gt;pointers.count; i++) {</span>
-<span class="lineNum">     242 </span><span class="lineCov">        107 :                         if (ptrs[i]) {</span>
-<span class="lineNum">     243 </span><span class="lineCov">         78 :                                 ss-&gt;sel_vector[count++] = i;</span>
+<span class="lineNum">     240 </span><span class="lineCov">         40 :                 size_t count = 0;</span>
+<span class="lineNum">     241 </span><span class="lineCov">        148 :                 for (size_t i = 0; i &lt; ss-&gt;pointers.count; i++) {</span>
+<span class="lineNum">     242 </span><span class="lineCov">        108 :                         if (ptrs[i]) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">         79 :                                 ss-&gt;sel_vector[count++] = i;</span>
 <span class="lineNum">     244 </span>            :                         }
 <span class="lineNum">     245 </span>            :                 }
-<span class="lineNum">     246 </span><span class="lineCov">         39 :                 ss-&gt;pointers.sel_vector = ss-&gt;sel_vector;</span>
-<span class="lineNum">     247 </span><span class="lineCov">         39 :                 ss-&gt;pointers.count = count;</span>
-<span class="lineNum">     248 </span><span class="lineCov">         39 :                 break;</span>
+<span class="lineNum">     246 </span><span class="lineCov">         40 :                 ss-&gt;pointers.sel_vector = ss-&gt;sel_vector;</span>
+<span class="lineNum">     247 </span><span class="lineCov">         40 :                 ss-&gt;pointers.count = count;</span>
+<span class="lineNum">     248 </span><span class="lineCov">         40 :                 break;</span>
 <span class="lineNum">     249 </span>            :         }
 <span class="lineNum">     250 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">     251 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented join type for hash join&quot;);</span>
 <span class="lineNum">     252 </span>            :         }
 <span class="lineNum">     253 </span>            : 
-<span class="lineNum">     254 </span><span class="lineCov">         78 :         return ss;</span>
+<span class="lineNum">     254 </span><span class="lineCov">         80 :         return ss;</span>
 <a name="255"><span class="lineNum">     255 </span>            : }</a>
 <span class="lineNum">     256 </span>            : 
-<span class="lineNum">     257 </span><span class="lineCov">      39975 : ScanStructure::ScanStructure(JoinHashTable &amp;ht) : ht(ht), finished(false) {</span>
-<span class="lineNum">     258 </span><span class="lineCov">         39 :         pointers.Initialize(TypeId::POINTER, false);</span>
-<span class="lineNum">     259 </span><span class="lineCov">         39 :         build_pointer_vector.Initialize(TypeId::POINTER, false);</span>
-<span class="lineNum">     260 </span><span class="lineCov">         39 :         pointers.sel_vector = this-&gt;sel_vector;</span>
-<a name="261"><span class="lineNum">     261 </span><span class="lineCov">         39 : }</span></a>
+<span class="lineNum">     257 </span><span class="lineCov">      41000 : ScanStructure::ScanStructure(JoinHashTable &amp;ht) : ht(ht), finished(false) {</span>
+<span class="lineNum">     258 </span><span class="lineCov">         40 :         pointers.Initialize(TypeId::POINTER, false);</span>
+<span class="lineNum">     259 </span><span class="lineCov">         40 :         build_pointer_vector.Initialize(TypeId::POINTER, false);</span>
+<span class="lineNum">     260 </span><span class="lineCov">         40 :         pointers.sel_vector = this-&gt;sel_vector;</span>
+<a name="261"><span class="lineNum">     261 </span><span class="lineCov">         40 : }</span></a>
 <span class="lineNum">     262 </span>            : 
-<span class="lineNum">     263 </span><span class="lineCov">      10323 : void ScanStructure::Next(DataChunk &amp;keys, DataChunk &amp;left, DataChunk &amp;result) {</span>
-<span class="lineNum">     264 </span><span class="lineCov">      10323 :         assert(!left.sel_vector &amp;&amp; !keys.sel_vector); // should be flattened before</span>
-<span class="lineNum">     265 </span><span class="lineCov">      10323 :         if (finished) {</span>
+<span class="lineNum">     263 </span><span class="lineCov">      10325 : void ScanStructure::Next(DataChunk &amp;keys, DataChunk &amp;left, DataChunk &amp;result) {</span>
+<span class="lineNum">     264 </span><span class="lineCov">      10325 :         assert(!left.sel_vector &amp;&amp; !keys.sel_vector); // should be flattened before</span>
+<span class="lineNum">     265 </span><span class="lineCov">      10325 :         if (finished) {</span>
 <span class="lineNum">     266 </span><span class="lineCov">         16 :                 return;</span>
 <span class="lineNum">     267 </span>            :         }
 <span class="lineNum">     268 </span>            : 
-<span class="lineNum">     269 </span><span class="lineCov">      10307 :         switch (ht.join_type) {</span>
-<span class="lineNum">     270 </span><span class="lineCov">      10290 :         case JoinType::INNER:</span>
-<span class="lineNum">     271 </span><span class="lineCov">      10290 :                 NextInnerJoin(keys, left, result);</span>
-<span class="lineNum">     272 </span><span class="lineCov">      10290 :                 break;</span>
+<span class="lineNum">     269 </span><span class="lineCov">      10309 :         switch (ht.join_type) {</span>
+<span class="lineNum">     270 </span><span class="lineCov">      10292 :         case JoinType::INNER:</span>
+<span class="lineNum">     271 </span><span class="lineCov">      10292 :                 NextInnerJoin(keys, left, result);</span>
+<span class="lineNum">     272 </span><span class="lineCov">      10292 :                 break;</span>
 <span class="lineNum">     273 </span><span class="lineCov">          6 :         case JoinType::SEMI:</span>
 <span class="lineNum">     274 </span><span class="lineCov">          6 :                 NextSemiJoin(keys, left, result);</span>
 <span class="lineNum">     275 </span><span class="lineCov">          6 :                 break;</span>
@@ -346,34 +346,34 @@
 <span class="lineNum">     284 </span>            :         }
 <a name="285"><span class="lineNum">     285 </span>            : }</a>
 <span class="lineNum">     286 </span>            : 
-<span class="lineNum">     287 </span><span class="lineCov">      10280 : void ScanStructure::ResolvePredicates(DataChunk &amp;keys, Vector &amp;final_result) {</span>
-<span class="lineNum">     288 </span><span class="lineCov">      10280 :         Vector current_pointers;</span>
-<span class="lineNum">     289 </span><span class="lineCov">      10280 :         current_pointers.Reference(pointers);</span>
+<span class="lineNum">     287 </span><span class="lineCov">      10281 : void ScanStructure::ResolvePredicates(DataChunk &amp;keys, Vector &amp;final_result) {</span>
+<span class="lineNum">     288 </span><span class="lineCov">      10281 :         Vector current_pointers;</span>
+<span class="lineNum">     289 </span><span class="lineCov">      10281 :         current_pointers.Reference(pointers);</span>
 <span class="lineNum">     290 </span>            : 
-<span class="lineNum">     291 </span><span class="lineCov">      10280 :         sel_t temporary_selection_vector[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     291 </span><span class="lineCov">      10281 :         sel_t temporary_selection_vector[STANDARD_VECTOR_SIZE];</span>
 <span class="lineNum">     292 </span>            : 
-<span class="lineNum">     293 </span><span class="lineCov">      10280 :         auto old_sel_vector = current_pointers.sel_vector;</span>
-<span class="lineNum">     294 </span><span class="lineCov">      10280 :         auto old_count = current_pointers.count;</span>
+<span class="lineNum">     293 </span><span class="lineCov">      10281 :         auto old_sel_vector = current_pointers.sel_vector;</span>
+<span class="lineNum">     294 </span><span class="lineCov">      10281 :         auto old_count = current_pointers.count;</span>
 <span class="lineNum">     295 </span>            : 
-<span class="lineNum">     296 </span><span class="lineCov">      20578 :         for (size_t i = 0; i &lt; ht.predicates.size(); i++) {</span>
+<span class="lineNum">     296 </span><span class="lineCov">      20580 :         for (size_t i = 0; i &lt; ht.predicates.size(); i++) {</span>
 <span class="lineNum">     297 </span>            :                 // gather the data from the pointers
-<span class="lineNum">     298 </span><span class="lineCov">      20596 :                 Vector ht_data(keys.data[i].type, true, false);</span>
-<span class="lineNum">     299 </span><span class="lineCov">      10298 :                 ht_data.sel_vector = current_pointers.sel_vector;</span>
-<span class="lineNum">     300 </span><span class="lineCov">      10298 :                 ht_data.count = current_pointers.count;</span>
+<span class="lineNum">     298 </span><span class="lineCov">      20598 :                 Vector ht_data(keys.data[i].type, true, false);</span>
+<span class="lineNum">     299 </span><span class="lineCov">      10299 :                 ht_data.sel_vector = current_pointers.sel_vector;</span>
+<span class="lineNum">     300 </span><span class="lineCov">      10299 :                 ht_data.count = current_pointers.count;</span>
 <span class="lineNum">     301 </span>            : 
-<span class="lineNum">     302 </span><span class="lineCov">      10298 :                 VectorOperations::Gather::Set(current_pointers, ht_data);</span>
+<span class="lineNum">     302 </span><span class="lineCov">      10299 :                 VectorOperations::Gather::Set(current_pointers, ht_data);</span>
 <span class="lineNum">     303 </span>            : 
 <span class="lineNum">     304 </span>            :                 // set the selection vector
-<span class="lineNum">     305 </span><span class="lineCov">      10298 :                 size_t old_count = keys.data[i].count;</span>
-<span class="lineNum">     306 </span><span class="lineCov">      10298 :                 assert(!keys.data[i].sel_vector);</span>
-<span class="lineNum">     307 </span><span class="lineCov">      10298 :                 keys.data[i].sel_vector = ht_data.sel_vector;</span>
-<span class="lineNum">     308 </span><span class="lineCov">      10298 :                 keys.data[i].count = ht_data.count;</span>
+<span class="lineNum">     305 </span><span class="lineCov">      10299 :                 size_t old_count = keys.data[i].count;</span>
+<span class="lineNum">     306 </span><span class="lineCov">      10299 :                 assert(!keys.data[i].sel_vector);</span>
+<span class="lineNum">     307 </span><span class="lineCov">      10299 :                 keys.data[i].sel_vector = ht_data.sel_vector;</span>
+<span class="lineNum">     308 </span><span class="lineCov">      10299 :                 keys.data[i].count = ht_data.count;</span>
 <span class="lineNum">     309 </span>            : 
 <span class="lineNum">     310 </span>            :                 // perform the comparison expression
-<span class="lineNum">     311 </span><span class="lineCov">      10298 :                 switch (ht.predicates[i]) {</span>
-<span class="lineNum">     312 </span><span class="lineCov">      10283 :                 case ExpressionType::COMPARE_EQUAL:</span>
-<span class="lineNum">     313 </span><span class="lineCov">      10283 :                         VectorOperations::Equals(keys.data[i], ht_data, final_result);</span>
-<span class="lineNum">     314 </span><span class="lineCov">      10283 :                         break;</span>
+<span class="lineNum">     311 </span><span class="lineCov">      10299 :                 switch (ht.predicates[i]) {</span>
+<span class="lineNum">     312 </span><span class="lineCov">      10284 :                 case ExpressionType::COMPARE_EQUAL:</span>
+<span class="lineNum">     313 </span><span class="lineCov">      10284 :                         VectorOperations::Equals(keys.data[i], ht_data, final_result);</span>
+<span class="lineNum">     314 </span><span class="lineCov">      10284 :                         break;</span>
 <span class="lineNum">     315 </span><span class="lineCov">          4 :                 case ExpressionType::COMPARE_GREATERTHAN:</span>
 <span class="lineNum">     316 </span><span class="lineCov">          4 :                         VectorOperations::GreaterThan(keys.data[i], ht_data, final_result);</span>
 <span class="lineNum">     317 </span><span class="lineCov">          4 :                         break;</span>
@@ -396,12 +396,12 @@
 <span class="lineNum">     334 </span><span class="lineNoCov">          0 :                             &quot;Unimplemented comparison type for join&quot;);</span>
 <span class="lineNum">     335 </span>            :                 }
 <span class="lineNum">     336 </span>            :                 // reset the selection vector
-<span class="lineNum">     337 </span><span class="lineCov">      10298 :                 keys.data[i].sel_vector = nullptr;</span>
-<span class="lineNum">     338 </span><span class="lineCov">      10298 :                 keys.data[i].count = old_count;</span>
+<span class="lineNum">     337 </span><span class="lineCov">      10299 :                 keys.data[i].sel_vector = nullptr;</span>
+<span class="lineNum">     338 </span><span class="lineCov">      10299 :                 keys.data[i].count = old_count;</span>
 <span class="lineNum">     339 </span>            : 
 <span class="lineNum">     340 </span>            :                 // now based on the result recreate the selection vector for the next
 <span class="lineNum">     341 </span>            :                 // step so we can skip unnecessary comparisons in the next phase
-<span class="lineNum">     342 </span><span class="lineCov">      10298 :                 if (i != ht.predicates.size() - 1) {</span>
+<span class="lineNum">     342 </span><span class="lineCov">      10299 :                 if (i != ht.predicates.size() - 1) {</span>
 <span class="lineNum">     343 </span><span class="lineCov">         18 :                         size_t new_count = 0;</span>
 <span class="lineNum">     344 </span><span class="lineCov">         18 :                         VectorOperations::ExecType&lt;bool&gt;(</span>
 <span class="lineNum">     345 </span>            :                             final_result, [&amp;](bool match, size_t index, size_t k) {
@@ -413,35 +413,35 @@
 <span class="lineNum">     351 </span><span class="lineCov">         18 :                         current_pointers.count = new_count;</span>
 <span class="lineNum">     352 </span>            :                 }
 <span class="lineNum">     353 </span>            :                 // move all the pointers to the next element
-<span class="lineNum">     354 </span><span class="lineCov">      10298 :                 VectorOperations::AddInPlace(pointers,</span>
-<span class="lineNum">     355 </span><span class="lineCov">      10298 :                                              GetTypeIdSize(keys.data[i].type));</span>
+<span class="lineNum">     354 </span><span class="lineCov">      10299 :                 VectorOperations::AddInPlace(pointers,</span>
+<span class="lineNum">     355 </span><span class="lineCov">      10299 :                                              GetTypeIdSize(keys.data[i].type));</span>
 <span class="lineNum">     356 </span>            :         }
-<span class="lineNum">     357 </span><span class="lineCov">      10280 :         final_result.sel_vector = old_sel_vector;</span>
-<span class="lineNum">     358 </span><span class="lineCov">      10280 :         final_result.count = old_count;</span>
-<a name="359"><span class="lineNum">     359 </span><span class="lineCov">      10280 : }</span></a>
+<span class="lineNum">     357 </span><span class="lineCov">      10281 :         final_result.sel_vector = old_sel_vector;</span>
+<span class="lineNum">     358 </span><span class="lineCov">      10281 :         final_result.count = old_count;</span>
+<a name="359"><span class="lineNum">     359 </span><span class="lineCov">      10281 : }</span></a>
 <span class="lineNum">     360 </span>            : 
-<span class="lineNum">     361 </span><span class="lineCov">      10292 : void ScanStructure::NextInnerJoin(DataChunk &amp;keys, DataChunk &amp;left,</span>
+<span class="lineNum">     361 </span><span class="lineCov">      10294 : void ScanStructure::NextInnerJoin(DataChunk &amp;keys, DataChunk &amp;left,</span>
 <span class="lineNum">     362 </span>            :                                   DataChunk &amp;result) {
-<span class="lineNum">     363 </span><span class="lineCov">      10292 :         assert(result.column_count == left.column_count + ht.build_types.size());</span>
-<span class="lineNum">     364 </span><span class="lineCov">      10292 :         if (pointers.count == 0) {</span>
+<span class="lineNum">     363 </span><span class="lineCov">      10294 :         assert(result.column_count == left.column_count + ht.build_types.size());</span>
+<span class="lineNum">     364 </span><span class="lineCov">      10294 :         if (pointers.count == 0) {</span>
 <span class="lineNum">     365 </span>            :                 // no pointers left to chase
-<span class="lineNum">     366 </span><span class="lineCov">         24 :                 return;</span>
+<span class="lineNum">     366 </span><span class="lineCov">         25 :                 return;</span>
 <span class="lineNum">     367 </span>            :         }
 <span class="lineNum">     368 </span>            : 
-<span class="lineNum">     369 </span><span class="lineCov">      20536 :         StaticVector&lt;bool&gt; comparison_result;</span>
+<span class="lineNum">     369 </span><span class="lineCov">      20538 :         StaticVector&lt;bool&gt; comparison_result;</span>
 <span class="lineNum">     370 </span>            : 
-<span class="lineNum">     371 </span><span class="lineCov">      10268 :         size_t result_count = 0;</span>
+<span class="lineNum">     371 </span><span class="lineCov">      10269 :         size_t result_count = 0;</span>
 <span class="lineNum">     372 </span><span class="lineNoCov">          0 :         do {</span>
-<span class="lineNum">     373 </span><span class="lineCov">      10268 :                 auto build_pointers = (uint8_t **)build_pointer_vector.data;</span>
+<span class="lineNum">     373 </span><span class="lineCov">      10269 :                 auto build_pointers = (uint8_t **)build_pointer_vector.data;</span>
 <span class="lineNum">     374 </span>            : 
 <span class="lineNum">     375 </span>            :                 // resolve the predicates for all the pointers
-<span class="lineNum">     376 </span><span class="lineCov">      10268 :                 ResolvePredicates(keys, comparison_result);</span>
+<span class="lineNum">     376 </span><span class="lineCov">      10269 :                 ResolvePredicates(keys, comparison_result);</span>
 <span class="lineNum">     377 </span>            : 
-<span class="lineNum">     378 </span><span class="lineCov">      10268 :                 auto ptrs = (uint8_t **)pointers.data;</span>
+<span class="lineNum">     378 </span><span class="lineCov">      10269 :                 auto ptrs = (uint8_t **)pointers.data;</span>
 <span class="lineNum">     379 </span>            :                 // after doing all the comparisons we loop to find all the actual
 <span class="lineNum">     380 </span>            :                 // matches
-<span class="lineNum">     381 </span><span class="lineCov">      10268 :                 result_count = 0;</span>
-<span class="lineNum">     382 </span><span class="lineCov">      10268 :                 VectorOperations::ExecType&lt;bool&gt;(</span>
+<span class="lineNum">     381 </span><span class="lineCov">      10269 :                 result_count = 0;</span>
+<span class="lineNum">     382 </span><span class="lineCov">      10269 :                 VectorOperations::ExecType&lt;bool&gt;(</span>
 <span class="lineNum">     383 </span>            :                     comparison_result, [&amp;](bool match, size_t index, size_t k) {
 <span class="lineNum">     384 </span>            :                             if (match) {
 <span class="lineNum">     385 </span>            :                                     found_match[index] = true;
@@ -452,8 +452,8 @@
 <span class="lineNum">     390 </span>            :                     });
 <span class="lineNum">     391 </span>            : 
 <span class="lineNum">     392 </span>            :                 // finally we chase the pointers for the next iteration
-<span class="lineNum">     393 </span><span class="lineCov">      10268 :                 size_t new_count = 0;</span>
-<span class="lineNum">     394 </span><span class="lineCov">      10268 :                 VectorOperations::Exec(pointers, [&amp;](size_t index, size_t k) {</span>
+<span class="lineNum">     393 </span><span class="lineCov">      10269 :                 size_t new_count = 0;</span>
+<span class="lineNum">     394 </span><span class="lineCov">      10269 :                 VectorOperations::Exec(pointers, [&amp;](size_t index, size_t k) {</span>
 <span class="lineNum">     395 </span>            :                         auto prev_pointer = (uint8_t **)(ptrs[index] + ht.build_size);
 <span class="lineNum">     396 </span>            :                         ptrs[index] = *prev_pointer;
 <span class="lineNum">     397 </span>            :                         if (ptrs[index]) {
@@ -462,29 +462,29 @@
 <span class="lineNum">     400 </span>            :                                 sel_vector[new_count++] = index;
 <span class="lineNum">     401 </span>            :                         }
 <span class="lineNum">     402 </span>            :                 });
-<span class="lineNum">     403 </span><span class="lineCov">      10268 :                 pointers.count = new_count;</span>
-<span class="lineNum">     404 </span><span class="lineCov">      10268 :         } while (pointers.count &gt; 0 &amp;&amp; result_count == 0);</span>
+<span class="lineNum">     403 </span><span class="lineCov">      10269 :                 pointers.count = new_count;</span>
+<span class="lineNum">     404 </span><span class="lineCov">      10269 :         } while (pointers.count &gt; 0 &amp;&amp; result_count == 0);</span>
 <span class="lineNum">     405 </span>            : 
-<span class="lineNum">     406 </span><span class="lineCov">      10268 :         if (result_count &gt; 0) {</span>
+<span class="lineNum">     406 </span><span class="lineCov">      10269 :         if (result_count &gt; 0) {</span>
 <span class="lineNum">     407 </span>            :                 // matches were found
 <span class="lineNum">     408 </span>            :                 // construct the result
-<span class="lineNum">     409 </span><span class="lineCov">      10268 :                 result.sel_vector = result.owned_sel_vector;</span>
-<span class="lineNum">     410 </span><span class="lineCov">      10268 :                 build_pointer_vector.count = result_count;</span>
+<span class="lineNum">     409 </span><span class="lineCov">      10269 :                 result.sel_vector = result.owned_sel_vector;</span>
+<span class="lineNum">     410 </span><span class="lineCov">      10269 :                 build_pointer_vector.count = result_count;</span>
 <span class="lineNum">     411 </span>            : 
 <span class="lineNum">     412 </span>            :                 // reference the columns of the left side from the result
-<span class="lineNum">     413 </span><span class="lineCov">      20574 :                 for (size_t i = 0; i &lt; left.column_count; i++) {</span>
-<span class="lineNum">     414 </span><span class="lineCov">      10306 :                         result.data[i].Reference(left.data[i]);</span>
-<span class="lineNum">     415 </span><span class="lineCov">      10306 :                         result.data[i].sel_vector = result.sel_vector;</span>
-<span class="lineNum">     416 </span><span class="lineCov">      10306 :                         result.data[i].count = result_count;</span>
+<span class="lineNum">     413 </span><span class="lineCov">      20576 :                 for (size_t i = 0; i &lt; left.column_count; i++) {</span>
+<span class="lineNum">     414 </span><span class="lineCov">      10307 :                         result.data[i].Reference(left.data[i]);</span>
+<span class="lineNum">     415 </span><span class="lineCov">      10307 :                         result.data[i].sel_vector = result.sel_vector;</span>
+<span class="lineNum">     416 </span><span class="lineCov">      10307 :                         result.data[i].count = result_count;</span>
 <span class="lineNum">     417 </span>            :                 }
 <span class="lineNum">     418 </span>            :                 // apply the selection vector
 <span class="lineNum">     419 </span>            :                 // now fetch the right side data from the HT
-<span class="lineNum">     420 </span><span class="lineCov">      20565 :                 for (size_t i = 0; i &lt; ht.build_types.size(); i++) {</span>
-<span class="lineNum">     421 </span><span class="lineCov">      10297 :                         auto &amp;vector = result.data[left.column_count + i];</span>
-<span class="lineNum">     422 </span><span class="lineCov">      10297 :                         vector.sel_vector = result.sel_vector;</span>
-<span class="lineNum">     423 </span><span class="lineCov">      10297 :                         vector.count = result_count;</span>
-<span class="lineNum">     424 </span><span class="lineCov">      20594 :                         ht.build_serializer.DeserializeColumn(</span>
-<span class="lineNum">     425 </span><span class="lineCov">      10297 :                             build_pointer_vector, i, result.data[left.column_count + i]);</span>
+<span class="lineNum">     420 </span><span class="lineCov">      20567 :                 for (size_t i = 0; i &lt; ht.build_types.size(); i++) {</span>
+<span class="lineNum">     421 </span><span class="lineCov">      10298 :                         auto &amp;vector = result.data[left.column_count + i];</span>
+<span class="lineNum">     422 </span><span class="lineCov">      10298 :                         vector.sel_vector = result.sel_vector;</span>
+<span class="lineNum">     423 </span><span class="lineCov">      10298 :                         vector.count = result_count;</span>
+<span class="lineNum">     424 </span><span class="lineCov">      20596 :                         ht.build_serializer.DeserializeColumn(</span>
+<span class="lineNum">     425 </span><span class="lineCov">      10298 :                             build_pointer_vector, i, result.data[left.column_count + i]);</span>
 <span class="lineNum">     426 </span>            :                 }
 <span class="lineNum">     427 </span>            :         }
 <span class="lineNum">     428 </span>            : }
