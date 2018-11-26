@@ -1,0 +1,6 @@
+------------
+|| DSQ087 ||
+------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Subquery "sr_items" does not have a column named "item_id"
