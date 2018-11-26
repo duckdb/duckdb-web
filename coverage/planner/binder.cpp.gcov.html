@@ -1,0 +1,520 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report f745df7 - planner/binder.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">planner</a> - binder.cpp<span style="font-size: 80%;"> (source / <a href="binder.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report f745df7</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">224</td>
+            <td class="headerCovTableEntry">246</td>
+            <td class="headerCovTableEntryHi">91.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-26 16:54:51</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryHi">94.4 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : </a>
+<span class="lineNum">       2 </span>            : #include &quot;planner/binder.hpp&quot;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &quot;parser/constraints/list.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;parser/expression/list.hpp&quot;
+<span class="lineNum">       6 </span>            : #include &quot;parser/statement/list.hpp&quot;
+<span class="lineNum">       7 </span>            : #include &quot;parser/tableref/list.hpp&quot;
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span>            : #include &quot;main/client_context.hpp&quot;
+<span class="lineNum">      10 </span>            : #include &quot;main/database.hpp&quot;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : using namespace duckdb;
+<a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span><span class="lineCov">      11115 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(SelectStatement &amp;statement) {</span>
+<span class="lineNum">      16 </span>            :         // first we visit the FROM statement
+<span class="lineNum">      17 </span>            :         // here we determine from where we can retrieve our columns (from which
+<span class="lineNum">      18 </span>            :         // tables/subqueries)
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            :         // we also need to visit the CTEs because they generate table names
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">      11180 :         for (auto &amp;cte_it : statement.cte_map) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">         65 :                 AddCTE(cte_it.first, cte_it.second.get());</span>
+<span class="lineNum">      24 </span>            :         }
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineCov">      11115 :         if (statement.from_table) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      10968 :                 AcceptChild(&amp;statement.from_table);</span>
+<span class="lineNum">      28 </span>            :         }
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :         // now we visit the rest of the statements
+<span class="lineNum">      31 </span>            :         // here we performing the binding of any mentioned column names
+<span class="lineNum">      32 </span>            :         // back to the tables/subqueries found in the FROM statement
+<span class="lineNum">      33 </span>            :         // (and throw an error if a mentioned column is not found)
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :         // first we visit the SELECT list
+<span class="lineNum">      36 </span>            :         // we generate a new list of expressions because a * statement expands to
+<span class="lineNum">      37 </span>            :         // multiple expressions
+<span class="lineNum">      38 </span>            :         // note that we also gather aliases from the SELECT list
+<span class="lineNum">      39 </span>            :         // because they might be used in the WHERE, GROUP BY or HAVING clauses
+<span class="lineNum">      40 </span><span class="lineCov">      22218 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; new_select_list;</span>
+<span class="lineNum">      41 </span><span class="lineCov">      39297 :         for (auto &amp;select_element : statement.select_list) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">      28188 :                 if (select_element-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
+<span class="lineNum">      43 </span>            :                         // * statement, expand to all columns from the FROM clause
+<span class="lineNum">      44 </span><span class="lineCov">        134 :                         bind_context-&gt;GenerateAllColumnExpressions(new_select_list);</span>
+<span class="lineNum">      45 </span><span class="lineCov">        134 :                         continue;</span>
+<span class="lineNum">      46 </span>            :                 } else {
+<span class="lineNum">      47 </span>            :                         // regular statement, add it to the list
+<span class="lineNum">      48 </span><span class="lineCov">      28054 :                         new_select_list.push_back(move(select_element));</span>
+<span class="lineNum">      49 </span>            :                 }
+<span class="lineNum">      50 </span>            :         }
+<span class="lineNum">      51 </span><span class="lineCov">      11109 :         statement.result_column_count = new_select_list.size();</span>
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span><span class="lineCov">      40228 :         for (size_t i = 0; i &lt; new_select_list.size(); i++) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      29120 :                 auto &amp;select_element = new_select_list[i];</span>
+<span class="lineNum">      55 </span><span class="lineCov">      29120 :                 AcceptChild(&amp;select_element);</span>
+<span class="lineNum">      56 </span><span class="lineCov">      29119 :                 select_element-&gt;ResolveType();</span>
+<span class="lineNum">      57 </span><span class="lineCov">      29119 :                 if (select_element-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">      58 </span>            :                         throw BinderException(
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :                             &quot;Could not resolve type of projection element!&quot;);</span>
+<span class="lineNum">      60 </span>            :                 }
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">      29119 :                 if (!select_element-&gt;alias.empty()) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">        918 :                         bind_context-&gt;AddExpression(select_element-&gt;alias,</span>
+<span class="lineNum">      64 </span>            :                                                     select_element.get(), i);
+<span class="lineNum">      65 </span>            :                 }
+<span class="lineNum">      66 </span>            :         }
+<span class="lineNum">      67 </span><span class="lineCov">      20315 :         for (auto &amp;order : statement.orderby.orders) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">       9207 :                 AcceptChild(&amp;order.expression);</span>
+<span class="lineNum">      69 </span><span class="lineCov">       9207 :                 if (order.expression-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">      70 </span>            :                         auto selection_ref =
+<span class="lineNum">      71 </span><span class="lineCov">       9191 :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(order.expression.get());</span>
+<span class="lineNum">      72 </span><span class="lineCov">       9191 :                         if (selection_ref-&gt;column_name.empty()) {</span>
+<span class="lineNum">      73 </span>            :                                 // this ORDER BY expression refers to a column in the select
+<span class="lineNum">      74 </span>            :                                 // clause by index e.g. ORDER BY 1 assign the type of the SELECT
+<span class="lineNum">      75 </span>            :                                 // clause
+<span class="lineNum">      76 </span><span class="lineCov">      17826 :                                 if (selection_ref-&gt;index &lt; 1 ||</span>
+<span class="lineNum">      77 </span><span class="lineCov">       8913 :                                     selection_ref-&gt;index &gt; new_select_list.size()) {</span>
+<span class="lineNum">      78 </span>            :                                         throw BinderException(
+<span class="lineNum">      79 </span>            :                                             &quot;ORDER term out of range - should be between 1 and %d&quot;,
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :                                             (int)new_select_list.size());</span>
+<span class="lineNum">      81 </span>            :                                 }
+<span class="lineNum">      82 </span><span class="lineCov">       8913 :                                 selection_ref-&gt;return_type =</span>
+<span class="lineNum">      83 </span><span class="lineCov">       8913 :                                     new_select_list[selection_ref-&gt;index - 1]-&gt;return_type;</span>
+<span class="lineNum">      84 </span><span class="lineCov">       8913 :                                 selection_ref-&gt;reference =</span>
+<span class="lineNum">      85 </span><span class="lineCov">       8913 :                                     new_select_list[selection_ref-&gt;index - 1].get();</span>
+<span class="lineNum">      86 </span>            :                         }
+<span class="lineNum">      87 </span>            :                 }
+<span class="lineNum">      88 </span><span class="lineCov">       9207 :                 order.expression-&gt;ResolveType();</span>
+<span class="lineNum">      89 </span>            :         }
+<span class="lineNum">      90 </span>            :         // for the ORDER BY statement, we have to project all the columns
+<span class="lineNum">      91 </span>            :         // in the projection phase as well
+<span class="lineNum">      92 </span>            :         // for each expression in the ORDER BY check if it is projected already
+<span class="lineNum">      93 </span><span class="lineCov">      20315 :         for (size_t i = 0; i &lt; statement.orderby.orders.size(); i++) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">       9207 :                 size_t j = 0;</span>
+<span class="lineNum">      95 </span><span class="lineCov">       9207 :                 TypeId type = TypeId::INVALID;</span>
+<span class="lineNum">      96 </span><span class="lineCov">      26915 :                 for (; j &lt; new_select_list.size(); j++) {</span>
+<span class="lineNum">      97 </span>            :                         // check if the expression matches exactly
+<span class="lineNum">      98 </span><span class="lineCov">      53812 :                         if (statement.orderby.orders[i].expression-&gt;Equals(</span>
+<span class="lineNum">      99 </span><span class="lineCov">      26906 :                                 new_select_list[j].get())) {</span>
+<span class="lineNum">     100 </span>            :                                 // in this case, we can just create a reference in the ORDER BY
+<span class="lineNum">     101 </span><span class="lineCov">        258 :                                 break;</span>
+<span class="lineNum">     102 </span>            :                         }
+<span class="lineNum">     103 </span>            :                         // if the ORDER BY is an alias reference, check if the alias matches
+<span class="lineNum">     104 </span><span class="lineCov">      26648 :                         if (statement.orderby.orders[i].expression-&gt;type ==</span>
+<span class="lineNum">     105 </span><span class="lineCov">      53271 :                                 ExpressionType::COLUMN_REF &amp;&amp;</span>
+<span class="lineNum">     106 </span>            :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(
+<span class="lineNum">     107 </span><span class="lineCov">      26623 :                                 statement.orderby.orders[i].expression.get())</span>
+<span class="lineNum">     108 </span><span class="lineCov">      26623 :                                     -&gt;reference == new_select_list[j].get()) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">       8940 :                                 break;</span>
+<span class="lineNum">     110 </span>            :                         }
+<span class="lineNum">     111 </span>            :                 }
+<span class="lineNum">     112 </span><span class="lineCov">       9207 :                 if (j == new_select_list.size()) {</span>
+<span class="lineNum">     113 </span>            :                         // if we didn't find a matching projection clause, we add it to the
+<span class="lineNum">     114 </span>            :                         // projection list
+<span class="lineNum">     115 </span><span class="lineCov">          9 :                         new_select_list.push_back(</span>
+<span class="lineNum">     116 </span><span class="lineCov">          9 :                             move(statement.orderby.orders[i].expression));</span>
+<span class="lineNum">     117 </span>            :                 }
+<span class="lineNum">     118 </span><span class="lineCov">       9207 :                 type = new_select_list[j]-&gt;return_type;</span>
+<span class="lineNum">     119 </span><span class="lineCov">       9207 :                 if (type == TypeId::INVALID) {</span>
+<span class="lineNum">     120 </span>            :                         throw Exception(
+<span class="lineNum">     121 </span><span class="lineNoCov">          0 :                             &quot;Could not deduce return type of ORDER BY expression&quot;);</span>
+<span class="lineNum">     122 </span>            :                 }
+<span class="lineNum">     123 </span><span class="lineCov">      18414 :                 statement.orderby.orders[i].expression =</span>
+<span class="lineNum">     124 </span><span class="lineCov">      18414 :                     make_unique&lt;ColumnRefExpression&gt;(type, j);</span>
+<span class="lineNum">     125 </span>            :         }
+<span class="lineNum">     126 </span><span class="lineCov">      11108 :         statement.select_list = move(new_select_list);</span>
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span><span class="lineCov">      11108 :         if (statement.where_clause) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">       7420 :                 AcceptChild(&amp;statement.where_clause);</span>
+<span class="lineNum">     130 </span><span class="lineCov">       7420 :                 statement.where_clause-&gt;ResolveType();</span>
+<span class="lineNum">     131 </span>            :         }
+<span class="lineNum">     132 </span>            : 
+<span class="lineNum">     133 </span><span class="lineCov">      11108 :         if (statement.HasGroup()) {</span>
+<span class="lineNum">     134 </span>            :                 // bind group columns
+<span class="lineNum">     135 </span><span class="lineCov">        561 :                 for (auto &amp;group : statement.groupby.groups) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">        384 :                         AcceptChild(&amp;group);</span>
+<span class="lineNum">     137 </span>            :                 }
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span>            :                 // handle aliases in the GROUP BY columns
+<span class="lineNum">     140 </span><span class="lineCov">        561 :                 for (size_t i = 0; i &lt; statement.groupby.groups.size(); i++) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">        384 :                         auto &amp;group = statement.groupby.groups[i];</span>
+<span class="lineNum">     142 </span><span class="lineCov">        384 :                         if (group-&gt;type != ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     143 </span>            :                                 throw BinderException(
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :                                     &quot;GROUP BY clause needs to be a column or alias reference.&quot;);</span>
+<span class="lineNum">     145 </span>            :                         }
+<span class="lineNum">     146 </span>            :                         auto group_column =
+<span class="lineNum">     147 </span><span class="lineCov">        384 :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(group.get());</span>
+<span class="lineNum">     148 </span><span class="lineCov">        384 :                         if (group_column-&gt;reference) {</span>
+<span class="lineNum">     149 </span>            :                                 // alias reference
+<span class="lineNum">     150 </span>            :                                 // move the computation here from the SELECT clause
+<span class="lineNum">     151 </span><span class="lineCov">          6 :                                 size_t select_index = group_column-&gt;index;</span>
+<span class="lineNum">     152 </span><span class="lineCov">          6 :                                 auto group_ref = make_unique&lt;GroupRefExpression&gt;(</span>
+<span class="lineNum">     153 </span><span class="lineCov">         12 :                                     statement.groupby.groups[i]-&gt;return_type, i);</span>
+<span class="lineNum">     154 </span><span class="lineCov">          6 :                                 group_ref-&gt;alias = string(group_column-&gt;column_name);</span>
+<span class="lineNum">     155 </span><span class="lineCov">          6 :                                 statement.groupby.groups[i] =</span>
+<span class="lineNum">     156 </span><span class="lineCov">          6 :                                     move(statement.select_list[select_index]);</span>
+<span class="lineNum">     157 </span>            :                                 // and add a GROUP REF expression to the SELECT clause
+<span class="lineNum">     158 </span><span class="lineCov">          6 :                                 statement.select_list[select_index] = move(group_ref);</span>
+<span class="lineNum">     159 </span>            :                         }
+<span class="lineNum">     160 </span>            :                 }
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span>            :                 // handle GROUP BY columns in the select clause
+<span class="lineNum">     163 </span><span class="lineCov">        942 :                 for (size_t i = 0; i &lt; statement.select_list.size(); i++) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">        765 :                         auto &amp;select = statement.select_list[i];</span>
+<span class="lineNum">     165 </span><span class="lineCov">        765 :                         if (select-&gt;type == ExpressionType::GROUP_REF)</span>
+<span class="lineNum">     166 </span><span class="lineCov">          6 :                                 continue;</span>
+<span class="lineNum">     167 </span><span class="lineCov">        759 :                         if (select-&gt;IsAggregate())</span>
+<span class="lineNum">     168 </span><span class="lineCov">        377 :                                 continue;</span>
+<span class="lineNum">     169 </span>            : 
+<span class="lineNum">     170 </span>            :                         // not an aggregate or existing GROUP REF
+<span class="lineNum">     171 </span><span class="lineCov">        382 :                         if (select-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     172 </span>            :                                 // column reference: check if it points to a GROUP BY column
+<span class="lineNum">     173 </span>            :                                 auto select_column =
+<span class="lineNum">     174 </span><span class="lineCov">        374 :                                     reinterpret_cast&lt;ColumnRefExpression *&gt;(select.get());</span>
+<span class="lineNum">     175 </span><span class="lineCov">        374 :                                 bool found_matching = false;</span>
+<span class="lineNum">     176 </span><span class="lineCov">       1062 :                                 for (size_t j = 0; j &lt; statement.groupby.groups.size(); j++) {</span>
+<span class="lineNum">     177 </span><span class="lineCov">       1057 :                                         auto &amp;group = statement.groupby.groups[j];</span>
+<span class="lineNum">     178 </span><span class="lineCov">       1057 :                                         if (select_column-&gt;reference) {</span>
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :                                                 if (select_column-&gt;reference == group.get()) {</span>
+<span class="lineNum">     180 </span>            :                                                         // group reference!
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :                                                         auto group_ref = make_unique&lt;GroupRefExpression&gt;(</span>
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :                                                             statement.select_list[i]-&gt;return_type, j);</span>
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :                                                         group_ref-&gt;alias =</span>
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                                                             string(select_column-&gt;column_name);</span>
+<span class="lineNum">     185 </span><span class="lineNoCov">          0 :                                                         statement.select_list[i] = move(group_ref);</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                                                         found_matching = true;</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :                                                         break;</span>
+<span class="lineNum">     188 </span>            :                                                 }
+<span class="lineNum">     189 </span>            :                                         } else {
+<span class="lineNum">     190 </span><span class="lineCov">       1057 :                                                 if (group-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     191 </span>            :                                                         auto group_column =
+<span class="lineNum">     192 </span>            :                                                             reinterpret_cast&lt;ColumnRefExpression *&gt;(
+<span class="lineNum">     193 </span><span class="lineCov">       1057 :                                                                 group.get());</span>
+<span class="lineNum">     194 </span><span class="lineCov">       1057 :                                                         if (group_column-&gt;binding ==</span>
+<span class="lineNum">     195 </span><span class="lineCov">       1057 :                                                             select_column-&gt;binding) {</span>
+<span class="lineNum">     196 </span><span class="lineCov">        369 :                                                                 auto group_ref =</span>
+<span class="lineNum">     197 </span>            :                                                                     make_unique&lt;GroupRefExpression&gt;(
+<span class="lineNum">     198 </span><span class="lineCov">        369 :                                                                         statement.select_list[i]-&gt;return_type,</span>
+<span class="lineNum">     199 </span><span class="lineCov">        738 :                                                                         j);</span>
+<span class="lineNum">     200 </span><span class="lineCov">        369 :                                                                 group_ref-&gt;alias =</span>
+<span class="lineNum">     201 </span><span class="lineCov">        369 :                                                                     statement.select_list[i]-&gt;alias.empty()</span>
+<span class="lineNum">     202 </span>            :                                                                         ? select_column-&gt;column_name
+<span class="lineNum">     203 </span><span class="lineCov">        738 :                                                                         : statement.select_list[i]-&gt;alias;</span>
+<span class="lineNum">     204 </span><span class="lineCov">        369 :                                                                 statement.select_list[i] = move(group_ref);</span>
+<span class="lineNum">     205 </span><span class="lineCov">        369 :                                                                 found_matching = true;</span>
+<span class="lineNum">     206 </span><span class="lineCov">        369 :                                                                 break;</span>
+<span class="lineNum">     207 </span>            :                                                         }
+<span class="lineNum">     208 </span>            :                                                 }
+<span class="lineNum">     209 </span>            :                                         }
+<span class="lineNum">     210 </span>            :                                 }
+<span class="lineNum">     211 </span><span class="lineCov">        374 :                                 if (found_matching) {</span>
+<span class="lineNum">     212 </span>            :                                         // the column reference was turned into a GROUP BY reference
+<span class="lineNum">     213 </span>            :                                         // move to the next column
+<span class="lineNum">     214 </span><span class="lineCov">        369 :                                         continue;</span>
+<span class="lineNum">     215 </span>            :                                 }
+<span class="lineNum">     216 </span>            :                         }
+<span class="lineNum">     217 </span>            :                         // not a group by column or aggregate
+<span class="lineNum">     218 </span>            :                         // create a FIRST aggregate around this aggregate
+<span class="lineNum">     219 </span><span class="lineCov">         26 :                         string stmt_alias = statement.select_list[i]-&gt;alias;</span>
+<span class="lineNum">     220 </span><span class="lineCov">         52 :                         statement.select_list[i] = make_unique&lt;AggregateExpression&gt;(</span>
+<span class="lineNum">     221 </span><span class="lineCov">         26 :                             ExpressionType::AGGREGATE_FIRST,</span>
+<span class="lineNum">     222 </span><span class="lineCov">         26 :                             move(statement.select_list[i]));</span>
+<span class="lineNum">     223 </span><span class="lineCov">         13 :                         statement.select_list[i]-&gt;alias = stmt_alias;</span>
+<span class="lineNum">     224 </span><span class="lineCov">         13 :                         statement.select_list[i]-&gt;ResolveType();</span>
+<span class="lineNum">     225 </span>            :                         // throw Exception(&quot;SELECT with GROUP BY can only contain &quot;
+<span class="lineNum">     226 </span>            :                         //                 &quot;aggregates or references to group columns!&quot;);
+<span class="lineNum">     227 </span>            :                 }
+<span class="lineNum">     228 </span>            :         }
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span><span class="lineCov">      11108 :         if (statement.groupby.having) {</span>
+<span class="lineNum">     231 </span><span class="lineCov">         16 :                 AcceptChild(&amp;statement.groupby.having);</span>
+<span class="lineNum">     232 </span><span class="lineCov">         16 :                 statement.groupby.having-&gt;ResolveType();</span>
+<span class="lineNum">     233 </span>            :         }
+<span class="lineNum">     234 </span>            :         // the union has an independent binder
+<span class="lineNum">     235 </span><span class="lineCov">      11108 :         if (statement.union_select) {</span>
+<span class="lineNum">     236 </span><span class="lineCov">        156 :                 Binder binder(context, this);</span>
+<span class="lineNum">     237 </span><span class="lineCov">         78 :                 statement.union_select-&gt;Accept(&amp;binder);</span>
+<span class="lineNum">     238 </span><span class="lineCov">         78 :                 statement.setop_binder = move(binder.bind_context);</span>
+<span class="lineNum">     239 </span>            :         }
+<span class="lineNum">     240 </span><span class="lineCov">      22216 :         return nullptr;</span>
+<a name="241"><span class="lineNum">     241 </span>            : }</a>
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span><span class="lineCov">      24691 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(InsertStatement &amp;statement) {</span>
+<span class="lineNum">     244 </span><span class="lineCov">      24691 :         if (statement.select_statement) {</span>
+<span class="lineNum">     245 </span><span class="lineCov">          5 :                 AcceptChild(&amp;statement.select_statement);</span>
+<span class="lineNum">     246 </span>            :         }
+<span class="lineNum">     247 </span>            :         // visit the expressions
+<span class="lineNum">     248 </span><span class="lineCov">      50590 :         for (auto &amp;expression_list : statement.values) {</span>
+<span class="lineNum">     249 </span><span class="lineCov">      62697 :                 for (auto &amp;expression : expression_list) {</span>
+<span class="lineNum">     250 </span><span class="lineCov">      36798 :                         AcceptChild(&amp;expression);</span>
+<span class="lineNum">     251 </span>            :                 }
+<span class="lineNum">     252 </span>            :         }
+<span class="lineNum">     253 </span><span class="lineCov">      24691 :         return nullptr;</span>
+<a name="254"><span class="lineNum">     254 </span>            : }</a>
+<span class="lineNum">     255 </span>            : 
+<span class="lineNum">     256 </span><span class="lineCov">          6 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CopyStatement &amp;stmt) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">          6 :         if (stmt.select_statement) {</span>
+<span class="lineNum">     258 </span><span class="lineCov">          3 :                 AcceptChild(&amp;stmt.select_statement);</span>
+<span class="lineNum">     259 </span>            :         }
+<span class="lineNum">     260 </span><span class="lineCov">          6 :         return nullptr;</span>
+<a name="261"><span class="lineNum">     261 </span>            : }</a>
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span><span class="lineCov">         16 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(DeleteStatement &amp;stmt) {</span>
+<span class="lineNum">     264 </span>            :         // visit the table reference
+<span class="lineNum">     265 </span><span class="lineCov">         16 :         AcceptChild(&amp;stmt.table);</span>
+<span class="lineNum">     266 </span>            :         // project any additional columns required for the condition
+<span class="lineNum">     267 </span><span class="lineCov">         16 :         AcceptChild(&amp;stmt.condition);</span>
+<span class="lineNum">     268 </span><span class="lineCov">         16 :         return nullptr;</span>
+<a name="269"><span class="lineNum">     269 </span>            : }</a>
+<span class="lineNum">     270 </span>            : 
+<span class="lineNum">     271 </span><span class="lineNoCov">          0 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(AlterTableStatement &amp;stmt) {</span>
+<span class="lineNum">     272 </span>            :         // visit the table reference
+<span class="lineNum">     273 </span><span class="lineNoCov">          0 :         AcceptChild(&amp;stmt.table);</span>
+<span class="lineNum">     274 </span><span class="lineNoCov">          0 :         return nullptr;</span>
+<a name="275"><span class="lineNum">     275 </span>            : }</a>
+<span class="lineNum">     276 </span>            : 
+<span class="lineNum">     277 </span><span class="lineCov">       2021 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(UpdateStatement &amp;stmt) {</span>
+<span class="lineNum">     278 </span>            :         // visit the table reference
+<span class="lineNum">     279 </span><span class="lineCov">       2021 :         AcceptChild(&amp;stmt.table);</span>
+<span class="lineNum">     280 </span>            :         // project any additional columns required for the condition/expressions
+<span class="lineNum">     281 </span><span class="lineCov">       2021 :         if (stmt.condition) {</span>
+<span class="lineNum">     282 </span><span class="lineCov">       2010 :                 AcceptChild(&amp;stmt.condition);</span>
+<span class="lineNum">     283 </span>            :         }
+<span class="lineNum">     284 </span><span class="lineCov">       4042 :         for (auto &amp;expression : stmt.expressions) {</span>
+<span class="lineNum">     285 </span><span class="lineCov">       2021 :                 AcceptChild(&amp;expression);</span>
+<span class="lineNum">     286 </span><span class="lineCov">       2021 :                 if (expression-&gt;type == ExpressionType::VALUE_DEFAULT) {</span>
+<span class="lineNum">     287 </span>            :                         // we resolve the type of the DEFAULT expression in the
+<span class="lineNum">     288 </span>            :                         // LogicalPlanGenerator because that is where we resolve the
+<span class="lineNum">     289 </span>            :                         // to-be-updated column
+<span class="lineNum">     290 </span><span class="lineNoCov">          0 :                         continue;</span>
+<span class="lineNum">     291 </span>            :                 }
+<span class="lineNum">     292 </span><span class="lineCov">       2021 :                 expression-&gt;ResolveType();</span>
+<span class="lineNum">     293 </span><span class="lineCov">       2021 :                 if (expression-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">     294 </span>            :                         throw BinderException(
+<span class="lineNum">     295 </span><span class="lineNoCov">          0 :                             &quot;Could not resolve type of projection element!&quot;);</span>
+<span class="lineNum">     296 </span>            :                 }
+<span class="lineNum">     297 </span>            :         }
+<span class="lineNum">     298 </span><span class="lineCov">       2021 :         return nullptr;</span>
+<a name="299"><span class="lineNum">     299 </span>            : }</a>
+<span class="lineNum">     300 </span>            : 
+<span class="lineNum">     301 </span><span class="lineCov">        153 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CreateTableStatement &amp;stmt) {</span>
+<span class="lineNum">     302 </span>            :         // bind any constraints
+<span class="lineNum">     303 </span>            :         // first create a fake table
+<span class="lineNum">     304 </span><span class="lineCov">        153 :         bind_context-&gt;AddDummyTable(stmt.info-&gt;table, stmt.info-&gt;columns);</span>
+<span class="lineNum">     305 </span><span class="lineCov">        215 :         for (auto &amp;it : stmt.info-&gt;constraints) {</span>
+<span class="lineNum">     306 </span><span class="lineCov">         62 :                 AcceptChild(&amp;it);</span>
+<span class="lineNum">     307 </span>            :         }
+<span class="lineNum">     308 </span><span class="lineCov">        153 :         return nullptr;</span>
+<a name="309"><span class="lineNum">     309 </span>            : }</a>
+<span class="lineNum">     310 </span>            : 
+<span class="lineNum">     311 </span><span class="lineCov">          4 : unique_ptr&lt;Constraint&gt; Binder::Visit(CheckConstraint &amp;constraint) {</span>
+<span class="lineNum">     312 </span><span class="lineCov">          4 :         SQLNodeVisitor::Visit(constraint);</span>
+<span class="lineNum">     313 </span>            : 
+<span class="lineNum">     314 </span><span class="lineCov">          4 :         constraint.expression-&gt;ResolveType();</span>
+<span class="lineNum">     315 </span><span class="lineCov">          4 :         if (constraint.expression-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">     316 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Could not resolve type of constraint!&quot;);</span>
+<span class="lineNum">     317 </span>            :         }
+<span class="lineNum">     318 </span>            :         // the CHECK constraint should always return an INTEGER value
+<span class="lineNum">     319 </span><span class="lineCov">          4 :         if (constraint.expression-&gt;return_type != TypeId::INTEGER) {</span>
+<span class="lineNum">     320 </span><span class="lineCov">         12 :                 constraint.expression = make_unique&lt;CastExpression&gt;(</span>
+<span class="lineNum">     321 </span><span class="lineCov">         12 :                     TypeId::INTEGER, move(constraint.expression));</span>
+<span class="lineNum">     322 </span>            :         }
+<span class="lineNum">     323 </span><span class="lineCov">          4 :         return nullptr;</span>
+<a name="324"><span class="lineNum">     324 </span>            : }</a>
+<span class="lineNum">     325 </span>            : 
+<span class="lineNum">     326 </span><span class="lineCov">     111101 : unique_ptr&lt;Expression&gt; Binder::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">     327 </span><span class="lineCov">     111101 :         if (expr.column_name.empty()) {</span>
+<span class="lineNum">     328 </span>            :                 // column expression should have been bound already
+<span class="lineNum">     329 </span><span class="lineCov">       8913 :                 return nullptr;</span>
+<span class="lineNum">     330 </span>            :         }
+<span class="lineNum">     331 </span>            :         // individual column reference
+<span class="lineNum">     332 </span>            :         // resolve to either a base table or a subquery expression
+<span class="lineNum">     333 </span><span class="lineCov">     102188 :         if (expr.table_name.empty()) {</span>
+<span class="lineNum">     334 </span>            :                 // no table name: find a binding that contains this
+<span class="lineNum">     335 </span><span class="lineCov">      92806 :                 expr.table_name = bind_context-&gt;GetMatchingBinding(expr.column_name);</span>
+<span class="lineNum">     336 </span>            :         }
+<span class="lineNum">     337 </span><span class="lineCov">     102187 :         bind_context-&gt;BindColumn(expr);</span>
+<span class="lineNum">     338 </span><span class="lineCov">     102187 :         return nullptr;</span>
+<a name="339"><span class="lineNum">     339 </span>            : }</a>
+<span class="lineNum">     340 </span>            : 
+<span class="lineNum">     341 </span><span class="lineCov">       2126 : unique_ptr&lt;Expression&gt; Binder::Visit(FunctionExpression &amp;expr) {</span>
+<span class="lineNum">     342 </span><span class="lineCov">       2126 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     343 </span><span class="lineCov">       2126 :         expr.bound_function = context.db.catalog.GetScalarFunction(</span>
+<span class="lineNum">     344 </span><span class="lineCov">       2126 :             context.ActiveTransaction(), expr.schema, expr.function_name);</span>
+<span class="lineNum">     345 </span><span class="lineCov">       2126 :         return nullptr;</span>
+<a name="346"><span class="lineNum">     346 </span>            : }</a>
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span><span class="lineCov">       3818 : unique_ptr&lt;Expression&gt; Binder::Visit(SubqueryExpression &amp;expr) {</span>
+<span class="lineNum">     349 </span><span class="lineCov">       3818 :         assert(bind_context);</span>
+<span class="lineNum">     350 </span>            : 
+<span class="lineNum">     351 </span><span class="lineCov">       7636 :         Binder binder(context);</span>
+<span class="lineNum">     352 </span><span class="lineCov">       3818 :         binder.bind_context-&gt;parent = bind_context.get();</span>
+<span class="lineNum">     353 </span>            :         // the subquery may refer to CTEs from the parent query
+<span class="lineNum">     354 </span><span class="lineCov">       3818 :         binder.CTE_bindings = CTE_bindings;</span>
+<span class="lineNum">     355 </span>            : 
+<span class="lineNum">     356 </span><span class="lineCov">       3818 :         expr.subquery-&gt;Accept(&amp;binder);</span>
+<span class="lineNum">     357 </span><span class="lineCov">       3818 :         if (expr.subquery-&gt;select_list.size() &lt; 1) {</span>
+<span class="lineNum">     358 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Subquery has no projections&quot;);</span>
+<span class="lineNum">     359 </span>            :         }
+<span class="lineNum">     360 </span><span class="lineCov">       3818 :         if (expr.subquery-&gt;select_list[0]-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">     361 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Subquery has no type&quot;);</span>
+<span class="lineNum">     362 </span>            :         }
+<span class="lineNum">     363 </span><span class="lineCov">       3840 :         if (expr.subquery_type == SubqueryType::IN &amp;&amp;</span>
+<span class="lineNum">     364 </span><span class="lineCov">         22 :             expr.subquery-&gt;select_list.size() != 1) {</span>
+<span class="lineNum">     365 </span>            :                 throw BinderException(&quot;Subquery returns %zu columns - expected 1&quot;,
+<span class="lineNum">     366 </span><span class="lineNoCov">          0 :                                       expr.subquery-&gt;select_list.size());</span>
+<span class="lineNum">     367 </span>            :         }
+<span class="lineNum">     368 </span>            : 
+<span class="lineNum">     369 </span><span class="lineCov">       7636 :         expr.return_type = expr.subquery_type == SubqueryType::EXISTS</span>
+<span class="lineNum">     370 </span><span class="lineCov">       6901 :                                ? TypeId::BOOLEAN</span>
+<span class="lineNum">     371 </span><span class="lineCov">       3083 :                                : expr.subquery-&gt;select_list[0]-&gt;return_type;</span>
+<span class="lineNum">     372 </span><span class="lineCov">       3818 :         expr.context = move(binder.bind_context);</span>
+<span class="lineNum">     373 </span><span class="lineCov">       3818 :         expr.is_correlated = expr.context-&gt;GetMaxDepth() &gt; 0;</span>
+<span class="lineNum">     374 </span><span class="lineCov">       7636 :         return nullptr;</span>
+<span class="lineNum">     375 </span>            : }
+<a name="376"><span class="lineNum">     376 </span>            : </a>
+<span class="lineNum">     377 </span>            : // CTEs are also referred to using BaseTableRefs, hence need to distinguish
+<span class="lineNum">     378 </span><span class="lineCov">      13373 : unique_ptr&lt;TableRef&gt; Binder::Visit(BaseTableRef &amp;expr) {</span>
+<span class="lineNum">     379 </span><span class="lineCov">      26746 :         auto cte = FindCTE(expr.table_name);</span>
+<span class="lineNum">     380 </span><span class="lineCov">      13373 :         if (cte) {</span>
+<span class="lineNum">     381 </span><span class="lineCov">        236 :                 auto subquery = make_unique&lt;SubqueryRef&gt;(move(cte));</span>
+<span class="lineNum">     382 </span><span class="lineCov">        118 :                 subquery-&gt;alias = expr.alias.empty() ? expr.table_name : expr.alias;</span>
+<span class="lineNum">     383 </span><span class="lineCov">        118 :                 AcceptChild(&amp;subquery);</span>
+<span class="lineNum">     384 </span><span class="lineCov">        118 :                 return move(subquery);</span>
+<span class="lineNum">     385 </span>            :         }
+<span class="lineNum">     386 </span>            : 
+<span class="lineNum">     387 </span><span class="lineCov">      13255 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
+<span class="lineNum">     388 </span><span class="lineCov">      13255 :                                                  expr.schema_name, expr.table_name);</span>
+<span class="lineNum">     389 </span><span class="lineCov">      26498 :         bind_context-&gt;AddBaseTable(</span>
+<span class="lineNum">     390 </span><span class="lineCov">      13249 :             expr.alias.empty() ? expr.table_name : expr.alias, table);</span>
+<span class="lineNum">     391 </span><span class="lineCov">      13249 :         return nullptr;</span>
+<a name="392"><span class="lineNum">     392 </span>            : }</a>
+<span class="lineNum">     393 </span>            : 
+<span class="lineNum">     394 </span><span class="lineCov">        516 : unique_ptr&lt;TableRef&gt; Binder::Visit(CrossProductRef &amp;expr) {</span>
+<span class="lineNum">     395 </span><span class="lineCov">        516 :         AcceptChild(&amp;expr.left);</span>
+<span class="lineNum">     396 </span><span class="lineCov">        516 :         AcceptChild(&amp;expr.right);</span>
+<span class="lineNum">     397 </span><span class="lineCov">        516 :         return nullptr;</span>
+<a name="398"><span class="lineNum">     398 </span>            : }</a>
+<span class="lineNum">     399 </span>            : 
+<span class="lineNum">     400 </span><span class="lineCov">         57 : unique_ptr&lt;TableRef&gt; Binder::Visit(JoinRef &amp;expr) {</span>
+<span class="lineNum">     401 </span><span class="lineCov">         57 :         AcceptChild(&amp;expr.left);</span>
+<span class="lineNum">     402 </span><span class="lineCov">         57 :         AcceptChild(&amp;expr.right);</span>
+<span class="lineNum">     403 </span><span class="lineCov">         57 :         AcceptChild(&amp;expr.condition);</span>
+<span class="lineNum">     404 </span><span class="lineCov">         57 :         return nullptr;</span>
+<a name="405"><span class="lineNum">     405 </span>            : }</a>
+<span class="lineNum">     406 </span>            : 
+<span class="lineNum">     407 </span><span class="lineCov">        314 : unique_ptr&lt;TableRef&gt; Binder::Visit(SubqueryRef &amp;expr) {</span>
+<span class="lineNum">     408 </span><span class="lineCov">        628 :         Binder binder(context, this);</span>
+<span class="lineNum">     409 </span><span class="lineCov">        314 :         expr.subquery-&gt;Accept(&amp;binder);</span>
+<span class="lineNum">     410 </span><span class="lineCov">        314 :         expr.context = move(binder.bind_context);</span>
+<span class="lineNum">     411 </span>            : 
+<span class="lineNum">     412 </span><span class="lineCov">        314 :         bind_context-&gt;AddSubquery(expr.alias, expr);</span>
+<span class="lineNum">     413 </span><span class="lineCov">        628 :         return nullptr;</span>
+<a name="414"><span class="lineNum">     414 </span>            : }</a>
+<span class="lineNum">     415 </span>            : 
+<span class="lineNum">     416 </span><span class="lineCov">          9 : unique_ptr&lt;TableRef&gt; Binder::Visit(TableFunction &amp;expr) {</span>
+<span class="lineNum">     417 </span><span class="lineCov">          9 :         auto function_definition = (FunctionExpression *)expr.function.get();</span>
+<span class="lineNum">     418 </span><span class="lineCov">          9 :         auto function = context.db.catalog.GetTableFunction(</span>
+<span class="lineNum">     419 </span><span class="lineCov">          9 :             context.ActiveTransaction(), function_definition);</span>
+<span class="lineNum">     420 </span><span class="lineCov">         18 :         bind_context-&gt;AddTableFunction(</span>
+<span class="lineNum">     421 </span><span class="lineCov">          9 :             expr.alias.empty() ? function_definition-&gt;function_name : expr.alias,</span>
+<span class="lineNum">     422 </span>            :             function);
+<span class="lineNum">     423 </span><span class="lineCov">          9 :         return nullptr;</span>
+<a name="424"><span class="lineNum">     424 </span>            : }</a>
+<span class="lineNum">     425 </span>            : 
+<span class="lineNum">     426 </span><span class="lineCov">         65 : void Binder::AddCTE(const std::string &amp;name, SelectStatement *cte) {</span>
+<span class="lineNum">     427 </span><span class="lineCov">         65 :         assert(cte);</span>
+<span class="lineNum">     428 </span><span class="lineCov">         65 :         assert(!name.empty());</span>
+<span class="lineNum">     429 </span><span class="lineCov">         65 :         auto entry = CTE_bindings.find(name);</span>
+<span class="lineNum">     430 </span><span class="lineCov">         65 :         if (entry != CTE_bindings.end()) {</span>
+<span class="lineNum">     431 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Duplicate CTE \&quot;%s\&quot; in query!&quot;, name.c_str());</span>
+<span class="lineNum">     432 </span>            :         }
+<a name="433"><span class="lineNum">     433 </span><span class="lineCov">         65 :         CTE_bindings[name] = cte;</span></a>
+<span class="lineNum">     434 </span><span class="lineCov">         65 : }</span>
+<span class="lineNum">     435 </span><span class="lineCov">      15266 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
+<span class="lineNum">     436 </span><span class="lineCov">      15266 :         auto entry = CTE_bindings.find(name);</span>
+<span class="lineNum">     437 </span><span class="lineCov">      15266 :         if (entry == CTE_bindings.end()) {</span>
+<span class="lineNum">     438 </span><span class="lineCov">      15148 :                 if (parent) {</span>
+<span class="lineNum">     439 </span><span class="lineCov">       1893 :                         return parent-&gt;FindCTE(name);</span>
+<span class="lineNum">     440 </span>            :                 }
+<span class="lineNum">     441 </span><span class="lineCov">      13255 :                 return nullptr;</span>
+<span class="lineNum">     442 </span>            :         }
+<span class="lineNum">     443 </span><span class="lineCov">        118 :         return entry-&gt;second-&gt;Copy();</span>
+<span class="lineNum">     444 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
