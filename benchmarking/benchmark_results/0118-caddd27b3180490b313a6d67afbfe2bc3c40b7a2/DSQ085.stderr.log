@@ -1,0 +1,6 @@
+------------
+|| DSQ085 ||
+------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Ambiguous reference to column name "ca_state" (use: "ctr1.ca_state" or "customer_address.ca_state")

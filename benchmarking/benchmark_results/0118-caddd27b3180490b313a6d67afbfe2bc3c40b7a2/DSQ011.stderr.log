@@ -1,0 +1,6 @@
+------------
+|| DSQ011 ||
+------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: Subquery "t_s_secyear" does not have a column named "customer_id"
