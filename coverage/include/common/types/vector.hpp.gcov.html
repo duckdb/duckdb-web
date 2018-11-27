@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 683c027 - include/common/types/vector.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 6810731 - include/common/types/vector.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 683c027</td>
+            <td class="headerValue">DuckDB Code Coverage Report 6810731</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-27 10:30:56</td>
+            <td class="headerValue">2018-11-27 23:25:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -148,13 +148,13 @@
 <span class="lineNum">      86 </span>            :         //! Sets the [index] element of the Vector to the specified Value
 <a name="87"><span class="lineNum">      87 </span>            :         void SetValue(size_t index, Value val);</a>
 <span class="lineNum">      88 </span>            :         //! Returns whether or not the value at the specified position is NULL
-<span class="lineNum">      89 </span><span class="lineCov">    1790344 :         inline bool ValueIsNull(size_t index) const {</span>
-<span class="lineNum">      90 </span><span class="lineCov">    1790344 :                 return nullmask[sel_vector ? sel_vector[index] : index];</span>
+<span class="lineNum">      89 </span><span class="lineCov">    1790388 :         inline bool ValueIsNull(size_t index) const {</span>
+<span class="lineNum">      90 </span><span class="lineCov">    1790388 :                 return nullmask[sel_vector ? sel_vector[index] : index];</span>
 <a name="91"><span class="lineNum">      91 </span>            :         }</a>
 <span class="lineNum">      92 </span>            :         //! Sets the value at the specified index to NULL
-<span class="lineNum">      93 </span><span class="lineCov">     636673 :         inline void SetNull(size_t index, bool null) {</span>
-<span class="lineNum">      94 </span><span class="lineCov">     636673 :                 nullmask[sel_vector ? sel_vector[index] : index] = null;</span>
-<span class="lineNum">      95 </span><span class="lineCov">     636673 :         }</span>
+<span class="lineNum">      93 </span><span class="lineCov">     636685 :         inline void SetNull(size_t index, bool null) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">     636685 :                 nullmask[sel_vector ? sel_vector[index] : index] = null;</span>
+<span class="lineNum">      95 </span><span class="lineCov">     636685 :         }</span>
 <span class="lineNum">      96 </span>            :         //! Sets the value of the vector at the specified index to the specified
 <span class="lineNum">      97 </span>            :         //! string. Can only be used for VARCHAR vectors
 <span class="lineNum">      98 </span>            :         void SetStringValue(size_t index, const char *value);
@@ -178,34 +178,42 @@
 <span class="lineNum">     116 </span>            :         //! Causes this vector to reference the data held by the other vector.
 <span class="lineNum">     117 </span>            :         void Reference(Vector &amp;other);
 <span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span>            :         //! Converts this Vector to a printable string representation
-<span class="lineNum">     120 </span>            :         std::string ToString() const;
-<span class="lineNum">     121 </span>            : 
-<a name="122"><span class="lineNum">     122 </span>            :         //! Returns true the vector holds only a single constant value and does not</a>
-<span class="lineNum">     123 </span>            :         //! have a selection vector
-<span class="lineNum">     124 </span><span class="lineCov">    1090768 :         bool IsConstant() {</span>
-<span class="lineNum">     125 </span><span class="lineCov">    1090768 :                 return count == 1 &amp;&amp; !sel_vector;</span>
-<span class="lineNum">     126 </span>            :         }
-<span class="lineNum">     127 </span>            : 
-<span class="lineNum">     128 </span>            : #ifdef DEBUG
-<span class="lineNum">     129 </span>            :         //! Verify that the Vector is in a consistent, not corrupt state. DEBUG
-<span class="lineNum">     130 </span>            :         //! FUNCTION ONLY!
-<span class="lineNum">     131 </span>            :         void Verify();
-<span class="lineNum">     132 </span>            : #else
-<span class="lineNum">     133 </span>            :         //! Verify that the Vector is in a consistent, not corrupt state. DEBUG
-<span class="lineNum">     134 </span>            :         //! FUNCTION ONLY!
-<span class="lineNum">     135 </span>            :         void Verify() {
-<span class="lineNum">     136 </span>            :         }
-<span class="lineNum">     137 </span>            : #endif
-<span class="lineNum">     138 </span>            : 
-<span class="lineNum">     139 </span>            :         //! The stringheap of the vector
-<span class="lineNum">     140 </span>            :         StringHeap string_heap;
-<span class="lineNum">     141 </span>            : 
-<span class="lineNum">     142 </span>            :   protected:
-<span class="lineNum">     143 </span>            :         //! If the vector owns data, this is the unique_ptr holds the actual data.
-<span class="lineNum">     144 </span>            :         std::unique_ptr&lt;char[]&gt; owned_data;
-<span class="lineNum">     145 </span>            : };
-<span class="lineNum">     146 </span>            : } // namespace duckdb
+<span class="lineNum">     119 </span>            :         //! Creates a selection vector that points only to non-null values for the
+<span class="lineNum">     120 </span>            :         //! given null mask. Returns the amount of not-null values.
+<span class="lineNum">     121 </span>            :         //! result_assignment will be set to either result_vector (if there are null
+<span class="lineNum">     122 </span>            :         //! values) or to nullptr (if there are no null values)
+<span class="lineNum">     123 </span>            :         static size_t NotNullSelVector(const Vector &amp;vector, sel_t *not_null_vector,
+<span class="lineNum">     124 </span>            :                                        sel_t *&amp;result_assignment,
+<span class="lineNum">     125 </span>            :                                        sel_t *null_vector = nullptr);
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            :         //! Converts this Vector to a printable string representation
+<span class="lineNum">     128 </span>            :         std::string ToString() const;
+<span class="lineNum">     129 </span>            : 
+<a name="130"><span class="lineNum">     130 </span>            :         //! Returns true the vector holds only a single constant value and does not</a>
+<span class="lineNum">     131 </span>            :         //! have a selection vector
+<span class="lineNum">     132 </span><span class="lineCov">    1090768 :         bool IsConstant() {</span>
+<span class="lineNum">     133 </span><span class="lineCov">    1090768 :                 return count == 1 &amp;&amp; !sel_vector;</span>
+<span class="lineNum">     134 </span>            :         }
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            : #ifdef DEBUG
+<span class="lineNum">     137 </span>            :         //! Verify that the Vector is in a consistent, not corrupt state. DEBUG
+<span class="lineNum">     138 </span>            :         //! FUNCTION ONLY!
+<span class="lineNum">     139 </span>            :         void Verify();
+<span class="lineNum">     140 </span>            : #else
+<span class="lineNum">     141 </span>            :         //! Verify that the Vector is in a consistent, not corrupt state. DEBUG
+<span class="lineNum">     142 </span>            :         //! FUNCTION ONLY!
+<span class="lineNum">     143 </span>            :         void Verify() {
+<span class="lineNum">     144 </span>            :         }
+<span class="lineNum">     145 </span>            : #endif
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            :         //! The stringheap of the vector
+<span class="lineNum">     148 </span>            :         StringHeap string_heap;
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span>            :   protected:
+<span class="lineNum">     151 </span>            :         //! If the vector owns data, this is the unique_ptr holds the actual data.
+<span class="lineNum">     152 </span>            :         std::unique_ptr&lt;char[]&gt; owned_data;
+<span class="lineNum">     153 </span>            : };
+<span class="lineNum">     154 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 683c027 - include/common/vector_operations/vector_operations.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 6810731 - include/common/vector_operations/vector_operations.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 683c027</td>
+            <td class="headerValue">DuckDB Code Coverage Report 6810731</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">624</td>
-            <td class="headerCovTableEntry">1457</td>
-            <td class="headerCovTableEntryLo">42.8 %</td>
+            <td class="headerCovTableEntry">619</td>
+            <td class="headerCovTableEntry">1454</td>
+            <td class="headerCovTableEntryLo">42.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-27 10:30:56</td>
+            <td class="headerValue">2018-11-27 23:25:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">230</td>
-            <td class="headerCovTableEntry">878</td>
-            <td class="headerCovTableEntryLo">26.2 %</td>
+            <td class="headerCovTableEntry">232</td>
+            <td class="headerCovTableEntry">798</td>
+            <td class="headerCovTableEntryLo">29.1 %</td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -238,149 +238,153 @@
 <span class="lineNum">     176 </span>            :         //===--------------------------------------------------------------------===//
 <span class="lineNum">     177 </span>            :         // Sort the vector, setting the given selection vector to a sorted state.
 <span class="lineNum">     178 </span>            :         static void Sort(Vector &amp;vector, sel_t result[]);
-<span class="lineNum">     179 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     180 </span>            :         // Hash functions
-<span class="lineNum">     181 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     182 </span>            :         // result = HASH(A)
-<span class="lineNum">     183 </span>            :         static void Hash(Vector &amp;A, Vector &amp;result);
-<span class="lineNum">     184 </span>            :         // A ^= HASH(B)
-<span class="lineNum">     185 </span>            :         static void CombineHash(Vector &amp;hashes, Vector &amp;B);
-<span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     188 </span>            :         // Generate functions
-<span class="lineNum">     189 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     190 </span>            :         static void GenerateSequence(Vector &amp;source, int64_t start = 0,
-<span class="lineNum">     191 </span>            :                                      int64_t increment = 1);
-<span class="lineNum">     192 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     193 </span>            :         // Helpers
-<span class="lineNum">     194 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     195 </span>            :         // Copy the data from source to target, casting if the types don't match
-<span class="lineNum">     196 </span>            :         static void Cast(Vector &amp;source, Vector &amp;result);
-<span class="lineNum">     197 </span>            :         // Copy the data of &lt;source&gt; to the target location
-<span class="lineNum">     198 </span>            :         static void Copy(Vector &amp;source, void *target, size_t offset = 0,
-<span class="lineNum">     199 </span>            :                          size_t element_count = 0);
-<span class="lineNum">     200 </span>            :         // Copy the data of &lt;source&gt; to the target vector
-<span class="lineNum">     201 </span>            :         static void Copy(Vector &amp;source, Vector &amp;target, size_t offset = 0);
-<span class="lineNum">     202 </span>            :         // Copy the data of &lt;source&gt; to the target location, setting null values to
-<span class="lineNum">     203 </span>            :         // NullValue&lt;T&gt;. Used to store data without separate NULL mask.
-<span class="lineNum">     204 </span>            :         static void CopyToStorage(Vector &amp;source, void *target, size_t offset = 0,
-<span class="lineNum">     205 </span>            :                                   size_t element_count = 0);
-<span class="lineNum">     206 </span>            :         // Appends the data of &lt;source&gt; to the target vector, setting the nullmask
-<span class="lineNum">     207 </span>            :         // for any NullValue&lt;T&gt; of source. Used to go back from storage to a
-<span class="lineNum">     208 </span>            :         // nullmask.
-<span class="lineNum">     209 </span>            :         static void AppendFromStorage(Vector &amp;source, Vector &amp;target);
-<span class="lineNum">     210 </span>            : 
-<span class="lineNum">     211 </span>            :         // Set all elements of the vector to the given constant value
-<span class="lineNum">     212 </span>            :         static void Set(Vector &amp;result, Value value);
-<span class="lineNum">     213 </span>            :         //===--------------------------------------------------------------------===//
-<span class="lineNum">     214 </span>            :         // Exec
-<a name="215"><span class="lineNum">     215 </span>            :         //===--------------------------------------------------------------------===//</a>
-<span class="lineNum">     216 </span>            :         template &lt;class T&gt;
-<span class="lineNum">     217 </span><span class="lineCov">    1913162 :         static void Exec(sel_t *sel_vector, size_t count, T &amp;&amp;fun,</span>
-<span class="lineNum">     218 </span>            :                          size_t offset = 0) {
-<span class="lineNum">     219 </span><span class="lineCov">    1913162 :                 size_t i = offset;</span>
-<span class="lineNum">     220 </span><span class="lineCov">    1913162 :                 if (sel_vector) {</span>
-<span class="lineNum">     221 </span>            :                         //#pragma GCC ivdep
-<span class="lineNum">     222 </span><span class="lineCov">    7585751 :                         for (; i &lt; count; i++) {</span>
-<span class="lineNum">     223 </span><span class="lineCov">    7074397 :                                 fun(sel_vector[i], i);</span>
-<span class="lineNum">     224 </span>            :                         }
-<span class="lineNum">     225 </span>            :                 } else {
-<span class="lineNum">     226 </span>            :                         //#pragma GCC ivdep
-<span class="lineNum">     227 </span><span class="lineCov">   24221202 :                         for (; i &lt; count; i++) {</span>
-<span class="lineNum">     228 </span><span class="lineCov">   22819399 :                                 fun(i, i);</span>
-<span class="lineNum">     229 </span>            :                         }
-<span class="lineNum">     230 </span>            :                 }
-<span class="lineNum">     231 </span><span class="lineCov">    1913157 :         }</span>
-<span class="lineNum">     232 </span><span class="lineCov">     176330 :         //! Exec over the set of indexes, calls the callback function with (i) =</span>
-<a name="233"><span class="lineNum">     233 </span>            :         //! index, dependent on selection vector and (k) = count</a>
-<span class="lineNum">     234 </span><span class="lineCov">     176330 :         template &lt;class T&gt;</span>
-<span class="lineNum">     235 </span><span class="lineCov">     265150 :         static void Exec(Vector &amp;vector, T &amp;&amp;fun, size_t offset = 0,</span>
-<span class="lineNum">     236 </span>            :                          size_t count = 0) {
-<span class="lineNum">     237 </span><span class="lineCov">     377994 :                 if (count == 0) {</span>
-<span class="lineNum">     238 </span><span class="lineCov">     339890 :                         count = vector.count;</span>
-<span class="lineNum">     239 </span>            :                 } else {
-<span class="lineNum">     240 </span><span class="lineNoCov">          0 :                         count += offset;</span>
-<span class="lineNum">     241 </span>            :                 }
-<span class="lineNum">     242 </span><span class="lineCov">    4621686 :                 Exec(vector.sel_vector, count, fun, offset);</span>
-<span class="lineNum">     243 </span><span class="lineCov">    4483460 :         }</span>
-<span class="lineNum">     244 </span>            : 
-<span class="lineNum">     245 </span>            :         //! Exec over a specific type. Note that it is up to the caller to verify
-<span class="lineNum">     246 </span><span class="lineCov">     176330 :         //! that the vector passed in has the correct type for the iteration! This</span>
-<span class="lineNum">     247 </span><span class="lineCov">      36477 :         //! is equivalent to calling ::Exec() and performing data[i] for</span>
-<a name="248"><span class="lineNum">     248 </span>            :         //! every entry</a>
-<span class="lineNum">     249 </span><span class="lineCov">      36477 :         template &lt;typename T, class FUNC&gt;</span>
-<span class="lineNum">     250 </span><span class="lineCov">      80810 :         static void ExecType(Vector &amp;vector, FUNC &amp;&amp;fun, size_t offset = 0,</span>
-<span class="lineNum">     251 </span>            :                              size_t limit = 0) {
-<span class="lineNum">     252 </span><span class="lineCov">     339112 :                 auto data = (T *)vector.data;</span>
-<span class="lineNum">     253 </span><span class="lineCov">     308388 :                 VectorOperations::Exec(vector,</span>
-<span class="lineNum">     254 </span>            :                                        [&amp;](size_t i, size_t k) { fun(data[i], i, k); },
-<span class="lineNum">     255 </span>            :                                        offset, limit);
-<a name="256"><span class="lineNum">     256 </span><span class="lineCov">      44333 :         }</span></a>
-<span class="lineNum">     257 </span><span class="lineCov">     159321 :         template &lt;class FUNC&gt;</span>
-<span class="lineNum">     258 </span><span class="lineCov">     153571 :         static void BinaryExec(Vector &amp;a, Vector &amp;b, Vector &amp;result, FUNC &amp;&amp;fun) {</span>
-<span class="lineNum">     259 </span>            :                 // it might be the case that not everything has a selection vector
-<span class="lineNum">     260 </span>            :                 // as constants do not need a selection vector
-<span class="lineNum">     261 </span><span class="lineCov">      36477 :                 // check if we are using a selection vector</span>
-<span class="lineNum">     262 </span><span class="lineCov">      47217 :                 if (!a.IsConstant()) {</span>
-<span class="lineNum">     263 </span><span class="lineCov">          2 :                         result.sel_vector = a.sel_vector;</span>
-<span class="lineNum">     264 </span><span class="lineCov">      47216 :                         result.count = a.count;</span>
-<span class="lineNum">     265 </span><span class="lineCov">      47308 :                 } else if (!b.IsConstant()) {</span>
-<span class="lineNum">     266 </span><span class="lineCov">          1 :                         result.sel_vector = b.sel_vector;</span>
-<span class="lineNum">     267 </span><span class="lineCov">      21943 :                         result.count = b.count;</span>
-<span class="lineNum">     268 </span><span class="lineCov">      11627 :                 } else {</span>
-<span class="lineNum">     269 </span><span class="lineNoCov">          0 :                         result.sel_vector = nullptr;</span>
-<span class="lineNum">     270 </span><span class="lineNoCov">          0 :                         result.count = 1;</span>
-<span class="lineNum">     271 </span>            :                 }
-<span class="lineNum">     272 </span><span class="lineCov">      73895 : </span>
-<span class="lineNum">     273 </span><span class="lineCov">      36996 :                 // now check for constants</span>
-<span class="lineNum">     274 </span><span class="lineNoCov">          0 :                 // we handle constants by multiplying the index access by 0 to avoid 2^3</span>
-<span class="lineNum">     275 </span>            :                 // branches in the code
-<span class="lineNum">     276 </span><span class="lineCov">      47217 :                 size_t a_mul = a.IsConstant() ? 0 : 1;</span>
-<span class="lineNum">     277 </span><span class="lineCov">      29491 :                 size_t b_mul = b.IsConstant() ? 0 : 1;</span>
-<span class="lineNum">     278 </span>            : 
-<span class="lineNum">     279 </span><span class="lineCov">      29491 :                 assert(a.IsConstant() || a.count == result.count);</span>
-<span class="lineNum">     280 </span><span class="lineCov">      33548 :                 assert(b.IsConstant() || b.count == result.count);</span>
-<span class="lineNum">     281 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">     282 </span><span class="lineCov">     104715 :                 VectorOperations::Exec(</span>
-<span class="lineNum">     283 </span><span class="lineCov">      97956 :                     result, [&amp;](size_t i, size_t k) { fun(a_mul * i, b_mul * i, i); });</span>
-<a name="284"><span class="lineNum">     284 </span><span class="lineCov">          3 :         }</span></a>
-<span class="lineNum">     285 </span><span class="lineCov">         78 :         template &lt;class FUNC&gt;</span>
-<span class="lineNum">     286 </span><span class="lineCov">         99 :         static void TernaryExec(Vector &amp;a, Vector &amp;b, Vector &amp;c, Vector &amp;result,</span>
-<span class="lineNum">     287 </span><span class="lineCov">     703342 :                                 FUNC &amp;&amp;fun) {</span>
-<span class="lineNum">     288 </span><span class="lineCov">     680688 :                 // it might be the case that not everything has a selection vector</span>
-<span class="lineNum">     289 </span><span class="lineCov">       2013 :                 // as constants do not need a selection vector</span>
-<span class="lineNum">     290 </span><span class="lineCov">         78 :                 // check if we are using a selection vector</span>
-<span class="lineNum">     291 </span><span class="lineCov">      31585 :                 if (!a.IsConstant()) {</span>
-<span class="lineNum">     292 </span><span class="lineCov">     127932 :                         result.sel_vector = a.sel_vector;</span>
-<span class="lineNum">     293 </span><span class="lineCov">          5 :                         result.count = a.count;</span>
-<span class="lineNum">     294 </span><span class="lineCov">     125915 :                 } else if (!b.IsConstant()) {</span>
-<span class="lineNum">     295 </span><span class="lineCov">     165211 :                         result.sel_vector = b.sel_vector;</span>
-<span class="lineNum">     296 </span><span class="lineCov">       2014 :                         result.count = b.count;</span>
-<span class="lineNum">     297 </span><span class="lineCov">    3312472 :                 } else if (!c.IsConstant()) {</span>
-<span class="lineNum">     298 </span><span class="lineCov">    3192296 :                         result.sel_vector = c.sel_vector;</span>
-<span class="lineNum">     299 </span><span class="lineNoCov">          0 :                         result.count = c.count;</span>
-<span class="lineNum">     300 </span><span class="lineCov">       2091 :                 } else {</span>
-<span class="lineNum">     301 </span><span class="lineCov">       2091 :                         result.sel_vector = nullptr;</span>
-<span class="lineNum">     302 </span><span class="lineCov">     210672 :                         result.count = 1;</span>
-<span class="lineNum">     303 </span><span class="lineCov">     205012 :                 }</span>
-<span class="lineNum">     304 </span><span class="lineCov">       2358 : </span>
-<span class="lineNum">     305 </span><span class="lineCov">       2013 :                 // now check for constants</span>
-<span class="lineNum">     306 </span><span class="lineCov">     130207 :                 // we handle constants by multiplying the index access by 0 to avoid 2^3</span>
-<span class="lineNum">     307 </span><span class="lineCov">      71340 :                 // branches in the code</span>
-<span class="lineNum">     308 </span><span class="lineCov">          6 :                 size_t a_mul = a.IsConstant() ? 0 : 1;</span>
-<span class="lineNum">     309 </span><span class="lineCov">      69066 :                 size_t b_mul = b.IsConstant() ? 0 : 1;</span>
-<span class="lineNum">     310 </span><span class="lineCov">     115686 :                 size_t c_mul = c.IsConstant() ? 0 : 1;</span>
-<span class="lineNum">     311 </span><span class="lineCov">       2280 : </span>
-<span class="lineNum">     312 </span><span class="lineCov">     392815 :                 assert(a.IsConstant() || a.count == result.count);</span>
-<span class="lineNum">     313 </span><span class="lineCov">     359173 :                 assert(b.IsConstant() || b.count == result.count);</span>
-<span class="lineNum">     314 </span><span class="lineCov">        100 :                 assert(c.IsConstant() || c.count == result.count);</span>
-<span class="lineNum">     315 </span><span class="lineCov">        172 : </span>
-<span class="lineNum">     316 </span><span class="lineCov">         84 :                 VectorOperations::Exec(result, [&amp;](size_t i, size_t k) {</span>
-<span class="lineNum">     317 </span><span class="lineCov">     727975 :                         fun(a_mul * i, b_mul * i, c_mul * i, i);</span>
-<span class="lineNum">     318 </span><span class="lineCov">     690371 :                 });</span>
-<span class="lineNum">     319 </span><span class="lineCov">       3946 :         }</span>
-<span class="lineNum">     320 </span><span class="lineCov">         78 : };</span>
-<span class="lineNum">     321 </span><span class="lineCov">      73062 : } // namespace duckdb</span>
+<span class="lineNum">     179 </span>            :         // Sort the vector, setting the given selection vector to a sorted state
+<span class="lineNum">     180 </span>            :         // while ignoring NULL values.
+<span class="lineNum">     181 </span>            :         static void Sort(Vector &amp;vector, sel_t *result_vector, size_t count,
+<span class="lineNum">     182 </span>            :                          sel_t result[]);
+<span class="lineNum">     183 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     184 </span>            :         // Hash functions
+<span class="lineNum">     185 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     186 </span>            :         // result = HASH(A)
+<span class="lineNum">     187 </span>            :         static void Hash(Vector &amp;A, Vector &amp;result);
+<span class="lineNum">     188 </span>            :         // A ^= HASH(B)
+<span class="lineNum">     189 </span>            :         static void CombineHash(Vector &amp;hashes, Vector &amp;B);
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     192 </span>            :         // Generate functions
+<span class="lineNum">     193 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     194 </span>            :         static void GenerateSequence(Vector &amp;source, int64_t start = 0,
+<span class="lineNum">     195 </span>            :                                      int64_t increment = 1);
+<span class="lineNum">     196 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     197 </span>            :         // Helpers
+<span class="lineNum">     198 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     199 </span>            :         // Copy the data from source to target, casting if the types don't match
+<span class="lineNum">     200 </span>            :         static void Cast(Vector &amp;source, Vector &amp;result);
+<span class="lineNum">     201 </span>            :         // Copy the data of &lt;source&gt; to the target location
+<span class="lineNum">     202 </span>            :         static void Copy(Vector &amp;source, void *target, size_t offset = 0,
+<span class="lineNum">     203 </span>            :                          size_t element_count = 0);
+<span class="lineNum">     204 </span>            :         // Copy the data of &lt;source&gt; to the target vector
+<span class="lineNum">     205 </span>            :         static void Copy(Vector &amp;source, Vector &amp;target, size_t offset = 0);
+<span class="lineNum">     206 </span>            :         // Copy the data of &lt;source&gt; to the target location, setting null values to
+<span class="lineNum">     207 </span>            :         // NullValue&lt;T&gt;. Used to store data without separate NULL mask.
+<span class="lineNum">     208 </span>            :         static void CopyToStorage(Vector &amp;source, void *target, size_t offset = 0,
+<span class="lineNum">     209 </span>            :                                   size_t element_count = 0);
+<span class="lineNum">     210 </span>            :         // Appends the data of &lt;source&gt; to the target vector, setting the nullmask
+<span class="lineNum">     211 </span>            :         // for any NullValue&lt;T&gt; of source. Used to go back from storage to a
+<span class="lineNum">     212 </span>            :         // nullmask.
+<span class="lineNum">     213 </span>            :         static void AppendFromStorage(Vector &amp;source, Vector &amp;target);
+<span class="lineNum">     214 </span>            : 
+<span class="lineNum">     215 </span>            :         // Set all elements of the vector to the given constant value
+<span class="lineNum">     216 </span>            :         static void Set(Vector &amp;result, Value value);
+<span class="lineNum">     217 </span>            :         //===--------------------------------------------------------------------===//
+<span class="lineNum">     218 </span>            :         // Exec
+<a name="219"><span class="lineNum">     219 </span>            :         //===--------------------------------------------------------------------===//</a>
+<span class="lineNum">     220 </span>            :         template &lt;class T&gt;
+<span class="lineNum">     221 </span><span class="lineCov">    1913252 :         static void Exec(sel_t *sel_vector, size_t count, T &amp;&amp;fun,</span>
+<span class="lineNum">     222 </span>            :                          size_t offset = 0) {
+<span class="lineNum">     223 </span><span class="lineCov">    1913252 :                 size_t i = offset;</span>
+<span class="lineNum">     224 </span><span class="lineCov">    1913252 :                 if (sel_vector) {</span>
+<span class="lineNum">     225 </span>            :                         //#pragma GCC ivdep
+<span class="lineNum">     226 </span><span class="lineCov">    7588700 :                         for (; i &lt; count; i++) {</span>
+<span class="lineNum">     227 </span><span class="lineCov">    7077331 :                                 fun(sel_vector[i], i);</span>
+<span class="lineNum">     228 </span>            :                         }
+<span class="lineNum">     229 </span>            :                 } else {
+<span class="lineNum">     230 </span>            :                         //#pragma GCC ivdep
+<span class="lineNum">     231 </span><span class="lineCov">   24222459 :                         for (; i &lt; count; i++) {</span>
+<span class="lineNum">     232 </span><span class="lineCov">   22820581 :                                 fun(i, i);</span>
+<span class="lineNum">     233 </span>            :                         }
+<span class="lineNum">     234 </span>            :                 }
+<span class="lineNum">     235 </span><span class="lineCov">    1913247 :         }</span>
+<span class="lineNum">     236 </span><span class="lineCov">     176331 :         //! Exec over the set of indexes, calls the callback function with (i) =</span>
+<a name="237"><span class="lineNum">     237 </span>            :         //! index, dependent on selection vector and (k) = count</a>
+<span class="lineNum">     238 </span><span class="lineCov">     176331 :         template &lt;class T&gt;</span>
+<span class="lineNum">     239 </span><span class="lineCov">     265150 :         static void Exec(const Vector &amp;vector, T &amp;&amp;fun, size_t offset = 0,</span>
+<span class="lineNum">     240 </span>            :                          size_t count = 0) {
+<span class="lineNum">     241 </span><span class="lineCov">     379018 :                 if (count == 0) {</span>
+<span class="lineNum">     242 </span><span class="lineCov">     340913 :                         count = vector.count;</span>
+<span class="lineNum">     243 </span>            :                 } else {
+<span class="lineNum">     244 </span><span class="lineNoCov">          0 :                         count += offset;</span>
+<span class="lineNum">     245 </span>            :                 }
+<span class="lineNum">     246 </span><span class="lineCov">    4621685 :                 Exec(vector.sel_vector, count, fun, offset);</span>
+<span class="lineNum">     247 </span><span class="lineCov">    4483459 :         }</span>
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span>            :         //! Exec over a specific type. Note that it is up to the caller to verify
+<span class="lineNum">     250 </span><span class="lineCov">     176331 :         //! that the vector passed in has the correct type for the iteration! This</span>
+<span class="lineNum">     251 </span><span class="lineCov">      36478 :         //! is equivalent to calling ::Exec() and performing data[i] for</span>
+<a name="252"><span class="lineNum">     252 </span>            :         //! every entry</a>
+<span class="lineNum">     253 </span><span class="lineCov">      36478 :         template &lt;typename T, class FUNC&gt;</span>
+<span class="lineNum">     254 </span><span class="lineCov">      80811 :         static void ExecType(Vector &amp;vector, FUNC &amp;&amp;fun, size_t offset = 0,</span>
+<span class="lineNum">     255 </span>            :                              size_t limit = 0) {
+<span class="lineNum">     256 </span><span class="lineCov">     339112 :                 auto data = (T *)vector.data;</span>
+<span class="lineNum">     257 </span><span class="lineCov">     308388 :                 VectorOperations::Exec(vector,</span>
+<span class="lineNum">     258 </span>            :                                        [&amp;](size_t i, size_t k) { fun(data[i], i, k); },
+<span class="lineNum">     259 </span>            :                                        offset, limit);
+<a name="260"><span class="lineNum">     260 </span><span class="lineCov">      44333 :         }</span></a>
+<span class="lineNum">     261 </span><span class="lineCov">     160346 :         template &lt;class FUNC&gt;</span>
+<span class="lineNum">     262 </span><span class="lineCov">     154595 :         static void BinaryExec(Vector &amp;a, Vector &amp;b, Vector &amp;result, FUNC &amp;&amp;fun) {</span>
+<span class="lineNum">     263 </span>            :                 // it might be the case that not everything has a selection vector
+<span class="lineNum">     264 </span>            :                 // as constants do not need a selection vector
+<span class="lineNum">     265 </span><span class="lineCov">      36478 :                 // check if we are using a selection vector</span>
+<span class="lineNum">     266 </span><span class="lineCov">      47229 :                 if (!a.IsConstant()) {</span>
+<span class="lineNum">     267 </span><span class="lineCov">          2 :                         result.sel_vector = a.sel_vector;</span>
+<span class="lineNum">     268 </span><span class="lineCov">      47228 :                         result.count = a.count;</span>
+<span class="lineNum">     269 </span><span class="lineCov">      47322 :                 } else if (!b.IsConstant()) {</span>
+<span class="lineNum">     270 </span><span class="lineCov">          1 :                         result.sel_vector = b.sel_vector;</span>
+<span class="lineNum">     271 </span><span class="lineCov">      21945 :                         result.count = b.count;</span>
+<span class="lineNum">     272 </span><span class="lineCov">      11629 :                 } else {</span>
+<span class="lineNum">     273 </span><span class="lineNoCov">          0 :                         result.sel_vector = nullptr;</span>
+<span class="lineNum">     274 </span><span class="lineNoCov">          0 :                         result.count = 1;</span>
+<span class="lineNum">     275 </span>            :                 }
+<span class="lineNum">     276 </span><span class="lineCov">      73921 : </span>
+<span class="lineNum">     277 </span><span class="lineCov">      37010 :                 // now check for constants</span>
+<span class="lineNum">     278 </span><span class="lineCov">          1 :                 // we handle constants by multiplying the index access by 0 to avoid 2^3</span>
+<span class="lineNum">     279 </span>            :                 // branches in the code
+<span class="lineNum">     280 </span><span class="lineCov">      47230 :                 size_t a_mul = a.IsConstant() ? 0 : 1;</span>
+<span class="lineNum">     281 </span><span class="lineCov">      29492 :                 size_t b_mul = b.IsConstant() ? 0 : 1;</span>
+<span class="lineNum">     282 </span>            : 
+<span class="lineNum">     283 </span><span class="lineCov">      29491 :                 assert(a.IsConstant() || a.count == result.count);</span>
+<span class="lineNum">     284 </span><span class="lineCov">      33548 :                 assert(b.IsConstant() || b.count == result.count);</span>
+<span class="lineNum">     285 </span><span class="lineCov">          1 : </span>
+<span class="lineNum">     286 </span><span class="lineCov">     104716 :                 VectorOperations::Exec(</span>
+<span class="lineNum">     287 </span><span class="lineCov">      97957 :                     result, [&amp;](size_t i, size_t k) { fun(a_mul * i, b_mul * i, i); });</span>
+<a name="288"><span class="lineNum">     288 </span><span class="lineCov">          3 :         }</span></a>
+<span class="lineNum">     289 </span><span class="lineCov">         79 :         template &lt;class FUNC&gt;</span>
+<span class="lineNum">     290 </span><span class="lineCov">        100 :         static void TernaryExec(Vector &amp;a, Vector &amp;b, Vector &amp;c, Vector &amp;result,</span>
+<span class="lineNum">     291 </span><span class="lineCov">     703342 :                                 FUNC &amp;&amp;fun) {</span>
+<span class="lineNum">     292 </span><span class="lineCov">     680688 :                 // it might be the case that not everything has a selection vector</span>
+<span class="lineNum">     293 </span><span class="lineCov">       2013 :                 // as constants do not need a selection vector</span>
+<span class="lineNum">     294 </span><span class="lineCov">         79 :                 // check if we are using a selection vector</span>
+<span class="lineNum">     295 </span><span class="lineCov">      31586 :                 if (!a.IsConstant()) {</span>
+<span class="lineNum">     296 </span><span class="lineCov">     128660 :                         result.sel_vector = a.sel_vector;</span>
+<span class="lineNum">     297 </span><span class="lineCov">          5 :                         result.count = a.count;</span>
+<span class="lineNum">     298 </span><span class="lineCov">     126643 :                 } else if (!b.IsConstant()) {</span>
+<span class="lineNum">     299 </span><span class="lineCov">     126643 :                         result.sel_vector = b.sel_vector;</span>
+<span class="lineNum">     300 </span><span class="lineCov">       2014 :                         result.count = b.count;</span>
+<span class="lineNum">     301 </span><span class="lineCov">    3277155 :                 } else if (!c.IsConstant()) {</span>
+<span class="lineNum">     302 </span><span class="lineCov">    3156766 :                         result.sel_vector = c.sel_vector;</span>
+<span class="lineNum">     303 </span><span class="lineNoCov">          0 :                         result.count = c.count;</span>
+<span class="lineNum">     304 </span><span class="lineCov">       2091 :                 } else {</span>
+<span class="lineNum">     305 </span><span class="lineCov">       2091 :                         result.sel_vector = nullptr;</span>
+<span class="lineNum">     306 </span><span class="lineCov">     187283 :                         result.count = 1;</span>
+<span class="lineNum">     307 </span><span class="lineCov">     181108 :                 }</span>
+<span class="lineNum">     308 </span><span class="lineCov">         78 : </span>
+<span class="lineNum">     309 </span><span class="lineCov">       2013 :                 // now check for constants</span>
+<span class="lineNum">     310 </span><span class="lineCov">     128655 :                 // we handle constants by multiplying the index access by 0 to avoid 2^3</span>
+<span class="lineNum">     311 </span><span class="lineCov">      69060 :                 // branches in the code</span>
+<span class="lineNum">     312 </span><span class="lineCov">          6 :                 size_t a_mul = a.IsConstant() ? 0 : 1;</span>
+<span class="lineNum">     313 </span><span class="lineCov">      69066 :                 size_t b_mul = b.IsConstant() ? 0 : 1;</span>
+<span class="lineNum">     314 </span><span class="lineCov">     154994 :                 size_t c_mul = c.IsConstant() ? 0 : 1;</span>
+<span class="lineNum">     315 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">     316 </span><span class="lineCov">     429843 :                 assert(a.IsConstant() || a.count == result.count);</span>
+<span class="lineNum">     317 </span><span class="lineCov">     398403 :                 assert(b.IsConstant() || b.count == result.count);</span>
+<span class="lineNum">     318 </span><span class="lineCov">        100 :                 assert(c.IsConstant() || c.count == result.count);</span>
+<span class="lineNum">     319 </span><span class="lineCov">         94 : </span>
+<span class="lineNum">     320 </span><span class="lineCov">          6 :                 VectorOperations::Exec(result, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">     321 </span><span class="lineCov">     767283 :                         fun(a_mul * i, b_mul * i, c_mul * i, i);</span>
+<span class="lineNum">     322 </span><span class="lineCov">     729679 :                 });</span>
+<span class="lineNum">     323 </span><span class="lineCov">       6226 :         }</span>
+<span class="lineNum">     324 </span>            : };
+<span class="lineNum">     325 </span><span class="lineCov">      75264 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>

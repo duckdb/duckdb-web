@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 683c027 - include/catalog/catalog_entry.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 6810731 - include/catalog/catalog_entry.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 683c027</td>
+            <td class="headerValue">DuckDB Code Coverage Report 6810731</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">14</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-27 10:30:56</td>
+            <td class="headerValue">2018-11-27 23:25:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -86,17 +86,17 @@
 <span class="lineNum">      24 </span>            : //! Abstract base class of an entry in the catalog
 <a name="25"><span class="lineNum">      25 </span>            : class CatalogEntry {</a>
 <span class="lineNum">      26 </span>            :   public:
-<span class="lineNum">      27 </span><span class="lineCov">       3027 :         CatalogEntry(CatalogType type, Catalog *catalog, std::string name)</span>
-<span class="lineNum">      28 </span><span class="lineCov">       3027 :             : type(type), catalog(catalog), set(nullptr), name(name),</span>
-<span class="lineNum">      29 </span><span class="lineCov">       3027 :               deleted(false), parent(nullptr) {</span>
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">       3027 :         }</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">       3053 :         CatalogEntry(CatalogType type, Catalog *catalog, std::string name)</span>
+<span class="lineNum">      28 </span><span class="lineCov">       3053 :             : type(type), catalog(catalog), set(nullptr), name(name),</span>
+<span class="lineNum">      29 </span><span class="lineCov">       3053 :               deleted(false), parent(nullptr) {</span>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">       3053 :         }</span></a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">       4541 :         virtual ~CatalogEntry() {</span>
-<span class="lineNum">      33 </span><span class="lineCov">       4541 :         }</span>
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">       1514 : </span></a>
-<span class="lineNum">      35 </span><span class="lineCov">       1514 :         //! Returns true if other objects depend on this object</span>
-<span class="lineNum">      36 </span><span class="lineCov">       3027 :         virtual bool HasDependents(Transaction &amp;transaction) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">       3027 :                 return false;</span>
+<span class="lineNum">      32 </span><span class="lineCov">       4580 :         virtual ~CatalogEntry() {</span>
+<span class="lineNum">      33 </span><span class="lineCov">       4580 :         }</span>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">       1527 : </span></a>
+<span class="lineNum">      35 </span><span class="lineCov">       1527 :         //! Returns true if other objects depend on this object</span>
+<span class="lineNum">      36 </span><span class="lineCov">       3053 :         virtual bool HasDependents(Transaction &amp;transaction) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">       3053 :                 return false;</span>
 <a name="38"><span class="lineNum">      38 </span>            :         }</a>
 <span class="lineNum">      39 </span>            :         //! Function that drops all dependents (used for Cascade)
 <span class="lineNum">      40 </span><span class="lineCov">         13 :         virtual void DropDependents(Transaction &amp;transaction) {</span>

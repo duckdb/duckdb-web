@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 683c027 - storage/data_table.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 6810731 - storage/data_table.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 683c027</td>
+            <td class="headerValue">DuckDB Code Coverage Report 6810731</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">211</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-27 10:30:56</td>
+            <td class="headerValue">2018-11-27 23:25:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -81,43 +81,43 @@
 <span class="lineNum">      19 </span>            : using namespace duckdb;
 <a name="20"><span class="lineNum">      20 </span>            : using namespace std;</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">        167 : DataTable::DataTable(StorageManager &amp;storage, std::string schema,</span>
-<span class="lineNum">      23 </span><span class="lineCov">        167 :                      std::string table, std::vector&lt;TypeId&gt; types_)</span>
-<span class="lineNum">      24 </span><span class="lineCov">        167 :     : schema(schema), table(table), types(types_), serializer(types),</span>
-<span class="lineNum">      25 </span><span class="lineCov">        167 :       storage(storage) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">        167 :         size_t accumulative_size = 0;</span>
-<span class="lineNum">      27 </span><span class="lineCov">        863 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">        696 :                 accumulative_tuple_size.push_back(accumulative_size);</span>
-<span class="lineNum">      29 </span><span class="lineCov">        696 :                 accumulative_size += GetTypeIdSize(types[i]);</span>
+<span class="lineNum">      22 </span><span class="lineCov">        169 : DataTable::DataTable(StorageManager &amp;storage, std::string schema,</span>
+<span class="lineNum">      23 </span><span class="lineCov">        169 :                      std::string table, std::vector&lt;TypeId&gt; types_)</span>
+<span class="lineNum">      24 </span><span class="lineCov">        169 :     : schema(schema), table(table), types(types_), serializer(types),</span>
+<span class="lineNum">      25 </span><span class="lineCov">        169 :       storage(storage) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">        169 :         size_t accumulative_size = 0;</span>
+<span class="lineNum">      27 </span><span class="lineCov">        869 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">        700 :                 accumulative_tuple_size.push_back(accumulative_size);</span>
+<span class="lineNum">      29 </span><span class="lineCov">        700 :                 accumulative_size += GetTypeIdSize(types[i]);</span>
 <span class="lineNum">      30 </span>            :         }
-<span class="lineNum">      31 </span><span class="lineCov">        167 :         tuple_size = accumulative_size;</span>
+<span class="lineNum">      31 </span><span class="lineCov">        169 :         tuple_size = accumulative_size;</span>
 <span class="lineNum">      32 </span>            :         // create empty statistics for the table
-<span class="lineNum">      33 </span><span class="lineCov">        863 :         statistics = unique_ptr&lt;Statistics[]&gt;(new Statistics[types.size()]);</span>
-<span class="lineNum">      34 </span><span class="lineCov">        863 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">        696 :                 statistics[i].type = types[i];</span>
+<span class="lineNum">      33 </span><span class="lineCov">        869 :         statistics = unique_ptr&lt;Statistics[]&gt;(new Statistics[types.size()]);</span>
+<span class="lineNum">      34 </span><span class="lineCov">        869 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">        700 :                 statistics[i].type = types[i];</span>
 <span class="lineNum">      36 </span>            :         }
-<span class="lineNum">      37 </span><span class="lineCov">        863 :         statistics_locks = unique_ptr&lt;mutex[]&gt;(new mutex[types.size()]);</span>
+<span class="lineNum">      37 </span><span class="lineCov">        869 :         statistics_locks = unique_ptr&lt;mutex[]&gt;(new mutex[types.size()]);</span>
 <span class="lineNum">      38 </span>            :         // initialize the table with an empty data chunk
-<span class="lineNum">      39 </span><span class="lineCov">        167 :         chunk_list = make_unique&lt;StorageChunk&gt;(*this, 0);</span>
-<span class="lineNum">      40 </span><span class="lineCov">        167 :         tail_chunk = chunk_list.get();</span>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">        167 : }</span></a>
+<span class="lineNum">      39 </span><span class="lineCov">        169 :         chunk_list = make_unique&lt;StorageChunk&gt;(*this, 0);</span>
+<span class="lineNum">      40 </span><span class="lineCov">        169 :         tail_chunk = chunk_list.get();</span>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">        169 : }</span></a>
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span><span class="lineCov">     116983 : vector&lt;TypeId&gt; DataTable::GetTypes(const vector&lt;column_t&gt; &amp;column_ids) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">     116983 :         vector&lt;TypeId&gt; result;</span>
-<span class="lineNum">      45 </span><span class="lineCov">     317726 :         for (auto &amp;index : column_ids) {</span>
-<span class="lineNum">      46 </span><span class="lineCov">     200743 :                 if (index == COLUMN_IDENTIFIER_ROW_ID) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">     116991 : vector&lt;TypeId&gt; DataTable::GetTypes(const vector&lt;column_t&gt; &amp;column_ids) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">     116991 :         vector&lt;TypeId&gt; result;</span>
+<span class="lineNum">      45 </span><span class="lineCov">     317742 :         for (auto &amp;index : column_ids) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">     200751 :                 if (index == COLUMN_IDENTIFIER_ROW_ID) {</span>
 <span class="lineNum">      47 </span><span class="lineCov">       5169 :                         result.push_back(TypeId::POINTER);</span>
 <span class="lineNum">      48 </span>            :                 } else {
-<span class="lineNum">      49 </span><span class="lineCov">     195574 :                         result.push_back(types[index]);</span>
+<span class="lineNum">      49 </span><span class="lineCov">     195582 :                         result.push_back(types[index]);</span>
 <span class="lineNum">      50 </span>            :                 }
 <span class="lineNum">      51 </span>            :         }
-<span class="lineNum">      52 </span><span class="lineCov">     116983 :         return result;</span>
+<span class="lineNum">      52 </span><span class="lineCov">     116991 :         return result;</span>
 <a name="53"><span class="lineNum">      53 </span>            : }</a>
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">      67375 : void DataTable::InitializeScan(ScanStructure &amp;structure) {</span>
-<span class="lineNum">      56 </span><span class="lineCov">      67375 :         structure.chunk = chunk_list.get();</span>
-<span class="lineNum">      57 </span><span class="lineCov">      67375 :         structure.offset = 0;</span>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">      67375 : }</span></a>
+<span class="lineNum">      55 </span><span class="lineCov">      67379 : void DataTable::InitializeScan(ScanStructure &amp;structure) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">      67379 :         structure.chunk = chunk_list.get();</span>
+<span class="lineNum">      57 </span><span class="lineCov">      67379 :         structure.offset = 0;</span>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">      67379 : }</span></a>
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span><span class="lineCov">       2065 : StorageChunk *DataTable::GetChunk(size_t row_number) {</span>
 <span class="lineNum">      61 </span>            :         // FIXME: this could be O(1) in amount of chunks
@@ -134,9 +134,9 @@
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :         return nullptr;</span>
 <a name="73"><span class="lineNum">      73 </span>            : }</a>
 <span class="lineNum">      74 </span>            : 
-<span class="lineNum">      75 </span><span class="lineCov">      26732 : void DataTable::VerifyConstraints(TableCatalogEntry &amp;table,</span>
+<span class="lineNum">      75 </span><span class="lineCov">      26734 : void DataTable::VerifyConstraints(TableCatalogEntry &amp;table,</span>
 <span class="lineNum">      76 </span>            :                                   ClientContext &amp;context, DataChunk &amp;chunk) {
-<span class="lineNum">      77 </span><span class="lineCov">      26794 :         for (auto &amp;constraint : table.constraints) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">      26796 :         for (auto &amp;constraint : table.constraints) {</span>
 <span class="lineNum">      78 </span><span class="lineCov">         71 :                 switch (constraint-&gt;type) {</span>
 <span class="lineNum">      79 </span><span class="lineCov">          7 :                 case ConstraintType::NOT_NULL: {</span>
 <span class="lineNum">      80 </span>            :                         auto &amp;not_null =
@@ -189,24 +189,24 @@
 <span class="lineNum">     127 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Constraint type not implemented!&quot;);</span>
 <span class="lineNum">     128 </span>            :                 }
 <span class="lineNum">     129 </span>            :         }
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">      26723 : }</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">      26725 : }</span></a>
 <span class="lineNum">     131 </span>            : 
-<span class="lineNum">     132 </span><span class="lineCov">      24711 : void DataTable::Append(TableCatalogEntry &amp;table, ClientContext &amp;context,</span>
+<span class="lineNum">     132 </span><span class="lineCov">      24713 : void DataTable::Append(TableCatalogEntry &amp;table, ClientContext &amp;context,</span>
 <span class="lineNum">     133 </span>            :                        DataChunk &amp;chunk) {
-<span class="lineNum">     134 </span><span class="lineCov">      24711 :         if (chunk.size() == 0) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">      24713 :         if (chunk.size() == 0) {</span>
 <span class="lineNum">     135 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">     136 </span>            :         }
-<span class="lineNum">     137 </span><span class="lineCov">      24711 :         if (chunk.column_count != table.columns.size()) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">      24713 :         if (chunk.column_count != table.columns.size()) {</span>
 <span class="lineNum">     138 </span><span class="lineNoCov">          0 :                 throw CatalogException(&quot;Mismatch in column count for append&quot;);</span>
 <span class="lineNum">     139 </span>            :         }
 <span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span><span class="lineCov">      24711 :         chunk.Verify();</span>
-<span class="lineNum">     142 </span><span class="lineCov">      24711 :         VerifyConstraints(table, context, chunk);</span>
+<span class="lineNum">     141 </span><span class="lineCov">      24713 :         chunk.Verify();</span>
+<span class="lineNum">     142 </span><span class="lineCov">      24713 :         VerifyConstraints(table, context, chunk);</span>
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">      24703 :         auto last_chunk = tail_chunk;</span>
+<span class="lineNum">     144 </span><span class="lineCov">      24705 :         auto last_chunk = tail_chunk;</span>
 <span class="lineNum">     145 </span>            :         do {
-<span class="lineNum">     146 </span><span class="lineCov">      24703 :                 last_chunk-&gt;GetExclusiveLock();</span>
-<span class="lineNum">     147 </span><span class="lineCov">      24703 :                 if (last_chunk != tail_chunk) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">      24705 :                 last_chunk-&gt;GetExclusiveLock();</span>
+<span class="lineNum">     147 </span><span class="lineCov">      24705 :                 if (last_chunk != tail_chunk) {</span>
 <span class="lineNum">     148 </span>            :                         // new chunk was added, have to obtain lock of last chunk
 <span class="lineNum">     149 </span><span class="lineNoCov">          0 :                         last_chunk-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">     150 </span><span class="lineNoCov">          0 :                         last_chunk = tail_chunk;</span>
@@ -214,53 +214,53 @@
 <span class="lineNum">     152 </span>            :                 }
 <span class="lineNum">     153 </span>            :         } while (false);
 <span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span><span class="lineCov">      49406 :         StringHeap heap;</span>
-<span class="lineNum">     156 </span><span class="lineCov">      24703 :         chunk.MoveStringsToHeap(heap);</span>
+<span class="lineNum">     155 </span><span class="lineCov">      49410 :         StringHeap heap;</span>
+<span class="lineNum">     156 </span><span class="lineCov">      24705 :         chunk.MoveStringsToHeap(heap);</span>
 <span class="lineNum">     157 </span>            : 
 <span class="lineNum">     158 </span>            :         // we have an exclusive lock on the last chunk
 <span class="lineNum">     159 </span>            :         // now we can append the elements
 <span class="lineNum">     160 </span>            : 
 <span class="lineNum">     161 </span>            :         // first we handle any PRIMARY KEY and UNIQUE constraints
-<span class="lineNum">     162 </span><span class="lineCov">      24703 :         auto error =</span>
-<span class="lineNum">     163 </span><span class="lineCov">      24703 :             UniqueIndex::Append(context.ActiveTransaction(), indexes, chunk,</span>
-<span class="lineNum">     164 </span><span class="lineCov">      49406 :                                 last_chunk-&gt;start + last_chunk-&gt;count);</span>
-<span class="lineNum">     165 </span><span class="lineCov">      24703 :         if (!error.empty()) {</span>
+<span class="lineNum">     162 </span><span class="lineCov">      24705 :         auto error =</span>
+<span class="lineNum">     163 </span><span class="lineCov">      24705 :             UniqueIndex::Append(context.ActiveTransaction(), indexes, chunk,</span>
+<span class="lineNum">     164 </span><span class="lineCov">      49410 :                                 last_chunk-&gt;start + last_chunk-&gt;count);</span>
+<span class="lineNum">     165 </span><span class="lineCov">      24705 :         if (!error.empty()) {</span>
 <span class="lineNum">     166 </span><span class="lineCov">          9 :                 last_chunk-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">     167 </span><span class="lineCov">          9 :                 throw ConstraintException(error);</span>
 <span class="lineNum">     168 </span>            :         }
 <span class="lineNum">     169 </span>            : 
 <span class="lineNum">     170 </span>            :         // update the statistics with the new data
-<span class="lineNum">     171 </span><span class="lineCov">      60143 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
-<span class="lineNum">     172 </span><span class="lineCov">      70898 :                 lock_guard&lt;mutex&gt; stats_lock(statistics_locks[i]);</span>
-<span class="lineNum">     173 </span><span class="lineCov">      35449 :                 statistics[i].Update(chunk.data[i]);</span>
+<span class="lineNum">     171 </span><span class="lineCov">      60149 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
+<span class="lineNum">     172 </span><span class="lineCov">      70906 :                 lock_guard&lt;mutex&gt; stats_lock(statistics_locks[i]);</span>
+<span class="lineNum">     173 </span><span class="lineCov">      35453 :                 statistics[i].Update(chunk.data[i]);</span>
 <span class="lineNum">     174 </span>            :         }
 <span class="lineNum">     175 </span>            : 
-<span class="lineNum">     176 </span><span class="lineCov">      24694 :         Transaction &amp;transaction = context.ActiveTransaction();</span>
+<span class="lineNum">     176 </span><span class="lineCov">      24696 :         Transaction &amp;transaction = context.ActiveTransaction();</span>
 <span class="lineNum">     177 </span>            : 
 <span class="lineNum">     178 </span>            :         // first copy as much as can fit into the current chunk
 <span class="lineNum">     179 </span>            :         size_t current_count =
-<span class="lineNum">     180 </span><span class="lineCov">      24694 :             min(STORAGE_CHUNK_SIZE - last_chunk-&gt;count, chunk.size());</span>
-<span class="lineNum">     181 </span><span class="lineCov">      24694 :         if (current_count &gt; 0) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">      24696 :             min(STORAGE_CHUNK_SIZE - last_chunk-&gt;count, chunk.size());</span>
+<span class="lineNum">     181 </span><span class="lineCov">      24696 :         if (current_count &gt; 0) {</span>
 <span class="lineNum">     182 </span>            :                 // in the undo buffer, create entries with the &quot;deleted&quot; flag for each
 <span class="lineNum">     183 </span>            :                 // tuple so other transactions see the deleted entries before these
 <span class="lineNum">     184 </span>            :                 // changes are committed
-<span class="lineNum">     185 </span><span class="lineCov">      24694 :                 transaction.PushDeletedEntries(</span>
+<span class="lineNum">     185 </span><span class="lineCov">      24696 :                 transaction.PushDeletedEntries(</span>
 <span class="lineNum">     186 </span>            :                     last_chunk-&gt;count, current_count, last_chunk,
-<span class="lineNum">     187 </span><span class="lineCov">      24694 :                     last_chunk-&gt;version_pointers + last_chunk-&gt;count);</span>
+<span class="lineNum">     187 </span><span class="lineCov">      24696 :                     last_chunk-&gt;version_pointers + last_chunk-&gt;count);</span>
 <span class="lineNum">     188 </span>            :                 // now insert the elements into the vector
-<span class="lineNum">     189 </span><span class="lineCov">      60143 :                 for (size_t i = 0; i &lt; chunk.column_count; i++) {</span>
+<span class="lineNum">     189 </span><span class="lineCov">      60149 :                 for (size_t i = 0; i &lt; chunk.column_count; i++) {</span>
 <span class="lineNum">     190 </span>            :                         char *target =
-<span class="lineNum">     191 </span><span class="lineCov">      35449 :                             last_chunk-&gt;columns[i] +</span>
-<span class="lineNum">     192 </span><span class="lineCov">      35449 :                             last_chunk-&gt;count * GetTypeIdSize(table.columns[i].type);</span>
-<span class="lineNum">     193 </span><span class="lineCov">      35449 :                         VectorOperations::CopyToStorage(chunk.data[i], target, 0,</span>
+<span class="lineNum">     191 </span><span class="lineCov">      35453 :                             last_chunk-&gt;columns[i] +</span>
+<span class="lineNum">     192 </span><span class="lineCov">      35453 :                             last_chunk-&gt;count * GetTypeIdSize(table.columns[i].type);</span>
+<span class="lineNum">     193 </span><span class="lineCov">      35453 :                         VectorOperations::CopyToStorage(chunk.data[i], target, 0,</span>
 <span class="lineNum">     194 </span>            :                                                         current_count);
 <span class="lineNum">     195 </span>            :                 }
 <span class="lineNum">     196 </span>            :                 // now increase the count of the chunk
-<span class="lineNum">     197 </span><span class="lineCov">      24694 :                 last_chunk-&gt;count += current_count;</span>
+<span class="lineNum">     197 </span><span class="lineCov">      24696 :                 last_chunk-&gt;count += current_count;</span>
 <span class="lineNum">     198 </span>            :         }
 <span class="lineNum">     199 </span>            : 
 <span class="lineNum">     200 </span>            :         // check if we need to append more entries
-<span class="lineNum">     201 </span><span class="lineCov">      24694 :         if (current_count != chunk.size()) {</span>
+<span class="lineNum">     201 </span><span class="lineCov">      24696 :         if (current_count != chunk.size()) {</span>
 <span class="lineNum">     202 </span>            :                 // we need to append more entries
 <span class="lineNum">     203 </span>            :                 // first create a new chunk and lock it
 <span class="lineNum">     204 </span><span class="lineNoCov">          0 :                 auto new_chunk = make_unique&lt;StorageChunk&gt;(</span>
@@ -286,9 +286,9 @@
 <span class="lineNum">     224 </span><span class="lineNoCov">          0 :                 new_chunk_pointer-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">     225 </span>            :         }
 <span class="lineNum">     226 </span>            :         // after a successful append move the strings to the chunk
-<span class="lineNum">     227 </span><span class="lineCov">      24694 :         last_chunk-&gt;string_heap.MergeHeap(heap);</span>
+<span class="lineNum">     227 </span><span class="lineCov">      24696 :         last_chunk-&gt;string_heap.MergeHeap(heap);</span>
 <span class="lineNum">     228 </span>            :         // everything has been appended: release lock
-<span class="lineNum">     229 </span><span class="lineCov">      24694 :         last_chunk-&gt;ReleaseExclusiveLock();</span>
+<span class="lineNum">     229 </span><span class="lineCov">      24696 :         last_chunk-&gt;ReleaseExclusiveLock();</span>
 <a name="230"><span class="lineNum">     230 </span>            : }</a>
 <span class="lineNum">     231 </span>            : 
 <span class="lineNum">     232 </span><span class="lineCov">         16 : void DataTable::Delete(TableCatalogEntry &amp;table, ClientContext &amp;context,</span>
@@ -432,31 +432,31 @@
 <span class="lineNum">     370 </span><span class="lineCov">       2013 :         chunk-&gt;ReleaseExclusiveLock();</span>
 <a name="371"><span class="lineNum">     371 </span>            : }</a>
 <span class="lineNum">     372 </span>            : 
-<span class="lineNum">     373 </span><span class="lineCov">     128719 : void DataTable::Scan(Transaction &amp;transaction, DataChunk &amp;result,</span>
+<span class="lineNum">     373 </span><span class="lineCov">     128727 : void DataTable::Scan(Transaction &amp;transaction, DataChunk &amp;result,</span>
 <span class="lineNum">     374 </span>            :                      const vector&lt;column_t&gt; &amp;column_ids,
 <span class="lineNum">     375 </span>            :                      ScanStructure &amp;structure) {
 <span class="lineNum">     376 </span>            :         // scan the base table
-<span class="lineNum">     377 </span><span class="lineCov">     128719 :         while (structure.chunk) {</span>
-<span class="lineNum">     378 </span><span class="lineCov">      67253 :                 auto current_chunk = structure.chunk;</span>
+<span class="lineNum">     377 </span><span class="lineCov">     128727 :         while (structure.chunk) {</span>
+<span class="lineNum">     378 </span><span class="lineCov">      67257 :                 auto current_chunk = structure.chunk;</span>
 <span class="lineNum">     379 </span>            :                 // first obtain a shared lock on the current chunk
-<span class="lineNum">     380 </span><span class="lineCov">      67253 :                 current_chunk-&gt;GetSharedLock();</span>
+<span class="lineNum">     380 </span><span class="lineCov">      67257 :                 current_chunk-&gt;GetSharedLock();</span>
 <span class="lineNum">     381 </span>            :                 // now scan the chunk until we find enough pieces to fill a vector or
 <span class="lineNum">     382 </span>            :                 // reach the end
-<span class="lineNum">     383 </span><span class="lineCov">      67253 :                 sel_t regular_entries[STANDARD_VECTOR_SIZE],</span>
-<span class="lineNum">     384 </span><span class="lineCov">      67253 :                     version_entries[STANDARD_VECTOR_SIZE];</span>
-<span class="lineNum">     385 </span><span class="lineCov">      67253 :                 size_t regular_count = 0, version_count = 0;</span>
-<span class="lineNum">     386 </span><span class="lineCov">     134506 :                 size_t end = min((size_t)STANDARD_VECTOR_SIZE,</span>
-<span class="lineNum">     387 </span><span class="lineCov">      67253 :                                  current_chunk-&gt;count - structure.offset);</span>
-<span class="lineNum">     388 </span><span class="lineCov">    2626968 :                 for (size_t i = 0; i &lt; end; i++) {</span>
-<span class="lineNum">     389 </span><span class="lineCov">    2559715 :                         version_entries[version_count] = regular_entries[regular_count] = i;</span>
-<span class="lineNum">     390 </span><span class="lineCov">    2559715 :                         bool has_version =</span>
-<span class="lineNum">     391 </span><span class="lineCov">    2559715 :                             current_chunk-&gt;version_pointers[structure.offset + i];</span>
-<span class="lineNum">     392 </span><span class="lineCov">    2559715 :                         bool is_deleted = current_chunk-&gt;deleted[structure.offset + i];</span>
-<span class="lineNum">     393 </span><span class="lineCov">    2559715 :                         version_count += has_version;</span>
-<span class="lineNum">     394 </span><span class="lineCov">    2559715 :                         regular_count += !(is_deleted || has_version);</span>
+<span class="lineNum">     383 </span><span class="lineCov">      67257 :                 sel_t regular_entries[STANDARD_VECTOR_SIZE],</span>
+<span class="lineNum">     384 </span><span class="lineCov">      67257 :                     version_entries[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     385 </span><span class="lineCov">      67257 :                 size_t regular_count = 0, version_count = 0;</span>
+<span class="lineNum">     386 </span><span class="lineCov">     134514 :                 size_t end = min((size_t)STANDARD_VECTOR_SIZE,</span>
+<span class="lineNum">     387 </span><span class="lineCov">      67257 :                                  current_chunk-&gt;count - structure.offset);</span>
+<span class="lineNum">     388 </span><span class="lineCov">    2626984 :                 for (size_t i = 0; i &lt; end; i++) {</span>
+<span class="lineNum">     389 </span><span class="lineCov">    2559727 :                         version_entries[version_count] = regular_entries[regular_count] = i;</span>
+<span class="lineNum">     390 </span><span class="lineCov">    2559727 :                         bool has_version =</span>
+<span class="lineNum">     391 </span><span class="lineCov">    2559727 :                             current_chunk-&gt;version_pointers[structure.offset + i];</span>
+<span class="lineNum">     392 </span><span class="lineCov">    2559727 :                         bool is_deleted = current_chunk-&gt;deleted[structure.offset + i];</span>
+<span class="lineNum">     393 </span><span class="lineCov">    2559727 :                         version_count += has_version;</span>
+<span class="lineNum">     394 </span><span class="lineCov">    2559727 :                         regular_count += !(is_deleted || has_version);</span>
 <span class="lineNum">     395 </span>            :                 }
 <span class="lineNum">     396 </span>            : 
-<span class="lineNum">     397 </span><span class="lineCov">      67253 :                 if (regular_count &lt; end) {</span>
+<span class="lineNum">     397 </span><span class="lineCov">      67257 :                 if (regular_count &lt; end) {</span>
 <span class="lineNum">     398 </span>            :                         // first chase the version pointers, if there are any
 <span class="lineNum">     399 </span><span class="lineCov">       3146 :                         uint8_t *alternate_version_pointers[STANDARD_VECTOR_SIZE];</span>
 <span class="lineNum">     400 </span><span class="lineCov">       3146 :                         size_t alternate_version_index[STANDARD_VECTOR_SIZE];</span>
@@ -530,9 +530,9 @@
 <span class="lineNum">     468 </span>            :                         }
 <span class="lineNum">     469 </span>            :                 }
 <span class="lineNum">     470 </span>            :                 // copy the regular entries
-<span class="lineNum">     471 </span><span class="lineCov">      67253 :                 if (regular_count &gt; 0) {</span>
-<span class="lineNum">     472 </span><span class="lineCov">     173315 :                         for (size_t j = 0; j &lt; column_ids.size(); j++) {</span>
-<span class="lineNum">     473 </span><span class="lineCov">     106306 :                                 if (column_ids[j] == COLUMN_IDENTIFIER_ROW_ID) {</span>
+<span class="lineNum">     471 </span><span class="lineCov">      67257 :                 if (regular_count &gt; 0) {</span>
+<span class="lineNum">     472 </span><span class="lineCov">     173323 :                         for (size_t j = 0; j &lt; column_ids.size(); j++) {</span>
+<span class="lineNum">     473 </span><span class="lineCov">     106310 :                                 if (column_ids[j] == COLUMN_IDENTIFIER_ROW_ID) {</span>
 <span class="lineNum">     474 </span>            :                                         // generate the row identifiers
 <span class="lineNum">     475 </span>            :                                         // first generate a sequence of identifiers
 <span class="lineNum">     476 </span><span class="lineCov">       6108 :                                         Vector source(TypeId::POINTER, true, false);</span>
@@ -548,25 +548,25 @@
 <span class="lineNum">     486 </span>            :                                         // normal column
 <span class="lineNum">     487 </span>            :                                         // grab the data from the source using a selection vector
 <span class="lineNum">     488 </span>            :                                         char *dataptr =
-<span class="lineNum">     489 </span><span class="lineCov">     103252 :                                             current_chunk-&gt;columns[column_ids[j]] +</span>
-<span class="lineNum">     490 </span><span class="lineCov">     103252 :                                             GetTypeIdSize(result.data[j].type) * structure.offset;</span>
-<span class="lineNum">     491 </span><span class="lineCov">     206504 :                                         Vector source(result.data[j].type, dataptr);</span>
-<span class="lineNum">     492 </span><span class="lineCov">     103252 :                                         source.sel_vector = regular_entries;</span>
-<span class="lineNum">     493 </span><span class="lineCov">     103252 :                                         source.count = regular_count;</span>
+<span class="lineNum">     489 </span><span class="lineCov">     103256 :                                             current_chunk-&gt;columns[column_ids[j]] +</span>
+<span class="lineNum">     490 </span><span class="lineCov">     103256 :                                             GetTypeIdSize(result.data[j].type) * structure.offset;</span>
+<span class="lineNum">     491 </span><span class="lineCov">     206512 :                                         Vector source(result.data[j].type, dataptr);</span>
+<span class="lineNum">     492 </span><span class="lineCov">     103256 :                                         source.sel_vector = regular_entries;</span>
+<span class="lineNum">     493 </span><span class="lineCov">     103256 :                                         source.count = regular_count;</span>
 <span class="lineNum">     494 </span>            :                                         // append while converting NullValue&lt;T&gt; to the nullmask
-<span class="lineNum">     495 </span><span class="lineCov">     103252 :                                         VectorOperations::AppendFromStorage(source, result.data[j]);</span>
+<span class="lineNum">     495 </span><span class="lineCov">     103256 :                                         VectorOperations::AppendFromStorage(source, result.data[j]);</span>
 <span class="lineNum">     496 </span>            :                                 }
 <span class="lineNum">     497 </span>            :                         }
 <span class="lineNum">     498 </span>            :                 }
 <span class="lineNum">     499 </span>            :                 // release the read lock
-<span class="lineNum">     500 </span><span class="lineCov">      67253 :                 structure.offset += STANDARD_VECTOR_SIZE;</span>
-<span class="lineNum">     501 </span><span class="lineCov">      67253 :                 if (structure.offset &gt;= current_chunk-&gt;count) {</span>
-<span class="lineNum">     502 </span><span class="lineCov">      67206 :                         structure.offset = 0;</span>
-<span class="lineNum">     503 </span><span class="lineCov">      67206 :                         structure.chunk = current_chunk-&gt;next.get();</span>
+<span class="lineNum">     500 </span><span class="lineCov">      67257 :                 structure.offset += STANDARD_VECTOR_SIZE;</span>
+<span class="lineNum">     501 </span><span class="lineCov">      67257 :                 if (structure.offset &gt;= current_chunk-&gt;count) {</span>
+<span class="lineNum">     502 </span><span class="lineCov">      67210 :                         structure.offset = 0;</span>
+<span class="lineNum">     503 </span><span class="lineCov">      67210 :                         structure.chunk = current_chunk-&gt;next.get();</span>
 <span class="lineNum">     504 </span>            :                 }
-<span class="lineNum">     505 </span><span class="lineCov">      67253 :                 current_chunk-&gt;ReleaseSharedLock();</span>
-<span class="lineNum">     506 </span><span class="lineCov">      67253 :                 if (result.size() &gt; 0) {</span>
-<span class="lineNum">     507 </span><span class="lineCov">      67011 :                         return;</span>
+<span class="lineNum">     505 </span><span class="lineCov">      67257 :                 current_chunk-&gt;ReleaseSharedLock();</span>
+<span class="lineNum">     506 </span><span class="lineCov">      67257 :                 if (result.size() &gt; 0) {</span>
+<span class="lineNum">     507 </span><span class="lineCov">      67015 :                         return;</span>
 <span class="lineNum">     508 </span>            :                 }
 <span class="lineNum">     509 </span>            :         }
 <span class="lineNum">     510 </span>            : }
