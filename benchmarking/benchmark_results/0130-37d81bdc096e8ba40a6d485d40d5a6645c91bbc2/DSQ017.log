@@ -1,0 +1,400 @@
+<<Query Profiling Information>>
+SELECT count(DISTINCT cs_order_number) AS "order count", sum(cs_ext_ship_cost) AS "total shipping cost", sum(cs_net_profit) AS "total net profit" FROM catalog_sales cs1, date_dim, customer_address, call_center WHERE d_date BETWEEN '2002-02-01' AND cast('2002-04-02' AS date) AND cs1.cs_ship_date_sk = d_date_sk AND cs1.cs_ship_addr_sk = ca_address_sk AND ca_state = 'GA' AND cs1.cs_call_center_sk = cc_call_center_sk AND cc_county = 'Williamson County' AND EXISTS (SELECT * FROM catalog_sales cs2 WHERE cs1.cs_order_number = cs2.cs_order_number AND cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk) AND NOT EXISTS (SELECT * FROM catalog_returns cr1 WHERE cs1.cs_order_number = cr1.cr_order_number) ORDER BY count(DISTINCT cs_order_number) LIMIT 100;
+<<Timing>>
+Total Time: 0.199485s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       SEMI       |
+|  cs_order_number |
+|       =#35       |
+|  cs_warehouse_sk |
+|       !=#34      |
+|      (0.09s)     |
+|        894       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |    PROJECTION    |
+|       ANTI       |                                                                                |                  |
+|  cs_order_number |                                                                                |                  |
+|       =#27       |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        894       |                                                                                |      1441548     |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||   catalog_sales  |
+| cs_call_center_s |                                                            |                  ||                  |
+| k=cc_call_center |                                                            |                  ||                  |
+|        _sk       |                                                            |                  ||                  |
+|      (0.00s)     |                                                            |      (0.00s)     ||      (0.05s)     |
+|       2475       |                                                            |      144067      ||      1441548     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |     cc_county    ||  catalog_returns |
+|  cs_ship_addr_sk |                                        |    = Williamson  ||                  |
+|  =ca_address_sk  |                                        |       County     ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       2475       |                                        |         6        ||      144067      |
+--------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                    |   ca_state = GA  ||    call_center   |
+|  cs_ship_date_sk |                    |                  ||                  |
+|    =d_date_sk    |                    |                  ||                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       50088      |                    |       2521       ||         6        |
+--------------------                    ----------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  ||     d_date <     || customer_address |
+|                  ||   = 2002-04-02   ||                  |
+|                  ||   CAST[VARCHAR]  ||                  |
+|                  ||     (d_date)     ||                  |
+|                  ||   >= 2002-02-01  ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.00s)     |
+|      1441548     ||        61        ||       50000      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT count(DISTINCT cs_order_number) AS "order count", sum(cs_ext_ship_cost) AS "total shipping cost", sum(cs_net_profit) AS "total net profit" FROM catalog_sales cs1, date_dim, customer_address, call_center WHERE d_date BETWEEN '2002-02-01' AND cast('2002-04-02' AS date) AND cs1.cs_ship_date_sk = d_date_sk AND cs1.cs_ship_addr_sk = ca_address_sk AND ca_state = 'GA' AND cs1.cs_call_center_sk = cc_call_center_sk AND cc_county = 'Williamson County' AND EXISTS (SELECT * FROM catalog_sales cs2 WHERE cs1.cs_order_number = cs2.cs_order_number AND cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk) AND NOT EXISTS (SELECT * FROM catalog_returns cr1 WHERE cs1.cs_order_number = cr1.cr_order_number) ORDER BY count(DISTINCT cs_order_number) LIMIT 100;
+<<Timing>>
+Total Time: 0.197685s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       SEMI       |
+|  cs_order_number |
+|       =#35       |
+|  cs_warehouse_sk |
+|       !=#34      |
+|      (0.09s)     |
+|        894       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |    PROJECTION    |
+|       ANTI       |                                                                                |                  |
+|  cs_order_number |                                                                                |                  |
+|       =#27       |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        894       |                                                                                |      1441548     |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||   catalog_sales  |
+| cs_call_center_s |                                                            |                  ||                  |
+| k=cc_call_center |                                                            |                  ||                  |
+|        _sk       |                                                            |                  ||                  |
+|      (0.00s)     |                                                            |      (0.00s)     ||      (0.05s)     |
+|       2475       |                                                            |      144067      ||      1441548     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |     cc_county    ||  catalog_returns |
+|  cs_ship_addr_sk |                                        |    = Williamson  ||                  |
+|  =ca_address_sk  |                                        |       County     ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       2475       |                                        |         6        ||      144067      |
+--------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                    |   ca_state = GA  ||    call_center   |
+|  cs_ship_date_sk |                    |                  ||                  |
+|    =d_date_sk    |                    |                  ||                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       50088      |                    |       2521       ||         6        |
+--------------------                    ----------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  ||     d_date <     || customer_address |
+|                  ||   = 2002-04-02   ||                  |
+|                  ||   CAST[VARCHAR]  ||                  |
+|                  ||     (d_date)     ||                  |
+|                  ||   >= 2002-02-01  ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.00s)     |
+|      1441548     ||        61        ||       50000      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT count(DISTINCT cs_order_number) AS "order count", sum(cs_ext_ship_cost) AS "total shipping cost", sum(cs_net_profit) AS "total net profit" FROM catalog_sales cs1, date_dim, customer_address, call_center WHERE d_date BETWEEN '2002-02-01' AND cast('2002-04-02' AS date) AND cs1.cs_ship_date_sk = d_date_sk AND cs1.cs_ship_addr_sk = ca_address_sk AND ca_state = 'GA' AND cs1.cs_call_center_sk = cc_call_center_sk AND cc_county = 'Williamson County' AND EXISTS (SELECT * FROM catalog_sales cs2 WHERE cs1.cs_order_number = cs2.cs_order_number AND cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk) AND NOT EXISTS (SELECT * FROM catalog_returns cr1 WHERE cs1.cs_order_number = cr1.cr_order_number) ORDER BY count(DISTINCT cs_order_number) LIMIT 100;
+<<Timing>>
+Total Time: 0.198137s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       SEMI       |
+|  cs_order_number |
+|       =#35       |
+|  cs_warehouse_sk |
+|       !=#34      |
+|      (0.09s)     |
+|        894       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |    PROJECTION    |
+|       ANTI       |                                                                                |                  |
+|  cs_order_number |                                                                                |                  |
+|       =#27       |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        894       |                                                                                |      1441548     |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||   catalog_sales  |
+| cs_call_center_s |                                                            |                  ||                  |
+| k=cc_call_center |                                                            |                  ||                  |
+|        _sk       |                                                            |                  ||                  |
+|      (0.00s)     |                                                            |      (0.00s)     ||      (0.05s)     |
+|       2475       |                                                            |      144067      ||      1441548     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |     cc_county    ||  catalog_returns |
+|  cs_ship_addr_sk |                                        |    = Williamson  ||                  |
+|  =ca_address_sk  |                                        |       County     ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       2475       |                                        |         6        ||      144067      |
+--------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                    |   ca_state = GA  ||    call_center   |
+|  cs_ship_date_sk |                    |                  ||                  |
+|    =d_date_sk    |                    |                  ||                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       50088      |                    |       2521       ||         6        |
+--------------------                    ----------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  ||     d_date <     || customer_address |
+|                  ||   = 2002-04-02   ||                  |
+|                  ||   CAST[VARCHAR]  ||                  |
+|                  ||     (d_date)     ||                  |
+|                  ||   >= 2002-02-01  ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.00s)     |
+|      1441548     ||        61        ||       50000      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT count(DISTINCT cs_order_number) AS "order count", sum(cs_ext_ship_cost) AS "total shipping cost", sum(cs_net_profit) AS "total net profit" FROM catalog_sales cs1, date_dim, customer_address, call_center WHERE d_date BETWEEN '2002-02-01' AND cast('2002-04-02' AS date) AND cs1.cs_ship_date_sk = d_date_sk AND cs1.cs_ship_addr_sk = ca_address_sk AND ca_state = 'GA' AND cs1.cs_call_center_sk = cc_call_center_sk AND cc_county = 'Williamson County' AND EXISTS (SELECT * FROM catalog_sales cs2 WHERE cs1.cs_order_number = cs2.cs_order_number AND cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk) AND NOT EXISTS (SELECT * FROM catalog_returns cr1 WHERE cs1.cs_order_number = cr1.cr_order_number) ORDER BY count(DISTINCT cs_order_number) LIMIT 100;
+<<Timing>>
+Total Time: 0.198110s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       SEMI       |
+|  cs_order_number |
+|       =#35       |
+|  cs_warehouse_sk |
+|       !=#34      |
+|      (0.09s)     |
+|        894       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |    PROJECTION    |
+|       ANTI       |                                                                                |                  |
+|  cs_order_number |                                                                                |                  |
+|       =#27       |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        894       |                                                                                |      1441548     |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||   catalog_sales  |
+| cs_call_center_s |                                                            |                  ||                  |
+| k=cc_call_center |                                                            |                  ||                  |
+|        _sk       |                                                            |                  ||                  |
+|      (0.00s)     |                                                            |      (0.00s)     ||      (0.05s)     |
+|       2475       |                                                            |      144067      ||      1441548     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |     cc_county    ||  catalog_returns |
+|  cs_ship_addr_sk |                                        |    = Williamson  ||                  |
+|  =ca_address_sk  |                                        |       County     ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       2475       |                                        |         6        ||      144067      |
+--------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                    |   ca_state = GA  ||    call_center   |
+|  cs_ship_date_sk |                    |                  ||                  |
+|    =d_date_sk    |                    |                  ||                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       50088      |                    |       2521       ||         6        |
+--------------------                    ----------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  ||     d_date <     || customer_address |
+|                  ||   = 2002-04-02   ||                  |
+|                  ||   CAST[VARCHAR]  ||                  |
+|                  ||     (d_date)     ||                  |
+|                  ||   >= 2002-02-01  ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.00s)     |
+|      1441548     ||        61        ||       50000      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT count(DISTINCT cs_order_number) AS "order count", sum(cs_ext_ship_cost) AS "total shipping cost", sum(cs_net_profit) AS "total net profit" FROM catalog_sales cs1, date_dim, customer_address, call_center WHERE d_date BETWEEN '2002-02-01' AND cast('2002-04-02' AS date) AND cs1.cs_ship_date_sk = d_date_sk AND cs1.cs_ship_addr_sk = ca_address_sk AND ca_state = 'GA' AND cs1.cs_call_center_sk = cc_call_center_sk AND cc_county = 'Williamson County' AND EXISTS (SELECT * FROM catalog_sales cs2 WHERE cs1.cs_order_number = cs2.cs_order_number AND cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk) AND NOT EXISTS (SELECT * FROM catalog_returns cr1 WHERE cs1.cs_order_number = cr1.cr_order_number) ORDER BY count(DISTINCT cs_order_number) LIMIT 100;
+<<Timing>>
+Total Time: 0.198363s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       SEMI       |
+|  cs_order_number |
+|       =#35       |
+|  cs_warehouse_sk |
+|       !=#34      |
+|      (0.09s)     |
+|        894       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |    PROJECTION    |
+|       ANTI       |                                                                                |                  |
+|  cs_order_number |                                                                                |                  |
+|       =#27       |                                                                                |                  |
+|      (0.01s)     |                                                                                |      (0.00s)     |
+|        894       |                                                                                |      1441548     |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||   catalog_sales  |
+| cs_call_center_s |                                                            |                  ||                  |
+| k=cc_call_center |                                                            |                  ||                  |
+|        _sk       |                                                            |                  ||                  |
+|      (0.00s)     |                                                            |      (0.00s)     ||      (0.05s)     |
+|       2475       |                                                            |      144067      ||      1441548     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |     cc_county    ||  catalog_returns |
+|  cs_ship_addr_sk |                                        |    = Williamson  ||                  |
+|  =ca_address_sk  |                                        |       County     ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       2475       |                                        |         6        ||      144067      |
+--------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                    |   ca_state = GA  ||    call_center   |
+|  cs_ship_date_sk |                    |                  ||                  |
+|    =d_date_sk    |                    |                  ||                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       50088      |                    |       2521       ||         6        |
+--------------------                    ----------------------------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  ||     d_date <     || customer_address |
+|                  ||   = 2002-04-02   ||                  |
+|                  ||   CAST[VARCHAR]  ||                  |
+|                  ||     (d_date)     ||                  |
+|                  ||   >= 2002-02-01  ||                  |
+|      (0.01s)     ||      (0.01s)     ||      (0.00s)     |
+|      1441548     ||        61        ||       50000      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
