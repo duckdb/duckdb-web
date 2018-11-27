@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7c494bc - planner/binder.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eea0ac8 - planner/binder.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7c494bc</td>
+            <td class="headerValue">DuckDB Code Coverage Report eea0ac8</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">225</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-27 10:12:58</td>
+            <td class="headerValue">2018-11-27 10:22:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">17</td>
@@ -74,19 +74,19 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">      11133 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(SelectStatement &amp;statement) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">      11138 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(SelectStatement &amp;statement) {</span>
 <span class="lineNum">      16 </span>            :         // first we visit the FROM statement
 <span class="lineNum">      17 </span>            :         // here we determine from where we can retrieve our columns (from which
 <span class="lineNum">      18 </span>            :         // tables/subqueries)
 <span class="lineNum">      19 </span>            : 
 <span class="lineNum">      20 </span>            :         // we also need to visit the CTEs because they generate table names
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">      11198 :         for (auto &amp;cte_it : statement.cte_map) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      11203 :         for (auto &amp;cte_it : statement.cte_map) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">         65 :                 AddCTE(cte_it.first, cte_it.second.get());</span>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">      11133 :         if (statement.from_table) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">      10986 :                 AcceptChild(&amp;statement.from_table);</span>
+<span class="lineNum">      26 </span><span class="lineCov">      11138 :         if (statement.from_table) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      10991 :                 AcceptChild(&amp;statement.from_table);</span>
 <span class="lineNum">      28 </span>            :         }
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :         // now we visit the rest of the statements
@@ -99,39 +99,39 @@
 <span class="lineNum">      37 </span>            :         // multiple expressions
 <span class="lineNum">      38 </span>            :         // note that we also gather aliases from the SELECT list
 <span class="lineNum">      39 </span>            :         // because they might be used in the WHERE, GROUP BY or HAVING clauses
-<span class="lineNum">      40 </span><span class="lineCov">      22254 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; new_select_list;</span>
-<span class="lineNum">      41 </span><span class="lineCov">      39334 :         for (auto &amp;select_element : statement.select_list) {</span>
-<span class="lineNum">      42 </span><span class="lineCov">      28207 :                 if (select_element-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">      22264 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; new_select_list;</span>
+<span class="lineNum">      41 </span><span class="lineCov">      39346 :         for (auto &amp;select_element : statement.select_list) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">      28214 :                 if (select_element-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
 <span class="lineNum">      43 </span>            :                         // * statement, expand to all columns from the FROM clause
 <span class="lineNum">      44 </span><span class="lineCov">        138 :                         bind_context-&gt;GenerateAllColumnExpressions(new_select_list);</span>
 <span class="lineNum">      45 </span><span class="lineCov">        138 :                         continue;</span>
 <span class="lineNum">      46 </span>            :                 } else {
 <span class="lineNum">      47 </span>            :                         // regular statement, add it to the list
-<span class="lineNum">      48 </span><span class="lineCov">      28069 :                         new_select_list.push_back(move(select_element));</span>
+<span class="lineNum">      48 </span><span class="lineCov">      28076 :                         new_select_list.push_back(move(select_element));</span>
 <span class="lineNum">      49 </span>            :                 }
 <span class="lineNum">      50 </span>            :         }
-<span class="lineNum">      51 </span><span class="lineCov">      11127 :         statement.result_column_count = new_select_list.size();</span>
+<span class="lineNum">      51 </span><span class="lineCov">      11132 :         statement.result_column_count = new_select_list.size();</span>
 <span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineCov">      40259 :         for (size_t i = 0; i &lt; new_select_list.size(); i++) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      29139 :                 auto &amp;select_element = new_select_list[i];</span>
-<span class="lineNum">      55 </span><span class="lineCov">      29139 :                 AcceptChild(&amp;select_element);</span>
-<span class="lineNum">      56 </span><span class="lineCov">      29132 :                 select_element-&gt;ResolveType();</span>
-<span class="lineNum">      57 </span><span class="lineCov">      29132 :                 if (select_element-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">      40271 :         for (size_t i = 0; i &lt; new_select_list.size(); i++) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      29146 :                 auto &amp;select_element = new_select_list[i];</span>
+<span class="lineNum">      55 </span><span class="lineCov">      29146 :                 AcceptChild(&amp;select_element);</span>
+<span class="lineNum">      56 </span><span class="lineCov">      29139 :                 select_element-&gt;ResolveType();</span>
+<span class="lineNum">      57 </span><span class="lineCov">      29139 :                 if (select_element-&gt;return_type == TypeId::INVALID) {</span>
 <span class="lineNum">      58 </span>            :                         throw BinderException(
 <span class="lineNum">      59 </span><span class="lineNoCov">          0 :                             &quot;Could not resolve type of projection element!&quot;);</span>
 <span class="lineNum">      60 </span>            :                 }
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">      29132 :                 if (!select_element-&gt;alias.empty()) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">        918 :                         bind_context-&gt;AddExpression(select_element-&gt;alias,</span>
+<span class="lineNum">      62 </span><span class="lineCov">      29139 :                 if (!select_element-&gt;alias.empty()) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">        921 :                         bind_context-&gt;AddExpression(select_element-&gt;alias,</span>
 <span class="lineNum">      64 </span>            :                                                     select_element.get(), i);
 <span class="lineNum">      65 </span>            :                 }
 <span class="lineNum">      66 </span>            :         }
-<span class="lineNum">      67 </span><span class="lineCov">      20328 :         for (auto &amp;order : statement.orderby.orders) {</span>
-<span class="lineNum">      68 </span><span class="lineCov">       9208 :                 AcceptChild(&amp;order.expression);</span>
-<span class="lineNum">      69 </span><span class="lineCov">       9208 :                 if (order.expression-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">      20334 :         for (auto &amp;order : statement.orderby.orders) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">       9209 :                 AcceptChild(&amp;order.expression);</span>
+<span class="lineNum">      69 </span><span class="lineCov">       9209 :                 if (order.expression-&gt;type == ExpressionType::COLUMN_REF) {</span>
 <span class="lineNum">      70 </span>            :                         auto selection_ref =
-<span class="lineNum">      71 </span><span class="lineCov">       9192 :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(order.expression.get());</span>
-<span class="lineNum">      72 </span><span class="lineCov">       9192 :                         if (selection_ref-&gt;column_name.empty()) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">       9193 :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(order.expression.get());</span>
+<span class="lineNum">      72 </span><span class="lineCov">       9193 :                         if (selection_ref-&gt;column_name.empty()) {</span>
 <span class="lineNum">      73 </span>            :                                 // this ORDER BY expression refers to a column in the select
 <span class="lineNum">      74 </span>            :                                 // clause by index e.g. ORDER BY 1 assign the type of the SELECT
 <span class="lineNum">      75 </span>            :                                 // clause
@@ -147,20 +147,20 @@
 <span class="lineNum">      85 </span><span class="lineCov">       8913 :                                     new_select_list[selection_ref-&gt;index - 1].get();</span>
 <span class="lineNum">      86 </span>            :                         }
 <span class="lineNum">      87 </span>            :                 }
-<span class="lineNum">      88 </span><span class="lineCov">       9208 :                 order.expression-&gt;ResolveType();</span>
+<span class="lineNum">      88 </span><span class="lineCov">       9209 :                 order.expression-&gt;ResolveType();</span>
 <span class="lineNum">      89 </span>            :         }
 <span class="lineNum">      90 </span>            :         // for the ORDER BY statement, we have to project all the columns
 <span class="lineNum">      91 </span>            :         // in the projection phase as well
 <span class="lineNum">      92 </span>            :         // for each expression in the ORDER BY check if it is projected already
-<span class="lineNum">      93 </span><span class="lineCov">      20328 :         for (size_t i = 0; i &lt; statement.orderby.orders.size(); i++) {</span>
-<span class="lineNum">      94 </span><span class="lineCov">       9208 :                 size_t j = 0;</span>
-<span class="lineNum">      95 </span><span class="lineCov">       9208 :                 TypeId type = TypeId::INVALID;</span>
-<span class="lineNum">      96 </span><span class="lineCov">      26916 :                 for (; j &lt; new_select_list.size(); j++) {</span>
+<span class="lineNum">      93 </span><span class="lineCov">      20334 :         for (size_t i = 0; i &lt; statement.orderby.orders.size(); i++) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">       9209 :                 size_t j = 0;</span>
+<span class="lineNum">      95 </span><span class="lineCov">       9209 :                 TypeId type = TypeId::INVALID;</span>
+<span class="lineNum">      96 </span><span class="lineCov">      26917 :                 for (; j &lt; new_select_list.size(); j++) {</span>
 <span class="lineNum">      97 </span>            :                         // check if the expression matches exactly
-<span class="lineNum">      98 </span><span class="lineCov">      53814 :                         if (statement.orderby.orders[i].expression-&gt;Equals(</span>
-<span class="lineNum">      99 </span><span class="lineCov">      26907 :                                 new_select_list[j].get())) {</span>
+<span class="lineNum">      98 </span><span class="lineCov">      53816 :                         if (statement.orderby.orders[i].expression-&gt;Equals(</span>
+<span class="lineNum">      99 </span><span class="lineCov">      26908 :                                 new_select_list[j].get())) {</span>
 <span class="lineNum">     100 </span>            :                                 // in this case, we can just create a reference in the ORDER BY
-<span class="lineNum">     101 </span><span class="lineCov">        259 :                                 break;</span>
+<span class="lineNum">     101 </span><span class="lineCov">        260 :                                 break;</span>
 <span class="lineNum">     102 </span>            :                         }
 <span class="lineNum">     103 </span>            :                         // if the ORDER BY is an alias reference, check if the alias matches
 <span class="lineNum">     104 </span><span class="lineCov">      26648 :                         if (statement.orderby.orders[i].expression-&gt;type ==</span>
@@ -171,43 +171,43 @@
 <span class="lineNum">     109 </span><span class="lineCov">       8940 :                                 break;</span>
 <span class="lineNum">     110 </span>            :                         }
 <span class="lineNum">     111 </span>            :                 }
-<span class="lineNum">     112 </span><span class="lineCov">       9208 :                 if (j == new_select_list.size()) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">       9209 :                 if (j == new_select_list.size()) {</span>
 <span class="lineNum">     113 </span>            :                         // if we didn't find a matching projection clause, we add it to the
 <span class="lineNum">     114 </span>            :                         // projection list
 <span class="lineNum">     115 </span><span class="lineCov">          9 :                         new_select_list.push_back(</span>
 <span class="lineNum">     116 </span><span class="lineCov">          9 :                             move(statement.orderby.orders[i].expression));</span>
 <span class="lineNum">     117 </span>            :                 }
-<span class="lineNum">     118 </span><span class="lineCov">       9208 :                 type = new_select_list[j]-&gt;return_type;</span>
-<span class="lineNum">     119 </span><span class="lineCov">       9208 :                 if (type == TypeId::INVALID) {</span>
+<span class="lineNum">     118 </span><span class="lineCov">       9209 :                 type = new_select_list[j]-&gt;return_type;</span>
+<span class="lineNum">     119 </span><span class="lineCov">       9209 :                 if (type == TypeId::INVALID) {</span>
 <span class="lineNum">     120 </span>            :                         throw Exception(
 <span class="lineNum">     121 </span><span class="lineNoCov">          0 :                             &quot;Could not deduce return type of ORDER BY expression&quot;);</span>
 <span class="lineNum">     122 </span>            :                 }
-<span class="lineNum">     123 </span><span class="lineCov">      18416 :                 statement.orderby.orders[i].expression =</span>
-<span class="lineNum">     124 </span><span class="lineCov">      18416 :                     make_unique&lt;ColumnRefExpression&gt;(type, j);</span>
+<span class="lineNum">     123 </span><span class="lineCov">      18418 :                 statement.orderby.orders[i].expression =</span>
+<span class="lineNum">     124 </span><span class="lineCov">      18418 :                     make_unique&lt;ColumnRefExpression&gt;(type, j);</span>
 <span class="lineNum">     125 </span>            :         }
-<span class="lineNum">     126 </span><span class="lineCov">      11120 :         statement.select_list = move(new_select_list);</span>
+<span class="lineNum">     126 </span><span class="lineCov">      11125 :         statement.select_list = move(new_select_list);</span>
 <span class="lineNum">     127 </span>            : 
-<span class="lineNum">     128 </span><span class="lineCov">      11120 :         if (statement.where_clause) {</span>
-<span class="lineNum">     129 </span><span class="lineCov">       7420 :                 AcceptChild(&amp;statement.where_clause);</span>
-<span class="lineNum">     130 </span><span class="lineCov">       7420 :                 statement.where_clause-&gt;ResolveType();</span>
+<span class="lineNum">     128 </span><span class="lineCov">      11125 :         if (statement.where_clause) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">       7423 :                 AcceptChild(&amp;statement.where_clause);</span>
+<span class="lineNum">     130 </span><span class="lineCov">       7423 :                 statement.where_clause-&gt;ResolveType();</span>
 <span class="lineNum">     131 </span>            :         }
 <span class="lineNum">     132 </span>            : 
-<span class="lineNum">     133 </span><span class="lineCov">      11120 :         if (statement.HasGroup()) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">      11125 :         if (statement.HasGroup()) {</span>
 <span class="lineNum">     134 </span>            :                 // bind group columns
-<span class="lineNum">     135 </span><span class="lineCov">        561 :                 for (auto &amp;group : statement.groupby.groups) {</span>
-<span class="lineNum">     136 </span><span class="lineCov">        384 :                         AcceptChild(&amp;group);</span>
+<span class="lineNum">     135 </span><span class="lineCov">        565 :                 for (auto &amp;group : statement.groupby.groups) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">        386 :                         AcceptChild(&amp;group);</span>
 <span class="lineNum">     137 </span>            :                 }
 <span class="lineNum">     138 </span>            : 
 <span class="lineNum">     139 </span>            :                 // handle aliases in the GROUP BY columns
-<span class="lineNum">     140 </span><span class="lineCov">        561 :                 for (size_t i = 0; i &lt; statement.groupby.groups.size(); i++) {</span>
-<span class="lineNum">     141 </span><span class="lineCov">        384 :                         auto &amp;group = statement.groupby.groups[i];</span>
-<span class="lineNum">     142 </span><span class="lineCov">        384 :                         if (group-&gt;type != ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     140 </span><span class="lineCov">        565 :                 for (size_t i = 0; i &lt; statement.groupby.groups.size(); i++) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">        386 :                         auto &amp;group = statement.groupby.groups[i];</span>
+<span class="lineNum">     142 </span><span class="lineCov">        386 :                         if (group-&gt;type != ExpressionType::COLUMN_REF) {</span>
 <span class="lineNum">     143 </span>            :                                 throw BinderException(
 <span class="lineNum">     144 </span><span class="lineNoCov">          0 :                                     &quot;GROUP BY clause needs to be a column or alias reference.&quot;);</span>
 <span class="lineNum">     145 </span>            :                         }
 <span class="lineNum">     146 </span>            :                         auto group_column =
-<span class="lineNum">     147 </span><span class="lineCov">        384 :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(group.get());</span>
-<span class="lineNum">     148 </span><span class="lineCov">        384 :                         if (group_column-&gt;reference) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">        386 :                             reinterpret_cast&lt;ColumnRefExpression *&gt;(group.get());</span>
+<span class="lineNum">     148 </span><span class="lineCov">        386 :                         if (group_column-&gt;reference) {</span>
 <span class="lineNum">     149 </span>            :                                 // alias reference
 <span class="lineNum">     150 </span>            :                                 // move the computation here from the SELECT clause
 <span class="lineNum">     151 </span><span class="lineCov">          6 :                                 size_t select_index = group_column-&gt;index;</span>
@@ -222,22 +222,22 @@
 <span class="lineNum">     160 </span>            :                 }
 <span class="lineNum">     161 </span>            : 
 <span class="lineNum">     162 </span>            :                 // handle GROUP BY columns in the select clause
-<span class="lineNum">     163 </span><span class="lineCov">        942 :                 for (size_t i = 0; i &lt; statement.select_list.size(); i++) {</span>
-<span class="lineNum">     164 </span><span class="lineCov">        765 :                         auto &amp;select = statement.select_list[i];</span>
-<span class="lineNum">     165 </span><span class="lineCov">        765 :                         if (select-&gt;type == ExpressionType::GROUP_REF)</span>
+<span class="lineNum">     163 </span><span class="lineCov">        948 :                 for (size_t i = 0; i &lt; statement.select_list.size(); i++) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">        769 :                         auto &amp;select = statement.select_list[i];</span>
+<span class="lineNum">     165 </span><span class="lineCov">        769 :                         if (select-&gt;type == ExpressionType::GROUP_REF)</span>
 <span class="lineNum">     166 </span><span class="lineCov">          6 :                                 continue;</span>
-<span class="lineNum">     167 </span><span class="lineCov">        759 :                         if (select-&gt;IsAggregate())</span>
-<span class="lineNum">     168 </span><span class="lineCov">        377 :                                 continue;</span>
+<span class="lineNum">     167 </span><span class="lineCov">        763 :                         if (select-&gt;IsAggregate())</span>
+<span class="lineNum">     168 </span><span class="lineCov">        379 :                                 continue;</span>
 <span class="lineNum">     169 </span>            : 
 <span class="lineNum">     170 </span>            :                         // not an aggregate or existing GROUP REF
-<span class="lineNum">     171 </span><span class="lineCov">        382 :                         if (select-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     171 </span><span class="lineCov">        384 :                         if (select-&gt;type == ExpressionType::COLUMN_REF) {</span>
 <span class="lineNum">     172 </span>            :                                 // column reference: check if it points to a GROUP BY column
 <span class="lineNum">     173 </span>            :                                 auto select_column =
-<span class="lineNum">     174 </span><span class="lineCov">        374 :                                     reinterpret_cast&lt;ColumnRefExpression *&gt;(select.get());</span>
-<span class="lineNum">     175 </span><span class="lineCov">        374 :                                 bool found_matching = false;</span>
-<span class="lineNum">     176 </span><span class="lineCov">       1062 :                                 for (size_t j = 0; j &lt; statement.groupby.groups.size(); j++) {</span>
-<span class="lineNum">     177 </span><span class="lineCov">       1057 :                                         auto &amp;group = statement.groupby.groups[j];</span>
-<span class="lineNum">     178 </span><span class="lineCov">       1057 :                                         if (select_column-&gt;reference) {</span>
+<span class="lineNum">     174 </span><span class="lineCov">        375 :                                     reinterpret_cast&lt;ColumnRefExpression *&gt;(select.get());</span>
+<span class="lineNum">     175 </span><span class="lineCov">        375 :                                 bool found_matching = false;</span>
+<span class="lineNum">     176 </span><span class="lineCov">       1063 :                                 for (size_t j = 0; j &lt; statement.groupby.groups.size(); j++) {</span>
+<span class="lineNum">     177 </span><span class="lineCov">       1058 :                                         auto &amp;group = statement.groupby.groups[j];</span>
+<span class="lineNum">     178 </span><span class="lineCov">       1058 :                                         if (select_column-&gt;reference) {</span>
 <span class="lineNum">     179 </span><span class="lineNoCov">          0 :                                                 if (select_column-&gt;reference == group.get()) {</span>
 <span class="lineNum">     180 </span>            :                                                         // group reference!
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :                                                         auto group_ref = make_unique&lt;GroupRefExpression&gt;(</span>
@@ -249,58 +249,58 @@
 <span class="lineNum">     187 </span><span class="lineNoCov">          0 :                                                         break;</span>
 <span class="lineNum">     188 </span>            :                                                 }
 <span class="lineNum">     189 </span>            :                                         } else {
-<span class="lineNum">     190 </span><span class="lineCov">       1057 :                                                 if (group-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     190 </span><span class="lineCov">       1058 :                                                 if (group-&gt;type == ExpressionType::COLUMN_REF) {</span>
 <span class="lineNum">     191 </span>            :                                                         auto group_column =
 <span class="lineNum">     192 </span>            :                                                             reinterpret_cast&lt;ColumnRefExpression *&gt;(
-<span class="lineNum">     193 </span><span class="lineCov">       1057 :                                                                 group.get());</span>
-<span class="lineNum">     194 </span><span class="lineCov">       1057 :                                                         if (group_column-&gt;binding ==</span>
-<span class="lineNum">     195 </span><span class="lineCov">       1057 :                                                             select_column-&gt;binding) {</span>
-<span class="lineNum">     196 </span><span class="lineCov">        369 :                                                                 auto group_ref =</span>
+<span class="lineNum">     193 </span><span class="lineCov">       1058 :                                                                 group.get());</span>
+<span class="lineNum">     194 </span><span class="lineCov">       1058 :                                                         if (group_column-&gt;binding ==</span>
+<span class="lineNum">     195 </span><span class="lineCov">       1058 :                                                             select_column-&gt;binding) {</span>
+<span class="lineNum">     196 </span><span class="lineCov">        370 :                                                                 auto group_ref =</span>
 <span class="lineNum">     197 </span>            :                                                                     make_unique&lt;GroupRefExpression&gt;(
-<span class="lineNum">     198 </span><span class="lineCov">        369 :                                                                         statement.select_list[i]-&gt;return_type,</span>
-<span class="lineNum">     199 </span><span class="lineCov">        738 :                                                                         j);</span>
-<span class="lineNum">     200 </span><span class="lineCov">        369 :                                                                 group_ref-&gt;alias =</span>
-<span class="lineNum">     201 </span><span class="lineCov">        369 :                                                                     statement.select_list[i]-&gt;alias.empty()</span>
+<span class="lineNum">     198 </span><span class="lineCov">        370 :                                                                         statement.select_list[i]-&gt;return_type,</span>
+<span class="lineNum">     199 </span><span class="lineCov">        740 :                                                                         j);</span>
+<span class="lineNum">     200 </span><span class="lineCov">        370 :                                                                 group_ref-&gt;alias =</span>
+<span class="lineNum">     201 </span><span class="lineCov">        370 :                                                                     statement.select_list[i]-&gt;alias.empty()</span>
 <span class="lineNum">     202 </span>            :                                                                         ? select_column-&gt;column_name
-<span class="lineNum">     203 </span><span class="lineCov">        738 :                                                                         : statement.select_list[i]-&gt;alias;</span>
-<span class="lineNum">     204 </span><span class="lineCov">        369 :                                                                 statement.select_list[i] = move(group_ref);</span>
-<span class="lineNum">     205 </span><span class="lineCov">        369 :                                                                 found_matching = true;</span>
-<span class="lineNum">     206 </span><span class="lineCov">        369 :                                                                 break;</span>
+<span class="lineNum">     203 </span><span class="lineCov">        740 :                                                                         : statement.select_list[i]-&gt;alias;</span>
+<span class="lineNum">     204 </span><span class="lineCov">        370 :                                                                 statement.select_list[i] = move(group_ref);</span>
+<span class="lineNum">     205 </span><span class="lineCov">        370 :                                                                 found_matching = true;</span>
+<span class="lineNum">     206 </span><span class="lineCov">        370 :                                                                 break;</span>
 <span class="lineNum">     207 </span>            :                                                         }
 <span class="lineNum">     208 </span>            :                                                 }
 <span class="lineNum">     209 </span>            :                                         }
 <span class="lineNum">     210 </span>            :                                 }
-<span class="lineNum">     211 </span><span class="lineCov">        374 :                                 if (found_matching) {</span>
+<span class="lineNum">     211 </span><span class="lineCov">        375 :                                 if (found_matching) {</span>
 <span class="lineNum">     212 </span>            :                                         // the column reference was turned into a GROUP BY reference
 <span class="lineNum">     213 </span>            :                                         // move to the next column
-<span class="lineNum">     214 </span><span class="lineCov">        369 :                                         continue;</span>
+<span class="lineNum">     214 </span><span class="lineCov">        370 :                                         continue;</span>
 <span class="lineNum">     215 </span>            :                                 }
 <span class="lineNum">     216 </span>            :                         }
 <span class="lineNum">     217 </span>            :                         // not a group by column or aggregate
 <span class="lineNum">     218 </span>            :                         // create a FIRST aggregate around this aggregate
-<span class="lineNum">     219 </span><span class="lineCov">         26 :                         string stmt_alias = statement.select_list[i]-&gt;alias;</span>
-<span class="lineNum">     220 </span><span class="lineCov">         52 :                         statement.select_list[i] = make_unique&lt;AggregateExpression&gt;(</span>
-<span class="lineNum">     221 </span><span class="lineCov">         26 :                             ExpressionType::AGGREGATE_FIRST,</span>
-<span class="lineNum">     222 </span><span class="lineCov">         26 :                             move(statement.select_list[i]));</span>
-<span class="lineNum">     223 </span><span class="lineCov">         13 :                         statement.select_list[i]-&gt;alias = stmt_alias;</span>
-<span class="lineNum">     224 </span><span class="lineCov">         13 :                         statement.select_list[i]-&gt;ResolveType();</span>
+<span class="lineNum">     219 </span><span class="lineCov">         28 :                         string stmt_alias = statement.select_list[i]-&gt;alias;</span>
+<span class="lineNum">     220 </span><span class="lineCov">         56 :                         statement.select_list[i] = make_unique&lt;AggregateExpression&gt;(</span>
+<span class="lineNum">     221 </span><span class="lineCov">         28 :                             ExpressionType::AGGREGATE_FIRST,</span>
+<span class="lineNum">     222 </span><span class="lineCov">         28 :                             move(statement.select_list[i]));</span>
+<span class="lineNum">     223 </span><span class="lineCov">         14 :                         statement.select_list[i]-&gt;alias = stmt_alias;</span>
+<span class="lineNum">     224 </span><span class="lineCov">         14 :                         statement.select_list[i]-&gt;ResolveType();</span>
 <span class="lineNum">     225 </span>            :                         // throw Exception(&quot;SELECT with GROUP BY can only contain &quot;
 <span class="lineNum">     226 </span>            :                         //                 &quot;aggregates or references to group columns!&quot;);
 <span class="lineNum">     227 </span>            :                 }
 <span class="lineNum">     228 </span>            :         }
 <span class="lineNum">     229 </span>            : 
-<span class="lineNum">     230 </span><span class="lineCov">      11120 :         if (statement.groupby.having) {</span>
-<span class="lineNum">     231 </span><span class="lineCov">         16 :                 AcceptChild(&amp;statement.groupby.having);</span>
-<span class="lineNum">     232 </span><span class="lineCov">         16 :                 statement.groupby.having-&gt;ResolveType();</span>
+<span class="lineNum">     230 </span><span class="lineCov">      11125 :         if (statement.groupby.having) {</span>
+<span class="lineNum">     231 </span><span class="lineCov">         17 :                 AcceptChild(&amp;statement.groupby.having);</span>
+<span class="lineNum">     232 </span><span class="lineCov">         17 :                 statement.groupby.having-&gt;ResolveType();</span>
 <span class="lineNum">     233 </span>            :         }
 <span class="lineNum">     234 </span>            :         // the union has an independent binder
-<span class="lineNum">     235 </span><span class="lineCov">      11120 :         if (statement.setop_type != SelectStatement::SetopType::NONE) {</span>
-<span class="lineNum">     236 </span><span class="lineCov">         80 :                 assert(statement.setop_select);</span>
-<span class="lineNum">     237 </span><span class="lineCov">        160 :                 Binder binder(context, this);</span>
-<span class="lineNum">     238 </span><span class="lineCov">         80 :                 statement.setop_select-&gt;Accept(&amp;binder);</span>
-<span class="lineNum">     239 </span><span class="lineCov">         80 :                 statement.setop_binder = move(binder.bind_context);</span>
+<span class="lineNum">     235 </span><span class="lineCov">      11125 :         if (statement.setop_type != SelectStatement::SetopType::NONE) {</span>
+<span class="lineNum">     236 </span><span class="lineCov">         81 :                 assert(statement.setop_select);</span>
+<span class="lineNum">     237 </span><span class="lineCov">        162 :                 Binder binder(context, this);</span>
+<span class="lineNum">     238 </span><span class="lineCov">         81 :                 statement.setop_select-&gt;Accept(&amp;binder);</span>
+<span class="lineNum">     239 </span><span class="lineCov">         81 :                 statement.setop_binder = move(binder.bind_context);</span>
 <span class="lineNum">     240 </span>            :         }
-<span class="lineNum">     241 </span><span class="lineCov">      22240 :         return nullptr;</span>
+<span class="lineNum">     241 </span><span class="lineCov">      22250 :         return nullptr;</span>
 <a name="242"><span class="lineNum">     242 </span>            : }</a>
 <span class="lineNum">     243 </span>            : 
 <span class="lineNum">     244 </span><span class="lineCov">      24694 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(InsertStatement &amp;statement) {</span>
@@ -386,26 +386,26 @@
 <span class="lineNum">     324 </span><span class="lineCov">          4 :         return nullptr;</span>
 <a name="325"><span class="lineNum">     325 </span>            : }</a>
 <span class="lineNum">     326 </span>            : 
-<span class="lineNum">     327 </span><span class="lineCov">     111121 : unique_ptr&lt;Expression&gt; Binder::Visit(ColumnRefExpression &amp;expr) {</span>
-<span class="lineNum">     328 </span><span class="lineCov">     111121 :         if (expr.column_name.empty()) {</span>
+<span class="lineNum">     327 </span><span class="lineCov">     111142 : unique_ptr&lt;Expression&gt; Binder::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">     328 </span><span class="lineCov">     111142 :         if (expr.column_name.empty()) {</span>
 <span class="lineNum">     329 </span>            :                 // column expression should have been bound already
 <span class="lineNum">     330 </span><span class="lineCov">       8913 :                 return nullptr;</span>
 <span class="lineNum">     331 </span>            :         }
 <span class="lineNum">     332 </span>            :         // individual column reference
 <span class="lineNum">     333 </span>            :         // resolve to either a base table or a subquery expression
-<span class="lineNum">     334 </span><span class="lineCov">     102208 :         if (expr.table_name.empty()) {</span>
+<span class="lineNum">     334 </span><span class="lineCov">     102229 :         if (expr.table_name.empty()) {</span>
 <span class="lineNum">     335 </span>            :                 // no table name: find a binding that contains this
-<span class="lineNum">     336 </span><span class="lineCov">      92822 :                 expr.table_name = bind_context-&gt;GetMatchingBinding(expr.column_name);</span>
+<span class="lineNum">     336 </span><span class="lineCov">      92842 :                 expr.table_name = bind_context-&gt;GetMatchingBinding(expr.column_name);</span>
 <span class="lineNum">     337 </span>            :         }
-<span class="lineNum">     338 </span><span class="lineCov">     102201 :         bind_context-&gt;BindColumn(expr);</span>
-<span class="lineNum">     339 </span><span class="lineCov">     102201 :         return nullptr;</span>
+<span class="lineNum">     338 </span><span class="lineCov">     102222 :         bind_context-&gt;BindColumn(expr);</span>
+<span class="lineNum">     339 </span><span class="lineCov">     102222 :         return nullptr;</span>
 <a name="340"><span class="lineNum">     340 </span>            : }</a>
 <span class="lineNum">     341 </span>            : 
-<span class="lineNum">     342 </span><span class="lineCov">       2126 : unique_ptr&lt;Expression&gt; Binder::Visit(FunctionExpression &amp;expr) {</span>
-<span class="lineNum">     343 </span><span class="lineCov">       2126 :         SQLNodeVisitor::Visit(expr);</span>
-<span class="lineNum">     344 </span><span class="lineCov">       2126 :         expr.bound_function = context.db.catalog.GetScalarFunction(</span>
-<span class="lineNum">     345 </span><span class="lineCov">       2126 :             context.ActiveTransaction(), expr.schema, expr.function_name);</span>
-<span class="lineNum">     346 </span><span class="lineCov">       2126 :         return nullptr;</span>
+<span class="lineNum">     342 </span><span class="lineCov">       2131 : unique_ptr&lt;Expression&gt; Binder::Visit(FunctionExpression &amp;expr) {</span>
+<span class="lineNum">     343 </span><span class="lineCov">       2131 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     344 </span><span class="lineCov">       2131 :         expr.bound_function = context.db.catalog.GetScalarFunction(</span>
+<span class="lineNum">     345 </span><span class="lineCov">       2131 :             context.ActiveTransaction(), expr.schema, expr.function_name);</span>
+<span class="lineNum">     346 </span><span class="lineCov">       2131 :         return nullptr;</span>
 <a name="347"><span class="lineNum">     347 </span>            : }</a>
 <span class="lineNum">     348 </span>            : 
 <span class="lineNum">     349 </span><span class="lineCov">       3818 : unique_ptr&lt;Expression&gt; Binder::Visit(SubqueryExpression &amp;expr) {</span>
@@ -438,26 +438,26 @@
 <span class="lineNum">     376 </span>            : }
 <a name="377"><span class="lineNum">     377 </span>            : </a>
 <span class="lineNum">     378 </span>            : // CTEs are also referred to using BaseTableRefs, hence need to distinguish
-<span class="lineNum">     379 </span><span class="lineCov">      13391 : unique_ptr&lt;TableRef&gt; Binder::Visit(BaseTableRef &amp;expr) {</span>
-<span class="lineNum">     380 </span><span class="lineCov">      26782 :         auto cte = FindCTE(expr.table_name);</span>
-<span class="lineNum">     381 </span><span class="lineCov">      13391 :         if (cte) {</span>
+<span class="lineNum">     379 </span><span class="lineCov">      13397 : unique_ptr&lt;TableRef&gt; Binder::Visit(BaseTableRef &amp;expr) {</span>
+<span class="lineNum">     380 </span><span class="lineCov">      26794 :         auto cte = FindCTE(expr.table_name);</span>
+<span class="lineNum">     381 </span><span class="lineCov">      13397 :         if (cte) {</span>
 <span class="lineNum">     382 </span><span class="lineCov">        236 :                 auto subquery = make_unique&lt;SubqueryRef&gt;(move(cte));</span>
 <span class="lineNum">     383 </span><span class="lineCov">        118 :                 subquery-&gt;alias = expr.alias.empty() ? expr.table_name : expr.alias;</span>
 <span class="lineNum">     384 </span><span class="lineCov">        118 :                 AcceptChild(&amp;subquery);</span>
 <span class="lineNum">     385 </span><span class="lineCov">        118 :                 return move(subquery);</span>
 <span class="lineNum">     386 </span>            :         }
 <span class="lineNum">     387 </span>            : 
-<span class="lineNum">     388 </span><span class="lineCov">      13273 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
-<span class="lineNum">     389 </span><span class="lineCov">      13273 :                                                  expr.schema_name, expr.table_name);</span>
-<span class="lineNum">     390 </span><span class="lineCov">      26534 :         bind_context-&gt;AddBaseTable(</span>
-<span class="lineNum">     391 </span><span class="lineCov">      13267 :             expr.alias.empty() ? expr.table_name : expr.alias, table);</span>
-<span class="lineNum">     392 </span><span class="lineCov">      13267 :         return nullptr;</span>
+<span class="lineNum">     388 </span><span class="lineCov">      13279 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
+<span class="lineNum">     389 </span><span class="lineCov">      13279 :                                                  expr.schema_name, expr.table_name);</span>
+<span class="lineNum">     390 </span><span class="lineCov">      26546 :         bind_context-&gt;AddBaseTable(</span>
+<span class="lineNum">     391 </span><span class="lineCov">      13273 :             expr.alias.empty() ? expr.table_name : expr.alias, table);</span>
+<span class="lineNum">     392 </span><span class="lineCov">      13273 :         return nullptr;</span>
 <a name="393"><span class="lineNum">     393 </span>            : }</a>
 <span class="lineNum">     394 </span>            : 
-<span class="lineNum">     395 </span><span class="lineCov">        516 : unique_ptr&lt;TableRef&gt; Binder::Visit(CrossProductRef &amp;expr) {</span>
-<span class="lineNum">     396 </span><span class="lineCov">        516 :         AcceptChild(&amp;expr.left);</span>
-<span class="lineNum">     397 </span><span class="lineCov">        516 :         AcceptChild(&amp;expr.right);</span>
-<span class="lineNum">     398 </span><span class="lineCov">        516 :         return nullptr;</span>
+<span class="lineNum">     395 </span><span class="lineCov">        520 : unique_ptr&lt;TableRef&gt; Binder::Visit(CrossProductRef &amp;expr) {</span>
+<span class="lineNum">     396 </span><span class="lineCov">        520 :         AcceptChild(&amp;expr.left);</span>
+<span class="lineNum">     397 </span><span class="lineCov">        520 :         AcceptChild(&amp;expr.right);</span>
+<span class="lineNum">     398 </span><span class="lineCov">        520 :         return nullptr;</span>
 <a name="399"><span class="lineNum">     399 </span>            : }</a>
 <span class="lineNum">     400 </span>            : 
 <span class="lineNum">     401 </span><span class="lineCov">         57 : unique_ptr&lt;TableRef&gt; Binder::Visit(JoinRef &amp;expr) {</span>
@@ -467,13 +467,13 @@
 <span class="lineNum">     405 </span><span class="lineCov">         57 :         return nullptr;</span>
 <a name="406"><span class="lineNum">     406 </span>            : }</a>
 <span class="lineNum">     407 </span>            : 
-<span class="lineNum">     408 </span><span class="lineCov">        314 : unique_ptr&lt;TableRef&gt; Binder::Visit(SubqueryRef &amp;expr) {</span>
-<span class="lineNum">     409 </span><span class="lineCov">        628 :         Binder binder(context, this);</span>
-<span class="lineNum">     410 </span><span class="lineCov">        314 :         expr.subquery-&gt;Accept(&amp;binder);</span>
-<span class="lineNum">     411 </span><span class="lineCov">        314 :         expr.context = move(binder.bind_context);</span>
+<span class="lineNum">     408 </span><span class="lineCov">        317 : unique_ptr&lt;TableRef&gt; Binder::Visit(SubqueryRef &amp;expr) {</span>
+<span class="lineNum">     409 </span><span class="lineCov">        634 :         Binder binder(context, this);</span>
+<span class="lineNum">     410 </span><span class="lineCov">        317 :         expr.subquery-&gt;Accept(&amp;binder);</span>
+<span class="lineNum">     411 </span><span class="lineCov">        317 :         expr.context = move(binder.bind_context);</span>
 <span class="lineNum">     412 </span>            : 
-<span class="lineNum">     413 </span><span class="lineCov">        314 :         bind_context-&gt;AddSubquery(expr.alias, expr);</span>
-<span class="lineNum">     414 </span><span class="lineCov">        628 :         return nullptr;</span>
+<span class="lineNum">     413 </span><span class="lineCov">        317 :         bind_context-&gt;AddSubquery(expr.alias, expr);</span>
+<span class="lineNum">     414 </span><span class="lineCov">        634 :         return nullptr;</span>
 <a name="415"><span class="lineNum">     415 </span>            : }</a>
 <span class="lineNum">     416 </span>            : 
 <span class="lineNum">     417 </span><span class="lineCov">          9 : unique_ptr&lt;TableRef&gt; Binder::Visit(TableFunction &amp;expr) {</span>
@@ -495,13 +495,13 @@
 <span class="lineNum">     433 </span>            :         }
 <a name="434"><span class="lineNum">     434 </span><span class="lineCov">         65 :         CTE_bindings[name] = cte;</span></a>
 <span class="lineNum">     435 </span><span class="lineCov">         65 : }</span>
-<span class="lineNum">     436 </span><span class="lineCov">      15286 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
-<span class="lineNum">     437 </span><span class="lineCov">      15286 :         auto entry = CTE_bindings.find(name);</span>
-<span class="lineNum">     438 </span><span class="lineCov">      15286 :         if (entry == CTE_bindings.end()) {</span>
-<span class="lineNum">     439 </span><span class="lineCov">      15168 :                 if (parent) {</span>
-<span class="lineNum">     440 </span><span class="lineCov">       1895 :                         return parent-&gt;FindCTE(name);</span>
+<span class="lineNum">     436 </span><span class="lineCov">      15302 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
+<span class="lineNum">     437 </span><span class="lineCov">      15302 :         auto entry = CTE_bindings.find(name);</span>
+<span class="lineNum">     438 </span><span class="lineCov">      15302 :         if (entry == CTE_bindings.end()) {</span>
+<span class="lineNum">     439 </span><span class="lineCov">      15184 :                 if (parent) {</span>
+<span class="lineNum">     440 </span><span class="lineCov">       1905 :                         return parent-&gt;FindCTE(name);</span>
 <span class="lineNum">     441 </span>            :                 }
-<span class="lineNum">     442 </span><span class="lineCov">      13273 :                 return nullptr;</span>
+<span class="lineNum">     442 </span><span class="lineCov">      13279 :                 return nullptr;</span>
 <span class="lineNum">     443 </span>            :         }
 <span class="lineNum">     444 </span><span class="lineCov">        118 :         return entry-&gt;second-&gt;Copy();</span>
 <span class="lineNum">     445 </span>            : }

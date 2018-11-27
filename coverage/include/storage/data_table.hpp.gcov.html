@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7c494bc - include/storage/data_table.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eea0ac8 - include/storage/data_table.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7c494bc</td>
+            <td class="headerValue">DuckDB Code Coverage Report eea0ac8</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-27 10:12:58</td>
+            <td class="headerValue">2018-11-27 10:22:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -123,11 +123,11 @@
 <span class="lineNum">      61 </span>            :                     DataChunk &amp;data);
 <a name="62"><span class="lineNum">      62 </span>            : </a>
 <span class="lineNum">      63 </span>            :         //! Get statistics of the specified column
-<span class="lineNum">      64 </span><span class="lineCov">      97414 :         Statistics &amp;GetStatistics(column_t oid) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">      97414 :                 if (oid == COLUMN_IDENTIFIER_ROW_ID) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">      97416 :         Statistics &amp;GetStatistics(column_t oid) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      97416 :                 if (oid == COLUMN_IDENTIFIER_ROW_ID) {</span>
 <span class="lineNum">      66 </span><span class="lineNoCov">          0 :                         return rowid_statistics;</span>
 <span class="lineNum">      67 </span>            :                 }
-<span class="lineNum">      68 </span><span class="lineCov">      97414 :                 return statistics[oid];</span>
+<span class="lineNum">      68 </span><span class="lineCov">      97416 :                 return statistics[oid];</span>
 <span class="lineNum">      69 </span>            :         }
 <span class="lineNum">      70 </span>            : 
 <span class="lineNum">      71 </span>            :         std::vector&lt;TypeId&gt; GetTypes(const std::vector&lt;column_t&gt; &amp;column_ids);
