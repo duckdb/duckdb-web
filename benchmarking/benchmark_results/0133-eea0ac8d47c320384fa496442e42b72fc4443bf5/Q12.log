@@ -1,0 +1,225 @@
+<<Query Profiling Information>>
+select  l_shipmode,  sum(case  when o_orderpriority = '1-URGENT'  or o_orderpriority = '2-HIGH'  then 1  else 0  end) as high_line_count,  sum(case  when o_orderpriority <> '1-URGENT'  and o_orderpriority <> '2-HIGH'  then 1  else 0  end) as low_line_count from  orders,  lineitem where  o_orderkey = l_orderkey  and l_shipmode in ('MAIL', 'SHIP')  and l_commitdate < l_receiptdate  and l_shipdate < l_commitdate  and l_receiptdate >= cast('1994-01-01' as date)  and l_receiptdate < cast('1995-01-01' as date) group by  l_shipmode order by  l_shipmode; 
+<<Timing>>
+Total Time: 0.295589s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.02s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    o_orderkey    |
+|    =l_orderkey   |
+|      (0.05s)     |
+|       30988      |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|      orders      ||   l_receiptdate  |
+|                  ||    < 1995-01-01  |
+|                  ||   l_receiptdate  |
+|                  ||   >= 1994-01-01  |
+|                  ||    l_shipdate    |
+|                  ||   < l_commitdate |
+|                  ||   l_commitdate   |
+|                  ||  < l_receiptdate |
+|                  ||   IN(l_shipmode  |
+|                  ||   , MAIL, SHIP   |
+|      (0.01s)     ||      (0.15s)     |
+|      1500000     ||       30988      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     lineitem     |
+                    |      (0.06s)     |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  l_shipmode,  sum(case  when o_orderpriority = '1-URGENT'  or o_orderpriority = '2-HIGH'  then 1  else 0  end) as high_line_count,  sum(case  when o_orderpriority <> '1-URGENT'  and o_orderpriority <> '2-HIGH'  then 1  else 0  end) as low_line_count from  orders,  lineitem where  o_orderkey = l_orderkey  and l_shipmode in ('MAIL', 'SHIP')  and l_commitdate < l_receiptdate  and l_shipdate < l_commitdate  and l_receiptdate >= cast('1994-01-01' as date)  and l_receiptdate < cast('1995-01-01' as date) group by  l_shipmode order by  l_shipmode; 
+<<Timing>>
+Total Time: 0.292660s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.02s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    o_orderkey    |
+|    =l_orderkey   |
+|      (0.06s)     |
+|       30988      |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|      orders      ||   l_receiptdate  |
+|                  ||    < 1995-01-01  |
+|                  ||   l_receiptdate  |
+|                  ||   >= 1994-01-01  |
+|                  ||    l_shipdate    |
+|                  ||   < l_commitdate |
+|                  ||   l_commitdate   |
+|                  ||  < l_receiptdate |
+|                  ||   IN(l_shipmode  |
+|                  ||   , MAIL, SHIP   |
+|      (0.01s)     ||      (0.14s)     |
+|      1500000     ||       30988      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     lineitem     |
+                    |      (0.06s)     |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  l_shipmode,  sum(case  when o_orderpriority = '1-URGENT'  or o_orderpriority = '2-HIGH'  then 1  else 0  end) as high_line_count,  sum(case  when o_orderpriority <> '1-URGENT'  and o_orderpriority <> '2-HIGH'  then 1  else 0  end) as low_line_count from  orders,  lineitem where  o_orderkey = l_orderkey  and l_shipmode in ('MAIL', 'SHIP')  and l_commitdate < l_receiptdate  and l_shipdate < l_commitdate  and l_receiptdate >= cast('1994-01-01' as date)  and l_receiptdate < cast('1995-01-01' as date) group by  l_shipmode order by  l_shipmode; 
+<<Timing>>
+Total Time: 0.293957s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.02s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    o_orderkey    |
+|    =l_orderkey   |
+|      (0.05s)     |
+|       30988      |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|      orders      ||   l_receiptdate  |
+|                  ||    < 1995-01-01  |
+|                  ||   l_receiptdate  |
+|                  ||   >= 1994-01-01  |
+|                  ||    l_shipdate    |
+|                  ||   < l_commitdate |
+|                  ||   l_commitdate   |
+|                  ||  < l_receiptdate |
+|                  ||   IN(l_shipmode  |
+|                  ||   , MAIL, SHIP   |
+|      (0.01s)     ||      (0.14s)     |
+|      1500000     ||       30988      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     lineitem     |
+                    |      (0.06s)     |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  l_shipmode,  sum(case  when o_orderpriority = '1-URGENT'  or o_orderpriority = '2-HIGH'  then 1  else 0  end) as high_line_count,  sum(case  when o_orderpriority <> '1-URGENT'  and o_orderpriority <> '2-HIGH'  then 1  else 0  end) as low_line_count from  orders,  lineitem where  o_orderkey = l_orderkey  and l_shipmode in ('MAIL', 'SHIP')  and l_commitdate < l_receiptdate  and l_shipdate < l_commitdate  and l_receiptdate >= cast('1994-01-01' as date)  and l_receiptdate < cast('1995-01-01' as date) group by  l_shipmode order by  l_shipmode; 
+<<Timing>>
+Total Time: 0.286439s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.02s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    o_orderkey    |
+|    =l_orderkey   |
+|      (0.05s)     |
+|       30988      |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|      orders      ||   l_receiptdate  |
+|                  ||    < 1995-01-01  |
+|                  ||   l_receiptdate  |
+|                  ||   >= 1994-01-01  |
+|                  ||    l_shipdate    |
+|                  ||   < l_commitdate |
+|                  ||   l_commitdate   |
+|                  ||  < l_receiptdate |
+|                  ||   IN(l_shipmode  |
+|                  ||   , MAIL, SHIP   |
+|      (0.01s)     ||      (0.14s)     |
+|      1500000     ||       30988      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     lineitem     |
+                    |      (0.06s)     |
+                    |      6001215     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  l_shipmode,  sum(case  when o_orderpriority = '1-URGENT'  or o_orderpriority = '2-HIGH'  then 1  else 0  end) as high_line_count,  sum(case  when o_orderpriority <> '1-URGENT'  and o_orderpriority <> '2-HIGH'  then 1  else 0  end) as low_line_count from  orders,  lineitem where  o_orderkey = l_orderkey  and l_shipmode in ('MAIL', 'SHIP')  and l_commitdate < l_receiptdate  and l_shipdate < l_commitdate  and l_receiptdate >= cast('1994-01-01' as date)  and l_receiptdate < cast('1995-01-01' as date) group by  l_shipmode order by  l_shipmode; 
+<<Timing>>
+Total Time: 0.285712s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.02s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    o_orderkey    |
+|    =l_orderkey   |
+|      (0.05s)     |
+|       30988      |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|      orders      ||   l_receiptdate  |
+|                  ||    < 1995-01-01  |
+|                  ||   l_receiptdate  |
+|                  ||   >= 1994-01-01  |
+|                  ||    l_shipdate    |
+|                  ||   < l_commitdate |
+|                  ||   l_commitdate   |
+|                  ||  < l_receiptdate |
+|                  ||   IN(l_shipmode  |
+|                  ||   , MAIL, SHIP   |
+|      (0.01s)     ||      (0.14s)     |
+|      1500000     ||       30988      |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     lineitem     |
+                    |      (0.06s)     |
+                    |      6001215     |
+                    --------------------
+
