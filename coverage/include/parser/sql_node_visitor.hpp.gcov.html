@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 529964f - include/parser/sql_node_visitor.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b37ff52 - include/parser/sql_node_visitor.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">26</td>
@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td class="headerValue">2018-11-29 00:45:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">10</td>
             <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntryLo">34.6 %</td>
+            <td class="headerCovTableEntryLo">38.5 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -121,7 +121,7 @@
 <span class="lineNum">      59 </span>            : //! visited.
 <a name="60"><span class="lineNum">      60 </span>            : class SQLNodeVisitor {</a>
 <span class="lineNum">      61 </span>            :   public:
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">     336485 :         virtual ~SQLNodeVisitor(){};</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">     351557 :         virtual ~SQLNodeVisitor(){};</span></a>
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span><span class="lineNoCov">          0 :         virtual std::unique_ptr&lt;SQLStatement&gt; Visit(CopyStatement &amp;) {</span>
 <a name="65"><span class="lineNum">      65 </span><span class="lineNoCov">          0 :                 return nullptr;</span></a>
@@ -194,13 +194,13 @@
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <a name="133"><span class="lineNum">     133 </span>            :         };</a>
 <span class="lineNum">     134 </span>            : 
-<span class="lineNum">     135 </span><span class="lineCov">     191231 :         template &lt;class T&gt; void AcceptChild(std::unique_ptr&lt;T&gt; *accept) {</span>
-<span class="lineNum">     136 </span><span class="lineCov">     191231 :                 assert(accept);</span>
-<span class="lineNum">     137 </span><span class="lineCov">     382449 :                 auto accept_res = (*accept)-&gt;Accept(this);</span>
-<span class="lineNum">     138 </span><span class="lineCov">     191218 :                 if (accept_res) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">     203277 :         template &lt;class T&gt; void AcceptChild(std::unique_ptr&lt;T&gt; *accept) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">     203277 :                 assert(accept);</span>
+<span class="lineNum">     137 </span><span class="lineCov">     406541 :                 auto accept_res = (*accept)-&gt;Accept(this);</span>
+<span class="lineNum">     138 </span><span class="lineCov">     203264 :                 if (accept_res) {</span>
 <span class="lineNum">     139 </span><span class="lineCov">        118 :                         (*accept) = std::unique_ptr&lt;T&gt;((T *)accept_res.release());</span>
 <span class="lineNum">     140 </span>            :                 }
-<span class="lineNum">     141 </span><span class="lineCov">     191218 :         }</span>
+<span class="lineNum">     141 </span><span class="lineCov">     203264 :         }</span>
 <span class="lineNum">     142 </span><span class="lineCov">        124 : };</span>
 <span class="lineNum">     143 </span><span class="lineCov">        124 : } // namespace duckdb</span>
 </pre>

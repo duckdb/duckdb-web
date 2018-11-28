@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 529964f - common/vector_operations/set.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b37ff52 - common/vector_operations/set.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">50</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td class="headerValue">2018-11-29 00:45:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -74,11 +74,11 @@
 <span class="lineNum">      12 </span>            : using namespace std;
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : template &lt;class T&gt;
-<span class="lineNum">      15 </span><span class="lineCov">      51428 : static inline void set_loop(T *__restrict result_data, T value, size_t count,</span>
+<span class="lineNum">      15 </span><span class="lineCov">      51430 : static inline void set_loop(T *__restrict result_data, T value, size_t count,</span>
 <span class="lineNum">      16 </span>            :                             sel_t *__restrict sel_vector) {
-<span class="lineNum">      17 </span><span class="lineCov">      51428 :         VectorOperations::Exec(sel_vector, count,</span>
+<span class="lineNum">      17 </span><span class="lineCov">      51430 :         VectorOperations::Exec(sel_vector, count,</span>
 <span class="lineNum">      18 </span>            :                                [&amp;](size_t i, size_t k) { result_data[i] = value; });
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">      51428 : }</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">      51430 : }</span></a>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">      21 </span>            : template &lt;class T&gt; void templated_set_loop(Vector &amp;result, T value) {
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :         auto result_data = (T *)result.data;</span>
@@ -94,11 +94,11 @@
 <span class="lineNum">      32 </span><span class="lineCov">         59 :                 value = value.CastAs(result.type);</span>
 <span class="lineNum">      33 </span>            :         }
 <span class="lineNum">      34 </span><span class="lineCov">         59 : </span>
-<span class="lineNum">      35 </span><span class="lineCov">       7262 :         if (value.is_null) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       7264 :         if (value.is_null) {</span>
 <span class="lineNum">      36 </span>            :                 // initialize the NULL mask with all 1
-<span class="lineNum">      37 </span><span class="lineCov">       7262 :                 result.nullmask.set();</span>
+<span class="lineNum">      37 </span><span class="lineCov">       7264 :                 result.nullmask.set();</span>
 <span class="lineNum">      38 </span>            :         } else {
-<span class="lineNum">      39 </span><span class="lineCov">       7262 :                 // set all values in the nullmask to 0</span>
+<span class="lineNum">      39 </span><span class="lineCov">       7264 :                 // set all values in the nullmask to 0</span>
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :                 result.nullmask.reset();</span>
 <span class="lineNum">      41 </span>            :                 switch (result.type) {
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :                 case TypeId::BOOLEAN:</span>
@@ -110,11 +110,11 @@
 <span class="lineNum">      48 </span>            :                         break;
 <span class="lineNum">      49 </span><span class="lineCov">      44107 :                 case TypeId::INTEGER:</span>
 <span class="lineNum">      50 </span>            :                         templated_set_loop&lt;int32_t&gt;(result, value.value_.integer);
-<span class="lineNum">      51 </span><span class="lineCov">      51428 :                         break;</span>
-<span class="lineNum">      52 </span><span class="lineCov">      51428 :                 case TypeId::BIGINT:</span>
+<span class="lineNum">      51 </span><span class="lineCov">      51430 :                         break;</span>
+<span class="lineNum">      52 </span><span class="lineCov">      51430 :                 case TypeId::BIGINT:</span>
 <span class="lineNum">      53 </span>            :                         templated_set_loop&lt;int64_t&gt;(result, value.value_.bigint);
-<span class="lineNum">      54 </span><span class="lineCov">      51428 :                         break;</span>
-<span class="lineNum">      55 </span><span class="lineCov">      51428 :                 case TypeId::DECIMAL:</span>
+<span class="lineNum">      54 </span><span class="lineCov">      51430 :                         break;</span>
+<span class="lineNum">      55 </span><span class="lineCov">      51430 :                 case TypeId::DECIMAL:</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :                         templated_set_loop&lt;double&gt;(result, value.value_.decimal);</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :                         break;</span>
 <span class="lineNum">      58 </span>            :                 case TypeId::POINTER:
@@ -130,11 +130,11 @@
 <span class="lineNum">      68 </span>            :                         auto str = result.string_heap.AddString(value.str_value);
 <span class="lineNum">      69 </span><span class="lineCov">         59 :                         auto dataptr = (const char **)result.data;</span>
 <span class="lineNum">      70 </span><span class="lineCov">         59 :                         VectorOperations::Exec(</span>
-<span class="lineNum">      71 </span><span class="lineCov">       7262 :                             result.sel_vector, result.count,</span>
-<span class="lineNum">      72 </span><span class="lineCov">       7262 :                             [&amp;](size_t i, size_t k) { dataptr[i] = str; });</span>
+<span class="lineNum">      71 </span><span class="lineCov">       7264 :                             result.sel_vector, result.count,</span>
+<span class="lineNum">      72 </span><span class="lineCov">       7264 :                             [&amp;](size_t i, size_t k) { dataptr[i] = str; });</span>
 <span class="lineNum">      73 </span>            :                         break;
-<span class="lineNum">      74 </span><span class="lineCov">       7262 :                 }</span>
-<span class="lineNum">      75 </span><span class="lineCov">       7262 :                 default:</span>
+<span class="lineNum">      74 </span><span class="lineCov">       7264 :                 }</span>
+<span class="lineNum">      75 </span><span class="lineCov">       7264 :                 default:</span>
 <span class="lineNum">      76 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Unimplemented type for Set&quot;);</span>
 <span class="lineNum">      77 </span><span class="lineNoCov">          0 :                 }</span>
 <span class="lineNum">      78 </span>            :         }

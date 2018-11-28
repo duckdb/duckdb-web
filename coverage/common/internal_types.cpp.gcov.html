@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 529964f - common/internal_types.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b37ff52 - common/internal_types.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">126</td>
+            <td class="headerCovTableEntry">131</td>
             <td class="headerCovTableEntry">492</td>
-            <td class="headerCovTableEntryLo">25.6 %</td>
+            <td class="headerCovTableEntryLo">26.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td class="headerValue">2018-11-29 00:45:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">11</td>
             <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntryLo">58.8 %</td>
+            <td class="headerCovTableEntryLo">64.7 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -73,32 +73,32 @@
 <span class="lineNum">      11 </span>            : sel_t ZERO_VECTOR[STANDARD_VECTOR_SIZE] = {0};
 <a name="12"><span class="lineNum">      12 </span>            : nullmask_t ZERO_MASK = nullmask_t(0);</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">      74532 : ExpressionType StringToExpressionType(const string &amp;str) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">     149064 :         string upper_str = StringUtil::Upper(str);</span>
-<span class="lineNum">      16 </span><span class="lineCov">      74532 :         if (upper_str == &quot;INVALID&quot;) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      74539 : ExpressionType StringToExpressionType(const string &amp;str) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     149078 :         string upper_str = StringUtil::Upper(str);</span>
+<span class="lineNum">      16 </span><span class="lineCov">      74539 :         if (upper_str == &quot;INVALID&quot;) {</span>
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :                 return ExpressionType::INVALID;</span>
-<span class="lineNum">      18 </span><span class="lineCov">      74532 :         } else if (upper_str == &quot;OPERATOR_PLUS&quot; || upper_str == &quot;+&quot;) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">      74539 :         } else if (upper_str == &quot;OPERATOR_PLUS&quot; || upper_str == &quot;+&quot;) {</span>
 <span class="lineNum">      19 </span><span class="lineCov">      27070 :                 return ExpressionType::OPERATOR_ADD;</span>
-<span class="lineNum">      20 </span><span class="lineCov">      47462 :         } else if (upper_str == &quot;OPERATOR_MINUS&quot; || upper_str == &quot;-&quot;) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      47469 :         } else if (upper_str == &quot;OPERATOR_MINUS&quot; || upper_str == &quot;-&quot;) {</span>
 <span class="lineNum">      21 </span><span class="lineCov">       9331 :                 return ExpressionType::OPERATOR_SUBTRACT;</span>
-<span class="lineNum">      22 </span><span class="lineCov">      38131 :         } else if (upper_str == &quot;OPERATOR_MULTIPLY&quot; || upper_str == &quot;*&quot;) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      38138 :         } else if (upper_str == &quot;OPERATOR_MULTIPLY&quot; || upper_str == &quot;*&quot;) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">      12069 :                 return ExpressionType::OPERATOR_MULTIPLY;</span>
-<span class="lineNum">      24 </span><span class="lineCov">      26062 :         } else if (upper_str == &quot;OPERATOR_DIVIDE&quot; || upper_str == &quot;/&quot;) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">      26069 :         } else if (upper_str == &quot;OPERATOR_DIVIDE&quot; || upper_str == &quot;/&quot;) {</span>
 <span class="lineNum">      25 </span><span class="lineCov">       1062 :                 return ExpressionType::OPERATOR_DIVIDE;</span>
-<span class="lineNum">      26 </span><span class="lineCov">      25000 :         } else if (upper_str == &quot;OPERATOR_CONCAT&quot; || upper_str == &quot;||&quot;) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">      25007 :         } else if (upper_str == &quot;OPERATOR_CONCAT&quot; || upper_str == &quot;||&quot;) {</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_CONCAT;</span>
-<span class="lineNum">      28 </span><span class="lineCov">      25000 :         } else if (upper_str == &quot;OPERATOR_MOD&quot; || upper_str == &quot;%&quot;) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">      25007 :         } else if (upper_str == &quot;OPERATOR_MOD&quot; || upper_str == &quot;%&quot;) {</span>
 <span class="lineNum">      29 </span><span class="lineCov">          8 :                 return ExpressionType::OPERATOR_MOD;</span>
-<span class="lineNum">      30 </span><span class="lineCov">      24992 :         } else if (upper_str == &quot;OPERATOR_CAST&quot;) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">      24999 :         } else if (upper_str == &quot;OPERATOR_CAST&quot;) {</span>
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_CAST;</span>
-<span class="lineNum">      32 </span><span class="lineCov">      24992 :         } else if (upper_str == &quot;OPERATOR_NOT&quot;) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">      24999 :         } else if (upper_str == &quot;OPERATOR_NOT&quot;) {</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_NOT;</span>
-<span class="lineNum">      34 </span><span class="lineCov">      24992 :         } else if (upper_str == &quot;OPERATOR_IS_NULL&quot;) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">      24999 :         } else if (upper_str == &quot;OPERATOR_IS_NULL&quot;) {</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_IS_NULL;</span>
-<span class="lineNum">      36 </span><span class="lineCov">      24992 :         } else if (upper_str == &quot;OPERATOR_EXISTS&quot;) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">      24999 :         } else if (upper_str == &quot;OPERATOR_EXISTS&quot;) {</span>
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_EXISTS;</span>
-<span class="lineNum">      38 </span><span class="lineCov">      24992 :         } else if (upper_str == &quot;COMPARE_EQUAL&quot; || upper_str == &quot;=&quot;) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">       2853 :                 return ExpressionType::COMPARE_EQUAL;</span>
+<span class="lineNum">      38 </span><span class="lineCov">      24999 :         } else if (upper_str == &quot;COMPARE_EQUAL&quot; || upper_str == &quot;=&quot;) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">       2860 :                 return ExpressionType::COMPARE_EQUAL;</span>
 <span class="lineNum">      40 </span><span class="lineCov">      44278 :         } else if (upper_str == &quot;COMPARE_NOTEQUAL&quot; || upper_str == &quot;!=&quot; ||</span>
 <span class="lineNum">      41 </span><span class="lineCov">      22139 :                    upper_str == &quot;&lt;&gt;&quot;) {</span>
 <span class="lineNum">      42 </span><span class="lineCov">        126 :                 return ExpressionType::COMPARE_NOTEQUAL;</span>
@@ -221,24 +221,24 @@
 <span class="lineNum">     159 </span><span class="lineNoCov">          0 :         return &quot;INVALID&quot;;</span>
 <a name="160"><span class="lineNum">     160 </span>            : }</a>
 <span class="lineNum">     161 </span>            : 
-<span class="lineNum">     162 </span><span class="lineCov">    3095228 : size_t GetTypeIdSize(TypeId type) {</span>
-<span class="lineNum">     163 </span><span class="lineCov">    3095228 :         switch (type) {</span>
+<span class="lineNum">     162 </span><span class="lineCov">    3155576 : size_t GetTypeIdSize(TypeId type) {</span>
+<span class="lineNum">     163 </span><span class="lineCov">    3155576 :         switch (type) {</span>
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :         case TypeId::PARAMETER_OFFSET:</span>
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :                 return sizeof(uint64_t);</span>
-<span class="lineNum">     166 </span><span class="lineCov">     135038 :         case TypeId::BOOLEAN:</span>
-<span class="lineNum">     167 </span><span class="lineCov">     135038 :                 return sizeof(bool);</span>
+<span class="lineNum">     166 </span><span class="lineCov">     135080 :         case TypeId::BOOLEAN:</span>
+<span class="lineNum">     167 </span><span class="lineCov">     135080 :                 return sizeof(bool);</span>
 <span class="lineNum">     168 </span><span class="lineCov">     240317 :         case TypeId::TINYINT:</span>
 <span class="lineNum">     169 </span><span class="lineCov">     240317 :                 return sizeof(int8_t);</span>
 <span class="lineNum">     170 </span><span class="lineCov">         44 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">     171 </span><span class="lineCov">         44 :                 return sizeof(int16_t);</span>
-<span class="lineNum">     172 </span><span class="lineCov">    1614263 :         case TypeId::INTEGER:</span>
-<span class="lineNum">     173 </span><span class="lineCov">    1614263 :                 return sizeof(int32_t);</span>
-<span class="lineNum">     174 </span><span class="lineCov">     904473 :         case TypeId::BIGINT:</span>
-<span class="lineNum">     175 </span><span class="lineCov">     904473 :                 return sizeof(int64_t);</span>
+<span class="lineNum">     172 </span><span class="lineCov">    1650503 :         case TypeId::INTEGER:</span>
+<span class="lineNum">     173 </span><span class="lineCov">    1650503 :                 return sizeof(int32_t);</span>
+<span class="lineNum">     174 </span><span class="lineCov">     928513 :         case TypeId::BIGINT:</span>
+<span class="lineNum">     175 </span><span class="lineCov">     928513 :                 return sizeof(int64_t);</span>
 <span class="lineNum">     176 </span><span class="lineCov">     116511 :         case TypeId::DECIMAL:</span>
 <span class="lineNum">     177 </span><span class="lineCov">     116511 :                 return sizeof(double);</span>
-<span class="lineNum">     178 </span><span class="lineCov">      73250 :         case TypeId::POINTER:</span>
-<span class="lineNum">     179 </span><span class="lineCov">      73250 :                 return sizeof(uint64_t);</span>
+<span class="lineNum">     178 </span><span class="lineCov">      73276 :         case TypeId::POINTER:</span>
+<span class="lineNum">     179 </span><span class="lineCov">      73276 :                 return sizeof(uint64_t);</span>
 <span class="lineNum">     180 </span><span class="lineNoCov">          0 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :                 return sizeof(int64_t);</span>
 <span class="lineNum">     182 </span><span class="lineCov">        909 :         case TypeId::DATE:</span>
@@ -599,12 +599,12 @@
 <span class="lineNum">     537 </span><span class="lineNoCov">          0 :                                   upper.c_str());</span>
 <a name="538"><span class="lineNum">     538 </span>            : }</a>
 <span class="lineNum">     539 </span>            : 
-<span class="lineNum">     540 </span><span class="lineNoCov">          0 : IndexType StringToIndexType(const std::string &amp;str) {</span>
-<span class="lineNum">     541 </span><span class="lineNoCov">          0 :         std::string upper_str = StringUtil::Upper(str);</span>
-<span class="lineNum">     542 </span><span class="lineNoCov">          0 :         if (upper_str == &quot;INVALID&quot;) {</span>
+<span class="lineNum">     540 </span><span class="lineCov">          1 : IndexType StringToIndexType(const std::string &amp;str) {</span>
+<span class="lineNum">     541 </span><span class="lineCov">          2 :         std::string upper_str = StringUtil::Upper(str);</span>
+<span class="lineNum">     542 </span><span class="lineCov">          1 :         if (upper_str == &quot;INVALID&quot;) {</span>
 <span class="lineNum">     543 </span><span class="lineNoCov">          0 :                 return IndexType::INVALID;</span>
-<span class="lineNum">     544 </span><span class="lineNoCov">          0 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
-<span class="lineNum">     545 </span><span class="lineNoCov">          0 :                 return IndexType::BTREE;</span>
+<span class="lineNum">     544 </span><span class="lineCov">          1 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
+<span class="lineNum">     545 </span><span class="lineCov">          1 :                 return IndexType::BTREE;</span>
 <span class="lineNum">     546 </span>            :         } else {
 <span class="lineNum">     547 </span><span class="lineNoCov">          0 :                 throw ConversionException(StringUtil::Format(</span>
 <span class="lineNum">     548 </span><span class="lineNoCov">          0 :                     &quot;No IndexType conversion from string '%s'&quot;, upper_str.c_str()));</span>
@@ -612,14 +612,14 @@
 <span class="lineNum">     550 </span>            :         return IndexType::INVALID;
 <a name="551"><span class="lineNum">     551 </span>            : }</a>
 <span class="lineNum">     552 </span>            : 
-<span class="lineNum">     553 </span><span class="lineCov">     308620 : bool TypeIsConstantSize(TypeId type) {</span>
-<a name="554"><span class="lineNum">     554 </span><span class="lineCov">     308620 :         return type &lt; TypeId::VARCHAR;</span></a>
+<span class="lineNum">     553 </span><span class="lineCov">     326646 : bool TypeIsConstantSize(TypeId type) {</span>
+<a name="554"><span class="lineNum">     554 </span><span class="lineCov">     326646 :         return type &lt; TypeId::VARCHAR;</span></a>
 <span class="lineNum">     555 </span>            : }
-<span class="lineNum">     556 </span><span class="lineCov">     709060 : bool TypeIsIntegral(TypeId type) {</span>
-<a name="557"><span class="lineNum">     557 </span><span class="lineCov">     709060 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::TIMESTAMP;</span></a>
+<span class="lineNum">     556 </span><span class="lineCov">     751083 : bool TypeIsIntegral(TypeId type) {</span>
+<a name="557"><span class="lineNum">     557 </span><span class="lineCov">     751083 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::TIMESTAMP;</span></a>
 <span class="lineNum">     558 </span>            : }
-<span class="lineNum">     559 </span><span class="lineCov">    2047850 : bool TypeIsNumeric(TypeId type) {</span>
-<a name="560"><span class="lineNum">     560 </span><span class="lineCov">    2047850 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::DECIMAL;</span></a>
+<span class="lineNum">     559 </span><span class="lineCov">    2066120 : bool TypeIsNumeric(TypeId type) {</span>
+<a name="560"><span class="lineNum">     560 </span><span class="lineCov">    2066120 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::DECIMAL;</span></a>
 <span class="lineNum">     561 </span>            : }
 <span class="lineNum">     562 </span><span class="lineCov">         20 : bool TypeIsInteger(TypeId type) {</span>
 <span class="lineNum">     563 </span><span class="lineCov">         20 :         return type &gt;= TypeId::TINYINT &amp;&amp; type &lt;= TypeId::BIGINT;</span>

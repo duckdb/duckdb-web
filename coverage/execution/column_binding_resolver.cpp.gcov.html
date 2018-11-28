@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 529964f - execution/column_binding_resolver.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b37ff52 - execution/column_binding_resolver.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">90</td>
+            <td class="headerCovTableEntry">98</td>
             <td class="headerCovTableEntry">101</td>
-            <td class="headerCovTableEntryMed">89.1 %</td>
+            <td class="headerCovTableEntryHi">97.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td class="headerValue">2018-11-29 00:45:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">9</td>
             <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntryHi">90.0 %</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -79,17 +79,17 @@
 <span class="lineNum">      17 </span>            :         }
 <a name="18"><span class="lineNum">      18 </span><span class="lineCov">        681 : }</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineNoCov">          0 : void ColumnBindingResolver::Visit(LogicalCreateIndex &amp;op) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">          1 : void ColumnBindingResolver::Visit(LogicalCreateIndex &amp;op) {</span>
 <span class="lineNum">      21 </span>            :         // add the table to the column binding resolver
 <span class="lineNum">      22 </span>            :         // since we only have one table in the CREATE INDEX statement there is no
 <span class="lineNum">      23 </span>            :         // offset
-<span class="lineNum">      24 </span><span class="lineNoCov">          0 :         BoundTable binding;</span>
-<span class="lineNum">      25 </span><span class="lineNoCov">          0 :         binding.table_index = 0;</span>
-<span class="lineNum">      26 </span><span class="lineNoCov">          0 :         binding.column_count = op.table.columns.size();</span>
-<span class="lineNum">      27 </span><span class="lineNoCov">          0 :         binding.column_offset = 0;</span>
-<span class="lineNum">      28 </span><span class="lineNoCov">          0 :         bound_tables.push_back(binding);</span>
-<span class="lineNum">      29 </span><span class="lineNoCov">          0 :         LogicalOperatorVisitor::Visit(op);</span>
-<a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">          1 :         BoundTable binding;</span>
+<span class="lineNum">      25 </span><span class="lineCov">          1 :         binding.table_index = 0;</span>
+<span class="lineNum">      26 </span><span class="lineCov">          1 :         binding.column_count = op.table.columns.size();</span>
+<span class="lineNum">      27 </span><span class="lineCov">          1 :         binding.column_offset = 0;</span>
+<span class="lineNum">      28 </span><span class="lineCov">          1 :         bound_tables.push_back(binding);</span>
+<span class="lineNum">      29 </span><span class="lineCov">          1 :         LogicalOperatorVisitor::Visit(op);</span>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          1 : }</span></a>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span><span class="lineCov">         33 : void ColumnBindingResolver::Visit(LogicalCrossProduct &amp;op) {</span>
 <span class="lineNum">      33 </span>            :         // resolve the column indices of the left side
@@ -124,19 +124,19 @@
 <span class="lineNum">      62 </span><span class="lineCov">         78 :         AppendTables(right_tables);</span>
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">         78 : }</span></a>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">      16733 : void ColumnBindingResolver::Visit(LogicalGet &amp;op) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">      16733 :         LogicalOperatorVisitor::Visit(op);</span>
-<span class="lineNum">      67 </span><span class="lineCov">      16733 :         if (!op.table) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      16740 : void ColumnBindingResolver::Visit(LogicalGet &amp;op) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">      16740 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      67 </span><span class="lineCov">      16740 :         if (!op.table) {</span>
 <span class="lineNum">      68 </span><span class="lineCov">        154 :                 return;</span>
 <span class="lineNum">      69 </span>            :         }
-<span class="lineNum">      70 </span><span class="lineCov">      16579 :         BoundTable binding;</span>
-<span class="lineNum">      71 </span><span class="lineCov">      16579 :         binding.table_index = op.table_index;</span>
-<span class="lineNum">      72 </span><span class="lineCov">      16579 :         binding.column_count = op.column_ids.size();</span>
-<span class="lineNum">      73 </span><span class="lineCov">      16579 :         binding.column_offset = bound_tables.size() == 0</span>
-<span class="lineNum">      74 </span><span class="lineCov">      16579 :                                     ? 0</span>
+<span class="lineNum">      70 </span><span class="lineCov">      16586 :         BoundTable binding;</span>
+<span class="lineNum">      71 </span><span class="lineCov">      16586 :         binding.table_index = op.table_index;</span>
+<span class="lineNum">      72 </span><span class="lineCov">      16586 :         binding.column_count = op.column_ids.size();</span>
+<span class="lineNum">      73 </span><span class="lineCov">      16586 :         binding.column_offset = bound_tables.size() == 0</span>
+<span class="lineNum">      74 </span><span class="lineCov">      16586 :                                     ? 0</span>
 <span class="lineNum">      75 </span><span class="lineCov">       3304 :                                     : bound_tables.back().column_offset +</span>
 <span class="lineNum">      76 </span><span class="lineCov">       3304 :                                           bound_tables.back().column_count;</span>
-<span class="lineNum">      77 </span><span class="lineCov">      16579 :         bound_tables.push_back(binding);</span>
+<span class="lineNum">      77 </span><span class="lineCov">      16586 :         bound_tables.push_back(binding);</span>
 <a name="78"><span class="lineNum">      78 </span>            : }</a>
 <span class="lineNum">      79 </span>            : 
 <span class="lineNum">      80 </span><span class="lineCov">        826 : void ColumnBindingResolver::Visit(LogicalSubquery &amp;op) {</span>
@@ -192,24 +192,24 @@
 <span class="lineNum">     130 </span>            :         }
 <a name="131"><span class="lineNum">     131 </span><span class="lineCov">       1064 : }</span></a>
 <span class="lineNum">     132 </span>            : 
-<span class="lineNum">     133 </span><span class="lineCov">     120354 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(ColumnRefExpression &amp;expr) {</span>
-<span class="lineNum">     134 </span><span class="lineCov">     120354 :         if (expr.index != (size_t)-1 || expr.reference ||</span>
-<span class="lineNum">     135 </span><span class="lineCov">     107650 :             expr.depth != current_depth) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">     120367 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">     120367 :         if (expr.index != (size_t)-1 || expr.reference ||</span>
+<span class="lineNum">     135 </span><span class="lineCov">     107663 :             expr.depth != current_depth) {</span>
 <span class="lineNum">     136 </span>            :                 // not a base table reference OR should not be resolved by the current
 <span class="lineNum">     137 </span>            :                 // resolver
 <span class="lineNum">     138 </span><span class="lineCov">      18311 :                 return nullptr;</span>
 <span class="lineNum">     139 </span>            :         }
-<span class="lineNum">     140 </span><span class="lineCov">     104160 :         for (auto &amp;binding : bound_tables) {</span>
-<span class="lineNum">     141 </span><span class="lineCov">     104160 :                 if (binding.table_index == expr.binding.table_index) {</span>
-<span class="lineNum">     142 </span><span class="lineCov">     102043 :                         expr.index = binding.column_offset + expr.binding.column_index;</span>
-<span class="lineNum">     143 </span><span class="lineCov">     102043 :                         assert(expr.binding.column_index &lt; binding.column_count);</span>
-<span class="lineNum">     144 </span><span class="lineCov">     102043 :                         break;</span>
+<span class="lineNum">     140 </span><span class="lineCov">     104173 :         for (auto &amp;binding : bound_tables) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">     104173 :                 if (binding.table_index == expr.binding.table_index) {</span>
+<span class="lineNum">     142 </span><span class="lineCov">     102056 :                         expr.index = binding.column_offset + expr.binding.column_index;</span>
+<span class="lineNum">     143 </span><span class="lineCov">     102056 :                         assert(expr.binding.column_index &lt; binding.column_count);</span>
+<span class="lineNum">     144 </span><span class="lineCov">     102056 :                         break;</span>
 <span class="lineNum">     145 </span>            :                 }
 <span class="lineNum">     146 </span>            :         }
-<span class="lineNum">     147 </span><span class="lineCov">     102043 :         if (expr.index == (size_t)-1) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">     102056 :         if (expr.index == (size_t)-1) {</span>
 <span class="lineNum">     148 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Failed to bind column ref&quot;);</span>
 <span class="lineNum">     149 </span>            :         }
-<span class="lineNum">     150 </span><span class="lineCov">     102043 :         return nullptr;</span>
+<span class="lineNum">     150 </span><span class="lineCov">     102056 :         return nullptr;</span>
 <a name="151"><span class="lineNum">     151 </span>            : }</a>
 <span class="lineNum">     152 </span>            : 
 <span class="lineNum">     153 </span><span class="lineCov">       3308 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(SubqueryExpression &amp;expr) {</span>

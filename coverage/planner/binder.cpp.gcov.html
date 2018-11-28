@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 529964f - planner/binder.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b37ff52 - planner/binder.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">225</td>
+            <td class="headerCovTableEntry">233</td>
             <td class="headerCovTableEntry">256</td>
-            <td class="headerCovTableEntryMed">87.9 %</td>
+            <td class="headerCovTableEntryHi">91.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td class="headerValue">2018-11-29 00:45:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">18</td>
             <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntryMed">89.5 %</td>
+            <td class="headerCovTableEntryHi">94.7 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -74,19 +74,19 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">      11144 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(SelectStatement &amp;statement) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">      11149 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(SelectStatement &amp;statement) {</span>
 <span class="lineNum">      16 </span>            :         // first we visit the FROM statement
 <span class="lineNum">      17 </span>            :         // here we determine from where we can retrieve our columns (from which
 <span class="lineNum">      18 </span>            :         // tables/subqueries)
 <span class="lineNum">      19 </span>            : 
 <span class="lineNum">      20 </span>            :         // we also need to visit the CTEs because they generate table names
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">      11209 :         for (auto &amp;cte_it : statement.cte_map) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      11214 :         for (auto &amp;cte_it : statement.cte_map) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">         65 :                 AddCTE(cte_it.first, cte_it.second.get());</span>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">      11144 :         if (statement.from_table) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">      10997 :                 AcceptChild(&amp;statement.from_table);</span>
+<span class="lineNum">      26 </span><span class="lineCov">      11149 :         if (statement.from_table) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      11002 :                 AcceptChild(&amp;statement.from_table);</span>
 <span class="lineNum">      28 </span>            :         }
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :         // now we visit the rest of the statements
@@ -99,34 +99,34 @@
 <span class="lineNum">      37 </span>            :         // multiple expressions
 <span class="lineNum">      38 </span>            :         // note that we also gather aliases from the SELECT list
 <span class="lineNum">      39 </span>            :         // because they might be used in the WHERE, GROUP BY or HAVING clauses
-<span class="lineNum">      40 </span><span class="lineCov">      22276 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; new_select_list;</span>
-<span class="lineNum">      41 </span><span class="lineCov">      39366 :         for (auto &amp;select_element : statement.select_list) {</span>
-<span class="lineNum">      42 </span><span class="lineCov">      28228 :                 if (select_element-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">      22286 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; new_select_list;</span>
+<span class="lineNum">      41 </span><span class="lineCov">      39376 :         for (auto &amp;select_element : statement.select_list) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">      28233 :                 if (select_element-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
 <span class="lineNum">      43 </span>            :                         // * statement, expand to all columns from the FROM clause
 <span class="lineNum">      44 </span><span class="lineCov">        138 :                         bind_context-&gt;GenerateAllColumnExpressions(new_select_list);</span>
 <span class="lineNum">      45 </span><span class="lineCov">        138 :                         continue;</span>
 <span class="lineNum">      46 </span>            :                 } else {
 <span class="lineNum">      47 </span>            :                         // regular statement, add it to the list
-<span class="lineNum">      48 </span><span class="lineCov">      28090 :                         new_select_list.push_back(move(select_element));</span>
+<span class="lineNum">      48 </span><span class="lineCov">      28095 :                         new_select_list.push_back(move(select_element));</span>
 <span class="lineNum">      49 </span>            :                 }
 <span class="lineNum">      50 </span>            :         }
-<span class="lineNum">      51 </span><span class="lineCov">      11138 :         statement.result_column_count = new_select_list.size();</span>
+<span class="lineNum">      51 </span><span class="lineCov">      11143 :         statement.result_column_count = new_select_list.size();</span>
 <span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineCov">      40291 :         for (size_t i = 0; i &lt; new_select_list.size(); i++) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      29160 :                 auto &amp;select_element = new_select_list[i];</span>
-<span class="lineNum">      55 </span><span class="lineCov">      29160 :                 AcceptChild(&amp;select_element);</span>
-<span class="lineNum">      56 </span><span class="lineCov">      29153 :                 select_element-&gt;ResolveType();</span>
-<span class="lineNum">      57 </span><span class="lineCov">      29153 :                 if (select_element-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">      40301 :         for (size_t i = 0; i &lt; new_select_list.size(); i++) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      29165 :                 auto &amp;select_element = new_select_list[i];</span>
+<span class="lineNum">      55 </span><span class="lineCov">      29165 :                 AcceptChild(&amp;select_element);</span>
+<span class="lineNum">      56 </span><span class="lineCov">      29158 :                 select_element-&gt;ResolveType();</span>
+<span class="lineNum">      57 </span><span class="lineCov">      29158 :                 if (select_element-&gt;return_type == TypeId::INVALID) {</span>
 <span class="lineNum">      58 </span>            :                         throw BinderException(
 <span class="lineNum">      59 </span><span class="lineNoCov">          0 :                             &quot;Could not resolve type of projection element!&quot;);</span>
 <span class="lineNum">      60 </span>            :                 }
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">      29153 :                 if (!select_element-&gt;alias.empty()) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">      29158 :                 if (!select_element-&gt;alias.empty()) {</span>
 <span class="lineNum">      63 </span><span class="lineCov">        921 :                         bind_context-&gt;AddExpression(select_element-&gt;alias,</span>
 <span class="lineNum">      64 </span>            :                                                     select_element.get(), i);
 <span class="lineNum">      65 </span>            :                 }
 <span class="lineNum">      66 </span>            :         }
-<span class="lineNum">      67 </span><span class="lineCov">      20342 :         for (auto &amp;order : statement.orderby.orders) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">      20347 :         for (auto &amp;order : statement.orderby.orders) {</span>
 <span class="lineNum">      68 </span><span class="lineCov">       9211 :                 AcceptChild(&amp;order.expression);</span>
 <span class="lineNum">      69 </span><span class="lineCov">       9211 :                 if (order.expression-&gt;type == ExpressionType::COLUMN_REF) {</span>
 <span class="lineNum">      70 </span>            :                         auto selection_ref =
@@ -152,7 +152,7 @@
 <span class="lineNum">      90 </span>            :         // for the ORDER BY statement, we have to project all the columns
 <span class="lineNum">      91 </span>            :         // in the projection phase as well
 <span class="lineNum">      92 </span>            :         // for each expression in the ORDER BY check if it is projected already
-<span class="lineNum">      93 </span><span class="lineCov">      20342 :         for (size_t i = 0; i &lt; statement.orderby.orders.size(); i++) {</span>
+<span class="lineNum">      93 </span><span class="lineCov">      20347 :         for (size_t i = 0; i &lt; statement.orderby.orders.size(); i++) {</span>
 <span class="lineNum">      94 </span><span class="lineCov">       9211 :                 size_t j = 0;</span>
 <span class="lineNum">      95 </span><span class="lineCov">       9211 :                 TypeId type = TypeId::INVALID;</span>
 <span class="lineNum">      96 </span><span class="lineCov">      26920 :                 for (; j &lt; new_select_list.size(); j++) {</span>
@@ -185,14 +185,14 @@
 <span class="lineNum">     123 </span><span class="lineCov">      18422 :                 statement.orderby.orders[i].expression =</span>
 <span class="lineNum">     124 </span><span class="lineCov">      18422 :                     make_unique&lt;ColumnRefExpression&gt;(type, j);</span>
 <span class="lineNum">     125 </span>            :         }
-<span class="lineNum">     126 </span><span class="lineCov">      11131 :         statement.select_list = move(new_select_list);</span>
+<span class="lineNum">     126 </span><span class="lineCov">      11136 :         statement.select_list = move(new_select_list);</span>
 <span class="lineNum">     127 </span>            : 
-<span class="lineNum">     128 </span><span class="lineCov">      11131 :         if (statement.where_clause) {</span>
-<span class="lineNum">     129 </span><span class="lineCov">       7428 :                 AcceptChild(&amp;statement.where_clause);</span>
-<span class="lineNum">     130 </span><span class="lineCov">       7428 :                 statement.where_clause-&gt;ResolveType();</span>
+<span class="lineNum">     128 </span><span class="lineCov">      11136 :         if (statement.where_clause) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">       7433 :                 AcceptChild(&amp;statement.where_clause);</span>
+<span class="lineNum">     130 </span><span class="lineCov">       7433 :                 statement.where_clause-&gt;ResolveType();</span>
 <span class="lineNum">     131 </span>            :         }
 <span class="lineNum">     132 </span>            : 
-<span class="lineNum">     133 </span><span class="lineCov">      11131 :         if (statement.HasGroup()) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">      11136 :         if (statement.HasGroup()) {</span>
 <span class="lineNum">     134 </span>            :                 // bind group columns
 <span class="lineNum">     135 </span><span class="lineCov">        565 :                 for (auto &amp;group : statement.groupby.groups) {</span>
 <span class="lineNum">     136 </span><span class="lineCov">        386 :                         AcceptChild(&amp;group);</span>
@@ -289,31 +289,31 @@
 <span class="lineNum">     227 </span>            :                 }
 <span class="lineNum">     228 </span>            :         }
 <span class="lineNum">     229 </span>            : 
-<span class="lineNum">     230 </span><span class="lineCov">      11131 :         if (statement.groupby.having) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">      11136 :         if (statement.groupby.having) {</span>
 <span class="lineNum">     231 </span><span class="lineCov">         17 :                 AcceptChild(&amp;statement.groupby.having);</span>
 <span class="lineNum">     232 </span><span class="lineCov">         17 :                 statement.groupby.having-&gt;ResolveType();</span>
 <span class="lineNum">     233 </span>            :         }
 <span class="lineNum">     234 </span>            :         // the union has an independent binder
-<span class="lineNum">     235 </span><span class="lineCov">      11131 :         if (statement.setop_type != SelectStatement::SetopType::NONE) {</span>
+<span class="lineNum">     235 </span><span class="lineCov">      11136 :         if (statement.setop_type != SelectStatement::SetopType::NONE) {</span>
 <span class="lineNum">     236 </span><span class="lineCov">         83 :                 assert(statement.setop_select);</span>
 <span class="lineNum">     237 </span><span class="lineCov">        166 :                 Binder binder(context, this);</span>
 <span class="lineNum">     238 </span><span class="lineCov">         83 :                 statement.setop_select-&gt;Accept(&amp;binder);</span>
 <span class="lineNum">     239 </span><span class="lineCov">         83 :                 statement.setop_binder = move(binder.bind_context);</span>
 <span class="lineNum">     240 </span>            :         }
-<span class="lineNum">     241 </span><span class="lineCov">      22262 :         return nullptr;</span>
+<span class="lineNum">     241 </span><span class="lineCov">      22272 :         return nullptr;</span>
 <a name="242"><span class="lineNum">     242 </span>            : }</a>
 <span class="lineNum">     243 </span>            : 
-<span class="lineNum">     244 </span><span class="lineCov">      24696 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(InsertStatement &amp;statement) {</span>
-<span class="lineNum">     245 </span><span class="lineCov">      24696 :         if (statement.select_statement) {</span>
+<span class="lineNum">     244 </span><span class="lineCov">      27697 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(InsertStatement &amp;statement) {</span>
+<span class="lineNum">     245 </span><span class="lineCov">      27697 :         if (statement.select_statement) {</span>
 <span class="lineNum">     246 </span><span class="lineCov">          5 :                 AcceptChild(&amp;statement.select_statement);</span>
 <span class="lineNum">     247 </span>            :         }
 <span class="lineNum">     248 </span>            :         // visit the expressions
-<span class="lineNum">     249 </span><span class="lineCov">      50610 :         for (auto &amp;expression_list : statement.values) {</span>
-<span class="lineNum">     250 </span><span class="lineCov">      62736 :                 for (auto &amp;expression : expression_list) {</span>
-<span class="lineNum">     251 </span><span class="lineCov">      36822 :                         AcceptChild(&amp;expression);</span>
+<span class="lineNum">     249 </span><span class="lineCov">      56612 :         for (auto &amp;expression_list : statement.values) {</span>
+<span class="lineNum">     250 </span><span class="lineCov">      71739 :                 for (auto &amp;expression : expression_list) {</span>
+<span class="lineNum">     251 </span><span class="lineCov">      42824 :                         AcceptChild(&amp;expression);</span>
 <span class="lineNum">     252 </span>            :                 }
 <span class="lineNum">     253 </span>            :         }
-<span class="lineNum">     254 </span><span class="lineCov">      24696 :         return nullptr;</span>
+<span class="lineNum">     254 </span><span class="lineCov">      27697 :         return nullptr;</span>
 <a name="255"><span class="lineNum">     255 </span>            : }</a>
 <span class="lineNum">     256 </span>            : 
 <span class="lineNum">     257 </span><span class="lineCov">          7 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CopyStatement &amp;stmt) {</span>
@@ -323,20 +323,20 @@
 <span class="lineNum">     261 </span><span class="lineCov">          7 :         return nullptr;</span>
 <a name="262"><span class="lineNum">     262 </span>            : }</a>
 <span class="lineNum">     263 </span>            : 
-<span class="lineNum">     264 </span><span class="lineNoCov">          0 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CreateIndexStatement &amp;stmt) {</span>
+<span class="lineNum">     264 </span><span class="lineCov">          1 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CreateIndexStatement &amp;stmt) {</span>
 <span class="lineNum">     265 </span>            :         // visit the table reference
-<span class="lineNum">     266 </span><span class="lineNoCov">          0 :         AcceptChild(&amp;stmt.table);</span>
+<span class="lineNum">     266 </span><span class="lineCov">          1 :         AcceptChild(&amp;stmt.table);</span>
 <span class="lineNum">     267 </span>            :         // visit the expressions
-<span class="lineNum">     268 </span><span class="lineNoCov">          0 :         for (auto &amp;expr : stmt.expressions) {</span>
-<span class="lineNum">     269 </span><span class="lineNoCov">          0 :                 AcceptChild(&amp;expr);</span>
-<span class="lineNum">     270 </span><span class="lineNoCov">          0 :                 expr-&gt;ResolveType();</span>
-<span class="lineNum">     271 </span><span class="lineNoCov">          0 :                 if (expr-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">     268 </span><span class="lineCov">          2 :         for (auto &amp;expr : stmt.expressions) {</span>
+<span class="lineNum">     269 </span><span class="lineCov">          1 :                 AcceptChild(&amp;expr);</span>
+<span class="lineNum">     270 </span><span class="lineCov">          1 :                 expr-&gt;ResolveType();</span>
+<span class="lineNum">     271 </span><span class="lineCov">          1 :                 if (expr-&gt;return_type == TypeId::INVALID) {</span>
 <span class="lineNum">     272 </span>            :                         throw BinderException(
 <span class="lineNum">     273 </span><span class="lineNoCov">          0 :                             &quot;Could not resolve type of projection element!&quot;);</span>
 <span class="lineNum">     274 </span>            :                 }
-<span class="lineNum">     275 </span><span class="lineNoCov">          0 :                 expr-&gt;ClearStatistics();</span>
+<span class="lineNum">     275 </span><span class="lineCov">          1 :                 expr-&gt;ClearStatistics();</span>
 <span class="lineNum">     276 </span>            :         }
-<span class="lineNum">     277 </span><span class="lineNoCov">          0 :         return nullptr;</span>
+<span class="lineNum">     277 </span><span class="lineCov">          1 :         return nullptr;</span>
 <a name="278"><span class="lineNum">     278 </span>            : }</a>
 <span class="lineNum">     279 </span>            : 
 <span class="lineNum">     280 </span><span class="lineCov">         16 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(DeleteStatement &amp;stmt) {</span>
@@ -353,38 +353,38 @@
 <span class="lineNum">     291 </span><span class="lineNoCov">          0 :         return nullptr;</span>
 <a name="292"><span class="lineNum">     292 </span>            : }</a>
 <span class="lineNum">     293 </span>            : 
-<span class="lineNum">     294 </span><span class="lineCov">       2021 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(UpdateStatement &amp;stmt) {</span>
+<span class="lineNum">     294 </span><span class="lineCov">       2023 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(UpdateStatement &amp;stmt) {</span>
 <span class="lineNum">     295 </span>            :         // visit the table reference
-<span class="lineNum">     296 </span><span class="lineCov">       2021 :         AcceptChild(&amp;stmt.table);</span>
+<span class="lineNum">     296 </span><span class="lineCov">       2023 :         AcceptChild(&amp;stmt.table);</span>
 <span class="lineNum">     297 </span>            :         // project any additional columns required for the condition/expressions
-<span class="lineNum">     298 </span><span class="lineCov">       2021 :         if (stmt.condition) {</span>
-<span class="lineNum">     299 </span><span class="lineCov">       2010 :                 AcceptChild(&amp;stmt.condition);</span>
+<span class="lineNum">     298 </span><span class="lineCov">       2023 :         if (stmt.condition) {</span>
+<span class="lineNum">     299 </span><span class="lineCov">       2012 :                 AcceptChild(&amp;stmt.condition);</span>
 <span class="lineNum">     300 </span>            :         }
-<span class="lineNum">     301 </span><span class="lineCov">       4042 :         for (auto &amp;expression : stmt.expressions) {</span>
-<span class="lineNum">     302 </span><span class="lineCov">       2021 :                 AcceptChild(&amp;expression);</span>
-<span class="lineNum">     303 </span><span class="lineCov">       2021 :                 if (expression-&gt;type == ExpressionType::VALUE_DEFAULT) {</span>
+<span class="lineNum">     301 </span><span class="lineCov">       4046 :         for (auto &amp;expression : stmt.expressions) {</span>
+<span class="lineNum">     302 </span><span class="lineCov">       2023 :                 AcceptChild(&amp;expression);</span>
+<span class="lineNum">     303 </span><span class="lineCov">       2023 :                 if (expression-&gt;type == ExpressionType::VALUE_DEFAULT) {</span>
 <span class="lineNum">     304 </span>            :                         // we resolve the type of the DEFAULT expression in the
 <span class="lineNum">     305 </span>            :                         // LogicalPlanGenerator because that is where we resolve the
 <span class="lineNum">     306 </span>            :                         // to-be-updated column
 <span class="lineNum">     307 </span><span class="lineNoCov">          0 :                         continue;</span>
 <span class="lineNum">     308 </span>            :                 }
-<span class="lineNum">     309 </span><span class="lineCov">       2021 :                 expression-&gt;ResolveType();</span>
-<span class="lineNum">     310 </span><span class="lineCov">       2021 :                 if (expression-&gt;return_type == TypeId::INVALID) {</span>
+<span class="lineNum">     309 </span><span class="lineCov">       2023 :                 expression-&gt;ResolveType();</span>
+<span class="lineNum">     310 </span><span class="lineCov">       2023 :                 if (expression-&gt;return_type == TypeId::INVALID) {</span>
 <span class="lineNum">     311 </span>            :                         throw BinderException(
 <span class="lineNum">     312 </span><span class="lineNoCov">          0 :                             &quot;Could not resolve type of projection element!&quot;);</span>
 <span class="lineNum">     313 </span>            :                 }
 <span class="lineNum">     314 </span>            :         }
-<span class="lineNum">     315 </span><span class="lineCov">       2021 :         return nullptr;</span>
+<span class="lineNum">     315 </span><span class="lineCov">       2023 :         return nullptr;</span>
 <a name="316"><span class="lineNum">     316 </span>            : }</a>
 <span class="lineNum">     317 </span>            : 
-<span class="lineNum">     318 </span><span class="lineCov">        161 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CreateTableStatement &amp;stmt) {</span>
+<span class="lineNum">     318 </span><span class="lineCov">        162 : unique_ptr&lt;SQLStatement&gt; Binder::Visit(CreateTableStatement &amp;stmt) {</span>
 <span class="lineNum">     319 </span>            :         // bind any constraints
 <span class="lineNum">     320 </span>            :         // first create a fake table
-<span class="lineNum">     321 </span><span class="lineCov">        161 :         bind_context-&gt;AddDummyTable(stmt.info-&gt;table, stmt.info-&gt;columns);</span>
-<span class="lineNum">     322 </span><span class="lineCov">        223 :         for (auto &amp;it : stmt.info-&gt;constraints) {</span>
+<span class="lineNum">     321 </span><span class="lineCov">        162 :         bind_context-&gt;AddDummyTable(stmt.info-&gt;table, stmt.info-&gt;columns);</span>
+<span class="lineNum">     322 </span><span class="lineCov">        224 :         for (auto &amp;it : stmt.info-&gt;constraints) {</span>
 <span class="lineNum">     323 </span><span class="lineCov">         62 :                 AcceptChild(&amp;it);</span>
 <span class="lineNum">     324 </span>            :         }
-<span class="lineNum">     325 </span><span class="lineCov">        161 :         return nullptr;</span>
+<span class="lineNum">     325 </span><span class="lineCov">        162 :         return nullptr;</span>
 <a name="326"><span class="lineNum">     326 </span>            : }</a>
 <span class="lineNum">     327 </span>            : 
 <span class="lineNum">     328 </span><span class="lineCov">          4 : unique_ptr&lt;Constraint&gt; Binder::Visit(CheckConstraint &amp;constraint) {</span>
@@ -402,19 +402,19 @@
 <span class="lineNum">     340 </span><span class="lineCov">          4 :         return nullptr;</span>
 <a name="341"><span class="lineNum">     341 </span>            : }</a>
 <span class="lineNum">     342 </span>            : 
-<span class="lineNum">     343 </span><span class="lineCov">     111179 : unique_ptr&lt;Expression&gt; Binder::Visit(ColumnRefExpression &amp;expr) {</span>
-<span class="lineNum">     344 </span><span class="lineCov">     111179 :         if (expr.column_name.empty()) {</span>
+<span class="lineNum">     343 </span><span class="lineCov">     111192 : unique_ptr&lt;Expression&gt; Binder::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">     344 </span><span class="lineCov">     111192 :         if (expr.column_name.empty()) {</span>
 <span class="lineNum">     345 </span>            :                 // column expression should have been bound already
 <span class="lineNum">     346 </span><span class="lineCov">       8915 :                 return nullptr;</span>
 <span class="lineNum">     347 </span>            :         }
 <span class="lineNum">     348 </span>            :         // individual column reference
 <span class="lineNum">     349 </span>            :         // resolve to either a base table or a subquery expression
-<span class="lineNum">     350 </span><span class="lineCov">     102264 :         if (expr.table_name.empty()) {</span>
+<span class="lineNum">     350 </span><span class="lineCov">     102277 :         if (expr.table_name.empty()) {</span>
 <span class="lineNum">     351 </span>            :                 // no table name: find a binding that contains this
-<span class="lineNum">     352 </span><span class="lineCov">      92857 :                 expr.table_name = bind_context-&gt;GetMatchingBinding(expr.column_name);</span>
+<span class="lineNum">     352 </span><span class="lineCov">      92870 :                 expr.table_name = bind_context-&gt;GetMatchingBinding(expr.column_name);</span>
 <span class="lineNum">     353 </span>            :         }
-<span class="lineNum">     354 </span><span class="lineCov">     102257 :         bind_context-&gt;BindColumn(expr);</span>
-<span class="lineNum">     355 </span><span class="lineCov">     102257 :         return nullptr;</span>
+<span class="lineNum">     354 </span><span class="lineCov">     102270 :         bind_context-&gt;BindColumn(expr);</span>
+<span class="lineNum">     355 </span><span class="lineCov">     102270 :         return nullptr;</span>
 <a name="356"><span class="lineNum">     356 </span>            : }</a>
 <span class="lineNum">     357 </span>            : 
 <span class="lineNum">     358 </span><span class="lineCov">       2131 : unique_ptr&lt;Expression&gt; Binder::Visit(FunctionExpression &amp;expr) {</span>
@@ -454,20 +454,20 @@
 <span class="lineNum">     392 </span>            : }
 <a name="393"><span class="lineNum">     393 </span>            : </a>
 <span class="lineNum">     394 </span>            : // CTEs are also referred to using BaseTableRefs, hence need to distinguish
-<span class="lineNum">     395 </span><span class="lineCov">      13410 : unique_ptr&lt;TableRef&gt; Binder::Visit(BaseTableRef &amp;expr) {</span>
-<span class="lineNum">     396 </span><span class="lineCov">      26820 :         auto cte = FindCTE(expr.table_name);</span>
-<span class="lineNum">     397 </span><span class="lineCov">      13410 :         if (cte) {</span>
+<span class="lineNum">     395 </span><span class="lineCov">      13418 : unique_ptr&lt;TableRef&gt; Binder::Visit(BaseTableRef &amp;expr) {</span>
+<span class="lineNum">     396 </span><span class="lineCov">      26836 :         auto cte = FindCTE(expr.table_name);</span>
+<span class="lineNum">     397 </span><span class="lineCov">      13418 :         if (cte) {</span>
 <span class="lineNum">     398 </span><span class="lineCov">        236 :                 auto subquery = make_unique&lt;SubqueryRef&gt;(move(cte));</span>
 <span class="lineNum">     399 </span><span class="lineCov">        118 :                 subquery-&gt;alias = expr.alias.empty() ? expr.table_name : expr.alias;</span>
 <span class="lineNum">     400 </span><span class="lineCov">        118 :                 AcceptChild(&amp;subquery);</span>
 <span class="lineNum">     401 </span><span class="lineCov">        118 :                 return move(subquery);</span>
 <span class="lineNum">     402 </span>            :         }
 <span class="lineNum">     403 </span>            : 
-<span class="lineNum">     404 </span><span class="lineCov">      13292 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
-<span class="lineNum">     405 </span><span class="lineCov">      13292 :                                                  expr.schema_name, expr.table_name);</span>
-<span class="lineNum">     406 </span><span class="lineCov">      26572 :         bind_context-&gt;AddBaseTable(</span>
-<span class="lineNum">     407 </span><span class="lineCov">      13286 :             expr.alias.empty() ? expr.table_name : expr.alias, table);</span>
-<span class="lineNum">     408 </span><span class="lineCov">      13286 :         return nullptr;</span>
+<span class="lineNum">     404 </span><span class="lineCov">      13300 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
+<span class="lineNum">     405 </span><span class="lineCov">      13300 :                                                  expr.schema_name, expr.table_name);</span>
+<span class="lineNum">     406 </span><span class="lineCov">      26588 :         bind_context-&gt;AddBaseTable(</span>
+<span class="lineNum">     407 </span><span class="lineCov">      13294 :             expr.alias.empty() ? expr.table_name : expr.alias, table);</span>
+<span class="lineNum">     408 </span><span class="lineCov">      13294 :         return nullptr;</span>
 <a name="409"><span class="lineNum">     409 </span>            : }</a>
 <span class="lineNum">     410 </span>            : 
 <span class="lineNum">     411 </span><span class="lineCov">        528 : unique_ptr&lt;TableRef&gt; Binder::Visit(CrossProductRef &amp;expr) {</span>
@@ -511,13 +511,13 @@
 <span class="lineNum">     449 </span>            :         }
 <a name="450"><span class="lineNum">     450 </span><span class="lineCov">         65 :         CTE_bindings[name] = cte;</span></a>
 <span class="lineNum">     451 </span><span class="lineCov">         65 : }</span>
-<span class="lineNum">     452 </span><span class="lineCov">      15333 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
-<span class="lineNum">     453 </span><span class="lineCov">      15333 :         auto entry = CTE_bindings.find(name);</span>
-<span class="lineNum">     454 </span><span class="lineCov">      15333 :         if (entry == CTE_bindings.end()) {</span>
-<span class="lineNum">     455 </span><span class="lineCov">      15215 :                 if (parent) {</span>
+<span class="lineNum">     452 </span><span class="lineCov">      15341 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
+<span class="lineNum">     453 </span><span class="lineCov">      15341 :         auto entry = CTE_bindings.find(name);</span>
+<span class="lineNum">     454 </span><span class="lineCov">      15341 :         if (entry == CTE_bindings.end()) {</span>
+<span class="lineNum">     455 </span><span class="lineCov">      15223 :                 if (parent) {</span>
 <span class="lineNum">     456 </span><span class="lineCov">       1923 :                         return parent-&gt;FindCTE(name);</span>
 <span class="lineNum">     457 </span>            :                 }
-<span class="lineNum">     458 </span><span class="lineCov">      13292 :                 return nullptr;</span>
+<span class="lineNum">     458 </span><span class="lineCov">      13300 :                 return nullptr;</span>
 <span class="lineNum">     459 </span>            :         }
 <span class="lineNum">     460 </span><span class="lineCov">        118 :         return entry-&gt;second-&gt;Copy();</span>
 <span class="lineNum">     461 </span>            : }
