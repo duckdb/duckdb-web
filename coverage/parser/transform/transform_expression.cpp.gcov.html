@@ -1,0 +1,894 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 529964f - parser/transform/transform_expression.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">parser/transform</a> - transform_expression.cpp<span style="font-size: 80%;"> (source / <a href="transform_expression.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">446</td>
+            <td class="headerCovTableEntry">526</td>
+            <td class="headerCovTableEntryMed">84.8 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntryHi">95.8 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : </a>
+<span class="lineNum">       2 </span>            : #include &quot;parser/transform.hpp&quot;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &quot;parser/expression/list.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;parser/tableref/list.hpp&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : using namespace postgres;
+<span class="lineNum">       8 </span>            : using namespace std;
+<span class="lineNum">       9 </span>            : 
+<a name="10"><span class="lineNum">      10 </span>            : namespace duckdb {</a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">       6714 : static bool IsAggregateFunction(const string &amp;fun_name) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">      16848 :         if (fun_name == &quot;min&quot; || fun_name == &quot;max&quot; || fun_name == &quot;count&quot; ||</span>
+<span class="lineNum">      14 </span><span class="lineCov">      16848 :             fun_name == &quot;avg&quot; || fun_name == &quot;sum&quot; || fun_name == &quot;first&quot;)</span>
+<span class="lineNum">      15 </span><span class="lineCov">       4587 :                 return true;</span>
+<span class="lineNum">      16 </span><span class="lineCov">       2127 :         return false;</span>
+<a name="17"><span class="lineNum">      17 </span>            : }</a>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">      38100 : string TransformAlias(Alias *root) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      38100 :         if (!root) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">      35082 :                 return &quot;&quot;;</span>
+<span class="lineNum">      22 </span>            :         }
+<span class="lineNum">      23 </span><span class="lineCov">       3018 :         return root-&gt;aliasname;</span>
+<a name="24"><span class="lineNum">      24 </span>            : }</a>
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineCov">        837 : TypeId TransformStringToTypeId(char *str) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">       3348 :         string lower_str = StringUtil::Lower(string(str));</span>
+<span class="lineNum">      28 </span>            :         // Transform column type
+<span class="lineNum">      29 </span><span class="lineCov">        837 :         if (lower_str == &quot;int&quot; || lower_str == &quot;int4&quot; || lower_str == &quot;signed&quot;) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">        424 :                 return TypeId::INTEGER;</span>
+<span class="lineNum">      31 </span><span class="lineCov">       1004 :         } else if (lower_str == &quot;varchar&quot; || lower_str == &quot;bpchar&quot; ||</span>
+<span class="lineNum">      32 </span><span class="lineCov">       1004 :                    lower_str == &quot;text&quot; || lower_str == &quot;string&quot;) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">        176 :                 return TypeId::VARCHAR;</span>
+<span class="lineNum">      34 </span><span class="lineCov">        237 :         } else if (lower_str == &quot;int8&quot;) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">          1 :                 return TypeId::BIGINT;</span>
+<span class="lineNum">      36 </span><span class="lineCov">        236 :         } else if (lower_str == &quot;int2&quot;) {</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :                 return TypeId::SMALLINT;</span>
+<span class="lineNum">      38 </span><span class="lineCov">        236 :         } else if (lower_str == &quot;timestamp&quot;) {</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :                 return TypeId::TIMESTAMP;</span>
+<span class="lineNum">      40 </span><span class="lineCov">        236 :         } else if (lower_str == &quot;bool&quot;) {</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                 return TypeId::BOOLEAN;</span>
+<span class="lineNum">      42 </span><span class="lineCov">        706 :         } else if (lower_str == &quot;double&quot; || lower_str == &quot;float8&quot; ||</span>
+<span class="lineNum">      43 </span><span class="lineCov">        941 :                    lower_str == &quot;real&quot; || lower_str == &quot;float4&quot; ||</span>
+<span class="lineNum">      44 </span><span class="lineCov">        235 :                    lower_str == &quot;numeric&quot;) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">         99 :                 return TypeId::DECIMAL;</span>
+<span class="lineNum">      46 </span><span class="lineCov">        137 :         } else if (lower_str == &quot;tinyint&quot;) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">          6 :                 return TypeId::TINYINT;</span>
+<span class="lineNum">      48 </span><span class="lineCov">        131 :         } else if (lower_str == &quot;varbinary&quot;) {</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                 return TypeId::VARBINARY;</span>
+<span class="lineNum">      50 </span><span class="lineCov">        131 :         } else if (lower_str == &quot;date&quot;) {</span>
+<span class="lineNum">      51 </span><span class="lineCov">        131 :                 return TypeId::DATE;</span>
+<span class="lineNum">      52 </span>            :         } else {
+<span class="lineNum">      53 </span>            :                 throw NotImplementedException(&quot;DataType %s not supported yet...\n&quot;,
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                                               str);</span>
+<span class="lineNum">      55 </span>            :         }
+<a name="56"><span class="lineNum">      56 </span>            : }</a>
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span><span class="lineCov">        152 : unique_ptr&lt;Expression&gt; TransformTypeCast(TypeCast *root) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">        152 :         if (!root) {</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">      61 </span>            :         }
+<span class="lineNum">      62 </span>            :         // get the type to cast to
+<span class="lineNum">      63 </span><span class="lineCov">        152 :         TypeName *type_name = root-&gt;typeName;</span>
+<span class="lineNum">      64 </span><span class="lineCov">        152 :         char *name =</span>
+<span class="lineNum">      65 </span><span class="lineCov">        152 :             (reinterpret_cast&lt;value *&gt;(type_name-&gt;names-&gt;tail-&gt;data.ptr_value)</span>
+<span class="lineNum">      66 </span>            :                  -&gt;val.str);
+<span class="lineNum">      67 </span><span class="lineCov">        152 :         TypeId target_type = TransformStringToTypeId(name);</span>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">        152 :         if (root-&gt;arg-&gt;type == T_A_Const) {</span>
+<span class="lineNum">      70 </span>            :                 // cast a constant value
+<span class="lineNum">      71 </span>            :                 // get the original constant value
+<span class="lineNum">      72 </span><span class="lineCov">        131 :                 auto constant =</span>
+<span class="lineNum">      73 </span><span class="lineCov">        262 :                     TransformConstant(reinterpret_cast&lt;A_Const *&gt;(root-&gt;arg));</span>
+<span class="lineNum">      74 </span>            :                 Value &amp;source_value =
+<span class="lineNum">      75 </span><span class="lineCov">        131 :                     reinterpret_cast&lt;ConstantExpression *&gt;(constant.get())-&gt;value;</span>
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span><span class="lineCov">        148 :                 if (!source_value.is_null &amp;&amp; TypeIsIntegral(source_value.type) &amp;&amp;</span>
+<span class="lineNum">      78 </span><span class="lineCov">         17 :                     TypeIsIntegral(target_type)) {</span>
+<span class="lineNum">      79 </span>            :                         // properly handle numeric overflows
+<span class="lineNum">      80 </span><span class="lineCov">          8 :                         target_type = std::max(MinimalType(source_value.GetNumericValue()),</span>
+<span class="lineNum">      81 </span><span class="lineCov">          4 :                                                target_type);</span>
+<span class="lineNum">      82 </span>            :                 }
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            :                 // perform the cast and substitute the expression
+<span class="lineNum">      85 </span><span class="lineCov">        262 :                 Value new_value = source_value.CastAs(target_type);</span>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineCov">        131 :                 return make_unique&lt;ConstantExpression&gt;(new_value);</span>
+<span class="lineNum">      88 </span>            :         } else {
+<span class="lineNum">      89 </span>            :                 // transform the expression node
+<span class="lineNum">      90 </span><span class="lineCov">         42 :                 auto expression = TransformExpression(root-&gt;arg);</span>
+<span class="lineNum">      91 </span>            :                 // now create a cast operation
+<span class="lineNum">      92 </span><span class="lineCov">         21 :                 return make_unique&lt;CastExpression&gt;(target_type, move(expression));</span>
+<span class="lineNum">      93 </span>            :         }
+<a name="94"><span class="lineNum">      94 </span>            : }</a>
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span><span class="lineCov">       7242 : unique_ptr&lt;Expression&gt; TransformBoolExpr(BoolExpr *root) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">       7242 :         unique_ptr&lt;Expression&gt; result;</span>
+<span class="lineNum">      98 </span><span class="lineCov">      24666 :         for (auto node = root-&gt;args-&gt;head; node != nullptr; node = node-&gt;next) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">      17424 :                 auto next =</span>
+<span class="lineNum">     100 </span><span class="lineCov">      34848 :                     TransformExpression(reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value));</span>
+<span class="lineNum">     101 </span>            : 
+<span class="lineNum">     102 </span><span class="lineCov">      17424 :                 switch (root-&gt;boolop) {</span>
+<span class="lineNum">     103 </span><span class="lineCov">      10490 :                 case AND_EXPR: {</span>
+<span class="lineNum">     104 </span><span class="lineCov">      10490 :                         if (!result) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">       4314 :                                 result = move(next);</span>
+<span class="lineNum">     106 </span>            :                         } else {
+<span class="lineNum">     107 </span><span class="lineCov">      18528 :                                 result = make_unique&lt;ConjunctionExpression&gt;(</span>
+<span class="lineNum">     108 </span><span class="lineCov">      18528 :                                     ExpressionType::CONJUNCTION_AND, move(result), move(next));</span>
+<span class="lineNum">     109 </span>            :                         }
+<span class="lineNum">     110 </span><span class="lineCov">      10490 :                         break;</span>
+<span class="lineNum">     111 </span>            :                 }
+<span class="lineNum">     112 </span><span class="lineCov">       6914 :                 case OR_EXPR: {</span>
+<span class="lineNum">     113 </span><span class="lineCov">       6914 :                         if (!result) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">       2908 :                                 result = move(next);</span>
+<span class="lineNum">     115 </span>            :                         } else {
+<span class="lineNum">     116 </span><span class="lineCov">      12018 :                                 result = make_unique&lt;ConjunctionExpression&gt;(</span>
+<span class="lineNum">     117 </span><span class="lineCov">      12018 :                                     ExpressionType::CONJUNCTION_OR, move(result), move(next));</span>
+<span class="lineNum">     118 </span>            :                         }
+<span class="lineNum">     119 </span><span class="lineCov">       6914 :                         break;</span>
+<span class="lineNum">     120 </span>            :                 }
+<span class="lineNum">     121 </span><span class="lineCov">         20 :                 case NOT_EXPR: {</span>
+<span class="lineNum">     122 </span><span class="lineCov">         20 :                         if (next-&gt;type == ExpressionType::COMPARE_IN) {</span>
+<span class="lineNum">     123 </span>            :                                 // convert COMPARE_IN to COMPARE_NOT_IN
+<span class="lineNum">     124 </span><span class="lineCov">          2 :                                 next-&gt;type = ExpressionType::COMPARE_NOT_IN;</span>
+<span class="lineNum">     125 </span><span class="lineCov">          2 :                                 result = move(next);</span>
+<span class="lineNum">     126 </span><span class="lineCov">         18 :                         } else if (next-&gt;type == ExpressionType::OPERATOR_EXISTS) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">         12 :                                 next-&gt;type = ExpressionType::OPERATOR_NOT_EXISTS;</span>
+<span class="lineNum">     128 </span><span class="lineCov">         12 :                                 result = move(next);</span>
+<span class="lineNum">     129 </span>            :                         } else {
+<span class="lineNum">     130 </span><span class="lineCov">         18 :                                 result = make_unique&lt;OperatorExpression&gt;(</span>
+<span class="lineNum">     131 </span><span class="lineCov">         12 :                                     ExpressionType::OPERATOR_NOT, TypeId::BOOLEAN, move(next),</span>
+<span class="lineNum">     132 </span><span class="lineCov">         18 :                                     nullptr);</span>
+<span class="lineNum">     133 </span>            :                         }
+<span class="lineNum">     134 </span><span class="lineCov">         20 :                         break;</span>
+<span class="lineNum">     135 </span>            :                 }
+<span class="lineNum">     136 </span>            :                 }
+<span class="lineNum">     137 </span>            :         }
+<span class="lineNum">     138 </span><span class="lineCov">       7242 :         return result;</span>
+<a name="139"><span class="lineNum">     139 </span>            : }</a>
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span><span class="lineCov">      37909 : unique_ptr&lt;TableRef&gt; TransformRangeVar(RangeVar *root) {</span>
+<span class="lineNum">     142 </span><span class="lineCov">      75818 :         auto result = make_unique&lt;BaseTableRef&gt;();</span>
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span><span class="lineCov">      37909 :         result-&gt;alias = TransformAlias(root-&gt;alias);</span>
+<span class="lineNum">     145 </span><span class="lineCov">      37909 :         if (root-&gt;relname)</span>
+<span class="lineNum">     146 </span><span class="lineCov">      37909 :                 result-&gt;table_name = root-&gt;relname;</span>
+<span class="lineNum">     147 </span><span class="lineCov">      37909 :         if (root-&gt;schemaname)</span>
+<span class="lineNum">     148 </span><span class="lineCov">          7 :                 result-&gt;schema_name = root-&gt;schemaname;</span>
+<span class="lineNum">     149 </span><span class="lineCov">      75818 :         return move(result);</span>
+<a name="150"><span class="lineNum">     150 </span>            : }</a>
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span><span class="lineCov">        182 : unique_ptr&lt;TableRef&gt; TransformRangeSubselect(RangeSubselect *root) {</span>
+<span class="lineNum">     153 </span><span class="lineCov">        364 :         auto subquery = TransformSelect(root-&gt;subquery);</span>
+<span class="lineNum">     154 </span><span class="lineCov">        182 :         if (!subquery) {</span>
+<span class="lineNum">     155 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     156 </span>            :         }
+<span class="lineNum">     157 </span><span class="lineCov">        364 :         auto result = make_unique&lt;SubqueryRef&gt;(move(subquery));</span>
+<span class="lineNum">     158 </span><span class="lineCov">        182 :         result-&gt;alias = TransformAlias(root-&gt;alias);</span>
+<span class="lineNum">     159 </span><span class="lineCov">        182 :         if (root-&gt;alias-&gt;colnames) {</span>
+<span class="lineNum">     160 </span><span class="lineNoCov">          0 :                 for (auto node = root-&gt;alias-&gt;colnames-&gt;head; node != nullptr;</span>
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :                      node = node-&gt;next) {</span>
+<span class="lineNum">     162 </span><span class="lineNoCov">          0 :                         result-&gt;column_name_alias.push_back(</span>
+<span class="lineNum">     163 </span><span class="lineNoCov">          0 :                             reinterpret_cast&lt;value *&gt;(node-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">     164 </span>            :                 }
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 :                 if (result-&gt;column_name_alias.size() !=</span>
+<span class="lineNum">     166 </span><span class="lineNoCov">          0 :                     result-&gt;subquery-&gt;select_list.size()) {</span>
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :                         throw ParserException(&quot;Column alias list count does not match&quot;);</span>
+<span class="lineNum">     168 </span>            :                 }
+<span class="lineNum">     169 </span>            :         }
+<span class="lineNum">     170 </span><span class="lineCov">        182 :         return move(result);</span>
+<a name="171"><span class="lineNum">     171 </span>            : }</a>
+<span class="lineNum">     172 </span>            : 
+<span class="lineNum">     173 </span><span class="lineCov">          9 : unique_ptr&lt;TableRef&gt; TransformRangeFunction(RangeFunction *root) {</span>
+<span class="lineNum">     174 </span><span class="lineCov">          9 :         if (root-&gt;lateral) {</span>
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;LATERAL not implemented&quot;);</span>
+<span class="lineNum">     176 </span>            :         }
+<span class="lineNum">     177 </span><span class="lineCov">          9 :         if (root-&gt;ordinality) {</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;WITH ORDINALITY not implemented&quot;);</span>
+<span class="lineNum">     179 </span>            :         }
+<span class="lineNum">     180 </span><span class="lineCov">          9 :         if (root-&gt;is_rowsfrom) {</span>
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;ROWS FROM() not implemented&quot;);</span>
+<span class="lineNum">     182 </span>            :         }
+<span class="lineNum">     183 </span><span class="lineCov">          9 :         if (root-&gt;functions-&gt;length != 1) {</span>
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Need exactly one function&quot;);</span>
+<span class="lineNum">     185 </span>            :         }
+<span class="lineNum">     186 </span><span class="lineCov">          9 :         auto function_sublist = (List *)root-&gt;functions-&gt;head-&gt;data.ptr_value;</span>
+<span class="lineNum">     187 </span><span class="lineCov">          9 :         assert(function_sublist-&gt;length == 2);</span>
+<span class="lineNum">     188 </span><span class="lineCov">          9 :         auto call_tree = (Node *)function_sublist-&gt;head-&gt;data.ptr_value;</span>
+<span class="lineNum">     189 </span><span class="lineCov">          9 :         auto coldef = function_sublist-&gt;head-&gt;next-&gt;data.ptr_value;</span>
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span><span class="lineCov">          9 :         assert(call_tree-&gt;type == T_FuncCall);</span>
+<span class="lineNum">     192 </span><span class="lineCov">          9 :         if (coldef) {</span>
+<span class="lineNum">     193 </span>            :                 throw NotImplementedException(
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :                     &quot;Explicit column definition not supported yet&quot;);</span>
+<span class="lineNum">     195 </span>            :         }
+<span class="lineNum">     196 </span>            :         // transform the function call
+<span class="lineNum">     197 </span><span class="lineCov">         18 :         auto result = make_unique&lt;TableFunction&gt;();</span>
+<span class="lineNum">     198 </span><span class="lineCov">          9 :         result-&gt;function = TransformFuncCall((FuncCall *)call_tree);</span>
+<span class="lineNum">     199 </span><span class="lineCov">          9 :         result-&gt;alias = TransformAlias(root-&gt;alias);</span>
+<span class="lineNum">     200 </span><span class="lineCov">         18 :         return result;</span>
+<a name="201"><span class="lineNum">     201 </span>            : }</a>
+<span class="lineNum">     202 </span>            : 
+<span class="lineNum">     203 </span><span class="lineCov">         36 : unique_ptr&lt;TableRef&gt; TransformJoin(JoinExpr *root) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">         72 :         auto result = make_unique&lt;JoinRef&gt;();</span>
+<span class="lineNum">     205 </span><span class="lineCov">         36 :         switch (root-&gt;jointype) {</span>
+<span class="lineNum">     206 </span><span class="lineCov">         18 :         case JOIN_INNER: {</span>
+<span class="lineNum">     207 </span><span class="lineCov">         18 :                 result-&gt;type = duckdb::JoinType::INNER;</span>
+<span class="lineNum">     208 </span><span class="lineCov">         18 :                 break;</span>
+<span class="lineNum">     209 </span>            :         }
+<span class="lineNum">     210 </span><span class="lineCov">         17 :         case JOIN_LEFT: {</span>
+<span class="lineNum">     211 </span><span class="lineCov">         17 :                 result-&gt;type = duckdb::JoinType::LEFT;</span>
+<span class="lineNum">     212 </span><span class="lineCov">         17 :                 break;</span>
+<span class="lineNum">     213 </span>            :         }
+<span class="lineNum">     214 </span><span class="lineCov">          1 :         case JOIN_FULL: {</span>
+<span class="lineNum">     215 </span><span class="lineCov">          1 :                 result-&gt;type = duckdb::JoinType::OUTER;</span>
+<span class="lineNum">     216 </span><span class="lineCov">          1 :                 break;</span>
+<span class="lineNum">     217 </span>            :         }
+<span class="lineNum">     218 </span><span class="lineNoCov">          0 :         case JOIN_RIGHT: {</span>
+<span class="lineNum">     219 </span><span class="lineNoCov">          0 :                 result-&gt;type = duckdb::JoinType::RIGHT;</span>
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     221 </span>            :         }
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :         case JOIN_SEMI: {</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :                 result-&gt;type = duckdb::JoinType::SEMI;</span>
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     225 </span>            :         }
+<span class="lineNum">     226 </span><span class="lineNoCov">          0 :         default: {</span>
+<span class="lineNum">     227 </span>            :                 throw NotImplementedException(&quot;Join type %d not supported yet...\n&quot;,
+<span class="lineNum">     228 </span><span class="lineNoCov">          0 :                                               root-&gt;jointype);</span>
+<span class="lineNum">     229 </span>            :         }
+<span class="lineNum">     230 </span>            :         }
+<span class="lineNum">     231 </span>            : 
+<span class="lineNum">     232 </span>            :         // Check the type of left arg and right arg before transform
+<span class="lineNum">     233 </span><span class="lineCov">         36 :         result-&gt;left = TransformTableRefNode(root-&gt;larg);</span>
+<span class="lineNum">     234 </span><span class="lineCov">         36 :         result-&gt;right = TransformTableRefNode(root-&gt;rarg);</span>
+<span class="lineNum">     235 </span>            : 
+<span class="lineNum">     236 </span><span class="lineCov">         36 :         if (!root-&gt;quals) { // CROSS JOIN</span>
+<span class="lineNum">     237 </span><span class="lineNoCov">          0 :                 auto cross = make_unique&lt;CrossProductRef&gt;();</span>
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :                 cross-&gt;left = move(result-&gt;left);</span>
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :                 cross-&gt;right = move(result-&gt;right);</span>
+<span class="lineNum">     240 </span><span class="lineNoCov">          0 :                 return move(cross);</span>
+<span class="lineNum">     241 </span>            :         }
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span>            :         // transform the quals, depends on AExprTranform and BoolExprTransform
+<span class="lineNum">     244 </span><span class="lineCov">         36 :         switch (root-&gt;quals-&gt;type) {</span>
+<span class="lineNum">     245 </span><span class="lineCov">         19 :         case T_A_Expr: {</span>
+<span class="lineNum">     246 </span><span class="lineCov">         38 :                 result-&gt;condition =</span>
+<span class="lineNum">     247 </span><span class="lineCov">         38 :                     TransformAExpr(reinterpret_cast&lt;A_Expr *&gt;(root-&gt;quals));</span>
+<span class="lineNum">     248 </span><span class="lineCov">         19 :                 break;</span>
+<span class="lineNum">     249 </span>            :         }
+<span class="lineNum">     250 </span><span class="lineCov">         17 :         case T_BoolExpr: {</span>
+<span class="lineNum">     251 </span><span class="lineCov">         34 :                 result-&gt;condition =</span>
+<span class="lineNum">     252 </span><span class="lineCov">         34 :                     TransformBoolExpr(reinterpret_cast&lt;BoolExpr *&gt;(root-&gt;quals));</span>
+<span class="lineNum">     253 </span><span class="lineCov">         17 :                 break;</span>
+<span class="lineNum">     254 </span>            :         }
+<span class="lineNum">     255 </span><span class="lineNoCov">          0 :         default: {</span>
+<span class="lineNum">     256 </span>            :                 throw NotImplementedException(
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :                     &quot;Join quals type %d not supported yet...\n&quot;, root-&gt;larg-&gt;type);</span>
+<span class="lineNum">     258 </span>            :         }
+<span class="lineNum">     259 </span>            :         }
+<span class="lineNum">     260 </span><span class="lineCov">         36 :         return move(result);</span>
+<a name="261"><span class="lineNum">     261 </span>            : }</a>
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span><span class="lineCov">      11397 : unique_ptr&lt;TableRef&gt; TransformTableRefNode(Node *n) {</span>
+<span class="lineNum">     264 </span><span class="lineCov">      11397 :         switch (n-&gt;type) {</span>
+<span class="lineNum">     265 </span><span class="lineCov">      11170 :         case T_RangeVar:</span>
+<span class="lineNum">     266 </span><span class="lineCov">      11170 :                 return TransformRangeVar(reinterpret_cast&lt;RangeVar *&gt;(n));</span>
+<span class="lineNum">     267 </span><span class="lineCov">         36 :         case T_JoinExpr:</span>
+<span class="lineNum">     268 </span><span class="lineCov">         36 :                 return TransformJoin(reinterpret_cast&lt;JoinExpr *&gt;(n));</span>
+<span class="lineNum">     269 </span><span class="lineCov">        182 :         case T_RangeSubselect:</span>
+<span class="lineNum">     270 </span><span class="lineCov">        182 :                 return TransformRangeSubselect(reinterpret_cast&lt;RangeSubselect *&gt;(n));</span>
+<span class="lineNum">     271 </span><span class="lineCov">          9 :         case T_RangeFunction:</span>
+<span class="lineNum">     272 </span><span class="lineCov">          9 :                 return TransformRangeFunction(reinterpret_cast&lt;RangeFunction *&gt;(n));</span>
+<span class="lineNum">     273 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     274 </span>            :                 throw NotImplementedException(&quot;From Type %d not supported yet...&quot;,
+<span class="lineNum">     275 </span><span class="lineNoCov">          0 :                                               n-&gt;type);</span>
+<span class="lineNum">     276 </span>            :         }
+<a name="277"><span class="lineNum">     277 </span>            : }</a>
+<span class="lineNum">     278 </span>            : 
+<span class="lineNum">     279 </span><span class="lineCov">      11071 : unique_ptr&lt;TableRef&gt; TransformFrom(List *root) {</span>
+<span class="lineNum">     280 </span><span class="lineCov">      11071 :         if (!root) {</span>
+<span class="lineNum">     281 </span><span class="lineCov">        168 :                 return nullptr;</span>
+<span class="lineNum">     282 </span>            :         }
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span><span class="lineCov">      10903 :         if (root-&gt;length &gt; 1) {</span>
+<span class="lineNum">     285 </span>            :                 // Cross Product
+<span class="lineNum">     286 </span><span class="lineCov">        340 :                 auto result = make_unique&lt;CrossProductRef&gt;();</span>
+<span class="lineNum">     287 </span><span class="lineCov">        170 :                 CrossProductRef *cur_root = result.get();</span>
+<span class="lineNum">     288 </span><span class="lineCov">        762 :                 for (auto node = root-&gt;head; node != nullptr; node = node-&gt;next) {</span>
+<span class="lineNum">     289 </span><span class="lineCov">        592 :                         Node *n = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
+<span class="lineNum">     290 </span><span class="lineCov">       1184 :                         unique_ptr&lt;TableRef&gt; next = TransformTableRefNode(n);</span>
+<span class="lineNum">     291 </span><span class="lineCov">        592 :                         if (!cur_root-&gt;left) {</span>
+<span class="lineNum">     292 </span><span class="lineCov">        170 :                                 cur_root-&gt;left = move(next);</span>
+<span class="lineNum">     293 </span><span class="lineCov">        422 :                         } else if (!cur_root-&gt;right) {</span>
+<span class="lineNum">     294 </span><span class="lineCov">        170 :                                 cur_root-&gt;right = move(next);</span>
+<span class="lineNum">     295 </span>            :                         } else {
+<span class="lineNum">     296 </span><span class="lineCov">        504 :                                 auto old_res = move(result);</span>
+<span class="lineNum">     297 </span><span class="lineCov">        252 :                                 result = make_unique&lt;CrossProductRef&gt;();</span>
+<span class="lineNum">     298 </span><span class="lineCov">        252 :                                 result-&gt;left = move(old_res);</span>
+<span class="lineNum">     299 </span><span class="lineCov">        252 :                                 result-&gt;right = move(next);</span>
+<span class="lineNum">     300 </span><span class="lineCov">        252 :                                 cur_root = result.get();</span>
+<span class="lineNum">     301 </span>            :                         }
+<span class="lineNum">     302 </span>            :                 }
+<span class="lineNum">     303 </span><span class="lineCov">        170 :                 return move(result);</span>
+<span class="lineNum">     304 </span>            :         }
+<span class="lineNum">     305 </span>            : 
+<span class="lineNum">     306 </span><span class="lineCov">      10733 :         Node *n = reinterpret_cast&lt;Node *&gt;(root-&gt;head-&gt;data.ptr_value);</span>
+<span class="lineNum">     307 </span><span class="lineCov">      10733 :         return TransformTableRefNode(n);</span>
+<a name="308"><span class="lineNum">     308 </span>            : }</a>
+<span class="lineNum">     309 </span>            : 
+<span class="lineNum">     310 </span><span class="lineCov">     100493 : unique_ptr&lt;Expression&gt; TransformColumnRef(ColumnRef *root) {</span>
+<span class="lineNum">     311 </span><span class="lineCov">     100493 :         List *fields = root-&gt;fields;</span>
+<span class="lineNum">     312 </span><span class="lineCov">     100493 :         switch ((reinterpret_cast&lt;Node *&gt;(fields-&gt;head-&gt;data.ptr_value))-&gt;type) {</span>
+<span class="lineNum">     313 </span><span class="lineCov">     100352 :         case T_String: {</span>
+<span class="lineNum">     314 </span><span class="lineCov">     100352 :                 if (fields-&gt;length &lt; 1 || fields-&gt;length &gt; 2) {</span>
+<span class="lineNum">     315 </span><span class="lineNoCov">          0 :                         throw ParserException(&quot;Unexpected field length&quot;);</span>
+<span class="lineNum">     316 </span>            :                 }
+<span class="lineNum">     317 </span><span class="lineCov">     200704 :                 string column_name, table_name;</span>
+<span class="lineNum">     318 </span><span class="lineCov">     100352 :                 if (fields-&gt;length == 1) {</span>
+<span class="lineNum">     319 </span><span class="lineCov">      92072 :                         column_name =</span>
+<span class="lineNum">     320 </span><span class="lineCov">     184144 :                             string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)</span>
+<span class="lineNum">     321 </span><span class="lineCov">      92072 :                                        -&gt;val.str);</span>
+<span class="lineNum">     322 </span>            :                 } else {
+<span class="lineNum">     323 </span><span class="lineCov">       8280 :                         table_name =</span>
+<span class="lineNum">     324 </span><span class="lineCov">      16560 :                             string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)</span>
+<span class="lineNum">     325 </span><span class="lineCov">       8280 :                                        -&gt;val.str);</span>
+<span class="lineNum">     326 </span><span class="lineCov">      16560 :                         column_name = string(</span>
+<span class="lineNum">     327 </span><span class="lineCov">       8280 :                             reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;next-&gt;data.ptr_value)</span>
+<span class="lineNum">     328 </span><span class="lineCov">       8280 :                                 -&gt;val.str);</span>
+<span class="lineNum">     329 </span>            :                 }
+<span class="lineNum">     330 </span><span class="lineCov">     100352 :                 return make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
+<span class="lineNum">     331 </span>            :         }
+<span class="lineNum">     332 </span><span class="lineCov">        141 :         case T_A_Star: {</span>
+<span class="lineNum">     333 </span><span class="lineCov">        141 :                 return make_unique&lt;StarExpression&gt;();</span>
+<span class="lineNum">     334 </span>            :         }
+<span class="lineNum">     335 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;ColumnRef not implemented!&quot;);</span>
+<span class="lineNum">     337 </span>            :         }
+<a name="338"><span class="lineNum">     338 </span>            : }</a>
+<span class="lineNum">     339 </span>            : 
+<span class="lineNum">     340 </span><span class="lineCov">      89620 : unique_ptr&lt;Expression&gt; TransformValue(value val) {</span>
+<span class="lineNum">     341 </span><span class="lineCov">      89620 :         switch (val.type) {</span>
+<span class="lineNum">     342 </span><span class="lineCov">      88370 :         case T_Integer:</span>
+<span class="lineNum">     343 </span><span class="lineCov">      88370 :                 return make_unique&lt;ConstantExpression&gt;(Value::INTEGER(val.val.ival));</span>
+<span class="lineNum">     344 </span><span class="lineCov">       1039 :         case T_BitString: // FIXME: this should actually convert to BLOB</span>
+<span class="lineNum">     345 </span>            :         case T_String:
+<span class="lineNum">     346 </span><span class="lineCov">       1039 :                 return make_unique&lt;ConstantExpression&gt;(Value(string(val.val.str)));</span>
+<span class="lineNum">     347 </span><span class="lineCov">         59 :         case T_Float:</span>
+<span class="lineNum">     348 </span><span class="lineCov">        177 :                 return make_unique&lt;ConstantExpression&gt;(</span>
+<span class="lineNum">     349 </span><span class="lineCov">        236 :                     Value(stod(string(val.val.str))));</span>
+<span class="lineNum">     350 </span><span class="lineCov">        152 :         case T_Null:</span>
+<span class="lineNum">     351 </span><span class="lineCov">        152 :                 return make_unique&lt;ConstantExpression&gt;();</span>
+<span class="lineNum">     352 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     353 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Value not implemented!&quot;);</span>
+<span class="lineNum">     354 </span>            :         }
+<a name="355"><span class="lineNum">     355 </span>            : }</a>
+<span class="lineNum">     356 </span>            : 
+<span class="lineNum">     357 </span><span class="lineCov">      89620 : unique_ptr&lt;Expression&gt; TransformConstant(A_Const *c) {</span>
+<span class="lineNum">     358 </span><span class="lineCov">      89620 :         return TransformValue(c-&gt;val);</span>
+<span class="lineNum">     359 </span>            : }
+<span class="lineNum">     360 </span>            : 
+<a name="361"><span class="lineNum">     361 </span>            : // COALESCE(a,b,c) returns the first argument that is NOT NULL, so</a>
+<span class="lineNum">     362 </span>            : // rewrite into CASE(a IS NOT NULL, a, CASE(b IS NOT NULL, b, c))
+<span class="lineNum">     363 </span><span class="lineCov">        143 : unique_ptr&lt;Expression&gt; TransformCoalesce(A_Expr *root) {</span>
+<span class="lineNum">     364 </span><span class="lineCov">        143 :         if (!root) {</span>
+<span class="lineNum">     365 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     366 </span>            :         }
+<span class="lineNum">     367 </span><span class="lineCov">        143 :         auto coalesce_args = reinterpret_cast&lt;List *&gt;(root-&gt;lexpr);</span>
+<span class="lineNum">     368 </span>            :         // TODO: this is somewhat duplicated from the CASE rewrite below, perhaps
+<span class="lineNum">     369 </span>            :         // they can be merged
+<span class="lineNum">     370 </span><span class="lineCov">        286 :         auto exp_root = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">     371 </span><span class="lineCov">        143 :         Expression *cur_root = exp_root.get();</span>
+<span class="lineNum">     372 </span><span class="lineCov">        143 :         Expression *next_root = nullptr;</span>
+<span class="lineNum">     373 </span>            : 
+<span class="lineNum">     374 </span><span class="lineCov">        615 :         for (auto cell = coalesce_args-&gt;head; cell &amp;&amp; cell-&gt;next;</span>
+<span class="lineNum">     375 </span><span class="lineCov">        472 :              cell = cell-&gt;next) {</span>
+<span class="lineNum">     376 </span>            :                 // we need this twice
+<span class="lineNum">     377 </span><span class="lineCov">        472 :                 auto value_expr =</span>
+<span class="lineNum">     378 </span><span class="lineCov">        944 :                     TransformExpression(reinterpret_cast&lt;Node *&gt;(cell-&gt;data.ptr_value));</span>
+<span class="lineNum">     379 </span><span class="lineCov">        472 :                 auto res_true =</span>
+<span class="lineNum">     380 </span><span class="lineCov">        944 :                     TransformExpression(reinterpret_cast&lt;Node *&gt;(cell-&gt;data.ptr_value));</span>
+<span class="lineNum">     381 </span>            : 
+<span class="lineNum">     382 </span><span class="lineCov">        472 :                 auto test = unique_ptr&lt;Expression&gt;(</span>
+<span class="lineNum">     383 </span>            :                     new OperatorExpression(ExpressionType::OPERATOR_IS_NOT_NULL,
+<span class="lineNum">     384 </span><span class="lineCov">       1888 :                                            TypeId::BOOLEAN, move(value_expr)));</span>
+<span class="lineNum">     385 </span>            : 
+<span class="lineNum">     386 </span>            :                 // the last argument does not need its own CASE because if we get there
+<span class="lineNum">     387 </span>            :                 // we might as well return it directly
+<span class="lineNum">     388 </span><span class="lineCov">        472 :                 unique_ptr&lt;Expression&gt; res_false;</span>
+<span class="lineNum">     389 </span><span class="lineCov">        472 :                 if (cell-&gt;next-&gt;next == nullptr) {</span>
+<span class="lineNum">     390 </span><span class="lineCov">        286 :                         res_false = TransformExpression(</span>
+<span class="lineNum">     391 </span><span class="lineCov">        143 :                             reinterpret_cast&lt;Node *&gt;(cell-&gt;next-&gt;data.ptr_value));</span>
+<span class="lineNum">     392 </span>            :                 } else {
+<span class="lineNum">     393 </span><span class="lineCov">        329 :                         res_false = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">     394 </span><span class="lineCov">        329 :                         next_root = res_false.get();</span>
+<span class="lineNum">     395 </span>            :                 }
+<span class="lineNum">     396 </span><span class="lineCov">        472 :                 cur_root-&gt;AddChild(move(test));</span>
+<span class="lineNum">     397 </span><span class="lineCov">        472 :                 cur_root-&gt;AddChild(move(res_true));</span>
+<span class="lineNum">     398 </span><span class="lineCov">        472 :                 cur_root-&gt;AddChild(move(res_false));</span>
+<span class="lineNum">     399 </span><span class="lineCov">        472 :                 cur_root = next_root;</span>
+<span class="lineNum">     400 </span>            :         }
+<span class="lineNum">     401 </span><span class="lineCov">        143 :         return exp_root;</span>
+<a name="402"><span class="lineNum">     402 </span>            : }</a>
+<span class="lineNum">     403 </span>            : 
+<span class="lineNum">     404 </span><span class="lineCov">        216 : unique_ptr&lt;Expression&gt; TransformNullTest(NullTest *root) {</span>
+<span class="lineNum">     405 </span><span class="lineCov">        216 :         if (!root) {</span>
+<span class="lineNum">     406 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     407 </span>            :         }
+<span class="lineNum">     408 </span><span class="lineCov">        432 :         auto arg = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;arg));</span>
+<span class="lineNum">     409 </span><span class="lineCov">        216 :         if (root-&gt;argisrow) {</span>
+<span class="lineNum">     410 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;IS NULL argisrow&quot;);</span>
+<span class="lineNum">     411 </span>            :         }
+<span class="lineNum">     412 </span><span class="lineCov">        432 :         ExpressionType expr_type = (root-&gt;nulltesttype == IS_NULL)</span>
+<span class="lineNum">     413 </span><span class="lineCov">        216 :                                        ? ExpressionType::OPERATOR_IS_NULL</span>
+<span class="lineNum">     414 </span>            :                                        : ExpressionType::OPERATOR_IS_NOT_NULL;
+<span class="lineNum">     415 </span>            : 
+<span class="lineNum">     416 </span>            :         return unique_ptr&lt;Expression&gt;(
+<span class="lineNum">     417 </span><span class="lineCov">        216 :             new OperatorExpression(expr_type, TypeId::BOOLEAN, move(arg)));</span>
+<a name="418"><span class="lineNum">     418 </span>            : }</a>
+<span class="lineNum">     419 </span>            : 
+<span class="lineNum">     420 </span><span class="lineCov">      72481 : unique_ptr&lt;Expression&gt; TransformAExpr(A_Expr *root) {</span>
+<span class="lineNum">     421 </span><span class="lineCov">      72481 :         if (!root) {</span>
+<span class="lineNum">     422 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     423 </span>            :         }
+<span class="lineNum">     424 </span><span class="lineCov">      72481 :         ExpressionType target_type;</span>
+<span class="lineNum">     425 </span><span class="lineCov">      72481 :         auto name = string(</span>
+<span class="lineNum">     426 </span><span class="lineCov">     217443 :             (reinterpret_cast&lt;value *&gt;(root-&gt;name-&gt;head-&gt;data.ptr_value))-&gt;val.str);</span>
+<span class="lineNum">     427 </span>            : 
+<span class="lineNum">     428 </span><span class="lineCov">      72481 :         switch (root-&gt;kind) {</span>
+<span class="lineNum">     429 </span><span class="lineNoCov">          0 :         case AEXPR_DISTINCT:</span>
+<span class="lineNum">     430 </span><span class="lineNoCov">          0 :                 target_type = ExpressionType::COMPARE_DISTINCT_FROM;</span>
+<span class="lineNum">     431 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     432 </span><span class="lineCov">         76 :         case AEXPR_IN: {</span>
+<span class="lineNum">     433 </span><span class="lineCov">        152 :                 auto left_expr = TransformExpression(root-&gt;lexpr);</span>
+<span class="lineNum">     434 </span><span class="lineCov">         76 :                 ExpressionType operator_type;</span>
+<span class="lineNum">     435 </span>            :                 // this looks very odd, but seems to be the way to find out its NOT IN
+<span class="lineNum">     436 </span><span class="lineCov">         76 :                 if (name == &quot;&lt;&gt;&quot;) {</span>
+<span class="lineNum">     437 </span>            :                         // NOT IN
+<span class="lineNum">     438 </span><span class="lineCov">          6 :                         operator_type = ExpressionType::COMPARE_NOT_IN;</span>
+<span class="lineNum">     439 </span>            :                 } else {
+<span class="lineNum">     440 </span>            :                         // IN
+<span class="lineNum">     441 </span><span class="lineCov">         70 :                         operator_type = ExpressionType::COMPARE_IN;</span>
+<span class="lineNum">     442 </span>            :                 }
+<span class="lineNum">     443 </span><span class="lineCov">         76 :                 auto result = make_unique&lt;OperatorExpression&gt;(</span>
+<span class="lineNum">     444 </span><span class="lineCov">        152 :                     operator_type, TypeId::BOOLEAN, move(left_expr));</span>
+<span class="lineNum">     445 </span><span class="lineCov">         76 :                 TransformExpressionList((List *)root-&gt;rexpr, result-&gt;children);</span>
+<span class="lineNum">     446 </span><span class="lineCov">         76 :                 return move(result);</span>
+<span class="lineNum">     447 </span>            :         } break;
+<span class="lineNum">     448 </span>            :         // rewrite NULLIF(a, b) into CASE WHEN a=b THEN NULL ELSE a END
+<span class="lineNum">     449 </span><span class="lineCov">          7 :         case AEXPR_NULLIF: {</span>
+<span class="lineNum">     450 </span><span class="lineCov">         14 :                 auto case_expr = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">     451 </span><span class="lineCov">          7 :                 auto test_expr = unique_ptr&lt;Expression&gt;(new ComparisonExpression(</span>
+<span class="lineNum">     452 </span><span class="lineCov">         14 :                     ExpressionType::COMPARE_EQUAL, TransformExpression(root-&gt;lexpr),</span>
+<span class="lineNum">     453 </span><span class="lineCov">         28 :                     TransformExpression(root-&gt;rexpr)));</span>
+<span class="lineNum">     454 </span><span class="lineCov">          7 :                 case_expr-&gt;AddChild(move(test_expr));</span>
+<span class="lineNum">     455 </span><span class="lineCov">          7 :                 auto null_expr =</span>
+<span class="lineNum">     456 </span><span class="lineCov">         21 :                     unique_ptr&lt;Expression&gt;(new ConstantExpression(Value()));</span>
+<span class="lineNum">     457 </span><span class="lineCov">          7 :                 case_expr-&gt;AddChild(move(null_expr));</span>
+<span class="lineNum">     458 </span><span class="lineCov">          7 :                 case_expr-&gt;AddChild(TransformExpression(root-&gt;lexpr));</span>
+<span class="lineNum">     459 </span><span class="lineCov">          7 :                 return case_expr;</span>
+<span class="lineNum">     460 </span>            :         } break;
+<span class="lineNum">     461 </span>            :         // rewrite (NOT) X BETWEEN A AND B into (NOT) AND(GREATERTHANOREQUALTO(X,
+<span class="lineNum">     462 </span>            :         // A), LESSTHANOREQUALTO(X, B))
+<span class="lineNum">     463 </span><span class="lineCov">       2453 :         case AEXPR_BETWEEN:</span>
+<span class="lineNum">     464 </span>            :         case AEXPR_NOT_BETWEEN: {
+<span class="lineNum">     465 </span><span class="lineCov">       2453 :                 auto between_args = reinterpret_cast&lt;List *&gt;(root-&gt;rexpr);</span>
+<span class="lineNum">     466 </span>            : 
+<span class="lineNum">     467 </span><span class="lineCov">       2453 :                 if (between_args-&gt;length != 2 || !between_args-&gt;head-&gt;data.ptr_value ||</span>
+<span class="lineNum">     468 </span><span class="lineCov">       2453 :                     !between_args-&gt;tail-&gt;data.ptr_value) {</span>
+<span class="lineNum">     469 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;(NOT) BETWEEN needs two args&quot;);</span>
+<span class="lineNum">     470 </span>            :                 }
+<span class="lineNum">     471 </span>            : 
+<span class="lineNum">     472 </span><span class="lineCov">       2453 :                 auto between_left = TransformExpression(</span>
+<span class="lineNum">     473 </span><span class="lineCov">       4906 :                     reinterpret_cast&lt;Node *&gt;(between_args-&gt;head-&gt;data.ptr_value));</span>
+<span class="lineNum">     474 </span><span class="lineCov">       2453 :                 auto between_right = TransformExpression(</span>
+<span class="lineNum">     475 </span><span class="lineCov">       4906 :                     reinterpret_cast&lt;Node *&gt;(between_args-&gt;tail-&gt;data.ptr_value));</span>
+<span class="lineNum">     476 </span>            : 
+<span class="lineNum">     477 </span><span class="lineCov">       2453 :                 auto compare_left = make_unique&lt;ComparisonExpression&gt;(</span>
+<span class="lineNum">     478 </span><span class="lineCov">       2453 :                     ExpressionType::COMPARE_GREATERTHANOREQUALTO,</span>
+<span class="lineNum">     479 </span><span class="lineCov">       7359 :                     TransformExpression(root-&gt;lexpr), move(between_left));</span>
+<span class="lineNum">     480 </span><span class="lineCov">       2453 :                 auto compare_right = make_unique&lt;ComparisonExpression&gt;(</span>
+<span class="lineNum">     481 </span><span class="lineCov">       2453 :                     ExpressionType::COMPARE_LESSTHANOREQUALTO,</span>
+<span class="lineNum">     482 </span><span class="lineCov">       7359 :                     TransformExpression(root-&gt;lexpr), move(between_right));</span>
+<span class="lineNum">     483 </span><span class="lineCov">       2453 :                 auto compare_between = make_unique&lt;ConjunctionExpression&gt;(</span>
+<span class="lineNum">     484 </span><span class="lineCov">       4906 :                     ExpressionType::CONJUNCTION_AND, move(compare_left),</span>
+<span class="lineNum">     485 </span><span class="lineCov">       7359 :                     move(compare_right));</span>
+<span class="lineNum">     486 </span><span class="lineCov">       2453 :                 if (root-&gt;kind == AEXPR_BETWEEN) {</span>
+<span class="lineNum">     487 </span><span class="lineCov">       1681 :                         return move(compare_between);</span>
+<span class="lineNum">     488 </span>            :                 } else {
+<span class="lineNum">     489 </span><span class="lineCov">       2316 :                         return make_unique&lt;OperatorExpression&gt;(</span>
+<span class="lineNum">     490 </span><span class="lineCov">       1544 :                             ExpressionType::OPERATOR_NOT, TypeId::BOOLEAN,</span>
+<span class="lineNum">     491 </span><span class="lineCov">       3088 :                             move(compare_between), nullptr);</span>
+<span class="lineNum">     492 </span>            :                 }
+<span class="lineNum">     493 </span>            :         } break;
+<span class="lineNum">     494 </span><span class="lineCov">      69945 :         default: {</span>
+<span class="lineNum">     495 </span><span class="lineCov">      69945 :                 target_type = StringToExpressionType(name);</span>
+<span class="lineNum">     496 </span><span class="lineCov">      69945 :                 if (target_type == ExpressionType::INVALID) {</span>
+<span class="lineNum">     497 </span>            :                         throw NotImplementedException(
+<span class="lineNum">     498 </span><span class="lineNoCov">          0 :                             &quot;A_Expr transform not implemented %s.&quot;, name.c_str());</span>
+<span class="lineNum">     499 </span>            :                 }
+<span class="lineNum">     500 </span>            :         }
+<span class="lineNum">     501 </span>            :         }
+<span class="lineNum">     502 </span>            : 
+<span class="lineNum">     503 </span>            :         // continuing default case
+<span class="lineNum">     504 </span><span class="lineCov">     139890 :         auto left_expr = TransformExpression(root-&gt;lexpr);</span>
+<span class="lineNum">     505 </span><span class="lineCov">     139890 :         auto right_expr = TransformExpression(root-&gt;rexpr);</span>
+<span class="lineNum">     506 </span><span class="lineCov">      69945 :         if (!left_expr) {</span>
+<span class="lineNum">     507 </span><span class="lineCov">          3 :                 switch (target_type) {</span>
+<span class="lineNum">     508 </span><span class="lineCov">          3 :                 case ExpressionType::OPERATOR_ADD:</span>
+<span class="lineNum">     509 </span><span class="lineCov">          3 :                         return right_expr;</span>
+<span class="lineNum">     510 </span><span class="lineNoCov">          0 :                 case ExpressionType::OPERATOR_SUBTRACT:</span>
+<span class="lineNum">     511 </span><span class="lineNoCov">          0 :                         target_type = ExpressionType::OPERATOR_MULTIPLY;</span>
+<span class="lineNum">     512 </span><span class="lineNoCov">          0 :                         left_expr = make_unique&lt;ConstantExpression&gt;(Value(-1));</span>
+<span class="lineNum">     513 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     514 </span><span class="lineNoCov">          0 :                 default:</span>
+<span class="lineNum">     515 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Unknown unary operator&quot;);</span>
+<span class="lineNum">     516 </span>            :                 }
+<span class="lineNum">     517 </span>            :         }
+<span class="lineNum">     518 </span>            : 
+<span class="lineNum">     519 </span><span class="lineCov">     139884 :         unique_ptr&lt;Expression&gt; result = nullptr;</span>
+<span class="lineNum">     520 </span><span class="lineCov">      69942 :         int type_id = static_cast&lt;int&gt;(target_type);</span>
+<span class="lineNum">     521 </span><span class="lineCov">      69942 :         if (type_id &gt;= static_cast&lt;int&gt;(ExpressionType::BINOP_BOUNDARY_START) &amp;&amp;</span>
+<span class="lineNum">     522 </span>            :             type_id &lt;= static_cast&lt;int&gt;(ExpressionType::BINOP_BOUNDARY_END)) {
+<span class="lineNum">     523 </span>            :                 // binary operator
+<span class="lineNum">     524 </span><span class="lineCov">     198148 :                 result = make_unique&lt;OperatorExpression&gt;(</span>
+<span class="lineNum">     525 </span><span class="lineCov">     148611 :                     target_type, TypeId::INVALID, move(left_expr), move(right_expr));</span>
+<span class="lineNum">     526 </span><span class="lineCov">      20405 :         } else if (type_id &gt;=</span>
+<span class="lineNum">     527 </span><span class="lineCov">      20405 :                        static_cast&lt;int&gt;(ExpressionType::COMPARE_BOUNDARY_START) &amp;&amp;</span>
+<span class="lineNum">     528 </span>            :                    type_id &lt;=
+<span class="lineNum">     529 </span>            :                        static_cast&lt;int&gt;(ExpressionType::COMPARE_BOUNDARY_END)) {
+<span class="lineNum">     530 </span><span class="lineCov">      61215 :                 result = make_unique&lt;ComparisonExpression&gt;(target_type, move(left_expr),</span>
+<span class="lineNum">     531 </span><span class="lineCov">      40810 :                                                            move(right_expr));</span>
+<span class="lineNum">     532 </span>            :         } else {
+<span class="lineNum">     533 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;A_Expr transform not implemented.&quot;);</span>
+<span class="lineNum">     534 </span>            :         }
+<span class="lineNum">     535 </span><span class="lineCov">      69942 :         return result;</span>
+<a name="536"><span class="lineNum">     536 </span>            : }</a>
+<span class="lineNum">     537 </span>            : 
+<span class="lineNum">     538 </span><span class="lineCov">       6714 : unique_ptr&lt;Expression&gt; TransformFuncCall(FuncCall *root) {</span>
+<span class="lineNum">     539 </span><span class="lineCov">       6714 :         auto name = root-&gt;funcname;</span>
+<span class="lineNum">     540 </span><span class="lineCov">      13428 :         string schema, function_name;</span>
+<span class="lineNum">     541 </span><span class="lineCov">       6714 :         if (name-&gt;length == 2) {</span>
+<span class="lineNum">     542 </span>            :                 // schema + name
+<span class="lineNum">     543 </span><span class="lineCov">        101 :                 schema = reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
+<span class="lineNum">     544 </span>            :                 function_name =
+<span class="lineNum">     545 </span><span class="lineCov">        101 :                     reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;next-&gt;data.ptr_value)</span>
+<span class="lineNum">     546 </span><span class="lineCov">        101 :                         -&gt;val.str;</span>
+<span class="lineNum">     547 </span>            :         } else {
+<span class="lineNum">     548 </span>            :                 // unqualified name
+<span class="lineNum">     549 </span><span class="lineCov">       6613 :                 schema = DEFAULT_SCHEMA;</span>
+<span class="lineNum">     550 </span>            :                 function_name =
+<span class="lineNum">     551 </span><span class="lineCov">       6613 :                     reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
+<span class="lineNum">     552 </span>            :         }
+<span class="lineNum">     553 </span>            : 
+<span class="lineNum">     554 </span><span class="lineCov">      13428 :         auto lowercase_name = StringUtil::Lower(function_name);</span>
+<span class="lineNum">     555 </span><span class="lineCov">       6714 :         if (!IsAggregateFunction(lowercase_name)) {</span>
+<span class="lineNum">     556 </span>            :                 // Normal functions (i.e. built-in functions or UDFs)
+<span class="lineNum">     557 </span><span class="lineCov">       4254 :                 vector&lt;unique_ptr&lt;Expression&gt;&gt; children;</span>
+<span class="lineNum">     558 </span><span class="lineCov">       2127 :                 if (root-&gt;args != nullptr) {</span>
+<span class="lineNum">     559 </span><span class="lineCov">       4403 :                         for (auto node = root-&gt;args-&gt;head; node != nullptr;</span>
+<span class="lineNum">     560 </span><span class="lineCov">       2276 :                              node = node-&gt;next) {</span>
+<span class="lineNum">     561 </span><span class="lineCov">       2276 :                                 auto child_expr =</span>
+<span class="lineNum">     562 </span><span class="lineCov">       4552 :                                     TransformExpression((Node *)node-&gt;data.ptr_value);</span>
+<span class="lineNum">     563 </span><span class="lineCov">       2276 :                                 children.push_back(move(child_expr));</span>
+<span class="lineNum">     564 </span>            :                         }
+<span class="lineNum">     565 </span>            :                 }
+<span class="lineNum">     566 </span><span class="lineCov">       4254 :                 return make_unique&lt;FunctionExpression&gt;(schema, function_name.c_str(),</span>
+<span class="lineNum">     567 </span><span class="lineCov">       4254 :                                                        children);</span>
+<span class="lineNum">     568 </span>            :         } else {
+<span class="lineNum">     569 </span>            :                 // Aggregate function
+<span class="lineNum">     570 </span><span class="lineCov">       4587 :                 auto agg_fun_type =</span>
+<span class="lineNum">     571 </span><span class="lineCov">       4587 :                     StringToExpressionType(&quot;AGGREGATE_&quot; + function_name);</span>
+<span class="lineNum">     572 </span>            :                 // if (root-&gt;agg_distinct) {
+<span class="lineNum">     573 </span>            :                 //      throw NotImplementedException(
+<span class="lineNum">     574 </span>            :                 //          &quot;AGGREGATE DISTINCT not supported yet!&quot;);
+<span class="lineNum">     575 </span>            :                 // }
+<span class="lineNum">     576 </span><span class="lineCov">       4587 :                 if (root-&gt;agg_star) {</span>
+<span class="lineNum">     577 </span><span class="lineCov">       9651 :                         return make_unique&lt;AggregateExpression&gt;(</span>
+<span class="lineNum">     578 </span><span class="lineCov">      12868 :                             agg_fun_type, make_unique&lt;StarExpression&gt;());</span>
+<span class="lineNum">     579 </span>            :                 } else {
+<span class="lineNum">     580 </span><span class="lineCov">       1370 :                         if (root-&gt;agg_distinct) {</span>
+<span class="lineNum">     581 </span><span class="lineCov">         17 :                                 switch (agg_fun_type) {</span>
+<span class="lineNum">     582 </span><span class="lineCov">         15 :                                 case ExpressionType::AGGREGATE_COUNT:</span>
+<span class="lineNum">     583 </span><span class="lineCov">         15 :                                         agg_fun_type = ExpressionType::AGGREGATE_COUNT_DISTINCT;</span>
+<span class="lineNum">     584 </span><span class="lineCov">         15 :                                         break;</span>
+<span class="lineNum">     585 </span><span class="lineCov">          2 :                                 case ExpressionType::AGGREGATE_SUM:</span>
+<span class="lineNum">     586 </span><span class="lineCov">          2 :                                         agg_fun_type = ExpressionType::AGGREGATE_SUM_DISTINCT;</span>
+<span class="lineNum">     587 </span><span class="lineCov">          2 :                                         break;</span>
+<span class="lineNum">     588 </span><span class="lineNoCov">          0 :                                 default:</span>
+<span class="lineNum">     589 </span>            :                                         // makes no difference for other aggregation types
+<span class="lineNum">     590 </span><span class="lineNoCov">          0 :                                         break;</span>
+<span class="lineNum">     591 </span>            :                                 }
+<span class="lineNum">     592 </span>            :                         }
+<span class="lineNum">     593 </span><span class="lineCov">       1370 :                         if (!root-&gt;args) {</span>
+<span class="lineNum">     594 </span>            :                                 throw NotImplementedException(
+<span class="lineNum">     595 </span><span class="lineNoCov">          0 :                                     &quot;Aggregation over zero columns not supported!&quot;);</span>
+<span class="lineNum">     596 </span><span class="lineCov">       1370 :                         } else if (root-&gt;args-&gt;length &lt; 2) {</span>
+<span class="lineNum">     597 </span><span class="lineCov">       1370 :                                 if (agg_fun_type == ExpressionType::AGGREGATE_AVG) {</span>
+<span class="lineNum">     598 </span>            :                                         // rewrite AVG(a) to SUM(a) / COUNT(a)
+<span class="lineNum">     599 </span>            :                                         // first create the SUM
+<span class="lineNum">     600 </span><span class="lineCov">       1016 :                                         auto sum = make_unique&lt;AggregateExpression&gt;(</span>
+<span class="lineNum">     601 </span><span class="lineCov">       1016 :                                             root-&gt;agg_distinct</span>
+<span class="lineNum">     602 </span><span class="lineCov">       2032 :                                                 ? ExpressionType::AGGREGATE_SUM_DISTINCT</span>
+<span class="lineNum">     603 </span>            :                                                 : ExpressionType::AGGREGATE_SUM,
+<span class="lineNum">     604 </span><span class="lineCov">       1016 :                                             TransformExpression(</span>
+<span class="lineNum">     605 </span><span class="lineCov">       3048 :                                                 (Node *)root-&gt;args-&gt;head-&gt;data.ptr_value));</span>
+<span class="lineNum">     606 </span>            :                                         // now create the count
+<span class="lineNum">     607 </span><span class="lineCov">       1016 :                                         auto count = make_unique&lt;AggregateExpression&gt;(</span>
+<span class="lineNum">     608 </span><span class="lineCov">       1016 :                                             root-&gt;agg_distinct</span>
+<span class="lineNum">     609 </span><span class="lineCov">       2032 :                                                 ? ExpressionType::AGGREGATE_COUNT_DISTINCT</span>
+<span class="lineNum">     610 </span>            :                                                 : ExpressionType::AGGREGATE_COUNT,
+<span class="lineNum">     611 </span><span class="lineCov">       1016 :                                             TransformExpression(</span>
+<span class="lineNum">     612 </span><span class="lineCov">       3048 :                                                 (Node *)root-&gt;args-&gt;head-&gt;data.ptr_value));</span>
+<span class="lineNum">     613 </span>            :                                         // cast both to decimal
+<span class="lineNum">     614 </span><span class="lineCov">       1016 :                                         auto sum_cast =</span>
+<span class="lineNum">     615 </span><span class="lineCov">       2032 :                                             make_unique&lt;CastExpression&gt;(TypeId::DECIMAL, move(sum));</span>
+<span class="lineNum">     616 </span><span class="lineCov">       1016 :                                         auto count_cast = make_unique&lt;CastExpression&gt;(</span>
+<span class="lineNum">     617 </span><span class="lineCov">       2032 :                                             TypeId::DECIMAL, move(count));</span>
+<span class="lineNum">     618 </span>            :                                         // create the divide operator
+<span class="lineNum">     619 </span><span class="lineCov">       2032 :                                         return make_unique&lt;OperatorExpression&gt;(</span>
+<span class="lineNum">     620 </span><span class="lineCov">       2032 :                                             ExpressionType::OPERATOR_DIVIDE, TypeId::DECIMAL,</span>
+<span class="lineNum">     621 </span><span class="lineCov">       2032 :                                             move(sum_cast), move(count_cast));</span>
+<span class="lineNum">     622 </span>            :                                 } else {
+<span class="lineNum">     623 </span><span class="lineCov">        354 :                                         auto child = TransformExpression(</span>
+<span class="lineNum">     624 </span><span class="lineCov">        708 :                                             (Node *)root-&gt;args-&gt;head-&gt;data.ptr_value);</span>
+<span class="lineNum">     625 </span><span class="lineCov">        708 :                                         return make_unique&lt;AggregateExpression&gt;(agg_fun_type,</span>
+<span class="lineNum">     626 </span><span class="lineCov">        708 :                                                                                 move(child));</span>
+<span class="lineNum">     627 </span>            :                                 }
+<span class="lineNum">     628 </span>            :                         } else {
+<span class="lineNum">     629 </span>            :                                 throw NotImplementedException(
+<span class="lineNum">     630 </span><span class="lineNoCov">          0 :                                     &quot;Aggregation over multiple columns not supported yet...\n&quot;);</span>
+<span class="lineNum">     631 </span>            :                         }
+<span class="lineNum">     632 </span>            :                 }
+<span class="lineNum">     633 </span>            :         }
+<a name="634"><span class="lineNum">     634 </span>            : }</a>
+<span class="lineNum">     635 </span>            : 
+<span class="lineNum">     636 </span><span class="lineCov">       3171 : unique_ptr&lt;Expression&gt; TransformCase(CaseExpr *root) {</span>
+<span class="lineNum">     637 </span><span class="lineCov">       3171 :         if (!root) {</span>
+<span class="lineNum">     638 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     639 </span>            :         }
+<span class="lineNum">     640 </span>            :         // CASE expression WHEN value THEN result [WHEN ...] ELSE result uses this,
+<span class="lineNum">     641 </span>            :         // but we rewrite to CASE WHEN expression = value THEN result ... to only
+<span class="lineNum">     642 </span>            :         // have to handle one case downstream.
+<span class="lineNum">     643 </span>            : 
+<span class="lineNum">     644 </span><span class="lineCov">       6342 :         unique_ptr&lt;Expression&gt; def_res;</span>
+<span class="lineNum">     645 </span><span class="lineCov">       3171 :         if (root-&gt;defresult) {</span>
+<span class="lineNum">     646 </span><span class="lineCov">       3170 :                 def_res =</span>
+<span class="lineNum">     647 </span><span class="lineCov">       3170 :                     TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;defresult));</span>
+<span class="lineNum">     648 </span>            :         } else {
+<span class="lineNum">     649 </span><span class="lineCov">          1 :                 def_res = unique_ptr&lt;Expression&gt;(new ConstantExpression(Value()));</span>
+<span class="lineNum">     650 </span>            :         }
+<span class="lineNum">     651 </span>            :         // def_res will be the else part of the innermost case expression
+<span class="lineNum">     652 </span>            : 
+<span class="lineNum">     653 </span>            :         // CASE WHEN e1 THEN r1 WHEN w2 THEN r2 ELSE r3 is rewritten to
+<span class="lineNum">     654 </span>            :         // CASE WHEN e1 THEN r1 ELSE CASE WHEN e2 THEN r2 ELSE r3
+<span class="lineNum">     655 </span>            : 
+<span class="lineNum">     656 </span><span class="lineCov">       6342 :         auto exp_root = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">     657 </span><span class="lineCov">       3171 :         Expression *cur_root = exp_root.get();</span>
+<span class="lineNum">     658 </span><span class="lineCov">       3171 :         Expression *next_root = nullptr;</span>
+<span class="lineNum">     659 </span>            : 
+<span class="lineNum">     660 </span><span class="lineCov">      11669 :         for (auto cell = root-&gt;args-&gt;head; cell != nullptr; cell = cell-&gt;next) {</span>
+<span class="lineNum">     661 </span><span class="lineCov">       8498 :                 CaseWhen *w = reinterpret_cast&lt;CaseWhen *&gt;(cell-&gt;data.ptr_value);</span>
+<span class="lineNum">     662 </span>            : 
+<span class="lineNum">     663 </span><span class="lineCov">      16996 :                 auto test_raw = TransformExpression(reinterpret_cast&lt;Node *&gt;(w-&gt;expr));</span>
+<span class="lineNum">     664 </span><span class="lineCov">      16996 :                 unique_ptr&lt;Expression&gt; test;</span>
+<span class="lineNum">     665 </span>            :                 // TODO: how do we copy those things?
+<span class="lineNum">     666 </span><span class="lineCov">      16996 :                 auto arg = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;arg));</span>
+<span class="lineNum">     667 </span>            : 
+<span class="lineNum">     668 </span><span class="lineCov">       8498 :                 if (arg) {</span>
+<span class="lineNum">     669 </span><span class="lineCov">      21050 :                         test = unique_ptr&lt;Expression&gt;(new ComparisonExpression(</span>
+<span class="lineNum">     670 </span><span class="lineCov">      16840 :                             ExpressionType::COMPARE_EQUAL, move(arg), move(test_raw)));</span>
+<span class="lineNum">     671 </span>            :                 } else {
+<span class="lineNum">     672 </span><span class="lineCov">       4288 :                         test = move(test_raw);</span>
+<span class="lineNum">     673 </span>            :                 }
+<span class="lineNum">     674 </span>            : 
+<span class="lineNum">     675 </span><span class="lineCov">       8498 :                 auto res_true =</span>
+<span class="lineNum">     676 </span><span class="lineCov">      16996 :                     TransformExpression(reinterpret_cast&lt;Node *&gt;(w-&gt;result));</span>
+<span class="lineNum">     677 </span>            : 
+<span class="lineNum">     678 </span><span class="lineCov">       8498 :                 unique_ptr&lt;Expression&gt; res_false;</span>
+<span class="lineNum">     679 </span><span class="lineCov">       8498 :                 if (cell-&gt;next == nullptr) {</span>
+<span class="lineNum">     680 </span><span class="lineCov">       3171 :                         res_false = move(def_res);</span>
+<span class="lineNum">     681 </span>            :                 } else {
+<span class="lineNum">     682 </span><span class="lineCov">       5327 :                         res_false = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">     683 </span><span class="lineCov">       5327 :                         next_root = res_false.get();</span>
+<span class="lineNum">     684 </span>            :                 }
+<span class="lineNum">     685 </span>            : 
+<span class="lineNum">     686 </span><span class="lineCov">       8498 :                 cur_root-&gt;AddChild(move(test));</span>
+<span class="lineNum">     687 </span><span class="lineCov">       8498 :                 cur_root-&gt;AddChild(move(res_true));</span>
+<span class="lineNum">     688 </span><span class="lineCov">       8498 :                 cur_root-&gt;AddChild(move(res_false));</span>
+<span class="lineNum">     689 </span>            : 
+<span class="lineNum">     690 </span><span class="lineCov">       8498 :                 cur_root = next_root;</span>
+<span class="lineNum">     691 </span>            :         }
+<span class="lineNum">     692 </span>            : 
+<span class="lineNum">     693 </span><span class="lineCov">       3171 :         return exp_root;</span>
+<a name="694"><span class="lineNum">     694 </span>            : }</a>
+<span class="lineNum">     695 </span>            : 
+<span class="lineNum">     696 </span><span class="lineCov">       3822 : unique_ptr&lt;Expression&gt; TransformSubquery(SubLink *root) {</span>
+<span class="lineNum">     697 </span><span class="lineCov">       3822 :         if (!root) {</span>
+<span class="lineNum">     698 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     699 </span>            :         }
+<span class="lineNum">     700 </span><span class="lineCov">       7644 :         auto subquery_expr = make_unique&lt;SubqueryExpression&gt;();</span>
+<span class="lineNum">     701 </span><span class="lineCov">       3822 :         subquery_expr-&gt;subquery = TransformSelect(root-&gt;subselect);</span>
+<span class="lineNum">     702 </span><span class="lineCov">       3822 :         if (!subquery_expr-&gt;subquery) {</span>
+<span class="lineNum">     703 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     704 </span>            :         }
+<span class="lineNum">     705 </span>            : 
+<span class="lineNum">     706 </span><span class="lineCov">       3822 :         switch (root-&gt;subLinkType) {</span>
+<span class="lineNum">     707 </span><span class="lineCov">        735 :         case EXISTS_SUBLINK: {</span>
+<span class="lineNum">     708 </span><span class="lineCov">        735 :                 subquery_expr-&gt;subquery_type = SubqueryType::EXISTS;</span>
+<span class="lineNum">     709 </span><span class="lineCov">       2205 :                 return make_unique&lt;OperatorExpression&gt;(ExpressionType::OPERATOR_EXISTS,</span>
+<span class="lineNum">     710 </span><span class="lineCov">       1470 :                                                        TypeId::BOOLEAN,</span>
+<span class="lineNum">     711 </span><span class="lineCov">       1470 :                                                        move(subquery_expr));</span>
+<span class="lineNum">     712 </span>            :         }
+<span class="lineNum">     713 </span><span class="lineCov">         22 :         case ANY_SUBLINK: {</span>
+<span class="lineNum">     714 </span><span class="lineCov">         22 :                 subquery_expr-&gt;subquery_type = SubqueryType::IN;</span>
+<span class="lineNum">     715 </span><span class="lineCov">         66 :                 return make_unique&lt;OperatorExpression&gt;(</span>
+<span class="lineNum">     716 </span><span class="lineCov">         44 :                     ExpressionType::COMPARE_IN, TypeId::BOOLEAN,</span>
+<span class="lineNum">     717 </span><span class="lineCov">         88 :                     TransformExpression(root-&gt;testexpr), move(subquery_expr));</span>
+<span class="lineNum">     718 </span>            :         }
+<span class="lineNum">     719 </span><span class="lineCov">       3065 :         case EXPR_SUBLINK: {</span>
+<span class="lineNum">     720 </span><span class="lineCov">       3065 :                 return subquery_expr;</span>
+<span class="lineNum">     721 </span>            :         }
+<span class="lineNum">     722 </span><span class="lineNoCov">          0 :         default: {</span>
+<span class="lineNum">     723 </span>            :                 throw NotImplementedException(&quot;Subquery of type %d not implemented\n&quot;,
+<span class="lineNum">     724 </span><span class="lineNoCov">          0 :                                               (int)root-&gt;subLinkType);</span>
+<span class="lineNum">     725 </span>            :         }
+<span class="lineNum">     726 </span>            :         }
+<a name="727"><span class="lineNum">     727 </span>            : }</a>
+<span class="lineNum">     728 </span>            : 
+<span class="lineNum">     729 </span><span class="lineCov">      27836 : unique_ptr&lt;Expression&gt; TransformResTarget(ResTarget *root) {</span>
+<span class="lineNum">     730 </span><span class="lineCov">      27836 :         if (!root) {</span>
+<span class="lineNum">     731 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     732 </span>            :         }
+<span class="lineNum">     733 </span><span class="lineCov">      55672 :         auto expr = TransformExpression(root-&gt;val);</span>
+<span class="lineNum">     734 </span><span class="lineCov">      27836 :         if (!expr) {</span>
+<span class="lineNum">     735 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     736 </span>            :         }
+<span class="lineNum">     737 </span><span class="lineCov">      27836 :         if (root-&gt;name) {</span>
+<span class="lineNum">     738 </span><span class="lineCov">        630 :                 expr-&gt;alias = string(root-&gt;name);</span>
+<span class="lineNum">     739 </span>            :         }
+<span class="lineNum">     740 </span><span class="lineCov">      27836 :         return expr;</span>
+<a name="741"><span class="lineNum">     741 </span>            : }</a>
+<span class="lineNum">     742 </span>            : 
+<span class="lineNum">     743 </span><span class="lineCov">     330762 : unique_ptr&lt;Expression&gt; TransformExpression(Node *node) {</span>
+<span class="lineNum">     744 </span><span class="lineCov">     330762 :         if (!node) {</span>
+<span class="lineNum">     745 </span><span class="lineCov">      19047 :                 return nullptr;</span>
+<span class="lineNum">     746 </span>            :         }
+<span class="lineNum">     747 </span>            : 
+<span class="lineNum">     748 </span><span class="lineCov">     311715 :         switch (node-&gt;type) {</span>
+<span class="lineNum">     749 </span><span class="lineCov">     100493 :         case T_ColumnRef:</span>
+<span class="lineNum">     750 </span><span class="lineCov">     100493 :                 return TransformColumnRef(reinterpret_cast&lt;ColumnRef *&gt;(node));</span>
+<span class="lineNum">     751 </span><span class="lineCov">      89489 :         case T_A_Const:</span>
+<span class="lineNum">     752 </span><span class="lineCov">      89489 :                 return TransformConstant(reinterpret_cast&lt;A_Const *&gt;(node));</span>
+<span class="lineNum">     753 </span><span class="lineCov">      72462 :         case T_A_Expr:</span>
+<span class="lineNum">     754 </span><span class="lineCov">      72462 :                 return TransformAExpr(reinterpret_cast&lt;A_Expr *&gt;(node));</span>
+<span class="lineNum">     755 </span><span class="lineCov">       6705 :         case T_FuncCall:</span>
+<span class="lineNum">     756 </span><span class="lineCov">       6705 :                 return TransformFuncCall(reinterpret_cast&lt;FuncCall *&gt;(node));</span>
+<span class="lineNum">     757 </span><span class="lineCov">       7225 :         case T_BoolExpr:</span>
+<span class="lineNum">     758 </span><span class="lineCov">       7225 :                 return TransformBoolExpr(reinterpret_cast&lt;BoolExpr *&gt;(node));</span>
+<span class="lineNum">     759 </span><span class="lineCov">        152 :         case T_TypeCast:</span>
+<span class="lineNum">     760 </span><span class="lineCov">        152 :                 return TransformTypeCast(reinterpret_cast&lt;TypeCast *&gt;(node));</span>
+<span class="lineNum">     761 </span><span class="lineCov">       3171 :         case T_CaseExpr:</span>
+<span class="lineNum">     762 </span><span class="lineCov">       3171 :                 return TransformCase(reinterpret_cast&lt;CaseExpr *&gt;(node));</span>
+<span class="lineNum">     763 </span><span class="lineCov">       3822 :         case T_SubLink:</span>
+<span class="lineNum">     764 </span><span class="lineCov">       3822 :                 return TransformSubquery(reinterpret_cast&lt;SubLink *&gt;(node));</span>
+<span class="lineNum">     765 </span><span class="lineCov">        143 :         case T_CoalesceExpr:</span>
+<span class="lineNum">     766 </span><span class="lineCov">        143 :                 return TransformCoalesce(reinterpret_cast&lt;A_Expr *&gt;(node));</span>
+<span class="lineNum">     767 </span><span class="lineCov">        216 :         case T_NullTest:</span>
+<span class="lineNum">     768 </span><span class="lineCov">        216 :                 return TransformNullTest(reinterpret_cast&lt;NullTest *&gt;(node));</span>
+<span class="lineNum">     769 </span><span class="lineCov">      27836 :         case T_ResTarget:</span>
+<span class="lineNum">     770 </span><span class="lineCov">      27836 :                 return TransformResTarget(reinterpret_cast&lt;ResTarget *&gt;(node));</span>
+<span class="lineNum">     771 </span><span class="lineCov">          1 :         case T_SetToDefault:</span>
+<span class="lineNum">     772 </span><span class="lineCov">          1 :                 return make_unique&lt;DefaultExpression&gt;();</span>
+<span class="lineNum">     773 </span><span class="lineNoCov">          0 :         case T_ParamRef:</span>
+<span class="lineNum">     774 </span>            : 
+<span class="lineNum">     775 </span>            :         default:
+<span class="lineNum">     776 </span>            :                 throw NotImplementedException(&quot;Expr of type %d not implemented\n&quot;,
+<span class="lineNum">     777 </span><span class="lineNoCov">          0 :                                               (int)node-&gt;type);</span>
+<span class="lineNum">     778 </span>            :         }
+<a name="779"><span class="lineNum">     779 </span>            : }</a>
+<span class="lineNum">     780 </span>            : 
+<span class="lineNum">     781 </span><span class="lineCov">      37061 : bool TransformExpressionList(List *list,</span>
+<span class="lineNum">     782 </span>            :                              vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;result) {
+<span class="lineNum">     783 </span><span class="lineCov">      37061 :         if (!list) {</span>
+<span class="lineNum">     784 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     785 </span>            :         }
+<span class="lineNum">     786 </span><span class="lineCov">     102381 :         for (auto node = list-&gt;head; node != nullptr; node = node-&gt;next) {</span>
+<span class="lineNum">     787 </span><span class="lineCov">      65320 :                 auto target = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
+<span class="lineNum">     788 </span><span class="lineCov">      65320 :                 if (!target) {</span>
+<span class="lineNum">     789 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     790 </span>            :                 }
+<span class="lineNum">     791 </span><span class="lineCov">      65320 :                 auto expr = TransformExpression(target);</span>
+<span class="lineNum">     792 </span><span class="lineCov">      65320 :                 if (!expr) {</span>
+<span class="lineNum">     793 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     794 </span>            :                 }
+<span class="lineNum">     795 </span><span class="lineCov">      65320 :                 result.push_back(move(expr));</span>
+<span class="lineNum">     796 </span>            :         }
+<span class="lineNum">     797 </span><span class="lineCov">      37061 :         return true;</span>
+<a name="798"><span class="lineNum">     798 </span>            : }</a>
+<span class="lineNum">     799 </span>            : 
+<span class="lineNum">     800 </span><span class="lineNoCov">          0 : unique_ptr&lt;Expression&gt; TransformListValue(Expr *node) {</span>
+<span class="lineNum">     801 </span><span class="lineNoCov">          0 :         if (!node) {</span>
+<span class="lineNum">     802 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
+<span class="lineNum">     803 </span>            :         }
+<span class="lineNum">     804 </span>            : 
+<span class="lineNum">     805 </span><span class="lineNoCov">          0 :         switch (node-&gt;type) {</span>
+<span class="lineNum">     806 </span><span class="lineNoCov">          0 :         case T_A_Const:</span>
+<span class="lineNum">     807 </span><span class="lineNoCov">          0 :                 return TransformConstant((A_Const *)node);</span>
+<span class="lineNum">     808 </span><span class="lineNoCov">          0 :         case T_ParamRef:</span>
+<span class="lineNum">     809 </span>            :         case T_TypeCast:
+<span class="lineNum">     810 </span>            :         case T_SetToDefault:
+<span class="lineNum">     811 </span>            : 
+<span class="lineNum">     812 </span>            :         default:
+<span class="lineNum">     813 </span>            :                 throw NotImplementedException(&quot;Expr of type %d not implemented\n&quot;,
+<span class="lineNum">     814 </span><span class="lineNoCov">          0 :                                               (int)node-&gt;type);</span>
+<span class="lineNum">     815 </span>            :         }
+<span class="lineNum">     816 </span>            : }
+<span class="lineNum">     817 </span>            : 
+<span class="lineNum">     818 </span>            : } // namespace duckdb
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

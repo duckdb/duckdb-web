@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 529964f - include/catalog/catalog_set.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">include/catalog</a> - catalog_set.hpp<span style="font-size: 80%;"> (source / <a href="catalog_set.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 529964f</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-11-29 00:10:59</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : //
+<span class="lineNum">       3 </span>            : //                         DuckDB
+<span class="lineNum">       4 </span>            : //
+<span class="lineNum">       5 </span>            : // catalog/catalog_set.hpp
+<span class="lineNum">       6 </span>            : //
+<span class="lineNum">       7 </span>            : // Author: Mark Raasveldt
+<span class="lineNum">       8 </span>            : //
+<span class="lineNum">       9 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #pragma once
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : #include &lt;functional&gt;
+<span class="lineNum">      14 </span>            : #include &lt;memory&gt;
+<span class="lineNum">      15 </span>            : #include &lt;mutex&gt;
+<span class="lineNum">      16 </span>            : #include &lt;string&gt;
+<span class="lineNum">      17 </span>            : #include &lt;unordered_map&gt;
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            : #include &quot;common/internal_types.hpp&quot;
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : #include &quot;catalog/catalog_entry.hpp&quot;
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            : #include &quot;transaction/transaction.hpp&quot;
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            : namespace duckdb {
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            : struct AlterInformation;
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : //! The Catalog Set stores (key, value) map of a set of AbstractCatalogEntries
+<span class="lineNum">      30 </span>            : class CatalogSet {
+<span class="lineNum">      31 </span>            :   public:
+<span class="lineNum">      32 </span>            :         //! Create an entry in the catalog set. Returns whether or not it was
+<span class="lineNum">      33 </span>            :         //! successful.
+<span class="lineNum">      34 </span>            :         bool CreateEntry(Transaction &amp;transaction, const std::string &amp;name,
+<span class="lineNum">      35 </span>            :                          std::unique_ptr&lt;CatalogEntry&gt; value);
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            :         bool AlterEntry(Transaction &amp;transaction, const std::string &amp;name,
+<span class="lineNum">      38 </span>            :                         AlterInformation *alter_info);
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span>            :         bool DropEntry(Transaction &amp;transaction, const std::string &amp;name,
+<span class="lineNum">      41 </span>            :                        bool cascade);
+<span class="lineNum">      42 </span>            :         //! Returns whether or not an entry exists
+<span class="lineNum">      43 </span>            :         bool EntryExists(Transaction &amp;transaction, const std::string &amp;name);
+<span class="lineNum">      44 </span>            :         //! Returns the entry with the specified name
+<span class="lineNum">      45 </span>            :         CatalogEntry *GetEntry(Transaction &amp;transaction, const std::string &amp;name);
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            :         //! Rollback &lt;entry&gt; to be the currently valid entry for a certain catalog
+<span class="lineNum">      48 </span>            :         //! entry
+<span class="lineNum">      49 </span>            :         void Undo(CatalogEntry *entry);
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :         //! Drops all entries
+<span class="lineNum">      52 </span>            :         void DropAllEntries(Transaction &amp;transaction);
+<span class="lineNum">      53 </span>            :         //! Returns true if the catalog set is empty for the transaction, false
+<span class="lineNum">      54 </span>            :         //! otherwise
+<span class="lineNum">      55 </span>            :         bool IsEmpty(Transaction &amp;transaction);
+<a name="56"><span class="lineNum">      56 </span>            : </a>
+<span class="lineNum">      57 </span>            :         //! Scan the catalog set, invoking the callback method for every entry
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :         template &lt;class T&gt; void Scan(Transaction &amp;transaction, T &amp;&amp;callback) {</span>
+<span class="lineNum">      59 </span>            :                 // lock the catalog set
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                 std::lock_guard&lt;std::mutex&gt; lock(catalog_lock);</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :                 for (auto &amp;kv : data) {</span>
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :                         auto entry = kv.second.get();</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                         entry = GetEntryForTransaction(transaction, entry);</span>
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                         if (!entry-&gt;deleted) {</span>
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :                                 callback(entry);</span>
+<span class="lineNum">      66 </span>            :                         }
+<span class="lineNum">      67 </span>            :                 }
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      70 </span>            :   private:
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :         //! Drops an entry from the catalog set; must hold the catalog_lock to</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :         //! safely call this</span>
+<span class="lineNum">      73 </span><span class="lineNoCov">          0 :         bool DropEntry(Transaction &amp;transaction, CatalogEntry &amp;entry, bool cascade);</span>
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 :         //! Given a root entry, gets the entry valid for this transaction</span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         CatalogEntry *GetEntryForTransaction(Transaction &amp;transaction,</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                                              CatalogEntry *current);</span>
+<span class="lineNum">      77 </span>            :         //! The catalog lock is used to make changes to the data
+<span class="lineNum">      78 </span>            :         std::mutex catalog_lock;
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :         //! The set of entries present in the CatalogSet.</span>
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :         std::unordered_map&lt;std::string, std::unique_ptr&lt;CatalogEntry&gt;&gt; data;</span>
+<span class="lineNum">      81 </span>            : };
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 : } // namespace duckdb</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
