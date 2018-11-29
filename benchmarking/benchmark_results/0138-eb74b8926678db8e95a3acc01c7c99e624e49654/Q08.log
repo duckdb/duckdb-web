@@ -1,0 +1,455 @@
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 2.416834s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.01s)     |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    n_regionkey   |
+|   =r_regionkey   |
+|      (0.09s)     |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       INNER      |                                                                                                                        | r_name = AMERICA |
+|    s_nationkey   |                                                                                                                        |                  |
+|   =n_nationkey   |                                                                                                                        |                  |
+|      (0.11s)     |                                                                                                                        |      (0.00s)     |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                                                                                    |      nation      ||      region      |
+|    c_nationkey   |                                                                                                    |                  ||                  |
+|   =n_nationkey   |                                                                                                    |                  ||                  |
+|      (0.09s)     |                                                                                                    |      (0.00s)     ||      (0.00s)     |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |      nation      |
+|     o_custkey    |                                                                                |                  |
+|    =c_custkey    |                                                                                |                  |
+|      (0.09s)     |                                                                                |      (0.00s)     |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |
+|    l_orderkey    |                                                            |                  |
+|    =o_orderkey   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |    o_orderdate   |
+|     s_suppkey    |                                        |   <= 1996-12-31  |
+|    =l_suppkey    |                                        |    o_orderdate   |
+|     p_partkey    |                                        |   >= 1995-01-01  |
+|    =l_partkey    |                                        |                  |
+|      (1.67s)     |                                        |      (0.01s)     |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     lineitem     ||      orders      |
+|      (0.01s)     |                    |      (0.04s)     ||      (0.01s)     |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|     p_type =     ||     supplier     |
+|      ECONOMY     ||                  |
+|   ANODIZED STEEL ||                  |
+|      (0.00s)     ||      (0.01s)     |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 2.415425s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.01s)     |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    n_regionkey   |
+|   =r_regionkey   |
+|      (0.09s)     |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       INNER      |                                                                                                                        | r_name = AMERICA |
+|    s_nationkey   |                                                                                                                        |                  |
+|   =n_nationkey   |                                                                                                                        |                  |
+|      (0.10s)     |                                                                                                                        |      (0.00s)     |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                                                                                    |      nation      ||      region      |
+|    c_nationkey   |                                                                                                    |                  ||                  |
+|   =n_nationkey   |                                                                                                    |                  ||                  |
+|      (0.09s)     |                                                                                                    |      (0.00s)     ||      (0.00s)     |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |      nation      |
+|     o_custkey    |                                                                                |                  |
+|    =c_custkey    |                                                                                |                  |
+|      (0.09s)     |                                                                                |      (0.00s)     |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |
+|    l_orderkey    |                                                            |                  |
+|    =o_orderkey   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |    o_orderdate   |
+|     s_suppkey    |                                        |   <= 1996-12-31  |
+|    =l_suppkey    |                                        |    o_orderdate   |
+|     p_partkey    |                                        |   >= 1995-01-01  |
+|    =l_partkey    |                                        |                  |
+|      (1.67s)     |                                        |      (0.01s)     |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     lineitem     ||      orders      |
+|      (0.01s)     |                    |      (0.04s)     ||      (0.01s)     |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|     p_type =     ||     supplier     |
+|      ECONOMY     ||                  |
+|   ANODIZED STEEL ||                  |
+|      (0.00s)     ||      (0.01s)     |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 2.419065s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.01s)     |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    n_regionkey   |
+|   =r_regionkey   |
+|      (0.09s)     |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       INNER      |                                                                                                                        | r_name = AMERICA |
+|    s_nationkey   |                                                                                                                        |                  |
+|   =n_nationkey   |                                                                                                                        |                  |
+|      (0.11s)     |                                                                                                                        |      (0.00s)     |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                                                                                    |      nation      ||      region      |
+|    c_nationkey   |                                                                                                    |                  ||                  |
+|   =n_nationkey   |                                                                                                    |                  ||                  |
+|      (0.09s)     |                                                                                                    |      (0.00s)     ||      (0.00s)     |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |      nation      |
+|     o_custkey    |                                                                                |                  |
+|    =c_custkey    |                                                                                |                  |
+|      (0.09s)     |                                                                                |      (0.00s)     |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |
+|    l_orderkey    |                                                            |                  |
+|    =o_orderkey   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |    o_orderdate   |
+|     s_suppkey    |                                        |   <= 1996-12-31  |
+|    =l_suppkey    |                                        |    o_orderdate   |
+|     p_partkey    |                                        |   >= 1995-01-01  |
+|    =l_partkey    |                                        |                  |
+|      (1.67s)     |                                        |      (0.01s)     |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     lineitem     ||      orders      |
+|      (0.01s)     |                    |      (0.04s)     ||      (0.01s)     |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|     p_type =     ||     supplier     |
+|      ECONOMY     ||                  |
+|   ANODIZED STEEL ||                  |
+|      (0.00s)     ||      (0.01s)     |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 2.419236s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.01s)     |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    n_regionkey   |
+|   =r_regionkey   |
+|      (0.09s)     |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       INNER      |                                                                                                                        | r_name = AMERICA |
+|    s_nationkey   |                                                                                                                        |                  |
+|   =n_nationkey   |                                                                                                                        |                  |
+|      (0.10s)     |                                                                                                                        |      (0.00s)     |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                                                                                    |      nation      ||      region      |
+|    c_nationkey   |                                                                                                    |                  ||                  |
+|   =n_nationkey   |                                                                                                    |                  ||                  |
+|      (0.09s)     |                                                                                                    |      (0.00s)     ||      (0.00s)     |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |      nation      |
+|     o_custkey    |                                                                                |                  |
+|    =c_custkey    |                                                                                |                  |
+|      (0.09s)     |                                                                                |      (0.00s)     |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |
+|    l_orderkey    |                                                            |                  |
+|    =o_orderkey   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |    o_orderdate   |
+|     s_suppkey    |                                        |   <= 1996-12-31  |
+|    =l_suppkey    |                                        |    o_orderdate   |
+|     p_partkey    |                                        |   >= 1995-01-01  |
+|    =l_partkey    |                                        |                  |
+|      (1.68s)     |                                        |      (0.01s)     |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     lineitem     ||      orders      |
+|      (0.01s)     |                    |      (0.04s)     ||      (0.01s)     |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|     p_type =     ||     supplier     |
+|      ECONOMY     ||                  |
+|   ANODIZED STEEL ||                  |
+|      (0.00s)     ||      (0.01s)     |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  o_year,  sum(case  when nation = 'BRAZIL' then volume  else 0  end) / sum(volume) as mkt_share from  (  select  extract(year from o_orderdate) as o_year,  l_extendedprice * (1 - l_discount) as volume,  n2.n_name as nation  from  part,  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2,  region  where  p_partkey = l_partkey  and s_suppkey = l_suppkey  and l_orderkey = o_orderkey  and o_custkey = c_custkey  and c_nationkey = n1.n_nationkey  and n1.n_regionkey = r_regionkey  and r_name = 'AMERICA'  and s_nationkey = n2.n_nationkey  and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  and p_type = 'ECONOMY ANODIZED STEEL'  ) as all_nations group by  o_year order by  o_year; 
+<<Timing>>
+Total Time: 2.411350s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.01s)     |
+|       2603       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    n_regionkey   |
+|   =r_regionkey   |
+|      (0.09s)     |
+|       2603       |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |      FILTER      |
+|       INNER      |                                                                                                                        | r_name = AMERICA |
+|    s_nationkey   |                                                                                                                        |                  |
+|   =n_nationkey   |                                                                                                                        |                  |
+|      (0.10s)     |                                                                                                                        |      (0.00s)     |
+|       13389      |                                                                                                                        |         1        |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    ----------------------------------------
+|     HASH_JOIN    |                                                                                                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                                                                                    |      nation      ||      region      |
+|    c_nationkey   |                                                                                                    |                  ||                  |
+|   =n_nationkey   |                                                                                                    |                  ||                  |
+|      (0.09s)     |                                                                                                    |      (0.00s)     ||      (0.00s)     |
+|       13389      |                                                                                                    |        25        ||         5        |
+--------------------                                                                                                    ----------------------------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |      nation      |
+|     o_custkey    |                                                                                |                  |
+|    =c_custkey    |                                                                                |                  |
+|      (0.09s)     |                                                                                |      (0.00s)     |
+|       13389      |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            |     customer     |
+|    l_orderkey    |                                                            |                  |
+|    =o_orderkey   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|       13389      |                                                            |      150000      |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |    o_orderdate   |
+|     s_suppkey    |                                        |   <= 1996-12-31  |
+|    =l_suppkey    |                                        |    o_orderdate   |
+|     p_partkey    |                                        |   >= 1995-01-01  |
+|    =l_partkey    |                                        |                  |
+|      (1.67s)     |                                        |      (0.01s)     |
+|       43693      |                                        |      457263      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     lineitem     ||      orders      |
+|      (0.01s)     |                    |      (0.04s)     ||      (0.01s)     |
+|     14510000     |                    |      6001215     ||      1500000     |
+--------------------                    ----------------------------------------
+----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |
+|     p_type =     ||     supplier     |
+|      ECONOMY     ||                  |
+|   ANODIZED STEEL ||                  |
+|      (0.00s)     ||      (0.01s)     |
+|       1451       ||      1960000     |
+----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
