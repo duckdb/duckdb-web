@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - include/common/exception.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - include/common/exception.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">55</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -91,11 +91,11 @@
 <span class="lineNum">      29 </span>            : 
 <a name="30"><span class="lineNum">      30 </span>            : namespace duckdb {</a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">    1025115 : inline void ASSERT_RESTRICT(void *left_start, void *left_end, void *right_start,</span>
+<span class="lineNum">      32 </span><span class="lineCov">    1025114 : inline void ASSERT_RESTRICT(void *left_start, void *left_end, void *right_start,</span>
 <span class="lineNum">      33 </span>            :                             void *right_end) {
 <span class="lineNum">      34 </span>            :         // assert that the two pointers do not overlap
-<span class="lineNum">      35 </span><span class="lineCov">    1025115 :         assert(left_end &lt; right_start || right_end &lt; left_start);</span>
-<span class="lineNum">      36 </span><span class="lineCov">    1025115 : }</span>
+<span class="lineNum">      35 </span><span class="lineCov">    1025114 :         assert(left_end &lt; right_start || right_end &lt; left_start);</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1025114 : }</span>
 <span class="lineNum">      37 </span>            : 
 <span class="lineNum">      38 </span>            : //===--------------------------------------------------------------------===//
 <span class="lineNum">      39 </span>            : // Exception Types

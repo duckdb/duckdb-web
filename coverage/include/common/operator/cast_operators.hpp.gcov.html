@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - include/common/operator/cast_operators.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - include/common/operator/cast_operators.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">30</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
@@ -78,8 +78,8 @@
 <span class="lineNum">      16 </span>            : namespace operators {
 <a name="17"><span class="lineNum">      17 </span>            : </a>
 <span class="lineNum">      18 </span>            : struct Cast {
-<span class="lineNum">      19 </span><span class="lineCov">    1364781 :         template &lt;class SRC, class DST&gt; static inline DST Operation(SRC left) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">    1364781 :                 return (DST)left;</span>
+<span class="lineNum">      19 </span><span class="lineCov">    1364674 :         template &lt;class SRC, class DST&gt; static inline DST Operation(SRC left) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    1364674 :                 return (DST)left;</span>
 <span class="lineNum">      21 </span>            :         }
 <span class="lineNum">      22 </span><span class="lineCov">          4 : };</span>
 <span class="lineNum">      23 </span><span class="lineCov">          4 : </span>
@@ -90,8 +90,8 @@
 <span class="lineNum">      28 </span><span class="lineCov">          1 : template &lt;&gt; int16_t Cast::Operation(const char *left);</span>
 <span class="lineNum">      29 </span><span class="lineCov">          1 : template &lt;&gt; int Cast::Operation(const char *left);</span>
 <span class="lineNum">      30 </span>            : template &lt;&gt; int64_t Cast::Operation(const char *left);
-<span class="lineNum">      31 </span><span class="lineCov">        142 : template &lt;&gt; uint64_t Cast::Operation(const char *left);</span>
-<span class="lineNum">      32 </span><span class="lineCov">        142 : template &lt;&gt; double Cast::Operation(const char *left);</span>
+<span class="lineNum">      31 </span><span class="lineCov">        120 : template &lt;&gt; uint64_t Cast::Operation(const char *left);</span>
+<span class="lineNum">      32 </span><span class="lineCov">        120 : template &lt;&gt; double Cast::Operation(const char *left);</span>
 <span class="lineNum">      33 </span>            : //===--------------------------------------------------------------------===//
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 : // Numeric -&gt; String Casts</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 : //===--------------------------------------------------------------------===//</span>

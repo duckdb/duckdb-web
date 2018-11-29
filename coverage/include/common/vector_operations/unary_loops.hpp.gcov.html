@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - include/common/vector_operations/unary_loops.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - include/common/vector_operations/unary_loops.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">115</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -109,30 +109,30 @@
 <span class="lineNum">      47 </span><span class="lineCov">        781 : }</span>
 <a name="48"><span class="lineNum">      48 </span>            : </a>
 <span class="lineNum">      49 </span><span class="lineNoCov">          0 : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;</span>
-<span class="lineNum">      50 </span><span class="lineCov">      44405 : static inline void unary_loop_process_null_function(</span>
+<span class="lineNum">      50 </span><span class="lineCov">      44392 : static inline void unary_loop_process_null_function(</span>
 <span class="lineNum">      51 </span>            :     LEFT_TYPE *__restrict ldata, RESULT_TYPE *__restrict result_data,
 <span class="lineNum">      52 </span>            :     size_t count, sel_t *__restrict sel_vector, nullmask_t &amp;nullmask) {
-<span class="lineNum">      53 </span><span class="lineCov">      44405 :         ASSERT_RESTRICT(ldata, ldata + count, result_data, result_data + count);</span>
-<span class="lineNum">      54 </span><span class="lineCov">      46261 :         if (nullmask.any()) {</span>
-<span class="lineNum">      55 </span><span class="lineCov">         33 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">      44392 :         ASSERT_RESTRICT(ldata, ldata + count, result_data, result_data + count);</span>
+<span class="lineNum">      54 </span><span class="lineCov">      46248 :         if (nullmask.any()) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">         18 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      56 </span>            :                         result_data[i] = OP::Operation(ldata[i], nullmask[i]);
 <span class="lineNum">      57 </span>            :                 });
 <span class="lineNum">      58 </span><span class="lineCov">       1856 :         } else {</span>
-<span class="lineNum">      59 </span><span class="lineCov">      46228 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">      46230 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      60 </span>            :                         result_data[i] = OP::Operation(ldata[i], false);
 <span class="lineNum">      61 </span>            :                 });
 <span class="lineNum">      62 </span><span class="lineCov">       1856 :         }</span>
-<span class="lineNum">      63 </span><span class="lineCov">      44405 : }</span>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         25 : </span></a>
+<span class="lineNum">      63 </span><span class="lineCov">      44392 : }</span>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">         20 : </span></a>
 <span class="lineNum">      65 </span>            : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;
 <span class="lineNum">      66 </span>            : void templated_unary_loop_process_null(Vector &amp;input, Vector &amp;result) {
-<span class="lineNum">      67 </span><span class="lineCov">         25 :         auto ldata = (LEFT_TYPE *)input.data;</span>
-<span class="lineNum">      68 </span><span class="lineCov">         25 :         auto result_data = (RESULT_TYPE *)result.data;</span>
-<span class="lineNum">      69 </span><span class="lineCov">          8 : </span>
+<span class="lineNum">      67 </span><span class="lineCov">         20 :         auto ldata = (LEFT_TYPE *)input.data;</span>
+<span class="lineNum">      68 </span><span class="lineCov">         20 :         auto result_data = (RESULT_TYPE *)result.data;</span>
+<span class="lineNum">      69 </span><span class="lineCov">          5 : </span>
 <span class="lineNum">      70 </span>            :         result.nullmask.reset();
 <span class="lineNum">      71 </span><span class="lineNoCov">          0 :         unary_loop_process_null_function&lt;LEFT_TYPE, RESULT_TYPE, OP&gt;(</span>
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :             ldata, result_data, input.count, input.sel_vector, input.nullmask);</span>
-<span class="lineNum">      73 </span><span class="lineCov">         17 :         result.sel_vector = input.sel_vector;</span>
+<span class="lineNum">      73 </span><span class="lineCov">         15 :         result.sel_vector = input.sel_vector;</span>
 <span class="lineNum">      74 </span>            :         result.count = input.count;
 <span class="lineNum">      75 </span>            : }
 <span class="lineNum">      76 </span><span class="lineNoCov">          0 : } // namespace duckdb</span>

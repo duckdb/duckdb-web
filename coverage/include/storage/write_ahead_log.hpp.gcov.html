@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - include/storage/write_ahead_log.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - include/storage/write_ahead_log.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -122,13 +122,13 @@
 <span class="lineNum">      60 </span>            : //! server crashes or is shut down.
 <a name="61"><span class="lineNum">      61 </span>            : class WriteAheadLog {</a>
 <span class="lineNum">      62 </span>            :   public:
-<span class="lineNum">      63 </span><span class="lineCov">        124 :         WriteAheadLog(DuckDB &amp;database)</span>
-<span class="lineNum">      64 </span><span class="lineCov">        124 :             : initialized(false), database(database), wal_file(nullptr) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">        124 :         }</span>
+<span class="lineNum">      63 </span><span class="lineCov">        125 :         WriteAheadLog(DuckDB &amp;database)</span>
+<span class="lineNum">      64 </span><span class="lineCov">        125 :             : initialized(false), database(database), wal_file(nullptr) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">        125 :         }</span>
 <a name="66"><span class="lineNum">      66 </span>            :         ~WriteAheadLog();</a>
 <span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span><span class="lineCov">      22628 :         bool IsInitialized() {</span>
-<span class="lineNum">      69 </span><span class="lineCov">      22628 :                 return initialized;</span>
+<span class="lineNum">      68 </span><span class="lineCov">      22630 :         bool IsInitialized() {</span>
+<span class="lineNum">      69 </span><span class="lineCov">      22630 :                 return initialized;</span>
 <span class="lineNum">      70 </span>            :         }
 <span class="lineNum">      71 </span>            : 
 <span class="lineNum">      72 </span>            :         //! Replay the WAL

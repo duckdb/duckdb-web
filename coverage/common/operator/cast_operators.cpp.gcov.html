@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - common/operator/cast_operators.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - common/operator/cast_operators.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">14</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -142,15 +142,15 @@
 <span class="lineNum">      80 </span><span class="lineNoCov">          0 :         return (int32_t)left;</span>
 <a name="81"><span class="lineNum">      81 </span>            : }</a>
 <span class="lineNum">      82 </span>            : 
-<span class="lineNum">      83 </span><span class="lineCov">        169 : template &lt;&gt; int64_t CastFromDate::Operation(date_t left) {</span>
-<span class="lineNum">      84 </span><span class="lineCov">        169 :         return (int64_t)left;</span>
+<span class="lineNum">      83 </span><span class="lineCov">        163 : template &lt;&gt; int64_t CastFromDate::Operation(date_t left) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">        163 :         return (int64_t)left;</span>
 <span class="lineNum">      85 </span>            : }
 <span class="lineNum">      86 </span>            : 
 <span class="lineNum">      87 </span>            : //===--------------------------------------------------------------------===//
 <a name="88"><span class="lineNum">      88 </span>            : // Cast To Date</a>
 <span class="lineNum">      89 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">      90 </span><span class="lineCov">        122 : template &lt;&gt; date_t CastToDate::Operation(const char *left) {</span>
-<span class="lineNum">      91 </span><span class="lineCov">        137 :         return Date::FromString(left);</span>
+<span class="lineNum">      90 </span><span class="lineCov">        116 : template &lt;&gt; date_t CastToDate::Operation(const char *left) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">        131 :         return Date::FromString(left);</span>
 <a name="92"><span class="lineNum">      92 </span>            : }</a>
 <span class="lineNum">      93 </span>            : 
 <span class="lineNum">      94 </span><span class="lineCov">         59 : template &lt;&gt; date_t CastToDate::Operation(int32_t left) {</span>

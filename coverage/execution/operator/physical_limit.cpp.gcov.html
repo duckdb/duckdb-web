@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - execution/operator/physical_limit.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - execution/operator/physical_limit.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">36</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -66,28 +66,28 @@
 <span class="lineNum">       4 </span>            : using namespace duckdb;
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">         66 : vector&lt;string&gt; PhysicalLimit::GetNames() {</span>
-<a name="8"><span class="lineNum">       8 </span><span class="lineCov">         66 :         return children[0]-&gt;GetNames();</span></a>
+<span class="lineNum">       7 </span><span class="lineCov">         61 : vector&lt;string&gt; PhysicalLimit::GetNames() {</span>
+<a name="8"><span class="lineNum">       8 </span><span class="lineCov">         61 :         return children[0]-&gt;GetNames();</span></a>
 <span class="lineNum">       9 </span>            : }
-<span class="lineNum">      10 </span><span class="lineCov">        231 : vector&lt;TypeId&gt; PhysicalLimit::GetTypes() {</span>
-<span class="lineNum">      11 </span><span class="lineCov">        231 :         return children[0]-&gt;GetTypes();</span>
+<span class="lineNum">      10 </span><span class="lineCov">        215 : vector&lt;TypeId&gt; PhysicalLimit::GetTypes() {</span>
+<span class="lineNum">      11 </span><span class="lineCov">        215 :         return children[0]-&gt;GetTypes();</span>
 <a name="12"><span class="lineNum">      12 </span>            : }</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">         95 : void PhysicalLimit::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk,</span>
+<span class="lineNum">      14 </span><span class="lineCov">         90 : void PhysicalLimit::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk,</span>
 <span class="lineNum">      15 </span>            :                               PhysicalOperatorState *state_) {
-<span class="lineNum">      16 </span><span class="lineCov">         95 :         auto state = reinterpret_cast&lt;PhysicalLimitOperatorState *&gt;(state_);</span>
-<span class="lineNum">      17 </span><span class="lineCov">         95 :         chunk.Reset();</span>
+<span class="lineNum">      16 </span><span class="lineCov">         90 :         auto state = reinterpret_cast&lt;PhysicalLimitOperatorState *&gt;(state_);</span>
+<span class="lineNum">      17 </span><span class="lineCov">         90 :         chunk.Reset();</span>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">         95 :         size_t max_element = limit + offset;</span>
-<span class="lineNum">      20 </span><span class="lineCov">         95 :         if (state-&gt;current_offset &gt;= max_element) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">         90 :         size_t max_element = limit + offset;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         90 :         if (state-&gt;current_offset &gt;= max_element) {</span>
 <span class="lineNum">      21 </span><span class="lineCov">          2 :                 return;</span>
 <span class="lineNum">      22 </span>            :         }
 <span class="lineNum">      23 </span>            : 
 <span class="lineNum">      24 </span>            :         // get the next chunk from the child
-<span class="lineNum">      25 </span><span class="lineCov">         93 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk,</span>
+<span class="lineNum">      25 </span><span class="lineCov">         88 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk,</span>
 <span class="lineNum">      26 </span>            :                               state-&gt;child_state.get());
-<span class="lineNum">      27 </span><span class="lineCov">         93 :         if (state-&gt;child_chunk.size() == 0) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">         64 :                 return;</span>
+<span class="lineNum">      27 </span><span class="lineCov">         88 :         if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">         59 :                 return;</span>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span><span class="lineCov">         29 :         if (state-&gt;current_offset &lt; offset) {</span>
@@ -131,9 +131,9 @@
 <span class="lineNum">      69 </span>            : }
 <a name="70"><span class="lineNum">      70 </span>            : </a>
 <span class="lineNum">      71 </span>            : unique_ptr&lt;PhysicalOperatorState&gt;
-<span class="lineNum">      72 </span><span class="lineCov">         78 : PhysicalLimit::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
-<span class="lineNum">      73 </span><span class="lineCov">        156 :         return make_unique&lt;PhysicalLimitOperatorState&gt;(children[0].get(), 0,</span>
-<span class="lineNum">      74 </span><span class="lineCov">        234 :                                                        parent_executor);</span>
+<span class="lineNum">      72 </span><span class="lineCov">         73 : PhysicalLimit::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
+<span class="lineNum">      73 </span><span class="lineCov">        146 :         return make_unique&lt;PhysicalLimitOperatorState&gt;(children[0].get(), 0,</span>
+<span class="lineNum">      74 </span><span class="lineCov">        219 :                                                        parent_executor);</span>
 <span class="lineNum">      75 </span>            : }
 </pre>
       </td>

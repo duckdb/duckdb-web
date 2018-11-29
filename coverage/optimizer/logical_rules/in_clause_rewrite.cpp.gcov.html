@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b37ff52 - optimizer/logical_rules/in_clause_rewrite.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report eb74b89 - optimizer/logical_rules/in_clause_rewrite.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b37ff52</td>
+            <td class="headerValue">DuckDB Code Coverage Report eb74b89</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">48</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 00:45:38</td>
+            <td class="headerValue">2018-11-29 13:01:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -70,25 +70,25 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">      36813 : InClauseRewriteRule::InClauseRewriteRule() {</span>
-<span class="lineNum">      12 </span><span class="lineCov">      36813 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(</span>
-<span class="lineNum">      13 </span><span class="lineCov">      73626 :             ExpressionType::SELECT_SUBQUERY);</span>
+<span class="lineNum">      11 </span><span class="lineCov">      36814 : InClauseRewriteRule::InClauseRewriteRule() {</span>
+<span class="lineNum">      12 </span><span class="lineCov">      36814 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(</span>
+<span class="lineNum">      13 </span><span class="lineCov">      73628 :             ExpressionType::SELECT_SUBQUERY);</span>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">      36813 :         vector&lt;ExpressionType&gt; types = {ExpressionType::COMPARE_IN,</span>
-<span class="lineNum">      16 </span><span class="lineCov">     110439 :                                         ExpressionType::COMPARE_NOT_IN};</span>
-<span class="lineNum">      17 </span><span class="lineCov">      36813 :         auto in_expression =</span>
-<span class="lineNum">      18 </span><span class="lineCov">      36813 :             make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(types);</span>
+<span class="lineNum">      15 </span><span class="lineCov">      36814 :         vector&lt;ExpressionType&gt; types = {ExpressionType::COMPARE_IN,</span>
+<span class="lineNum">      16 </span><span class="lineCov">     110442 :                                         ExpressionType::COMPARE_NOT_IN};</span>
+<span class="lineNum">      17 </span><span class="lineCov">      36814 :         auto in_expression =</span>
+<span class="lineNum">      18 </span><span class="lineCov">      36814 :             make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(types);</span>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">      36813 :         in_expression-&gt;children.push_back(make_unique&lt;ExpressionNodeAny&gt;());</span>
-<span class="lineNum">      21 </span><span class="lineCov">      36813 :         in_expression-&gt;children.push_back(move(subquery));</span>
-<span class="lineNum">      22 </span><span class="lineCov">      36813 :         in_expression-&gt;child_policy = ChildPolicy::ORDERED;</span>
+<span class="lineNum">      20 </span><span class="lineCov">      36814 :         in_expression-&gt;children.push_back(make_unique&lt;ExpressionNodeAny&gt;());</span>
+<span class="lineNum">      21 </span><span class="lineCov">      36814 :         in_expression-&gt;children.push_back(move(subquery));</span>
+<span class="lineNum">      22 </span><span class="lineCov">      36814 :         in_expression-&gt;child_policy = ChildPolicy::ORDERED;</span>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">      73626 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(</span>
-<span class="lineNum">      25 </span><span class="lineCov">      73626 :             LogicalOperatorType::FILTER);</span>
+<span class="lineNum">      24 </span><span class="lineCov">      73628 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(</span>
+<span class="lineNum">      25 </span><span class="lineCov">      73628 :             LogicalOperatorType::FILTER);</span>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">      36813 :         root-&gt;children.push_back(move(in_expression));</span>
-<span class="lineNum">      28 </span><span class="lineCov">      36813 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
-<span class="lineNum">      29 </span><span class="lineCov">      36813 : }</span>
+<span class="lineNum">      27 </span><span class="lineCov">      36814 :         root-&gt;children.push_back(move(in_expression));</span>
+<span class="lineNum">      28 </span><span class="lineCov">      36814 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
+<span class="lineNum">      29 </span><span class="lineCov">      36814 : }</span>
 <a name="30"><span class="lineNum">      30 </span>            : </a>
 <span class="lineNum">      31 </span>            : unique_ptr&lt;LogicalOperator&gt;
 <span class="lineNum">      32 </span><span class="lineCov">         21 : InClauseRewriteRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;op_root,</span>
