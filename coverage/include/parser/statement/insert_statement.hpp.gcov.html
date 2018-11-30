@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c8058fa - include/parser/statement/insert_statement.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report f4d5b30 - include/parser/statement/insert_statement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c8058fa</td>
+            <td class="headerValue">DuckDB Code Coverage Report f4d5b30</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 14:20:27</td>
+            <td class="headerValue">2018-11-30 10:11:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -83,18 +83,18 @@
 <span class="lineNum">      21 </span>            : 
 <a name="22"><span class="lineNum">      22 </span>            : class InsertStatement : public SQLStatement {</a>
 <span class="lineNum">      23 </span>            :   public:
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">      27700 :         InsertStatement()</span></a>
-<span class="lineNum">      25 </span><span class="lineCov">      27700 :             : SQLStatement(StatementType::INSERT), schema(DEFAULT_SCHEMA){};</span>
-<span class="lineNum">      26 </span><span class="lineCov">      55400 :         virtual ~InsertStatement() {</span>
-<span class="lineNum">      27 </span><span class="lineCov">      55400 :         }</span>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">      27700 : </span></a>
-<span class="lineNum">      29 </span><span class="lineCov">      27700 :         virtual std::string ToString() const;</span>
-<span class="lineNum">      30 </span><span class="lineCov">      27700 :         virtual std::unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">      27700 :                 return v-&gt;Visit(*this);</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">      27702 :         InsertStatement()</span></a>
+<span class="lineNum">      25 </span><span class="lineCov">      27702 :             : SQLStatement(StatementType::INSERT), schema(DEFAULT_SCHEMA){};</span>
+<span class="lineNum">      26 </span><span class="lineCov">      55404 :         virtual ~InsertStatement() {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      55404 :         }</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">      27702 : </span></a>
+<span class="lineNum">      29 </span><span class="lineCov">      27702 :         virtual std::string ToString() const;</span>
+<span class="lineNum">      30 </span><span class="lineCov">      27702 :         virtual std::unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">      27702 :                 return v-&gt;Visit(*this);</span>
 <a name="32"><span class="lineNum">      32 </span>            :         }</a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">      55400 :         virtual bool Equals(const SQLStatement *other_) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">      55400 :                 if (!SQLStatement::Equals(other_)) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">      55404 :         virtual bool Equals(const SQLStatement *other_) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">      55404 :                 if (!SQLStatement::Equals(other_)) {</span>
 <span class="lineNum">      36 </span>            :                         return false;
 <span class="lineNum">      37 </span>            :                 }
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Equality not implemented!&quot;);</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c8058fa - catalog/catalog_entry/schema_catalog_entry.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report f4d5b30 - catalog/catalog_entry/schema_catalog_entry.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c8058fa</td>
+            <td class="headerValue">DuckDB Code Coverage Report f4d5b30</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">60</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-29 14:20:27</td>
+            <td class="headerValue">2018-11-30 10:11:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -78,17 +78,17 @@
 <span class="lineNum">      16 </span><span class="lineCov">        135 :     : CatalogEntry(CatalogType::SCHEMA, catalog, name) {</span>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">        135 : }</span></a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">        173 : void SchemaCatalogEntry::CreateTable(Transaction &amp;transaction,</span>
+<span class="lineNum">      19 </span><span class="lineCov">        174 : void SchemaCatalogEntry::CreateTable(Transaction &amp;transaction,</span>
 <span class="lineNum">      20 </span>            :                                      CreateTableInformation *info) {
-<span class="lineNum">      21 </span><span class="lineCov">        173 :         auto table =</span>
-<span class="lineNum">      22 </span><span class="lineCov">        346 :             make_unique_base&lt;CatalogEntry, TableCatalogEntry&gt;(catalog, this, info);</span>
-<span class="lineNum">      23 </span><span class="lineCov">        173 :         if (!tables.CreateEntry(transaction, info-&gt;table, move(table))) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">        174 :         auto table =</span>
+<span class="lineNum">      22 </span><span class="lineCov">        348 :             make_unique_base&lt;CatalogEntry, TableCatalogEntry&gt;(catalog, this, info);</span>
+<span class="lineNum">      23 </span><span class="lineCov">        174 :         if (!tables.CreateEntry(transaction, info-&gt;table, move(table))) {</span>
 <span class="lineNum">      24 </span><span class="lineCov">          3 :                 if (!info-&gt;if_not_exists) {</span>
 <span class="lineNum">      25 </span>            :                         throw CatalogException(&quot;Table with name \&quot;%s\&quot; already exists!&quot;,
 <span class="lineNum">      26 </span><span class="lineCov">          2 :                                                info-&gt;table.c_str());</span>
 <span class="lineNum">      27 </span>            :                 }
 <span class="lineNum">      28 </span>            :         }
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        171 : }</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        172 : }</span></a>
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span><span class="lineCov">          1 : bool SchemaCatalogEntry::CreateIndex(Transaction &amp;transaction,</span>
 <span class="lineNum">      32 </span>            :                                      CreateIndexInformation *info) {
@@ -127,14 +127,14 @@
 <span class="lineNum">      65 </span><span class="lineNoCov">          0 :         return tables.EntryExists(transaction, table_name);</span>
 <a name="66"><span class="lineNum">      66 </span>            : }</a>
 <span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span><span class="lineCov">      54272 : TableCatalogEntry *SchemaCatalogEntry::GetTable(Transaction &amp;transaction,</span>
+<span class="lineNum">      68 </span><span class="lineCov">      54276 : TableCatalogEntry *SchemaCatalogEntry::GetTable(Transaction &amp;transaction,</span>
 <span class="lineNum">      69 </span>            :                                                 const string &amp;table_name) {
-<span class="lineNum">      70 </span><span class="lineCov">      54272 :         auto entry = tables.GetEntry(transaction, table_name);</span>
-<span class="lineNum">      71 </span><span class="lineCov">      54272 :         if (!entry) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">      54276 :         auto entry = tables.GetEntry(transaction, table_name);</span>
+<span class="lineNum">      71 </span><span class="lineCov">      54276 :         if (!entry) {</span>
 <span class="lineNum">      72 </span>            :                 throw CatalogException(&quot;Table with name %s does not exist!&quot;,
 <span class="lineNum">      73 </span><span class="lineCov">          6 :                                        table_name.c_str());</span>
 <span class="lineNum">      74 </span>            :         }
-<span class="lineNum">      75 </span><span class="lineCov">      54266 :         return (TableCatalogEntry *)entry;</span>
+<span class="lineNum">      75 </span><span class="lineCov">      54270 :         return (TableCatalogEntry *)entry;</span>
 <span class="lineNum">      76 </span>            : }
 <a name="77"><span class="lineNum">      77 </span>            : </a>
 <span class="lineNum">      78 </span>            : TableFunctionCatalogEntry *
