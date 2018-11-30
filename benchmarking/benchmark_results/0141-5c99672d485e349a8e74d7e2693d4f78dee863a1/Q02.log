@@ -1,0 +1,385 @@
+<<Query Profiling Information>>
+select  s_acctbal,  s_name,  n_name,  p_partkey,  p_mfgr,  s_address,  s_phone,  s_comment from  part,  supplier,  partsupp,  nation,  region where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and p_size = 15  and p_type like '%BRASS'  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  and ps_supplycost = (  select  min(ps_supplycost)  from  partsupp,  supplier,  nation,  region  where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  ) order by  s_acctbal desc,  n_name,  s_name,  p_partkey limit 100; 
+<<Timing>>
+Total Time: 0.635396s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| ps_supplycost=#0 |
+|   p_partkey=#1   |
+|      (0.01s)     |
+|        460       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|    n_regionkey   |                                                                                |                  |
+|   =r_regionkey   |                                                                                |                  |
+|      (0.02s)     |                                                                                |      (0.02s)     |
+|        642       |                                                                                |      117422      |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     HASH_JOIN    |
+|       INNER      |                                                            |  r_name = EUROPE ||       INNER      |
+|    s_nationkey   |                                                            |                  ||    n_regionkey   |
+|   =n_nationkey   |                                                            |                  ||   =r_regionkey   |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.04s)     |
+|       2988       |                                                            |         1        ||      158960      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |      nation      ||      region      ||       INNER      |                                        |  r_name = EUROPE |
+|     s_suppkey    |                                        |                  ||                  ||    s_nationkey   |                                        |                  |
+|    =ps_suppkey   |                                        |                  ||                  ||   =n_nationkey   |                                        |                  |
+|     p_partkey    |                                        |                  ||                  ||                  |                                        |                  |
+|    =ps_partkey   |                                        |                  ||                  ||                  |                                        |                  |
+|      (0.37s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.04s)     |                                        |      (0.00s)     |
+|       2988       |                                        |        25        ||         5        ||      800000      |                                        |         1        |
+--------------------                                        ------------------------------------------------------------                                        --------------------
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     partsupp     |                                        |       INNER      |                    |      nation      ||      region      |
+|                  |                    |                  |                                        |    ps_suppkey    |                    |                  ||                  |
+|                  |                    |                  |                                        |    =s_suppkey    |                    |                  ||                  |
+|      (0.01s)     |                    |      (0.00s)     |                                        |      (0.03s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      7470000     |                    |      800000      |                                        |      800000      |                    |        25        ||         5        |
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+----------------------------------------                                                            ----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|    LIKE(p_type   ||     supplier     |                                                            |     partsupp     ||     supplier     |
+|     , %BRASS     ||                  |                                                            |                  ||                  |
+|    p_size = 15   ||                  |                                                            |                  ||                  |
+|      (0.02s)     ||      (0.04s)     |                                                            |      (0.00s)     ||      (0.00s)     |
+|        747       ||      1920000     |                                                            |      800000      ||       10000      |
+----------------------------------------                                                            ----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  s_acctbal,  s_name,  n_name,  p_partkey,  p_mfgr,  s_address,  s_phone,  s_comment from  part,  supplier,  partsupp,  nation,  region where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and p_size = 15  and p_type like '%BRASS'  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  and ps_supplycost = (  select  min(ps_supplycost)  from  partsupp,  supplier,  nation,  region  where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  ) order by  s_acctbal desc,  n_name,  s_name,  p_partkey limit 100; 
+<<Timing>>
+Total Time: 0.634388s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| ps_supplycost=#0 |
+|   p_partkey=#1   |
+|      (0.01s)     |
+|        460       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|    n_regionkey   |                                                                                |                  |
+|   =r_regionkey   |                                                                                |                  |
+|      (0.02s)     |                                                                                |      (0.02s)     |
+|        642       |                                                                                |      117422      |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     HASH_JOIN    |
+|       INNER      |                                                            |  r_name = EUROPE ||       INNER      |
+|    s_nationkey   |                                                            |                  ||    n_regionkey   |
+|   =n_nationkey   |                                                            |                  ||   =r_regionkey   |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.04s)     |
+|       2988       |                                                            |         1        ||      158960      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |      nation      ||      region      ||       INNER      |                                        |  r_name = EUROPE |
+|     s_suppkey    |                                        |                  ||                  ||    s_nationkey   |                                        |                  |
+|    =ps_suppkey   |                                        |                  ||                  ||   =n_nationkey   |                                        |                  |
+|     p_partkey    |                                        |                  ||                  ||                  |                                        |                  |
+|    =ps_partkey   |                                        |                  ||                  ||                  |                                        |                  |
+|      (0.37s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.04s)     |                                        |      (0.00s)     |
+|       2988       |                                        |        25        ||         5        ||      800000      |                                        |         1        |
+--------------------                                        ------------------------------------------------------------                                        --------------------
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     partsupp     |                                        |       INNER      |                    |      nation      ||      region      |
+|                  |                    |                  |                                        |    ps_suppkey    |                    |                  ||                  |
+|                  |                    |                  |                                        |    =s_suppkey    |                    |                  ||                  |
+|      (0.01s)     |                    |      (0.00s)     |                                        |      (0.03s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      7470000     |                    |      800000      |                                        |      800000      |                    |        25        ||         5        |
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+----------------------------------------                                                            ----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|    LIKE(p_type   ||     supplier     |                                                            |     partsupp     ||     supplier     |
+|     , %BRASS     ||                  |                                                            |                  ||                  |
+|    p_size = 15   ||                  |                                                            |                  ||                  |
+|      (0.02s)     ||      (0.04s)     |                                                            |      (0.00s)     ||      (0.00s)     |
+|        747       ||      1920000     |                                                            |      800000      ||       10000      |
+----------------------------------------                                                            ----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  s_acctbal,  s_name,  n_name,  p_partkey,  p_mfgr,  s_address,  s_phone,  s_comment from  part,  supplier,  partsupp,  nation,  region where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and p_size = 15  and p_type like '%BRASS'  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  and ps_supplycost = (  select  min(ps_supplycost)  from  partsupp,  supplier,  nation,  region  where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  ) order by  s_acctbal desc,  n_name,  s_name,  p_partkey limit 100; 
+<<Timing>>
+Total Time: 0.634762s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| ps_supplycost=#0 |
+|   p_partkey=#1   |
+|      (0.01s)     |
+|        460       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|    n_regionkey   |                                                                                |                  |
+|   =r_regionkey   |                                                                                |                  |
+|      (0.02s)     |                                                                                |      (0.02s)     |
+|        642       |                                                                                |      117422      |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     HASH_JOIN    |
+|       INNER      |                                                            |  r_name = EUROPE ||       INNER      |
+|    s_nationkey   |                                                            |                  ||    n_regionkey   |
+|   =n_nationkey   |                                                            |                  ||   =r_regionkey   |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.04s)     |
+|       2988       |                                                            |         1        ||      158960      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |      nation      ||      region      ||       INNER      |                                        |  r_name = EUROPE |
+|     s_suppkey    |                                        |                  ||                  ||    s_nationkey   |                                        |                  |
+|    =ps_suppkey   |                                        |                  ||                  ||   =n_nationkey   |                                        |                  |
+|     p_partkey    |                                        |                  ||                  ||                  |                                        |                  |
+|    =ps_partkey   |                                        |                  ||                  ||                  |                                        |                  |
+|      (0.37s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.04s)     |                                        |      (0.00s)     |
+|       2988       |                                        |        25        ||         5        ||      800000      |                                        |         1        |
+--------------------                                        ------------------------------------------------------------                                        --------------------
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     partsupp     |                                        |       INNER      |                    |      nation      ||      region      |
+|                  |                    |                  |                                        |    ps_suppkey    |                    |                  ||                  |
+|                  |                    |                  |                                        |    =s_suppkey    |                    |                  ||                  |
+|      (0.01s)     |                    |      (0.00s)     |                                        |      (0.03s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      7470000     |                    |      800000      |                                        |      800000      |                    |        25        ||         5        |
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+----------------------------------------                                                            ----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|    LIKE(p_type   ||     supplier     |                                                            |     partsupp     ||     supplier     |
+|     , %BRASS     ||                  |                                                            |                  ||                  |
+|    p_size = 15   ||                  |                                                            |                  ||                  |
+|      (0.02s)     ||      (0.04s)     |                                                            |      (0.00s)     ||      (0.00s)     |
+|        747       ||      1920000     |                                                            |      800000      ||       10000      |
+----------------------------------------                                                            ----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  s_acctbal,  s_name,  n_name,  p_partkey,  p_mfgr,  s_address,  s_phone,  s_comment from  part,  supplier,  partsupp,  nation,  region where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and p_size = 15  and p_type like '%BRASS'  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  and ps_supplycost = (  select  min(ps_supplycost)  from  partsupp,  supplier,  nation,  region  where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  ) order by  s_acctbal desc,  n_name,  s_name,  p_partkey limit 100; 
+<<Timing>>
+Total Time: 0.634523s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| ps_supplycost=#0 |
+|   p_partkey=#1   |
+|      (0.01s)     |
+|        460       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|    n_regionkey   |                                                                                |                  |
+|   =r_regionkey   |                                                                                |                  |
+|      (0.02s)     |                                                                                |      (0.02s)     |
+|        642       |                                                                                |      117422      |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     HASH_JOIN    |
+|       INNER      |                                                            |  r_name = EUROPE ||       INNER      |
+|    s_nationkey   |                                                            |                  ||    n_regionkey   |
+|   =n_nationkey   |                                                            |                  ||   =r_regionkey   |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.04s)     |
+|       2988       |                                                            |         1        ||      158960      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |      nation      ||      region      ||       INNER      |                                        |  r_name = EUROPE |
+|     s_suppkey    |                                        |                  ||                  ||    s_nationkey   |                                        |                  |
+|    =ps_suppkey   |                                        |                  ||                  ||   =n_nationkey   |                                        |                  |
+|     p_partkey    |                                        |                  ||                  ||                  |                                        |                  |
+|    =ps_partkey   |                                        |                  ||                  ||                  |                                        |                  |
+|      (0.37s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.04s)     |                                        |      (0.00s)     |
+|       2988       |                                        |        25        ||         5        ||      800000      |                                        |         1        |
+--------------------                                        ------------------------------------------------------------                                        --------------------
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     partsupp     |                                        |       INNER      |                    |      nation      ||      region      |
+|                  |                    |                  |                                        |    ps_suppkey    |                    |                  ||                  |
+|                  |                    |                  |                                        |    =s_suppkey    |                    |                  ||                  |
+|      (0.01s)     |                    |      (0.00s)     |                                        |      (0.03s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      7470000     |                    |      800000      |                                        |      800000      |                    |        25        ||         5        |
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+----------------------------------------                                                            ----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|    LIKE(p_type   ||     supplier     |                                                            |     partsupp     ||     supplier     |
+|     , %BRASS     ||                  |                                                            |                  ||                  |
+|    p_size = 15   ||                  |                                                            |                  ||                  |
+|      (0.02s)     ||      (0.04s)     |                                                            |      (0.00s)     ||      (0.00s)     |
+|        747       ||      1920000     |                                                            |      800000      ||       10000      |
+----------------------------------------                                                            ----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
+<<Query Profiling Information>>
+select  s_acctbal,  s_name,  n_name,  p_partkey,  p_mfgr,  s_address,  s_phone,  s_comment from  part,  supplier,  partsupp,  nation,  region where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and p_size = 15  and p_type like '%BRASS'  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  and ps_supplycost = (  select  min(ps_supplycost)  from  partsupp,  supplier,  nation,  region  where  p_partkey = ps_partkey  and s_suppkey = ps_suppkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'EUROPE'  ) order by  s_acctbal desc,  n_name,  s_name,  p_partkey limit 100; 
+<<Timing>>
+Total Time: 0.635593s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        460       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| ps_supplycost=#0 |
+|   p_partkey=#1   |
+|      (0.01s)     |
+|        460       |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|    n_regionkey   |                                                                                |                  |
+|   =r_regionkey   |                                                                                |                  |
+|      (0.02s)     |                                                                                |      (0.02s)     |
+|        642       |                                                                                |      117422      |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     HASH_JOIN    |
+|       INNER      |                                                            |  r_name = EUROPE ||       INNER      |
+|    s_nationkey   |                                                            |                  ||    n_regionkey   |
+|   =n_nationkey   |                                                            |                  ||   =r_regionkey   |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.04s)     |
+|       2988       |                                                            |         1        ||      158960      |
+--------------------                                                            ----------------------------------------
+--------------------                                        ------------------------------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                        |      nation      ||      region      ||       INNER      |                                        |  r_name = EUROPE |
+|     s_suppkey    |                                        |                  ||                  ||    s_nationkey   |                                        |                  |
+|    =ps_suppkey   |                                        |                  ||                  ||   =n_nationkey   |                                        |                  |
+|     p_partkey    |                                        |                  ||                  ||                  |                                        |                  |
+|    =ps_partkey   |                                        |                  ||                  ||                  |                                        |                  |
+|      (0.37s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.04s)     |                                        |      (0.00s)     |
+|       2988       |                                        |        25        ||         5        ||      800000      |                                        |         1        |
+--------------------                                        ------------------------------------------------------------                                        --------------------
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+|   CROSS_PRODUCT  |                    |     SEQ_SCAN     |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     ||     SEQ_SCAN     |
+|                  |                    |     partsupp     |                                        |       INNER      |                    |      nation      ||      region      |
+|                  |                    |                  |                                        |    ps_suppkey    |                    |                  ||                  |
+|                  |                    |                  |                                        |    =s_suppkey    |                    |                  ||                  |
+|      (0.01s)     |                    |      (0.00s)     |                                        |      (0.03s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      7470000     |                    |      800000      |                                        |      800000      |                    |        25        ||         5        |
+--------------------                    --------------------                                        --------------------                    ----------------------------------------
+----------------------------------------                                                            ----------------------------------------
+|      FILTER      ||     SEQ_SCAN     |                                                            |     SEQ_SCAN     ||     SEQ_SCAN     |
+|    LIKE(p_type   ||     supplier     |                                                            |     partsupp     ||     supplier     |
+|     , %BRASS     ||                  |                                                            |                  ||                  |
+|    p_size = 15   ||                  |                                                            |                  ||                  |
+|      (0.02s)     ||      (0.04s)     |                                                            |      (0.00s)     ||      (0.00s)     |
+|        747       ||      1920000     |                                                            |      800000      ||       10000      |
+----------------------------------------                                                            ----------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|       part       |
+|      (0.00s)     |
+|      200000      |
+--------------------
+
