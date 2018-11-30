@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report f4d5b30 - planner/binder.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report f6877b6 - planner/binder.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report f4d5b30</td>
+            <td class="headerValue">DuckDB Code Coverage Report f6877b6</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">242</td>
-            <td class="headerCovTableEntry">265</td>
-            <td class="headerCovTableEntryHi">91.3 %</td>
+            <td class="headerCovTableEntry">243</td>
+            <td class="headerCovTableEntry">266</td>
+            <td class="headerCovTableEntryHi">91.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-11-30 10:11:06</td>
+            <td class="headerValue">2018-11-30 10:48:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
@@ -500,47 +500,48 @@
 <span class="lineNum">     438 </span><span class="lineCov">         57 :         AcceptChild(&amp;expr.left);</span>
 <span class="lineNum">     439 </span><span class="lineCov">         57 :         AcceptChild(&amp;expr.right);</span>
 <span class="lineNum">     440 </span><span class="lineCov">         57 :         AcceptChild(&amp;expr.condition);</span>
-<span class="lineNum">     441 </span><span class="lineCov">         57 :         return nullptr;</span>
-<a name="442"><span class="lineNum">     442 </span>            : }</a>
-<span class="lineNum">     443 </span>            : 
-<span class="lineNum">     444 </span><span class="lineCov">        315 : unique_ptr&lt;TableRef&gt; Binder::Visit(SubqueryRef &amp;expr) {</span>
-<span class="lineNum">     445 </span><span class="lineCov">        630 :         Binder binder(context, this);</span>
-<span class="lineNum">     446 </span><span class="lineCov">        315 :         expr.subquery-&gt;Accept(&amp;binder);</span>
-<span class="lineNum">     447 </span><span class="lineCov">        315 :         expr.context = move(binder.bind_context);</span>
-<span class="lineNum">     448 </span>            : 
-<span class="lineNum">     449 </span><span class="lineCov">        315 :         bind_context-&gt;AddSubquery(expr.alias, expr);</span>
-<span class="lineNum">     450 </span><span class="lineCov">        630 :         return nullptr;</span>
-<a name="451"><span class="lineNum">     451 </span>            : }</a>
-<span class="lineNum">     452 </span>            : 
-<span class="lineNum">     453 </span><span class="lineCov">          9 : unique_ptr&lt;TableRef&gt; Binder::Visit(TableFunction &amp;expr) {</span>
-<span class="lineNum">     454 </span><span class="lineCov">          9 :         auto function_definition = (FunctionExpression *)expr.function.get();</span>
-<span class="lineNum">     455 </span><span class="lineCov">          9 :         auto function = context.db.catalog.GetTableFunction(</span>
-<span class="lineNum">     456 </span><span class="lineCov">          9 :             context.ActiveTransaction(), function_definition);</span>
-<span class="lineNum">     457 </span><span class="lineCov">         18 :         bind_context-&gt;AddTableFunction(</span>
-<span class="lineNum">     458 </span><span class="lineCov">          9 :             expr.alias.empty() ? function_definition-&gt;function_name : expr.alias,</span>
-<span class="lineNum">     459 </span>            :             function);
-<span class="lineNum">     460 </span><span class="lineCov">          9 :         return nullptr;</span>
-<a name="461"><span class="lineNum">     461 </span>            : }</a>
-<span class="lineNum">     462 </span>            : 
-<span class="lineNum">     463 </span><span class="lineCov">         65 : void Binder::AddCTE(const std::string &amp;name, SelectStatement *cte) {</span>
-<span class="lineNum">     464 </span><span class="lineCov">         65 :         assert(cte);</span>
-<span class="lineNum">     465 </span><span class="lineCov">         65 :         assert(!name.empty());</span>
-<span class="lineNum">     466 </span><span class="lineCov">         65 :         auto entry = CTE_bindings.find(name);</span>
-<span class="lineNum">     467 </span><span class="lineCov">         65 :         if (entry != CTE_bindings.end()) {</span>
-<span class="lineNum">     468 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Duplicate CTE \&quot;%s\&quot; in query!&quot;, name.c_str());</span>
-<span class="lineNum">     469 </span>            :         }
-<a name="470"><span class="lineNum">     470 </span><span class="lineCov">         65 :         CTE_bindings[name] = cte;</span></a>
-<span class="lineNum">     471 </span><span class="lineCov">         65 : }</span>
-<span class="lineNum">     472 </span><span class="lineCov">      15666 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
-<span class="lineNum">     473 </span><span class="lineCov">      15666 :         auto entry = CTE_bindings.find(name);</span>
-<span class="lineNum">     474 </span><span class="lineCov">      15666 :         if (entry == CTE_bindings.end()) {</span>
-<span class="lineNum">     475 </span><span class="lineCov">      15548 :                 if (parent) {</span>
-<span class="lineNum">     476 </span><span class="lineCov">       2265 :                         return parent-&gt;FindCTE(name);</span>
-<span class="lineNum">     477 </span>            :                 }
-<span class="lineNum">     478 </span><span class="lineCov">      13283 :                 return nullptr;</span>
-<span class="lineNum">     479 </span>            :         }
-<span class="lineNum">     480 </span><span class="lineCov">        118 :         return entry-&gt;second-&gt;Copy();</span>
-<span class="lineNum">     481 </span>            : }
+<span class="lineNum">     441 </span><span class="lineCov">         57 :         expr.condition-&gt;ResolveType();</span>
+<span class="lineNum">     442 </span><span class="lineCov">         57 :         return nullptr;</span>
+<a name="443"><span class="lineNum">     443 </span>            : }</a>
+<span class="lineNum">     444 </span>            : 
+<span class="lineNum">     445 </span><span class="lineCov">        315 : unique_ptr&lt;TableRef&gt; Binder::Visit(SubqueryRef &amp;expr) {</span>
+<span class="lineNum">     446 </span><span class="lineCov">        630 :         Binder binder(context, this);</span>
+<span class="lineNum">     447 </span><span class="lineCov">        315 :         expr.subquery-&gt;Accept(&amp;binder);</span>
+<span class="lineNum">     448 </span><span class="lineCov">        315 :         expr.context = move(binder.bind_context);</span>
+<span class="lineNum">     449 </span>            : 
+<span class="lineNum">     450 </span><span class="lineCov">        315 :         bind_context-&gt;AddSubquery(expr.alias, expr);</span>
+<span class="lineNum">     451 </span><span class="lineCov">        630 :         return nullptr;</span>
+<a name="452"><span class="lineNum">     452 </span>            : }</a>
+<span class="lineNum">     453 </span>            : 
+<span class="lineNum">     454 </span><span class="lineCov">          9 : unique_ptr&lt;TableRef&gt; Binder::Visit(TableFunction &amp;expr) {</span>
+<span class="lineNum">     455 </span><span class="lineCov">          9 :         auto function_definition = (FunctionExpression *)expr.function.get();</span>
+<span class="lineNum">     456 </span><span class="lineCov">          9 :         auto function = context.db.catalog.GetTableFunction(</span>
+<span class="lineNum">     457 </span><span class="lineCov">          9 :             context.ActiveTransaction(), function_definition);</span>
+<span class="lineNum">     458 </span><span class="lineCov">         18 :         bind_context-&gt;AddTableFunction(</span>
+<span class="lineNum">     459 </span><span class="lineCov">          9 :             expr.alias.empty() ? function_definition-&gt;function_name : expr.alias,</span>
+<span class="lineNum">     460 </span>            :             function);
+<span class="lineNum">     461 </span><span class="lineCov">          9 :         return nullptr;</span>
+<a name="462"><span class="lineNum">     462 </span>            : }</a>
+<span class="lineNum">     463 </span>            : 
+<span class="lineNum">     464 </span><span class="lineCov">         65 : void Binder::AddCTE(const std::string &amp;name, SelectStatement *cte) {</span>
+<span class="lineNum">     465 </span><span class="lineCov">         65 :         assert(cte);</span>
+<span class="lineNum">     466 </span><span class="lineCov">         65 :         assert(!name.empty());</span>
+<span class="lineNum">     467 </span><span class="lineCov">         65 :         auto entry = CTE_bindings.find(name);</span>
+<span class="lineNum">     468 </span><span class="lineCov">         65 :         if (entry != CTE_bindings.end()) {</span>
+<span class="lineNum">     469 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Duplicate CTE \&quot;%s\&quot; in query!&quot;, name.c_str());</span>
+<span class="lineNum">     470 </span>            :         }
+<a name="471"><span class="lineNum">     471 </span><span class="lineCov">         65 :         CTE_bindings[name] = cte;</span></a>
+<span class="lineNum">     472 </span><span class="lineCov">         65 : }</span>
+<span class="lineNum">     473 </span><span class="lineCov">      15666 : unique_ptr&lt;SelectStatement&gt; Binder::FindCTE(const std::string &amp;name) {</span>
+<span class="lineNum">     474 </span><span class="lineCov">      15666 :         auto entry = CTE_bindings.find(name);</span>
+<span class="lineNum">     475 </span><span class="lineCov">      15666 :         if (entry == CTE_bindings.end()) {</span>
+<span class="lineNum">     476 </span><span class="lineCov">      15548 :                 if (parent) {</span>
+<span class="lineNum">     477 </span><span class="lineCov">       2265 :                         return parent-&gt;FindCTE(name);</span>
+<span class="lineNum">     478 </span>            :                 }
+<span class="lineNum">     479 </span><span class="lineCov">      13283 :                 return nullptr;</span>
+<span class="lineNum">     480 </span>            :         }
+<span class="lineNum">     481 </span><span class="lineCov">        118 :         return entry-&gt;second-&gt;Copy();</span>
+<span class="lineNum">     482 </span>            : }
 </pre>
       </td>
     </tr>
