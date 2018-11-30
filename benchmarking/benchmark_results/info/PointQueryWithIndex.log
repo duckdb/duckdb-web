@@ -1,0 +1,2 @@
+PointQueryWithIndex - [micro]
+Runs the following query: "SELECT j FROM integers WHERE i=50000" with an index
