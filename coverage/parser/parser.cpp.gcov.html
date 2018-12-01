@@ -1,0 +1,957 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 33674a1 - parser/parser.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">parser</a> - parser.cpp<span style="font-size: 80%;"> (source / <a href="parser.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 33674a1</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">90</td>
+            <td class="headerCovTableEntry">806</td>
+            <td class="headerCovTableEntryLo">11.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-01 12:33:35</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : </a>
+<span class="lineNum">       2 </span>            : #include &quot;parser/parser.hpp&quot;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &quot;parser/transform.hpp&quot;
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : using namespace postgres;
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : using namespace duckdb;
+<a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span><span class="lineCov">      40163 : Parser::Parser() : success(false) {</span>
+<a name="12"><span class="lineNum">      12 </span><span class="lineCov">      40163 : }</span></a>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">      40167 : bool Parser::ParseQuery(std::string query) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">      40167 :         void *context = nullptr;</span>
+<span class="lineNum">      16 </span><span class="lineCov">      40167 :         PgQueryInternalParsetreeAndError result;</span>
+<span class="lineNum">      17 </span>            :         try {
+<span class="lineNum">      18 </span>            :                 // first try to parse any PRAGMA statements
+<span class="lineNum">      19 </span><span class="lineCov">      40167 :                 if (ParsePragma(query)) {</span>
+<span class="lineNum">      20 </span>            :                         // query parsed as pragma statement
+<span class="lineNum">      21 </span>            :                         // if there was no error we were successful
+<span class="lineNum">      22 </span><span class="lineCov">          4 :                         this-&gt;success = this-&gt;message.empty();</span>
+<span class="lineNum">      23 </span><span class="lineCov">          4 :                         goto wrapup;</span>
+<span class="lineNum">      24 </span>            :                 }
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span>            :                 // use the postgres parser to parse the query
+<span class="lineNum">      27 </span><span class="lineCov">      40160 :                 context = pg_query_parse_init();</span>
+<span class="lineNum">      28 </span><span class="lineCov">      40160 :                 result = pg_query_parse(query.c_str());</span>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :                 // check if it succeeded
+<span class="lineNum">      31 </span><span class="lineCov">      40160 :                 this-&gt;success = false;</span>
+<span class="lineNum">      32 </span><span class="lineCov">      40160 :                 if (result.error) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">          4 :                         this-&gt;message = string(result.error-&gt;message) + &quot;[&quot; +</span>
+<span class="lineNum">      34 </span><span class="lineCov">          6 :                                         to_string(result.error-&gt;lineno) + &quot;:&quot; +</span>
+<span class="lineNum">      35 </span><span class="lineCov">          4 :                                         to_string(result.error-&gt;cursorpos) + &quot;]&quot;;</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :                         goto wrapup;</span>
+<span class="lineNum">      37 </span>            :                 }
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">      40159 :                 if (!result.tree) {</span>
+<span class="lineNum">      40 </span>            :                         // empty statement
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                         this-&gt;success = true;</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :                         goto wrapup;</span>
+<span class="lineNum">      43 </span>            :                 }
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            :                 // if it succeeded, we transform the Postgres parse tree into a list of
+<span class="lineNum">      46 </span>            :                 // SQLStatements
+<span class="lineNum">      47 </span><span class="lineCov">      40159 :                 if (!TransformList(result.tree)) {</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                         goto wrapup;</span>
+<span class="lineNum">      49 </span>            :                 }
+<span class="lineNum">      50 </span><span class="lineCov">      40157 :                 this-&gt;success = true;</span>
+<span class="lineNum">      51 </span><span class="lineCov">         10 :         } catch (Exception &amp;ex) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">          5 :                 this-&gt;message = ex.GetMessage();</span>
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :         } catch (...) {</span>
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 this-&gt;message = &quot;UNHANDLED EXCEPTION TYPE THROWN IN PARSER!&quot;;</span>
+<span class="lineNum">      55 </span>            :         }
+<span class="lineNum">      56 </span><span class="lineCov">      40167 : wrapup:</span>
+<span class="lineNum">      57 </span><span class="lineCov">      40167 :         if (context) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">      40160 :                 pg_query_parse_finish(context);</span>
+<span class="lineNum">      59 </span><span class="lineCov">      40160 :                 pg_query_free_parse_result(result);</span>
+<span class="lineNum">      60 </span>            :         }
+<span class="lineNum">      61 </span><span class="lineCov">      40167 :         return this-&gt;success;</span>
+<span class="lineNum">      62 </span>            : }
+<span class="lineNum">      63 </span>            : 
+<a name="64"><span class="lineNum">      64 </span>            : enum class PragmaType : uint8_t { NOTHING, ASSIGNMENT, CALL };</a>
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span><span class="lineCov">      40167 : bool Parser::ParsePragma(std::string &amp;query) {</span>
+<span class="lineNum">      67 </span>            :         // check if there is a PRAGMA statement, this is done before calling the
+<span class="lineNum">      68 </span>            :         // postgres parser
+<span class="lineNum">      69 </span><span class="lineCov">      40167 :         static const string pragma_string = &quot;PRAGMA&quot;;</span>
+<span class="lineNum">      70 </span><span class="lineCov">      40167 :         auto query_cstr = query.c_str();</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span>            :         // skip any spaces
+<span class="lineNum">      73 </span><span class="lineCov">      40167 :         size_t pos = 0;</span>
+<span class="lineNum">      74 </span><span class="lineCov">      40169 :         while (isspace(query_cstr[pos]))</span>
+<span class="lineNum">      75 </span><span class="lineCov">          2 :                 pos++;</span>
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span><span class="lineCov">      40167 :         if (pos + pragma_string.size() &gt;= query.size()) {</span>
+<span class="lineNum">      78 </span>            :                 // query is too small, can't contain PRAGMA
+<span class="lineNum">      79 </span><span class="lineCov">         11 :                 return false;</span>
+<span class="lineNum">      80 </span>            :         }
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span><span class="lineCov">      40156 :         if (query.compare(pos, pragma_string.size(), pragma_string.c_str()) != 0) {</span>
+<span class="lineNum">      83 </span>            :                 // statement does not start with PRAGMA
+<span class="lineNum">      84 </span><span class="lineCov">      40149 :                 return false;</span>
+<span class="lineNum">      85 </span>            :         }
+<span class="lineNum">      86 </span><span class="lineCov">          7 :         pos += pragma_string.size();</span>
+<span class="lineNum">      87 </span>            :         // string starts with PRAGMA, parse the pragma
+<span class="lineNum">      88 </span>            :         // first skip any spaces
+<span class="lineNum">      89 </span><span class="lineCov">         17 :         while (isspace(query_cstr[pos]))</span>
+<span class="lineNum">      90 </span><span class="lineCov">         10 :                 pos++;</span>
+<span class="lineNum">      91 </span>            :         // now look for the keyword
+<span class="lineNum">      92 </span><span class="lineCov">          7 :         size_t keyword_start = pos;</span>
+<span class="lineNum">      93 </span><span class="lineCov">         76 :         while (query_cstr[pos] &amp;&amp; query_cstr[pos] != ';' &amp;&amp;</span>
+<span class="lineNum">      94 </span><span class="lineCov">        154 :                query_cstr[pos] != '=' &amp;&amp; query_cstr[pos] != '(' &amp;&amp;</span>
+<span class="lineNum">      95 </span><span class="lineCov">         73 :                !isspace(query_cstr[pos]))</span>
+<span class="lineNum">      96 </span><span class="lineCov">         71 :                 pos++;</span>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span>            :         // no keyword found
+<span class="lineNum">      99 </span><span class="lineCov">          7 :         if (pos == keyword_start) {</span>
+<span class="lineNum">     100 </span><span class="lineCov">          1 :                 throw ParserException(&quot;Invalid PRAGMA: PRAGMA without keyword&quot;);</span>
+<span class="lineNum">     101 </span>            :         }
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span><span class="lineCov">          8 :         string keyword = query.substr(keyword_start, pos - keyword_start);</span>
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span><span class="lineCov">          9 :         while (isspace(query_cstr[pos]))</span>
+<span class="lineNum">     106 </span><span class="lineCov">          3 :                 pos++;</span>
+<span class="lineNum">     107 </span>            : 
+<span class="lineNum">     108 </span>            :         PragmaType type;
+<span class="lineNum">     109 </span><span class="lineCov">          6 :         if (query_cstr[pos] == '=') {</span>
+<span class="lineNum">     110 </span>            :                 // assignment
+<span class="lineNum">     111 </span><span class="lineCov">          1 :                 type = PragmaType::ASSIGNMENT;</span>
+<span class="lineNum">     112 </span><span class="lineCov">          5 :         } else if (query_cstr[pos] == '(') {</span>
+<span class="lineNum">     113 </span>            :                 // function call
+<span class="lineNum">     114 </span><span class="lineCov">          4 :                 type = PragmaType::CALL;</span>
+<span class="lineNum">     115 </span>            :         } else {
+<span class="lineNum">     116 </span>            :                 // nothing
+<span class="lineNum">     117 </span><span class="lineCov">          1 :                 type = PragmaType::NOTHING;</span>
+<span class="lineNum">     118 </span>            :         }
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span><span class="lineCov">          6 :         if (keyword == &quot;table_info&quot;) {</span>
+<span class="lineNum">     121 </span><span class="lineCov">          5 :                 if (type != PragmaType::CALL) {</span>
+<span class="lineNum">     122 </span>            :                         throw ParserException(
+<span class="lineNum">     123 </span><span class="lineCov">          1 :                             &quot;Invalid PRAGMA table_info: expected table name&quot;);</span>
+<span class="lineNum">     124 </span>            :                 }
+<span class="lineNum">     125 </span><span class="lineCov">          4 :                 ParseQuery(&quot;SELECT * FROM pragma_&quot; + query.substr(keyword_start));</span>
+<span class="lineNum">     126 </span>            :         } else {
+<span class="lineNum">     127 </span>            :                 throw ParserException(&quot;Unrecognized PRAGMA keyword: %s&quot;,
+<span class="lineNum">     128 </span><span class="lineCov">          1 :                                       keyword.c_str());</span>
+<span class="lineNum">     129 </span>            :         }
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span><span class="lineCov">          4 :         return true;</span>
+<a name="132"><span class="lineNum">     132 </span>            : }</a>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span><span class="lineCov">      40159 : bool Parser::TransformList(List *tree) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">      80316 :         for (auto entry = tree-&gt;head; entry != nullptr; entry = entry-&gt;next) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">      40159 :                 auto stmt = TransformNode((Node *)entry-&gt;data.ptr_value);</span>
+<span class="lineNum">     137 </span><span class="lineCov">      40157 :                 if (!stmt) {</span>
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :                         statements.clear();</span>
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     140 </span>            :                 }
+<span class="lineNum">     141 </span><span class="lineCov">      40157 :                 statements.push_back(move(stmt));</span>
+<span class="lineNum">     142 </span>            :         }
+<span class="lineNum">     143 </span><span class="lineCov">      40157 :         return true;</span>
+<a name="144"><span class="lineNum">     144 </span>            : }</a>
+<span class="lineNum">     145 </span>            : 
+<span class="lineNum">     146 </span><span class="lineCov">      40159 : unique_ptr&lt;SQLStatement&gt; Parser::TransformNode(Node *stmt) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">      40159 :         switch (stmt-&gt;type) {</span>
+<span class="lineNum">     148 </span><span class="lineCov">       6938 :         case T_SelectStmt:</span>
+<span class="lineNum">     149 </span><span class="lineCov">       6938 :                 return TransformSelect(stmt);</span>
+<span class="lineNum">     150 </span><span class="lineCov">        169 :         case T_CreateStmt:</span>
+<span class="lineNum">     151 </span><span class="lineCov">        169 :                 return TransformCreateTable(stmt);</span>
+<span class="lineNum">     152 </span><span class="lineCov">          8 :         case T_CreateSchemaStmt:</span>
+<span class="lineNum">     153 </span><span class="lineCov">          8 :                 return TransformCreateSchema(stmt);</span>
+<span class="lineNum">     154 </span><span class="lineCov">         21 :         case T_DropStmt:</span>
+<span class="lineNum">     155 </span><span class="lineCov">         21 :                 return TransformDrop(stmt);</span>
+<span class="lineNum">     156 </span><span class="lineCov">      30703 :         case T_InsertStmt:</span>
+<span class="lineNum">     157 </span><span class="lineCov">      30703 :                 return TransformInsert(stmt);</span>
+<span class="lineNum">     158 </span><span class="lineCov">          7 :         case T_CopyStmt:</span>
+<span class="lineNum">     159 </span><span class="lineCov">          7 :                 return TransformCopy(stmt);</span>
+<span class="lineNum">     160 </span><span class="lineCov">        266 :         case T_TransactionStmt:</span>
+<span class="lineNum">     161 </span><span class="lineCov">        266 :                 return TransformTransaction(stmt);</span>
+<span class="lineNum">     162 </span><span class="lineCov">         16 :         case T_DeleteStmt:</span>
+<span class="lineNum">     163 </span><span class="lineCov">         16 :                 return TransformDelete(stmt);</span>
+<span class="lineNum">     164 </span><span class="lineCov">       2023 :         case T_UpdateStmt:</span>
+<span class="lineNum">     165 </span><span class="lineCov">       2023 :                 return TransformUpdate(stmt);</span>
+<span class="lineNum">     166 </span><span class="lineCov">          2 :         case T_IndexStmt:</span>
+<span class="lineNum">     167 </span><span class="lineCov">          2 :                 return TransformCreateIndex(stmt);</span>
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :         case T_AlterTableStmt:</span>
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :                 return TransformAlter(stmt);</span>
+<span class="lineNum">     170 </span><span class="lineCov">          6 :         case T_RenameStmt:</span>
+<span class="lineNum">     171 </span><span class="lineCov">          6 :                 return TransformRename(stmt);</span>
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :         case T_ExplainStmt: {</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                 ExplainStmt *explain_stmt = reinterpret_cast&lt;ExplainStmt *&gt;(stmt);</span>
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :                 return make_unique&lt;ExplainStatement&gt;(</span>
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :                     TransformNode(explain_stmt-&gt;query));</span>
+<span class="lineNum">     176 </span>            :         }
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;A_Expr not implemented!&quot;);</span>
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :         case T_Invalid:</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :         case T_IndexInfo:</span>
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :         case T_ExprContext:</span>
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     185 </span><span class="lineNoCov">          0 :         case T_ProjectionInfo:</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :         case T_JunkFilter:</span>
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     189 </span><span class="lineNoCov">          0 :         case T_ResultRelInfo:</span>
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :         case T_EState:</span>
+<span class="lineNum">     192 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :         case T_TupleTableSlot:</span>
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :         case T_Plan:</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :         case T_Result:</span>
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     199 </span><span class="lineNoCov">          0 :         case T_ModifyTable:</span>
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :         case T_Append:</span>
+<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :         case T_MergeAppend:</span>
+<span class="lineNum">     204 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :         case T_RecursiveUnion:</span>
+<span class="lineNum">     206 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     207 </span><span class="lineNoCov">          0 :         case T_BitmapAnd:</span>
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     209 </span><span class="lineNoCov">          0 :         case T_BitmapOr:</span>
+<span class="lineNum">     210 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     211 </span><span class="lineNoCov">          0 :         case T_Scan:</span>
+<span class="lineNum">     212 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :         case T_SeqScan:</span>
+<span class="lineNum">     214 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :         case T_SampleScan:</span>
+<span class="lineNum">     216 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     217 </span><span class="lineNoCov">          0 :         case T_IndexScan:</span>
+<span class="lineNum">     218 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     219 </span><span class="lineNoCov">          0 :         case T_IndexOnlyScan:</span>
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     221 </span><span class="lineNoCov">          0 :         case T_BitmapIndexScan:</span>
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :         case T_BitmapHeapScan:</span>
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 :         case T_TidScan:</span>
+<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     227 </span><span class="lineNoCov">          0 :         case T_SubqueryScan:</span>
+<span class="lineNum">     228 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :         case T_FunctionScan:</span>
+<span class="lineNum">     230 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :         case T_ValuesScan:</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :         case T_CteScan:</span>
+<span class="lineNum">     234 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :         case T_WorkTableScan:</span>
+<span class="lineNum">     236 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     237 </span><span class="lineNoCov">          0 :         case T_ForeignScan:</span>
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :         case T_CustomScan:</span>
+<span class="lineNum">     240 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     241 </span><span class="lineNoCov">          0 :         case T_Join:</span>
+<span class="lineNum">     242 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     243 </span><span class="lineNoCov">          0 :         case T_NestLoop:</span>
+<span class="lineNum">     244 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     245 </span><span class="lineNoCov">          0 :         case T_MergeJoin:</span>
+<span class="lineNum">     246 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     247 </span><span class="lineNoCov">          0 :         case T_HashJoin:</span>
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     249 </span><span class="lineNoCov">          0 :         case T_Material:</span>
+<span class="lineNum">     250 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     251 </span><span class="lineNoCov">          0 :         case T_Sort:</span>
+<span class="lineNum">     252 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     253 </span><span class="lineNoCov">          0 :         case T_Group:</span>
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     255 </span><span class="lineNoCov">          0 :         case T_Agg:</span>
+<span class="lineNum">     256 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :         case T_WindowAgg:</span>
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 :         case T_Unique:</span>
+<span class="lineNum">     260 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     261 </span><span class="lineNoCov">          0 :         case T_Hash:</span>
+<span class="lineNum">     262 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     263 </span><span class="lineNoCov">          0 :         case T_SetOp:</span>
+<span class="lineNum">     264 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     265 </span><span class="lineNoCov">          0 :         case T_LockRows:</span>
+<span class="lineNum">     266 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     267 </span><span class="lineNoCov">          0 :         case T_Limit:</span>
+<span class="lineNum">     268 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     269 </span><span class="lineNoCov">          0 :         case T_NestLoopParam:</span>
+<span class="lineNum">     270 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     271 </span><span class="lineNoCov">          0 :         case T_PlanRowMark:</span>
+<span class="lineNum">     272 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     273 </span><span class="lineNoCov">          0 :         case T_PlanInvalItem:</span>
+<span class="lineNum">     274 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     275 </span><span class="lineNoCov">          0 :         case T_PlanState:</span>
+<span class="lineNum">     276 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     277 </span><span class="lineNoCov">          0 :         case T_ResultState:</span>
+<span class="lineNum">     278 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     279 </span><span class="lineNoCov">          0 :         case T_ModifyTableState:</span>
+<span class="lineNum">     280 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     281 </span><span class="lineNoCov">          0 :         case T_AppendState:</span>
+<span class="lineNum">     282 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     283 </span><span class="lineNoCov">          0 :         case T_MergeAppendState:</span>
+<span class="lineNum">     284 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     285 </span><span class="lineNoCov">          0 :         case T_RecursiveUnionState:</span>
+<span class="lineNum">     286 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     287 </span><span class="lineNoCov">          0 :         case T_BitmapAndState:</span>
+<span class="lineNum">     288 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     289 </span><span class="lineNoCov">          0 :         case T_BitmapOrState:</span>
+<span class="lineNum">     290 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     291 </span><span class="lineNoCov">          0 :         case T_ScanState:</span>
+<span class="lineNum">     292 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     293 </span><span class="lineNoCov">          0 :         case T_SeqScanState:</span>
+<span class="lineNum">     294 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     295 </span><span class="lineNoCov">          0 :         case T_SampleScanState:</span>
+<span class="lineNum">     296 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     297 </span><span class="lineNoCov">          0 :         case T_IndexScanState:</span>
+<span class="lineNum">     298 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     299 </span><span class="lineNoCov">          0 :         case T_IndexOnlyScanState:</span>
+<span class="lineNum">     300 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     301 </span><span class="lineNoCov">          0 :         case T_BitmapIndexScanState:</span>
+<span class="lineNum">     302 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     303 </span><span class="lineNoCov">          0 :         case T_BitmapHeapScanState:</span>
+<span class="lineNum">     304 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     305 </span><span class="lineNoCov">          0 :         case T_TidScanState:</span>
+<span class="lineNum">     306 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     307 </span><span class="lineNoCov">          0 :         case T_SubqueryScanState:</span>
+<span class="lineNum">     308 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     309 </span><span class="lineNoCov">          0 :         case T_FunctionScanState:</span>
+<span class="lineNum">     310 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     311 </span><span class="lineNoCov">          0 :         case T_ValuesScanState:</span>
+<span class="lineNum">     312 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     313 </span><span class="lineNoCov">          0 :         case T_CteScanState:</span>
+<span class="lineNum">     314 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     315 </span><span class="lineNoCov">          0 :         case T_WorkTableScanState:</span>
+<span class="lineNum">     316 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     317 </span><span class="lineNoCov">          0 :         case T_ForeignScanState:</span>
+<span class="lineNum">     318 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     319 </span><span class="lineNoCov">          0 :         case T_CustomScanState:</span>
+<span class="lineNum">     320 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     321 </span><span class="lineNoCov">          0 :         case T_JoinState:</span>
+<span class="lineNum">     322 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     323 </span><span class="lineNoCov">          0 :         case T_NestLoopState:</span>
+<span class="lineNum">     324 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     325 </span><span class="lineNoCov">          0 :         case T_MergeJoinState:</span>
+<span class="lineNum">     326 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     327 </span><span class="lineNoCov">          0 :         case T_HashJoinState:</span>
+<span class="lineNum">     328 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     329 </span><span class="lineNoCov">          0 :         case T_MaterialState:</span>
+<span class="lineNum">     330 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     331 </span><span class="lineNoCov">          0 :         case T_SortState:</span>
+<span class="lineNum">     332 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     333 </span><span class="lineNoCov">          0 :         case T_GroupState:</span>
+<span class="lineNum">     334 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     335 </span><span class="lineNoCov">          0 :         case T_AggState:</span>
+<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     337 </span><span class="lineNoCov">          0 :         case T_WindowAggState:</span>
+<span class="lineNum">     338 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     339 </span><span class="lineNoCov">          0 :         case T_UniqueState:</span>
+<span class="lineNum">     340 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     341 </span><span class="lineNoCov">          0 :         case T_HashState:</span>
+<span class="lineNum">     342 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     343 </span><span class="lineNoCov">          0 :         case T_SetOpState:</span>
+<span class="lineNum">     344 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :         case T_LockRowsState:</span>
+<span class="lineNum">     346 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     347 </span><span class="lineNoCov">          0 :         case T_LimitState:</span>
+<span class="lineNum">     348 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     349 </span><span class="lineNoCov">          0 :         case T_Alias:</span>
+<span class="lineNum">     350 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     351 </span><span class="lineNoCov">          0 :         case T_RangeVar:</span>
+<span class="lineNum">     352 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     353 </span><span class="lineNoCov">          0 :         case T_Expr:</span>
+<span class="lineNum">     354 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     355 </span><span class="lineNoCov">          0 :         case T_Var:</span>
+<span class="lineNum">     356 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     357 </span><span class="lineNoCov">          0 :         case T_Const:</span>
+<span class="lineNum">     358 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     359 </span><span class="lineNoCov">          0 :         case T_Param:</span>
+<span class="lineNum">     360 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     361 </span><span class="lineNoCov">          0 :         case T_Aggref:</span>
+<span class="lineNum">     362 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     363 </span><span class="lineNoCov">          0 :         case T_GroupingFunc:</span>
+<span class="lineNum">     364 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     365 </span><span class="lineNoCov">          0 :         case T_WindowFunc:</span>
+<span class="lineNum">     366 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     367 </span><span class="lineNoCov">          0 :         case T_ArrayRef:</span>
+<span class="lineNum">     368 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     369 </span><span class="lineNoCov">          0 :         case T_FuncExpr:</span>
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     371 </span><span class="lineNoCov">          0 :         case T_NamedArgExpr:</span>
+<span class="lineNum">     372 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     373 </span><span class="lineNoCov">          0 :         case T_OpExpr:</span>
+<span class="lineNum">     374 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     375 </span><span class="lineNoCov">          0 :         case T_DistinctExpr:</span>
+<span class="lineNum">     376 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     377 </span><span class="lineNoCov">          0 :         case T_NullIfExpr:</span>
+<span class="lineNum">     378 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     379 </span><span class="lineNoCov">          0 :         case T_ScalarArrayOpExpr:</span>
+<span class="lineNum">     380 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     381 </span><span class="lineNoCov">          0 :         case T_BoolExpr:</span>
+<span class="lineNum">     382 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     383 </span><span class="lineNoCov">          0 :         case T_SubLink:</span>
+<span class="lineNum">     384 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     385 </span><span class="lineNoCov">          0 :         case T_SubPlan:</span>
+<span class="lineNum">     386 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     387 </span><span class="lineNoCov">          0 :         case T_AlternativeSubPlan:</span>
+<span class="lineNum">     388 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     389 </span><span class="lineNoCov">          0 :         case T_FieldSelect:</span>
+<span class="lineNum">     390 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     391 </span><span class="lineNoCov">          0 :         case T_FieldStore:</span>
+<span class="lineNum">     392 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     393 </span><span class="lineNoCov">          0 :         case T_RelabelType:</span>
+<span class="lineNum">     394 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     395 </span><span class="lineNoCov">          0 :         case T_CoerceViaIO:</span>
+<span class="lineNum">     396 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     397 </span><span class="lineNoCov">          0 :         case T_ArrayCoerceExpr:</span>
+<span class="lineNum">     398 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     399 </span><span class="lineNoCov">          0 :         case T_ConvertRowtypeExpr:</span>
+<span class="lineNum">     400 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     401 </span><span class="lineNoCov">          0 :         case T_CollateExpr:</span>
+<span class="lineNum">     402 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     403 </span><span class="lineNoCov">          0 :         case T_CaseExpr:</span>
+<span class="lineNum">     404 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     405 </span><span class="lineNoCov">          0 :         case T_CaseWhen:</span>
+<span class="lineNum">     406 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     407 </span><span class="lineNoCov">          0 :         case T_CaseTestExpr:</span>
+<span class="lineNum">     408 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     409 </span><span class="lineNoCov">          0 :         case T_ArrayExpr:</span>
+<span class="lineNum">     410 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     411 </span><span class="lineNoCov">          0 :         case T_RowExpr:</span>
+<span class="lineNum">     412 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     413 </span><span class="lineNoCov">          0 :         case T_RowCompareExpr:</span>
+<span class="lineNum">     414 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     415 </span><span class="lineNoCov">          0 :         case T_CoalesceExpr:</span>
+<span class="lineNum">     416 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     417 </span><span class="lineNoCov">          0 :         case T_MinMaxExpr:</span>
+<span class="lineNum">     418 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     419 </span><span class="lineNoCov">          0 :         case T_XmlExpr:</span>
+<span class="lineNum">     420 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     421 </span><span class="lineNoCov">          0 :         case T_NullTest:</span>
+<span class="lineNum">     422 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     423 </span><span class="lineNoCov">          0 :         case T_BooleanTest:</span>
+<span class="lineNum">     424 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     425 </span><span class="lineNoCov">          0 :         case T_CoerceToDomain:</span>
+<span class="lineNum">     426 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     427 </span><span class="lineNoCov">          0 :         case T_CoerceToDomainValue:</span>
+<span class="lineNum">     428 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     429 </span><span class="lineNoCov">          0 :         case T_SetToDefault:</span>
+<span class="lineNum">     430 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     431 </span><span class="lineNoCov">          0 :         case T_CurrentOfExpr:</span>
+<span class="lineNum">     432 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     433 </span><span class="lineNoCov">          0 :         case T_InferenceElem:</span>
+<span class="lineNum">     434 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     435 </span><span class="lineNoCov">          0 :         case T_TargetEntry:</span>
+<span class="lineNum">     436 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     437 </span><span class="lineNoCov">          0 :         case T_RangeTblRef:</span>
+<span class="lineNum">     438 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     439 </span><span class="lineNoCov">          0 :         case T_JoinExpr:</span>
+<span class="lineNum">     440 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     441 </span><span class="lineNoCov">          0 :         case T_FromExpr:</span>
+<span class="lineNum">     442 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     443 </span><span class="lineNoCov">          0 :         case T_OnConflictExpr:</span>
+<span class="lineNum">     444 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     445 </span><span class="lineNoCov">          0 :         case T_IntoClause:</span>
+<span class="lineNum">     446 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     447 </span><span class="lineNoCov">          0 :         case T_ExprState:</span>
+<span class="lineNum">     448 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     449 </span><span class="lineNoCov">          0 :         case T_GenericExprState:</span>
+<span class="lineNum">     450 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     451 </span><span class="lineNoCov">          0 :         case T_WholeRowVarExprState:</span>
+<span class="lineNum">     452 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     453 </span><span class="lineNoCov">          0 :         case T_AggrefExprState:</span>
+<span class="lineNum">     454 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     455 </span><span class="lineNoCov">          0 :         case T_GroupingFuncExprState:</span>
+<span class="lineNum">     456 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     457 </span><span class="lineNoCov">          0 :         case T_WindowFuncExprState:</span>
+<span class="lineNum">     458 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     459 </span><span class="lineNoCov">          0 :         case T_ArrayRefExprState:</span>
+<span class="lineNum">     460 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     461 </span><span class="lineNoCov">          0 :         case T_FuncExprState:</span>
+<span class="lineNum">     462 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     463 </span><span class="lineNoCov">          0 :         case T_ScalarArrayOpExprState:</span>
+<span class="lineNum">     464 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     465 </span><span class="lineNoCov">          0 :         case T_BoolExprState:</span>
+<span class="lineNum">     466 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     467 </span><span class="lineNoCov">          0 :         case T_SubPlanState:</span>
+<span class="lineNum">     468 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     469 </span><span class="lineNoCov">          0 :         case T_AlternativeSubPlanState:</span>
+<span class="lineNum">     470 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     471 </span><span class="lineNoCov">          0 :         case T_FieldSelectState:</span>
+<span class="lineNum">     472 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     473 </span><span class="lineNoCov">          0 :         case T_FieldStoreState:</span>
+<span class="lineNum">     474 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     475 </span><span class="lineNoCov">          0 :         case T_CoerceViaIOState:</span>
+<span class="lineNum">     476 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     477 </span><span class="lineNoCov">          0 :         case T_ArrayCoerceExprState:</span>
+<span class="lineNum">     478 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     479 </span><span class="lineNoCov">          0 :         case T_ConvertRowtypeExprState:</span>
+<span class="lineNum">     480 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     481 </span><span class="lineNoCov">          0 :         case T_CaseExprState:</span>
+<span class="lineNum">     482 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     483 </span><span class="lineNoCov">          0 :         case T_CaseWhenState:</span>
+<span class="lineNum">     484 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     485 </span><span class="lineNoCov">          0 :         case T_ArrayExprState:</span>
+<span class="lineNum">     486 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     487 </span><span class="lineNoCov">          0 :         case T_RowExprState:</span>
+<span class="lineNum">     488 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     489 </span><span class="lineNoCov">          0 :         case T_RowCompareExprState:</span>
+<span class="lineNum">     490 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     491 </span><span class="lineNoCov">          0 :         case T_CoalesceExprState:</span>
+<span class="lineNum">     492 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     493 </span><span class="lineNoCov">          0 :         case T_MinMaxExprState:</span>
+<span class="lineNum">     494 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     495 </span><span class="lineNoCov">          0 :         case T_XmlExprState:</span>
+<span class="lineNum">     496 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     497 </span><span class="lineNoCov">          0 :         case T_NullTestState:</span>
+<span class="lineNum">     498 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     499 </span><span class="lineNoCov">          0 :         case T_CoerceToDomainState:</span>
+<span class="lineNum">     500 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     501 </span><span class="lineNoCov">          0 :         case T_DomainConstraintState:</span>
+<span class="lineNum">     502 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     503 </span><span class="lineNoCov">          0 :         case T_PlannerInfo:</span>
+<span class="lineNum">     504 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     505 </span><span class="lineNoCov">          0 :         case T_PlannerGlobal:</span>
+<span class="lineNum">     506 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     507 </span><span class="lineNoCov">          0 :         case T_RelOptInfo:</span>
+<span class="lineNum">     508 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     509 </span><span class="lineNoCov">          0 :         case T_IndexOptInfo:</span>
+<span class="lineNum">     510 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     511 </span><span class="lineNoCov">          0 :         case T_ParamPathInfo:</span>
+<span class="lineNum">     512 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     513 </span><span class="lineNoCov">          0 :         case T_Path:</span>
+<span class="lineNum">     514 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     515 </span><span class="lineNoCov">          0 :         case T_IndexPath:</span>
+<span class="lineNum">     516 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     517 </span><span class="lineNoCov">          0 :         case T_BitmapHeapPath:</span>
+<span class="lineNum">     518 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     519 </span><span class="lineNoCov">          0 :         case T_BitmapAndPath:</span>
+<span class="lineNum">     520 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     521 </span><span class="lineNoCov">          0 :         case T_BitmapOrPath:</span>
+<span class="lineNum">     522 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     523 </span><span class="lineNoCov">          0 :         case T_NestPath:</span>
+<span class="lineNum">     524 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     525 </span><span class="lineNoCov">          0 :         case T_MergePath:</span>
+<span class="lineNum">     526 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     527 </span><span class="lineNoCov">          0 :         case T_HashPath:</span>
+<span class="lineNum">     528 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     529 </span><span class="lineNoCov">          0 :         case T_TidPath:</span>
+<span class="lineNum">     530 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     531 </span><span class="lineNoCov">          0 :         case T_ForeignPath:</span>
+<span class="lineNum">     532 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     533 </span><span class="lineNoCov">          0 :         case T_CustomPath:</span>
+<span class="lineNum">     534 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     535 </span><span class="lineNoCov">          0 :         case T_AppendPath:</span>
+<span class="lineNum">     536 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     537 </span><span class="lineNoCov">          0 :         case T_MergeAppendPath:</span>
+<span class="lineNum">     538 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     539 </span><span class="lineNoCov">          0 :         case T_ResultPath:</span>
+<span class="lineNum">     540 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     541 </span><span class="lineNoCov">          0 :         case T_MaterialPath:</span>
+<span class="lineNum">     542 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     543 </span><span class="lineNoCov">          0 :         case T_UniquePath:</span>
+<span class="lineNum">     544 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     545 </span><span class="lineNoCov">          0 :         case T_EquivalenceClass:</span>
+<span class="lineNum">     546 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     547 </span><span class="lineNoCov">          0 :         case T_EquivalenceMember:</span>
+<span class="lineNum">     548 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     549 </span><span class="lineNoCov">          0 :         case T_PathKey:</span>
+<span class="lineNum">     550 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     551 </span><span class="lineNoCov">          0 :         case T_RestrictInfo:</span>
+<span class="lineNum">     552 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     553 </span><span class="lineNoCov">          0 :         case T_PlaceHolderVar:</span>
+<span class="lineNum">     554 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     555 </span><span class="lineNoCov">          0 :         case T_SpecialJoinInfo:</span>
+<span class="lineNum">     556 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     557 </span><span class="lineNoCov">          0 :         case T_AppendRelInfo:</span>
+<span class="lineNum">     558 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     559 </span><span class="lineNoCov">          0 :         case T_PlaceHolderInfo:</span>
+<span class="lineNum">     560 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     561 </span><span class="lineNoCov">          0 :         case T_MinMaxAggInfo:</span>
+<span class="lineNum">     562 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     563 </span><span class="lineNoCov">          0 :         case T_PlannerParamItem:</span>
+<span class="lineNum">     564 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     565 </span><span class="lineNoCov">          0 :         case T_MemoryContext:</span>
+<span class="lineNum">     566 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     567 </span><span class="lineNoCov">          0 :         case T_AllocSetContext:</span>
+<span class="lineNum">     568 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     569 </span><span class="lineNoCov">          0 :         case T_Value:</span>
+<span class="lineNum">     570 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     571 </span><span class="lineNoCov">          0 :         case T_Integer:</span>
+<span class="lineNum">     572 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     573 </span><span class="lineNoCov">          0 :         case T_Float:</span>
+<span class="lineNum">     574 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     575 </span><span class="lineNoCov">          0 :         case T_String:</span>
+<span class="lineNum">     576 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     577 </span><span class="lineNoCov">          0 :         case T_BitString:</span>
+<span class="lineNum">     578 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     579 </span><span class="lineNoCov">          0 :         case T_Null:</span>
+<span class="lineNum">     580 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     581 </span><span class="lineNoCov">          0 :         case T_List:</span>
+<span class="lineNum">     582 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     583 </span><span class="lineNoCov">          0 :         case T_IntList:</span>
+<span class="lineNum">     584 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     585 </span><span class="lineNoCov">          0 :         case T_OidList:</span>
+<span class="lineNum">     586 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     587 </span><span class="lineNoCov">          0 :         case T_Query:</span>
+<span class="lineNum">     588 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     589 </span><span class="lineNoCov">          0 :         case T_PlannedStmt:</span>
+<span class="lineNum">     590 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     591 </span><span class="lineNoCov">          0 :         case T_AlterTableCmd:</span>
+<span class="lineNum">     592 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     593 </span><span class="lineNoCov">          0 :         case T_AlterDomainStmt:</span>
+<span class="lineNum">     594 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     595 </span><span class="lineNoCov">          0 :         case T_SetOperationStmt:</span>
+<span class="lineNum">     596 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     597 </span><span class="lineNoCov">          0 :         case T_GrantStmt:</span>
+<span class="lineNum">     598 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     599 </span><span class="lineNoCov">          0 :         case T_GrantRoleStmt:</span>
+<span class="lineNum">     600 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     601 </span><span class="lineNoCov">          0 :         case T_AlterDefaultPrivilegesStmt:</span>
+<span class="lineNum">     602 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     603 </span><span class="lineNoCov">          0 :         case T_ClosePortalStmt:</span>
+<span class="lineNum">     604 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     605 </span><span class="lineNoCov">          0 :         case T_ClusterStmt:</span>
+<span class="lineNum">     606 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     607 </span><span class="lineNoCov">          0 :         case T_DefineStmt:</span>
+<span class="lineNum">     608 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     609 </span><span class="lineNoCov">          0 :         case T_TruncateStmt:</span>
+<span class="lineNum">     610 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     611 </span><span class="lineNoCov">          0 :         case T_CommentStmt:</span>
+<span class="lineNum">     612 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     613 </span><span class="lineNoCov">          0 :         case T_FetchStmt:</span>
+<span class="lineNum">     614 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     615 </span><span class="lineNoCov">          0 :         case T_CreateFunctionStmt:</span>
+<span class="lineNum">     616 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     617 </span><span class="lineNoCov">          0 :         case T_AlterFunctionStmt:</span>
+<span class="lineNum">     618 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     619 </span><span class="lineNoCov">          0 :         case T_DoStmt:</span>
+<span class="lineNum">     620 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     621 </span><span class="lineNoCov">          0 :         case T_RuleStmt:</span>
+<span class="lineNum">     622 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     623 </span><span class="lineNoCov">          0 :         case T_NotifyStmt:</span>
+<span class="lineNum">     624 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     625 </span><span class="lineNoCov">          0 :         case T_ListenStmt:</span>
+<span class="lineNum">     626 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     627 </span><span class="lineNoCov">          0 :         case T_UnlistenStmt:</span>
+<span class="lineNum">     628 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     629 </span><span class="lineNoCov">          0 :         case T_ViewStmt:</span>
+<span class="lineNum">     630 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     631 </span><span class="lineNoCov">          0 :         case T_LoadStmt:</span>
+<span class="lineNum">     632 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     633 </span><span class="lineNoCov">          0 :         case T_CreateDomainStmt:</span>
+<span class="lineNum">     634 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     635 </span><span class="lineNoCov">          0 :         case T_CreatedbStmt:</span>
+<span class="lineNum">     636 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     637 </span><span class="lineNoCov">          0 :         case T_DropdbStmt:</span>
+<span class="lineNum">     638 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     639 </span><span class="lineNoCov">          0 :         case T_VacuumStmt:</span>
+<span class="lineNum">     640 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     641 </span><span class="lineNoCov">          0 :         case T_CreateTableAsStmt:</span>
+<span class="lineNum">     642 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     643 </span><span class="lineNoCov">          0 :         case T_CreateSeqStmt:</span>
+<span class="lineNum">     644 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     645 </span><span class="lineNoCov">          0 :         case T_AlterSeqStmt:</span>
+<span class="lineNum">     646 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     647 </span><span class="lineNoCov">          0 :         case T_VariableSetStmt:</span>
+<span class="lineNum">     648 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     649 </span><span class="lineNoCov">          0 :         case T_VariableShowStmt:</span>
+<span class="lineNum">     650 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     651 </span><span class="lineNoCov">          0 :         case T_DiscardStmt:</span>
+<span class="lineNum">     652 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     653 </span><span class="lineNoCov">          0 :         case T_CreateTrigStmt:</span>
+<span class="lineNum">     654 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     655 </span><span class="lineNoCov">          0 :         case T_CreatePLangStmt:</span>
+<span class="lineNum">     656 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     657 </span><span class="lineNoCov">          0 :         case T_CreateRoleStmt:</span>
+<span class="lineNum">     658 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     659 </span><span class="lineNoCov">          0 :         case T_AlterRoleStmt:</span>
+<span class="lineNum">     660 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     661 </span><span class="lineNoCov">          0 :         case T_DropRoleStmt:</span>
+<span class="lineNum">     662 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     663 </span><span class="lineNoCov">          0 :         case T_LockStmt:</span>
+<span class="lineNum">     664 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     665 </span><span class="lineNoCov">          0 :         case T_ConstraintsSetStmt:</span>
+<span class="lineNum">     666 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     667 </span><span class="lineNoCov">          0 :         case T_ReindexStmt:</span>
+<span class="lineNum">     668 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     669 </span><span class="lineNoCov">          0 :         case T_CheckPointStmt:</span>
+<span class="lineNum">     670 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     671 </span><span class="lineNoCov">          0 :         case T_AlterDatabaseStmt:</span>
+<span class="lineNum">     672 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     673 </span><span class="lineNoCov">          0 :         case T_AlterDatabaseSetStmt:</span>
+<span class="lineNum">     674 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     675 </span><span class="lineNoCov">          0 :         case T_AlterRoleSetStmt:</span>
+<span class="lineNum">     676 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     677 </span><span class="lineNoCov">          0 :         case T_CreateConversionStmt:</span>
+<span class="lineNum">     678 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     679 </span><span class="lineNoCov">          0 :         case T_CreateCastStmt:</span>
+<span class="lineNum">     680 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     681 </span><span class="lineNoCov">          0 :         case T_CreateOpClassStmt:</span>
+<span class="lineNum">     682 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     683 </span><span class="lineNoCov">          0 :         case T_CreateOpFamilyStmt:</span>
+<span class="lineNum">     684 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     685 </span><span class="lineNoCov">          0 :         case T_AlterOpFamilyStmt:</span>
+<span class="lineNum">     686 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     687 </span><span class="lineNoCov">          0 :         case T_PrepareStmt:</span>
+<span class="lineNum">     688 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     689 </span><span class="lineNoCov">          0 :         case T_ExecuteStmt:</span>
+<span class="lineNum">     690 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     691 </span><span class="lineNoCov">          0 :         case T_DeallocateStmt:</span>
+<span class="lineNum">     692 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     693 </span><span class="lineNoCov">          0 :         case T_DeclareCursorStmt:</span>
+<span class="lineNum">     694 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     695 </span><span class="lineNoCov">          0 :         case T_CreateTableSpaceStmt:</span>
+<span class="lineNum">     696 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     697 </span><span class="lineNoCov">          0 :         case T_DropTableSpaceStmt:</span>
+<span class="lineNum">     698 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     699 </span><span class="lineNoCov">          0 :         case T_AlterObjectSchemaStmt:</span>
+<span class="lineNum">     700 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     701 </span><span class="lineNoCov">          0 :         case T_AlterOwnerStmt:</span>
+<span class="lineNum">     702 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     703 </span><span class="lineNoCov">          0 :         case T_DropOwnedStmt:</span>
+<span class="lineNum">     704 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     705 </span><span class="lineNoCov">          0 :         case T_ReassignOwnedStmt:</span>
+<span class="lineNum">     706 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     707 </span><span class="lineNoCov">          0 :         case T_CompositeTypeStmt:</span>
+<span class="lineNum">     708 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     709 </span><span class="lineNoCov">          0 :         case T_CreateEnumStmt:</span>
+<span class="lineNum">     710 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     711 </span><span class="lineNoCov">          0 :         case T_CreateRangeStmt:</span>
+<span class="lineNum">     712 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     713 </span><span class="lineNoCov">          0 :         case T_AlterEnumStmt:</span>
+<span class="lineNum">     714 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     715 </span><span class="lineNoCov">          0 :         case T_AlterTSDictionaryStmt:</span>
+<span class="lineNum">     716 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     717 </span><span class="lineNoCov">          0 :         case T_AlterTSConfigurationStmt:</span>
+<span class="lineNum">     718 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     719 </span><span class="lineNoCov">          0 :         case T_CreateFdwStmt:</span>
+<span class="lineNum">     720 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     721 </span><span class="lineNoCov">          0 :         case T_AlterFdwStmt:</span>
+<span class="lineNum">     722 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     723 </span><span class="lineNoCov">          0 :         case T_CreateForeignServerStmt:</span>
+<span class="lineNum">     724 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     725 </span><span class="lineNoCov">          0 :         case T_AlterForeignServerStmt:</span>
+<span class="lineNum">     726 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     727 </span><span class="lineNoCov">          0 :         case T_CreateUserMappingStmt:</span>
+<span class="lineNum">     728 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     729 </span><span class="lineNoCov">          0 :         case T_AlterUserMappingStmt:</span>
+<span class="lineNum">     730 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     731 </span><span class="lineNoCov">          0 :         case T_DropUserMappingStmt:</span>
+<span class="lineNum">     732 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     733 </span><span class="lineNoCov">          0 :         case T_AlterTableSpaceOptionsStmt:</span>
+<span class="lineNum">     734 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     735 </span><span class="lineNoCov">          0 :         case T_AlterTableMoveAllStmt:</span>
+<span class="lineNum">     736 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     737 </span><span class="lineNoCov">          0 :         case T_SecLabelStmt:</span>
+<span class="lineNum">     738 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     739 </span><span class="lineNoCov">          0 :         case T_CreateForeignTableStmt:</span>
+<span class="lineNum">     740 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     741 </span><span class="lineNoCov">          0 :         case T_ImportForeignSchemaStmt:</span>
+<span class="lineNum">     742 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     743 </span><span class="lineNoCov">          0 :         case T_CreateExtensionStmt:</span>
+<span class="lineNum">     744 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     745 </span><span class="lineNoCov">          0 :         case T_AlterExtensionStmt:</span>
+<span class="lineNum">     746 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     747 </span><span class="lineNoCov">          0 :         case T_AlterExtensionContentsStmt:</span>
+<span class="lineNum">     748 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     749 </span><span class="lineNoCov">          0 :         case T_CreateEventTrigStmt:</span>
+<span class="lineNum">     750 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     751 </span><span class="lineNoCov">          0 :         case T_AlterEventTrigStmt:</span>
+<span class="lineNum">     752 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     753 </span><span class="lineNoCov">          0 :         case T_RefreshMatViewStmt:</span>
+<span class="lineNum">     754 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     755 </span><span class="lineNoCov">          0 :         case T_ReplicaIdentityStmt:</span>
+<span class="lineNum">     756 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     757 </span><span class="lineNoCov">          0 :         case T_AlterSystemStmt:</span>
+<span class="lineNum">     758 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     759 </span><span class="lineNoCov">          0 :         case T_CreatePolicyStmt:</span>
+<span class="lineNum">     760 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     761 </span><span class="lineNoCov">          0 :         case T_AlterPolicyStmt:</span>
+<span class="lineNum">     762 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     763 </span><span class="lineNoCov">          0 :         case T_CreateTransformStmt:</span>
+<span class="lineNum">     764 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     765 </span><span class="lineNoCov">          0 :         case T_A_Expr:</span>
+<span class="lineNum">     766 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     767 </span><span class="lineNoCov">          0 :         case T_ColumnRef:</span>
+<span class="lineNum">     768 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     769 </span><span class="lineNoCov">          0 :         case T_ParamRef:</span>
+<span class="lineNum">     770 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     771 </span><span class="lineNoCov">          0 :         case T_A_Const:</span>
+<span class="lineNum">     772 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     773 </span><span class="lineNoCov">          0 :         case T_FuncCall:</span>
+<span class="lineNum">     774 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     775 </span><span class="lineNoCov">          0 :         case T_A_Star:</span>
+<span class="lineNum">     776 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     777 </span><span class="lineNoCov">          0 :         case T_A_Indices:</span>
+<span class="lineNum">     778 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     779 </span><span class="lineNoCov">          0 :         case T_A_Indirection:</span>
+<span class="lineNum">     780 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     781 </span><span class="lineNoCov">          0 :         case T_A_ArrayExpr:</span>
+<span class="lineNum">     782 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     783 </span><span class="lineNoCov">          0 :         case T_ResTarget:</span>
+<span class="lineNum">     784 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     785 </span><span class="lineNoCov">          0 :         case T_MultiAssignRef:</span>
+<span class="lineNum">     786 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     787 </span><span class="lineNoCov">          0 :         case T_TypeCast:</span>
+<span class="lineNum">     788 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     789 </span><span class="lineNoCov">          0 :         case T_CollateClause:</span>
+<span class="lineNum">     790 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     791 </span><span class="lineNoCov">          0 :         case T_SortBy:</span>
+<span class="lineNum">     792 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     793 </span><span class="lineNoCov">          0 :         case T_WindowDef:</span>
+<span class="lineNum">     794 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     795 </span><span class="lineNoCov">          0 :         case T_RangeSubselect:</span>
+<span class="lineNum">     796 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     797 </span><span class="lineNoCov">          0 :         case T_RangeFunction:</span>
+<span class="lineNum">     798 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     799 </span><span class="lineNoCov">          0 :         case T_RangeTableSample:</span>
+<span class="lineNum">     800 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     801 </span><span class="lineNoCov">          0 :         case T_TypeName:</span>
+<span class="lineNum">     802 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     803 </span><span class="lineNoCov">          0 :         case T_ColumnDef:</span>
+<span class="lineNum">     804 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     805 </span><span class="lineNoCov">          0 :         case T_IndexElem:</span>
+<span class="lineNum">     806 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     807 </span><span class="lineNoCov">          0 :         case T_Constraint:</span>
+<span class="lineNum">     808 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     809 </span><span class="lineNoCov">          0 :         case T_DefElem:</span>
+<span class="lineNum">     810 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     811 </span><span class="lineNoCov">          0 :         case T_RangeTblEntry:</span>
+<span class="lineNum">     812 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     813 </span><span class="lineNoCov">          0 :         case T_RangeTblFunction:</span>
+<span class="lineNum">     814 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     815 </span><span class="lineNoCov">          0 :         case T_TableSampleClause:</span>
+<span class="lineNum">     816 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     817 </span><span class="lineNoCov">          0 :         case T_WithCheckOption:</span>
+<span class="lineNum">     818 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     819 </span><span class="lineNoCov">          0 :         case T_SortGroupClause:</span>
+<span class="lineNum">     820 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     821 </span><span class="lineNoCov">          0 :         case T_GroupingSet:</span>
+<span class="lineNum">     822 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     823 </span><span class="lineNoCov">          0 :         case T_WindowClause:</span>
+<span class="lineNum">     824 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     825 </span><span class="lineNoCov">          0 :         case T_FuncWithArgs:</span>
+<span class="lineNum">     826 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     827 </span><span class="lineNoCov">          0 :         case T_AccessPriv:</span>
+<span class="lineNum">     828 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     829 </span><span class="lineNoCov">          0 :         case T_CreateOpClassItem:</span>
+<span class="lineNum">     830 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     831 </span><span class="lineNoCov">          0 :         case T_TableLikeClause:</span>
+<span class="lineNum">     832 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     833 </span><span class="lineNoCov">          0 :         case T_FunctionParameter:</span>
+<span class="lineNum">     834 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     835 </span><span class="lineNoCov">          0 :         case T_LockingClause:</span>
+<span class="lineNum">     836 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     837 </span><span class="lineNoCov">          0 :         case T_RowMarkClause:</span>
+<span class="lineNum">     838 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     839 </span><span class="lineNoCov">          0 :         case T_XmlSerialize:</span>
+<span class="lineNum">     840 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     841 </span><span class="lineNoCov">          0 :         case T_WithClause:</span>
+<span class="lineNum">     842 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     843 </span><span class="lineNoCov">          0 :         case T_InferClause:</span>
+<span class="lineNum">     844 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     845 </span><span class="lineNoCov">          0 :         case T_OnConflictClause:</span>
+<span class="lineNum">     846 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     847 </span><span class="lineNoCov">          0 :         case T_CommonTableExpr:</span>
+<span class="lineNum">     848 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     849 </span><span class="lineNoCov">          0 :         case T_RoleSpec:</span>
+<span class="lineNum">     850 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     851 </span><span class="lineNoCov">          0 :         case T_IdentifySystemCmd:</span>
+<span class="lineNum">     852 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     853 </span><span class="lineNoCov">          0 :         case T_BaseBackupCmd:</span>
+<span class="lineNum">     854 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     855 </span><span class="lineNoCov">          0 :         case T_CreateReplicationSlotCmd:</span>
+<span class="lineNum">     856 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     857 </span><span class="lineNoCov">          0 :         case T_DropReplicationSlotCmd:</span>
+<span class="lineNum">     858 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     859 </span><span class="lineNoCov">          0 :         case T_StartReplicationCmd:</span>
+<span class="lineNum">     860 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     861 </span><span class="lineNoCov">          0 :         case T_TimeLineHistoryCmd:</span>
+<span class="lineNum">     862 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     863 </span><span class="lineNoCov">          0 :         case T_TriggerData:</span>
+<span class="lineNum">     864 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     865 </span><span class="lineNoCov">          0 :         case T_EventTriggerData:</span>
+<span class="lineNum">     866 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     867 </span><span class="lineNoCov">          0 :         case T_ReturnSetInfo:</span>
+<span class="lineNum">     868 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     869 </span><span class="lineNoCov">          0 :         case T_WindowObjectData:</span>
+<span class="lineNum">     870 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     871 </span><span class="lineNoCov">          0 :         case T_TIDBitmap:</span>
+<span class="lineNum">     872 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     873 </span><span class="lineNoCov">          0 :         case T_InlineCodeBlock:</span>
+<span class="lineNum">     874 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     875 </span><span class="lineNoCov">          0 :         case T_FdwRoutine:</span>
+<span class="lineNum">     876 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     877 </span><span class="lineNoCov">          0 :         case T_TsmRoutine:</span>
+<span class="lineNum">     878 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     879 </span>            :         }
+<span class="lineNum">     880 </span><span class="lineNoCov">          0 :         return nullptr;</span>
+<span class="lineNum">     881 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
