@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 03fac97 - common/types/vector.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 670d29b - common/types/vector.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 03fac97</td>
+            <td class="headerValue">DuckDB Code Coverage Report 670d29b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">194</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 14:23:43</td>
+            <td class="headerValue">2018-12-03 14:38:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
@@ -77,41 +77,41 @@
 <span class="lineNum">      15 </span>            :         }
 <a name="16"><span class="lineNum">      16 </span><span class="lineCov">     154502 : }</span></a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">     103310 : Vector::Vector(TypeId type, char *dataptr)</span>
-<span class="lineNum">      19 </span><span class="lineCov">     103310 :     : type(type), count(0), data(dataptr), sel_vector(nullptr) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">     103310 :         if (dataptr &amp;&amp; type == TypeId::INVALID) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">     103311 : Vector::Vector(TypeId type, char *dataptr)</span>
+<span class="lineNum">      19 </span><span class="lineCov">     103311 :     : type(type), count(0), data(dataptr), sel_vector(nullptr) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     103311 :         if (dataptr &amp;&amp; type == TypeId::INVALID) {</span>
 <span class="lineNum">      21 </span>            :                 throw InvalidTypeException(type,
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                                            &quot;Cannot create a vector of type INVALID!&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">     103310 : }</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">     103311 : }</span></a>
 <span class="lineNum">      25 </span>            : 
 <span class="lineNum">      26 </span><span class="lineCov">      44261 : Vector::Vector(Value value) : Vector(value.type, true, false) {</span>
 <span class="lineNum">      27 </span><span class="lineCov">      44261 :         count = 1;</span>
 <span class="lineNum">      28 </span><span class="lineCov">      44261 :         SetValue(0, value);</span>
 <a name="29"><span class="lineNum">      29 </span><span class="lineCov">      44261 : }</span></a>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">    1627333 : Vector::Vector()</span>
-<span class="lineNum">      32 </span><span class="lineCov">    1627333 :     : type(TypeId::INVALID), count(0), data(nullptr), sel_vector(nullptr) {</span>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    1627333 : }</span></a>
+<span class="lineNum">      31 </span><span class="lineCov">    1627347 : Vector::Vector()</span>
+<span class="lineNum">      32 </span><span class="lineCov">    1627347 :     : type(TypeId::INVALID), count(0), data(nullptr), sel_vector(nullptr) {</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    1627347 : }</span></a>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">    1885145 : Vector::~Vector() {</span>
-<span class="lineNum">      36 </span><span class="lineCov">    1885145 :         Destroy();</span>
-<a name="37"><span class="lineNum">      37 </span><span class="lineCov">    1885145 : }</span></a>
+<span class="lineNum">      35 </span><span class="lineCov">    1885160 : Vector::~Vector() {</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1885160 :         Destroy();</span>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">    1885160 : }</span></a>
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">      39 </span>            : void Vector::Reference(Value &amp;value) {
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :         Destroy();</span>
-<span class="lineNum">      41 </span><span class="lineCov">    1885145 :         type = value.type;</span>
-<span class="lineNum">      42 </span><span class="lineCov">    1885145 :         count = 1;</span>
-<span class="lineNum">      43 </span><span class="lineCov">    1885145 :         if (value.is_null) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">    1885160 :         type = value.type;</span>
+<span class="lineNum">      42 </span><span class="lineCov">    1885160 :         count = 1;</span>
+<span class="lineNum">      43 </span><span class="lineCov">    1885160 :         if (value.is_null) {</span>
 <span class="lineNum">      44 </span>            :                 nullmask[0] = true;
-<span class="lineNum">      45 </span><span class="lineCov">     307786 :         }</span>
-<span class="lineNum">      46 </span><span class="lineCov">     307786 :         switch (value.type) {</span>
-<span class="lineNum">      47 </span><span class="lineCov">     307786 :         case TypeId::BOOLEAN:</span>
-<span class="lineNum">      48 </span><span class="lineCov">     307786 :                 data = (char *)&amp;value.value_.boolean;</span>
-<span class="lineNum">      49 </span><span class="lineCov">     307786 :                 break;</span>
+<span class="lineNum">      45 </span><span class="lineCov">     307787 :         }</span>
+<span class="lineNum">      46 </span><span class="lineCov">     307787 :         switch (value.type) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">     307787 :         case TypeId::BOOLEAN:</span>
+<span class="lineNum">      48 </span><span class="lineCov">     307787 :                 data = (char *)&amp;value.value_.boolean;</span>
+<span class="lineNum">      49 </span><span class="lineCov">     307787 :                 break;</span>
 <span class="lineNum">      50 </span><span class="lineCov">        137 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      51 </span>            :                 data = (char *)&amp;value.value_.tinyint;
-<span class="lineNum">      52 </span><span class="lineCov">     307786 :                 break;</span>
+<span class="lineNum">      52 </span><span class="lineCov">     307787 :                 break;</span>
 <span class="lineNum">      53 </span><span class="lineCov">         36 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      54 </span><span class="lineCov">         36 :                 data = (char *)&amp;value.value_.smallint;</span>
 <span class="lineNum">      55 </span><span class="lineCov">         36 :                 break;</span>
@@ -121,9 +121,9 @@
 <span class="lineNum">      59 </span><span class="lineCov">          2 :         case TypeId::BIGINT:</span>
 <span class="lineNum">      60 </span><span class="lineCov">          2 :                 data = (char *)&amp;value.value_.bigint;</span>
 <span class="lineNum">      61 </span><span class="lineCov">          2 :                 break;</span>
-<span class="lineNum">      62 </span><span class="lineCov">      95244 :         case TypeId::DECIMAL:</span>
-<span class="lineNum">      63 </span><span class="lineCov">      95244 :                 data = (char *)&amp;value.value_.decimal;</span>
-<span class="lineNum">      64 </span><span class="lineCov">      95244 :                 break;</span>
+<span class="lineNum">      62 </span><span class="lineCov">      95245 :         case TypeId::DECIMAL:</span>
+<span class="lineNum">      63 </span><span class="lineCov">      95245 :                 data = (char *)&amp;value.value_.decimal;</span>
+<span class="lineNum">      64 </span><span class="lineCov">      95245 :                 break;</span>
 <span class="lineNum">      65 </span><span class="lineCov">          7 :         case TypeId::DATE:</span>
 <span class="lineNum">      66 </span><span class="lineCov">          7 :                 data = (char *)&amp;value.value_.date;</span>
 <span class="lineNum">      67 </span><span class="lineCov">          7 :                 break;</span>
@@ -148,7 +148,7 @@
 <span class="lineNum">      86 </span><span class="lineNoCov">          0 :         if (new_type != TypeId::INVALID) {</span>
 <span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 type = new_type;</span>
 <span class="lineNum">      88 </span>            :         }
-<span class="lineNum">      89 </span><span class="lineCov">     307786 :         string_heap.Destroy();</span>
+<span class="lineNum">      89 </span><span class="lineCov">     307787 :         string_heap.Destroy();</span>
 <span class="lineNum">      90 </span>            :         owned_data = unique_ptr&lt;char[]&gt;(
 <span class="lineNum">      91 </span><span class="lineCov">     372957 :             new char[STANDARD_VECTOR_SIZE * GetTypeIdSize(type)]);</span>
 <span class="lineNum">      92 </span><span class="lineCov">     372957 :         data = owned_data.get();</span>
@@ -163,25 +163,25 @@
 <span class="lineNum">     101 </span>            :         data = nullptr;
 <span class="lineNum">     102 </span><span class="lineCov">     372957 :         count = 0;</span>
 <span class="lineNum">     103 </span>            :         sel_vector = nullptr;
-<span class="lineNum">     104 </span><span class="lineCov">    3884029 :         nullmask.reset();</span>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">    3884029 : }</span></a>
-<span class="lineNum">     106 </span><span class="lineCov">    3884029 : </span>
-<span class="lineNum">     107 </span><span class="lineCov">    3884029 : void Vector::SetValue(size_t index_, Value val) {</span>
-<span class="lineNum">     108 </span><span class="lineCov">    3884029 :         if (index_ &gt;= count) {</span>
-<span class="lineNum">     109 </span><span class="lineCov">    3884029 :                 throw OutOfRangeException(&quot;SetValue() out of range!&quot;);</span>
-<span class="lineNum">     110 </span><span class="lineCov">    3884029 :         }</span>
-<span class="lineNum">     111 </span><span class="lineCov">    3884029 :         Value newVal = val.CastAs(type);</span>
+<span class="lineNum">     104 </span><span class="lineCov">    3884051 :         nullmask.reset();</span>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">    3884051 : }</span></a>
+<span class="lineNum">     106 </span><span class="lineCov">    3884051 : </span>
+<span class="lineNum">     107 </span><span class="lineCov">    3884051 : void Vector::SetValue(size_t index_, Value val) {</span>
+<span class="lineNum">     108 </span><span class="lineCov">    3884051 :         if (index_ &gt;= count) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">    3884051 :                 throw OutOfRangeException(&quot;SetValue() out of range!&quot;);</span>
+<span class="lineNum">     110 </span><span class="lineCov">    3884051 :         }</span>
+<span class="lineNum">     111 </span><span class="lineCov">    3884051 :         Value newVal = val.CastAs(type);</span>
 <span class="lineNum">     112 </span>            : 
-<span class="lineNum">     113 </span><span class="lineCov">     642735 :         // set the NULL bit in the null mask</span>
-<span class="lineNum">     114 </span><span class="lineCov">     642735 :         SetNull(index_, newVal.is_null);</span>
+<span class="lineNum">     113 </span><span class="lineCov">     642737 :         // set the NULL bit in the null mask</span>
+<span class="lineNum">     114 </span><span class="lineCov">     642737 :         SetNull(index_, newVal.is_null);</span>
 <span class="lineNum">     115 </span><span class="lineNoCov">          0 :         size_t index = sel_vector ? sel_vector[index_] : index_;</span>
 <span class="lineNum">     116 </span>            :         switch (type) {
-<span class="lineNum">     117 </span><span class="lineCov">    1285470 :         case TypeId::BOOLEAN:</span>
+<span class="lineNum">     117 </span><span class="lineCov">    1285474 :         case TypeId::BOOLEAN:</span>
 <span class="lineNum">     118 </span>            :                 ((int8_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.boolean;
 <span class="lineNum">     119 </span>            :                 break;
-<span class="lineNum">     120 </span><span class="lineCov">     642735 :         case TypeId::TINYINT:</span>
-<span class="lineNum">     121 </span><span class="lineCov">     642735 :                 ((int8_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.tinyint;</span>
-<span class="lineNum">     122 </span><span class="lineCov">     642735 :                 break;</span>
+<span class="lineNum">     120 </span><span class="lineCov">     642737 :         case TypeId::TINYINT:</span>
+<span class="lineNum">     121 </span><span class="lineCov">     642737 :                 ((int8_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.tinyint;</span>
+<span class="lineNum">     122 </span><span class="lineCov">     642737 :                 break;</span>
 <span class="lineNum">     123 </span><span class="lineCov">       7716 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">     124 </span><span class="lineCov">       7716 :                 ((int16_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.smallint;</span>
 <span class="lineNum">     125 </span><span class="lineCov">       7716 :                 break;</span>
@@ -194,9 +194,9 @@
 <span class="lineNum">     132 </span><span class="lineCov">     463572 :         case TypeId::DECIMAL:</span>
 <span class="lineNum">     133 </span><span class="lineCov">     463572 :                 ((double *)data)[index] = newVal.is_null ? 0 : newVal.value_.decimal;</span>
 <span class="lineNum">     134 </span><span class="lineCov">     463572 :                 break;</span>
-<span class="lineNum">     135 </span><span class="lineCov">     143804 :         case TypeId::POINTER:</span>
-<span class="lineNum">     136 </span><span class="lineCov">     143804 :                 ((uint64_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.pointer;</span>
-<span class="lineNum">     137 </span><span class="lineCov">     143804 :                 break;</span>
+<span class="lineNum">     135 </span><span class="lineCov">     143806 :         case TypeId::POINTER:</span>
+<span class="lineNum">     136 </span><span class="lineCov">     143806 :                 ((uint64_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.pointer;</span>
+<span class="lineNum">     137 </span><span class="lineCov">     143806 :                 break;</span>
 <span class="lineNum">     138 </span><span class="lineCov">      17538 :         case TypeId::DATE:</span>
 <span class="lineNum">     139 </span><span class="lineCov">      17538 :                 ((date_t *)data)[index] = newVal.is_null ? 0 : newVal.value_.date;</span>
 <span class="lineNum">     140 </span><span class="lineCov">      17538 :                 break;</span>
@@ -218,7 +218,7 @@
 <span class="lineNum">     156 </span><span class="lineNoCov">          0 :         if (type != TypeId::VARCHAR) {</span>
 <span class="lineNum">     157 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(</span>
 <span class="lineNum">     158 </span>            :                     type, &quot;Can only set string value of VARCHAR vectors!&quot;);
-<span class="lineNum">     159 </span><span class="lineCov">     642735 :         }</span>
+<span class="lineNum">     159 </span><span class="lineCov">     642737 :         }</span>
 <span class="lineNum">     160 </span>            :         SetNull(index, value ? false : true);
 <span class="lineNum">     161 </span><span class="lineNoCov">          0 :         if (value) {</span>
 <span class="lineNum">     162 </span><span class="lineNoCov">          0 :                 ((const char **)data)[index] = string_heap.AddString(value);</span>
@@ -233,23 +233,23 @@
 <span class="lineNum">     171 </span>            :         }
 <span class="lineNum">     172 </span><span class="lineNoCov">          0 :         if (ValueIsNull(index)) {</span>
 <span class="lineNum">     173 </span>            :                 return Value(type);
-<span class="lineNum">     174 </span><span class="lineCov">    1439319 :         }</span>
-<span class="lineNum">     175 </span><span class="lineCov">    1439319 :         size_t entry = sel_vector ? sel_vector[index] : index;</span>
+<span class="lineNum">     174 </span><span class="lineCov">    1439321 :         }</span>
+<span class="lineNum">     175 </span><span class="lineCov">    1439321 :         size_t entry = sel_vector ? sel_vector[index] : index;</span>
 <span class="lineNum">     176 </span><span class="lineNoCov">          0 :         switch (type) {</span>
 <span class="lineNum">     177 </span>            :         case TypeId::BOOLEAN:
-<span class="lineNum">     178 </span><span class="lineCov">    1439319 :                 return Value::BOOLEAN(((int8_t *)data)[entry]);</span>
+<span class="lineNum">     178 </span><span class="lineCov">    1439321 :                 return Value::BOOLEAN(((int8_t *)data)[entry]);</span>
 <span class="lineNum">     179 </span><span class="lineCov">      69803 :         case TypeId::TINYINT:</span>
 <span class="lineNum">     180 </span>            :                 return Value::TINYINT(((int8_t *)data)[entry]);
-<span class="lineNum">     181 </span><span class="lineCov">    1369516 :         case TypeId::SMALLINT:</span>
-<span class="lineNum">     182 </span><span class="lineCov">    1369516 :                 return Value::SMALLINT(((int16_t *)data)[entry]);</span>
+<span class="lineNum">     181 </span><span class="lineCov">    1369518 :         case TypeId::SMALLINT:</span>
+<span class="lineNum">     182 </span><span class="lineCov">    1369518 :                 return Value::SMALLINT(((int16_t *)data)[entry]);</span>
 <span class="lineNum">     183 </span><span class="lineCov">         93 :         case TypeId::INTEGER:</span>
 <span class="lineNum">     184 </span><span class="lineCov">         93 :                 return Value::INTEGER(((int32_t *)data)[entry]);</span>
 <span class="lineNum">     185 </span><span class="lineCov">      44098 :         case TypeId::BIGINT:</span>
 <span class="lineNum">     186 </span><span class="lineCov">      44098 :                 return Value::BIGINT(((int64_t *)data)[entry]);</span>
 <span class="lineNum">     187 </span><span class="lineCov">         12 :         case TypeId::POINTER:</span>
 <span class="lineNum">     188 </span><span class="lineCov">         12 :                 return Value::POINTER(((uint64_t *)data)[entry]);</span>
-<span class="lineNum">     189 </span><span class="lineCov">    1191073 :         case TypeId::DECIMAL:</span>
-<span class="lineNum">     190 </span><span class="lineCov">    1191073 :                 return Value(((double *)data)[entry]);</span>
+<span class="lineNum">     189 </span><span class="lineCov">    1191075 :         case TypeId::DECIMAL:</span>
+<span class="lineNum">     190 </span><span class="lineCov">    1191075 :                 return Value(((double *)data)[entry]);</span>
 <span class="lineNum">     191 </span><span class="lineCov">     106404 :         case TypeId::DATE:</span>
 <span class="lineNum">     192 </span><span class="lineCov">     106404 :                 return Value::DATE(((date_t *)data)[entry]);</span>
 <span class="lineNum">     193 </span><span class="lineNoCov">          0 :         case TypeId::VARCHAR: {</span>
@@ -267,29 +267,29 @@
 <span class="lineNum">     205 </span>            :         count = other.count;
 <span class="lineNum">     206 </span>            :         data = other.data;
 <span class="lineNum">     207 </span>            :         sel_vector = other.sel_vector;
-<span class="lineNum">     208 </span><span class="lineCov">     415702 :         type = other.type;</span>
-<span class="lineNum">     209 </span><span class="lineCov">     415702 :         nullmask = other.nullmask;</span>
+<span class="lineNum">     208 </span><span class="lineCov">     415703 :         type = other.type;</span>
+<span class="lineNum">     209 </span><span class="lineCov">     415703 :         nullmask = other.nullmask;</span>
 <a name="210"><span class="lineNum">     210 </span>            : }</a>
-<span class="lineNum">     211 </span><span class="lineCov">     415702 : </span>
-<span class="lineNum">     212 </span><span class="lineCov">     415702 : void Vector::Move(Vector &amp;other) {</span>
-<span class="lineNum">     213 </span><span class="lineCov">     415702 :         other.Destroy();</span>
-<span class="lineNum">     214 </span><span class="lineCov">     415702 : </span>
-<span class="lineNum">     215 </span><span class="lineCov">     415702 :         other.owned_data = move(owned_data);</span>
-<span class="lineNum">     216 </span><span class="lineCov">     415702 :         string_heap.Move(other.string_heap);</span>
+<span class="lineNum">     211 </span><span class="lineCov">     415703 : </span>
+<span class="lineNum">     212 </span><span class="lineCov">     415703 : void Vector::Move(Vector &amp;other) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">     415703 :         other.Destroy();</span>
+<span class="lineNum">     214 </span><span class="lineCov">     415703 : </span>
+<span class="lineNum">     215 </span><span class="lineCov">     415703 :         other.owned_data = move(owned_data);</span>
+<span class="lineNum">     216 </span><span class="lineCov">     415703 :         string_heap.Move(other.string_heap);</span>
 <span class="lineNum">     217 </span>            :         other.count = count;
-<span class="lineNum">     218 </span><span class="lineCov">     701382 :         other.data = data;</span>
-<span class="lineNum">     219 </span><span class="lineCov">     701382 :         other.sel_vector = sel_vector;</span>
+<span class="lineNum">     218 </span><span class="lineCov">     701384 :         other.data = data;</span>
+<span class="lineNum">     219 </span><span class="lineCov">     701384 :         other.sel_vector = sel_vector;</span>
 <span class="lineNum">     220 </span>            :         other.type = type;
-<span class="lineNum">     221 </span><span class="lineCov">     701382 :         other.nullmask = nullmask;</span>
-<span class="lineNum">     222 </span><span class="lineCov">     701382 : </span>
-<span class="lineNum">     223 </span><span class="lineCov">     701382 :         Destroy();</span>
-<a name="224"><span class="lineNum">     224 </span><span class="lineCov">     701382 : }</span></a>
-<span class="lineNum">     225 </span><span class="lineCov">     701382 : </span>
-<span class="lineNum">     226 </span><span class="lineCov">     701382 : void Vector::Flatten() {</span>
-<span class="lineNum">     227 </span><span class="lineCov">     701382 :         if (!sel_vector) {</span>
+<span class="lineNum">     221 </span><span class="lineCov">     701384 :         other.nullmask = nullmask;</span>
+<span class="lineNum">     222 </span><span class="lineCov">     701384 : </span>
+<span class="lineNum">     223 </span><span class="lineCov">     701384 :         Destroy();</span>
+<a name="224"><span class="lineNum">     224 </span><span class="lineCov">     701384 : }</span></a>
+<span class="lineNum">     225 </span><span class="lineCov">     701384 : </span>
+<span class="lineNum">     226 </span><span class="lineCov">     701384 : void Vector::Flatten() {</span>
+<span class="lineNum">     227 </span><span class="lineCov">     701384 :         if (!sel_vector) {</span>
 <span class="lineNum">     228 </span>            :                 return;
-<span class="lineNum">     229 </span><span class="lineCov">     701382 :         }</span>
-<span class="lineNum">     230 </span><span class="lineCov">     701382 :         Vector other(type, true, false);</span>
+<span class="lineNum">     229 </span><span class="lineCov">     701384 :         }</span>
+<span class="lineNum">     230 </span><span class="lineCov">     701384 :         Vector other(type, true, false);</span>
 <span class="lineNum">     231 </span>            :         this-&gt;Copy(other);
 <span class="lineNum">     232 </span><span class="lineCov">       1687 :         other.Move(*this);</span>
 <a name="233"><span class="lineNum">     233 </span><span class="lineCov">       1687 : }</span></a>
@@ -300,19 +300,19 @@
 <span class="lineNum">     238 </span><span class="lineCov">       1641 :                                             &quot;Copying to vector of different type not &quot;</span>
 <span class="lineNum">     239 </span>            :                                             &quot;supported! Call Cast instead!&quot;);
 <span class="lineNum">     240 </span>            :         }
-<span class="lineNum">     241 </span><span class="lineCov">      75017 :         if (other.sel_vector) {</span>
-<span class="lineNum">     242 </span><span class="lineCov">      75017 :                 throw NotImplementedException(</span>
+<span class="lineNum">     241 </span><span class="lineCov">      75020 :         if (other.sel_vector) {</span>
+<span class="lineNum">     242 </span><span class="lineCov">      75020 :                 throw NotImplementedException(</span>
 <span class="lineNum">     243 </span>            :                     &quot;Copy to vector with sel_vector not supported!&quot;);
 <span class="lineNum">     244 </span>            :         }
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">     246 </span>            :         other.nullmask.reset();
-<span class="lineNum">     247 </span><span class="lineCov">      75017 :         if (!TypeIsConstantSize(type)) {</span>
+<span class="lineNum">     247 </span><span class="lineCov">      75020 :         if (!TypeIsConstantSize(type)) {</span>
 <span class="lineNum">     248 </span>            :                 assert(type == TypeId::VARCHAR);
 <span class="lineNum">     249 </span><span class="lineNoCov">          0 :                 other.count = count - offset;</span>
 <span class="lineNum">     250 </span>            :                 auto source = (const char **)data;
 <span class="lineNum">     251 </span>            :                 auto target = (const char **)other.data;
-<span class="lineNum">     252 </span><span class="lineCov">      75017 :                 VectorOperations::Exec(</span>
-<span class="lineNum">     253 </span><span class="lineCov">      75017 :                     *this,</span>
+<span class="lineNum">     252 </span><span class="lineCov">      75020 :                 VectorOperations::Exec(</span>
+<span class="lineNum">     253 </span><span class="lineCov">      75020 :                     *this,</span>
 <span class="lineNum">     254 </span><span class="lineCov">         91 :                     [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">     255 </span><span class="lineCov">         91 :                             if (nullmask[i]) {</span>
 <span class="lineNum">     256 </span><span class="lineCov">         91 :                                     other.nullmask[k - offset] = true;</span>
@@ -329,9 +329,9 @@
 <span class="lineNum">     267 </span>            : 
 <span class="lineNum">     268 </span>            : void Vector::Cast(TypeId new_type) {
 <span class="lineNum">     269 </span>            :         if (new_type == TypeId::INVALID) {
-<span class="lineNum">     270 </span><span class="lineCov">      74926 :                 throw InvalidTypeException(new_type,</span>
+<span class="lineNum">     270 </span><span class="lineCov">      74929 :                 throw InvalidTypeException(new_type,</span>
 <span class="lineNum">     271 </span>            :                                            &quot;Cannot create a vector of type invalid!&quot;);
-<span class="lineNum">     272 </span><span class="lineCov">      75017 :         }</span>
+<span class="lineNum">     272 </span><span class="lineCov">      75020 :         }</span>
 <span class="lineNum">     273 </span>            :         if (type == new_type) {
 <span class="lineNum">     274 </span><span class="lineCov">          8 :                 return;</span>
 <span class="lineNum">     275 </span><span class="lineCov">          8 :         }</span>
@@ -346,25 +346,25 @@
 <span class="lineNum">     284 </span><span class="lineCov">          8 :                     &quot;Append to vector with selection vector not supported!&quot;);</span>
 <span class="lineNum">     285 </span>            :         }
 <span class="lineNum">     286 </span>            :         if (other.type != type) {
-<span class="lineNum">     287 </span><span class="lineCov">      48877 :                 throw TypeMismatchException(type, other.type,</span>
-<span class="lineNum">     288 </span><span class="lineCov">      48877 :                                             &quot;Can only append vectors of similar types&quot;);</span>
+<span class="lineNum">     287 </span><span class="lineCov">      48878 :                 throw TypeMismatchException(type, other.type,</span>
+<span class="lineNum">     288 </span><span class="lineCov">      48878 :                                             &quot;Can only append vectors of similar types&quot;);</span>
 <span class="lineNum">     289 </span>            :         }
 <span class="lineNum">     290 </span><span class="lineNoCov">          0 :         if (count + other.count &gt; STANDARD_VECTOR_SIZE) {</span>
 <span class="lineNum">     291 </span>            :                 throw OutOfRangeException(&quot;Cannot append to vector: vector is full!&quot;);
-<span class="lineNum">     292 </span><span class="lineCov">      48877 :         }</span>
+<span class="lineNum">     292 </span><span class="lineCov">      48878 :         }</span>
 <span class="lineNum">     293 </span>            :         size_t old_count = count;
 <span class="lineNum">     294 </span><span class="lineNoCov">          0 :         count += other.count;</span>
 <span class="lineNum">     295 </span>            :         // merge NULL mask
-<span class="lineNum">     296 </span><span class="lineCov">      48877 :         VectorOperations::Exec(other, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">     296 </span><span class="lineCov">      48878 :         VectorOperations::Exec(other, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">     297 </span><span class="lineNoCov">          0 :                 nullmask[old_count + k] = other.nullmask[i];</span>
 <span class="lineNum">     298 </span>            :         });
-<span class="lineNum">     299 </span><span class="lineCov">      48877 :         if (!TypeIsConstantSize(type)) {</span>
-<span class="lineNum">     300 </span><span class="lineCov">      48877 :                 assert(type == TypeId::VARCHAR);</span>
+<span class="lineNum">     299 </span><span class="lineCov">      48878 :         if (!TypeIsConstantSize(type)) {</span>
+<span class="lineNum">     300 </span><span class="lineCov">      48878 :                 assert(type == TypeId::VARCHAR);</span>
 <span class="lineNum">     301 </span>            :                 auto source = (const char **)other.data;
-<span class="lineNum">     302 </span><span class="lineCov">      48877 :                 auto target = (const char **)data;</span>
+<span class="lineNum">     302 </span><span class="lineCov">      48878 :                 auto target = (const char **)data;</span>
 <span class="lineNum">     303 </span>            :                 VectorOperations::Exec(other, [&amp;](size_t i, size_t k) {
 <span class="lineNum">     304 </span>            :                         if (other.nullmask[i]) {
-<span class="lineNum">     305 </span><span class="lineCov">      48877 :                                 target[old_count + k] = nullptr;</span>
+<span class="lineNum">     305 </span><span class="lineCov">      48878 :                                 target[old_count + k] = nullptr;</span>
 <span class="lineNum">     306 </span><span class="lineCov">         76 :                         } else {</span>
 <span class="lineNum">     307 </span><span class="lineCov">         76 :                                 target[old_count + k] = string_heap.AddString(source[i]);</span>
 <span class="lineNum">     308 </span><span class="lineCov">         76 :                         }</span>
@@ -376,9 +376,9 @@
 <span class="lineNum">     314 </span>            : 
 <span class="lineNum">     315 </span>            : size_t Vector::NotNullSelVector(const Vector &amp;vector, sel_t *not_null_vector,
 <span class="lineNum">     316 </span>            :                                 sel_t *&amp;result_assignment, sel_t *null_vector) {
-<span class="lineNum">     317 </span><span class="lineCov">      48801 :         if (vector.nullmask.any()) {</span>
+<span class="lineNum">     317 </span><span class="lineCov">      48802 :         if (vector.nullmask.any()) {</span>
 <span class="lineNum">     318 </span>            :                 size_t result_count = 0, null_count = 0;
-<span class="lineNum">     319 </span><span class="lineCov">      48877 :                 VectorOperations::Exec(vector.sel_vector, vector.count,</span>
+<span class="lineNum">     319 </span><span class="lineCov">      48878 :                 VectorOperations::Exec(vector.sel_vector, vector.count,</span>
 <span class="lineNum">     320 </span>            :                                        [&amp;](size_t i, size_t k) {
 <span class="lineNum">     321 </span><span class="lineCov">       1257 :                                                if (!vector.nullmask[i]) {</span>
 <span class="lineNum">     322 </span>            :                                                        not_null_vector[result_count++] = i;
@@ -410,8 +410,8 @@
 <span class="lineNum">     348 </span>            :                 // of them are deallocated/corrupt
 <span class="lineNum">     349 </span>            :                 VectorOperations::ExecType&lt;const char *&gt;(
 <span class="lineNum">     350 </span>            :                     *this, [&amp;](const char *string, size_t i, size_t k) {
-<span class="lineNum">     351 </span><span class="lineCov">     710407 :                             if (!nullmask[i]) {</span>
-<span class="lineNum">     352 </span><span class="lineCov">     710407 :                                     assert(string);</span>
+<span class="lineNum">     351 </span><span class="lineCov">     710416 :                             if (!nullmask[i]) {</span>
+<span class="lineNum">     352 </span><span class="lineCov">     710416 :                                     assert(string);</span>
 <span class="lineNum">     353 </span>            :                                     assert(strlen(string) != (size_t)-1);
 <span class="lineNum">     354 </span>            :                             }
 <span class="lineNum">     355 </span><span class="lineCov">       2343 :                     });</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 03fac97 - storage/unique_index.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 670d29b - storage/unique_index.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 03fac97</td>
+            <td class="headerValue">DuckDB Code Coverage Report 670d29b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">166</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 14:23:43</td>
+            <td class="headerValue">2018-12-03 14:38:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -316,11 +316,11 @@
 <span class="lineNum">     254 </span><span class="lineCov">         48 :         return success;</span>
 <a name="255"><span class="lineNum">     255 </span>            : }</a>
 <span class="lineNum">     256 </span>            : 
-<span class="lineNum">     257 </span><span class="lineCov">      30712 : string UniqueIndex::Append(Transaction &amp;transaction,</span>
+<span class="lineNum">     257 </span><span class="lineCov">      30713 : string UniqueIndex::Append(Transaction &amp;transaction,</span>
 <span class="lineNum">     258 </span>            :                            vector&lt;unique_ptr&lt;UniqueIndex&gt;&gt; &amp;indexes,
 <span class="lineNum">     259 </span>            :                            DataChunk &amp;chunk, size_t row_identifier_start) {
-<span class="lineNum">     260 </span><span class="lineCov">      30712 :         if (indexes.size() == 0) {</span>
-<span class="lineNum">     261 </span><span class="lineCov">      30681 :                 return string();</span>
+<span class="lineNum">     260 </span><span class="lineCov">      30713 :         if (indexes.size() == 0) {</span>
+<span class="lineNum">     261 </span><span class="lineCov">      30682 :                 return string();</span>
 <span class="lineNum">     262 </span>            :         }
 <span class="lineNum">     263 </span>            : 
 <span class="lineNum">     264 </span><span class="lineCov">         31 :         UniqueIndexNode *added_nodes[indexes.size()][STANDARD_VECTOR_SIZE];</span>
@@ -374,7 +374,7 @@
 <span class="lineNum">     312 </span>            :                 }
 <span class="lineNum">     313 </span><span class="lineCov">          9 :                 return error;</span>
 <span class="lineNum">     314 </span>            :         }
-<span class="lineNum">     315 </span><span class="lineCov">      30734 :         return string();</span>
+<span class="lineNum">     315 </span><span class="lineCov">      30735 :         return string();</span>
 <span class="lineNum">     316 </span>            : }
 <span class="lineNum">     317 </span>            : 
 <span class="lineNum">     318 </span>            : // Handle an update in the UniqueIndex
