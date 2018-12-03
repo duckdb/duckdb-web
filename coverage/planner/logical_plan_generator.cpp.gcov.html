@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 723f98c - planner/logical_plan_generator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2b93926 - planner/logical_plan_generator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 723f98c</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2b93926</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">379</td>
-            <td class="headerCovTableEntry">401</td>
+            <td class="headerCovTableEntry">380</td>
+            <td class="headerCovTableEntry">402</td>
             <td class="headerCovTableEntryHi">94.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 15:53:11</td>
+            <td class="headerValue">2018-12-03 23:58:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">20</td>
@@ -432,304 +432,303 @@
 <span class="lineNum">     370 </span><span class="lineCov">      90800 : static void cast_children_to_equal_types(Expression &amp;expr,</span>
 <span class="lineNum">     371 </span>            :                                          size_t start_idx = 0) {
 <span class="lineNum">     372 </span>            :         // first figure out the widest type
-<span class="lineNum">     373 </span><span class="lineCov">      90800 :         TypeId max_type = TypeId::INVALID;</span>
-<span class="lineNum">     374 </span><span class="lineCov">     270771 :         for (size_t child_idx = start_idx; child_idx &lt; expr.children.size();</span>
-<span class="lineNum">     375 </span>            :              child_idx++) {
-<span class="lineNum">     376 </span><span class="lineCov">     179971 :                 TypeId child_type = expr.children[child_idx]-&gt;return_type;</span>
-<span class="lineNum">     377 </span><span class="lineCov">     179971 :                 if (child_type &gt; max_type) {</span>
-<span class="lineNum">     378 </span><span class="lineCov">      91897 :                         max_type = child_type;</span>
-<span class="lineNum">     379 </span>            :                 }
-<span class="lineNum">     380 </span>            :         }
-<span class="lineNum">     381 </span>            :         // now add casts where appropriate
-<span class="lineNum">     382 </span><span class="lineCov">     270771 :         for (size_t child_idx = start_idx; child_idx &lt; expr.children.size();</span>
-<span class="lineNum">     383 </span>            :              child_idx++) {
-<span class="lineNum">     384 </span><span class="lineCov">     179971 :                 TypeId child_type = expr.children[child_idx]-&gt;return_type;</span>
-<span class="lineNum">     385 </span><span class="lineCov">     179971 :                 if (child_type != max_type) {</span>
-<span class="lineNum">     386 </span><span class="lineCov">       1477 :                         auto cast = make_unique&lt;CastExpression&gt;(</span>
-<span class="lineNum">     387 </span><span class="lineCov">       2954 :                             max_type, move(expr.children[child_idx]));</span>
-<span class="lineNum">     388 </span><span class="lineCov">       1477 :                         expr.children[child_idx] = move(cast);</span>
-<span class="lineNum">     389 </span>            :                 }
-<span class="lineNum">     390 </span>            :         }
-<a name="391"><span class="lineNum">     391 </span><span class="lineCov">      90800 : }</span></a>
-<span class="lineNum">     392 </span>            : 
-<span class="lineNum">     393 </span><span class="lineCov">       6080 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(AggregateExpression &amp;expr) {</span>
-<span class="lineNum">     394 </span><span class="lineCov">       6080 :         SQLNodeVisitor::Visit(expr);</span>
-<span class="lineNum">     395 </span>            :         // add cast if types don't match
-<span class="lineNum">     396 </span><span class="lineCov">       8923 :         for (size_t i = 0; i &lt; expr.children.size(); i++) {</span>
-<span class="lineNum">     397 </span><span class="lineCov">       2843 :                 auto &amp;child = expr.children[i];</span>
-<span class="lineNum">     398 </span><span class="lineCov">       2843 :                 if (child-&gt;return_type != expr.return_type) {</span>
-<span class="lineNum">     399 </span><span class="lineCov">       1139 :                         auto cast = make_unique&lt;CastExpression&gt;(expr.return_type,</span>
-<span class="lineNum">     400 </span><span class="lineCov">       2278 :                                                                 move(expr.children[i]));</span>
-<span class="lineNum">     401 </span><span class="lineCov">       1139 :                         expr.children[i] = move(cast);</span>
-<span class="lineNum">     402 </span>            :                 }
-<span class="lineNum">     403 </span>            :         }
-<span class="lineNum">     404 </span><span class="lineCov">       6080 :         return nullptr;</span>
-<a name="405"><span class="lineNum">     405 </span>            : }</a>
-<span class="lineNum">     406 </span>            : 
-<span class="lineNum">     407 </span><span class="lineCov">       9066 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(CaseExpression &amp;expr) {</span>
-<span class="lineNum">     408 </span><span class="lineCov">       9066 :         SQLNodeVisitor::Visit(expr);</span>
-<span class="lineNum">     409 </span><span class="lineCov">       9066 :         assert(expr.children.size() == 3);</span>
-<span class="lineNum">     410 </span>            :         // check needs to be bool
-<span class="lineNum">     411 </span><span class="lineCov">       9066 :         if (expr.children[0]-&gt;return_type != TypeId::BOOLEAN) {</span>
-<span class="lineNum">     412 </span><span class="lineNoCov">          0 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
-<span class="lineNum">     413 </span><span class="lineNoCov">          0 :                                                         move(expr.children[0]));</span>
-<span class="lineNum">     414 </span><span class="lineNoCov">          0 :                 expr.children[0] = move(cast);</span>
-<span class="lineNum">     415 </span>            :         }
-<span class="lineNum">     416 </span>            :         // others need same type
-<span class="lineNum">     417 </span><span class="lineCov">       9066 :         cast_children_to_equal_types(expr, 1);</span>
-<span class="lineNum">     418 </span><span class="lineCov">       9066 :         return nullptr;</span>
-<a name="419"><span class="lineNum">     419 </span>            : }</a>
-<span class="lineNum">     420 </span>            : 
-<span class="lineNum">     421 </span><span class="lineCov">      30488 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(ComparisonExpression &amp;expr) {</span>
-<span class="lineNum">     422 </span><span class="lineCov">      30488 :         SQLNodeVisitor::Visit(expr);</span>
-<span class="lineNum">     423 </span><span class="lineCov">      30488 :         cast_children_to_equal_types(expr);</span>
-<span class="lineNum">     424 </span><span class="lineCov">      30488 :         return nullptr;</span>
-<span class="lineNum">     425 </span>            : }
-<span class="lineNum">     426 </span>            : 
-<a name="427"><span class="lineNum">     427 </span>            : // TODO: this is ugly, generify functionality</a>
-<span class="lineNum">     428 </span>            : unique_ptr&lt;Expression&gt;
-<span class="lineNum">     429 </span><span class="lineCov">      13251 : LogicalPlanGenerator::Visit(ConjunctionExpression &amp;expr) {</span>
-<span class="lineNum">     430 </span><span class="lineCov">      13251 :         SQLNodeVisitor::Visit(expr);</span>
-<span class="lineNum">     431 </span>            : 
-<span class="lineNum">     432 </span><span class="lineCov">      13251 :         if (expr.children[0]-&gt;return_type != TypeId::BOOLEAN) {</span>
-<span class="lineNum">     433 </span><span class="lineCov">         36 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
-<span class="lineNum">     434 </span><span class="lineCov">         36 :                                                         move(expr.children[0]));</span>
-<span class="lineNum">     435 </span><span class="lineCov">         18 :                 expr.children[0] = move(cast);</span>
-<span class="lineNum">     436 </span>            :         }
-<span class="lineNum">     437 </span><span class="lineCov">      13251 :         if (expr.children[1]-&gt;return_type != TypeId::BOOLEAN) {</span>
-<span class="lineNum">     438 </span><span class="lineCov">         36 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
-<span class="lineNum">     439 </span><span class="lineCov">         36 :                                                         move(expr.children[1]));</span>
-<span class="lineNum">     440 </span><span class="lineCov">         18 :                 expr.children[1] = move(cast);</span>
-<span class="lineNum">     441 </span>            :         }
-<span class="lineNum">     442 </span><span class="lineCov">      13251 :         return nullptr;</span>
-<a name="443"><span class="lineNum">     443 </span>            : }</a>
-<span class="lineNum">     444 </span>            : 
-<span class="lineNum">     445 </span><span class="lineCov">      51249 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(OperatorExpression &amp;expr) {</span>
-<span class="lineNum">     446 </span><span class="lineCov">      51249 :         SQLNodeVisitor::Visit(expr);</span>
-<span class="lineNum">     447 </span><span class="lineCov">      52024 :         if (expr.type == ExpressionType::OPERATOR_NOT &amp;&amp;</span>
-<span class="lineNum">     448 </span><span class="lineCov">        775 :             expr.children[0]-&gt;return_type != TypeId::BOOLEAN) {</span>
-<span class="lineNum">     449 </span><span class="lineCov">          6 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
-<span class="lineNum">     450 </span><span class="lineCov">          6 :                                                         move(expr.children[0]));</span>
-<span class="lineNum">     451 </span><span class="lineCov">          3 :                 expr.children[0] = move(cast);</span>
-<span class="lineNum">     452 </span>            :         } else {
-<span class="lineNum">     453 </span><span class="lineCov">      51246 :                 cast_children_to_equal_types(expr);</span>
-<span class="lineNum">     454 </span>            :         }
-<span class="lineNum">     455 </span><span class="lineCov">      51249 :         return nullptr;</span>
-<a name="456"><span class="lineNum">     456 </span>            : }</a>
-<span class="lineNum">     457 </span>            : 
-<span class="lineNum">     458 </span><span class="lineCov">       3860 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(SubqueryExpression &amp;expr) {</span>
-<span class="lineNum">     459 </span><span class="lineCov">       7720 :         LogicalPlanGenerator generator(context, *expr.context, true);</span>
-<span class="lineNum">     460 </span><span class="lineCov">       3860 :         expr.subquery-&gt;Accept(&amp;generator);</span>
-<span class="lineNum">     461 </span><span class="lineCov">       3860 :         if (!generator.root) {</span>
-<span class="lineNum">     462 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Can't plan subquery&quot;);</span>
-<span class="lineNum">     463 </span>            :         }
-<span class="lineNum">     464 </span><span class="lineCov">       3860 :         expr.op = move(generator.root);</span>
-<span class="lineNum">     465 </span><span class="lineCov">       3860 :         assert(expr.op);</span>
-<span class="lineNum">     466 </span><span class="lineCov">       7720 :         return nullptr;</span>
-<a name="467"><span class="lineNum">     467 </span>            : }</a>
-<span class="lineNum">     468 </span>            : 
-<span class="lineNum">     469 </span><span class="lineCov">      13744 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(BaseTableRef &amp;expr) {</span>
-<span class="lineNum">     470 </span>            :         // FIXME: catalog access should only happen once in binder
-<span class="lineNum">     471 </span><span class="lineCov">      27488 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
-<span class="lineNum">     472 </span><span class="lineCov">      13744 :                                                  expr.schema_name, expr.table_name);</span>
-<span class="lineNum">     473 </span><span class="lineCov">      27488 :         auto alias = expr.alias.empty() ? expr.table_name : expr.alias;</span>
-<span class="lineNum">     474 </span>            : 
-<span class="lineNum">     475 </span><span class="lineCov">      13744 :         auto index = bind_context.GetBindingIndex(alias);</span>
-<span class="lineNum">     476 </span>            : 
-<span class="lineNum">     477 </span><span class="lineCov">      27488 :         std::vector&lt;column_t&gt; column_ids;</span>
-<span class="lineNum">     478 </span>            :         // look in the context for this table which columns are required
-<span class="lineNum">     479 </span><span class="lineCov">      51938 :         for (auto &amp;bound_column : bind_context.bound_columns[alias]) {</span>
-<span class="lineNum">     480 </span><span class="lineCov">      38194 :                 column_ids.push_back(table-&gt;name_map[bound_column]);</span>
-<span class="lineNum">     481 </span>            :         }
-<span class="lineNum">     482 </span><span class="lineCov">      13744 :         if (require_row_id || column_ids.size() == 0) {</span>
-<span class="lineNum">     483 </span>            :                 // no column ids selected
-<span class="lineNum">     484 </span>            :                 // the query is like SELECT COUNT(*) FROM table, or SELECT 42 FROM table
-<span class="lineNum">     485 </span>            :                 // return just the row id
-<span class="lineNum">     486 </span><span class="lineCov">       3146 :                 column_ids.push_back(COLUMN_IDENTIFIER_ROW_ID);</span>
-<span class="lineNum">     487 </span>            :         }
-<span class="lineNum">     488 </span>            : 
-<span class="lineNum">     489 </span><span class="lineCov">      27488 :         auto get_table = make_unique&lt;LogicalGet&gt;(table, index, column_ids);</span>
-<span class="lineNum">     490 </span><span class="lineCov">      13744 :         if (root) {</span>
-<span class="lineNum">     491 </span><span class="lineNoCov">          0 :                 get_table-&gt;AddChild(move(root));</span>
-<span class="lineNum">     492 </span>            :         }
-<span class="lineNum">     493 </span><span class="lineCov">      13744 :         root = move(get_table);</span>
-<span class="lineNum">     494 </span><span class="lineCov">      27488 :         return nullptr;</span>
-<a name="495"><span class="lineNum">     495 </span>            : }</a>
-<span class="lineNum">     496 </span>            : 
-<span class="lineNum">     497 </span><span class="lineCov">        818 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(CrossProductRef &amp;expr) {</span>
-<span class="lineNum">     498 </span><span class="lineCov">       1636 :         auto cross_product = make_unique&lt;LogicalCrossProduct&gt;();</span>
-<span class="lineNum">     499 </span>            : 
-<span class="lineNum">     500 </span><span class="lineCov">        818 :         if (root) {</span>
-<span class="lineNum">     501 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cross product cannot have children!&quot;);</span>
-<span class="lineNum">     502 </span>            :         }
-<span class="lineNum">     503 </span>            : 
-<span class="lineNum">     504 </span><span class="lineCov">        818 :         AcceptChild(&amp;expr.left);</span>
-<span class="lineNum">     505 </span><span class="lineCov">        818 :         assert(root);</span>
-<span class="lineNum">     506 </span><span class="lineCov">        818 :         cross_product-&gt;AddChild(move(root));</span>
-<span class="lineNum">     507 </span><span class="lineCov">        818 :         root = nullptr;</span>
-<span class="lineNum">     508 </span>            : 
-<span class="lineNum">     509 </span><span class="lineCov">        818 :         AcceptChild(&amp;expr.right);</span>
-<span class="lineNum">     510 </span><span class="lineCov">        818 :         assert(root);</span>
-<span class="lineNum">     511 </span><span class="lineCov">        818 :         cross_product-&gt;AddChild(move(root));</span>
-<span class="lineNum">     512 </span><span class="lineCov">        818 :         root = nullptr;</span>
-<span class="lineNum">     513 </span>            : 
-<span class="lineNum">     514 </span><span class="lineCov">        818 :         root = move(cross_product);</span>
-<span class="lineNum">     515 </span><span class="lineCov">       1636 :         return nullptr;</span>
-<a name="516"><span class="lineNum">     516 </span>            : }</a>
-<span class="lineNum">     517 </span>            : 
-<span class="lineNum">     518 </span><span class="lineCov">         67 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(JoinRef &amp;expr) {</span>
-<span class="lineNum">     519 </span><span class="lineCov">         67 :         AcceptChild(&amp;expr.condition);</span>
-<span class="lineNum">     520 </span><span class="lineCov">        134 :         auto join = make_unique&lt;LogicalJoin&gt;(expr.type);</span>
-<span class="lineNum">     521 </span>            : 
-<span class="lineNum">     522 </span><span class="lineCov">         67 :         if (root) {</span>
-<span class="lineNum">     523 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cross product cannot have children!&quot;);</span>
-<span class="lineNum">     524 </span>            :         }
-<span class="lineNum">     525 </span>            : 
-<span class="lineNum">     526 </span><span class="lineCov">         67 :         AcceptChild(&amp;expr.left);</span>
-<span class="lineNum">     527 </span><span class="lineCov">         67 :         assert(root);</span>
-<span class="lineNum">     528 </span><span class="lineCov">         67 :         join-&gt;AddChild(move(root));</span>
-<span class="lineNum">     529 </span><span class="lineCov">         67 :         root = nullptr;</span>
-<span class="lineNum">     530 </span>            : 
-<span class="lineNum">     531 </span><span class="lineCov">         67 :         AcceptChild(&amp;expr.right);</span>
-<span class="lineNum">     532 </span><span class="lineCov">         67 :         assert(root);</span>
-<span class="lineNum">     533 </span><span class="lineCov">         67 :         join-&gt;AddChild(move(root));</span>
-<span class="lineNum">     534 </span><span class="lineCov">         67 :         root = nullptr;</span>
-<span class="lineNum">     535 </span>            : 
-<span class="lineNum">     536 </span><span class="lineCov">         67 :         join-&gt;SetJoinCondition(move(expr.condition));</span>
-<span class="lineNum">     537 </span><span class="lineCov">         67 :         if (join-&gt;conditions.size() &gt; 0) {</span>
-<span class="lineNum">     538 </span><span class="lineCov">         65 :                 root = move(join);</span>
-<span class="lineNum">     539 </span>            :         } else { // the conditions were not comparisions between left on right,
-<span class="lineNum">     540 </span>            :                      // cross product
-<span class="lineNum">     541 </span><span class="lineCov">          4 :                 auto cp = make_unique&lt;LogicalCrossProduct&gt;();</span>
-<span class="lineNum">     542 </span><span class="lineCov">          2 :                 cp-&gt;AddChild(move(join-&gt;children[0]));</span>
-<span class="lineNum">     543 </span><span class="lineCov">          2 :                 cp-&gt;AddChild(move(join-&gt;children[1]));</span>
-<span class="lineNum">     544 </span><span class="lineCov">          2 :                 root = move(cp);</span>
-<span class="lineNum">     545 </span>            :         }
-<span class="lineNum">     546 </span><span class="lineCov">        134 :         return nullptr;</span>
-<a name="547"><span class="lineNum">     547 </span>            : }</a>
-<span class="lineNum">     548 </span>            : 
-<span class="lineNum">     549 </span><span class="lineCov">        425 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(SubqueryRef &amp;expr) {</span>
-<span class="lineNum">     550 </span>            :         // generate the logical plan for the subquery
-<span class="lineNum">     551 </span>            :         // this happens separately from the current LogicalPlan generation
-<span class="lineNum">     552 </span><span class="lineCov">        850 :         LogicalPlanGenerator generator(context, *expr.context, true);</span>
-<span class="lineNum">     553 </span>            : 
-<span class="lineNum">     554 </span><span class="lineCov">        425 :         size_t column_count = expr.subquery-&gt;select_list.size();</span>
-<span class="lineNum">     555 </span><span class="lineCov">        425 :         expr.subquery-&gt;Accept(&amp;generator);</span>
-<span class="lineNum">     556 </span>            : 
-<span class="lineNum">     557 </span><span class="lineCov">        425 :         auto index = bind_context.GetBindingIndex(expr.alias);</span>
-<span class="lineNum">     558 </span>            : 
-<span class="lineNum">     559 </span><span class="lineCov">        425 :         if (root) {</span>
-<span class="lineNum">     560 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Subquery cannot have children&quot;);</span>
-<span class="lineNum">     561 </span>            :         }
-<span class="lineNum">     562 </span><span class="lineCov">        425 :         root = make_unique&lt;LogicalSubquery&gt;(index, column_count);</span>
-<span class="lineNum">     563 </span>            :         // this intentionally does a push_back directly instead of using AddChild
-<span class="lineNum">     564 </span>            :         // because the Subquery is stand-alone, we do not copy the referenced_tables
-<span class="lineNum">     565 </span>            :         // of the children
-<span class="lineNum">     566 </span><span class="lineCov">        425 :         root-&gt;children.push_back(move(generator.root));</span>
-<span class="lineNum">     567 </span><span class="lineCov">        850 :         return nullptr;</span>
-<a name="568"><span class="lineNum">     568 </span>            : }</a>
-<span class="lineNum">     569 </span>            : 
-<span class="lineNum">     570 </span><span class="lineCov">          8 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(TableFunction &amp;expr) {</span>
-<span class="lineNum">     571 </span>            :         // FIXME: catalog access should only happen once in binder
-<span class="lineNum">     572 </span><span class="lineCov">          8 :         auto function_definition = (FunctionExpression *)expr.function.get();</span>
-<span class="lineNum">     573 </span><span class="lineCov">         16 :         auto function = context.db.catalog.GetTableFunction(</span>
-<span class="lineNum">     574 </span><span class="lineCov">          8 :             context.ActiveTransaction(), function_definition);</span>
-<span class="lineNum">     575 </span>            : 
-<span class="lineNum">     576 </span><span class="lineCov">         16 :         auto index = bind_context.GetBindingIndex(</span>
-<span class="lineNum">     577 </span><span class="lineCov">          8 :             expr.alias.empty() ? function_definition-&gt;function_name : expr.alias);</span>
-<span class="lineNum">     578 </span>            : 
-<span class="lineNum">     579 </span><span class="lineCov">          8 :         if (root) {</span>
-<span class="lineNum">     580 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Table function cannot have children&quot;);</span>
-<span class="lineNum">     581 </span>            :         }
-<span class="lineNum">     582 </span><span class="lineCov">          8 :         root =</span>
-<span class="lineNum">     583 </span><span class="lineCov">          8 :             make_unique&lt;LogicalTableFunction&gt;(function, index, move(expr.function));</span>
-<span class="lineNum">     584 </span><span class="lineCov">         16 :         return nullptr;</span>
-<span class="lineNum">     585 </span>            : }
-<a name="586"><span class="lineNum">     586 </span>            : </a>
-<span class="lineNum">     587 </span>            : unique_ptr&lt;SQLStatement&gt;
-<span class="lineNum">     588 </span><span class="lineCov">      30705 : LogicalPlanGenerator::Visit(InsertStatement &amp;statement) {</span>
-<span class="lineNum">     589 </span><span class="lineCov">      61410 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
-<span class="lineNum">     590 </span><span class="lineCov">      30705 :                                                  statement.schema, statement.table);</span>
-<span class="lineNum">     591 </span><span class="lineCov">      61410 :         auto insert = make_unique&lt;LogicalInsert&gt;(table);</span>
-<span class="lineNum">     592 </span>            : 
-<span class="lineNum">     593 </span><span class="lineCov">      30705 :         if (statement.columns.size() &gt; 0) {</span>
-<span class="lineNum">     594 </span>            :                 // insertion statement specifies column list
-<span class="lineNum">     595 </span>            : 
-<span class="lineNum">     596 </span>            :                 // create a mapping of (list index) -&gt; (column index)
-<span class="lineNum">     597 </span><span class="lineCov">        190 :                 map&lt;std::string, int&gt; column_name_map;</span>
-<span class="lineNum">     598 </span><span class="lineCov">        558 :                 for (size_t i = 0; i &lt; statement.columns.size(); i++) {</span>
-<span class="lineNum">     599 </span><span class="lineCov">        463 :                         column_name_map[statement.columns[i]] = i;</span>
-<span class="lineNum">     600 </span>            :                 }
-<span class="lineNum">     601 </span><span class="lineCov">        559 :                 for (size_t i = 0; i &lt; table-&gt;columns.size(); i++) {</span>
-<span class="lineNum">     602 </span><span class="lineCov">        464 :                         auto &amp;col = table-&gt;columns[i];</span>
-<span class="lineNum">     603 </span><span class="lineCov">        464 :                         auto entry = column_name_map.find(col.name);</span>
-<span class="lineNum">     604 </span><span class="lineCov">        464 :                         if (entry == column_name_map.end()) {</span>
-<span class="lineNum">     605 </span>            :                                 // column not specified, set index to -1
-<span class="lineNum">     606 </span><span class="lineCov">          1 :                                 insert-&gt;column_index_map.push_back(-1);</span>
-<span class="lineNum">     607 </span>            :                         } else {
-<span class="lineNum">     608 </span>            :                                 // column was specified, set to the index
-<span class="lineNum">     609 </span><span class="lineCov">        463 :                                 insert-&gt;column_index_map.push_back(entry-&gt;second);</span>
-<span class="lineNum">     610 </span>            :                         }
-<span class="lineNum">     611 </span>            :                 }
-<span class="lineNum">     612 </span>            :         }
-<span class="lineNum">     613 </span>            : 
-<span class="lineNum">     614 </span><span class="lineCov">      30705 :         if (statement.select_statement) {</span>
-<span class="lineNum">     615 </span>            :                 // insert from select statement
-<span class="lineNum">     616 </span>            :                 // parse select statement and add to logical plan
-<span class="lineNum">     617 </span><span class="lineCov">          7 :                 AcceptChild(&amp;statement.select_statement);</span>
-<span class="lineNum">     618 </span><span class="lineCov">          7 :                 assert(root);</span>
-<span class="lineNum">     619 </span><span class="lineCov">          7 :                 insert-&gt;AddChild(move(root));</span>
-<span class="lineNum">     620 </span><span class="lineCov">          7 :                 root = move(insert);</span>
-<span class="lineNum">     621 </span>            :         } else {
-<span class="lineNum">     622 </span>            :                 // first visit the expressions
-<span class="lineNum">     623 </span><span class="lineCov">      62626 :                 for (auto &amp;expression_list : statement.values) {</span>
-<span class="lineNum">     624 </span><span class="lineCov">      80772 :                         for (auto &amp;expression : expression_list) {</span>
-<span class="lineNum">     625 </span><span class="lineCov">      48844 :                                 AcceptChild(&amp;expression);</span>
-<span class="lineNum">     626 </span>            :                         }
-<span class="lineNum">     627 </span>            :                 }
-<span class="lineNum">     628 </span>            :                 // insert from constants
-<span class="lineNum">     629 </span>            :                 // check if the correct amount of constants are supplied
-<span class="lineNum">     630 </span><span class="lineCov">      30698 :                 if (statement.columns.size() == 0) {</span>
-<span class="lineNum">     631 </span><span class="lineCov">      30606 :                         if (statement.values[0].size() != table-&gt;columns.size()) {</span>
-<span class="lineNum">     632 </span>            :                                 throw SyntaxException(
-<span class="lineNum">     633 </span>            :                                     &quot;table %s has %d columns but %d values were supplied&quot;,
-<span class="lineNum">     634 </span><span class="lineNoCov">          0 :                                     table-&gt;name.c_str(), table-&gt;columns.size(),</span>
-<span class="lineNum">     635 </span><span class="lineNoCov">          0 :                                     statement.values[0].size());</span>
-<span class="lineNum">     636 </span>            :                         }
-<span class="lineNum">     637 </span>            :                 } else {
-<span class="lineNum">     638 </span><span class="lineCov">         92 :                         if (statement.values[0].size() != statement.columns.size()) {</span>
-<span class="lineNum">     639 </span>            :                                 throw SyntaxException(
-<span class="lineNum">     640 </span>            :                                     &quot;Column name/value mismatch: %d values for %d columns&quot;,
-<span class="lineNum">     641 </span><span class="lineNoCov">          0 :                                     statement.values[0].size(), statement.columns.size());</span>
-<span class="lineNum">     642 </span>            :                         }
-<span class="lineNum">     643 </span>            :                 }
-<span class="lineNum">     644 </span><span class="lineCov">      30698 :                 insert-&gt;insert_values = move(statement.values);</span>
-<span class="lineNum">     645 </span><span class="lineCov">      30698 :                 root = move(insert);</span>
-<span class="lineNum">     646 </span>            :         }
-<span class="lineNum">     647 </span><span class="lineCov">      61410 :         return nullptr;</span>
-<a name="648"><span class="lineNum">     648 </span>            : }</a>
-<span class="lineNum">     649 </span>            : 
-<span class="lineNum">     650 </span><span class="lineCov">          7 : unique_ptr&lt;SQLStatement&gt; LogicalPlanGenerator::Visit(CopyStatement &amp;statement) {</span>
-<span class="lineNum">     651 </span><span class="lineCov">          7 :         if (statement.table[0] != '\0') {</span>
-<span class="lineNum">     652 </span><span class="lineCov">          8 :                 auto table = context.db.catalog.GetTable(</span>
-<span class="lineNum">     653 </span><span class="lineCov">          4 :                     context.ActiveTransaction(), statement.schema, statement.table);</span>
-<span class="lineNum">     654 </span><span class="lineCov">          4 :                 auto copy = make_unique&lt;LogicalCopy&gt;(</span>
-<span class="lineNum">     655 </span><span class="lineCov">          4 :                     table, move(statement.file_path), move(statement.is_from),</span>
-<span class="lineNum">     656 </span><span class="lineCov">          4 :                     move(statement.delimiter), move(statement.quote),</span>
-<span class="lineNum">     657 </span><span class="lineCov">         12 :                     move(statement.escape), move(statement.select_list));</span>
-<span class="lineNum">     658 </span><span class="lineCov">          4 :                 root = move(copy);</span>
-<span class="lineNum">     659 </span>            :         } else {
-<span class="lineNum">     660 </span><span class="lineCov">          3 :                 auto copy = make_unique&lt;LogicalCopy&gt;(</span>
-<span class="lineNum">     661 </span><span class="lineCov">          3 :                     move(statement.file_path), move(statement.is_from),</span>
-<span class="lineNum">     662 </span><span class="lineCov">          3 :                     move(statement.delimiter), move(statement.quote),</span>
-<span class="lineNum">     663 </span><span class="lineCov">          9 :                     move(statement.escape));</span>
-<span class="lineNum">     664 </span><span class="lineCov">          3 :                 AcceptChild(&amp;statement.select_statement);</span>
-<span class="lineNum">     665 </span><span class="lineCov">          3 :                 assert(root);</span>
-<span class="lineNum">     666 </span><span class="lineCov">          3 :                 copy-&gt;AddChild(move(root));</span>
-<span class="lineNum">     667 </span><span class="lineCov">          3 :                 root = move(copy);</span>
-<span class="lineNum">     668 </span>            :         }
-<span class="lineNum">     669 </span><span class="lineCov">          7 :         return nullptr;</span>
-<span class="lineNum">     670 </span>            : }
+<span class="lineNum">     373 </span><span class="lineCov">      90800 :         TypeId max_type = expr.return_type;</span>
+<span class="lineNum">     374 </span><span class="lineCov">     270771 :         for (size_t i = start_idx; i &lt; expr.children.size(); i++) {</span>
+<span class="lineNum">     375 </span><span class="lineCov">     179971 :                 TypeId child_type = expr.children[i]-&gt;return_type;</span>
+<span class="lineNum">     376 </span><span class="lineCov">     179971 :                 if (child_type &gt; max_type) {</span>
+<span class="lineNum">     377 </span><span class="lineCov">      32303 :                         max_type = child_type;</span>
+<span class="lineNum">     378 </span>            :                 }
+<span class="lineNum">     379 </span>            :         }
+<span class="lineNum">     380 </span>            :         // now add casts where appropriate
+<span class="lineNum">     381 </span><span class="lineCov">     270771 :         for (size_t i = start_idx; i &lt; expr.children.size(); i++) {</span>
+<span class="lineNum">     382 </span><span class="lineCov">     179971 :                 TypeId child_type = expr.children[i]-&gt;return_type;</span>
+<span class="lineNum">     383 </span><span class="lineCov">     179971 :                 if (child_type != max_type) {</span>
+<span class="lineNum">     384 </span><span class="lineCov">       1479 :                         auto cast =</span>
+<span class="lineNum">     385 </span><span class="lineCov">       2958 :                             make_unique&lt;CastExpression&gt;(max_type, move(expr.children[i]));</span>
+<span class="lineNum">     386 </span><span class="lineCov">       1479 :                         cast-&gt;ResolveType();</span>
+<span class="lineNum">     387 </span><span class="lineCov">       1479 :                         expr.children[i] = move(cast);</span>
+<span class="lineNum">     388 </span>            :                 }
+<span class="lineNum">     389 </span>            :         }
+<a name="390"><span class="lineNum">     390 </span><span class="lineCov">      90800 : }</span></a>
+<span class="lineNum">     391 </span>            : 
+<span class="lineNum">     392 </span><span class="lineCov">       6080 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(AggregateExpression &amp;expr) {</span>
+<span class="lineNum">     393 </span><span class="lineCov">       6080 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     394 </span>            :         // add cast if types don't match
+<span class="lineNum">     395 </span><span class="lineCov">       8923 :         for (size_t i = 0; i &lt; expr.children.size(); i++) {</span>
+<span class="lineNum">     396 </span><span class="lineCov">       2843 :                 auto &amp;child = expr.children[i];</span>
+<span class="lineNum">     397 </span><span class="lineCov">       2843 :                 if (child-&gt;return_type != expr.return_type) {</span>
+<span class="lineNum">     398 </span><span class="lineCov">       1140 :                         auto cast = make_unique&lt;CastExpression&gt;(expr.return_type,</span>
+<span class="lineNum">     399 </span><span class="lineCov">       2280 :                                                                 move(expr.children[i]));</span>
+<span class="lineNum">     400 </span><span class="lineCov">       1140 :                         expr.children[i] = move(cast);</span>
+<span class="lineNum">     401 </span>            :                 }
+<span class="lineNum">     402 </span>            :         }
+<span class="lineNum">     403 </span><span class="lineCov">       6080 :         return nullptr;</span>
+<a name="404"><span class="lineNum">     404 </span>            : }</a>
+<span class="lineNum">     405 </span>            : 
+<span class="lineNum">     406 </span><span class="lineCov">       9066 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(CaseExpression &amp;expr) {</span>
+<span class="lineNum">     407 </span><span class="lineCov">       9066 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     408 </span><span class="lineCov">       9066 :         assert(expr.children.size() == 3);</span>
+<span class="lineNum">     409 </span>            :         // check needs to be bool
+<span class="lineNum">     410 </span><span class="lineCov">       9066 :         if (expr.children[0]-&gt;return_type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">     411 </span><span class="lineNoCov">          0 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
+<span class="lineNum">     412 </span><span class="lineNoCov">          0 :                                                         move(expr.children[0]));</span>
+<span class="lineNum">     413 </span><span class="lineNoCov">          0 :                 expr.children[0] = move(cast);</span>
+<span class="lineNum">     414 </span>            :         }
+<span class="lineNum">     415 </span>            :         // others need same type
+<span class="lineNum">     416 </span><span class="lineCov">       9066 :         cast_children_to_equal_types(expr, 1);</span>
+<span class="lineNum">     417 </span><span class="lineCov">       9066 :         return nullptr;</span>
+<a name="418"><span class="lineNum">     418 </span>            : }</a>
+<span class="lineNum">     419 </span>            : 
+<span class="lineNum">     420 </span><span class="lineCov">      30488 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(ComparisonExpression &amp;expr) {</span>
+<span class="lineNum">     421 </span><span class="lineCov">      30488 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     422 </span><span class="lineCov">      30488 :         cast_children_to_equal_types(expr);</span>
+<span class="lineNum">     423 </span><span class="lineCov">      30488 :         return nullptr;</span>
+<span class="lineNum">     424 </span>            : }
+<span class="lineNum">     425 </span>            : 
+<a name="426"><span class="lineNum">     426 </span>            : // TODO: this is ugly, generify functionality</a>
+<span class="lineNum">     427 </span>            : unique_ptr&lt;Expression&gt;
+<span class="lineNum">     428 </span><span class="lineCov">      13251 : LogicalPlanGenerator::Visit(ConjunctionExpression &amp;expr) {</span>
+<span class="lineNum">     429 </span><span class="lineCov">      13251 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     430 </span>            : 
+<span class="lineNum">     431 </span><span class="lineCov">      13251 :         if (expr.children[0]-&gt;return_type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">     432 </span><span class="lineCov">         36 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
+<span class="lineNum">     433 </span><span class="lineCov">         36 :                                                         move(expr.children[0]));</span>
+<span class="lineNum">     434 </span><span class="lineCov">         18 :                 expr.children[0] = move(cast);</span>
+<span class="lineNum">     435 </span>            :         }
+<span class="lineNum">     436 </span><span class="lineCov">      13251 :         if (expr.children[1]-&gt;return_type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">     437 </span><span class="lineCov">         36 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
+<span class="lineNum">     438 </span><span class="lineCov">         36 :                                                         move(expr.children[1]));</span>
+<span class="lineNum">     439 </span><span class="lineCov">         18 :                 expr.children[1] = move(cast);</span>
+<span class="lineNum">     440 </span>            :         }
+<span class="lineNum">     441 </span><span class="lineCov">      13251 :         return nullptr;</span>
+<a name="442"><span class="lineNum">     442 </span>            : }</a>
+<span class="lineNum">     443 </span>            : 
+<span class="lineNum">     444 </span><span class="lineCov">      51249 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(OperatorExpression &amp;expr) {</span>
+<span class="lineNum">     445 </span><span class="lineCov">      51249 :         SQLNodeVisitor::Visit(expr);</span>
+<span class="lineNum">     446 </span><span class="lineCov">      52024 :         if (expr.type == ExpressionType::OPERATOR_NOT &amp;&amp;</span>
+<span class="lineNum">     447 </span><span class="lineCov">        775 :             expr.children[0]-&gt;return_type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">     448 </span><span class="lineCov">          6 :                 auto cast = make_unique&lt;CastExpression&gt;(TypeId::BOOLEAN,</span>
+<span class="lineNum">     449 </span><span class="lineCov">          6 :                                                         move(expr.children[0]));</span>
+<span class="lineNum">     450 </span><span class="lineCov">          3 :                 expr.children[0] = move(cast);</span>
+<span class="lineNum">     451 </span>            :         } else {
+<span class="lineNum">     452 </span><span class="lineCov">      51246 :                 cast_children_to_equal_types(expr);</span>
+<span class="lineNum">     453 </span>            :         }
+<span class="lineNum">     454 </span><span class="lineCov">      51249 :         return nullptr;</span>
+<a name="455"><span class="lineNum">     455 </span>            : }</a>
+<span class="lineNum">     456 </span>            : 
+<span class="lineNum">     457 </span><span class="lineCov">       3860 : unique_ptr&lt;Expression&gt; LogicalPlanGenerator::Visit(SubqueryExpression &amp;expr) {</span>
+<span class="lineNum">     458 </span><span class="lineCov">       7720 :         LogicalPlanGenerator generator(context, *expr.context, true);</span>
+<span class="lineNum">     459 </span><span class="lineCov">       3860 :         expr.subquery-&gt;Accept(&amp;generator);</span>
+<span class="lineNum">     460 </span><span class="lineCov">       3860 :         if (!generator.root) {</span>
+<span class="lineNum">     461 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Can't plan subquery&quot;);</span>
+<span class="lineNum">     462 </span>            :         }
+<span class="lineNum">     463 </span><span class="lineCov">       3860 :         expr.op = move(generator.root);</span>
+<span class="lineNum">     464 </span><span class="lineCov">       3860 :         assert(expr.op);</span>
+<span class="lineNum">     465 </span><span class="lineCov">       7720 :         return nullptr;</span>
+<a name="466"><span class="lineNum">     466 </span>            : }</a>
+<span class="lineNum">     467 </span>            : 
+<span class="lineNum">     468 </span><span class="lineCov">      13744 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(BaseTableRef &amp;expr) {</span>
+<span class="lineNum">     469 </span>            :         // FIXME: catalog access should only happen once in binder
+<span class="lineNum">     470 </span><span class="lineCov">      27488 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
+<span class="lineNum">     471 </span><span class="lineCov">      13744 :                                                  expr.schema_name, expr.table_name);</span>
+<span class="lineNum">     472 </span><span class="lineCov">      27488 :         auto alias = expr.alias.empty() ? expr.table_name : expr.alias;</span>
+<span class="lineNum">     473 </span>            : 
+<span class="lineNum">     474 </span><span class="lineCov">      13744 :         auto index = bind_context.GetBindingIndex(alias);</span>
+<span class="lineNum">     475 </span>            : 
+<span class="lineNum">     476 </span><span class="lineCov">      27488 :         std::vector&lt;column_t&gt; column_ids;</span>
+<span class="lineNum">     477 </span>            :         // look in the context for this table which columns are required
+<span class="lineNum">     478 </span><span class="lineCov">      51938 :         for (auto &amp;bound_column : bind_context.bound_columns[alias]) {</span>
+<span class="lineNum">     479 </span><span class="lineCov">      38194 :                 column_ids.push_back(table-&gt;name_map[bound_column]);</span>
+<span class="lineNum">     480 </span>            :         }
+<span class="lineNum">     481 </span><span class="lineCov">      13744 :         if (require_row_id || column_ids.size() == 0) {</span>
+<span class="lineNum">     482 </span>            :                 // no column ids selected
+<span class="lineNum">     483 </span>            :                 // the query is like SELECT COUNT(*) FROM table, or SELECT 42 FROM table
+<span class="lineNum">     484 </span>            :                 // return just the row id
+<span class="lineNum">     485 </span><span class="lineCov">       3146 :                 column_ids.push_back(COLUMN_IDENTIFIER_ROW_ID);</span>
+<span class="lineNum">     486 </span>            :         }
+<span class="lineNum">     487 </span>            : 
+<span class="lineNum">     488 </span><span class="lineCov">      27488 :         auto get_table = make_unique&lt;LogicalGet&gt;(table, index, column_ids);</span>
+<span class="lineNum">     489 </span><span class="lineCov">      13744 :         if (root) {</span>
+<span class="lineNum">     490 </span><span class="lineNoCov">          0 :                 get_table-&gt;AddChild(move(root));</span>
+<span class="lineNum">     491 </span>            :         }
+<span class="lineNum">     492 </span><span class="lineCov">      13744 :         root = move(get_table);</span>
+<span class="lineNum">     493 </span><span class="lineCov">      27488 :         return nullptr;</span>
+<a name="494"><span class="lineNum">     494 </span>            : }</a>
+<span class="lineNum">     495 </span>            : 
+<span class="lineNum">     496 </span><span class="lineCov">        818 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(CrossProductRef &amp;expr) {</span>
+<span class="lineNum">     497 </span><span class="lineCov">       1636 :         auto cross_product = make_unique&lt;LogicalCrossProduct&gt;();</span>
+<span class="lineNum">     498 </span>            : 
+<span class="lineNum">     499 </span><span class="lineCov">        818 :         if (root) {</span>
+<span class="lineNum">     500 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cross product cannot have children!&quot;);</span>
+<span class="lineNum">     501 </span>            :         }
+<span class="lineNum">     502 </span>            : 
+<span class="lineNum">     503 </span><span class="lineCov">        818 :         AcceptChild(&amp;expr.left);</span>
+<span class="lineNum">     504 </span><span class="lineCov">        818 :         assert(root);</span>
+<span class="lineNum">     505 </span><span class="lineCov">        818 :         cross_product-&gt;AddChild(move(root));</span>
+<span class="lineNum">     506 </span><span class="lineCov">        818 :         root = nullptr;</span>
+<span class="lineNum">     507 </span>            : 
+<span class="lineNum">     508 </span><span class="lineCov">        818 :         AcceptChild(&amp;expr.right);</span>
+<span class="lineNum">     509 </span><span class="lineCov">        818 :         assert(root);</span>
+<span class="lineNum">     510 </span><span class="lineCov">        818 :         cross_product-&gt;AddChild(move(root));</span>
+<span class="lineNum">     511 </span><span class="lineCov">        818 :         root = nullptr;</span>
+<span class="lineNum">     512 </span>            : 
+<span class="lineNum">     513 </span><span class="lineCov">        818 :         root = move(cross_product);</span>
+<span class="lineNum">     514 </span><span class="lineCov">       1636 :         return nullptr;</span>
+<a name="515"><span class="lineNum">     515 </span>            : }</a>
+<span class="lineNum">     516 </span>            : 
+<span class="lineNum">     517 </span><span class="lineCov">         67 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(JoinRef &amp;expr) {</span>
+<span class="lineNum">     518 </span><span class="lineCov">         67 :         AcceptChild(&amp;expr.condition);</span>
+<span class="lineNum">     519 </span><span class="lineCov">        134 :         auto join = make_unique&lt;LogicalJoin&gt;(expr.type);</span>
+<span class="lineNum">     520 </span>            : 
+<span class="lineNum">     521 </span><span class="lineCov">         67 :         if (root) {</span>
+<span class="lineNum">     522 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cross product cannot have children!&quot;);</span>
+<span class="lineNum">     523 </span>            :         }
+<span class="lineNum">     524 </span>            : 
+<span class="lineNum">     525 </span><span class="lineCov">         67 :         AcceptChild(&amp;expr.left);</span>
+<span class="lineNum">     526 </span><span class="lineCov">         67 :         assert(root);</span>
+<span class="lineNum">     527 </span><span class="lineCov">         67 :         join-&gt;AddChild(move(root));</span>
+<span class="lineNum">     528 </span><span class="lineCov">         67 :         root = nullptr;</span>
+<span class="lineNum">     529 </span>            : 
+<span class="lineNum">     530 </span><span class="lineCov">         67 :         AcceptChild(&amp;expr.right);</span>
+<span class="lineNum">     531 </span><span class="lineCov">         67 :         assert(root);</span>
+<span class="lineNum">     532 </span><span class="lineCov">         67 :         join-&gt;AddChild(move(root));</span>
+<span class="lineNum">     533 </span><span class="lineCov">         67 :         root = nullptr;</span>
+<span class="lineNum">     534 </span>            : 
+<span class="lineNum">     535 </span><span class="lineCov">         67 :         join-&gt;SetJoinCondition(move(expr.condition));</span>
+<span class="lineNum">     536 </span><span class="lineCov">         67 :         if (join-&gt;conditions.size() &gt; 0) {</span>
+<span class="lineNum">     537 </span><span class="lineCov">         65 :                 root = move(join);</span>
+<span class="lineNum">     538 </span>            :         } else { // the conditions were not comparisions between left on right,
+<span class="lineNum">     539 </span>            :                      // cross product
+<span class="lineNum">     540 </span><span class="lineCov">          4 :                 auto cp = make_unique&lt;LogicalCrossProduct&gt;();</span>
+<span class="lineNum">     541 </span><span class="lineCov">          2 :                 cp-&gt;AddChild(move(join-&gt;children[0]));</span>
+<span class="lineNum">     542 </span><span class="lineCov">          2 :                 cp-&gt;AddChild(move(join-&gt;children[1]));</span>
+<span class="lineNum">     543 </span><span class="lineCov">          2 :                 root = move(cp);</span>
+<span class="lineNum">     544 </span>            :         }
+<span class="lineNum">     545 </span><span class="lineCov">        134 :         return nullptr;</span>
+<a name="546"><span class="lineNum">     546 </span>            : }</a>
+<span class="lineNum">     547 </span>            : 
+<span class="lineNum">     548 </span><span class="lineCov">        425 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(SubqueryRef &amp;expr) {</span>
+<span class="lineNum">     549 </span>            :         // generate the logical plan for the subquery
+<span class="lineNum">     550 </span>            :         // this happens separately from the current LogicalPlan generation
+<span class="lineNum">     551 </span><span class="lineCov">        850 :         LogicalPlanGenerator generator(context, *expr.context, true);</span>
+<span class="lineNum">     552 </span>            : 
+<span class="lineNum">     553 </span><span class="lineCov">        425 :         size_t column_count = expr.subquery-&gt;select_list.size();</span>
+<span class="lineNum">     554 </span><span class="lineCov">        425 :         expr.subquery-&gt;Accept(&amp;generator);</span>
+<span class="lineNum">     555 </span>            : 
+<span class="lineNum">     556 </span><span class="lineCov">        425 :         auto index = bind_context.GetBindingIndex(expr.alias);</span>
+<span class="lineNum">     557 </span>            : 
+<span class="lineNum">     558 </span><span class="lineCov">        425 :         if (root) {</span>
+<span class="lineNum">     559 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Subquery cannot have children&quot;);</span>
+<span class="lineNum">     560 </span>            :         }
+<span class="lineNum">     561 </span><span class="lineCov">        425 :         root = make_unique&lt;LogicalSubquery&gt;(index, column_count);</span>
+<span class="lineNum">     562 </span>            :         // this intentionally does a push_back directly instead of using AddChild
+<span class="lineNum">     563 </span>            :         // because the Subquery is stand-alone, we do not copy the referenced_tables
+<span class="lineNum">     564 </span>            :         // of the children
+<span class="lineNum">     565 </span><span class="lineCov">        425 :         root-&gt;children.push_back(move(generator.root));</span>
+<span class="lineNum">     566 </span><span class="lineCov">        850 :         return nullptr;</span>
+<a name="567"><span class="lineNum">     567 </span>            : }</a>
+<span class="lineNum">     568 </span>            : 
+<span class="lineNum">     569 </span><span class="lineCov">          8 : unique_ptr&lt;TableRef&gt; LogicalPlanGenerator::Visit(TableFunction &amp;expr) {</span>
+<span class="lineNum">     570 </span>            :         // FIXME: catalog access should only happen once in binder
+<span class="lineNum">     571 </span><span class="lineCov">          8 :         auto function_definition = (FunctionExpression *)expr.function.get();</span>
+<span class="lineNum">     572 </span><span class="lineCov">         16 :         auto function = context.db.catalog.GetTableFunction(</span>
+<span class="lineNum">     573 </span><span class="lineCov">          8 :             context.ActiveTransaction(), function_definition);</span>
+<span class="lineNum">     574 </span>            : 
+<span class="lineNum">     575 </span><span class="lineCov">         16 :         auto index = bind_context.GetBindingIndex(</span>
+<span class="lineNum">     576 </span><span class="lineCov">          8 :             expr.alias.empty() ? function_definition-&gt;function_name : expr.alias);</span>
+<span class="lineNum">     577 </span>            : 
+<span class="lineNum">     578 </span><span class="lineCov">          8 :         if (root) {</span>
+<span class="lineNum">     579 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Table function cannot have children&quot;);</span>
+<span class="lineNum">     580 </span>            :         }
+<span class="lineNum">     581 </span><span class="lineCov">          8 :         root =</span>
+<span class="lineNum">     582 </span><span class="lineCov">          8 :             make_unique&lt;LogicalTableFunction&gt;(function, index, move(expr.function));</span>
+<span class="lineNum">     583 </span><span class="lineCov">         16 :         return nullptr;</span>
+<span class="lineNum">     584 </span>            : }
+<a name="585"><span class="lineNum">     585 </span>            : </a>
+<span class="lineNum">     586 </span>            : unique_ptr&lt;SQLStatement&gt;
+<span class="lineNum">     587 </span><span class="lineCov">      30705 : LogicalPlanGenerator::Visit(InsertStatement &amp;statement) {</span>
+<span class="lineNum">     588 </span><span class="lineCov">      61410 :         auto table = context.db.catalog.GetTable(context.ActiveTransaction(),</span>
+<span class="lineNum">     589 </span><span class="lineCov">      30705 :                                                  statement.schema, statement.table);</span>
+<span class="lineNum">     590 </span><span class="lineCov">      61410 :         auto insert = make_unique&lt;LogicalInsert&gt;(table);</span>
+<span class="lineNum">     591 </span>            : 
+<span class="lineNum">     592 </span><span class="lineCov">      30705 :         if (statement.columns.size() &gt; 0) {</span>
+<span class="lineNum">     593 </span>            :                 // insertion statement specifies column list
+<span class="lineNum">     594 </span>            : 
+<span class="lineNum">     595 </span>            :                 // create a mapping of (list index) -&gt; (column index)
+<span class="lineNum">     596 </span><span class="lineCov">        190 :                 map&lt;std::string, int&gt; column_name_map;</span>
+<span class="lineNum">     597 </span><span class="lineCov">        558 :                 for (size_t i = 0; i &lt; statement.columns.size(); i++) {</span>
+<span class="lineNum">     598 </span><span class="lineCov">        463 :                         column_name_map[statement.columns[i]] = i;</span>
+<span class="lineNum">     599 </span>            :                 }
+<span class="lineNum">     600 </span><span class="lineCov">        559 :                 for (size_t i = 0; i &lt; table-&gt;columns.size(); i++) {</span>
+<span class="lineNum">     601 </span><span class="lineCov">        464 :                         auto &amp;col = table-&gt;columns[i];</span>
+<span class="lineNum">     602 </span><span class="lineCov">        464 :                         auto entry = column_name_map.find(col.name);</span>
+<span class="lineNum">     603 </span><span class="lineCov">        464 :                         if (entry == column_name_map.end()) {</span>
+<span class="lineNum">     604 </span>            :                                 // column not specified, set index to -1
+<span class="lineNum">     605 </span><span class="lineCov">          1 :                                 insert-&gt;column_index_map.push_back(-1);</span>
+<span class="lineNum">     606 </span>            :                         } else {
+<span class="lineNum">     607 </span>            :                                 // column was specified, set to the index
+<span class="lineNum">     608 </span><span class="lineCov">        463 :                                 insert-&gt;column_index_map.push_back(entry-&gt;second);</span>
+<span class="lineNum">     609 </span>            :                         }
+<span class="lineNum">     610 </span>            :                 }
+<span class="lineNum">     611 </span>            :         }
+<span class="lineNum">     612 </span>            : 
+<span class="lineNum">     613 </span><span class="lineCov">      30705 :         if (statement.select_statement) {</span>
+<span class="lineNum">     614 </span>            :                 // insert from select statement
+<span class="lineNum">     615 </span>            :                 // parse select statement and add to logical plan
+<span class="lineNum">     616 </span><span class="lineCov">          7 :                 AcceptChild(&amp;statement.select_statement);</span>
+<span class="lineNum">     617 </span><span class="lineCov">          7 :                 assert(root);</span>
+<span class="lineNum">     618 </span><span class="lineCov">          7 :                 insert-&gt;AddChild(move(root));</span>
+<span class="lineNum">     619 </span><span class="lineCov">          7 :                 root = move(insert);</span>
+<span class="lineNum">     620 </span>            :         } else {
+<span class="lineNum">     621 </span>            :                 // first visit the expressions
+<span class="lineNum">     622 </span><span class="lineCov">      62626 :                 for (auto &amp;expression_list : statement.values) {</span>
+<span class="lineNum">     623 </span><span class="lineCov">      80772 :                         for (auto &amp;expression : expression_list) {</span>
+<span class="lineNum">     624 </span><span class="lineCov">      48844 :                                 AcceptChild(&amp;expression);</span>
+<span class="lineNum">     625 </span>            :                         }
+<span class="lineNum">     626 </span>            :                 }
+<span class="lineNum">     627 </span>            :                 // insert from constants
+<span class="lineNum">     628 </span>            :                 // check if the correct amount of constants are supplied
+<span class="lineNum">     629 </span><span class="lineCov">      30698 :                 if (statement.columns.size() == 0) {</span>
+<span class="lineNum">     630 </span><span class="lineCov">      30606 :                         if (statement.values[0].size() != table-&gt;columns.size()) {</span>
+<span class="lineNum">     631 </span>            :                                 throw SyntaxException(
+<span class="lineNum">     632 </span>            :                                     &quot;table %s has %d columns but %d values were supplied&quot;,
+<span class="lineNum">     633 </span><span class="lineNoCov">          0 :                                     table-&gt;name.c_str(), table-&gt;columns.size(),</span>
+<span class="lineNum">     634 </span><span class="lineNoCov">          0 :                                     statement.values[0].size());</span>
+<span class="lineNum">     635 </span>            :                         }
+<span class="lineNum">     636 </span>            :                 } else {
+<span class="lineNum">     637 </span><span class="lineCov">         92 :                         if (statement.values[0].size() != statement.columns.size()) {</span>
+<span class="lineNum">     638 </span>            :                                 throw SyntaxException(
+<span class="lineNum">     639 </span>            :                                     &quot;Column name/value mismatch: %d values for %d columns&quot;,
+<span class="lineNum">     640 </span><span class="lineNoCov">          0 :                                     statement.values[0].size(), statement.columns.size());</span>
+<span class="lineNum">     641 </span>            :                         }
+<span class="lineNum">     642 </span>            :                 }
+<span class="lineNum">     643 </span><span class="lineCov">      30698 :                 insert-&gt;insert_values = move(statement.values);</span>
+<span class="lineNum">     644 </span><span class="lineCov">      30698 :                 root = move(insert);</span>
+<span class="lineNum">     645 </span>            :         }
+<span class="lineNum">     646 </span><span class="lineCov">      61410 :         return nullptr;</span>
+<a name="647"><span class="lineNum">     647 </span>            : }</a>
+<span class="lineNum">     648 </span>            : 
+<span class="lineNum">     649 </span><span class="lineCov">          7 : unique_ptr&lt;SQLStatement&gt; LogicalPlanGenerator::Visit(CopyStatement &amp;statement) {</span>
+<span class="lineNum">     650 </span><span class="lineCov">          7 :         if (statement.table[0] != '\0') {</span>
+<span class="lineNum">     651 </span><span class="lineCov">          8 :                 auto table = context.db.catalog.GetTable(</span>
+<span class="lineNum">     652 </span><span class="lineCov">          4 :                     context.ActiveTransaction(), statement.schema, statement.table);</span>
+<span class="lineNum">     653 </span><span class="lineCov">          4 :                 auto copy = make_unique&lt;LogicalCopy&gt;(</span>
+<span class="lineNum">     654 </span><span class="lineCov">          4 :                     table, move(statement.file_path), move(statement.is_from),</span>
+<span class="lineNum">     655 </span><span class="lineCov">          4 :                     move(statement.delimiter), move(statement.quote),</span>
+<span class="lineNum">     656 </span><span class="lineCov">         12 :                     move(statement.escape), move(statement.select_list));</span>
+<span class="lineNum">     657 </span><span class="lineCov">          4 :                 root = move(copy);</span>
+<span class="lineNum">     658 </span>            :         } else {
+<span class="lineNum">     659 </span><span class="lineCov">          3 :                 auto copy = make_unique&lt;LogicalCopy&gt;(</span>
+<span class="lineNum">     660 </span><span class="lineCov">          3 :                     move(statement.file_path), move(statement.is_from),</span>
+<span class="lineNum">     661 </span><span class="lineCov">          3 :                     move(statement.delimiter), move(statement.quote),</span>
+<span class="lineNum">     662 </span><span class="lineCov">          9 :                     move(statement.escape));</span>
+<span class="lineNum">     663 </span><span class="lineCov">          3 :                 AcceptChild(&amp;statement.select_statement);</span>
+<span class="lineNum">     664 </span><span class="lineCov">          3 :                 assert(root);</span>
+<span class="lineNum">     665 </span><span class="lineCov">          3 :                 copy-&gt;AddChild(move(root));</span>
+<span class="lineNum">     666 </span><span class="lineCov">          3 :                 root = move(copy);</span>
+<span class="lineNum">     667 </span>            :         }
+<span class="lineNum">     668 </span><span class="lineCov">          7 :         return nullptr;</span>
+<span class="lineNum">     669 </span>            : }
 </pre>
       </td>
     </tr>

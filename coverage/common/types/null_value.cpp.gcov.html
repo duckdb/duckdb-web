@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 723f98c - common/types/null_value.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2b93926 - common/types/null_value.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 723f98c</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2b93926</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">15</td>
             <td class="headerCovTableEntry">33</td>
-            <td class="headerCovTableEntryLo">54.5 %</td>
+            <td class="headerCovTableEntryLo">45.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 15:53:11</td>
+            <td class="headerValue">2018-12-03 23:58:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -80,18 +80,18 @@
 <span class="lineNum">      18 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 :                 *((int8_t *)ptr) = NullValue&lt;int8_t&gt;();</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      21 </span><span class="lineCov">          1 :         case TypeId::SMALLINT:</span>
-<span class="lineNum">      22 </span><span class="lineCov">          1 :                 *((int16_t *)ptr) = NullValue&lt;int16_t&gt;();</span>
-<span class="lineNum">      23 </span><span class="lineCov">          1 :                 break;</span>
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 *((int16_t *)ptr) = NullValue&lt;int16_t&gt;();</span>
+<span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      24 </span><span class="lineCov">      17683 :         case TypeId::INTEGER:</span>
 <span class="lineNum">      25 </span><span class="lineCov">      17683 :                 *((int32_t *)ptr) = NullValue&lt;int32_t&gt;();</span>
 <span class="lineNum">      26 </span><span class="lineCov">      17683 :                 break;</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :         case TypeId::DATE:</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :                 *((date_t *)ptr) = NullValue&lt;date_t&gt;();</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      30 </span><span class="lineCov">         15 :         case TypeId::BIGINT:</span>
-<span class="lineNum">      31 </span><span class="lineCov">         15 :                 *((int64_t *)ptr) = NullValue&lt;int64_t&gt;();</span>
-<span class="lineNum">      32 </span><span class="lineCov">         15 :                 break;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         16 :         case TypeId::BIGINT:</span>
+<span class="lineNum">      31 </span><span class="lineCov">         16 :                 *((int64_t *)ptr) = NullValue&lt;int64_t&gt;();</span>
+<span class="lineNum">      32 </span><span class="lineCov">         16 :                 break;</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :                 *((timestamp_t *)ptr) = NullValue&lt;timestamp_t&gt;();</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 break;</span>

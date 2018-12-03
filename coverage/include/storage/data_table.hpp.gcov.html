@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 723f98c - include/storage/data_table.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2b93926 - include/storage/data_table.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 723f98c</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2b93926</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 15:53:11</td>
+            <td class="headerValue">2018-12-03 23:58:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -77,9 +77,9 @@
 <span class="lineNum">      15 </span>            : #include &lt;vector&gt;
 <span class="lineNum">      16 </span>            : 
 <span class="lineNum">      17 </span>            : #include &quot;common/types/data_chunk.hpp&quot;
-<span class="lineNum">      18 </span>            : #include &quot;common/types/statistics.hpp&quot;
-<span class="lineNum">      19 </span>            : #include &quot;common/types/tuple.hpp&quot;
-<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      18 </span>            : #include &quot;common/types/tuple.hpp&quot;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : #include &quot;storage/column_statistics.hpp&quot;
 <span class="lineNum">      21 </span>            : #include &quot;storage/index.hpp&quot;
 <span class="lineNum">      22 </span>            : #include &quot;storage/storage_chunk.hpp&quot;
 <span class="lineNum">      23 </span>            : #include &quot;storage/unique_index.hpp&quot;
@@ -138,11 +138,11 @@
 <span class="lineNum">      76 </span>            :         void ReleaseIndexLocks();
 <a name="77"><span class="lineNum">      77 </span>            : </a>
 <span class="lineNum">      78 </span>            :         //! Get statistics of the specified column
-<span class="lineNum">      79 </span><span class="lineCov">      97475 :         Statistics &amp;GetStatistics(column_t oid) {</span>
-<span class="lineNum">      80 </span><span class="lineCov">      97475 :                 if (oid == COLUMN_IDENTIFIER_ROW_ID) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">     102840 :         ColumnStatistics &amp;GetStatistics(column_t oid) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">     102840 :                 if (oid == COLUMN_IDENTIFIER_ROW_ID) {</span>
 <span class="lineNum">      81 </span><span class="lineNoCov">          0 :                         return rowid_statistics;</span>
 <span class="lineNum">      82 </span>            :                 }
-<span class="lineNum">      83 </span><span class="lineCov">      97475 :                 return statistics[oid];</span>
+<span class="lineNum">      83 </span><span class="lineCov">     102840 :                 return statistics[oid];</span>
 <span class="lineNum">      84 </span>            :         }
 <span class="lineNum">      85 </span>            : 
 <span class="lineNum">      86 </span>            :         std::vector&lt;TypeId&gt; GetTypes(const std::vector&lt;column_t&gt; &amp;column_ids);
@@ -196,13 +196,11 @@
 <span class="lineNum">     134 </span>            :         //! A reference to the last entry in the chunk list
 <span class="lineNum">     135 </span>            :         StorageChunk *tail_chunk;
 <span class="lineNum">     136 </span>            :         //! Row ID statistics
-<span class="lineNum">     137 </span>            :         Statistics rowid_statistics;
+<span class="lineNum">     137 </span>            :         ColumnStatistics rowid_statistics;
 <span class="lineNum">     138 </span>            :         //! The statistics of each of the columns
-<span class="lineNum">     139 </span>            :         std::unique_ptr&lt;Statistics[]&gt; statistics;
-<span class="lineNum">     140 </span>            :         //! Locks used for updating the statistics
-<span class="lineNum">     141 </span>            :         std::unique_ptr&lt;std::mutex[]&gt; statistics_locks;
-<span class="lineNum">     142 </span>            : };
-<span class="lineNum">     143 </span>            : } // namespace duckdb
+<span class="lineNum">     139 </span>            :         std::unique_ptr&lt;ColumnStatistics[]&gt; statistics;
+<span class="lineNum">     140 </span>            : };
+<span class="lineNum">     141 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

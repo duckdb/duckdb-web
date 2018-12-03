@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 723f98c - include/common/operator/comparison_operators.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2b93926 - include/common/operator/comparison_operators.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 723f98c</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2b93926</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">50</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 15:53:11</td>
+            <td class="headerValue">2018-12-03 23:58:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">21</td>
@@ -80,8 +80,8 @@
 <span class="lineNum">      18 </span>            : // Comparison Operations
 <a name="19"><span class="lineNum">      19 </span>            : //===--------------------------------------------------------------------===//</a>
 <span class="lineNum">      20 </span>            : struct Equals {
-<span class="lineNum">      21 </span><span class="lineCov">    1266718 :         template &lt;class T&gt; static inline bool Operation(T left, T right) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">    1266718 :                 return left == right;</span>
+<span class="lineNum">      21 </span><span class="lineCov">    1258692 :         template &lt;class T&gt; static inline bool Operation(T left, T right) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">    1258692 :                 return left == right;</span>
 <a name="23"><span class="lineNum">      23 </span>            :         }</a>
 <span class="lineNum">      24 </span><span class="lineCov">        204 : };</span>
 <span class="lineNum">      25 </span><span class="lineCov">        204 : template &lt;&gt; inline bool Equals::Operation(const char *left, const char *right) {</span>
@@ -89,14 +89,14 @@
 <a name="27"><span class="lineNum">      27 </span><span class="lineCov">          1 : }</span></a>
 <span class="lineNum">      28 </span><span class="lineCov">          1 : struct NotEquals {</span>
 <span class="lineNum">      29 </span>            :         template &lt;class T&gt; static inline bool Operation(T left, T right) {
-<span class="lineNum">      30 </span><span class="lineCov">         99 :                 return left != right;</span>
-<span class="lineNum">      31 </span><span class="lineCov">         99 :         }</span>
+<span class="lineNum">      30 </span><span class="lineCov">       1927 :                 return left != right;</span>
+<span class="lineNum">      31 </span><span class="lineCov">       1927 :         }</span>
 <a name="32"><span class="lineNum">      32 </span>            : };</a>
-<span class="lineNum">      33 </span><span class="lineCov">      64102 : template &lt;&gt;</span>
-<span class="lineNum">      34 </span><span class="lineCov">      64102 : inline bool NotEquals::Operation(const char *left, const char *right) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      29109 : template &lt;&gt;</span>
+<span class="lineNum">      34 </span><span class="lineCov">      29109 : inline bool NotEquals::Operation(const char *left, const char *right) {</span>
 <span class="lineNum">      35 </span>            :         return strcmp(left, right) != 0;
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">    1202282 : }</span></a>
-<span class="lineNum">      37 </span><span class="lineCov">    1202282 : struct GreaterThan {</span>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">    1227421 : }</span></a>
+<span class="lineNum">      37 </span><span class="lineCov">    1227421 : struct GreaterThan {</span>
 <span class="lineNum">      38 </span>            :         template &lt;class T&gt; static inline bool Operation(T left, T right) {
 <span class="lineNum">      39 </span><span class="lineCov">          7 :                 return left &gt; right;</span>
 <span class="lineNum">      40 </span><span class="lineCov">          7 :         }</span>
@@ -118,8 +118,8 @@
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :         template &lt;class T&gt; static inline bool Operation(T left, T right) {</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :                 return left &lt; right;</span>
 <span class="lineNum">      58 </span>            :         }
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">    1134074 : };</span></a>
-<span class="lineNum">      60 </span><span class="lineCov">    1134074 : template &lt;&gt;</span>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">    1230812 : };</span></a>
+<span class="lineNum">      60 </span><span class="lineCov">    1230812 : template &lt;&gt;</span>
 <span class="lineNum">      61 </span>            : inline bool LessThan::Operation(const char *left, const char *right) {
 <span class="lineNum">      62 </span><span class="lineCov">          4 :         return strcmp(left, right) &lt; 0;</span>
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">          4 : }</span></a>
@@ -130,8 +130,8 @@
 <a name="68"><span class="lineNum">      68 </span><span class="lineCov">      17478 : };</span></a>
 <span class="lineNum">      69 </span><span class="lineCov">      17478 : template &lt;&gt;</span>
 <span class="lineNum">      70 </span><span class="lineCov">          3 : inline bool LessThanEquals::Operation(const char *left, const char *right) {</span>
-<span class="lineNum">      71 </span><span class="lineCov">      12587 :         return strcmp(left, right) &lt;= 0;</span>
-<span class="lineNum">      72 </span><span class="lineCov">      12584 : }</span>
+<span class="lineNum">      71 </span><span class="lineCov">     109325 :         return strcmp(left, right) &lt;= 0;</span>
+<span class="lineNum">      72 </span><span class="lineCov">     109322 : }</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 : } // namespace operators</span>
 </pre>
       </td>
