@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 164bdf4 - common/vector_operations/cast_operators.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 03fac97 - common/vector_operations/cast_operators.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 164bdf4</td>
+            <td class="headerValue">DuckDB Code Coverage Report 03fac97</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">222</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 12:51:15</td>
+            <td class="headerValue">2018-12-03 14:23:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">19</td>
@@ -72,25 +72,25 @@
 <span class="lineNum">      10 </span>            : using namespace std;
 <a name="11"><span class="lineNum">      11 </span>            : </a>
 <span class="lineNum">      12 </span>            : template &lt;class SRC_TYPE, class DST_TYPE, class OP, bool IGNORE_NULL&gt;
-<span class="lineNum">      13 </span><span class="lineCov">      53432 : void templated_cast_loop(Vector &amp;source, Vector &amp;result) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">      53432 :         auto ldata = (SRC_TYPE *)source.data;</span>
-<span class="lineNum">      15 </span><span class="lineCov">      53432 :         auto result_data = (DST_TYPE *)result.data;</span>
-<span class="lineNum">      16 </span><span class="lineCov">      53432 :         if (!IGNORE_NULL || !result.nullmask.any()) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">      39144 :                 VectorOperations::Exec(source, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">      53440 : void templated_cast_loop(Vector &amp;source, Vector &amp;result) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      53440 :         auto ldata = (SRC_TYPE *)source.data;</span>
+<span class="lineNum">      15 </span><span class="lineCov">      53440 :         auto result_data = (DST_TYPE *)result.data;</span>
+<span class="lineNum">      16 </span><span class="lineCov">      53440 :         if (!IGNORE_NULL || !result.nullmask.any()) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">      39148 :                 VectorOperations::Exec(source, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      18 </span>            :                         result_data[i] =
 <span class="lineNum">      19 </span>            :                             OP::template Operation&lt;SRC_TYPE, DST_TYPE&gt;(ldata[i]);
 <span class="lineNum">      20 </span>            :                 });
 <span class="lineNum">      21 </span>            :         } else {
-<span class="lineNum">      22 </span><span class="lineCov">      14288 :                 VectorOperations::Exec(source, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      14292 :                 VectorOperations::Exec(source, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      23 </span>            :                         if (!result.nullmask[i]) {
 <span class="lineNum">      24 </span>            :                                 result_data[i] =
 <span class="lineNum">      25 </span>            :                                     OP::template Operation&lt;SRC_TYPE, DST_TYPE&gt;(ldata[i]);
 <span class="lineNum">      26 </span>            :                         }
 <span class="lineNum">      27 </span>            :                 });
 <span class="lineNum">      28 </span>            :         }
-<span class="lineNum">      29 </span><span class="lineCov">      53426 :         result.sel_vector = source.sel_vector;</span>
-<span class="lineNum">      30 </span><span class="lineCov">      53426 :         result.count = source.count;</span>
-<span class="lineNum">      31 </span><span class="lineCov">      53426 : }</span>
+<span class="lineNum">      29 </span><span class="lineCov">      53434 :         result.sel_vector = source.sel_vector;</span>
+<span class="lineNum">      30 </span><span class="lineCov">      53434 :         result.count = source.count;</span>
+<span class="lineNum">      31 </span><span class="lineCov">      53434 : }</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineNoCov">          0 : </span></a>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 : template &lt;class SRC, class OP, bool IGNORE_NULL&gt;</span>
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 : static void result_cast_switch(Vector &amp;source, Vector &amp;result) {</span>

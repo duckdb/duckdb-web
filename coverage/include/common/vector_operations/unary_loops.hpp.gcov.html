@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 164bdf4 - include/common/vector_operations/unary_loops.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 03fac97 - include/common/vector_operations/unary_loops.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 164bdf4</td>
+            <td class="headerValue">DuckDB Code Coverage Report 03fac97</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">116</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 12:51:15</td>
+            <td class="headerValue">2018-12-03 14:23:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -78,12 +78,12 @@
 <span class="lineNum">      16 </span>            : 
 <a name="17"><span class="lineNum">      17 </span>            : namespace duckdb {</a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">       1868 : inline void UNARY_TYPE_CHECK(Vector &amp;input, Vector &amp;result) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">       1868 :         if (input.type != result.type) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">       1872 : inline void UNARY_TYPE_CHECK(Vector &amp;input, Vector &amp;result) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">       1872 :         if (input.type != result.type) {</span>
 <span class="lineNum">      21 </span>            :                 throw TypeMismatchException(input.type, result.type,
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                                             &quot;input and result types must be the same&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">       1868 : }</span>
+<span class="lineNum">      24 </span><span class="lineCov">       1872 : }</span>
 <a name="25"><span class="lineNum">      25 </span>            : </a>
 <span class="lineNum">      26 </span>            : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;
 <span class="lineNum">      27 </span><span class="lineCov">       2643 : static inline void unary_loop_function(LEFT_TYPE *__restrict ldata,</span>
@@ -109,20 +109,20 @@
 <span class="lineNum">      47 </span><span class="lineCov">        781 : }</span>
 <a name="48"><span class="lineNum">      48 </span>            : </a>
 <span class="lineNum">      49 </span><span class="lineNoCov">          0 : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;</span>
-<span class="lineNum">      50 </span><span class="lineCov">      44395 : static inline void unary_loop_process_null_function(</span>
+<span class="lineNum">      50 </span><span class="lineCov">      44399 : static inline void unary_loop_process_null_function(</span>
 <span class="lineNum">      51 </span>            :     LEFT_TYPE *__restrict ldata, RESULT_TYPE *__restrict result_data,
 <span class="lineNum">      52 </span>            :     size_t count, sel_t *__restrict sel_vector, nullmask_t &amp;nullmask) {
-<span class="lineNum">      53 </span><span class="lineCov">      44395 :         ASSERT_RESTRICT(ldata, ldata + count, result_data, result_data + count);</span>
-<span class="lineNum">      54 </span><span class="lineCov">      46257 :         if (nullmask.any()) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">      44399 :         ASSERT_RESTRICT(ldata, ldata + count, result_data, result_data + count);</span>
+<span class="lineNum">      54 </span><span class="lineCov">      46261 :         if (nullmask.any()) {</span>
 <span class="lineNum">      55 </span><span class="lineCov">         19 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      56 </span>            :                         result_data[i] = OP::Operation(ldata[i], nullmask[i]);
 <span class="lineNum">      57 </span>            :                 });
 <span class="lineNum">      58 </span><span class="lineCov">       1862 :         } else {</span>
-<span class="lineNum">      59 </span><span class="lineCov">      46238 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">      46242 :                 VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      60 </span>            :                         result_data[i] = OP::Operation(ldata[i], false);
 <span class="lineNum">      61 </span>            :                 });
 <span class="lineNum">      62 </span><span class="lineCov">       1862 :         }</span>
-<span class="lineNum">      63 </span><span class="lineCov">      44395 : }</span>
+<span class="lineNum">      63 </span><span class="lineCov">      44399 : }</span>
 <a name="64"><span class="lineNum">      64 </span><span class="lineCov">         20 : </span></a>
 <span class="lineNum">      65 </span>            : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;
 <span class="lineNum">      66 </span>            : void templated_unary_loop_process_null(Vector &amp;input, Vector &amp;result) {
