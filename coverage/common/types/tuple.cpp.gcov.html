@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 670d29b - common/types/tuple.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report a4c0ab3 - common/types/tuple.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 670d29b</td>
+            <td class="headerValue">DuckDB Code Coverage Report a4c0ab3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">146</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 14:38:44</td>
+            <td class="headerValue">2018-12-03 15:31:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -70,44 +70,44 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">      53497 : TupleSerializer::TupleSerializer() : base_size(0), has_variable_columns(false) {</span>
-<a name="12"><span class="lineNum">      12 </span><span class="lineCov">      53497 : }</span></a>
+<span class="lineNum">      11 </span><span class="lineCov">      54664 : TupleSerializer::TupleSerializer() : base_size(0), has_variable_columns(false) {</span>
+<a name="12"><span class="lineNum">      12 </span><span class="lineCov">      54664 : }</span></a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">      52311 : TupleSerializer::TupleSerializer(const std::vector&lt;TypeId&gt; &amp;types_,</span>
-<span class="lineNum">      15 </span><span class="lineCov">      52311 :                                  std::vector&lt;size_t&gt; columns_)</span>
-<span class="lineNum">      16 </span><span class="lineCov">      52311 :     : TupleSerializer() {</span>
-<span class="lineNum">      17 </span><span class="lineCov">      52311 :         Initialize(types_, columns_);</span>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">      52311 : }</span></a>
+<span class="lineNum">      14 </span><span class="lineCov">      52746 : TupleSerializer::TupleSerializer(const std::vector&lt;TypeId&gt; &amp;types_,</span>
+<span class="lineNum">      15 </span><span class="lineCov">      52746 :                                  std::vector&lt;size_t&gt; columns_)</span>
+<span class="lineNum">      16 </span><span class="lineCov">      52746 :     : TupleSerializer() {</span>
+<span class="lineNum">      17 </span><span class="lineCov">      52746 :         Initialize(types_, columns_);</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">      52746 : }</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">      53497 : void TupleSerializer::Initialize(const std::vector&lt;TypeId&gt; &amp;types_,</span>
+<span class="lineNum">      20 </span><span class="lineCov">      54664 : void TupleSerializer::Initialize(const std::vector&lt;TypeId&gt; &amp;types_,</span>
 <span class="lineNum">      21 </span>            :                                  std::vector&lt;size_t&gt; columns_) {
-<span class="lineNum">      22 </span><span class="lineCov">      53497 :         types = types_;</span>
+<span class="lineNum">      22 </span><span class="lineCov">      54664 :         types = types_;</span>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">      53497 :         if (columns_.size() == 0) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">      54664 :         if (columns_.size() == 0) {</span>
 <span class="lineNum">      25 </span>            :                 // if _columns is not supplied we use all columns
-<span class="lineNum">      26 </span><span class="lineCov">     109626 :                 for (size_t i = 0; i &lt; types.size(); i++) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">      56141 :                         columns.push_back(i);</span>
+<span class="lineNum">      26 </span><span class="lineCov">     112991 :                 for (size_t i = 0; i &lt; types.size(); i++) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      58339 :                         columns.push_back(i);</span>
 <span class="lineNum">      28 </span>            :                 }
 <span class="lineNum">      29 </span>            :         } else {
 <span class="lineNum">      30 </span><span class="lineCov">         12 :                 columns = columns_;</span>
 <span class="lineNum">      31 </span>            :         }
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">      53497 :         assert(types.size() == columns.size());</span>
-<span class="lineNum">      34 </span><span class="lineCov">      53497 :         is_variable.resize(columns.size());</span>
-<span class="lineNum">      35 </span><span class="lineCov">      53497 :         type_sizes.resize(columns.size());</span>
-<span class="lineNum">      36 </span><span class="lineCov">     109652 :         for (size_t i = 0; i &lt; columns.size(); i++) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">      56155 :                 auto type = types[i];</span>
-<span class="lineNum">      38 </span><span class="lineCov">      56155 :                 type_sizes[i] = GetTypeIdSize(type);</span>
-<span class="lineNum">      39 </span><span class="lineCov">      56155 :                 if (TypeIsConstantSize(type)) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">      55148 :                         base_size += type_sizes[i];</span>
+<span class="lineNum">      33 </span><span class="lineCov">      54664 :         assert(types.size() == columns.size());</span>
+<span class="lineNum">      34 </span><span class="lineCov">      54664 :         is_variable.resize(columns.size());</span>
+<span class="lineNum">      35 </span><span class="lineCov">      54664 :         type_sizes.resize(columns.size());</span>
+<span class="lineNum">      36 </span><span class="lineCov">     113017 :         for (size_t i = 0; i &lt; columns.size(); i++) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">      58353 :                 auto type = types[i];</span>
+<span class="lineNum">      38 </span><span class="lineCov">      58353 :                 type_sizes[i] = GetTypeIdSize(type);</span>
+<span class="lineNum">      39 </span><span class="lineCov">      58353 :                 if (TypeIsConstantSize(type)) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">      57164 :                         base_size += type_sizes[i];</span>
 <span class="lineNum">      41 </span>            :                 } else {
-<span class="lineNum">      42 </span><span class="lineCov">       1007 :                         assert(type == TypeId::VARCHAR);</span>
-<span class="lineNum">      43 </span><span class="lineCov">       1007 :                         has_variable_columns = true;</span>
-<span class="lineNum">      44 </span><span class="lineCov">       1007 :                         is_variable[i] = true;</span>
-<span class="lineNum">      45 </span><span class="lineCov">       1007 :                         base_size += type_sizes[i];</span>
+<span class="lineNum">      42 </span><span class="lineCov">       1189 :                         assert(type == TypeId::VARCHAR);</span>
+<span class="lineNum">      43 </span><span class="lineCov">       1189 :                         has_variable_columns = true;</span>
+<span class="lineNum">      44 </span><span class="lineCov">       1189 :                         is_variable[i] = true;</span>
+<span class="lineNum">      45 </span><span class="lineCov">       1189 :                         base_size += type_sizes[i];</span>
 <span class="lineNum">      46 </span>            :                 }
 <span class="lineNum">      47 </span>            :         }
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">      53497 : }</span></a>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">      54664 : }</span></a>
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span><span class="lineCov">         33 : void TupleSerializer::Serialize(DataChunk &amp;chunk, Tuple targets[]) {</span>
 <span class="lineNum">      51 </span>            :         // initialize the tuples
@@ -123,12 +123,12 @@
 <span class="lineNum">      61 </span><span class="lineCov">         33 :         Serialize(chunk, target_locations);</span>
 <a name="62"><span class="lineNum">      62 </span><span class="lineCov">         33 : }</span></a>
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">      44385 : void TupleSerializer::Serialize(DataChunk &amp;chunk, uint8_t *targets[]) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">      44385 :         size_t offset = 0;</span>
-<span class="lineNum">      66 </span><span class="lineCov">      88851 :         for (size_t i = 0; i &lt; columns.size(); i++) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">      44466 :                 SerializeColumn(chunk, targets, i, offset);</span>
+<span class="lineNum">      64 </span><span class="lineCov">      44386 : void TupleSerializer::Serialize(DataChunk &amp;chunk, uint8_t *targets[]) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      44386 :         size_t offset = 0;</span>
+<span class="lineNum">      66 </span><span class="lineCov">      88858 :         for (size_t i = 0; i &lt; columns.size(); i++) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">      44472 :                 SerializeColumn(chunk, targets, i, offset);</span>
 <span class="lineNum">      68 </span>            :         }
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">      44385 : }</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">      44386 : }</span></a>
 <span class="lineNum">      70 </span>            : 
 <span class="lineNum">      71 </span><span class="lineNoCov">          0 : void TupleSerializer::Deserialize(Vector &amp;source, DataChunk &amp;chunk) {</span>
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :         for (size_t i = 0; i &lt; columns.size(); i++) {</span>
@@ -213,26 +213,26 @@
 <span class="lineNum">     151 </span>            :         }
 <a name="152"><span class="lineNum">     152 </span><span class="lineCov">         12 : }</span></a>
 <span class="lineNum">     153 </span>            : 
-<span class="lineNum">     154 </span><span class="lineCov">     823879 : static void SerializeValue(uint8_t *target_data, Vector &amp;col, size_t index,</span>
+<span class="lineNum">     154 </span><span class="lineCov">     823885 : static void SerializeValue(uint8_t *target_data, Vector &amp;col, size_t index,</span>
 <span class="lineNum">     155 </span>            :                            size_t result_index, size_t type_size) {
-<span class="lineNum">     156 </span><span class="lineCov">     823879 :         if (col.nullmask[index]) {</span>
-<span class="lineNum">     157 </span><span class="lineCov">         27 :                 SetNullValue(target_data, col.type);</span>
+<span class="lineNum">     156 </span><span class="lineCov">     823885 :         if (col.nullmask[index]) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">         33 :                 SetNullValue(target_data, col.type);</span>
 <span class="lineNum">     158 </span>            :         } else {
 <span class="lineNum">     159 </span><span class="lineCov">     823852 :                 memcpy(target_data, col.data + index * type_size, type_size);</span>
 <span class="lineNum">     160 </span>            :         }
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">     823879 : }</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">     823885 : }</span></a>
 <span class="lineNum">     162 </span>            : 
-<span class="lineNum">     163 </span><span class="lineCov">      44466 : void TupleSerializer::SerializeColumn(DataChunk &amp;chunk, uint8_t *targets[],</span>
+<span class="lineNum">     163 </span><span class="lineCov">      44472 : void TupleSerializer::SerializeColumn(DataChunk &amp;chunk, uint8_t *targets[],</span>
 <span class="lineNum">     164 </span>            :                                       size_t column_index, size_t &amp;offset) {
-<span class="lineNum">     165 </span><span class="lineCov">      44466 :         const auto column = columns[column_index];</span>
-<span class="lineNum">     166 </span><span class="lineCov">      44466 :         const auto type_size = type_sizes[column_index];</span>
-<span class="lineNum">     167 </span><span class="lineCov">      44466 :         assert(types[column_index] == chunk.data[column].type);</span>
-<span class="lineNum">     168 </span><span class="lineCov">      44466 :         VectorOperations::Exec(chunk.data[column], [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">     165 </span><span class="lineCov">      44472 :         const auto column = columns[column_index];</span>
+<span class="lineNum">     166 </span><span class="lineCov">      44472 :         const auto type_size = type_sizes[column_index];</span>
+<span class="lineNum">     167 </span><span class="lineCov">      44472 :         assert(types[column_index] == chunk.data[column].type);</span>
+<span class="lineNum">     168 </span><span class="lineCov">      44472 :         VectorOperations::Exec(chunk.data[column], [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">     169 </span>            :                 auto target_data = targets[k] + offset;
 <span class="lineNum">     170 </span>            :                 SerializeValue(target_data, chunk.data[column], i, k, type_size);
 <span class="lineNum">     171 </span>            :         });
-<span class="lineNum">     172 </span><span class="lineCov">      44466 :         offset += type_size;</span>
-<a name="173"><span class="lineNum">     173 </span><span class="lineCov">      44466 : }</span></a>
+<span class="lineNum">     172 </span><span class="lineCov">      44472 :         offset += type_size;</span>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">      44472 : }</span></a>
 <span class="lineNum">     174 </span>            : 
 <span class="lineNum">     175 </span><span class="lineCov">      10300 : void TupleSerializer::DeserializeColumn(Vector &amp;source, size_t column_index,</span>
 <span class="lineNum">     176 </span>            :                                         Vector &amp;target) {

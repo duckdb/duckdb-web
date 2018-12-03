@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 670d29b - include/common/vector_operations/binary_loops.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report a4c0ab3 - include/common/vector_operations/binary_loops.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 670d29b</td>
+            <td class="headerValue">DuckDB Code Coverage Report a4c0ab3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">709</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 14:38:44</td>
+            <td class="headerValue">2018-12-03 15:31:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">66</td>
@@ -78,22 +78,22 @@
 <span class="lineNum">      16 </span>            : 
 <a name="17"><span class="lineNum">      17 </span>            : namespace duckdb {</a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">      64075 : inline void BINARY_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">      64075 :         if (left.type != right.type) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">      64087 : inline void BINARY_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      64087 :         if (left.type != right.type) {</span>
 <span class="lineNum">      21 </span>            :                 throw TypeMismatchException(left.type, right.type,
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                                             &quot;left and right types must be the same&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">      64075 :         if (left.type != result.type) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">      64087 :         if (left.type != result.type) {</span>
 <span class="lineNum">      25 </span>            :                 throw TypeMismatchException(
 <span class="lineNum">      26 </span>            :                     left.type, result.type,
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :                     &quot;result type must be the same as input types&quot;);</span>
 <span class="lineNum">      28 </span>            :         }
-<span class="lineNum">      29 </span><span class="lineCov">      84196 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp;</span>
+<span class="lineNum">      29 </span><span class="lineCov">      84208 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp;</span>
 <span class="lineNum">      30 </span><span class="lineCov">      20121 :             left.count != right.count) {</span>
 <span class="lineNum">      31 </span>            :                 throw Exception(&quot;Cardinality exception: left and right cannot have &quot;
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :                                 &quot;different cardinalities&quot;);</span>
 <span class="lineNum">      33 </span>            :         }
-<span class="lineNum">      34 </span><span class="lineCov">      64075 : }</span>
+<span class="lineNum">      34 </span><span class="lineCov">      64087 : }</span>
 <span class="lineNum">      35 </span>            : 
 <a name="36"><span class="lineNum">      36 </span>            : template &lt;class LEFT_TYPE, class RIGHT_TYPE, class RESULT_TYPE, class OP&gt;</a>
 <span class="lineNum">      37 </span>            : static inline void

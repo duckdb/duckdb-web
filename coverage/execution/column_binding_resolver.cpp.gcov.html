@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 670d29b - execution/column_binding_resolver.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report a4c0ab3 - execution/column_binding_resolver.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 670d29b</td>
+            <td class="headerValue">DuckDB Code Coverage Report a4c0ab3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">101</td>
+            <td class="headerCovTableEntry">103</td>
             <td class="headerCovTableEntry">106</td>
-            <td class="headerCovTableEntryHi">95.3 %</td>
+            <td class="headerCovTableEntryHi">97.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 14:38:44</td>
+            <td class="headerValue">2018-12-03 15:31:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
@@ -67,17 +67,17 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">        588 : void ColumnBindingResolver::AppendTables(</span>
+<span class="lineNum">       8 </span><span class="lineCov">        954 : void ColumnBindingResolver::AppendTables(</span>
 <span class="lineNum">       9 </span>            :     std::vector&lt;BoundTable&gt; &amp;right_tables) {
-<span class="lineNum">      10 </span><span class="lineCov">        588 :         size_t offset = bound_tables.size() == 0</span>
-<span class="lineNum">      11 </span><span class="lineCov">        588 :                             ? 0</span>
-<span class="lineNum">      12 </span><span class="lineCov">        588 :                             : bound_tables.back().column_offset +</span>
-<span class="lineNum">      13 </span><span class="lineCov">        588 :                                   bound_tables.back().column_count;</span>
-<span class="lineNum">      14 </span><span class="lineCov">       1176 :         for (auto table : right_tables) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">        588 :                 table.column_offset += offset;</span>
-<span class="lineNum">      16 </span><span class="lineCov">        588 :                 bound_tables.push_back(table);</span>
+<span class="lineNum">      10 </span><span class="lineCov">        954 :         size_t offset = bound_tables.size() == 0</span>
+<span class="lineNum">      11 </span><span class="lineCov">        954 :                             ? 0</span>
+<span class="lineNum">      12 </span><span class="lineCov">        954 :                             : bound_tables.back().column_offset +</span>
+<span class="lineNum">      13 </span><span class="lineCov">        954 :                                   bound_tables.back().column_count;</span>
+<span class="lineNum">      14 </span><span class="lineCov">       1908 :         for (auto table : right_tables) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">        954 :                 table.column_offset += offset;</span>
+<span class="lineNum">      16 </span><span class="lineCov">        954 :                 bound_tables.push_back(table);</span>
 <span class="lineNum">      17 </span>            :         }
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        588 : }</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        954 : }</span></a>
 <span class="lineNum">      19 </span>            : 
 <span class="lineNum">      20 </span><span class="lineCov">          2 : void ColumnBindingResolver::Visit(LogicalCreateIndex &amp;op) {</span>
 <span class="lineNum">      21 </span>            :         // add the table to the column binding resolver
@@ -91,72 +91,72 @@
 <span class="lineNum">      29 </span><span class="lineCov">          2 :         LogicalOperatorVisitor::Visit(op);</span>
 <a name="30"><span class="lineNum">      30 </span><span class="lineCov">          2 : }</span></a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">        118 : static void BindTablesBinaryOp(LogicalOperator &amp;op, ColumnBindingResolver *res,</span>
+<span class="lineNum">      32 </span><span class="lineCov">        252 : static void BindTablesBinaryOp(LogicalOperator &amp;op, ColumnBindingResolver *res,</span>
 <span class="lineNum">      33 </span>            :                                bool append_right) {
-<span class="lineNum">      34 </span><span class="lineCov">        118 :         assert(res);</span>
+<span class="lineNum">      34 </span><span class="lineCov">        252 :         assert(res);</span>
 <span class="lineNum">      35 </span>            : 
 <span class="lineNum">      36 </span>            :         // resolve the column indices of the left side
-<span class="lineNum">      37 </span><span class="lineCov">        118 :         op.children[0]-&gt;Accept(res);</span>
+<span class="lineNum">      37 </span><span class="lineCov">        252 :         op.children[0]-&gt;Accept(res);</span>
 <span class="lineNum">      38 </span>            :         // store the added tables
-<span class="lineNum">      39 </span><span class="lineCov">        236 :         auto left_tables = res-&gt;bound_tables;</span>
-<span class="lineNum">      40 </span><span class="lineCov">        118 :         res-&gt;bound_tables.clear();</span>
+<span class="lineNum">      39 </span><span class="lineCov">        504 :         auto left_tables = res-&gt;bound_tables;</span>
+<span class="lineNum">      40 </span><span class="lineCov">        252 :         res-&gt;bound_tables.clear();</span>
 <span class="lineNum">      41 </span>            : 
 <span class="lineNum">      42 </span>            :         // now resolve the column indices of the right side
-<span class="lineNum">      43 </span><span class="lineCov">        118 :         op.children[1]-&gt;Accept(res);</span>
-<span class="lineNum">      44 </span><span class="lineCov">        236 :         auto right_tables = res-&gt;bound_tables;</span>
+<span class="lineNum">      43 </span><span class="lineCov">        252 :         op.children[1]-&gt;Accept(res);</span>
+<span class="lineNum">      44 </span><span class="lineCov">        504 :         auto right_tables = res-&gt;bound_tables;</span>
 <span class="lineNum">      45 </span>            : 
 <span class="lineNum">      46 </span>            :         // now merge the two together
-<span class="lineNum">      47 </span><span class="lineCov">        118 :         res-&gt;bound_tables = left_tables;</span>
-<span class="lineNum">      48 </span><span class="lineCov">        118 :         if (append_right) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">         33 :                 res-&gt;AppendTables(right_tables);</span>
+<span class="lineNum">      47 </span><span class="lineCov">        252 :         res-&gt;bound_tables = left_tables;</span>
+<span class="lineNum">      48 </span><span class="lineCov">        252 :         if (append_right) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">         38 :                 res-&gt;AppendTables(right_tables);</span>
 <span class="lineNum">      50 </span>            :         }
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">        118 : }</span></a>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">        252 : }</span></a>
 <span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineCov">         33 : void ColumnBindingResolver::Visit(LogicalCrossProduct &amp;op) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">         33 :         BindTablesBinaryOp(op, this, true);</span>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">         33 : }</span></a>
+<span class="lineNum">      53 </span><span class="lineCov">         38 : void ColumnBindingResolver::Visit(LogicalCrossProduct &amp;op) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">         38 :         BindTablesBinaryOp(op, this, true);</span>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">         38 : }</span></a>
 <span class="lineNum">      56 </span>            : 
-<span class="lineNum">      57 </span><span class="lineCov">         78 : void ColumnBindingResolver::Visit(LogicalUnion &amp;op) {</span>
-<span class="lineNum">      58 </span><span class="lineCov">         78 :         BindTablesBinaryOp(op, this, false);</span>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">         78 : }</span></a>
+<span class="lineNum">      57 </span><span class="lineCov">        171 : void ColumnBindingResolver::Visit(LogicalUnion &amp;op) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">        171 :         BindTablesBinaryOp(op, this, false);</span>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">        171 : }</span></a>
 <span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">          3 : void ColumnBindingResolver::Visit(LogicalExcept &amp;op) {</span>
-<span class="lineNum">      62 </span><span class="lineCov">          3 :         BindTablesBinaryOp(op, this, false);</span>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          3 : }</span></a>
+<span class="lineNum">      61 </span><span class="lineCov">          5 : void ColumnBindingResolver::Visit(LogicalExcept &amp;op) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">          5 :         BindTablesBinaryOp(op, this, false);</span>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          5 : }</span></a>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">          4 : void ColumnBindingResolver::Visit(LogicalIntersect &amp;op) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">          4 :         BindTablesBinaryOp(op, this, false);</span>
-<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          4 : }</span></a>
+<span class="lineNum">      65 </span><span class="lineCov">         38 : void ColumnBindingResolver::Visit(LogicalIntersect &amp;op) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">         38 :         BindTablesBinaryOp(op, this, false);</span>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">         38 : }</span></a>
 <span class="lineNum">      68 </span>            : 
-<span class="lineNum">      69 </span><span class="lineCov">      16733 : void ColumnBindingResolver::Visit(LogicalGet &amp;op) {</span>
-<span class="lineNum">      70 </span><span class="lineCov">      16733 :         LogicalOperatorVisitor::Visit(op);</span>
-<span class="lineNum">      71 </span><span class="lineCov">      16733 :         if (!op.table) {</span>
+<span class="lineNum">      69 </span><span class="lineCov">      17304 : void ColumnBindingResolver::Visit(LogicalGet &amp;op) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">      17304 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      71 </span><span class="lineCov">      17304 :         if (!op.table) {</span>
 <span class="lineNum">      72 </span><span class="lineCov">        156 :                 return;</span>
 <span class="lineNum">      73 </span>            :         }
-<span class="lineNum">      74 </span><span class="lineCov">      16577 :         BoundTable binding;</span>
-<span class="lineNum">      75 </span><span class="lineCov">      16577 :         binding.table_index = op.table_index;</span>
-<span class="lineNum">      76 </span><span class="lineCov">      16577 :         binding.column_count = op.column_ids.size();</span>
-<span class="lineNum">      77 </span><span class="lineCov">      16577 :         binding.column_offset = bound_tables.size() == 0</span>
-<span class="lineNum">      78 </span><span class="lineCov">      16577 :                                     ? 0</span>
-<span class="lineNum">      79 </span><span class="lineCov">       3300 :                                     : bound_tables.back().column_offset +</span>
-<span class="lineNum">      80 </span><span class="lineCov">       3300 :                                           bound_tables.back().column_count;</span>
-<span class="lineNum">      81 </span><span class="lineCov">      16577 :         bound_tables.push_back(binding);</span>
+<span class="lineNum">      74 </span><span class="lineCov">      17148 :         BoundTable binding;</span>
+<span class="lineNum">      75 </span><span class="lineCov">      17148 :         binding.table_index = op.table_index;</span>
+<span class="lineNum">      76 </span><span class="lineCov">      17148 :         binding.column_count = op.column_ids.size();</span>
+<span class="lineNum">      77 </span><span class="lineCov">      17148 :         binding.column_offset = bound_tables.size() == 0</span>
+<span class="lineNum">      78 </span><span class="lineCov">      17148 :                                     ? 0</span>
+<span class="lineNum">      79 </span><span class="lineCov">       3305 :                                     : bound_tables.back().column_offset +</span>
+<span class="lineNum">      80 </span><span class="lineCov">       3305 :                                           bound_tables.back().column_count;</span>
+<span class="lineNum">      81 </span><span class="lineCov">      17148 :         bound_tables.push_back(binding);</span>
 <a name="82"><span class="lineNum">      82 </span>            : }</a>
 <span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span><span class="lineCov">        823 : void ColumnBindingResolver::Visit(LogicalSubquery &amp;op) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">        987 : void ColumnBindingResolver::Visit(LogicalSubquery &amp;op) {</span>
 <span class="lineNum">      85 </span>            :         // we resolve the subquery separately
-<span class="lineNum">      86 </span><span class="lineCov">       1646 :         ColumnBindingResolver resolver;</span>
-<span class="lineNum">      87 </span><span class="lineCov">        823 :         op.AcceptChildren(&amp;resolver);</span>
+<span class="lineNum">      86 </span><span class="lineCov">       1974 :         ColumnBindingResolver resolver;</span>
+<span class="lineNum">      87 </span><span class="lineCov">        987 :         op.AcceptChildren(&amp;resolver);</span>
 <span class="lineNum">      88 </span>            : 
-<span class="lineNum">      89 </span><span class="lineCov">        823 :         BoundTable binding;</span>
-<span class="lineNum">      90 </span><span class="lineCov">        823 :         binding.table_index = op.table_index;</span>
-<span class="lineNum">      91 </span><span class="lineCov">        823 :         binding.column_count = op.column_count;</span>
-<span class="lineNum">      92 </span><span class="lineCov">        823 :         binding.column_offset = bound_tables.size() == 0</span>
-<span class="lineNum">      93 </span><span class="lineCov">        823 :                                     ? 0</span>
-<span class="lineNum">      94 </span><span class="lineNoCov">          0 :                                     : bound_tables.back().column_offset +</span>
-<span class="lineNum">      95 </span><span class="lineNoCov">          0 :                                           bound_tables.back().column_count;</span>
-<span class="lineNum">      96 </span><span class="lineCov">        823 :         bound_tables.push_back(binding);</span>
-<a name="97"><span class="lineNum">      97 </span><span class="lineCov">        823 : }</span></a>
+<span class="lineNum">      89 </span><span class="lineCov">        987 :         BoundTable binding;</span>
+<span class="lineNum">      90 </span><span class="lineCov">        987 :         binding.table_index = op.table_index;</span>
+<span class="lineNum">      91 </span><span class="lineCov">        987 :         binding.column_count = op.column_count;</span>
+<span class="lineNum">      92 </span><span class="lineCov">        987 :         binding.column_offset = bound_tables.size() == 0</span>
+<span class="lineNum">      93 </span><span class="lineCov">        987 :                                     ? 0</span>
+<span class="lineNum">      94 </span><span class="lineCov">         17 :                                     : bound_tables.back().column_offset +</span>
+<span class="lineNum">      95 </span><span class="lineCov">         17 :                                           bound_tables.back().column_count;</span>
+<span class="lineNum">      96 </span><span class="lineCov">        987 :         bound_tables.push_back(binding);</span>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">        987 : }</span></a>
 <span class="lineNum">      98 </span>            : 
 <span class="lineNum">      99 </span><span class="lineCov">          8 : void ColumnBindingResolver::Visit(LogicalTableFunction &amp;op) {</span>
 <span class="lineNum">     100 </span><span class="lineCov">          8 :         BoundTable binding;</span>
@@ -169,59 +169,59 @@
 <span class="lineNum">     107 </span><span class="lineCov">          8 :         bound_tables.push_back(binding);</span>
 <a name="108"><span class="lineNum">     108 </span><span class="lineCov">          8 : }</span></a>
 <span class="lineNum">     109 </span>            : 
-<span class="lineNum">     110 </span><span class="lineCov">       1049 : void ColumnBindingResolver::Visit(LogicalJoin &amp;op) {</span>
+<span class="lineNum">     110 </span><span class="lineCov">       1430 : void ColumnBindingResolver::Visit(LogicalJoin &amp;op) {</span>
 <span class="lineNum">     111 </span>            :         // resolve the column indices of the left side
-<span class="lineNum">     112 </span><span class="lineCov">       1049 :         op.children[0]-&gt;Accept(this);</span>
-<span class="lineNum">     113 </span><span class="lineCov">       2203 :         for (auto &amp;cond : op.conditions) {</span>
-<span class="lineNum">     114 </span><span class="lineCov">       1154 :                 cond.left-&gt;Accept(this);</span>
+<span class="lineNum">     112 </span><span class="lineCov">       1430 :         op.children[0]-&gt;Accept(this);</span>
+<span class="lineNum">     113 </span><span class="lineCov">       3024 :         for (auto &amp;cond : op.conditions) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">       1594 :                 cond.left-&gt;Accept(this);</span>
 <span class="lineNum">     115 </span>            :         }
 <span class="lineNum">     116 </span>            :         // store the added tables
-<span class="lineNum">     117 </span><span class="lineCov">       2098 :         auto left_tables = bound_tables;</span>
-<span class="lineNum">     118 </span><span class="lineCov">       1049 :         bound_tables.clear();</span>
+<span class="lineNum">     117 </span><span class="lineCov">       2860 :         auto left_tables = bound_tables;</span>
+<span class="lineNum">     118 </span><span class="lineCov">       1430 :         bound_tables.clear();</span>
 <span class="lineNum">     119 </span>            : 
 <span class="lineNum">     120 </span>            :         // now resolve the column indices of the right side
-<span class="lineNum">     121 </span><span class="lineCov">       1049 :         op.children[1]-&gt;Accept(this);</span>
-<span class="lineNum">     122 </span><span class="lineCov">       2203 :         for (auto &amp;cond : op.conditions) {</span>
-<span class="lineNum">     123 </span><span class="lineCov">       1154 :                 cond.right-&gt;Accept(this);</span>
+<span class="lineNum">     121 </span><span class="lineCov">       1430 :         op.children[1]-&gt;Accept(this);</span>
+<span class="lineNum">     122 </span><span class="lineCov">       3024 :         for (auto &amp;cond : op.conditions) {</span>
+<span class="lineNum">     123 </span><span class="lineCov">       1594 :                 cond.right-&gt;Accept(this);</span>
 <span class="lineNum">     124 </span>            :         }
-<span class="lineNum">     125 </span><span class="lineCov">       2098 :         auto right_tables = bound_tables;</span>
+<span class="lineNum">     125 </span><span class="lineCov">       2860 :         auto right_tables = bound_tables;</span>
 <span class="lineNum">     126 </span>            : 
-<span class="lineNum">     127 </span><span class="lineCov">       1049 :         if (op.type != JoinType::ANTI &amp;&amp; op.type != JoinType::SEMI) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">       1430 :         if (op.type != JoinType::ANTI &amp;&amp; op.type != JoinType::SEMI) {</span>
 <span class="lineNum">     128 </span>            :                 // for normal joins the two results are combined
-<span class="lineNum">     129 </span><span class="lineCov">        555 :                 bound_tables = left_tables;</span>
-<span class="lineNum">     130 </span><span class="lineCov">        555 :                 AppendTables(right_tables);</span>
+<span class="lineNum">     129 </span><span class="lineCov">        916 :                 bound_tables = left_tables;</span>
+<span class="lineNum">     130 </span><span class="lineCov">        916 :                 AppendTables(right_tables);</span>
 <span class="lineNum">     131 </span>            :         } else {
 <span class="lineNum">     132 </span>            :                 // for semi/anti joins the result is just the left side
-<span class="lineNum">     133 </span><span class="lineCov">        494 :                 bound_tables = left_tables;</span>
+<span class="lineNum">     133 </span><span class="lineCov">        514 :                 bound_tables = left_tables;</span>
 <span class="lineNum">     134 </span>            :         }
-<a name="135"><span class="lineNum">     135 </span><span class="lineCov">       1049 : }</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">       1430 : }</span></a>
 <span class="lineNum">     136 </span>            : 
-<span class="lineNum">     137 </span><span class="lineCov">     120777 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(ColumnRefExpression &amp;expr) {</span>
-<span class="lineNum">     138 </span><span class="lineCov">     120777 :         if (expr.index != (size_t)-1 || expr.reference ||</span>
-<span class="lineNum">     139 </span><span class="lineCov">     107556 :             expr.depth != current_depth) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">     124447 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">     138 </span><span class="lineCov">     124447 :         if (expr.index != (size_t)-1 || expr.reference ||</span>
+<span class="lineNum">     139 </span><span class="lineCov">     109854 :             expr.depth != current_depth) {</span>
 <span class="lineNum">     140 </span>            :                 // not a base table reference OR should not be resolved by the current
 <span class="lineNum">     141 </span>            :                 // resolver
-<span class="lineNum">     142 </span><span class="lineCov">      18828 :                 return nullptr;</span>
+<span class="lineNum">     142 </span><span class="lineCov">      20231 :                 return nullptr;</span>
 <span class="lineNum">     143 </span>            :         }
-<span class="lineNum">     144 </span><span class="lineCov">     104024 :         for (auto &amp;binding : bound_tables) {</span>
-<span class="lineNum">     145 </span><span class="lineCov">     104024 :                 if (binding.table_index == expr.binding.table_index) {</span>
-<span class="lineNum">     146 </span><span class="lineCov">     101949 :                         expr.index = binding.column_offset + expr.binding.column_index;</span>
-<span class="lineNum">     147 </span><span class="lineCov">     101949 :                         assert(expr.binding.column_index &lt; binding.column_count);</span>
-<span class="lineNum">     148 </span><span class="lineCov">     101949 :                         break;</span>
+<span class="lineNum">     144 </span><span class="lineCov">     107006 :         for (auto &amp;binding : bound_tables) {</span>
+<span class="lineNum">     145 </span><span class="lineCov">     107006 :                 if (binding.table_index == expr.binding.table_index) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">     104216 :                         expr.index = binding.column_offset + expr.binding.column_index;</span>
+<span class="lineNum">     147 </span><span class="lineCov">     104216 :                         assert(expr.binding.column_index &lt; binding.column_count);</span>
+<span class="lineNum">     148 </span><span class="lineCov">     104216 :                         break;</span>
 <span class="lineNum">     149 </span>            :                 }
 <span class="lineNum">     150 </span>            :         }
-<span class="lineNum">     151 </span><span class="lineCov">     101949 :         if (expr.index == (size_t)-1) {</span>
+<span class="lineNum">     151 </span><span class="lineCov">     104216 :         if (expr.index == (size_t)-1) {</span>
 <span class="lineNum">     152 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Failed to bind column ref&quot;);</span>
 <span class="lineNum">     153 </span>            :         }
-<span class="lineNum">     154 </span><span class="lineCov">     101949 :         return nullptr;</span>
+<span class="lineNum">     154 </span><span class="lineCov">     104216 :         return nullptr;</span>
 <a name="155"><span class="lineNum">     155 </span>            : }</a>
 <span class="lineNum">     156 </span>            : 
-<span class="lineNum">     157 </span><span class="lineCov">       3308 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(SubqueryExpression &amp;expr) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">       3330 : unique_ptr&lt;Expression&gt; ColumnBindingResolver::Visit(SubqueryExpression &amp;expr) {</span>
 <span class="lineNum">     158 </span>            :         // resolve the column ref indices of subqueries
-<span class="lineNum">     159 </span><span class="lineCov">       3308 :         current_depth++;</span>
-<span class="lineNum">     160 </span><span class="lineCov">       3308 :         expr.op-&gt;Accept(this);</span>
-<span class="lineNum">     161 </span><span class="lineCov">       3308 :         current_depth--;</span>
-<span class="lineNum">     162 </span><span class="lineCov">       3308 :         return nullptr;</span>
+<span class="lineNum">     159 </span><span class="lineCov">       3330 :         current_depth++;</span>
+<span class="lineNum">     160 </span><span class="lineCov">       3330 :         expr.op-&gt;Accept(this);</span>
+<span class="lineNum">     161 </span><span class="lineCov">       3330 :         current_depth--;</span>
+<span class="lineNum">     162 </span><span class="lineCov">       3330 :         return nullptr;</span>
 <span class="lineNum">     163 </span>            : }
 </pre>
       </td>
