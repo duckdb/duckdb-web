@@ -1,0 +1,30 @@
+<<Query Profiling Information>>
+DROP INDEX i_index;
+<<Timing>>
+Total Time: 0.001954s
+<<Operator Tree>>
+<<ERROR RENDERING ROOT>
+<<Query Profiling Information>>
+DROP INDEX i_index;
+<<Timing>>
+Total Time: 0.008797s
+<<Operator Tree>>
+<<ERROR RENDERING ROOT>
+<<Query Profiling Information>>
+DROP INDEX i_index;
+<<Timing>>
+Total Time: 0.003039s
+<<Operator Tree>>
+<<ERROR RENDERING ROOT>
+<<Query Profiling Information>>
+DROP INDEX i_index;
+<<Timing>>
+Total Time: 0.008766s
+<<Operator Tree>>
+<<ERROR RENDERING ROOT>
+<<Query Profiling Information>>
+DROP INDEX i_index;
+<<Timing>>
+Total Time: 0.006135s
+<<Operator Tree>>
+<<ERROR RENDERING ROOT>
