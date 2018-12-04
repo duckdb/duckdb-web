@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 2b93926 - optimizer/expression_rules/constant_cast.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report dfeac1d - optimizer/expression_rules/constant_cast.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 2b93926</td>
+            <td class="headerValue">DuckDB Code Coverage Report dfeac1d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">13</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-03 23:58:16</td>
+            <td class="headerValue">2018-12-04 11:24:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -75,23 +75,23 @@
 <span class="lineNum">      13 </span>            : using namespace duckdb;
 <a name="14"><span class="lineNum">      14 </span>            : using namespace std;</a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">      39844 : ConstantCastRule::ConstantCastRule() {</span>
-<span class="lineNum">      17 </span><span class="lineCov">      79688 :         root = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(</span>
-<span class="lineNum">      18 </span><span class="lineCov">      79688 :             ExpressionType::OPERATOR_CAST);</span>
-<span class="lineNum">      19 </span><span class="lineCov">      79688 :         root-&gt;children.push_back(</span>
-<span class="lineNum">      20 </span><span class="lineCov">      79688 :             make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(</span>
-<span class="lineNum">      21 </span><span class="lineCov">      79688 :                 ExpressionType::VALUE_CONSTANT));</span>
-<span class="lineNum">      22 </span><span class="lineCov">      39844 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
-<span class="lineNum">      23 </span><span class="lineCov">      39844 : }</span>
+<span class="lineNum">      16 </span><span class="lineCov">      39848 : ConstantCastRule::ConstantCastRule() {</span>
+<span class="lineNum">      17 </span><span class="lineCov">      79696 :         root = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(</span>
+<span class="lineNum">      18 </span><span class="lineCov">      79696 :             ExpressionType::OPERATOR_CAST);</span>
+<span class="lineNum">      19 </span><span class="lineCov">      79696 :         root-&gt;children.push_back(</span>
+<span class="lineNum">      20 </span><span class="lineCov">      79696 :             make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(</span>
+<span class="lineNum">      21 </span><span class="lineCov">      79696 :                 ExpressionType::VALUE_CONSTANT));</span>
+<span class="lineNum">      22 </span><span class="lineCov">      39848 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
+<span class="lineNum">      23 </span><span class="lineCov">      39848 : }</span>
 <a name="24"><span class="lineNum">      24 </span>            : </a>
 <span class="lineNum">      25 </span>            : unique_ptr&lt;Expression&gt;
-<span class="lineNum">      26 </span><span class="lineCov">        382 : ConstantCastRule::Apply(Rewriter &amp;rewriter, Expression &amp;root,</span>
+<span class="lineNum">      26 </span><span class="lineCov">        429 : ConstantCastRule::Apply(Rewriter &amp;rewriter, Expression &amp;root,</span>
 <span class="lineNum">      27 </span>            :                         vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
-<span class="lineNum">      28 </span><span class="lineCov">        382 :         auto &amp;cast_expr = (CastExpression &amp;)root;</span>
+<span class="lineNum">      28 </span><span class="lineCov">        429 :         auto &amp;cast_expr = (CastExpression &amp;)root;</span>
 <span class="lineNum">      29 </span>            :         auto const_expr =
-<span class="lineNum">      30 </span><span class="lineCov">        382 :             reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
-<span class="lineNum">      31 </span><span class="lineCov">       1146 :         return make_unique&lt;ConstantExpression&gt;(</span>
-<span class="lineNum">      32 </span><span class="lineCov">       1528 :             const_expr-&gt;value.CastAs(cast_expr.return_type));</span>
+<span class="lineNum">      30 </span><span class="lineCov">        429 :             reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
+<span class="lineNum">      31 </span><span class="lineCov">       1287 :         return make_unique&lt;ConstantExpression&gt;(</span>
+<span class="lineNum">      32 </span><span class="lineCov">       1716 :             const_expr-&gt;value.CastAs(cast_expr.return_type));</span>
 <span class="lineNum">      33 </span>            : };
 </pre>
       </td>
