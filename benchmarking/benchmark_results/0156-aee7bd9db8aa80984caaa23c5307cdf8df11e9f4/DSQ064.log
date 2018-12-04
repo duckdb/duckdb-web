@@ -1,0 +1,530 @@
+<<Query Profiling Information>>
+WITH ss AS (SELECT i_item_id, sum(ss_ext_sales_price) total_sales FROM store_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND ss_item_sk = i_item_sk AND ss_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ss_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), cs AS (SELECT i_item_id, sum(cs_ext_sales_price) total_sales FROM catalog_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND cs_item_sk = i_item_sk AND cs_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND cs_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), ws AS (SELECT i_item_id, sum(ws_ext_sales_price) total_sales FROM web_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category = 'Music') AND ws_item_sk = i_item_sk AND ws_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ws_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id) SELECT i_item_id, sum(total_sales) total_sales FROM (SELECT * FROM ss UNION ALL SELECT * FROM cs UNION ALL SELECT * FROM ws) tmp1 GROUP BY i_item_id ORDER BY i_item_id, total_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.179448s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|       1729       |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       3743       |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |        835       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       SEMI       |
+|                  |                                                                                |                  |                                                                                |   i_item_id=#0   |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       1148       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |                                                            |    PROJECTION    |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    ws_item_sk    |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                                            |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       6120       |                                                            |       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       SEMI       |                                                                                |       SEMI       |                                                                                |       INNER      |                                        |       item       ||    i_category    |
+|   i_item_id=#0   |                                                                                |   i_item_id=#0   |                                                                                |  ws_bill_addr_sk |                                        |                  ||      = Music     |
+|                  |                                                                                |                  |                                                                                |  =ca_address_sk  |                                        |                  ||                  |
+|      (0.02s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       4780       |                                                                                |       2286       |                                                                                |       6120       |                                        |       18000      ||       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||       INNER      |                                                            |                  ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |
+|    ss_item_sk    |                                                            |                  ||    cs_item_sk    |                                                            |                  ||  ws_sold_date_sk |                    |    = -5.000000   |                    |                  |
+|    =i_item_sk    |                                                            |                  ||    =i_item_sk    |                                                            |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.00s)     |                                                            |      (0.00s)     ||      (0.01s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       24499      |                                                            |       1863       ||       11921      |                                                            |       1863       ||       15635      |                    |       18832      |                    |       18000      |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||    i_category    ||       INNER      |                                        |       item       ||    i_category    ||     web_sales    ||     d_moy = 9    || customer_address |
+|    ss_addr_sk    |                                        |                  ||      = Music     ||  cs_bill_addr_sk |                                        |                  ||      = Music     ||                  ||   d_year = 1998  ||                  |
+|  =ca_address_sk  |                                        |                  ||                  ||  =ca_address_sk  |                                        |                  ||                  ||                  ||                  ||                  |
+|      (0.01s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|       24499      |                                        |       18000      ||       1863       ||       11921      |                                        |       18000      ||       1863       ||      719384      ||        30        ||       50000      |
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |   ca_gmt_offset  |                    |       item       ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |                    |     date_dim     |
+|  ss_sold_date_sk |                    |    = -5.000000   |                    |                  ||  cs_sold_date_sk |                    |    = -5.000000   |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |                    |                  |
+|      (0.04s)     |                    |      (0.00s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       65349      |                    |       18832      |                    |       18000      ||       30985      |                    |       18832      |                    |       18000      |                    |       73049      |
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||     d_moy = 9    || customer_address |                                        |   catalog_sales  ||     d_moy = 9    || customer_address |
+|                  ||   d_year = 1998  ||                  |                                        |                  ||   d_year = 1998  ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        30        ||       50000      |                                        |      1441548     ||        30        ||       50000      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    |     date_dim     |                                                                                |     date_dim     |
+                    |      (0.00s)     |                                                                                |      (0.00s)     |
+                    |       73049      |                                                                                |       73049      |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH ss AS (SELECT i_item_id, sum(ss_ext_sales_price) total_sales FROM store_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND ss_item_sk = i_item_sk AND ss_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ss_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), cs AS (SELECT i_item_id, sum(cs_ext_sales_price) total_sales FROM catalog_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND cs_item_sk = i_item_sk AND cs_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND cs_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), ws AS (SELECT i_item_id, sum(ws_ext_sales_price) total_sales FROM web_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category = 'Music') AND ws_item_sk = i_item_sk AND ws_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ws_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id) SELECT i_item_id, sum(total_sales) total_sales FROM (SELECT * FROM ss UNION ALL SELECT * FROM cs UNION ALL SELECT * FROM ws) tmp1 GROUP BY i_item_id ORDER BY i_item_id, total_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.178930s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|       1729       |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       3743       |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |        835       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       SEMI       |
+|                  |                                                                                |                  |                                                                                |   i_item_id=#0   |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       1148       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |                                                            |    PROJECTION    |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    ws_item_sk    |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                                            |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       6120       |                                                            |       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       SEMI       |                                                                                |       SEMI       |                                                                                |       INNER      |                                        |       item       ||    i_category    |
+|   i_item_id=#0   |                                                                                |   i_item_id=#0   |                                                                                |  ws_bill_addr_sk |                                        |                  ||      = Music     |
+|                  |                                                                                |                  |                                                                                |  =ca_address_sk  |                                        |                  ||                  |
+|      (0.02s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       4780       |                                                                                |       2286       |                                                                                |       6120       |                                        |       18000      ||       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||       INNER      |                                                            |                  ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |
+|    ss_item_sk    |                                                            |                  ||    cs_item_sk    |                                                            |                  ||  ws_sold_date_sk |                    |    = -5.000000   |                    |                  |
+|    =i_item_sk    |                                                            |                  ||    =i_item_sk    |                                                            |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.00s)     |                                                            |      (0.00s)     ||      (0.01s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       24499      |                                                            |       1863       ||       11921      |                                                            |       1863       ||       15635      |                    |       18832      |                    |       18000      |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||    i_category    ||       INNER      |                                        |       item       ||    i_category    ||     web_sales    ||     d_moy = 9    || customer_address |
+|    ss_addr_sk    |                                        |                  ||      = Music     ||  cs_bill_addr_sk |                                        |                  ||      = Music     ||                  ||   d_year = 1998  ||                  |
+|  =ca_address_sk  |                                        |                  ||                  ||  =ca_address_sk  |                                        |                  ||                  ||                  ||                  ||                  |
+|      (0.01s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|       24499      |                                        |       18000      ||       1863       ||       11921      |                                        |       18000      ||       1863       ||      719384      ||        30        ||       50000      |
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |   ca_gmt_offset  |                    |       item       ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |                    |     date_dim     |
+|  ss_sold_date_sk |                    |    = -5.000000   |                    |                  ||  cs_sold_date_sk |                    |    = -5.000000   |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |                    |                  |
+|      (0.04s)     |                    |      (0.00s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       65349      |                    |       18832      |                    |       18000      ||       30985      |                    |       18832      |                    |       18000      |                    |       73049      |
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||     d_moy = 9    || customer_address |                                        |   catalog_sales  ||     d_moy = 9    || customer_address |
+|                  ||   d_year = 1998  ||                  |                                        |                  ||   d_year = 1998  ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        30        ||       50000      |                                        |      1441548     ||        30        ||       50000      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    |     date_dim     |                                                                                |     date_dim     |
+                    |      (0.00s)     |                                                                                |      (0.00s)     |
+                    |       73049      |                                                                                |       73049      |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH ss AS (SELECT i_item_id, sum(ss_ext_sales_price) total_sales FROM store_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND ss_item_sk = i_item_sk AND ss_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ss_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), cs AS (SELECT i_item_id, sum(cs_ext_sales_price) total_sales FROM catalog_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND cs_item_sk = i_item_sk AND cs_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND cs_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), ws AS (SELECT i_item_id, sum(ws_ext_sales_price) total_sales FROM web_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category = 'Music') AND ws_item_sk = i_item_sk AND ws_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ws_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id) SELECT i_item_id, sum(total_sales) total_sales FROM (SELECT * FROM ss UNION ALL SELECT * FROM cs UNION ALL SELECT * FROM ws) tmp1 GROUP BY i_item_id ORDER BY i_item_id, total_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.177969s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|       1729       |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       3743       |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |        835       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       SEMI       |
+|                  |                                                                                |                  |                                                                                |   i_item_id=#0   |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       1148       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |                                                            |    PROJECTION    |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    ws_item_sk    |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                                            |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       6120       |                                                            |       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       SEMI       |                                                                                |       SEMI       |                                                                                |       INNER      |                                        |       item       ||    i_category    |
+|   i_item_id=#0   |                                                                                |   i_item_id=#0   |                                                                                |  ws_bill_addr_sk |                                        |                  ||      = Music     |
+|                  |                                                                                |                  |                                                                                |  =ca_address_sk  |                                        |                  ||                  |
+|      (0.02s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       4780       |                                                                                |       2286       |                                                                                |       6120       |                                        |       18000      ||       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||       INNER      |                                                            |                  ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |
+|    ss_item_sk    |                                                            |                  ||    cs_item_sk    |                                                            |                  ||  ws_sold_date_sk |                    |    = -5.000000   |                    |                  |
+|    =i_item_sk    |                                                            |                  ||    =i_item_sk    |                                                            |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.00s)     |                                                            |      (0.00s)     ||      (0.01s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       24499      |                                                            |       1863       ||       11921      |                                                            |       1863       ||       15635      |                    |       18832      |                    |       18000      |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||    i_category    ||       INNER      |                                        |       item       ||    i_category    ||     web_sales    ||     d_moy = 9    || customer_address |
+|    ss_addr_sk    |                                        |                  ||      = Music     ||  cs_bill_addr_sk |                                        |                  ||      = Music     ||                  ||   d_year = 1998  ||                  |
+|  =ca_address_sk  |                                        |                  ||                  ||  =ca_address_sk  |                                        |                  ||                  ||                  ||                  ||                  |
+|      (0.01s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|       24499      |                                        |       18000      ||       1863       ||       11921      |                                        |       18000      ||       1863       ||      719384      ||        30        ||       50000      |
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |   ca_gmt_offset  |                    |       item       ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |                    |     date_dim     |
+|  ss_sold_date_sk |                    |    = -5.000000   |                    |                  ||  cs_sold_date_sk |                    |    = -5.000000   |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |                    |                  |
+|      (0.04s)     |                    |      (0.00s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       65349      |                    |       18832      |                    |       18000      ||       30985      |                    |       18832      |                    |       18000      |                    |       73049      |
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||     d_moy = 9    || customer_address |                                        |   catalog_sales  ||     d_moy = 9    || customer_address |
+|                  ||   d_year = 1998  ||                  |                                        |                  ||   d_year = 1998  ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        30        ||       50000      |                                        |      1441548     ||        30        ||       50000      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    |     date_dim     |                                                                                |     date_dim     |
+                    |      (0.00s)     |                                                                                |      (0.00s)     |
+                    |       73049      |                                                                                |       73049      |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH ss AS (SELECT i_item_id, sum(ss_ext_sales_price) total_sales FROM store_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND ss_item_sk = i_item_sk AND ss_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ss_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), cs AS (SELECT i_item_id, sum(cs_ext_sales_price) total_sales FROM catalog_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND cs_item_sk = i_item_sk AND cs_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND cs_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), ws AS (SELECT i_item_id, sum(ws_ext_sales_price) total_sales FROM web_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category = 'Music') AND ws_item_sk = i_item_sk AND ws_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ws_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id) SELECT i_item_id, sum(total_sales) total_sales FROM (SELECT * FROM ss UNION ALL SELECT * FROM cs UNION ALL SELECT * FROM ws) tmp1 GROUP BY i_item_id ORDER BY i_item_id, total_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.179449s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|       1729       |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       3743       |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |        835       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       SEMI       |
+|                  |                                                                                |                  |                                                                                |   i_item_id=#0   |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       1148       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |                                                            |    PROJECTION    |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    ws_item_sk    |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                                            |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       6120       |                                                            |       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       SEMI       |                                                                                |       SEMI       |                                                                                |       INNER      |                                        |       item       ||    i_category    |
+|   i_item_id=#0   |                                                                                |   i_item_id=#0   |                                                                                |  ws_bill_addr_sk |                                        |                  ||      = Music     |
+|                  |                                                                                |                  |                                                                                |  =ca_address_sk  |                                        |                  ||                  |
+|      (0.02s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       4780       |                                                                                |       2286       |                                                                                |       6120       |                                        |       18000      ||       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||       INNER      |                                                            |                  ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |
+|    ss_item_sk    |                                                            |                  ||    cs_item_sk    |                                                            |                  ||  ws_sold_date_sk |                    |    = -5.000000   |                    |                  |
+|    =i_item_sk    |                                                            |                  ||    =i_item_sk    |                                                            |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.00s)     |                                                            |      (0.00s)     ||      (0.01s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       24499      |                                                            |       1863       ||       11921      |                                                            |       1863       ||       15635      |                    |       18832      |                    |       18000      |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||    i_category    ||       INNER      |                                        |       item       ||    i_category    ||     web_sales    ||     d_moy = 9    || customer_address |
+|    ss_addr_sk    |                                        |                  ||      = Music     ||  cs_bill_addr_sk |                                        |                  ||      = Music     ||                  ||   d_year = 1998  ||                  |
+|  =ca_address_sk  |                                        |                  ||                  ||  =ca_address_sk  |                                        |                  ||                  ||                  ||                  ||                  |
+|      (0.01s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|       24499      |                                        |       18000      ||       1863       ||       11921      |                                        |       18000      ||       1863       ||      719384      ||        30        ||       50000      |
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |   ca_gmt_offset  |                    |       item       ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |                    |     date_dim     |
+|  ss_sold_date_sk |                    |    = -5.000000   |                    |                  ||  cs_sold_date_sk |                    |    = -5.000000   |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |                    |                  |
+|      (0.04s)     |                    |      (0.00s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       65349      |                    |       18832      |                    |       18000      ||       30985      |                    |       18832      |                    |       18000      |                    |       73049      |
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||     d_moy = 9    || customer_address |                                        |   catalog_sales  ||     d_moy = 9    || customer_address |
+|                  ||   d_year = 1998  ||                  |                                        |                  ||   d_year = 1998  ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        30        ||       50000      |                                        |      1441548     ||        30        ||       50000      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    |     date_dim     |                                                                                |     date_dim     |
+                    |      (0.00s)     |                                                                                |      (0.00s)     |
+                    |       73049      |                                                                                |       73049      |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH ss AS (SELECT i_item_id, sum(ss_ext_sales_price) total_sales FROM store_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND ss_item_sk = i_item_sk AND ss_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ss_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), cs AS (SELECT i_item_id, sum(cs_ext_sales_price) total_sales FROM catalog_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category ='Music') AND cs_item_sk = i_item_sk AND cs_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND cs_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id), ws AS (SELECT i_item_id, sum(ws_ext_sales_price) total_sales FROM web_sales, date_dim, customer_address, item WHERE i_item_id IN (SELECT i_item_id FROM item WHERE i_category = 'Music') AND ws_item_sk = i_item_sk AND ws_sold_date_sk = d_date_sk AND d_year = 1998 AND d_moy = 9 AND ws_bill_addr_sk = ca_address_sk AND ca_gmt_offset = -5 GROUP BY i_item_id) SELECT i_item_id, sum(total_sales) total_sales FROM (SELECT * FROM ss UNION ALL SELECT * FROM cs UNION ALL SELECT * FROM ws) tmp1 GROUP BY i_item_id ORDER BY i_item_id, total_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.178827s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|       1729       |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       3743       |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       2908       |                                                                                                                                                                                    |        835       |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |        835       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       SEMI       |
+|                  |                                                                                |                  |                                                                                |   i_item_id=#0   |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       1148       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |                                                            |    PROJECTION    |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    ws_item_sk    |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                                            |      (0.00s)     |
+|       1631       |                                                                                |       1277       |                                                                                |       6120       |                                                            |       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       SEMI       |                                                                                |       SEMI       |                                                                                |       INNER      |                                        |       item       ||    i_category    |
+|   i_item_id=#0   |                                                                                |   i_item_id=#0   |                                                                                |  ws_bill_addr_sk |                                        |                  ||      = Music     |
+|                  |                                                                                |                  |                                                                                |  =ca_address_sk  |                                        |                  ||                  |
+|      (0.02s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       4780       |                                                                                |       2286       |                                                                                |       6120       |                                        |       18000      ||       1863       |
+--------------------                                                                                --------------------                                                                                --------------------                                        ----------------------------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                                                            |    PROJECTION    ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |
+|       INNER      |                                                            |                  ||       INNER      |                                                            |                  ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |
+|    ss_item_sk    |                                                            |                  ||    cs_item_sk    |                                                            |                  ||  ws_sold_date_sk |                    |    = -5.000000   |                    |                  |
+|    =i_item_sk    |                                                            |                  ||    =i_item_sk    |                                                            |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.00s)     |                                                            |      (0.00s)     ||      (0.01s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       24499      |                                                            |       1863       ||       11921      |                                                            |       1863       ||       15635      |                    |       18832      |                    |       18000      |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    --------------------                    --------------------
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||    i_category    ||       INNER      |                                        |       item       ||    i_category    ||     web_sales    ||     d_moy = 9    || customer_address |
+|    ss_addr_sk    |                                        |                  ||      = Music     ||  cs_bill_addr_sk |                                        |                  ||      = Music     ||                  ||   d_year = 1998  ||                  |
+|  =ca_address_sk  |                                        |                  ||                  ||  =ca_address_sk  |                                        |                  ||                  ||                  ||                  ||                  |
+|      (0.01s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|       24499      |                                        |       18000      ||       1863       ||       11921      |                                        |       18000      ||       1863       ||      719384      ||        30        ||       50000      |
+--------------------                                        ------------------------------------------------------------                                        ----------------------------------------------------------------------------------------------------
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |   ca_gmt_offset  |                    |       item       ||       INNER      |                    |   ca_gmt_offset  |                    |       item       |                    |     date_dim     |
+|  ss_sold_date_sk |                    |    = -5.000000   |                    |                  ||  cs_sold_date_sk |                    |    = -5.000000   |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |                    |                  |
+|      (0.04s)     |                    |      (0.00s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       65349      |                    |       18832      |                    |       18000      ||       30985      |                    |       18832      |                    |       18000      |                    |       73049      |
+--------------------                    --------------------                    ----------------------------------------                    --------------------                    --------------------                    --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||     d_moy = 9    || customer_address |                                        |   catalog_sales  ||     d_moy = 9    || customer_address |
+|                  ||   d_year = 1998  ||                  |                                        |                  ||   d_year = 1998  ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |                                        |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        30        ||       50000      |                                        |      1441548     ||        30        ||       50000      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    |     date_dim     |                                                                                |     date_dim     |
+                    |      (0.00s)     |                                                                                |      (0.00s)     |
+                    |       73049      |                                                                                |       73049      |
+                    --------------------                                                                                --------------------
+

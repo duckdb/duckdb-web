@@ -1,0 +1,85 @@
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.000075s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    INDEX_SCAN    |
+|  integers[50000] |
+|      (0.00s)     |
+|         1        |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.000063s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    INDEX_SCAN    |
+|  integers[50000] |
+|      (0.00s)     |
+|         1        |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.000071s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    INDEX_SCAN    |
+|  integers[50000] |
+|      (0.00s)     |
+|         1        |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.000066s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    INDEX_SCAN    |
+|  integers[50000] |
+|      (0.00s)     |
+|         1        |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.000085s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|    INDEX_SCAN    |
+|  integers[50000] |
+|      (0.00s)     |
+|         1        |
+--------------------
+
