@@ -1,0 +1,215 @@
+<<Query Profiling Information>>
+select  c_count,  count(*) as custdist from  (  select  c_custkey,  count(o_orderkey)  from  customer left outer join orders on  c_custkey = o_custkey  and o_comment not like '%special%requests%'  group by  c_custkey  ) as c_orders (c_custkey, c_count) group by  c_count order by  custdist desc,  c_count desc; 
+<<Timing>>
+Total Time: 0.774779s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.09s)     |
+|      150000      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       LEFT       |
+|     c_custkey    |
+|    =o_custkey    |
+|      (0.31s)     |
+|      1533923     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|     customer     || NOTLIKE(o_commen |
+|                  ||    t, %special   |
+|                  ||    %requests%    |
+|      (0.00s)     ||      (0.34s)     |
+|      150000      ||      1483918     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |      orders      |
+                    |      (0.02s)     |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  c_count,  count(*) as custdist from  (  select  c_custkey,  count(o_orderkey)  from  customer left outer join orders on  c_custkey = o_custkey  and o_comment not like '%special%requests%'  group by  c_custkey  ) as c_orders (c_custkey, c_count) group by  c_count order by  custdist desc,  c_count desc; 
+<<Timing>>
+Total Time: 0.770491s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.09s)     |
+|      150000      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       LEFT       |
+|     c_custkey    |
+|    =o_custkey    |
+|      (0.31s)     |
+|      1533923     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|     customer     || NOTLIKE(o_commen |
+|                  ||    t, %special   |
+|                  ||    %requests%    |
+|      (0.00s)     ||      (0.34s)     |
+|      150000      ||      1483918     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |      orders      |
+                    |      (0.02s)     |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  c_count,  count(*) as custdist from  (  select  c_custkey,  count(o_orderkey)  from  customer left outer join orders on  c_custkey = o_custkey  and o_comment not like '%special%requests%'  group by  c_custkey  ) as c_orders (c_custkey, c_count) group by  c_count order by  custdist desc,  c_count desc; 
+<<Timing>>
+Total Time: 0.773086s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.09s)     |
+|      150000      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       LEFT       |
+|     c_custkey    |
+|    =o_custkey    |
+|      (0.31s)     |
+|      1533923     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|     customer     || NOTLIKE(o_commen |
+|                  ||    t, %special   |
+|                  ||    %requests%    |
+|      (0.00s)     ||      (0.34s)     |
+|      150000      ||      1483918     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |      orders      |
+                    |      (0.02s)     |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  c_count,  count(*) as custdist from  (  select  c_custkey,  count(o_orderkey)  from  customer left outer join orders on  c_custkey = o_custkey  and o_comment not like '%special%requests%'  group by  c_custkey  ) as c_orders (c_custkey, c_count) group by  c_count order by  custdist desc,  c_count desc; 
+<<Timing>>
+Total Time: 0.772950s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.09s)     |
+|      150000      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       LEFT       |
+|     c_custkey    |
+|    =o_custkey    |
+|      (0.31s)     |
+|      1533923     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|     customer     || NOTLIKE(o_commen |
+|                  ||    t, %special   |
+|                  ||    %requests%    |
+|      (0.00s)     ||      (0.34s)     |
+|      150000      ||      1483918     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |      orders      |
+                    |      (0.02s)     |
+                    |      1500000     |
+                    --------------------
+
+<<Query Profiling Information>>
+select  c_count,  count(*) as custdist from  (  select  c_custkey,  count(o_orderkey)  from  customer left outer join orders on  c_custkey = o_custkey  and o_comment not like '%special%requests%'  group by  c_custkey  ) as c_orders (c_custkey, c_count) group by  c_count order by  custdist desc,  c_count desc; 
+<<Timing>>
+Total Time: 0.772913s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        42        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.09s)     |
+|      150000      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       LEFT       |
+|     c_custkey    |
+|    =o_custkey    |
+|      (0.31s)     |
+|      1533923     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |
+|     customer     || NOTLIKE(o_commen |
+|                  ||    t, %special   |
+|                  ||    %requests%    |
+|      (0.00s)     ||      (0.34s)     |
+|      150000      ||      1483918     |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |      orders      |
+                    |      (0.02s)     |
+                    |      1500000     |
+                    --------------------
+

@@ -1,0 +1,395 @@
+<<Query Profiling Information>>
+SELECT cc_call_center_id Call_Center, cc_name Call_Center_Name, cc_manager Manager, sum(cr_net_loss) Returns_Loss FROM call_center, catalog_returns, date_dim, customer, customer_address, customer_demographics, household_demographics WHERE cr_call_center_sk = cc_call_center_sk AND cr_returned_date_sk = d_date_sk AND cr_returning_customer_sk= c_customer_sk AND cd_demo_sk = c_current_cdemo_sk AND hd_demo_sk = c_current_hdemo_sk AND ca_address_sk = c_current_addr_sk AND d_year = 1998 AND d_moy = 11 AND ((cd_marital_status = 'M' AND cd_education_status = 'Unknown') or(cd_marital_status = 'W' AND cd_education_status = 'Advanced Degree')) AND hd_buy_potential LIKE 'Unknown%' AND ca_gmt_offset = -7 GROUP BY cc_call_center_id, cc_name, cc_manager, cd_marital_status, cd_education_status ORDER BY sum(cr_net_loss) DESC;
+<<Timing>>
+Total Time: 0.357509s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| c_current_hdemo_ |
+|   sk=hd_demo_sk  |
+|      (0.00s)     |
+|         3        |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |      FILTER      |
+|       INNER      |                                                                                                    | LIKE(hd_buy_pote |
+| c_current_cdemo_ |                                                                                                    |  ntial, Unknown% |
+|   sk=cd_demo_sk  |                                                                                                    |                  |
+|      (0.01s)     |                                                                                                    |      (0.00s)     |
+|        18        |                                                                                                    |       1200       |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                                                | OR(AND((cd_marit || household_demogr |
+| c_current_addr_s |                                                                                |     al_status    ||      aphics      |
+|  k=ca_address_sk |                                                                                |  = M), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |    = Unknown))   ||                  |
+|                  |                                                                                | , AND((cd_marita ||                  |
+|                  |                                                                                |     l_status     ||                  |
+|                  |                                                                                |  = W), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |     = Advanced   ||                  |
+|      (0.01s)     |                                                                                |      (0.04s)     ||      (0.00s)     |
+|        231       |                                                                                |      109760      ||       7200       |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |   ca_gmt_offset  || customer_demogra |
+| cr_returning_cus |                                                            |    = -7.000000   ||       phics      |
+|     tomer_sk     |                                                            |                  ||                  |
+|  =c_customer_sk  |                                                            |                  ||                  |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.02s)     |
+|       1909       |                                                            |       5611       ||      1920800     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     customer     || customer_address |
+| cr_returned_date |                                        |                  ||                  |
+|   _sk=d_date_sk  |                                        |                  ||                  |
+|      (0.16s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       1909       |                                        |      100000      ||       50000      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+| cc_call_center_s |                    |   d_year = 1998  |
+| k=cr_call_center |                    |                  |
+|        _sk       |                    |                  |
+|      (0.08s)     |                    |      (0.00s)     |
+|      144067      |                    |        30        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    call_center   ||  catalog_returns ||     date_dim     |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         6        ||      144067      ||       73049      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+SELECT cc_call_center_id Call_Center, cc_name Call_Center_Name, cc_manager Manager, sum(cr_net_loss) Returns_Loss FROM call_center, catalog_returns, date_dim, customer, customer_address, customer_demographics, household_demographics WHERE cr_call_center_sk = cc_call_center_sk AND cr_returned_date_sk = d_date_sk AND cr_returning_customer_sk= c_customer_sk AND cd_demo_sk = c_current_cdemo_sk AND hd_demo_sk = c_current_hdemo_sk AND ca_address_sk = c_current_addr_sk AND d_year = 1998 AND d_moy = 11 AND ((cd_marital_status = 'M' AND cd_education_status = 'Unknown') or(cd_marital_status = 'W' AND cd_education_status = 'Advanced Degree')) AND hd_buy_potential LIKE 'Unknown%' AND ca_gmt_offset = -7 GROUP BY cc_call_center_id, cc_name, cc_manager, cd_marital_status, cd_education_status ORDER BY sum(cr_net_loss) DESC;
+<<Timing>>
+Total Time: 0.363569s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| c_current_hdemo_ |
+|   sk=hd_demo_sk  |
+|      (0.00s)     |
+|         3        |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |      FILTER      |
+|       INNER      |                                                                                                    | LIKE(hd_buy_pote |
+| c_current_cdemo_ |                                                                                                    |  ntial, Unknown% |
+|   sk=cd_demo_sk  |                                                                                                    |                  |
+|      (0.01s)     |                                                                                                    |      (0.00s)     |
+|        18        |                                                                                                    |       1200       |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                                                | OR(AND((cd_marit || household_demogr |
+| c_current_addr_s |                                                                                |     al_status    ||      aphics      |
+|  k=ca_address_sk |                                                                                |  = M), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |    = Unknown))   ||                  |
+|                  |                                                                                | , AND((cd_marita ||                  |
+|                  |                                                                                |     l_status     ||                  |
+|                  |                                                                                |  = W), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |     = Advanced   ||                  |
+|      (0.01s)     |                                                                                |      (0.05s)     ||      (0.00s)     |
+|        231       |                                                                                |      109760      ||       7200       |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |   ca_gmt_offset  || customer_demogra |
+| cr_returning_cus |                                                            |    = -7.000000   ||       phics      |
+|     tomer_sk     |                                                            |                  ||                  |
+|  =c_customer_sk  |                                                            |                  ||                  |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.02s)     |
+|       1909       |                                                            |       5611       ||      1920800     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     customer     || customer_address |
+| cr_returned_date |                                        |                  ||                  |
+|   _sk=d_date_sk  |                                        |                  ||                  |
+|      (0.16s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       1909       |                                        |      100000      ||       50000      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+| cc_call_center_s |                    |   d_year = 1998  |
+| k=cr_call_center |                    |                  |
+|        _sk       |                    |                  |
+|      (0.08s)     |                    |      (0.00s)     |
+|      144067      |                    |        30        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    call_center   ||  catalog_returns ||     date_dim     |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         6        ||      144067      ||       73049      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+SELECT cc_call_center_id Call_Center, cc_name Call_Center_Name, cc_manager Manager, sum(cr_net_loss) Returns_Loss FROM call_center, catalog_returns, date_dim, customer, customer_address, customer_demographics, household_demographics WHERE cr_call_center_sk = cc_call_center_sk AND cr_returned_date_sk = d_date_sk AND cr_returning_customer_sk= c_customer_sk AND cd_demo_sk = c_current_cdemo_sk AND hd_demo_sk = c_current_hdemo_sk AND ca_address_sk = c_current_addr_sk AND d_year = 1998 AND d_moy = 11 AND ((cd_marital_status = 'M' AND cd_education_status = 'Unknown') or(cd_marital_status = 'W' AND cd_education_status = 'Advanced Degree')) AND hd_buy_potential LIKE 'Unknown%' AND ca_gmt_offset = -7 GROUP BY cc_call_center_id, cc_name, cc_manager, cd_marital_status, cd_education_status ORDER BY sum(cr_net_loss) DESC;
+<<Timing>>
+Total Time: 0.356246s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| c_current_hdemo_ |
+|   sk=hd_demo_sk  |
+|      (0.00s)     |
+|         3        |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |      FILTER      |
+|       INNER      |                                                                                                    | LIKE(hd_buy_pote |
+| c_current_cdemo_ |                                                                                                    |  ntial, Unknown% |
+|   sk=cd_demo_sk  |                                                                                                    |                  |
+|      (0.01s)     |                                                                                                    |      (0.00s)     |
+|        18        |                                                                                                    |       1200       |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                                                | OR(AND((cd_marit || household_demogr |
+| c_current_addr_s |                                                                                |     al_status    ||      aphics      |
+|  k=ca_address_sk |                                                                                |  = M), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |    = Unknown))   ||                  |
+|                  |                                                                                | , AND((cd_marita ||                  |
+|                  |                                                                                |     l_status     ||                  |
+|                  |                                                                                |  = W), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |     = Advanced   ||                  |
+|      (0.01s)     |                                                                                |      (0.04s)     ||      (0.00s)     |
+|        231       |                                                                                |      109760      ||       7200       |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |   ca_gmt_offset  || customer_demogra |
+| cr_returning_cus |                                                            |    = -7.000000   ||       phics      |
+|     tomer_sk     |                                                            |                  ||                  |
+|  =c_customer_sk  |                                                            |                  ||                  |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.02s)     |
+|       1909       |                                                            |       5611       ||      1920800     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     customer     || customer_address |
+| cr_returned_date |                                        |                  ||                  |
+|   _sk=d_date_sk  |                                        |                  ||                  |
+|      (0.16s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       1909       |                                        |      100000      ||       50000      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+| cc_call_center_s |                    |   d_year = 1998  |
+| k=cr_call_center |                    |                  |
+|        _sk       |                    |                  |
+|      (0.07s)     |                    |      (0.00s)     |
+|      144067      |                    |        30        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    call_center   ||  catalog_returns ||     date_dim     |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         6        ||      144067      ||       73049      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+SELECT cc_call_center_id Call_Center, cc_name Call_Center_Name, cc_manager Manager, sum(cr_net_loss) Returns_Loss FROM call_center, catalog_returns, date_dim, customer, customer_address, customer_demographics, household_demographics WHERE cr_call_center_sk = cc_call_center_sk AND cr_returned_date_sk = d_date_sk AND cr_returning_customer_sk= c_customer_sk AND cd_demo_sk = c_current_cdemo_sk AND hd_demo_sk = c_current_hdemo_sk AND ca_address_sk = c_current_addr_sk AND d_year = 1998 AND d_moy = 11 AND ((cd_marital_status = 'M' AND cd_education_status = 'Unknown') or(cd_marital_status = 'W' AND cd_education_status = 'Advanced Degree')) AND hd_buy_potential LIKE 'Unknown%' AND ca_gmt_offset = -7 GROUP BY cc_call_center_id, cc_name, cc_manager, cd_marital_status, cd_education_status ORDER BY sum(cr_net_loss) DESC;
+<<Timing>>
+Total Time: 0.358272s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| c_current_hdemo_ |
+|   sk=hd_demo_sk  |
+|      (0.00s)     |
+|         3        |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |      FILTER      |
+|       INNER      |                                                                                                    | LIKE(hd_buy_pote |
+| c_current_cdemo_ |                                                                                                    |  ntial, Unknown% |
+|   sk=cd_demo_sk  |                                                                                                    |                  |
+|      (0.01s)     |                                                                                                    |      (0.00s)     |
+|        18        |                                                                                                    |       1200       |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                                                | OR(AND((cd_marit || household_demogr |
+| c_current_addr_s |                                                                                |     al_status    ||      aphics      |
+|  k=ca_address_sk |                                                                                |  = M), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |    = Unknown))   ||                  |
+|                  |                                                                                | , AND((cd_marita ||                  |
+|                  |                                                                                |     l_status     ||                  |
+|                  |                                                                                |  = W), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |     = Advanced   ||                  |
+|      (0.01s)     |                                                                                |      (0.05s)     ||      (0.00s)     |
+|        231       |                                                                                |      109760      ||       7200       |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |   ca_gmt_offset  || customer_demogra |
+| cr_returning_cus |                                                            |    = -7.000000   ||       phics      |
+|     tomer_sk     |                                                            |                  ||                  |
+|  =c_customer_sk  |                                                            |                  ||                  |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.02s)     |
+|       1909       |                                                            |       5611       ||      1920800     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     customer     || customer_address |
+| cr_returned_date |                                        |                  ||                  |
+|   _sk=d_date_sk  |                                        |                  ||                  |
+|      (0.16s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       1909       |                                        |      100000      ||       50000      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+| cc_call_center_s |                    |   d_year = 1998  |
+| k=cr_call_center |                    |                  |
+|        _sk       |                    |                  |
+|      (0.07s)     |                    |      (0.00s)     |
+|      144067      |                    |        30        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    call_center   ||  catalog_returns ||     date_dim     |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         6        ||      144067      ||       73049      |
+------------------------------------------------------------
+
+<<Query Profiling Information>>
+SELECT cc_call_center_id Call_Center, cc_name Call_Center_Name, cc_manager Manager, sum(cr_net_loss) Returns_Loss FROM call_center, catalog_returns, date_dim, customer, customer_address, customer_demographics, household_demographics WHERE cr_call_center_sk = cc_call_center_sk AND cr_returned_date_sk = d_date_sk AND cr_returning_customer_sk= c_customer_sk AND cd_demo_sk = c_current_cdemo_sk AND hd_demo_sk = c_current_hdemo_sk AND ca_address_sk = c_current_addr_sk AND d_year = 1998 AND d_moy = 11 AND ((cd_marital_status = 'M' AND cd_education_status = 'Unknown') or(cd_marital_status = 'W' AND cd_education_status = 'Advanced Degree')) AND hd_buy_potential LIKE 'Unknown%' AND ca_gmt_offset = -7 GROUP BY cc_call_center_id, cc_name, cc_manager, cd_marital_status, cd_education_status ORDER BY sum(cr_net_loss) DESC;
+<<Timing>>
+Total Time: 0.358245s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+| c_current_hdemo_ |
+|   sk=hd_demo_sk  |
+|      (0.00s)     |
+|         3        |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |      FILTER      |
+|       INNER      |                                                                                                    | LIKE(hd_buy_pote |
+| c_current_cdemo_ |                                                                                                    |  ntial, Unknown% |
+|   sk=cd_demo_sk  |                                                                                                    |                  |
+|      (0.01s)     |                                                                                                    |      (0.00s)     |
+|        18        |                                                                                                    |       1200       |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                                                | OR(AND((cd_marit || household_demogr |
+| c_current_addr_s |                                                                                |     al_status    ||      aphics      |
+|  k=ca_address_sk |                                                                                |  = M), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |    = Unknown))   ||                  |
+|                  |                                                                                | , AND((cd_marita ||                  |
+|                  |                                                                                |     l_status     ||                  |
+|                  |                                                                                |  = W), (cd_educa ||                  |
+|                  |                                                                                |    tion_status   ||                  |
+|                  |                                                                                |     = Advanced   ||                  |
+|      (0.01s)     |                                                                                |      (0.04s)     ||      (0.00s)     |
+|        231       |                                                                                |      109760      ||       7200       |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |   ca_gmt_offset  || customer_demogra |
+| cr_returning_cus |                                                            |    = -7.000000   ||       phics      |
+|     tomer_sk     |                                                            |                  ||                  |
+|  =c_customer_sk  |                                                            |                  ||                  |
+|      (0.02s)     |                                                            |      (0.00s)     ||      (0.02s)     |
+|       1909       |                                                            |       5611       ||      1920800     |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     customer     || customer_address |
+| cr_returned_date |                                        |                  ||                  |
+|   _sk=d_date_sk  |                                        |                  ||                  |
+|      (0.16s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       1909       |                                        |      100000      ||       50000      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+| cc_call_center_s |                    |   d_year = 1998  |
+| k=cr_call_center |                    |                  |
+|        _sk       |                    |                  |
+|      (0.07s)     |                    |      (0.00s)     |
+|      144067      |                    |        30        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|    call_center   ||  catalog_returns ||     date_dim     |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         6        ||      144067      ||       73049      |
+------------------------------------------------------------
+

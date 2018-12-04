@@ -1,0 +1,440 @@
+<<Query Profiling Information>>
+SELECT count(*) FROM ((SELECT DISTINCT c_last_name, c_first_name, d_date FROM store_sales, date_dim, customer WHERE store_sales.ss_sold_date_sk = date_dim.d_date_sk AND store_sales.ss_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM catalog_sales, date_dim, customer WHERE catalog_sales.cs_sold_date_sk = date_dim.d_date_sk AND catalog_sales.cs_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM web_sales, date_dim, customer WHERE web_sales.ws_sold_date_sk = date_dim.d_date_sk AND web_sales.ws_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11)) cool_cust ;
+<<Timing>>
+Total Time: 0.524610s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.08s)     |
+|       48087      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       ANTI       |
+|       #0=#0      |
+|       #1=#1      |
+|       #2=#2      |
+|      (0.09s)     |
+|      578509      |
+--------------------
+--------------------                                                                                                    --------------------
+|    PROJECTION    |                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |    PROJECTION    |
+|       ANTI       |                                                                                                    |                  |
+|       #0=#0      |                                                                                                    |                  |
+|       #1=#1      |                                                                                                    |                  |
+|       #2=#2      |                                                                                                    |                  |
+|      (0.12s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                        --------------------                                        --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |
+|                  |                                        |                  |                                        |       INNER      |
+|                  |                                        |                  |                                        | ws_bill_customer |
+|                  |                                        |                  |                                        | _sk=c_customer_s |
+|                  |                                        |                  |                                        |         k        |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.02s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |
+--------------------                                        --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|                  |                                        |                  |                                        |       INNER      |                    |     customer     |
+|                  |                                        |                  |                                        |  ws_sold_date_sk |                    |                  |
+|                  |                                        |                  |                                        |    =d_date_sk    |                    |                  |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.01s)     |                    |      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |                    |      100000      |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                                        |       INNER      |                                        |     web_sales    ||    d_month_seq   |
+|  ss_customer_sk  |                                        | cs_bill_customer |                                        |                  ||      <= 1211     |
+|  =c_customer_sk  |                                        | _sk=c_customer_s |                                        |                  ||    d_month_seq   |
+|                  |                                        |         k        |                                        |                  ||      >= 1200     |
+|      (0.06s)     |                                        |      (0.03s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      719384      ||        366       |
+--------------------                                        --------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |     customer     ||       INNER      |                    |     customer     |                    |     date_dim     |
+|  ss_sold_date_sk |                    |                  ||  cs_sold_date_sk |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      580161      |                    |      100000      ||      288992      |                    |      100000      |                    |       73049      |
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+----------------------------------------                    ----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |                    |     SEQ_SCAN     ||      FILTER      |
+|    store_sales   ||    d_month_seq   |                    |   catalog_sales  ||    d_month_seq   |
+|                  ||      <= 1211     |                    |                  ||      <= 1211     |
+|                  ||    d_month_seq   |                    |                  ||    d_month_seq   |
+|                  ||      >= 1200     |                    |                  ||      >= 1200     |
+|      (0.01s)     ||      (0.00s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        366       |                    |      1441548     ||        366       |
+----------------------------------------                    ----------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |     date_dim     |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       73049      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT count(*) FROM ((SELECT DISTINCT c_last_name, c_first_name, d_date FROM store_sales, date_dim, customer WHERE store_sales.ss_sold_date_sk = date_dim.d_date_sk AND store_sales.ss_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM catalog_sales, date_dim, customer WHERE catalog_sales.cs_sold_date_sk = date_dim.d_date_sk AND catalog_sales.cs_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM web_sales, date_dim, customer WHERE web_sales.ws_sold_date_sk = date_dim.d_date_sk AND web_sales.ws_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11)) cool_cust ;
+<<Timing>>
+Total Time: 0.523833s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.08s)     |
+|       48087      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       ANTI       |
+|       #0=#0      |
+|       #1=#1      |
+|       #2=#2      |
+|      (0.09s)     |
+|      578509      |
+--------------------
+--------------------                                                                                                    --------------------
+|    PROJECTION    |                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |    PROJECTION    |
+|       ANTI       |                                                                                                    |                  |
+|       #0=#0      |                                                                                                    |                  |
+|       #1=#1      |                                                                                                    |                  |
+|       #2=#2      |                                                                                                    |                  |
+|      (0.11s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                        --------------------                                        --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |
+|                  |                                        |                  |                                        |       INNER      |
+|                  |                                        |                  |                                        | ws_bill_customer |
+|                  |                                        |                  |                                        | _sk=c_customer_s |
+|                  |                                        |                  |                                        |         k        |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.02s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |
+--------------------                                        --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|                  |                                        |                  |                                        |       INNER      |                    |     customer     |
+|                  |                                        |                  |                                        |  ws_sold_date_sk |                    |                  |
+|                  |                                        |                  |                                        |    =d_date_sk    |                    |                  |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.01s)     |                    |      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |                    |      100000      |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                                        |       INNER      |                                        |     web_sales    ||    d_month_seq   |
+|  ss_customer_sk  |                                        | cs_bill_customer |                                        |                  ||      <= 1211     |
+|  =c_customer_sk  |                                        | _sk=c_customer_s |                                        |                  ||    d_month_seq   |
+|                  |                                        |         k        |                                        |                  ||      >= 1200     |
+|      (0.06s)     |                                        |      (0.03s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      719384      ||        366       |
+--------------------                                        --------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |     customer     ||       INNER      |                    |     customer     |                    |     date_dim     |
+|  ss_sold_date_sk |                    |                  ||  cs_sold_date_sk |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      580161      |                    |      100000      ||      288992      |                    |      100000      |                    |       73049      |
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+----------------------------------------                    ----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |                    |     SEQ_SCAN     ||      FILTER      |
+|    store_sales   ||    d_month_seq   |                    |   catalog_sales  ||    d_month_seq   |
+|                  ||      <= 1211     |                    |                  ||      <= 1211     |
+|                  ||    d_month_seq   |                    |                  ||    d_month_seq   |
+|                  ||      >= 1200     |                    |                  ||      >= 1200     |
+|      (0.01s)     ||      (0.00s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        366       |                    |      1441548     ||        366       |
+----------------------------------------                    ----------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |     date_dim     |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       73049      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT count(*) FROM ((SELECT DISTINCT c_last_name, c_first_name, d_date FROM store_sales, date_dim, customer WHERE store_sales.ss_sold_date_sk = date_dim.d_date_sk AND store_sales.ss_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM catalog_sales, date_dim, customer WHERE catalog_sales.cs_sold_date_sk = date_dim.d_date_sk AND catalog_sales.cs_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM web_sales, date_dim, customer WHERE web_sales.ws_sold_date_sk = date_dim.d_date_sk AND web_sales.ws_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11)) cool_cust ;
+<<Timing>>
+Total Time: 0.524017s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.08s)     |
+|       48087      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       ANTI       |
+|       #0=#0      |
+|       #1=#1      |
+|       #2=#2      |
+|      (0.09s)     |
+|      578509      |
+--------------------
+--------------------                                                                                                    --------------------
+|    PROJECTION    |                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |    PROJECTION    |
+|       ANTI       |                                                                                                    |                  |
+|       #0=#0      |                                                                                                    |                  |
+|       #1=#1      |                                                                                                    |                  |
+|       #2=#2      |                                                                                                    |                  |
+|      (0.11s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                        --------------------                                        --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |
+|                  |                                        |                  |                                        |       INNER      |
+|                  |                                        |                  |                                        | ws_bill_customer |
+|                  |                                        |                  |                                        | _sk=c_customer_s |
+|                  |                                        |                  |                                        |         k        |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.02s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |
+--------------------                                        --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|                  |                                        |                  |                                        |       INNER      |                    |     customer     |
+|                  |                                        |                  |                                        |  ws_sold_date_sk |                    |                  |
+|                  |                                        |                  |                                        |    =d_date_sk    |                    |                  |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.01s)     |                    |      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |                    |      100000      |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                                        |       INNER      |                                        |     web_sales    ||    d_month_seq   |
+|  ss_customer_sk  |                                        | cs_bill_customer |                                        |                  ||      <= 1211     |
+|  =c_customer_sk  |                                        | _sk=c_customer_s |                                        |                  ||    d_month_seq   |
+|                  |                                        |         k        |                                        |                  ||      >= 1200     |
+|      (0.06s)     |                                        |      (0.03s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      719384      ||        366       |
+--------------------                                        --------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |     customer     ||       INNER      |                    |     customer     |                    |     date_dim     |
+|  ss_sold_date_sk |                    |                  ||  cs_sold_date_sk |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      580161      |                    |      100000      ||      288992      |                    |      100000      |                    |       73049      |
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+----------------------------------------                    ----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |                    |     SEQ_SCAN     ||      FILTER      |
+|    store_sales   ||    d_month_seq   |                    |   catalog_sales  ||    d_month_seq   |
+|                  ||      <= 1211     |                    |                  ||      <= 1211     |
+|                  ||    d_month_seq   |                    |                  ||    d_month_seq   |
+|                  ||      >= 1200     |                    |                  ||      >= 1200     |
+|      (0.01s)     ||      (0.00s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        366       |                    |      1441548     ||        366       |
+----------------------------------------                    ----------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |     date_dim     |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       73049      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT count(*) FROM ((SELECT DISTINCT c_last_name, c_first_name, d_date FROM store_sales, date_dim, customer WHERE store_sales.ss_sold_date_sk = date_dim.d_date_sk AND store_sales.ss_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM catalog_sales, date_dim, customer WHERE catalog_sales.cs_sold_date_sk = date_dim.d_date_sk AND catalog_sales.cs_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM web_sales, date_dim, customer WHERE web_sales.ws_sold_date_sk = date_dim.d_date_sk AND web_sales.ws_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11)) cool_cust ;
+<<Timing>>
+Total Time: 0.525694s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.08s)     |
+|       48087      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       ANTI       |
+|       #0=#0      |
+|       #1=#1      |
+|       #2=#2      |
+|      (0.10s)     |
+|      578509      |
+--------------------
+--------------------                                                                                                    --------------------
+|    PROJECTION    |                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |    PROJECTION    |
+|       ANTI       |                                                                                                    |                  |
+|       #0=#0      |                                                                                                    |                  |
+|       #1=#1      |                                                                                                    |                  |
+|       #2=#2      |                                                                                                    |                  |
+|      (0.11s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                        --------------------                                        --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |
+|                  |                                        |                  |                                        |       INNER      |
+|                  |                                        |                  |                                        | ws_bill_customer |
+|                  |                                        |                  |                                        | _sk=c_customer_s |
+|                  |                                        |                  |                                        |         k        |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.02s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |
+--------------------                                        --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|                  |                                        |                  |                                        |       INNER      |                    |     customer     |
+|                  |                                        |                  |                                        |  ws_sold_date_sk |                    |                  |
+|                  |                                        |                  |                                        |    =d_date_sk    |                    |                  |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.01s)     |                    |      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |                    |      100000      |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                                        |       INNER      |                                        |     web_sales    ||    d_month_seq   |
+|  ss_customer_sk  |                                        | cs_bill_customer |                                        |                  ||      <= 1211     |
+|  =c_customer_sk  |                                        | _sk=c_customer_s |                                        |                  ||    d_month_seq   |
+|                  |                                        |         k        |                                        |                  ||      >= 1200     |
+|      (0.06s)     |                                        |      (0.03s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      719384      ||        366       |
+--------------------                                        --------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |     customer     ||       INNER      |                    |     customer     |                    |     date_dim     |
+|  ss_sold_date_sk |                    |                  ||  cs_sold_date_sk |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      580161      |                    |      100000      ||      288992      |                    |      100000      |                    |       73049      |
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+----------------------------------------                    ----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |                    |     SEQ_SCAN     ||      FILTER      |
+|    store_sales   ||    d_month_seq   |                    |   catalog_sales  ||    d_month_seq   |
+|                  ||      <= 1211     |                    |                  ||      <= 1211     |
+|                  ||    d_month_seq   |                    |                  ||    d_month_seq   |
+|                  ||      >= 1200     |                    |                  ||      >= 1200     |
+|      (0.01s)     ||      (0.00s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        366       |                    |      1441548     ||        366       |
+----------------------------------------                    ----------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |     date_dim     |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       73049      |                                        |       73049      |
+                    --------------------                                        --------------------
+
+<<Query Profiling Information>>
+SELECT count(*) FROM ((SELECT DISTINCT c_last_name, c_first_name, d_date FROM store_sales, date_dim, customer WHERE store_sales.ss_sold_date_sk = date_dim.d_date_sk AND store_sales.ss_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM catalog_sales, date_dim, customer WHERE catalog_sales.cs_sold_date_sk = date_dim.d_date_sk AND catalog_sales.cs_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11) EXCEPT (SELECT DISTINCT c_last_name, c_first_name, d_date FROM web_sales, date_dim, customer WHERE web_sales.ws_sold_date_sk = date_dim.d_date_sk AND web_sales.ws_bill_customer_sk = customer.c_customer_sk AND d_month_seq BETWEEN 1200 AND 1200+11)) cool_cust ;
+<<Timing>>
+Total Time: 0.522919s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.08s)     |
+|       48087      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       ANTI       |
+|       #0=#0      |
+|       #1=#1      |
+|       #2=#2      |
+|      (0.09s)     |
+|      578509      |
+--------------------
+--------------------                                                                                                    --------------------
+|    PROJECTION    |                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |    PROJECTION    |
+|       ANTI       |                                                                                                    |                  |
+|       #0=#0      |                                                                                                    |                  |
+|       #1=#1      |                                                                                                    |                  |
+|       #2=#2      |                                                                                                    |                  |
+|      (0.11s)     |                                                                                                    |      (0.00s)     |
+|      579035      |                                                                                                    |      142217      |
+--------------------                                                                                                    --------------------
+--------------------                                        --------------------                                        --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |
+|                  |                                        |                  |                                        |       INNER      |
+|                  |                                        |                  |                                        | ws_bill_customer |
+|                  |                                        |                  |                                        | _sk=c_customer_s |
+|                  |                                        |                  |                                        |         k        |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.02s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |
+--------------------                                        --------------------                                        --------------------
+--------------------                                        --------------------                                        --------------------                    --------------------
+|    PROJECTION    |                                        |    PROJECTION    |                                        |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|                  |                                        |                  |                                        |       INNER      |                    |     customer     |
+|                  |                                        |                  |                                        |  ws_sold_date_sk |                    |                  |
+|                  |                                        |                  |                                        |    =d_date_sk    |                    |                  |
+|      (0.00s)     |                                        |      (0.00s)     |                                        |      (0.01s)     |                    |      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      142217      |                    |      100000      |
+--------------------                                        --------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                                        |       INNER      |                                        |     web_sales    ||    d_month_seq   |
+|  ss_customer_sk  |                                        | cs_bill_customer |                                        |                  ||      <= 1211     |
+|  =c_customer_sk  |                                        | _sk=c_customer_s |                                        |                  ||    d_month_seq   |
+|                  |                                        |         k        |                                        |                  ||      >= 1200     |
+|      (0.06s)     |                                        |      (0.03s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      580161      |                                        |      288992      |                                        |      719384      ||        366       |
+--------------------                                        --------------------                                        ----------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     ||     HASH_JOIN    |                    |     SEQ_SCAN     |                    |     SEQ_SCAN     |
+|       INNER      |                    |     customer     ||       INNER      |                    |     customer     |                    |     date_dim     |
+|  ss_sold_date_sk |                    |                  ||  cs_sold_date_sk |                    |                  |                    |                  |
+|    =d_date_sk    |                    |                  ||    =d_date_sk    |                    |                  |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      580161      |                    |      100000      ||      288992      |                    |      100000      |                    |       73049      |
+--------------------                    ----------------------------------------                    --------------------                    --------------------
+----------------------------------------                    ----------------------------------------
+|     SEQ_SCAN     ||      FILTER      |                    |     SEQ_SCAN     ||      FILTER      |
+|    store_sales   ||    d_month_seq   |                    |   catalog_sales  ||    d_month_seq   |
+|                  ||      <= 1211     |                    |                  ||      <= 1211     |
+|                  ||    d_month_seq   |                    |                  ||    d_month_seq   |
+|                  ||      >= 1200     |                    |                  ||      >= 1200     |
+|      (0.01s)     ||      (0.00s)     |                    |      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        366       |                    |      1441548     ||        366       |
+----------------------------------------                    ----------------------------------------
+                    --------------------                                        --------------------
+                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+                    |     date_dim     |                                        |     date_dim     |
+                    |      (0.00s)     |                                        |      (0.00s)     |
+                    |       73049      |                                        |       73049      |
+                    --------------------                                        --------------------
+
