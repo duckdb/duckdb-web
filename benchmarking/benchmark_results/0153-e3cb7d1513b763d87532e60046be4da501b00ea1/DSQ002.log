@@ -1,0 +1,395 @@
+<<Query Profiling Information>>
+WITH wscs AS (SELECT sold_date_sk, sales_price FROM (SELECT ws_sold_date_sk sold_date_sk, ws_ext_sales_price sales_price FROM web_sales UNION ALL SELECT cs_sold_date_sk sold_date_sk, cs_ext_sales_price sales_price FROM catalog_sales) sq1), wswscs AS (SELECT d_week_seq, sum(CASE WHEN (d_day_name='Sunday') THEN sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN sales_price ELSE NULL END) sat_sales FROM wscs, date_dim WHERE d_date_sk = sold_date_sk GROUP BY d_week_seq) SELECT d_week_seq1, round(sun_sales1/sun_sales2, 2), round(mon_sales1/mon_sales2, 2), round(tue_sales1/tue_sales2, 2), round(wed_sales1/wed_sales2, 2), round(thu_sales1/thu_sales2, 2), round(fri_sales1/fri_sales2, 2), round(sat_sales1/sat_sales2, 2) FROM (SELECT wswscs.d_week_seq d_week_seq1, sun_sales sun_sales1, mon_sales mon_sales1, tue_sales tue_sales1, wed_sales wed_sales1, thu_sales thu_sales1, fri_sales fri_sales1, sat_sales sat_sales1 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y, (SELECT wswscs.d_week_seq d_week_seq2, sun_sales sun_sales2, mon_sales mon_sales2, tue_sales tue_sales2, wed_sales wed_sales2, thu_sales thu_sales2, fri_sales fri_sales2, sat_sales sat_sales2 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001+1) z WHERE d_week_seq1 = d_week_seq2-53 ORDER BY d_week_seq1;
+<<Timing>>
+Total Time: 0.610382s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    d_week_seq    |
+|   1=(d_week_seq  |
+|      2 - 53      |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------                                                            --------------------
+|    PROJECTION    |                                                            |    PROJECTION    |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     HASH_JOIN    |
+|       INNER      |                                                            |       INNER      |
+|    d_week_seq    |                                                            |    d_week_seq    |
+|    =d_week_seq   |                                                            |    =d_week_seq   |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      ||   HASH_GROUP_BY  |                                        |      FILTER      |
+|                  |                                        |   d_year = 2001  ||                  |                                        |   d_year = 2002  |
+|      (0.22s)     |                                        |      (0.00s)     ||      (0.23s)     |                                        |      (0.00s)     |
+|        263       |                                        |        365       ||        263       |                                        |        365       |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |     date_dim     ||       INNER      |                                        |     date_dim     |
+|   sold_date_sk   |                                        |                  ||   sold_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  ||    =d_date_sk    |                                        |                  |
+|      (0.06s)     |                                        |      (0.00s)     ||      (0.07s)     |                                        |      (0.00s)     |
+|      2160932     |                                        |       73049      ||      2160932     |                                        |       73049      |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                    --------------------                    --------------------                    --------------------
+|    PROJECTION    |                    |     SEQ_SCAN     |                    |    PROJECTION    |                    |     SEQ_SCAN     |
+|                  |                    |     date_dim     |                    |                  |                    |     date_dim     |
+|      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      2160932     |                    |       73049      |                    |      2160932     |                    |       73049      |
+--------------------                    --------------------                    --------------------                    --------------------
+--------------------                                                            --------------------
+|       UNION      |                                                            |       UNION      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|      2160932     |                                                            |      2160932     |
+--------------------                                                            --------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|     web_sales    ||   catalog_sales  |                                        |     web_sales    ||   catalog_sales  |
+|      (0.00s)     ||      (0.01s)     |                                        |      (0.00s)     ||      (0.01s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+
+<<Query Profiling Information>>
+WITH wscs AS (SELECT sold_date_sk, sales_price FROM (SELECT ws_sold_date_sk sold_date_sk, ws_ext_sales_price sales_price FROM web_sales UNION ALL SELECT cs_sold_date_sk sold_date_sk, cs_ext_sales_price sales_price FROM catalog_sales) sq1), wswscs AS (SELECT d_week_seq, sum(CASE WHEN (d_day_name='Sunday') THEN sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN sales_price ELSE NULL END) sat_sales FROM wscs, date_dim WHERE d_date_sk = sold_date_sk GROUP BY d_week_seq) SELECT d_week_seq1, round(sun_sales1/sun_sales2, 2), round(mon_sales1/mon_sales2, 2), round(tue_sales1/tue_sales2, 2), round(wed_sales1/wed_sales2, 2), round(thu_sales1/thu_sales2, 2), round(fri_sales1/fri_sales2, 2), round(sat_sales1/sat_sales2, 2) FROM (SELECT wswscs.d_week_seq d_week_seq1, sun_sales sun_sales1, mon_sales mon_sales1, tue_sales tue_sales1, wed_sales wed_sales1, thu_sales thu_sales1, fri_sales fri_sales1, sat_sales sat_sales1 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y, (SELECT wswscs.d_week_seq d_week_seq2, sun_sales sun_sales2, mon_sales mon_sales2, tue_sales tue_sales2, wed_sales wed_sales2, thu_sales thu_sales2, fri_sales fri_sales2, sat_sales sat_sales2 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001+1) z WHERE d_week_seq1 = d_week_seq2-53 ORDER BY d_week_seq1;
+<<Timing>>
+Total Time: 0.612124s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    d_week_seq    |
+|   1=(d_week_seq  |
+|      2 - 53      |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------                                                            --------------------
+|    PROJECTION    |                                                            |    PROJECTION    |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     HASH_JOIN    |
+|       INNER      |                                                            |       INNER      |
+|    d_week_seq    |                                                            |    d_week_seq    |
+|    =d_week_seq   |                                                            |    =d_week_seq   |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      ||   HASH_GROUP_BY  |                                        |      FILTER      |
+|                  |                                        |   d_year = 2001  ||                  |                                        |   d_year = 2002  |
+|      (0.22s)     |                                        |      (0.00s)     ||      (0.23s)     |                                        |      (0.00s)     |
+|        263       |                                        |        365       ||        263       |                                        |        365       |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |     date_dim     ||       INNER      |                                        |     date_dim     |
+|   sold_date_sk   |                                        |                  ||   sold_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  ||    =d_date_sk    |                                        |                  |
+|      (0.06s)     |                                        |      (0.00s)     ||      (0.06s)     |                                        |      (0.00s)     |
+|      2160932     |                                        |       73049      ||      2160932     |                                        |       73049      |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                    --------------------                    --------------------                    --------------------
+|    PROJECTION    |                    |     SEQ_SCAN     |                    |    PROJECTION    |                    |     SEQ_SCAN     |
+|                  |                    |     date_dim     |                    |                  |                    |     date_dim     |
+|      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      2160932     |                    |       73049      |                    |      2160932     |                    |       73049      |
+--------------------                    --------------------                    --------------------                    --------------------
+--------------------                                                            --------------------
+|       UNION      |                                                            |       UNION      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|      2160932     |                                                            |      2160932     |
+--------------------                                                            --------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|     web_sales    ||   catalog_sales  |                                        |     web_sales    ||   catalog_sales  |
+|      (0.00s)     ||      (0.01s)     |                                        |      (0.00s)     ||      (0.01s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+
+<<Query Profiling Information>>
+WITH wscs AS (SELECT sold_date_sk, sales_price FROM (SELECT ws_sold_date_sk sold_date_sk, ws_ext_sales_price sales_price FROM web_sales UNION ALL SELECT cs_sold_date_sk sold_date_sk, cs_ext_sales_price sales_price FROM catalog_sales) sq1), wswscs AS (SELECT d_week_seq, sum(CASE WHEN (d_day_name='Sunday') THEN sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN sales_price ELSE NULL END) sat_sales FROM wscs, date_dim WHERE d_date_sk = sold_date_sk GROUP BY d_week_seq) SELECT d_week_seq1, round(sun_sales1/sun_sales2, 2), round(mon_sales1/mon_sales2, 2), round(tue_sales1/tue_sales2, 2), round(wed_sales1/wed_sales2, 2), round(thu_sales1/thu_sales2, 2), round(fri_sales1/fri_sales2, 2), round(sat_sales1/sat_sales2, 2) FROM (SELECT wswscs.d_week_seq d_week_seq1, sun_sales sun_sales1, mon_sales mon_sales1, tue_sales tue_sales1, wed_sales wed_sales1, thu_sales thu_sales1, fri_sales fri_sales1, sat_sales sat_sales1 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y, (SELECT wswscs.d_week_seq d_week_seq2, sun_sales sun_sales2, mon_sales mon_sales2, tue_sales tue_sales2, wed_sales wed_sales2, thu_sales thu_sales2, fri_sales fri_sales2, sat_sales sat_sales2 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001+1) z WHERE d_week_seq1 = d_week_seq2-53 ORDER BY d_week_seq1;
+<<Timing>>
+Total Time: 0.602953s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    d_week_seq    |
+|   1=(d_week_seq  |
+|      2 - 53      |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------                                                            --------------------
+|    PROJECTION    |                                                            |    PROJECTION    |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     HASH_JOIN    |
+|       INNER      |                                                            |       INNER      |
+|    d_week_seq    |                                                            |    d_week_seq    |
+|    =d_week_seq   |                                                            |    =d_week_seq   |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      ||   HASH_GROUP_BY  |                                        |      FILTER      |
+|                  |                                        |   d_year = 2001  ||                  |                                        |   d_year = 2002  |
+|      (0.22s)     |                                        |      (0.00s)     ||      (0.22s)     |                                        |      (0.00s)     |
+|        263       |                                        |        365       ||        263       |                                        |        365       |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |     date_dim     ||       INNER      |                                        |     date_dim     |
+|   sold_date_sk   |                                        |                  ||   sold_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  ||    =d_date_sk    |                                        |                  |
+|      (0.06s)     |                                        |      (0.00s)     ||      (0.06s)     |                                        |      (0.00s)     |
+|      2160932     |                                        |       73049      ||      2160932     |                                        |       73049      |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                    --------------------                    --------------------                    --------------------
+|    PROJECTION    |                    |     SEQ_SCAN     |                    |    PROJECTION    |                    |     SEQ_SCAN     |
+|                  |                    |     date_dim     |                    |                  |                    |     date_dim     |
+|      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      2160932     |                    |       73049      |                    |      2160932     |                    |       73049      |
+--------------------                    --------------------                    --------------------                    --------------------
+--------------------                                                            --------------------
+|       UNION      |                                                            |       UNION      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|      2160932     |                                                            |      2160932     |
+--------------------                                                            --------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|     web_sales    ||   catalog_sales  |                                        |     web_sales    ||   catalog_sales  |
+|      (0.00s)     ||      (0.01s)     |                                        |      (0.00s)     ||      (0.01s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+
+<<Query Profiling Information>>
+WITH wscs AS (SELECT sold_date_sk, sales_price FROM (SELECT ws_sold_date_sk sold_date_sk, ws_ext_sales_price sales_price FROM web_sales UNION ALL SELECT cs_sold_date_sk sold_date_sk, cs_ext_sales_price sales_price FROM catalog_sales) sq1), wswscs AS (SELECT d_week_seq, sum(CASE WHEN (d_day_name='Sunday') THEN sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN sales_price ELSE NULL END) sat_sales FROM wscs, date_dim WHERE d_date_sk = sold_date_sk GROUP BY d_week_seq) SELECT d_week_seq1, round(sun_sales1/sun_sales2, 2), round(mon_sales1/mon_sales2, 2), round(tue_sales1/tue_sales2, 2), round(wed_sales1/wed_sales2, 2), round(thu_sales1/thu_sales2, 2), round(fri_sales1/fri_sales2, 2), round(sat_sales1/sat_sales2, 2) FROM (SELECT wswscs.d_week_seq d_week_seq1, sun_sales sun_sales1, mon_sales mon_sales1, tue_sales tue_sales1, wed_sales wed_sales1, thu_sales thu_sales1, fri_sales fri_sales1, sat_sales sat_sales1 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y, (SELECT wswscs.d_week_seq d_week_seq2, sun_sales sun_sales2, mon_sales mon_sales2, tue_sales tue_sales2, wed_sales wed_sales2, thu_sales thu_sales2, fri_sales fri_sales2, sat_sales sat_sales2 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001+1) z WHERE d_week_seq1 = d_week_seq2-53 ORDER BY d_week_seq1;
+<<Timing>>
+Total Time: 0.611046s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    d_week_seq    |
+|   1=(d_week_seq  |
+|      2 - 53      |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------                                                            --------------------
+|    PROJECTION    |                                                            |    PROJECTION    |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     HASH_JOIN    |
+|       INNER      |                                                            |       INNER      |
+|    d_week_seq    |                                                            |    d_week_seq    |
+|    =d_week_seq   |                                                            |    =d_week_seq   |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      ||   HASH_GROUP_BY  |                                        |      FILTER      |
+|                  |                                        |   d_year = 2001  ||                  |                                        |   d_year = 2002  |
+|      (0.23s)     |                                        |      (0.00s)     ||      (0.23s)     |                                        |      (0.00s)     |
+|        263       |                                        |        365       ||        263       |                                        |        365       |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |     date_dim     ||       INNER      |                                        |     date_dim     |
+|   sold_date_sk   |                                        |                  ||   sold_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  ||    =d_date_sk    |                                        |                  |
+|      (0.06s)     |                                        |      (0.00s)     ||      (0.06s)     |                                        |      (0.00s)     |
+|      2160932     |                                        |       73049      ||      2160932     |                                        |       73049      |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                    --------------------                    --------------------                    --------------------
+|    PROJECTION    |                    |     SEQ_SCAN     |                    |    PROJECTION    |                    |     SEQ_SCAN     |
+|                  |                    |     date_dim     |                    |                  |                    |     date_dim     |
+|      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      2160932     |                    |       73049      |                    |      2160932     |                    |       73049      |
+--------------------                    --------------------                    --------------------                    --------------------
+--------------------                                                            --------------------
+|       UNION      |                                                            |       UNION      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|      2160932     |                                                            |      2160932     |
+--------------------                                                            --------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|     web_sales    ||   catalog_sales  |                                        |     web_sales    ||   catalog_sales  |
+|      (0.00s)     ||      (0.01s)     |                                        |      (0.00s)     ||      (0.01s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+
+<<Query Profiling Information>>
+WITH wscs AS (SELECT sold_date_sk, sales_price FROM (SELECT ws_sold_date_sk sold_date_sk, ws_ext_sales_price sales_price FROM web_sales UNION ALL SELECT cs_sold_date_sk sold_date_sk, cs_ext_sales_price sales_price FROM catalog_sales) sq1), wswscs AS (SELECT d_week_seq, sum(CASE WHEN (d_day_name='Sunday') THEN sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN sales_price ELSE NULL END) sat_sales FROM wscs, date_dim WHERE d_date_sk = sold_date_sk GROUP BY d_week_seq) SELECT d_week_seq1, round(sun_sales1/sun_sales2, 2), round(mon_sales1/mon_sales2, 2), round(tue_sales1/tue_sales2, 2), round(wed_sales1/wed_sales2, 2), round(thu_sales1/thu_sales2, 2), round(fri_sales1/fri_sales2, 2), round(sat_sales1/sat_sales2, 2) FROM (SELECT wswscs.d_week_seq d_week_seq1, sun_sales sun_sales1, mon_sales mon_sales1, tue_sales tue_sales1, wed_sales wed_sales1, thu_sales thu_sales1, fri_sales fri_sales1, sat_sales sat_sales1 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001) y, (SELECT wswscs.d_week_seq d_week_seq2, sun_sales sun_sales2, mon_sales mon_sales2, tue_sales tue_sales2, wed_sales wed_sales2, thu_sales thu_sales2, fri_sales fri_sales2, sat_sales sat_sales2 FROM wswscs, date_dim WHERE date_dim.d_week_seq = wswscs.d_week_seq AND d_year = 2001+1) z WHERE d_week_seq1 = d_week_seq2-53 ORDER BY d_week_seq1;
+<<Timing>>
+Total Time: 0.617669s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    d_week_seq    |
+|   1=(d_week_seq  |
+|      2 - 53      |
+|      (0.00s)     |
+|       2513       |
+--------------------
+--------------------                                                            --------------------
+|    PROJECTION    |                                                            |    PROJECTION    |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     HASH_JOIN    |
+|       INNER      |                                                            |       INNER      |
+|    d_week_seq    |                                                            |    d_week_seq    |
+|    =d_week_seq   |                                                            |    =d_week_seq   |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|        365       |                                                            |        365       |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      ||   HASH_GROUP_BY  |                                        |      FILTER      |
+|                  |                                        |   d_year = 2001  ||                  |                                        |   d_year = 2002  |
+|      (0.23s)     |                                        |      (0.00s)     ||      (0.23s)     |                                        |      (0.00s)     |
+|        263       |                                        |        365       ||        263       |                                        |        365       |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                                        ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |     date_dim     ||       INNER      |                                        |     date_dim     |
+|   sold_date_sk   |                                        |                  ||   sold_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  ||    =d_date_sk    |                                        |                  |
+|      (0.06s)     |                                        |      (0.00s)     ||      (0.06s)     |                                        |      (0.00s)     |
+|      2160932     |                                        |       73049      ||      2160932     |                                        |       73049      |
+--------------------                                        ----------------------------------------                                        --------------------
+--------------------                    --------------------                    --------------------                    --------------------
+|    PROJECTION    |                    |     SEQ_SCAN     |                    |    PROJECTION    |                    |     SEQ_SCAN     |
+|                  |                    |     date_dim     |                    |                  |                    |     date_dim     |
+|      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|      2160932     |                    |       73049      |                    |      2160932     |                    |       73049      |
+--------------------                    --------------------                    --------------------                    --------------------
+--------------------                                                            --------------------
+|       UNION      |                                                            |       UNION      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|      2160932     |                                                            |      2160932     |
+--------------------                                                            --------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|    PROJECTION    ||    PROJECTION    |                                        |    PROJECTION    ||    PROJECTION    |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+----------------------------------------                                        ----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|     web_sales    ||   catalog_sales  |                                        |     web_sales    ||   catalog_sales  |
+|      (0.00s)     ||      (0.01s)     |                                        |      (0.00s)     ||      (0.01s)     |
+|      719384      ||      1441548     |                                        |      719384      ||      1441548     |
+----------------------------------------                                        ----------------------------------------
+
