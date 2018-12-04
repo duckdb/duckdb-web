@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report dfeac1d - include/execution/expression_executor.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 4e157b1 - include/execution/expression_executor.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report dfeac1d</td>
+            <td class="headerValue">DuckDB Code Coverage Report 4e157b1</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryMed">85.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 11:24:53</td>
+            <td class="headerValue">2018-12-04 11:26:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryMed">75.0 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -60,14 +60,14 @@
       <td>
 <pre class="sourceHeading">          Line data    Source code</pre>
 <pre class="source">
-<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===// </a>
-<span class="lineNum">       2 </span>            : // 
-<span class="lineNum">       3 </span>            : //                         DuckDB 
-<span class="lineNum">       4 </span>            : // 
+<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : //
+<span class="lineNum">       3 </span>            : //                         DuckDB
+<span class="lineNum">       4 </span>            : //
 <span class="lineNum">       5 </span>            : // execution/expression_executor.hpp
-<span class="lineNum">       6 </span>            : // 
-<span class="lineNum">       7 </span>            : // 
-<span class="lineNum">       8 </span>            : // 
+<span class="lineNum">       6 </span>            : //
+<span class="lineNum">       7 </span>            : //
+<span class="lineNum">       8 </span>            : //
 <span class="lineNum">       9 </span>            : //===----------------------------------------------------------------------===//
 <span class="lineNum">      10 </span>            : 
 <span class="lineNum">      11 </span>            : #pragma once
@@ -137,37 +137,40 @@
 <span class="lineNum">      75 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(CastExpression &amp;expr);
 <span class="lineNum">      76 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ColumnRefExpression &amp;expr);
 <span class="lineNum">      77 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ComparisonExpression &amp;expr);
-<span class="lineNum">      78 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ConjunctionExpression &amp;expr);
+<a name="78"><span class="lineNum">      78 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ConjunctionExpression &amp;expr);</a>
 <span class="lineNum">      79 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(ConstantExpression &amp;expr);
-<span class="lineNum">      80 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(DefaultExpression &amp;expr);
-<span class="lineNum">      81 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(FunctionExpression &amp;expr);
-<span class="lineNum">      82 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(GroupRefExpression &amp;expr);
-<span class="lineNum">      83 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(OperatorExpression &amp;expr);
-<span class="lineNum">      84 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(SubqueryExpression &amp;expr);
-<span class="lineNum">      85 </span>            : 
-<span class="lineNum">      86 </span>            :   private:
-<span class="lineNum">      87 </span>            :         ClientContext &amp;context;
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :         std::unique_ptr&lt;Expression&gt; Visit(DefaultExpression &amp;expr) {</span>
+<span class="lineNum">      81 </span>            :                 throw NotImplementedException(
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :                     &quot;Cannot execute DEFAULT expression in ExpressionExecutor&quot;);</span>
+<span class="lineNum">      83 </span>            :         }
+<span class="lineNum">      84 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(FunctionExpression &amp;expr);
+<span class="lineNum">      85 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(GroupRefExpression &amp;expr);
+<span class="lineNum">      86 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(OperatorExpression &amp;expr);
+<span class="lineNum">      87 </span>            :         std::unique_ptr&lt;Expression&gt; Visit(SubqueryExpression &amp;expr);
 <span class="lineNum">      88 </span>            : 
-<span class="lineNum">      89 </span>            :         //! Whether or not the ExpressionExecutor is a scalar executor (i.e. output
-<span class="lineNum">      90 </span>            :         //! size = input size), this is true for e.g. expressions in the SELECT
-<span class="lineNum">      91 </span>            :         //! clause without aggregations
-<span class="lineNum">      92 </span>            :         bool scalar_executor;
-<span class="lineNum">      93 </span>            :         //! The data chunk of the current physical operator, used to resolve e.g.
-<span class="lineNum">      94 </span>            :         //! column references
-<span class="lineNum">      95 </span>            :         DataChunk *chunk;
-<span class="lineNum">      96 </span>            : 
-<span class="lineNum">      97 </span>            :         //! The parent executor of this one, if any. Used for subquery evaluation.
-<span class="lineNum">      98 </span>            :         ExpressionExecutor *parent;
+<span class="lineNum">      89 </span>            :   private:
+<span class="lineNum">      90 </span>            :         ClientContext &amp;context;
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span>            :         //! Whether or not the ExpressionExecutor is a scalar executor (i.e. output
+<span class="lineNum">      93 </span>            :         //! size = input size), this is true for e.g. expressions in the SELECT
+<span class="lineNum">      94 </span>            :         //! clause without aggregations
+<span class="lineNum">      95 </span>            :         bool scalar_executor;
+<span class="lineNum">      96 </span>            :         //! The data chunk of the current physical operator, used to resolve e.g.
+<span class="lineNum">      97 </span>            :         //! column references
+<span class="lineNum">      98 </span>            :         DataChunk *chunk;
 <span class="lineNum">      99 </span>            : 
-<span class="lineNum">     100 </span>            :         //! The operator state of the current physical operator, used to resolve
-<span class="lineNum">     101 </span>            :         //! e.g. group-by HT lookups
-<span class="lineNum">     102 </span>            :         PhysicalOperatorState *state;
-<span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span>            :         //! Intermediate vector that is the result of the previously visited
-<span class="lineNum">     105 </span>            :         //! expression
-<span class="lineNum">     106 </span>            :         Vector vector;
-<span class="lineNum">     107 </span>            : };
-<span class="lineNum">     108 </span>            : } // namespace duckdb
+<span class="lineNum">     100 </span>            :         //! The parent executor of this one, if any. Used for subquery evaluation.
+<span class="lineNum">     101 </span>            :         ExpressionExecutor *parent;
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span>            :         //! The operator state of the current physical operator, used to resolve
+<span class="lineNum">     104 </span>            :         //! e.g. group-by HT lookups
+<span class="lineNum">     105 </span>            :         PhysicalOperatorState *state;
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            :         //! Intermediate vector that is the result of the previously visited
+<span class="lineNum">     108 </span>            :         //! expression
+<span class="lineNum">     109 </span>            :         Vector vector;
+<span class="lineNum">     110 </span>            : };
+<span class="lineNum">     111 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>
