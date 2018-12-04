@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aee7bd9 - planner/logical_operator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 20da63e - planner/logical_operator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aee7bd9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 20da63e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">20</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 13:49:13</td>
+            <td class="headerValue">2018-12-04 14:08:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -119,16 +119,16 @@
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="58"><span class="lineNum">      58 </span>            : }</a>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">     932300 : size_t LogicalOperator::ExpressionCount() {</span>
-<span class="lineNum">      61 </span><span class="lineCov">     932300 :         return expressions.size();</span>
+<span class="lineNum">      60 </span><span class="lineCov">     932468 : size_t LogicalOperator::ExpressionCount() {</span>
+<span class="lineNum">      61 </span><span class="lineCov">     932468 :         return expressions.size();</span>
 <a name="62"><span class="lineNum">      62 </span>            : }</a>
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">     175443 : Expression *LogicalOperator::GetExpression(size_t index) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">     175443 :         if (index &gt;= ExpressionCount()) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">     175476 : Expression *LogicalOperator::GetExpression(size_t index) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">     175476 :         if (index &gt;= ExpressionCount()) {</span>
 <span class="lineNum">      66 </span>            :                 throw OutOfRangeException(
 <span class="lineNum">      67 </span><span class="lineNoCov">          0 :                     &quot;GetExpression(): Expression index out of range!&quot;);</span>
 <span class="lineNum">      68 </span>            :         }
-<span class="lineNum">      69 </span><span class="lineCov">     175443 :         return expressions[index].get();</span>
+<span class="lineNum">      69 </span><span class="lineCov">     175476 :         return expressions[index].get();</span>
 <a name="70"><span class="lineNum">      70 </span>            : }</a>
 <span class="lineNum">      71 </span>            : 
 <span class="lineNum">      72 </span><span class="lineCov">         30 : void LogicalOperator::SetExpression(size_t index,</span>

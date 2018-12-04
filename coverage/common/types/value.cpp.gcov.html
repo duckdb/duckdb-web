@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aee7bd9 - common/types/value.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 20da63e - common/types/value.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aee7bd9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 20da63e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">299</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 13:49:13</td>
+            <td class="headerValue">2018-12-04 14:08:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">35</td>
@@ -74,25 +74,25 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">    4037875 : Value::Value(const Value &amp;other)</span>
-<span class="lineNum">      16 </span><span class="lineCov">    4037875 :     : type(other.type), is_null(other.is_null), str_value(other.str_value) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">    4037875 :         this-&gt;value_ = other.value_;</span>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">    4037875 : }</span></a>
+<span class="lineNum">      15 </span><span class="lineCov">    4038073 : Value::Value(const Value &amp;other)</span>
+<span class="lineNum">      16 </span><span class="lineCov">    4038073 :     : type(other.type), is_null(other.is_null), str_value(other.str_value) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">    4038073 :         this-&gt;value_ = other.value_;</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">    4038073 : }</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">     381321 : Value Value::MinimumValue(TypeId type) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">     381321 :         Value result;</span>
-<span class="lineNum">      22 </span><span class="lineCov">     381321 :         result.type = type;</span>
-<span class="lineNum">      23 </span><span class="lineCov">     381321 :         result.is_null = false;</span>
-<span class="lineNum">      24 </span><span class="lineCov">     381321 :         switch (type) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     381333 : Value Value::MinimumValue(TypeId type) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">     381333 :         Value result;</span>
+<span class="lineNum">      22 </span><span class="lineCov">     381333 :         result.type = type;</span>
+<span class="lineNum">      23 </span><span class="lineCov">     381333 :         result.is_null = false;</span>
+<span class="lineNum">      24 </span><span class="lineCov">     381333 :         switch (type) {</span>
 <span class="lineNum">      25 </span><span class="lineCov">          3 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      26 </span><span class="lineCov">          3 :                 result.value_.tinyint = std::numeric_limits&lt;int8_t&gt;::min();</span>
 <span class="lineNum">      27 </span><span class="lineCov">          3 :                 break;</span>
 <span class="lineNum">      28 </span><span class="lineCov">          3 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      29 </span><span class="lineCov">          3 :                 result.value_.smallint = std::numeric_limits&lt;int16_t&gt;::min();</span>
 <span class="lineNum">      30 </span><span class="lineCov">          3 :                 break;</span>
-<span class="lineNum">      31 </span><span class="lineCov">     380289 :         case TypeId::INTEGER:</span>
-<span class="lineNum">      32 </span><span class="lineCov">     380289 :                 result.value_.integer = std::numeric_limits&lt;int32_t&gt;::min();</span>
-<span class="lineNum">      33 </span><span class="lineCov">     380289 :                 break;</span>
+<span class="lineNum">      31 </span><span class="lineCov">     380301 :         case TypeId::INTEGER:</span>
+<span class="lineNum">      32 </span><span class="lineCov">     380301 :                 result.value_.integer = std::numeric_limits&lt;int32_t&gt;::min();</span>
+<span class="lineNum">      33 </span><span class="lineCov">     380301 :                 break;</span>
 <span class="lineNum">      34 </span><span class="lineCov">          8 :         case TypeId::BIGINT:</span>
 <span class="lineNum">      35 </span><span class="lineCov">          8 :                 result.value_.bigint = std::numeric_limits&lt;int64_t&gt;::min();</span>
 <span class="lineNum">      36 </span><span class="lineCov">          8 :                 break;</span>
@@ -111,23 +111,23 @@
 <span class="lineNum">      49 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      50 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(type, &quot;MinimumValue requires numeric type&quot;);</span>
 <span class="lineNum">      51 </span>            :         }
-<span class="lineNum">      52 </span><span class="lineCov">     381321 :         return result;</span>
+<span class="lineNum">      52 </span><span class="lineCov">     381333 :         return result;</span>
 <a name="53"><span class="lineNum">      53 </span>            : }</a>
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">     381321 : Value Value::MaximumValue(TypeId type) {</span>
-<span class="lineNum">      56 </span><span class="lineCov">     381321 :         Value result;</span>
-<span class="lineNum">      57 </span><span class="lineCov">     381321 :         result.type = type;</span>
-<span class="lineNum">      58 </span><span class="lineCov">     381321 :         result.is_null = false;</span>
-<span class="lineNum">      59 </span><span class="lineCov">     381321 :         switch (type) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">     381333 : Value Value::MaximumValue(TypeId type) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">     381333 :         Value result;</span>
+<span class="lineNum">      57 </span><span class="lineCov">     381333 :         result.type = type;</span>
+<span class="lineNum">      58 </span><span class="lineCov">     381333 :         result.is_null = false;</span>
+<span class="lineNum">      59 </span><span class="lineCov">     381333 :         switch (type) {</span>
 <span class="lineNum">      60 </span><span class="lineCov">          3 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      61 </span><span class="lineCov">          3 :                 result.value_.tinyint = std::numeric_limits&lt;int8_t&gt;::max();</span>
 <span class="lineNum">      62 </span><span class="lineCov">          3 :                 break;</span>
 <span class="lineNum">      63 </span><span class="lineCov">          3 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      64 </span><span class="lineCov">          3 :                 result.value_.smallint = std::numeric_limits&lt;int16_t&gt;::max();</span>
 <span class="lineNum">      65 </span><span class="lineCov">          3 :                 break;</span>
-<span class="lineNum">      66 </span><span class="lineCov">     380289 :         case TypeId::INTEGER:</span>
-<span class="lineNum">      67 </span><span class="lineCov">     380289 :                 result.value_.integer = std::numeric_limits&lt;int32_t&gt;::max();</span>
-<span class="lineNum">      68 </span><span class="lineCov">     380289 :                 break;</span>
+<span class="lineNum">      66 </span><span class="lineCov">     380301 :         case TypeId::INTEGER:</span>
+<span class="lineNum">      67 </span><span class="lineCov">     380301 :                 result.value_.integer = std::numeric_limits&lt;int32_t&gt;::max();</span>
+<span class="lineNum">      68 </span><span class="lineCov">     380301 :                 break;</span>
 <span class="lineNum">      69 </span><span class="lineCov">          8 :         case TypeId::BIGINT:</span>
 <span class="lineNum">      70 </span><span class="lineCov">          8 :                 result.value_.bigint = std::numeric_limits&lt;int64_t&gt;::max();</span>
 <span class="lineNum">      71 </span><span class="lineCov">          8 :                 break;</span>
@@ -146,7 +146,7 @@
 <span class="lineNum">      84 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(type, &quot;MaximumValue requires numeric type&quot;);</span>
 <span class="lineNum">      86 </span>            :         }
-<span class="lineNum">      87 </span><span class="lineCov">     381321 :         return result;</span>
+<span class="lineNum">      87 </span><span class="lineCov">     381333 :         return result;</span>
 <a name="88"><span class="lineNum">      88 </span>            : }</a>
 <span class="lineNum">      89 </span>            : 
 <span class="lineNum">      90 </span><span class="lineCov">       7823 : Value Value::BOOLEAN(int8_t value) {</span>
@@ -168,17 +168,17 @@
 <span class="lineNum">     106 </span><span class="lineCov">         11 :         result.is_null = false;</span>
 <a name="107"><span class="lineNum">     107 </span><span class="lineCov">         11 :         return result;</span></a>
 <span class="lineNum">     108 </span>            : }
-<span class="lineNum">     109 </span><span class="lineCov">    1291829 : Value Value::INTEGER(int32_t value) {</span>
-<span class="lineNum">     110 </span><span class="lineCov">    1291829 :         Value result(TypeId::INTEGER);</span>
-<span class="lineNum">     111 </span><span class="lineCov">    1291829 :         result.value_.integer = value;</span>
-<span class="lineNum">     112 </span><span class="lineCov">    1291829 :         result.is_null = false;</span>
-<a name="113"><span class="lineNum">     113 </span><span class="lineCov">    1291829 :         return result;</span></a>
+<span class="lineNum">     109 </span><span class="lineCov">    1291846 : Value Value::INTEGER(int32_t value) {</span>
+<span class="lineNum">     110 </span><span class="lineCov">    1291846 :         Value result(TypeId::INTEGER);</span>
+<span class="lineNum">     111 </span><span class="lineCov">    1291846 :         result.value_.integer = value;</span>
+<span class="lineNum">     112 </span><span class="lineCov">    1291846 :         result.is_null = false;</span>
+<a name="113"><span class="lineNum">     113 </span><span class="lineCov">    1291846 :         return result;</span></a>
 <span class="lineNum">     114 </span>            : }
-<span class="lineNum">     115 </span><span class="lineCov">     184859 : Value Value::BIGINT(int64_t value) {</span>
-<span class="lineNum">     116 </span><span class="lineCov">     184859 :         Value result(TypeId::BIGINT);</span>
-<span class="lineNum">     117 </span><span class="lineCov">     184859 :         result.value_.bigint = value;</span>
-<span class="lineNum">     118 </span><span class="lineCov">     184859 :         result.is_null = false;</span>
-<a name="119"><span class="lineNum">     119 </span><span class="lineCov">     184859 :         return result;</span></a>
+<span class="lineNum">     115 </span><span class="lineCov">     184867 : Value Value::BIGINT(int64_t value) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">     184867 :         Value result(TypeId::BIGINT);</span>
+<span class="lineNum">     117 </span><span class="lineCov">     184867 :         result.value_.bigint = value;</span>
+<span class="lineNum">     118 </span><span class="lineCov">     184867 :         result.is_null = false;</span>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">     184867 :         return result;</span></a>
 <span class="lineNum">     120 </span>            : }
 <span class="lineNum">     121 </span><span class="lineCov">     168520 : Value Value::POINTER(uint64_t value) {</span>
 <span class="lineNum">     122 </span><span class="lineCov">     168520 :         Value result(TypeId::POINTER);</span>
@@ -299,12 +299,12 @@
 <span class="lineNum">     237 </span>            : //===--------------------------------------------------------------------===//
 <a name="238"><span class="lineNum">     238 </span>            : // Comparison Operators</a>
 <span class="lineNum">     239 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">     240 </span><span class="lineCov">     764052 : bool Value::operator==(const Value &amp;rhs) const {</span>
-<span class="lineNum">     241 </span><span class="lineCov">     764052 :         return ValueOperations::Equals(*this, rhs);</span>
+<span class="lineNum">     240 </span><span class="lineCov">     764076 : bool Value::operator==(const Value &amp;rhs) const {</span>
+<span class="lineNum">     241 </span><span class="lineCov">     764076 :         return ValueOperations::Equals(*this, rhs);</span>
 <a name="242"><span class="lineNum">     242 </span>            : }</a>
 <span class="lineNum">     243 </span>            : 
-<span class="lineNum">     244 </span><span class="lineCov">       1063 : bool Value::operator!=(const Value &amp;rhs) const {</span>
-<span class="lineNum">     245 </span><span class="lineCov">       1063 :         return ValueOperations::NotEquals(*this, rhs);</span>
+<span class="lineNum">     244 </span><span class="lineCov">       1067 : bool Value::operator!=(const Value &amp;rhs) const {</span>
+<span class="lineNum">     245 </span><span class="lineCov">       1067 :         return ValueOperations::NotEquals(*this, rhs);</span>
 <a name="246"><span class="lineNum">     246 </span>            : }</a>
 <span class="lineNum">     247 </span>            : 
 <span class="lineNum">     248 </span><span class="lineNoCov">          0 : bool Value::operator&lt;(const Value &amp;rhs) const {</span>
@@ -315,12 +315,12 @@
 <span class="lineNum">     253 </span><span class="lineCov">      97220 :         return ValueOperations::GreaterThan(*this, rhs);</span>
 <a name="254"><span class="lineNum">     254 </span>            : }</a>
 <span class="lineNum">     255 </span>            : 
-<span class="lineNum">     256 </span><span class="lineCov">     328578 : bool Value::operator&lt;=(const Value &amp;rhs) const {</span>
-<span class="lineNum">     257 </span><span class="lineCov">     328578 :         return ValueOperations::LessThanEquals(*this, rhs);</span>
+<span class="lineNum">     256 </span><span class="lineCov">     328585 : bool Value::operator&lt;=(const Value &amp;rhs) const {</span>
+<span class="lineNum">     257 </span><span class="lineCov">     328585 :         return ValueOperations::LessThanEquals(*this, rhs);</span>
 <a name="258"><span class="lineNum">     258 </span>            : }</a>
 <span class="lineNum">     259 </span>            : 
-<span class="lineNum">     260 </span><span class="lineCov">     328140 : bool Value::operator&gt;=(const Value &amp;rhs) const {</span>
-<span class="lineNum">     261 </span><span class="lineCov">     328140 :         return ValueOperations::GreaterThanEquals(*this, rhs);</span>
+<span class="lineNum">     260 </span><span class="lineCov">     328147 : bool Value::operator&gt;=(const Value &amp;rhs) const {</span>
+<span class="lineNum">     261 </span><span class="lineCov">     328147 :         return ValueOperations::GreaterThanEquals(*this, rhs);</span>
 <a name="262"><span class="lineNum">     262 </span>            : }</a>
 <span class="lineNum">     263 </span>            : 
 <span class="lineNum">     264 </span><span class="lineCov">       1130 : bool Value::operator==(const int64_t &amp;rhs) const {</span>
@@ -347,16 +347,16 @@
 <span class="lineNum">     285 </span><span class="lineCov">          1 :         return *this &gt;= Value::Numeric(type, rhs);</span>
 <a name="286"><span class="lineNum">     286 </span>            : }</a>
 <span class="lineNum">     287 </span>            : 
-<span class="lineNum">     288 </span><span class="lineCov">     839950 : template &lt;class DST, class OP&gt; DST Value::_cast(const Value &amp;v) {</span>
-<span class="lineNum">     289 </span><span class="lineCov">     839950 :         switch (v.type) {</span>
+<span class="lineNum">     288 </span><span class="lineCov">     839979 : template &lt;class DST, class OP&gt; DST Value::_cast(const Value &amp;v) {</span>
+<span class="lineNum">     289 </span><span class="lineCov">     839979 :         switch (v.type) {</span>
 <span class="lineNum">     290 </span><span class="lineNoCov">          0 :         case TypeId::BOOLEAN:</span>
 <span class="lineNum">     291 </span><span class="lineNoCov">          0 :                 return OP::template Operation&lt;int8_t, DST&gt;(v.value_.boolean);</span>
 <span class="lineNum">     292 </span><span class="lineCov">       7764 :         case TypeId::TINYINT:</span>
 <span class="lineNum">     293 </span><span class="lineCov">       7764 :                 return OP::template Operation&lt;int8_t, DST&gt;(v.value_.tinyint);</span>
 <span class="lineNum">     294 </span><span class="lineCov">         17 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">     295 </span><span class="lineCov">         17 :                 return OP::template Operation&lt;int16_t, DST&gt;(v.value_.smallint);</span>
-<span class="lineNum">     296 </span><span class="lineCov">     814499 :         case TypeId::INTEGER:</span>
-<span class="lineNum">     297 </span><span class="lineCov">     814499 :                 return OP::template Operation&lt;int32_t, DST&gt;(v.value_.integer);</span>
+<span class="lineNum">     296 </span><span class="lineCov">     814528 :         case TypeId::INTEGER:</span>
+<span class="lineNum">     297 </span><span class="lineCov">     814528 :                 return OP::template Operation&lt;int32_t, DST&gt;(v.value_.integer);</span>
 <span class="lineNum">     298 </span><span class="lineCov">       2263 :         case TypeId::BIGINT:</span>
 <span class="lineNum">     299 </span><span class="lineCov">       2263 :                 return OP::template Operation&lt;int64_t, DST&gt;(v.value_.bigint);</span>
 <span class="lineNum">     300 </span><span class="lineCov">          1 :         case TypeId::DECIMAL:</span>
@@ -477,16 +477,16 @@
 <span class="lineNum">     415 </span><span class="lineNoCov">          0 :                 new_value.value_.boolean = source.Read&lt;int8_t&gt;();</span>
 <span class="lineNum">     416 </span>            :                 break;
 <span class="lineNum">     417 </span>            :         case TypeId::TINYINT:
-<span class="lineNum">     418 </span><span class="lineCov">     814432 :                 new_value.value_.tinyint = source.Read&lt;int8_t&gt;();</span>
-<span class="lineNum">     419 </span><span class="lineCov">     814432 :                 break;</span>
+<span class="lineNum">     418 </span><span class="lineCov">     814461 :                 new_value.value_.tinyint = source.Read&lt;int8_t&gt;();</span>
+<span class="lineNum">     419 </span><span class="lineCov">     814461 :                 break;</span>
 <span class="lineNum">     420 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">     421 </span><span class="lineNoCov">          0 :                 new_value.value_.smallint = source.Read&lt;int16_t&gt;();</span>
 <span class="lineNum">     422 </span><span class="lineCov">         11 :                 break;</span>
 <span class="lineNum">     423 </span><span class="lineCov">         11 :         case TypeId::INTEGER:</span>
 <span class="lineNum">     424 </span><span class="lineCov">         12 :                 new_value.value_.integer = source.Read&lt;int32_t&gt;();</span>
 <span class="lineNum">     425 </span><span class="lineCov">         12 :                 break;</span>
-<span class="lineNum">     426 </span><span class="lineCov">     814132 :         case TypeId::BIGINT:</span>
-<span class="lineNum">     427 </span><span class="lineCov">     814132 :                 new_value.value_.bigint = source.Read&lt;int64_t&gt;();</span>
+<span class="lineNum">     426 </span><span class="lineCov">     814161 :         case TypeId::BIGINT:</span>
+<span class="lineNum">     427 </span><span class="lineCov">     814161 :                 new_value.value_.bigint = source.Read&lt;int64_t&gt;();</span>
 <span class="lineNum">     428 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     429 </span><span class="lineNoCov">          0 :         case TypeId::DECIMAL:</span>
 <span class="lineNum">     430 </span><span class="lineNoCov">          0 :                 new_value.value_.decimal = source.Read&lt;double&gt;();</span>

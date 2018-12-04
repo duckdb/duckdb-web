@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aee7bd9 - include/parser/statement/create_index_statement.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 20da63e - include/parser/statement/create_index_statement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aee7bd9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 20da63e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">11</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 13:49:13</td>
+            <td class="headerValue">2018-12-04 14:08:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -84,21 +84,21 @@
 <span class="lineNum">      22 </span>            : 
 <a name="23"><span class="lineNum">      23 </span>            : class CreateIndexStatement : public SQLStatement {</a>
 <span class="lineNum">      24 </span>            :   public:
-<span class="lineNum">      25 </span><span class="lineCov">          2 :         CreateIndexStatement()</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          2 :             : SQLStatement(StatementType::CREATE_INDEX),</span></a>
-<span class="lineNum">      27 </span><span class="lineCov">          2 :               info(make_unique&lt;CreateIndexInformation&gt;()){};</span>
-<span class="lineNum">      28 </span><span class="lineCov">          4 :         virtual ~CreateIndexStatement() {</span>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          4 :         }</span></a>
-<span class="lineNum">      30 </span><span class="lineCov">          2 : </span>
-<span class="lineNum">      31 </span><span class="lineCov">          2 :         virtual std::string ToString() const {</span>
-<a name="32"><span class="lineNum">      32 </span><span class="lineCov">          2 :                 return &quot;CREATE INDEX&quot;;</span></a>
-<span class="lineNum">      33 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">      25 </span><span class="lineCov">          4 :         CreateIndexStatement()</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          4 :             : SQLStatement(StatementType::CREATE_INDEX),</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">          4 :               info(make_unique&lt;CreateIndexInformation&gt;()){};</span>
+<span class="lineNum">      28 </span><span class="lineCov">          8 :         virtual ~CreateIndexStatement() {</span>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          8 :         }</span></a>
+<span class="lineNum">      30 </span><span class="lineCov">          4 : </span>
+<span class="lineNum">      31 </span><span class="lineCov">          4 :         virtual std::string ToString() const {</span>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">          4 :                 return &quot;CREATE INDEX&quot;;</span></a>
+<span class="lineNum">      33 </span><span class="lineCov">          4 :         }</span>
 <span class="lineNum">      34 </span>            :         virtual std::unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 return v-&gt;Visit(*this);</span>
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :         }</span>
 <span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span><span class="lineCov">          4 :         //! The table to create the index on</span>
-<span class="lineNum">      39 </span><span class="lineCov">          4 :         std::unique_ptr&lt;BaseTableRef&gt; table;</span>
+<span class="lineNum">      38 </span><span class="lineCov">          8 :         //! The table to create the index on</span>
+<span class="lineNum">      39 </span><span class="lineCov">          8 :         std::unique_ptr&lt;BaseTableRef&gt; table;</span>
 <span class="lineNum">      40 </span>            :         //! Set of expressions to index by
 <span class="lineNum">      41 </span>            :         std::vector&lt;std::unique_ptr&lt;Expression&gt;&gt; expressions;
 <span class="lineNum">      42 </span>            :         // Info for index creation

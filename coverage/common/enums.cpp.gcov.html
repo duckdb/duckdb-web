@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aee7bd9 - common/enums.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 20da63e - common/enums.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aee7bd9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 20da63e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">74</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 13:49:13</td>
+            <td class="headerValue">2018-12-04 14:08:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -69,32 +69,32 @@
 <span class="lineNum">       7 </span>            : 
 <a name="8"><span class="lineNum">       8 </span>            : namespace duckdb {</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">      75151 : ExpressionType StringToExpressionType(const string &amp;str) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">     150302 :         string upper_str = StringUtil::Upper(str);</span>
-<span class="lineNum">      12 </span><span class="lineCov">      75151 :         if (upper_str == &quot;INVALID&quot;) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">      75155 : ExpressionType StringToExpressionType(const string &amp;str) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">     150310 :         string upper_str = StringUtil::Upper(str);</span>
+<span class="lineNum">      12 </span><span class="lineCov">      75155 :         if (upper_str == &quot;INVALID&quot;) {</span>
 <span class="lineNum">      13 </span><span class="lineNoCov">          0 :                 return ExpressionType::INVALID;</span>
-<span class="lineNum">      14 </span><span class="lineCov">      75151 :         } else if (upper_str == &quot;OPERATOR_PLUS&quot; || upper_str == &quot;+&quot;) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      75155 :         } else if (upper_str == &quot;OPERATOR_PLUS&quot; || upper_str == &quot;+&quot;) {</span>
 <span class="lineNum">      15 </span><span class="lineCov">      27089 :                 return ExpressionType::OPERATOR_ADD;</span>
-<span class="lineNum">      16 </span><span class="lineCov">      48062 :         } else if (upper_str == &quot;OPERATOR_MINUS&quot; || upper_str == &quot;-&quot;) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">      48066 :         } else if (upper_str == &quot;OPERATOR_MINUS&quot; || upper_str == &quot;-&quot;) {</span>
 <span class="lineNum">      17 </span><span class="lineCov">       9337 :                 return ExpressionType::OPERATOR_SUBTRACT;</span>
-<span class="lineNum">      18 </span><span class="lineCov">      38725 :         } else if (upper_str == &quot;OPERATOR_MULTIPLY&quot; || upper_str == &quot;*&quot;) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">      38729 :         } else if (upper_str == &quot;OPERATOR_MULTIPLY&quot; || upper_str == &quot;*&quot;) {</span>
 <span class="lineNum">      19 </span><span class="lineCov">      12153 :                 return ExpressionType::OPERATOR_MULTIPLY;</span>
-<span class="lineNum">      20 </span><span class="lineCov">      26572 :         } else if (upper_str == &quot;OPERATOR_DIVIDE&quot; || upper_str == &quot;/&quot;) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      26576 :         } else if (upper_str == &quot;OPERATOR_DIVIDE&quot; || upper_str == &quot;/&quot;) {</span>
 <span class="lineNum">      21 </span><span class="lineCov">       1101 :                 return ExpressionType::OPERATOR_DIVIDE;</span>
-<span class="lineNum">      22 </span><span class="lineCov">      25471 :         } else if (upper_str == &quot;OPERATOR_CONCAT&quot; || upper_str == &quot;||&quot;) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      25475 :         } else if (upper_str == &quot;OPERATOR_CONCAT&quot; || upper_str == &quot;||&quot;) {</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_CONCAT;</span>
-<span class="lineNum">      24 </span><span class="lineCov">      25471 :         } else if (upper_str == &quot;OPERATOR_MOD&quot; || upper_str == &quot;%&quot;) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">      25475 :         } else if (upper_str == &quot;OPERATOR_MOD&quot; || upper_str == &quot;%&quot;) {</span>
 <span class="lineNum">      25 </span><span class="lineCov">          8 :                 return ExpressionType::OPERATOR_MOD;</span>
-<span class="lineNum">      26 </span><span class="lineCov">      25463 :         } else if (upper_str == &quot;OPERATOR_CAST&quot;) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">      25467 :         } else if (upper_str == &quot;OPERATOR_CAST&quot;) {</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_CAST;</span>
-<span class="lineNum">      28 </span><span class="lineCov">      25463 :         } else if (upper_str == &quot;OPERATOR_NOT&quot;) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">      25467 :         } else if (upper_str == &quot;OPERATOR_NOT&quot;) {</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_NOT;</span>
-<span class="lineNum">      30 </span><span class="lineCov">      25463 :         } else if (upper_str == &quot;OPERATOR_IS_NULL&quot;) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">      25467 :         } else if (upper_str == &quot;OPERATOR_IS_NULL&quot;) {</span>
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_IS_NULL;</span>
-<span class="lineNum">      32 </span><span class="lineCov">      25463 :         } else if (upper_str == &quot;OPERATOR_EXISTS&quot;) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">      25467 :         } else if (upper_str == &quot;OPERATOR_EXISTS&quot;) {</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_EXISTS;</span>
-<span class="lineNum">      34 </span><span class="lineCov">      25463 :         } else if (upper_str == &quot;COMPARE_EQUAL&quot; || upper_str == &quot;=&quot;) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">       3112 :                 return ExpressionType::COMPARE_EQUAL;</span>
+<span class="lineNum">      34 </span><span class="lineCov">      25467 :         } else if (upper_str == &quot;COMPARE_EQUAL&quot; || upper_str == &quot;=&quot;) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       3116 :                 return ExpressionType::COMPARE_EQUAL;</span>
 <span class="lineNum">      36 </span><span class="lineCov">      44702 :         } else if (upper_str == &quot;COMPARE_NOTEQUAL&quot; || upper_str == &quot;!=&quot; ||</span>
 <span class="lineNum">      37 </span><span class="lineCov">      22351 :                    upper_str == &quot;&lt;&gt;&quot;) {</span>
 <span class="lineNum">      38 </span><span class="lineCov">        125 :                 return ExpressionType::COMPARE_NOTEQUAL;</span>
@@ -505,12 +505,12 @@
 <span class="lineNum">     443 </span><span class="lineNoCov">          0 :                                   upper.c_str());</span>
 <a name="444"><span class="lineNum">     444 </span>            : }</a>
 <span class="lineNum">     445 </span>            : 
-<span class="lineNum">     446 </span><span class="lineCov">          2 : IndexType StringToIndexType(const std::string &amp;str) {</span>
-<span class="lineNum">     447 </span><span class="lineCov">          4 :         std::string upper_str = StringUtil::Upper(str);</span>
-<span class="lineNum">     448 </span><span class="lineCov">          2 :         if (upper_str == &quot;INVALID&quot;) {</span>
+<span class="lineNum">     446 </span><span class="lineCov">          4 : IndexType StringToIndexType(const std::string &amp;str) {</span>
+<span class="lineNum">     447 </span><span class="lineCov">          8 :         std::string upper_str = StringUtil::Upper(str);</span>
+<span class="lineNum">     448 </span><span class="lineCov">          4 :         if (upper_str == &quot;INVALID&quot;) {</span>
 <span class="lineNum">     449 </span><span class="lineNoCov">          0 :                 return IndexType::INVALID;</span>
-<span class="lineNum">     450 </span><span class="lineCov">          2 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
-<span class="lineNum">     451 </span><span class="lineCov">          2 :                 return IndexType::BTREE;</span>
+<span class="lineNum">     450 </span><span class="lineCov">          4 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
+<span class="lineNum">     451 </span><span class="lineCov">          4 :                 return IndexType::BTREE;</span>
 <span class="lineNum">     452 </span>            :         } else {
 <span class="lineNum">     453 </span><span class="lineNoCov">          0 :                 throw ConversionException(StringUtil::Format(</span>
 <span class="lineNum">     454 </span><span class="lineNoCov">          0 :                     &quot;No IndexType conversion from string '%s'&quot;, upper_str.c_str()));</span>

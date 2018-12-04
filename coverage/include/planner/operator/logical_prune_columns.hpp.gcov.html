@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aee7bd9 - include/planner/operator/logical_prune_columns.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 20da63e - include/planner/operator/logical_prune_columns.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aee7bd9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 20da63e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 13:49:13</td>
+            <td class="headerValue">2018-12-04 14:08:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -80,14 +80,14 @@
 <span class="lineNum">      18 </span>            : //! children
 <a name="19"><span class="lineNum">      19 </span>            : class LogicalPruneColumns : public LogicalOperator {</a>
 <span class="lineNum">      20 </span>            :   public:
-<span class="lineNum">      21 </span><span class="lineCov">       6944 :         LogicalPruneColumns(size_t column_limit)</span>
-<span class="lineNum">      22 </span><span class="lineCov">       6944 :             : LogicalOperator(LogicalOperatorType::PRUNE_COLUMNS),</span>
-<span class="lineNum">      23 </span><span class="lineCov">       6944 :               column_limit(column_limit) {</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       6944 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">       6948 :         LogicalPruneColumns(size_t column_limit)</span>
+<span class="lineNum">      22 </span><span class="lineCov">       6948 :             : LogicalOperator(LogicalOperatorType::PRUNE_COLUMNS),</span>
+<span class="lineNum">      23 </span><span class="lineCov">       6948 :               column_limit(column_limit) {</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       6948 :         }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">      13882 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      27 </span><span class="lineCov">      13882 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      28 </span><span class="lineCov">      13882 :         }</span>
+<span class="lineNum">      26 </span><span class="lineCov">      13890 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      13890 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      28 </span><span class="lineCov">      13890 :         }</span>
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :         size_t column_limit;
 <span class="lineNum">      31 </span>            : };

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aee7bd9 - parser/transform/tableref/transform_base_tableref.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 20da63e - parser/transform/tableref/transform_base_tableref.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aee7bd9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 20da63e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-04 13:49:13</td>
+            <td class="headerValue">2018-12-04 14:08:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -68,15 +68,15 @@
 <span class="lineNum">       6 </span>            : using namespace postgres;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">      44125 : unique_ptr&lt;TableRef&gt; Transformer::TransformRangeVar(RangeVar *root) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">      88250 :         auto result = make_unique&lt;BaseTableRef&gt;();</span>
+<span class="lineNum">       9 </span><span class="lineCov">      44134 : unique_ptr&lt;TableRef&gt; Transformer::TransformRangeVar(RangeVar *root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">      88268 :         auto result = make_unique&lt;BaseTableRef&gt;();</span>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">      44125 :         result-&gt;alias = TransformAlias(root-&gt;alias);</span>
-<span class="lineNum">      13 </span><span class="lineCov">      44125 :         if (root-&gt;relname)</span>
-<span class="lineNum">      14 </span><span class="lineCov">      44125 :                 result-&gt;table_name = root-&gt;relname;</span>
-<span class="lineNum">      15 </span><span class="lineCov">      44125 :         if (root-&gt;schemaname)</span>
+<span class="lineNum">      12 </span><span class="lineCov">      44134 :         result-&gt;alias = TransformAlias(root-&gt;alias);</span>
+<span class="lineNum">      13 </span><span class="lineCov">      44134 :         if (root-&gt;relname)</span>
+<span class="lineNum">      14 </span><span class="lineCov">      44134 :                 result-&gt;table_name = root-&gt;relname;</span>
+<span class="lineNum">      15 </span><span class="lineCov">      44134 :         if (root-&gt;schemaname)</span>
 <span class="lineNum">      16 </span><span class="lineCov">          7 :                 result-&gt;schema_name = root-&gt;schemaname;</span>
-<span class="lineNum">      17 </span><span class="lineCov">      88250 :         return move(result);</span>
+<span class="lineNum">      17 </span><span class="lineCov">      88268 :         return move(result);</span>
 <span class="lineNum">      18 </span>            : }
 </pre>
       </td>
