@@ -1,0 +1,250 @@
+<<Query Profiling Information>>
+select  ps_partkey,  sum(ps_supplycost * ps_availqty) as value from  partsupp,  supplier,  nation where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY' group by  ps_partkey  having  sum(ps_supplycost * ps_availqty) >  (  select  sum(ps_supplycost * ps_availqty) * 0.0001000000  from  partsupp,  supplier,  nation  where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY'  ) order by  value desc; 
+<<Timing>>
+Total Time: 0.133517s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|PIECEWISE_MERGE_JO|
+|       INNER      |
+|       #1>#0      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |   HASH_GROUP_BY  |
+|      (0.01s)     |                                        |      (0.00s)     |
+|       29818      |                                        |         1        |
+--------------------                                        --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |
+|       INNER      |                                        |       INNER      |
+|    s_nationkey   |                                        |    s_nationkey   |
+|   =n_nationkey   |                                        |   =n_nationkey   |
+|      (0.03s)     |                                        |      (0.03s)     |
+|       31680      |                                        |       31680      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | n_name = GERMANY ||       INNER      |                    | n_name = GERMANY |
+|    ps_suppkey    |                    |                  ||    ps_suppkey    |                    |                  |
+|    =s_suppkey    |                    |                  ||    =s_suppkey    |                    |                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.03s)     |                    |      (0.00s)     |
+|      800000      |                    |         1        ||      800000      |                    |         1        |
+--------------------                    ----------------------------------------                    --------------------
+------------------------------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|     partsupp     ||     supplier     ||      nation      ||     partsupp     ||     supplier     ||      nation      |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|      800000      ||       10000      ||        25        ||      800000      ||       10000      ||        25        |
+------------------------------------------------------------------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  ps_partkey,  sum(ps_supplycost * ps_availqty) as value from  partsupp,  supplier,  nation where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY' group by  ps_partkey  having  sum(ps_supplycost * ps_availqty) >  (  select  sum(ps_supplycost * ps_availqty) * 0.0001000000  from  partsupp,  supplier,  nation  where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY'  ) order by  value desc; 
+<<Timing>>
+Total Time: 0.134301s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|PIECEWISE_MERGE_JO|
+|       INNER      |
+|       #1>#0      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |   HASH_GROUP_BY  |
+|      (0.01s)     |                                        |      (0.00s)     |
+|       29818      |                                        |         1        |
+--------------------                                        --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |
+|       INNER      |                                        |       INNER      |
+|    s_nationkey   |                                        |    s_nationkey   |
+|   =n_nationkey   |                                        |   =n_nationkey   |
+|      (0.03s)     |                                        |      (0.03s)     |
+|       31680      |                                        |       31680      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | n_name = GERMANY ||       INNER      |                    | n_name = GERMANY |
+|    ps_suppkey    |                    |                  ||    ps_suppkey    |                    |                  |
+|    =s_suppkey    |                    |                  ||    =s_suppkey    |                    |                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.03s)     |                    |      (0.00s)     |
+|      800000      |                    |         1        ||      800000      |                    |         1        |
+--------------------                    ----------------------------------------                    --------------------
+------------------------------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|     partsupp     ||     supplier     ||      nation      ||     partsupp     ||     supplier     ||      nation      |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|      800000      ||       10000      ||        25        ||      800000      ||       10000      ||        25        |
+------------------------------------------------------------------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  ps_partkey,  sum(ps_supplycost * ps_availqty) as value from  partsupp,  supplier,  nation where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY' group by  ps_partkey  having  sum(ps_supplycost * ps_availqty) >  (  select  sum(ps_supplycost * ps_availqty) * 0.0001000000  from  partsupp,  supplier,  nation  where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY'  ) order by  value desc; 
+<<Timing>>
+Total Time: 0.133714s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|PIECEWISE_MERGE_JO|
+|       INNER      |
+|       #1>#0      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |   HASH_GROUP_BY  |
+|      (0.01s)     |                                        |      (0.00s)     |
+|       29818      |                                        |         1        |
+--------------------                                        --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |
+|       INNER      |                                        |       INNER      |
+|    s_nationkey   |                                        |    s_nationkey   |
+|   =n_nationkey   |                                        |   =n_nationkey   |
+|      (0.03s)     |                                        |      (0.03s)     |
+|       31680      |                                        |       31680      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | n_name = GERMANY ||       INNER      |                    | n_name = GERMANY |
+|    ps_suppkey    |                    |                  ||    ps_suppkey    |                    |                  |
+|    =s_suppkey    |                    |                  ||    =s_suppkey    |                    |                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.03s)     |                    |      (0.00s)     |
+|      800000      |                    |         1        ||      800000      |                    |         1        |
+--------------------                    ----------------------------------------                    --------------------
+------------------------------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|     partsupp     ||     supplier     ||      nation      ||     partsupp     ||     supplier     ||      nation      |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|      800000      ||       10000      ||        25        ||      800000      ||       10000      ||        25        |
+------------------------------------------------------------------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  ps_partkey,  sum(ps_supplycost * ps_availqty) as value from  partsupp,  supplier,  nation where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY' group by  ps_partkey  having  sum(ps_supplycost * ps_availqty) >  (  select  sum(ps_supplycost * ps_availqty) * 0.0001000000  from  partsupp,  supplier,  nation  where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY'  ) order by  value desc; 
+<<Timing>>
+Total Time: 0.132731s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|PIECEWISE_MERGE_JO|
+|       INNER      |
+|       #1>#0      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |   HASH_GROUP_BY  |
+|      (0.01s)     |                                        |      (0.00s)     |
+|       29818      |                                        |         1        |
+--------------------                                        --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |
+|       INNER      |                                        |       INNER      |
+|    s_nationkey   |                                        |    s_nationkey   |
+|   =n_nationkey   |                                        |   =n_nationkey   |
+|      (0.03s)     |                                        |      (0.03s)     |
+|       31680      |                                        |       31680      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | n_name = GERMANY ||       INNER      |                    | n_name = GERMANY |
+|    ps_suppkey    |                    |                  ||    ps_suppkey    |                    |                  |
+|    =s_suppkey    |                    |                  ||    =s_suppkey    |                    |                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.02s)     |                    |      (0.00s)     |
+|      800000      |                    |         1        ||      800000      |                    |         1        |
+--------------------                    ----------------------------------------                    --------------------
+------------------------------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|     partsupp     ||     supplier     ||      nation      ||     partsupp     ||     supplier     ||      nation      |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|      800000      ||       10000      ||        25        ||      800000      ||       10000      ||        25        |
+------------------------------------------------------------------------------------------------------------------------
+
+<<Query Profiling Information>>
+select  ps_partkey,  sum(ps_supplycost * ps_availqty) as value from  partsupp,  supplier,  nation where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY' group by  ps_partkey  having  sum(ps_supplycost * ps_availqty) >  (  select  sum(ps_supplycost * ps_availqty) * 0.0001000000  from  partsupp,  supplier,  nation  where  ps_suppkey = s_suppkey  and s_nationkey = n_nationkey  and n_name = 'GERMANY'  ) order by  value desc; 
+<<Timing>>
+Total Time: 0.133134s
+<<Operator Tree>>
+--------------------
+|       PRUNE      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------
+|PIECEWISE_MERGE_JO|
+|       INNER      |
+|       #1>#0      |
+|      (0.00s)     |
+|       1048       |
+--------------------
+--------------------                                        --------------------
+|   HASH_GROUP_BY  |                                        |   HASH_GROUP_BY  |
+|      (0.01s)     |                                        |      (0.00s)     |
+|       29818      |                                        |         1        |
+--------------------                                        --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     HASH_JOIN    |
+|       INNER      |                                        |       INNER      |
+|    s_nationkey   |                                        |    s_nationkey   |
+|   =n_nationkey   |                                        |   =n_nationkey   |
+|      (0.03s)     |                                        |      (0.03s)     |
+|       31680      |                                        |       31680      |
+--------------------                                        --------------------
+--------------------                    ----------------------------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | n_name = GERMANY ||       INNER      |                    | n_name = GERMANY |
+|    ps_suppkey    |                    |                  ||    ps_suppkey    |                    |                  |
+|    =s_suppkey    |                    |                  ||    =s_suppkey    |                    |                  |
+|      (0.02s)     |                    |      (0.00s)     ||      (0.03s)     |                    |      (0.00s)     |
+|      800000      |                    |         1        ||      800000      |                    |         1        |
+--------------------                    ----------------------------------------                    --------------------
+------------------------------------------------------------------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|     partsupp     ||     supplier     ||      nation      ||     partsupp     ||     supplier     ||      nation      |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|      800000      ||       10000      ||        25        ||      800000      ||       10000      ||        25        |
+------------------------------------------------------------------------------------------------------------------------
+

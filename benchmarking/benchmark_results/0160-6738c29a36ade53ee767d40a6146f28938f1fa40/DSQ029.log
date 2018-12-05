@@ -1,0 +1,355 @@
+<<Query Profiling Information>>
+SELECT i_item_id, avg(cs_quantity) agg1, avg(cs_list_price) agg2, avg(cs_coupon_amt) agg3, avg(cs_sales_price) agg4 FROM catalog_sales, customer_demographics, date_dim, item, promotion WHERE cs_sold_date_sk = d_date_sk AND cs_item_sk = i_item_sk AND cs_bill_cdemo_sk = cd_demo_sk AND cs_promo_sk = p_promo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND (p_channel_email = 'N' OR p_channel_event = 'N') AND d_year = 2000 GROUP BY i_item_id ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 0.000302s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    cs_promo_sk   |
+|    =p_promo_sk   |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            | OR((p_channel_em |
+|    cs_item_sk    |                                                            |     ail = N)     |
+|    =i_item_sk    |                                                            | , (p_channel_eve |
+|                  |                                                            |      nt = N      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||     promotion    |
+|  cs_sold_date_sk |                                        |                  ||                  |
+|    =d_date_sk    |                                        |                  ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|         0        |                                        |         0        ||        300       |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   d_year = 2000  |
+| cs_bill_cdemo_sk |                    |                  |
+|    =cd_demo_sk   |                    |                  |
+|      (0.00s)     |                    |      (0.00s)     |
+|         0        |                    |         0        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         0        ||         0        ||         0        |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    | customer_demogra |
+                    |       phics      |
+                    |      (0.00s)     |
+                    |         0        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id, avg(cs_quantity) agg1, avg(cs_list_price) agg2, avg(cs_coupon_amt) agg3, avg(cs_sales_price) agg4 FROM catalog_sales, customer_demographics, date_dim, item, promotion WHERE cs_sold_date_sk = d_date_sk AND cs_item_sk = i_item_sk AND cs_bill_cdemo_sk = cd_demo_sk AND cs_promo_sk = p_promo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND (p_channel_email = 'N' OR p_channel_event = 'N') AND d_year = 2000 GROUP BY i_item_id ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 0.000292s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    cs_promo_sk   |
+|    =p_promo_sk   |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            | OR((p_channel_em |
+|    cs_item_sk    |                                                            |     ail = N)     |
+|    =i_item_sk    |                                                            | , (p_channel_eve |
+|                  |                                                            |      nt = N      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||     promotion    |
+|  cs_sold_date_sk |                                        |                  ||                  |
+|    =d_date_sk    |                                        |                  ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|         0        |                                        |         0        ||        300       |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   d_year = 2000  |
+| cs_bill_cdemo_sk |                    |                  |
+|    =cd_demo_sk   |                    |                  |
+|      (0.00s)     |                    |      (0.00s)     |
+|         0        |                    |         0        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         0        ||         0        ||         0        |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    | customer_demogra |
+                    |       phics      |
+                    |      (0.00s)     |
+                    |         0        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id, avg(cs_quantity) agg1, avg(cs_list_price) agg2, avg(cs_coupon_amt) agg3, avg(cs_sales_price) agg4 FROM catalog_sales, customer_demographics, date_dim, item, promotion WHERE cs_sold_date_sk = d_date_sk AND cs_item_sk = i_item_sk AND cs_bill_cdemo_sk = cd_demo_sk AND cs_promo_sk = p_promo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND (p_channel_email = 'N' OR p_channel_event = 'N') AND d_year = 2000 GROUP BY i_item_id ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 0.000484s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    cs_promo_sk   |
+|    =p_promo_sk   |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            | OR((p_channel_em |
+|    cs_item_sk    |                                                            |     ail = N)     |
+|    =i_item_sk    |                                                            | , (p_channel_eve |
+|                  |                                                            |      nt = N      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||     promotion    |
+|  cs_sold_date_sk |                                        |                  ||                  |
+|    =d_date_sk    |                                        |                  ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|         0        |                                        |         0        ||        300       |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   d_year = 2000  |
+| cs_bill_cdemo_sk |                    |                  |
+|    =cd_demo_sk   |                    |                  |
+|      (0.00s)     |                    |      (0.00s)     |
+|         0        |                    |         0        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         0        ||         0        ||         0        |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    | customer_demogra |
+                    |       phics      |
+                    |      (0.00s)     |
+                    |         0        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id, avg(cs_quantity) agg1, avg(cs_list_price) agg2, avg(cs_coupon_amt) agg3, avg(cs_sales_price) agg4 FROM catalog_sales, customer_demographics, date_dim, item, promotion WHERE cs_sold_date_sk = d_date_sk AND cs_item_sk = i_item_sk AND cs_bill_cdemo_sk = cd_demo_sk AND cs_promo_sk = p_promo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND (p_channel_email = 'N' OR p_channel_event = 'N') AND d_year = 2000 GROUP BY i_item_id ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 0.000521s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    cs_promo_sk   |
+|    =p_promo_sk   |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            | OR((p_channel_em |
+|    cs_item_sk    |                                                            |     ail = N)     |
+|    =i_item_sk    |                                                            | , (p_channel_eve |
+|                  |                                                            |      nt = N      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||     promotion    |
+|  cs_sold_date_sk |                                        |                  ||                  |
+|    =d_date_sk    |                                        |                  ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|         0        |                                        |         0        ||        300       |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   d_year = 2000  |
+| cs_bill_cdemo_sk |                    |                  |
+|    =cd_demo_sk   |                    |                  |
+|      (0.00s)     |                    |      (0.00s)     |
+|         0        |                    |         0        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         0        ||         0        ||         0        |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    | customer_demogra |
+                    |       phics      |
+                    |      (0.00s)     |
+                    |         0        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id, avg(cs_quantity) agg1, avg(cs_list_price) agg2, avg(cs_coupon_amt) agg3, avg(cs_sales_price) agg4 FROM catalog_sales, customer_demographics, date_dim, item, promotion WHERE cs_sold_date_sk = d_date_sk AND cs_item_sk = i_item_sk AND cs_bill_cdemo_sk = cd_demo_sk AND cs_promo_sk = p_promo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND (p_channel_email = 'N' OR p_channel_event = 'N') AND d_year = 2000 GROUP BY i_item_id ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 0.000649s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    cs_promo_sk   |
+|    =p_promo_sk   |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            | OR((p_channel_em |
+|    cs_item_sk    |                                                            |     ail = N)     |
+|    =i_item_sk    |                                                            | , (p_channel_eve |
+|                  |                                                            |      nt = N      |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       ||     promotion    |
+|  cs_sold_date_sk |                                        |                  ||                  |
+|    =d_date_sk    |                                        |                  ||                  |
+|      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|         0        |                                        |         0        ||        300       |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   d_year = 2000  |
+| cs_bill_cdemo_sk |                    |                  |
+|    =cd_demo_sk   |                    |                  |
+|      (0.00s)     |                    |      (0.00s)     |
+|         0        |                    |         0        |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|   catalog_sales  || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+|         0        ||         0        ||         0        |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    | customer_demogra |
+                    |       phics      |
+                    |      (0.00s)     |
+                    |         0        |
+                    --------------------
+
