@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 030c93af - optimizer/optimizer.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 016684ec - optimizer/optimizer.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
+            <td class="headerValue">DuckDB Code Coverage Report 016684ec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">15</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 13:16:06</td>
+            <td class="headerValue">2018-12-05 16:05:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -69,28 +69,28 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">    3128555 : Optimizer::Optimizer(BindContext &amp;context) : rewriter(context) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    3128645 :         rewriter.rules.push_back(make_unique&lt;ConstantCastRule&gt;());</span>
-<span class="lineNum">      12 </span><span class="lineCov">    3130732 :         rewriter.rules.push_back(make_unique&lt;ConstantFoldingRule&gt;());</span>
-<span class="lineNum">      13 </span><span class="lineCov">    3131202 :         rewriter.rules.push_back(make_unique&lt;DistributivityRule&gt;());</span>
-<span class="lineNum">      14 </span><span class="lineCov">    3129369 :         rewriter.rules.push_back(make_unique&lt;SplitFilterConjunctionRule&gt;());</span>
-<span class="lineNum">      15 </span><span class="lineCov">    3129832 :         rewriter.rules.push_back(make_unique&lt;InClauseRewriteRule&gt;());</span>
-<span class="lineNum">      16 </span><span class="lineCov">    3127911 :         rewriter.rules.push_back(make_unique&lt;ExistsRewriteRule&gt;());</span>
-<span class="lineNum">      17 </span><span class="lineCov">    3129585 :         rewriter.rules.push_back(make_unique&lt;SubqueryRewritingRule&gt;());</span>
-<span class="lineNum">      18 </span><span class="lineCov">    3128423 :         rewriter.rules.push_back(make_unique&lt;CrossProductRewrite&gt;());</span>
-<span class="lineNum">      19 </span><span class="lineCov">    3128113 :         rewriter.rules.push_back(make_unique&lt;SelectionPushdownRule&gt;());</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3128343 : Optimizer::Optimizer(BindContext &amp;context) : rewriter(context) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3128409 :         rewriter.rules.push_back(make_unique&lt;ConstantCastRule&gt;());</span>
+<span class="lineNum">      12 </span><span class="lineCov">    3128309 :         rewriter.rules.push_back(make_unique&lt;ConstantFoldingRule&gt;());</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3129704 :         rewriter.rules.push_back(make_unique&lt;DistributivityRule&gt;());</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3130335 :         rewriter.rules.push_back(make_unique&lt;SplitFilterConjunctionRule&gt;());</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3128049 :         rewriter.rules.push_back(make_unique&lt;InClauseRewriteRule&gt;());</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3128745 :         rewriter.rules.push_back(make_unique&lt;ExistsRewriteRule&gt;());</span>
+<span class="lineNum">      17 </span><span class="lineCov">    3127961 :         rewriter.rules.push_back(make_unique&lt;SubqueryRewritingRule&gt;());</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3128554 :         rewriter.rules.push_back(make_unique&lt;CrossProductRewrite&gt;());</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3128022 :         rewriter.rules.push_back(make_unique&lt;SelectionPushdownRule&gt;());</span>
 <span class="lineNum">      20 </span>            : 
 <span class="lineNum">      21 </span>            : #ifdef DEBUG
-<span class="lineNum">      22 </span><span class="lineCov">   31299448 :         for (auto &amp;rule : rewriter.rules) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">   31297886 :         for (auto &amp;rule : rewriter.rules) {</span>
 <span class="lineNum">      23 </span>            :                 // root not defined in rule
-<span class="lineNum">      24 </span><span class="lineCov">   28170486 :                 assert(rule-&gt;root);</span>
+<span class="lineNum">      24 </span><span class="lineCov">   28168618 :                 assert(rule-&gt;root);</span>
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span>            : #endif
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">    3130619 : }</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">    3131547 : }</span></a>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">    3127682 : unique_ptr&lt;LogicalOperator&gt; Optimizer::Optimize(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">    3128362 : unique_ptr&lt;LogicalOperator&gt; Optimizer::Optimize(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
 <span class="lineNum">      30 </span>            :         // then we optimize the logical tree
-<span class="lineNum">      31 </span><span class="lineCov">    3127682 :         return rewriter.ApplyRules(move(plan));</span>
+<span class="lineNum">      31 </span><span class="lineCov">    3128362 :         return rewriter.ApplyRules(move(plan));</span>
 <span class="lineNum">      32 </span>            : }
 </pre>
       </td>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 030c93af - include/common/helper.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 016684ec - include/common/helper.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
+            <td class="headerValue">DuckDB Code Coverage Report 016684ec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">61</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 13:16:06</td>
+            <td class="headerValue">2018-12-05 16:05:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">107</td>
@@ -77,19 +77,19 @@
 <span class="lineNum">      15 </span>            : 
 <a name="16"><span class="lineNum">      16 </span>            : namespace duckdb {</a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">  126017009 : template &lt;typename T, typename... Args&gt; unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">  126017011 :         return unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      18 </span><span class="lineCov">  126041865 : template &lt;typename T, typename... Args&gt; unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">  126041867 :         return unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
 <a name="20"><span class="lineNum">      20 </span>            : }</a>
 <span class="lineNum">      21 </span><span class="lineCov">        534 : </span>
-<span class="lineNum">      22 </span><span class="lineCov">   43808097 : template &lt;typename S, typename T, typename... Args&gt; unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">   43807563 :         return unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      22 </span><span class="lineCov">   43809031 : template &lt;typename S, typename T, typename... Args&gt; unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">   43808497 :         return unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
 <span class="lineNum">      24 </span><span class="lineCov">       2718 : }</span>
 <span class="lineNum">      25 </span><span class="lineCov">       2718 : </span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 : template &lt;class T&gt; inline bool in_bounds(int64_t value) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">     574615 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp; value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
-<span class="lineNum">      28 </span><span class="lineCov">    6832255 : }</span>
-<span class="lineNum">      29 </span><span class="lineCov">    6257640 : </span>
-<span class="lineNum">      30 </span><span class="lineCov">    3859033 : } // namespace duckdb</span>
+<span class="lineNum">      27 </span><span class="lineCov">     574678 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp; value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
+<span class="lineNum">      28 </span><span class="lineCov">    6832772 : }</span>
+<span class="lineNum">      29 </span><span class="lineCov">    6258094 : </span>
+<span class="lineNum">      30 </span><span class="lineCov">    3859617 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>

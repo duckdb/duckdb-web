@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 030c93af - planner/bindcontext.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 016684ec - planner/bindcontext.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
+            <td class="headerValue">DuckDB Code Coverage Report 016684ec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">163</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 13:16:06</td>
+            <td class="headerValue">2018-12-05 16:05:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
@@ -98,15 +98,15 @@
 <span class="lineNum">      36 </span>            :         }
 <a name="37"><span class="lineNum">      37 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">    3865094 : static bool HasMatchingBinding(Binding *binding, const string &amp;column_name) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">    3865094 :         switch (binding-&gt;type) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">    3864999 : static bool HasMatchingBinding(Binding *binding, const string &amp;column_name) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">    3864999 :         switch (binding-&gt;type) {</span>
 <span class="lineNum">      41 </span><span class="lineCov">          9 :         case BindingType::DUMMY:</span>
 <span class="lineNum">      42 </span>            :                 // always bind to dummy table
 <span class="lineNum">      43 </span><span class="lineCov">          9 :                 return true;</span>
-<span class="lineNum">      44 </span><span class="lineCov">    3865569 :         case BindingType::TABLE: {</span>
-<span class="lineNum">      45 </span><span class="lineCov">    3865569 :                 auto table_binding = (TableBinding *)binding;</span>
-<span class="lineNum">      46 </span><span class="lineCov">    3865569 :                 auto table = table_binding-&gt;table;</span>
-<span class="lineNum">      47 </span><span class="lineCov">    3865569 :                 return table-&gt;ColumnExists(column_name);</span>
+<span class="lineNum">      44 </span><span class="lineCov">    3865502 :         case BindingType::TABLE: {</span>
+<span class="lineNum">      45 </span><span class="lineCov">    3865502 :                 auto table_binding = (TableBinding *)binding;</span>
+<span class="lineNum">      46 </span><span class="lineCov">    3865502 :                 auto table = table_binding-&gt;table;</span>
+<span class="lineNum">      47 </span><span class="lineCov">    3865502 :                 return table-&gt;ColumnExists(column_name);</span>
 <span class="lineNum">      48 </span>            :         }
 <span class="lineNum">      49 </span><span class="lineCov">       2237 :         case BindingType::SUBQUERY: {</span>
 <span class="lineNum">      50 </span><span class="lineCov">       2237 :                 auto subquery = (SubqueryBinding *)binding;</span>
@@ -122,36 +122,36 @@
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 :         return false;</span>
 <a name="61"><span class="lineNum">      61 </span>            : }</a>
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">    3777603 : string BindContext::GetMatchingBinding(const string &amp;column_name) {</span>
-<span class="lineNum">      64 </span><span class="lineCov">    7556234 :         string result;</span>
-<span class="lineNum">      65 </span><span class="lineCov">    7644744 :         for (auto &amp;kv : bindings) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">    3864979 :                 auto binding = kv.second.get();</span>
-<span class="lineNum">      67 </span><span class="lineCov">    3868323 :                 if (HasMatchingBinding(binding, column_name)) {</span>
-<span class="lineNum">      68 </span><span class="lineCov">    3779508 :                         if (!result.empty()) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">    3777785 : string BindContext::GetMatchingBinding(const string &amp;column_name) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">    7556050 :         string result;</span>
+<span class="lineNum">      65 </span><span class="lineCov">    7645319 :         for (auto &amp;kv : bindings) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">    3864479 :                 auto binding = kv.second.get();</span>
+<span class="lineNum">      67 </span><span class="lineCov">    3868225 :                 if (HasMatchingBinding(binding, column_name)) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">    3779024 :                         if (!result.empty()) {</span>
 <span class="lineNum">      69 </span>            :                                 throw BinderException(&quot;Ambiguous reference to column name \&quot;%s\&quot; (use: \&quot;%s.%s\&quot; &quot;
 <span class="lineNum">      70 </span>            :                                                       &quot;or \&quot;%s.%s\&quot;)&quot;,
 <span class="lineNum">      71 </span>            :                                                       column_name.c_str(), result.c_str(), column_name.c_str(), kv.first.c_str(),
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :                                                       column_name.c_str());</span>
 <span class="lineNum">      73 </span>            :                         }
-<span class="lineNum">      74 </span><span class="lineCov">    3779631 :                         result = kv.first;</span>
+<span class="lineNum">      74 </span><span class="lineCov">    3779238 :                         result = kv.first;</span>
 <span class="lineNum">      75 </span>            :                 }
 <span class="lineNum">      76 </span>            :         }
 <span class="lineNum">      77 </span>            : 
-<span class="lineNum">      78 </span><span class="lineCov">    3778603 :         if (result.empty() &amp;&amp; expression_alias_map.find(column_name) != expression_alias_map.end()) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">    3778230 :         if (result.empty() &amp;&amp; expression_alias_map.find(column_name) != expression_alias_map.end()) {</span>
 <span class="lineNum">      79 </span><span class="lineCov">         42 :                 return result; // empty result, will be bound to alias</span>
 <span class="lineNum">      80 </span>            :         }
 <span class="lineNum">      81 </span>            : 
-<span class="lineNum">      82 </span><span class="lineCov">    3778006 :         if (result.empty()) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">    3777963 :         if (result.empty()) {</span>
 <span class="lineNum">      83 </span><span class="lineCov">         15 :                 if (parent) {</span>
 <span class="lineNum">      84 </span><span class="lineCov">          8 :                         return parent-&gt;GetMatchingBinding(column_name);</span>
 <span class="lineNum">      85 </span>            :                 }
 <span class="lineNum">      86 </span><span class="lineCov">          7 :                 throw BinderException(&quot;Referenced column \&quot;%s\&quot; not found in FROM clause!&quot;, column_name.c_str());</span>
 <span class="lineNum">      87 </span>            :         }
-<span class="lineNum">      88 </span><span class="lineCov">    3778963 :         return result;</span>
+<span class="lineNum">      88 </span><span class="lineCov">    3778664 :         return result;</span>
 <a name="89"><span class="lineNum">      89 </span>            : }</a>
 <span class="lineNum">      90 </span>            : 
-<span class="lineNum">      91 </span><span class="lineCov">    4967506 : void BindContext::BindColumn(ColumnRefExpression &amp;expr, size_t depth) {</span>
-<span class="lineNum">      92 </span><span class="lineCov">    4967506 :         if (expr.table_name.empty()) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">    4969098 : void BindContext::BindColumn(ColumnRefExpression &amp;expr, size_t depth) {</span>
+<span class="lineNum">      92 </span><span class="lineCov">    4969098 :         if (expr.table_name.empty()) {</span>
 <span class="lineNum">      93 </span>            :                 // empty table name, bind
 <span class="lineNum">      94 </span><span class="lineCov">         42 :                 auto entry = expression_alias_map.find(expr.column_name);</span>
 <span class="lineNum">      95 </span><span class="lineCov">         42 :                 if (entry == expression_alias_map.end()) {</span>
@@ -163,8 +163,8 @@
 <span class="lineNum">     101 </span><span class="lineCov">         42 :                 return;</span>
 <span class="lineNum">     102 </span>            :         }
 <span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span><span class="lineCov">    4969566 :         auto match = bindings.find(expr.table_name);</span>
-<span class="lineNum">     105 </span><span class="lineCov">    4972446 :         if (match == bindings.end()) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">    4970355 :         auto match = bindings.find(expr.table_name);</span>
+<span class="lineNum">     105 </span><span class="lineCov">    4972342 :         if (match == bindings.end()) {</span>
 <span class="lineNum">     106 </span>            :                 // alias not found in this BindContext
 <span class="lineNum">     107 </span>            :                 // if there is a parent BindContext look there
 <span class="lineNum">     108 </span><span class="lineCov">       4201 :                 if (parent) {</span>
@@ -174,8 +174,8 @@
 <span class="lineNum">     112 </span>            :                 }
 <span class="lineNum">     113 </span><span class="lineCov">          4 :                 throw BinderException(&quot;Referenced table \&quot;%s\&quot; not found!&quot;, expr.table_name.c_str());</span>
 <span class="lineNum">     114 </span>            :         }
-<span class="lineNum">     115 </span><span class="lineCov">    4966329 :         auto binding = match-&gt;second.get();</span>
-<span class="lineNum">     116 </span><span class="lineCov">    4967996 :         switch (binding-&gt;type) {</span>
+<span class="lineNum">     115 </span><span class="lineCov">    4966072 :         auto binding = match-&gt;second.get();</span>
+<span class="lineNum">     116 </span><span class="lineCov">    4966221 :         switch (binding-&gt;type) {</span>
 <span class="lineNum">     117 </span><span class="lineCov">          9 :         case BindingType::DUMMY: {</span>
 <span class="lineNum">     118 </span><span class="lineCov">          9 :                 auto dummy = (DummyTableBinding *)binding;</span>
 <span class="lineNum">     119 </span><span class="lineCov">          9 :                 auto entry = dummy-&gt;bound_columns.find(expr.column_name);</span>
@@ -186,41 +186,41 @@
 <span class="lineNum">     124 </span><span class="lineCov">          9 :                 expr.return_type = entry-&gt;second-&gt;type;</span>
 <span class="lineNum">     125 </span><span class="lineCov">          9 :                 break;</span>
 <span class="lineNum">     126 </span>            :         }
-<span class="lineNum">     127 </span><span class="lineCov">    4965370 :         case BindingType::TABLE: {</span>
+<span class="lineNum">     127 </span><span class="lineCov">    4965277 :         case BindingType::TABLE: {</span>
 <span class="lineNum">     128 </span>            :                 // base table
-<span class="lineNum">     129 </span><span class="lineCov">    4965370 :                 auto &amp;table = *((TableBinding *)binding);</span>
-<span class="lineNum">     130 </span><span class="lineCov">    4965370 :                 if (!table.table-&gt;ColumnExists(expr.column_name)) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">    4965277 :                 auto &amp;table = *((TableBinding *)binding);</span>
+<span class="lineNum">     130 </span><span class="lineCov">    4965277 :                 if (!table.table-&gt;ColumnExists(expr.column_name)) {</span>
 <span class="lineNum">     131 </span>            :                         throw BinderException(&quot;Table \&quot;%s\&quot; does not have a column named \&quot;%s\&quot;&quot;, expr.table_name.c_str(),
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :                                               expr.column_name.c_str());</span>
 <span class="lineNum">     133 </span>            :                 }
-<span class="lineNum">     134 </span><span class="lineCov">    4964920 :                 auto table_index = table.index;</span>
-<span class="lineNum">     135 </span><span class="lineCov">    4964920 :                 auto entry = &amp;table.table-&gt;GetColumn(expr.column_name);</span>
+<span class="lineNum">     134 </span><span class="lineCov">    4963696 :                 auto table_index = table.index;</span>
+<span class="lineNum">     135 </span><span class="lineCov">    4963696 :                 auto entry = &amp;table.table-&gt;GetColumn(expr.column_name);</span>
 <span class="lineNum">     136 </span>            :                 // assign the base table statistics
-<span class="lineNum">     137 </span><span class="lineCov">    4962361 :                 auto &amp;table_stats = table.table-&gt;GetStatistics(entry-&gt;oid);</span>
-<span class="lineNum">     138 </span><span class="lineCov">    4963217 :                 table_stats.Initialize(expr.stats);</span>
-<span class="lineNum">     139 </span><span class="lineCov">    4965212 :                 if (bindings.size() &gt; 1) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">    4962203 :                 auto &amp;table_stats = table.table-&gt;GetStatistics(entry-&gt;oid);</span>
+<span class="lineNum">     138 </span><span class="lineCov">    4963099 :                 table_stats.Initialize(expr.stats);</span>
+<span class="lineNum">     139 </span><span class="lineCov">    4964650 :                 if (bindings.size() &gt; 1) {</span>
 <span class="lineNum">     140 </span>            :                         // OUTER JOINS can introduce NULLs in the column
 <span class="lineNum">     141 </span><span class="lineCov">     259793 :                         expr.stats.can_have_null = true;</span>
 <span class="lineNum">     142 </span>            :                 }
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">    4963224 :                 auto &amp;column_list = bound_columns[expr.table_name];</span>
+<span class="lineNum">     144 </span><span class="lineCov">    4963460 :                 auto &amp;column_list = bound_columns[expr.table_name];</span>
 <span class="lineNum">     145 </span>            :                 // check if the entry already exists in the column list for the table
-<span class="lineNum">     146 </span><span class="lineCov">    4964564 :                 expr.binding.column_index = column_list.size();</span>
-<span class="lineNum">     147 </span><span class="lineCov">    7739828 :                 for (size_t i = 0; i &lt; column_list.size(); i++) {</span>
-<span class="lineNum">     148 </span><span class="lineCov">    4043482 :                         auto &amp;column = column_list[i];</span>
-<span class="lineNum">     149 </span><span class="lineCov">    4041147 :                         if (column == expr.column_name) {</span>
-<span class="lineNum">     150 </span><span class="lineCov">    1264198 :                                 expr.binding.column_index = i;</span>
-<span class="lineNum">     151 </span><span class="lineCov">    1264198 :                                 break;</span>
+<span class="lineNum">     146 </span><span class="lineCov">    4963417 :                 expr.binding.column_index = column_list.size();</span>
+<span class="lineNum">     147 </span><span class="lineCov">    7739794 :                 for (size_t i = 0; i &lt; column_list.size(); i++) {</span>
+<span class="lineNum">     148 </span><span class="lineCov">    4043447 :                         auto &amp;column = column_list[i];</span>
+<span class="lineNum">     149 </span><span class="lineCov">    4041179 :                         if (column == expr.column_name) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">    1264201 :                                 expr.binding.column_index = i;</span>
+<span class="lineNum">     151 </span><span class="lineCov">    1264201 :                                 break;</span>
 <span class="lineNum">     152 </span>            :                         }
 <span class="lineNum">     153 </span>            :                 }
-<span class="lineNum">     154 </span><span class="lineCov">    4960934 :                 if (expr.binding.column_index == column_list.size()) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">    4960991 :                 if (expr.binding.column_index == column_list.size()) {</span>
 <span class="lineNum">     155 </span>            :                         // column binding not found: add it to the list of bindings
-<span class="lineNum">     156 </span><span class="lineCov">    3697033 :                         column_list.push_back(expr.column_name);</span>
+<span class="lineNum">     156 </span><span class="lineCov">    3697285 :                         column_list.push_back(expr.column_name);</span>
 <span class="lineNum">     157 </span>            :                 }
-<span class="lineNum">     158 </span><span class="lineCov">    4964430 :                 expr.binding.table_index = table_index;</span>
-<span class="lineNum">     159 </span><span class="lineCov">    4964430 :                 expr.depth = depth;</span>
-<span class="lineNum">     160 </span><span class="lineCov">    4964430 :                 expr.return_type = entry-&gt;type;</span>
-<span class="lineNum">     161 </span><span class="lineCov">    4964430 :                 break;</span>
+<span class="lineNum">     158 </span><span class="lineCov">    4964874 :                 expr.binding.table_index = table_index;</span>
+<span class="lineNum">     159 </span><span class="lineCov">    4964874 :                 expr.depth = depth;</span>
+<span class="lineNum">     160 </span><span class="lineCov">    4964874 :                 expr.return_type = entry-&gt;type;</span>
+<span class="lineNum">     161 </span><span class="lineCov">    4964874 :                 break;</span>
 <span class="lineNum">     162 </span>            :         }
 <span class="lineNum">     163 </span><span class="lineCov">       2039 :         case BindingType::SUBQUERY: {</span>
 <span class="lineNum">     164 </span>            :                 // subquery
@@ -256,23 +256,23 @@
 <span class="lineNum">     194 </span>            :         }
 <a name="195"><span class="lineNum">     195 </span>            : }</a>
 <span class="lineNum">     196 </span>            : 
-<span class="lineNum">     197 </span><span class="lineCov">     196892 : void BindContext::GenerateAllColumnExpressions(vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;new_select_list) {</span>
-<span class="lineNum">     198 </span><span class="lineCov">     196892 :         if (bindings_list.size() == 0) {</span>
+<span class="lineNum">     197 </span><span class="lineCov">     196893 : void BindContext::GenerateAllColumnExpressions(vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;new_select_list) {</span>
+<span class="lineNum">     198 </span><span class="lineCov">     196893 :         if (bindings_list.size() == 0) {</span>
 <span class="lineNum">     199 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;SELECT * expression without FROM clause!&quot;);</span>
 <span class="lineNum">     200 </span>            :         }
 <span class="lineNum">     201 </span>            : 
 <span class="lineNum">     202 </span>            :         // we have to bind the tables and subqueries in order of table_index
-<span class="lineNum">     203 </span><span class="lineCov">     435234 :         for (auto &amp;entry : bindings_list) {</span>
-<span class="lineNum">     204 </span><span class="lineCov">     238342 :                 auto &amp;name = entry.first;</span>
-<span class="lineNum">     205 </span><span class="lineCov">     238342 :                 auto binding = entry.second;</span>
-<span class="lineNum">     206 </span><span class="lineCov">     238342 :                 switch (binding-&gt;type) {</span>
+<span class="lineNum">     203 </span><span class="lineCov">     435236 :         for (auto &amp;entry : bindings_list) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">     238343 :                 auto &amp;name = entry.first;</span>
+<span class="lineNum">     205 </span><span class="lineCov">     238343 :                 auto binding = entry.second;</span>
+<span class="lineNum">     206 </span><span class="lineCov">     238343 :                 switch (binding-&gt;type) {</span>
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :                 case BindingType::DUMMY: {</span>
 <span class="lineNum">     208 </span><span class="lineNoCov">          0 :                         throw BinderException(&quot;Cannot use * with DUMMY table&quot;);</span>
 <span class="lineNum">     209 </span>            :                 }
-<span class="lineNum">     210 </span><span class="lineCov">     238296 :                 case BindingType::TABLE: {</span>
-<span class="lineNum">     211 </span><span class="lineCov">     238296 :                         auto &amp;table = *((TableBinding *)binding);</span>
-<span class="lineNum">     212 </span><span class="lineCov">     953723 :                         for (auto &amp;column : table.table-&gt;columns) {</span>
-<span class="lineNum">     213 </span><span class="lineCov">     715427 :                                 new_select_list.push_back(make_unique&lt;ColumnRefExpression&gt;(column.name, name));</span>
+<span class="lineNum">     210 </span><span class="lineCov">     238297 :                 case BindingType::TABLE: {</span>
+<span class="lineNum">     211 </span><span class="lineCov">     238297 :                         auto &amp;table = *((TableBinding *)binding);</span>
+<span class="lineNum">     212 </span><span class="lineCov">     953726 :                         for (auto &amp;column : table.table-&gt;columns) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">     715429 :                                 new_select_list.push_back(make_unique&lt;ColumnRefExpression&gt;(column.name, name));</span>
 <span class="lineNum">     214 </span>            :                         }
 <span class="lineNum">     215 </span>            :                         break;
 <span class="lineNum">     216 </span>            :                 }
@@ -292,19 +292,19 @@
 <span class="lineNum">     230 </span>            :                 }
 <span class="lineNum">     231 </span>            :                 }
 <span class="lineNum">     232 </span>            :         }
-<a name="233"><span class="lineNum">     233 </span><span class="lineCov">     196892 : }</span></a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">     196893 : }</span></a>
 <span class="lineNum">     234 </span>            : 
-<span class="lineNum">     235 </span><span class="lineCov">    2706623 : void BindContext::AddBinding(const string &amp;alias, unique_ptr&lt;Binding&gt; binding) {</span>
-<span class="lineNum">     236 </span><span class="lineCov">    2706623 :         if (HasAlias(alias)) {</span>
+<span class="lineNum">     235 </span><span class="lineCov">    2706677 : void BindContext::AddBinding(const string &amp;alias, unique_ptr&lt;Binding&gt; binding) {</span>
+<span class="lineNum">     236 </span><span class="lineCov">    2706677 :         if (HasAlias(alias)) {</span>
 <span class="lineNum">     237 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Duplicate alias \&quot;%s\&quot; in query!&quot;, alias.c_str());</span>
 <span class="lineNum">     238 </span>            :         }
-<span class="lineNum">     239 </span><span class="lineCov">    2705723 :         bindings_list.push_back(make_pair(alias, binding.get()));</span>
-<a name="240"><span class="lineNum">     240 </span><span class="lineCov">    2706211 :         bindings[alias] = move(binding);</span></a>
-<span class="lineNum">     241 </span><span class="lineCov">    2702942 : }</span>
-<span class="lineNum">     242 </span><span class="lineCov">    2705376 : size_t BindContext::AddBaseTable(const string &amp;alias, TableCatalogEntry *table_entry) {</span>
-<span class="lineNum">     243 </span><span class="lineCov">    2705376 :         size_t index = GenerateTableIndex();</span>
-<span class="lineNum">     244 </span><span class="lineCov">    2705380 :         AddBinding(alias, make_unique&lt;TableBinding&gt;(table_entry, index));</span>
-<span class="lineNum">     245 </span><span class="lineCov">    2702487 :         return index;</span>
+<span class="lineNum">     239 </span><span class="lineCov">    2705830 :         bindings_list.push_back(make_pair(alias, binding.get()));</span>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">    2706162 :         bindings[alias] = move(binding);</span></a>
+<span class="lineNum">     241 </span><span class="lineCov">    2703028 : }</span>
+<span class="lineNum">     242 </span><span class="lineCov">    2705440 : size_t BindContext::AddBaseTable(const string &amp;alias, TableCatalogEntry *table_entry) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">    2705440 :         size_t index = GenerateTableIndex();</span>
+<span class="lineNum">     244 </span><span class="lineCov">    2705441 :         AddBinding(alias, make_unique&lt;TableBinding&gt;(table_entry, index));</span>
+<span class="lineNum">     245 </span><span class="lineCov">    2703684 :         return index;</span>
 <a name="246"><span class="lineNum">     246 </span>            : }</a>
 <span class="lineNum">     247 </span>            : 
 <span class="lineNum">     248 </span><span class="lineCov">       1130 : void BindContext::AddDummyTable(const string &amp;alias, vector&lt;ColumnDefinition&gt; &amp;columns) {</span>
@@ -332,23 +332,23 @@
 <span class="lineNum">     270 </span><span class="lineCov">    1679283 :         expression_alias_map[alias] = make_pair(i, expression);</span>
 <a name="271"><span class="lineNum">     271 </span><span class="lineCov">    1679283 : }</span></a>
 <span class="lineNum">     272 </span>            : 
-<span class="lineNum">     273 </span><span class="lineCov">    2706567 : bool BindContext::HasAlias(const string &amp;alias) {</span>
-<span class="lineNum">     274 </span><span class="lineCov">    2706567 :         return bindings.find(alias) != bindings.end();</span>
+<span class="lineNum">     273 </span><span class="lineCov">    2706651 : bool BindContext::HasAlias(const string &amp;alias) {</span>
+<span class="lineNum">     274 </span><span class="lineCov">    2706651 :         return bindings.find(alias) != bindings.end();</span>
 <a name="275"><span class="lineNum">     275 </span>            : }</a>
 <span class="lineNum">     276 </span>            : 
-<span class="lineNum">     277 </span><span class="lineCov">    2705697 : size_t BindContext::GetBindingIndex(const string &amp;alias) {</span>
-<span class="lineNum">     278 </span><span class="lineCov">    2705697 :         auto entry = bindings.find(alias);</span>
-<span class="lineNum">     279 </span><span class="lineCov">    2705677 :         if (entry == bindings.end()) {</span>
+<span class="lineNum">     277 </span><span class="lineCov">    2705757 : size_t BindContext::GetBindingIndex(const string &amp;alias) {</span>
+<span class="lineNum">     278 </span><span class="lineCov">    2705757 :         auto entry = bindings.find(alias);</span>
+<span class="lineNum">     279 </span><span class="lineCov">    2705732 :         if (entry == bindings.end()) {</span>
 <span class="lineNum">     280 </span><span class="lineNoCov">          0 :                 throw BinderException(&quot;Could not find alias!&quot;);</span>
 <span class="lineNum">     281 </span>            :         }
-<span class="lineNum">     282 </span><span class="lineCov">    2705642 :         return entry-&gt;second-&gt;index;</span>
+<span class="lineNum">     282 </span><span class="lineCov">    2705684 :         return entry-&gt;second-&gt;index;</span>
 <a name="283"><span class="lineNum">     283 </span>            : }</a>
 <span class="lineNum">     284 </span>            : 
-<span class="lineNum">     285 </span><span class="lineCov">    2710537 : size_t BindContext::GenerateTableIndex() {</span>
-<span class="lineNum">     286 </span><span class="lineCov">    2710537 :         if (parent) {</span>
+<span class="lineNum">     285 </span><span class="lineCov">    2710598 : size_t BindContext::GenerateTableIndex() {</span>
+<span class="lineNum">     286 </span><span class="lineCov">    2710598 :         if (parent) {</span>
 <span class="lineNum">     287 </span><span class="lineCov">       4210 :                 return parent-&gt;GenerateTableIndex();</span>
 <span class="lineNum">     288 </span>            :         }
-<span class="lineNum">     289 </span><span class="lineCov">    2706327 :         return bound_tables++;</span>
+<span class="lineNum">     289 </span><span class="lineCov">    2706388 :         return bound_tables++;</span>
 <a name="290"><span class="lineNum">     290 </span>            : }</a>
 <span class="lineNum">     291 </span>            : 
 <span class="lineNum">     292 </span><span class="lineNoCov">          0 : string BindContext::GenerateAlias() {</span>

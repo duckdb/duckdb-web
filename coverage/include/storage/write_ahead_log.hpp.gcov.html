@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 030c93af - include/storage/write_ahead_log.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 016684ec - include/storage/write_ahead_log.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
+            <td class="headerValue">DuckDB Code Coverage Report 016684ec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">6</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 13:16:06</td>
+            <td class="headerValue">2018-12-05 16:05:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -85,77 +85,75 @@
 <span class="lineNum">      23 </span>            : class Transaction;
 <span class="lineNum">      24 </span>            : class TransactionManager;
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span>            : #define WAL_FILE &quot;duckdb.wal&quot;
-<span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span>            : //! The type of WAL entry
-<span class="lineNum">      29 </span>            : typedef uint8_t wal_type_t;
-<span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span>            : struct WALEntry {
-<span class="lineNum">      32 </span>            :         static constexpr wal_type_t INVALID = 0;
-<span class="lineNum">      33 </span>            :         static constexpr wal_type_t DROP_TABLE = 1;
-<span class="lineNum">      34 </span>            :         static constexpr wal_type_t CREATE_TABLE = 2;
-<span class="lineNum">      35 </span>            :         static constexpr wal_type_t DROP_SCHEMA = 3;
-<span class="lineNum">      36 </span>            :         static constexpr wal_type_t CREATE_SCHEMA = 4;
-<span class="lineNum">      37 </span>            :         static constexpr wal_type_t INSERT_TUPLE = 5;
-<span class="lineNum">      38 </span>            :         static constexpr wal_type_t QUERY = 6;
-<a name="39"><span class="lineNum">      39 </span>            :         static constexpr wal_type_t WAL_FLUSH = 100;</a>
-<span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">       1882 :         static bool TypeIsValid(wal_type_t type) {</span>
-<span class="lineNum">      42 </span><span class="lineCov">       1882 :                 return type == WALEntry::WAL_FLUSH || (type &gt;= WALEntry::DROP_TABLE &amp;&amp; type &lt;= WALEntry::QUERY);</span>
-<span class="lineNum">      43 </span>            :         }
-<span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span>            :         wal_type_t type;
-<span class="lineNum">      46 </span>            :         uint32_t size;
-<span class="lineNum">      47 </span>            : };
-<span class="lineNum">      48 </span>            : 
-<span class="lineNum">      49 </span>            : struct WALEntryData {
-<span class="lineNum">      50 </span>            :         WALEntry entry;
-<span class="lineNum">      51 </span>            :         unique_ptr&lt;uint8_t[]&gt; data;
-<span class="lineNum">      52 </span>            : };
-<span class="lineNum">      53 </span>            : 
-<span class="lineNum">      54 </span>            : //! The WriteAheadLog (WAL) is a log that is used to provide durability. Prior
-<span class="lineNum">      55 </span>            : //! to committing a transaction it writes the changes the transaction made to
-<span class="lineNum">      56 </span>            : //! the database to the log, which can then be replayed upon startup in case the
-<span class="lineNum">      57 </span>            : //! server crashes or is shut down.
-<a name="58"><span class="lineNum">      58 </span>            : class WriteAheadLog {</a>
-<span class="lineNum">      59 </span>            : public:
-<span class="lineNum">      60 </span><span class="lineCov">        448 :         WriteAheadLog(DuckDB &amp;database) : initialized(false), database(database), wal_file(nullptr) {</span>
-<span class="lineNum">      61 </span><span class="lineCov">        448 :         }</span>
-<a name="62"><span class="lineNum">      62 </span>            :         ~WriteAheadLog();</a>
-<span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">    3040382 :         bool IsInitialized() {</span>
-<span class="lineNum">      65 </span><span class="lineCov">    3040382 :                 return initialized;</span>
-<span class="lineNum">      66 </span>            :         }
-<span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span>            :         //! Replay the WAL
-<span class="lineNum">      69 </span>            :         void Replay(string &amp;path);
-<span class="lineNum">      70 </span>            :         //! Initialize the WAL in the specified directory
-<span class="lineNum">      71 </span>            :         void Initialize(string &amp;path);
-<span class="lineNum">      72 </span>            : 
-<span class="lineNum">      73 </span>            :         void WriteCreateTable(TableCatalogEntry *entry);
-<span class="lineNum">      74 </span>            :         void WriteDropTable(TableCatalogEntry *entry);
-<span class="lineNum">      75 </span>            : 
-<span class="lineNum">      76 </span>            :         void WriteCreateSchema(SchemaCatalogEntry *entry);
-<span class="lineNum">      77 </span>            :         void WriteDropSchema(SchemaCatalogEntry *entry);
-<span class="lineNum">      78 </span>            : 
-<span class="lineNum">      79 </span>            :         void WriteInsert(string &amp;schema, string &amp;table, DataChunk &amp;chunk);
-<span class="lineNum">      80 </span>            :         void WriteQuery(string &amp;query);
+<span class="lineNum">      26 </span>            : //! The type of WAL entry
+<span class="lineNum">      27 </span>            : typedef uint8_t wal_type_t;
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : struct WALEntry {
+<span class="lineNum">      30 </span>            :         static constexpr wal_type_t INVALID = 0;
+<span class="lineNum">      31 </span>            :         static constexpr wal_type_t DROP_TABLE = 1;
+<span class="lineNum">      32 </span>            :         static constexpr wal_type_t CREATE_TABLE = 2;
+<span class="lineNum">      33 </span>            :         static constexpr wal_type_t DROP_SCHEMA = 3;
+<span class="lineNum">      34 </span>            :         static constexpr wal_type_t CREATE_SCHEMA = 4;
+<span class="lineNum">      35 </span>            :         static constexpr wal_type_t INSERT_TUPLE = 5;
+<span class="lineNum">      36 </span>            :         static constexpr wal_type_t QUERY = 6;
+<a name="37"><span class="lineNum">      37 </span>            :         static constexpr wal_type_t WAL_FLUSH = 100;</a>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">       1882 :         static bool TypeIsValid(wal_type_t type) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">       1882 :                 return type == WALEntry::WAL_FLUSH || (type &gt;= WALEntry::DROP_TABLE &amp;&amp; type &lt;= WALEntry::QUERY);</span>
+<span class="lineNum">      41 </span>            :         }
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            :         wal_type_t type;
+<span class="lineNum">      44 </span>            :         uint32_t size;
+<span class="lineNum">      45 </span>            : };
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            : struct WALEntryData {
+<span class="lineNum">      48 </span>            :         WALEntry entry;
+<span class="lineNum">      49 </span>            :         unique_ptr&lt;uint8_t[]&gt; data;
+<span class="lineNum">      50 </span>            : };
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : //! The WriteAheadLog (WAL) is a log that is used to provide durability. Prior
+<span class="lineNum">      53 </span>            : //! to committing a transaction it writes the changes the transaction made to
+<span class="lineNum">      54 </span>            : //! the database to the log, which can then be replayed upon startup in case the
+<span class="lineNum">      55 </span>            : //! server crashes or is shut down.
+<a name="56"><span class="lineNum">      56 </span>            : class WriteAheadLog {</a>
+<span class="lineNum">      57 </span>            : public:
+<span class="lineNum">      58 </span><span class="lineCov">        452 :         WriteAheadLog(DuckDB &amp;database) : initialized(false), database(database), wal_file(nullptr) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">        452 :         }</span>
+<a name="60"><span class="lineNum">      60 </span>            :         ~WriteAheadLog();</a>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">    3040457 :         bool IsInitialized() {</span>
+<span class="lineNum">      63 </span><span class="lineCov">    3040457 :                 return initialized;</span>
+<span class="lineNum">      64 </span>            :         }
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            :         //! Replay the WAL
+<span class="lineNum">      67 </span>            :         void Replay(string &amp;path);
+<span class="lineNum">      68 </span>            :         //! Initialize the WAL in the specified directory
+<span class="lineNum">      69 </span>            :         void Initialize(string &amp;path);
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            :         void WriteCreateTable(TableCatalogEntry *entry);
+<span class="lineNum">      72 </span>            :         void WriteDropTable(TableCatalogEntry *entry);
+<span class="lineNum">      73 </span>            : 
+<span class="lineNum">      74 </span>            :         void WriteCreateSchema(SchemaCatalogEntry *entry);
+<span class="lineNum">      75 </span>            :         void WriteDropSchema(SchemaCatalogEntry *entry);
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            :         void WriteInsert(string &amp;schema, string &amp;table, DataChunk &amp;chunk);
+<span class="lineNum">      78 </span>            :         void WriteQuery(string &amp;query);
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            :         void Flush();
 <span class="lineNum">      81 </span>            : 
-<span class="lineNum">      82 </span>            :         void Flush();
-<span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span>            : private:
-<span class="lineNum">      85 </span>            :         template &lt;class T&gt; void Write(T val);
-<span class="lineNum">      86 </span>            :         void WriteData(uint8_t *dataptr, size_t data_size);
+<span class="lineNum">      82 </span>            : private:
+<span class="lineNum">      83 </span>            :         template &lt;class T&gt; void Write(T val);
+<span class="lineNum">      84 </span>            :         void WriteData(uint8_t *dataptr, size_t data_size);
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            :         void WriteEntry(wal_type_t type, Serializer &amp;serializer);
 <span class="lineNum">      87 </span>            : 
-<span class="lineNum">      88 </span>            :         void WriteEntry(wal_type_t type, Serializer &amp;serializer);
+<span class="lineNum">      88 </span>            :         bool initialized;
 <span class="lineNum">      89 </span>            : 
-<span class="lineNum">      90 </span>            :         bool initialized;
-<span class="lineNum">      91 </span>            : 
-<span class="lineNum">      92 </span>            :         DuckDB &amp;database;
-<span class="lineNum">      93 </span>            :         FILE *wal_file;
-<span class="lineNum">      94 </span>            : };
-<span class="lineNum">      95 </span>            : 
-<span class="lineNum">      96 </span>            : } // namespace duckdb
+<span class="lineNum">      90 </span>            :         DuckDB &amp;database;
+<span class="lineNum">      91 </span>            :         FILE *wal_file;
+<span class="lineNum">      92 </span>            : };
+<span class="lineNum">      93 </span>            : 
+<span class="lineNum">      94 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

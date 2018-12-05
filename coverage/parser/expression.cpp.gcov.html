@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 030c93af - parser/expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 016684ec - parser/expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
+            <td class="headerValue">DuckDB Code Coverage Report 016684ec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">97</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 13:16:06</td>
+            <td class="headerValue">2018-12-05 16:05:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -68,21 +68,21 @@
 <span class="lineNum">       6 </span>            : using namespace duckdb;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">   77221624 : void Expression::AcceptChildren(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">  143845634 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">  133254914 :                 auto accept_res = children[i]-&gt;Accept(v);</span>
-<span class="lineNum">      12 </span><span class="lineCov">   66645668 :                 if (accept_res) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">   77223959 : void Expression::AcceptChildren(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">  143848691 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">  133251220 :                 auto accept_res = children[i]-&gt;Accept(v);</span>
+<span class="lineNum">      12 </span><span class="lineCov">   66648119 :                 if (accept_res) {</span>
 <span class="lineNum">      13 </span><span class="lineNoCov">          0 :                         children[i] = move(accept_res);</span>
 <span class="lineNum">      14 </span>            :                 }
 <span class="lineNum">      15 </span>            :         }
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">   77201644 : }</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">   77202478 : }</span></a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">   18144658 : bool Expression::IsAggregate() {</span>
-<span class="lineNum">      19 </span><span class="lineCov">   18144658 :         bool is_aggregate = false;</span>
-<span class="lineNum">      20 </span><span class="lineCov">   33340590 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">   18144664 : bool Expression::IsAggregate() {</span>
+<span class="lineNum">      19 </span><span class="lineCov">   18144664 :         bool is_aggregate = false;</span>
+<span class="lineNum">      20 </span><span class="lineCov">   33340596 :         for (auto &amp;child : children) {</span>
 <span class="lineNum">      21 </span><span class="lineCov">   15195932 :                 is_aggregate |= child-&gt;IsAggregate();</span>
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">   18144658 :         return is_aggregate;</span>
+<span class="lineNum">      23 </span><span class="lineCov">   18144664 :         return is_aggregate;</span>
 <a name="24"><span class="lineNum">      24 </span>            : }</a>
 <span class="lineNum">      25 </span>            : 
 <span class="lineNum">      26 </span><span class="lineCov">     358329 : bool Expression::IsScalar() {</span>
@@ -93,11 +93,11 @@
 <span class="lineNum">      31 </span><span class="lineCov">     358329 :         return is_scalar;</span>
 <a name="32"><span class="lineNum">      32 </span>            : }</a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">    5941636 : void Expression::GetAggregates(vector&lt;AggregateExpression *&gt; &amp;expressions) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">   10304334 :         for (auto &amp;child : children) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">    4362698 :                 child-&gt;GetAggregates(expressions);</span>
+<span class="lineNum">      34 </span><span class="lineCov">    5941738 : void Expression::GetAggregates(vector&lt;AggregateExpression *&gt; &amp;expressions) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">   10304481 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">    4362743 :                 child-&gt;GetAggregates(expressions);</span>
 <span class="lineNum">      37 </span>            :         }
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    5941674 : }</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    5941751 : }</span></a>
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span><span class="lineCov">         29 : bool Expression::HasSubquery() {</span>
 <span class="lineNum">      41 </span><span class="lineCov">         52 :         for (auto &amp;child : children) {</span>
@@ -108,22 +108,22 @@
 <span class="lineNum">      46 </span><span class="lineCov">         28 :         return false;</span>
 <a name="47"><span class="lineNum">      47 </span>            : }</a>
 <span class="lineNum">      48 </span>            : 
-<span class="lineNum">      49 </span><span class="lineCov">      83587 : bool Expression::Equals(const Expression *other) {</span>
-<span class="lineNum">      50 </span><span class="lineCov">      83587 :         if (!other) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">      83590 : bool Expression::Equals(const Expression *other) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">      83590 :         if (!other) {</span>
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">      52 </span>            :         }
-<span class="lineNum">      53 </span><span class="lineCov">      83587 :         if (this-&gt;type != other-&gt;type) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">      83590 :         if (this-&gt;type != other-&gt;type) {</span>
 <span class="lineNum">      54 </span><span class="lineCov">      43533 :                 return false;</span>
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">      40054 :         if (children.size() != other-&gt;children.size()) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">      40057 :         if (children.size() != other-&gt;children.size()) {</span>
 <span class="lineNum">      57 </span><span class="lineCov">        550 :                 return false;</span>
 <span class="lineNum">      58 </span>            :         }
-<span class="lineNum">      59 </span><span class="lineCov">      41949 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">      41952 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
 <span class="lineNum">      60 </span><span class="lineCov">      22351 :                 if (!children[i]-&gt;Equals(other-&gt;children[i].get())) {</span>
 <span class="lineNum">      61 </span><span class="lineCov">      19906 :                         return false;</span>
 <span class="lineNum">      62 </span>            :                 }
 <span class="lineNum">      63 </span>            :         }
-<span class="lineNum">      64 </span><span class="lineCov">      19598 :         return true;</span>
+<span class="lineNum">      64 </span><span class="lineCov">      19601 :         return true;</span>
 <a name="65"><span class="lineNum">      65 </span>            : }</a>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span><span class="lineCov">        249 : string Expression::ToString() const {</span>
@@ -152,13 +152,13 @@
 <span class="lineNum">      90 </span><span class="lineCov">        247 :         return result;</span>
 <a name="91"><span class="lineNum">      91 </span>            : }</a>
 <span class="lineNum">      92 </span>            : 
-<span class="lineNum">      93 </span><span class="lineCov">         71 : void Expression::Serialize(Serializer &amp;serializer) {</span>
-<span class="lineNum">      94 </span><span class="lineCov">         71 :         serializer.Write&lt;ExpressionClass&gt;(GetExpressionClass());</span>
-<span class="lineNum">      95 </span><span class="lineCov">         71 :         serializer.Write&lt;ExpressionType&gt;(type);</span>
-<span class="lineNum">      96 </span><span class="lineCov">         71 :         serializer.Write&lt;TypeId&gt;(return_type);</span>
-<span class="lineNum">      97 </span><span class="lineCov">         71 :         serializer.WriteString(alias);</span>
-<span class="lineNum">      98 </span><span class="lineCov">         71 :         serializer.WriteList&lt;Expression&gt;(children);</span>
-<a name="99"><span class="lineNum">      99 </span><span class="lineCov">         71 : }</span></a>
+<span class="lineNum">      93 </span><span class="lineCov">         88 : void Expression::Serialize(Serializer &amp;serializer) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">         88 :         serializer.Write&lt;ExpressionClass&gt;(GetExpressionClass());</span>
+<span class="lineNum">      95 </span><span class="lineCov">         88 :         serializer.Write&lt;ExpressionType&gt;(type);</span>
+<span class="lineNum">      96 </span><span class="lineCov">         88 :         serializer.Write&lt;TypeId&gt;(return_type);</span>
+<span class="lineNum">      97 </span><span class="lineCov">         88 :         serializer.WriteString(alias);</span>
+<span class="lineNum">      98 </span><span class="lineCov">         88 :         serializer.WriteList&lt;Expression&gt;(children);</span>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">         88 : }</span></a>
 <span class="lineNum">     100 </span>            : 
 <span class="lineNum">     101 </span><span class="lineCov">         71 : unique_ptr&lt;Expression&gt; Expression::Deserialize(Deserializer &amp;source) {</span>
 <span class="lineNum">     102 </span><span class="lineCov">        142 :         ExpressionDeserializeInfo info;</span>

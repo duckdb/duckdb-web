@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 030c93af - include/common/string_util.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 016684ec - include/common/string_util.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
+            <td class="headerValue">DuckDB Code Coverage Report 016684ec</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 13:16:06</td>
+            <td class="headerValue">2018-12-05 16:05:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -178,17 +178,17 @@
 <span class="lineNum">     116 </span>            :          */
 <a name="117"><span class="lineNum">     117 </span>            :         static string Strip(const string &amp;str, char c);</a>
 <span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span><span class="lineCov">         10 :         static string Replace(string source, const string &amp;from, const string &amp;to) {</span>
-<span class="lineNum">     120 </span><span class="lineCov">         10 :                 if (from.empty())</span>
+<span class="lineNum">     119 </span><span class="lineCov">         27 :         static string Replace(string source, const string &amp;from, const string &amp;to) {</span>
+<span class="lineNum">     120 </span><span class="lineCov">         27 :                 if (from.empty())</span>
 <span class="lineNum">     121 </span><span class="lineNoCov">          0 :                         return source;</span>
 <span class="lineNum">     122 </span>            :                 ;
-<span class="lineNum">     123 </span><span class="lineCov">         10 :                 size_t start_pos = 0;</span>
-<span class="lineNum">     124 </span><span class="lineCov">         10 :                 while ((start_pos = source.find(from, start_pos)) != string::npos) {</span>
+<span class="lineNum">     123 </span><span class="lineCov">         27 :                 size_t start_pos = 0;</span>
+<span class="lineNum">     124 </span><span class="lineCov">         27 :                 while ((start_pos = source.find(from, start_pos)) != string::npos) {</span>
 <span class="lineNum">     125 </span><span class="lineNoCov">          0 :                         source.replace(start_pos, from.length(), to);</span>
 <span class="lineNum">     126 </span><span class="lineNoCov">          0 :                         start_pos += to.length(); // In case 'to' contains 'from', like</span>
 <span class="lineNum">     127 </span>            :                                                   // replacing 'x' with 'yx'
 <span class="lineNum">     128 </span>            :                 }
-<span class="lineNum">     129 </span><span class="lineCov">         10 :                 return source;</span>
+<span class="lineNum">     129 </span><span class="lineCov">         27 :                 return source;</span>
 <span class="lineNum">     130 </span>            :         }
 <span class="lineNum">     131 </span>            : };
 <span class="lineNum">     132 </span>            : } // namespace duckdb
