@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -66,16 +66,16 @@
 <span class="lineNum">       4 </span>            : using namespace postgres;
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">      11627 : unique_ptr&lt;TableRef&gt; Transformer::TransformTableRefNode(Node *n) {</span>
-<span class="lineNum">       8 </span><span class="lineCov">      11627 :         switch (n-&gt;type) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">      11379 :         case T_RangeVar:</span>
-<span class="lineNum">      10 </span><span class="lineCov">      11379 :                 return TransformRangeVar(reinterpret_cast&lt;RangeVar *&gt;(n));</span>
-<span class="lineNum">      11 </span><span class="lineCov">         46 :         case T_JoinExpr:</span>
-<span class="lineNum">      12 </span><span class="lineCov">         46 :                 return TransformJoin(reinterpret_cast&lt;JoinExpr *&gt;(n));</span>
-<span class="lineNum">      13 </span><span class="lineCov">        193 :         case T_RangeSubselect:</span>
-<span class="lineNum">      14 </span><span class="lineCov">        193 :                 return TransformRangeSubselect(reinterpret_cast&lt;RangeSubselect *&gt;(n));</span>
-<span class="lineNum">      15 </span><span class="lineCov">          9 :         case T_RangeFunction:</span>
-<span class="lineNum">      16 </span><span class="lineCov">          9 :                 return TransformRangeFunction(reinterpret_cast&lt;RangeFunction *&gt;(n));</span>
+<span class="lineNum">       7 </span><span class="lineCov">    2675789 : unique_ptr&lt;TableRef&gt; Transformer::TransformTableRefNode(Node *n) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    2675789 :         switch (n-&gt;type) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    2619856 :         case T_RangeVar:</span>
+<span class="lineNum">      10 </span><span class="lineCov">    2619856 :                 return TransformRangeVar(reinterpret_cast&lt;RangeVar *&gt;(n));</span>
+<span class="lineNum">      11 </span><span class="lineCov">      55757 :         case T_JoinExpr:</span>
+<span class="lineNum">      12 </span><span class="lineCov">      55757 :                 return TransformJoin(reinterpret_cast&lt;JoinExpr *&gt;(n));</span>
+<span class="lineNum">      13 </span><span class="lineCov">        241 :         case T_RangeSubselect:</span>
+<span class="lineNum">      14 </span><span class="lineCov">        241 :                 return TransformRangeSubselect(reinterpret_cast&lt;RangeSubselect *&gt;(n));</span>
+<span class="lineNum">      15 </span><span class="lineCov">         10 :         case T_RangeFunction:</span>
+<span class="lineNum">      16 </span><span class="lineCov">         10 :                 return TransformRangeFunction(reinterpret_cast&lt;RangeFunction *&gt;(n));</span>
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      18 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;From Type %d not supported yet...&quot;, n-&gt;type);</span>
 <span class="lineNum">      19 </span>            :         }

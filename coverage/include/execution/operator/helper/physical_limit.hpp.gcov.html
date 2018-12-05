@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -77,9 +77,9 @@
 <span class="lineNum">      15 </span>            : //! PhyisicalLimit represents the LIMIT operator
 <a name="16"><span class="lineNum">      16 </span>            : class PhysicalLimit : public PhysicalOperator {</a>
 <span class="lineNum">      17 </span>            : public:
-<span class="lineNum">      18 </span><span class="lineCov">         77 :         PhysicalLimit(LogicalOperator &amp;op, size_t limit, size_t offset)</span>
-<span class="lineNum">      19 </span><span class="lineCov">         77 :             : PhysicalOperator(PhysicalOperatorType::LIMIT, op.types), limit(limit), offset(offset) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">         77 :         }</span>
+<span class="lineNum">      18 </span><span class="lineCov">        186 :         PhysicalLimit(LogicalOperator &amp;op, size_t limit, size_t offset)</span>
+<span class="lineNum">      19 </span><span class="lineCov">        186 :             : PhysicalOperator(PhysicalOperatorType::LIMIT, op.types), limit(limit), offset(offset) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">        186 :         }</span>
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span>            :         size_t limit;
 <span class="lineNum">      23 </span>            :         size_t offset;
@@ -91,10 +91,10 @@
 <span class="lineNum">      29 </span>            : 
 <a name="30"><span class="lineNum">      30 </span>            : class PhysicalLimitOperatorState : public PhysicalOperatorState {</a>
 <span class="lineNum">      31 </span>            : public:
-<span class="lineNum">      32 </span><span class="lineCov">         85 :         PhysicalLimitOperatorState(PhysicalOperator *child, size_t current_offset = 0,</span>
+<span class="lineNum">      32 </span><span class="lineCov">      13436 :         PhysicalLimitOperatorState(PhysicalOperator *child, size_t current_offset = 0,</span>
 <span class="lineNum">      33 </span>            :                                    ExpressionExecutor *parent_executor = nullptr)
-<span class="lineNum">      34 </span><span class="lineCov">         85 :             : PhysicalOperatorState(child, parent_executor), current_offset(current_offset) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">         85 :         }</span>
+<span class="lineNum">      34 </span><span class="lineCov">      13436 :             : PhysicalOperatorState(child, parent_executor), current_offset(current_offset) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">      13436 :         }</span>
 <span class="lineNum">      36 </span>            : 
 <span class="lineNum">      37 </span>            :         size_t current_offset;
 <span class="lineNum">      38 </span>            : };

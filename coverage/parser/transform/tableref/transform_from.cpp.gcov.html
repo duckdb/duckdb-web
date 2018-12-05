@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,35 +67,35 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">      11183 : unique_ptr&lt;TableRef&gt; Transformer::TransformFrom(List *root) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">      11183 :         if (!root) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">        170 :                 return nullptr;</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3019561 : unique_ptr&lt;TableRef&gt; Transformer::TransformFrom(List *root) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    3019561 :         if (!root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">     659210 :                 return nullptr;</span>
 <span class="lineNum">      11 </span>            :         }
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">      11013 :         if (root-&gt;length &gt; 1) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    2360351 :         if (root-&gt;length &gt; 1) {</span>
 <span class="lineNum">      14 </span>            :                 // Cross Product
-<span class="lineNum">      15 </span><span class="lineCov">        428 :                 auto result = make_unique&lt;CrossProductRef&gt;();</span>
-<span class="lineNum">      16 </span><span class="lineCov">        214 :                 CrossProductRef *cur_root = result.get();</span>
-<span class="lineNum">      17 </span><span class="lineCov">        950 :                 for (auto node = root-&gt;head; node != nullptr; node = node-&gt;next) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">        736 :                         Node *n = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
-<span class="lineNum">      19 </span><span class="lineCov">       1472 :                         unique_ptr&lt;TableRef&gt; next = TransformTableRefNode(n);</span>
-<span class="lineNum">      20 </span><span class="lineCov">        736 :                         if (!cur_root-&gt;left) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">        214 :                                 cur_root-&gt;left = move(next);</span>
-<span class="lineNum">      22 </span><span class="lineCov">        522 :                         } else if (!cur_root-&gt;right) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">        214 :                                 cur_root-&gt;right = move(next);</span>
+<span class="lineNum">      15 </span><span class="lineCov">     244142 :                 auto result = make_unique&lt;CrossProductRef&gt;();</span>
+<span class="lineNum">      16 </span><span class="lineCov">     122071 :                 CrossProductRef *cur_root = result.get();</span>
+<span class="lineNum">      17 </span><span class="lineCov">     448069 :                 for (auto node = root-&gt;head; node != nullptr; node = node-&gt;next) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">     325998 :                         Node *n = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
+<span class="lineNum">      19 </span><span class="lineCov">     651996 :                         unique_ptr&lt;TableRef&gt; next = TransformTableRefNode(n);</span>
+<span class="lineNum">      20 </span><span class="lineCov">     325998 :                         if (!cur_root-&gt;left) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">     122071 :                                 cur_root-&gt;left = move(next);</span>
+<span class="lineNum">      22 </span><span class="lineCov">     203927 :                         } else if (!cur_root-&gt;right) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">     122071 :                                 cur_root-&gt;right = move(next);</span>
 <span class="lineNum">      24 </span>            :                         } else {
-<span class="lineNum">      25 </span><span class="lineCov">        616 :                                 auto old_res = move(result);</span>
-<span class="lineNum">      26 </span><span class="lineCov">        308 :                                 result = make_unique&lt;CrossProductRef&gt;();</span>
-<span class="lineNum">      27 </span><span class="lineCov">        308 :                                 result-&gt;left = move(old_res);</span>
-<span class="lineNum">      28 </span><span class="lineCov">        308 :                                 result-&gt;right = move(next);</span>
-<span class="lineNum">      29 </span><span class="lineCov">        308 :                                 cur_root = result.get();</span>
+<span class="lineNum">      25 </span><span class="lineCov">     163712 :                                 auto old_res = move(result);</span>
+<span class="lineNum">      26 </span><span class="lineCov">      81856 :                                 result = make_unique&lt;CrossProductRef&gt;();</span>
+<span class="lineNum">      27 </span><span class="lineCov">      81856 :                                 result-&gt;left = move(old_res);</span>
+<span class="lineNum">      28 </span><span class="lineCov">      81856 :                                 result-&gt;right = move(next);</span>
+<span class="lineNum">      29 </span><span class="lineCov">      81856 :                                 cur_root = result.get();</span>
 <span class="lineNum">      30 </span>            :                         }
 <span class="lineNum">      31 </span>            :                 }
-<span class="lineNum">      32 </span><span class="lineCov">        214 :                 return move(result);</span>
+<span class="lineNum">      32 </span><span class="lineCov">     122071 :                 return move(result);</span>
 <span class="lineNum">      33 </span>            :         }
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">      10799 :         Node *n = reinterpret_cast&lt;Node *&gt;(root-&gt;head-&gt;data.ptr_value);</span>
-<span class="lineNum">      36 </span><span class="lineCov">      10799 :         return TransformTableRefNode(n);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    2238280 :         Node *n = reinterpret_cast&lt;Node *&gt;(root-&gt;head-&gt;data.ptr_value);</span>
+<span class="lineNum">      36 </span><span class="lineCov">    2238280 :         return TransformTableRefNode(n);</span>
 <span class="lineNum">      37 </span>            : }
 </pre>
       </td>

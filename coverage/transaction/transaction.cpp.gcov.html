@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -70,63 +70,63 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">       1632 : void Transaction::PushCatalogEntry(CatalogEntry *entry) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">       6168 : void Transaction::PushCatalogEntry(CatalogEntry *entry) {</span>
 <span class="lineNum">      12 </span>            :         // store only the pointer to the catalog entry
-<span class="lineNum">      13 </span><span class="lineCov">       1632 :         CatalogEntry **blob = (CatalogEntry **)undo_buffer.CreateEntry(UndoFlags::CATALOG_ENTRY, sizeof(CatalogEntry *));</span>
-<span class="lineNum">      14 </span><span class="lineCov">       1632 :         *blob = entry;</span>
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">       1632 : }</span></a>
+<span class="lineNum">      13 </span><span class="lineCov">       6168 :         CatalogEntry **blob = (CatalogEntry **)undo_buffer.CreateEntry(UndoFlags::CATALOG_ENTRY, sizeof(CatalogEntry *));</span>
+<span class="lineNum">      14 </span><span class="lineCov">       6168 :         *blob = entry;</span>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">       6168 : }</span></a>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">      30708 : void Transaction::PushDeletedEntries(size_t offset, size_t count, StorageChunk *storage,</span>
+<span class="lineNum">      17 </span><span class="lineCov">      67488 : void Transaction::PushDeletedEntries(size_t offset, size_t count, StorageChunk *storage,</span>
 <span class="lineNum">      18 </span>            :                                      VersionInformation *version_pointers[]) {
-<span class="lineNum">      19 </span><span class="lineCov">      73705 :         for (size_t i = 0; i &lt; count; i++) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">      42997 :                 auto ptr = PushTuple(0);</span>
-<span class="lineNum">      21 </span><span class="lineCov">      42997 :                 auto meta = (VersionInformation *)ptr;</span>
-<span class="lineNum">      22 </span><span class="lineCov">      42997 :                 meta-&gt;tuple_data = nullptr;</span>
-<span class="lineNum">      23 </span><span class="lineCov">      42997 :                 meta-&gt;version_number = transaction_id;</span>
-<span class="lineNum">      24 </span><span class="lineCov">      42997 :                 meta-&gt;prev.entry = offset + i;</span>
-<span class="lineNum">      25 </span><span class="lineCov">      42997 :                 meta-&gt;chunk = storage;</span>
-<span class="lineNum">      26 </span><span class="lineCov">      42997 :                 meta-&gt;next = nullptr;</span>
-<span class="lineNum">      27 </span><span class="lineCov">      42997 :                 version_pointers[i] = meta;</span>
+<span class="lineNum">      19 </span><span class="lineCov">   31516278 :         for (size_t i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">   31448790 :                 auto ptr = PushTuple(0);</span>
+<span class="lineNum">      21 </span><span class="lineCov">   31448790 :                 auto meta = (VersionInformation *)ptr;</span>
+<span class="lineNum">      22 </span><span class="lineCov">   31448790 :                 meta-&gt;tuple_data = nullptr;</span>
+<span class="lineNum">      23 </span><span class="lineCov">   31448790 :                 meta-&gt;version_number = transaction_id;</span>
+<span class="lineNum">      24 </span><span class="lineCov">   31448790 :                 meta-&gt;prev.entry = offset + i;</span>
+<span class="lineNum">      25 </span><span class="lineCov">   31448790 :                 meta-&gt;chunk = storage;</span>
+<span class="lineNum">      26 </span><span class="lineCov">   31448790 :                 meta-&gt;next = nullptr;</span>
+<span class="lineNum">      27 </span><span class="lineCov">   31448790 :                 version_pointers[i] = meta;</span>
 <span class="lineNum">      28 </span>            :         }
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">      30708 : }</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">      67488 : }</span></a>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">       3249 : void Transaction::PushTuple(size_t offset, StorageChunk *storage) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">     101270 : void Transaction::PushTuple(size_t offset, StorageChunk *storage) {</span>
 <span class="lineNum">      32 </span>            :         // push the tuple into the undo buffer
-<span class="lineNum">      33 </span><span class="lineCov">       3249 :         auto ptr = PushTuple(storage-&gt;table.tuple_size);</span>
+<span class="lineNum">      33 </span><span class="lineCov">     101270 :         auto ptr = PushTuple(storage-&gt;table.tuple_size);</span>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">       3249 :         auto meta = (VersionInformation *)ptr;</span>
-<span class="lineNum">      36 </span><span class="lineCov">       3249 :         auto tuple_data = ptr + sizeof(VersionInformation);</span>
+<span class="lineNum">      35 </span><span class="lineCov">     101270 :         auto meta = (VersionInformation *)ptr;</span>
+<span class="lineNum">      36 </span><span class="lineCov">     101270 :         auto tuple_data = ptr + sizeof(VersionInformation);</span>
 <span class="lineNum">      37 </span>            : 
 <span class="lineNum">      38 </span>            :         // fill in the meta data for the tuple
-<span class="lineNum">      39 </span><span class="lineCov">       3249 :         meta-&gt;tuple_data = tuple_data;</span>
-<span class="lineNum">      40 </span><span class="lineCov">       3249 :         meta-&gt;version_number = transaction_id;</span>
-<span class="lineNum">      41 </span><span class="lineCov">       3249 :         meta-&gt;prev.entry = offset;</span>
-<span class="lineNum">      42 </span><span class="lineCov">       3249 :         meta-&gt;chunk = storage;</span>
-<span class="lineNum">      43 </span><span class="lineCov">       3249 :         meta-&gt;next = storage-&gt;version_pointers[offset];</span>
-<span class="lineNum">      44 </span><span class="lineCov">       3249 :         storage-&gt;version_pointers[offset] = meta;</span>
+<span class="lineNum">      39 </span><span class="lineCov">     101270 :         meta-&gt;tuple_data = tuple_data;</span>
+<span class="lineNum">      40 </span><span class="lineCov">     101270 :         meta-&gt;version_number = transaction_id;</span>
+<span class="lineNum">      41 </span><span class="lineCov">     101270 :         meta-&gt;prev.entry = offset;</span>
+<span class="lineNum">      42 </span><span class="lineCov">     101270 :         meta-&gt;chunk = storage;</span>
+<span class="lineNum">      43 </span><span class="lineCov">     101270 :         meta-&gt;next = storage-&gt;version_pointers[offset];</span>
+<span class="lineNum">      44 </span><span class="lineCov">     101270 :         storage-&gt;version_pointers[offset] = meta;</span>
 <span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">       3249 :         if (meta-&gt;next) {</span>
-<span class="lineNum">      47 </span><span class="lineCov">       2005 :                 meta-&gt;next-&gt;chunk = nullptr;</span>
-<span class="lineNum">      48 </span><span class="lineCov">       2005 :                 meta-&gt;next-&gt;prev.pointer = meta;</span>
+<span class="lineNum">      46 </span><span class="lineCov">     101270 :         if (meta-&gt;next) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">      71959 :                 meta-&gt;next-&gt;chunk = nullptr;</span>
+<span class="lineNum">      48 </span><span class="lineCov">      71959 :                 meta-&gt;next-&gt;prev.pointer = meta;</span>
 <span class="lineNum">      49 </span>            :         }
 <span class="lineNum">      50 </span>            : 
 <span class="lineNum">      51 </span>            :         // now fill in the tuple data
-<span class="lineNum">      52 </span><span class="lineCov">       3249 :         storage-&gt;table.serializer.Serialize(storage-&gt;columns, offset, tuple_data);</span>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">       3249 : }</span></a>
+<span class="lineNum">      52 </span><span class="lineCov">     101270 :         storage-&gt;table.serializer.Serialize(storage-&gt;columns, offset, tuple_data);</span>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">     101270 : }</span></a>
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">       2050 : void Transaction::PushQuery(string query) {</span>
-<span class="lineNum">      56 </span><span class="lineCov">       2050 :         char *blob = (char *)undo_buffer.CreateEntry(UndoFlags::QUERY, query.size() + 1);</span>
-<span class="lineNum">      57 </span><span class="lineCov">       2050 :         strcpy(blob, query.c_str());</span>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">       2050 : }</span></a>
+<span class="lineNum">      55 </span><span class="lineCov">      81185 : void Transaction::PushQuery(string query) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">      81185 :         char *blob = (char *)undo_buffer.CreateEntry(UndoFlags::QUERY, query.size() + 1);</span>
+<span class="lineNum">      57 </span><span class="lineCov">      83632 :         strcpy(blob, query.c_str());</span>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">      83834 : }</span></a>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">      46246 : uint8_t *Transaction::PushTuple(size_t data_size) {</span>
-<span class="lineNum">      61 </span><span class="lineCov">      46246 :         return undo_buffer.CreateEntry(UndoFlags::TUPLE_ENTRY, sizeof(VersionInformation) + data_size);</span>
+<span class="lineNum">      60 </span><span class="lineCov">   31550060 : uint8_t *Transaction::PushTuple(size_t data_size) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">   31550060 :         return undo_buffer.CreateEntry(UndoFlags::TUPLE_ENTRY, sizeof(VersionInformation) + data_size);</span>
 <a name="62"><span class="lineNum">      62 </span>            : }</a>
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">      25669 : void Transaction::Commit(WriteAheadLog *log, transaction_t commit_id) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">      25669 :         this-&gt;commit_id = commit_id;</span>
-<span class="lineNum">      66 </span><span class="lineCov">      25669 :         undo_buffer.Commit(log, commit_id);</span>
-<span class="lineNum">      67 </span><span class="lineCov">      25669 : }</span>
+<span class="lineNum">      64 </span><span class="lineCov">    3040318 : void Transaction::Commit(WriteAheadLog *log, transaction_t commit_id) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">    3040318 :         this-&gt;commit_id = commit_id;</span>
+<span class="lineNum">      66 </span><span class="lineCov">    3040318 :         undo_buffer.Commit(log, commit_id);</span>
+<span class="lineNum">      67 </span><span class="lineCov">    3040318 : }</span>
 </pre>
       </td>
     </tr>

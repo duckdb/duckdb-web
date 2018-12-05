@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -100,28 +100,28 @@
 <span class="lineNum">      38 </span>            :         void Undo(VersionInformation *info);
 <a name="39"><span class="lineNum">      39 </span>            : </a>
 <span class="lineNum">      40 </span>            :         //! Get an exclusive lock
-<span class="lineNum">      41 </span><span class="lineCov">      32756 :         void GetExclusiveLock() {</span>
-<span class="lineNum">      42 </span><span class="lineCov">      32756 :                 exclusive_lock.lock();</span>
-<span class="lineNum">      43 </span><span class="lineCov">      32756 :                 while (read_count != 0)</span>
+<span class="lineNum">      41 </span><span class="lineCov">     148935 :         void GetExclusiveLock() {</span>
+<span class="lineNum">      42 </span><span class="lineCov">     148935 :                 exclusive_lock.lock();</span>
+<span class="lineNum">      43 </span><span class="lineCov">  135514200 :                 while (read_count != 0)</span>
 <span class="lineNum">      44 </span>            :                         ;
-<span class="lineNum">      45 </span><span class="lineCov">      32756 :         }</span>
+<span class="lineNum">      45 </span><span class="lineCov">     155341 :         }</span>
 <a name="46"><span class="lineNum">      46 </span>            : </a>
 <span class="lineNum">      47 </span>            :         //! Release an exclusive lock on the chunk
-<span class="lineNum">      48 </span><span class="lineCov">      32756 :         void ReleaseExclusiveLock() {</span>
-<span class="lineNum">      49 </span><span class="lineCov">      32756 :                 exclusive_lock.unlock();</span>
-<span class="lineNum">      50 </span><span class="lineCov">      32756 :         }</span>
+<span class="lineNum">      48 </span><span class="lineCov">     155341 :         void ReleaseExclusiveLock() {</span>
+<span class="lineNum">      49 </span><span class="lineCov">     155341 :                 exclusive_lock.unlock();</span>
+<span class="lineNum">      50 </span><span class="lineCov">     155341 :         }</span>
 <a name="51"><span class="lineNum">      51 </span>            : </a>
 <span class="lineNum">      52 </span>            :         //! Get a shared lock on the chunk
-<span class="lineNum">      53 </span><span class="lineCov">      67330 :         void GetSharedLock() {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      67330 :                 exclusive_lock.lock();</span>
-<span class="lineNum">      55 </span><span class="lineCov">      67330 :                 read_count++;</span>
-<span class="lineNum">      56 </span><span class="lineCov">      67330 :                 exclusive_lock.unlock();</span>
-<span class="lineNum">      57 </span><span class="lineCov">      67330 :         }</span>
+<span class="lineNum">      53 </span><span class="lineCov">    3727908 :         void GetSharedLock() {</span>
+<span class="lineNum">      54 </span><span class="lineCov">    3727908 :                 exclusive_lock.lock();</span>
+<span class="lineNum">      55 </span><span class="lineCov">    3733385 :                 read_count++;</span>
+<span class="lineNum">      56 </span><span class="lineCov">    3733385 :                 exclusive_lock.unlock();</span>
+<span class="lineNum">      57 </span><span class="lineCov">    3733334 :         }</span>
 <a name="58"><span class="lineNum">      58 </span>            : </a>
 <span class="lineNum">      59 </span>            :         //! Release a shared lock on the chunk
-<span class="lineNum">      60 </span><span class="lineCov">      67330 :         void ReleaseSharedLock() {</span>
-<span class="lineNum">      61 </span><span class="lineCov">      67330 :                 read_count--;</span>
-<span class="lineNum">      62 </span><span class="lineCov">      67330 :         }</span>
+<span class="lineNum">      60 </span><span class="lineCov">    3727905 :         void ReleaseSharedLock() {</span>
+<span class="lineNum">      61 </span><span class="lineCov">    3727905 :                 read_count--;</span>
+<span class="lineNum">      62 </span><span class="lineCov">    3732384 :         }</span>
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :         unique_ptr&lt;StorageChunk&gt; next;
 <span class="lineNum">      65 </span>            :         StringHeap string_heap;

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -77,9 +77,9 @@
 <span class="lineNum">      15 </span>            : //! Physically delete data from a table
 <a name="16"><span class="lineNum">      16 </span>            : class PhysicalDelete : public PhysicalOperator {</a>
 <span class="lineNum">      17 </span>            : public:
-<span class="lineNum">      18 </span><span class="lineCov">         16 :         PhysicalDelete(LogicalOperator &amp;op, TableCatalogEntry &amp;tableref, DataTable &amp;table)</span>
-<span class="lineNum">      19 </span><span class="lineCov">         16 :             : PhysicalOperator(PhysicalOperatorType::DELETE, op.types), tableref(tableref), table(table) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">         16 :         }</span>
+<span class="lineNum">      18 </span><span class="lineCov">        939 :         PhysicalDelete(LogicalOperator &amp;op, TableCatalogEntry &amp;tableref, DataTable &amp;table)</span>
+<span class="lineNum">      19 </span><span class="lineCov">        939 :             : PhysicalOperator(PhysicalOperatorType::DELETE, op.types), tableref(tableref), table(table) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">        957 :         }</span>
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span>            :         void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) override;
 <span class="lineNum">      23 </span>            : 

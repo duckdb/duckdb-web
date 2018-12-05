@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -136,10 +136,10 @@
 <span class="lineNum">      74 </span>            :                 unique_ptr&lt;uint8_t[]&gt; data;
 <a name="75"><span class="lineNum">      75 </span>            :                 unique_ptr&lt;Node&gt; prev;</a>
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">         51 :                 Node(size_t tuple_size, size_t capacity) : count(0), capacity(capacity) {</span>
-<span class="lineNum">      78 </span><span class="lineCov">         51 :                         data = unique_ptr&lt;uint8_t[]&gt;(new uint8_t[tuple_size * capacity]);</span>
-<span class="lineNum">      79 </span><span class="lineCov">         51 :                         memset(data.get(), 0, tuple_size * capacity);</span>
-<span class="lineNum">      80 </span><span class="lineCov">         51 :                 }</span>
+<span class="lineNum">      77 </span><span class="lineCov">      11984 :                 Node(size_t tuple_size, size_t capacity) : count(0), capacity(capacity) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">      11984 :                         data = unique_ptr&lt;uint8_t[]&gt;(new uint8_t[tuple_size * capacity]);</span>
+<span class="lineNum">      79 </span><span class="lineCov">      11984 :                         memset(data.get(), 0, tuple_size * capacity);</span>
+<span class="lineNum">      80 </span><span class="lineCov">      11984 :                 }</span>
 <span class="lineNum">      81 </span>            :         };
 <span class="lineNum">      82 </span>            : 
 <span class="lineNum">      83 </span>            :         void Hash(DataChunk &amp;keys, Vector &amp;hashes);
@@ -158,8 +158,8 @@
 <span class="lineNum">      96 </span>            :         //! The stringheap of the JoinHashTable
 <a name="97"><span class="lineNum">      97 </span>            :         StringHeap string_heap;</a>
 <span class="lineNum">      98 </span>            : 
-<span class="lineNum">      99 </span><span class="lineCov">        297 :         size_t size() {</span>
-<span class="lineNum">     100 </span><span class="lineCov">        297 :                 return count;</span>
+<span class="lineNum">      99 </span><span class="lineCov">       3138 :         size_t size() {</span>
+<span class="lineNum">     100 </span><span class="lineCov">       3138 :                 return count;</span>
 <span class="lineNum">     101 </span>            :         }
 <span class="lineNum">     102 </span>            : 
 <span class="lineNum">     103 </span>            :         //! Serializer for the keys used in equality comparison

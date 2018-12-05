@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -93,10 +93,10 @@
 <span class="lineNum">      31 </span>            :         unique_ptr&lt;UniqueIndexNode&gt; left;
 <a name="32"><span class="lineNum">      32 </span>            :         unique_ptr&lt;UniqueIndexNode&gt; right;</a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">         65 :         UniqueIndexNode(Tuple tuple, size_t row_identifier)</span>
-<span class="lineNum">      35 </span><span class="lineCov">        130 :             : tuple(std::move(tuple)), row_identifier(row_identifier),</span>
-<span class="lineNum">      36 </span><span class="lineCov">         65 :               parent(nullptr) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">         65 :         }</span>
+<span class="lineNum">      34 </span><span class="lineCov">         80 :         UniqueIndexNode(Tuple tuple, size_t row_identifier)</span>
+<span class="lineNum">      35 </span><span class="lineCov">        160 :             : tuple(std::move(tuple)), row_identifier(row_identifier),</span>
+<span class="lineNum">      36 </span><span class="lineCov">         80 :               parent(nullptr) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">         80 :         }</span>
 <span class="lineNum">      38 </span>            : };
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span>            : //! The unique index is used to lookup whether or not multiple values have the

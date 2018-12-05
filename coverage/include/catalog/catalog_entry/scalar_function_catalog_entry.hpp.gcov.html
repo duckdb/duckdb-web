@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -86,10 +86,10 @@
 <span class="lineNum">      24 </span>            : //! A table function in the catalog
 <a name="25"><span class="lineNum">      25 </span>            : class ScalarFunctionCatalogEntry : public CatalogEntry {</a>
 <span class="lineNum">      26 </span>            : public:
-<span class="lineNum">      27 </span><span class="lineCov">       1032 :         ScalarFunctionCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateScalarFunctionInformation *info)</span>
-<span class="lineNum">      28 </span><span class="lineCov">       3096 :             : CatalogEntry(CatalogType::SCALAR_FUNCTION, catalog, info-&gt;name), schema(schema), function(info-&gt;function),</span>
-<span class="lineNum">      29 </span><span class="lineCov">       1032 :               matches(info-&gt;matches), return_type(info-&gt;return_type) {</span>
-<span class="lineNum">      30 </span><span class="lineCov">       1032 :         }</span>
+<span class="lineNum">      27 </span><span class="lineCov">       3584 :         ScalarFunctionCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateScalarFunctionInformation *info)</span>
+<span class="lineNum">      28 </span><span class="lineCov">      10752 :             : CatalogEntry(CatalogType::SCALAR_FUNCTION, catalog, info-&gt;name), schema(schema), function(info-&gt;function),</span>
+<span class="lineNum">      29 </span><span class="lineCov">       3584 :               matches(info-&gt;matches), return_type(info-&gt;return_type) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">       3584 :         }</span>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            :         //! The schema the table belongs to
 <span class="lineNum">      33 </span>            :         SchemaCatalogEntry *schema;

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -68,24 +68,24 @@
 <span class="lineNum">       6 </span>            : using namespace postgres;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">     101787 : unique_ptr&lt;Expression&gt; Transformer::TransformColumnRef(ColumnRef *root) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">     101787 :         List *fields = root-&gt;fields;</span>
-<span class="lineNum">      11 </span><span class="lineCov">     101787 :         switch ((reinterpret_cast&lt;Node *&gt;(fields-&gt;head-&gt;data.ptr_value))-&gt;type) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">     101641 :         case T_String: {</span>
-<span class="lineNum">      13 </span><span class="lineCov">     101641 :                 if (fields-&gt;length &lt; 1 || fields-&gt;length &gt; 2) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    4443365 : unique_ptr&lt;Expression&gt; Transformer::TransformColumnRef(ColumnRef *root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    4443365 :         List *fields = root-&gt;fields;</span>
+<span class="lineNum">      11 </span><span class="lineCov">    4443365 :         switch ((reinterpret_cast&lt;Node *&gt;(fields-&gt;head-&gt;data.ptr_value))-&gt;type) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    4247857 :         case T_String: {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    4247857 :                 if (fields-&gt;length &lt; 1 || fields-&gt;length &gt; 2) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         throw ParserException(&quot;Unexpected field length&quot;);</span>
 <span class="lineNum">      15 </span>            :                 }
-<span class="lineNum">      16 </span><span class="lineCov">     203282 :                 string column_name, table_name;</span>
-<span class="lineNum">      17 </span><span class="lineCov">     101641 :                 if (fields-&gt;length == 1) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">      93063 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    8501339 :                 string column_name, table_name;</span>
+<span class="lineNum">      17 </span><span class="lineCov">    4251969 :                 if (fields-&gt;length == 1) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3780997 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
 <span class="lineNum">      19 </span>            :                 } else {
-<span class="lineNum">      20 </span><span class="lineCov">       8578 :                         table_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
-<span class="lineNum">      21 </span><span class="lineCov">       8578 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;next-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">      20 </span><span class="lineCov">     470972 :                         table_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">      21 </span><span class="lineCov">     470972 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;next-&gt;data.ptr_value)-&gt;val.str);</span>
 <span class="lineNum">      22 </span>            :                 }
-<span class="lineNum">      23 </span><span class="lineCov">     101641 :                 return make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
+<span class="lineNum">      23 </span><span class="lineCov">    4250518 :                 return make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
 <span class="lineNum">      24 </span>            :         }
-<span class="lineNum">      25 </span><span class="lineCov">        146 :         case T_A_Star: {</span>
-<span class="lineNum">      26 </span><span class="lineCov">        146 :                 return make_unique&lt;StarExpression&gt;();</span>
+<span class="lineNum">      25 </span><span class="lineCov">     196898 :         case T_A_Star: {</span>
+<span class="lineNum">      26 </span><span class="lineCov">     196898 :                 return make_unique&lt;StarExpression&gt;();</span>
 <span class="lineNum">      27 </span>            :         }
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;ColumnRef not implemented!&quot;);</span>

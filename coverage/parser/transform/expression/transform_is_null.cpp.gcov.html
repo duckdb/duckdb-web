@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,18 +67,18 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">        220 : unique_ptr&lt;Expression&gt; Transformer::TransformNullTest(NullTest *root) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">        220 :         if (!root) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">     156246 : unique_ptr&lt;Expression&gt; Transformer::TransformNullTest(NullTest *root) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">     156246 :         if (!root) {</span>
 <span class="lineNum">      10 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      11 </span>            :         }
-<span class="lineNum">      12 </span><span class="lineCov">        440 :         auto arg = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;arg));</span>
-<span class="lineNum">      13 </span><span class="lineCov">        220 :         if (root-&gt;argisrow) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">     312492 :         auto arg = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;arg));</span>
+<span class="lineNum">      13 </span><span class="lineCov">     156246 :         if (root-&gt;argisrow) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;IS NULL argisrow&quot;);</span>
 <span class="lineNum">      15 </span>            :         }
-<span class="lineNum">      16 </span><span class="lineCov">        220 :         ExpressionType expr_type =</span>
-<span class="lineNum">      17 </span><span class="lineCov">        220 :             (root-&gt;nulltesttype == IS_NULL) ? ExpressionType::OPERATOR_IS_NULL : ExpressionType::OPERATOR_IS_NOT_NULL;</span>
+<span class="lineNum">      16 </span><span class="lineCov">     156246 :         ExpressionType expr_type =</span>
+<span class="lineNum">      17 </span><span class="lineCov">     156246 :             (root-&gt;nulltesttype == IS_NULL) ? ExpressionType::OPERATOR_IS_NULL : ExpressionType::OPERATOR_IS_NOT_NULL;</span>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">        220 :         return unique_ptr&lt;Expression&gt;(new OperatorExpression(expr_type, TypeId::BOOLEAN, move(arg)));</span>
+<span class="lineNum">      19 </span><span class="lineCov">     156246 :         return unique_ptr&lt;Expression&gt;(new OperatorExpression(expr_type, TypeId::BOOLEAN, move(arg)));</span>
 <span class="lineNum">      20 </span>            : }
 </pre>
       </td>

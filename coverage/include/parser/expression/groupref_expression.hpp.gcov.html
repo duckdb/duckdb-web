@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -79,8 +79,8 @@
 <span class="lineNum">      17 </span>            : public:
 <a name="18"><span class="lineNum">      18 </span>            :         GroupRefExpression(TypeId return_type, size_t group_index);</a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">       2476 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       2476 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      20 </span><span class="lineCov">    2646471 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">    2646471 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      22 </span>            :         }
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :         ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :                 return ExpressionClass::GROUP_REF;</span>

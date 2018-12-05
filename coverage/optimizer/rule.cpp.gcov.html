@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -63,14 +63,14 @@
 <a name="1"><span class="lineNum">       1 </span>            : #include &quot;optimizer/rule.hpp&quot;</a>
 <a name="2"><span class="lineNum">       2 </span>            : using namespace duckdb;</a>
 <span class="lineNum">       3 </span>            : 
-<span class="lineNum">       4 </span><span class="lineCov">      41596 : AbstractOperator::iterator AbstractOperator::begin() {</span>
-<span class="lineNum">       5 </span><span class="lineCov">      41596 :         assert(type == AbstractOperatorType::LOGICAL_OPERATOR);</span>
-<span class="lineNum">       6 </span><span class="lineCov">      41596 :         return iterator(value.op);</span>
+<span class="lineNum">       4 </span><span class="lineCov">    4567165 : AbstractOperator::iterator AbstractOperator::begin() {</span>
+<span class="lineNum">       5 </span><span class="lineCov">    4567165 :         assert(type == AbstractOperatorType::LOGICAL_OPERATOR);</span>
+<span class="lineNum">       6 </span><span class="lineCov">    4567165 :         return iterator(value.op);</span>
 <a name="7"><span class="lineNum">       7 </span>            : }</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">     408396 : AbstractOperator::iterator AbstractOperator::end() {</span>
-<span class="lineNum">      10 </span><span class="lineCov">     408396 :         assert(type == AbstractOperatorType::LOGICAL_OPERATOR);</span>
-<span class="lineNum">      11 </span><span class="lineCov">     408396 :         return iterator(value.op, value.op-&gt;children.size(), value.op-&gt;ExpressionCount());</span>
+<span class="lineNum">       9 </span><span class="lineCov">   58303094 : AbstractOperator::iterator AbstractOperator::end() {</span>
+<span class="lineNum">      10 </span><span class="lineCov">   58303094 :         assert(type == AbstractOperatorType::LOGICAL_OPERATOR);</span>
+<span class="lineNum">      11 </span><span class="lineCov">   58303094 :         return iterator(value.op, value.op-&gt;children.size(), value.op-&gt;ExpressionCount());</span>
 <span class="lineNum">      12 </span>            : }
 </pre>
       </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -68,28 +68,28 @@
 <span class="lineNum">       6 </span>            : using namespace postgres;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">       3840 : unique_ptr&lt;Expression&gt; Transformer::TransformSubquery(SubLink *root) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">       3840 :         if (!root) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">       4117 : unique_ptr&lt;Expression&gt; Transformer::TransformSubquery(SubLink *root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">       4117 :         if (!root) {</span>
 <span class="lineNum">      11 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      12 </span>            :         }
-<span class="lineNum">      13 </span><span class="lineCov">       7680 :         auto subquery_expr = make_unique&lt;SubqueryExpression&gt;();</span>
-<span class="lineNum">      14 </span><span class="lineCov">       3840 :         subquery_expr-&gt;subquery = TransformSelectNode((SelectStmt *)root-&gt;subselect);</span>
-<span class="lineNum">      15 </span><span class="lineCov">       3840 :         if (!subquery_expr-&gt;subquery) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">       8234 :         auto subquery_expr = make_unique&lt;SubqueryExpression&gt;();</span>
+<span class="lineNum">      14 </span><span class="lineCov">       4117 :         subquery_expr-&gt;subquery = TransformSelectNode((SelectStmt *)root-&gt;subselect);</span>
+<span class="lineNum">      15 </span><span class="lineCov">       4117 :         if (!subquery_expr-&gt;subquery) {</span>
 <span class="lineNum">      16 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      17 </span>            :         }
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">       3840 :         switch (root-&gt;subLinkType) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">        735 :         case EXISTS_SUBLINK: {</span>
-<span class="lineNum">      21 </span><span class="lineCov">        735 :                 subquery_expr-&gt;subquery_type = SubqueryType::EXISTS;</span>
-<span class="lineNum">      22 </span><span class="lineCov">        735 :                 return make_unique&lt;OperatorExpression&gt;(ExpressionType::OPERATOR_EXISTS, TypeId::BOOLEAN, move(subquery_expr));</span>
+<span class="lineNum">      19 </span><span class="lineCov">       4117 :         switch (root-&gt;subLinkType) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">        847 :         case EXISTS_SUBLINK: {</span>
+<span class="lineNum">      21 </span><span class="lineCov">        847 :                 subquery_expr-&gt;subquery_type = SubqueryType::EXISTS;</span>
+<span class="lineNum">      22 </span><span class="lineCov">        847 :                 return make_unique&lt;OperatorExpression&gt;(ExpressionType::OPERATOR_EXISTS, TypeId::BOOLEAN, move(subquery_expr));</span>
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">         30 :         case ANY_SUBLINK: {</span>
-<span class="lineNum">      25 </span><span class="lineCov">         30 :                 subquery_expr-&gt;subquery_type = SubqueryType::IN;</span>
-<span class="lineNum">      26 </span><span class="lineCov">         90 :                 return make_unique&lt;OperatorExpression&gt;(ExpressionType::COMPARE_IN, TypeId::BOOLEAN,</span>
-<span class="lineNum">      27 </span><span class="lineCov">        120 :                                                        TransformExpression(root-&gt;testexpr), move(subquery_expr));</span>
+<span class="lineNum">      24 </span><span class="lineCov">        115 :         case ANY_SUBLINK: {</span>
+<span class="lineNum">      25 </span><span class="lineCov">        115 :                 subquery_expr-&gt;subquery_type = SubqueryType::IN;</span>
+<span class="lineNum">      26 </span><span class="lineCov">        345 :                 return make_unique&lt;OperatorExpression&gt;(ExpressionType::COMPARE_IN, TypeId::BOOLEAN,</span>
+<span class="lineNum">      27 </span><span class="lineCov">        460 :                                                        TransformExpression(root-&gt;testexpr), move(subquery_expr));</span>
 <span class="lineNum">      28 </span>            :         }
-<span class="lineNum">      29 </span><span class="lineCov">       3075 :         case EXPR_SUBLINK: {</span>
-<span class="lineNum">      30 </span><span class="lineCov">       3075 :                 return subquery_expr;</span>
+<span class="lineNum">      29 </span><span class="lineCov">       3155 :         case EXPR_SUBLINK: {</span>
+<span class="lineNum">      30 </span><span class="lineCov">       3155 :                 return subquery_expr;</span>
 <span class="lineNum">      31 </span>            :         }
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :         default: { throw NotImplementedException(&quot;Subquery of type %d not implemented\n&quot;, (int)root-&gt;subLinkType); }</span>
 <span class="lineNum">      33 </span>            :         }

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -81,8 +81,8 @@
 <span class="lineNum">      19 </span>            : public:
 <a name="20"><span class="lineNum">      20 </span>            :         SubqueryRef(unique_ptr&lt;QueryNode&gt; subquery);</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">        890 :         unique_ptr&lt;TableRef&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">        890 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">        967 :         unique_ptr&lt;TableRef&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">        967 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :         bool Equals(const TableRef *other_) override {</span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :                 if (!TableRef::Equals(other_)) {</span>

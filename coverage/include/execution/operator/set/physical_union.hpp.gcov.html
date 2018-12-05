@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -83,9 +83,9 @@
 <span class="lineNum">      21 </span>            : 
 <a name="22"><span class="lineNum">      22 </span>            : class PhysicalUnionOperatorState : public PhysicalOperatorState {</a>
 <span class="lineNum">      23 </span>            : public:
-<span class="lineNum">      24 </span><span class="lineCov">        109 :         PhysicalUnionOperatorState(ExpressionExecutor *parent_executor)</span>
-<span class="lineNum">      25 </span><span class="lineCov">        109 :             : PhysicalOperatorState(nullptr, parent_executor), top_done(false) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">        109 :         }</span>
+<span class="lineNum">      24 </span><span class="lineCov">       2456 :         PhysicalUnionOperatorState(ExpressionExecutor *parent_executor)</span>
+<span class="lineNum">      25 </span><span class="lineCov">       2456 :             : PhysicalOperatorState(nullptr, parent_executor), top_done(false) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">       2456 :         }</span>
 <span class="lineNum">      27 </span>            :         unique_ptr&lt;PhysicalOperatorState&gt; top_state;
 <span class="lineNum">      28 </span>            :         unique_ptr&lt;PhysicalOperatorState&gt; bottom_state;
 <span class="lineNum">      29 </span>            :         bool top_done = false;

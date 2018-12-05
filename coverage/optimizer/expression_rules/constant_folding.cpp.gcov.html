@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -74,58 +74,58 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">      39862 : ConstantFoldingRule::ConstantFoldingRule() {</span>
-<span class="lineNum">      16 </span><span class="lineCov">     119586 :         root = unique_ptr&lt;AbstractRuleNode&gt;(new ExpressionNodeSet(</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3128640 : ConstantFoldingRule::ConstantFoldingRule() {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    9393621 :         root = unique_ptr&lt;AbstractRuleNode&gt;(new ExpressionNodeSet(</span>
 <span class="lineNum">      17 </span>            :             {ExpressionType::OPERATOR_ADD, ExpressionType::OPERATOR_SUBTRACT, ExpressionType::OPERATOR_MULTIPLY,
-<span class="lineNum">      18 </span><span class="lineCov">      79724 :              ExpressionType::OPERATOR_DIVIDE, ExpressionType::OPERATOR_MOD}));</span>
-<span class="lineNum">      19 </span><span class="lineCov">      39862 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::VALUE_CONSTANT));</span>
-<span class="lineNum">      20 </span><span class="lineCov">      39862 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeAny&gt;());</span>
-<span class="lineNum">      21 </span><span class="lineCov">      39862 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">      39862 : }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">    6259929 :              ExpressionType::OPERATOR_DIVIDE, ExpressionType::OPERATOR_MOD}));</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3131746 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::VALUE_CONSTANT));</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3129359 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeAny&gt;());</span>
+<span class="lineNum">      21 </span><span class="lineCov">    3129679 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    3129561 : }</span></a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">      55386 : unique_ptr&lt;Expression&gt; ConstantFoldingRule::Apply(Rewriter &amp;rewriter, Expression &amp;root,</span>
+<span class="lineNum">      24 </span><span class="lineCov">   10643183 : unique_ptr&lt;Expression&gt; ConstantFoldingRule::Apply(Rewriter &amp;rewriter, Expression &amp;root,</span>
 <span class="lineNum">      25 </span>            :                                                   vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
-<span class="lineNum">      26 </span><span class="lineCov">     110772 :         Value result;</span>
+<span class="lineNum">      26 </span><span class="lineCov">   21286200 :         Value result;</span>
 <span class="lineNum">      27 </span>            : 
 <span class="lineNum">      28 </span>            :         // TODO: add boolean ops
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">      55386 :         auto left = root.children[0].get();</span>
-<span class="lineNum">      31 </span><span class="lineCov">      55386 :         auto right = root.children[1].get();</span>
+<span class="lineNum">      30 </span><span class="lineCov">   10643343 :         auto left = root.children[0].get();</span>
+<span class="lineNum">      31 </span><span class="lineCov">   10643166 :         auto right = root.children[1].get();</span>
 <span class="lineNum">      32 </span>            : 
 <span class="lineNum">      33 </span>            :         // case: both constant, evaluate
-<span class="lineNum">      34 </span><span class="lineCov">      55386 :         if (left-&gt;type == ExpressionType::VALUE_CONSTANT &amp;&amp; right-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">        628 :                 Value result;</span>
-<span class="lineNum">      36 </span><span class="lineCov">        314 :                 auto left_val = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
-<span class="lineNum">      37 </span><span class="lineCov">        314 :                 auto right_val = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[1].get());</span>
+<span class="lineNum">      34 </span><span class="lineCov">   10645614 :         if (left-&gt;type == ExpressionType::VALUE_CONSTANT &amp;&amp; right-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    2620380 :                 Value result;</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1310190 :                 auto left_val = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
+<span class="lineNum">      37 </span><span class="lineCov">    1310190 :                 auto right_val = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[1].get());</span>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">        314 :                 if (TypeIsNumeric(left_val-&gt;value.type) &amp;&amp; TypeIsNumeric(right_val-&gt;value.type)) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">        314 :                         switch (root.type) {</span>
-<span class="lineNum">      41 </span><span class="lineCov">        294 :                         case ExpressionType::OPERATOR_ADD:</span>
-<span class="lineNum">      42 </span><span class="lineCov">        294 :                                 result = left_val-&gt;value + right_val-&gt;value;</span>
-<span class="lineNum">      43 </span><span class="lineCov">        294 :                                 break;</span>
-<span class="lineNum">      44 </span><span class="lineCov">         10 :                         case ExpressionType::OPERATOR_SUBTRACT:</span>
-<span class="lineNum">      45 </span><span class="lineCov">         10 :                                 result = left_val-&gt;value - right_val-&gt;value;</span>
-<span class="lineNum">      46 </span><span class="lineCov">         10 :                                 break;</span>
-<span class="lineNum">      47 </span><span class="lineCov">          3 :                         case ExpressionType::OPERATOR_MULTIPLY:</span>
-<span class="lineNum">      48 </span><span class="lineCov">          3 :                                 result = left_val-&gt;value * right_val-&gt;value;</span>
-<span class="lineNum">      49 </span><span class="lineCov">          3 :                                 break;</span>
-<span class="lineNum">      50 </span><span class="lineCov">          7 :                         case ExpressionType::OPERATOR_DIVIDE:</span>
-<span class="lineNum">      51 </span><span class="lineCov">          7 :                                 result = left_val-&gt;value / right_val-&gt;value;</span>
-<span class="lineNum">      52 </span><span class="lineCov">          7 :                                 break;</span>
+<span class="lineNum">      39 </span><span class="lineCov">    1310190 :                 if (TypeIsNumeric(left_val-&gt;value.type) &amp;&amp; TypeIsNumeric(right_val-&gt;value.type)) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">    1310190 :                         switch (root.type) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">     295152 :                         case ExpressionType::OPERATOR_ADD:</span>
+<span class="lineNum">      42 </span><span class="lineCov">     295152 :                                 result = left_val-&gt;value + right_val-&gt;value;</span>
+<span class="lineNum">      43 </span><span class="lineCov">     295152 :                                 break;</span>
+<span class="lineNum">      44 </span><span class="lineCov">      77854 :                         case ExpressionType::OPERATOR_SUBTRACT:</span>
+<span class="lineNum">      45 </span><span class="lineCov">      77854 :                                 result = left_val-&gt;value - right_val-&gt;value;</span>
+<span class="lineNum">      46 </span><span class="lineCov">      77854 :                                 break;</span>
+<span class="lineNum">      47 </span><span class="lineCov">     831710 :                         case ExpressionType::OPERATOR_MULTIPLY:</span>
+<span class="lineNum">      48 </span><span class="lineCov">     831710 :                                 result = left_val-&gt;value * right_val-&gt;value;</span>
+<span class="lineNum">      49 </span><span class="lineCov">     831710 :                                 break;</span>
+<span class="lineNum">      50 </span><span class="lineCov">     105474 :                         case ExpressionType::OPERATOR_DIVIDE:</span>
+<span class="lineNum">      51 </span><span class="lineCov">     105474 :                                 result = left_val-&gt;value / right_val-&gt;value;</span>
+<span class="lineNum">      52 </span><span class="lineCov">     105474 :                                 break;</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :                         case ExpressionType::OPERATOR_MOD:</span>
 <span class="lineNum">      54 </span>            :                                 // Value::Modulo(left_val-&gt;value, right_val-&gt;value, result);
 <span class="lineNum">      55 </span>            :                                 // break;
 <span class="lineNum">      56 </span>            :                         default:
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :                                 throw NotImplementedException(&quot;Unsupported operator&quot;);</span>
 <span class="lineNum">      58 </span>            :                         }
-<span class="lineNum">      59 </span><span class="lineCov">        314 :                         return make_unique&lt;ConstantExpression&gt;(result.CastAs(root.return_type));</span>
+<span class="lineNum">      59 </span><span class="lineCov">    1310190 :                         return make_unique&lt;ConstantExpression&gt;(result.CastAs(root.return_type));</span>
 <span class="lineNum">      60 </span>            :                 }
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      62 </span>            :         }
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :         // FIXME:  folding unknown subtrees produces incorrect results with
 <span class="lineNum">      65 </span>            :         // NULLs.
-<span class="lineNum">      66 </span><span class="lineCov">      55072 :         return nullptr;</span>
+<span class="lineNum">      66 </span><span class="lineCov">    9335424 :         return nullptr;</span>
 <span class="lineNum">      67 </span>            : };
 </pre>
       </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -77,16 +77,16 @@
 <span class="lineNum">      15 </span>            : //! LogicalGet represents a scan operation from a data source
 <a name="16"><span class="lineNum">      16 </span>            : class LogicalGet : public LogicalOperator {</a>
 <span class="lineNum">      17 </span>            : public:
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        149 :         LogicalGet() : LogicalOperator(LogicalOperatorType::GET), table(nullptr) {</span></a>
-<span class="lineNum">      19 </span><span class="lineCov">        149 :         }</span>
-<span class="lineNum">      20 </span><span class="lineCov">      13871 :         LogicalGet(TableCatalogEntry *table, size_t table_index, vector&lt;column_t&gt; column_ids)</span>
-<span class="lineNum">      21 </span><span class="lineCov">      13871 :             : LogicalOperator(LogicalOperatorType::GET), table(table), table_index(table_index), column_ids(column_ids) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">      13871 :                 referenced_tables.insert(table_index);</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      13871 :         }</span></a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">     659188 :         LogicalGet() : LogicalOperator(LogicalOperatorType::GET), table(nullptr) {</span></a>
+<span class="lineNum">      19 </span><span class="lineCov">     659188 :         }</span>
+<span class="lineNum">      20 </span><span class="lineCov">    2701748 :         LogicalGet(TableCatalogEntry *table, size_t table_index, vector&lt;column_t&gt; column_ids)</span>
+<span class="lineNum">      21 </span><span class="lineCov">    2701748 :             : LogicalOperator(LogicalOperatorType::GET), table(table), table_index(table_index), column_ids(column_ids) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">    2704378 :                 referenced_tables.insert(table_index);</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    2703596 :         }</span></a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">      31429 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      26 </span><span class="lineCov">      31429 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      27 </span><span class="lineCov">      31429 :         }</span>
+<span class="lineNum">      25 </span><span class="lineCov">    6723171 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    6723171 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      27 </span><span class="lineCov">    6721168 :         }</span>
 <span class="lineNum">      28 </span>            :         vector&lt;string&gt; GetNames() override;
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :         //! The base table to retrieve data from

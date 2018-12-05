@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -85,9 +85,9 @@
 <span class="lineNum">      23 </span>            : //! statement
 <a name="24"><span class="lineNum">      24 </span>            : class LogicalPlanGenerator : public SQLNodeVisitor {</a>
 <span class="lineNum">      25 </span>            : public:
-<span class="lineNum">      26 </span><span class="lineCov">      44568 :         LogicalPlanGenerator(ClientContext &amp;context, BindContext &amp;bind_context)</span>
-<span class="lineNum">      27 </span><span class="lineCov">      44568 :             : require_row_id(false), context(context), bind_context(bind_context) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">      44568 :         }</span>
+<span class="lineNum">      26 </span><span class="lineCov">    3143351 :         LogicalPlanGenerator(ClientContext &amp;context, BindContext &amp;bind_context)</span>
+<span class="lineNum">      27 </span><span class="lineCov">    3143351 :             : require_row_id(false), context(context), bind_context(bind_context) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3142774 :         }</span>
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :         unique_ptr&lt;SQLStatement&gt; Visit(SelectStatement &amp;statement);
 <span class="lineNum">      31 </span>            :         unique_ptr&lt;SQLStatement&gt; Visit(InsertStatement &amp;statement);

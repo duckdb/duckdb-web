@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -84,15 +84,15 @@
 <span class="lineNum">      22 </span>            :         void ResolveType() override;
 <a name="23"><span class="lineNum">      23 </span>            : </a>
 <span class="lineNum">      24 </span>            :         void GetAggregates(vector&lt;AggregateExpression *&gt; &amp;expressions) override;
-<span class="lineNum">      25 </span><span class="lineCov">       5950 :         bool IsAggregate() override {</span>
-<span class="lineNum">      26 </span><span class="lineCov">       5950 :                 return true;</span>
+<span class="lineNum">      25 </span><span class="lineCov">     809869 :         bool IsAggregate() override {</span>
+<span class="lineNum">      26 </span><span class="lineCov">     809869 :                 return true;</span>
 <a name="27"><span class="lineNum">      27 </span>            :         }</a>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">      97475 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">      97475 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      29 </span><span class="lineCov">    4228780 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">    4228780 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      31 </span>            :         }
-<span class="lineNum">      32 </span><span class="lineCov">         42 :         ExpressionClass GetExpressionClass() override {</span>
-<span class="lineNum">      33 </span><span class="lineCov">         42 :                 return ExpressionClass::AGGREGATE;</span>
+<span class="lineNum">      32 </span><span class="lineCov">         44 :         ExpressionClass GetExpressionClass() override {</span>
+<span class="lineNum">      33 </span><span class="lineCov">         44 :                 return ExpressionClass::AGGREGATE;</span>
 <span class="lineNum">      34 </span>            :         }
 <span class="lineNum">      35 </span>            : 
 <span class="lineNum">      36 </span>            :         unique_ptr&lt;Expression&gt; Copy() override;

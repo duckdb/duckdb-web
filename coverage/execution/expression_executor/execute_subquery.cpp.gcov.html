@@ -31,13 +31,13 @@
             <td class="headerValue">DuckDB Code Coverage Report aaaae6fe</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntry">35</td>
             <td class="headerCovTableEntry">38</td>
-            <td class="headerCovTableEntryMed">89.5 %</td>
+            <td class="headerCovTableEntryHi">92.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,57 +67,57 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">       3108 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(SubqueryExpression &amp;expr) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">       3108 :         auto &amp;plan = expr.plan;</span>
-<span class="lineNum">      10 </span><span class="lineCov">       3108 :         if (!plan) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">       3141 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(SubqueryExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">       3141 :         auto &amp;plan = expr.plan;</span>
+<span class="lineNum">      10 </span><span class="lineCov">       3141 :         if (!plan) {</span>
 <span class="lineNum">      11 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Failed to generate query plan for subquery&quot;);</span>
 <span class="lineNum">      12 </span>            :         }
-<span class="lineNum">      13 </span><span class="lineCov">       3108 :         DataChunk *old_chunk = chunk;</span>
-<span class="lineNum">      14 </span><span class="lineCov">       6216 :         DataChunk row_chunk;</span>
-<span class="lineNum">      15 </span><span class="lineCov">       3108 :         if (old_chunk) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">       3108 :                 chunk = &amp;row_chunk;</span>
-<span class="lineNum">      17 </span><span class="lineCov">       6216 :                 auto types = old_chunk-&gt;GetTypes();</span>
-<span class="lineNum">      18 </span><span class="lineCov">       3108 :                 row_chunk.Initialize(types, true);</span>
-<span class="lineNum">      19 </span><span class="lineCov">      17771 :                 for (size_t c = 0; c &lt; old_chunk-&gt;column_count; c++) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">      14663 :                         row_chunk.data[c].count = 1;</span>
+<span class="lineNum">      13 </span><span class="lineCov">       3141 :         DataChunk *old_chunk = chunk;</span>
+<span class="lineNum">      14 </span><span class="lineCov">       6282 :         DataChunk row_chunk;</span>
+<span class="lineNum">      15 </span><span class="lineCov">       3141 :         if (old_chunk) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">       3135 :                 chunk = &amp;row_chunk;</span>
+<span class="lineNum">      17 </span><span class="lineCov">       6270 :                 auto types = old_chunk-&gt;GetTypes();</span>
+<span class="lineNum">      18 </span><span class="lineCov">       3135 :                 row_chunk.Initialize(types, true);</span>
+<span class="lineNum">      19 </span><span class="lineCov">      17969 :                 for (size_t c = 0; c &lt; old_chunk-&gt;column_count; c++) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      14834 :                         row_chunk.data[c].count = 1;</span>
 <span class="lineNum">      21 </span>            :                 }
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">       3108 :         vector.Initialize(expr.return_type);</span>
-<span class="lineNum">      24 </span><span class="lineCov">       3108 :         vector.count = old_chunk ? old_chunk-&gt;size() : 1;</span>
-<span class="lineNum">      25 </span><span class="lineCov">       3108 :         vector.sel_vector = old_chunk ? old_chunk-&gt;sel_vector : nullptr;</span>
+<span class="lineNum">      23 </span><span class="lineCov">       3141 :         vector.Initialize(expr.return_type);</span>
+<span class="lineNum">      24 </span><span class="lineCov">       3141 :         vector.count = old_chunk ? old_chunk-&gt;size() : 1;</span>
+<span class="lineNum">      25 </span><span class="lineCov">       3141 :         vector.sel_vector = old_chunk ? old_chunk-&gt;sel_vector : nullptr;</span>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">      60953 :         for (size_t r = 0; r &lt; vector.count; r++) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">      57845 :                 if (old_chunk) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">     328959 :                         for (size_t c = 0; c &lt; row_chunk.column_count; c++) {</span>
-<span class="lineNum">      30 </span><span class="lineCov">     271114 :                                 row_chunk.data[c].SetValue(0, old_chunk-&gt;data[c].GetValue(r));</span>
+<span class="lineNum">      27 </span><span class="lineCov">      74310 :         for (size_t r = 0; r &lt; vector.count; r++) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">      71173 :                 if (old_chunk) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">     400986 :                         for (size_t c = 0; c &lt; row_chunk.column_count; c++) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">     329819 :                                 row_chunk.data[c].SetValue(0, old_chunk-&gt;data[c].GetValue(r));</span>
 <span class="lineNum">      31 </span>            :                         }
 <span class="lineNum">      32 </span>            :                 }
-<span class="lineNum">      33 </span><span class="lineCov">     115690 :                 auto state = plan-&gt;GetOperatorState(this);</span>
-<span class="lineNum">      34 </span><span class="lineCov">     115690 :                 DataChunk s_chunk;</span>
-<span class="lineNum">      35 </span><span class="lineCov">      57845 :                 plan-&gt;InitializeChunk(s_chunk);</span>
-<span class="lineNum">      36 </span><span class="lineCov">      57845 :                 plan-&gt;GetChunk(context, s_chunk, state.get());</span>
+<span class="lineNum">      33 </span><span class="lineCov">     142346 :                 auto state = plan-&gt;GetOperatorState(this);</span>
+<span class="lineNum">      34 </span><span class="lineCov">     142346 :                 DataChunk s_chunk;</span>
+<span class="lineNum">      35 </span><span class="lineCov">      71173 :                 plan-&gt;InitializeChunk(s_chunk);</span>
+<span class="lineNum">      36 </span><span class="lineCov">      71173 :                 plan-&gt;GetChunk(context, s_chunk, state.get());</span>
 <span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span><span class="lineCov">      57845 :                 switch (expr.subquery_type) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">      50165 :                 case SubqueryType::DEFAULT:</span>
-<span class="lineNum">      40 </span><span class="lineCov">      50165 :                         if (s_chunk.size() == 0) {</span>
-<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                                 vector.SetValue(r, Value());</span>
+<span class="lineNum">      38 </span><span class="lineCov">      71169 :                 switch (expr.subquery_type) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">      61455 :                 case SubqueryType::DEFAULT:</span>
+<span class="lineNum">      40 </span><span class="lineCov">      61455 :                         if (s_chunk.size() == 0) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">       1024 :                                 vector.SetValue(r, Value());</span>
 <span class="lineNum">      42 </span>            :                         } else {
-<span class="lineNum">      43 </span><span class="lineCov">      50165 :                                 assert(s_chunk.column_count &gt; 0);</span>
-<span class="lineNum">      44 </span><span class="lineCov">      50165 :                                 vector.SetValue(r, s_chunk.data[0].GetValue(0));</span>
+<span class="lineNum">      43 </span><span class="lineCov">      60431 :                                 assert(s_chunk.column_count &gt; 0);</span>
+<span class="lineNum">      44 </span><span class="lineCov">      60431 :                                 vector.SetValue(r, s_chunk.data[0].GetValue(0));</span>
 <span class="lineNum">      45 </span>            :                         }
-<span class="lineNum">      46 </span><span class="lineCov">      50165 :                         break;</span>
+<span class="lineNum">      46 </span><span class="lineCov">      61455 :                         break;</span>
 <span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span><span class="lineCov">       7680 :                 case SubqueryType::IN: // in case is handled separately above</span>
+<span class="lineNum">      48 </span><span class="lineCov">       9714 :                 case SubqueryType::IN: // in case is handled separately above</span>
 <span class="lineNum">      49 </span>            :                 case SubqueryType::EXISTS:
-<span class="lineNum">      50 </span><span class="lineCov">       7680 :                         vector.SetValue(r, Value::BOOLEAN(s_chunk.size() != 0));</span>
-<span class="lineNum">      51 </span><span class="lineCov">       7680 :                         break;</span>
+<span class="lineNum">      50 </span><span class="lineCov">       9714 :                         vector.SetValue(r, Value::BOOLEAN(s_chunk.size() != 0));</span>
+<span class="lineNum">      51 </span><span class="lineCov">       9714 :                         break;</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :                 default:</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Subquery type not implemented&quot;);</span>
 <span class="lineNum">      54 </span>            :                 }
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">       3108 :         chunk = old_chunk;</span>
-<span class="lineNum">      57 </span><span class="lineCov">       3108 :         expr.stats.Verify(vector);</span>
-<span class="lineNum">      58 </span><span class="lineCov">       6216 :         return nullptr;</span>
+<span class="lineNum">      56 </span><span class="lineCov">       3137 :         chunk = old_chunk;</span>
+<span class="lineNum">      57 </span><span class="lineCov">       3137 :         expr.stats.Verify(vector);</span>
+<span class="lineNum">      58 </span><span class="lineCov">       6274 :         return nullptr;</span>
 <span class="lineNum">      59 </span>            : }
 </pre>
       </td>

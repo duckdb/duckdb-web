@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -76,24 +76,24 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : class LogicalUpdate : public LogicalOperator {</a>
 <span class="lineNum">      16 </span>            : public:
-<span class="lineNum">      17 </span><span class="lineCov">       2024 :         LogicalUpdate(TableCatalogEntry *table, vector&lt;column_t&gt; columns, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
-<span class="lineNum">      18 </span><span class="lineCov">       2024 :             : LogicalOperator(LogicalOperatorType::UPDATE, std::move(expressions)), table(table), columns(columns) {</span>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">       2024 :         }</span></a>
+<span class="lineNum">      17 </span><span class="lineCov">      80165 :         LogicalUpdate(TableCatalogEntry *table, vector&lt;column_t&gt; columns, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
+<span class="lineNum">      18 </span><span class="lineCov">      80165 :             : LogicalOperator(LogicalOperatorType::UPDATE, std::move(expressions)), table(table), columns(columns) {</span>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">      82440 :         }</span></a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">       4048 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       4048 :                 v-&gt;Visit(*this);</span></a>
-<span class="lineNum">      23 </span><span class="lineCov">       4048 :         }</span>
-<span class="lineNum">      24 </span><span class="lineCov">       2024 :         vector&lt;string&gt; GetNames() override {</span>
-<span class="lineNum">      25 </span><span class="lineCov">       4048 :                 return {&quot;Count&quot;};</span>
+<span class="lineNum">      21 </span><span class="lineCov">     157256 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">     157256 :                 v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      23 </span><span class="lineCov">     157171 :         }</span>
+<span class="lineNum">      24 </span><span class="lineCov">      78363 :         vector&lt;string&gt; GetNames() override {</span>
+<span class="lineNum">      25 </span><span class="lineCov">     157351 :                 return {&quot;Count&quot;};</span>
 <span class="lineNum">      26 </span>            :         }
 <span class="lineNum">      27 </span>            : 
 <span class="lineNum">      28 </span>            :         TableCatalogEntry *table;
 <span class="lineNum">      29 </span>            :         vector&lt;column_t&gt; columns;
 <a name="30"><span class="lineNum">      30 </span>            : </a>
 <span class="lineNum">      31 </span>            : protected:
-<span class="lineNum">      32 </span><span class="lineCov">       2024 :         void ResolveTypes() override {</span>
-<span class="lineNum">      33 </span><span class="lineCov">       2024 :                 types.push_back(TypeId::BIGINT);</span>
-<span class="lineNum">      34 </span><span class="lineCov">       2024 :         }</span>
+<span class="lineNum">      32 </span><span class="lineCov">      78157 :         void ResolveTypes() override {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      78157 :                 types.push_back(TypeId::BIGINT);</span>
+<span class="lineNum">      34 </span><span class="lineCov">      80597 :         }</span>
 <span class="lineNum">      35 </span>            : };
 <span class="lineNum">      36 </span>            : } // namespace duckdb
 </pre>

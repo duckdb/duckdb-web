@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -77,13 +77,13 @@
 <span class="lineNum">      15 </span>            : //! LogicalProjection represents the projection list in a SELECT clause
 <a name="16"><span class="lineNum">      16 </span>            : class LogicalProjection : public LogicalOperator {</a>
 <span class="lineNum">      17 </span>            : public:
-<span class="lineNum">      18 </span><span class="lineCov">       7340 :         LogicalProjection(vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
-<span class="lineNum">      19 </span><span class="lineCov">       7340 :             : LogicalOperator(LogicalOperatorType::PROJECTION, std::move(select_list)) {</span>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">       7340 :         }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">    2454936 :         LogicalProjection(vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
+<span class="lineNum">      19 </span><span class="lineCov">    2454936 :             : LogicalOperator(LogicalOperatorType::PROJECTION, std::move(select_list)) {</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    2454936 :         }</span></a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">      15065 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      23 </span><span class="lineCov">      15065 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      24 </span><span class="lineCov">      15065 :         }</span>
+<span class="lineNum">      22 </span><span class="lineCov">    4910419 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      23 </span><span class="lineCov">    4910419 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      24 </span><span class="lineCov">    4910419 :         }</span>
 <span class="lineNum">      25 </span>            :         vector&lt;string&gt; GetNames() override;
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            : protected:

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -77,11 +77,11 @@
 <span class="lineNum">      15 </span>            : namespace operators {
 <span class="lineNum">      16 </span>            : 
 <span class="lineNum">      17 </span>            : struct Hash {
-<span class="lineNum">      18 </span><span class="lineCov">     813537 :         template &lt;class T&gt; static inline uint64_t Operation(T input, bool is_null) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">     813537 :                 if (is_null) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">         31 :                         return duckdb::Hash&lt;T&gt;(duckdb::NullValue&lt;T&gt;());</span>
+<span class="lineNum">      18 </span><span class="lineCov">   93538480 :         template &lt;class T&gt; static inline uint64_t Operation(T input, bool is_null) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">   93538480 :                 if (is_null) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     122625 :                         return duckdb::Hash&lt;T&gt;(duckdb::NullValue&lt;T&gt;());</span>
 <span class="lineNum">      21 </span>            :                 }
-<span class="lineNum">      22 </span><span class="lineCov">     813506 :                 return duckdb::Hash&lt;T&gt;(input);</span>
+<span class="lineNum">      22 </span><span class="lineCov">   93415855 :                 return duckdb::Hash&lt;T&gt;(input);</span>
 <span class="lineNum">      23 </span>            :         }
 <span class="lineNum">      24 </span>            : };
 <span class="lineNum">      25 </span>            : 

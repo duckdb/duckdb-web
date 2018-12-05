@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -77,16 +77,16 @@
 <span class="lineNum">      15 </span>            : 
 <a name="16"><span class="lineNum">      16 </span>            : class NotNullConstraint : public Constraint {</a>
 <a name="17"><span class="lineNum">      17 </span>            : public:</a>
-<span class="lineNum">      18 </span><span class="lineCov">         47 :         NotNullConstraint(size_t index) : Constraint(ConstraintType::NOT_NULL), index(index){};</span>
-<span class="lineNum">      19 </span><span class="lineCov">         94 :         virtual ~NotNullConstraint() {</span>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         94 :         }</span></a>
-<span class="lineNum">      21 </span><span class="lineCov">         47 : </span>
-<span class="lineNum">      22 </span><span class="lineCov">         47 :         virtual unique_ptr&lt;Constraint&gt; Accept(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">         47 :                 return v-&gt;Visit(*this);</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">         47 :         }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">         93 :         NotNullConstraint(size_t index) : Constraint(ConstraintType::NOT_NULL), index(index){};</span>
+<span class="lineNum">      19 </span><span class="lineCov">        186 :         virtual ~NotNullConstraint() {</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">        186 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">         93 : </span>
+<span class="lineNum">      22 </span><span class="lineCov">         93 :         virtual unique_ptr&lt;Constraint&gt; Accept(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">         93 :                 return v-&gt;Visit(*this);</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">         93 :         }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">         47 :         virtual string ToString() const {</span>
-<span class="lineNum">      27 </span><span class="lineCov">         47 :                 return &quot;NOT NULL Constraint&quot;;</span>
+<span class="lineNum">      26 </span><span class="lineCov">         93 :         virtual string ToString() const {</span>
+<span class="lineNum">      27 </span><span class="lineCov">         93 :                 return &quot;NOT NULL Constraint&quot;;</span>
 <span class="lineNum">      28 </span>            :         }
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :         //! Serialize to a stand-alone binary blob</span>

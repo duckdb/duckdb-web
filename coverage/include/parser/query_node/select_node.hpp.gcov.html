@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -89,12 +89,12 @@
 <span class="lineNum">      27 </span>            : //! SelectNode represents a standard SELECT statement
 <a name="28"><span class="lineNum">      28 </span>            : class SelectNode : public QueryNode {</a>
 <span class="lineNum">      29 </span>            : public:
-<span class="lineNum">      30 </span><span class="lineCov">      11649 :         SelectNode() : QueryNode(QueryNodeType::SELECT_NODE) {</span>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">      11649 :         }</span></a>
+<span class="lineNum">      30 </span><span class="lineCov">    3020035 :         SelectNode() : QueryNode(QueryNodeType::SELECT_NODE) {</span>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    3020110 :         }</span></a>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">      22909 :         void Accept(SQLNodeVisitor *v) override {</span>
-<span class="lineNum">      34 </span><span class="lineCov">      22909 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      35 </span><span class="lineCov">      22896 :         }</span>
+<span class="lineNum">      33 </span><span class="lineCov">    6039611 :         void Accept(SQLNodeVisitor *v) override {</span>
+<span class="lineNum">      34 </span><span class="lineCov">    6039611 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    6039582 :         }</span>
 <span class="lineNum">      36 </span>            : 
 <span class="lineNum">      37 </span>            :         //! The projection list
 <span class="lineNum">      38 </span>            :         vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list;
@@ -109,18 +109,18 @@
 <span class="lineNum">      47 </span>            :         GroupByDescription groupby;
 <a name="48"><span class="lineNum">      48 </span>            : </a>
 <span class="lineNum">      49 </span>            :         //! Whether or not the query has a GROUP BY clause
-<span class="lineNum">      50 </span><span class="lineCov">      27414 :         bool HasGroup() {</span>
-<span class="lineNum">      51 </span><span class="lineCov">      27414 :                 return groupby.groups.size() &gt; 0;</span>
+<span class="lineNum">      50 </span><span class="lineCov">    6613899 :         bool HasGroup() {</span>
+<span class="lineNum">      51 </span><span class="lineCov">    6613899 :                 return groupby.groups.size() &gt; 0;</span>
 <a name="52"><span class="lineNum">      52 </span>            :         }</a>
 <span class="lineNum">      53 </span>            :         //! Whether or not the query has a HAVING clause
-<span class="lineNum">      54 </span><span class="lineCov">       4518 :         bool HasHaving() {</span>
-<span class="lineNum">      55 </span><span class="lineCov">       4518 :                 return groupby.having.get();</span>
+<span class="lineNum">      54 </span><span class="lineCov">     574285 :         bool HasHaving() {</span>
+<span class="lineNum">      55 </span><span class="lineCov">     574285 :                 return groupby.having.get();</span>
 <span class="lineNum">      56 </span>            :         }
 <span class="lineNum">      57 </span>            :         //! Whether or not the query has an AGGREGATION
 <a name="58"><span class="lineNum">      58 </span>            :         bool HasAggregation();</a>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">      14125 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;GetSelectList() override {</span>
-<span class="lineNum">      61 </span><span class="lineCov">      14125 :                 return select_list;</span>
+<span class="lineNum">      60 </span><span class="lineCov">    3031922 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;GetSelectList() override {</span>
+<span class="lineNum">      61 </span><span class="lineCov">    3031922 :                 return select_list;</span>
 <span class="lineNum">      62 </span>            :         }
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :         bool Equals(const QueryNode *other) override;

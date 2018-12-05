@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -77,12 +77,12 @@
 <span class="lineNum">      15 </span>            : //! Represents a conjunction (AND/OR)
 <a name="16"><span class="lineNum">      16 </span>            : class ConjunctionExpression : public Expression {</a>
 <span class="lineNum">      17 </span>            : public:
-<span class="lineNum">      18 </span><span class="lineCov">      13722 :         ConjunctionExpression(ExpressionType type, unique_ptr&lt;Expression&gt; left, unique_ptr&lt;Expression&gt; right)</span>
-<span class="lineNum">      19 </span><span class="lineCov">      13722 :             : Expression(type, TypeId::BOOLEAN, std::move(left), std::move(right)) {</span>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">      13722 :         }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">     115847 :         ConjunctionExpression(ExpressionType type, unique_ptr&lt;Expression&gt; left, unique_ptr&lt;Expression&gt; right)</span>
+<span class="lineNum">      19 </span><span class="lineCov">     115847 :             : Expression(type, TypeId::BOOLEAN, std::move(left), std::move(right)) {</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">     115847 :         }</span></a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">      45017 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      45017 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">     580089 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">     580089 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span><span class="lineCov">          1 :         ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      26 </span><span class="lineCov">          1 :                 return ExpressionClass::CONJUNCTION;</span>

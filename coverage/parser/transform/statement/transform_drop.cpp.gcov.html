@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -69,16 +69,16 @@
 <span class="lineNum">       7 </span>            : using namespace postgres;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">         22 : unique_ptr&lt;SQLStatement&gt; Transformer::TransformDrop(Node *node) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">         22 :         DropStmt *stmt = reinterpret_cast&lt;DropStmt *&gt;(node);</span>
-<span class="lineNum">      12 </span><span class="lineCov">         22 :         assert(stmt);</span>
-<span class="lineNum">      13 </span><span class="lineCov">         22 :         if (stmt-&gt;objects-&gt;length != 1) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">         23 : unique_ptr&lt;SQLStatement&gt; Transformer::TransformDrop(Node *node) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">         23 :         DropStmt *stmt = reinterpret_cast&lt;DropStmt *&gt;(node);</span>
+<span class="lineNum">      12 </span><span class="lineCov">         23 :         assert(stmt);</span>
+<span class="lineNum">      13 </span><span class="lineCov">         23 :         if (stmt-&gt;objects-&gt;length != 1) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Can only drop one object at a time&quot;);</span>
 <span class="lineNum">      15 </span>            :         }
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">         22 :         switch (stmt-&gt;removeType) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">         13 :         case OBJECT_TABLE:</span>
-<span class="lineNum">      19 </span><span class="lineCov">         13 :                 return TransformDropTable(stmt);</span>
+<span class="lineNum">      17 </span><span class="lineCov">         23 :         switch (stmt-&gt;removeType) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">         14 :         case OBJECT_TABLE:</span>
+<span class="lineNum">      19 </span><span class="lineCov">         14 :                 return TransformDropTable(stmt);</span>
 <span class="lineNum">      20 </span><span class="lineCov">          8 :         case OBJECT_SCHEMA:</span>
 <span class="lineNum">      21 </span><span class="lineCov">          8 :                 return TransformDropSchema(stmt);</span>
 <span class="lineNum">      22 </span><span class="lineCov">          1 :         case OBJECT_INDEX:</span>

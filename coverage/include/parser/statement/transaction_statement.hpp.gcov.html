@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -80,13 +80,13 @@
 <span class="lineNum">      18 </span>            : 
 <a name="19"><span class="lineNum">      19 </span>            : class TransactionStatement : public SQLStatement {</a>
 <a name="20"><span class="lineNum">      20 </span>            : public:</a>
-<span class="lineNum">      21 </span><span class="lineCov">        267 :         TransactionStatement(TransactionType type) : SQLStatement(StatementType::TRANSACTION), type(type){};</span>
-<span class="lineNum">      22 </span><span class="lineCov">        534 :         virtual ~TransactionStatement() {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">        534 :         }</span></a>
-<span class="lineNum">      24 </span><span class="lineCov">        267 : </span>
-<span class="lineNum">      25 </span><span class="lineCov">        267 :         virtual string ToString() const {</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        267 :                 return &quot;Transaction&quot;;</span></a>
-<span class="lineNum">      27 </span><span class="lineCov">        267 :         }</span>
+<span class="lineNum">      21 </span><span class="lineCov">      42113 :         TransactionStatement(TransactionType type) : SQLStatement(StatementType::TRANSACTION), type(type){};</span>
+<span class="lineNum">      22 </span><span class="lineCov">      84772 :         virtual ~TransactionStatement() {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      84675 :         }</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">      42387 : </span>
+<span class="lineNum">      25 </span><span class="lineCov">      42387 :         virtual string ToString() const {</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">      42385 :                 return &quot;Transaction&quot;;</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">      42288 :         }</span>
 <span class="lineNum">      28 </span>            :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 return v-&gt;Visit(*this);</span>
 <a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :         }</span></a>

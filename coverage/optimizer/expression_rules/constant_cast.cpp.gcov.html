@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -73,17 +73,17 @@
 <span class="lineNum">      11 </span>            : using namespace duckdb;
 <a name="12"><span class="lineNum">      12 </span>            : using namespace std;</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">      39860 : ConstantCastRule::ConstantCastRule() {</span>
-<span class="lineNum">      15 </span><span class="lineCov">      39860 :         root = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::OPERATOR_CAST);</span>
-<span class="lineNum">      16 </span><span class="lineCov">      39860 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::VALUE_CONSTANT));</span>
-<span class="lineNum">      17 </span><span class="lineCov">      39860 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">      39860 : }</span></a>
+<span class="lineNum">      14 </span><span class="lineCov">    3128775 : ConstantCastRule::ConstantCastRule() {</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3128508 :         root = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::OPERATOR_CAST);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3128378 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::VALUE_CONSTANT));</span>
+<span class="lineNum">      17 </span><span class="lineCov">    3130041 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">    3128614 : }</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">        429 : unique_ptr&lt;Expression&gt; ConstantCastRule::Apply(Rewriter &amp;rewriter, Expression &amp;root, vector&lt;AbstractOperator&gt; &amp;bindings,</span>
+<span class="lineNum">      20 </span><span class="lineCov">    1135641 : unique_ptr&lt;Expression&gt; ConstantCastRule::Apply(Rewriter &amp;rewriter, Expression &amp;root, vector&lt;AbstractOperator&gt; &amp;bindings,</span>
 <span class="lineNum">      21 </span>            :                                                bool &amp;fixed_point) {
-<span class="lineNum">      22 </span><span class="lineCov">        429 :         auto &amp;cast_expr = (CastExpression &amp;)root;</span>
-<span class="lineNum">      23 </span><span class="lineCov">        429 :         auto const_expr = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
-<span class="lineNum">      24 </span><span class="lineCov">        429 :         return make_unique&lt;ConstantExpression&gt;(const_expr-&gt;value.CastAs(cast_expr.return_type));</span>
+<span class="lineNum">      22 </span><span class="lineCov">    1135641 :         auto &amp;cast_expr = (CastExpression &amp;)root;</span>
+<span class="lineNum">      23 </span><span class="lineCov">    1135641 :         auto const_expr = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
+<span class="lineNum">      24 </span><span class="lineCov">    1135641 :         return make_unique&lt;ConstantExpression&gt;(const_expr-&gt;value.CastAs(cast_expr.return_type));</span>
 <span class="lineNum">      25 </span>            : };
 </pre>
       </td>

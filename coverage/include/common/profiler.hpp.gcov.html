@@ -31,18 +31,18 @@
             <td class="headerValue">DuckDB Code Coverage Report aaaae6fe</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntryLo">0.0 %</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntryLo">0.0 %</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -80,27 +80,27 @@
 <span class="lineNum">      18 </span>            : class Profiler {
 <a name="19"><span class="lineNum">      19 </span>            : public:</a>
 <span class="lineNum">      20 </span>            :         //! Starts the timer
-<span class="lineNum">      21 </span><span class="lineNoCov">          0 :         void Start() {</span>
-<span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 finished = false;</span>
-<span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 start = Tick();</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">      87764 :         void Start() {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      87764 :                 finished = false;</span>
+<span class="lineNum">      23 </span><span class="lineCov">      87764 :                 start = Tick();</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">      87764 :         }</span></a>
 <span class="lineNum">      25 </span>            :         //! Finishes timing
-<span class="lineNum">      26 </span><span class="lineNoCov">          0 :         void End() {</span>
-<span class="lineNum">      27 </span><span class="lineNoCov">          0 :                 end = Tick();</span>
-<span class="lineNum">      28 </span><span class="lineNoCov">          0 :                 finished = true;</span>
-<span class="lineNum">      29 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">      26 </span><span class="lineCov">      87753 :         void End() {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      87753 :                 end = Tick();</span>
+<span class="lineNum">      28 </span><span class="lineCov">      87753 :                 finished = true;</span>
+<span class="lineNum">      29 </span><span class="lineCov">      87753 :         }</span>
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span>            :         //! Returns the elapsed time in seconds. If End() has been called, returns
 <a name="32"><span class="lineNum">      32 </span>            :         //! the total elapsed time. Otherwise returns how far along the timer is</a>
 <span class="lineNum">      33 </span>            :         //! right now.
-<span class="lineNum">      34 </span><span class="lineNoCov">          0 :         double Elapsed() const {</span>
-<span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 auto _end = finished ? end : Tick();</span>
-<span class="lineNum">      36 </span><span class="lineNoCov">          0 :                 return std::chrono::duration_cast&lt;std::chrono::duration&lt;double&gt;&gt;(_end - start).count();</span>
+<span class="lineNum">      34 </span><span class="lineCov">      87695 :         double Elapsed() const {</span>
+<span class="lineNum">      35 </span><span class="lineCov">      87695 :                 auto _end = finished ? end : Tick();</span>
+<span class="lineNum">      36 </span><span class="lineCov">     175390 :                 return std::chrono::duration_cast&lt;std::chrono::duration&lt;double&gt;&gt;(_end - start).count();</span>
 <span class="lineNum">      37 </span>            :         }
 <a name="38"><span class="lineNum">      38 </span>            : </a>
 <span class="lineNum">      39 </span>            : private:
-<span class="lineNum">      40 </span><span class="lineNoCov">          0 :         std::chrono::time_point&lt;std::chrono::system_clock&gt; Tick() const {</span>
-<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                 return std::chrono::system_clock::now();</span>
+<span class="lineNum">      40 </span><span class="lineCov">     175517 :         std::chrono::time_point&lt;std::chrono::system_clock&gt; Tick() const {</span>
+<span class="lineNum">      41 </span><span class="lineCov">     175517 :                 return std::chrono::system_clock::now();</span>
 <span class="lineNum">      42 </span>            :         }
 <span class="lineNum">      43 </span>            :         std::chrono::time_point&lt;std::chrono::system_clock&gt; start;
 <span class="lineNum">      44 </span>            :         std::chrono::time_point&lt;std::chrono::system_clock&gt; end;

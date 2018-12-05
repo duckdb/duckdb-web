@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -90,8 +90,8 @@
 <span class="lineNum">      28 </span>            :         //! Initialize a database or load an existing database from the given path
 <a name="29"><span class="lineNum">      29 </span>            :         void Initialize();</a>
 <span class="lineNum">      30 </span>            :         //! Get the WAL of the StorageManager, returns nullptr if in-memory
-<span class="lineNum">      31 </span><span class="lineCov">      25669 :         WriteAheadLog *GetWriteAheadLog() {</span>
-<span class="lineNum">      32 </span><span class="lineCov">      25669 :                 return wal.IsInitialized() ? &amp;wal : nullptr;</span>
+<span class="lineNum">      31 </span><span class="lineCov">    3040318 :         WriteAheadLog *GetWriteAheadLog() {</span>
+<span class="lineNum">      32 </span><span class="lineCov">    3040318 :                 return wal.IsInitialized() ? &amp;wal : nullptr;</span>
 <span class="lineNum">      33 </span>            :         }
 <span class="lineNum">      34 </span>            : 
 <span class="lineNum">      35 </span>            : private:

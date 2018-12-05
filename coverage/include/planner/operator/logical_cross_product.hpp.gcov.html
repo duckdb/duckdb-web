@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -77,12 +77,12 @@
 <span class="lineNum">      15 </span>            : //! LogicalCrossProduct represents a cross product between two relations
 <a name="16"><span class="lineNum">      16 </span>            : class LogicalCrossProduct : public LogicalOperator {</a>
 <span class="lineNum">      17 </span>            : public:
-<span class="lineNum">      18 </span><span class="lineCov">        916 :         LogicalCrossProduct() : LogicalOperator(LogicalOperatorType::CROSS_PRODUCT) {</span>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">        916 :         }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">     259996 :         LogicalCrossProduct() : LogicalOperator(LogicalOperatorType::CROSS_PRODUCT) {</span>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">     259996 :         }</span></a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">         76 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      22 </span><span class="lineCov">         76 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      23 </span><span class="lineCov">         76 :         }</span>
+<span class="lineNum">      21 </span><span class="lineCov">     516966 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      22 </span><span class="lineCov">     516966 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      23 </span><span class="lineCov">     516966 :         }</span>
 <span class="lineNum">      24 </span>            : 
 <span class="lineNum">      25 </span>            :         vector&lt;string&gt; GetNames() override;
 <span class="lineNum">      26 </span>            : 

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -67,33 +67,33 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">       1664 : void ExpressionStatistics::Sum(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">       1664 :         result.has_stats = false;</span>
+<span class="lineNum">       8 </span><span class="lineCov">      45861 : void ExpressionStatistics::Sum(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">      45861 :         result.has_stats = false;</span>
 <span class="lineNum">      10 </span>            :         // FIXME: SUM statistics depend on cardinality
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">       1664 : }</span></a>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">      45861 : }</span></a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">       2792 : void ExpressionStatistics::Count(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">       2792 :         result.has_stats = false;</span>
+<span class="lineNum">      13 </span><span class="lineCov">      73876 : void ExpressionStatistics::Count(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      73876 :         result.has_stats = false;</span>
 <span class="lineNum">      15 </span>            :         // FIXME: count statistics depend on cardinality
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">       2792 : }</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">      73876 : }</span></a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">         18 : void ExpressionStatistics::Max(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">         18 :         result.has_stats = source.has_stats;</span>
-<span class="lineNum">      20 </span><span class="lineCov">         18 :         if (result.has_stats) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">          9 :                 result.can_have_null = true;</span>
-<span class="lineNum">      22 </span><span class="lineCov">          9 :                 result.min = source.min;</span>
-<span class="lineNum">      23 </span><span class="lineCov">          9 :                 result.max = source.max;</span>
+<span class="lineNum">      18 </span><span class="lineCov">     108872 : void ExpressionStatistics::Max(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     108872 :         result.has_stats = source.has_stats;</span>
+<span class="lineNum">      20 </span><span class="lineCov">     108872 :         if (result.has_stats) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">     108862 :                 result.can_have_null = true;</span>
+<span class="lineNum">      22 </span><span class="lineCov">     108862 :                 result.min = source.min;</span>
+<span class="lineNum">      23 </span><span class="lineCov">     108862 :                 result.max = source.max;</span>
 <span class="lineNum">      24 </span>            :         }
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         18 : }</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">     108872 : }</span></a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">         17 : void ExpressionStatistics::Min(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">         17 :         result.has_stats = source.has_stats;</span>
-<span class="lineNum">      29 </span><span class="lineCov">         17 :         if (result.has_stats) {</span>
-<span class="lineNum">      30 </span><span class="lineCov">         17 :                 result.can_have_null = true;</span>
-<span class="lineNum">      31 </span><span class="lineCov">         17 :                 result.min = source.min;</span>
-<span class="lineNum">      32 </span><span class="lineCov">         17 :                 result.max = source.max;</span>
+<span class="lineNum">      27 </span><span class="lineCov">     109782 : void ExpressionStatistics::Min(ExpressionStatistics &amp;source, ExpressionStatistics &amp;result) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">     109782 :         result.has_stats = source.has_stats;</span>
+<span class="lineNum">      29 </span><span class="lineCov">     109782 :         if (result.has_stats) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">     109781 :                 result.can_have_null = true;</span>
+<span class="lineNum">      31 </span><span class="lineCov">     109781 :                 result.min = source.min;</span>
+<span class="lineNum">      32 </span><span class="lineCov">     109781 :                 result.max = source.max;</span>
 <span class="lineNum">      33 </span>            :         }
-<span class="lineNum">      34 </span><span class="lineCov">         17 : }</span>
+<span class="lineNum">      34 </span><span class="lineCov">     109782 : }</span>
 </pre>
       </td>
     </tr>

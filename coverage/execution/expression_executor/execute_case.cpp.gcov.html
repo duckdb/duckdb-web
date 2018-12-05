@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,22 +67,22 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">       8277 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(CaseExpression &amp;expr) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">       8277 :         if (expr.children.size() != 3) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">     304546 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(CaseExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">     304546 :         if (expr.children.size() != 3) {</span>
 <span class="lineNum">      10 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Cast needs three child nodes&quot;);</span>
 <span class="lineNum">      11 </span>            :         }
-<span class="lineNum">      12 </span><span class="lineCov">      16554 :         Vector check, res_true, res_false;</span>
-<span class="lineNum">      13 </span><span class="lineCov">       8277 :         expr.children[0]-&gt;Accept(this);</span>
-<span class="lineNum">      14 </span><span class="lineCov">       8277 :         vector.Move(check);</span>
-<span class="lineNum">      15 </span><span class="lineCov">       8277 :         expr.children[1]-&gt;Accept(this);</span>
-<span class="lineNum">      16 </span><span class="lineCov">       8277 :         vector.Move(res_true);</span>
-<span class="lineNum">      17 </span><span class="lineCov">       8277 :         expr.children[2]-&gt;Accept(this);</span>
-<span class="lineNum">      18 </span><span class="lineCov">       8277 :         vector.Move(res_false);</span>
+<span class="lineNum">      12 </span><span class="lineCov">     609114 :         Vector check, res_true, res_false;</span>
+<span class="lineNum">      13 </span><span class="lineCov">     304546 :         expr.children[0]-&gt;Accept(this);</span>
+<span class="lineNum">      14 </span><span class="lineCov">     304536 :         vector.Move(check);</span>
+<span class="lineNum">      15 </span><span class="lineCov">     304536 :         expr.children[1]-&gt;Accept(this);</span>
+<span class="lineNum">      16 </span><span class="lineCov">     304536 :         vector.Move(res_true);</span>
+<span class="lineNum">      17 </span><span class="lineCov">     304536 :         expr.children[2]-&gt;Accept(this);</span>
+<span class="lineNum">      18 </span><span class="lineCov">     304535 :         vector.Move(res_false);</span>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">       8277 :         vector.Initialize(res_true.type);</span>
-<span class="lineNum">      21 </span><span class="lineCov">       8277 :         VectorOperations::Case(check, res_true, res_false, vector);</span>
-<span class="lineNum">      22 </span><span class="lineCov">       8277 :         expr.stats.Verify(vector);</span>
-<span class="lineNum">      23 </span><span class="lineCov">      16554 :         return nullptr;</span>
+<span class="lineNum">      20 </span><span class="lineCov">     304535 :         vector.Initialize(res_true.type);</span>
+<span class="lineNum">      21 </span><span class="lineCov">     304535 :         VectorOperations::Case(check, res_true, res_false, vector);</span>
+<span class="lineNum">      22 </span><span class="lineCov">     304535 :         expr.stats.Verify(vector);</span>
+<span class="lineNum">      23 </span><span class="lineCov">     609070 :         return nullptr;</span>
 <span class="lineNum">      24 </span>            : }
 </pre>
       </td>

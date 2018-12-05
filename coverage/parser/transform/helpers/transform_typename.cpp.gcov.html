@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -66,30 +66,30 @@
 <span class="lineNum">       4 </span>            : using namespace postgres;
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">        853 : TypeId Transformer::TransformStringToTypeId(char *str) {</span>
-<span class="lineNum">       8 </span><span class="lineCov">       3412 :         string lower_str = StringUtil::Lower(string(str));</span>
+<span class="lineNum">       7 </span><span class="lineCov">     419334 : TypeId Transformer::TransformStringToTypeId(char *str) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    1677336 :         string lower_str = StringUtil::Lower(string(str));</span>
 <span class="lineNum">       9 </span>            :         // Transform column type
-<span class="lineNum">      10 </span><span class="lineCov">        853 :         if (lower_str == &quot;int&quot; || lower_str == &quot;int4&quot; || lower_str == &quot;signed&quot;) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">        438 :                 return TypeId::INTEGER;</span>
-<span class="lineNum">      12 </span><span class="lineCov">        415 :         } else if (lower_str == &quot;varchar&quot; || lower_str == &quot;bpchar&quot; || lower_str == &quot;text&quot; || lower_str == &quot;string&quot;) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">        177 :                 return TypeId::VARCHAR;</span>
-<span class="lineNum">      14 </span><span class="lineCov">        238 :         } else if (lower_str == &quot;int8&quot;) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">     419334 :         if (lower_str == &quot;int&quot; || lower_str == &quot;int4&quot; || lower_str == &quot;signed&quot;) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">     371102 :                 return TypeId::INTEGER;</span>
+<span class="lineNum">      12 </span><span class="lineCov">      48232 :         } else if (lower_str == &quot;varchar&quot; || lower_str == &quot;bpchar&quot; || lower_str == &quot;text&quot; || lower_str == &quot;string&quot;) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">        467 :                 return TypeId::VARCHAR;</span>
+<span class="lineNum">      14 </span><span class="lineCov">      47765 :         } else if (lower_str == &quot;int8&quot;) {</span>
 <span class="lineNum">      15 </span><span class="lineCov">          1 :                 return TypeId::BIGINT;</span>
-<span class="lineNum">      16 </span><span class="lineCov">        237 :         } else if (lower_str == &quot;int2&quot;) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">      47764 :         } else if (lower_str == &quot;int2&quot;) {</span>
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :                 return TypeId::SMALLINT;</span>
-<span class="lineNum">      18 </span><span class="lineCov">        237 :         } else if (lower_str == &quot;timestamp&quot;) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">      47764 :         } else if (lower_str == &quot;timestamp&quot;) {</span>
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 :                 return TypeId::TIMESTAMP;</span>
-<span class="lineNum">      20 </span><span class="lineCov">        237 :         } else if (lower_str == &quot;bool&quot;) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      47764 :         } else if (lower_str == &quot;bool&quot;) {</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :                 return TypeId::BOOLEAN;</span>
-<span class="lineNum">      22 </span><span class="lineCov">        473 :         } else if (lower_str == &quot;double&quot; || lower_str == &quot;float8&quot; || lower_str == &quot;real&quot; || lower_str == &quot;float4&quot; ||</span>
-<span class="lineNum">      23 </span><span class="lineCov">        236 :                    lower_str == &quot;numeric&quot;) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">        106 :                 return TypeId::DECIMAL;</span>
-<span class="lineNum">      25 </span><span class="lineCov">        131 :         } else if (lower_str == &quot;tinyint&quot;) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">      48175 :         } else if (lower_str == &quot;double&quot; || lower_str == &quot;float8&quot; || lower_str == &quot;real&quot; || lower_str == &quot;float4&quot; ||</span>
+<span class="lineNum">      23 </span><span class="lineCov">        411 :                    lower_str == &quot;numeric&quot;) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">      47563 :                 return TypeId::DECIMAL;</span>
+<span class="lineNum">      25 </span><span class="lineCov">        201 :         } else if (lower_str == &quot;tinyint&quot;) {</span>
 <span class="lineNum">      26 </span><span class="lineCov">          6 :                 return TypeId::TINYINT;</span>
-<span class="lineNum">      27 </span><span class="lineCov">        125 :         } else if (lower_str == &quot;varbinary&quot;) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">        195 :         } else if (lower_str == &quot;varbinary&quot;) {</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :                 return TypeId::VARBINARY;</span>
-<span class="lineNum">      29 </span><span class="lineCov">        125 :         } else if (lower_str == &quot;date&quot;) {</span>
-<span class="lineNum">      30 </span><span class="lineCov">        125 :                 return TypeId::DATE;</span>
+<span class="lineNum">      29 </span><span class="lineCov">        195 :         } else if (lower_str == &quot;date&quot;) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">        195 :                 return TypeId::DATE;</span>
 <span class="lineNum">      31 </span>            :         } else {
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;DataType %s not supported yet...\n&quot;, str);</span>
 <span class="lineNum">      33 </span>            :         }

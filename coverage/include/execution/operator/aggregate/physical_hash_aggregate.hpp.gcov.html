@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -93,10 +93,10 @@
 <span class="lineNum">      31 </span>            : 
 <a name="32"><span class="lineNum">      32 </span>            : class PhysicalHashAggregateOperatorState : public PhysicalAggregateOperatorState {</a>
 <span class="lineNum">      33 </span>            : public:
-<span class="lineNum">      34 </span><span class="lineCov">      51581 :         PhysicalHashAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
+<span class="lineNum">      34 </span><span class="lineCov">    1351722 :         PhysicalHashAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
 <span class="lineNum">      35 </span>            :                                            ExpressionExecutor *parent_executor)
-<span class="lineNum">      36 </span><span class="lineCov">      51581 :             : PhysicalAggregateOperatorState(parent, child, parent_executor), ht_scan_position(0) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">      51581 :         }</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1351722 :             : PhysicalAggregateOperatorState(parent, child, parent_executor), ht_scan_position(0) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">    1351684 :         }</span>
 <span class="lineNum">      38 </span>            : 
 <span class="lineNum">      39 </span>            :         //! The current position to scan the HT for output tuples
 <span class="lineNum">      40 </span>            :         size_t ht_scan_position;

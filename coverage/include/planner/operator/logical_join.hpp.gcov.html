@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -85,12 +85,12 @@
 <span class="lineNum">      23 </span>            : //! LogicalJoin represents a join between two relations
 <a name="24"><span class="lineNum">      24 </span>            : class LogicalJoin : public LogicalOperator {</a>
 <span class="lineNum">      25 </span>            : public:
-<span class="lineNum">      26 </span><span class="lineCov">       1476 :         LogicalJoin(JoinType type) : LogicalOperator(LogicalOperatorType::JOIN), type(type) {</span>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">       1476 :         }</span></a>
+<span class="lineNum">      26 </span><span class="lineCov">       2774 :         LogicalJoin(JoinType type) : LogicalOperator(LogicalOperatorType::JOIN), type(type) {</span>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">       2774 :         }</span></a>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">       2997 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      30 </span><span class="lineCov">       2997 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      31 </span><span class="lineCov">       2997 :         }</span>
+<span class="lineNum">      29 </span><span class="lineCov">       4314 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      30 </span><span class="lineCov">       4314 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      31 </span><span class="lineCov">       4314 :         }</span>
 <span class="lineNum">      32 </span>            :         vector&lt;string&gt; GetNames() override;
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span>            :         //! Creates the join condition for this node from the given expression

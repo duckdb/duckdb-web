@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -69,62 +69,62 @@
 <span class="lineNum">       7 </span>            : using namespace postgres;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">       3234 : unique_ptr&lt;Expression&gt; Transformer::TransformCase(CaseExpr *root) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">       3234 :         if (!root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">      76363 : unique_ptr&lt;Expression&gt; Transformer::TransformCase(CaseExpr *root) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">      76363 :         if (!root) {</span>
 <span class="lineNum">      12 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      13 </span>            :         }
 <span class="lineNum">      14 </span>            :         // CASE expression WHEN value THEN result [WHEN ...] ELSE result uses this,
 <span class="lineNum">      15 </span>            :         // but we rewrite to CASE WHEN expression = value THEN result ... to only
 <span class="lineNum">      16 </span>            :         // have to handle one case downstream.
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">       6468 :         unique_ptr&lt;Expression&gt; def_res;</span>
-<span class="lineNum">      19 </span><span class="lineCov">       3234 :         if (root-&gt;defresult) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">       3233 :                 def_res = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;defresult));</span>
+<span class="lineNum">      18 </span><span class="lineCov">     152726 :         unique_ptr&lt;Expression&gt; def_res;</span>
+<span class="lineNum">      19 </span><span class="lineCov">      76363 :         if (root-&gt;defresult) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">      42783 :                 def_res = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;defresult));</span>
 <span class="lineNum">      21 </span>            :         } else {
-<span class="lineNum">      22 </span><span class="lineCov">          1 :                 def_res = unique_ptr&lt;Expression&gt;(new ConstantExpression(Value()));</span>
+<span class="lineNum">      22 </span><span class="lineCov">      33580 :                 def_res = unique_ptr&lt;Expression&gt;(new ConstantExpression(Value()));</span>
 <span class="lineNum">      23 </span>            :         }
 <span class="lineNum">      24 </span>            :         // def_res will be the else part of the innermost case expression
 <span class="lineNum">      25 </span>            : 
 <span class="lineNum">      26 </span>            :         // CASE WHEN e1 THEN r1 WHEN w2 THEN r2 ELSE r3 is rewritten to
 <span class="lineNum">      27 </span>            :         // CASE WHEN e1 THEN r1 ELSE CASE WHEN e2 THEN r2 ELSE r3
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">       6468 :         auto exp_root = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
-<span class="lineNum">      30 </span><span class="lineCov">       3234 :         Expression *cur_root = exp_root.get();</span>
-<span class="lineNum">      31 </span><span class="lineCov">       3234 :         Expression *next_root = nullptr;</span>
+<span class="lineNum">      29 </span><span class="lineCov">     152726 :         auto exp_root = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">      30 </span><span class="lineCov">      76363 :         Expression *cur_root = exp_root.get();</span>
+<span class="lineNum">      31 </span><span class="lineCov">      76363 :         Expression *next_root = nullptr;</span>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">      11795 :         for (auto cell = root-&gt;args-&gt;head; cell != nullptr; cell = cell-&gt;next) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">       8561 :                 CaseWhen *w = reinterpret_cast&lt;CaseWhen *&gt;(cell-&gt;data.ptr_value);</span>
+<span class="lineNum">      33 </span><span class="lineCov">     200238 :         for (auto cell = root-&gt;args-&gt;head; cell != nullptr; cell = cell-&gt;next) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">     123875 :                 CaseWhen *w = reinterpret_cast&lt;CaseWhen *&gt;(cell-&gt;data.ptr_value);</span>
 <span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span><span class="lineCov">      17122 :                 auto test_raw = TransformExpression(reinterpret_cast&lt;Node *&gt;(w-&gt;expr));</span>
-<span class="lineNum">      37 </span><span class="lineCov">      17122 :                 unique_ptr&lt;Expression&gt; test;</span>
+<span class="lineNum">      36 </span><span class="lineCov">     247750 :                 auto test_raw = TransformExpression(reinterpret_cast&lt;Node *&gt;(w-&gt;expr));</span>
+<span class="lineNum">      37 </span><span class="lineCov">     247750 :                 unique_ptr&lt;Expression&gt; test;</span>
 <span class="lineNum">      38 </span>            :                 // TODO: how do we copy those things?
-<span class="lineNum">      39 </span><span class="lineCov">      17122 :                 auto arg = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;arg));</span>
+<span class="lineNum">      39 </span><span class="lineCov">     247750 :                 auto arg = TransformExpression(reinterpret_cast&lt;Node *&gt;(root-&gt;arg));</span>
 <span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">       8561 :                 if (arg) {</span>
-<span class="lineNum">      42 </span><span class="lineCov">      21070 :                         test = unique_ptr&lt;Expression&gt;(</span>
-<span class="lineNum">      43 </span><span class="lineCov">      16856 :                             new ComparisonExpression(ExpressionType::COMPARE_EQUAL, move(arg), move(test_raw)));</span>
+<span class="lineNum">      41 </span><span class="lineCov">     123875 :                 if (arg) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">     581455 :                         test = unique_ptr&lt;Expression&gt;(</span>
+<span class="lineNum">      43 </span><span class="lineCov">     465164 :                             new ComparisonExpression(ExpressionType::COMPARE_EQUAL, move(arg), move(test_raw)));</span>
 <span class="lineNum">      44 </span>            :                 } else {
-<span class="lineNum">      45 </span><span class="lineCov">       4347 :                         test = move(test_raw);</span>
+<span class="lineNum">      45 </span><span class="lineCov">       7584 :                         test = move(test_raw);</span>
 <span class="lineNum">      46 </span>            :                 }
 <span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span><span class="lineCov">      17122 :                 auto res_true = TransformExpression(reinterpret_cast&lt;Node *&gt;(w-&gt;result));</span>
+<span class="lineNum">      48 </span><span class="lineCov">     247750 :                 auto res_true = TransformExpression(reinterpret_cast&lt;Node *&gt;(w-&gt;result));</span>
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">       8561 :                 unique_ptr&lt;Expression&gt; res_false;</span>
-<span class="lineNum">      51 </span><span class="lineCov">       8561 :                 if (cell-&gt;next == nullptr) {</span>
-<span class="lineNum">      52 </span><span class="lineCov">       3234 :                         res_false = move(def_res);</span>
+<span class="lineNum">      50 </span><span class="lineCov">     123875 :                 unique_ptr&lt;Expression&gt; res_false;</span>
+<span class="lineNum">      51 </span><span class="lineCov">     123875 :                 if (cell-&gt;next == nullptr) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">      76363 :                         res_false = move(def_res);</span>
 <span class="lineNum">      53 </span>            :                 } else {
-<span class="lineNum">      54 </span><span class="lineCov">       5327 :                         res_false = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
-<span class="lineNum">      55 </span><span class="lineCov">       5327 :                         next_root = res_false.get();</span>
+<span class="lineNum">      54 </span><span class="lineCov">      47512 :                         res_false = unique_ptr&lt;Expression&gt;(new CaseExpression());</span>
+<span class="lineNum">      55 </span><span class="lineCov">      47512 :                         next_root = res_false.get();</span>
 <span class="lineNum">      56 </span>            :                 }
 <span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span><span class="lineCov">       8561 :                 cur_root-&gt;AddChild(move(test));</span>
-<span class="lineNum">      59 </span><span class="lineCov">       8561 :                 cur_root-&gt;AddChild(move(res_true));</span>
-<span class="lineNum">      60 </span><span class="lineCov">       8561 :                 cur_root-&gt;AddChild(move(res_false));</span>
+<span class="lineNum">      58 </span><span class="lineCov">     123875 :                 cur_root-&gt;AddChild(move(test));</span>
+<span class="lineNum">      59 </span><span class="lineCov">     123875 :                 cur_root-&gt;AddChild(move(res_true));</span>
+<span class="lineNum">      60 </span><span class="lineCov">     123875 :                 cur_root-&gt;AddChild(move(res_false));</span>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">       8561 :                 cur_root = next_root;</span>
+<span class="lineNum">      62 </span><span class="lineCov">     123875 :                 cur_root = next_root;</span>
 <span class="lineNum">      63 </span>            :         }
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">       3234 :         return exp_root;</span>
+<span class="lineNum">      65 </span><span class="lineCov">      76363 :         return exp_root;</span>
 <span class="lineNum">      66 </span>            : }
 </pre>
       </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -80,24 +80,24 @@
 <span class="lineNum">      18 </span>            : // efficient hash function that maximizes the avalanche effect and minimizes
 <a name="19"><span class="lineNum">      19 </span>            : // bias</a>
 <span class="lineNum">      20 </span>            : // see: https://nullprogram.com/blog/2018/07/31/
-<span class="lineNum">      21 </span><span class="lineCov">     813534 : inline uint64_t murmurhash32(uint32_t x) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">     813534 :         x ^= x &gt;&gt; 16;</span>
-<span class="lineNum">      23 </span><span class="lineCov">     813534 :         x *= UINT32_C(0x85ebca6b);</span>
-<span class="lineNum">      24 </span><span class="lineCov">     813534 :         x ^= x &gt;&gt; 13;</span>
-<span class="lineNum">      25 </span><span class="lineCov">     813534 :         x *= UINT32_C(0xc2b2ae35);</span>
-<span class="lineNum">      26 </span><span class="lineCov">     813534 :         x ^= x &gt;&gt; 16;</span>
-<span class="lineNum">      27 </span><span class="lineCov">     813534 :         return (uint64_t)x;</span>
+<span class="lineNum">      21 </span><span class="lineCov">   91180677 : inline uint64_t murmurhash32(uint32_t x) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">   91180677 :         x ^= x &gt;&gt; 16;</span>
+<span class="lineNum">      23 </span><span class="lineCov">   91180677 :         x *= UINT32_C(0x85ebca6b);</span>
+<span class="lineNum">      24 </span><span class="lineCov">   91180677 :         x ^= x &gt;&gt; 13;</span>
+<span class="lineNum">      25 </span><span class="lineCov">   91180677 :         x *= UINT32_C(0xc2b2ae35);</span>
+<span class="lineNum">      26 </span><span class="lineCov">   91180677 :         x ^= x &gt;&gt; 16;</span>
+<span class="lineNum">      27 </span><span class="lineCov">   91180677 :         return (uint64_t)x;</span>
 <span class="lineNum">      28 </span>            : }
 <a name="29"><span class="lineNum">      29 </span>            : </a>
 <span class="lineNum">      30 </span>            : // 64-bit hash function, XOR together two calls to 32-bit
-<span class="lineNum">      31 </span><span class="lineCov">         22 : inline uint64_t murmurhash64(uint32_t *vals) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">         22 :         auto left = murmurhash32(vals[0]);</span>
-<span class="lineNum">      33 </span><span class="lineCov">         22 :         auto right = murmurhash32(vals[1]);</span>
-<span class="lineNum">      34 </span><span class="lineCov">         22 :         return left ^ right;</span>
+<span class="lineNum">      31 </span><span class="lineCov">     293763 : inline uint64_t murmurhash64(uint32_t *vals) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">     293763 :         auto left = murmurhash32(vals[0]);</span>
+<span class="lineNum">      33 </span><span class="lineCov">     293763 :         auto right = murmurhash32(vals[1]);</span>
+<span class="lineNum">      34 </span><span class="lineCov">     293763 :         return left ^ right;</span>
 <span class="lineNum">      35 </span>            : }
 <span class="lineNum">      36 </span>            : 
-<span class="lineNum">      37 </span><span class="lineCov">     813490 : template &lt;class T&gt; uint64_t Hash(T value) {</span>
-<span class="lineNum">      38 </span><span class="lineCov">     813490 :         return murmurhash32(value);</span>
+<span class="lineNum">      37 </span><span class="lineCov">   90592530 : template &lt;class T&gt; uint64_t Hash(T value) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">   90592530 :         return murmurhash32(value);</span>
 <span class="lineNum">      39 </span>            : }
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            : template &lt;&gt; uint64_t Hash(uint64_t val);

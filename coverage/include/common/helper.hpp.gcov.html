@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">105</td>
+            <td class="headerCovTableEntry">107</td>
             <td class="headerCovTableEntry">113</td>
-            <td class="headerCovTableEntryHi">92.9 %</td>
+            <td class="headerCovTableEntryHi">94.7 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -77,19 +77,19 @@
 <span class="lineNum">      15 </span>            : 
 <a name="16"><span class="lineNum">      16 </span>            : namespace duckdb {</a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">    1567967 : template &lt;typename T, typename... Args&gt; unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">    1567969 :         return unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      18 </span><span class="lineCov">  126013661 : template &lt;typename T, typename... Args&gt; unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">  126013663 :         return unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
 <a name="20"><span class="lineNum">      20 </span>            : }</a>
-<span class="lineNum">      21 </span><span class="lineCov">        574 : </span>
-<span class="lineNum">      22 </span><span class="lineCov">     560257 : template &lt;typename S, typename T, typename... Args&gt; unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">     559683 :         return unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
-<span class="lineNum">      24 </span><span class="lineCov">       1681 : }</span>
-<span class="lineNum">      25 </span><span class="lineCov">       1681 : </span>
+<span class="lineNum">      21 </span><span class="lineCov">        744 : </span>
+<span class="lineNum">      22 </span><span class="lineCov">   43807801 : template &lt;typename S, typename T, typename... Args&gt; unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">   43807057 :         return unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      24 </span><span class="lineCov">       2718 : }</span>
+<span class="lineNum">      25 </span><span class="lineCov">       2718 : </span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 : template &lt;class T&gt; inline bool in_bounds(int64_t value) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">       4807 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp; value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
-<span class="lineNum">      28 </span><span class="lineCov">      84527 : }</span>
-<span class="lineNum">      29 </span><span class="lineCov">      79720 : </span>
-<span class="lineNum">      30 </span><span class="lineCov">      40158 : } // namespace duckdb</span>
+<span class="lineNum">      27 </span><span class="lineCov">     574565 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp; value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
+<span class="lineNum">      28 </span><span class="lineCov">    6831834 : }</span>
+<span class="lineNum">      29 </span><span class="lineCov">    6257269 : </span>
+<span class="lineNum">      30 </span><span class="lineCov">    3858837 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>

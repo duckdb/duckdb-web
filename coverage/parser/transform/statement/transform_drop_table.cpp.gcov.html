@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,20 +67,20 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">         13 : unique_ptr&lt;DropTableStatement&gt; Transformer::TransformDropTable(DropStmt *stmt) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">         13 :         auto result = make_unique&lt;DropTableStatement&gt;();</span>
-<span class="lineNum">      10 </span><span class="lineCov">         13 :         auto &amp;info = *result-&gt;info.get();</span>
+<span class="lineNum">       8 </span><span class="lineCov">         14 : unique_ptr&lt;DropTableStatement&gt; Transformer::TransformDropTable(DropStmt *stmt) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">         14 :         auto result = make_unique&lt;DropTableStatement&gt;();</span>
+<span class="lineNum">      10 </span><span class="lineCov">         14 :         auto &amp;info = *result-&gt;info.get();</span>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">         13 :         info.cascade = stmt-&gt;behavior == DropBehavior::DROP_CASCADE;</span>
-<span class="lineNum">      13 </span><span class="lineCov">         13 :         auto table_list = reinterpret_cast&lt;List *&gt;(stmt-&gt;objects-&gt;head-&gt;data.ptr_value);</span>
-<span class="lineNum">      14 </span><span class="lineCov">         13 :         if (table_list-&gt;length == 2) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">         14 :         info.cascade = stmt-&gt;behavior == DropBehavior::DROP_CASCADE;</span>
+<span class="lineNum">      13 </span><span class="lineCov">         14 :         auto table_list = reinterpret_cast&lt;List *&gt;(stmt-&gt;objects-&gt;head-&gt;data.ptr_value);</span>
+<span class="lineNum">      14 </span><span class="lineCov">         14 :         if (table_list-&gt;length == 2) {</span>
 <span class="lineNum">      15 </span><span class="lineCov">          4 :                 info.schema = reinterpret_cast&lt;value *&gt;(table_list-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
 <span class="lineNum">      16 </span><span class="lineCov">          4 :                 info.table = reinterpret_cast&lt;value *&gt;(table_list-&gt;head-&gt;next-&gt;data.ptr_value)-&gt;val.str;</span>
 <span class="lineNum">      17 </span>            :         } else {
-<span class="lineNum">      18 </span><span class="lineCov">          9 :                 info.table = reinterpret_cast&lt;value *&gt;(table_list-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
+<span class="lineNum">      18 </span><span class="lineCov">         10 :                 info.table = reinterpret_cast&lt;value *&gt;(table_list-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
 <span class="lineNum">      19 </span>            :         }
-<span class="lineNum">      20 </span><span class="lineCov">         13 :         info.if_exists = stmt-&gt;missing_ok;</span>
-<span class="lineNum">      21 </span><span class="lineCov">         13 :         return result;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         14 :         info.if_exists = stmt-&gt;missing_ok;</span>
+<span class="lineNum">      21 </span><span class="lineCov">         14 :         return result;</span>
 <span class="lineNum">      22 </span>            : }
 </pre>
       </td>

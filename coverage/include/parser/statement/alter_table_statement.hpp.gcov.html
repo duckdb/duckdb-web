@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -81,14 +81,14 @@
 <span class="lineNum">      19 </span>            : 
 <a name="20"><span class="lineNum">      20 </span>            : class AlterTableStatement : public SQLStatement {</a>
 <span class="lineNum">      21 </span>            : public:
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          6 :         AlterTableStatement(unique_ptr&lt;AlterTableInformation&gt; info)</span></a>
-<span class="lineNum">      23 </span><span class="lineCov">          6 :             : SQLStatement(StatementType::ALTER), info(std::move(info)){};</span>
-<span class="lineNum">      24 </span><span class="lineCov">         12 :         virtual ~AlterTableStatement() {</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         12 :         }</span></a>
-<span class="lineNum">      26 </span><span class="lineCov">          6 : </span>
-<span class="lineNum">      27 </span><span class="lineCov">          6 :         virtual string ToString() const {</span>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          6 :                 return &quot;ALTER TABLE&quot;;</span></a>
-<span class="lineNum">      29 </span><span class="lineCov">          6 :         }</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">          7 :         AlterTableStatement(unique_ptr&lt;AlterTableInformation&gt; info)</span></a>
+<span class="lineNum">      23 </span><span class="lineCov">          7 :             : SQLStatement(StatementType::ALTER), info(std::move(info)){};</span>
+<span class="lineNum">      24 </span><span class="lineCov">         14 :         virtual ~AlterTableStatement() {</span>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         14 :         }</span></a>
+<span class="lineNum">      26 </span><span class="lineCov">          7 : </span>
+<span class="lineNum">      27 </span><span class="lineCov">          7 :         virtual string ToString() const {</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          7 :                 return &quot;ALTER TABLE&quot;;</span></a>
+<span class="lineNum">      29 </span><span class="lineCov">          7 :         }</span>
 <span class="lineNum">      30 </span>            :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :                 return v-&gt;Visit(*this);</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineNoCov">          0 :         }</span></a>

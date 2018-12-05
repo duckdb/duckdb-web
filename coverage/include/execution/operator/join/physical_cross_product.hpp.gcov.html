@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -85,11 +85,11 @@
 <span class="lineNum">      23 </span>            : 
 <a name="24"><span class="lineNum">      24 </span>            : class PhysicalCrossProductOperatorState : public PhysicalOperatorState {</a>
 <span class="lineNum">      25 </span>            : public:
-<span class="lineNum">      26 </span><span class="lineCov">         38 :         PhysicalCrossProductOperatorState(PhysicalOperator *left, PhysicalOperator *right,</span>
+<span class="lineNum">      26 </span><span class="lineCov">     258479 :         PhysicalCrossProductOperatorState(PhysicalOperator *left, PhysicalOperator *right,</span>
 <span class="lineNum">      27 </span>            :                                           ExpressionExecutor *parent_executor)
-<span class="lineNum">      28 </span><span class="lineCov">         38 :             : PhysicalOperatorState(left, parent_executor), left_position(0) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">         38 :                 assert(left &amp;&amp; right);</span>
-<span class="lineNum">      30 </span><span class="lineCov">         38 :         }</span>
+<span class="lineNum">      28 </span><span class="lineCov">     258479 :             : PhysicalOperatorState(left, parent_executor), left_position(0) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">     258479 :                 assert(left &amp;&amp; right);</span>
+<span class="lineNum">      30 </span><span class="lineCov">     258479 :         }</span>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            :         size_t left_position;
 <span class="lineNum">      33 </span>            :         DataChunk right_chunk;

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -67,34 +67,34 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">        157 : PhysicalUnion::PhysicalUnion(LogicalOperator &amp;op, unique_ptr&lt;PhysicalOperator&gt; top, unique_ptr&lt;PhysicalOperator&gt; bottom)</span>
-<span class="lineNum">       9 </span><span class="lineCov">        157 :     : PhysicalOperator(PhysicalOperatorType::UNION, op.types) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">        157 :         children.push_back(move(top));</span>
-<span class="lineNum">      11 </span><span class="lineCov">        157 :         children.push_back(move(bottom));</span>
-<span class="lineNum">      12 </span><span class="lineCov">        157 : }</span>
+<span class="lineNum">       8 </span><span class="lineCov">       2504 : PhysicalUnion::PhysicalUnion(LogicalOperator &amp;op, unique_ptr&lt;PhysicalOperator&gt; top, unique_ptr&lt;PhysicalOperator&gt; bottom)</span>
+<span class="lineNum">       9 </span><span class="lineCov">       2504 :     : PhysicalOperator(PhysicalOperatorType::UNION, op.types) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">       2504 :         children.push_back(move(top));</span>
+<span class="lineNum">      11 </span><span class="lineCov">       2504 :         children.push_back(move(bottom));</span>
+<span class="lineNum">      12 </span><span class="lineCov">       2504 : }</span>
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : // first exhaust top, then exhaust bottom. state to remember which.
-<span class="lineNum">      15 </span><span class="lineCov">        163 : void PhysicalUnion::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">        163 :         auto state = reinterpret_cast&lt;PhysicalUnionOperatorState *&gt;(state_);</span>
-<span class="lineNum">      17 </span><span class="lineCov">        163 :         if (!state-&gt;top_done) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">        130 :                 children[0]-&gt;GetChunk(context, chunk, state-&gt;top_state.get());</span>
-<span class="lineNum">      19 </span><span class="lineCov">        130 :                 if (chunk.size() == 0) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">         91 :                         state-&gt;top_done = true;</span>
+<span class="lineNum">      15 </span><span class="lineCov">       8374 : void PhysicalUnion::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">       8374 :         auto state = reinterpret_cast&lt;PhysicalUnionOperatorState *&gt;(state_);</span>
+<span class="lineNum">      17 </span><span class="lineCov">       8374 :         if (!state-&gt;top_done) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">       5994 :                 children[0]-&gt;GetChunk(context, chunk, state-&gt;top_state.get());</span>
+<span class="lineNum">      19 </span><span class="lineCov">       5994 :                 if (chunk.size() == 0) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">       2438 :                         state-&gt;top_done = true;</span>
 <span class="lineNum">      21 </span>            :                 }
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">        163 :         if (state-&gt;top_done) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">        124 :                 children[1]-&gt;GetChunk(context, chunk, state-&gt;bottom_state.get());</span>
+<span class="lineNum">      23 </span><span class="lineCov">       8374 :         if (state-&gt;top_done) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">       4818 :                 children[1]-&gt;GetChunk(context, chunk, state-&gt;bottom_state.get());</span>
 <span class="lineNum">      25 </span>            :         }
-<span class="lineNum">      26 </span><span class="lineCov">        163 :         if (chunk.size() == 0) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">         91 :                 state-&gt;finished = true;</span>
+<span class="lineNum">      26 </span><span class="lineCov">       8374 :         if (chunk.size() == 0) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">       2438 :                 state-&gt;finished = true;</span>
 <span class="lineNum">      28 </span>            :         }
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        163 : }</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">       8374 : }</span></a>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">        109 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalUnion::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">        218 :         auto state = make_unique&lt;PhysicalUnionOperatorState&gt;(parent_executor);</span>
-<span class="lineNum">      33 </span><span class="lineCov">        109 :         state-&gt;top_state = children[0]-&gt;GetOperatorState(parent_executor);</span>
-<span class="lineNum">      34 </span><span class="lineCov">        109 :         state-&gt;bottom_state = children[1]-&gt;GetOperatorState(parent_executor);</span>
-<span class="lineNum">      35 </span><span class="lineCov">        218 :         return (move(state));</span>
+<span class="lineNum">      31 </span><span class="lineCov">       2456 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalUnion::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">       4912 :         auto state = make_unique&lt;PhysicalUnionOperatorState&gt;(parent_executor);</span>
+<span class="lineNum">      33 </span><span class="lineCov">       2456 :         state-&gt;top_state = children[0]-&gt;GetOperatorState(parent_executor);</span>
+<span class="lineNum">      34 </span><span class="lineCov">       2456 :         state-&gt;bottom_state = children[1]-&gt;GetOperatorState(parent_executor);</span>
+<span class="lineNum">      35 </span><span class="lineCov">       4912 :         return (move(state));</span>
 <span class="lineNum">      36 </span>            : }
 </pre>
       </td>

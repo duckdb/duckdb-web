@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -79,9 +79,9 @@
 <span class="lineNum">      17 </span>            : //! the data but only add a selection vector.
 <a name="18"><span class="lineNum">      18 </span>            : class PhysicalOrder : public PhysicalOperator {</a>
 <span class="lineNum">      19 </span>            : public:
-<span class="lineNum">      20 </span><span class="lineCov">       2815 :         PhysicalOrder(LogicalOperator &amp;op, OrderByDescription description)</span>
-<span class="lineNum">      21 </span><span class="lineCov">       2815 :             : PhysicalOperator(PhysicalOperatorType::ORDER_BY, op.types), description(std::move(description)) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">       2815 :         }</span>
+<span class="lineNum">      20 </span><span class="lineCov">       2835 :         PhysicalOrder(LogicalOperator &amp;op, OrderByDescription description)</span>
+<span class="lineNum">      21 </span><span class="lineCov">       2835 :             : PhysicalOperator(PhysicalOperatorType::ORDER_BY, op.types), description(std::move(description)) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">       2835 :         }</span>
 <span class="lineNum">      23 </span>            : 
 <span class="lineNum">      24 </span>            :         void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) override;
 <span class="lineNum">      25 </span>            : 
@@ -92,9 +92,9 @@
 <span class="lineNum">      30 </span>            : 
 <a name="31"><span class="lineNum">      31 </span>            : class PhysicalOrderOperatorState : public PhysicalOperatorState {</a>
 <span class="lineNum">      32 </span>            : public:
-<span class="lineNum">      33 </span><span class="lineCov">       2815 :         PhysicalOrderOperatorState(PhysicalOperator *child, ExpressionExecutor *parent_executor)</span>
-<span class="lineNum">      34 </span><span class="lineCov">       2815 :             : PhysicalOperatorState(child, parent_executor), position(0) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">       2815 :         }</span>
+<span class="lineNum">      33 </span><span class="lineCov">       2835 :         PhysicalOrderOperatorState(PhysicalOperator *child, ExpressionExecutor *parent_executor)</span>
+<span class="lineNum">      34 </span><span class="lineCov">       2835 :             : PhysicalOperatorState(child, parent_executor), position(0) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       2835 :         }</span>
 <span class="lineNum">      36 </span>            : 
 <span class="lineNum">      37 </span>            :         size_t position;
 <span class="lineNum">      38 </span>            :         ChunkCollection sorted_data;

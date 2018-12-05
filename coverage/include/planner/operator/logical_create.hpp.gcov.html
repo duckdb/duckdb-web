@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -76,15 +76,15 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : class LogicalCreate : public LogicalOperator {</a>
 <span class="lineNum">      16 </span>            : public:
-<span class="lineNum">      17 </span><span class="lineCov">        169 :         LogicalCreate(SchemaCatalogEntry *schema, unique_ptr&lt;CreateTableInformation&gt; info)</span>
-<span class="lineNum">      18 </span><span class="lineCov">        169 :             : LogicalOperator(LogicalOperatorType::CREATE), schema(schema), info(move(info)) {</span>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">        169 :         }</span></a>
+<span class="lineNum">      17 </span><span class="lineCov">       1129 :         LogicalCreate(SchemaCatalogEntry *schema, unique_ptr&lt;CreateTableInformation&gt; info)</span>
+<span class="lineNum">      18 </span><span class="lineCov">       1129 :             : LogicalOperator(LogicalOperatorType::CREATE), schema(schema), info(move(info)) {</span>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">       1129 :         }</span></a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">        338 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">        338 :                 v-&gt;Visit(*this);</span></a>
-<span class="lineNum">      23 </span><span class="lineCov">        338 :         }</span>
-<span class="lineNum">      24 </span><span class="lineCov">        169 :         vector&lt;string&gt; GetNames() override {</span>
-<span class="lineNum">      25 </span><span class="lineCov">        338 :                 return {&quot;Count&quot;};</span>
+<span class="lineNum">      21 </span><span class="lineCov">       2258 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       2258 :                 v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      23 </span><span class="lineCov">       2258 :         }</span>
+<span class="lineNum">      24 </span><span class="lineCov">       1129 :         vector&lt;string&gt; GetNames() override {</span>
+<span class="lineNum">      25 </span><span class="lineCov">       2258 :                 return {&quot;Count&quot;};</span>
 <span class="lineNum">      26 </span>            :         }
 <span class="lineNum">      27 </span>            : 
 <span class="lineNum">      28 </span>            :         //! Schema to insert to
@@ -93,9 +93,9 @@
 <span class="lineNum">      31 </span>            :         unique_ptr&lt;CreateTableInformation&gt; info;
 <a name="32"><span class="lineNum">      32 </span>            : </a>
 <span class="lineNum">      33 </span>            : protected:
-<span class="lineNum">      34 </span><span class="lineCov">        169 :         void ResolveTypes() override {</span>
-<span class="lineNum">      35 </span><span class="lineCov">        169 :                 types.push_back(TypeId::BIGINT);</span>
-<span class="lineNum">      36 </span><span class="lineCov">        169 :         }</span>
+<span class="lineNum">      34 </span><span class="lineCov">       1129 :         void ResolveTypes() override {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       1129 :                 types.push_back(TypeId::BIGINT);</span>
+<span class="lineNum">      36 </span><span class="lineCov">       1129 :         }</span>
 <span class="lineNum">      37 </span>            : };
 <span class="lineNum">      38 </span>            : } // namespace duckdb
 </pre>

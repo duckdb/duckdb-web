@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -81,13 +81,13 @@
 <span class="lineNum">      19 </span>            : //! SQLStatement is the base class of any type of SQL statement.
 <a name="20"><span class="lineNum">      20 </span>            : class SQLStatement : public Printable {</a>
 <a name="21"><span class="lineNum">      21 </span>            : public:</a>
-<span class="lineNum">      22 </span><span class="lineCov">      40205 :         SQLStatement(StatementType type) : type(type){};</span>
-<span class="lineNum">      23 </span><span class="lineCov">      40205 :         virtual ~SQLStatement() {</span>
-<span class="lineNum">      24 </span><span class="lineCov">      40205 :         }</span>
+<span class="lineNum">      22 </span><span class="lineCov">    3172070 :         SQLStatement(StatementType type) : type(type){};</span>
+<span class="lineNum">      23 </span><span class="lineCov">    3170873 :         virtual ~SQLStatement() {</span>
+<span class="lineNum">      24 </span><span class="lineCov">    3170791 :         }</span>
 <a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 : </span></a>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *) = 0;</span>
-<span class="lineNum">      27 </span><span class="lineCov">      40205 :         virtual bool Equals(const SQLStatement *other) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">      40205 :                 return other &amp;&amp; type == other-&gt;type;</span>
+<span class="lineNum">      27 </span><span class="lineCov">    3170873 :         virtual bool Equals(const SQLStatement *other) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3170791 :                 return other &amp;&amp; type == other-&gt;type;</span>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :         StatementType type;</span>

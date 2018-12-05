@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -70,22 +70,22 @@
 <span class="lineNum">       8 </span>            : namespace duckdb {
 <a name="9"><span class="lineNum">       9 </span>            : namespace function {</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">          6 : void substring_function(Vector inputs[], size_t input_count, Vector &amp;result) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">          6 :         assert(input_count == 3);</span>
-<span class="lineNum">      13 </span><span class="lineCov">          6 :         auto &amp;input = inputs[0];</span>
-<span class="lineNum">      14 </span><span class="lineCov">          6 :         auto &amp;offset = inputs[1];</span>
-<span class="lineNum">      15 </span><span class="lineCov">          6 :         auto &amp;length = inputs[2];</span>
-<span class="lineNum">      16 </span><span class="lineCov">          6 :         assert(input.type == TypeId::VARCHAR);</span>
+<span class="lineNum">      11 </span><span class="lineCov">         51 : void substring_function(Vector inputs[], size_t input_count, Vector &amp;result) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">         51 :         assert(input_count == 3);</span>
+<span class="lineNum">      13 </span><span class="lineCov">         51 :         auto &amp;input = inputs[0];</span>
+<span class="lineNum">      14 </span><span class="lineCov">         51 :         auto &amp;offset = inputs[1];</span>
+<span class="lineNum">      15 </span><span class="lineCov">         51 :         auto &amp;length = inputs[2];</span>
+<span class="lineNum">      16 </span><span class="lineCov">         51 :         assert(input.type == TypeId::VARCHAR);</span>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">          6 :         result.Initialize(TypeId::VARCHAR);</span>
-<span class="lineNum">      19 </span><span class="lineCov">          6 :         result.nullmask = input.nullmask;</span>
+<span class="lineNum">      18 </span><span class="lineCov">         51 :         result.Initialize(TypeId::VARCHAR);</span>
+<span class="lineNum">      19 </span><span class="lineCov">         51 :         result.nullmask = input.nullmask;</span>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">          6 :         auto result_data = (const char **)result.data;</span>
-<span class="lineNum">      22 </span><span class="lineCov">          6 :         auto input_data = (const char **)input.data;</span>
-<span class="lineNum">      23 </span><span class="lineCov">          6 :         auto offset_data = (int *)offset.data;</span>
-<span class="lineNum">      24 </span><span class="lineCov">          6 :         auto length_data = (int *)length.data;</span>
+<span class="lineNum">      21 </span><span class="lineCov">         51 :         auto result_data = (const char **)result.data;</span>
+<span class="lineNum">      22 </span><span class="lineCov">         51 :         auto input_data = (const char **)input.data;</span>
+<span class="lineNum">      23 </span><span class="lineCov">         51 :         auto offset_data = (int *)offset.data;</span>
+<span class="lineNum">      24 </span><span class="lineCov">         51 :         auto length_data = (int *)length.data;</span>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">          6 :         VectorOperations::TernaryExec(</span>
+<span class="lineNum">      26 </span><span class="lineCov">         51 :         VectorOperations::TernaryExec(</span>
 <span class="lineNum">      27 </span>            :             input, offset, length, result,
 <span class="lineNum">      28 </span>            :             [&amp;](size_t input_index, size_t offset_index, size_t length_index, size_t result_index) {
 <span class="lineNum">      29 </span>            :                     auto input = input_data[input_index];
@@ -113,15 +113,15 @@
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span>            :                     result_data[result_index] = result.string_heap.AddString(output);
 <span class="lineNum">      53 </span>            :             });
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          6 : }</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         51 : }</span></a>
 <span class="lineNum">      55 </span>            : 
-<span class="lineNum">      56 </span><span class="lineCov">         27 : bool substring_matches_arguments(vector&lt;TypeId&gt; &amp;arguments) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">         54 :         return arguments.size() == 3 &amp;&amp; arguments[0] == TypeId::VARCHAR &amp;&amp; arguments[1] == TypeId::INTEGER &amp;&amp;</span>
-<span class="lineNum">      58 </span><span class="lineCov">         54 :                arguments[2] == TypeId::INTEGER;</span>
+<span class="lineNum">      56 </span><span class="lineCov">         30 : bool substring_matches_arguments(vector&lt;TypeId&gt; &amp;arguments) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">         60 :         return arguments.size() == 3 &amp;&amp; arguments[0] == TypeId::VARCHAR &amp;&amp; arguments[1] == TypeId::INTEGER &amp;&amp;</span>
+<span class="lineNum">      58 </span><span class="lineCov">         60 :                arguments[2] == TypeId::INTEGER;</span>
 <a name="59"><span class="lineNum">      59 </span>            : }</a>
 <span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">         27 : TypeId substring_get_return_type(vector&lt;TypeId&gt; &amp;arguments) {</span>
-<span class="lineNum">      62 </span><span class="lineCov">         27 :         return TypeId::VARCHAR;</span>
+<span class="lineNum">      61 </span><span class="lineCov">         30 : TypeId substring_get_return_type(vector&lt;TypeId&gt; &amp;arguments) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">         30 :         return TypeId::VARCHAR;</span>
 <span class="lineNum">      63 </span>            : }
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span>            : } // namespace function

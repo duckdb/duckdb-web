@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,18 +67,18 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">          8 : void PhysicalPruneColumns::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">          8 :         auto state = reinterpret_cast&lt;PhysicalOperatorState *&gt;(state_);</span>
+<span class="lineNum">       8 </span><span class="lineCov">         18 : void PhysicalPruneColumns::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">         18 :         auto state = reinterpret_cast&lt;PhysicalOperatorState *&gt;(state_);</span>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">          8 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">      12 </span><span class="lineCov">          8 :         if (state-&gt;child_chunk.size() == 0) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">          7 :                 return;</span>
+<span class="lineNum">      11 </span><span class="lineCov">         18 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      12 </span><span class="lineCov">         18 :         if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">          9 :                 return;</span>
 <span class="lineNum">      14 </span>            :         }
-<span class="lineNum">      15 </span><span class="lineCov">          1 :         assert(column_limit &lt;= state-&gt;child_chunk.column_count);</span>
-<span class="lineNum">      16 </span><span class="lineCov">          3 :         for (size_t i = 0; i &lt; column_limit; i++) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">          2 :                 chunk.data[i].Reference(state-&gt;child_chunk.data[i]);</span>
+<span class="lineNum">      15 </span><span class="lineCov">          9 :         assert(column_limit &lt;= state-&gt;child_chunk.column_count);</span>
+<span class="lineNum">      16 </span><span class="lineCov">         22 :         for (size_t i = 0; i &lt; column_limit; i++) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">         13 :                 chunk.data[i].Reference(state-&gt;child_chunk.data[i]);</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">          1 :         chunk.sel_vector = state-&gt;child_chunk.sel_vector;</span>
+<span class="lineNum">      19 </span><span class="lineCov">          9 :         chunk.sel_vector = state-&gt;child_chunk.sel_vector;</span>
 <span class="lineNum">      20 </span>            : }
 </pre>
       </td>

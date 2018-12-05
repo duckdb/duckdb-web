@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -81,8 +81,8 @@
 <span class="lineNum">      19 </span>            :         DuckDBResult();
 <a name="20"><span class="lineNum">      20 </span>            :         DuckDBResult(string error);</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">      50145 :         bool GetSuccess() const {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      50145 :                 return success;</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">    6177239 :         bool GetSuccess() const {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    6177239 :                 return success;</span></a>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :         const string &amp;GetErrorMessage() const {</span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :                 return error;</span>
@@ -91,16 +91,16 @@
 <span class="lineNum">      29 </span>            :         void Print();
 <a name="30"><span class="lineNum">      30 </span>            : </a>
 <span class="lineNum">      31 </span>            :         //! Returns the number of columns in the result
-<span class="lineNum">      32 </span><span class="lineCov">       5966 :         size_t column_count() {</span>
-<span class="lineNum">      33 </span><span class="lineCov">       5966 :                 return collection.types.size();</span>
+<span class="lineNum">      32 </span><span class="lineCov">    3003558 :         size_t column_count() {</span>
+<span class="lineNum">      33 </span><span class="lineCov">    3003558 :                 return collection.types.size();</span>
 <a name="34"><span class="lineNum">      34 </span>            :         }</a>
 <span class="lineNum">      35 </span>            :         //! Returns the number of elements in the result
-<span class="lineNum">      36 </span><span class="lineCov">      69508 :         size_t size() {</span>
-<span class="lineNum">      37 </span><span class="lineCov">      69508 :                 return collection.count;</span>
+<span class="lineNum">      36 </span><span class="lineCov">   14320183 :         size_t size() {</span>
+<span class="lineNum">      37 </span><span class="lineCov">   14320183 :                 return collection.count;</span>
 <a name="38"><span class="lineNum">      38 </span>            :         }</a>
 <span class="lineNum">      39 </span>            :         //! Returns a list of types of the result
-<span class="lineNum">      40 </span><span class="lineCov">      21177 :         vector&lt;TypeId&gt; &amp;types() {</span>
-<span class="lineNum">      41 </span><span class="lineCov">      21177 :                 return collection.types;</span>
+<span class="lineNum">      40 </span><span class="lineCov">    3771824 :         vector&lt;TypeId&gt; &amp;types() {</span>
+<span class="lineNum">      41 </span><span class="lineCov">    3771824 :                 return collection.types;</span>
 <span class="lineNum">      42 </span>            :         }
 <span class="lineNum">      43 </span>            : 
 <span class="lineNum">      44 </span>            :         //! Gets the value of the column at the given index. Note that this method

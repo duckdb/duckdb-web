@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,26 +67,26 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">     241343 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(ColumnRefExpression &amp;expr) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">     241343 :         size_t cur_depth = expr.depth;</span>
-<span class="lineNum">      10 </span><span class="lineCov">     241343 :         ExpressionExecutor *cur_exec = this;</span>
-<span class="lineNum">      11 </span><span class="lineCov">     297505 :         while (cur_depth &gt; 0) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">      56162 :                 cur_exec = cur_exec-&gt;parent;</span>
-<span class="lineNum">      13 </span><span class="lineCov">      56162 :                 if (!cur_exec) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">   20713872 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">   20713872 :         size_t cur_depth = expr.depth;</span>
+<span class="lineNum">      10 </span><span class="lineCov">   20713872 :         ExpressionExecutor *cur_exec = this;</span>
+<span class="lineNum">      11 </span><span class="lineCov">   20774082 :         while (cur_depth &gt; 0) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">      59314 :                 cur_exec = cur_exec-&gt;parent;</span>
+<span class="lineNum">      13 </span><span class="lineCov">      59314 :                 if (!cur_exec) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Unable to find matching parent executor&quot;);</span>
 <span class="lineNum">      15 </span>            :                 }
-<span class="lineNum">      16 </span><span class="lineCov">      56162 :                 cur_depth--;</span>
+<span class="lineNum">      16 </span><span class="lineCov">      60210 :                 cur_depth--;</span>
 <span class="lineNum">      17 </span>            :         }
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">     241343 :         if (expr.index == (size_t)-1) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">   20714768 :         if (expr.index == (size_t)-1) {</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Column Reference not bound!&quot;);</span>
 <span class="lineNum">      21 </span>            :         }
-<span class="lineNum">      22 </span><span class="lineCov">     241343 :         if (expr.index &gt;= cur_exec-&gt;chunk-&gt;column_count) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">   20714768 :         if (expr.index &gt;= cur_exec-&gt;chunk-&gt;column_count) {</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Column reference index out of range!&quot;);</span>
 <span class="lineNum">      24 </span>            :         }
-<span class="lineNum">      25 </span><span class="lineCov">     241343 :         vector.Reference(cur_exec-&gt;chunk-&gt;data[expr.index]);</span>
-<span class="lineNum">      26 </span><span class="lineCov">     241343 :         expr.stats.Verify(vector);</span>
-<span class="lineNum">      27 </span><span class="lineCov">     241343 :         return nullptr;</span>
+<span class="lineNum">      25 </span><span class="lineCov">   20714768 :         vector.Reference(cur_exec-&gt;chunk-&gt;data[expr.index]);</span>
+<span class="lineNum">      26 </span><span class="lineCov">   20714481 :         expr.stats.Verify(vector);</span>
+<span class="lineNum">      27 </span><span class="lineCov">   20719808 :         return nullptr;</span>
 <span class="lineNum">      28 </span>            : }
 </pre>
       </td>

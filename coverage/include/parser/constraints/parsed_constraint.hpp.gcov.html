@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -82,20 +82,20 @@
 <span class="lineNum">      20 </span>            : //! will be transformed to a proper PRIMARY KEY or UNIQUE constraint
 <a name="21"><span class="lineNum">      21 </span>            : class ParsedConstraint : public Constraint {</a>
 <span class="lineNum">      22 </span>            : public:
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         10 :         ParsedConstraint(ConstraintType type, size_t index) : Constraint(ConstraintType::DUMMY), ctype(type), index(index) {</span></a>
-<span class="lineNum">      24 </span><span class="lineCov">         10 :         }</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         17 :         ParsedConstraint(ConstraintType type, size_t index) : Constraint(ConstraintType::DUMMY), ctype(type), index(index) {</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">         17 :         }</span>
 <span class="lineNum">      25 </span><span class="lineCov">          2 :         ParsedConstraint(ConstraintType type, vector&lt;string&gt; columns)</span>
 <a name="26"><span class="lineNum">      26 </span><span class="lineCov">          2 :             : Constraint(ConstraintType::DUMMY), ctype(type), index((size_t)-1), columns(columns) {</span></a>
 <span class="lineNum">      27 </span><span class="lineCov">          2 :         }</span>
-<span class="lineNum">      28 </span><span class="lineCov">         24 :         virtual ~ParsedConstraint() {</span>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         24 :         }</span></a>
-<span class="lineNum">      30 </span><span class="lineCov">         12 : </span>
-<span class="lineNum">      31 </span><span class="lineCov">         12 :         virtual unique_ptr&lt;Constraint&gt; Accept(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">         12 :                 return v-&gt;Visit(*this);</span>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">         12 :         }</span></a>
+<span class="lineNum">      28 </span><span class="lineCov">         38 :         virtual ~ParsedConstraint() {</span>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         38 :         }</span></a>
+<span class="lineNum">      30 </span><span class="lineCov">         19 : </span>
+<span class="lineNum">      31 </span><span class="lineCov">         19 :         virtual unique_ptr&lt;Constraint&gt; Accept(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">         19 :                 return v-&gt;Visit(*this);</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">         19 :         }</span></a>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">         11 :         virtual string ToString() const {</span>
-<span class="lineNum">      36 </span><span class="lineCov">         11 :                 return &quot;Dummy Constraint&quot;;</span>
+<span class="lineNum">      35 </span><span class="lineCov">         18 :         virtual string ToString() const {</span>
+<span class="lineNum">      36 </span><span class="lineCov">         18 :                 return &quot;Dummy Constraint&quot;;</span>
 <span class="lineNum">      37 </span>            :         }
 <span class="lineNum">      38 </span>            : 
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 :         //! Serialize to a stand-alone binary blob</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -86,8 +86,8 @@
 <span class="lineNum">      24 </span>            : 
 <a name="25"><span class="lineNum">      25 </span>            :         void ResolveType() override;</a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">      10495 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">      10495 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">      28529 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">      28529 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :         ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :                 return ExpressionClass::FUNCTION;</span>

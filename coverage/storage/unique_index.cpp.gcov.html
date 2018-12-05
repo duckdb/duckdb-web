@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -72,27 +72,27 @@
 <span class="lineNum">      10 </span>            : using namespace duckdb;
 <a name="11"><span class="lineNum">      11 </span>            : using namespace std;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">         12 : UniqueIndex::UniqueIndex(DataTable &amp;table, vector&lt;TypeId&gt; types, vector&lt;size_t&gt; keys, bool allow_nulls)</span>
-<span class="lineNum">      14 </span><span class="lineCov">         12 :     : serializer(types, keys), comparer(serializer, table.serializer), table(table), types(types), keys(keys),</span>
-<span class="lineNum">      15 </span><span class="lineCov">         12 :       allow_nulls(allow_nulls) {</span>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">         12 : }</span></a>
+<span class="lineNum">      13 </span><span class="lineCov">         19 : UniqueIndex::UniqueIndex(DataTable &amp;table, vector&lt;TypeId&gt; types, vector&lt;size_t&gt; keys, bool allow_nulls)</span>
+<span class="lineNum">      14 </span><span class="lineCov">         19 :     : serializer(types, keys), comparer(serializer, table.serializer), table(table), types(types), keys(keys),</span>
+<span class="lineNum">      15 </span><span class="lineCov">         19 :       allow_nulls(allow_nulls) {</span>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">         19 : }</span></a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">         65 : UniqueIndexNode *UniqueIndex::AddEntry(Transaction &amp;transaction, Tuple tuple, size_t row_identifier,</span>
+<span class="lineNum">      18 </span><span class="lineCov">         80 : UniqueIndexNode *UniqueIndex::AddEntry(Transaction &amp;transaction, Tuple tuple, size_t row_identifier,</span>
 <span class="lineNum">      19 </span>            :                                        unordered_set&lt;size_t&gt; &amp;ignored_identifiers) {
-<span class="lineNum">      20 </span><span class="lineCov">        130 :         auto new_node = make_unique&lt;UniqueIndexNode&gt;(move(tuple), row_identifier);</span>
-<span class="lineNum">      21 </span><span class="lineCov">         65 :         if (!root) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">        160 :         auto new_node = make_unique&lt;UniqueIndexNode&gt;(move(tuple), row_identifier);</span>
+<span class="lineNum">      21 </span><span class="lineCov">         80 :         if (!root) {</span>
 <span class="lineNum">      22 </span>            :                 // no root, make this entry the root
-<span class="lineNum">      23 </span><span class="lineCov">         12 :                 root = move(new_node);</span>
-<span class="lineNum">      24 </span><span class="lineCov">         12 :                 return root.get();</span>
+<span class="lineNum">      23 </span><span class="lineCov">         17 :                 root = move(new_node);</span>
+<span class="lineNum">      24 </span><span class="lineCov">         17 :                 return root.get();</span>
 <span class="lineNum">      25 </span>            :         }
-<span class="lineNum">      26 </span><span class="lineCov">         53 :         UniqueIndexNode *prev = nullptr, *entry = root.get();</span>
-<span class="lineNum">      27 </span><span class="lineCov">         53 :         int cmp = 0;</span>
+<span class="lineNum">      26 </span><span class="lineCov">         63 :         UniqueIndexNode *prev = nullptr, *entry = root.get();</span>
+<span class="lineNum">      27 </span><span class="lineCov">         63 :         int cmp = 0;</span>
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span>            :         // traverse the tree
-<span class="lineNum">      30 </span><span class="lineCov">        150 :         while (entry) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">        175 :         while (entry) {</span>
 <span class="lineNum">      31 </span>            :                 // compare the new entry to the current entry
-<span class="lineNum">      32 </span><span class="lineCov">        107 :                 cmp = serializer.Compare(entry-&gt;tuple, new_node-&gt;tuple);</span>
-<span class="lineNum">      33 </span><span class="lineCov">        107 :                 if (cmp == 0) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">        122 :                 cmp = serializer.Compare(entry-&gt;tuple, new_node-&gt;tuple);</span>
+<span class="lineNum">      33 </span><span class="lineCov">        122 :                 if (cmp == 0) {</span>
 <span class="lineNum">      34 </span>            :                         // node is potentially equivalent
 <span class="lineNum">      35 </span>            :                         // check the base table for the actual version
 <span class="lineNum">      36 </span><span class="lineCov">         29 :                         auto chunk = table.GetChunk(entry-&gt;row_identifier);</span>
@@ -174,10 +174,10 @@
 <span class="lineNum">     112 </span>            :                         }
 <span class="lineNum">     113 </span>            :                 }
 <span class="lineNum">     114 </span>            : 
-<span class="lineNum">     115 </span><span class="lineCov">         97 :                 prev = entry;</span>
-<span class="lineNum">     116 </span><span class="lineCov">         97 :                 if (cmp &lt; 0) {</span>
+<span class="lineNum">     115 </span><span class="lineCov">        112 :                 prev = entry;</span>
+<span class="lineNum">     116 </span><span class="lineCov">        112 :                 if (cmp &lt; 0) {</span>
 <span class="lineNum">     117 </span>            :                         // smaller: go to the left
-<span class="lineNum">     118 </span><span class="lineCov">         69 :                         entry = entry-&gt;left.get();</span>
+<span class="lineNum">     118 </span><span class="lineCov">         84 :                         entry = entry-&gt;left.get();</span>
 <span class="lineNum">     119 </span>            :                 } else {
 <span class="lineNum">     120 </span>            :                         // greater or equal: go to the right
 <span class="lineNum">     121 </span><span class="lineCov">         28 :                         entry = entry-&gt;right.get();</span>
@@ -185,11 +185,11 @@
 <span class="lineNum">     123 </span>            :         }
 <span class="lineNum">     124 </span>            : 
 <span class="lineNum">     125 </span>            :         // we can place the node in the tree now
-<span class="lineNum">     126 </span><span class="lineCov">         43 :         new_node-&gt;parent = prev;</span>
-<span class="lineNum">     127 </span><span class="lineCov">         43 :         if (cmp &lt; 0) {</span>
+<span class="lineNum">     126 </span><span class="lineCov">         53 :         new_node-&gt;parent = prev;</span>
+<span class="lineNum">     127 </span><span class="lineCov">         53 :         if (cmp &lt; 0) {</span>
 <span class="lineNum">     128 </span>            :                 // left side
-<span class="lineNum">     129 </span><span class="lineCov">         27 :                 prev-&gt;left = move(new_node);</span>
-<span class="lineNum">     130 </span><span class="lineCov">         27 :                 return prev-&gt;left.get();</span>
+<span class="lineNum">     129 </span><span class="lineCov">         37 :                 prev-&gt;left = move(new_node);</span>
+<span class="lineNum">     130 </span><span class="lineCov">         37 :                 return prev-&gt;left.get();</span>
 <span class="lineNum">     131 </span>            :         } else {
 <span class="lineNum">     132 </span>            :                 // right side
 <span class="lineNum">     133 </span><span class="lineCov">         16 :                 prev-&gt;right = move(new_node);</span>
@@ -242,37 +242,37 @@
 <span class="lineNum">     180 </span>            :         }
 <a name="181"><span class="lineNum">     181 </span><span class="lineCov">          6 : }</span></a>
 <span class="lineNum">     182 </span>            : 
-<span class="lineNum">     183 </span><span class="lineCov">         42 : string UniqueIndex::AddEntries(Transaction &amp;transaction, UniqueIndexNode *added_nodes[], Tuple tuples[],</span>
+<span class="lineNum">     183 </span><span class="lineCov">         53 : string UniqueIndex::AddEntries(Transaction &amp;transaction, UniqueIndexNode *added_nodes[], Tuple tuples[],</span>
 <span class="lineNum">     184 </span>            :                                bool has_null[], Vector &amp;row_identifiers, unordered_set&lt;size_t&gt; &amp;ignored_identifiers) {
-<span class="lineNum">     185 </span><span class="lineCov">         42 :         string error;</span>
+<span class="lineNum">     185 </span><span class="lineCov">         53 :         string error;</span>
 <span class="lineNum">     186 </span>            : 
-<span class="lineNum">     187 </span><span class="lineCov">         84 :         lock_guard&lt;mutex&gt; guard(index_lock);</span>
+<span class="lineNum">     187 </span><span class="lineCov">        106 :         lock_guard&lt;mutex&gt; guard(index_lock);</span>
 <span class="lineNum">     188 </span>            : 
-<span class="lineNum">     189 </span><span class="lineCov">         42 :         assert(row_identifiers.type == TypeId::POINTER);</span>
+<span class="lineNum">     189 </span><span class="lineCov">         53 :         assert(row_identifiers.type == TypeId::POINTER);</span>
 <span class="lineNum">     190 </span>            : 
-<span class="lineNum">     191 </span><span class="lineCov">         42 :         auto identifiers = (uint64_t *)row_identifiers.data;</span>
-<span class="lineNum">     192 </span><span class="lineCov">         99 :         for (size_t i = 0; i &lt; row_identifiers.count; i++) {</span>
-<span class="lineNum">     193 </span><span class="lineCov">         67 :                 auto row_identifier = row_identifiers.sel_vector ? identifiers[row_identifiers.sel_vector[i]] : identifiers[i];</span>
-<span class="lineNum">     194 </span><span class="lineCov">         67 :                 UniqueIndexNode *entry = nullptr;</span>
-<span class="lineNum">     195 </span><span class="lineCov">         67 :                 if (has_null[i]) {</span>
-<span class="lineNum">     196 </span><span class="lineCov">          2 :                         if (allow_nulls) {</span>
+<span class="lineNum">     191 </span><span class="lineCov">         53 :         auto identifiers = (uint64_t *)row_identifiers.data;</span>
+<span class="lineNum">     192 </span><span class="lineCov">        127 :         for (size_t i = 0; i &lt; row_identifiers.count; i++) {</span>
+<span class="lineNum">     193 </span><span class="lineCov">         84 :                 auto row_identifier = row_identifiers.sel_vector ? identifiers[row_identifiers.sel_vector[i]] : identifiers[i];</span>
+<span class="lineNum">     194 </span><span class="lineCov">         84 :                 UniqueIndexNode *entry = nullptr;</span>
+<span class="lineNum">     195 </span><span class="lineCov">         84 :                 if (has_null[i]) {</span>
+<span class="lineNum">     196 </span><span class="lineCov">          4 :                         if (allow_nulls) {</span>
 <span class="lineNum">     197 </span>            :                                 // skip entries with NULL values
-<span class="lineNum">     198 </span><span class="lineCov">          2 :                                 added_nodes[i] = nullptr;</span>
-<span class="lineNum">     199 </span><span class="lineCov">          2 :                                 continue;</span>
+<span class="lineNum">     198 </span><span class="lineCov">          4 :                                 added_nodes[i] = nullptr;</span>
+<span class="lineNum">     199 </span><span class="lineCov">          4 :                                 continue;</span>
 <span class="lineNum">     200 </span>            :                         } else {
 <span class="lineNum">     201 </span>            :                                 // if NULLs are not allowed, throw an exception
 <span class="lineNum">     202 </span><span class="lineNoCov">          0 :                                 error = &quot;PRIMARY KEY column cannot contain NULL values!&quot;;</span>
 <span class="lineNum">     203 </span>            :                         }
 <span class="lineNum">     204 </span>            :                 } else {
-<span class="lineNum">     205 </span><span class="lineCov">         65 :                         entry = AddEntry(transaction, move(tuples[i]), row_identifier, ignored_identifiers);</span>
-<span class="lineNum">     206 </span><span class="lineCov">         65 :                         if (!entry) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">         80 :                         entry = AddEntry(transaction, move(tuples[i]), row_identifier, ignored_identifiers);</span>
+<span class="lineNum">     206 </span><span class="lineCov">         80 :                         if (!entry) {</span>
 <span class="lineNum">     207 </span>            :                                 // could not add entry: constraint violation
 <span class="lineNum">     208 </span>            :                                 error = &quot;PRIMARY KEY or UNIQUE constraint violated: &quot;
 <span class="lineNum">     209 </span><span class="lineCov">         10 :                                         &quot;duplicated key&quot;;</span>
 <span class="lineNum">     210 </span>            :                         }
 <span class="lineNum">     211 </span>            :                 }
 <span class="lineNum">     212 </span>            : 
-<span class="lineNum">     213 </span><span class="lineCov">         65 :                 if (!entry) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">         80 :                 if (!entry) {</span>
 <span class="lineNum">     214 </span>            :                         // remove all added entries from this index and return the error
 <span class="lineNum">     215 </span><span class="lineCov">         14 :                         for (size_t j = i; j &gt; 0; j--) {</span>
 <span class="lineNum">     216 </span><span class="lineCov">          4 :                                 if (added_nodes[j - 1]) {</span>
@@ -281,68 +281,68 @@
 <span class="lineNum">     219 </span>            :                         }
 <span class="lineNum">     220 </span><span class="lineCov">         10 :                         return error;</span>
 <span class="lineNum">     221 </span>            :                 }
-<span class="lineNum">     222 </span><span class="lineCov">         55 :                 added_nodes[i] = entry;</span>
+<span class="lineNum">     222 </span><span class="lineCov">         70 :                 added_nodes[i] = entry;</span>
 <span class="lineNum">     223 </span>            :         }
-<span class="lineNum">     224 </span><span class="lineCov">         32 :         return error;</span>
+<span class="lineNum">     224 </span><span class="lineCov">         43 :         return error;</span>
 <a name="225"><span class="lineNum">     225 </span>            : }</a>
 <span class="lineNum">     226 </span>            : 
-<span class="lineNum">     227 </span><span class="lineCov">         48 : static bool boolean_array_from_nullmask(sel_t *sel_vector, size_t count, nullmask_t &amp;mask, bool array[],</span>
+<span class="lineNum">     227 </span><span class="lineCov">         59 : static bool boolean_array_from_nullmask(sel_t *sel_vector, size_t count, nullmask_t &amp;mask, bool array[],</span>
 <span class="lineNum">     228 </span>            :                                         bool allow_nulls) {
-<span class="lineNum">     229 </span><span class="lineCov">         48 :         bool success = true;</span>
-<span class="lineNum">     230 </span><span class="lineCov">         48 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">     229 </span><span class="lineCov">         59 :         bool success = true;</span>
+<span class="lineNum">     230 </span><span class="lineCov">         59 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">     231 </span>            :                 array[k] = mask[i];
 <span class="lineNum">     232 </span>            :                 if (array[k] &amp;&amp; !allow_nulls) {
 <span class="lineNum">     233 </span>            :                         success = false;
 <span class="lineNum">     234 </span>            :                         return;
 <span class="lineNum">     235 </span>            :                 }
 <span class="lineNum">     236 </span>            :         });
-<span class="lineNum">     237 </span><span class="lineCov">         48 :         return success;</span>
+<span class="lineNum">     237 </span><span class="lineCov">         59 :         return success;</span>
 <a name="238"><span class="lineNum">     238 </span>            : }</a>
 <span class="lineNum">     239 </span>            : 
-<span class="lineNum">     240 </span><span class="lineCov">      30717 : string UniqueIndex::Append(Transaction &amp;transaction, vector&lt;unique_ptr&lt;UniqueIndex&gt;&gt; &amp;indexes, DataChunk &amp;chunk,</span>
+<span class="lineNum">     240 </span><span class="lineCov">      67244 : string UniqueIndex::Append(Transaction &amp;transaction, vector&lt;unique_ptr&lt;UniqueIndex&gt;&gt; &amp;indexes, DataChunk &amp;chunk,</span>
 <span class="lineNum">     241 </span>            :                            size_t row_identifier_start) {
-<span class="lineNum">     242 </span><span class="lineCov">      30717 :         if (indexes.size() == 0) {</span>
-<span class="lineNum">     243 </span><span class="lineCov">      30686 :                 return string();</span>
+<span class="lineNum">     242 </span><span class="lineCov">      67244 :         if (indexes.size() == 0) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">      67202 :                 return string();</span>
 <span class="lineNum">     244 </span>            :         }
 <span class="lineNum">     245 </span>            : 
-<span class="lineNum">     246 </span><span class="lineCov">         31 :         UniqueIndexNode *added_nodes[indexes.size()][STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     246 </span><span class="lineCov">         42 :         UniqueIndexNode *added_nodes[indexes.size()][STANDARD_VECTOR_SIZE];</span>
 <span class="lineNum">     247 </span>            : 
 <span class="lineNum">     248 </span>            :         // the row numbers that are ignored for conflicts
 <span class="lineNum">     249 </span>            :         // this is left empty because we ignore nothing in the append
-<span class="lineNum">     250 </span><span class="lineCov">         62 :         unordered_set&lt;size_t&gt; dummy;</span>
+<span class="lineNum">     250 </span><span class="lineCov">         84 :         unordered_set&lt;size_t&gt; dummy;</span>
 <span class="lineNum">     251 </span>            : 
-<span class="lineNum">     252 </span><span class="lineCov">         62 :         string error;</span>
-<span class="lineNum">     253 </span><span class="lineCov">         31 :         size_t current_index = 0;</span>
+<span class="lineNum">     252 </span><span class="lineCov">         84 :         string error;</span>
+<span class="lineNum">     253 </span><span class="lineCov">         42 :         size_t current_index = 0;</span>
 <span class="lineNum">     254 </span>            :         // insert the entries in each of the unique indexes
-<span class="lineNum">     255 </span><span class="lineCov">         56 :         for (current_index = 0; current_index &lt; indexes.size(); current_index++) {</span>
-<span class="lineNum">     256 </span><span class="lineCov">         34 :                 auto &amp;index = *indexes[current_index];</span>
+<span class="lineNum">     255 </span><span class="lineCov">         78 :         for (current_index = 0; current_index &lt; indexes.size(); current_index++) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">         45 :                 auto &amp;index = *indexes[current_index];</span>
 <span class="lineNum">     257 </span>            : 
-<span class="lineNum">     258 </span><span class="lineCov">      69666 :                 Tuple tuples[STANDARD_VECTOR_SIZE];</span>
-<span class="lineNum">     259 </span><span class="lineCov">         34 :                 bool has_null[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     258 </span><span class="lineCov">      92205 :                 Tuple tuples[STANDARD_VECTOR_SIZE];</span>
+<span class="lineNum">     259 </span><span class="lineCov">         45 :                 bool has_null[STANDARD_VECTOR_SIZE];</span>
 <span class="lineNum">     260 </span>            : 
-<span class="lineNum">     261 </span><span class="lineCov">         34 :                 nullmask_t nulls;</span>
-<span class="lineNum">     262 </span><span class="lineCov">         74 :                 for (auto &amp;key : index.keys) {</span>
-<span class="lineNum">     263 </span><span class="lineCov">         40 :                         nulls |= chunk.data[key].nullmask;</span>
+<span class="lineNum">     261 </span><span class="lineCov">         45 :                 nullmask_t nulls;</span>
+<span class="lineNum">     262 </span><span class="lineCov">         96 :                 for (auto &amp;key : index.keys) {</span>
+<span class="lineNum">     263 </span><span class="lineCov">         51 :                         nulls |= chunk.data[key].nullmask;</span>
 <span class="lineNum">     264 </span>            :                 }
-<span class="lineNum">     265 </span><span class="lineCov">         34 :                 if (!boolean_array_from_nullmask(chunk.sel_vector, chunk.size(), nulls, has_null, index.allow_nulls)) {</span>
+<span class="lineNum">     265 </span><span class="lineCov">         45 :                 if (!boolean_array_from_nullmask(chunk.sel_vector, chunk.size(), nulls, has_null, index.allow_nulls)) {</span>
 <span class="lineNum">     266 </span><span class="lineCov">          1 :                         error = &quot;PRIMARY KEY column cannot contain NULL values!&quot;;</span>
 <span class="lineNum">     267 </span><span class="lineCov">          1 :                         break;</span>
 <span class="lineNum">     268 </span>            :                 }
-<span class="lineNum">     269 </span><span class="lineCov">         33 :                 index.serializer.Serialize(chunk, tuples);</span>
+<span class="lineNum">     269 </span><span class="lineCov">         44 :                 index.serializer.Serialize(chunk, tuples);</span>
 <span class="lineNum">     270 </span>            : 
 <span class="lineNum">     271 </span>            :                 // create the row number vector
-<span class="lineNum">     272 </span><span class="lineCov">         33 :                 Vector row_numbers(TypeId::POINTER, true, false);</span>
-<span class="lineNum">     273 </span><span class="lineCov">         33 :                 row_numbers.count = chunk.size();</span>
-<span class="lineNum">     274 </span><span class="lineCov">         33 :                 VectorOperations::GenerateSequence(row_numbers, row_identifier_start);</span>
+<span class="lineNum">     272 </span><span class="lineCov">         44 :                 Vector row_numbers(TypeId::POINTER, true, false);</span>
+<span class="lineNum">     273 </span><span class="lineCov">         44 :                 row_numbers.count = chunk.size();</span>
+<span class="lineNum">     274 </span><span class="lineCov">         44 :                 VectorOperations::GenerateSequence(row_numbers, row_identifier_start);</span>
 <span class="lineNum">     275 </span>            : 
 <span class="lineNum">     276 </span>            :                 // now actually add the entries to this index
-<span class="lineNum">     277 </span><span class="lineCov">         33 :                 error = index.AddEntries(transaction, added_nodes[current_index], tuples, has_null, row_numbers, dummy);</span>
+<span class="lineNum">     277 </span><span class="lineCov">         44 :                 error = index.AddEntries(transaction, added_nodes[current_index], tuples, has_null, row_numbers, dummy);</span>
 <span class="lineNum">     278 </span>            : 
-<span class="lineNum">     279 </span><span class="lineCov">         33 :                 if (!error.empty()) {</span>
+<span class="lineNum">     279 </span><span class="lineCov">         44 :                 if (!error.empty()) {</span>
 <span class="lineNum">     280 </span><span class="lineCov">          8 :                         break;</span>
 <span class="lineNum">     281 </span>            :                 }
 <span class="lineNum">     282 </span>            :         }
-<span class="lineNum">     283 </span><span class="lineCov">         31 :         if (current_index != indexes.size()) {</span>
+<span class="lineNum">     283 </span><span class="lineCov">         42 :         if (current_index != indexes.size()) {</span>
 <span class="lineNum">     284 </span>            :                 // something went wrong! we have to revert all the additions
 <span class="lineNum">     285 </span><span class="lineCov">         10 :                 for (size_t k = current_index; k &gt; 0; k--) {</span>
 <span class="lineNum">     286 </span><span class="lineCov">          1 :                         auto &amp;index = *indexes[k - 1];</span>
@@ -354,7 +354,7 @@
 <span class="lineNum">     292 </span>            :                 }
 <span class="lineNum">     293 </span><span class="lineCov">          9 :                 return error;</span>
 <span class="lineNum">     294 </span>            :         }
-<span class="lineNum">     295 </span><span class="lineCov">      30739 :         return string();</span>
+<span class="lineNum">     295 </span><span class="lineCov">      67277 :         return string();</span>
 <span class="lineNum">     296 </span>            : }
 <span class="lineNum">     297 </span>            : 
 <span class="lineNum">     298 </span>            : // Handle an update in the UniqueIndex

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 09:44:58</td>
+            <td class="headerValue">2018-12-05 10:38:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -65,16 +65,16 @@
 <span class="lineNum">       3 </span>            : using namespace duckdb;
 <a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineCov">       6931 : vector&lt;string&gt; LogicalPruneColumns::GetNames() {</span>
-<span class="lineNum">       7 </span><span class="lineCov">       6931 :         auto names = children[0]-&gt;GetNames();</span>
-<span class="lineNum">       8 </span><span class="lineCov">       6931 :         assert(column_limit &lt;= names.size());</span>
-<span class="lineNum">       9 </span><span class="lineCov">       6931 :         names.erase(names.begin() + column_limit, names.end());</span>
-<span class="lineNum">      10 </span><span class="lineCov">       6931 :         return names;</span>
+<span class="lineNum">       6 </span><span class="lineCov">    3010430 : vector&lt;string&gt; LogicalPruneColumns::GetNames() {</span>
+<span class="lineNum">       7 </span><span class="lineCov">    3010430 :         auto names = children[0]-&gt;GetNames();</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3010449 :         assert(column_limit &lt;= names.size());</span>
+<span class="lineNum">       9 </span><span class="lineCov">    3010450 :         names.erase(names.begin() + column_limit, names.end());</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3010461 :         return names;</span>
 <a name="11"><span class="lineNum">      11 </span>            : }</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">       6942 : void LogicalPruneColumns::ResolveTypes() {</span>
-<span class="lineNum">      14 </span><span class="lineCov">       6942 :         types.insert(types.end(), children[0]-&gt;types.begin(), children[0]-&gt;types.begin() + column_limit);</span>
-<span class="lineNum">      15 </span><span class="lineCov">       6942 : }</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3010452 : void LogicalPruneColumns::ResolveTypes() {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3010452 :         types.insert(types.end(), children[0]-&gt;types.begin(), children[0]-&gt;types.begin() + column_limit);</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3010526 : }</span>
 </pre>
       </td>
     </tr>
