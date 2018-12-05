@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report ed60e922 - optimizer/optimizer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">optimizer</a> - optimizer.cpp<span style="font-size: 80%;"> (source / <a href="optimizer.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report ed60e922</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-05 18:11:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;optimizer/optimizer.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;optimizer/expression_rules/rule_list.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;optimizer/logical_rules/rule_list.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;planner/operator/list.hpp&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : using namespace duckdb;
+<a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">    3128056 : Optimizer::Optimizer(BindContext &amp;context) : rewriter(context) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3128168 :         rewriter.rules.push_back(make_unique&lt;ConstantCastRule&gt;());</span>
+<span class="lineNum">      12 </span><span class="lineCov">    3129435 :         rewriter.rules.push_back(make_unique&lt;ConstantFoldingRule&gt;());</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3129194 :         rewriter.rules.push_back(make_unique&lt;DistributivityRule&gt;());</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3128865 :         rewriter.rules.push_back(make_unique&lt;SplitFilterConjunctionRule&gt;());</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3129017 :         rewriter.rules.push_back(make_unique&lt;InClauseRewriteRule&gt;());</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3127332 :         rewriter.rules.push_back(make_unique&lt;ExistsRewriteRule&gt;());</span>
+<span class="lineNum">      17 </span><span class="lineCov">    3129021 :         rewriter.rules.push_back(make_unique&lt;SubqueryRewritingRule&gt;());</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3127601 :         rewriter.rules.push_back(make_unique&lt;CrossProductRewrite&gt;());</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3127878 :         rewriter.rules.push_back(make_unique&lt;SelectionPushdownRule&gt;());</span>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : #ifdef DEBUG
+<span class="lineNum">      22 </span><span class="lineCov">   31297807 :         for (auto &amp;rule : rewriter.rules) {</span>
+<span class="lineNum">      23 </span>            :                 // root not defined in rule
+<span class="lineNum">      24 </span><span class="lineCov">   28167437 :                 assert(rule-&gt;root);</span>
+<span class="lineNum">      25 </span>            :         }
+<span class="lineNum">      26 </span>            : #endif
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">    3130567 : }</span></a>
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span><span class="lineCov">    3128495 : unique_ptr&lt;LogicalOperator&gt; Optimizer::Optimize(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
+<span class="lineNum">      30 </span>            :         // then we optimize the logical tree
+<span class="lineNum">      31 </span><span class="lineCov">    3128495 :         return rewriter.ApplyRules(move(plan));</span>
+<span class="lineNum">      32 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
