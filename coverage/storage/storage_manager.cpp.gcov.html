@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ed60e922 - storage/storage_manager.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report e50ec30d - storage/storage_manager.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ed60e922</td>
+            <td class="headerValue">DuckDB Code Coverage Report e50ec30d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">177</td>
-            <td class="headerCovTableEntry">193</td>
-            <td class="headerCovTableEntryHi">91.7 %</td>
+            <td class="headerCovTableEntry">162</td>
+            <td class="headerCovTableEntry">173</td>
+            <td class="headerCovTableEntryHi">93.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 18:11:58</td>
+            <td class="headerValue">2018-12-05 18:51:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -66,72 +66,72 @@
 <span class="lineNum">       4 </span>            : #include &quot;catalog/catalog_entry/schema_catalog_entry.hpp&quot;
 <span class="lineNum">       5 </span>            : #include &quot;common/exception.hpp&quot;
 <span class="lineNum">       6 </span>            : #include &quot;common/file_system.hpp&quot;
-<span class="lineNum">       7 </span>            : #include &quot;common/serializer.hpp&quot;
-<span class="lineNum">       8 </span>            : #include &quot;function/function.hpp&quot;
-<span class="lineNum">       9 </span>            : #include &quot;main/client_context.hpp&quot;
-<span class="lineNum">      10 </span>            : #include &quot;main/database.hpp&quot;
-<span class="lineNum">      11 </span>            : #include &quot;transaction/transaction_manager.hpp&quot;
-<span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span>            : #include &lt;fstream&gt;
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span>            : using namespace duckdb;
-<a name="16"><span class="lineNum">      16 </span>            : using namespace std;</a>
-<span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">        452 : StorageManager::StorageManager(DuckDB &amp;database, string path) : path(path), database(database), wal(database) {</span>
-<a name="19"><span class="lineNum">      19 </span><span class="lineCov">        452 : }</span></a>
-<span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">        452 : void StorageManager::Initialize() {</span>
-<span class="lineNum">      22 </span><span class="lineCov">        452 :         bool in_memory = path.empty() || path == &quot;:memory:&quot;;</span>
-<span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span>            :         // first initialize the base system catalogs
-<span class="lineNum">      25 </span>            :         // these are never written to the WAL
-<span class="lineNum">      26 </span><span class="lineCov">        452 :         auto transaction = database.transaction_manager.StartTransaction();</span>
-<span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span>            :         // create the default schema
-<span class="lineNum">      29 </span><span class="lineCov">        904 :         CreateSchemaInformation info;</span>
-<span class="lineNum">      30 </span><span class="lineCov">        452 :         info.schema = DEFAULT_SCHEMA;</span>
-<span class="lineNum">      31 </span><span class="lineCov">        452 :         database.catalog.CreateSchema(*transaction, &amp;info);</span>
-<span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span>            :         // initialize default functions
-<span class="lineNum">      34 </span><span class="lineCov">        452 :         BuiltinFunctions::Initialize(*transaction, database.catalog);</span>
-<span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span>            :         // commit transactions
-<span class="lineNum">      37 </span><span class="lineCov">        452 :         database.transaction_manager.CommitTransaction(transaction);</span>
-<span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">        452 :         if (!in_memory) {</span>
-<span class="lineNum">      40 </span>            :                 // create or load the database from disk, if not in-memory mode
-<span class="lineNum">      41 </span><span class="lineCov">         22 :                 LoadDatabase();</span>
-<span class="lineNum">      42 </span>            :         }
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">        452 : }</span></a>
-<span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">         22 : void StorageManager::LoadDatabase() {</span>
-<span class="lineNum">      46 </span><span class="lineCov">         22 :         int iteration = 0;</span>
-<span class="lineNum">      47 </span>            :         // first check if the database exists
-<span class="lineNum">      48 </span><span class="lineCov">         22 :         if (!DirectoryExists(path)) {</span>
-<span class="lineNum">      49 </span>            :                 // have to create the directory
-<span class="lineNum">      50 </span><span class="lineCov">          9 :                 CreateDirectory(path);</span>
-<span class="lineNum">      51 </span>            :         } else {
-<span class="lineNum">      52 </span>            :                 // load from the main storage if it exists
-<span class="lineNum">      53 </span><span class="lineCov">         13 :                 iteration = LoadFromStorage();</span>
-<span class="lineNum">      54 </span>            :                 // directory already exists
-<span class="lineNum">      55 </span>            :                 // verify that it is an existing database
-<span class="lineNum">      56 </span><span class="lineCov">         52 :                 string wal_path = JoinPath(path, WAL_FILES[iteration]);</span>
-<span class="lineNum">      57 </span><span class="lineCov">         13 :                 if (FileExists(wal_path)) {</span>
-<span class="lineNum">      58 </span>            :                         // replay the WAL
-<span class="lineNum">      59 </span><span class="lineCov">         13 :                         wal.Replay(wal_path);</span>
-<span class="lineNum">      60 </span>            :                         // switch the iteration target to the other one
-<span class="lineNum">      61 </span><span class="lineCov">         13 :                         iteration = 1 - iteration;</span>
-<span class="lineNum">      62 </span>            :                         // checkpoint the WAL
-<span class="lineNum">      63 </span><span class="lineCov">         13 :                         CreateCheckpoint(iteration);</span>
-<span class="lineNum">      64 </span>            :                 }
-<span class="lineNum">      65 </span>            :         }
-<span class="lineNum">      66 </span>            :         // initialize the WAL file
-<span class="lineNum">      67 </span><span class="lineCov">         88 :         string wal_path = JoinPath(path, WAL_FILES[iteration]);</span>
-<span class="lineNum">      68 </span><span class="lineCov">         22 :         wal.Initialize(wal_path);</span>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         22 : }</span></a>
-<span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">         13 : int StorageManager::LoadFromStorage() {</span>
-<span class="lineNum">      72 </span><span class="lineCov">         26 :         ClientContext context(database);</span>
+<span class="lineNum">       7 </span>            : #include &quot;common/fstream_util.hpp&quot;
+<span class="lineNum">       8 </span>            : #include &quot;common/serializer.hpp&quot;
+<span class="lineNum">       9 </span>            : #include &quot;function/function.hpp&quot;
+<span class="lineNum">      10 </span>            : #include &quot;main/client_context.hpp&quot;
+<span class="lineNum">      11 </span>            : #include &quot;main/database.hpp&quot;
+<span class="lineNum">      12 </span>            : #include &quot;transaction/transaction_manager.hpp&quot;
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : using namespace duckdb;
+<a name="15"><span class="lineNum">      15 </span>            : using namespace std;</a>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span><span class="lineCov">        452 : StorageManager::StorageManager(DuckDB &amp;database, string path) : path(path), database(database), wal(database) {</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        452 : }</span></a>
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">        452 : void StorageManager::Initialize() {</span>
+<span class="lineNum">      21 </span><span class="lineCov">        452 :         bool in_memory = path.empty() || path == &quot;:memory:&quot;;</span>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            :         // first initialize the base system catalogs
+<span class="lineNum">      24 </span>            :         // these are never written to the WAL
+<span class="lineNum">      25 </span><span class="lineCov">        452 :         auto transaction = database.transaction_manager.StartTransaction();</span>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            :         // create the default schema
+<span class="lineNum">      28 </span><span class="lineCov">        904 :         CreateSchemaInformation info;</span>
+<span class="lineNum">      29 </span><span class="lineCov">        452 :         info.schema = DEFAULT_SCHEMA;</span>
+<span class="lineNum">      30 </span><span class="lineCov">        452 :         database.catalog.CreateSchema(*transaction, &amp;info);</span>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :         // initialize default functions
+<span class="lineNum">      33 </span><span class="lineCov">        452 :         BuiltinFunctions::Initialize(*transaction, database.catalog);</span>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :         // commit transactions
+<span class="lineNum">      36 </span><span class="lineCov">        452 :         database.transaction_manager.CommitTransaction(transaction);</span>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineCov">        452 :         if (!in_memory) {</span>
+<span class="lineNum">      39 </span>            :                 // create or load the database from disk, if not in-memory mode
+<span class="lineNum">      40 </span><span class="lineCov">         22 :                 LoadDatabase();</span>
+<span class="lineNum">      41 </span>            :         }
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">        452 : }</span></a>
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span><span class="lineCov">         22 : void StorageManager::LoadDatabase() {</span>
+<span class="lineNum">      45 </span><span class="lineCov">         22 :         int iteration = 0;</span>
+<span class="lineNum">      46 </span>            :         // first check if the database exists
+<span class="lineNum">      47 </span><span class="lineCov">         22 :         if (!DirectoryExists(path)) {</span>
+<span class="lineNum">      48 </span>            :                 // have to create the directory
+<span class="lineNum">      49 </span><span class="lineCov">          9 :                 CreateDirectory(path);</span>
+<span class="lineNum">      50 </span>            :         } else {
+<span class="lineNum">      51 </span>            :                 // load from the main storage if it exists
+<span class="lineNum">      52 </span><span class="lineCov">         13 :                 iteration = LoadFromStorage();</span>
+<span class="lineNum">      53 </span>            :                 // directory already exists
+<span class="lineNum">      54 </span>            :                 // verify that it is an existing database
+<span class="lineNum">      55 </span><span class="lineCov">         52 :                 string wal_path = JoinPath(path, WAL_FILES[iteration]);</span>
+<span class="lineNum">      56 </span><span class="lineCov">         13 :                 if (FileExists(wal_path)) {</span>
+<span class="lineNum">      57 </span>            :                         // replay the WAL
+<span class="lineNum">      58 </span><span class="lineCov">         13 :                         wal.Replay(wal_path);</span>
+<span class="lineNum">      59 </span>            :                         // switch the iteration target to the other one
+<span class="lineNum">      60 </span><span class="lineCov">         13 :                         iteration = 1 - iteration;</span>
+<span class="lineNum">      61 </span>            :                         // checkpoint the WAL
+<span class="lineNum">      62 </span><span class="lineCov">         13 :                         CreateCheckpoint(iteration);</span>
+<span class="lineNum">      63 </span>            :                 }
+<span class="lineNum">      64 </span>            :         }
+<span class="lineNum">      65 </span>            :         // initialize the WAL file
+<span class="lineNum">      66 </span><span class="lineCov">         88 :         string wal_path = JoinPath(path, WAL_FILES[iteration]);</span>
+<span class="lineNum">      67 </span><span class="lineCov">         22 :         wal.Initialize(wal_path);</span>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">         22 : }</span></a>
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span><span class="lineCov">         13 : int StorageManager::LoadFromStorage() {</span>
+<span class="lineNum">      71 </span><span class="lineCov">         26 :         ClientContext context(database);</span>
+<span class="lineNum">      72 </span><span class="lineCov">         13 :         FstreamUtil file_util;</span>
 <span class="lineNum">      73 </span>            : 
 <span class="lineNum">      74 </span><span class="lineCov">         52 :         auto meta_info_path = JoinPath(path, DATABASE_INFO_FILE);</span>
 <span class="lineNum">      75 </span>            :         // read the meta information, if there is any
@@ -142,296 +142,270 @@
 <span class="lineNum">      80 </span>            : 
 <span class="lineNum">      81 </span><span class="lineCov">          4 :         context.transaction.BeginTransaction();</span>
 <span class="lineNum">      82 </span>            :         // first read the meta information
-<span class="lineNum">      83 </span><span class="lineCov">          8 :         ifstream meta_info;</span>
-<span class="lineNum">      84 </span><span class="lineCov">          4 :         meta_info.open(meta_info_path);</span>
-<span class="lineNum">      85 </span><span class="lineCov">          4 :         if (!meta_info.good()) {</span>
-<span class="lineNum">      86 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Could not open meta file for writing!&quot;);</span>
-<span class="lineNum">      87 </span>            :         }
-<span class="lineNum">      88 </span><span class="lineCov">          4 :         int64_t storage_version;</span>
-<span class="lineNum">      89 </span><span class="lineCov">          4 :         int iteration;</span>
-<span class="lineNum">      90 </span>            : 
-<span class="lineNum">      91 </span><span class="lineCov">          4 :         meta_info &gt;&gt; storage_version;</span>
-<span class="lineNum">      92 </span><span class="lineCov">          4 :         meta_info &gt;&gt; iteration;</span>
+<span class="lineNum">      83 </span><span class="lineCov">          8 :         auto meta_info = file_util.OpenFile(meta_info_path);</span>
+<span class="lineNum">      84 </span><span class="lineCov">          4 :         int64_t storage_version;</span>
+<span class="lineNum">      85 </span><span class="lineCov">          4 :         int iteration;</span>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineCov">          4 :         meta_info &gt;&gt; storage_version;</span>
+<span class="lineNum">      88 </span><span class="lineCov">          4 :         meta_info &gt;&gt; iteration;</span>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span>            :         // now we can start by actually reading the files
+<span class="lineNum">      91 </span><span class="lineCov">         16 :         auto storage_path_base = JoinPath(path, STORAGE_FILES[iteration]);</span>
+<span class="lineNum">      92 </span><span class="lineCov">         16 :         auto schema_path = JoinPath(storage_path_base, SCHEMA_FILE);</span>
 <span class="lineNum">      93 </span>            : 
-<span class="lineNum">      94 </span>            :         // now we can start by actually reading the files
-<span class="lineNum">      95 </span><span class="lineCov">         16 :         auto storage_path_base = JoinPath(path, STORAGE_FILES[iteration]);</span>
-<span class="lineNum">      96 </span><span class="lineCov">         16 :         auto schema_path = JoinPath(storage_path_base, SCHEMA_FILE);</span>
+<span class="lineNum">      94 </span>            :         // read the list of schemas
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span><span class="lineCov">          8 :         auto schema_file = file_util.OpenFile(schema_path);</span>
 <span class="lineNum">      97 </span>            : 
-<span class="lineNum">      98 </span>            :         // read the list of schemas
-<span class="lineNum">      99 </span>            :         // FIXME: turn into function Open()
-<span class="lineNum">     100 </span><span class="lineCov">          8 :         ifstream schema_file;</span>
-<span class="lineNum">     101 </span><span class="lineCov">          4 :         schema_file.open(schema_path);</span>
-<span class="lineNum">     102 </span><span class="lineCov">          4 :         if (!schema_file.good()) {</span>
-<span class="lineNum">     103 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Could not open schema for writing!&quot;);</span>
-<span class="lineNum">     104 </span>            :         }
-<span class="lineNum">     105 </span>            :         // END OF FIXME
-<span class="lineNum">     106 </span><span class="lineCov">          4 :         string schema_name;</span>
-<span class="lineNum">     107 </span><span class="lineCov">          8 :         while (getline(schema_file, schema_name)) {</span>
-<span class="lineNum">     108 </span>            :                 // create the schema in the catalog
-<span class="lineNum">     109 </span><span class="lineCov">          8 :                 CreateSchemaInformation info;</span>
-<span class="lineNum">     110 </span><span class="lineCov">          4 :                 info.schema = schema_name;</span>
-<span class="lineNum">     111 </span><span class="lineCov">          4 :                 info.if_not_exists = true;</span>
-<span class="lineNum">     112 </span><span class="lineCov">          4 :                 database.catalog.CreateSchema(context.ActiveTransaction(), &amp;info);</span>
-<span class="lineNum">     113 </span>            : 
-<span class="lineNum">     114 </span>            :                 // now read the list of the tables belonging to this schema
-<span class="lineNum">     115 </span><span class="lineCov">          8 :                 auto schema_directory_path = JoinPath(storage_path_base, schema_name);</span>
-<span class="lineNum">     116 </span><span class="lineCov">         16 :                 auto table_list_path = JoinPath(schema_directory_path, TABLE_LIST_FILE);</span>
-<span class="lineNum">     117 </span>            : 
-<span class="lineNum">     118 </span>            :                 // read the list of schemas
-<span class="lineNum">     119 </span>            :                 // FIXME: turn into function Open()
-<span class="lineNum">     120 </span><span class="lineCov">          8 :                 ifstream table_list_file;</span>
-<span class="lineNum">     121 </span><span class="lineCov">          4 :                 table_list_file.open(table_list_path);</span>
-<span class="lineNum">     122 </span><span class="lineCov">          4 :                 if (!table_list_file.good()) {</span>
-<span class="lineNum">     123 </span><span class="lineNoCov">          0 :                         throw IOException(&quot;Could not open schema for writing!&quot;);</span>
-<span class="lineNum">     124 </span>            :                 }
-<span class="lineNum">     125 </span>            :                 // END OF FIXME
-<span class="lineNum">     126 </span><span class="lineCov">          8 :                 string table_name;</span>
-<span class="lineNum">     127 </span><span class="lineCov">         15 :                 while (getline(table_list_file, table_name)) {</span>
-<span class="lineNum">     128 </span>            :                         // get the information of the table
-<span class="lineNum">     129 </span><span class="lineCov">         22 :                         auto table_directory_path = JoinPath(schema_directory_path, table_name);</span>
-<span class="lineNum">     130 </span><span class="lineCov">         44 :                         auto table_meta_name = JoinPath(table_directory_path, TABLE_FILE);</span>
-<span class="lineNum">     131 </span>            : 
-<span class="lineNum">     132 </span>            :                         // FIXME: turn into function Open()
-<span class="lineNum">     133 </span><span class="lineCov">         22 :                         ifstream table_file;</span>
-<span class="lineNum">     134 </span><span class="lineCov">         11 :                         table_file.open(table_meta_name, ifstream::binary);</span>
-<span class="lineNum">     135 </span><span class="lineCov">         11 :                         if (!table_file.good()) {</span>
-<span class="lineNum">     136 </span><span class="lineNoCov">          0 :                                 throw IOException(&quot;Could not open table file for writing!&quot;);</span>
-<span class="lineNum">     137 </span>            :                         }
-<span class="lineNum">     138 </span>            :                         // END OF FIXME
-<span class="lineNum">     139 </span>            :                         // FIXME: turn into function ReadBinary()
-<span class="lineNum">     140 </span><span class="lineCov">         11 :                         table_file.seekg(0, ios::end);</span>
-<span class="lineNum">     141 </span><span class="lineCov">         11 :                         size_t table_file_size = table_file.tellg();</span>
-<span class="lineNum">     142 </span><span class="lineCov">         22 :                         auto result = unique_ptr&lt;char[]&gt;(new char[table_file_size]);</span>
-<span class="lineNum">     143 </span><span class="lineCov">         11 :                         table_file.seekg(0, ios::beg);</span>
-<span class="lineNum">     144 </span><span class="lineCov">         11 :                         table_file.read(result.get(), table_file_size);</span>
-<span class="lineNum">     145 </span>            :                         // END OF FIXME
+<span class="lineNum">      98 </span><span class="lineCov">          4 :         string schema_name;</span>
+<span class="lineNum">      99 </span><span class="lineCov">          8 :         while (getline(schema_file, schema_name)) {</span>
+<span class="lineNum">     100 </span>            :                 // create the schema in the catalog
+<span class="lineNum">     101 </span><span class="lineCov">          8 :                 CreateSchemaInformation info;</span>
+<span class="lineNum">     102 </span><span class="lineCov">          4 :                 info.schema = schema_name;</span>
+<span class="lineNum">     103 </span><span class="lineCov">          4 :                 info.if_not_exists = true;</span>
+<span class="lineNum">     104 </span><span class="lineCov">          4 :                 database.catalog.CreateSchema(context.ActiveTransaction(), &amp;info);</span>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span>            :                 // now read the list of the tables belonging to this schema
+<span class="lineNum">     107 </span><span class="lineCov">          8 :                 auto schema_directory_path = JoinPath(storage_path_base, schema_name);</span>
+<span class="lineNum">     108 </span><span class="lineCov">         16 :                 auto table_list_path = JoinPath(schema_directory_path, TABLE_LIST_FILE);</span>
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span>            :                 // read the list of schemas
+<span class="lineNum">     111 </span>            :                 // FIXME: turn into function Open()
+<span class="lineNum">     112 </span><span class="lineCov">          8 :                 auto table_list_file = file_util.OpenFile(table_list_path);</span>
+<span class="lineNum">     113 </span>            :                 // END OF FIXME
+<span class="lineNum">     114 </span><span class="lineCov">          8 :                 string table_name;</span>
+<span class="lineNum">     115 </span><span class="lineCov">         15 :                 while (getline(table_list_file, table_name)) {</span>
+<span class="lineNum">     116 </span>            :                         // get the information of the table
+<span class="lineNum">     117 </span><span class="lineCov">         22 :                         auto table_directory_path = JoinPath(schema_directory_path, table_name);</span>
+<span class="lineNum">     118 </span><span class="lineCov">         44 :                         auto table_meta_name = JoinPath(table_directory_path, TABLE_FILE);</span>
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            :                         // FIXME: turn into function Open()
+<span class="lineNum">     121 </span><span class="lineCov">         22 :                         auto table_file = file_util.OpenFile(table_meta_name);</span>
+<span class="lineNum">     122 </span>            :                         // END OF FIXME
+<span class="lineNum">     123 </span>            :                         // FIXME: turn into function ReadBinary()
+<span class="lineNum">     124 </span><span class="lineCov">         22 :                         auto result = file_util.ReadBinary(table_file);</span>
+<span class="lineNum">     125 </span>            :                         // END OF FIXME
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            :                         // deserialize the CreateTableInformation
+<span class="lineNum">     128 </span><span class="lineCov">         11 :                         auto table_file_size = file_util.GetFileSize(table_file);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         11 :                         Deserializer source((uint8_t *)result.get(), table_file_size);</span>
+<span class="lineNum">     130 </span><span class="lineCov">         22 :                         auto info = TableCatalogEntry::Deserialize(source);</span>
+<span class="lineNum">     131 </span>            :                         // create the table inside the catalog
+<span class="lineNum">     132 </span><span class="lineCov">         11 :                         database.catalog.CreateTable(context.ActiveTransaction(), info.get());</span>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span>            :                         // now load the actual data
+<span class="lineNum">     135 </span><span class="lineCov">         11 :                         auto *table = database.catalog.GetTable(context.ActiveTransaction(), info-&gt;schema, info-&gt;table);</span>
+<span class="lineNum">     136 </span><span class="lineCov">         22 :                         auto types = table-&gt;GetTypes();</span>
+<span class="lineNum">     137 </span><span class="lineCov">         22 :                         DataChunk chunk;</span>
+<span class="lineNum">     138 </span><span class="lineCov">         11 :                         chunk.Initialize(types);</span>
+<span class="lineNum">     139 </span>            : 
+<span class="lineNum">     140 </span><span class="lineCov">         11 :                         size_t chunk_count = 1;</span>
+<span class="lineNum">     141 </span>            :                         while (true) {
+<span class="lineNum">     142 </span><span class="lineCov">       3460 :                                 auto chunk_name = JoinPath(table_directory_path, &quot;chunk-&quot; + to_string(chunk_count) + &quot;.bin&quot;);</span>
+<span class="lineNum">     143 </span><span class="lineCov">        865 :                                 if (!FileExists(chunk_name)) {</span>
+<span class="lineNum">     144 </span><span class="lineCov">         11 :                                         break;</span>
+<span class="lineNum">     145 </span>            :                                 }
 <span class="lineNum">     146 </span>            : 
-<span class="lineNum">     147 </span>            :                         // deserialize the CreateTableInformation
-<span class="lineNum">     148 </span><span class="lineCov">         11 :                         Deserializer source((uint8_t *)result.get(), table_file_size);</span>
-<span class="lineNum">     149 </span><span class="lineCov">         22 :                         auto info = TableCatalogEntry::Deserialize(source);</span>
-<span class="lineNum">     150 </span>            :                         // create the table inside the catalog
-<span class="lineNum">     151 </span><span class="lineCov">         11 :                         database.catalog.CreateTable(context.ActiveTransaction(), info.get());</span>
-<span class="lineNum">     152 </span>            : 
-<span class="lineNum">     153 </span>            :                         // now load the actual data
-<span class="lineNum">     154 </span><span class="lineCov">         11 :                         auto *table = database.catalog.GetTable(context.ActiveTransaction(), info-&gt;schema, info-&gt;table);</span>
-<span class="lineNum">     155 </span><span class="lineCov">         22 :                         auto types = table-&gt;GetTypes();</span>
-<span class="lineNum">     156 </span><span class="lineCov">         22 :                         DataChunk chunk;</span>
-<span class="lineNum">     157 </span><span class="lineCov">         11 :                         chunk.Initialize(types);</span>
-<span class="lineNum">     158 </span>            : 
-<span class="lineNum">     159 </span><span class="lineCov">         11 :                         size_t chunk_count = 1;</span>
-<span class="lineNum">     160 </span>            :                         while (true) {
-<span class="lineNum">     161 </span><span class="lineCov">       3460 :                                 auto chunk_name = JoinPath(table_directory_path, &quot;chunk-&quot; + to_string(chunk_count) + &quot;.bin&quot;);</span>
-<span class="lineNum">     162 </span><span class="lineCov">        865 :                                 if (!FileExists(chunk_name)) {</span>
-<span class="lineNum">     163 </span><span class="lineCov">         11 :                                         break;</span>
-<span class="lineNum">     164 </span>            :                                 }
-<span class="lineNum">     165 </span>            : 
-<span class="lineNum">     166 </span>            :                                 // FIXME: turn into function Open()
-<span class="lineNum">     167 </span><span class="lineCov">       1708 :                                 ifstream chunk_file;</span>
-<span class="lineNum">     168 </span><span class="lineCov">        854 :                                 chunk_file.open(chunk_name, ifstream::binary);</span>
-<span class="lineNum">     169 </span><span class="lineCov">        854 :                                 if (!chunk_file.good()) {</span>
-<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                                         throw IOException(&quot;Could not open table file for writing!&quot;);</span>
-<span class="lineNum">     171 </span>            :                                 }
-<span class="lineNum">     172 </span>            :                                 // END OF FIXME
-<span class="lineNum">     173 </span>            :                                 // FIXME: turn into function ReadBinary()
-<span class="lineNum">     174 </span><span class="lineCov">        854 :                                 chunk_file.seekg(0, ios::end);</span>
-<span class="lineNum">     175 </span><span class="lineCov">        854 :                                 auto chunk_file_size = chunk_file.tellg();</span>
-<span class="lineNum">     176 </span><span class="lineCov">       1708 :                                 auto result = unique_ptr&lt;char[]&gt;(new char[chunk_file_size]);</span>
-<span class="lineNum">     177 </span><span class="lineCov">        854 :                                 chunk_file.seekg(0, ios::beg);</span>
-<span class="lineNum">     178 </span><span class="lineCov">        854 :                                 chunk_file.read(result.get(), chunk_file_size);</span>
-<span class="lineNum">     179 </span>            :                                 // END OF FIXME
-<span class="lineNum">     180 </span>            :                                 // deserialize the chunk
-<span class="lineNum">     181 </span><span class="lineCov">        854 :                                 DataChunk insert_chunk;</span>
-<span class="lineNum">     182 </span><span class="lineCov">        854 :                                 Deserializer source((uint8_t *)result.get(), chunk_file_size);</span>
-<span class="lineNum">     183 </span><span class="lineCov">        854 :                                 insert_chunk.Deserialize(source);</span>
-<span class="lineNum">     184 </span>            :                                 // insert the chunk into the table
-<span class="lineNum">     185 </span><span class="lineCov">        854 :                                 table-&gt;storage-&gt;Append(*table, context, insert_chunk);</span>
-<span class="lineNum">     186 </span><span class="lineCov">        854 :                                 chunk_count++;</span>
-<span class="lineNum">     187 </span><span class="lineCov">        854 :                         }</span>
-<span class="lineNum">     188 </span>            :                 }
-<span class="lineNum">     189 </span>            :         }
-<span class="lineNum">     190 </span><span class="lineCov">          4 :         context.transaction.Commit();</span>
-<span class="lineNum">     191 </span><span class="lineCov">          4 :         return iteration;</span>
-<a name="192"><span class="lineNum">     192 </span>            : }</a>
-<span class="lineNum">     193 </span>            : 
-<span class="lineNum">     194 </span><span class="lineCov">         13 : void StorageManager::CreateCheckpoint(int iteration) {</span>
-<span class="lineNum">     195 </span><span class="lineCov">         13 :         auto transaction = database.transaction_manager.StartTransaction();</span>
-<span class="lineNum">     196 </span>            : 
-<span class="lineNum">     197 </span><span class="lineCov">         13 :         assert(iteration == 0 || iteration == 1);</span>
-<span class="lineNum">     198 </span><span class="lineCov">         52 :         auto storage_path_base = JoinPath(path, STORAGE_FILES[iteration]);</span>
-<span class="lineNum">     199 </span><span class="lineCov">         13 :         if (DirectoryExists(storage_path_base)) {</span>
-<span class="lineNum">     200 </span>            :                 // have a leftover directory
-<span class="lineNum">     201 </span>            :                 // remove it
-<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                 RemoveDirectory(storage_path_base);</span>
-<span class="lineNum">     203 </span>            :         }
-<span class="lineNum">     204 </span>            :         // create the directory
-<span class="lineNum">     205 </span><span class="lineCov">         13 :         CreateDirectory(storage_path_base);</span>
-<span class="lineNum">     206 </span>            : 
-<span class="lineNum">     207 </span>            :         // first we have to access the schemas
-<span class="lineNum">     208 </span><span class="lineCov">         52 :         auto schema_path = JoinPath(storage_path_base, SCHEMA_FILE);</span>
-<span class="lineNum">     209 </span>            :         // FIXME
-<span class="lineNum">     210 </span><span class="lineCov">         26 :         ofstream schema_file;</span>
-<span class="lineNum">     211 </span><span class="lineCov">         13 :         schema_file.open(schema_path);</span>
-<span class="lineNum">     212 </span><span class="lineCov">         13 :         if (!schema_file.good()) {</span>
-<span class="lineNum">     213 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Could not open schemas file for writing!&quot;);</span>
-<span class="lineNum">     214 </span>            :         }
-<span class="lineNum">     215 </span>            :         // END OF FIXME
-<span class="lineNum">     216 </span><span class="lineCov">         26 :         vector&lt;SchemaCatalogEntry *&gt; schemas;</span>
-<span class="lineNum">     217 </span>            :         // scan the schemas and write them to the schemas.csv file
-<span class="lineNum">     218 </span><span class="lineCov">         13 :         database.catalog.schemas.Scan(*transaction, [&amp;](CatalogEntry *entry) {</span>
-<span class="lineNum">     219 </span>            :                 schema_file &lt;&lt; entry-&gt;name &lt;&lt; &quot;\n&quot;;
-<span class="lineNum">     220 </span>            :                 schemas.push_back((SchemaCatalogEntry *)entry);
-<span class="lineNum">     221 </span>            :         });
-<span class="lineNum">     222 </span>            :         // FIXME: turn into function Close()
-<span class="lineNum">     223 </span><span class="lineCov">         13 :         schema_file.close();</span>
-<span class="lineNum">     224 </span>            :         // check the success of the write
-<span class="lineNum">     225 </span><span class="lineCov">         13 :         if (schema_file.fail()) {</span>
-<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Failed to write to schema!&quot;);</span>
-<span class="lineNum">     227 </span>            :         }
-<span class="lineNum">     228 </span>            :         // END OF FIXME
-<span class="lineNum">     229 </span>            : 
-<span class="lineNum">     230 </span>            :         // now for each schema create a directory
-<span class="lineNum">     231 </span><span class="lineCov">         27 :         for (auto &amp;schema : schemas) {</span>
-<span class="lineNum">     232 </span>            :                 // FIXME: schemas can have unicode, do something for file systems, maybe hash?
-<span class="lineNum">     233 </span><span class="lineCov">         28 :                 auto schema_directory_path = JoinPath(storage_path_base, schema-&gt;name);</span>
-<span class="lineNum">     234 </span><span class="lineCov">         14 :                 assert(!DirectoryExists(schema_directory_path));</span>
-<span class="lineNum">     235 </span>            :                 // create the directory
-<span class="lineNum">     236 </span><span class="lineCov">         14 :                 CreateDirectory(schema_directory_path);</span>
-<span class="lineNum">     237 </span>            :                 // create the file holding the list of tables for the schema
-<span class="lineNum">     238 </span><span class="lineCov">         56 :                 auto table_list_path = JoinPath(schema_directory_path, TABLE_LIST_FILE);</span>
-<span class="lineNum">     239 </span><span class="lineCov">         28 :                 ofstream table_list_file;</span>
-<span class="lineNum">     240 </span>            :                 // FIXME
-<span class="lineNum">     241 </span><span class="lineCov">         14 :                 table_list_file.open(table_list_path);</span>
-<span class="lineNum">     242 </span><span class="lineCov">         14 :                 if (!table_list_file.good()) {</span>
-<span class="lineNum">     243 </span><span class="lineNoCov">          0 :                         throw IOException(&quot;Could not open table list file for writing!&quot;);</span>
-<span class="lineNum">     244 </span>            :                 }
-<span class="lineNum">     245 </span>            :                 // END OF FIXME
-<span class="lineNum">     246 </span>            : 
-<span class="lineNum">     247 </span>            :                 // create the list of tables for the schema
-<span class="lineNum">     248 </span><span class="lineCov">         28 :                 vector&lt;TableCatalogEntry *&gt; tables;</span>
-<span class="lineNum">     249 </span><span class="lineCov">         14 :                 schema-&gt;tables.Scan(*transaction, [&amp;](CatalogEntry *entry) {</span>
-<span class="lineNum">     250 </span>            :                         table_list_file &lt;&lt; entry-&gt;name &lt;&lt; &quot;\n&quot;;
-<span class="lineNum">     251 </span>            :                         tables.push_back((TableCatalogEntry *)entry);
-<span class="lineNum">     252 </span>            :                 });
-<span class="lineNum">     253 </span>            :                 // FIXME
-<span class="lineNum">     254 </span><span class="lineCov">         14 :                 table_list_file.close();</span>
-<span class="lineNum">     255 </span>            :                 // check the success of the write
-<span class="lineNum">     256 </span><span class="lineCov">         14 :                 if (table_list_file.fail()) {</span>
-<span class="lineNum">     257 </span><span class="lineNoCov">          0 :                         throw IOException(&quot;Failed to write to table list!&quot;);</span>
-<span class="lineNum">     258 </span>            :                 }
-<span class="lineNum">     259 </span>            :                 // END OF FIXME
-<span class="lineNum">     260 </span>            : 
-<span class="lineNum">     261 </span>            :                 // now for each table, write the column meta information and the actual data
-<span class="lineNum">     262 </span><span class="lineCov">         41 :                 for (auto &amp;table : tables) {</span>
-<span class="lineNum">     263 </span>            :                         // first create a directory for the table information
-<span class="lineNum">     264 </span>            :                         // FIXME: same problem as schemas, unicode and file systems may not agree
-<span class="lineNum">     265 </span><span class="lineCov">         54 :                         auto table_directory_path = JoinPath(schema_directory_path, table-&gt;name);</span>
-<span class="lineNum">     266 </span><span class="lineCov">         27 :                         assert(!DirectoryExists(table_directory_path));</span>
-<span class="lineNum">     267 </span>            :                         // create the directory
-<span class="lineNum">     268 </span><span class="lineCov">         27 :                         CreateDirectory(table_directory_path);</span>
-<span class="lineNum">     269 </span>            : 
-<span class="lineNum">     270 </span><span class="lineCov">        108 :                         auto table_meta_name = JoinPath(table_directory_path, TABLE_FILE);</span>
-<span class="lineNum">     271 </span>            :                         // FIXME
-<span class="lineNum">     272 </span><span class="lineCov">         54 :                         ofstream table_file;</span>
-<span class="lineNum">     273 </span><span class="lineCov">         27 :                         table_file.open(table_meta_name, std::ofstream::binary);</span>
-<span class="lineNum">     274 </span><span class="lineCov">         27 :                         if (!table_file.good()) {</span>
-<span class="lineNum">     275 </span><span class="lineNoCov">          0 :                                 throw IOException(&quot;Could not open table file for writing!&quot;);</span>
-<span class="lineNum">     276 </span>            :                         }
-<span class="lineNum">     277 </span>            :                         // END OF FIXME
-<span class="lineNum">     278 </span>            : 
-<span class="lineNum">     279 </span>            :                         // serialize the table information to a file
-<span class="lineNum">     280 </span><span class="lineCov">         54 :                         Serializer serializer;</span>
-<span class="lineNum">     281 </span><span class="lineCov">         27 :                         table-&gt;Serialize(serializer);</span>
-<span class="lineNum">     282 </span><span class="lineCov">         54 :                         auto data = serializer.GetData();</span>
-<span class="lineNum">     283 </span><span class="lineCov">         27 :                         table_file.write((char *)data.data.get(), data.size);</span>
-<span class="lineNum">     284 </span>            : 
-<span class="lineNum">     285 </span>            :                         // FIXME
-<span class="lineNum">     286 </span><span class="lineCov">         27 :                         table_file.close();</span>
-<span class="lineNum">     287 </span>            :                         // check the success of the write
-<span class="lineNum">     288 </span><span class="lineCov">         27 :                         if (table_file.fail()) {</span>
-<span class="lineNum">     289 </span><span class="lineNoCov">          0 :                                 throw IOException(&quot;Failed to write to table meta info!&quot;);</span>
-<span class="lineNum">     290 </span>            :                         }
-<span class="lineNum">     291 </span>            :                         // END OF FIXME
-<span class="lineNum">     292 </span>            : 
-<span class="lineNum">     293 </span>            :                         // now we have to write the actual binary
-<span class="lineNum">     294 </span>            :                         // we do this by performing a scan of the table
-<span class="lineNum">     295 </span><span class="lineCov">         27 :                         ScanStructure ss;</span>
-<span class="lineNum">     296 </span><span class="lineCov">         27 :                         table-&gt;storage-&gt;InitializeScan(ss);</span>
-<span class="lineNum">     297 </span>            : 
-<span class="lineNum">     298 </span><span class="lineCov">         54 :                         vector&lt;column_t&gt; column_ids;</span>
-<span class="lineNum">     299 </span><span class="lineCov">        171 :                         for (size_t i = 0; i &lt; table-&gt;columns.size(); i++) {</span>
-<span class="lineNum">     300 </span><span class="lineCov">        144 :                                 column_ids.push_back(i);</span>
-<span class="lineNum">     301 </span>            :                         }
-<span class="lineNum">     302 </span><span class="lineCov">         54 :                         DataChunk chunk;</span>
-<span class="lineNum">     303 </span><span class="lineCov">         54 :                         auto types = table-&gt;GetTypes();</span>
-<span class="lineNum">     304 </span><span class="lineCov">         27 :                         chunk.Initialize(types);</span>
-<span class="lineNum">     305 </span>            : 
-<span class="lineNum">     306 </span><span class="lineCov">         27 :                         size_t chunk_count = 1;</span>
-<span class="lineNum">     307 </span>            :                         while (true) {
-<span class="lineNum">     308 </span><span class="lineCov">       1739 :                                 chunk.Reset();</span>
-<span class="lineNum">     309 </span><span class="lineCov">       1739 :                                 table-&gt;storage-&gt;Scan(*transaction, chunk, column_ids, ss);</span>
-<span class="lineNum">     310 </span><span class="lineCov">       1739 :                                 if (chunk.size() == 0) {</span>
-<span class="lineNum">     311 </span><span class="lineCov">         27 :                                         break;</span>
-<span class="lineNum">     312 </span>            :                                 }
-<span class="lineNum">     313 </span><span class="lineCov">       8560 :                                 auto chunk_name = JoinPath(table_directory_path, &quot;chunk-&quot; + to_string(chunk_count) + &quot;.bin&quot;);</span>
-<span class="lineNum">     314 </span>            :                                 // FIXME
-<span class="lineNum">     315 </span><span class="lineCov">       3424 :                                 ofstream chunk_file;</span>
-<span class="lineNum">     316 </span><span class="lineCov">       1712 :                                 chunk_file.open(chunk_name, std::ofstream::binary);</span>
-<span class="lineNum">     317 </span><span class="lineCov">       1712 :                                 if (!chunk_file.good()) {</span>
-<span class="lineNum">     318 </span><span class="lineNoCov">          0 :                                         throw IOException(&quot;Could not open DataChunk for writing!&quot;);</span>
-<span class="lineNum">     319 </span>            :                                 }
-<span class="lineNum">     320 </span>            :                                 // END OF FIXME
-<span class="lineNum">     321 </span><span class="lineCov">       3424 :                                 Serializer serializer;</span>
-<span class="lineNum">     322 </span><span class="lineCov">       1712 :                                 chunk.Serialize(serializer);</span>
-<span class="lineNum">     323 </span><span class="lineCov">       1712 :                                 auto data = serializer.GetData();</span>
-<span class="lineNum">     324 </span><span class="lineCov">       1712 :                                 chunk_file.write((char *)data.data.get(), data.size);</span>
-<span class="lineNum">     325 </span>            : 
-<span class="lineNum">     326 </span>            :                                 // FIXME
-<span class="lineNum">     327 </span><span class="lineCov">       1712 :                                 chunk_file.close();</span>
-<span class="lineNum">     328 </span>            :                                 // check the success of the write
-<span class="lineNum">     329 </span><span class="lineCov">       1712 :                                 if (chunk_file.fail()) {</span>
-<span class="lineNum">     330 </span><span class="lineNoCov">          0 :                                         throw IOException(&quot;Failed to write to chunk file!&quot;);</span>
-<span class="lineNum">     331 </span>            :                                 }
-<span class="lineNum">     332 </span>            :                                 // END OF FIXME
-<span class="lineNum">     333 </span><span class="lineCov">       1712 :                                 chunk_count++;</span>
-<span class="lineNum">     334 </span><span class="lineCov">       1712 :                         }</span>
-<span class="lineNum">     335 </span>            :                 }
-<span class="lineNum">     336 </span>            :         }
-<span class="lineNum">     337 </span>            :         // all the writes have been flushed and the entire database has been written
-<span class="lineNum">     338 </span>            :         // now we create the temporary meta information file
-<span class="lineNum">     339 </span><span class="lineCov">         52 :         auto meta_path = JoinPath(path, DATABASE_TEMP_INFO_FILE);</span>
-<span class="lineNum">     340 </span><span class="lineCov">         26 :         ofstream meta_file;</span>
-<span class="lineNum">     341 </span><span class="lineCov">         13 :         meta_file.open(meta_path);</span>
-<span class="lineNum">     342 </span><span class="lineCov">         13 :         if (!meta_file.good()) {</span>
-<span class="lineNum">     343 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Could not open meta file for writing!&quot;);</span>
+<span class="lineNum">     147 </span>            :                                 // FIXME: turn into function Open()
+<span class="lineNum">     148 </span><span class="lineCov">       1708 :                                 auto chunk_file = file_util.OpenFile(chunk_name);</span>
+<span class="lineNum">     149 </span>            :                                 // END OF FIXME
+<span class="lineNum">     150 </span>            :                                 // FIXME: turn into function ReadBinary()
+<span class="lineNum">     151 </span><span class="lineCov">       1708 :                                 auto result = file_util.ReadBinary(chunk_file);</span>
+<span class="lineNum">     152 </span>            :                                 // END OF FIXME
+<span class="lineNum">     153 </span>            :                                 // deserialize the chunk
+<span class="lineNum">     154 </span><span class="lineCov">        854 :                                 DataChunk insert_chunk;</span>
+<span class="lineNum">     155 </span><span class="lineCov">        854 :                                 auto chunk_file_size = file_util.GetFileSize(chunk_file);</span>
+<span class="lineNum">     156 </span><span class="lineCov">        854 :                                 Deserializer source((uint8_t *)result.get(), chunk_file_size);</span>
+<span class="lineNum">     157 </span><span class="lineCov">        854 :                                 insert_chunk.Deserialize(source);</span>
+<span class="lineNum">     158 </span>            :                                 // insert the chunk into the table
+<span class="lineNum">     159 </span><span class="lineCov">        854 :                                 table-&gt;storage-&gt;Append(*table, context, insert_chunk);</span>
+<span class="lineNum">     160 </span><span class="lineCov">        854 :                                 chunk_count++;</span>
+<span class="lineNum">     161 </span><span class="lineCov">        854 :                         }</span>
+<span class="lineNum">     162 </span>            :                 }
+<span class="lineNum">     163 </span>            :         }
+<span class="lineNum">     164 </span><span class="lineCov">          4 :         context.transaction.Commit();</span>
+<span class="lineNum">     165 </span><span class="lineCov">          4 :         return iteration;</span>
+<a name="166"><span class="lineNum">     166 </span>            : }</a>
+<span class="lineNum">     167 </span>            : 
+<span class="lineNum">     168 </span><span class="lineCov">         13 : void StorageManager::CreateCheckpoint(int iteration) {</span>
+<span class="lineNum">     169 </span><span class="lineCov">         13 :         auto transaction = database.transaction_manager.StartTransaction();</span>
+<span class="lineNum">     170 </span>            : 
+<span class="lineNum">     171 </span><span class="lineCov">         13 :         assert(iteration == 0 || iteration == 1);</span>
+<span class="lineNum">     172 </span><span class="lineCov">         52 :         auto storage_path_base = JoinPath(path, STORAGE_FILES[iteration]);</span>
+<span class="lineNum">     173 </span><span class="lineCov">         13 :         if (DirectoryExists(storage_path_base)) {</span>
+<span class="lineNum">     174 </span>            :                 // have a leftover directory
+<span class="lineNum">     175 </span>            :                 // remove it
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :                 RemoveDirectory(storage_path_base);</span>
+<span class="lineNum">     177 </span>            :         }
+<span class="lineNum">     178 </span>            :         // create the directory
+<span class="lineNum">     179 </span><span class="lineCov">         13 :         CreateDirectory(storage_path_base);</span>
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            :         // first we have to access the schemas
+<span class="lineNum">     182 </span><span class="lineCov">         52 :         auto schema_path = JoinPath(storage_path_base, SCHEMA_FILE);</span>
+<span class="lineNum">     183 </span>            :         // FIXME
+<span class="lineNum">     184 </span><span class="lineCov">         26 :         ofstream schema_file;</span>
+<span class="lineNum">     185 </span><span class="lineCov">         13 :         schema_file.open(schema_path);</span>
+<span class="lineNum">     186 </span><span class="lineCov">         13 :         if (!schema_file.good()) {</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Could not open schemas file for writing!&quot;);</span>
+<span class="lineNum">     188 </span>            :         }
+<span class="lineNum">     189 </span>            :         // END OF FIXME
+<span class="lineNum">     190 </span><span class="lineCov">         26 :         vector&lt;SchemaCatalogEntry *&gt; schemas;</span>
+<span class="lineNum">     191 </span>            :         // scan the schemas and write them to the schemas.csv file
+<span class="lineNum">     192 </span><span class="lineCov">         13 :         database.catalog.schemas.Scan(*transaction, [&amp;](CatalogEntry *entry) {</span>
+<span class="lineNum">     193 </span>            :                 schema_file &lt;&lt; entry-&gt;name &lt;&lt; &quot;\n&quot;;
+<span class="lineNum">     194 </span>            :                 schemas.push_back((SchemaCatalogEntry *)entry);
+<span class="lineNum">     195 </span>            :         });
+<span class="lineNum">     196 </span>            :         // FIXME: turn into function Close()
+<span class="lineNum">     197 </span><span class="lineCov">         13 :         schema_file.close();</span>
+<span class="lineNum">     198 </span>            :         // check the success of the write
+<span class="lineNum">     199 </span><span class="lineCov">         13 :         if (schema_file.fail()) {</span>
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Failed to write to schema!&quot;);</span>
+<span class="lineNum">     201 </span>            :         }
+<span class="lineNum">     202 </span>            :         // END OF FIXME
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span>            :         // now for each schema create a directory
+<span class="lineNum">     205 </span><span class="lineCov">         27 :         for (auto &amp;schema : schemas) {</span>
+<span class="lineNum">     206 </span>            :                 // FIXME: schemas can have unicode, do something for file systems, maybe hash?
+<span class="lineNum">     207 </span><span class="lineCov">         28 :                 auto schema_directory_path = JoinPath(storage_path_base, schema-&gt;name);</span>
+<span class="lineNum">     208 </span><span class="lineCov">         14 :                 assert(!DirectoryExists(schema_directory_path));</span>
+<span class="lineNum">     209 </span>            :                 // create the directory
+<span class="lineNum">     210 </span><span class="lineCov">         14 :                 CreateDirectory(schema_directory_path);</span>
+<span class="lineNum">     211 </span>            :                 // create the file holding the list of tables for the schema
+<span class="lineNum">     212 </span><span class="lineCov">         56 :                 auto table_list_path = JoinPath(schema_directory_path, TABLE_LIST_FILE);</span>
+<span class="lineNum">     213 </span><span class="lineCov">         28 :                 ofstream table_list_file;</span>
+<span class="lineNum">     214 </span>            :                 // FIXME
+<span class="lineNum">     215 </span><span class="lineCov">         14 :                 table_list_file.open(table_list_path);</span>
+<span class="lineNum">     216 </span><span class="lineCov">         14 :                 if (!table_list_file.good()) {</span>
+<span class="lineNum">     217 </span><span class="lineNoCov">          0 :                         throw IOException(&quot;Could not open table list file for writing!&quot;);</span>
+<span class="lineNum">     218 </span>            :                 }
+<span class="lineNum">     219 </span>            :                 // END OF FIXME
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span>            :                 // create the list of tables for the schema
+<span class="lineNum">     222 </span><span class="lineCov">         28 :                 vector&lt;TableCatalogEntry *&gt; tables;</span>
+<span class="lineNum">     223 </span><span class="lineCov">         14 :                 schema-&gt;tables.Scan(*transaction, [&amp;](CatalogEntry *entry) {</span>
+<span class="lineNum">     224 </span>            :                         table_list_file &lt;&lt; entry-&gt;name &lt;&lt; &quot;\n&quot;;
+<span class="lineNum">     225 </span>            :                         tables.push_back((TableCatalogEntry *)entry);
+<span class="lineNum">     226 </span>            :                 });
+<span class="lineNum">     227 </span>            :                 // FIXME
+<span class="lineNum">     228 </span><span class="lineCov">         14 :                 table_list_file.close();</span>
+<span class="lineNum">     229 </span>            :                 // check the success of the write
+<span class="lineNum">     230 </span><span class="lineCov">         14 :                 if (table_list_file.fail()) {</span>
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :                         throw IOException(&quot;Failed to write to table list!&quot;);</span>
+<span class="lineNum">     232 </span>            :                 }
+<span class="lineNum">     233 </span>            :                 // END OF FIXME
+<span class="lineNum">     234 </span>            : 
+<span class="lineNum">     235 </span>            :                 // now for each table, write the column meta information and the actual data
+<span class="lineNum">     236 </span><span class="lineCov">         41 :                 for (auto &amp;table : tables) {</span>
+<span class="lineNum">     237 </span>            :                         // first create a directory for the table information
+<span class="lineNum">     238 </span>            :                         // FIXME: same problem as schemas, unicode and file systems may not agree
+<span class="lineNum">     239 </span><span class="lineCov">         54 :                         auto table_directory_path = JoinPath(schema_directory_path, table-&gt;name);</span>
+<span class="lineNum">     240 </span><span class="lineCov">         27 :                         assert(!DirectoryExists(table_directory_path));</span>
+<span class="lineNum">     241 </span>            :                         // create the directory
+<span class="lineNum">     242 </span><span class="lineCov">         27 :                         CreateDirectory(table_directory_path);</span>
+<span class="lineNum">     243 </span>            : 
+<span class="lineNum">     244 </span><span class="lineCov">        108 :                         auto table_meta_name = JoinPath(table_directory_path, TABLE_FILE);</span>
+<span class="lineNum">     245 </span>            :                         // FIXME
+<span class="lineNum">     246 </span><span class="lineCov">         54 :                         ofstream table_file;</span>
+<span class="lineNum">     247 </span><span class="lineCov">         27 :                         table_file.open(table_meta_name, std::ofstream::binary);</span>
+<span class="lineNum">     248 </span><span class="lineCov">         27 :                         if (!table_file.good()) {</span>
+<span class="lineNum">     249 </span><span class="lineNoCov">          0 :                                 throw IOException(&quot;Could not open table file for writing!&quot;);</span>
+<span class="lineNum">     250 </span>            :                         }
+<span class="lineNum">     251 </span>            :                         // END OF FIXME
+<span class="lineNum">     252 </span>            : 
+<span class="lineNum">     253 </span>            :                         // serialize the table information to a file
+<span class="lineNum">     254 </span><span class="lineCov">         54 :                         Serializer serializer;</span>
+<span class="lineNum">     255 </span><span class="lineCov">         27 :                         table-&gt;Serialize(serializer);</span>
+<span class="lineNum">     256 </span><span class="lineCov">         54 :                         auto data = serializer.GetData();</span>
+<span class="lineNum">     257 </span><span class="lineCov">         27 :                         table_file.write((char *)data.data.get(), data.size);</span>
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span>            :                         // FIXME
+<span class="lineNum">     260 </span><span class="lineCov">         27 :                         table_file.close();</span>
+<span class="lineNum">     261 </span>            :                         // check the success of the write
+<span class="lineNum">     262 </span><span class="lineCov">         27 :                         if (table_file.fail()) {</span>
+<span class="lineNum">     263 </span><span class="lineNoCov">          0 :                                 throw IOException(&quot;Failed to write to table meta info!&quot;);</span>
+<span class="lineNum">     264 </span>            :                         }
+<span class="lineNum">     265 </span>            :                         // END OF FIXME
+<span class="lineNum">     266 </span>            : 
+<span class="lineNum">     267 </span>            :                         // now we have to write the actual binary
+<span class="lineNum">     268 </span>            :                         // we do this by performing a scan of the table
+<span class="lineNum">     269 </span><span class="lineCov">         27 :                         ScanStructure ss;</span>
+<span class="lineNum">     270 </span><span class="lineCov">         27 :                         table-&gt;storage-&gt;InitializeScan(ss);</span>
+<span class="lineNum">     271 </span>            : 
+<span class="lineNum">     272 </span><span class="lineCov">         54 :                         vector&lt;column_t&gt; column_ids;</span>
+<span class="lineNum">     273 </span><span class="lineCov">        171 :                         for (size_t i = 0; i &lt; table-&gt;columns.size(); i++) {</span>
+<span class="lineNum">     274 </span><span class="lineCov">        144 :                                 column_ids.push_back(i);</span>
+<span class="lineNum">     275 </span>            :                         }
+<span class="lineNum">     276 </span><span class="lineCov">         54 :                         DataChunk chunk;</span>
+<span class="lineNum">     277 </span><span class="lineCov">         54 :                         auto types = table-&gt;GetTypes();</span>
+<span class="lineNum">     278 </span><span class="lineCov">         27 :                         chunk.Initialize(types);</span>
+<span class="lineNum">     279 </span>            : 
+<span class="lineNum">     280 </span><span class="lineCov">         27 :                         size_t chunk_count = 1;</span>
+<span class="lineNum">     281 </span>            :                         while (true) {
+<span class="lineNum">     282 </span><span class="lineCov">       1739 :                                 chunk.Reset();</span>
+<span class="lineNum">     283 </span><span class="lineCov">       1739 :                                 table-&gt;storage-&gt;Scan(*transaction, chunk, column_ids, ss);</span>
+<span class="lineNum">     284 </span><span class="lineCov">       1739 :                                 if (chunk.size() == 0) {</span>
+<span class="lineNum">     285 </span><span class="lineCov">         27 :                                         break;</span>
+<span class="lineNum">     286 </span>            :                                 }
+<span class="lineNum">     287 </span><span class="lineCov">       8560 :                                 auto chunk_name = JoinPath(table_directory_path, &quot;chunk-&quot; + to_string(chunk_count) + &quot;.bin&quot;);</span>
+<span class="lineNum">     288 </span>            :                                 // FIXME
+<span class="lineNum">     289 </span><span class="lineCov">       3424 :                                 ofstream chunk_file;</span>
+<span class="lineNum">     290 </span><span class="lineCov">       1712 :                                 chunk_file.open(chunk_name, std::ofstream::binary);</span>
+<span class="lineNum">     291 </span><span class="lineCov">       1712 :                                 if (!chunk_file.good()) {</span>
+<span class="lineNum">     292 </span><span class="lineNoCov">          0 :                                         throw IOException(&quot;Could not open DataChunk for writing!&quot;);</span>
+<span class="lineNum">     293 </span>            :                                 }
+<span class="lineNum">     294 </span>            :                                 // END OF FIXME
+<span class="lineNum">     295 </span><span class="lineCov">       3424 :                                 Serializer serializer;</span>
+<span class="lineNum">     296 </span><span class="lineCov">       1712 :                                 chunk.Serialize(serializer);</span>
+<span class="lineNum">     297 </span><span class="lineCov">       1712 :                                 auto data = serializer.GetData();</span>
+<span class="lineNum">     298 </span><span class="lineCov">       1712 :                                 chunk_file.write((char *)data.data.get(), data.size);</span>
+<span class="lineNum">     299 </span>            : 
+<span class="lineNum">     300 </span>            :                                 // FIXME
+<span class="lineNum">     301 </span><span class="lineCov">       1712 :                                 chunk_file.close();</span>
+<span class="lineNum">     302 </span>            :                                 // check the success of the write
+<span class="lineNum">     303 </span><span class="lineCov">       1712 :                                 if (chunk_file.fail()) {</span>
+<span class="lineNum">     304 </span><span class="lineNoCov">          0 :                                         throw IOException(&quot;Failed to write to chunk file!&quot;);</span>
+<span class="lineNum">     305 </span>            :                                 }
+<span class="lineNum">     306 </span>            :                                 // END OF FIXME
+<span class="lineNum">     307 </span><span class="lineCov">       1712 :                                 chunk_count++;</span>
+<span class="lineNum">     308 </span><span class="lineCov">       1712 :                         }</span>
+<span class="lineNum">     309 </span>            :                 }
+<span class="lineNum">     310 </span>            :         }
+<span class="lineNum">     311 </span>            :         // all the writes have been flushed and the entire database has been written
+<span class="lineNum">     312 </span>            :         // now we create the temporary meta information file
+<span class="lineNum">     313 </span><span class="lineCov">         52 :         auto meta_path = JoinPath(path, DATABASE_TEMP_INFO_FILE);</span>
+<span class="lineNum">     314 </span><span class="lineCov">         26 :         ofstream meta_file;</span>
+<span class="lineNum">     315 </span><span class="lineCov">         13 :         meta_file.open(meta_path);</span>
+<span class="lineNum">     316 </span><span class="lineCov">         13 :         if (!meta_file.good()) {</span>
+<span class="lineNum">     317 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Could not open meta file for writing!&quot;);</span>
+<span class="lineNum">     318 </span>            :         }
+<span class="lineNum">     319 </span>            : 
+<span class="lineNum">     320 </span>            :         //! Write information to the meta file
+<span class="lineNum">     321 </span><span class="lineCov">         13 :         meta_file &lt;&lt; STORAGE_VERSION &lt;&lt; &quot;\n&quot;;</span>
+<span class="lineNum">     322 </span><span class="lineCov">         13 :         meta_file &lt;&lt; iteration &lt;&lt; &quot;\n&quot;;</span>
+<span class="lineNum">     323 </span>            : 
+<span class="lineNum">     324 </span><span class="lineCov">         13 :         meta_file.close();</span>
+<span class="lineNum">     325 </span>            :         // check the success of the write
+<span class="lineNum">     326 </span><span class="lineCov">         13 :         if (meta_file.fail()) {</span>
+<span class="lineNum">     327 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Failed to write to meta file!&quot;);</span>
+<span class="lineNum">     328 </span>            :         }
+<span class="lineNum">     329 </span>            : 
+<span class="lineNum">     330 </span>            :         // now we move the meta information file over the old meta information file
+<span class="lineNum">     331 </span>            :         // this signifies a &quot;completion&quot; of the checkpoint
+<span class="lineNum">     332 </span><span class="lineCov">         52 :         auto permanent_meta_path = JoinPath(path, DATABASE_INFO_FILE);</span>
+<span class="lineNum">     333 </span><span class="lineCov">         13 :         MoveFile(meta_path, permanent_meta_path);</span>
+<span class="lineNum">     334 </span>            : 
+<span class="lineNum">     335 </span>            :         // we are now done writing
+<span class="lineNum">     336 </span>            :         // we can delete the directory for the other iteration because we do not need it anymore for consistency
+<span class="lineNum">     337 </span><span class="lineCov">         52 :         auto other_storage_path = JoinPath(path, STORAGE_FILES[1 - iteration]);</span>
+<span class="lineNum">     338 </span><span class="lineCov">         52 :         auto other_wal_path = JoinPath(path, WAL_FILES[1 - iteration]);</span>
+<span class="lineNum">     339 </span><span class="lineCov">         13 :         if (DirectoryExists(other_storage_path)) {</span>
+<span class="lineNum">     340 </span><span class="lineCov">          4 :                 RemoveDirectory(other_storage_path);</span>
+<span class="lineNum">     341 </span>            :         }
+<span class="lineNum">     342 </span><span class="lineCov">         13 :         if (FileExists(other_wal_path)) {</span>
+<span class="lineNum">     343 </span><span class="lineCov">         13 :                 RemoveDirectory(other_wal_path);</span>
 <span class="lineNum">     344 </span>            :         }
-<span class="lineNum">     345 </span>            : 
-<span class="lineNum">     346 </span>            :         //! Write information to the meta file
-<span class="lineNum">     347 </span><span class="lineCov">         13 :         meta_file &lt;&lt; STORAGE_VERSION &lt;&lt; &quot;\n&quot;;</span>
-<span class="lineNum">     348 </span><span class="lineCov">         13 :         meta_file &lt;&lt; iteration &lt;&lt; &quot;\n&quot;;</span>
-<span class="lineNum">     349 </span>            : 
-<span class="lineNum">     350 </span><span class="lineCov">         13 :         meta_file.close();</span>
-<span class="lineNum">     351 </span>            :         // check the success of the write
-<span class="lineNum">     352 </span><span class="lineCov">         13 :         if (meta_file.fail()) {</span>
-<span class="lineNum">     353 </span><span class="lineNoCov">          0 :                 throw IOException(&quot;Failed to write to meta file!&quot;);</span>
-<span class="lineNum">     354 </span>            :         }
-<span class="lineNum">     355 </span>            : 
-<span class="lineNum">     356 </span>            :         // now we move the meta information file over the old meta information file
-<span class="lineNum">     357 </span>            :         // this signifies a &quot;completion&quot; of the checkpoint
-<span class="lineNum">     358 </span><span class="lineCov">         52 :         auto permanent_meta_path = JoinPath(path, DATABASE_INFO_FILE);</span>
-<span class="lineNum">     359 </span><span class="lineCov">         13 :         MoveFile(meta_path, permanent_meta_path);</span>
-<span class="lineNum">     360 </span>            : 
-<span class="lineNum">     361 </span>            :         // we are now done writing
-<span class="lineNum">     362 </span>            :         // we can delete the directory for the other iteration because we do not need it anymore for consistency
-<span class="lineNum">     363 </span><span class="lineCov">         52 :         auto other_storage_path = JoinPath(path, STORAGE_FILES[1 - iteration]);</span>
-<span class="lineNum">     364 </span><span class="lineCov">         52 :         auto other_wal_path = JoinPath(path, WAL_FILES[1 - iteration]);</span>
-<span class="lineNum">     365 </span><span class="lineCov">         13 :         if (DirectoryExists(other_storage_path)) {</span>
-<span class="lineNum">     366 </span><span class="lineCov">          4 :                 RemoveDirectory(other_storage_path);</span>
-<span class="lineNum">     367 </span>            :         }
-<span class="lineNum">     368 </span><span class="lineCov">         13 :         if (FileExists(other_wal_path)) {</span>
-<span class="lineNum">     369 </span><span class="lineCov">         13 :                 RemoveDirectory(other_wal_path);</span>
-<span class="lineNum">     370 </span>            :         }
-<span class="lineNum">     371 </span><span class="lineCov">         13 :         transaction-&gt;Rollback();</span>
-<span class="lineNum">     372 </span><span class="lineCov">         13 : }</span>
+<span class="lineNum">     345 </span><span class="lineCov">         13 :         transaction-&gt;Rollback();</span>
+<span class="lineNum">     346 </span><span class="lineCov">         13 : }</span>
 </pre>
       </td>
     </tr>
