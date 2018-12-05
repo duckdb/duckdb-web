@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 14e35034 - common/types/data_chunk.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 030c93af - common/types/data_chunk.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
+            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">134</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 12:37:37</td>
+            <td class="headerValue">2018-12-05 13:16:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
@@ -71,47 +71,47 @@
 <span class="lineNum">       9 </span>            : using namespace duckdb;
 <a name="10"><span class="lineNum">      10 </span>            : using namespace std;</a>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">   24351951 : DataChunk::DataChunk() : column_count(0), data(nullptr), sel_vector(nullptr) {</span>
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">   24344822 : }</span></a>
+<span class="lineNum">      12 </span><span class="lineCov">   24352238 : DataChunk::DataChunk() : column_count(0), data(nullptr), sel_vector(nullptr) {</span>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">   24345669 : }</span></a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">   20881979 : void DataChunk::Initialize(vector&lt;TypeId&gt; &amp;types, bool zero_data) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">   20881979 :         column_count = types.size();</span>
-<span class="lineNum">      17 </span><span class="lineCov">   20881541 :         size_t size = 0;</span>
-<span class="lineNum">      18 </span><span class="lineCov">   54459627 :         for (auto &amp;type : types) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">   33574169 :                 size += GetTypeIdSize(type) * STANDARD_VECTOR_SIZE;</span>
+<span class="lineNum">      15 </span><span class="lineCov">   20882530 : void DataChunk::Initialize(vector&lt;TypeId&gt; &amp;types, bool zero_data) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">   20882530 :         column_count = types.size();</span>
+<span class="lineNum">      17 </span><span class="lineCov">   20882056 :         size_t size = 0;</span>
+<span class="lineNum">      18 </span><span class="lineCov">   54458404 :         for (auto &amp;type : types) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">   33570441 :                 size += GetTypeIdSize(type) * STANDARD_VECTOR_SIZE;</span>
 <span class="lineNum">      20 </span>            :         }
-<span class="lineNum">      21 </span><span class="lineCov">   20891735 :         if (size &gt; 0) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">   19434376 :                 owned_data = unique_ptr&lt;char[]&gt;(new char[size]);</span>
-<span class="lineNum">      23 </span><span class="lineCov">   19413277 :                 if (zero_data) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">   20892752 :         if (size &gt; 0) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">   19434717 :                 owned_data = unique_ptr&lt;char[]&gt;(new char[size]);</span>
+<span class="lineNum">      23 </span><span class="lineCov">   19413217 :                 if (zero_data) {</span>
 <span class="lineNum">      24 </span><span class="lineCov">       3205 :                         memset(owned_data.get(), 0, size);</span>
 <span class="lineNum">      25 </span>            :                 }
 <span class="lineNum">      26 </span>            :         }
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">   20870636 :         char *ptr = owned_data.get();</span>
-<span class="lineNum">      29 </span><span class="lineCov">   54444626 :         data = unique_ptr&lt;Vector[]&gt;(new Vector[types.size()]);</span>
-<span class="lineNum">      30 </span><span class="lineCov">   54444425 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">   33556225 :                 data[i].type = types[i];</span>
-<span class="lineNum">      32 </span><span class="lineCov">   33548521 :                 data[i].data = ptr;</span>
-<span class="lineNum">      33 </span><span class="lineCov">   33560966 :                 data[i].count = 0;</span>
-<span class="lineNum">      34 </span><span class="lineCov">   33564807 :                 data[i].sel_vector = nullptr;</span>
+<span class="lineNum">      28 </span><span class="lineCov">   20871252 :         char *ptr = owned_data.get();</span>
+<span class="lineNum">      29 </span><span class="lineCov">   54444834 :         data = unique_ptr&lt;Vector[]&gt;(new Vector[types.size()]);</span>
+<span class="lineNum">      30 </span><span class="lineCov">   54442644 :         for (size_t i = 0; i &lt; types.size(); i++) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">   33555332 :                 data[i].type = types[i];</span>
+<span class="lineNum">      32 </span><span class="lineCov">   33546592 :                 data[i].data = ptr;</span>
+<span class="lineNum">      33 </span><span class="lineCov">   33559233 :                 data[i].count = 0;</span>
+<span class="lineNum">      34 </span><span class="lineCov">   33562452 :                 data[i].sel_vector = nullptr;</span>
 <span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span><span class="lineCov">   33566410 :                 ptr += GetTypeIdSize(types[i]) * STANDARD_VECTOR_SIZE;</span>
+<span class="lineNum">      36 </span><span class="lineCov">   33564134 :                 ptr += GetTypeIdSize(types[i]) * STANDARD_VECTOR_SIZE;</span>
 <span class="lineNum">      37 </span>            :         }
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">   20889233 : }</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">   20888556 : }</span></a>
 <span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span><span class="lineCov">   32427071 : void DataChunk::Reset() {</span>
-<span class="lineNum">      41 </span><span class="lineCov">   32427071 :         char *ptr = owned_data.get();</span>
-<span class="lineNum">      42 </span><span class="lineCov">  120052198 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">      43 </span><span class="lineCov">   87622881 :                 data[i].data = ptr;</span>
-<span class="lineNum">      44 </span><span class="lineCov">   87619115 :                 data[i].count = 0;</span>
-<span class="lineNum">      45 </span><span class="lineCov">   87626646 :                 data[i].sel_vector = nullptr;</span>
-<span class="lineNum">      46 </span><span class="lineCov">   87629355 :                 data[i].owned_data = nullptr;</span>
-<span class="lineNum">      47 </span><span class="lineCov">   87622872 :                 data[i].string_heap.Destroy();</span>
-<span class="lineNum">      48 </span><span class="lineCov">   87630490 :                 data[i].nullmask.reset();</span>
-<span class="lineNum">      49 </span><span class="lineCov">   87646480 :                 ptr += GetTypeIdSize(data[i].type) * STANDARD_VECTOR_SIZE;</span>
+<span class="lineNum">      40 </span><span class="lineCov">   32427715 : void DataChunk::Reset() {</span>
+<span class="lineNum">      41 </span><span class="lineCov">   32427715 :         char *ptr = owned_data.get();</span>
+<span class="lineNum">      42 </span><span class="lineCov">  120048886 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">   87620644 :                 data[i].data = ptr;</span>
+<span class="lineNum">      44 </span><span class="lineCov">   87616478 :                 data[i].count = 0;</span>
+<span class="lineNum">      45 </span><span class="lineCov">   87623498 :                 data[i].sel_vector = nullptr;</span>
+<span class="lineNum">      46 </span><span class="lineCov">   87626606 :                 data[i].owned_data = nullptr;</span>
+<span class="lineNum">      47 </span><span class="lineCov">   87627170 :                 data[i].string_heap.Destroy();</span>
+<span class="lineNum">      48 </span><span class="lineCov">   87633080 :                 data[i].nullmask.reset();</span>
+<span class="lineNum">      49 </span><span class="lineCov">   87614978 :                 ptr += GetTypeIdSize(data[i].type) * STANDARD_VECTOR_SIZE;</span>
 <span class="lineNum">      50 </span>            :         }
-<span class="lineNum">      51 </span><span class="lineCov">   32429317 :         sel_vector = nullptr;</span>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">   32429317 : }</span></a>
+<span class="lineNum">      51 </span><span class="lineCov">   32428242 :         sel_vector = nullptr;</span>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">   32428242 : }</span></a>
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span><span class="lineNoCov">          0 : void DataChunk::Destroy() {</span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :         data = nullptr;</span>
@@ -120,14 +120,14 @@
 <span class="lineNum">      58 </span><span class="lineNoCov">          0 :         column_count = 0;</span>
 <a name="59"><span class="lineNum">      59 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">    2903924 : void DataChunk::Copy(DataChunk &amp;other, size_t offset) {</span>
-<span class="lineNum">      62 </span><span class="lineCov">    2903924 :         assert(column_count == other.column_count);</span>
-<span class="lineNum">      63 </span><span class="lineCov">    2903924 :         other.sel_vector = nullptr;</span>
+<span class="lineNum">      61 </span><span class="lineCov">    2903986 : void DataChunk::Copy(DataChunk &amp;other, size_t offset) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">    2903986 :         assert(column_count == other.column_count);</span>
+<span class="lineNum">      63 </span><span class="lineCov">    2903986 :         other.sel_vector = nullptr;</span>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">    6323805 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">    3419901 :                 data[i].Copy(other.data[i], offset);</span>
+<span class="lineNum">      65 </span><span class="lineCov">    6323908 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">    3419941 :                 data[i].Copy(other.data[i], offset);</span>
 <span class="lineNum">      67 </span>            :         }
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">    2903904 : }</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">    2903967 : }</span></a>
 <span class="lineNum">      69 </span>            : 
 <span class="lineNum">      70 </span><span class="lineNoCov">          0 : void DataChunk::Move(DataChunk &amp;other) {</span>
 <span class="lineNum">      71 </span><span class="lineNoCov">          0 :         other.column_count = column_count;</span>
@@ -143,15 +143,15 @@
 <span class="lineNum">      81 </span><span class="lineNoCov">          0 :         Destroy();</span>
 <a name="82"><span class="lineNum">      82 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span><span class="lineCov">    1788048 : void DataChunk::Flatten() {</span>
-<span class="lineNum">      85 </span><span class="lineCov">    1788048 :         if (!sel_vector) {</span>
-<span class="lineNum">      86 </span><span class="lineCov">    1239229 :                 return;</span>
+<span class="lineNum">      84 </span><span class="lineCov">    1788043 : void DataChunk::Flatten() {</span>
+<span class="lineNum">      85 </span><span class="lineCov">    1788043 :         if (!sel_vector) {</span>
+<span class="lineNum">      86 </span><span class="lineCov">    1239226 :                 return;</span>
 <span class="lineNum">      87 </span>            :         }
 <span class="lineNum">      88 </span>            : 
-<span class="lineNum">      89 </span><span class="lineCov">    2411300 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">      90 </span><span class="lineCov">    1862481 :                 data[i].Flatten();</span>
+<span class="lineNum">      89 </span><span class="lineCov">    2411290 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">      90 </span><span class="lineCov">    1862473 :                 data[i].Flatten();</span>
 <span class="lineNum">      91 </span>            :         }
-<span class="lineNum">      92 </span><span class="lineCov">     548819 :         sel_vector = nullptr;</span>
+<span class="lineNum">      92 </span><span class="lineCov">     548817 :         sel_vector = nullptr;</span>
 <a name="93"><span class="lineNum">      93 </span>            : }</a>
 <span class="lineNum">      94 </span>            : 
 <span class="lineNum">      95 </span><span class="lineCov">    1275102 : void DataChunk::Append(DataChunk &amp;other) {</span>
@@ -172,13 +172,13 @@
 <span class="lineNum">     110 </span>            :         }
 <a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">     112 </span>            : 
-<span class="lineNum">     113 </span><span class="lineCov">    1000467 : void DataChunk::SetSelectionVector(Vector &amp;matches) {</span>
-<span class="lineNum">     114 </span><span class="lineCov">    1000467 :         if (matches.type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">     113 </span><span class="lineCov">    1000507 : void DataChunk::SetSelectionVector(Vector &amp;matches) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">    1000507 :         if (matches.type != TypeId::BOOLEAN) {</span>
 <span class="lineNum">     115 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(matches.type, &quot;Can only set selection vector using a boolean vector!&quot;);</span>
 <span class="lineNum">     116 </span>            :         }
-<span class="lineNum">     117 </span><span class="lineCov">    1000467 :         bool *match_data = (bool *)matches.data;</span>
-<span class="lineNum">     118 </span><span class="lineCov">    1000467 :         size_t match_count = 0;</span>
-<span class="lineNum">     119 </span><span class="lineCov">    1000467 :         if (sel_vector) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">    1000507 :         bool *match_data = (bool *)matches.data;</span>
+<span class="lineNum">     118 </span><span class="lineCov">    1000507 :         size_t match_count = 0;</span>
+<span class="lineNum">     119 </span><span class="lineCov">    1000507 :         if (sel_vector) {</span>
 <span class="lineNum">     120 </span><span class="lineCov">       3301 :                 assert(matches.sel_vector);</span>
 <span class="lineNum">     121 </span>            :                 // existing selection vector: have to merge the selection vector
 <span class="lineNum">     122 </span><span class="lineCov">     207281 :                 for (size_t i = 0; i &lt; matches.count; i++) {</span>
@@ -189,28 +189,28 @@
 <span class="lineNum">     127 </span><span class="lineCov">       3301 :                 sel_vector = owned_sel_vector;</span>
 <span class="lineNum">     128 </span>            :         } else {
 <span class="lineNum">     129 </span>            :                 // no selection vector yet: can just set the selection vector
-<span class="lineNum">     130 </span><span class="lineCov">   69097687 :                 for (size_t i = 0; i &lt; matches.count; i++) {</span>
-<span class="lineNum">     131 </span><span class="lineCov">   68097704 :                         if (match_data[i] &amp;&amp; !matches.nullmask[i]) {</span>
-<span class="lineNum">     132 </span><span class="lineCov">    5871552 :                                 owned_sel_vector[match_count++] = i;</span>
+<span class="lineNum">     130 </span><span class="lineCov">   69108808 :                 for (size_t i = 0; i &lt; matches.count; i++) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">   68108972 :                         if (match_data[i] &amp;&amp; !matches.nullmask[i]) {</span>
+<span class="lineNum">     132 </span><span class="lineCov">    5871422 :                                 owned_sel_vector[match_count++] = i;</span>
 <span class="lineNum">     133 </span>            :                         }
 <span class="lineNum">     134 </span>            :                 }
-<span class="lineNum">     135 </span><span class="lineCov">     999983 :                 if (match_count &lt; matches.count) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">     999836 :                 if (match_count &lt; matches.count) {</span>
 <span class="lineNum">     136 </span>            :                         // we only have to set the selection vector if tuples were filtered
-<span class="lineNum">     137 </span><span class="lineCov">     883619 :                         sel_vector = owned_sel_vector;</span>
+<span class="lineNum">     137 </span><span class="lineCov">     883422 :                         sel_vector = owned_sel_vector;</span>
 <span class="lineNum">     138 </span>            :                 }
 <span class="lineNum">     139 </span>            :         }
-<span class="lineNum">     140 </span><span class="lineCov">    3283796 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">     141 </span><span class="lineCov">    2280033 :                 data[i].count = match_count;</span>
-<span class="lineNum">     142 </span><span class="lineCov">    2278035 :                 data[i].sel_vector = sel_vector;</span>
+<span class="lineNum">     140 </span><span class="lineCov">    3282767 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">    2279217 :                 data[i].count = match_count;</span>
+<span class="lineNum">     142 </span><span class="lineCov">    2277300 :                 data[i].sel_vector = sel_vector;</span>
 <span class="lineNum">     143 </span>            :         }
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">    1003763 : }</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">    1003550 : }</span></a>
 <span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span><span class="lineCov">    4182552 : vector&lt;TypeId&gt; DataChunk::GetTypes() {</span>
-<span class="lineNum">     147 </span><span class="lineCov">    4182552 :         vector&lt;TypeId&gt; types;</span>
-<span class="lineNum">     148 </span><span class="lineCov">   15570250 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">     149 </span><span class="lineCov">   11387801 :                 types.push_back(data[i].type);</span>
+<span class="lineNum">     146 </span><span class="lineCov">    4182602 : vector&lt;TypeId&gt; DataChunk::GetTypes() {</span>
+<span class="lineNum">     147 </span><span class="lineCov">    4182602 :         vector&lt;TypeId&gt; types;</span>
+<span class="lineNum">     148 </span><span class="lineCov">   15570355 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">     149 </span><span class="lineCov">   11387855 :                 types.push_back(data[i].type);</span>
 <span class="lineNum">     150 </span>            :         }
-<span class="lineNum">     151 </span><span class="lineCov">    4182449 :         return types;</span>
+<span class="lineNum">     151 </span><span class="lineCov">    4182500 :         return types;</span>
 <a name="152"><span class="lineNum">     152 </span>            : }</a>
 <span class="lineNum">     153 </span>            : 
 <span class="lineNum">     154 </span><span class="lineNoCov">          0 : string DataChunk::ToString() const {</span>
@@ -288,9 +288,9 @@
 <span class="lineNum">     226 </span><span class="lineCov">        860 :         Verify();</span>
 <a name="227"><span class="lineNum">     227 </span><span class="lineCov">        860 : }</span></a>
 <span class="lineNum">     228 </span>            : 
-<span class="lineNum">     229 </span><span class="lineCov">    3608578 : void DataChunk::MoveStringsToHeap(StringHeap &amp;heap) {</span>
-<span class="lineNum">     230 </span><span class="lineCov">    9034387 :         for (size_t c = 0; c &lt; column_count; c++) {</span>
-<span class="lineNum">     231 </span><span class="lineCov">    5426069 :                 if (data[c].type == TypeId::VARCHAR) {</span>
+<span class="lineNum">     229 </span><span class="lineCov">    3608613 : void DataChunk::MoveStringsToHeap(StringHeap &amp;heap) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">    9034509 :         for (size_t c = 0; c &lt; column_count; c++) {</span>
+<span class="lineNum">     231 </span><span class="lineCov">    5425743 :                 if (data[c].type == TypeId::VARCHAR) {</span>
 <span class="lineNum">     232 </span>            :                         // move strings of this chunk to the specified heap
 <span class="lineNum">     233 </span><span class="lineCov">      61822 :                         auto strings = (const char **)data[c].data;</span>
 <span class="lineNum">     234 </span><span class="lineCov">      61822 :                         VectorOperations::ExecType&lt;const char *&gt;(data[c], [&amp;](const char *str, size_t i, size_t k) {</span>
@@ -300,29 +300,29 @@
 <span class="lineNum">     238 </span>            :                         });
 <span class="lineNum">     239 </span>            :                 }
 <span class="lineNum">     240 </span>            :         }
-<a name="241"><span class="lineNum">     241 </span><span class="lineCov">    3609669 : }</span></a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">    3609803 : }</span></a>
 <span class="lineNum">     242 </span>            : 
-<span class="lineNum">     243 </span><span class="lineCov">    1787609 : void DataChunk::Hash(Vector &amp;result) {</span>
-<span class="lineNum">     244 </span><span class="lineCov">    1787609 :         assert(result.type == TypeId::POINTER);</span>
-<span class="lineNum">     245 </span><span class="lineCov">    1787609 :         VectorOperations::Hash(data[0], result);</span>
-<span class="lineNum">     246 </span><span class="lineCov">    4063524 :         for (size_t i = 1; i &lt; column_count; i++) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">    1787678 : void DataChunk::Hash(Vector &amp;result) {</span>
+<span class="lineNum">     244 </span><span class="lineCov">    1787678 :         assert(result.type == TypeId::POINTER);</span>
+<span class="lineNum">     245 </span><span class="lineCov">    1787678 :         VectorOperations::Hash(data[0], result);</span>
+<span class="lineNum">     246 </span><span class="lineCov">    4063606 :         for (size_t i = 1; i &lt; column_count; i++) {</span>
 <span class="lineNum">     247 </span><span class="lineCov">    2275882 :                 VectorOperations::CombineHash(result, data[i]);</span>
 <span class="lineNum">     248 </span>            :         }
-<span class="lineNum">     249 </span><span class="lineCov">    1787642 : }</span>
+<span class="lineNum">     249 </span><span class="lineCov">    1787724 : }</span>
 <a name="250"><span class="lineNum">     250 </span>            : </a>
 <span class="lineNum">     251 </span>            : #ifdef DEBUG
-<span class="lineNum">     252 </span><span class="lineCov">   28386664 : void DataChunk::Verify() {</span>
+<span class="lineNum">     252 </span><span class="lineCov">   28386807 : void DataChunk::Verify() {</span>
 <span class="lineNum">     253 </span>            :         // verify that all vectors in this chunk have the chunk selection vector
-<span class="lineNum">     254 </span><span class="lineCov">   28386664 :         sel_t *v = sel_vector;</span>
-<span class="lineNum">     255 </span><span class="lineCov">  113768016 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">     256 </span><span class="lineCov">   85377327 :                 assert(data[i].sel_vector == v);</span>
-<span class="lineNum">     257 </span><span class="lineCov">   85377149 :                 data[i].Verify();</span>
+<span class="lineNum">     254 </span><span class="lineCov">   28386807 :         sel_t *v = sel_vector;</span>
+<span class="lineNum">     255 </span><span class="lineCov">  113765219 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">   85375534 :                 assert(data[i].sel_vector == v);</span>
+<span class="lineNum">     257 </span><span class="lineCov">   85373410 :                 data[i].Verify();</span>
 <span class="lineNum">     258 </span>            :         }
 <span class="lineNum">     259 </span>            :         // verify that all vectors in the chunk have the same count
-<span class="lineNum">     260 </span><span class="lineCov">  113777689 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
-<span class="lineNum">     261 </span><span class="lineCov">   85383600 :                 assert(size() == data[i].count);</span>
+<span class="lineNum">     260 </span><span class="lineCov">  113771861 :         for (size_t i = 0; i &lt; column_count; i++) {</span>
+<span class="lineNum">     261 </span><span class="lineCov">   85379320 :                 assert(size() == data[i].count);</span>
 <span class="lineNum">     262 </span>            :         }
-<span class="lineNum">     263 </span><span class="lineCov">   28394089 : }</span>
+<span class="lineNum">     263 </span><span class="lineCov">   28392541 : }</span>
 <span class="lineNum">     264 </span>            : #endif
 </pre>
       </td>

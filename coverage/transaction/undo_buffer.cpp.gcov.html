@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 14e35034 - transaction/undo_buffer.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 030c93af - transaction/undo_buffer.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
+            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">136</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 12:37:37</td>
+            <td class="headerValue">2018-12-05 13:16:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -75,17 +75,17 @@
 <span class="lineNum">      13 </span>            : using namespace duckdb;
 <a name="14"><span class="lineNum">      14 </span>            : using namespace std;</a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">   31637150 : uint8_t *UndoBuffer::CreateEntry(UndoFlags type, size_t len) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">   31637150 :         UndoEntry entry;</span>
-<span class="lineNum">      18 </span><span class="lineCov">   31636865 :         entry.type = type;</span>
-<span class="lineNum">      19 </span><span class="lineCov">   31636865 :         entry.length = len;</span>
-<span class="lineNum">      20 </span><span class="lineCov">   31636865 :         auto dataptr = new uint8_t[len];</span>
-<span class="lineNum">      21 </span><span class="lineCov">   31640147 :         entry.data = unique_ptr&lt;uint8_t[]&gt;(dataptr);</span>
-<span class="lineNum">      22 </span><span class="lineCov">   31637326 :         entries.push_back(move(entry));</span>
-<span class="lineNum">      23 </span><span class="lineCov">   63279654 :         return dataptr;</span>
+<span class="lineNum">      16 </span><span class="lineCov">   31637237 : uint8_t *UndoBuffer::CreateEntry(UndoFlags type, size_t len) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">   31637237 :         UndoEntry entry;</span>
+<span class="lineNum">      18 </span><span class="lineCov">   31636855 :         entry.type = type;</span>
+<span class="lineNum">      19 </span><span class="lineCov">   31636855 :         entry.length = len;</span>
+<span class="lineNum">      20 </span><span class="lineCov">   31636855 :         auto dataptr = new uint8_t[len];</span>
+<span class="lineNum">      21 </span><span class="lineCov">   31640170 :         entry.data = unique_ptr&lt;uint8_t[]&gt;(dataptr);</span>
+<span class="lineNum">      22 </span><span class="lineCov">   31637782 :         entries.push_back(move(entry));</span>
+<span class="lineNum">      23 </span><span class="lineCov">   63279695 :         return dataptr;</span>
 <a name="24"><span class="lineNum">      24 </span>            : }</a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">    3040327 : void UndoBuffer::Cleanup() {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    3040382 : void UndoBuffer::Cleanup() {</span>
 <span class="lineNum">      27 </span>            :         // garbage collect everything in the Undo Chunk
 <span class="lineNum">      28 </span>            :         // this should only happen if
 <span class="lineNum">      29 </span>            :         //  (1) the transaction this UndoBuffer belongs to has successfully
@@ -94,26 +94,26 @@
 <span class="lineNum">      32 </span>            :         //      the chunks)
 <span class="lineNum">      33 </span>            :         //  (2) there is no active transaction with start_id &lt; commit_id of this
 <span class="lineNum">      34 </span>            :         //  transaction
-<span class="lineNum">      35 </span><span class="lineCov">   34601522 :         for (auto &amp;entry : entries) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">   31561195 :                 if (entry.type == UndoFlags::CATALOG_ENTRY) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">       6184 :                         CatalogEntry *catalog_entry = *((CatalogEntry **)entry.data.get());</span>
+<span class="lineNum">      35 </span><span class="lineCov">   34601547 :         for (auto &amp;entry : entries) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">   31561165 :                 if (entry.type == UndoFlags::CATALOG_ENTRY) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">       6160 :                         CatalogEntry *catalog_entry = *((CatalogEntry **)entry.data.get());</span>
 <span class="lineNum">      38 </span>            :                         // destroy the backed up entry: it is no longer required
-<span class="lineNum">      39 </span><span class="lineCov">       6184 :                         assert(catalog_entry-&gt;parent);</span>
-<span class="lineNum">      40 </span><span class="lineCov">       6184 :                         if (catalog_entry-&gt;parent-&gt;type != CatalogType::UPDATED_ENTRY) {</span>
-<span class="lineNum">      41 </span><span class="lineCov">       6184 :                                 catalog_entry-&gt;parent-&gt;child = move(catalog_entry-&gt;child);</span>
+<span class="lineNum">      39 </span><span class="lineCov">       6160 :                         assert(catalog_entry-&gt;parent);</span>
+<span class="lineNum">      40 </span><span class="lineCov">       6160 :                         if (catalog_entry-&gt;parent-&gt;type != CatalogType::UPDATED_ENTRY) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">       6160 :                                 catalog_entry-&gt;parent-&gt;child = move(catalog_entry-&gt;child);</span>
 <span class="lineNum">      42 </span>            :                         }
-<span class="lineNum">      43 </span><span class="lineCov">   31555011 :                 } else if (entry.type == UndoFlags::TUPLE_ENTRY) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">   31555005 :                 } else if (entry.type == UndoFlags::TUPLE_ENTRY) {</span>
 <span class="lineNum">      44 </span>            :                         // undo this entry
-<span class="lineNum">      45 </span><span class="lineCov">   31509962 :                         auto info = (VersionInformation *)entry.data.get();</span>
-<span class="lineNum">      46 </span><span class="lineCov">   31509962 :                         if (info-&gt;chunk) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">   31509956 :                         auto info = (VersionInformation *)entry.data.get();</span>
+<span class="lineNum">      46 </span><span class="lineCov">   31509956 :                         if (info-&gt;chunk) {</span>
 <span class="lineNum">      47 </span>            :                                 // parent refers to a storage chunk
-<span class="lineNum">      48 </span><span class="lineCov">   31468018 :                                 info-&gt;chunk-&gt;Cleanup(info);</span>
+<span class="lineNum">      48 </span><span class="lineCov">   31468004 :                                 info-&gt;chunk-&gt;Cleanup(info);</span>
 <span class="lineNum">      49 </span>            :                         } else {
 <span class="lineNum">      50 </span>            :                                 // parent refers to another entry in UndoBuffer
 <span class="lineNum">      51 </span>            :                                 // simply remove this entry from the list
-<span class="lineNum">      52 </span><span class="lineCov">      41944 :                                 auto parent = info-&gt;prev.pointer;</span>
-<span class="lineNum">      53 </span><span class="lineCov">      41944 :                                 parent-&gt;next = info-&gt;next;</span>
-<span class="lineNum">      54 </span><span class="lineCov">      41944 :                                 if (parent-&gt;next) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">      41952 :                                 auto parent = info-&gt;prev.pointer;</span>
+<span class="lineNum">      53 </span><span class="lineCov">      41952 :                                 parent-&gt;next = info-&gt;next;</span>
+<span class="lineNum">      54 </span><span class="lineCov">      41952 :                                 if (parent-&gt;next) {</span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :                                         parent-&gt;next-&gt;prev.pointer = parent;</span>
 <span class="lineNum">      56 </span>            :                                 }
 <span class="lineNum">      57 </span>            :                         }
@@ -121,11 +121,11 @@
 <span class="lineNum">      59 </span><span class="lineCov">      45049 :                         assert(entry.type == UndoFlags::EMPTY_ENTRY || entry.type == UndoFlags::QUERY);</span>
 <span class="lineNum">      60 </span>            :                 }
 <span class="lineNum">      61 </span>            :         }
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">    3040327 : }</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">    3040382 : }</span></a>
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">       6184 : static void WriteCatalogEntry(WriteAheadLog *log, CatalogEntry *entry) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">       6184 :         if (!log) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">       6160 :                 return;</span>
+<span class="lineNum">      64 </span><span class="lineCov">       6160 : static void WriteCatalogEntry(WriteAheadLog *log, CatalogEntry *entry) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">       6160 :         if (!log) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">       6136 :                 return;</span>
 <span class="lineNum">      67 </span>            :         }
 <span class="lineNum">      68 </span>            : 
 <span class="lineNum">      69 </span>            :         // look at the type of the parent entry
@@ -175,10 +175,10 @@
 <span class="lineNum">     113 </span><span class="lineCov">         11 :         appends.clear();</span>
 <a name="114"><span class="lineNum">     114 </span>            : }</a>
 <span class="lineNum">     115 </span>            : 
-<span class="lineNum">     116 </span><span class="lineCov">   31509962 : static void WriteTuple(WriteAheadLog *log, VersionInformation *entry,</span>
+<span class="lineNum">     116 </span><span class="lineCov">   31509956 : static void WriteTuple(WriteAheadLog *log, VersionInformation *entry,</span>
 <span class="lineNum">     117 </span>            :                        unordered_map&lt;DataTable *, unique_ptr&lt;DataChunk&gt;&gt; &amp;appends) {
-<span class="lineNum">     118 </span><span class="lineCov">   31509962 :         if (!log) {</span>
-<span class="lineNum">     119 </span><span class="lineCov">   30642337 :                 return;</span>
+<span class="lineNum">     118 </span><span class="lineCov">   31509956 :         if (!log) {</span>
+<span class="lineNum">     119 </span><span class="lineCov">   30642331 :                 return;</span>
 <span class="lineNum">     120 </span>            :         }
 <span class="lineNum">     121 </span>            :         // we only insert tuples of insertions into the WAL
 <span class="lineNum">     122 </span>            :         // for deletions and updates we instead write the queries
@@ -251,25 +251,25 @@
 <span class="lineNum">     189 </span>            :         }
 <a name="190"><span class="lineNum">     190 </span>            : }</a>
 <span class="lineNum">     191 </span>            : 
-<span class="lineNum">     192 </span><span class="lineCov">    3040327 : void UndoBuffer::Commit(WriteAheadLog *log, transaction_t commit_id) {</span>
+<span class="lineNum">     192 </span><span class="lineCov">    3040382 : void UndoBuffer::Commit(WriteAheadLog *log, transaction_t commit_id) {</span>
 <span class="lineNum">     193 </span>            :         // the list of appends committed by this transaction for each table
-<span class="lineNum">     194 </span><span class="lineCov">    6080654 :         unordered_map&lt;DataTable *, unique_ptr&lt;DataChunk&gt;&gt; appends;</span>
-<span class="lineNum">     195 </span><span class="lineCov">   34601522 :         for (auto &amp;entry : entries) {</span>
-<span class="lineNum">     196 </span><span class="lineCov">   31561195 :                 if (entry.type == UndoFlags::CATALOG_ENTRY) {</span>
+<span class="lineNum">     194 </span><span class="lineCov">    6080764 :         unordered_map&lt;DataTable *, unique_ptr&lt;DataChunk&gt;&gt; appends;</span>
+<span class="lineNum">     195 </span><span class="lineCov">   34601547 :         for (auto &amp;entry : entries) {</span>
+<span class="lineNum">     196 </span><span class="lineCov">   31561165 :                 if (entry.type == UndoFlags::CATALOG_ENTRY) {</span>
 <span class="lineNum">     197 </span>            :                         // set the commit timestamp of the catalog entry to the given id
-<span class="lineNum">     198 </span><span class="lineCov">       6184 :                         CatalogEntry *catalog_entry = *((CatalogEntry **)entry.data.get());</span>
-<span class="lineNum">     199 </span><span class="lineCov">       6184 :                         assert(catalog_entry-&gt;parent);</span>
-<span class="lineNum">     200 </span><span class="lineCov">       6184 :                         catalog_entry-&gt;parent-&gt;timestamp = commit_id;</span>
+<span class="lineNum">     198 </span><span class="lineCov">       6160 :                         CatalogEntry *catalog_entry = *((CatalogEntry **)entry.data.get());</span>
+<span class="lineNum">     199 </span><span class="lineCov">       6160 :                         assert(catalog_entry-&gt;parent);</span>
+<span class="lineNum">     200 </span><span class="lineCov">       6160 :                         catalog_entry-&gt;parent-&gt;timestamp = commit_id;</span>
 <span class="lineNum">     201 </span>            : 
 <span class="lineNum">     202 </span>            :                         // push the catalog update to the WAL
-<span class="lineNum">     203 </span><span class="lineCov">       6184 :                         WriteCatalogEntry(log, catalog_entry);</span>
-<span class="lineNum">     204 </span><span class="lineCov">   31555011 :                 } else if (entry.type == UndoFlags::TUPLE_ENTRY) {</span>
+<span class="lineNum">     203 </span><span class="lineCov">       6160 :                         WriteCatalogEntry(log, catalog_entry);</span>
+<span class="lineNum">     204 </span><span class="lineCov">   31555005 :                 } else if (entry.type == UndoFlags::TUPLE_ENTRY) {</span>
 <span class="lineNum">     205 </span>            :                         // set the commit timestamp of the entry
-<span class="lineNum">     206 </span><span class="lineCov">   31509962 :                         auto info = (VersionInformation *)entry.data.get();</span>
-<span class="lineNum">     207 </span><span class="lineCov">   31509962 :                         info-&gt;version_number = commit_id;</span>
+<span class="lineNum">     206 </span><span class="lineCov">   31509956 :                         auto info = (VersionInformation *)entry.data.get();</span>
+<span class="lineNum">     207 </span><span class="lineCov">   31509956 :                         info-&gt;version_number = commit_id;</span>
 <span class="lineNum">     208 </span>            : 
 <span class="lineNum">     209 </span>            :                         // push the tuple update to the WAL
-<span class="lineNum">     210 </span><span class="lineCov">   31509962 :                         WriteTuple(log, info, appends);</span>
+<span class="lineNum">     210 </span><span class="lineCov">   31509956 :                         WriteTuple(log, info, appends);</span>
 <span class="lineNum">     211 </span><span class="lineCov">      45049 :                 } else if (entry.type == UndoFlags::QUERY) {</span>
 <span class="lineNum">     212 </span><span class="lineCov">     135147 :                         string query = string((char *)entry.data.get());</span>
 <span class="lineNum">     213 </span><span class="lineCov">      45049 :                         if (log) {</span>
@@ -282,12 +282,12 @@
 <span class="lineNum">     220 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;UndoBuffer - don't know how to commit this type!&quot;);</span>
 <span class="lineNum">     221 </span>            :                 }
 <span class="lineNum">     222 </span>            :         }
-<span class="lineNum">     223 </span><span class="lineCov">    3040327 :         if (log) {</span>
+<span class="lineNum">     223 </span><span class="lineCov">    3040382 :         if (log) {</span>
 <span class="lineNum">     224 </span><span class="lineCov">         40 :                 FlushAppends(log, appends);</span>
 <span class="lineNum">     225 </span>            :                 // flush the WAL
 <span class="lineNum">     226 </span><span class="lineCov">         40 :                 log-&gt;Flush();</span>
 <span class="lineNum">     227 </span>            :         }
-<a name="228"><span class="lineNum">     228 </span><span class="lineCov">    3040327 : }</span></a>
+<a name="228"><span class="lineNum">     228 </span><span class="lineCov">    3040382 : }</span></a>
 <span class="lineNum">     229 </span>            : 
 <span class="lineNum">     230 </span><span class="lineCov">      10096 : void UndoBuffer::Rollback() {</span>
 <span class="lineNum">     231 </span><span class="lineCov">      90242 :         for (size_t i = entries.size(); i &gt; 0; i--) {</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 14e35034 - catalog/catalog.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 030c93af - catalog/catalog.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
+            <td class="headerValue">DuckDB Code Coverage Report 030c93af</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">50</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 12:37:37</td>
+            <td class="headerValue">2018-12-05 13:16:06</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
@@ -69,17 +69,17 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">        450 : Catalog::Catalog(StorageManager &amp;storage) : storage(storage) {</span>
-<a name="11"><span class="lineNum">      11 </span><span class="lineCov">        450 : }</span></a>
+<span class="lineNum">      10 </span><span class="lineCov">        448 : Catalog::Catalog(StorageManager &amp;storage) : storage(storage) {</span>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">        448 : }</span></a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">        460 : void Catalog::CreateSchema(Transaction &amp;transaction, CreateSchemaInformation *info) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">        920 :         auto entry = make_unique_base&lt;CatalogEntry, SchemaCatalogEntry&gt;(this, info-&gt;schema);</span>
-<span class="lineNum">      15 </span><span class="lineCov">        460 :         if (!schemas.CreateEntry(transaction, info-&gt;schema, move(entry))) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">        458 : void Catalog::CreateSchema(Transaction &amp;transaction, CreateSchemaInformation *info) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">        916 :         auto entry = make_unique_base&lt;CatalogEntry, SchemaCatalogEntry&gt;(this, info-&gt;schema);</span>
+<span class="lineNum">      15 </span><span class="lineCov">        458 :         if (!schemas.CreateEntry(transaction, info-&gt;schema, move(entry))) {</span>
 <span class="lineNum">      16 </span><span class="lineCov">          2 :                 if (!info-&gt;if_not_exists) {</span>
 <span class="lineNum">      17 </span><span class="lineCov">          1 :                         throw CatalogException(&quot;Schema with name %s already exists!&quot;, info-&gt;schema.c_str());</span>
 <span class="lineNum">      18 </span>            :                 }
 <span class="lineNum">      19 </span>            :         }
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">        459 : }</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">        457 : }</span></a>
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span><span class="lineCov">          9 : void Catalog::DropSchema(Transaction &amp;transaction, DropSchemaInformation *info) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">          9 :         if (!schemas.DropEntry(transaction, info-&gt;schema, info-&gt;cascade)) {</span>
@@ -93,12 +93,12 @@
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :         return schemas.EntryExists(transaction, name);</span>
 <a name="32"><span class="lineNum">      32 </span>            : }</a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">    5447717 : SchemaCatalogEntry *Catalog::GetSchema(Transaction &amp;transaction, const string &amp;schema_name) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">    5447717 :         auto entry = schemas.GetEntry(transaction, schema_name);</span>
-<span class="lineNum">      36 </span><span class="lineCov">    5455980 :         if (!entry) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">          8 :                 throw CatalogException(&quot;Schema with name %s does not exist!&quot;, schema_name.c_str());</span>
+<span class="lineNum">      34 </span><span class="lineCov">    5447912 : SchemaCatalogEntry *Catalog::GetSchema(Transaction &amp;transaction, const string &amp;schema_name) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    5447912 :         auto entry = schemas.GetEntry(transaction, schema_name);</span>
+<span class="lineNum">      36 </span><span class="lineCov">    5456065 :         if (!entry) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">          5 :                 throw CatalogException(&quot;Schema with name %s does not exist!&quot;, schema_name.c_str());</span>
 <span class="lineNum">      38 </span>            :         }
-<span class="lineNum">      39 </span><span class="lineCov">    5455972 :         return (SchemaCatalogEntry *)entry;</span>
+<span class="lineNum">      39 </span><span class="lineCov">    5456060 :         return (SchemaCatalogEntry *)entry;</span>
 <a name="40"><span class="lineNum">      40 </span>            : }</a>
 <span class="lineNum">      41 </span>            : 
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 : bool Catalog::TableExists(Transaction &amp;transaction, const string &amp;schema_name, const string &amp;table_name) {</span>
@@ -125,25 +125,25 @@
 <span class="lineNum">      63 </span><span class="lineCov">          7 :         schema-&gt;AlterTable(transaction, info);</span>
 <a name="64"><span class="lineNum">      64 </span><span class="lineCov">          5 : }</span></a>
 <span class="lineNum">      65 </span>            : 
-<span class="lineNum">      66 </span><span class="lineCov">    5439992 : TableCatalogEntry *Catalog::GetTable(Transaction &amp;transaction, const string &amp;schema_name, const string &amp;table_name) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">    5439992 :         auto schema = GetSchema(transaction, schema_name);</span>
-<span class="lineNum">      68 </span><span class="lineCov">    5448082 :         return schema-&gt;GetTable(transaction, table_name);</span>
+<span class="lineNum">      66 </span><span class="lineCov">    5440255 : TableCatalogEntry *Catalog::GetTable(Transaction &amp;transaction, const string &amp;schema_name, const string &amp;table_name) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">    5440255 :         auto schema = GetSchema(transaction, schema_name);</span>
+<span class="lineNum">      68 </span><span class="lineCov">    5448190 :         return schema-&gt;GetTable(transaction, table_name);</span>
 <a name="69"><span class="lineNum">      69 </span>            : }</a>
 <span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">        900 : void Catalog::CreateTableFunction(Transaction &amp;transaction, CreateTableFunctionInformation *info) {</span>
-<span class="lineNum">      72 </span><span class="lineCov">        900 :         auto schema = GetSchema(transaction, info-&gt;schema);</span>
-<span class="lineNum">      73 </span><span class="lineCov">        900 :         schema-&gt;CreateTableFunction(transaction, info);</span>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">        900 : }</span></a>
+<span class="lineNum">      71 </span><span class="lineCov">        896 : void Catalog::CreateTableFunction(Transaction &amp;transaction, CreateTableFunctionInformation *info) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">        896 :         auto schema = GetSchema(transaction, info-&gt;schema);</span>
+<span class="lineNum">      73 </span><span class="lineCov">        896 :         schema-&gt;CreateTableFunction(transaction, info);</span>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">        896 : }</span></a>
 <span class="lineNum">      75 </span>            : 
 <span class="lineNum">      76 </span><span class="lineCov">         19 : TableFunctionCatalogEntry *Catalog::GetTableFunction(Transaction &amp;transaction, FunctionExpression *expression) {</span>
 <span class="lineNum">      77 </span><span class="lineCov">         19 :         auto schema = GetSchema(transaction, expression-&gt;schema);</span>
 <span class="lineNum">      78 </span><span class="lineCov">         19 :         return schema-&gt;GetTableFunction(transaction, expression);</span>
 <a name="79"><span class="lineNum">      79 </span>            : }</a>
 <span class="lineNum">      80 </span>            : 
-<span class="lineNum">      81 </span><span class="lineCov">       3600 : void Catalog::CreateScalarFunction(Transaction &amp;transaction, CreateScalarFunctionInformation *info) {</span>
-<span class="lineNum">      82 </span><span class="lineCov">       3600 :         auto schema = GetSchema(transaction, info-&gt;schema);</span>
-<span class="lineNum">      83 </span><span class="lineCov">       3600 :         schema-&gt;CreateScalarFunction(transaction, info);</span>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">       3600 : }</span></a>
+<span class="lineNum">      81 </span><span class="lineCov">       3584 : void Catalog::CreateScalarFunction(Transaction &amp;transaction, CreateScalarFunctionInformation *info) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">       3584 :         auto schema = GetSchema(transaction, info-&gt;schema);</span>
+<span class="lineNum">      83 </span><span class="lineCov">       3584 :         schema-&gt;CreateScalarFunction(transaction, info);</span>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">       3584 : }</span></a>
 <span class="lineNum">      85 </span>            : 
 <span class="lineNum">      86 </span><span class="lineCov">       2141 : ScalarFunctionCatalogEntry *Catalog::GetScalarFunction(Transaction &amp;transaction, const string &amp;schema_name,</span>
 <span class="lineNum">      87 </span>            :                                                        const string &amp;name) {
