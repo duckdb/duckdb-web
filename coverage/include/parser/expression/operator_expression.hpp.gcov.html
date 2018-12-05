@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - include/parser/expression/operator_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - include/parser/expression/operator_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">9</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -79,15 +79,15 @@
 <span class="lineNum">      17 </span>            : public:
 <a name="18"><span class="lineNum">      18 </span><span class="lineCov">        590 :         OperatorExpression(ExpressionType type, TypeId type_id = TypeId::INVALID) : Expression(type, type_id) {</span></a>
 <span class="lineNum">      19 </span><span class="lineCov">        590 :         }</span>
-<span class="lineNum">      20 </span><span class="lineCov">    7751328 :         OperatorExpression(ExpressionType type, TypeId type_id, unique_ptr&lt;Expression&gt; left,</span>
+<span class="lineNum">      20 </span><span class="lineCov">    7751305 :         OperatorExpression(ExpressionType type, TypeId type_id, unique_ptr&lt;Expression&gt; left,</span>
 <span class="lineNum">      21 </span>            :                            unique_ptr&lt;Expression&gt; right = nullptr)
-<span class="lineNum">      22 </span><span class="lineCov">    7751328 :             : Expression(type, type_id, std::move(left), std::move(right)) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">    7751908 :         }</span>
+<span class="lineNum">      22 </span><span class="lineCov">    7751305 :             : Expression(type, type_id, std::move(left), std::move(right)) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">    7753606 :         }</span>
 <span class="lineNum">      24 </span>            : 
 <a name="25"><span class="lineNum">      25 </span>            :         void ResolveType() override;</a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">   36185243 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">   36185243 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">   36184185 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">   36184185 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span><span class="lineCov">         24 :         ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      31 </span><span class="lineCov">         24 :                 return ExpressionClass::OPERATOR;</span>

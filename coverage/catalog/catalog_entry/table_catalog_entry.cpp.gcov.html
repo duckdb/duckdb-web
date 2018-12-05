@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - catalog/catalog_entry/table_catalog_entry.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - catalog/catalog_entry/table_catalog_entry.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">83</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -72,27 +72,27 @@
 <span class="lineNum">      10 </span>            : using namespace duckdb;
 <a name="11"><span class="lineNum">      11 </span>            : using namespace std;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">       1209 : void TableCatalogEntry::Initialize(CreateTableInformation *info) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">      35592 :         for (auto entry : info-&gt;columns) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">      34383 :                 if (ColumnExists(entry.name)) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">       1211 : void TableCatalogEntry::Initialize(CreateTableInformation *info) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      35596 :         for (auto entry : info-&gt;columns) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">      34385 :                 if (ColumnExists(entry.name)) {</span>
 <span class="lineNum">      16 </span><span class="lineCov">          1 :                         throw CatalogException(&quot;Column with name %s already exists!&quot;, entry.name.c_str());</span>
 <span class="lineNum">      17 </span>            :                 }
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">      34382 :                 column_t oid = columns.size();</span>
-<span class="lineNum">      20 </span><span class="lineCov">      34382 :                 name_map[entry.name] = oid;</span>
-<span class="lineNum">      21 </span><span class="lineCov">      34382 :                 entry.oid = oid;</span>
-<span class="lineNum">      22 </span><span class="lineCov">      34382 :                 columns.push_back(entry);</span>
+<span class="lineNum">      19 </span><span class="lineCov">      34384 :                 column_t oid = columns.size();</span>
+<span class="lineNum">      20 </span><span class="lineCov">      34384 :                 name_map[entry.name] = oid;</span>
+<span class="lineNum">      21 </span><span class="lineCov">      34384 :                 entry.oid = oid;</span>
+<span class="lineNum">      22 </span><span class="lineCov">      34384 :                 columns.push_back(entry);</span>
 <span class="lineNum">      23 </span>            :         }
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       1208 : }</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       1210 : }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">       1203 : TableCatalogEntry::TableCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateTableInformation *info)</span>
-<span class="lineNum">      27 </span><span class="lineCov">       1203 :     : CatalogEntry(CatalogType::TABLE, catalog, info-&gt;table), schema(schema) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">       1203 :         Initialize(info);</span>
-<span class="lineNum">      29 </span><span class="lineCov">       1203 :         storage = make_shared&lt;DataTable&gt;(catalog-&gt;storage, schema-&gt;name, name, GetTypes());</span>
+<span class="lineNum">      26 </span><span class="lineCov">       1205 : TableCatalogEntry::TableCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateTableInformation *info)</span>
+<span class="lineNum">      27 </span><span class="lineCov">       1205 :     : CatalogEntry(CatalogType::TABLE, catalog, info-&gt;table), schema(schema) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">       1205 :         Initialize(info);</span>
+<span class="lineNum">      29 </span><span class="lineCov">       1205 :         storage = make_shared&lt;DataTable&gt;(catalog-&gt;storage, schema-&gt;name, name, GetTypes());</span>
 <span class="lineNum">      30 </span>            :         // resolve the constraints
 <span class="lineNum">      31 </span>            :         // we have to parse the DUMMY constraints and initialize the indices
-<span class="lineNum">      32 </span><span class="lineCov">       1203 :         bool has_primary_key = false;</span>
-<span class="lineNum">      33 </span><span class="lineCov">       1321 :         for (auto &amp;constraint : info-&gt;constraints) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">       1205 :         bool has_primary_key = false;</span>
+<span class="lineNum">      33 </span><span class="lineCov">       1323 :         for (auto &amp;constraint : info-&gt;constraints) {</span>
 <span class="lineNum">      34 </span><span class="lineCov">        118 :                 if (constraint-&gt;type == ConstraintType::DUMMY) {</span>
 <span class="lineNum">      35 </span>            :                         // have to resolve columns
 <span class="lineNum">      36 </span><span class="lineCov">         19 :                         auto c = (ParsedConstraint *)constraint.get();</span>
@@ -135,7 +135,7 @@
 <span class="lineNum">      73 </span>            :                 }
 <span class="lineNum">      74 </span><span class="lineCov">        118 :                 constraints.push_back(move(constraint));</span>
 <span class="lineNum">      75 </span>            :         }
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">       1203 : }</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">       1205 : }</span></a>
 <span class="lineNum">      77 </span>            : 
 <span class="lineNum">      78 </span><span class="lineCov">          6 : TableCatalogEntry::TableCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateTableInformation *info,</span>
 <span class="lineNum">      79 </span><span class="lineCov">          6 :                                      shared_ptr&lt;DataTable&gt; storage)</span>
@@ -147,8 +147,8 @@
 <span class="lineNum">      85 </span>            :         }
 <a name="86"><span class="lineNum">      86 </span><span class="lineCov">          5 : }</span></a>
 <span class="lineNum">      87 </span>            : 
-<span class="lineNum">      88 </span><span class="lineCov">   13984866 : bool TableCatalogEntry::ColumnExists(const string &amp;name) {</span>
-<span class="lineNum">      89 </span><span class="lineCov">   13984866 :         return name_map.find(name) != name_map.end();</span>
+<span class="lineNum">      88 </span><span class="lineCov">   13984688 : bool TableCatalogEntry::ColumnExists(const string &amp;name) {</span>
+<span class="lineNum">      89 </span><span class="lineCov">   13984688 :         return name_map.find(name) != name_map.end();</span>
 <a name="90"><span class="lineNum">      90 </span>            : }</a>
 <span class="lineNum">      91 </span>            : 
 <span class="lineNum">      92 </span><span class="lineCov">          7 : unique_ptr&lt;CatalogEntry&gt; TableCatalogEntry::AlterEntry(AlterInformation *info) {</span>
@@ -185,35 +185,35 @@
 <span class="lineNum">     123 </span>            :         }
 <a name="124"><span class="lineNum">     124 </span>            : }</a>
 <span class="lineNum">     125 </span>            : 
-<span class="lineNum">     126 </span><span class="lineCov">    5043145 : ColumnDefinition &amp;TableCatalogEntry::GetColumn(const string &amp;name) {</span>
-<span class="lineNum">     127 </span><span class="lineCov">    5043145 :         if (!ColumnExists(name)) {</span>
+<span class="lineNum">     126 </span><span class="lineCov">    5043710 : ColumnDefinition &amp;TableCatalogEntry::GetColumn(const string &amp;name) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">    5043710 :         if (!ColumnExists(name)) {</span>
 <span class="lineNum">     128 </span><span class="lineNoCov">          0 :                 throw CatalogException(&quot;Column with name %s does not exist!&quot;, name.c_str());</span>
 <span class="lineNum">     129 </span>            :         }
-<span class="lineNum">     130 </span><span class="lineCov">    5051530 :         return columns[name_map[name]];</span>
+<span class="lineNum">     130 </span><span class="lineCov">    5051759 :         return columns[name_map[name]];</span>
 <a name="131"><span class="lineNum">     131 </span>            : }</a>
 <span class="lineNum">     132 </span>            : 
-<span class="lineNum">     133 </span><span class="lineCov">    4961660 : ColumnStatistics &amp;TableCatalogEntry::GetStatistics(column_t oid) {</span>
-<span class="lineNum">     134 </span><span class="lineCov">    4961660 :         return storage-&gt;GetStatistics(oid);</span>
+<span class="lineNum">     133 </span><span class="lineCov">    4961652 : ColumnStatistics &amp;TableCatalogEntry::GetStatistics(column_t oid) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">    4961652 :         return storage-&gt;GetStatistics(oid);</span>
 <a name="135"><span class="lineNum">     135 </span>            : }</a>
 <span class="lineNum">     136 </span>            : 
-<span class="lineNum">     137 </span><span class="lineCov">      37787 : vector&lt;TypeId&gt; TableCatalogEntry::GetTypes() {</span>
-<span class="lineNum">     138 </span><span class="lineCov">      37787 :         vector&lt;TypeId&gt; types;</span>
-<span class="lineNum">     139 </span><span class="lineCov">     166831 :         for (auto &amp;it : columns) {</span>
-<span class="lineNum">     140 </span><span class="lineCov">     129042 :                 types.push_back(it.type);</span>
+<span class="lineNum">     137 </span><span class="lineCov">      37809 : vector&lt;TypeId&gt; TableCatalogEntry::GetTypes() {</span>
+<span class="lineNum">     138 </span><span class="lineCov">      37809 :         vector&lt;TypeId&gt; types;</span>
+<span class="lineNum">     139 </span><span class="lineCov">     166876 :         for (auto &amp;it : columns) {</span>
+<span class="lineNum">     140 </span><span class="lineCov">     129066 :                 types.push_back(it.type);</span>
 <span class="lineNum">     141 </span>            :         }
-<span class="lineNum">     142 </span><span class="lineCov">      37788 :         return types;</span>
+<span class="lineNum">     142 </span><span class="lineCov">      37813 :         return types;</span>
 <a name="143"><span class="lineNum">     143 </span>            : }</a>
 <span class="lineNum">     144 </span>            : 
-<span class="lineNum">     145 </span><span class="lineCov">    3358356 : vector&lt;TypeId&gt; TableCatalogEntry::GetTypes(const vector&lt;column_t&gt; &amp;column_ids) {</span>
-<span class="lineNum">     146 </span><span class="lineCov">    3358356 :         vector&lt;TypeId&gt; result;</span>
-<span class="lineNum">     147 </span><span class="lineCov">    7763923 :         for (auto &amp;index : column_ids) {</span>
-<span class="lineNum">     148 </span><span class="lineCov">    4406879 :                 if (index == COLUMN_IDENTIFIER_ROW_ID) {</span>
-<span class="lineNum">     149 </span><span class="lineCov">     711955 :                         result.push_back(TypeId::POINTER);</span>
+<span class="lineNum">     145 </span><span class="lineCov">    3359010 : vector&lt;TypeId&gt; TableCatalogEntry::GetTypes(const vector&lt;column_t&gt; &amp;column_ids) {</span>
+<span class="lineNum">     146 </span><span class="lineCov">    3359010 :         vector&lt;TypeId&gt; result;</span>
+<span class="lineNum">     147 </span><span class="lineCov">    7764908 :         for (auto &amp;index : column_ids) {</span>
+<span class="lineNum">     148 </span><span class="lineCov">    4407454 :                 if (index == COLUMN_IDENTIFIER_ROW_ID) {</span>
+<span class="lineNum">     149 </span><span class="lineCov">     711941 :                         result.push_back(TypeId::POINTER);</span>
 <span class="lineNum">     150 </span>            :                 } else {
-<span class="lineNum">     151 </span><span class="lineCov">    3694924 :                         result.push_back(columns[index].type);</span>
+<span class="lineNum">     151 </span><span class="lineCov">    3695513 :                         result.push_back(columns[index].type);</span>
 <span class="lineNum">     152 </span>            :                 }
 <span class="lineNum">     153 </span>            :         }
-<span class="lineNum">     154 </span><span class="lineCov">    3361777 :         return result;</span>
+<span class="lineNum">     154 </span><span class="lineCov">    3362114 :         return result;</span>
 <span class="lineNum">     155 </span>            : }
 </pre>
       </td>

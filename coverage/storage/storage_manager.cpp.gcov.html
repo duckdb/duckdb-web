@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - storage/storage_manager.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - storage/storage_manager.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">21</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -72,32 +72,32 @@
 <span class="lineNum">      10 </span>            : using namespace duckdb;
 <a name="11"><span class="lineNum">      11 </span>            : using namespace std;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">        448 : StorageManager::StorageManager(DuckDB &amp;database, string path) : path(path), database(database), wal(database) {</span>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">        448 : }</span></a>
+<span class="lineNum">      13 </span><span class="lineCov">        450 : StorageManager::StorageManager(DuckDB &amp;database, string path) : path(path), database(database), wal(database) {</span>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">        450 : }</span></a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">        448 : void StorageManager::Initialize() {</span>
-<span class="lineNum">      17 </span><span class="lineCov">        448 :         bool in_memory = path.empty() || path == &quot;:memory:&quot;;</span>
+<span class="lineNum">      16 </span><span class="lineCov">        450 : void StorageManager::Initialize() {</span>
+<span class="lineNum">      17 </span><span class="lineCov">        450 :         bool in_memory = path.empty() || path == &quot;:memory:&quot;;</span>
 <span class="lineNum">      18 </span>            : 
 <span class="lineNum">      19 </span>            :         // first initialize the base system catalogs
 <span class="lineNum">      20 </span>            :         // these are never written to the WAL
-<span class="lineNum">      21 </span><span class="lineCov">        448 :         auto transaction = database.transaction_manager.StartTransaction();</span>
+<span class="lineNum">      21 </span><span class="lineCov">        450 :         auto transaction = database.transaction_manager.StartTransaction();</span>
 <span class="lineNum">      22 </span>            : 
 <span class="lineNum">      23 </span>            :         // create the default schema
-<span class="lineNum">      24 </span><span class="lineCov">        896 :         CreateSchemaInformation info;</span>
-<span class="lineNum">      25 </span><span class="lineCov">        448 :         info.schema = DEFAULT_SCHEMA;</span>
-<span class="lineNum">      26 </span><span class="lineCov">        448 :         database.catalog.CreateSchema(*transaction, &amp;info);</span>
+<span class="lineNum">      24 </span><span class="lineCov">        900 :         CreateSchemaInformation info;</span>
+<span class="lineNum">      25 </span><span class="lineCov">        450 :         info.schema = DEFAULT_SCHEMA;</span>
+<span class="lineNum">      26 </span><span class="lineCov">        450 :         database.catalog.CreateSchema(*transaction, &amp;info);</span>
 <span class="lineNum">      27 </span>            : 
 <span class="lineNum">      28 </span>            :         // initialize default functions
-<span class="lineNum">      29 </span><span class="lineCov">        448 :         BuiltinFunctions::Initialize(*transaction, database.catalog);</span>
+<span class="lineNum">      29 </span><span class="lineCov">        450 :         BuiltinFunctions::Initialize(*transaction, database.catalog);</span>
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span>            :         // commit transactions
-<span class="lineNum">      32 </span><span class="lineCov">        448 :         database.transaction_manager.CommitTransaction(transaction);</span>
+<span class="lineNum">      32 </span><span class="lineCov">        450 :         database.transaction_manager.CommitTransaction(transaction);</span>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">        448 :         if (!in_memory) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">        450 :         if (!in_memory) {</span>
 <span class="lineNum">      35 </span>            :                 // create or load the database from disk, if not in-memory mode
 <span class="lineNum">      36 </span><span class="lineCov">         18 :                 LoadDatabase(path);</span>
 <span class="lineNum">      37 </span>            :         }
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">        448 : }</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">        450 : }</span></a>
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span><span class="lineCov">         18 : void StorageManager::LoadDatabase(string &amp;path) {</span>
 <span class="lineNum">      41 </span>            :         // first check if the database exists

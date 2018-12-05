@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - parser/expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - parser/expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">97</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -68,14 +68,14 @@
 <span class="lineNum">       6 </span>            : using namespace duckdb;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">   77222623 : void Expression::AcceptChildren(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">  143849007 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">  133254073 :                 auto accept_res = children[i]-&gt;Accept(v);</span>
-<span class="lineNum">      12 </span><span class="lineCov">   66646389 :                 if (accept_res) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">   77222573 : void Expression::AcceptChildren(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">  143849816 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">  133253744 :                 auto accept_res = children[i]-&gt;Accept(v);</span>
+<span class="lineNum">      12 </span><span class="lineCov">   66645426 :                 if (accept_res) {</span>
 <span class="lineNum">      13 </span><span class="lineNoCov">          0 :                         children[i] = move(accept_res);</span>
 <span class="lineNum">      14 </span>            :                 }
 <span class="lineNum">      15 </span>            :         }
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">   77205321 : }</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">   77202722 : }</span></a>
 <span class="lineNum">      17 </span>            : 
 <span class="lineNum">      18 </span><span class="lineCov">   18145008 : bool Expression::IsAggregate() {</span>
 <span class="lineNum">      19 </span><span class="lineCov">   18145008 :         bool is_aggregate = false;</span>
@@ -93,11 +93,11 @@
 <span class="lineNum">      31 </span><span class="lineCov">     358329 :         return is_scalar;</span>
 <a name="32"><span class="lineNum">      32 </span>            : }</a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">    5941151 : void Expression::GetAggregates(vector&lt;AggregateExpression *&gt; &amp;expressions) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">   10303621 :         for (auto &amp;child : children) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">    4362470 :                 child-&gt;GetAggregates(expressions);</span>
+<span class="lineNum">      34 </span><span class="lineCov">    5941466 : void Expression::GetAggregates(vector&lt;AggregateExpression *&gt; &amp;expressions) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">   10304097 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">    4362631 :                 child-&gt;GetAggregates(expressions);</span>
 <span class="lineNum">      37 </span>            :         }
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    5941165 : }</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    5941496 : }</span></a>
 <span class="lineNum">      39 </span>            : 
 <span class="lineNum">      40 </span><span class="lineCov">         29 : bool Expression::HasSubquery() {</span>
 <span class="lineNum">      41 </span><span class="lineCov">         52 :         for (auto &amp;child : children) {</span>
@@ -108,22 +108,22 @@
 <span class="lineNum">      46 </span><span class="lineCov">         28 :         return false;</span>
 <a name="47"><span class="lineNum">      47 </span>            : }</a>
 <span class="lineNum">      48 </span>            : 
-<span class="lineNum">      49 </span><span class="lineCov">      83577 : bool Expression::Equals(const Expression *other) {</span>
-<span class="lineNum">      50 </span><span class="lineCov">      83577 :         if (!other) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">      83588 : bool Expression::Equals(const Expression *other) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">      83588 :         if (!other) {</span>
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">      52 </span>            :         }
-<span class="lineNum">      53 </span><span class="lineCov">      83577 :         if (this-&gt;type != other-&gt;type) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      43532 :                 return false;</span>
+<span class="lineNum">      53 </span><span class="lineCov">      83588 :         if (this-&gt;type != other-&gt;type) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      43533 :                 return false;</span>
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">      40045 :         if (children.size() != other-&gt;children.size()) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">      40055 :         if (children.size() != other-&gt;children.size()) {</span>
 <span class="lineNum">      57 </span><span class="lineCov">        550 :                 return false;</span>
 <span class="lineNum">      58 </span>            :         }
-<span class="lineNum">      59 </span><span class="lineCov">      41940 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">      41950 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
 <span class="lineNum">      60 </span><span class="lineCov">      22351 :                 if (!children[i]-&gt;Equals(other-&gt;children[i].get())) {</span>
 <span class="lineNum">      61 </span><span class="lineCov">      19906 :                         return false;</span>
 <span class="lineNum">      62 </span>            :                 }
 <span class="lineNum">      63 </span>            :         }
-<span class="lineNum">      64 </span><span class="lineCov">      19589 :         return true;</span>
+<span class="lineNum">      64 </span><span class="lineCov">      19599 :         return true;</span>
 <a name="65"><span class="lineNum">      65 </span>            : }</a>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span><span class="lineCov">        249 : string Expression::ToString() const {</span>

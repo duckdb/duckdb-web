@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - optimizer/logical_rules/split_filter_conjunctions.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - optimizer/logical_rules/split_filter_conjunctions.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -66,17 +66,17 @@
 <span class="lineNum">       4 </span>            : using namespace duckdb;
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">    3128306 : SplitFilterConjunctionRule::SplitFilterConjunctionRule() {</span>
-<span class="lineNum">       8 </span><span class="lineCov">    3130100 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">    3128315 : }</span></a>
+<span class="lineNum">       7 </span><span class="lineCov">    3128468 : SplitFilterConjunctionRule::SplitFilterConjunctionRule() {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3130129 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">    3128417 : }</span></a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">     616550 : unique_ptr&lt;LogicalOperator&gt; SplitFilterConjunctionRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;root,</span>
+<span class="lineNum">      11 </span><span class="lineCov">     616541 : unique_ptr&lt;LogicalOperator&gt; SplitFilterConjunctionRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;root,</span>
 <span class="lineNum">      12 </span>            :                                                               vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
-<span class="lineNum">      13 </span><span class="lineCov">     616550 :         auto filter = (LogicalFilter *)bindings[0].value.op;</span>
-<span class="lineNum">      14 </span><span class="lineCov">     616537 :         if (filter-&gt;SplitPredicates()) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">     616541 :         auto filter = (LogicalFilter *)bindings[0].value.op;</span>
+<span class="lineNum">      14 </span><span class="lineCov">     616492 :         if (filter-&gt;SplitPredicates()) {</span>
 <span class="lineNum">      15 </span><span class="lineCov">         13 :                 fixed_point = false;</span>
 <span class="lineNum">      16 </span>            :         }
-<span class="lineNum">      17 </span><span class="lineCov">     617267 :         return nullptr;</span>
+<span class="lineNum">      17 </span><span class="lineCov">     618387 :         return nullptr;</span>
 <span class="lineNum">      18 </span>            : }
 </pre>
       </td>

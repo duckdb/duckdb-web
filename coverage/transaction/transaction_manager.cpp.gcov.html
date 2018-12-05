@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - transaction/transaction_manager.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - transaction/transaction_manager.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">61</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -75,58 +75,58 @@
 <span class="lineNum">      13 </span>            : transaction_t MAXIMUM_QUERY_ID = std::numeric_limits&lt;transaction_t&gt;::max(); // 2^64
 <a name="14"><span class="lineNum">      14 </span>            : } // namespace duckdb</a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">        448 : TransactionManager::TransactionManager(StorageManager &amp;storage) : storage(storage) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">        450 : TransactionManager::TransactionManager(StorageManager &amp;storage) : storage(storage) {</span>
 <span class="lineNum">      17 </span>            :         // start timestamp starts at zero
-<span class="lineNum">      18 </span><span class="lineCov">        448 :         current_start_timestamp = 0;</span>
+<span class="lineNum">      18 </span><span class="lineCov">        450 :         current_start_timestamp = 0;</span>
 <span class="lineNum">      19 </span>            :         // transaction ID starts very high:
 <span class="lineNum">      20 </span>            :         // it should be much higher than the current start timestamp
 <span class="lineNum">      21 </span>            :         // if transaction_id &lt; start_timestamp for any set of active transactions
 <span class="lineNum">      22 </span>            :         // uncommited data could be read by
-<span class="lineNum">      23 </span><span class="lineCov">        448 :         current_transaction_id = TRANSACTION_ID_START;</span>
+<span class="lineNum">      23 </span><span class="lineCov">        450 :         current_transaction_id = TRANSACTION_ID_START;</span>
 <span class="lineNum">      24 </span>            :         // the current active query id
-<span class="lineNum">      25 </span><span class="lineCov">        448 :         current_query_number = 1;</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        448 : }</span></a>
+<span class="lineNum">      25 </span><span class="lineCov">        450 :         current_query_number = 1;</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        450 : }</span></a>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">    3050236 : Transaction *TransactionManager::StartTransaction() {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3050422 : Transaction *TransactionManager::StartTransaction() {</span>
 <span class="lineNum">      29 </span>            :         // obtain the transaction lock during this function
-<span class="lineNum">      30 </span><span class="lineCov">    6100472 :         lock_guard&lt;mutex&gt; lock(transaction_lock);</span>
+<span class="lineNum">      30 </span><span class="lineCov">    6100845 :         lock_guard&lt;mutex&gt; lock(transaction_lock);</span>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">    3050236 :         if (current_start_timestamp &gt;= TRANSACTION_ID_START) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">    3050423 :         if (current_start_timestamp &gt;= TRANSACTION_ID_START) {</span>
 <span class="lineNum">      33 </span>            :                 throw Exception(&quot;Cannot start more transactions, ran out of &quot;
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :                                 &quot;transaction identifiers!&quot;);</span>
 <span class="lineNum">      35 </span>            :         }
 <span class="lineNum">      36 </span>            : 
 <span class="lineNum">      37 </span>            :         // obtain the start time and transaction ID of this transaction
-<span class="lineNum">      38 </span><span class="lineCov">    3050236 :         transaction_t start_time = current_start_timestamp++;</span>
-<span class="lineNum">      39 </span><span class="lineCov">    3050236 :         transaction_t transaction_id = current_transaction_id++;</span>
+<span class="lineNum">      38 </span><span class="lineCov">    3050423 :         transaction_t start_time = current_start_timestamp++;</span>
+<span class="lineNum">      39 </span><span class="lineCov">    3050423 :         transaction_t transaction_id = current_transaction_id++;</span>
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            :         // create the actual transaction
-<span class="lineNum">      42 </span><span class="lineCov">    3050236 :         auto transaction = make_unique&lt;Transaction&gt;(start_time, transaction_id);</span>
-<span class="lineNum">      43 </span><span class="lineCov">    3050236 :         auto transaction_ptr = transaction.get();</span>
+<span class="lineNum">      42 </span><span class="lineCov">    3050423 :         auto transaction = make_unique&lt;Transaction&gt;(start_time, transaction_id);</span>
+<span class="lineNum">      43 </span><span class="lineCov">    3050423 :         auto transaction_ptr = transaction.get();</span>
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span>            :         // store it in the set of active transactions
-<span class="lineNum">      46 </span><span class="lineCov">    3050236 :         active_transactions.push_back(move(transaction));</span>
-<span class="lineNum">      47 </span><span class="lineCov">    6100472 :         return transaction_ptr;</span>
+<span class="lineNum">      46 </span><span class="lineCov">    3050423 :         active_transactions.push_back(move(transaction));</span>
+<span class="lineNum">      47 </span><span class="lineCov">    6100846 :         return transaction_ptr;</span>
 <a name="48"><span class="lineNum">      48 </span>            : }</a>
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">    3040033 : void TransactionManager::CommitTransaction(Transaction *transaction) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">    3040220 : void TransactionManager::CommitTransaction(Transaction *transaction) {</span>
 <span class="lineNum">      51 </span>            :         // obtain the transaction lock during this function
-<span class="lineNum">      52 </span><span class="lineCov">    6080173 :         lock_guard&lt;mutex&gt; lock(transaction_lock);</span>
+<span class="lineNum">      52 </span><span class="lineCov">    6080547 :         lock_guard&lt;mutex&gt; lock(transaction_lock);</span>
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span>            :         // obtain a commit id for the transaction
-<span class="lineNum">      55 </span><span class="lineCov">    3040140 :         transaction_t commit_id = current_start_timestamp++;</span>
+<span class="lineNum">      55 </span><span class="lineCov">    3040327 :         transaction_t commit_id = current_start_timestamp++;</span>
 <span class="lineNum">      56 </span>            : 
 <span class="lineNum">      57 </span>            :         // commit the UndoBuffer of the transaction
-<span class="lineNum">      58 </span><span class="lineCov">    3040140 :         transaction-&gt;Commit(storage.GetWriteAheadLog(), commit_id);</span>
+<span class="lineNum">      58 </span><span class="lineCov">    3040327 :         transaction-&gt;Commit(storage.GetWriteAheadLog(), commit_id);</span>
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span>            :         // remove the transaction id from the list of active transactions
 <span class="lineNum">      61 </span>            :         // potentially resulting in garbage collection
-<span class="lineNum">      62 </span><span class="lineCov">    3040140 :         RemoveTransaction(transaction);</span>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">    3040140 : }</span></a>
+<span class="lineNum">      62 </span><span class="lineCov">    3040327 :         RemoveTransaction(transaction);</span>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">    3040327 : }</span></a>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">      10001 : void TransactionManager::RollbackTransaction(Transaction *transaction) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      10014 : void TransactionManager::RollbackTransaction(Transaction *transaction) {</span>
 <span class="lineNum">      66 </span>            :         // obtain the transaction lock during this function
-<span class="lineNum">      67 </span><span class="lineCov">      20097 :         lock_guard&lt;mutex&gt; lock(transaction_lock);</span>
+<span class="lineNum">      67 </span><span class="lineCov">      20110 :         lock_guard&lt;mutex&gt; lock(transaction_lock);</span>
 <span class="lineNum">      68 </span>            : 
 <span class="lineNum">      69 </span>            :         // rollback the transaction
 <span class="lineNum">      70 </span><span class="lineCov">      10096 :         transaction-&gt;Rollback();</span>
@@ -136,26 +136,26 @@
 <span class="lineNum">      74 </span><span class="lineCov">      10096 :         RemoveTransaction(transaction);</span>
 <a name="75"><span class="lineNum">      75 </span><span class="lineCov">      10096 : }</span></a>
 <span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span><span class="lineCov">    3050236 : void TransactionManager::RemoveTransaction(Transaction *transaction) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">    3050423 : void TransactionManager::RemoveTransaction(Transaction *transaction) {</span>
 <span class="lineNum">      78 </span>            :         // remove the transaction from the list of active transactions
-<span class="lineNum">      79 </span><span class="lineCov">    3050236 :         size_t t_index = active_transactions.size();</span>
+<span class="lineNum">      79 </span><span class="lineCov">    3050423 :         size_t t_index = active_transactions.size();</span>
 <span class="lineNum">      80 </span>            :         // check for the lowest and highest start time in the list of transactions
-<span class="lineNum">      81 </span><span class="lineCov">    3050236 :         transaction_t lowest_start_time = TRANSACTION_ID_START;</span>
-<span class="lineNum">      82 </span><span class="lineCov">    3050236 :         transaction_t lowest_active_query = MAXIMUM_QUERY_ID;</span>
-<span class="lineNum">      83 </span><span class="lineCov">    6619347 :         for (size_t i = 0; i &lt; active_transactions.size(); i++) {</span>
-<span class="lineNum">      84 </span><span class="lineCov">    3569111 :                 if (active_transactions[i].get() == transaction) {</span>
-<span class="lineNum">      85 </span><span class="lineCov">    3050236 :                         t_index = i;</span>
+<span class="lineNum">      81 </span><span class="lineCov">    3050423 :         transaction_t lowest_start_time = TRANSACTION_ID_START;</span>
+<span class="lineNum">      82 </span><span class="lineCov">    3050423 :         transaction_t lowest_active_query = MAXIMUM_QUERY_ID;</span>
+<span class="lineNum">      83 </span><span class="lineCov">    6621416 :         for (size_t i = 0; i &lt; active_transactions.size(); i++) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">    3570993 :                 if (active_transactions[i].get() == transaction) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">    3050423 :                         t_index = i;</span>
 <span class="lineNum">      86 </span>            :                 } else {
-<span class="lineNum">      87 </span><span class="lineCov">     518875 :                         lowest_start_time = std::min(lowest_start_time, active_transactions[i]-&gt;start_time);</span>
-<span class="lineNum">      88 </span><span class="lineCov">     518875 :                         lowest_active_query = std::min(lowest_active_query, active_transactions[i]-&gt;active_query);</span>
+<span class="lineNum">      87 </span><span class="lineCov">     520570 :                         lowest_start_time = std::min(lowest_start_time, active_transactions[i]-&gt;start_time);</span>
+<span class="lineNum">      88 </span><span class="lineCov">     520570 :                         lowest_active_query = std::min(lowest_active_query, active_transactions[i]-&gt;active_query);</span>
 <span class="lineNum">      89 </span>            :                 }
 <span class="lineNum">      90 </span>            :         }
-<span class="lineNum">      91 </span><span class="lineCov">    3050236 :         assert(t_index != active_transactions.size());</span>
-<span class="lineNum">      92 </span><span class="lineCov">    6100472 :         auto current_transaction = move(active_transactions[t_index]);</span>
-<span class="lineNum">      93 </span><span class="lineCov">    3050236 :         if (transaction-&gt;commit_id != 0) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">    3050423 :         assert(t_index != active_transactions.size());</span>
+<span class="lineNum">      92 </span><span class="lineCov">    6100846 :         auto current_transaction = move(active_transactions[t_index]);</span>
+<span class="lineNum">      93 </span><span class="lineCov">    3050423 :         if (transaction-&gt;commit_id != 0) {</span>
 <span class="lineNum">      94 </span>            :                 // the transaction was committed, add it to the list of recently
 <span class="lineNum">      95 </span>            :                 // committed transactions
-<span class="lineNum">      96 </span><span class="lineCov">    3040140 :                 recently_committed_transactions.push_back(move(current_transaction));</span>
+<span class="lineNum">      96 </span><span class="lineCov">    3040327 :                 recently_committed_transactions.push_back(move(current_transaction));</span>
 <span class="lineNum">      97 </span>            :         } else {
 <span class="lineNum">      98 </span>            :                 // the transaction was aborted, but we might still need its information
 <span class="lineNum">      99 </span>            :                 // add it to the set of transactions awaiting GC
@@ -163,12 +163,12 @@
 <span class="lineNum">     101 </span><span class="lineCov">      10096 :                 old_transactions.push_back(move(current_transaction));</span>
 <span class="lineNum">     102 </span>            :         }
 <span class="lineNum">     103 </span>            :         // remove the transaction from the set of currently active transactions
-<span class="lineNum">     104 </span><span class="lineCov">    3050236 :         active_transactions.erase(active_transactions.begin() + t_index);</span>
+<span class="lineNum">     104 </span><span class="lineCov">    3050423 :         active_transactions.erase(active_transactions.begin() + t_index);</span>
 <span class="lineNum">     105 </span>            :         // traverse the recently_committed transactions to see if we can remove any
-<span class="lineNum">     106 </span><span class="lineCov">    3050236 :         size_t i = 0;</span>
-<span class="lineNum">     107 </span><span class="lineCov">    6090376 :         for (; i &lt; recently_committed_transactions.size(); i++) {</span>
-<span class="lineNum">     108 </span><span class="lineCov">    3073021 :                 assert(recently_committed_transactions[i]);</span>
-<span class="lineNum">     109 </span><span class="lineCov">    3073021 :                 if (recently_committed_transactions[i]-&gt;commit_id &lt; lowest_start_time) {</span>
+<span class="lineNum">     106 </span><span class="lineCov">    3050423 :         size_t i = 0;</span>
+<span class="lineNum">     107 </span><span class="lineCov">    6090750 :         for (; i &lt; recently_committed_transactions.size(); i++) {</span>
+<span class="lineNum">     108 </span><span class="lineCov">    3073356 :                 assert(recently_committed_transactions[i]);</span>
+<span class="lineNum">     109 </span><span class="lineCov">    3073356 :                 if (recently_committed_transactions[i]-&gt;commit_id &lt; lowest_start_time) {</span>
 <span class="lineNum">     110 </span>            :                         // changes made BEFORE this transaction are no longer relevant
 <span class="lineNum">     111 </span>            :                         // we can cleanup the undo buffer
 <span class="lineNum">     112 </span>            : 
@@ -181,39 +181,39 @@
 <span class="lineNum">     119 </span>            :                         // we can only safely do the actual memory cleanup when all the
 <span class="lineNum">     120 </span>            :                         // currently active queries have finished running! (actually,
 <span class="lineNum">     121 </span>            :                         // when all the currently active scans have finished running...)
-<span class="lineNum">     122 </span><span class="lineCov">    3040140 :                         recently_committed_transactions[i]-&gt;Cleanup();</span>
+<span class="lineNum">     122 </span><span class="lineCov">    3040327 :                         recently_committed_transactions[i]-&gt;Cleanup();</span>
 <span class="lineNum">     123 </span>            :                         // store the current highest active query
-<span class="lineNum">     124 </span><span class="lineCov">    3040140 :                         recently_committed_transactions[i]-&gt;highest_active_query = current_query_number;</span>
+<span class="lineNum">     124 </span><span class="lineCov">    3040327 :                         recently_committed_transactions[i]-&gt;highest_active_query = current_query_number;</span>
 <span class="lineNum">     125 </span>            :                         // move it to the list of transactions awaiting GC
-<span class="lineNum">     126 </span><span class="lineCov">    3040140 :                         old_transactions.push_back(move(recently_committed_transactions[i]));</span>
+<span class="lineNum">     126 </span><span class="lineCov">    3040327 :                         old_transactions.push_back(move(recently_committed_transactions[i]));</span>
 <span class="lineNum">     127 </span>            :                 } else {
 <span class="lineNum">     128 </span>            :                         // recently_committed_transactions is ordered on commit_id
 <span class="lineNum">     129 </span>            :                         // implicitly thus if the current one is bigger than
 <span class="lineNum">     130 </span>            :                         // lowest_start_time any subsequent ones are also bigger
-<span class="lineNum">     131 </span><span class="lineCov">      32881 :                         break;</span>
+<span class="lineNum">     131 </span><span class="lineCov">      33029 :                         break;</span>
 <span class="lineNum">     132 </span>            :                 }
 <span class="lineNum">     133 </span>            :         }
-<span class="lineNum">     134 </span><span class="lineCov">    3050236 :         if (i &gt; 0) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">    3050423 :         if (i &gt; 0) {</span>
 <span class="lineNum">     135 </span>            :                 // we garbage collected transactions: remove them from the list
-<span class="lineNum">     136 </span><span class="lineCov">    9064608 :                 recently_committed_transactions.erase(recently_committed_transactions.begin(),</span>
-<span class="lineNum">     137 </span><span class="lineCov">   12086144 :                                                       recently_committed_transactions.begin() + i);</span>
+<span class="lineNum">     136 </span><span class="lineCov">    9064650 :                 recently_committed_transactions.erase(recently_committed_transactions.begin(),</span>
+<span class="lineNum">     137 </span><span class="lineCov">   12086200 :                                                       recently_committed_transactions.begin() + i);</span>
 <span class="lineNum">     138 </span>            :         }
 <span class="lineNum">     139 </span>            :         // check if we can free the memory of any old transactions
-<span class="lineNum">     140 </span><span class="lineCov">    3050236 :         i = active_transactions.size() == 0 ? old_transactions.size() : 0;</span>
-<span class="lineNum">     141 </span><span class="lineCov">    3082874 :         for (; i &lt; old_transactions.size(); i++) {</span>
-<span class="lineNum">     142 </span><span class="lineCov">      60258 :                 assert(old_transactions[i]);</span>
-<span class="lineNum">     143 </span><span class="lineCov">      60258 :                 assert(old_transactions[i]-&gt;highest_active_query &gt; 0);</span>
-<span class="lineNum">     144 </span><span class="lineCov">      60258 :                 if (old_transactions[i]-&gt;highest_active_query &gt;= lowest_active_query) {</span>
+<span class="lineNum">     140 </span><span class="lineCov">    3050423 :         i = active_transactions.size() == 0 ? old_transactions.size() : 0;</span>
+<span class="lineNum">     141 </span><span class="lineCov">    3083148 :         for (; i &lt; old_transactions.size(); i++) {</span>
+<span class="lineNum">     142 </span><span class="lineCov">      60429 :                 assert(old_transactions[i]);</span>
+<span class="lineNum">     143 </span><span class="lineCov">      60429 :                 assert(old_transactions[i]-&gt;highest_active_query &gt; 0);</span>
+<span class="lineNum">     144 </span><span class="lineCov">      60429 :                 if (old_transactions[i]-&gt;highest_active_query &gt;= lowest_active_query) {</span>
 <span class="lineNum">     145 </span>            :                         // there is still a query running that could be using
 <span class="lineNum">     146 </span>            :                         // this transactions' data
-<span class="lineNum">     147 </span><span class="lineCov">      27620 :                         break;</span>
+<span class="lineNum">     147 </span><span class="lineCov">      27704 :                         break;</span>
 <span class="lineNum">     148 </span>            :                 }
 <span class="lineNum">     149 </span>            :         }
-<span class="lineNum">     150 </span><span class="lineCov">    3050236 :         if (i &gt; 0) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">    3050423 :         if (i &gt; 0) {</span>
 <span class="lineNum">     151 </span>            :                 // we garbage collected transactions: remove them from the list
-<span class="lineNum">     152 </span><span class="lineCov">    3021735 :                 old_transactions.erase(old_transactions.begin(), old_transactions.begin() + i);</span>
+<span class="lineNum">     152 </span><span class="lineCov">    3021797 :                 old_transactions.erase(old_transactions.begin(), old_transactions.begin() + i);</span>
 <span class="lineNum">     153 </span>            :         }
-<span class="lineNum">     154 </span><span class="lineCov">    3050236 : }</span>
+<span class="lineNum">     154 </span><span class="lineCov">    3050423 : }</span>
 </pre>
       </td>
     </tr>

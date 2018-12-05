@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - parser/transform/statement/transform_update.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - parser/transform/statement/transform_update.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,22 +67,22 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">      80709 : unique_ptr&lt;UpdateStatement&gt; Transformer::TransformUpdate(Node *node) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">      80709 :         UpdateStmt *stmt = reinterpret_cast&lt;UpdateStmt *&gt;(node);</span>
-<span class="lineNum">      10 </span><span class="lineCov">      80709 :         assert(stmt);</span>
+<span class="lineNum">       8 </span><span class="lineCov">      80679 : unique_ptr&lt;UpdateStatement&gt; Transformer::TransformUpdate(Node *node) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">      80679 :         UpdateStmt *stmt = reinterpret_cast&lt;UpdateStmt *&gt;(node);</span>
+<span class="lineNum">      10 </span><span class="lineCov">      80679 :         assert(stmt);</span>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">      80709 :         auto result = make_unique&lt;UpdateStatement&gt;();</span>
+<span class="lineNum">      12 </span><span class="lineCov">      80679 :         auto result = make_unique&lt;UpdateStatement&gt;();</span>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">      80777 :         result-&gt;table = TransformRangeVar(stmt-&gt;relation);</span>
-<span class="lineNum">      15 </span><span class="lineCov">      80505 :         result-&gt;condition = TransformExpression(stmt-&gt;whereClause);</span>
+<span class="lineNum">      14 </span><span class="lineCov">      80674 :         result-&gt;table = TransformRangeVar(stmt-&gt;relation);</span>
+<span class="lineNum">      15 </span><span class="lineCov">      80454 :         result-&gt;condition = TransformExpression(stmt-&gt;whereClause);</span>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">      81398 :         List *root = stmt-&gt;targetList;</span>
-<span class="lineNum">      18 </span><span class="lineCov">     162576 :         for (auto cell = root-&gt;head; cell != NULL; cell = cell-&gt;next) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">      81509 :                 auto target = (ResTarget *)(cell-&gt;data.ptr_value);</span>
-<span class="lineNum">      20 </span><span class="lineCov">      81509 :                 result-&gt;columns.push_back(target-&gt;name);</span>
-<span class="lineNum">      21 </span><span class="lineCov">      80548 :                 result-&gt;expressions.push_back(TransformExpression(target-&gt;val));</span>
+<span class="lineNum">      17 </span><span class="lineCov">      81301 :         List *root = stmt-&gt;targetList;</span>
+<span class="lineNum">      18 </span><span class="lineCov">     162587 :         for (auto cell = root-&gt;head; cell != NULL; cell = cell-&gt;next) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">      81408 :                 auto target = (ResTarget *)(cell-&gt;data.ptr_value);</span>
+<span class="lineNum">      20 </span><span class="lineCov">      81408 :                 result-&gt;columns.push_back(target-&gt;name);</span>
+<span class="lineNum">      21 </span><span class="lineCov">      80415 :                 result-&gt;expressions.push_back(TransformExpression(target-&gt;val));</span>
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">      81067 :         return result;</span>
+<span class="lineNum">      23 </span><span class="lineCov">      81179 :         return result;</span>
 <span class="lineNum">      24 </span>            : }
 </pre>
       </td>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - common/enums.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - common/enums.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">71</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -428,12 +428,12 @@
 <span class="lineNum">     366 </span><span class="lineNoCov">          0 :         throw ConversionException(&quot;No ExternalFileFormat for input '%s'&quot;, upper.c_str());</span>
 <a name="367"><span class="lineNum">     367 </span>            : }</a>
 <span class="lineNum">     368 </span>            : 
-<span class="lineNum">     369 </span><span class="lineCov">          4 : IndexType StringToIndexType(const string &amp;str) {</span>
-<span class="lineNum">     370 </span><span class="lineCov">          8 :         string upper_str = StringUtil::Upper(str);</span>
-<span class="lineNum">     371 </span><span class="lineCov">          4 :         if (upper_str == &quot;INVALID&quot;) {</span>
+<span class="lineNum">     369 </span><span class="lineCov">          6 : IndexType StringToIndexType(const string &amp;str) {</span>
+<span class="lineNum">     370 </span><span class="lineCov">         12 :         string upper_str = StringUtil::Upper(str);</span>
+<span class="lineNum">     371 </span><span class="lineCov">          6 :         if (upper_str == &quot;INVALID&quot;) {</span>
 <span class="lineNum">     372 </span><span class="lineNoCov">          0 :                 return IndexType::INVALID;</span>
-<span class="lineNum">     373 </span><span class="lineCov">          4 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
-<span class="lineNum">     374 </span><span class="lineCov">          4 :                 return IndexType::BTREE;</span>
+<span class="lineNum">     373 </span><span class="lineCov">          6 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
+<span class="lineNum">     374 </span><span class="lineCov">          6 :                 return IndexType::BTREE;</span>
 <span class="lineNum">     375 </span>            :         } else {
 <span class="lineNum">     376 </span><span class="lineNoCov">          0 :                 throw ConversionException(StringUtil::Format(&quot;No IndexType conversion from string '%s'&quot;, upper_str.c_str()));</span>
 <span class="lineNum">     377 </span>            :         }

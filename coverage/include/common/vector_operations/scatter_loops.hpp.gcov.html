@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - include/common/vector_operations/scatter_loops.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - include/common/vector_operations/scatter_loops.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">85</td>
+            <td class="headerCovTableEntry">88</td>
             <td class="headerCovTableEntry">283</td>
-            <td class="headerCovTableEntryLo">30.0 %</td>
+            <td class="headerCovTableEntryLo">31.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">20</td>
             <td class="headerCovTableEntry">76</td>
-            <td class="headerCovTableEntryLo">25.0 %</td>
+            <td class="headerCovTableEntryLo">26.3 %</td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -78,9 +78,9 @@
 <span class="lineNum">      16 </span>            : namespace duckdb {
 <a name="17"><span class="lineNum">      17 </span>            : </a>
 <span class="lineNum">      18 </span>            : template &lt;class T, class OP&gt;
-<span class="lineNum">      19 </span><span class="lineCov">     672709 : static inline void scatter_loop_constant(T constant, T **__restrict destination, size_t count,</span>
+<span class="lineNum">      19 </span><span class="lineCov">     672711 : static inline void scatter_loop_constant(T constant, T **__restrict destination, size_t count,</span>
 <span class="lineNum">      20 </span>            :                                          sel_t *__restrict sel_vector) {
-<span class="lineNum">      21 </span><span class="lineCov">     672709 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">     672711 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      22 </span>            :                 if (!IsNullValue&lt;T&gt;(*destination[i])) {
 <span class="lineNum">      23 </span>            :                         *destination[i] = OP::Operation(constant, *destination[i]);
 <span class="lineNum">      24 </span>            :                 } else {
@@ -98,26 +98,26 @@
 <span class="lineNum">      36 </span>            :                         if (!IsNullValue&lt;T&gt;(*destination[i])) {
 <span class="lineNum">      37 </span>            :                                 *destination[i] = OP::Operation(ldata[i], *destination[i]);
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :                         } else {</span>
-<span class="lineNum">      39 </span><span class="lineCov">     542578 :                                 *destination[i] = ldata[i];</span>
+<span class="lineNum">      39 </span><span class="lineCov">     542579 :                                 *destination[i] = ldata[i];</span>
 <span class="lineNum">      40 </span>            :                         }
-<span class="lineNum">      41 </span><span class="lineCov">     542578 :                 }</span>
+<span class="lineNum">      41 </span><span class="lineCov">     542579 :                 }</span>
 <span class="lineNum">      42 </span>            :         });
 <span class="lineNum">      43 </span>            : }
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span>            : template &lt;class T, class OP&gt; void scatter_templated_loop(Vector &amp;source, Vector &amp;dest) {
 <span class="lineNum">      46 </span>            :         auto ldata = (T *)source.data;
 <span class="lineNum">      47 </span>            :         auto destination = (T **)dest.data;
-<span class="lineNum">      48 </span><span class="lineCov">     542625 :         if (source.IsConstant()) {</span>
-<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                 // special case: source is a constant</span>
+<span class="lineNum">      48 </span><span class="lineCov">     542624 :         if (source.IsConstant()) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">          1 :                 // special case: source is a constant</span>
 <span class="lineNum">      50 </span>            :                 if (source.nullmask[0]) {
-<span class="lineNum">      51 </span><span class="lineNoCov">          0 :                         // source is NULL, do nothing</span>
+<span class="lineNum">      51 </span><span class="lineCov">          1 :                         // source is NULL, do nothing</span>
 <span class="lineNum">      52 </span>            :                         return;
 <span class="lineNum">      53 </span>            :                 }
 <span class="lineNum">      54 </span>            : 
 <span class="lineNum">      55 </span>            :                 auto constant = ldata[0];
 <span class="lineNum">      56 </span>            :                 scatter_loop_constant&lt;T, OP&gt;(constant, destination, dest.count, dest.sel_vector);
 <span class="lineNum">      57 </span>            :         } else {
-<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 // source and dest are equal-length vectors</span>
+<span class="lineNum">      58 </span><span class="lineCov">          1 :                 // source and dest are equal-length vectors</span>
 <span class="lineNum">      59 </span><span class="lineNoCov">          0 :                 assert(dest.sel_vector == source.sel_vector);</span>
 <span class="lineNum">      60 </span>            :                 scatter_loop&lt;T, OP&gt;(ldata, destination, dest.count, dest.sel_vector, source.nullmask);
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 :         }</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ae358524 - execution/expression_executor/execute_constant.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 14e35034 - execution/expression_executor/execute_constant.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
+            <td class="headerValue">DuckDB Code Coverage Report 14e35034</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:56:45</td>
+            <td class="headerValue">2018-12-05 12:37:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,10 +67,10 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    9431418 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(ConstantExpression &amp;expr) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    9431418 :         vector.Reference(expr.value);</span>
-<span class="lineNum">      10 </span><span class="lineCov">    9434708 :         expr.stats.Verify(vector);</span>
-<span class="lineNum">      11 </span><span class="lineCov">    9437153 :         return nullptr;</span>
+<span class="lineNum">       8 </span><span class="lineCov">    9431991 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(ConstantExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    9431991 :         vector.Reference(expr.value);</span>
+<span class="lineNum">      10 </span><span class="lineCov">    9435790 :         expr.stats.Verify(vector);</span>
+<span class="lineNum">      11 </span><span class="lineCov">    9437936 :         return nullptr;</span>
 <span class="lineNum">      12 </span>            : }
 </pre>
       </td>
