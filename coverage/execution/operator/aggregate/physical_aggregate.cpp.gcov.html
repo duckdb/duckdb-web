@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b18d7f1f - execution/operator/aggregate/physical_aggregate.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ae358524 - execution/operator/aggregate/physical_aggregate.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b18d7f1f</td>
+            <td class="headerValue">DuckDB Code Coverage Report ae358524</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">32</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 11:17:49</td>
+            <td class="headerValue">2018-12-05 11:56:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -69,11 +69,11 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">     574033 : PhysicalAggregate::PhysicalAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
-<span class="lineNum">      11 </span><span class="lineCov">     574033 :                                      PhysicalOperatorType type)</span>
-<span class="lineNum">      12 </span><span class="lineCov">     574033 :     : PhysicalOperator(type, op.types), select_list(std::move(select_list)) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">     574050 :         Initialize();</span>
-<a name="14"><span class="lineNum">      14 </span><span class="lineCov">     574033 : }</span></a>
+<span class="lineNum">      10 </span><span class="lineCov">     573780 : PhysicalAggregate::PhysicalAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
+<span class="lineNum">      11 </span><span class="lineCov">     573780 :                                      PhysicalOperatorType type)</span>
+<span class="lineNum">      12 </span><span class="lineCov">     573780 :     : PhysicalOperator(type, op.types), select_list(std::move(select_list)) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">     573793 :         Initialize();</span>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">     573785 : }</span></a>
 <span class="lineNum">      15 </span>            : 
 <span class="lineNum">      16 </span><span class="lineCov">     730648 : PhysicalAggregate::PhysicalAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
 <span class="lineNum">      17 </span><span class="lineCov">     730648 :                                      vector&lt;unique_ptr&lt;Expression&gt;&gt; groups, PhysicalOperatorType type)</span>
@@ -81,37 +81,37 @@
 <span class="lineNum">      19 </span><span class="lineCov">     730648 :         Initialize();</span>
 <a name="20"><span class="lineNum">      20 </span><span class="lineCov">     730648 : }</span></a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    1304675 : void PhysicalAggregate::Initialize() {</span>
+<span class="lineNum">      22 </span><span class="lineCov">    1304425 : void PhysicalAggregate::Initialize() {</span>
 <span class="lineNum">      23 </span>            :         // get a list of all aggregates to be computed
 <span class="lineNum">      24 </span>            :         // fake a single group with a constant value for aggregation without groups
-<span class="lineNum">      25 </span><span class="lineCov">    1304675 :         if (groups.size() == 0) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">    1722219 :                 unique_ptr&lt;Expression&gt; ce = make_unique&lt;ConstantExpression&gt;(Value::TINYINT(42));</span>
-<span class="lineNum">      27 </span><span class="lineCov">     574099 :                 groups.push_back(move(ce));</span>
-<span class="lineNum">      28 </span><span class="lineCov">     574052 :                 is_implicit_aggr = true;</span>
+<span class="lineNum">      25 </span><span class="lineCov">    1304425 :         if (groups.size() == 0) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    1721470 :                 unique_ptr&lt;Expression&gt; ce = make_unique&lt;ConstantExpression&gt;(Value::TINYINT(42));</span>
+<span class="lineNum">      27 </span><span class="lineCov">     573856 :                 groups.push_back(move(ce));</span>
+<span class="lineNum">      28 </span><span class="lineCov">     573778 :                 is_implicit_aggr = true;</span>
 <span class="lineNum">      29 </span>            :         } else {
 <span class="lineNum">      30 </span><span class="lineCov">     730648 :                 is_implicit_aggr = false;</span>
 <span class="lineNum">      31 </span>            :         }
-<span class="lineNum">      32 </span><span class="lineCov">    2883648 :         for (auto &amp;expr : select_list) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">    1578997 :                 expr-&gt;GetAggregates(aggregates);</span>
+<span class="lineNum">      32 </span><span class="lineCov">    2883140 :         for (auto &amp;expr : select_list) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">    1578742 :                 expr-&gt;GetAggregates(aggregates);</span>
 <span class="lineNum">      34 </span>            :         }
-<span class="lineNum">      35 </span><span class="lineCov">    2137083 :         for (size_t i = 0; i &lt; aggregates.size(); i++) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">     832417 :                 aggregates[i]-&gt;index = i;</span>
+<span class="lineNum">      35 </span><span class="lineCov">    2136610 :         for (size_t i = 0; i &lt; aggregates.size(); i++) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">     832191 :                 aggregates[i]-&gt;index = i;</span>
 <span class="lineNum">      37 </span>            :         }
-<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    1304687 : }</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    1304430 : }</span></a>
 <span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span><span class="lineCov">    1351739 : PhysicalAggregateOperatorState::PhysicalAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
-<span class="lineNum">      41 </span><span class="lineCov">    1351739 :                                                                ExpressionExecutor *parent_executor)</span>
-<span class="lineNum">      42 </span><span class="lineCov">    1351739 :     : PhysicalOperatorState(child, parent_executor) {</span>
-<span class="lineNum">      43 </span><span class="lineCov">    2703596 :         vector&lt;TypeId&gt; group_types, aggregate_types;</span>
-<span class="lineNum">      44 </span><span class="lineCov">    2900624 :         for (auto &amp;expr : parent-&gt;groups) {</span>
-<span class="lineNum">      45 </span><span class="lineCov">    1548848 :                 group_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      40 </span><span class="lineCov">    1351503 : PhysicalAggregateOperatorState::PhysicalAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
+<span class="lineNum">      41 </span><span class="lineCov">    1351503 :                                                                ExpressionExecutor *parent_executor)</span>
+<span class="lineNum">      42 </span><span class="lineCov">    1351503 :     : PhysicalOperatorState(child, parent_executor) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">    2703088 :         vector&lt;TypeId&gt; group_types, aggregate_types;</span>
+<span class="lineNum">      44 </span><span class="lineCov">    2900115 :         for (auto &amp;expr : parent-&gt;groups) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">    1548594 :                 group_types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      46 </span>            :         }
-<span class="lineNum">      47 </span><span class="lineCov">    1351785 :         group_chunk.Initialize(group_types);</span>
-<span class="lineNum">      48 </span><span class="lineCov">    2247646 :         for (auto &amp;expr : parent-&gt;aggregates) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">     895877 :                 aggregate_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      47 </span><span class="lineCov">    1351532 :         group_chunk.Initialize(group_types);</span>
+<span class="lineNum">      48 </span><span class="lineCov">    2247180 :         for (auto &amp;expr : parent-&gt;aggregates) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">     895632 :                 aggregate_types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      50 </span>            :         }
-<span class="lineNum">      51 </span><span class="lineCov">    1351745 :         aggregate_chunk.Initialize(aggregate_types);</span>
-<span class="lineNum">      52 </span><span class="lineCov">    1351764 : }</span>
+<span class="lineNum">      51 </span><span class="lineCov">    1351497 :         aggregate_chunk.Initialize(aggregate_types);</span>
+<span class="lineNum">      52 </span><span class="lineCov">    1351544 : }</span>
 </pre>
       </td>
     </tr>
