@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report aaaae6fe - common/vector_operations/copy.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b18d7f1f - common/vector_operations/copy.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report aaaae6fe</td>
+            <td class="headerValue">DuckDB Code Coverage Report b18d7f1f</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">201</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 10:38:07</td>
+            <td class="headerValue">2018-12-05 11:17:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">28</td>
@@ -74,11 +74,11 @@
 <span class="lineNum">      12 </span>            : using namespace std;
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : template &lt;class T&gt;
-<span class="lineNum">      15 </span><span class="lineCov">   16382041 : static void copy_function(T *__restrict source, T *__restrict target, size_t offset, size_t count,</span>
+<span class="lineNum">      15 </span><span class="lineCov">   16382116 : static void copy_function(T *__restrict source, T *__restrict target, size_t offset, size_t count,</span>
 <span class="lineNum">      16 </span>            :                           sel_t *__restrict sel_vector) {
-<span class="lineNum">      17 </span><span class="lineCov">   16382041 :         VectorOperations::Exec(sel_vector, count + offset, [&amp;](size_t i, size_t k) { target[k - offset] = source[i]; },</span>
+<span class="lineNum">      17 </span><span class="lineCov">   16382116 :         VectorOperations::Exec(sel_vector, count + offset, [&amp;](size_t i, size_t k) { target[k - offset] = source[i]; },</span>
 <span class="lineNum">      18 </span>            :                                offset);
-<span class="lineNum">      19 </span><span class="lineCov">   16382176 : }</span>
+<span class="lineNum">      19 </span><span class="lineCov">   16382290 : }</span>
 <a name="20"><span class="lineNum">      20 </span><span class="lineCov">      36305 : </span></a>
 <span class="lineNum">      21 </span>            : template &lt;class T&gt;
 <span class="lineNum">      22 </span><span class="lineCov">      36305 : static void copy_function_set_null(T *__restrict source, T *__restrict target, size_t offset, size_t count,</span>
@@ -94,16 +94,16 @@
 <span class="lineNum">      32 </span><span class="lineCov">     347414 :                                                }</span>
 <span class="lineNum">      33 </span>            :                                        },
 <span class="lineNum">      34 </span><span class="lineCov">     347414 :                                        offset);</span>
-<span class="lineNum">      35 </span><span class="lineCov">     943623 :         } else {</span>
+<span class="lineNum">      35 </span><span class="lineCov">     943614 :         } else {</span>
 <span class="lineNum">      36 </span>            :                 // no NULL values, use normal copy
-<span class="lineNum">      37 </span><span class="lineCov">     943623 :                 copy_function(source, target, offset, count, sel_vector);</span>
+<span class="lineNum">      37 </span><span class="lineCov">     943614 :                 copy_function(source, target, offset, count, sel_vector);</span>
 <span class="lineNum">      38 </span>            :         }
-<span class="lineNum">      39 </span><span class="lineCov">     943753 : }</span>
-<a name="40"><span class="lineNum">      40 </span><span class="lineCov">   15045848 : </span></a>
+<span class="lineNum">      39 </span><span class="lineCov">     943788 : }</span>
+<a name="40"><span class="lineNum">      40 </span><span class="lineCov">   15045932 : </span></a>
 <span class="lineNum">      41 </span>            : template &lt;class T, bool SET_NULL&gt;
-<span class="lineNum">      42 </span><span class="lineCov">   15045848 : static void copy_loop(Vector &amp;input, void *target, size_t offset, size_t element_count) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">   15045932 : static void copy_loop(Vector &amp;input, void *target, size_t offset, size_t element_count) {</span>
 <span class="lineNum">      43 </span>            :         auto ldata = (T *)input.data;
-<span class="lineNum">      44 </span><span class="lineCov">   15045853 :         auto result_data = (T *)target;</span>
+<span class="lineNum">      44 </span><span class="lineCov">   15045932 :         auto result_data = (T *)target;</span>
 <span class="lineNum">      45 </span><span class="lineCov">          3 :         if (SET_NULL) {</span>
 <span class="lineNum">      46 </span>            :                 copy_function_set_null(ldata, result_data, offset, element_count, input.sel_vector, input.nullmask);
 <span class="lineNum">      47 </span><span class="lineCov">          3 :         } else {</span>
