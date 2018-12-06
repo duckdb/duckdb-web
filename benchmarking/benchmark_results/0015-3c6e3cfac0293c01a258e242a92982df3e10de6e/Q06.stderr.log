@@ -1,0 +1,25 @@
+---------
+|| Q06 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 1 ]: 
+Chunk - [1 Columns]
+- DECIMAL: 1 = [ 568264314.843496]
+
+Expected answer:
+Chunk - [1 Columns]
+- DECIMAL: 1 = [ 123141078.230000]
+
+Difference in column 0:
+Result
+------
+DECIMAL [568264314.843496,]
+
+Expect
+------
+DECIMAL [123141078.230000,]
+
+

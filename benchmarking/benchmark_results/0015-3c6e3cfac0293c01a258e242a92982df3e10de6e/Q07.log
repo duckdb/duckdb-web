@@ -1,0 +1,97 @@
+<<Query Profiling Information>>
+select  supp_nation,  cust_nation,  l_year,  sum(volume) as revenue from  (  select  n1.n_name as supp_nation,  n2.n_name as cust_nation,  extract(year from l_shipdate) as l_year,  l_extendedprice * (1 - l_discount) as volume  from  supplier,  lineitem,  orders,  customer,  nation n1,  nation n2  where  s_suppkey = l_suppkey  and o_orderkey = l_orderkey  and c_custkey = o_custkey  and s_nationkey = n1.n_nationkey  and c_nationkey = n2.n_nationkey  and (  (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')  or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')  )  and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)  ) as shipping group by  supp_nation,  cust_nation,  l_year order by  supp_nation,  cust_nation,  l_year; 
+<<Timing>>
+Total Time: 4.777780s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        14        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.03s)     |
+|        14        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.03s)     |
+|       19334      |
+--------------------
+--------------------
+|      FILTER      |
+|  OR(AND((n_name  |
+|     = FRANCE)    |
+|     , (n_name    |
+|    = GERMANY))   |
+|   , AND((n_name  |
+|     = GERMANY)   |
+|     , (n_name    |
+|      = FRANCE    |
+|      (0.32s)     |
+|       19334      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    c_nationkey   |
+|   =n_nationkey   |
+|      (1.02s)     |
+|      6001215     |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |     SEQ_SCAN     |
+|       INNER      |                                                                                |      nation      |
+|    s_nationkey   |                                                                                |                  |
+|   =n_nationkey   |                                                                                |                  |
+|      (0.74s)     |                                                                                |      (0.00s)     |
+|      6001215     |                                                                                |        25        |
+--------------------                                                                                --------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|       INNER      |                                                            |      nation      |
+|     o_custkey    |                                                            |                  |
+|    =c_custkey    |                                                            |                  |
+|      (0.78s)     |                                                            |      (0.00s)     |
+|      6001215     |                                                            |        25        |
+--------------------                                                            --------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |     customer     |
+|    l_orderkey    |                                        |                  |
+|    =o_orderkey   |                                        |                  |
+|      (0.75s)     |                                        |      (0.00s)     |
+|      6001215     |                                        |      150000      |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    |      orders      |
+|     s_suppkey    |                    |                  |
+|    =l_suppkey    |                    |                  |
+|      (0.99s)     |                    |      (0.01s)     |
+|      6001215     |                    |      1500000     |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     supplier     ||     lineitem     |
+|      (0.00s)     ||      (0.05s)     |
+|       10000      ||      6001215     |
+----------------------------------------
+
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 14 ]: 
+Chunk - [4 Columns]
+- VARCHAR: 14 = [ FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY]
+- VARCHAR: 14 = [ GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, GERMANY, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE, FRANCE]
+- BIGINT: 14 = [ 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+- DECIMAL: 14 = [ 41064906.875500, 52252517.571100, 52993600.835200, 54639732.733600, 54633083.307600, 52471496.184800, 38277606.989200, 44008626.613300, 53575108.500900, 52388286.204200, 52531746.669700, 52520549.022400, 53707667.755500, 39569019.352200]
+
+Expected answer:
+Chunk - [4 Columns]
+- VARCHAR: 4 = [ FRANCE   , FRANCE   , GERMANY   , GERMANY   ]
+- VARCHAR: 4 = [ GERMANY   , GERMANY   , FRANCE   , FRANCE   ]
+- BIGINT: 4 = [ 1995, 1996, 1995, 1996]
+- DECIMAL: 4 = [ 54639732.730000, 54633083.310000, 52531746.670000, 52520549.020000]
+
+Different sizes: 14 vs 4

@@ -1,0 +1,405 @@
+<<Query Profiling Information>>
+SELECT a.ca_state state, count(*) cnt FROM customer_address a , customer c , store_sales s , date_dim d , item i WHERE a.ca_address_sk = c.c_current_addr_sk AND c.c_customer_sk = s.ss_customer_sk AND s.ss_sold_date_sk = d.d_date_sk AND s.ss_item_sk = i.i_item_sk AND d.d_month_seq = (SELECT DISTINCT (d_month_seq) FROM date_dim WHERE d_year = 2001 AND d_moy = 1 ) AND i.i_current_price > 1.2 * (SELECT avg(j.i_current_price) FROM item j WHERE j.i_category = i.i_category) GROUP BY a.ca_state HAVING count(*) >= 10 ORDER BY cnt, a.ca_state LIMIT 100;
+<<Timing>>
+Total Time: 15.105961s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|      FILTER      |
+|     #1 >= 10     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|        50        |
+--------------------
+--------------------
+|      FILTER      |
+|  i_current_price |
+|      > (1.20     |
+|  0000 * SUBQUERY |
+|      (0.36s)     |
+|       3069       |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |   HASH_GROUP_BY  |
+|       INNER      |                                                                                                    |                  |
+|  d_month_seq=#0  |                                                                                                    |                  |
+|      (1.11s)     |                                                                                                    |      (3.48s)     |
+|       31158      |                                                                                                    |       31158      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  ||      FILTER      |
+|       INNER      |                                                                                |                  ||    i_category    |
+|    ss_item_sk    |                                                                                |                  ||    = i_category  |
+|    =i_item_sk    |                                                                                |                  ||                  |
+|      (0.83s)     |                                                                                |      (0.00s)     ||      (3.83s)     |
+|      2880404     |                                                                                |         1        ||     56109304     |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||                  ||       item       |
+|  ss_sold_date_sk |                                                            |                  ||                  ||                  |
+|    =d_date_sk    |                                                            |                  ||                  ||                  |
+|      (0.48s)     |                                                            |      (0.00s)     ||      (0.00s)     ||      (4.35s)     |
+|      2880404     |                                                            |       18000      ||        31        ||     560844000    |
+--------------------                                                            ------------------------------------------------------------
+--------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |      FILTER      |
+|       INNER      |                                        |     date_dim     |                    |     d_moy = 1    |
+|   c_customer_sk  |                                        |                  |                    |   d_year = 2001  |
+|  =ss_customer_sk |                                        |                  |                    |                  |
+|      (0.40s)     |                                        |      (0.00s)     |                    |      (0.00s)     |
+|      2880404     |                                        |       73049      |                    |        31        |
+--------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |    store_sales   |                                        |     date_dim     |
+|   ca_address_sk  |                    |                  |                                        |                  |
+| =c_current_addr_ |                    |                  |                                        |                  |
+|        sk        |                    |                  |                                        |                  |
+|      (0.01s)     |                    |      (0.02s)     |                                        |      (0.00s)     |
+|      100000      |                    |      2880404     |                                        |       73049      |
+--------------------                    --------------------                                        --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+| customer_address ||     customer     |
+|      (0.00s)     ||      (0.00s)     |
+|       50000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT a.ca_state state, count(*) cnt FROM customer_address a , customer c , store_sales s , date_dim d , item i WHERE a.ca_address_sk = c.c_current_addr_sk AND c.c_customer_sk = s.ss_customer_sk AND s.ss_sold_date_sk = d.d_date_sk AND s.ss_item_sk = i.i_item_sk AND d.d_month_seq = (SELECT DISTINCT (d_month_seq) FROM date_dim WHERE d_year = 2001 AND d_moy = 1 ) AND i.i_current_price > 1.2 * (SELECT avg(j.i_current_price) FROM item j WHERE j.i_category = i.i_category) GROUP BY a.ca_state HAVING count(*) >= 10 ORDER BY cnt, a.ca_state LIMIT 100;
+<<Timing>>
+Total Time: 15.161059s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|      FILTER      |
+|     #1 >= 10     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|        50        |
+--------------------
+--------------------
+|      FILTER      |
+|  i_current_price |
+|      > (1.20     |
+|  0000 * SUBQUERY |
+|      (0.36s)     |
+|       3069       |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |   HASH_GROUP_BY  |
+|       INNER      |                                                                                                    |                  |
+|  d_month_seq=#0  |                                                                                                    |                  |
+|      (1.12s)     |                                                                                                    |      (3.48s)     |
+|       31158      |                                                                                                    |       31158      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  ||      FILTER      |
+|       INNER      |                                                                                |                  ||    i_category    |
+|    ss_item_sk    |                                                                                |                  ||    = i_category  |
+|    =i_item_sk    |                                                                                |                  ||                  |
+|      (0.83s)     |                                                                                |      (0.00s)     ||      (3.86s)     |
+|      2880404     |                                                                                |         1        ||     56109304     |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||                  ||       item       |
+|  ss_sold_date_sk |                                                            |                  ||                  ||                  |
+|    =d_date_sk    |                                                            |                  ||                  ||                  |
+|      (0.48s)     |                                                            |      (0.00s)     ||      (0.00s)     ||      (4.35s)     |
+|      2880404     |                                                            |       18000      ||        31        ||     560844000    |
+--------------------                                                            ------------------------------------------------------------
+--------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |      FILTER      |
+|       INNER      |                                        |     date_dim     |                    |     d_moy = 1    |
+|   c_customer_sk  |                                        |                  |                    |   d_year = 2001  |
+|  =ss_customer_sk |                                        |                  |                    |                  |
+|      (0.40s)     |                                        |      (0.00s)     |                    |      (0.00s)     |
+|      2880404     |                                        |       73049      |                    |        31        |
+--------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |    store_sales   |                                        |     date_dim     |
+|   ca_address_sk  |                    |                  |                                        |                  |
+| =c_current_addr_ |                    |                  |                                        |                  |
+|        sk        |                    |                  |                                        |                  |
+|      (0.01s)     |                    |      (0.02s)     |                                        |      (0.00s)     |
+|      100000      |                    |      2880404     |                                        |       73049      |
+--------------------                    --------------------                                        --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+| customer_address ||     customer     |
+|      (0.00s)     ||      (0.00s)     |
+|       50000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT a.ca_state state, count(*) cnt FROM customer_address a , customer c , store_sales s , date_dim d , item i WHERE a.ca_address_sk = c.c_current_addr_sk AND c.c_customer_sk = s.ss_customer_sk AND s.ss_sold_date_sk = d.d_date_sk AND s.ss_item_sk = i.i_item_sk AND d.d_month_seq = (SELECT DISTINCT (d_month_seq) FROM date_dim WHERE d_year = 2001 AND d_moy = 1 ) AND i.i_current_price > 1.2 * (SELECT avg(j.i_current_price) FROM item j WHERE j.i_category = i.i_category) GROUP BY a.ca_state HAVING count(*) >= 10 ORDER BY cnt, a.ca_state LIMIT 100;
+<<Timing>>
+Total Time: 15.317719s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|      FILTER      |
+|     #1 >= 10     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|        50        |
+--------------------
+--------------------
+|      FILTER      |
+|  i_current_price |
+|      > (1.20     |
+|  0000 * SUBQUERY |
+|      (0.36s)     |
+|       3069       |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |   HASH_GROUP_BY  |
+|       INNER      |                                                                                                    |                  |
+|  d_month_seq=#0  |                                                                                                    |                  |
+|      (1.13s)     |                                                                                                    |      (3.47s)     |
+|       31158      |                                                                                                    |       31158      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  ||      FILTER      |
+|       INNER      |                                                                                |                  ||    i_category    |
+|    ss_item_sk    |                                                                                |                  ||    = i_category  |
+|    =i_item_sk    |                                                                                |                  ||                  |
+|      (0.83s)     |                                                                                |      (0.00s)     ||      (3.97s)     |
+|      2880404     |                                                                                |         1        ||     56109304     |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||                  ||       item       |
+|  ss_sold_date_sk |                                                            |                  ||                  ||                  |
+|    =d_date_sk    |                                                            |                  ||                  ||                  |
+|      (0.48s)     |                                                            |      (0.00s)     ||      (0.00s)     ||      (4.41s)     |
+|      2880404     |                                                            |       18000      ||        31        ||     560844000    |
+--------------------                                                            ------------------------------------------------------------
+--------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |      FILTER      |
+|       INNER      |                                        |     date_dim     |                    |     d_moy = 1    |
+|   c_customer_sk  |                                        |                  |                    |   d_year = 2001  |
+|  =ss_customer_sk |                                        |                  |                    |                  |
+|      (0.40s)     |                                        |      (0.00s)     |                    |      (0.00s)     |
+|      2880404     |                                        |       73049      |                    |        31        |
+--------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |    store_sales   |                                        |     date_dim     |
+|   ca_address_sk  |                    |                  |                                        |                  |
+| =c_current_addr_ |                    |                  |                                        |                  |
+|        sk        |                    |                  |                                        |                  |
+|      (0.01s)     |                    |      (0.02s)     |                                        |      (0.00s)     |
+|      100000      |                    |      2880404     |                                        |       73049      |
+--------------------                    --------------------                                        --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+| customer_address ||     customer     |
+|      (0.00s)     ||      (0.00s)     |
+|       50000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT a.ca_state state, count(*) cnt FROM customer_address a , customer c , store_sales s , date_dim d , item i WHERE a.ca_address_sk = c.c_current_addr_sk AND c.c_customer_sk = s.ss_customer_sk AND s.ss_sold_date_sk = d.d_date_sk AND s.ss_item_sk = i.i_item_sk AND d.d_month_seq = (SELECT DISTINCT (d_month_seq) FROM date_dim WHERE d_year = 2001 AND d_moy = 1 ) AND i.i_current_price > 1.2 * (SELECT avg(j.i_current_price) FROM item j WHERE j.i_category = i.i_category) GROUP BY a.ca_state HAVING count(*) >= 10 ORDER BY cnt, a.ca_state LIMIT 100;
+<<Timing>>
+Total Time: 15.153602s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|      FILTER      |
+|     #1 >= 10     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|        50        |
+--------------------
+--------------------
+|      FILTER      |
+|  i_current_price |
+|      > (1.20     |
+|  0000 * SUBQUERY |
+|      (0.35s)     |
+|       3069       |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |   HASH_GROUP_BY  |
+|       INNER      |                                                                                                    |                  |
+|  d_month_seq=#0  |                                                                                                    |                  |
+|      (1.13s)     |                                                                                                    |      (3.48s)     |
+|       31158      |                                                                                                    |       31158      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  ||      FILTER      |
+|       INNER      |                                                                                |                  ||    i_category    |
+|    ss_item_sk    |                                                                                |                  ||    = i_category  |
+|    =i_item_sk    |                                                                                |                  ||                  |
+|      (0.83s)     |                                                                                |      (0.00s)     ||      (3.87s)     |
+|      2880404     |                                                                                |         1        ||     56109304     |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||                  ||       item       |
+|  ss_sold_date_sk |                                                            |                  ||                  ||                  |
+|    =d_date_sk    |                                                            |                  ||                  ||                  |
+|      (0.48s)     |                                                            |      (0.00s)     ||      (0.00s)     ||      (4.34s)     |
+|      2880404     |                                                            |       18000      ||        31        ||     560844000    |
+--------------------                                                            ------------------------------------------------------------
+--------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |      FILTER      |
+|       INNER      |                                        |     date_dim     |                    |     d_moy = 1    |
+|   c_customer_sk  |                                        |                  |                    |   d_year = 2001  |
+|  =ss_customer_sk |                                        |                  |                    |                  |
+|      (0.40s)     |                                        |      (0.00s)     |                    |      (0.00s)     |
+|      2880404     |                                        |       73049      |                    |        31        |
+--------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |    store_sales   |                                        |     date_dim     |
+|   ca_address_sk  |                    |                  |                                        |                  |
+| =c_current_addr_ |                    |                  |                                        |                  |
+|        sk        |                    |                  |                                        |                  |
+|      (0.01s)     |                    |      (0.02s)     |                                        |      (0.00s)     |
+|      100000      |                    |      2880404     |                                        |       73049      |
+--------------------                    --------------------                                        --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+| customer_address ||     customer     |
+|      (0.00s)     ||      (0.00s)     |
+|       50000      ||      100000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT a.ca_state state, count(*) cnt FROM customer_address a , customer c , store_sales s , date_dim d , item i WHERE a.ca_address_sk = c.c_current_addr_sk AND c.c_customer_sk = s.ss_customer_sk AND s.ss_sold_date_sk = d.d_date_sk AND s.ss_item_sk = i.i_item_sk AND d.d_month_seq = (SELECT DISTINCT (d_month_seq) FROM date_dim WHERE d_year = 2001 AND d_moy = 1 ) AND i.i_current_price > 1.2 * (SELECT avg(j.i_current_price) FROM item j WHERE j.i_category = i.i_category) GROUP BY a.ca_state HAVING count(*) >= 10 ORDER BY cnt, a.ca_state LIMIT 100;
+<<Timing>>
+Total Time: 15.086554s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|      FILTER      |
+|     #1 >= 10     |
+|      (0.00s)     |
+|        45        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|        50        |
+--------------------
+--------------------
+|      FILTER      |
+|  i_current_price |
+|      > (1.20     |
+|  0000 * SUBQUERY |
+|      (0.35s)     |
+|       3069       |
+--------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |   HASH_GROUP_BY  |
+|       INNER      |                                                                                                    |                  |
+|  d_month_seq=#0  |                                                                                                    |                  |
+|      (1.12s)     |                                                                                                    |      (3.48s)     |
+|       31158      |                                                                                                    |       31158      |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  ||      FILTER      |
+|       INNER      |                                                                                |                  ||    i_category    |
+|    ss_item_sk    |                                                                                |                  ||    = i_category  |
+|    =i_item_sk    |                                                                                |                  ||                  |
+|      (0.83s)     |                                                                                |      (0.00s)     ||      (3.79s)     |
+|      2880404     |                                                                                |         1        ||     56109304     |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ------------------------------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||    PROJECTION    ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||                  ||       item       |
+|  ss_sold_date_sk |                                                            |                  ||                  ||                  |
+|    =d_date_sk    |                                                            |                  ||                  ||                  |
+|      (0.48s)     |                                                            |      (0.00s)     ||      (0.00s)     ||      (4.36s)     |
+|      2880404     |                                                            |       18000      ||        31        ||     560844000    |
+--------------------                                                            ------------------------------------------------------------
+--------------------                                        --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |      FILTER      |
+|       INNER      |                                        |     date_dim     |                    |     d_moy = 1    |
+|   c_customer_sk  |                                        |                  |                    |   d_year = 2001  |
+|  =ss_customer_sk |                                        |                  |                    |                  |
+|      (0.40s)     |                                        |      (0.00s)     |                    |      (0.00s)     |
+|      2880404     |                                        |       73049      |                    |        31        |
+--------------------                                        --------------------                    --------------------
+--------------------                    --------------------                                        --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |    store_sales   |                                        |     date_dim     |
+|   ca_address_sk  |                    |                  |                                        |                  |
+| =c_current_addr_ |                    |                  |                                        |                  |
+|        sk        |                    |                  |                                        |                  |
+|      (0.01s)     |                    |      (0.02s)     |                                        |      (0.00s)     |
+|      100000      |                    |      2880404     |                                        |       73049      |
+--------------------                    --------------------                                        --------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+| customer_address ||     customer     |
+|      (0.00s)     ||      (0.00s)     |
+|       50000      ||      100000      |
+----------------------------------------
+

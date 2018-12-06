@@ -1,0 +1,115 @@
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.521547s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|      FILTER      |
+|     i = 50000    |
+|      (0.15s)     |
+|         1        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.36s)     |
+|     100000000    |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.517819s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|      FILTER      |
+|     i = 50000    |
+|      (0.15s)     |
+|         1        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.35s)     |
+|     100000000    |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.519283s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|      FILTER      |
+|     i = 50000    |
+|      (0.15s)     |
+|         1        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.35s)     |
+|     100000000    |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.520885s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|      FILTER      |
+|     i = 50000    |
+|      (0.15s)     |
+|         1        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.36s)     |
+|     100000000    |
+--------------------
+
+<<Query Profiling Information>>
+SELECT j FROM integers WHERE i=50000
+<<Timing>>
+Total Time: 0.520144s
+<<Operator Tree>>
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         1        |
+--------------------
+--------------------
+|      FILTER      |
+|     i = 50000    |
+|      (0.15s)     |
+|         1        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.35s)     |
+|     100000000    |
+--------------------
+

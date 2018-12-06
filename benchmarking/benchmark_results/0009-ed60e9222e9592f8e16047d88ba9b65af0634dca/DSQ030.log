@@ -1,0 +1,540 @@
+<<Query Profiling Information>>
+WITH results AS (SELECT i_item_id, s_state, 0 AS g_state, ss_quantity agg1, ss_list_price agg2, ss_coupon_amt agg3, ss_sales_price agg4 FROM store_sales, customer_demographics, date_dim, store, item WHERE ss_sold_date_sk = d_date_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND ss_cdemo_sk = cd_demo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND d_year = 2002 AND s_state = 'TN' ) SELECT i_item_id, s_state, g_state, agg1, agg2, agg3, agg4 FROM ( SELECT i_item_id, s_state, 0 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id , s_state UNION ALL SELECT i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id UNION ALL SELECT NULL AS i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results ) foo ORDER BY i_item_id, s_state LIMIT 100;
+<<Timing>>
+Total Time: 0.723363s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.06s)     |
+|       1024       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.01s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |    PROJECTION    |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       INNER      |
+|                  |                                                                                |                  |                                                                                |    ss_item_sk    |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.01s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |       item       |
+|                  |                                                                                |                  |                                                                                |    ss_store_sk   |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =s_store_sk   |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |                                                            |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                                            |       18000      |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                                                                |       INNER      |                                                                                |       INNER      |                                        |   s_state = TN   |
+|    ss_item_sk    |                                                                                |    ss_item_sk    |                                                                                |  ss_sold_date_sk |                                        |                  |
+|    =i_item_sk    |                                                                                |    =i_item_sk    |                                                                                |    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.02s)     |                                        |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                        |        12        |
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||       INNER      |                                                            |       item       ||       INNER      |                    |   d_year = 2002  ||       store      |
+|    ss_store_sk   |                                                            |                  ||    ss_store_sk   |                                                            |                  ||    ss_cdemo_sk   |                    |                  ||                  |
+|    =s_store_sk   |                                                            |                  ||    =s_store_sk   |                                                            |                  ||    =cd_demo_sk   |                    |                  ||                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.01s)     |                                                            |      (0.00s)     ||      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       8102       |                                                            |       18000      ||       8102       |                                                            |       18000      ||       41350      |                    |        365       ||        12        |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      |                    |     HASH_JOIN    |                                        |      FILTER      |                    |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |   s_state = TN   |                    |       INNER      |                                        |   s_state = TN   |                    |    store_sales   || cd_education_sta ||     date_dim     |
+|  ss_sold_date_sk |                                        |                  |                    |  ss_sold_date_sk |                                        |                  |                    |                  ||   tus = College  ||                  |
+|    =d_date_sk    |                                        |                  |                    |    =d_date_sk    |                                        |                  |                    |                  || cd_marital_statu ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||       s = S      ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||   cd_gender = M  ||                  |
+|      (0.02s)     |                                        |      (0.00s)     |                    |      (0.02s)     |                                        |      (0.00s)     |                    |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|       8102       |                                        |        12        |                    |       8102       |                                        |        12        |                    |      2880404     ||       27440      ||       73049      |
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                    |     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |   d_year = 2002  ||       store      |                    |       INNER      |                    |   d_year = 2002  ||       store      |                                        | customer_demogra |
+|    ss_cdemo_sk   |                    |                  ||                  |                    |    ss_cdemo_sk   |                    |                  ||                  |                                        |       phics      |
+|    =cd_demo_sk   |                    |                  ||                  |                    |    =cd_demo_sk   |                    |                  ||                  |                                        |                  |
+|      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                    |      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                                        |      (0.03s)     |
+|       41350      |                    |        365       ||        12        |                    |       41350      |                    |        365       ||        12        |                                        |      1920800     |
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   || cd_education_sta ||     date_dim     |                                        |    store_sales   || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |                                        |                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |                                        |                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |                                        |                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |                                        |                  ||   cd_gender = M  ||                  |
+|      (0.03s)     ||      (0.04s)     ||      (0.00s)     |                                        |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|      2880404     ||       27440      ||       73049      |                                        |      2880404     ||       27440      ||       73049      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    | customer_demogra |                                                                                | customer_demogra |
+                    |       phics      |                                                                                |       phics      |
+                    |      (0.03s)     |                                                                                |      (0.03s)     |
+                    |      1920800     |                                                                                |      1920800     |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH results AS (SELECT i_item_id, s_state, 0 AS g_state, ss_quantity agg1, ss_list_price agg2, ss_coupon_amt agg3, ss_sales_price agg4 FROM store_sales, customer_demographics, date_dim, store, item WHERE ss_sold_date_sk = d_date_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND ss_cdemo_sk = cd_demo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND d_year = 2002 AND s_state = 'TN' ) SELECT i_item_id, s_state, g_state, agg1, agg2, agg3, agg4 FROM ( SELECT i_item_id, s_state, 0 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id , s_state UNION ALL SELECT i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id UNION ALL SELECT NULL AS i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results ) foo ORDER BY i_item_id, s_state LIMIT 100;
+<<Timing>>
+Total Time: 0.751472s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.06s)     |
+|       1024       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.01s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |    PROJECTION    |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       INNER      |
+|                  |                                                                                |                  |                                                                                |    ss_item_sk    |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.01s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |       item       |
+|                  |                                                                                |                  |                                                                                |    ss_store_sk   |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =s_store_sk   |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |                                                            |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                                            |       18000      |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                                                                |       INNER      |                                                                                |       INNER      |                                        |   s_state = TN   |
+|    ss_item_sk    |                                                                                |    ss_item_sk    |                                                                                |  ss_sold_date_sk |                                        |                  |
+|    =i_item_sk    |                                                                                |    =i_item_sk    |                                                                                |    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.02s)     |                                        |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                        |        12        |
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||       INNER      |                                                            |       item       ||       INNER      |                    |   d_year = 2002  ||       store      |
+|    ss_store_sk   |                                                            |                  ||    ss_store_sk   |                                                            |                  ||    ss_cdemo_sk   |                    |                  ||                  |
+|    =s_store_sk   |                                                            |                  ||    =s_store_sk   |                                                            |                  ||    =cd_demo_sk   |                    |                  ||                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.01s)     |                                                            |      (0.00s)     ||      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       8102       |                                                            |       18000      ||       8102       |                                                            |       18000      ||       41350      |                    |        365       ||        12        |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      |                    |     HASH_JOIN    |                                        |      FILTER      |                    |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |   s_state = TN   |                    |       INNER      |                                        |   s_state = TN   |                    |    store_sales   || cd_education_sta ||     date_dim     |
+|  ss_sold_date_sk |                                        |                  |                    |  ss_sold_date_sk |                                        |                  |                    |                  ||   tus = College  ||                  |
+|    =d_date_sk    |                                        |                  |                    |    =d_date_sk    |                                        |                  |                    |                  || cd_marital_statu ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||       s = S      ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||   cd_gender = M  ||                  |
+|      (0.02s)     |                                        |      (0.00s)     |                    |      (0.02s)     |                                        |      (0.00s)     |                    |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|       8102       |                                        |        12        |                    |       8102       |                                        |        12        |                    |      2880404     ||       27440      ||       73049      |
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                    |     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |   d_year = 2002  ||       store      |                    |       INNER      |                    |   d_year = 2002  ||       store      |                                        | customer_demogra |
+|    ss_cdemo_sk   |                    |                  ||                  |                    |    ss_cdemo_sk   |                    |                  ||                  |                                        |       phics      |
+|    =cd_demo_sk   |                    |                  ||                  |                    |    =cd_demo_sk   |                    |                  ||                  |                                        |                  |
+|      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                    |      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                                        |      (0.03s)     |
+|       41350      |                    |        365       ||        12        |                    |       41350      |                    |        365       ||        12        |                                        |      1920800     |
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   || cd_education_sta ||     date_dim     |                                        |    store_sales   || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |                                        |                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |                                        |                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |                                        |                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |                                        |                  ||   cd_gender = M  ||                  |
+|      (0.03s)     ||      (0.05s)     ||      (0.00s)     |                                        |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|      2880404     ||       27440      ||       73049      |                                        |      2880404     ||       27440      ||       73049      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    | customer_demogra |                                                                                | customer_demogra |
+                    |       phics      |                                                                                |       phics      |
+                    |      (0.04s)     |                                                                                |      (0.03s)     |
+                    |      1920800     |                                                                                |      1920800     |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH results AS (SELECT i_item_id, s_state, 0 AS g_state, ss_quantity agg1, ss_list_price agg2, ss_coupon_amt agg3, ss_sales_price agg4 FROM store_sales, customer_demographics, date_dim, store, item WHERE ss_sold_date_sk = d_date_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND ss_cdemo_sk = cd_demo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND d_year = 2002 AND s_state = 'TN' ) SELECT i_item_id, s_state, g_state, agg1, agg2, agg3, agg4 FROM ( SELECT i_item_id, s_state, 0 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id , s_state UNION ALL SELECT i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id UNION ALL SELECT NULL AS i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results ) foo ORDER BY i_item_id, s_state LIMIT 100;
+<<Timing>>
+Total Time: 0.756894s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.06s)     |
+|       1024       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.01s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |    PROJECTION    |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       INNER      |
+|                  |                                                                                |                  |                                                                                |    ss_item_sk    |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.01s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |       item       |
+|                  |                                                                                |                  |                                                                                |    ss_store_sk   |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =s_store_sk   |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |                                                            |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                                            |       18000      |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                                                                |       INNER      |                                                                                |       INNER      |                                        |   s_state = TN   |
+|    ss_item_sk    |                                                                                |    ss_item_sk    |                                                                                |  ss_sold_date_sk |                                        |                  |
+|    =i_item_sk    |                                                                                |    =i_item_sk    |                                                                                |    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.02s)     |                                        |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                        |        12        |
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||       INNER      |                                                            |       item       ||       INNER      |                    |   d_year = 2002  ||       store      |
+|    ss_store_sk   |                                                            |                  ||    ss_store_sk   |                                                            |                  ||    ss_cdemo_sk   |                    |                  ||                  |
+|    =s_store_sk   |                                                            |                  ||    =s_store_sk   |                                                            |                  ||    =cd_demo_sk   |                    |                  ||                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.01s)     |                                                            |      (0.00s)     ||      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       8102       |                                                            |       18000      ||       8102       |                                                            |       18000      ||       41350      |                    |        365       ||        12        |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      |                    |     HASH_JOIN    |                                        |      FILTER      |                    |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |   s_state = TN   |                    |       INNER      |                                        |   s_state = TN   |                    |    store_sales   || cd_education_sta ||     date_dim     |
+|  ss_sold_date_sk |                                        |                  |                    |  ss_sold_date_sk |                                        |                  |                    |                  ||   tus = College  ||                  |
+|    =d_date_sk    |                                        |                  |                    |    =d_date_sk    |                                        |                  |                    |                  || cd_marital_statu ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||       s = S      ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||   cd_gender = M  ||                  |
+|      (0.02s)     |                                        |      (0.00s)     |                    |      (0.02s)     |                                        |      (0.00s)     |                    |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|       8102       |                                        |        12        |                    |       8102       |                                        |        12        |                    |      2880404     ||       27440      ||       73049      |
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                    |     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |   d_year = 2002  ||       store      |                    |       INNER      |                    |   d_year = 2002  ||       store      |                                        | customer_demogra |
+|    ss_cdemo_sk   |                    |                  ||                  |                    |    ss_cdemo_sk   |                    |                  ||                  |                                        |       phics      |
+|    =cd_demo_sk   |                    |                  ||                  |                    |    =cd_demo_sk   |                    |                  ||                  |                                        |                  |
+|      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                    |      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                                        |      (0.03s)     |
+|       41350      |                    |        365       ||        12        |                    |       41350      |                    |        365       ||        12        |                                        |      1920800     |
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   || cd_education_sta ||     date_dim     |                                        |    store_sales   || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |                                        |                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |                                        |                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |                                        |                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |                                        |                  ||   cd_gender = M  ||                  |
+|      (0.04s)     ||      (0.04s)     ||      (0.00s)     |                                        |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|      2880404     ||       27440      ||       73049      |                                        |      2880404     ||       27440      ||       73049      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    | customer_demogra |                                                                                | customer_demogra |
+                    |       phics      |                                                                                |       phics      |
+                    |      (0.04s)     |                                                                                |      (0.04s)     |
+                    |      1920800     |                                                                                |      1920800     |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH results AS (SELECT i_item_id, s_state, 0 AS g_state, ss_quantity agg1, ss_list_price agg2, ss_coupon_amt agg3, ss_sales_price agg4 FROM store_sales, customer_demographics, date_dim, store, item WHERE ss_sold_date_sk = d_date_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND ss_cdemo_sk = cd_demo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND d_year = 2002 AND s_state = 'TN' ) SELECT i_item_id, s_state, g_state, agg1, agg2, agg3, agg4 FROM ( SELECT i_item_id, s_state, 0 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id , s_state UNION ALL SELECT i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id UNION ALL SELECT NULL AS i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results ) foo ORDER BY i_item_id, s_state LIMIT 100;
+<<Timing>>
+Total Time: 0.725568s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.06s)     |
+|       1024       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.01s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |    PROJECTION    |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       INNER      |
+|                  |                                                                                |                  |                                                                                |    ss_item_sk    |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.01s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |       item       |
+|                  |                                                                                |                  |                                                                                |    ss_store_sk   |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =s_store_sk   |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |                                                            |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                                            |       18000      |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                                                                |       INNER      |                                                                                |       INNER      |                                        |   s_state = TN   |
+|    ss_item_sk    |                                                                                |    ss_item_sk    |                                                                                |  ss_sold_date_sk |                                        |                  |
+|    =i_item_sk    |                                                                                |    =i_item_sk    |                                                                                |    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.02s)     |                                        |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                        |        12        |
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||       INNER      |                                                            |       item       ||       INNER      |                    |   d_year = 2002  ||       store      |
+|    ss_store_sk   |                                                            |                  ||    ss_store_sk   |                                                            |                  ||    ss_cdemo_sk   |                    |                  ||                  |
+|    =s_store_sk   |                                                            |                  ||    =s_store_sk   |                                                            |                  ||    =cd_demo_sk   |                    |                  ||                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.01s)     |                                                            |      (0.00s)     ||      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       8102       |                                                            |       18000      ||       8102       |                                                            |       18000      ||       41350      |                    |        365       ||        12        |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      |                    |     HASH_JOIN    |                                        |      FILTER      |                    |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |   s_state = TN   |                    |       INNER      |                                        |   s_state = TN   |                    |    store_sales   || cd_education_sta ||     date_dim     |
+|  ss_sold_date_sk |                                        |                  |                    |  ss_sold_date_sk |                                        |                  |                    |                  ||   tus = College  ||                  |
+|    =d_date_sk    |                                        |                  |                    |    =d_date_sk    |                                        |                  |                    |                  || cd_marital_statu ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||       s = S      ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||   cd_gender = M  ||                  |
+|      (0.02s)     |                                        |      (0.00s)     |                    |      (0.02s)     |                                        |      (0.00s)     |                    |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|       8102       |                                        |        12        |                    |       8102       |                                        |        12        |                    |      2880404     ||       27440      ||       73049      |
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                    |     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |   d_year = 2002  ||       store      |                    |       INNER      |                    |   d_year = 2002  ||       store      |                                        | customer_demogra |
+|    ss_cdemo_sk   |                    |                  ||                  |                    |    ss_cdemo_sk   |                    |                  ||                  |                                        |       phics      |
+|    =cd_demo_sk   |                    |                  ||                  |                    |    =cd_demo_sk   |                    |                  ||                  |                                        |                  |
+|      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                    |      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                                        |      (0.03s)     |
+|       41350      |                    |        365       ||        12        |                    |       41350      |                    |        365       ||        12        |                                        |      1920800     |
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   || cd_education_sta ||     date_dim     |                                        |    store_sales   || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |                                        |                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |                                        |                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |                                        |                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |                                        |                  ||   cd_gender = M  ||                  |
+|      (0.03s)     ||      (0.04s)     ||      (0.00s)     |                                        |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|      2880404     ||       27440      ||       73049      |                                        |      2880404     ||       27440      ||       73049      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    | customer_demogra |                                                                                | customer_demogra |
+                    |       phics      |                                                                                |       phics      |
+                    |      (0.03s)     |                                                                                |      (0.03s)     |
+                    |      1920800     |                                                                                |      1920800     |
+                    --------------------                                                                                --------------------
+
+<<Query Profiling Information>>
+WITH results AS (SELECT i_item_id, s_state, 0 AS g_state, ss_quantity agg1, ss_list_price agg2, ss_coupon_amt agg3, ss_sales_price agg4 FROM store_sales, customer_demographics, date_dim, store, item WHERE ss_sold_date_sk = d_date_sk AND ss_item_sk = i_item_sk AND ss_store_sk = s_store_sk AND ss_cdemo_sk = cd_demo_sk AND cd_gender = 'M' AND cd_marital_status = 'S' AND cd_education_status = 'College' AND d_year = 2002 AND s_state = 'TN' ) SELECT i_item_id, s_state, g_state, agg1, agg2, agg3, agg4 FROM ( SELECT i_item_id, s_state, 0 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id , s_state UNION ALL SELECT i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results GROUP BY i_item_id UNION ALL SELECT NULL AS i_item_id, NULL AS s_state, 1 AS g_state, avg(agg1) agg1, avg(agg2) agg2, avg(agg3) agg3, avg(agg4) agg4 FROM results ) foo ORDER BY i_item_id, s_state LIMIT 100;
+<<Timing>>
+Total Time: 0.724027s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.06s)     |
+|       1024       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------
+|       UNION      |
+|      (0.00s)     |
+|       10665      |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|    PROJECTION    |                                                                                                                                                                                    |    PROJECTION    |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                                    --------------------
+|       UNION      |                                                                                                                                                                                    |   HASH_GROUP_BY  |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.01s)     |
+|       10664      |                                                                                                                                                                                    |         1        |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |    PROJECTION    |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.00s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------
+|   HASH_GROUP_BY  |                                                                                |   HASH_GROUP_BY  |                                                                                |     HASH_JOIN    |
+|                  |                                                                                |                  |                                                                                |       INNER      |
+|                  |                                                                                |                  |                                                                                |    ss_item_sk    |
+|                  |                                                                                |                  |                                                                                |    =i_item_sk    |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.01s)     |
+|       5332       |                                                                                |       5332       |                                                                                |       8102       |
+--------------------                                                                                --------------------                                                                                --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+|    PROJECTION    |                                                                                |    PROJECTION    |                                                                                |     HASH_JOIN    |                                                            |     SEQ_SCAN     |
+|                  |                                                                                |                  |                                                                                |       INNER      |                                                            |       item       |
+|                  |                                                                                |                  |                                                                                |    ss_store_sk   |                                                            |                  |
+|                  |                                                                                |                  |                                                                                |    =s_store_sk   |                                                            |                  |
+|      (0.00s)     |                                                                                |      (0.00s)     |                                                                                |      (0.01s)     |                                                            |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                                            |       18000      |
+--------------------                                                                                --------------------                                                                                --------------------                                                            --------------------
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+|     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                                                                |     HASH_JOIN    |                                        |      FILTER      |
+|       INNER      |                                                                                |       INNER      |                                                                                |       INNER      |                                        |   s_state = TN   |
+|    ss_item_sk    |                                                                                |    ss_item_sk    |                                                                                |  ss_sold_date_sk |                                        |                  |
+|    =i_item_sk    |                                                                                |    =i_item_sk    |                                                                                |    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                                                                |      (0.01s)     |                                                                                |      (0.02s)     |                                        |      (0.00s)     |
+|       8102       |                                                                                |       8102       |                                                                                |       8102       |                                        |        12        |
+--------------------                                                                                --------------------                                                                                --------------------                                        --------------------
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+|     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                                                            |     SEQ_SCAN     ||     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            |       item       ||       INNER      |                                                            |       item       ||       INNER      |                    |   d_year = 2002  ||       store      |
+|    ss_store_sk   |                                                            |                  ||    ss_store_sk   |                                                            |                  ||    ss_cdemo_sk   |                    |                  ||                  |
+|    =s_store_sk   |                                                            |                  ||    =s_store_sk   |                                                            |                  ||    =cd_demo_sk   |                    |                  ||                  |
+|      (0.01s)     |                                                            |      (0.00s)     ||      (0.01s)     |                                                            |      (0.00s)     ||      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |
+|       8102       |                                                            |       18000      ||       8102       |                                                            |       18000      ||       41350      |                    |        365       ||        12        |
+--------------------                                                            ----------------------------------------                                                            ----------------------------------------                    ----------------------------------------
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+|     HASH_JOIN    |                                        |      FILTER      |                    |     HASH_JOIN    |                                        |      FILTER      |                    |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                        |   s_state = TN   |                    |       INNER      |                                        |   s_state = TN   |                    |    store_sales   || cd_education_sta ||     date_dim     |
+|  ss_sold_date_sk |                                        |                  |                    |  ss_sold_date_sk |                                        |                  |                    |                  ||   tus = College  ||                  |
+|    =d_date_sk    |                                        |                  |                    |    =d_date_sk    |                                        |                  |                    |                  || cd_marital_statu ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||       s = S      ||                  |
+|                  |                                        |                  |                    |                  |                                        |                  |                    |                  ||   cd_gender = M  ||                  |
+|      (0.02s)     |                                        |      (0.00s)     |                    |      (0.02s)     |                                        |      (0.00s)     |                    |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|       8102       |                                        |        12        |                    |       8102       |                                        |        12        |                    |      2880404     ||       27440      ||       73049      |
+--------------------                                        --------------------                    --------------------                                        --------------------                    ------------------------------------------------------------
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+|     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                    |     HASH_JOIN    |                    |      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     |
+|       INNER      |                    |   d_year = 2002  ||       store      |                    |       INNER      |                    |   d_year = 2002  ||       store      |                                        | customer_demogra |
+|    ss_cdemo_sk   |                    |                  ||                  |                    |    ss_cdemo_sk   |                    |                  ||                  |                                        |       phics      |
+|    =cd_demo_sk   |                    |                  ||                  |                    |    =cd_demo_sk   |                    |                  ||                  |                                        |                  |
+|      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                    |      (0.07s)     |                    |      (0.00s)     ||      (0.00s)     |                                        |      (0.03s)     |
+|       41350      |                    |        365       ||        12        |                    |       41350      |                    |        365       ||        12        |                                        |      1920800     |
+--------------------                    ----------------------------------------                    --------------------                    ----------------------------------------                                        --------------------
+------------------------------------------------------------                                        ------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   || cd_education_sta ||     date_dim     |                                        |    store_sales   || cd_education_sta ||     date_dim     |
+|                  ||   tus = College  ||                  |                                        |                  ||   tus = College  ||                  |
+|                  || cd_marital_statu ||                  |                                        |                  || cd_marital_statu ||                  |
+|                  ||       s = S      ||                  |                                        |                  ||       s = S      ||                  |
+|                  ||   cd_gender = M  ||                  |                                        |                  ||   cd_gender = M  ||                  |
+|      (0.03s)     ||      (0.04s)     ||      (0.00s)     |                                        |      (0.03s)     ||      (0.04s)     ||      (0.00s)     |
+|      2880404     ||       27440      ||       73049      |                                        |      2880404     ||       27440      ||       73049      |
+------------------------------------------------------------                                        ------------------------------------------------------------
+                    --------------------                                                                                --------------------
+                    |     SEQ_SCAN     |                                                                                |     SEQ_SCAN     |
+                    | customer_demogra |                                                                                | customer_demogra |
+                    |       phics      |                                                                                |       phics      |
+                    |      (0.03s)     |                                                                                |      (0.03s)     |
+                    |      1920800     |                                                                                |      1920800     |
+                    --------------------                                                                                --------------------
+

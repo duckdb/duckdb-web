@@ -1,0 +1,250 @@
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manager_id = 1 AND dt.d_moy=11 AND dt.d_year=2000 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, ext_price DESC, brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.309151s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1568       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | i_manager_id = 1 |
+|     d_date_sk    |                    |                  |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       92861      |                    |        321       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manager_id = 1 AND dt.d_moy=11 AND dt.d_year=2000 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, ext_price DESC, brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.309566s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1568       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | i_manager_id = 1 |
+|     d_date_sk    |                    |                  |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       92861      |                    |        321       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manager_id = 1 AND dt.d_moy=11 AND dt.d_year=2000 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, ext_price DESC, brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.309201s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1568       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | i_manager_id = 1 |
+|     d_date_sk    |                    |                  |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       92861      |                    |        321       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manager_id = 1 AND dt.d_moy=11 AND dt.d_year=2000 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, ext_price DESC, brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.311180s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1568       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | i_manager_id = 1 |
+|     d_date_sk    |                    |                  |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       92861      |                    |        321       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manager_id = 1 AND dt.d_moy=11 AND dt.d_year=2000 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, ext_price DESC, brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.310237s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        109       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1568       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | i_manager_id = 1 |
+|     d_date_sk    |                    |                  |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       92861      |                    |        321       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+

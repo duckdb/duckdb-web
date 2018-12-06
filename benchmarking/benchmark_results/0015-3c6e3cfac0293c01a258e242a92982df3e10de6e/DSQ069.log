@@ -1,0 +1,76 @@
+<<Query Profiling Information>>
+SELECT s_store_name, i_item_desc, sc.revenue, i_current_price, i_wholesale_cost, i_brand FROM store, item, (SELECT ss_store_sk, avg(revenue) AS ave FROM (SELECT ss_store_sk, ss_item_sk, sum(ss_sales_price) AS revenue FROM store_sales, date_dim WHERE ss_sold_date_sk = d_date_sk AND d_month_seq BETWEEN 1176 AND 1176+11 GROUP BY ss_store_sk, ss_item_sk) sa GROUP BY ss_store_sk) sb, (SELECT ss_store_sk, ss_item_sk, sum(ss_sales_price) AS revenue FROM store_sales, date_dim WHERE ss_sold_date_sk = d_date_sk AND d_month_seq BETWEEN 1176 AND 1176+11 GROUP BY ss_store_sk, ss_item_sk) sc WHERE sb.ss_store_sk = sc.ss_store_sk AND sc.revenue <= 0.1 * sb.ave AND s_store_sk = sc.ss_store_sk AND i_item_sk = sc.ss_item_sk ORDER BY s_store_name, i_item_desc LIMIT 100;
+<<Timing>>
+Total Time: 30.340129s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|       4028       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     i_item_sk    |
+|    =ss_item_sk   |
+|    s_store_sk    |
+|   =ss_store_sk   |
+|    ss_store_sk   |
+|   =ss_store_sk   |
+|     0.100000     |
+|  * ave)>=revenue |
+|      (0.18s)     |
+|       4028       |
+--------------------
+--------------------                                                            --------------------
+|   CROSS_PRODUCT  |                                                            |   HASH_GROUP_BY  |
+|      (0.02s)     |                                                            |      (0.17s)     |
+|       98304      |                                                            |      107999      |
+--------------------                                                            --------------------
+--------------------                    --------------------                    --------------------
+|   CROSS_PRODUCT  |                    |   HASH_GROUP_BY  |                    |     HASH_JOIN    |
+|                  |                    |                  |                    |       INNER      |
+|                  |                    |                  |                    |  ss_sold_date_sk |
+|                  |                    |                  |                    |    =d_date_sk    |
+|      (0.00s)     |                    |      (0.06s)     |                    |      (0.09s)     |
+|       17408      |                    |        96        |                    |      2880404     |
+--------------------                    --------------------                    --------------------
+------------------------------------------------------------                    ----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||   HASH_GROUP_BY  |                    |     SEQ_SCAN     ||      FILTER      |
+|       store      ||       item       ||                  |                    |    store_sales   ||    d_month_seq   |
+|                  ||                  ||                  |                    |                  ||      >= 1176     |
+|      (0.00s)     ||      (0.00s)     ||     (23.05s)     |                    |      (0.02s)     ||      (0.00s)     |
+|        12        ||       2048       ||      1727984     |                    |      2880404     ||       37256      |
+------------------------------------------------------------                    ----------------------------------------
+                                        --------------------                                        --------------------
+                                        |     HASH_JOIN    |                                        |     SEQ_SCAN     |
+                                        |       INNER      |                                        |     date_dim     |
+                                        |  ss_sold_date_sk |                                        |                  |
+                                        |    =d_date_sk    |                                        |                  |
+                                        |      (6.22s)     |                                        |      (0.00s)     |
+                                        |     428898600    |                                        |       73049      |
+                                        --------------------                                        --------------------
+                                        ----------------------------------------
+                                        |     SEQ_SCAN     ||      FILTER      |
+                                        |    store_sales   ||    d_month_seq   |
+                                        |                  ||      >= 1176     |
+                                        |      (0.35s)     ||      (0.00s)     |
+                                        |     48272704     ||      633352      |
+                                        ----------------------------------------
+                                                            --------------------
+                                                            |     SEQ_SCAN     |
+                                                            |     date_dim     |
+                                                            |      (0.01s)     |
+                                                            |      1241833     |
+                                                            --------------------
+
