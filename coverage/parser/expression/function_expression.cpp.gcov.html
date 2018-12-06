@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report cdef117e - parser/expression/function_expression.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">parser/expression</a> - function_expression.cpp<span style="font-size: 80%;"> (source / <a href="function_expression.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntryLo">65.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryLo">60.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;parser/expression/function_expression.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;catalog/catalog_entry/scalar_function_catalog_entry.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;common/exception.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;common/serializer.hpp&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : using namespace duckdb;
+<a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">       2161 : FunctionExpression::FunctionExpression(string schema, string function_name, vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;children)</span>
+<span class="lineNum">      11 </span>            :     : Expression(ExpressionType::FUNCTION), schema(schema), function_name(StringUtil::Lower(function_name)),
+<span class="lineNum">      12 </span><span class="lineCov">       2161 :       bound_function(nullptr) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">       4509 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">       2348 :                 AddChild(move(child));</span>
+<span class="lineNum">      15 </span>            :         }
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">       2161 : }</span></a>
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span><span class="lineCov">       2143 : void FunctionExpression::ResolveType() {</span>
+<span class="lineNum">      19 </span><span class="lineCov">       2143 :         Expression::ResolveType();</span>
+<span class="lineNum">      20 </span><span class="lineCov">       2143 :         vector&lt;TypeId&gt; child_types;</span>
+<span class="lineNum">      21 </span><span class="lineCov">       4468 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">       2325 :                 child_types.push_back(child-&gt;return_type);</span>
+<span class="lineNum">      23 </span>            :         }
+<span class="lineNum">      24 </span><span class="lineCov">       2143 :         if (!bound_function-&gt;matches(child_types)) {</span>
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 :                 throw CatalogException(&quot;Incorrect set of arguments for function \&quot;%s\&quot;&quot;, function_name.c_str());</span>
+<span class="lineNum">      26 </span>            :         }
+<span class="lineNum">      27 </span><span class="lineCov">       2143 :         return_type = bound_function-&gt;return_type(child_types);</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">       2143 : }</span></a>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">         26 : unique_ptr&lt;Expression&gt; FunctionExpression::Copy() {</span>
+<span class="lineNum">      31 </span><span class="lineCov">         52 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; copy_children;</span>
+<span class="lineNum">      32 </span><span class="lineCov">         78 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">         52 :                 copy_children.push_back(child-&gt;Copy());</span>
+<span class="lineNum">      34 </span>            :         }
+<span class="lineNum">      35 </span><span class="lineCov">         52 :         auto copy = make_unique&lt;FunctionExpression&gt;(function_name, copy_children);</span>
+<span class="lineNum">      36 </span><span class="lineCov">         26 :         copy-&gt;schema = schema;</span>
+<span class="lineNum">      37 </span><span class="lineCov">         26 :         copy-&gt;CopyProperties(*this);</span>
+<span class="lineNum">      38 </span><span class="lineCov">         52 :         return copy;</span>
+<a name="39"><span class="lineNum">      39 </span>            : }</a>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 : void FunctionExpression::Serialize(Serializer &amp;serializer) {</span>
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :         Expression::Serialize(serializer);</span>
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :         serializer.WriteString(function_name);</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :         serializer.WriteString(schema);</span>
+<a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 : unique_ptr&lt;Expression&gt; FunctionExpression::Deserialize(ExpressionDeserializeInfo *info, Deserializer &amp;source) {</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :         auto function_name = source.Read&lt;string&gt;();</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :         auto function = make_unique&lt;FunctionExpression&gt;(function_name, info-&gt;children);</span>
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :         function-&gt;schema = source.Read&lt;string&gt;();</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :         return function;</span>
+<span class="lineNum">      52 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

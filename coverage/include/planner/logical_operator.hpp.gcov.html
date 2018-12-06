@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report cdef117e - include/planner/logical_operator.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">include/planner</a> - logical_operator.hpp<span style="font-size: 80%;"> (source / <a href="logical_operator.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntryHi">94.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : //                         DuckDB
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // planner/logical_operator.hpp
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : //
+<span class="lineNum">       7 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span>            : #pragma once
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #include &quot;catalog/catalog.hpp&quot;
+<span class="lineNum">      12 </span>            : #include &quot;common/common.hpp&quot;
+<span class="lineNum">      13 </span>            : #include &quot;common/printable.hpp&quot;
+<span class="lineNum">      14 </span>            : #include &quot;parser/expression.hpp&quot;
+<span class="lineNum">      15 </span>            : #include &quot;parser/statement/select_statement.hpp&quot;
+<span class="lineNum">      16 </span>            : #include &quot;planner/logical_operator_visitor.hpp&quot;
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : #include &lt;unordered_set&gt;
+<span class="lineNum">      19 </span>            : #include &lt;vector&gt;
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span>            : namespace duckdb {
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            : //! Returns true if the node is a projection
+<span class="lineNum">      24 </span>            : bool IsProjection(LogicalOperatorType type);
+<span class="lineNum">      25 </span>            : //! Returns the root projection or join node
+<span class="lineNum">      26 </span>            : LogicalOperator *GetProjection(LogicalOperator *);
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span>            : //! LogicalOperator is the base class of the logical operators present in the
+<span class="lineNum">      29 </span>            : //! logical query tree
+<a name="30"><span class="lineNum">      30 </span>            : class LogicalOperator : public Printable {</a>
+<span class="lineNum">      31 </span>            : public:
+<span class="lineNum">      32 </span><span class="lineCov">    7185326 :         LogicalOperator(LogicalOperatorType type) : type(type) {</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    7184458 :         }</span></a>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">    3839243 :         LogicalOperator(LogicalOperatorType type, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
+<span class="lineNum">      36 </span><span class="lineCov">    3839243 :             : type(type), expressions(std::move(expressions)) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">    3839371 :         }</span>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :         LogicalOperatorType GetOperatorType() {
+<span class="lineNum">      40 </span>            :                 return type;
+<span class="lineNum">      41 </span>            :         }
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            :         //! Return a vector of the column names that will be returned by this
+<span class="lineNum">      44 </span>            :         //! operator
+<a name="45"><span class="lineNum">      45 </span>            :         virtual vector&lt;string&gt; GetNames() = 0;</a>
+<span class="lineNum">      46 </span>            :         //! Resolve the types of the logical operator and its children
+<span class="lineNum">      47 </span><span class="lineCov">   11012997 :         void ResolveOperatorTypes() {</span>
+<span class="lineNum">      48 </span><span class="lineCov">   11012997 :                 if (types.size() &gt; 0) {</span>
+<span class="lineNum">      49 </span>            :                         // types already resolved for this node
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :                         return;</span>
+<span class="lineNum">      51 </span>            :                 }
+<span class="lineNum">      52 </span>            :                 // first resolve child types
+<span class="lineNum">      53 </span><span class="lineCov">   18889090 :                 for (auto &amp;child : children) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">    7880654 :                         child-&gt;ResolveOperatorTypes();</span>
+<span class="lineNum">      55 </span>            :                 }
+<span class="lineNum">      56 </span>            :                 // now resolve the types for this operator
+<span class="lineNum">      57 </span><span class="lineCov">   11013368 :                 ResolveTypes();</span>
+<span class="lineNum">      58 </span>            :         }
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            :         virtual string ParamsToString() const;
+<span class="lineNum">      61 </span>            :         string ToString() const override;
+<a name="62"><span class="lineNum">      62 </span>            : </a>
+<span class="lineNum">      63 </span>            :         virtual void Accept(LogicalOperatorVisitor *) = 0;
+<span class="lineNum">      64 </span><span class="lineCov">   21486182 :         virtual void AcceptChildren(LogicalOperatorVisitor *v) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">   36180821 :                 for (auto &amp;child : children) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">   14705837 :                         child-&gt;Accept(v);</span>
+<span class="lineNum">      67 </span>            :                 }
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">   21502185 :         }</span></a>
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span><span class="lineCov">    7883181 :         void AddChild(unique_ptr&lt;LogicalOperator&gt; child) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">    7883181 :                 referenced_tables.insert(child-&gt;referenced_tables.begin(), child-&gt;referenced_tables.end());</span>
+<span class="lineNum">      72 </span><span class="lineCov">    7885702 :                 children.push_back(move(child));</span>
+<span class="lineNum">      73 </span><span class="lineCov">    7883713 :         }</span>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            :         //! The type of the logical operator
+<span class="lineNum">      76 </span>            :         LogicalOperatorType type;
+<span class="lineNum">      77 </span>            :         //! The set of tables that is accessible from this operator
+<span class="lineNum">      78 </span>            :         std::unordered_set&lt;size_t&gt; referenced_tables;
+<span class="lineNum">      79 </span>            :         //! The set of children of the operator
+<span class="lineNum">      80 </span>            :         vector&lt;unique_ptr&lt;LogicalOperator&gt;&gt; children;
+<span class="lineNum">      81 </span>            :         //! The set of expressions contained within the operator, if any
+<span class="lineNum">      82 </span>            :         vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions;
+<span class="lineNum">      83 </span>            :         //! The types returned by this logical operator. Set by calling LogicalOperator::ResolveTypes.
+<span class="lineNum">      84 </span>            :         vector&lt;TypeId&gt; types;
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            :         virtual size_t ExpressionCount();
+<span class="lineNum">      87 </span>            :         virtual Expression *GetExpression(size_t index);
+<span class="lineNum">      88 </span>            :         virtual void SetExpression(size_t index, unique_ptr&lt;Expression&gt; expr);
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span>            : protected:
+<span class="lineNum">      91 </span>            :         //! Resolve types for this specific operator
+<span class="lineNum">      92 </span>            :         virtual void ResolveTypes() = 0;
+<span class="lineNum">      93 </span>            : };
+<span class="lineNum">      94 </span>            : } // namespace duckdb
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report cdef117e - execution/operator/helper/physical_limit.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">execution/operator/helper</a> - physical_limit.cpp<span style="font-size: 80%;"> (source / <a href="physical_limit.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;execution/operator/helper/physical_limit.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : using namespace duckdb;
+<a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span><span class="lineCov">      13476 : void PhysicalLimit::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">       7 </span><span class="lineCov">      13476 :         auto state = reinterpret_cast&lt;PhysicalLimitOperatorState *&gt;(state_);</span>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">      13476 :         size_t max_element = limit + offset;</span>
+<span class="lineNum">      10 </span><span class="lineCov">      13476 :         if (state-&gt;current_offset &gt;= max_element) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">          9 :                 return;</span>
+<span class="lineNum">      12 </span>            :         }
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            :         // get the next chunk from the child
+<span class="lineNum">      15 </span><span class="lineCov">      13467 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      16 </span><span class="lineCov">      13459 :         if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">       1115 :                 return;</span>
+<span class="lineNum">      18 </span>            :         }
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">      12344 :         if (state-&gt;current_offset &lt; offset) {</span>
+<span class="lineNum">      21 </span>            :                 // we are not yet at the offset point
+<span class="lineNum">      22 </span><span class="lineCov">      11304 :                 if (state-&gt;current_offset + state-&gt;child_chunk.size() &gt;= offset) {</span>
+<span class="lineNum">      23 </span>            :                         // however we will reach it in this chunk
+<span class="lineNum">      24 </span>            :                         // we have to copy part of the chunk with an offset
+<span class="lineNum">      25 </span><span class="lineCov">      11304 :                         size_t start_position = offset - state-&gt;current_offset;</span>
+<span class="lineNum">      26 </span><span class="lineCov">      11304 :                         size_t chunk_count = min(limit, state-&gt;child_chunk.size() - start_position);</span>
+<span class="lineNum">      27 </span><span class="lineCov">      22610 :                         for (size_t i = 0; i &lt; chunk.column_count; i++) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">      11306 :                                 chunk.data[i].Reference(state-&gt;child_chunk.data[i]);</span>
+<span class="lineNum">      29 </span><span class="lineCov">      11306 :                                 chunk.data[i].data = chunk.data[i].data + GetTypeIdSize(chunk.data[i].type) * start_position;</span>
+<span class="lineNum">      30 </span><span class="lineCov">      11306 :                                 chunk.data[i].count = chunk_count;</span>
+<span class="lineNum">      31 </span>            :                         }
+<span class="lineNum">      32 </span><span class="lineCov">      11304 :                         chunk.sel_vector = move(state-&gt;child_chunk.sel_vector);</span>
+<span class="lineNum">      33 </span>            :                 }
+<span class="lineNum">      34 </span>            :         } else {
+<span class="lineNum">      35 </span>            :                 // have to copy either the entire chunk or part of it
+<span class="lineNum">      36 </span>            :                 size_t chunk_count;
+<span class="lineNum">      37 </span><span class="lineCov">       1040 :                 if (state-&gt;current_offset + state-&gt;child_chunk.size() &gt;= max_element) {</span>
+<span class="lineNum">      38 </span>            :                         // have to limit the count of the chunk
+<span class="lineNum">      39 </span><span class="lineCov">         10 :                         chunk_count = max_element - state-&gt;current_offset;</span>
+<span class="lineNum">      40 </span>            :                 } else {
+<span class="lineNum">      41 </span>            :                         // we copy the entire chunk
+<span class="lineNum">      42 </span><span class="lineCov">       1030 :                         chunk_count = state-&gt;child_chunk.size();</span>
+<span class="lineNum">      43 </span>            :                 }
+<span class="lineNum">      44 </span>            :                 // instead of copying we just change the pointer in the current chunk
+<span class="lineNum">      45 </span><span class="lineCov">       7288 :                 for (size_t i = 0; i &lt; chunk.column_count; i++) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">       6248 :                         chunk.data[i].Reference(state-&gt;child_chunk.data[i]);</span>
+<span class="lineNum">      47 </span><span class="lineCov">       6248 :                         chunk.data[i].count = chunk_count;</span>
+<span class="lineNum">      48 </span>            :                 }
+<span class="lineNum">      49 </span><span class="lineCov">       1040 :                 chunk.sel_vector = move(state-&gt;child_chunk.sel_vector);</span>
+<span class="lineNum">      50 </span>            :         }
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span><span class="lineCov">      12344 :         state-&gt;current_offset += state-&gt;child_chunk.size();</span>
+<a name="53"><span class="lineNum">      53 </span>            : }</a>
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span><span class="lineCov">      13437 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalLimit::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">      13437 :         return make_unique&lt;PhysicalLimitOperatorState&gt;(children[0].get(), 0, parent_executor);</span>
+<span class="lineNum">      57 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

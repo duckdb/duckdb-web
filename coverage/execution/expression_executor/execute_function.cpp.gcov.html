@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report cdef117e - execution/expression_executor/execute_function.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">execution/expression_executor</a> - execute_function.cpp<span style="font-size: 80%;"> (source / <a href="execute_function.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntryHi">90.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;common/vector_operations/vector_operations.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;execution/expression_executor.hpp&quot;
+<span class="lineNum">       3 </span>            : #include &quot;parser/expression/function_expression.hpp&quot;
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : using namespace duckdb;
+<a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span><span class="lineCov">      19973 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(FunctionExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">      19973 :         assert(expr.bound_function);</span>
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span><span class="lineCov">      78077 :         auto arguments = unique_ptr&lt;Vector[]&gt;(new Vector[expr.children.size()]);</span>
+<span class="lineNum">      12 </span><span class="lineCov">      58104 :         for (size_t i = 0; i &lt; expr.children.size(); i++) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">      38131 :                 expr.children[i]-&gt;Accept(this);</span>
+<span class="lineNum">      14 </span><span class="lineCov">      38131 :                 vector.Move(arguments[i]);</span>
+<span class="lineNum">      15 </span>            :         }
+<span class="lineNum">      16 </span><span class="lineCov">      19973 :         vector.Destroy();</span>
+<span class="lineNum">      17 </span><span class="lineCov">      19973 :         expr.bound_function-&gt;function(arguments.get(), expr.children.size(), vector);</span>
+<span class="lineNum">      18 </span><span class="lineCov">      19973 :         if (vector.type != expr.return_type) {</span>
+<span class="lineNum">      19 </span>            :                 throw TypeMismatchException(expr.return_type, vector.type,
+<span class="lineNum">      20 </span>            :                                             &quot;expected function to return the former &quot;
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :                                             &quot;but the function returned the latter&quot;);</span>
+<span class="lineNum">      22 </span>            :         }
+<span class="lineNum">      23 </span><span class="lineCov">      39946 :         return nullptr;</span>
+<span class="lineNum">      24 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
