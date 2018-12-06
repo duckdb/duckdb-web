@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report e50ec30d - include/parser/query_node.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report c1b92c22 - include/parser/query_node.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report e50ec30d</td>
+            <td class="headerValue">DuckDB Code Coverage Report c1b92c22</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">17</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 18:51:48</td>
+            <td class="headerValue">2018-12-06 17:12:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -107,14 +107,14 @@
 <span class="lineNum">      45 </span>            : 
 <a name="46"><span class="lineNum">      46 </span>            : class QueryNode {</a>
 <span class="lineNum">      47 </span>            : public:
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">    3024648 :         QueryNode(QueryNodeType type) : type(type) {</span></a>
-<span class="lineNum">      49 </span><span class="lineCov">    3024642 :         }</span>
-<span class="lineNum">      50 </span><span class="lineCov">    3024643 :         virtual ~QueryNode() {</span>
-<span class="lineNum">      51 </span><span class="lineCov">    3024664 :         }</span>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">    3024531 :         QueryNode(QueryNodeType type) : type(type) {</span></a>
+<span class="lineNum">      49 </span><span class="lineCov">    3024532 :         }</span>
+<span class="lineNum">      50 </span><span class="lineCov">    3024526 :         virtual ~QueryNode() {</span>
+<span class="lineNum">      51 </span><span class="lineCov">    3024534 :         }</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 : </span>
 <a name="53"><span class="lineNum">      53 </span><span class="lineNoCov">          0 :         virtual void Accept(SQLNodeVisitor *) = 0;</span></a>
-<span class="lineNum">      54 </span><span class="lineCov">    3024643 : </span>
-<span class="lineNum">      55 </span><span class="lineCov">    3024664 :         virtual bool Equals(const QueryNode *other) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">    3024526 : </span>
+<span class="lineNum">      55 </span><span class="lineCov">    3024534 :         virtual bool Equals(const QueryNode *other) {</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 if (!other) {</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">      58 </span>            :                 }
@@ -141,12 +141,12 @@
 <span class="lineNum">      79 </span>            :         LimitDescription limit;
 <a name="80"><span class="lineNum">      80 </span>            : </a>
 <span class="lineNum">      81 </span>            :         //! Whether or not the query has a LIMIT clause
-<span class="lineNum">      82 </span><span class="lineCov">    3024318 :         bool HasLimit() {</span>
-<span class="lineNum">      83 </span><span class="lineCov">    3024318 :                 return limit.limit &gt;= 0 || limit.offset &gt;= 0;</span>
+<span class="lineNum">      82 </span><span class="lineCov">    3024201 :         bool HasLimit() {</span>
+<span class="lineNum">      83 </span><span class="lineCov">    3024201 :                 return limit.limit &gt;= 0 || limit.offset &gt;= 0;</span>
 <a name="84"><span class="lineNum">      84 </span>            :         }</a>
 <span class="lineNum">      85 </span>            :         //! Whether or not the query has an ORDER BY clause
-<span class="lineNum">      86 </span><span class="lineCov">    3024318 :         bool HasOrder() {</span>
-<span class="lineNum">      87 </span><span class="lineCov">    3024318 :                 return orderby.orders.size() &gt; 0;</span>
+<span class="lineNum">      86 </span><span class="lineCov">    3024203 :         bool HasOrder() {</span>
+<span class="lineNum">      87 </span><span class="lineCov">    3024203 :                 return orderby.orders.size() &gt; 0;</span>
 <span class="lineNum">      88 </span>            :         }
 <span class="lineNum">      89 </span>            : };
 <span class="lineNum">      90 </span>            : 

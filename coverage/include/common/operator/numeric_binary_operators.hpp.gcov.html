@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report e50ec30d - include/common/operator/numeric_binary_operators.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report c1b92c22 - include/common/operator/numeric_binary_operators.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report e50ec30d</td>
+            <td class="headerValue">DuckDB Code Coverage Report c1b92c22</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">29</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-05 18:51:48</td>
+            <td class="headerValue">2018-12-06 17:12:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -75,8 +75,8 @@
 <span class="lineNum">      13 </span>            : namespace operators {
 <a name="14"><span class="lineNum">      14 </span>            : </a>
 <span class="lineNum">      15 </span>            : struct Add {
-<span class="lineNum">      16 </span><span class="lineCov">   67456461 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">   67456461 :                 return left + right;</span>
+<span class="lineNum">      16 </span><span class="lineCov">   67439725 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">   67439725 :                 return left + right;</span>
 <span class="lineNum">      18 </span>            :         }
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 : };</span>
 <a name="20"><span class="lineNum">      20 </span><span class="lineNoCov">          0 : </span></a>
@@ -84,11 +84,11 @@
 <span class="lineNum">      22 </span><span class="lineCov">    3717456 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">    3717456 :                 return left - right;</span>
 <span class="lineNum">      24 </span>            :         }
-<span class="lineNum">      25 </span><span class="lineCov">   53151068 : };</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">   53151068 : </span></a>
+<span class="lineNum">      25 </span><span class="lineCov">   53137184 : };</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">   53137184 : </span></a>
 <span class="lineNum">      27 </span>            : struct Multiply {
-<span class="lineNum">      28 </span><span class="lineCov">   10587937 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">   10587937 :                 return left * right;</span>
+<span class="lineNum">      28 </span><span class="lineCov">   10585085 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">   10585085 :                 return left * right;</span>
 <span class="lineNum">      30 </span>            :         }
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 : };</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineNoCov">          0 : </span></a>
@@ -99,8 +99,8 @@
 <span class="lineNum">      37 </span>            :         }
 <span class="lineNum">      38 </span>            : };
 <span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span><span class="lineCov">    3941478 : struct Modulo {</span>
-<span class="lineNum">      41 </span><span class="lineCov">    3941478 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">    3941340 : struct Modulo {</span>
+<span class="lineNum">      41 </span><span class="lineCov">    3941340 :         template &lt;class T&gt; static inline T Operation(T left, T right) {</span>
 <span class="lineNum">      42 </span>            :                 return left % right;
 <span class="lineNum">      43 </span><span class="lineNoCov">          0 :         }</span>
 <span class="lineNum">      44 </span><span class="lineNoCov">          0 : };</span>
