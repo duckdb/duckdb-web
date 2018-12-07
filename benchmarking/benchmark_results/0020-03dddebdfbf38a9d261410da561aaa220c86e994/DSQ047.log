@@ -1,0 +1,245 @@
+<<Query Profiling Information>>
+SELECT s_store_name, s_store_id, sum(CASE WHEN (d_day_name='Sunday') THEN ss_sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN ss_sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN ss_sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN ss_sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN ss_sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN ss_sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN ss_sales_price ELSE NULL END) sat_sales FROM date_dim, store_sales, store WHERE d_date_sk = ss_sold_date_sk AND s_store_sk = ss_store_sk AND s_gmt_offset = -5 AND d_year = 2000 GROUP BY s_store_name, s_store_id ORDER BY s_store_name, s_store_id, sun_sales, mon_sales, tue_sales, wed_sales, thu_sales, fri_sales, sat_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.566715s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.18s)     |
+|         6        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_store_sk   |
+|    =s_store_sk   |
+|      (0.08s)     |
+|      580161      |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   s_gmt_offset   |
+|     d_date_sk    |                    |    = -5.000000   |
+| =ss_sold_date_sk |                    |                  |
+|      (0.28s)     |                    |      (0.00s)     |
+|      580161      |                    |        12        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       store      |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        366       ||      2880404     ||        12        |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT s_store_name, s_store_id, sum(CASE WHEN (d_day_name='Sunday') THEN ss_sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN ss_sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN ss_sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN ss_sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN ss_sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN ss_sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN ss_sales_price ELSE NULL END) sat_sales FROM date_dim, store_sales, store WHERE d_date_sk = ss_sold_date_sk AND s_store_sk = ss_store_sk AND s_gmt_offset = -5 AND d_year = 2000 GROUP BY s_store_name, s_store_id ORDER BY s_store_name, s_store_id, sun_sales, mon_sales, tue_sales, wed_sales, thu_sales, fri_sales, sat_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.569562s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.18s)     |
+|         6        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_store_sk   |
+|    =s_store_sk   |
+|      (0.08s)     |
+|      580161      |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   s_gmt_offset   |
+|     d_date_sk    |                    |    = -5.000000   |
+| =ss_sold_date_sk |                    |                  |
+|      (0.28s)     |                    |      (0.00s)     |
+|      580161      |                    |        12        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       store      |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        366       ||      2880404     ||        12        |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT s_store_name, s_store_id, sum(CASE WHEN (d_day_name='Sunday') THEN ss_sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN ss_sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN ss_sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN ss_sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN ss_sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN ss_sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN ss_sales_price ELSE NULL END) sat_sales FROM date_dim, store_sales, store WHERE d_date_sk = ss_sold_date_sk AND s_store_sk = ss_store_sk AND s_gmt_offset = -5 AND d_year = 2000 GROUP BY s_store_name, s_store_id ORDER BY s_store_name, s_store_id, sun_sales, mon_sales, tue_sales, wed_sales, thu_sales, fri_sales, sat_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.570331s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.18s)     |
+|         6        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_store_sk   |
+|    =s_store_sk   |
+|      (0.08s)     |
+|      580161      |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   s_gmt_offset   |
+|     d_date_sk    |                    |    = -5.000000   |
+| =ss_sold_date_sk |                    |                  |
+|      (0.28s)     |                    |      (0.00s)     |
+|      580161      |                    |        12        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       store      |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        366       ||      2880404     ||        12        |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT s_store_name, s_store_id, sum(CASE WHEN (d_day_name='Sunday') THEN ss_sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN ss_sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN ss_sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN ss_sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN ss_sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN ss_sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN ss_sales_price ELSE NULL END) sat_sales FROM date_dim, store_sales, store WHERE d_date_sk = ss_sold_date_sk AND s_store_sk = ss_store_sk AND s_gmt_offset = -5 AND d_year = 2000 GROUP BY s_store_name, s_store_id ORDER BY s_store_name, s_store_id, sun_sales, mon_sales, tue_sales, wed_sales, thu_sales, fri_sales, sat_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.565919s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.18s)     |
+|         6        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_store_sk   |
+|    =s_store_sk   |
+|      (0.08s)     |
+|      580161      |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   s_gmt_offset   |
+|     d_date_sk    |                    |    = -5.000000   |
+| =ss_sold_date_sk |                    |                  |
+|      (0.28s)     |                    |      (0.00s)     |
+|      580161      |                    |        12        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       store      |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        366       ||      2880404     ||        12        |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT s_store_name, s_store_id, sum(CASE WHEN (d_day_name='Sunday') THEN ss_sales_price ELSE NULL END) sun_sales, sum(CASE WHEN (d_day_name='Monday') THEN ss_sales_price ELSE NULL END) mon_sales, sum(CASE WHEN (d_day_name='Tuesday') THEN ss_sales_price ELSE NULL END) tue_sales, sum(CASE WHEN (d_day_name='Wednesday') THEN ss_sales_price ELSE NULL END) wed_sales, sum(CASE WHEN (d_day_name='Thursday') THEN ss_sales_price ELSE NULL END) thu_sales, sum(CASE WHEN (d_day_name='Friday') THEN ss_sales_price ELSE NULL END) fri_sales, sum(CASE WHEN (d_day_name='Saturday') THEN ss_sales_price ELSE NULL END) sat_sales FROM date_dim, store_sales, store WHERE d_date_sk = ss_sold_date_sk AND s_store_sk = ss_store_sk AND s_gmt_offset = -5 AND d_year = 2000 GROUP BY s_store_name, s_store_id ORDER BY s_store_name, s_store_id, sun_sales, mon_sales, tue_sales, wed_sales, thu_sales, fri_sales, sat_sales LIMIT 100;
+<<Timing>>
+Total Time: 0.567468s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         6        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.18s)     |
+|         6        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_store_sk   |
+|    =s_store_sk   |
+|      (0.08s)     |
+|      580161      |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   s_gmt_offset   |
+|     d_date_sk    |                    |    = -5.000000   |
+| =ss_sold_date_sk |                    |                  |
+|      (0.28s)     |                    |      (0.00s)     |
+|      580161      |                    |        12        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 2000  ||    store_sales   ||       store      |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        366       ||      2880404     ||        12        |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+

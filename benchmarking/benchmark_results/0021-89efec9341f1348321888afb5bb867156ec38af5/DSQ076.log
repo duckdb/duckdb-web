@@ -1,0 +1,132 @@
+<<Query Profiling Information>>
+SELECT i_item_desc, w_warehouse_name, d1.d_week_seq, sum(CASE WHEN p_promo_sk IS NULL THEN 1 ELSE 0 END) no_promo, sum(CASE WHEN p_promo_sk IS NOT NULL THEN 1 ELSE 0 END) promo, count(*) total_cnt FROM catalog_sales JOIN inventory ON (cs_item_sk = inv_item_sk) JOIN warehouse ON (w_warehouse_sk=inv_warehouse_sk) JOIN item ON (i_item_sk = cs_item_sk) JOIN customer_demographics ON (cs_bill_cdemo_sk = cd_demo_sk) JOIN household_demographics ON (cs_bill_hdemo_sk = hd_demo_sk) JOIN date_dim d1 ON (cs_sold_date_sk = d1.d_date_sk) JOIN date_dim d2 ON (inv_date_sk = d2.d_date_sk) JOIN date_dim d3 ON (cs_ship_date_sk = d3.d_date_sk) LEFT OUTER JOIN promotion ON (cs_promo_sk=p_promo_sk) LEFT OUTER JOIN catalog_returns ON (cr_item_sk = cs_item_sk AND cr_order_number = cs_order_number) WHERE d1.d_week_seq = d2.d_week_seq AND inv_quantity_on_hand < cs_quantity AND d3.d_date > d1.d_date + 5 AND hd_buy_potential = '>10000' AND d1.d_year = 1999 AND cd_marital_status = 'D' GROUP BY i_item_desc, w_warehouse_name, d1.d_week_seq ORDER BY total_cnt DESC, i_item_desc, w_warehouse_name, d1.d_week_seq LIMIT 100;
+<<Timing>>
+Total Time: 30.358850s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       LEFT       |
+|    cs_item_sk    |
+|    =cr_item_sk   |
+|  cs_order_number |
+| =cr_order_number |
+|      (0.01s)     |
+|         0        |
+--------------------
+--------------------                                                                                                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                                                                                                    |     SEQ_SCAN     |
+|       LEFT       |                                                                                                                                                                                    |  catalog_returns |
+|    cs_promo_sk   |                                                                                                                                                                                    |                  |
+|    =p_promo_sk   |                                                                                                                                                                                    |                  |
+|      (0.00s)     |                                                                                                                                                                                    |      (0.00s)     |
+|         0        |                                                                                                                                                                                    |      144067      |
+--------------------                                                                                                                                                                                    --------------------
+--------------------                                                                                                                                                                --------------------
+|      FILTER      |                                                                                                                                                                |     SEQ_SCAN     |
+|     d_date >     |                                                                                                                                                                |     promotion    |
+|      (d_date     |                                                                                                                                                                |                  |
+|     + -1-01-06   |                                                                                                                                                                |                  |
+|      (0.00s)     |                                                                                                                                                                |      (0.00s)     |
+|         0        |                                                                                                                                                                |        300       |
+--------------------                                                                                                                                                                --------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  cs_ship_date_sk |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                                                                                                            --------------------
+|      FILTER      |                                                                                                                                            |     SEQ_SCAN     |
+|    d_week_seq    |                                                                                                                                            |     date_dim     |
+|    = d_week_seq  |                                                                                                                                            |                  |
+|      (0.00s)     |                                                                                                                                            |      (0.00s)     |
+|         0        |                                                                                                                                            |       73049      |
+--------------------                                                                                                                                            --------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    inv_date_sk   |
+|    =d_date_sk    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                                                                                        --------------------
+|     HASH_JOIN    |                                                                                                                        |     SEQ_SCAN     |
+|       INNER      |                                                                                                                        |     date_dim     |
+|  cs_sold_date_sk |                                                                                                                        |                  |
+|    =d_date_sk    |                                                                                                                        |                  |
+|      (2.46s)     |                                                                                                                        |      (0.00s)     |
+|         0        |                                                                                                                        |       73049      |
+--------------------                                                                                                                        --------------------
+--------------------                                                                                                    --------------------
+|     HASH_JOIN    |                                                                                                    |      FILTER      |
+|       INNER      |                                                                                                    |   d_year = 1999  |
+| cs_bill_hdemo_sk |                                                                                                    |                  |
+|    =hd_demo_sk   |                                                                                                    |                  |
+|      (5.72s)     |                                                                                                    |      (0.00s)     |
+|      319638      |                                                                                                    |        365       |
+--------------------                                                                                                    --------------------
+--------------------                                                                                ----------------------------------------
+|     HASH_JOIN    |                                                                                |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                                                | hd_buy_potential ||     date_dim     |
+| cs_bill_cdemo_sk |                                                                                |      = >10000    ||                  |
+|    =cd_demo_sk   |                                                                                |                  ||                  |
+|      (6.94s)     |                                                                                |      (0.00s)     ||      (0.00s)     |
+|      1879399     |                                                                                |       1200       ||       73049      |
+--------------------                                                                                ----------------------------------------
+--------------------                                                            ----------------------------------------
+|     HASH_JOIN    |                                                            |      FILTER      ||     SEQ_SCAN     |
+|       INNER      |                                                            | cd_marital_statu || household_demogr |
+|    cs_item_sk    |                                                            |       s = D      ||      aphics      |
+|    =i_item_sk    |                                                            |                  ||                  |
+|      (3.70s)     |                                                            |      (0.01s)     ||      (0.00s)     |
+|      9389466     |                                                            |      384160      ||       7200       |
+--------------------                                                            ----------------------------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |       item       || customer_demogra |
+| inv_warehouse_sk |                                        |                  ||       phics      |
+|  =w_warehouse_sk |                                        |                  ||                  |
+|      (2.73s)     |                                        |      (0.00s)     ||      (0.02s)     |
+|      9389466     |                                        |       18000      ||      1920800     |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|      FILTER      |                    |     SEQ_SCAN     |
+| inv_quantity_on_ |                    |     warehouse    |
+| hand < cs_quanti |                    |                  |
+|        ty        |                    |                  |
+|      (0.76s)     |                    |      (0.00s)     |
+|      9389466     |                    |         5        |
+--------------------                    --------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    cs_item_sk    |
+|   =inv_item_sk   |
+|      (7.38s)     |
+|     185591426    |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|   catalog_sales  ||     inventory    |
+|      (0.00s)     ||      (0.08s)     |
+|      212992      ||     11745000     |
+----------------------------------------
+

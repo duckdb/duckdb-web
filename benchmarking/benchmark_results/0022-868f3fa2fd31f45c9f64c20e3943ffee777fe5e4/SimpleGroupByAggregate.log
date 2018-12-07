@@ -1,0 +1,85 @@
+<<Query Profiling Information>>
+SELECT i, SUM(j) FROM integers GROUP BY i
+<<Timing>>
+Total Time: 0.343541s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.30s)     |
+|         5        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.04s)     |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i, SUM(j) FROM integers GROUP BY i
+<<Timing>>
+Total Time: 0.343005s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.30s)     |
+|         5        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.04s)     |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i, SUM(j) FROM integers GROUP BY i
+<<Timing>>
+Total Time: 0.343271s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.30s)     |
+|         5        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.04s)     |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i, SUM(j) FROM integers GROUP BY i
+<<Timing>>
+Total Time: 0.345719s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.31s)     |
+|         5        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.04s)     |
+|     10000000     |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i, SUM(j) FROM integers GROUP BY i
+<<Timing>>
+Total Time: 0.352346s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.31s)     |
+|         5        |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.04s)     |
+|     10000000     |
+--------------------
+

@@ -1,0 +1,425 @@
+<<Query Profiling Information>>
+WITH customer_total_return AS (SELECT cr_returning_customer_sk AS ctr_customer_sk , ca_state AS ctr_state, sum(cr_return_amt_inc_tax) AS ctr_total_return FROM catalog_returns , date_dim , customer_address WHERE cr_returned_date_sk = d_date_sk AND d_year = 2000 AND cr_returning_addr_sk = ca_address_sk GROUP BY cr_returning_customer_sk , ca_state) SELECT c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return FROM customer_total_return ctr1 , customer_address , customer WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return)*1.2 FROM customer_total_return ctr2 WHERE ctr1.ctr_state = ctr2.ctr_state) AND ca_address_sk = c_current_addr_sk AND ca_state = 'GA' AND ctr1.ctr_customer_sk = c_customer_sk ORDER BY c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return LIMIT 100;
+<<Timing>>
+Total Time: 8.999011s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|   ctr_state=#1   |
+| ctr_total_return |
+|        >#0       |
+|      (0.02s)     |
+|         0        |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|  ctr_customer_sk |                                                                                |                  |
+|  =c_customer_sk  |                                                                                |                  |
+|   ca_address_sk  |                                                                                |                  |
+| =c_current_addr_ |                                                                                |                  |
+|        sk        |                                                                                |                  |
+|      (8.03s)     |                                                                                |      (0.00s)     |
+|       1496       |                                                                                |        51        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |     SEQ_SCAN     ||   HASH_GROUP_BY  |
+|                  |                                                            |     customer     ||                  |
+|      (0.58s)     |                                                            |      (0.00s)     ||      (0.01s)     |
+|     72032533     |                                                            |      100000      ||       28573      |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------                    --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      |                    |     HASH_JOIN    |
+|                  |                                        |   ca_state = GA  |                    |       INNER      |
+|                  |                                        |                  |                    | cr_returning_add |
+|                  |                                        |                  |                    | r_sk=ca_address_ |
+|                  |                                        |                  |                    |        sk        |
+|      (0.01s)     |                                        |      (0.01s)     |                    |      (0.01s)     |
+|       28573      |                                        |       70588      |                    |       28792      |
+--------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                                        | customer_address |                    |       INNER      |                    | customer_address |
+| cr_returning_add |                                        |                  |                    | cr_returned_date |                    |                  |
+| r_sk=ca_address_ |                                        |                  |                    |   _sk=d_date_sk  |                    |                  |
+|        sk        |                                        |                  |                    |                  |                    |                  |
+|      (0.01s)     |                                        |      (0.07s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       28792      |                                        |      1400000     |                    |       28792      |                    |       50000      |
+--------------------                                        --------------------                    --------------------                    --------------------
+--------------------                    --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                    | customer_address |                                        |  catalog_returns ||   d_year = 2000  |
+| cr_returned_date |                    |                  |                                        |                  ||                  |
+|   _sk=d_date_sk  |                    |                  |                                        |                  ||                  |
+|      (0.00s)     |                    |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       28792      |                    |       50000      |                                        |      144067      ||        366       |
+--------------------                    --------------------                                        ----------------------------------------
+----------------------------------------                                                                                --------------------
+|     SEQ_SCAN     ||      FILTER      |                                                                                |     SEQ_SCAN     |
+|  catalog_returns ||   d_year = 2000  |                                                                                |     date_dim     |
+|      (0.00s)     ||      (0.00s)     |                                                                                |      (0.00s)     |
+|      144067      ||        366       |                                                                                |       73049      |
+----------------------------------------                                                                                --------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+WITH customer_total_return AS (SELECT cr_returning_customer_sk AS ctr_customer_sk , ca_state AS ctr_state, sum(cr_return_amt_inc_tax) AS ctr_total_return FROM catalog_returns , date_dim , customer_address WHERE cr_returned_date_sk = d_date_sk AND d_year = 2000 AND cr_returning_addr_sk = ca_address_sk GROUP BY cr_returning_customer_sk , ca_state) SELECT c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return FROM customer_total_return ctr1 , customer_address , customer WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return)*1.2 FROM customer_total_return ctr2 WHERE ctr1.ctr_state = ctr2.ctr_state) AND ca_address_sk = c_current_addr_sk AND ca_state = 'GA' AND ctr1.ctr_customer_sk = c_customer_sk ORDER BY c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return LIMIT 100;
+<<Timing>>
+Total Time: 9.043740s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|   ctr_state=#1   |
+| ctr_total_return |
+|        >#0       |
+|      (0.02s)     |
+|         0        |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|  ctr_customer_sk |                                                                                |                  |
+|  =c_customer_sk  |                                                                                |                  |
+|   ca_address_sk  |                                                                                |                  |
+| =c_current_addr_ |                                                                                |                  |
+|        sk        |                                                                                |                  |
+|      (8.11s)     |                                                                                |      (0.00s)     |
+|       1496       |                                                                                |        51        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |     SEQ_SCAN     ||   HASH_GROUP_BY  |
+|                  |                                                            |     customer     ||                  |
+|      (0.58s)     |                                                            |      (0.00s)     ||      (0.01s)     |
+|     72032533     |                                                            |      100000      ||       28573      |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------                    --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      |                    |     HASH_JOIN    |
+|                  |                                        |   ca_state = GA  |                    |       INNER      |
+|                  |                                        |                  |                    | cr_returning_add |
+|                  |                                        |                  |                    | r_sk=ca_address_ |
+|                  |                                        |                  |                    |        sk        |
+|      (0.01s)     |                                        |      (0.01s)     |                    |      (0.01s)     |
+|       28573      |                                        |       70588      |                    |       28792      |
+--------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                                        | customer_address |                    |       INNER      |                    | customer_address |
+| cr_returning_add |                                        |                  |                    | cr_returned_date |                    |                  |
+| r_sk=ca_address_ |                                        |                  |                    |   _sk=d_date_sk  |                    |                  |
+|        sk        |                                        |                  |                    |                  |                    |                  |
+|      (0.01s)     |                                        |      (0.07s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       28792      |                                        |      1400000     |                    |       28792      |                    |       50000      |
+--------------------                                        --------------------                    --------------------                    --------------------
+--------------------                    --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                    | customer_address |                                        |  catalog_returns ||   d_year = 2000  |
+| cr_returned_date |                    |                  |                                        |                  ||                  |
+|   _sk=d_date_sk  |                    |                  |                                        |                  ||                  |
+|      (0.00s)     |                    |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       28792      |                    |       50000      |                                        |      144067      ||        366       |
+--------------------                    --------------------                                        ----------------------------------------
+----------------------------------------                                                                                --------------------
+|     SEQ_SCAN     ||      FILTER      |                                                                                |     SEQ_SCAN     |
+|  catalog_returns ||   d_year = 2000  |                                                                                |     date_dim     |
+|      (0.00s)     ||      (0.00s)     |                                                                                |      (0.00s)     |
+|      144067      ||        366       |                                                                                |       73049      |
+----------------------------------------                                                                                --------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+WITH customer_total_return AS (SELECT cr_returning_customer_sk AS ctr_customer_sk , ca_state AS ctr_state, sum(cr_return_amt_inc_tax) AS ctr_total_return FROM catalog_returns , date_dim , customer_address WHERE cr_returned_date_sk = d_date_sk AND d_year = 2000 AND cr_returning_addr_sk = ca_address_sk GROUP BY cr_returning_customer_sk , ca_state) SELECT c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return FROM customer_total_return ctr1 , customer_address , customer WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return)*1.2 FROM customer_total_return ctr2 WHERE ctr1.ctr_state = ctr2.ctr_state) AND ca_address_sk = c_current_addr_sk AND ca_state = 'GA' AND ctr1.ctr_customer_sk = c_customer_sk ORDER BY c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return LIMIT 100;
+<<Timing>>
+Total Time: 9.001486s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|   ctr_state=#1   |
+| ctr_total_return |
+|        >#0       |
+|      (0.02s)     |
+|         0        |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|  ctr_customer_sk |                                                                                |                  |
+|  =c_customer_sk  |                                                                                |                  |
+|   ca_address_sk  |                                                                                |                  |
+| =c_current_addr_ |                                                                                |                  |
+|        sk        |                                                                                |                  |
+|      (8.08s)     |                                                                                |      (0.00s)     |
+|       1496       |                                                                                |        51        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |     SEQ_SCAN     ||   HASH_GROUP_BY  |
+|                  |                                                            |     customer     ||                  |
+|      (0.58s)     |                                                            |      (0.00s)     ||      (0.01s)     |
+|     72032533     |                                                            |      100000      ||       28573      |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------                    --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      |                    |     HASH_JOIN    |
+|                  |                                        |   ca_state = GA  |                    |       INNER      |
+|                  |                                        |                  |                    | cr_returning_add |
+|                  |                                        |                  |                    | r_sk=ca_address_ |
+|                  |                                        |                  |                    |        sk        |
+|      (0.01s)     |                                        |      (0.01s)     |                    |      (0.01s)     |
+|       28573      |                                        |       70588      |                    |       28792      |
+--------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                                        | customer_address |                    |       INNER      |                    | customer_address |
+| cr_returning_add |                                        |                  |                    | cr_returned_date |                    |                  |
+| r_sk=ca_address_ |                                        |                  |                    |   _sk=d_date_sk  |                    |                  |
+|        sk        |                                        |                  |                    |                  |                    |                  |
+|      (0.01s)     |                                        |      (0.07s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       28792      |                                        |      1400000     |                    |       28792      |                    |       50000      |
+--------------------                                        --------------------                    --------------------                    --------------------
+--------------------                    --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                    | customer_address |                                        |  catalog_returns ||   d_year = 2000  |
+| cr_returned_date |                    |                  |                                        |                  ||                  |
+|   _sk=d_date_sk  |                    |                  |                                        |                  ||                  |
+|      (0.00s)     |                    |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       28792      |                    |       50000      |                                        |      144067      ||        366       |
+--------------------                    --------------------                                        ----------------------------------------
+----------------------------------------                                                                                --------------------
+|     SEQ_SCAN     ||      FILTER      |                                                                                |     SEQ_SCAN     |
+|  catalog_returns ||   d_year = 2000  |                                                                                |     date_dim     |
+|      (0.00s)     ||      (0.00s)     |                                                                                |      (0.00s)     |
+|      144067      ||        366       |                                                                                |       73049      |
+----------------------------------------                                                                                --------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+WITH customer_total_return AS (SELECT cr_returning_customer_sk AS ctr_customer_sk , ca_state AS ctr_state, sum(cr_return_amt_inc_tax) AS ctr_total_return FROM catalog_returns , date_dim , customer_address WHERE cr_returned_date_sk = d_date_sk AND d_year = 2000 AND cr_returning_addr_sk = ca_address_sk GROUP BY cr_returning_customer_sk , ca_state) SELECT c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return FROM customer_total_return ctr1 , customer_address , customer WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return)*1.2 FROM customer_total_return ctr2 WHERE ctr1.ctr_state = ctr2.ctr_state) AND ca_address_sk = c_current_addr_sk AND ca_state = 'GA' AND ctr1.ctr_customer_sk = c_customer_sk ORDER BY c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return LIMIT 100;
+<<Timing>>
+Total Time: 9.059603s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|   ctr_state=#1   |
+| ctr_total_return |
+|        >#0       |
+|      (0.02s)     |
+|         0        |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|  ctr_customer_sk |                                                                                |                  |
+|  =c_customer_sk  |                                                                                |                  |
+|   ca_address_sk  |                                                                                |                  |
+| =c_current_addr_ |                                                                                |                  |
+|        sk        |                                                                                |                  |
+|      (8.13s)     |                                                                                |      (0.00s)     |
+|       1496       |                                                                                |        51        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |     SEQ_SCAN     ||   HASH_GROUP_BY  |
+|                  |                                                            |     customer     ||                  |
+|      (0.59s)     |                                                            |      (0.00s)     ||      (0.01s)     |
+|     72032533     |                                                            |      100000      ||       28573      |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------                    --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      |                    |     HASH_JOIN    |
+|                  |                                        |   ca_state = GA  |                    |       INNER      |
+|                  |                                        |                  |                    | cr_returning_add |
+|                  |                                        |                  |                    | r_sk=ca_address_ |
+|                  |                                        |                  |                    |        sk        |
+|      (0.01s)     |                                        |      (0.01s)     |                    |      (0.01s)     |
+|       28573      |                                        |       70588      |                    |       28792      |
+--------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                                        | customer_address |                    |       INNER      |                    | customer_address |
+| cr_returning_add |                                        |                  |                    | cr_returned_date |                    |                  |
+| r_sk=ca_address_ |                                        |                  |                    |   _sk=d_date_sk  |                    |                  |
+|        sk        |                                        |                  |                    |                  |                    |                  |
+|      (0.01s)     |                                        |      (0.07s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       28792      |                                        |      1400000     |                    |       28792      |                    |       50000      |
+--------------------                                        --------------------                    --------------------                    --------------------
+--------------------                    --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                    | customer_address |                                        |  catalog_returns ||   d_year = 2000  |
+| cr_returned_date |                    |                  |                                        |                  ||                  |
+|   _sk=d_date_sk  |                    |                  |                                        |                  ||                  |
+|      (0.00s)     |                    |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       28792      |                    |       50000      |                                        |      144067      ||        366       |
+--------------------                    --------------------                                        ----------------------------------------
+----------------------------------------                                                                                --------------------
+|     SEQ_SCAN     ||      FILTER      |                                                                                |     SEQ_SCAN     |
+|  catalog_returns ||   d_year = 2000  |                                                                                |     date_dim     |
+|      (0.00s)     ||      (0.00s)     |                                                                                |      (0.00s)     |
+|      144067      ||        366       |                                                                                |       73049      |
+----------------------------------------                                                                                --------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+
+<<Query Profiling Information>>
+WITH customer_total_return AS (SELECT cr_returning_customer_sk AS ctr_customer_sk , ca_state AS ctr_state, sum(cr_return_amt_inc_tax) AS ctr_total_return FROM catalog_returns , date_dim , customer_address WHERE cr_returned_date_sk = d_date_sk AND d_year = 2000 AND cr_returning_addr_sk = ca_address_sk GROUP BY cr_returning_customer_sk , ca_state) SELECT c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return FROM customer_total_return ctr1 , customer_address , customer WHERE ctr1.ctr_total_return > (SELECT avg(ctr_total_return)*1.2 FROM customer_total_return ctr2 WHERE ctr1.ctr_state = ctr2.ctr_state) AND ca_address_sk = c_current_addr_sk AND ca_state = 'GA' AND ctr1.ctr_customer_sk = c_customer_sk ORDER BY c_customer_id, c_salutation, c_first_name, c_last_name, ca_street_number, ca_street_name , ca_street_type, ca_suite_number, ca_city, ca_county, ca_state, ca_zip, ca_country, ca_gmt_offset , ca_location_type, ctr_total_return LIMIT 100;
+<<Timing>>
+Total Time: 9.016168s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|   ctr_state=#1   |
+| ctr_total_return |
+|        >#0       |
+|      (0.02s)     |
+|         0        |
+--------------------
+--------------------                                                                                --------------------
+|     HASH_JOIN    |                                                                                |   HASH_GROUP_BY  |
+|       INNER      |                                                                                |                  |
+|  ctr_customer_sk |                                                                                |                  |
+|  =c_customer_sk  |                                                                                |                  |
+|   ca_address_sk  |                                                                                |                  |
+| =c_current_addr_ |                                                                                |                  |
+|        sk        |                                                                                |                  |
+|      (8.07s)     |                                                                                |      (0.00s)     |
+|       1496       |                                                                                |        51        |
+--------------------                                                                                --------------------
+--------------------                                                            ----------------------------------------
+|   CROSS_PRODUCT  |                                                            |     SEQ_SCAN     ||   HASH_GROUP_BY  |
+|                  |                                                            |     customer     ||                  |
+|      (0.58s)     |                                                            |      (0.00s)     ||      (0.01s)     |
+|     72032533     |                                                            |      100000      ||       28573      |
+--------------------                                                            ----------------------------------------
+--------------------                                        --------------------                    --------------------
+|   HASH_GROUP_BY  |                                        |      FILTER      |                    |     HASH_JOIN    |
+|                  |                                        |   ca_state = GA  |                    |       INNER      |
+|                  |                                        |                  |                    | cr_returning_add |
+|                  |                                        |                  |                    | r_sk=ca_address_ |
+|                  |                                        |                  |                    |        sk        |
+|      (0.01s)     |                                        |      (0.01s)     |                    |      (0.01s)     |
+|       28573      |                                        |       70588      |                    |       28792      |
+--------------------                                        --------------------                    --------------------
+--------------------                                        --------------------                    --------------------                    --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |                    |     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                                        | customer_address |                    |       INNER      |                    | customer_address |
+| cr_returning_add |                                        |                  |                    | cr_returned_date |                    |                  |
+| r_sk=ca_address_ |                                        |                  |                    |   _sk=d_date_sk  |                    |                  |
+|        sk        |                                        |                  |                    |                  |                    |                  |
+|      (0.01s)     |                                        |      (0.07s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|       28792      |                                        |      1400000     |                    |       28792      |                    |       50000      |
+--------------------                                        --------------------                    --------------------                    --------------------
+--------------------                    --------------------                                        ----------------------------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |                                        |     SEQ_SCAN     ||      FILTER      |
+|       INNER      |                    | customer_address |                                        |  catalog_returns ||   d_year = 2000  |
+| cr_returned_date |                    |                  |                                        |                  ||                  |
+|   _sk=d_date_sk  |                    |                  |                                        |                  ||                  |
+|      (0.00s)     |                    |      (0.00s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|       28792      |                    |       50000      |                                        |      144067      ||        366       |
+--------------------                    --------------------                                        ----------------------------------------
+----------------------------------------                                                                                --------------------
+|     SEQ_SCAN     ||      FILTER      |                                                                                |     SEQ_SCAN     |
+|  catalog_returns ||   d_year = 2000  |                                                                                |     date_dim     |
+|      (0.00s)     ||      (0.00s)     |                                                                                |      (0.00s)     |
+|      144067      ||        366       |                                                                                |       73049      |
+----------------------------------------                                                                                --------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     date_dim     |
+                    |      (0.00s)     |
+                    |       73049      |
+                    --------------------
+

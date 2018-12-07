@@ -1,0 +1,250 @@
+<<Query Profiling Information>>
+SELECT i_brand_id brand_id, i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim, store_sales, item WHERE d_date_sk = ss_sold_date_sk AND ss_item_sk = i_item_sk AND i_manager_id=28 AND d_moy=11 AND d_year=1999 GROUP BY i_brand, i_brand_id ORDER BY ext_price DESC, i_brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.311868s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1812       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   i_manager_id   |
+|     d_date_sk    |                    |        = 28      |
+| =ss_sold_date_sk |                    |                  |
+|      (0.27s)     |                    |      (0.00s)     |
+|       90398      |                    |        340       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 1999  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i_brand_id brand_id, i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim, store_sales, item WHERE d_date_sk = ss_sold_date_sk AND ss_item_sk = i_item_sk AND i_manager_id=28 AND d_moy=11 AND d_year=1999 GROUP BY i_brand, i_brand_id ORDER BY ext_price DESC, i_brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.308534s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1812       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   i_manager_id   |
+|     d_date_sk    |                    |        = 28      |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       90398      |                    |        340       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 1999  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i_brand_id brand_id, i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim, store_sales, item WHERE d_date_sk = ss_sold_date_sk AND ss_item_sk = i_item_sk AND i_manager_id=28 AND d_moy=11 AND d_year=1999 GROUP BY i_brand, i_brand_id ORDER BY ext_price DESC, i_brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.310507s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1812       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   i_manager_id   |
+|     d_date_sk    |                    |        = 28      |
+| =ss_sold_date_sk |                    |                  |
+|      (0.27s)     |                    |      (0.00s)     |
+|       90398      |                    |        340       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 1999  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i_brand_id brand_id, i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim, store_sales, item WHERE d_date_sk = ss_sold_date_sk AND ss_item_sk = i_item_sk AND i_manager_id=28 AND d_moy=11 AND d_year=1999 GROUP BY i_brand, i_brand_id ORDER BY ext_price DESC, i_brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.309291s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1812       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   i_manager_id   |
+|     d_date_sk    |                    |        = 28      |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       90398      |                    |        340       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 1999  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+
+<<Query Profiling Information>>
+SELECT i_brand_id brand_id, i_brand brand, sum(ss_ext_sales_price) ext_price FROM date_dim, store_sales, item WHERE d_date_sk = ss_sold_date_sk AND ss_item_sk = i_item_sk AND i_manager_id=28 AND d_moy=11 AND d_year=1999 GROUP BY i_brand, i_brand_id ORDER BY ext_price DESC, i_brand_id LIMIT 100 ;
+<<Timing>>
+Total Time: 0.309190s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        104       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    ss_item_sk    |
+|    =i_item_sk    |
+|      (0.02s)     |
+|       1812       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |   i_manager_id   |
+|     d_date_sk    |                    |        = 28      |
+| =ss_sold_date_sk |                    |                  |
+|      (0.26s)     |                    |      (0.00s)     |
+|       90398      |                    |        340       |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|   d_year = 1999  ||    store_sales   ||       item       |
+|    d_moy = 11    ||                  ||                  |
+|      (0.00s)     ||      (0.02s)     ||      (0.00s)     |
+|        30        ||      2880404     ||       18000      |
+------------------------------------------------------------
+--------------------
+|     SEQ_SCAN     |
+|     date_dim     |
+|      (0.00s)     |
+|       73049      |
+--------------------
+

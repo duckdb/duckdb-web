@@ -1,0 +1,320 @@
+<<Query Profiling Information>>
+SELECT i_item_id , i_item_desc , i_current_price FROM item, inventory, date_dim, store_sales WHERE i_current_price BETWEEN 62 AND 62+30 AND inv_item_sk = i_item_sk AND d_date_sk=inv_date_sk AND d_date BETWEEN cast('2000-05-25' AS date) AND cast('2000-07-24' AS date) AND i_manufact_id IN (129, 270, 821, 423) AND inv_quantity_on_hand BETWEEN 100 AND 500 AND ss_item_sk = i_item_sk GROUP BY i_item_id, i_item_desc, i_current_price ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 1.084916s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     i_item_sk    |
+|    =ss_item_sk   |
+|      (0.25s)     |
+|       8058       |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |    store_sales   |
+|    inv_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                        |      (0.01s)     |
+|        34        |                                        |      2880404     |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |     d_date <     |
+|     i_item_sk    |                    |   = 2000-07-24   |
+|   =inv_item_sk   |                    |     d_date >     |
+|                  |                    |   = 2000-05-25   |
+|      (0.60s)     |                    |      (0.00s)     |
+|       1150       |                    |        61        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+| IN(i_manufact_id || inv_quantity_on_ ||     date_dim     |
+|     , 129, 2     ||    hand <= 500   ||                  |
+|   70, 821, 423   || inv_quantity_on_ ||                  |
+|  i_current_price ||    hand >= 100   ||                  |
+|    <= 92.000000  ||                  ||                  |
+|  i_current_price ||                  ||                  |
+|    >= 62.000000  ||                  ||                  |
+|      (0.00s)     ||      (0.11s)     ||      (0.00s)     |
+|         4        ||      4703922     ||       73049      |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       item       ||     inventory    |
+|      (0.00s)     ||      (0.07s)     |
+|       18000      ||     11745000     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id , i_item_desc , i_current_price FROM item, inventory, date_dim, store_sales WHERE i_current_price BETWEEN 62 AND 62+30 AND inv_item_sk = i_item_sk AND d_date_sk=inv_date_sk AND d_date BETWEEN cast('2000-05-25' AS date) AND cast('2000-07-24' AS date) AND i_manufact_id IN (129, 270, 821, 423) AND inv_quantity_on_hand BETWEEN 100 AND 500 AND ss_item_sk = i_item_sk GROUP BY i_item_id, i_item_desc, i_current_price ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 1.117449s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     i_item_sk    |
+|    =ss_item_sk   |
+|      (0.28s)     |
+|       8058       |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |    store_sales   |
+|    inv_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                        |      (0.01s)     |
+|        34        |                                        |      2880404     |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |     d_date <     |
+|     i_item_sk    |                    |   = 2000-07-24   |
+|   =inv_item_sk   |                    |     d_date >     |
+|                  |                    |   = 2000-05-25   |
+|      (0.61s)     |                    |      (0.00s)     |
+|       1150       |                    |        61        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+| IN(i_manufact_id || inv_quantity_on_ ||     date_dim     |
+|     , 129, 2     ||    hand <= 500   ||                  |
+|   70, 821, 423   || inv_quantity_on_ ||                  |
+|  i_current_price ||    hand >= 100   ||                  |
+|    <= 92.000000  ||                  ||                  |
+|  i_current_price ||                  ||                  |
+|    >= 62.000000  ||                  ||                  |
+|      (0.00s)     ||      (0.11s)     ||      (0.00s)     |
+|         4        ||      4703922     ||       73049      |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       item       ||     inventory    |
+|      (0.00s)     ||      (0.07s)     |
+|       18000      ||     11745000     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id , i_item_desc , i_current_price FROM item, inventory, date_dim, store_sales WHERE i_current_price BETWEEN 62 AND 62+30 AND inv_item_sk = i_item_sk AND d_date_sk=inv_date_sk AND d_date BETWEEN cast('2000-05-25' AS date) AND cast('2000-07-24' AS date) AND i_manufact_id IN (129, 270, 821, 423) AND inv_quantity_on_hand BETWEEN 100 AND 500 AND ss_item_sk = i_item_sk GROUP BY i_item_id, i_item_desc, i_current_price ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 1.109933s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     i_item_sk    |
+|    =ss_item_sk   |
+|      (0.25s)     |
+|       8058       |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |    store_sales   |
+|    inv_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                        |      (0.02s)     |
+|        34        |                                        |      2880404     |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |     d_date <     |
+|     i_item_sk    |                    |   = 2000-07-24   |
+|   =inv_item_sk   |                    |     d_date >     |
+|                  |                    |   = 2000-05-25   |
+|      (0.61s)     |                    |      (0.00s)     |
+|       1150       |                    |        61        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+| IN(i_manufact_id || inv_quantity_on_ ||     date_dim     |
+|     , 129, 2     ||    hand <= 500   ||                  |
+|   70, 821, 423   || inv_quantity_on_ ||                  |
+|  i_current_price ||    hand >= 100   ||                  |
+|    <= 92.000000  ||                  ||                  |
+|  i_current_price ||                  ||                  |
+|    >= 62.000000  ||                  ||                  |
+|      (0.00s)     ||      (0.11s)     ||      (0.00s)     |
+|         4        ||      4703922     ||       73049      |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       item       ||     inventory    |
+|      (0.00s)     ||      (0.08s)     |
+|       18000      ||     11745000     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id , i_item_desc , i_current_price FROM item, inventory, date_dim, store_sales WHERE i_current_price BETWEEN 62 AND 62+30 AND inv_item_sk = i_item_sk AND d_date_sk=inv_date_sk AND d_date BETWEEN cast('2000-05-25' AS date) AND cast('2000-07-24' AS date) AND i_manufact_id IN (129, 270, 821, 423) AND inv_quantity_on_hand BETWEEN 100 AND 500 AND ss_item_sk = i_item_sk GROUP BY i_item_id, i_item_desc, i_current_price ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 1.077891s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     i_item_sk    |
+|    =ss_item_sk   |
+|      (0.25s)     |
+|       8058       |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |    store_sales   |
+|    inv_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                        |      (0.01s)     |
+|        34        |                                        |      2880404     |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |     d_date <     |
+|     i_item_sk    |                    |   = 2000-07-24   |
+|   =inv_item_sk   |                    |     d_date >     |
+|                  |                    |   = 2000-05-25   |
+|      (0.60s)     |                    |      (0.00s)     |
+|       1150       |                    |        61        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+| IN(i_manufact_id || inv_quantity_on_ ||     date_dim     |
+|     , 129, 2     ||    hand <= 500   ||                  |
+|   70, 821, 423   || inv_quantity_on_ ||                  |
+|  i_current_price ||    hand >= 100   ||                  |
+|    <= 92.000000  ||                  ||                  |
+|  i_current_price ||                  ||                  |
+|    >= 62.000000  ||                  ||                  |
+|      (0.00s)     ||      (0.11s)     ||      (0.00s)     |
+|         4        ||      4703922     ||       73049      |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       item       ||     inventory    |
+|      (0.00s)     ||      (0.07s)     |
+|       18000      ||     11745000     |
+----------------------------------------
+
+<<Query Profiling Information>>
+SELECT i_item_id , i_item_desc , i_current_price FROM item, inventory, date_dim, store_sales WHERE i_current_price BETWEEN 62 AND 62+30 AND inv_item_sk = i_item_sk AND d_date_sk=inv_date_sk AND d_date BETWEEN cast('2000-05-25' AS date) AND cast('2000-07-24' AS date) AND i_manufact_id IN (129, 270, 821, 423) AND inv_quantity_on_hand BETWEEN 100 AND 500 AND ss_item_sk = i_item_sk GROUP BY i_item_id, i_item_desc, i_current_price ORDER BY i_item_id LIMIT 100;
+<<Timing>>
+Total Time: 1.085305s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         2        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         2        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     i_item_sk    |
+|    =ss_item_sk   |
+|      (0.25s)     |
+|       8058       |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |    store_sales   |
+|    inv_date_sk   |                                        |                  |
+|    =d_date_sk    |                                        |                  |
+|      (0.01s)     |                                        |      (0.02s)     |
+|        34        |                                        |      2880404     |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |     d_date <     |
+|     i_item_sk    |                    |   = 2000-07-24   |
+|   =inv_item_sk   |                    |     d_date >     |
+|                  |                    |   = 2000-05-25   |
+|      (0.60s)     |                    |      (0.00s)     |
+|       1150       |                    |        61        |
+--------------------                    --------------------
+------------------------------------------------------------
+|      FILTER      ||      FILTER      ||     SEQ_SCAN     |
+| IN(i_manufact_id || inv_quantity_on_ ||     date_dim     |
+|     , 129, 2     ||    hand <= 500   ||                  |
+|   70, 821, 423   || inv_quantity_on_ ||                  |
+|  i_current_price ||    hand >= 100   ||                  |
+|    <= 92.000000  ||                  ||                  |
+|  i_current_price ||                  ||                  |
+|    >= 62.000000  ||                  ||                  |
+|      (0.00s)     ||      (0.11s)     ||      (0.00s)     |
+|         4        ||      4703922     ||       73049      |
+------------------------------------------------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|       item       ||     inventory    |
+|      (0.00s)     ||      (0.07s)     |
+|       18000      ||     11745000     |
+----------------------------------------
+
