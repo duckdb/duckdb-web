@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 528c3f9b - parser/transform/statement/transform_create_table.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">parser/transform/statement</a> - transform_create_table.cpp<span style="font-size: 80%;"> (source / <a href="transform_create_table.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 528c3f9b</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntryHi">90.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-07 13:56:04</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;parser/statement/create_table_statement.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;parser/transformer.hpp&quot;
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : using namespace duckdb;
+<span class="lineNum">       5 </span>            : using namespace postgres;
+<a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span><span class="lineCov">       1133 : unique_ptr&lt;CreateTableStatement&gt; Transformer::TransformCreateTable(Node *node) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">       1133 :         auto stmt = reinterpret_cast&lt;CreateStmt *&gt;(node);</span>
+<span class="lineNum">      10 </span><span class="lineCov">       1133 :         assert(stmt);</span>
+<span class="lineNum">      11 </span><span class="lineCov">       1133 :         auto result = make_unique&lt;CreateTableStatement&gt;();</span>
+<span class="lineNum">      12 </span><span class="lineCov">       1133 :         auto &amp;info = *result-&gt;info.get();</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">       1133 :         if (stmt-&gt;inhRelations) {</span>
+<span class="lineNum">      15 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;inherited relations not implemented&quot;);</span>
+<span class="lineNum">      16 </span>            :         }
+<span class="lineNum">      17 </span><span class="lineCov">       1133 :         assert(stmt-&gt;relation);</span>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">       1133 :         if (stmt-&gt;relation-&gt;schemaname) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">          6 :                 info.schema = stmt-&gt;relation-&gt;schemaname;</span>
+<span class="lineNum">      21 </span>            :         }
+<span class="lineNum">      22 </span><span class="lineCov">       1133 :         info.table = stmt-&gt;relation-&gt;relname;</span>
+<span class="lineNum">      23 </span><span class="lineCov">       1133 :         info.if_not_exists = stmt-&gt;if_not_exists;</span>
+<span class="lineNum">      24 </span><span class="lineCov">       1133 :         assert(stmt-&gt;tableElts);</span>
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineCov">      35053 :         for (auto c = stmt-&gt;tableElts-&gt;head; c != NULL; c = lnext(c)) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">      33922 :                 auto node = reinterpret_cast&lt;Node *&gt;(c-&gt;data.ptr_value);</span>
+<span class="lineNum">      28 </span><span class="lineCov">      33922 :                 switch (node-&gt;type) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">      33920 :                 case T_ColumnDef: {</span>
+<span class="lineNum">      30 </span><span class="lineCov">      33920 :                         auto cdef = (ColumnDef *)c-&gt;data.ptr_value;</span>
+<span class="lineNum">      31 </span><span class="lineCov">      33920 :                         char *name = (reinterpret_cast&lt;value *&gt;(cdef-&gt;typeName-&gt;names-&gt;tail-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">      32 </span><span class="lineCov">     135680 :                         auto centry = ColumnDefinition(cdef-&gt;colname, TransformStringToTypeId(name));</span>
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineCov">      33920 :                         if (cdef-&gt;constraints) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">        228 :                                 for (auto constr = cdef-&gt;constraints-&gt;head; constr != nullptr; constr = constr-&gt;next) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">        117 :                                         info.constraints.push_back(TransformConstraint(constr, centry, info.columns.size()));</span>
+<span class="lineNum">      37 </span>            :                                 }
+<span class="lineNum">      38 </span>            :                         }
+<span class="lineNum">      39 </span><span class="lineCov">      33918 :                         info.columns.push_back(centry);</span>
+<span class="lineNum">      40 </span><span class="lineCov">      33918 :                         break;</span>
+<span class="lineNum">      41 </span>            :                 }
+<span class="lineNum">      42 </span><span class="lineCov">          2 :                 case T_Constraint: {</span>
+<span class="lineNum">      43 </span><span class="lineCov">          2 :                         info.constraints.push_back(TransformConstraint(c));</span>
+<span class="lineNum">      44 </span><span class="lineCov">          2 :                         break;</span>
+<span class="lineNum">      45 </span>            :                 }
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :                 default:</span>
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;ColumnDef type not handled yet&quot;);</span>
+<span class="lineNum">      48 </span>            :                 }
+<span class="lineNum">      49 </span>            :         }
+<span class="lineNum">      50 </span><span class="lineCov">       1131 :         return result;</span>
+<span class="lineNum">      51 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

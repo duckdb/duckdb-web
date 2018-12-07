@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 528c3f9b - execution/operator/aggregate/physical_aggregate.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">execution/operator/aggregate</a> - physical_aggregate.cpp<span style="font-size: 80%;"> (source / <a href="physical_aggregate.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 528c3f9b</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-07 13:56:04</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;execution/operator/aggregate/physical_aggregate.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;execution/expression_executor.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;parser/expression/aggregate_expression.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;parser/expression/constant_expression.hpp&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : using namespace duckdb;
+<a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">     574113 : PhysicalAggregate::PhysicalAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
+<span class="lineNum">      11 </span><span class="lineCov">     574113 :                                      PhysicalOperatorType type)</span>
+<span class="lineNum">      12 </span><span class="lineCov">     574113 :     : PhysicalOperator(type, op.types), select_list(std::move(select_list)) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">     574126 :         Initialize();</span>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">     574107 : }</span></a>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">     730646 : PhysicalAggregate::PhysicalAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
+<span class="lineNum">      17 </span><span class="lineCov">     730646 :                                      vector&lt;unique_ptr&lt;Expression&gt;&gt; groups, PhysicalOperatorType type)</span>
+<span class="lineNum">      18 </span><span class="lineCov">     730646 :     : PhysicalOperator(type, op.types), select_list(std::move(select_list)), groups(std::move(groups)) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     730646 :         Initialize();</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">     730646 : }</span></a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">    1304756 : void PhysicalAggregate::Initialize() {</span>
+<span class="lineNum">      23 </span>            :         // get a list of all aggregates to be computed
+<span class="lineNum">      24 </span>            :         // fake a single group with a constant value for aggregation without groups
+<span class="lineNum">      25 </span><span class="lineCov">    1304756 :         if (groups.size() == 0) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    1722458 :                 unique_ptr&lt;Expression&gt; ce = make_unique&lt;ConstantExpression&gt;(Value::TINYINT(42));</span>
+<span class="lineNum">      27 </span><span class="lineCov">     574155 :                 groups.push_back(move(ce));</span>
+<span class="lineNum">      28 </span><span class="lineCov">     574134 :                 is_implicit_aggr = true;</span>
+<span class="lineNum">      29 </span>            :         } else {
+<span class="lineNum">      30 </span><span class="lineCov">     730646 :                 is_implicit_aggr = false;</span>
+<span class="lineNum">      31 </span>            :         }
+<span class="lineNum">      32 </span><span class="lineCov">    2883794 :         for (auto &amp;expr : select_list) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">    1579080 :                 expr-&gt;GetAggregates(aggregates);</span>
+<span class="lineNum">      34 </span>            :         }
+<span class="lineNum">      35 </span><span class="lineCov">    2137268 :         for (size_t i = 0; i &lt; aggregates.size(); i++) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">     832521 :                 aggregates[i]-&gt;index = i;</span>
+<span class="lineNum">      37 </span>            :         }
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">    1304768 : }</span></a>
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span><span class="lineCov">    1351853 : PhysicalAggregateOperatorState::PhysicalAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
+<span class="lineNum">      41 </span><span class="lineCov">    1351853 :                                                                ExpressionExecutor *parent_executor)</span>
+<span class="lineNum">      42 </span><span class="lineCov">    1351853 :     : PhysicalOperatorState(child, parent_executor) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">    2703772 :         vector&lt;TypeId&gt; group_types, aggregate_types;</span>
+<span class="lineNum">      44 </span><span class="lineCov">    2900734 :         for (auto &amp;expr : parent-&gt;groups) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">    1548916 :                 group_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      46 </span>            :         }
+<span class="lineNum">      47 </span><span class="lineCov">    1351861 :         group_chunk.Initialize(group_types);</span>
+<span class="lineNum">      48 </span><span class="lineCov">    2247815 :         for (auto &amp;expr : parent-&gt;aggregates) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">     895949 :                 aggregate_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      50 </span>            :         }
+<span class="lineNum">      51 </span><span class="lineCov">    1351828 :         aggregate_chunk.Initialize(aggregate_types);</span>
+<span class="lineNum">      52 </span><span class="lineCov">    1351842 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
