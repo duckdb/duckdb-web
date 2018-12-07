@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 528c3f9b - parser/transform/tableref/transform_join.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 32020235 - parser/transform/tableref/transform_join.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 528c3f9b</td>
+            <td class="headerValue">DuckDB Code Coverage Report 32020235</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">27</td>
-            <td class="headerCovTableEntry">33</td>
-            <td class="headerCovTableEntryMed">81.8 %</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntryMed">79.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-07 13:56:04</td>
+            <td class="headerValue">2018-12-07 14:39:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -91,32 +91,34 @@
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 result-&gt;type = duckdb::JoinType::SEMI;</span>
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      31 </span>            :         }
-<span class="lineNum">      32 </span><span class="lineNoCov">          0 :         default: { throw NotImplementedException(&quot;Join type %d not supported yet...\n&quot;, root-&gt;jointype); }</span>
-<span class="lineNum">      33 </span>            :         }
-<span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span>            :         // Check the type of left arg and right arg before transform
-<span class="lineNum">      36 </span><span class="lineCov">      55756 :         result-&gt;left = TransformTableRefNode(root-&gt;larg);</span>
-<span class="lineNum">      37 </span><span class="lineCov">      55753 :         result-&gt;right = TransformTableRefNode(root-&gt;rarg);</span>
-<span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">      55752 :         if (!root-&gt;quals) { // CROSS JOIN</span>
-<span class="lineNum">      40 </span><span class="lineCov">     110118 :                 auto cross = make_unique&lt;CrossProductRef&gt;();</span>
-<span class="lineNum">      41 </span><span class="lineCov">      55059 :                 cross-&gt;left = move(result-&gt;left);</span>
-<span class="lineNum">      42 </span><span class="lineCov">      55059 :                 cross-&gt;right = move(result-&gt;right);</span>
-<span class="lineNum">      43 </span><span class="lineCov">      55059 :                 return move(cross);</span>
-<span class="lineNum">      44 </span>            :         }
-<span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">        693 :         switch (root-&gt;quals-&gt;type) {</span>
-<span class="lineNum">      47 </span><span class="lineCov">        693 :         case T_A_Expr:</span>
-<span class="lineNum">      48 </span>            :         case T_BoolExpr:
-<span class="lineNum">      49 </span>            :         case T_NullTest:
-<span class="lineNum">      50 </span><span class="lineCov">        693 :                 result-&gt;condition = TransformExpression(root-&gt;quals);</span>
-<span class="lineNum">      51 </span><span class="lineCov">        693 :                 break;</span>
-<span class="lineNum">      52 </span>            : 
-<span class="lineNum">      53 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Join quals type %d not supported yet...\n&quot;, root-&gt;larg-&gt;type);</span>
-<span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">        693 :         return move(result);</span>
-<span class="lineNum">      57 </span>            : }
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 :         default: {</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Join type %d not supported yet...\n&quot;, root-&gt;jointype);</span>
+<span class="lineNum">      34 </span>            :         }
+<span class="lineNum">      35 </span>            :         }
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            :         // Check the type of left arg and right arg before transform
+<span class="lineNum">      38 </span><span class="lineCov">      55756 :         result-&gt;left = TransformTableRefNode(root-&gt;larg);</span>
+<span class="lineNum">      39 </span><span class="lineCov">      55753 :         result-&gt;right = TransformTableRefNode(root-&gt;rarg);</span>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">      55752 :         if (!root-&gt;quals) { // CROSS JOIN</span>
+<span class="lineNum">      42 </span><span class="lineCov">     110118 :                 auto cross = make_unique&lt;CrossProductRef&gt;();</span>
+<span class="lineNum">      43 </span><span class="lineCov">      55059 :                 cross-&gt;left = move(result-&gt;left);</span>
+<span class="lineNum">      44 </span><span class="lineCov">      55059 :                 cross-&gt;right = move(result-&gt;right);</span>
+<span class="lineNum">      45 </span><span class="lineCov">      55059 :                 return move(cross);</span>
+<span class="lineNum">      46 </span>            :         }
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span><span class="lineCov">        693 :         switch (root-&gt;quals-&gt;type) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">        693 :         case T_A_Expr:</span>
+<span class="lineNum">      50 </span>            :         case T_BoolExpr:
+<span class="lineNum">      51 </span>            :         case T_NullTest:
+<span class="lineNum">      52 </span><span class="lineCov">        693 :                 result-&gt;condition = TransformExpression(root-&gt;quals);</span>
+<span class="lineNum">      53 </span><span class="lineCov">        693 :                 break;</span>
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Join quals type %d not supported yet...\n&quot;, root-&gt;larg-&gt;type);</span>
+<span class="lineNum">      57 </span>            :         }
+<span class="lineNum">      58 </span><span class="lineCov">        693 :         return move(result);</span>
+<span class="lineNum">      59 </span>            : }
 </pre>
       </td>
     </tr>
