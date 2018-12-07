@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cdef117e - include/execution/operator/scan/physical_index_scan.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b42f154d - include/execution/operator/scan/physical_index_scan.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td class="headerValue">DuckDB Code Coverage Report b42f154d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td class="headerValue">2018-12-07 01:20:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -79,12 +79,12 @@
 <span class="lineNum">      17 </span>            : //! Represents a scan of an index
 <a name="18"><span class="lineNum">      18 </span>            : class PhysicalIndexScan : public PhysicalOperator {</a>
 <span class="lineNum">      19 </span>            : public:
-<span class="lineNum">      20 </span><span class="lineCov">         23 :         PhysicalIndexScan(LogicalOperator &amp;op, TableCatalogEntry &amp;tableref, DataTable &amp;table, Index &amp;index,</span>
+<span class="lineNum">      20 </span><span class="lineCov">         11 :         PhysicalIndexScan(LogicalOperator &amp;op, TableCatalogEntry &amp;tableref, DataTable &amp;table, Index &amp;index,</span>
 <span class="lineNum">      21 </span>            :                           vector&lt;column_t&gt; column_ids, unique_ptr&lt;Expression&gt; low_expression,
 <span class="lineNum">      22 </span>            :                           unique_ptr&lt;Expression&gt; high_expression)
-<span class="lineNum">      23 </span><span class="lineCov">         46 :             : PhysicalOperator(PhysicalOperatorType::INDEX_SCAN, op.types), tableref(tableref), table(table), index(index),</span>
-<span class="lineNum">      24 </span><span class="lineCov">         23 :               column_ids(column_ids), low_expression(move(low_expression)), high_expression(move(high_expression)) {</span>
-<span class="lineNum">      25 </span><span class="lineCov">         23 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">         22 :             : PhysicalOperator(PhysicalOperatorType::INDEX_SCAN, op.types), tableref(tableref), table(table), index(index),</span>
+<span class="lineNum">      24 </span><span class="lineCov">         11 :               column_ids(column_ids), low_expression(move(low_expression)), high_expression(move(high_expression)) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">         11 :         }</span>
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :         //! The table to scan
 <span class="lineNum">      28 </span>            :         TableCatalogEntry &amp;tableref;
@@ -112,9 +112,9 @@
 <span class="lineNum">      50 </span>            : 
 <a name="51"><span class="lineNum">      51 </span>            : class PhysicalIndexScanOperatorState : public PhysicalOperatorState {</a>
 <span class="lineNum">      52 </span>            : public:
-<span class="lineNum">      53 </span><span class="lineCov">         23 :         PhysicalIndexScanOperatorState(ExpressionExecutor *parent_executor)</span>
-<span class="lineNum">      54 </span><span class="lineCov">         23 :             : PhysicalOperatorState(nullptr, parent_executor), scan_state(nullptr) {</span>
-<span class="lineNum">      55 </span><span class="lineCov">         23 :         }</span>
+<span class="lineNum">      53 </span><span class="lineCov">         11 :         PhysicalIndexScanOperatorState(ExpressionExecutor *parent_executor)</span>
+<span class="lineNum">      54 </span><span class="lineCov">         11 :             : PhysicalOperatorState(nullptr, parent_executor), scan_state(nullptr) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">         11 :         }</span>
 <span class="lineNum">      56 </span>            : 
 <span class="lineNum">      57 </span>            :         unique_ptr&lt;IndexScanState&gt; scan_state;
 <span class="lineNum">      58 </span>            : };

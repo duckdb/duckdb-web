@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cdef117e - execution/physical_plan_generator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b42f154d - execution/physical_plan_generator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td class="headerValue">DuckDB Code Coverage Report b42f154d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">267</td>
+            <td class="headerCovTableEntry">231</td>
             <td class="headerCovTableEntry">305</td>
-            <td class="headerCovTableEntryMed">87.5 %</td>
+            <td class="headerCovTableEntryMed">75.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td class="headerValue">2018-12-07 01:20:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">23</td>
@@ -72,34 +72,34 @@
 <span class="lineNum">      10 </span>            : using namespace duckdb;
 <a name="11"><span class="lineNum">      11 </span>            : using namespace std;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    3130547 : void PhysicalPlanGenerator::CreatePlan(unique_ptr&lt;LogicalOperator&gt; logical) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3131282 : void PhysicalPlanGenerator::CreatePlan(unique_ptr&lt;LogicalOperator&gt; logical) {</span>
 <span class="lineNum">      14 </span>            :         // first resolve column references
-<span class="lineNum">      15 </span><span class="lineCov">    6264435 :         ColumnBindingResolver resolver;</span>
-<span class="lineNum">      16 </span><span class="lineCov">    3131797 :         logical-&gt;Accept(&amp;resolver);</span>
+<span class="lineNum">      15 </span><span class="lineCov">    6265235 :         ColumnBindingResolver resolver;</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3132133 :         logical-&gt;Accept(&amp;resolver);</span>
 <span class="lineNum">      17 </span>            :         // now resolve types of all the operators
-<span class="lineNum">      18 </span><span class="lineCov">    3131910 :         logical-&gt;ResolveOperatorTypes();</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3132343 :         logical-&gt;ResolveOperatorTypes();</span>
 <span class="lineNum">      19 </span>            :         // then create the physical plan
-<span class="lineNum">      20 </span><span class="lineCov">    3131584 :         logical-&gt;Accept(this);</span>
-<span class="lineNum">      21 </span><span class="lineCov">    3131145 :         if (!this-&gt;plan) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3131840 :         logical-&gt;Accept(this);</span>
+<span class="lineNum">      21 </span><span class="lineCov">    3132070 :         if (!this-&gt;plan) {</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Unknown error in physical plan generation&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3130262 : }</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3130972 : }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">    1304505 : void PhysicalPlanGenerator::Visit(LogicalAggregate &amp;op) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    1304505 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      26 </span><span class="lineCov">    1304572 : void PhysicalPlanGenerator::Visit(LogicalAggregate &amp;op) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    1304572 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">    1304569 :         if (op.groups.size() == 0) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">    1304635 :         if (op.groups.size() == 0) {</span>
 <span class="lineNum">      30 </span>            :                 // no groups
-<span class="lineNum">      31 </span><span class="lineCov">     573945 :                 if (!plan) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">     574015 :                 if (!plan) {</span>
 <span class="lineNum">      32 </span>            :                         // and no FROM clause, use a dummy aggregate
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                         auto groupby = make_unique&lt;PhysicalHashAggregate&gt;(op, move(op.expressions));</span>
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :                         this-&gt;plan = move(groupby);</span>
 <span class="lineNum">      35 </span>            :                 } else {
 <span class="lineNum">      36 </span>            :                         // but there is a FROM clause
 <span class="lineNum">      37 </span>            :                         // special case: aggregate entire columns together
-<span class="lineNum">      38 </span><span class="lineCov">    1147816 :                         auto groupby = make_unique&lt;PhysicalHashAggregate&gt;(op, move(op.expressions));</span>
-<span class="lineNum">      39 </span><span class="lineCov">     573914 :                         groupby-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">      40 </span><span class="lineCov">     573863 :                         this-&gt;plan = move(groupby);</span>
+<span class="lineNum">      38 </span><span class="lineCov">    1147923 :                         auto groupby = make_unique&lt;PhysicalHashAggregate&gt;(op, move(op.expressions));</span>
+<span class="lineNum">      39 </span><span class="lineCov">     573975 :                         groupby-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">      40 </span><span class="lineCov">     573932 :                         this-&gt;plan = move(groupby);</span>
 <span class="lineNum">      41 </span>            :                 }
 <span class="lineNum">      42 </span>            :         } else {
 <span class="lineNum">      43 </span>            :                 // groups! create a GROUP BY aggregator
@@ -111,7 +111,7 @@
 <span class="lineNum">      49 </span><span class="lineCov">     730646 :                 groupby-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">      50 </span><span class="lineCov">     730646 :                 this-&gt;plan = move(groupby);</span>
 <span class="lineNum">      51 </span>            :         }
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">    1304563 : }</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">    1304656 : }</span></a>
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span><span class="lineCov">     258481 : void PhysicalPlanGenerator::Visit(LogicalCrossProduct &amp;op) {</span>
 <span class="lineNum">      55 </span><span class="lineCov">     258481 :         if (plan) {</span>
@@ -128,29 +128,29 @@
 <span class="lineNum">      66 </span><span class="lineCov">     258481 :         plan = make_unique&lt;PhysicalCrossProduct&gt;(op, move(left), move(right));</span>
 <a name="67"><span class="lineNum">      67 </span><span class="lineCov">     258481 : }</span></a>
 <span class="lineNum">      68 </span>            : 
-<span class="lineNum">      69 </span><span class="lineCov">        912 : void PhysicalPlanGenerator::Visit(LogicalDelete &amp;op) {</span>
-<span class="lineNum">      70 </span><span class="lineCov">        912 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      69 </span><span class="lineCov">        922 : void PhysicalPlanGenerator::Visit(LogicalDelete &amp;op) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">        922 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">      71 </span>            : 
-<span class="lineNum">      72 </span><span class="lineCov">        952 :         if (!plan) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">        953 :         if (!plan) {</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Delete node cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">      74 </span>            :         }
 <span class="lineNum">      75 </span>            : 
-<span class="lineNum">      76 </span><span class="lineCov">       1945 :         auto del = make_unique&lt;PhysicalDelete&gt;(op, *op.table, *op.table-&gt;storage);</span>
-<span class="lineNum">      77 </span><span class="lineCov">        912 :         del-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">      78 </span><span class="lineCov">        996 :         this-&gt;plan = move(del);</span>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">        943 : }</span></a>
+<span class="lineNum">      76 </span><span class="lineCov">       1933 :         auto del = make_unique&lt;PhysicalDelete&gt;(op, *op.table, *op.table-&gt;storage);</span>
+<span class="lineNum">      77 </span><span class="lineCov">        922 :         del-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">      78 </span><span class="lineCov">       1007 :         this-&gt;plan = move(del);</span>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">        922 : }</span></a>
 <span class="lineNum">      80 </span>            : 
-<span class="lineNum">      81 </span><span class="lineCov">      78141 : void PhysicalPlanGenerator::Visit(LogicalUpdate &amp;op) {</span>
-<span class="lineNum">      82 </span><span class="lineCov">      78141 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      81 </span><span class="lineCov">      78726 : void PhysicalPlanGenerator::Visit(LogicalUpdate &amp;op) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">      78726 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span><span class="lineCov">      79300 :         if (!plan) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">      79983 :         if (!plan) {</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Update node cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">      86 </span>            :         }
 <span class="lineNum">      87 </span>            : 
-<span class="lineNum">      88 </span><span class="lineCov">     158894 :         auto update = make_unique&lt;PhysicalUpdate&gt;(op, *op.table, *op.table-&gt;storage, op.columns, move(op.expressions));</span>
-<span class="lineNum">      89 </span><span class="lineCov">      80062 :         update-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">      90 </span><span class="lineCov">      81434 :         this-&gt;plan = move(update);</span>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">      80008 : }</span></a>
+<span class="lineNum">      88 </span><span class="lineCov">     159670 :         auto update = make_unique&lt;PhysicalUpdate&gt;(op, *op.table, *op.table-&gt;storage, op.columns, move(op.expressions));</span>
+<span class="lineNum">      89 </span><span class="lineCov">      80355 :         update-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">      90 </span><span class="lineCov">      82233 :         this-&gt;plan = move(update);</span>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">      80761 : }</span></a>
 <span class="lineNum">      92 </span>            : 
 <span class="lineNum">      93 </span><span class="lineCov">       1129 : void PhysicalPlanGenerator::Visit(LogicalCreate &amp;op) {</span>
 <span class="lineNum">      94 </span><span class="lineCov">       1129 :         LogicalOperatorVisitor::Visit(op);</span>
@@ -162,122 +162,122 @@
 <span class="lineNum">     100 </span><span class="lineCov">       1129 :         this-&gt;plan = make_unique&lt;PhysicalCreate&gt;(op, op.schema, move(op.info));</span>
 <a name="101"><span class="lineNum">     101 </span><span class="lineCov">       1129 : }</span></a>
 <span class="lineNum">     102 </span>            : 
-<span class="lineNum">     103 </span><span class="lineCov">          6 : void PhysicalPlanGenerator::Visit(LogicalCreateIndex &amp;op) {</span>
-<span class="lineNum">     104 </span><span class="lineCov">          6 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          5 : void PhysicalPlanGenerator::Visit(LogicalCreateIndex &amp;op) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">          5 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     105 </span>            : 
-<span class="lineNum">     106 </span><span class="lineCov">          6 :         if (plan) {</span>
+<span class="lineNum">     106 </span><span class="lineCov">          5 :         if (plan) {</span>
 <span class="lineNum">     107 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;CREATE INDEX node must be first node of the plan!&quot;);</span>
 <span class="lineNum">     108 </span>            :         }
 <span class="lineNum">     109 </span>            : 
-<span class="lineNum">     110 </span><span class="lineCov">          6 :         this-&gt;plan = make_unique&lt;PhysicalCreateIndex&gt;(op, op.table, op.column_ids, move(op.expressions), move(op.info));</span>
-<span class="lineNum">     111 </span><span class="lineCov">          6 : }</span>
+<span class="lineNum">     110 </span><span class="lineCov">          5 :         this-&gt;plan = make_unique&lt;PhysicalCreateIndex&gt;(op, op.table, op.column_ids, move(op.expressions), move(op.info));</span>
+<span class="lineNum">     111 </span><span class="lineCov">          5 : }</span>
 <a name="112"><span class="lineNum">     112 </span>            : </a>
 <span class="lineNum">     113 </span>            : //! Attempt to create an index scan from a filter + get, if possible
-<span class="lineNum">     114 </span><span class="lineCov">     489245 : static unique_ptr&lt;PhysicalOperator&gt; CreateIndexScan(LogicalFilter &amp;filter, LogicalGet &amp;scan) {</span>
-<span class="lineNum">     115 </span><span class="lineCov">     489245 :         if (!scan.table) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">     489964 : static unique_ptr&lt;PhysicalOperator&gt; CreateIndexScan(LogicalFilter &amp;filter, LogicalGet &amp;scan) {</span>
+<span class="lineNum">     115 </span><span class="lineCov">     489964 :         if (!scan.table) {</span>
 <span class="lineNum">     116 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">     117 </span>            :         }
 <span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span><span class="lineCov">     489245 :         auto &amp;storage = *scan.table-&gt;storage;</span>
+<span class="lineNum">     119 </span><span class="lineCov">     489964 :         auto &amp;storage = *scan.table-&gt;storage;</span>
 <span class="lineNum">     120 </span>            : 
-<span class="lineNum">     121 </span><span class="lineCov">     489598 :         if (storage.indexes.size() == 0) {</span>
+<span class="lineNum">     121 </span><span class="lineCov">     489953 :         if (storage.indexes.size() == 0) {</span>
 <span class="lineNum">     122 </span>            :                 // no indexes on the table, can't rewrite
-<span class="lineNum">     123 </span><span class="lineCov">     489295 :                 return nullptr;</span>
+<span class="lineNum">     123 </span><span class="lineCov">     490008 :                 return nullptr;</span>
 <span class="lineNum">     124 </span>            :         }
 <span class="lineNum">     125 </span>            :         // check all the indexes
-<span class="lineNum">     126 </span><span class="lineCov">         23 :         for (size_t j = 0; j &lt; storage.indexes.size(); j++) {</span>
-<span class="lineNum">     127 </span><span class="lineCov">         23 :                 auto &amp;index = storage.indexes[j];</span>
+<span class="lineNum">     126 </span><span class="lineCov">         11 :         for (size_t j = 0; j &lt; storage.indexes.size(); j++) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">         11 :                 auto &amp;index = storage.indexes[j];</span>
 <span class="lineNum">     128 </span>            :                 // FIXME: assume every index is order index currently
-<span class="lineNum">     129 </span><span class="lineCov">         23 :                 assert(index-&gt;type == IndexType::ORDER_INDEX);</span>
-<span class="lineNum">     130 </span><span class="lineCov">         23 :                 auto order_index = (OrderIndex *)index.get();</span>
+<span class="lineNum">     129 </span><span class="lineCov">         11 :                 assert(index-&gt;type == IndexType::ORDER_INDEX);</span>
+<span class="lineNum">     130 </span><span class="lineCov">         11 :                 auto order_index = (OrderIndex *)index.get();</span>
 <span class="lineNum">     131 </span>            :                 // try to find a matching index for any of the filter expressions
 <span class="lineNum">     132 </span>            :                 // currently we only look for equality predicates
-<span class="lineNum">     133 </span><span class="lineCov">         23 :                 for (size_t i = 0; i &lt; filter.expressions.size(); i++) {</span>
-<span class="lineNum">     134 </span><span class="lineCov">         23 :                         auto expr = filter.expressions[i].get();</span>
-<span class="lineNum">     135 </span><span class="lineCov">         23 :                         if (expr-&gt;type == ExpressionType::COMPARE_EQUAL ||</span>
-<span class="lineNum">     136 </span><span class="lineCov">         12 :                             expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
-<span class="lineNum">     137 </span><span class="lineCov">         10 :                             expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
-<span class="lineNum">     138 </span><span class="lineCov">          9 :                             expr-&gt;type == ExpressionType::COMPARE_LESSTHAN || expr-&gt;type == ExpressionType::COMPARE_GREATERTHAN) {</span>
-<span class="lineNum">     139 </span><span class="lineCov">         23 :                                 auto comparison = (ComparisonExpression *)expr;</span>
-<span class="lineNum">     140 </span><span class="lineCov">         23 :                                 unique_ptr&lt;Expression&gt; value;</span>
+<span class="lineNum">     133 </span><span class="lineCov">         11 :                 for (size_t i = 0; i &lt; filter.expressions.size(); i++) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">         11 :                         auto expr = filter.expressions[i].get();</span>
+<span class="lineNum">     135 </span><span class="lineCov">         11 :                         if (expr-&gt;type == ExpressionType::COMPARE_EQUAL ||</span>
+<span class="lineNum">     136 </span><span class="lineCov">          1 :                             expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
+<span class="lineNum">     137 </span><span class="lineCov">          1 :                             expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
+<span class="lineNum">     138 </span><span class="lineCov">          1 :                             expr-&gt;type == ExpressionType::COMPARE_LESSTHAN || expr-&gt;type == ExpressionType::COMPARE_GREATERTHAN) {</span>
+<span class="lineNum">     139 </span><span class="lineCov">         11 :                                 auto comparison = (ComparisonExpression *)expr;</span>
+<span class="lineNum">     140 </span><span class="lineCov">         11 :                                 unique_ptr&lt;Expression&gt; value;</span>
 <span class="lineNum">     141 </span>            :                                 // check if any of the two children is an index
-<span class="lineNum">     142 </span><span class="lineCov">         45 :                                 if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[0].get()) &amp;&amp;</span>
-<span class="lineNum">     143 </span><span class="lineCov">         22 :                                     comparison-&gt;children[1]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
-<span class="lineNum">     144 </span><span class="lineCov">         22 :                                         value = move(comparison-&gt;children[1]);</span>
-<span class="lineNum">     145 </span><span class="lineCov">          2 :                                 } else if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[1].get()) &amp;&amp;</span>
-<span class="lineNum">     146 </span><span class="lineCov">          1 :                                            comparison-&gt;children[0]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
-<span class="lineNum">     147 </span><span class="lineCov">          1 :                                         value = move(comparison-&gt;children[0]);</span>
-<span class="lineNum">     148 </span><span class="lineCov">          1 :                                         expr-&gt;type = ComparisonExpression::FlipComparisionExpression(expr-&gt;type);</span>
+<span class="lineNum">     142 </span><span class="lineCov">         22 :                                 if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[0].get()) &amp;&amp;</span>
+<span class="lineNum">     143 </span><span class="lineCov">         11 :                                     comparison-&gt;children[1]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
+<span class="lineNum">     144 </span><span class="lineCov">         11 :                                         value = move(comparison-&gt;children[1]);</span>
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :                                 } else if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[1].get()) &amp;&amp;</span>
+<span class="lineNum">     146 </span><span class="lineNoCov">          0 :                                            comparison-&gt;children[0]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :                                         value = move(comparison-&gt;children[0]);</span>
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :                                         expr-&gt;type = ComparisonExpression::FlipComparisionExpression(expr-&gt;type);</span>
 <span class="lineNum">     149 </span>            :                                 }
-<span class="lineNum">     150 </span><span class="lineCov">         23 :                                 if (value) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">         11 :                                 if (value) {</span>
 <span class="lineNum">     151 </span>            :                                         // we can use the index here!
 <span class="lineNum">     152 </span>            :                                         // create an index scan
 <span class="lineNum">     153 </span>            :                                         // FIXME: use statistics to see if it is worth it
-<span class="lineNum">     154 </span><span class="lineCov">         46 :                                         unique_ptr&lt;Expression&gt; low_value, high_value;</span>
-<span class="lineNum">     155 </span><span class="lineCov">         23 :                                         auto expr_low = expr-&gt;type;</span>
-<span class="lineNum">     156 </span><span class="lineCov">         23 :                                         auto expr_high = expr-&gt;type;</span>
-<span class="lineNum">     157 </span><span class="lineCov">         23 :                                         if (expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
-<span class="lineNum">     158 </span><span class="lineCov">         21 :                                             expr-&gt;type == ExpressionType::COMPARE_GREATERTHAN ||</span>
-<span class="lineNum">     159 </span><span class="lineCov">         15 :                                             expr-&gt;type == ExpressionType::COMPARE_EQUAL) {</span>
-<span class="lineNum">     160 </span><span class="lineCov">         19 :                                                 low_value = move(value);</span>
-<span class="lineNum">     161 </span><span class="lineCov">          4 :                                         } else if (expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
-<span class="lineNum">     162 </span><span class="lineCov">          3 :                                                    expr-&gt;type == ExpressionType::COMPARE_LESSTHAN) {</span>
-<span class="lineNum">     163 </span><span class="lineCov">          4 :                                                 high_value = move(value);</span>
+<span class="lineNum">     154 </span><span class="lineCov">         22 :                                         unique_ptr&lt;Expression&gt; low_value, high_value;</span>
+<span class="lineNum">     155 </span><span class="lineCov">         11 :                                         auto expr_low = expr-&gt;type;</span>
+<span class="lineNum">     156 </span><span class="lineCov">         11 :                                         auto expr_high = expr-&gt;type;</span>
+<span class="lineNum">     157 </span><span class="lineCov">         11 :                                         if (expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
+<span class="lineNum">     158 </span><span class="lineCov">         11 :                                             expr-&gt;type == ExpressionType::COMPARE_GREATERTHAN ||</span>
+<span class="lineNum">     159 </span><span class="lineCov">         10 :                                             expr-&gt;type == ExpressionType::COMPARE_EQUAL) {</span>
+<span class="lineNum">     160 </span><span class="lineCov">         11 :                                                 low_value = move(value);</span>
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :                                         } else if (expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
+<span class="lineNum">     162 </span><span class="lineNoCov">          0 :                                                    expr-&gt;type == ExpressionType::COMPARE_LESSTHAN) {</span>
+<span class="lineNum">     163 </span><span class="lineNoCov">          0 :                                                 high_value = move(value);</span>
 <span class="lineNum">     164 </span>            :                                         }
-<span class="lineNum">     165 </span><span class="lineCov">         23 :                                         filter.expressions.erase(filter.expressions.begin() + i);</span>
-<span class="lineNum">     166 </span><span class="lineCov">         23 :                                         if (!(expr_low == ExpressionType::COMPARE_EQUAL)) {</span>
-<span class="lineNum">     167 </span><span class="lineCov">         16 :                                                 for (size_t k = i; k &lt; filter.expressions.size(); k++) {</span>
-<span class="lineNum">     168 </span><span class="lineCov">          4 :                                                         expr = filter.expressions[k].get();</span>
-<span class="lineNum">     169 </span><span class="lineCov">          4 :                                                         comparison = (ComparisonExpression *)expr;</span>
-<span class="lineNum">     170 </span><span class="lineCov">          4 :                                                         value = nullptr;</span>
-<span class="lineNum">     171 </span><span class="lineCov">          8 :                                                         if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[0].get()) &amp;&amp;</span>
-<span class="lineNum">     172 </span><span class="lineCov">          4 :                                                             comparison-&gt;children[1]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
-<span class="lineNum">     173 </span><span class="lineCov">          4 :                                                                 value = move(comparison-&gt;children[1]);</span>
+<span class="lineNum">     165 </span><span class="lineCov">         11 :                                         filter.expressions.erase(filter.expressions.begin() + i);</span>
+<span class="lineNum">     166 </span><span class="lineCov">         11 :                                         if (!(expr_low == ExpressionType::COMPARE_EQUAL)) {</span>
+<span class="lineNum">     167 </span><span class="lineCov">          1 :                                                 for (size_t k = i; k &lt; filter.expressions.size(); k++) {</span>
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :                                                         expr = filter.expressions[k].get();</span>
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :                                                         comparison = (ComparisonExpression *)expr;</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                                                         value = nullptr;</span>
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :                                                         if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[0].get()) &amp;&amp;</span>
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :                                                             comparison-&gt;children[1]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                                                                 value = move(comparison-&gt;children[1]);</span>
 <span class="lineNum">     174 </span><span class="lineNoCov">          0 :                                                         } else if (order_index-&gt;expressions[0]-&gt;Equals(comparison-&gt;children[1].get()) &amp;&amp;</span>
 <span class="lineNum">     175 </span><span class="lineNoCov">          0 :                                                                    comparison-&gt;children[0]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
 <span class="lineNum">     176 </span><span class="lineNoCov">          0 :                                                                 value = move(comparison-&gt;children[0]);</span>
 <span class="lineNum">     177 </span><span class="lineNoCov">          0 :                                                                 expr-&gt;type = ComparisonExpression::FlipComparisionExpression(expr-&gt;type);</span>
 <span class="lineNum">     178 </span>            :                                                         }
-<span class="lineNum">     179 </span><span class="lineCov">          4 :                                                         if (value) {</span>
-<span class="lineNum">     180 </span><span class="lineCov">         11 :                                                                 if ((expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
-<span class="lineNum">     181 </span><span class="lineCov">          7 :                                                                      expr-&gt;type == ExpressionType::COMPARE_GREATERTHAN) &amp;&amp;</span>
-<span class="lineNum">     182 </span><span class="lineCov">          3 :                                                                     ((ConstantExpression *)value.get())-&gt;value &gt;=</span>
-<span class="lineNum">     183 </span><span class="lineCov">          3 :                                                                         ((ConstantExpression *)low_value.get())-&gt;value) {</span>
-<span class="lineNum">     184 </span><span class="lineCov">          2 :                                                                         if (((ConstantExpression *)value.get())-&gt;value ==</span>
-<span class="lineNum">     185 </span><span class="lineCov">          5 :                                                                                 ((ConstantExpression *)low_value.get())-&gt;value &amp;&amp;</span>
-<span class="lineNum">     186 </span><span class="lineCov">          1 :                                                                             (expr_low == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
-<span class="lineNum">     187 </span><span class="lineCov">          1 :                                                                              expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO)) {</span>
-<span class="lineNum">     188 </span><span class="lineCov">          1 :                                                                                 expr_low = ExpressionType::COMPARE_GREATERTHANOREQUALTO;</span>
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :                                                         if (value) {</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :                                                                 if ((expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :                                                                      expr-&gt;type == ExpressionType::COMPARE_GREATERTHAN) &amp;&amp;</span>
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 :                                                                     ((ConstantExpression *)value.get())-&gt;value &gt;=</span>
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :                                                                         ((ConstantExpression *)low_value.get())-&gt;value) {</span>
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                                                                         if (((ConstantExpression *)value.get())-&gt;value ==</span>
+<span class="lineNum">     185 </span><span class="lineNoCov">          0 :                                                                                 ((ConstantExpression *)low_value.get())-&gt;value &amp;&amp;</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                                                                             (expr_low == ExpressionType::COMPARE_GREATERTHANOREQUALTO ||</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :                                                                              expr-&gt;type == ExpressionType::COMPARE_GREATERTHANOREQUALTO)) {</span>
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :                                                                                 expr_low = ExpressionType::COMPARE_GREATERTHANOREQUALTO;</span>
 <span class="lineNum">     189 </span>            :                                                                         } else {
-<span class="lineNum">     190 </span><span class="lineCov">          1 :                                                                                 low_value = move(value);</span>
-<span class="lineNum">     191 </span><span class="lineCov">          1 :                                                                                 expr_low = expr-&gt;type;</span>
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :                                                                                 low_value = move(value);</span>
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                                                                                 expr_low = expr-&gt;type;</span>
 <span class="lineNum">     192 </span>            :                                                                         }
 <span class="lineNum">     193 </span>            : 
-<span class="lineNum">     194 </span><span class="lineCov">          5 :                                                                 } else if ((expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
-<span class="lineNum">     195 </span><span class="lineCov">          3 :                                                                             expr-&gt;type == ExpressionType::COMPARE_LESSTHAN) &amp;&amp;</span>
-<span class="lineNum">     196 </span><span class="lineCov">          1 :                                                                            ((ConstantExpression *)value.get())-&gt;value &lt;=</span>
-<span class="lineNum">     197 </span><span class="lineCov">          1 :                                                                                ((ConstantExpression *)high_value.get())-&gt;value) {</span>
-<span class="lineNum">     198 </span><span class="lineCov">          1 :                                                                         if (((ConstantExpression *)value.get())-&gt;value ==</span>
-<span class="lineNum">     199 </span><span class="lineCov">          3 :                                                                                 ((ConstantExpression *)high_value.get())-&gt;value &amp;&amp;</span>
-<span class="lineNum">     200 </span><span class="lineCov">          1 :                                                                             (expr_high == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
-<span class="lineNum">     201 </span><span class="lineCov">          1 :                                                                              expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO)) {</span>
-<span class="lineNum">     202 </span><span class="lineCov">          1 :                                                                                 expr_high = ExpressionType::COMPARE_LESSTHANOREQUALTO;</span>
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :                                                                 } else if ((expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :                                                                             expr-&gt;type == ExpressionType::COMPARE_LESSTHAN) &amp;&amp;</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                                                                            ((ConstantExpression *)value.get())-&gt;value &lt;=</span>
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :                                                                                ((ConstantExpression *)high_value.get())-&gt;value) {</span>
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :                                                                         if (((ConstantExpression *)value.get())-&gt;value ==</span>
+<span class="lineNum">     199 </span><span class="lineNoCov">          0 :                                                                                 ((ConstantExpression *)high_value.get())-&gt;value &amp;&amp;</span>
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                                                                             (expr_high == ExpressionType::COMPARE_LESSTHANOREQUALTO ||</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :                                                                              expr-&gt;type == ExpressionType::COMPARE_LESSTHANOREQUALTO)) {</span>
+<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                                                                                 expr_high = ExpressionType::COMPARE_LESSTHANOREQUALTO;</span>
 <span class="lineNum">     203 </span>            :                                                                         } else {
 <span class="lineNum">     204 </span><span class="lineNoCov">          0 :                                                                                 high_value = move(value);</span>
 <span class="lineNum">     205 </span><span class="lineNoCov">          0 :                                                                                 expr_high = expr-&gt;type;</span>
 <span class="lineNum">     206 </span>            :                                                                         }
 <span class="lineNum">     207 </span>            :                                                                 }
-<span class="lineNum">     208 </span><span class="lineCov">          4 :                                                                 filter.expressions.erase(filter.expressions.begin() + k);</span>
-<span class="lineNum">     209 </span><span class="lineCov">          4 :                                                                 k--;</span>
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :                                                                 filter.expressions.erase(filter.expressions.begin() + k);</span>
+<span class="lineNum">     209 </span><span class="lineNoCov">          0 :                                                                 k--;</span>
 <span class="lineNum">     210 </span>            :                                                         }
 <span class="lineNum">     211 </span>            :                                                 }
 <span class="lineNum">     212 </span>            :                                         }
-<span class="lineNum">     213 </span><span class="lineCov">         23 :                                         auto index_scan =</span>
-<span class="lineNum">     214 </span><span class="lineCov">         46 :                                             make_unique&lt;PhysicalIndexScan&gt;(scan, *scan.table, *scan.table-&gt;storage, *order_index,</span>
-<span class="lineNum">     215 </span><span class="lineCov">         46 :                                                                            scan.column_ids, move(low_value), move(high_value));</span>
-<span class="lineNum">     216 </span><span class="lineCov">         23 :                                         index_scan-&gt;low_expression_type = expr_low;</span>
-<span class="lineNum">     217 </span><span class="lineCov">         23 :                                         index_scan-&gt;high_expression_type = expr_high;</span>
-<span class="lineNum">     218 </span><span class="lineCov">         23 :                                         return move(index_scan);</span>
+<span class="lineNum">     213 </span><span class="lineCov">         11 :                                         auto index_scan =</span>
+<span class="lineNum">     214 </span><span class="lineCov">         22 :                                             make_unique&lt;PhysicalIndexScan&gt;(scan, *scan.table, *scan.table-&gt;storage, *order_index,</span>
+<span class="lineNum">     215 </span><span class="lineCov">         22 :                                                                            scan.column_ids, move(low_value), move(high_value));</span>
+<span class="lineNum">     216 </span><span class="lineCov">         11 :                                         index_scan-&gt;low_expression_type = expr_low;</span>
+<span class="lineNum">     217 </span><span class="lineCov">         11 :                                         index_scan-&gt;high_expression_type = expr_high;</span>
+<span class="lineNum">     218 </span><span class="lineCov">         11 :                                         return move(index_scan);</span>
 <span class="lineNum">     219 </span>            :                                 }
 <span class="lineNum">     220 </span>            :                         }
 <span class="lineNum">     221 </span>            :                 }
@@ -285,49 +285,49 @@
 <span class="lineNum">     223 </span><span class="lineNoCov">          0 :         return nullptr;</span>
 <a name="224"><span class="lineNum">     224 </span>            : }</a>
 <span class="lineNum">     225 </span>            : 
-<span class="lineNum">     226 </span><span class="lineCov">     489404 : void PhysicalPlanGenerator::Visit(LogicalFilter &amp;op) {</span>
-<span class="lineNum">     227 </span><span class="lineCov">     489404 :         if (op.children[0]-&gt;type == LogicalOperatorType::GET) {</span>
+<span class="lineNum">     226 </span><span class="lineCov">     490099 : void PhysicalPlanGenerator::Visit(LogicalFilter &amp;op) {</span>
+<span class="lineNum">     227 </span><span class="lineCov">     490099 :         if (op.children[0]-&gt;type == LogicalOperatorType::GET) {</span>
 <span class="lineNum">     228 </span>            :                 // filter + get
 <span class="lineNum">     229 </span>            :                 // check if we can transform this into an index scan
-<span class="lineNum">     230 </span><span class="lineCov">     494165 :                 auto scan = (LogicalGet *)op.children[0].get();</span>
-<span class="lineNum">     231 </span><span class="lineCov">     984219 :                 auto node = CreateIndexScan(op, *scan);</span>
-<span class="lineNum">     232 </span><span class="lineCov">     490699 :                 if (node) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">     494401 :                 auto scan = (LogicalGet *)op.children[0].get();</span>
+<span class="lineNum">     231 </span><span class="lineCov">     985724 :                 auto node = CreateIndexScan(op, *scan);</span>
+<span class="lineNum">     232 </span><span class="lineCov">     490975 :                 if (node) {</span>
 <span class="lineNum">     233 </span>            :                         // we can do an index scan, move it to the root node
-<span class="lineNum">     234 </span><span class="lineCov">         23 :                         assert(!plan);</span>
-<span class="lineNum">     235 </span><span class="lineCov">         23 :                         plan = move(node);</span>
+<span class="lineNum">     234 </span><span class="lineCov">         11 :                         assert(!plan);</span>
+<span class="lineNum">     235 </span><span class="lineCov">         11 :                         plan = move(node);</span>
 <span class="lineNum">     236 </span>            :                 } else {
 <span class="lineNum">     237 </span>            :                         // we can't do an index scan, create a normal table scan
-<span class="lineNum">     238 </span><span class="lineCov">     489132 :                         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     238 </span><span class="lineCov">     489871 :                         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     239 </span>            :                 }
 <span class="lineNum">     240 </span>            :         } else {
 <span class="lineNum">     241 </span><span class="lineCov">        150 :                 LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     242 </span>            :         }
 <span class="lineNum">     243 </span>            : 
-<span class="lineNum">     244 </span><span class="lineCov">     489907 :         if (!plan) {</span>
+<span class="lineNum">     244 </span><span class="lineCov">     491250 :         if (!plan) {</span>
 <span class="lineNum">     245 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Filter cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">     246 </span>            :         }
 <span class="lineNum">     247 </span>            : 
-<span class="lineNum">     248 </span><span class="lineCov">     492020 :         if (op.expressions.size() &gt; 0) {</span>
+<span class="lineNum">     248 </span><span class="lineCov">     492680 :         if (op.expressions.size() &gt; 0) {</span>
 <span class="lineNum">     249 </span>            :                 // create a filter if there is anything to filter
-<span class="lineNum">     250 </span><span class="lineCov">     981488 :                 auto filter = make_unique&lt;PhysicalFilter&gt;(op, move(op.expressions));</span>
-<span class="lineNum">     251 </span><span class="lineCov">     489481 :                 filter-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">     252 </span><span class="lineCov">     489260 :                 this-&gt;plan = move(filter);</span>
+<span class="lineNum">     250 </span><span class="lineCov">     983303 :                 auto filter = make_unique&lt;PhysicalFilter&gt;(op, move(op.expressions));</span>
+<span class="lineNum">     251 </span><span class="lineCov">     490158 :                 filter-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">     252 </span><span class="lineCov">     489989 :                 this-&gt;plan = move(filter);</span>
 <span class="lineNum">     253 </span>            :         }
-<a name="254"><span class="lineNum">     254 </span><span class="lineCov">     489444 : }</span></a>
+<a name="254"><span class="lineNum">     254 </span><span class="lineCov">     490382 : }</span></a>
 <span class="lineNum">     255 </span>            : 
-<span class="lineNum">     256 </span><span class="lineCov">    3358070 : void PhysicalPlanGenerator::Visit(LogicalGet &amp;op) {</span>
-<span class="lineNum">     257 </span><span class="lineCov">    3358070 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     256 </span><span class="lineCov">    3358827 : void PhysicalPlanGenerator::Visit(LogicalGet &amp;op) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">    3358827 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     258 </span>            : 
-<span class="lineNum">     259 </span><span class="lineCov">    3363523 :         if (!op.table) {</span>
+<span class="lineNum">     259 </span><span class="lineCov">    3363827 :         if (!op.table) {</span>
 <span class="lineNum">     260 </span><span class="lineCov">    1318376 :                 vector&lt;TypeId&gt; types = {TypeId::BIGINT};</span>
 <span class="lineNum">     261 </span><span class="lineCov">     659188 :                 this-&gt;plan = make_unique&lt;PhysicalDummyScan&gt;(types);</span>
 <span class="lineNum">     262 </span><span class="lineCov">     659188 :                 return;</span>
 <span class="lineNum">     263 </span>            :         }
-<span class="lineNum">     264 </span><span class="lineCov">    5403849 :         auto scan = make_unique&lt;PhysicalTableScan&gt;(op, *op.table, *op.table-&gt;storage, op.column_ids);</span>
-<span class="lineNum">     265 </span><span class="lineCov">    2699825 :         if (plan) {</span>
+<span class="lineNum">     264 </span><span class="lineCov">    5404180 :         auto scan = make_unique&lt;PhysicalTableScan&gt;(op, *op.table, *op.table-&gt;storage, op.column_ids);</span>
+<span class="lineNum">     265 </span><span class="lineCov">    2700138 :         if (plan) {</span>
 <span class="lineNum">     266 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Scan has to be the first node of a plan!&quot;);</span>
 <span class="lineNum">     267 </span>            :         }
-<span class="lineNum">     268 </span><span class="lineCov">    2700517 :         this-&gt;plan = move(scan);</span>
+<span class="lineNum">     268 </span><span class="lineCov">    2701308 :         this-&gt;plan = move(scan);</span>
 <a name="269"><span class="lineNum">     269 </span>            : }</a>
 <span class="lineNum">     270 </span>            : 
 <span class="lineNum">     271 </span><span class="lineCov">       2124 : void PhysicalPlanGenerator::Visit(LogicalJoin &amp;op) {</span>
@@ -414,29 +414,29 @@
 <span class="lineNum">     352 </span><span class="lineCov">    2454780 :         this-&gt;plan = move(projection);</span>
 <a name="353"><span class="lineNum">     353 </span><span class="lineCov">    2454780 : }</span></a>
 <span class="lineNum">     354 </span>            : 
-<span class="lineNum">     355 </span><span class="lineCov">      36520 : void PhysicalPlanGenerator::Visit(LogicalInsert &amp;op) {</span>
-<span class="lineNum">     356 </span><span class="lineCov">      36520 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     355 </span><span class="lineCov">      36525 : void PhysicalPlanGenerator::Visit(LogicalInsert &amp;op) {</span>
+<span class="lineNum">     356 </span><span class="lineCov">      36525 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     357 </span>            : 
-<span class="lineNum">     358 </span><span class="lineCov">      73047 :         auto insertion = make_unique&lt;PhysicalInsert&gt;(op, op.table, move(op.insert_values), op.column_index_map);</span>
-<span class="lineNum">     359 </span><span class="lineCov">      36521 :         if (plan) {</span>
+<span class="lineNum">     358 </span><span class="lineCov">      73052 :         auto insertion = make_unique&lt;PhysicalInsert&gt;(op, op.table, move(op.insert_values), op.column_index_map);</span>
+<span class="lineNum">     359 </span><span class="lineCov">      36524 :         if (plan) {</span>
 <span class="lineNum">     360 </span><span class="lineCov">         14 :                 insertion-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">     361 </span>            :         }
-<span class="lineNum">     362 </span><span class="lineCov">      36522 :         this-&gt;plan = move(insertion);</span>
-<a name="363"><span class="lineNum">     363 </span><span class="lineCov">      36522 : }</span></a>
+<span class="lineNum">     362 </span><span class="lineCov">      36524 :         this-&gt;plan = move(insertion);</span>
+<a name="363"><span class="lineNum">     363 </span><span class="lineCov">      36525 : }</span></a>
 <span class="lineNum">     364 </span>            : 
-<span class="lineNum">     365 </span><span class="lineCov">    3010322 : void PhysicalPlanGenerator::Visit(LogicalPruneColumns &amp;op) {</span>
-<span class="lineNum">     366 </span><span class="lineCov">    3010322 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     365 </span><span class="lineCov">    3010385 : void PhysicalPlanGenerator::Visit(LogicalPruneColumns &amp;op) {</span>
+<span class="lineNum">     366 </span><span class="lineCov">    3010385 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     367 </span>            : 
-<span class="lineNum">     368 </span><span class="lineCov">    3010348 :         if (!plan) {</span>
+<span class="lineNum">     368 </span><span class="lineCov">    3010423 :         if (!plan) {</span>
 <span class="lineNum">     369 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Prune columns cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">     370 </span>            :         }
-<span class="lineNum">     371 </span><span class="lineCov">    3010390 :         if (plan-&gt;GetTypes().size() &gt; op.column_limit) {</span>
+<span class="lineNum">     371 </span><span class="lineCov">    3010441 :         if (plan-&gt;GetTypes().size() &gt; op.column_limit) {</span>
 <span class="lineNum">     372 </span>            :                 // only prune if we need to
 <span class="lineNum">     373 </span><span class="lineCov">         18 :                 auto node = make_unique&lt;PhysicalPruneColumns&gt;(op, op.column_limit);</span>
 <span class="lineNum">     374 </span><span class="lineCov">          9 :                 node-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">     375 </span><span class="lineCov">          9 :                 this-&gt;plan = move(node);</span>
 <span class="lineNum">     376 </span>            :         }
-<a name="377"><span class="lineNum">     377 </span><span class="lineCov">    3010334 : }</span></a>
+<a name="377"><span class="lineNum">     377 </span><span class="lineCov">    3010395 : }</span></a>
 <span class="lineNum">     378 </span>            : 
 <span class="lineNum">     379 </span><span class="lineCov">          9 : void PhysicalPlanGenerator::Visit(LogicalTableFunction &amp;op) {</span>
 <span class="lineNum">     380 </span><span class="lineCov">          9 :         LogicalOperatorVisitor::Visit(op);</span>

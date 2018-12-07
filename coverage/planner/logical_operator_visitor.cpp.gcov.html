@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cdef117e - planner/logical_operator_visitor.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b42f154d - planner/logical_operator_visitor.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td class="headerValue">DuckDB Code Coverage Report b42f154d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">66</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td class="headerValue">2018-12-07 01:20:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -67,19 +67,19 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">   21484213 : void LogicalOperatorVisitor::VisitOperator(LogicalOperator &amp;op) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">   21484213 :         op.AcceptChildren(this);</span>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">   21499873 : }</span></a>
+<span class="lineNum">       8 </span><span class="lineCov">   21489480 : void LogicalOperatorVisitor::VisitOperator(LogicalOperator &amp;op) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">   21489480 :         op.AcceptChildren(this);</span>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">   21503155 : }</span></a>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">    2612084 : void LogicalOperatorVisitor::Visit(LogicalAggregate &amp;op) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">    2612084 :         VisitOperator(op);</span>
-<span class="lineNum">      14 </span><span class="lineCov">    4467856 :         for (auto &amp;exp : op.groups) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    2612198 : void LogicalOperatorVisitor::Visit(LogicalAggregate &amp;op) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    2612198 :         VisitOperator(op);</span>
+<span class="lineNum">      14 </span><span class="lineCov">    4467984 :         for (auto &amp;exp : op.groups) {</span>
 <span class="lineNum">      15 </span><span class="lineCov">    1855704 :                 exp-&gt;Accept(this);</span>
 <span class="lineNum">      16 </span>            :         }
-<span class="lineNum">      17 </span><span class="lineCov">    5772822 :         for (auto &amp;exp : op.expressions) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">    3160717 :                 exp-&gt;Accept(this);</span>
+<span class="lineNum">      17 </span><span class="lineCov">    5773047 :         for (auto &amp;exp : op.expressions) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3160814 :                 exp-&gt;Accept(this);</span>
 <span class="lineNum">      19 </span>            :         }
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    2612172 : }</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    2612316 : }</span></a>
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 : void LogicalOperatorVisitor::Visit(LogicalCrossProduct &amp;op) {</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :         VisitOperator(op);</span>
@@ -93,23 +93,23 @@
 <span class="lineNum">      31 </span><span class="lineCov">          9 :         VisitOperator(op);</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineCov">          9 : }</span></a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">    6020656 : void LogicalOperatorVisitor::Visit(LogicalPruneColumns &amp;op) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">    6020656 :         VisitOperator(op);</span>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">    6020731 : }</span></a>
+<span class="lineNum">      34 </span><span class="lineCov">    6020774 : void LogicalOperatorVisitor::Visit(LogicalPruneColumns &amp;op) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    6020774 :         VisitOperator(op);</span>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">    6020835 : }</span></a>
 <span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span><span class="lineCov">       1824 : void LogicalOperatorVisitor::Visit(LogicalDelete &amp;op) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">       1824 :         VisitOperator(op);</span>
-<span class="lineNum">      40 </span><span class="lineCov">       1867 :         for (auto &amp;exp : op.expressions) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">       1849 : void LogicalOperatorVisitor::Visit(LogicalDelete &amp;op) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">       1849 :         VisitOperator(op);</span>
+<span class="lineNum">      40 </span><span class="lineCov">       1933 :         for (auto &amp;exp : op.expressions) {</span>
 <span class="lineNum">      41 </span><span class="lineNoCov">          0 :                 exp-&gt;Accept(this);</span>
 <span class="lineNum">      42 </span>            :         }
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">       1958 : }</span></a>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">       1951 : }</span></a>
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">     156276 : void LogicalOperatorVisitor::Visit(LogicalUpdate &amp;op) {</span>
-<span class="lineNum">      46 </span><span class="lineCov">     156276 :         VisitOperator(op);</span>
-<span class="lineNum">      47 </span><span class="lineCov">     319751 :         for (auto &amp;exp : op.expressions) {</span>
-<span class="lineNum">      48 </span><span class="lineCov">     162197 :                 exp-&gt;Accept(this);</span>
+<span class="lineNum">      45 </span><span class="lineCov">     157633 : void LogicalOperatorVisitor::Visit(LogicalUpdate &amp;op) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">     157633 :         VisitOperator(op);</span>
+<span class="lineNum">      47 </span><span class="lineCov">     323355 :         for (auto &amp;exp : op.expressions) {</span>
+<span class="lineNum">      48 </span><span class="lineCov">     163046 :                 exp-&gt;Accept(this);</span>
 <span class="lineNum">      49 </span>            :         }
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">     161128 : }</span></a>
+<a name="50"><span class="lineNum">      50 </span><span class="lineCov">     162469 : }</span></a>
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 : void LogicalOperatorVisitor::Visit(LogicalUnion &amp;op) {</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :         VisitOperator(op);</span>
@@ -123,16 +123,16 @@
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 :         VisitOperator(op);</span>
 <a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      63 </span>            : 
-<span class="lineNum">      64 </span><span class="lineCov">     981501 : void LogicalOperatorVisitor::Visit(LogicalFilter &amp;op) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">     981501 :         VisitOperator(op);</span>
-<span class="lineNum">      66 </span><span class="lineCov">    2025146 :         for (auto &amp;exp : op.expressions) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">    1042202 :                 exp-&gt;Accept(this);</span>
+<span class="lineNum">      64 </span><span class="lineCov">     983055 : void LogicalOperatorVisitor::Visit(LogicalFilter &amp;op) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">     983055 :         VisitOperator(op);</span>
+<span class="lineNum">      66 </span><span class="lineCov">    2027984 :         for (auto &amp;exp : op.expressions) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">    1043136 :                 exp-&gt;Accept(this);</span>
 <span class="lineNum">      68 </span>            :         }
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">     984846 : }</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">     986388 : }</span></a>
 <span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">    6720034 : void LogicalOperatorVisitor::Visit(LogicalGet &amp;op) {</span>
-<span class="lineNum">      72 </span><span class="lineCov">    6720034 :         VisitOperator(op);</span>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">    6730657 : }</span></a>
+<span class="lineNum">      71 </span><span class="lineCov">    6721984 : void LogicalOperatorVisitor::Visit(LogicalGet &amp;op) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">    6721984 :         VisitOperator(op);</span>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">    6731055 : }</span></a>
 <span class="lineNum">      74 </span>            : 
 <span class="lineNum">      75 </span><span class="lineNoCov">          0 : void LogicalOperatorVisitor::Visit(LogicalJoin &amp;op) {</span>
 <span class="lineNum">      76 </span><span class="lineNoCov">          0 :         for (auto &amp;cond : op.conditions) {</span>
@@ -160,28 +160,28 @@
 <span class="lineNum">      98 </span>            :         }
 <a name="99"><span class="lineNum">      99 </span><span class="lineCov">    4910195 : }</span></a>
 <span class="lineNum">     100 </span>            : 
-<span class="lineNum">     101 </span><span class="lineCov">      73040 : void LogicalOperatorVisitor::Visit(LogicalInsert &amp;op) {</span>
-<span class="lineNum">     102 </span><span class="lineCov">      73040 :         VisitOperator(op);</span>
+<span class="lineNum">     101 </span><span class="lineCov">      73050 : void LogicalOperatorVisitor::Visit(LogicalInsert &amp;op) {</span>
+<span class="lineNum">     102 </span><span class="lineCov">      73050 :         VisitOperator(op);</span>
 <span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span><span class="lineCov">     148517 :         for (auto &amp;list : op.insert_values) {</span>
-<span class="lineNum">     105 </span><span class="lineCov">     206018 :                 for (auto &amp;exp : list) {</span>
-<span class="lineNum">     106 </span><span class="lineCov">     130551 :                         exp-&gt;Accept(this);</span>
+<span class="lineNum">     104 </span><span class="lineCov">     148530 :         for (auto &amp;list : op.insert_values) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">     206036 :                 for (auto &amp;exp : list) {</span>
+<span class="lineNum">     106 </span><span class="lineCov">     130560 :                         exp-&gt;Accept(this);</span>
 <span class="lineNum">     107 </span>            :                 }
 <span class="lineNum">     108 </span>            :         }
-<a name="109"><span class="lineNum">     109 </span><span class="lineCov">      73047 : }</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">      73049 : }</span></a>
 <span class="lineNum">     110 </span>            : 
 <span class="lineNum">     111 </span><span class="lineCov">       2258 : void LogicalOperatorVisitor::Visit(LogicalCreate &amp;op) {</span>
 <span class="lineNum">     112 </span><span class="lineCov">       2258 :         VisitOperator(op);</span>
 <span class="lineNum">     113 </span>            :         // FIXME: visit expressions in constraints
 <a name="114"><span class="lineNum">     114 </span><span class="lineCov">       2258 : }</span></a>
 <span class="lineNum">     115 </span>            : 
-<span class="lineNum">     116 </span><span class="lineCov">         12 : void LogicalOperatorVisitor::Visit(LogicalCreateIndex &amp;op) {</span>
-<span class="lineNum">     117 </span><span class="lineCov">         12 :         VisitOperator(op);</span>
+<span class="lineNum">     116 </span><span class="lineCov">         10 : void LogicalOperatorVisitor::Visit(LogicalCreateIndex &amp;op) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">         10 :         VisitOperator(op);</span>
 <span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span><span class="lineCov">         24 :         for (auto &amp;exp : op.expressions) {</span>
-<span class="lineNum">     120 </span><span class="lineCov">         12 :                 exp-&gt;Accept(this);</span>
+<span class="lineNum">     119 </span><span class="lineCov">         20 :         for (auto &amp;exp : op.expressions) {</span>
+<span class="lineNum">     120 </span><span class="lineCov">         10 :                 exp-&gt;Accept(this);</span>
 <span class="lineNum">     121 </span>            :         }
-<a name="122"><span class="lineNum">     122 </span><span class="lineCov">         12 : }</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">         10 : }</span></a>
 <span class="lineNum">     123 </span>            : 
 <span class="lineNum">     124 </span><span class="lineCov">         14 : void LogicalOperatorVisitor::Visit(LogicalCopy &amp;op) {</span>
 <span class="lineNum">     125 </span><span class="lineCov">         14 :         VisitOperator(op);</span>

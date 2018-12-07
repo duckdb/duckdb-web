@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cdef117e - include/common/vector_operations/binary_loops.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b42f154d - include/common/vector_operations/binary_loops.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cdef117e</td>
+            <td class="headerValue">DuckDB Code Coverage Report b42f154d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">1238</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-07 00:22:45</td>
+            <td class="headerValue">2018-12-07 01:20:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">129</td>
@@ -76,27 +76,27 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : namespace duckdb {</a>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">    7178015 : inline void BINARY_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">    7178015 :         if (left.type != right.type) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">    7178745 : inline void BINARY_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    7178745 :         if (left.type != right.type) {</span>
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 :                 throw TypeMismatchException(left.type, right.type, &quot;left and right types must be the same&quot;);</span>
 <span class="lineNum">      20 </span>            :         }
-<span class="lineNum">      21 </span><span class="lineCov">    7178015 :         if (left.type != result.type) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">    7178745 :         if (left.type != result.type) {</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 throw TypeMismatchException(left.type, result.type, &quot;result type must be the same as input types&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">    7178015 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp; left.count != right.count) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">    7178745 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp; left.count != right.count) {</span>
 <span class="lineNum">      25 </span>            :                 throw Exception(&quot;Cardinality exception: left and right cannot have &quot;
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :                                 &quot;different cardinalities&quot;);</span>
 <span class="lineNum">      27 </span>            :         }
-<span class="lineNum">      28 </span><span class="lineCov">    7181025 : }</span>
+<span class="lineNum">      28 </span><span class="lineCov">    7180891 : }</span>
 <a name="29"><span class="lineNum">      29 </span>            : </a>
 <span class="lineNum">      30 </span>            : template &lt;class LEFT_TYPE, class RIGHT_TYPE, class RESULT_TYPE, class OP&gt;
-<span class="lineNum">      31 </span><span class="lineCov">    4241090 : static inline void binary_loop_function_left_constant(LEFT_TYPE ldata, RIGHT_TYPE *__restrict rdata,</span>
+<span class="lineNum">      31 </span><span class="lineCov">    4241091 : static inline void binary_loop_function_left_constant(LEFT_TYPE ldata, RIGHT_TYPE *__restrict rdata,</span>
 <span class="lineNum">      32 </span>            :                                                       RESULT_TYPE *__restrict result_data, size_t count,
 <span class="lineNum">      33 </span>            :                                                       sel_t *__restrict sel_vector) {
-<span class="lineNum">      34 </span><span class="lineCov">    4241090 :         ASSERT_RESTRICT(rdata, rdata + count, result_data, result_data + count);</span>
-<span class="lineNum">      35 </span><span class="lineCov">    4241090 :         VectorOperations::Exec(sel_vector, count,</span>
+<span class="lineNum">      34 </span><span class="lineCov">    4241091 :         ASSERT_RESTRICT(rdata, rdata + count, result_data, result_data + count);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    4241091 :         VectorOperations::Exec(sel_vector, count,</span>
 <span class="lineNum">      36 </span>            :                                [&amp;](size_t i, size_t k) { result_data[i] = OP::Operation(ldata, rdata[i]); });
-<span class="lineNum">      37 </span><span class="lineCov">    4241090 : }</span>
+<span class="lineNum">      37 </span><span class="lineCov">    4241091 : }</span>
 <a name="38"><span class="lineNum">      38 </span><span class="lineCov">       3171 : </span></a>
 <span class="lineNum">      39 </span>            : template &lt;class LEFT_TYPE, class RIGHT_TYPE, class RESULT_TYPE, class OP&gt;
 <span class="lineNum">      40 </span><span class="lineCov">          2 : static inline void binary_loop_function_right_constant(LEFT_TYPE *__restrict ldata, RIGHT_TYPE rdata,</span>
