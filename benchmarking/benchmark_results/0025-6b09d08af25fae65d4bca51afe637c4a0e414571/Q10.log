@@ -1,0 +1,148 @@
+<<Query Profiling Information>>
+select  c_custkey,  c_name,  sum(l_extendedprice * (1 - l_discount)) as revenue,  c_acctbal,  n_name,  c_address,  c_phone,  c_comment from  customer,  orders,  lineitem,  nation where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and o_orderdate >= cast('1993-10-01' as date)  and o_orderdate < cast('1994-01-01' as date)  and l_returnflag = 'R'  and c_nationkey = n_nationkey group by  c_custkey,  c_name,  c_acctbal,  c_phone,  n_name,  c_address,  c_comment order by  revenue desc limit 20; 
+<<Timing>>
+Total Time: 2.880603s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        20        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.13s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (1.06s)     |
+|       99318      |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    c_nationkey   |
+|   =n_nationkey   |
+|      (0.64s)     |
+|      1478870     |
+--------------------
+--------------------                                        --------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     |
+|       INNER      |                                        |      nation      |
+|    o_orderkey    |                                        |                  |
+|    =l_orderkey   |                                        |                  |
+|      (0.67s)     |                                        |      (0.00s)     |
+|      1478870     |                                        |        25        |
+--------------------                                        --------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    | l_returnflag = R |
+|     c_custkey    |                    |                  |
+|    =o_custkey    |                    |                  |
+|      (0.21s)     |                    |      (0.05s)     |
+|      1500000     |                    |      1478870     |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     |
+|     customer     ||      orders      ||     lineitem     |
+|      (0.01s)     ||      (0.01s)     ||      (0.07s)     |
+|      150000      ||      1500000     ||      6001215     |
+------------------------------------------------------------
+
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 20 ]: 
+Chunk - [8 Columns]
+- INTEGER: 20 = [ 47401, 121909, 50605, 57718, 17059, 100015, 50506, 125152, 38914, 130447, 59413, 42619, 112399, 120412, 54031, 124048, 35194, 97672, 12625, 76303]
+- VARCHAR: 20 = [ Customer#000047401, Customer#000121909, Customer#000050605, Customer#000057718, Customer#000017059, Customer#000100015, Customer#000050506, Customer#000125152, Customer#000038914, Customer#000130447, Customer#000059413, Customer#000042619, Customer#000112399, Customer#000120412, Customer#000054031, Customer#000124048, Customer#000035194, Customer#000097672, Customer#000012625, Customer#000076303]
+- DECIMAL: 20 = [ 2319234.002900, 2281646.890400, 2251107.132800, 2174136.291600, 2170177.833700, 2170070.304600, 2155888.852700, 2115176.623900, 2082432.134000, 2051467.251700, 2041775.996000, 2018958.399200, 2014701.520000, 2014569.166400, 2001015.067700, 1995902.278400, 1993273.839900, 1991422.343700, 1984953.657800, 1973422.417100]
+- DECIMAL: 20 = [ 9148.760000, 2635.210000, 5287.380000, -606.340000, 5187.860000, 7089.830000, 6859.440000, -250.020000, 1398.990000, 1799.920000, 9948.300000, 2093.260000, 4161.250000, 3816.860000, 9916.490000, -925.900000, 7558.440000, 1330.090000, 3782.110000, 1237.060000]
+- VARCHAR: 20 = [ PERU, CHINA, IRAQ, CANADA, INDONESIA, KENYA, UNITED STATES, ARGENTINA, UNITED STATES, IRAQ, CANADA, UNITED STATES, MOZAMBIQUE, MOZAMBIQUE, IRAN, RUSSIA, RUSSIA, EGYPT, CANADA, MOZAMBIQUE]
+- VARCHAR: 20 = [  5GjrYD2obP5jtmL8s0DDa1tbbE, P,wtdjcm428pUv33bQoIXtEOjwzSewDFcv, zmRQnyQtkZTRoCLSfPLSVBNDPETa24gvwTl, bdEDQ3Q5t4, hyJ1TjhFzdHOBMfubi6H3h5gBCX2n9Z, TZflo2m9oPZlXYLzPLM, o2g3V1CzDGrkuvCMi8jVMXWBQ, gAKNLRLwItaQYRqwfl, eP6li8JWL B5hjJtwnH5mGbh6, 9v8S6S5HlT, 3L9o7YNDDnY vMLyR rl,9KFXRWD5Wsu, 366j1v0uAYfbjGVx8IT0enpkGIUzgUU, BgdWhWf1njZUZ82ugG,4Q3PTIsMq, 86o338ALHGQPD9SsWa04A11R8HI57xK1, GmuQ470kRR6yHZL9VJwwbkCZOE2B, iFzlpXgQ7HoqRPXJkcYqlOlKWna, P46KOQtr kvORDFGHd, ltPWl6B4dgdmNMoLyAsVaza7EsGnzorT, ZYkgNcfxNtrlsRY, A8p3ASWuYtiEX6Y]
+- VARCHAR: 20 = [ 27-125-618-3435, 28-765-474-9668, 21-462-509-4562, 13-550-650-3465, 19-139-886-6141, 24-502-321-3361, 34-506-830-6107, 11-735-849-1130, 34-244-849-2072, 21-581-850-1307, 13-419-750-2952, 34-441-437-7237, 26-340-520-2960, 26-942-947-6036, 20-518-369-9890, 32-749-446-4779, 32-839-374-1719, 14-341-207-6992, 13-736-612-1475, 26-209-139-9643]
+- VARCHAR: 20 = [ ing pinto beans. accounts haggle furiously. packages after the bl, lly silent deposits. quickly special accounts cajole furiously special excuses. ironic dinos wake slyly acc, ely against the carefully ironic acco, nic, ironic accounts use blithely. , its. furiously special theodolites are, sts. accounts after the final packages are bold deposits. furiously even platelets ser, lets haggle furiously. bold, unusual asymptotes about the carefully regular deposits affix blithely about, onic excuses. thin deposits along the foxes affix after the final accounts. blithely final foxe, onic foxes cajole blithely above the final instructions. quickly pending theodolites haggl, es. even instructions boost carefully. bold, daring ins, nic, bold packages among the furiously regular dolphins sleep after the caref, ual theodolites sleep. fluffily bold package, e the pinto beans nag blithely according to the slyly busy foxes. pending pinto be, ously ironic packages. regular ac, . slyly ironic grouches might are across the , ic deposits. quickly special orbits cajole slyly upon the furiously final ideas. furious, ual instructions are. ironic packages cajole regular, bold asymptotes. carefully regular accounts bo, packages. pearls use furiously above the requests. dogged requests promise carefully? requests boo,  foxes. blithely final packages haggle slyly quickly ironic hockey players. qu, ffix. slyly regular requests nag carefully. blithely ironic packag]
+
+Expected answer:
+Chunk - [8 Columns]
+- INTEGER: 20 = [ 57040, 143347, 60838, 101998, 125341, 25501, 115831, 84223, 54289, 39922, 6226, 922, 147946, 115640, 73606, 110246, 142549, 146149, 52528, 23431]
+- VARCHAR: 20 = [ Customer#000057040, Customer#000143347, Customer#000060838, Customer#000101998, Customer#000125341, Customer#000025501, Customer#000115831, Customer#000084223, Customer#000054289, Customer#000039922, Customer#000006226, Customer#000000922, Customer#000147946, Customer#000115640, Customer#000073606, Customer#000110246, Customer#000142549, Customer#000146149, Customer#000052528, Customer#000023431]
+- DECIMAL: 20 = [ 734235.245500, 721002.694800, 679127.307700, 637029.566700, 633508.086000, 620269.784900, 596423.867200, 594998.023900, 585603.391800, 584878.113400, 576783.760600, 576767.533300, 576455.132000, 569341.193300, 568656.857800, 566842.981500, 563537.236800, 557254.986500, 556397.350900, 554269.536000]
+- DECIMAL: 20 = [ 632.870000, 2557.470000, 2454.770000, 3790.890000, 4983.510000, 7725.040000, 5098.100000, 528.650000, 5583.020000, 7321.110000, 2230.090000, 3869.250000, 2030.130000, 6436.100000, 1785.670000, 7763.350000, 5085.990000, 1791.550000, 551.790000, 3381.860000]
+- VARCHAR: 20 = [ JAPAN, EGYPT, BRAZIL, UNITED KINGDOM, GERMANY, ETHIOPIA, FRANCE, UNITED KINGDOM, IRAN, GERMANY, UNITED KINGDOM, GERMANY, ALGERIA, ARGENTINA, JAPAN, VIETNAM, INDONESIA, ROMANIA, ARGENTINA, ROMANIA]
+- VARCHAR: 20 = [ nICtsILWBB, ,Q9Ml3w0gvX, VWmQhWweqj5hFpcvhGFBeOY9hJ4m, 0,ORojfDdyMca2E2H, 9YRcnoUPOM7Sa8xymhsDHdQg, sr4VVVe3xCJQ2oo2QEhi19D,pXqo6kOGaSn2, AlMpPnmtGrOFrDMUs5VLo EIA,Cg,Rw5TBuBoKiO, Eq51o UpQ4RBr  fYTdrZApDsPV4pQyuPq, x3ouCpz6,pRNVhajr0CCQG1, 2KtWzW,FYkhdWBfobp6SFXWYKjvU9, TKbxS1dbkGMtaa,KOi26lbip4P0tPbWK0, rsR9lRxyTdHbDOVt8nYbwjK5vAWH9sB, Jqdt1kHAJtuTqHQK,B7 3tJh, 6yKLIRRAirUmBjKNO6Z3, vx9,7ACVtoKnLcoAHGNYDF, UgsLFL3rendATzcHi, pJAmChWXct HNjPzgoBUOgAHduwwIR,  STLwtlaB6, elsyt8c9Z,7ch, kKI5,CJAJQjQRQtOdCiFQ]
+- VARCHAR: 20 = [ 22-895-641-3466, 14-742-935-3718, 12-913-494-9813, 33-593-865-6378, 17-582-695-5962, 15-874-808-6793, 16-715-386-3788, 33-442-824-8191, 20-834-292-4707, 17-147-757-8036, 33-657-701-3391, 17-945-916-9648, 10-886-956-3143, 11-411-543-4901, 22-437-653-6966, 31-943-426-9837, 19-955-562-2398, 29-744-164-6487, 11-208-192-3205, 29-915-458-2654]
+- VARCHAR: 20 = [ sits. slyly regular requests sleep alongside of the regular inst, ggle carefully enticing requests. final deposits use bold, bold pinto beans. ironic, idle re,  need to boost against the slyly regular account, ress foxes wake slyly after the bold excuses. ironic platelets are furiously carefully bold theodolites, arefully even depths. blithely even excuses sleep furiously. foxes use except the dependencies. ca, he pending instructions wake carefully at the pinto beans. regular, final instructions along the slyly fina, l somas sleep. furiously final deposits wake blithely regular pinto b,  slyly final deposits haggle regular, pending dependencies. pending escapades wake , ely special foxes are quickly finally ironic p, y final requests. furiously final foxes cajole blithely special platelets. f, ending platelets along the express deposits cajole carefully final , luffily fluffy deposits. packages c, ithely ironic deposits haggle blithely ironic requests. quickly regu, ost slyly along the patterns; pinto be, he furiously regular ideas. slowly, egular deposits serve blithely above the fl, sleep pending courts. ironic deposits against the carefully unusual platelets cajole carefully express accounts.,  of the slyly silent accounts. quickly final accounts across the ,  deposits hinder. blithely pending asymptotes breach slyly regular re, nusual, even instructions: furiously stealthy n]
+
+Difference in column 0:
+Result
+------
+INTEGER [47401,121909,50605,57718,17059,100015,50506,125152,38914,130447,59413,42619,112399,120412,54031,124048,35194,97672,12625,76303,]
+
+Expect
+------
+INTEGER [57040,143347,60838,101998,125341,25501,115831,84223,54289,39922,6226,922,147946,115640,73606,110246,142549,146149,52528,23431,]
+
+Difference in column 1:
+Result
+------
+VARCHAR [Customer#000047401,Customer#000121909,Customer#000050605,Customer#000057718,Customer#000017059,Customer#000100015,Customer#000050506,Customer#000125152,Customer#000038914,Customer#000130447,Customer#000059413,Customer#000042619,Customer#000112399,Customer#000120412,Customer#000054031,Customer#000124048,Customer#000035194,Customer#000097672,Customer#000012625,Customer#000076303,]
+
+Expect
+------
+VARCHAR [Customer#000057040,Customer#000143347,Customer#000060838,Customer#000101998,Customer#000125341,Customer#000025501,Customer#000115831,Customer#000084223,Customer#000054289,Customer#000039922,Customer#000006226,Customer#000000922,Customer#000147946,Customer#000115640,Customer#000073606,Customer#000110246,Customer#000142549,Customer#000146149,Customer#000052528,Customer#000023431,]
+
+Difference in column 2:
+Result
+------
+DECIMAL [2319234.002900,2281646.890400,2251107.132800,2174136.291600,2170177.833700,2170070.304600,2155888.852700,2115176.623900,2082432.134000,2051467.251700,2041775.996000,2018958.399200,2014701.520000,2014569.166400,2001015.067700,1995902.278400,1993273.839900,1991422.343700,1984953.657800,1973422.417100,]
+
+Expect
+------
+DECIMAL [734235.245500,721002.694800,679127.307700,637029.566700,633508.086000,620269.784900,596423.867200,594998.023900,585603.391800,584878.113400,576783.760600,576767.533300,576455.132000,569341.193300,568656.857800,566842.981500,563537.236800,557254.986500,556397.350900,554269.536000,]
+
+Difference in column 3:
+Result
+------
+DECIMAL [9148.760000,2635.210000,5287.380000,-606.340000,5187.860000,7089.830000,6859.440000,-250.020000,1398.990000,1799.920000,9948.300000,2093.260000,4161.250000,3816.860000,9916.490000,-925.900000,7558.440000,1330.090000,3782.110000,1237.060000,]
+
+Expect
+------
+DECIMAL [632.870000,2557.470000,2454.770000,3790.890000,4983.510000,7725.040000,5098.100000,528.650000,5583.020000,7321.110000,2230.090000,3869.250000,2030.130000,6436.100000,1785.670000,7763.350000,5085.990000,1791.550000,551.790000,3381.860000,]
+
+Difference in column 4:
+Result
+------
+VARCHAR [PERU,CHINA,IRAQ,CANADA,INDONESIA,KENYA,UNITED STATES,ARGENTINA,UNITED STATES,IRAQ,CANADA,UNITED STATES,MOZAMBIQUE,MOZAMBIQUE,IRAN,RUSSIA,RUSSIA,EGYPT,CANADA,MOZAMBIQUE,]
+
+Expect
+------
+VARCHAR [JAPAN,EGYPT,BRAZIL,UNITED KINGDOM,GERMANY,ETHIOPIA,FRANCE,UNITED KINGDOM,IRAN,GERMANY,UNITED KINGDOM,GERMANY,ALGERIA,ARGENTINA,JAPAN,VIETNAM,INDONESIA,ROMANIA,ARGENTINA,ROMANIA,]
+
+Difference in column 5:
+Result
+------
+VARCHAR [ 5GjrYD2obP5jtmL8s0DDa1tbbE,P,wtdjcm428pUv33bQoIXtEOjwzSewDFcv,zmRQnyQtkZTRoCLSfPLSVBNDPETa24gvwTl,bdEDQ3Q5t4,hyJ1TjhFzdHOBMfubi6H3h5gBCX2n9Z,TZflo2m9oPZlXYLzPLM,o2g3V1CzDGrkuvCMi8jVMXWBQ,gAKNLRLwItaQYRqwfl,eP6li8JWL B5hjJtwnH5mGbh6,9v8S6S5HlT,3L9o7YNDDnY vMLyR rl,9KFXRWD5Wsu,366j1v0uAYfbjGVx8IT0enpkGIUzgUU,BgdWhWf1njZUZ82ugG,4Q3PTIsMq,86o338ALHGQPD9SsWa04A11R8HI57xK1,GmuQ470kRR6yHZL9VJwwbkCZOE2B,iFzlpXgQ7HoqRPXJkcYqlOlKWna,P46KOQtr kvORDFGHd,ltPWl6B4dgdmNMoLyAsVaza7EsGnzorT,ZYkgNcfxNtrlsRY,A8p3ASWuYtiEX6Y,]
+
+Expect
+------
+VARCHAR [nICtsILWBB,,Q9Ml3w0gvX,VWmQhWweqj5hFpcvhGFBeOY9hJ4m,0,ORojfDdyMca2E2H,9YRcnoUPOM7Sa8xymhsDHdQg,sr4VVVe3xCJQ2oo2QEhi19D,pXqo6kOGaSn2,AlMpPnmtGrOFrDMUs5VLo EIA,Cg,Rw5TBuBoKiO,Eq51o UpQ4RBr  fYTdrZApDsPV4pQyuPq,x3ouCpz6,pRNVhajr0CCQG1,2KtWzW,FYkhdWBfobp6SFXWYKjvU9,TKbxS1dbkGMtaa,KOi26lbip4P0tPbWK0,rsR9lRxyTdHbDOVt8nYbwjK5vAWH9sB,Jqdt1kHAJtuTqHQK,B7 3tJh,6yKLIRRAirUmBjKNO6Z3,vx9,7ACVtoKnLcoAHGNYDF,UgsLFL3rendATzcHi,pJAmChWXct HNjPzgoBUOgAHduwwIR, STLwtlaB6,elsyt8c9Z,7ch,kKI5,CJAJQjQRQtOdCiFQ,]
+
+Difference in column 6:
+Result
+------
+VARCHAR [27-125-618-3435,28-765-474-9668,21-462-509-4562,13-550-650-3465,19-139-886-6141,24-502-321-3361,34-506-830-6107,11-735-849-1130,34-244-849-2072,21-581-850-1307,13-419-750-2952,34-441-437-7237,26-340-520-2960,26-942-947-6036,20-518-369-9890,32-749-446-4779,32-839-374-1719,14-341-207-6992,13-736-612-1475,26-209-139-9643,]
+
+Expect
+------
+VARCHAR [22-895-641-3466,14-742-935-3718,12-913-494-9813,33-593-865-6378,17-582-695-5962,15-874-808-6793,16-715-386-3788,33-442-824-8191,20-834-292-4707,17-147-757-8036,33-657-701-3391,17-945-916-9648,10-886-956-3143,11-411-543-4901,22-437-653-6966,31-943-426-9837,19-955-562-2398,29-744-164-6487,11-208-192-3205,29-915-458-2654,]
+
+Difference in column 7:
+Result
+------
+VARCHAR [ing pinto beans. accounts haggle furiously. packages after the bl,lly silent deposits. quickly special accounts cajole furiously special excuses. ironic dinos wake slyly acc,ely against the carefully ironic acco,nic, ironic accounts use blithely. ,its. furiously special theodolites are,sts. accounts after the final packages are bold deposits. furiously even platelets ser,lets haggle furiously. bold, unusual asymptotes about the carefully regular deposits affix blithely about,onic excuses. thin deposits along the foxes affix after the final accounts. blithely final foxe,onic foxes cajole blithely above the final instructions. quickly pending theodolites haggl,es. even instructions boost carefully. bold, daring ins,nic, bold packages among the furiously regular dolphins sleep after the caref,ual theodolites sleep. fluffily bold package,e the pinto beans nag blithely according to the slyly busy foxes. pending pinto be,ously ironic packages. regular ac,. slyly ironic grouches might are across the ,ic deposits. quickly special orbits cajole slyly upon the furiously final ideas. furious,ual instructions are. ironic packages cajole regular, bold asymptotes. carefully regular accounts bo,packages. pearls use furiously above the requests. dogged requests promise carefully? requests boo, foxes. blithely final packages haggle slyly quickly ironic hockey players. qu,ffix. slyly regular requests nag carefully. blithely ironic packag,]
+
+Expect
+------
+VARCHAR [sits. slyly regular requests sleep alongside of the regular inst,ggle carefully enticing requests. final deposits use bold, bold pinto beans. ironic, idle re, need to boost against the slyly regular account,ress foxes wake slyly after the bold excuses. ironic platelets are furiously carefully bold theodolites,arefully even depths. blithely even excuses sleep furiously. foxes use except the dependencies. ca,he pending instructions wake carefully at the pinto beans. regular, final instructions along the slyly fina,l somas sleep. furiously final deposits wake blithely regular pinto b, slyly final deposits haggle regular, pending dependencies. pending escapades wake ,ely special foxes are quickly finally ironic p,y final requests. furiously final foxes cajole blithely special platelets. f,ending platelets along the express deposits cajole carefully final ,luffily fluffy deposits. packages c,ithely ironic deposits haggle blithely ironic requests. quickly regu,ost slyly along the patterns; pinto be,he furiously regular ideas. slowly,egular deposits serve blithely above the fl,sleep pending courts. ironic deposits against the carefully unusual platelets cajole carefully express accounts., of the slyly silent accounts. quickly final accounts across the , deposits hinder. blithely pending asymptotes breach slyly regular re,nusual, even instructions: furiously stealthy n,]
+
+

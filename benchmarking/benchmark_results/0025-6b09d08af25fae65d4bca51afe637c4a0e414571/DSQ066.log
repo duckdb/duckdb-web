@@ -1,0 +1,325 @@
+<<Query Profiling Information>>
+SELECT w_substr, sm_type, web_name, sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk <= 30) THEN 1 ELSE 0 END) AS "30 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 30) AND (ws_ship_date_sk - ws_sold_date_sk <= 60) THEN 1 ELSE 0 END) AS "31-60 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 60) AND (ws_ship_date_sk - ws_sold_date_sk <= 90) THEN 1 ELSE 0 END) AS "61-90 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 90) AND (ws_ship_date_sk - ws_sold_date_sk <= 120) THEN 1 ELSE 0 END) AS "91-120 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 120) THEN 1 ELSE 0 END) AS ">120 days" FROM web_sales, (SELECT SUBSTRING(w_warehouse_name,1,20) w_substr, * FROM warehouse) sq1, ship_mode, web_site, date_dim WHERE d_month_seq BETWEEN 1200 AND 1200 + 11 AND ws_ship_date_sk = d_date_sk AND ws_warehouse_sk = w_warehouse_sk AND ws_ship_mode_sk = sm_ship_mode_sk AND ws_web_site_sk = web_site_sk GROUP BY w_substr, sm_type, web_name ORDER BY 1, 2, 3 LIMIT 100;
+<<Timing>>
+Total Time: 1.082739s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.02s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.24s)     |
+|       6817       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ws_ship_date_sk |
+|    =d_date_sk    |
+|      (0.26s)     |
+|      476768      |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            |    d_month_seq   |
+|  ws_web_site_sk  |                                                            |      >= 1200     |
+|   =web_site_sk   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|      719384      |                                                            |       36526      |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     web_site     ||     date_dim     |
+|  ws_ship_mode_sk |                                        |                  ||                  |
+| =sm_ship_mode_sk |                                        |                  ||                  |
+|      (0.24s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      |                                        |        30        ||       73049      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    |     ship_mode    |
+|  ws_warehouse_sk |                    |                  |
+|  =w_warehouse_sk |                    |                  |
+|      (0.08s)     |                    |      (0.00s)     |
+|      719384      |                    |        20        |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||    PROJECTION    |
+|     web_sales    ||                  |
+|      (0.01s)     ||      (0.00s)     |
+|      719384      ||         5        |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     warehouse    |
+                    |      (0.00s)     |
+                    |         5        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT w_substr, sm_type, web_name, sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk <= 30) THEN 1 ELSE 0 END) AS "30 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 30) AND (ws_ship_date_sk - ws_sold_date_sk <= 60) THEN 1 ELSE 0 END) AS "31-60 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 60) AND (ws_ship_date_sk - ws_sold_date_sk <= 90) THEN 1 ELSE 0 END) AS "61-90 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 90) AND (ws_ship_date_sk - ws_sold_date_sk <= 120) THEN 1 ELSE 0 END) AS "91-120 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 120) THEN 1 ELSE 0 END) AS ">120 days" FROM web_sales, (SELECT SUBSTRING(w_warehouse_name,1,20) w_substr, * FROM warehouse) sq1, ship_mode, web_site, date_dim WHERE d_month_seq BETWEEN 1200 AND 1200 + 11 AND ws_ship_date_sk = d_date_sk AND ws_warehouse_sk = w_warehouse_sk AND ws_ship_mode_sk = sm_ship_mode_sk AND ws_web_site_sk = web_site_sk GROUP BY w_substr, sm_type, web_name ORDER BY 1, 2, 3 LIMIT 100;
+<<Timing>>
+Total Time: 1.039029s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.02s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.20s)     |
+|       6628       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ws_ship_date_sk |
+|    =d_date_sk    |
+|      (0.26s)     |
+|      476768      |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            |    d_month_seq   |
+|  ws_web_site_sk  |                                                            |      >= 1200     |
+|   =web_site_sk   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|      719384      |                                                            |       36526      |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     web_site     ||     date_dim     |
+|  ws_ship_mode_sk |                                        |                  ||                  |
+| =sm_ship_mode_sk |                                        |                  ||                  |
+|      (0.24s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      |                                        |        30        ||       73049      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    |     ship_mode    |
+|  ws_warehouse_sk |                    |                  |
+|  =w_warehouse_sk |                    |                  |
+|      (0.08s)     |                    |      (0.00s)     |
+|      719384      |                    |        20        |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||    PROJECTION    |
+|     web_sales    ||                  |
+|      (0.01s)     ||      (0.00s)     |
+|      719384      ||         5        |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     warehouse    |
+                    |      (0.00s)     |
+                    |         5        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT w_substr, sm_type, web_name, sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk <= 30) THEN 1 ELSE 0 END) AS "30 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 30) AND (ws_ship_date_sk - ws_sold_date_sk <= 60) THEN 1 ELSE 0 END) AS "31-60 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 60) AND (ws_ship_date_sk - ws_sold_date_sk <= 90) THEN 1 ELSE 0 END) AS "61-90 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 90) AND (ws_ship_date_sk - ws_sold_date_sk <= 120) THEN 1 ELSE 0 END) AS "91-120 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 120) THEN 1 ELSE 0 END) AS ">120 days" FROM web_sales, (SELECT SUBSTRING(w_warehouse_name,1,20) w_substr, * FROM warehouse) sq1, ship_mode, web_site, date_dim WHERE d_month_seq BETWEEN 1200 AND 1200 + 11 AND ws_ship_date_sk = d_date_sk AND ws_warehouse_sk = w_warehouse_sk AND ws_ship_mode_sk = sm_ship_mode_sk AND ws_web_site_sk = web_site_sk GROUP BY w_substr, sm_type, web_name ORDER BY 1, 2, 3 LIMIT 100;
+<<Timing>>
+Total Time: 1.000591s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.02s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.16s)     |
+|       6607       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ws_ship_date_sk |
+|    =d_date_sk    |
+|      (0.26s)     |
+|      476768      |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            |    d_month_seq   |
+|  ws_web_site_sk  |                                                            |      >= 1200     |
+|   =web_site_sk   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|      719384      |                                                            |       36526      |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     web_site     ||     date_dim     |
+|  ws_ship_mode_sk |                                        |                  ||                  |
+| =sm_ship_mode_sk |                                        |                  ||                  |
+|      (0.24s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      |                                        |        30        ||       73049      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    |     ship_mode    |
+|  ws_warehouse_sk |                    |                  |
+|  =w_warehouse_sk |                    |                  |
+|      (0.08s)     |                    |      (0.00s)     |
+|      719384      |                    |        20        |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||    PROJECTION    |
+|     web_sales    ||                  |
+|      (0.01s)     ||      (0.00s)     |
+|      719384      ||         5        |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     warehouse    |
+                    |      (0.00s)     |
+                    |         5        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT w_substr, sm_type, web_name, sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk <= 30) THEN 1 ELSE 0 END) AS "30 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 30) AND (ws_ship_date_sk - ws_sold_date_sk <= 60) THEN 1 ELSE 0 END) AS "31-60 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 60) AND (ws_ship_date_sk - ws_sold_date_sk <= 90) THEN 1 ELSE 0 END) AS "61-90 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 90) AND (ws_ship_date_sk - ws_sold_date_sk <= 120) THEN 1 ELSE 0 END) AS "91-120 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 120) THEN 1 ELSE 0 END) AS ">120 days" FROM web_sales, (SELECT SUBSTRING(w_warehouse_name,1,20) w_substr, * FROM warehouse) sq1, ship_mode, web_site, date_dim WHERE d_month_seq BETWEEN 1200 AND 1200 + 11 AND ws_ship_date_sk = d_date_sk AND ws_warehouse_sk = w_warehouse_sk AND ws_ship_mode_sk = sm_ship_mode_sk AND ws_web_site_sk = web_site_sk GROUP BY w_substr, sm_type, web_name ORDER BY 1, 2, 3 LIMIT 100;
+<<Timing>>
+Total Time: 1.160481s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.02s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.33s)     |
+|       6208       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ws_ship_date_sk |
+|    =d_date_sk    |
+|      (0.26s)     |
+|      476768      |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            |    d_month_seq   |
+|  ws_web_site_sk  |                                                            |      >= 1200     |
+|   =web_site_sk   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|      719384      |                                                            |       36526      |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     web_site     ||     date_dim     |
+|  ws_ship_mode_sk |                                        |                  ||                  |
+| =sm_ship_mode_sk |                                        |                  ||                  |
+|      (0.24s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      |                                        |        30        ||       73049      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    |     ship_mode    |
+|  ws_warehouse_sk |                    |                  |
+|  =w_warehouse_sk |                    |                  |
+|      (0.07s)     |                    |      (0.00s)     |
+|      719384      |                    |        20        |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||    PROJECTION    |
+|     web_sales    ||                  |
+|      (0.01s)     ||      (0.00s)     |
+|      719384      ||         5        |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     warehouse    |
+                    |      (0.00s)     |
+                    |         5        |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT w_substr, sm_type, web_name, sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk <= 30) THEN 1 ELSE 0 END) AS "30 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 30) AND (ws_ship_date_sk - ws_sold_date_sk <= 60) THEN 1 ELSE 0 END) AS "31-60 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 60) AND (ws_ship_date_sk - ws_sold_date_sk <= 90) THEN 1 ELSE 0 END) AS "61-90 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 90) AND (ws_ship_date_sk - ws_sold_date_sk <= 120) THEN 1 ELSE 0 END) AS "91-120 days", sum(CASE WHEN (ws_ship_date_sk - ws_sold_date_sk > 120) THEN 1 ELSE 0 END) AS ">120 days" FROM web_sales, (SELECT SUBSTRING(w_warehouse_name,1,20) w_substr, * FROM warehouse) sq1, ship_mode, web_site, date_dim WHERE d_month_seq BETWEEN 1200 AND 1200 + 11 AND ws_ship_date_sk = d_date_sk AND ws_warehouse_sk = w_warehouse_sk AND ws_ship_mode_sk = sm_ship_mode_sk AND ws_web_site_sk = web_site_sk GROUP BY w_substr, sm_type, web_name ORDER BY 1, 2, 3 LIMIT 100;
+<<Timing>>
+Total Time: 1.004842s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        100       |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.02s)     |
+|       1024       |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.17s)     |
+|       6959       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ws_ship_date_sk |
+|    =d_date_sk    |
+|      (0.26s)     |
+|      476768      |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       INNER      |                                                            |    d_month_seq   |
+|  ws_web_site_sk  |                                                            |      >= 1200     |
+|   =web_site_sk   |                                                            |                  |
+|      (0.24s)     |                                                            |      (0.00s)     |
+|      719384      |                                                            |       36526      |
+--------------------                                                            --------------------
+--------------------                                        ----------------------------------------
+|     HASH_JOIN    |                                        |     SEQ_SCAN     ||     SEQ_SCAN     |
+|       INNER      |                                        |     web_site     ||     date_dim     |
+|  ws_ship_mode_sk |                                        |                  ||                  |
+| =sm_ship_mode_sk |                                        |                  ||                  |
+|      (0.24s)     |                                        |      (0.00s)     ||      (0.00s)     |
+|      719384      |                                        |        30        ||       73049      |
+--------------------                                        ----------------------------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |     SEQ_SCAN     |
+|       INNER      |                    |     ship_mode    |
+|  ws_warehouse_sk |                    |                  |
+|  =w_warehouse_sk |                    |                  |
+|      (0.07s)     |                    |      (0.00s)     |
+|      719384      |                    |        20        |
+--------------------                    --------------------
+----------------------------------------
+|     SEQ_SCAN     ||    PROJECTION    |
+|     web_sales    ||                  |
+|      (0.01s)     ||      (0.00s)     |
+|      719384      ||         5        |
+----------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     warehouse    |
+                    |      (0.00s)     |
+                    |         5        |
+                    --------------------
+

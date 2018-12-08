@@ -1,0 +1,2 @@
+RangeQueryWithoutIndex - [micro]
+Runs the following query: "SELECT sum(j) FROM integers WHERE i > 15000000 and i < 16000000" without an index

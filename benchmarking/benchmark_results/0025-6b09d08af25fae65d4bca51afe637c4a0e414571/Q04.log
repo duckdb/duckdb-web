@@ -1,0 +1,64 @@
+<<Query Profiling Information>>
+select  o_orderpriority,  count(*) as order_count from  orders where  o_orderdate >= cast('1993-07-01' as date)  and o_orderdate < cast('1993-10-01' as date)  and exists (  select  *  from  lineitem  where  l_orderkey = o_orderkey  and l_commitdate < l_receiptdate  ) group by  o_orderpriority order by  o_orderpriority; 
+<<Timing>>
+Total Time: 0.776577s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.10s)     |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       SEMI       |
+|  o_orderkey=#16  |
+|      (0.35s)     |
+|      1375365     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||    PROJECTION    |
+|      orders      ||                  |
+|      (0.02s)     ||      (0.01s)     |
+|      1500000     ||      3793296     |
+----------------------------------------
+                    --------------------
+                    |      FILTER      |
+                    |   l_commitdate   |
+                    |  < l_receiptdate |
+                    |      (0.04s)     |
+                    |      3793296     |
+                    --------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |     lineitem     |
+                    |      (0.25s)     |
+                    |      6001215     |
+                    --------------------
+
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 5 ]: 
+Chunk - [2 Columns]
+- VARCHAR: 5 = [ 1-URGENT, 2-HIGH, 3-MEDIUM, 4-NOT SPECIFIED, 5-LOW]
+- BIGINT: 5 = [ 275529, 275113, 273938, 275277, 275508]
+
+Expected answer:
+Chunk - [2 Columns]
+- VARCHAR: 5 = [ 1-URGENT , 2-HIGH  , 3-MEDIUM , 4-NOT SPECIFIED, 5-LOW  ]
+- BIGINT: 5 = [ 10594, 10476, 10410, 10556, 10487]
+
+Difference in column 1:
+Result
+------
+BIGINT [275529,275113,273938,275277,275508,]
+
+Expect
+------
+BIGINT [10594,10476,10410,10556,10487,]
+
+

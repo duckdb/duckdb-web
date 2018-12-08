@@ -1,0 +1,69 @@
+---------
+|| Q15 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 1 ]: 
+Chunk - [5 Columns]
+- INTEGER: 1 = [ 5994]
+- VARCHAR: 1 = [ Supplier#000005994]
+- VARCHAR: 1 = [ OR540dbUtNtFJh8YUgQCUj Fk88 ARSsjN]
+- VARCHAR: 1 = [ 24-519-922-3883]
+- DECIMAL: 1 = [ 28698575.631300]
+
+Expected answer:
+Chunk - [5 Columns]
+- INTEGER: 1 = [ 8449]
+- VARCHAR: 1 = [ Supplier#000008449]
+- VARCHAR: 1 = [ 5BXWsJERA2mP5OyO4]
+- VARCHAR: 1 = [ 20-469-856-8873]
+- DECIMAL: 1 = [ 1772627.208700]
+
+Difference in column 0:
+Result
+------
+INTEGER [5994,]
+
+Expect
+------
+INTEGER [8449,]
+
+Difference in column 1:
+Result
+------
+VARCHAR [Supplier#000005994,]
+
+Expect
+------
+VARCHAR [Supplier#000008449,]
+
+Difference in column 2:
+Result
+------
+VARCHAR [OR540dbUtNtFJh8YUgQCUj Fk88 ARSsjN,]
+
+Expect
+------
+VARCHAR [5BXWsJERA2mP5OyO4,]
+
+Difference in column 3:
+Result
+------
+VARCHAR [24-519-922-3883,]
+
+Expect
+------
+VARCHAR [20-469-856-8873,]
+
+Difference in column 4:
+Result
+------
+DECIMAL [28698575.631300,]
+
+Expect
+------
+DECIMAL [1772627.208700,]
+
+

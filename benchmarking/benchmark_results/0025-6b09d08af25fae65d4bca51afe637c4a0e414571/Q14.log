@@ -1,0 +1,125 @@
+<<Query Profiling Information>>
+select  100.00 * sum(case  when p_type like 'PROMO%'  then l_extendedprice * (1 - l_discount)  else 0  end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue from  lineitem,  part where  l_partkey = p_partkey  and l_shipdate >= date '1995-09-01'  and l_shipdate < cast('1995-10-01' as date); 
+<<Timing>>
+Total Time: 0.969522s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.44s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     l_partkey    |
+|    =p_partkey    |
+|      (0.47s)     |
+|      6001215     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     lineitem     ||       part       |
+|      (0.04s)     ||      (0.00s)     |
+|      6001215     ||      200000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+select  100.00 * sum(case  when p_type like 'PROMO%'  then l_extendedprice * (1 - l_discount)  else 0  end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue from  lineitem,  part where  l_partkey = p_partkey  and l_shipdate >= date '1995-09-01'  and l_shipdate < cast('1995-10-01' as date); 
+<<Timing>>
+Total Time: 0.962668s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.44s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     l_partkey    |
+|    =p_partkey    |
+|      (0.48s)     |
+|      6001215     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     lineitem     ||       part       |
+|      (0.04s)     ||      (0.00s)     |
+|      6001215     ||      200000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+select  100.00 * sum(case  when p_type like 'PROMO%'  then l_extendedprice * (1 - l_discount)  else 0  end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue from  lineitem,  part where  l_partkey = p_partkey  and l_shipdate >= date '1995-09-01'  and l_shipdate < cast('1995-10-01' as date); 
+<<Timing>>
+Total Time: 0.971135s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.44s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     l_partkey    |
+|    =p_partkey    |
+|      (0.48s)     |
+|      6001215     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     lineitem     ||       part       |
+|      (0.04s)     ||      (0.00s)     |
+|      6001215     ||      200000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+select  100.00 * sum(case  when p_type like 'PROMO%'  then l_extendedprice * (1 - l_discount)  else 0  end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue from  lineitem,  part where  l_partkey = p_partkey  and l_shipdate >= date '1995-09-01'  and l_shipdate < cast('1995-10-01' as date); 
+<<Timing>>
+Total Time: 0.977267s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.45s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     l_partkey    |
+|    =p_partkey    |
+|      (0.48s)     |
+|      6001215     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     lineitem     ||       part       |
+|      (0.04s)     ||      (0.00s)     |
+|      6001215     ||      200000      |
+----------------------------------------
+
+<<Query Profiling Information>>
+select  100.00 * sum(case  when p_type like 'PROMO%'  then l_extendedprice * (1 - l_discount)  else 0  end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue from  lineitem,  part where  l_partkey = p_partkey  and l_shipdate >= date '1995-09-01'  and l_shipdate < cast('1995-10-01' as date); 
+<<Timing>>
+Total Time: 0.970033s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.44s)     |
+|         1        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|     l_partkey    |
+|    =p_partkey    |
+|      (0.47s)     |
+|      6001215     |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     |
+|     lineitem     ||       part       |
+|      (0.04s)     ||      (0.00s)     |
+|      6001215     ||      200000      |
+----------------------------------------
+
