@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report 59b982ff - include/storage/index.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">include/storage</a> - index.hpp<span style="font-size: 80%;"> (source / <a href="index.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report 59b982ff</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryMed">75.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-08 12:07:42</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : //                         DuckDB
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // storage/index.hpp
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : //
+<span class="lineNum">       7 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span>            : #pragma once
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #include &quot;common/types/data_chunk.hpp&quot;
+<span class="lineNum">      12 </span>            : #include &quot;common/types/tuple.hpp&quot;
+<span class="lineNum">      13 </span>            : #include &quot;parser/expression.hpp&quot;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : namespace duckdb {
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : class ClientContext;
+<span class="lineNum">      18 </span>            : class Transaction;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : struct IndexScanState {
+<a name="21"><span class="lineNum">      21 </span>            :         vector&lt;column_t&gt; column_ids;</a>
+<span class="lineNum">      22 </span>            : 
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         27 :         IndexScanState(vector&lt;column_t&gt; column_ids) : column_ids(column_ids) {</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">         27 :         }</span>
+<span class="lineNum">      25 </span><span class="lineCov">         27 :         virtual ~IndexScanState() {</span>
+<span class="lineNum">      26 </span><span class="lineCov">         27 :         }</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 : };</span>
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 : </span>
+<span class="lineNum">      29 </span><span class="lineCov">         27 : //! The index is an abstract base class that serves as the basis for indexes</span>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">         27 : class Index {</span></a>
+<span class="lineNum">      31 </span>            : public:
+<a name="32"><span class="lineNum">      32 </span>            :         Index(IndexType type) : type(type) {</a>
+<span class="lineNum">      33 </span>            :         }
+<span class="lineNum">      34 </span>            :         virtual ~Index() {
+<span class="lineNum">      35 </span>            :         }
+<span class="lineNum">      36 </span><span class="lineCov">          6 : </span>
+<span class="lineNum">      37 </span><span class="lineCov">          6 :         IndexType type;</span>
+<span class="lineNum">      38 </span><span class="lineCov">          6 : </span>
+<span class="lineNum">      39 </span><span class="lineCov">          6 :         //! Initialize a scan on the index with the given expression and column ids</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :         //! to fetch from the base table when we only have one query predicate</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :         virtual unique_ptr&lt;IndexScanState&gt; InitializeScanSinglePredicate(Transaction &amp;transaction,</span>
+<span class="lineNum">      42 </span><span class="lineCov">          6 :                                                                          vector&lt;column_t&gt; column_ids, Value value,</span>
+<span class="lineNum">      43 </span><span class="lineCov">          6 :                                                                          ExpressionType expressionType) = 0;</span>
+<span class="lineNum">      44 </span>            :         //! Initialize a scan on the index with the given expression and column ids
+<span class="lineNum">      45 </span>            :         //! to fetch from the base table for two query predicates
+<span class="lineNum">      46 </span>            :         virtual unique_ptr&lt;IndexScanState&gt; InitializeScanTwoPredicates(Transaction &amp;transaction,
+<span class="lineNum">      47 </span>            :                                                                        vector&lt;column_t&gt; column_ids, Value low_value,
+<span class="lineNum">      48 </span>            :                                                                        ExpressionType low_expression_type, Value high_value,
+<span class="lineNum">      49 </span>            :                                                                        ExpressionType high_expression_type) = 0;
+<span class="lineNum">      50 </span>            :         //! Perform a lookup on the index
+<span class="lineNum">      51 </span>            :         virtual void Scan(Transaction &amp;transaction, IndexScanState *ss, DataChunk &amp;result) = 0;
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            :         //! Called when data is appended to the index
+<span class="lineNum">      54 </span>            :         virtual void Append(ClientContext &amp;context, DataChunk &amp;entries, size_t row_identifier_start) = 0;
+<span class="lineNum">      55 </span>            :         //! Called when data inside the index is updated
+<span class="lineNum">      56 </span>            :         virtual void Update(ClientContext &amp;context, vector&lt;column_t&gt; &amp;column_ids, DataChunk &amp;update_data,
+<span class="lineNum">      57 </span>            :                             Vector &amp;row_identifiers) = 0;
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            :         // FIXME: what about delete?
+<span class="lineNum">      60 </span>            : };
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            : } // namespace duckdb
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
