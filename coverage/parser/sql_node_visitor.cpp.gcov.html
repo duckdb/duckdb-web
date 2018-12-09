@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 59b982ff - parser/sql_node_visitor.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report af9eda3a - parser/sql_node_visitor.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 59b982ff</td>
+            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">36</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-08 12:07:42</td>
+            <td class="headerValue">2018-12-09 16:22:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -69,9 +69,9 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">    3333446 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(AggregateExpression &amp;expr) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    3333446 :         expr.AcceptChildren(this);</span>
-<a name="12"><span class="lineNum">      12 </span><span class="lineCov">    3333509 :         return nullptr;</span></a>
+<span class="lineNum">      10 </span><span class="lineCov">    3333342 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(AggregateExpression &amp;expr) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3333342 :         expr.AcceptChildren(this);</span>
+<a name="12"><span class="lineNum">      12 </span><span class="lineCov">    3333391 :         return nullptr;</span></a>
 <span class="lineNum">      13 </span>            : }
 <span class="lineNum">      14 </span><span class="lineCov">    1213567 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(CaseExpression &amp;expr) {</span>
 <span class="lineNum">      15 </span><span class="lineCov">    1213567 :         expr.AcceptChildren(this);</span>
@@ -81,21 +81,21 @@
 <span class="lineNum">      19 </span><span class="lineCov">     957002 :         expr.AcceptChildren(this);</span>
 <a name="20"><span class="lineNum">      20 </span><span class="lineCov">     957002 :         return nullptr;</span></a>
 <span class="lineNum">      21 </span>            : }
-<span class="lineNum">      22 </span><span class="lineCov">   10787530 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ColumnRefExpression &amp;expr) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">   10787530 :         expr.AcceptChildren(this);</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">   10788722 :         return nullptr;</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">   10786925 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ColumnRefExpression &amp;expr) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">   10786925 :         expr.AcceptChildren(this);</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">   10787835 :         return nullptr;</span></a>
 <span class="lineNum">      25 </span>            : }
-<span class="lineNum">      26 </span><span class="lineCov">    2380952 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ComparisonExpression &amp;expr) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    2380952 :         expr.AcceptChildren(this);</span>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">    2385611 :         return nullptr;</span></a>
+<span class="lineNum">      26 </span><span class="lineCov">    2380310 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ComparisonExpression &amp;expr) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    2380310 :         expr.AcceptChildren(this);</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">    2385783 :         return nullptr;</span></a>
 <span class="lineNum">      29 </span>            : }
 <span class="lineNum">      30 </span><span class="lineCov">     392033 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ConjunctionExpression &amp;expr) {</span>
 <span class="lineNum">      31 </span><span class="lineCov">     392033 :         expr.AcceptChildren(this);</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineCov">     392000 :         return nullptr;</span></a>
 <span class="lineNum">      33 </span>            : }
-<span class="lineNum">      34 </span><span class="lineCov">   28025998 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ConstantExpression &amp;expr) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">   28025998 :         expr.AcceptChildren(this);</span>
-<a name="36"><span class="lineNum">      36 </span><span class="lineCov">   28029844 :         return nullptr;</span></a>
+<span class="lineNum">      34 </span><span class="lineCov">   28024995 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(ConstantExpression &amp;expr) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">   28024995 :         expr.AcceptChildren(this);</span>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">   28029185 :         return nullptr;</span></a>
 <span class="lineNum">      37 </span>            : }
 <span class="lineNum">      38 </span><span class="lineCov">        161 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(DefaultExpression &amp;expr) {</span>
 <span class="lineNum">      39 </span><span class="lineCov">        161 :         expr.AcceptChildren(this);</span>
@@ -109,9 +109,9 @@
 <span class="lineNum">      47 </span><span class="lineCov">    1856486 :         expr.AcceptChildren(this);</span>
 <a name="48"><span class="lineNum">      48 </span><span class="lineCov">    1856486 :         return nullptr;</span></a>
 <span class="lineNum">      49 </span>            : }
-<span class="lineNum">      50 </span><span class="lineCov">   28302122 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(OperatorExpression &amp;expr) {</span>
-<span class="lineNum">      51 </span><span class="lineCov">   28302122 :         expr.AcceptChildren(this);</span>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">   28305654 :         return nullptr;</span></a>
+<span class="lineNum">      50 </span><span class="lineCov">   28298947 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(OperatorExpression &amp;expr) {</span>
+<span class="lineNum">      51 </span><span class="lineCov">   28298947 :         expr.AcceptChildren(this);</span>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">   28305582 :         return nullptr;</span></a>
 <span class="lineNum">      53 </span>            : }
 <span class="lineNum">      54 </span><span class="lineNoCov">          0 : unique_ptr&lt;Expression&gt; SQLNodeVisitor::Visit(SubqueryExpression &amp;expr) {</span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :         expr.AcceptChildren(this);</span>

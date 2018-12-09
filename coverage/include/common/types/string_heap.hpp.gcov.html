@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 59b982ff - include/common/types/string_heap.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report af9eda3a - include/common/types/string_heap.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 59b982ff</td>
+            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">19</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-08 12:07:42</td>
+            <td class="headerValue">2018-12-09 16:22:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -81,17 +81,17 @@
 <span class="lineNum">      19 </span>            : public:
 <a name="20"><span class="lineNum">      20 </span>            :         StringHeap();</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">  329888090 :         void Destroy() {</span>
-<span class="lineNum">      23 </span><span class="lineCov">  329888090 :                 tail = nullptr;</span>
-<span class="lineNum">      24 </span><span class="lineCov">  329888090 :                 chunk = nullptr;</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">  329992256 :         }</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">  329892658 :         void Destroy() {</span>
+<span class="lineNum">      23 </span><span class="lineCov">  329892658 :                 tail = nullptr;</span>
+<span class="lineNum">      24 </span><span class="lineCov">  329892658 :                 chunk = nullptr;</span>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">  329999734 :         }</span></a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">   44965700 :         void Move(StringHeap &amp;other) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">   44965700 :                 assert(!other.chunk);</span>
-<span class="lineNum">      29 </span><span class="lineCov">   44960008 :                 other.tail = tail;</span>
-<span class="lineNum">      30 </span><span class="lineCov">   44960008 :                 other.chunk = move(chunk);</span>
-<span class="lineNum">      31 </span><span class="lineCov">   44970438 :                 tail = nullptr;</span>
-<span class="lineNum">      32 </span><span class="lineCov">   44970438 :         }</span>
+<span class="lineNum">      27 </span><span class="lineCov">   44964976 :         void Move(StringHeap &amp;other) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">   44964976 :                 assert(!other.chunk);</span>
+<span class="lineNum">      29 </span><span class="lineCov">   44959946 :                 other.tail = tail;</span>
+<span class="lineNum">      30 </span><span class="lineCov">   44959946 :                 other.chunk = move(chunk);</span>
+<span class="lineNum">      31 </span><span class="lineCov">   44981717 :                 tail = nullptr;</span>
+<span class="lineNum">      32 </span><span class="lineCov">   44981717 :         }</span>
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span>            :         //! Add a string to the string heap, returns a pointer to the string
 <span class="lineNum">      35 </span>            :         const char *AddString(const char *data, size_t len);

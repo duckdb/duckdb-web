@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 59b982ff - optimizer/logical_rules/subquery_rewrite.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report af9eda3a - optimizer/logical_rules/subquery_rewrite.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 59b982ff</td>
+            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">91</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-08 12:07:42</td>
+            <td class="headerValue">2018-12-09 16:22:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -69,19 +69,19 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">    3131011 : SubqueryRewritingRule::SubqueryRewritingRule() {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    6265926 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::SELECT_SUBQUERY);</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3131038 : SubqueryRewritingRule::SubqueryRewritingRule() {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    6265925 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::SELECT_SUBQUERY);</span>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    3132468 :         auto comparison = make_unique_base&lt;AbstractRuleNode, ComparisonNodeType&gt;();</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3131307 :         auto comparison = make_unique_base&lt;AbstractRuleNode, ComparisonNodeType&gt;();</span>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">    3131106 :         comparison-&gt;children.push_back(move(subquery));</span>
-<span class="lineNum">      16 </span><span class="lineCov">    3132883 :         comparison-&gt;child_policy = ChildPolicy::SOME;</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3133845 :         comparison-&gt;children.push_back(move(subquery));</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3132872 :         comparison-&gt;child_policy = ChildPolicy::SOME;</span>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">    3132404 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3132503 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">    3132690 :         root-&gt;children.push_back(move(comparison));</span>
-<span class="lineNum">      21 </span><span class="lineCov">    3131813 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    3135163 : }</span></a>
+<span class="lineNum">      20 </span><span class="lineCov">    3131035 :         root-&gt;children.push_back(move(comparison));</span>
+<span class="lineNum">      21 </span><span class="lineCov">    3133960 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    3133650 : }</span></a>
 <span class="lineNum">      23 </span>            : 
 <span class="lineNum">      24 </span><span class="lineCov">         66 : unique_ptr&lt;LogicalOperator&gt; SubqueryRewritingRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;op_root,</span>
 <span class="lineNum">      25 </span>            :                                                          vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
