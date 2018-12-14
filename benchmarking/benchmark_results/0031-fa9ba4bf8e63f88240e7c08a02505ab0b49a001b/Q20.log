@@ -1,0 +1,380 @@
+<<Query Profiling Information>>
+select  s_name,  s_address from  supplier,  nation where  s_suppkey in (  select  ps_suppkey  from  partsupp  where  ps_partkey in (  select  p_partkey  from  part  where  p_name like 'forest%'  )  and ps_availqty > (  select  0.5 * sum(l_quantity)  from  lineitem  where  l_partkey = ps_partkey  and l_suppkey = ps_suppkey  and l_shipdate >= cast('1994-01-01' as date)  and l_shipdate < cast ('1995-01-01' as date)  )  )  and s_nationkey = n_nationkey  and n_name = 'CANADA' order by  s_name; 
+<<Timing>>
+Total Time: 0.429922s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    s_nationkey   |
+|   =n_nationkey   |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       SEMI       |                                                            |  n_name = CANADA |
+|   s_suppkey=#0   |                                                            |                  |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|       4397       |                                                            |         1        |
+--------------------                                                            --------------------
+----------------------------------------                                        --------------------
+|     SEQ_SCAN     ||    PROJECTION    |                                        |     SEQ_SCAN     |
+|     supplier     ||                  |                                        |      nation      |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     |
+|       10000      ||       5833       |                                        |        25        |
+----------------------------------------                                        --------------------
+                    --------------------
+                    |     HASH_JOIN    |
+                    |       SEMI       |
+                    |   ps_partkey=#0  |
+                    |      (0.03s)     |
+                    |       5833       |
+                    --------------------
+                    --------------------                    --------------------
+                    |     HASH_JOIN    |                    |    PROJECTION    |
+                    |       INNER      |                    |                  |
+                    |   ps_suppkey=#1  |                    |                  |
+                    |   ps_partkey=#2  |                    |                  |
+                    |   CAST[DECIMAL]  |                    |                  |
+                    | (ps_availqty)>#0 |                    |                  |
+                    |      (0.13s)     |                    |      (0.00s)     |
+                    |      542095      |                    |       2127       |
+                    --------------------                    --------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||   HASH_GROUP_BY  ||      FILTER      |
+                    |     partsupp     ||                  ||    LIKE(p_name   |
+                    |                  ||                  ||     , forest%    |
+                    |      (0.00s)     ||      (0.17s)     ||      (0.00s)     |
+                    |      800000      ||      543210      ||       2127       |
+                    ------------------------------------------------------------
+                                        ----------------------------------------
+                                        |      FILTER      ||     SEQ_SCAN     |
+                                        |    l_shipdate    ||       part       |
+                                        |    < 1995-01-01  ||                  |
+                                        |    l_shipdate    ||                  |
+                                        |   >= 1994-01-01  ||                  |
+                                        |      (0.04s)     ||      (0.00s)     |
+                                        |      909455      ||      200000      |
+                                        ----------------------------------------
+                                        --------------------
+                                        |     SEQ_SCAN     |
+                                        |     lineitem     |
+                                        |      (0.04s)     |
+                                        |      6001215     |
+                                        --------------------
+
+<<Query Profiling Information>>
+select  s_name,  s_address from  supplier,  nation where  s_suppkey in (  select  ps_suppkey  from  partsupp  where  ps_partkey in (  select  p_partkey  from  part  where  p_name like 'forest%'  )  and ps_availqty > (  select  0.5 * sum(l_quantity)  from  lineitem  where  l_partkey = ps_partkey  and l_suppkey = ps_suppkey  and l_shipdate >= cast('1994-01-01' as date)  and l_shipdate < cast ('1995-01-01' as date)  )  )  and s_nationkey = n_nationkey  and n_name = 'CANADA' order by  s_name; 
+<<Timing>>
+Total Time: 0.463535s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    s_nationkey   |
+|   =n_nationkey   |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       SEMI       |                                                            |  n_name = CANADA |
+|   s_suppkey=#0   |                                                            |                  |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|       4397       |                                                            |         1        |
+--------------------                                                            --------------------
+----------------------------------------                                        --------------------
+|     SEQ_SCAN     ||    PROJECTION    |                                        |     SEQ_SCAN     |
+|     supplier     ||                  |                                        |      nation      |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     |
+|       10000      ||       5833       |                                        |        25        |
+----------------------------------------                                        --------------------
+                    --------------------
+                    |     HASH_JOIN    |
+                    |       SEMI       |
+                    |   ps_partkey=#0  |
+                    |      (0.03s)     |
+                    |       5833       |
+                    --------------------
+                    --------------------                    --------------------
+                    |     HASH_JOIN    |                    |    PROJECTION    |
+                    |       INNER      |                    |                  |
+                    |   ps_suppkey=#1  |                    |                  |
+                    |   ps_partkey=#2  |                    |                  |
+                    |   CAST[DECIMAL]  |                    |                  |
+                    | (ps_availqty)>#0 |                    |                  |
+                    |      (0.13s)     |                    |      (0.00s)     |
+                    |      542095      |                    |       2127       |
+                    --------------------                    --------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||   HASH_GROUP_BY  ||      FILTER      |
+                    |     partsupp     ||                  ||    LIKE(p_name   |
+                    |                  ||                  ||     , forest%    |
+                    |      (0.00s)     ||      (0.18s)     ||      (0.00s)     |
+                    |      800000      ||      543210      ||       2127       |
+                    ------------------------------------------------------------
+                                        ----------------------------------------
+                                        |      FILTER      ||     SEQ_SCAN     |
+                                        |    l_shipdate    ||       part       |
+                                        |    < 1995-01-01  ||                  |
+                                        |    l_shipdate    ||                  |
+                                        |   >= 1994-01-01  ||                  |
+                                        |      (0.04s)     ||      (0.00s)     |
+                                        |      909455      ||      200000      |
+                                        ----------------------------------------
+                                        --------------------
+                                        |     SEQ_SCAN     |
+                                        |     lineitem     |
+                                        |      (0.06s)     |
+                                        |      6001215     |
+                                        --------------------
+
+<<Query Profiling Information>>
+select  s_name,  s_address from  supplier,  nation where  s_suppkey in (  select  ps_suppkey  from  partsupp  where  ps_partkey in (  select  p_partkey  from  part  where  p_name like 'forest%'  )  and ps_availqty > (  select  0.5 * sum(l_quantity)  from  lineitem  where  l_partkey = ps_partkey  and l_suppkey = ps_suppkey  and l_shipdate >= cast('1994-01-01' as date)  and l_shipdate < cast ('1995-01-01' as date)  )  )  and s_nationkey = n_nationkey  and n_name = 'CANADA' order by  s_name; 
+<<Timing>>
+Total Time: 0.451133s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    s_nationkey   |
+|   =n_nationkey   |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       SEMI       |                                                            |  n_name = CANADA |
+|   s_suppkey=#0   |                                                            |                  |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|       4397       |                                                            |         1        |
+--------------------                                                            --------------------
+----------------------------------------                                        --------------------
+|     SEQ_SCAN     ||    PROJECTION    |                                        |     SEQ_SCAN     |
+|     supplier     ||                  |                                        |      nation      |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     |
+|       10000      ||       5833       |                                        |        25        |
+----------------------------------------                                        --------------------
+                    --------------------
+                    |     HASH_JOIN    |
+                    |       SEMI       |
+                    |   ps_partkey=#0  |
+                    |      (0.03s)     |
+                    |       5833       |
+                    --------------------
+                    --------------------                    --------------------
+                    |     HASH_JOIN    |                    |    PROJECTION    |
+                    |       INNER      |                    |                  |
+                    |   ps_suppkey=#1  |                    |                  |
+                    |   ps_partkey=#2  |                    |                  |
+                    |   CAST[DECIMAL]  |                    |                  |
+                    | (ps_availqty)>#0 |                    |                  |
+                    |      (0.13s)     |                    |      (0.00s)     |
+                    |      542095      |                    |       2127       |
+                    --------------------                    --------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||   HASH_GROUP_BY  ||      FILTER      |
+                    |     partsupp     ||                  ||    LIKE(p_name   |
+                    |                  ||                  ||     , forest%    |
+                    |      (0.00s)     ||      (0.18s)     ||      (0.00s)     |
+                    |      800000      ||      543210      ||       2127       |
+                    ------------------------------------------------------------
+                                        ----------------------------------------
+                                        |      FILTER      ||     SEQ_SCAN     |
+                                        |    l_shipdate    ||       part       |
+                                        |    < 1995-01-01  ||                  |
+                                        |    l_shipdate    ||                  |
+                                        |   >= 1994-01-01  ||                  |
+                                        |      (0.04s)     ||      (0.00s)     |
+                                        |      909455      ||      200000      |
+                                        ----------------------------------------
+                                        --------------------
+                                        |     SEQ_SCAN     |
+                                        |     lineitem     |
+                                        |      (0.05s)     |
+                                        |      6001215     |
+                                        --------------------
+
+<<Query Profiling Information>>
+select  s_name,  s_address from  supplier,  nation where  s_suppkey in (  select  ps_suppkey  from  partsupp  where  ps_partkey in (  select  p_partkey  from  part  where  p_name like 'forest%'  )  and ps_availqty > (  select  0.5 * sum(l_quantity)  from  lineitem  where  l_partkey = ps_partkey  and l_suppkey = ps_suppkey  and l_shipdate >= cast('1994-01-01' as date)  and l_shipdate < cast ('1995-01-01' as date)  )  )  and s_nationkey = n_nationkey  and n_name = 'CANADA' order by  s_name; 
+<<Timing>>
+Total Time: 0.463245s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    s_nationkey   |
+|   =n_nationkey   |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       SEMI       |                                                            |  n_name = CANADA |
+|   s_suppkey=#0   |                                                            |                  |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|       4397       |                                                            |         1        |
+--------------------                                                            --------------------
+----------------------------------------                                        --------------------
+|     SEQ_SCAN     ||    PROJECTION    |                                        |     SEQ_SCAN     |
+|     supplier     ||                  |                                        |      nation      |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     |
+|       10000      ||       5833       |                                        |        25        |
+----------------------------------------                                        --------------------
+                    --------------------
+                    |     HASH_JOIN    |
+                    |       SEMI       |
+                    |   ps_partkey=#0  |
+                    |      (0.03s)     |
+                    |       5833       |
+                    --------------------
+                    --------------------                    --------------------
+                    |     HASH_JOIN    |                    |    PROJECTION    |
+                    |       INNER      |                    |                  |
+                    |   ps_suppkey=#1  |                    |                  |
+                    |   ps_partkey=#2  |                    |                  |
+                    |   CAST[DECIMAL]  |                    |                  |
+                    | (ps_availqty)>#0 |                    |                  |
+                    |      (0.13s)     |                    |      (0.00s)     |
+                    |      542095      |                    |       2127       |
+                    --------------------                    --------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||   HASH_GROUP_BY  ||      FILTER      |
+                    |     partsupp     ||                  ||    LIKE(p_name   |
+                    |                  ||                  ||     , forest%    |
+                    |      (0.00s)     ||      (0.18s)     ||      (0.00s)     |
+                    |      800000      ||      543210      ||       2127       |
+                    ------------------------------------------------------------
+                                        ----------------------------------------
+                                        |      FILTER      ||     SEQ_SCAN     |
+                                        |    l_shipdate    ||       part       |
+                                        |    < 1995-01-01  ||                  |
+                                        |    l_shipdate    ||                  |
+                                        |   >= 1994-01-01  ||                  |
+                                        |      (0.04s)     ||      (0.00s)     |
+                                        |      909455      ||      200000      |
+                                        ----------------------------------------
+                                        --------------------
+                                        |     SEQ_SCAN     |
+                                        |     lineitem     |
+                                        |      (0.06s)     |
+                                        |      6001215     |
+                                        --------------------
+
+<<Query Profiling Information>>
+select  s_name,  s_address from  supplier,  nation where  s_suppkey in (  select  ps_suppkey  from  partsupp  where  ps_partkey in (  select  p_partkey  from  part  where  p_name like 'forest%'  )  and ps_availqty > (  select  0.5 * sum(l_quantity)  from  lineitem  where  l_partkey = ps_partkey  and l_suppkey = ps_suppkey  and l_shipdate >= cast('1994-01-01' as date)  and l_shipdate < cast ('1995-01-01' as date)  )  )  and s_nationkey = n_nationkey  and n_name = 'CANADA' order by  s_name; 
+<<Timing>>
+Total Time: 0.469874s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    s_nationkey   |
+|   =n_nationkey   |
+|      (0.00s)     |
+|        186       |
+--------------------
+--------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |      FILTER      |
+|       SEMI       |                                                            |  n_name = CANADA |
+|   s_suppkey=#0   |                                                            |                  |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|       4397       |                                                            |         1        |
+--------------------                                                            --------------------
+----------------------------------------                                        --------------------
+|     SEQ_SCAN     ||    PROJECTION    |                                        |     SEQ_SCAN     |
+|     supplier     ||                  |                                        |      nation      |
+|      (0.00s)     ||      (0.00s)     |                                        |      (0.00s)     |
+|       10000      ||       5833       |                                        |        25        |
+----------------------------------------                                        --------------------
+                    --------------------
+                    |     HASH_JOIN    |
+                    |       SEMI       |
+                    |   ps_partkey=#0  |
+                    |      (0.03s)     |
+                    |       5833       |
+                    --------------------
+                    --------------------                    --------------------
+                    |     HASH_JOIN    |                    |    PROJECTION    |
+                    |       INNER      |                    |                  |
+                    |   ps_suppkey=#1  |                    |                  |
+                    |   ps_partkey=#2  |                    |                  |
+                    |   CAST[DECIMAL]  |                    |                  |
+                    | (ps_availqty)>#0 |                    |                  |
+                    |      (0.13s)     |                    |      (0.00s)     |
+                    |      542095      |                    |       2127       |
+                    --------------------                    --------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||   HASH_GROUP_BY  ||      FILTER      |
+                    |     partsupp     ||                  ||    LIKE(p_name   |
+                    |                  ||                  ||     , forest%    |
+                    |      (0.00s)     ||      (0.20s)     ||      (0.00s)     |
+                    |      800000      ||      543210      ||       2127       |
+                    ------------------------------------------------------------
+                                        ----------------------------------------
+                                        |      FILTER      ||     SEQ_SCAN     |
+                                        |    l_shipdate    ||       part       |
+                                        |    < 1995-01-01  ||                  |
+                                        |    l_shipdate    ||                  |
+                                        |   >= 1994-01-01  ||                  |
+                                        |      (0.04s)     ||      (0.00s)     |
+                                        |      909455      ||      200000      |
+                                        ----------------------------------------
+                                        --------------------
+                                        |     SEQ_SCAN     |
+                                        |     lineitem     |
+                                        |      (0.04s)     |
+                                        |      6001215     |
+                                        --------------------
+
