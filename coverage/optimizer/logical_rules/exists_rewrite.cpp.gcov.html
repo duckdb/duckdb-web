@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report af9eda3a - optimizer/logical_rules/exists_rewrite.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - optimizer/logical_rules/exists_rewrite.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
+            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">47</td>
+            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">54</td>
-            <td class="headerCovTableEntryMed">87.0 %</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-09 16:22:46</td>
+            <td class="headerValue">2018-12-14 17:41:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
             <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -70,71 +70,71 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">    3131243 : ExistsRewriteRule::ExistsRewriteRule() {</span>
-<span class="lineNum">      12 </span><span class="lineCov">    6265834 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::SELECT_SUBQUERY);</span>
+<span class="lineNum">      11 </span><span class="lineNoCov">          0 : ExistsRewriteRule::ExistsRewriteRule() {</span>
+<span class="lineNum">      12 </span><span class="lineNoCov">          0 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::SELECT_SUBQUERY);</span>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">    9398043 :         vector&lt;ExpressionType&gt; types = {ExpressionType::OPERATOR_EXISTS, ExpressionType::OPERATOR_NOT_EXISTS};</span>
-<span class="lineNum">      15 </span><span class="lineCov">    3132946 :         auto exists = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(types);</span>
+<span class="lineNum">      14 </span><span class="lineNoCov">          0 :         vector&lt;ExpressionType&gt; types = {ExpressionType::OPERATOR_EXISTS, ExpressionType::OPERATOR_NOT_EXISTS};</span>
+<span class="lineNum">      15 </span><span class="lineNoCov">          0 :         auto exists = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(types);</span>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">    3133462 :         exists-&gt;children.push_back(move(subquery));</span>
-<span class="lineNum">      18 </span><span class="lineCov">    3133398 :         exists-&gt;child_policy = ChildPolicy::ORDERED;</span>
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 :         exists-&gt;children.push_back(move(subquery));</span>
+<span class="lineNum">      18 </span><span class="lineNoCov">          0 :         exists-&gt;child_policy = ChildPolicy::ORDERED;</span>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">    3132460 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
+<span class="lineNum">      20 </span><span class="lineNoCov">          0 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    3132145 :         root-&gt;children.push_back(move(exists));</span>
-<span class="lineNum">      23 </span><span class="lineCov">    3132111 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3133990 : }</span></a>
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :         root-&gt;children.push_back(move(exists));</span>
+<span class="lineNum">      23 </span><span class="lineNoCov">          0 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">        500 : unique_ptr&lt;LogicalOperator&gt; ExistsRewriteRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;op_root,</span>
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 : unique_ptr&lt;LogicalOperator&gt; ExistsRewriteRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;op_root,</span>
 <span class="lineNum">      27 </span>            :                                                      vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
-<span class="lineNum">      28 </span><span class="lineCov">        500 :         auto *filter = (LogicalFilter *)bindings[0].value.op;</span>
-<span class="lineNum">      29 </span><span class="lineCov">        500 :         auto *exists = (OperatorExpression *)bindings[1].value.expr;</span>
-<span class="lineNum">      30 </span><span class="lineCov">        500 :         auto *subquery = (SubqueryExpression *)bindings[2].value.expr;</span>
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 :         auto *filter = (LogicalFilter *)bindings[0].value.op;</span>
+<span class="lineNum">      29 </span><span class="lineNoCov">          0 :         auto *exists = (OperatorExpression *)bindings[1].value.expr;</span>
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :         auto *subquery = (SubqueryExpression *)bindings[2].value.expr;</span>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            :         // Only rewrite correlated exists
 <span class="lineNum">      33 </span>            :         // Non-correlated exists should be rewritten in a different way
 <span class="lineNum">      34 </span>            :         // Because either (1) the whole result is empty, or (2) it's a NOP operation
-<span class="lineNum">      35 </span><span class="lineCov">        500 :         if (!subquery-&gt;is_correlated) {</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :         if (!subquery-&gt;is_correlated) {</span>
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      37 </span>            :         }
 <span class="lineNum">      38 </span>            : 
 <span class="lineNum">      39 </span>            :         // find the projection
-<span class="lineNum">      40 </span><span class="lineCov">        500 :         auto node = GetProjection(subquery-&gt;op.get());</span>
-<span class="lineNum">      41 </span><span class="lineCov">        500 :         if (node-&gt;type != LogicalOperatorType::PROJECTION) {</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :         auto node = GetProjection(subquery-&gt;op.get());</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :         if (node-&gt;type != LogicalOperatorType::PROJECTION) {</span>
 <span class="lineNum">      42 </span>            :                 // only know how to rewrite normal projections in EXISTS clause
 <span class="lineNum">      43 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      44 </span>            :         }
 <span class="lineNum">      45 </span>            : 
 <span class="lineNum">      46 </span>            :         // figure out the join type
-<span class="lineNum">      47 </span><span class="lineCov">        500 :         JoinType type;</span>
-<span class="lineNum">      48 </span><span class="lineCov">        500 :         if (exists-&gt;type == ExpressionType::OPERATOR_EXISTS) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">        486 :                 type = JoinType::SEMI;</span>
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :         JoinType type;</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :         if (exists-&gt;type == ExpressionType::OPERATOR_EXISTS) {</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                 type = JoinType::SEMI;</span>
 <span class="lineNum">      50 </span>            :         } else { /* OPERATOR_NOT_EXISTS */
-<span class="lineNum">      51 </span><span class="lineCov">         14 :                 assert(exists-&gt;type == ExpressionType::OPERATOR_NOT_EXISTS);</span>
-<span class="lineNum">      52 </span><span class="lineCov">         14 :                 type = JoinType::ANTI;</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :                 assert(exists-&gt;type == ExpressionType::OPERATOR_NOT_EXISTS);</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :                 type = JoinType::ANTI;</span>
 <span class="lineNum">      53 </span>            :         }
 <span class="lineNum">      54 </span>            : 
 <span class="lineNum">      55 </span>            :         // now we turn a subquery in the WHERE clause into a &quot;proper&quot; subquery
 <span class="lineNum">      56 </span>            :         // hence we need to get a new table index from the BindContext
-<span class="lineNum">      57 </span><span class="lineCov">        500 :         auto subquery_table_index = rewriter.context.GenerateTableIndex();</span>
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :         auto subquery_table_index = rewriter.context.GenerateTableIndex();</span>
 <span class="lineNum">      58 </span>            : 
 <span class="lineNum">      59 </span>            :         // step 2: find correlations to add to the list of join conditions
-<span class="lineNum">      60 </span><span class="lineCov">       1000 :         vector&lt;JoinCondition&gt; join_conditions;</span>
-<span class="lineNum">      61 </span><span class="lineCov">        500 :         ExtractCorrelatedExpressions(node, subquery, subquery_table_index, join_conditions);</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :         vector&lt;JoinCondition&gt; join_conditions;</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :         ExtractCorrelatedExpressions(node, subquery, subquery_table_index, join_conditions);</span>
 <span class="lineNum">      62 </span>            : 
 <span class="lineNum">      63 </span>            :         // unlike equality comparison with subquery we only have the correlated
 <span class="lineNum">      64 </span>            :         // expressions as join condition
-<span class="lineNum">      65 </span><span class="lineCov">        500 :         if (join_conditions.size() == 0) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">         21 :                 return nullptr;</span>
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :         if (join_conditions.size() == 0) {</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      67 </span>            :         }
-<span class="lineNum">      68 </span><span class="lineCov">        479 :         bool has_only_inequality = true;</span>
-<span class="lineNum">      69 </span><span class="lineCov">        487 :         for (auto &amp;condition : join_conditions) {</span>
-<span class="lineNum">      70 </span><span class="lineCov">        487 :                 if (condition.comparison != ExpressionType::COMPARE_NOTEQUAL) {</span>
-<span class="lineNum">      71 </span><span class="lineCov">        479 :                         has_only_inequality = false;</span>
-<span class="lineNum">      72 </span><span class="lineCov">        479 :                         break;</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :         bool has_only_inequality = true;</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :         for (auto &amp;condition : join_conditions) {</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :                 if (condition.comparison != ExpressionType::COMPARE_NOTEQUAL) {</span>
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :                         has_only_inequality = false;</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :                         break;</span>
 <span class="lineNum">      73 </span>            :                 }
 <span class="lineNum">      74 </span>            :         }
-<span class="lineNum">      75 </span><span class="lineCov">        479 :         if (has_only_inequality) {</span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         if (has_only_inequality) {</span>
 <span class="lineNum">      76 </span>            :                 // only inequality comparisons
 <span class="lineNum">      77 </span>            :                 // we flip them to equality comparisons and invert the join
 <span class="lineNum">      78 </span>            :                 // this allows us to use a hash join
@@ -149,27 +149,27 @@
 <span class="lineNum">      87 </span>            :         }
 <span class="lineNum">      88 </span>            : 
 <span class="lineNum">      89 </span>            :         // now we add join between the filter and the subquery
-<span class="lineNum">      90 </span><span class="lineCov">        479 :         assert(filter-&gt;children.size() == 1);</span>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :         assert(filter-&gt;children.size() == 1);</span>
 <span class="lineNum">      91 </span>            : 
-<span class="lineNum">      92 </span><span class="lineCov">        958 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
-<span class="lineNum">      93 </span><span class="lineCov">        479 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
 <span class="lineNum">      94 </span>            : 
-<span class="lineNum">      95 </span><span class="lineCov">        958 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
-<span class="lineNum">      96 </span><span class="lineCov">        479 :         join-&gt;children.push_back(move(filter-&gt;children[0]));</span>
-<span class="lineNum">      97 </span><span class="lineCov">        479 :         join-&gt;children.push_back(move(table_subquery));</span>
-<span class="lineNum">      98 </span><span class="lineCov">        479 :         join-&gt;conditions = move(join_conditions);</span>
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :         join-&gt;children.push_back(move(filter-&gt;children[0]));</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :         join-&gt;children.push_back(move(table_subquery));</span>
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :         join-&gt;conditions = move(join_conditions);</span>
 <span class="lineNum">      99 </span>            : 
-<span class="lineNum">     100 </span><span class="lineCov">        479 :         filter-&gt;children[0] = move(join);</span>
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :         filter-&gt;children[0] = move(join);</span>
 <span class="lineNum">     101 </span>            : 
 <span class="lineNum">     102 </span>            :         // finally we remove the original equality expression from the filter
-<span class="lineNum">     103 </span><span class="lineCov">        857 :         for (size_t i = 0; i &lt; filter-&gt;expressions.size(); i++) {</span>
-<span class="lineNum">     104 </span><span class="lineCov">        857 :                 if (filter-&gt;expressions[i].get() == exists) {</span>
-<span class="lineNum">     105 </span><span class="lineCov">        479 :                         filter-&gt;expressions.erase(filter-&gt;expressions.begin() + i);</span>
-<span class="lineNum">     106 </span><span class="lineCov">        479 :                         break;</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :         for (size_t i = 0; i &lt; filter-&gt;expressions.size(); i++) {</span>
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :                 if (filter-&gt;expressions[i].get() == exists) {</span>
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :                         filter-&gt;expressions.erase(filter-&gt;expressions.begin() + i);</span>
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :                         break;</span>
 <span class="lineNum">     107 </span>            :                 }
 <span class="lineNum">     108 </span>            :         }
-<span class="lineNum">     109 </span><span class="lineCov">        479 :         fixed_point = false;</span>
-<span class="lineNum">     110 </span><span class="lineCov">        479 :         return nullptr;</span>
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :         fixed_point = false;</span>
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :         return nullptr;</span>
 <span class="lineNum">     111 </span>            : }
 </pre>
       </td>

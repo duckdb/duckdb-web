@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report af9eda3a - main/query_profiler.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - main/query_profiler.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
+            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">73</td>
+            <td class="headerCovTableEntry">74</td>
             <td class="headerCovTableEntry">147</td>
-            <td class="headerCovTableEntryLo">49.7 %</td>
+            <td class="headerCovTableEntryLo">50.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-09 16:22:46</td>
+            <td class="headerValue">2018-12-14 17:41:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -71,72 +71,72 @@
 <span class="lineNum">       9 </span>            : constexpr size_t REMAINING_RENDER_WIDTH = TREE_RENDER_WIDTH - 2;
 <a name="10"><span class="lineNum">      10 </span>            : constexpr size_t MAX_EXTRA_LINES = 10;</a>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">    3175695 : void QueryProfiler::StartQuery(string query) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">    3175695 :         if (!enabled)</span>
-<span class="lineNum">      14 </span><span class="lineCov">    3177656 :                 return;</span>
+<span class="lineNum">      12 </span><span class="lineCov">    3177995 : void QueryProfiler::StartQuery(string query) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3177995 :         if (!enabled)</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3179061 :                 return;</span>
 <span class="lineNum">      15 </span>            : 
 <span class="lineNum">      16 </span><span class="lineNoCov">          0 :         this-&gt;query = query;</span>
-<span class="lineNum">      17 </span><span class="lineCov">         58 :         tree_map.clear();</span>
-<span class="lineNum">      18 </span><span class="lineCov">         58 :         execution_stack = stack&lt;PhysicalOperator *&gt;();</span>
-<span class="lineNum">      19 </span><span class="lineCov">         58 :         root = nullptr;</span>
+<span class="lineNum">      17 </span><span class="lineCov">         95 :         tree_map.clear();</span>
+<span class="lineNum">      18 </span><span class="lineCov">         95 :         execution_stack = stack&lt;PhysicalOperator *&gt;();</span>
+<span class="lineNum">      19 </span><span class="lineCov">         95 :         root = nullptr;</span>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">         58 :         main_query.Start();</span>
+<span class="lineNum">      21 </span><span class="lineCov">         95 :         main_query.Start();</span>
 <a name="22"><span class="lineNum">      22 </span>            : }</a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">    3131740 : void QueryProfiler::EndQuery() {</span>
-<span class="lineNum">      25 </span><span class="lineCov">    3131740 :         if (!enabled)</span>
-<span class="lineNum">      26 </span><span class="lineCov">    3134435 :                 return;</span>
+<span class="lineNum">      24 </span><span class="lineCov">    3134810 : void QueryProfiler::EndQuery() {</span>
+<span class="lineNum">      25 </span><span class="lineCov">    3134810 :         if (!enabled)</span>
+<span class="lineNum">      26 </span><span class="lineCov">    3136222 :                 return;</span>
 <span class="lineNum">      27 </span>            : 
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :         main_query.End();</span>
 <a name="29"><span class="lineNum">      29 </span>            : }</a>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">   24705602 : void QueryProfiler::StartOperator(PhysicalOperator *phys_op) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">   24705602 :         if (!enabled)</span>
-<span class="lineNum">      33 </span><span class="lineCov">   24621652 :                 return;</span>
+<span class="lineNum">      31 </span><span class="lineCov">   18533766 : void QueryProfiler::StartOperator(PhysicalOperator *phys_op) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">   18533766 :         if (!enabled)</span>
+<span class="lineNum">      33 </span><span class="lineCov">   18332911 :                 return;</span>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">      83950 :         if (!root) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">     200855 :         if (!root) {</span>
 <span class="lineNum">      36 </span>            :                 // start of execution: create operator tree
-<span class="lineNum">      37 </span><span class="lineCov">         46 :                 root = CreateTree(phys_op);</span>
+<span class="lineNum">      37 </span><span class="lineCov">         89 :                 root = CreateTree(phys_op);</span>
 <span class="lineNum">      38 </span>            :         }
-<span class="lineNum">      39 </span><span class="lineCov">      88853 :         if (!execution_stack.empty()) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">     205066 :         if (!execution_stack.empty()) {</span>
 <span class="lineNum">      40 </span>            :                 // add timing for the previous element
-<span class="lineNum">      41 </span><span class="lineCov">      88778 :                 op.End();</span>
-<span class="lineNum">      42 </span><span class="lineCov">      88778 :                 assert(tree_map.count(execution_stack.top()) &gt; 0);</span>
-<span class="lineNum">      43 </span><span class="lineCov">      88778 :                 auto &amp;info = tree_map[execution_stack.top()]-&gt;info;</span>
-<span class="lineNum">      44 </span><span class="lineCov">      88778 :                 info.time += op.Elapsed();</span>
+<span class="lineNum">      41 </span><span class="lineCov">     204906 :                 op.End();</span>
+<span class="lineNum">      42 </span><span class="lineCov">     204906 :                 assert(tree_map.count(execution_stack.top()) &gt; 0);</span>
+<span class="lineNum">      43 </span><span class="lineCov">     204906 :                 auto &amp;info = tree_map[execution_stack.top()]-&gt;info;</span>
+<span class="lineNum">      44 </span><span class="lineCov">     204906 :                 info.time += op.Elapsed();</span>
 <span class="lineNum">      45 </span>            :         }
 <span class="lineNum">      46 </span>            : 
 <span class="lineNum">      47 </span>            :         // push new element onto stack
-<span class="lineNum">      48 </span><span class="lineCov">      88853 :         if (tree_map.count(phys_op) == 0) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">         23 :                 auto node = tree_map[execution_stack.top()];</span>
+<span class="lineNum">      48 </span><span class="lineCov">     205066 :         if (tree_map.count(phys_op) == 0) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">         26 :                 auto node = tree_map[execution_stack.top()];</span>
 <span class="lineNum">      50 </span>            :                 // element does not exist in the tree! this only happens with a subquery
 <span class="lineNum">      51 </span>            :                 // create a new tree
-<span class="lineNum">      52 </span><span class="lineCov">         46 :                 auto new_tree = CreateTree(phys_op, node-&gt;depth + 1);</span>
+<span class="lineNum">      52 </span><span class="lineCov">         52 :                 auto new_tree = CreateTree(phys_op, node-&gt;depth + 1);</span>
 <span class="lineNum">      53 </span>            :                 // add it to the current node
-<span class="lineNum">      54 </span><span class="lineCov">         23 :                 node-&gt;children.push_back(move(new_tree));</span>
+<span class="lineNum">      54 </span><span class="lineCov">         26 :                 node-&gt;children.push_back(move(new_tree));</span>
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">      88853 :         execution_stack.push(phys_op);</span>
+<span class="lineNum">      56 </span><span class="lineCov">     205066 :         execution_stack.push(phys_op);</span>
 <span class="lineNum">      57 </span>            : 
 <span class="lineNum">      58 </span>            :         // start timing for current element
-<span class="lineNum">      59 </span><span class="lineCov">      88853 :         op.Start();</span>
+<span class="lineNum">      59 </span><span class="lineCov">     205066 :         op.Start();</span>
 <a name="60"><span class="lineNum">      60 </span>            : }</a>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">   24708324 : void QueryProfiler::EndOperator(DataChunk &amp;chunk) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">   24708324 :         if (!enabled)</span>
-<span class="lineNum">      64 </span><span class="lineCov">   24622547 :                 return;</span>
+<span class="lineNum">      62 </span><span class="lineCov">   18535830 : void QueryProfiler::EndOperator(DataChunk &amp;chunk) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">   18535830 :         if (!enabled)</span>
+<span class="lineNum">      64 </span><span class="lineCov">   18332715 :                 return;</span>
 <span class="lineNum">      65 </span>            : 
 <span class="lineNum">      66 </span>            :         // finish timing for the current element
-<span class="lineNum">      67 </span><span class="lineCov">      85777 :         op.End();</span>
-<span class="lineNum">      68 </span><span class="lineCov">      88813 :         auto &amp;info = tree_map[execution_stack.top()]-&gt;info;</span>
-<span class="lineNum">      69 </span><span class="lineCov">      88813 :         info.time += op.Elapsed();</span>
-<span class="lineNum">      70 </span><span class="lineCov">      88813 :         info.elements += chunk.size();</span>
+<span class="lineNum">      67 </span><span class="lineCov">     203115 :         op.End();</span>
+<span class="lineNum">      68 </span><span class="lineCov">     205025 :         auto &amp;info = tree_map[execution_stack.top()]-&gt;info;</span>
+<span class="lineNum">      69 </span><span class="lineCov">     205025 :         info.time += op.Elapsed();</span>
+<span class="lineNum">      70 </span><span class="lineCov">     205025 :         info.elements += chunk.size();</span>
 <span class="lineNum">      71 </span>            : 
-<span class="lineNum">      72 </span><span class="lineCov">      88813 :         assert(!execution_stack.empty());</span>
-<span class="lineNum">      73 </span><span class="lineCov">      88813 :         execution_stack.pop();</span>
+<span class="lineNum">      72 </span><span class="lineCov">     205025 :         assert(!execution_stack.empty());</span>
+<span class="lineNum">      73 </span><span class="lineCov">     205025 :         execution_stack.pop();</span>
 <span class="lineNum">      74 </span>            : 
 <span class="lineNum">      75 </span>            :         // start timing again for the previous element, if any
-<span class="lineNum">      76 </span><span class="lineCov">      88813 :         if (!execution_stack.empty()) {</span>
-<span class="lineNum">      77 </span><span class="lineCov">      88749 :                 op.Start();</span>
+<span class="lineNum">      76 </span><span class="lineCov">     205025 :         if (!execution_stack.empty()) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">     204876 :                 op.Start();</span>
 <span class="lineNum">      78 </span>            :         }
 <a name="79"><span class="lineNum">      79 </span>            : }</a>
 <span class="lineNum">      80 </span>            : 
@@ -162,62 +162,62 @@
 <span class="lineNum">     100 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="101"><span class="lineNum">     101 </span>            : }</a>
 <span class="lineNum">     102 </span>            : 
-<span class="lineNum">     103 </span><span class="lineCov">        456 : static bool is_non_split_char(char l) {</span>
-<span class="lineNum">     104 </span><span class="lineCov">        456 :         return (l &gt;= 65 &amp;&amp; l &lt;= 90) || (l &gt;= 97 &amp;&amp; l &lt;= 122) || l == 95 || l == ']' || l == ')';</span>
+<span class="lineNum">     103 </span><span class="lineCov">       1091 : static bool is_non_split_char(char l) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">       1091 :         return (l &gt;= 65 &amp;&amp; l &lt;= 90) || (l &gt;= 97 &amp;&amp; l &lt;= 122) || l == 95 || l == ']' || l == ')';</span>
 <a name="105"><span class="lineNum">     105 </span>            : }</a>
 <span class="lineNum">     106 </span>            : 
-<span class="lineNum">     107 </span><span class="lineCov">        326 : static bool is_padding(char l) {</span>
-<span class="lineNum">     108 </span><span class="lineCov">        326 :         return l == ' ' || l == '(' || l == ')';</span>
+<span class="lineNum">     107 </span><span class="lineCov">       1199 : static bool is_padding(char l) {</span>
+<span class="lineNum">     108 </span><span class="lineCov">       1199 :         return l == ' ' || l == '(' || l == ')';</span>
 <a name="109"><span class="lineNum">     109 </span>            : }</a>
 <span class="lineNum">     110 </span>            : 
-<span class="lineNum">     111 </span><span class="lineCov">        123 : static string remove_padding(string l) {</span>
-<span class="lineNum">     112 </span><span class="lineCov">        123 :         size_t start = 0, end = l.size();</span>
-<span class="lineNum">     113 </span><span class="lineCov">        123 :         while (start &lt; l.size() &amp;&amp; is_padding(l[start])) {</span>
-<span class="lineNum">     114 </span><span class="lineNoCov">          0 :                 start++;</span>
+<span class="lineNum">     111 </span><span class="lineCov">        478 : static string remove_padding(string l) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">        478 :         size_t start = 0, end = l.size();</span>
+<span class="lineNum">     113 </span><span class="lineCov">        536 :         while (start &lt; l.size() &amp;&amp; is_padding(l[start])) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">         58 :                 start++;</span>
 <span class="lineNum">     115 </span>            :         }
-<span class="lineNum">     116 </span><span class="lineCov">        203 :         while (end &gt; 0 &amp;&amp; is_padding(l[end - 1])) {</span>
-<span class="lineNum">     117 </span><span class="lineCov">         80 :                 end--;</span>
+<span class="lineNum">     116 </span><span class="lineCov">        663 :         while (end &gt; 0 &amp;&amp; is_padding(l[end - 1])) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">        185 :                 end--;</span>
 <span class="lineNum">     118 </span>            :         }
-<span class="lineNum">     119 </span><span class="lineCov">        123 :         return l.substr(start, end - start);</span>
+<span class="lineNum">     119 </span><span class="lineCov">        478 :         return l.substr(start, end - start);</span>
 <a name="120"><span class="lineNum">     120 </span>            : }</a>
 <span class="lineNum">     121 </span>            : 
-<span class="lineNum">     122 </span><span class="lineCov">        249 : unique_ptr&lt;QueryProfiler::TreeNode&gt; QueryProfiler::CreateTree(PhysicalOperator *root, size_t depth) {</span>
-<span class="lineNum">     123 </span><span class="lineCov">        249 :         auto node = make_unique&lt;QueryProfiler::TreeNode&gt;();</span>
-<span class="lineNum">     124 </span><span class="lineCov">        249 :         node-&gt;name = PhysicalOperatorToString(root-&gt;type);</span>
-<span class="lineNum">     125 </span><span class="lineCov">        498 :         auto extra_info = root-&gt;ExtraRenderInformation();</span>
-<span class="lineNum">     126 </span><span class="lineCov">        249 :         if (!extra_info.empty()) {</span>
-<span class="lineNum">     127 </span><span class="lineCov">        206 :                 auto splits = StringUtil::Split(extra_info, '\n');</span>
-<span class="lineNum">     128 </span><span class="lineCov">        226 :                 for (auto &amp;split : splits) {</span>
-<span class="lineNum">     129 </span><span class="lineCov">        369 :                         string str = remove_padding(split);</span>
-<span class="lineNum">     130 </span><span class="lineCov">        123 :                         constexpr size_t max_segment_size = REMAINING_RENDER_WIDTH - 2;</span>
-<span class="lineNum">     131 </span><span class="lineCov">        123 :                         size_t location = 0;</span>
-<span class="lineNum">     132 </span><span class="lineCov">        238 :                         while (location &lt; str.size() &amp;&amp; node-&gt;extra_info.size() &lt; MAX_EXTRA_LINES) {</span>
-<span class="lineNum">     133 </span><span class="lineCov">        231 :                                 bool has_to_split = (str.size() - location) &gt; max_segment_size;</span>
-<span class="lineNum">     134 </span><span class="lineCov">        231 :                                 if (has_to_split) {</span>
+<span class="lineNum">     122 </span><span class="lineCov">        626 : unique_ptr&lt;QueryProfiler::TreeNode&gt; QueryProfiler::CreateTree(PhysicalOperator *root, size_t depth) {</span>
+<span class="lineNum">     123 </span><span class="lineCov">        626 :         auto node = make_unique&lt;QueryProfiler::TreeNode&gt;();</span>
+<span class="lineNum">     124 </span><span class="lineCov">        626 :         node-&gt;name = PhysicalOperatorToString(root-&gt;type);</span>
+<span class="lineNum">     125 </span><span class="lineCov">       1252 :         auto extra_info = root-&gt;ExtraRenderInformation();</span>
+<span class="lineNum">     126 </span><span class="lineCov">        626 :         if (!extra_info.empty()) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">        712 :                 auto splits = StringUtil::Split(extra_info, '\n');</span>
+<span class="lineNum">     128 </span><span class="lineCov">        834 :                 for (auto &amp;split : splits) {</span>
+<span class="lineNum">     129 </span><span class="lineCov">       1434 :                         string str = remove_padding(split);</span>
+<span class="lineNum">     130 </span><span class="lineCov">        478 :                         constexpr size_t max_segment_size = REMAINING_RENDER_WIDTH - 2;</span>
+<span class="lineNum">     131 </span><span class="lineCov">        478 :                         size_t location = 0;</span>
+<span class="lineNum">     132 </span><span class="lineCov">        779 :                         while (location &lt; str.size() &amp;&amp; node-&gt;extra_info.size() &lt; MAX_EXTRA_LINES) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">        768 :                                 bool has_to_split = (str.size() - location) &gt; max_segment_size;</span>
+<span class="lineNum">     134 </span><span class="lineCov">        768 :                                 if (has_to_split) {</span>
 <span class="lineNum">     135 </span>            :                                         // look for a split character
 <span class="lineNum">     136 </span>            :                                         size_t i;
-<span class="lineNum">     137 </span><span class="lineCov">        471 :                                         for (i = 8; i &lt; max_segment_size; i++) {</span>
-<span class="lineNum">     138 </span><span class="lineCov">        456 :                                                 if (!is_non_split_char(str[location + i])) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">       1113 :                                         for (i = 8; i &lt; max_segment_size; i++) {</span>
+<span class="lineNum">     138 </span><span class="lineCov">       1091 :                                                 if (!is_non_split_char(str[location + i])) {</span>
 <span class="lineNum">     139 </span>            :                                                         // split here
-<span class="lineNum">     140 </span><span class="lineCov">        100 :                                                         break;</span>
+<span class="lineNum">     140 </span><span class="lineCov">        279 :                                                         break;</span>
 <span class="lineNum">     141 </span>            :                                                 }
 <span class="lineNum">     142 </span>            :                                         }
-<span class="lineNum">     143 </span><span class="lineCov">        115 :                                         node-&gt;extra_info.push_back(str.substr(location, i));</span>
-<span class="lineNum">     144 </span><span class="lineCov">        115 :                                         location += i;</span>
+<span class="lineNum">     143 </span><span class="lineCov">        301 :                                         node-&gt;extra_info.push_back(str.substr(location, i));</span>
+<span class="lineNum">     144 </span><span class="lineCov">        301 :                                         location += i;</span>
 <span class="lineNum">     145 </span>            :                                 } else {
-<span class="lineNum">     146 </span><span class="lineCov">        116 :                                         node-&gt;extra_info.push_back(str.substr(location));</span>
-<span class="lineNum">     147 </span><span class="lineCov">        116 :                                         break;</span>
+<span class="lineNum">     146 </span><span class="lineCov">        467 :                                         node-&gt;extra_info.push_back(str.substr(location));</span>
+<span class="lineNum">     147 </span><span class="lineCov">        467 :                                         break;</span>
 <span class="lineNum">     148 </span>            :                                 }
 <span class="lineNum">     149 </span>            :                         }
 <span class="lineNum">     150 </span>            :                 }
 <span class="lineNum">     151 </span>            :         }
-<span class="lineNum">     152 </span><span class="lineCov">        249 :         node-&gt;depth = depth;</span>
-<span class="lineNum">     153 </span><span class="lineCov">        249 :         tree_map[root] = node.get();</span>
-<span class="lineNum">     154 </span><span class="lineCov">        429 :         for (auto &amp;child : root-&gt;children) {</span>
-<span class="lineNum">     155 </span><span class="lineCov">        360 :                 auto child_node = CreateTree(child.get(), depth + 1);</span>
-<span class="lineNum">     156 </span><span class="lineCov">        180 :                 node-&gt;children.push_back(move(child_node));</span>
+<span class="lineNum">     152 </span><span class="lineCov">        626 :         node-&gt;depth = depth;</span>
+<span class="lineNum">     153 </span><span class="lineCov">        626 :         tree_map[root] = node.get();</span>
+<span class="lineNum">     154 </span><span class="lineCov">       1137 :         for (auto &amp;child : root-&gt;children) {</span>
+<span class="lineNum">     155 </span><span class="lineCov">       1022 :                 auto child_node = CreateTree(child.get(), depth + 1);</span>
+<span class="lineNum">     156 </span><span class="lineCov">        511 :                 node-&gt;children.push_back(move(child_node));</span>
 <span class="lineNum">     157 </span>            :         }
-<span class="lineNum">     158 </span><span class="lineCov">        249 :         return node;</span>
+<span class="lineNum">     158 </span><span class="lineCov">        626 :         return node;</span>
 <a name="159"><span class="lineNum">     159 </span>            : }</a>
 <span class="lineNum">     160 </span>            : 
 <span class="lineNum">     161 </span><span class="lineNoCov">          0 : static string DrawPadded(string text, char padding_character = ' ') {</span>

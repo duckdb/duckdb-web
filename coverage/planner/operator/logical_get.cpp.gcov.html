@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report af9eda3a - planner/operator/logical_get.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - planner/operator/logical_get.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
+            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">9</td>
-            <td class="headerCovTableEntryLo">33.3 %</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryLo">46.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-09 16:22:46</td>
+            <td class="headerValue">2018-12-14 17:41:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">1</td>
             <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntryLo">50.0 %</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -62,21 +62,32 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : #include &quot;planner/operator/logical_get.hpp&quot;</a>
 <span class="lineNum">       2 </span>            : 
-<span class="lineNum">       3 </span>            : using namespace duckdb;
-<a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
+<span class="lineNum">       3 </span>            : #include &quot;catalog/catalog_entry/table_catalog_entry.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;storage/data_table.hpp&quot;
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineNoCov">          0 : vector&lt;string&gt; LogicalGet::GetNames() {</span>
-<span class="lineNum">       7 </span><span class="lineNoCov">          0 :         assert(table);</span>
-<span class="lineNum">       8 </span><span class="lineNoCov">          0 :         vector&lt;string&gt; names;</span>
-<span class="lineNum">       9 </span><span class="lineNoCov">          0 :         for (auto &amp;column : table-&gt;columns) {</span>
-<span class="lineNum">      10 </span><span class="lineNoCov">          0 :                 names.push_back(column.name);</span>
-<span class="lineNum">      11 </span>            :         }
-<span class="lineNum">      12 </span><span class="lineNoCov">          0 :         return names;</span>
-<a name="13"><span class="lineNum">      13 </span>            : }</a>
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">    3358618 : void LogicalGet::ResolveTypes() {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    3358618 :         types = table-&gt;GetTypes(column_ids);</span>
-<span class="lineNum">      17 </span><span class="lineCov">    3359588 : }</span>
+<span class="lineNum">       6 </span>            : using namespace duckdb;
+<a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineNoCov">          0 : vector&lt;string&gt; LogicalGet::GetNames() {</span>
+<span class="lineNum">      10 </span><span class="lineNoCov">          0 :         assert(table);</span>
+<span class="lineNum">      11 </span><span class="lineNoCov">          0 :         vector&lt;string&gt; names;</span>
+<span class="lineNum">      12 </span><span class="lineNoCov">          0 :         for (auto &amp;column : table-&gt;columns) {</span>
+<span class="lineNum">      13 </span><span class="lineNoCov">          0 :                 names.push_back(column.name);</span>
+<span class="lineNum">      14 </span>            :         }
+<span class="lineNum">      15 </span><span class="lineNoCov">          0 :         return names;</span>
+<a name="16"><span class="lineNum">      16 </span>            : }</a>
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span><span class="lineCov">    3384832 : void LogicalGet::ResolveTypes() {</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3384832 :         types = table-&gt;GetTypes(column_ids);</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    3385913 : }</span></a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">     452207 : size_t LogicalGet::EstimateCardinality() {</span>
+<span class="lineNum">      23 </span><span class="lineCov">     452207 :         if (table) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">     452207 :                 return table-&gt;storage-&gt;cardinality;</span>
+<span class="lineNum">      25 </span>            :         } else {
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :                 return 1;</span>
+<span class="lineNum">      27 </span>            :         }
+<span class="lineNum">      28 </span>            : }
 </pre>
       </td>
     </tr>

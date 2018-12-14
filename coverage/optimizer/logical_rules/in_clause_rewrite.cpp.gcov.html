@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report af9eda3a - optimizer/logical_rules/in_clause_rewrite.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - optimizer/logical_rules/in_clause_rewrite.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report af9eda3a</td>
+            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">42</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-09 16:22:46</td>
+            <td class="headerValue">2018-12-14 17:41:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -69,81 +69,81 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">    3131178 : InClauseRewriteRule::InClauseRewriteRule() {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    6266600 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::SELECT_SUBQUERY);</span>
+<span class="lineNum">      10 </span><span class="lineCov">          2 : InClauseRewriteRule::InClauseRewriteRule() {</span>
+<span class="lineNum">      11 </span><span class="lineCov">          4 :         auto subquery = make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::SELECT_SUBQUERY);</span>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    9397291 :         vector&lt;ExpressionType&gt; types = {ExpressionType::COMPARE_IN, ExpressionType::COMPARE_NOT_IN};</span>
-<span class="lineNum">      14 </span><span class="lineCov">    3132046 :         auto in_expression = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(types);</span>
+<span class="lineNum">      13 </span><span class="lineCov">          6 :         vector&lt;ExpressionType&gt; types = {ExpressionType::COMPARE_IN, ExpressionType::COMPARE_NOT_IN};</span>
+<span class="lineNum">      14 </span><span class="lineCov">          2 :         auto in_expression = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(types);</span>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">    3132860 :         in_expression-&gt;children.push_back(make_unique&lt;ExpressionNodeAny&gt;());</span>
-<span class="lineNum">      17 </span><span class="lineCov">    3131724 :         in_expression-&gt;children.push_back(move(subquery));</span>
-<span class="lineNum">      18 </span><span class="lineCov">    3133306 :         in_expression-&gt;child_policy = ChildPolicy::ORDERED;</span>
+<span class="lineNum">      16 </span><span class="lineCov">          2 :         in_expression-&gt;children.push_back(make_unique&lt;ExpressionNodeAny&gt;());</span>
+<span class="lineNum">      17 </span><span class="lineCov">          2 :         in_expression-&gt;children.push_back(move(subquery));</span>
+<span class="lineNum">      18 </span><span class="lineCov">          2 :         in_expression-&gt;child_policy = ChildPolicy::ORDERED;</span>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">    3132348 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
+<span class="lineNum">      20 </span><span class="lineCov">          2 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    3133729 :         root-&gt;children.push_back(move(in_expression));</span>
-<span class="lineNum">      23 </span><span class="lineCov">    3132383 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3133993 : }</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">          2 :         root-&gt;children.push_back(move(in_expression));</span>
+<span class="lineNum">      23 </span><span class="lineCov">          2 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">          2 : }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">         46 : unique_ptr&lt;LogicalOperator&gt; InClauseRewriteRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;op_root,</span>
+<span class="lineNum">      26 </span><span class="lineCov">          2 : unique_ptr&lt;LogicalOperator&gt; InClauseRewriteRule::Apply(Rewriter &amp;rewriter, LogicalOperator &amp;op_root,</span>
 <span class="lineNum">      27 </span>            :                                                        vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
-<span class="lineNum">      28 </span><span class="lineCov">         46 :         auto *filter = (LogicalFilter *)bindings[0].value.op;</span>
-<span class="lineNum">      29 </span><span class="lineCov">         46 :         auto *operator_expression = (OperatorExpression *)bindings[1].value.expr;</span>
-<span class="lineNum">      30 </span><span class="lineCov">         46 :         auto *subquery = (SubqueryExpression *)bindings[3].value.expr;</span>
+<span class="lineNum">      28 </span><span class="lineCov">          2 :         auto *filter = (LogicalFilter *)bindings[0].value.op;</span>
+<span class="lineNum">      29 </span><span class="lineCov">          2 :         auto *operator_expression = (OperatorExpression *)bindings[1].value.expr;</span>
+<span class="lineNum">      30 </span><span class="lineCov">          2 :         auto *subquery = (SubqueryExpression *)bindings[3].value.expr;</span>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            :         // we found a COMPARE_IN/COMPARE_NOT_IN with
-<span class="lineNum">      33 </span><span class="lineCov">         46 :         if (subquery-&gt;is_correlated) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">          2 :         if (subquery-&gt;is_correlated) {</span>
 <span class="lineNum">      34 </span>            :                 // correlated subqueries not handled yet for in clause rewrite
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      36 </span>            :         }
 <span class="lineNum">      37 </span>            : 
 <span class="lineNum">      38 </span>            :         // find the projection
-<span class="lineNum">      39 </span><span class="lineCov">         46 :         auto node = GetProjection(subquery-&gt;op.get());</span>
+<span class="lineNum">      39 </span><span class="lineCov">          2 :         auto node = GetProjection(subquery-&gt;op.get());</span>
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            :         // convert the expression into a semi-join or anti-join
 <span class="lineNum">      42 </span>            : 
 <span class="lineNum">      43 </span>            :         // first figure out the join type
-<span class="lineNum">      44 </span><span class="lineCov">         46 :         JoinType type;</span>
-<span class="lineNum">      45 </span><span class="lineCov">         46 :         if (operator_expression-&gt;type == ExpressionType::COMPARE_IN) {</span>
-<span class="lineNum">      46 </span><span class="lineCov">         43 :                 type = JoinType::SEMI;</span>
+<span class="lineNum">      44 </span><span class="lineCov">          2 :         JoinType type;</span>
+<span class="lineNum">      45 </span><span class="lineCov">          2 :         if (operator_expression-&gt;type == ExpressionType::COMPARE_IN) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">          1 :                 type = JoinType::SEMI;</span>
 <span class="lineNum">      47 </span>            :         } else { /* COMPARE_NOT_IN */
-<span class="lineNum">      48 </span><span class="lineCov">          3 :                 assert(operator_expression-&gt;type == ExpressionType::COMPARE_NOT_IN);</span>
-<span class="lineNum">      49 </span><span class="lineCov">          3 :                 type = JoinType::ANTI;</span>
+<span class="lineNum">      48 </span><span class="lineCov">          1 :                 assert(operator_expression-&gt;type == ExpressionType::COMPARE_NOT_IN);</span>
+<span class="lineNum">      49 </span><span class="lineCov">          1 :                 type = JoinType::ANTI;</span>
 <span class="lineNum">      50 </span>            :         }
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span>            :         // generate a table index for the new subquery
-<span class="lineNum">      53 </span><span class="lineCov">         46 :         auto subquery_table_index = rewriter.context.GenerateTableIndex();</span>
+<span class="lineNum">      53 </span><span class="lineCov">          2 :         auto subquery_table_index = rewriter.context.GenerateTableIndex();</span>
 <span class="lineNum">      54 </span>            : 
 <span class="lineNum">      55 </span>            :         // create the join condition
-<span class="lineNum">      56 </span><span class="lineCov">         92 :         JoinCondition condition;</span>
+<span class="lineNum">      56 </span><span class="lineCov">          4 :         JoinCondition condition;</span>
 <span class="lineNum">      57 </span>            :         // it is between the left_expression of the IN clause
-<span class="lineNum">      58 </span><span class="lineCov">         46 :         condition.left = move(operator_expression-&gt;children[0]);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          2 :         condition.left = move(operator_expression-&gt;children[0]);</span>
 <span class="lineNum">      59 </span>            :         // and the first column of the subquery
-<span class="lineNum">      60 </span><span class="lineCov">         46 :         assert(node-&gt;expressions.size() &gt; 0);</span>
-<span class="lineNum">      61 </span><span class="lineCov">         46 :         condition.right =</span>
-<span class="lineNum">      62 </span><span class="lineCov">         46 :             make_unique&lt;ColumnRefExpression&gt;(node-&gt;expressions[0]-&gt;return_type, ColumnBinding(subquery_table_index, 0));</span>
-<span class="lineNum">      63 </span><span class="lineCov">         46 :         condition.comparison = ExpressionType::COMPARE_EQUAL;</span>
+<span class="lineNum">      60 </span><span class="lineCov">          2 :         assert(node-&gt;expressions.size() &gt; 0);</span>
+<span class="lineNum">      61 </span><span class="lineCov">          2 :         condition.right =</span>
+<span class="lineNum">      62 </span><span class="lineCov">          2 :             make_unique&lt;ColumnRefExpression&gt;(node-&gt;expressions[0]-&gt;return_type, ColumnBinding(subquery_table_index, 0));</span>
+<span class="lineNum">      63 </span><span class="lineCov">          2 :         condition.comparison = ExpressionType::COMPARE_EQUAL;</span>
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span>            :         // now convert the subquery expression into a proper subquery
-<span class="lineNum">      66 </span><span class="lineCov">         92 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
-<span class="lineNum">      67 </span><span class="lineCov">         46 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
+<span class="lineNum">      66 </span><span class="lineCov">          4 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
+<span class="lineNum">      67 </span><span class="lineCov">          2 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
 <span class="lineNum">      68 </span>            : 
 <span class="lineNum">      69 </span>            :         // create the join between the new subquery and the child of the filter
-<span class="lineNum">      70 </span><span class="lineCov">         92 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
-<span class="lineNum">      71 </span><span class="lineCov">         46 :         join-&gt;children.push_back(move(filter-&gt;children[0]));</span>
-<span class="lineNum">      72 </span><span class="lineCov">         46 :         join-&gt;children.push_back(move(table_subquery));</span>
-<span class="lineNum">      73 </span><span class="lineCov">         46 :         join-&gt;conditions.push_back(move(condition));</span>
+<span class="lineNum">      70 </span><span class="lineCov">          4 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
+<span class="lineNum">      71 </span><span class="lineCov">          2 :         join-&gt;children.push_back(move(filter-&gt;children[0]));</span>
+<span class="lineNum">      72 </span><span class="lineCov">          2 :         join-&gt;children.push_back(move(table_subquery));</span>
+<span class="lineNum">      73 </span><span class="lineCov">          2 :         join-&gt;conditions.push_back(move(condition));</span>
 <span class="lineNum">      74 </span>            : 
 <span class="lineNum">      75 </span>            :         // finally we remove the original in-expression from the filter
-<span class="lineNum">      76 </span><span class="lineCov">        177 :         for (size_t i = 0; i &lt; filter-&gt;expressions.size(); i++) {</span>
-<span class="lineNum">      77 </span><span class="lineCov">        177 :                 if (filter-&gt;expressions[i].get() == operator_expression) {</span>
-<span class="lineNum">      78 </span><span class="lineCov">         46 :                         filter-&gt;expressions.erase(filter-&gt;expressions.begin() + i);</span>
-<span class="lineNum">      79 </span><span class="lineCov">         46 :                         break;</span>
+<span class="lineNum">      76 </span><span class="lineCov">          2 :         for (size_t i = 0; i &lt; filter-&gt;expressions.size(); i++) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">          2 :                 if (filter-&gt;expressions[i].get() == operator_expression) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">          2 :                         filter-&gt;expressions.erase(filter-&gt;expressions.begin() + i);</span>
+<span class="lineNum">      79 </span><span class="lineCov">          2 :                         break;</span>
 <span class="lineNum">      80 </span>            :                 }
 <span class="lineNum">      81 </span>            :         }
-<span class="lineNum">      82 </span><span class="lineCov">         46 :         filter-&gt;children[0] = move(join);</span>
-<span class="lineNum">      83 </span><span class="lineCov">         46 :         fixed_point = false;</span>
-<span class="lineNum">      84 </span><span class="lineCov">         46 :         return nullptr;</span>
+<span class="lineNum">      82 </span><span class="lineCov">          2 :         filter-&gt;children[0] = move(join);</span>
+<span class="lineNum">      83 </span><span class="lineCov">          2 :         fixed_point = false;</span>
+<span class="lineNum">      84 </span><span class="lineCov">          2 :         return nullptr;</span>
 <span class="lineNum">      85 </span>            : }
 </pre>
       </td>

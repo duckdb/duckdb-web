@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - include/optimizer/join_order/relation.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">include/optimizer/join_order</a> - relation.hpp<span style="font-size: 80%;"> (source / <a href="relation.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-14 17:41:24</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : //===----------------------------------------------------------------------===//</a>
+<span class="lineNum">       2 </span>            : //                         DuckDB
+<span class="lineNum">       3 </span>            : //
+<span class="lineNum">       4 </span>            : // optimizer/join_order/relation.hpp
+<span class="lineNum">       5 </span>            : //
+<span class="lineNum">       6 </span>            : //
+<span class="lineNum">       7 </span>            : //===----------------------------------------------------------------------===//
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span>            : #pragma once
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : #include &quot;common/common.hpp&quot;
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            : #include &lt;unordered_set&gt;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span>            : namespace duckdb {
+<span class="lineNum">      16 </span>            : class LogicalOperator;
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : //! Represents a single relation and any metadata accompanying that relation
+<span class="lineNum">      19 </span>            : struct Relation {
+<span class="lineNum">      20 </span>            :         LogicalOperator *op;
+<span class="lineNum">      21 </span>            :         LogicalOperator *parent;
+<span class="lineNum">      22 </span>            : 
+<a name="23"><span class="lineNum">      23 </span>            :         Relation() {</a>
+<span class="lineNum">      24 </span>            :         }
+<span class="lineNum">      25 </span><span class="lineCov">    3297751 :         Relation(LogicalOperator *op, LogicalOperator *parent) : op(op), parent(parent) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    3297751 :         }</span>
+<span class="lineNum">      27 </span>            : };
+<span class="lineNum">      28 </span>            : 
+<a name="29"><span class="lineNum">      29 </span>            : //! Set of relations, used in the join graph.</a>
+<span class="lineNum">      30 </span>            : struct RelationSet {
+<span class="lineNum">      31 </span><span class="lineCov">    1202792 :         RelationSet(unique_ptr&lt;size_t[]&gt; relations, size_t count) : relations(move(relations)), count(count) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">    1202792 :         }</span>
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            :         string ToString();
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            :         unique_ptr&lt;size_t[]&gt; relations;
+<span class="lineNum">      37 </span>            :         size_t count;
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :         static bool IsSubset(RelationSet *super, RelationSet *sub);
+<span class="lineNum">      40 </span>            : };
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : //! The RelationTree is a structure holding all the created RelationSet objects and allowing fast lookup on to them
+<span class="lineNum">      43 </span>            : class RelationSetManager {
+<span class="lineNum">      44 </span>            : public:
+<span class="lineNum">      45 </span>            :         //! Contains a node with a RelationSet and child relations
+<span class="lineNum">      46 </span>            :         // FIXME: this structure is inefficient, could use a bitmap for lookup instead (todo: profile)
+<span class="lineNum">      47 </span>            :         struct RelationTreeNode {
+<span class="lineNum">      48 </span>            :                 unique_ptr&lt;RelationSet&gt; relation;
+<span class="lineNum">      49 </span>            :                 unordered_map&lt;size_t, unique_ptr&lt;RelationTreeNode&gt;&gt; children;
+<span class="lineNum">      50 </span>            :         };
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : public:
+<span class="lineNum">      53 </span>            :         //! Create or get a RelationSet from a single node with the given index
+<span class="lineNum">      54 </span>            :         RelationSet *GetRelation(size_t index);
+<span class="lineNum">      55 </span>            :         //! Create or get a RelationSet from a set of relation bindings
+<span class="lineNum">      56 </span>            :         RelationSet *GetRelation(std::unordered_set&lt;size_t&gt; &amp;bindings);
+<span class="lineNum">      57 </span>            :         //! Create or get a RelationSet from a (sorted, duplicate-free!) list of relations
+<span class="lineNum">      58 </span>            :         RelationSet *GetRelation(unique_ptr&lt;size_t[]&gt; relations, size_t count);
+<span class="lineNum">      59 </span>            :         //! Union two sets of relations together and create a new relation set
+<span class="lineNum">      60 </span>            :         RelationSet *Union(RelationSet *left, RelationSet *right);
+<span class="lineNum">      61 </span>            :         //! Create the set difference of left \ right (i.e. all elements in left that are not in right)
+<span class="lineNum">      62 </span>            :         RelationSet *Difference(RelationSet *left, RelationSet *right);
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            : private:
+<span class="lineNum">      65 </span>            :         RelationTreeNode root;
+<span class="lineNum">      66 </span>            : };
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            : } // namespace duckdb
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
