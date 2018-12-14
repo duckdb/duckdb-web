@@ -1,0 +1,25 @@
+<<Query Profiling Information>>
+SELECT sum(j) FROM integers WHERE i > 15000000 and i < 16000000
+<<Timing>>
+Total Time: 0.881828s
+<<Operator Tree>>
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.03s)     |
+|         1        |
+--------------------
+--------------------
+|      FILTER      |
+|   i < 16000000   |
+|   i > 15000000   |
+|      (0.48s)     |
+|      999999      |
+--------------------
+--------------------
+|     SEQ_SCAN     |
+|     integers     |
+|      (0.36s)     |
+|     100000000    |
+--------------------
+
+INCORRECT RESULT: Incorrect result returned, expected -552471264
