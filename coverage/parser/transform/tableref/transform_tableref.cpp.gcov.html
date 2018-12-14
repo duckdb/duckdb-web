@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - parser/transform/tableref/transform_tableref.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 8a760df3 - parser/transform/tableref/transform_tableref.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
+            <td class="headerValue">DuckDB Code Coverage Report 8a760df3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-14 17:41:24</td>
+            <td class="headerValue">2018-12-14 23:15:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -66,10 +66,10 @@
 <span class="lineNum">       4 </span>            : using namespace postgres;
 <a name="5"><span class="lineNum">       5 </span>            : using namespace std;</a>
 <span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span><span class="lineCov">    2700205 : unique_ptr&lt;TableRef&gt; Transformer::TransformTableRefNode(Node *n) {</span>
-<span class="lineNum">       8 </span><span class="lineCov">    2700205 :         switch (n-&gt;type) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    2644420 :         case T_RangeVar:</span>
-<span class="lineNum">      10 </span><span class="lineCov">    2644420 :                 return TransformRangeVar(reinterpret_cast&lt;RangeVar *&gt;(n));</span>
+<span class="lineNum">       7 </span><span class="lineCov">    2700092 : unique_ptr&lt;TableRef&gt; Transformer::TransformTableRefNode(Node *n) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    2700092 :         switch (n-&gt;type) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    2644294 :         case T_RangeVar:</span>
+<span class="lineNum">      10 </span><span class="lineCov">    2644294 :                 return TransformRangeVar(reinterpret_cast&lt;RangeVar *&gt;(n));</span>
 <span class="lineNum">      11 </span><span class="lineCov">      55751 :         case T_JoinExpr:</span>
 <span class="lineNum">      12 </span><span class="lineCov">      55751 :                 return TransformJoin(reinterpret_cast&lt;JoinExpr *&gt;(n));</span>
 <span class="lineNum">      13 </span><span class="lineCov">        127 :         case T_RangeSubselect:</span>

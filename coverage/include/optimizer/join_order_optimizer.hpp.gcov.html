@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report fa9ba4bf - include/optimizer/join_order_optimizer.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 8a760df3 - include/optimizer/join_order_optimizer.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report fa9ba4bf</td>
+            <td class="headerValue">DuckDB Code Coverage Report 8a760df3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">6</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-14 17:41:24</td>
+            <td class="headerValue">2018-12-14 23:15:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -103,13 +103,13 @@
 <span class="lineNum">      41 </span>            :                 }
 <a name="42"><span class="lineNum">      42 </span>            : </a>
 <span class="lineNum">      43 </span>            :                 //! Create a leaf node in the join tree
-<span class="lineNum">      44 </span><span class="lineCov">     451638 :                 JoinNode(RelationSet *set, size_t cardinality)</span>
-<span class="lineNum">      45 </span><span class="lineCov">     451638 :                     : set(set), info(nullptr), cardinality(cardinality), cost(cardinality), left(nullptr), right(nullptr) {</span>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">     451638 :                 }</span></a>
+<span class="lineNum">      44 </span><span class="lineCov">     451772 :                 JoinNode(RelationSet *set, size_t cardinality)</span>
+<span class="lineNum">      45 </span><span class="lineCov">     451772 :                     : set(set), info(nullptr), cardinality(cardinality), cost(cardinality), left(nullptr), right(nullptr) {</span>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">     451772 :                 }</span></a>
 <span class="lineNum">      47 </span>            :                 //! Create an intermediate node in the join tree
-<span class="lineNum">      48 </span><span class="lineCov">   19660452 :                 JoinNode(RelationSet *set, NeighborInfo *info, JoinNode *left, JoinNode *right, size_t cardinality, size_t cost)</span>
-<span class="lineNum">      49 </span><span class="lineCov">   19660452 :                     : set(set), info(info), cardinality(cardinality), cost(cost), left(left), right(right) {</span>
-<span class="lineNum">      50 </span><span class="lineCov">   19660452 :                 }</span>
+<span class="lineNum">      48 </span><span class="lineCov">   19660546 :                 JoinNode(RelationSet *set, NeighborInfo *info, JoinNode *left, JoinNode *right, size_t cardinality, size_t cost)</span>
+<span class="lineNum">      49 </span><span class="lineCov">   19660546 :                     : set(set), info(info), cardinality(cardinality), cost(cost), left(left), right(right) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">   19660546 :                 }</span>
 <span class="lineNum">      51 </span>            :         };
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span>            : public:
