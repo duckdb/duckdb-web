@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 8a760df3 - parser/transform/tableref/transform_from.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - parser/transform/tableref/transform_from.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 8a760df3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">21</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-14 23:15:07</td>
+            <td class="headerValue">2018-12-15 11:38:29</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,12 +67,12 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    3019740 : unique_ptr&lt;TableRef&gt; Transformer::TransformFrom(List *root) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    3019740 :         if (!root) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3019575 : unique_ptr&lt;TableRef&gt; Transformer::TransformFrom(List *root) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    3019575 :         if (!root) {</span>
 <span class="lineNum">      10 </span><span class="lineCov">     659226 :                 return nullptr;</span>
 <span class="lineNum">      11 </span>            :         }
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    2360514 :         if (root-&gt;length &gt; 1) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    2360349 :         if (root-&gt;length &gt; 1) {</span>
 <span class="lineNum">      14 </span>            :                 // Cross Product
 <span class="lineNum">      15 </span><span class="lineCov">     245602 :                 auto result = make_unique&lt;CrossProductRef&gt;();</span>
 <span class="lineNum">      16 </span><span class="lineCov">     122801 :                 CrossProductRef *cur_root = result.get();</span>
@@ -94,8 +94,8 @@
 <span class="lineNum">      32 </span><span class="lineCov">     122801 :                 return move(result);</span>
 <span class="lineNum">      33 </span>            :         }
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">    2237713 :         Node *n = reinterpret_cast&lt;Node *&gt;(root-&gt;head-&gt;data.ptr_value);</span>
-<span class="lineNum">      36 </span><span class="lineCov">    2237713 :         return TransformTableRefNode(n);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    2237548 :         Node *n = reinterpret_cast&lt;Node *&gt;(root-&gt;head-&gt;data.ptr_value);</span>
+<span class="lineNum">      36 </span><span class="lineCov">    2237548 :         return TransformTableRefNode(n);</span>
 <span class="lineNum">      37 </span>            : }
 </pre>
       </td>
