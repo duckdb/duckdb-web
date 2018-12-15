@@ -1,0 +1,250 @@
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) sum_agg FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manufact_id = 128 AND dt.d_moy=11 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, sum_agg DESC, brand_id LIMIT 100;
+<<Timing>>
+Total Time: 0.088008s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+|    ss_item_sk    |                    |                  |
+|    =i_item_sk    |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     |
+|       6656       |                    |       6000       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||   i_manufact_id  ||     date_dim     |
+|                  ||       = 128      ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        39        ||       73049      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       item       |
+                    |      (0.00s)     |
+                    |       18000      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) sum_agg FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manufact_id = 128 AND dt.d_moy=11 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, sum_agg DESC, brand_id LIMIT 100;
+<<Timing>>
+Total Time: 0.084102s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+|    ss_item_sk    |                    |                  |
+|    =i_item_sk    |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     |
+|       6656       |                    |       6000       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||   i_manufact_id  ||     date_dim     |
+|                  ||       = 128      ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        39        ||       73049      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       item       |
+                    |      (0.00s)     |
+                    |       18000      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) sum_agg FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manufact_id = 128 AND dt.d_moy=11 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, sum_agg DESC, brand_id LIMIT 100;
+<<Timing>>
+Total Time: 0.088406s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+|    ss_item_sk    |                    |                  |
+|    =i_item_sk    |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     |
+|       6656       |                    |       6000       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||   i_manufact_id  ||     date_dim     |
+|                  ||       = 128      ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        39        ||       73049      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       item       |
+                    |      (0.00s)     |
+                    |       18000      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) sum_agg FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manufact_id = 128 AND dt.d_moy=11 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, sum_agg DESC, brand_id LIMIT 100;
+<<Timing>>
+Total Time: 0.085100s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+|    ss_item_sk    |                    |                  |
+|    =i_item_sk    |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     |
+|       6656       |                    |       6000       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||   i_manufact_id  ||     date_dim     |
+|                  ||       = 128      ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        39        ||       73049      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       item       |
+                    |      (0.00s)     |
+                    |       18000      |
+                    --------------------
+
+<<Query Profiling Information>>
+SELECT dt.d_year, item.i_brand_id brand_id, item.i_brand brand, sum(ss_ext_sales_price) sum_agg FROM date_dim dt, store_sales, item WHERE dt.d_date_sk = store_sales.ss_sold_date_sk AND store_sales.ss_item_sk = item.i_item_sk AND item.i_manufact_id = 128 AND dt.d_moy=11 GROUP BY dt.d_year, item.i_brand, item.i_brand_id ORDER BY dt.d_year, sum_agg DESC, brand_id LIMIT 100;
+<<Timing>>
+Total Time: 0.085874s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.00s)     |
+|        89        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  ss_sold_date_sk |
+|    =d_date_sk    |
+|      (0.01s)     |
+|       1024       |
+--------------------
+--------------------                    --------------------
+|     HASH_JOIN    |                    |      FILTER      |
+|       INNER      |                    |    d_moy = 11    |
+|    ss_item_sk    |                    |                  |
+|    =i_item_sk    |                    |                  |
+|      (0.05s)     |                    |      (0.00s)     |
+|       6656       |                    |       6000       |
+--------------------                    --------------------
+------------------------------------------------------------
+|     SEQ_SCAN     ||      FILTER      ||     SEQ_SCAN     |
+|    store_sales   ||   i_manufact_id  ||     date_dim     |
+|                  ||       = 128      ||                  |
+|      (0.02s)     ||      (0.00s)     ||      (0.00s)     |
+|      2880404     ||        39        ||       73049      |
+------------------------------------------------------------
+                    --------------------
+                    |     SEQ_SCAN     |
+                    |       item       |
+                    |      (0.00s)     |
+                    |       18000      |
+                    --------------------
+
