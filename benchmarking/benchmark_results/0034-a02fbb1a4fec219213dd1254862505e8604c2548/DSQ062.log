@@ -1,0 +1,109 @@
+<<Query Profiling Information>>
+WITH ss_items AS (SELECT i_item_id item_id, sum(ss_ext_sales_price) ss_item_rev FROM store_sales, item, date_dim WHERE ss_item_sk = i_item_sk AND d_date IN (SELECT d_date FROM date_dim WHERE d_week_seq = (SELECT d_week_seq FROM date_dim WHERE d_date = '2000-01-03')) AND ss_sold_date_sk = d_date_sk GROUP BY i_item_id), cs_items AS (SELECT i_item_id item_id, sum(cs_ext_sales_price) cs_item_rev FROM catalog_sales, item, date_dim WHERE cs_item_sk = i_item_sk AND d_date IN (SELECT d_date FROM date_dim WHERE d_week_seq = (SELECT d_week_seq FROM date_dim WHERE d_date = '2000-01-03')) AND cs_sold_date_sk = d_date_sk GROUP BY i_item_id), ws_items AS (SELECT i_item_id item_id, sum(ws_ext_sales_price) ws_item_rev FROM web_sales, item, date_dim WHERE ws_item_sk = i_item_sk AND d_date IN (SELECT d_date FROM date_dim WHERE d_week_seq = (SELECT d_week_seq FROM date_dim WHERE d_date = '2000-01-03')) AND ws_sold_date_sk = d_date_sk GROUP BY i_item_id) SELECT ss_items.item_id, ss_item_rev, ss_item_rev/((ss_item_rev+cs_item_rev+ws_item_rev)/3) * 100 ss_dev, cs_item_rev, cs_item_rev/((ss_item_rev+cs_item_rev+ws_item_rev)/3) * 100 cs_dev, ws_item_rev, ws_item_rev/((ss_item_rev+cs_item_rev+ws_item_rev)/3) * 100 ws_dev, (ss_item_rev+cs_item_rev+ws_item_rev)/3 average FROM ss_items, cs_items, ws_items WHERE ss_items.item_id=cs_items.item_id AND ss_items.item_id=ws_items.item_id AND ss_item_rev BETWEEN 0.9 * cs_item_rev AND 1.1 * cs_item_rev AND ss_item_rev BETWEEN 0.9 * ws_item_rev AND 1.1 * ws_item_rev AND cs_item_rev BETWEEN 0.9 * ss_item_rev AND 1.1 * ss_item_rev AND cs_item_rev BETWEEN 0.9 * ws_item_rev AND 1.1 * ws_item_rev AND ws_item_rev BETWEEN 0.9 * ss_item_rev AND 1.1 * ss_item_rev AND ws_item_rev BETWEEN 0.9 * cs_item_rev AND 1.1 * cs_item_rev ORDER BY ss_items.item_id, ss_item_rev LIMIT 100;
+<<Timing>>
+Total Time: 30.339041s
+<<Operator Tree>>
+--------------------
+|       LIMIT      |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|    PROJECTION    |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|  item_id=item_id |
+|  item_id=item_id |
+|    ss_item_rev   |
+|     >=(0.900     |
+| 000 * cs_item_re |
+|         v        |
+|    ss_item_rev   |
+|     <=(1.100     |
+| 000 * cs_item_re |
+|      (0.00s)     |
+|         0        |
+--------------------
+--------------------                                                            --------------------
+|   HASH_GROUP_BY  |                                                            | NESTED_LOOP_JOIN |
+|                  |                                                            |       INNER      |
+|                  |                                                            |    cs_item_rev   |
+|                  |                                                            |     >=(0.900     |
+|                  |                                                            | 000 * ws_item_re |
+|                  |                                                            |         v        |
+|                  |                                                            |    cs_item_rev   |
+|                  |                                                            |     <=(1.100     |
+|                  |                                                            | 000 * ws_item_re |
+|                  |                                                            |         v        |
+|                  |                                                            |     0.900000     |
+|      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |
+--------------------                                                            --------------------
+--------------------                                                            --------------------                                                            --------------------
+|     HASH_JOIN    |                                                            |   HASH_GROUP_BY  |                                                            |   HASH_GROUP_BY  |
+|       INNER      |                                                            |                  |                                                            |                  |
+|  ss_sold_date_sk |                                                            |                  |                                                            |                  |
+|    =d_date_sk    |                                                            |                  |                                                            |                  |
+|      (0.00s)     |                                                            |      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                                                            |         0        |                                                            |         0        |
+--------------------                                                            --------------------                                                            --------------------
+--------------------                    --------------------                    --------------------                                                            --------------------
+|     HASH_JOIN    |                    |     HASH_JOIN    |                    |     HASH_JOIN    |                                                            |     HASH_JOIN    |
+|       INNER      |                    |       SEMI       |                    |       INNER      |                                                            |       INNER      |
+|    ss_item_sk    |                    |     d_date=#0    |                    |  cs_sold_date_sk |                                                            |  ws_sold_date_sk |
+|    =i_item_sk    |                    |                  |                    |    =d_date_sk    |                                                            |    =d_date_sk    |
+|      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                                                            |      (0.00s)     |
+|         0        |                    |         0        |                    |         0        |                                                            |         0        |
+--------------------                    --------------------                    --------------------                                                            --------------------
+----------------------------------------------------------------------------------------------------                    --------------------                    --------------------                    --------------------
+|     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||    PROJECTION    ||     HASH_JOIN    |                    |     HASH_JOIN    |                    |     HASH_JOIN    |                    |     HASH_JOIN    |
+|    store_sales   ||       item       ||     date_dim     ||                  ||       INNER      |                    |       SEMI       |                    |       INNER      |                    |       SEMI       |
+|                  ||                  ||                  ||                  ||    cs_item_sk    |                    |     d_date=#0    |                    |    ws_item_sk    |                    |     d_date=#0    |
+|                  ||                  ||                  ||                  ||    =i_item_sk    |                    |                  |                    |    =i_item_sk    |                    |                  |
+|      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |                    |      (0.00s)     |
+|         0        ||         0        ||         0        ||         0        ||         0        |                    |         0        |                    |         0        |                    |         0        |
+----------------------------------------------------------------------------------------------------                    --------------------                    --------------------                    --------------------
+                                                            ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                            |      FILTER      ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||    PROJECTION    ||     SEQ_SCAN     ||     SEQ_SCAN     ||     SEQ_SCAN     ||    PROJECTION    |
+                                                            |    d_week_seq    ||   catalog_sales  ||       item       ||     date_dim     ||                  ||     web_sales    ||       item       ||     date_dim     ||                  |
+                                                            |     = SUBQUERY   ||                  ||                  ||                  ||                  ||                  ||                  ||                  ||                  |
+                                                            |      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     ||      (0.00s)     |
+                                                            |         0        ||         0        ||         0        ||         0        ||         0        ||         0        ||         0        ||         0        ||         0        |
+                                                            ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                            --------------------                                                            --------------------                                                            --------------------
+                                                            |     SEQ_SCAN     |                                                            |      FILTER      |                                                            |      FILTER      |
+                                                            |     date_dim     |                                                            |    d_week_seq    |                                                            |    d_week_seq    |
+                                                            |                  |                                                            |     = SUBQUERY   |                                                            |     = SUBQUERY   |
+                                                            |      (0.00s)     |                                                            |      (0.00s)     |                                                            |      (0.01s)     |
+                                                            |         0        |                                                            |         0        |                                                            |         0        |
+                                                            --------------------                                                            --------------------                                                            --------------------
+                                                                                                                                            --------------------                                                            ----------------------------------------
+                                                                                                                                            |     SEQ_SCAN     |                                                            |     SEQ_SCAN     ||    PROJECTION    |
+                                                                                                                                            |     date_dim     |                                                            |     date_dim     ||                  |
+                                                                                                                                            |      (0.00s)     |                                                            |      (0.00s)     ||      (0.00s)     |
+                                                                                                                                            |         0        |                                                            |       7168       ||       6216       |
+                                                                                                                                            --------------------                                                            ----------------------------------------
+                                                                                                                                                                                                                                                --------------------
+                                                                                                                                                                                                                                                |      FILTER      |
+                                                                                                                                                                                                                                                |   CAST[VARCHAR]  |
+                                                                                                                                                                                                                                                |     (d_date)     |
+                                                                                                                                                                                                                                                |    = 2000-01-03  |
+                                                                                                                                                                                                                                                |     (29.51s)     |
+                                                                                                                                                                                                                                                |       6216       |
+                                                                                                                                                                                                                                                --------------------
+                                                                                                                                                                                                                                                --------------------
+                                                                                                                                                                                                                                                |     SEQ_SCAN     |
+                                                                                                                                                                                                                                                |     date_dim     |
+                                                                                                                                                                                                                                                |      (0.79s)     |
+                                                                                                                                                                                                                                                |     229153792    |
+                                                                                                                                                                                                                                                --------------------
+

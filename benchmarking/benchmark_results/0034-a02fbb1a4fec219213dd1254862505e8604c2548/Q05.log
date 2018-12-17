@@ -1,0 +1,355 @@
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 13.485727s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    l_orderkey    |
+|    =o_orderkey   |
+|     l_suppkey    |
+|    =s_suppkey    |
+|      (7.84s)     |
+|       7243       |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     HASH_JOIN    |
+|     lineitem     ||       INNER      |
+|                  ||     o_custkey    |
+|                  ||    =c_custkey    |
+|      (0.05s)     ||      (4.77s)     |
+|      6001215     ||     18435748     |
+----------------------------------------
+                    ----------------------------------------
+                    |      FILTER      ||     HASH_JOIN    |
+                    |    o_orderdate   ||       INNER      |
+                    |    < 1995-01-01  ||    c_nationkey   |
+                    |    o_orderdate   ||   =s_nationkey   |
+                    |   >= 1994-01-01  ||                  |
+                    |      (0.01s)     ||      (0.42s)     |
+                    |      227597      ||     12093991     |
+                    ----------------------------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |
+                    |      orders      ||     customer     ||       INNER      |
+                    |                  ||                  ||    s_nationkey   |
+                    |                  ||                  ||   =n_nationkey   |
+                    |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+                    |      1500000     ||      150000      ||       2003       |
+                    ------------------------------------------------------------
+                                                            ----------------------------------------
+                                                            |     SEQ_SCAN     ||     HASH_JOIN    |
+                                                            |     supplier     ||       INNER      |
+                                                            |                  ||    n_regionkey   |
+                                                            |                  ||   =r_regionkey   |
+                                                            |      (0.00s)     ||      (0.00s)     |
+                                                            |       10000      ||         5        |
+                                                            ----------------------------------------
+                                                                                ----------------------------------------
+                                                                                |     SEQ_SCAN     ||      FILTER      |
+                                                                                |      nation      ||   r_name = ASIA  |
+                                                                                |      (0.00s)     ||      (0.00s)     |
+                                                                                |        25        ||         1        |
+                                                                                ----------------------------------------
+                                                                                                    --------------------
+                                                                                                    |     SEQ_SCAN     |
+                                                                                                    |      region      |
+                                                                                                    |      (0.00s)     |
+                                                                                                    |         5        |
+                                                                                                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 13.322365s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    l_orderkey    |
+|    =o_orderkey   |
+|     l_suppkey    |
+|    =s_suppkey    |
+|      (7.69s)     |
+|       7243       |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     HASH_JOIN    |
+|     lineitem     ||       INNER      |
+|                  ||     o_custkey    |
+|                  ||    =c_custkey    |
+|      (0.05s)     ||      (4.78s)     |
+|      6001215     ||     18435748     |
+----------------------------------------
+                    ----------------------------------------
+                    |      FILTER      ||     HASH_JOIN    |
+                    |    o_orderdate   ||       INNER      |
+                    |    < 1995-01-01  ||    c_nationkey   |
+                    |    o_orderdate   ||   =s_nationkey   |
+                    |   >= 1994-01-01  ||                  |
+                    |      (0.01s)     ||      (0.42s)     |
+                    |      227597      ||     12093991     |
+                    ----------------------------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |
+                    |      orders      ||     customer     ||       INNER      |
+                    |                  ||                  ||    s_nationkey   |
+                    |                  ||                  ||   =n_nationkey   |
+                    |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+                    |      1500000     ||      150000      ||       2003       |
+                    ------------------------------------------------------------
+                                                            ----------------------------------------
+                                                            |     SEQ_SCAN     ||     HASH_JOIN    |
+                                                            |     supplier     ||       INNER      |
+                                                            |                  ||    n_regionkey   |
+                                                            |                  ||   =r_regionkey   |
+                                                            |      (0.00s)     ||      (0.00s)     |
+                                                            |       10000      ||         5        |
+                                                            ----------------------------------------
+                                                                                ----------------------------------------
+                                                                                |     SEQ_SCAN     ||      FILTER      |
+                                                                                |      nation      ||   r_name = ASIA  |
+                                                                                |      (0.00s)     ||      (0.00s)     |
+                                                                                |        25        ||         1        |
+                                                                                ----------------------------------------
+                                                                                                    --------------------
+                                                                                                    |     SEQ_SCAN     |
+                                                                                                    |      region      |
+                                                                                                    |      (0.00s)     |
+                                                                                                    |         5        |
+                                                                                                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 13.379211s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    l_orderkey    |
+|    =o_orderkey   |
+|     l_suppkey    |
+|    =s_suppkey    |
+|      (7.76s)     |
+|       7243       |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     HASH_JOIN    |
+|     lineitem     ||       INNER      |
+|                  ||     o_custkey    |
+|                  ||    =c_custkey    |
+|      (0.05s)     ||      (4.79s)     |
+|      6001215     ||     18435748     |
+----------------------------------------
+                    ----------------------------------------
+                    |      FILTER      ||     HASH_JOIN    |
+                    |    o_orderdate   ||       INNER      |
+                    |    < 1995-01-01  ||    c_nationkey   |
+                    |    o_orderdate   ||   =s_nationkey   |
+                    |   >= 1994-01-01  ||                  |
+                    |      (0.01s)     ||      (0.42s)     |
+                    |      227597      ||     12093991     |
+                    ----------------------------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |
+                    |      orders      ||     customer     ||       INNER      |
+                    |                  ||                  ||    s_nationkey   |
+                    |                  ||                  ||   =n_nationkey   |
+                    |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+                    |      1500000     ||      150000      ||       2003       |
+                    ------------------------------------------------------------
+                                                            ----------------------------------------
+                                                            |     SEQ_SCAN     ||     HASH_JOIN    |
+                                                            |     supplier     ||       INNER      |
+                                                            |                  ||    n_regionkey   |
+                                                            |                  ||   =r_regionkey   |
+                                                            |      (0.00s)     ||      (0.00s)     |
+                                                            |       10000      ||         5        |
+                                                            ----------------------------------------
+                                                                                ----------------------------------------
+                                                                                |     SEQ_SCAN     ||      FILTER      |
+                                                                                |      nation      ||   r_name = ASIA  |
+                                                                                |      (0.00s)     ||      (0.00s)     |
+                                                                                |        25        ||         1        |
+                                                                                ----------------------------------------
+                                                                                                    --------------------
+                                                                                                    |     SEQ_SCAN     |
+                                                                                                    |      region      |
+                                                                                                    |      (0.00s)     |
+                                                                                                    |         5        |
+                                                                                                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 13.421860s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    l_orderkey    |
+|    =o_orderkey   |
+|     l_suppkey    |
+|    =s_suppkey    |
+|      (7.75s)     |
+|       7243       |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     HASH_JOIN    |
+|     lineitem     ||       INNER      |
+|                  ||     o_custkey    |
+|                  ||    =c_custkey    |
+|      (0.05s)     ||      (4.80s)     |
+|      6001215     ||     18435748     |
+----------------------------------------
+                    ----------------------------------------
+                    |      FILTER      ||     HASH_JOIN    |
+                    |    o_orderdate   ||       INNER      |
+                    |    < 1995-01-01  ||    c_nationkey   |
+                    |    o_orderdate   ||   =s_nationkey   |
+                    |   >= 1994-01-01  ||                  |
+                    |      (0.01s)     ||      (0.43s)     |
+                    |      227597      ||     12093991     |
+                    ----------------------------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |
+                    |      orders      ||     customer     ||       INNER      |
+                    |                  ||                  ||    s_nationkey   |
+                    |                  ||                  ||   =n_nationkey   |
+                    |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+                    |      1500000     ||      150000      ||       2003       |
+                    ------------------------------------------------------------
+                                                            ----------------------------------------
+                                                            |     SEQ_SCAN     ||     HASH_JOIN    |
+                                                            |     supplier     ||       INNER      |
+                                                            |                  ||    n_regionkey   |
+                                                            |                  ||   =r_regionkey   |
+                                                            |      (0.00s)     ||      (0.00s)     |
+                                                            |       10000      ||         5        |
+                                                            ----------------------------------------
+                                                                                ----------------------------------------
+                                                                                |     SEQ_SCAN     ||      FILTER      |
+                                                                                |      nation      ||   r_name = ASIA  |
+                                                                                |      (0.00s)     ||      (0.00s)     |
+                                                                                |        25        ||         1        |
+                                                                                ----------------------------------------
+                                                                                                    --------------------
+                                                                                                    |     SEQ_SCAN     |
+                                                                                                    |      region      |
+                                                                                                    |      (0.00s)     |
+                                                                                                    |         5        |
+                                                                                                    --------------------
+
+<<Query Profiling Information>>
+select  n_name,  sum(l_extendedprice * (1 - l_discount)) as revenue from  customer,  orders,  lineitem,  supplier,  nation,  region where  c_custkey = o_custkey  and l_orderkey = o_orderkey  and l_suppkey = s_suppkey  and c_nationkey = s_nationkey  and s_nationkey = n_nationkey  and n_regionkey = r_regionkey  and r_name = 'ASIA'  and o_orderdate >= cast('1994-01-01' as date)  and o_orderdate < cast('1995-01-01' as date) group by  n_name order by  revenue desc; 
+<<Timing>>
+Total Time: 13.468841s
+<<Operator Tree>>
+--------------------
+|     ORDER_BY     |
+|      (0.00s)     |
+|         5        |
+--------------------
+--------------------
+|   HASH_GROUP_BY  |
+|      (0.01s)     |
+|         5        |
+--------------------
+--------------------
+|     HASH_JOIN    |
+|       INNER      |
+|    l_orderkey    |
+|    =o_orderkey   |
+|     l_suppkey    |
+|    =s_suppkey    |
+|      (7.75s)     |
+|       7243       |
+--------------------
+----------------------------------------
+|     SEQ_SCAN     ||     HASH_JOIN    |
+|     lineitem     ||       INNER      |
+|                  ||     o_custkey    |
+|                  ||    =c_custkey    |
+|      (0.05s)     ||      (4.88s)     |
+|      6001215     ||     18435748     |
+----------------------------------------
+                    ----------------------------------------
+                    |      FILTER      ||     HASH_JOIN    |
+                    |    o_orderdate   ||       INNER      |
+                    |    < 1995-01-01  ||    c_nationkey   |
+                    |    o_orderdate   ||   =s_nationkey   |
+                    |   >= 1994-01-01  ||                  |
+                    |      (0.01s)     ||      (0.42s)     |
+                    |      227597      ||     12093991     |
+                    ----------------------------------------
+                    ------------------------------------------------------------
+                    |     SEQ_SCAN     ||     SEQ_SCAN     ||     HASH_JOIN    |
+                    |      orders      ||     customer     ||       INNER      |
+                    |                  ||                  ||    s_nationkey   |
+                    |                  ||                  ||   =n_nationkey   |
+                    |      (0.01s)     ||      (0.00s)     ||      (0.00s)     |
+                    |      1500000     ||      150000      ||       2003       |
+                    ------------------------------------------------------------
+                                                            ----------------------------------------
+                                                            |     SEQ_SCAN     ||     HASH_JOIN    |
+                                                            |     supplier     ||       INNER      |
+                                                            |                  ||    n_regionkey   |
+                                                            |                  ||   =r_regionkey   |
+                                                            |      (0.00s)     ||      (0.00s)     |
+                                                            |       10000      ||         5        |
+                                                            ----------------------------------------
+                                                                                ----------------------------------------
+                                                                                |     SEQ_SCAN     ||      FILTER      |
+                                                                                |      nation      ||   r_name = ASIA  |
+                                                                                |      (0.00s)     ||      (0.00s)     |
+                                                                                |        25        ||         1        |
+                                                                                ----------------------------------------
+                                                                                                    --------------------
+                                                                                                    |     SEQ_SCAN     |
+                                                                                                    |      region      |
+                                                                                                    |      (0.00s)     |
+                                                                                                    |         5        |
+                                                                                                    --------------------
+
