@@ -1,4 +1,4 @@
-{ "result": 30.342467,
+{ "result": 30.340112,
 "tree": { "name": "LIMIT",
 "timing":0.00,
 "cardinality":0,
@@ -7,7 +7,7 @@
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
-"children": [{ "name": "PROJECTION",
+"children": [{ "name": "HASH_GROUP_BY",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
@@ -20,6 +20,10 @@
 "cardinality":0,
 "extra_info": "",
 "children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
@@ -31,28 +35,24 @@
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
-"children": [{ "name": "PROJECTION",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "",
 "children": [{ "name": "FILTER",
-"timing":27.34,
+"timing":4.64,
 "cardinality":0,
-"extra_info": "(s_state = TN)\n(d_year = 2002)\n(cd_education_status = College)\n(cd_marital_status = S)\n(cd_gender = M)\n(ss_cdemo_sk = cd_demo_sk)\n(ss_store_sk = s_store_sk)\n(ss_item_sk = i_item_sk)\n(ss_sold_date_sk = d_date_sk)\n",
+"extra_info": "(ca_gmt_offset = -5.000000)\n(ss_addr_sk = ca_address_sk)\n(d_moy = 9)\n(d_year = 1998)\n(ss_sold_date_sk = d_date_sk)\n(ss_item_sk = i_item_sk)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":24.34,
+"cardinality":135237844,
+"extra_info": "SEMI\ni_item_id=#0\n",
 "children": [{ "name": "CROSS_PRODUCT",
-"timing":2.73,
-"cardinality":666109248,
+"timing":1.11,
+"cardinality":605345792,
 "extra_info": "",
 "children": [{ "name": "CROSS_PRODUCT",
 "timing":0.00,
-"cardinality":37008,
+"cardinality":33792,
 "extra_info": "",
 "children": [{ "name": "CROSS_PRODUCT",
 "timing":0.00,
-"cardinality":4096,
-"extra_info": "",
-"children": [{ "name": "CROSS_PRODUCT",
-"timing":0.09,
 "cardinality":1024,
 "extra_info": "",
 "children": [{ "name": "SEQ_SCAN",
@@ -60,15 +60,6 @@
 "cardinality":1024,
 "extra_info": "store_sales",
 "children": []
-}
-,
-{ "name": "SEQ_SCAN",
-"timing":0.03,
-"cardinality":1920800,
-"extra_info": "customer_demographics",
-"children": []
-}
-]
 }
 ,
 { "name": "SEQ_SCAN",
@@ -82,14 +73,31 @@
 ,
 { "name": "SEQ_SCAN",
 "timing":0.00,
-"cardinality":12,
-"extra_info": "store",
+"cardinality":50000,
+"extra_info": "customer_address",
 "children": []
 }
 ]
 }
 ,
 { "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1863,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1863,
+"extra_info": "(i_category = Music)\n",
+"children": [{ "name": "SEQ_SCAN",
 "timing":0.00,
 "cardinality":18000,
 "extra_info": "item",
@@ -105,12 +113,12 @@
 }
 ]
 }
+]
+}
+]
+}
 ,
 { "name": "PROJECTION",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "",
-"children": [{ "name": "HASH_GROUP_BY",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
@@ -118,14 +126,18 @@
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
-"children": [{ "name": "FILTER",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "(s_state = TN)\n(d_year = 2002)\n(cd_education_status = College)\n(cd_marital_status = S)\n(cd_gender = M)\n(ss_cdemo_sk = cd_demo_sk)\n(ss_store_sk = s_store_sk)\n(ss_item_sk = i_item_sk)\n(ss_sold_date_sk = d_date_sk)\n",
-"children": [{ "name": "CROSS_PRODUCT",
+"children": [{ "name": "HASH_GROUP_BY",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(ca_gmt_offset = -5.000000)\n(cs_bill_addr_sk = ca_address_sk)\n(d_moy = 9)\n(d_year = 1998)\n(cs_sold_date_sk = d_date_sk)\n(cs_item_sk = i_item_sk)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SEMI\ni_item_id=#0\n",
 "children": [{ "name": "CROSS_PRODUCT",
 "timing":0.00,
 "cardinality":0,
@@ -141,17 +153,8 @@
 "children": [{ "name": "SEQ_SCAN",
 "timing":0.00,
 "cardinality":0,
-"extra_info": "store_sales",
+"extra_info": "catalog_sales",
 "children": []
-}
-,
-{ "name": "SEQ_SCAN",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "customer_demographics",
-"children": []
-}
-]
 }
 ,
 { "name": "SEQ_SCAN",
@@ -166,13 +169,30 @@
 { "name": "SEQ_SCAN",
 "timing":0.00,
 "cardinality":0,
-"extra_info": "store",
+"extra_info": "customer_address",
 "children": []
 }
 ]
 }
 ,
 { "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_category = Music)\n",
+"children": [{ "name": "SEQ_SCAN",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "item",
@@ -192,12 +212,12 @@
 }
 ]
 }
+]
+}
+]
+}
 ,
 { "name": "PROJECTION",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "",
-"children": [{ "name": "HASH_GROUP_BY",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
@@ -205,14 +225,18 @@
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
-"children": [{ "name": "FILTER",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "(s_state = TN)\n(d_year = 2002)\n(cd_education_status = College)\n(cd_marital_status = S)\n(cd_gender = M)\n(ss_cdemo_sk = cd_demo_sk)\n(ss_store_sk = s_store_sk)\n(ss_item_sk = i_item_sk)\n(ss_sold_date_sk = d_date_sk)\n",
-"children": [{ "name": "CROSS_PRODUCT",
+"children": [{ "name": "HASH_GROUP_BY",
 "timing":0.00,
 "cardinality":0,
 "extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(ca_gmt_offset = -5.000000)\n(ws_bill_addr_sk = ca_address_sk)\n(d_moy = 9)\n(d_year = 1998)\n(ws_sold_date_sk = d_date_sk)\n(ws_item_sk = i_item_sk)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SEMI\ni_item_id=#0\n",
 "children": [{ "name": "CROSS_PRODUCT",
 "timing":0.00,
 "cardinality":0,
@@ -228,17 +252,8 @@
 "children": [{ "name": "SEQ_SCAN",
 "timing":0.00,
 "cardinality":0,
-"extra_info": "store_sales",
+"extra_info": "web_sales",
 "children": []
-}
-,
-{ "name": "SEQ_SCAN",
-"timing":0.00,
-"cardinality":0,
-"extra_info": "customer_demographics",
-"children": []
-}
-]
 }
 ,
 { "name": "SEQ_SCAN",
@@ -253,7 +268,7 @@
 { "name": "SEQ_SCAN",
 "timing":0.00,
 "cardinality":0,
-"extra_info": "store",
+"extra_info": "customer_address",
 "children": []
 }
 ]
@@ -264,6 +279,27 @@
 "cardinality":0,
 "extra_info": "item",
 "children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_category = Music)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
 }
 ]
 }
