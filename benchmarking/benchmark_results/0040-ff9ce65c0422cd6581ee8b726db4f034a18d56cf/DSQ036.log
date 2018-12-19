@@ -1,0 +1,322 @@
+{ "result": 30.339015,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":14.28,
+"cardinality":0,
+"extra_info": "(ca_gmt_offset = -5.000000)\n(ss_addr_sk = ca_address_sk)\n(d_moy = 5)\n(d_year = 1998)\n(ss_sold_date_sk = d_date_sk)\n(ss_item_sk = i_item_sk)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":14.44,
+"cardinality":600241857,
+"extra_info": "SEMI\ni_manufact_id=#0\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":1.30,
+"cardinality":681663728,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":37888,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1816,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1816,
+"extra_info": "IN(i_category, Electronics)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(ca_gmt_offset = -5.000000)\n(cs_bill_addr_sk = ca_address_sk)\n(d_moy = 5)\n(d_year = 1998)\n(cs_sold_date_sk = d_date_sk)\n(cs_item_sk = i_item_sk)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SEMI\ni_manufact_id=#0\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "IN(i_category, Electronics)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(ca_gmt_offset = -5.000000)\n(ws_bill_addr_sk = ca_address_sk)\n(d_moy = 5)\n(d_year = 1998)\n(ws_sold_date_sk = d_date_sk)\n(ws_item_sk = i_item_sk)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SEMI\ni_manufact_id=#0\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "IN(i_category, Electronics)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

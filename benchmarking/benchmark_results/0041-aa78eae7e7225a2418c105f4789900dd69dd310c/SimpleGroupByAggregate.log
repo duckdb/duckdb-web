@@ -1,0 +1,70 @@
+{ "result": 0.345747,
+"tree": { "name": "HASH_GROUP_BY",
+"timing":0.31,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.345991,
+"tree": { "name": "HASH_GROUP_BY",
+"timing":0.31,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.345432,
+"tree": { "name": "HASH_GROUP_BY",
+"timing":0.31,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.345012,
+"tree": { "name": "HASH_GROUP_BY",
+"timing":0.31,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.345796,
+"tree": { "name": "HASH_GROUP_BY",
+"timing":0.31,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}

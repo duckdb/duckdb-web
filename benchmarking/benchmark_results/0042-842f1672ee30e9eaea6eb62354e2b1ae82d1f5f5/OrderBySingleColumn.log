@@ -1,0 +1,100 @@
+{ "result": 0.112586,
+"tree": { "name": "ORDER_BY",
+"timing":0.11,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.113765,
+"tree": { "name": "ORDER_BY",
+"timing":0.11,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.113291,
+"tree": { "name": "ORDER_BY",
+"timing":0.11,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.115187,
+"tree": { "name": "ORDER_BY",
+"timing":0.11,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.112814,
+"tree": { "name": "ORDER_BY",
+"timing":0.11,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
