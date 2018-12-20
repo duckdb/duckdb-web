@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - include/optimizer/join_order_optimizer.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - include/optimizer/join_order_optimizer.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">6</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -103,13 +103,13 @@
 <span class="lineNum">      41 </span>            :                 }
 <a name="42"><span class="lineNum">      42 </span>            : </a>
 <span class="lineNum">      43 </span>            :                 //! Create a leaf node in the join tree
-<span class="lineNum">      44 </span><span class="lineCov">     451772 :                 JoinNode(RelationSet *set, size_t cardinality)</span>
-<span class="lineNum">      45 </span><span class="lineCov">     451772 :                     : set(set), info(nullptr), cardinality(cardinality), cost(cardinality), left(nullptr), right(nullptr) {</span>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">     451772 :                 }</span></a>
+<span class="lineNum">      44 </span><span class="lineCov">     455237 :                 JoinNode(RelationSet *set, size_t cardinality)</span>
+<span class="lineNum">      45 </span><span class="lineCov">     455237 :                     : set(set), info(nullptr), cardinality(cardinality), cost(cardinality), left(nullptr), right(nullptr) {</span>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">     455237 :                 }</span></a>
 <span class="lineNum">      47 </span>            :                 //! Create an intermediate node in the join tree
-<span class="lineNum">      48 </span><span class="lineCov">   19660546 :                 JoinNode(RelationSet *set, NeighborInfo *info, JoinNode *left, JoinNode *right, size_t cardinality, size_t cost)</span>
-<span class="lineNum">      49 </span><span class="lineCov">   19660546 :                     : set(set), info(info), cardinality(cardinality), cost(cost), left(left), right(right) {</span>
-<span class="lineNum">      50 </span><span class="lineCov">   19660546 :                 }</span>
+<span class="lineNum">      48 </span><span class="lineCov">   19700377 :                 JoinNode(RelationSet *set, NeighborInfo *info, JoinNode *left, JoinNode *right, size_t cardinality, size_t cost)</span>
+<span class="lineNum">      49 </span><span class="lineCov">   19700377 :                     : set(set), info(info), cardinality(cardinality), cost(cost), left(left), right(right) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">   19700377 :                 }</span>
 <span class="lineNum">      51 </span>            :         };
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span>            : public:
@@ -120,7 +120,7 @@
 <span class="lineNum">      58 </span>            :         unique_ptr&lt;Expression&gt; Visit(SubqueryExpression &amp;expr) override;
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span>            : private:
-<span class="lineNum">      61 </span>            :         //! The total amount of pairs currently considered
+<span class="lineNum">      61 </span>            :         //! The total amount of join pairs that have been considered
 <span class="lineNum">      62 </span>            :         size_t pairs = 0;
 <span class="lineNum">      63 </span>            :         //! Set of all relations considered in the join optimizer
 <span class="lineNum">      64 </span>            :         vector&lt;unique_ptr&lt;Relation&gt;&gt; relations;
@@ -128,57 +128,55 @@
 <span class="lineNum">      66 </span>            :         unordered_map&lt;size_t, size_t&gt; relation_mapping;
 <span class="lineNum">      67 </span>            :         //! A structure holding all the created RelationSet objects
 <span class="lineNum">      68 </span>            :         RelationSetManager set_manager;
-<span class="lineNum">      69 </span>            :         //! The set of filters that we want to push down
-<span class="lineNum">      70 </span>            :         FilterNode pushdown_filters;
-<span class="lineNum">      71 </span>            :         //! The set of edges used in the join optimizer
-<span class="lineNum">      72 </span>            :         QueryGraph query_graph;
-<span class="lineNum">      73 </span>            :         //! The optimal join plan found for the specific RelationSet*
-<span class="lineNum">      74 </span>            :         unordered_map&lt;RelationSet *, unique_ptr&lt;JoinNode&gt;&gt; plans;
-<span class="lineNum">      75 </span>            : 
-<span class="lineNum">      76 </span>            :         // Add a filter to the set of to-be-pushed-down filters, where the filter needs columns from the given RelationSet
-<span class="lineNum">      77 </span>            :         // to be evaluated
-<span class="lineNum">      78 </span>            :         void AddPushdownFilter(RelationSet *set, FilterInfo *filter);
-<span class="lineNum">      79 </span>            :         //! Enumerate all pushdown filters that can be fulfilled by a given RelationSet node (i.e. all entries in
-<span class="lineNum">      80 </span>            :         //! pushdown_filters where the given RelationSet is a subset of [[node]]). Return true in the callback to remove the
-<span class="lineNum">      81 </span>            :         //! filter from the set of pushdown filters.
-<span class="lineNum">      82 </span>            :         void EnumeratePushdownFilters(RelationSet *node, std::function&lt;bool(FilterInfo *)&gt; callback);
-<span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span>            :         //! Extract the bindings referred to by an Expression
-<span class="lineNum">      85 </span>            :         bool ExtractBindings(Expression &amp;expression, std::unordered_set&lt;size_t&gt; &amp;bindings);
-<span class="lineNum">      86 </span>            :         //! Traverse the query tree to find (1) base relations, (2) existing join conditions and (3) filters that can be
-<span class="lineNum">      87 </span>            :         //! rewritten into joins. Returns true if there are joins in the tree that can be reordered, false otherwise.
-<span class="lineNum">      88 </span>            :         bool ExtractJoinRelations(LogicalOperator &amp;input_op, vector&lt;unique_ptr&lt;FilterInfo&gt;&gt; &amp;filters,
-<span class="lineNum">      89 </span>            :                                   LogicalOperator *parent = nullptr);
-<span class="lineNum">      90 </span>            :         //! Emit a pair as a potential join candidate. Returns the best plan found for the (left, right) connection (either
-<span class="lineNum">      91 </span>            :         //! the newly created plan, or an existing plan)
-<span class="lineNum">      92 </span>            :         JoinNode *EmitPair(RelationSet *left, RelationSet *right, NeighborInfo *info);
-<span class="lineNum">      93 </span>            :         //! Tries to emit a potential join candidate pair. Returns false if too many pairs have already been emitted,
-<span class="lineNum">      94 </span>            :         //! cancelling the dynamic programming step.
-<span class="lineNum">      95 </span>            :         bool TryEmitPair(RelationSet *left, RelationSet *right, NeighborInfo *info);
-<span class="lineNum">      96 </span>            : 
-<span class="lineNum">      97 </span>            :         bool EnumerateCmpRecursive(RelationSet *left, RelationSet *right, std::unordered_set&lt;size_t&gt; exclusion_set);
-<span class="lineNum">      98 </span>            :         //! Emit a relation set node
-<span class="lineNum">      99 </span>            :         bool EmitCSG(RelationSet *node);
-<span class="lineNum">     100 </span>            :         //! Enumerate the possible connected subgraphs that can be joined together in the join graph
-<span class="lineNum">     101 </span>            :         bool EnumerateCSGRecursive(RelationSet *node, std::unordered_set&lt;size_t&gt; &amp;exclusion_set);
-<span class="lineNum">     102 </span>            :         //! Rewrite a logical query plan given the join plan
-<span class="lineNum">     103 </span>            :         unique_ptr&lt;LogicalOperator&gt; RewritePlan(unique_ptr&lt;LogicalOperator&gt; plan, JoinNode *node);
-<span class="lineNum">     104 </span>            :         //! Generate cross product edges inside the side
-<span class="lineNum">     105 </span>            :         void GenerateCrossProducts();
-<span class="lineNum">     106 </span>            :         //! Perform the join order solving
-<span class="lineNum">     107 </span>            :         void SolveJoinOrder();
-<span class="lineNum">     108 </span>            :         //! Solve the join order exactly using dynamic programming. Returns true if it was completed successfully (i.e. did
-<span class="lineNum">     109 </span>            :         //! not time-out)
-<span class="lineNum">     110 </span>            :         bool SolveJoinOrderExactly();
-<span class="lineNum">     111 </span>            :         //! Solve the join order approximately using a greedy algorithm
-<span class="lineNum">     112 </span>            :         void SolveJoinOrderApproximately();
-<span class="lineNum">     113 </span>            : 
-<span class="lineNum">     114 </span>            :         unique_ptr&lt;LogicalOperator&gt; ResolveJoinConditions(unique_ptr&lt;LogicalOperator&gt; op);
-<span class="lineNum">     115 </span>            :         std::pair&lt;RelationSet *, unique_ptr&lt;LogicalOperator&gt;&gt;
-<span class="lineNum">     116 </span>            :         GenerateJoins(vector&lt;unique_ptr&lt;LogicalOperator&gt;&gt; &amp;extracted_relations, JoinNode *node);
-<span class="lineNum">     117 </span>            : };
-<span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span>            : } // namespace duckdb
+<span class="lineNum">      69 </span>            :         //! The set of edges used in the join optimizer
+<span class="lineNum">      70 </span>            :         QueryGraph query_graph;
+<span class="lineNum">      71 </span>            :         //! The optimal join plan found for the specific RelationSet*
+<span class="lineNum">      72 </span>            :         unordered_map&lt;RelationSet *, unique_ptr&lt;JoinNode&gt;&gt; plans;
+<span class="lineNum">      73 </span>            :         //! The set of filters extracted from the query graph
+<span class="lineNum">      74 </span>            :         vector&lt;unique_ptr&lt;Expression&gt;&gt; filters;
+<span class="lineNum">      75 </span>            :         //! The set of filter infos created from the extracted filters
+<span class="lineNum">      76 </span>            :         vector&lt;unique_ptr&lt;FilterInfo&gt;&gt; filter_infos;
+<span class="lineNum">      77 </span>            :         //! A map of all expressions a given expression has to be equivalent to. This is used to add &quot;implied join edges&quot;.
+<span class="lineNum">      78 </span>            :         //! i.e. in the join A=B AND B=C, the equivalence set of {B} is {A, C}, thus we can add an implied join edge {A &lt;-&gt;
+<span class="lineNum">      79 </span>            :         //! C}
+<span class="lineNum">      80 </span>            :         unordered_map&lt;Expression *, vector&lt;FilterInfo *&gt;, ExpressionHashFunction, ExpressionEquality&gt; equivalence_sets;
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span>            :         //! Extract the bindings referred to by an Expression
+<span class="lineNum">      83 </span>            :         bool ExtractBindings(Expression &amp;expression, std::unordered_set&lt;size_t&gt; &amp;bindings);
+<span class="lineNum">      84 </span>            :         //! Traverse the query tree to find (1) base relations, (2) existing join conditions and (3) filters that can be
+<span class="lineNum">      85 </span>            :         //! rewritten into joins. Returns true if there are joins in the tree that can be reordered, false otherwise.
+<span class="lineNum">      86 </span>            :         bool ExtractJoinRelations(LogicalOperator &amp;input_op, vector&lt;LogicalOperator *&gt; &amp;filter_operators,
+<span class="lineNum">      87 </span>            :                                   LogicalOperator *parent = nullptr);
+<span class="lineNum">      88 </span>            :         //! Emit a pair as a potential join candidate. Returns the best plan found for the (left, right) connection (either
+<span class="lineNum">      89 </span>            :         //! the newly created plan, or an existing plan)
+<span class="lineNum">      90 </span>            :         JoinNode *EmitPair(RelationSet *left, RelationSet *right, NeighborInfo *info);
+<span class="lineNum">      91 </span>            :         //! Tries to emit a potential join candidate pair. Returns false if too many pairs have already been emitted,
+<span class="lineNum">      92 </span>            :         //! cancelling the dynamic programming step.
+<span class="lineNum">      93 </span>            :         bool TryEmitPair(RelationSet *left, RelationSet *right, NeighborInfo *info);
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            :         bool EnumerateCmpRecursive(RelationSet *left, RelationSet *right, std::unordered_set&lt;size_t&gt; exclusion_set);
+<span class="lineNum">      96 </span>            :         //! Emit a relation set node
+<span class="lineNum">      97 </span>            :         bool EmitCSG(RelationSet *node);
+<span class="lineNum">      98 </span>            :         //! Enumerate the possible connected subgraphs that can be joined together in the join graph
+<span class="lineNum">      99 </span>            :         bool EnumerateCSGRecursive(RelationSet *node, std::unordered_set&lt;size_t&gt; &amp;exclusion_set);
+<span class="lineNum">     100 </span>            :         //! Rewrite a logical query plan given the join plan
+<span class="lineNum">     101 </span>            :         unique_ptr&lt;LogicalOperator&gt; RewritePlan(unique_ptr&lt;LogicalOperator&gt; plan, JoinNode *node);
+<span class="lineNum">     102 </span>            :         //! Generate cross product edges inside the side
+<span class="lineNum">     103 </span>            :         void GenerateCrossProducts();
+<span class="lineNum">     104 </span>            :         //! Perform the join order solving
+<span class="lineNum">     105 </span>            :         void SolveJoinOrder();
+<span class="lineNum">     106 </span>            :         //! Solve the join order exactly using dynamic programming. Returns true if it was completed successfully (i.e. did
+<span class="lineNum">     107 </span>            :         //! not time-out)
+<span class="lineNum">     108 </span>            :         bool SolveJoinOrderExactly();
+<span class="lineNum">     109 </span>            :         //! Solve the join order approximately using a greedy algorithm
+<span class="lineNum">     110 </span>            :         void SolveJoinOrderApproximately();
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span>            :         unique_ptr&lt;LogicalOperator&gt; ResolveJoinConditions(unique_ptr&lt;LogicalOperator&gt; op);
+<span class="lineNum">     113 </span>            :         std::pair&lt;RelationSet *, unique_ptr&lt;LogicalOperator&gt;&gt;
+<span class="lineNum">     114 </span>            :         GenerateJoins(vector&lt;unique_ptr&lt;LogicalOperator&gt;&gt; &amp;extracted_relations, JoinNode *node);
+<span class="lineNum">     115 </span>            : };
+<span class="lineNum">     116 </span>            : 
+<span class="lineNum">     117 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - include/planner/logical_operator.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - include/planner/logical_operator.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">22</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -91,12 +91,12 @@
 <span class="lineNum">      29 </span>            : //! logical query tree
 <a name="30"><span class="lineNum">      30 </span>            : class LogicalOperator : public Printable {</a>
 <span class="lineNum">      31 </span>            : public:
-<span class="lineNum">      32 </span><span class="lineCov">    7519092 :         LogicalOperator(LogicalOperatorType type) : type(type) {</span>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    7519826 :         }</span></a>
+<span class="lineNum">      32 </span><span class="lineCov">    7522387 :         LogicalOperator(LogicalOperatorType type) : type(type) {</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    7522254 :         }</span></a>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">    3839380 :         LogicalOperator(LogicalOperatorType type, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
-<span class="lineNum">      36 </span><span class="lineCov">    3839380 :             : type(type), expressions(std::move(expressions)) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">    3839886 :         }</span>
+<span class="lineNum">      35 </span><span class="lineCov">    5143363 :         LogicalOperator(LogicalOperatorType type, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
+<span class="lineNum">      36 </span><span class="lineCov">    5143363 :             : type(type), expressions(std::move(expressions)) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">    5143733 :         }</span>
 <span class="lineNum">      38 </span>            : 
 <span class="lineNum">      39 </span>            :         LogicalOperatorType GetOperatorType() {
 <span class="lineNum">      40 </span>            :                 return type;
@@ -106,32 +106,32 @@
 <span class="lineNum">      44 </span>            :         //! operator
 <a name="45"><span class="lineNum">      45 </span>            :         virtual vector&lt;string&gt; GetNames() = 0;</a>
 <span class="lineNum">      46 </span>            :         //! Resolve the types of the logical operator and its children
-<span class="lineNum">      47 </span><span class="lineCov">   11065714 :         void ResolveOperatorTypes() {</span>
-<span class="lineNum">      48 </span><span class="lineCov">   11065714 :                 if (types.size() &gt; 0) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">   12369156 :         void ResolveOperatorTypes() {</span>
+<span class="lineNum">      48 </span><span class="lineCov">   12369156 :                 if (types.size() &gt; 0) {</span>
 <span class="lineNum">      49 </span>            :                         // types already resolved for this node
 <span class="lineNum">      50 </span><span class="lineNoCov">          0 :                         return;</span>
 <span class="lineNum">      51 </span>            :                 }
 <span class="lineNum">      52 </span>            :                 // first resolve child types
-<span class="lineNum">      53 </span><span class="lineCov">   18989556 :                 for (auto &amp;child : children) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">    7931183 :                         child-&gt;ResolveOperatorTypes();</span>
+<span class="lineNum">      53 </span><span class="lineCov">   21598741 :                 for (auto &amp;child : children) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">    9234026 :                         child-&gt;ResolveOperatorTypes();</span>
 <span class="lineNum">      55 </span>            :                 }
 <span class="lineNum">      56 </span>            :                 // now resolve the types for this operator
-<span class="lineNum">      57 </span><span class="lineCov">   11064518 :                 ResolveTypes();</span>
+<span class="lineNum">      57 </span><span class="lineCov">   12369313 :                 ResolveTypes();</span>
 <span class="lineNum">      58 </span>            :         }
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span>            :         virtual string ParamsToString() const;
 <span class="lineNum">      61 </span>            :         string ToString() const override;
 <a name="62"><span class="lineNum">      62 </span>            : </a>
 <span class="lineNum">      63 </span>            :         virtual void Accept(LogicalOperatorVisitor *) = 0;
-<span class="lineNum">      64 </span><span class="lineCov">   32394698 :         virtual void AcceptChildren(LogicalOperatorVisitor *v) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">   54919900 :                 for (auto &amp;child : children) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">   22538329 :                         child-&gt;Accept(v);</span>
+<span class="lineNum">      64 </span><span class="lineCov">   39181144 :         virtual void AcceptChildren(LogicalOperatorVisitor *v) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">   67064250 :                 for (auto &amp;child : children) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">   27893958 :                         child-&gt;Accept(v);</span>
 <span class="lineNum">      67 </span>            :                 }
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">   32411473 :         }</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">   39201017 :         }</span></a>
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">    7910941 :         void AddChild(unique_ptr&lt;LogicalOperator&gt; child) {</span>
-<span class="lineNum">      71 </span><span class="lineCov">    7910941 :                 children.push_back(move(child));</span>
-<span class="lineNum">      72 </span><span class="lineCov">    7912430 :         }</span>
+<span class="lineNum">      70 </span><span class="lineCov">    9214674 :         void AddChild(unique_ptr&lt;LogicalOperator&gt; child) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">    9214674 :                 children.push_back(move(child));</span>
+<span class="lineNum">      72 </span><span class="lineCov">    9215457 :         }</span>
 <span class="lineNum">      73 </span>            : 
 <span class="lineNum">      74 </span>            :         //! The type of the logical operator
 <span class="lineNum">      75 </span>            :         LogicalOperatorType type;
@@ -142,13 +142,13 @@
 <span class="lineNum">      80 </span>            :         //! The types returned by this logical operator. Set by calling LogicalOperator::ResolveTypes.
 <a name="81"><span class="lineNum">      81 </span>            :         vector&lt;TypeId&gt; types;</a>
 <span class="lineNum">      82 </span>            : 
-<span class="lineNum">      83 </span><span class="lineCov">       2581 :         virtual size_t EstimateCardinality() {</span>
+<span class="lineNum">      83 </span><span class="lineCov">       6399 :         virtual size_t EstimateCardinality() {</span>
 <span class="lineNum">      84 </span>            :                 // simple estimator, just take the max of the children
-<span class="lineNum">      85 </span><span class="lineCov">       2581 :                 size_t max_cardinality = 0;</span>
-<span class="lineNum">      86 </span><span class="lineCov">       6187 :                 for (auto &amp;child : children) {</span>
-<span class="lineNum">      87 </span><span class="lineCov">       3606 :                         max_cardinality = std::max(child-&gt;EstimateCardinality(), max_cardinality);</span>
+<span class="lineNum">      85 </span><span class="lineCov">       6399 :                 size_t max_cardinality = 0;</span>
+<span class="lineNum">      86 </span><span class="lineCov">      14676 :                 for (auto &amp;child : children) {</span>
+<span class="lineNum">      87 </span><span class="lineCov">       8277 :                         max_cardinality = std::max(child-&gt;EstimateCardinality(), max_cardinality);</span>
 <span class="lineNum">      88 </span>            :                 }
-<span class="lineNum">      89 </span><span class="lineCov">       2581 :                 return max_cardinality;</span>
+<span class="lineNum">      89 </span><span class="lineCov">       6399 :                 return max_cardinality;</span>
 <span class="lineNum">      90 </span>            :         }
 <span class="lineNum">      91 </span>            : 
 <span class="lineNum">      92 </span>            :         virtual size_t ExpressionCount();

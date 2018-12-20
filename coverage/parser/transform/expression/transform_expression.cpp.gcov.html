@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - parser/transform/expression/transform_expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - parser/transform/expression/transform_expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">44</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -67,48 +67,48 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    3309317 : unique_ptr&lt;Expression&gt; Transformer::TransformResTarget(ResTarget *root) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    3309317 :         if (!root) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3308747 : unique_ptr&lt;Expression&gt; Transformer::TransformResTarget(ResTarget *root) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    3308747 :         if (!root) {</span>
 <span class="lineNum">      10 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      11 </span>            :         }
-<span class="lineNum">      12 </span><span class="lineCov">    6618709 :         auto expr = TransformExpression(root-&gt;val);</span>
-<span class="lineNum">      13 </span><span class="lineCov">    3309331 :         if (!expr) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    6617554 :         auto expr = TransformExpression(root-&gt;val);</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3308773 :         if (!expr) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      15 </span>            :         }
-<span class="lineNum">      16 </span><span class="lineCov">    3309352 :         if (root-&gt;name) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">    1678634 :                 expr-&gt;alias = string(root-&gt;name);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3308752 :         if (root-&gt;name) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">    1678592 :                 expr-&gt;alias = string(root-&gt;name);</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">    3309352 :         return expr;</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3308752 :         return expr;</span>
 <a name="20"><span class="lineNum">      20 </span>            : }</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">   38442731 : unique_ptr&lt;Expression&gt; Transformer::TransformExpression(Node *node) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">   38442731 :         if (!node) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">   12177707 :                 return nullptr;</span>
+<span class="lineNum">      22 </span><span class="lineCov">   38379063 : unique_ptr&lt;Expression&gt; Transformer::TransformExpression(Node *node) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">   38379063 :         if (!node) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">   12160241 :                 return nullptr;</span>
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">   26265024 :         switch (node-&gt;type) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">    4517967 :         case T_ColumnRef:</span>
-<span class="lineNum">      29 </span><span class="lineCov">    4517967 :                 return TransformColumnRef(reinterpret_cast&lt;ColumnRef *&gt;(node));</span>
-<span class="lineNum">      30 </span><span class="lineCov">    4907781 :         case T_A_Const:</span>
-<span class="lineNum">      31 </span><span class="lineCov">    4907781 :                 return TransformConstant(reinterpret_cast&lt;A_Const *&gt;(node));</span>
-<span class="lineNum">      32 </span><span class="lineCov">   11787090 :         case T_A_Expr:</span>
-<span class="lineNum">      33 </span><span class="lineCov">   11787090 :                 return TransformAExpr(reinterpret_cast&lt;A_Expr *&gt;(node));</span>
-<span class="lineNum">      34 </span><span class="lineCov">     812459 :         case T_FuncCall:</span>
-<span class="lineNum">      35 </span><span class="lineCov">     812459 :                 return TransformFuncCall(reinterpret_cast&lt;FuncCall *&gt;(node));</span>
-<span class="lineNum">      36 </span><span class="lineCov">     239198 :         case T_BoolExpr:</span>
-<span class="lineNum">      37 </span><span class="lineCov">     239198 :                 return TransformBoolExpr(reinterpret_cast&lt;BoolExpr *&gt;(node));</span>
-<span class="lineNum">      38 </span><span class="lineCov">     385408 :         case T_TypeCast:</span>
-<span class="lineNum">      39 </span><span class="lineCov">     385408 :                 return TransformTypeCast(reinterpret_cast&lt;TypeCast *&gt;(node));</span>
-<span class="lineNum">      40 </span><span class="lineCov">      76365 :         case T_CaseExpr:</span>
-<span class="lineNum">      41 </span><span class="lineCov">      76365 :                 return TransformCase(reinterpret_cast&lt;CaseExpr *&gt;(node));</span>
-<span class="lineNum">      42 </span><span class="lineCov">       4111 :         case T_SubLink:</span>
-<span class="lineNum">      43 </span><span class="lineCov">       4111 :                 return TransformSubquery(reinterpret_cast&lt;SubLink *&gt;(node));</span>
-<span class="lineNum">      44 </span><span class="lineCov">      71390 :         case T_CoalesceExpr:</span>
-<span class="lineNum">      45 </span><span class="lineCov">      71390 :                 return TransformCoalesce(reinterpret_cast&lt;A_Expr *&gt;(node));</span>
-<span class="lineNum">      46 </span><span class="lineCov">     156243 :         case T_NullTest:</span>
-<span class="lineNum">      47 </span><span class="lineCov">     156243 :                 return TransformNullTest(reinterpret_cast&lt;NullTest *&gt;(node));</span>
-<span class="lineNum">      48 </span><span class="lineCov">    3309374 :         case T_ResTarget:</span>
-<span class="lineNum">      49 </span><span class="lineCov">    3309374 :                 return TransformResTarget(reinterpret_cast&lt;ResTarget *&gt;(node));</span>
+<span class="lineNum">      27 </span><span class="lineCov">   26218822 :         switch (node-&gt;type) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    4514221 :         case T_ColumnRef:</span>
+<span class="lineNum">      29 </span><span class="lineCov">    4514221 :                 return TransformColumnRef(reinterpret_cast&lt;ColumnRef *&gt;(node));</span>
+<span class="lineNum">      30 </span><span class="lineCov">    4888082 :         case T_A_Const:</span>
+<span class="lineNum">      31 </span><span class="lineCov">    4888082 :                 return TransformConstant(reinterpret_cast&lt;A_Const *&gt;(node));</span>
+<span class="lineNum">      32 </span><span class="lineCov">   11769356 :         case T_A_Expr:</span>
+<span class="lineNum">      33 </span><span class="lineCov">   11769356 :                 return TransformAExpr(reinterpret_cast&lt;A_Expr *&gt;(node));</span>
+<span class="lineNum">      34 </span><span class="lineCov">     811885 :         case T_FuncCall:</span>
+<span class="lineNum">      35 </span><span class="lineCov">     811885 :                 return TransformFuncCall(reinterpret_cast&lt;FuncCall *&gt;(node));</span>
+<span class="lineNum">      36 </span><span class="lineCov">     239171 :         case T_BoolExpr:</span>
+<span class="lineNum">      37 </span><span class="lineCov">     239171 :                 return TransformBoolExpr(reinterpret_cast&lt;BoolExpr *&gt;(node));</span>
+<span class="lineNum">      38 </span><span class="lineCov">     382350 :         case T_TypeCast:</span>
+<span class="lineNum">      39 </span><span class="lineCov">     382350 :                 return TransformTypeCast(reinterpret_cast&lt;TypeCast *&gt;(node));</span>
+<span class="lineNum">      40 </span><span class="lineCov">      76063 :         case T_CaseExpr:</span>
+<span class="lineNum">      41 </span><span class="lineCov">      76063 :                 return TransformCase(reinterpret_cast&lt;CaseExpr *&gt;(node));</span>
+<span class="lineNum">      42 </span><span class="lineCov">       4101 :         case T_SubLink:</span>
+<span class="lineNum">      43 </span><span class="lineCov">       4101 :                 return TransformSubquery(reinterpret_cast&lt;SubLink *&gt;(node));</span>
+<span class="lineNum">      44 </span><span class="lineCov">      71169 :         case T_CoalesceExpr:</span>
+<span class="lineNum">      45 </span><span class="lineCov">      71169 :                 return TransformCoalesce(reinterpret_cast&lt;A_Expr *&gt;(node));</span>
+<span class="lineNum">      46 </span><span class="lineCov">     156223 :         case T_NullTest:</span>
+<span class="lineNum">      47 </span><span class="lineCov">     156223 :                 return TransformNullTest(reinterpret_cast&lt;NullTest *&gt;(node));</span>
+<span class="lineNum">      48 </span><span class="lineCov">    3308765 :         case T_ResTarget:</span>
+<span class="lineNum">      49 </span><span class="lineCov">    3308765 :                 return TransformResTarget(reinterpret_cast&lt;ResTarget *&gt;(node));</span>
 <span class="lineNum">      50 </span><span class="lineCov">         47 :         case T_SetToDefault:</span>
 <span class="lineNum">      51 </span><span class="lineCov">         47 :                 return make_unique&lt;DefaultExpression&gt;();</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :         case T_ParamRef:</span>
@@ -118,22 +118,22 @@
 <span class="lineNum">      56 </span>            :         }
 <a name="57"><span class="lineNum">      57 </span>            : }</a>
 <span class="lineNum">      58 </span>            : 
-<span class="lineNum">      59 </span><span class="lineCov">    3113720 : bool Transformer::TransformExpressionList(List *list, vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;result) {</span>
-<span class="lineNum">      60 </span><span class="lineCov">    3113720 :         if (!list) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">    3113156 : bool Transformer::TransformExpressionList(List *list, vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;result) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">    3113156 :         if (!list) {</span>
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">      62 </span>            :         }
-<span class="lineNum">      63 </span><span class="lineCov">    6609583 :         for (auto node = list-&gt;head; node != nullptr; node = node-&gt;next) {</span>
-<span class="lineNum">      64 </span><span class="lineCov">    3495848 :                 auto target = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
-<span class="lineNum">      65 </span><span class="lineCov">    3495848 :                 if (!target) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">    6608369 :         for (auto node = list-&gt;head; node != nullptr; node = node-&gt;next) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">    3495210 :                 auto target = reinterpret_cast&lt;Node *&gt;(node-&gt;data.ptr_value);</span>
+<span class="lineNum">      65 </span><span class="lineCov">    3495210 :                 if (!target) {</span>
 <span class="lineNum">      66 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">      67 </span>            :                 }
-<span class="lineNum">      68 </span><span class="lineCov">    3495848 :                 auto expr = TransformExpression(target);</span>
-<span class="lineNum">      69 </span><span class="lineCov">    3495784 :                 if (!expr) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">    3495210 :                 auto expr = TransformExpression(target);</span>
+<span class="lineNum">      69 </span><span class="lineCov">    3495193 :                 if (!expr) {</span>
 <span class="lineNum">      70 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">      71 </span>            :                 }
-<span class="lineNum">      72 </span><span class="lineCov">    3495817 :                 result.push_back(move(expr));</span>
+<span class="lineNum">      72 </span><span class="lineCov">    3495202 :                 result.push_back(move(expr));</span>
 <span class="lineNum">      73 </span>            :         }
-<span class="lineNum">      74 </span><span class="lineCov">    3113735 :         return true;</span>
+<span class="lineNum">      74 </span><span class="lineCov">    3113159 :         return true;</span>
 <span class="lineNum">      75 </span>            : }
 </pre>
       </td>

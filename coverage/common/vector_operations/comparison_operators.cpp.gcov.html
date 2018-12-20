@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - common/vector_operations/comparison_operators.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - common/vector_operations/comparison_operators.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">139</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">13</td>
@@ -74,23 +74,23 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">    1010068 : inline void COMPARISON_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    1010068 :         if (left.type != right.type) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     970293 : inline void COMPARISON_TYPE_CHECK(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">     970293 :         if (left.type != right.type) {</span>
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :                 throw TypeMismatchException(left.type, right.type, &quot;left and right types must be the same&quot;);</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">    1010068 :         if (result.type != TypeId::BOOLEAN) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     970293 :         if (result.type != TypeId::BOOLEAN) {</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(result.type, &quot;result of comparison must be boolean&quot;);</span>
 <span class="lineNum">      21 </span>            :         }
-<span class="lineNum">      22 </span><span class="lineCov">    1010068 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp; left.count != right.count) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">     970293 :         if (!left.IsConstant() &amp;&amp; !right.IsConstant() &amp;&amp; left.count != right.count) {</span>
 <span class="lineNum">      23 </span>            :                 throw Exception(&quot;Cardinality exception: left and right cannot have &quot;
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :                                 &quot;different cardinalities&quot;);</span>
 <span class="lineNum">      25 </span>            :         }
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">    1012648 : }</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">     972979 : }</span></a>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">    1009930 : template &lt;class OP&gt; static void templated_boolean_operation(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">    1009930 :         COMPARISON_TYPE_CHECK(left, right, result);</span>
+<span class="lineNum">      28 </span><span class="lineCov">     970202 : template &lt;class OP&gt; static void templated_boolean_operation(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">     970202 :         COMPARISON_TYPE_CHECK(left, right, result);</span>
 <span class="lineNum">      30 </span>            :         // the inplace loops take the result as the last parameter
-<span class="lineNum">      31 </span><span class="lineCov">    1012482 :         switch (left.type) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">     972989 :         switch (left.type) {</span>
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :         case TypeId::BOOLEAN:</span>
 <span class="lineNum">      33 </span>            :         case TypeId::TINYINT:
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int8_t, int8_t, bool, OP&gt;(left, right, result);</span>
@@ -98,10 +98,10 @@
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int16_t, int16_t, bool, OP&gt;(left, right, result);</span>
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      39 </span><span class="lineCov">     896904 :         case TypeId::DATE:</span>
+<span class="lineNum">      39 </span><span class="lineCov">     856409 :         case TypeId::DATE:</span>
 <span class="lineNum">      40 </span>            :         case TypeId::INTEGER:
-<span class="lineNum">      41 </span><span class="lineCov">     896904 :                 templated_binary_loop&lt;int32_t, int32_t, bool, OP&gt;(left, right, result);</span>
-<span class="lineNum">      42 </span><span class="lineCov">     894876 :                 break;</span>
+<span class="lineNum">      41 </span><span class="lineCov">     856409 :                 templated_binary_loop&lt;int32_t, int32_t, bool, OP&gt;(left, right, result);</span>
+<span class="lineNum">      42 </span><span class="lineCov">     855449 :                 break;</span>
 <span class="lineNum">      43 </span><span class="lineCov">      58012 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">      44 </span>            :         case TypeId::BIGINT:
 <span class="lineNum">      45 </span><span class="lineCov">      58012 :                 templated_binary_loop&lt;int64_t, int64_t, bool, OP&gt;(left, right, result);</span>
@@ -115,10 +115,10 @@
 <span class="lineNum">      53 </span><span class="lineCov">      37639 :         case TypeId::VARCHAR:</span>
 <span class="lineNum">      54 </span><span class="lineCov">      37639 :                 templated_binary_loop&lt;const char *, const char *, bool, OP, true&gt;(left, right, result);</span>
 <span class="lineNum">      55 </span><span class="lineCov">      37639 :                 break;</span>
-<span class="lineNum">      56 </span><span class="lineCov">        258 :         default:</span>
-<span class="lineNum">      57 </span><span class="lineCov">        258 :                 throw InvalidTypeException(left.type, &quot;Invalid type for addition&quot;);</span>
+<span class="lineNum">      56 </span><span class="lineCov">       1260 :         default:</span>
+<span class="lineNum">      57 </span><span class="lineCov">       1260 :                 throw InvalidTypeException(left.type, &quot;Invalid type for addition&quot;);</span>
 <span class="lineNum">      58 </span>            :         }
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">    1010196 : }</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">     970769 : }</span></a>
 <span class="lineNum">      60 </span><span class="lineCov">      74113 : </span>
 <span class="lineNum">      61 </span><span class="lineCov">      74113 : void VectorOperations::Equals(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
 <span class="lineNum">      62 </span>            :         templated_boolean_operation&lt;operators::Equals&gt;(left, right, result);

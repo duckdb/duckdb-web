@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - parser/expression/columnref_expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - parser/expression/columnref_expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">37</td>
-            <td class="headerCovTableEntry">40</td>
-            <td class="headerCovTableEntryHi">92.5 %</td>
+            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntryHi">95.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -64,70 +64,75 @@
 <span class="lineNum">       2 </span>            : 
 <span class="lineNum">       3 </span>            : #include &quot;common/exception.hpp&quot;
 <span class="lineNum">       4 </span>            : #include &quot;common/serializer.hpp&quot;
-<span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span>            : using namespace duckdb;
-<a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
-<span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">       4409 : unique_ptr&lt;Expression&gt; ColumnRefExpression::Copy() {</span>
-<span class="lineNum">      10 </span>            :         // should not make a copy with a reference because reference is not owned
-<span class="lineNum">      11 </span>            :         // we cannot make a copy of reference along with it -&gt; might result in
-<span class="lineNum">      12 </span>            :         // original reference being freed
-<span class="lineNum">      13 </span><span class="lineCov">       4409 :         assert(!reference);</span>
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">       8818 :         auto copy = make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
-<span class="lineNum">      16 </span><span class="lineCov">       4409 :         copy-&gt;CopyProperties(*this);</span>
-<span class="lineNum">      17 </span><span class="lineCov">       4409 :         copy-&gt;binding = binding;</span>
-<span class="lineNum">      18 </span><span class="lineCov">       4409 :         copy-&gt;index = index;</span>
-<span class="lineNum">      19 </span><span class="lineCov">       4409 :         copy-&gt;reference = reference;</span>
-<span class="lineNum">      20 </span><span class="lineCov">       8818 :         return copy;</span>
-<a name="21"><span class="lineNum">      21 </span>            : }</a>
-<span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">         18 : void ColumnRefExpression::Serialize(Serializer &amp;serializer) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">         18 :         Expression::Serialize(serializer);</span>
-<span class="lineNum">      25 </span><span class="lineCov">         18 :         assert(!reference);</span>
-<span class="lineNum">      26 </span><span class="lineCov">         18 :         serializer.WriteString(table_name);</span>
-<span class="lineNum">      27 </span><span class="lineCov">         18 :         serializer.WriteString(column_name);</span>
-<span class="lineNum">      28 </span><span class="lineCov">         18 :         serializer.Write&lt;size_t&gt;(index);</span>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         18 : }</span></a>
-<span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">         12 : unique_ptr&lt;Expression&gt; ColumnRefExpression::Deserialize(ExpressionDeserializeInfo *info, Deserializer &amp;source) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">         24 :         auto table_name = source.Read&lt;string&gt;();</span>
-<span class="lineNum">      33 </span><span class="lineCov">         24 :         auto column_name = source.Read&lt;string&gt;();</span>
-<span class="lineNum">      34 </span><span class="lineCov">         12 :         auto index = source.Read&lt;size_t&gt;();</span>
-<span class="lineNum">      35 </span>            : 
-<span class="lineNum">      36 </span><span class="lineCov">         12 :         if (info-&gt;children.size() &gt; 0) {</span>
-<span class="lineNum">      37 </span><span class="lineNoCov">          0 :                 throw SerializationException(&quot;ColumnRef cannot have children!&quot;);</span>
-<span class="lineNum">      38 </span>            :         }
-<span class="lineNum">      39 </span>            : 
-<span class="lineNum">      40 </span><span class="lineCov">         24 :         auto expression = make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
-<span class="lineNum">      41 </span><span class="lineCov">         12 :         expression-&gt;index = index;</span>
-<span class="lineNum">      42 </span><span class="lineCov">         24 :         return expression;</span>
-<a name="43"><span class="lineNum">      43 </span>            : }</a>
-<span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">    5018907 : void ColumnRefExpression::ResolveType() {</span>
-<span class="lineNum">      46 </span><span class="lineCov">    5018907 :         Expression::ResolveType();</span>
-<span class="lineNum">      47 </span><span class="lineCov">    5021370 :         if (return_type == TypeId::INVALID) {</span>
-<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Type of ColumnRefExpression was not resolved!&quot;);</span>
-<span class="lineNum">      49 </span>            :         }
-<a name="50"><span class="lineNum">      50 </span><span class="lineCov">    5021370 : }</span></a>
-<span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">      42718 : bool ColumnRefExpression::Equals(const Expression *other_) {</span>
-<span class="lineNum">      53 </span><span class="lineCov">      42718 :         if (!Expression::Equals(other_)) {</span>
-<span class="lineNum">      54 </span><span class="lineCov">      25410 :                 return false;</span>
-<span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">      17308 :         auto other = reinterpret_cast&lt;const ColumnRefExpression *&gt;(other_);</span>
-<span class="lineNum">      57 </span><span class="lineCov">      17308 :         if (!other) {</span>
-<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 return false;</span>
-<span class="lineNum">      59 </span>            :         }
-<span class="lineNum">      60 </span><span class="lineCov">      17308 :         return column_name == other-&gt;column_name &amp;&amp; table_name == other-&gt;table_name;</span>
-<a name="61"><span class="lineNum">      61 </span>            : }</a>
-<span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">        360 : string ColumnRefExpression::ToString() const {</span>
-<span class="lineNum">      64 </span><span class="lineCov">        360 :         if (column_name.empty() &amp;&amp; index != (size_t)-1) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">         22 :                 return &quot;#&quot; + std::to_string(index);</span>
-<span class="lineNum">      66 </span>            :         }
-<span class="lineNum">      67 </span><span class="lineCov">        338 :         return column_name.empty() ? std::to_string(binding.column_index) : column_name;</span>
-<span class="lineNum">      68 </span>            : }
+<span class="lineNum">       5 </span>            : #include &quot;common/types/hash.hpp&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : using namespace duckdb;
+<a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">       8433 : unique_ptr&lt;Expression&gt; ColumnRefExpression::Copy() {</span>
+<span class="lineNum">      11 </span>            :         // should not make a copy with a reference because reference is not owned
+<span class="lineNum">      12 </span>            :         // we cannot make a copy of reference along with it -&gt; might result in
+<span class="lineNum">      13 </span>            :         // original reference being freed
+<span class="lineNum">      14 </span><span class="lineCov">       8433 :         assert(!reference);</span>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">      16866 :         auto copy = make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
+<span class="lineNum">      17 </span><span class="lineCov">       8433 :         copy-&gt;CopyProperties(*this);</span>
+<span class="lineNum">      18 </span><span class="lineCov">       8433 :         copy-&gt;binding = binding;</span>
+<span class="lineNum">      19 </span><span class="lineCov">       8433 :         copy-&gt;index = index;</span>
+<span class="lineNum">      20 </span><span class="lineCov">       8433 :         copy-&gt;reference = reference;</span>
+<span class="lineNum">      21 </span><span class="lineCov">      16866 :         return copy;</span>
+<a name="22"><span class="lineNum">      22 </span>            : }</a>
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineCov">         18 : void ColumnRefExpression::Serialize(Serializer &amp;serializer) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">         18 :         Expression::Serialize(serializer);</span>
+<span class="lineNum">      26 </span><span class="lineCov">         18 :         assert(!reference);</span>
+<span class="lineNum">      27 </span><span class="lineCov">         18 :         serializer.WriteString(table_name);</span>
+<span class="lineNum">      28 </span><span class="lineCov">         18 :         serializer.WriteString(column_name);</span>
+<span class="lineNum">      29 </span><span class="lineCov">         18 :         serializer.Write&lt;size_t&gt;(index);</span>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">         18 : }</span></a>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span><span class="lineCov">         12 : unique_ptr&lt;Expression&gt; ColumnRefExpression::Deserialize(ExpressionDeserializeInfo *info, Deserializer &amp;source) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">         24 :         auto table_name = source.Read&lt;string&gt;();</span>
+<span class="lineNum">      34 </span><span class="lineCov">         24 :         auto column_name = source.Read&lt;string&gt;();</span>
+<span class="lineNum">      35 </span><span class="lineCov">         12 :         auto index = source.Read&lt;size_t&gt;();</span>
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span><span class="lineCov">         12 :         if (info-&gt;children.size() &gt; 0) {</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :                 throw SerializationException(&quot;ColumnRef cannot have children!&quot;);</span>
+<span class="lineNum">      39 </span>            :         }
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">         24 :         auto expression = make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
+<span class="lineNum">      42 </span><span class="lineCov">         12 :         expression-&gt;index = index;</span>
+<span class="lineNum">      43 </span><span class="lineCov">         24 :         return expression;</span>
+<a name="44"><span class="lineNum">      44 </span>            : }</a>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineCov">    5019145 : void ColumnRefExpression::ResolveType() {</span>
+<span class="lineNum">      47 </span><span class="lineCov">    5019145 :         Expression::ResolveType();</span>
+<span class="lineNum">      48 </span><span class="lineCov">    5021835 :         if (return_type == TypeId::INVALID) {</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Type of ColumnRefExpression was not resolved!&quot;);</span>
+<span class="lineNum">      50 </span>            :         }
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">    5021835 : }</span></a>
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span><span class="lineCov">      42669 : bool ColumnRefExpression::Equals(const Expression *other_) const {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      42669 :         if (!Expression::Equals(other_)) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">      25410 :                 return false;</span>
+<span class="lineNum">      56 </span>            :         }
+<span class="lineNum">      57 </span><span class="lineCov">      17259 :         auto other = (ColumnRefExpression *)other_;</span>
+<span class="lineNum">      58 </span><span class="lineCov">      17259 :         return column_name == other-&gt;column_name &amp;&amp; table_name == other-&gt;table_name;</span>
+<a name="59"><span class="lineNum">      59 </span>            : }</a>
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span><span class="lineCov">         14 : uint64_t ColumnRefExpression::Hash() const {</span>
+<span class="lineNum">      62 </span><span class="lineCov">         14 :         uint64_t result = Expression::Hash();</span>
+<span class="lineNum">      63 </span><span class="lineCov">         14 :         result = CombineHash(result, duckdb::Hash&lt;const char *&gt;(column_name.c_str()));</span>
+<span class="lineNum">      64 </span><span class="lineCov">         14 :         result = CombineHash(result, duckdb::Hash&lt;const char *&gt;(table_name.c_str()));</span>
+<span class="lineNum">      65 </span><span class="lineCov">         14 :         return result;</span>
+<a name="66"><span class="lineNum">      66 </span>            : }</a>
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span><span class="lineCov">        358 : string ColumnRefExpression::ToString() const {</span>
+<span class="lineNum">      69 </span><span class="lineCov">        358 :         if (column_name.empty() &amp;&amp; index != (size_t)-1) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">         22 :                 return &quot;#&quot; + std::to_string(index);</span>
+<span class="lineNum">      71 </span>            :         }
+<span class="lineNum">      72 </span><span class="lineCov">        336 :         return column_name.empty() ? std::to_string(binding.column_index) : column_name;</span>
+<span class="lineNum">      73 </span>            : }
 </pre>
       </td>
     </tr>

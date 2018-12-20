@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - include/catalog/catalog_entry/scalar_function_catalog_entry.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - include/catalog/catalog_entry/scalar_function_catalog_entry.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -86,10 +86,10 @@
 <span class="lineNum">      24 </span>            : //! A table function in the catalog
 <a name="25"><span class="lineNum">      25 </span>            : class ScalarFunctionCatalogEntry : public CatalogEntry {</a>
 <span class="lineNum">      26 </span>            : public:
-<span class="lineNum">      27 </span><span class="lineCov">       4368 :         ScalarFunctionCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateScalarFunctionInformation *info)</span>
-<span class="lineNum">      28 </span><span class="lineCov">      13104 :             : CatalogEntry(CatalogType::SCALAR_FUNCTION, catalog, info-&gt;name), schema(schema), function(info-&gt;function),</span>
-<span class="lineNum">      29 </span><span class="lineCov">       4368 :               matches(info-&gt;matches), return_type(info-&gt;return_type) {</span>
-<span class="lineNum">      30 </span><span class="lineCov">       4368 :         }</span>
+<span class="lineNum">      27 </span><span class="lineCov">       4432 :         ScalarFunctionCatalogEntry(Catalog *catalog, SchemaCatalogEntry *schema, CreateScalarFunctionInformation *info)</span>
+<span class="lineNum">      28 </span><span class="lineCov">      13296 :             : CatalogEntry(CatalogType::SCALAR_FUNCTION, catalog, info-&gt;name), schema(schema), function(info-&gt;function),</span>
+<span class="lineNum">      29 </span><span class="lineCov">       4432 :               matches(info-&gt;matches), return_type(info-&gt;return_type) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">       4432 :         }</span>
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            :         //! The schema the table belongs to
 <span class="lineNum">      33 </span>            :         SchemaCatalogEntry *schema;

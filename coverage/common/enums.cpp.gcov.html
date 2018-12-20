@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - common/enums.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - common/enums.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">101</td>
+            <td class="headerCovTableEntry">99</td>
             <td class="headerCovTableEntry">339</td>
-            <td class="headerCovTableEntryLo">29.8 %</td>
+            <td class="headerCovTableEntryLo">29.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -173,14 +173,14 @@
 <span class="lineNum">     111 </span><span class="lineNoCov">          0 :         return &quot;INVALID&quot;;</span>
 <a name="112"><span class="lineNum">     112 </span>            : }</a>
 <span class="lineNum">     113 </span>            : 
-<span class="lineNum">     114 </span><span class="lineCov">        626 : string PhysicalOperatorToString(PhysicalOperatorType type) {</span>
-<span class="lineNum">     115 </span><span class="lineCov">        626 :         switch (type) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">        655 : string PhysicalOperatorToString(PhysicalOperatorType type) {</span>
+<span class="lineNum">     115 </span><span class="lineCov">        655 :         switch (type) {</span>
 <span class="lineNum">     116 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::LEAF:</span>
 <span class="lineNum">     117 </span><span class="lineNoCov">          0 :                 return &quot;LEAF&quot;;</span>
-<span class="lineNum">     118 </span><span class="lineCov">          9 :         case PhysicalOperatorType::DUMMY_SCAN:</span>
-<span class="lineNum">     119 </span><span class="lineCov">          9 :                 return &quot;DUMMY_SCAN&quot;;</span>
-<span class="lineNum">     120 </span><span class="lineCov">        170 :         case PhysicalOperatorType::SEQ_SCAN:</span>
-<span class="lineNum">     121 </span><span class="lineCov">        170 :                 return &quot;SEQ_SCAN&quot;;</span>
+<span class="lineNum">     118 </span><span class="lineCov">         10 :         case PhysicalOperatorType::DUMMY_SCAN:</span>
+<span class="lineNum">     119 </span><span class="lineCov">         10 :                 return &quot;DUMMY_SCAN&quot;;</span>
+<span class="lineNum">     120 </span><span class="lineCov">        166 :         case PhysicalOperatorType::SEQ_SCAN:</span>
+<span class="lineNum">     121 </span><span class="lineCov">        166 :                 return &quot;SEQ_SCAN&quot;;</span>
 <span class="lineNum">     122 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::INDEX_SCAN:</span>
 <span class="lineNum">     123 </span><span class="lineNoCov">          0 :                 return &quot;INDEX_SCAN&quot;;</span>
 <span class="lineNum">     124 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::EXTERNAL_FILE_SCAN:</span>
@@ -189,30 +189,30 @@
 <span class="lineNum">     127 </span><span class="lineNoCov">          0 :                 return &quot;QUERY_DERIVED_SCAN&quot;;</span>
 <span class="lineNum">     128 </span><span class="lineCov">         20 :         case PhysicalOperatorType::ORDER_BY:</span>
 <span class="lineNum">     129 </span><span class="lineCov">         20 :                 return &quot;ORDER_BY&quot;;</span>
-<span class="lineNum">     130 </span><span class="lineCov">         65 :         case PhysicalOperatorType::LIMIT:</span>
-<span class="lineNum">     131 </span><span class="lineCov">         65 :                 return &quot;LIMIT&quot;;</span>
+<span class="lineNum">     130 </span><span class="lineCov">         62 :         case PhysicalOperatorType::LIMIT:</span>
+<span class="lineNum">     131 </span><span class="lineCov">         62 :                 return &quot;LIMIT&quot;;</span>
 <span class="lineNum">     132 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::AGGREGATE:</span>
 <span class="lineNum">     133 </span><span class="lineNoCov">          0 :                 return &quot;AGGREGATE&quot;;</span>
 <span class="lineNum">     134 </span><span class="lineCov">         43 :         case PhysicalOperatorType::HASH_GROUP_BY:</span>
 <span class="lineNum">     135 </span><span class="lineCov">         43 :                 return &quot;HASH_GROUP_BY&quot;;</span>
 <span class="lineNum">     136 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::SORT_GROUP_BY:</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :                 return &quot;SORT_GROUP_BY&quot;;</span>
-<span class="lineNum">     138 </span><span class="lineCov">        115 :         case PhysicalOperatorType::FILTER:</span>
-<span class="lineNum">     139 </span><span class="lineCov">        115 :                 return &quot;FILTER&quot;;</span>
-<span class="lineNum">     140 </span><span class="lineCov">        101 :         case PhysicalOperatorType::PROJECTION:</span>
-<span class="lineNum">     141 </span><span class="lineCov">        101 :                 return &quot;PROJECTION&quot;;</span>
+<span class="lineNum">     138 </span><span class="lineCov">        114 :         case PhysicalOperatorType::FILTER:</span>
+<span class="lineNum">     139 </span><span class="lineCov">        114 :                 return &quot;FILTER&quot;;</span>
+<span class="lineNum">     140 </span><span class="lineCov">        141 :         case PhysicalOperatorType::PROJECTION:</span>
+<span class="lineNum">     141 </span><span class="lineCov">        141 :                 return &quot;PROJECTION&quot;;</span>
 <span class="lineNum">     142 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::BASE_GROUP_BY:</span>
 <span class="lineNum">     143 </span><span class="lineNoCov">          0 :                 return &quot;BASE_GROUP_BY&quot;;</span>
 <span class="lineNum">     144 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::COPY:</span>
 <span class="lineNum">     145 </span><span class="lineNoCov">          0 :                 return &quot;COPY&quot;;</span>
 <span class="lineNum">     146 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::NESTED_LOOP_JOIN:</span>
 <span class="lineNum">     147 </span><span class="lineNoCov">          0 :                 return &quot;NESTED_LOOP_JOIN&quot;;</span>
-<span class="lineNum">     148 </span><span class="lineCov">         69 :         case PhysicalOperatorType::HASH_JOIN:</span>
-<span class="lineNum">     149 </span><span class="lineCov">         69 :                 return &quot;HASH_JOIN&quot;;</span>
+<span class="lineNum">     148 </span><span class="lineCov">         70 :         case PhysicalOperatorType::HASH_JOIN:</span>
+<span class="lineNum">     149 </span><span class="lineCov">         70 :                 return &quot;HASH_JOIN&quot;;</span>
 <span class="lineNum">     150 </span><span class="lineCov">          2 :         case PhysicalOperatorType::PIECEWISE_MERGE_JOIN:</span>
 <span class="lineNum">     151 </span><span class="lineCov">          2 :                 return &quot;PIECEWISE_MERGE_JOIN&quot;;</span>
-<span class="lineNum">     152 </span><span class="lineCov">         11 :         case PhysicalOperatorType::CROSS_PRODUCT:</span>
-<span class="lineNum">     153 </span><span class="lineCov">         11 :                 return &quot;CROSS_PRODUCT&quot;;</span>
+<span class="lineNum">     152 </span><span class="lineCov">          8 :         case PhysicalOperatorType::CROSS_PRODUCT:</span>
+<span class="lineNum">     153 </span><span class="lineCov">          8 :                 return &quot;CROSS_PRODUCT&quot;;</span>
 <span class="lineNum">     154 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::UNION:</span>
 <span class="lineNum">     155 </span><span class="lineNoCov">          0 :                 return &quot;UNION&quot;;</span>
 <span class="lineNum">     156 </span><span class="lineCov">         18 :         case PhysicalOperatorType::INSERT:</span>
@@ -225,8 +225,8 @@
 <span class="lineNum">     163 </span><span class="lineCov">          1 :                 return &quot;UPDATE&quot;;</span>
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::EXPORT_EXTERNAL_FILE:</span>
 <span class="lineNum">     165 </span><span class="lineNoCov">          0 :                 return &quot;EXPORT_EXTERNAL_FILE&quot;;</span>
-<span class="lineNum">     166 </span><span class="lineCov">          2 :         case PhysicalOperatorType::PRUNE_COLUMNS:</span>
-<span class="lineNum">     167 </span><span class="lineCov">          2 :                 return &quot;PRUNE&quot;;</span>
+<span class="lineNum">     166 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::PRUNE_COLUMNS:</span>
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :                 return &quot;PRUNE&quot;;</span>
 <span class="lineNum">     168 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::TABLE_FUNCTION:</span>
 <span class="lineNum">     169 </span><span class="lineNoCov">          0 :                 return &quot;TABLE_FUNCTION&quot;;</span>
 <span class="lineNum">     170 </span><span class="lineNoCov">          0 :         case PhysicalOperatorType::CREATE:</span>
@@ -241,8 +241,8 @@
 <span class="lineNum">     179 </span><span class="lineNoCov">          0 :         return &quot;INVALID&quot;;</span>
 <a name="180"><span class="lineNum">     180 </span>            : }</a>
 <span class="lineNum">     181 </span>            : 
-<span class="lineNum">     182 </span><span class="lineCov">        405 : string ExpressionTypeToString(ExpressionType type) {</span>
-<span class="lineNum">     183 </span><span class="lineCov">        405 :         switch (type) {</span>
+<span class="lineNum">     182 </span><span class="lineCov">        390 : string ExpressionTypeToString(ExpressionType type) {</span>
+<span class="lineNum">     183 </span><span class="lineCov">        390 :         switch (type) {</span>
 <span class="lineNum">     184 </span><span class="lineNoCov">          0 :         case ExpressionType::OPERATOR_ADD:</span>
 <span class="lineNum">     185 </span><span class="lineNoCov">          0 :                 return &quot;ADD&quot;;</span>
 <span class="lineNum">     186 </span><span class="lineNoCov">          0 :         case ExpressionType::OPERATOR_SUBTRACT:</span>
@@ -259,12 +259,12 @@
 <span class="lineNum">     197 </span><span class="lineNoCov">          0 :                 return &quot;CAST&quot;;</span>
 <span class="lineNum">     198 </span><span class="lineNoCov">          0 :         case ExpressionType::OPERATOR_NOT:</span>
 <span class="lineNum">     199 </span><span class="lineNoCov">          0 :                 return &quot;NOT&quot;;</span>
-<span class="lineNum">     200 </span><span class="lineCov">         60 :         case ExpressionType::OPERATOR_IS_NULL:</span>
-<span class="lineNum">     201 </span><span class="lineCov">         60 :                 return &quot;IS_NULL&quot;;</span>
-<span class="lineNum">     202 </span><span class="lineCov">         58 :         case ExpressionType::OPERATOR_IS_NOT_NULL:</span>
-<span class="lineNum">     203 </span><span class="lineCov">         58 :                 return &quot;IS_NOT_NULL&quot;;</span>
-<span class="lineNum">     204 </span><span class="lineCov">         36 :         case ExpressionType::OPERATOR_EXISTS:</span>
-<span class="lineNum">     205 </span><span class="lineCov">         36 :                 return &quot;EXISTS&quot;;</span>
+<span class="lineNum">     200 </span><span class="lineCov">         57 :         case ExpressionType::OPERATOR_IS_NULL:</span>
+<span class="lineNum">     201 </span><span class="lineCov">         57 :                 return &quot;IS_NULL&quot;;</span>
+<span class="lineNum">     202 </span><span class="lineCov">         57 :         case ExpressionType::OPERATOR_IS_NOT_NULL:</span>
+<span class="lineNum">     203 </span><span class="lineCov">         57 :                 return &quot;IS_NOT_NULL&quot;;</span>
+<span class="lineNum">     204 </span><span class="lineCov">         35 :         case ExpressionType::OPERATOR_EXISTS:</span>
+<span class="lineNum">     205 </span><span class="lineCov">         35 :                 return &quot;EXISTS&quot;;</span>
 <span class="lineNum">     206 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_EQUAL:</span>
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :                 return &quot;EQUAL&quot;;</span>
 <span class="lineNum">     208 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_NOTEQUAL:</span>
@@ -285,10 +285,10 @@
 <span class="lineNum">     223 </span><span class="lineCov">          8 :                 return &quot;IN&quot;;</span>
 <span class="lineNum">     224 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_DISTINCT_FROM:</span>
 <span class="lineNum">     225 </span><span class="lineNoCov">          0 :                 return &quot;DISTINCT_FROM&quot;;</span>
-<span class="lineNum">     226 </span><span class="lineCov">         86 :         case ExpressionType::CONJUNCTION_AND:</span>
-<span class="lineNum">     227 </span><span class="lineCov">         86 :                 return &quot;AND&quot;;</span>
-<span class="lineNum">     228 </span><span class="lineCov">        101 :         case ExpressionType::CONJUNCTION_OR:</span>
-<span class="lineNum">     229 </span><span class="lineCov">        101 :                 return &quot;OR&quot;;</span>
+<span class="lineNum">     226 </span><span class="lineCov">         82 :         case ExpressionType::CONJUNCTION_AND:</span>
+<span class="lineNum">     227 </span><span class="lineCov">         82 :                 return &quot;AND&quot;;</span>
+<span class="lineNum">     228 </span><span class="lineCov">         96 :         case ExpressionType::CONJUNCTION_OR:</span>
+<span class="lineNum">     229 </span><span class="lineCov">         96 :                 return &quot;OR&quot;;</span>
 <span class="lineNum">     230 </span><span class="lineNoCov">          0 :         case ExpressionType::VALUE_CONSTANT:</span>
 <span class="lineNum">     231 </span><span class="lineNoCov">          0 :                 return &quot;CONSTANT&quot;;</span>
 <span class="lineNum">     232 </span><span class="lineNoCov">          0 :         case ExpressionType::VALUE_PARAMETER:</span>
@@ -331,8 +331,8 @@
 <span class="lineNum">     269 </span><span class="lineNoCov">          0 :                 return &quot;COALESCE&quot;;</span>
 <span class="lineNum">     270 </span><span class="lineNoCov">          0 :         case ExpressionType::ROW_SUBQUERY:</span>
 <span class="lineNum">     271 </span><span class="lineNoCov">          0 :                 return &quot;SUBQUERY&quot;;</span>
-<span class="lineNum">     272 </span><span class="lineCov">         45 :         case ExpressionType::SELECT_SUBQUERY:</span>
-<span class="lineNum">     273 </span><span class="lineCov">         45 :                 return &quot;SUBQUERY&quot;;</span>
+<span class="lineNum">     272 </span><span class="lineCov">         44 :         case ExpressionType::SELECT_SUBQUERY:</span>
+<span class="lineNum">     273 </span><span class="lineCov">         44 :                 return &quot;SUBQUERY&quot;;</span>
 <span class="lineNum">     274 </span><span class="lineNoCov">          0 :         case ExpressionType::STAR:</span>
 <span class="lineNum">     275 </span><span class="lineNoCov">          0 :                 return &quot;STAR&quot;;</span>
 <span class="lineNum">     276 </span><span class="lineNoCov">          0 :         case ExpressionType::PLACEHOLDER:</span>
@@ -365,8 +365,8 @@
 <span class="lineNum">     303 </span><span class="lineNoCov">          0 :         return &quot;INVALID&quot;;</span>
 <a name="304"><span class="lineNum">     304 </span>            : }</a>
 <span class="lineNum">     305 </span>            : 
-<span class="lineNum">     306 </span><span class="lineCov">        514 : string ExpressionTypeToOperator(ExpressionType type) {</span>
-<span class="lineNum">     307 </span><span class="lineCov">        514 :         switch (type) {</span>
+<span class="lineNum">     306 </span><span class="lineCov">        501 : string ExpressionTypeToOperator(ExpressionType type) {</span>
+<span class="lineNum">     307 </span><span class="lineCov">        501 :         switch (type) {</span>
 <span class="lineNum">     308 </span><span class="lineNoCov">          0 :         case ExpressionType::OPERATOR_ADD:</span>
 <span class="lineNum">     309 </span><span class="lineNoCov">          0 :                 return &quot;+&quot;;</span>
 <span class="lineNum">     310 </span><span class="lineNoCov">          0 :         case ExpressionType::OPERATOR_SUBTRACT:</span>
@@ -381,8 +381,8 @@
 <span class="lineNum">     319 </span><span class="lineNoCov">          0 :                 return &quot;%&quot;;</span>
 <span class="lineNum">     320 </span><span class="lineNoCov">          0 :         case ExpressionType::OPERATOR_NOT:</span>
 <span class="lineNum">     321 </span><span class="lineNoCov">          0 :                 return &quot;!&quot;;</span>
-<span class="lineNum">     322 </span><span class="lineCov">         99 :         case ExpressionType::COMPARE_EQUAL:</span>
-<span class="lineNum">     323 </span><span class="lineCov">         99 :                 return &quot;=&quot;;</span>
+<span class="lineNum">     322 </span><span class="lineCov">        100 :         case ExpressionType::COMPARE_EQUAL:</span>
+<span class="lineNum">     323 </span><span class="lineCov">        100 :                 return &quot;=&quot;;</span>
 <span class="lineNum">     324 </span><span class="lineCov">          3 :         case ExpressionType::COMPARE_NOTEQUAL:</span>
 <span class="lineNum">     325 </span><span class="lineCov">          3 :                 return &quot;!=&quot;;</span>
 <span class="lineNum">     326 </span><span class="lineCov">         15 :         case ExpressionType::COMPARE_LESSTHAN:</span>
@@ -395,19 +395,19 @@
 <span class="lineNum">     333 </span><span class="lineCov">         16 :                 return &quot;&gt;=&quot;;</span>
 <span class="lineNum">     334 </span><span class="lineNoCov">          0 :         case ExpressionType::STAR:</span>
 <span class="lineNum">     335 </span><span class="lineNoCov">          0 :                 return &quot;*&quot;;</span>
-<span class="lineNum">     336 </span><span class="lineCov">        360 :         default:</span>
-<span class="lineNum">     337 </span><span class="lineCov">        360 :                 return &quot;&quot;;</span>
+<span class="lineNum">     336 </span><span class="lineCov">        346 :         default:</span>
+<span class="lineNum">     337 </span><span class="lineCov">        346 :                 return &quot;&quot;;</span>
 <span class="lineNum">     338 </span>            :         }
 <a name="339"><span class="lineNum">     339 </span>            : }</a>
 <span class="lineNum">     340 </span>            : 
-<span class="lineNum">     341 </span><span class="lineCov">         71 : string JoinTypeToString(JoinType type) {</span>
-<span class="lineNum">     342 </span><span class="lineCov">         71 :         switch (type) {</span>
+<span class="lineNum">     341 </span><span class="lineCov">         72 : string JoinTypeToString(JoinType type) {</span>
+<span class="lineNum">     342 </span><span class="lineCov">         72 :         switch (type) {</span>
 <span class="lineNum">     343 </span><span class="lineCov">          1 :         case JoinType::LEFT:</span>
 <span class="lineNum">     344 </span><span class="lineCov">          1 :                 return &quot;LEFT&quot;;</span>
 <span class="lineNum">     345 </span><span class="lineCov">          2 :         case JoinType::RIGHT:</span>
 <span class="lineNum">     346 </span><span class="lineCov">          2 :                 return &quot;RIGHT&quot;;</span>
-<span class="lineNum">     347 </span><span class="lineCov">         60 :         case JoinType::INNER:</span>
-<span class="lineNum">     348 </span><span class="lineCov">         60 :                 return &quot;INNER&quot;;</span>
+<span class="lineNum">     347 </span><span class="lineCov">         61 :         case JoinType::INNER:</span>
+<span class="lineNum">     348 </span><span class="lineCov">         61 :                 return &quot;INNER&quot;;</span>
 <span class="lineNum">     349 </span><span class="lineNoCov">          0 :         case JoinType::OUTER:</span>
 <span class="lineNum">     350 </span><span class="lineNoCov">          0 :                 return &quot;OUTER&quot;;</span>
 <span class="lineNum">     351 </span><span class="lineCov">          5 :         case JoinType::SEMI:</span>
@@ -428,12 +428,12 @@
 <span class="lineNum">     366 </span><span class="lineNoCov">          0 :         throw ConversionException(&quot;No ExternalFileFormat for input '%s'&quot;, upper.c_str());</span>
 <a name="367"><span class="lineNum">     367 </span>            : }</a>
 <span class="lineNum">     368 </span>            : 
-<span class="lineNum">     369 </span><span class="lineCov">          6 : IndexType StringToIndexType(const string &amp;str) {</span>
-<span class="lineNum">     370 </span><span class="lineCov">         12 :         string upper_str = StringUtil::Upper(str);</span>
-<span class="lineNum">     371 </span><span class="lineCov">          6 :         if (upper_str == &quot;INVALID&quot;) {</span>
+<span class="lineNum">     369 </span><span class="lineCov">          8 : IndexType StringToIndexType(const string &amp;str) {</span>
+<span class="lineNum">     370 </span><span class="lineCov">         16 :         string upper_str = StringUtil::Upper(str);</span>
+<span class="lineNum">     371 </span><span class="lineCov">          8 :         if (upper_str == &quot;INVALID&quot;) {</span>
 <span class="lineNum">     372 </span><span class="lineNoCov">          0 :                 return IndexType::INVALID;</span>
-<span class="lineNum">     373 </span><span class="lineCov">          6 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
-<span class="lineNum">     374 </span><span class="lineCov">          6 :                 return IndexType::BTREE;</span>
+<span class="lineNum">     373 </span><span class="lineCov">          8 :         } else if (upper_str == &quot;BTREE&quot;) {</span>
+<span class="lineNum">     374 </span><span class="lineCov">          8 :                 return IndexType::BTREE;</span>
 <span class="lineNum">     375 </span>            :         } else {
 <span class="lineNum">     376 </span><span class="lineNoCov">          0 :                 throw ConversionException(StringUtil::Format(&quot;No IndexType conversion from string '%s'&quot;, upper_str.c_str()));</span>
 <span class="lineNum">     377 </span>            :         }

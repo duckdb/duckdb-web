@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - execution/operator/join/physical_hash_join.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - execution/operator/join/physical_hash_join.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">46</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -68,84 +68,84 @@
 <span class="lineNum">       6 </span>            : using namespace duckdb;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">      27563 : PhysicalHashJoin::PhysicalHashJoin(LogicalOperator &amp;op, unique_ptr&lt;PhysicalOperator&gt; left,</span>
-<span class="lineNum">      10 </span><span class="lineCov">      27563 :                                    unique_ptr&lt;PhysicalOperator&gt; right, vector&lt;JoinCondition&gt; cond, JoinType join_type)</span>
-<span class="lineNum">      11 </span><span class="lineCov">      27563 :     : PhysicalJoin(op, PhysicalOperatorType::HASH_JOIN, move(cond), join_type) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">      27563 :         hash_table = make_unique&lt;JoinHashTable&gt;(conditions, right-&gt;GetTypes(), join_type);</span>
+<span class="lineNum">       9 </span><span class="lineCov">      27892 : PhysicalHashJoin::PhysicalHashJoin(LogicalOperator &amp;op, unique_ptr&lt;PhysicalOperator&gt; left,</span>
+<span class="lineNum">      10 </span><span class="lineCov">      27892 :                                    unique_ptr&lt;PhysicalOperator&gt; right, vector&lt;JoinCondition&gt; cond, JoinType join_type)</span>
+<span class="lineNum">      11 </span><span class="lineCov">      27892 :     : PhysicalJoin(op, PhysicalOperatorType::HASH_JOIN, move(cond), join_type) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">      27892 :         hash_table = make_unique&lt;JoinHashTable&gt;(conditions, right-&gt;GetTypes(), join_type);</span>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">      27563 :         children.push_back(move(left));</span>
-<span class="lineNum">      15 </span><span class="lineCov">      27563 :         children.push_back(move(right));</span>
-<a name="16"><span class="lineNum">      16 </span><span class="lineCov">      27563 : }</span></a>
+<span class="lineNum">      14 </span><span class="lineCov">      27892 :         children.push_back(move(left));</span>
+<span class="lineNum">      15 </span><span class="lineCov">      27892 :         children.push_back(move(right));</span>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">      27892 : }</span></a>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">     147411 : void PhysicalHashJoin::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">     147411 :         auto state = reinterpret_cast&lt;PhysicalHashJoinOperatorState *&gt;(state_);</span>
-<span class="lineNum">      20 </span><span class="lineCov">     147411 :         if (!state-&gt;initialized) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">     116640 : void PhysicalHashJoin::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     116640 :         auto state = reinterpret_cast&lt;PhysicalHashJoinOperatorState *&gt;(state_);</span>
+<span class="lineNum">      20 </span><span class="lineCov">     116640 :         if (!state-&gt;initialized) {</span>
 <span class="lineNum">      21 </span>            :                 // build the HT
-<span class="lineNum">      22 </span><span class="lineCov">      27258 :                 auto right_state = children[1]-&gt;GetOperatorState(state-&gt;parent);</span>
-<span class="lineNum">      23 </span><span class="lineCov">      27258 :                 auto types = children[1]-&gt;GetTypes();</span>
+<span class="lineNum">      22 </span><span class="lineCov">      27315 :                 auto right_state = children[1]-&gt;GetOperatorState(state-&gt;parent);</span>
+<span class="lineNum">      23 </span><span class="lineCov">      27315 :                 auto types = children[1]-&gt;GetTypes();</span>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">      27258 :                 DataChunk right_chunk;</span>
-<span class="lineNum">      26 </span><span class="lineCov">      27258 :                 right_chunk.Initialize(types);</span>
+<span class="lineNum">      25 </span><span class="lineCov">      27315 :                 DataChunk right_chunk;</span>
+<span class="lineNum">      26 </span><span class="lineCov">      27315 :                 right_chunk.Initialize(types);</span>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">      27258 :                 state-&gt;join_keys.Initialize(hash_table-&gt;condition_types);</span>
+<span class="lineNum">      28 </span><span class="lineCov">      27315 :                 state-&gt;join_keys.Initialize(hash_table-&gt;condition_types);</span>
 <span class="lineNum">      29 </span>            :                 while (true) {
 <span class="lineNum">      30 </span>            :                         // get the child chunk
-<span class="lineNum">      31 </span><span class="lineCov">      79906 :                         children[1]-&gt;GetChunk(context, right_chunk, right_state.get());</span>
-<span class="lineNum">      32 </span><span class="lineCov">      79906 :                         if (right_chunk.size() == 0) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">      27258 :                                 break;</span>
+<span class="lineNum">      31 </span><span class="lineCov">      79964 :                         children[1]-&gt;GetChunk(context, right_chunk, right_state.get());</span>
+<span class="lineNum">      32 </span><span class="lineCov">      79964 :                         if (right_chunk.size() == 0) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      27315 :                                 break;</span>
 <span class="lineNum">      34 </span>            :                         }
 <span class="lineNum">      35 </span>            :                         // resolve the join keys for the right chunk
-<span class="lineNum">      36 </span><span class="lineCov">      52648 :                         state-&gt;join_keys.Reset();</span>
-<span class="lineNum">      37 </span><span class="lineCov">     105296 :                         ExpressionExecutor executor(right_chunk, context);</span>
-<span class="lineNum">      38 </span><span class="lineCov">     106808 :                         for (size_t i = 0; i &lt; conditions.size(); i++) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">      54160 :                                 executor.ExecuteExpression(conditions[i].right.get(), state-&gt;join_keys.data[i]);</span>
+<span class="lineNum">      36 </span><span class="lineCov">      52649 :                         state-&gt;join_keys.Reset();</span>
+<span class="lineNum">      37 </span><span class="lineCov">     105298 :                         ExpressionExecutor executor(right_chunk, context);</span>
+<span class="lineNum">      38 </span><span class="lineCov">     114931 :                         for (size_t i = 0; i &lt; conditions.size(); i++) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">      62282 :                                 executor.ExecuteExpression(conditions[i].right.get(), state-&gt;join_keys.data[i]);</span>
 <span class="lineNum">      40 </span>            :                         }
 <span class="lineNum">      41 </span>            :                         // build the HT
-<span class="lineNum">      42 </span><span class="lineCov">      52648 :                         hash_table-&gt;Build(state-&gt;join_keys, right_chunk);</span>
-<span class="lineNum">      43 </span><span class="lineCov">      52648 :                 }</span>
+<span class="lineNum">      42 </span><span class="lineCov">      52649 :                         hash_table-&gt;Build(state-&gt;join_keys, right_chunk);</span>
+<span class="lineNum">      43 </span><span class="lineCov">      52649 :                 }</span>
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">      27258 :                 if (hash_table-&gt;size() == 0 &amp;&amp; hash_table-&gt;join_type != JoinType::ANTI) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">      27315 :                 if (hash_table-&gt;size() == 0 &amp;&amp; hash_table-&gt;join_type != JoinType::ANTI) {</span>
 <span class="lineNum">      46 </span>            :                         // empty hash table means empty result set
 <span class="lineNum">      47 </span>            :                         // except for ANTI-join, in which case it means NOP join
 <span class="lineNum">      48 </span>            :                         // FIXME: NOP join should not involve HT at all
-<span class="lineNum">      49 </span><span class="lineCov">        203 :                         return;</span>
+<span class="lineNum">      49 </span><span class="lineCov">        259 :                         return;</span>
 <span class="lineNum">      50 </span>            :                 }
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">      27055 :                 state-&gt;initialized = true;</span>
+<span class="lineNum">      52 </span><span class="lineCov">      27056 :                 state-&gt;initialized = true;</span>
 <span class="lineNum">      53 </span>            :         }
-<span class="lineNum">      54 </span><span class="lineCov">     147208 :         if (state-&gt;scan_structure) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">     116381 :         if (state-&gt;scan_structure) {</span>
 <span class="lineNum">      55 </span>            :                 // still have elements remaining from the previous probe (i.e. we got
 <span class="lineNum">      56 </span>            :                 // &gt;1024 elements in the previous probe)
-<span class="lineNum">      57 </span><span class="lineCov">     118806 :                 state-&gt;scan_structure-&gt;Next(state-&gt;join_keys, state-&gt;child_chunk, chunk);</span>
-<span class="lineNum">      58 </span><span class="lineCov">     118806 :                 if (chunk.size() &gt; 0) {</span>
-<span class="lineNum">      59 </span><span class="lineCov">      66437 :                         return;</span>
+<span class="lineNum">      57 </span><span class="lineCov">      87979 :                 state-&gt;scan_structure-&gt;Next(state-&gt;join_keys, state-&gt;child_chunk, chunk);</span>
+<span class="lineNum">      58 </span><span class="lineCov">      87979 :                 if (chunk.size() &gt; 0) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">      35762 :                         return;</span>
 <span class="lineNum">      60 </span>            :                 }
-<span class="lineNum">      61 </span><span class="lineCov">      52369 :                 state-&gt;scan_structure = nullptr;</span>
+<span class="lineNum">      61 </span><span class="lineCov">      52217 :                 state-&gt;scan_structure = nullptr;</span>
 <span class="lineNum">      62 </span>            :         }
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :         // probe the HT
-<span class="lineNum">      65 </span><span class="lineCov">      33320 :         do {</span>
+<span class="lineNum">      65 </span><span class="lineCov">      33474 :         do {</span>
 <span class="lineNum">      66 </span>            :                 // fetch the chunk from the left side
-<span class="lineNum">      67 </span><span class="lineCov">     114091 :                 children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">      68 </span><span class="lineCov">     114091 :                 if (state-&gt;child_chunk.size() == 0) {</span>
-<span class="lineNum">      69 </span><span class="lineCov">      28426 :                         return;</span>
+<span class="lineNum">      67 </span><span class="lineCov">     114093 :                 children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      68 </span><span class="lineCov">     114093 :                 if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      69 </span><span class="lineCov">      28427 :                         return;</span>
 <span class="lineNum">      70 </span>            :                 }
 <span class="lineNum">      71 </span>            :                 // remove any selection vectors
-<span class="lineNum">      72 </span><span class="lineCov">      85665 :                 state-&gt;child_chunk.Flatten();</span>
+<span class="lineNum">      72 </span><span class="lineCov">      85666 :                 state-&gt;child_chunk.Flatten();</span>
 <span class="lineNum">      73 </span>            :                 // resolve the join keys for the left chunk
-<span class="lineNum">      74 </span><span class="lineCov">      85665 :                 state-&gt;join_keys.Reset();</span>
-<span class="lineNum">      75 </span><span class="lineCov">     171330 :                 ExpressionExecutor executor(state-&gt;child_chunk, context);</span>
-<span class="lineNum">      76 </span><span class="lineCov">     174215 :                 for (size_t i = 0; i &lt; conditions.size(); i++) {</span>
-<span class="lineNum">      77 </span><span class="lineCov">      88550 :                         executor.ExecuteExpression(conditions[i].left.get(), state-&gt;join_keys.data[i]);</span>
+<span class="lineNum">      74 </span><span class="lineCov">      85666 :                 state-&gt;join_keys.Reset();</span>
+<span class="lineNum">      75 </span><span class="lineCov">     171332 :                 ExpressionExecutor executor(state-&gt;child_chunk, context);</span>
+<span class="lineNum">      76 </span><span class="lineCov">     174805 :                 for (size_t i = 0; i &lt; conditions.size(); i++) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">      89139 :                         executor.ExecuteExpression(conditions[i].left.get(), state-&gt;join_keys.data[i]);</span>
 <span class="lineNum">      78 </span>            :                 }
 <span class="lineNum">      79 </span>            :                 // perform the actual probe
-<span class="lineNum">      80 </span><span class="lineCov">      85665 :                 state-&gt;scan_structure = hash_table-&gt;Probe(state-&gt;join_keys);</span>
-<span class="lineNum">      81 </span><span class="lineCov">      85663 :                 state-&gt;scan_structure-&gt;Next(state-&gt;join_keys, state-&gt;child_chunk, chunk);</span>
-<span class="lineNum">      82 </span><span class="lineCov">      85663 :         } while (chunk.size() == 0);</span>
+<span class="lineNum">      80 </span><span class="lineCov">      85666 :                 state-&gt;scan_structure = hash_table-&gt;Probe(state-&gt;join_keys);</span>
+<span class="lineNum">      81 </span><span class="lineCov">      85664 :                 state-&gt;scan_structure-&gt;Next(state-&gt;join_keys, state-&gt;child_chunk, chunk);</span>
+<span class="lineNum">      82 </span><span class="lineCov">      85664 :         } while (chunk.size() == 0);</span>
 <a name="83"><span class="lineNum">      83 </span>            : }</a>
 <span class="lineNum">      84 </span>            : 
-<span class="lineNum">      85 </span><span class="lineCov">      27506 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalHashJoin::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
-<span class="lineNum">      86 </span><span class="lineCov">      27506 :         return make_unique&lt;PhysicalHashJoinOperatorState&gt;(children[0].get(), children[1].get(), parent_executor);</span>
+<span class="lineNum">      85 </span><span class="lineCov">      27737 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalHashJoin::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
+<span class="lineNum">      86 </span><span class="lineCov">      27737 :         return make_unique&lt;PhysicalHashJoinOperatorState&gt;(children[0].get(), children[1].get(), parent_executor);</span>
 <span class="lineNum">      87 </span>            : }
 </pre>
       </td>

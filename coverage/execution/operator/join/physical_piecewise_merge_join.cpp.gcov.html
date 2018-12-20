@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7d93d0b6 - execution/operator/join/physical_piecewise_merge_join.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 01a32607 - execution/operator/join/physical_piecewise_merge_join.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7d93d0b6</td>
+            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">204</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-15 11:38:29</td>
+            <td class="headerValue">2018-12-21 00:57:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -78,9 +78,9 @@
 <span class="lineNum">      16 </span>            :         size_t &amp;pos;
 <a name="17"><span class="lineNum">      17 </span>            :         sel_t result[STANDARD_VECTOR_SIZE];</a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">         90 :         MergeInfo(Vector &amp;v, size_t count, sel_t *sel_vector, size_t &amp;pos)</span>
-<span class="lineNum">      20 </span><span class="lineCov">         90 :             : v(v), count(count), sel_vector(sel_vector), pos(pos) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">         90 :         }</span>
+<span class="lineNum">      19 </span><span class="lineCov">         94 :         MergeInfo(Vector &amp;v, size_t count, sel_t *sel_vector, size_t &amp;pos)</span>
+<span class="lineNum">      20 </span><span class="lineCov">         94 :             : v(v), count(count), sel_vector(sel_vector), pos(pos) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">         94 :         }</span>
 <span class="lineNum">      22 </span>            : };
 <a name="23"><span class="lineNum">      23 </span>            : </a>
 <span class="lineNum">      24 </span>            : struct MergeJoinEquality {
