@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report d64ba5cb - include/planner/operator/logical_delete.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 51719eac - include/planner/operator/logical_delete.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report d64ba5cb</td>
+            <td class="headerValue">DuckDB Code Coverage Report 51719eac</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 14:12:33</td>
+            <td class="headerValue">2018-12-21 15:18:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -76,22 +76,22 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : class LogicalDelete : public LogicalOperator {</a>
 <span class="lineNum">      16 </span>            : public:
-<span class="lineNum">      17 </span><span class="lineCov">        877 :         LogicalDelete(TableCatalogEntry *table) : LogicalOperator(LogicalOperatorType::DELETE), table(table) {</span>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        940 :         }</span></a>
+<span class="lineNum">      17 </span><span class="lineCov">        958 :         LogicalDelete(TableCatalogEntry *table) : LogicalOperator(LogicalOperatorType::DELETE), table(table) {</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        990 :         }</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">       2667 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       2667 :                 v-&gt;Visit(*this);</span></a>
-<span class="lineNum">      22 </span><span class="lineCov">       2741 :         }</span>
-<span class="lineNum">      23 </span><span class="lineCov">        867 :         vector&lt;string&gt; GetNames() override {</span>
-<span class="lineNum">      24 </span><span class="lineCov">       1768 :                 return {&quot;Count&quot;};</span>
+<span class="lineNum">      20 </span><span class="lineCov">       2907 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       2907 :                 v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">       2936 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">        952 :         vector&lt;string&gt; GetNames() override {</span>
+<span class="lineNum">      24 </span><span class="lineCov">       1919 :                 return {&quot;Count&quot;};</span>
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :         TableCatalogEntry *table;
 <a name="28"><span class="lineNum">      28 </span>            : </a>
 <span class="lineNum">      29 </span>            : protected:
-<span class="lineNum">      30 </span><span class="lineCov">        857 :         void ResolveTypes() override {</span>
-<span class="lineNum">      31 </span><span class="lineCov">        857 :                 types.push_back(TypeId::BIGINT);</span>
-<span class="lineNum">      32 </span><span class="lineCov">        992 :         }</span>
+<span class="lineNum">      30 </span><span class="lineCov">        951 :         void ResolveTypes() override {</span>
+<span class="lineNum">      31 </span><span class="lineCov">        951 :                 types.push_back(TypeId::BIGINT);</span>
+<span class="lineNum">      32 </span><span class="lineCov">        969 :         }</span>
 <span class="lineNum">      33 </span>            : };
 <span class="lineNum">      34 </span>            : } // namespace duckdb
 </pre>

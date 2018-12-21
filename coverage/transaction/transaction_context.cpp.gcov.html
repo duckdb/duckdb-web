@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report d64ba5cb - transaction/transaction_context.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 51719eac - transaction/transaction_context.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report d64ba5cb</td>
+            <td class="headerValue">DuckDB Code Coverage Report 51719eac</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">18</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 14:12:33</td>
+            <td class="headerValue">2018-12-21 15:18:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -78,26 +78,26 @@
 <span class="lineNum">      16 </span>            :         }
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">       1088 : }</span></a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">    3053302 : void TransactionContext::BeginTransaction() {</span>
-<span class="lineNum">      20 </span><span class="lineCov">    3053302 :         if (current_transaction) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3053391 : void TransactionContext::BeginTransaction() {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3053391 :         if (current_transaction) {</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :                 throw TransactionException(&quot;Transaction is already running!&quot;);</span>
 <span class="lineNum">      22 </span>            :         }
-<span class="lineNum">      23 </span><span class="lineCov">    3053302 :         current_transaction = transaction_manager.StartTransaction();</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3053304 : }</span></a>
+<span class="lineNum">      23 </span><span class="lineCov">    3053391 :         current_transaction = transaction_manager.StartTransaction();</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3053392 : }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">    3043123 : void TransactionContext::Commit() {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    3043123 :         if (!current_transaction) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    3043164 : void TransactionContext::Commit() {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    3043164 :         if (!current_transaction) {</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :                 throw TransactionException(&quot;No transaction is currently active - cannot commit!&quot;);</span>
 <span class="lineNum">      29 </span>            :         }
-<span class="lineNum">      30 </span><span class="lineCov">    3043123 :         transaction_manager.CommitTransaction(current_transaction);</span>
-<span class="lineNum">      31 </span><span class="lineCov">    3043199 :         current_transaction = nullptr;</span>
-<a name="32"><span class="lineNum">      32 </span><span class="lineCov">    3043199 : }</span></a>
+<span class="lineNum">      30 </span><span class="lineCov">    3043164 :         transaction_manager.CommitTransaction(current_transaction);</span>
+<span class="lineNum">      31 </span><span class="lineCov">    3043287 :         current_transaction = nullptr;</span>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">    3043287 : }</span></a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">      10009 : void TransactionContext::Rollback() {</span>
-<span class="lineNum">      35 </span><span class="lineCov">      10009 :         if (!current_transaction) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">      10029 : void TransactionContext::Rollback() {</span>
+<span class="lineNum">      35 </span><span class="lineCov">      10029 :         if (!current_transaction) {</span>
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :                 throw TransactionException(&quot;No transaction is currently active - cannot rollback!&quot;);</span>
 <span class="lineNum">      37 </span>            :         }
-<span class="lineNum">      38 </span><span class="lineCov">      10009 :         transaction_manager.RollbackTransaction(current_transaction);</span>
+<span class="lineNum">      38 </span><span class="lineCov">      10029 :         transaction_manager.RollbackTransaction(current_transaction);</span>
 <span class="lineNum">      39 </span><span class="lineCov">      10105 :         current_transaction = nullptr;</span>
 <span class="lineNum">      40 </span><span class="lineCov">      10105 : }</span>
 </pre>

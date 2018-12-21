@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report d64ba5cb - optimizer/rewriter.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 51719eac - optimizer/rewriter.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report d64ba5cb</td>
+            <td class="headerValue">DuckDB Code Coverage Report 51719eac</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">67</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 14:12:33</td>
+            <td class="headerValue">2018-12-21 15:18:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -69,26 +69,26 @@
 <span class="lineNum">       7 </span>            : using namespace std;
 <a name="8"><span class="lineNum">       8 </span>            : </a>
 <span class="lineNum">       9 </span>            : namespace duckdb {
-<span class="lineNum">      10 </span><span class="lineCov">    3131228 : unique_ptr&lt;LogicalOperator&gt; Rewriter::ApplyRules(unique_ptr&lt;LogicalOperator&gt; root) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    3131228 :         bool finished_iterating;</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3130994 : unique_ptr&lt;LogicalOperator&gt; Rewriter::ApplyRules(unique_ptr&lt;LogicalOperator&gt; root) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3130994 :         bool finished_iterating;</span>
 <span class="lineNum">      12 </span>            : 
 <span class="lineNum">      13 </span><span class="lineCov">    1429063 :         do {</span>
-<span class="lineNum">      14 </span><span class="lineCov">    4561480 :                 finished_iterating = true;</span>
-<span class="lineNum">      15 </span><span class="lineCov">    4561480 :                 AbstractOperator op(root.get());</span>
-<span class="lineNum">      16 </span><span class="lineCov">   62307701 :                 for (auto iterator = op.begin(); iterator != op.end(); iterator++) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">   57746085 :                         auto &amp;vertex = *iterator;</span>
+<span class="lineNum">      14 </span><span class="lineCov">    4561220 :                 finished_iterating = true;</span>
+<span class="lineNum">      15 </span><span class="lineCov">    4561220 :                 AbstractOperator op(root.get());</span>
+<span class="lineNum">      16 </span><span class="lineCov">   62306573 :                 for (auto iterator = op.begin(); iterator != op.end(); iterator++) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">   57742852 :                         auto &amp;vertex = *iterator;</span>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">  335257153 :                         for (auto &amp;rule : rules) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">  280076157 :                                 vector&lt;AbstractOperator&gt; bindings;</span>
-<span class="lineNum">      21 </span><span class="lineCov">  280070227 :                                 bool match = MatchOperands(rule-&gt;root.get(), vertex, bindings);</span>
-<span class="lineNum">      22 </span><span class="lineCov">  280135346 :                                 if (!match) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">  267729055 :                                         continue;</span>
+<span class="lineNum">      19 </span><span class="lineCov">  335213422 :                         for (auto &amp;rule : rules) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">  280045538 :                                 vector&lt;AbstractOperator&gt; bindings;</span>
+<span class="lineNum">      21 </span><span class="lineCov">  280019122 :                                 bool match = MatchOperands(rule-&gt;root.get(), vertex, bindings);</span>
+<span class="lineNum">      22 </span><span class="lineCov">  280110334 :                                 if (!match) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">  267705062 :                                         continue;</span>
 <span class="lineNum">      24 </span>            :                                 }
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">   12406291 :                                 if (vertex.type == AbstractOperatorType::LOGICAL_OPERATOR) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">     614465 :                                         auto new_vertex = rule-&gt;Apply(*this, *vertex.value.op, bindings, finished_iterating);</span>
-<span class="lineNum">      28 </span><span class="lineCov">     613904 :                                         if (!new_vertex) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">     613351 :                                                 continue;</span>
+<span class="lineNum">      26 </span><span class="lineCov">   12405272 :                                 if (vertex.type == AbstractOperatorType::LOGICAL_OPERATOR) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">     613933 :                                         auto new_vertex = rule-&gt;Apply(*this, *vertex.value.op, bindings, finished_iterating);</span>
+<span class="lineNum">      28 </span><span class="lineCov">     612988 :                                         if (!new_vertex) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">     612795 :                                                 continue;</span>
 <span class="lineNum">      30 </span>            :                                         }
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :                                         if (vertex.value.op == root.get()) {</span>
@@ -101,13 +101,13 @@
 <span class="lineNum">      39 </span>            :                                         }
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            :                                 } else { // AbstractOperatorType::ABSTRACT_EXPRESSION
-<span class="lineNum">      42 </span><span class="lineCov">   11791826 :                                         auto new_vertex = rule-&gt;Apply(*this, *vertex.value.expr, bindings, finished_iterating);</span>
-<span class="lineNum">      43 </span><span class="lineCov">   11792938 :                                         if (!new_vertex) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">    9345657 :                                                 continue;</span>
+<span class="lineNum">      42 </span><span class="lineCov">   11791339 :                                         auto new_vertex = rule-&gt;Apply(*this, *vertex.value.expr, bindings, finished_iterating);</span>
+<span class="lineNum">      43 </span><span class="lineCov">   11793289 :                                         if (!new_vertex) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">    9345494 :                                                 continue;</span>
 <span class="lineNum">      45 </span>            :                                         }
 <span class="lineNum">      46 </span>            :                                         // resolve the type of the new expression
 <span class="lineNum">      47 </span>            :                                         // this also resolves statistics for the operator again
-<span class="lineNum">      48 </span><span class="lineCov">    2445891 :                                         new_vertex-&gt;ResolveType();</span>
+<span class="lineNum">      48 </span><span class="lineCov">    2445960 :                                         new_vertex-&gt;ResolveType();</span>
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span>            :                                         // abstract expressions cannot be the root of the plan
 <span class="lineNum">      51 </span>            :                                         // so we don't need to consider replacing it
@@ -117,65 +117,65 @@
 <span class="lineNum">      55 </span><span class="lineCov">    2445983 :                                 break;</span>
 <span class="lineNum">      56 </span>            :                         }
 <span class="lineNum">      57 </span>            :                 }
-<span class="lineNum">      58 </span><span class="lineCov">    4562452 :         } while (!finished_iterating);</span>
-<span class="lineNum">      59 </span><span class="lineCov">    3133389 :         return root;</span>
+<span class="lineNum">      58 </span><span class="lineCov">    4561987 :         } while (!finished_iterating);</span>
+<span class="lineNum">      59 </span><span class="lineCov">    3132924 :         return root;</span>
 <a name="60"><span class="lineNum">      60 </span>            : }</a>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">  317703303 : bool Rewriter::MatchOperands(AbstractRuleNode *node, AbstractOperator rel, vector&lt;AbstractOperator&gt; &amp;bindings) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">  317703303 :         if (!node-&gt;Matches(rel)) {</span>
-<span class="lineNum">      64 </span><span class="lineCov">  281238432 :                 return false;</span>
+<span class="lineNum">      62 </span><span class="lineCov">  317676084 : bool Rewriter::MatchOperands(AbstractRuleNode *node, AbstractOperator rel, vector&lt;AbstractOperator&gt; &amp;bindings) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">  317676084 :         if (!node-&gt;Matches(rel)) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">  281216464 :                 return false;</span>
 <span class="lineNum">      65 </span>            :         }
-<span class="lineNum">      66 </span><span class="lineCov">   72927031 :         auto children = rel.GetAllChildren();</span>
+<span class="lineNum">      66 </span><span class="lineCov">   72916941 :         auto children = rel.GetAllChildren();</span>
 <span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span><span class="lineCov">  182381342 :         vector&lt;AbstractOperator&gt; current_bindings = {rel};</span>
+<span class="lineNum">      68 </span><span class="lineCov">  182365609 :         vector&lt;AbstractOperator&gt; current_bindings = {rel};</span>
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">   36471127 :         switch (node-&gt;child_policy) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">   36468664 :         switch (node-&gt;child_policy) {</span>
 <span class="lineNum">      71 </span><span class="lineNoCov">          0 :         case ChildPolicy::ALWAYS_MATCH:</span>
 <span class="lineNum">      72 </span>            :                 // ChildPolicy::ALWAYS_MATCH simply always matches
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      74 </span><span class="lineCov">   23199902 :         case ChildPolicy::ANY: {</span>
+<span class="lineNum">      74 </span><span class="lineCov">   23198267 :         case ChildPolicy::ANY: {</span>
 <span class="lineNum">      75 </span>            :                 // with ChildPolicy::Any only a single child must match
-<span class="lineNum">      76 </span><span class="lineCov">   23199902 :                 bool match = false;</span>
-<span class="lineNum">      77 </span><span class="lineCov">   38937907 :                 for (auto &amp;c : children) {</span>
-<span class="lineNum">      78 </span><span class="lineCov">   15736828 :                         for (auto &amp;co : node-&gt;children) {</span>
+<span class="lineNum">      76 </span><span class="lineCov">   23198267 :                 bool match = false;</span>
+<span class="lineNum">      77 </span><span class="lineCov">   38936667 :                 for (auto &amp;c : children) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">   15737785 :                         for (auto &amp;co : node-&gt;children) {</span>
 <span class="lineNum">      79 </span><span class="lineNoCov">          0 :                                 match = MatchOperands(co.get(), c, current_bindings);</span>
 <span class="lineNum">      80 </span><span class="lineNoCov">          0 :                                 if (match) {</span>
 <span class="lineNum">      81 </span><span class="lineNoCov">          0 :                                         break;</span>
 <span class="lineNum">      82 </span>            :                                 }
 <span class="lineNum">      83 </span>            :                         }
-<span class="lineNum">      84 </span><span class="lineCov">   15738005 :                         if (match) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">   15738400 :                         if (match) {</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :                                 break;</span>
 <span class="lineNum">      86 </span>            :                         }
 <span class="lineNum">      87 </span>            :                 }
-<span class="lineNum">      88 </span><span class="lineCov">   23208786 :                 if (match) {</span>
+<span class="lineNum">      88 </span><span class="lineCov">   23205639 :                 if (match) {</span>
 <span class="lineNum">      89 </span><span class="lineNoCov">          0 :                         return true;</span>
 <span class="lineNum">      90 </span>            :                 }
-<span class="lineNum">      91 </span><span class="lineCov">   23208786 :                 break;</span>
+<span class="lineNum">      91 </span><span class="lineCov">   23205639 :                 break;</span>
 <span class="lineNum">      92 </span>            :         }
-<span class="lineNum">      93 </span><span class="lineCov">   12664694 :         case ChildPolicy::UNORDERED: {</span>
+<span class="lineNum">      93 </span><span class="lineCov">   12664352 :         case ChildPolicy::UNORDERED: {</span>
 <span class="lineNum">      94 </span>            :                 // ChildPolicy::UNORDERED requires all children to match to exactly one
 <span class="lineNum">      95 </span>            :                 // node and none of the child nodes should be left unmatched
 <span class="lineNum">      96 </span>            : 
 <span class="lineNum">      97 </span>            :                 // FIXME: unordered should match all of node-&gt;children of the node!
 <span class="lineNum">      98 </span>            :                 // current implementation is not correct
-<span class="lineNum">      99 </span><span class="lineCov">   12664694 :                 if (children.size() != node-&gt;children.size()) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">   12664352 :                 if (children.size() != node-&gt;children.size()) {</span>
 <span class="lineNum">     100 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">     101 </span>            :                 }
 <span class="lineNum">     102 </span>            :                 // For each operand, at least one child must match. If
 <span class="lineNum">     103 </span>            :                 // matchAnyChildren, usually there's just one operand.
-<span class="lineNum">     104 </span><span class="lineCov">   35073761 :                 for (auto &amp;c : children) {</span>
-<span class="lineNum">     105 </span><span class="lineCov">   23303279 :                         bool match = false;</span>
-<span class="lineNum">     106 </span><span class="lineCov">   37196640 :                         for (auto &amp;co : node-&gt;children) {</span>
-<span class="lineNum">     107 </span><span class="lineCov">   36303233 :                                 match = MatchOperands(co.get(), c, current_bindings);</span>
-<span class="lineNum">     108 </span><span class="lineCov">   36302705 :                                 if (match) {</span>
-<span class="lineNum">     109 </span><span class="lineCov">   22409344 :                                         break;</span>
+<span class="lineNum">     104 </span><span class="lineCov">   35072729 :                 for (auto &amp;c : children) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">   23302666 :                         bool match = false;</span>
+<span class="lineNum">     106 </span><span class="lineCov">   37195527 :                         for (auto &amp;co : node-&gt;children) {</span>
+<span class="lineNum">     107 </span><span class="lineCov">   36302801 :                                 match = MatchOperands(co.get(), c, current_bindings);</span>
+<span class="lineNum">     108 </span><span class="lineCov">   36301250 :                                 if (match) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">   22408389 :                                         break;</span>
 <span class="lineNum">     110 </span>            :                                 }
 <span class="lineNum">     111 </span>            :                         }
-<span class="lineNum">     112 </span><span class="lineCov">   23302086 :                         if (!match) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">   23301580 :                         if (!match) {</span>
 <span class="lineNum">     113 </span><span class="lineCov">     892950 :                                 return false;</span>
 <span class="lineNum">     114 </span>            :                         }
 <span class="lineNum">     115 </span>            :                 }
-<span class="lineNum">     116 </span><span class="lineCov">   11774129 :                 break;</span>
+<span class="lineNum">     116 </span><span class="lineCov">   11773600 :                 break;</span>
 <span class="lineNum">     117 </span>            :         }
 <span class="lineNum">     118 </span><span class="lineNoCov">          0 :         case ChildPolicy::ORDERED: {</span>
 <span class="lineNum">     119 </span>            :                 // ChildPolicy::ORDERED requires the children to match exactly in order
@@ -191,43 +191,43 @@
 <span class="lineNum">     129 </span>            :                 }
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     131 </span>            :         }
-<span class="lineNum">     132 </span><span class="lineCov">     608397 :         case ChildPolicy::SOME: {</span>
+<span class="lineNum">     132 </span><span class="lineCov">     608129 :         case ChildPolicy::SOME: {</span>
 <span class="lineNum">     133 </span>            :                 // ChildPolicy::SOME requires all nodes to find a match in
 <span class="lineNum">     134 </span>            :                 // node-&gt;children for one child, ChildPolicy::SOME and ChildPolicy::ANY
 <span class="lineNum">     135 </span>            :                 // is identical
-<span class="lineNum">     136 </span><span class="lineCov">     608098 :                 if (children.size() &lt; node-&gt;children.size()) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">     607735 :                 if (children.size() &lt; node-&gt;children.size()) {</span>
 <span class="lineNum">     137 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">     138 </span>            :                 }
-<span class="lineNum">     139 </span><span class="lineCov">     608031 :                 bool child_is_matched[children.size()];</span>
-<span class="lineNum">     140 </span><span class="lineCov">     608024 :                 memset(child_is_matched, 0, sizeof(child_is_matched));</span>
+<span class="lineNum">     139 </span><span class="lineCov">     607604 :                 bool child_is_matched[children.size()];</span>
+<span class="lineNum">     140 </span><span class="lineCov">     607699 :                 memset(child_is_matched, 0, sizeof(child_is_matched));</span>
 <span class="lineNum">     141 </span>            : 
-<span class="lineNum">     142 </span><span class="lineCov">     813015 :                 for (auto &amp;co : node-&gt;children) {</span>
-<span class="lineNum">     143 </span><span class="lineCov">     766983 :                         bool match = false;</span>
-<span class="lineNum">     144 </span><span class="lineCov">    1927909 :                         for (size_t i = 0; i &lt; children.size(); i++) {</span>
-<span class="lineNum">     145 </span><span class="lineCov">    1368832 :                                 if (child_is_matched[i]) {</span>
+<span class="lineNum">     142 </span><span class="lineCov">     811400 :                 for (auto &amp;co : node-&gt;children) {</span>
+<span class="lineNum">     143 </span><span class="lineCov">     765947 :                         bool match = false;</span>
+<span class="lineNum">     144 </span><span class="lineCov">    1926537 :                         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">     145 </span><span class="lineCov">    1368469 :                                 if (child_is_matched[i]) {</span>
 <span class="lineNum">     146 </span>            :                                         // if this node has already been matched we can't match it again
-<span class="lineNum">     147 </span><span class="lineCov">     178311 :                                         continue;</span>
+<span class="lineNum">     147 </span><span class="lineCov">     178169 :                                         continue;</span>
 <span class="lineNum">     148 </span>            :                                 }
-<span class="lineNum">     149 </span><span class="lineCov">    1190521 :                                 match = MatchOperands(co.get(), children[i], current_bindings);</span>
-<span class="lineNum">     150 </span><span class="lineCov">    1188448 :                                 if (match) {</span>
+<span class="lineNum">     149 </span><span class="lineCov">    1190300 :                                 match = MatchOperands(co.get(), children[i], current_bindings);</span>
+<span class="lineNum">     150 </span><span class="lineCov">    1187952 :                                 if (match) {</span>
 <span class="lineNum">     151 </span>            :                                         // found a match, set the node to already matched
-<span class="lineNum">     152 </span><span class="lineCov">     205833 :                                         child_is_matched[i] = true;</span>
-<span class="lineNum">     153 </span><span class="lineCov">     205833 :                                         break;</span>
+<span class="lineNum">     152 </span><span class="lineCov">     205531 :                                         child_is_matched[i] = true;</span>
+<span class="lineNum">     153 </span><span class="lineCov">     205531 :                                         break;</span>
 <span class="lineNum">     154 </span>            :                                 }
 <span class="lineNum">     155 </span>            :                         }
-<span class="lineNum">     156 </span><span class="lineCov">     765554 :                         if (!match) {</span>
-<span class="lineNum">     157 </span><span class="lineCov">     560563 :                                 return false;</span>
+<span class="lineNum">     156 </span><span class="lineCov">     763852 :                         if (!match) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">     560151 :                                 return false;</span>
 <span class="lineNum">     158 </span>            :                         }
 <span class="lineNum">     159 </span>            :                 }
-<span class="lineNum">     160 </span><span class="lineCov">     656389 :                 break;</span>
+<span class="lineNum">     160 </span><span class="lineCov">     656121 :                 break;</span>
 <span class="lineNum">     161 </span>            :         }
 <span class="lineNum">     162 </span>            : 
 <span class="lineNum">     163 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">     164 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unsupported Child Policy&quot;);</span>
 <span class="lineNum">     165 </span>            :         }
 <span class="lineNum">     166 </span>            : 
-<span class="lineNum">     167 </span><span class="lineCov">   35030907 :         bindings.insert(bindings.end(), current_bindings.begin(), current_bindings.end());</span>
-<span class="lineNum">     168 </span><span class="lineCov">   35034841 :         return true;</span>
+<span class="lineNum">     167 </span><span class="lineCov">   35027231 :         bindings.insert(bindings.end(), current_bindings.begin(), current_bindings.end());</span>
+<span class="lineNum">     168 </span><span class="lineCov">   35028618 :         return true;</span>
 <span class="lineNum">     169 </span>            : }
 <span class="lineNum">     170 </span>            : 
 <span class="lineNum">     171 </span>            : } // namespace duckdb

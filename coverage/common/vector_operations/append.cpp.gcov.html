@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report d64ba5cb - common/vector_operations/append.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 51719eac - common/vector_operations/append.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report d64ba5cb</td>
+            <td class="headerValue">DuckDB Code Coverage Report 51719eac</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">79</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 14:12:33</td>
+            <td class="headerValue">2018-12-21 15:18:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -73,16 +73,16 @@
 <span class="lineNum">      11 </span>            : using namespace std;
 <a name="12"><span class="lineNum">      12 </span>            : </a>
 <span class="lineNum">      13 </span>            : template &lt;class T&gt;
-<span class="lineNum">      14 </span><span class="lineCov">    4064767 : static void append_function(T *__restrict source, T *__restrict target, size_t count, sel_t *__restrict sel_vector,</span>
+<span class="lineNum">      14 </span><span class="lineCov">    4064039 : static void append_function(T *__restrict source, T *__restrict target, size_t count, sel_t *__restrict sel_vector,</span>
 <span class="lineNum">      15 </span>            :                             nullmask_t &amp;nullmask, size_t right_offset) {
-<span class="lineNum">      16 </span><span class="lineCov">    4064767 :         target += right_offset;</span>
-<span class="lineNum">      17 </span><span class="lineCov">    4064767 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    4064039 :         target += right_offset;</span>
+<span class="lineNum">      17 </span><span class="lineCov">    4064039 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      18 </span>            :                 target[k] = source[i];
 <span class="lineNum">      19 </span>            :                 if (IsNullValue&lt;T&gt;(target[k])) {
 <span class="lineNum">      20 </span>            :                         nullmask[right_offset + k] = true;
 <span class="lineNum">      21 </span>            :                 }
 <span class="lineNum">      22 </span>            :         });
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    4072551 : }</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    4073384 : }</span></a>
 <span class="lineNum">      24 </span><span class="lineCov">      78802 : </span>
 <span class="lineNum">      25 </span>            : template &lt;class T&gt; static void append_loop(Vector &amp;left, Vector &amp;right) {
 <span class="lineNum">      26 </span><span class="lineCov">      78802 :         auto ldata = (T *)left.data;</span>
@@ -123,10 +123,10 @@
 <span class="lineNum">      61 </span>            :                 break;
 <span class="lineNum">      62 </span>            :         case TypeId::VARCHAR:
 <span class="lineNum">      63 </span><span class="lineCov">          2 :                 append_loop&lt;const char *&gt;(source, target);</span>
-<span class="lineNum">      64 </span><span class="lineCov">    3953422 :                 break;</span>
+<span class="lineNum">      64 </span><span class="lineCov">    3952694 :                 break;</span>
 <span class="lineNum">      65 </span>            :         default:
-<span class="lineNum">      66 </span><span class="lineCov">    3953422 :                 throw NotImplementedException(&quot;Unimplemented type for copy&quot;);</span>
-<span class="lineNum">      67 </span><span class="lineCov">    3953422 :         }</span>
+<span class="lineNum">      66 </span><span class="lineCov">    3952694 :                 throw NotImplementedException(&quot;Unimplemented type for copy&quot;);</span>
+<span class="lineNum">      67 </span><span class="lineCov">    3952694 :         }</span>
 <span class="lineNum">      68 </span>            : }
 </pre>
       </td>
