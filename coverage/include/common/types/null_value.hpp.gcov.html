@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 0504da4c - include/common/types/null_value.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report c956cd63 - include/common/types/null_value.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 0504da4c</td>
+            <td class="headerValue">DuckDB Code Coverage Report c956cd63</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">25</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 10:26:35</td>
+            <td class="headerValue">2018-12-21 11:18:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -76,23 +76,23 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : //! This is no longer used in regular vectors, however, hash tables use this</a>
 <span class="lineNum">      16 </span>            : //! value to store a NULL
-<span class="lineNum">      17 </span><span class="lineCov">  240330782 : template &lt;class T&gt; inline T NullValue() {</span>
-<span class="lineNum">      18 </span><span class="lineCov">  240330782 :         return std::numeric_limits&lt;T&gt;::min();</span>
+<span class="lineNum">      17 </span><span class="lineCov">  241269821 : template &lt;class T&gt; inline T NullValue() {</span>
+<span class="lineNum">      18 </span><span class="lineCov">  241269821 :         return std::numeric_limits&lt;T&gt;::min();</span>
 <span class="lineNum">      19 </span>            : }
 <span class="lineNum">      20 </span><span class="lineCov">   37225967 : </span>
 <a name="21"><span class="lineNum">      21 </span><span class="lineCov">   37225967 : constexpr const char str_nil[2] = {'\200', '\0'};</span></a>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">  114067323 : template &lt;&gt; inline const char *NullValue() {</span>
-<span class="lineNum">      24 </span><span class="lineCov">  114067323 :         assert(str_nil[0] == '\200' &amp;&amp; str_nil[1] == '\0');</span>
+<span class="lineNum">      23 </span><span class="lineCov">  114077454 : template &lt;&gt; inline const char *NullValue() {</span>
+<span class="lineNum">      24 </span><span class="lineCov">  114077454 :         assert(str_nil[0] == '\200' &amp;&amp; str_nil[1] == '\0');</span>
 <span class="lineNum">      25 </span><span class="lineCov">   63171208 :         return str_nil;</span>
-<span class="lineNum">      26 </span><span class="lineCov">  151635026 : }</span>
-<span class="lineNum">      27 </span><span class="lineCov">  151635026 : </span>
+<span class="lineNum">      26 </span><span class="lineCov">  152563894 : }</span>
+<span class="lineNum">      27 </span><span class="lineCov">  152563894 : </span>
 <span class="lineNum">      28 </span>            : template &lt;&gt; inline char *NullValue() {
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :         return (char *)NullValue&lt;const char *&gt;();</span>
 <a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">     573674 : template &lt;class T&gt; inline bool IsNullValue(T value) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">     573674 :         return value == NullValue&lt;T&gt;();</span>
+<span class="lineNum">      32 </span><span class="lineCov">     573714 : template &lt;class T&gt; inline bool IsNullValue(T value) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">     573714 :         return value == NullValue&lt;T&gt;();</span>
 <a name="34"><span class="lineNum">      34 </span>            : }</a>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">      36 </span><span class="lineCov">   63156129 : template &lt;&gt; inline bool IsNullValue(const char *value) {</span>
@@ -109,7 +109,7 @@
 <span class="lineNum">      47 </span>            : //! Writes NullValue&lt;T&gt; value of a specific type to a memory address
 <span class="lineNum">      48 </span>            : void SetNullValue(uint8_t *ptr, TypeId type);
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">  239647108 : } // namespace duckdb</span>
+<span class="lineNum">      50 </span><span class="lineCov">  240630515 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>
