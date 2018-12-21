@@ -1,0 +1,108 @@
+{ "result": 30.828772,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "OR(EXISTS(SUBQUERY), EXISTS(SUBQUERY))\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":24.97,
+"cardinality":0,
+"extra_info": "SEMI\nc_customer_sk=#51\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "IN(ca_county, Rush County, Toole County, Jefferson County, Dona Ana County, La Porte County)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":3.63,
+"cardinality":92945160,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":1.25,
+"cardinality":92945160,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":775168,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":120,
+"extra_info": "(d_moy <= 4)\n(d_year = 2002)\n(d_moy >= 1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
