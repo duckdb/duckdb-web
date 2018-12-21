@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c956cd63 - execution/expression_executor/execute_comparison.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d64ba5cb - execution/expression_executor/execute_comparison.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c956cd63</td>
+            <td class="headerValue">DuckDB Code Coverage Report d64ba5cb</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">36</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 11:18:05</td>
+            <td class="headerValue">2018-12-21 14:12:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,18 +67,18 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">     724102 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(ComparisonExpression &amp;expr) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    1448447 :         Vector l, r;</span>
-<span class="lineNum">      10 </span><span class="lineCov">     729422 :         expr.children[0]-&gt;Accept(this);</span>
-<span class="lineNum">      11 </span><span class="lineCov">     723596 :         vector.Move(l);</span>
-<span class="lineNum">      12 </span><span class="lineCov">     725341 :         expr.children[1]-&gt;Accept(this);</span>
-<span class="lineNum">      13 </span><span class="lineCov">     724410 :         vector.Move(r);</span>
-<span class="lineNum">      14 </span><span class="lineCov">     725881 :         vector.Initialize(TypeId::BOOLEAN);</span>
+<span class="lineNum">       8 </span><span class="lineCov">     724819 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(ComparisonExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    1449890 :         Vector l, r;</span>
+<span class="lineNum">      10 </span><span class="lineCov">     729780 :         expr.children[0]-&gt;Accept(this);</span>
+<span class="lineNum">      11 </span><span class="lineCov">     724310 :         vector.Move(l);</span>
+<span class="lineNum">      12 </span><span class="lineCov">     725662 :         expr.children[1]-&gt;Accept(this);</span>
+<span class="lineNum">      13 </span><span class="lineCov">     725169 :         vector.Move(r);</span>
+<span class="lineNum">      14 </span><span class="lineCov">     726344 :         vector.Initialize(TypeId::BOOLEAN);</span>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">     727791 :         switch (expr.type) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">     361904 :         case ExpressionType::COMPARE_EQUAL:</span>
-<span class="lineNum">      18 </span><span class="lineCov">     361904 :                 VectorOperations::Equals(l, r, vector);</span>
-<span class="lineNum">      19 </span><span class="lineCov">     361602 :                 break;</span>
+<span class="lineNum">      16 </span><span class="lineCov">     728135 :         switch (expr.type) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">     362366 :         case ExpressionType::COMPARE_EQUAL:</span>
+<span class="lineNum">      18 </span><span class="lineCov">     362366 :                 VectorOperations::Equals(l, r, vector);</span>
+<span class="lineNum">      19 </span><span class="lineCov">     362299 :                 break;</span>
 <span class="lineNum">      20 </span><span class="lineCov">      24074 :         case ExpressionType::COMPARE_NOTEQUAL:</span>
 <span class="lineNum">      21 </span><span class="lineCov">      24074 :                 VectorOperations::NotEquals(l, r, vector);</span>
 <span class="lineNum">      22 </span><span class="lineCov">      24074 :                 break;</span>
@@ -102,11 +102,11 @@
 <span class="lineNum">      40 </span><span class="lineCov">        168 :                 break;</span>
 <span class="lineNum">      41 </span><span class="lineNoCov">          0 :         case ExpressionType::COMPARE_DISTINCT_FROM:</span>
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented compare: COMPARE_DISTINCT_FROM&quot;);</span>
-<span class="lineNum">      43 </span><span class="lineCov">       3110 :         default:</span>
-<span class="lineNum">      44 </span><span class="lineCov">       3110 :                 throw NotImplementedException(&quot;Unknown comparison type!&quot;);</span>
+<span class="lineNum">      43 </span><span class="lineCov">       2992 :         default:</span>
+<span class="lineNum">      44 </span><span class="lineCov">       2992 :                 throw NotImplementedException(&quot;Unknown comparison type!&quot;);</span>
 <span class="lineNum">      45 </span>            :         }
-<span class="lineNum">      46 </span><span class="lineCov">     724379 :         Verify(expr);</span>
-<span class="lineNum">      47 </span><span class="lineCov">    1449870 :         return nullptr;</span>
+<span class="lineNum">      46 </span><span class="lineCov">     725076 :         Verify(expr);</span>
+<span class="lineNum">      47 </span><span class="lineCov">    1451349 :         return nullptr;</span>
 <span class="lineNum">      48 </span>            : }
 </pre>
       </td>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report c956cd63 - planner/logical_operator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report d64ba5cb - planner/logical_operator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report c956cd63</td>
+            <td class="headerValue">DuckDB Code Coverage Report d64ba5cb</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">17</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 11:18:05</td>
+            <td class="headerValue">2018-12-21 14:12:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -66,15 +66,15 @@
 <span class="lineNum">       4 </span>            : using namespace std;
 <a name="5"><span class="lineNum">       5 </span>            : </a>
 <span class="lineNum">       6 </span>            : namespace duckdb {
-<span class="lineNum">       7 </span><span class="lineCov">    1462704 : bool IsProjection(LogicalOperatorType type) {</span>
-<span class="lineNum">       8 </span><span class="lineCov">    1462704 :         return type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY || type == LogicalOperatorType::PROJECTION;</span>
+<span class="lineNum">       7 </span><span class="lineCov">    1481066 : bool IsProjection(LogicalOperatorType type) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    1481066 :         return type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY || type == LogicalOperatorType::PROJECTION;</span>
 <a name="9"><span class="lineNum">       9 </span>            : }</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">     732351 : LogicalOperator *GetProjection(LogicalOperator *node) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">     733768 :         while ((node-&gt;children.size() == 1 || node-&gt;type == LogicalOperatorType::UNION ||</span>
-<span class="lineNum">      13 </span><span class="lineCov">    1465603 :                 node-&gt;type == LogicalOperatorType::EXCEPT || node-&gt;type == LogicalOperatorType::INTERSECT) &amp;&amp;</span>
-<span class="lineNum">      14 </span><span class="lineCov">     732351 :                !IsProjection(node-&gt;type)) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">       1422 :                 node = node-&gt;children[0].get();</span>
+<span class="lineNum">      11 </span><span class="lineCov">     735146 : LogicalOperator *GetProjection(LogicalOperator *node) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">     739358 :         while ((node-&gt;children.size() == 1 || node-&gt;type == LogicalOperatorType::UNION ||</span>
+<span class="lineNum">      13 </span><span class="lineCov">    1472491 :                 node-&gt;type == LogicalOperatorType::EXCEPT || node-&gt;type == LogicalOperatorType::INTERSECT) &amp;&amp;</span>
+<span class="lineNum">      14 </span><span class="lineCov">     735146 :                !IsProjection(node-&gt;type)) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">       4217 :                 node = node-&gt;children[0].get();</span>
 <span class="lineNum">      16 </span>            :         }
 <span class="lineNum">      17 </span><span class="lineCov">     730929 :         return node;</span>
 <span class="lineNum">      18 </span>            : }
@@ -115,23 +115,23 @@
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="54"><span class="lineNum">      54 </span>            : }</a>
 <span class="lineNum">      55 </span>            : 
-<span class="lineNum">      56 </span><span class="lineCov">  109331872 : size_t LogicalOperator::ExpressionCount() {</span>
-<span class="lineNum">      57 </span><span class="lineCov">  109331872 :         return expressions.size();</span>
+<span class="lineNum">      56 </span><span class="lineCov">  109276562 : size_t LogicalOperator::ExpressionCount() {</span>
+<span class="lineNum">      57 </span><span class="lineCov">  109276562 :         return expressions.size();</span>
 <a name="58"><span class="lineNum">      58 </span>            : }</a>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">    9232862 : Expression *LogicalOperator::GetExpression(size_t index) {</span>
-<span class="lineNum">      61 </span><span class="lineCov">    9232862 :         if (index &gt;= ExpressionCount()) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">    9224850 : Expression *LogicalOperator::GetExpression(size_t index) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">    9224850 :         if (index &gt;= ExpressionCount()) {</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :                 throw OutOfRangeException(&quot;GetExpression(): Expression index out of range!&quot;);</span>
 <span class="lineNum">      63 </span>            :         }
-<span class="lineNum">      64 </span><span class="lineCov">    9235822 :         return expressions[index].get();</span>
+<span class="lineNum">      64 </span><span class="lineCov">    9227206 :         return expressions[index].get();</span>
 <a name="65"><span class="lineNum">      65 </span>            : }</a>
 <span class="lineNum">      66 </span>            : 
-<span class="lineNum">      67 </span><span class="lineCov">     404683 : void LogicalOperator::SetExpression(size_t index, unique_ptr&lt;Expression&gt; expr) {</span>
-<span class="lineNum">      68 </span><span class="lineCov">     404683 :         if (index &gt;= ExpressionCount()) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">     404701 : void LogicalOperator::SetExpression(size_t index, unique_ptr&lt;Expression&gt; expr) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">     404701 :         if (index &gt;= ExpressionCount()) {</span>
 <span class="lineNum">      69 </span><span class="lineNoCov">          0 :                 throw OutOfRangeException(&quot;SetExpression(): Expression index out of range!&quot;);</span>
 <span class="lineNum">      70 </span>            :         }
-<span class="lineNum">      71 </span><span class="lineCov">     404683 :         expressions[index] = std::move(expr);</span>
-<span class="lineNum">      72 </span><span class="lineCov">     404683 : }</span>
+<span class="lineNum">      71 </span><span class="lineCov">     404701 :         expressions[index] = std::move(expr);</span>
+<span class="lineNum">      72 </span><span class="lineCov">     404701 : }</span>
 </pre>
       </td>
     </tr>
