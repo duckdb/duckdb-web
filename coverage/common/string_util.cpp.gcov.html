@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report e353519f - common/string_util.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">common</a> - string_util.cpp<span style="font-size: 80%;"> (source / <a href="string_util.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report e353519f</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">39</td>
+            <td class="headerCovTableEntry">111</td>
+            <td class="headerCovTableEntryLo">35.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-21 17:58:02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryLo">35.3 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;common/string_util.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &lt;algorithm&gt;
+<span class="lineNum">       4 </span>            : #include &lt;iomanip&gt;
+<span class="lineNum">       5 </span>            : #include &lt;memory&gt;
+<span class="lineNum">       6 </span>            : #include &lt;sstream&gt;
+<span class="lineNum">       7 </span>            : #include &lt;stdarg.h&gt;
+<span class="lineNum">       8 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">       9 </span>            : #include &lt;string&gt;
+<span class="lineNum">      10 </span>            : 
+<a name="11"><span class="lineNum">      11 </span>            : using namespace duckdb;</a>
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span><span class="lineNoCov">          0 : bool StringUtil::Contains(const string &amp;haystack, const string &amp;needle) {</span>
+<span class="lineNum">      14 </span><span class="lineNoCov">          0 :         return (haystack.find(needle) != string::npos);</span>
+<span class="lineNum">      15 </span>            : }
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : /*
+<a name="18"><span class="lineNum">      18 </span>            :  * Remove trailing ' ', '\f', '\n', '\r', '\t', '\v'</a>
+<span class="lineNum">      19 </span>            :  */
+<span class="lineNum">      20 </span><span class="lineCov">      12768 : void StringUtil::RTrim(string &amp;str) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">      12768 :         str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) { return !std::isspace(ch); }).base(), str.end());</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">      12768 : }</span></a>
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineNoCov">          0 : string StringUtil::Indent(int num_indent) {</span>
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 :         return string(num_indent, ' ');</span>
+<a name="26"><span class="lineNum">      26 </span>            : }</a>
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 : bool StringUtil::StartsWith(const string &amp;str, const string &amp;prefix) {</span>
+<span class="lineNum">      29 </span><span class="lineNoCov">          0 :         return std::equal(prefix.begin(), prefix.end(), str.begin());</span>
+<a name="30"><span class="lineNum">      30 </span>            : }</a>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 : bool StringUtil::EndsWith(const string &amp;str, const string &amp;suffix) {</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :         if (suffix.size() &gt; str.size())</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :                 return (false);</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :         return std::equal(suffix.rbegin(), suffix.rend(), str.rbegin());</span>
+<a name="36"><span class="lineNum">      36 </span>            : }</a>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 : string StringUtil::Repeat(const string &amp;str, const std::size_t n) {</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :         std::ostringstream os;</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :         if (n == 0 || str.empty()) {</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                 return (os.str());</span>
+<span class="lineNum">      42 </span>            :         }
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :         for (int i = 0; i &lt; static_cast&lt;int&gt;(n); i++) {</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :                 os &lt;&lt; str;</span>
+<span class="lineNum">      45 </span>            :         }
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :         return (os.str());</span>
+<a name="47"><span class="lineNum">      47 </span>            : }</a>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">       6064 : vector&lt;string&gt; StringUtil::Split(const string &amp;str, char delimiter) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">      12128 :         std::stringstream ss(str);</span>
+<span class="lineNum">      51 </span><span class="lineCov">       6064 :         vector&lt;string&gt; lines;</span>
+<span class="lineNum">      52 </span><span class="lineCov">      12128 :         string temp;</span>
+<span class="lineNum">      53 </span><span class="lineCov">      24249 :         while (std::getline(ss, temp, delimiter)) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">      18185 :                 lines.push_back(temp);</span>
+<span class="lineNum">      55 </span>            :         } // WHILE
+<span class="lineNum">      56 </span><span class="lineCov">      12128 :         return (lines);</span>
+<a name="57"><span class="lineNum">      57 </span>            : }</a>
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 : string StringUtil::Join(const vector&lt;string&gt; &amp;input, const string &amp;separator) {</span>
+<span class="lineNum">      60 </span>            :         // The result
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :         string result;</span>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            :         // If the input isn't empty, append the first element. We do this so we
+<span class="lineNum">      64 </span>            :         // don't
+<span class="lineNum">      65 </span>            :         // need to introduce an if into the loop.
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :         if (!input.empty()) {</span>
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :                 result += input[0];</span>
+<span class="lineNum">      68 </span>            :         }
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span>            :         // Append the remaining input components, after the first
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :         for (uint32_t i = 1; i &lt; input.size(); i++) {</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :                 result += separator + input[i];</span>
+<span class="lineNum">      73 </span>            :         }
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         return result;</span>
+<a name="76"><span class="lineNum">      76 </span>            : }</a>
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 : string StringUtil::Prefix(const string &amp;str, const string &amp;prefix) {</span>
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :         vector&lt;string&gt; lines = StringUtil::Split(str, '\n');</span>
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :         if (lines.empty())</span>
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :                 return (&quot;&quot;);</span>
+<span class="lineNum">      82 </span>            : 
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :         std::ostringstream os;</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :         for (int i = 0, cnt = lines.size(); i &lt; cnt; i++) {</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :                 if (i &gt; 0)</span>
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :                         os &lt;&lt; std::endl;</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 os &lt;&lt; prefix &lt;&lt; lines[i];</span>
+<span class="lineNum">      88 </span>            :         } // FOR
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :         return (os.str());</span>
+<a name="90"><span class="lineNum">      90 </span>            : }</a>
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 : string StringUtil::FormatSize(long bytes) {</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :         double BASE = 1024;</span>
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :         double KB = BASE;</span>
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :         double MB = KB * BASE;</span>
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :         double GB = MB * BASE;</span>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :         std::ostringstream os;</span>
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :         if (bytes &gt;= GB) {</span>
+<span class="lineNum">     101 </span><span class="lineNoCov">          0 :                 os &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; (bytes / GB) &lt;&lt; &quot; GB&quot;;</span>
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :         } else if (bytes &gt;= MB) {</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :                 os &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; (bytes / MB) &lt;&lt; &quot; MB&quot;;</span>
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :         } else if (bytes &gt;= KB) {</span>
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :                 os &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; (bytes / KB) &lt;&lt; &quot; KB&quot;;</span>
+<span class="lineNum">     106 </span>            :         } else {
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :                 os &lt;&lt; std::to_string(bytes) + &quot; bytes&quot;;</span>
+<span class="lineNum">     108 </span>            :         }
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :         return (os.str());</span>
+<a name="110"><span class="lineNum">     110 </span>            : }</a>
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 : string StringUtil::Bold(const string &amp;str) {</span>
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :         string SET_PLAIN_TEXT = &quot;\033[0;0m&quot;;</span>
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 :         string SET_BOLD_TEXT = &quot;\033[0;1m&quot;;</span>
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span><span class="lineNoCov">          0 :         std::ostringstream os;</span>
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :         os &lt;&lt; SET_BOLD_TEXT &lt;&lt; str &lt;&lt; SET_PLAIN_TEXT;</span>
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :         return (os.str());</span>
+<a name="119"><span class="lineNum">     119 </span>            : }</a>
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span><span class="lineCov">          8 : string StringUtil::Upper(const string &amp;str) {</span>
+<span class="lineNum">     122 </span><span class="lineCov">          8 :         string copy(str);</span>
+<span class="lineNum">     123 </span><span class="lineCov">          8 :         std::transform(copy.begin(), copy.end(), copy.begin(), [](unsigned char c) { return std::toupper(c); });</span>
+<span class="lineNum">     124 </span><span class="lineCov">          8 :         return (copy);</span>
+<a name="125"><span class="lineNum">     125 </span>            : }</a>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span><span class="lineCov">    1234374 : string StringUtil::Lower(const string &amp;str) {</span>
+<span class="lineNum">     128 </span><span class="lineCov">    1234374 :         string copy(str);</span>
+<span class="lineNum">     129 </span><span class="lineCov">    1234411 :         std::transform(copy.begin(), copy.end(), copy.begin(), [](unsigned char c) { return std::tolower(c); });</span>
+<span class="lineNum">     130 </span><span class="lineCov">    1234452 :         return (copy);</span>
+<a name="131"><span class="lineNum">     131 </span>            : }</a>
+<span class="lineNum">     132 </span>            : 
+<span class="lineNum">     133 </span><span class="lineCov">       5823 : string StringUtil::Format(const string fmt_str, ...) {</span>
+<span class="lineNum">     134 </span>            :         // Reserve two times as much as the length of the fmt_str
+<span class="lineNum">     135 </span><span class="lineCov">       5823 :         int final_n, n = ((int)fmt_str.size()) * 2;</span>
+<span class="lineNum">     136 </span><span class="lineCov">      11646 :         string str;</span>
+<span class="lineNum">     137 </span><span class="lineCov">      11646 :         unique_ptr&lt;char[]&gt; formatted;</span>
+<span class="lineNum">     138 </span><span class="lineCov">       5823 :         va_list ap;</span>
+<span class="lineNum">     139 </span>            : 
+<span class="lineNum">     140 </span>            :         while (1) {
+<span class="lineNum">     141 </span>            :                 // Wrap the plain char array into the unique_ptr
+<span class="lineNum">     142 </span><span class="lineCov">      11409 :                 formatted.reset(new char[n + 1]);</span>
+<span class="lineNum">     143 </span><span class="lineCov">      11409 :                 strcpy(&amp;formatted[0], fmt_str.c_str());</span>
+<span class="lineNum">     144 </span><span class="lineCov">      11409 :                 va_start(ap, fmt_str);</span>
+<span class="lineNum">     145 </span><span class="lineCov">      11409 :                 final_n = vsnprintf(&amp;formatted[0], n, fmt_str.c_str(), ap);</span>
+<span class="lineNum">     146 </span><span class="lineCov">      11409 :                 va_end(ap);</span>
+<span class="lineNum">     147 </span><span class="lineCov">      11409 :                 if (final_n &lt; 0 || final_n &gt;= n)</span>
+<span class="lineNum">     148 </span><span class="lineCov">       5586 :                         n += abs(final_n - n + 1);</span>
+<span class="lineNum">     149 </span>            :                 else
+<span class="lineNum">     150 </span>            :                         break;
+<span class="lineNum">     151 </span>            :         }
+<span class="lineNum">     152 </span><span class="lineCov">      11646 :         return string(formatted.get());</span>
+<a name="153"><span class="lineNum">     153 </span>            : }</a>
+<span class="lineNum">     154 </span>            : 
+<span class="lineNum">     155 </span><span class="lineCov">         85 : string StringUtil::VFormat(const string fmt_str, va_list args) {</span>
+<span class="lineNum">     156 </span><span class="lineCov">         85 :         va_list args_copy;</span>
+<span class="lineNum">     157 </span>            : 
+<span class="lineNum">     158 </span><span class="lineCov">        170 :         unique_ptr&lt;char[]&gt; formatted;</span>
+<span class="lineNum">     159 </span>            :         // make a copy of the args as we can only use it once
+<span class="lineNum">     160 </span><span class="lineCov">         85 :         va_copy(args_copy, args);</span>
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span>            :         // first get the amount of characters we need
+<span class="lineNum">     163 </span><span class="lineCov">         85 :         const auto n = vsnprintf(nullptr, 0, fmt_str.c_str(), args) + 1;</span>
+<span class="lineNum">     164 </span>            : 
+<span class="lineNum">     165 </span>            :         // now allocate the string and do the actual printing
+<span class="lineNum">     166 </span><span class="lineCov">         85 :         formatted.reset(new char[n]);</span>
+<span class="lineNum">     167 </span><span class="lineCov">         85 :         (void)vsnprintf(&amp;formatted[0], n, fmt_str.c_str(), args_copy);</span>
+<span class="lineNum">     168 </span><span class="lineCov">        170 :         return string(formatted.get());</span>
+<a name="169"><span class="lineNum">     169 </span>            : }</a>
+<span class="lineNum">     170 </span>            : 
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 : vector&lt;string&gt; StringUtil::Split(const string &amp;input, const string &amp;split) {</span>
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :         vector&lt;string&gt; splits;</span>
+<span class="lineNum">     173 </span>            : 
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :         size_t last = 0;</span>
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :         size_t input_len = input.size();</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :         size_t split_len = split.size();</span>
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :         while (last &lt;= input_len) {</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                 size_t next = input.find(split, last);</span>
+<span class="lineNum">     179 </span><span class="lineNoCov">          0 :                 if (next == string::npos) {</span>
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 :                         next = input_len;</span>
+<span class="lineNum">     181 </span>            :                 }
+<span class="lineNum">     182 </span>            : 
+<span class="lineNum">     183 </span>            :                 // Push the substring [last, next) on to splits
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :                 string substr = input.substr(last, next - last);</span>
+<span class="lineNum">     185 </span><span class="lineNoCov">          0 :                 if (substr.empty() == false) {</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :                         splits.push_back(substr);</span>
+<span class="lineNum">     187 </span>            :                 }
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :                 last = next + split_len;</span>
+<span class="lineNum">     189 </span>            :         }
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :         return splits;</span>
+<a name="191"><span class="lineNum">     191 </span>            : }</a>
+<span class="lineNum">     192 </span>            : 
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 : string StringUtil::Strip(const string &amp;str, char c) {</span>
+<span class="lineNum">     194 </span>            :         // There's a copy here which is wasteful, so don't use this in performance
+<span class="lineNum">     195 </span>            :         // critical code!
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :         string tmp = str;</span>
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :         tmp.erase(std::remove(tmp.begin(), tmp.end(), c), tmp.end());</span>
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :         return tmp;</span>
+<span class="lineNum">     199 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

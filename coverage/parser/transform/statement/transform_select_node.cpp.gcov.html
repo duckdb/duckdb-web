@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report e353519f - parser/transform/statement/transform_select_node.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">parser/transform/statement</a> - transform_select_node.cpp<span style="font-size: 80%;"> (source / <a href="transform_select_node.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report e353519f</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntry">50</td>
+            <td class="headerCovTableEntryMed">88.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-21 17:58:02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;common/exception.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;parser/query_node/list.hpp&quot;
+<span class="lineNum">       3 </span>            : #include &quot;parser/statement/select_statement.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;parser/transformer.hpp&quot;
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : using namespace duckdb;
+<span class="lineNum">       7 </span>            : using namespace postgres;
+<a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">    3023475 : unique_ptr&lt;QueryNode&gt; Transformer::TransformSelectNode(postgres::SelectStmt *stmt) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3023475 :         unique_ptr&lt;QueryNode&gt; node;</span>
+<span class="lineNum">      12 </span><span class="lineCov">    3023475 :         switch (stmt-&gt;op) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3018956 :         case SETOP_NONE: {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3018956 :                 node = make_unique&lt;SelectNode&gt;();</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3018965 :                 auto result = (SelectNode *)node.get();</span>
+<span class="lineNum">      16 </span>            :                 // distinct clause
+<span class="lineNum">      17 </span><span class="lineCov">    3018863 :                 result-&gt;select_distinct = stmt-&gt;distinctClause != NULL ? true : false;</span>
+<span class="lineNum">      18 </span>            :                 // from table
+<span class="lineNum">      19 </span><span class="lineCov">    3018863 :                 result-&gt;from_table = TransformFrom(stmt-&gt;fromClause);</span>
+<span class="lineNum">      20 </span>            :                 // group by
+<span class="lineNum">      21 </span><span class="lineCov">    3018891 :                 TransformGroupBy(stmt-&gt;groupClause, result-&gt;groupby.groups);</span>
+<span class="lineNum">      22 </span><span class="lineCov">    3018861 :                 result-&gt;groupby.having = TransformExpression(stmt-&gt;havingClause);</span>
+<span class="lineNum">      23 </span>            :                 // where
+<span class="lineNum">      24 </span><span class="lineCov">    3018861 :                 result-&gt;where_clause = TransformExpression(stmt-&gt;whereClause);</span>
+<span class="lineNum">      25 </span>            :                 // select list
+<span class="lineNum">      26 </span><span class="lineCov">    3018879 :                 if (!TransformExpressionList(stmt-&gt;targetList, result-&gt;select_list)) {</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Failed to transform expression list.&quot;);</span>
+<span class="lineNum">      28 </span>            :                 }
+<span class="lineNum">      29 </span><span class="lineCov">    3018842 :                 break;</span>
+<span class="lineNum">      30 </span>            :         }
+<span class="lineNum">      31 </span><span class="lineCov">       4634 :         case SETOP_UNION:</span>
+<span class="lineNum">      32 </span>            :         case SETOP_EXCEPT:
+<span class="lineNum">      33 </span>            :         case SETOP_INTERSECT: {
+<span class="lineNum">      34 </span><span class="lineCov">       4634 :                 node = make_unique&lt;SetOperationNode&gt;();</span>
+<span class="lineNum">      35 </span><span class="lineCov">       4634 :                 auto result = (SetOperationNode *)node.get();</span>
+<span class="lineNum">      36 </span><span class="lineCov">       4634 :                 result-&gt;left = TransformSelectNode(stmt-&gt;larg);</span>
+<span class="lineNum">      37 </span><span class="lineCov">       4634 :                 result-&gt;right = TransformSelectNode(stmt-&gt;rarg);</span>
+<span class="lineNum">      38 </span><span class="lineCov">       4634 :                 if (!result-&gt;left || !result-&gt;right) {</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Failed to transform setop children.&quot;);</span>
+<span class="lineNum">      40 </span>            :                 }
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span><span class="lineCov">       4634 :                 result-&gt;select_distinct = true;</span>
+<span class="lineNum">      43 </span><span class="lineCov">       4634 :                 switch (stmt-&gt;op) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">       2431 :                 case SETOP_UNION:</span>
+<span class="lineNum">      45 </span><span class="lineCov">       2431 :                         result-&gt;select_distinct = !stmt-&gt;all;</span>
+<span class="lineNum">      46 </span><span class="lineCov">       2431 :                         result-&gt;setop_type = SetOperationType::UNION;</span>
+<span class="lineNum">      47 </span><span class="lineCov">       2431 :                         break;</span>
+<span class="lineNum">      48 </span><span class="lineCov">       1896 :                 case SETOP_EXCEPT:</span>
+<span class="lineNum">      49 </span><span class="lineCov">       1896 :                         result-&gt;setop_type = SetOperationType::EXCEPT;</span>
+<span class="lineNum">      50 </span><span class="lineCov">       1896 :                         break;</span>
+<span class="lineNum">      51 </span><span class="lineCov">        307 :                 case SETOP_INTERSECT:</span>
+<span class="lineNum">      52 </span><span class="lineCov">        307 :                         result-&gt;setop_type = SetOperationType::INTERSECT;</span>
+<span class="lineNum">      53 </span><span class="lineCov">        307 :                         break;</span>
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 default:</span>
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Unexpected setop type&quot;);</span>
+<span class="lineNum">      56 </span>            :                 }
+<span class="lineNum">      57 </span>            :                 // if we compute the distinct result here, we do not have to do this in
+<span class="lineNum">      58 </span>            :                 // the children. This saves a bunch of unnecessary DISTINCTs.
+<span class="lineNum">      59 </span><span class="lineCov">       4634 :                 if (result-&gt;select_distinct) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">       3397 :                         result-&gt;left-&gt;select_distinct = false;</span>
+<span class="lineNum">      61 </span><span class="lineCov">       3397 :                         result-&gt;right-&gt;select_distinct = false;</span>
+<span class="lineNum">      62 </span>            :                 }
+<span class="lineNum">      63 </span><span class="lineCov">       4634 :                 break;</span>
+<span class="lineNum">      64 </span>            :         }
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Statement type %d not implemented!&quot;, stmt-&gt;op);</span>
+<span class="lineNum">      67 </span>            :         }
+<span class="lineNum">      68 </span>            :         // transform the common properties
+<span class="lineNum">      69 </span>            :         // both the set operations and the regular select can have an ORDER BY/LIMIT attached to them
+<span class="lineNum">      70 </span><span class="lineCov">    3023476 :         TransformOrderBy(stmt-&gt;sortClause, node-&gt;orderby);</span>
+<span class="lineNum">      71 </span><span class="lineCov">    3023467 :         if (stmt-&gt;limitCount) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">        261 :                 node-&gt;limit.limit = ((A_Const *)stmt-&gt;limitCount)-&gt;val.val.ival;</span>
+<span class="lineNum">      73 </span><span class="lineCov">        261 :                 node-&gt;limit.offset = 0;</span>
+<span class="lineNum">      74 </span>            :         }
+<span class="lineNum">      75 </span><span class="lineCov">    3023467 :         if (stmt-&gt;limitOffset) {</span>
+<span class="lineNum">      76 </span><span class="lineCov">         70 :                 node-&gt;limit.offset = ((A_Const *)stmt-&gt;limitOffset)-&gt;val.val.ival;</span>
+<span class="lineNum">      77 </span><span class="lineCov">         70 :                 if (!stmt-&gt;limitCount) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">          1 :                         node-&gt;limit.limit = std::numeric_limits&lt;int64_t&gt;::max();</span>
+<span class="lineNum">      79 </span>            :                 }
+<span class="lineNum">      80 </span>            :         }
+<span class="lineNum">      81 </span><span class="lineCov">    3023466 :         return node;</span>
+<span class="lineNum">      82 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

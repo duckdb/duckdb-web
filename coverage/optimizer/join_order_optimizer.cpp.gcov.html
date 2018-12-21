@@ -1,0 +1,929 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - DuckDB Code Coverage Report e353519f - optimizer/join_order_optimizer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">optimizer</a> - join_order_optimizer.cpp<span style="font-size: 80%;"> (source / <a href="join_order_optimizer.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">DuckDB Code Coverage Report e353519f</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">428</td>
+            <td class="headerCovTableEntry">466</td>
+            <td class="headerCovTableEntryHi">91.8 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-12-21 17:58:02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;optimizer/join_order_optimizer.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;parser/expression/list.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;planner/operator/list.hpp&quot;
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : #include &lt;algorithm&gt;
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : using namespace duckdb;
+<span class="lineNum">       9 </span>            : using namespace std;
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : using JoinNode = JoinOrderOptimizer::JoinNode;
+<a name="12"><span class="lineNum">      12 </span>            : </a>
+<span class="lineNum">      13 </span>            : //! Returns true if A and B are disjoint, false otherwise
+<span class="lineNum">      14 </span><span class="lineCov">      25906 : template &lt;class T&gt; static bool Disjoint(unordered_set&lt;T&gt; &amp;a, unordered_set&lt;T&gt; &amp;b) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">      51818 :         for (auto &amp;entry : a) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">      25912 :                 if (b.find(entry) != b.end()) {</span>
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">      18 </span>            :                 }
+<span class="lineNum">      19 </span>            :         }
+<span class="lineNum">      20 </span><span class="lineCov">      25906 :         return true;</span>
+<span class="lineNum">      21 </span>            : }
+<a name="22"><span class="lineNum">      22 </span>            : </a>
+<span class="lineNum">      23 </span>            : //! Extract the set of relations referred to inside an expression
+<span class="lineNum">      24 </span><span class="lineCov">     222700 : bool JoinOrderOptimizer::ExtractBindings(Expression &amp;expression, unordered_set&lt;size_t&gt; &amp;bindings) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">     222700 :         if (expression.type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">     118796 :                 auto &amp;colref = (ColumnRefExpression &amp;)expression;</span>
+<span class="lineNum">      27 </span><span class="lineCov">     118796 :                 if (colref.depth &gt; 0) {</span>
+<span class="lineNum">      28 </span>            :                         // correlated column reference, we don't allow this to be reshuffled inside the subquery
+<span class="lineNum">      29 </span>            :                         // we clear any currently made bindings
+<span class="lineNum">      30 </span><span class="lineCov">         26 :                         bindings.clear();</span>
+<span class="lineNum">      31 </span><span class="lineCov">         26 :                         return false;</span>
+<span class="lineNum">      32 </span>            :                 }
+<span class="lineNum">      33 </span><span class="lineCov">     118770 :                 if (colref.index != (size_t)-1) {</span>
+<span class="lineNum">      34 </span>            :                         // column reference has already been bound, don't use it for reordering
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :                         bindings.clear();</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">      37 </span>            :                 }
+<span class="lineNum">      38 </span><span class="lineCov">     118770 :                 assert(colref.binding.table_index != (size_t)-1);</span>
+<span class="lineNum">      39 </span>            :                 // map the base table index to the relation index used by the JoinOrderOptimizer
+<span class="lineNum">      40 </span><span class="lineCov">     118770 :                 assert(relation_mapping.find(colref.binding.table_index) != relation_mapping.end());</span>
+<span class="lineNum">      41 </span><span class="lineCov">     118770 :                 bindings.insert(relation_mapping[colref.binding.table_index]);</span>
+<span class="lineNum">      42 </span>            :         }
+<span class="lineNum">      43 </span><span class="lineCov">     222674 :         if (expression.type == ExpressionType::SELECT_SUBQUERY) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">         85 :                 auto &amp;subquery = (SubqueryExpression &amp;)expression;</span>
+<span class="lineNum">      45 </span><span class="lineCov">         85 :                 if (subquery.is_correlated) {</span>
+<span class="lineNum">      46 </span>            :                         // we don't allow correlated subqueries to be reordered
+<span class="lineNum">      47 </span>            :                         // FIXME: we could extract all the correlated table_indexes referenced inside the subquery here
+<span class="lineNum">      48 </span><span class="lineCov">         35 :                         bindings.clear();</span>
+<span class="lineNum">      49 </span><span class="lineCov">         35 :                         return false;</span>
+<span class="lineNum">      50 </span>            :                 }
+<span class="lineNum">      51 </span>            :         }
+<span class="lineNum">      52 </span><span class="lineCov">     337377 :         for (auto &amp;child : expression.children) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">     114786 :                 if (!ExtractBindings(*child, bindings)) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">         48 :                         return false;</span>
+<span class="lineNum">      55 </span>            :                 }
+<span class="lineNum">      56 </span>            :         }
+<span class="lineNum">      57 </span><span class="lineCov">     222591 :         return true;</span>
+<a name="58"><span class="lineNum">      58 </span>            : }</a>
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span><span class="lineCov">      12251 : static void ExtractFilters(LogicalOperator *op, vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;filters) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">      56023 :         for (size_t i = 0; i &lt; op-&gt;expressions.size(); i++) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">      43772 :                 filters.push_back(move(op-&gt;expressions[i]));</span>
+<span class="lineNum">      63 </span>            :         }
+<span class="lineNum">      64 </span><span class="lineCov">      12251 :         op-&gt;expressions.clear();</span>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">      12251 : }</span></a>
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span><span class="lineCov">       1365 : static void GetTableReferences(LogicalOperator *op, unordered_set&lt;size_t&gt; &amp;bindings) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">       1365 :         if (op-&gt;type == LogicalOperatorType::GET) {</span>
+<span class="lineNum">      69 </span><span class="lineCov">        901 :                 auto get = (LogicalGet *)op;</span>
+<span class="lineNum">      70 </span><span class="lineCov">        901 :                 bindings.insert(get-&gt;table_index);</span>
+<span class="lineNum">      71 </span><span class="lineCov">        464 :         } else if (op-&gt;type == LogicalOperatorType::SUBQUERY) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">         81 :                 auto subquery = (LogicalSubquery *)op;</span>
+<span class="lineNum">      73 </span><span class="lineCov">         81 :                 bindings.insert(subquery-&gt;table_index);</span>
+<span class="lineNum">      74 </span><span class="lineCov">        383 :         } else if (op-&gt;type == LogicalOperatorType::TABLE_FUNCTION) {</span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :                 auto table_function = (LogicalTableFunction *)op;</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                 bindings.insert(table_function-&gt;table_index);</span>
+<span class="lineNum">      77 </span>            :         } else {
+<span class="lineNum">      78 </span>            :                 // iterate over the children
+<span class="lineNum">      79 </span><span class="lineCov">       1106 :                 for (auto &amp;child : op-&gt;children) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">        723 :                         GetTableReferences(child.get(), bindings);</span>
+<span class="lineNum">      81 </span>            :                 }
+<span class="lineNum">      82 </span>            :         }
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">       1365 : }</span></a>
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span><span class="lineCov">      17692 : static unique_ptr&lt;LogicalOperator&gt; PushFilter(unique_ptr&lt;LogicalOperator&gt; node, unique_ptr&lt;Expression&gt; expr) {</span>
+<span class="lineNum">      86 </span>            :         // push an expression into a filter
+<span class="lineNum">      87 </span>            :         // first check if we have any filter to push it into
+<span class="lineNum">      88 </span><span class="lineCov">      17692 :         if (node-&gt;type != LogicalOperatorType::FILTER) {</span>
+<span class="lineNum">      89 </span>            :                 // we don't, we need to create one
+<span class="lineNum">      90 </span><span class="lineCov">      34842 :                 auto filter = make_unique&lt;LogicalFilter&gt;();</span>
+<span class="lineNum">      91 </span><span class="lineCov">      17421 :                 filter-&gt;children.push_back(move(node));</span>
+<span class="lineNum">      92 </span><span class="lineCov">      17421 :                 node = move(filter);</span>
+<span class="lineNum">      93 </span>            :         }
+<span class="lineNum">      94 </span>            :         // push the filter into the LogicalFilter
+<span class="lineNum">      95 </span><span class="lineCov">      17692 :         assert(node-&gt;type == LogicalOperatorType::FILTER);</span>
+<span class="lineNum">      96 </span><span class="lineCov">      17692 :         auto filter = (LogicalFilter *)node.get();</span>
+<span class="lineNum">      97 </span><span class="lineCov">      17692 :         filter-&gt;expressions.push_back(move(expr));</span>
+<span class="lineNum">      98 </span><span class="lineCov">      17692 :         return node;</span>
+<a name="99"><span class="lineNum">      99 </span>            : }</a>
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span><span class="lineCov">        228 : static JoinSide CombineJoinSide(JoinSide left, JoinSide right) {</span>
+<span class="lineNum">     102 </span><span class="lineCov">        228 :         if (left == JoinSide::NONE) {</span>
+<span class="lineNum">     103 </span><span class="lineCov">         54 :                 return right;</span>
+<span class="lineNum">     104 </span>            :         }
+<span class="lineNum">     105 </span><span class="lineCov">        174 :         if (right == JoinSide::NONE) {</span>
+<span class="lineNum">     106 </span><span class="lineCov">         55 :                 return left;</span>
+<span class="lineNum">     107 </span>            :         }
+<span class="lineNum">     108 </span><span class="lineCov">        119 :         if (left != right) {</span>
+<span class="lineNum">     109 </span><span class="lineCov">        109 :                 return JoinSide::BOTH;</span>
+<span class="lineNum">     110 </span>            :         }
+<span class="lineNum">     111 </span><span class="lineCov">         10 :         return left;</span>
+<a name="112"><span class="lineNum">     112 </span>            : }</a>
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span><span class="lineCov">        366 : static JoinSide GetJoinSide(Expression &amp;expression, unordered_set&lt;size_t&gt; &amp;left_bindings,</span>
+<span class="lineNum">     115 </span>            :                             unordered_set&lt;size_t&gt; &amp;right_bindings) {
+<span class="lineNum">     116 </span><span class="lineCov">        366 :         if (expression.type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">        231 :                 auto &amp;colref = (ColumnRefExpression &amp;)expression;</span>
+<span class="lineNum">     118 </span><span class="lineCov">        231 :                 if (colref.depth &gt; 0) {</span>
+<span class="lineNum">     119 </span>            :                         // correlated column reference, we can't join on this
+<span class="lineNum">     120 </span><span class="lineNoCov">          0 :                         return JoinSide::BOTH;</span>
+<span class="lineNum">     121 </span>            :                 }
+<span class="lineNum">     122 </span><span class="lineCov">        231 :                 if (colref.index != (size_t)-1) {</span>
+<span class="lineNum">     123 </span>            :                         // column reference has already been bound, don't use it for reordering
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :                         return JoinSide::NONE;</span>
+<span class="lineNum">     125 </span>            :                 }
+<span class="lineNum">     126 </span><span class="lineCov">        231 :                 if (left_bindings.find(colref.binding.table_index) != left_bindings.end()) {</span>
+<span class="lineNum">     127 </span>            :                         // column references table on left side
+<span class="lineNum">     128 </span><span class="lineCov">        124 :                         assert(right_bindings.find(colref.binding.table_index) == right_bindings.end());</span>
+<span class="lineNum">     129 </span><span class="lineCov">        124 :                         return JoinSide::LEFT;</span>
+<span class="lineNum">     130 </span>            :                 } else {
+<span class="lineNum">     131 </span>            :                         // column references table on right side
+<span class="lineNum">     132 </span><span class="lineCov">        107 :                         assert(right_bindings.find(colref.binding.table_index) != right_bindings.end());</span>
+<span class="lineNum">     133 </span><span class="lineCov">        107 :                         return JoinSide::RIGHT;</span>
+<span class="lineNum">     134 </span>            :                 }
+<span class="lineNum">     135 </span>            :         }
+<span class="lineNum">     136 </span><span class="lineCov">        135 :         if (expression.type == ExpressionType::SELECT_SUBQUERY) {</span>
+<span class="lineNum">     137 </span><span class="lineNoCov">          0 :                 return JoinSide::BOTH;</span>
+<span class="lineNum">     138 </span>            :         }
+<span class="lineNum">     139 </span><span class="lineCov">        135 :         JoinSide join_side = JoinSide::NONE;</span>
+<span class="lineNum">     140 </span><span class="lineCov">        225 :         for (auto &amp;child : expression.children) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">         90 :                 auto child_side = GetJoinSide(*child, left_bindings, right_bindings);</span>
+<span class="lineNum">     142 </span><span class="lineCov">         90 :                 join_side = CombineJoinSide(child_side, join_side);</span>
+<span class="lineNum">     143 </span>            :         }
+<span class="lineNum">     144 </span><span class="lineCov">        135 :         return join_side;</span>
+<a name="145"><span class="lineNum">     145 </span>            : }</a>
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span><span class="lineCov">        283 : static unique_ptr&lt;LogicalOperator&gt; CreateJoinCondition(unique_ptr&lt;LogicalOperator&gt; op, LogicalJoin &amp;join,</span>
+<span class="lineNum">     148 </span>            :                                                        unique_ptr&lt;Expression&gt; expr,
+<span class="lineNum">     149 </span>            :                                                        unordered_set&lt;size_t&gt; &amp;left_bindings,
+<span class="lineNum">     150 </span>            :                                                        unordered_set&lt;size_t&gt; &amp;right_bindings) {
+<span class="lineNum">     151 </span><span class="lineCov">        283 :         if (expr-&gt;type &gt;= ExpressionType::COMPARE_EQUAL &amp;&amp; expr-&gt;type &lt;= ExpressionType::COMPARE_NOTLIKE) {</span>
+<span class="lineNum">     152 </span>            :                 // comparison
+<span class="lineNum">     153 </span><span class="lineCov">        138 :                 auto left_side = GetJoinSide(*expr-&gt;children[0], left_bindings, right_bindings);</span>
+<span class="lineNum">     154 </span><span class="lineCov">        138 :                 auto right_side = GetJoinSide(*expr-&gt;children[1], left_bindings, right_bindings);</span>
+<span class="lineNum">     155 </span><span class="lineCov">        138 :                 auto total_side = CombineJoinSide(left_side, right_side);</span>
+<span class="lineNum">     156 </span>            :                 // check if we can use this condition as a join condition
+<span class="lineNum">     157 </span><span class="lineCov">        138 :                 if (total_side != JoinSide::BOTH) {</span>
+<span class="lineNum">     158 </span>            :                         // join condition does not reference both sides, add it as filter under the join
+<span class="lineNum">     159 </span><span class="lineCov">         39 :                         int push_side = total_side == JoinSide::LEFT ? 0 : 1;</span>
+<span class="lineNum">     160 </span><span class="lineCov">         39 :                         join.children[push_side] = PushFilter(move(join.children[push_side]), move(expr));</span>
+<span class="lineNum">     161 </span><span class="lineCov">         39 :                         return op;</span>
+<span class="lineNum">     162 </span><span class="lineCov">         99 :                 } else if (left_side != JoinSide::BOTH &amp;&amp; right_side != JoinSide::BOTH) {</span>
+<span class="lineNum">     163 </span>            :                         // join condition can be divided in a left/right side
+<span class="lineNum">     164 </span><span class="lineCov">        186 :                         JoinCondition condition;</span>
+<span class="lineNum">     165 </span><span class="lineCov">         93 :                         condition.comparison = expr-&gt;type;</span>
+<span class="lineNum">     166 </span><span class="lineCov">         93 :                         int left_index = 0;</span>
+<span class="lineNum">     167 </span><span class="lineCov">         93 :                         if (left_side == JoinSide::RIGHT) {</span>
+<span class="lineNum">     168 </span>            :                                 // left = right, right = left, flip the comparison symbol and reverse sides
+<span class="lineNum">     169 </span><span class="lineCov">         16 :                                 left_index = 1;</span>
+<span class="lineNum">     170 </span><span class="lineCov">         16 :                                 condition.comparison = ComparisonExpression::FlipComparisionExpression(expr-&gt;type);</span>
+<span class="lineNum">     171 </span>            :                         }
+<span class="lineNum">     172 </span><span class="lineCov">         93 :                         condition.left = move(expr-&gt;children[left_index]);</span>
+<span class="lineNum">     173 </span><span class="lineCov">         93 :                         condition.right = move(expr-&gt;children[1 - left_index]);</span>
+<span class="lineNum">     174 </span><span class="lineCov">         93 :                         join.conditions.push_back(move(condition));</span>
+<span class="lineNum">     175 </span><span class="lineCov">         93 :                         return op;</span>
+<span class="lineNum">     176 </span>            :                 }
+<span class="lineNum">     177 </span><span class="lineCov">        145 :         } else if (expr-&gt;type == ExpressionType::OPERATOR_NOT) {</span>
+<span class="lineNum">     178 </span><span class="lineCov">         74 :                 assert(expr-&gt;children.size() == 1);</span>
+<span class="lineNum">     179 </span><span class="lineCov">         74 :                 ExpressionType child_type = expr-&gt;children[0]-&gt;GetExpressionType();</span>
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            :                 // ON NOT (X = 3) can be turned into ON (X &lt;&gt; 3)
+<span class="lineNum">     182 </span>            :                 // for non-comparison operators here we just push the filter
+<span class="lineNum">     183 </span><span class="lineCov">         74 :                 if (child_type &gt;= ExpressionType::COMPARE_EQUAL &amp;&amp; child_type &lt;= ExpressionType::COMPARE_GREATERTHANOREQUALTO) {</span>
+<span class="lineNum">     184 </span>            :                         // switcheroo the child condition
+<span class="lineNum">     185 </span>            :                         // our join needs to compare explicit left and right sides. So we
+<span class="lineNum">     186 </span>            :                         // invert the condition to express NOT, this way we can still use
+<span class="lineNum">     187 </span>            :                         // equi-joins
+<span class="lineNum">     188 </span><span class="lineCov">          9 :                         expr-&gt;children[0]-&gt;type = ComparisonExpression::NegateComparisionExpression(child_type);</span>
+<span class="lineNum">     189 </span><span class="lineCov">          9 :                         return CreateJoinCondition(move(op), join, move(expr-&gt;children[0]), left_bindings, right_bindings);</span>
+<span class="lineNum">     190 </span>            :                 }
+<span class="lineNum">     191 </span>            :         }
+<span class="lineNum">     192 </span>            :         // unrecognized type for join condition
+<span class="lineNum">     193 </span>            :         // push as filter under the join
+<span class="lineNum">     194 </span><span class="lineCov">        142 :         op = PushFilter(move(op), move(expr));</span>
+<span class="lineNum">     195 </span><span class="lineCov">        142 :         return op;</span>
+<span class="lineNum">     196 </span>            : }
+<a name="197"><span class="lineNum">     197 </span>            : </a>
+<span class="lineNum">     198 </span>            : //! Resolve join conditions for non-inner joins
+<span class="lineNum">     199 </span><span class="lineCov">   14919011 : unique_ptr&lt;LogicalOperator&gt; JoinOrderOptimizer::ResolveJoinConditions(unique_ptr&lt;LogicalOperator&gt; op) {</span>
+<span class="lineNum">     200 </span>            :         // first resolve the join conditions of any children
+<span class="lineNum">     201 </span><span class="lineCov">   25401894 :         for (size_t i = 0; i &lt; op-&gt;children.size(); i++) {</span>
+<span class="lineNum">     202 </span><span class="lineCov">   10476474 :                 op-&gt;children[i] = ResolveJoinConditions(move(op-&gt;children[i]));</span>
+<span class="lineNum">     203 </span>            :         }
+<span class="lineNum">     204 </span><span class="lineCov">   14920370 :         if (op-&gt;type == LogicalOperatorType::JOIN) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">      30045 :                 LogicalJoin &amp;join = (LogicalJoin &amp;)*op;</span>
+<span class="lineNum">     206 </span><span class="lineCov">      30045 :                 if (join.expressions.size() &gt; 0) {</span>
+<span class="lineNum">     207 </span>            :                         // turn any remaining expressions into proper join conditions
+<span class="lineNum">     208 </span><span class="lineCov">        440 :                         unordered_set&lt;size_t&gt; left_bindings, right_bindings;</span>
+<span class="lineNum">     209 </span><span class="lineCov">        220 :                         GetTableReferences(join.children[0].get(), left_bindings);</span>
+<span class="lineNum">     210 </span><span class="lineCov">        220 :                         GetTableReferences(join.children[1].get(), right_bindings);</span>
+<span class="lineNum">     211 </span>            :                         // now for each expression turn it into a proper JoinCondition
+<span class="lineNum">     212 </span><span class="lineCov">        494 :                         for (size_t i = 0; i &lt; join.expressions.size(); i++) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">        274 :                                 op = CreateJoinCondition(move(op), join, move(join.expressions[i]), left_bindings, right_bindings);</span>
+<span class="lineNum">     214 </span>            :                         }
+<span class="lineNum">     215 </span><span class="lineCov">        220 :                         join.expressions.clear();</span>
+<span class="lineNum">     216 </span>            :                 }
+<span class="lineNum">     217 </span>            :         }
+<span class="lineNum">     218 </span><span class="lineCov">   14921729 :         return op;</span>
+<a name="219"><span class="lineNum">     219 </span>            : }</a>
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span><span class="lineCov">    5016073 : bool JoinOrderOptimizer::ExtractJoinRelations(LogicalOperator &amp;input_op, vector&lt;LogicalOperator *&gt; &amp;filter_operators,</span>
+<span class="lineNum">     222 </span>            :                                               LogicalOperator *parent) {
+<span class="lineNum">     223 </span><span class="lineCov">    5016073 :         LogicalOperator *op = &amp;input_op;</span>
+<span class="lineNum">     224 </span><span class="lineCov">   12348645 :         while (op-&gt;children.size() == 1 &amp;&amp; op-&gt;type != LogicalOperatorType::SUBQUERY) {</span>
+<span class="lineNum">     225 </span><span class="lineCov">    8635228 :                 if (op-&gt;type == LogicalOperatorType::FILTER) {</span>
+<span class="lineNum">     226 </span>            :                         // extract join conditions from filter
+<span class="lineNum">     227 </span><span class="lineCov">     489133 :                         filter_operators.push_back(op);</span>
+<span class="lineNum">     228 </span>            :                 }
+<span class="lineNum">     229 </span><span class="lineCov">    8632148 :                 if (op-&gt;type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
+<span class="lineNum">     230 </span>            :                         // don't push filters through aggregate and group by
+<span class="lineNum">     231 </span><span class="lineCov">    1303349 :                         JoinOrderOptimizer optimizer;</span>
+<span class="lineNum">     232 </span><span class="lineCov">    1303351 :                         op-&gt;children[0] = optimizer.Optimize(move(op-&gt;children[0]));</span>
+<span class="lineNum">     233 </span><span class="lineCov">    1303361 :                         return false;</span>
+<span class="lineNum">     234 </span>            :                 }
+<span class="lineNum">     235 </span><span class="lineCov">    7328799 :                 op = op-&gt;children[0].get();</span>
+<span class="lineNum">     236 </span>            :         }
+<span class="lineNum">     237 </span><span class="lineCov">    3712886 :         if (op-&gt;type == LogicalOperatorType::UNION || op-&gt;type == LogicalOperatorType::EXCEPT ||</span>
+<span class="lineNum">     238 </span><span class="lineCov">    3710104 :             op-&gt;type == LogicalOperatorType::INTERSECT) {</span>
+<span class="lineNum">     239 </span>            :                 // set operation, optimize separately in children
+<span class="lineNum">     240 </span><span class="lineCov">      13814 :                 for (size_t i = 0; i &lt; op-&gt;children.size(); i++) {</span>
+<span class="lineNum">     241 </span><span class="lineCov">      18956 :                         JoinOrderOptimizer optimizer;</span>
+<span class="lineNum">     242 </span><span class="lineCov">       9478 :                         op-&gt;children[i] = optimizer.Optimize(move(op-&gt;children[i]));</span>
+<span class="lineNum">     243 </span>            :                 }
+<span class="lineNum">     244 </span><span class="lineCov">       4739 :                 return false;</span>
+<span class="lineNum">     245 </span>            :         }
+<span class="lineNum">     246 </span>            : 
+<span class="lineNum">     247 </span><span class="lineCov">    3708550 :         if (op-&gt;type == LogicalOperatorType::JOIN) {</span>
+<span class="lineNum">     248 </span><span class="lineCov">        712 :                 LogicalJoin *join = (LogicalJoin *)op;</span>
+<span class="lineNum">     249 </span><span class="lineCov">        712 :                 if (join-&gt;type != JoinType::INNER) {</span>
+<span class="lineNum">     250 </span>            :                         // non-inner join
+<span class="lineNum">     251 </span>            :                         // we do not reorder non-inner joins yet, however we do want to expand the potential join graph around them
+<span class="lineNum">     252 </span>            :                         // non-inner joins are also tricky because we can't freely make conditions through them
+<span class="lineNum">     253 </span>            :                         // e.g. suppose we have (left LEFT OUTER JOIN right WHERE right IS NOT NULL), the join can generate
+<span class="lineNum">     254 </span>            :                         // new NULL values in the right side, so pushing this condition through the join leads to incorrect results
+<span class="lineNum">     255 </span>            :                         // for this reason, we just start a new JoinOptimizer pass in each of the children of the join
+<span class="lineNum">     256 </span><span class="lineCov">        404 :                         JoinOrderOptimizer optimizer_left, optimizer_right;</span>
+<span class="lineNum">     257 </span><span class="lineCov">        202 :                         join-&gt;children[0] = optimizer_left.Optimize(move(join-&gt;children[0]));</span>
+<span class="lineNum">     258 </span><span class="lineCov">        202 :                         join-&gt;children[1] = optimizer_right.Optimize(move(join-&gt;children[1]));</span>
+<span class="lineNum">     259 </span>            :                         // after this we want to treat this node as one  &quot;end node&quot; (like e.g. a base relation)
+<span class="lineNum">     260 </span>            :                         // however the join refers to multiple base relations
+<span class="lineNum">     261 </span>            :                         // enumerate all base relations obtained from this join and add them to the relation mapping
+<span class="lineNum">     262 </span>            :                         // also, we have to resolve the join conditions for the joins here
+<span class="lineNum">     263 </span>            :                         // get the left and right bindings
+<span class="lineNum">     264 </span><span class="lineCov">        404 :                         unordered_set&lt;size_t&gt; bindings;</span>
+<span class="lineNum">     265 </span><span class="lineCov">        202 :                         GetTableReferences(join, bindings);</span>
+<span class="lineNum">     266 </span>            :                         // now create the relation that refers to all these bindings
+<span class="lineNum">     267 </span><span class="lineCov">        202 :                         auto relation = make_unique&lt;Relation&gt;(&amp;input_op, parent);</span>
+<span class="lineNum">     268 </span><span class="lineCov">        638 :                         for (size_t it : bindings) {</span>
+<span class="lineNum">     269 </span><span class="lineCov">        436 :                                 relation_mapping[it] = relations.size();</span>
+<span class="lineNum">     270 </span>            :                         }
+<span class="lineNum">     271 </span><span class="lineCov">        202 :                         relations.push_back(move(relation));</span>
+<span class="lineNum">     272 </span><span class="lineCov">        202 :                         return true;</span>
+<span class="lineNum">     273 </span>            :                 } else {
+<span class="lineNum">     274 </span>            :                         // extract join conditions from inner join
+<span class="lineNum">     275 </span><span class="lineCov">        510 :                         filter_operators.push_back(op);</span>
+<span class="lineNum">     276 </span>            :                 }
+<span class="lineNum">     277 </span>            :         }
+<span class="lineNum">     278 </span><span class="lineCov">    3708348 :         if (op-&gt;type == LogicalOperatorType::JOIN || op-&gt;type == LogicalOperatorType::CROSS_PRODUCT) {</span>
+<span class="lineNum">     279 </span>            :                 // inner join or cross product
+<span class="lineNum">     280 </span><span class="lineCov">     284508 :                 if (!ExtractJoinRelations(*op-&gt;children[0], filter_operators, op)) {</span>
+<span class="lineNum">     281 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     282 </span>            :                 }
+<span class="lineNum">     283 </span><span class="lineCov">     284072 :                 if (!ExtractJoinRelations(*op-&gt;children[1], filter_operators, op)) {</span>
+<span class="lineNum">     284 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     285 </span>            :                 }
+<span class="lineNum">     286 </span><span class="lineCov">     284072 :                 return true;</span>
+<span class="lineNum">     287 </span><span class="lineCov">    3423840 :         } else if (op-&gt;type == LogicalOperatorType::GET) {</span>
+<span class="lineNum">     288 </span>            :                 // base table scan, add to set of relations
+<span class="lineNum">     289 </span><span class="lineCov">    3382084 :                 auto get = (LogicalGet *)op;</span>
+<span class="lineNum">     290 </span><span class="lineCov">    3382084 :                 auto relation = make_unique&lt;Relation&gt;(&amp;input_op, parent);</span>
+<span class="lineNum">     291 </span><span class="lineCov">    3382716 :                 relation_mapping[get-&gt;table_index] = relations.size();</span>
+<span class="lineNum">     292 </span><span class="lineCov">    3384132 :                 relations.push_back(move(relation));</span>
+<span class="lineNum">     293 </span><span class="lineCov">    3382899 :                 return true;</span>
+<span class="lineNum">     294 </span><span class="lineCov">      41756 :         } else if (op-&gt;type == LogicalOperatorType::SUBQUERY) {</span>
+<span class="lineNum">     295 </span><span class="lineCov">        392 :                 auto subquery = (LogicalSubquery *)op;</span>
+<span class="lineNum">     296 </span><span class="lineCov">        392 :                 assert(op-&gt;children.size() == 1);</span>
+<span class="lineNum">     297 </span>            :                 // we run the join order optimizer witin the subquery as well
+<span class="lineNum">     298 </span><span class="lineCov">        784 :                 JoinOrderOptimizer optimizer;</span>
+<span class="lineNum">     299 </span><span class="lineCov">        392 :                 op-&gt;children[0] = optimizer.Optimize(move(op-&gt;children[0]));</span>
+<span class="lineNum">     300 </span>            :                 // now we add the subquery to the set of relations
+<span class="lineNum">     301 </span><span class="lineCov">        392 :                 auto relation = make_unique&lt;Relation&gt;(&amp;input_op, parent);</span>
+<span class="lineNum">     302 </span><span class="lineCov">        392 :                 relation_mapping[subquery-&gt;table_index] = relations.size();</span>
+<span class="lineNum">     303 </span><span class="lineCov">        392 :                 relations.push_back(move(relation));</span>
+<span class="lineNum">     304 </span><span class="lineCov">        392 :                 return true;</span>
+<span class="lineNum">     305 </span><span class="lineCov">      41364 :         } else if (op-&gt;type == LogicalOperatorType::TABLE_FUNCTION) {</span>
+<span class="lineNum">     306 </span>            :                 // table function call, add to set of relations
+<span class="lineNum">     307 </span><span class="lineCov">          9 :                 auto table_function = (LogicalTableFunction *)op;</span>
+<span class="lineNum">     308 </span><span class="lineCov">          9 :                 auto relation = make_unique&lt;Relation&gt;(&amp;input_op, parent);</span>
+<span class="lineNum">     309 </span><span class="lineCov">          9 :                 relation_mapping[table_function-&gt;table_index] = relations.size();</span>
+<span class="lineNum">     310 </span><span class="lineCov">          9 :                 relations.push_back(move(relation));</span>
+<span class="lineNum">     311 </span><span class="lineCov">          9 :                 return true;</span>
+<span class="lineNum">     312 </span>            :         }
+<span class="lineNum">     313 </span><span class="lineCov">      41355 :         return false;</span>
+<span class="lineNum">     314 </span>            : }
+<a name="315"><span class="lineNum">     315 </span>            : </a>
+<span class="lineNum">     316 </span>            : //! Update the exclusion set with all entries in the subgraph
+<span class="lineNum">     317 </span><span class="lineCov">    7880784 : static void UpdateExclusionSet(RelationSet *node, unordered_set&lt;size_t&gt; &amp;exclusion_set) {</span>
+<span class="lineNum">     318 </span><span class="lineCov">   48274005 :         for (size_t i = 0; i &lt; node-&gt;count; i++) {</span>
+<span class="lineNum">     319 </span><span class="lineCov">   40393221 :                 exclusion_set.insert(node-&gt;relations[i]);</span>
+<span class="lineNum">     320 </span>            :         }
+<span class="lineNum">     321 </span><span class="lineCov">    7880784 : }</span>
+<a name="322"><span class="lineNum">     322 </span>            : </a>
+<span class="lineNum">     323 </span>            : //! Create a new JoinTree node by joining together two previous JoinTree nodes
+<span class="lineNum">     324 </span><span class="lineCov">   25258244 : static unique_ptr&lt;JoinNode&gt; CreateJoinTree(RelationSet *set, NeighborInfo *info, JoinNode *left, JoinNode *right) {</span>
+<span class="lineNum">     325 </span>            :         // for the hash join we want the right side (build side) to have the smallest cardinality
+<span class="lineNum">     326 </span>            :         // also just a heuristic but for now...
+<span class="lineNum">     327 </span>            :         // FIXME: we should probably actually benchmark that as well
+<span class="lineNum">     328 </span>            :         // FIXME: should consider different join algorithms, should we pick a join algorithm here as well? (probably)
+<span class="lineNum">     329 </span><span class="lineCov">   25258244 :         if (left-&gt;cardinality &lt; right-&gt;cardinality) {</span>
+<span class="lineNum">     330 </span><span class="lineCov">    5563929 :                 return CreateJoinTree(set, info, right, left);</span>
+<span class="lineNum">     331 </span>            :         }
+<span class="lineNum">     332 </span>            :         // the expected cardinality is the max of the child cardinalities
+<span class="lineNum">     333 </span>            :         // FIXME: we should obviously use better cardinality estimation here
+<span class="lineNum">     334 </span>            :         // but for now we just assume foreign key joins only
+<span class="lineNum">     335 </span><span class="lineCov">   19694315 :         size_t expected_cardinality;</span>
+<span class="lineNum">     336 </span><span class="lineCov">   19694315 :         if (info-&gt;filters.size() == 0) {</span>
+<span class="lineNum">     337 </span>            :                 // cross product
+<span class="lineNum">     338 </span><span class="lineCov">   12113164 :                 expected_cardinality = left-&gt;cardinality * right-&gt;cardinality;</span>
+<span class="lineNum">     339 </span>            :         } else {
+<span class="lineNum">     340 </span>            :                 // normal join, expect foreign key join
+<span class="lineNum">     341 </span><span class="lineCov">    7581151 :                 expected_cardinality = std::max(left-&gt;cardinality, right-&gt;cardinality);</span>
+<span class="lineNum">     342 </span>            :         }
+<span class="lineNum">     343 </span>            :         // cost is expected_cardinality plus the cost of the previous plans
+<span class="lineNum">     344 </span><span class="lineCov">   19694315 :         size_t cost = expected_cardinality + left-&gt;cost + right-&gt;cost;</span>
+<span class="lineNum">     345 </span><span class="lineCov">   19694315 :         return make_unique&lt;JoinNode&gt;(set, info, left, right, expected_cardinality, cost);</span>
+<a name="346"><span class="lineNum">     346 </span>            : }</a>
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span><span class="lineCov">   19694315 : JoinNode *JoinOrderOptimizer::EmitPair(RelationSet *left, RelationSet *right, NeighborInfo *info) {</span>
+<span class="lineNum">     349 </span>            :         // get the left and right join plans
+<span class="lineNum">     350 </span><span class="lineCov">   19694315 :         auto &amp;left_plan = plans[left];</span>
+<span class="lineNum">     351 </span><span class="lineCov">   19694315 :         auto &amp;right_plan = plans[right];</span>
+<span class="lineNum">     352 </span><span class="lineCov">   19694315 :         auto new_set = set_manager.Union(left, right);</span>
+<span class="lineNum">     353 </span>            :         // create the join tree based on combining the two plans
+<span class="lineNum">     354 </span><span class="lineCov">   39388630 :         auto new_plan = CreateJoinTree(new_set, info, left_plan.get(), right_plan.get());</span>
+<span class="lineNum">     355 </span>            :         // check if this plan is the optimal plan we found for this set of relations
+<span class="lineNum">     356 </span><span class="lineCov">   19694315 :         auto entry = plans.find(new_set);</span>
+<span class="lineNum">     357 </span><span class="lineCov">   19694315 :         if (entry == plans.end() || new_plan-&gt;cost &lt; entry-&gt;second-&gt;cost) {</span>
+<span class="lineNum">     358 </span>            :                 // the plan is the optimal plan, move it into the dynamic programming tree
+<span class="lineNum">     359 </span><span class="lineCov">     826281 :                 auto result = new_plan.get();</span>
+<span class="lineNum">     360 </span><span class="lineCov">     826281 :                 plans[new_set] = move(new_plan);</span>
+<span class="lineNum">     361 </span><span class="lineCov">     826281 :                 return result;</span>
+<span class="lineNum">     362 </span>            :         }
+<span class="lineNum">     363 </span><span class="lineCov">   18868034 :         return entry-&gt;second.get();</span>
+<a name="364"><span class="lineNum">     364 </span>            : }</a>
+<span class="lineNum">     365 </span>            : 
+<span class="lineNum">     366 </span><span class="lineCov">   19159721 : bool JoinOrderOptimizer::TryEmitPair(RelationSet *left, RelationSet *right, NeighborInfo *info) {</span>
+<span class="lineNum">     367 </span><span class="lineCov">   19159721 :         pairs++;</span>
+<span class="lineNum">     368 </span><span class="lineCov">   19159721 :         if (pairs &gt;= 10000) {</span>
+<span class="lineNum">     369 </span>            :                 // when the amount of pairs gets too large we exit the dynamic programming and resort to a greedy algorithm
+<span class="lineNum">     370 </span>            :                 // FIXME: simple heuristic currently
+<span class="lineNum">     371 </span>            :                 // at 10K pairs stop searching exactly and switch to heuristic
+<span class="lineNum">     372 </span><span class="lineCov">        841 :                 return false;</span>
+<span class="lineNum">     373 </span>            :         }
+<span class="lineNum">     374 </span><span class="lineCov">   19158880 :         EmitPair(left, right, info);</span>
+<span class="lineNum">     375 </span><span class="lineCov">   19158880 :         return true;</span>
+<a name="376"><span class="lineNum">     376 </span>            : }</a>
+<span class="lineNum">     377 </span>            : 
+<span class="lineNum">     378 </span><span class="lineCov">    7880784 : bool JoinOrderOptimizer::EmitCSG(RelationSet *node) {</span>
+<span class="lineNum">     379 </span>            :         // create the exclusion set as everything inside the subgraph AND anything with members BELOW it
+<span class="lineNum">     380 </span><span class="lineCov">   15761568 :         unordered_set&lt;size_t&gt; exclusion_set;</span>
+<span class="lineNum">     381 </span><span class="lineCov">   31814355 :         for (size_t i = 0; i &lt; node-&gt;relations[0]; i++) {</span>
+<span class="lineNum">     382 </span><span class="lineCov">   23933571 :                 exclusion_set.insert(i);</span>
+<span class="lineNum">     383 </span>            :         }
+<span class="lineNum">     384 </span><span class="lineCov">    7880784 :         UpdateExclusionSet(node, exclusion_set);</span>
+<span class="lineNum">     385 </span>            :         // find the neighbors given this exclusion set
+<span class="lineNum">     386 </span><span class="lineCov">   15761568 :         auto neighbors = query_graph.GetNeighbors(node, exclusion_set);</span>
+<span class="lineNum">     387 </span><span class="lineCov">    7880784 :         if (neighbors.size() == 0) {</span>
+<span class="lineNum">     388 </span><span class="lineCov">    3774986 :                 return true;</span>
+<span class="lineNum">     389 </span>            :         }
+<span class="lineNum">     390 </span>            :         // we iterate over the neighbors ordered by their first node
+<span class="lineNum">     391 </span><span class="lineCov">    4105798 :         sort(neighbors.begin(), neighbors.end());</span>
+<span class="lineNum">     392 </span><span class="lineCov">    9492499 :         for (auto neighbor : neighbors) {</span>
+<span class="lineNum">     393 </span>            :                 // since the GetNeighbors only returns the smallest element in a list, the entry might not be connected to
+<span class="lineNum">     394 </span>            :                 // (only!) this neighbor,  hence we have to do a connectedness check before we can emit it
+<span class="lineNum">     395 </span><span class="lineCov">    5387542 :                 auto neighbor_relation = set_manager.GetRelation(neighbor);</span>
+<span class="lineNum">     396 </span><span class="lineCov">    5387542 :                 auto connection = query_graph.GetConnection(node, neighbor_relation);</span>
+<span class="lineNum">     397 </span><span class="lineCov">    5387542 :                 if (connection) {</span>
+<span class="lineNum">     398 </span><span class="lineCov">    5387537 :                         if (!TryEmitPair(node, neighbor_relation, connection)) {</span>
+<span class="lineNum">     399 </span><span class="lineCov">        183 :                                 return false;</span>
+<span class="lineNum">     400 </span>            :                         }
+<span class="lineNum">     401 </span>            :                 }
+<span class="lineNum">     402 </span><span class="lineCov">    5387359 :                 if (!EnumerateCmpRecursive(node, neighbor_relation, exclusion_set)) {</span>
+<span class="lineNum">     403 </span><span class="lineCov">        658 :                         return false;</span>
+<span class="lineNum">     404 </span>            :                 }
+<span class="lineNum">     405 </span>            :         }
+<span class="lineNum">     406 </span><span class="lineCov">    4104957 :         return true;</span>
+<a name="407"><span class="lineNum">     407 </span>            : }</a>
+<span class="lineNum">     408 </span>            : 
+<span class="lineNum">     409 </span><span class="lineCov">   19156591 : bool JoinOrderOptimizer::EnumerateCmpRecursive(RelationSet *left, RelationSet *right,</span>
+<span class="lineNum">     410 </span>            :                                                unordered_set&lt;size_t&gt; exclusion_set) {
+<span class="lineNum">     411 </span>            :         // get the neighbors of the second relation under the exclusion set
+<span class="lineNum">     412 </span><span class="lineCov">   38313182 :         auto neighbors = query_graph.GetNeighbors(right, exclusion_set);</span>
+<span class="lineNum">     413 </span><span class="lineCov">   19156591 :         if (neighbors.size() == 0) {</span>
+<span class="lineNum">     414 </span><span class="lineCov">    8406754 :                 return true;</span>
+<span class="lineNum">     415 </span>            :         }
+<span class="lineNum">     416 </span><span class="lineCov">   21499674 :         vector&lt;RelationSet *&gt; union_sets;</span>
+<span class="lineNum">     417 </span><span class="lineCov">   10749837 :         union_sets.resize(neighbors.size());</span>
+<span class="lineNum">     418 </span><span class="lineCov">   24521397 :         for (size_t i = 0; i &lt; neighbors.size(); i++) {</span>
+<span class="lineNum">     419 </span><span class="lineCov">   13772218 :                 auto neighbor = set_manager.GetRelation(neighbors[i]);</span>
+<span class="lineNum">     420 </span>            :                 // emit the combinations of this node and its neighbors
+<span class="lineNum">     421 </span><span class="lineCov">   13772218 :                 auto combined_set = set_manager.Union(right, neighbor);</span>
+<span class="lineNum">     422 </span><span class="lineCov">   13772218 :                 if (plans.find(combined_set) != plans.end()) {</span>
+<span class="lineNum">     423 </span><span class="lineCov">   13772188 :                         auto connection = query_graph.GetConnection(left, combined_set);</span>
+<span class="lineNum">     424 </span><span class="lineCov">   13772188 :                         if (connection) {</span>
+<span class="lineNum">     425 </span><span class="lineCov">   13772184 :                                 if (!TryEmitPair(left, combined_set, connection)) {</span>
+<span class="lineNum">     426 </span><span class="lineCov">        658 :                                         return false;</span>
+<span class="lineNum">     427 </span>            :                                 }
+<span class="lineNum">     428 </span>            :                         }
+<span class="lineNum">     429 </span>            :                 }
+<span class="lineNum">     430 </span><span class="lineCov">   13771560 :                 union_sets[i] = combined_set;</span>
+<span class="lineNum">     431 </span>            :         }
+<span class="lineNum">     432 </span>            :         // recursively enumerate the sets
+<span class="lineNum">     433 </span><span class="lineCov">   24516489 :         for (size_t i = 0; i &lt; neighbors.size(); i++) {</span>
+<span class="lineNum">     434 </span>            :                 // updated the set of excluded entries with this neighbor
+<span class="lineNum">     435 </span><span class="lineCov">   13769232 :                 unordered_set&lt;size_t&gt; new_exclusion_set = exclusion_set;</span>
+<span class="lineNum">     436 </span><span class="lineCov">   13769232 :                 new_exclusion_set.insert(neighbors[i]);</span>
+<span class="lineNum">     437 </span><span class="lineCov">   13769232 :                 if (!EnumerateCmpRecursive(left, union_sets[i], new_exclusion_set)) {</span>
+<span class="lineNum">     438 </span><span class="lineCov">       1922 :                         return false;</span>
+<span class="lineNum">     439 </span>            :                 }
+<span class="lineNum">     440 </span>            :         }
+<span class="lineNum">     441 </span><span class="lineCov">   10747257 :         return true;</span>
+<a name="442"><span class="lineNum">     442 </span>            : }</a>
+<span class="lineNum">     443 </span>            : 
+<span class="lineNum">     444 </span><span class="lineCov">    7875241 : bool JoinOrderOptimizer::EnumerateCSGRecursive(RelationSet *node, unordered_set&lt;size_t&gt; &amp;exclusion_set) {</span>
+<span class="lineNum">     445 </span>            :         // find neighbors of S under the exlusion set
+<span class="lineNum">     446 </span><span class="lineCov">   15750482 :         auto neighbors = query_graph.GetNeighbors(node, exclusion_set);</span>
+<span class="lineNum">     447 </span><span class="lineCov">    7875241 :         if (neighbors.size() == 0) {</span>
+<span class="lineNum">     448 </span><span class="lineCov">    3048454 :                 return true;</span>
+<span class="lineNum">     449 </span>            :         }
+<span class="lineNum">     450 </span>            :         // now first emit the connected subgraphs of the neighbors
+<span class="lineNum">     451 </span><span class="lineCov">    9653574 :         vector&lt;RelationSet *&gt; union_sets;</span>
+<span class="lineNum">     452 </span><span class="lineCov">    4826787 :         union_sets.resize(neighbors.size());</span>
+<span class="lineNum">     453 </span><span class="lineCov">   11833119 :         for (size_t i = 0; i &lt; neighbors.size(); i++) {</span>
+<span class="lineNum">     454 </span><span class="lineCov">    7006976 :                 auto neighbor = set_manager.GetRelation(neighbors[i]);</span>
+<span class="lineNum">     455 </span>            :                 // emit the combinations of this node and its neighbors
+<span class="lineNum">     456 </span><span class="lineCov">    7006976 :                 auto new_set = set_manager.Union(node, neighbor);</span>
+<span class="lineNum">     457 </span><span class="lineCov">    7006976 :                 if (plans.find(new_set) != plans.end()) {</span>
+<span class="lineNum">     458 </span><span class="lineCov">    7006965 :                         if (!EmitCSG(new_set)) {</span>
+<span class="lineNum">     459 </span><span class="lineCov">        644 :                                 return false;</span>
+<span class="lineNum">     460 </span>            :                         }
+<span class="lineNum">     461 </span>            :                 }
+<span class="lineNum">     462 </span><span class="lineCov">    7006332 :                 union_sets[i] = new_set;</span>
+<span class="lineNum">     463 </span>            :         }
+<span class="lineNum">     464 </span>            :         // recursively enumerate the sets
+<span class="lineNum">     465 </span><span class="lineCov">   11822816 :         for (size_t i = 0; i &lt; neighbors.size(); i++) {</span>
+<span class="lineNum">     466 </span>            :                 // updated the set of excluded entries with this neighbor
+<span class="lineNum">     467 </span><span class="lineCov">    7001619 :                 unordered_set&lt;size_t&gt; new_exclusion_set = exclusion_set;</span>
+<span class="lineNum">     468 </span><span class="lineCov">    7001619 :                 new_exclusion_set.insert(neighbors[i]);</span>
+<span class="lineNum">     469 </span><span class="lineCov">    7001619 :                 if (!EnumerateCSGRecursive(union_sets[i], new_exclusion_set)) {</span>
+<span class="lineNum">     470 </span><span class="lineCov">       4946 :                         return false;</span>
+<span class="lineNum">     471 </span>            :                 }
+<span class="lineNum">     472 </span>            :         }
+<span class="lineNum">     473 </span><span class="lineCov">    4821197 :         return true;</span>
+<a name="474"><span class="lineNum">     474 </span>            : }</a>
+<span class="lineNum">     475 </span>            : 
+<span class="lineNum">     476 </span><span class="lineCov">     335478 : bool JoinOrderOptimizer::SolveJoinOrderExactly() {</span>
+<span class="lineNum">     477 </span>            :         // now we perform the actual dynamic programming to compute the final result
+<span class="lineNum">     478 </span>            :         // we enumerate over all the possible pairs in the neighborhood
+<span class="lineNum">     479 </span><span class="lineCov">    1208456 :         for (size_t i = relations.size(); i &gt; 0; i--) {</span>
+<span class="lineNum">     480 </span>            :                 // for every node in the set, we consider it as the start node once
+<span class="lineNum">     481 </span><span class="lineCov">     873819 :                 auto start_node = set_manager.GetRelation(i - 1);</span>
+<span class="lineNum">     482 </span>            :                 // emit the start node
+<span class="lineNum">     483 </span><span class="lineCov">     873819 :                 if (!EmitCSG(start_node)) {</span>
+<span class="lineNum">     484 </span><span class="lineCov">        197 :                         return false;</span>
+<span class="lineNum">     485 </span>            :                 }
+<span class="lineNum">     486 </span>            :                 // initialize the set of exclusion_set as all the nodes with a number below this
+<span class="lineNum">     487 </span><span class="lineCov">     873622 :                 unordered_set&lt;size_t&gt; exclusion_set;</span>
+<span class="lineNum">     488 </span><span class="lineCov">    2147455 :                 for (size_t j = 0; j &lt; i - 1; j++) {</span>
+<span class="lineNum">     489 </span><span class="lineCov">    1273833 :                         exclusion_set.insert(j);</span>
+<span class="lineNum">     490 </span>            :                 }
+<span class="lineNum">     491 </span>            :                 // then we recursively search for neighbors that do not belong to the banned entries
+<span class="lineNum">     492 </span><span class="lineCov">     873622 :                 if (!EnumerateCSGRecursive(start_node, exclusion_set)) {</span>
+<span class="lineNum">     493 </span><span class="lineCov">        644 :                         return false;</span>
+<span class="lineNum">     494 </span>            :                 }
+<span class="lineNum">     495 </span>            :         }
+<span class="lineNum">     496 </span><span class="lineCov">     334637 :         return true;</span>
+<a name="497"><span class="lineNum">     497 </span>            : }</a>
+<span class="lineNum">     498 </span>            : 
+<span class="lineNum">     499 </span><span class="lineCov">        841 : void JoinOrderOptimizer::SolveJoinOrderApproximately() {</span>
+<span class="lineNum">     500 </span>            :         // at this point, we exited the dynamic programming but did not compute the final join order because it took too
+<span class="lineNum">     501 </span>            :         // long instead, we use a greedy heuristic to obtain a join ordering now we use Greedy Operator Ordering to
+<span class="lineNum">     502 </span>            :         // construct the result tree first we start out with all the base relations (the to-be-joined relations)
+<span class="lineNum">     503 </span><span class="lineCov">       1682 :         vector&lt;RelationSet *&gt; T;</span>
+<span class="lineNum">     504 </span><span class="lineCov">      26570 :         for (size_t i = 0; i &lt; relations.size(); i++) {</span>
+<span class="lineNum">     505 </span><span class="lineCov">      25729 :                 T.push_back(set_manager.GetRelation(i));</span>
+<span class="lineNum">     506 </span>            :         }
+<span class="lineNum">     507 </span><span class="lineCov">      25729 :         while (T.size() &gt; 1) {</span>
+<span class="lineNum">     508 </span>            :                 // now in every step of the algorithm, we greedily pick the join between the to-be-joined relations that has the
+<span class="lineNum">     509 </span>            :                 // smallest cost. This is O(r^2) per step, and every step will reduce the total amount of relations to-be-joined
+<span class="lineNum">     510 </span>            :                 // by 1, so the total cost is O(r^3) in the amount of relations
+<span class="lineNum">     511 </span><span class="lineCov">      24888 :                 size_t best_left = 0, best_right = 0;</span>
+<span class="lineNum">     512 </span><span class="lineCov">      24888 :                 JoinNode *best_connection = nullptr;</span>
+<span class="lineNum">     513 </span><span class="lineCov">     576605 :                 for (size_t i = 0; i &lt; T.size(); i++) {</span>
+<span class="lineNum">     514 </span><span class="lineCov">     551717 :                         auto left = T[i];</span>
+<span class="lineNum">     515 </span><span class="lineCov">    9208085 :                         for (size_t j = i + 1; j &lt; T.size(); j++) {</span>
+<span class="lineNum">     516 </span><span class="lineCov">    8656368 :                                 auto right = T[j];</span>
+<span class="lineNum">     517 </span>            :                                 // check if we can connect these two relations
+<span class="lineNum">     518 </span><span class="lineCov">    8656368 :                                 auto connection = query_graph.GetConnection(left, right);</span>
+<span class="lineNum">     519 </span><span class="lineCov">    8656368 :                                 if (connection) {</span>
+<span class="lineNum">     520 </span>            :                                         // we can! check the cost of this connection
+<span class="lineNum">     521 </span><span class="lineCov">     535435 :                                         auto node = EmitPair(left, right, connection);</span>
+<span class="lineNum">     522 </span><span class="lineCov">     535435 :                                         if (!best_connection || node-&gt;cost &lt; best_connection-&gt;cost) {</span>
+<span class="lineNum">     523 </span>            :                                                 // best pair found so far
+<span class="lineNum">     524 </span><span class="lineCov">      30585 :                                                 best_connection = node;</span>
+<span class="lineNum">     525 </span><span class="lineCov">      30585 :                                                 best_left = i;</span>
+<span class="lineNum">     526 </span><span class="lineCov">      30585 :                                                 best_right = j;</span>
+<span class="lineNum">     527 </span>            :                                         }
+<span class="lineNum">     528 </span>            :                                 }
+<span class="lineNum">     529 </span>            :                         }
+<span class="lineNum">     530 </span>            :                 }
+<span class="lineNum">     531 </span><span class="lineCov">      24888 :                 if (!best_connection) {</span>
+<span class="lineNum">     532 </span>            :                         // could not find a connection, but we were not done with finding a completed plan
+<span class="lineNum">     533 </span>            :                         // we have to add a cross product; we add it between the two smallest relations
+<span class="lineNum">     534 </span><span class="lineNoCov">          0 :                         JoinNode *smallest_plans[2] = {nullptr};</span>
+<span class="lineNum">     535 </span><span class="lineNoCov">          0 :                         size_t smallest_index[2];</span>
+<span class="lineNum">     536 </span><span class="lineNoCov">          0 :                         for (size_t i = 0; i &lt; T.size(); i++) {</span>
+<span class="lineNum">     537 </span>            :                                 // get the plan for this relation
+<span class="lineNum">     538 </span><span class="lineNoCov">          0 :                                 auto current_plan = plans[T[i]].get();</span>
+<span class="lineNum">     539 </span>            :                                 // check if the cardinality is smaller than the smallest two found so far
+<span class="lineNum">     540 </span><span class="lineNoCov">          0 :                                 for (size_t j = 0; j &lt; 2; j++) {</span>
+<span class="lineNum">     541 </span><span class="lineNoCov">          0 :                                         if (!smallest_plans[j] || smallest_plans[j]-&gt;cardinality &gt; current_plan-&gt;cardinality) {</span>
+<span class="lineNum">     542 </span><span class="lineNoCov">          0 :                                                 smallest_plans[j] = current_plan;</span>
+<span class="lineNum">     543 </span><span class="lineNoCov">          0 :                                                 smallest_index[j] = i;</span>
+<span class="lineNum">     544 </span><span class="lineNoCov">          0 :                                                 break;</span>
+<span class="lineNum">     545 </span>            :                                         }
+<span class="lineNum">     546 </span>            :                                 }
+<span class="lineNum">     547 </span>            :                         }
+<span class="lineNum">     548 </span><span class="lineNoCov">          0 :                         assert(smallest_plans[0] &amp;&amp; smallest_plans[1]);</span>
+<span class="lineNum">     549 </span><span class="lineNoCov">          0 :                         assert(smallest_index[0] != smallest_index[1]);</span>
+<span class="lineNum">     550 </span><span class="lineNoCov">          0 :                         auto left = smallest_plans[0]-&gt;set, right = smallest_plans[1]-&gt;set;</span>
+<span class="lineNum">     551 </span>            :                         // create a cross product edge (i.e. edge with empty filter) between these two sets in the query graph
+<span class="lineNum">     552 </span><span class="lineNoCov">          0 :                         query_graph.CreateEdge(left, right, nullptr);</span>
+<span class="lineNum">     553 </span>            :                         // now emit the pair and continue with the algorithm
+<span class="lineNum">     554 </span><span class="lineNoCov">          0 :                         auto connection = query_graph.GetConnection(left, right);</span>
+<span class="lineNum">     555 </span><span class="lineNoCov">          0 :                         assert(connection);</span>
+<span class="lineNum">     556 </span>            : 
+<span class="lineNum">     557 </span><span class="lineNoCov">          0 :                         best_connection = EmitPair(left, right, connection);</span>
+<span class="lineNum">     558 </span><span class="lineNoCov">          0 :                         best_left = smallest_index[0];</span>
+<span class="lineNum">     559 </span><span class="lineNoCov">          0 :                         best_right = smallest_index[1];</span>
+<span class="lineNum">     560 </span>            :                         // the code below assumes best_right &gt; best_left
+<span class="lineNum">     561 </span><span class="lineNoCov">          0 :                         if (best_left &gt; best_right) {</span>
+<span class="lineNum">     562 </span><span class="lineNoCov">          0 :                                 swap(best_left, best_right);</span>
+<span class="lineNum">     563 </span>            :                         }
+<span class="lineNum">     564 </span>            :                 }
+<span class="lineNum">     565 </span>            :                 // now update the to-be-checked pairs
+<span class="lineNum">     566 </span>            :                 // remove left and right, and add the combination
+<span class="lineNum">     567 </span>            : 
+<span class="lineNum">     568 </span>            :                 // important to erase the biggest element first
+<span class="lineNum">     569 </span>            :                 // if we erase the smallest element first the index of the biggest element changes
+<span class="lineNum">     570 </span><span class="lineCov">      24888 :                 assert(best_right &gt; best_left);</span>
+<span class="lineNum">     571 </span><span class="lineCov">      24888 :                 T.erase(T.begin() + best_right);</span>
+<span class="lineNum">     572 </span><span class="lineCov">      24888 :                 T.erase(T.begin() + best_left);</span>
+<span class="lineNum">     573 </span><span class="lineCov">      24888 :                 T.push_back(best_connection-&gt;set);</span>
+<span class="lineNum">     574 </span>            :         }
+<a name="575"><span class="lineNum">     575 </span><span class="lineCov">        841 : }</span></a>
+<span class="lineNum">     576 </span>            : 
+<span class="lineNum">     577 </span><span class="lineCov">     335478 : void JoinOrderOptimizer::SolveJoinOrder() {</span>
+<span class="lineNum">     578 </span>            :         // first try to solve the join order exactly
+<span class="lineNum">     579 </span><span class="lineCov">     335478 :         if (!SolveJoinOrderExactly()) {</span>
+<span class="lineNum">     580 </span>            :                 // otherwise, if that times out we resort to a greedy algorithm
+<span class="lineNum">     581 </span><span class="lineCov">        841 :                 SolveJoinOrderApproximately();</span>
+<span class="lineNum">     582 </span>            :         }
+<a name="583"><span class="lineNum">     583 </span><span class="lineCov">     335478 : }</span></a>
+<span class="lineNum">     584 </span>            : 
+<span class="lineNum">     585 </span><span class="lineCov">     167115 : void JoinOrderOptimizer::GenerateCrossProducts() {</span>
+<span class="lineNum">     586 </span>            :         // generate a set of cross products to combine the currently available plans into a full join plan
+<span class="lineNum">     587 </span>            :         // we create edges between every relation with a high cost
+<span class="lineNum">     588 </span><span class="lineCov">     593079 :         for (size_t i = 0; i &lt; relations.size(); i++) {</span>
+<span class="lineNum">     589 </span><span class="lineCov">     425964 :                 auto left = set_manager.GetRelation(i);</span>
+<span class="lineNum">     590 </span><span class="lineCov">    1623450 :                 for (size_t j = 0; j &lt; relations.size(); j++) {</span>
+<span class="lineNum">     591 </span><span class="lineCov">    1197486 :                         if (i != j) {</span>
+<span class="lineNum">     592 </span><span class="lineCov">     771522 :                                 auto right = set_manager.GetRelation(j);</span>
+<span class="lineNum">     593 </span><span class="lineCov">     771522 :                                 query_graph.CreateEdge(left, right, nullptr);</span>
+<span class="lineNum">     594 </span><span class="lineCov">     771522 :                                 query_graph.CreateEdge(right, left, nullptr);</span>
+<span class="lineNum">     595 </span>            :                         }
+<span class="lineNum">     596 </span>            :                 }
+<span class="lineNum">     597 </span>            :         }
+<a name="598"><span class="lineNum">     598 </span><span class="lineCov">     167115 : }</span></a>
+<span class="lineNum">     599 </span>            : 
+<span class="lineNum">     600 </span><span class="lineCov">     452435 : static unique_ptr&lt;LogicalOperator&gt; ExtractRelation(Relation &amp;rel) {</span>
+<span class="lineNum">     601 </span><span class="lineCov">     452435 :         auto &amp;children = rel.parent-&gt;children;</span>
+<span class="lineNum">     602 </span><span class="lineCov">     563763 :         for (size_t i = 0; i &lt; children.size(); i++) {</span>
+<span class="lineNum">     603 </span><span class="lineCov">     563763 :                 if (children[i].get() == rel.op) {</span>
+<span class="lineNum">     604 </span>            :                         // found it! take ownership of it from the parent
+<span class="lineNum">     605 </span><span class="lineCov">     904870 :                         auto result = move(children[i]);</span>
+<span class="lineNum">     606 </span><span class="lineCov">     452435 :                         children.erase(children.begin() + i);</span>
+<span class="lineNum">     607 </span><span class="lineCov">     904870 :                         return result;</span>
+<span class="lineNum">     608 </span>            :                 }
+<span class="lineNum">     609 </span>            :         }
+<span class="lineNum">     610 </span><span class="lineNoCov">          0 :         throw Exception(&quot;Could not find relation in parent node (?)&quot;);</span>
+<span class="lineNum">     611 </span>            : }
+<a name="612"><span class="lineNum">     612 </span>            : </a>
+<span class="lineNum">     613 </span>            : pair&lt;RelationSet *, unique_ptr&lt;LogicalOperator&gt;&gt;
+<span class="lineNum">     614 </span><span class="lineCov">     736507 : JoinOrderOptimizer::GenerateJoins(vector&lt;unique_ptr&lt;LogicalOperator&gt;&gt; &amp;extracted_relations, JoinNode *node) {</span>
+<span class="lineNum">     615 </span><span class="lineCov">     736507 :         RelationSet *result_relation;</span>
+<span class="lineNum">     616 </span><span class="lineCov">    1473014 :         unique_ptr&lt;LogicalOperator&gt; result_operator;</span>
+<span class="lineNum">     617 </span><span class="lineCov">     736507 :         if (node-&gt;left &amp;&amp; node-&gt;right) {</span>
+<span class="lineNum">     618 </span>            :                 // generate the left and right children
+<span class="lineNum">     619 </span><span class="lineCov">     568144 :                 auto left = GenerateJoins(extracted_relations, node-&gt;left);</span>
+<span class="lineNum">     620 </span><span class="lineCov">     284072 :                 auto right = GenerateJoins(extracted_relations, node-&gt;right);</span>
+<span class="lineNum">     621 </span>            : 
+<span class="lineNum">     622 </span><span class="lineCov">     284072 :                 if (node-&gt;info-&gt;filters.size() == 0) {</span>
+<span class="lineNum">     623 </span>            :                         // no filters, create a cross product
+<span class="lineNum">     624 </span><span class="lineCov">     516594 :                         auto join = make_unique&lt;LogicalCrossProduct&gt;();</span>
+<span class="lineNum">     625 </span><span class="lineCov">     258297 :                         join-&gt;children.push_back(move(left.second));</span>
+<span class="lineNum">     626 </span><span class="lineCov">     258297 :                         join-&gt;children.push_back(move(right.second));</span>
+<span class="lineNum">     627 </span><span class="lineCov">     258297 :                         result_operator = move(join);</span>
+<span class="lineNum">     628 </span>            :                 } else {
+<span class="lineNum">     629 </span>            :                         // we have filters, create a join node
+<span class="lineNum">     630 </span><span class="lineCov">      51550 :                         auto join = make_unique&lt;LogicalJoin&gt;(JoinType::INNER);</span>
+<span class="lineNum">     631 </span><span class="lineCov">      25775 :                         join-&gt;children.push_back(move(left.second));</span>
+<span class="lineNum">     632 </span><span class="lineCov">      25775 :                         join-&gt;children.push_back(move(right.second));</span>
+<span class="lineNum">     633 </span>            :                         // set the join conditions from the join node
+<span class="lineNum">     634 </span><span class="lineCov">      51659 :                         for (auto &amp;f : node-&gt;info-&gt;filters) {</span>
+<span class="lineNum">     635 </span>            :                                 // extract the filter from the operator it originally belonged to
+<span class="lineNum">     636 </span><span class="lineCov">      25884 :                                 assert(filters[f-&gt;filter_index]);</span>
+<span class="lineNum">     637 </span><span class="lineCov">      51768 :                                 auto condition = move(filters[f-&gt;filter_index]);</span>
+<span class="lineNum">     638 </span>            :                                 // now create the actual join condition
+<span class="lineNum">     639 </span><span class="lineCov">      25884 :                                 assert((RelationSet::IsSubset(left.first, f-&gt;left_set) &amp;&amp;</span>
+<span class="lineNum">     640 </span>            :                                         RelationSet::IsSubset(right.first, f-&gt;right_set)) ||
+<span class="lineNum">     641 </span>            :                                        (RelationSet::IsSubset(left.first, f-&gt;right_set) &amp;&amp;
+<span class="lineNum">     642 </span>            :                                         RelationSet::IsSubset(right.first, f-&gt;left_set)));
+<span class="lineNum">     643 </span><span class="lineCov">      51768 :                                 JoinCondition cond;</span>
+<span class="lineNum">     644 </span>            :                                 // we need to figure out which side is which by looking at the relations available to us
+<span class="lineNum">     645 </span><span class="lineCov">      25884 :                                 int left_child = RelationSet::IsSubset(left.first, f-&gt;left_set) ? 0 : 1;</span>
+<span class="lineNum">     646 </span><span class="lineCov">      25884 :                                 int right_child = 1 - left_child;</span>
+<span class="lineNum">     647 </span><span class="lineCov">      25884 :                                 cond.left = move(condition-&gt;children[left_child]);</span>
+<span class="lineNum">     648 </span><span class="lineCov">      25884 :                                 cond.right = move(condition-&gt;children[right_child]);</span>
+<span class="lineNum">     649 </span><span class="lineCov">      25884 :                                 cond.comparison = condition-&gt;type;</span>
+<span class="lineNum">     650 </span><span class="lineCov">      25884 :                                 if (left_child != 0) {</span>
+<span class="lineNum">     651 </span>            :                                         // reverse comparison expression if we reverse the order of the children
+<span class="lineNum">     652 </span><span class="lineCov">      12543 :                                         cond.comparison = ComparisonExpression::FlipComparisionExpression(cond.comparison);</span>
+<span class="lineNum">     653 </span>            :                                 }
+<span class="lineNum">     654 </span><span class="lineCov">      25884 :                                 join-&gt;conditions.push_back(move(cond));</span>
+<span class="lineNum">     655 </span>            :                         }
+<span class="lineNum">     656 </span><span class="lineCov">      25775 :                         assert(join-&gt;conditions.size() &gt; 0);</span>
+<span class="lineNum">     657 </span><span class="lineCov">      25775 :                         result_operator = move(join);</span>
+<span class="lineNum">     658 </span>            :                 }
+<span class="lineNum">     659 </span><span class="lineCov">     284072 :                 result_relation = set_manager.Union(left.first, right.first);</span>
+<span class="lineNum">     660 </span>            :         } else {
+<span class="lineNum">     661 </span>            :                 // base node, get the entry from the list of extracted relations
+<span class="lineNum">     662 </span><span class="lineCov">     452435 :                 assert(node-&gt;set-&gt;count == 1);</span>
+<span class="lineNum">     663 </span><span class="lineCov">     452435 :                 assert(extracted_relations[node-&gt;set-&gt;relations[0]]);</span>
+<span class="lineNum">     664 </span><span class="lineCov">     452435 :                 result_relation = node-&gt;set;</span>
+<span class="lineNum">     665 </span><span class="lineCov">     452435 :                 result_operator = move(extracted_relations[node-&gt;set-&gt;relations[0]]);</span>
+<span class="lineNum">     666 </span>            :         }
+<span class="lineNum">     667 </span>            :         // check if we should do a pushdown on this node
+<span class="lineNum">     668 </span>            :         // basically, any remaining filter that is a subset of the current relation will no longer be used in joins
+<span class="lineNum">     669 </span>            :         // hence we should push it here
+<span class="lineNum">     670 </span><span class="lineCov">    2964433 :         for (size_t i = 0; i &lt; filter_infos.size(); i++) {</span>
+<span class="lineNum">     671 </span>            :                 // check if the filter has already been extracted
+<span class="lineNum">     672 </span><span class="lineCov">    2227926 :                 auto info = filter_infos[i].get();</span>
+<span class="lineNum">     673 </span><span class="lineCov">    2227926 :                 if (filters[info-&gt;filter_index]) {</span>
+<span class="lineNum">     674 </span>            :                         // now check if the filter is a subset of the current relation
+<span class="lineNum">     675 </span>            :                         // note that infos with an empty relation set are a special case and we do not push them down
+<span class="lineNum">     676 </span><span class="lineCov">    1186368 :                         if (info-&gt;set-&gt;count &gt; 0 &amp;&amp; RelationSet::IsSubset(result_relation, info-&gt;set)) {</span>
+<span class="lineNum">     677 </span><span class="lineCov">      17474 :                                 auto filter = move(filters[info-&gt;filter_index]);</span>
+<span class="lineNum">     678 </span>            :                                 // if it is, we can push the filter
+<span class="lineNum">     679 </span>            :                                 // there are two cases here
+<span class="lineNum">     680 </span>            :                                 // (1) the filter is a ComparisonExpression, in which case we can push it into a join (if it exists)
+<span class="lineNum">     681 </span>            :                                 // (2) the filter is anything else, in which case we push it into a filter
+<span class="lineNum">     682 </span>            :                                 // first check the class
+<span class="lineNum">     683 </span><span class="lineCov">       8737 :                                 if (filter-&gt;GetExpressionClass() == ExpressionClass::COMPARISON) {</span>
+<span class="lineNum">     684 </span>            :                                         // comparison, check if there is a join
+<span class="lineNum">     685 </span><span class="lineCov">       4284 :                                         if (result_operator-&gt;type == LogicalOperatorType::JOIN) {</span>
+<span class="lineNum">     686 </span>            :                                                 // join, push it into the expression list
+<span class="lineNum">     687 </span><span class="lineCov">         35 :                                                 result_operator-&gt;expressions.push_back(move(filter));</span>
+<span class="lineNum">     688 </span><span class="lineCov">       4249 :                                         } else if (result_operator-&gt;type == LogicalOperatorType::FILTER) {</span>
+<span class="lineNum">     689 </span>            :                                                 // filter, check if the underlying type is a join
+<span class="lineNum">     690 </span><span class="lineCov">        342 :                                                 if (result_operator-&gt;children[0]-&gt;type == LogicalOperatorType::JOIN) {</span>
+<span class="lineNum">     691 </span>            :                                                         // join, push it there
+<span class="lineNum">     692 </span><span class="lineNoCov">          0 :                                                         result_operator-&gt;children[0]-&gt;expressions.push_back(move(filter));</span>
+<span class="lineNum">     693 </span>            :                                                 } else {
+<span class="lineNum">     694 </span>            :                                                         // not a join, push it to the filter
+<span class="lineNum">     695 </span><span class="lineCov">        342 :                                                         result_operator-&gt;expressions.push_back(move(filter));</span>
+<span class="lineNum">     696 </span>            :                                                 }
+<span class="lineNum">     697 </span>            :                                         } else {
+<span class="lineNum">     698 </span>            :                                                 // not a filter or a join, push a filter
+<span class="lineNum">     699 </span><span class="lineCov">       3907 :                                                 result_operator = PushFilter(move(result_operator), move(filter));</span>
+<span class="lineNum">     700 </span>            :                                         }
+<span class="lineNum">     701 </span>            :                                 } else {
+<span class="lineNum">     702 </span>            :                                         // not a comparison, just push it into a filter
+<span class="lineNum">     703 </span><span class="lineCov">       4453 :                                         result_operator = PushFilter(move(result_operator), move(filter));</span>
+<span class="lineNum">     704 </span>            :                                 }
+<span class="lineNum">     705 </span>            :                         }
+<span class="lineNum">     706 </span>            :                 }
+<span class="lineNum">     707 </span>            :         }
+<span class="lineNum">     708 </span><span class="lineCov">    1473014 :         return make_pair(result_relation, move(result_operator));</span>
+<a name="709"><span class="lineNum">     709 </span>            : }</a>
+<span class="lineNum">     710 </span>            : 
+<span class="lineNum">     711 </span><span class="lineCov">     168363 : unique_ptr&lt;LogicalOperator&gt; JoinOrderOptimizer::RewritePlan(unique_ptr&lt;LogicalOperator&gt; plan, JoinNode *node) {</span>
+<span class="lineNum">     712 </span>            :         // now we have to rewrite the plan
+<span class="lineNum">     713 </span><span class="lineCov">     168363 :         bool root_is_join = plan-&gt;children.size() &gt; 1;</span>
+<span class="lineNum">     714 </span>            : 
+<span class="lineNum">     715 </span>            :         // first we will extract all relations from the main plan
+<span class="lineNum">     716 </span><span class="lineCov">     336726 :         vector&lt;unique_ptr&lt;LogicalOperator&gt;&gt; extracted_relations;</span>
+<span class="lineNum">     717 </span><span class="lineCov">     620798 :         for (size_t i = 0; i &lt; relations.size(); i++) {</span>
+<span class="lineNum">     718 </span><span class="lineCov">     452435 :                 extracted_relations.push_back(ExtractRelation(*relations[i]));</span>
+<span class="lineNum">     719 </span>            :         }
+<span class="lineNum">     720 </span>            :         // now we generate the actual joins
+<span class="lineNum">     721 </span><span class="lineCov">     336726 :         auto join_tree = GenerateJoins(extracted_relations, node);</span>
+<span class="lineNum">     722 </span>            :         // perform the final pushdown of remaining filters
+<span class="lineNum">     723 </span><span class="lineCov">     212135 :         for (size_t i = 0; i &lt; filters.size(); i++) {</span>
+<span class="lineNum">     724 </span>            :                 // check if the filter has already been extracted
+<span class="lineNum">     725 </span><span class="lineCov">      43772 :                 if (filters[i]) {</span>
+<span class="lineNum">     726 </span>            :                         // if not we need to push it
+<span class="lineNum">     727 </span><span class="lineCov">       9151 :                         join_tree.second = PushFilter(move(join_tree.second), move(filters[i]));</span>
+<span class="lineNum">     728 </span>            :                 }
+<span class="lineNum">     729 </span>            :         }
+<span class="lineNum">     730 </span>            : 
+<span class="lineNum">     731 </span>            :         // find the first join in the relation to know where to place this node
+<span class="lineNum">     732 </span><span class="lineCov">     168363 :         if (root_is_join) {</span>
+<span class="lineNum">     733 </span>            :                 // first node is the join, return it immediately
+<span class="lineNum">     734 </span><span class="lineCov">      11591 :                 return move(join_tree.second);</span>
+<span class="lineNum">     735 </span>            :         }
+<span class="lineNum">     736 </span><span class="lineCov">     156772 :         assert(plan-&gt;children.size() == 1);</span>
+<span class="lineNum">     737 </span>            :         // have to move up through the relations
+<span class="lineNum">     738 </span><span class="lineCov">     156772 :         auto op = plan.get();</span>
+<span class="lineNum">     739 </span><span class="lineCov">     156772 :         auto parent = plan.get();</span>
+<span class="lineNum">     740 </span><span class="lineCov">     438166 :         while (op-&gt;type != LogicalOperatorType::CROSS_PRODUCT &amp;&amp; op-&gt;type != LogicalOperatorType::JOIN) {</span>
+<span class="lineNum">     741 </span><span class="lineCov">     281394 :                 assert(op-&gt;children.size() == 1);</span>
+<span class="lineNum">     742 </span><span class="lineCov">     281394 :                 parent = op;</span>
+<span class="lineNum">     743 </span><span class="lineCov">     281394 :                 op = op-&gt;children[0].get();</span>
+<span class="lineNum">     744 </span>            :         }
+<span class="lineNum">     745 </span>            :         // have to replace at this node
+<span class="lineNum">     746 </span><span class="lineCov">     156772 :         parent-&gt;children[0] = move(join_tree.second);</span>
+<span class="lineNum">     747 </span><span class="lineCov">     156772 :         return ResolveJoinConditions(move(plan));</span>
+<span class="lineNum">     748 </span>            : }
+<span class="lineNum">     749 </span>            : 
+<span class="lineNum">     750 </span>            : // the join ordering is pretty much a straight implementation of the paper &quot;Dynamic Programming Strikes Back&quot; by Guido
+<span class="lineNum">     751 </span>            : // Moerkotte and Thomas Neumannn, see that paper for additional info/documentation bonus slides:
+<a name="752"><span class="lineNum">     752 </span>            : // https://db.in.tum.de/teaching/ws1415/queryopt/chapter3.pdf?lang=de</a>
+<span class="lineNum">     753 </span>            : // FIXME: incorporate cardinality estimation into the plans, possibly by pushing samples?
+<span class="lineNum">     754 </span><span class="lineCov">    4447951 : unique_ptr&lt;LogicalOperator&gt; JoinOrderOptimizer::Optimize(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
+<span class="lineNum">     755 </span><span class="lineCov">    4447951 :         assert(filters.size() == 0 &amp;&amp; relations.size() == 0); // assert that the JoinOrderOptimizer has not been used before</span>
+<span class="lineNum">     756 </span><span class="lineCov">    4448238 :         LogicalOperator *op = plan.get();</span>
+<span class="lineNum">     757 </span>            :         // now we optimize the current plan
+<span class="lineNum">     758 </span>            :         // we skip past until we find the first projection, we do this because the HAVING clause inserts a Filter AFTER the
+<span class="lineNum">     759 </span>            :         // group by and this filter cannot be reordered
+<span class="lineNum">     760 </span>            :         // extract a list of all relations that have to be joined together
+<span class="lineNum">     761 </span>            :         // and a list of all conditions that is applied to them
+<span class="lineNum">     762 </span><span class="lineCov">    8903135 :         vector&lt;LogicalOperator *&gt; filter_operators;</span>
+<span class="lineNum">     763 </span><span class="lineCov">    4448160 :         if (!ExtractJoinRelations(*op, filter_operators)) {</span>
+<span class="lineNum">     764 </span>            :                 // do not support reordering this type of plan
+<span class="lineNum">     765 </span><span class="lineCov">    1349399 :                 return ResolveJoinConditions(move(plan));</span>
+<span class="lineNum">     766 </span>            :         }
+<span class="lineNum">     767 </span><span class="lineCov">    3098685 :         if (relations.size() &lt;= 1) {</span>
+<span class="lineNum">     768 </span>            :                 // at most one relation, nothing to reorder
+<span class="lineNum">     769 </span><span class="lineCov">    2931157 :                 return ResolveJoinConditions(move(plan));</span>
+<span class="lineNum">     770 </span>            :         }
+<span class="lineNum">     771 </span>            :         // now that we know we are going to perform join ordering we actually extract the filters
+<span class="lineNum">     772 </span><span class="lineCov">     179802 :         for (auto &amp;op : filter_operators) {</span>
+<span class="lineNum">     773 </span><span class="lineCov">      12251 :                 ExtractFilters(op, filters);</span>
+<span class="lineNum">     774 </span>            :         }
+<span class="lineNum">     775 </span>            :         // create potential edges from the comparisons
+<span class="lineNum">     776 </span><span class="lineCov">     212135 :         for (size_t i = 0; i &lt; filters.size(); i++) {</span>
+<span class="lineNum">     777 </span><span class="lineCov">      43772 :                 auto &amp;filter = filters[i];</span>
+<span class="lineNum">     778 </span><span class="lineCov">      43772 :                 auto info = make_unique&lt;FilterInfo&gt;();</span>
+<span class="lineNum">     779 </span><span class="lineCov">      43772 :                 auto filter_info = info.get();</span>
+<span class="lineNum">     780 </span><span class="lineCov">      43772 :                 filter_infos.push_back(move(info));</span>
+<span class="lineNum">     781 </span>            :                 // first extract the relation set for the entire filter
+<span class="lineNum">     782 </span><span class="lineCov">      43772 :                 unordered_set&lt;size_t&gt; bindings;</span>
+<span class="lineNum">     783 </span><span class="lineCov">      43772 :                 ExtractBindings(*filter, bindings);</span>
+<span class="lineNum">     784 </span><span class="lineCov">      43772 :                 filter_info-&gt;set = set_manager.GetRelation(bindings);</span>
+<span class="lineNum">     785 </span><span class="lineCov">      43772 :                 filter_info-&gt;filter_index = i;</span>
+<span class="lineNum">     786 </span>            :                 // now check if it can be used as a join predicate
+<span class="lineNum">     787 </span><span class="lineCov">      43772 :                 if (filter-&gt;GetExpressionClass() == ExpressionClass::COMPARISON) {</span>
+<span class="lineNum">     788 </span><span class="lineCov">      32071 :                         auto comparison = (ComparisonExpression *)filter.get();</span>
+<span class="lineNum">     789 </span>            :                         // extract the bindings that are required for the left and right side of the comparison
+<span class="lineNum">     790 </span><span class="lineCov">      32071 :                         unordered_set&lt;size_t&gt; left_bindings, right_bindings;</span>
+<span class="lineNum">     791 </span><span class="lineCov">      32071 :                         ExtractBindings(*comparison-&gt;children[0], left_bindings);</span>
+<span class="lineNum">     792 </span><span class="lineCov">      32071 :                         ExtractBindings(*comparison-&gt;children[1], right_bindings);</span>
+<span class="lineNum">     793 </span><span class="lineCov">      32071 :                         if (left_bindings.size() &gt; 0 &amp;&amp; right_bindings.size() &gt; 0) {</span>
+<span class="lineNum">     794 </span>            :                                 // both the left and the right side have bindings
+<span class="lineNum">     795 </span>            :                                 // first create the relation sets, if they do not exist
+<span class="lineNum">     796 </span><span class="lineCov">      25910 :                                 filter_info-&gt;left_set = set_manager.GetRelation(left_bindings);</span>
+<span class="lineNum">     797 </span><span class="lineCov">      25910 :                                 filter_info-&gt;right_set = set_manager.GetRelation(right_bindings);</span>
+<span class="lineNum">     798 </span>            :                                 // we can only create a meaningful edge if the sets are not exactly the same
+<span class="lineNum">     799 </span><span class="lineCov">      25910 :                                 if (filter_info-&gt;left_set != filter_info-&gt;right_set) {</span>
+<span class="lineNum">     800 </span>            :                                         // check if the sets are disjoint
+<span class="lineNum">     801 </span><span class="lineCov">      25906 :                                         if (Disjoint(left_bindings, right_bindings)) {</span>
+<span class="lineNum">     802 </span>            :                                                 // they are disjoint, we only need to create one set of edges in the join graph
+<span class="lineNum">     803 </span><span class="lineCov">      25906 :                                                 query_graph.CreateEdge(filter_info-&gt;left_set, filter_info-&gt;right_set, filter_info);</span>
+<span class="lineNum">     804 </span><span class="lineCov">      25906 :                                                 query_graph.CreateEdge(filter_info-&gt;right_set, filter_info-&gt;left_set, filter_info);</span>
+<span class="lineNum">     805 </span>            :                                         } else {
+<span class="lineNum">     806 </span>            :                                                 // the sets are not disjoint, we create two sets of edges
+<span class="lineNum">     807 </span><span class="lineNoCov">          0 :                                                 auto left_difference = set_manager.Difference(filter_info-&gt;left_set, filter_info-&gt;right_set);</span>
+<span class="lineNum">     808 </span><span class="lineNoCov">          0 :                                                 auto right_difference = set_manager.Difference(filter_info-&gt;right_set, filter_info-&gt;left_set);</span>
+<span class="lineNum">     809 </span>            :                                                 // -&gt; LEFT &lt;-&gt; RIGHT \ LEFT
+<span class="lineNum">     810 </span><span class="lineNoCov">          0 :                                                 query_graph.CreateEdge(filter_info-&gt;left_set, right_difference, filter_info);</span>
+<span class="lineNum">     811 </span><span class="lineNoCov">          0 :                                                 query_graph.CreateEdge(right_difference, filter_info-&gt;left_set, filter_info);</span>
+<span class="lineNum">     812 </span>            :                                                 // -&gt; RIGHT &lt;-&gt; LEFT \ RIGHT
+<span class="lineNum">     813 </span><span class="lineNoCov">          0 :                                                 query_graph.CreateEdge(left_difference, filter_info-&gt;right_set, filter_info);</span>
+<span class="lineNum">     814 </span><span class="lineNoCov">          0 :                                                 query_graph.CreateEdge(filter_info-&gt;right_set, left_difference, filter_info);</span>
+<span class="lineNum">     815 </span>            :                                         }
+<span class="lineNum">     816 </span><span class="lineCov">      25906 :                                         continue;</span>
+<span class="lineNum">     817 </span>            :                                 }
+<span class="lineNum">     818 </span>            :                         }
+<span class="lineNum">     819 </span>            :                 }
+<span class="lineNum">     820 </span>            :         }
+<span class="lineNum">     821 </span>            :         // now use dynamic programming to figure out the optimal join order
+<span class="lineNum">     822 </span>            :         // First we initialize each of the single-node plans with themselves and with their cardinalities these are the leaf
+<span class="lineNum">     823 </span>            :         // nodes of the join tree NOTE: we can just use pointers to RelationSet* here because the GetRelation function
+<span class="lineNum">     824 </span>            :         // ensures that a unique combination of relations will have a unique RelationSet object.
+<span class="lineNum">     825 </span><span class="lineCov">     620798 :         for (size_t i = 0; i &lt; relations.size(); i++) {</span>
+<span class="lineNum">     826 </span><span class="lineCov">     452435 :                 auto &amp;rel = *relations[i];</span>
+<span class="lineNum">     827 </span><span class="lineCov">     452435 :                 auto node = set_manager.GetRelation(i);</span>
+<span class="lineNum">     828 </span><span class="lineCov">     452435 :                 plans[node] = make_unique&lt;JoinNode&gt;(node, rel.op-&gt;EstimateCardinality());</span>
+<span class="lineNum">     829 </span>            :         }
+<span class="lineNum">     830 </span>            :         // now we perform the actual dynamic programming to compute the final result
+<span class="lineNum">     831 </span><span class="lineCov">     168363 :         SolveJoinOrder();</span>
+<span class="lineNum">     832 </span>            :         // now the optimal join path should have been found
+<span class="lineNum">     833 </span>            :         // get it from the node
+<span class="lineNum">     834 </span><span class="lineCov">     336726 :         unordered_set&lt;size_t&gt; bindings;</span>
+<span class="lineNum">     835 </span><span class="lineCov">     620798 :         for (size_t i = 0; i &lt; relations.size(); i++) {</span>
+<span class="lineNum">     836 </span><span class="lineCov">     452435 :                 bindings.insert(i);</span>
+<span class="lineNum">     837 </span>            :         }
+<span class="lineNum">     838 </span><span class="lineCov">     168363 :         auto total_relation = set_manager.GetRelation(bindings);</span>
+<span class="lineNum">     839 </span><span class="lineCov">     168363 :         auto final_plan = plans.find(total_relation);</span>
+<span class="lineNum">     840 </span><span class="lineCov">     168363 :         if (final_plan == plans.end()) {</span>
+<span class="lineNum">     841 </span>            :                 // could not find the final plan
+<span class="lineNum">     842 </span>            :                 // this should only happen in case the sets are actually disjunct
+<span class="lineNum">     843 </span>            :                 // in this case we need to generate cross product to connect the disjoint sets
+<span class="lineNum">     844 </span><span class="lineCov">     167115 :                 GenerateCrossProducts();</span>
+<span class="lineNum">     845 </span>            :                 //! solve the join order again
+<span class="lineNum">     846 </span><span class="lineCov">     167115 :                 SolveJoinOrder();</span>
+<span class="lineNum">     847 </span>            :                 // now we can obtain the final plan!
+<span class="lineNum">     848 </span><span class="lineCov">     167115 :                 final_plan = plans.find(total_relation);</span>
+<span class="lineNum">     849 </span><span class="lineCov">     167115 :                 assert(final_plan != plans.end());</span>
+<span class="lineNum">     850 </span>            :         }
+<span class="lineNum">     851 </span>            :         // now perform the actual reordering
+<span class="lineNum">     852 </span><span class="lineCov">     168363 :         return RewritePlan(move(plan), final_plan-&gt;second.get());</span>
+<span class="lineNum">     853 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
