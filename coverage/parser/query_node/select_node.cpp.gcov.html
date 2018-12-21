@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 01a32607 - parser/query_node/select_node.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 0504da4c - parser/query_node/select_node.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
+            <td class="headerValue">DuckDB Code Coverage Report 0504da4c</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">69</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 00:57:14</td>
+            <td class="headerValue">2018-12-21 10:26:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -65,13 +65,13 @@
 <span class="lineNum">       3 </span>            : using namespace duckdb;
 <a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineCov">    3019219 : bool SelectNode::HasAggregation() {</span>
-<span class="lineNum">       7 </span><span class="lineCov">    3019219 :         if (HasGroup()) {</span>
+<span class="lineNum">       6 </span><span class="lineCov">    3019177 : bool SelectNode::HasAggregation() {</span>
+<span class="lineNum">       7 </span><span class="lineCov">    3019177 :         if (HasGroup()) {</span>
 <span class="lineNum">       8 </span><span class="lineCov">        286 :                 return true;</span>
 <span class="lineNum">       9 </span>            :         }
-<span class="lineNum">      10 </span><span class="lineCov">    6226918 :         for (auto &amp;expr : select_list) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    3780883 :                 if (expr-&gt;IsAggregate()) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">     572867 :                         return true;</span>
+<span class="lineNum">      10 </span><span class="lineCov">    6226879 :         for (auto &amp;expr : select_list) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3780825 :                 if (expr-&gt;IsAggregate()) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">     572817 :                         return true;</span>
 <span class="lineNum">      13 </span>            :                 }
 <span class="lineNum">      14 </span>            :         }
 <span class="lineNum">      15 </span><span class="lineCov">    2446088 :         return false;</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 01a32607 - common/file_system.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 0504da4c - common/file_system.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
+            <td class="headerValue">DuckDB Code Coverage Report 0504da4c</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">43</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 00:57:14</td>
+            <td class="headerValue">2018-12-21 10:26:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -78,14 +78,14 @@
 <span class="lineNum">      16 </span><span class="lineCov">         99 : bool DirectoryExists(const string &amp;directory) {</span>
 <span class="lineNum">      17 </span><span class="lineCov">         99 :         if (!directory.empty()) {</span>
 <span class="lineNum">      18 </span><span class="lineCov">         99 :                 if (access(directory.c_str(), 0) == 0) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">         18 :                         struct stat status;</span>
-<span class="lineNum">      20 </span><span class="lineCov">         18 :                         stat(directory.c_str(), &amp;status);</span>
-<span class="lineNum">      21 </span><span class="lineCov">         18 :                         if (status.st_mode &amp; S_IFDIR)</span>
-<span class="lineNum">      22 </span><span class="lineCov">         18 :                                 return true;</span>
+<span class="lineNum">      19 </span><span class="lineCov">         17 :                         struct stat status;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         17 :                         stat(directory.c_str(), &amp;status);</span>
+<span class="lineNum">      21 </span><span class="lineCov">         17 :                         if (status.st_mode &amp; S_IFDIR)</span>
+<span class="lineNum">      22 </span><span class="lineCov">         17 :                                 return true;</span>
 <span class="lineNum">      23 </span>            :                 }
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span>            :         // if any condition fails
-<span class="lineNum">      26 </span><span class="lineCov">         81 :         return false;</span>
+<span class="lineNum">      26 </span><span class="lineCov">         82 :         return false;</span>
 <a name="27"><span class="lineNum">      27 </span>            : }</a>
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span><span class="lineCov">        904 : bool FileExists(const string &amp;filename) {</span>
@@ -114,10 +114,10 @@
 <span class="lineNum">      52 </span>            :         }
 <a name="53"><span class="lineNum">      53 </span><span class="lineCov">         64 : }</span></a>
 <span class="lineNum">      54 </span>            : 
-<span class="lineNum">      55 </span><span class="lineCov">         28 : void RemoveDirectory(const string &amp;directory) {</span>
-<span class="lineNum">      56 </span><span class="lineCov">        224 :         auto command = &quot;rm -r &quot; + StringUtil::Replace(directory, &quot; &quot;, &quot;\\ &quot;);</span>
-<span class="lineNum">      57 </span><span class="lineCov">         28 :         system(command.c_str());</span>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         28 : }</span></a>
+<span class="lineNum">      55 </span><span class="lineCov">         27 : void RemoveDirectory(const string &amp;directory) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">        216 :         auto command = &quot;rm -r &quot; + StringUtil::Replace(directory, &quot; &quot;, &quot;\\ &quot;);</span>
+<span class="lineNum">      57 </span><span class="lineCov">         27 :         system(command.c_str());</span>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         27 : }</span></a>
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span><span class="lineCov">          1 : bool ListFiles(const string &amp;directory, function&lt;void(string)&gt; callback) {</span>
 <span class="lineNum">      61 </span>            :         DIR *dir;

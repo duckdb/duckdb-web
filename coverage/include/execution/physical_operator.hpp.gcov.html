@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 01a32607 - include/execution/physical_operator.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 0504da4c - include/execution/physical_operator.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 01a32607</td>
+            <td class="headerValue">DuckDB Code Coverage Report 0504da4c</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">18</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 00:57:14</td>
+            <td class="headerValue">2018-12-21 10:26:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -90,12 +90,12 @@
 <span class="lineNum">      28 </span>            : class PhysicalOperatorState {
 <a name="29"><span class="lineNum">      29 </span>            : public:</a>
 <span class="lineNum">      30 </span>            :         PhysicalOperatorState(PhysicalOperator *child, ExpressionExecutor *parent);
-<span class="lineNum">      31 </span><span class="lineCov">   14802566 :         virtual ~PhysicalOperatorState() {</span>
-<span class="lineNum">      32 </span><span class="lineCov">   14802469 :         }</span>
-<span class="lineNum">      33 </span><span class="lineCov">    5160982 : </span>
-<span class="lineNum">      34 </span><span class="lineCov">    5160982 :         //! Flag indicating whether or not the operator is finished [note: not all</span>
-<span class="lineNum">      35 </span><span class="lineCov">    9641584 :         //! operators use this flag]</span>
-<span class="lineNum">      36 </span><span class="lineCov">    9641487 :         bool finished;</span>
+<span class="lineNum">      31 </span><span class="lineCov">   14801768 :         virtual ~PhysicalOperatorState() {</span>
+<span class="lineNum">      32 </span><span class="lineCov">   14801536 :         }</span>
+<span class="lineNum">      33 </span><span class="lineCov">    5160906 : </span>
+<span class="lineNum">      34 </span><span class="lineCov">    5160906 :         //! Flag indicating whether or not the operator is finished [note: not all</span>
+<span class="lineNum">      35 </span><span class="lineCov">    9640862 :         //! operators use this flag]</span>
+<span class="lineNum">      36 </span><span class="lineCov">    9640630 :         bool finished;</span>
 <span class="lineNum">      37 </span>            :         //! DataChunk that stores data from the child of this operator
 <span class="lineNum">      38 </span>            :         DataChunk child_chunk;
 <span class="lineNum">      39 </span>            :         //! State of the child of this operator
@@ -119,8 +119,8 @@
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :         }</span>
 <span class="lineNum">      58 </span>            : 
 <span class="lineNum">      59 </span>            :         PhysicalOperatorType GetOperatorType() {
-<span class="lineNum">      60 </span><span class="lineCov">    9351338 :                 return type;</span>
-<span class="lineNum">      61 </span><span class="lineCov">    9360126 :         }</span>
+<span class="lineNum">      60 </span><span class="lineCov">    9347932 :                 return type;</span>
+<span class="lineNum">      61 </span><span class="lineCov">    9358558 :         }</span>
 <span class="lineNum">      62 </span>            : 
 <span class="lineNum">      63 </span>            :         string ToString() const override;
 <a name="64"><span class="lineNum">      64 </span>            : </a>
@@ -129,16 +129,16 @@
 <span class="lineNum">      67 </span><span class="lineNoCov">          0 :                 return types;</span>
 <span class="lineNum">      68 </span>            :         }
 <span class="lineNum">      69 </span>            :         //! Initialize a given chunk to the types that will be returned by this
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">   19344909 :         //! operator, this will prepare chunk for a call to GetChunk. This method</span></a>
-<span class="lineNum">      71 </span><span class="lineCov">   19344909 :         //! only has to be called once for any amount of calls to GetChunk.</span>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">   19340172 :         //! operator, this will prepare chunk for a call to GetChunk. This method</span></a>
+<span class="lineNum">      71 </span><span class="lineCov">   19340172 :         //! only has to be called once for any amount of calls to GetChunk.</span>
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :         virtual void InitializeChunk(DataChunk &amp;chunk) {</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                 auto &amp;types = GetTypes();</span>
 <span class="lineNum">      74 </span><span class="lineNoCov">          0 :                 chunk.Initialize(types);</span>
 <span class="lineNum">      75 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">      76 </span><span class="lineCov">   12880807 :         //! Retrieves a chunk from this operator and stores it in the chunk</span>
-<span class="lineNum">      77 </span><span class="lineCov">   12880807 :         //! variable.</span>
-<span class="lineNum">      78 </span><span class="lineCov">   12881402 :         virtual void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) = 0;</span>
-<span class="lineNum">      79 </span><span class="lineCov">   12883891 : </span>
+<span class="lineNum">      76 </span><span class="lineCov">   12877396 :         //! Retrieves a chunk from this operator and stores it in the chunk</span>
+<span class="lineNum">      77 </span><span class="lineCov">   12877396 :         //! variable.</span>
+<span class="lineNum">      78 </span><span class="lineCov">   12878287 :         virtual void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) = 0;</span>
+<span class="lineNum">      79 </span><span class="lineCov">   12881037 : </span>
 <span class="lineNum">      80 </span>            :         void GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state);
 <a name="81"><span class="lineNum">      81 </span>            : </a>
 <span class="lineNum">      82 </span>            :         //! Create a new empty instance of the operator state
@@ -146,8 +146,8 @@
 <span class="lineNum">      84 </span><span class="lineNoCov">          0 :                 return make_unique&lt;PhysicalOperatorState&gt;(children.size() == 0 ? nullptr : children[0].get(), parent);</span>
 <a name="85"><span class="lineNum">      85 </span>            :         }</a>
 <span class="lineNum">      86 </span>            : 
-<span class="lineNum">      87 </span><span class="lineCov">    5153156 :         virtual string ExtraRenderInformation() {</span>
-<span class="lineNum">      88 </span><span class="lineCov">    5153156 :                 return &quot;&quot;;</span>
+<span class="lineNum">      87 </span><span class="lineCov">    5151192 :         virtual string ExtraRenderInformation() {</span>
+<span class="lineNum">      88 </span><span class="lineCov">    5151192 :                 return &quot;&quot;;</span>
 <span class="lineNum">      89 </span>            :         }
 <span class="lineNum">      90 </span>            : 
 <span class="lineNum">      91 </span><span class="lineCov">        303 :         //! The physical operator type</span>
