@@ -1,0 +1,70 @@
+{ "result": 0.000060,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "integers[NULL]",
+"children": []
+}
+]
+}
+}
+{ "result": 0.000060,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "integers[NULL]",
+"children": []
+}
+]
+}
+}
+{ "result": 0.000061,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "integers[NULL]",
+"children": []
+}
+]
+}
+}
+{ "result": 0.000060,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "integers[NULL]",
+"children": []
+}
+]
+}
+}
+{ "result": 0.000087,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "integers[NULL]",
+"children": []
+}
+]
+}
+}
