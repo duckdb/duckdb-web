@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report e353519f - main/database.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7666e9ed - main/database.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report e353519f</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7666e9ed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 17:58:02</td>
+            <td class="headerValue">2018-12-22 11:23:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -65,11 +65,11 @@
 <span class="lineNum">       3 </span>            : using namespace duckdb;
 <a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineCov">        559 : DuckDB::DuckDB(const char *path)</span>
-<span class="lineNum">       7 </span><span class="lineCov">        581 :     : storage(*this, path ? string(path) : string()), catalog(storage), transaction_manager(storage) {</span>
+<span class="lineNum">       6 </span><span class="lineCov">        560 : DuckDB::DuckDB(const char *path)</span>
+<span class="lineNum">       7 </span><span class="lineCov">        582 :     : storage(*this, path ? string(path) : string()), catalog(storage), transaction_manager(storage) {</span>
 <span class="lineNum">       8 </span>            :         // initialize the database
-<span class="lineNum">       9 </span><span class="lineCov">        559 :         storage.Initialize();</span>
-<span class="lineNum">      10 </span><span class="lineCov">        559 : }</span>
+<span class="lineNum">       9 </span><span class="lineCov">        560 :         storage.Initialize();</span>
+<span class="lineNum">      10 </span><span class="lineCov">        560 : }</span>
 </pre>
       </td>
     </tr>

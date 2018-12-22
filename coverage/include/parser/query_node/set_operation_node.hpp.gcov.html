@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report e353519f - include/parser/query_node/set_operation_node.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7666e9ed - include/parser/query_node/set_operation_node.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report e353519f</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7666e9ed</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">9</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-21 17:58:02</td>
+            <td class="headerValue">2018-12-22 11:23:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -80,11 +80,11 @@
 <span class="lineNum">      18 </span>            : 
 <a name="19"><span class="lineNum">      19 </span>            : class SetOperationNode : public QueryNode {</a>
 <span class="lineNum">      20 </span>            : public:
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       4770 :         SetOperationNode() : QueryNode(QueryNodeType::SET_OPERATION_NODE) {</span></a>
-<span class="lineNum">      22 </span><span class="lineCov">       4770 :         }</span>
-<span class="lineNum">      23 </span><span class="lineCov">       9478 :         void Accept(SQLNodeVisitor *v) override {</span>
-<span class="lineNum">      24 </span><span class="lineCov">       9478 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      25 </span><span class="lineCov">       9478 :         }</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">       4779 :         SetOperationNode() : QueryNode(QueryNodeType::SET_OPERATION_NODE) {</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">       4779 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">       9496 :         void Accept(SQLNodeVisitor *v) override {</span>
+<span class="lineNum">      24 </span><span class="lineCov">       9496 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      25 </span><span class="lineCov">       9496 :         }</span>
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :         //! The type of set operation
 <span class="lineNum">      28 </span>            :         SetOperationType setop_type = SetOperationType::NONE;
@@ -98,12 +98,12 @@
 <span class="lineNum">      36 </span>            :         //! The bind context used by the right side of the set operation
 <a name="37"><span class="lineNum">      37 </span>            :         unique_ptr&lt;BindContext&gt; setop_right_binder;</a>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">      27488 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;GetSelectList() override {</span>
-<span class="lineNum">      40 </span><span class="lineCov">      27488 :                 return left-&gt;GetSelectList();</span>
+<span class="lineNum">      39 </span><span class="lineCov">      27509 :         vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;GetSelectList() override {</span>
+<span class="lineNum">      40 </span><span class="lineCov">      27509 :                 return left-&gt;GetSelectList();</span>
 <a name="41"><span class="lineNum">      41 </span>            :         }</a>
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span><span class="lineCov">       4566 :         size_t GetSelectCount() override {</span>
-<span class="lineNum">      44 </span><span class="lineCov">       4566 :                 return left-&gt;GetSelectCount();</span>
+<span class="lineNum">      43 </span><span class="lineCov">       4571 :         size_t GetSelectCount() override {</span>
+<span class="lineNum">      44 </span><span class="lineCov">       4571 :                 return left-&gt;GetSelectCount();</span>
 <span class="lineNum">      45 </span>            :         }
 <span class="lineNum">      46 </span>            : 
 <span class="lineNum">      47 </span>            :         bool Equals(const QueryNode *other) const override;
