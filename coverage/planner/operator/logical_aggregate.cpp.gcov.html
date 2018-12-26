@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7666e9ed - planner/operator/logical_aggregate.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - planner/operator/logical_aggregate.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7666e9ed</td>
+            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">13</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-22 11:23:03</td>
+            <td class="headerValue">2018-12-26 18:59:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -76,28 +76,28 @@
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :         return names;</span>
 <a name="15"><span class="lineNum">      15 </span>            : }</a>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">    1304639 : void LogicalAggregate::ResolveTypes() {</span>
-<span class="lineNum">      18 </span><span class="lineCov">    2234657 :         for (auto &amp;expr : groups) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">    1304777 : void LogicalAggregate::ResolveTypes() {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    2234795 :         for (auto &amp;expr : groups) {</span>
 <span class="lineNum">      19 </span><span class="lineCov">     930018 :                 types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      20 </span>            :         }
 <span class="lineNum">      21 </span>            :         // get the chunk types from the projection list
-<span class="lineNum">      22 </span><span class="lineCov">    2136580 :         for (auto &amp;expr : expressions) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">     831911 :                 types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      22 </span><span class="lineCov">    2136774 :         for (auto &amp;expr : expressions) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">     832002 :                 types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      24 </span>            :         }
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">    1304690 : }</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">    1304781 : }</span></a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">   10801575 : size_t LogicalAggregate::ExpressionCount() {</span>
-<span class="lineNum">      28 </span><span class="lineCov">   10801575 :         return expressions.size() + groups.size();</span>
+<span class="lineNum">      27 </span><span class="lineCov">   10801911 : size_t LogicalAggregate::ExpressionCount() {</span>
+<span class="lineNum">      28 </span><span class="lineCov">   10801911 :         return expressions.size() + groups.size();</span>
 <a name="29"><span class="lineNum">      29 </span>            : }</a>
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">    3196200 : Expression *LogicalAggregate::GetExpression(size_t index) {</span>
-<span class="lineNum">      32 </span><span class="lineCov">    3196200 :         if (index &gt;= ExpressionCount()) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">    3196298 : Expression *LogicalAggregate::GetExpression(size_t index) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">    3196298 :         if (index &gt;= ExpressionCount()) {</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 throw OutOfRangeException(&quot;GetExpression(): Expression index out of range!&quot;);</span>
 <span class="lineNum">      34 </span>            :         }
-<span class="lineNum">      35 </span><span class="lineCov">    3196247 :         if (index &gt;= expressions.size()) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    3196313 :         if (index &gt;= expressions.size()) {</span>
 <span class="lineNum">      36 </span><span class="lineCov">    1265769 :                 return groups[index - expressions.size()].get();</span>
 <span class="lineNum">      37 </span>            :         }
-<span class="lineNum">      38 </span><span class="lineCov">    1930419 :         return expressions[index].get();</span>
+<span class="lineNum">      38 </span><span class="lineCov">    1930526 :         return expressions[index].get();</span>
 <a name="39"><span class="lineNum">      39 </span>            : }</a>
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span><span class="lineNoCov">          0 : void LogicalAggregate::SetExpression(size_t index, unique_ptr&lt;Expression&gt; expr) {</span>

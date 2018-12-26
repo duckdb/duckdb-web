@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7666e9ed - include/common/limits.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - include/common/limits.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7666e9ed</td>
+            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">48</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-22 11:23:03</td>
+            <td class="headerValue">2018-12-26 18:59:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -77,48 +77,48 @@
 <span class="lineNum">      15 </span>            : namespace duckdb {
 <a name="16"><span class="lineNum">      16 </span>            : </a>
 <span class="lineNum">      17 </span>            : //! Returns the minimum value that can be stored in a given type
-<span class="lineNum">      18 </span><span class="lineCov">  129217631 : template &lt;class T&gt; int64_t MinimumValue() {</span>
-<span class="lineNum">      19 </span><span class="lineCov">  129217631 :         assert(IsIntegerType&lt;T&gt;());</span>
-<span class="lineNum">      20 </span><span class="lineCov">  129218535 :         if (std::is_same&lt;T, int8_t&gt;()) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">  129217720 : template &lt;class T&gt; int64_t MinimumValue() {</span>
+<span class="lineNum">      19 </span><span class="lineCov">  129217720 :         assert(IsIntegerType&lt;T&gt;());</span>
+<span class="lineNum">      20 </span><span class="lineCov">  129218368 :         if (std::is_same&lt;T, int8_t&gt;()) {</span>
 <span class="lineNum">      21 </span><span class="lineCov">    2062673 :                 return std::numeric_limits&lt;int8_t&gt;::min() + 1;</span>
-<span class="lineNum">      22 </span><span class="lineCov">  127155451 :         } else if (std::is_same&lt;T, int16_t&gt;()) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">  127155384 :         } else if (std::is_same&lt;T, int16_t&gt;()) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">     550207 :                 return std::numeric_limits&lt;int16_t&gt;::min() + 1;</span>
-<span class="lineNum">      24 </span><span class="lineCov">  126607071 :         } else if (std::is_same&lt;T, int32_t&gt;()) {</span>
-<span class="lineNum">      25 </span><span class="lineCov">  119788465 :                 return std::numeric_limits&lt;int32_t&gt;::min() + 1;</span>
-<span class="lineNum">      26 </span><span class="lineCov">    6819161 :         } else if (std::is_same&lt;T, int64_t&gt;()) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    2627910 :                 return std::numeric_limits&lt;int64_t&gt;::min() + 1;</span>
-<span class="lineNum">      28 </span><span class="lineCov">    4191208 :         } else if (std::is_same&lt;T, uint64_t&gt;()) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">    4191241 :                 return std::numeric_limits&lt;uint64_t&gt;::min();</span>
+<span class="lineNum">      24 </span><span class="lineCov">  126606734 :         } else if (std::is_same&lt;T, int32_t&gt;()) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">  119787746 :                 return std::numeric_limits&lt;int32_t&gt;::min() + 1;</span>
+<span class="lineNum">      26 </span><span class="lineCov">    6819343 :         } else if (std::is_same&lt;T, int64_t&gt;()) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    2627927 :                 return std::numeric_limits&lt;int64_t&gt;::min() + 1;</span>
+<span class="lineNum">      28 </span><span class="lineCov">    4191410 :         } else if (std::is_same&lt;T, uint64_t&gt;()) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">    4191419 :                 return std::numeric_limits&lt;uint64_t&gt;::min();</span>
 <span class="lineNum">      30 </span>            :         } else {
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :                 assert(0);</span>
 <span class="lineNum">      32 </span>            :                 return 0;
 <span class="lineNum">      33 </span>            :         }
 <span class="lineNum">      34 </span>            : }
-<span class="lineNum">      35 </span><span class="lineCov">    6818984 : </span>
-<span class="lineNum">      36 </span><span class="lineCov">    6818984 : //! Returns the maximum value that can be stored in a given type</span>
-<span class="lineNum">      37 </span><span class="lineCov">    6819086 : template &lt;class T&gt; int64_t MaximumValue() {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    6819278 : </span>
+<span class="lineNum">      36 </span><span class="lineCov">    6819278 : //! Returns the maximum value that can be stored in a given type</span>
+<span class="lineNum">      37 </span><span class="lineCov">    6819321 : template &lt;class T&gt; int64_t MaximumValue() {</span>
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :         assert(IsIntegerType&lt;T&gt;());</span>
-<span class="lineNum">      39 </span><span class="lineCov">    6819026 :         if (std::is_same&lt;T, int8_t&gt;()) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">    6819301 :         if (std::is_same&lt;T, int8_t&gt;()) {</span>
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :                 return std::numeric_limits&lt;int8_t&gt;::max();</span>
-<span class="lineNum">      41 </span><span class="lineCov">    6819124 :         } else if (std::is_same&lt;T, int16_t&gt;()) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">    6819331 :         } else if (std::is_same&lt;T, int16_t&gt;()) {</span>
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :                 return std::numeric_limits&lt;int16_t&gt;::max();</span>
-<span class="lineNum">      43 </span><span class="lineCov">    6819161 :         } else if (std::is_same&lt;T, int32_t&gt;()) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">    2627910 :                 return std::numeric_limits&lt;int32_t&gt;::max();</span>
-<span class="lineNum">      45 </span><span class="lineCov">    4191208 :         } else if (std::is_same&lt;T, int64_t&gt;()) {</span>
-<span class="lineNum">      46 </span><span class="lineCov">    4191241 :                 return std::numeric_limits&lt;int64_t&gt;::max();</span>
+<span class="lineNum">      43 </span><span class="lineCov">    6819343 :         } else if (std::is_same&lt;T, int32_t&gt;()) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">    2627927 :                 return std::numeric_limits&lt;int32_t&gt;::max();</span>
+<span class="lineNum">      45 </span><span class="lineCov">    4191410 :         } else if (std::is_same&lt;T, int64_t&gt;()) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">    4191419 :                 return std::numeric_limits&lt;int64_t&gt;::max();</span>
 <span class="lineNum">      47 </span>            :         } else if (std::is_same&lt;T, uint64_t&gt;()) {
 <span class="lineNum">      48 </span><span class="lineNoCov">          0 :                 return std::numeric_limits&lt;int64_t&gt;::max();</span>
 <span class="lineNum">      49 </span>            :         } else {
 <span class="lineNum">      50 </span>            :                 assert(0);
 <span class="lineNum">      51 </span>            :                 return 0;
-<span class="lineNum">      52 </span><span class="lineCov">  119785767 :         }</span>
-<span class="lineNum">      53 </span><span class="lineCov">  119785767 : }</span>
-<span class="lineNum">      54 </span><span class="lineCov">  119786569 : </span>
+<span class="lineNum">      52 </span><span class="lineCov">  119785562 :         }</span>
+<span class="lineNum">      53 </span><span class="lineCov">  119785562 : }</span>
+<span class="lineNum">      54 </span><span class="lineCov">  119786167 : </span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 : //! Returns the minimum value that can be stored in a given type</span>
-<span class="lineNum">      56 </span><span class="lineCov">  119786218 : int64_t MinimumValue(TypeId type);</span>
+<span class="lineNum">      56 </span><span class="lineCov">  119785876 : int64_t MinimumValue(TypeId type);</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 : //! Returns the maximum value that can be stored in a given type</span>
-<span class="lineNum">      58 </span><span class="lineCov">  119787947 : int64_t MaximumValue(TypeId type);</span>
-<span class="lineNum">      59 </span><span class="lineCov">  119788465 : //! Returns the minimal type that guarantees an integer value from not</span>
+<span class="lineNum">      58 </span><span class="lineCov">  119787403 : int64_t MaximumValue(TypeId type);</span>
+<span class="lineNum">      59 </span><span class="lineCov">  119787746 : //! Returns the minimal type that guarantees an integer value from not</span>
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 : //! overflowing</span>
 <span class="lineNum">      61 </span><span class="lineNoCov">          0 : TypeId MinimalType(int64_t value);</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 : </span>
