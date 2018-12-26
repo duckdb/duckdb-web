@@ -1,0 +1,320 @@
+{ "result": 0.545028,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":587,
+"extra_info": "INNER\np_partkey=#1\nCAST[DECIMAL](l_quantity)<#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "(p_container = MED BOX)\n(p_brand = Brand#23)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.33,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.545296,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":587,
+"extra_info": "INNER\np_partkey=#1\nCAST[DECIMAL](l_quantity)<#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "(p_container = MED BOX)\n(p_brand = Brand#23)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.33,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.543327,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":587,
+"extra_info": "INNER\np_partkey=#1\nCAST[DECIMAL](l_quantity)<#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "(p_container = MED BOX)\n(p_brand = Brand#23)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.33,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.544373,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":587,
+"extra_info": "INNER\np_partkey=#1\nCAST[DECIMAL](l_quantity)<#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "(p_container = MED BOX)\n(p_brand = Brand#23)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.33,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.545173,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":587,
+"extra_info": "INNER\np_partkey=#1\nCAST[DECIMAL](l_quantity)<#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "(p_container = MED BOX)\n(p_brand = Brand#23)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.33,
+"cardinality":200000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
