@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - parser/transform/expression/transform_function.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7826fddc - parser/transform/expression/transform_function.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">121</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-26 18:59:44</td>
+            <td class="headerValue">2018-12-30 21:00:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -72,11 +72,11 @@
 <span class="lineNum">      10 </span>            : using namespace postgres;
 <a name="11"><span class="lineNum">      11 </span>            : using namespace std;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">     811667 : static ExpressionType AggregateToExpressionType(string &amp;fun_name) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">     811667 :         if (fun_name == &quot;count&quot;) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">     518450 :                 return ExpressionType::AGGREGATE_COUNT;</span>
-<span class="lineNum">      16 </span><span class="lineCov">     293242 :         } else if (fun_name == &quot;sum&quot;) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">      97983 :                 return ExpressionType::AGGREGATE_SUM;</span>
+<span class="lineNum">      13 </span><span class="lineCov">     811745 : static ExpressionType AggregateToExpressionType(string &amp;fun_name) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">     811745 :         if (fun_name == &quot;count&quot;) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     518435 :                 return ExpressionType::AGGREGATE_COUNT;</span>
+<span class="lineNum">      16 </span><span class="lineCov">     293383 :         } else if (fun_name == &quot;sum&quot;) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">      98139 :                 return ExpressionType::AGGREGATE_SUM;</span>
 <span class="lineNum">      18 </span><span class="lineCov">     195264 :         } else if (fun_name == &quot;min&quot;) {</span>
 <span class="lineNum">      19 </span><span class="lineCov">      86339 :                 return ExpressionType::AGGREGATE_MIN;</span>
 <span class="lineNum">      20 </span><span class="lineCov">     108925 :         } else if (fun_name == &quot;max&quot;) {</span>
@@ -117,22 +117,22 @@
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :         return ExpressionType::INVALID;</span>
 <a name="56"><span class="lineNum">      56 </span>            : }</a>
 <span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span><span class="lineCov">     811720 : unique_ptr&lt;Expression&gt; Transformer::TransformFuncCall(FuncCall *root) {</span>
-<span class="lineNum">      59 </span><span class="lineCov">     811720 :         auto name = root-&gt;funcname;</span>
-<span class="lineNum">      60 </span><span class="lineCov">    1623443 :         string schema, function_name;</span>
-<span class="lineNum">      61 </span><span class="lineCov">     811746 :         if (name-&gt;length == 2) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">     811800 : unique_ptr&lt;Expression&gt; Transformer::TransformFuncCall(FuncCall *root) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">     811800 :         auto name = root-&gt;funcname;</span>
+<span class="lineNum">      60 </span><span class="lineCov">    1623599 :         string schema, function_name;</span>
+<span class="lineNum">      61 </span><span class="lineCov">     811885 :         if (name-&gt;length == 2) {</span>
 <span class="lineNum">      62 </span>            :                 // schema + name
 <span class="lineNum">      63 </span><span class="lineCov">        107 :                 schema = reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
 <span class="lineNum">      64 </span><span class="lineCov">        107 :                 function_name = reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;next-&gt;data.ptr_value)-&gt;val.str;</span>
 <span class="lineNum">      65 </span>            :         } else {
 <span class="lineNum">      66 </span>            :                 // unqualified name
-<span class="lineNum">      67 </span><span class="lineCov">     811639 :                 schema = DEFAULT_SCHEMA;</span>
-<span class="lineNum">      68 </span><span class="lineCov">     811638 :                 function_name = reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
+<span class="lineNum">      67 </span><span class="lineCov">     811778 :                 schema = DEFAULT_SCHEMA;</span>
+<span class="lineNum">      68 </span><span class="lineCov">     811739 :                 function_name = reinterpret_cast&lt;value *&gt;(name-&gt;head-&gt;data.ptr_value)-&gt;val.str;</span>
 <span class="lineNum">      69 </span>            :         }
 <span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">    1623484 :         auto lowercase_name = StringUtil::Lower(function_name);</span>
+<span class="lineNum">      71 </span><span class="lineCov">    1623738 :         auto lowercase_name = StringUtil::Lower(function_name);</span>
 <span class="lineNum">      72 </span>            : 
-<span class="lineNum">      73 </span><span class="lineCov">     811720 :         if (root-&gt;over) {</span>
+<span class="lineNum">      73 </span><span class="lineCov">     811820 :         if (root-&gt;over) {</span>
 <span class="lineNum">      74 </span><span class="lineCov">         53 :                 auto window_spec = reinterpret_cast&lt;WindowDef *&gt;(root-&gt;over);</span>
 <span class="lineNum">      75 </span><span class="lineCov">         53 :                 if (window_spec-&gt;refname) {</span>
 <span class="lineNum">      76 </span>            :                         // TODO
@@ -206,8 +206,8 @@
 <span class="lineNum">     144 </span><span class="lineCov">         53 :                 return expr;</span>
 <span class="lineNum">     145 </span>            :         }
 <span class="lineNum">     146 </span>            : 
-<span class="lineNum">     147 </span><span class="lineCov">     811667 :         auto agg_fun_type = AggregateToExpressionType(lowercase_name);</span>
-<span class="lineNum">     148 </span><span class="lineCov">     811667 :         if (agg_fun_type == ExpressionType::INVALID) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">     811767 :         auto agg_fun_type = AggregateToExpressionType(lowercase_name);</span>
+<span class="lineNum">     148 </span><span class="lineCov">     811741 :         if (agg_fun_type == ExpressionType::INVALID) {</span>
 <span class="lineNum">     149 </span>            :                 // Normal functions (i.e. built-in functions or UDFs)
 <span class="lineNum">     150 </span><span class="lineCov">       4280 :                 vector&lt;unique_ptr&lt;Expression&gt;&gt; children;</span>
 <span class="lineNum">     151 </span><span class="lineCov">       2140 :                 if (root-&gt;args != nullptr) {</span>
@@ -220,13 +220,13 @@
 <span class="lineNum">     158 </span>            :         } else {
 <span class="lineNum">     159 </span>            :                 // Aggregate function
 <span class="lineNum">     160 </span>            : 
-<span class="lineNum">     161 </span><span class="lineCov">     809527 :                 if (root-&gt;over) {</span>
+<span class="lineNum">     161 </span><span class="lineCov">     809601 :                 if (root-&gt;over) {</span>
 <span class="lineNum">     162 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Window functions (OVER/PARTITION BY)&quot;);</span>
 <span class="lineNum">     163 </span>            :                 }
-<span class="lineNum">     164 </span><span class="lineCov">     809527 :                 if (root-&gt;agg_star) {</span>
-<span class="lineNum">     165 </span><span class="lineCov">     431655 :                         return make_unique&lt;AggregateExpression&gt;(agg_fun_type, make_unique&lt;StarExpression&gt;());</span>
+<span class="lineNum">     164 </span><span class="lineCov">     809601 :                 if (root-&gt;agg_star) {</span>
+<span class="lineNum">     165 </span><span class="lineCov">     431573 :                         return make_unique&lt;AggregateExpression&gt;(agg_fun_type, make_unique&lt;StarExpression&gt;());</span>
 <span class="lineNum">     166 </span>            :                 } else {
-<span class="lineNum">     167 </span><span class="lineCov">     377872 :                         if (root-&gt;agg_distinct) {</span>
+<span class="lineNum">     167 </span><span class="lineCov">     378028 :                         if (root-&gt;agg_distinct) {</span>
 <span class="lineNum">     168 </span><span class="lineCov">      93144 :                                 switch (agg_fun_type) {</span>
 <span class="lineNum">     169 </span><span class="lineCov">      22036 :                                 case ExpressionType::AGGREGATE_COUNT:</span>
 <span class="lineNum">     170 </span><span class="lineCov">      22036 :                                         agg_fun_type = ExpressionType::AGGREGATE_COUNT_DISTINCT;</span>
@@ -239,14 +239,14 @@
 <span class="lineNum">     177 </span><span class="lineCov">      48967 :                                         break;</span>
 <span class="lineNum">     178 </span>            :                                 }
 <span class="lineNum">     179 </span>            :                         }
-<span class="lineNum">     180 </span><span class="lineCov">     377872 :                         if (!root-&gt;args) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">     378028 :                         if (!root-&gt;args) {</span>
 <span class="lineNum">     181 </span><span class="lineNoCov">          0 :                                 throw NotImplementedException(&quot;Aggregation over zero columns not supported!&quot;);</span>
-<span class="lineNum">     182 </span><span class="lineCov">     377872 :                         } else if (root-&gt;args-&gt;length &lt; 2) {</span>
-<span class="lineNum">     183 </span><span class="lineCov">     755744 :                                 auto child = TransformExpression((Node *)root-&gt;args-&gt;head-&gt;data.ptr_value);</span>
-<span class="lineNum">     184 </span><span class="lineCov">     377872 :                                 if (child-&gt;IsAggregate()) {</span>
+<span class="lineNum">     182 </span><span class="lineCov">     378028 :                         } else if (root-&gt;args-&gt;length &lt; 2) {</span>
+<span class="lineNum">     183 </span><span class="lineCov">     756056 :                                 auto child = TransformExpression((Node *)root-&gt;args-&gt;head-&gt;data.ptr_value);</span>
+<span class="lineNum">     184 </span><span class="lineCov">     378028 :                                 if (child-&gt;IsAggregate()) {</span>
 <span class="lineNum">     185 </span><span class="lineCov">          2 :                                         throw ParserException(&quot;aggregate function calls cannot be nested&quot;);</span>
 <span class="lineNum">     186 </span>            :                                 }
-<span class="lineNum">     187 </span><span class="lineCov">     377870 :                                 if (agg_fun_type == ExpressionType::AGGREGATE_AVG) {</span>
+<span class="lineNum">     187 </span><span class="lineCov">     378026 :                                 if (agg_fun_type == ExpressionType::AGGREGATE_AVG) {</span>
 <span class="lineNum">     188 </span>            :                                         // rewrite AVG(a) to SUM(a) / COUNT(a)
 <span class="lineNum">     189 </span>            :                                         // first create the SUM
 <span class="lineNum">     190 </span><span class="lineCov">      21226 :                                         auto sum = make_unique&lt;AggregateExpression&gt;(</span>
@@ -263,7 +263,7 @@
 <span class="lineNum">     201 </span><span class="lineCov">      42452 :                                         return make_unique&lt;OperatorExpression&gt;(ExpressionType::OPERATOR_DIVIDE, TypeId::DECIMAL,</span>
 <span class="lineNum">     202 </span><span class="lineCov">      42452 :                                                                                move(sum_cast), move(count_cast));</span>
 <span class="lineNum">     203 </span>            :                                 } else {
-<span class="lineNum">     204 </span><span class="lineCov">     356644 :                                         return make_unique&lt;AggregateExpression&gt;(agg_fun_type, move(child));</span>
+<span class="lineNum">     204 </span><span class="lineCov">     356800 :                                         return make_unique&lt;AggregateExpression&gt;(agg_fun_type, move(child));</span>
 <span class="lineNum">     205 </span>            :                                 }
 <span class="lineNum">     206 </span>            :                         } else {
 <span class="lineNum">     207 </span><span class="lineNoCov">          0 :                                 throw NotImplementedException(&quot;Aggregation over multiple columns not supported yet...\n&quot;);</span>

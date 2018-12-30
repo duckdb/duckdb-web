@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - execution/operator/order/physical_order.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7826fddc - execution/operator/order/physical_order.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">32</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-26 18:59:44</td>
+            <td class="headerValue">2018-12-30 21:00:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -71,26 +71,26 @@
 <span class="lineNum">       9 </span>            : using namespace duckdb;
 <a name="10"><span class="lineNum">      10 </span>            : using namespace std;</a>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">       5515 : void PhysicalOrder::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">       5515 :         auto state = reinterpret_cast&lt;PhysicalOrderOperatorState *&gt;(state_);</span>
-<span class="lineNum">      14 </span><span class="lineCov">       5515 :         ChunkCollection &amp;big_data = state-&gt;sorted_data;</span>
-<span class="lineNum">      15 </span><span class="lineCov">       5515 :         if (state-&gt;position == 0) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">       5518 : void PhysicalOrder::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">       5518 :         auto state = reinterpret_cast&lt;PhysicalOrderOperatorState *&gt;(state_);</span>
+<span class="lineNum">      14 </span><span class="lineCov">       5518 :         ChunkCollection &amp;big_data = state-&gt;sorted_data;</span>
+<span class="lineNum">      15 </span><span class="lineCov">       5518 :         if (state-&gt;position == 0) {</span>
 <span class="lineNum">      16 </span>            :                 // first concatenate all the data of the child chunks
 <span class="lineNum">      17 </span><span class="lineCov">       2696 :                 do {</span>
-<span class="lineNum">      18 </span><span class="lineCov">       5570 :                         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">      19 </span><span class="lineCov">       5570 :                         big_data.Append(state-&gt;child_chunk);</span>
-<span class="lineNum">      20 </span><span class="lineCov">       5570 :                 } while (state-&gt;child_chunk.size() != 0);</span>
+<span class="lineNum">      18 </span><span class="lineCov">       5573 :                         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      19 </span><span class="lineCov">       5573 :                         big_data.Append(state-&gt;child_chunk);</span>
+<span class="lineNum">      20 </span><span class="lineCov">       5573 :                 } while (state-&gt;child_chunk.size() != 0);</span>
 <span class="lineNum">      21 </span>            : 
 <span class="lineNum">      22 </span>            :                 // now perform the actual ordering of the data
 <span class="lineNum">      23 </span>            :                 // compute the sorting columns from the input data
-<span class="lineNum">      24 </span><span class="lineCov">       5748 :                 vector&lt;TypeId&gt; sort_types;</span>
-<span class="lineNum">      25 </span><span class="lineCov">      12235 :                 for (size_t i = 0; i &lt; description.orders.size(); i++) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">       9361 :                         auto &amp;expr = description.orders[i].expression;</span>
-<span class="lineNum">      27 </span><span class="lineCov">       9361 :                         sort_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      24 </span><span class="lineCov">       5754 :                 vector&lt;TypeId&gt; sort_types;</span>
+<span class="lineNum">      25 </span><span class="lineCov">      12241 :                 for (size_t i = 0; i &lt; description.orders.size(); i++) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">       9364 :                         auto &amp;expr = description.orders[i].expression;</span>
+<span class="lineNum">      27 </span><span class="lineCov">       9364 :                         sort_types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      28 </span>            :                 }
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">       5748 :                 ChunkCollection sort_collection;</span>
-<span class="lineNum">      31 </span><span class="lineCov">       5523 :                 for (size_t i = 0; i &lt; big_data.chunks.size(); i++) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">       5754 :                 ChunkCollection sort_collection;</span>
+<span class="lineNum">      31 </span><span class="lineCov">       5526 :                 for (size_t i = 0; i &lt; big_data.chunks.size(); i++) {</span>
 <span class="lineNum">      32 </span><span class="lineCov">       5298 :                         DataChunk sort_chunk;</span>
 <span class="lineNum">      33 </span><span class="lineCov">       2649 :                         sort_chunk.Initialize(sort_types);</span>
 <span class="lineNum">      34 </span>            : 
@@ -100,15 +100,15 @@
 <span class="lineNum">      38 </span><span class="lineCov">       2649 :                         sort_collection.Append(sort_chunk);</span>
 <span class="lineNum">      39 </span>            :                 }
 <span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">       2874 :                 assert(sort_collection.count == big_data.count);</span>
+<span class="lineNum">      41 </span><span class="lineCov">       2877 :                 assert(sort_collection.count == big_data.count);</span>
 <span class="lineNum">      42 </span>            : 
 <span class="lineNum">      43 </span>            :                 // now perform the actual sort
-<span class="lineNum">      44 </span><span class="lineCov">       2874 :                 state-&gt;sorted_vector = unique_ptr&lt;uint64_t[]&gt;(new uint64_t[sort_collection.count]);</span>
-<span class="lineNum">      45 </span><span class="lineCov">       2874 :                 sort_collection.Sort(description, state-&gt;sorted_vector.get());</span>
+<span class="lineNum">      44 </span><span class="lineCov">       2877 :                 state-&gt;sorted_vector = unique_ptr&lt;uint64_t[]&gt;(new uint64_t[sort_collection.count]);</span>
+<span class="lineNum">      45 </span><span class="lineCov">       2877 :                 sort_collection.Sort(description, state-&gt;sorted_vector.get());</span>
 <span class="lineNum">      46 </span>            :         }
 <span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span><span class="lineCov">       5515 :         if (state-&gt;position &gt;= big_data.count) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">       2870 :                 return;</span>
+<span class="lineNum">      48 </span><span class="lineCov">       5518 :         if (state-&gt;position &gt;= big_data.count) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">       2873 :                 return;</span>
 <span class="lineNum">      50 </span>            :         }
 <span class="lineNum">      51 </span>            : 
 <span class="lineNum">      52 </span><span class="lineCov">       2645 :         size_t remaining_data = min((size_t)STANDARD_VECTOR_SIZE, big_data.count - state-&gt;position);</span>
@@ -121,8 +121,8 @@
 <span class="lineNum">      59 </span><span class="lineCov">       2645 :         state-&gt;position += STANDARD_VECTOR_SIZE;</span>
 <a name="60"><span class="lineNum">      60 </span>            : }</a>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">       2874 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalOrder::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">       2874 :         return make_unique&lt;PhysicalOrderOperatorState&gt;(children[0].get(), parent_executor);</span>
+<span class="lineNum">      62 </span><span class="lineCov">       2877 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalOrder::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">       2877 :         return make_unique&lt;PhysicalOrderOperatorState&gt;(children[0].get(), parent_executor);</span>
 <span class="lineNum">      64 </span>            : }
 </pre>
       </td>

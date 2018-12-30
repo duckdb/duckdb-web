@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - optimizer/subquery_rewriter.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7826fddc - optimizer/subquery_rewriter.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">175</td>
-            <td class="headerCovTableEntry">184</td>
-            <td class="headerCovTableEntryHi">95.1 %</td>
+            <td class="headerCovTableEntry">182</td>
+            <td class="headerCovTableEntry">193</td>
+            <td class="headerCovTableEntryHi">94.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-26 18:59:44</td>
+            <td class="headerValue">2018-12-30 21:00:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -70,381 +70,399 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <span class="lineNum">       9 </span>            : using namespace std;
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span>            : void ExtractCorrelatedExpressions(LogicalOperator *op, SubqueryExpression *subquery, size_t subquery_table_index,
-<span class="lineNum">      12 </span>            :                                   vector&lt;JoinCondition&gt; &amp;join_conditions);
-<a name="13"><span class="lineNum">      13 </span>            : </a>
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">   12357628 : unique_ptr&lt;LogicalOperator&gt; SubqueryRewriter::Rewrite(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">   12357628 :         if (plan-&gt;type == LogicalOperatorType::FILTER) {</span>
-<span class="lineNum">      17 </span>            :                 // rewrite subqueries within a filter
-<span class="lineNum">      18 </span><span class="lineCov">     506573 :                 auto &amp;filter = (LogicalFilter &amp;)*plan;</span>
-<span class="lineNum">      19 </span>            :                 // now rewrite subqueries within the filter
-<span class="lineNum">      20 </span><span class="lineCov">    1018220 :                 for (size_t i = 0; i &lt; filter.expressions.size(); i++) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">     514306 :                         auto &amp;expr = *filter.expressions[i];</span>
-<span class="lineNum">      22 </span>            :                         // check if we know how to rewrite this type of subquery
-<span class="lineNum">      23 </span><span class="lineCov">     514313 :                         switch (expr.type) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">      36833 :                         case ExpressionType::COMPARE_IN:</span>
-<span class="lineNum">      25 </span>            :                         case ExpressionType::COMPARE_NOT_IN:
-<span class="lineNum">      26 </span>            :                                 // (NOT) IN, check if we are dealing with a subquery
-<span class="lineNum">      27 </span><span class="lineCov">      36833 :                                 if (expr.children.size() != 2) {</span>
-<span class="lineNum">      28 </span>            :                                         // only constant lists have multiple elements
-<span class="lineNum">      29 </span><span class="lineCov">      12314 :                                         break;</span>
-<span class="lineNum">      30 </span>            :                                 }
-<span class="lineNum">      31 </span><span class="lineCov">      24519 :                                 if (expr.children[1]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
-<span class="lineNum">      32 </span>            :                                         // IN (SUBQUERY), rewrite
-<span class="lineNum">      33 </span><span class="lineCov">         46 :                                         if (RewriteInClause(filter, (OperatorExpression *)filter.expressions[i].get(),</span>
-<span class="lineNum">      34 </span><span class="lineCov">         46 :                                                             (SubqueryExpression *)expr.children[1].get())) {</span>
-<span class="lineNum">      35 </span>            :                                                 // successful rewrite, remove the expression from the set of filter expressions
-<span class="lineNum">      36 </span><span class="lineCov">         46 :                                                 filter.expressions.erase(filter.expressions.begin() + i);</span>
-<span class="lineNum">      37 </span><span class="lineCov">         46 :                                                 i--;</span>
-<span class="lineNum">      38 </span>            :                                         }
-<span class="lineNum">      39 </span>            :                                 }
-<span class="lineNum">      40 </span><span class="lineCov">      24519 :                                 break;</span>
-<span class="lineNum">      41 </span><span class="lineCov">        485 :                         case ExpressionType::OPERATOR_EXISTS:</span>
-<span class="lineNum">      42 </span>            :                         case ExpressionType::OPERATOR_NOT_EXISTS:
-<span class="lineNum">      43 </span>            :                                 // NOT (EXISTS), check if we are dealing with a subquery
-<span class="lineNum">      44 </span><span class="lineCov">        485 :                                 assert(expr.children.size() == 1);</span>
-<span class="lineNum">      45 </span><span class="lineCov">        485 :                                 if (expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
-<span class="lineNum">      46 </span>            :                                         // EXISTS (SUBQUERY), rewrite
-<span class="lineNum">      47 </span><span class="lineCov">        485 :                                         if (RewriteExistsClause(filter, (OperatorExpression *)filter.expressions[i].get(),</span>
-<span class="lineNum">      48 </span><span class="lineCov">        485 :                                                                 (SubqueryExpression *)expr.children[0].get())) {</span>
-<span class="lineNum">      49 </span>            :                                                 // successful rewrite, remove the expression from the set of filter expressions
-<span class="lineNum">      50 </span><span class="lineCov">        479 :                                                 filter.expressions.erase(filter.expressions.begin() + i);</span>
-<span class="lineNum">      51 </span><span class="lineCov">        479 :                                                 i--;</span>
-<span class="lineNum">      52 </span>            :                                         }
-<span class="lineNum">      53 </span>            :                                 }
-<span class="lineNum">      54 </span><span class="lineCov">        485 :                                 break;</span>
-<span class="lineNum">      55 </span><span class="lineCov">     186867 :                         case ExpressionType::COMPARE_EQUAL:</span>
-<span class="lineNum">      56 </span>            :                         case ExpressionType::COMPARE_NOTEQUAL:
-<span class="lineNum">      57 </span>            :                         case ExpressionType::COMPARE_LESSTHAN:
-<span class="lineNum">      58 </span>            :                         case ExpressionType::COMPARE_GREATERTHAN:
-<span class="lineNum">      59 </span>            :                         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
-<span class="lineNum">      60 </span>            :                         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:
-<span class="lineNum">      61 </span>            :                                 // comparison, check if we are dealing with a subquery
-<span class="lineNum">      62 </span><span class="lineCov">     186867 :                                 assert(expr.children.size() == 2);</span>
-<span class="lineNum">      63 </span><span class="lineCov">     377095 :                                 if (expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ||</span>
-<span class="lineNum">      64 </span><span class="lineCov">     189126 :                                     expr.children[1]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
-<span class="lineNum">      65 </span><span class="lineCov">         45 :                                         int subquery_index = expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ? 0 : 1;</span>
-<span class="lineNum">      66 </span>            :                                         // Comparison with subquery, rewrite
-<span class="lineNum">      67 </span><span class="lineCov">         45 :                                         if (RewriteSubqueryComparison(filter, (ComparisonExpression *)filter.expressions[i].get(),</span>
-<span class="lineNum">      68 </span><span class="lineCov">         45 :                                                                       (SubqueryExpression *)expr.children[subquery_index].get())) {</span>
-<span class="lineNum">      69 </span>            :                                                 // successful rewrite, remove the expression from the set of filter expressions
-<span class="lineNum">      70 </span><span class="lineCov">         23 :                                                 filter.expressions.erase(filter.expressions.begin() + i);</span>
-<span class="lineNum">      71 </span><span class="lineCov">         23 :                                                 i--;</span>
-<span class="lineNum">      72 </span>            :                                         }
-<span class="lineNum">      73 </span>            :                                 }
-<span class="lineNum">      74 </span><span class="lineCov">     189931 :                                 break;</span>
-<span class="lineNum">      75 </span><span class="lineCov">     290128 :                         default:</span>
-<span class="lineNum">      76 </span><span class="lineCov">     290128 :                                 break;</span>
-<span class="lineNum">      77 </span>            :                         }
-<span class="lineNum">      78 </span>            :                 }
-<span class="lineNum">      79 </span><span class="lineCov">     503315 :                 if (filter.expressions.size() == 0) {</span>
-<span class="lineNum">      80 </span>            :                         // the filter is empty, return its child instead
-<span class="lineNum">      81 </span><span class="lineCov">      12320 :                         return Rewrite(move(filter.children[0]));</span>
-<span class="lineNum">      82 </span>            :                 }
-<span class="lineNum">      83 </span>            :         }
-<span class="lineNum">      84 </span>            :         // recursively rewrite the children of the current node as well
-<span class="lineNum">      85 </span><span class="lineCov">   21556506 :         for (size_t i = 0; i &lt; plan-&gt;children.size(); i++) {</span>
-<span class="lineNum">      86 </span><span class="lineCov">    9208741 :                 plan-&gt;children[i] = Rewrite(move(plan-&gt;children[i]));</span>
-<span class="lineNum">      87 </span>            :         }
-<span class="lineNum">      88 </span><span class="lineCov">   12348154 :         return plan;</span>
-<a name="89"><span class="lineNum">      89 </span>            : }</a>
-<span class="lineNum">      90 </span>            : 
-<span class="lineNum">      91 </span><span class="lineCov">         46 : bool SubqueryRewriter::RewriteInClause(LogicalFilter &amp;filter, OperatorExpression *operator_expression,</span>
-<span class="lineNum">      92 </span>            :                                        SubqueryExpression *subquery) {
-<span class="lineNum">      93 </span>            :         // we found a COMPARE_IN/COMPARE_NOT_IN with a subquery
-<span class="lineNum">      94 </span><span class="lineCov">         46 :         if (subquery-&gt;is_correlated) {</span>
-<span class="lineNum">      95 </span>            :                 // correlated subqueries not handled yet for in clause rewrite
-<span class="lineNum">      96 </span><span class="lineNoCov">          0 :                 return false;</span>
-<span class="lineNum">      97 </span>            :         }
-<span class="lineNum">      98 </span>            :         // find the projection
-<span class="lineNum">      99 </span><span class="lineCov">         46 :         auto node = GetProjection(subquery-&gt;op.get());</span>
-<span class="lineNum">     100 </span>            : 
-<span class="lineNum">     101 </span>            :         // convert the expression into a semi-join or anti-join
-<span class="lineNum">     102 </span>            :         // first figure out the join type
-<span class="lineNum">     103 </span><span class="lineCov">         46 :         JoinType type;</span>
-<span class="lineNum">     104 </span><span class="lineCov">         46 :         if (operator_expression-&gt;type == ExpressionType::COMPARE_IN) {</span>
-<span class="lineNum">     105 </span><span class="lineCov">         43 :                 type = JoinType::SEMI;</span>
-<span class="lineNum">     106 </span>            :         } else { /* COMPARE_NOT_IN */
-<span class="lineNum">     107 </span><span class="lineCov">          3 :                 assert(operator_expression-&gt;type == ExpressionType::COMPARE_NOT_IN);</span>
-<span class="lineNum">     108 </span><span class="lineCov">          3 :                 type = JoinType::ANTI;</span>
-<span class="lineNum">     109 </span>            :         }
-<span class="lineNum">     110 </span>            : 
-<span class="lineNum">     111 </span>            :         // generate a table index for the new subquery
-<span class="lineNum">     112 </span><span class="lineCov">         46 :         auto subquery_table_index = context.GenerateTableIndex();</span>
-<span class="lineNum">     113 </span>            : 
-<span class="lineNum">     114 </span>            :         // create the join condition
-<span class="lineNum">     115 </span><span class="lineCov">         92 :         JoinCondition condition;</span>
-<span class="lineNum">     116 </span>            :         // it is between the left_expression of the IN clause
-<span class="lineNum">     117 </span><span class="lineCov">         46 :         condition.left = move(operator_expression-&gt;children[0]);</span>
-<span class="lineNum">     118 </span>            :         // and the first column of the subquery
-<span class="lineNum">     119 </span><span class="lineCov">         46 :         assert(node-&gt;expressions.size() &gt; 0);</span>
-<span class="lineNum">     120 </span><span class="lineCov">         46 :         condition.right =</span>
-<span class="lineNum">     121 </span><span class="lineCov">         46 :             make_unique&lt;ColumnRefExpression&gt;(node-&gt;expressions[0]-&gt;return_type, ColumnBinding(subquery_table_index, 0));</span>
-<span class="lineNum">     122 </span><span class="lineCov">         46 :         condition.comparison = ExpressionType::COMPARE_EQUAL;</span>
-<span class="lineNum">     123 </span>            : 
-<span class="lineNum">     124 </span>            :         // now convert the subquery expression into a proper subquery
-<span class="lineNum">     125 </span><span class="lineCov">         92 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
-<span class="lineNum">     126 </span><span class="lineCov">         46 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
-<span class="lineNum">     127 </span>            : 
-<span class="lineNum">     128 </span>            :         // create the join between the new subquery and the child of the filter
-<span class="lineNum">     129 </span><span class="lineCov">         46 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
-<span class="lineNum">     130 </span><span class="lineCov">         46 :         join-&gt;children.push_back(move(filter.children[0]));</span>
-<span class="lineNum">     131 </span><span class="lineCov">         46 :         join-&gt;children.push_back(move(table_subquery));</span>
-<span class="lineNum">     132 </span><span class="lineCov">         46 :         join-&gt;conditions.push_back(move(condition));</span>
-<span class="lineNum">     133 </span>            : 
-<span class="lineNum">     134 </span>            :         // finally we remove the original in-expression from the filter
-<span class="lineNum">     135 </span><span class="lineCov">         46 :         filter.children[0] = move(join);</span>
-<span class="lineNum">     136 </span><span class="lineCov">         46 :         return true;</span>
-<a name="137"><span class="lineNum">     137 </span>            : }</a>
-<span class="lineNum">     138 </span>            : 
-<span class="lineNum">     139 </span><span class="lineCov">        485 : bool SubqueryRewriter::RewriteExistsClause(LogicalFilter &amp;filter, OperatorExpression *exists,</span>
-<span class="lineNum">     140 </span>            :                                            SubqueryExpression *subquery) {
-<span class="lineNum">     141 </span>            :         // Only rewrite correlated exists
-<span class="lineNum">     142 </span>            :         // Non-correlated exists should be rewritten in a different way
-<span class="lineNum">     143 </span>            :         // Because either (1) the whole result is empty, or (2) it's a NOP operation
-<span class="lineNum">     144 </span><span class="lineCov">        485 :         if (!subquery-&gt;is_correlated) {</span>
-<span class="lineNum">     145 </span><span class="lineNoCov">          0 :                 return false;</span>
-<span class="lineNum">     146 </span>            :         }
-<span class="lineNum">     147 </span>            : 
-<span class="lineNum">     148 </span>            :         // find the projection
-<span class="lineNum">     149 </span><span class="lineCov">        485 :         auto node = GetProjection(subquery-&gt;op.get());</span>
-<span class="lineNum">     150 </span><span class="lineCov">        485 :         if (node-&gt;type != LogicalOperatorType::PROJECTION) {</span>
-<span class="lineNum">     151 </span>            :                 // only know how to rewrite normal projections in EXISTS clause
-<span class="lineNum">     152 </span><span class="lineNoCov">          0 :                 return false;</span>
-<span class="lineNum">     153 </span>            :         }
-<span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span>            :         // figure out the join type
-<span class="lineNum">     156 </span><span class="lineCov">        485 :         JoinType type;</span>
-<span class="lineNum">     157 </span><span class="lineCov">        485 :         if (exists-&gt;type == ExpressionType::OPERATOR_EXISTS) {</span>
-<span class="lineNum">     158 </span><span class="lineCov">        471 :                 type = JoinType::SEMI;</span>
-<span class="lineNum">     159 </span>            :         } else { /* OPERATOR_NOT_EXISTS */
-<span class="lineNum">     160 </span><span class="lineCov">         14 :                 assert(exists-&gt;type == ExpressionType::OPERATOR_NOT_EXISTS);</span>
-<span class="lineNum">     161 </span><span class="lineCov">         14 :                 type = JoinType::ANTI;</span>
-<span class="lineNum">     162 </span>            :         }
-<span class="lineNum">     163 </span>            : 
-<span class="lineNum">     164 </span>            :         // now we turn a subquery in the WHERE clause into a &quot;proper&quot; subquery
-<span class="lineNum">     165 </span>            :         // hence we need to get a new table index from the BindContext
-<span class="lineNum">     166 </span><span class="lineCov">        485 :         auto subquery_table_index = context.GenerateTableIndex();</span>
-<span class="lineNum">     167 </span>            : 
-<span class="lineNum">     168 </span>            :         // step 2: find correlations to add to the list of join conditions
-<span class="lineNum">     169 </span><span class="lineCov">        970 :         vector&lt;JoinCondition&gt; join_conditions;</span>
-<span class="lineNum">     170 </span><span class="lineCov">        485 :         ExtractCorrelatedExpressions(node, subquery, subquery_table_index, join_conditions);</span>
-<span class="lineNum">     171 </span>            : 
-<span class="lineNum">     172 </span>            :         // unlike equality comparison with subquery we only have the correlated
-<span class="lineNum">     173 </span>            :         // expressions as join condition
-<span class="lineNum">     174 </span><span class="lineCov">        485 :         if (join_conditions.size() == 0) {</span>
-<span class="lineNum">     175 </span><span class="lineCov">          6 :                 return false;</span>
-<span class="lineNum">     176 </span>            :         }
-<span class="lineNum">     177 </span><span class="lineCov">        479 :         bool has_only_inequality = true;</span>
-<span class="lineNum">     178 </span><span class="lineCov">        487 :         for (auto &amp;condition : join_conditions) {</span>
-<span class="lineNum">     179 </span><span class="lineCov">        487 :                 if (condition.comparison != ExpressionType::COMPARE_NOTEQUAL) {</span>
-<span class="lineNum">     180 </span><span class="lineCov">        479 :                         has_only_inequality = false;</span>
-<span class="lineNum">     181 </span><span class="lineCov">        479 :                         break;</span>
-<span class="lineNum">     182 </span>            :                 }
-<span class="lineNum">     183 </span>            :         }
-<span class="lineNum">     184 </span><span class="lineCov">        479 :         if (has_only_inequality) {</span>
-<span class="lineNum">     185 </span>            :                 // only inequality comparisons
-<span class="lineNum">     186 </span>            :                 // we flip them to equality comparisons and invert the join
-<span class="lineNum">     187 </span>            :                 // this allows us to use a hash join
-<span class="lineNum">     188 </span><span class="lineNoCov">          0 :                 for (auto &amp;condition : join_conditions) {</span>
-<span class="lineNum">     189 </span><span class="lineNoCov">          0 :                         condition.comparison = ExpressionType::COMPARE_EQUAL;</span>
-<span class="lineNum">     190 </span>            :                 }
-<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 if (type == JoinType::SEMI) {</span>
-<span class="lineNum">     192 </span><span class="lineNoCov">          0 :                         type = JoinType::ANTI;</span>
-<span class="lineNum">     193 </span>            :                 } else {
-<span class="lineNum">     194 </span><span class="lineNoCov">          0 :                         type = JoinType::SEMI;</span>
-<span class="lineNum">     195 </span>            :                 }
-<span class="lineNum">     196 </span>            :         }
-<span class="lineNum">     197 </span>            : 
-<span class="lineNum">     198 </span>            :         // now we add join between the filter and the subquery
-<span class="lineNum">     199 </span><span class="lineCov">        479 :         assert(filter.children.size() == 1);</span>
-<span class="lineNum">     200 </span>            : 
-<span class="lineNum">     201 </span><span class="lineCov">        958 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
-<span class="lineNum">     202 </span><span class="lineCov">        479 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
-<span class="lineNum">     203 </span>            : 
-<span class="lineNum">     204 </span><span class="lineCov">        479 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
-<span class="lineNum">     205 </span><span class="lineCov">        479 :         join-&gt;children.push_back(move(filter.children[0]));</span>
-<span class="lineNum">     206 </span><span class="lineCov">        479 :         join-&gt;children.push_back(move(table_subquery));</span>
-<span class="lineNum">     207 </span><span class="lineCov">        479 :         join-&gt;conditions = move(join_conditions);</span>
-<span class="lineNum">     208 </span>            : 
-<span class="lineNum">     209 </span><span class="lineCov">        479 :         filter.children[0] = move(join);</span>
-<span class="lineNum">     210 </span>            : 
-<span class="lineNum">     211 </span>            :         // finally we remove the original equality expression from the filter
-<span class="lineNum">     212 </span><span class="lineCov">        479 :         return true;</span>
-<a name="213"><span class="lineNum">     213 </span>            : }</a>
-<span class="lineNum">     214 </span>            : 
-<span class="lineNum">     215 </span><span class="lineCov">         45 : bool SubqueryRewriter::RewriteSubqueryComparison(LogicalFilter &amp;filter, ComparisonExpression *comparison,</span>
-<span class="lineNum">     216 </span>            :                                                  SubqueryExpression *subquery) {
-<span class="lineNum">     217 </span>            :         // rewrite a comparison with a subquery (e.g. A == (SUBQUERY))
-<span class="lineNum">     218 </span>            :         // step 1: check that subquery is a projection
-<span class="lineNum">     219 </span><span class="lineCov">         45 :         auto node = GetProjection(subquery-&gt;op.get());</span>
-<span class="lineNum">     220 </span><span class="lineCov">         45 :         if (node-&gt;type != LogicalOperatorType::PROJECTION) {</span>
-<span class="lineNum">     221 </span><span class="lineNoCov">          0 :                 return false;</span>
-<span class="lineNum">     222 </span>            :         }
-<span class="lineNum">     223 </span><span class="lineCov">         45 :         if (node-&gt;children[0]-&gt;type != LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
-<span class="lineNum">     224 </span><span class="lineCov">         22 :                 return false;</span>
-<span class="lineNum">     225 </span>            :         }
-<span class="lineNum">     226 </span><span class="lineCov">         23 :         auto proj = (LogicalProjection *)node;</span>
-<span class="lineNum">     227 </span><span class="lineCov">         23 :         auto aggr = (LogicalAggregate *)node-&gt;children[0].get();</span>
-<span class="lineNum">     228 </span>            : 
-<span class="lineNum">     229 </span>            :         // now we turn a subquery in the WHERE clause into a &quot;proper&quot; subquery
-<span class="lineNum">     230 </span>            :         // hence we need to get a new table index from the BindContext
-<span class="lineNum">     231 </span><span class="lineCov">         23 :         auto subquery_table_index = context.GenerateTableIndex();</span>
-<span class="lineNum">     232 </span>            : 
-<span class="lineNum">     233 </span><span class="lineCov">         23 :         size_t old_groups = aggr-&gt;groups.size();</span>
-<span class="lineNum">     234 </span>            :         // step 2: find correlations to add to the list of join conditions
-<span class="lineNum">     235 </span><span class="lineCov">         46 :         vector&lt;JoinCondition&gt; join_conditions;</span>
-<span class="lineNum">     236 </span><span class="lineCov">         23 :         ExtractCorrelatedExpressions(aggr, subquery, subquery_table_index, join_conditions);</span>
-<span class="lineNum">     237 </span>            : 
-<span class="lineNum">     238 </span>            :         // we might have added new groups
-<span class="lineNum">     239 </span>            :         // since groups occur BEFORE aggregates in the output of the aggregate, we need to shift column references to
-<span class="lineNum">     240 </span>            :         // aggregates by the amount of new groups we added
-<span class="lineNum">     241 </span><span class="lineCov">         23 :         Expression::EnumerateExpressions(&amp;proj-&gt;expressions[0], ExpressionType::COLUMN_REF,</span>
-<span class="lineNum">     242 </span>            :                                          [&amp;](unique_ptr&lt;Expression&gt; expr) -&gt; unique_ptr&lt;Expression&gt; {
-<span class="lineNum">     243 </span>            :                                                  auto colref = (ColumnRefExpression *)expr.get();
-<span class="lineNum">     244 </span>            :                                                  if (colref-&gt;index &gt;= old_groups) {
-<span class="lineNum">     245 </span>            :                                                          colref-&gt;index += aggr-&gt;groups.size() - old_groups;
-<span class="lineNum">     246 </span>            :                                                  }
-<span class="lineNum">     247 </span>            :                                                  return expr;
-<span class="lineNum">     248 </span>            :                                          });
-<span class="lineNum">     249 </span>            :         // for each of the new join conditions with correlated expressions we added we have to:
-<span class="lineNum">     250 </span>            :         // (1) project the group column in the projection
-<span class="lineNum">     251 </span>            :         // (2) set the right join condition so it references the group column
-<span class="lineNum">     252 </span><span class="lineCov">         38 :         for (size_t i = 0; i &lt; join_conditions.size(); i++) {</span>
-<span class="lineNum">     253 </span><span class="lineCov">         15 :                 auto type = aggr-&gt;groups[old_groups + i]-&gt;return_type;</span>
-<span class="lineNum">     254 </span>            :                 // create the grouping column
-<span class="lineNum">     255 </span><span class="lineCov">         15 :                 proj-&gt;expressions.push_back(make_unique&lt;ColumnRefExpression&gt;(type, old_groups + i));</span>
-<span class="lineNum">     256 </span>            :                 // now make the join condition reference this column
-<span class="lineNum">     257 </span><span class="lineCov">         30 :                 join_conditions[i].right =</span>
-<span class="lineNum">     258 </span><span class="lineCov">         30 :                     make_unique&lt;ColumnRefExpression&gt;(type, ColumnBinding(subquery_table_index, proj-&gt;expressions.size() - 1));</span>
-<span class="lineNum">     259 </span>            :         }
-<span class="lineNum">     260 </span>            : 
-<span class="lineNum">     261 </span>            :         // create the join condition based on the equality expression
-<span class="lineNum">     262 </span>            :         // first is the original condition
-<span class="lineNum">     263 </span><span class="lineCov">         46 :         JoinCondition condition;</span>
-<span class="lineNum">     264 </span>            :         condition.left =
-<span class="lineNum">     265 </span><span class="lineCov">         23 :             subquery == comparison-&gt;children[0].get() ? move(comparison-&gt;children[1]) : move(comparison-&gt;children[0]);</span>
-<span class="lineNum">     266 </span>            :         // the right condition is the aggregate of the subquery
-<span class="lineNum">     267 </span><span class="lineCov">         23 :         condition.right =</span>
-<span class="lineNum">     268 </span><span class="lineCov">         23 :             make_unique&lt;ColumnRefExpression&gt;(proj-&gt;expressions[0]-&gt;return_type, ColumnBinding(subquery_table_index, 0));</span>
-<span class="lineNum">     269 </span><span class="lineCov">         23 :         condition.comparison = comparison-&gt;type;</span>
-<span class="lineNum">     270 </span>            : 
-<span class="lineNum">     271 </span>            :         // now we add join between the filter and the subquery
-<span class="lineNum">     272 </span><span class="lineCov">         23 :         assert(filter.children.size() == 1);</span>
+<span class="lineNum">      11 </span>            : bool ExtractCorrelatedExpressions(LogicalOperator *op, SubqueryExpression *subquery, size_t subquery_table_index,
+<a name="12"><span class="lineNum">      12 </span>            :                                   vector&lt;JoinCondition&gt; &amp;join_conditions);</a>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">   12358578 : unique_ptr&lt;LogicalOperator&gt; SubqueryRewriter::Rewrite(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">   12358578 :         if (plan-&gt;type == LogicalOperatorType::FILTER) {</span>
+<span class="lineNum">      16 </span>            :                 // rewrite subqueries within a filter
+<span class="lineNum">      17 </span><span class="lineCov">     506660 :                 auto &amp;filter = (LogicalFilter &amp;)*plan;</span>
+<span class="lineNum">      18 </span>            :                 // now rewrite subqueries within the filter
+<span class="lineNum">      19 </span><span class="lineCov">    1017966 :                 for (size_t i = 0; i &lt; filter.expressions.size(); i++) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     514434 :                         auto &amp;expr = *filter.expressions[i];</span>
+<span class="lineNum">      21 </span>            :                         // check if we know how to rewrite this type of subquery
+<span class="lineNum">      22 </span><span class="lineCov">     514338 :                         switch (expr.type) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">      36833 :                         case ExpressionType::COMPARE_IN:</span>
+<span class="lineNum">      24 </span>            :                         case ExpressionType::COMPARE_NOT_IN:
+<span class="lineNum">      25 </span>            :                                 // (NOT) IN, check if we are dealing with a subquery
+<span class="lineNum">      26 </span><span class="lineCov">      36833 :                                 if (expr.children.size() != 2) {</span>
+<span class="lineNum">      27 </span>            :                                         // only constant lists have multiple elements
+<span class="lineNum">      28 </span><span class="lineCov">      12314 :                                         break;</span>
+<span class="lineNum">      29 </span>            :                                 }
+<span class="lineNum">      30 </span><span class="lineCov">      24519 :                                 if (expr.children[1]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
+<span class="lineNum">      31 </span>            :                                         // IN (SUBQUERY), rewrite
+<span class="lineNum">      32 </span><span class="lineCov">         46 :                                         if (RewriteInClause(filter, (OperatorExpression *)filter.expressions[i].get(),</span>
+<span class="lineNum">      33 </span><span class="lineCov">         46 :                                                             (SubqueryExpression *)expr.children[1].get())) {</span>
+<span class="lineNum">      34 </span>            :                                                 // successful rewrite, remove the expression from the set of filter expressions
+<span class="lineNum">      35 </span><span class="lineCov">         46 :                                                 filter.expressions.erase(filter.expressions.begin() + i);</span>
+<span class="lineNum">      36 </span><span class="lineCov">         46 :                                                 i--;</span>
+<span class="lineNum">      37 </span>            :                                         }
+<span class="lineNum">      38 </span>            :                                 }
+<span class="lineNum">      39 </span><span class="lineCov">      24519 :                                 break;</span>
+<span class="lineNum">      40 </span><span class="lineCov">        485 :                         case ExpressionType::OPERATOR_EXISTS:</span>
+<span class="lineNum">      41 </span>            :                         case ExpressionType::OPERATOR_NOT_EXISTS:
+<span class="lineNum">      42 </span>            :                                 // NOT (EXISTS), check if we are dealing with a subquery
+<span class="lineNum">      43 </span><span class="lineCov">        485 :                                 assert(expr.children.size() == 1);</span>
+<span class="lineNum">      44 </span><span class="lineCov">        485 :                                 if (expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
+<span class="lineNum">      45 </span>            :                                         // EXISTS (SUBQUERY), rewrite
+<span class="lineNum">      46 </span><span class="lineCov">        485 :                                         if (RewriteExistsClause(filter, (OperatorExpression *)filter.expressions[i].get(),</span>
+<span class="lineNum">      47 </span><span class="lineCov">        485 :                                                                 (SubqueryExpression *)expr.children[0].get())) {</span>
+<span class="lineNum">      48 </span>            :                                                 // successful rewrite, remove the expression from the set of filter expressions
+<span class="lineNum">      49 </span><span class="lineCov">        479 :                                                 filter.expressions.erase(filter.expressions.begin() + i);</span>
+<span class="lineNum">      50 </span><span class="lineCov">        479 :                                                 i--;</span>
+<span class="lineNum">      51 </span>            :                                         }
+<span class="lineNum">      52 </span>            :                                 }
+<span class="lineNum">      53 </span><span class="lineCov">        485 :                                 break;</span>
+<span class="lineNum">      54 </span><span class="lineCov">     186890 :                         case ExpressionType::COMPARE_EQUAL:</span>
+<span class="lineNum">      55 </span>            :                         case ExpressionType::COMPARE_NOTEQUAL:
+<span class="lineNum">      56 </span>            :                         case ExpressionType::COMPARE_LESSTHAN:
+<span class="lineNum">      57 </span>            :                         case ExpressionType::COMPARE_GREATERTHAN:
+<span class="lineNum">      58 </span>            :                         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
+<span class="lineNum">      59 </span>            :                         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:
+<span class="lineNum">      60 </span>            :                                 // comparison, check if we are dealing with a subquery
+<span class="lineNum">      61 </span><span class="lineCov">     186890 :                                 assert(expr.children.size() == 2);</span>
+<span class="lineNum">      62 </span><span class="lineCov">     376966 :                                 if (expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ||</span>
+<span class="lineNum">      63 </span><span class="lineCov">     189394 :                                     expr.children[1]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">         47 :                                         int subquery_index = expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ? 0 : 1;</span>
+<span class="lineNum">      65 </span>            :                                         // Comparison with subquery, rewrite
+<span class="lineNum">      66 </span><span class="lineCov">         47 :                                         if (RewriteSubqueryComparison(filter, (ComparisonExpression *)filter.expressions[i].get(),</span>
+<span class="lineNum">      67 </span><span class="lineCov">         47 :                                                                       (SubqueryExpression *)expr.children[subquery_index].get())) {</span>
+<span class="lineNum">      68 </span>            :                                                 // successful rewrite, remove the expression from the set of filter expressions
+<span class="lineNum">      69 </span><span class="lineCov">         25 :                                                 filter.expressions.erase(filter.expressions.begin() + i);</span>
+<span class="lineNum">      70 </span><span class="lineCov">         25 :                                                 i--;</span>
+<span class="lineNum">      71 </span>            :                                         }
+<span class="lineNum">      72 </span>            :                                 }
+<span class="lineNum">      73 </span><span class="lineCov">     189713 :                                 break;</span>
+<span class="lineNum">      74 </span><span class="lineCov">     290130 :                         default:</span>
+<span class="lineNum">      75 </span><span class="lineCov">     290130 :                                 break;</span>
+<span class="lineNum">      76 </span>            :                         }
+<span class="lineNum">      77 </span>            :                 }
+<span class="lineNum">      78 </span><span class="lineCov">     503097 :                 if (filter.expressions.size() == 0) {</span>
+<span class="lineNum">      79 </span>            :                         // the filter is empty, return its child instead
+<span class="lineNum">      80 </span><span class="lineCov">      12456 :                         return Rewrite(move(filter.children[0]));</span>
+<span class="lineNum">      81 </span>            :                 }
+<span class="lineNum">      82 </span>            :         }
+<span class="lineNum">      83 </span>            :         // recursively rewrite the children of the current node as well
+<span class="lineNum">      84 </span><span class="lineCov">   21557926 :         for (size_t i = 0; i &lt; plan-&gt;children.size(); i++) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">    9209390 :                 plan-&gt;children[i] = Rewrite(move(plan-&gt;children[i]));</span>
+<span class="lineNum">      86 </span>            :         }
+<span class="lineNum">      87 </span><span class="lineCov">   12348717 :         return plan;</span>
+<a name="88"><span class="lineNum">      88 </span>            : }</a>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineCov">         46 : bool SubqueryRewriter::RewriteInClause(LogicalFilter &amp;filter, OperatorExpression *operator_expression,</span>
+<span class="lineNum">      91 </span>            :                                        SubqueryExpression *subquery) {
+<span class="lineNum">      92 </span>            :         // we found a COMPARE_IN/COMPARE_NOT_IN with a subquery
+<span class="lineNum">      93 </span><span class="lineCov">         46 :         if (subquery-&gt;is_correlated) {</span>
+<span class="lineNum">      94 </span>            :                 // correlated subqueries not handled yet for in clause rewrite
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">      96 </span>            :         }
+<span class="lineNum">      97 </span>            :         // find the projection
+<span class="lineNum">      98 </span><span class="lineCov">         46 :         auto node = GetProjection(subquery-&gt;op.get());</span>
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :         // convert the expression into a semi-join or anti-join
+<span class="lineNum">     101 </span>            :         // first figure out the join type
+<span class="lineNum">     102 </span><span class="lineCov">         46 :         JoinType type;</span>
+<span class="lineNum">     103 </span><span class="lineCov">         46 :         if (operator_expression-&gt;type == ExpressionType::COMPARE_IN) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">         43 :                 type = JoinType::SEMI;</span>
+<span class="lineNum">     105 </span>            :         } else { /* COMPARE_NOT_IN */
+<span class="lineNum">     106 </span><span class="lineCov">          3 :                 assert(operator_expression-&gt;type == ExpressionType::COMPARE_NOT_IN);</span>
+<span class="lineNum">     107 </span><span class="lineCov">          3 :                 type = JoinType::ANTI;</span>
+<span class="lineNum">     108 </span>            :         }
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span>            :         // generate a table index for the new subquery
+<span class="lineNum">     111 </span><span class="lineCov">         46 :         auto subquery_table_index = context.GenerateTableIndex();</span>
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            :         // create the join condition
+<span class="lineNum">     114 </span><span class="lineCov">         92 :         JoinCondition condition;</span>
+<span class="lineNum">     115 </span>            :         // it is between the left_expression of the IN clause
+<span class="lineNum">     116 </span><span class="lineCov">         46 :         condition.left = move(operator_expression-&gt;children[0]);</span>
+<span class="lineNum">     117 </span>            :         // and the first column of the subquery
+<span class="lineNum">     118 </span><span class="lineCov">         46 :         assert(node-&gt;expressions.size() &gt; 0);</span>
+<span class="lineNum">     119 </span><span class="lineCov">         46 :         condition.right =</span>
+<span class="lineNum">     120 </span><span class="lineCov">         46 :             make_unique&lt;ColumnRefExpression&gt;(node-&gt;expressions[0]-&gt;return_type, ColumnBinding(subquery_table_index, 0));</span>
+<span class="lineNum">     121 </span><span class="lineCov">         46 :         condition.comparison = ExpressionType::COMPARE_EQUAL;</span>
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span>            :         // now convert the subquery expression into a proper subquery
+<span class="lineNum">     124 </span><span class="lineCov">         92 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
+<span class="lineNum">     125 </span><span class="lineCov">         46 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            :         // create the join between the new subquery and the child of the filter
+<span class="lineNum">     128 </span><span class="lineCov">         46 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         46 :         join-&gt;children.push_back(move(filter.children[0]));</span>
+<span class="lineNum">     130 </span><span class="lineCov">         46 :         join-&gt;children.push_back(move(table_subquery));</span>
+<span class="lineNum">     131 </span><span class="lineCov">         46 :         join-&gt;conditions.push_back(move(condition));</span>
+<span class="lineNum">     132 </span>            : 
+<span class="lineNum">     133 </span>            :         // finally we remove the original in-expression from the filter
+<span class="lineNum">     134 </span><span class="lineCov">         46 :         filter.children[0] = move(join);</span>
+<span class="lineNum">     135 </span><span class="lineCov">         46 :         return true;</span>
+<a name="136"><span class="lineNum">     136 </span>            : }</a>
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span><span class="lineCov">        485 : bool SubqueryRewriter::RewriteExistsClause(LogicalFilter &amp;filter, OperatorExpression *exists,</span>
+<span class="lineNum">     139 </span>            :                                            SubqueryExpression *subquery) {
+<span class="lineNum">     140 </span>            :         // Only rewrite correlated exists
+<span class="lineNum">     141 </span>            :         // Non-correlated exists should be rewritten in a different way
+<span class="lineNum">     142 </span>            :         // Because either (1) the whole result is empty, or (2) it's a NOP operation
+<span class="lineNum">     143 </span><span class="lineCov">        485 :         if (!subquery-&gt;is_correlated) {</span>
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     145 </span>            :         }
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            :         // find the projection
+<span class="lineNum">     148 </span><span class="lineCov">        485 :         auto node = GetProjection(subquery-&gt;op.get());</span>
+<span class="lineNum">     149 </span><span class="lineCov">        485 :         if (node-&gt;type != LogicalOperatorType::PROJECTION) {</span>
+<span class="lineNum">     150 </span>            :                 // only know how to rewrite normal projections in EXISTS clause
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     152 </span>            :         }
+<span class="lineNum">     153 </span>            : 
+<span class="lineNum">     154 </span>            :         // figure out the join type
+<span class="lineNum">     155 </span><span class="lineCov">        485 :         JoinType type;</span>
+<span class="lineNum">     156 </span><span class="lineCov">        485 :         if (exists-&gt;type == ExpressionType::OPERATOR_EXISTS) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">        471 :                 type = JoinType::SEMI;</span>
+<span class="lineNum">     158 </span>            :         } else { /* OPERATOR_NOT_EXISTS */
+<span class="lineNum">     159 </span><span class="lineCov">         14 :                 assert(exists-&gt;type == ExpressionType::OPERATOR_NOT_EXISTS);</span>
+<span class="lineNum">     160 </span><span class="lineCov">         14 :                 type = JoinType::ANTI;</span>
+<span class="lineNum">     161 </span>            :         }
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span>            :         // now we turn a subquery in the WHERE clause into a &quot;proper&quot; subquery
+<span class="lineNum">     164 </span>            :         // hence we need to get a new table index from the BindContext
+<span class="lineNum">     165 </span><span class="lineCov">        485 :         auto subquery_table_index = context.GenerateTableIndex();</span>
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span>            :         // step 2: find correlations to add to the list of join conditions
+<span class="lineNum">     168 </span><span class="lineCov">        970 :         vector&lt;JoinCondition&gt; join_conditions;</span>
+<span class="lineNum">     169 </span><span class="lineCov">        485 :         if (!ExtractCorrelatedExpressions(node, subquery, subquery_table_index, join_conditions)) {</span>
+<span class="lineNum">     170 </span><span class="lineCov">          6 :                 return false;</span>
+<span class="lineNum">     171 </span>            :         }
+<span class="lineNum">     172 </span>            : 
+<span class="lineNum">     173 </span>            :         // unlike equality comparison with subquery we only have the correlated
+<span class="lineNum">     174 </span>            :         // expressions as join condition
+<span class="lineNum">     175 </span><span class="lineCov">        479 :         if (join_conditions.size() == 0) {</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     177 </span>            :         }
+<span class="lineNum">     178 </span><span class="lineCov">        479 :         bool has_only_inequality = true;</span>
+<span class="lineNum">     179 </span><span class="lineCov">        487 :         for (auto &amp;condition : join_conditions) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">        487 :                 if (condition.comparison != ExpressionType::COMPARE_NOTEQUAL) {</span>
+<span class="lineNum">     181 </span><span class="lineCov">        479 :                         has_only_inequality = false;</span>
+<span class="lineNum">     182 </span><span class="lineCov">        479 :                         break;</span>
+<span class="lineNum">     183 </span>            :                 }
+<span class="lineNum">     184 </span>            :         }
+<span class="lineNum">     185 </span><span class="lineCov">        479 :         if (has_only_inequality) {</span>
+<span class="lineNum">     186 </span>            :                 // only inequality comparisons
+<span class="lineNum">     187 </span>            :                 // we flip them to equality comparisons and invert the join
+<span class="lineNum">     188 </span>            :                 // this allows us to use a hash join
+<span class="lineNum">     189 </span><span class="lineNoCov">          0 :                 for (auto &amp;condition : join_conditions) {</span>
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :                         condition.comparison = ExpressionType::COMPARE_EQUAL;</span>
+<span class="lineNum">     191 </span>            :                 }
+<span class="lineNum">     192 </span><span class="lineNoCov">          0 :                 if (type == JoinType::SEMI) {</span>
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :                         type = JoinType::ANTI;</span>
+<span class="lineNum">     194 </span>            :                 } else {
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :                         type = JoinType::SEMI;</span>
+<span class="lineNum">     196 </span>            :                 }
+<span class="lineNum">     197 </span>            :         }
+<span class="lineNum">     198 </span>            : 
+<span class="lineNum">     199 </span>            :         // now we add join between the filter and the subquery
+<span class="lineNum">     200 </span><span class="lineCov">        479 :         assert(filter.children.size() == 1);</span>
+<span class="lineNum">     201 </span>            : 
+<span class="lineNum">     202 </span><span class="lineCov">        958 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, node-&gt;expressions.size());</span>
+<span class="lineNum">     203 </span><span class="lineCov">        479 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span><span class="lineCov">        479 :         auto join = make_unique&lt;LogicalJoin&gt;(type);</span>
+<span class="lineNum">     206 </span><span class="lineCov">        479 :         join-&gt;children.push_back(move(filter.children[0]));</span>
+<span class="lineNum">     207 </span><span class="lineCov">        479 :         join-&gt;children.push_back(move(table_subquery));</span>
+<span class="lineNum">     208 </span><span class="lineCov">        479 :         join-&gt;conditions = move(join_conditions);</span>
+<span class="lineNum">     209 </span>            : 
+<span class="lineNum">     210 </span><span class="lineCov">        479 :         filter.children[0] = move(join);</span>
+<span class="lineNum">     211 </span>            : 
+<span class="lineNum">     212 </span>            :         // finally we remove the original equality expression from the filter
+<span class="lineNum">     213 </span><span class="lineCov">        479 :         return true;</span>
+<a name="214"><span class="lineNum">     214 </span>            : }</a>
+<span class="lineNum">     215 </span>            : 
+<span class="lineNum">     216 </span><span class="lineCov">         47 : bool SubqueryRewriter::RewriteSubqueryComparison(LogicalFilter &amp;filter, ComparisonExpression *comparison,</span>
+<span class="lineNum">     217 </span>            :                                                  SubqueryExpression *subquery) {
+<span class="lineNum">     218 </span>            :         // rewrite a comparison with a subquery (e.g. A == (SUBQUERY))
+<span class="lineNum">     219 </span>            :         // step 1: check that subquery is a projection
+<span class="lineNum">     220 </span><span class="lineCov">         47 :         auto node = GetProjection(subquery-&gt;op.get());</span>
+<span class="lineNum">     221 </span><span class="lineCov">         47 :         if (node-&gt;type != LogicalOperatorType::PROJECTION) {</span>
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     223 </span>            :         }
+<span class="lineNum">     224 </span><span class="lineCov">         47 :         if (node-&gt;children[0]-&gt;type != LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
+<span class="lineNum">     225 </span><span class="lineCov">         22 :                 return false;</span>
+<span class="lineNum">     226 </span>            :         }
+<span class="lineNum">     227 </span><span class="lineCov">         25 :         auto proj = (LogicalProjection *)node;</span>
+<span class="lineNum">     228 </span><span class="lineCov">         25 :         auto aggr = (LogicalAggregate *)node-&gt;children[0].get();</span>
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span>            :         // now we turn a subquery in the WHERE clause into a &quot;proper&quot; subquery
+<span class="lineNum">     231 </span>            :         // hence we need to get a new table index from the BindContext
+<span class="lineNum">     232 </span><span class="lineCov">         25 :         auto subquery_table_index = context.GenerateTableIndex();</span>
+<span class="lineNum">     233 </span>            : 
+<span class="lineNum">     234 </span><span class="lineCov">         25 :         size_t old_groups = aggr-&gt;groups.size();</span>
+<span class="lineNum">     235 </span>            :         // step 2: find correlations to add to the list of join conditions
+<span class="lineNum">     236 </span><span class="lineCov">         50 :         vector&lt;JoinCondition&gt; join_conditions;</span>
+<span class="lineNum">     237 </span><span class="lineCov">         25 :         if (!ExtractCorrelatedExpressions(aggr, subquery, subquery_table_index, join_conditions)) {</span>
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     239 </span>            :         }
+<span class="lineNum">     240 </span>            : 
+<span class="lineNum">     241 </span>            :         // we might have added new groups
+<span class="lineNum">     242 </span>            :         // since groups occur BEFORE aggregates in the output of the aggregate, we need to shift column references to
+<span class="lineNum">     243 </span>            :         // aggregates by the amount of new groups we added
+<span class="lineNum">     244 </span><span class="lineCov">         25 :         Expression::EnumerateExpressions(&amp;proj-&gt;expressions[0], ExpressionType::COLUMN_REF,</span>
+<span class="lineNum">     245 </span>            :                                          [&amp;](unique_ptr&lt;Expression&gt; expr) -&gt; unique_ptr&lt;Expression&gt; {
+<span class="lineNum">     246 </span>            :                                                  auto colref = (ColumnRefExpression *)expr.get();
+<span class="lineNum">     247 </span>            :                                                  if (colref-&gt;index &gt;= old_groups) {
+<span class="lineNum">     248 </span>            :                                                          colref-&gt;index += aggr-&gt;groups.size() - old_groups;
+<span class="lineNum">     249 </span>            :                                                  }
+<span class="lineNum">     250 </span>            :                                                  return expr;
+<span class="lineNum">     251 </span>            :                                          });
+<span class="lineNum">     252 </span>            :         // for each of the new join conditions with correlated expressions we added we have to:
+<span class="lineNum">     253 </span>            :         // (1) project the group column in the projection
+<span class="lineNum">     254 </span>            :         // (2) set the right join condition so it references the group column
+<span class="lineNum">     255 </span><span class="lineCov">         42 :         for (size_t i = 0; i &lt; join_conditions.size(); i++) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">         17 :                 auto type = aggr-&gt;groups[old_groups + i]-&gt;return_type;</span>
+<span class="lineNum">     257 </span>            :                 // create the grouping column
+<span class="lineNum">     258 </span><span class="lineCov">         17 :                 proj-&gt;expressions.push_back(make_unique&lt;ColumnRefExpression&gt;(type, old_groups + i));</span>
+<span class="lineNum">     259 </span>            :                 // now make the join condition reference this column
+<span class="lineNum">     260 </span><span class="lineCov">         34 :                 join_conditions[i].right =</span>
+<span class="lineNum">     261 </span><span class="lineCov">         34 :                     make_unique&lt;ColumnRefExpression&gt;(type, ColumnBinding(subquery_table_index, proj-&gt;expressions.size() - 1));</span>
+<span class="lineNum">     262 </span>            :         }
+<span class="lineNum">     263 </span>            : 
+<span class="lineNum">     264 </span>            :         // create the join condition based on the equality expression
+<span class="lineNum">     265 </span>            :         // first is the original condition
+<span class="lineNum">     266 </span><span class="lineCov">         50 :         JoinCondition condition;</span>
+<span class="lineNum">     267 </span>            :         condition.left =
+<span class="lineNum">     268 </span><span class="lineCov">         25 :             subquery == comparison-&gt;children[0].get() ? move(comparison-&gt;children[1]) : move(comparison-&gt;children[0]);</span>
+<span class="lineNum">     269 </span>            :         // the right condition is the aggregate of the subquery
+<span class="lineNum">     270 </span><span class="lineCov">         25 :         condition.right =</span>
+<span class="lineNum">     271 </span><span class="lineCov">         25 :             make_unique&lt;ColumnRefExpression&gt;(proj-&gt;expressions[0]-&gt;return_type, ColumnBinding(subquery_table_index, 0));</span>
+<span class="lineNum">     272 </span><span class="lineCov">         25 :         condition.comparison = comparison-&gt;type;</span>
 <span class="lineNum">     273 </span>            : 
-<span class="lineNum">     274 </span><span class="lineCov">         46 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, proj-&gt;expressions.size());</span>
-<span class="lineNum">     275 </span><span class="lineCov">         23 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
+<span class="lineNum">     274 </span>            :         // now we add join between the filter and the subquery
+<span class="lineNum">     275 </span><span class="lineCov">         25 :         assert(filter.children.size() == 1);</span>
 <span class="lineNum">     276 </span>            : 
-<span class="lineNum">     277 </span><span class="lineCov">         23 :         auto join = make_unique&lt;LogicalJoin&gt;(JoinType::INNER);</span>
-<span class="lineNum">     278 </span><span class="lineCov">         23 :         join-&gt;children.push_back(move(filter.children[0]));</span>
-<span class="lineNum">     279 </span><span class="lineCov">         23 :         join-&gt;children.push_back(move(table_subquery));</span>
-<span class="lineNum">     280 </span><span class="lineCov">         23 :         join-&gt;conditions.push_back(move(condition));</span>
-<span class="lineNum">     281 </span><span class="lineCov">         38 :         for (auto &amp;condition : join_conditions) {</span>
-<span class="lineNum">     282 </span><span class="lineCov">         15 :                 join-&gt;conditions.push_back(move(condition));</span>
-<span class="lineNum">     283 </span>            :         }
-<span class="lineNum">     284 </span>            : 
-<span class="lineNum">     285 </span><span class="lineCov">         23 :         filter.children[0] = move(join);</span>
-<span class="lineNum">     286 </span>            :         // finally we remove the original equality expression from the filter
-<span class="lineNum">     287 </span><span class="lineCov">         23 :         return true;</span>
-<a name="288"><span class="lineNum">     288 </span>            : }</a>
-<span class="lineNum">     289 </span>            : 
-<span class="lineNum">     290 </span><span class="lineCov">        508 : void ExtractCorrelatedExpressions(LogicalOperator *op, SubqueryExpression *subquery, size_t subquery_table_index,</span>
-<span class="lineNum">     291 </span>            :                                   vector&lt;JoinCondition&gt; &amp;join_conditions) {
-<span class="lineNum">     292 </span>            :         // we look through the subquery to find the matching correlation expression
-<span class="lineNum">     293 </span>            :         // using the Column Depth a correlating expression will have a column ref
-<span class="lineNum">     294 </span>            :         // with depth == 0 (belonging to the subquery) and a correlating expression
-<span class="lineNum">     295 </span>            :         // with depth == 1 (belonging to the main expression) we use the matcher to
-<span class="lineNum">     296 </span>            :         // find this comparison
-<span class="lineNum">     297 </span><span class="lineCov">       1016 :         auto equality_rule = make_unique_base&lt;AbstractRuleNode, ComparisonNodeType&gt;();</span>
-<span class="lineNum">     298 </span><span class="lineCov">        508 :         equality_rule-&gt;children.push_back(make_unique&lt;ColumnRefNodeDepth&gt;(0));</span>
-<span class="lineNum">     299 </span><span class="lineCov">        508 :         equality_rule-&gt;children.push_back(make_unique&lt;ColumnRefNodeDepth&gt;(1));</span>
-<span class="lineNum">     300 </span><span class="lineCov">        508 :         equality_rule-&gt;child_policy = ChildPolicy::SOME;</span>
-<span class="lineNum">     301 </span>            : 
-<span class="lineNum">     302 </span><span class="lineCov">       1016 :         auto filter_rule = make_unique&lt;LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
-<span class="lineNum">     303 </span><span class="lineCov">        508 :         filter_rule-&gt;children.push_back(move(equality_rule));</span>
-<span class="lineNum">     304 </span><span class="lineCov">        508 :         filter_rule-&gt;child_policy = ChildPolicy::SOME;</span>
-<span class="lineNum">     305 </span>            : 
-<span class="lineNum">     306 </span>            :         while (true) {
-<span class="lineNum">     307 </span>            :                 // search for a correlating comparison
-<span class="lineNum">     308 </span>            :                 // this is a comparison like e.g. a.A = b.A
-<span class="lineNum">     309 </span>            :                 // where &quot;a&quot; is from the subquery, and &quot;b&quot; from the outer layer
-<span class="lineNum">     310 </span><span class="lineCov">       1018 :                 vector&lt;AbstractOperator&gt; sq_bindings;</span>
-<span class="lineNum">     311 </span><span class="lineCov">       1018 :                 auto subquery_op = AbstractOperator(op);</span>
-<span class="lineNum">     312 </span><span class="lineCov">       6709 :                 for (auto it = subquery_op.begin(); it != subquery_op.end(); it++) {</span>
-<span class="lineNum">     313 </span><span class="lineCov">       5691 :                         if (Rewriter::MatchOperands(filter_rule.get(), *it, sq_bindings)) {</span>
-<span class="lineNum">     314 </span><span class="lineCov">        510 :                                 break;</span>
-<span class="lineNum">     315 </span>            :                         }
-<span class="lineNum">     316 </span>            :                 }
-<span class="lineNum">     317 </span><span class="lineCov">       1018 :                 if (sq_bindings.size() == 0) {</span>
-<span class="lineNum">     318 </span>            :                         // correlated comparison operator not found inside subquery anymore
-<span class="lineNum">     319 </span><span class="lineCov">        508 :                         break;</span>
-<span class="lineNum">     320 </span>            :                 }
-<span class="lineNum">     321 </span>            : 
-<span class="lineNum">     322 </span><span class="lineCov">        510 :                 auto *sq_filter = (LogicalFilter *)sq_bindings[0].value.op;</span>
-<span class="lineNum">     323 </span><span class="lineCov">        510 :                 auto *sq_comp = (ComparisonExpression *)sq_bindings[1].value.expr;</span>
-<span class="lineNum">     324 </span><span class="lineCov">        510 :                 auto *sq_colref_inner = (ColumnRefExpression *)sq_bindings[2].value.expr;</span>
-<span class="lineNum">     325 </span><span class="lineCov">        510 :                 auto *sq_colref_outer = (ColumnRefExpression *)sq_bindings[3].value.expr;</span>
-<span class="lineNum">     326 </span><span class="lineCov">        510 :                 auto comparison_type = sq_comp-&gt;type;</span>
-<span class="lineNum">     327 </span>            : 
-<span class="lineNum">     328 </span><span class="lineCov">        510 :                 auto comp_left =</span>
-<span class="lineNum">     329 </span><span class="lineCov">       1020 :                     make_unique_base&lt;Expression, ColumnRefExpression&gt;(sq_colref_inner-&gt;return_type, sq_colref_inner-&gt;binding);</span>
-<span class="lineNum">     330 </span><span class="lineCov">        510 :                 auto comp_right =</span>
-<span class="lineNum">     331 </span><span class="lineCov">       1020 :                     make_unique_base&lt;Expression, ColumnRefExpression&gt;(sq_colref_outer-&gt;return_type, sq_colref_outer-&gt;binding);</span>
-<span class="lineNum">     332 </span>            : 
-<span class="lineNum">     333 </span>            :                 // index of uncorrelated expression (0 or 1)
-<span class="lineNum">     334 </span><span class="lineCov">        510 :                 size_t uncorrelated_index = sq_comp-&gt;children[0].get() == sq_colref_inner ? 0 : 1;</span>
-<span class="lineNum">     335 </span><span class="lineCov">       1020 :                 auto uncorrelated_expression = move(sq_comp-&gt;children[uncorrelated_index]);</span>
-<span class="lineNum">     336 </span>            :                 // correlated expression
-<span class="lineNum">     337 </span><span class="lineCov">       1020 :                 auto correlated_expression = move(sq_comp-&gt;children[1 - uncorrelated_index]);</span>
-<span class="lineNum">     338 </span>            : 
-<span class="lineNum">     339 </span><span class="lineCov">        510 :                 if (op-&gt;type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
-<span class="lineNum">     340 </span><span class="lineCov">         15 :                         auto aggr = (LogicalAggregate *)op;</span>
-<span class="lineNum">     341 </span>            :                         // now inside the aggregation, we use the uncorrelated column used
-<span class="lineNum">     342 </span>            :                         // in the comparison as both projection and grouping col in subquery
-<span class="lineNum">     343 </span><span class="lineCov">         15 :                         aggr-&gt;groups.push_back(move(uncorrelated_expression));</span>
-<span class="lineNum">     344 </span>            :                 } else {
-<span class="lineNum">     345 </span>            :                         // push the expression into the select list
-<span class="lineNum">     346 </span><span class="lineCov">        495 :                         assert(op-&gt;type == LogicalOperatorType::PROJECTION);</span>
-<span class="lineNum">     347 </span><span class="lineCov">        495 :                         op-&gt;expressions.push_back(move(uncorrelated_expression));</span>
-<span class="lineNum">     348 </span>            :                 }
-<span class="lineNum">     349 </span>            : 
-<span class="lineNum">     350 </span>            :                 // remove the correlated expression from the filter in the subquery
-<span class="lineNum">     351 </span><span class="lineCov">        526 :                 for (size_t i = 0; i &lt; sq_filter-&gt;expressions.size(); i++) {</span>
-<span class="lineNum">     352 </span><span class="lineCov">        526 :                         if (sq_filter-&gt;expressions[i].get() == sq_comp) {</span>
-<span class="lineNum">     353 </span><span class="lineCov">        510 :                                 sq_filter-&gt;expressions.erase(sq_filter-&gt;expressions.begin() + i);</span>
-<span class="lineNum">     354 </span><span class="lineCov">        510 :                                 break;</span>
-<span class="lineNum">     355 </span>            :                         }
-<span class="lineNum">     356 </span>            :                 }
-<span class="lineNum">     357 </span>            : 
-<span class="lineNum">     358 </span>            :                 // now we introduce a new join condition based on this correlated
-<span class="lineNum">     359 </span>            :                 // expression
-<span class="lineNum">     360 </span><span class="lineCov">       1020 :                 JoinCondition condition;</span>
-<span class="lineNum">     361 </span>            :                 // on the left side is the original correlated expression
-<span class="lineNum">     362 </span>            :                 // however, since there is no longer a subquery, its depth has changed
-<span class="lineNum">     363 </span>            :                 // to 0
-<span class="lineNum">     364 </span><span class="lineCov">        510 :                 ((ColumnRefExpression *)correlated_expression.get())-&gt;depth = 0;</span>
-<span class="lineNum">     365 </span><span class="lineCov">        510 :                 condition.left = move(correlated_expression);</span>
-<span class="lineNum">     366 </span>            :                 // on the right side is the newly added group in the original subquery
-<span class="lineNum">     367 </span><span class="lineCov">        510 :                 if (op-&gt;type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
-<span class="lineNum">     368 </span>            :                         // in the case of the AGGREGATE_AND_GROUP_BY, we will add the right condition later on, as we need to
-<span class="lineNum">     369 </span>            :                         // reference an expression in the PROJECTION above the AGGREGATE
-<span class="lineNum">     370 </span><span class="lineCov">         15 :                         condition.right = nullptr;</span>
-<span class="lineNum">     371 </span>            :                 } else {
-<span class="lineNum">     372 </span><span class="lineCov">        990 :                         condition.right = make_unique&lt;ColumnRefExpression&gt;(</span>
-<span class="lineNum">     373 </span><span class="lineCov">        990 :                             op-&gt;expressions.back()-&gt;return_type, ColumnBinding(subquery_table_index, op-&gt;expressions.size() - 1));</span>
-<span class="lineNum">     374 </span><span class="lineCov">        495 :                         assert(condition.left-&gt;return_type == condition.right-&gt;return_type);</span>
-<span class="lineNum">     375 </span>            :                 }
-<span class="lineNum">     376 </span><span class="lineCov">        510 :                 condition.comparison = comparison_type;</span>
-<span class="lineNum">     377 </span><span class="lineCov">        510 :                 if (uncorrelated_index == 0) {</span>
-<span class="lineNum">     378 </span>            :                         // flip the comparison
-<span class="lineNum">     379 </span><span class="lineCov">        469 :                         condition.comparison = ComparisonExpression::FlipComparisionExpression(condition.comparison);</span>
-<span class="lineNum">     380 </span>            :                 }
-<span class="lineNum">     381 </span>            : 
-<span class="lineNum">     382 </span>            :                 // add the join condition
-<span class="lineNum">     383 </span><span class="lineCov">        510 :                 join_conditions.push_back(move(condition));</span>
-<span class="lineNum">     384 </span><span class="lineCov">        510 :         }</span>
-<span class="lineNum">     385 </span><span class="lineCov">        508 : }</span>
+<span class="lineNum">     277 </span><span class="lineCov">         50 :         auto table_subquery = make_unique&lt;LogicalSubquery&gt;(subquery_table_index, proj-&gt;expressions.size());</span>
+<span class="lineNum">     278 </span><span class="lineCov">         25 :         table_subquery-&gt;children.push_back(move(subquery-&gt;op));</span>
+<span class="lineNum">     279 </span>            : 
+<span class="lineNum">     280 </span><span class="lineCov">         25 :         auto join = make_unique&lt;LogicalJoin&gt;(JoinType::INNER);</span>
+<span class="lineNum">     281 </span><span class="lineCov">         25 :         join-&gt;children.push_back(move(filter.children[0]));</span>
+<span class="lineNum">     282 </span><span class="lineCov">         25 :         join-&gt;children.push_back(move(table_subquery));</span>
+<span class="lineNum">     283 </span><span class="lineCov">         25 :         join-&gt;conditions.push_back(move(condition));</span>
+<span class="lineNum">     284 </span><span class="lineCov">         42 :         for (auto &amp;condition : join_conditions) {</span>
+<span class="lineNum">     285 </span><span class="lineCov">         17 :                 join-&gt;conditions.push_back(move(condition));</span>
+<span class="lineNum">     286 </span>            :         }
+<span class="lineNum">     287 </span>            : 
+<span class="lineNum">     288 </span><span class="lineCov">         25 :         filter.children[0] = move(join);</span>
+<span class="lineNum">     289 </span>            :         // finally we remove the original equality expression from the filter
+<span class="lineNum">     290 </span><span class="lineCov">         25 :         return true;</span>
+<a name="291"><span class="lineNum">     291 </span>            : }</a>
+<span class="lineNum">     292 </span>            : 
+<span class="lineNum">     293 </span><span class="lineCov">        510 : bool ExtractCorrelatedExpressions(LogicalOperator *op, SubqueryExpression *subquery, size_t subquery_table_index,</span>
+<span class="lineNum">     294 </span>            :                                   vector&lt;JoinCondition&gt; &amp;join_conditions) {
+<span class="lineNum">     295 </span>            :         // we look through the subquery to find the matching correlation expression
+<span class="lineNum">     296 </span>            :         // using the Column Depth a correlating expression will have a column ref
+<span class="lineNum">     297 </span>            :         // with depth == 0 (belonging to the subquery) and a correlating expression
+<span class="lineNum">     298 </span>            :         // with depth == 1 (belonging to the main expression) we use the matcher to
+<span class="lineNum">     299 </span>            :         // find this comparison
+<span class="lineNum">     300 </span><span class="lineCov">       1020 :         auto equality_rule = make_unique_base&lt;AbstractRuleNode, ComparisonNodeType&gt;();</span>
+<span class="lineNum">     301 </span><span class="lineCov">        510 :         equality_rule-&gt;children.push_back(make_unique&lt;ColumnRefNodeDepth&gt;(0));</span>
+<span class="lineNum">     302 </span><span class="lineCov">        510 :         equality_rule-&gt;children.push_back(make_unique&lt;ColumnRefNodeDepth&gt;(1));</span>
+<span class="lineNum">     303 </span><span class="lineCov">        510 :         equality_rule-&gt;child_policy = ChildPolicy::SOME;</span>
+<span class="lineNum">     304 </span>            : 
+<span class="lineNum">     305 </span><span class="lineCov">       1020 :         auto filter_rule = make_unique&lt;LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
+<span class="lineNum">     306 </span><span class="lineCov">        510 :         filter_rule-&gt;children.push_back(move(equality_rule));</span>
+<span class="lineNum">     307 </span><span class="lineCov">        510 :         filter_rule-&gt;child_policy = ChildPolicy::SOME;</span>
+<span class="lineNum">     308 </span>            : 
+<span class="lineNum">     309 </span>            :         while (true) {
+<span class="lineNum">     310 </span>            :                 // search for a correlating comparison
+<span class="lineNum">     311 </span>            :                 // this is a comparison like e.g. a.A = b.A
+<span class="lineNum">     312 </span>            :                 // where &quot;a&quot; is from the subquery, and &quot;b&quot; from the outer layer
+<span class="lineNum">     313 </span><span class="lineCov">       1022 :                 vector&lt;AbstractOperator&gt; sq_bindings;</span>
+<span class="lineNum">     314 </span><span class="lineCov">       1022 :                 auto subquery_op = AbstractOperator(op);</span>
+<span class="lineNum">     315 </span><span class="lineCov">       6939 :                 for (auto it = subquery_op.begin(); it != subquery_op.end(); it++) {</span>
+<span class="lineNum">     316 </span><span class="lineCov">       5917 :                         if (Rewriter::MatchOperands(filter_rule.get(), *it, sq_bindings)) {</span>
+<span class="lineNum">     317 </span><span class="lineCov">        512 :                                 break;</span>
+<span class="lineNum">     318 </span>            :                         }
+<span class="lineNum">     319 </span>            :                 }
+<span class="lineNum">     320 </span><span class="lineCov">       1022 :                 if (sq_bindings.size() == 0) {</span>
+<span class="lineNum">     321 </span>            :                         // correlated comparison operator not found inside subquery anymore
+<span class="lineNum">     322 </span><span class="lineCov">        510 :                         break;</span>
+<span class="lineNum">     323 </span>            :                 }
+<span class="lineNum">     324 </span>            : 
+<span class="lineNum">     325 </span><span class="lineCov">        512 :                 auto *sq_filter = (LogicalFilter *)sq_bindings[0].value.op;</span>
+<span class="lineNum">     326 </span><span class="lineCov">        512 :                 auto *sq_comp = (ComparisonExpression *)sq_bindings[1].value.expr;</span>
+<span class="lineNum">     327 </span><span class="lineCov">        512 :                 auto *sq_colref_inner = (ColumnRefExpression *)sq_bindings[2].value.expr;</span>
+<span class="lineNum">     328 </span><span class="lineCov">        512 :                 auto *sq_colref_outer = (ColumnRefExpression *)sq_bindings[3].value.expr;</span>
+<span class="lineNum">     329 </span><span class="lineCov">        512 :                 auto comparison_type = sq_comp-&gt;type;</span>
+<span class="lineNum">     330 </span>            : 
+<span class="lineNum">     331 </span><span class="lineCov">        512 :                 auto comp_left =</span>
+<span class="lineNum">     332 </span><span class="lineCov">       1024 :                     make_unique_base&lt;Expression, ColumnRefExpression&gt;(sq_colref_inner-&gt;return_type, sq_colref_inner-&gt;binding);</span>
+<span class="lineNum">     333 </span><span class="lineCov">        512 :                 auto comp_right =</span>
+<span class="lineNum">     334 </span><span class="lineCov">       1024 :                     make_unique_base&lt;Expression, ColumnRefExpression&gt;(sq_colref_outer-&gt;return_type, sq_colref_outer-&gt;binding);</span>
+<span class="lineNum">     335 </span>            : 
+<span class="lineNum">     336 </span>            :                 // index of uncorrelated expression (0 or 1)
+<span class="lineNum">     337 </span><span class="lineCov">        512 :                 size_t uncorrelated_index = sq_comp-&gt;children[0].get() == sq_colref_inner ? 0 : 1;</span>
+<span class="lineNum">     338 </span><span class="lineCov">       1024 :                 auto uncorrelated_expression = move(sq_comp-&gt;children[uncorrelated_index]);</span>
+<span class="lineNum">     339 </span>            :                 // correlated expression
+<span class="lineNum">     340 </span><span class="lineCov">       1024 :                 auto correlated_expression = move(sq_comp-&gt;children[1 - uncorrelated_index]);</span>
+<span class="lineNum">     341 </span>            : 
+<span class="lineNum">     342 </span><span class="lineCov">        512 :                 if (op-&gt;type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
+<span class="lineNum">     343 </span><span class="lineCov">         17 :                         auto aggr = (LogicalAggregate *)op;</span>
+<span class="lineNum">     344 </span>            :                         // now inside the aggregation, we use the uncorrelated column used
+<span class="lineNum">     345 </span>            :                         // in the comparison as both projection and grouping col in subquery
+<span class="lineNum">     346 </span><span class="lineCov">         17 :                         aggr-&gt;groups.push_back(move(uncorrelated_expression));</span>
+<span class="lineNum">     347 </span>            :                 } else {
+<span class="lineNum">     348 </span>            :                         // push the expression into the select list
+<span class="lineNum">     349 </span><span class="lineCov">        495 :                         assert(op-&gt;type == LogicalOperatorType::PROJECTION);</span>
+<span class="lineNum">     350 </span><span class="lineCov">        495 :                         op-&gt;expressions.push_back(move(uncorrelated_expression));</span>
+<span class="lineNum">     351 </span>            :                 }
+<span class="lineNum">     352 </span>            : 
+<span class="lineNum">     353 </span>            :                 // remove the correlated expression from the filter in the subquery
+<span class="lineNum">     354 </span><span class="lineCov">        529 :                 for (size_t i = 0; i &lt; sq_filter-&gt;expressions.size(); i++) {</span>
+<span class="lineNum">     355 </span><span class="lineCov">        529 :                         if (sq_filter-&gt;expressions[i].get() == sq_comp) {</span>
+<span class="lineNum">     356 </span><span class="lineCov">        512 :                                 sq_filter-&gt;expressions.erase(sq_filter-&gt;expressions.begin() + i);</span>
+<span class="lineNum">     357 </span><span class="lineCov">        512 :                                 break;</span>
+<span class="lineNum">     358 </span>            :                         }
+<span class="lineNum">     359 </span>            :                 }
+<span class="lineNum">     360 </span>            : 
+<span class="lineNum">     361 </span>            :                 // now we introduce a new join condition based on this correlated
+<span class="lineNum">     362 </span>            :                 // expression
+<span class="lineNum">     363 </span><span class="lineCov">       1024 :                 JoinCondition condition;</span>
+<span class="lineNum">     364 </span>            :                 // on the left side is the original correlated expression
+<span class="lineNum">     365 </span>            :                 // however, since there is no longer a subquery, its depth has changed
+<span class="lineNum">     366 </span>            :                 // to 0
+<span class="lineNum">     367 </span><span class="lineCov">        512 :                 ((ColumnRefExpression *)correlated_expression.get())-&gt;depth = 0;</span>
+<span class="lineNum">     368 </span><span class="lineCov">        512 :                 condition.left = move(correlated_expression);</span>
+<span class="lineNum">     369 </span>            :                 // on the right side is the newly added group in the original subquery
+<span class="lineNum">     370 </span><span class="lineCov">        512 :                 if (op-&gt;type == LogicalOperatorType::AGGREGATE_AND_GROUP_BY) {</span>
+<span class="lineNum">     371 </span>            :                         // in the case of the AGGREGATE_AND_GROUP_BY, we will add the right condition later on, as we need to
+<span class="lineNum">     372 </span>            :                         // reference an expression in the PROJECTION above the AGGREGATE
+<span class="lineNum">     373 </span><span class="lineCov">         17 :                         condition.right = nullptr;</span>
+<span class="lineNum">     374 </span>            :                 } else {
+<span class="lineNum">     375 </span><span class="lineCov">        990 :                         condition.right = make_unique&lt;ColumnRefExpression&gt;(</span>
+<span class="lineNum">     376 </span><span class="lineCov">        990 :                             op-&gt;expressions.back()-&gt;return_type, ColumnBinding(subquery_table_index, op-&gt;expressions.size() - 1));</span>
+<span class="lineNum">     377 </span><span class="lineCov">        495 :                         assert(condition.left-&gt;return_type == condition.right-&gt;return_type);</span>
+<span class="lineNum">     378 </span>            :                 }
+<span class="lineNum">     379 </span><span class="lineCov">        512 :                 condition.comparison = comparison_type;</span>
+<span class="lineNum">     380 </span><span class="lineCov">        512 :                 if (uncorrelated_index == 0) {</span>
+<span class="lineNum">     381 </span>            :                         // flip the comparison
+<span class="lineNum">     382 </span><span class="lineCov">        471 :                         condition.comparison = ComparisonExpression::FlipComparisionExpression(condition.comparison);</span>
+<span class="lineNum">     383 </span>            :                 }
+<span class="lineNum">     384 </span>            : 
+<span class="lineNum">     385 </span>            :                 // add the join condition
+<span class="lineNum">     386 </span><span class="lineCov">        512 :                 join_conditions.push_back(move(condition));</span>
+<span class="lineNum">     387 </span><span class="lineCov">        512 :         }</span>
+<span class="lineNum">     388 </span>            : 
+<span class="lineNum">     389 </span>            :         // check if there are any correlated column references left
+<span class="lineNum">     390 </span>            :         // if there are any we couldn't extract then the subquery cannot be rewritten
+<span class="lineNum">     391 </span><span class="lineCov">       1020 :         auto subquery_op = AbstractOperator(op);</span>
+<span class="lineNum">     392 </span><span class="lineCov">       4103 :         for (auto it = subquery_op.begin(); it != subquery_op.end(); it++) {</span>
+<span class="lineNum">     393 </span><span class="lineCov">       3599 :                 if (it-&gt;type == AbstractOperatorType::ABSTRACT_EXPRESSION) {</span>
+<span class="lineNum">     394 </span><span class="lineCov">       1978 :                         if (it-&gt;value.expr-&gt;type == ExpressionType::COLUMN_REF) {</span>
+<span class="lineNum">     395 </span><span class="lineCov">       1214 :                                 auto colref = (ColumnRefExpression *)it-&gt;value.expr;</span>
+<span class="lineNum">     396 </span><span class="lineCov">       1214 :                                 if (colref-&gt;depth &gt; 0) {</span>
+<span class="lineNum">     397 </span><span class="lineCov">          6 :                                         return false;</span>
+<span class="lineNum">     398 </span>            :                                 }
+<span class="lineNum">     399 </span>            :                         }
+<span class="lineNum">     400 </span>            :                 }
+<span class="lineNum">     401 </span>            :         }
+<span class="lineNum">     402 </span><span class="lineCov">        504 :         return true;</span>
+<span class="lineNum">     403 </span>            : }
 </pre>
       </td>
     </tr>

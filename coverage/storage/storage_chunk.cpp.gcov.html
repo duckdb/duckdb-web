@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - storage/storage_chunk.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7826fddc - storage/storage_chunk.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">50</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-26 18:59:44</td>
+            <td class="headerValue">2018-12-30 21:00:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -70,28 +70,28 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">       9768 : StorageChunk::StorageChunk(DataTable &amp;_table, size_t start) : table(_table), count(0), start(start), read_count(0) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">       9768 :         columns.resize(table.types.size());</span>
-<span class="lineNum">      13 </span><span class="lineCov">       9768 :         size_t tuple_size = 0;</span>
-<span class="lineNum">      14 </span><span class="lineCov">     143786 :         for (auto &amp;type : table.types) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">     134018 :                 tuple_size += GetTypeIdSize(type);</span>
+<span class="lineNum">      11 </span><span class="lineCov">       9769 : StorageChunk::StorageChunk(DataTable &amp;_table, size_t start) : table(_table), count(0), start(start), read_count(0) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">       9769 :         columns.resize(table.types.size());</span>
+<span class="lineNum">      13 </span><span class="lineCov">       9769 :         size_t tuple_size = 0;</span>
+<span class="lineNum">      14 </span><span class="lineCov">     143788 :         for (auto &amp;type : table.types) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     134019 :                 tuple_size += GetTypeIdSize(type);</span>
 <span class="lineNum">      16 </span>            :         }
-<span class="lineNum">      17 </span><span class="lineCov">       9768 :         owned_data = unique_ptr&lt;char[]&gt;(new char[tuple_size * STORAGE_CHUNK_SIZE]);</span>
-<span class="lineNum">      18 </span><span class="lineCov">       9768 :         char *dataptr = owned_data.get();</span>
-<span class="lineNum">      19 </span><span class="lineCov">     143786 :         for (size_t i = 0; i &lt; table.types.size(); i++) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">     134018 :                 columns[i] = dataptr;</span>
-<span class="lineNum">      21 </span><span class="lineCov">     134018 :                 dataptr += GetTypeIdSize(table.types[i]) * STORAGE_CHUNK_SIZE;</span>
+<span class="lineNum">      17 </span><span class="lineCov">       9769 :         owned_data = unique_ptr&lt;char[]&gt;(new char[tuple_size * STORAGE_CHUNK_SIZE]);</span>
+<span class="lineNum">      18 </span><span class="lineCov">       9769 :         char *dataptr = owned_data.get();</span>
+<span class="lineNum">      19 </span><span class="lineCov">     143788 :         for (size_t i = 0; i &lt; table.types.size(); i++) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     134019 :                 columns[i] = dataptr;</span>
+<span class="lineNum">      21 </span><span class="lineCov">     134019 :                 dataptr += GetTypeIdSize(table.types[i]) * STORAGE_CHUNK_SIZE;</span>
 <span class="lineNum">      22 </span>            :         }
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">       9768 : }</span></a>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">       9769 : }</span></a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">   84685227 : void StorageChunk::Cleanup(VersionInformation *info) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">   84685227 :         size_t entry = info-&gt;prev.entry;</span>
-<span class="lineNum">      27 </span><span class="lineCov">   84685227 :         version_pointers[entry] = info-&gt;next;</span>
-<span class="lineNum">      28 </span><span class="lineCov">   84685227 :         if (version_pointers[entry]) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">   84685223 : void StorageChunk::Cleanup(VersionInformation *info) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">   84685223 :         size_t entry = info-&gt;prev.entry;</span>
+<span class="lineNum">      27 </span><span class="lineCov">   84685223 :         version_pointers[entry] = info-&gt;next;</span>
+<span class="lineNum">      28 </span><span class="lineCov">   84685223 :         if (version_pointers[entry]) {</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 version_pointers[entry]-&gt;prev.entry = entry;</span>
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                 version_pointers[entry]-&gt;chunk = this;</span>
 <span class="lineNum">      31 </span>            :         }
-<a name="32"><span class="lineNum">      32 </span><span class="lineCov">   84685227 : }</span></a>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">   84685223 : }</span></a>
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span><span class="lineCov">      42119 : void StorageChunk::Undo(VersionInformation *info) {</span>
 <span class="lineNum">      35 </span><span class="lineCov">      42119 :         size_t entry = info-&gt;prev.entry;</span>
@@ -111,36 +111,36 @@
 <span class="lineNum">      49 </span>            :         }
 <a name="50"><span class="lineNum">      50 </span><span class="lineCov">      42119 : }</span></a>
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">     211429 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetExclusiveLock() {</span>
-<span class="lineNum">      53 </span><span class="lineCov">     211429 :         exclusive_lock.lock();</span>
-<span class="lineNum">      54 </span><span class="lineCov">  139499989 :         while (read_count != 0)</span>
+<span class="lineNum">      52 </span><span class="lineCov">     209530 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetExclusiveLock() {</span>
+<span class="lineNum">      53 </span><span class="lineCov">     209530 :         exclusive_lock.lock();</span>
+<span class="lineNum">      54 </span><span class="lineCov">  141142992 :         while (read_count != 0)</span>
 <span class="lineNum">      55 </span>            :                 ;
-<span class="lineNum">      56 </span><span class="lineCov">     216287 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::EXCLUSIVE));</span>
+<span class="lineNum">      56 </span><span class="lineCov">     216284 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::EXCLUSIVE));</span>
 <a name="57"><span class="lineNum">      57 </span>            : }</a>
 <span class="lineNum">      58 </span>            : 
-<span class="lineNum">      59 </span><span class="lineCov">    2885851 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetSharedLock() {</span>
-<span class="lineNum">      60 </span><span class="lineCov">    2885851 :         exclusive_lock.lock();</span>
-<span class="lineNum">      61 </span><span class="lineCov">    2892415 :         read_count++;</span>
-<span class="lineNum">      62 </span><span class="lineCov">    2892431 :         exclusive_lock.unlock();</span>
-<span class="lineNum">      63 </span><span class="lineCov">    2892329 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::SHARED));</span>
+<span class="lineNum">      59 </span><span class="lineCov">    2886137 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetSharedLock() {</span>
+<span class="lineNum">      60 </span><span class="lineCov">    2886137 :         exclusive_lock.lock();</span>
+<span class="lineNum">      61 </span><span class="lineCov">    2892578 :         read_count++;</span>
+<span class="lineNum">      62 </span><span class="lineCov">    2892585 :         exclusive_lock.unlock();</span>
+<span class="lineNum">      63 </span><span class="lineCov">    2892454 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::SHARED));</span>
 <a name="64"><span class="lineNum">      64 </span>            : }</a>
 <span class="lineNum">      65 </span>            : 
-<span class="lineNum">      66 </span><span class="lineCov">     216287 : void StorageChunk::ReleaseExclusiveLock() {</span>
-<span class="lineNum">      67 </span><span class="lineCov">     216287 :         exclusive_lock.unlock();</span>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">     216287 : }</span></a>
+<span class="lineNum">      66 </span><span class="lineCov">     216284 : void StorageChunk::ReleaseExclusiveLock() {</span>
+<span class="lineNum">      67 </span><span class="lineCov">     216284 :         exclusive_lock.unlock();</span>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">     216283 : }</span></a>
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">    2885636 : void StorageChunk::ReleaseSharedLock() {</span>
-<span class="lineNum">      71 </span><span class="lineCov">    2885636 :         read_count--;</span>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    2890985 : }</span></a>
+<span class="lineNum">      70 </span><span class="lineCov">    2885773 : void StorageChunk::ReleaseSharedLock() {</span>
+<span class="lineNum">      71 </span><span class="lineCov">    2885773 :         read_count--;</span>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    2890374 : }</span></a>
 <span class="lineNum">      73 </span>            : 
-<span class="lineNum">      74 </span><span class="lineCov">    6210597 : StorageLock::~StorageLock() {</span>
-<span class="lineNum">      75 </span><span class="lineCov">    3101995 :         if (type == StorageLockType::EXCLUSIVE) {</span>
-<span class="lineNum">      76 </span><span class="lineCov">     216287 :                 chunk-&gt;ReleaseExclusiveLock();</span>
+<span class="lineNum">      74 </span><span class="lineCov">    6210805 : StorageLock::~StorageLock() {</span>
+<span class="lineNum">      75 </span><span class="lineCov">    3102101 :         if (type == StorageLockType::EXCLUSIVE) {</span>
+<span class="lineNum">      76 </span><span class="lineCov">     216284 :                 chunk-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">      77 </span>            :         } else {
-<span class="lineNum">      78 </span><span class="lineCov">    2885708 :                 assert(type == StorageLockType::SHARED);</span>
-<span class="lineNum">      79 </span><span class="lineCov">    2885708 :                 chunk-&gt;ReleaseSharedLock();</span>
+<span class="lineNum">      78 </span><span class="lineCov">    2885817 :                 assert(type == StorageLockType::SHARED);</span>
+<span class="lineNum">      79 </span><span class="lineCov">    2885817 :                 chunk-&gt;ReleaseSharedLock();</span>
 <span class="lineNum">      80 </span>            :         }
-<span class="lineNum">      81 </span><span class="lineCov">    3108602 : }</span>
+<span class="lineNum">      81 </span><span class="lineCov">    3108704 : }</span>
 </pre>
       </td>
     </tr>

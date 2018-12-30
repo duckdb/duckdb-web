@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report b1d75a46 - include/parser/expression/cast_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7826fddc - include/parser/expression/cast_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report b1d75a46</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">15</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-26 18:59:44</td>
+            <td class="headerValue">2018-12-30 21:00:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -77,17 +77,17 @@
 <span class="lineNum">      15 </span>            : //! Represents a type cast from one type to another type
 <a name="16"><span class="lineNum">      16 </span>            : class CastExpression : public Expression {</a>
 <span class="lineNum">      17 </span>            : public:
-<span class="lineNum">      18 </span><span class="lineCov">    1431930 :         CastExpression(TypeId target, unique_ptr&lt;Expression&gt; child)</span>
-<span class="lineNum">      19 </span><span class="lineCov">    1431930 :             : Expression(ExpressionType::OPERATOR_CAST, target, std::move(child)) {</span>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    1431930 :         }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">    1431932 :         CastExpression(TypeId target, unique_ptr&lt;Expression&gt; child)</span>
+<span class="lineNum">      19 </span><span class="lineCov">    1431932 :             : Expression(ExpressionType::OPERATOR_CAST, target, std::move(child)) {</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    1431932 :         }</span></a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    1363245 :         void ResolveType() override {</span>
-<span class="lineNum">      23 </span><span class="lineCov">    1363245 :                 Expression::ResolveType();</span>
-<span class="lineNum">      24 </span><span class="lineCov">    1363245 :                 ExpressionStatistics::Cast(children[0]-&gt;stats, stats);</span>
-<span class="lineNum">      25 </span><span class="lineCov">    1363245 :                 if (!stats.FitsInType(return_type)) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">    1363247 :         void ResolveType() override {</span>
+<span class="lineNum">      23 </span><span class="lineCov">    1363247 :                 Expression::ResolveType();</span>
+<span class="lineNum">      24 </span><span class="lineCov">    1363247 :                 ExpressionStatistics::Cast(children[0]-&gt;stats, stats);</span>
+<span class="lineNum">      25 </span><span class="lineCov">    1363247 :                 if (!stats.FitsInType(return_type)) {</span>
 <span class="lineNum">      26 </span><span class="lineCov">          1 :                         return_type = stats.MinimalType();</span>
 <span class="lineNum">      27 </span>            :                 }
-<span class="lineNum">      28 </span><span class="lineCov">    1363245 :         }</span>
+<span class="lineNum">      28 </span><span class="lineCov">    1363247 :         }</span>
 <span class="lineNum">      29 </span>            : 
 <span class="lineNum">      30 </span>            :         unique_ptr&lt;Expression&gt; Copy() override;
 <span class="lineNum">      31 </span>            : 
