@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7826fddc - include/parser/statement/delete_statement.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report a1d8ab4d - include/parser/statement/delete_statement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
+            <td class="headerValue">DuckDB Code Coverage Report a1d8ab4d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-30 21:00:35</td>
+            <td class="headerValue">2018-12-31 11:02:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -80,20 +80,20 @@
 <span class="lineNum">      18 </span>            : 
 <a name="19"><span class="lineNum">      19 </span>            : class DeleteStatement : public SQLStatement {</a>
 <span class="lineNum">      20 </span>            : public:
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">        916 :         DeleteStatement() : SQLStatement(StatementType::DELETE) {</span></a>
-<span class="lineNum">      22 </span><span class="lineCov">        933 :         }</span>
-<span class="lineNum">      23 </span><span class="lineCov">       1808 :         virtual ~DeleteStatement() {</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       1811 :         }</span></a>
-<span class="lineNum">      25 </span><span class="lineCov">        905 : </span>
-<span class="lineNum">      26 </span><span class="lineCov">        905 :         virtual string ToString() const {</span>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">        903 :                 return &quot;Delete&quot;;</span></a>
-<span class="lineNum">      28 </span><span class="lineCov">        906 :         }</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">        965 :         DeleteStatement() : SQLStatement(StatementType::DELETE) {</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">        963 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">       1904 :         virtual ~DeleteStatement() {</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">       1931 :         }</span></a>
+<span class="lineNum">      25 </span><span class="lineCov">        953 : </span>
+<span class="lineNum">      26 </span><span class="lineCov">        953 :         virtual string ToString() const {</span>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">        951 :                 return &quot;Delete&quot;;</span></a>
+<span class="lineNum">      28 </span><span class="lineCov">        978 :         }</span>
 <span class="lineNum">      29 </span>            :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                 return v-&gt;Visit(*this);</span>
 <a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 :         }</span></a>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">       1830 :         virtual bool Equals(const SQLStatement *other_) const {</span>
-<span class="lineNum">      34 </span><span class="lineCov">       1830 :                 if (!SQLStatement::Equals(other_)) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">       1905 :         virtual bool Equals(const SQLStatement *other_) const {</span>
+<span class="lineNum">      34 </span><span class="lineCov">       1905 :                 if (!SQLStatement::Equals(other_)) {</span>
 <span class="lineNum">      35 </span>            :                         return false;
 <span class="lineNum">      36 </span>            :                 }
 <span class="lineNum">      37 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Equality not implemented!&quot;);</span>

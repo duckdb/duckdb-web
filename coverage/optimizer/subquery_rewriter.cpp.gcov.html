@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7826fddc - optimizer/subquery_rewriter.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report a1d8ab4d - optimizer/subquery_rewriter.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7826fddc</td>
+            <td class="headerValue">DuckDB Code Coverage Report a1d8ab4d</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">182</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-30 21:00:35</td>
+            <td class="headerValue">2018-12-31 11:02:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -73,15 +73,15 @@
 <span class="lineNum">      11 </span>            : bool ExtractCorrelatedExpressions(LogicalOperator *op, SubqueryExpression *subquery, size_t subquery_table_index,
 <a name="12"><span class="lineNum">      12 </span>            :                                   vector&lt;JoinCondition&gt; &amp;join_conditions);</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">   12358578 : unique_ptr&lt;LogicalOperator&gt; SubqueryRewriter::Rewrite(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">   12358578 :         if (plan-&gt;type == LogicalOperatorType::FILTER) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">   12357883 : unique_ptr&lt;LogicalOperator&gt; SubqueryRewriter::Rewrite(unique_ptr&lt;LogicalOperator&gt; plan) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">   12357883 :         if (plan-&gt;type == LogicalOperatorType::FILTER) {</span>
 <span class="lineNum">      16 </span>            :                 // rewrite subqueries within a filter
-<span class="lineNum">      17 </span><span class="lineCov">     506660 :                 auto &amp;filter = (LogicalFilter &amp;)*plan;</span>
+<span class="lineNum">      17 </span><span class="lineCov">     506233 :                 auto &amp;filter = (LogicalFilter &amp;)*plan;</span>
 <span class="lineNum">      18 </span>            :                 // now rewrite subqueries within the filter
-<span class="lineNum">      19 </span><span class="lineCov">    1017966 :                 for (size_t i = 0; i &lt; filter.expressions.size(); i++) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">     514434 :                         auto &amp;expr = *filter.expressions[i];</span>
+<span class="lineNum">      19 </span><span class="lineCov">    1018541 :                 for (size_t i = 0; i &lt; filter.expressions.size(); i++) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">     515278 :                         auto &amp;expr = *filter.expressions[i];</span>
 <span class="lineNum">      21 </span>            :                         // check if we know how to rewrite this type of subquery
-<span class="lineNum">      22 </span><span class="lineCov">     514338 :                         switch (expr.type) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">     514327 :                         switch (expr.type) {</span>
 <span class="lineNum">      23 </span><span class="lineCov">      36833 :                         case ExpressionType::COMPARE_IN:</span>
 <span class="lineNum">      24 </span>            :                         case ExpressionType::COMPARE_NOT_IN:
 <span class="lineNum">      25 </span>            :                                 // (NOT) IN, check if we are dealing with a subquery
@@ -113,16 +113,16 @@
 <span class="lineNum">      51 </span>            :                                         }
 <span class="lineNum">      52 </span>            :                                 }
 <span class="lineNum">      53 </span><span class="lineCov">        485 :                                 break;</span>
-<span class="lineNum">      54 </span><span class="lineCov">     186890 :                         case ExpressionType::COMPARE_EQUAL:</span>
+<span class="lineNum">      54 </span><span class="lineCov">     186879 :                         case ExpressionType::COMPARE_EQUAL:</span>
 <span class="lineNum">      55 </span>            :                         case ExpressionType::COMPARE_NOTEQUAL:
 <span class="lineNum">      56 </span>            :                         case ExpressionType::COMPARE_LESSTHAN:
 <span class="lineNum">      57 </span>            :                         case ExpressionType::COMPARE_GREATERTHAN:
 <span class="lineNum">      58 </span>            :                         case ExpressionType::COMPARE_LESSTHANOREQUALTO:
 <span class="lineNum">      59 </span>            :                         case ExpressionType::COMPARE_GREATERTHANOREQUALTO:
 <span class="lineNum">      60 </span>            :                                 // comparison, check if we are dealing with a subquery
-<span class="lineNum">      61 </span><span class="lineCov">     186890 :                                 assert(expr.children.size() == 2);</span>
-<span class="lineNum">      62 </span><span class="lineCov">     376966 :                                 if (expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ||</span>
-<span class="lineNum">      63 </span><span class="lineCov">     189394 :                                     expr.children[1]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">     186879 :                                 assert(expr.children.size() == 2);</span>
+<span class="lineNum">      62 </span><span class="lineCov">     377651 :                                 if (expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ||</span>
+<span class="lineNum">      63 </span><span class="lineCov">     188965 :                                     expr.children[1]-&gt;type == ExpressionType::SELECT_SUBQUERY) {</span>
 <span class="lineNum">      64 </span><span class="lineCov">         47 :                                         int subquery_index = expr.children[0]-&gt;type == ExpressionType::SELECT_SUBQUERY ? 0 : 1;</span>
 <span class="lineNum">      65 </span>            :                                         // Comparison with subquery, rewrite
 <span class="lineNum">      66 </span><span class="lineCov">         47 :                                         if (RewriteSubqueryComparison(filter, (ComparisonExpression *)filter.expressions[i].get(),</span>
@@ -132,21 +132,21 @@
 <span class="lineNum">      70 </span><span class="lineCov">         25 :                                                 i--;</span>
 <span class="lineNum">      71 </span>            :                                         }
 <span class="lineNum">      72 </span>            :                                 }
-<span class="lineNum">      73 </span><span class="lineCov">     189713 :                                 break;</span>
+<span class="lineNum">      73 </span><span class="lineCov">     190292 :                                 break;</span>
 <span class="lineNum">      74 </span><span class="lineCov">     290130 :                         default:</span>
 <span class="lineNum">      75 </span><span class="lineCov">     290130 :                                 break;</span>
 <span class="lineNum">      76 </span>            :                         }
 <span class="lineNum">      77 </span>            :                 }
-<span class="lineNum">      78 </span><span class="lineCov">     503097 :                 if (filter.expressions.size() == 0) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">     502224 :                 if (filter.expressions.size() == 0) {</span>
 <span class="lineNum">      79 </span>            :                         // the filter is empty, return its child instead
-<span class="lineNum">      80 </span><span class="lineCov">      12456 :                         return Rewrite(move(filter.children[0]));</span>
+<span class="lineNum">      80 </span><span class="lineCov">      12218 :                         return Rewrite(move(filter.children[0]));</span>
 <span class="lineNum">      81 </span>            :                 }
 <span class="lineNum">      82 </span>            :         }
 <span class="lineNum">      83 </span>            :         // recursively rewrite the children of the current node as well
-<span class="lineNum">      84 </span><span class="lineCov">   21557926 :         for (size_t i = 0; i &lt; plan-&gt;children.size(); i++) {</span>
-<span class="lineNum">      85 </span><span class="lineCov">    9209390 :                 plan-&gt;children[i] = Rewrite(move(plan-&gt;children[i]));</span>
+<span class="lineNum">      84 </span><span class="lineCov">   21557871 :         for (size_t i = 0; i &lt; plan-&gt;children.size(); i++) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">    9208911 :                 plan-&gt;children[i] = Rewrite(move(plan-&gt;children[i]));</span>
 <span class="lineNum">      86 </span>            :         }
-<span class="lineNum">      87 </span><span class="lineCov">   12348717 :         return plan;</span>
+<span class="lineNum">      87 </span><span class="lineCov">   12347923 :         return plan;</span>
 <a name="88"><span class="lineNum">      88 </span>            : }</a>
 <span class="lineNum">      89 </span>            : 
 <span class="lineNum">      90 </span><span class="lineCov">         46 : bool SubqueryRewriter::RewriteInClause(LogicalFilter &amp;filter, OperatorExpression *operator_expression,</span>
