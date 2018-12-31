@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report a1d8ab4d - execution/expression_executor/execute_operator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 2b8f0491 - execution/expression_executor/execute_operator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report a1d8ab4d</td>
+            <td class="headerValue">DuckDB Code Coverage Report 2b8f0491</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">115</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-31 11:02:54</td>
+            <td class="headerValue">2018-12-31 13:47:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -68,11 +68,11 @@
 <span class="lineNum">       6 </span>            : using namespace duckdb;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">    6854931 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(OperatorExpression &amp;expr) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    6854934 : unique_ptr&lt;Expression&gt; ExpressionExecutor::Visit(OperatorExpression &amp;expr) {</span>
 <span class="lineNum">      10 </span>            :         // special handling for special snowflake 'IN'
 <span class="lineNum">      11 </span>            :         // IN has n children
-<span class="lineNum">      12 </span><span class="lineCov">    6854931 :         if (expr.type == ExpressionType::COMPARE_IN || expr.type == ExpressionType::COMPARE_NOT_IN) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">      53371 :                 if (expr.children.size() &lt; 2) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    6854934 :         if (expr.type == ExpressionType::COMPARE_IN || expr.type == ExpressionType::COMPARE_NOT_IN) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">      52580 :                 if (expr.children.size() &lt; 2) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;IN needs at least two children&quot;);</span>
 <span class="lineNum">      15 </span>            :                 }
 <span class="lineNum">      16 </span><span class="lineCov">     117022 :                 Vector l;</span>
@@ -190,7 +190,7 @@
 <span class="lineNum">     128 </span><span class="lineCov">      58511 :                 expr.stats.Verify(vector);</span>
 <span class="lineNum">     129 </span><span class="lineCov">      58511 :                 return nullptr;</span>
 <span class="lineNum">     130 </span>            :         }
-<span class="lineNum">     131 </span><span class="lineCov">    6801560 :         if (expr.children.size() == 1) {</span>
+<span class="lineNum">     131 </span><span class="lineCov">    6802354 :         if (expr.children.size() == 1) {</span>
 <span class="lineNum">     132 </span><span class="lineCov">     516535 :                 expr.children[0]-&gt;Accept(this);</span>
 <span class="lineNum">     133 </span><span class="lineCov">     516530 :                 switch (expr.type) {</span>
 <span class="lineNum">     134 </span><span class="lineCov">        261 :                 case ExpressionType::OPERATOR_EXISTS:</span>
@@ -223,22 +223,22 @@
 <span class="lineNum">     161 </span><span class="lineNoCov">          0 :                 default:</span>
 <span class="lineNum">     162 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Unsupported operator type with 1 child!&quot;);</span>
 <span class="lineNum">     163 </span>            :                 }
-<span class="lineNum">     164 </span><span class="lineCov">    6282353 :         } else if (expr.children.size() == 2) {</span>
-<span class="lineNum">     165 </span><span class="lineCov">   12565875 :                 Vector l, r;</span>
-<span class="lineNum">     166 </span><span class="lineCov">    6284942 :                 expr.children[0]-&gt;Accept(this);</span>
-<span class="lineNum">     167 </span><span class="lineCov">    6279720 :                 vector.Move(l);</span>
-<span class="lineNum">     168 </span><span class="lineCov">    6281113 :                 expr.children[1]-&gt;Accept(this);</span>
-<span class="lineNum">     169 </span><span class="lineCov">    6279931 :                 vector.Move(r);</span>
+<span class="lineNum">     164 </span><span class="lineCov">    6283726 :         } else if (expr.children.size() == 2) {</span>
+<span class="lineNum">     165 </span><span class="lineCov">   12567483 :                 Vector l, r;</span>
+<span class="lineNum">     166 </span><span class="lineCov">    6285052 :                 expr.children[0]-&gt;Accept(this);</span>
+<span class="lineNum">     167 </span><span class="lineCov">    6279855 :                 vector.Move(l);</span>
+<span class="lineNum">     168 </span><span class="lineCov">    6281335 :                 expr.children[1]-&gt;Accept(this);</span>
+<span class="lineNum">     169 </span><span class="lineCov">    6280072 :                 vector.Move(r);</span>
 <span class="lineNum">     170 </span>            : 
-<span class="lineNum">     171 </span><span class="lineCov">    6281404 :                 vector.Initialize(l.type);</span>
+<span class="lineNum">     171 </span><span class="lineCov">    6281401 :                 vector.Initialize(l.type);</span>
 <span class="lineNum">     172 </span>            : 
-<span class="lineNum">     173 </span><span class="lineCov">    6280735 :                 switch (expr.type) {</span>
-<span class="lineNum">     174 </span><span class="lineCov">    1698048 :                 case ExpressionType::OPERATOR_ADD:</span>
-<span class="lineNum">     175 </span><span class="lineCov">    1698048 :                         VectorOperations::Add(l, r, vector);</span>
-<span class="lineNum">     176 </span><span class="lineCov">    1698021 :                         break;</span>
-<span class="lineNum">     177 </span><span class="lineCov">     391741 :                 case ExpressionType::OPERATOR_SUBTRACT:</span>
-<span class="lineNum">     178 </span><span class="lineCov">     391741 :                         VectorOperations::Subtract(l, r, vector);</span>
-<span class="lineNum">     179 </span><span class="lineCov">     391672 :                         break;</span>
+<span class="lineNum">     173 </span><span class="lineCov">    6281466 :                 switch (expr.type) {</span>
+<span class="lineNum">     174 </span><span class="lineCov">    1698030 :                 case ExpressionType::OPERATOR_ADD:</span>
+<span class="lineNum">     175 </span><span class="lineCov">    1698030 :                         VectorOperations::Add(l, r, vector);</span>
+<span class="lineNum">     176 </span><span class="lineCov">    1698039 :                         break;</span>
+<span class="lineNum">     177 </span><span class="lineCov">     391544 :                 case ExpressionType::OPERATOR_SUBTRACT:</span>
+<span class="lineNum">     178 </span><span class="lineCov">     391544 :                         VectorOperations::Subtract(l, r, vector);</span>
+<span class="lineNum">     179 </span><span class="lineCov">     391567 :                         break;</span>
 <span class="lineNum">     180 </span><span class="lineCov">    3821622 :                 case ExpressionType::OPERATOR_MULTIPLY:</span>
 <span class="lineNum">     181 </span><span class="lineCov">    3821622 :                         VectorOperations::Multiply(l, r, vector);</span>
 <span class="lineNum">     182 </span><span class="lineCov">    3821621 :                         break;</span>
@@ -254,8 +254,8 @@
 <span class="lineNum">     192 </span>            :         } else {
 <span class="lineNum">     193 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;operator&quot;);</span>
 <span class="lineNum">     194 </span>            :         }
-<span class="lineNum">     195 </span><span class="lineCov">    6796898 :         Verify(expr);</span>
-<span class="lineNum">     196 </span><span class="lineCov">    6798225 :         return nullptr;</span>
+<span class="lineNum">     195 </span><span class="lineCov">    6796571 :         Verify(expr);</span>
+<span class="lineNum">     196 </span><span class="lineCov">    6798333 :         return nullptr;</span>
 <span class="lineNum">     197 </span>            : }
 </pre>
       </td>
