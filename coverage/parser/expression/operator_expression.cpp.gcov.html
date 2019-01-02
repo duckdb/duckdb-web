@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - parser/expression/operator_expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - parser/expression/operator_expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">36</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -67,24 +67,24 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    8296120 : void OperatorExpression::ResolveType() {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    8296120 :         Expression::ResolveType();</span>
+<span class="lineNum">       8 </span><span class="lineCov">    8296179 : void OperatorExpression::ResolveType() {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    8296179 :         Expression::ResolveType();</span>
 <span class="lineNum">      10 </span>            :         // logical operators return a bool
-<span class="lineNum">      11 </span><span class="lineCov">    8298264 :         if (type == ExpressionType::OPERATOR_NOT || type == ExpressionType::OPERATOR_IS_NULL ||</span>
-<span class="lineNum">      12 </span><span class="lineCov">    7982741 :             type == ExpressionType::OPERATOR_IS_NOT_NULL || type == ExpressionType::OPERATOR_EXISTS ||</span>
-<span class="lineNum">      13 </span><span class="lineCov">    7775695 :             type == ExpressionType::OPERATOR_NOT_EXISTS || type == ExpressionType::COMPARE_IN ||</span>
-<span class="lineNum">      14 </span><span class="lineCov">    7758664 :             type == ExpressionType::COMPARE_NOT_IN) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">     574590 :                 return_type = TypeId::BOOLEAN;</span>
-<span class="lineNum">      16 </span><span class="lineCov">     574590 :                 return;</span>
+<span class="lineNum">      11 </span><span class="lineCov">    8298495 :         if (type == ExpressionType::OPERATOR_NOT || type == ExpressionType::OPERATOR_IS_NULL ||</span>
+<span class="lineNum">      12 </span><span class="lineCov">    7982711 :             type == ExpressionType::OPERATOR_IS_NOT_NULL || type == ExpressionType::OPERATOR_EXISTS ||</span>
+<span class="lineNum">      13 </span><span class="lineCov">    7776714 :             type == ExpressionType::OPERATOR_NOT_EXISTS || type == ExpressionType::COMPARE_IN ||</span>
+<span class="lineNum">      14 </span><span class="lineCov">    7758397 :             type == ExpressionType::COMPARE_NOT_IN) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     576948 :                 return_type = TypeId::BOOLEAN;</span>
+<span class="lineNum">      16 </span><span class="lineCov">     576948 :                 return;</span>
 <span class="lineNum">      17 </span>            :         }
-<span class="lineNum">      18 </span><span class="lineCov">    7723674 :         return_type = std::max(children[0]-&gt;return_type, children[1]-&gt;return_type);</span>
-<span class="lineNum">      19 </span><span class="lineCov">    7722873 :         switch (type) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">    1866721 :         case ExpressionType::OPERATOR_ADD:</span>
-<span class="lineNum">      21 </span><span class="lineCov">    1866721 :                 ExpressionStatistics::Add(children[0]-&gt;stats, children[1]-&gt;stats, stats);</span>
-<span class="lineNum">      22 </span><span class="lineCov">    1867141 :                 break;</span>
-<span class="lineNum">      23 </span><span class="lineCov">     476575 :         case ExpressionType::OPERATOR_SUBTRACT:</span>
-<span class="lineNum">      24 </span><span class="lineCov">     476575 :                 ExpressionStatistics::Subtract(children[0]-&gt;stats, children[1]-&gt;stats, stats);</span>
-<span class="lineNum">      25 </span><span class="lineCov">     476870 :                 break;</span>
+<span class="lineNum">      18 </span><span class="lineCov">    7721547 :         return_type = std::max(children[0]-&gt;return_type, children[1]-&gt;return_type);</span>
+<span class="lineNum">      19 </span><span class="lineCov">    7722917 :         switch (type) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    1866736 :         case ExpressionType::OPERATOR_ADD:</span>
+<span class="lineNum">      21 </span><span class="lineCov">    1866736 :                 ExpressionStatistics::Add(children[0]-&gt;stats, children[1]-&gt;stats, stats);</span>
+<span class="lineNum">      22 </span><span class="lineCov">    1867153 :                 break;</span>
+<span class="lineNum">      23 </span><span class="lineCov">     476604 :         case ExpressionType::OPERATOR_SUBTRACT:</span>
+<span class="lineNum">      24 </span><span class="lineCov">     476604 :                 ExpressionStatistics::Subtract(children[0]-&gt;stats, children[1]-&gt;stats, stats);</span>
+<span class="lineNum">      25 </span><span class="lineCov">     477231 :                 break;</span>
 <span class="lineNum">      26 </span><span class="lineCov">    4879684 :         case ExpressionType::OPERATOR_MULTIPLY:</span>
 <span class="lineNum">      27 </span><span class="lineCov">    4879684 :                 ExpressionStatistics::Multiply(children[0]-&gt;stats, children[1]-&gt;stats, stats);</span>
 <span class="lineNum">      28 </span><span class="lineCov">    4879684 :                 break;</span>
@@ -99,7 +99,7 @@
 <span class="lineNum">      37 </span>            :         }
 <span class="lineNum">      38 </span>            :         // return the highest type of the children, unless we need to upcast to
 <span class="lineNum">      39 </span>            :         // avoid overflow
-<span class="lineNum">      40 </span><span class="lineCov">    7723588 :         if (!stats.FitsInType(return_type)) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">    7723961 :         if (!stats.FitsInType(return_type)) {</span>
 <span class="lineNum">      41 </span><span class="lineCov">        487 :                 return_type = stats.MinimalType();</span>
 <span class="lineNum">      42 </span>            :         }
 <a name="43"><span class="lineNum">      43 </span>            : }</a>

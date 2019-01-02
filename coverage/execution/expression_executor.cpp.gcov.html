@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - execution/expression_executor.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - execution/expression_executor.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">41</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -72,57 +72,57 @@
 <span class="lineNum">      10 </span><span class="lineNoCov">          0 :         vector.Destroy();</span>
 <a name="11"><span class="lineNum">      11 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    7544383 : void ExpressionExecutor::Execute(DataChunk &amp;result, std::function&lt;Expression *(size_t i)&gt; callback, size_t count) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">    7544383 :         assert(count == result.column_count);</span>
-<span class="lineNum">      15 </span><span class="lineCov">    7544383 :         if (count == 0) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    7544681 : void ExpressionExecutor::Execute(DataChunk &amp;result, std::function&lt;Expression *(size_t i)&gt; callback, size_t count) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    7544681 :         assert(count == result.column_count);</span>
+<span class="lineNum">      15 </span><span class="lineCov">    7544681 :         if (count == 0) {</span>
 <span class="lineNum">      16 </span><span class="lineCov">     880929 :                 return;</span>
 <span class="lineNum">      17 </span>            :         }
-<span class="lineNum">      18 </span><span class="lineCov">   17609822 :         for (size_t i = 0; i &lt; count; i++) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">   10946887 :                 auto expression = callback(i);</span>
-<span class="lineNum">      20 </span><span class="lineCov">   10946188 :                 if (expression) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">   10455512 :                         ExecuteExpression(expression, result.data[i]);</span>
+<span class="lineNum">      18 </span><span class="lineCov">   17610003 :         for (size_t i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">   10946619 :                 auto expression = callback(i);</span>
+<span class="lineNum">      20 </span><span class="lineCov">   10946213 :                 if (expression) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">   10455724 :                         ExecuteExpression(expression, result.data[i]);</span>
 <span class="lineNum">      22 </span>            :                 }
-<span class="lineNum">      23 </span><span class="lineCov">   10946128 :                 result.sel_vector = result.data[i].sel_vector;</span>
-<span class="lineNum">      24 </span><span class="lineCov">   10945084 :                 result.heap.MergeHeap(result.data[i].string_heap);</span>
+<span class="lineNum">      23 </span><span class="lineCov">   10945504 :                 result.sel_vector = result.data[i].sel_vector;</span>
+<span class="lineNum">      24 </span><span class="lineCov">   10944921 :                 result.heap.MergeHeap(result.data[i].string_heap);</span>
 <span class="lineNum">      25 </span>            :         }
 <a name="26"><span class="lineNum">      26 </span>            : }</a>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">     587440 : void ExpressionExecutor::Merge(std::vector&lt;std::unique_ptr&lt;Expression&gt;&gt; &amp;expressions, Vector &amp;result) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">     587440 :         if (expressions.size() == 0) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">     590029 : void ExpressionExecutor::Merge(std::vector&lt;std::unique_ptr&lt;Expression&gt;&gt; &amp;expressions, Vector &amp;result) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">     590029 :         if (expressions.size() == 0) {</span>
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">      31 </span>            :         }
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">     587696 :         ExecuteExpression(expressions[0].get(), result);</span>
-<span class="lineNum">      34 </span><span class="lineCov">     639526 :         for (size_t i = 1; i &lt; expressions.size(); i++) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">     590072 :         ExecuteExpression(expressions[0].get(), result);</span>
+<span class="lineNum">      34 </span><span class="lineCov">     642590 :         for (size_t i = 1; i &lt; expressions.size(); i++) {</span>
 <span class="lineNum">      35 </span><span class="lineCov">      52325 :                 MergeExpression(expressions[i].get(), result);</span>
 <span class="lineNum">      36 </span>            :         }
 <a name="37"><span class="lineNum">      37 </span>            : }</a>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">   11263931 : void ExpressionExecutor::ExecuteExpression(Expression *expr, Vector &amp;result) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">   11263931 :         vector.Destroy();</span>
-<span class="lineNum">      41 </span><span class="lineCov">   11264593 :         expr-&gt;Accept(this);</span>
+<span class="lineNum">      39 </span><span class="lineCov">   11266916 : void ExpressionExecutor::ExecuteExpression(Expression *expr, Vector &amp;result) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">   11266916 :         vector.Destroy();</span>
+<span class="lineNum">      41 </span><span class="lineCov">   11267594 :         expr-&gt;Accept(this);</span>
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span><span class="lineCov">   11262436 :         if (chunk &amp;&amp; scalar_executor) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">   11192253 :                 if (vector.count == 1 &amp;&amp; (chunk-&gt;size() &gt; 1 || vector.sel_vector != chunk-&gt;sel_vector)) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">   11265720 :         if (chunk &amp;&amp; scalar_executor) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">   11195319 :                 if (vector.count == 1 &amp;&amp; (chunk-&gt;size() &gt; 1 || vector.sel_vector != chunk-&gt;sel_vector)) {</span>
 <span class="lineNum">      45 </span>            :                         // have to duplicate the constant value to match the rows in the
 <span class="lineNum">      46 </span>            :                         // other columns
-<span class="lineNum">      47 </span><span class="lineCov">    1244085 :                         result.count = chunk-&gt;size();</span>
-<span class="lineNum">      48 </span><span class="lineCov">    1244101 :                         result.sel_vector = chunk-&gt;sel_vector;</span>
-<span class="lineNum">      49 </span><span class="lineCov">    1244101 :                         VectorOperations::Set(result, vector.GetValue(0));</span>
-<span class="lineNum">      50 </span><span class="lineCov">    1244158 :                         result.Move(vector);</span>
-<span class="lineNum">      51 </span><span class="lineCov">    9947979 :                 } else if (vector.count != chunk-&gt;size()) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">    1243942 :                         result.count = chunk-&gt;size();</span>
+<span class="lineNum">      48 </span><span class="lineCov">    1243960 :                         result.sel_vector = chunk-&gt;sel_vector;</span>
+<span class="lineNum">      49 </span><span class="lineCov">    1243960 :                         VectorOperations::Set(result, vector.GetValue(0));</span>
+<span class="lineNum">      50 </span><span class="lineCov">    1244025 :                         result.Move(vector);</span>
+<span class="lineNum">      51 </span><span class="lineCov">    9951225 :                 } else if (vector.count != chunk-&gt;size()) {</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Computed vector length does not match expected length!&quot;);</span>
 <span class="lineNum">      53 </span>            :                 }
-<span class="lineNum">      54 </span><span class="lineCov">   11193945 :                 assert(vector.sel_vector == chunk-&gt;sel_vector);</span>
+<span class="lineNum">      54 </span><span class="lineCov">   11196890 :                 assert(vector.sel_vector == chunk-&gt;sel_vector);</span>
 <span class="lineNum">      55 </span>            :         }
-<span class="lineNum">      56 </span><span class="lineCov">   11264128 :         if (result.type != vector.type) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">   11267291 :         if (result.type != vector.type) {</span>
 <span class="lineNum">      57 </span>            :                 // cast to the expected type
 <span class="lineNum">      58 </span><span class="lineCov">         61 :                 VectorOperations::Cast(vector, result);</span>
 <span class="lineNum">      59 </span>            :         } else {
 <span class="lineNum">      60 </span>            :                 // types match, only move the data
-<span class="lineNum">      61 </span><span class="lineCov">   11264067 :                 vector.Move(result);</span>
+<span class="lineNum">      61 </span><span class="lineCov">   11267230 :                 vector.Move(result);</span>
 <span class="lineNum">      62 </span>            :         }
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">   11265853 : }</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">   11268819 : }</span></a>
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span><span class="lineCov">      52325 : void ExpressionExecutor::MergeExpression(Expression *expr, Vector &amp;result) {</span>
 <span class="lineNum">      66 </span><span class="lineCov">      52325 :         vector.Destroy();</span>
@@ -137,13 +137,13 @@
 <span class="lineNum">      75 </span><span class="lineCov">      52325 :         VectorOperations::And(vector, result, result);</span>
 <a name="76"><span class="lineNum">      76 </span><span class="lineCov">      52325 : }</span></a>
 <span class="lineNum">      77 </span>            : 
-<span class="lineNum">      78 </span><span class="lineCov">   27410862 : void ExpressionExecutor::Verify(Expression &amp;expr) {</span>
-<span class="lineNum">      79 </span><span class="lineCov">   27410862 :         expr.stats.Verify(vector);</span>
+<span class="lineNum">      78 </span><span class="lineCov">   27420105 : void ExpressionExecutor::Verify(Expression &amp;expr) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">   27420105 :         expr.stats.Verify(vector);</span>
 <span class="lineNum">      80 </span>            :         // if (chunk) {
 <span class="lineNum">      81 </span>            :         //      assert(vector.IsConstant() || vector.sel_vector == chunk-&gt;sel_vector);
 <span class="lineNum">      82 </span>            :         // }
-<span class="lineNum">      83 </span><span class="lineCov">   27422076 :         vector.Verify();</span>
-<span class="lineNum">      84 </span><span class="lineCov">   27417153 : }</span>
+<span class="lineNum">      83 </span><span class="lineCov">   27431193 :         vector.Verify();</span>
+<span class="lineNum">      84 </span><span class="lineCov">   27427108 : }</span>
 </pre>
       </td>
     </tr>

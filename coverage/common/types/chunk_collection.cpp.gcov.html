@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - common/types/chunk_collection.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - common/types/chunk_collection.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">105</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -68,24 +68,24 @@
 <span class="lineNum">       6 </span>            : using namespace duckdb;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">    6987162 : void ChunkCollection::Append(DataChunk &amp;new_chunk) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">    6987162 :         if (new_chunk.size() == 0) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    3138294 :                 return;</span>
+<span class="lineNum">       9 </span><span class="lineCov">    6986807 : void ChunkCollection::Append(DataChunk &amp;new_chunk) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    6986807 :         if (new_chunk.size() == 0) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3138178 :                 return;</span>
 <span class="lineNum">      12 </span>            :         }
 <span class="lineNum">      13 </span>            :         // we have to ensure that every chunk in the ChunkCollection is completely
 <span class="lineNum">      14 </span>            :         // filled, otherwise our O(1) lookup in GetValue and SetValue does not work
 <span class="lineNum">      15 </span>            :         // first fill the latest chunk, if it exists
-<span class="lineNum">      16 </span><span class="lineCov">    3848424 :         count += new_chunk.size();</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3848279 :         count += new_chunk.size();</span>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">    3848772 :         size_t remaining_data = new_chunk.size();</span>
-<span class="lineNum">      19 </span><span class="lineCov">    3848856 :         size_t offset = 0;</span>
-<span class="lineNum">      20 </span><span class="lineCov">    3848856 :         if (chunks.size() == 0) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3848614 :         size_t remaining_data = new_chunk.size();</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3848719 :         size_t offset = 0;</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3848719 :         if (chunks.size() == 0) {</span>
 <span class="lineNum">      21 </span>            :                 // first chunk
-<span class="lineNum">      22 </span><span class="lineCov">    3165540 :                 types = new_chunk.GetTypes();</span>
+<span class="lineNum">      22 </span><span class="lineCov">    3165380 :                 types = new_chunk.GetTypes();</span>
 <span class="lineNum">      23 </span>            :         } else {
 <span class="lineNum">      24 </span>            : #ifdef DEBUG
 <span class="lineNum">      25 </span>            :                 // the types of the new chunk should match the types of the previous one
-<span class="lineNum">      26 </span><span class="lineCov">     683221 :                 assert(types.size() == new_chunk.column_count);</span>
+<span class="lineNum">      26 </span><span class="lineCov">     683224 :                 assert(types.size() == new_chunk.column_count);</span>
 <span class="lineNum">      27 </span><span class="lineCov">    1366468 :                 auto new_types = new_chunk.GetTypes();</span>
 <span class="lineNum">      28 </span><span class="lineCov">    3413769 :                 for (size_t i = 0; i &lt; types.size(); i++) {</span>
 <span class="lineNum">      29 </span><span class="lineCov">    2730535 :                         assert(new_types[i] == types[i]);</span>
@@ -111,12 +111,12 @@
 <span class="lineNum">      49 </span>            :                 }
 <span class="lineNum">      50 </span>            :         }
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">    3848530 :         if (remaining_data &gt; 0) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">    3848388 :         if (remaining_data &gt; 0) {</span>
 <span class="lineNum">      53 </span>            :                 // create a new chunk and fill it with the remainder
-<span class="lineNum">      54 </span><span class="lineCov">    6332311 :                 auto chunk = make_unique&lt;DataChunk&gt;();</span>
-<span class="lineNum">      55 </span><span class="lineCov">    3166372 :                 chunk-&gt;Initialize(types);</span>
-<span class="lineNum">      56 </span><span class="lineCov">    3166484 :                 new_chunk.Copy(*chunk, offset);</span>
-<span class="lineNum">      57 </span><span class="lineCov">    3166087 :                 chunks.push_back(move(chunk));</span>
+<span class="lineNum">      54 </span><span class="lineCov">    6332064 :                 auto chunk = make_unique&lt;DataChunk&gt;();</span>
+<span class="lineNum">      55 </span><span class="lineCov">    3166220 :                 chunk-&gt;Initialize(types);</span>
+<span class="lineNum">      56 </span><span class="lineCov">    3166340 :                 new_chunk.Copy(*chunk, offset);</span>
+<span class="lineNum">      57 </span><span class="lineCov">    3166043 :                 chunks.push_back(move(chunk));</span>
 <span class="lineNum">      58 </span>            :         }
 <a name="59"><span class="lineNum">      59 </span>            : }</a>
 <span class="lineNum">      60 </span>            : 

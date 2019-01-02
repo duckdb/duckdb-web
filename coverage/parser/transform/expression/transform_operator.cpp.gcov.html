@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - parser/transform/expression/transform_operator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - parser/transform/expression/transform_operator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">87</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -71,22 +71,22 @@
 <span class="lineNum">       9 </span>            : using namespace postgres;
 <a name="10"><span class="lineNum">      10 </span>            : using namespace std;</a>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">   11564875 : static ExpressionType OperatorToExpressionType(string &amp;op) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">   11564875 :         if (op == &quot;+&quot;) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">    5884424 :                 return ExpressionType::OPERATOR_ADD;</span>
-<span class="lineNum">      15 </span><span class="lineCov">    5683096 :         } else if (op == &quot;-&quot;) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    2869414 :                 return ExpressionType::OPERATOR_SUBTRACT;</span>
-<span class="lineNum">      17 </span><span class="lineCov">    2815034 :         } else if (op == &quot;*&quot;) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">   11564321 : static ExpressionType OperatorToExpressionType(string &amp;op) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">   11564321 :         if (op == &quot;+&quot;) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    5884377 :                 return ExpressionType::OPERATOR_ADD;</span>
+<span class="lineNum">      15 </span><span class="lineCov">    5683174 :         } else if (op == &quot;-&quot;) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    2869100 :                 return ExpressionType::OPERATOR_SUBTRACT;</span>
+<span class="lineNum">      17 </span><span class="lineCov">    2815587 :         } else if (op == &quot;*&quot;) {</span>
 <span class="lineNum">      18 </span><span class="lineCov">    2097007 :                 return ExpressionType::OPERATOR_MULTIPLY;</span>
-<span class="lineNum">      19 </span><span class="lineCov">     717611 :         } else if (op == &quot;/&quot;) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     715318 :         } else if (op == &quot;/&quot;) {</span>
 <span class="lineNum">      20 </span><span class="lineCov">     435680 :                 return ExpressionType::OPERATOR_DIVIDE;</span>
-<span class="lineNum">      21 </span><span class="lineCov">     282079 :         } else if (op == &quot;||&quot;) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">     282002 :         } else if (op == &quot;||&quot;) {</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 return ExpressionType::OPERATOR_CONCAT;</span>
-<span class="lineNum">      23 </span><span class="lineCov">     279478 :         } else if (op == &quot;%&quot;) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">     282425 :         } else if (op == &quot;%&quot;) {</span>
 <span class="lineNum">      24 </span><span class="lineCov">         10 :                 return ExpressionType::OPERATOR_MOD;</span>
-<span class="lineNum">      25 </span><span class="lineCov">     282237 :         } else if (op == &quot;=&quot;) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">     160817 :                 return ExpressionType::COMPARE_EQUAL;</span>
-<span class="lineNum">      27 </span><span class="lineCov">     121834 :         } else if (op == &quot;!=&quot; || op == &quot;&lt;&gt;&quot;) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">     282589 :         } else if (op == &quot;=&quot;) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">     158100 :                 return ExpressionType::COMPARE_EQUAL;</span>
+<span class="lineNum">      27 </span><span class="lineCov">     121542 :         } else if (op == &quot;!=&quot; || op == &quot;&lt;&gt;&quot;) {</span>
 <span class="lineNum">      28 </span><span class="lineCov">      21092 :                 return ExpressionType::COMPARE_NOTEQUAL;</span>
 <span class="lineNum">      29 </span><span class="lineCov">     100824 :         } else if (op == &quot;&lt;&quot;) {</span>
 <span class="lineNum">      30 </span><span class="lineCov">      28305 :                 return ExpressionType::COMPARE_LESSTHAN;</span>
@@ -104,14 +104,14 @@
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :         return ExpressionType::INVALID;</span>
 <a name="43"><span class="lineNum">      43 </span>            : }</a>
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">   11768645 : unique_ptr&lt;Expression&gt; Transformer::TransformAExpr(A_Expr *root) {</span>
-<span class="lineNum">      46 </span><span class="lineCov">   11768645 :         if (!root) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">   11767984 : unique_ptr&lt;Expression&gt; Transformer::TransformAExpr(A_Expr *root) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">   11767984 :         if (!root) {</span>
 <span class="lineNum">      47 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      48 </span>            :         }
-<span class="lineNum">      49 </span><span class="lineCov">   11768645 :         ExpressionType target_type;</span>
-<span class="lineNum">      50 </span><span class="lineCov">   35312845 :         auto name = string((reinterpret_cast&lt;value *&gt;(root-&gt;name-&gt;head-&gt;data.ptr_value))-&gt;val.str);</span>
+<span class="lineNum">      49 </span><span class="lineCov">   11767984 :         ExpressionType target_type;</span>
+<span class="lineNum">      50 </span><span class="lineCov">   35310847 :         auto name = string((reinterpret_cast&lt;value *&gt;(root-&gt;name-&gt;head-&gt;data.ptr_value))-&gt;val.str);</span>
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">   11772950 :         switch (root-&gt;kind) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">   11771938 :         switch (root-&gt;kind) {</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :         case AEXPR_DISTINCT:</span>
 <span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 target_type = ExpressionType::COMPARE_DISTINCT_FROM;</span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :                 break;</span>
@@ -167,18 +167,18 @@
 <span class="lineNum">     105 </span><span class="lineCov">     143456 :                                                                nullptr);</span>
 <span class="lineNum">     106 </span>            :                 }
 <span class="lineNum">     107 </span>            :         } break;
-<span class="lineNum">     108 </span><span class="lineCov">   11567946 :         default: {</span>
-<span class="lineNum">     109 </span><span class="lineCov">   11567946 :                 target_type = OperatorToExpressionType(name);</span>
-<span class="lineNum">     110 </span><span class="lineCov">   11564918 :                 if (target_type == ExpressionType::INVALID) {</span>
+<span class="lineNum">     108 </span><span class="lineCov">   11566934 :         default: {</span>
+<span class="lineNum">     109 </span><span class="lineCov">   11566934 :                 target_type = OperatorToExpressionType(name);</span>
+<span class="lineNum">     110 </span><span class="lineCov">   11565590 :                 if (target_type == ExpressionType::INVALID) {</span>
 <span class="lineNum">     111 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;A_Expr transform not implemented %s.&quot;, name.c_str());</span>
 <span class="lineNum">     112 </span>            :                 }
 <span class="lineNum">     113 </span>            :         }
 <span class="lineNum">     114 </span>            :         }
 <span class="lineNum">     115 </span>            : 
 <span class="lineNum">     116 </span>            :         // continuing default case
-<span class="lineNum">     117 </span><span class="lineCov">   23130769 :         auto left_expr = TransformExpression(root-&gt;lexpr);</span>
-<span class="lineNum">     118 </span><span class="lineCov">   23127370 :         auto right_expr = TransformExpression(root-&gt;rexpr);</span>
-<span class="lineNum">     119 </span><span class="lineCov">   11563441 :         if (!left_expr) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">   23129800 :         auto left_expr = TransformExpression(root-&gt;lexpr);</span>
+<span class="lineNum">     118 </span><span class="lineCov">   23126867 :         auto right_expr = TransformExpression(root-&gt;rexpr);</span>
+<span class="lineNum">     119 </span><span class="lineCov">   11563743 :         if (!left_expr) {</span>
 <span class="lineNum">     120 </span><span class="lineCov">    6520600 :                 switch (target_type) {</span>
 <span class="lineNum">     121 </span><span class="lineCov">    4105640 :                 case ExpressionType::OPERATOR_ADD:</span>
 <span class="lineNum">     122 </span><span class="lineCov">    4105640 :                         return right_expr;</span>
@@ -191,19 +191,19 @@
 <span class="lineNum">     129 </span>            :                 }
 <span class="lineNum">     130 </span>            :         }
 <span class="lineNum">     131 </span>            : 
-<span class="lineNum">     132 </span><span class="lineCov">   14915857 :         unique_ptr&lt;Expression&gt; result = nullptr;</span>
-<span class="lineNum">     133 </span><span class="lineCov">    7458945 :         int type_id = static_cast&lt;int&gt;(target_type);</span>
-<span class="lineNum">     134 </span><span class="lineCov">    7458945 :         if (type_id &gt;= static_cast&lt;int&gt;(ExpressionType::BINOP_BOUNDARY_START) &amp;&amp;</span>
+<span class="lineNum">     132 </span><span class="lineCov">   14915720 :         unique_ptr&lt;Expression&gt; result = nullptr;</span>
+<span class="lineNum">     133 </span><span class="lineCov">    7459031 :         int type_id = static_cast&lt;int&gt;(target_type);</span>
+<span class="lineNum">     134 </span><span class="lineCov">    7459031 :         if (type_id &gt;= static_cast&lt;int&gt;(ExpressionType::BINOP_BOUNDARY_START) &amp;&amp;</span>
 <span class="lineNum">     135 </span>            :             type_id &lt;= static_cast&lt;int&gt;(ExpressionType::BINOP_BOUNDARY_END)) {
 <span class="lineNum">     136 </span>            :                 // binary operator
-<span class="lineNum">     137 </span><span class="lineCov">    7177915 :                 result = make_unique&lt;OperatorExpression&gt;(target_type, TypeId::INVALID, move(left_expr), move(right_expr));</span>
-<span class="lineNum">     138 </span><span class="lineCov">     281030 :         } else if (type_id &gt;= static_cast&lt;int&gt;(ExpressionType::COMPARE_BOUNDARY_START) &amp;&amp;</span>
+<span class="lineNum">     137 </span><span class="lineCov">    7178963 :                 result = make_unique&lt;OperatorExpression&gt;(target_type, TypeId::INVALID, move(left_expr), move(right_expr));</span>
+<span class="lineNum">     138 </span><span class="lineCov">     280068 :         } else if (type_id &gt;= static_cast&lt;int&gt;(ExpressionType::COMPARE_BOUNDARY_START) &amp;&amp;</span>
 <span class="lineNum">     139 </span>            :                    type_id &lt;= static_cast&lt;int&gt;(ExpressionType::COMPARE_BOUNDARY_END)) {
-<span class="lineNum">     140 </span><span class="lineCov">     279527 :                 result = make_unique&lt;ComparisonExpression&gt;(target_type, move(left_expr), move(right_expr));</span>
+<span class="lineNum">     140 </span><span class="lineCov">     279267 :                 result = make_unique&lt;ComparisonExpression&gt;(target_type, move(left_expr), move(right_expr));</span>
 <span class="lineNum">     141 </span>            :         } else {
-<span class="lineNum">     142 </span><span class="lineCov">       1503 :                 throw NotImplementedException(&quot;A_Expr transform not implemented.&quot;);</span>
+<span class="lineNum">     142 </span><span class="lineCov">        801 :                 throw NotImplementedException(&quot;A_Expr transform not implemented.&quot;);</span>
 <span class="lineNum">     143 </span>            :         }
-<span class="lineNum">     144 </span><span class="lineCov">    7459603 :         return result;</span>
+<span class="lineNum">     144 </span><span class="lineCov">    7460191 :         return result;</span>
 <span class="lineNum">     145 </span>            : }
 </pre>
       </td>

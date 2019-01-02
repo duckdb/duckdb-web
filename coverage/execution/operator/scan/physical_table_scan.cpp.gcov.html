@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - execution/operator/scan/physical_table_scan.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - execution/operator/scan/physical_table_scan.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -67,16 +67,16 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    6343369 : void PhysicalTableScan::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    6343369 :         auto state = reinterpret_cast&lt;PhysicalTableScanOperatorState *&gt;(state_);</span>
-<span class="lineNum">      10 </span><span class="lineCov">    6343369 :         if (column_ids.size() == 0)</span>
+<span class="lineNum">       8 </span><span class="lineCov">    6346440 : void PhysicalTableScan::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    6346440 :         auto state = reinterpret_cast&lt;PhysicalTableScanOperatorState *&gt;(state_);</span>
+<span class="lineNum">      10 </span><span class="lineCov">    6346440 :         if (column_ids.size() == 0)</span>
 <span class="lineNum">      11 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    6342912 :         table.Scan(context.ActiveTransaction(), chunk, column_ids, state-&gt;scan_offset);</span>
+<span class="lineNum">      13 </span><span class="lineCov">    6346020 :         table.Scan(context.ActiveTransaction(), chunk, column_ids, state-&gt;scan_offset);</span>
 <a name="14"><span class="lineNum">      14 </span>            : }</a>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">    2804872 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalTableScan::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">    2804872 :         return make_unique&lt;PhysicalTableScanOperatorState&gt;(table, parent_executor);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    2804767 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalTableScan::GetOperatorState(ExpressionExecutor *parent_executor) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">    2804767 :         return make_unique&lt;PhysicalTableScanOperatorState&gt;(table, parent_executor);</span>
 <a name="18"><span class="lineNum">      18 </span>            : }</a>
 <span class="lineNum">      19 </span>            : 
 <span class="lineNum">      20 </span><span class="lineCov">        166 : string PhysicalTableScan::ExtraRenderInformation() {</span>

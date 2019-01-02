@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - include/storage/data_table.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - include/storage/data_table.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -126,11 +126,11 @@
 <span class="lineNum">      64 </span>            :         void CreateIndexScan(ScanStructure &amp;structure, vector&lt;column_t&gt; &amp;column_ids, DataChunk &amp;result);
 <a name="65"><span class="lineNum">      65 </span>            : </a>
 <span class="lineNum">      66 </span>            :         //! Get statistics of the specified column
-<span class="lineNum">      67 </span><span class="lineCov">    5034961 :         ColumnStatistics &amp;GetStatistics(column_t oid) {</span>
-<span class="lineNum">      68 </span><span class="lineCov">    5034961 :                 if (oid == COLUMN_IDENTIFIER_ROW_ID) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">    5034726 :         ColumnStatistics &amp;GetStatistics(column_t oid) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">    5034726 :                 if (oid == COLUMN_IDENTIFIER_ROW_ID) {</span>
 <span class="lineNum">      69 </span><span class="lineNoCov">          0 :                         return rowid_statistics;</span>
 <span class="lineNum">      70 </span>            :                 }
-<span class="lineNum">      71 </span><span class="lineCov">    5034961 :                 return statistics[oid];</span>
+<span class="lineNum">      71 </span><span class="lineCov">    5034726 :                 return statistics[oid];</span>
 <span class="lineNum">      72 </span>            :         }
 <span class="lineNum">      73 </span>            : 
 <span class="lineNum">      74 </span>            :         //! The amount of elements in the table. Note that this number signifies the amount of COMMITTED entries in the

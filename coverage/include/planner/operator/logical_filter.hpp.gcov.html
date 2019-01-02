@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - include/planner/operator/logical_filter.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - include/planner/operator/logical_filter.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -80,12 +80,12 @@
 <span class="lineNum">      18 </span>            :         LogicalFilter(unique_ptr&lt;Expression&gt; expression);
 <a name="19"><span class="lineNum">      19 </span>            :         LogicalFilter();</a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">    1484559 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      22 </span><span class="lineCov">    1484559 :                 v-&gt;Visit(*this);</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    1484129 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">    1484248 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      22 </span><span class="lineCov">    1484248 :                 v-&gt;Visit(*this);</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    1484889 :         }</span></a>
 <span class="lineNum">      24 </span>            :         vector&lt;string&gt; GetNames() override;
-<span class="lineNum">      25 </span><span class="lineCov">     585385 :         bool SplitPredicates() {</span>
-<span class="lineNum">      26 </span><span class="lineCov">     585385 :                 return SplitPredicates(expressions);</span>
+<span class="lineNum">      25 </span><span class="lineCov">     585406 :         bool SplitPredicates() {</span>
+<span class="lineNum">      26 </span><span class="lineCov">     585406 :                 return SplitPredicates(expressions);</span>
 <span class="lineNum">      27 </span>            :         }
 <span class="lineNum">      28 </span>            :         //! Splits up the predicates of the LogicalFilter into a set of predicates
 <span class="lineNum">      29 </span>            :         //! separated by AND Returns whether or not any splits were made

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - parser/transform/statement/transform_insert.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 13766100 - parser/transform/statement/transform_insert.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
+            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">24</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 12:29:43</td>
+            <td class="headerValue">2019-01-02 13:22:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -68,35 +68,35 @@
 <span class="lineNum">       6 </span>            : using namespace postgres;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">      40166 : unique_ptr&lt;InsertStatement&gt; Transformer::TransformInsert(Node *node) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">      40166 :         InsertStmt *stmt = reinterpret_cast&lt;InsertStmt *&gt;(node);</span>
-<span class="lineNum">      11 </span><span class="lineCov">      40166 :         assert(stmt);</span>
+<span class="lineNum">       9 </span><span class="lineCov">      40167 : unique_ptr&lt;InsertStatement&gt; Transformer::TransformInsert(Node *node) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">      40167 :         InsertStmt *stmt = reinterpret_cast&lt;InsertStmt *&gt;(node);</span>
+<span class="lineNum">      11 </span><span class="lineCov">      40167 :         assert(stmt);</span>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">      40166 :         auto result = make_unique&lt;InsertStatement&gt;();</span>
+<span class="lineNum">      13 </span><span class="lineCov">      40167 :         auto result = make_unique&lt;InsertStatement&gt;();</span>
 <span class="lineNum">      14 </span>            : 
 <span class="lineNum">      15 </span>            :         // first check if there are any columns specified
-<span class="lineNum">      16 </span><span class="lineCov">      40165 :         if (stmt-&gt;cols) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">      40167 :         if (stmt-&gt;cols) {</span>
 <span class="lineNum">      17 </span><span class="lineCov">        561 :                 for (ListCell *c = stmt-&gt;cols-&gt;head; c != NULL; c = lnext(c)) {</span>
 <span class="lineNum">      18 </span><span class="lineCov">        465 :                         ResTarget *target = (ResTarget *)(c-&gt;data.ptr_value);</span>
 <span class="lineNum">      19 </span><span class="lineCov">        465 :                         result-&gt;columns.push_back(string(target-&gt;name));</span>
 <span class="lineNum">      20 </span>            :                 }
 <span class="lineNum">      21 </span>            :         }
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">      40165 :         auto select_stmt = reinterpret_cast&lt;SelectStmt *&gt;(stmt-&gt;selectStmt);</span>
-<span class="lineNum">      24 </span><span class="lineCov">      40165 :         if (!select_stmt-&gt;valuesLists) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">      40167 :         auto select_stmt = reinterpret_cast&lt;SelectStmt *&gt;(stmt-&gt;selectStmt);</span>
+<span class="lineNum">      24 </span><span class="lineCov">      40167 :         if (!select_stmt-&gt;valuesLists) {</span>
 <span class="lineNum">      25 </span>            :                 // insert from select statement
 <span class="lineNum">      26 </span><span class="lineCov">         14 :                 result-&gt;select_statement = TransformSelect(stmt-&gt;selectStmt);</span>
 <span class="lineNum">      27 </span>            :         } else {
 <span class="lineNum">      28 </span>            :                 // transform the insert list
-<span class="lineNum">      29 </span><span class="lineCov">      40151 :                 auto list = select_stmt-&gt;valuesLists;</span>
-<span class="lineNum">      30 </span><span class="lineCov">      81588 :                 for (auto value_list = list-&gt;head; value_list != NULL; value_list = value_list-&gt;next) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">      41435 :                         List *target = (List *)(value_list-&gt;data.ptr_value);</span>
+<span class="lineNum">      29 </span><span class="lineCov">      40153 :                 auto list = select_stmt-&gt;valuesLists;</span>
+<span class="lineNum">      30 </span><span class="lineCov">      81590 :                 for (auto value_list = list-&gt;head; value_list != NULL; value_list = value_list-&gt;next) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">      41437 :                         List *target = (List *)(value_list-&gt;data.ptr_value);</span>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">      82870 :                         vector&lt;unique_ptr&lt;Expression&gt;&gt; insert_values;</span>
-<span class="lineNum">      34 </span><span class="lineCov">      41436 :                         if (!TransformExpressionList(target, insert_values)) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">      82874 :                         vector&lt;unique_ptr&lt;Expression&gt;&gt; insert_values;</span>
+<span class="lineNum">      34 </span><span class="lineCov">      41437 :                         if (!TransformExpressionList(target, insert_values)) {</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                                 throw ParserException(&quot;Could not parse expression list!&quot;);</span>
 <span class="lineNum">      36 </span>            :                         }
-<span class="lineNum">      37 </span><span class="lineCov">      41436 :                         if (result-&gt;values.size() &gt; 0) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">      41438 :                         if (result-&gt;values.size() &gt; 0) {</span>
 <span class="lineNum">      38 </span><span class="lineCov">       1284 :                                 if (result-&gt;values[0].size() != insert_values.size()) {</span>
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 :                                         throw ParserException(&quot;Insert VALUES lists must all be the same length&quot;);</span>
 <span class="lineNum">      40 </span>            :                                 }
@@ -105,11 +105,11 @@
 <span class="lineNum">      43 </span>            :                 }
 <span class="lineNum">      44 </span>            :         }
 <span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">      80334 :         auto ref = TransformRangeVar(stmt-&gt;relation);</span>
+<span class="lineNum">      46 </span><span class="lineCov">      80336 :         auto ref = TransformRangeVar(stmt-&gt;relation);</span>
 <span class="lineNum">      47 </span><span class="lineCov">      40168 :         auto &amp;table = *reinterpret_cast&lt;BaseTableRef *&gt;(ref.get());</span>
-<span class="lineNum">      48 </span><span class="lineCov">      40165 :         result-&gt;table = table.table_name;</span>
+<span class="lineNum">      48 </span><span class="lineCov">      40167 :         result-&gt;table = table.table_name;</span>
 <span class="lineNum">      49 </span><span class="lineCov">      40168 :         result-&gt;schema = table.schema_name;</span>
-<span class="lineNum">      50 </span><span class="lineCov">      80335 :         return result;</span>
+<span class="lineNum">      50 </span><span class="lineCov">      80337 :         return result;</span>
 <span class="lineNum">      51 </span>            : }
 </pre>
       </td>
