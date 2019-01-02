@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ee3c68e4 - common/value_operations/comparison_operations.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 7243ba4e - common/value_operations/comparison_operations.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ee3c68e4</td>
+            <td class="headerValue">DuckDB Code Coverage Report 7243ba4e</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">111</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-12-31 15:41:33</td>
+            <td class="headerValue">2019-01-02 12:29:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -70,32 +70,32 @@
 <span class="lineNum">       8 </span>            : //===--------------------------------------------------------------------===//
 <a name="9"><span class="lineNum">       9 </span>            : // Comparison Operations</a>
 <span class="lineNum">      10 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">      11 </span><span class="lineCov">  130432115 : template &lt;class OP&gt; static bool templated_boolean_operation(const Value &amp;left, const Value &amp;right) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">  130432115 :         if (left.type != right.type) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">   36648697 :                 if (TypeIsNumeric(left.type) &amp;&amp; TypeIsNumeric(right.type)) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">   36662621 :                         if (left.type &lt; right.type) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">   36632684 :                                 Value left_cast = left.CastAs(right.type);</span>
-<span class="lineNum">      16 </span><span class="lineCov">   18306487 :                                 return templated_boolean_operation&lt;OP&gt;(left_cast, right);</span>
+<span class="lineNum">      11 </span><span class="lineCov">  130452148 : template &lt;class OP&gt; static bool templated_boolean_operation(const Value &amp;left, const Value &amp;right) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">  130452148 :         if (left.type != right.type) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">   36657927 :                 if (TypeIsNumeric(left.type) &amp;&amp; TypeIsNumeric(right.type)) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">   36669197 :                         if (left.type &lt; right.type) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">   36638557 :                                 Value left_cast = left.CastAs(right.type);</span>
+<span class="lineNum">      16 </span><span class="lineCov">   18309672 :                                 return templated_boolean_operation&lt;OP&gt;(left_cast, right);</span>
 <span class="lineNum">      17 </span>            :                         } else {
-<span class="lineNum">      18 </span><span class="lineCov">   36681318 :                                 Value right_cast = right.CastAs(left.type);</span>
-<span class="lineNum">      19 </span><span class="lineCov">   18333200 :                                 return templated_boolean_operation&lt;OP&gt;(left, right_cast);</span>
+<span class="lineNum">      18 </span><span class="lineCov">   36683958 :                                 Value right_cast = right.CastAs(left.type);</span>
+<span class="lineNum">      19 </span><span class="lineCov">   18334571 :                                 return templated_boolean_operation&lt;OP&gt;(left, right_cast);</span>
 <span class="lineNum">      20 </span>            :                         }
 <span class="lineNum">      21 </span>            :                 }
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 throw TypeMismatchException(left.type, right.type, &quot;Cannot perform boolean operation on these two types&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<span class="lineNum">      24 </span><span class="lineCov">   93783418 :         switch (left.type) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">   93794221 :         switch (left.type) {</span>
 <span class="lineNum">      25 </span><span class="lineCov">         49 :         case TypeId::BOOLEAN:</span>
 <span class="lineNum">      26 </span><span class="lineCov">         49 :                 return OP::Operation(left.value_.boolean, right.value_.boolean);</span>
 <span class="lineNum">      27 </span><span class="lineCov">         25 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      28 </span><span class="lineCov">         25 :                 return OP::Operation(left.value_.tinyint, right.value_.tinyint);</span>
 <span class="lineNum">      29 </span><span class="lineCov">         11 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      30 </span><span class="lineCov">         11 :                 return OP::Operation(left.value_.smallint, right.value_.smallint);</span>
-<span class="lineNum">      31 </span><span class="lineCov">   38635537 :         case TypeId::INTEGER:</span>
-<span class="lineNum">      32 </span><span class="lineCov">   38635537 :                 return OP::Operation(left.value_.integer, right.value_.integer);</span>
-<span class="lineNum">      33 </span><span class="lineCov">   52984167 :         case TypeId::BIGINT:</span>
-<span class="lineNum">      34 </span><span class="lineCov">   52984167 :                 return OP::Operation(left.value_.bigint, right.value_.bigint);</span>
-<span class="lineNum">      35 </span><span class="lineCov">    1453540 :         case TypeId::DECIMAL:</span>
-<span class="lineNum">      36 </span><span class="lineCov">    1453540 :                 return OP::Operation(left.value_.decimal, right.value_.decimal);</span>
+<span class="lineNum">      31 </span><span class="lineCov">   38641335 :         case TypeId::INTEGER:</span>
+<span class="lineNum">      32 </span><span class="lineCov">   38641335 :                 return OP::Operation(left.value_.integer, right.value_.integer);</span>
+<span class="lineNum">      33 </span><span class="lineCov">   52986137 :         case TypeId::BIGINT:</span>
+<span class="lineNum">      34 </span><span class="lineCov">   52986137 :                 return OP::Operation(left.value_.bigint, right.value_.bigint);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    1453551 :         case TypeId::DECIMAL:</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1453551 :                 return OP::Operation(left.value_.decimal, right.value_.decimal);</span>
 <span class="lineNum">      37 </span><span class="lineCov">     218170 :         case TypeId::POINTER:</span>
 <span class="lineNum">      38 </span><span class="lineCov">     218170 :                 return OP::Operation(left.value_.pointer, right.value_.pointer);</span>
 <span class="lineNum">      39 </span><span class="lineCov">     395239 :         case TypeId::DATE:</span>
@@ -108,20 +108,20 @@
 <span class="lineNum">      46 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type&quot;);</span>
 <span class="lineNum">      47 </span>            :         }
 <a name="48"><span class="lineNum">      48 </span>            : }</a>
-<span class="lineNum">      49 </span><span class="lineCov">   76231921 : </span>
-<span class="lineNum">      50 </span><span class="lineCov">   76231921 : bool ValueOperations::Equals(const Value &amp;left, const Value &amp;right) {</span>
-<span class="lineNum">      51 </span><span class="lineCov">   36648343 :         if (left.is_null &amp;&amp; right.is_null) {</span>
-<span class="lineNum">      52 </span><span class="lineCov">   36662267 :                 return true;</span>
-<span class="lineNum">      53 </span><span class="lineCov">   36632056 :         }</span>
-<span class="lineNum">      54 </span><span class="lineCov">   18306173 :         if (left.is_null != right.is_null) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">   76245862 : </span>
+<span class="lineNum">      50 </span><span class="lineCov">   76245862 : bool ValueOperations::Equals(const Value &amp;left, const Value &amp;right) {</span>
+<span class="lineNum">      51 </span><span class="lineCov">   36657573 :         if (left.is_null &amp;&amp; right.is_null) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">   36668843 :                 return true;</span>
+<span class="lineNum">      53 </span><span class="lineCov">   36637929 :         }</span>
+<span class="lineNum">      54 </span><span class="lineCov">   18309358 :         if (left.is_null != right.is_null) {</span>
 <span class="lineNum">      55 </span>            :                 return false;
-<span class="lineNum">      56 </span><span class="lineCov">   36681238 :         }</span>
-<span class="lineNum">      57 </span><span class="lineCov">   18333160 :         return templated_boolean_operation&lt;operators::Equals&gt;(left, right);</span>
+<span class="lineNum">      56 </span><span class="lineCov">   36683878 :         }</span>
+<span class="lineNum">      57 </span><span class="lineCov">   18334531 :         return templated_boolean_operation&lt;operators::Equals&gt;(left, right);</span>
 <a name="58"><span class="lineNum">      58 </span>            : }</a>
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 : bool ValueOperations::NotEquals(const Value &amp;left, const Value &amp;right) {</span>
 <span class="lineNum">      61 </span>            :         return !ValueOperations::Equals(left, right);
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">   39583578 : }</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">   39588289 : }</span></a>
 <span class="lineNum">      63 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">      64 </span><span class="lineNoCov">          0 : bool ValueOperations::GreaterThan(const Value &amp;left, const Value &amp;right) {</span>
 <span class="lineNum">      65 </span><span class="lineNoCov">          0 :         if (left.is_null &amp;&amp; right.is_null) {</span>
@@ -130,8 +130,8 @@
 <span class="lineNum">      68 </span><span class="lineNoCov">          0 :                 return true;</span>
 <span class="lineNum">      69 </span><span class="lineNoCov">          0 :         } else if (left.is_null) {</span>
 <span class="lineNum">      70 </span><span class="lineNoCov">          0 :                 return false;</span>
-<span class="lineNum">      71 </span><span class="lineCov">   38969032 :         }</span>
-<span class="lineNum">      72 </span><span class="lineCov">   38969032 :         return templated_boolean_operation&lt;operators::GreaterThan&gt;(left, right);</span>
+<span class="lineNum">      71 </span><span class="lineCov">   38970939 :         }</span>
+<span class="lineNum">      72 </span><span class="lineCov">   38970939 :         return templated_boolean_operation&lt;operators::GreaterThan&gt;(left, right);</span>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">     345153 : }</span></a>
 <span class="lineNum">      74 </span><span class="lineCov">     345153 : </span>
 <span class="lineNum">      75 </span><span class="lineCov">     218169 : bool ValueOperations::GreaterThanEquals(const Value &amp;left, const Value &amp;right) {</span>
@@ -146,8 +146,8 @@
 <a name="84"><span class="lineNum">      84 </span><span class="lineNoCov">          0 : }</span></a>
 <span class="lineNum">      85 </span>            : 
 <span class="lineNum">      86 </span>            : bool ValueOperations::LessThan(const Value &amp;left, const Value &amp;right) {
-<span class="lineNum">      87 </span><span class="lineCov">   12397865 :         return ValueOperations::GreaterThan(right, left);</span>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">   12397865 : }</span></a>
+<span class="lineNum">      87 </span><span class="lineCov">   12397874 :         return ValueOperations::GreaterThan(right, left);</span>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">   12397874 : }</span></a>
 <span class="lineNum">      89 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">      90 </span><span class="lineNoCov">          0 : bool ValueOperations::LessThanEquals(const Value &amp;left, const Value &amp;right) {</span>
 <span class="lineNum">      91 </span><span class="lineNoCov">          0 :         return ValueOperations::GreaterThanEquals(right, left);</span>
