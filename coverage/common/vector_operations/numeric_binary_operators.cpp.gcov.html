@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - common/vector_operations/numeric_binary_operators.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - common/vector_operations/numeric_binary_operators.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">176</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -77,19 +77,19 @@
 <span class="lineNum">      15 </span>            : //===--------------------------------------------------------------------===//
 <a name="16"><span class="lineNum">      16 </span>            : // Addition</a>
 <span class="lineNum">      17 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">      18 </span><span class="lineCov">    1697890 : void VectorOperations::Add(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">    1697890 :         BINARY_TYPE_CHECK(left, right, result);</span>
-<span class="lineNum">      20 </span><span class="lineCov">    1698373 :         switch (left.type) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    1697912 : void VectorOperations::Add(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">    1697912 :         BINARY_TYPE_CHECK(left, right, result);</span>
+<span class="lineNum">      20 </span><span class="lineCov">    1698603 :         switch (left.type) {</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int8_t, int8_t, int8_t, operators::Add&gt;(left, right, result);</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int16_t, int16_t, int16_t, operators::Add&gt;(left, right, result);</span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      27 </span><span class="lineCov">    1429139 :         case TypeId::DATE:</span>
+<span class="lineNum">      27 </span><span class="lineCov">    1429390 :         case TypeId::DATE:</span>
 <span class="lineNum">      28 </span>            :         case TypeId::INTEGER:
-<span class="lineNum">      29 </span><span class="lineCov">    1429139 :                 templated_binary_loop&lt;int32_t, int32_t, int32_t, operators::Add&gt;(left, right, result);</span>
-<span class="lineNum">      30 </span><span class="lineCov">    1429207 :                 break;</span>
+<span class="lineNum">      29 </span><span class="lineCov">    1429390 :                 templated_binary_loop&lt;int32_t, int32_t, int32_t, operators::Add&gt;(left, right, result);</span>
+<span class="lineNum">      30 </span><span class="lineCov">    1428912 :                 break;</span>
 <span class="lineNum">      31 </span><span class="lineCov">     237260 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">      32 </span>            :         case TypeId::BIGINT:
 <span class="lineNum">      33 </span><span class="lineCov">     237260 :                 templated_binary_loop&lt;int64_t, int64_t, int64_t, operators::Add&gt;(left, right, result);</span>
@@ -100,27 +100,27 @@
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;uint64_t, uint64_t, uint64_t, operators::Add&gt;(left, right, result);</span>
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      41 </span><span class="lineCov">        257 :         default:</span>
-<span class="lineNum">      42 </span><span class="lineCov">        257 :                 throw InvalidTypeException(left.type, &quot;Invalid type for addition&quot;);</span>
+<span class="lineNum">      41 </span><span class="lineCov">        236 :         default:</span>
+<span class="lineNum">      42 </span><span class="lineCov">        236 :                 throw InvalidTypeException(left.type, &quot;Invalid type for addition&quot;);</span>
 <span class="lineNum">      43 </span>            :         }
-<span class="lineNum">      44 </span><span class="lineCov">    1698184 : }</span>
+<span class="lineNum">      44 </span><span class="lineCov">    1697889 : }</span>
 <span class="lineNum">      45 </span>            : 
 <span class="lineNum">      46 </span>            : //===--------------------------------------------------------------------===//
 <a name="47"><span class="lineNum">      47 </span>            : // Subtraction</a>
 <span class="lineNum">      48 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">      49 </span><span class="lineCov">     391601 : void VectorOperations::Subtract(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      50 </span><span class="lineCov">     391601 :         BINARY_TYPE_CHECK(left, right, result);</span>
-<span class="lineNum">      51 </span><span class="lineCov">     392057 :         switch (left.type) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">     391476 : void VectorOperations::Subtract(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">     391476 :         BINARY_TYPE_CHECK(left, right, result);</span>
+<span class="lineNum">      51 </span><span class="lineCov">     392221 :         switch (left.type) {</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int8_t, int8_t, int8_t, operators::Subtract&gt;(left, right, result);</span>
 <span class="lineNum">      54 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      55 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int16_t, int16_t, int16_t, operators::Subtract&gt;(left, right, result);</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      58 </span><span class="lineCov">     305689 :         case TypeId::DATE:</span>
+<span class="lineNum">      58 </span><span class="lineCov">     305409 :         case TypeId::DATE:</span>
 <span class="lineNum">      59 </span>            :         case TypeId::INTEGER:
-<span class="lineNum">      60 </span><span class="lineCov">     305689 :                 templated_binary_loop&lt;int32_t, int32_t, int32_t, operators::Subtract&gt;(left, right, result);</span>
-<span class="lineNum">      61 </span><span class="lineCov">     305416 :                 break;</span>
+<span class="lineNum">      60 </span><span class="lineCov">     305409 :                 templated_binary_loop&lt;int32_t, int32_t, int32_t, operators::Subtract&gt;(left, right, result);</span>
+<span class="lineNum">      61 </span><span class="lineCov">     305183 :                 break;</span>
 <span class="lineNum">      62 </span><span class="lineCov">      64482 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">      63 </span>            :         case TypeId::BIGINT:
 <span class="lineNum">      64 </span><span class="lineCov">      64482 :                 templated_binary_loop&lt;int64_t, int64_t, int64_t, operators::Subtract&gt;(left, right, result);</span>
@@ -131,17 +131,17 @@
 <span class="lineNum">      69 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
 <span class="lineNum">      70 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;uint64_t, uint64_t, uint64_t, operators::Subtract&gt;(left, right, result);</span>
 <span class="lineNum">      71 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      72 </span><span class="lineCov">         68 :         default:</span>
-<span class="lineNum">      73 </span><span class="lineCov">         68 :                 throw InvalidTypeException(left.type, &quot;Invalid type for subtraction&quot;);</span>
+<span class="lineNum">      72 </span><span class="lineCov">        512 :         default:</span>
+<span class="lineNum">      73 </span><span class="lineCov">        512 :                 throw InvalidTypeException(left.type, &quot;Invalid type for subtraction&quot;);</span>
 <span class="lineNum">      74 </span>            :         }
-<span class="lineNum">      75 </span><span class="lineCov">     391716 : }</span>
+<span class="lineNum">      75 </span><span class="lineCov">     391483 : }</span>
 <span class="lineNum">      76 </span>            : 
 <span class="lineNum">      77 </span>            : //===--------------------------------------------------------------------===//
 <a name="78"><span class="lineNum">      78 </span>            : // Multiplication</a>
 <span class="lineNum">      79 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">      80 </span><span class="lineCov">    3821622 : void VectorOperations::Multiply(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
-<span class="lineNum">      81 </span><span class="lineCov">    3821622 :         BINARY_TYPE_CHECK(left, right, result);</span>
-<span class="lineNum">      82 </span><span class="lineCov">    3821622 :         switch (left.type) {</span>
+<span class="lineNum">      80 </span><span class="lineCov">    3821623 : void VectorOperations::Multiply(Vector &amp;left, Vector &amp;right, Vector &amp;result) {</span>
+<span class="lineNum">      81 </span><span class="lineCov">    3821623 :         BINARY_TYPE_CHECK(left, right, result);</span>
+<span class="lineNum">      82 </span><span class="lineCov">    3821623 :         switch (left.type) {</span>
 <span class="lineNum">      83 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      84 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;int8_t, int8_t, int8_t, operators::Multiply&gt;(left, right, result);</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :                 break;</span>
@@ -154,16 +154,16 @@
 <span class="lineNum">      92 </span><span class="lineCov">     524638 :         case TypeId::BIGINT:</span>
 <span class="lineNum">      93 </span><span class="lineCov">     524638 :                 templated_binary_loop&lt;int64_t, int64_t, int64_t, operators::Multiply&gt;(left, right, result);</span>
 <span class="lineNum">      94 </span><span class="lineCov">     524638 :                 break;</span>
-<span class="lineNum">      95 </span><span class="lineCov">      56406 :         case TypeId::DECIMAL:</span>
-<span class="lineNum">      96 </span><span class="lineCov">      56406 :                 templated_binary_loop&lt;double, double, double, operators::Multiply&gt;(left, right, result);</span>
-<span class="lineNum">      97 </span><span class="lineCov">      56406 :                 break;</span>
+<span class="lineNum">      95 </span><span class="lineCov">      56407 :         case TypeId::DECIMAL:</span>
+<span class="lineNum">      96 </span><span class="lineCov">      56407 :                 templated_binary_loop&lt;double, double, double, operators::Multiply&gt;(left, right, result);</span>
+<span class="lineNum">      97 </span><span class="lineCov">      56407 :                 break;</span>
 <span class="lineNum">      98 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
 <span class="lineNum">      99 </span><span class="lineNoCov">          0 :                 templated_binary_loop&lt;uint64_t, uint64_t, uint64_t, operators::Multiply&gt;(left, right, result);</span>
 <span class="lineNum">     100 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     101 </span><span class="lineCov">          1 :         default:</span>
 <span class="lineNum">     102 </span><span class="lineCov">          1 :                 throw InvalidTypeException(left.type, &quot;Invalid type for multiplication&quot;);</span>
 <span class="lineNum">     103 </span>            :         }
-<span class="lineNum">     104 </span><span class="lineCov">    3821621 : }</span>
+<span class="lineNum">     104 </span><span class="lineCov">    3821622 : }</span>
 <span class="lineNum">     105 </span>            : 
 <span class="lineNum">     106 </span>            : //===--------------------------------------------------------------------===//
 <span class="lineNum">     107 </span>            : // Division

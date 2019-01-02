@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - transaction/transaction.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - transaction/transaction.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">42</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -108,27 +108,27 @@
 <span class="lineNum">      46 </span><span class="lineCov">     101270 :         storage-&gt;version_pointers[offset] = meta;</span>
 <span class="lineNum">      47 </span>            : 
 <span class="lineNum">      48 </span><span class="lineCov">     101270 :         if (meta-&gt;next) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">      71953 :                 meta-&gt;next-&gt;chunk = nullptr;</span>
-<span class="lineNum">      50 </span><span class="lineCov">      71953 :                 meta-&gt;next-&gt;prev.pointer = meta;</span>
+<span class="lineNum">      49 </span><span class="lineCov">      71933 :                 meta-&gt;next-&gt;chunk = nullptr;</span>
+<span class="lineNum">      50 </span><span class="lineCov">      71933 :                 meta-&gt;next-&gt;prev.pointer = meta;</span>
 <span class="lineNum">      51 </span>            :         }
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span>            :         // now fill in the tuple data
 <span class="lineNum">      54 </span><span class="lineCov">     101270 :         storage-&gt;table.serializer.Serialize(storage-&gt;columns, offset, tuple_data);</span>
 <a name="55"><span class="lineNum">      55 </span><span class="lineCov">     101270 : }</span></a>
 <span class="lineNum">      56 </span>            : 
-<span class="lineNum">      57 </span><span class="lineCov">      81060 : void Transaction::PushQuery(string query) {</span>
-<span class="lineNum">      58 </span><span class="lineCov">      81060 :         char *blob = (char *)undo_buffer.CreateEntry(UndoFlags::QUERY, query.size() + 1);</span>
-<span class="lineNum">      59 </span><span class="lineCov">      83676 :         strcpy(blob, query.c_str());</span>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">      83651 : }</span></a>
+<span class="lineNum">      57 </span><span class="lineCov">      81054 : void Transaction::PushQuery(string query) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">      81054 :         char *blob = (char *)undo_buffer.CreateEntry(UndoFlags::QUERY, query.size() + 1);</span>
+<span class="lineNum">      59 </span><span class="lineCov">      83706 :         strcpy(blob, query.c_str());</span>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">      83403 : }</span></a>
 <span class="lineNum">      61 </span>            : 
 <span class="lineNum">      62 </span><span class="lineCov">   84769292 : uint8_t *Transaction::PushTuple(UndoFlags flags, size_t data_size) {</span>
 <span class="lineNum">      63 </span><span class="lineCov">   84769292 :         return undo_buffer.CreateEntry(flags, sizeof(VersionInformation) + data_size);</span>
 <a name="64"><span class="lineNum">      64 </span>            : }</a>
 <span class="lineNum">      65 </span>            : 
-<span class="lineNum">      66 </span><span class="lineCov">    3043781 : void Transaction::Commit(WriteAheadLog *log, transaction_t commit_id) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">    3043781 :         this-&gt;commit_id = commit_id;</span>
-<span class="lineNum">      68 </span><span class="lineCov">    3043781 :         undo_buffer.Commit(log, commit_id);</span>
-<span class="lineNum">      69 </span><span class="lineCov">    3043781 : }</span>
+<span class="lineNum">      66 </span><span class="lineCov">    3043960 : void Transaction::Commit(WriteAheadLog *log, transaction_t commit_id) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">    3043960 :         this-&gt;commit_id = commit_id;</span>
+<span class="lineNum">      68 </span><span class="lineCov">    3043960 :         undo_buffer.Commit(log, commit_id);</span>
+<span class="lineNum">      69 </span><span class="lineCov">    3043960 : }</span>
 </pre>
       </td>
     </tr>

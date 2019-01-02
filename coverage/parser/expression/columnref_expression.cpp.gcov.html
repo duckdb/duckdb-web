@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - parser/expression/columnref_expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - parser/expression/columnref_expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">45</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -109,19 +109,19 @@
 <span class="lineNum">      47 </span><span class="lineCov">         24 :         return expression;</span>
 <a name="48"><span class="lineNum">      48 </span>            : }</a>
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">    5019231 : void ColumnRefExpression::ResolveType() {</span>
-<span class="lineNum">      51 </span><span class="lineCov">    5019231 :         Expression::ResolveType();</span>
-<span class="lineNum">      52 </span><span class="lineCov">    5022552 :         if (return_type == TypeId::INVALID) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">    5019185 : void ColumnRefExpression::ResolveType() {</span>
+<span class="lineNum">      51 </span><span class="lineCov">    5019185 :         Expression::ResolveType();</span>
+<span class="lineNum">      52 </span><span class="lineCov">    5022053 :         if (return_type == TypeId::INVALID) {</span>
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Type of ColumnRefExpression was not resolved!&quot;);</span>
 <span class="lineNum">      54 </span>            :         }
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">    5022552 : }</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">    5022053 : }</span></a>
 <span class="lineNum">      56 </span>            : 
-<span class="lineNum">      57 </span><span class="lineCov">      43259 : bool ColumnRefExpression::Equals(const Expression *other_) const {</span>
-<span class="lineNum">      58 </span><span class="lineCov">      43259 :         if (!Expression::Equals(other_)) {</span>
-<span class="lineNum">      59 </span><span class="lineCov">      25442 :                 return false;</span>
+<span class="lineNum">      57 </span><span class="lineCov">      43262 : bool ColumnRefExpression::Equals(const Expression *other_) const {</span>
+<span class="lineNum">      58 </span><span class="lineCov">      43262 :         if (!Expression::Equals(other_)) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">      25444 :                 return false;</span>
 <span class="lineNum">      60 </span>            :         }
-<span class="lineNum">      61 </span><span class="lineCov">      17817 :         auto other = (ColumnRefExpression *)other_;</span>
-<span class="lineNum">      62 </span><span class="lineCov">      17817 :         return column_name == other-&gt;column_name &amp;&amp; table_name == other-&gt;table_name;</span>
+<span class="lineNum">      61 </span><span class="lineCov">      17818 :         auto other = (ColumnRefExpression *)other_;</span>
+<span class="lineNum">      62 </span><span class="lineCov">      17818 :         return column_name == other-&gt;column_name &amp;&amp; table_name == other-&gt;table_name;</span>
 <a name="63"><span class="lineNum">      63 </span>            : }</a>
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span><span class="lineCov">         14 : uint64_t ColumnRefExpression::Hash() const {</span>

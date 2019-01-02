@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/parser/query_node.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/parser/query_node.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">17</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -85,10 +85,10 @@
 <span class="lineNum">      23 </span>            :         //! Expression to order by
 <a name="24"><span class="lineNum">      24 </span>            :         unique_ptr&lt;Expression&gt; expression;</a>
 <span class="lineNum">      25 </span>            : 
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       9431 :         OrderByNode() {</span></a>
-<span class="lineNum">      27 </span><span class="lineCov">       9431 :         }</span>
-<span class="lineNum">      28 </span><span class="lineCov">       9479 :         OrderByNode(OrderType type, unique_ptr&lt;Expression&gt; expression) : type(type), expression(std::move(expression)) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">       9479 :         }</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       9434 :         OrderByNode() {</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">       9434 :         }</span>
+<span class="lineNum">      28 </span><span class="lineCov">       9484 :         OrderByNode(OrderType type, unique_ptr&lt;Expression&gt; expression) : type(type), expression(std::move(expression)) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">       9484 :         }</span>
 <span class="lineNum">      30 </span>            : };
 <span class="lineNum">      31 </span>            : 
 <span class="lineNum">      32 </span>            : //! ORDER BY description
@@ -107,14 +107,14 @@
 <span class="lineNum">      45 </span>            : 
 <a name="46"><span class="lineNum">      46 </span>            : class QueryNode {</a>
 <span class="lineNum">      47 </span>            : public:
-<a name="48"><span class="lineNum">      48 </span><span class="lineCov">    3024219 :         QueryNode(QueryNodeType type) : type(type) {</span></a>
-<span class="lineNum">      49 </span><span class="lineCov">    3024216 :         }</span>
-<span class="lineNum">      50 </span><span class="lineCov">    3024215 :         virtual ~QueryNode() {</span>
-<span class="lineNum">      51 </span><span class="lineCov">    3024230 :         }</span>
+<a name="48"><span class="lineNum">      48 </span><span class="lineCov">    3024383 :         QueryNode(QueryNodeType type) : type(type) {</span></a>
+<span class="lineNum">      49 </span><span class="lineCov">    3024381 :         }</span>
+<span class="lineNum">      50 </span><span class="lineCov">    3024375 :         virtual ~QueryNode() {</span>
+<span class="lineNum">      51 </span><span class="lineCov">    3024401 :         }</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 : </span>
 <a name="53"><span class="lineNum">      53 </span><span class="lineNoCov">          0 :         virtual void Accept(SQLNodeVisitor *) = 0;</span></a>
-<span class="lineNum">      54 </span><span class="lineCov">    3024215 : </span>
-<span class="lineNum">      55 </span><span class="lineCov">    3024230 :         virtual bool Equals(const QueryNode *other) const {</span>
+<span class="lineNum">      54 </span><span class="lineCov">    3024375 : </span>
+<span class="lineNum">      55 </span><span class="lineCov">    3024401 :         virtual bool Equals(const QueryNode *other) const {</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :                 if (!other) {</span>
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">      58 </span>            :                 }
@@ -143,12 +143,12 @@
 <span class="lineNum">      81 </span>            :         LimitDescription limit;
 <a name="82"><span class="lineNum">      82 </span>            : </a>
 <span class="lineNum">      83 </span>            :         //! Whether or not the query has a LIMIT clause
-<span class="lineNum">      84 </span><span class="lineCov">    3023883 :         bool HasLimit() {</span>
-<span class="lineNum">      85 </span><span class="lineCov">    3023883 :                 return limit.limit &gt;= 0 || limit.offset &gt;= 0;</span>
+<span class="lineNum">      84 </span><span class="lineCov">    3024048 :         bool HasLimit() {</span>
+<span class="lineNum">      85 </span><span class="lineCov">    3024048 :                 return limit.limit &gt;= 0 || limit.offset &gt;= 0;</span>
 <a name="86"><span class="lineNum">      86 </span>            :         }</a>
 <span class="lineNum">      87 </span>            :         //! Whether or not the query has an ORDER BY clause
-<span class="lineNum">      88 </span><span class="lineCov">    3023883 :         bool HasOrder() {</span>
-<span class="lineNum">      89 </span><span class="lineCov">    3023883 :                 return orderby.orders.size() &gt; 0;</span>
+<span class="lineNum">      88 </span><span class="lineCov">    3024048 :         bool HasOrder() {</span>
+<span class="lineNum">      89 </span><span class="lineCov">    3024048 :                 return orderby.orders.size() &gt; 0;</span>
 <span class="lineNum">      90 </span>            :         }
 <span class="lineNum">      91 </span>            : };
 <span class="lineNum">      92 </span>            : 

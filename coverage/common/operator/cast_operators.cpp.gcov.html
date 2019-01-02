@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - common/operator/cast_operators.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - common/operator/cast_operators.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">55</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">22</td>
@@ -73,11 +73,11 @@
 <span class="lineNum">      11 </span>            : 
 <a name="12"><span class="lineNum">      12 </span>            : namespace operators {</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">  114352720 : template &lt;class SRC, class DST&gt; static DST cast_with_overflow_check(SRC value) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">  114352720 :         if (value &lt; MinimumValue&lt;DST&gt;() || value &gt; MaximumValue&lt;DST&gt;()) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">  114352730 : template &lt;class SRC, class DST&gt; static DST cast_with_overflow_check(SRC value) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">  114352730 :         if (value &lt; MinimumValue&lt;DST&gt;() || value &gt; MaximumValue&lt;DST&gt;()) {</span>
 <span class="lineNum">      16 </span><span class="lineCov">          1 :                 throw ValueOutOfRangeException((int64_t)value, GetTypeId&lt;SRC&gt;(), GetTypeId&lt;DST&gt;());</span>
 <span class="lineNum">      17 </span>            :         }
-<span class="lineNum">      18 </span><span class="lineCov">  114352719 :         return (DST)value;</span>
+<span class="lineNum">      18 </span><span class="lineCov">  114352729 :         return (DST)value;</span>
 <a name="19"><span class="lineNum">      19 </span>            : }</a>
 <span class="lineNum">      20 </span><span class="lineCov">    1187913 : </span>
 <span class="lineNum">      21 </span><span class="lineCov">    1187913 : template &lt;class SRC&gt; static uint64_t cast_to_uint64_overflow_check(SRC value) {</span>
@@ -85,11 +85,11 @@
 <span class="lineNum">      23 </span>            :                 throw ValueOutOfRangeException((int64_t)value, GetTypeId&lt;SRC&gt;(), TypeId::POINTER);
 <span class="lineNum">      24 </span><span class="lineCov">    1187913 :         }</span>
 <span class="lineNum">      25 </span>            :         return (uint64_t)value;
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       1999 : }</span></a>
-<span class="lineNum">      27 </span><span class="lineCov">       1999 : </span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">       2009 : }</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">       2009 : </span>
 <span class="lineNum">      28 </span><span class="lineCov">          1 : template &lt;class DST&gt; static DST cast_from_uint64_overflow_check(uint64_t value) {</span>
 <span class="lineNum">      29 </span>            :         if (value &gt; MaximumValue&lt;DST&gt;()) {
-<span class="lineNum">      30 </span><span class="lineCov">       1998 :                 throw ValueOutOfRangeException((int64_t)value, TypeId::POINTER, GetTypeId&lt;DST&gt;());</span>
+<span class="lineNum">      30 </span><span class="lineCov">       2008 :                 throw ValueOutOfRangeException((int64_t)value, TypeId::POINTER, GetTypeId&lt;DST&gt;());</span>
 <span class="lineNum">      31 </span>            :         }
 <span class="lineNum">      32 </span><span class="lineCov">  113102020 :         return (DST)value;</span>
 <span class="lineNum">      33 </span><span class="lineCov">  113102020 : }</span>
@@ -244,8 +244,8 @@
 <span class="lineNum">     182 </span><span class="lineNoCov">          0 : </span>
 <span class="lineNum">     183 </span><span class="lineNoCov">          0 : //===--------------------------------------------------------------------===//</span>
 <a name="184"><span class="lineNum">     184 </span>            : // Cast To Date</a>
-<span class="lineNum">     185 </span><span class="lineCov">       1999 : //===--------------------------------------------------------------------===//</span>
-<span class="lineNum">     186 </span><span class="lineCov">       1999 : template &lt;&gt; date_t CastToDate::Operation(const char *left) {</span>
+<span class="lineNum">     185 </span><span class="lineCov">       2009 : //===--------------------------------------------------------------------===//</span>
+<span class="lineNum">     186 </span><span class="lineCov">       2009 : template &lt;&gt; date_t CastToDate::Operation(const char *left) {</span>
 <span class="lineNum">     187 </span>            :         return Date::FromString(left);
 <a name="188"><span class="lineNum">     188 </span>            : }</a>
 <span class="lineNum">     189 </span>            : 

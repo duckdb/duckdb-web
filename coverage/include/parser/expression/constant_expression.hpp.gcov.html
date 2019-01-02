@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/parser/expression/constant_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/parser/expression/constant_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -80,14 +80,14 @@
 <span class="lineNum">      18 </span>            : public:
 <a name="19"><span class="lineNum">      19 </span><span class="lineCov">     520533 :         ConstantExpression() : Expression(ExpressionType::VALUE_CONSTANT, TypeId::INTEGER), value() {</span></a>
 <span class="lineNum">      20 </span><span class="lineCov">     520533 :         }</span>
-<span class="lineNum">      21 </span><span class="lineCov">   10450828 :         ConstantExpression(Value val) : Expression(ExpressionType::VALUE_CONSTANT, val.type), value(val) {</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">   10452312 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">   10451114 :         ConstantExpression(Value val) : Expression(ExpressionType::VALUE_CONSTANT, val.type), value(val) {</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">   10451798 :         }</span></a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">   42115754 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">   42115754 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">   42115935 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">   42115935 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      26 </span>            :         }
-<span class="lineNum">      27 </span><span class="lineCov">    2091940 :         ExpressionClass GetExpressionClass() override {</span>
-<span class="lineNum">      28 </span><span class="lineCov">    2091940 :                 return ExpressionClass::CONSTANT;</span>
+<span class="lineNum">      27 </span><span class="lineCov">    2091941 :         ExpressionClass GetExpressionClass() override {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    2091941 :                 return ExpressionClass::CONSTANT;</span>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span>            :         unique_ptr&lt;Expression&gt; Copy() override;

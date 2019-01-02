@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - common/types/chunk_collection.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - common/types/chunk_collection.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">105</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -68,24 +68,24 @@
 <span class="lineNum">       6 </span>            : using namespace duckdb;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">    6986973 : void ChunkCollection::Append(DataChunk &amp;new_chunk) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">    6986973 :         if (new_chunk.size() == 0) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    3138250 :                 return;</span>
+<span class="lineNum">       9 </span><span class="lineCov">    6987160 : void ChunkCollection::Append(DataChunk &amp;new_chunk) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    6987160 :         if (new_chunk.size() == 0) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3138358 :                 return;</span>
 <span class="lineNum">      12 </span>            :         }
 <span class="lineNum">      13 </span>            :         // we have to ensure that every chunk in the ChunkCollection is completely
 <span class="lineNum">      14 </span>            :         // filled, otherwise our O(1) lookup in GetValue and SetValue does not work
 <span class="lineNum">      15 </span>            :         // first fill the latest chunk, if it exists
-<span class="lineNum">      16 </span><span class="lineCov">    3848327 :         count += new_chunk.size();</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3848498 :         count += new_chunk.size();</span>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">    3848681 :         size_t remaining_data = new_chunk.size();</span>
-<span class="lineNum">      19 </span><span class="lineCov">    3848766 :         size_t offset = 0;</span>
-<span class="lineNum">      20 </span><span class="lineCov">    3848766 :         if (chunks.size() == 0) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3848927 :         size_t remaining_data = new_chunk.size();</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3848842 :         size_t offset = 0;</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3848842 :         if (chunks.size() == 0) {</span>
 <span class="lineNum">      21 </span>            :                 // first chunk
-<span class="lineNum">      22 </span><span class="lineCov">    3165446 :                 types = new_chunk.GetTypes();</span>
+<span class="lineNum">      22 </span><span class="lineCov">    3165592 :                 types = new_chunk.GetTypes();</span>
 <span class="lineNum">      23 </span>            :         } else {
 <span class="lineNum">      24 </span>            : #ifdef DEBUG
 <span class="lineNum">      25 </span>            :                 // the types of the new chunk should match the types of the previous one
-<span class="lineNum">      26 </span><span class="lineCov">     683219 :                 assert(types.size() == new_chunk.column_count);</span>
+<span class="lineNum">      26 </span><span class="lineCov">     683224 :                 assert(types.size() == new_chunk.column_count);</span>
 <span class="lineNum">      27 </span><span class="lineCov">    1366468 :                 auto new_types = new_chunk.GetTypes();</span>
 <span class="lineNum">      28 </span><span class="lineCov">    3413769 :                 for (size_t i = 0; i &lt; types.size(); i++) {</span>
 <span class="lineNum">      29 </span><span class="lineCov">    2730535 :                         assert(new_types[i] == types[i]);</span>
@@ -111,141 +111,141 @@
 <span class="lineNum">      49 </span>            :                 }
 <span class="lineNum">      50 </span>            :         }
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">    3848439 :         if (remaining_data &gt; 0) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">    3848646 :         if (remaining_data &gt; 0) {</span>
 <span class="lineNum">      53 </span>            :                 // create a new chunk and fill it with the remainder
-<span class="lineNum">      54 </span><span class="lineCov">    6332215 :                 auto chunk = make_unique&lt;DataChunk&gt;();</span>
-<span class="lineNum">      55 </span><span class="lineCov">    3166263 :                 chunk-&gt;Initialize(types);</span>
-<span class="lineNum">      56 </span><span class="lineCov">    3166363 :                 new_chunk.Copy(*chunk, offset);</span>
-<span class="lineNum">      57 </span><span class="lineCov">    3166071 :                 chunks.push_back(move(chunk));</span>
+<span class="lineNum">      54 </span><span class="lineCov">    6332467 :                 auto chunk = make_unique&lt;DataChunk&gt;();</span>
+<span class="lineNum">      55 </span><span class="lineCov">    3166424 :                 chunk-&gt;Initialize(types);</span>
+<span class="lineNum">      56 </span><span class="lineCov">    3166346 :                 new_chunk.Copy(*chunk, offset);</span>
+<span class="lineNum">      57 </span><span class="lineCov">    3166218 :                 chunks.push_back(move(chunk));</span>
 <span class="lineNum">      58 </span>            :         }
 <a name="59"><span class="lineNum">      59 </span>            : }</a>
 <span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">     554285 : static int compare_tuple(ChunkCollection *sort_by, OrderByDescription &amp;desc, size_t left, size_t right) {</span>
-<span class="lineNum">      62 </span><span class="lineCov">     688384 :         for (size_t i = 0; i &lt; desc.orders.size(); i++) {</span>
-<span class="lineNum">      63 </span><span class="lineCov">     675190 :                 Value left_value = sort_by-&gt;GetValue(i, left);</span>
-<span class="lineNum">      64 </span><span class="lineCov">     675190 :                 Value right_value = sort_by-&gt;GetValue(i, right);</span>
-<span class="lineNum">      65 </span><span class="lineCov">     675190 :                 if (ValueOperations::Equals(left_value, right_value)) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">     134099 :                         continue;</span>
+<span class="lineNum">      61 </span><span class="lineCov">     554352 : static int compare_tuple(ChunkCollection *sort_by, OrderByDescription &amp;desc, size_t left, size_t right) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">     688481 :         for (size_t i = 0; i &lt; desc.orders.size(); i++) {</span>
+<span class="lineNum">      63 </span><span class="lineCov">     675280 :                 Value left_value = sort_by-&gt;GetValue(i, left);</span>
+<span class="lineNum">      64 </span><span class="lineCov">     675280 :                 Value right_value = sort_by-&gt;GetValue(i, right);</span>
+<span class="lineNum">      65 </span><span class="lineCov">     675280 :                 if (ValueOperations::Equals(left_value, right_value)) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">     134129 :                         continue;</span>
 <span class="lineNum">      67 </span>            :                 }
-<span class="lineNum">      68 </span><span class="lineCov">     541091 :                 auto order_type = desc.orders[i].type;</span>
-<span class="lineNum">      69 </span><span class="lineCov">     847005 :                 return ValueOperations::LessThan(left_value, right_value) ? (order_type == OrderType::ASCENDING ? -1 : 1)</span>
-<span class="lineNum">      70 </span><span class="lineCov">     847005 :                                                                           : (order_type == OrderType::ASCENDING ? 1 : -1);</span>
+<span class="lineNum">      68 </span><span class="lineCov">     541151 :                 auto order_type = desc.orders[i].type;</span>
+<span class="lineNum">      69 </span><span class="lineCov">     847107 :                 return ValueOperations::LessThan(left_value, right_value) ? (order_type == OrderType::ASCENDING ? -1 : 1)</span>
+<span class="lineNum">      70 </span><span class="lineCov">     847107 :                                                                           : (order_type == OrderType::ASCENDING ? 1 : -1);</span>
 <span class="lineNum">      71 </span>            :         }
-<span class="lineNum">      72 </span><span class="lineCov">      13194 :         return 0;</span>
+<span class="lineNum">      72 </span><span class="lineCov">      13201 :         return 0;</span>
 <a name="73"><span class="lineNum">      73 </span>            : }</a>
 <span class="lineNum">      74 </span>            : 
-<span class="lineNum">      75 </span><span class="lineCov">       2665 : static int64_t _quicksort_initial(ChunkCollection *sort_by, OrderByDescription &amp;desc, uint64_t *result) {</span>
+<span class="lineNum">      75 </span><span class="lineCov">       2667 : static int64_t _quicksort_initial(ChunkCollection *sort_by, OrderByDescription &amp;desc, uint64_t *result) {</span>
 <span class="lineNum">      76 </span>            :         // select pivot
-<span class="lineNum">      77 </span><span class="lineCov">       2665 :         int64_t pivot = 0;</span>
-<span class="lineNum">      78 </span><span class="lineCov">       2665 :         int64_t low = 0, high = sort_by-&gt;count - 1;</span>
+<span class="lineNum">      77 </span><span class="lineCov">       2667 :         int64_t pivot = 0;</span>
+<span class="lineNum">      78 </span><span class="lineCov">       2667 :         int64_t low = 0, high = sort_by-&gt;count - 1;</span>
 <span class="lineNum">      79 </span>            :         // now insert elements
-<span class="lineNum">      80 </span><span class="lineCov">      66374 :         for (size_t i = 1; i &lt; sort_by-&gt;count; i++) {</span>
-<span class="lineNum">      81 </span><span class="lineCov">      63709 :                 if (compare_tuple(sort_by, desc, i, pivot) &lt;= 0) {</span>
-<span class="lineNum">      82 </span><span class="lineCov">      26252 :                         result[low++] = i;</span>
+<span class="lineNum">      80 </span><span class="lineCov">      66394 :         for (size_t i = 1; i &lt; sort_by-&gt;count; i++) {</span>
+<span class="lineNum">      81 </span><span class="lineCov">      63727 :                 if (compare_tuple(sort_by, desc, i, pivot) &lt;= 0) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">      26254 :                         result[low++] = i;</span>
 <span class="lineNum">      83 </span>            :                 } else {
-<span class="lineNum">      84 </span><span class="lineCov">      37457 :                         result[high--] = i;</span>
+<span class="lineNum">      84 </span><span class="lineCov">      37473 :                         result[high--] = i;</span>
 <span class="lineNum">      85 </span>            :                 }
 <span class="lineNum">      86 </span>            :         }
-<span class="lineNum">      87 </span><span class="lineCov">       2665 :         assert(low == high);</span>
-<span class="lineNum">      88 </span><span class="lineCov">       2665 :         result[low] = pivot;</span>
-<span class="lineNum">      89 </span><span class="lineCov">       2665 :         return low;</span>
+<span class="lineNum">      87 </span><span class="lineCov">       2667 :         assert(low == high);</span>
+<span class="lineNum">      88 </span><span class="lineCov">       2667 :         result[low] = pivot;</span>
+<span class="lineNum">      89 </span><span class="lineCov">       2667 :         return low;</span>
 <a name="90"><span class="lineNum">      90 </span>            : }</a>
 <span class="lineNum">      91 </span>            : 
-<span class="lineNum">      92 </span><span class="lineCov">      93056 : static void _quicksort_inplace(ChunkCollection *sort_by, OrderByDescription &amp;desc, uint64_t *result, int64_t left,</span>
+<span class="lineNum">      92 </span><span class="lineCov">      93086 : static void _quicksort_inplace(ChunkCollection *sort_by, OrderByDescription &amp;desc, uint64_t *result, int64_t left,</span>
 <span class="lineNum">      93 </span>            :                                int64_t right) {
-<span class="lineNum">      94 </span><span class="lineCov">      93056 :         if (left &gt;= right) {</span>
-<span class="lineNum">      95 </span><span class="lineCov">      49193 :                 return;</span>
+<span class="lineNum">      94 </span><span class="lineCov">      93086 :         if (left &gt;= right) {</span>
+<span class="lineNum">      95 </span><span class="lineCov">      49210 :                 return;</span>
 <span class="lineNum">      96 </span>            :         }
 <span class="lineNum">      97 </span>            : 
-<span class="lineNum">      98 </span><span class="lineCov">      43863 :         int64_t middle = left + (right - left) / 2;</span>
-<span class="lineNum">      99 </span><span class="lineCov">      43863 :         int64_t pivot = result[middle];</span>
+<span class="lineNum">      98 </span><span class="lineCov">      43876 :         int64_t middle = left + (right - left) / 2;</span>
+<span class="lineNum">      99 </span><span class="lineCov">      43876 :         int64_t pivot = result[middle];</span>
 <span class="lineNum">     100 </span>            :         // move the mid point value to the front.
-<span class="lineNum">     101 </span><span class="lineCov">      43863 :         int64_t i = left + 1;</span>
-<span class="lineNum">     102 </span><span class="lineCov">      43863 :         int64_t j = right;</span>
+<span class="lineNum">     101 </span><span class="lineCov">      43876 :         int64_t i = left + 1;</span>
+<span class="lineNum">     102 </span><span class="lineCov">      43876 :         int64_t j = right;</span>
 <span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span><span class="lineCov">      43863 :         std::swap(result[middle], result[left]);</span>
-<span class="lineNum">     105 </span><span class="lineCov">     129967 :         while (i &lt;= j) {</span>
-<span class="lineNum">     106 </span><span class="lineCov">     261530 :                 while (i &lt;= j &amp;&amp; compare_tuple(sort_by, desc, result[i], pivot) &lt;= 0) {</span>
-<span class="lineNum">     107 </span><span class="lineCov">     175426 :                         i++;</span>
+<span class="lineNum">     104 </span><span class="lineCov">      43876 :         std::swap(result[middle], result[left]);</span>
+<span class="lineNum">     105 </span><span class="lineCov">     129998 :         while (i &lt;= j) {</span>
+<span class="lineNum">     106 </span><span class="lineCov">     261566 :                 while (i &lt;= j &amp;&amp; compare_tuple(sort_by, desc, result[i], pivot) &lt;= 0) {</span>
+<span class="lineNum">     107 </span><span class="lineCov">     175444 :                         i++;</span>
 <span class="lineNum">     108 </span>            :                 }
 <span class="lineNum">     109 </span>            : 
-<span class="lineNum">     110 </span><span class="lineCov">     286614 :                 while (i &lt;= j &amp;&amp; compare_tuple(sort_by, desc, result[j], pivot) &gt; 0) {</span>
-<span class="lineNum">     111 </span><span class="lineCov">     200510 :                         j--;</span>
+<span class="lineNum">     110 </span><span class="lineCov">     286647 :                 while (i &lt;= j &amp;&amp; compare_tuple(sort_by, desc, result[j], pivot) &gt; 0) {</span>
+<span class="lineNum">     111 </span><span class="lineCov">     200525 :                         j--;</span>
 <span class="lineNum">     112 </span>            :                 }
 <span class="lineNum">     113 </span>            : 
-<span class="lineNum">     114 </span><span class="lineCov">      86104 :                 if (i &lt; j) {</span>
-<span class="lineNum">     115 </span><span class="lineCov">      42241 :                         std::swap(result[i], result[j]);</span>
+<span class="lineNum">     114 </span><span class="lineCov">      86122 :                 if (i &lt; j) {</span>
+<span class="lineNum">     115 </span><span class="lineCov">      42246 :                         std::swap(result[i], result[j]);</span>
 <span class="lineNum">     116 </span>            :                 }
 <span class="lineNum">     117 </span>            :         }
-<span class="lineNum">     118 </span><span class="lineCov">      43863 :         std::swap(result[i - 1], result[left]);</span>
-<span class="lineNum">     119 </span><span class="lineCov">      43863 :         int64_t part = i - 1;</span>
+<span class="lineNum">     118 </span><span class="lineCov">      43876 :         std::swap(result[i - 1], result[left]);</span>
+<span class="lineNum">     119 </span><span class="lineCov">      43876 :         int64_t part = i - 1;</span>
 <span class="lineNum">     120 </span>            : 
-<span class="lineNum">     121 </span><span class="lineCov">      43863 :         _quicksort_inplace(sort_by, desc, result, left, part - 1);</span>
-<span class="lineNum">     122 </span><span class="lineCov">      43863 :         _quicksort_inplace(sort_by, desc, result, part + 1, right);</span>
+<span class="lineNum">     121 </span><span class="lineCov">      43876 :         _quicksort_inplace(sort_by, desc, result, left, part - 1);</span>
+<span class="lineNum">     122 </span><span class="lineCov">      43876 :         _quicksort_inplace(sort_by, desc, result, part + 1, right);</span>
 <a name="123"><span class="lineNum">     123 </span>            : }</a>
 <span class="lineNum">     124 </span>            : 
-<span class="lineNum">     125 </span><span class="lineCov">       2910 : void ChunkCollection::Sort(OrderByDescription &amp;desc, uint64_t result[]) {</span>
-<span class="lineNum">     126 </span><span class="lineCov">       2910 :         assert(result);</span>
-<span class="lineNum">     127 </span><span class="lineCov">       2910 :         if (count == 0)</span>
+<span class="lineNum">     125 </span><span class="lineCov">       2912 : void ChunkCollection::Sort(OrderByDescription &amp;desc, uint64_t result[]) {</span>
+<span class="lineNum">     126 </span><span class="lineCov">       2912 :         assert(result);</span>
+<span class="lineNum">     127 </span><span class="lineCov">       2912 :         if (count == 0)</span>
 <span class="lineNum">     128 </span><span class="lineCov">        245 :                 return;</span>
 <span class="lineNum">     129 </span>            :         // quicksort
-<span class="lineNum">     130 </span><span class="lineCov">       2665 :         int64_t part = _quicksort_initial(this, desc, result);</span>
-<span class="lineNum">     131 </span><span class="lineCov">       2665 :         _quicksort_inplace(this, desc, result, 0, part);</span>
-<span class="lineNum">     132 </span><span class="lineCov">       2665 :         _quicksort_inplace(this, desc, result, part + 1, count - 1);</span>
+<span class="lineNum">     130 </span><span class="lineCov">       2667 :         int64_t part = _quicksort_initial(this, desc, result);</span>
+<span class="lineNum">     131 </span><span class="lineCov">       2667 :         _quicksort_inplace(this, desc, result, 0, part);</span>
+<span class="lineNum">     132 </span><span class="lineCov">       2667 :         _quicksort_inplace(this, desc, result, part + 1, count - 1);</span>
 <span class="lineNum">     133 </span>            : }
 <span class="lineNum">     134 </span>            : 
 <span class="lineNum">     135 </span>            : // FIXME make this more efficient by not using the Value API
 <a name="136"><span class="lineNum">     136 </span>            : // just use memcpy in the vectors</a>
 <span class="lineNum">     137 </span>            : // assert that there is no selection list
-<span class="lineNum">     138 </span><span class="lineCov">         64 : void ChunkCollection::Reorder(uint64_t order_org[]) {</span>
-<span class="lineNum">     139 </span><span class="lineCov">        128 :         auto order = unique_ptr&lt;uint64_t[]&gt;(new uint64_t[count]);</span>
-<span class="lineNum">     140 </span><span class="lineCov">         64 :         memcpy(order.get(), order_org, sizeof(uint64_t) * count);</span>
+<span class="lineNum">     138 </span><span class="lineCov">         66 : void ChunkCollection::Reorder(uint64_t order_org[]) {</span>
+<span class="lineNum">     139 </span><span class="lineCov">        132 :         auto order = unique_ptr&lt;uint64_t[]&gt;(new uint64_t[count]);</span>
+<span class="lineNum">     140 </span><span class="lineCov">         66 :         memcpy(order.get(), order_org, sizeof(uint64_t) * count);</span>
 <span class="lineNum">     141 </span>            : 
 <span class="lineNum">     142 </span>            :         // adapted from https://stackoverflow.com/a/7366196/2652376
 <span class="lineNum">     143 </span>            : 
-<span class="lineNum">     144 </span><span class="lineCov">        128 :         auto val_buf = vector&lt;Value&gt;();</span>
-<span class="lineNum">     145 </span><span class="lineCov">         64 :         val_buf.resize(column_count());</span>
+<span class="lineNum">     144 </span><span class="lineCov">        132 :         auto val_buf = vector&lt;Value&gt;();</span>
+<span class="lineNum">     145 </span><span class="lineCov">         66 :         val_buf.resize(column_count());</span>
 <span class="lineNum">     146 </span>            : 
 <span class="lineNum">     147 </span>            :         size_t j, k;
-<span class="lineNum">     148 </span><span class="lineCov">        896 :         for (size_t i = 0; i &lt; count; i++) {</span>
-<span class="lineNum">     149 </span><span class="lineCov">       2550 :                 for (size_t col_idx = 0; col_idx &lt; column_count(); col_idx++) {</span>
-<span class="lineNum">     150 </span><span class="lineCov">       1718 :                         val_buf[col_idx] = GetValue(col_idx, i);</span>
+<span class="lineNum">     148 </span><span class="lineCov">        918 :         for (size_t i = 0; i &lt; count; i++) {</span>
+<span class="lineNum">     149 </span><span class="lineCov">       2610 :                 for (size_t col_idx = 0; col_idx &lt; column_count(); col_idx++) {</span>
+<span class="lineNum">     150 </span><span class="lineCov">       1758 :                         val_buf[col_idx] = GetValue(col_idx, i);</span>
 <span class="lineNum">     151 </span>            :                 }
-<span class="lineNum">     152 </span><span class="lineCov">        832 :                 j = i;</span>
+<span class="lineNum">     152 </span><span class="lineCov">        852 :                 j = i;</span>
 <span class="lineNum">     153 </span>            :                 while (true) {
-<span class="lineNum">     154 </span><span class="lineCov">       1254 :                         k = order[j];</span>
-<span class="lineNum">     155 </span><span class="lineCov">       1254 :                         order[j] = j;</span>
-<span class="lineNum">     156 </span><span class="lineCov">       1254 :                         if (k == i) {</span>
-<span class="lineNum">     157 </span><span class="lineCov">        832 :                                 break;</span>
+<span class="lineNum">     154 </span><span class="lineCov">       1284 :                         k = order[j];</span>
+<span class="lineNum">     155 </span><span class="lineCov">       1284 :                         order[j] = j;</span>
+<span class="lineNum">     156 </span><span class="lineCov">       1284 :                         if (k == i) {</span>
+<span class="lineNum">     157 </span><span class="lineCov">        852 :                                 break;</span>
 <span class="lineNum">     158 </span>            :                         }
-<span class="lineNum">     159 </span><span class="lineCov">       1281 :                         for (size_t col_idx = 0; col_idx &lt; column_count(); col_idx++) {</span>
-<span class="lineNum">     160 </span><span class="lineCov">        859 :                                 SetValue(col_idx, j, GetValue(col_idx, k));</span>
+<span class="lineNum">     159 </span><span class="lineCov">       1311 :                         for (size_t col_idx = 0; col_idx &lt; column_count(); col_idx++) {</span>
+<span class="lineNum">     160 </span><span class="lineCov">        879 :                                 SetValue(col_idx, j, GetValue(col_idx, k));</span>
 <span class="lineNum">     161 </span>            :                         }
-<span class="lineNum">     162 </span><span class="lineCov">        422 :                         j = k;</span>
-<span class="lineNum">     163 </span><span class="lineCov">        422 :                 }</span>
-<span class="lineNum">     164 </span><span class="lineCov">       2550 :                 for (size_t col_idx = 0; col_idx &lt; column_count(); col_idx++) {</span>
-<span class="lineNum">     165 </span><span class="lineCov">       1718 :                         SetValue(col_idx, j, val_buf[col_idx]);</span>
+<span class="lineNum">     162 </span><span class="lineCov">        432 :                         j = k;</span>
+<span class="lineNum">     163 </span><span class="lineCov">        432 :                 }</span>
+<span class="lineNum">     164 </span><span class="lineCov">       2610 :                 for (size_t col_idx = 0; col_idx &lt; column_count(); col_idx++) {</span>
+<span class="lineNum">     165 </span><span class="lineCov">       1758 :                         SetValue(col_idx, j, val_buf[col_idx]);</span>
 <span class="lineNum">     166 </span>            :                 }
 <span class="lineNum">     167 </span>            :         }
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">         64 : }</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">         66 : }</span></a>
 <span class="lineNum">     169 </span>            : 
-<span class="lineNum">     170 </span><span class="lineCov">    1599960 : Value ChunkCollection::GetValue(size_t column, size_t index) {</span>
-<span class="lineNum">     171 </span><span class="lineCov">    1599960 :         return chunks[LocateChunk(index)]-&gt;data[column].GetValue(index % STANDARD_VECTOR_SIZE);</span>
+<span class="lineNum">     170 </span><span class="lineCov">    1600336 : Value ChunkCollection::GetValue(size_t column, size_t index) {</span>
+<span class="lineNum">     171 </span><span class="lineCov">    1600336 :         return chunks[LocateChunk(index)]-&gt;data[column].GetValue(index % STANDARD_VECTOR_SIZE);</span>
 <a name="172"><span class="lineNum">     172 </span>            : }</a>
 <span class="lineNum">     173 </span>            : 
-<span class="lineNum">     174 </span><span class="lineCov">       2058 : vector&lt;Value&gt; ChunkCollection::GetRow(size_t index) {</span>
-<span class="lineNum">     175 </span><span class="lineCov">       2058 :         vector&lt;Value&gt; values;</span>
-<span class="lineNum">     176 </span><span class="lineCov">       2058 :         values.resize(column_count());</span>
+<span class="lineNum">     174 </span><span class="lineCov">       2111 : vector&lt;Value&gt; ChunkCollection::GetRow(size_t index) {</span>
+<span class="lineNum">     175 </span><span class="lineCov">       2111 :         vector&lt;Value&gt; values;</span>
+<span class="lineNum">     176 </span><span class="lineCov">       2111 :         values.resize(column_count());</span>
 <span class="lineNum">     177 </span>            : 
-<span class="lineNum">     178 </span><span class="lineCov">       6272 :         for (size_t p_idx = 0; p_idx &lt; column_count(); p_idx++) {</span>
-<span class="lineNum">     179 </span><span class="lineCov">       4214 :                 values[p_idx] = GetValue(p_idx, index);</span>
+<span class="lineNum">     178 </span><span class="lineCov">       6431 :         for (size_t p_idx = 0; p_idx &lt; column_count(); p_idx++) {</span>
+<span class="lineNum">     179 </span><span class="lineCov">       4320 :                 values[p_idx] = GetValue(p_idx, index);</span>
 <span class="lineNum">     180 </span>            :         }
-<span class="lineNum">     181 </span><span class="lineCov">       2058 :         return values;</span>
+<span class="lineNum">     181 </span><span class="lineCov">       2111 :         return values;</span>
 <a name="182"><span class="lineNum">     182 </span>            : }</a>
 <span class="lineNum">     183 </span>            : 
-<span class="lineNum">     184 </span><span class="lineCov">       3003 : void ChunkCollection::SetValue(size_t column, size_t index, Value value) {</span>
-<span class="lineNum">     185 </span><span class="lineCov">       3003 :         chunks[LocateChunk(index)]-&gt;data[column].SetValue(index % STANDARD_VECTOR_SIZE, value);</span>
-<span class="lineNum">     186 </span><span class="lineCov">       3003 : }</span>
+<span class="lineNum">     184 </span><span class="lineCov">       3073 : void ChunkCollection::SetValue(size_t column, size_t index, Value value) {</span>
+<span class="lineNum">     185 </span><span class="lineCov">       3073 :         chunks[LocateChunk(index)]-&gt;data[column].SetValue(index % STANDARD_VECTOR_SIZE, value);</span>
+<span class="lineNum">     186 </span><span class="lineCov">       3073 : }</span>
 </pre>
       </td>
     </tr>

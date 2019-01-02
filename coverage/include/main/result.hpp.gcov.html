@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/main/result.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/main/result.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -81,8 +81,8 @@
 <span class="lineNum">      19 </span>            :         DuckDBResult();
 <a name="20"><span class="lineNum">      20 </span>            :         DuckDBResult(string error);</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    6184074 :         bool GetSuccess() const {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    6184074 :                 return success;</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">    6184909 :         bool GetSuccess() const {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    6184909 :                 return success;</span></a>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :         const string &amp;GetErrorMessage() const {</span>
 <span class="lineNum">      26 </span><span class="lineNoCov">          0 :                 return error;</span>
@@ -91,12 +91,12 @@
 <span class="lineNum">      29 </span>            :         void Print();
 <a name="30"><span class="lineNum">      30 </span>            : </a>
 <span class="lineNum">      31 </span>            :         //! Returns the number of columns in the result
-<span class="lineNum">      32 </span><span class="lineCov">    3003089 :         size_t column_count() {</span>
-<span class="lineNum">      33 </span><span class="lineCov">    3003089 :                 return collection.types.size();</span>
+<span class="lineNum">      32 </span><span class="lineCov">    3003269 :         size_t column_count() {</span>
+<span class="lineNum">      33 </span><span class="lineCov">    3003269 :                 return collection.types.size();</span>
 <a name="34"><span class="lineNum">      34 </span>            :         }</a>
 <span class="lineNum">      35 </span>            :         //! Returns the number of elements in the result
-<span class="lineNum">      36 </span><span class="lineCov">   14419237 :         size_t size() {</span>
-<span class="lineNum">      37 </span><span class="lineCov">   14419237 :                 return collection.count;</span>
+<span class="lineNum">      36 </span><span class="lineCov">   14419416 :         size_t size() {</span>
+<span class="lineNum">      37 </span><span class="lineCov">   14419416 :                 return collection.count;</span>
 <a name="38"><span class="lineNum">      38 </span>            :         }</a>
 <span class="lineNum">      39 </span>            :         //! Returns a list of types of the result
 <span class="lineNum">      40 </span><span class="lineCov">    3796712 :         vector&lt;TypeId&gt; &amp;types() {</span>

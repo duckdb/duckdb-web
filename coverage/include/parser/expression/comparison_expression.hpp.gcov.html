@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/parser/expression/comparison_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/parser/expression/comparison_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -78,12 +78,12 @@
 <span class="lineNum">      16 </span>            : //! and has two children.
 <a name="17"><span class="lineNum">      17 </span>            : class ComparisonExpression : public Expression {</a>
 <span class="lineNum">      18 </span>            : public:
-<span class="lineNum">      19 </span><span class="lineCov">     622346 :         ComparisonExpression(ExpressionType type, unique_ptr&lt;Expression&gt; left, unique_ptr&lt;Expression&gt; right)</span>
-<span class="lineNum">      20 </span><span class="lineCov">     622346 :             : Expression(type, TypeId::BOOLEAN, std::move(left), std::move(right)) {</span>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">     624465 :         }</span></a>
+<span class="lineNum">      19 </span><span class="lineCov">     622408 :         ComparisonExpression(ExpressionType type, unique_ptr&lt;Expression&gt; left, unique_ptr&lt;Expression&gt; right)</span>
+<span class="lineNum">      20 </span><span class="lineCov">     622408 :             : Expression(type, TypeId::BOOLEAN, std::move(left), std::move(right)) {</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">     623282 :         }</span></a>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">    3746625 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3746625 :                 return v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      23 </span><span class="lineCov">    3745138 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3745138 :                 return v-&gt;Visit(*this);</span></a>
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span><span class="lineCov">     185988 :         ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      27 </span><span class="lineCov">     185988 :                 return ExpressionClass::COMPARISON;</span>

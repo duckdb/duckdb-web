@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - execution/operator/persistent/physical_update.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - execution/operator/persistent/physical_update.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">22</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -70,25 +70,25 @@
 <span class="lineNum">       8 </span>            : using namespace duckdb;
 <a name="9"><span class="lineNum">       9 </span>            : using namespace std;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">      77298 : void PhysicalUpdate::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">     161258 :         vector&lt;TypeId&gt; update_types;</span>
-<span class="lineNum">      13 </span><span class="lineCov">     156816 :         for (auto &amp;expr : expressions) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">      80544 :                 update_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      11 </span><span class="lineCov">      77311 : void PhysicalUpdate::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">     161259 :         vector&lt;TypeId&gt; update_types;</span>
+<span class="lineNum">      13 </span><span class="lineCov">     157260 :         for (auto &amp;expr : expressions) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">      80310 :                 update_types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      15 </span>            :         }
-<span class="lineNum">      16 </span><span class="lineCov">     163523 :         DataChunk update_chunk;</span>
-<span class="lineNum">      17 </span><span class="lineCov">      77927 :         update_chunk.Initialize(update_types);</span>
+<span class="lineNum">      16 </span><span class="lineCov">     164096 :         DataChunk update_chunk;</span>
+<span class="lineNum">      17 </span><span class="lineCov">      78048 :         update_chunk.Initialize(update_types);</span>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">      80300 :         int64_t updated_count = 0;</span>
+<span class="lineNum">      19 </span><span class="lineCov">      80175 :         int64_t updated_count = 0;</span>
 <span class="lineNum">      20 </span>            :         while (true) {
-<span class="lineNum">      21 </span><span class="lineCov">     164333 :                 children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">      22 </span><span class="lineCov">     162286 :                 if (state-&gt;child_chunk.size() == 0) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">      84008 :                         break;</span>
+<span class="lineNum">      21 </span><span class="lineCov">     164211 :                 children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      22 </span><span class="lineCov">     162420 :                 if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">      84026 :                         break;</span>
 <span class="lineNum">      24 </span>            :                 }
 <span class="lineNum">      25 </span>            :                 // update data in the base table
 <span class="lineNum">      26 </span>            :                 // the row ids are given to us as the last column of the child chunk
-<span class="lineNum">      27 </span><span class="lineCov">      80286 :                 auto &amp;row_ids = state-&gt;child_chunk.data[state-&gt;child_chunk.column_count - 1];</span>
-<span class="lineNum">      28 </span><span class="lineCov">      79874 :                 ExpressionExecutor executor(state-&gt;child_chunk, context);</span>
-<span class="lineNum">      29 </span><span class="lineCov">      78179 :                 executor.Execute(update_chunk,</span>
+<span class="lineNum">      27 </span><span class="lineCov">      80287 :                 auto &amp;row_ids = state-&gt;child_chunk.data[state-&gt;child_chunk.column_count - 1];</span>
+<span class="lineNum">      28 </span><span class="lineCov">      81202 :                 ExpressionExecutor executor(state-&gt;child_chunk, context);</span>
+<span class="lineNum">      29 </span><span class="lineCov">      77853 :                 executor.Execute(update_chunk,</span>
 <span class="lineNum">      30 </span>            :                                  [&amp;](size_t i) -&gt; Expression * {
 <span class="lineNum">      31 </span>            :                                          if (expressions[i]-&gt;type == ExpressionType::VALUE_DEFAULT) {
 <span class="lineNum">      32 </span>            :                                                  // we resolve default expressions separately
@@ -100,19 +100,19 @@
 <span class="lineNum">      38 </span>            :                                          return expressions[i].get();
 <span class="lineNum">      39 </span>            :                                  },
 <span class="lineNum">      40 </span>            :                                  expressions.size());
-<span class="lineNum">      41 </span><span class="lineCov">      83130 :                 update_chunk.sel_vector = state-&gt;child_chunk.sel_vector;</span>
+<span class="lineNum">      41 </span><span class="lineCov">      78879 :                 update_chunk.sel_vector = state-&gt;child_chunk.sel_vector;</span>
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span><span class="lineCov">      83130 :                 table.Update(tableref, context, row_ids, columns, update_chunk);</span>
+<span class="lineNum">      43 </span><span class="lineCov">      78879 :                 table.Update(tableref, context, row_ids, columns, update_chunk);</span>
 <span class="lineNum">      44 </span><span class="lineCov">      84039 :                 updated_count += state-&gt;child_chunk.size();</span>
-<span class="lineNum">      45 </span><span class="lineCov">      84033 :         }</span>
+<span class="lineNum">      45 </span><span class="lineCov">      84036 :         }</span>
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">      83740 :         chunk.data[0].count = 1;</span>
-<span class="lineNum">      48 </span><span class="lineCov">      84025 :         chunk.data[0].SetValue(0, Value::BIGINT(updated_count));</span>
+<span class="lineNum">      47 </span><span class="lineCov">      83758 :         chunk.data[0].count = 1;</span>
+<span class="lineNum">      48 </span><span class="lineCov">      84028 :         chunk.data[0].SetValue(0, Value::BIGINT(updated_count));</span>
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">      84013 :         state-&gt;finished = true;</span>
+<span class="lineNum">      50 </span><span class="lineCov">      83985 :         state-&gt;finished = true;</span>
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">      84013 :         chunk.Verify();</span>
-<span class="lineNum">      53 </span><span class="lineCov">      83939 : }</span>
+<span class="lineNum">      52 </span><span class="lineCov">      83985 :         chunk.Verify();</span>
+<span class="lineNum">      53 </span><span class="lineCov">      83899 : }</span>
 </pre>
       </td>
     </tr>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - main/connection.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - main/connection.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">52</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -78,89 +78,89 @@
 <span class="lineNum">      16 </span><span class="lineCov">        924 : DuckDBConnection::~DuckDBConnection() {</span>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">        924 : }</span></a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">    3176223 : unique_ptr&lt;DuckDBResult&gt; DuckDBConnection::GetQueryResult(ClientContext &amp;context, string query) {</span>
-<span class="lineNum">      20 </span><span class="lineCov">    6354434 :         auto result = make_unique&lt;DuckDBResult&gt;();</span>
-<span class="lineNum">      21 </span><span class="lineCov">    3175912 :         result-&gt;success = false;</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3176310 : unique_ptr&lt;DuckDBResult&gt; DuckDBConnection::GetQueryResult(ClientContext &amp;context, string query) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    6352717 :         auto result = make_unique&lt;DuckDBResult&gt;();</span>
+<span class="lineNum">      21 </span><span class="lineCov">    3176459 :         result-&gt;success = false;</span>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">    3176573 :         context.profiler.StartQuery(query);</span>
-<span class="lineNum">      24 </span><span class="lineCov">    3178428 :         context.interrupted = false;</span>
+<span class="lineNum">      23 </span><span class="lineCov">    3176587 :         context.profiler.StartQuery(query);</span>
+<span class="lineNum">      24 </span><span class="lineCov">    3178526 :         context.interrupted = false;</span>
 <span class="lineNum">      25 </span>            :         try {
 <span class="lineNum">      26 </span>            :                 // parse the query and transform it into a set of statements
-<span class="lineNum">      27 </span><span class="lineCov">    3178523 :                 Parser parser(context);</span>
-<span class="lineNum">      28 </span><span class="lineCov">    3176000 :                 parser.ParseQuery(query.c_str());</span>
-<span class="lineNum">      29 </span><span class="lineCov">    3177688 :                 if (parser.statements.size() == 0) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    3178621 :                 Parser parser(context);</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3175994 :                 parser.ParseQuery(query.c_str());</span>
+<span class="lineNum">      29 </span><span class="lineCov">    3178251 :                 if (parser.statements.size() == 0) {</span>
 <span class="lineNum">      30 </span>            :                         // empty query
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :                         return make_unique&lt;DuckDBResult&gt;();</span>
 <span class="lineNum">      32 </span>            :                 }
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">    3177728 :                 if (parser.statements.size() &gt; 1) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">    3174540 :                 if (parser.statements.size() &gt; 1) {</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;More than one statement per query not supported yet!&quot;);</span>
 <span class="lineNum">      36 </span>            :                 }
 <span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span><span class="lineCov">    3177990 :                 auto &amp;statement = parser.statements.back();</span>
-<span class="lineNum">      39 </span><span class="lineCov">    6269865 :                 if (statement-&gt;type == StatementType::UPDATE || statement-&gt;type == StatementType::DELETE ||</span>
-<span class="lineNum">      40 </span><span class="lineCov">    6270722 :                     statement-&gt;type == StatementType::ALTER || statement-&gt;type == StatementType::CREATE_INDEX) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">    3174913 :                 auto &amp;statement = parser.statements.back();</span>
+<span class="lineNum">      39 </span><span class="lineCov">    6269779 :                 if (statement-&gt;type == StatementType::UPDATE || statement-&gt;type == StatementType::DELETE ||</span>
+<span class="lineNum">      40 </span><span class="lineCov">    6270944 :                     statement-&gt;type == StatementType::ALTER || statement-&gt;type == StatementType::CREATE_INDEX) {</span>
 <span class="lineNum">      41 </span>            :                         // log query in UNDO buffer so it can be saved in the WAL on commit
-<span class="lineNum">      42 </span><span class="lineCov">      81155 :                         auto &amp;transaction = context.transaction.ActiveTransaction();</span>
-<span class="lineNum">      43 </span><span class="lineCov">      80750 :                         transaction.PushQuery(query);</span>
+<span class="lineNum">      42 </span><span class="lineCov">      81492 :                         auto &amp;transaction = context.transaction.ActiveTransaction();</span>
+<span class="lineNum">      43 </span><span class="lineCov">      81121 :                         transaction.PushQuery(query);</span>
 <span class="lineNum">      44 </span>            :                 }
 <span class="lineNum">      45 </span>            : 
-<span class="lineNum">      46 </span><span class="lineCov">    3178200 :                 Planner planner;</span>
-<span class="lineNum">      47 </span><span class="lineCov">    3177191 :                 planner.CreatePlan(context, move(statement));</span>
-<span class="lineNum">      48 </span><span class="lineCov">    3177644 :                 if (!planner.plan) {</span>
-<span class="lineNum">      49 </span><span class="lineCov">      42293 :                         return make_unique&lt;DuckDBResult&gt;();</span>
+<span class="lineNum">      46 </span><span class="lineCov">    3178513 :                 Planner planner;</span>
+<span class="lineNum">      47 </span><span class="lineCov">    3178389 :                 planner.CreatePlan(context, move(statement));</span>
+<span class="lineNum">      48 </span><span class="lineCov">    3177482 :                 if (!planner.plan) {</span>
+<span class="lineNum">      49 </span><span class="lineCov">      42320 :                         return make_unique&lt;DuckDBResult&gt;();</span>
 <span class="lineNum">      50 </span>            :                 }
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">    3131996 :                 auto plan = move(planner.plan);</span>
-<span class="lineNum">      53 </span><span class="lineCov">    3133970 :                 Optimizer optimizer(*planner.context);</span>
-<span class="lineNum">      54 </span><span class="lineCov">    3131972 :                 plan = optimizer.Optimize(move(plan));</span>
-<span class="lineNum">      55 </span><span class="lineCov">    3135525 :                 if (!plan) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">    3132759 :                 auto plan = move(planner.plan);</span>
+<span class="lineNum">      53 </span><span class="lineCov">    3133901 :                 Optimizer optimizer(*planner.context);</span>
+<span class="lineNum">      54 </span><span class="lineCov">    3132304 :                 plan = optimizer.Optimize(move(plan));</span>
+<span class="lineNum">      55 </span><span class="lineCov">    3131285 :                 if (!plan) {</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 :                         return make_unique&lt;DuckDBResult&gt;();</span>
 <span class="lineNum">      57 </span>            :                 }
 <span class="lineNum">      58 </span>            : 
 <span class="lineNum">      59 </span>            :                 // extract the result column names from the plan
-<span class="lineNum">      60 </span><span class="lineCov">    3130249 :                 result-&gt;names = plan-&gt;GetNames();</span>
+<span class="lineNum">      60 </span><span class="lineCov">    3131145 :                 result-&gt;names = plan-&gt;GetNames();</span>
 <span class="lineNum">      61 </span>            : 
 <span class="lineNum">      62 </span>            :                 // now convert logical query plan into a physical query plan
-<span class="lineNum">      63 </span><span class="lineCov">    3130968 :                 PhysicalPlanGenerator physical_planner(context);</span>
-<span class="lineNum">      64 </span><span class="lineCov">    3130407 :                 physical_planner.CreatePlan(move(plan));</span>
+<span class="lineNum">      63 </span><span class="lineCov">    3136345 :                 PhysicalPlanGenerator physical_planner(context);</span>
+<span class="lineNum">      64 </span><span class="lineCov">    3130083 :                 physical_planner.CreatePlan(move(plan));</span>
 <span class="lineNum">      65 </span>            : 
 <span class="lineNum">      66 </span>            :                 // finally execute the plan and return the result
-<span class="lineNum">      67 </span><span class="lineCov">    3133990 :                 Executor executor;</span>
-<span class="lineNum">      68 </span><span class="lineCov">    3134727 :                 result-&gt;collection = executor.Execute(context, move(physical_planner.plan));</span>
-<span class="lineNum">      69 </span><span class="lineCov">    3135508 :                 result-&gt;success = true;</span>
+<span class="lineNum">      67 </span><span class="lineCov">    3134616 :                 Executor executor;</span>
+<span class="lineNum">      68 </span><span class="lineCov">    3135441 :                 result-&gt;collection = executor.Execute(context, move(physical_planner.plan));</span>
+<span class="lineNum">      69 </span><span class="lineCov">    3135514 :                 result-&gt;success = true;</span>
 <span class="lineNum">      70 </span><span class="lineCov">        190 :         } catch (Exception &amp;ex) {</span>
 <span class="lineNum">      71 </span><span class="lineCov">         95 :                 result-&gt;error = ex.GetMessage();</span>
 <span class="lineNum">      72 </span><span class="lineNoCov">          0 :         } catch (...) {</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                 result-&gt;error = &quot;UNHANDLED EXCEPTION TYPE THROWN!&quot;;</span>
 <span class="lineNum">      74 </span>            :         }
-<span class="lineNum">      75 </span><span class="lineCov">    3133184 :         context.profiler.EndQuery();</span>
-<span class="lineNum">      76 </span><span class="lineCov">    3134929 :         if (context.profiler.IsEnabled() &amp;&amp; context.profiler.automatic_printing) {</span>
+<span class="lineNum">      75 </span><span class="lineCov">    3133383 :         context.profiler.EndQuery();</span>
+<span class="lineNum">      76 </span><span class="lineCov">    3135845 :         if (context.profiler.IsEnabled() &amp;&amp; context.profiler.automatic_printing) {</span>
 <span class="lineNum">      77 </span><span class="lineNoCov">          0 :                 cout &lt;&lt; context.profiler.ToString() &lt;&lt; &quot;\n&quot;;</span>
 <span class="lineNum">      78 </span>            :         }
 <span class="lineNum">      79 </span>            :         // destroy any data held in the query allocator
-<span class="lineNum">      80 </span><span class="lineCov">    3133383 :         context.allocator.Destroy();</span>
-<span class="lineNum">      81 </span><span class="lineCov">    3132586 :         return result;</span>
+<span class="lineNum">      80 </span><span class="lineCov">    3133593 :         context.allocator.Destroy();</span>
+<span class="lineNum">      81 </span><span class="lineCov">    3133768 :         return result;</span>
 <a name="82"><span class="lineNum">      82 </span>            : }</a>
 <span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span><span class="lineCov">    3175842 : unique_ptr&lt;DuckDBResult&gt; DuckDBConnection::GetQueryResult(string query) {</span>
-<span class="lineNum">      85 </span><span class="lineCov">    3175842 :         return GetQueryResult(context, query);</span>
+<span class="lineNum">      84 </span><span class="lineCov">    3175311 : unique_ptr&lt;DuckDBResult&gt; DuckDBConnection::GetQueryResult(string query) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">    3175311 :         return GetQueryResult(context, query);</span>
 <a name="86"><span class="lineNum">      86 </span>            : }</a>
 <span class="lineNum">      87 </span>            : 
-<span class="lineNum">      88 </span><span class="lineCov">    3174982 : unique_ptr&lt;DuckDBResult&gt; DuckDBConnection::Query(string query) {</span>
-<span class="lineNum">      89 </span><span class="lineCov">    3174982 :         if (context.transaction.IsAutoCommit()) {</span>
-<span class="lineNum">      90 </span><span class="lineCov">    3053177 :                 context.transaction.BeginTransaction();</span>
+<span class="lineNum">      88 </span><span class="lineCov">    3175115 : unique_ptr&lt;DuckDBResult&gt; DuckDBConnection::Query(string query) {</span>
+<span class="lineNum">      89 </span><span class="lineCov">    3175115 :         if (context.transaction.IsAutoCommit()) {</span>
+<span class="lineNum">      90 </span><span class="lineCov">    3053356 :                 context.transaction.BeginTransaction();</span>
 <span class="lineNum">      91 </span>            :         }
 <span class="lineNum">      92 </span>            : 
-<span class="lineNum">      93 </span><span class="lineCov">    3175436 :         context.ActiveTransaction().active_query = context.db.transaction_manager.GetQueryNumber();</span>
-<span class="lineNum">      94 </span><span class="lineCov">    6354313 :         auto result = GetQueryResult(query);</span>
+<span class="lineNum">      93 </span><span class="lineCov">    3175478 :         context.ActiveTransaction().active_query = context.db.transaction_manager.GetQueryNumber();</span>
+<span class="lineNum">      94 </span><span class="lineCov">    6354714 :         auto result = GetQueryResult(query);</span>
 <span class="lineNum">      95 </span>            : 
-<span class="lineNum">      96 </span><span class="lineCov">    3176862 :         if (context.transaction.HasActiveTransaction()) {</span>
-<span class="lineNum">      97 </span><span class="lineCov">    3153663 :                 context.ActiveTransaction().active_query = MAXIMUM_QUERY_ID;</span>
+<span class="lineNum">      96 </span><span class="lineCov">    3177038 :         if (context.transaction.HasActiveTransaction()) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">    3154218 :                 context.ActiveTransaction().active_query = MAXIMUM_QUERY_ID;</span>
 <span class="lineNum">      98 </span>            :                 try {
-<span class="lineNum">      99 </span><span class="lineCov">    3153185 :                         if (context.transaction.IsAutoCommit()) {</span>
-<span class="lineNum">     100 </span><span class="lineCov">    3031926 :                                 if (result-&gt;GetSuccess()) {</span>
-<span class="lineNum">     101 </span><span class="lineCov">    3031842 :                                         context.transaction.Commit();</span>
+<span class="lineNum">      99 </span><span class="lineCov">    3153625 :                         if (context.transaction.IsAutoCommit()) {</span>
+<span class="lineNum">     100 </span><span class="lineCov">    3032105 :                                 if (result-&gt;GetSuccess()) {</span>
+<span class="lineNum">     101 </span><span class="lineCov">    3032021 :                                         context.transaction.Commit();</span>
 <span class="lineNum">     102 </span>            :                                 } else {
 <span class="lineNum">     103 </span><span class="lineCov">         84 :                                         context.transaction.Rollback();</span>
 <span class="lineNum">     104 </span>            :                                 }
@@ -173,7 +173,7 @@
 <span class="lineNum">     111 </span><span class="lineNoCov">          0 :                         result-&gt;error = &quot;UNHANDLED EXCEPTION TYPE THROWN IN TRANSACTION COMMIT!&quot;;</span>
 <span class="lineNum">     112 </span>            :                 }
 <span class="lineNum">     113 </span>            :         }
-<span class="lineNum">     114 </span><span class="lineCov">    3174617 :         return result;</span>
+<span class="lineNum">     114 </span><span class="lineCov">    3175029 :         return result;</span>
 <span class="lineNum">     115 </span>            : }
 </pre>
       </td>

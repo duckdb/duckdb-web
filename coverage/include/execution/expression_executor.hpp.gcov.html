@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/execution/expression_executor.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/execution/expression_executor.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -89,22 +89,22 @@
 <span class="lineNum">      27 </span>            : */
 <a name="28"><span class="lineNum">      28 </span>            : class ExpressionExecutor : public SQLNodeVisitor {</a>
 <span class="lineNum">      29 </span>            : public:
-<span class="lineNum">      30 </span><span class="lineCov">    6550659 :         ExpressionExecutor(PhysicalOperatorState *state, ClientContext &amp;context, bool scalar_executor = true)</span>
-<span class="lineNum">      31 </span><span class="lineCov">    6550575 :             : context(context), scalar_executor(scalar_executor), chunk(state ? &amp;state-&gt;child_chunk : nullptr),</span>
-<span class="lineNum">      32 </span><span class="lineCov">   13101234 :               parent(state ? state-&gt;parent : nullptr), state(state) {</span>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    6551822 :         }</span></a>
+<span class="lineNum">      30 </span><span class="lineCov">    6550929 :         ExpressionExecutor(PhysicalOperatorState *state, ClientContext &amp;context, bool scalar_executor = true)</span>
+<span class="lineNum">      31 </span><span class="lineCov">    6551031 :             : context(context), scalar_executor(scalar_executor), chunk(state ? &amp;state-&gt;child_chunk : nullptr),</span>
+<span class="lineNum">      32 </span><span class="lineCov">   13101960 :               parent(state ? state-&gt;parent : nullptr), state(state) {</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">    6553413 :         }</span></a>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">     222805 :         ExpressionExecutor(DataChunk &amp;child_chunk, ClientContext &amp;context, ExpressionExecutor *parent = nullptr)</span>
-<span class="lineNum">      36 </span><span class="lineCov">     222805 :             : context(context), scalar_executor(true), chunk(&amp;child_chunk), parent(parent), state(nullptr) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">     222174 :         }</span>
+<span class="lineNum">      35 </span><span class="lineCov">     222309 :         ExpressionExecutor(DataChunk &amp;child_chunk, ClientContext &amp;context, ExpressionExecutor *parent = nullptr)</span>
+<span class="lineNum">      36 </span><span class="lineCov">     222309 :             : context(context), scalar_executor(true), chunk(&amp;child_chunk), parent(parent), state(nullptr) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">     222152 :         }</span>
 <span class="lineNum">      38 </span>            : 
 <span class="lineNum">      39 </span>            :         void Reset();
 <span class="lineNum">      40 </span>            : 
 <a name="41"><span class="lineNum">      41 </span>            :         void Execute(DataChunk &amp;result, std::function&lt;Expression *(size_t i)&gt; callback, size_t count);</a>
 <span class="lineNum">      42 </span>            :         //! Executes a set of expressions and stores them in the result chunk
-<span class="lineNum">      43 </span><span class="lineCov">    5927410 :         void Execute(vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;expressions, DataChunk &amp;result) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">    5927413 :                 Execute(result, [&amp;](size_t i) { return expressions[i].get(); }, expressions.size());</span>
-<span class="lineNum">      45 </span><span class="lineCov">    5927462 :         }</span>
+<span class="lineNum">      43 </span><span class="lineCov">    5927753 :         void Execute(vector&lt;unique_ptr&lt;Expression&gt;&gt; &amp;expressions, DataChunk &amp;result) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">    5927756 :                 Execute(result, [&amp;](size_t i) { return expressions[i].get(); }, expressions.size());</span>
+<span class="lineNum">      45 </span><span class="lineCov">    5927798 :         }</span>
 <span class="lineNum">      46 </span>            :         //! Executes a set of column expresions and merges them using the logical
 <span class="lineNum">      47 </span>            :         //! AND operator
 <span class="lineNum">      48 </span>            :         void Merge(std::vector&lt;std::unique_ptr&lt;Expression&gt;&gt; &amp;expressions, Vector &amp;result);

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - parser/transform/expression/transform_cast.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 5462e40b - parser/transform/expression/transform_cast.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
+            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">14</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 14:52:16</td>
+            <td class="headerValue">2019-01-02 15:45:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -69,16 +69,16 @@
 <span class="lineNum">       7 </span>            : using namespace postgres;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">     382368 : unique_ptr&lt;Expression&gt; Transformer::TransformTypeCast(TypeCast *root) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">     382368 :         if (!root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">     382369 : unique_ptr&lt;Expression&gt; Transformer::TransformTypeCast(TypeCast *root) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">     382369 :         if (!root) {</span>
 <span class="lineNum">      12 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">      13 </span>            :         }
 <span class="lineNum">      14 </span>            :         // get the type to cast to
-<span class="lineNum">      15 </span><span class="lineCov">     382368 :         TypeName *type_name = root-&gt;typeName;</span>
-<span class="lineNum">      16 </span><span class="lineCov">     382368 :         char *name = (reinterpret_cast&lt;value *&gt;(type_name-&gt;names-&gt;tail-&gt;data.ptr_value)-&gt;val.str);</span>
-<span class="lineNum">      17 </span><span class="lineCov">     382368 :         TypeId target_type = TransformStringToTypeId(name);</span>
+<span class="lineNum">      15 </span><span class="lineCov">     382369 :         TypeName *type_name = root-&gt;typeName;</span>
+<span class="lineNum">      16 </span><span class="lineCov">     382369 :         char *name = (reinterpret_cast&lt;value *&gt;(type_name-&gt;names-&gt;tail-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">      17 </span><span class="lineCov">     382369 :         TypeId target_type = TransformStringToTypeId(name);</span>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">     382368 :         if (root-&gt;arg-&gt;type == T_A_Const) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     382369 :         if (root-&gt;arg-&gt;type == T_A_Const) {</span>
 <span class="lineNum">      20 </span>            :                 // cast a constant value
 <span class="lineNum">      21 </span>            :                 // get the original constant value
 <span class="lineNum">      22 </span><span class="lineCov">     510092 :                 auto constant = TransformConstant(reinterpret_cast&lt;A_Const *&gt;(root-&gt;arg));</span>
@@ -95,9 +95,9 @@
 <span class="lineNum">      33 </span><span class="lineCov">     255046 :                 return make_unique&lt;ConstantExpression&gt;(new_value);</span>
 <span class="lineNum">      34 </span>            :         } else {
 <span class="lineNum">      35 </span>            :                 // transform the expression node
-<span class="lineNum">      36 </span><span class="lineCov">     254644 :                 auto expression = TransformExpression(root-&gt;arg);</span>
+<span class="lineNum">      36 </span><span class="lineCov">     254646 :                 auto expression = TransformExpression(root-&gt;arg);</span>
 <span class="lineNum">      37 </span>            :                 // now create a cast operation
-<span class="lineNum">      38 </span><span class="lineCov">     127322 :                 return make_unique&lt;CastExpression&gt;(target_type, move(expression));</span>
+<span class="lineNum">      38 </span><span class="lineCov">     127323 :                 return make_unique&lt;CastExpression&gt;(target_type, move(expression));</span>
 <span class="lineNum">      39 </span>            :         }
 <span class="lineNum">      40 </span>            : }
 </pre>
