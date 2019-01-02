@@ -1,0 +1,670 @@
+{ "result": 0.222315,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2266,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2266,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\nbought_city!=ca_city\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27538,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":27538,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":113850,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\n(d_dom <= 2)\n(d_dom >= 1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(s_city, Fairview, Midway)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1800,
+"extra_info": "OR((hd_dep_count = 4), (hd_vehicle_count = 3))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":100000,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.220999,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2266,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2266,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\nbought_city!=ca_city\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27538,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":27538,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":113850,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\n(d_dom <= 2)\n(d_dom >= 1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(s_city, Fairview, Midway)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1800,
+"extra_info": "OR((hd_dep_count = 4), (hd_vehicle_count = 3))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":100000,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.221448,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2266,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2266,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\nbought_city!=ca_city\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27538,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":27538,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":113850,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\n(d_dom <= 2)\n(d_dom >= 1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(s_city, Fairview, Midway)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1800,
+"extra_info": "OR((hd_dep_count = 4), (hd_vehicle_count = 3))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":100000,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.220664,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2266,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2266,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\nbought_city!=ca_city\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27538,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":27538,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":113850,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\n(d_dom <= 2)\n(d_dom >= 1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(s_city, Fairview, Midway)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1800,
+"extra_info": "OR((hd_dep_count = 4), (hd_vehicle_count = 3))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":100000,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.221225,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2266,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2266,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\nbought_city!=ca_city\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2286,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27538,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":27538,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":113850,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\n(d_dom <= 2)\n(d_dom >= 1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(s_city, Fairview, Midway)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1800,
+"extra_info": "OR((hd_dep_count = 4), (hd_vehicle_count = 3))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":100000,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
