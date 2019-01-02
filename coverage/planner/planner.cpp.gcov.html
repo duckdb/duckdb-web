@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - planner/planner.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - planner/planner.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">56</td>
+            <td class="headerCovTableEntry">55</td>
             <td class="headerCovTableEntry">70</td>
-            <td class="headerCovTableEntryMed">80.0 %</td>
+            <td class="headerCovTableEntryMed">78.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -73,24 +73,24 @@
 <span class="lineNum">      11 </span>            : using namespace duckdb;
 <a name="12"><span class="lineNum">      12 </span>            : using namespace std;</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">    3133881 : void Planner::CreatePlan(ClientContext &amp;context, SQLStatement &amp;statement) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3133862 : void Planner::CreatePlan(ClientContext &amp;context, SQLStatement &amp;statement) {</span>
 <span class="lineNum">      15 </span>            :         // first bind the tables and columns to the catalog
-<span class="lineNum">      16 </span><span class="lineCov">    6265499 :         Binder binder(context);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    6265479 :         Binder binder(context);</span>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">    3134665 :         statement.Accept(&amp;binder);</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3135627 :         statement.Accept(&amp;binder);</span>
 <span class="lineNum">      19 </span>            : 
 <span class="lineNum">      20 </span>            :         // now create a logical query plan from the query
-<span class="lineNum">      21 </span><span class="lineCov">    6264874 :         LogicalPlanGenerator logical_planner(context, *binder.bind_context);</span>
-<span class="lineNum">      22 </span><span class="lineCov">    3131687 :         statement.Accept(&amp;logical_planner);</span>
+<span class="lineNum">      21 </span><span class="lineCov">    6263618 :         LogicalPlanGenerator logical_planner(context, *binder.bind_context);</span>
+<span class="lineNum">      22 </span><span class="lineCov">    3131761 :         statement.Accept(&amp;logical_planner);</span>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">    3131951 :         this-&gt;plan = move(logical_planner.root);</span>
-<span class="lineNum">      25 </span><span class="lineCov">    3132436 :         this-&gt;context = move(binder.bind_context);</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">    3132847 : }</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">    3132181 :         this-&gt;plan = move(logical_planner.root);</span>
+<span class="lineNum">      25 </span><span class="lineCov">    3132416 :         this-&gt;context = move(binder.bind_context);</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">    3135659 : }</span></a>
 <span class="lineNum">      27 </span>            : 
-<span class="lineNum">      28 </span><span class="lineCov">    3176004 : void Planner::CreatePlan(ClientContext &amp;context, unique_ptr&lt;SQLStatement&gt; statement) {</span>
-<span class="lineNum">      29 </span><span class="lineCov">    3176004 :         assert(statement);</span>
-<span class="lineNum">      30 </span><span class="lineCov">    3177730 :         switch (statement-&gt;type) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">    3134154 :         case StatementType::SELECT:</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3175974 : void Planner::CreatePlan(ClientContext &amp;context, unique_ptr&lt;SQLStatement&gt; statement) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">    3175974 :         assert(statement);</span>
+<span class="lineNum">      30 </span><span class="lineCov">    3177489 :         switch (statement-&gt;type) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">    3133950 :         case StatementType::SELECT:</span>
 <span class="lineNum">      32 </span>            :                 // #ifdef DEBUG
 <span class="lineNum">      33 </span>            :                 //      {
 <span class="lineNum">      34 </span>            :                 //              // in debug mode we test the serialization/deserialization and copying of arbitrary SQL statements
@@ -109,8 +109,8 @@
 <span class="lineNum">      47 </span>            :         case StatementType::UPDATE:
 <span class="lineNum">      48 </span>            :         case StatementType::CREATE_INDEX:
 <span class="lineNum">      49 </span>            :         case StatementType::CREATE_TABLE:
-<span class="lineNum">      50 </span><span class="lineCov">    3134154 :                 CreatePlan(context, *statement);</span>
-<span class="lineNum">      51 </span><span class="lineCov">    3131779 :                 break;</span>
+<span class="lineNum">      50 </span><span class="lineCov">    3133950 :                 CreatePlan(context, *statement);</span>
+<span class="lineNum">      51 </span><span class="lineCov">    3131883 :                 break;</span>
 <span class="lineNum">      52 </span><span class="lineCov">         10 :         case StatementType::CREATE_SCHEMA: {</span>
 <span class="lineNum">      53 </span><span class="lineCov">         10 :                 auto &amp;stmt = *((CreateSchemaStatement *)statement.get());</span>
 <span class="lineNum">      54 </span><span class="lineCov">         10 :                 context.db.catalog.CreateSchema(context.ActiveTransaction(), stmt.info.get());</span>
@@ -139,47 +139,47 @@
 <span class="lineNum">      77 </span><span class="lineCov">          7 :                 context.db.catalog.AlterTable(context.ActiveTransaction(), stmt.info.get());</span>
 <span class="lineNum">      78 </span><span class="lineCov">          5 :                 break;</span>
 <span class="lineNum">      79 </span>            :         }
-<span class="lineNum">      80 </span><span class="lineCov">      42078 :         case StatementType::TRANSACTION: {</span>
-<span class="lineNum">      81 </span><span class="lineCov">      42078 :                 auto &amp;stmt = *((TransactionStatement *)statement.get());</span>
+<span class="lineNum">      80 </span><span class="lineCov">      41907 :         case StatementType::TRANSACTION: {</span>
+<span class="lineNum">      81 </span><span class="lineCov">      41907 :                 auto &amp;stmt = *((TransactionStatement *)statement.get());</span>
 <span class="lineNum">      82 </span>            :                 // TODO: create actual plan
-<span class="lineNum">      83 </span><span class="lineCov">      42059 :                 switch (stmt.type) {</span>
-<span class="lineNum">      84 </span><span class="lineCov">      21199 :                 case TransactionType::BEGIN_TRANSACTION: {</span>
-<span class="lineNum">      85 </span><span class="lineCov">      21199 :                         if (context.transaction.IsAutoCommit()) {</span>
+<span class="lineNum">      83 </span><span class="lineCov">      41946 :                 switch (stmt.type) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">      21156 :                 case TransactionType::BEGIN_TRANSACTION: {</span>
+<span class="lineNum">      85 </span><span class="lineCov">      21156 :                         if (context.transaction.IsAutoCommit()) {</span>
 <span class="lineNum">      86 </span>            :                                 // start the active transaction
 <span class="lineNum">      87 </span>            :                                 // if autocommit is active, we have already called
 <span class="lineNum">      88 </span>            :                                 // BeginTransaction by setting autocommit to false we
 <span class="lineNum">      89 </span>            :                                 // prevent it from being closed after this query, hence
 <span class="lineNum">      90 </span>            :                                 // preserving the transaction context for the next query
-<span class="lineNum">      91 </span><span class="lineCov">      21171 :                                 context.transaction.SetAutoCommit(false);</span>
+<span class="lineNum">      91 </span><span class="lineCov">      21190 :                                 context.transaction.SetAutoCommit(false);</span>
 <span class="lineNum">      92 </span>            :                         } else {
-<span class="lineNum">      93 </span><span class="lineCov">          1 :                                 throw TransactionException(&quot;cannot start a transaction within a transaction&quot;);</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :                                 throw TransactionException(&quot;cannot start a transaction within a transaction&quot;);</span>
 <span class="lineNum">      94 </span>            :                         }
-<span class="lineNum">      95 </span><span class="lineCov">      21143 :                         break;</span>
+<span class="lineNum">      95 </span><span class="lineCov">      21184 :                         break;</span>
 <span class="lineNum">      96 </span>            :                 }
-<span class="lineNum">      97 </span><span class="lineCov">      11145 :                 case TransactionType::COMMIT: {</span>
-<span class="lineNum">      98 </span><span class="lineCov">      11145 :                         if (context.transaction.IsAutoCommit()) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">      11117 :                 case TransactionType::COMMIT: {</span>
+<span class="lineNum">      98 </span><span class="lineCov">      11117 :                         if (context.transaction.IsAutoCommit()) {</span>
 <span class="lineNum">      99 </span><span class="lineNoCov">          0 :                                 throw TransactionException(&quot;cannot commit - no transaction is active&quot;);</span>
 <span class="lineNum">     100 </span>            :                         } else {
 <span class="lineNum">     101 </span>            :                                 // explicitly commit the current transaction
-<span class="lineNum">     102 </span><span class="lineCov">      11136 :                                 context.transaction.Commit();</span>
+<span class="lineNum">     102 </span><span class="lineCov">      11122 :                                 context.transaction.Commit();</span>
 <span class="lineNum">     103 </span><span class="lineCov">      11233 :                                 context.transaction.SetAutoCommit(true);</span>
 <span class="lineNum">     104 </span>            :                         }
 <span class="lineNum">     105 </span><span class="lineCov">      11233 :                         break;</span>
 <span class="lineNum">     106 </span>            :                 }
-<span class="lineNum">     107 </span><span class="lineCov">       9952 :                 case TransactionType::ROLLBACK: {</span>
-<span class="lineNum">     108 </span><span class="lineCov">       9952 :                         if (context.transaction.IsAutoCommit()) {</span>
+<span class="lineNum">     107 </span><span class="lineCov">       9929 :                 case TransactionType::ROLLBACK: {</span>
+<span class="lineNum">     108 </span><span class="lineCov">       9929 :                         if (context.transaction.IsAutoCommit()) {</span>
 <span class="lineNum">     109 </span><span class="lineNoCov">          0 :                                 throw TransactionException(&quot;cannot rollback - no transaction is active&quot;);</span>
 <span class="lineNum">     110 </span>            :                         } else {
 <span class="lineNum">     111 </span>            :                                 // explicitly rollback the current transaction
-<span class="lineNum">     112 </span><span class="lineCov">       9939 :                                 context.transaction.Rollback();</span>
+<span class="lineNum">     112 </span><span class="lineCov">       9931 :                                 context.transaction.Rollback();</span>
 <span class="lineNum">     113 </span><span class="lineCov">      10011 :                                 context.transaction.SetAutoCommit(true);</span>
 <span class="lineNum">     114 </span>            :                         }
-<span class="lineNum">     115 </span><span class="lineCov">       9999 :                         break;</span>
+<span class="lineNum">     115 </span><span class="lineCov">       9988 :                         break;</span>
 <span class="lineNum">     116 </span>            :                 }
 <span class="lineNum">     117 </span><span class="lineNoCov">          0 :                 default:</span>
 <span class="lineNum">     118 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Unrecognized transaction type!&quot;);</span>
 <span class="lineNum">     119 </span>            :                 }
-<span class="lineNum">     120 </span><span class="lineCov">      42375 :                 break;</span>
+<span class="lineNum">     120 </span><span class="lineCov">      42405 :                 break;</span>
 <span class="lineNum">     121 </span>            :         }
 <span class="lineNum">     122 </span><span class="lineNoCov">          0 :         case StatementType::EXPLAIN: {</span>
 <span class="lineNum">     123 </span><span class="lineNoCov">          0 :                 auto &amp;stmt = *reinterpret_cast&lt;ExplainStatement *&gt;(statement.get());</span>
@@ -192,10 +192,10 @@
 <span class="lineNum">     130 </span><span class="lineNoCov">          0 :                 plan = move(explain);</span>
 <span class="lineNum">     131 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">     132 </span>            :         }
-<span class="lineNum">     133 </span><span class="lineCov">       2170 :         default:</span>
-<span class="lineNum">     134 </span><span class="lineCov">       2170 :                 throw NotImplementedException(&quot;Statement of type %d not implemented in planner!&quot;, statement-&gt;type);</span>
+<span class="lineNum">     133 </span><span class="lineCov">       2427 :         default:</span>
+<span class="lineNum">     134 </span><span class="lineCov">       2427 :                 throw NotImplementedException(&quot;Statement of type %d not implemented in planner!&quot;, statement-&gt;type);</span>
 <span class="lineNum">     135 </span>            :         }
-<span class="lineNum">     136 </span><span class="lineCov">    3174191 : }</span>
+<span class="lineNum">     136 </span><span class="lineCov">    3174325 : }</span>
 </pre>
       </td>
     </tr>

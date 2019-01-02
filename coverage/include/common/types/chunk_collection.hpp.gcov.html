@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - include/common/types/chunk_collection.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/common/types/chunk_collection.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -85,8 +85,8 @@
 <span class="lineNum">      23 </span>            : */
 <a name="24"><span class="lineNum">      24 </span>            : class ChunkCollection : public Printable {</a>
 <span class="lineNum">      25 </span>            : public:
-<span class="lineNum">      26 </span><span class="lineCov">    6612445 :         ChunkCollection() : count(0) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    6611686 :         }</span>
+<span class="lineNum">      26 </span><span class="lineCov">    6612444 :         ChunkCollection() : count(0) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    6612597 :         }</span>
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span>            :         //! The total amount of elements in the collection
 <span class="lineNum">      30 </span>            :         size_t count;
@@ -96,8 +96,8 @@
 <span class="lineNum">      34 </span>            :         vector&lt;TypeId&gt; types;
 <a name="35"><span class="lineNum">      35 </span>            : </a>
 <span class="lineNum">      36 </span>            :         //! The amount of columns in the ChunkCollection
-<span class="lineNum">      37 </span><span class="lineCov">    1742127 :         size_t column_count() {</span>
-<span class="lineNum">      38 </span><span class="lineCov">    1742127 :                 return types.size();</span>
+<span class="lineNum">      37 </span><span class="lineCov">    1743650 :         size_t column_count() {</span>
+<span class="lineNum">      38 </span><span class="lineCov">    1743650 :                 return types.size();</span>
 <span class="lineNum">      39 </span>            :         }
 <span class="lineNum">      40 </span>            : 
 <span class="lineNum">      41 </span>            :         //! Append a new DataChunk directly to this ChunkCollection
@@ -115,8 +115,8 @@
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 :                                           : &quot;ChunkCollection [ &quot; + std::to_string(count) + &quot; ]: \n&quot; + chunks[0]-&gt;ToString();</span>
 <a name="54"><span class="lineNum">      54 </span>            :         }</a>
 <span class="lineNum">      55 </span>            :         //! Gets a reference to the chunk at the given index
-<span class="lineNum">      56 </span><span class="lineCov">      10050 :         DataChunk &amp;GetChunk(size_t index) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">      10050 :                 return *chunks[LocateChunk(index)];</span>
+<span class="lineNum">      56 </span><span class="lineCov">      10052 :         DataChunk &amp;GetChunk(size_t index) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">      10052 :                 return *chunks[LocateChunk(index)];</span>
 <span class="lineNum">      58 </span>            :         }
 <span class="lineNum">      59 </span>            : 
 <span class="lineNum">      60 </span>            :         void Sort(OrderByDescription &amp;desc, uint64_t result[]);
@@ -125,10 +125,10 @@
 <span class="lineNum">      63 </span>            : 
 <a name="64"><span class="lineNum">      64 </span>            : private:</a>
 <span class="lineNum">      65 </span>            :         //! Locates the chunk that belongs to the specific index
-<span class="lineNum">      66 </span><span class="lineCov">    1611027 :         size_t LocateChunk(size_t index) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">    1611027 :                 size_t result = index / STANDARD_VECTOR_SIZE;</span>
-<span class="lineNum">      68 </span><span class="lineCov">    1611027 :                 assert(result &lt; chunks.size());</span>
-<span class="lineNum">      69 </span><span class="lineCov">    1611027 :                 return result;</span>
+<span class="lineNum">      66 </span><span class="lineCov">    1613015 :         size_t LocateChunk(size_t index) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">    1613015 :                 size_t result = index / STANDARD_VECTOR_SIZE;</span>
+<span class="lineNum">      68 </span><span class="lineCov">    1613015 :                 assert(result &lt; chunks.size());</span>
+<span class="lineNum">      69 </span><span class="lineCov">    1613015 :                 return result;</span>
 <span class="lineNum">      70 </span>            :         }
 <span class="lineNum">      71 </span>            : };
 <span class="lineNum">      72 </span>            : 

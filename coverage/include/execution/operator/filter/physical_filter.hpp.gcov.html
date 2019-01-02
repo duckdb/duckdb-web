@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - include/execution/operator/filter/physical_filter.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/execution/operator/filter/physical_filter.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -79,9 +79,9 @@
 <span class="lineNum">      17 </span>            : //! adds a selection vector to the chunk.
 <a name="18"><span class="lineNum">      18 </span>            : class PhysicalFilter : public PhysicalOperator {</a>
 <span class="lineNum">      19 </span>            : public:
-<span class="lineNum">      20 </span><span class="lineCov">     490433 :         PhysicalFilter(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
-<span class="lineNum">      21 </span><span class="lineCov">     490433 :             : PhysicalOperator(PhysicalOperatorType::FILTER, op.types), expressions(std::move(select_list)) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">     490927 :         }</span>
+<span class="lineNum">      20 </span><span class="lineCov">     490483 :         PhysicalFilter(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
+<span class="lineNum">      21 </span><span class="lineCov">     490483 :             : PhysicalOperator(PhysicalOperatorType::FILTER, op.types), expressions(std::move(select_list)) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">     491620 :         }</span>
 <span class="lineNum">      23 </span>            : 
 <span class="lineNum">      24 </span>            :         void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) override;
 <span class="lineNum">      25 </span>            : 

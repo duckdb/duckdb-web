@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - parser/expression/window_expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - parser/expression/window_expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">54</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -67,9 +67,9 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">         67 : WindowExpression::WindowExpression(ExpressionType type, unique_ptr&lt;Expression&gt; child) : Expression(type) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">         67 :         switch (type) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">         67 :         case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">       8 </span><span class="lineCov">         69 : WindowExpression::WindowExpression(ExpressionType type, unique_ptr&lt;Expression&gt; child) : Expression(type) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">         69 :         switch (type) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">         69 :         case ExpressionType::WINDOW_SUM:</span>
 <span class="lineNum">      11 </span>            :         case ExpressionType::WINDOW_COUNT_STAR:
 <span class="lineNum">      12 </span>            :         case ExpressionType::WINDOW_MIN:
 <span class="lineNum">      13 </span>            :         case ExpressionType::WINDOW_MAX:
@@ -80,17 +80,17 @@
 <span class="lineNum">      18 </span>            :         case ExpressionType::WINDOW_RANK:
 <span class="lineNum">      19 </span>            :         case ExpressionType::WINDOW_RANK_DENSE:
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">         67 :                 break;</span>
+<span class="lineNum">      21 </span><span class="lineCov">         69 :                 break;</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window aggregate type %s not supported&quot;, ExpressionTypeToString(type).c_str());</span>
 <span class="lineNum">      24 </span>            :         }
-<span class="lineNum">      25 </span><span class="lineCov">         67 :         if (child) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">         44 :                 AddChild(move(child));</span>
+<span class="lineNum">      25 </span><span class="lineCov">         69 :         if (child) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">         46 :                 AddChild(move(child));</span>
 <span class="lineNum">      27 </span>            :         }
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">         67 : }</span></a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">         69 : }</span></a>
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">         45 : bool WindowExpression::IsWindow() {</span>
-<span class="lineNum">      31 </span><span class="lineCov">         45 :         return true;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         46 : bool WindowExpression::IsWindow() {</span>
+<span class="lineNum">      31 </span><span class="lineCov">         46 :         return true;</span>
 <a name="32"><span class="lineNum">      32 </span>            : }</a>
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span><span class="lineCov">         14 : unique_ptr&lt;Expression&gt; WindowExpression::Copy() {</span>
@@ -158,28 +158,28 @@
 <span class="lineNum">      96 </span>            : }
 <a name="97"><span class="lineNum">      97 </span>            : </a>
 <span class="lineNum">      98 </span>            : //! Resolve the type of the window function
-<span class="lineNum">      99 </span><span class="lineCov">         68 : void WindowExpression::ResolveType() {</span>
-<span class="lineNum">     100 </span><span class="lineCov">         68 :         Expression::ResolveType();</span>
+<span class="lineNum">      99 </span><span class="lineCov">         70 : void WindowExpression::ResolveType() {</span>
+<span class="lineNum">     100 </span><span class="lineCov">         70 :         Expression::ResolveType();</span>
 <span class="lineNum">     101 </span>            : 
-<span class="lineNum">     102 </span><span class="lineCov">         68 :         if (start_expr) {</span>
+<span class="lineNum">     102 </span><span class="lineCov">         70 :         if (start_expr) {</span>
 <span class="lineNum">     103 </span><span class="lineCov">          3 :                 start_expr-&gt;ResolveType();</span>
 <span class="lineNum">     104 </span>            :         }
-<span class="lineNum">     105 </span><span class="lineCov">         68 :         if (end_expr) {</span>
+<span class="lineNum">     105 </span><span class="lineCov">         70 :         if (end_expr) {</span>
 <span class="lineNum">     106 </span><span class="lineCov">          4 :                 end_expr-&gt;ResolveType();</span>
 <span class="lineNum">     107 </span>            :         }
 <span class="lineNum">     108 </span>            : 
-<span class="lineNum">     109 </span><span class="lineCov">        138 :         for (auto &amp;order : ordering.orders) {</span>
-<span class="lineNum">     110 </span><span class="lineCov">         70 :                 order.expression-&gt;ResolveType();</span>
+<span class="lineNum">     109 </span><span class="lineCov">        142 :         for (auto &amp;order : ordering.orders) {</span>
+<span class="lineNum">     110 </span><span class="lineCov">         72 :                 order.expression-&gt;ResolveType();</span>
 <span class="lineNum">     111 </span>            :         }
 <span class="lineNum">     112 </span>            : 
-<span class="lineNum">     113 </span><span class="lineCov">        176 :         for (auto &amp;part : partitions) {</span>
-<span class="lineNum">     114 </span><span class="lineCov">        108 :                 part-&gt;ResolveType();</span>
+<span class="lineNum">     113 </span><span class="lineCov">        180 :         for (auto &amp;part : partitions) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">        110 :                 part-&gt;ResolveType();</span>
 <span class="lineNum">     115 </span>            :         }
 <span class="lineNum">     116 </span>            : 
-<span class="lineNum">     117 </span><span class="lineCov">         68 :         switch (type) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">         70 :         switch (type) {</span>
 <span class="lineNum">     118 </span>            : 
-<span class="lineNum">     119 </span><span class="lineCov">         21 :         case ExpressionType::WINDOW_SUM:</span>
-<span class="lineNum">     120 </span><span class="lineCov">         21 :                 if (children[0]-&gt;IsScalar()) {</span>
+<span class="lineNum">     119 </span><span class="lineCov">         22 :         case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">     120 </span><span class="lineCov">         22 :                 if (children[0]-&gt;IsScalar()) {</span>
 <span class="lineNum">     121 </span><span class="lineNoCov">          0 :                         stats.has_stats = false;</span>
 <span class="lineNum">     122 </span><span class="lineNoCov">          0 :                         switch (children[0]-&gt;return_type) {</span>
 <span class="lineNum">     123 </span><span class="lineNoCov">          0 :                         case TypeId::BOOLEAN:</span>
@@ -193,12 +193,12 @@
 <span class="lineNum">     131 </span><span class="lineNoCov">          0 :                                 return_type = children[0]-&gt;return_type;</span>
 <span class="lineNum">     132 </span>            :                         }
 <span class="lineNum">     133 </span>            :                 } else {
-<span class="lineNum">     134 </span><span class="lineCov">         21 :                         ExpressionStatistics::Count(children[0]-&gt;stats, stats);</span>
-<span class="lineNum">     135 </span><span class="lineCov">         21 :                         ExpressionStatistics::Sum(children[0]-&gt;stats, stats);</span>
-<span class="lineNum">     136 </span><span class="lineCov">         21 :                         return_type = max(children[0]-&gt;return_type, stats.MinimalType());</span>
+<span class="lineNum">     134 </span><span class="lineCov">         22 :                         ExpressionStatistics::Count(children[0]-&gt;stats, stats);</span>
+<span class="lineNum">     135 </span><span class="lineCov">         22 :                         ExpressionStatistics::Sum(children[0]-&gt;stats, stats);</span>
+<span class="lineNum">     136 </span><span class="lineCov">         22 :                         return_type = max(children[0]-&gt;return_type, stats.MinimalType());</span>
 <span class="lineNum">     137 </span>            :                 }
 <span class="lineNum">     138 </span>            : 
-<span class="lineNum">     139 </span><span class="lineCov">         21 :                 break;</span>
+<span class="lineNum">     139 </span><span class="lineCov">         22 :                 break;</span>
 <span class="lineNum">     140 </span><span class="lineCov">         10 :         case ExpressionType::WINDOW_AVG:</span>
 <span class="lineNum">     141 </span><span class="lineCov">         10 :                 return_type = TypeId::DECIMAL;</span>
 <span class="lineNum">     142 </span><span class="lineCov">         10 :                 break;</span>
@@ -208,19 +208,19 @@
 <span class="lineNum">     146 </span>            :         case ExpressionType::WINDOW_RANK_DENSE:
 <span class="lineNum">     147 </span><span class="lineCov">         27 :                 return_type = TypeId::BIGINT;</span>
 <span class="lineNum">     148 </span><span class="lineCov">         27 :                 break;</span>
-<span class="lineNum">     149 </span><span class="lineCov">         10 :         case ExpressionType::WINDOW_MIN:</span>
+<span class="lineNum">     149 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_MIN:</span>
 <span class="lineNum">     150 </span>            :         case ExpressionType::WINDOW_MAX:
 <span class="lineNum">     151 </span>            :         case ExpressionType::WINDOW_FIRST_VALUE:
 <span class="lineNum">     152 </span>            :         case ExpressionType::WINDOW_LAST_VALUE:
-<span class="lineNum">     153 </span><span class="lineCov">         10 :                 if (children.size() != 1) {</span>
+<span class="lineNum">     153 </span><span class="lineCov">         11 :                 if (children.size() != 1) {</span>
 <span class="lineNum">     154 </span><span class="lineNoCov">          0 :                         throw Exception(&quot;Window functions FIRST_VALUE and LAST_VALUE need an expression&quot;);</span>
 <span class="lineNum">     155 </span>            :                 }
-<span class="lineNum">     156 </span><span class="lineCov">         10 :                 return_type = children[0]-&gt;return_type;</span>
-<span class="lineNum">     157 </span><span class="lineCov">         10 :                 break;</span>
+<span class="lineNum">     156 </span><span class="lineCov">         11 :                 return_type = children[0]-&gt;return_type;</span>
+<span class="lineNum">     157 </span><span class="lineCov">         11 :                 break;</span>
 <span class="lineNum">     158 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">     159 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unsupported window type!&quot;);</span>
 <span class="lineNum">     160 </span>            :         }
-<span class="lineNum">     161 </span><span class="lineCov">         68 : }</span>
+<span class="lineNum">     161 </span><span class="lineCov">         70 : }</span>
 </pre>
       </td>
     </tr>

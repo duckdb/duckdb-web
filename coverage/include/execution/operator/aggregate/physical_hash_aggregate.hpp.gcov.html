@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - include/execution/operator/aggregate/physical_hash_aggregate.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/execution/operator/aggregate/physical_hash_aggregate.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -93,10 +93,10 @@
 <span class="lineNum">      31 </span>            : 
 <a name="32"><span class="lineNum">      32 </span>            : class PhysicalHashAggregateOperatorState : public PhysicalAggregateOperatorState {</a>
 <span class="lineNum">      33 </span>            : public:
-<span class="lineNum">      34 </span><span class="lineCov">    1350369 :         PhysicalHashAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
+<span class="lineNum">      34 </span><span class="lineCov">    1350420 :         PhysicalHashAggregateOperatorState(PhysicalAggregate *parent, PhysicalOperator *child,</span>
 <span class="lineNum">      35 </span>            :                                            ExpressionExecutor *parent_executor)
-<span class="lineNum">      36 </span><span class="lineCov">    1350369 :             : PhysicalAggregateOperatorState(parent, child, parent_executor), ht_scan_position(0), tuples_scanned(0) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">    1350345 :         }</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1350420 :             : PhysicalAggregateOperatorState(parent, child, parent_executor), ht_scan_position(0), tuples_scanned(0) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">    1350384 :         }</span>
 <span class="lineNum">      38 </span>            : 
 <span class="lineNum">      39 </span>            :         //! The current position to scan the HT for output tuples
 <span class="lineNum">      40 </span>            :         size_t ht_scan_position;

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - include/planner/operator/logical_aggregate.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - include/planner/operator/logical_aggregate.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">6</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -78,13 +78,13 @@
 <span class="lineNum">      16 </span>            : //! operator.
 <a name="17"><span class="lineNum">      17 </span>            : class LogicalAggregate : public LogicalOperator {</a>
 <span class="lineNum">      18 </span>            : public:
-<span class="lineNum">      19 </span><span class="lineCov">    1303316 :         LogicalAggregate(vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
-<span class="lineNum">      20 </span><span class="lineCov">    1303316 :             : LogicalOperator(LogicalOperatorType::AGGREGATE_AND_GROUP_BY, std::move(select_list)) {</span>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">    1303377 :         }</span></a>
+<span class="lineNum">      19 </span><span class="lineCov">    1303360 :         LogicalAggregate(vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
+<span class="lineNum">      20 </span><span class="lineCov">    1303360 :             : LogicalOperator(LogicalOperatorType::AGGREGATE_AND_GROUP_BY, std::move(select_list)) {</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">    1303411 :         }</span></a>
 <span class="lineNum">      22 </span>            : 
-<span class="lineNum">      23 </span><span class="lineCov">    3910011 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      24 </span><span class="lineCov">    3910011 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      25 </span><span class="lineCov">    3909951 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">    3910146 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      24 </span><span class="lineCov">    3910146 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      25 </span><span class="lineCov">    3910040 :         }</span>
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :         vector&lt;string&gt; GetNames() override;
 <span class="lineNum">      28 </span>            : 

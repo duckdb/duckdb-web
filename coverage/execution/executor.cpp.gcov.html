@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 13766100 - execution/executor.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 64b4d478 - execution/executor.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 13766100</td>
+            <td class="headerValue">DuckDB Code Coverage Report 64b4d478</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 13:22:47</td>
+            <td class="headerValue">2019-01-02 14:52:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -65,22 +65,22 @@
 <span class="lineNum">       3 </span>            : using namespace duckdb;
 <a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineCov">    3129462 : ChunkCollection Executor::Execute(ClientContext &amp;context, unique_ptr&lt;PhysicalOperator&gt; plan) {</span>
-<span class="lineNum">       7 </span><span class="lineCov">    3129462 :         ChunkCollection result;</span>
+<span class="lineNum">       6 </span><span class="lineCov">    3129502 : ChunkCollection Executor::Execute(ClientContext &amp;context, unique_ptr&lt;PhysicalOperator&gt; plan) {</span>
+<span class="lineNum">       7 </span><span class="lineCov">    3129502 :         ChunkCollection result;</span>
 <span class="lineNum">       8 </span>            :         // the chunk and state are used to iterate over the input plan
-<span class="lineNum">       9 </span><span class="lineCov">    6264830 :         auto state = plan-&gt;GetOperatorState(nullptr);</span>
+<span class="lineNum">       9 </span><span class="lineCov">    6265735 :         auto state = plan-&gt;GetOperatorState(nullptr);</span>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">    3132146 :         result.types = plan-&gt;GetTypes();</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3131588 :         result.types = plan-&gt;GetTypes();</span>
 <span class="lineNum">      12 </span>            : 
 <span class="lineNum">      13 </span>            :         // loop until we have retrieved all data
-<span class="lineNum">      14 </span><span class="lineCov">    6264567 :         unique_ptr&lt;DataChunk&gt; chunk;</span>
-<span class="lineNum">      15 </span><span class="lineCov">    3540763 :         do {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    6670327 :                 chunk = make_unique&lt;DataChunk&gt;();</span>
-<span class="lineNum">      17 </span><span class="lineCov">    6672052 :                 plan-&gt;InitializeChunk(*chunk.get());</span>
-<span class="lineNum">      18 </span><span class="lineCov">    6672818 :                 plan-&gt;GetChunk(context, *chunk, state.get());</span>
-<span class="lineNum">      19 </span><span class="lineCov">    6676470 :                 result.Append(*chunk);</span>
-<span class="lineNum">      20 </span><span class="lineCov">    6675868 :         } while (chunk-&gt;size() &gt; 0);</span>
-<span class="lineNum">      21 </span><span class="lineCov">    6271083 :         return result;</span>
+<span class="lineNum">      14 </span><span class="lineCov">    6264622 :         unique_ptr&lt;DataChunk&gt; chunk;</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3540782 :         do {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    6670390 :                 chunk = make_unique&lt;DataChunk&gt;();</span>
+<span class="lineNum">      17 </span><span class="lineCov">    6670107 :                 plan-&gt;InitializeChunk(*chunk.get());</span>
+<span class="lineNum">      18 </span><span class="lineCov">    6672851 :                 plan-&gt;GetChunk(context, *chunk, state.get());</span>
+<span class="lineNum">      19 </span><span class="lineCov">    6676477 :                 result.Append(*chunk);</span>
+<span class="lineNum">      20 </span><span class="lineCov">    6675896 :         } while (chunk-&gt;size() &gt; 0);</span>
+<span class="lineNum">      21 </span><span class="lineCov">    6271213 :         return result;</span>
 <span class="lineNum">      22 </span>            : }
 </pre>
       </td>
