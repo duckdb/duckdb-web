@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/common/vector_operations/inplace_loops.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/common/vector_operations/inplace_loops.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">66</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -76,21 +76,21 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : namespace duckdb {</a>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">    4818477 : inline void INPLACE_TYPE_CHECK(Vector &amp;left, Vector &amp;result) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">    4818477 :         if (left.type != result.type) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">    4817834 : inline void INPLACE_TYPE_CHECK(Vector &amp;left, Vector &amp;result) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    4817834 :         if (left.type != result.type) {</span>
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 :                 throw TypeMismatchException(left.type, result.type, &quot;input and result types must be the same&quot;);</span>
 <span class="lineNum">      20 </span>            :         }
-<span class="lineNum">      21 </span><span class="lineCov">    4818477 :         if (!left.IsConstant() &amp;&amp; left.count != result.count) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">    4817834 :         if (!left.IsConstant() &amp;&amp; left.count != result.count) {</span>
 <span class="lineNum">      22 </span>            :                 throw Exception(&quot;Cardinality exception: left and result cannot have &quot;
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :                                 &quot;different cardinalities&quot;);</span>
 <span class="lineNum">      24 </span>            :         }
-<span class="lineNum">      25 </span><span class="lineCov">    4818542 : }</span>
+<span class="lineNum">      25 </span><span class="lineCov">    4817908 : }</span>
 <a name="26"><span class="lineNum">      26 </span>            : </a>
 <span class="lineNum">      27 </span>            : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;
-<span class="lineNum">      28 </span><span class="lineCov">    4029199 : static inline void inplace_loop_function_constant(LEFT_TYPE ldata, RESULT_TYPE *__restrict result_data, size_t count,</span>
+<span class="lineNum">      28 </span><span class="lineCov">    4028543 : static inline void inplace_loop_function_constant(LEFT_TYPE ldata, RESULT_TYPE *__restrict result_data, size_t count,</span>
 <span class="lineNum">      29 </span>            :                                                   sel_t *__restrict sel_vector) {
-<span class="lineNum">      30 </span><span class="lineCov">    4029199 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) { OP::Operation(result_data[i], ldata); });</span>
-<span class="lineNum">      31 </span><span class="lineCov">    4029351 : }</span>
+<span class="lineNum">      30 </span><span class="lineCov">    4028543 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) { OP::Operation(result_data[i], ldata); });</span>
+<span class="lineNum">      31 </span><span class="lineCov">    4028734 : }</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineCov">     209619 : </span></a>
 <span class="lineNum">      33 </span>            : template &lt;class LEFT_TYPE, class RESULT_TYPE, class OP&gt;
 <span class="lineNum">      34 </span><span class="lineCov">     209619 : static inline void inplace_loop_function_array(LEFT_TYPE *__restrict ldata, RESULT_TYPE *__restrict result_data,</span>
@@ -111,10 +111,10 @@
 <span class="lineNum">      49 </span>            :                                                                                    result.sel_vector);
 <span class="lineNum">      50 </span><span class="lineNoCov">          0 :                 }</span>
 <span class="lineNum">      51 </span><span class="lineNoCov">          0 :         } else {</span>
-<span class="lineNum">      52 </span><span class="lineCov">    3819580 :                 // OR nullmasks together</span>
+<span class="lineNum">      52 </span><span class="lineCov">    3818924 :                 // OR nullmasks together</span>
 <span class="lineNum">      53 </span>            :                 result.nullmask = input.nullmask | result.nullmask;
-<span class="lineNum">      54 </span><span class="lineCov">    4608819 :                 assert(result.sel_vector == input.sel_vector);</span>
-<span class="lineNum">      55 </span><span class="lineCov">    3819732 :                 inplace_loop_function_array&lt;LEFT_TYPE, RESULT_TYPE, OP&gt;(ldata, result_data, input.count, input.sel_vector);</span>
+<span class="lineNum">      54 </span><span class="lineCov">    4608163 :                 assert(result.sel_vector == input.sel_vector);</span>
+<span class="lineNum">      55 </span><span class="lineCov">    3819115 :                 inplace_loop_function_array&lt;LEFT_TYPE, RESULT_TYPE, OP&gt;(ldata, result_data, input.count, input.sel_vector);</span>
 <span class="lineNum">      56 </span><span class="lineCov">     789239 :         }</span>
 <span class="lineNum">      57 </span><span class="lineCov">     789239 : }</span>
 <span class="lineNum">      58 </span><span class="lineCov">     789239 : </span>

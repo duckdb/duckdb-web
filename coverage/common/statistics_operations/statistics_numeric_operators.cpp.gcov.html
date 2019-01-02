@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - common/statistics_operations/statistics_numeric_operators.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - common/statistics_operations/statistics_numeric_operators.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">61</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -69,74 +69,74 @@
 <span class="lineNum">       7 </span>            : using namespace std;
 <a name="8"><span class="lineNum">       8 </span>            : </a>
 <span class="lineNum">       9 </span>            : //! Extract the min and max value from four possible combinations
-<span class="lineNum">      10 </span><span class="lineCov">    6255916 : static void GetMaxAndMin(Value &amp;o1, Value &amp;o2, Value &amp;o3, Value &amp;o4, Value &amp;min, Value &amp;max) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    6255916 :         if (o1 &gt; o2) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    6255952 : static void GetMaxAndMin(Value &amp;o1, Value &amp;o2, Value &amp;o3, Value &amp;o4, Value &amp;min, Value &amp;max) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    6255952 :         if (o1 &gt; o2) {</span>
 <span class="lineNum">      12 </span>            :                 // o1 bigger
 <span class="lineNum">      13 </span><span class="lineCov">    2190505 :                 min = o2;</span>
 <span class="lineNum">      14 </span><span class="lineCov">    2190505 :                 max = o1;</span>
 <span class="lineNum">      15 </span>            :         } else {
 <span class="lineNum">      16 </span>            :                 // o2 bigger
-<span class="lineNum">      17 </span><span class="lineCov">    4064807 :                 min = o1;</span>
-<span class="lineNum">      18 </span><span class="lineCov">    4065557 :                 max = o2;</span>
+<span class="lineNum">      17 </span><span class="lineCov">    4064958 :                 min = o1;</span>
+<span class="lineNum">      18 </span><span class="lineCov">    4065491 :                 max = o2;</span>
 <span class="lineNum">      19 </span>            :         }
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">    6257216 :         if (o3 &gt; o4) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">    6256877 :         if (o3 &gt; o4) {</span>
 <span class="lineNum">      22 </span>            :                 // o3 bigger
 <span class="lineNum">      23 </span><span class="lineCov">    2179519 :                 min = ValueOperations::Min(min, o4);</span>
 <span class="lineNum">      24 </span><span class="lineCov">    2179519 :                 max = ValueOperations::Max(max, o3);</span>
 <span class="lineNum">      25 </span>            :         } else {
 <span class="lineNum">      26 </span>            :                 // o4 bigger
-<span class="lineNum">      27 </span><span class="lineCov">    4079902 :                 min = ValueOperations::Min(min, o3);</span>
-<span class="lineNum">      28 </span><span class="lineCov">    4079020 :                 max = ValueOperations::Max(max, o4);</span>
+<span class="lineNum">      27 </span><span class="lineCov">    4079851 :                 min = ValueOperations::Min(min, o3);</span>
+<span class="lineNum">      28 </span><span class="lineCov">    4078974 :                 max = ValueOperations::Max(max, o4);</span>
 <span class="lineNum">      29 </span>            :         }
-<a name="30"><span class="lineNum">      30 </span><span class="lineCov">    6258279 : }</span></a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">    6258229 : }</span></a>
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">    1866779 : void ExpressionStatistics::Add(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right, ExpressionStatistics &amp;result) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">    1866779 :         result.has_stats = left.has_stats &amp;&amp; right.has_stats;</span>
-<span class="lineNum">      34 </span><span class="lineCov">    1866779 :         if (result.has_stats) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">    1592004 :                 result.can_have_null = left.can_have_null || right.can_have_null;</span>
+<span class="lineNum">      32 </span><span class="lineCov">    1866810 : void ExpressionStatistics::Add(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right, ExpressionStatistics &amp;result) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">    1866810 :         result.has_stats = left.has_stats &amp;&amp; right.has_stats;</span>
+<span class="lineNum">      34 </span><span class="lineCov">    1866810 :         if (result.has_stats) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    1592101 :                 result.can_have_null = left.can_have_null || right.can_have_null;</span>
 <span class="lineNum">      36 </span>            :                 // the minimum value and maximum value depends on the signs
 <span class="lineNum">      37 </span>            :                 // we just compute all four possibilities and take the maximum and
 <span class="lineNum">      38 </span>            :                 // minimum
-<span class="lineNum">      39 </span><span class="lineCov">    3184080 :                 Value o1 = left.min + right.min;</span>
-<span class="lineNum">      40 </span><span class="lineCov">    3183473 :                 Value o2 = left.min + right.max;</span>
-<span class="lineNum">      41 </span><span class="lineCov">    3183495 :                 Value o3 = left.max + right.min;</span>
-<span class="lineNum">      42 </span><span class="lineCov">    3183511 :                 Value o4 = left.max + right.max;</span>
-<span class="lineNum">      43 </span><span class="lineCov">    1591959 :                 GetMaxAndMin(o1, o2, o3, o4, result.min, result.max);</span>
+<span class="lineNum">      39 </span><span class="lineCov">    3184175 :                 Value o1 = left.min + right.min;</span>
+<span class="lineNum">      40 </span><span class="lineCov">    3183394 :                 Value o2 = left.min + right.max;</span>
+<span class="lineNum">      41 </span><span class="lineCov">    3183497 :                 Value o3 = left.max + right.min;</span>
+<span class="lineNum">      42 </span><span class="lineCov">    3183469 :                 Value o4 = left.max + right.max;</span>
+<span class="lineNum">      43 </span><span class="lineCov">    1591948 :                 GetMaxAndMin(o1, o2, o3, o4, result.min, result.max);</span>
 <span class="lineNum">      44 </span>            :         }
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">    1866970 : }</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">    1866907 : }</span></a>
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">     476533 : void ExpressionStatistics::Subtract(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right,</span>
+<span class="lineNum">      47 </span><span class="lineCov">     476675 : void ExpressionStatistics::Subtract(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right,</span>
 <span class="lineNum">      48 </span>            :                                     ExpressionStatistics &amp;result) {
-<span class="lineNum">      49 </span><span class="lineCov">     476533 :         result.has_stats = left.has_stats &amp;&amp; right.has_stats;</span>
-<span class="lineNum">      50 </span><span class="lineCov">     476533 :         if (result.has_stats) {</span>
-<span class="lineNum">      51 </span><span class="lineCov">     402644 :                 result.can_have_null = left.can_have_null || right.can_have_null;</span>
+<span class="lineNum">      49 </span><span class="lineCov">     476675 :         result.has_stats = left.has_stats &amp;&amp; right.has_stats;</span>
+<span class="lineNum">      50 </span><span class="lineCov">     476675 :         if (result.has_stats) {</span>
+<span class="lineNum">      51 </span><span class="lineCov">     402740 :                 result.can_have_null = left.can_have_null || right.can_have_null;</span>
 <span class="lineNum">      52 </span>            :                 // the minimum value and maximum value depends on the signs
 <span class="lineNum">      53 </span>            :                 // we just compute all four possibilities and take the maximum and
 <span class="lineNum">      54 </span>            :                 // minimum
-<span class="lineNum">      55 </span><span class="lineCov">     805341 :                 Value o1 = left.min - right.min;</span>
-<span class="lineNum">      56 </span><span class="lineCov">     804417 :                 Value o2 = left.min - right.max;</span>
-<span class="lineNum">      57 </span><span class="lineCov">     804356 :                 Value o3 = left.max - right.min;</span>
-<span class="lineNum">      58 </span><span class="lineCov">     804407 :                 Value o4 = left.max - right.max;</span>
-<span class="lineNum">      59 </span><span class="lineCov">     402553 :                 GetMaxAndMin(o1, o2, o3, o4, result.min, result.max);</span>
+<span class="lineNum">      55 </span><span class="lineCov">     805475 :                 Value o1 = left.min - right.min;</span>
+<span class="lineNum">      56 </span><span class="lineCov">     804456 :                 Value o2 = left.min - right.max;</span>
+<span class="lineNum">      57 </span><span class="lineCov">     804435 :                 Value o3 = left.max - right.min;</span>
+<span class="lineNum">      58 </span><span class="lineCov">     804474 :                 Value o4 = left.max - right.max;</span>
+<span class="lineNum">      59 </span><span class="lineCov">     402583 :                 GetMaxAndMin(o1, o2, o3, o4, result.min, result.max);</span>
 <span class="lineNum">      60 </span>            :         }
-<a name="61"><span class="lineNum">      61 </span><span class="lineCov">     476748 : }</span></a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">     476844 : }</span></a>
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineCov">    4879685 : void ExpressionStatistics::Multiply(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right,</span>
+<span class="lineNum">      63 </span><span class="lineCov">    4879687 : void ExpressionStatistics::Multiply(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right,</span>
 <span class="lineNum">      64 </span>            :                                     ExpressionStatistics &amp;result) {
-<span class="lineNum">      65 </span><span class="lineCov">    4879685 :         result.has_stats = left.has_stats &amp;&amp; right.has_stats;</span>
-<span class="lineNum">      66 </span><span class="lineCov">    4879685 :         if (result.has_stats) {</span>
-<span class="lineNum">      67 </span><span class="lineCov">    4264134 :                 result.can_have_null = left.can_have_null || right.can_have_null;</span>
+<span class="lineNum">      65 </span><span class="lineCov">    4879687 :         result.has_stats = left.has_stats &amp;&amp; right.has_stats;</span>
+<span class="lineNum">      66 </span><span class="lineCov">    4879687 :         if (result.has_stats) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">    4264136 :                 result.can_have_null = left.can_have_null || right.can_have_null;</span>
 <span class="lineNum">      68 </span>            :                 // the minimum value and maximum value depends on the signs
 <span class="lineNum">      69 </span>            :                 // we just compute all four possibilities and take the maximum and
 <span class="lineNum">      70 </span>            :                 // minimum
-<span class="lineNum">      71 </span><span class="lineCov">    8528268 :                 Value o1 = left.min * right.min;</span>
-<span class="lineNum">      72 </span><span class="lineCov">    8528268 :                 Value o2 = left.min * right.max;</span>
-<span class="lineNum">      73 </span><span class="lineCov">    8528268 :                 Value o3 = left.max * right.min;</span>
-<span class="lineNum">      74 </span><span class="lineCov">    8528268 :                 Value o4 = left.max * right.max;</span>
-<span class="lineNum">      75 </span><span class="lineCov">    4264134 :                 GetMaxAndMin(o1, o2, o3, o4, result.min, result.max);</span>
+<span class="lineNum">      71 </span><span class="lineCov">    8528272 :                 Value o1 = left.min * right.min;</span>
+<span class="lineNum">      72 </span><span class="lineCov">    8528272 :                 Value o2 = left.min * right.max;</span>
+<span class="lineNum">      73 </span><span class="lineCov">    8528272 :                 Value o3 = left.max * right.min;</span>
+<span class="lineNum">      74 </span><span class="lineCov">    8528272 :                 Value o4 = left.max * right.max;</span>
+<span class="lineNum">      75 </span><span class="lineCov">    4264136 :                 GetMaxAndMin(o1, o2, o3, o4, result.min, result.max);</span>
 <span class="lineNum">      76 </span>            :         }
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">    4879685 : }</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">    4879687 : }</span></a>
 <span class="lineNum">      78 </span>            : 
 <span class="lineNum">      79 </span><span class="lineCov">     499890 : void ExpressionStatistics::Divide(ExpressionStatistics &amp;left, ExpressionStatistics &amp;right,</span>
 <span class="lineNum">      80 </span>            :                                   ExpressionStatistics &amp;result) {

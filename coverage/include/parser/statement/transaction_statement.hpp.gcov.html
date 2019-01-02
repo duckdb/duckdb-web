@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/parser/statement/transaction_statement.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/parser/statement/transaction_statement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -80,13 +80,13 @@
 <span class="lineNum">      18 </span>            : 
 <a name="19"><span class="lineNum">      19 </span>            : class TransactionStatement : public SQLStatement {</a>
 <a name="20"><span class="lineNum">      20 </span>            : public:</a>
-<span class="lineNum">      21 </span><span class="lineCov">      42086 :         TransactionStatement(TransactionType type) : SQLStatement(StatementType::TRANSACTION), type(type){};</span>
-<span class="lineNum">      22 </span><span class="lineCov">      84809 :         virtual ~TransactionStatement() {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      84682 :         }</span></a>
-<span class="lineNum">      24 </span><span class="lineCov">      42409 : </span>
-<span class="lineNum">      25 </span><span class="lineCov">      42409 :         virtual string ToString() const {</span>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">      42400 :                 return &quot;Transaction&quot;;</span></a>
-<span class="lineNum">      27 </span><span class="lineCov">      42273 :         }</span>
+<span class="lineNum">      21 </span><span class="lineCov">      42122 :         TransactionStatement(TransactionType type) : SQLStatement(StatementType::TRANSACTION), type(type){};</span>
+<span class="lineNum">      22 </span><span class="lineCov">      84792 :         virtual ~TransactionStatement() {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">      84678 :         }</span></a>
+<span class="lineNum">      24 </span><span class="lineCov">      42408 : </span>
+<span class="lineNum">      25 </span><span class="lineCov">      42408 :         virtual string ToString() const {</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">      42384 :                 return &quot;Transaction&quot;;</span></a>
+<span class="lineNum">      27 </span><span class="lineCov">      42270 :         }</span>
 <span class="lineNum">      28 </span>            :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 return v-&gt;Visit(*this);</span>
 <a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :         }</span></a>

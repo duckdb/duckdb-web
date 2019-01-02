@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - common/vector_operations/scatter.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - common/vector_operations/scatter.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">82</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">10</td>
@@ -74,25 +74,25 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">     935722 : template &lt;class OP&gt; static void generic_scatter_loop(Vector &amp;source, Vector &amp;dest) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">     935722 :         if (dest.type != TypeId::POINTER) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     935496 : template &lt;class OP&gt; static void generic_scatter_loop(Vector &amp;source, Vector &amp;dest) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">     935496 :         if (dest.type != TypeId::POINTER) {</span>
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(dest.type, &quot;Cannot scatter to non-pointer type!&quot;);</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">     935722 :         switch (source.type) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     935496 :         switch (source.type) {</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :                 scatter_templated_loop&lt;int8_t, OP&gt;(source, dest);</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :                 scatter_templated_loop&lt;int16_t, OP&gt;(source, dest);</span>
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      26 </span><span class="lineCov">     221932 :         case TypeId::DATE:</span>
+<span class="lineNum">      26 </span><span class="lineCov">     221727 :         case TypeId::DATE:</span>
 <span class="lineNum">      27 </span>            :         case TypeId::INTEGER:
-<span class="lineNum">      28 </span><span class="lineCov">     221932 :                 scatter_templated_loop&lt;int32_t, OP&gt;(source, dest);</span>
-<span class="lineNum">      29 </span><span class="lineCov">     221932 :                 break;</span>
-<span class="lineNum">      30 </span><span class="lineCov">     698353 :         case TypeId::TIMESTAMP:</span>
+<span class="lineNum">      28 </span><span class="lineCov">     221727 :                 scatter_templated_loop&lt;int32_t, OP&gt;(source, dest);</span>
+<span class="lineNum">      29 </span><span class="lineCov">     221727 :                 break;</span>
+<span class="lineNum">      30 </span><span class="lineCov">     698333 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">      31 </span>            :         case TypeId::BIGINT:
-<span class="lineNum">      32 </span><span class="lineCov">     698353 :                 scatter_templated_loop&lt;int64_t, OP&gt;(source, dest);</span>
-<span class="lineNum">      33 </span><span class="lineCov">     698389 :                 break;</span>
+<span class="lineNum">      32 </span><span class="lineCov">     698333 :                 scatter_templated_loop&lt;int64_t, OP&gt;(source, dest);</span>
+<span class="lineNum">      33 </span><span class="lineCov">     698393 :                 break;</span>
 <span class="lineNum">      34 </span><span class="lineCov">      15437 :         case TypeId::DECIMAL:</span>
 <span class="lineNum">      35 </span><span class="lineCov">      15437 :                 scatter_templated_loop&lt;double, OP&gt;(source, dest);</span>
 <span class="lineNum">      36 </span><span class="lineCov">      15437 :                 break;</span>
@@ -103,7 +103,7 @@
 <span class="lineNum">      41 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for scatter&quot;);</span>
 <span class="lineNum">      43 </span>            :         }
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">     935758 : }</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">     935557 : }</span></a>
 <span class="lineNum">      45 </span><span class="lineCov">     123756 : </span>
 <span class="lineNum">      46 </span><span class="lineCov">     123756 : void VectorOperations::Scatter::Set(Vector &amp;source, Vector &amp;dest) {</span>
 <span class="lineNum">      47 </span><span class="lineNoCov">          0 :         if (source.type == TypeId::VARCHAR) {</span>

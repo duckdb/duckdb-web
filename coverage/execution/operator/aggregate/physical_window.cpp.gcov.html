@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - execution/operator/aggregate/physical_window.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - execution/operator/aggregate/physical_window.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">311</td>
             <td class="headerCovTableEntry">342</td>
-            <td class="headerCovTableEntryHi">90.9 %</td>
+            <td class="headerCovTableEntry">373</td>
+            <td class="headerCovTableEntryHi">91.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">15</td>
-            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -74,107 +74,107 @@
 <span class="lineNum">      12 </span>            : using namespace std;
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : // this implements a sorted window functions variant
-<span class="lineNum">      15 </span><span class="lineCov">         47 : PhysicalWindow::PhysicalWindow(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
-<span class="lineNum">      16 </span><span class="lineCov">         47 :                                PhysicalOperatorType type)</span>
-<span class="lineNum">      17 </span><span class="lineCov">         47 :     : PhysicalOperator(type, op.types), select_list(std::move(select_list)) {</span>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">         47 : }</span></a>
+<span class="lineNum">      15 </span><span class="lineCov">         54 : PhysicalWindow::PhysicalWindow(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list,</span>
+<span class="lineNum">      16 </span><span class="lineCov">         54 :                                PhysicalOperatorType type)</span>
+<span class="lineNum">      17 </span><span class="lineCov">         54 :     : PhysicalOperator(type, op.types), select_list(std::move(select_list)) {</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">         54 : }</span></a>
 <span class="lineNum">      19 </span>            : 
-<span class="lineNum">      20 </span><span class="lineCov">        799 : static bool EqualsSubset(vector&lt;Value&gt; &amp;a, vector&lt;Value&gt; &amp;b, size_t start, size_t end) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">        799 :         assert(start &lt;= end);</span>
-<span class="lineNum">      22 </span><span class="lineCov">       1192 :         for (size_t i = start; i &lt; end; i++) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">        738 :                 if (a[i] != b[i]) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">        345 :                         return false;</span>
+<span class="lineNum">      20 </span><span class="lineCov">        918 : static bool EqualsSubset(vector&lt;Value&gt; &amp;a, vector&lt;Value&gt; &amp;b, size_t start, size_t end) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">        918 :         assert(start &lt;= end);</span>
+<span class="lineNum">      22 </span><span class="lineCov">       1381 :         for (size_t i = start; i &lt; end; i++) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">        857 :                 if (a[i] != b[i]) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">        394 :                         return false;</span>
 <span class="lineNum">      25 </span>            :                 }
 <span class="lineNum">      26 </span>            :         }
-<span class="lineNum">      27 </span><span class="lineCov">        454 :         return true;</span>
+<span class="lineNum">      27 </span><span class="lineCov">        524 :         return true;</span>
 <a name="28"><span class="lineNum">      28 </span>            : }</a>
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">        463 : static size_t BinarySearchRightmost(ChunkCollection &amp;input, vector&lt;Value&gt; row, size_t l, size_t r, size_t comp_cols) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">        463 :         if (comp_cols == 0) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">        561 : static size_t BinarySearchRightmost(ChunkCollection &amp;input, vector&lt;Value&gt; row, size_t l, size_t r, size_t comp_cols) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">        561 :         if (comp_cols == 0) {</span>
 <span class="lineNum">      32 </span><span class="lineCov">         16 :                 return r - 1;</span>
 <span class="lineNum">      33 </span>            :         }
-<span class="lineNum">      34 </span><span class="lineCov">       1401 :         while (l &lt; r) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">        954 :                 size_t m = floor((l + r) / 2);</span>
-<span class="lineNum">      36 </span><span class="lineCov">        954 :                 bool less_than_equals = true;</span>
-<span class="lineNum">      37 </span><span class="lineCov">       2153 :                 for (size_t i = 0; i &lt; comp_cols; i++) {</span>
-<span class="lineNum">      38 </span><span class="lineCov">       1641 :                         if (input.GetRow(m)[i] &gt; row[i]) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">        442 :                                 less_than_equals = false;</span>
-<span class="lineNum">      40 </span><span class="lineCov">        442 :                                 break;</span>
+<span class="lineNum">      34 </span><span class="lineCov">       1681 :         while (l &lt; r) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       1136 :                 size_t m = floor((l + r) / 2);</span>
+<span class="lineNum">      36 </span><span class="lineCov">       1136 :                 bool less_than_equals = true;</span>
+<span class="lineNum">      37 </span><span class="lineCov">       2545 :                 for (size_t i = 0; i &lt; comp_cols; i++) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">       1935 :                         if (input.GetRow(m)[i] &gt; row[i]) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">        526 :                                 less_than_equals = false;</span>
+<span class="lineNum">      40 </span><span class="lineCov">        526 :                                 break;</span>
 <span class="lineNum">      41 </span>            :                         }
 <span class="lineNum">      42 </span>            :                 }
-<span class="lineNum">      43 </span><span class="lineCov">        954 :                 if (less_than_equals) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">        512 :                         l = m + 1;</span>
+<span class="lineNum">      43 </span><span class="lineCov">       1136 :                 if (less_than_equals) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">        610 :                         l = m + 1;</span>
 <span class="lineNum">      45 </span>            :                 } else {
-<span class="lineNum">      46 </span><span class="lineCov">        442 :                         r = m;</span>
+<span class="lineNum">      46 </span><span class="lineCov">        526 :                         r = m;</span>
 <span class="lineNum">      47 </span>            :                 }
 <span class="lineNum">      48 </span>            :         }
-<span class="lineNum">      49 </span><span class="lineCov">        447 :         return l - 1;</span>
+<span class="lineNum">      49 </span><span class="lineCov">        545 :         return l - 1;</span>
 <a name="50"><span class="lineNum">      50 </span>            : }</a>
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">         33 : static void MaterializeExpression(ClientContext &amp;context, Expression *expr, ChunkCollection &amp;input,</span>
+<span class="lineNum">      52 </span><span class="lineCov">         46 : static void MaterializeExpression(ClientContext &amp;context, Expression *expr, ChunkCollection &amp;input,</span>
 <span class="lineNum">      53 </span>            :                                   ChunkCollection &amp;output, bool scalar = false) {
-<span class="lineNum">      54 </span><span class="lineCov">         66 :         ChunkCollection boundary_start_collection;</span>
-<span class="lineNum">      55 </span><span class="lineCov">         99 :         vector&lt;TypeId&gt; types = {expr-&gt;return_type};</span>
-<span class="lineNum">      56 </span><span class="lineCov">         59 :         for (size_t i = 0; i &lt; input.chunks.size(); i++) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">         33 :                 DataChunk chunk;</span>
-<span class="lineNum">      58 </span><span class="lineCov">         33 :                 chunk.Initialize(types);</span>
-<span class="lineNum">      59 </span><span class="lineCov">         33 :                 ExpressionExecutor executor(*input.chunks[i], context);</span>
-<span class="lineNum">      60 </span><span class="lineCov">         33 :                 executor.ExecuteExpression(expr, chunk.data[0]);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         92 :         ChunkCollection boundary_start_collection;</span>
+<span class="lineNum">      55 </span><span class="lineCov">        138 :         vector&lt;TypeId&gt; types = {expr-&gt;return_type};</span>
+<span class="lineNum">      56 </span><span class="lineCov">         81 :         for (size_t i = 0; i &lt; input.chunks.size(); i++) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">         46 :                 DataChunk chunk;</span>
+<span class="lineNum">      58 </span><span class="lineCov">         46 :                 chunk.Initialize(types);</span>
+<span class="lineNum">      59 </span><span class="lineCov">         46 :                 ExpressionExecutor executor(*input.chunks[i], context);</span>
+<span class="lineNum">      60 </span><span class="lineCov">         46 :                 executor.ExecuteExpression(expr, chunk.data[0]);</span>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">         33 :                 chunk.Verify();</span>
-<span class="lineNum">      63 </span><span class="lineCov">         33 :                 output.Append(chunk);</span>
+<span class="lineNum">      62 </span><span class="lineCov">         46 :                 chunk.Verify();</span>
+<span class="lineNum">      63 </span><span class="lineCov">         46 :                 output.Append(chunk);</span>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">         33 :                 if (scalar) {</span>
-<span class="lineNum">      66 </span><span class="lineCov">          7 :                         break;</span>
+<span class="lineNum">      65 </span><span class="lineCov">         46 :                 if (scalar) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">         11 :                         break;</span>
 <span class="lineNum">      67 </span>            :                 }
 <span class="lineNum">      68 </span>            :         }
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         33 : }</span></a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">         46 : }</span></a>
 <span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">         33 : static void SortCollectionForWindow(ClientContext &amp;context, WindowExpression *wexpr, ChunkCollection &amp;input,</span>
+<span class="lineNum">      71 </span><span class="lineCov">         40 : static void SortCollectionForWindow(ClientContext &amp;context, WindowExpression *wexpr, ChunkCollection &amp;input,</span>
 <span class="lineNum">      72 </span>            :                                     ChunkCollection &amp;output) {
-<span class="lineNum">      73 </span><span class="lineCov">         66 :         vector&lt;TypeId&gt; sort_types;</span>
-<span class="lineNum">      74 </span><span class="lineCov">         66 :         vector&lt;Expression *&gt; exprs;</span>
-<span class="lineNum">      75 </span><span class="lineCov">         66 :         OrderByDescription odesc;</span>
+<span class="lineNum">      73 </span><span class="lineCov">         80 :         vector&lt;TypeId&gt; sort_types;</span>
+<span class="lineNum">      74 </span><span class="lineCov">         80 :         vector&lt;Expression *&gt; exprs;</span>
+<span class="lineNum">      75 </span><span class="lineCov">         80 :         OrderByDescription odesc;</span>
 <span class="lineNum">      76 </span>            : 
 <span class="lineNum">      77 </span>            :         // we sort by both 1) partition by expression list and 2) order by expressions
-<span class="lineNum">      78 </span><span class="lineCov">         61 :         for (size_t prt_idx = 0; prt_idx &lt; wexpr-&gt;partitions.size(); prt_idx++) {</span>
-<span class="lineNum">      79 </span><span class="lineCov">         28 :                 auto &amp;pexpr = wexpr-&gt;partitions[prt_idx];</span>
-<span class="lineNum">      80 </span><span class="lineCov">         28 :                 sort_types.push_back(pexpr-&gt;return_type);</span>
-<span class="lineNum">      81 </span><span class="lineCov">         28 :                 exprs.push_back(pexpr.get());</span>
-<span class="lineNum">      82 </span><span class="lineCov">         56 :                 odesc.orders.push_back(OrderByNode(OrderType::ASCENDING, make_unique_base&lt;Expression, ColumnRefExpression&gt;(</span>
-<span class="lineNum">      83 </span><span class="lineCov">         56 :                                                                              pexpr-&gt;return_type, exprs.size() - 1)));</span>
+<span class="lineNum">      78 </span><span class="lineCov">         75 :         for (size_t prt_idx = 0; prt_idx &lt; wexpr-&gt;partitions.size(); prt_idx++) {</span>
+<span class="lineNum">      79 </span><span class="lineCov">         35 :                 auto &amp;pexpr = wexpr-&gt;partitions[prt_idx];</span>
+<span class="lineNum">      80 </span><span class="lineCov">         35 :                 sort_types.push_back(pexpr-&gt;return_type);</span>
+<span class="lineNum">      81 </span><span class="lineCov">         35 :                 exprs.push_back(pexpr.get());</span>
+<span class="lineNum">      82 </span><span class="lineCov">         70 :                 odesc.orders.push_back(OrderByNode(OrderType::ASCENDING, make_unique_base&lt;Expression, ColumnRefExpression&gt;(</span>
+<span class="lineNum">      83 </span><span class="lineCov">         70 :                                                                              pexpr-&gt;return_type, exprs.size() - 1)));</span>
 <span class="lineNum">      84 </span>            :         }
 <span class="lineNum">      85 </span>            : 
-<span class="lineNum">      86 </span><span class="lineCov">         69 :         for (size_t ord_idx = 0; ord_idx &lt; wexpr-&gt;ordering.orders.size(); ord_idx++) {</span>
-<span class="lineNum">      87 </span><span class="lineCov">         36 :                 auto &amp;oexpr = wexpr-&gt;ordering.orders[ord_idx].expression;</span>
-<span class="lineNum">      88 </span><span class="lineCov">         36 :                 sort_types.push_back(oexpr-&gt;return_type);</span>
-<span class="lineNum">      89 </span><span class="lineCov">         36 :                 exprs.push_back(oexpr.get());</span>
-<span class="lineNum">      90 </span><span class="lineCov">         72 :                 odesc.orders.push_back(</span>
-<span class="lineNum">      91 </span><span class="lineCov">        108 :                     OrderByNode(wexpr-&gt;ordering.orders[ord_idx].type,</span>
-<span class="lineNum">      92 </span><span class="lineCov">         72 :                                 make_unique_base&lt;Expression, ColumnRefExpression&gt;(oexpr-&gt;return_type, exprs.size() - 1)));</span>
+<span class="lineNum">      86 </span><span class="lineCov">         83 :         for (size_t ord_idx = 0; ord_idx &lt; wexpr-&gt;ordering.orders.size(); ord_idx++) {</span>
+<span class="lineNum">      87 </span><span class="lineCov">         43 :                 auto &amp;oexpr = wexpr-&gt;ordering.orders[ord_idx].expression;</span>
+<span class="lineNum">      88 </span><span class="lineCov">         43 :                 sort_types.push_back(oexpr-&gt;return_type);</span>
+<span class="lineNum">      89 </span><span class="lineCov">         43 :                 exprs.push_back(oexpr.get());</span>
+<span class="lineNum">      90 </span><span class="lineCov">         86 :                 odesc.orders.push_back(</span>
+<span class="lineNum">      91 </span><span class="lineCov">        129 :                     OrderByNode(wexpr-&gt;ordering.orders[ord_idx].type,</span>
+<span class="lineNum">      92 </span><span class="lineCov">         86 :                                 make_unique_base&lt;Expression, ColumnRefExpression&gt;(oexpr-&gt;return_type, exprs.size() - 1)));</span>
 <span class="lineNum">      93 </span>            :         }
 <span class="lineNum">      94 </span>            : 
-<span class="lineNum">      95 </span><span class="lineCov">         33 :         assert(sort_types.size() &gt; 0);</span>
+<span class="lineNum">      95 </span><span class="lineCov">         40 :         assert(sort_types.size() &gt; 0);</span>
 <span class="lineNum">      96 </span>            : 
 <span class="lineNum">      97 </span>            :         // create a chunkcollection for the results of the expressions in the window definitions
-<span class="lineNum">      98 </span><span class="lineCov">         66 :         for (size_t i = 0; i &lt; input.chunks.size(); i++) {</span>
-<span class="lineNum">      99 </span><span class="lineCov">         66 :                 DataChunk sort_chunk;</span>
-<span class="lineNum">     100 </span><span class="lineCov">         33 :                 sort_chunk.Initialize(sort_types);</span>
+<span class="lineNum">      98 </span><span class="lineCov">         80 :         for (size_t i = 0; i &lt; input.chunks.size(); i++) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">         80 :                 DataChunk sort_chunk;</span>
+<span class="lineNum">     100 </span><span class="lineCov">         40 :                 sort_chunk.Initialize(sort_types);</span>
 <span class="lineNum">     101 </span>            : 
-<span class="lineNum">     102 </span><span class="lineCov">         66 :                 ExpressionExecutor executor(*input.chunks[i], context);</span>
-<span class="lineNum">     103 </span><span class="lineCov">         33 :                 executor.Execute(sort_chunk, [&amp;](size_t i) { return exprs[i]; }, exprs.size());</span>
-<span class="lineNum">     104 </span><span class="lineCov">         33 :                 sort_chunk.Verify();</span>
-<span class="lineNum">     105 </span><span class="lineCov">         33 :                 output.Append(sort_chunk);</span>
+<span class="lineNum">     102 </span><span class="lineCov">         80 :                 ExpressionExecutor executor(*input.chunks[i], context);</span>
+<span class="lineNum">     103 </span><span class="lineCov">         40 :                 executor.Execute(sort_chunk, [&amp;](size_t i) { return exprs[i]; }, exprs.size());</span>
+<span class="lineNum">     104 </span><span class="lineCov">         40 :                 sort_chunk.Verify();</span>
+<span class="lineNum">     105 </span><span class="lineCov">         40 :                 output.Append(sort_chunk);</span>
 <span class="lineNum">     106 </span>            :         }
 <span class="lineNum">     107 </span>            : 
-<span class="lineNum">     108 </span><span class="lineCov">         33 :         assert(input.count == output.count);</span>
+<span class="lineNum">     108 </span><span class="lineCov">         40 :         assert(input.count == output.count);</span>
 <span class="lineNum">     109 </span>            : 
-<span class="lineNum">     110 </span><span class="lineCov">         66 :         auto sorted_vector = unique_ptr&lt;uint64_t[]&gt;(new uint64_t[input.count]);</span>
-<span class="lineNum">     111 </span><span class="lineCov">         33 :         output.Sort(odesc, sorted_vector.get());</span>
+<span class="lineNum">     110 </span><span class="lineCov">         80 :         auto sorted_vector = unique_ptr&lt;uint64_t[]&gt;(new uint64_t[input.count]);</span>
+<span class="lineNum">     111 </span><span class="lineCov">         40 :         output.Sort(odesc, sorted_vector.get());</span>
 <span class="lineNum">     112 </span>            : 
-<span class="lineNum">     113 </span><span class="lineCov">         33 :         input.Reorder(sorted_vector.get());</span>
-<span class="lineNum">     114 </span><span class="lineCov">         33 :         output.Reorder(sorted_vector.get());</span>
-<span class="lineNum">     115 </span><span class="lineCov">         33 : }</span>
+<span class="lineNum">     113 </span><span class="lineCov">         40 :         input.Reorder(sorted_vector.get());</span>
+<span class="lineNum">     114 </span><span class="lineCov">         40 :         output.Reorder(sorted_vector.get());</span>
+<span class="lineNum">     115 </span><span class="lineCov">         40 : }</span>
 <span class="lineNum">     116 </span>            : 
 <span class="lineNum">     117 </span>            : struct WindowBoundariesState {
 <span class="lineNum">     118 </span>            :         size_t partition_start = 0;
@@ -188,417 +188,466 @@
 <span class="lineNum">     126 </span>            :         vector&lt;Value&gt; row_prev;
 <a name="127"><span class="lineNum">     127 </span>            : };</a>
 <span class="lineNum">     128 </span>            : 
-<span class="lineNum">     129 </span><span class="lineCov">        436 : static void UpdateWindowBoundaries(WindowExpression *wexpr, ChunkCollection &amp;input, size_t row_idx,</span>
-<span class="lineNum">     130 </span>            :                                    ChunkCollection &amp;boundary_start_collection, ChunkCollection &amp;boundary_end_collection,
-<span class="lineNum">     131 </span>            :                                    WindowBoundariesState &amp;bounds) {
-<span class="lineNum">     132 </span><span class="lineCov">        872 :         vector&lt;Value&gt; row_cur = input.GetRow(row_idx);</span>
-<span class="lineNum">     133 </span><span class="lineCov">        436 :         size_t sort_col_count = wexpr-&gt;partitions.size() + wexpr-&gt;ordering.orders.size();</span>
-<span class="lineNum">     134 </span>            : 
-<span class="lineNum">     135 </span>            :         // determine partition and peer group boundaries to ultimately figure out window size
-<span class="lineNum">     136 </span><span class="lineCov">        436 :         bounds.is_same_partition = EqualsSubset(bounds.row_prev, row_cur, 0, wexpr-&gt;partitions.size());</span>
-<span class="lineNum">     137 </span><span class="lineCov">        436 :         bounds.is_peer =</span>
-<span class="lineNum">     138 </span><span class="lineCov">        436 :             bounds.is_same_partition &amp;&amp; EqualsSubset(bounds.row_prev, row_cur, wexpr-&gt;partitions.size(), sort_col_count);</span>
-<span class="lineNum">     139 </span><span class="lineCov">        436 :         bounds.row_prev = row_cur;</span>
-<span class="lineNum">     140 </span>            : 
-<span class="lineNum">     141 </span>            :         // when the partition changes, recompute the boundaries
-<span class="lineNum">     142 </span><span class="lineCov">        436 :         if (!bounds.is_same_partition || row_idx == 0) { // special case for first row, need to init</span>
-<span class="lineNum">     143 </span><span class="lineCov">        107 :                 bounds.partition_start = row_idx;</span>
-<span class="lineNum">     144 </span><span class="lineCov">        107 :                 bounds.peer_start = row_idx;</span>
+<span class="lineNum">     129 </span><span class="lineCov">        506 : static bool WindowNeedsRank(WindowExpression *wexpr) {</span>
+<span class="lineNum">     130 </span><span class="lineCov">        982 :         return wexpr-&gt;type == ExpressionType::WINDOW_PERCENT_RANK || wexpr-&gt;type == ExpressionType::WINDOW_RANK ||</span>
+<span class="lineNum">     131 </span><span class="lineCov">        982 :                wexpr-&gt;type == ExpressionType::WINDOW_RANK_DENSE;</span>
+<a name="132"><span class="lineNum">     132 </span>            : }</a>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span><span class="lineCov">        506 : static void UpdateWindowBoundaries(WindowExpression *wexpr, ChunkCollection &amp;input, size_t row_idx,</span>
+<span class="lineNum">     135 </span>            :                                    ChunkCollection &amp;boundary_start_collection, ChunkCollection &amp;boundary_end_collection,
+<span class="lineNum">     136 </span>            :                                    WindowBoundariesState &amp;bounds) {
+<span class="lineNum">     137 </span><span class="lineCov">       1012 :         vector&lt;Value&gt; row_cur = input.GetRow(row_idx);</span>
+<span class="lineNum">     138 </span><span class="lineCov">        506 :         size_t sort_col_count = wexpr-&gt;partitions.size() + wexpr-&gt;ordering.orders.size();</span>
+<span class="lineNum">     139 </span>            : 
+<span class="lineNum">     140 </span>            :         // determine partition and peer group boundaries to ultimately figure out window size
+<span class="lineNum">     141 </span><span class="lineCov">        506 :         bounds.is_same_partition = EqualsSubset(bounds.row_prev, row_cur, 0, wexpr-&gt;partitions.size());</span>
+<span class="lineNum">     142 </span><span class="lineCov">        506 :         bounds.is_peer =</span>
+<span class="lineNum">     143 </span><span class="lineCov">        506 :             bounds.is_same_partition &amp;&amp; EqualsSubset(bounds.row_prev, row_cur, wexpr-&gt;partitions.size(), sort_col_count);</span>
+<span class="lineNum">     144 </span><span class="lineCov">        506 :         bounds.row_prev = row_cur;</span>
 <span class="lineNum">     145 </span>            : 
-<span class="lineNum">     146 </span>            :                 // find end of partition
-<span class="lineNum">     147 </span><span class="lineCov">        107 :                 bounds.partition_end =</span>
-<span class="lineNum">     148 </span><span class="lineCov">        107 :                     BinarySearchRightmost(input, row_cur, bounds.partition_start, input.count, wexpr-&gt;partitions.size()) + 1;</span>
-<span class="lineNum">     149 </span>            : 
-<span class="lineNum">     150 </span><span class="lineCov">        329 :         } else if (!bounds.is_peer) {</span>
-<span class="lineNum">     151 </span><span class="lineCov">        272 :                 bounds.peer_start = row_idx;</span>
-<span class="lineNum">     152 </span>            :         }
-<span class="lineNum">     153 </span>            : 
-<span class="lineNum">     154 </span><span class="lineCov">        436 :         if (wexpr-&gt;end == WindowBoundary::CURRENT_ROW_RANGE) {</span>
-<span class="lineNum">     155 </span><span class="lineCov">        356 :                 bounds.peer_end = BinarySearchRightmost(input, row_cur, row_idx, bounds.partition_end, sort_col_count) + 1;</span>
-<span class="lineNum">     156 </span>            :         }
-<span class="lineNum">     157 </span>            : 
-<span class="lineNum">     158 </span>            :         // determine window boundaries depending on the type of expression
-<span class="lineNum">     159 </span><span class="lineCov">        436 :         bounds.window_start = -1;</span>
-<span class="lineNum">     160 </span><span class="lineCov">        436 :         bounds.window_end = -1;</span>
-<span class="lineNum">     161 </span>            : 
-<span class="lineNum">     162 </span><span class="lineCov">        436 :         switch (wexpr-&gt;start) {</span>
-<span class="lineNum">     163 </span><span class="lineCov">        406 :         case WindowBoundary::UNBOUNDED_PRECEDING:</span>
-<span class="lineNum">     164 </span><span class="lineCov">        406 :                 bounds.window_start = bounds.partition_start;</span>
-<span class="lineNum">     165 </span><span class="lineCov">        406 :                 break;</span>
-<span class="lineNum">     166 </span><span class="lineNoCov">          0 :         case WindowBoundary::CURRENT_ROW_ROWS:</span>
-<span class="lineNum">     167 </span><span class="lineNoCov">          0 :                 bounds.window_start = row_idx;</span>
-<span class="lineNum">     168 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">     169 </span><span class="lineNoCov">          0 :         case WindowBoundary::CURRENT_ROW_RANGE:</span>
-<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                 bounds.window_start = bounds.peer_start;</span>
-<span class="lineNum">     171 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">     172 </span><span class="lineNoCov">          0 :         case WindowBoundary::UNBOUNDED_FOLLOWING:</span>
-<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                 assert(0); // disallowed</span>
-<span class="lineNum">     174 </span>            :                 break;
-<span class="lineNum">     175 </span><span class="lineCov">         20 :         case WindowBoundary::EXPR_PRECEDING: {</span>
-<span class="lineNum">     176 </span><span class="lineCov">         20 :                 assert(boundary_start_collection.column_count() &gt; 0);</span>
-<span class="lineNum">     177 </span><span class="lineCov">         40 :                 bounds.window_start =</span>
-<span class="lineNum">     178 </span><span class="lineCov">         20 :                     (ssize_t)row_idx -</span>
-<span class="lineNum">     179 </span><span class="lineCov">         20 :                     boundary_start_collection.GetValue(0, wexpr-&gt;start_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue();</span>
-<span class="lineNum">     180 </span><span class="lineCov">         20 :                 break;</span>
-<span class="lineNum">     181 </span>            :         }
-<span class="lineNum">     182 </span><span class="lineCov">         10 :         case WindowBoundary::EXPR_FOLLOWING: {</span>
-<span class="lineNum">     183 </span><span class="lineCov">         10 :                 assert(boundary_start_collection.column_count() &gt; 0);</span>
-<span class="lineNum">     184 </span><span class="lineCov">         10 :                 bounds.window_start =</span>
-<span class="lineNum">     185 </span><span class="lineCov">         10 :                     row_idx +</span>
-<span class="lineNum">     186 </span><span class="lineCov">         10 :                     boundary_start_collection.GetValue(0, wexpr-&gt;start_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue();</span>
-<span class="lineNum">     187 </span><span class="lineCov">         10 :                 break;</span>
-<span class="lineNum">     188 </span>            :         }
-<span class="lineNum">     189 </span>            : 
-<span class="lineNum">     190 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unsupported boundary&quot;);</span>
-<span class="lineNum">     192 </span>            :         }
-<span class="lineNum">     193 </span>            : 
-<span class="lineNum">     194 </span><span class="lineCov">        436 :         switch (wexpr-&gt;end) {</span>
-<span class="lineNum">     195 </span><span class="lineNoCov">          0 :         case WindowBoundary::UNBOUNDED_PRECEDING:</span>
-<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                 assert(0); // disallowed</span>
-<span class="lineNum">     197 </span>            :                 break;
-<span class="lineNum">     198 </span><span class="lineNoCov">          0 :         case WindowBoundary::CURRENT_ROW_ROWS:</span>
-<span class="lineNum">     199 </span><span class="lineNoCov">          0 :                 bounds.window_end = row_idx + 1;</span>
-<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">     201 </span><span class="lineCov">        356 :         case WindowBoundary::CURRENT_ROW_RANGE:</span>
-<span class="lineNum">     202 </span><span class="lineCov">        356 :                 bounds.window_end = bounds.peer_end;</span>
-<span class="lineNum">     203 </span><span class="lineCov">        356 :                 break;</span>
-<span class="lineNum">     204 </span><span class="lineCov">         40 :         case WindowBoundary::UNBOUNDED_FOLLOWING:</span>
-<span class="lineNum">     205 </span><span class="lineCov">         40 :                 bounds.window_end = bounds.partition_end;</span>
-<span class="lineNum">     206 </span><span class="lineCov">         40 :                 break;</span>
-<span class="lineNum">     207 </span><span class="lineCov">         10 :         case WindowBoundary::EXPR_PRECEDING:</span>
-<span class="lineNum">     208 </span><span class="lineCov">         10 :                 assert(boundary_end_collection.column_count() &gt; 0);</span>
-<span class="lineNum">     209 </span><span class="lineCov">         20 :                 bounds.window_end =</span>
-<span class="lineNum">     210 </span><span class="lineCov">         10 :                     (ssize_t)row_idx -</span>
-<span class="lineNum">     211 </span><span class="lineCov">         10 :                     boundary_end_collection.GetValue(0, wexpr-&gt;end_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue() + 1;</span>
-<span class="lineNum">     212 </span><span class="lineCov">         10 :                 break;</span>
-<span class="lineNum">     213 </span><span class="lineCov">         30 :         case WindowBoundary::EXPR_FOLLOWING:</span>
-<span class="lineNum">     214 </span><span class="lineCov">         30 :                 assert(boundary_end_collection.column_count() &gt; 0);</span>
-<span class="lineNum">     215 </span><span class="lineCov">         30 :                 bounds.window_end =</span>
-<span class="lineNum">     216 </span><span class="lineCov">         30 :                     row_idx + boundary_end_collection.GetValue(0, wexpr-&gt;end_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue() +</span>
-<span class="lineNum">     217 </span>            :                     1;
-<span class="lineNum">     218 </span>            : 
-<span class="lineNum">     219 </span><span class="lineCov">         30 :                 break;</span>
-<span class="lineNum">     220 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     221 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unsupported boundary&quot;);</span>
-<span class="lineNum">     222 </span>            :         }
+<span class="lineNum">     146 </span>            :         // when the partition changes, recompute the boundaries
+<span class="lineNum">     147 </span><span class="lineCov">        506 :         if (!bounds.is_same_partition || row_idx == 0) { // special case for first row, need to init</span>
+<span class="lineNum">     148 </span><span class="lineCov">        135 :                 bounds.partition_start = row_idx;</span>
+<span class="lineNum">     149 </span><span class="lineCov">        135 :                 bounds.peer_start = row_idx;</span>
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span>            :                 // find end of partition
+<span class="lineNum">     152 </span><span class="lineCov">        135 :                 bounds.partition_end =</span>
+<span class="lineNum">     153 </span><span class="lineCov">        135 :                     BinarySearchRightmost(input, row_cur, bounds.partition_start, input.count, wexpr-&gt;partitions.size()) + 1;</span>
+<span class="lineNum">     154 </span>            : 
+<span class="lineNum">     155 </span><span class="lineCov">        371 :         } else if (!bounds.is_peer) {</span>
+<span class="lineNum">     156 </span><span class="lineCov">        300 :                 bounds.peer_start = row_idx;</span>
+<span class="lineNum">     157 </span>            :         }
+<span class="lineNum">     158 </span>            : 
+<span class="lineNum">     159 </span><span class="lineCov">        506 :         if (wexpr-&gt;end == WindowBoundary::CURRENT_ROW_RANGE || wexpr-&gt;type == ExpressionType::WINDOW_CUME_DIST) {</span>
+<span class="lineNum">     160 </span><span class="lineCov">        426 :                 bounds.peer_end = BinarySearchRightmost(input, row_cur, row_idx, bounds.partition_end, sort_col_count) + 1;</span>
+<span class="lineNum">     161 </span>            :         }
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span>            :         // determine window boundaries depending on the type of expression
+<span class="lineNum">     164 </span><span class="lineCov">        506 :         bounds.window_start = -1;</span>
+<span class="lineNum">     165 </span><span class="lineCov">        506 :         bounds.window_end = -1;</span>
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span><span class="lineCov">        506 :         switch (wexpr-&gt;start) {</span>
+<span class="lineNum">     168 </span><span class="lineCov">        476 :         case WindowBoundary::UNBOUNDED_PRECEDING:</span>
+<span class="lineNum">     169 </span><span class="lineCov">        476 :                 bounds.window_start = bounds.partition_start;</span>
+<span class="lineNum">     170 </span><span class="lineCov">        476 :                 break;</span>
+<span class="lineNum">     171 </span><span class="lineNoCov">          0 :         case WindowBoundary::CURRENT_ROW_ROWS:</span>
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :                 bounds.window_start = row_idx;</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :         case WindowBoundary::CURRENT_ROW_RANGE:</span>
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :                 bounds.window_start = bounds.peer_start;</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :         case WindowBoundary::UNBOUNDED_FOLLOWING:</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :                 assert(0); // disallowed</span>
+<span class="lineNum">     179 </span>            :                 break;
+<span class="lineNum">     180 </span><span class="lineCov">         20 :         case WindowBoundary::EXPR_PRECEDING: {</span>
+<span class="lineNum">     181 </span><span class="lineCov">         20 :                 assert(boundary_start_collection.column_count() &gt; 0);</span>
+<span class="lineNum">     182 </span><span class="lineCov">         40 :                 bounds.window_start =</span>
+<span class="lineNum">     183 </span><span class="lineCov">         20 :                     (ssize_t)row_idx -</span>
+<span class="lineNum">     184 </span><span class="lineCov">         20 :                     boundary_start_collection.GetValue(0, wexpr-&gt;start_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue();</span>
+<span class="lineNum">     185 </span><span class="lineCov">         20 :                 break;</span>
+<span class="lineNum">     186 </span>            :         }
+<span class="lineNum">     187 </span><span class="lineCov">         10 :         case WindowBoundary::EXPR_FOLLOWING: {</span>
+<span class="lineNum">     188 </span><span class="lineCov">         10 :                 assert(boundary_start_collection.column_count() &gt; 0);</span>
+<span class="lineNum">     189 </span><span class="lineCov">         10 :                 bounds.window_start =</span>
+<span class="lineNum">     190 </span><span class="lineCov">         10 :                     row_idx +</span>
+<span class="lineNum">     191 </span><span class="lineCov">         10 :                     boundary_start_collection.GetValue(0, wexpr-&gt;start_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue();</span>
+<span class="lineNum">     192 </span><span class="lineCov">         10 :                 break;</span>
+<span class="lineNum">     193 </span>            :         }
+<span class="lineNum">     194 </span>            : 
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unsupported boundary&quot;);</span>
+<span class="lineNum">     197 </span>            :         }
+<span class="lineNum">     198 </span>            : 
+<span class="lineNum">     199 </span><span class="lineCov">        506 :         switch (wexpr-&gt;end) {</span>
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :         case WindowBoundary::UNBOUNDED_PRECEDING:</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :                 assert(0); // disallowed</span>
+<span class="lineNum">     202 </span>            :                 break;
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :         case WindowBoundary::CURRENT_ROW_ROWS:</span>
+<span class="lineNum">     204 </span><span class="lineNoCov">          0 :                 bounds.window_end = row_idx + 1;</span>
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     206 </span><span class="lineCov">        426 :         case WindowBoundary::CURRENT_ROW_RANGE:</span>
+<span class="lineNum">     207 </span><span class="lineCov">        426 :                 bounds.window_end = bounds.peer_end;</span>
+<span class="lineNum">     208 </span><span class="lineCov">        426 :                 break;</span>
+<span class="lineNum">     209 </span><span class="lineCov">         40 :         case WindowBoundary::UNBOUNDED_FOLLOWING:</span>
+<span class="lineNum">     210 </span><span class="lineCov">         40 :                 bounds.window_end = bounds.partition_end;</span>
+<span class="lineNum">     211 </span><span class="lineCov">         40 :                 break;</span>
+<span class="lineNum">     212 </span><span class="lineCov">         10 :         case WindowBoundary::EXPR_PRECEDING:</span>
+<span class="lineNum">     213 </span><span class="lineCov">         10 :                 assert(boundary_end_collection.column_count() &gt; 0);</span>
+<span class="lineNum">     214 </span><span class="lineCov">         20 :                 bounds.window_end =</span>
+<span class="lineNum">     215 </span><span class="lineCov">         10 :                     (ssize_t)row_idx -</span>
+<span class="lineNum">     216 </span><span class="lineCov">         10 :                     boundary_end_collection.GetValue(0, wexpr-&gt;end_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue() + 1;</span>
+<span class="lineNum">     217 </span><span class="lineCov">         10 :                 break;</span>
+<span class="lineNum">     218 </span><span class="lineCov">         30 :         case WindowBoundary::EXPR_FOLLOWING:</span>
+<span class="lineNum">     219 </span><span class="lineCov">         30 :                 assert(boundary_end_collection.column_count() &gt; 0);</span>
+<span class="lineNum">     220 </span><span class="lineCov">         30 :                 bounds.window_end =</span>
+<span class="lineNum">     221 </span><span class="lineCov">         30 :                     row_idx + boundary_end_collection.GetValue(0, wexpr-&gt;end_expr-&gt;IsScalar() ? 0 : row_idx).GetNumericValue() +</span>
+<span class="lineNum">     222 </span>            :                     1;
 <span class="lineNum">     223 </span>            : 
-<span class="lineNum">     224 </span>            :         // clamp windows to partitions if they should exceed
-<span class="lineNum">     225 </span><span class="lineCov">        436 :         if (bounds.window_start &lt; (ssize_t)bounds.partition_start) {</span>
-<span class="lineNum">     226 </span><span class="lineCov">          4 :                 bounds.window_start = bounds.partition_start;</span>
+<span class="lineNum">     224 </span><span class="lineCov">         30 :                 break;</span>
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unsupported boundary&quot;);</span>
 <span class="lineNum">     227 </span>            :         }
-<span class="lineNum">     228 </span><span class="lineCov">        436 :         if (bounds.window_end &gt; bounds.partition_end) {</span>
-<span class="lineNum">     229 </span><span class="lineCov">          6 :                 bounds.window_end = bounds.partition_end;</span>
-<span class="lineNum">     230 </span>            :         }
-<span class="lineNum">     231 </span>            : 
-<span class="lineNum">     232 </span><span class="lineCov">        436 :         if (bounds.window_start &lt; 0 || bounds.window_end &lt; 0) {</span>
-<span class="lineNum">     233 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Failed to compute window boundaries&quot;);</span>
-<span class="lineNum">     234 </span>            :         }
-<a name="235"><span class="lineNum">     235 </span><span class="lineCov">        436 : }</span></a>
+<span class="lineNum">     228 </span>            : 
+<span class="lineNum">     229 </span>            :         // clamp windows to partitions if they should exceed
+<span class="lineNum">     230 </span><span class="lineCov">        506 :         if (bounds.window_start &lt; (ssize_t)bounds.partition_start) {</span>
+<span class="lineNum">     231 </span><span class="lineCov">          4 :                 bounds.window_start = bounds.partition_start;</span>
+<span class="lineNum">     232 </span>            :         }
+<span class="lineNum">     233 </span><span class="lineCov">        506 :         if (bounds.window_end &gt; bounds.partition_end) {</span>
+<span class="lineNum">     234 </span><span class="lineCov">          6 :                 bounds.window_end = bounds.partition_end;</span>
+<span class="lineNum">     235 </span>            :         }
 <span class="lineNum">     236 </span>            : 
-<span class="lineNum">     237 </span><span class="lineCov">         34 : static void ComputeWindowExpression(ClientContext &amp;context, WindowExpression *wexpr, ChunkCollection &amp;input,</span>
-<span class="lineNum">     238 </span>            :                                     ChunkCollection &amp;output, size_t output_idx) {
-<span class="lineNum">     239 </span>            : 
-<span class="lineNum">     240 </span>            :         // TODO: if we have no sort nor order by we don't have to sort and the window is everything
-<span class="lineNum">     241 </span><span class="lineCov">         68 :         ChunkCollection sort_collection;</span>
-<span class="lineNum">     242 </span><span class="lineCov">         34 :         size_t sort_col_count = wexpr-&gt;partitions.size() + wexpr-&gt;ordering.orders.size();</span>
-<span class="lineNum">     243 </span><span class="lineCov">         34 :         if (sort_col_count &gt; 0) {</span>
-<span class="lineNum">     244 </span><span class="lineCov">         33 :                 SortCollectionForWindow(context, wexpr, input, sort_collection);</span>
-<span class="lineNum">     245 </span>            :         }
-<span class="lineNum">     246 </span>            : 
-<span class="lineNum">     247 </span>            :         // evaluate inner expressions of window functions, could be more complex
-<span class="lineNum">     248 </span><span class="lineCov">         68 :         ChunkCollection payload_collection;</span>
-<span class="lineNum">     249 </span><span class="lineCov">         34 :         if (wexpr-&gt;children.size() &gt; 0) {</span>
-<span class="lineNum">     250 </span>            :                 // TODO: child[0] may be a scalar, don't need to materialize the whole collection then
-<span class="lineNum">     251 </span><span class="lineCov">         26 :                 MaterializeExpression(context, wexpr-&gt;children[0].get(), input, payload_collection);</span>
-<span class="lineNum">     252 </span>            :         }
-<span class="lineNum">     253 </span>            : 
-<span class="lineNum">     254 </span>            :         // evaluate boundaries if present.
-<span class="lineNum">     255 </span><span class="lineCov">         68 :         ChunkCollection boundary_start_collection;</span>
-<span class="lineNum">     256 </span><span class="lineCov">         37 :         if (wexpr-&gt;start_expr &amp;&amp;</span>
-<span class="lineNum">     257 </span><span class="lineCov">         37 :             (wexpr-&gt;start == WindowBoundary::EXPR_PRECEDING || wexpr-&gt;start == WindowBoundary::EXPR_FOLLOWING)) {</span>
-<span class="lineNum">     258 </span><span class="lineCov">          3 :                 MaterializeExpression(context, wexpr-&gt;start_expr.get(), input, boundary_start_collection,</span>
-<span class="lineNum">     259 </span><span class="lineCov">          3 :                                       wexpr-&gt;start_expr-&gt;IsScalar());</span>
-<span class="lineNum">     260 </span>            :         }
-<span class="lineNum">     261 </span><span class="lineCov">         68 :         ChunkCollection boundary_end_collection;</span>
-<span class="lineNum">     262 </span><span class="lineCov">         38 :         if (wexpr-&gt;end_expr &amp;&amp;</span>
-<span class="lineNum">     263 </span><span class="lineCov">         38 :             (wexpr-&gt;end == WindowBoundary::EXPR_PRECEDING || wexpr-&gt;end == WindowBoundary::EXPR_FOLLOWING)) {</span>
-<span class="lineNum">     264 </span><span class="lineCov">          4 :                 MaterializeExpression(context, wexpr-&gt;end_expr.get(), input, boundary_end_collection,</span>
-<span class="lineNum">     265 </span><span class="lineCov">          4 :                                       wexpr-&gt;end_expr-&gt;IsScalar());</span>
-<span class="lineNum">     266 </span>            :         }
-<span class="lineNum">     267 </span>            : 
-<span class="lineNum">     268 </span><span class="lineCov">         68 :         WindowBoundariesState bounds;</span>
-<span class="lineNum">     269 </span>            : 
-<span class="lineNum">     270 </span>            :         // build a segment tree for frame-adhering aggregates
-<span class="lineNum">     271 </span>            :         // see http://www.vldb.org/pvldb/vol8/p1058-leis.pdf
-<span class="lineNum">     272 </span><span class="lineCov">         68 :         unique_ptr&lt;WindowSegmentTree&gt; segment_tree = nullptr;</span>
-<span class="lineNum">     273 </span><span class="lineCov">         34 :         switch (wexpr-&gt;type) {</span>
-<span class="lineNum">     274 </span><span class="lineCov">         19 :         case ExpressionType::WINDOW_SUM:</span>
-<span class="lineNum">     275 </span>            :         case ExpressionType::WINDOW_MIN:
-<span class="lineNum">     276 </span>            :         case ExpressionType::WINDOW_MAX:
-<span class="lineNum">     277 </span>            :         case ExpressionType::WINDOW_AVG:
-<span class="lineNum">     278 </span><span class="lineCov">         19 :                 segment_tree = make_unique&lt;WindowSegmentTree&gt;(wexpr-&gt;type, wexpr-&gt;return_type, 16);</span>
-<span class="lineNum">     279 </span><span class="lineCov">         19 :                 segment_tree-&gt;Construct(payload_collection);</span>
-<span class="lineNum">     280 </span><span class="lineCov">         19 :                 break;</span>
-<span class="lineNum">     281 </span><span class="lineCov">         15 :         default:</span>
-<span class="lineNum">     282 </span><span class="lineCov">         15 :                 break;</span>
-<span class="lineNum">     283 </span>            :                 // nothing
+<span class="lineNum">     237 </span><span class="lineCov">        506 :         if (bounds.window_start &lt; 0 || bounds.window_end &lt; 0) {</span>
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Failed to compute window boundaries&quot;);</span>
+<span class="lineNum">     239 </span>            :         }
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">        506 : }</span></a>
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span><span class="lineCov">         41 : static void ComputeWindowExpression(ClientContext &amp;context, WindowExpression *wexpr, ChunkCollection &amp;input,</span>
+<span class="lineNum">     243 </span>            :                                     ChunkCollection &amp;output, size_t output_idx) {
+<span class="lineNum">     244 </span>            : 
+<span class="lineNum">     245 </span>            :         // TODO: if we have no sort nor order by we don't have to sort and the window is everything
+<span class="lineNum">     246 </span><span class="lineCov">         82 :         ChunkCollection sort_collection;</span>
+<span class="lineNum">     247 </span><span class="lineCov">         41 :         size_t sort_col_count = wexpr-&gt;partitions.size() + wexpr-&gt;ordering.orders.size();</span>
+<span class="lineNum">     248 </span><span class="lineCov">         41 :         if (sort_col_count &gt; 0) {</span>
+<span class="lineNum">     249 </span><span class="lineCov">         40 :                 SortCollectionForWindow(context, wexpr, input, sort_collection);</span>
+<span class="lineNum">     250 </span>            :         }
+<span class="lineNum">     251 </span>            : 
+<span class="lineNum">     252 </span>            :         // evaluate inner expressions of window functions, could be more complex
+<span class="lineNum">     253 </span><span class="lineCov">         82 :         ChunkCollection payload_collection;</span>
+<span class="lineNum">     254 </span><span class="lineCov">         41 :         if (wexpr-&gt;children.size() &gt; 0) {</span>
+<span class="lineNum">     255 </span>            :                 // TODO: child[0] may be a scalar, don't need to materialize the whole collection then
+<span class="lineNum">     256 </span><span class="lineCov">         33 :                 MaterializeExpression(context, wexpr-&gt;children[0].get(), input, payload_collection);</span>
+<span class="lineNum">     257 </span>            :         }
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span><span class="lineCov">         82 :         ChunkCollection leadlag_offset_collection;</span>
+<span class="lineNum">     260 </span><span class="lineCov">         82 :         ChunkCollection leadlag_default_collection;</span>
+<span class="lineNum">     261 </span><span class="lineCov">         41 :         if (wexpr-&gt;type == ExpressionType::WINDOW_LEAD || wexpr-&gt;type == ExpressionType::WINDOW_LAG) {</span>
+<span class="lineNum">     262 </span><span class="lineCov">          7 :                 if (wexpr-&gt;children.size() &gt; 1) {</span>
+<span class="lineNum">     263 </span><span class="lineCov">          4 :                         MaterializeExpression(context, wexpr-&gt;children[1].get(), input, leadlag_offset_collection,</span>
+<span class="lineNum">     264 </span><span class="lineCov">          4 :                                               wexpr-&gt;children[1]-&gt;IsScalar());</span>
+<span class="lineNum">     265 </span>            :                 }
+<span class="lineNum">     266 </span><span class="lineCov">          7 :                 if (wexpr-&gt;children.size() &gt; 2) {</span>
+<span class="lineNum">     267 </span><span class="lineCov">          2 :                         MaterializeExpression(context, wexpr-&gt;children[2].get(), input, leadlag_default_collection,</span>
+<span class="lineNum">     268 </span><span class="lineCov">          2 :                                               wexpr-&gt;children[2]-&gt;IsScalar());</span>
+<span class="lineNum">     269 </span>            :                 }
+<span class="lineNum">     270 </span>            :         }
+<span class="lineNum">     271 </span>            : 
+<span class="lineNum">     272 </span>            :         // evaluate boundaries if present.
+<span class="lineNum">     273 </span><span class="lineCov">         82 :         ChunkCollection boundary_start_collection;</span>
+<span class="lineNum">     274 </span><span class="lineCov">         44 :         if (wexpr-&gt;start_expr &amp;&amp;</span>
+<span class="lineNum">     275 </span><span class="lineCov">         44 :             (wexpr-&gt;start == WindowBoundary::EXPR_PRECEDING || wexpr-&gt;start == WindowBoundary::EXPR_FOLLOWING)) {</span>
+<span class="lineNum">     276 </span><span class="lineCov">          3 :                 MaterializeExpression(context, wexpr-&gt;start_expr.get(), input, boundary_start_collection,</span>
+<span class="lineNum">     277 </span><span class="lineCov">          3 :                                       wexpr-&gt;start_expr-&gt;IsScalar());</span>
+<span class="lineNum">     278 </span>            :         }
+<span class="lineNum">     279 </span><span class="lineCov">         82 :         ChunkCollection boundary_end_collection;</span>
+<span class="lineNum">     280 </span><span class="lineCov">         45 :         if (wexpr-&gt;end_expr &amp;&amp;</span>
+<span class="lineNum">     281 </span><span class="lineCov">         45 :             (wexpr-&gt;end == WindowBoundary::EXPR_PRECEDING || wexpr-&gt;end == WindowBoundary::EXPR_FOLLOWING)) {</span>
+<span class="lineNum">     282 </span><span class="lineCov">          4 :                 MaterializeExpression(context, wexpr-&gt;end_expr.get(), input, boundary_end_collection,</span>
+<span class="lineNum">     283 </span><span class="lineCov">          4 :                                       wexpr-&gt;end_expr-&gt;IsScalar());</span>
 <span class="lineNum">     284 </span>            :         }
 <span class="lineNum">     285 </span>            : 
-<span class="lineNum">     286 </span>            :         size_t dense_rank, rank_equal, rank;
-<span class="lineNum">     287 </span><span class="lineCov">         34 :         bounds.row_prev = sort_collection.GetRow(0);</span>
-<span class="lineNum">     288 </span>            : 
-<span class="lineNum">     289 </span>            :         // this is the main loop, go through all sorted rows and compute window function result
-<span class="lineNum">     290 </span><span class="lineCov">        470 :         for (size_t row_idx = 0; row_idx &lt; input.count; row_idx++) {</span>
-<span class="lineNum">     291 </span>            : 
-<span class="lineNum">     292 </span><span class="lineCov">        436 :                 UpdateWindowBoundaries(wexpr, sort_collection, row_idx, boundary_start_collection, boundary_end_collection,</span>
-<span class="lineNum">     293 </span>            :                                        bounds);
-<span class="lineNum">     294 </span>            : 
-<span class="lineNum">     295 </span><span class="lineCov">        436 :                 if (!bounds.is_same_partition || row_idx == 0) { // special case for first row, need to init</span>
-<span class="lineNum">     296 </span><span class="lineCov">        107 :                         dense_rank = 1;</span>
-<span class="lineNum">     297 </span><span class="lineCov">        107 :                         rank = 1;</span>
-<span class="lineNum">     298 </span><span class="lineCov">        107 :                         rank_equal = 0;</span>
-<span class="lineNum">     299 </span><span class="lineCov">        329 :                 } else if (!bounds.is_peer) {</span>
-<span class="lineNum">     300 </span><span class="lineCov">        272 :                         dense_rank++;</span>
-<span class="lineNum">     301 </span><span class="lineCov">        272 :                         rank += rank_equal;</span>
-<span class="lineNum">     302 </span><span class="lineCov">        272 :                         rank_equal = 0;</span>
-<span class="lineNum">     303 </span>            :                 }
-<span class="lineNum">     304 </span><span class="lineCov">        436 :                 rank_equal++;</span>
-<span class="lineNum">     305 </span>            : 
-<span class="lineNum">     306 </span><span class="lineCov">        436 :                 auto res = Value();</span>
-<span class="lineNum">     307 </span>            : 
-<span class="lineNum">     308 </span>            :                 // if no values are read for window, result is NULL
-<span class="lineNum">     309 </span><span class="lineCov">        436 :                 if (bounds.window_start &gt;= bounds.window_end) {</span>
-<span class="lineNum">     310 </span><span class="lineCov">         12 :                         output.SetValue(output_idx, row_idx, res);</span>
-<span class="lineNum">     311 </span><span class="lineCov">         12 :                         continue;</span>
-<span class="lineNum">     312 </span>            :                 }
-<span class="lineNum">     313 </span>            : 
-<span class="lineNum">     314 </span><span class="lineCov">        424 :                 switch (wexpr-&gt;type) {</span>
-<span class="lineNum">     315 </span><span class="lineCov">        234 :                 case ExpressionType::WINDOW_SUM:</span>
-<span class="lineNum">     316 </span>            :                 case ExpressionType::WINDOW_MIN:
-<span class="lineNum">     317 </span>            :                 case ExpressionType::WINDOW_MAX:
-<span class="lineNum">     318 </span>            :                 case ExpressionType::WINDOW_AVG:
-<span class="lineNum">     319 </span><span class="lineCov">        234 :                         assert(segment_tree);</span>
-<span class="lineNum">     320 </span><span class="lineCov">        234 :                         res = segment_tree-&gt;Compute(bounds.window_start, bounds.window_end);</span>
-<span class="lineNum">     321 </span><span class="lineCov">        234 :                         break;</span>
-<span class="lineNum">     322 </span>            : 
-<span class="lineNum">     323 </span><span class="lineNoCov">          0 :                 case ExpressionType::WINDOW_COUNT_STAR: {</span>
-<span class="lineNum">     324 </span><span class="lineNoCov">          0 :                         res = Value::Numeric(wexpr-&gt;return_type, bounds.window_end - bounds.window_start);</span>
-<span class="lineNum">     325 </span><span class="lineNoCov">          0 :                         break;</span>
-<span class="lineNum">     326 </span>            :                 }
-<span class="lineNum">     327 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_ROW_NUMBER: {</span>
-<span class="lineNum">     328 </span><span class="lineCov">         20 :                         res = Value::Numeric(wexpr-&gt;return_type, row_idx - bounds.window_start + 1);</span>
-<span class="lineNum">     329 </span><span class="lineCov">         20 :                         break;</span>
-<span class="lineNum">     330 </span>            :                 }
-<span class="lineNum">     331 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_RANK_DENSE: {</span>
-<span class="lineNum">     332 </span><span class="lineCov">         20 :                         res = Value::Numeric(wexpr-&gt;return_type, dense_rank);</span>
-<span class="lineNum">     333 </span><span class="lineCov">         20 :                         break;</span>
-<span class="lineNum">     334 </span>            :                 }
-<span class="lineNum">     335 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_RANK: {</span>
-<span class="lineNum">     336 </span><span class="lineCov">         20 :                         res = Value::Numeric(wexpr-&gt;return_type, rank);</span>
-<span class="lineNum">     337 </span><span class="lineCov">         20 :                         break;</span>
-<span class="lineNum">     338 </span>            :                 }
-<span class="lineNum">     339 </span><span class="lineCov">         10 :                 case ExpressionType::WINDOW_PERCENT_RANK: {</span>
-<span class="lineNum">     340 </span><span class="lineCov">         10 :                         ssize_t denom = (ssize_t)bounds.partition_end - bounds.partition_start - 1;</span>
-<span class="lineNum">     341 </span><span class="lineCov">         10 :                         double percent_rank = denom &gt; 0 ? ((double)rank - 1) / denom : 0;</span>
-<span class="lineNum">     342 </span><span class="lineCov">         10 :                         res = Value(percent_rank);</span>
-<span class="lineNum">     343 </span><span class="lineCov">         10 :                         break;</span>
-<span class="lineNum">     344 </span>            :                 }
-<span class="lineNum">     345 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_FIRST_VALUE: {</span>
-<span class="lineNum">     346 </span><span class="lineCov">         20 :                         res = payload_collection.GetValue(0, bounds.window_start);</span>
-<span class="lineNum">     347 </span><span class="lineCov">         20 :                         break;</span>
-<span class="lineNum">     348 </span>            :                 }
-<span class="lineNum">     349 </span><span class="lineCov">        100 :                 case ExpressionType::WINDOW_LAST_VALUE: {</span>
-<span class="lineNum">     350 </span><span class="lineCov">        100 :                         res = payload_collection.GetValue(0, bounds.window_end - 1);</span>
-<span class="lineNum">     351 </span><span class="lineCov">        100 :                         break;</span>
-<span class="lineNum">     352 </span>            :                 }
-<span class="lineNum">     353 </span><span class="lineNoCov">          0 :                 default:</span>
-<span class="lineNum">     354 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Window aggregate type %s&quot;, ExpressionTypeToString(wexpr-&gt;type).c_str());</span>
-<span class="lineNum">     355 </span>            :                 }
-<span class="lineNum">     356 </span>            : 
-<span class="lineNum">     357 </span><span class="lineCov">        424 :                 output.SetValue(output_idx, row_idx, res);</span>
-<span class="lineNum">     358 </span>            :         }
-<a name="359"><span class="lineNum">     359 </span><span class="lineCov">         34 : }</span></a>
-<span class="lineNum">     360 </span>            : 
-<span class="lineNum">     361 </span><span class="lineCov">         67 : void PhysicalWindow::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">     362 </span><span class="lineCov">         67 :         auto state = reinterpret_cast&lt;PhysicalWindowOperatorState *&gt;(state_);</span>
-<span class="lineNum">     363 </span><span class="lineCov">         67 :         ChunkCollection &amp;big_data = state-&gt;tuples;</span>
-<span class="lineNum">     364 </span><span class="lineCov">         67 :         ChunkCollection &amp;window_results = state-&gt;window_results;</span>
-<span class="lineNum">     365 </span>            : 
-<span class="lineNum">     366 </span>            :         // this is a blocking operator, so compute complete result on first invocation
-<span class="lineNum">     367 </span><span class="lineCov">         67 :         if (state-&gt;position == 0) {</span>
-<span class="lineNum">     368 </span><span class="lineCov">         27 :                 do {</span>
-<span class="lineNum">     369 </span><span class="lineCov">         67 :                         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">     370 </span><span class="lineCov">         67 :                         big_data.Append(state-&gt;child_chunk);</span>
-<span class="lineNum">     371 </span><span class="lineCov">         67 :                 } while (state-&gt;child_chunk.size() != 0);</span>
-<span class="lineNum">     372 </span>            : 
-<span class="lineNum">     373 </span><span class="lineCov">         40 :                 if (big_data.count == 0) {</span>
-<span class="lineNum">     374 </span><span class="lineCov">         13 :                         return;</span>
-<span class="lineNum">     375 </span>            :                 }
-<span class="lineNum">     376 </span>            : 
-<span class="lineNum">     377 </span><span class="lineCov">         54 :                 vector&lt;TypeId&gt; window_types;</span>
-<span class="lineNum">     378 </span><span class="lineCov">         61 :                 for (size_t expr_idx = 0; expr_idx &lt; select_list.size(); expr_idx++) {</span>
-<span class="lineNum">     379 </span><span class="lineCov">         34 :                         window_types.push_back(select_list[expr_idx]-&gt;return_type);</span>
-<span class="lineNum">     380 </span>            :                 }
-<span class="lineNum">     381 </span>            : 
-<span class="lineNum">     382 </span><span class="lineCov">         54 :                 for (size_t i = 0; i &lt; big_data.chunks.size(); i++) {</span>
-<span class="lineNum">     383 </span><span class="lineCov">         54 :                         DataChunk window_chunk;</span>
-<span class="lineNum">     384 </span><span class="lineCov">         27 :                         window_chunk.Initialize(window_types);</span>
-<span class="lineNum">     385 </span><span class="lineCov">         61 :                         for (size_t col_idx = 0; col_idx &lt; window_chunk.column_count; col_idx++) {</span>
-<span class="lineNum">     386 </span><span class="lineCov">         34 :                                 window_chunk.data[col_idx].count = big_data.chunks[i]-&gt;size();</span>
-<span class="lineNum">     387 </span>            :                         }
-<span class="lineNum">     388 </span><span class="lineCov">         27 :                         window_chunk.Verify();</span>
-<span class="lineNum">     389 </span><span class="lineCov">         27 :                         window_results.Append(window_chunk);</span>
-<span class="lineNum">     390 </span>            :                 }
+<span class="lineNum">     286 </span><span class="lineCov">         82 :         WindowBoundariesState bounds;</span>
+<span class="lineNum">     287 </span>            : 
+<span class="lineNum">     288 </span>            :         // build a segment tree for frame-adhering aggregates
+<span class="lineNum">     289 </span>            :         // see http://www.vldb.org/pvldb/vol8/p1058-leis.pdf
+<span class="lineNum">     290 </span><span class="lineCov">         82 :         unique_ptr&lt;WindowSegmentTree&gt; segment_tree = nullptr;</span>
+<span class="lineNum">     291 </span><span class="lineCov">         41 :         switch (wexpr-&gt;type) {</span>
+<span class="lineNum">     292 </span><span class="lineCov">         19 :         case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">     293 </span>            :         case ExpressionType::WINDOW_MIN:
+<span class="lineNum">     294 </span>            :         case ExpressionType::WINDOW_MAX:
+<span class="lineNum">     295 </span>            :         case ExpressionType::WINDOW_AVG:
+<span class="lineNum">     296 </span><span class="lineCov">         19 :                 segment_tree = make_unique&lt;WindowSegmentTree&gt;(wexpr-&gt;type, wexpr-&gt;return_type, 16);</span>
+<span class="lineNum">     297 </span><span class="lineCov">         19 :                 segment_tree-&gt;Construct(payload_collection);</span>
+<span class="lineNum">     298 </span><span class="lineCov">         19 :                 break;</span>
+<span class="lineNum">     299 </span><span class="lineCov">         22 :         default:</span>
+<span class="lineNum">     300 </span><span class="lineCov">         22 :                 break;</span>
+<span class="lineNum">     301 </span>            :                 // nothing
+<span class="lineNum">     302 </span>            :         }
+<span class="lineNum">     303 </span>            : 
+<span class="lineNum">     304 </span>            :         size_t dense_rank, rank_equal, rank;
+<span class="lineNum">     305 </span><span class="lineCov">         41 :         bounds.row_prev = sort_collection.GetRow(0);</span>
+<span class="lineNum">     306 </span>            : 
+<span class="lineNum">     307 </span>            :         // this is the main loop, go through all sorted rows and compute window function result
+<span class="lineNum">     308 </span><span class="lineCov">        547 :         for (size_t row_idx = 0; row_idx &lt; input.count; row_idx++) {</span>
+<span class="lineNum">     309 </span>            : 
+<span class="lineNum">     310 </span><span class="lineCov">        506 :                 UpdateWindowBoundaries(wexpr, sort_collection, row_idx, boundary_start_collection, boundary_end_collection,</span>
+<span class="lineNum">     311 </span>            :                                        bounds);
+<span class="lineNum">     312 </span>            : 
+<span class="lineNum">     313 </span><span class="lineCov">        506 :                 if (WindowNeedsRank(wexpr)) {</span>
+<span class="lineNum">     314 </span><span class="lineCov">         50 :                         if (!bounds.is_same_partition || row_idx == 0) { // special case for first row, need to init</span>
+<span class="lineNum">     315 </span><span class="lineCov">         18 :                                 dense_rank = 1;</span>
+<span class="lineNum">     316 </span><span class="lineCov">         18 :                                 rank = 1;</span>
+<span class="lineNum">     317 </span><span class="lineCov">         18 :                                 rank_equal = 0;</span>
+<span class="lineNum">     318 </span><span class="lineCov">         32 :                         } else if (!bounds.is_peer) {</span>
+<span class="lineNum">     319 </span><span class="lineCov">         22 :                                 dense_rank++;</span>
+<span class="lineNum">     320 </span><span class="lineCov">         22 :                                 rank += rank_equal;</span>
+<span class="lineNum">     321 </span><span class="lineCov">         22 :                                 rank_equal = 0;</span>
+<span class="lineNum">     322 </span>            :                         }
+<span class="lineNum">     323 </span><span class="lineCov">         50 :                         rank_equal++;</span>
+<span class="lineNum">     324 </span>            :                 }
+<span class="lineNum">     325 </span>            : 
+<span class="lineNum">     326 </span><span class="lineCov">        506 :                 auto res = Value();</span>
+<span class="lineNum">     327 </span>            : 
+<span class="lineNum">     328 </span>            :                 // if no values are read for window, result is NULL
+<span class="lineNum">     329 </span><span class="lineCov">        506 :                 if (bounds.window_start &gt;= bounds.window_end) {</span>
+<span class="lineNum">     330 </span><span class="lineCov">         12 :                         output.SetValue(output_idx, row_idx, res);</span>
+<span class="lineNum">     331 </span><span class="lineCov">         12 :                         continue;</span>
+<span class="lineNum">     332 </span>            :                 }
+<span class="lineNum">     333 </span>            : 
+<span class="lineNum">     334 </span><span class="lineCov">        494 :                 switch (wexpr-&gt;type) {</span>
+<span class="lineNum">     335 </span><span class="lineCov">        234 :                 case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">     336 </span>            :                 case ExpressionType::WINDOW_MIN:
+<span class="lineNum">     337 </span>            :                 case ExpressionType::WINDOW_MAX:
+<span class="lineNum">     338 </span>            :                 case ExpressionType::WINDOW_AVG:
+<span class="lineNum">     339 </span><span class="lineCov">        234 :                         assert(segment_tree);</span>
+<span class="lineNum">     340 </span><span class="lineCov">        234 :                         res = segment_tree-&gt;Compute(bounds.window_start, bounds.window_end);</span>
+<span class="lineNum">     341 </span><span class="lineCov">        234 :                         break;</span>
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span><span class="lineNoCov">          0 :                 case ExpressionType::WINDOW_COUNT_STAR: {</span>
+<span class="lineNum">     344 </span><span class="lineNoCov">          0 :                         res = Value::Numeric(wexpr-&gt;return_type, bounds.window_end - bounds.window_start);</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">     346 </span>            :                 }
+<span class="lineNum">     347 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_ROW_NUMBER: {</span>
+<span class="lineNum">     348 </span><span class="lineCov">         20 :                         res = Value::Numeric(wexpr-&gt;return_type, row_idx - bounds.window_start + 1);</span>
+<span class="lineNum">     349 </span><span class="lineCov">         20 :                         break;</span>
+<span class="lineNum">     350 </span>            :                 }
+<span class="lineNum">     351 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_RANK_DENSE: {</span>
+<span class="lineNum">     352 </span><span class="lineCov">         20 :                         res = Value::Numeric(wexpr-&gt;return_type, dense_rank);</span>
+<span class="lineNum">     353 </span><span class="lineCov">         20 :                         break;</span>
+<span class="lineNum">     354 </span>            :                 }
+<span class="lineNum">     355 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_RANK: {</span>
+<span class="lineNum">     356 </span><span class="lineCov">         20 :                         res = Value::Numeric(wexpr-&gt;return_type, rank);</span>
+<span class="lineNum">     357 </span><span class="lineCov">         20 :                         break;</span>
+<span class="lineNum">     358 </span>            :                 }
+<span class="lineNum">     359 </span><span class="lineCov">         10 :                 case ExpressionType::WINDOW_PERCENT_RANK: {</span>
+<span class="lineNum">     360 </span><span class="lineCov">         10 :                         ssize_t denom = (ssize_t)bounds.partition_end - bounds.partition_start - 1;</span>
+<span class="lineNum">     361 </span><span class="lineCov">         10 :                         double percent_rank = denom &gt; 0 ? ((double)rank - 1) / denom : 0;</span>
+<span class="lineNum">     362 </span><span class="lineCov">         10 :                         res = Value(percent_rank);</span>
+<span class="lineNum">     363 </span><span class="lineCov">         10 :                         break;</span>
+<span class="lineNum">     364 </span>            :                 }
+<span class="lineNum">     365 </span><span class="lineCov">         70 :                 case ExpressionType::WINDOW_LEAD:</span>
+<span class="lineNum">     366 </span>            :                 case ExpressionType::WINDOW_LAG: {
+<span class="lineNum">     367 </span><span class="lineCov">        210 :                         Value def_val = Value().CastAs(wexpr-&gt;return_type);</span>
+<span class="lineNum">     368 </span><span class="lineCov">         70 :                         size_t offset = 1;</span>
+<span class="lineNum">     369 </span><span class="lineCov">         70 :                         if (wexpr-&gt;children.size() &gt; 1) {</span>
+<span class="lineNum">     370 </span><span class="lineCov">         80 :                                 offset = leadlag_offset_collection.GetValue(0, wexpr-&gt;children[1]-&gt;IsScalar() ? 0 : row_idx)</span>
+<span class="lineNum">     371 </span><span class="lineCov">         40 :                                              .GetNumericValue();</span>
+<span class="lineNum">     372 </span>            :                         }
+<span class="lineNum">     373 </span><span class="lineCov">         70 :                         if (wexpr-&gt;children.size() &gt; 2) {</span>
+<span class="lineNum">     374 </span><span class="lineCov">         20 :                                 def_val = leadlag_default_collection.GetValue(0, wexpr-&gt;children[2]-&gt;IsScalar() ? 0 : row_idx);</span>
+<span class="lineNum">     375 </span>            :                         }
+<span class="lineNum">     376 </span><span class="lineCov">         70 :                         if (wexpr-&gt;type == ExpressionType::WINDOW_LEAD) {</span>
+<span class="lineNum">     377 </span><span class="lineCov">         40 :                                 ssize_t lead_idx = (ssize_t)row_idx + 1;</span>
+<span class="lineNum">     378 </span><span class="lineCov">         40 :                                 if (lead_idx &lt; bounds.partition_end) {</span>
+<span class="lineNum">     379 </span><span class="lineCov">         24 :                                         res = payload_collection.GetValue(0, lead_idx);</span>
+<span class="lineNum">     380 </span>            :                                 } else {
+<span class="lineNum">     381 </span><span class="lineCov">         16 :                                         res = def_val;</span>
+<span class="lineNum">     382 </span>            :                                 }
+<span class="lineNum">     383 </span>            :                         } else {
+<span class="lineNum">     384 </span><span class="lineCov">         30 :                                 ssize_t lag_idx = (ssize_t)row_idx - offset;</span>
+<span class="lineNum">     385 </span><span class="lineCov">         30 :                                 if (lag_idx &gt;= 0 &amp;&amp; lag_idx &gt;= bounds.partition_start) {</span>
+<span class="lineNum">     386 </span><span class="lineCov">         18 :                                         res = payload_collection.GetValue(0, lag_idx);</span>
+<span class="lineNum">     387 </span>            :                                 } else {
+<span class="lineNum">     388 </span><span class="lineCov">         12 :                                         res = def_val;</span>
+<span class="lineNum">     389 </span>            :                                 }
+<span class="lineNum">     390 </span>            :                         }
 <span class="lineNum">     391 </span>            : 
-<span class="lineNum">     392 </span><span class="lineCov">         27 :                 assert(window_results.column_count() == select_list.size());</span>
-<span class="lineNum">     393 </span><span class="lineCov">         27 :                 size_t window_output_idx = 0;</span>
-<span class="lineNum">     394 </span>            :                 // we can have multiple window functions
-<span class="lineNum">     395 </span><span class="lineCov">         61 :                 for (size_t expr_idx = 0; expr_idx &lt; select_list.size(); expr_idx++) {</span>
-<span class="lineNum">     396 </span><span class="lineCov">         34 :                         assert(select_list[expr_idx]-&gt;GetExpressionClass() == ExpressionClass::WINDOW);</span>
-<span class="lineNum">     397 </span>            :                         // sort by partition and order clause in window def
-<span class="lineNum">     398 </span><span class="lineCov">         34 :                         auto wexpr = reinterpret_cast&lt;WindowExpression *&gt;(select_list[expr_idx].get());</span>
-<span class="lineNum">     399 </span><span class="lineCov">         34 :                         ComputeWindowExpression(context, wexpr, big_data, window_results, window_output_idx++);</span>
-<span class="lineNum">     400 </span>            :                 }
-<span class="lineNum">     401 </span>            :         }
-<span class="lineNum">     402 </span>            : 
-<span class="lineNum">     403 </span><span class="lineCov">         54 :         if (state-&gt;position &gt;= big_data.count) {</span>
-<span class="lineNum">     404 </span><span class="lineCov">         27 :                 return;</span>
-<span class="lineNum">     405 </span>            :         }
-<span class="lineNum">     406 </span>            : 
-<span class="lineNum">     407 </span>            :         // just return what was computed before, appending the result cols of the window expressions at the end
-<span class="lineNum">     408 </span><span class="lineCov">         27 :         auto &amp;proj_ch = big_data.GetChunk(state-&gt;position);</span>
-<span class="lineNum">     409 </span><span class="lineCov">         27 :         auto &amp;wind_ch = window_results.GetChunk(state-&gt;position);</span>
-<span class="lineNum">     410 </span>            : 
-<span class="lineNum">     411 </span><span class="lineCov">         27 :         size_t out_idx = 0;</span>
-<span class="lineNum">     412 </span><span class="lineCov">         86 :         for (size_t col_idx = 0; col_idx &lt; proj_ch.column_count; col_idx++) {</span>
-<span class="lineNum">     413 </span><span class="lineCov">         59 :                 chunk.data[out_idx++].Reference(proj_ch.data[col_idx]);</span>
-<span class="lineNum">     414 </span>            :         }
-<span class="lineNum">     415 </span><span class="lineCov">         61 :         for (size_t col_idx = 0; col_idx &lt; wind_ch.column_count; col_idx++) {</span>
-<span class="lineNum">     416 </span><span class="lineCov">         34 :                 chunk.data[out_idx++].Reference(wind_ch.data[col_idx]);</span>
-<span class="lineNum">     417 </span>            :         }
-<span class="lineNum">     418 </span><span class="lineCov">         27 :         state-&gt;position += STANDARD_VECTOR_SIZE;</span>
-<a name="419"><span class="lineNum">     419 </span>            : }</a>
-<span class="lineNum">     420 </span>            : 
-<span class="lineNum">     421 </span><span class="lineCov">         45 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalWindow::GetOperatorState(ExpressionExecutor *parent) {</span>
-<span class="lineNum">     422 </span><span class="lineCov">         45 :         return make_unique&lt;PhysicalWindowOperatorState&gt;(children[0].get(), parent);</span>
-<a name="423"><span class="lineNum">     423 </span>            : }</a>
-<span class="lineNum">     424 </span>            : 
-<span class="lineNum">     425 </span><span class="lineCov">        258 : void WindowSegmentTree::AggregateInit() {</span>
-<span class="lineNum">     426 </span><span class="lineCov">        258 :         switch (window_type) {</span>
-<span class="lineNum">     427 </span><span class="lineCov">        236 :         case ExpressionType::WINDOW_SUM:</span>
-<span class="lineNum">     428 </span>            :         case ExpressionType::WINDOW_AVG:
-<span class="lineNum">     429 </span><span class="lineCov">        236 :                 aggregate = Value::Numeric(payload_type, 0);</span>
-<span class="lineNum">     430 </span><span class="lineCov">        236 :                 break;</span>
-<span class="lineNum">     431 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_MIN:</span>
-<span class="lineNum">     432 </span><span class="lineCov">         11 :                 aggregate = Value::MaximumValue(payload_type);</span>
-<span class="lineNum">     433 </span><span class="lineCov">         11 :                 break;</span>
-<span class="lineNum">     434 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_MAX:</span>
-<span class="lineNum">     435 </span><span class="lineCov">         11 :                 aggregate = Value::MinimumValue(payload_type);</span>
-<span class="lineNum">     436 </span><span class="lineCov">         11 :                 break;</span>
-<span class="lineNum">     437 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     438 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window Type&quot;);</span>
-<span class="lineNum">     439 </span>            :         }
-<span class="lineNum">     440 </span><span class="lineCov">        258 :         n_aggregated = 0;</span>
-<a name="441"><span class="lineNum">     441 </span><span class="lineCov">        258 : }</span></a>
-<span class="lineNum">     442 </span>            : 
-<span class="lineNum">     443 </span><span class="lineCov">        969 : void WindowSegmentTree::AggregateAccum(Value val) {</span>
-<span class="lineNum">     444 </span><span class="lineCov">        969 :         switch (window_type) {</span>
-<span class="lineNum">     445 </span><span class="lineCov">        901 :         case ExpressionType::WINDOW_SUM:</span>
-<span class="lineNum">     446 </span>            :         case ExpressionType::WINDOW_AVG:
-<span class="lineNum">     447 </span><span class="lineCov">        901 :                 aggregate = aggregate + val;</span>
-<span class="lineNum">     448 </span><span class="lineCov">        901 :                 break;</span>
-<span class="lineNum">     449 </span><span class="lineCov">         34 :         case ExpressionType::WINDOW_MIN:</span>
-<span class="lineNum">     450 </span><span class="lineCov">         34 :                 if (val &lt; aggregate) {</span>
-<span class="lineNum">     451 </span><span class="lineCov">         12 :                         aggregate = val;</span>
-<span class="lineNum">     452 </span>            :                 }
-<span class="lineNum">     453 </span><span class="lineCov">         34 :                 break;</span>
-<span class="lineNum">     454 </span><span class="lineCov">         34 :         case ExpressionType::WINDOW_MAX:</span>
-<span class="lineNum">     455 </span><span class="lineCov">         34 :                 if (val &gt; aggregate) {</span>
-<span class="lineNum">     456 </span><span class="lineCov">         24 :                         aggregate = val;</span>
-<span class="lineNum">     457 </span>            :                 }
-<span class="lineNum">     458 </span><span class="lineCov">         34 :                 break;</span>
-<span class="lineNum">     459 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     460 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window Type&quot;);</span>
-<span class="lineNum">     461 </span>            :         }
-<span class="lineNum">     462 </span><span class="lineCov">        969 :         n_aggregated++;</span>
-<a name="463"><span class="lineNum">     463 </span><span class="lineCov">        969 : }</span></a>
-<span class="lineNum">     464 </span>            : 
-<span class="lineNum">     465 </span><span class="lineCov">        263 : Value WindowSegmentTree::AggegateFinal() {</span>
-<span class="lineNum">     466 </span><span class="lineCov">        263 :         if (n_aggregated == 0) {</span>
-<span class="lineNum">     467 </span><span class="lineNoCov">          0 :                 return Value().CastAs(payload_type);</span>
-<span class="lineNum">     468 </span>            :         }
-<span class="lineNum">     469 </span><span class="lineCov">        263 :         switch (window_type) {</span>
-<span class="lineNum">     470 </span><span class="lineCov">        252 :         case ExpressionType::WINDOW_SUM:</span>
-<span class="lineNum">     471 </span>            :         case ExpressionType::WINDOW_MIN:
-<span class="lineNum">     472 </span>            :         case ExpressionType::WINDOW_MAX:
-<span class="lineNum">     473 </span><span class="lineCov">        252 :                 return aggregate;</span>
-<span class="lineNum">     474 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_AVG:</span>
-<span class="lineNum">     475 </span><span class="lineCov">         11 :                 return aggregate / Value::Numeric(payload_type, n_aggregated);</span>
-<span class="lineNum">     476 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">     477 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window Type&quot;);</span>
-<span class="lineNum">     478 </span>            :         }
-<span class="lineNum">     479 </span>            : 
-<span class="lineNum">     480 </span>            :         return aggregate;
-<a name="481"><span class="lineNum">     481 </span>            : }</a>
-<span class="lineNum">     482 </span>            : 
-<span class="lineNum">     483 </span><span class="lineCov">         19 : void WindowSegmentTree::Construct(ChunkCollection &amp;input) {</span>
-<span class="lineNum">     484 </span><span class="lineCov">         19 :         assert(input.column_count() == 1);</span>
-<span class="lineNum">     485 </span><span class="lineCov">         19 :         AggregateInit();</span>
-<span class="lineNum">     486 </span><span class="lineCov">         19 :         input_ref = &amp;input;</span>
-<span class="lineNum">     487 </span>            :         // level 0 is data itself
-<span class="lineNum">     488 </span>            :         size_t level_size;
-<span class="lineNum">     489 </span><span class="lineCov">         43 :         while ((level_size = (levels.size() == 0 ? input_ref-&gt;count : levels[levels.size() - 1].size())) &gt; 1) {</span>
-<span class="lineNum">     490 </span><span class="lineCov">         48 :                 vector&lt;Value&gt; nl;</span>
-<span class="lineNum">     491 </span><span class="lineCov">         24 :                 size_t fanout_count = 0;</span>
-<span class="lineNum">     492 </span><span class="lineCov">        270 :                 for (size_t pos = 0; pos &lt; level_size; pos++) {</span>
-<span class="lineNum">     493 </span><span class="lineCov">        482 :                         AggregateAccum((levels.size() == 0 ? input_ref-&gt;GetValue(0, pos) : levels[levels.size() - 1][pos]));</span>
-<span class="lineNum">     494 </span><span class="lineCov">        246 :                         fanout_count++;</span>
-<span class="lineNum">     495 </span><span class="lineCov">        246 :                         if (fanout_count == fanout) {</span>
-<span class="lineNum">     496 </span><span class="lineCov">          5 :                                 nl.push_back(AggegateFinal());</span>
-<span class="lineNum">     497 </span><span class="lineCov">          5 :                                 AggregateInit();</span>
-<span class="lineNum">     498 </span><span class="lineCov">          5 :                                 fanout_count = 0;</span>
-<span class="lineNum">     499 </span>            :                         }
-<span class="lineNum">     500 </span>            :                 }
-<span class="lineNum">     501 </span><span class="lineCov">         24 :                 if (fanout_count &gt; 0) {</span>
-<span class="lineNum">     502 </span><span class="lineCov">         24 :                         nl.push_back(AggegateFinal());</span>
-<span class="lineNum">     503 </span>            :                 }
-<span class="lineNum">     504 </span><span class="lineCov">         24 :                 levels.push_back(nl);</span>
-<span class="lineNum">     505 </span>            :         }
-<a name="506"><span class="lineNum">     506 </span><span class="lineCov">         19 : }</span></a>
-<span class="lineNum">     507 </span>            : 
-<span class="lineNum">     508 </span><span class="lineCov">        282 : void WindowSegmentTree::WindowSegmentValue(size_t l_idx, size_t begin, size_t end) {</span>
-<span class="lineNum">     509 </span><span class="lineCov">        282 :         assert(begin &lt;= end);</span>
-<span class="lineNum">     510 </span><span class="lineCov">       1005 :         for (size_t pos = begin; pos &lt; end; pos++) {</span>
-<span class="lineNum">     511 </span><span class="lineCov">        723 :                 AggregateAccum(l_idx == 0 ? input_ref-&gt;GetValue(0, pos) : levels[l_idx - 1][pos]);</span>
-<span class="lineNum">     512 </span>            :         }
-<a name="513"><span class="lineNum">     513 </span><span class="lineCov">        282 : }</span></a>
-<span class="lineNum">     514 </span>            : 
-<span class="lineNum">     515 </span><span class="lineCov">        234 : Value WindowSegmentTree::Compute(size_t begin, size_t end) {</span>
-<span class="lineNum">     516 </span><span class="lineCov">        234 :         assert(input_ref);</span>
-<span class="lineNum">     517 </span><span class="lineCov">        234 :         AggregateInit();</span>
-<span class="lineNum">     518 </span><span class="lineCov">        259 :         for (size_t l_idx = 0; l_idx &lt; levels.size() + 1; l_idx++) {</span>
-<span class="lineNum">     519 </span><span class="lineCov">        259 :                 size_t parent_begin = begin / fanout;</span>
-<span class="lineNum">     520 </span><span class="lineCov">        259 :                 size_t parent_end = end / fanout;</span>
-<span class="lineNum">     521 </span><span class="lineCov">        259 :                 if (parent_begin == parent_end) {</span>
-<span class="lineNum">     522 </span><span class="lineCov">        234 :                         WindowSegmentValue(l_idx, begin, end);</span>
-<span class="lineNum">     523 </span><span class="lineCov">        234 :                         return AggegateFinal();</span>
-<span class="lineNum">     524 </span>            :                 }
-<span class="lineNum">     525 </span><span class="lineCov">         25 :                 size_t group_begin = parent_begin * fanout;</span>
-<span class="lineNum">     526 </span><span class="lineCov">         25 :                 if (begin != group_begin) {</span>
-<span class="lineNum">     527 </span><span class="lineCov">         25 :                         WindowSegmentValue(l_idx, begin, group_begin + fanout);</span>
-<span class="lineNum">     528 </span><span class="lineCov">         25 :                         parent_begin++;</span>
-<span class="lineNum">     529 </span>            :                 }
-<span class="lineNum">     530 </span><span class="lineCov">         25 :                 size_t group_end = parent_end * fanout;</span>
-<span class="lineNum">     531 </span><span class="lineCov">         25 :                 if (end != group_end) {</span>
-<span class="lineNum">     532 </span><span class="lineCov">         23 :                         WindowSegmentValue(l_idx, group_end, end);</span>
-<span class="lineNum">     533 </span>            :                 }
-<span class="lineNum">     534 </span><span class="lineCov">         25 :                 begin = parent_begin;</span>
-<span class="lineNum">     535 </span><span class="lineCov">         25 :                 end = parent_end;</span>
-<span class="lineNum">     536 </span>            :         }
-<span class="lineNum">     537 </span>            : 
-<span class="lineNum">     538 </span><span class="lineNoCov">          0 :         return AggegateFinal();</span>
-<span class="lineNum">     539 </span>            : }
+<span class="lineNum">     392 </span><span class="lineCov">         70 :                         break;</span>
+<span class="lineNum">     393 </span>            :                 }
+<span class="lineNum">     394 </span><span class="lineCov">         20 :                 case ExpressionType::WINDOW_FIRST_VALUE: {</span>
+<span class="lineNum">     395 </span><span class="lineCov">         20 :                         res = payload_collection.GetValue(0, bounds.window_start);</span>
+<span class="lineNum">     396 </span><span class="lineCov">         20 :                         break;</span>
+<span class="lineNum">     397 </span>            :                 }
+<span class="lineNum">     398 </span><span class="lineCov">        100 :                 case ExpressionType::WINDOW_LAST_VALUE: {</span>
+<span class="lineNum">     399 </span><span class="lineCov">        100 :                         res = payload_collection.GetValue(0, bounds.window_end - 1);</span>
+<span class="lineNum">     400 </span><span class="lineCov">        100 :                         break;</span>
+<span class="lineNum">     401 </span>            :                 }
+<span class="lineNum">     402 </span><span class="lineNoCov">          0 :                 default:</span>
+<span class="lineNum">     403 </span><span class="lineNoCov">          0 :                         throw NotImplementedException(&quot;Window aggregate type %s&quot;, ExpressionTypeToString(wexpr-&gt;type).c_str());</span>
+<span class="lineNum">     404 </span>            :                 }
+<span class="lineNum">     405 </span>            : 
+<span class="lineNum">     406 </span><span class="lineCov">        494 :                 output.SetValue(output_idx, row_idx, res);</span>
+<span class="lineNum">     407 </span>            :         }
+<a name="408"><span class="lineNum">     408 </span><span class="lineCov">         41 : }</span></a>
+<span class="lineNum">     409 </span>            : 
+<span class="lineNum">     410 </span><span class="lineCov">         81 : void PhysicalWindow::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">     411 </span><span class="lineCov">         81 :         auto state = reinterpret_cast&lt;PhysicalWindowOperatorState *&gt;(state_);</span>
+<span class="lineNum">     412 </span><span class="lineCov">         81 :         ChunkCollection &amp;big_data = state-&gt;tuples;</span>
+<span class="lineNum">     413 </span><span class="lineCov">         81 :         ChunkCollection &amp;window_results = state-&gt;window_results;</span>
+<span class="lineNum">     414 </span>            : 
+<span class="lineNum">     415 </span>            :         // this is a blocking operator, so compute complete result on first invocation
+<span class="lineNum">     416 </span><span class="lineCov">         81 :         if (state-&gt;position == 0) {</span>
+<span class="lineNum">     417 </span><span class="lineCov">         34 :                 do {</span>
+<span class="lineNum">     418 </span><span class="lineCov">         81 :                         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">     419 </span><span class="lineCov">         81 :                         big_data.Append(state-&gt;child_chunk);</span>
+<span class="lineNum">     420 </span><span class="lineCov">         81 :                 } while (state-&gt;child_chunk.size() != 0);</span>
+<span class="lineNum">     421 </span>            : 
+<span class="lineNum">     422 </span><span class="lineCov">         47 :                 if (big_data.count == 0) {</span>
+<span class="lineNum">     423 </span><span class="lineCov">         13 :                         return;</span>
+<span class="lineNum">     424 </span>            :                 }
+<span class="lineNum">     425 </span>            : 
+<span class="lineNum">     426 </span><span class="lineCov">         68 :                 vector&lt;TypeId&gt; window_types;</span>
+<span class="lineNum">     427 </span><span class="lineCov">         75 :                 for (size_t expr_idx = 0; expr_idx &lt; select_list.size(); expr_idx++) {</span>
+<span class="lineNum">     428 </span><span class="lineCov">         41 :                         window_types.push_back(select_list[expr_idx]-&gt;return_type);</span>
+<span class="lineNum">     429 </span>            :                 }
+<span class="lineNum">     430 </span>            : 
+<span class="lineNum">     431 </span><span class="lineCov">         68 :                 for (size_t i = 0; i &lt; big_data.chunks.size(); i++) {</span>
+<span class="lineNum">     432 </span><span class="lineCov">         68 :                         DataChunk window_chunk;</span>
+<span class="lineNum">     433 </span><span class="lineCov">         34 :                         window_chunk.Initialize(window_types);</span>
+<span class="lineNum">     434 </span><span class="lineCov">         75 :                         for (size_t col_idx = 0; col_idx &lt; window_chunk.column_count; col_idx++) {</span>
+<span class="lineNum">     435 </span><span class="lineCov">         41 :                                 window_chunk.data[col_idx].count = big_data.chunks[i]-&gt;size();</span>
+<span class="lineNum">     436 </span>            :                         }
+<span class="lineNum">     437 </span><span class="lineCov">         34 :                         window_chunk.Verify();</span>
+<span class="lineNum">     438 </span><span class="lineCov">         34 :                         window_results.Append(window_chunk);</span>
+<span class="lineNum">     439 </span>            :                 }
+<span class="lineNum">     440 </span>            : 
+<span class="lineNum">     441 </span><span class="lineCov">         34 :                 assert(window_results.column_count() == select_list.size());</span>
+<span class="lineNum">     442 </span><span class="lineCov">         34 :                 size_t window_output_idx = 0;</span>
+<span class="lineNum">     443 </span>            :                 // we can have multiple window functions
+<span class="lineNum">     444 </span><span class="lineCov">         75 :                 for (size_t expr_idx = 0; expr_idx &lt; select_list.size(); expr_idx++) {</span>
+<span class="lineNum">     445 </span><span class="lineCov">         41 :                         assert(select_list[expr_idx]-&gt;GetExpressionClass() == ExpressionClass::WINDOW);</span>
+<span class="lineNum">     446 </span>            :                         // sort by partition and order clause in window def
+<span class="lineNum">     447 </span><span class="lineCov">         41 :                         auto wexpr = reinterpret_cast&lt;WindowExpression *&gt;(select_list[expr_idx].get());</span>
+<span class="lineNum">     448 </span><span class="lineCov">         41 :                         ComputeWindowExpression(context, wexpr, big_data, window_results, window_output_idx++);</span>
+<span class="lineNum">     449 </span>            :                 }
+<span class="lineNum">     450 </span>            :         }
+<span class="lineNum">     451 </span>            : 
+<span class="lineNum">     452 </span><span class="lineCov">         68 :         if (state-&gt;position &gt;= big_data.count) {</span>
+<span class="lineNum">     453 </span><span class="lineCov">         34 :                 return;</span>
+<span class="lineNum">     454 </span>            :         }
+<span class="lineNum">     455 </span>            : 
+<span class="lineNum">     456 </span>            :         // just return what was computed before, appending the result cols of the window expressions at the end
+<span class="lineNum">     457 </span><span class="lineCov">         34 :         auto &amp;proj_ch = big_data.GetChunk(state-&gt;position);</span>
+<span class="lineNum">     458 </span><span class="lineCov">         34 :         auto &amp;wind_ch = window_results.GetChunk(state-&gt;position);</span>
+<span class="lineNum">     459 </span>            : 
+<span class="lineNum">     460 </span><span class="lineCov">         34 :         size_t out_idx = 0;</span>
+<span class="lineNum">     461 </span><span class="lineCov">        107 :         for (size_t col_idx = 0; col_idx &lt; proj_ch.column_count; col_idx++) {</span>
+<span class="lineNum">     462 </span><span class="lineCov">         73 :                 chunk.data[out_idx++].Reference(proj_ch.data[col_idx]);</span>
+<span class="lineNum">     463 </span>            :         }
+<span class="lineNum">     464 </span><span class="lineCov">         75 :         for (size_t col_idx = 0; col_idx &lt; wind_ch.column_count; col_idx++) {</span>
+<span class="lineNum">     465 </span><span class="lineCov">         41 :                 chunk.data[out_idx++].Reference(wind_ch.data[col_idx]);</span>
+<span class="lineNum">     466 </span>            :         }
+<span class="lineNum">     467 </span><span class="lineCov">         34 :         state-&gt;position += STANDARD_VECTOR_SIZE;</span>
+<a name="468"><span class="lineNum">     468 </span>            : }</a>
+<span class="lineNum">     469 </span>            : 
+<span class="lineNum">     470 </span><span class="lineCov">         52 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalWindow::GetOperatorState(ExpressionExecutor *parent) {</span>
+<span class="lineNum">     471 </span><span class="lineCov">         52 :         return make_unique&lt;PhysicalWindowOperatorState&gt;(children[0].get(), parent);</span>
+<a name="472"><span class="lineNum">     472 </span>            : }</a>
+<span class="lineNum">     473 </span>            : 
+<span class="lineNum">     474 </span><span class="lineCov">        258 : void WindowSegmentTree::AggregateInit() {</span>
+<span class="lineNum">     475 </span><span class="lineCov">        258 :         switch (window_type) {</span>
+<span class="lineNum">     476 </span><span class="lineCov">        236 :         case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">     477 </span>            :         case ExpressionType::WINDOW_AVG:
+<span class="lineNum">     478 </span><span class="lineCov">        236 :                 aggregate = Value::Numeric(payload_type, 0);</span>
+<span class="lineNum">     479 </span><span class="lineCov">        236 :                 break;</span>
+<span class="lineNum">     480 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_MIN:</span>
+<span class="lineNum">     481 </span><span class="lineCov">         11 :                 aggregate = Value::MaximumValue(payload_type);</span>
+<span class="lineNum">     482 </span><span class="lineCov">         11 :                 break;</span>
+<span class="lineNum">     483 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_MAX:</span>
+<span class="lineNum">     484 </span><span class="lineCov">         11 :                 aggregate = Value::MinimumValue(payload_type);</span>
+<span class="lineNum">     485 </span><span class="lineCov">         11 :                 break;</span>
+<span class="lineNum">     486 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     487 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window Type&quot;);</span>
+<span class="lineNum">     488 </span>            :         }
+<span class="lineNum">     489 </span><span class="lineCov">        258 :         n_aggregated = 0;</span>
+<a name="490"><span class="lineNum">     490 </span><span class="lineCov">        258 : }</span></a>
+<span class="lineNum">     491 </span>            : 
+<span class="lineNum">     492 </span><span class="lineCov">        969 : void WindowSegmentTree::AggregateAccum(Value val) {</span>
+<span class="lineNum">     493 </span><span class="lineCov">        969 :         switch (window_type) {</span>
+<span class="lineNum">     494 </span><span class="lineCov">        901 :         case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">     495 </span>            :         case ExpressionType::WINDOW_AVG:
+<span class="lineNum">     496 </span><span class="lineCov">        901 :                 aggregate = aggregate + val;</span>
+<span class="lineNum">     497 </span><span class="lineCov">        901 :                 break;</span>
+<span class="lineNum">     498 </span><span class="lineCov">         34 :         case ExpressionType::WINDOW_MIN:</span>
+<span class="lineNum">     499 </span><span class="lineCov">         34 :                 if (val &lt; aggregate) {</span>
+<span class="lineNum">     500 </span><span class="lineCov">         12 :                         aggregate = val;</span>
+<span class="lineNum">     501 </span>            :                 }
+<span class="lineNum">     502 </span><span class="lineCov">         34 :                 break;</span>
+<span class="lineNum">     503 </span><span class="lineCov">         34 :         case ExpressionType::WINDOW_MAX:</span>
+<span class="lineNum">     504 </span><span class="lineCov">         34 :                 if (val &gt; aggregate) {</span>
+<span class="lineNum">     505 </span><span class="lineCov">         24 :                         aggregate = val;</span>
+<span class="lineNum">     506 </span>            :                 }
+<span class="lineNum">     507 </span><span class="lineCov">         34 :                 break;</span>
+<span class="lineNum">     508 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     509 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window Type&quot;);</span>
+<span class="lineNum">     510 </span>            :         }
+<span class="lineNum">     511 </span><span class="lineCov">        969 :         n_aggregated++;</span>
+<a name="512"><span class="lineNum">     512 </span><span class="lineCov">        969 : }</span></a>
+<span class="lineNum">     513 </span>            : 
+<span class="lineNum">     514 </span><span class="lineCov">        263 : Value WindowSegmentTree::AggegateFinal() {</span>
+<span class="lineNum">     515 </span><span class="lineCov">        263 :         if (n_aggregated == 0) {</span>
+<span class="lineNum">     516 </span><span class="lineNoCov">          0 :                 return Value().CastAs(payload_type);</span>
+<span class="lineNum">     517 </span>            :         }
+<span class="lineNum">     518 </span><span class="lineCov">        263 :         switch (window_type) {</span>
+<span class="lineNum">     519 </span><span class="lineCov">        252 :         case ExpressionType::WINDOW_SUM:</span>
+<span class="lineNum">     520 </span>            :         case ExpressionType::WINDOW_MIN:
+<span class="lineNum">     521 </span>            :         case ExpressionType::WINDOW_MAX:
+<span class="lineNum">     522 </span><span class="lineCov">        252 :                 return aggregate;</span>
+<span class="lineNum">     523 </span><span class="lineCov">         11 :         case ExpressionType::WINDOW_AVG:</span>
+<span class="lineNum">     524 </span><span class="lineCov">         11 :                 return aggregate / Value::Numeric(payload_type, n_aggregated);</span>
+<span class="lineNum">     525 </span><span class="lineNoCov">          0 :         default:</span>
+<span class="lineNum">     526 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Window Type&quot;);</span>
+<span class="lineNum">     527 </span>            :         }
+<span class="lineNum">     528 </span>            : 
+<span class="lineNum">     529 </span>            :         return aggregate;
+<a name="530"><span class="lineNum">     530 </span>            : }</a>
+<span class="lineNum">     531 </span>            : 
+<span class="lineNum">     532 </span><span class="lineCov">         19 : void WindowSegmentTree::Construct(ChunkCollection &amp;input) {</span>
+<span class="lineNum">     533 </span><span class="lineCov">         19 :         assert(input.column_count() == 1);</span>
+<span class="lineNum">     534 </span><span class="lineCov">         19 :         AggregateInit();</span>
+<span class="lineNum">     535 </span><span class="lineCov">         19 :         input_ref = &amp;input;</span>
+<span class="lineNum">     536 </span>            :         // level 0 is data itself
+<span class="lineNum">     537 </span>            :         size_t level_size;
+<span class="lineNum">     538 </span><span class="lineCov">         43 :         while ((level_size = (levels.size() == 0 ? input_ref-&gt;count : levels[levels.size() - 1].size())) &gt; 1) {</span>
+<span class="lineNum">     539 </span><span class="lineCov">         48 :                 vector&lt;Value&gt; nl;</span>
+<span class="lineNum">     540 </span><span class="lineCov">         24 :                 size_t fanout_count = 0;</span>
+<span class="lineNum">     541 </span><span class="lineCov">        270 :                 for (size_t pos = 0; pos &lt; level_size; pos++) {</span>
+<span class="lineNum">     542 </span><span class="lineCov">        482 :                         AggregateAccum((levels.size() == 0 ? input_ref-&gt;GetValue(0, pos) : levels[levels.size() - 1][pos]));</span>
+<span class="lineNum">     543 </span><span class="lineCov">        246 :                         fanout_count++;</span>
+<span class="lineNum">     544 </span><span class="lineCov">        246 :                         if (fanout_count == fanout) {</span>
+<span class="lineNum">     545 </span><span class="lineCov">          5 :                                 nl.push_back(AggegateFinal());</span>
+<span class="lineNum">     546 </span><span class="lineCov">          5 :                                 AggregateInit();</span>
+<span class="lineNum">     547 </span><span class="lineCov">          5 :                                 fanout_count = 0;</span>
+<span class="lineNum">     548 </span>            :                         }
+<span class="lineNum">     549 </span>            :                 }
+<span class="lineNum">     550 </span><span class="lineCov">         24 :                 if (fanout_count &gt; 0) {</span>
+<span class="lineNum">     551 </span><span class="lineCov">         24 :                         nl.push_back(AggegateFinal());</span>
+<span class="lineNum">     552 </span>            :                 }
+<span class="lineNum">     553 </span><span class="lineCov">         24 :                 levels.push_back(nl);</span>
+<span class="lineNum">     554 </span>            :         }
+<a name="555"><span class="lineNum">     555 </span><span class="lineCov">         19 : }</span></a>
+<span class="lineNum">     556 </span>            : 
+<span class="lineNum">     557 </span><span class="lineCov">        282 : void WindowSegmentTree::WindowSegmentValue(size_t l_idx, size_t begin, size_t end) {</span>
+<span class="lineNum">     558 </span><span class="lineCov">        282 :         assert(begin &lt;= end);</span>
+<span class="lineNum">     559 </span><span class="lineCov">       1005 :         for (size_t pos = begin; pos &lt; end; pos++) {</span>
+<span class="lineNum">     560 </span><span class="lineCov">        723 :                 AggregateAccum(l_idx == 0 ? input_ref-&gt;GetValue(0, pos) : levels[l_idx - 1][pos]);</span>
+<span class="lineNum">     561 </span>            :         }
+<a name="562"><span class="lineNum">     562 </span><span class="lineCov">        282 : }</span></a>
+<span class="lineNum">     563 </span>            : 
+<span class="lineNum">     564 </span><span class="lineCov">        234 : Value WindowSegmentTree::Compute(size_t begin, size_t end) {</span>
+<span class="lineNum">     565 </span><span class="lineCov">        234 :         assert(input_ref);</span>
+<span class="lineNum">     566 </span><span class="lineCov">        234 :         AggregateInit();</span>
+<span class="lineNum">     567 </span><span class="lineCov">        259 :         for (size_t l_idx = 0; l_idx &lt; levels.size() + 1; l_idx++) {</span>
+<span class="lineNum">     568 </span><span class="lineCov">        259 :                 size_t parent_begin = begin / fanout;</span>
+<span class="lineNum">     569 </span><span class="lineCov">        259 :                 size_t parent_end = end / fanout;</span>
+<span class="lineNum">     570 </span><span class="lineCov">        259 :                 if (parent_begin == parent_end) {</span>
+<span class="lineNum">     571 </span><span class="lineCov">        234 :                         WindowSegmentValue(l_idx, begin, end);</span>
+<span class="lineNum">     572 </span><span class="lineCov">        234 :                         return AggegateFinal();</span>
+<span class="lineNum">     573 </span>            :                 }
+<span class="lineNum">     574 </span><span class="lineCov">         25 :                 size_t group_begin = parent_begin * fanout;</span>
+<span class="lineNum">     575 </span><span class="lineCov">         25 :                 if (begin != group_begin) {</span>
+<span class="lineNum">     576 </span><span class="lineCov">         25 :                         WindowSegmentValue(l_idx, begin, group_begin + fanout);</span>
+<span class="lineNum">     577 </span><span class="lineCov">         25 :                         parent_begin++;</span>
+<span class="lineNum">     578 </span>            :                 }
+<span class="lineNum">     579 </span><span class="lineCov">         25 :                 size_t group_end = parent_end * fanout;</span>
+<span class="lineNum">     580 </span><span class="lineCov">         25 :                 if (end != group_end) {</span>
+<span class="lineNum">     581 </span><span class="lineCov">         23 :                         WindowSegmentValue(l_idx, group_end, end);</span>
+<span class="lineNum">     582 </span>            :                 }
+<span class="lineNum">     583 </span><span class="lineCov">         25 :                 begin = parent_begin;</span>
+<span class="lineNum">     584 </span><span class="lineCov">         25 :                 end = parent_end;</span>
+<span class="lineNum">     585 </span>            :         }
+<span class="lineNum">     586 </span>            : 
+<span class="lineNum">     587 </span><span class="lineNoCov">          0 :         return AggegateFinal();</span>
+<span class="lineNum">     588 </span>            : }
 </pre>
       </td>
     </tr>

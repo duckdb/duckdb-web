@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/parser/expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/parser/expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">36</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -97,34 +97,34 @@
 <span class="lineNum">      35 </span>            : class Expression : public Printable {
 <a name="36"><span class="lineNum">      36 </span>            : public:</a>
 <span class="lineNum">      37 </span>            :         //! Create an Expression
-<span class="lineNum">      38 </span><span class="lineCov">    6811391 :         Expression(ExpressionType type) : type(type), stats(*this) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">    6810479 :         }</span>
+<span class="lineNum">      38 </span><span class="lineCov">    6810960 :         Expression(ExpressionType type) : type(type), stats(*this) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">    6809988 :         }</span>
 <a name="40"><span class="lineNum">      40 </span>            :         //! Create an Expression with zero, one or two children with the</a>
 <span class="lineNum">      41 </span>            :         //! specified return type
-<span class="lineNum">      42 </span><span class="lineCov">   23630053 :         Expression(ExpressionType type, TypeId return_type, unique_ptr&lt;Expression&gt; left = nullptr,</span>
+<span class="lineNum">      42 </span><span class="lineCov">   23630693 :         Expression(ExpressionType type, TypeId return_type, unique_ptr&lt;Expression&gt; left = nullptr,</span>
 <span class="lineNum">      43 </span>            :                    unique_ptr&lt;Expression&gt; right = nullptr)
-<span class="lineNum">      44 </span><span class="lineCov">   23630053 :             : type(type), return_type(return_type), stats(*this) {</span>
-<span class="lineNum">      45 </span><span class="lineCov">   23631976 :                 if (left)</span>
-<span class="lineNum">      46 </span><span class="lineCov">    9939652 :                         AddChild(std::move(left));</span>
-<span class="lineNum">      47 </span><span class="lineCov">   23624573 :                 if (right)</span>
-<span class="lineNum">      48 </span><span class="lineCov">    7960654 :                         AddChild(std::move(right));</span>
-<span class="lineNum">      49 </span><span class="lineCov">   23629907 :         }</span>
+<span class="lineNum">      44 </span><span class="lineCov">   23630693 :             : type(type), return_type(return_type), stats(*this) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">   23631257 :                 if (left)</span>
+<span class="lineNum">      46 </span><span class="lineCov">    9940004 :                         AddChild(std::move(left));</span>
+<span class="lineNum">      47 </span><span class="lineCov">   23625607 :                 if (right)</span>
+<span class="lineNum">      48 </span><span class="lineCov">    7961531 :                         AddChild(std::move(right));</span>
+<span class="lineNum">      49 </span><span class="lineCov">   23628731 :         }</span>
 <span class="lineNum">      50 </span>            : 
 <span class="lineNum">      51 </span>            :         virtual unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *) = 0;
 <span class="lineNum">      52 </span>            :         virtual void AcceptChildren(SQLNodeVisitor *v);
 <a name="53"><span class="lineNum">      53 </span>            : </a>
 <span class="lineNum">      54 </span>            :         //! Resolves the type for this expression based on its children
-<span class="lineNum">      55 </span><span class="lineCov">   28481202 :         virtual void ResolveType() {</span>
-<span class="lineNum">      56 </span><span class="lineCov">   49125474 :                 for (auto &amp;child : children) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">   20642313 :                         child-&gt;ResolveType();</span>
+<span class="lineNum">      55 </span><span class="lineCov">   28480864 :         virtual void ResolveType() {</span>
+<span class="lineNum">      56 </span><span class="lineCov">   49125912 :                 for (auto &amp;child : children) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">   20642681 :                         child-&gt;ResolveType();</span>
 <span class="lineNum">      58 </span>            :                 }
-<span class="lineNum">      59 </span><span class="lineCov">   28489399 :         }</span>
+<span class="lineNum">      59 </span><span class="lineCov">   28489704 :         }</span>
 <span class="lineNum">      60 </span>            : 
 <a name="61"><span class="lineNum">      61 </span>            :         //! Add a child node to the Expression. Note that the order of</a>
 <span class="lineNum">      62 </span>            :         //! adding children is important in most cases
-<span class="lineNum">      63 </span><span class="lineCov">   19215964 :         void AddChild(unique_ptr&lt;Expression&gt; child) {</span>
-<span class="lineNum">      64 </span><span class="lineCov">   19215964 :                 children.push_back(std::move(child));</span>
-<span class="lineNum">      65 </span><span class="lineCov">   19212606 :         }</span>
+<span class="lineNum">      63 </span><span class="lineCov">   19214976 :         void AddChild(unique_ptr&lt;Expression&gt; child) {</span>
+<span class="lineNum">      64 </span><span class="lineCov">   19214976 :                 children.push_back(std::move(child));</span>
+<span class="lineNum">      65 </span><span class="lineCov">   19214678 :         }</span>
 <span class="lineNum">      66 </span>            : 
 <span class="lineNum">      67 </span>            :         //! Returns true if this Expression is an aggregate or not.
 <span class="lineNum">      68 </span>            :         /*!
@@ -146,8 +146,8 @@
 <span class="lineNum">      84 </span>            :         virtual bool IsScalar();
 <a name="85"><span class="lineNum">      85 </span>            : </a>
 <span class="lineNum">      86 </span>            :         //! Returns the type of the expression
-<span class="lineNum">      87 </span><span class="lineCov">    9117947 :         ExpressionType GetExpressionType() {</span>
-<span class="lineNum">      88 </span><span class="lineCov">    9117947 :                 return type;</span>
+<span class="lineNum">      87 </span><span class="lineCov">    9117788 :         ExpressionType GetExpressionType() {</span>
+<span class="lineNum">      88 </span><span class="lineCov">    9117788 :                 return type;</span>
 <span class="lineNum">      89 </span>            :         }
 <span class="lineNum">      90 </span>            : 
 <span class="lineNum">      91 </span>            :         //! Creates a hash value of this expression. It is important that if two expressions are identical (i.e.

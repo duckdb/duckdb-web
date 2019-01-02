@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - planner/logical_operator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - planner/logical_operator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">23</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -98,19 +98,19 @@
 <span class="lineNum">      36 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="37"><span class="lineNum">      37 </span>            : }</a>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">   12406374 : void LogicalOperator::ResolveOperatorTypes() {</span>
+<span class="lineNum">      39 </span><span class="lineCov">   12406031 : void LogicalOperator::ResolveOperatorTypes() {</span>
 <span class="lineNum">      40 </span>            :         // if (types.size() &gt; 0) {
 <span class="lineNum">      41 </span>            :         //      // types already resolved for this node
 <span class="lineNum">      42 </span>            :         //      return;
 <span class="lineNum">      43 </span>            :         // }
-<span class="lineNum">      44 </span><span class="lineCov">   12406374 :         types.clear();</span>
+<span class="lineNum">      44 </span><span class="lineCov">   12406031 :         types.clear();</span>
 <span class="lineNum">      45 </span>            :         // first resolve child types
-<span class="lineNum">      46 </span><span class="lineCov">   21669803 :         for (auto &amp;child : children) {</span>
-<span class="lineNum">      47 </span><span class="lineCov">    9268268 :                 child-&gt;ResolveOperatorTypes();</span>
+<span class="lineNum">      46 </span><span class="lineCov">   21670871 :         for (auto &amp;child : children) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">    9268961 :                 child-&gt;ResolveOperatorTypes();</span>
 <span class="lineNum">      48 </span>            :         }
 <span class="lineNum">      49 </span>            :         // now resolve the types for this operator
-<span class="lineNum">      50 </span><span class="lineCov">   12407243 :         ResolveTypes();</span>
-<a name="51"><span class="lineNum">      51 </span><span class="lineCov">   12399319 : }</span></a>
+<span class="lineNum">      50 </span><span class="lineCov">   12405724 :         ResolveTypes();</span>
+<a name="51"><span class="lineNum">      51 </span><span class="lineCov">   12404012 : }</span></a>
 <span class="lineNum">      52 </span>            : 
 <span class="lineNum">      53 </span><span class="lineNoCov">          0 : string LogicalOperator::ToString() const {</span>
 <span class="lineNum">      54 </span><span class="lineNoCov">          0 :         string result = LogicalOperatorToString(type);</span>
@@ -129,15 +129,15 @@
 <span class="lineNum">      67 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="68"><span class="lineNum">      68 </span>            : }</a>
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">  109278062 : size_t LogicalOperator::ExpressionCount() {</span>
-<span class="lineNum">      71 </span><span class="lineCov">  109278062 :         return expressions.size();</span>
+<span class="lineNum">      70 </span><span class="lineCov">  109275440 : size_t LogicalOperator::ExpressionCount() {</span>
+<span class="lineNum">      71 </span><span class="lineCov">  109275440 :         return expressions.size();</span>
 <a name="72"><span class="lineNum">      72 </span>            : }</a>
 <span class="lineNum">      73 </span>            : 
-<span class="lineNum">      74 </span><span class="lineCov">    9224460 : Expression *LogicalOperator::GetExpression(size_t index) {</span>
-<span class="lineNum">      75 </span><span class="lineCov">    9224460 :         if (index &gt;= ExpressionCount()) {</span>
+<span class="lineNum">      74 </span><span class="lineCov">    9224116 : Expression *LogicalOperator::GetExpression(size_t index) {</span>
+<span class="lineNum">      75 </span><span class="lineCov">    9224116 :         if (index &gt;= ExpressionCount()) {</span>
 <span class="lineNum">      76 </span><span class="lineNoCov">          0 :                 throw OutOfRangeException(&quot;GetExpression(): Expression index out of range!&quot;);</span>
 <span class="lineNum">      77 </span>            :         }
-<span class="lineNum">      78 </span><span class="lineCov">    9226995 :         return expressions[index].get();</span>
+<span class="lineNum">      78 </span><span class="lineCov">    9226114 :         return expressions[index].get();</span>
 <a name="79"><span class="lineNum">      79 </span>            : }</a>
 <span class="lineNum">      80 </span>            : 
 <span class="lineNum">      81 </span><span class="lineCov">     404707 : void LogicalOperator::SetExpression(size_t index, unique_ptr&lt;Expression&gt; expr) {</span>

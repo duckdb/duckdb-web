@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - parser/transformer.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - parser/transformer.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">30</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -69,38 +69,38 @@
 <span class="lineNum">       7 </span>            : using namespace postgres;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">    3175190 : bool Transformer::TransformParseTree(List *tree, vector&lt;unique_ptr&lt;SQLStatement&gt;&gt; &amp;statements) {</span>
-<span class="lineNum">      11 </span><span class="lineCov">    6350898 :         for (auto entry = tree-&gt;head; entry != nullptr; entry = entry-&gt;next) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">    3176018 :                 auto stmt = TransformStatement((Node *)entry-&gt;data.ptr_value);</span>
-<span class="lineNum">      13 </span><span class="lineCov">    3174402 :                 if (!stmt) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3175138 : bool Transformer::TransformParseTree(List *tree, vector&lt;unique_ptr&lt;SQLStatement&gt;&gt; &amp;statements) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">    6350904 :         for (auto entry = tree-&gt;head; entry != nullptr; entry = entry-&gt;next) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    3176120 :                 auto stmt = TransformStatement((Node *)entry-&gt;data.ptr_value);</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3174262 :                 if (!stmt) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         statements.clear();</span>
 <span class="lineNum">      15 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">      16 </span>            :                 }
-<span class="lineNum">      17 </span><span class="lineCov">    3174301 :                 statements.push_back(move(stmt));</span>
+<span class="lineNum">      17 </span><span class="lineCov">    3174174 :                 statements.push_back(move(stmt));</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">    3174880 :         return true;</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3174784 :         return true;</span>
 <a name="20"><span class="lineNum">      20 </span>            : }</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    3175301 : unique_ptr&lt;SQLStatement&gt; Transformer::TransformStatement(Node *stmt) {</span>
-<span class="lineNum">      23 </span><span class="lineCov">    3175301 :         switch (stmt-&gt;type) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">    3010136 :         case T_SelectStmt:</span>
-<span class="lineNum">      25 </span><span class="lineCov">    3010136 :                 return TransformSelect(stmt);</span>
+<span class="lineNum">      22 </span><span class="lineCov">    3175229 : unique_ptr&lt;SQLStatement&gt; Transformer::TransformStatement(Node *stmt) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">    3175229 :         switch (stmt-&gt;type) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">    3009924 :         case T_SelectStmt:</span>
+<span class="lineNum">      25 </span><span class="lineCov">    3009924 :                 return TransformSelect(stmt);</span>
 <span class="lineNum">      26 </span><span class="lineCov">       1210 :         case T_CreateStmt:</span>
 <span class="lineNum">      27 </span><span class="lineCov">       1210 :                 return TransformCreateTable(stmt);</span>
 <span class="lineNum">      28 </span><span class="lineCov">         10 :         case T_CreateSchemaStmt:</span>
 <span class="lineNum">      29 </span><span class="lineCov">         10 :                 return TransformCreateSchema(stmt);</span>
 <span class="lineNum">      30 </span><span class="lineCov">         27 :         case T_DropStmt:</span>
 <span class="lineNum">      31 </span><span class="lineCov">         27 :                 return TransformDrop(stmt);</span>
-<span class="lineNum">      32 </span><span class="lineCov">      40168 :         case T_InsertStmt:</span>
-<span class="lineNum">      33 </span><span class="lineCov">      40168 :                 return TransformInsert(stmt);</span>
+<span class="lineNum">      32 </span><span class="lineCov">      40162 :         case T_InsertStmt:</span>
+<span class="lineNum">      33 </span><span class="lineCov">      40162 :                 return TransformInsert(stmt);</span>
 <span class="lineNum">      34 </span><span class="lineCov">          7 :         case T_CopyStmt:</span>
 <span class="lineNum">      35 </span><span class="lineCov">          7 :                 return TransformCopy(stmt);</span>
-<span class="lineNum">      36 </span><span class="lineCov">      42041 :         case T_TransactionStmt:</span>
-<span class="lineNum">      37 </span><span class="lineCov">      42041 :                 return TransformTransaction(stmt);</span>
-<span class="lineNum">      38 </span><span class="lineCov">        909 :         case T_DeleteStmt:</span>
-<span class="lineNum">      39 </span><span class="lineCov">        909 :                 return TransformDelete(stmt);</span>
-<span class="lineNum">      40 </span><span class="lineCov">      81055 :         case T_UpdateStmt:</span>
-<span class="lineNum">      41 </span><span class="lineCov">      81055 :                 return TransformUpdate(stmt);</span>
+<span class="lineNum">      36 </span><span class="lineCov">      42093 :         case T_TransactionStmt:</span>
+<span class="lineNum">      37 </span><span class="lineCov">      42093 :                 return TransformTransaction(stmt);</span>
+<span class="lineNum">      38 </span><span class="lineCov">        907 :         case T_DeleteStmt:</span>
+<span class="lineNum">      39 </span><span class="lineCov">        907 :                 return TransformDelete(stmt);</span>
+<span class="lineNum">      40 </span><span class="lineCov">      81127 :         case T_UpdateStmt:</span>
+<span class="lineNum">      41 </span><span class="lineCov">      81127 :                 return TransformUpdate(stmt);</span>
 <span class="lineNum">      42 </span><span class="lineCov">          8 :         case T_IndexStmt:</span>
 <span class="lineNum">      43 </span><span class="lineCov">          8 :                 return TransformCreateIndex(stmt);</span>
 <span class="lineNum">      44 </span><span class="lineNoCov">          0 :         case T_AlterTableStmt:</span>

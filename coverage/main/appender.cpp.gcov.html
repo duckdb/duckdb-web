@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - main/appender.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - main/appender.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">76</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -93,27 +93,27 @@
 <span class="lineNum">      31 </span><span class="lineCov">         47 :         Rollback();</span>
 <a name="32"><span class="lineNum">      32 </span><span class="lineCov">         47 : }</span></a>
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">    2071208 : void Appender::CheckAppend(TypeId type) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">    2071208 :         if (column &gt;= chunk.column_count) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">    2075217 : void Appender::CheckAppend(TypeId type) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">    2075217 :         if (column &gt;= chunk.column_count) {</span>
 <span class="lineNum">      36 </span><span class="lineCov">          1 :                 throw Exception(&quot;Too many appends for chunk!&quot;);</span>
 <span class="lineNum">      37 </span>            :         }
-<span class="lineNum">      38 </span><span class="lineCov">    2071207 :         assert(type == TypeId::INVALID || chunk.data[column].type == type);</span>
-<a name="39"><span class="lineNum">      39 </span><span class="lineCov">    2066780 : }</span></a>
+<span class="lineNum">      38 </span><span class="lineCov">    2075216 :         assert(type == TypeId::INVALID || chunk.data[column].type == type);</span>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">    2071370 : }</span></a>
 <span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">    2055035 : void Appender::BeginRow() {</span>
-<span class="lineNum">      42 </span><span class="lineCov">    2055035 :         column = 0;</span>
-<a name="43"><span class="lineNum">      43 </span><span class="lineCov">    2055035 : }</span></a>
+<span class="lineNum">      41 </span><span class="lineCov">    2060008 : void Appender::BeginRow() {</span>
+<span class="lineNum">      42 </span><span class="lineCov">    2060008 :         column = 0;</span>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">    2060008 : }</span></a>
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">    2055342 : void Appender::EndRow() {</span>
+<span class="lineNum">      45 </span><span class="lineCov">    2060139 : void Appender::EndRow() {</span>
 <span class="lineNum">      46 </span>            :         // check that all rows have been appended to
-<span class="lineNum">      47 </span><span class="lineCov">    2055342 :         if (column != chunk.column_count) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">    2060139 :         if (column != chunk.column_count) {</span>
 <span class="lineNum">      48 </span>            :                 throw Exception(&quot;Call to Appender::EndRow() without all rows having been &quot;
 <span class="lineNum">      49 </span><span class="lineCov">          1 :                                 &quot;appended to!&quot;);</span>
 <span class="lineNum">      50 </span>            :         }
-<span class="lineNum">      51 </span><span class="lineCov">    2055341 :         if (chunk.size() &gt;= STANDARD_VECTOR_SIZE) {</span>
-<span class="lineNum">      52 </span><span class="lineCov">       1995 :                 Flush();</span>
+<span class="lineNum">      51 </span><span class="lineCov">    2060138 :         if (chunk.size() &gt;= STANDARD_VECTOR_SIZE) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">       1994 :                 Flush();</span>
 <span class="lineNum">      53 </span>            :         }
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">    2055981 : }</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">    2060812 : }</span></a>
 <span class="lineNum">      55 </span>            : 
 <span class="lineNum">      56 </span><span class="lineCov">       2000 : void Appender::AppendTinyInt(int8_t value) {</span>
 <span class="lineNum">      57 </span><span class="lineCov">       2000 :         CheckAppend(TypeId::TINYINT);</span>
@@ -127,11 +127,11 @@
 <span class="lineNum">      65 </span><span class="lineCov">       2000 :         ((int16_t *)col.data)[col.count++] = value;</span>
 <a name="66"><span class="lineNum">      66 </span><span class="lineCov">       2000 : }</span></a>
 <span class="lineNum">      67 </span>            : 
-<span class="lineNum">      68 </span><span class="lineCov">    2052337 : void Appender::AppendInteger(int value) {</span>
-<span class="lineNum">      69 </span><span class="lineCov">    2052337 :         CheckAppend(TypeId::INTEGER);</span>
-<span class="lineNum">      70 </span><span class="lineCov">    2054987 :         auto &amp;col = chunk.data[column++];</span>
-<span class="lineNum">      71 </span><span class="lineCov">    2051987 :         ((int32_t *)col.data)[col.count++] = value;</span>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    2051987 : }</span></a>
+<span class="lineNum">      68 </span><span class="lineCov">    2057280 : void Appender::AppendInteger(int value) {</span>
+<span class="lineNum">      69 </span><span class="lineCov">    2057280 :         CheckAppend(TypeId::INTEGER);</span>
+<span class="lineNum">      70 </span><span class="lineCov">    2059575 :         auto &amp;col = chunk.data[column++];</span>
+<span class="lineNum">      71 </span><span class="lineCov">    2056447 :         ((int32_t *)col.data)[col.count++] = value;</span>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    2056447 : }</span></a>
 <span class="lineNum">      73 </span>            : 
 <span class="lineNum">      74 </span><span class="lineCov">       2000 : void Appender::AppendBigInt(int64_t value) {</span>
 <span class="lineNum">      75 </span><span class="lineCov">       2000 :         CheckAppend(TypeId::BIGINT);</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - parser/parser.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - parser/parser.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">55</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -73,69 +73,69 @@
 <span class="lineNum">      11 </span>            :         void *context = nullptr;
 <a name="12"><span class="lineNum">      12 </span>            :         PgQueryInternalParsetreeAndError result;</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">    6347927 :         ~PGParseContext() {</span>
-<span class="lineNum">      15 </span><span class="lineCov">    3173894 :                 if (context) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    3175960 :                         pg_query_parse_finish(context);</span>
-<span class="lineNum">      17 </span><span class="lineCov">    3178253 :                         pg_query_free_parse_result(result);</span>
+<span class="lineNum">      14 </span><span class="lineCov">    6349776 :         ~PGParseContext() {</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3173630 :                 if (context) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3175073 :                         pg_query_parse_finish(context);</span>
+<span class="lineNum">      17 </span><span class="lineCov">    3178224 :                         pg_query_free_parse_result(result);</span>
 <span class="lineNum">      18 </span>            :                 }
-<span class="lineNum">      19 </span><span class="lineCov">    3174033 :         }</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3176146 :         }</span>
 <a name="20"><span class="lineNum">      20 </span>            : };</a>
 <span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">    3176078 : Parser::Parser(ClientContext &amp;context) : context(context) {</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    3175983 : }</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">    3175895 : Parser::Parser(ClientContext &amp;context) : context(context) {</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">    3175833 : }</span></a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">    3176454 : void Parser::ParseQuery(string query) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">    3176466 :         PGParseContext parse_context;</span>
+<span class="lineNum">      25 </span><span class="lineCov">    3176240 : void Parser::ParseQuery(string query) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    3176252 :         PGParseContext parse_context;</span>
 <span class="lineNum">      27 </span>            :         // first try to parse any PRAGMA statements
-<span class="lineNum">      28 </span><span class="lineCov">    3176409 :         if (ParsePragma(query)) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3176123 :         if (ParsePragma(query)) {</span>
 <span class="lineNum">      29 </span>            :                 // query parsed as pragma statement
 <span class="lineNum">      30 </span>            :                 // if there was no error we were successful
 <span class="lineNum">      31 </span><span class="lineCov">          4 :                 return;</span>
 <span class="lineNum">      32 </span>            :         }
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span>            :         // use the postgres parser to parse the query
-<span class="lineNum">      35 </span><span class="lineCov">    3176036 :         parse_context.context = pg_query_parse_init();</span>
-<span class="lineNum">      36 </span><span class="lineCov">    3177695 :         parse_context.result = pg_query_parse(query.c_str());</span>
+<span class="lineNum">      35 </span><span class="lineCov">    3176005 :         parse_context.context = pg_query_parse_init();</span>
+<span class="lineNum">      36 </span><span class="lineCov">    3177875 :         parse_context.result = pg_query_parse(query.c_str());</span>
 <span class="lineNum">      37 </span>            :         // check if it succeeded
-<span class="lineNum">      38 </span><span class="lineCov">    3175966 :         if (parse_context.result.error) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">    3175762 :         if (parse_context.result.error) {</span>
 <span class="lineNum">      39 </span><span class="lineCov">          9 :                 throw ParserException(string(parse_context.result.error-&gt;message) + &quot;[&quot; +</span>
 <span class="lineNum">      40 </span><span class="lineCov">         18 :                                       to_string(parse_context.result.error-&gt;lineno) + &quot;:&quot; +</span>
 <span class="lineNum">      41 </span><span class="lineCov">         12 :                                       to_string(parse_context.result.error-&gt;cursorpos) + &quot;]&quot;);</span>
 <span class="lineNum">      42 </span>            :                 return;
 <span class="lineNum">      43 </span>            :         }
 <span class="lineNum">      44 </span>            : 
-<span class="lineNum">      45 </span><span class="lineCov">    3175963 :         if (!parse_context.result.tree) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">    3175759 :         if (!parse_context.result.tree) {</span>
 <span class="lineNum">      46 </span>            :                 // empty statement
 <span class="lineNum">      47 </span><span class="lineNoCov">          0 :                 return;</span>
 <span class="lineNum">      48 </span>            :         }
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span>            :         // if it succeeded, we transform the Postgres parse tree into a list of
 <span class="lineNum">      51 </span>            :         // SQLStatements
-<span class="lineNum">      52 </span><span class="lineCov">    6349953 :         Transformer transformer;</span>
-<span class="lineNum">      53 </span><span class="lineCov">    3175373 :         transformer.TransformParseTree(parse_context.result.tree, statements);</span>
+<span class="lineNum">      52 </span><span class="lineCov">    6350304 :         Transformer transformer;</span>
+<span class="lineNum">      53 </span><span class="lineCov">    3175235 :         transformer.TransformParseTree(parse_context.result.tree, statements);</span>
 <span class="lineNum">      54 </span>            : }
 <span class="lineNum">      55 </span>            : 
 <a name="56"><span class="lineNum">      56 </span>            : enum class PragmaType : uint8_t { NOTHING, ASSIGNMENT, CALL };</a>
 <span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span><span class="lineCov">    3176106 : bool Parser::ParsePragma(string &amp;query) {</span>
+<span class="lineNum">      58 </span><span class="lineCov">    3175996 : bool Parser::ParsePragma(string &amp;query) {</span>
 <span class="lineNum">      59 </span>            :         // check if there is a PRAGMA statement, this is done before calling the
 <span class="lineNum">      60 </span>            :         // postgres parser
-<span class="lineNum">      61 </span><span class="lineCov">    3176106 :         static const string pragma_string = &quot;PRAGMA&quot;;</span>
-<span class="lineNum">      62 </span><span class="lineCov">    3176106 :         auto query_cstr = query.c_str();</span>
+<span class="lineNum">      61 </span><span class="lineCov">    3175996 :         static const string pragma_string = &quot;PRAGMA&quot;;</span>
+<span class="lineNum">      62 </span><span class="lineCov">    3175996 :         auto query_cstr = query.c_str();</span>
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :         // skip any spaces
-<span class="lineNum">      65 </span><span class="lineCov">    3176103 :         size_t pos = 0;</span>
-<span class="lineNum">      66 </span><span class="lineCov">    3178105 :         while (isspace(query_cstr[pos]))</span>
+<span class="lineNum">      65 </span><span class="lineCov">    3175939 :         size_t pos = 0;</span>
+<span class="lineNum">      66 </span><span class="lineCov">    3177941 :         while (isspace(query_cstr[pos]))</span>
 <span class="lineNum">      67 </span><span class="lineCov">       2002 :                 pos++;</span>
 <span class="lineNum">      68 </span>            : 
-<span class="lineNum">      69 </span><span class="lineCov">    3176103 :         if (pos + pragma_string.size() &gt;= query.size()) {</span>
+<span class="lineNum">      69 </span><span class="lineCov">    3175939 :         if (pos + pragma_string.size() &gt;= query.size()) {</span>
 <span class="lineNum">      70 </span>            :                 // query is too small, can't contain PRAGMA
-<span class="lineNum">      71 </span><span class="lineCov">      10968 :                 return false;</span>
+<span class="lineNum">      71 </span><span class="lineCov">      10998 :                 return false;</span>
 <span class="lineNum">      72 </span>            :         }
 <span class="lineNum">      73 </span>            : 
-<span class="lineNum">      74 </span><span class="lineCov">    3167349 :         if (query.compare(pos, pragma_string.size(), pragma_string.c_str()) != 0) {</span>
+<span class="lineNum">      74 </span><span class="lineCov">    3167253 :         if (query.compare(pos, pragma_string.size(), pragma_string.c_str()) != 0) {</span>
 <span class="lineNum">      75 </span>            :                 // statement does not start with PRAGMA
-<span class="lineNum">      76 </span><span class="lineCov">    3166522 :                 return false;</span>
+<span class="lineNum">      76 </span><span class="lineCov">    3166479 :                 return false;</span>
 <span class="lineNum">      77 </span>            :         }
 <span class="lineNum">      78 </span><span class="lineCov">          7 :         pos += pragma_string.size();</span>
 <span class="lineNum">      79 </span>            :         // string starts with PRAGMA, parse the pragma

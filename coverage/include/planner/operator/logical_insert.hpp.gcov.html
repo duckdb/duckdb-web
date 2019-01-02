@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 5462e40b - include/planner/operator/logical_insert.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/planner/operator/logical_insert.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 5462e40b</td>
+            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 15:45:52</td>
+            <td class="headerValue">2019-01-02 17:09:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -83,20 +83,20 @@
 <span class="lineNum">      21 </span>            :         vector&lt;vector&lt;unique_ptr&lt;Expression&gt;&gt;&gt; insert_values;
 <a name="22"><span class="lineNum">      22 </span>            :         vector&lt;int&gt; column_index_map;</a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">     120484 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">     120484 :                 v-&gt;Visit(*this);</span></a>
-<span class="lineNum">      26 </span><span class="lineCov">     120487 :         }</span>
-<span class="lineNum">      27 </span><span class="lineCov">      40163 :         vector&lt;string&gt; GetNames() override {</span>
-<span class="lineNum">      28 </span><span class="lineCov">      80326 :                 return {&quot;Count&quot;};</span>
+<span class="lineNum">      24 </span><span class="lineCov">     120479 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">     120479 :                 v-&gt;Visit(*this);</span></a>
+<span class="lineNum">      26 </span><span class="lineCov">     120482 :         }</span>
+<span class="lineNum">      27 </span><span class="lineCov">      40158 :         vector&lt;string&gt; GetNames() override {</span>
+<span class="lineNum">      28 </span><span class="lineCov">      80318 :                 return {&quot;Count&quot;};</span>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span>            :         //! The base table to insert into
 <span class="lineNum">      32 </span>            :         TableCatalogEntry *table;
 <a name="33"><span class="lineNum">      33 </span>            : </a>
 <span class="lineNum">      34 </span>            : protected:
-<span class="lineNum">      35 </span><span class="lineCov">      40162 :         void ResolveTypes() override {</span>
-<span class="lineNum">      36 </span><span class="lineCov">      40162 :                 types.push_back(TypeId::BIGINT);</span>
-<span class="lineNum">      37 </span><span class="lineCov">      40161 :         }</span>
+<span class="lineNum">      35 </span><span class="lineCov">      40160 :         void ResolveTypes() override {</span>
+<span class="lineNum">      36 </span><span class="lineCov">      40160 :                 types.push_back(TypeId::BIGINT);</span>
+<span class="lineNum">      37 </span><span class="lineCov">      40158 :         }</span>
 <span class="lineNum">      38 </span>            : };
 <span class="lineNum">      39 </span>            : } // namespace duckdb
 </pre>
