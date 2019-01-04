@@ -1,0 +1,375 @@
+{ "result": 0.009453,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_manufact_id <= 778)\n(i_manufact_id >= 738)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\ni_manufact=#1\n0>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "OR(OR(OR(AND(OR(AND(AND(OR((i_color = powder), (i_color = khaki)), OR((i_units = Ounce), (i_units = Oz))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = brown), (i_color = honeydew)), OR((i_units = Bunch), (i_units = Ton))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = floral), (i_color = deep))), OR((i_units = N/A), (i_units = Dozen))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = light), (i_color = cornflower))), OR((i_units = Box), (i_units = Pound))), OR((i_size = medium), (i_size = extra large)))), OR(OR(AND(OR(AND(AND(OR((i_color = midnight), (i_color = snow)), OR((i_units = Pallet), (i_units = Gross))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = cyan), (i_color = papaya)), OR((i_units = Cup), (i_units = Dram))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = orange), (i_color = frosted))), OR((i_units = Each), (i_units = Tbl))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = forest), (i_color = ghost))), OR((i_units = Lb), (i_units = Bundle))), OR((i_size = medium), (i_size = extra large)))))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009305,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_manufact_id <= 778)\n(i_manufact_id >= 738)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\ni_manufact=#1\n0>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "OR(OR(OR(AND(OR(AND(AND(OR((i_color = powder), (i_color = khaki)), OR((i_units = Ounce), (i_units = Oz))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = brown), (i_color = honeydew)), OR((i_units = Bunch), (i_units = Ton))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = floral), (i_color = deep))), OR((i_units = N/A), (i_units = Dozen))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = light), (i_color = cornflower))), OR((i_units = Box), (i_units = Pound))), OR((i_size = medium), (i_size = extra large)))), OR(OR(AND(OR(AND(AND(OR((i_color = midnight), (i_color = snow)), OR((i_units = Pallet), (i_units = Gross))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = cyan), (i_color = papaya)), OR((i_units = Cup), (i_units = Dram))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = orange), (i_color = frosted))), OR((i_units = Each), (i_units = Tbl))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = forest), (i_color = ghost))), OR((i_units = Lb), (i_units = Bundle))), OR((i_size = medium), (i_size = extra large)))))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009416,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_manufact_id <= 778)\n(i_manufact_id >= 738)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\ni_manufact=#1\n0>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "OR(OR(OR(AND(OR(AND(AND(OR((i_color = powder), (i_color = khaki)), OR((i_units = Ounce), (i_units = Oz))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = brown), (i_color = honeydew)), OR((i_units = Bunch), (i_units = Ton))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = floral), (i_color = deep))), OR((i_units = N/A), (i_units = Dozen))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = light), (i_color = cornflower))), OR((i_units = Box), (i_units = Pound))), OR((i_size = medium), (i_size = extra large)))), OR(OR(AND(OR(AND(AND(OR((i_color = midnight), (i_color = snow)), OR((i_units = Pallet), (i_units = Gross))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = cyan), (i_color = papaya)), OR((i_units = Cup), (i_units = Dram))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = orange), (i_color = frosted))), OR((i_units = Each), (i_units = Tbl))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = forest), (i_color = ghost))), OR((i_units = Lb), (i_units = Bundle))), OR((i_size = medium), (i_size = extra large)))))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009246,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_manufact_id <= 778)\n(i_manufact_id >= 738)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\ni_manufact=#1\n0>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "OR(OR(OR(AND(OR(AND(AND(OR((i_color = powder), (i_color = khaki)), OR((i_units = Ounce), (i_units = Oz))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = brown), (i_color = honeydew)), OR((i_units = Bunch), (i_units = Ton))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = floral), (i_color = deep))), OR((i_units = N/A), (i_units = Dozen))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = light), (i_color = cornflower))), OR((i_units = Box), (i_units = Pound))), OR((i_size = medium), (i_size = extra large)))), OR(OR(AND(OR(AND(AND(OR((i_color = midnight), (i_color = snow)), OR((i_units = Pallet), (i_units = Gross))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = cyan), (i_color = papaya)), OR((i_units = Cup), (i_units = Dram))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = orange), (i_color = frosted))), OR((i_units = Each), (i_units = Tbl))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = forest), (i_color = ghost))), OR((i_units = Lb), (i_units = Bundle))), OR((i_size = medium), (i_size = extra large)))))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009450,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "(i_manufact_id <= 778)\n(i_manufact_id >= 738)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\ni_manufact=#1\n0>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":8,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "OR(OR(OR(AND(OR(AND(AND(OR((i_color = powder), (i_color = khaki)), OR((i_units = Ounce), (i_units = Oz))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = brown), (i_color = honeydew)), OR((i_units = Bunch), (i_units = Ton))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = floral), (i_color = deep))), OR((i_units = N/A), (i_units = Dozen))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = light), (i_color = cornflower))), OR((i_units = Box), (i_units = Pound))), OR((i_size = medium), (i_size = extra large)))), OR(OR(AND(OR(AND(AND(OR((i_color = midnight), (i_color = snow)), OR((i_units = Pallet), (i_units = Gross))), OR((i_size = medium), (i_size = extra large))), AND(AND(OR((i_color = cyan), (i_color = papaya)), OR((i_units = Cup), (i_units = Dram))), OR((i_size = N/A), (i_size = small)))), (i_category = Women)), AND(AND(AND((i_category = Men), OR((i_color = orange), (i_color = frosted))), OR((i_units = Each), (i_units = Tbl))), (i_size = petite))), AND(AND(AND((i_category = Men), OR((i_color = forest), (i_color = ghost))), OR((i_units = Lb), (i_units = Bundle))), OR((i_size = medium), (i_size = extra large)))))\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
