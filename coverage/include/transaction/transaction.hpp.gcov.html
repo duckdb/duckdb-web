@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/transaction/transaction.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/transaction/transaction.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -99,10 +99,10 @@
 <span class="lineNum">      37 </span>            : //! transaction
 <a name="38"><span class="lineNum">      38 </span>            : class Transaction {</a>
 <span class="lineNum">      39 </span>            : public:
-<span class="lineNum">      40 </span><span class="lineCov">    3053880 :         Transaction(transaction_t start_time, transaction_t transaction_id)</span>
-<span class="lineNum">      41 </span><span class="lineCov">    3053880 :             : start_time(start_time), transaction_id(transaction_id), commit_id(0), highest_active_query(0),</span>
-<span class="lineNum">      42 </span><span class="lineCov">    3053880 :               active_query(MAXIMUM_QUERY_ID) {</span>
-<span class="lineNum">      43 </span><span class="lineCov">    3053880 :         }</span>
+<span class="lineNum">      40 </span><span class="lineCov">    3054036 :         Transaction(transaction_t start_time, transaction_t transaction_id)</span>
+<span class="lineNum">      41 </span><span class="lineCov">    3054036 :             : start_time(start_time), transaction_id(transaction_id), commit_id(0), highest_active_query(0),</span>
+<span class="lineNum">      42 </span><span class="lineCov">    3054036 :               active_query(MAXIMUM_QUERY_ID) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">    3054036 :         }</span>
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span>            :         void PushCatalogEntry(CatalogEntry *entry);
 <span class="lineNum">      46 </span>            :         //! Create deleted entries in the undo buffer
@@ -120,9 +120,9 @@
 <span class="lineNum">      58 </span><span class="lineCov">      10118 :                 undo_buffer.Rollback();</span>
 <a name="59"><span class="lineNum">      59 </span><span class="lineCov">      10118 :         }</span></a>
 <span class="lineNum">      60 </span>            :         //! Cleanup the undo buffer
-<span class="lineNum">      61 </span><span class="lineCov">    3043733 :         void Cleanup() {</span>
-<span class="lineNum">      62 </span><span class="lineCov">    3043733 :                 undo_buffer.Cleanup();</span>
-<span class="lineNum">      63 </span><span class="lineCov">    3043733 :         }</span>
+<span class="lineNum">      61 </span><span class="lineCov">    3043889 :         void Cleanup() {</span>
+<span class="lineNum">      62 </span><span class="lineCov">    3043889 :                 undo_buffer.Cleanup();</span>
+<span class="lineNum">      63 </span><span class="lineCov">    3043889 :         }</span>
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span>            :         //! The start timestamp of this transaction
 <span class="lineNum">      66 </span>            :         transaction_t start_time;

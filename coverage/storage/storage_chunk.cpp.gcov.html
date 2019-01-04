@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - storage/storage_chunk.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - storage/storage_chunk.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">50</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -84,14 +84,14 @@
 <span class="lineNum">      22 </span>            :         }
 <a name="23"><span class="lineNum">      23 </span><span class="lineCov">       9769 : }</span></a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">   84685211 : void StorageChunk::Cleanup(VersionInformation *info) {</span>
-<span class="lineNum">      26 </span><span class="lineCov">   84685211 :         size_t entry = info-&gt;prev.entry;</span>
-<span class="lineNum">      27 </span><span class="lineCov">   84685211 :         version_pointers[entry] = info-&gt;next;</span>
-<span class="lineNum">      28 </span><span class="lineCov">   84685211 :         if (version_pointers[entry]) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">   84685224 : void StorageChunk::Cleanup(VersionInformation *info) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">   84685224 :         size_t entry = info-&gt;prev.entry;</span>
+<span class="lineNum">      27 </span><span class="lineCov">   84685224 :         version_pointers[entry] = info-&gt;next;</span>
+<span class="lineNum">      28 </span><span class="lineCov">   84685224 :         if (version_pointers[entry]) {</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 version_pointers[entry]-&gt;prev.entry = entry;</span>
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                 version_pointers[entry]-&gt;chunk = this;</span>
 <span class="lineNum">      31 </span>            :         }
-<a name="32"><span class="lineNum">      32 </span><span class="lineCov">   84685211 : }</span></a>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">   84685224 : }</span></a>
 <span class="lineNum">      33 </span>            : 
 <span class="lineNum">      34 </span><span class="lineCov">      42119 : void StorageChunk::Undo(VersionInformation *info) {</span>
 <span class="lineNum">      35 </span><span class="lineCov">      42119 :         size_t entry = info-&gt;prev.entry;</span>
@@ -111,36 +111,36 @@
 <span class="lineNum">      49 </span>            :         }
 <a name="50"><span class="lineNum">      50 </span><span class="lineCov">      42119 : }</span></a>
 <span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span><span class="lineCov">     213047 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetExclusiveLock() {</span>
-<span class="lineNum">      53 </span><span class="lineCov">     213047 :         exclusive_lock.lock();</span>
-<span class="lineNum">      54 </span><span class="lineCov">  136306567 :         while (read_count != 0)</span>
+<span class="lineNum">      52 </span><span class="lineCov">     209744 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetExclusiveLock() {</span>
+<span class="lineNum">      53 </span><span class="lineCov">     209744 :         exclusive_lock.lock();</span>
+<span class="lineNum">      54 </span><span class="lineCov">  133593064 :         while (read_count != 0)</span>
 <span class="lineNum">      55 </span>            :                 ;
 <span class="lineNum">      56 </span><span class="lineCov">     216285 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::EXCLUSIVE));</span>
 <a name="57"><span class="lineNum">      57 </span>            : }</a>
 <span class="lineNum">      58 </span>            : 
-<span class="lineNum">      59 </span><span class="lineCov">    2885980 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetSharedLock() {</span>
-<span class="lineNum">      60 </span><span class="lineCov">    2885980 :         exclusive_lock.lock();</span>
-<span class="lineNum">      61 </span><span class="lineCov">    2892489 :         read_count++;</span>
-<span class="lineNum">      62 </span><span class="lineCov">    2892503 :         exclusive_lock.unlock();</span>
-<span class="lineNum">      63 </span><span class="lineCov">    2892379 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::SHARED));</span>
+<span class="lineNum">      59 </span><span class="lineCov">    2886488 : unique_ptr&lt;StorageLock&gt; StorageChunk::GetSharedLock() {</span>
+<span class="lineNum">      60 </span><span class="lineCov">    2886488 :         exclusive_lock.lock();</span>
+<span class="lineNum">      61 </span><span class="lineCov">    2892644 :         read_count++;</span>
+<span class="lineNum">      62 </span><span class="lineCov">    2892658 :         exclusive_lock.unlock();</span>
+<span class="lineNum">      63 </span><span class="lineCov">    2892545 :         return unique_ptr&lt;StorageLock&gt;(new StorageLock(this, StorageLockType::SHARED));</span>
 <a name="64"><span class="lineNum">      64 </span>            : }</a>
 <span class="lineNum">      65 </span>            : 
 <span class="lineNum">      66 </span><span class="lineCov">     216285 : void StorageChunk::ReleaseExclusiveLock() {</span>
 <span class="lineNum">      67 </span><span class="lineCov">     216285 :         exclusive_lock.unlock();</span>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">     216283 : }</span></a>
+<a name="68"><span class="lineNum">      68 </span><span class="lineCov">     216285 : }</span></a>
 <span class="lineNum">      69 </span>            : 
-<span class="lineNum">      70 </span><span class="lineCov">    2885635 : void StorageChunk::ReleaseSharedLock() {</span>
-<span class="lineNum">      71 </span><span class="lineCov">    2885635 :         read_count--;</span>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    2891571 : }</span></a>
+<span class="lineNum">      70 </span><span class="lineCov">    2886038 : void StorageChunk::ReleaseSharedLock() {</span>
+<span class="lineNum">      71 </span><span class="lineCov">    2886038 :         read_count--;</span>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">    2891403 : }</span></a>
 <span class="lineNum">      73 </span>            : 
-<span class="lineNum">      74 </span><span class="lineCov">    6210638 : StorageLock::~StorageLock() {</span>
-<span class="lineNum">      75 </span><span class="lineCov">    3101923 :         if (type == StorageLockType::EXCLUSIVE) {</span>
+<span class="lineNum">      74 </span><span class="lineCov">    6211308 : StorageLock::~StorageLock() {</span>
+<span class="lineNum">      75 </span><span class="lineCov">    3102454 :         if (type == StorageLockType::EXCLUSIVE) {</span>
 <span class="lineNum">      76 </span><span class="lineCov">     216285 :                 chunk-&gt;ReleaseExclusiveLock();</span>
 <span class="lineNum">      77 </span>            :         } else {
-<span class="lineNum">      78 </span><span class="lineCov">    2885638 :                 assert(type == StorageLockType::SHARED);</span>
-<span class="lineNum">      79 </span><span class="lineCov">    2885638 :                 chunk-&gt;ReleaseSharedLock();</span>
+<span class="lineNum">      78 </span><span class="lineCov">    2886169 :                 assert(type == StorageLockType::SHARED);</span>
+<span class="lineNum">      79 </span><span class="lineCov">    2886169 :                 chunk-&gt;ReleaseSharedLock();</span>
 <span class="lineNum">      80 </span>            :         }
-<span class="lineNum">      81 </span><span class="lineCov">    3108715 : }</span>
+<span class="lineNum">      81 </span><span class="lineCov">    3108854 : }</span>
 </pre>
       </td>
     </tr>

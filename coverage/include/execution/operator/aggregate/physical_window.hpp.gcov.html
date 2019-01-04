@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/execution/operator/aggregate/physical_window.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/execution/operator/aggregate/physical_window.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">7</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -104,26 +104,26 @@
 <span class="lineNum">      42 </span>            : 
 <a name="43"><span class="lineNum">      43 </span>            : class WindowSegmentTree {</a>
 <span class="lineNum">      44 </span>            : public:
-<span class="lineNum">      45 </span><span class="lineCov">         19 :         WindowSegmentTree(ExpressionType window_type, TypeId payload_type, size_t fanout)</span>
-<span class="lineNum">      46 </span><span class="lineCov">         19 :             : aggregate(Value()), n_aggregated(0), window_type(window_type), payload_type(payload_type), fanout(fanout),</span>
-<span class="lineNum">      47 </span><span class="lineCov">         19 :               input_ref(nullptr) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">         19 :         WindowSegmentTree(ExpressionType window_type, TypeId payload_type, ChunkCollection *input)</span>
+<span class="lineNum">      46 </span><span class="lineCov">         19 :             : aggregate(Value()), n_aggregated(0), window_type(window_type), payload_type(payload_type), input_ref(input) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">         19 :                 ConstructTree();</span>
 <span class="lineNum">      48 </span><span class="lineCov">         19 :         }</span>
-<span class="lineNum">      49 </span>            :         void Construct(ChunkCollection &amp;input);
-<span class="lineNum">      50 </span>            :         Value Compute(size_t start, size_t end);
-<span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span>            : private:
+<span class="lineNum">      49 </span>            :         Value Compute(size_t start, size_t end);
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            : private:
+<span class="lineNum">      52 </span>            :         void ConstructTree();
 <span class="lineNum">      53 </span>            :         void WindowSegmentValue(size_t l_idx, size_t begin, size_t end);
 <span class="lineNum">      54 </span>            :         void AggregateInit();
-<span class="lineNum">      55 </span>            :         void AggregateAccum(Value val);
-<span class="lineNum">      56 </span>            :         Value AggegateFinal();
-<span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span>            :         Value aggregate;
-<span class="lineNum">      59 </span>            :         size_t n_aggregated; // for sum
-<span class="lineNum">      60 </span>            :         ExpressionType window_type;
-<span class="lineNum">      61 </span>            :         TypeId payload_type;
-<span class="lineNum">      62 </span>            :         // FIXME use a native array here
-<span class="lineNum">      63 </span>            :         vector&lt;vector&lt;Value&gt;&gt; levels;
-<span class="lineNum">      64 </span>            :         size_t fanout;
+<span class="lineNum">      55 </span>            :         Value AggegateFinal();
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            :         Value aggregate;
+<span class="lineNum">      58 </span>            :         size_t n_aggregated; // for sum
+<span class="lineNum">      59 </span>            :         ExpressionType window_type;
+<span class="lineNum">      60 </span>            :         TypeId payload_type;
+<span class="lineNum">      61 </span>            :         unique_ptr&lt;char[]&gt; levels_flat_native;
+<span class="lineNum">      62 </span>            :         vector&lt;size_t&gt; levels_flat_start;
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            :         const size_t fanout = 64; // this should cleanly divide STANDARD_VECTOR_SIZE
 <span class="lineNum">      65 </span>            :         ChunkCollection *input_ref;
 <span class="lineNum">      66 </span>            : };
 <span class="lineNum">      67 </span>            : 

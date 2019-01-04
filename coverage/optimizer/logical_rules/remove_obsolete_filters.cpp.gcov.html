@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - optimizer/logical_rules/remove_obsolete_filters.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - optimizer/logical_rules/remove_obsolete_filters.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">64</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -67,20 +67,20 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    3131375 : RemoveObsoleteFilterRule::RemoveObsoleteFilterRule() {</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3131581 : RemoveObsoleteFilterRule::RemoveObsoleteFilterRule() {</span>
 <span class="lineNum">       9 </span>            :         // we match on a filter with at least two equality/gt/lt comparisons
-<span class="lineNum">      10 </span><span class="lineCov">    3134620 :         vector&lt;ExpressionType&gt; matched_types = {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3134967 :         vector&lt;ExpressionType&gt; matched_types = {</span>
 <span class="lineNum">      11 </span>            :             ExpressionType::COMPARE_GREATERTHAN, ExpressionType::COMPARE_GREATERTHANOREQUALTO,
-<span class="lineNum">      12 </span><span class="lineCov">    9403765 :             ExpressionType::COMPARE_LESSTHAN, ExpressionType::COMPARE_LESSTHANOREQUALTO, ExpressionType::COMPARE_EQUAL};</span>
-<span class="lineNum">      13 </span><span class="lineCov">    6268759 :         auto compare_one = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(matched_types);</span>
-<span class="lineNum">      14 </span><span class="lineCov">    3133210 :         auto compare_two = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(matched_types);</span>
+<span class="lineNum">      12 </span><span class="lineCov">    9403908 :             ExpressionType::COMPARE_LESSTHAN, ExpressionType::COMPARE_LESSTHANOREQUALTO, ExpressionType::COMPARE_EQUAL};</span>
+<span class="lineNum">      13 </span><span class="lineCov">    6269083 :         auto compare_one = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(matched_types);</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3134081 :         auto compare_two = make_unique_base&lt;AbstractRuleNode, ExpressionNodeSet&gt;(matched_types);</span>
 <span class="lineNum">      15 </span>            : 
-<span class="lineNum">      16 </span><span class="lineCov">    3135688 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3135800 :         root = make_unique_base&lt;AbstractRuleNode, LogicalNodeType&gt;(LogicalOperatorType::FILTER);</span>
 <span class="lineNum">      17 </span>            : 
-<span class="lineNum">      18 </span><span class="lineCov">    3133069 :         root-&gt;children.push_back(move(compare_one));</span>
-<span class="lineNum">      19 </span><span class="lineCov">    3132946 :         root-&gt;children.push_back(move(compare_two));</span>
-<span class="lineNum">      20 </span><span class="lineCov">    3134890 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
-<a name="21"><span class="lineNum">      21 </span><span class="lineCov">    3131881 : }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">    3133007 :         root-&gt;children.push_back(move(compare_one));</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3133049 :         root-&gt;children.push_back(move(compare_two));</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3134970 :         root-&gt;child_policy = ChildPolicy::SOME;</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">    3132930 : }</span></a>
 <span class="lineNum">      22 </span>            : 
 <span class="lineNum">      23 </span><span class="lineCov">      54486 : static int GetConstantComparison(Expression *expr) {</span>
 <span class="lineNum">      24 </span><span class="lineCov">      54486 :         if (expr-&gt;children[0]-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>

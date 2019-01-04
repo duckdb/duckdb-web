@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/common/types.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/common/types.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">55</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -85,20 +85,20 @@
 <span class="lineNum">      23 </span>            : }
 <a name="24"><span class="lineNum">      24 </span>            : </a>
 <span class="lineNum">      25 </span>            : //! Returns the TypeId for the given type
-<span class="lineNum">      26 </span><span class="lineCov">  258140393 : template &lt;class T&gt; TypeId GetTypeId() {</span>
+<span class="lineNum">      26 </span><span class="lineCov">  258139316 : template &lt;class T&gt; TypeId GetTypeId() {</span>
 <span class="lineNum">      27 </span>            :         static_assert(IsValidType&lt;T&gt;(), &quot;Invalid type for GetTypeId&quot;);
-<span class="lineNum">      28 </span><span class="lineCov">  258140393 :         if (std::is_same&lt;T, bool&gt;()) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">  258139316 :         if (std::is_same&lt;T, bool&gt;()) {</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 return TypeId::BOOLEAN;</span>
-<span class="lineNum">      30 </span><span class="lineCov">  258141320 :         } else if (std::is_same&lt;T, int8_t&gt;()) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">    3856952 :                 return TypeId::TINYINT;</span>
-<span class="lineNum">      32 </span><span class="lineCov">  254288005 :         } else if (std::is_same&lt;T, int16_t&gt;()) {</span>
-<span class="lineNum">      33 </span><span class="lineCov">    1072936 :                 return TypeId::SMALLINT;</span>
-<span class="lineNum">      34 </span><span class="lineCov">  253217094 :         } else if (std::is_same&lt;T, int32_t&gt;()) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">  239576670 :                 return TypeId::INTEGER;</span>
-<span class="lineNum">      36 </span><span class="lineCov">   13639035 :         } else if (std::is_same&lt;T, int64_t&gt;()) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">    5255823 :                 return TypeId::BIGINT;</span>
-<span class="lineNum">      38 </span><span class="lineCov">    8383199 :         } else if (std::is_same&lt;T, uint64_t&gt;()) {</span>
-<span class="lineNum">      39 </span><span class="lineCov">    8383114 :                 return TypeId::POINTER;</span>
+<span class="lineNum">      30 </span><span class="lineCov">  258140490 :         } else if (std::is_same&lt;T, int8_t&gt;()) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">    3855658 :                 return TypeId::TINYINT;</span>
+<span class="lineNum">      32 </span><span class="lineCov">  254288659 :         } else if (std::is_same&lt;T, int16_t&gt;()) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">    1072688 :                 return TypeId::SMALLINT;</span>
+<span class="lineNum">      34 </span><span class="lineCov">  253216970 :         } else if (std::is_same&lt;T, int32_t&gt;()) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">  239575516 :                 return TypeId::INTEGER;</span>
+<span class="lineNum">      36 </span><span class="lineCov">   13640009 :         } else if (std::is_same&lt;T, int64_t&gt;()) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">    5255840 :                 return TypeId::BIGINT;</span>
+<span class="lineNum">      38 </span><span class="lineCov">    8384148 :         } else if (std::is_same&lt;T, uint64_t&gt;()) {</span>
+<span class="lineNum">      39 </span><span class="lineCov">    8384116 :                 return TypeId::POINTER;</span>
 <span class="lineNum">      40 </span><span class="lineCov">          1 :         } else if (std::is_same&lt;T, double&gt;()) {</span>
 <span class="lineNum">      41 </span><span class="lineCov">          1 :                 return TypeId::DECIMAL;</span>
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :         } else if (std::is_same&lt;T, const char *&gt;()) {</span>
@@ -108,19 +108,19 @@
 <span class="lineNum">      46 </span>            :                 return TypeId::INVALID;
 <span class="lineNum">      47 </span>            :         }
 <span class="lineNum">      48 </span>            : }
-<span class="lineNum">      49 </span><span class="lineCov">    8382959 : </span>
+<span class="lineNum">      49 </span><span class="lineCov">    8384044 : </span>
 <span class="lineNum">      50 </span>            : string TypeIdToString(TypeId type);
-<span class="lineNum">      51 </span><span class="lineCov">    8382959 : size_t GetTypeIdSize(TypeId type);</span>
+<span class="lineNum">      51 </span><span class="lineCov">    8384044 : size_t GetTypeIdSize(TypeId type);</span>
 <span class="lineNum">      52 </span><span class="lineNoCov">          0 : bool TypeIsConstantSize(TypeId type);</span>
-<span class="lineNum">      53 </span><span class="lineCov">    8383031 : bool TypeIsIntegral(TypeId type);</span>
+<span class="lineNum">      53 </span><span class="lineCov">    8384072 : bool TypeIsIntegral(TypeId type);</span>
 <span class="lineNum">      54 </span><span class="lineNoCov">          0 : bool TypeIsNumeric(TypeId type);</span>
-<span class="lineNum">      55 </span><span class="lineCov">    8383118 : bool TypeIsInteger(TypeId type);</span>
+<span class="lineNum">      55 </span><span class="lineCov">    8384118 : bool TypeIsInteger(TypeId type);</span>
 <span class="lineNum">      56 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">      57 </span><span class="lineCov">    8383133 : template &lt;class T&gt; bool IsIntegerType() {</span>
+<span class="lineNum">      57 </span><span class="lineCov">    8384131 : template &lt;class T&gt; bool IsIntegerType() {</span>
 <span class="lineNum">      58 </span><span class="lineNoCov">          0 :         return TypeIsIntegral(GetTypeId&lt;T&gt;());</span>
-<span class="lineNum">      59 </span><span class="lineCov">    8383176 : }</span>
+<span class="lineNum">      59 </span><span class="lineCov">    8384148 : }</span>
 <span class="lineNum">      60 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">      61 </span><span class="lineCov">    8383198 : }; // namespace duckdb</span>
+<span class="lineNum">      61 </span><span class="lineCov">    8384147 : }; // namespace duckdb</span>
 </pre>
       </td>
     </tr>

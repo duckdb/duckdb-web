@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/parser/query_node/select_node.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/parser/query_node/select_node.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">13</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -89,12 +89,12 @@
 <span class="lineNum">      27 </span>            : //! SelectNode represents a standard SELECT statement
 <a name="28"><span class="lineNum">      28 </span>            : class SelectNode : public QueryNode {</a>
 <span class="lineNum">      29 </span>            : public:
-<span class="lineNum">      30 </span><span class="lineCov">    3019404 :         SelectNode() : QueryNode(QueryNodeType::SELECT_NODE) {</span>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    3019412 :         }</span></a>
+<span class="lineNum">      30 </span><span class="lineCov">    3019605 :         SelectNode() : QueryNode(QueryNodeType::SELECT_NODE) {</span>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    3019670 :         }</span></a>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">    6038297 :         void Accept(SQLNodeVisitor *v) override {</span>
-<span class="lineNum">      34 </span><span class="lineCov">    6038297 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      35 </span><span class="lineCov">    6038288 :         }</span>
+<span class="lineNum">      33 </span><span class="lineCov">    6038685 :         void Accept(SQLNodeVisitor *v) override {</span>
+<span class="lineNum">      34 </span><span class="lineCov">    6038685 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    6038640 :         }</span>
 <span class="lineNum">      36 </span>            : 
 <span class="lineNum">      37 </span>            :         //! The projection list
 <span class="lineNum">      38 </span>            :         vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list;
@@ -109,12 +109,12 @@
 <span class="lineNum">      47 </span>            :         GroupByDescription groupby;
 <a name="48"><span class="lineNum">      48 </span>            : </a>
 <span class="lineNum">      49 </span>            :         //! Whether or not the query has a GROUP BY clause
-<span class="lineNum">      50 </span><span class="lineCov">    6611289 :         bool HasGroup() {</span>
-<span class="lineNum">      51 </span><span class="lineCov">    6611289 :                 return groupby.groups.size() &gt; 0;</span>
+<span class="lineNum">      50 </span><span class="lineCov">    6611864 :         bool HasGroup() {</span>
+<span class="lineNum">      51 </span><span class="lineCov">    6611864 :                 return groupby.groups.size() &gt; 0;</span>
 <a name="52"><span class="lineNum">      52 </span>            :         }</a>
 <span class="lineNum">      53 </span>            :         //! Whether or not the query has a HAVING clause
-<span class="lineNum">      54 </span><span class="lineCov">    1145939 :         bool HasHaving() {</span>
-<span class="lineNum">      55 </span><span class="lineCov">    1145939 :                 return groupby.having.get();</span>
+<span class="lineNum">      54 </span><span class="lineCov">    1146319 :         bool HasHaving() {</span>
+<span class="lineNum">      55 </span><span class="lineCov">    1146319 :                 return groupby.having.get();</span>
 <span class="lineNum">      56 </span>            :         }
 <span class="lineNum">      57 </span>            :         //! Whether or not the query has an AGGREGATION
 <span class="lineNum">      58 </span>            :         bool HasAggregation();
@@ -126,8 +126,8 @@
 <span class="lineNum">      64 </span><span class="lineCov">      21409 :                 return select_list;</span>
 <a name="65"><span class="lineNum">      65 </span>            :         }</a>
 <span class="lineNum">      66 </span>            : 
-<span class="lineNum">      67 </span><span class="lineCov">    3009886 :         size_t GetSelectCount() override {</span>
-<span class="lineNum">      68 </span><span class="lineCov">    3009886 :                 return result_column_count;</span>
+<span class="lineNum">      67 </span><span class="lineCov">    3010095 :         size_t GetSelectCount() override {</span>
+<span class="lineNum">      68 </span><span class="lineCov">    3010095 :                 return result_column_count;</span>
 <span class="lineNum">      69 </span>            :         }
 <span class="lineNum">      70 </span>            : 
 <span class="lineNum">      71 </span>            :         bool Equals(const QueryNode *other) const override;

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report cac02252 - include/common/types/data_chunk.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/common/types/data_chunk.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report cac02252</td>
+            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">5</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-02 17:09:45</td>
+            <td class="headerValue">2019-01-04 15:19:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -119,11 +119,11 @@
 <span class="lineNum">      57 </span><span class="lineNoCov">          0 :         }</span>
 <a name="58"><span class="lineNum">      58 </span>            : #endif</a>
 <span class="lineNum">      59 </span>            : 
-<span class="lineNum">      60 </span><span class="lineCov">  194294792 :         size_t size() {</span>
-<span class="lineNum">      61 </span><span class="lineCov">  275091589 :                 if (column_count == 0) {</span>
+<span class="lineNum">      60 </span><span class="lineCov">  194268668 :         size_t size() {</span>
+<span class="lineNum">      61 </span><span class="lineCov">  275065465 :                 if (column_count == 0) {</span>
 <span class="lineNum">      62 </span><span class="lineNoCov">          0 :                         return 0;</span>
 <span class="lineNum">      63 </span>            :                 }
-<span class="lineNum">      64 </span><span class="lineCov">  478364758 :                 return data[0].count;</span>
+<span class="lineNum">      64 </span><span class="lineCov">  478338634 :                 return data[0].count;</span>
 <span class="lineNum">      65 </span>            :         }
 <span class="lineNum">      66 </span>            :         //! Initializes the DataChunk with the specified types to an empty DataChunk
 <span class="lineNum">      67 </span>            :         //! that holds at most maximum_chunk_size elements.
