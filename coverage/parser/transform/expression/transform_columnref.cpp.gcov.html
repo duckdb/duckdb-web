@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - parser/transform/expression/transform_columnref.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - parser/transform/expression/transform_columnref.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">13</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 15:19:40</td>
+            <td class="headerValue">2019-01-04 16:11:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -68,21 +68,21 @@
 <span class="lineNum">       6 </span>            : using namespace postgres;
 <a name="7"><span class="lineNum">       7 </span>            : using namespace std;</a>
 <span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span><span class="lineCov">    4513490 : unique_ptr&lt;Expression&gt; Transformer::TransformColumnRef(ColumnRef *root) {</span>
-<span class="lineNum">      10 </span><span class="lineCov">    4513490 :         List *fields = root-&gt;fields;</span>
-<span class="lineNum">      11 </span><span class="lineCov">    4513490 :         switch ((reinterpret_cast&lt;Node *&gt;(fields-&gt;head-&gt;data.ptr_value))-&gt;type) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">    4317622 :         case T_String: {</span>
-<span class="lineNum">      13 </span><span class="lineCov">    4317622 :                 if (fields-&gt;length &lt; 1 || fields-&gt;length &gt; 2) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    4513099 : unique_ptr&lt;Expression&gt; Transformer::TransformColumnRef(ColumnRef *root) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">    4513099 :         List *fields = root-&gt;fields;</span>
+<span class="lineNum">      11 </span><span class="lineCov">    4513099 :         switch ((reinterpret_cast&lt;Node *&gt;(fields-&gt;head-&gt;data.ptr_value))-&gt;type) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    4317532 :         case T_String: {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    4317532 :                 if (fields-&gt;length &lt; 1 || fields-&gt;length &gt; 2) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         throw ParserException(&quot;Unexpected field length&quot;);</span>
 <span class="lineNum">      15 </span>            :                 }
-<span class="lineNum">      16 </span><span class="lineCov">    8640570 :                 string column_name, table_name;</span>
-<span class="lineNum">      17 </span><span class="lineCov">    4321475 :                 if (fields-&gt;length == 1) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">    3850425 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
+<span class="lineNum">      16 </span><span class="lineCov">    8639431 :                 string column_name, table_name;</span>
+<span class="lineNum">      17 </span><span class="lineCov">    4321223 :                 if (fields-&gt;length == 1) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3850173 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
 <span class="lineNum">      19 </span>            :                 } else {
 <span class="lineNum">      20 </span><span class="lineCov">     471050 :                         table_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;data.ptr_value)-&gt;val.str);</span>
 <span class="lineNum">      21 </span><span class="lineCov">     471050 :                         column_name = string(reinterpret_cast&lt;value *&gt;(fields-&gt;head-&gt;next-&gt;data.ptr_value)-&gt;val.str);</span>
 <span class="lineNum">      22 </span>            :                 }
-<span class="lineNum">      23 </span><span class="lineCov">    4320729 :                 return make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
+<span class="lineNum">      23 </span><span class="lineCov">    4320638 :                 return make_unique&lt;ColumnRefExpression&gt;(column_name, table_name);</span>
 <span class="lineNum">      24 </span>            :         }
 <span class="lineNum">      25 </span><span class="lineCov">     196906 :         case T_A_Star: {</span>
 <span class="lineNum">      26 </span><span class="lineCov">     196906 :                 return make_unique&lt;StarExpression&gt;();</span>

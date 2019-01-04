@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - common/types/string_heap.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - common/types/string_heap.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">25</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 15:19:40</td>
+            <td class="headerValue">2019-01-04 16:11:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -67,11 +67,11 @@
 <span class="lineNum">       5 </span>            : 
 <a name="6"><span class="lineNum">       6 </span>            : #define MINIMUM_HEAP_SIZE 4096</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">   94086524 : StringHeap::StringHeap() : tail(nullptr) {</span>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">   94045470 : }</span></a>
+<span class="lineNum">       8 </span><span class="lineCov">   94076176 : StringHeap::StringHeap() : tail(nullptr) {</span>
+<a name="9"><span class="lineNum">       9 </span><span class="lineCov">   94039909 : }</span></a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">  546732913 : const char *StringHeap::AddString(const char *data, size_t len) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">  546732913 :         if (!chunk || chunk-&gt;current_position + len &gt;= chunk-&gt;maximum_size) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">  546732908 : const char *StringHeap::AddString(const char *data, size_t len) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">  546732908 :         if (!chunk || chunk-&gt;current_position + len &gt;= chunk-&gt;maximum_size) {</span>
 <span class="lineNum">      13 </span>            :                 // have to make a new entry
 <span class="lineNum">      14 </span><span class="lineCov">    4410432 :                 auto new_chunk = make_unique&lt;StringChunk&gt;(std::max(len + 1, (size_t)MINIMUM_HEAP_SIZE));</span>
 <span class="lineNum">      15 </span><span class="lineCov">    2205216 :                 new_chunk-&gt;prev = move(chunk);</span>
@@ -80,25 +80,25 @@
 <span class="lineNum">      18 </span><span class="lineCov">     517659 :                         tail = chunk.get();</span>
 <span class="lineNum">      19 </span>            :                 }
 <span class="lineNum">      20 </span>            :         }
-<span class="lineNum">      21 </span><span class="lineCov">  546732913 :         auto insert_pos = chunk-&gt;data.get() + chunk-&gt;current_position;</span>
-<span class="lineNum">      22 </span><span class="lineCov">  546732913 :         strcpy(insert_pos, data);</span>
-<span class="lineNum">      23 </span><span class="lineCov">  546732913 :         chunk-&gt;current_position += len + 1;</span>
-<span class="lineNum">      24 </span><span class="lineCov">  546732913 :         return insert_pos;</span>
+<span class="lineNum">      21 </span><span class="lineCov">  546732908 :         auto insert_pos = chunk-&gt;data.get() + chunk-&gt;current_position;</span>
+<span class="lineNum">      22 </span><span class="lineCov">  546732908 :         strcpy(insert_pos, data);</span>
+<span class="lineNum">      23 </span><span class="lineCov">  546732908 :         chunk-&gt;current_position += len + 1;</span>
+<span class="lineNum">      24 </span><span class="lineCov">  546732908 :         return insert_pos;</span>
 <a name="25"><span class="lineNum">      25 </span>            : }</a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">  538079948 : const char *StringHeap::AddString(const char *data) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">  538079948 :         return AddString(data, strlen(data));</span>
+<span class="lineNum">      27 </span><span class="lineCov">  538079943 : const char *StringHeap::AddString(const char *data) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">  538079943 :         return AddString(data, strlen(data));</span>
 <a name="29"><span class="lineNum">      29 </span>            : }</a>
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span><span class="lineCov">    8652965 : const char *StringHeap::AddString(const string &amp;data) {</span>
 <span class="lineNum">      32 </span><span class="lineCov">    8652965 :         return AddString(data.c_str(), data.size());</span>
 <a name="33"><span class="lineNum">      33 </span>            : }</a>
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">   11152361 : void StringHeap::MergeHeap(StringHeap &amp;other) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">   11152361 :         if (!other.tail) {</span>
-<span class="lineNum">      37 </span><span class="lineCov">   11087740 :                 return;</span>
+<span class="lineNum">      35 </span><span class="lineCov">   11151648 : void StringHeap::MergeHeap(StringHeap &amp;other) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">   11151648 :         if (!other.tail) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">   11086804 :                 return;</span>
 <span class="lineNum">      38 </span>            :         }
-<span class="lineNum">      39 </span><span class="lineCov">      64621 :         other.tail-&gt;prev = move(chunk);</span>
+<span class="lineNum">      39 </span><span class="lineCov">      64844 :         other.tail-&gt;prev = move(chunk);</span>
 <span class="lineNum">      40 </span><span class="lineCov">      66286 :         this-&gt;chunk = move(other.chunk);</span>
 <span class="lineNum">      41 </span><span class="lineCov">      66286 :         if (!tail) {</span>
 <span class="lineNum">      42 </span><span class="lineCov">       7774 :                 tail = this-&gt;chunk.get();</span>

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/planner/operator/logical_get.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - include/planner/operator/logical_get.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 15:19:40</td>
+            <td class="headerValue">2019-01-04 16:11:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -79,13 +79,13 @@
 <span class="lineNum">      17 </span>            : public:
 <a name="18"><span class="lineNum">      18 </span><span class="lineCov">     659203 :         LogicalGet() : LogicalOperator(LogicalOperatorType::GET), table(nullptr) {</span></a>
 <span class="lineNum">      19 </span><span class="lineCov">     659203 :         }</span>
-<span class="lineNum">      20 </span><span class="lineCov">    2725480 :         LogicalGet(TableCatalogEntry *table, size_t table_index, vector&lt;column_t&gt; column_ids)</span>
-<span class="lineNum">      21 </span><span class="lineCov">    2725480 :             : LogicalOperator(LogicalOperatorType::GET), table(table), table_index(table_index), column_ids(column_ids) {</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    2728353 :         }</span></a>
+<span class="lineNum">      20 </span><span class="lineCov">    2725264 :         LogicalGet(TableCatalogEntry *table, size_t table_index, vector&lt;column_t&gt; column_ids)</span>
+<span class="lineNum">      21 </span><span class="lineCov">    2725264 :             : LogicalOperator(LogicalOperatorType::GET), table(table), table_index(table_index), column_ids(column_ids) {</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    2728140 :         }</span></a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">   10151506 :         void Accept(LogicalOperatorVisitor *v) override {</span>
-<span class="lineNum">      25 </span><span class="lineCov">   10151506 :                 v-&gt;Visit(*this);</span>
-<span class="lineNum">      26 </span><span class="lineCov">   10150246 :         }</span>
+<span class="lineNum">      24 </span><span class="lineCov">   10150650 :         void Accept(LogicalOperatorVisitor *v) override {</span>
+<span class="lineNum">      25 </span><span class="lineCov">   10150650 :                 v-&gt;Visit(*this);</span>
+<span class="lineNum">      26 </span><span class="lineCov">   10145639 :         }</span>
 <span class="lineNum">      27 </span>            :         vector&lt;string&gt; GetNames() override;
 <span class="lineNum">      28 </span>            : 
 <span class="lineNum">      29 </span>            :         size_t EstimateCardinality() override;

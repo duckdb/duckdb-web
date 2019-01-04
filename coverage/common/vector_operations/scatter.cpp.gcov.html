@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - common/vector_operations/scatter.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - common/vector_operations/scatter.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">96</td>
+            <td class="headerCovTableEntry">100</td>
             <td class="headerCovTableEntry">197</td>
-            <td class="headerCovTableEntryLo">48.7 %</td>
+            <td class="headerCovTableEntryLo">50.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 15:19:40</td>
+            <td class="headerValue">2019-01-04 16:11:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -74,24 +74,24 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">     935698 : template &lt;class OP&gt; static void generic_scatter_loop(Vector &amp;source, Vector &amp;dest) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">     935698 :         if (dest.type != TypeId::POINTER) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">     935574 : template &lt;class OP&gt; static void generic_scatter_loop(Vector &amp;source, Vector &amp;dest) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">     935574 :         if (dest.type != TypeId::POINTER) {</span>
 <span class="lineNum">      17 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(dest.type, &quot;Cannot scatter to non-pointer type!&quot;);</span>
 <span class="lineNum">      18 </span>            :         }
-<span class="lineNum">      19 </span><span class="lineCov">     935698 :         switch (source.type) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">     935574 :         switch (source.type) {</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :                 scatter_templated_loop&lt;int8_t, OP&gt;(source, dest);</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :                 scatter_templated_loop&lt;int16_t, OP&gt;(source, dest);</span>
 <span class="lineNum">      25 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      26 </span><span class="lineCov">     221901 :         case TypeId::DATE:</span>
+<span class="lineNum">      26 </span><span class="lineCov">     221794 :         case TypeId::DATE:</span>
 <span class="lineNum">      27 </span>            :         case TypeId::INTEGER:
-<span class="lineNum">      28 </span><span class="lineCov">     221901 :                 scatter_templated_loop&lt;int32_t, OP&gt;(source, dest);</span>
-<span class="lineNum">      29 </span><span class="lineCov">     221901 :                 break;</span>
-<span class="lineNum">      30 </span><span class="lineCov">     698359 :         case TypeId::TIMESTAMP:</span>
+<span class="lineNum">      28 </span><span class="lineCov">     221794 :                 scatter_templated_loop&lt;int32_t, OP&gt;(source, dest);</span>
+<span class="lineNum">      29 </span><span class="lineCov">     221794 :                 break;</span>
+<span class="lineNum">      30 </span><span class="lineCov">     698340 :         case TypeId::TIMESTAMP:</span>
 <span class="lineNum">      31 </span>            :         case TypeId::BIGINT:
-<span class="lineNum">      32 </span><span class="lineCov">     698359 :                 scatter_templated_loop&lt;int64_t, OP&gt;(source, dest);</span>
+<span class="lineNum">      32 </span><span class="lineCov">     698340 :                 scatter_templated_loop&lt;int64_t, OP&gt;(source, dest);</span>
 <span class="lineNum">      33 </span><span class="lineCov">     698392 :                 break;</span>
 <span class="lineNum">      34 </span><span class="lineCov">      15438 :         case TypeId::DECIMAL:</span>
 <span class="lineNum">      35 </span><span class="lineCov">      15438 :                 scatter_templated_loop&lt;double, OP&gt;(source, dest);</span>
@@ -100,10 +100,10 @@
 <span class="lineNum">      38 </span><span class="lineNoCov">          0 :         case TypeId::POINTER:</span>
 <span class="lineNum">      39 </span><span class="lineNoCov">          0 :                 scatter_templated_loop&lt;uint64_t, OP&gt;(source, dest);</span>
 <span class="lineNum">      40 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      41 </span><span class="lineNoCov">          0 :         default:</span>
-<span class="lineNum">      42 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Unimplemented type for scatter&quot;);</span>
+<span class="lineNum">      41 </span><span class="lineCov">          2 :         default:</span>
+<span class="lineNum">      42 </span><span class="lineCov">          2 :                 throw NotImplementedException(&quot;Unimplemented type for scatter&quot;);</span>
 <span class="lineNum">      43 </span>            :         }
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">     935731 : }</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">     935624 : }</span></a>
 <span class="lineNum">      45 </span><span class="lineCov">     123756 : </span>
 <span class="lineNum">      46 </span><span class="lineCov">     123756 : void VectorOperations::Scatter::Set(Vector &amp;source, Vector &amp;dest) {</span>
 <span class="lineNum">      47 </span><span class="lineNoCov">          0 :         if (source.type == TypeId::VARCHAR) {</span>

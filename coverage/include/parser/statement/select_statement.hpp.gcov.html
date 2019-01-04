@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - include/parser/statement/select_statement.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - include/parser/statement/select_statement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 15:19:40</td>
+            <td class="headerValue">2019-01-04 16:11:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -82,12 +82,12 @@
 <span class="lineNum">      20 </span>            : //! SelectStatement is a typical SELECT clause
 <a name="21"><span class="lineNum">      21 </span>            : class SelectStatement : public SQLStatement {</a>
 <span class="lineNum">      22 </span>            : public:
-<span class="lineNum">      23 </span><span class="lineCov">    3010148 :         SelectStatement() : SQLStatement(StatementType::SELECT) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">    3010146 :         }</span>
+<span class="lineNum">      23 </span><span class="lineCov">    3010004 :         SelectStatement() : SQLStatement(StatementType::SELECT) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">    3010001 :         }</span>
 <a name="25"><span class="lineNum">      25 </span>            : </a>
 <span class="lineNum">      26 </span>            :         virtual string ToString() const;
-<span class="lineNum">      27 </span><span class="lineCov">    6020220 :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">    6020220 :                 return v-&gt;Visit(*this);</span>
+<span class="lineNum">      27 </span><span class="lineCov">    6019929 :         virtual unique_ptr&lt;SQLStatement&gt; Accept(SQLNodeVisitor *v) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    6019929 :                 return v-&gt;Visit(*this);</span>
 <span class="lineNum">      29 </span>            :         }
 <span class="lineNum">      30 </span>            : 
 <span class="lineNum">      31 </span>            :         virtual bool Equals(const SQLStatement *other) const;

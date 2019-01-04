@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report ad17dee3 - function/scalar_function/substring.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - function/scalar_function/substring.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report ad17dee3</td>
+            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">19</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 15:19:40</td>
+            <td class="headerValue">2019-01-04 16:11:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -88,44 +88,48 @@
 <span class="lineNum">      26 </span><span class="lineCov">         51 :         VectorOperations::TernaryExec(</span>
 <span class="lineNum">      27 </span>            :             input, offset, length, result,
 <span class="lineNum">      28 </span>            :             [&amp;](size_t input_index, size_t offset_index, size_t length_index, size_t result_index) {
-<span class="lineNum">      29 </span>            :                     auto input = input_data[input_index];
+<span class="lineNum">      29 </span>            :                     auto input_string = input_data[input_index];
 <span class="lineNum">      30 </span>            :                     auto offset = offset_data[offset_index] - 1;
 <span class="lineNum">      31 </span>            :                     auto length = length_data[length_index];
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span>            :                     // create the output string
-<span class="lineNum">      34 </span>            :                     char output[length + 1];
-<span class="lineNum">      35 </span>            :                     int input_offset = 0;
-<span class="lineNum">      36 </span>            :                     while (input[input_offset] &amp;&amp; input_offset &lt; offset) {
-<span class="lineNum">      37 </span>            :                             input_offset++;
-<span class="lineNum">      38 </span>            :                     }
-<span class="lineNum">      39 </span>            :                     if (!input[input_offset]) {
-<span class="lineNum">      40 </span>            :                             // out of range, return empty string
-<span class="lineNum">      41 </span>            :                             output[0] = '\0';
-<span class="lineNum">      42 </span>            :                     } else {
-<span class="lineNum">      43 </span>            :                             // now limit the string
-<span class="lineNum">      44 </span>            :                             size_t write_offset = 0;
-<span class="lineNum">      45 </span>            :                             while (input[input_offset + write_offset] &amp;&amp; write_offset &lt; length) {
-<span class="lineNum">      46 </span>            :                                     output[write_offset] = input[input_offset + write_offset];
-<span class="lineNum">      47 </span>            :                                     write_offset++;
-<span class="lineNum">      48 </span>            :                             }
-<span class="lineNum">      49 </span>            :                             output[write_offset] = '\0';
-<span class="lineNum">      50 </span>            :                     }
-<span class="lineNum">      51 </span>            : 
-<span class="lineNum">      52 </span>            :                     result_data[result_index] = result.string_heap.AddString(output);
-<span class="lineNum">      53 </span>            :             });
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">         51 : }</span></a>
+<span class="lineNum">      33 </span>            :                     if (input.nullmask[input_index]) {
+<span class="lineNum">      34 </span>            :                             return;
+<span class="lineNum">      35 </span>            :                     }
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            :                     // create the output string
+<span class="lineNum">      38 </span>            :                     char output[length + 1];
+<span class="lineNum">      39 </span>            :                     int input_offset = 0;
+<span class="lineNum">      40 </span>            :                     while (input_string[input_offset] &amp;&amp; input_offset &lt; offset) {
+<span class="lineNum">      41 </span>            :                             input_offset++;
+<span class="lineNum">      42 </span>            :                     }
+<span class="lineNum">      43 </span>            :                     if (!input_string[input_offset]) {
+<span class="lineNum">      44 </span>            :                             // out of range, return empty string
+<span class="lineNum">      45 </span>            :                             output[0] = '\0';
+<span class="lineNum">      46 </span>            :                     } else {
+<span class="lineNum">      47 </span>            :                             // now limit the string
+<span class="lineNum">      48 </span>            :                             size_t write_offset = 0;
+<span class="lineNum">      49 </span>            :                             while (input_string[input_offset + write_offset] &amp;&amp; write_offset &lt; length) {
+<span class="lineNum">      50 </span>            :                                     output[write_offset] = input_string[input_offset + write_offset];
+<span class="lineNum">      51 </span>            :                                     write_offset++;
+<span class="lineNum">      52 </span>            :                             }
+<span class="lineNum">      53 </span>            :                             output[write_offset] = '\0';
+<span class="lineNum">      54 </span>            :                     }
 <span class="lineNum">      55 </span>            : 
-<span class="lineNum">      56 </span><span class="lineCov">         30 : bool substring_matches_arguments(vector&lt;TypeId&gt; &amp;arguments) {</span>
-<span class="lineNum">      57 </span><span class="lineCov">         60 :         return arguments.size() == 3 &amp;&amp; arguments[0] == TypeId::VARCHAR &amp;&amp; arguments[1] == TypeId::INTEGER &amp;&amp;</span>
-<span class="lineNum">      58 </span><span class="lineCov">         60 :                arguments[2] == TypeId::INTEGER;</span>
-<a name="59"><span class="lineNum">      59 </span>            : }</a>
-<span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">         30 : TypeId substring_get_return_type(vector&lt;TypeId&gt; &amp;arguments) {</span>
-<span class="lineNum">      62 </span><span class="lineCov">         30 :         return TypeId::VARCHAR;</span>
-<span class="lineNum">      63 </span>            : }
+<span class="lineNum">      56 </span>            :                     result_data[result_index] = result.string_heap.AddString(output);
+<span class="lineNum">      57 </span>            :             });
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         51 : }</span></a>
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span><span class="lineCov">         30 : bool substring_matches_arguments(vector&lt;TypeId&gt; &amp;arguments) {</span>
+<span class="lineNum">      61 </span><span class="lineCov">         60 :         return arguments.size() == 3 &amp;&amp; arguments[0] == TypeId::VARCHAR &amp;&amp; arguments[1] == TypeId::INTEGER &amp;&amp;</span>
+<span class="lineNum">      62 </span><span class="lineCov">         60 :                arguments[2] == TypeId::INTEGER;</span>
+<a name="63"><span class="lineNum">      63 </span>            : }</a>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span>            : } // namespace function
-<span class="lineNum">      66 </span>            : } // namespace duckdb
+<span class="lineNum">      65 </span><span class="lineCov">         30 : TypeId substring_get_return_type(vector&lt;TypeId&gt; &amp;arguments) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">         30 :         return TypeId::VARCHAR;</span>
+<span class="lineNum">      67 </span>            : }
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span>            : } // namespace function
+<span class="lineNum">      70 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>
