@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - include/parser/expression/columnref_expression.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - include/parser/expression/columnref_expression.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">28</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -79,8 +79,8 @@
 <span class="lineNum">      17 </span>            :         size_t table_index;
 <a name="18"><span class="lineNum">      18 </span>            :         size_t column_index;</a>
 <span class="lineNum">      19 </span>            : 
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    7748429 :         ColumnBinding() : table_index((size_t)-1), column_index((size_t)-1) {</span></a>
-<span class="lineNum">      21 </span><span class="lineCov">    7748429 :         }</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">    7748751 :         ColumnBinding() : table_index((size_t)-1), column_index((size_t)-1) {</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">    7748751 :         }</span>
 <span class="lineNum">      22 </span><span class="lineCov">        583 :         ColumnBinding(size_t table, size_t column) : table_index(table), column_index(column) {</span>
 <a name="23"><span class="lineNum">      23 </span><span class="lineCov">        583 :         }</span></a>
 <span class="lineNum">      24 </span>            : 
@@ -99,19 +99,19 @@
 <span class="lineNum">      37 </span><span class="lineCov">          9 :         }</span>
 <a name="38"><span class="lineNum">      38 </span>            : </a>
 <span class="lineNum">      39 </span>            :         //! Specify both the column and table name
-<span class="lineNum">      40 </span><span class="lineCov">    5041848 :         ColumnRefExpression(string column_name, string table_name)</span>
-<span class="lineNum">      41 </span><span class="lineCov">    5041848 :             : Expression(ExpressionType::COLUMN_REF), reference(nullptr), column_name(column_name), table_name(table_name) {</span>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    5045484 :         }</span></a>
+<span class="lineNum">      40 </span><span class="lineCov">    5041639 :         ColumnRefExpression(string column_name, string table_name)</span>
+<span class="lineNum">      41 </span><span class="lineCov">    5041639 :             : Expression(ExpressionType::COLUMN_REF), reference(nullptr), column_name(column_name), table_name(table_name) {</span>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">    5045042 :         }</span></a>
 <span class="lineNum">      43 </span>            : 
 <span class="lineNum">      44 </span><span class="lineCov">       1607 :         ColumnRefExpression(TypeId type, ColumnBinding binding)</span>
 <span class="lineNum">      45 </span><span class="lineCov">       1607 :             : Expression(ExpressionType::COLUMN_REF, type), binding(binding), reference(nullptr), column_name(&quot;&quot;),</span>
 <span class="lineNum">      46 </span><span class="lineCov">       1607 :               table_name(&quot;&quot;) {</span>
 <a name="47"><span class="lineNum">      47 </span><span class="lineCov">       1607 :         }</span></a>
 <span class="lineNum">      48 </span>            : 
-<span class="lineNum">      49 </span><span class="lineCov">    2709249 :         ColumnRefExpression(TypeId type, size_t index)</span>
-<span class="lineNum">      50 </span><span class="lineCov">    2709249 :             : Expression(ExpressionType::COLUMN_REF, type), index(index), reference(nullptr), column_name(&quot;&quot;),</span>
-<span class="lineNum">      51 </span><span class="lineCov">    2709249 :               table_name(&quot;&quot;) {</span>
-<span class="lineNum">      52 </span><span class="lineCov">    2709319 :         }</span>
+<span class="lineNum">      49 </span><span class="lineCov">    2709213 :         ColumnRefExpression(TypeId type, size_t index)</span>
+<span class="lineNum">      50 </span><span class="lineCov">    2709213 :             : Expression(ExpressionType::COLUMN_REF, type), index(index), reference(nullptr), column_name(&quot;&quot;),</span>
+<span class="lineNum">      51 </span><span class="lineCov">    2709213 :               table_name(&quot;&quot;) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">    2709246 :         }</span>
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span>            :         const string &amp;GetColumnName() const {
 <span class="lineNum">      55 </span>            :                 return column_name;
@@ -120,12 +120,12 @@
 <span class="lineNum">      58 </span>            :                 return table_name;
 <a name="59"><span class="lineNum">      59 </span>            :         }</a>
 <span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">   44635464 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
-<span class="lineNum">      62 </span><span class="lineCov">   44635464 :                 return v-&gt;Visit(*this);</span>
+<span class="lineNum">      61 </span><span class="lineCov">   44634928 :         unique_ptr&lt;Expression&gt; Accept(SQLNodeVisitor *v) override {</span>
+<span class="lineNum">      62 </span><span class="lineCov">   44634928 :                 return v-&gt;Visit(*this);</span>
 <a name="63"><span class="lineNum">      63 </span>            :         }</a>
 <span class="lineNum">      64 </span>            : 
-<span class="lineNum">      65 </span><span class="lineCov">    1670976 :         string GetName() override {</span>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">    1670976 :                 return !alias.empty() ? alias : column_name;</span></a>
+<span class="lineNum">      65 </span><span class="lineCov">    1670948 :         string GetName() override {</span>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">    1670948 :                 return !alias.empty() ? alias : column_name;</span></a>
 <span class="lineNum">      67 </span>            :         }
 <span class="lineNum">      68 </span><span class="lineCov">        175 :         ExpressionClass GetExpressionClass() override {</span>
 <span class="lineNum">      69 </span><span class="lineCov">        175 :                 return ExpressionClass::COLUMN_REF;</span>
@@ -165,8 +165,8 @@
 <span class="lineNum">     103 </span>            : 
 <a name="104"><span class="lineNum">     104 </span>            :         string ToString() const override;</a>
 <span class="lineNum">     105 </span>            : 
-<span class="lineNum">     106 </span><span class="lineCov">      73611 :         bool IsScalar() override {</span>
-<span class="lineNum">     107 </span><span class="lineCov">      73611 :                 return false;</span>
+<span class="lineNum">     106 </span><span class="lineCov">      73543 :         bool IsScalar() override {</span>
+<span class="lineNum">     107 </span><span class="lineCov">      73543 :                 return false;</span>
 <span class="lineNum">     108 </span>            :         }
 <span class="lineNum">     109 </span>            : };
 <span class="lineNum">     110 </span>            : } // namespace duckdb

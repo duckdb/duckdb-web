@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - parser/transform/statement/transform_transaction.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - parser/transform/statement/transform_transaction.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">10</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,17 +67,17 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">      42018 : unique_ptr&lt;TransactionStatement&gt; Transformer::TransformTransaction(Node *node) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">      42018 :         TransactionStmt *stmt = reinterpret_cast&lt;TransactionStmt *&gt;(node);</span>
-<span class="lineNum">      10 </span><span class="lineCov">      42018 :         assert(stmt);</span>
-<span class="lineNum">      11 </span><span class="lineCov">      42018 :         switch (stmt-&gt;kind) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">      21181 :         case TRANS_STMT_BEGIN:</span>
+<span class="lineNum">       8 </span><span class="lineCov">      42070 : unique_ptr&lt;TransactionStatement&gt; Transformer::TransformTransaction(Node *node) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">      42070 :         TransactionStmt *stmt = reinterpret_cast&lt;TransactionStmt *&gt;(node);</span>
+<span class="lineNum">      10 </span><span class="lineCov">      42070 :         assert(stmt);</span>
+<span class="lineNum">      11 </span><span class="lineCov">      42070 :         switch (stmt-&gt;kind) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">      21189 :         case TRANS_STMT_BEGIN:</span>
 <span class="lineNum">      13 </span>            :         case TRANS_STMT_START:
-<span class="lineNum">      14 </span><span class="lineCov">      21181 :                 return make_unique&lt;TransactionStatement&gt;(TransactionType::BEGIN_TRANSACTION);</span>
-<span class="lineNum">      15 </span><span class="lineCov">      11158 :         case TRANS_STMT_COMMIT:</span>
-<span class="lineNum">      16 </span><span class="lineCov">      11158 :                 return make_unique&lt;TransactionStatement&gt;(TransactionType::COMMIT);</span>
-<span class="lineNum">      17 </span><span class="lineCov">       9908 :         case TRANS_STMT_ROLLBACK:</span>
-<span class="lineNum">      18 </span><span class="lineCov">       9908 :                 return make_unique&lt;TransactionStatement&gt;(TransactionType::ROLLBACK);</span>
+<span class="lineNum">      14 </span><span class="lineCov">      21189 :                 return make_unique&lt;TransactionStatement&gt;(TransactionType::BEGIN_TRANSACTION);</span>
+<span class="lineNum">      15 </span><span class="lineCov">      11178 :         case TRANS_STMT_COMMIT:</span>
+<span class="lineNum">      16 </span><span class="lineCov">      11178 :                 return make_unique&lt;TransactionStatement&gt;(TransactionType::COMMIT);</span>
+<span class="lineNum">      17 </span><span class="lineCov">       9974 :         case TRANS_STMT_ROLLBACK:</span>
+<span class="lineNum">      18 </span><span class="lineCov">       9974 :                 return make_unique&lt;TransactionStatement&gt;(TransactionType::ROLLBACK);</span>
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Transaction type %d not implemented yet&quot;, stmt-&gt;kind);</span>
 <span class="lineNum">      21 </span>            :         }

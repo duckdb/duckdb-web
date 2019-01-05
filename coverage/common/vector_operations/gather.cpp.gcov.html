@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - common/vector_operations/gather.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - common/vector_operations/gather.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">63</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">7</td>
@@ -73,10 +73,10 @@
 <span class="lineNum">      11 </span>            : using namespace duckdb;
 <a name="12"><span class="lineNum">      12 </span>            : using namespace std;</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">    2883702 : template &lt;class T, class OP&gt; void gather_templated_loop(Vector &amp;src, Vector &amp;result) {</span>
-<span class="lineNum">      15 </span><span class="lineCov">    2883702 :         auto source = (T **)src.data;</span>
-<span class="lineNum">      16 </span><span class="lineCov">    2883720 :         auto ldata = (T *)result.data;</span>
-<span class="lineNum">      17 </span><span class="lineCov">    2883719 :         if (result.sel_vector) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    2883607 : template &lt;class T, class OP&gt; void gather_templated_loop(Vector &amp;src, Vector &amp;result) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">    2883607 :         auto source = (T **)src.data;</span>
+<span class="lineNum">      16 </span><span class="lineCov">    2883617 :         auto ldata = (T *)result.data;</span>
+<span class="lineNum">      17 </span><span class="lineCov">    2883614 :         if (result.sel_vector) {</span>
 <span class="lineNum">      18 </span><span class="lineCov">     653551 :                 VectorOperations::Exec(src, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      19 </span>            :                         if (IsNullValue&lt;T&gt;(source[i][0])) {
 <span class="lineNum">      20 </span>            :                                 result.nullmask.set(result.sel_vector[k]);
@@ -85,7 +85,7 @@
 <span class="lineNum">      23 </span>            :                         }
 <span class="lineNum">      24 </span>            :                 });
 <span class="lineNum">      25 </span>            :         } else {
-<span class="lineNum">      26 </span><span class="lineCov">    2230168 :                 VectorOperations::Exec(src, [&amp;](size_t i, size_t k) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">    2230063 :                 VectorOperations::Exec(src, [&amp;](size_t i, size_t k) {</span>
 <span class="lineNum">      27 </span>            :                         if (IsNullValue&lt;T&gt;(source[i][0])) {
 <span class="lineNum">      28 </span>            :                                 result.nullmask.set(k);
 <span class="lineNum">      29 </span>            :                         } else {
@@ -93,7 +93,7 @@
 <span class="lineNum">      31 </span>            :                         }
 <span class="lineNum">      32 </span>            :                 });
 <span class="lineNum">      33 </span>            :         }
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">    2883764 : }</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">    2883625 : }</span></a>
 <span class="lineNum">      35 </span><span class="lineCov">     147327 : </span>
 <span class="lineNum">      36 </span><span class="lineCov">     147327 : template &lt;class OP&gt; static void generic_gather_loop(Vector &amp;source, Vector &amp;dest) {</span>
 <span class="lineNum">      37 </span><span class="lineCov">     147327 :         if (source.type != TypeId::POINTER) {</span>

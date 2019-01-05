@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - include/common/helper.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - include/common/helper.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">66</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">113</td>
@@ -72,9 +72,9 @@
 <span class="lineNum">      10 </span>            : 
 <span class="lineNum">      11 </span>            : #include &quot;common/constants.hpp&quot;
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span>            : #include &lt;limits&gt;
-<span class="lineNum">      14 </span>            : #include &lt;sstream&gt;
-<span class="lineNum">      15 </span>            : #include &lt;algorithm&gt;
+<span class="lineNum">      13 </span>            : #include &lt;algorithm&gt;
+<span class="lineNum">      14 </span>            : #include &lt;limits&gt;
+<span class="lineNum">      15 </span>            : #include &lt;sstream&gt;
 <span class="lineNum">      16 </span>            : 
 <span class="lineNum">      17 </span>            : #ifdef _MSC_VER
 <span class="lineNum">      18 </span>            : #define ssize_t int64_t
@@ -82,22 +82,22 @@
 <span class="lineNum">      20 </span>            : 
 <a name="21"><span class="lineNum">      21 </span>            : namespace duckdb {</a>
 <span class="lineNum">      22 </span>            : #ifndef _MSC_VER
-<span class="lineNum">      23 </span><span class="lineCov">  140674623 : template &lt;typename T, typename... Args&gt; unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      24 </span><span class="lineCov">  140674625 :         return unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      23 </span><span class="lineCov">  140677083 : template &lt;typename T, typename... Args&gt; unique_ptr&lt;T&gt; make_unique(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">  140677085 :         return unique_ptr&lt;T&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
 <span class="lineNum">      25 </span>            : }
 <span class="lineNum">      26 </span><span class="lineCov">     659780 : #else // Visual Studio has make_unique</span>
 <span class="lineNum">      27 </span><span class="lineCov">     659780 : #include &lt;memory&gt;</span>
 <a name="28"><span class="lineNum">      28 </span>            : #define make_unique std::make_unique</a>
 <span class="lineNum">      29 </span><span class="lineCov">       2247 : #endif</span>
-<span class="lineNum">      30 </span><span class="lineCov">   25068220 : template &lt;typename S, typename T, typename... Args&gt; unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">   25065973 :         return unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
-<span class="lineNum">      32 </span><span class="lineCov">     572760 : }</span>
-<span class="lineNum">      33 </span><span class="lineCov">     572760 : </span>
+<span class="lineNum">      30 </span><span class="lineCov">   25070560 : template &lt;typename S, typename T, typename... Args&gt; unique_ptr&lt;S&gt; make_unique_base(Args &amp;&amp;... args) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">   25068313 :         return unique_ptr&lt;S&gt;(new T(std::forward&lt;Args&gt;(args)...));</span>
+<span class="lineNum">      32 </span><span class="lineCov">     572731 : }</span>
+<span class="lineNum">      33 </span><span class="lineCov">     572731 : </span>
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 : template &lt;class T&gt; inline bool in_bounds(int64_t value) {</span>
-<span class="lineNum">      35 </span><span class="lineCov">    1217829 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp; value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
-<span class="lineNum">      36 </span><span class="lineCov">    1217907 : }</span>
+<span class="lineNum">      35 </span><span class="lineCov">    1217892 :         return value &gt;= std::numeric_limits&lt;T&gt;::min() &amp;&amp; value &lt;= std::numeric_limits&lt;T&gt;::max();</span>
+<span class="lineNum">      36 </span><span class="lineCov">    1217970 : }</span>
 <span class="lineNum">      37 </span><span class="lineCov">         78 : </span>
-<span class="lineNum">      38 </span><span class="lineCov">   10311964 : } // namespace duckdb</span>
+<span class="lineNum">      38 </span><span class="lineCov">   10312218 : } // namespace duckdb</span>
 </pre>
       </td>
     </tr>

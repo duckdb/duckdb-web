@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - execution/physical_operator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - execution/physical_operator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">15</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -84,29 +84,29 @@
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :         return result;</span>
 <a name="23"><span class="lineNum">      23 </span>            : }</a>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">    9623500 : PhysicalOperatorState::PhysicalOperatorState(PhysicalOperator *child, ExpressionExecutor *parent_executor)</span>
-<span class="lineNum">      26 </span><span class="lineCov">    9623500 :     : finished(false), parent(parent_executor) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    9622354 :         if (child) {</span>
-<span class="lineNum">      28 </span><span class="lineCov">    6111892 :                 child-&gt;InitializeChunk(child_chunk);</span>
-<span class="lineNum">      29 </span><span class="lineCov">    6112322 :                 child_state = child-&gt;GetOperatorState(parent_executor);</span>
+<span class="lineNum">      25 </span><span class="lineCov">    9623330 : PhysicalOperatorState::PhysicalOperatorState(PhysicalOperator *child, ExpressionExecutor *parent_executor)</span>
+<span class="lineNum">      26 </span><span class="lineCov">    9623330 :     : finished(false), parent(parent_executor) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    9622029 :         if (child) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    6111701 :                 child-&gt;InitializeChunk(child_chunk);</span>
+<span class="lineNum">      29 </span><span class="lineCov">    6112743 :                 child_state = child-&gt;GetOperatorState(parent_executor);</span>
 <span class="lineNum">      30 </span>            :         }
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    9624663 : }</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    9628667 : }</span></a>
 <span class="lineNum">      32 </span>            : 
-<span class="lineNum">      33 </span><span class="lineCov">   22482416 : void PhysicalOperator::GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">   22482416 :         if (context.interrupted) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">   22482505 : void PhysicalOperator::GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">   22482505 :         if (context.interrupted) {</span>
 <span class="lineNum">      35 </span><span class="lineNoCov">          0 :                 throw InterruptException();</span>
 <span class="lineNum">      36 </span>            :         }
 <span class="lineNum">      37 </span>            :         // finished with this operator
-<span class="lineNum">      38 </span><span class="lineCov">   22482416 :         chunk.Reset();</span>
-<span class="lineNum">      39 </span><span class="lineCov">   22479131 :         if (state-&gt;finished) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">    1289097 :                 return;</span>
+<span class="lineNum">      38 </span><span class="lineCov">   22482505 :         chunk.Reset();</span>
+<span class="lineNum">      39 </span><span class="lineCov">   22480524 :         if (state-&gt;finished) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">    1289041 :                 return;</span>
 <span class="lineNum">      41 </span>            :         }
 <span class="lineNum">      42 </span>            : 
-<span class="lineNum">      43 </span><span class="lineCov">   21190034 :         context.profiler.StartOperator(this);</span>
-<span class="lineNum">      44 </span><span class="lineCov">   21199385 :         _GetChunk(context, chunk, state);</span>
-<span class="lineNum">      45 </span><span class="lineCov">   21199166 :         context.profiler.EndOperator(chunk);</span>
+<span class="lineNum">      43 </span><span class="lineCov">   21191483 :         context.profiler.StartOperator(this);</span>
+<span class="lineNum">      44 </span><span class="lineCov">   21201195 :         _GetChunk(context, chunk, state);</span>
+<span class="lineNum">      45 </span><span class="lineCov">   21199635 :         context.profiler.EndOperator(chunk);</span>
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">   21200814 :         chunk.Verify();</span>
+<span class="lineNum">      47 </span><span class="lineCov">   21200852 :         chunk.Verify();</span>
 <span class="lineNum">      48 </span>            : }
 </pre>
       </td>

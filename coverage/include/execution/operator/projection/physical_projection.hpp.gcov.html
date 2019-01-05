@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - include/execution/operator/projection/physical_projection.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - include/execution/operator/projection/physical_projection.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -76,9 +76,9 @@
 <span class="lineNum">      14 </span>            : 
 <a name="15"><span class="lineNum">      15 </span>            : class PhysicalProjection : public PhysicalOperator {</a>
 <span class="lineNum">      16 </span>            : public:
-<span class="lineNum">      17 </span><span class="lineCov">    3749594 :         PhysicalProjection(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
-<span class="lineNum">      18 </span><span class="lineCov">    3749594 :             : PhysicalOperator(PhysicalOperatorType::PROJECTION, op.types), select_list(move(select_list)) {</span>
-<span class="lineNum">      19 </span><span class="lineCov">    3749674 :         }</span>
+<span class="lineNum">      17 </span><span class="lineCov">    3749559 :         PhysicalProjection(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; select_list)</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3749559 :             : PhysicalOperator(PhysicalOperatorType::PROJECTION, op.types), select_list(move(select_list)) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3749566 :         }</span>
 <span class="lineNum">      20 </span>            : 
 <span class="lineNum">      21 </span>            :         void _GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) override;
 <span class="lineNum">      22 </span>            : 

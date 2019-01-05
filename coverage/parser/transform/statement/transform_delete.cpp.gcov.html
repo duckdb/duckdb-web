@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - parser/transform/statement/transform_delete.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - parser/transform/statement/transform_delete.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,17 +67,17 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">        946 : unique_ptr&lt;DeleteStatement&gt; Transformer::TransformDelete(Node *node) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">        946 :         DeleteStmt *stmt = reinterpret_cast&lt;DeleteStmt *&gt;(node);</span>
-<span class="lineNum">      10 </span><span class="lineCov">        946 :         assert(stmt);</span>
-<span class="lineNum">      11 </span><span class="lineCov">        946 :         auto result = make_unique&lt;DeleteStatement&gt;();</span>
+<span class="lineNum">       8 </span><span class="lineCov">        979 : unique_ptr&lt;DeleteStatement&gt; Transformer::TransformDelete(Node *node) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">        979 :         DeleteStmt *stmt = reinterpret_cast&lt;DeleteStmt *&gt;(node);</span>
+<span class="lineNum">      10 </span><span class="lineCov">        979 :         assert(stmt);</span>
+<span class="lineNum">      11 </span><span class="lineCov">        979 :         auto result = make_unique&lt;DeleteStatement&gt;();</span>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">        957 :         result-&gt;condition = TransformExpression(stmt-&gt;whereClause);</span>
-<span class="lineNum">      14 </span><span class="lineCov">        967 :         result-&gt;table = TransformRangeVar(stmt-&gt;relation);</span>
-<span class="lineNum">      15 </span><span class="lineCov">        974 :         if (result-&gt;table-&gt;type != TableReferenceType::BASE_TABLE) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">        987 :         result-&gt;condition = TransformExpression(stmt-&gt;whereClause);</span>
+<span class="lineNum">      14 </span><span class="lineCov">        984 :         result-&gt;table = TransformRangeVar(stmt-&gt;relation);</span>
+<span class="lineNum">      15 </span><span class="lineCov">        983 :         if (result-&gt;table-&gt;type != TableReferenceType::BASE_TABLE) {</span>
 <span class="lineNum">      16 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Can only delete from base tables!&quot;);</span>
 <span class="lineNum">      17 </span>            :         }
-<span class="lineNum">      18 </span><span class="lineCov">        942 :         return result;</span>
+<span class="lineNum">      18 </span><span class="lineCov">        979 :         return result;</span>
 <span class="lineNum">      19 </span>            : }
 </pre>
       </td>

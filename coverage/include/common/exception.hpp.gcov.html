@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - include/common/exception.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - include/common/exception.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">68</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -89,10 +89,10 @@
 <span class="lineNum">      27 </span>            : 
 <a name="28"><span class="lineNum">      28 </span>            : namespace duckdb {</a>
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">   53982164 : inline void ASSERT_RESTRICT(void *left_start, void *left_end, void *right_start, void *right_end) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">   53981759 : inline void ASSERT_RESTRICT(void *left_start, void *left_end, void *right_start, void *right_end) {</span>
 <span class="lineNum">      31 </span>            :         // assert that the two pointers do not overlap
-<span class="lineNum">      32 </span><span class="lineCov">   53982164 :         assert(left_end &lt; right_start || right_end &lt; left_start);</span>
-<span class="lineNum">      33 </span><span class="lineCov">   53982164 : }</span>
+<span class="lineNum">      32 </span><span class="lineCov">   53981759 :         assert(left_end &lt; right_start || right_end &lt; left_start);</span>
+<span class="lineNum">      33 </span><span class="lineCov">   53981759 : }</span>
 <span class="lineNum">      34 </span>            : 
 <span class="lineNum">      35 </span>            : //===--------------------------------------------------------------------===//
 <span class="lineNum">      36 </span>            : // Exception Types
@@ -290,178 +290,179 @@
 <span class="lineNum">     228 </span>            :                 }
 <span class="lineNum">     229 </span>            :         }
 <span class="lineNum">     230 </span>            : #else
-<span class="lineNum">     231 </span>            :         static void PrintStackTrace(FILE *out, unsigned int max_frames) {}
-<span class="lineNum">     232 </span>            : #endif
-<span class="lineNum">     233 </span>            :         friend std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const Exception &amp;e);
-<span class="lineNum">     234 </span>            : 
-<span class="lineNum">     235 </span>            : private:
-<span class="lineNum">     236 </span>            :         // type
-<span class="lineNum">     237 </span>            :         ExceptionType type;
-<span class="lineNum">     238 </span>            :         string exception_message_;
-<span class="lineNum">     239 </span>            : };
-<span class="lineNum">     240 </span>            : 
-<span class="lineNum">     241 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">     242 </span>            : // Exception derived classes
-<span class="lineNum">     243 </span>            : //===--------------------------------------------------------------------===//
-<span class="lineNum">     244 </span>            : 
-<span class="lineNum">     245 </span>            : class CastException : public Exception {
-<span class="lineNum">     246 </span>            :         CastException() = delete;
-<span class="lineNum">     247 </span>            : 
-<span class="lineNum">     248 </span>            : public:
-<span class="lineNum">     249 </span>            :         CastException(const TypeId origType, const TypeId newType)
-<span class="lineNum">     250 </span>            :             : Exception(ExceptionType::CONVERSION,
-<span class="lineNum">     251 </span>            :                         &quot;Type &quot; + TypeIdToString(origType) + &quot; can't be cast as &quot; + TypeIdToString(newType)) {
-<span class="lineNum">     252 </span>            :         }
-<span class="lineNum">     253 </span>            : };
-<span class="lineNum">     254 </span>            : 
-<span class="lineNum">     255 </span>            : class ValueOutOfRangeException : public Exception {
-<span class="lineNum">     256 </span>            :         ValueOutOfRangeException() = delete;
-<a name="257"><span class="lineNum">     257 </span>            : </a>
-<span class="lineNum">     258 </span>            : public:
-<span class="lineNum">     259 </span><span class="lineCov">          1 :         ValueOutOfRangeException(const int64_t value, const TypeId origType, const TypeId newType)</span>
-<span class="lineNum">     260 </span><span class="lineCov">          3 :             : Exception(ExceptionType::CONVERSION, &quot;Type &quot; + TypeIdToString(origType) + &quot; with value &quot; +</span>
-<span class="lineNum">     261 </span><span class="lineCov">          5 :                                                        std::to_string((intmax_t)value) +</span>
-<span class="lineNum">     262 </span>            :                                                        &quot; can't be cast as %s because the value is out of range &quot;
-<span class="lineNum">     263 </span><span class="lineCov">          4 :                                                        &quot;for the destination type &quot; +</span>
-<span class="lineNum">     264 </span><span class="lineCov">          4 :                                                        TypeIdToString(newType)) {</span>
-<span class="lineNum">     265 </span><span class="lineCov">          1 :         }</span>
-<span class="lineNum">     266 </span>            : 
-<span class="lineNum">     267 </span>            :         ValueOutOfRangeException(const double value, const TypeId origType, const TypeId newType)
-<span class="lineNum">     268 </span>            :             : Exception(ExceptionType::CONVERSION, &quot;Type &quot; + TypeIdToString(origType) + &quot; with value &quot; +
-<span class="lineNum">     269 </span>            :                                                        std::to_string(value) +
-<span class="lineNum">     270 </span>            :                                                        &quot; can't be cast as %s because the value is out of range &quot;
-<span class="lineNum">     271 </span>            :                                                        &quot;for the destination type &quot; +
-<span class="lineNum">     272 </span>            :                                                        TypeIdToString(newType)) {
-<span class="lineNum">     273 </span>            :         }
-<span class="lineNum">     274 </span>            :         ValueOutOfRangeException(const TypeId varType, const size_t length)
-<span class="lineNum">     275 </span>            :             : Exception(ExceptionType::OUT_OF_RANGE, &quot;The value is too long to fit into type &quot; + TypeIdToString(varType) +
-<span class="lineNum">     276 </span>            :                                                          &quot;(&quot; + std::to_string(length) + &quot;)&quot;){};
-<span class="lineNum">     277 </span>            : };
-<span class="lineNum">     278 </span>            : 
-<span class="lineNum">     279 </span>            : class ConversionException : public Exception {
-<span class="lineNum">     280 </span>            :         ConversionException() = delete;
-<a name="281"><span class="lineNum">     281 </span>            : </a>
-<span class="lineNum">     282 </span>            : public:
-<span class="lineNum">     283 </span><span class="lineNoCov">          0 :         ConversionException(string msg, ...) : Exception(ExceptionType::CONVERSION, msg) {</span>
-<span class="lineNum">     284 </span><span class="lineNoCov">          0 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     285 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     286 </span>            : };
-<span class="lineNum">     287 </span>            : 
-<span class="lineNum">     288 </span>            : class InvalidTypeException : public Exception {
-<span class="lineNum">     289 </span>            :         InvalidTypeException() = delete;
-<a name="290"><span class="lineNum">     290 </span>            : </a>
-<span class="lineNum">     291 </span>            : public:
-<span class="lineNum">     292 </span><span class="lineCov">          3 :         InvalidTypeException(TypeId type, string msg)</span>
-<span class="lineNum">     293 </span><span class="lineCov">          3 :             : Exception(ExceptionType::INVALID_TYPE, &quot;Invalid Type [&quot; + TypeIdToString(type) + &quot;]: &quot; + msg) {</span>
-<span class="lineNum">     294 </span><span class="lineCov">          3 :         }</span>
-<span class="lineNum">     295 </span>            : };
-<span class="lineNum">     296 </span>            : 
-<span class="lineNum">     297 </span>            : class TypeMismatchException : public Exception {
-<span class="lineNum">     298 </span>            :         TypeMismatchException() = delete;
-<a name="299"><span class="lineNum">     299 </span>            : </a>
-<span class="lineNum">     300 </span>            : public:
-<span class="lineNum">     301 </span><span class="lineNoCov">          0 :         TypeMismatchException(const TypeId type_1, const TypeId type_2, string msg)</span>
-<span class="lineNum">     302 </span><span class="lineNoCov">          0 :             : Exception(ExceptionType::MISMATCH_TYPE,</span>
-<span class="lineNum">     303 </span><span class="lineNoCov">          0 :                         &quot;Type &quot; + TypeIdToString(type_1) + &quot; does not match with &quot; + TypeIdToString(type_2) + &quot;. &quot; + msg) {</span>
-<span class="lineNum">     304 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     305 </span>            : };
-<span class="lineNum">     306 </span>            : 
-<span class="lineNum">     307 </span>            : class TransactionException : public Exception {
-<span class="lineNum">     308 </span>            :         TransactionException() = delete;
-<a name="309"><span class="lineNum">     309 </span>            : </a>
-<span class="lineNum">     310 </span>            : public:
-<span class="lineNum">     311 </span><span class="lineCov">          2 :         TransactionException(string msg) : Exception(ExceptionType::TRANSACTION, msg) {</span>
-<span class="lineNum">     312 </span><span class="lineCov">          2 :         }</span>
-<span class="lineNum">     313 </span>            : };
-<span class="lineNum">     314 </span>            : 
-<span class="lineNum">     315 </span>            : class NotImplementedException : public Exception {
-<span class="lineNum">     316 </span>            :         NotImplementedException() = delete;
-<a name="317"><span class="lineNum">     317 </span>            : </a>
-<span class="lineNum">     318 </span>            : public:
-<span class="lineNum">     319 </span><span class="lineCov">         13 :         NotImplementedException(string msg, ...) : Exception(ExceptionType::NOT_IMPLEMENTED, msg) {</span>
-<span class="lineNum">     320 </span><span class="lineCov">         13 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     321 </span><span class="lineCov">         13 :         }</span>
-<span class="lineNum">     322 </span>            : };
-<span class="lineNum">     323 </span>            : 
-<span class="lineNum">     324 </span>            : class OutOfRangeException : public Exception {
-<span class="lineNum">     325 </span>            :         OutOfRangeException() = delete;
-<a name="326"><span class="lineNum">     326 </span>            : </a>
-<span class="lineNum">     327 </span>            : public:
-<span class="lineNum">     328 </span><span class="lineCov">          1 :         OutOfRangeException(string msg, ...) : Exception(ExceptionType::OUT_OF_RANGE, msg) {</span>
-<span class="lineNum">     329 </span><span class="lineCov">          1 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     330 </span><span class="lineCov">          1 :         }</span>
-<span class="lineNum">     331 </span>            : };
-<span class="lineNum">     332 </span>            : 
-<span class="lineNum">     333 </span>            : class CatalogException : public Exception {
-<span class="lineNum">     334 </span>            :         CatalogException() = delete;
-<a name="335"><span class="lineNum">     335 </span>            : </a>
-<span class="lineNum">     336 </span>            : public:
-<span class="lineNum">     337 </span><span class="lineCov">         15 :         CatalogException(string msg, ...) : Exception(ExceptionType::CATALOG, msg) {</span>
-<span class="lineNum">     338 </span><span class="lineCov">         15 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     339 </span><span class="lineCov">         15 :         }</span>
-<span class="lineNum">     340 </span>            : };
-<span class="lineNum">     341 </span>            : 
-<span class="lineNum">     342 </span>            : class ParserException : public Exception {
-<span class="lineNum">     343 </span>            :         ParserException() = delete;
-<a name="344"><span class="lineNum">     344 </span>            : </a>
-<span class="lineNum">     345 </span>            : public:
-<span class="lineNum">     346 </span><span class="lineCov">         12 :         ParserException(string msg, ...) : Exception(ExceptionType::PARSER, msg) {</span>
-<span class="lineNum">     347 </span><span class="lineCov">         12 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     348 </span><span class="lineCov">         12 :         }</span>
-<span class="lineNum">     349 </span>            : };
-<span class="lineNum">     350 </span>            : 
-<span class="lineNum">     351 </span>            : class SyntaxException : public Exception {
-<span class="lineNum">     352 </span>            :         SyntaxException() = delete;
-<a name="353"><span class="lineNum">     353 </span>            : </a>
-<span class="lineNum">     354 </span>            : public:
-<span class="lineNum">     355 </span><span class="lineNoCov">          0 :         SyntaxException(string msg, ...) : Exception(ExceptionType::SYNTAX, msg) {</span>
-<span class="lineNum">     356 </span><span class="lineNoCov">          0 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     357 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     358 </span>            : };
-<span class="lineNum">     359 </span>            : 
-<span class="lineNum">     360 </span>            : class ConstraintException : public Exception {
-<span class="lineNum">     361 </span>            :         ConstraintException() = delete;
-<a name="362"><span class="lineNum">     362 </span>            : </a>
-<span class="lineNum">     363 </span>            : public:
-<span class="lineNum">     364 </span><span class="lineCov">         26 :         ConstraintException(string msg, ...) : Exception(ExceptionType::CONSTRAINT, msg) {</span>
-<span class="lineNum">     365 </span><span class="lineCov">         26 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     366 </span><span class="lineCov">         26 :         }</span>
-<span class="lineNum">     367 </span>            : };
-<span class="lineNum">     368 </span>            : 
-<span class="lineNum">     369 </span>            : class BinderException : public Exception {
-<span class="lineNum">     370 </span>            :         BinderException() = delete;
-<a name="371"><span class="lineNum">     371 </span>            : </a>
-<span class="lineNum">     372 </span>            : public:
-<span class="lineNum">     373 </span><span class="lineCov">         17 :         BinderException(string msg, ...) : Exception(ExceptionType::BINDER, msg) {</span>
-<span class="lineNum">     374 </span><span class="lineCov">         17 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     375 </span><span class="lineCov">         17 :         }</span>
-<span class="lineNum">     376 </span>            : };
-<span class="lineNum">     377 </span>            : 
-<span class="lineNum">     378 </span>            : class IOException : public Exception {
-<span class="lineNum">     379 </span>            :         IOException() = delete;
-<a name="380"><span class="lineNum">     380 </span>            : </a>
-<span class="lineNum">     381 </span>            : public:
-<span class="lineNum">     382 </span><span class="lineNoCov">          0 :         IOException(string msg, ...) : Exception(ExceptionType::IO, msg) {</span>
-<span class="lineNum">     383 </span><span class="lineNoCov">          0 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     384 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     385 </span>            : };
-<span class="lineNum">     386 </span>            : 
-<span class="lineNum">     387 </span>            : class SerializationException : public Exception {
-<span class="lineNum">     388 </span>            :         SerializationException() = delete;
-<a name="389"><span class="lineNum">     389 </span>            : </a>
-<span class="lineNum">     390 </span>            : public:
-<span class="lineNum">     391 </span><span class="lineCov">          1 :         SerializationException(string msg, ...) : Exception(ExceptionType::SERIALIZATION, msg) {</span>
-<span class="lineNum">     392 </span><span class="lineCov">          1 :                 FORMAT_CONSTRUCTOR(msg);</span>
-<span class="lineNum">     393 </span><span class="lineCov">          1 :         }</span>
-<span class="lineNum">     394 </span>            : };
-<span class="lineNum">     395 </span>            : 
-<a name="396"><span class="lineNum">     396 </span>            : class InterruptException : public Exception {</a>
-<span class="lineNum">     397 </span>            : public:
-<span class="lineNum">     398 </span><span class="lineNoCov">          0 :         InterruptException() : Exception(ExceptionType::INTERRUPT, &quot;Interrupted!&quot;) {</span>
-<span class="lineNum">     399 </span><span class="lineNoCov">          0 :         }</span>
-<span class="lineNum">     400 </span>            : };
-<span class="lineNum">     401 </span>            : 
-<span class="lineNum">     402 </span>            : } // namespace duckdb
+<span class="lineNum">     231 </span>            :         static void PrintStackTrace(FILE *out, unsigned int max_frames) {
+<span class="lineNum">     232 </span>            :         }
+<span class="lineNum">     233 </span>            : #endif
+<span class="lineNum">     234 </span>            :         friend std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const Exception &amp;e);
+<span class="lineNum">     235 </span>            : 
+<span class="lineNum">     236 </span>            : private:
+<span class="lineNum">     237 </span>            :         // type
+<span class="lineNum">     238 </span>            :         ExceptionType type;
+<span class="lineNum">     239 </span>            :         string exception_message_;
+<span class="lineNum">     240 </span>            : };
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span>            : //===--------------------------------------------------------------------===//
+<span class="lineNum">     243 </span>            : // Exception derived classes
+<span class="lineNum">     244 </span>            : //===--------------------------------------------------------------------===//
+<span class="lineNum">     245 </span>            : 
+<span class="lineNum">     246 </span>            : class CastException : public Exception {
+<span class="lineNum">     247 </span>            :         CastException() = delete;
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span>            : public:
+<span class="lineNum">     250 </span>            :         CastException(const TypeId origType, const TypeId newType)
+<span class="lineNum">     251 </span>            :             : Exception(ExceptionType::CONVERSION,
+<span class="lineNum">     252 </span>            :                         &quot;Type &quot; + TypeIdToString(origType) + &quot; can't be cast as &quot; + TypeIdToString(newType)) {
+<span class="lineNum">     253 </span>            :         }
+<span class="lineNum">     254 </span>            : };
+<span class="lineNum">     255 </span>            : 
+<span class="lineNum">     256 </span>            : class ValueOutOfRangeException : public Exception {
+<span class="lineNum">     257 </span>            :         ValueOutOfRangeException() = delete;
+<a name="258"><span class="lineNum">     258 </span>            : </a>
+<span class="lineNum">     259 </span>            : public:
+<span class="lineNum">     260 </span><span class="lineCov">          1 :         ValueOutOfRangeException(const int64_t value, const TypeId origType, const TypeId newType)</span>
+<span class="lineNum">     261 </span><span class="lineCov">          3 :             : Exception(ExceptionType::CONVERSION, &quot;Type &quot; + TypeIdToString(origType) + &quot; with value &quot; +</span>
+<span class="lineNum">     262 </span><span class="lineCov">          5 :                                                        std::to_string((intmax_t)value) +</span>
+<span class="lineNum">     263 </span>            :                                                        &quot; can't be cast as %s because the value is out of range &quot;
+<span class="lineNum">     264 </span><span class="lineCov">          4 :                                                        &quot;for the destination type &quot; +</span>
+<span class="lineNum">     265 </span><span class="lineCov">          4 :                                                        TypeIdToString(newType)) {</span>
+<span class="lineNum">     266 </span><span class="lineCov">          1 :         }</span>
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span>            :         ValueOutOfRangeException(const double value, const TypeId origType, const TypeId newType)
+<span class="lineNum">     269 </span>            :             : Exception(ExceptionType::CONVERSION, &quot;Type &quot; + TypeIdToString(origType) + &quot; with value &quot; +
+<span class="lineNum">     270 </span>            :                                                        std::to_string(value) +
+<span class="lineNum">     271 </span>            :                                                        &quot; can't be cast as %s because the value is out of range &quot;
+<span class="lineNum">     272 </span>            :                                                        &quot;for the destination type &quot; +
+<span class="lineNum">     273 </span>            :                                                        TypeIdToString(newType)) {
+<span class="lineNum">     274 </span>            :         }
+<span class="lineNum">     275 </span>            :         ValueOutOfRangeException(const TypeId varType, const size_t length)
+<span class="lineNum">     276 </span>            :             : Exception(ExceptionType::OUT_OF_RANGE, &quot;The value is too long to fit into type &quot; + TypeIdToString(varType) +
+<span class="lineNum">     277 </span>            :                                                          &quot;(&quot; + std::to_string(length) + &quot;)&quot;){};
+<span class="lineNum">     278 </span>            : };
+<span class="lineNum">     279 </span>            : 
+<span class="lineNum">     280 </span>            : class ConversionException : public Exception {
+<span class="lineNum">     281 </span>            :         ConversionException() = delete;
+<a name="282"><span class="lineNum">     282 </span>            : </a>
+<span class="lineNum">     283 </span>            : public:
+<span class="lineNum">     284 </span><span class="lineNoCov">          0 :         ConversionException(string msg, ...) : Exception(ExceptionType::CONVERSION, msg) {</span>
+<span class="lineNum">     285 </span><span class="lineNoCov">          0 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     286 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     287 </span>            : };
+<span class="lineNum">     288 </span>            : 
+<span class="lineNum">     289 </span>            : class InvalidTypeException : public Exception {
+<span class="lineNum">     290 </span>            :         InvalidTypeException() = delete;
+<a name="291"><span class="lineNum">     291 </span>            : </a>
+<span class="lineNum">     292 </span>            : public:
+<span class="lineNum">     293 </span><span class="lineCov">          3 :         InvalidTypeException(TypeId type, string msg)</span>
+<span class="lineNum">     294 </span><span class="lineCov">          3 :             : Exception(ExceptionType::INVALID_TYPE, &quot;Invalid Type [&quot; + TypeIdToString(type) + &quot;]: &quot; + msg) {</span>
+<span class="lineNum">     295 </span><span class="lineCov">          3 :         }</span>
+<span class="lineNum">     296 </span>            : };
+<span class="lineNum">     297 </span>            : 
+<span class="lineNum">     298 </span>            : class TypeMismatchException : public Exception {
+<span class="lineNum">     299 </span>            :         TypeMismatchException() = delete;
+<a name="300"><span class="lineNum">     300 </span>            : </a>
+<span class="lineNum">     301 </span>            : public:
+<span class="lineNum">     302 </span><span class="lineNoCov">          0 :         TypeMismatchException(const TypeId type_1, const TypeId type_2, string msg)</span>
+<span class="lineNum">     303 </span><span class="lineNoCov">          0 :             : Exception(ExceptionType::MISMATCH_TYPE,</span>
+<span class="lineNum">     304 </span><span class="lineNoCov">          0 :                         &quot;Type &quot; + TypeIdToString(type_1) + &quot; does not match with &quot; + TypeIdToString(type_2) + &quot;. &quot; + msg) {</span>
+<span class="lineNum">     305 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     306 </span>            : };
+<span class="lineNum">     307 </span>            : 
+<span class="lineNum">     308 </span>            : class TransactionException : public Exception {
+<span class="lineNum">     309 </span>            :         TransactionException() = delete;
+<a name="310"><span class="lineNum">     310 </span>            : </a>
+<span class="lineNum">     311 </span>            : public:
+<span class="lineNum">     312 </span><span class="lineCov">          2 :         TransactionException(string msg) : Exception(ExceptionType::TRANSACTION, msg) {</span>
+<span class="lineNum">     313 </span><span class="lineCov">          2 :         }</span>
+<span class="lineNum">     314 </span>            : };
+<span class="lineNum">     315 </span>            : 
+<span class="lineNum">     316 </span>            : class NotImplementedException : public Exception {
+<span class="lineNum">     317 </span>            :         NotImplementedException() = delete;
+<a name="318"><span class="lineNum">     318 </span>            : </a>
+<span class="lineNum">     319 </span>            : public:
+<span class="lineNum">     320 </span><span class="lineCov">         13 :         NotImplementedException(string msg, ...) : Exception(ExceptionType::NOT_IMPLEMENTED, msg) {</span>
+<span class="lineNum">     321 </span><span class="lineCov">         13 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     322 </span><span class="lineCov">         13 :         }</span>
+<span class="lineNum">     323 </span>            : };
+<span class="lineNum">     324 </span>            : 
+<span class="lineNum">     325 </span>            : class OutOfRangeException : public Exception {
+<span class="lineNum">     326 </span>            :         OutOfRangeException() = delete;
+<a name="327"><span class="lineNum">     327 </span>            : </a>
+<span class="lineNum">     328 </span>            : public:
+<span class="lineNum">     329 </span><span class="lineCov">          1 :         OutOfRangeException(string msg, ...) : Exception(ExceptionType::OUT_OF_RANGE, msg) {</span>
+<span class="lineNum">     330 </span><span class="lineCov">          1 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     331 </span><span class="lineCov">          1 :         }</span>
+<span class="lineNum">     332 </span>            : };
+<span class="lineNum">     333 </span>            : 
+<span class="lineNum">     334 </span>            : class CatalogException : public Exception {
+<span class="lineNum">     335 </span>            :         CatalogException() = delete;
+<a name="336"><span class="lineNum">     336 </span>            : </a>
+<span class="lineNum">     337 </span>            : public:
+<span class="lineNum">     338 </span><span class="lineCov">         15 :         CatalogException(string msg, ...) : Exception(ExceptionType::CATALOG, msg) {</span>
+<span class="lineNum">     339 </span><span class="lineCov">         15 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     340 </span><span class="lineCov">         15 :         }</span>
+<span class="lineNum">     341 </span>            : };
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span>            : class ParserException : public Exception {
+<span class="lineNum">     344 </span>            :         ParserException() = delete;
+<a name="345"><span class="lineNum">     345 </span>            : </a>
+<span class="lineNum">     346 </span>            : public:
+<span class="lineNum">     347 </span><span class="lineCov">         12 :         ParserException(string msg, ...) : Exception(ExceptionType::PARSER, msg) {</span>
+<span class="lineNum">     348 </span><span class="lineCov">         12 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     349 </span><span class="lineCov">         12 :         }</span>
+<span class="lineNum">     350 </span>            : };
+<span class="lineNum">     351 </span>            : 
+<span class="lineNum">     352 </span>            : class SyntaxException : public Exception {
+<span class="lineNum">     353 </span>            :         SyntaxException() = delete;
+<a name="354"><span class="lineNum">     354 </span>            : </a>
+<span class="lineNum">     355 </span>            : public:
+<span class="lineNum">     356 </span><span class="lineNoCov">          0 :         SyntaxException(string msg, ...) : Exception(ExceptionType::SYNTAX, msg) {</span>
+<span class="lineNum">     357 </span><span class="lineNoCov">          0 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     358 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     359 </span>            : };
+<span class="lineNum">     360 </span>            : 
+<span class="lineNum">     361 </span>            : class ConstraintException : public Exception {
+<span class="lineNum">     362 </span>            :         ConstraintException() = delete;
+<a name="363"><span class="lineNum">     363 </span>            : </a>
+<span class="lineNum">     364 </span>            : public:
+<span class="lineNum">     365 </span><span class="lineCov">         26 :         ConstraintException(string msg, ...) : Exception(ExceptionType::CONSTRAINT, msg) {</span>
+<span class="lineNum">     366 </span><span class="lineCov">         26 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     367 </span><span class="lineCov">         26 :         }</span>
+<span class="lineNum">     368 </span>            : };
+<span class="lineNum">     369 </span>            : 
+<span class="lineNum">     370 </span>            : class BinderException : public Exception {
+<span class="lineNum">     371 </span>            :         BinderException() = delete;
+<a name="372"><span class="lineNum">     372 </span>            : </a>
+<span class="lineNum">     373 </span>            : public:
+<span class="lineNum">     374 </span><span class="lineCov">         17 :         BinderException(string msg, ...) : Exception(ExceptionType::BINDER, msg) {</span>
+<span class="lineNum">     375 </span><span class="lineCov">         17 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     376 </span><span class="lineCov">         17 :         }</span>
+<span class="lineNum">     377 </span>            : };
+<span class="lineNum">     378 </span>            : 
+<span class="lineNum">     379 </span>            : class IOException : public Exception {
+<span class="lineNum">     380 </span>            :         IOException() = delete;
+<a name="381"><span class="lineNum">     381 </span>            : </a>
+<span class="lineNum">     382 </span>            : public:
+<span class="lineNum">     383 </span><span class="lineNoCov">          0 :         IOException(string msg, ...) : Exception(ExceptionType::IO, msg) {</span>
+<span class="lineNum">     384 </span><span class="lineNoCov">          0 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     385 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     386 </span>            : };
+<span class="lineNum">     387 </span>            : 
+<span class="lineNum">     388 </span>            : class SerializationException : public Exception {
+<span class="lineNum">     389 </span>            :         SerializationException() = delete;
+<a name="390"><span class="lineNum">     390 </span>            : </a>
+<span class="lineNum">     391 </span>            : public:
+<span class="lineNum">     392 </span><span class="lineCov">          1 :         SerializationException(string msg, ...) : Exception(ExceptionType::SERIALIZATION, msg) {</span>
+<span class="lineNum">     393 </span><span class="lineCov">          1 :                 FORMAT_CONSTRUCTOR(msg);</span>
+<span class="lineNum">     394 </span><span class="lineCov">          1 :         }</span>
+<span class="lineNum">     395 </span>            : };
+<span class="lineNum">     396 </span>            : 
+<a name="397"><span class="lineNum">     397 </span>            : class InterruptException : public Exception {</a>
+<span class="lineNum">     398 </span>            : public:
+<span class="lineNum">     399 </span><span class="lineNoCov">          0 :         InterruptException() : Exception(ExceptionType::INTERRUPT, &quot;Interrupted!&quot;) {</span>
+<span class="lineNum">     400 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     401 </span>            : };
+<span class="lineNum">     402 </span>            : 
+<span class="lineNum">     403 </span>            : } // namespace duckdb
 </pre>
       </td>
     </tr>

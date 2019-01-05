@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - parser/expression/aggregate_expression.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - parser/expression/aggregate_expression.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">72</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">6</td>
@@ -67,20 +67,20 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">     831386 : AggregateExpression::AggregateExpression(ExpressionType type, unique_ptr&lt;Expression&gt; child)</span>
-<span class="lineNum">       9 </span><span class="lineCov">     831386 :     : Expression(type), index(0) {</span>
+<span class="lineNum">       8 </span><span class="lineCov">     831351 : AggregateExpression::AggregateExpression(ExpressionType type, unique_ptr&lt;Expression&gt; child)</span>
+<span class="lineNum">       9 </span><span class="lineCov">     831351 :     : Expression(type), index(0) {</span>
 <span class="lineNum">      10 </span>            : 
 <span class="lineNum">      11 </span>            :         // translate COUNT(*) into AGGREGATE_COUNT_STAR
-<span class="lineNum">      12 </span><span class="lineCov">     831449 :         if (type == ExpressionType::AGGREGATE_COUNT) {</span>
-<span class="lineNum">      13 </span><span class="lineCov">     512497 :                 if (!child) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">     831383 :         if (type == ExpressionType::AGGREGATE_COUNT) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">     512501 :                 if (!child) {</span>
 <span class="lineNum">      14 </span><span class="lineNoCov">          0 :                         this-&gt;type = ExpressionType::AGGREGATE_COUNT_STAR;</span>
-<span class="lineNum">      15 </span><span class="lineCov">     512431 :                 } else if (child-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">     431623 :                         child = nullptr;</span>
-<span class="lineNum">      17 </span><span class="lineCov">     431657 :                         this-&gt;type = ExpressionType::AGGREGATE_COUNT_STAR;</span>
+<span class="lineNum">      15 </span><span class="lineCov">     512467 :                 } else if (child-&gt;GetExpressionType() == ExpressionType::STAR) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">     431654 :                         child = nullptr;</span>
+<span class="lineNum">      17 </span><span class="lineCov">     431683 :                         this-&gt;type = ExpressionType::AGGREGATE_COUNT_STAR;</span>
 <span class="lineNum">      18 </span>            :                 }
 <span class="lineNum">      19 </span>            :         }
-<span class="lineNum">      20 </span><span class="lineCov">     831427 :         switch (type) {</span>
-<span class="lineNum">      21 </span><span class="lineCov">     831427 :         case ExpressionType::AGGREGATE_COUNT:</span>
+<span class="lineNum">      20 </span><span class="lineCov">     831371 :         switch (type) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">     831371 :         case ExpressionType::AGGREGATE_COUNT:</span>
 <span class="lineNum">      22 </span>            :         case ExpressionType::AGGREGATE_COUNT_STAR:
 <span class="lineNum">      23 </span>            :         case ExpressionType::AGGREGATE_COUNT_DISTINCT:
 <span class="lineNum">      24 </span>            :         case ExpressionType::AGGREGATE_SUM:
@@ -90,22 +90,22 @@
 <span class="lineNum">      28 </span>            :         case ExpressionType::AGGREGATE_FIRST:
 <span class="lineNum">      29 </span>            :         case ExpressionType::AGGREGATE_STDDEV_SAMP:
 <span class="lineNum">      30 </span>            : 
-<span class="lineNum">      31 </span><span class="lineCov">     831427 :                 break;</span>
+<span class="lineNum">      31 </span><span class="lineCov">     831371 :                 break;</span>
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 throw NotImplementedException(&quot;Aggregate type not supported&quot;);</span>
 <span class="lineNum">      34 </span>            :         }
-<span class="lineNum">      35 </span><span class="lineCov">     831427 :         if (child) {</span>
-<span class="lineNum">      36 </span><span class="lineCov">     399734 :                 AddChild(move(child));</span>
+<span class="lineNum">      35 </span><span class="lineCov">     831371 :         if (child) {</span>
+<span class="lineNum">      36 </span><span class="lineCov">     399666 :                 AddChild(move(child));</span>
 <span class="lineNum">      37 </span>            :         }
-<span class="lineNum">      38 </span><span class="lineCov">     831387 : }</span>
+<span class="lineNum">      38 </span><span class="lineCov">     831352 : }</span>
 <a name="39"><span class="lineNum">      39 </span>            : </a>
 <span class="lineNum">      40 </span>            : //! Resolve the type of the aggregate
-<span class="lineNum">      41 </span><span class="lineCov">     931106 : void AggregateExpression::ResolveType() {</span>
-<span class="lineNum">      42 </span><span class="lineCov">     931106 :         Expression::ResolveType();</span>
-<span class="lineNum">      43 </span><span class="lineCov">     931124 :         switch (type) {</span>
-<span class="lineNum">      44 </span><span class="lineCov">     464246 :         case ExpressionType::AGGREGATE_COUNT_STAR:</span>
-<span class="lineNum">      45 </span><span class="lineCov">     464246 :                 return_type = TypeId::BIGINT;</span>
-<span class="lineNum">      46 </span><span class="lineCov">     464246 :                 break;</span>
+<span class="lineNum">      41 </span><span class="lineCov">     931075 : void AggregateExpression::ResolveType() {</span>
+<span class="lineNum">      42 </span><span class="lineCov">     931075 :         Expression::ResolveType();</span>
+<span class="lineNum">      43 </span><span class="lineCov">     931102 :         switch (type) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">     464294 :         case ExpressionType::AGGREGATE_COUNT_STAR:</span>
+<span class="lineNum">      45 </span><span class="lineCov">     464294 :                 return_type = TypeId::BIGINT;</span>
+<span class="lineNum">      46 </span><span class="lineCov">     464294 :                 break;</span>
 <span class="lineNum">      47 </span><span class="lineCov">     115677 :         case ExpressionType::AGGREGATE_COUNT:</span>
 <span class="lineNum">      48 </span>            :         case ExpressionType::AGGREGATE_COUNT_DISTINCT:
 <span class="lineNum">      49 </span><span class="lineCov">     115677 :                 if (children[0]-&gt;IsScalar()) {</span>
@@ -123,9 +123,9 @@
 <span class="lineNum">      61 </span><span class="lineCov">     109782 :                 ExpressionStatistics::Min(children[0]-&gt;stats, stats);</span>
 <span class="lineNum">      62 </span><span class="lineCov">     109782 :                 return_type = max(children[0]-&gt;return_type, stats.MinimalType());</span>
 <span class="lineNum">      63 </span><span class="lineCov">     109782 :                 break;</span>
-<span class="lineNum">      64 </span><span class="lineCov">     132417 :         case ExpressionType::AGGREGATE_SUM:</span>
+<span class="lineNum">      64 </span><span class="lineCov">     132349 :         case ExpressionType::AGGREGATE_SUM:</span>
 <span class="lineNum">      65 </span>            :         case ExpressionType::AGGREGATE_SUM_DISTINCT:
-<span class="lineNum">      66 </span><span class="lineCov">     132417 :                 if (children[0]-&gt;IsScalar()) {</span>
+<span class="lineNum">      66 </span><span class="lineCov">     132349 :                 if (children[0]-&gt;IsScalar()) {</span>
 <span class="lineNum">      67 </span><span class="lineCov">      87739 :                         stats.has_stats = false;</span>
 <span class="lineNum">      68 </span><span class="lineCov">      87739 :                         switch (children[0]-&gt;return_type) {</span>
 <span class="lineNum">      69 </span><span class="lineCov">      86833 :                         case TypeId::BOOLEAN:</span>
@@ -139,22 +139,22 @@
 <span class="lineNum">      77 </span><span class="lineCov">        906 :                                 return_type = children[0]-&gt;return_type;</span>
 <span class="lineNum">      78 </span>            :                         }
 <span class="lineNum">      79 </span>            :                 } else {
-<span class="lineNum">      80 </span><span class="lineCov">      44678 :                         ExpressionStatistics::Count(children[0]-&gt;stats, stats);</span>
-<span class="lineNum">      81 </span><span class="lineCov">      44678 :                         ExpressionStatistics::Sum(children[0]-&gt;stats, stats);</span>
-<span class="lineNum">      82 </span><span class="lineCov">      44678 :                         return_type = max(children[0]-&gt;return_type, stats.MinimalType());</span>
+<span class="lineNum">      80 </span><span class="lineCov">      44610 :                         ExpressionStatistics::Count(children[0]-&gt;stats, stats);</span>
+<span class="lineNum">      81 </span><span class="lineCov">      44610 :                         ExpressionStatistics::Sum(children[0]-&gt;stats, stats);</span>
+<span class="lineNum">      82 </span><span class="lineCov">      44610 :                         return_type = max(children[0]-&gt;return_type, stats.MinimalType());</span>
 <span class="lineNum">      83 </span>            :                 }
 <span class="lineNum">      84 </span>            : 
-<span class="lineNum">      85 </span><span class="lineCov">     132417 :                 break;</span>
+<span class="lineNum">      85 </span><span class="lineCov">     132349 :                 break;</span>
 <span class="lineNum">      86 </span><span class="lineCov">         94 :         case ExpressionType::AGGREGATE_FIRST:</span>
 <span class="lineNum">      87 </span><span class="lineCov">         94 :                 return_type = children[0]-&gt;return_type;</span>
 <span class="lineNum">      88 </span><span class="lineCov">         94 :                 break;</span>
 <span class="lineNum">      89 </span><span class="lineCov">         14 :         case ExpressionType::AGGREGATE_STDDEV_SAMP:</span>
 <span class="lineNum">      90 </span><span class="lineCov">         14 :                 return_type = TypeId::DECIMAL;</span>
 <span class="lineNum">      91 </span><span class="lineCov">         14 :                 break;</span>
-<span class="lineNum">      92 </span><span class="lineCov">         22 :         default:</span>
-<span class="lineNum">      93 </span><span class="lineCov">         22 :                 throw NotImplementedException(&quot;Unsupported aggregate type!&quot;);</span>
+<span class="lineNum">      92 </span><span class="lineCov">         20 :         default:</span>
+<span class="lineNum">      93 </span><span class="lineCov">         20 :                 throw NotImplementedException(&quot;Unsupported aggregate type!&quot;);</span>
 <span class="lineNum">      94 </span>            :         }
-<a name="95"><span class="lineNum">      95 </span><span class="lineCov">     931102 : }</span></a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">     931082 : }</span></a>
 <span class="lineNum">      96 </span>            : 
 <span class="lineNum">      97 </span><span class="lineCov">        402 : unique_ptr&lt;Expression&gt; AggregateExpression::Copy() {</span>
 <span class="lineNum">      98 </span><span class="lineCov">        402 :         if (children.size() &gt; 1) {</span>

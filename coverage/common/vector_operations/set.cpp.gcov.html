@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - common/vector_operations/set.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - common/vector_operations/set.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">72</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">11</td>
@@ -74,9 +74,9 @@
 <span class="lineNum">      12 </span>            : using namespace std;
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : template &lt;class T&gt;
-<span class="lineNum">      15 </span><span class="lineCov">    5340711 : static inline void set_loop(T *__restrict result_data, T value, size_t count, sel_t *__restrict sel_vector) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    5340711 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) { result_data[i] = value; });</span>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">    5340793 : }</span></a>
+<span class="lineNum">      15 </span><span class="lineCov">    5340676 : static inline void set_loop(T *__restrict result_data, T value, size_t count, sel_t *__restrict sel_vector) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    5340676 :         VectorOperations::Exec(sel_vector, count, [&amp;](size_t i, size_t k) { result_data[i] = value; });</span>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">    5340724 : }</span></a>
 <span class="lineNum">      18 </span><span class="lineCov">    1312215 : </span>
 <span class="lineNum">      19 </span><span class="lineCov">    1312215 : template &lt;class T&gt; void templated_set_loop(Vector &amp;result, T value) {</span>
 <span class="lineNum">      20 </span><span class="lineCov">    1312215 :         auto result_data = (T *)result.data;</span>
@@ -92,15 +92,15 @@
 <span class="lineNum">      30 </span><span class="lineNoCov">          0 :                 value = value.CastAs(result.type);</span>
 <span class="lineNum">      31 </span><span class="lineNoCov">          0 :         }</span>
 <span class="lineNum">      32 </span><span class="lineNoCov">          0 : </span>
-<span class="lineNum">      33 </span><span class="lineCov">     501168 :         if (value.is_null) {</span>
-<span class="lineNum">      34 </span><span class="lineCov">     501168 :                 // initialize the NULL mask with all 1</span>
-<span class="lineNum">      35 </span><span class="lineCov">     501250 :                 result.nullmask.set();</span>
+<span class="lineNum">      33 </span><span class="lineCov">     501133 :         if (value.is_null) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">     501133 :                 // initialize the NULL mask with all 1</span>
+<span class="lineNum">      35 </span><span class="lineCov">     501181 :                 result.nullmask.set();</span>
 <span class="lineNum">      36 </span>            :         } else {
-<span class="lineNum">      37 </span><span class="lineCov">    5340711 :                 // set all values in the nullmask to 0</span>
-<span class="lineNum">      38 </span><span class="lineCov">    5340711 :                 result.nullmask.reset();</span>
+<span class="lineNum">      37 </span><span class="lineCov">    5340676 :                 // set all values in the nullmask to 0</span>
+<span class="lineNum">      38 </span><span class="lineCov">    5340676 :                 result.nullmask.reset();</span>
 <span class="lineNum">      39 </span>            :                 switch (result.type) {
-<span class="lineNum">      40 </span><span class="lineCov">    5340711 :                 case TypeId::BOOLEAN:</span>
-<span class="lineNum">      41 </span><span class="lineCov">    5340793 :                 case TypeId::TINYINT:</span>
+<span class="lineNum">      40 </span><span class="lineCov">    5340676 :                 case TypeId::BOOLEAN:</span>
+<span class="lineNum">      41 </span><span class="lineCov">    5340724 :                 case TypeId::TINYINT:</span>
 <span class="lineNum">      42 </span><span class="lineCov">    1312215 :                         templated_set_loop&lt;int8_t&gt;(result, value.value_.tinyint);</span>
 <span class="lineNum">      43 </span><span class="lineCov">    1312215 :                         break;</span>
 <span class="lineNum">      44 </span>            :                 case TypeId::SMALLINT:
@@ -126,11 +126,11 @@
 <span class="lineNum">      64 </span>            :                         break;
 <span class="lineNum">      65 </span><span class="lineNoCov">          0 :                 case TypeId::VARCHAR: {</span>
 <span class="lineNum">      66 </span><span class="lineNoCov">          0 :                         auto str = result.string_heap.AddString(value.str_value);</span>
-<span class="lineNum">      67 </span><span class="lineCov">     501168 :                         auto dataptr = (const char **)result.data;</span>
-<span class="lineNum">      68 </span><span class="lineCov">     501168 :                         VectorOperations::Exec(result.sel_vector, result.count, [&amp;](size_t i, size_t k) { dataptr[i] = str; });</span>
+<span class="lineNum">      67 </span><span class="lineCov">     501133 :                         auto dataptr = (const char **)result.data;</span>
+<span class="lineNum">      68 </span><span class="lineCov">     501133 :                         VectorOperations::Exec(result.sel_vector, result.count, [&amp;](size_t i, size_t k) { dataptr[i] = str; });</span>
 <span class="lineNum">      69 </span>            :                         break;
-<span class="lineNum">      70 </span><span class="lineCov">     501168 :                 }</span>
-<span class="lineNum">      71 </span><span class="lineCov">     501250 :                 default:</span>
+<span class="lineNum">      70 </span><span class="lineCov">     501133 :                 }</span>
+<span class="lineNum">      71 </span><span class="lineCov">     501181 :                 default:</span>
 <span class="lineNum">      72 </span>            :                         throw NotImplementedException(&quot;Unimplemented type for Set&quot;);
 <span class="lineNum">      73 </span>            :                 }
 <span class="lineNum">      74 </span>            :         }

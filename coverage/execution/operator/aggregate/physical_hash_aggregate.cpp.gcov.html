@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 840047b9 - execution/operator/aggregate/physical_hash_aggregate.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 551026c3 - execution/operator/aggregate/physical_hash_aggregate.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
+            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">76</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:01:10</td>
+            <td class="headerValue">2019-01-05 15:54:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -69,10 +69,10 @@
 <span class="lineNum">       7 </span>            : using namespace duckdb;
 <a name="8"><span class="lineNum">       8 </span>            : using namespace std;</a>
 <span class="lineNum">       9 </span>            : 
-<span class="lineNum">      10 </span><span class="lineCov">     572758 : PhysicalHashAggregate::PhysicalHashAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
-<span class="lineNum">      11 </span><span class="lineCov">     572758 :     : PhysicalAggregate(op, move(expressions), PhysicalOperatorType::HASH_GROUP_BY) {</span>
-<span class="lineNum">      12 </span><span class="lineCov">     572789 :         Initialize();</span>
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">     572759 : }</span></a>
+<span class="lineNum">      10 </span><span class="lineCov">     572720 : PhysicalHashAggregate::PhysicalHashAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions)</span>
+<span class="lineNum">      11 </span><span class="lineCov">     572720 :     : PhysicalAggregate(op, move(expressions), PhysicalOperatorType::HASH_GROUP_BY) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">     572745 :         Initialize();</span>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">     572726 : }</span></a>
 <span class="lineNum">      14 </span>            : 
 <span class="lineNum">      15 </span><span class="lineCov">     730681 : PhysicalHashAggregate::PhysicalHashAggregate(LogicalOperator &amp;op, vector&lt;unique_ptr&lt;Expression&gt;&gt; expressions,</span>
 <span class="lineNum">      16 </span><span class="lineCov">     730681 :                                              vector&lt;unique_ptr&lt;Expression&gt;&gt; groups)</span>
@@ -80,26 +80,26 @@
 <span class="lineNum">      18 </span><span class="lineCov">     730681 :         Initialize();</span>
 <a name="19"><span class="lineNum">      19 </span><span class="lineCov">     730681 : }</span></a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">    1303435 : void PhysicalHashAggregate::Initialize() {</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    1303435 : }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">    1303404 : void PhysicalHashAggregate::Initialize() {</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    1303404 : }</span></a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">    2559587 : void PhysicalHashAggregate::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
-<span class="lineNum">      25 </span><span class="lineCov">    2559587 :         auto state = reinterpret_cast&lt;PhysicalHashAggregateOperatorState *&gt;(state_);</span>
-<span class="lineNum">      26 </span><span class="lineCov">    1535807 :         do {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    4095419 :                 if (children.size() &gt; 0) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">    2559508 : void PhysicalHashAggregate::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state_) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">    2559508 :         auto state = reinterpret_cast&lt;PhysicalHashAggregateOperatorState *&gt;(state_);</span>
+<span class="lineNum">      26 </span><span class="lineCov">    1535756 :         do {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    4095283 :                 if (children.size() &gt; 0) {</span>
 <span class="lineNum">      28 </span>            :                         // resolve the child chunk if there is one
-<span class="lineNum">      29 </span><span class="lineCov">    4095451 :                         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">      30 </span><span class="lineCov">    4095390 :                         if (state-&gt;child_chunk.size() == 0) {</span>
-<span class="lineNum">      31 </span><span class="lineCov">    2559609 :                                 break;</span>
+<span class="lineNum">      29 </span><span class="lineCov">    4095301 :                         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      30 </span><span class="lineCov">    4095251 :                         if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">    2559510 :                                 break;</span>
 <span class="lineNum">      32 </span>            :                         }
 <span class="lineNum">      33 </span>            :                 }
 <span class="lineNum">      34 </span>            : 
-<span class="lineNum">      35 </span><span class="lineCov">    1535769 :                 ExpressionExecutor executor(state, context);</span>
+<span class="lineNum">      35 </span><span class="lineCov">    1535731 :                 ExpressionExecutor executor(state, context);</span>
 <span class="lineNum">      36 </span>            :                 // aggregation with groups
-<span class="lineNum">      37 </span><span class="lineCov">    1535796 :                 DataChunk &amp;group_chunk = state-&gt;group_chunk;</span>
-<span class="lineNum">      38 </span><span class="lineCov">    1535796 :                 DataChunk &amp;payload_chunk = state-&gt;payload_chunk;</span>
-<span class="lineNum">      39 </span><span class="lineCov">    1535796 :                 executor.Execute(groups, group_chunk);</span>
-<span class="lineNum">      40 </span><span class="lineCov">    1535801 :                 executor.Execute(payload_chunk,</span>
+<span class="lineNum">      37 </span><span class="lineCov">    1535751 :                 DataChunk &amp;group_chunk = state-&gt;group_chunk;</span>
+<span class="lineNum">      38 </span><span class="lineCov">    1535751 :                 DataChunk &amp;payload_chunk = state-&gt;payload_chunk;</span>
+<span class="lineNum">      39 </span><span class="lineCov">    1535751 :                 executor.Execute(groups, group_chunk);</span>
+<span class="lineNum">      40 </span><span class="lineCov">    1535759 :                 executor.Execute(payload_chunk,</span>
 <span class="lineNum">      41 </span>            :                                  [&amp;](size_t i) {
 <span class="lineNum">      42 </span>            :                                          if (!state-&gt;payload_expressions[i]) {
 <span class="lineNum">      43 </span>            :                                                  state-&gt;payload_chunk.data[i].count = group_chunk.size();
@@ -107,32 +107,32 @@
 <span class="lineNum">      45 </span>            :                                          }
 <span class="lineNum">      46 </span>            :                                          return state-&gt;payload_expressions[i];
 <span class="lineNum">      47 </span>            :                                  },
-<span class="lineNum">      48 </span><span class="lineCov">    1535780 :                                  state-&gt;payload_expressions.size());</span>
+<span class="lineNum">      48 </span><span class="lineCov">    1535745 :                                  state-&gt;payload_expressions.size());</span>
 <span class="lineNum">      49 </span>            : 
-<span class="lineNum">      50 </span><span class="lineCov">    1535794 :                 group_chunk.Verify();</span>
-<span class="lineNum">      51 </span><span class="lineCov">    1535792 :                 payload_chunk.Verify();</span>
-<span class="lineNum">      52 </span><span class="lineCov">    1535794 :                 assert(payload_chunk.column_count == 0 || group_chunk.size() == payload_chunk.size());</span>
+<span class="lineNum">      50 </span><span class="lineCov">    1535747 :                 group_chunk.Verify();</span>
+<span class="lineNum">      51 </span><span class="lineCov">    1535744 :                 payload_chunk.Verify();</span>
+<span class="lineNum">      52 </span><span class="lineCov">    1535744 :                 assert(payload_chunk.column_count == 0 || group_chunk.size() == payload_chunk.size());</span>
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span>            :                 // move the strings inside the groups to the string heap
-<span class="lineNum">      55 </span><span class="lineCov">    1535788 :                 group_chunk.MoveStringsToHeap(state-&gt;ht-&gt;string_heap);</span>
-<span class="lineNum">      56 </span><span class="lineCov">    1535781 :                 payload_chunk.MoveStringsToHeap(state-&gt;ht-&gt;string_heap);</span>
+<span class="lineNum">      55 </span><span class="lineCov">    1535752 :                 group_chunk.MoveStringsToHeap(state-&gt;ht-&gt;string_heap);</span>
+<span class="lineNum">      56 </span><span class="lineCov">    1535738 :                 payload_chunk.MoveStringsToHeap(state-&gt;ht-&gt;string_heap);</span>
 <span class="lineNum">      57 </span>            : 
-<span class="lineNum">      58 </span><span class="lineCov">    1535790 :                 state-&gt;ht-&gt;AddChunk(group_chunk, payload_chunk);</span>
-<span class="lineNum">      59 </span><span class="lineCov">    1535805 :                 state-&gt;tuples_scanned += state-&gt;child_chunk.size();</span>
-<span class="lineNum">      60 </span><span class="lineCov">    1535806 :         } while (state-&gt;child_chunk.size() &gt; 0);</span>
+<span class="lineNum">      58 </span><span class="lineCov">    1535750 :                 state-&gt;ht-&gt;AddChunk(group_chunk, payload_chunk);</span>
+<span class="lineNum">      59 </span><span class="lineCov">    1535757 :                 state-&gt;tuples_scanned += state-&gt;child_chunk.size();</span>
+<span class="lineNum">      60 </span><span class="lineCov">    1535755 :         } while (state-&gt;child_chunk.size() &gt; 0);</span>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span><span class="lineCov">    2559596 :         state-&gt;group_chunk.Reset();</span>
-<span class="lineNum">      63 </span><span class="lineCov">    2559621 :         state-&gt;aggregate_chunk.Reset();</span>
-<span class="lineNum">      64 </span><span class="lineCov">    2559610 :         size_t elements_found = state-&gt;ht-&gt;Scan(state-&gt;ht_scan_position, state-&gt;group_chunk, state-&gt;aggregate_chunk);</span>
+<span class="lineNum">      62 </span><span class="lineCov">    2559499 :         state-&gt;group_chunk.Reset();</span>
+<span class="lineNum">      63 </span><span class="lineCov">    2559516 :         state-&gt;aggregate_chunk.Reset();</span>
+<span class="lineNum">      64 </span><span class="lineCov">    2559518 :         size_t elements_found = state-&gt;ht-&gt;Scan(state-&gt;ht_scan_position, state-&gt;group_chunk, state-&gt;aggregate_chunk);</span>
 <span class="lineNum">      65 </span>            : 
 <span class="lineNum">      66 </span>            :         // special case hack to sort out aggregating from empty intermediates
 <span class="lineNum">      67 </span>            :         // for aggregations without groups
-<span class="lineNum">      68 </span><span class="lineCov">    2559643 :         if (elements_found == 0 &amp;&amp; state-&gt;tuples_scanned == 0 &amp;&amp; is_implicit_aggr) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">    2559547 :         if (elements_found == 0 &amp;&amp; state-&gt;tuples_scanned == 0 &amp;&amp; is_implicit_aggr) {</span>
 <span class="lineNum">      69 </span><span class="lineCov">      46243 :                 assert(state-&gt;aggregate_chunk.column_count == aggregates.size());</span>
 <span class="lineNum">      70 </span>            :                 // for each column in the aggregates, seit either to NULL or 0
-<span class="lineNum">      71 </span><span class="lineCov">     100284 :                 for (size_t i = 0; i &lt; state-&gt;aggregate_chunk.column_count; i++) {</span>
-<span class="lineNum">      72 </span><span class="lineCov">      54042 :                         state-&gt;aggregate_chunk.data[i].count = 1;</span>
-<span class="lineNum">      73 </span><span class="lineCov">      54042 :                         switch (aggregates[i]-&gt;type) {</span>
+<span class="lineNum">      71 </span><span class="lineCov">     100286 :                 for (size_t i = 0; i &lt; state-&gt;aggregate_chunk.column_count; i++) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">      54043 :                         state-&gt;aggregate_chunk.data[i].count = 1;</span>
+<span class="lineNum">      73 </span><span class="lineCov">      54043 :                         switch (aggregates[i]-&gt;type) {</span>
 <span class="lineNum">      74 </span><span class="lineCov">      42306 :                         case ExpressionType::AGGREGATE_COUNT_STAR:</span>
 <span class="lineNum">      75 </span>            :                         case ExpressionType::AGGREGATE_COUNT:
 <span class="lineNum">      76 </span>            :                         case ExpressionType::AGGREGATE_COUNT_DISTINCT:
@@ -140,57 +140,57 @@
 <span class="lineNum">      78 </span><span class="lineCov">      42306 :                                 break;</span>
 <span class="lineNum">      79 </span><span class="lineCov">      11737 :                         default:</span>
 <span class="lineNum">      80 </span><span class="lineCov">      11737 :                                 state-&gt;aggregate_chunk.data[i].SetValue(0, Value());</span>
-<span class="lineNum">      81 </span><span class="lineCov">      11736 :                                 break;</span>
+<span class="lineNum">      81 </span><span class="lineCov">      11737 :                                 break;</span>
 <span class="lineNum">      82 </span>            :                         }
 <span class="lineNum">      83 </span>            :                 }
-<span class="lineNum">      84 </span><span class="lineCov">      46242 :                 state-&gt;finished = true;</span>
+<span class="lineNum">      84 </span><span class="lineCov">      46243 :                 state-&gt;finished = true;</span>
 <span class="lineNum">      85 </span>            :         }
-<span class="lineNum">      86 </span><span class="lineCov">    2559642 :         if (elements_found == 0 &amp;&amp; !state-&gt;finished) {</span>
-<span class="lineNum">      87 </span><span class="lineCov">    1271344 :                 state-&gt;finished = true;</span>
-<span class="lineNum">      88 </span><span class="lineCov">    1271344 :                 return;</span>
+<span class="lineNum">      86 </span><span class="lineCov">    2559547 :         if (elements_found == 0 &amp;&amp; !state-&gt;finished) {</span>
+<span class="lineNum">      87 </span><span class="lineCov">    1271298 :                 state-&gt;finished = true;</span>
+<span class="lineNum">      88 </span><span class="lineCov">    1271298 :                 return;</span>
 <span class="lineNum">      89 </span>            :         }
 <span class="lineNum">      90 </span>            :         // we finished the child chunk
 <span class="lineNum">      91 </span>            :         // actually compute the final projection list now
 <span class="lineNum">      92 </span>            : 
-<span class="lineNum">      93 </span><span class="lineCov">    1288298 :         size_t chunk_index = 0;</span>
-<span class="lineNum">      94 </span><span class="lineCov">    1288298 :         if (state-&gt;group_chunk.column_count + state-&gt;aggregate_chunk.column_count == chunk.column_count) {</span>
+<span class="lineNum">      93 </span><span class="lineCov">    1288249 :         size_t chunk_index = 0;</span>
+<span class="lineNum">      94 </span><span class="lineCov">    1288249 :         if (state-&gt;group_chunk.column_count + state-&gt;aggregate_chunk.column_count == chunk.column_count) {</span>
 <span class="lineNum">      95 </span><span class="lineCov">    1458411 :                 for (size_t col_idx = 0; col_idx &lt; state-&gt;group_chunk.column_count; col_idx++) {</span>
 <span class="lineNum">      96 </span><span class="lineCov">     790005 :                         chunk.data[chunk_index++].Reference(state-&gt;group_chunk.data[col_idx]);</span>
 <span class="lineNum">      97 </span>            :                 }
 <span class="lineNum">      98 </span>            :         } else {
-<span class="lineNum">      99 </span><span class="lineCov">     619892 :                 assert(state-&gt;aggregate_chunk.column_count == chunk.column_count);</span>
+<span class="lineNum">      99 </span><span class="lineCov">     619843 :                 assert(state-&gt;aggregate_chunk.column_count == chunk.column_count);</span>
 <span class="lineNum">     100 </span>            :         }
 <span class="lineNum">     101 </span>            : 
-<span class="lineNum">     102 </span><span class="lineCov">    2182551 :         for (size_t col_idx = 0; col_idx &lt; state-&gt;aggregate_chunk.column_count; col_idx++) {</span>
-<span class="lineNum">     103 </span><span class="lineCov">     894269 :                 chunk.data[chunk_index++].Reference(state-&gt;aggregate_chunk.data[col_idx]);</span>
+<span class="lineNum">     102 </span><span class="lineCov">    2182455 :         for (size_t col_idx = 0; col_idx &lt; state-&gt;aggregate_chunk.column_count; col_idx++) {</span>
+<span class="lineNum">     103 </span><span class="lineCov">     894216 :                 chunk.data[chunk_index++].Reference(state-&gt;aggregate_chunk.data[col_idx]);</span>
 <span class="lineNum">     104 </span>            :         }
 <a name="105"><span class="lineNum">     105 </span>            : }</a>
 <span class="lineNum">     106 </span>            : 
-<span class="lineNum">     107 </span><span class="lineCov">    1350480 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalHashAggregate::GetOperatorState(ExpressionExecutor *parent) {</span>
-<span class="lineNum">     108 </span><span class="lineCov">    1350480 :         auto state = make_unique&lt;PhysicalHashAggregateOperatorState&gt;(</span>
-<span class="lineNum">     109 </span><span class="lineCov">    2700991 :             this, children.size() == 0 ? nullptr : children[0].get(), parent);</span>
-<span class="lineNum">     110 </span><span class="lineCov">    1350500 :         state-&gt;tuples_scanned = 0;</span>
-<span class="lineNum">     111 </span><span class="lineCov">    2701029 :         vector&lt;TypeId&gt; group_types, payload_types;</span>
-<span class="lineNum">     112 </span><span class="lineCov">    2701050 :         vector&lt;ExpressionType&gt; aggregate_kind;</span>
-<span class="lineNum">     113 </span><span class="lineCov">    2898141 :         for (auto &amp;expr : groups) {</span>
-<span class="lineNum">     114 </span><span class="lineCov">    1547624 :                 group_types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">     107 </span><span class="lineCov">    1350454 : unique_ptr&lt;PhysicalOperatorState&gt; PhysicalHashAggregate::GetOperatorState(ExpressionExecutor *parent) {</span>
+<span class="lineNum">     108 </span><span class="lineCov">    1350454 :         auto state = make_unique&lt;PhysicalHashAggregateOperatorState&gt;(</span>
+<span class="lineNum">     109 </span><span class="lineCov">    2700947 :             this, children.size() == 0 ? nullptr : children[0].get(), parent);</span>
+<span class="lineNum">     110 </span><span class="lineCov">    1350459 :         state-&gt;tuples_scanned = 0;</span>
+<span class="lineNum">     111 </span><span class="lineCov">    2700934 :         vector&lt;TypeId&gt; group_types, payload_types;</span>
+<span class="lineNum">     112 </span><span class="lineCov">    2700937 :         vector&lt;ExpressionType&gt; aggregate_kind;</span>
+<span class="lineNum">     113 </span><span class="lineCov">    2898055 :         for (auto &amp;expr : groups) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">    1547588 :                 group_types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">     115 </span>            :         }
-<span class="lineNum">     116 </span><span class="lineCov">    2245242 :         for (auto &amp;expr : aggregates) {</span>
-<span class="lineNum">     117 </span><span class="lineCov">     894742 :                 aggregate_kind.push_back(expr-&gt;type);</span>
-<span class="lineNum">     118 </span><span class="lineCov">     894674 :                 if (expr-&gt;children.size() &gt; 0) {</span>
-<span class="lineNum">     119 </span><span class="lineCov">     432460 :                         auto &amp;child = expr-&gt;children[0];</span>
-<span class="lineNum">     120 </span><span class="lineCov">     432460 :                         payload_types.push_back(child-&gt;return_type);</span>
-<span class="lineNum">     121 </span><span class="lineCov">     432460 :                         state-&gt;payload_expressions.push_back(child.get());</span>
+<span class="lineNum">     116 </span><span class="lineCov">    2245128 :         for (auto &amp;expr : aggregates) {</span>
+<span class="lineNum">     117 </span><span class="lineCov">     894675 :                 aggregate_kind.push_back(expr-&gt;type);</span>
+<span class="lineNum">     118 </span><span class="lineCov">     894650 :                 if (expr-&gt;children.size() &gt; 0) {</span>
+<span class="lineNum">     119 </span><span class="lineCov">     432392 :                         auto &amp;child = expr-&gt;children[0];</span>
+<span class="lineNum">     120 </span><span class="lineCov">     432392 :                         payload_types.push_back(child-&gt;return_type);</span>
+<span class="lineNum">     121 </span><span class="lineCov">     432392 :                         state-&gt;payload_expressions.push_back(child.get());</span>
 <span class="lineNum">     122 </span>            :                 } else {
 <span class="lineNum">     123 </span>            :                         // COUNT(*)
-<span class="lineNum">     124 </span><span class="lineCov">     462217 :                         payload_types.push_back(TypeId::BIGINT);</span>
-<span class="lineNum">     125 </span><span class="lineCov">     462268 :                         state-&gt;payload_expressions.push_back(nullptr);</span>
+<span class="lineNum">     124 </span><span class="lineCov">     462257 :                         payload_types.push_back(TypeId::BIGINT);</span>
+<span class="lineNum">     125 </span><span class="lineCov">     462280 :                         state-&gt;payload_expressions.push_back(nullptr);</span>
 <span class="lineNum">     126 </span>            :                 }
 <span class="lineNum">     127 </span>            :         }
-<span class="lineNum">     128 </span><span class="lineCov">    1350541 :         state-&gt;payload_chunk.Initialize(payload_types);</span>
+<span class="lineNum">     128 </span><span class="lineCov">    1350484 :         state-&gt;payload_chunk.Initialize(payload_types);</span>
 <span class="lineNum">     129 </span>            : 
-<span class="lineNum">     130 </span><span class="lineCov">    1350515 :         state-&gt;ht = make_unique&lt;SuperLargeHashTable&gt;(1024, group_types, payload_types, aggregate_kind);</span>
-<span class="lineNum">     131 </span><span class="lineCov">    2700999 :         return move(state);</span>
+<span class="lineNum">     130 </span><span class="lineCov">    1350461 :         state-&gt;ht = make_unique&lt;SuperLargeHashTable&gt;(1024, group_types, payload_types, aggregate_kind);</span>
+<span class="lineNum">     131 </span><span class="lineCov">    2700905 :         return move(state);</span>
 <span class="lineNum">     132 </span>            : }
 </pre>
       </td>
