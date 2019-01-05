@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - optimizer/expression_rules/constant_folding.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 840047b9 - optimizer/expression_rules/constant_folding.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
+            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">31</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 16:11:25</td>
+            <td class="headerValue">2019-01-05 15:01:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -74,26 +74,26 @@
 <span class="lineNum">      12 </span>            : using namespace duckdb;
 <a name="13"><span class="lineNum">      13 </span>            : using namespace std;</a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">    3131660 : ConstantFoldingRule::ConstantFoldingRule() {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    9399635 :         root = unique_ptr&lt;AbstractRuleNode&gt;(new ExpressionNodeSet(</span>
+<span class="lineNum">      15 </span><span class="lineCov">    3131689 : ConstantFoldingRule::ConstantFoldingRule() {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    9399675 :         root = unique_ptr&lt;AbstractRuleNode&gt;(new ExpressionNodeSet(</span>
 <span class="lineNum">      17 </span>            :             {ExpressionType::OPERATOR_ADD, ExpressionType::OPERATOR_SUBTRACT, ExpressionType::OPERATOR_MULTIPLY,
-<span class="lineNum">      18 </span><span class="lineCov">    6266176 :              ExpressionType::OPERATOR_DIVIDE, ExpressionType::OPERATOR_MOD}));</span>
-<span class="lineNum">      19 </span><span class="lineCov">    3135040 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::VALUE_CONSTANT));</span>
-<span class="lineNum">      20 </span><span class="lineCov">    3133575 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeAny&gt;());</span>
-<span class="lineNum">      21 </span><span class="lineCov">    3133323 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
-<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    3133792 : }</span></a>
+<span class="lineNum">      18 </span><span class="lineCov">    6266191 :              ExpressionType::OPERATOR_DIVIDE, ExpressionType::OPERATOR_MOD}));</span>
+<span class="lineNum">      19 </span><span class="lineCov">    3135122 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeType&gt;(ExpressionType::VALUE_CONSTANT));</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3133527 :         root-&gt;children.push_back(make_unique_base&lt;AbstractRuleNode, ExpressionNodeAny&gt;());</span>
+<span class="lineNum">      21 </span><span class="lineCov">    3133176 :         root-&gt;child_policy = ChildPolicy::UNORDERED;</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">    3133893 : }</span></a>
 <span class="lineNum">      23 </span>            : 
-<span class="lineNum">      24 </span><span class="lineCov">   10635298 : unique_ptr&lt;Expression&gt; ConstantFoldingRule::Apply(Rewriter &amp;rewriter, Expression &amp;root,</span>
+<span class="lineNum">      24 </span><span class="lineCov">   10635175 : unique_ptr&lt;Expression&gt; ConstantFoldingRule::Apply(Rewriter &amp;rewriter, Expression &amp;root,</span>
 <span class="lineNum">      25 </span>            :                                                   vector&lt;AbstractOperator&gt; &amp;bindings, bool &amp;fixed_point) {
-<span class="lineNum">      26 </span><span class="lineCov">   21273655 :         Value result;</span>
+<span class="lineNum">      26 </span><span class="lineCov">   21273163 :         Value result;</span>
 <span class="lineNum">      27 </span>            : 
 <span class="lineNum">      28 </span>            :         // TODO: add boolean ops
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">   10635343 :         auto left = root.children[0].get();</span>
-<span class="lineNum">      31 </span><span class="lineCov">   10635463 :         auto right = root.children[1].get();</span>
+<span class="lineNum">      30 </span><span class="lineCov">   10635407 :         auto left = root.children[0].get();</span>
+<span class="lineNum">      31 </span><span class="lineCov">   10635518 :         auto right = root.children[1].get();</span>
 <span class="lineNum">      32 </span>            : 
 <span class="lineNum">      33 </span>            :         // case: both constant, evaluate
-<span class="lineNum">      34 </span><span class="lineCov">   10637463 :         if (left-&gt;type == ExpressionType::VALUE_CONSTANT &amp;&amp; right-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
+<span class="lineNum">      34 </span><span class="lineCov">   10637367 :         if (left-&gt;type == ExpressionType::VALUE_CONSTANT &amp;&amp; right-&gt;type == ExpressionType::VALUE_CONSTANT) {</span>
 <span class="lineNum">      35 </span><span class="lineCov">    2620454 :                 Value result;</span>
 <span class="lineNum">      36 </span><span class="lineCov">    1310227 :                 auto left_val = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[0].get());</span>
 <span class="lineNum">      37 </span><span class="lineCov">    1310227 :                 auto right_val = reinterpret_cast&lt;ConstantExpression *&gt;(root.children[1].get());</span>
@@ -125,7 +125,7 @@
 <span class="lineNum">      63 </span>            : 
 <span class="lineNum">      64 </span>            :         // FIXME:  folding unknown subtrees produces incorrect results with
 <span class="lineNum">      65 </span>            :         // NULLs.
-<span class="lineNum">      66 </span><span class="lineCov">    9327236 :         return nullptr;</span>
+<span class="lineNum">      66 </span><span class="lineCov">    9327140 :         return nullptr;</span>
 <span class="lineNum">      67 </span>            : };
 </pre>
       </td>

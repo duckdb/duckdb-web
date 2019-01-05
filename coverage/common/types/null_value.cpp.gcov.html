@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - common/types/null_value.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 840047b9 - common/types/null_value.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
+            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">15</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 16:11:25</td>
+            <td class="headerValue">2019-01-05 15:01:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -75,17 +75,17 @@
 <span class="lineNum">      13 </span>            : }
 <a name="14"><span class="lineNum">      14 </span>            : </a>
 <span class="lineNum">      15 </span>            : //! Writes NullValue&lt;T&gt; value of a specific type to a memory address
-<span class="lineNum">      16 </span><span class="lineCov">     430567 : void SetNullValue(uint8_t *ptr, TypeId type) {</span>
-<span class="lineNum">      17 </span><span class="lineCov">     430567 :         switch (type) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">     430619 : void SetNullValue(uint8_t *ptr, TypeId type) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">     430619 :         switch (type) {</span>
 <span class="lineNum">      18 </span><span class="lineNoCov">          0 :         case TypeId::TINYINT:</span>
 <span class="lineNum">      19 </span><span class="lineNoCov">          0 :                 *((int8_t *)ptr) = NullValue&lt;int8_t&gt;();</span>
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :                 break;</span>
 <span class="lineNum">      21 </span><span class="lineNoCov">          0 :         case TypeId::SMALLINT:</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 *((int16_t *)ptr) = NullValue&lt;int16_t&gt;();</span>
 <span class="lineNum">      23 </span><span class="lineNoCov">          0 :                 break;</span>
-<span class="lineNum">      24 </span><span class="lineCov">     311530 :         case TypeId::INTEGER:</span>
-<span class="lineNum">      25 </span><span class="lineCov">     311530 :                 *((int32_t *)ptr) = NullValue&lt;int32_t&gt;();</span>
-<span class="lineNum">      26 </span><span class="lineCov">     311530 :                 break;</span>
+<span class="lineNum">      24 </span><span class="lineCov">     311582 :         case TypeId::INTEGER:</span>
+<span class="lineNum">      25 </span><span class="lineCov">     311582 :                 *((int32_t *)ptr) = NullValue&lt;int32_t&gt;();</span>
+<span class="lineNum">      26 </span><span class="lineCov">     311582 :                 break;</span>
 <span class="lineNum">      27 </span><span class="lineNoCov">          0 :         case TypeId::DATE:</span>
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :                 *((date_t *)ptr) = NullValue&lt;date_t&gt;();</span>
 <span class="lineNum">      29 </span><span class="lineNoCov">          0 :                 break;</span>
@@ -104,7 +104,7 @@
 <span class="lineNum">      42 </span><span class="lineNoCov">          0 :         default:</span>
 <span class="lineNum">      43 </span><span class="lineNoCov">          0 :                 throw InvalidTypeException(type, &quot;Non-integer type in HT initialization!&quot;);</span>
 <span class="lineNum">      44 </span>            :         }
-<span class="lineNum">      45 </span><span class="lineCov">     430567 : }</span>
+<span class="lineNum">      45 </span><span class="lineCov">     430619 : }</span>
 <span class="lineNum">      46 </span>            : 
 <span class="lineNum">      47 </span>            : } // namespace duckdb
 </pre>

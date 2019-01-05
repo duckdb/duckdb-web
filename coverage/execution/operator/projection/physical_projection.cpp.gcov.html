@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - execution/operator/projection/physical_projection.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 840047b9 - execution/operator/projection/physical_projection.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
+            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 16:11:25</td>
+            <td class="headerValue">2019-01-05 15:01:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,17 +67,17 @@
 <span class="lineNum">       5 </span>            : using namespace duckdb;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    8804334 : void PhysicalProjection::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    8804334 :         assert(select_list.size() &gt; 0);</span>
-<span class="lineNum">      10 </span><span class="lineCov">    8804337 :         assert(children.size() == 1);</span>
+<span class="lineNum">       8 </span><span class="lineCov">    8804500 : void PhysicalProjection::_GetChunk(ClientContext &amp;context, DataChunk &amp;chunk, PhysicalOperatorState *state) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    8804500 :         assert(select_list.size() &gt; 0);</span>
+<span class="lineNum">      10 </span><span class="lineCov">    8804502 :         assert(children.size() == 1);</span>
 <span class="lineNum">      11 </span>            :         // get the next chunk from the child
-<span class="lineNum">      12 </span><span class="lineCov">    8804346 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
-<span class="lineNum">      13 </span><span class="lineCov">    8804372 :         if (state-&gt;child_chunk.size() == 0) {</span>
-<span class="lineNum">      14 </span><span class="lineCov">    4414642 :                 return;</span>
+<span class="lineNum">      12 </span><span class="lineCov">    8804516 :         children[0]-&gt;GetChunk(context, state-&gt;child_chunk, state-&gt;child_state.get());</span>
+<span class="lineNum">      13 </span><span class="lineCov">    8804517 :         if (state-&gt;child_chunk.size() == 0) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">    4414711 :                 return;</span>
 <span class="lineNum">      15 </span>            :         }
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">    8779498 :         ExpressionExecutor executor(state, context);</span>
-<span class="lineNum">      18 </span><span class="lineCov">    4389777 :         executor.Execute(select_list, chunk);</span>
+<span class="lineNum">      17 </span><span class="lineCov">    8779641 :         ExpressionExecutor executor(state, context);</span>
+<span class="lineNum">      18 </span><span class="lineCov">    4389829 :         executor.Execute(select_list, chunk);</span>
 <span class="lineNum">      19 </span>            : }
 </pre>
       </td>

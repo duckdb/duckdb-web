@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 3a8ff3e2 - execution/physical_plan_generator.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report 840047b9 - execution/physical_plan_generator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 3a8ff3e2</td>
+            <td class="headerValue">DuckDB Code Coverage Report 840047b9</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">265</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-04 16:11:25</td>
+            <td class="headerValue">2019-01-05 15:01:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">25</td>
@@ -72,34 +72,34 @@
 <span class="lineNum">      10 </span>            : using namespace duckdb;
 <a name="11"><span class="lineNum">      11 </span>            : using namespace std;</a>
 <span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span><span class="lineCov">    3133361 : void PhysicalPlanGenerator::CreatePlan(unique_ptr&lt;LogicalOperator&gt; logical) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">    3133609 : void PhysicalPlanGenerator::CreatePlan(unique_ptr&lt;LogicalOperator&gt; logical) {</span>
 <span class="lineNum">      14 </span>            :         // first resolve column references
-<span class="lineNum">      15 </span><span class="lineCov">    6269354 :         ColumnBindingResolver resolver;</span>
-<span class="lineNum">      16 </span><span class="lineCov">    3133692 :         logical-&gt;Accept(&amp;resolver);</span>
+<span class="lineNum">      15 </span><span class="lineCov">    6269606 :         ColumnBindingResolver resolver;</span>
+<span class="lineNum">      16 </span><span class="lineCov">    3133955 :         logical-&gt;Accept(&amp;resolver);</span>
 <span class="lineNum">      17 </span>            :         // now resolve types of all the operators
-<span class="lineNum">      18 </span><span class="lineCov">    3135279 :         logical-&gt;ResolveOperatorTypes();</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3135572 :         logical-&gt;ResolveOperatorTypes();</span>
 <span class="lineNum">      19 </span>            :         // then create the physical plan
-<span class="lineNum">      20 </span><span class="lineCov">    3134291 :         logical-&gt;Accept(this);</span>
-<span class="lineNum">      21 </span><span class="lineCov">    3133701 :         if (!this-&gt;plan) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">    3134504 :         logical-&gt;Accept(this);</span>
+<span class="lineNum">      21 </span><span class="lineCov">    3133897 :         if (!this-&gt;plan) {</span>
 <span class="lineNum">      22 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Unknown error in physical plan generation&quot;);</span>
 <span class="lineNum">      23 </span>            :         }
-<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3133235 : }</span></a>
+<a name="24"><span class="lineNum">      24 </span><span class="lineCov">    3133322 : }</span></a>
 <span class="lineNum">      25 </span>            : 
-<span class="lineNum">      26 </span><span class="lineCov">    1303343 : void PhysicalPlanGenerator::Visit(LogicalAggregate &amp;op) {</span>
-<span class="lineNum">      27 </span><span class="lineCov">    1303343 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      26 </span><span class="lineCov">    1303435 : void PhysicalPlanGenerator::Visit(LogicalAggregate &amp;op) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">    1303435 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">      28 </span>            : 
-<span class="lineNum">      29 </span><span class="lineCov">    1303386 :         if (op.groups.size() == 0) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">    1303464 :         if (op.groups.size() == 0) {</span>
 <span class="lineNum">      30 </span>            :                 // no groups
-<span class="lineNum">      31 </span><span class="lineCov">     572745 :                 if (!plan) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">     572809 :                 if (!plan) {</span>
 <span class="lineNum">      32 </span>            :                         // and no FROM clause, use a dummy aggregate
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :                         auto groupby = make_unique&lt;PhysicalHashAggregate&gt;(op, move(op.expressions));</span>
 <span class="lineNum">      34 </span><span class="lineNoCov">          0 :                         this-&gt;plan = move(groupby);</span>
 <span class="lineNum">      35 </span>            :                 } else {
 <span class="lineNum">      36 </span>            :                         // but there is a FROM clause
 <span class="lineNum">      37 </span>            :                         // special case: aggregate entire columns together
-<span class="lineNum">      38 </span><span class="lineCov">    1145422 :                         auto groupby = make_unique&lt;PhysicalHashAggregate&gt;(op, move(op.expressions));</span>
-<span class="lineNum">      39 </span><span class="lineCov">     572711 :                         groupby-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">      40 </span><span class="lineCov">     572662 :                         this-&gt;plan = move(groupby);</span>
+<span class="lineNum">      38 </span><span class="lineCov">    1145581 :                         auto groupby = make_unique&lt;PhysicalHashAggregate&gt;(op, move(op.expressions));</span>
+<span class="lineNum">      39 </span><span class="lineCov">     572795 :                         groupby-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">      40 </span><span class="lineCov">     572756 :                         this-&gt;plan = move(groupby);</span>
 <span class="lineNum">      41 </span>            :                 }
 <span class="lineNum">      42 </span>            :         } else {
 <span class="lineNum">      43 </span>            :                 // groups! create a GROUP BY aggregator
@@ -111,7 +111,7 @@
 <span class="lineNum">      49 </span><span class="lineCov">     730681 :                 groupby-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">      50 </span><span class="lineCov">     730681 :                 this-&gt;plan = move(groupby);</span>
 <span class="lineNum">      51 </span>            :         }
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">    1303445 : }</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">    1303498 : }</span></a>
 <span class="lineNum">      53 </span>            : 
 <span class="lineNum">      54 </span><span class="lineCov">     258297 : void PhysicalPlanGenerator::Visit(LogicalCrossProduct &amp;op) {</span>
 <span class="lineNum">      55 </span><span class="lineCov">     258297 :         if (plan) {</span>
@@ -128,29 +128,29 @@
 <span class="lineNum">      66 </span><span class="lineCov">     258297 :         plan = make_unique&lt;PhysicalCrossProduct&gt;(op, move(left), move(right));</span>
 <a name="67"><span class="lineNum">      67 </span><span class="lineCov">     258297 : }</span></a>
 <span class="lineNum">      68 </span>            : 
-<span class="lineNum">      69 </span><span class="lineCov">        897 : void PhysicalPlanGenerator::Visit(LogicalDelete &amp;op) {</span>
-<span class="lineNum">      70 </span><span class="lineCov">        897 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      69 </span><span class="lineCov">        939 : void PhysicalPlanGenerator::Visit(LogicalDelete &amp;op) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">        939 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">      71 </span>            : 
-<span class="lineNum">      72 </span><span class="lineCov">        957 :         if (!plan) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">        973 :         if (!plan) {</span>
 <span class="lineNum">      73 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Delete node cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">      74 </span>            :         }
 <span class="lineNum">      75 </span>            : 
-<span class="lineNum">      76 </span><span class="lineCov">       1892 :         auto del = make_unique&lt;PhysicalDelete&gt;(op, *op.table, *op.table-&gt;storage);</span>
-<span class="lineNum">      77 </span><span class="lineCov">        901 :         del-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">      78 </span><span class="lineCov">        987 :         this-&gt;plan = move(del);</span>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">        924 : }</span></a>
+<span class="lineNum">      76 </span><span class="lineCov">       1949 :         auto del = make_unique&lt;PhysicalDelete&gt;(op, *op.table, *op.table-&gt;storage);</span>
+<span class="lineNum">      77 </span><span class="lineCov">        938 :         del-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">      78 </span><span class="lineCov">       1006 :         this-&gt;plan = move(del);</span>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">        958 : }</span></a>
 <span class="lineNum">      80 </span>            : 
-<span class="lineNum">      81 </span><span class="lineCov">      77528 : void PhysicalPlanGenerator::Visit(LogicalUpdate &amp;op) {</span>
-<span class="lineNum">      82 </span><span class="lineCov">      77528 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">      81 </span><span class="lineCov">      77571 : void PhysicalPlanGenerator::Visit(LogicalUpdate &amp;op) {</span>
+<span class="lineNum">      82 </span><span class="lineCov">      77571 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">      83 </span>            : 
-<span class="lineNum">      84 </span><span class="lineCov">      78810 :         if (!plan) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">      78704 :         if (!plan) {</span>
 <span class="lineNum">      85 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Update node cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">      86 </span>            :         }
 <span class="lineNum">      87 </span>            : 
-<span class="lineNum">      88 </span><span class="lineCov">     157607 :         auto update = make_unique&lt;PhysicalUpdate&gt;(op, *op.table, *op.table-&gt;storage, op.columns, move(op.expressions));</span>
-<span class="lineNum">      89 </span><span class="lineCov">      79132 :         update-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">      90 </span><span class="lineCov">      80691 :         this-&gt;plan = move(update);</span>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">      78738 : }</span></a>
+<span class="lineNum">      88 </span><span class="lineCov">     157349 :         auto update = make_unique&lt;PhysicalUpdate&gt;(op, *op.table, *op.table-&gt;storage, op.columns, move(op.expressions));</span>
+<span class="lineNum">      89 </span><span class="lineCov">      79050 :         update-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">      90 </span><span class="lineCov">      80656 :         this-&gt;plan = move(update);</span>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">      78856 : }</span></a>
 <span class="lineNum">      92 </span>            : 
 <span class="lineNum">      93 </span><span class="lineCov">       1207 : void PhysicalPlanGenerator::Visit(LogicalCreate &amp;op) {</span>
 <span class="lineNum">      94 </span><span class="lineCov">       1207 :         LogicalOperatorVisitor::Visit(op);</span>
@@ -179,16 +179,16 @@
 <span class="lineNum">     117 </span>            : }
 <a name="118"><span class="lineNum">     118 </span>            : </a>
 <span class="lineNum">     119 </span>            : //! Attempt to create an index scan from a filter + get, if possible
-<span class="lineNum">     120 </span><span class="lineCov">     480172 : static unique_ptr&lt;PhysicalOperator&gt; CreateIndexScan(LogicalFilter &amp;filter, LogicalGet &amp;scan) {</span>
-<span class="lineNum">     121 </span><span class="lineCov">     480172 :         if (!scan.table) {</span>
+<span class="lineNum">     120 </span><span class="lineCov">     480214 : static unique_ptr&lt;PhysicalOperator&gt; CreateIndexScan(LogicalFilter &amp;filter, LogicalGet &amp;scan) {</span>
+<span class="lineNum">     121 </span><span class="lineCov">     480214 :         if (!scan.table) {</span>
 <span class="lineNum">     122 </span><span class="lineNoCov">          0 :                 return nullptr;</span>
 <span class="lineNum">     123 </span>            :         }
 <span class="lineNum">     124 </span>            : 
-<span class="lineNum">     125 </span><span class="lineCov">     480172 :         auto &amp;storage = *scan.table-&gt;storage;</span>
+<span class="lineNum">     125 </span><span class="lineCov">     480214 :         auto &amp;storage = *scan.table-&gt;storage;</span>
 <span class="lineNum">     126 </span>            : 
-<span class="lineNum">     127 </span><span class="lineCov">     480294 :         if (storage.indexes.size() == 0) {</span>
+<span class="lineNum">     127 </span><span class="lineCov">     480310 :         if (storage.indexes.size() == 0) {</span>
 <span class="lineNum">     128 </span>            :                 // no indexes on the table, can't rewrite
-<span class="lineNum">     129 </span><span class="lineCov">     480372 :                 return nullptr;</span>
+<span class="lineNum">     129 </span><span class="lineCov">     481841 :                 return nullptr;</span>
 <span class="lineNum">     130 </span>            :         }
 <span class="lineNum">     131 </span>            :         // check all the indexes
 <span class="lineNum">     132 </span><span class="lineCov">         29 :         for (size_t j = 0; j &lt; storage.indexes.size(); j++) {</span>
@@ -271,49 +271,49 @@
 <span class="lineNum">     209 </span><span class="lineNoCov">          0 :         return nullptr;</span>
 <a name="210"><span class="lineNum">     210 </span>            : }</a>
 <span class="lineNum">     211 </span>            : 
-<span class="lineNum">     212 </span><span class="lineCov">     489814 : void PhysicalPlanGenerator::Visit(LogicalFilter &amp;op) {</span>
-<span class="lineNum">     213 </span><span class="lineCov">     489814 :         if (op.children[0]-&gt;type == LogicalOperatorType::GET) {</span>
+<span class="lineNum">     212 </span><span class="lineCov">     489869 : void PhysicalPlanGenerator::Visit(LogicalFilter &amp;op) {</span>
+<span class="lineNum">     213 </span><span class="lineCov">     489869 :         if (op.children[0]-&gt;type == LogicalOperatorType::GET) {</span>
 <span class="lineNum">     214 </span>            :                 // filter + get
 <span class="lineNum">     215 </span>            :                 // check if we can transform this into an index scan
-<span class="lineNum">     216 </span><span class="lineCov">     485170 :                 auto scan = (LogicalGet *)op.children[0].get();</span>
-<span class="lineNum">     217 </span><span class="lineCov">     966588 :                 auto node = CreateIndexScan(op, *scan);</span>
-<span class="lineNum">     218 </span><span class="lineCov">     481388 :                 if (node) {</span>
+<span class="lineNum">     216 </span><span class="lineCov">     485066 :                 auto scan = (LogicalGet *)op.children[0].get();</span>
+<span class="lineNum">     217 </span><span class="lineCov">     966227 :                 auto node = CreateIndexScan(op, *scan);</span>
+<span class="lineNum">     218 </span><span class="lineCov">     481220 :                 if (node) {</span>
 <span class="lineNum">     219 </span>            :                         // we can do an index scan, move it to the root node
 <span class="lineNum">     220 </span><span class="lineCov">         29 :                         assert(!plan);</span>
 <span class="lineNum">     221 </span><span class="lineCov">         29 :                         plan = move(node);</span>
 <span class="lineNum">     222 </span>            :                 } else {
 <span class="lineNum">     223 </span>            :                         // we can't do an index scan, create a normal table scan
-<span class="lineNum">     224 </span><span class="lineCov">     479998 :                         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     224 </span><span class="lineCov">     480084 :                         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     225 </span>            :                 }
 <span class="lineNum">     226 </span>            :         } else {
 <span class="lineNum">     227 </span><span class="lineCov">       9605 :                 LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     228 </span>            :         }
 <span class="lineNum">     229 </span>            : 
-<span class="lineNum">     230 </span><span class="lineCov">     490272 :         if (!plan) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">     490326 :         if (!plan) {</span>
 <span class="lineNum">     231 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Filter cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">     232 </span>            :         }
 <span class="lineNum">     233 </span>            : 
-<span class="lineNum">     234 </span><span class="lineCov">     492117 :         if (op.expressions.size() &gt; 0) {</span>
+<span class="lineNum">     234 </span><span class="lineCov">     492006 :         if (op.expressions.size() &gt; 0) {</span>
 <span class="lineNum">     235 </span>            :                 // create a filter if there is anything to filter
-<span class="lineNum">     236 </span><span class="lineCov">     982342 :                 auto filter = make_unique&lt;PhysicalFilter&gt;(op, move(op.expressions));</span>
-<span class="lineNum">     237 </span><span class="lineCov">     489706 :                 filter-&gt;children.push_back(move(plan));</span>
-<span class="lineNum">     238 </span><span class="lineCov">     490166 :                 this-&gt;plan = move(filter);</span>
+<span class="lineNum">     236 </span><span class="lineCov">     982252 :                 auto filter = make_unique&lt;PhysicalFilter&gt;(op, move(op.expressions));</span>
+<span class="lineNum">     237 </span><span class="lineCov">     489749 :                 filter-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">     238 </span><span class="lineCov">     490293 :                 this-&gt;plan = move(filter);</span>
 <span class="lineNum">     239 </span>            :         }
-<a name="240"><span class="lineNum">     240 </span><span class="lineCov">     490254 : }</span></a>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">     489261 : }</span></a>
 <span class="lineNum">     241 </span>            : 
-<span class="lineNum">     242 </span><span class="lineCov">    3381372 : void PhysicalPlanGenerator::Visit(LogicalGet &amp;op) {</span>
-<span class="lineNum">     243 </span><span class="lineCov">    3381372 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     242 </span><span class="lineCov">    3381502 : void PhysicalPlanGenerator::Visit(LogicalGet &amp;op) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">    3381502 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     244 </span>            : 
-<span class="lineNum">     245 </span><span class="lineCov">    3384563 :         if (!op.table) {</span>
+<span class="lineNum">     245 </span><span class="lineCov">    3384474 :         if (!op.table) {</span>
 <span class="lineNum">     246 </span><span class="lineCov">    1318406 :                 vector&lt;TypeId&gt; types = {TypeId::BIGINT};</span>
 <span class="lineNum">     247 </span><span class="lineCov">     659203 :                 this-&gt;plan = make_unique&lt;PhysicalDummyScan&gt;(types);</span>
 <span class="lineNum">     248 </span><span class="lineCov">     659203 :                 return;</span>
 <span class="lineNum">     249 </span>            :         }
-<span class="lineNum">     250 </span><span class="lineCov">    5447231 :         auto scan = make_unique&lt;PhysicalTableScan&gt;(op, *op.table, *op.table-&gt;storage, op.column_ids);</span>
-<span class="lineNum">     251 </span><span class="lineCov">    2723318 :         if (plan) {</span>
+<span class="lineNum">     250 </span><span class="lineCov">    5447319 :         auto scan = make_unique&lt;PhysicalTableScan&gt;(op, *op.table, *op.table-&gt;storage, op.column_ids);</span>
+<span class="lineNum">     251 </span><span class="lineCov">    2723799 :         if (plan) {</span>
 <span class="lineNum">     252 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Scan has to be the first node of a plan!&quot;);</span>
 <span class="lineNum">     253 </span>            :         }
-<span class="lineNum">     254 </span><span class="lineCov">    2723690 :         this-&gt;plan = move(scan);</span>
+<span class="lineNum">     254 </span><span class="lineCov">    2723601 :         this-&gt;plan = move(scan);</span>
 <a name="255"><span class="lineNum">     255 </span>            : }</a>
 <span class="lineNum">     256 </span>            : 
 <span class="lineNum">     257 </span><span class="lineCov">      26524 : void PhysicalPlanGenerator::Visit(LogicalJoin &amp;op) {</span>
@@ -395,39 +395,39 @@
 <span class="lineNum">     333 </span><span class="lineCov">       2886 :         this-&gt;plan = move(order);</span>
 <a name="334"><span class="lineNum">     334 </span><span class="lineCov">       2886 : }</span></a>
 <span class="lineNum">     335 </span>            : 
-<span class="lineNum">     336 </span><span class="lineCov">    3749497 : void PhysicalPlanGenerator::Visit(LogicalProjection &amp;op) {</span>
-<span class="lineNum">     337 </span><span class="lineCov">    3749497 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     336 </span><span class="lineCov">    3749588 : void PhysicalPlanGenerator::Visit(LogicalProjection &amp;op) {</span>
+<span class="lineNum">     337 </span><span class="lineCov">    3749588 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     338 </span>            : 
-<span class="lineNum">     339 </span><span class="lineCov">    7499057 :         auto projection = make_unique&lt;PhysicalProjection&gt;(op, move(op.expressions));</span>
-<span class="lineNum">     340 </span><span class="lineCov">    3749568 :         if (plan) {</span>
-<span class="lineNum">     341 </span><span class="lineCov">    3749507 :                 projection-&gt;children.push_back(move(plan));</span>
+<span class="lineNum">     339 </span><span class="lineCov">    7499215 :         auto projection = make_unique&lt;PhysicalProjection&gt;(op, move(op.expressions));</span>
+<span class="lineNum">     340 </span><span class="lineCov">    3749635 :         if (plan) {</span>
+<span class="lineNum">     341 </span><span class="lineCov">    3749590 :                 projection-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">     342 </span>            :         }
-<span class="lineNum">     343 </span><span class="lineCov">    3749681 :         this-&gt;plan = move(projection);</span>
-<a name="344"><span class="lineNum">     344 </span><span class="lineCov">    3749510 : }</span></a>
+<span class="lineNum">     343 </span><span class="lineCov">    3749717 :         this-&gt;plan = move(projection);</span>
+<a name="344"><span class="lineNum">     344 </span><span class="lineCov">    3749591 : }</span></a>
 <span class="lineNum">     345 </span>            : 
-<span class="lineNum">     346 </span><span class="lineCov">      40163 : void PhysicalPlanGenerator::Visit(LogicalInsert &amp;op) {</span>
-<span class="lineNum">     347 </span><span class="lineCov">      40163 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     346 </span><span class="lineCov">      40160 : void PhysicalPlanGenerator::Visit(LogicalInsert &amp;op) {</span>
+<span class="lineNum">     347 </span><span class="lineCov">      40160 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     348 </span>            : 
-<span class="lineNum">     349 </span><span class="lineCov">      80324 :         auto insertion = make_unique&lt;PhysicalInsert&gt;(op, op.table, move(op.insert_values), op.column_index_map);</span>
-<span class="lineNum">     350 </span><span class="lineCov">      40161 :         if (plan) {</span>
+<span class="lineNum">     349 </span><span class="lineCov">      80323 :         auto insertion = make_unique&lt;PhysicalInsert&gt;(op, op.table, move(op.insert_values), op.column_index_map);</span>
+<span class="lineNum">     350 </span><span class="lineCov">      40159 :         if (plan) {</span>
 <span class="lineNum">     351 </span><span class="lineCov">         14 :                 insertion-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">     352 </span>            :         }
-<span class="lineNum">     353 </span><span class="lineCov">      40162 :         this-&gt;plan = move(insertion);</span>
-<a name="354"><span class="lineNum">     354 </span><span class="lineCov">      40160 : }</span></a>
+<span class="lineNum">     353 </span><span class="lineCov">      40159 :         this-&gt;plan = move(insertion);</span>
+<a name="354"><span class="lineNum">     354 </span><span class="lineCov">      40159 : }</span></a>
 <span class="lineNum">     355 </span>            : 
-<span class="lineNum">     356 </span><span class="lineCov">    3009924 : void PhysicalPlanGenerator::Visit(LogicalPruneColumns &amp;op) {</span>
-<span class="lineNum">     357 </span><span class="lineCov">    3009924 :         LogicalOperatorVisitor::Visit(op);</span>
+<span class="lineNum">     356 </span><span class="lineCov">    3010015 : void PhysicalPlanGenerator::Visit(LogicalPruneColumns &amp;op) {</span>
+<span class="lineNum">     357 </span><span class="lineCov">    3010015 :         LogicalOperatorVisitor::Visit(op);</span>
 <span class="lineNum">     358 </span>            : 
-<span class="lineNum">     359 </span><span class="lineCov">    3009947 :         if (!plan) {</span>
+<span class="lineNum">     359 </span><span class="lineCov">    3010030 :         if (!plan) {</span>
 <span class="lineNum">     360 </span><span class="lineNoCov">          0 :                 throw Exception(&quot;Prune columns cannot be the first node of a plan!&quot;);</span>
 <span class="lineNum">     361 </span>            :         }
-<span class="lineNum">     362 </span><span class="lineCov">    3010019 :         if (plan-&gt;GetTypes().size() &gt; op.column_limit) {</span>
+<span class="lineNum">     362 </span><span class="lineCov">    3010079 :         if (plan-&gt;GetTypes().size() &gt; op.column_limit) {</span>
 <span class="lineNum">     363 </span>            :                 // only prune if we need to
 <span class="lineNum">     364 </span><span class="lineCov">         66 :                 auto node = make_unique&lt;PhysicalPruneColumns&gt;(op, op.column_limit);</span>
 <span class="lineNum">     365 </span><span class="lineCov">         33 :                 node-&gt;children.push_back(move(plan));</span>
 <span class="lineNum">     366 </span><span class="lineCov">         33 :                 this-&gt;plan = move(node);</span>
 <span class="lineNum">     367 </span>            :         }
-<a name="368"><span class="lineNum">     368 </span><span class="lineCov">    3009932 : }</span></a>
+<a name="368"><span class="lineNum">     368 </span><span class="lineCov">    3010021 : }</span></a>
 <span class="lineNum">     369 </span>            : 
 <span class="lineNum">     370 </span><span class="lineCov">          9 : void PhysicalPlanGenerator::Visit(LogicalTableFunction &amp;op) {</span>
 <span class="lineNum">     371 </span><span class="lineCov">          9 :         LogicalOperatorVisitor::Visit(op);</span>
