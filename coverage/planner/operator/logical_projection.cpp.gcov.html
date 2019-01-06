@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 551026c3 - planner/operator/logical_projection.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ac63cbdc - planner/operator/logical_projection.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
+            <td class="headerValue">DuckDB Code Coverage Report ac63cbdc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">9</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:54:25</td>
+            <td class="headerValue">2019-01-06 11:13:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -65,19 +65,19 @@
 <span class="lineNum">       3 </span>            : using namespace duckdb;
 <a name="4"><span class="lineNum">       4 </span>            : using namespace std;</a>
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineCov">    3009974 : vector&lt;string&gt; LogicalProjection::GetNames() {</span>
-<span class="lineNum">       7 </span><span class="lineCov">    3009974 :         vector&lt;string&gt; names;</span>
-<span class="lineNum">       8 </span><span class="lineCov">    6826187 :         for (auto &amp;exp : expressions) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    3816220 :                 names.push_back(exp-&gt;GetName());</span>
+<span class="lineNum">       6 </span><span class="lineCov">    3009942 : vector&lt;string&gt; LogicalProjection::GetNames() {</span>
+<span class="lineNum">       7 </span><span class="lineCov">    3009942 :         vector&lt;string&gt; names;</span>
+<span class="lineNum">       8 </span><span class="lineCov">    6826134 :         for (auto &amp;exp : expressions) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    3816207 :                 names.push_back(exp-&gt;GetName());</span>
 <span class="lineNum">      10 </span>            :         }
-<span class="lineNum">      11 </span><span class="lineCov">    3010000 :         return names;</span>
+<span class="lineNum">      11 </span><span class="lineCov">    3009984 :         return names;</span>
 <a name="12"><span class="lineNum">      12 </span>            : }</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">    3762543 : void LogicalProjection::ResolveTypes() {</span>
-<span class="lineNum">      15 </span><span class="lineCov">    8532951 :         for (auto &amp;expr : expressions) {</span>
-<span class="lineNum">      16 </span><span class="lineCov">    4770414 :                 types.push_back(expr-&gt;return_type);</span>
+<span class="lineNum">      14 </span><span class="lineCov">    3762511 : void LogicalProjection::ResolveTypes() {</span>
+<span class="lineNum">      15 </span><span class="lineCov">    8532919 :         for (auto &amp;expr : expressions) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">    4770409 :                 types.push_back(expr-&gt;return_type);</span>
 <span class="lineNum">      17 </span>            :         }
-<span class="lineNum">      18 </span><span class="lineCov">    3762573 : }</span>
+<span class="lineNum">      18 </span><span class="lineCov">    3762574 : }</span>
 </pre>
       </td>
     </tr>

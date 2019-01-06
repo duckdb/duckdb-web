@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 551026c3 - include/common/types/value.hpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ac63cbdc - include/common/types/value.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
+            <td class="headerValue">DuckDB Code Coverage Report ac63cbdc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">13</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:54:25</td>
+            <td class="headerValue">2019-01-06 11:13:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -85,12 +85,12 @@
 <span class="lineNum">      23 </span>            : 
 <a name="24"><span class="lineNum">      24 </span>            : public:</a>
 <span class="lineNum">      25 </span>            :         //! Create an empty NULL value of the specified type
-<span class="lineNum">      26 </span><span class="lineCov">  550403631 :         Value(TypeId type = TypeId::INTEGER) : type(type), is_null(true) {</span>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">  550390707 :         }</span></a>
+<span class="lineNum">      26 </span><span class="lineCov">  550409768 :         Value(TypeId type = TypeId::INTEGER) : type(type), is_null(true) {</span>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">  550392593 :         }</span></a>
 <span class="lineNum">      28 </span>            :         //! Create a BIGINT value
-<span class="lineNum">      29 </span><span class="lineCov">    2942189 :         Value(int32_t val) : type(TypeId::INTEGER), is_null(false) {</span>
-<span class="lineNum">      30 </span><span class="lineCov">    2942189 :                 value_.integer = val;</span>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    2938468 :         }</span></a>
+<span class="lineNum">      29 </span><span class="lineCov">    2942181 :         Value(int32_t val) : type(TypeId::INTEGER), is_null(false) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">    2942181 :                 value_.integer = val;</span>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">    2938460 :         }</span></a>
 <span class="lineNum">      32 </span>            :         //! Create a DOUBLE value
 <span class="lineNum">      33 </span><span class="lineCov">   71851124 :         Value(double val) : type(TypeId::DECIMAL), is_null(false) {</span>
 <span class="lineNum">      34 </span><span class="lineCov">   71851124 :                 value_.decimal = val;</span>

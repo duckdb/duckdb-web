@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 551026c3 - parser/transform/statement/transform_select.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ac63cbdc - parser/transform/statement/transform_select.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
+            <td class="headerValue">DuckDB Code Coverage Report ac63cbdc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">16</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:54:25</td>
+            <td class="headerValue">2019-01-06 11:13:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -67,11 +67,11 @@
 <span class="lineNum">       5 </span>            : using namespace postgres;
 <a name="6"><span class="lineNum">       6 </span>            : using namespace std;</a>
 <span class="lineNum">       7 </span>            : 
-<span class="lineNum">       8 </span><span class="lineCov">    3010049 : unique_ptr&lt;SelectStatement&gt; Transformer::TransformSelect(Node *node) {</span>
-<span class="lineNum">       9 </span><span class="lineCov">    3010049 :         SelectStmt *stmt = reinterpret_cast&lt;SelectStmt *&gt;(node);</span>
-<span class="lineNum">      10 </span><span class="lineCov">    3010049 :         auto result = make_unique&lt;SelectStatement&gt;();</span>
+<span class="lineNum">       8 </span><span class="lineCov">    3010021 : unique_ptr&lt;SelectStatement&gt; Transformer::TransformSelect(Node *node) {</span>
+<span class="lineNum">       9 </span><span class="lineCov">    3010021 :         SelectStmt *stmt = reinterpret_cast&lt;SelectStmt *&gt;(node);</span>
+<span class="lineNum">      10 </span><span class="lineCov">    3010021 :         auto result = make_unique&lt;SelectStatement&gt;();</span>
 <span class="lineNum">      11 </span>            : 
-<span class="lineNum">      12 </span><span class="lineCov">    3010065 :         if (stmt-&gt;windowClause) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">    3010029 :         if (stmt-&gt;windowClause) {</span>
 <span class="lineNum">      13 </span><span class="lineCov">          2 :                 for (auto window_ele = stmt-&gt;windowClause-&gt;head; window_ele != NULL; window_ele = window_ele-&gt;next) {</span>
 <span class="lineNum">      14 </span><span class="lineCov">          1 :                         auto window_def = reinterpret_cast&lt;WindowDef *&gt;(window_ele-&gt;data.ptr_value);</span>
 <span class="lineNum">      15 </span><span class="lineCov">          1 :                         assert(window_def);</span>
@@ -87,12 +87,12 @@
 <span class="lineNum">      25 </span>            :         }
 <span class="lineNum">      26 </span>            : 
 <span class="lineNum">      27 </span>            :         // may contain windows so second
-<span class="lineNum">      28 </span><span class="lineCov">    3010065 :         if (stmt-&gt;withClause) {</span>
+<span class="lineNum">      28 </span><span class="lineCov">    3010029 :         if (stmt-&gt;withClause) {</span>
 <span class="lineNum">      29 </span><span class="lineCov">         45 :                 TransformCTE(reinterpret_cast&lt;WithClause *&gt;(stmt-&gt;withClause), *result);</span>
 <span class="lineNum">      30 </span>            :         }
 <span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span><span class="lineCov">    3010063 :         result-&gt;node = TransformSelectNode(stmt);</span>
-<span class="lineNum">      33 </span><span class="lineCov">    3010057 :         return result;</span>
+<span class="lineNum">      32 </span><span class="lineCov">    3010027 :         result-&gt;node = TransformSelectNode(stmt);</span>
+<span class="lineNum">      33 </span><span class="lineCov">    3010042 :         return result;</span>
 <span class="lineNum">      34 </span>            : }
 </pre>
       </td>

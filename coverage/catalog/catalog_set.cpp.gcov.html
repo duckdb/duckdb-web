@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - DuckDB Code Coverage Report 551026c3 - catalog/catalog_set.cpp</title>
+  <title>LCOV - DuckDB Code Coverage Report ac63cbdc - catalog/catalog_set.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">DuckDB Code Coverage Report 551026c3</td>
+            <td class="headerValue">DuckDB Code Coverage Report ac63cbdc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">96</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-01-05 15:54:25</td>
+            <td class="headerValue">2019-01-06 11:13:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">9</td>
@@ -195,8 +195,8 @@
 <span class="lineNum">     133 </span><span class="lineCov">         29 :         return DropEntry(transaction, *entry-&gt;second, cascade);</span>
 <a name="134"><span class="lineNum">     134 </span>            : }</a>
 <span class="lineNum">     135 </span>            : 
-<span class="lineNum">     136 </span><span class="lineCov">   11010286 : CatalogEntry *CatalogSet::GetEntryForTransaction(Transaction &amp;transaction, CatalogEntry *current) {</span>
-<span class="lineNum">     137 </span><span class="lineCov">   11010286 :         while (current-&gt;child) {</span>
+<span class="lineNum">     136 </span><span class="lineCov">   11010319 : CatalogEntry *CatalogSet::GetEntryForTransaction(Transaction &amp;transaction, CatalogEntry *current) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">   11010319 :         while (current-&gt;child) {</span>
 <span class="lineNum">     138 </span><span class="lineCov">      21310 :                 if (current-&gt;timestamp == transaction.transaction_id) {</span>
 <span class="lineNum">     139 </span>            :                         // we created this version
 <span class="lineNum">     140 </span><span class="lineCov">      21297 :                         break;</span>
@@ -208,22 +208,22 @@
 <span class="lineNum">     146 </span><span class="lineCov">         12 :                 current = current-&gt;child.get();</span>
 <span class="lineNum">     147 </span><span class="lineCov">         12 :                 assert(current);</span>
 <span class="lineNum">     148 </span>            :         }
-<span class="lineNum">     149 </span><span class="lineCov">   11010438 :         return current;</span>
+<span class="lineNum">     149 </span><span class="lineCov">   11010467 :         return current;</span>
 <a name="150"><span class="lineNum">     150 </span>            : }</a>
 <span class="lineNum">     151 </span>            : 
-<span class="lineNum">     152 </span><span class="lineCov">   11002564 : CatalogEntry *CatalogSet::GetEntry(Transaction &amp;transaction, const string &amp;name) {</span>
-<span class="lineNum">     153 </span><span class="lineCov">   22012908 :         lock_guard&lt;mutex&gt; lock(catalog_lock);</span>
+<span class="lineNum">     152 </span><span class="lineCov">   11003219 : CatalogEntry *CatalogSet::GetEntry(Transaction &amp;transaction, const string &amp;name) {</span>
+<span class="lineNum">     153 </span><span class="lineCov">   22013607 :         lock_guard&lt;mutex&gt; lock(catalog_lock);</span>
 <span class="lineNum">     154 </span>            : 
-<span class="lineNum">     155 </span><span class="lineCov">   11010758 :         auto entry = data.find(name);</span>
-<span class="lineNum">     156 </span><span class="lineCov">   11010331 :         if (entry == data.end()) {</span>
+<span class="lineNum">     155 </span><span class="lineCov">   11010788 :         auto entry = data.find(name);</span>
+<span class="lineNum">     156 </span><span class="lineCov">   11010244 :         if (entry == data.end()) {</span>
 <span class="lineNum">     157 </span><span class="lineCov">          3 :                 return nullptr;</span>
 <span class="lineNum">     158 </span>            :         }
 <span class="lineNum">     159 </span>            :         // if it does, we have to check version numbers
-<span class="lineNum">     160 </span><span class="lineCov">   11010275 :         CatalogEntry *current = GetEntryForTransaction(transaction, data[name].get());</span>
-<span class="lineNum">     161 </span><span class="lineCov">   11010341 :         if (current-&gt;deleted) {</span>
+<span class="lineNum">     160 </span><span class="lineCov">   11010231 :         CatalogEntry *current = GetEntryForTransaction(transaction, data[name].get());</span>
+<span class="lineNum">     161 </span><span class="lineCov">   11010385 :         if (current-&gt;deleted) {</span>
 <span class="lineNum">     162 </span><span class="lineCov">          5 :                 return nullptr;</span>
 <span class="lineNum">     163 </span>            :         }
-<span class="lineNum">     164 </span><span class="lineCov">   11010336 :         return current;</span>
+<span class="lineNum">     164 </span><span class="lineCov">   11010380 :         return current;</span>
 <a name="165"><span class="lineNum">     165 </span>            : }</a>
 <span class="lineNum">     166 </span>            : 
 <span class="lineNum">     167 </span><span class="lineCov">         11 : void CatalogSet::Undo(CatalogEntry *entry) {</span>
