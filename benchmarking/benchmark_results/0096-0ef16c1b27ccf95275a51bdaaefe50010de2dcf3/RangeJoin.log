@@ -1,0 +1,135 @@
+{ "result": 0.155471,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3098113,
+"extra_info": "",
+"children": [{ "name": "PIECEWISE_MERGE_JOIN",
+"timing":0.09,
+"cardinality":3098113,
+"extra_info": "INNER\ni / 1000>j\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.136269,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3098113,
+"extra_info": "",
+"children": [{ "name": "PIECEWISE_MERGE_JOIN",
+"timing":0.09,
+"cardinality":3098113,
+"extra_info": "INNER\ni / 1000>j\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.141459,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3098113,
+"extra_info": "",
+"children": [{ "name": "PIECEWISE_MERGE_JOIN",
+"timing":0.09,
+"cardinality":3098113,
+"extra_info": "INNER\ni / 1000>j\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.139200,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3098113,
+"extra_info": "",
+"children": [{ "name": "PIECEWISE_MERGE_JOIN",
+"timing":0.09,
+"cardinality":3098113,
+"extra_info": "INNER\ni / 1000>j\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.136545,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3098113,
+"extra_info": "",
+"children": [{ "name": "PIECEWISE_MERGE_JOIN",
+"timing":0.09,
+"cardinality":3098113,
+"extra_info": "INNER\ni / 1000>j\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
