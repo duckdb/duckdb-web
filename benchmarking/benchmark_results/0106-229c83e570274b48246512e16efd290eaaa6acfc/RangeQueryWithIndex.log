@@ -1,0 +1,26 @@
+{ "result": 30.344019,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.25,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":8410112,
+"extra_info": "i<16000000\n",
+"children": [{ "name": "INDEX_SCAN",
+"timing":30.07,
+"cardinality":8410112,
+"extra_info": "integers[NULL]",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
