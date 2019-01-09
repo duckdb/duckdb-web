@@ -1,0 +1,100 @@
+{ "result": 0.336828,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.340859,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.336880,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.339593,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.337625,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
