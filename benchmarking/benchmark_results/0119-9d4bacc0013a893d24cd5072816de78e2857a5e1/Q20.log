@@ -1,0 +1,570 @@
+{ "result": 0.432873,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4397,
+"extra_info": "SEMI\ns_suppkey=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5833,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":5833,
+"extra_info": "SEMI\nps_partkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.13,
+"cardinality":542095,
+"extra_info": "INNER\nps_suppkey=#1\nps_partkey=#2\nCAST[DECIMAL](ps_availqty)>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.17,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":909455,
+"extra_info": "l_shipdate<1995-01-01\nl_shipdate>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "p_nameforest%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "n_name=CANADA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.439630,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4397,
+"extra_info": "SEMI\ns_suppkey=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5833,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":5833,
+"extra_info": "SEMI\nps_partkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.13,
+"cardinality":542095,
+"extra_info": "INNER\nps_suppkey=#1\nps_partkey=#2\nCAST[DECIMAL](ps_availqty)>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.18,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":909455,
+"extra_info": "l_shipdate<1995-01-01\nl_shipdate>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "p_nameforest%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "n_name=CANADA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.441037,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4397,
+"extra_info": "SEMI\ns_suppkey=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5833,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":5833,
+"extra_info": "SEMI\nps_partkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.13,
+"cardinality":542095,
+"extra_info": "INNER\nps_suppkey=#1\nps_partkey=#2\nCAST[DECIMAL](ps_availqty)>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.18,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":909455,
+"extra_info": "l_shipdate<1995-01-01\nl_shipdate>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "p_nameforest%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "n_name=CANADA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.441854,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4397,
+"extra_info": "SEMI\ns_suppkey=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5833,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":5833,
+"extra_info": "SEMI\nps_partkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.13,
+"cardinality":542095,
+"extra_info": "INNER\nps_suppkey=#1\nps_partkey=#2\nCAST[DECIMAL](ps_availqty)>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.18,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":909455,
+"extra_info": "l_shipdate<1995-01-01\nl_shipdate>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "p_nameforest%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "n_name=CANADA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.439335,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":186,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4397,
+"extra_info": "SEMI\ns_suppkey=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5833,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":5833,
+"extra_info": "SEMI\nps_partkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.13,
+"cardinality":542095,
+"extra_info": "INNER\nps_suppkey=#1\nps_partkey=#2\nCAST[DECIMAL](ps_availqty)>#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.18,
+"cardinality":543210,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":909455,
+"extra_info": "l_shipdate<1995-01-01\nl_shipdate>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2127,
+"extra_info": "p_nameforest%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "n_name=CANADA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
