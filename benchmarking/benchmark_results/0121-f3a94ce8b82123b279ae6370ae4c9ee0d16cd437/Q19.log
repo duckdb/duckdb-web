@@ -1,0 +1,255 @@
+{ "result": 0.605820,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.21,
+"cardinality":121,
+"extra_info": "p_brand=Brand#12 AND IN(p_container, SM CASE, SM BOX, SM PACK, SM PKG) AND l_quantity>=1 AND l_quantity<=11 AND p_size<=5 OR p_brand=Brand#23 AND IN(p_container, MED BAG, MED BOX, MED PKG, MED PACK) AND l_quantity>=10 AND l_quantity<=20 AND p_size<=10 OR p_brand=Brand#34 AND IN(p_container, LG CASE, LG BOX, LG PACK, LG PKG) AND l_quantity>=20 AND l_quantity<=30 AND p_size<=15\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.11,
+"cardinality":214377,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":214377,
+"extra_info": "l_shipinstruct=DELIVER IN PERSON\nIN(l_shipmode, AIR, AIR REG)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.12,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "p_size>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.601450,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.21,
+"cardinality":121,
+"extra_info": "p_brand=Brand#12 AND IN(p_container, SM CASE, SM BOX, SM PACK, SM PKG) AND l_quantity>=1 AND l_quantity<=11 AND p_size<=5 OR p_brand=Brand#23 AND IN(p_container, MED BAG, MED BOX, MED PKG, MED PACK) AND l_quantity>=10 AND l_quantity<=20 AND p_size<=10 OR p_brand=Brand#34 AND IN(p_container, LG CASE, LG BOX, LG PACK, LG PKG) AND l_quantity>=20 AND l_quantity<=30 AND p_size<=15\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.11,
+"cardinality":214377,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.15,
+"cardinality":214377,
+"extra_info": "l_shipinstruct=DELIVER IN PERSON\nIN(l_shipmode, AIR, AIR REG)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.12,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "p_size>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.608926,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.20,
+"cardinality":121,
+"extra_info": "p_brand=Brand#12 AND IN(p_container, SM CASE, SM BOX, SM PACK, SM PKG) AND l_quantity>=1 AND l_quantity<=11 AND p_size<=5 OR p_brand=Brand#23 AND IN(p_container, MED BAG, MED BOX, MED PKG, MED PACK) AND l_quantity>=10 AND l_quantity<=20 AND p_size<=10 OR p_brand=Brand#34 AND IN(p_container, LG CASE, LG BOX, LG PACK, LG PKG) AND l_quantity>=20 AND l_quantity<=30 AND p_size<=15\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.11,
+"cardinality":214377,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":214377,
+"extra_info": "l_shipinstruct=DELIVER IN PERSON\nIN(l_shipmode, AIR, AIR REG)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.12,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "p_size>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.605687,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.21,
+"cardinality":121,
+"extra_info": "p_brand=Brand#12 AND IN(p_container, SM CASE, SM BOX, SM PACK, SM PKG) AND l_quantity>=1 AND l_quantity<=11 AND p_size<=5 OR p_brand=Brand#23 AND IN(p_container, MED BAG, MED BOX, MED PKG, MED PACK) AND l_quantity>=10 AND l_quantity<=20 AND p_size<=10 OR p_brand=Brand#34 AND IN(p_container, LG CASE, LG BOX, LG PACK, LG PKG) AND l_quantity>=20 AND l_quantity<=30 AND p_size<=15\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.12,
+"cardinality":214377,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":214377,
+"extra_info": "l_shipinstruct=DELIVER IN PERSON\nIN(l_shipmode, AIR, AIR REG)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.12,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "p_size>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.599893,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.21,
+"cardinality":121,
+"extra_info": "p_brand=Brand#12 AND IN(p_container, SM CASE, SM BOX, SM PACK, SM PKG) AND l_quantity>=1 AND l_quantity<=11 AND p_size<=5 OR p_brand=Brand#23 AND IN(p_container, MED BAG, MED BOX, MED PKG, MED PACK) AND l_quantity>=10 AND l_quantity<=20 AND p_size<=10 OR p_brand=Brand#34 AND IN(p_container, LG CASE, LG BOX, LG PACK, LG PKG) AND l_quantity>=20 AND l_quantity<=30 AND p_size<=15\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.11,
+"cardinality":214377,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.15,
+"cardinality":214377,
+"extra_info": "l_shipinstruct=DELIVER IN PERSON\nIN(l_shipmode, AIR, AIR REG)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.12,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "p_size>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

@@ -1,0 +1,515 @@
+{ "result": 0.133255,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":18,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":219,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_upper_bound<=88128\nib_lower_bound>=38128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.132871,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":18,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":219,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_upper_bound<=88128\nib_lower_bound>=38128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.132645,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":18,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":219,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_upper_bound<=88128\nib_lower_bound>=38128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.132375,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":18,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":219,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_upper_bound<=88128\nib_lower_bound>=38128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.134247,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":18,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":219,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_upper_bound<=88128\nib_lower_bound>=38128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

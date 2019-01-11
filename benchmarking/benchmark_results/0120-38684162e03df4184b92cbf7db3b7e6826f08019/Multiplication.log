@@ -1,0 +1,70 @@
+{ "result": 0.103164,
+"tree": { "name": "PROJECTION",
+"timing":0.03,
+"cardinality":10000000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.098412,
+"tree": { "name": "PROJECTION",
+"timing":0.03,
+"cardinality":10000000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.100202,
+"tree": { "name": "PROJECTION",
+"timing":0.03,
+"cardinality":10000000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.100804,
+"tree": { "name": "PROJECTION",
+"timing":0.03,
+"cardinality":10000000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
+{ "result": 0.101765,
+"tree": { "name": "PROJECTION",
+"timing":0.03,
+"cardinality":10000000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+}
