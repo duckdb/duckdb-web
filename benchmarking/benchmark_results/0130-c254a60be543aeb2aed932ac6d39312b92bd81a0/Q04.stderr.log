@@ -1,0 +1,36 @@
+---------
+|| Q04 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 5 ]: 
+Chunk - [2 Columns]
+- VARCHAR: 5 = [ 1-URGENT, 2-HIGH, 5-LOW, 3-MEDIUM, 4-NOT SPECIFIED]
+- BIGINT: 5 = [ 10594, 10476, 10487, 10410, 10556]
+
+Expected answer:
+Chunk - [2 Columns]
+- VARCHAR: 5 = [ 1-URGENT , 2-HIGH  , 3-MEDIUM , 4-NOT SPECIFIED, 5-LOW  ]
+- BIGINT: 5 = [ 10594, 10476, 10410, 10556, 10487]
+
+Difference in column 0:
+Result
+------
+VARCHAR [_,_,5-LOW,3-MEDIUM,4-NOT SPECIFIED,]
+
+Expect
+------
+VARCHAR [_,_,3-MEDIUM ,4-NOT SPECIFIED,5-LOW  ,]
+
+Difference in column 1:
+Result
+------
+BIGINT [_,_,10487,10410,10556,]
+
+Expect
+------
+BIGINT [_,_,10410,10556,10487,]
+
+

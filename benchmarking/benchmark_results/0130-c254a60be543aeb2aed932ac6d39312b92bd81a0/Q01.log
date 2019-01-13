@@ -1,0 +1,124 @@
+{ "result": 0.854779,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.73,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=1998-09-02\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.11,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 4 ]: 
+Chunk - [10 Columns]
+- VARCHAR: 4 = [ N, N, R, A]
+- VARCHAR: 4 = [ O, F, F, F]
+- INTEGER: 4 = [ 74476040, 991417, 37719753, 37734107]
+- DECIMAL: 4 = [ 111701729697.735565, 1487504710.379997, 56568041380.904472, 56586554400.729897]
+- DECIMAL: 4 = [ 106118230307.612228, 1413082168.054104, 53741292684.603783, 53758257134.865143]
+- DECIMAL: 4 = [ 110367043872.492081, 1469649223.194360, 55889619119.829659, 55909065222.825607]
+- DECIMAL: 4 = [ 25.502227, 25.516472, 25.505794, 25.522006]
+- DECIMAL: 4 = [ 38249.117989, 38284.467761, 38250.854626, 38273.129735]
+- DECIMAL: 4 = [ 0.049997, 0.050093, 0.050009, 0.049985]
+- BIGINT: 4 = [ 2920374, 38854, 1478870, 1478493]
+
+Expected answer:
+Chunk - [10 Columns]
+- VARCHAR: 4 = [ A, N, N, R]
+- VARCHAR: 4 = [ F, F, O, F]
+- INTEGER: 4 = [ 37734107, 991417, 74476040, 37719753]
+- DECIMAL: 4 = [ 56586554400.730003, 1487504710.380000, 111701729697.740005, 56568041380.900002]
+- DECIMAL: 4 = [ 53758257134.870003, 1413082168.050000, 106118230307.610001, 53741292684.599998]
+- DECIMAL: 4 = [ 55909065222.830002, 1469649223.190000, 110367043872.500000, 55889619119.830002]
+- DECIMAL: 4 = [ 25.520000, 25.520000, 25.500000, 25.510000]
+- DECIMAL: 4 = [ 38273.130000, 38284.470000, 38249.120000, 38250.850000]
+- DECIMAL: 4 = [ 0.050000, 0.050000, 0.050000, 0.050000]
+- BIGINT: 4 = [ 1478493, 38854, 2920374, 1478870]
+
+Difference in column 0:
+Result
+------
+VARCHAR [N,_,R,A,]
+
+Expect
+------
+VARCHAR [A,_,N,R,]
+
+Difference in column 1:
+Result
+------
+VARCHAR [O,_,F,_,]
+
+Expect
+------
+VARCHAR [F,_,O,_,]
+
+Difference in column 2:
+Result
+------
+INTEGER [74476040,_,37719753,37734107,]
+
+Expect
+------
+INTEGER [37734107,_,74476040,37719753,]
+
+Difference in column 3:
+Result
+------
+DECIMAL [111701729697.735565,_,56568041380.904472,_,]
+
+Expect
+------
+DECIMAL [56586554400.730003,_,111701729697.740005,_,]
+
+Difference in column 4:
+Result
+------
+DECIMAL [106118230307.612228,_,53741292684.603783,_,]
+
+Expect
+------
+DECIMAL [53758257134.870003,_,106118230307.610001,_,]
+
+Difference in column 5:
+Result
+------
+DECIMAL [110367043872.492081,_,55889619119.829659,_,]
+
+Expect
+------
+DECIMAL [55909065222.830002,_,110367043872.500000,_,]
+
+Difference in column 9:
+Result
+------
+BIGINT [2920374,_,1478870,1478493,]
+
+Expect
+------
+BIGINT [1478493,_,2920374,1478870,]
+
+

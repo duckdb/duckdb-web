@@ -1,0 +1,58 @@
+---------
+|| Q07 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 4 ]: 
+Chunk - [4 Columns]
+- VARCHAR: 4 = [ GERMANY, GERMANY, FRANCE, FRANCE]
+- VARCHAR: 4 = [ FRANCE, FRANCE, GERMANY, GERMANY]
+- BIGINT: 4 = [ 1996, 1995, 1995, 1996]
+- DECIMAL: 4 = [ 52520549.022400, 52531746.669700, 54639732.733600, 54633083.307600]
+
+Expected answer:
+Chunk - [4 Columns]
+- VARCHAR: 4 = [ FRANCE   , FRANCE   , GERMANY   , GERMANY   ]
+- VARCHAR: 4 = [ GERMANY   , GERMANY   , FRANCE   , FRANCE   ]
+- BIGINT: 4 = [ 1995, 1996, 1995, 1996]
+- DECIMAL: 4 = [ 54639732.730000, 54633083.310000, 52531746.670000, 52520549.020000]
+
+Difference in column 0:
+Result
+------
+VARCHAR [GERMANY,GERMANY,FRANCE,FRANCE,]
+
+Expect
+------
+VARCHAR [FRANCE   ,FRANCE   ,GERMANY   ,GERMANY   ,]
+
+Difference in column 1:
+Result
+------
+VARCHAR [FRANCE,FRANCE,GERMANY,GERMANY,]
+
+Expect
+------
+VARCHAR [GERMANY   ,GERMANY   ,FRANCE   ,FRANCE   ,]
+
+Difference in column 2:
+Result
+------
+BIGINT [1996,1995,_,_,]
+
+Expect
+------
+BIGINT [1995,1996,_,_,]
+
+Difference in column 3:
+Result
+------
+DECIMAL [52520549.022400,52531746.669700,54639732.733600,54633083.307600,]
+
+Expect
+------
+DECIMAL [54639732.730000,54633083.310000,52531746.670000,52520549.020000,]
+
+

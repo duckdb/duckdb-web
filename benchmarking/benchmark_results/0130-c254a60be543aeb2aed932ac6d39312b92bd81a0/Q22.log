@@ -1,0 +1,130 @@
+{ "result": 0.357924,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":7,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":7,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":7,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6384,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":6384,
+"extra_info": "IN(substring(c_phone,1,2), 13, 31, 23, 29, 30, 18, 17)\n",
+"children": [{ "name": "PIECEWISE_MERGE_JOIN",
+"timing":0.01,
+"cardinality":22720,
+"extra_info": "INNER\nc_acctbal>#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.27,
+"cardinality":50004,
+"extra_info": "ANTI\nc_custkey=#9\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1500000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":38120,
+"extra_info": "IN(substring(c_phone,1,2), 13, 31, 23, 29, 30, 18, 17)\nc_acctbal>0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 7 ]: 
+Chunk - [3 Columns]
+- VARCHAR: 7 = [ 13, 30, 31, 29, 18, 23, 17]
+- BIGINT: 7 = [ 888, 909, 922, 948, 964, 892, 861]
+- DECIMAL: 7 = [ 6737713.990000, 6808436.130000, 6806670.180000, 7158866.630000, 7236687.400000, 6701457.950000, 6460573.720000]
+
+Expected answer:
+Chunk - [3 Columns]
+- VARCHAR: 7 = [ 13  , 17  , 18  , 23  , 29  , 30  , 31  ]
+- BIGINT: 7 = [ 888, 861, 964, 892, 948, 909, 922]
+- DECIMAL: 7 = [ 6737713.990000, 6460573.720000, 7236687.400000, 6701457.950000, 7158866.630000, 6808436.130000, 6806670.180000]
+
+Difference in column 0:
+Result
+------
+VARCHAR [_,30,31,29,18,23,17,]
+
+Expect
+------
+VARCHAR [_,17  ,18  ,23  ,29  ,30  ,31  ,]
+
+Difference in column 1:
+Result
+------
+BIGINT [_,909,922,948,964,892,861,]
+
+Expect
+------
+BIGINT [_,861,964,892,948,909,922,]
+
+Difference in column 2:
+Result
+------
+DECIMAL [_,6808436.130000,6806670.180000,7158866.630000,7236687.400000,6701457.950000,6460573.720000,]
+
+Expect
+------
+DECIMAL [_,6460573.720000,7236687.400000,6701457.950000,7158866.630000,6808436.130000,6806670.180000,]
+
+
