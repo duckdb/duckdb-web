@@ -1,0 +1,130 @@
+{ "result": 0.148541,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.10,
+"cardinality":114160,
+"extra_info": "#3<24\n#1<=0.070000\n#2<1995-01-01\n#1>=0.050000\n#2>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.145517,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.10,
+"cardinality":114160,
+"extra_info": "#3<24\n#1<=0.070000\n#2<1995-01-01\n#1>=0.050000\n#2>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.146985,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.10,
+"cardinality":114160,
+"extra_info": "#3<24\n#1<=0.070000\n#2<1995-01-01\n#1>=0.050000\n#2>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.144600,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":114160,
+"extra_info": "#3<24\n#1<=0.070000\n#2<1995-01-01\n#1>=0.050000\n#2>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.147231,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.10,
+"cardinality":114160,
+"extra_info": "#3<24\n#1<=0.070000\n#2<1995-01-01\n#1>=0.050000\n#2>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}

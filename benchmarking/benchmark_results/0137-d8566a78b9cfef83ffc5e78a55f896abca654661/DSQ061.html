@@ -1,0 +1,381 @@
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Query Profile Graph for Query</title>
+		<style>
+		
+	.Treant { position: relative; overflow: hidden; padding: 0 !important; }
+	.Treant > .node,
+	.Treant > .pseudo { position: absolute; display: block; visibility: hidden; }
+	.Treant.loaded .node,
+	.Treant.loaded .pseudo { visibility: visible; }
+	.Treant > .pseudo { width: 0; height: 0; border: none; padding: 0; }
+	.Treant .collapse-switch { width: 3px; height: 3px; display: block; border: 1px solid black; position: absolute; top: 1px; right: 1px; cursor: pointer; }
+	.Treant .collapsed .collapse-switch { background-color: #868DEE; }
+	.Treant > .node img {	border: none; float: left; }
+
+	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
+	table { border-collapse:collapse; border-spacing:0; }
+	fieldset,img { border:0; }
+	address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+	caption,th { text-align:left; }
+	h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+	q:before,q:after { content:''; }
+	abbr,acronym { border:0; }
+
+	body { background: #fff; }
+	/* optional Container STYLES */
+	.chart { height: 500px; margin: 5px; width: 100%;  }
+	.Treant > .node {  }
+	.Treant > p { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: bold; font-size: 12px; }
+
+	.tree-node {
+		padding: 2px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		background-color: #ffffff;
+		border: 1px solid #000;
+		width: 200px;
+		font-family: Tahoma;
+		font-size: 12px;
+	}
+
+	.node-name {
+		font-weight: bold;
+		text-align: center;
+		font-size: 14px;
+	}
+
+	.node-title {
+		text-align: center;
+	}
+
+	.node-contact {
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.small-impact {
+		opacity: 0.7;
+	}
+
+	.medium-impact {
+		opacity: 0.8;
+	}
+
+	.high-impact {
+		opacity: 0.9;
+	}
+
+	.most-impact {
+		opacity: 1;
+	}
+
+
+	
+		.tone-0 {
+			background-color: #493829;
+		}
+		.tone-1 {
+			background-color: #816C5B;
+		}
+		.tone-2 {
+			background-color: #A9A18C;
+		}
+		.tone-3 {
+			background-color: #613318;
+		}
+		.tone-4 {
+			background-color: #B99C6B;
+		}
+		.tone-5 {
+			background-color: #A15038;
+		}
+		.tone-6 {
+			background-color: #8F3B1B;
+		}
+		.tone-7 {
+			background-color: #D57500;
+		}
+		.tone-8 {
+			background-color: #DBCA69;
+		}
+		.tone-9 {
+			background-color: #404F24;
+		}
+		.tone-10 {
+			background-color: #668D3C;
+		}
+		.tone-11 {
+			background-color: #BDD09F;
+		}
+		.tone-12 {
+			background-color: #4E6172;
+		}
+		.tone-13 {
+			background-color: #83929F;
+		}
+		.tone-14 {
+			background-color: #A3ADB8;
+		}
+		</style>
+	</head>
+	<body>
+		<script src="../../raphael.js"></script>
+		<script src="../../treant.js"></script>
+		<script>
+		
+	var chart_config = {
+		chart: {
+			container: "#query-profile",
+			nodeAlign: "BOTTOM",
+			connectors: {
+				type: 'step'
+			},
+			node: {
+				HTMLclass: 'tree-node'
+			}
+		},
+		nodeStructure: { "text": {"name": "PRUNE (0.0s)",
+"title": "",
+"contact": "[100]"},
+"HTMLclass": "small-impact tone-2",
+"children": [{ "text": {"name": "LIMIT (0.0s)",
+"title": "",
+"contact": "[100]"},
+"HTMLclass": "small-impact tone-0",
+"children": [{ "text": {"name": "ORDER_BY (0.01s)",
+"title": "",
+"contact": "[1024]"},
+"HTMLclass": "medium-impact tone-8",
+"children": [{ "text": {"name": "PROJECTION (0.0s)",
+"title": "",
+"contact": "[24 661]"},
+"HTMLclass": "small-impact tone-5",
+"children": [{ "text": {"name": "FILTER (0.0s)",
+"title": "CASE WHEN (avg_monthly_sales>0.000000) THEN (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) ELSE (NULL)>0.100000<br>avg_monthly_sales>0.000000<br>d_year=1999<br>",
+"contact": "[24 661]"},
+"HTMLclass": "small-impact tone-13",
+"children": [{ "text": {"name": "PROJECTION (0.0s)",
+"title": "",
+"contact": "[27 059]"},
+"HTMLclass": "small-impact tone-5",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>rn=rn - 1<br>cc_name=cc_name<br>i_brand=i_brand<br>i_category=i_category<br>",
+"contact": "[27 059]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>rn=rn + 1<br>cc_name=cc_name<br>i_brand=i_brand<br>i_category=i_category<br>",
+"contact": "[29 582]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "PROJECTION (0.0s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "small-impact tone-5",
+"children": [{ "text": {"name": "WINDOW (0.66s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "most-impact tone-3",
+"children": [{ "text": {"name": "HASH_GROUP_BY (0.14s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "most-impact tone-7",
+"children": [{ "text": {"name": "HASH_JOIN (0.04s)",
+"title": "INNER<br>cs_item_sk=i_item_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "high-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>cs_call_center_sk=cc_call_center_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>cs_sold_date_sk=d_date_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "SEQ_SCAN (0.01s)",
+"title": "catalog_sales<br>",
+"contact": "[1441 548]"},
+"HTMLclass": "medium-impact tone-4",
+"children": []}
+,{ "text": {"name": "FILTER (0.0s)",
+"title": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1<br>",
+"contact": "[427]"},
+"HTMLclass": "small-impact tone-13",
+"children": [{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "date_dim<br>",
+"contact": "[73 049]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+]}
+,{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "call_center<br>",
+"contact": "[6]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+,{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "item<br>",
+"contact": "[18 000]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+]}
+]}
+]}
+,{ "text": {"name": "PROJECTION (0.0s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "small-impact tone-5",
+"children": [{ "text": {"name": "WINDOW (0.66s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "most-impact tone-3",
+"children": [{ "text": {"name": "HASH_GROUP_BY (0.14s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "most-impact tone-7",
+"children": [{ "text": {"name": "HASH_JOIN (0.04s)",
+"title": "INNER<br>cs_item_sk=i_item_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "high-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>cs_call_center_sk=cc_call_center_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>cs_sold_date_sk=d_date_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "SEQ_SCAN (0.01s)",
+"title": "catalog_sales<br>",
+"contact": "[1441 548]"},
+"HTMLclass": "medium-impact tone-4",
+"children": []}
+,{ "text": {"name": "FILTER (0.0s)",
+"title": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1<br>",
+"contact": "[427]"},
+"HTMLclass": "small-impact tone-13",
+"children": [{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "date_dim<br>",
+"contact": "[73 049]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+]}
+,{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "call_center<br>",
+"contact": "[6]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+,{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "item<br>",
+"contact": "[18 000]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+]}
+]}
+]}
+]}
+,{ "text": {"name": "PROJECTION (0.0s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "small-impact tone-5",
+"children": [{ "text": {"name": "WINDOW (0.65s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "most-impact tone-3",
+"children": [{ "text": {"name": "HASH_GROUP_BY (0.14s)",
+"title": "",
+"contact": "[32 223]"},
+"HTMLclass": "most-impact tone-7",
+"children": [{ "text": {"name": "HASH_JOIN (0.04s)",
+"title": "INNER<br>cs_item_sk=i_item_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "high-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.02s)",
+"title": "INNER<br>cs_call_center_sk=cc_call_center_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "medium-impact tone-10",
+"children": [{ "text": {"name": "HASH_JOIN (0.03s)",
+"title": "INNER<br>cs_sold_date_sk=d_date_sk<br>",
+"contact": "[350 498]"},
+"HTMLclass": "high-impact tone-10",
+"children": [{ "text": {"name": "SEQ_SCAN (0.01s)",
+"title": "catalog_sales<br>",
+"contact": "[1441 548]"},
+"HTMLclass": "medium-impact tone-4",
+"children": []}
+,{ "text": {"name": "FILTER (0.0s)",
+"title": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1<br>",
+"contact": "[427]"},
+"HTMLclass": "small-impact tone-13",
+"children": [{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "date_dim<br>",
+"contact": "[73 049]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+]}
+,{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "call_center<br>",
+"contact": "[6]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+,{ "text": {"name": "SEQ_SCAN (0.0s)",
+"title": "item<br>",
+"contact": "[18 000]"},
+"HTMLclass": "small-impact tone-4",
+"children": []}
+]}
+]}
+]}
+]}
+]}
+]}
+]}
+]}
+]}
+]}
+]}
+
+	}
+	
+		</script>
+
+		<div class="chart" id="query-profile"></div>
+
+		<script>
+			// create a dummy chart to figure out how wide/high iti s
+			new Treant(chart_config );
+			max_height = 0
+			document.querySelectorAll('.tree-node').forEach(function(node) {
+				top_px = parseInt(node.style.top.substring(0, node.style.top.length - 2))
+				if (top_px > max_height) {
+					max_height = top_px
+				}
+			});
+			// now remove the chart we just created
+			document.querySelectorAll('#query-profile').forEach(function(node) {
+				node.innerHTML = ""
+			});
+			// resize the chart
+			document.querySelectorAll('.chart').forEach(function(node) {
+				node.style.height = (max_height + 200) + "px"
+			});
+			// and recreate it
+			new Treant(chart_config );
+			
+
+		</script>
+
+	</body>
+	</html>
+		

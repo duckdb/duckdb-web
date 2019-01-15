@@ -1,0 +1,150 @@
+{ "result": 2.087670,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "web_cumulative>store_cumulative\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":0,
+"extra_info": "OUTER\nd_date=d_date\nitem_sk=item_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.31,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":138345,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":142217,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "IS_NOT_NULL(ws_item_sk)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_month_seq<=1211\nd_month_seq>=1200\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":520232,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":1.50,
+"cardinality":520232,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.10,
+"cardinality":520232,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "IS_NOT_NULL(ss_item_sk)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_month_seq<=1211\nd_month_seq>=1200\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+INCORRECT RESULT: Not implemented: Unimplemented join type for hash join
