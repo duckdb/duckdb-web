@@ -1,0 +1,69 @@
+{ "result": 30.340040,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":2,
+"extra_info": "SUBQUERY>0\n#1<=778\n#1>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":4096,
+"extra_info": "item",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3593,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":3593,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":28.86,
+"cardinality":47,
+"extra_info": "#0=#2 AND #1=Women AND #2=powder OR #2=khaki AND #3=Ounce OR #3=Oz AND #4=medium OR #4=extra large OR #1=Women AND #2=brown OR #2=honeydew AND #3=Bunch OR #3=Ton AND #4=N/A OR #4=small OR #1=Men AND #2=floral OR #2=deep AND #3=N/A OR #3=Dozen AND #4=petite OR #4=petite OR #1=Men AND #2=light OR #2=cornflower AND #3=Box OR #3=Pound AND #4=medium OR #4=extra large OR #0=#2 AND #1=Women AND #2=midnight OR #2=snow AND #3=Pallet OR #3=Gross AND #4=medium OR #4=extra large OR #1=Women AND #2=cyan OR #2=papaya AND #3=Cup OR #3=Dram AND #4=N/A OR #4=small OR #1=Men AND #2=orange OR #2=frosted AND #3=Each OR #3=Tbl AND #4=petite OR #4=petite OR #1=Men AND #2=forest OR #2=ghost AND #3=Lb OR #3=Bundle AND #4=medium OR #4=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":1.44,
+"cardinality":64678096,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
