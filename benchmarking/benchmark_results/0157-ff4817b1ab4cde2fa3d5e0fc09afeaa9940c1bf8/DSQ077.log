@@ -1,0 +1,540 @@
+{ "result": 0.139002,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":0,
+"extra_info": "INNER\n#1=#4\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#2<=5\n#2>=1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":12513,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":12513,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(#2, 1999, 2000, 2001)\n#1<=2\n#1>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "CASE WHEN (#2>0) THEN (#3 / #2) ELSE (NULL)>1\n#2>0\n#1=Unknown OR #1=>10000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(#1, Orange County, Bronx County, Franklin Parish, Williamson County)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.134768,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":0,
+"extra_info": "INNER\n#1=#4\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#2<=5\n#2>=1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":12513,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":12513,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(#2, 1999, 2000, 2001)\n#1<=2\n#1>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "CASE WHEN (#2>0) THEN (#3 / #2) ELSE (NULL)>1\n#2>0\n#1=Unknown OR #1=>10000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(#1, Orange County, Bronx County, Franklin Parish, Williamson County)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.134406,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":0,
+"extra_info": "INNER\n#1=#4\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#2<=5\n#2>=1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":12513,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":12513,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(#2, 1999, 2000, 2001)\n#1<=2\n#1>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "CASE WHEN (#2>0) THEN (#3 / #2) ELSE (NULL)>1\n#2>0\n#1=Unknown OR #1=>10000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(#1, Orange County, Bronx County, Franklin Parish, Williamson County)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.138495,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":0,
+"extra_info": "INNER\n#1=#4\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#2<=5\n#2>=1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":12513,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":12513,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(#2, 1999, 2000, 2001)\n#1<=2\n#1>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "CASE WHEN (#2>0) THEN (#3 / #2) ELSE (NULL)>1\n#2>0\n#1=Unknown OR #1=>10000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(#1, Orange County, Bronx County, Franklin Parish, Williamson County)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.124078,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":0,
+"extra_info": "INNER\n#1=#4\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#2<=5\n#2>=1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1028,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":12513,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":12513,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":113850,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":72,
+"extra_info": "IN(#2, 1999, 2000, 2001)\n#1<=2\n#1>=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "CASE WHEN (#2>0) THEN (#3 / #2) ELSE (NULL)>1\n#2>0\n#1=Unknown OR #1=>10000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "IN(#1, Orange County, Bronx County, Franklin Parish, Williamson County)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
