@@ -1,0 +1,350 @@
+{ "result": 0.165324,
+"tree": { "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.08,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":118274,
+"extra_info": "INNER\n#1=#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":799680,
+"extra_info": "ANTI\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#1%Customer%Complaints%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":29581,
+"extra_info": "IN(#2, 49, 14, 23, 45, 19, 3, 36, 9)\n#1MEDIUM POLISHED%\n#0!=Brand#45\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.164553,
+"tree": { "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.08,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":118274,
+"extra_info": "INNER\n#1=#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":799680,
+"extra_info": "ANTI\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#1%Customer%Complaints%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":29581,
+"extra_info": "IN(#2, 49, 14, 23, 45, 19, 3, 36, 9)\n#1MEDIUM POLISHED%\n#0!=Brand#45\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.179877,
+"tree": { "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.08,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":118274,
+"extra_info": "INNER\n#1=#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":799680,
+"extra_info": "ANTI\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#1%Customer%Complaints%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":29581,
+"extra_info": "IN(#2, 49, 14, 23, 45, 19, 3, 36, 9)\n#1MEDIUM POLISHED%\n#0!=Brand#45\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.163166,
+"tree": { "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.08,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":118274,
+"extra_info": "INNER\n#1=#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":799680,
+"extra_info": "ANTI\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#1%Customer%Complaints%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":29581,
+"extra_info": "IN(#2, 49, 14, 23, 45, 19, 3, 36, 9)\n#1MEDIUM POLISHED%\n#0!=Brand#45\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.163394,
+"tree": { "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.08,
+"cardinality":18314,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":118274,
+"extra_info": "INNER\n#1=#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":799680,
+"extra_info": "ANTI\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#1%Customer%Complaints%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":29581,
+"extra_info": "IN(#2, 49, 14, 23, 45, 19, 3, 36, 9)\n#1MEDIUM POLISHED%\n#0!=Brand#45\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
