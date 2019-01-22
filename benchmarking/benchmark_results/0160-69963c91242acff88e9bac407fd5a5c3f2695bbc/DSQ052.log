@@ -1,0 +1,480 @@
+{ "result": 1.041938,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":612,
+"extra_info": "#14=M AND #15=4 yr Degree AND #4>=100.000000 AND #4<=150.000000 OR #14=D AND #15=2 yr Degree AND #4>=50.000000 AND #4<=100.000000 OR #14=S AND #15=College AND #4>=150.000000 AND #4<=200.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":36574,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":36574,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":182491,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.31,
+"cardinality":182491,
+"extra_info": "IN(#9, CO, OH, TX) AND #6>=0.000000 AND #6<=2000.000000 OR IN(#9, OR, MN, KY) AND #6>=150.000000 AND #6<=3000.000000 OR IN(#9, VA, CA, MS) AND #6>=50.000000 AND #6<=25000.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.15,
+"cardinality":2880404,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.049146,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":612,
+"extra_info": "#14=M AND #15=4 yr Degree AND #4>=100.000000 AND #4<=150.000000 OR #14=D AND #15=2 yr Degree AND #4>=50.000000 AND #4<=100.000000 OR #14=S AND #15=College AND #4>=150.000000 AND #4<=200.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":36574,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":36574,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":182491,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.32,
+"cardinality":182491,
+"extra_info": "IN(#9, CO, OH, TX) AND #6>=0.000000 AND #6<=2000.000000 OR IN(#9, OR, MN, KY) AND #6>=150.000000 AND #6<=3000.000000 OR IN(#9, VA, CA, MS) AND #6>=50.000000 AND #6<=25000.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.15,
+"cardinality":2880404,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.041200,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":612,
+"extra_info": "#14=M AND #15=4 yr Degree AND #4>=100.000000 AND #4<=150.000000 OR #14=D AND #15=2 yr Degree AND #4>=50.000000 AND #4<=100.000000 OR #14=S AND #15=College AND #4>=150.000000 AND #4<=200.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":36574,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":36574,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":182491,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.32,
+"cardinality":182491,
+"extra_info": "IN(#9, CO, OH, TX) AND #6>=0.000000 AND #6<=2000.000000 OR IN(#9, OR, MN, KY) AND #6>=150.000000 AND #6<=3000.000000 OR IN(#9, VA, CA, MS) AND #6>=50.000000 AND #6<=25000.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.15,
+"cardinality":2880404,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.040435,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":612,
+"extra_info": "#14=M AND #15=4 yr Degree AND #4>=100.000000 AND #4<=150.000000 OR #14=D AND #15=2 yr Degree AND #4>=50.000000 AND #4<=100.000000 OR #14=S AND #15=College AND #4>=150.000000 AND #4<=200.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.31,
+"cardinality":36574,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":36574,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":182491,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.32,
+"cardinality":182491,
+"extra_info": "IN(#9, CO, OH, TX) AND #6>=0.000000 AND #6<=2000.000000 OR IN(#9, OR, MN, KY) AND #6>=150.000000 AND #6<=3000.000000 OR IN(#9, VA, CA, MS) AND #6>=50.000000 AND #6<=25000.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.15,
+"cardinality":2880404,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.049502,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":612,
+"extra_info": "#14=M AND #15=4 yr Degree AND #4>=100.000000 AND #4<=150.000000 OR #14=D AND #15=2 yr Degree AND #4>=50.000000 AND #4<=100.000000 OR #14=S AND #15=College AND #4>=150.000000 AND #4<=200.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":36574,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":36574,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":182491,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.32,
+"cardinality":182491,
+"extra_info": "IN(#9, CO, OH, TX) AND #6>=0.000000 AND #6<=2000.000000 OR IN(#9, OR, MN, KY) AND #6>=150.000000 AND #6<=3000.000000 OR IN(#9, VA, CA, MS) AND #6>=50.000000 AND #6<=25000.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.15,
+"cardinality":2880404,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
