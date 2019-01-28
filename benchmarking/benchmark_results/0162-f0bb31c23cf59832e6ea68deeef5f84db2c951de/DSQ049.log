@@ -1,0 +1,115 @@
+{ "result": 30.337244,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":17,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "FILTER",
+"timing":1.76,
+"cardinality":780,
+"extra_info": "IN(substring(#8,1,5), 85669, 86197, 88274, 83405, 86475, 85392, 85460, 80348, 81792) OR IN(#5, SUBQUERY)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.11,
+"cardinality":698348,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":698356,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":698368,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":100000,
+"extra_info": "INNER\n#1=#2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.16,
+"cardinality":6982950,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":22.66,
+"cardinality":6982950,
+"extra_info": "IN(#1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":5.29,
+"cardinality":715054080,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "#2=2001\n#1=2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

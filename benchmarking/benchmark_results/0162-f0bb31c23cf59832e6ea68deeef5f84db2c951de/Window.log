@@ -1,0 +1,100 @@
+{ "result": 0.226876,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.23,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.229736,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.23,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.226829,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.23,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.227096,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.23,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.229425,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.23,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
