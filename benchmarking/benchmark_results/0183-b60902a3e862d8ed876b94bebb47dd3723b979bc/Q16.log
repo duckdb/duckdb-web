@@ -1,0 +1,70 @@
+{ "result": 30.338592,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":23.28,
+"cardinality":495,
+"extra_info": "!#6\nIN(#5, 49, 14, 23, 45, 19, 3, 36, 9)\n#4MEDIUM POLISHED%\n#3!=Brand#45\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":6.70,
+"cardinality":444699648,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.20,
+"cardinality":444699648,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":3072,
+"extra_info": "partsupp",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#0%Customer%Complaints%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

@@ -1,0 +1,225 @@
+{ "result": 0.532543,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.24,
+"cardinality":30988,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "#3<1995-01-01\n#3>=1994-01-01\n#4<#2\n#2<#3\nIN(#1, MAIL, SHIP)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.531864,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":30988,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.17,
+"cardinality":30988,
+"extra_info": "#3<1995-01-01\n#3>=1994-01-01\n#4<#2\n#2<#3\nIN(#1, MAIL, SHIP)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.532837,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.24,
+"cardinality":30988,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "#3<1995-01-01\n#3>=1994-01-01\n#4<#2\n#2<#3\nIN(#1, MAIL, SHIP)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.535519,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.24,
+"cardinality":30988,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "#3<1995-01-01\n#3>=1994-01-01\n#4<#2\n#2<#3\nIN(#1, MAIL, SHIP)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.542012,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.24,
+"cardinality":30988,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.17,
+"cardinality":30988,
+"extra_info": "#3<1995-01-01\n#3>=1994-01-01\n#4<#2\n#2<#3\nIN(#1, MAIL, SHIP)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
