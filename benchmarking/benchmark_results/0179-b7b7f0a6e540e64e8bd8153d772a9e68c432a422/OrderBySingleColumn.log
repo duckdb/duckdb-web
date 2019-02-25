@@ -1,0 +1,130 @@
+{ "result": 0.046146,
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.04,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.041716,
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.04,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.042771,
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.04,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.042115,
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.04,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.042234,
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.04,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
