@@ -1,0 +1,2 @@
+InList2048Entry - [in]
+Runs the following query: "SELECT * FROM strings WHERE s IN ()"

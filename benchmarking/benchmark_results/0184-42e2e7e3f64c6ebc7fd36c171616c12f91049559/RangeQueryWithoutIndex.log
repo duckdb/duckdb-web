@@ -1,0 +1,27 @@
+{ "result": 0.894292,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.49,
+"cardinality":999999,
+"extra_info": "#0<16000000\n#0>15000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.36,
+"cardinality":100000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+INCORRECT RESULT: Incorrect result returned, expected -552471264
