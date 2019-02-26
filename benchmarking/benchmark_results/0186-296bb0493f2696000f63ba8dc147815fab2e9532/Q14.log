@@ -1,0 +1,195 @@
+{ "result": 0.192174,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":75983,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.03,
+"cardinality":75983,
+"extra_info": "#1<1995-10-01\n#1>=1995-09-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.194121,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":75983,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.03,
+"cardinality":75983,
+"extra_info": "#1<1995-10-01\n#1>=1995-09-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.194883,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":75983,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.03,
+"cardinality":75983,
+"extra_info": "#1<1995-10-01\n#1>=1995-09-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.191298,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":75983,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.03,
+"cardinality":75983,
+"extra_info": "#1<1995-10-01\n#1>=1995-09-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.190395,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":75983,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.03,
+"cardinality":75983,
+"extra_info": "#1<1995-10-01\n#1>=1995-09-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}

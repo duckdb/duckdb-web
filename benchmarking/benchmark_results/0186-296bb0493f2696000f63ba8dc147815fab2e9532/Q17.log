@@ -1,0 +1,45 @@
+{ "result": 29.536044,
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "CAST[DECIMAL](#1)<#6\n#5=MED BOX\n#4=Brand#23\n#3=#0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":29.05,
+"cardinality":0,
+"extra_info": "SINGLE\n#3=#1\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.39,
+"cardinality":514099200,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":3072,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
