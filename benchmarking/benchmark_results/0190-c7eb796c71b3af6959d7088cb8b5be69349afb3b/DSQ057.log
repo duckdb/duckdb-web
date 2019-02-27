@@ -1,0 +1,114 @@
+{ "result": 30.339782,
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "CASE WHEN (#2>0.000000) THEN (abs(#1 - #2) / #2) ELSE (NULL)>0.100000\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":25.32,
+"cardinality":0,
+"extra_info": "IN(#4, Books, Children, Electronics) AND IN(#5, personal, portable, reference, self-help) AND IN(#6, scholaramalgamalg #14, scholaramalgamalg #7, exportiunivamalg #9, scholaramalgamalg #9) OR IN(#4, Women, Music, Men) AND IN(#5, accessories, classical, fragrances, pants) AND IN(#6, amalgimporto #1, edu packscholar #1, exportiimporto #1, importoamalg #1)\n#13\n#10=#12\n#9=#0\n#8=#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":2.40,
+"cardinality":153577472,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":1.60,
+"cardinality":153577472,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.53,
+"cardinality":34564848,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
