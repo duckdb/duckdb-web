@@ -1,0 +1,89 @@
+{ "result": 29.875138,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "!IS_NOT_NULL(#17)\nIS_NOT_NULL(#15)\n#12=pri\n#6=#11\n#3=IL\n#5=#2\n#4=#1\n#0<=1999-04-02\nCAST[VARCHAR](#0)>=1999-02-01\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SINGLE\n#7=#0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":27.70,
+"cardinality":0,
+"extra_info": "SINGLE\n#7=#0\n#8=#1\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":1.76,
+"cardinality":364794880,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.22,
+"cardinality":21581520,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
