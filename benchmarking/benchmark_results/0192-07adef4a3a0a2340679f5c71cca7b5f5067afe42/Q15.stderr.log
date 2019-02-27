@@ -1,0 +1,6 @@
+---------
+|| Q15 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Unknown: column supplier_no must appear in the GROUP BY clause or be used in an aggregate function

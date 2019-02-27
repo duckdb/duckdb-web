@@ -1,0 +1,965 @@
+{ "result": 0.721344,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39053,
+"extra_info": "#1>=122.000000 AND #1<=132.000000 OR #2>=836.000000 AND #2<=1836.000000 OR #3>=17.000000 AND #3<=37.000000\n#0<=25\n#0>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "#1>=154.000000 AND #1<=164.000000 OR #2>=7326.000000 AND #2<=8326.000000 OR #3>=7.000000 AND #3<=27.000000\n#0<=30\n#0>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "#1>=8.000000 AND #1<=18.000000 OR #2>=459.000000 AND #2<=1459.000000 OR #3>=57.000000 AND #3<=77.000000\n#0<=5\n#0>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "#1>=142.000000 AND #1<=152.000000 OR #2>=12214.000000 AND #2<=13214.000000 OR #3>=79.000000 AND #3<=99.000000\n#0<=15\n#0>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "#1>=135.000000 AND #1<=145.000000 OR #2>=6071.000000 AND #2<=7071.000000 OR #3>=38.000000 AND #3<=58.000000\n#0<=20\n#0>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":38144,
+"extra_info": "#1>=90.000000 AND #1<=100.000000 OR #2>=2323.000000 AND #2<=3323.000000 OR #3>=31.000000 AND #3<=51.000000\n#0<=10\n#0>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.722693,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39053,
+"extra_info": "#1>=122.000000 AND #1<=132.000000 OR #2>=836.000000 AND #2<=1836.000000 OR #3>=17.000000 AND #3<=37.000000\n#0<=25\n#0>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "#1>=154.000000 AND #1<=164.000000 OR #2>=7326.000000 AND #2<=8326.000000 OR #3>=7.000000 AND #3<=27.000000\n#0<=30\n#0>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "#1>=8.000000 AND #1<=18.000000 OR #2>=459.000000 AND #2<=1459.000000 OR #3>=57.000000 AND #3<=77.000000\n#0<=5\n#0>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "#1>=142.000000 AND #1<=152.000000 OR #2>=12214.000000 AND #2<=13214.000000 OR #3>=79.000000 AND #3<=99.000000\n#0<=15\n#0>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "#1>=135.000000 AND #1<=145.000000 OR #2>=6071.000000 AND #2<=7071.000000 OR #3>=38.000000 AND #3<=58.000000\n#0<=20\n#0>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":38144,
+"extra_info": "#1>=90.000000 AND #1<=100.000000 OR #2>=2323.000000 AND #2<=3323.000000 OR #3>=31.000000 AND #3<=51.000000\n#0<=10\n#0>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.715325,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39053,
+"extra_info": "#1>=122.000000 AND #1<=132.000000 OR #2>=836.000000 AND #2<=1836.000000 OR #3>=17.000000 AND #3<=37.000000\n#0<=25\n#0>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "#1>=154.000000 AND #1<=164.000000 OR #2>=7326.000000 AND #2<=8326.000000 OR #3>=7.000000 AND #3<=27.000000\n#0<=30\n#0>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39368,
+"extra_info": "#1>=8.000000 AND #1<=18.000000 OR #2>=459.000000 AND #2<=1459.000000 OR #3>=57.000000 AND #3<=77.000000\n#0<=5\n#0>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "#1>=142.000000 AND #1<=152.000000 OR #2>=12214.000000 AND #2<=13214.000000 OR #3>=79.000000 AND #3<=99.000000\n#0<=15\n#0>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "#1>=135.000000 AND #1<=145.000000 OR #2>=6071.000000 AND #2<=7071.000000 OR #3>=38.000000 AND #3<=58.000000\n#0<=20\n#0>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "#1>=90.000000 AND #1<=100.000000 OR #2>=2323.000000 AND #2<=3323.000000 OR #3>=31.000000 AND #3<=51.000000\n#0<=10\n#0>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.719174,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39053,
+"extra_info": "#1>=122.000000 AND #1<=132.000000 OR #2>=836.000000 AND #2<=1836.000000 OR #3>=17.000000 AND #3<=37.000000\n#0<=25\n#0>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "#1>=154.000000 AND #1<=164.000000 OR #2>=7326.000000 AND #2<=8326.000000 OR #3>=7.000000 AND #3<=27.000000\n#0<=30\n#0>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "#1>=8.000000 AND #1<=18.000000 OR #2>=459.000000 AND #2<=1459.000000 OR #3>=57.000000 AND #3<=77.000000\n#0<=5\n#0>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "#1>=142.000000 AND #1<=152.000000 OR #2>=12214.000000 AND #2<=13214.000000 OR #3>=79.000000 AND #3<=99.000000\n#0<=15\n#0>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "#1>=135.000000 AND #1<=145.000000 OR #2>=6071.000000 AND #2<=7071.000000 OR #3>=38.000000 AND #3<=58.000000\n#0<=20\n#0>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":38144,
+"extra_info": "#1>=90.000000 AND #1<=100.000000 OR #2>=2323.000000 AND #2<=3323.000000 OR #3>=31.000000 AND #3<=51.000000\n#0<=10\n#0>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.722515,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39053,
+"extra_info": "#1>=122.000000 AND #1<=132.000000 OR #2>=836.000000 AND #2<=1836.000000 OR #3>=17.000000 AND #3<=37.000000\n#0<=25\n#0>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "#1>=154.000000 AND #1<=164.000000 OR #2>=7326.000000 AND #2<=8326.000000 OR #3>=7.000000 AND #3<=27.000000\n#0<=30\n#0>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "#1>=8.000000 AND #1<=18.000000 OR #2>=459.000000 AND #2<=1459.000000 OR #3>=57.000000 AND #3<=77.000000\n#0<=5\n#0>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "#1>=142.000000 AND #1<=152.000000 OR #2>=12214.000000 AND #2<=13214.000000 OR #3>=79.000000 AND #3<=99.000000\n#0<=15\n#0>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "#1>=135.000000 AND #1<=145.000000 OR #2>=6071.000000 AND #2<=7071.000000 OR #3>=38.000000 AND #3<=58.000000\n#0<=20\n#0>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "#1>=90.000000 AND #1<=100.000000 OR #2>=2323.000000 AND #2<=3323.000000 OR #3>=31.000000 AND #3<=51.000000\n#0<=10\n#0>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
