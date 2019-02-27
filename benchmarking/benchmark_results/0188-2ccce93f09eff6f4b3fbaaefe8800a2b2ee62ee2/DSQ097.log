@@ -1,0 +1,350 @@
+{ "result": 0.375474,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":8222,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":8222,
+"extra_info": "INNER\n#7=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.16,
+"cardinality":2880404,
+"extra_info": "LEFT\n#1=#1\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=reason 28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":35,
+"extra_info": "reason",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.376749,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":8222,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":8222,
+"extra_info": "INNER\n#7=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.16,
+"cardinality":2880404,
+"extra_info": "LEFT\n#1=#1\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=reason 28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":35,
+"extra_info": "reason",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.376871,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":8222,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":8222,
+"extra_info": "INNER\n#7=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.16,
+"cardinality":2880404,
+"extra_info": "LEFT\n#1=#1\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=reason 28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":35,
+"extra_info": "reason",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.376654,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":8222,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":8222,
+"extra_info": "INNER\n#7=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.16,
+"cardinality":2880404,
+"extra_info": "LEFT\n#1=#1\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=reason 28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":35,
+"extra_info": "reason",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.378277,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":7742,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":8222,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":8222,
+"extra_info": "INNER\n#7=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.16,
+"cardinality":2880404,
+"extra_info": "LEFT\n#1=#1\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=reason 28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":35,
+"extra_info": "reason",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
