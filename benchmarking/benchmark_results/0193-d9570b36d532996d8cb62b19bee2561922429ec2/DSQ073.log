@@ -1,0 +1,82 @@
+{ "result": 28.688414,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "!IS_NOT_NULL(#16)\nIS_NOT_NULL(#12)\n!IS_NOT_NULL(#14)\n#5=#1\nIN(#4, KY, GA, NM)\n#0=#3\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SINGLE\n#2=#0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "SINGLE\n#2=#0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":28.16,
+"cardinality":0,
+"extra_info": "SINGLE\n#2=#0\n",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.43,
+"cardinality":226428928,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
