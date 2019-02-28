@@ -1,0 +1,40 @@
+{ "result": 3.046736,
+"tree": { "name": "COPY",
+"timing":3.05,
+"cardinality":1,
+"extra_info": "",
+"children": []
+}
+}
+{ "result": 3.063273,
+"tree": { "name": "COPY",
+"timing":3.06,
+"cardinality":1,
+"extra_info": "",
+"children": []
+}
+}
+{ "result": 3.061865,
+"tree": { "name": "COPY",
+"timing":3.06,
+"cardinality":1,
+"extra_info": "",
+"children": []
+}
+}
+{ "result": 3.060728,
+"tree": { "name": "COPY",
+"timing":3.06,
+"cardinality":1,
+"extra_info": "",
+"children": []
+}
+}
+{ "result": 3.060610,
+"tree": { "name": "COPY",
+"timing":3.06,
+"cardinality":1,
+"extra_info": "",
+"children": []
+}
+}
