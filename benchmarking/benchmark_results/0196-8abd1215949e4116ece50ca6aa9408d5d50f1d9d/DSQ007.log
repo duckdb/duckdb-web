@@ -1,0 +1,510 @@
+{ "result": 0.000948,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#3=College\n#2=S\n#1=M\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=N OR #2=N\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":300,
+"extra_info": "promotion",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.000960,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#3=College\n#2=S\n#1=M\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=N OR #2=N\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":300,
+"extra_info": "promotion",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.001366,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#3=College\n#2=S\n#1=M\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=N OR #2=N\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":300,
+"extra_info": "promotion",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.002212,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#3=College\n#2=S\n#1=M\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=N OR #2=N\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":300,
+"extra_info": "promotion",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.002789,
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#3=College\n#2=S\n#1=M\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "#1=N OR #2=N\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":300,
+"extra_info": "promotion",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
