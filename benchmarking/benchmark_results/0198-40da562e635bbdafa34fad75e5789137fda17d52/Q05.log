@@ -1,0 +1,109 @@
+{ "result": 30.336491,
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":5.67,
+"cardinality":95,
+"extra_info": "c_nationkey=s_nationkey\nc_custkey=o_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":23.91,
+"cardinality":16038335,
+"extra_info": "INNER\nn_nationkey=c_nationkey\nn_nationkey=c_nationkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":2671,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":17386,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":88064,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2003,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=ASIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":227597,
+"extra_info": "o_orderdate<1995-01-01\no_orderdate>=1994-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
