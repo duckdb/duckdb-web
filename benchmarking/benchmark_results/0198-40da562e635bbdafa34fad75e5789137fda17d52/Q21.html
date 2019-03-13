@@ -44,6 +44,25 @@
 		font-size: 12px;
 	}
 
+	.metainfo {
+		font-family: Tahoma;
+		font-weight: bold;
+	}
+
+	.metainfo > th {
+		padding: 1px 5px;
+	}
+
+	.mainphase {
+		background-color: #668D3C;
+	}
+	.subphase {
+		background-color: #B99C6B;
+	}
+	.phaseheader {
+		background-color: #83929F;
+	}
+
 	.node-name {
 		font-weight: bold;
 		text-align: center;
@@ -244,7 +263,7 @@
 "children": [{ "text": {"name": "DELIM_SCAN (0.0s)",
 "title": "",
 "contact": "[75 864]"},
-"HTMLclass": "small-impact tone-6",
+"HTMLclass": "small-impact tone-9",
 "children": []}
 ,{ "text": {"name": "SEQ_SCAN (0.28s)",
 "title": "lineitem<br>",
@@ -285,7 +304,7 @@
 "children": [{ "text": {"name": "DELIM_SCAN (0.0s)",
 "title": "",
 "contact": "[73 082]"},
-"HTMLclass": "small-impact tone-6",
+"HTMLclass": "small-impact tone-9",
 "children": []}
 ,{ "text": {"name": "FILTER (0.04s)",
 "title": "l_receiptdate>l_commitdate<br>",
@@ -310,10 +329,11 @@
 	
 		</script>
 
+		<div id="meta-info"></div>
 		<div class="chart" id="query-profile"></div>
 
 		<script>
-			// create a dummy chart to figure out how wide/high iti s
+			// create a dummy chart to figure out how wide/high it is
 			new Treant(chart_config );
 			max_height = 0
 			document.querySelectorAll('.tree-node').forEach(function(node) {

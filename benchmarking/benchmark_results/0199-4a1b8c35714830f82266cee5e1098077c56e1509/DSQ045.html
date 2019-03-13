@@ -44,6 +44,25 @@
 		font-size: 12px;
 	}
 
+	.metainfo {
+		font-family: Tahoma;
+		font-weight: bold;
+	}
+
+	.metainfo > th {
+		padding: 1px 5px;
+	}
+
+	.mainphase {
+		background-color: #668D3C;
+	}
+	.subphase {
+		background-color: #B99C6B;
+	}
+	.phaseheader {
+		background-color: #83929F;
+	}
+
 	.node-name {
 		font-weight: bold;
 		text-align: center;
@@ -204,7 +223,7 @@
 "children": [{ "text": {"name": "DELIM_SCAN (0.0s)",
 "title": "",
 "contact": "[67]"},
-"HTMLclass": "small-impact tone-6",
+"HTMLclass": "small-impact tone-9",
 "children": []}
 ,{ "text": {"name": "HASH_GROUP_BY (0.0s)",
 "title": "",
@@ -217,7 +236,7 @@
 "children": [{ "text": {"name": "DELIM_SCAN (0.0s)",
 "title": "",
 "contact": "[67]"},
-"HTMLclass": "small-impact tone-6",
+"HTMLclass": "small-impact tone-9",
 "children": []}
 ,{ "text": {"name": "FILTER (0.01s)",
 "title": "i_color=powder OR i_color=khaki AND i_units=Ounce OR i_units=Oz AND i_size=medium OR i_size=extra large OR i_color=brown OR i_color=honeydew AND i_units=Bunch OR i_units=Ton AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=floral OR i_color=deep AND i_units=N/A OR i_units=Dozen AND i_size=petite OR i_category=Men AND i_color=light OR i_color=cornflower AND i_units=Box OR i_units=Pound AND i_size=medium OR i_size=extra large OR i_color=midnight OR i_color=snow AND i_units=Pallet OR i_units=Gross AND i_size=medium OR i_size=extra large OR i_color=cyan OR i_color=papaya AND i_units=Cup OR i_units=Dram AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=orange OR i_color=frosted AND i_units=Each OR i_units=Tbl AND i_size=petite OR i_category=Men AND i_color=forest OR i_color=ghost AND i_units=Lb OR i_units=Bundle AND i_size=medium OR i_size=extra large<br>",
@@ -245,10 +264,11 @@
 	
 		</script>
 
+		<div id="meta-info"></div>
 		<div class="chart" id="query-profile"></div>
 
 		<script>
-			// create a dummy chart to figure out how wide/high iti s
+			// create a dummy chart to figure out how wide/high it is
 			new Treant(chart_config );
 			max_height = 0
 			document.querySelectorAll('.tree-node').forEach(function(node) {
