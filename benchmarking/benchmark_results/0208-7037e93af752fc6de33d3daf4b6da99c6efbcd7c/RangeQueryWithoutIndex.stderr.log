@@ -1,0 +1,6 @@
+----------------------------
+|| RangeQueryWithoutIndex ||
+----------------------------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect result returned, expected 15499984500000
