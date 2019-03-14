@@ -1,0 +1,775 @@
+{ "result": 0.784450,
+"timings": {
+"physical_planner > create_plan": 0.000178,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000198,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000017,
+"optimizer > filter_pushdown": 0.000121,
+"optimizer > expression_rewriter": 0.000030,
+"optimizer": 0.003864,
+"planner > logical_planner": 0.000019,
+"planner > binder": 0.000102,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.003689,
+"planner": 0.000124},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":2603,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.18,
+"cardinality":365091,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "o_orderdate<=1996-12-31\no_orderdate>=1995-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\nc_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "p_type=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.780957,
+"timings": {
+"physical_planner > create_plan": 0.000165,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000187,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000016,
+"optimizer > filter_pushdown": 0.000124,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.003796,
+"planner > logical_planner": 0.000019,
+"planner > binder": 0.000092,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.003612,
+"planner": 0.000114},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":2603,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "o_orderdate<=1996-12-31\no_orderdate>=1995-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\nc_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "p_type=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.787867,
+"timings": {
+"physical_planner > create_plan": 0.000195,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000226,
+"optimizer > in_clause": 0.000004,
+"optimizer > common_subexpressions": 0.000022,
+"optimizer > filter_pushdown": 0.000121,
+"optimizer > expression_rewriter": 0.000046,
+"optimizer": 0.004852,
+"planner > logical_planner": 0.000018,
+"planner > binder": 0.000093,
+"physical_planner > column_binding": 0.000020,
+"optimizer > join_order": 0.004654,
+"planner": 0.000116},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":2603,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.18,
+"cardinality":365091,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "o_orderdate<=1996-12-31\no_orderdate>=1995-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\nc_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "p_type=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.785933,
+"timings": {
+"physical_planner > create_plan": 0.000224,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000252,
+"optimizer > in_clause": 0.000004,
+"optimizer > common_subexpressions": 0.000024,
+"optimizer > filter_pushdown": 0.000137,
+"optimizer > expression_rewriter": 0.000032,
+"optimizer": 0.005346,
+"planner > logical_planner": 0.000020,
+"planner > binder": 0.000092,
+"physical_planner > column_binding": 0.000017,
+"optimizer > join_order": 0.005143,
+"planner": 0.000116},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":2603,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "o_orderdate<=1996-12-31\no_orderdate>=1995-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\nc_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "p_type=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.786246,
+"timings": {
+"physical_planner > create_plan": 0.000187,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000206,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000016,
+"optimizer > filter_pushdown": 0.000124,
+"optimizer > expression_rewriter": 0.000032,
+"optimizer": 0.003803,
+"planner > logical_planner": 0.000019,
+"planner > binder": 0.000105,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.003622,
+"planner": 0.000127},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":2603,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.18,
+"cardinality":365091,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "o_orderdate<=1996-12-31\no_orderdate>=1995-01-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\nc_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "p_type=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
