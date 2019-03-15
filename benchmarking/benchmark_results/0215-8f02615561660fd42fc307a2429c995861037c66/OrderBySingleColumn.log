@@ -1,0 +1,200 @@
+{ "result": 0.054424,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000006,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000001,
+"optimizer > filter_pushdown": 0.000001,
+"optimizer > expression_rewriter": 0.000002,
+"optimizer": 0.000012,
+"planner > logical_planner": 0.000003,
+"planner > binder": 0.000011,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000015},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.05,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.054982,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000005,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000001,
+"optimizer > filter_pushdown": 0.000001,
+"optimizer > expression_rewriter": 0.000002,
+"optimizer": 0.000011,
+"planner > logical_planner": 0.000002,
+"planner > binder": 0.000011,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000015},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.05,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.052217,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000006,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000001,
+"optimizer > filter_pushdown": 0.000001,
+"optimizer > expression_rewriter": 0.000002,
+"optimizer": 0.000011,
+"planner > logical_planner": 0.000003,
+"planner > binder": 0.000011,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000015},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.05,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.055122,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000006,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000001,
+"optimizer > filter_pushdown": 0.000019,
+"optimizer > expression_rewriter": 0.000005,
+"optimizer": 0.000041,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000033,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000044},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.05,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.052432,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000006,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000001,
+"optimizer > filter_pushdown": 0.000001,
+"optimizer > expression_rewriter": 0.000002,
+"optimizer": 0.000031,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000033,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000044},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.05,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
