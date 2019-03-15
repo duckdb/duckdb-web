@@ -1,0 +1,710 @@
+{ "result": 0.117983,
+"timings": {
+"physical_planner > create_plan": 0.000171,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000194,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000022,
+"optimizer > filter_pushdown": 0.000125,
+"optimizer > expression_rewriter": 0.000036,
+"optimizer": 0.005083,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000092,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.004892,
+"planner": 0.000111},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\ncr_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\nc_customer_sk=cr_returning_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":110,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.06,
+"cardinality":109760,
+"extra_info": "cd_marital_status=M AND cd_education_status=Unknown OR cd_marital_status=W AND cd_education_status=Advanced Degree\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1826,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":11178,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5611,
+"extra_info": "ca_gmt_offset=-7.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1200,
+"extra_info": "hd_buy_potentialUnknown%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1909,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "d_year=1998\nd_moy=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.112179,
+"timings": {
+"physical_planner > create_plan": 0.000168,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000187,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000018,
+"optimizer > filter_pushdown": 0.000123,
+"optimizer > expression_rewriter": 0.000046,
+"optimizer": 0.004309,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000091,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.004114,
+"planner": 0.000109},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\ncr_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\nc_customer_sk=cr_returning_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":110,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":109760,
+"extra_info": "cd_marital_status=M AND cd_education_status=Unknown OR cd_marital_status=W AND cd_education_status=Advanced Degree\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1826,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":11178,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5611,
+"extra_info": "ca_gmt_offset=-7.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1200,
+"extra_info": "hd_buy_potentialUnknown%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1909,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "d_year=1998\nd_moy=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.115766,
+"timings": {
+"physical_planner > create_plan": 0.000189,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000215,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000025,
+"optimizer > filter_pushdown": 0.000122,
+"optimizer > expression_rewriter": 0.000038,
+"optimizer": 0.005878,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000093,
+"physical_planner > column_binding": 0.000016,
+"optimizer > join_order": 0.005684,
+"planner": 0.000110},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\ncr_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\nc_customer_sk=cr_returning_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":110,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":109760,
+"extra_info": "cd_marital_status=M AND cd_education_status=Unknown OR cd_marital_status=W AND cd_education_status=Advanced Degree\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1826,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":11178,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5611,
+"extra_info": "ca_gmt_offset=-7.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1200,
+"extra_info": "hd_buy_potentialUnknown%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1909,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "d_year=1998\nd_moy=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.112437,
+"timings": {
+"physical_planner > create_plan": 0.000150,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000169,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000017,
+"optimizer > filter_pushdown": 0.000109,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.004274,
+"planner > logical_planner": 0.000014,
+"planner > binder": 0.000105,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.004105,
+"planner": 0.000122},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\ncr_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\nc_customer_sk=cr_returning_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":110,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":109760,
+"extra_info": "cd_marital_status=M AND cd_education_status=Unknown OR cd_marital_status=W AND cd_education_status=Advanced Degree\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1826,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":11178,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5611,
+"extra_info": "ca_gmt_offset=-7.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1200,
+"extra_info": "hd_buy_potentialUnknown%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1909,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "d_year=1998\nd_moy=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.115598,
+"timings": {
+"physical_planner > create_plan": 0.000182,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000206,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000024,
+"optimizer > filter_pushdown": 0.000109,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.005520,
+"planner > logical_planner": 0.000014,
+"planner > binder": 0.000107,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.005344,
+"planner": 0.000123},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\ncr_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "INNER\nc_customer_sk=cr_returning_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":110,
+"extra_info": "INNER\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.05,
+"cardinality":109760,
+"extra_info": "cd_marital_status=M AND cd_education_status=Unknown OR cd_marital_status=W AND cd_education_status=Advanced Degree\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1826,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":11178,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5611,
+"extra_info": "ca_gmt_offset=-7.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1200,
+"extra_info": "hd_buy_potentialUnknown%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1909,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "d_year=1998\nd_moy=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

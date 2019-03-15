@@ -1,0 +1,235 @@
+{ "result": 0.611947,
+"timings": {
+"physical_planner > create_plan": 0.000126,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000134,
+"optimizer > in_clause": 0.000805,
+"optimizer > common_subexpressions": 0.001184,
+"optimizer > filter_pushdown": 0.000038,
+"optimizer > expression_rewriter": 0.000050,
+"optimizer": 0.002088,
+"planner > logical_planner": 0.000020,
+"planner > binder": 0.000215,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000004,
+"planner": 0.000237},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "Unknown\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.41,
+"cardinality":1000000,
+"extra_info": "MARK\ns=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1000000,
+"extra_info": "strings",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":512,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.505477,
+"timings": {
+"physical_planner > create_plan": 0.000036,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000044,
+"optimizer > in_clause": 0.000856,
+"optimizer > common_subexpressions": 0.001231,
+"optimizer > filter_pushdown": 0.000030,
+"optimizer > expression_rewriter": 0.000069,
+"optimizer": 0.002198,
+"planner > logical_planner": 0.000025,
+"planner > binder": 0.000244,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000004,
+"planner": 0.000271},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "Unknown\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.40,
+"cardinality":1000000,
+"extra_info": "MARK\ns=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1000000,
+"extra_info": "strings",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":512,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.505803,
+"timings": {
+"physical_planner > create_plan": 0.000037,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000046,
+"optimizer > in_clause": 0.000944,
+"optimizer > common_subexpressions": 0.000906,
+"optimizer > filter_pushdown": 0.000023,
+"optimizer > expression_rewriter": 0.000051,
+"optimizer": 0.001935,
+"planner > logical_planner": 0.000020,
+"planner > binder": 0.000173,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000003,
+"planner": 0.000195},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "Unknown\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.40,
+"cardinality":1000000,
+"extra_info": "MARK\ns=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1000000,
+"extra_info": "strings",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":512,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.529713,
+"timings": {
+"physical_planner > create_plan": 0.000075,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000092,
+"optimizer > in_clause": 0.002116,
+"optimizer > common_subexpressions": 0.002965,
+"optimizer > filter_pushdown": 0.000068,
+"optimizer > expression_rewriter": 0.000163,
+"optimizer": 0.005334,
+"planner > logical_planner": 0.000057,
+"planner > binder": 0.000552,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000007,
+"planner": 0.000613},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "Unknown\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.42,
+"cardinality":1000000,
+"extra_info": "MARK\ns=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1000000,
+"extra_info": "strings",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":512,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.508412,
+"timings": {
+"physical_planner > create_plan": 0.000029,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000037,
+"optimizer > in_clause": 0.000808,
+"optimizer > common_subexpressions": 0.001125,
+"optimizer > filter_pushdown": 0.000028,
+"optimizer > expression_rewriter": 0.000063,
+"optimizer": 0.002035,
+"planner > logical_planner": 0.000024,
+"planner > binder": 0.000218,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000004,
+"planner": 0.000243},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":939201,
+"extra_info": "Unknown\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.41,
+"cardinality":1000000,
+"extra_info": "MARK\ns=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1000000,
+"extra_info": "strings",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":512,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}

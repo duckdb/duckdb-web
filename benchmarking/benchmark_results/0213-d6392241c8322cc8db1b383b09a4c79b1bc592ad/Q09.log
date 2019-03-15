@@ -1,0 +1,585 @@
+{ "result": 5.093065,
+"timings": {
+"physical_planner > create_plan": 0.000112,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000130,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000015,
+"optimizer > filter_pushdown": 0.000091,
+"optimizer > expression_rewriter": 0.000021,
+"optimizer": 0.002049,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000084,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.001915,
+"planner": 0.000102},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.18,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.24,
+"cardinality":319404,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.77,
+"cardinality":319404,
+"extra_info": "INNER\nps_partkey=p_partkey\nps_partkey=p_partkey\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.27,
+"cardinality":6001215,
+"extra_info": "INNER\nps_suppkey=s_suppkey\nps_suppkey=s_suppkey\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.80,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.67,
+"cardinality":6001215,
+"extra_info": "INNER\nl_partkey=ps_partkey\nl_suppkey=ps_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.03,
+"cardinality":10664,
+"extra_info": "p_name%green%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 4.991900,
+"timings": {
+"physical_planner > create_plan": 0.000117,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000135,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000016,
+"optimizer > filter_pushdown": 0.000097,
+"optimizer > expression_rewriter": 0.000025,
+"optimizer": 0.002078,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000083,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.001933,
+"planner": 0.000101},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.17,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.23,
+"cardinality":319404,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.72,
+"cardinality":319404,
+"extra_info": "INNER\nps_partkey=p_partkey\nps_partkey=p_partkey\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.23,
+"cardinality":6001215,
+"extra_info": "INNER\nps_suppkey=s_suppkey\nps_suppkey=s_suppkey\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.80,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.66,
+"cardinality":6001215,
+"extra_info": "INNER\nl_partkey=ps_partkey\nl_suppkey=ps_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.03,
+"cardinality":10664,
+"extra_info": "p_name%green%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.046689,
+"timings": {
+"physical_planner > create_plan": 0.000118,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000137,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000016,
+"optimizer > filter_pushdown": 0.000100,
+"optimizer > expression_rewriter": 0.000027,
+"optimizer": 0.002076,
+"planner > logical_planner": 0.000016,
+"planner > binder": 0.000085,
+"physical_planner > column_binding": 0.000012,
+"optimizer > join_order": 0.001926,
+"planner": 0.000105},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.17,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.23,
+"cardinality":319404,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.75,
+"cardinality":319404,
+"extra_info": "INNER\nps_partkey=p_partkey\nps_partkey=p_partkey\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.25,
+"cardinality":6001215,
+"extra_info": "INNER\nps_suppkey=s_suppkey\nps_suppkey=s_suppkey\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.80,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.65,
+"cardinality":6001215,
+"extra_info": "INNER\nl_partkey=ps_partkey\nl_suppkey=ps_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.03,
+"cardinality":10664,
+"extra_info": "p_name%green%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.076894,
+"timings": {
+"physical_planner > create_plan": 0.000145,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000170,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000021,
+"optimizer > filter_pushdown": 0.000136,
+"optimizer > expression_rewriter": 0.000037,
+"optimizer": 0.002895,
+"planner > logical_planner": 0.000022,
+"planner > binder": 0.000111,
+"physical_planner > column_binding": 0.000016,
+"optimizer > join_order": 0.002691,
+"planner": 0.000137},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.17,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.24,
+"cardinality":319404,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.75,
+"cardinality":319404,
+"extra_info": "INNER\nps_partkey=p_partkey\nps_partkey=p_partkey\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.27,
+"cardinality":6001215,
+"extra_info": "INNER\nps_suppkey=s_suppkey\nps_suppkey=s_suppkey\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.80,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.67,
+"cardinality":6001215,
+"extra_info": "INNER\nl_partkey=ps_partkey\nl_suppkey=ps_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.03,
+"cardinality":10664,
+"extra_info": "p_name%green%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.108650,
+"timings": {
+"physical_planner > create_plan": 0.000130,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000148,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000015,
+"optimizer > filter_pushdown": 0.000116,
+"optimizer > expression_rewriter": 0.000027,
+"optimizer": 0.002040,
+"planner > logical_planner": 0.000016,
+"planner > binder": 0.000087,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.001873,
+"planner": 0.000107},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.18,
+"cardinality":175,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.24,
+"cardinality":319404,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.76,
+"cardinality":319404,
+"extra_info": "INNER\nps_partkey=p_partkey\nps_partkey=p_partkey\nl_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.27,
+"cardinality":6001215,
+"extra_info": "INNER\nps_suppkey=s_suppkey\nps_suppkey=s_suppkey\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.80,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.67,
+"cardinality":6001215,
+"extra_info": "INNER\nl_partkey=ps_partkey\nl_suppkey=ps_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":800000,
+"extra_info": "partsupp",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.03,
+"cardinality":10664,
+"extra_info": "p_name%green%\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
