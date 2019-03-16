@@ -1,0 +1,170 @@
+{ "result": 0.339166,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000009,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000002,
+"optimizer > filter_pushdown": 0.000003,
+"optimizer > expression_rewriter": 0.000003,
+"optimizer": 0.000018,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000021,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000026},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.340008,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000008,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000002,
+"optimizer > filter_pushdown": 0.000003,
+"optimizer > expression_rewriter": 0.000003,
+"optimizer": 0.000020,
+"planner > logical_planner": 0.000003,
+"planner > binder": 0.000021,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000004,
+"planner": 0.000026},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.339971,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000008,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000002,
+"optimizer > filter_pushdown": 0.000003,
+"optimizer > expression_rewriter": 0.000003,
+"optimizer": 0.000018,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000020,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000004,
+"planner": 0.000025},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.338461,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000009,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000002,
+"optimizer > filter_pushdown": 0.000003,
+"optimizer > expression_rewriter": 0.000003,
+"optimizer": 0.000018,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000020,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000025},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.339465,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000008,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000002,
+"optimizer > filter_pushdown": 0.000003,
+"optimizer > expression_rewriter": 0.000003,
+"optimizer": 0.000018,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000019,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000025},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.30,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":10000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
