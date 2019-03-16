@@ -1,0 +1,420 @@
+{ "result": 0.413970,
+"timings": {
+"physical_planner > create_plan": 0.000040,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000056,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000010,
+"optimizer > filter_pushdown": 0.000046,
+"optimizer > expression_rewriter": 0.000018,
+"optimizer": 0.000123,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000075,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000041,
+"planner": 0.000087},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.01,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":8249,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.14,
+"cardinality":856143,
+"extra_info": "INNER\nss_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5337,
+"extra_info": "IN(i_category, Sports, Books, Home)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_date<=1999-03-24\nd_date>=1999-02-22\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.413773,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000069,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000010,
+"optimizer > filter_pushdown": 0.000046,
+"optimizer > expression_rewriter": 0.000018,
+"optimizer": 0.000122,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000067,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000041,
+"planner": 0.000079},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.01,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":8249,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.14,
+"cardinality":856143,
+"extra_info": "INNER\nss_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5337,
+"extra_info": "IN(i_category, Sports, Books, Home)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_date<=1999-03-24\nd_date>=1999-02-22\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.414943,
+"timings": {
+"physical_planner > create_plan": 0.000038,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000068,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000011,
+"optimizer > filter_pushdown": 0.000047,
+"optimizer > expression_rewriter": 0.000018,
+"optimizer": 0.000124,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000068,
+"physical_planner > column_binding": 0.000024,
+"optimizer > join_order": 0.000041,
+"planner": 0.000081},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.01,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":8249,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.14,
+"cardinality":856143,
+"extra_info": "INNER\nss_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5337,
+"extra_info": "IN(i_category, Sports, Books, Home)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_date<=1999-03-24\nd_date>=1999-02-22\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.418235,
+"timings": {
+"physical_planner > create_plan": 0.000040,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000056,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000011,
+"optimizer > filter_pushdown": 0.000047,
+"optimizer > expression_rewriter": 0.000018,
+"optimizer": 0.000125,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000067,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000041,
+"planner": 0.000079},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.01,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":8249,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.14,
+"cardinality":856143,
+"extra_info": "INNER\nss_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5337,
+"extra_info": "IN(i_category, Sports, Books, Home)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_date<=1999-03-24\nd_date>=1999-02-22\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.418384,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000068,
+"optimizer > in_clause": 0.000002,
+"optimizer > common_subexpressions": 0.000011,
+"optimizer > filter_pushdown": 0.000045,
+"optimizer > expression_rewriter": 0.000018,
+"optimizer": 0.000122,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000066,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000040,
+"planner": 0.000078},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "WINDOW",
+"timing":0.01,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":2545,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":8249,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.14,
+"cardinality":856143,
+"extra_info": "INNER\nss_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":5337,
+"extra_info": "IN(i_category, Sports, Books, Home)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_date<=1999-03-24\nd_date>=1999-02-22\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
