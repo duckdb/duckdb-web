@@ -1,1 +1,1 @@
-# duckdb-web
+# DuckDB, the SQLite for Analytics
