@@ -1,0 +1,1040 @@
+{ "result": 0.715449,
+"timings": {
+"physical_planner > create_plan": 0.000013,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000074,
+"optimizer > in_clause": 0.000009,
+"optimizer > common_subexpressions": 0.000085,
+"optimizer > common_aggregate_expressions": 0.000027,
+"optimizer > filter_pushdown": 0.000069,
+"optimizer > expression_rewriter": 0.000187,
+"optimizer": 0.004435,
+"planner > logical_planner": 0.000032,
+"planner > binder": 0.000168,
+"physical_planner > column_binding": 0.000050,
+"optimizer > join_order": 0.004052,
+"planner": 0.000205},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39053,
+"extra_info": "ss_list_price>=122.000000 AND ss_list_price<=132.000000 OR ss_coupon_amt>=836.000000 AND ss_coupon_amt<=1836.000000 OR ss_wholesale_cost>=17.000000 AND ss_wholesale_cost<=37.000000\nss_quantity<=25\nss_quantity>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "ss_list_price>=154.000000 AND ss_list_price<=164.000000 OR ss_coupon_amt>=7326.000000 AND ss_coupon_amt<=8326.000000 OR ss_wholesale_cost>=7.000000 AND ss_wholesale_cost<=27.000000\nss_quantity<=30\nss_quantity>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "ss_list_price>=135.000000 AND ss_list_price<=145.000000 OR ss_coupon_amt>=6071.000000 AND ss_coupon_amt<=7071.000000 OR ss_wholesale_cost>=38.000000 AND ss_wholesale_cost<=58.000000\nss_quantity<=20\nss_quantity>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "ss_list_price>=142.000000 AND ss_list_price<=152.000000 OR ss_coupon_amt>=12214.000000 AND ss_coupon_amt<=13214.000000 OR ss_wholesale_cost>=79.000000 AND ss_wholesale_cost<=99.000000\nss_quantity<=15\nss_quantity>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "ss_list_price>=90.000000 AND ss_list_price<=100.000000 OR ss_coupon_amt>=2323.000000 AND ss_coupon_amt<=3323.000000 OR ss_wholesale_cost>=31.000000 AND ss_wholesale_cost<=51.000000\nss_quantity<=10\nss_quantity>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "ss_list_price>=8.000000 AND ss_list_price<=18.000000 OR ss_coupon_amt>=459.000000 AND ss_coupon_amt<=1459.000000 OR ss_wholesale_cost>=57.000000 AND ss_wholesale_cost<=77.000000\nss_quantity<=5\nss_quantity>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.714871,
+"timings": {
+"physical_planner > create_plan": 0.000013,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000055,
+"optimizer > in_clause": 0.000010,
+"optimizer > common_subexpressions": 0.000088,
+"optimizer > common_aggregate_expressions": 0.000028,
+"optimizer > filter_pushdown": 0.000096,
+"optimizer > expression_rewriter": 0.000187,
+"optimizer": 0.004377,
+"planner > logical_planner": 0.000033,
+"planner > binder": 0.000193,
+"physical_planner > column_binding": 0.000032,
+"optimizer > join_order": 0.003963,
+"planner": 0.000231},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39053,
+"extra_info": "ss_list_price>=122.000000 AND ss_list_price<=132.000000 OR ss_coupon_amt>=836.000000 AND ss_coupon_amt<=1836.000000 OR ss_wholesale_cost>=17.000000 AND ss_wholesale_cost<=37.000000\nss_quantity<=25\nss_quantity>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "ss_list_price>=154.000000 AND ss_list_price<=164.000000 OR ss_coupon_amt>=7326.000000 AND ss_coupon_amt<=8326.000000 OR ss_wholesale_cost>=7.000000 AND ss_wholesale_cost<=27.000000\nss_quantity<=30\nss_quantity>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "ss_list_price>=135.000000 AND ss_list_price<=145.000000 OR ss_coupon_amt>=6071.000000 AND ss_coupon_amt<=7071.000000 OR ss_wholesale_cost>=38.000000 AND ss_wholesale_cost<=58.000000\nss_quantity<=20\nss_quantity>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "ss_list_price>=142.000000 AND ss_list_price<=152.000000 OR ss_coupon_amt>=12214.000000 AND ss_coupon_amt<=13214.000000 OR ss_wholesale_cost>=79.000000 AND ss_wholesale_cost<=99.000000\nss_quantity<=15\nss_quantity>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "ss_list_price>=90.000000 AND ss_list_price<=100.000000 OR ss_coupon_amt>=2323.000000 AND ss_coupon_amt<=3323.000000 OR ss_wholesale_cost>=31.000000 AND ss_wholesale_cost<=51.000000\nss_quantity<=10\nss_quantity>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "ss_list_price>=8.000000 AND ss_list_price<=18.000000 OR ss_coupon_amt>=459.000000 AND ss_coupon_amt<=1459.000000 OR ss_wholesale_cost>=57.000000 AND ss_wholesale_cost<=77.000000\nss_quantity<=5\nss_quantity>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.713263,
+"timings": {
+"physical_planner > create_plan": 0.000012,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000053,
+"optimizer > in_clause": 0.000009,
+"optimizer > common_subexpressions": 0.000085,
+"optimizer > common_aggregate_expressions": 0.000027,
+"optimizer > filter_pushdown": 0.000069,
+"optimizer > expression_rewriter": 0.000189,
+"optimizer": 0.004423,
+"planner > logical_planner": 0.000033,
+"planner > binder": 0.000211,
+"physical_planner > column_binding": 0.000031,
+"optimizer > join_order": 0.004039,
+"planner": 0.000248},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39053,
+"extra_info": "ss_list_price>=122.000000 AND ss_list_price<=132.000000 OR ss_coupon_amt>=836.000000 AND ss_coupon_amt<=1836.000000 OR ss_wholesale_cost>=17.000000 AND ss_wholesale_cost<=37.000000\nss_quantity<=25\nss_quantity>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "ss_list_price>=154.000000 AND ss_list_price<=164.000000 OR ss_coupon_amt>=7326.000000 AND ss_coupon_amt<=8326.000000 OR ss_wholesale_cost>=7.000000 AND ss_wholesale_cost<=27.000000\nss_quantity<=30\nss_quantity>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "ss_list_price>=135.000000 AND ss_list_price<=145.000000 OR ss_coupon_amt>=6071.000000 AND ss_coupon_amt<=7071.000000 OR ss_wholesale_cost>=38.000000 AND ss_wholesale_cost<=58.000000\nss_quantity<=20\nss_quantity>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "ss_list_price>=142.000000 AND ss_list_price<=152.000000 OR ss_coupon_amt>=12214.000000 AND ss_coupon_amt<=13214.000000 OR ss_wholesale_cost>=79.000000 AND ss_wholesale_cost<=99.000000\nss_quantity<=15\nss_quantity>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "ss_list_price>=90.000000 AND ss_list_price<=100.000000 OR ss_coupon_amt>=2323.000000 AND ss_coupon_amt<=3323.000000 OR ss_wholesale_cost>=31.000000 AND ss_wholesale_cost<=51.000000\nss_quantity<=10\nss_quantity>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "ss_list_price>=8.000000 AND ss_list_price<=18.000000 OR ss_coupon_amt>=459.000000 AND ss_coupon_amt<=1459.000000 OR ss_wholesale_cost>=57.000000 AND ss_wholesale_cost<=77.000000\nss_quantity<=5\nss_quantity>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.714573,
+"timings": {
+"physical_planner > create_plan": 0.000012,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000054,
+"optimizer > in_clause": 0.000009,
+"optimizer > common_subexpressions": 0.000102,
+"optimizer > common_aggregate_expressions": 0.000028,
+"optimizer > filter_pushdown": 0.000069,
+"optimizer > expression_rewriter": 0.000189,
+"optimizer": 0.004395,
+"planner > logical_planner": 0.000033,
+"planner > binder": 0.000188,
+"physical_planner > column_binding": 0.000031,
+"optimizer > join_order": 0.003992,
+"planner": 0.000226},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":39053,
+"extra_info": "ss_list_price>=122.000000 AND ss_list_price<=132.000000 OR ss_coupon_amt>=836.000000 AND ss_coupon_amt<=1836.000000 OR ss_wholesale_cost>=17.000000 AND ss_wholesale_cost<=37.000000\nss_quantity<=25\nss_quantity>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "ss_list_price>=154.000000 AND ss_list_price<=164.000000 OR ss_coupon_amt>=7326.000000 AND ss_coupon_amt<=8326.000000 OR ss_wholesale_cost>=7.000000 AND ss_wholesale_cost<=27.000000\nss_quantity<=30\nss_quantity>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "ss_list_price>=135.000000 AND ss_list_price<=145.000000 OR ss_coupon_amt>=6071.000000 AND ss_coupon_amt<=7071.000000 OR ss_wholesale_cost>=38.000000 AND ss_wholesale_cost<=58.000000\nss_quantity<=20\nss_quantity>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "ss_list_price>=142.000000 AND ss_list_price<=152.000000 OR ss_coupon_amt>=12214.000000 AND ss_coupon_amt<=13214.000000 OR ss_wholesale_cost>=79.000000 AND ss_wholesale_cost<=99.000000\nss_quantity<=15\nss_quantity>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "ss_list_price>=90.000000 AND ss_list_price<=100.000000 OR ss_coupon_amt>=2323.000000 AND ss_coupon_amt<=3323.000000 OR ss_wholesale_cost>=31.000000 AND ss_wholesale_cost<=51.000000\nss_quantity<=10\nss_quantity>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39368,
+"extra_info": "ss_list_price>=8.000000 AND ss_list_price<=18.000000 OR ss_coupon_amt>=459.000000 AND ss_coupon_amt<=1459.000000 OR ss_wholesale_cost>=57.000000 AND ss_wholesale_cost<=77.000000\nss_quantity<=5\nss_quantity>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.742402,
+"timings": {
+"physical_planner > create_plan": 0.000016,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000066,
+"optimizer > in_clause": 0.000012,
+"optimizer > common_subexpressions": 0.000109,
+"optimizer > common_aggregate_expressions": 0.000034,
+"optimizer > filter_pushdown": 0.000223,
+"optimizer > expression_rewriter": 0.000633,
+"optimizer": 0.011685,
+"planner > logical_planner": 0.000097,
+"planner > binder": 0.000532,
+"physical_planner > column_binding": 0.000038,
+"optimizer > join_order": 0.010663,
+"planner": 0.000642},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "CROSS_PRODUCT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":39053,
+"extra_info": "ss_list_price>=122.000000 AND ss_list_price<=132.000000 OR ss_coupon_amt>=836.000000 AND ss_coupon_amt<=1836.000000 OR ss_wholesale_cost>=17.000000 AND ss_wholesale_cost<=37.000000\nss_quantity<=25\nss_quantity>=21\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":32263,
+"extra_info": "ss_list_price>=154.000000 AND ss_list_price<=164.000000 OR ss_coupon_amt>=7326.000000 AND ss_coupon_amt<=8326.000000 OR ss_wholesale_cost>=7.000000 AND ss_wholesale_cost<=27.000000\nss_quantity<=30\nss_quantity>=26\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":34124,
+"extra_info": "ss_list_price>=135.000000 AND ss_list_price<=145.000000 OR ss_coupon_amt>=6071.000000 AND ss_coupon_amt<=7071.000000 OR ss_wholesale_cost>=38.000000 AND ss_wholesale_cost<=58.000000\nss_quantity<=20\nss_quantity>=16\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.08,
+"cardinality":30290,
+"extra_info": "ss_list_price>=142.000000 AND ss_list_price<=152.000000 OR ss_coupon_amt>=12214.000000 AND ss_coupon_amt<=13214.000000 OR ss_wholesale_cost>=79.000000 AND ss_wholesale_cost<=99.000000\nss_quantity<=15\nss_quantity>=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.09,
+"cardinality":38144,
+"extra_info": "ss_list_price>=90.000000 AND ss_list_price<=100.000000 OR ss_coupon_amt>=2323.000000 AND ss_coupon_amt<=3323.000000 OR ss_wholesale_cost>=31.000000 AND ss_wholesale_cost<=51.000000\nss_quantity<=10\nss_quantity>=6\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.10,
+"cardinality":39368,
+"extra_info": "ss_list_price>=8.000000 AND ss_list_price<=18.000000 OR ss_coupon_amt>=459.000000 AND ss_coupon_amt<=1459.000000 OR ss_wholesale_cost>=57.000000 AND ss_wholesale_cost<=77.000000\nss_quantity<=5\nss_quantity>=0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

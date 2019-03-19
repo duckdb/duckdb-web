@@ -1,0 +1,175 @@
+{ "result": 0.556811,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000007,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000004,
+"optimizer > common_aggregate_expressions": 0.000002,
+"optimizer > filter_pushdown": 0.000010,
+"optimizer > expression_rewriter": 0.000041,
+"optimizer": 0.000073,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000038,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000004,
+"planner": 0.000053},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.19,
+"cardinality":1,
+"extra_info": "i=50000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.36,
+"cardinality":100000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.562259,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000008,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000004,
+"optimizer > common_aggregate_expressions": 0.000002,
+"optimizer > filter_pushdown": 0.000009,
+"optimizer > expression_rewriter": 0.000009,
+"optimizer": 0.000033,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000017,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000003,
+"planner": 0.000025},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.19,
+"cardinality":1,
+"extra_info": "i=50000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.36,
+"cardinality":100000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.556023,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000007,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000004,
+"optimizer > common_aggregate_expressions": 0.000002,
+"optimizer > filter_pushdown": 0.000009,
+"optimizer > expression_rewriter": 0.000010,
+"optimizer": 0.000033,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000017,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000003,
+"planner": 0.000024},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.19,
+"cardinality":1,
+"extra_info": "i=50000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.36,
+"cardinality":100000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.558595,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000007,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000004,
+"optimizer > common_aggregate_expressions": 0.000002,
+"optimizer > filter_pushdown": 0.000009,
+"optimizer > expression_rewriter": 0.000010,
+"optimizer": 0.000033,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000017,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000003,
+"planner": 0.000024},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.19,
+"cardinality":1,
+"extra_info": "i=50000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.36,
+"cardinality":100000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.558413,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000007,
+"optimizer > in_clause": 0.000001,
+"optimizer > common_subexpressions": 0.000003,
+"optimizer > common_aggregate_expressions": 0.000002,
+"optimizer > filter_pushdown": 0.000009,
+"optimizer > expression_rewriter": 0.000010,
+"optimizer": 0.000034,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000018,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000003,
+"planner": 0.000025},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.19,
+"cardinality":1,
+"extra_info": "i=50000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.36,
+"cardinality":100000000,
+"extra_info": "integers",
+"children": []
+}
+]
+}
+]
+}
+}
