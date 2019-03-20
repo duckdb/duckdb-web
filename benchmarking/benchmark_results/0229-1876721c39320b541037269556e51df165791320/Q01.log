@@ -1,0 +1,235 @@
+{ "result": 0.825739,
+"timings": {
+"physical_planner > create_plan": 0.000016,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000028,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000012,
+"optimizer > common_aggregate_expressions": 0.000021,
+"optimizer > filter_pushdown": 0.000013,
+"optimizer > expression_rewriter": 0.000023,
+"optimizer": 0.000082,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000064,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000003,
+"planner": 0.000073},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=1998-09-02\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.822427,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000017,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000011,
+"optimizer > common_aggregate_expressions": 0.000020,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000023,
+"optimizer": 0.000082,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000063,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000003,
+"planner": 0.000074},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.69,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=1998-09-02\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.827639,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000017,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000010,
+"optimizer > common_aggregate_expressions": 0.000020,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000038,
+"optimizer": 0.000094,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000064,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000003,
+"planner": 0.000074},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=1998-09-02\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.821523,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000017,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000011,
+"optimizer > common_aggregate_expressions": 0.000035,
+"optimizer > filter_pushdown": 0.000015,
+"optimizer > expression_rewriter": 0.000039,
+"optimizer": 0.000113,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000065,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000004,
+"planner": 0.000076},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.69,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=1998-09-02\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.828080,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000017,
+"optimizer > in_clause": 0.000003,
+"optimizer > common_subexpressions": 0.000011,
+"optimizer > common_aggregate_expressions": 0.000020,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000022,
+"optimizer": 0.000080,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000062,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000003,
+"planner": 0.000072},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=1998-09-02\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
