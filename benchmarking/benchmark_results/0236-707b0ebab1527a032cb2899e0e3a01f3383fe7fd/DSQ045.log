@@ -1,0 +1,700 @@
+{ "result": 0.008923,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000074,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000176,
+"optimizer > expression_rewriter": 0.000380,
+"optimizer": 0.000574,
+"planner > logical_planner": 0.000036,
+"planner > binder": 0.000090,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000007,
+"planner": 0.000127},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#3>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#0<=778\n#0>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "#2=powder OR #2=khaki AND #3=Ounce OR #3=Oz AND #4=medium OR #4=extra large OR #2=brown OR #2=honeydew AND #3=Bunch OR #3=Ton AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=floral OR #2=deep AND #3=N/A OR #3=Dozen AND #4=petite OR #1=Men AND #2=light OR #2=cornflower AND #3=Box OR #3=Pound AND #4=medium OR #4=extra large OR #2=midnight OR #2=snow AND #3=Pallet OR #3=Gross AND #4=medium OR #4=extra large OR #2=cyan OR #2=papaya AND #3=Cup OR #3=Dram AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=orange OR #2=frosted AND #3=Each OR #3=Tbl AND #4=petite OR #1=Men AND #2=forest OR #2=ghost AND #3=Lb OR #3=Bundle AND #4=medium OR #4=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009088,
+"timings": {
+"physical_planner > create_plan": 0.000068,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000089,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000183,
+"optimizer > expression_rewriter": 0.000408,
+"optimizer": 0.000609,
+"planner > logical_planner": 0.000035,
+"planner > binder": 0.000086,
+"physical_planner > column_binding": 0.000016,
+"optimizer > join_order": 0.000008,
+"planner": 0.000123},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#3>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#0<=778\n#0>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "#2=powder OR #2=khaki AND #3=Ounce OR #3=Oz AND #4=medium OR #4=extra large OR #2=brown OR #2=honeydew AND #3=Bunch OR #3=Ton AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=floral OR #2=deep AND #3=N/A OR #3=Dozen AND #4=petite OR #1=Men AND #2=light OR #2=cornflower AND #3=Box OR #3=Pound AND #4=medium OR #4=extra large OR #2=midnight OR #2=snow AND #3=Pallet OR #3=Gross AND #4=medium OR #4=extra large OR #2=cyan OR #2=papaya AND #3=Cup OR #3=Dram AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=orange OR #2=frosted AND #3=Each OR #3=Tbl AND #4=petite OR #1=Men AND #2=forest OR #2=ghost AND #3=Lb OR #3=Bundle AND #4=medium OR #4=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.008899,
+"timings": {
+"physical_planner > create_plan": 0.000052,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000072,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000177,
+"optimizer > expression_rewriter": 0.000395,
+"optimizer": 0.000589,
+"planner > logical_planner": 0.000036,
+"planner > binder": 0.000090,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.000007,
+"planner": 0.000128},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#3>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#0<=778\n#0>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "#2=powder OR #2=khaki AND #3=Ounce OR #3=Oz AND #4=medium OR #4=extra large OR #2=brown OR #2=honeydew AND #3=Bunch OR #3=Ton AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=floral OR #2=deep AND #3=N/A OR #3=Dozen AND #4=petite OR #1=Men AND #2=light OR #2=cornflower AND #3=Box OR #3=Pound AND #4=medium OR #4=extra large OR #2=midnight OR #2=snow AND #3=Pallet OR #3=Gross AND #4=medium OR #4=extra large OR #2=cyan OR #2=papaya AND #3=Cup OR #3=Dram AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=orange OR #2=frosted AND #3=Each OR #3=Tbl AND #4=petite OR #1=Men AND #2=forest OR #2=ghost AND #3=Lb OR #3=Bundle AND #4=medium OR #4=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009129,
+"timings": {
+"physical_planner > create_plan": 0.000054,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000075,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000183,
+"optimizer > expression_rewriter": 0.000390,
+"optimizer": 0.000591,
+"planner > logical_planner": 0.000034,
+"planner > binder": 0.000101,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000007,
+"planner": 0.000136},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#3>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#0<=778\n#0>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "#2=powder OR #2=khaki AND #3=Ounce OR #3=Oz AND #4=medium OR #4=extra large OR #2=brown OR #2=honeydew AND #3=Bunch OR #3=Ton AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=floral OR #2=deep AND #3=N/A OR #3=Dozen AND #4=petite OR #1=Men AND #2=light OR #2=cornflower AND #3=Box OR #3=Pound AND #4=medium OR #4=extra large OR #2=midnight OR #2=snow AND #3=Pallet OR #3=Gross AND #4=medium OR #4=extra large OR #2=cyan OR #2=papaya AND #3=Cup OR #3=Dram AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=orange OR #2=frosted AND #3=Each OR #3=Tbl AND #4=petite OR #1=Men AND #2=forest OR #2=ghost AND #3=Lb OR #3=Bundle AND #4=medium OR #4=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009143,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000073,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000176,
+"optimizer > expression_rewriter": 0.000396,
+"optimizer": 0.000589,
+"planner > logical_planner": 0.000035,
+"planner > binder": 0.000087,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.000007,
+"planner": 0.000123},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "#3>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#0<=778\n#0>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\n#1=#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "#2=powder OR #2=khaki AND #3=Ounce OR #3=Oz AND #4=medium OR #4=extra large OR #2=brown OR #2=honeydew AND #3=Bunch OR #3=Ton AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=floral OR #2=deep AND #3=N/A OR #3=Dozen AND #4=petite OR #1=Men AND #2=light OR #2=cornflower AND #3=Box OR #3=Pound AND #4=medium OR #4=extra large OR #2=midnight OR #2=snow AND #3=Pallet OR #3=Gross AND #4=medium OR #4=extra large OR #2=cyan OR #2=papaya AND #3=Cup OR #3=Dram AND #4=N/A OR #4=small AND #1=Women OR #1=Men AND #2=orange OR #2=frosted AND #3=Each OR #3=Tbl AND #4=petite OR #1=Men AND #2=forest OR #2=ghost AND #3=Lb OR #3=Bundle AND #4=medium OR #4=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
