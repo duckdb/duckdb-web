@@ -1,0 +1,1120 @@
+{ "result": 5.107993,
+"timings": {
+"physical_planner > create_plan": 0.000197,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000220,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000152,
+"optimizer > expression_rewriter": 0.000024,
+"optimizer": 0.000282,
+"planner > logical_planner": 0.000030,
+"planner > binder": 0.000125,
+"physical_planner > column_binding": 0.000012,
+"optimizer > join_order": 0.000097,
+"planner": 0.000158},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.02,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.03,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":75871,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.33,
+"cardinality":1828911,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":729413,
+"extra_info": "#1=F\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=SAUDI ARABIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":302356,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":2.23,
+"cardinality":302356,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":75864,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":190909,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.49,
+"cardinality":190909,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":73082,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.023395,
+"timings": {
+"physical_planner > create_plan": 0.000171,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000193,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000170,
+"optimizer > expression_rewriter": 0.000023,
+"optimizer": 0.000327,
+"planner > logical_planner": 0.000031,
+"planner > binder": 0.000129,
+"physical_planner > column_binding": 0.000012,
+"optimizer > join_order": 0.000124,
+"planner": 0.000164},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.02,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.03,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.18,
+"cardinality":75871,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.33,
+"cardinality":1828911,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":729413,
+"extra_info": "#1=F\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=SAUDI ARABIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":302356,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":2.23,
+"cardinality":302356,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":75864,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.23,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":190909,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.42,
+"cardinality":190909,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":73082,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.129318,
+"timings": {
+"physical_planner > create_plan": 0.000175,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000196,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000172,
+"optimizer > expression_rewriter": 0.000023,
+"optimizer": 0.000301,
+"planner > logical_planner": 0.000032,
+"planner > binder": 0.000132,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000097,
+"planner": 0.000168},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.02,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.03,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":75871,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.33,
+"cardinality":1828911,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":729413,
+"extra_info": "#1=F\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=SAUDI ARABIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":302356,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":2.24,
+"cardinality":302356,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":75864,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":190909,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.50,
+"cardinality":190909,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":73082,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.028778,
+"timings": {
+"physical_planner > create_plan": 0.000214,
+"physical_planner > resolve_types": 0.000008,
+"physical_planner": 0.000244,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000229,
+"optimizer > expression_rewriter": 0.000036,
+"optimizer": 0.000429,
+"planner > logical_planner": 0.000040,
+"planner > binder": 0.000174,
+"physical_planner > column_binding": 0.000016,
+"optimizer > join_order": 0.000151,
+"planner": 0.000219},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.02,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.03,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":75871,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.33,
+"cardinality":1828911,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":729413,
+"extra_info": "#1=F\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=SAUDI ARABIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":302356,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":2.23,
+"cardinality":302356,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":75864,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":190909,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.42,
+"cardinality":190909,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":73082,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.034593,
+"timings": {
+"physical_planner > create_plan": 0.000194,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000221,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000201,
+"optimizer > expression_rewriter": 0.000028,
+"optimizer": 0.000363,
+"planner > logical_planner": 0.000037,
+"planner > binder": 0.000151,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.000124,
+"planner": 0.000193},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.02,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.03,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":75871,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.33,
+"cardinality":1828911,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":729413,
+"extra_info": "#1=F\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":411,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=SAUDI ARABIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":73089,
+"extra_info": "SEMI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":75871,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":302356,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":2.23,
+"cardinality":302356,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":75864,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.24,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":4141,
+"extra_info": "ANTI\n#1=#16\n#0=#17\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":73089,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":190909,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":1.42,
+"cardinality":190909,
+"extra_info": "INNER\n#0=#0\n#1!=#1\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":73082,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.04,
+"cardinality":3793296,
+"extra_info": "#2>#3\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.23,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

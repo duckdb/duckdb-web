@@ -1,0 +1,665 @@
+{ "result": 0.188644,
+"timings": {
+"physical_planner > create_plan": 0.000087,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000105,
+"optimizer > in_clause": 0.000016,
+"optimizer > filter_pushdown": 0.000073,
+"optimizer > expression_rewriter": 0.000056,
+"optimizer": 0.000241,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000105,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000091,
+"planner": 0.000122},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "CASE WHEN (#4>0.000000) THEN (abs(#2 - #4) / #4) ELSE (NULL)>0.100000\n",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":20758,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":580161,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":936,
+"extra_info": "IN(#1, Books, Children, Electronics) AND IN(#2, personal, portable, reference, self-help) AND IN(#3, scholaramalgamalg #14, scholaramalgamalg #7, exportiunivamalg #9, scholaramalgamalg #9) OR IN(#1, Women, Music, Men) AND IN(#2, accessories, classical, fragrances, pants) AND IN(#3, amalgimporto #1, edu packscholar #1, exportiimporto #1, importoamalg #1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.189161,
+"timings": {
+"physical_planner > create_plan": 0.000087,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000106,
+"optimizer > in_clause": 0.000018,
+"optimizer > filter_pushdown": 0.000073,
+"optimizer > expression_rewriter": 0.000071,
+"optimizer": 0.000283,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000094,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000117,
+"planner": 0.000112},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "CASE WHEN (#4>0.000000) THEN (abs(#2 - #4) / #4) ELSE (NULL)>0.100000\n",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":20758,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":580161,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":936,
+"extra_info": "IN(#1, Books, Children, Electronics) AND IN(#2, personal, portable, reference, self-help) AND IN(#3, scholaramalgamalg #14, scholaramalgamalg #7, exportiunivamalg #9, scholaramalgamalg #9) OR IN(#1, Women, Music, Men) AND IN(#2, accessories, classical, fragrances, pants) AND IN(#3, amalgimporto #1, edu packscholar #1, exportiimporto #1, importoamalg #1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.188593,
+"timings": {
+"physical_planner > create_plan": 0.000086,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000103,
+"optimizer > in_clause": 0.000016,
+"optimizer > filter_pushdown": 0.000075,
+"optimizer > expression_rewriter": 0.000059,
+"optimizer": 0.000261,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000093,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000106,
+"planner": 0.000110},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "CASE WHEN (#4>0.000000) THEN (abs(#2 - #4) / #4) ELSE (NULL)>0.100000\n",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":20758,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":580161,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":936,
+"extra_info": "IN(#1, Books, Children, Electronics) AND IN(#2, personal, portable, reference, self-help) AND IN(#3, scholaramalgamalg #14, scholaramalgamalg #7, exportiunivamalg #9, scholaramalgamalg #9) OR IN(#1, Women, Music, Men) AND IN(#2, accessories, classical, fragrances, pants) AND IN(#3, amalgimporto #1, edu packscholar #1, exportiimporto #1, importoamalg #1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.188840,
+"timings": {
+"physical_planner > create_plan": 0.000112,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000129,
+"optimizer > in_clause": 0.000016,
+"optimizer > filter_pushdown": 0.000072,
+"optimizer > expression_rewriter": 0.000057,
+"optimizer": 0.000241,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000091,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000092,
+"planner": 0.000108},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "CASE WHEN (#4>0.000000) THEN (abs(#2 - #4) / #4) ELSE (NULL)>0.100000\n",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":20758,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":580161,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":936,
+"extra_info": "IN(#1, Books, Children, Electronics) AND IN(#2, personal, portable, reference, self-help) AND IN(#3, scholaramalgamalg #14, scholaramalgamalg #7, exportiunivamalg #9, scholaramalgamalg #9) OR IN(#1, Women, Music, Men) AND IN(#2, accessories, classical, fragrances, pants) AND IN(#3, amalgimporto #1, edu packscholar #1, exportiimporto #1, importoamalg #1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.187573,
+"timings": {
+"physical_planner > create_plan": 0.000085,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000103,
+"optimizer > in_clause": 0.000016,
+"optimizer > filter_pushdown": 0.000072,
+"optimizer > expression_rewriter": 0.000058,
+"optimizer": 0.000243,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000089,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000093,
+"planner": 0.000106},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":960,
+"extra_info": "CASE WHEN (#4>0.000000) THEN (abs(#2 - #4) / #4) ELSE (NULL)>0.100000\n",
+"children": [{ "name": "WINDOW",
+"timing":0.00,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1106,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":20758,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":580161,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "#3\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "MARK\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":936,
+"extra_info": "IN(#1, Books, Children, Electronics) AND IN(#2, personal, portable, reference, self-help) AND IN(#3, scholaramalgamalg #14, scholaramalgamalg #7, exportiunivamalg #9, scholaramalgamalg #9) OR IN(#1, Women, Music, Men) AND IN(#2, accessories, classical, fragrances, pants) AND IN(#3, amalgimporto #1, edu packscholar #1, exportiimporto #1, importoamalg #1)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
