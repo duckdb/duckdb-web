@@ -1,0 +1,415 @@
+{ "result": 0.085708,
+"timings": {
+"physical_planner > create_plan": 0.000052,
+"physical_planner > resolve_types": 0.000018,
+"physical_planner": 0.000077,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000048,
+"optimizer > expression_rewriter": 0.000013,
+"optimizer": 0.000120,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000074,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000053,
+"planner": 0.000084},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":6656,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":39,
+"extra_info": "#1=128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":6000,
+"extra_info": "#1=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.084793,
+"timings": {
+"physical_planner > create_plan": 0.000043,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000053,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000043,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000100,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000059,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000038,
+"planner": 0.000069},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":6656,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":39,
+"extra_info": "#1=128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":6000,
+"extra_info": "#1=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.085735,
+"timings": {
+"physical_planner > create_plan": 0.000044,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000053,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000044,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000115,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000046,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000052,
+"planner": 0.000055},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":6656,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":39,
+"extra_info": "#1=128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":6000,
+"extra_info": "#1=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.088186,
+"timings": {
+"physical_planner > create_plan": 0.000073,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000084,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000045,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000104,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000046,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000040,
+"planner": 0.000056},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":6656,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":39,
+"extra_info": "#1=128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":6000,
+"extra_info": "#1=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.084812,
+"timings": {
+"physical_planner > create_plan": 0.000044,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000054,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000058,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000115,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000046,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000037,
+"planner": 0.000055},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":89,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":6656,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":39,
+"extra_info": "#1=128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":6000,
+"extra_info": "#1=11\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

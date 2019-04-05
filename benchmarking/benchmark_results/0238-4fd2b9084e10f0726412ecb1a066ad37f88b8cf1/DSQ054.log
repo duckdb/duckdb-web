@@ -1,0 +1,515 @@
+{ "result": 0.834819,
+"timings": {
+"physical_planner > create_plan": 0.000099,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000119,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000080,
+"optimizer > expression_rewriter": 0.000043,
+"optimizer": 0.000496,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000112,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000363,
+"planner": 0.000127},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":2290,
+"extra_info": "INNER\n#3=#3\n#1=#1\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":2880404,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\n#2=#2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "#1=8\n#0=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.835843,
+"timings": {
+"physical_planner > create_plan": 0.000097,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000116,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000098,
+"optimizer > expression_rewriter": 0.000052,
+"optimizer": 0.000498,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000113,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000339,
+"planner": 0.000128},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":2290,
+"extra_info": "INNER\n#3=#3\n#1=#1\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":2880404,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\n#2=#2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "#1=8\n#0=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.833838,
+"timings": {
+"physical_planner > create_plan": 0.000098,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000117,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000086,
+"optimizer > expression_rewriter": 0.000058,
+"optimizer": 0.000491,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000136,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000337,
+"planner": 0.000152},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":2290,
+"extra_info": "INNER\n#3=#3\n#1=#1\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":2880404,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\n#2=#2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "#1=8\n#0=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.834720,
+"timings": {
+"physical_planner > create_plan": 0.000113,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000134,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000080,
+"optimizer > expression_rewriter": 0.000058,
+"optimizer": 0.000515,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000112,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000366,
+"planner": 0.000126},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":2290,
+"extra_info": "INNER\n#3=#3\n#1=#1\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":2880404,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\n#2=#2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "#1=8\n#0=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.832391,
+"timings": {
+"physical_planner > create_plan": 0.000122,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000141,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000085,
+"optimizer > expression_rewriter": 0.000043,
+"optimizer": 0.000479,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000126,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000341,
+"planner": 0.000141},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":2290,
+"extra_info": "INNER\n#3=#3\n#1=#1\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":2880404,
+"extra_info": "INNER\n#4=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\n#2=#2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "#1=8\n#0=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

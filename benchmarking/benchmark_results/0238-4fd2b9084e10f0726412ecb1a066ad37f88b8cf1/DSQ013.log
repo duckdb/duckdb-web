@@ -1,0 +1,610 @@
+{ "result": 1.403209,
+"timings": {
+"physical_planner > create_plan": 0.000141,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000163,
+"optimizer > in_clause": 0.000008,
+"optimizer > filter_pushdown": 0.000118,
+"optimizer > expression_rewriter": 0.000201,
+"optimizer": 0.004428,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000137,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.004096,
+"planner": 0.000154},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":46,
+"extra_info": "IN(#18, TX, OH, TX) AND #6>=100.000000 AND #6<=200.000000 OR IN(#18, OR, NM, KY) AND #6>=150.000000 AND #6<=300.000000 OR IN(#18, VA, TX, MS) AND #6>=50.000000 AND #6<=250.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":2468,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.30,
+"cardinality":2468,
+"extra_info": "#12=M AND #13=Advanced Degree AND #4>=100.000000 AND #4<=150.000000 AND #15=3 OR #12=S AND #13=College AND #4>=50.000000 AND #4<=100.000000 AND #15=1 OR #12=W AND #13=2 yr Degree AND #4>=150.000000 AND #4<=200.000000 AND #15=1\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.36,
+"cardinality":2880404,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2880404,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":2880404,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":365,
+"extra_info": "#1=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.401816,
+"timings": {
+"physical_planner > create_plan": 0.000140,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000163,
+"optimizer > in_clause": 0.000008,
+"optimizer > filter_pushdown": 0.000119,
+"optimizer > expression_rewriter": 0.000201,
+"optimizer": 0.004931,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000116,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.004597,
+"planner": 0.000133},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":46,
+"extra_info": "IN(#18, TX, OH, TX) AND #6>=100.000000 AND #6<=200.000000 OR IN(#18, OR, NM, KY) AND #6>=150.000000 AND #6<=300.000000 OR IN(#18, VA, TX, MS) AND #6>=50.000000 AND #6<=250.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":2468,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.30,
+"cardinality":2468,
+"extra_info": "#12=M AND #13=Advanced Degree AND #4>=100.000000 AND #4<=150.000000 AND #15=3 OR #12=S AND #13=College AND #4>=50.000000 AND #4<=100.000000 AND #15=1 OR #12=W AND #13=2 yr Degree AND #4>=150.000000 AND #4<=200.000000 AND #15=1\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.36,
+"cardinality":2880404,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2880404,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":2880404,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":365,
+"extra_info": "#1=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.414143,
+"timings": {
+"physical_planner > create_plan": 0.000159,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000187,
+"optimizer > in_clause": 0.000010,
+"optimizer > filter_pushdown": 0.000119,
+"optimizer > expression_rewriter": 0.000196,
+"optimizer": 0.005896,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000112,
+"physical_planner > column_binding": 0.000018,
+"optimizer > join_order": 0.005566,
+"planner": 0.000129},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":46,
+"extra_info": "IN(#18, TX, OH, TX) AND #6>=100.000000 AND #6<=200.000000 OR IN(#18, OR, NM, KY) AND #6>=150.000000 AND #6<=300.000000 OR IN(#18, VA, TX, MS) AND #6>=50.000000 AND #6<=250.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":2468,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.31,
+"cardinality":2468,
+"extra_info": "#12=M AND #13=Advanced Degree AND #4>=100.000000 AND #4<=150.000000 AND #15=3 OR #12=S AND #13=College AND #4>=50.000000 AND #4<=100.000000 AND #15=1 OR #12=W AND #13=2 yr Degree AND #4>=150.000000 AND #4<=200.000000 AND #15=1\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.36,
+"cardinality":2880404,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2880404,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":2880404,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":365,
+"extra_info": "#1=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.407483,
+"timings": {
+"physical_planner > create_plan": 0.000143,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000161,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000149,
+"optimizer > expression_rewriter": 0.000201,
+"optimizer": 0.004159,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000132,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.003799,
+"planner": 0.000149},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":46,
+"extra_info": "IN(#18, TX, OH, TX) AND #6>=100.000000 AND #6<=200.000000 OR IN(#18, OR, NM, KY) AND #6>=150.000000 AND #6<=300.000000 OR IN(#18, VA, TX, MS) AND #6>=50.000000 AND #6<=250.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":2468,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.30,
+"cardinality":2468,
+"extra_info": "#12=M AND #13=Advanced Degree AND #4>=100.000000 AND #4<=150.000000 AND #15=3 OR #12=S AND #13=College AND #4>=50.000000 AND #4<=100.000000 AND #15=1 OR #12=W AND #13=2 yr Degree AND #4>=150.000000 AND #4<=200.000000 AND #15=1\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.36,
+"cardinality":2880404,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2880404,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":2880404,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":365,
+"extra_info": "#1=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.409308,
+"timings": {
+"physical_planner > create_plan": 0.000141,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000164,
+"optimizer > in_clause": 0.000008,
+"optimizer > filter_pushdown": 0.000132,
+"optimizer > expression_rewriter": 0.000189,
+"optimizer": 0.004888,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000116,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.004554,
+"planner": 0.000132},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":46,
+"extra_info": "IN(#18, TX, OH, TX) AND #6>=100.000000 AND #6<=200.000000 OR IN(#18, OR, NM, KY) AND #6>=150.000000 AND #6<=300.000000 OR IN(#18, VA, TX, MS) AND #6>=50.000000 AND #6<=250.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":2468,
+"extra_info": "INNER\n#5=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.30,
+"cardinality":2468,
+"extra_info": "#12=M AND #13=Advanced Degree AND #4>=100.000000 AND #4<=150.000000 AND #15=3 OR #12=S AND #13=College AND #4>=50.000000 AND #4<=100.000000 AND #15=1 OR #12=W AND #13=2 yr Degree AND #4>=150.000000 AND #4<=200.000000 AND #15=1\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.36,
+"cardinality":2880404,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2880404,
+"extra_info": "INNER\n#3=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.07,
+"cardinality":2880404,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "#1=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":365,
+"extra_info": "#1=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

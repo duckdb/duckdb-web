@@ -1,0 +1,770 @@
+{ "result": 0.789910,
+"timings": {
+"physical_planner > create_plan": 0.000238,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000265,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000196,
+"optimizer > expression_rewriter": 0.000054,
+"optimizer": 0.006494,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000084,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.006232,
+"planner": 0.000103},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.25,
+"cardinality":2603,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.21,
+"cardinality":365091,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "#2<=729389\n#2>=728659\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "#1=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.781157,
+"timings": {
+"physical_planner > create_plan": 0.000187,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000207,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000154,
+"optimizer > expression_rewriter": 0.000075,
+"optimizer": 0.004716,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000081,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.004478,
+"planner": 0.000100},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.25,
+"cardinality":2603,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.21,
+"cardinality":365091,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "#2<=729389\n#2>=728659\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "#1=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.787223,
+"timings": {
+"physical_planner > create_plan": 0.000211,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000232,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000135,
+"optimizer > expression_rewriter": 0.000052,
+"optimizer": 0.003983,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000083,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.003785,
+"planner": 0.000102},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.25,
+"cardinality":2603,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.21,
+"cardinality":365091,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "#2<=729389\n#2>=728659\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "#1=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.767751,
+"timings": {
+"physical_planner > create_plan": 0.000179,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000195,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000137,
+"optimizer > expression_rewriter": 0.000052,
+"optimizer": 0.003815,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000083,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.003616,
+"planner": 0.000101},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.25,
+"cardinality":2603,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "#2<=729389\n#2>=728659\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "#1=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.769875,
+"timings": {
+"physical_planner > create_plan": 0.000213,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000237,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000124,
+"optimizer > expression_rewriter": 0.000052,
+"optimizer": 0.005446,
+"planner > logical_planner": 0.000013,
+"planner > binder": 0.000084,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.005259,
+"planner": 0.000103},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":2603,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.25,
+"cardinality":2603,
+"extra_info": "INNER\n#0=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.17,
+"cardinality":365091,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":365091,
+"extra_info": "INNER\n#2=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":91179,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "FILTER",
+"timing":0.01,
+"cardinality":457263,
+"extra_info": "#2<=729389\n#2>=728659\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":29952,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "#1=AMERICA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "INNER\n#1=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1451,
+"extra_info": "#1=ECONOMY ANODIZED STEEL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
