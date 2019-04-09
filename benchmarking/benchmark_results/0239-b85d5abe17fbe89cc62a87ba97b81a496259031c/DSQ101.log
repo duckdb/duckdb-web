@@ -1,0 +1,115 @@
+{ "result": 0.300873,
+"timings": {
+"physical_planner > create_plan": 0.000070,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000085,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000083,
+"optimizer > expression_rewriter": 0.000051,
+"optimizer": 0.000176,
+"planner > logical_planner": 0.000026,
+"planner > binder": 0.000081,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000033,
+"planner": 0.000114},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "store_only\ncatalog_only\nstore_and_catalog\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":0,
+"extra_info": "OUTER\nitem_sk=item_sk\ncustomer_sk=customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "customer_sk\nitem_sk\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.11,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.06,
+"cardinality":580161,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_month_seq<=1211\nd_month_seq>=1200\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":288949,
+"extra_info": "customer_sk\nitem_sk\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.05,
+"cardinality":288949,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":288992,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_month_seq<=1211\nd_month_seq>=1200\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+INCORRECT RESULT: Not implemented: Unimplemented join type for hash join
