@@ -1,0 +1,1360 @@
+{ "result": 15.353591,
+"timings": {
+"physical_planner > create_plan": 0.000250,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000294,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000232,
+"optimizer > expression_rewriter": 0.000151,
+"optimizer": 0.000702,
+"planner > logical_planner": 0.000028,
+"planner > binder": 0.000239,
+"physical_planner > column_binding": 0.000029,
+"optimizer > join_order": 0.000305,
+"planner": 0.000281},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\nsum_sales - avg_monthly_sales\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":12.48,
+"cardinality":24661,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn - 1\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn + 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "CASE WHEN (avg_monthly_sales>0.000000) THEN (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) ELSE (NULL)>0.100000\navg_monthly_sales>0.000000\nd_year=1999\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27059,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn + 1=rn - 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 15.363323,
+"timings": {
+"physical_planner > create_plan": 0.000252,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000296,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000200,
+"optimizer > expression_rewriter": 0.000175,
+"optimizer": 0.000691,
+"planner > logical_planner": 0.000028,
+"planner > binder": 0.000259,
+"physical_planner > column_binding": 0.000029,
+"optimizer > join_order": 0.000303,
+"planner": 0.000300},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\nsum_sales - avg_monthly_sales\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":12.49,
+"cardinality":24661,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn - 1\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn + 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "CASE WHEN (avg_monthly_sales>0.000000) THEN (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) ELSE (NULL)>0.100000\navg_monthly_sales>0.000000\nd_year=1999\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27059,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn + 1=rn - 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 15.312567,
+"timings": {
+"physical_planner > create_plan": 0.000279,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000325,
+"optimizer > in_clause": 0.000010,
+"optimizer > filter_pushdown": 0.000192,
+"optimizer > expression_rewriter": 0.000151,
+"optimizer": 0.000673,
+"planner > logical_planner": 0.000028,
+"planner > binder": 0.000263,
+"physical_planner > column_binding": 0.000031,
+"optimizer > join_order": 0.000315,
+"planner": 0.000304},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\nsum_sales - avg_monthly_sales\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":12.44,
+"cardinality":24661,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn - 1\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn + 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "CASE WHEN (avg_monthly_sales>0.000000) THEN (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) ELSE (NULL)>0.100000\navg_monthly_sales>0.000000\nd_year=1999\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.15,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27059,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn + 1=rn - 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 15.490212,
+"timings": {
+"physical_planner > create_plan": 0.000555,
+"physical_planner > resolve_types": 0.000027,
+"physical_planner": 0.000694,
+"optimizer > in_clause": 0.000029,
+"optimizer > filter_pushdown": 0.000647,
+"optimizer > expression_rewriter": 0.000483,
+"optimizer": 0.002136,
+"planner > logical_planner": 0.000095,
+"planner > binder": 0.000734,
+"physical_planner > column_binding": 0.000093,
+"optimizer > join_order": 0.000964,
+"planner": 0.000869},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\nsum_sales - avg_monthly_sales\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":12.57,
+"cardinality":24661,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn - 1\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn + 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "CASE WHEN (avg_monthly_sales>0.000000) THEN (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) ELSE (NULL)>0.100000\navg_monthly_sales>0.000000\nd_year=1999\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27059,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn + 1=rn - 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.16,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 15.239020,
+"timings": {
+"physical_planner > create_plan": 0.000257,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000301,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000218,
+"optimizer > expression_rewriter": 0.000148,
+"optimizer": 0.000693,
+"planner > logical_planner": 0.000027,
+"planner > binder": 0.000244,
+"physical_planner > column_binding": 0.000028,
+"optimizer > join_order": 0.000314,
+"planner": 0.000285},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.02,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\nsum_sales - avg_monthly_sales\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.03,
+"cardinality":24661,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\navg_monthly_sales\nsum_sales\npsum\nnsum\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":12.35,
+"cardinality":24661,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn - 1\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn=rn + 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":25089,
+"extra_info": "CASE WHEN (avg_monthly_sales>0.000000) THEN (abs(sum_sales - avg_monthly_sales) / avg_monthly_sales) ELSE (NULL)>0.100000\navg_monthly_sales>0.000000\nd_year=1999\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":27059,
+"extra_info": "INNER\ni_category=i_category\ni_brand=i_brand\ncc_name=cc_name\nrn + 1=rn - 1\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.69,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.14,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":32223,
+"extra_info": "i_category\ni_brand\ncc_name\nd_year\nd_moy\nsum_sales\navg_monthly_sales\nrn\n",
+"children": [{ "name": "WINDOW",
+"timing":0.68,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.15,
+"cardinality":32223,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.04,
+"cardinality":350498,
+"extra_info": "INNER\ncs_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":350498,
+"extra_info": "INNER\ncs_call_center_sk=cc_call_center_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":350498,
+"extra_info": "INNER\ncs_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":427,
+"extra_info": "d_year=1999 OR d_year=1998 AND d_moy=12 OR d_year=2000 AND d_moy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "call_center",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

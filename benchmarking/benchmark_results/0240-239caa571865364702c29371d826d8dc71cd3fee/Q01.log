@@ -1,0 +1,225 @@
+{ "result": 0.832422,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000041,
+"optimizer": 0.000068,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000056,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000003,
+"planner": 0.000064},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "l_returnflag\nl_linestatus\nsum_qty\nsum_base_price\nsum_disc_price\nsum_charge\nCAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](COUNT(lineitem.l_quantity))\nSUM(lineitem.l_extendedprice) / CAST[DOUBLE](COUNT(lineitem.l_extendedprice))\nSUM(lineitem.l_discount) / CAST[DOUBLE](COUNT(lineitem.l_discount))\ncount_order\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=729999\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.827888,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000039,
+"optimizer": 0.000067,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000071,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000003,
+"planner": 0.000080},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "l_returnflag\nl_linestatus\nsum_qty\nsum_base_price\nsum_disc_price\nsum_charge\nCAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](COUNT(lineitem.l_quantity))\nSUM(lineitem.l_extendedprice) / CAST[DOUBLE](COUNT(lineitem.l_extendedprice))\nSUM(lineitem.l_discount) / CAST[DOUBLE](COUNT(lineitem.l_discount))\ncount_order\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=729999\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.828924,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000036,
+"optimizer": 0.000063,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000057,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000003,
+"planner": 0.000066},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "l_returnflag\nl_linestatus\nsum_qty\nsum_base_price\nsum_disc_price\nsum_charge\nCAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](COUNT(lineitem.l_quantity))\nSUM(lineitem.l_extendedprice) / CAST[DOUBLE](COUNT(lineitem.l_extendedprice))\nSUM(lineitem.l_discount) / CAST[DOUBLE](COUNT(lineitem.l_discount))\ncount_order\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=729999\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.828206,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000036,
+"optimizer": 0.000062,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000057,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000003,
+"planner": 0.000065},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "l_returnflag\nl_linestatus\nsum_qty\nsum_base_price\nsum_disc_price\nsum_charge\nCAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](COUNT(lineitem.l_quantity))\nSUM(lineitem.l_extendedprice) / CAST[DOUBLE](COUNT(lineitem.l_extendedprice))\nSUM(lineitem.l_discount) / CAST[DOUBLE](COUNT(lineitem.l_discount))\ncount_order\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=729999\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.830648,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000014,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.000062,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000057,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000003,
+"planner": 0.000066},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "l_returnflag\nl_linestatus\nsum_qty\nsum_base_price\nsum_disc_price\nsum_charge\nCAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](COUNT(lineitem.l_quantity))\nSUM(lineitem.l_extendedprice) / CAST[DOUBLE](COUNT(lineitem.l_extendedprice))\nSUM(lineitem.l_discount) / CAST[DOUBLE](COUNT(lineitem.l_discount))\ncount_order\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.70,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":5916591,
+"extra_info": "l_shipdate<=729999\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.10,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
