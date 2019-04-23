@@ -16,8 +16,8 @@
 10. Type Conversion
 11. Indexes
 12. Concurrency Control
-13. Pragmas
-14. Profiling & Performance Tips
+13. [Pragmas](sql/pragmas)
+14. Performance Tips
 ### Internals
-15. Overview of DuckDB Internals
-16. Contributing
+15. [Overview of DuckDB Internals](internals/overview)
+16. [Contributing](internals/contributing)
