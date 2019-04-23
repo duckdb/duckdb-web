@@ -1,7 +1,7 @@
 # SQL Introduction
 Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
-In the examples that follow, we assume that you have installed DuckDB. You can launch the shell of DuckDB in the installation directory ``build/release/tools/shell/shell``. Launching the shell should give you the following prompt:
+In the examples that follow, we assume that you have installed DuckDB. See [here](https://www.duckdb.org/docs/current/tutorials/installation) for information on how to install DuckDB. You can launch the shell of DuckDB in the installation directory ``build/release/tools/shell/shell``. Launching the shell should give you the following prompt:
 
 ```
 Enter ".help" for usage hints.
@@ -44,8 +44,8 @@ The second example will store cities and their associated geographical location:
 ```sql
 CREATE TABLE cities (
     name            VARCHAR,
-	lat             DECIMAL,
-	lon             DECIMAL
+    lat             DECIMAL,
+    lon             DECIMAL
 );
 ```
 
@@ -67,7 +67,7 @@ Constants that are not numeric values (e.g. text and dates) must be surrounded b
 We can insert into the cities table int he same manner.
 
 ```sql
-INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0');
+INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0);
 ```
 
 The syntax used so far requires you to remember the order of the columns. An alternative syntax allows you to list the columns explicitly:
@@ -207,10 +207,10 @@ SELECT *
     WHERE city = name;
 ```
 ```
-     city      | temp_lo | temp_hi | prcp |    date    |     name      | location
----------------+---------+---------+------+------------+---------------+-----------
- San Francisco |      46 |      50 | 0.25 | 1994-11-27 | San Francisco | (-194,53)
- San Francisco |      43 |      57 |    0 | 1994-11-29 | San Francisco | (-194,53)
+     city      | temp_lo | temp_hi | prcp |    date    |     name      | lon | lat
+---------------+---------+---------+------+------------+---------------+-----+----
+ San Francisco |      46 |      50 | 0.25 | 1994-11-27 | San Francisco | -194|  53
+ San Francisco |      43 |      57 |    0 | 1994-11-29 | San Francisco | -194|  53
 (2 rows)
 ```
 
@@ -219,7 +219,7 @@ Observe two things about the result set:
 * There is no result row for the city of Hayward. This is because there is no matching entry in the cities table for Hayward, so the join ignores the unmatched rows in the weather table. We will see shortly how this can be fixed.
 * There are two columns containing the city name. This is correct because the lists of columns from the weather and cities tables are concatenated. In practice this is undesirable, though, so you will probably want to list the output columns explicitly rather than using *:
 ```sql
-SELECT city, temp_lo, temp_hi, prcp, date, location
+SELECT city, temp_lo, temp_hi, prcp, date, lon, lat
     FROM weather, cities
     WHERE city = name;
 ```
@@ -227,7 +227,7 @@ SELECT city, temp_lo, temp_hi, prcp, date, location
 Since the columns all had different names, the parser automatically found which table they belong to. If there were duplicate column names in the two tables you'd need to qualify the column names to show which one you meant, as in:
 ```sql
 SELECT weather.city, weather.temp_lo, weather.temp_hi,
-       weather.prcp, weather.date, cities.location
+       weather.prcp, weather.date, cities.lon, cities.lat
     FROM weather, cities
     WHERE cities.name = weather.city;
 ```
@@ -250,11 +250,11 @@ SELECT *
     FROM weather LEFT OUTER JOIN cities ON (weather.city = cities.name);
 ```
 ```
-     city      | temp_lo | temp_hi | prcp |    date    |     name      | location
----------------+---------+---------+------+------------+---------------+-----------
- Hayward       |      37 |      54 |      | 1994-11-29 |               |
- San Francisco |      46 |      50 | 0.25 | 1994-11-27 | San Francisco | (-194,53)
- San Francisco |      43 |      57 |    0 | 1994-11-29 | San Francisco | (-194,53)
+     city      | temp_lo | temp_hi | prcp |    date    |     name      | lon | lat
+---------------+---------+---------+------+------------+---------------+-----+----
+ San Francisco |      46 |      50 | 0.25 | 1994-11-27 | San Francisco | -194| 53
+ San Francisco |      43 |      57 |    0 | 1994-11-29 | San Francisco | -194| 53
+ Hayward       |      37 |      54 |      | 1994-11-29 |               |     |
 (3 rows)
 ```
 
