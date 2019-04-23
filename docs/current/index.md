@@ -4,8 +4,8 @@
 ### Preface
 1. [What is DuckDB?](preface/what-is-duckdb)
 ### Tutorials
-1. Installation
-2. SQL Introduction
+1. [Installation](tutorials/installation)
+2. [SQL Introduction](tutorials/sql)
 ### The SQL Language
 4. SQL Syntax
 5. Data Definition
