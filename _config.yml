@@ -1,1 +1,8 @@
-theme: jekyll-theme-modernist
+theme: jekyll-theme-slate
+title: DuckDB
+description: An embedded analytical database
+show_downloads: true
+github:
+  repository_name: DuckDB
+  repository_url: https://github.com/cwida/duckdb
+  zip_url: https://github.com/cwida/duckdb/archive/master.zip
