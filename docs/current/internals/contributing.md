@@ -1,14 +1,12 @@
 # Contributing
-
-## General Guidelines
-* Do not commit/push directly to the master branch. Instead, create a feature branch/fork and file a merge request.
+Do not commit/push directly to the master branch. Instead, create a feature branch/fork and file a merge request.
 
 ## Testing
 * `make unit` runs the **fast** unit tests (~one minute), `make allunit` runs **all** unit tests (~one hour).
 * Write many tests
 * Test with different types, especially numerics and strings
 * Try to test unexpected/incorrect usage as well, instead of only the happy path
-* Slower tests should be added to the **all** unit tests. You can do this by adding `[.]` after the test group, e.g. `TEST_CASE("Test TPC-H SF0.1", "[tpch][.]")`.
+* Slower tests should be added to the **all** unit tests. You can do this by adding `[.]` after the test group. For an example see `test_tpch.cpp`.
 
 ## Formatting
 * Tabs for indentation, spaces for alignment
@@ -28,7 +26,7 @@
 * Use exceptions **only** when an error is encountered that terminates a query (e.g. parser error, table not found). Exceptions should only be used for **exceptional** situations. For regular errors that does not break the execution flow (e.g. errors you **expect** might occur) use a return value instead.
 * Try to add test cases that trigger exceptions. If an exception cannot be easily triggered using a test case then it should probably be an assertion. This is not always true (e.g. out of memory errors are exceptions).
 * Use **assert** only when failing the assert means a programmer error. Assert should never be triggered by a user input.
-* Assert liberally, but make it clear with comments next to the assert what went wrong when the assert is triggered. Avoid code like `assert(a > b + 3);` without comments or context.
+* Assert liberally, but make it clear with comments next to the assert what went wrong when the assert is triggered.
 
 ## Naming Conventions
 * Files: lowercase separated by underscores, e.g., abstract_operator.cpp
