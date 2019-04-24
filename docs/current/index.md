@@ -12,6 +12,7 @@
 6. Data Manipulation
 7. Queries
 8. Data Types
+8.1. [Sequences](sql/createsequence)
 9. Functions and Operators
 10. Type Conversion
 11. Indexes
