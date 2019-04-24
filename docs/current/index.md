@@ -20,4 +20,4 @@
 14. Performance Tips
 ### Internals
 15. [Overview of DuckDB Internals](internals/overview)
-16. [Contributing](internals/contributing)
+16. [Contributing](https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md)
