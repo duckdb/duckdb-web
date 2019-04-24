@@ -1,0 +1,1870 @@
+{ "result": 0.483648,
+"timings": {
+"physical_planner > create_plan": 0.000422,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000464,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000323,
+"optimizer > expression_rewriter": 0.000128,
+"optimizer": 0.004632,
+"planner > logical_planner": 0.000026,
+"planner > binder": 0.000192,
+"physical_planner > column_binding": 0.000026,
+"optimizer > join_order": 0.004167,
+"planner": 0.000227},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "ca_county\nd_year\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":156,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1689,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1689,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":88282,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":88282,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":159,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":376,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1661,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1661,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":83319,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":83319,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=2\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":396,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1811,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1811,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":154318,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":154318,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":400,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=1\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":691,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1280,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1280,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.483277,
+"timings": {
+"physical_planner > create_plan": 0.000417,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000458,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000331,
+"optimizer > expression_rewriter": 0.000097,
+"optimizer": 0.004635,
+"planner > logical_planner": 0.000025,
+"planner > binder": 0.000195,
+"physical_planner > column_binding": 0.000025,
+"optimizer > join_order": 0.004193,
+"planner": 0.000230},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "ca_county\nd_year\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":156,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1689,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1689,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":88282,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":88282,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":159,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":376,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1661,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1661,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":83319,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":83319,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=2\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":396,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1811,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1811,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":154318,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":154318,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":400,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=1\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":691,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1280,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1280,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.483052,
+"timings": {
+"physical_planner > create_plan": 0.000438,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000479,
+"optimizer > in_clause": 0.000010,
+"optimizer > filter_pushdown": 0.000324,
+"optimizer > expression_rewriter": 0.000097,
+"optimizer": 0.004661,
+"planner > logical_planner": 0.000026,
+"planner > binder": 0.000198,
+"physical_planner > column_binding": 0.000025,
+"optimizer > join_order": 0.004227,
+"planner": 0.000233},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "ca_county\nd_year\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":156,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1689,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1689,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":88282,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":88282,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":159,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":376,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1661,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1661,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":83319,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":83319,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=2\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":396,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1811,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1811,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":154318,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":154318,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":400,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=1\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":691,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1280,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1280,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.483373,
+"timings": {
+"physical_planner > create_plan": 0.000418,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000459,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000299,
+"optimizer > expression_rewriter": 0.000096,
+"optimizer": 0.004663,
+"planner > logical_planner": 0.000027,
+"planner > binder": 0.000180,
+"physical_planner > column_binding": 0.000025,
+"optimizer > join_order": 0.004253,
+"planner": 0.000216},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "ca_county\nd_year\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":156,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1689,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1689,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":88282,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":88282,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":159,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":376,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1661,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1661,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":83319,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":83319,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=2\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":396,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1811,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1811,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":154318,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":154318,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":400,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=1\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":691,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1280,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1280,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.483571,
+"timings": {
+"physical_planner > create_plan": 0.000418,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000460,
+"optimizer > in_clause": 0.000010,
+"optimizer > filter_pushdown": 0.000301,
+"optimizer > expression_rewriter": 0.000095,
+"optimizer": 0.004663,
+"planner > logical_planner": 0.000027,
+"planner > binder": 0.000179,
+"physical_planner > column_binding": 0.000025,
+"optimizer > join_order": 0.004251,
+"planner": 0.000215},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "ca_county\nd_year\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\nweb_sales * 1.000000 / web_sales\nstore_sales * 1.000000 / store_sales\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":47,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":156,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1689,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1689,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":88282,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":88282,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=1\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":159,
+"extra_info": "CASE WHEN (web_sales>0.000000) THEN (web_sales * 1.000000 / web_sales) ELSE (NULL)>CASE WHEN (store_sales>0.000000) THEN (store_sales * 1.000000 / store_sales) ELSE (NULL)\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":376,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1661,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.02,
+"cardinality":1661,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":83319,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":83319,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=2\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":396,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1811,
+"extra_info": "ca_county\nd_qoy\nd_year\nstore_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1811,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":154318,
+"extra_info": "INNER\nss_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":154318,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":400,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":957,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":21655,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_qoy=1\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":691,
+"extra_info": "INNER\nca_county=ca_county\nca_county=ca_county\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":945,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":20832,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":91,
+"extra_info": "d_year=2000\nd_qoy=2\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1280,
+"extra_info": "ca_county\nd_qoy\nd_year\nweb_sales\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":1280,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_bill_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":37613,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":92,
+"extra_info": "d_qoy=3\nd_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
