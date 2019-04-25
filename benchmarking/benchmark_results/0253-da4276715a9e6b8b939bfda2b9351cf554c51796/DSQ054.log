@@ -1,0 +1,515 @@
+{ "result": 0.847596,
+"timings": {
+"physical_planner > create_plan": 0.000096,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000116,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000080,
+"optimizer > expression_rewriter": 0.000042,
+"optimizer": 0.000466,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000110,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000333,
+"planner": 0.000125},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_name\ns_company_id\ns_street_number\ns_street_name\ns_street_type\ns_suite_number\ns_city\ns_county\ns_state\ns_zip\n30 days\n31-60 days\n61-90 days\n91-120 days\n>120 days\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2290,
+"extra_info": "INNER\nss_customer_sk=sr_customer_sk\nss_item_sk=sr_item_sk\nss_ticket_number=sr_ticket_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":2880404,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_moy=8\nd_year=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.851832,
+"timings": {
+"physical_planner > create_plan": 0.000099,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000119,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000082,
+"optimizer > expression_rewriter": 0.000045,
+"optimizer": 0.000499,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000120,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000362,
+"planner": 0.000135},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_name\ns_company_id\ns_street_number\ns_street_name\ns_street_type\ns_suite_number\ns_city\ns_county\ns_state\ns_zip\n30 days\n31-60 days\n61-90 days\n91-120 days\n>120 days\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2290,
+"extra_info": "INNER\nss_customer_sk=sr_customer_sk\nss_item_sk=sr_item_sk\nss_ticket_number=sr_ticket_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":2880404,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_moy=8\nd_year=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.851859,
+"timings": {
+"physical_planner > create_plan": 0.000133,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000165,
+"optimizer > in_clause": 0.000009,
+"optimizer > filter_pushdown": 0.000109,
+"optimizer > expression_rewriter": 0.000056,
+"optimizer": 0.000745,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000112,
+"physical_planner > column_binding": 0.000021,
+"optimizer > join_order": 0.000566,
+"planner": 0.000127},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_name\ns_company_id\ns_street_number\ns_street_name\ns_street_type\ns_suite_number\ns_city\ns_county\ns_state\ns_zip\n30 days\n31-60 days\n61-90 days\n91-120 days\n>120 days\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2290,
+"extra_info": "INNER\nss_customer_sk=sr_customer_sk\nss_item_sk=sr_item_sk\nss_ticket_number=sr_ticket_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":2880404,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_moy=8\nd_year=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.861998,
+"timings": {
+"physical_planner > create_plan": 0.000122,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000149,
+"optimizer > in_clause": 0.000008,
+"optimizer > filter_pushdown": 0.000085,
+"optimizer > expression_rewriter": 0.000044,
+"optimizer": 0.000646,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000123,
+"physical_planner > column_binding": 0.000018,
+"optimizer > join_order": 0.000505,
+"planner": 0.000138},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_name\ns_company_id\ns_street_number\ns_street_name\ns_street_type\ns_suite_number\ns_city\ns_county\ns_state\ns_zip\n30 days\n31-60 days\n61-90 days\n91-120 days\n>120 days\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2290,
+"extra_info": "INNER\nss_customer_sk=sr_customer_sk\nss_item_sk=sr_item_sk\nss_ticket_number=sr_ticket_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.21,
+"cardinality":2880404,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_moy=8\nd_year=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.848824,
+"timings": {
+"physical_planner > create_plan": 0.000097,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000117,
+"optimizer > in_clause": 0.000006,
+"optimizer > filter_pushdown": 0.000102,
+"optimizer > expression_rewriter": 0.000043,
+"optimizer": 0.000521,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000114,
+"physical_planner > column_binding": 0.000013,
+"optimizer > join_order": 0.000354,
+"planner": 0.000130},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_name\ns_company_id\ns_street_number\ns_street_name\ns_street_type\ns_suite_number\ns_city\ns_county\ns_state\ns_zip\n30 days\n31-60 days\n61-90 days\n91-120 days\n>120 days\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2290,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":2290,
+"extra_info": "INNER\nss_customer_sk=sr_customer_sk\nss_item_sk=sr_item_sk\nss_ticket_number=sr_ticket_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":2880404,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":2931,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":31,
+"extra_info": "d_moy=8\nd_year=2001\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
