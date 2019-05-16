@@ -1,0 +1,510 @@
+{ "result": 2.197968,
+"timings": {
+"physical_planner > create_plan": 0.000073,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000089,
+"optimizer > in_clause": 0.000003,
+"optimizer > filter_pushdown": 0.000081,
+"optimizer > expression_rewriter": 0.000016,
+"optimizer": 0.000145,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000074,
+"physical_planner > column_binding": 0.000006,
+"optimizer > join_order": 0.000040,
+"planner": 0.000090},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "c_name\nc_custkey\no_orderkey\no_orderdate\no_totalprice\nSUM(lineitem.l_quantity)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":399,
+"extra_info": "SEMI\no_orderkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":6001215,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.47,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "l_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "SUM(lineitem.l_quantity)>300\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.50,
+"cardinality":1500000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.199470,
+"timings": {
+"physical_planner > create_plan": 0.000320,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000335,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000060,
+"optimizer > expression_rewriter": 0.000017,
+"optimizer": 0.000134,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000064,
+"physical_planner > column_binding": 0.000006,
+"optimizer > join_order": 0.000048,
+"planner": 0.000079},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "c_name\nc_custkey\no_orderkey\no_orderdate\no_totalprice\nSUM(lineitem.l_quantity)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":399,
+"extra_info": "SEMI\no_orderkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":6001215,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.47,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "l_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "SUM(lineitem.l_quantity)>300\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.51,
+"cardinality":1500000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.201036,
+"timings": {
+"physical_planner > create_plan": 0.000476,
+"physical_planner > resolve_types": 0.000006,
+"physical_planner": 0.000500,
+"optimizer > in_clause": 0.000005,
+"optimizer > filter_pushdown": 0.000090,
+"optimizer > expression_rewriter": 0.000026,
+"optimizer": 0.000190,
+"planner > logical_planner": 0.000017,
+"planner > binder": 0.000086,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000062,
+"planner": 0.000107},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "c_name\nc_custkey\no_orderkey\no_orderdate\no_totalprice\nSUM(lineitem.l_quantity)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":399,
+"extra_info": "SEMI\no_orderkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":6001215,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.47,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "l_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "SUM(lineitem.l_quantity)>300\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.51,
+"cardinality":1500000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.199834,
+"timings": {
+"physical_planner > create_plan": 0.000340,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000356,
+"optimizer > in_clause": 0.000003,
+"optimizer > filter_pushdown": 0.000060,
+"optimizer > expression_rewriter": 0.000017,
+"optimizer": 0.000125,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000064,
+"physical_planner > column_binding": 0.000006,
+"optimizer > join_order": 0.000040,
+"planner": 0.000080},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "c_name\nc_custkey\no_orderkey\no_orderdate\no_totalprice\nSUM(lineitem.l_quantity)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":399,
+"extra_info": "SEMI\no_orderkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":6001215,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.47,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "l_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "SUM(lineitem.l_quantity)>300\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.51,
+"cardinality":1500000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.203861,
+"timings": {
+"physical_planner > create_plan": 0.000422,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000442,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000081,
+"optimizer > expression_rewriter": 0.000023,
+"optimizer": 0.000171,
+"planner > logical_planner": 0.000016,
+"planner > binder": 0.000090,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000056,
+"planner": 0.000110},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "c_name\nc_custkey\no_orderkey\no_orderdate\no_totalprice\nSUM(lineitem.l_quantity)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":399,
+"extra_info": "SEMI\no_orderkey=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":6001215,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.47,
+"cardinality":6001215,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "l_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":57,
+"extra_info": "SUM(lineitem.l_quantity)>300\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.51,
+"cardinality":1500000,
+"extra_info": "",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

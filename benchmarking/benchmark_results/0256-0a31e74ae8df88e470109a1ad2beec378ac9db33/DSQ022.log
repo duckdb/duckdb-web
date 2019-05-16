@@ -1,0 +1,570 @@
+{ "result": 1.001276,
+"timings": {
+"physical_planner > create_plan": 0.000115,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000132,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000088,
+"optimizer > expression_rewriter": 0.000083,
+"optimizer": 0.000309,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000087,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000129,
+"planner": 0.000103},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\nw_warehouse_name\ni_item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "CAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))<=1.500000\nCAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))>=0.666667\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2815,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":25335,
+"extra_info": "INNER\ninv_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":405000,
+"extra_info": "INNER\ninv_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":11745000,
+"extra_info": "INNER\ninv_warehouse_sk=w_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":11745000,
+"extra_info": "inventory",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "warehouse",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":61,
+"extra_info": "d_date<=730585\nd_date>=730525\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1110,
+"extra_info": "i_current_price<=1.490000\ni_current_price>=0.990000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.997145,
+"timings": {
+"physical_planner > create_plan": 0.000081,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000096,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000086,
+"optimizer > expression_rewriter": 0.000079,
+"optimizer": 0.000288,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000091,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000114,
+"planner": 0.000108},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\nw_warehouse_name\ni_item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "CAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))<=1.500000\nCAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))>=0.666667\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2815,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":25335,
+"extra_info": "INNER\ninv_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":405000,
+"extra_info": "INNER\ninv_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":11745000,
+"extra_info": "INNER\ninv_warehouse_sk=w_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":11745000,
+"extra_info": "inventory",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "warehouse",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":61,
+"extra_info": "d_date<=730585\nd_date>=730525\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1110,
+"extra_info": "i_current_price<=1.490000\ni_current_price>=0.990000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 1.002785,
+"timings": {
+"physical_planner > create_plan": 0.000082,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000098,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000108,
+"optimizer > expression_rewriter": 0.000081,
+"optimizer": 0.000317,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000076,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000120,
+"planner": 0.000092},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\nw_warehouse_name\ni_item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "CAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))<=1.500000\nCAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))>=0.666667\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2815,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":25335,
+"extra_info": "INNER\ninv_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.57,
+"cardinality":405000,
+"extra_info": "INNER\ninv_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":11745000,
+"extra_info": "INNER\ninv_warehouse_sk=w_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":11745000,
+"extra_info": "inventory",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "warehouse",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":61,
+"extra_info": "d_date<=730585\nd_date>=730525\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1110,
+"extra_info": "i_current_price<=1.490000\ni_current_price>=0.990000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.998667,
+"timings": {
+"physical_planner > create_plan": 0.000085,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000101,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000099,
+"optimizer > expression_rewriter": 0.000084,
+"optimizer": 0.000304,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000078,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000112,
+"planner": 0.000094},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\nw_warehouse_name\ni_item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "CAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))<=1.500000\nCAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))>=0.666667\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2815,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":25335,
+"extra_info": "INNER\ninv_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":405000,
+"extra_info": "INNER\ninv_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.32,
+"cardinality":11745000,
+"extra_info": "INNER\ninv_warehouse_sk=w_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":11745000,
+"extra_info": "inventory",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "warehouse",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":61,
+"extra_info": "d_date<=730585\nd_date>=730525\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1110,
+"extra_info": "i_current_price<=1.490000\ni_current_price>=0.990000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.996032,
+"timings": {
+"physical_planner > create_plan": 0.000082,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000097,
+"optimizer > in_clause": 0.000004,
+"optimizer > filter_pushdown": 0.000102,
+"optimizer > expression_rewriter": 0.000084,
+"optimizer": 0.000306,
+"planner > logical_planner": 0.000011,
+"planner > binder": 0.000079,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000112,
+"planner": 0.000096},
+"tree": { "name": "PRUNE",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\nw_warehouse_name\ni_item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "w_warehouse_name\ni_item_id\ninv_before\ninv_after\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":749,
+"extra_info": "CAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))<=1.500000\nCAST[DOUBLE](CASE WHEN (inv_before>0) THEN (inv_after / inv_before) ELSE (NULL))>=0.666667\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":2815,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":25335,
+"extra_info": "INNER\ninv_item_sk=i_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.56,
+"cardinality":405000,
+"extra_info": "INNER\ninv_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.33,
+"cardinality":11745000,
+"extra_info": "INNER\ninv_warehouse_sk=w_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":11745000,
+"extra_info": "inventory",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "warehouse",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":61,
+"extra_info": "d_date<=730585\nd_date>=730525\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1110,
+"extra_info": "i_current_price<=1.490000\ni_current_price>=0.990000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
