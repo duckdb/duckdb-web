@@ -1,0 +1,165 @@
+{ "result": 24.179064,
+"timings": {
+"physical_planner > create_plan": 0.000007,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000017,
+"optimizer > expression_rewriter": 0.000038,
+"optimizer": 0.000077,
+"planner > logical_planner": 0.000012,
+"planner > binder": 0.000045,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000003,
+"planner": 0.000082},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":24.15,
+"cardinality":999999,
+"extra_info": "integers[15000000]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 24.045784,
+"timings": {
+"physical_planner > create_plan": 0.000008,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000014,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000017,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000040,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000021,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000028},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":24.01,
+"cardinality":999999,
+"extra_info": "integers[15000000]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 23.924066,
+"timings": {
+"physical_planner > create_plan": 0.000007,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000013,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000017,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000039,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000021,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000028},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":23.89,
+"cardinality":999999,
+"extra_info": "integers[15000000]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 23.841411,
+"timings": {
+"physical_planner > create_plan": 0.000007,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000014,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000018,
+"optimizer > expression_rewriter": 0.000012,
+"optimizer": 0.000040,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000021,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000003,
+"planner": 0.000028},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":23.81,
+"cardinality":999999,
+"extra_info": "integers[15000000]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 23.733344,
+"timings": {
+"physical_planner > create_plan": 0.000008,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000002,
+"optimizer > filter_pushdown": 0.000017,
+"optimizer > expression_rewriter": 0.000011,
+"optimizer": 0.000039,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000022,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000003,
+"planner": 0.000029},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":23.70,
+"cardinality":999999,
+"extra_info": "integers[15000000]",
+"children": []
+}
+]
+}
+]
+}
+}

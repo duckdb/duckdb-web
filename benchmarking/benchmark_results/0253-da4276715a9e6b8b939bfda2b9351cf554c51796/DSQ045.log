@@ -1,0 +1,700 @@
+{ "result": 0.009098,
+"timings": {
+"physical_planner > create_plan": 0.000051,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000072,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000189,
+"optimizer > expression_rewriter": 0.000410,
+"optimizer": 0.000618,
+"planner > logical_planner": 0.000036,
+"planner > binder": 0.000086,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000008,
+"planner": 0.000124},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "i_product_name\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "SUBQUERY>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "i_manufact_id<=778\ni_manufact_id>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "CASE WHEN (IS_NULL(item_cnt)) THEN (0) ELSE (item_cnt)\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\ni_manufact=i_manufact\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "i_color=powder OR i_color=khaki AND i_units=Ounce OR i_units=Oz AND i_size=medium OR i_size=extra large OR i_color=brown OR i_color=honeydew AND i_units=Bunch OR i_units=Ton AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=floral OR i_color=deep AND i_units=N/A OR i_units=Dozen AND i_size=petite OR i_category=Men AND i_color=light OR i_color=cornflower AND i_units=Box OR i_units=Pound AND i_size=medium OR i_size=extra large OR i_color=midnight OR i_color=snow AND i_units=Pallet OR i_units=Gross AND i_size=medium OR i_size=extra large OR i_color=cyan OR i_color=papaya AND i_units=Cup OR i_units=Dram AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=orange OR i_color=frosted AND i_units=Each OR i_units=Tbl AND i_size=petite OR i_category=Men AND i_color=forest OR i_color=ghost AND i_units=Lb OR i_units=Bundle AND i_size=medium OR i_size=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009043,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000074,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000202,
+"optimizer > expression_rewriter": 0.000412,
+"optimizer": 0.000632,
+"planner > logical_planner": 0.000035,
+"planner > binder": 0.000087,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000008,
+"planner": 0.000124},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "i_product_name\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "SUBQUERY>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "i_manufact_id<=778\ni_manufact_id>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "CASE WHEN (IS_NULL(item_cnt)) THEN (0) ELSE (item_cnt)\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\ni_manufact=i_manufact\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "i_color=powder OR i_color=khaki AND i_units=Ounce OR i_units=Oz AND i_size=medium OR i_size=extra large OR i_color=brown OR i_color=honeydew AND i_units=Bunch OR i_units=Ton AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=floral OR i_color=deep AND i_units=N/A OR i_units=Dozen AND i_size=petite OR i_category=Men AND i_color=light OR i_color=cornflower AND i_units=Box OR i_units=Pound AND i_size=medium OR i_size=extra large OR i_color=midnight OR i_color=snow AND i_units=Pallet OR i_units=Gross AND i_size=medium OR i_size=extra large OR i_color=cyan OR i_color=papaya AND i_units=Cup OR i_units=Dram AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=orange OR i_color=frosted AND i_units=Each OR i_units=Tbl AND i_size=petite OR i_category=Men AND i_color=forest OR i_color=ghost AND i_units=Lb OR i_units=Bundle AND i_size=medium OR i_size=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.008968,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000074,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000196,
+"optimizer > expression_rewriter": 0.000378,
+"optimizer": 0.000594,
+"planner > logical_planner": 0.000036,
+"planner > binder": 0.000085,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000008,
+"planner": 0.000123},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "i_product_name\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "SUBQUERY>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "i_manufact_id<=778\ni_manufact_id>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "CASE WHEN (IS_NULL(item_cnt)) THEN (0) ELSE (item_cnt)\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\ni_manufact=i_manufact\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "i_color=powder OR i_color=khaki AND i_units=Ounce OR i_units=Oz AND i_size=medium OR i_size=extra large OR i_color=brown OR i_color=honeydew AND i_units=Bunch OR i_units=Ton AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=floral OR i_color=deep AND i_units=N/A OR i_units=Dozen AND i_size=petite OR i_category=Men AND i_color=light OR i_color=cornflower AND i_units=Box OR i_units=Pound AND i_size=medium OR i_size=extra large OR i_color=midnight OR i_color=snow AND i_units=Pallet OR i_units=Gross AND i_size=medium OR i_size=extra large OR i_color=cyan OR i_color=papaya AND i_units=Cup OR i_units=Dram AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=orange OR i_color=frosted AND i_units=Each OR i_units=Tbl AND i_size=petite OR i_category=Men AND i_color=forest OR i_color=ghost AND i_units=Lb OR i_units=Bundle AND i_size=medium OR i_size=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009219,
+"timings": {
+"physical_planner > create_plan": 0.000051,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000072,
+"optimizer > in_clause": 0.000007,
+"optimizer > filter_pushdown": 0.000188,
+"optimizer > expression_rewriter": 0.000414,
+"optimizer": 0.000620,
+"planner > logical_planner": 0.000036,
+"planner > binder": 0.000086,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.000007,
+"planner": 0.000122},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "i_product_name\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "SUBQUERY>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "i_manufact_id<=778\ni_manufact_id>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "CASE WHEN (IS_NULL(item_cnt)) THEN (0) ELSE (item_cnt)\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\ni_manufact=i_manufact\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "i_color=powder OR i_color=khaki AND i_units=Ounce OR i_units=Oz AND i_size=medium OR i_size=extra large OR i_color=brown OR i_color=honeydew AND i_units=Bunch OR i_units=Ton AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=floral OR i_color=deep AND i_units=N/A OR i_units=Dozen AND i_size=petite OR i_category=Men AND i_color=light OR i_color=cornflower AND i_units=Box OR i_units=Pound AND i_size=medium OR i_size=extra large OR i_color=midnight OR i_color=snow AND i_units=Pallet OR i_units=Gross AND i_size=medium OR i_size=extra large OR i_color=cyan OR i_color=papaya AND i_units=Cup OR i_units=Dram AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=orange OR i_color=frosted AND i_units=Each OR i_units=Tbl AND i_size=petite OR i_category=Men AND i_color=forest OR i_color=ghost AND i_units=Lb OR i_units=Bundle AND i_size=medium OR i_size=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.009004,
+"timings": {
+"physical_planner > create_plan": 0.000053,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000074,
+"optimizer > in_clause": 0.000008,
+"optimizer > filter_pushdown": 0.000195,
+"optimizer > expression_rewriter": 0.000363,
+"optimizer": 0.000577,
+"planner > logical_planner": 0.000034,
+"planner > binder": 0.000099,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000008,
+"planner": 0.000134},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "i_product_name\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "SUBQUERY>0\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "i_manufact_id<=778\ni_manufact_id>=738\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "SINGLE\ni_manufact=i_manufact\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":240,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "CASE WHEN (IS_NULL(item_cnt)) THEN (0) ELSE (item_cnt)\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "INNER\ni_manufact=i_manufact\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":67,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":8,
+"extra_info": "i_color=powder OR i_color=khaki AND i_units=Ounce OR i_units=Oz AND i_size=medium OR i_size=extra large OR i_color=brown OR i_color=honeydew AND i_units=Bunch OR i_units=Ton AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=floral OR i_color=deep AND i_units=N/A OR i_units=Dozen AND i_size=petite OR i_category=Men AND i_color=light OR i_color=cornflower AND i_units=Box OR i_units=Pound AND i_size=medium OR i_size=extra large OR i_color=midnight OR i_color=snow AND i_units=Pallet OR i_units=Gross AND i_size=medium OR i_size=extra large OR i_color=cyan OR i_color=papaya AND i_units=Cup OR i_units=Dram AND i_size=N/A OR i_size=small AND i_category=Women OR i_category=Men AND i_color=orange OR i_color=frosted AND i_units=Each OR i_units=Tbl AND i_size=petite OR i_category=Men AND i_color=forest OR i_color=ghost AND i_units=Lb OR i_units=Bundle AND i_size=medium OR i_size=extra large\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
