@@ -7,18 +7,12 @@
 1. [Installation](tutorials/installation)
 2. [SQL Introduction](tutorials/sql)
 ### The SQL Language
-4. SQL Syntax
-5. Data Definition
-6. Data Manipulation
-7. Queries
-8. Data Types
-8.1. [Sequences](sql/createsequence)
-9. Functions and Operators
-10. Type Conversion
-11. Indexes
-12. Concurrency Control
-13. [Pragmas](sql/pragmas)
-14. Performance Tips
+4. [Data Types](sql/types)
+4.1. [Sequences](sql/createsequence)
+5. [Functions and Operators](sql/functions)
+6. [Type Conversion](sql/type_conversion)
+7. [Indexes](sql/indexes)
+8. [Pragmas](sql/pragmas)
 ### Internals
 15. [Overview of DuckDB Internals](internals/overview)
 16. [Contributing](https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md)
