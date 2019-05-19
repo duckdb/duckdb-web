@@ -64,7 +64,7 @@ SELECT nextval('serial');
 
  nextval
 ---------
-     114
+     101
 ```
 
 Use this sequence in an INSERT command:
