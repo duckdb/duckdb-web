@@ -1,0 +1,27 @@
+---------
+|| Q08 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 2 ]: 
+Chunk - [2 Columns]
+- BIGINT: 2 = [ 1995, 1996]
+- DOUBLE: 2 = [ 0.034436, 0.041486]
+
+Expected answer:
+Chunk - [2 Columns]
+- BIGINT: 2 = [ 1995, 1996]
+- DOUBLE: 2 = [ 0.030000, 0.040000]
+
+Difference in column 1:
+Result
+------
+DOUBLE [0.034436,0.041486,]
+
+Expect
+------
+DOUBLE [0.030000,0.040000,]
+
+

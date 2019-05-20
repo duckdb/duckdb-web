@@ -1,0 +1,156 @@
+{ "result": 30.379619,
+"timings": {
+"physical_planner > create_plan": 0.000207,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000235,
+"optimizer > in_clause": 0.000007,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000198,
+"optimizer > expression_rewriter": 0.000165,
+"optimizer": 0.005437,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000132,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.005060,
+"planner": 0.000152},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "substring(r_reason_desc, 1, 20)\nCAST[DOUBLE](SUM(web_sales.ws_quantity)) / CAST[DOUBLE](COUNT(web_sales.ws_quantity))\nSUM(web_returns.wr_refunded_cash) / CAST[DOUBLE](COUNT(web_returns.wr_refunded_cash))\nSUM(web_returns.wr_fee) / CAST[DOUBLE](COUNT(web_returns.wr_fee))\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "INNER\nws_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":0,
+"extra_info": "IN(ca_state, IN, OH, NJ) AND ws_net_profit>=100.000000 AND ws_net_profit<=200.000000 OR IN(ca_state, WI, CT, KY) AND ws_net_profit>=150.000000 AND ws_net_profit<=300.000000 OR IN(ca_state, LA, IA, AR) AND ws_net_profit>=50.000000 AND ws_net_profit<=250.000000\ncd_marital_status=M AND cd_education_status=Advanced Degree AND ws_sales_price>=100.000000 AND ws_sales_price<=150.000000 OR cd_marital_status=S AND cd_education_status=College AND ws_sales_price>=50.000000 AND ws_sales_price<=100.000000 OR cd_marital_status=W AND cd_education_status=2 yr Degree AND ws_sales_price>=150.000000 AND ws_sales_price<=200.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.13,
+"cardinality":87,
+"extra_info": "INNER\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":87,
+"extra_info": "INNER\nwr_reason_sk=r_reason_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":26.79,
+"cardinality":87,
+"extra_info": "INNER\ncd_demo_sk=wr_returning_cdemo_sk\ncd_demo_sk=wr_refunded_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":3.32,
+"cardinality":93212672,
+"extra_info": "INNER\ncd_education_status=cd_education_status\ncd_marital_status=cd_marital_status\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":2048,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":71654,
+"extra_info": "INNER\nwr_refunded_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "ca_country=United States\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":35,
+"extra_info": "reason",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":719384,
+"extra_info": "INNER\nws_web_page_sk=wp_web_page_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":60,
+"extra_info": "web_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
