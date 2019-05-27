@@ -13,4 +13,4 @@ SELECT DATE '1992-09-20';
 ```
 
 ## Functions
-See [Date Functions and Operators](https://www.duckdb.org/docs/sql/functions/date_functions)
+See [Date Functions and Operators](../functions/date_functions)
