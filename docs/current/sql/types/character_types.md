@@ -22,4 +22,4 @@ CREATE TABLE strings(
 The `varchar` field allows storage of unicode characters. Internally, the data is encoded as UTF-8.
 
 ## Functions
-See [Character Functions and Operators](https://www.duckdb.org/docs/sql/functions/character_functions)
+See [Character Functions](../functions/character_functions) and [Pattern Matching](../functions/regex)

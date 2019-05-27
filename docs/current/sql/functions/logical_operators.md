@@ -5,7 +5,7 @@ The following logical operators are available: `AND`, `OR` and `NOT`. SQL uses a
 
 | a | b | a AND b | a OR b |
 |:---|:---|:---|:---|
-| <span style="color:green">TRUE</span> | TRUE | TRUE | TRUE |
+| TRUE | TRUE | TRUE | TRUE |
 | TRUE | FALSE | FALSE | TRUE |
 | TRUE | NULL | NULL | TRUE |
 | FALSE | FALSE | FALSE | FALSE |
@@ -19,8 +19,3 @@ The following logical operators are available: `AND`, `OR` and `NOT`. SQL uses a
 | NULL | NULL |
 
 The operators `AND` and `OR` are commutative, that is, you can switch the left and right operand without affecting the result.
-
-
-
-
-
