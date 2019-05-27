@@ -15,4 +15,4 @@ SELECT TIMESTAMP '1992-20-09 14:30:00';
 ```
 
 ## Functions
-See [Timestamp Functions and Operators](https://www.duckdb.org/docs/sql/functions/timestamp_functions)
+See [Timestamp Functions and Operators](../functions/timestamp_functions)

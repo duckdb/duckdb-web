@@ -28,4 +28,4 @@ SELECT * FROM integers WHERE i > 10;
 ```
 
 ## Functions
-See [Logical Operators](https://www.duckdb.org/docs/current/sql/functions/logical_operators) and [Comparison Operators](../functions/comparison_operators).
+See [Logical Operators](../functions/logical_operators) and [Comparison Operators](../functions/comparison_operators).

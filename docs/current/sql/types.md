@@ -15,8 +15,8 @@ The table below shows all the built-in general-purpose data types. The alternati
 | tinyint |   | signed one-byte integer|
 | varchar | char, bpchar, text, string| variable-length character string |
 
-* [Numeric Types](https://www.duckdb.org/docs/sql/types/numeric_types)
-* [Character Types](https://www.duckdb.org/docs/sql/types/character_types)
-* [Date Type](https://www.duckdb.org/docs/sql/types/date_type)
-* [Timestamp Type](https://www.duckdb.org/docs/sql/types/timestamp_type)
-* [Boolean Type](https://www.duckdb.org/docs/sql/types/boolean_type)
+* [Numeric Types](types/numeric_types)
+* [Character Types](types/character_types)
+* [Date Type](types/date_type)
+* [Timestamp Type](types/timestamp_type)
+* [Boolean Type](types/boolean_type)
