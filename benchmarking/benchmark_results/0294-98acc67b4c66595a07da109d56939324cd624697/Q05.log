@@ -1,0 +1,590 @@
+{ "result": 0.740586,
+"timings": {
+"physical_planner > create_plan": 0.000136,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000153,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000103,
+"optimizer > expression_rewriter": 0.000041,
+"optimizer": 0.002680,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000055,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.002526,
+"planner": 0.000068},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "n_name\nrevenue\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":7243,
+"extra_info": "INNER\nn_nationkey=c_nationkey\nn_nationkey=c_nationkey\ns_nationkey=c_nationkey\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":182183,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":1201113,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2003,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=ASIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":227597,
+"extra_info": "o_orderdate<728659\no_orderdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.745207,
+"timings": {
+"physical_planner > create_plan": 0.000159,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000181,
+"optimizer > in_clause": 0.000005,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000119,
+"optimizer > expression_rewriter": 0.000036,
+"optimizer": 0.003530,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000055,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.003363,
+"planner": 0.000069},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "n_name\nrevenue\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":7243,
+"extra_info": "INNER\nn_nationkey=c_nationkey\nn_nationkey=c_nationkey\ns_nationkey=c_nationkey\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":182183,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":1201113,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2003,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=ASIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":227597,
+"extra_info": "o_orderdate<728659\no_orderdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.732172,
+"timings": {
+"physical_planner > create_plan": 0.000142,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000158,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000102,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.002623,
+"planner > logical_planner": 0.000023,
+"planner > binder": 0.000056,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.002477,
+"planner": 0.000083},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "n_name\nrevenue\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":7243,
+"extra_info": "INNER\nn_nationkey=c_nationkey\nn_nationkey=c_nationkey\ns_nationkey=c_nationkey\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":182183,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":1201113,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2003,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=ASIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":227597,
+"extra_info": "o_orderdate<728659\no_orderdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.738971,
+"timings": {
+"physical_planner > create_plan": 0.000124,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000157,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000104,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.002640,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000070,
+"physical_planner > column_binding": 0.000025,
+"optimizer > join_order": 0.002490,
+"planner": 0.000083},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "n_name\nrevenue\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":7243,
+"extra_info": "INNER\nn_nationkey=c_nationkey\nn_nationkey=c_nationkey\ns_nationkey=c_nationkey\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":182183,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":1201113,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2003,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=ASIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":227597,
+"extra_info": "o_orderdate<728659\no_orderdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.735565,
+"timings": {
+"physical_planner > create_plan": 0.000147,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000168,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000102,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.003251,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000071,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.003103,
+"planner": 0.000084},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "n_name\nrevenue\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":5,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.20,
+"cardinality":7243,
+"extra_info": "INNER\nn_nationkey=c_nationkey\nn_nationkey=c_nationkey\ns_nationkey=c_nationkey\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.26,
+"cardinality":182183,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.19,
+"cardinality":1201113,
+"extra_info": "INNER\nl_suppkey=s_suppkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":2003,
+"extra_info": "INNER\ns_nationkey=n_nationkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":10000,
+"extra_info": "supplier",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "INNER\nn_regionkey=r_regionkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":25,
+"extra_info": "nation",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "r_name=ASIA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":5,
+"extra_info": "region",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":227597,
+"extra_info": "o_orderdate<728659\no_orderdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
