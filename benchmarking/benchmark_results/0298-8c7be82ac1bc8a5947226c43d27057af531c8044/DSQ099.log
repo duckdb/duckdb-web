@@ -1,0 +1,965 @@
+{ "result": 2.183450,
+"timings": {
+"physical_planner > create_plan": 0.000223,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000244,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000184,
+"optimizer > expression_rewriter": 0.000041,
+"optimizer": 0.000386,
+"planner > logical_planner": 0.000022,
+"planner > binder": 0.000090,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000149,
+"planner": 0.000117},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "order count\ntotal shipping cost\ntotal net profit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.83,
+"cardinality":98,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.43,
+"cardinality":138,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":138,
+"extra_info": "INNER\nws_ship_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":4022,
+"extra_info": "INNER\nws_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":30472,
+"extra_info": "INNER\nws_ship_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":61,
+"extra_info": "d_date<=730211\nCAST[VARCHAR](d_date)>=1999-02-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "web_company_name=pri\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1646,
+"extra_info": "ca_state=IL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6647314,
+"extra_info": "ws_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.02,
+"cardinality":8705152,
+"extra_info": "wr_order_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.34,
+"cardinality":8705152,
+"extra_info": "INNER\nws_order_number=wr_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.188924,
+"timings": {
+"physical_planner > create_plan": 0.000215,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000237,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000190,
+"optimizer > expression_rewriter": 0.000040,
+"optimizer": 0.000390,
+"planner > logical_planner": 0.000023,
+"planner > binder": 0.000109,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000150,
+"planner": 0.000136},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "order count\ntotal shipping cost\ntotal net profit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.84,
+"cardinality":98,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.43,
+"cardinality":138,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":138,
+"extra_info": "INNER\nws_ship_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":4022,
+"extra_info": "INNER\nws_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":30472,
+"extra_info": "INNER\nws_ship_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":61,
+"extra_info": "d_date<=730211\nCAST[VARCHAR](d_date)>=1999-02-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "web_company_name=pri\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1646,
+"extra_info": "ca_state=IL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6647314,
+"extra_info": "ws_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.02,
+"cardinality":8705152,
+"extra_info": "wr_order_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.34,
+"cardinality":8705152,
+"extra_info": "INNER\nws_order_number=wr_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.179580,
+"timings": {
+"physical_planner > create_plan": 0.000194,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000214,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000215,
+"optimizer > expression_rewriter": 0.000055,
+"optimizer": 0.000447,
+"planner > logical_planner": 0.000022,
+"planner > binder": 0.000094,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000165,
+"planner": 0.000120},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "order count\ntotal shipping cost\ntotal net profit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.83,
+"cardinality":98,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.43,
+"cardinality":138,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":138,
+"extra_info": "INNER\nws_ship_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":4022,
+"extra_info": "INNER\nws_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":30472,
+"extra_info": "INNER\nws_ship_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":61,
+"extra_info": "d_date<=730211\nCAST[VARCHAR](d_date)>=1999-02-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "web_company_name=pri\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1646,
+"extra_info": "ca_state=IL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6647314,
+"extra_info": "ws_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.02,
+"cardinality":8705152,
+"extra_info": "wr_order_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.34,
+"cardinality":8705152,
+"extra_info": "INNER\nws_order_number=wr_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.180025,
+"timings": {
+"physical_planner > create_plan": 0.000225,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000252,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000238,
+"optimizer > expression_rewriter": 0.000040,
+"optimizer": 0.000492,
+"planner > logical_planner": 0.000023,
+"planner > binder": 0.000091,
+"physical_planner > column_binding": 0.000012,
+"optimizer > join_order": 0.000201,
+"planner": 0.000118},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "order count\ntotal shipping cost\ntotal net profit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.83,
+"cardinality":98,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.43,
+"cardinality":138,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":138,
+"extra_info": "INNER\nws_ship_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":4022,
+"extra_info": "INNER\nws_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":30472,
+"extra_info": "INNER\nws_ship_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":61,
+"extra_info": "d_date<=730211\nCAST[VARCHAR](d_date)>=1999-02-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "web_company_name=pri\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1646,
+"extra_info": "ca_state=IL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6647314,
+"extra_info": "ws_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.02,
+"cardinality":8705152,
+"extra_info": "wr_order_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.34,
+"cardinality":8705152,
+"extra_info": "INNER\nws_order_number=wr_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 2.188405,
+"timings": {
+"physical_planner > create_plan": 0.000222,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000244,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000205,
+"optimizer > expression_rewriter": 0.000040,
+"optimizer": 0.000404,
+"planner > logical_planner": 0.000022,
+"planner > binder": 0.000093,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000148,
+"planner": 0.000119},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "order count\ntotal shipping cost\ntotal net profit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.84,
+"cardinality":98,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.43,
+"cardinality":138,
+"extra_info": "SEMI\nws_order_number=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":138,
+"extra_info": "INNER\nws_ship_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":4022,
+"extra_info": "INNER\nws_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":30472,
+"extra_info": "INNER\nws_ship_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.02,
+"cardinality":61,
+"extra_info": "d_date<=730211\nCAST[VARCHAR](d_date)>=1999-02-01\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "web_company_name=pri\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":1646,
+"extra_info": "ca_state=IL\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6647314,
+"extra_info": "ws_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.02,
+"cardinality":8705152,
+"extra_info": "wr_order_number\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.34,
+"cardinality":8705152,
+"extra_info": "INNER\nws_order_number=wr_order_number\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.01,
+"cardinality":6647314,
+"extra_info": "ws_order_number\nwh1\nwh2\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.22,
+"cardinality":6647314,
+"extra_info": "INNER\nws_order_number=ws_order_number\nws_warehouse_sk!=ws_warehouse_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
