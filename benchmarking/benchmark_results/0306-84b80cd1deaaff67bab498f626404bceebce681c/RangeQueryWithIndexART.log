@@ -1,0 +1,175 @@
+{ "result": 0.002863,
+"timings": {
+"physical_planner > create_plan": 0.000002,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000006,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000005,
+"optimizer > filter_pushdown": 0.000013,
+"optimizer > expression_rewriter": 0.000010,
+"optimizer": 0.000035,
+"planner > logical_planner": 0.000003,
+"planner > binder": 0.000013,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000001,
+"planner": 0.000017},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.003915,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000008,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000006,
+"optimizer > filter_pushdown": 0.000018,
+"optimizer > expression_rewriter": 0.000014,
+"optimizer": 0.000048,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000017,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000023},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.004147,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000010,
+"optimizer > in_clause": 0.000002,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000009,
+"optimizer > filter_pushdown": 0.000024,
+"optimizer > expression_rewriter": 0.000019,
+"optimizer": 0.000065,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000023,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000030},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.004469,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000010,
+"optimizer > in_clause": 0.000002,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000008,
+"optimizer > filter_pushdown": 0.000024,
+"optimizer > expression_rewriter": 0.000018,
+"optimizer": 0.000063,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000023,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000031},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 0.004319,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000011,
+"optimizer > in_clause": 0.000002,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000009,
+"optimizer > filter_pushdown": 0.000027,
+"optimizer > expression_rewriter": 0.000020,
+"optimizer": 0.000070,
+"planner > logical_planner": 0.000005,
+"planner > binder": 0.000024,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000003,
+"planner": 0.000032},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+}
