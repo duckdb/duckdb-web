@@ -1,0 +1,1090 @@
+{ "result": 0.099056,
+"timings": {
+"physical_planner > create_plan": 0.000180,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000203,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000206,
+"optimizer > expression_rewriter": 0.000027,
+"optimizer": 0.000306,
+"planner > logical_planner": 0.000032,
+"planner > binder": 0.000097,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000061,
+"planner": 0.000134},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "c_customer_id\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":52440,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=s_store_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_state=TN\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.096098,
+"timings": {
+"physical_planner > create_plan": 0.000179,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000204,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000229,
+"optimizer > expression_rewriter": 0.000052,
+"optimizer": 0.000352,
+"planner > logical_planner": 0.000031,
+"planner > binder": 0.000108,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000060,
+"planner": 0.000144},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "c_customer_id\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=s_store_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_state=TN\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.095495,
+"timings": {
+"physical_planner > create_plan": 0.000207,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000231,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000206,
+"optimizer > expression_rewriter": 0.000027,
+"optimizer": 0.000305,
+"planner > logical_planner": 0.000033,
+"planner > binder": 0.000112,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000061,
+"planner": 0.000149},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "c_customer_id\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=s_store_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_state=TN\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.095569,
+"timings": {
+"physical_planner > create_plan": 0.000182,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000206,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000222,
+"optimizer > expression_rewriter": 0.000028,
+"optimizer": 0.000323,
+"planner > logical_planner": 0.000034,
+"planner > binder": 0.000098,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000062,
+"planner": 0.000137},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "c_customer_id\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=s_store_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_state=TN\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.095044,
+"timings": {
+"physical_planner > create_plan": 0.000196,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000220,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000253,
+"optimizer > expression_rewriter": 0.000029,
+"optimizer": 0.000357,
+"planner > logical_planner": 0.000034,
+"planner > binder": 0.000095,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000064,
+"planner": 0.000133},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.01,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "c_customer_id\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":13760,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=s_store_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_state=TN\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "SINGLE\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "INNER\nctr_store_sk=ctr_store_sk\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":52440,
+"extra_info": "ctr_customer_sk\nctr_store_sk\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":52440,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":57489,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
