@@ -1,0 +1,685 @@
+{ "result": 0.912060,
+"timings": {
+"physical_planner > create_plan": 0.000115,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000131,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000135,
+"optimizer > expression_rewriter": 0.000029,
+"optimizer": 0.000199,
+"planner > logical_planner": 0.000024,
+"planner > binder": 0.000073,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000025,
+"planner": 0.000101},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(lineitem.l_extendedprice) / 7.000000\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":587,
+"extra_info": "CAST[DOUBLE](l_quantity)<SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "p_brand=Brand#23\np_container=MED BOX\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "#3\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "0.200000 * CAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(lineitem.l_quantity))) THEN (0) ELSE (COUNT(lineitem.l_quantity)))\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.70,
+"cardinality":6088,
+"extra_info": "INNER\np_partkey=l_partkey\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.891268,
+"timings": {
+"physical_planner > create_plan": 0.000122,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000145,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000187,
+"optimizer > expression_rewriter": 0.000032,
+"optimizer": 0.000268,
+"planner > logical_planner": 0.000030,
+"planner > binder": 0.000065,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000035,
+"planner": 0.000099},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(lineitem.l_extendedprice) / 7.000000\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":587,
+"extra_info": "CAST[DOUBLE](l_quantity)<SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "p_brand=Brand#23\np_container=MED BOX\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "#3\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "0.200000 * CAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(lineitem.l_quantity))) THEN (0) ELSE (COUNT(lineitem.l_quantity)))\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.69,
+"cardinality":6088,
+"extra_info": "INNER\np_partkey=l_partkey\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.887992,
+"timings": {
+"physical_planner > create_plan": 0.000097,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000113,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000012,
+"optimizer > filter_pushdown": 0.000132,
+"optimizer > expression_rewriter": 0.000025,
+"optimizer": 0.000203,
+"planner > logical_planner": 0.000024,
+"planner > binder": 0.000052,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000025,
+"planner": 0.000078},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(lineitem.l_extendedprice) / 7.000000\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":587,
+"extra_info": "CAST[DOUBLE](l_quantity)<SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "p_brand=Brand#23\np_container=MED BOX\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "#3\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "0.200000 * CAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(lineitem.l_quantity))) THEN (0) ELSE (COUNT(lineitem.l_quantity)))\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.70,
+"cardinality":6088,
+"extra_info": "INNER\np_partkey=l_partkey\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.890025,
+"timings": {
+"physical_planner > create_plan": 0.000116,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000133,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000131,
+"optimizer > expression_rewriter": 0.000024,
+"optimizer": 0.000201,
+"planner > logical_planner": 0.000024,
+"planner > binder": 0.000051,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000036,
+"planner": 0.000078},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(lineitem.l_extendedprice) / 7.000000\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":587,
+"extra_info": "CAST[DOUBLE](l_quantity)<SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "p_brand=Brand#23\np_container=MED BOX\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "#3\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "0.200000 * CAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(lineitem.l_quantity))) THEN (0) ELSE (COUNT(lineitem.l_quantity)))\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.69,
+"cardinality":6088,
+"extra_info": "INNER\np_partkey=l_partkey\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.919436,
+"timings": {
+"physical_planner > create_plan": 0.000123,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000139,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000133,
+"optimizer > expression_rewriter": 0.000024,
+"optimizer": 0.000207,
+"planner > logical_planner": 0.000025,
+"planner > binder": 0.000050,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000041,
+"planner": 0.000078},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(lineitem.l_extendedprice) / 7.000000\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":587,
+"extra_info": "CAST[DOUBLE](l_quantity)<SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.10,
+"cardinality":6088,
+"extra_info": "INNER\nl_partkey=p_partkey\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "p_brand=Brand#23\np_container=MED BOX\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":200000,
+"extra_info": "part",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "#3\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "SINGLE\np_partkey=p_partkey\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":6088,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "0.200000 * CAST[DOUBLE](SUM(lineitem.l_quantity)) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(lineitem.l_quantity))) THEN (0) ELSE (COUNT(lineitem.l_quantity)))\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.71,
+"cardinality":6088,
+"extra_info": "INNER\np_partkey=l_partkey\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":204,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.04,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
