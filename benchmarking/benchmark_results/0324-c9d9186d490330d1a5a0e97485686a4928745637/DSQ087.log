@@ -1,0 +1,1565 @@
+{ "result": 0.224692,
+"timings": {
+"physical_planner > create_plan": 0.000330,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000365,
+"optimizer > in_clause": 0.000008,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000152,
+"optimizer > expression_rewriter": 0.000049,
+"optimizer": 0.000362,
+"planner > logical_planner": 0.000030,
+"planner > binder": 0.000143,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000145,
+"planner": 0.000183},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "item_id\nsr_item_qty\nCAST[DOUBLE](sr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\ncr_item_qty\nCAST[DOUBLE](cr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nwr_item_qty\nCAST[DOUBLE](wr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nCAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "INNER\nitem_id=item_id\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "item_id\nsr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2763,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":287867,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":287867,
+"extra_info": "INNER\nsr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":96,
+"extra_info": "INNER\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "item_id\ncr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1296,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":144067,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":144067,
+"extra_info": "INNER\ncr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "item_id\nwr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":722,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":71654,
+"extra_info": "INNER\nd_date_sk=wr_returned_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "INNER\nwr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.03,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.221433,
+"timings": {
+"physical_planner > create_plan": 0.000321,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000357,
+"optimizer > in_clause": 0.000008,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000151,
+"optimizer > expression_rewriter": 0.000049,
+"optimizer": 0.000362,
+"planner > logical_planner": 0.000030,
+"planner > binder": 0.000140,
+"physical_planner > column_binding": 0.000016,
+"optimizer > join_order": 0.000146,
+"planner": 0.000181},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "item_id\nsr_item_qty\nCAST[DOUBLE](sr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\ncr_item_qty\nCAST[DOUBLE](cr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nwr_item_qty\nCAST[DOUBLE](wr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nCAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "INNER\nitem_id=item_id\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "item_id\nsr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2763,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":287867,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":287867,
+"extra_info": "INNER\nsr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":96,
+"extra_info": "INNER\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "item_id\ncr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1296,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":144067,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":144067,
+"extra_info": "INNER\ncr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "item_id\nwr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":722,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":71654,
+"extra_info": "INNER\nd_date_sk=wr_returned_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "INNER\nwr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.220282,
+"timings": {
+"physical_planner > create_plan": 0.000325,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000382,
+"optimizer > in_clause": 0.000008,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000126,
+"optimizer > expression_rewriter": 0.000050,
+"optimizer": 0.000326,
+"planner > logical_planner": 0.000029,
+"planner > binder": 0.000157,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000133,
+"planner": 0.000197},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "item_id\nsr_item_qty\nCAST[DOUBLE](sr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\ncr_item_qty\nCAST[DOUBLE](cr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nwr_item_qty\nCAST[DOUBLE](wr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nCAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "INNER\nitem_id=item_id\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "item_id\nsr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2763,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":287867,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":287867,
+"extra_info": "INNER\nsr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":96,
+"extra_info": "INNER\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "item_id\ncr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1296,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":144067,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":144067,
+"extra_info": "INNER\ncr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "item_id\nwr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":722,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":71654,
+"extra_info": "INNER\nd_date_sk=wr_returned_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "INNER\nwr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.220604,
+"timings": {
+"physical_planner > create_plan": 0.000321,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000356,
+"optimizer > in_clause": 0.000008,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000128,
+"optimizer > expression_rewriter": 0.000048,
+"optimizer": 0.000352,
+"planner > logical_planner": 0.000030,
+"planner > binder": 0.000157,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000160,
+"planner": 0.000198},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "item_id\nsr_item_qty\nCAST[DOUBLE](sr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\ncr_item_qty\nCAST[DOUBLE](cr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nwr_item_qty\nCAST[DOUBLE](wr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nCAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "INNER\nitem_id=item_id\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "item_id\nsr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2763,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":287867,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":287867,
+"extra_info": "INNER\nsr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":96,
+"extra_info": "INNER\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "item_id\ncr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1296,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":144067,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":144067,
+"extra_info": "INNER\ncr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "item_id\nwr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":722,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":71654,
+"extra_info": "INNER\nd_date_sk=wr_returned_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "INNER\nwr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.220419,
+"timings": {
+"physical_planner > create_plan": 0.000333,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000367,
+"optimizer > in_clause": 0.000007,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000127,
+"optimizer > expression_rewriter": 0.000050,
+"optimizer": 0.000326,
+"planner > logical_planner": 0.000030,
+"planner > binder": 0.000156,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000133,
+"planner": 0.000196},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "item_id\nsr_item_qty\nCAST[DOUBLE](sr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\ncr_item_qty\nCAST[DOUBLE](cr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nwr_item_qty\nCAST[DOUBLE](wr_item_qty) * 1.000000 / CAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000 * 100.000000\nCAST[DOUBLE](sr_item_qty + cr_item_qty + wr_item_qty) / 3.000000\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":26,
+"extra_info": "INNER\nitem_id=item_id\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "item_id\nsr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":2379,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":2763,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":287867,
+"extra_info": "INNER\nsr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":287867,
+"extra_info": "INNER\nsr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":96,
+"extra_info": "INNER\nitem_id=item_id\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "item_id\ncr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1209,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1296,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":144067,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":144067,
+"extra_info": "INNER\ncr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "item_id\nwr_item_qty\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":694,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":722,
+"extra_info": "SEMI\nd_date=#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":71654,
+"extra_info": "INNER\nd_date_sk=wr_returned_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "INNER\nwr_item_sk=i_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":18000,
+"extra_info": "item",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "d_date\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":21,
+"extra_info": "SEMI\nd_week_seq=#0\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "d_week_seq\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3,
+"extra_info": "IN(CAST[VARCHAR](d_date), 2000-06-30, 2000-09-27, 2000-11-17)\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

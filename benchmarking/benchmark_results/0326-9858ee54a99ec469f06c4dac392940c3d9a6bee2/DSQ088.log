@@ -1,0 +1,590 @@
+{ "result": 5.371983,
+"timings": {
+"physical_planner > create_plan": 0.000165,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000187,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000051,
+"optimizer > expression_rewriter": 0.000022,
+"optimizer": 0.003604,
+"planner > logical_planner": 0.000018,
+"planner > binder": 0.000065,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.003518,
+"planner": 0.000087},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "customer_id\nconcat(concat(CASE WHEN (IS_NOT_NULL(c_last_name)) THEN (c_last_name) ELSE (), , ), CASE WHEN (IS_NOT_NULL(c_first_name)) THEN (c_first_name) ELSE ())\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":5.26,
+"cardinality":123,
+"extra_info": "INNER\nsr_cdemo_sk=c_current_cdemo_sk\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_lower_bound>=38128\nib_upper_bound<=88128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.431476,
+"timings": {
+"physical_planner > create_plan": 0.000186,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000210,
+"optimizer > in_clause": 0.000005,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000050,
+"optimizer > expression_rewriter": 0.000021,
+"optimizer": 0.004005,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000065,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.003921,
+"planner": 0.000080},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "customer_id\nconcat(concat(CASE WHEN (IS_NOT_NULL(c_last_name)) THEN (c_last_name) ELSE (), , ), CASE WHEN (IS_NOT_NULL(c_first_name)) THEN (c_first_name) ELSE ())\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":5.32,
+"cardinality":123,
+"extra_info": "INNER\nsr_cdemo_sk=c_current_cdemo_sk\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_lower_bound>=38128\nib_upper_bound<=88128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.377100,
+"timings": {
+"physical_planner > create_plan": 0.000165,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000186,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000068,
+"optimizer > expression_rewriter": 0.000021,
+"optimizer": 0.003660,
+"planner > logical_planner": 0.000010,
+"planner > binder": 0.000079,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.003559,
+"planner": 0.000093},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "customer_id\nconcat(concat(CASE WHEN (IS_NOT_NULL(c_last_name)) THEN (c_last_name) ELSE (), , ), CASE WHEN (IS_NOT_NULL(c_first_name)) THEN (c_first_name) ELSE ())\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":5.27,
+"cardinality":123,
+"extra_info": "INNER\nsr_cdemo_sk=c_current_cdemo_sk\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_lower_bound>=38128\nib_upper_bound<=88128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.401012,
+"timings": {
+"physical_planner > create_plan": 0.000131,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000146,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000049,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.002422,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000065,
+"physical_planner > column_binding": 0.000006,
+"optimizer > join_order": 0.002328,
+"planner": 0.000079},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "customer_id\nconcat(concat(CASE WHEN (IS_NOT_NULL(c_last_name)) THEN (c_last_name) ELSE (), , ), CASE WHEN (IS_NOT_NULL(c_first_name)) THEN (c_first_name) ELSE ())\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":5.29,
+"cardinality":123,
+"extra_info": "INNER\nsr_cdemo_sk=c_current_cdemo_sk\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_lower_bound>=38128\nib_upper_bound<=88128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 5.065906,
+"timings": {
+"physical_planner > create_plan": 0.000159,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000178,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000065,
+"optimizer > expression_rewriter": 0.000021,
+"optimizer": 0.002840,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000065,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.002742,
+"planner": 0.000078},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "customer_id\nconcat(concat(CASE WHEN (IS_NOT_NULL(c_last_name)) THEN (c_last_name) ELSE (), , ), CASE WHEN (IS_NOT_NULL(c_first_name)) THEN (c_first_name) ELSE ())\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":18,
+"extra_info": "INNER\nc_current_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":4.96,
+"cardinality":123,
+"extra_info": "INNER\nsr_cdemo_sk=c_current_cdemo_sk\ncd_demo_sk=c_current_cdemo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.09,
+"cardinality":287867,
+"extra_info": "INNER\ncd_demo_sk=sr_cdemo_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":1920800,
+"extra_info": "customer_demographics",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":962,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":477,
+"extra_info": "ca_city=Edgewood\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1440,
+"extra_info": "INNER\nhd_income_band_sk=ib_income_band_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":4,
+"extra_info": "ib_lower_bound>=38128\nib_upper_bound<=88128\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":20,
+"extra_info": "income_band",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
