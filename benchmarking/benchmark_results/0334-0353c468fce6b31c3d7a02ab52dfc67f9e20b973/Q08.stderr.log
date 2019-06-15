@@ -1,0 +1,18 @@
+---------
+|| Q08 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 2 ]: 
+Chunk - [2 Columns]
+- BIGINT: 2 = [ 1995, 1996]
+- DOUBLE: 2 = [ 0.034436, 0.041486]
+
+Expected answer [could not parse]:
+o_year  |mkt_share    
+  1995|0.03
+  1996|0.04
+
+

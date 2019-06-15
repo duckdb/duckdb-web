@@ -1,0 +1,114 @@
+{ "result": 0.438534,
+"timings": {
+"physical_planner > create_plan": 0.000056,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000069,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000054,
+"optimizer > expression_rewriter": 0.000047,
+"optimizer": 0.000151,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000055,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000039,
+"planner": 0.000067},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":10,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":1024,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":11620,
+"extra_info": "l_orderkey\nrevenue\no_orderdate\no_shippriority\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.03,
+"cardinality":11620,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":30519,
+"extra_info": "INNER\no_custkey=c_custkey\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.25,
+"cardinality":151331,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.02,
+"cardinality":3241776,
+"extra_info": "l_shipdate>728732\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.03,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.01,
+"cardinality":727305,
+"extra_info": "o_orderdate<728732\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":30142,
+"extra_info": "c_mktsegment=BUILDING\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":150000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 10 ]: 
+Chunk - [4 Columns]
+- INTEGER: 10 = [ 2456423, 3459808, 492164, 1188320, 2435712, 4878020, 5521732, 2628192, 993600, 2300070]
+- DOUBLE: 10 = [ 406181.011100, 405838.698900, 390324.061000, 384537.935900, 378673.055800, 378376.795200, 375153.921500, 373133.309400, 371407.459500, 367371.145200]
+- INTEGER: 10 = [ 728722, 728721, 728708, 728726, 728715, 728729, 728730, 728711, 728722, 728730]
+- INTEGER: 10 = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Expected answer [could not parse]:
+l_orderkey  |revenue     |o_orderdat|o_shippriority 
+  2456423|406181.01|1995-03-05|   0
+  3459808|405838.70|1995-03-04|   0
+  492164|390324.06|1995-02-19|   0
+  1188320|384537.94|1995-03-09|   0
+  2435712|378673.06|1995-02-26|   0
+  4878020|378376.80|1995-03-12|   0
+  5521732|375153.92|1995-03-13|   0
+  2628192|373133.31|1995-02-22|   0
+  993600|371407.46|1995-03-05|   0
+  2300070|367371.15|1995-03-13|   0
+
+

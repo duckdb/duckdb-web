@@ -1,0 +1,205 @@
+{ "result": 0.000167,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000007,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000005,
+"optimizer > filter_pushdown": 0.000013,
+"optimizer > expression_rewriter": 0.000010,
+"optimizer": 0.000036,
+"planner > logical_planner": 0.000003,
+"planner > binder": 0.000013,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000002,
+"planner": 0.000018},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "i<=15000200\ni>=15000100\n",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.000150,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000007,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000004,
+"optimizer > filter_pushdown": 0.000013,
+"optimizer > expression_rewriter": 0.000010,
+"optimizer": 0.000035,
+"planner > logical_planner": 0.000003,
+"planner > binder": 0.000013,
+"physical_planner > column_binding": 0.000002,
+"optimizer > join_order": 0.000001,
+"planner": 0.000018},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "i<=15000200\ni>=15000100\n",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.000231,
+"timings": {
+"physical_planner > create_plan": 0.000004,
+"physical_planner > resolve_types": 0.000001,
+"physical_planner": 0.000010,
+"optimizer > in_clause": 0.000002,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000006,
+"optimizer > filter_pushdown": 0.000019,
+"optimizer > expression_rewriter": 0.000015,
+"optimizer": 0.000052,
+"planner > logical_planner": 0.000004,
+"planner > binder": 0.000019,
+"physical_planner > column_binding": 0.000003,
+"optimizer > join_order": 0.000002,
+"planner": 0.000026},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "i<=15000200\ni>=15000100\n",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.000391,
+"timings": {
+"physical_planner > create_plan": 0.000007,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000017,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000011,
+"optimizer > filter_pushdown": 0.000033,
+"optimizer > expression_rewriter": 0.000025,
+"optimizer": 0.000088,
+"planner > logical_planner": 0.000022,
+"planner > binder": 0.000038,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000004,
+"planner": 0.000064},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "i<=15000200\ni>=15000100\n",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.000434,
+"timings": {
+"physical_planner > create_plan": 0.000008,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000022,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000013,
+"optimizer > filter_pushdown": 0.000040,
+"optimizer > expression_rewriter": 0.000032,
+"optimizer": 0.000108,
+"planner > logical_planner": 0.000009,
+"planner > binder": 0.000039,
+"physical_planner > column_binding": 0.000007,
+"optimizer > join_order": 0.000005,
+"planner": 0.000053},
+"tree": { "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "SUM(integers.j)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "i<=15000200\ni>=15000100\n",
+"children": [{ "name": "INDEX_SCAN",
+"timing":0.00,
+"cardinality":101,
+"extra_info": "integers[15000100]",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}

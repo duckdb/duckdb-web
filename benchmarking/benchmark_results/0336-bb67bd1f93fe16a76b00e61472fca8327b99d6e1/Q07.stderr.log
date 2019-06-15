@@ -1,0 +1,22 @@
+---------
+|| Q07 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 4 ]: 
+Chunk - [4 Columns]
+- VARCHAR: 4 = [ FRANCE, FRANCE, GERMANY, GERMANY]
+- VARCHAR: 4 = [ GERMANY, GERMANY, FRANCE, FRANCE]
+- BIGINT: 4 = [ 1995, 1996, 1995, 1996]
+- DOUBLE: 4 = [ 54639732.733600, 54633083.307600, 52531746.669700, 52520549.022400]
+
+Expected answer [could not parse]:
+supp_nation  |cust_nation  |l_year  |revenue     
+FRANCE   |GERMANY   |  1995|54639732.73
+FRANCE   |GERMANY   |  1996|54633083.31
+GERMANY   |FRANCE   |  1995|52531746.67
+GERMANY   |FRANCE   |  1996|52520549.02
+
+

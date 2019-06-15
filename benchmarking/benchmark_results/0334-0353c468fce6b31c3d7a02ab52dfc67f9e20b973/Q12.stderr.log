@@ -1,0 +1,19 @@
+---------
+|| Q12 ||
+---------
+Cold run...DONE
+1/5...INCORRECT
+INCORRECT RESULT: Incorrect answer for query!
+Provided answer:
+ChunkCollection [ 2 ]: 
+Chunk - [3 Columns]
+- VARCHAR: 2 = [ MAIL, SHIP]
+- BIGINT: 2 = [ 6202, 6200]
+- BIGINT: 2 = [ 9324, 9262]
+
+Expected answer [could not parse]:
+l_shipmode|high_line_count |low_line_count 
+MAIL |   6202|   9324
+SHIP |   6200|   9262
+
+
