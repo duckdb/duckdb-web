@@ -1,0 +1,2 @@
+SimpleAggregate - [micro]
+Runs the following query: "SELECT SUM(i) FROM integers" on 10000000 rows
