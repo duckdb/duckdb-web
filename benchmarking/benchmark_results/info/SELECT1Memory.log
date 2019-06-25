@@ -1,0 +1,2 @@
+SELECT1Memory - [storage]
+Run the query "SELECT 1" 50K times in in-memory mode
