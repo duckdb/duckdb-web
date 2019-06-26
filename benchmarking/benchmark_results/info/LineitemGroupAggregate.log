@@ -1,0 +1,2 @@
+LineitemGroupAggregate - [aggregate]
+Execute the query "SELECT l_quantity, SUM(l_quantity) FROM lineitem GROUP BY l_quantity" on SF1

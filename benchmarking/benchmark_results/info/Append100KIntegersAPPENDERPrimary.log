@@ -1,2 +1,2 @@
-Append100KIntegersAPPENDERPrimary - [csv]
+Append100KIntegersAPPENDERPrimary - [append]
 Append 100K 4-byte integers to a table using an Appender

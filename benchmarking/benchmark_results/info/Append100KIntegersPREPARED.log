@@ -1,2 +1,2 @@
-Append100KIntegersPREPARED - [csv]
+Append100KIntegersPREPARED - [append]
 Append 100K 4-byte integers to a table using a series of prepared INSERT INTO statements

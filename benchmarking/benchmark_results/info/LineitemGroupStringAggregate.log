@@ -1,0 +1,2 @@
+LineitemGroupStringAggregate - [aggregate]
+Execute the query "SELECT SUM(l_quantity) FROM lineitem GROUP BY l_returnflag" on SF1

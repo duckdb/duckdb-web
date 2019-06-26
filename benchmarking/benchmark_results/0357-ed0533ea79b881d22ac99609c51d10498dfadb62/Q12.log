@@ -1,0 +1,300 @@
+{ "result": 0.505448,
+"timings": {
+"physical_planner > create_plan": 0.000032,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000043,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000038,
+"optimizer > expression_rewriter": 0.000036,
+"optimizer": 0.000106,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000045,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000022,
+"planner": 0.000055},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "l_shipmode\nhigh_line_count\nlow_line_count\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":30988,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "l_shipdate<l_commitdate\nl_commitdate<l_receiptdate\nIN(l_shipmode, MAIL, SHIP)\nl_receiptdate<728659\nl_receiptdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.514960,
+"timings": {
+"physical_planner > create_plan": 0.000032,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000043,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000039,
+"optimizer > expression_rewriter": 0.000039,
+"optimizer": 0.000111,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000044,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000023,
+"planner": 0.000054},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "l_shipmode\nhigh_line_count\nlow_line_count\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.24,
+"cardinality":30988,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "l_shipdate<l_commitdate\nl_commitdate<l_receiptdate\nIN(l_shipmode, MAIL, SHIP)\nl_receiptdate<728659\nl_receiptdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.527044,
+"timings": {
+"physical_planner > create_plan": 0.000031,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000043,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000039,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.000105,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000044,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000022,
+"planner": 0.000056},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "l_shipmode\nhigh_line_count\nlow_line_count\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":30988,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "l_shipdate<l_commitdate\nl_commitdate<l_receiptdate\nIN(l_shipmode, MAIL, SHIP)\nl_receiptdate<728659\nl_receiptdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.07,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.513590,
+"timings": {
+"physical_planner > create_plan": 0.000033,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000044,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000000,
+"optimizer > filter_pushdown": 0.000040,
+"optimizer > expression_rewriter": 0.000035,
+"optimizer": 0.000114,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000044,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000030,
+"planner": 0.000055},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "l_shipmode\nhigh_line_count\nlow_line_count\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":30988,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "l_shipdate<l_commitdate\nl_commitdate<l_receiptdate\nIN(l_shipmode, MAIL, SHIP)\nl_receiptdate<728659\nl_receiptdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.06,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.503005,
+"timings": {
+"physical_planner > create_plan": 0.000035,
+"physical_planner > resolve_types": 0.000003,
+"physical_planner": 0.000049,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000047,
+"optimizer > expression_rewriter": 0.000042,
+"optimizer": 0.000126,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000060,
+"physical_planner > column_binding": 0.000006,
+"optimizer > join_order": 0.000026,
+"planner": 0.000072},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2,
+"extra_info": "l_shipmode\nhigh_line_count\nlow_line_count\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.04,
+"cardinality":2,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.23,
+"cardinality":30988,
+"extra_info": "INNER\nl_orderkey=o_orderkey\n",
+"children": [{ "name": "FILTER",
+"timing":0.16,
+"cardinality":30988,
+"extra_info": "l_shipdate<l_commitdate\nl_commitdate<l_receiptdate\nIN(l_shipmode, MAIL, SHIP)\nl_receiptdate<728659\nl_receiptdate>=728294\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.05,
+"cardinality":6001215,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1500000,
+"extra_info": "orders",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

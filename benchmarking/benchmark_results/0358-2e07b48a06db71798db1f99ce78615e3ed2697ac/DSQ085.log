@@ -1,0 +1,1220 @@
+{ "result": 0.060578,
+"timings": {
+"physical_planner > create_plan": 0.000246,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000276,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000278,
+"optimizer > expression_rewriter": 0.000030,
+"optimizer": 0.000415,
+"planner > logical_planner": 0.000035,
+"planner > binder": 0.000141,
+"physical_planner > column_binding": 0.000014,
+"optimizer > join_order": 0.000095,
+"planner": 0.000183},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "c_customer_id\nc_salutation\nc_first_name\nc_last_name\nca_street_number\nca_street_name\nca_street_type\nca_suite_number\nca_city\nca_county\nca_state\nca_zip\nca_country\nca_gmt_offset\nca_location_type\nctr_total_return\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1496,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5111,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2521,
+"extra_info": "ca_state=GA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28535,
+"extra_info": "INNER\nctr_state=ctr_state\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.063684,
+"timings": {
+"physical_planner > create_plan": 0.000285,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000318,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000278,
+"optimizer > expression_rewriter": 0.000030,
+"optimizer": 0.000440,
+"planner > logical_planner": 0.000036,
+"planner > binder": 0.000123,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000120,
+"planner": 0.000165},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "c_customer_id\nc_salutation\nc_first_name\nc_last_name\nca_street_number\nca_street_name\nca_street_type\nca_suite_number\nca_city\nca_county\nca_state\nca_zip\nca_country\nca_gmt_offset\nca_location_type\nctr_total_return\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1496,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":5111,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2521,
+"extra_info": "ca_state=GA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28535,
+"extra_info": "INNER\nctr_state=ctr_state\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.060457,
+"timings": {
+"physical_planner > create_plan": 0.000235,
+"physical_planner > resolve_types": 0.000007,
+"physical_planner": 0.000266,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000310,
+"optimizer > expression_rewriter": 0.000030,
+"optimizer": 0.000449,
+"planner > logical_planner": 0.000035,
+"planner > binder": 0.000142,
+"physical_planner > column_binding": 0.000015,
+"optimizer > join_order": 0.000097,
+"planner": 0.000183},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "c_customer_id\nc_salutation\nc_first_name\nc_last_name\nca_street_number\nca_street_name\nca_street_type\nca_suite_number\nca_city\nca_county\nca_state\nca_zip\nca_country\nca_gmt_offset\nca_location_type\nctr_total_return\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1496,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":5111,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2521,
+"extra_info": "ca_state=GA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28535,
+"extra_info": "INNER\nctr_state=ctr_state\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.063429,
+"timings": {
+"physical_planner > create_plan": 0.000266,
+"physical_planner > resolve_types": 0.000009,
+"physical_planner": 0.000306,
+"optimizer > in_clause": 0.000005,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000391,
+"optimizer > expression_rewriter": 0.000041,
+"optimizer": 0.000594,
+"planner > logical_planner": 0.000057,
+"planner > binder": 0.000139,
+"physical_planner > column_binding": 0.000020,
+"optimizer > join_order": 0.000131,
+"planner": 0.000202},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "c_customer_id\nc_salutation\nc_first_name\nc_last_name\nca_street_number\nca_street_name\nca_street_type\nca_suite_number\nca_city\nca_county\nca_state\nca_zip\nca_country\nca_gmt_offset\nca_location_type\nctr_total_return\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1496,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":5111,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2521,
+"extra_info": "ca_state=GA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28535,
+"extra_info": "INNER\nctr_state=ctr_state\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.062108,
+"timings": {
+"physical_planner > create_plan": 0.000260,
+"physical_planner > resolve_types": 0.000008,
+"physical_planner": 0.000297,
+"optimizer > in_clause": 0.000005,
+"optimizer > regex_range": 0.000002,
+"optimizer > index_scan": 0.000002,
+"optimizer > filter_pushdown": 0.000357,
+"optimizer > expression_rewriter": 0.000050,
+"optimizer": 0.000539,
+"planner > logical_planner": 0.000035,
+"planner > binder": 0.000144,
+"physical_planner > column_binding": 0.000018,
+"optimizer > join_order": 0.000118,
+"planner": 0.000186},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "c_customer_id\nc_salutation\nc_first_name\nc_last_name\nca_street_number\nca_street_name\nca_street_type\nca_suite_number\nca_city\nca_county\nca_state\nca_zip\nca_country\nca_gmt_offset\nca_location_type\nctr_total_return\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":395,
+"extra_info": "ctr_total_return>SUBQUERY\n",
+"children": [{ "name": "DELIM_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":1496,
+"extra_info": "INNER\nctr_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":5111,
+"extra_info": "INNER\nc_current_addr_sk=ca_address_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":2521,
+"extra_info": "ca_state=GA\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "#1\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+]
+}
+,
+{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "SINGLE\nctr_state=ctr_state\n",
+"children": [{ "name": "CHUNK_SCAN",
+"timing":0.00,
+"cardinality":1496,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "SUM(ctr2.ctr_total_return) / CAST[DOUBLE](CASE WHEN (IS_NULL(COUNT(ctr2.ctr_total_return))) THEN (0) ELSE (COUNT(ctr2.ctr_total_return))) * 1.200000\n#0\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "LEFT\n#0=#0\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28535,
+"extra_info": "INNER\nctr_state=ctr_state\n",
+"children": [{ "name": "DELIM_SCAN",
+"timing":0.00,
+"cardinality":49,
+"extra_info": "",
+"children": []
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":28573,
+"extra_info": "ctr_customer_sk\nctr_state\nctr_total_return\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":28573,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returning_addr_sk=ca_address_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":28792,
+"extra_info": "INNER\ncr_returned_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":366,
+"extra_info": "d_year=2000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":50000,
+"extra_info": "customer_address",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}

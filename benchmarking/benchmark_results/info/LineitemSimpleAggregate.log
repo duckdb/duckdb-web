@@ -1,0 +1,2 @@
+LineitemSimpleAggregate - [aggregate]
+Execute the query "SELECT SUM(l_quantity) FROM lineitem" on SF1

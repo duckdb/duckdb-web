@@ -1,2 +1,2 @@
-SimpleGroupByAggregate - [micro]
+SimpleGroupByAggregate - [aggregate]
 Runs the following query: "SELECT i, SUM(j) FROM integers GROUP BY i" on 10000000 rows with 5 unique groups
