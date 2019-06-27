@@ -1,0 +1,4655 @@
+{ "result": 0.733134,
+"timings": {
+"physical_planner > create_plan": 0.000647,
+"physical_planner > resolve_types": 0.000038,
+"physical_planner": 0.000812,
+"optimizer > in_clause": 0.000025,
+"optimizer > regex_range": 0.000007,
+"optimizer > index_scan": 0.000008,
+"optimizer > filter_pushdown": 0.001127,
+"optimizer > expression_rewriter": 0.000264,
+"optimizer": 0.001800,
+"planner > logical_planner": 0.000097,
+"planner > binder": 0.000739,
+"physical_planner > column_binding": 0.000075,
+"optimizer > join_order": 0.000364,
+"planner": 0.000893},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":701,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "channel\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "NULL\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "SIMPLE_AGGREGATE",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.727678,
+"timings": {
+"physical_planner > create_plan": 0.000572,
+"physical_planner > resolve_types": 0.000028,
+"physical_planner": 0.000701,
+"optimizer > in_clause": 0.000034,
+"optimizer > regex_range": 0.000005,
+"optimizer > index_scan": 0.000007,
+"optimizer > filter_pushdown": 0.000893,
+"optimizer > expression_rewriter": 0.000226,
+"optimizer": 0.001452,
+"planner > logical_planner": 0.000080,
+"planner > binder": 0.000638,
+"physical_planner > column_binding": 0.000059,
+"optimizer > join_order": 0.000282,
+"planner": 0.000766},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":701,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "channel\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "NULL\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "SIMPLE_AGGREGATE",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.734897,
+"timings": {
+"physical_planner > create_plan": 0.000632,
+"physical_planner > resolve_types": 0.000038,
+"physical_planner": 0.000792,
+"optimizer > in_clause": 0.000024,
+"optimizer > regex_range": 0.000006,
+"optimizer > index_scan": 0.000008,
+"optimizer > filter_pushdown": 0.001107,
+"optimizer > expression_rewriter": 0.000254,
+"optimizer": 0.001750,
+"planner > logical_planner": 0.000102,
+"planner > binder": 0.000761,
+"physical_planner > column_binding": 0.000073,
+"optimizer > join_order": 0.000346,
+"planner": 0.000921},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":701,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "channel\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "NULL\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "SIMPLE_AGGREGATE",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.727721,
+"timings": {
+"physical_planner > create_plan": 0.000573,
+"physical_planner > resolve_types": 0.000029,
+"physical_planner": 0.000700,
+"optimizer > in_clause": 0.000019,
+"optimizer > regex_range": 0.000005,
+"optimizer > index_scan": 0.000006,
+"optimizer > filter_pushdown": 0.000868,
+"optimizer > expression_rewriter": 0.000219,
+"optimizer": 0.001409,
+"planner > logical_planner": 0.000081,
+"planner > binder": 0.000643,
+"physical_planner > column_binding": 0.000058,
+"optimizer > join_order": 0.000285,
+"planner": 0.000773},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":701,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "channel\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "NULL\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "SIMPLE_AGGREGATE",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.733954,
+"timings": {
+"physical_planner > create_plan": 0.000709,
+"physical_planner > resolve_types": 0.000045,
+"physical_planner": 0.000900,
+"optimizer > in_clause": 0.000028,
+"optimizer > regex_range": 0.000008,
+"optimizer > index_scan": 0.000009,
+"optimizer > filter_pushdown": 0.001340,
+"optimizer > expression_rewriter": 0.000305,
+"optimizer": 0.002121,
+"planner > logical_planner": 0.000112,
+"planner > binder": 0.000956,
+"physical_planner > column_binding": 0.000088,
+"optimizer > join_order": 0.000423,
+"planner": 0.001134},
+"tree": { "name": "LIMIT",
+"timing":0.00,
+"cardinality":100,
+"extra_info": "",
+"children": [{ "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "DISTINCT",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":702,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":701,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "channel\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":3,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "NULL\nNULL\nSUM(results.sales)\nSUM(results.returns_)\nSUM(results.profit)\n",
+"children": [{ "name": "SIMPLE_AGGREGATE",
+"timing":0.00,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "channel\nid\nsales\nreturns_\nprofit\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":698,
+"extra_info": "",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":683,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "store channel\nconcat(store, s_store_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":6,
+"extra_info": "s_store_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":6,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.01,
+"cardinality":32884,
+"extra_info": "INNER\nstore_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":32884,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":3168271,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":2880404,
+"extra_info": "store_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":287867,
+"extra_info": "store_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "catalog channel\nconcat(catalog_page, cp_catalog_page_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "cp_catalog_page_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":677,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":16080,
+"extra_info": "INNER\npage_sk=cp_catalog_page_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":16080,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":1585615,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":1441548,
+"extra_info": "page_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.01,
+"cardinality":1441548,
+"extra_info": "catalog_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "page_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":144067,
+"extra_info": "catalog_returns",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":11718,
+"extra_info": "catalog_page",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web channel\nconcat(web_site, web_site_id)\nsales\nreturns_\nprofit - profit_loss\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "web_site_id\nsales\nprofit\nreturns_\nprofit_loss\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.00,
+"cardinality":8427,
+"extra_info": "INNER\nwsr_web_site_sk=web_site_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":8427,
+"extra_info": "INNER\ndate_sk=d_date_sk\n",
+"children": [{ "name": "UNION",
+"timing":0.00,
+"cardinality":791038,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "wsr_web_site_sk\ndate_sk\nsales_price\nprofit\n0.000000\n0.000000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+,
+{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "wsr_web_site_sk\ndate_sk\n0.000000\n0.000000\nreturn_amt\nnet_loss\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.08,
+"cardinality":71654,
+"extra_info": "LEFT\nwr_order_number=ws_order_number\nwr_item_sk=ws_item_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":71654,
+"extra_info": "web_returns",
+"children": []
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":719384,
+"extra_info": "web_sales",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":15,
+"extra_info": "d_date<=730734\nd_date>=730720\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":30,
+"extra_info": "web_site",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+}
