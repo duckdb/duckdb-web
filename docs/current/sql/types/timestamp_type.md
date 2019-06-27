@@ -9,9 +9,9 @@ A timestamp specifies a combination of `DATE` (year, month, day) and a `TIME` (h
 
 ```sql
 -- 11:30 AM at 20 September, 1992
-SELECT TIMESTAMP '1992-20-09 11:30:00';
+SELECT TIMESTAMP '1992-09-20 11:30:00';
 -- 2:30 PM at 20 September, 1992
-SELECT TIMESTAMP '1992-20-09 14:30:00';
+SELECT TIMESTAMP '1992-09-20 14:30:00';
 ```
 
 ## Functions
