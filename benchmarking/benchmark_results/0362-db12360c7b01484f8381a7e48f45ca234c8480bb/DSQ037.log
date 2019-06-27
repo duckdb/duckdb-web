@@ -1,0 +1,615 @@
+{ "result": 0.153583,
+"timings": {
+"physical_planner > create_plan": 0.000085,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000103,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000108,
+"optimizer > expression_rewriter": 0.000060,
+"optimizer": 0.000301,
+"planner > logical_planner": 0.000014,
+"planner > binder": 0.000070,
+"physical_planner > column_binding": 0.000009,
+"optimizer > join_order": 0.000122,
+"planner": 0.000090},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "c_last_name\nc_first_name\nc_salutation\nc_preferred_cust_flag\nss_ticket_number\ncnt\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":832,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "ss_ticket_number\nss_customer_sk\ncnt\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "cnt<=20\ncnt>=15\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":3660,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":44040,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":44040,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":393980,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":252,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\nd_dom>=1 AND d_dom<=3 OR d_dom>=25 AND d_dom<=28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "hd_buy_potential=>10000 OR hd_buy_potential=Unknown\nhd_vehicle_count>0\nCAST[DOUBLE](CASE WHEN (hd_vehicle_count>0) THEN (hd_dep_count / hd_vehicle_count) ELSE (NULL))>1.200000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_county=Williamson County\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.153044,
+"timings": {
+"physical_planner > create_plan": 0.000098,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000121,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000119,
+"optimizer > expression_rewriter": 0.000058,
+"optimizer": 0.000348,
+"planner > logical_planner": 0.000014,
+"planner > binder": 0.000070,
+"physical_planner > column_binding": 0.000010,
+"optimizer > join_order": 0.000159,
+"planner": 0.000090},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "c_last_name\nc_first_name\nc_salutation\nc_preferred_cust_flag\nss_ticket_number\ncnt\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":832,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "ss_ticket_number\nss_customer_sk\ncnt\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "cnt<=20\ncnt>=15\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":3660,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":44040,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":44040,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":393980,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":252,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\nd_dom>=1 AND d_dom<=3 OR d_dom>=25 AND d_dom<=28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "hd_buy_potential=>10000 OR hd_buy_potential=Unknown\nhd_vehicle_count>0\nCAST[DOUBLE](CASE WHEN (hd_vehicle_count>0) THEN (hd_dep_count / hd_vehicle_count) ELSE (NULL))>1.200000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_county=Williamson County\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.156509,
+"timings": {
+"physical_planner > create_plan": 0.000110,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000128,
+"optimizer > in_clause": 0.000003,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000091,
+"optimizer > expression_rewriter": 0.000057,
+"optimizer": 0.000284,
+"planner > logical_planner": 0.000014,
+"planner > binder": 0.000069,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000125,
+"planner": 0.000089},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "c_last_name\nc_first_name\nc_salutation\nc_preferred_cust_flag\nss_ticket_number\ncnt\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":832,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "ss_ticket_number\nss_customer_sk\ncnt\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "cnt<=20\ncnt>=15\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":3660,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":44040,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":44040,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":393980,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":252,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\nd_dom>=1 AND d_dom<=3 OR d_dom>=25 AND d_dom<=28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "hd_buy_potential=>10000 OR hd_buy_potential=Unknown\nhd_vehicle_count>0\nCAST[DOUBLE](CASE WHEN (hd_vehicle_count>0) THEN (hd_dep_count / hd_vehicle_count) ELSE (NULL))>1.200000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_county=Williamson County\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.154790,
+"timings": {
+"physical_planner > create_plan": 0.000101,
+"physical_planner > resolve_types": 0.000005,
+"physical_planner": 0.000123,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000123,
+"optimizer > expression_rewriter": 0.000098,
+"optimizer": 0.000392,
+"planner > logical_planner": 0.000014,
+"planner > binder": 0.000072,
+"physical_planner > column_binding": 0.000011,
+"optimizer > join_order": 0.000159,
+"planner": 0.000092},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "c_last_name\nc_first_name\nc_salutation\nc_preferred_cust_flag\nss_ticket_number\ncnt\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":832,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "ss_ticket_number\nss_customer_sk\ncnt\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "cnt<=20\ncnt>=15\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":3660,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":44040,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":44040,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":393980,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":252,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\nd_dom>=1 AND d_dom<=3 OR d_dom>=25 AND d_dom<=28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "hd_buy_potential=>10000 OR hd_buy_potential=Unknown\nhd_vehicle_count>0\nCAST[DOUBLE](CASE WHEN (hd_vehicle_count>0) THEN (hd_dep_count / hd_vehicle_count) ELSE (NULL))>1.200000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_county=Williamson County\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
+{ "result": 0.157190,
+"timings": {
+"physical_planner > create_plan": 0.000087,
+"physical_planner > resolve_types": 0.000004,
+"physical_planner": 0.000105,
+"optimizer > in_clause": 0.000004,
+"optimizer > regex_range": 0.000001,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000107,
+"optimizer > expression_rewriter": 0.000061,
+"optimizer": 0.000302,
+"planner > logical_planner": 0.000015,
+"planner > binder": 0.000088,
+"physical_planner > column_binding": 0.000008,
+"optimizer > join_order": 0.000123,
+"planner": 0.000109},
+"tree": { "name": "ORDER_BY",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "c_last_name\nc_first_name\nc_salutation\nc_preferred_cust_flag\nss_ticket_number\ncnt\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":832,
+"extra_info": "INNER\nss_customer_sk=c_customer_sk\n",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "ss_ticket_number\nss_customer_sk\ncnt\n",
+"children": [{ "name": "FILTER",
+"timing":0.00,
+"cardinality":832,
+"extra_info": "cnt<=20\ncnt>=15\n",
+"children": [{ "name": "HASH_GROUP_BY",
+"timing":0.01,
+"cardinality":3660,
+"extra_info": "",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.02,
+"cardinality":44040,
+"extra_info": "INNER\nss_store_sk=s_store_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.03,
+"cardinality":44040,
+"extra_info": "INNER\nss_hdemo_sk=hd_demo_sk\n",
+"children": [{ "name": "HASH_JOIN",
+"timing":0.05,
+"cardinality":393980,
+"extra_info": "INNER\nss_sold_date_sk=d_date_sk\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":2880404,
+"extra_info": "store_sales",
+"children": []
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":252,
+"extra_info": "IN(d_year, 1999, 2000, 2001)\nd_dom>=1 AND d_dom<=3 OR d_dom>=25 AND d_dom<=28\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":73049,
+"extra_info": "date_dim",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":800,
+"extra_info": "hd_buy_potential=>10000 OR hd_buy_potential=Unknown\nhd_vehicle_count>0\nCAST[DOUBLE](CASE WHEN (hd_vehicle_count>0) THEN (hd_dep_count / hd_vehicle_count) ELSE (NULL))>1.200000\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":7200,
+"extra_info": "household_demographics",
+"children": []
+}
+]
+}
+]
+}
+,
+{ "name": "FILTER",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "s_county=Williamson County\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":12,
+"extra_info": "store",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+]
+}
+]
+}
+,
+{ "name": "SEQ_SCAN",
+"timing":0.00,
+"cardinality":100000,
+"extra_info": "customer",
+"children": []
+}
+]
+}
+]
+}
+]
+}
+}
