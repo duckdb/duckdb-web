@@ -1,0 +1,17 @@
+
+.header {
+	background-color:#2e2e2e;
+	color:white;
+};
+
+.title {
+	color:white;
+}
+
+.content {
+	color:black;
+}
+
+html, .content {
+	background-color:white;
+}
