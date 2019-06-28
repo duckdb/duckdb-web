@@ -1,0 +1,175 @@
+{ "result": 2.045039,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000012,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000000,
+"optimizer > filter_pushdown": 0.000002,
+"optimizer > expression_rewriter": 0.000004,
+"optimizer": 0.000017,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000035,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000003,
+"planner": 0.000045},
+"tree": { "name": "COPY_TO_FILE",
+"timing":2.02,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":600572,
+"extra_info": "l_orderkey\nl_partkey\nl_suppkey\nl_linenumber\nl_quantity\nl_extendedprice\nl_discount\nl_tax\nl_returnflag\nl_linestatus\nl_shipdate\nl_commitdate\nl_receiptdate\nl_shipinstruct\nl_shipmode\nl_comment\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":600572,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 1.999457,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000012,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000000,
+"optimizer > filter_pushdown": 0.000002,
+"optimizer > expression_rewriter": 0.000004,
+"optimizer": 0.000018,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000036,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000003,
+"planner": 0.000047},
+"tree": { "name": "COPY_TO_FILE",
+"timing":1.98,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":600572,
+"extra_info": "l_orderkey\nl_partkey\nl_suppkey\nl_linenumber\nl_quantity\nl_extendedprice\nl_discount\nl_tax\nl_returnflag\nl_linestatus\nl_shipdate\nl_commitdate\nl_receiptdate\nl_shipinstruct\nl_shipmode\nl_comment\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":600572,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 1.979093,
+"timings": {
+"physical_planner > create_plan": 0.000005,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000015,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000000,
+"optimizer > filter_pushdown": 0.000003,
+"optimizer > expression_rewriter": 0.000006,
+"optimizer": 0.000022,
+"planner > logical_planner": 0.000008,
+"planner > binder": 0.000063,
+"physical_planner > column_binding": 0.000006,
+"optimizer > join_order": 0.000004,
+"planner": 0.000077},
+"tree": { "name": "COPY_TO_FILE",
+"timing":1.96,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":600572,
+"extra_info": "l_orderkey\nl_partkey\nl_suppkey\nl_linenumber\nl_quantity\nl_extendedprice\nl_discount\nl_tax\nl_returnflag\nl_linestatus\nl_shipdate\nl_commitdate\nl_receiptdate\nl_shipinstruct\nl_shipmode\nl_comment\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":600572,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 3.471717,
+"timings": {
+"physical_planner > create_plan": 0.000018,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000026,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000000,
+"optimizer > filter_pushdown": 0.000002,
+"optimizer > expression_rewriter": 0.000004,
+"optimizer": 0.000018,
+"planner > logical_planner": 0.000007,
+"planner > binder": 0.000035,
+"physical_planner > column_binding": 0.000005,
+"optimizer > join_order": 0.000004,
+"planner": 0.000045},
+"tree": { "name": "COPY_TO_FILE",
+"timing":3.45,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":600572,
+"extra_info": "l_orderkey\nl_partkey\nl_suppkey\nl_linenumber\nl_quantity\nl_extendedprice\nl_discount\nl_tax\nl_returnflag\nl_linestatus\nl_shipdate\nl_commitdate\nl_receiptdate\nl_shipinstruct\nl_shipmode\nl_comment\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":600572,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+}
+{ "result": 1.981742,
+"timings": {
+"physical_planner > create_plan": 0.000003,
+"physical_planner > resolve_types": 0.000002,
+"physical_planner": 0.000011,
+"optimizer > in_clause": 0.000001,
+"optimizer > regex_range": 0.000000,
+"optimizer > index_scan": 0.000001,
+"optimizer > filter_pushdown": 0.000002,
+"optimizer > expression_rewriter": 0.000004,
+"optimizer": 0.000017,
+"planner > logical_planner": 0.000006,
+"planner > binder": 0.000054,
+"physical_planner > column_binding": 0.000004,
+"optimizer > join_order": 0.000003,
+"planner": 0.000065},
+"tree": { "name": "COPY_TO_FILE",
+"timing":1.96,
+"cardinality":1,
+"extra_info": "",
+"children": [{ "name": "PROJECTION",
+"timing":0.00,
+"cardinality":600572,
+"extra_info": "l_orderkey\nl_partkey\nl_suppkey\nl_linenumber\nl_quantity\nl_extendedprice\nl_discount\nl_tax\nl_returnflag\nl_linestatus\nl_shipdate\nl_commitdate\nl_receiptdate\nl_shipinstruct\nl_shipmode\nl_comment\n",
+"children": [{ "name": "SEQ_SCAN",
+"timing":0.02,
+"cardinality":600572,
+"extra_info": "lineitem",
+"children": []
+}
+]
+}
+]
+}
+}
