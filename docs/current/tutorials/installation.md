@@ -3,11 +3,24 @@ layout: default
 title: Installation
 selected: Documentation/Installation
 ---
-# Installation From Source
-The source code of DuckDB can be found [here](https://github.com/cwida/duckdb).
+# Python Installation
+DuckDB can be installed for Python using the following command:
 
-## Requirements
-DuckDB requires CMake to be installed and a C++11 compliant compiler. GCC 4.9 and newer, Clang 3.9 and newer and VisualStudio 2017 are tested on each revision.
+```bash
+pip install duckdb
+```
+
+DuckDB for Python requires `numpy` to be installed. After installation, DuckDB can be used as follows:
+
+```python
+import duckdb
+cursor = duckdb.connect(':memory:').cursor()
+print(cursor.execute('SELECT 42').fetchall())
+```
+
+# Installation From Source
+The source code of DuckDB can be found [here](https://github.com/cwida/duckdb). DuckDB requires CMake to be installed and a C++11 compliant compiler. GCC 4.9 and newer, Clang 3.9 and newer and VisualStudio 2017 are tested on each revision.
+
 ## Compiling
 Run ``make`` in the root directory to compile the sources. For development, use ``make debug`` to build a non-optimized debug version. You may run make unit and make allunit to verify that your version works properly after making changes.
 
