@@ -1,9 +1,9 @@
 category,name
-[tpch-sf1],TPC-H
 [aggregate],Aggregate
-[in],In
 [append],Append
 [csv],CSV
+[in],In
 [micro],Micro
-[tpcds-sf1],TPC-DS
 [storage],Storage
+[tpcds-sf1],TPC-DS
+[tpch-sf1],TPC-H
