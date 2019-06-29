@@ -1,3 +1,8 @@
+---
+layout: default
+title: Installation
+selected: Documentation/Installation
+---
 # Installation From Source
 The source code of DuckDB can be found [here](https://github.com/cwida/duckdb).
 

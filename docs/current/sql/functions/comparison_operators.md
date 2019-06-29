@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: Comparisons
+selected: Documentation/Functions/Comparisons
+expanded: Functions
+---
 ## Comparison Operators
 The table below shows the standard comparison operators. Whenever either of the input arguments is `NULL`, the output of the comparison is `NULL`.
 

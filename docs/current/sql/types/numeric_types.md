@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: Numeric Types
+selected: Documentation/Data Types/Numeric
+expanded: Data Types
+---
 ## Integer Types
 The types `tinyint`, `smallint`, `integer`, and `bigint` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 

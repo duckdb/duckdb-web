@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="{{ page.title }}: {{ page.subtitle }}">
+	<link rel="icon" href="/images/logo-128.png">
+	{% if page.title == "DuckDB" %}
+    <title>{{ page.title }}</title>
+	{% else %}
+    <title>DuckDB - {{ page.title }}</title>
+	{% endif %}
+</head>
+<body>
+<pre id="content">
+
+</pre>
+<script>
+function findGetParameter(parameterName) {
+	var result = null,
+	tmp = [];
+	var items = location.search.substr(1).split("&");
+	for (var index = 0; index < items.length; index++) {
+		tmp = items[index].split("=");
+		if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+	}
+	return result;
+}
+
+content = {% include {{ page.logfile }} %}
+parameter = findGetParameter("name")
+text = content[parameter]
+if (text === undefined) {
+	text = "Benchmark \"" + parameter + "\" not found. Use ?name=[benchmark]"
+}
+var elem = document.querySelector('#content');
+elem.innerHTML = text
+
+</script>
+</body>
+</html>

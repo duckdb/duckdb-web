@@ -1,6 +1,9 @@
-
-## Date Type
-
+---
+layout: default
+title: Date Types
+selected: Documentation/Data Types/Date
+expanded: Data Types
+---
 | Name | Aliases | Description |
 |:---|:---|:---|
 | date |   | calendar date (year, month day) |

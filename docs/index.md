@@ -1,2 +1,7 @@
-# Documentation
-This section contains the [current](https://www.duckdb.org/docs/current) manual for DuckDB users.
+---
+layout: default
+title: Documentation
+selected: Documentation
+---
+<!-- # Documentation -->
+This section contains the [current](/docs/current/index.html) manual for DuckDB users.
