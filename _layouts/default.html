@@ -76,7 +76,11 @@
 
 				{% if page_name == "Benchmarking" and page.expanded == "Benchmarking" %}
 					{% for item in site.data.categories %}
-						<li class="pure-menu-item"><a href="/benchmarks/{{ item.name | lower }}.html" class="pure-menu-link">&nbsp;&nbsp;{{ item.name }}</a></li>
+						{% assign item_name = item.name | downcase %}
+						{% assign item_name = item_name | remove: "-" %}
+
+
+						<li class="pure-menu-item"><a href="/benchmarks/{{ item_name }}.html" class="pure-menu-link">&nbsp;&nbsp;{{ item.name }}</a></li>
 					{% endfor %}
 				{% endif %}
 
