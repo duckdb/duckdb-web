@@ -295,7 +295,6 @@ third_party/sqllogictest
 .last_format
 # Benchmarks
 .last_benchmarked_commit
-benchmark_results/
 
 .sass-cache/
 Gemfile

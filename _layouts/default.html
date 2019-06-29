@@ -95,7 +95,7 @@
 			{{ content }}
 			{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
 			<table class="table">
-				{% include /benchmark_results/aggregate.html %}
+				{% include {{ page.benchmark }} %}
 			</table>
 			{% endif %}
 
