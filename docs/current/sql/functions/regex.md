@@ -5,7 +5,7 @@ selected: Documentation/Functions/Pattern Matching
 expanded: Functions
 ---
 ## Pattern Matching
-There are two separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), and POSIX-style regular expressions.
+There are three separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), and POSIX-style regular expressions.
 
 ## LIKE
 ```sql

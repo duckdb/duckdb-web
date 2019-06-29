@@ -9,9 +9,9 @@ selected: Documentation
 1. [Installation](tutorials/installation)
 2. [SQL Introduction](tutorials/sql)
 ### The SQL Language
-3. [Data Types](sql/types)
-4. [Functions and Operators](sql/functions)
-5. [Indexes](sql/indexes)
+3. [CSV Import](sql/copy)
+4. [Data Types](sql/types)
+5. [Functions and Operators](sql/functions)
 6. [Sequences](sql/createsequence)
 7. [Pragmas](sql/pragmas)
 ### Internals
