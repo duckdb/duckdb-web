@@ -79,8 +79,12 @@
 						{% assign item_name = item.name | downcase %}
 						{% assign item_name = item_name | remove: "-" %}
 
-
-						<li class="pure-menu-item"><a href="/benchmarks/{{ item_name }}.html" class="pure-menu-link">&nbsp;&nbsp;{{ item.name }}</a></li>
+						{% if item.name == selected_page %}
+						<li class="pure-menu-item menu-item-divided pure-menu-selected">
+						{% else %}
+						<li class="pure-menu-item">
+						{% endif %}
+						<a href="/benchmarks/{{ item_name }}.html" class="pure-menu-link">&nbsp;&nbsp;{{ item.name }}</a></li>
 					{% endfor %}
 				{% endif %}
 
