@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: Functions
+selected: Documentation/Functions
+expanded: Functions
+---
 ## Functions
 
 1. [Logical Operators](functions/logical_operators)

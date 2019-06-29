@@ -1,6 +1,0 @@
-------------
-|| DSQ084 ||
-------------
-Cold run...DONE
-1/5...INCORRECT
-INCORRECT RESULT: Unknown: Referenced column "store_id" not found in FROM clause!

@@ -1,6 +1,9 @@
-
-## Timestamp Type
-
+---
+layout: default
+title: Timestamp Type
+selected: Documentation/Data Types/Timestamp
+expanded: Data Types
+---
 | Name | Aliases | Description |
 |:---|:---|:---|
 | timestamp | datetime | time of day (no time zone) |

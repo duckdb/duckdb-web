@@ -1,2 +1,0 @@
-RangeQueryWithIndexBaseline - [micro]
-Runs the following query: "SELECT sum(j) FROM integers WHERE i >= 15000100 and i <= 15000200" with an index

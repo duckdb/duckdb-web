@@ -1,5 +1,9 @@
-
-## Boolean Type
+---
+layout: default
+title: Boolean Type
+selected: Documentation/Data Types/Boolean
+expanded: Data Types
+---
 
 | Name | Aliases | Description |
 |:---|:---|:---|

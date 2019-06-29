@@ -1,6 +1,0 @@
------------
-|| DSQ50 ||
------------
-Cold run...DONE
-1/5...INCORRECT
-INCORRECT RESULT: Unknown: Ambiguous reference to column name "ca_city" (use: "current_addr.ca_city" or "dn.ca_city")

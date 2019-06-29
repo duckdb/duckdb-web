@@ -1,2 +1,0 @@
-Multiplication - [micro]
-Runs the following query: "SELECT (i * j) * (i * j) * (i * j) * (i * j) FROM integers" on 10000000 rows

@@ -1,3 +1,8 @@
+---
+layout: default
+title: SQL Introduction
+selected: Documentation/Intro to SQL
+---
 # SQL Introduction
 Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 

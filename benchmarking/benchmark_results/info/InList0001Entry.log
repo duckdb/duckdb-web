@@ -1,2 +1,0 @@
-InList0001Entry - [in]
-Runs the following query: "SELECT * FROM strings WHERE s IN ()"

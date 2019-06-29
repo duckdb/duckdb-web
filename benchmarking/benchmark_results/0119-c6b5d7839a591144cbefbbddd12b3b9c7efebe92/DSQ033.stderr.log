@@ -1,6 +1,0 @@
-------------
-|| DSQ033 ||
-------------
-Cold run...DONE
-1/5...INCORRECT
-INCORRECT RESULT: Unknown: Subquery "ctr1" does not have a column named "ctr_state"

@@ -1,6 +1,0 @@
----------------------
-|| InList2048Entry ||
----------------------
-Cold run...terminate called after throwing an instance of 'duckdb::InterruptException'
-  what():  Interrupted!
-timeout: the monitored command dumped core

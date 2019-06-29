@@ -1,6 +1,0 @@
----------------
-|| RangeJoin ||
----------------
-Cold run...DONE
-1/5...INCORRECT
-INCORRECT RESULT: Computed vector length does not match expected length!

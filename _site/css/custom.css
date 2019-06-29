@@ -1,0 +1,46 @@
+
+.header {
+	background-color:#2e2e2e;
+	color:white;
+};
+
+.title {
+	color:white;
+}
+
+.content {
+	color:black;
+}
+
+html, .content {
+	background-color:white;
+}
+
+.table-warning {
+	background-color:#ffc107;
+}
+.table-danger {
+	background-color:#fd7e14;
+}
+.table-info {
+	background-color:#17a2b8;
+}
+.table-row-header {
+	background-color:#dedede;
+
+}
+.table-odd {
+	background-color:white;
+}
+.table-even {
+	background-color:#ececec;
+}
+.img-inline {
+	display:inline;
+	margin:auto 5px;
+	border-style:none;
+}
+.img-logo {
+	height:3em;
+	vertical-align: middle;
+}

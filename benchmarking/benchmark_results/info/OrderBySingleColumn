@@ -1,2 +1,0 @@
-OrderBySingleColumn - [micro]
-Runs the following query: "SELECT * FROM integers ORDER BY i" on 100000 rows

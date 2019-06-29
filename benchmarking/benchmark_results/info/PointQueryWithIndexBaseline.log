@@ -1,2 +1,0 @@
-PointQueryWithIndexBaseline - [micro]
-Runs the following query: "SELECT j FROM integers WHERE i=50000" with an order index as baseline

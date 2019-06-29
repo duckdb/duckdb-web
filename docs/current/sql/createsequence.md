@@ -1,3 +1,8 @@
+---
+layout: default
+title: Sequences
+selected: Documentation/Sequences
+---
 # Create Sequence
 CREATE SEQUENCE -- define a new sequence generator
 ## Syntax

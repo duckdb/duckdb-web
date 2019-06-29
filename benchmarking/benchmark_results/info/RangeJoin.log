@@ -1,2 +1,0 @@
-RangeJoin - [micro]
-Runs the following query: "SELECT * FROM integers a, integers b WHERE (a.i / 1000) > b.j;" on 100000 rows

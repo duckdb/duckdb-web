@@ -1,5 +1,9 @@
-
-## Character Types
+---
+layout: default
+title: Text Types
+selected: Documentation/Data Types/Text
+expanded: Data Types
+---
 In DuckDB, strings can be stored in the `varchar` field.
 
 | Name | Aliases | Description |

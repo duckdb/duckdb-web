@@ -1,6 +1,0 @@
-------------
-|| DSQ041 ||
-------------
-Cold run...DONE
-1/5...INCORRECT
-INCORRECT RESULT: Set operations can only apply to projection, union or group

@@ -1,6 +1,0 @@
-------------
-|| DSQ006 ||
-------------
-Cold run...DONE
-1/5...INCORRECT
-INCORRECT RESULT: Mismatch Type: Type INTEGER does not match with BIGINT. left and right types must be the same

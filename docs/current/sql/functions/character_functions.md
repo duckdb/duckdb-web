@@ -1,5 +1,9 @@
-
-## String Functions
+---
+layout: default
+title: Text Functions
+selected: Documentation/Functions/Text Functions
+expanded: Functions
+---
 This section describes functions and operators for examining and manipulating string values.
 
 | Function | Description | Example | Result |
