@@ -18,6 +18,22 @@ cursor = duckdb.connect(':memory:').cursor()
 print(cursor.execute('SELECT 42').fetchall())
 ```
 
+# R Installation
+DuckDB can be installed for the R Environment for Statistical Computing using the following command:
+
+```R
+remotes::install_github("cwida/duckdb/tools/rpkg", build = FALSE)
+```
+
+DuckDB for R requires `remotes` to be installed. After installation, DuckDB can be used as follows:
+
+```R
+library("DBI")
+con <- dbConnect(duckdb::duckdb(), ":memory:")
+dbWriteTable(con, "iris", iris)
+dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"')
+```
+
 # Installation From Source
 The source code of DuckDB can be found [here](https://github.com/cwida/duckdb). DuckDB requires CMake to be installed and a C++11 compliant compiler. GCC 4.9 and newer, Clang 3.9 and newer and VisualStudio 2017 are tested on each revision.
 
