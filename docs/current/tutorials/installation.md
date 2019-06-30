@@ -25,7 +25,7 @@ DuckDB can be installed for the R Environment for Statistical Computing using th
 remotes::install_github("cwida/duckdb/tools/rpkg", build = FALSE)
 ```
 
-DuckDB for R requires `remotes` to be installed. After installation, DuckDB can be used as follows:
+DuckDB for R requires `remotes` to be installed. On Windows, you will also need Rtools installed. After installation, DuckDB can be used as follows:
 
 ```R
 library("DBI")
