@@ -17,3 +17,5 @@ selected: Documentation
 ### Internals
 8. [Overview of DuckDB Internals](internals/overview)
 9. [Contributing](https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md)
+### Other
+10. [Frequently Asked Questions](faq)
