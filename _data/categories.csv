@@ -4,6 +4,7 @@ category,name
 [csv],CSV
 [in],In
 [micro],Micro
+[startup],Startup
 [storage],Storage
 [tpcds-sf1],TPC-DS
 [tpch-sf1],TPC-H
