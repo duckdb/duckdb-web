@@ -14,3 +14,4 @@ Continuous benchmarking is run on every commit to detect performance regressions
 6. [Storage](/benchmarks/storage)
 7. [TPC-DS](/benchmarks/tpcds)
 8. [TPC-H](/benchmarks/tpch)
+8. [IMDB](/benchmarks/imdb)
