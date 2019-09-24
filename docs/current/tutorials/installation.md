@@ -4,13 +4,13 @@ title: Installation
 selected: Documentation/Installation
 ---
 # Python Installation
-DuckDB can be installed for Python (Currently only Python 3) using the following command:
+DuckDB can be installed for Python using the following command:
 
 ```bash
 pip install duckdb
 ```
 
-DuckDB for Python requires `numpy` to be installed. After installation, DuckDB can be used as follows:
+After installation, DuckDB can be used as follows:
 
 ```python
 import duckdb
