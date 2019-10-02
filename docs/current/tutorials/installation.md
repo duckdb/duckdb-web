@@ -18,6 +18,8 @@ cursor = duckdb.connect(':memory:').cursor()
 print(cursor.execute('SELECT 42').fetchall())
 ```
 
+For a more detailed description of the Python API, see the [/docs/current/python/api](Python API page).
+
 # R Installation
 DuckDB can be installed for the R Environment for Statistical Computing using the following command:
 
