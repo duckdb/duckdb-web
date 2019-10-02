@@ -11,7 +11,8 @@ Continuous benchmarking is run on every commit to detect performance regressions
 3. [CSV](/benchmarks/csv)
 4. [In](/benchmarks/in)
 5. [Micro](/benchmarks/micro)
-6. [Storage](/benchmarks/storage)
-7. [TPC-DS](/benchmarks/tpcds)
-8. [TPC-H](/benchmarks/tpch)
-8. [IMDB](/benchmarks/imdb)
+6. [Startup](/benchmarks/startup)
+7. [Storage](/benchmarks/storage)
+8. [TPC-DS](/benchmarks/tpcds)
+9. [TPC-H](/benchmarks/tpch)
+<!-- 10. [IMDB](/benchmarks/imdb) -->
