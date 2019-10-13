@@ -12,6 +12,7 @@ selected: Documentation
 3. [CSV Import](sql/copy)
 4. [Data Types](sql/types)
 5. [Functions and Operators](sql/functions)
+5. [Indexes](sql/indexes)
 6. [Sequences](sql/createsequence)
 7. [Pragmas](sql/pragmas)
 ### Internals
