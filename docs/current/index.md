@@ -12,11 +12,11 @@ selected: Documentation
 3. [CSV Import](sql/copy)
 4. [Data Types](sql/types)
 5. [Functions and Operators](sql/functions)
-5. [Indexes](sql/indexes)
-6. [Sequences](sql/createsequence)
-7. [Pragmas](sql/pragmas)
+6. [Indexes](sql/indexes)
+7. [Sequences](sql/createsequence)
+8. [Pragmas](sql/pragmas)
 ### Internals
-8. [Overview of DuckDB Internals](internals/overview)
-9. [Contributing](https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md)
+9. [Overview of DuckDB Internals](internals/overview)
+10. [Contributing](https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md)
 ### Other
-10. [Frequently Asked Questions](faq)
+11. [Frequently Asked Questions](faq)
