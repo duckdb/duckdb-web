@@ -3,7 +3,7 @@ layout: default
 title: Indexes
 selected: Documentation/Indexes
 ---
-An Adaptive Radix Tree is used as the index data structure of choice for DuckDB. Its mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries.
+An Adaptive Radix Tree is used as the index data structure of choice for DuckDB. Its mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Note that an index is automatically created for columns with a UNIQUE or PRIMARY KEY constrain.
 
 # Create Index
 ```sql
