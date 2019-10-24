@@ -69,7 +69,7 @@ INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
 
 Constants that are not numeric values (e.g. text and dates) must be surrounded by single quotes (''), as in the example. Input dates for the date type must be formatted as 'YYYY-MM-DD'.
 
-We can insert into the cities table int he same manner.
+We can insert into the cities table in the same manner.
 
 ```sql
 INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0);
@@ -92,7 +92,7 @@ Many developers consider explicitly listing the columns better style than relyin
 
 Please enter all the commands shown above so you have some data to work with in the following sections.
 
-You could also have used COPY to load large amounts of data from CSV files. This is usually faster because the COPY command is optimized for this application while allowing less flexibility than INSERT. An example would be:
+You could also have used `COPY` to load large amounts of data from CSV files. This is usually faster because the `COPY` command is optimized for this application while allowing less flexibility than `INSERT`. An example would be:
 
 ```sql
 COPY weather FROM '/home/user/weather.csv';
@@ -101,7 +101,7 @@ COPY weather FROM '/home/user/weather.csv';
 Where the file name for the source file must be available on the machine running the process. You can read more about the COPY command in [COPY](https://www.duckdb.org/docs/current/sql/copy).
 
 # Querying a Table
-To retrieve data from a table, the table is queried. An SQL SELECT statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table weather, type:
+To retrieve data from a table, the table is queried. A SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table weather, type:
 
 ```sql
 SELECT * FROM weather;
@@ -399,4 +399,3 @@ DELETE FROM tablename;
 ```
 
 Without a qualification, DELETE will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this!
-
