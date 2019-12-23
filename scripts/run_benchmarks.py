@@ -30,14 +30,13 @@ CREATE TABLE benchmarks(
     description VARCHAR);""")
     c.execute("""
 CREATE TABLE commits(
-    id INTEGER PRIMARY KEY,
-    hash VARCHAR,
+    hash VARCHAR PRIMARY KEY,
     date VARCHAR,
     message VARCHAR);""")
     c.execute("""
 CREATE TABLE timings(
+    hash VARCHAR,
     benchmark_id INTEGER,
-    commit_id INTEGER,
     success BOOLEAN,
     median DOUBLE,
     timings VARCHAR,
@@ -139,7 +138,18 @@ class RunBenchmark(object):
             return 1
         return self.proc.returncode
 
-def run_benchmark(benchmark, benchmark_id, commit_id):
+def benchmark_already_ran(benchmark_id, commit_hash):
+    # first check if this benchmark has already been run
+    c.execute("SELECT * FROM timings WHERE benchmark_id=? AND hash=?", (benchmark_id, commit_hash))
+    results = c.fetchall()
+    if len(results) > 0:
+        return True
+    return False
+
+def run_benchmark(benchmark, benchmark_id, commit_hash):
+    if benchmark_already_ran(benchmark_id, commit_hash):
+        return
+
     log("Starting benchmark " + benchmark)
     base_path = '/tmp/benchmark'
 
@@ -158,31 +168,28 @@ def run_benchmark(benchmark, benchmark_id, commit_id):
         error_msg = "CRASH"
     else:
         log("Succeeded in running benchmark " + benchmark)
-        try:
-            # succeeded, gather data
-            stdout = runner.stdout
-            stderr = runner.stderr
-            timings = []
-            with open(runner.out_file, 'r') as f:
-                for line in f.read().split('\n'):
-                    line = line.strip()
-                    if len(line) == 0:
-                        continue
-                    timings.append(float(line))
-            timing_info = ','.join(timings)
-            timings.sort()
-            median = timings[len(timings) / 2]
-            with open(runner.log_file, 'r') as f:
-                profile_info = f.read()
-        except:
-            error_msg = "INTERNAL"
-            pass
+        # succeeded, gather data
+        stdout = runner.stdout
+        stderr = runner.stderr
+        timings = []
+        with open(runner.out_file, 'r') as f:
+            for line in f.read().split('\n'):
+                line = line.strip()
+                if len(line) == 0:
+                    continue
+                timings.append(float(line))
+        timing_info = ','.join([str(x) for x in timings])
+        timings.sort()
+        median = timings[int(len(timings) / 2)]
+        with open(runner.log_file, 'r') as f:
+            profile_info = f.read()
     if len(error_msg) > 0:
         # insert error into database
-        c.execute("INSERT INTO timings (benchmark_id, commit_id, success, error) VALUES (?, ?, ?, ?)", (benchmark_id, commit_id, False, error_msg))
+        c.execute("INSERT INTO timings (benchmark_id, hash, success, error) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, False, error_msg))
     else:
         # insert data about benchmark into database
-        c.execute("INSERT INTO timings (benchmark_id, commit_id, success, median, timings, profile, stdout, stderr) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (benchmark_id, commit_id, True, median, timing_info, profile_info, stdout, stderr))
+        print("Median timing: " + str(median))
+        c.execute("INSERT INTO timings (benchmark_id, hash, success, median, timings, profile, stdout, stderr) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (benchmark_id, commit_hash, True, median, timing_info, profile_info, stdout, stderr))
     con.commit()
 
 def write_benchmark_info(benchmark):
@@ -196,8 +203,9 @@ def write_benchmark_info(benchmark):
     # get info and group
     proc = subprocess.Popen([benchmark_runner, '--info', benchmark], stdout=subprocess.PIPE)
     description = proc.stdout.read().decode('utf8').strip()
-    proc = subprocess.Popen([benchmark_runner, '--group', benchmark], stdout=subprocess.PIPE)
-    groupname = proc.stdout.read().decode('utf8').strip().lstrip('[').rstrip(']')
+    groupname = description.split('\n')[0].split(' - ')[1].strip().lstrip('[').rstrip(']')
+    # proc = subprocess.Popen([benchmark_runner, '--group', benchmark], stdout=subprocess.PIPE)
+    # groupname = proc.stdout.read().decode('utf8').strip().lstrip('[').rstrip(']')
     # write to db
     c.execute("INSERT INTO benchmarks (name, groupname, description) VALUES (?, ?, ?)", (benchmark, groupname, description))
     # now fetch the id
@@ -210,7 +218,7 @@ if not os.path.isfile(sqlite_db_file):
 con = sqlite3.connect(sqlite_db_file)
 c = con.cursor()
 
-# figure out the highest commit id we already ran by looking into the db
+# figure out the highest commit hash we already ran by looking into the db
 c.execute("""
 SELECT hash
 FROM commits
@@ -256,16 +264,15 @@ for commit in commit_list:
     proc = subprocess.Popen(['git', 'show', '-s', '--format=%B', commit], stdout=subprocess.PIPE)
     commit_msg = proc.stdout.read().decode('utf8').strip()
 
-    c.execute('INSERT INTO commits (hash, date, message) VALUES (?, ?, ?)', (commit, date, commit_msg))
-    commit_id = c.execute('SELECT id FROM commits WHERE hash=?', (commit,)).fetchall()[0]
     # now run the benchmarks
     benchmarks_to_run = get_benchmark_list()
     for benchmark in benchmarks_to_run:
         (benchmark_id, groupname) = write_benchmark_info(benchmark)
         if groupname in slow_benchmarks and not is_final_commit:
             continue
-        run_benchmark(benchmark, benchmark_id, commit_id)
-    exit(1)
+        run_benchmark(benchmark, benchmark_id, commit)
+    # finished running this commit: insert it into the list of completed commits
+    c.execute('INSERT INTO commits (hash, date, message) VALUES (?, ?, ?)', (commit, date, commit_msg))
     con.commit()
 
 
