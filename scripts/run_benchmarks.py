@@ -1,4 +1,4 @@
-import os, sys, subprocess, re, time, threading, sqlite3
+import os, sys, subprocess, re, time, threading, sqlite3, sys
 
 FNULL = open(os.devnull, 'w')
 benchmark_runner = os.path.join('build', 'release', 'benchmark', 'benchmark_runner')
@@ -15,6 +15,12 @@ maximum_commit_count = 30
 # slow benchmarks are skipped for all commits except the most recent commit to speed up benchmarking
 # e.g. if a merge of 20+ commits is done, we don't want to run the slow benchmarks for all commits
 slow_benchmarks = ['append', 'imdb', 'tpcds-sf1']
+# the specific commit to run (if any)
+specific_commit = None
+
+if len(sys.argv) > 1:
+    specific_commit = sys.argv[1]
+    print("Running specific commit " + specific_commit)
 
 def log(msg):
     print(msg)
@@ -103,7 +109,9 @@ def get_benchmark_list():
     benchmark_list = []
     proc = subprocess.Popen([benchmark_runner, '--list'], stdout=subprocess.PIPE)
     for line in proc.stdout.read().decode('utf8').split('\n'):
-        benchmark_list.append(line.rstrip())
+        bname = line.rstrip()
+        if len(bname) > 0:
+            benchmark_list.append(bname)
     return benchmark_list
 
 class RunBenchmark(object):
@@ -180,7 +188,7 @@ def run_benchmark(benchmark, benchmark_id, commit_hash):
                         continue
                     if line == 'TIMEOUT':
                         error_msg = "TIMEOUT"
-                        continue
+                        raise Exception("TIMEOUT")
                     timings.append(float(line))
             timing_info = ','.join([str(x) for x in timings])
             timings.sort()
@@ -194,6 +202,7 @@ def run_benchmark(benchmark, benchmark_id, commit_hash):
 
     if len(error_msg) > 0:
         # insert error into database
+        print("Error: " + error_msg)
         c.execute("INSERT INTO timings (benchmark_id, hash, success, error) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, False, error_msg))
     else:
         # insert data about benchmark into database
@@ -210,15 +219,49 @@ def write_benchmark_info(benchmark):
         return (results[0][0], results[0][1])
     # benchmark does not exist, write it to the database
     # get info and group
-    proc = subprocess.Popen([benchmark_runner, '--info', benchmark], stdout=subprocess.PIPE)
-    description = proc.stdout.read().decode('utf8').strip()
-    groupname = description.split('\n')[0].split(' - ')[1].strip().lstrip('[').rstrip(']')
-    # proc = subprocess.Popen([benchmark_runner, '--group', benchmark], stdout=subprocess.PIPE)
-    # groupname = proc.stdout.read().decode('utf8').strip().lstrip('[').rstrip(']')
+    try:
+        proc = subprocess.Popen([benchmark_runner, '--info', benchmark], stdout=subprocess.PIPE)
+        description = proc.stdout.read().decode('utf8').strip()
+        # groupname = description.split('\n')[0].split(' - ')[1].strip().lstrip('[').rstrip(']')
+        proc = subprocess.Popen([benchmark_runner, '--group', benchmark], stdout=subprocess.PIPE)
+        groupname = proc.stdout.read().decode('utf8').strip().lstrip('[').rstrip(']')
+    except:
+        print("Could not figure out description or group name for benchmark " + benchmark)
+        raise
     # write to db
     c.execute("INSERT INTO benchmarks (name, groupname, description) VALUES (?, ?, ?)", (benchmark, groupname, description))
     # now fetch the id
     return write_benchmark_info(benchmark)
+
+def run_benchmark_for_commit(commit, run_slow_benchmarks):
+    log("Benchmarking commit " + commit)
+    # switch to this commit in the source tree
+    if not switch_to_commit(commit):
+        log("Failed to switch to commit!")
+        return
+    # now try to compile it
+    if not build_optimized():
+        log("Failed to build!")
+        return
+
+    # get the commit hash, date and commit msg from the commit
+    proc = subprocess.Popen(['git', 'rev-parse', 'HEAD'], stdout=subprocess.PIPE)
+    commit = proc.stdout.read().decode('utf8').strip()
+    proc = subprocess.Popen(['git', 'show', '-s', '--format=%ci', commit], stdout=subprocess.PIPE)
+    date = proc.stdout.read().decode('utf8').strip()
+    proc = subprocess.Popen(['git', 'show', '-s', '--format=%B', commit], stdout=subprocess.PIPE)
+    commit_msg = proc.stdout.read().decode('utf8').strip()
+
+    # now run the benchmarks
+    benchmarks_to_run = get_benchmark_list()
+    for benchmark in benchmarks_to_run:
+        (benchmark_id, groupname) = write_benchmark_info(benchmark)
+        if groupname in slow_benchmarks and not is_final_commit:
+            continue
+        run_benchmark(benchmark, benchmark_id, commit)
+    # finished running this commit: insert it into the list of completed commits
+    c.execute('INSERT INTO commits (hash, date, message) VALUES (?, ?, ?)', (commit, date, commit_msg))
+    con.commit()
 
 # initialize the sqlite database, if it does not exist yet
 if not os.path.isfile(sqlite_db_file):
@@ -227,6 +270,12 @@ if not os.path.isfile(sqlite_db_file):
 con = sqlite3.connect(sqlite_db_file)
 c = con.cursor()
 
+pull_new_changes()
+
+if specific_commit != None:
+    run_benchmark_for_commit(specific_commit, True)
+    exit(0)
+
 # figure out the highest commit hash we already ran by looking into the db
 c.execute("""
 SELECT hash
@@ -234,8 +283,6 @@ FROM commits
 ORDER BY date DESC
 LIMIT 1
 """)
-
-pull_new_changes()
 
 prev_hash = default_start_commit
 results = c.fetchall()
@@ -258,31 +305,7 @@ if len(commit_list) > maximum_commit_count:
 
 for commit in commit_list:
     is_final_commit = commit == commit_list[-1]
-    log("Benchmarking commit " + commit)
-    # switch to this commit in the source tree
-    if not switch_to_commit(commit):
-        log("Failed to switch to commit! Moving to next commit")
-        continue
-    # now try to compile it
-    if not build_optimized():
-        continue
-
-    # get the date from the commit
-    proc = subprocess.Popen(['git', 'show', '-s', '--format=%ci', commit], stdout=subprocess.PIPE)
-    date = proc.stdout.read().decode('utf8').strip()
-    proc = subprocess.Popen(['git', 'show', '-s', '--format=%B', commit], stdout=subprocess.PIPE)
-    commit_msg = proc.stdout.read().decode('utf8').strip()
-
-    # now run the benchmarks
-    benchmarks_to_run = get_benchmark_list()
-    for benchmark in benchmarks_to_run:
-        (benchmark_id, groupname) = write_benchmark_info(benchmark)
-        if groupname in slow_benchmarks and not is_final_commit:
-            continue
-        run_benchmark(benchmark, benchmark_id, commit)
-    # finished running this commit: insert it into the list of completed commits
-    c.execute('INSERT INTO commits (hash, date, message) VALUES (?, ?, ?)', (commit, date, commit_msg))
-    con.commit()
+    run_benchmark_for_commit(commit, is_final_commit)
 
 
 
