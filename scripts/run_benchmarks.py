@@ -168,21 +168,30 @@ def run_benchmark(benchmark, benchmark_id, commit_hash):
         error_msg = "CRASH"
     else:
         log("Succeeded in running benchmark " + benchmark)
-        # succeeded, gather data
-        stdout = runner.stdout
-        stderr = runner.stderr
-        timings = []
-        with open(runner.out_file, 'r') as f:
-            for line in f.read().split('\n'):
-                line = line.strip()
-                if len(line) == 0:
-                    continue
-                timings.append(float(line))
-        timing_info = ','.join([str(x) for x in timings])
-        timings.sort()
-        median = timings[int(len(timings) / 2)]
-        with open(runner.log_file, 'r') as f:
-            profile_info = f.read()
+        try:
+            # succeeded, gather data
+            stdout = runner.stdout
+            stderr = runner.stderr
+            timings = []
+            with open(runner.out_file, 'r') as f:
+                for line in f.read().split('\n'):
+                    line = line.strip()
+                    if len(line) == 0:
+                        continue
+                    if line == 'TIMEOUT':
+                        error_msg = "TIMEOUT"
+                        continue
+                    timings.append(float(line))
+            timing_info = ','.join([str(x) for x in timings])
+            timings.sort()
+            median = timings[int(len(timings) / 2)]
+            with open(runner.log_file, 'r') as f:
+                profile_info = f.read()
+        except:
+            if len(error_msg) == 0:
+                # no error message specified
+                raise
+
     if len(error_msg) > 0:
         # insert error into database
         c.execute("INSERT INTO timings (benchmark_id, hash, success, error) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, False, error_msg))
