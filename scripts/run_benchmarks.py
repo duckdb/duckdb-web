@@ -186,10 +186,11 @@ def run_benchmark(benchmark, benchmark_id, commit_hash):
                     line = line.strip()
                     if len(line) == 0:
                         continue
-                    if line == 'TIMEOUT':
-                        error_msg = "TIMEOUT"
-                        raise Exception("TIMEOUT")
-                    timings.append(float(line))
+                    try:
+                        timings.append(float(line))
+                    except:
+                        error_msg = line
+                        raise
             timing_info = ','.join([str(x) for x in timings])
             timings.sort()
             median = timings[int(len(timings) / 2)]
