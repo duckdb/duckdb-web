@@ -1,10 +1,11 @@
 category,name
-[aggregate],Aggregate
-[append],Append
-[csv],CSV
-[in],In
-[micro],Micro
-[startup],Startup
-[storage],Storage
-[tpcds-sf1],TPC-DS
-[tpch-sf1],TPC-H
+aggregate,Aggregate
+append,Append
+bulkupdate,Bulk Update
+csv,CSV
+in,In
+micro,Micro
+startup,Startup
+storage,Storage
+tpcds-sf1,TPC-DS
+tpch-sf1,TPC-H
