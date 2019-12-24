@@ -230,6 +230,25 @@ logfile: /benchmark_logs/%s-stdout.json
 
     written_commits[commit_hash] = result_dict
 
+def get_benchmark_html(median, success, error):
+    result_html = []
+    if success:
+        result_html = bold_output("%.2lf" % (median,))
+        table_class = None
+    else:
+        if error.upper() == 'CRASH':
+            result_html = bold_output('C')
+            table_class = 'table-danger'
+        elif error.upper() == 'INCORRECT':
+            result_html = bold_output('!')
+            table_class = 'table-danger'
+        elif error.upper() == 'TIMEOUT':
+            result_html = bold_output('T')
+            table_class = 'table-warning'
+        else:
+            table_class = 'table-info'
+    return (result_html, table_class)
+
 def create_html(database):
     con = sqlite3.connect(sqlite_db_file)
     c = con.cursor()
@@ -237,6 +256,84 @@ def create_html(database):
     # generate the benchmark, category and benchmark info files
     pack_info(c)
 
+    # generate the individual benchmark pages
+    # get a list of all the individual benchmarks
+    c.execute("SELECT name, id, groupname, description FROM benchmarks")
+    for benchmark_info in c.fetchall():
+        benchmark_name = benchmark_info[0]
+        benchmark_id = benchmark_info[1]
+        groupname = benchmark_info[2]
+        description = benchmark_info[3]
+        with open(os.path.join('_includes', 'individual_results', benchmark_name + '.html'), 'w+') as f:
+            # first write the description
+            f.write("<p>%s</p>" % (description,))
+            # then an image of the graph
+            f.write('<img src="%s"/>' % ('/images/graphs/%s.png' % (benchmark_name,),))
+            # then a table containing all the results for each of the hashes
+            # the table is <hash, time>
+            begin_row(f, "table-header")
+            begin_header(f)
+            f.write("Commit")
+            end_header(f)
+            begin_header(f)
+            f.write("Date")
+            end_header(f)
+            begin_header(f)
+            f.write("Result")
+            end_header(f)
+            begin_header(f)
+            f.write("Message")
+            end_header(f)
+            end_row(f)
+
+            class_name = "table-even"
+            c.execute("SELECT commits.hash, date, median, success, error, commits.message FROM timings JOIN commits ON commits.hash=timings.hash WHERE benchmark_id=? ORDER BY date DESC;", (benchmark_id,))
+            results = c.fetchall()
+            for entry in results:
+                commit_hash = entry[0]
+                date = entry[1]
+                median = entry[2]
+                success = entry[3]
+                error = entry[4]
+                message = entry[5]
+
+                (result_html, table_class) = get_benchmark_html(median, success, error)
+                begin_row(f, class_name)
+                # commit hash
+                begin_value(f, None)
+                write_commit(f, commit_hash)
+                end_value(f)
+                # date
+                begin_value(f, None)
+                f.write(date.split(' ')[0])
+                end_value(f)
+                # benchmark result
+                begin_value(f, table_class)
+                f.write(result_html)
+                end_value(f)
+
+                begin_value(f, None)
+                f.write(message)
+                end_value(f)
+                end_row(f)
+                if class_name == "table-even":
+                    class_name = "table-odd"
+                else:
+                    class_name = "table-even"
+
+        with open(os.path.join('benchmarks', 'individual_results', benchmark_name + '.md'), 'w+') as f:
+            pretty_name = get_group_name(groupname)
+            f.write("""---
+layout: default
+title: %s
+subtitle: Continuous Benchmarking
+selected: %s
+expanded: Benchmarking
+benchmark: /individual_results/%s.html
+---""" % (benchmark_name, pretty_name, benchmark_name)
+)
+
+    # generate the group benchmark pages
     # get a list of all the groups from the benchmarks
     c.execute("SELECT DISTINCT groupname FROM benchmarks")
     groups = [x[0] for x in c.fetchall()]
@@ -248,8 +345,8 @@ def create_html(database):
         c.execute("SELECT id FROM benchmarks WHERE groupname=? LIMIT 1;", (groupname,))
         benchmark_id = c.fetchall()[0][0]
 
-        # now find the 30 most recent commits that ran this benchmark
-        c.execute("SELECT commits.hash FROM commits JOIN timings ON commits.hash=timings.hash WHERE benchmark_id=? ORDER BY commits.date DESC LIMIT 30", (benchmark_id,))
+        # now find the 15 most recent commits that ran this benchmark
+        c.execute("SELECT commits.hash FROM commits JOIN timings ON commits.hash=timings.hash WHERE benchmark_id=? ORDER BY commits.date DESC LIMIT 15", (benchmark_id,))
         hashes = [x[0] for x in c.fetchall()]
 
         # for each of the referenced commits, generate the stdout, stderr and graph html files
@@ -288,22 +385,7 @@ def create_html(database):
                 has_graph = benchmark_has_files[0]
                 has_stdout = benchmark_has_files[1]
                 has_stderr = benchmark_has_files[2]
-                result_html = []
-                if success:
-                    result_html = bold_output("%.2lf" % (median,))
-                    table_class = None
-                else:
-                    if error.upper() == 'CRASH':
-                        result_html = bold_output('C')
-                        table_class = 'table-danger'
-                    elif error.upper() == 'INCORRECT':
-                        result_html = bold_output('!')
-                        table_class = 'table-danger'
-                    elif error.upper() == 'TIMEOUT':
-                        result_html = bold_output('T')
-                        table_class = 'table-warning'
-                    else:
-                        table_class = 'table-info'
+                (result_html, table_class) = get_benchmark_html(median, success, error)
                 extra_info = []
                 if has_graph:
                     extra_info.append(['Q', base_graph + "?name=" + benchmark_name])
@@ -352,7 +434,8 @@ benchmark: /benchmark_results/%s.html
                 begin_row(f, class_name)
                 # benchmark name
                 begin_value(f, 'table-row-header')
-                f.write('<a href="/benchmarks/info/info.html?name=%s">%s</a>' % (benchmark_name,benchmark_name))
+
+                f.write('<a href="/benchmarks/individual_results/%s">%s</a>' % (benchmark_name,benchmark_name))
                 end_value(f)
                 # benchmark results
                 for commit_hash in hashes:
@@ -369,6 +452,7 @@ benchmark: /benchmark_results/%s.html
                     class_name = "table-odd"
                 else:
                     class_name = "table-even"
+
 
 if __name__ == "__main__":
     create_html(sqlite_db_file)

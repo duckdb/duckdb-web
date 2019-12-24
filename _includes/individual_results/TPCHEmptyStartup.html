@@ -1,0 +1,32 @@
+<p>TPCHEmptyStartup - [startup]
+Start a TPC-H SF1 database and run SELECT * FROM lineitem WHERE 1=0 in the database</p><img src="/images/graphs/TPCHEmptyStartup.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/f331a271dc89c74a70d38f01b7bcded8137a8bc4">f331</a></td><td>2019-12-17</td><td><b>0.00</b></td><td>covering all filter expression classes</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/ea042a326215b7dd1169457eef406bd442e3ee89">ea04</a></td><td>2019-12-17</td><td><b>0.00</b></td><td>Fixes for non-unity builds on linux</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/110bd1c83861a55e22a9ee4e97894366bf417dba">110b</a></td><td>2019-09-09</td><td><b>0.01</b></td><td>Adding the IMDB-based Join Order Benchmark [JOB] from Leis et al. (#283)</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/69f931fb495279250b70b45a70964b6035bb0b62">69f9</a></td><td>2019-09-05</td><td><b>0.00</b></td><td>Update setseed
+
+Updates:
+- Constrain seed value between -1.0 and 1.0, inclusive
+- Set return type to SQLNULL</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/32c1e53db960f545059b5269b01cf8f28138230b">32c1</a></td><td>2019-09-05</td><td><b>0.00</b></td><td>Merge pull request #279 from mweisgut/master
+
+BenchmarkRunner: Wildcard support for benchmark names</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/4cff1d7957ce895dd9984a87aa20aef67f5986e6">4cff</a></td><td>2019-09-05</td><td><b>0.01</b></td><td>reverted TPC-H renaming</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/983a39fcda407216efa751679be3969ffaea8f10">983a</a></td><td>2019-09-05</td><td><b>0.01</b></td><td>shrink to fit</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/90818d98ebea87b14ed61871236d6390c4354b46">9081</a></td><td>2019-09-05</td><td><b>0.01</b></td><td>support wildcards</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/9065d25490a824b6254a3573199469a349ead6ab">9065</a></td><td>2019-09-05</td><td><b>0.00</b></td><td>Bump Travis Xcode Version (#281)</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/59a24af98009e923140548e9be90eb4dcc3c1314">59a2</a></td><td>2019-09-04</td><td><b>0.00</b></td><td>TIMESTAMP (rw), DATE (rw) & TIME (r) support for R client (#277)</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/1999e0754df20a073d04c41ad25f79fab122ede2">1999</a></td><td>2019-09-04</td><td><b>0.00</b></td><td>Merge pull request #272 from xhochy/use-setuptools_scm-for-versioning
+
+Use setuptools_scm for Python versioning</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/02e41da93e359fbad3c83b200f6d40e9455ace56">02e4</a></td><td>2019-09-01</td><td><b>0.01</b></td><td>Refactor appenders (#276)
+
+* new appender api, now created from connection.CreateAppender()
+* appender changes for r client</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/297e39cdcb5e5c462bf2bec9318f49881d15df91">297e</a></td><td>2019-09-01</td><td><b>0.00</b></td><td>Merge pull request #275 from hawkfish/hawkfish-combinefunc
+
+Implement aggregate state merging</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/a7b3c8120a8a8a9e632ec2f2e305c73880d4dc05">a7b3</a></td><td>2019-08-30</td><td><b>0.01</b></td><td>Implement - and test - multi-argument windowed aggregates
+using segment trees.</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/49cd0a15c4d5e434627ab7249cdccb4dfb10773c">49cd</a></td><td>2019-08-30</td><td><b>0.01</b></td><td>Extend WindowSegmentTree to handle uncombinable aggregate functions.
+This essentially just does the full aggregation at the
+bottom level. This seemed like a better implementation
+than copying out all the range aggregation machinery.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/1a9b53906d8af2204008b797b9e6e1ecd9eb8379">1a9b</a></td><td>2019-08-30</td><td><b>0.00</b></td><td>Convert windowed aggregates to use the AggregateFunction APIs
+instead of hard-coded switch statements.
+This is implemented using the combine function
+which is also used for parallel aggregation.
+
+There is one small hack where a missing combine function
+assumes that the aggregate is COUNT(*) but I will be
+dealing with that next as part of non segment-tree
+windowing.</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/24e9e3d0321fbf5277711ed6b3ea4c678d149223">24e9</a></td><td>2019-08-30</td><td><b>0.00</b></td><td>Fix comment</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/7141891977c3130b7e6db17cddde1c96acd12b88">7141</a></td><td>2019-08-29</td><td><b>0.01</b></td><td>Redefine combine to look more like update.</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/958295e2af6ab52b09944c93732714b23f74bad5">9582</a></td><td>2019-08-27</td><td><b>0.01</b></td><td>Merge pull request #273 from xhochy/return-datetime64
+
+Return datetime64 in Python</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/40db7cd3fa117327cbbd83b724848925960fa3a2">40db</a></td><td>2019-08-27</td><td><b>0.01</b></td><td>Add optional COMBINEFUNC member for aggregate functions.
+Not used yet.</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/967141c1ce4892c75dbbce55702cd128413c8d2f">9671</a></td><td>2019-08-27</td><td><b>0.01</b></td><td>Merge pull request #5 from cwida/master
+
+Pull as of 2019-08-27</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/e6287422a8bee35ab582909d32984fbfd9d60bb8">e628</a></td><td>2019-08-26</td><td><b>0.00</b></td><td>Return datetime64 in Python</td></tr>
