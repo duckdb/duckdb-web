@@ -15,6 +15,7 @@ maximum_commit_count = 30
 # slow benchmarks are skipped for all commits except the most recent commit to speed up benchmarking
 # e.g. if a merge of 20+ commits is done, we don't want to run the slow benchmarks for all commits
 slow_benchmarks = ['append', 'imdb', 'tpcds-sf1']
+ignored_benchmarks = ['imdb', 'expression_reordering']
 # the specific commit to run (if any)
 specific_commit = None
 
@@ -257,7 +258,7 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
     benchmarks_to_run = get_benchmark_list()
     for benchmark in benchmarks_to_run:
         (benchmark_id, groupname) = write_benchmark_info(benchmark)
-        if groupname in slow_benchmarks and not run_slow_benchmarks:
+        if groupname in expression_reordering or (groupname in slow_benchmarks and not run_slow_benchmarks):
             continue
         run_benchmark(benchmark, benchmark_id, commit)
     # finished running this commit: insert it into the list of completed commits
