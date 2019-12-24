@@ -291,18 +291,6 @@ def create_html(database):
                 result_html = []
                 if success:
                     result_html = bold_output("%.2lf" % (median,))
-                    extra_info = []
-                    if has_graph:
-                        extra_info.append(['Q', base_graph + "?name=" + benchmark_name])
-                    if has_stdout:
-                        extra_info.append(['L', base_stdout + "?name=" + benchmark_name])
-                    if has_stderr:
-                        extra_info.append(['E', base_stderr + "?name=" + benchmark_name])
-                    if len(extra_info) > 0:
-                        result_html += " ["
-                        for i in range(len(extra_info) - 1):
-                            result_html += '<a href="%s">%s</a>/' % (extra_info[i][1], extra_info[i][0])
-                        result_html += '<a href="%s">%s</a>]' % (extra_info[-1][1], extra_info[-1][0])
                     table_class = None
                 else:
                     if error.upper() == 'CRASH':
@@ -316,6 +304,18 @@ def create_html(database):
                         table_class = 'table-warning'
                     else:
                         table_class = 'table-info'
+                extra_info = []
+                if has_graph:
+                    extra_info.append(['Q', base_graph + "?name=" + benchmark_name])
+                if has_stdout:
+                    extra_info.append(['L', base_stdout + "?name=" + benchmark_name])
+                if has_stderr:
+                    extra_info.append(['E', base_stderr + "?name=" + benchmark_name])
+                if len(extra_info) > 0:
+                    result_html += " ["
+                    for i in range(len(extra_info) - 1):
+                        result_html += '<a href="%s">%s</a>/' % (extra_info[i][1], extra_info[i][0])
+                    result_html += '<a href="%s">%s</a>]' % (extra_info[-1][1], extra_info[-1][0])
                 benchmark_results[benchmark_name][commit_hash] = (result_html, table_class)
                 found_results[benchmark_name] = True
 
@@ -340,7 +340,7 @@ benchmark: /benchmark_results/%s.html
             end_header(f)
             for commit_hash in hashes:
                 begin_rotated_header(f)
-                write_commit(f, commit_hash[5:])
+                write_commit(f, commit_hash)
                 end_rotated_header(f)
             end_row(f)
             # now write the results
