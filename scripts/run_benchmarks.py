@@ -262,7 +262,9 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
             continue
         run_benchmark(benchmark, benchmark_id, commit)
     # finished running this commit: insert it into the list of completed commits
-    c.execute('INSERT INTO commits (hash, date, message) VALUES (?, ?, ?)', (commit, date, commit_msg))
+    c.execute("SELECT * FROM commits WHERE hash=?", (commit,))
+    if len(c.fetchall()) == 0:
+        c.execute('INSERT INTO commits (hash, date, message) VALUES (?, ?, ?)', (commit, date, commit_msg))
     con.commit()
 
 # initialize the sqlite database, if it does not exist yet
@@ -275,7 +277,7 @@ c = con.cursor()
 pull_new_changes()
 
 if specific_commit != None:
-    run_benchmark_for_commit(specific_commit, True)
+    run_benchmark_for_commit(specific_commit, False)
     exit(0)
 
 # figure out the highest commit hash we already ran by looking into the db
