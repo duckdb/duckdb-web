@@ -74,7 +74,7 @@ def build_optimized():
         print("Failed to compile, moving on to next commit")
         while True:
             line = proc.stderr.readline()
-            if line == '':
+            if len(line) == 0:
                 break
             print(line)
         return False

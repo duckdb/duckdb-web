@@ -17,9 +17,9 @@ for(idx in 1:nrow(benchmarks)) {
 	result <- dbGetQuery(con, paste0("SELECT commits.hash, date, median FROM timings JOIN commits ON commits.hash=timings.hash WHERE benchmark_id=", benchmark_id, " ORDER BY date;"))
 	result[[2]] <- as.Date(result[[2]])
 
-	store_path <- paste0("images/graphs/", benchmark_name, ".pdf")
+	store_path <- paste0("images/graphs/", benchmark_name, ".png")
 	print(store_path)
-	pdf(store_path)
+	png(store_path, width=1024, height=640)
 	print(qplot(x=date, y=median, data=result, na.rm=TRUE, main=paste0("Benchmark ", benchmark_name), xlab="Date", ylab="Median Time (s)") + geom_line() + ylim(0,max(result['median'])) + theme)
 	dev.off()
 };
