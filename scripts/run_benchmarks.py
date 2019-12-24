@@ -258,7 +258,7 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
     benchmarks_to_run = get_benchmark_list()
     for benchmark in benchmarks_to_run:
         (benchmark_id, groupname) = write_benchmark_info(benchmark)
-        if groupname in expression_reordering or (groupname in slow_benchmarks and not run_slow_benchmarks):
+        if groupname in ignored_benchmarks or (groupname in slow_benchmarks and not run_slow_benchmarks):
             continue
         run_benchmark(benchmark, benchmark_id, commit)
     # finished running this commit: insert it into the list of completed commits
