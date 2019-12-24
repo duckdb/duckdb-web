@@ -78,6 +78,7 @@
 					{% for item in site.data.categories %}
 						{% assign item_name = item.name | downcase %}
 						{% assign item_name = item_name | remove: "-" %}
+						{% assign item_name = item_name | remove: " " %}
 
 						{% if item.name == selected_page %}
 						<li class="pure-menu-item menu-item-divided pure-menu-selected">
