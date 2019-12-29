@@ -14,6 +14,9 @@ name_map = {
 
 ignored_groups = ['imdb', 'expression_reordering']
 
+def group_is_ignored(groupname):
+	return groupname is None or len(groupname) == 0 or groupname in ignored_groups
+
 def get_benchmark_results(results_folder):
 	results = [x for x in os.listdir(results_folder) if x != 'info']
 	results = sorted(results)
@@ -130,6 +133,8 @@ def pack_info(c):
 		benchmark_csv.write("benchmark,category\n")
 		c.execute("SELECT groupname, name FROM benchmarks")
 		for entry in c.fetchall():
+			if group_is_ignored(entry[0]):
+				continue
 			benchmark_csv.write("%s,%s\n" % (entry[1], entry[0]))
 
 	# categories.csv:
@@ -138,6 +143,8 @@ def pack_info(c):
 		category_csv.write("category,name\n")
 		c.execute("SELECT DISTINCT groupname FROM benchmarks ORDER BY 1")
 		for entry in c.fetchall():
+			if group_is_ignored(entry[0]):
+				continue
 			key = entry[0]
 			category_name = get_group_name(key)
 			category_csv.write("%s,%s\n" % (key, category_name))
@@ -358,7 +365,7 @@ benchmark: /individual_results/%s.html
 	groups = [x[0] for x in c.fetchall()]
 
 	for groupname in groups:
-		if groupname is None or len(groupname) == 0 or groupname in ignored_groups:
+		if group_is_ignored(groupname):
 			continue
 		# now for each of the groups find the most recent 15 commits that ran a benchmark from that group
 		# first select a random benchmark from the group
