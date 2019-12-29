@@ -3,6 +3,8 @@ aggregate,Aggregate
 append,Append
 bulkupdate,Bulk Update
 csv,CSV
+expression_reordering,Expression_Reordering
+imdb,IMDB
 in,In
 micro,Micro
 startup,Startup
