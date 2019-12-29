@@ -1,0 +1,1 @@
+{"BulkUpdate": "", "BulkDelete": "", "SimpleAggregate": "", "SimpleGroupByAggregate": "", "Multiplication": "", "OrderBySingleColumn": "", "PointQueryWithoutIndex": "", "PointQueryWithIndexART": "", "RangeJoin": "", "RangeQueryWithoutIndex": "", "RangeQueryWithIndexART": "", "Window": "", "SELECT1Memory": "", "SELECT1Disk": ""}

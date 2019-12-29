@@ -1,0 +1,39 @@
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    MIN(cn.name) <span style="color:black;font-weight:bold;">AS</span> producing_company,
+    MIN(miidx.info) <span style="color:black;font-weight:bold;">AS</span> rating,
+    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> movie_about_winning
+<span style="color:black;font-weight:bold;">FROM</span>
+    company_name <span style="color:black;font-weight:bold;">AS</span> cn,
+    company_type <span style="color:black;font-weight:bold;">AS</span> ct,
+    info_type <span style="color:black;font-weight:bold;">AS</span> it,
+    info_type <span style="color:black;font-weight:bold;">AS</span> it2,
+    kind_type <span style="color:black;font-weight:bold;">AS</span> kt,
+    movie_companies <span style="color:black;font-weight:bold;">AS</span> mc,
+    movie_info <span style="color:black;font-weight:bold;">AS</span> mi,
+    movie_info_idx <span style="color:black;font-weight:bold;">AS</span> miidx,
+    title <span style="color:black;font-weight:bold;">AS</span> t
+<span style="color:black;font-weight:bold;">WHERE</span>
+    cn.country_code = <span style="color:firebrick;">'[us]'</span>
+    <span style="color:black;font-weight:bold;">AND</span> ct.kind = <span style="color:firebrick;">'production companies'</span>
+    <span style="color:black;font-weight:bold;">AND</span> it.info = <span style="color:firebrick;">'rating'</span>
+    <span style="color:black;font-weight:bold;">AND</span> it2.info = <span style="color:firebrick;">'release dates'</span>
+    <span style="color:black;font-weight:bold;">AND</span> kt.kind = <span style="color:firebrick;">'movie'</span>
+    <span style="color:black;font-weight:bold;">AND</span> t.title != '<span style="color:firebrick;">'
+    AND (t.title LIKE '</span>%Champion%<span style="color:firebrick;">'
+        OR t.title LIKE '</span>%Loser%')
+    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = t.id
+    <span style="color:black;font-weight:bold;">AND</span> it2.id = mi.info_type_id
+    <span style="color:black;font-weight:bold;">AND</span> kt.id = t.kind_id
+    <span style="color:black;font-weight:bold;">AND</span> mc.movie_id = t.id
+    <span style="color:black;font-weight:bold;">AND</span> cn.id = mc.company_id
+    <span style="color:black;font-weight:bold;">AND</span> ct.id = mc.company_type_id
+    <span style="color:black;font-weight:bold;">AND</span> miidx.movie_id = t.id
+    <span style="color:black;font-weight:bold;">AND</span> it.id = miidx.info_type_id
+    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = miidx.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = mc.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> miidx.movie_id = mc.movie_id;
+
+</pre>
+		<img src="/images/graphs/IMDBQ046.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

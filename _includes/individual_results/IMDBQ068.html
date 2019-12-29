@@ -1,0 +1,37 @@
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    MIN(mi.info) <span style="color:black;font-weight:bold;">AS</span> movie_budget,
+    MIN(mi_idx.info) <span style="color:black;font-weight:bold;">AS</span> movie_votes,
+    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> movie_title
+<span style="color:black;font-weight:bold;">FROM</span>
+    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
+    info_type <span style="color:black;font-weight:bold;">AS</span> it1,
+    info_type <span style="color:black;font-weight:bold;">AS</span> it2,
+    movie_info <span style="color:black;font-weight:bold;">AS</span> mi,
+    movie_info_idx <span style="color:black;font-weight:bold;">AS</span> mi_idx,
+    name <span style="color:black;font-weight:bold;">AS</span> n,
+    title <span style="color:black;font-weight:bold;">AS</span> t
+<span style="color:black;font-weight:bold;">WHERE</span>
+    ci.note <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'(writer)'</span>, <span style="color:firebrick;">'(head writer)'</span>, <span style="color:firebrick;">'(written by)'</span>, <span style="color:firebrick;">'(story)'</span>, <span style="color:firebrick;">'(story editor)'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> it1.info = <span style="color:firebrick;">'genres'</span>
+    <span style="color:black;font-weight:bold;">AND</span> it2.info = <span style="color:firebrick;">'votes'</span>
+    <span style="color:black;font-weight:bold;">AND</span> mi.info <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'Horror'</span>,
+        <span style="color:firebrick;">'Action'</span>,
+        <span style="color:firebrick;">'Sci-Fi'</span>,
+        <span style="color:firebrick;">'Thriller'</span>,
+        <span style="color:firebrick;">'Crime'</span>,
+        <span style="color:firebrick;">'War'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> n.gender = <span style="color:firebrick;">'m'</span>
+    <span style="color:black;font-weight:bold;">AND</span> t.id = mi.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = mi_idx.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mi.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mi_idx.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = mi_idx.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id
+    <span style="color:black;font-weight:bold;">AND</span> it1.id = mi.info_type_id
+    <span style="color:black;font-weight:bold;">AND</span> it2.id = mi_idx.info_type_id;
+
+</pre>
+		<img src="/images/graphs/IMDBQ068.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

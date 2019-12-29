@@ -1,0 +1,24 @@
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    MIN(k.keyword) <span style="color:black;font-weight:bold;">AS</span> movie_keyword,
+    MIN(n.name) <span style="color:black;font-weight:bold;">AS</span> actor_name,
+    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> marvel_movie
+<span style="color:black;font-weight:bold;">FROM</span>
+    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
+    keyword <span style="color:black;font-weight:bold;">AS</span> k,
+    movie_keyword <span style="color:black;font-weight:bold;">AS</span> mk,
+    name <span style="color:black;font-weight:bold;">AS</span> n,
+    title <span style="color:black;font-weight:bold;">AS</span> t
+<span style="color:black;font-weight:bold;">WHERE</span>
+    k.keyword = <span style="color:firebrick;">'marvel-cinematic-universe'</span>
+    <span style="color:black;font-weight:bold;">AND</span> n.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Downey%Robert%'</span>
+    <span style="color:black;font-weight:bold;">AND</span> t.production_year > 2000
+    <span style="color:black;font-weight:bold;">AND</span> k.id = mk.keyword_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = mk.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mk.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id;
+
+</pre>
+		<img src="/images/graphs/IMDBQ022.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

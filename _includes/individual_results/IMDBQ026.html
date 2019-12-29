@@ -1,0 +1,44 @@
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    MIN(n.name) <span style="color:black;font-weight:bold;">AS</span> cast_member_name,
+    MIN(pi.info) <span style="color:black;font-weight:bold;">AS</span> cast_member_info
+<span style="color:black;font-weight:bold;">FROM</span>
+    aka_name <span style="color:black;font-weight:bold;">AS</span> an,
+    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
+    info_type <span style="color:black;font-weight:bold;">AS</span> it,
+    link_type <span style="color:black;font-weight:bold;">AS</span> lt,
+    movie_link <span style="color:black;font-weight:bold;">AS</span> ml,
+    name <span style="color:black;font-weight:bold;">AS</span> n,
+    person_info <span style="color:black;font-weight:bold;">AS</span> pi,
+    title <span style="color:black;font-weight:bold;">AS</span> t
+<span style="color:black;font-weight:bold;">WHERE</span>
+    an.name IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
+    <span style="color:black;font-weight:bold;">AND</span> (an.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%a%'</span>
+        <span style="color:black;font-weight:bold;">OR</span> an.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'A%'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> it.info = <span style="color:firebrick;">'mini biography'</span>
+    <span style="color:black;font-weight:bold;">AND</span> lt.link <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'references'</span>,
+        <span style="color:firebrick;">'referenced in'</span>,
+        <span style="color:firebrick;">'features'</span>,
+        <span style="color:firebrick;">'featured in'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> n.name_pcode_cf <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:firebrick;">'A'</span>
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:firebrick;">'F'</span>
+    <span style="color:black;font-weight:bold;">AND</span> (n.gender = <span style="color:firebrick;">'m'</span>
+        <span style="color:black;font-weight:bold;">OR</span> (n.gender = <span style="color:firebrick;">'f'</span>
+            <span style="color:black;font-weight:bold;">AND</span> n.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'A%'</span>))
+    <span style="color:black;font-weight:bold;">AND</span> pi.note IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
+    <span style="color:black;font-weight:bold;">AND</span> t.production_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1980 <span style="color:black;font-weight:bold;">AND</span> 2010
+    <span style="color:black;font-weight:bold;">AND</span> n.id = an.person_id
+    <span style="color:black;font-weight:bold;">AND</span> n.id = pi.person_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.person_id = n.id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> ml.linked_movie_id = t.id
+    <span style="color:black;font-weight:bold;">AND</span> lt.id = ml.link_type_id
+    <span style="color:black;font-weight:bold;">AND</span> it.id = pi.info_type_id
+    <span style="color:black;font-weight:bold;">AND</span> pi.person_id = an.person_id
+    <span style="color:black;font-weight:bold;">AND</span> pi.person_id = ci.person_id
+    <span style="color:black;font-weight:bold;">AND</span> an.person_id = ci.person_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = ml.linked_movie_id;
+
+</pre>
+		<img src="/images/graphs/IMDBQ026.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
