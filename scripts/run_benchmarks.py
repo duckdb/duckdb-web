@@ -295,6 +295,9 @@ if len(results) > 0:
 
 # get a list of all commits we need to run
 commit_list = get_list_of_commits(prev_hash)
+if len(commit_list) == 0:
+    exit(1)
+
 # we limit the amount of commits we run at once
 if len(commit_list) > maximum_commit_count:
     new_commit_list = []
