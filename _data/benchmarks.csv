@@ -185,3 +185,4 @@ RangeQueryWithIndex,micro
 RangeQueryWithIndexBaseline,micro
 BulkUpdate,bulkupdate
 PointQueryWithIndexBaseline,micro
+ReadLineitemCSVUnicode,csv
