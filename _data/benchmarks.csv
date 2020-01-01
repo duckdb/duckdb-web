@@ -186,3 +186,15 @@ RangeQueryWithIndexBaseline,micro
 BulkUpdate,bulkupdate
 PointQueryWithIndexBaseline,micro
 ReadLineitemCSVUnicode,csv
+NotInList0001Entry,in
+NotInList0002Entry,in
+NotInList0004Entry,in
+NotInList0008Entry,in
+NotInList0016Entry,in
+NotInList0032Entry,in
+NotInList0064Entry,in
+NotInList0128Entry,in
+NotInList0256Entry,in
+NotInList0512Entry,in
+NotInList1024Entry,in
+NotInList2048Entry,in
