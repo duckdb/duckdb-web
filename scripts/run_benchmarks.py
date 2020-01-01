@@ -14,8 +14,8 @@ total_timeout = 300
 maximum_commit_count = 30
 # slow benchmarks are skipped for all commits except the most recent commit to speed up benchmarking
 # e.g. if a merge of 20+ commits is done, we don't want to run the slow benchmarks for all commits
-slow_benchmarks = ['append', 'imdb', 'tpcds-sf1']
-ignored_benchmarks = ['imdb', 'expression_reordering']
+slow_benchmarks = ['imdb']
+ignored_benchmarks = ['expression_reordering']
 # the specific commit to run (if any)
 specific_commit = None
 
