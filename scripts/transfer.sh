@@ -1,6 +1,6 @@
 python3 scripts/generate_minidb.py
 python3 scripts/generate_descriptions.py
-R -f generate_graphs.R
+R -f scripts/generate_graphs.R
 python3 scripts/benchmark_html.py
 git add benchmarks
 git add _includes
