@@ -1,47 +1,41 @@
-
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    MIN(mi_idx.info) <span style="color:black;font-weight:bold;">AS</span> rating,
-    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> western_dark_production
-<span style="color:black;font-weight:bold;">FROM</span>
-    info_type <span style="color:black;font-weight:bold;">AS</span> it1,
-    info_type <span style="color:black;font-weight:bold;">AS</span> it2,
-    keyword <span style="color:black;font-weight:bold;">AS</span> k,
-    kind_type <span style="color:black;font-weight:bold;">AS</span> kt,
-    movie_info <span style="color:black;font-weight:bold;">AS</span> mi,
-    movie_info_idx <span style="color:black;font-weight:bold;">AS</span> mi_idx,
-    movie_keyword <span style="color:black;font-weight:bold;">AS</span> mk,
-    title <span style="color:black;font-weight:bold;">AS</span> t
-<span style="color:black;font-weight:bold;">WHERE</span>
-    it1.info = <span style="color:firebrick;">'countries'</span>
-    <span style="color:black;font-weight:bold;">AND</span> it2.info = <span style="color:firebrick;">'rating'</span>
-    <span style="color:black;font-weight:bold;">AND</span> k.keyword <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'murder'</span>, <span style="color:firebrick;">'murder-in-title'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> kt.kind = <span style="color:firebrick;">'movie'</span>
-    <span style="color:black;font-weight:bold;">AND</span> mi.info <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'Sweden'</span>,
-        <span style="color:firebrick;">'Norway'</span>,
-        <span style="color:firebrick;">'Germany'</span>,
-        <span style="color:firebrick;">'Denmark'</span>,
-        <span style="color:firebrick;">'Swedish'</span>,
-        <span style="color:firebrick;">'Denish'</span>,
-        <span style="color:firebrick;">'Norwegian'</span>,
-        <span style="color:firebrick;">'German'</span>,
-        <span style="color:firebrick;">'USA'</span>,
-        <span style="color:firebrick;">'American'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> mi_idx.info > <span style="color:firebrick;">'6.0'</span>
-    <span style="color:black;font-weight:bold;">AND</span> t.production_year > 2010
-    <span style="color:black;font-weight:bold;">AND</span> (t.title <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%murder%'</span>
-        <span style="color:black;font-weight:bold;">OR</span> t.title <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Murder%'</span>
-        <span style="color:black;font-weight:bold;">OR</span> t.title <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Mord%'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> kt.id = t.kind_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mi.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mk.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = mi.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> k.id = mk.keyword_id
-    <span style="color:black;font-weight:bold;">AND</span> it1.id = mi.info_type_id
-    <span style="color:black;font-weight:bold;">AND</span> it2.id = mi_idx.info_type_id;
-
-</pre>
-		<img src="/images/graphs/IMDBQ050.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+IMDBQ050 - [imdb]
+IMDB (JOB) Q50: SELECT MIN(mi_idx.info) AS rating,
+       MIN(t.title) AS western_dark_production
+FROM info_type AS it1,
+     info_type AS it2,
+     keyword AS k,
+     kind_type AS kt,
+     movie_info AS mi,
+     movie_info_idx AS mi_idx,
+     movie_keyword AS mk,
+     title AS t
+WHERE it1.info = 'countries'
+  AND it2.info = 'rating'
+  AND k.keyword IN ('murder',
+                    'murder-in-title')
+  AND kt.kind = 'movie'
+  AND mi.info IN ('Sweden',
+                  'Norway',
+                  'Germany',
+                  'Denmark',
+                  'Swedish',
+                  'Denish',
+                  'Norwegian',
+                  'German',
+                  'USA',
+                  'American')
+  AND mi_idx.info > '6.0'
+  AND t.production_year > 2010
+  AND (t.title LIKE '%murder%'
+       OR t.title LIKE '%Murder%'
+       OR t.title LIKE '%Mord%')
+  AND kt.id = t.kind_id
+  AND t.id = mi.movie_id
+  AND t.id = mk.movie_id
+  AND t.id = mi_idx.movie_id
+  AND mk.movie_id = mi.movie_id
+  AND mk.movie_id = mi_idx.movie_id
+  AND mi.movie_id = mi_idx.movie_id
+  AND k.id = mk.keyword_id
+  AND it1.id = mi.info_type_id
+  AND it2.id = mi_idx.info_type_id;<img src="/images/graphs/IMDBQ050.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

@@ -1,32 +1,25 @@
-
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    MIN(an1.name) <span style="color:black;font-weight:bold;">AS</span> actress_pseudonym,
-    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> japanese_movie_dubbed
-<span style="color:black;font-weight:bold;">FROM</span>
-    aka_name <span style="color:black;font-weight:bold;">AS</span> an1,
-    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
-    company_name <span style="color:black;font-weight:bold;">AS</span> cn,
-    movie_companies <span style="color:black;font-weight:bold;">AS</span> mc,
-    name <span style="color:black;font-weight:bold;">AS</span> n1,
-    role_type <span style="color:black;font-weight:bold;">AS</span> rt,
-    title <span style="color:black;font-weight:bold;">AS</span> t
-<span style="color:black;font-weight:bold;">WHERE</span>
-    ci.note = <span style="color:firebrick;">'(voice: English version)'</span>
-    <span style="color:black;font-weight:bold;">AND</span> cn.country_code = <span style="color:firebrick;">'[jp]'</span>
-    <span style="color:black;font-weight:bold;">AND</span> mc.note <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%(Japan)%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> mc.note <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%(USA)%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> n1.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Yo%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> n1.name <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Yu%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> rt.role = <span style="color:firebrick;">'actress'</span>
-    <span style="color:black;font-weight:bold;">AND</span> an1.person_id = n1.id
-    <span style="color:black;font-weight:bold;">AND</span> n1.id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = t.id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mc.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mc.company_id = cn.id
-    <span style="color:black;font-weight:bold;">AND</span> ci.role_id = rt.id
-    <span style="color:black;font-weight:bold;">AND</span> an1.person_id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mc.movie_id;
-
-</pre>
-		<img src="/images/graphs/IMDBQ027.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+IMDBQ027 - [imdb]
+IMDB (JOB) Q27: SELECT MIN(an1.name) AS actress_pseudonym,
+       MIN(t.title) AS japanese_movie_dubbed
+FROM aka_name AS an1,
+     cast_info AS ci,
+     company_name AS cn,
+     movie_companies AS mc,
+     name AS n1,
+     role_type AS rt,
+     title AS t
+WHERE ci.note ='(voice: English version)'
+  AND cn.country_code ='[jp]'
+  AND mc.note LIKE '%(Japan)%'
+  AND mc.note NOT LIKE '%(USA)%'
+  AND n1.name LIKE '%Yo%'
+  AND n1.name NOT LIKE '%Yu%'
+  AND rt.role ='actress'
+  AND an1.person_id = n1.id
+  AND n1.id = ci.person_id
+  AND ci.movie_id = t.id
+  AND t.id = mc.movie_id
+  AND mc.company_id = cn.id
+  AND ci.role_id = rt.id
+  AND an1.person_id = ci.person_id
+  AND ci.movie_id = mc.movie_id;<img src="/images/graphs/IMDBQ027.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

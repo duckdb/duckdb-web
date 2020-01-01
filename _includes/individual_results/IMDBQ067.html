@@ -1,37 +1,34 @@
-
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    MIN(mi.info) <span style="color:black;font-weight:bold;">AS</span> movie_budget,
-    MIN(mi_idx.info) <span style="color:black;font-weight:bold;">AS</span> movie_votes,
-    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> movie_title
-<span style="color:black;font-weight:bold;">FROM</span>
-    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
-    info_type <span style="color:black;font-weight:bold;">AS</span> it1,
-    info_type <span style="color:black;font-weight:bold;">AS</span> it2,
-    movie_info <span style="color:black;font-weight:bold;">AS</span> mi,
-    movie_info_idx <span style="color:black;font-weight:bold;">AS</span> mi_idx,
-    name <span style="color:black;font-weight:bold;">AS</span> n,
-    title <span style="color:black;font-weight:bold;">AS</span> t
-<span style="color:black;font-weight:bold;">WHERE</span>
-    ci.note <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'(writer)'</span>, <span style="color:firebrick;">'(head writer)'</span>, <span style="color:firebrick;">'(written by)'</span>, <span style="color:firebrick;">'(story)'</span>, <span style="color:firebrick;">'(story editor)'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> it1.info = <span style="color:firebrick;">'genres'</span>
-    <span style="color:black;font-weight:bold;">AND</span> it2.info = <span style="color:firebrick;">'rating'</span>
-    <span style="color:black;font-weight:bold;">AND</span> mi.info <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'Horror'</span>,
-        <span style="color:firebrick;">'Thriller'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> mi.note IS <span style="color:black;font-weight:bold;">NULL</span>
-    <span style="color:black;font-weight:bold;">AND</span> mi_idx.info > <span style="color:firebrick;">'8.0'</span>
-    <span style="color:black;font-weight:bold;">AND</span> n.gender IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
-    <span style="color:black;font-weight:bold;">AND</span> n.gender = <span style="color:firebrick;">'f'</span>
-    <span style="color:black;font-weight:bold;">AND</span> t.production_year <span style="color:black;font-weight:bold;">BETWEEN</span> 2008 <span style="color:black;font-weight:bold;">AND</span> 2014
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mi.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mi.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> it1.id = mi.info_type_id
-    <span style="color:black;font-weight:bold;">AND</span> it2.id = mi_idx.info_type_id;
-
-</pre>
-		<img src="/images/graphs/IMDBQ067.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+IMDBQ067 - [imdb]
+IMDB (JOB) Q67: SELECT MIN(mi.info) AS movie_budget,
+       MIN(mi_idx.info) AS movie_votes,
+       MIN(t.title) AS movie_title
+FROM cast_info AS ci,
+     info_type AS it1,
+     info_type AS it2,
+     movie_info AS mi,
+     movie_info_idx AS mi_idx,
+     name AS n,
+     title AS t
+WHERE ci.note IN ('(writer)',
+                  '(head writer)',
+                  '(written by)',
+                  '(story)',
+                  '(story editor)')
+  AND it1.info = 'genres'
+  AND it2.info = 'rating'
+  AND mi.info IN ('Horror',
+                  'Thriller')
+  AND mi.note IS NULL
+  AND mi_idx.info > '8.0'
+  AND n.gender IS NOT NULL
+  AND n.gender = 'f'
+  AND t.production_year BETWEEN 2008 AND 2014
+  AND t.id = mi.movie_id
+  AND t.id = mi_idx.movie_id
+  AND t.id = ci.movie_id
+  AND ci.movie_id = mi.movie_id
+  AND ci.movie_id = mi_idx.movie_id
+  AND mi.movie_id = mi_idx.movie_id
+  AND n.id = ci.person_id
+  AND it1.id = mi.info_type_id
+  AND it2.id = mi_idx.info_type_id;<img src="/images/graphs/IMDBQ067.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

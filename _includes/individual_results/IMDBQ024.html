@@ -1,39 +1,31 @@
-
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    MIN(n.name) <span style="color:black;font-weight:bold;">AS</span> of_person,
-    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> biography_movie
-<span style="color:black;font-weight:bold;">FROM</span>
-    aka_name <span style="color:black;font-weight:bold;">AS</span> an,
-    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
-    info_type <span style="color:black;font-weight:bold;">AS</span> it,
-    link_type <span style="color:black;font-weight:bold;">AS</span> lt,
-    movie_link <span style="color:black;font-weight:bold;">AS</span> ml,
-    name <span style="color:black;font-weight:bold;">AS</span> n,
-    person_info <span style="color:black;font-weight:bold;">AS</span> pi,
-    title <span style="color:black;font-weight:bold;">AS</span> t
-<span style="color:black;font-weight:bold;">WHERE</span>
-    an.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%a%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> it.info = <span style="color:firebrick;">'mini biography'</span>
-    <span style="color:black;font-weight:bold;">AND</span> lt.link = <span style="color:firebrick;">'features'</span>
-    <span style="color:black;font-weight:bold;">AND</span> n.name_pcode_cf <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:firebrick;">'A'</span>
-    <span style="color:black;font-weight:bold;">AND</span> <span style="color:firebrick;">'F'</span>
-    <span style="color:black;font-weight:bold;">AND</span> (n.gender = <span style="color:firebrick;">'m'</span>
-        <span style="color:black;font-weight:bold;">OR</span> (n.gender = <span style="color:firebrick;">'f'</span>
-            <span style="color:black;font-weight:bold;">AND</span> n.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'B%'</span>))
-    <span style="color:black;font-weight:bold;">AND</span> pi.note = <span style="color:firebrick;">'Volker Boehm'</span>
-    <span style="color:black;font-weight:bold;">AND</span> t.production_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1980 <span style="color:black;font-weight:bold;">AND</span> 1995
-    <span style="color:black;font-weight:bold;">AND</span> n.id = an.person_id
-    <span style="color:black;font-weight:bold;">AND</span> n.id = pi.person_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.person_id = n.id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> ml.linked_movie_id = t.id
-    <span style="color:black;font-weight:bold;">AND</span> lt.id = ml.link_type_id
-    <span style="color:black;font-weight:bold;">AND</span> it.id = pi.info_type_id
-    <span style="color:black;font-weight:bold;">AND</span> pi.person_id = an.person_id
-    <span style="color:black;font-weight:bold;">AND</span> pi.person_id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> an.person_id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = ml.linked_movie_id;
-
-</pre>
-		<img src="/images/graphs/IMDBQ024.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+IMDBQ024 - [imdb]
+IMDB (JOB) Q24: SELECT MIN(n.name) AS of_person,
+       MIN(t.title) AS biography_movie
+FROM aka_name AS an,
+     cast_info AS ci,
+     info_type AS it,
+     link_type AS lt,
+     movie_link AS ml,
+     name AS n,
+     person_info AS pi,
+     title AS t
+WHERE an.name LIKE '%a%'
+  AND it.info ='mini biography'
+  AND lt.link ='features'
+  AND n.name_pcode_cf BETWEEN 'A' AND 'F'
+  AND (n.gender='m'
+       OR (n.gender = 'f'
+           AND n.name LIKE 'B%'))
+  AND pi.note ='Volker Boehm'
+  AND t.production_year BETWEEN 1980 AND 1995
+  AND n.id = an.person_id
+  AND n.id = pi.person_id
+  AND ci.person_id = n.id
+  AND t.id = ci.movie_id
+  AND ml.linked_movie_id = t.id
+  AND lt.id = ml.link_type_id
+  AND it.id = pi.info_type_id
+  AND pi.person_id = an.person_id
+  AND pi.person_id = ci.person_id
+  AND an.person_id = ci.person_id
+  AND ci.movie_id = ml.linked_movie_id;<img src="/images/graphs/IMDBQ024.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

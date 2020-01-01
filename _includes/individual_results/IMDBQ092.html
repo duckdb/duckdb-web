@@ -1,53 +1,46 @@
-
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    MIN(chn.name) <span style="color:black;font-weight:bold;">AS</span> character_name,
-    MIN(mi_idx.info) <span style="color:black;font-weight:bold;">AS</span> rating,
-    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> complete_hero_movie
-<span style="color:black;font-weight:bold;">FROM</span>
-    complete_cast <span style="color:black;font-weight:bold;">AS</span> cc,
-    comp_cast_type <span style="color:black;font-weight:bold;">AS</span> cct1,
-    comp_cast_type <span style="color:black;font-weight:bold;">AS</span> cct2,
-    char_name <span style="color:black;font-weight:bold;">AS</span> chn,
-    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
-    info_type <span style="color:black;font-weight:bold;">AS</span> it2,
-    keyword <span style="color:black;font-weight:bold;">AS</span> k,
-    kind_type <span style="color:black;font-weight:bold;">AS</span> kt,
-    movie_info_idx <span style="color:black;font-weight:bold;">AS</span> mi_idx,
-    movie_keyword <span style="color:black;font-weight:bold;">AS</span> mk,
-    name <span style="color:black;font-weight:bold;">AS</span> n,
-    title <span style="color:black;font-weight:bold;">AS</span> t
-<span style="color:black;font-weight:bold;">WHERE</span>
-    cct1.kind = <span style="color:firebrick;">'cast'</span>
-    <span style="color:black;font-weight:bold;">AND</span> cct2.kind <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%complete%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> chn.name IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
-    <span style="color:black;font-weight:bold;">AND</span> (chn.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%man%'</span>
-        <span style="color:black;font-weight:bold;">OR</span> chn.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Man%'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> it2.info = <span style="color:firebrick;">'rating'</span>
-    <span style="color:black;font-weight:bold;">AND</span> k.keyword <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'superhero'</span>,
-        <span style="color:firebrick;">'marvel-comics'</span>,
-        <span style="color:firebrick;">'based-on-comic'</span>,
-        <span style="color:firebrick;">'fight'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> kt.kind = <span style="color:firebrick;">'movie'</span>
-    <span style="color:black;font-weight:bold;">AND</span> mi_idx.info > <span style="color:firebrick;">'8.0'</span>
-    <span style="color:black;font-weight:bold;">AND</span> t.production_year > 2005
-    <span style="color:black;font-weight:bold;">AND</span> kt.id = t.kind_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mk.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = cc.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = cc.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = cc.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> cc.movie_id = mi_idx.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> chn.id = ci.person_role_id
-    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> k.id = mk.keyword_id
-    <span style="color:black;font-weight:bold;">AND</span> cct1.id = cc.subject_id
-    <span style="color:black;font-weight:bold;">AND</span> cct2.id = cc.status_id
-    <span style="color:black;font-weight:bold;">AND</span> it2.id = mi_idx.info_type_id;
-
-</pre>
-		<img src="/images/graphs/IMDBQ092.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+IMDBQ092 - [imdb]
+IMDB (JOB) Q92: SELECT MIN(chn.name) AS character_name,
+       MIN(mi_idx.info) AS rating,
+       MIN(t.title) AS complete_hero_movie
+FROM complete_cast AS cc,
+     comp_cast_type AS cct1,
+     comp_cast_type AS cct2,
+     char_name AS chn,
+     cast_info AS ci,
+     info_type AS it2,
+     keyword AS k,
+     kind_type AS kt,
+     movie_info_idx AS mi_idx,
+     movie_keyword AS mk,
+     name AS n,
+     title AS t
+WHERE cct1.kind = 'cast'
+  AND cct2.kind LIKE '%complete%'
+  AND chn.name IS NOT NULL
+  AND (chn.name LIKE '%man%'
+       OR chn.name LIKE '%Man%')
+  AND it2.info = 'rating'
+  AND k.keyword IN ('superhero',
+                    'marvel-comics',
+                    'based-on-comic',
+                    'fight')
+  AND kt.kind = 'movie'
+  AND mi_idx.info > '8.0'
+  AND t.production_year > 2005
+  AND kt.id = t.kind_id
+  AND t.id = mk.movie_id
+  AND t.id = ci.movie_id
+  AND t.id = cc.movie_id
+  AND t.id = mi_idx.movie_id
+  AND mk.movie_id = ci.movie_id
+  AND mk.movie_id = cc.movie_id
+  AND mk.movie_id = mi_idx.movie_id
+  AND ci.movie_id = cc.movie_id
+  AND ci.movie_id = mi_idx.movie_id
+  AND cc.movie_id = mi_idx.movie_id
+  AND chn.id = ci.person_role_id
+  AND n.id = ci.person_id
+  AND k.id = mk.keyword_id
+  AND cct1.id = cc.subject_id
+  AND cct2.id = cc.status_id
+  AND it2.id = mi_idx.info_type_id;<img src="/images/graphs/IMDBQ092.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

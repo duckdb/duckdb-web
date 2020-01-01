@@ -1,43 +1,39 @@
-
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    MIN(n.name) <span style="color:black;font-weight:bold;">AS</span> voicing_actress,
-    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> jap_engl_voiced_movie
-<span style="color:black;font-weight:bold;">FROM</span>
-    aka_name <span style="color:black;font-weight:bold;">AS</span> an,
-    char_name <span style="color:black;font-weight:bold;">AS</span> chn,
-    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
-    company_name <span style="color:black;font-weight:bold;">AS</span> cn,
-    info_type <span style="color:black;font-weight:bold;">AS</span> it,
-    movie_companies <span style="color:black;font-weight:bold;">AS</span> mc,
-    movie_info <span style="color:black;font-weight:bold;">AS</span> mi,
-    name <span style="color:black;font-weight:bold;">AS</span> n,
-    role_type <span style="color:black;font-weight:bold;">AS</span> rt,
-    title <span style="color:black;font-weight:bold;">AS</span> t
-<span style="color:black;font-weight:bold;">WHERE</span>
-    ci.note <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'(voice)'</span>, <span style="color:firebrick;">'(voice: Japanese version)'</span>, <span style="color:firebrick;">'(voice) (uncredited)'</span>, <span style="color:firebrick;">'(voice: English version)'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> cn.country_code = <span style="color:firebrick;">'[us]'</span>
-    <span style="color:black;font-weight:bold;">AND</span> it.info = <span style="color:firebrick;">'release dates'</span>
-    <span style="color:black;font-weight:bold;">AND</span> mi.info IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
-    <span style="color:black;font-weight:bold;">AND</span> (mi.info <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'Japan:%200%'</span>
-        <span style="color:black;font-weight:bold;">OR</span> mi.info <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'USA:%200%'</span>)
-    <span style="color:black;font-weight:bold;">AND</span> n.gender = <span style="color:firebrick;">'f'</span>
-    <span style="color:black;font-weight:bold;">AND</span> n.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%An%'</span>
-    <span style="color:black;font-weight:bold;">AND</span> rt.role = <span style="color:firebrick;">'actress'</span>
-    <span style="color:black;font-weight:bold;">AND</span> t.production_year > 2000
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mi.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = mc.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mc.movie_id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mc.movie_id = mi.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> mi.movie_id = ci.movie_id
-    <span style="color:black;font-weight:bold;">AND</span> cn.id = mc.company_id
-    <span style="color:black;font-weight:bold;">AND</span> it.id = mi.info_type_id
-    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id
-    <span style="color:black;font-weight:bold;">AND</span> rt.id = ci.role_id
-    <span style="color:black;font-weight:bold;">AND</span> n.id = an.person_id
-    <span style="color:black;font-weight:bold;">AND</span> ci.person_id = an.person_id
-    <span style="color:black;font-weight:bold;">AND</span> chn.id = ci.person_role_id;
-
-</pre>
-		<img src="/images/graphs/IMDBQ071.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+IMDBQ071 - [imdb]
+IMDB (JOB) Q71: SELECT MIN(n.name) AS voicing_actress,
+       MIN(t.title) AS jap_engl_voiced_movie
+FROM aka_name AS an,
+     char_name AS chn,
+     cast_info AS ci,
+     company_name AS cn,
+     info_type AS it,
+     movie_companies AS mc,
+     movie_info AS mi,
+     name AS n,
+     role_type AS rt,
+     title AS t
+WHERE ci.note IN ('(voice)',
+                  '(voice: Japanese version)',
+                  '(voice) (uncredited)',
+                  '(voice: English version)')
+  AND cn.country_code ='[us]'
+  AND it.info = 'release dates'
+  AND mi.info IS NOT NULL
+  AND (mi.info LIKE 'Japan:%200%'
+       OR mi.info LIKE 'USA:%200%')
+  AND n.gender ='f'
+  AND n.name LIKE '%An%'
+  AND rt.role ='actress'
+  AND t.production_year > 2000
+  AND t.id = mi.movie_id
+  AND t.id = mc.movie_id
+  AND t.id = ci.movie_id
+  AND mc.movie_id = ci.movie_id
+  AND mc.movie_id = mi.movie_id
+  AND mi.movie_id = ci.movie_id
+  AND cn.id = mc.company_id
+  AND it.id = mi.info_type_id
+  AND n.id = ci.person_id
+  AND rt.id = ci.role_id
+  AND n.id = an.person_id
+  AND ci.person_id = an.person_id
+  AND chn.id = ci.person_role_id;<img src="/images/graphs/IMDBQ071.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>

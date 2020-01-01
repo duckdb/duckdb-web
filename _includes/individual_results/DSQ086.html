@@ -1,36 +1,7 @@
+DSQ086 - [tpcds-sf1]
+TPC-DS Q86 SF1: SELECT i_item_id , i_item_desc , i_current_price FROM item, inventory, date_dim, store_sales WHERE i_current_price BETWEEN 62 AND 62+30 AND inv_item_sk = i_item_sk AND d_date_sk=inv_date_sk AND d_date BETWEEN cast('2000-05-25' AS date) AND cast('2000-07-24' AS date) AND i_manufact_id IN (129, 270, 821, 423) AND inv_quantity_on_hand BETWEEN 100 AND 500 AND ss_item_sk = i_item_sk GROUP BY i_item_id, i_item_desc, i_current_price ORDER BY i_item_id LIMIT 100;<img src="/images/graphs/DSQ086.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td class="table-warning"><b>T</b></td><td></td><td>Merge pull request #382 from cwida/between
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
-    i_item_id,
-    i_item_desc,
-    i_current_price
-<span style="color:black;font-weight:bold;">FROM</span>
-    item,
-    inventory,
-    date_dim,
-    store_sales
-<span style="color:black;font-weight:bold;">WHERE</span>
-    i_current_price <span style="color:black;font-weight:bold;">BETWEEN</span> 62 <span style="color:black;font-weight:bold;">AND</span> 62 + 30
-    <span style="color:black;font-weight:bold;">AND</span> inv_item_sk = i_item_sk
-    <span style="color:black;font-weight:bold;">AND</span> d_date_sk = inv_date_sk
-    <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-05-25'</span> <span style="color:black;font-weight:bold;">AS</span> date)
-    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-07-24'</span> <span style="color:black;font-weight:bold;">AS</span> date)
-    <span style="color:black;font-weight:bold;">AND</span> i_manufact_id <span style="color:black;font-weight:bold;">IN</span> (129,
-        270,
-        821,
-        423)
-    <span style="color:black;font-weight:bold;">AND</span> inv_quantity_on_hand <span style="color:black;font-weight:bold;">BETWEEN</span> 100 <span style="color:black;font-weight:bold;">AND</span> 500
-    <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = i_item_sk
-<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
-    i_item_id,
-    i_item_desc,
-    i_current_price
-<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
-    i_item_id
-<span style="color:black;font-weight:bold;">LIMIT</span> 100;
-
-</pre>
-		<img src="/images/graphs/DSQ086.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/7762672ea11ab96b3e89f95ea9019be8503fde87">7762</a></td><td>2019-12-23</td><td class="table-warning"><b>T</b></td><td></td><td>Move continuous benchmark code out of main repo and into website repo</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/f331a271dc89c74a70d38f01b7bcded8137a8bc4">f331</a></td><td>2019-12-17</td><td class="table-warning"><b>T</b></td><td></td><td>covering all filter expression classes</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ea042a326215b7dd1169457eef406bd442e3ee89">ea04</a></td><td>2019-12-17</td><td class="table-warning"><b>T</b></td><td></td><td>Fixes for non-unity builds on linux</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/110bd1c83861a55e22a9ee4e97894366bf417dba">110b</a></td><td>2019-09-09</td><td class="table-warning"><b>T</b></td><td></td><td>Adding the IMDB-based Join Order Benchmark [JOB] from Leis et al. (#283)</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/8b5a04fe16ca99342cf0e8df471d923856a8f605">8b5a</a></td><td>2019-09-06</td><td class="table-danger"><b>C</b></td><td></td><td>Add benchmark for bulk updates/deletions</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/69f931fb495279250b70b45a70964b6035bb0b62">69f9</a></td><td>2019-09-05</td><td class="table-warning"><b>T</b></td><td></td><td>Update setseed
+Add BETWEEN operator and rework OR/(NOT) IN operators</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/8091a7ceeaf387a9d19849d15bd24c0b0d03b1ce">8091</a></td><td>2019-12-29</td><td class="table-warning"><b>T</b></td><td></td><td>Add --query option to benchmark_runner</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/7762672ea11ab96b3e89f95ea9019be8503fde87">7762</a></td><td>2019-12-23</td><td class="table-warning"><b>T</b></td><td></td><td>Move continuous benchmark code out of main repo and into website repo</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/f331a271dc89c74a70d38f01b7bcded8137a8bc4">f331</a></td><td>2019-12-17</td><td class="table-warning"><b>T</b></td><td></td><td>covering all filter expression classes</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ea042a326215b7dd1169457eef406bd442e3ee89">ea04</a></td><td>2019-12-17</td><td class="table-warning"><b>T</b></td><td></td><td>Fixes for non-unity builds on linux</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/110bd1c83861a55e22a9ee4e97894366bf417dba">110b</a></td><td>2019-09-09</td><td class="table-warning"><b>T</b></td><td></td><td>Adding the IMDB-based Join Order Benchmark [JOB] from Leis et al. (#283)</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/8b5a04fe16ca99342cf0e8df471d923856a8f605">8b5a</a></td><td>2019-09-06</td><td class="table-danger"><b>C</b></td><td></td><td>Add benchmark for bulk updates/deletions</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/69f931fb495279250b70b45a70964b6035bb0b62">69f9</a></td><td>2019-09-05</td><td class="table-warning"><b>T</b></td><td></td><td>Update setseed
 
 Updates:
 - Constrain seed value between -1.0 and 1.0, inclusive
