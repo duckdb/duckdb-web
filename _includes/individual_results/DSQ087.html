@@ -1,7 +1,113 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> sr_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sr_return_quantity) sr_item_qty
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_returns,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        sr_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq <span style="color:black;font-weight:bold;">IN</span> (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'2000-06-30'</span>,
+                            <span style="color:firebrick;">'2000-09-27'</span>,
+                            <span style="color:firebrick;">'2000-11-17'</span>)))
+                <span style="color:black;font-weight:bold;">AND</span> sr_returned_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+),
+cr_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(cr_return_quantity) cr_item_qty
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_returns,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cr_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq <span style="color:black;font-weight:bold;">IN</span> (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'2000-06-30'</span>,
+                            <span style="color:firebrick;">'2000-09-27'</span>,
+                            <span style="color:firebrick;">'2000-11-17'</span>)))
+                <span style="color:black;font-weight:bold;">AND</span> cr_returned_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+),
+wr_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(wr_return_quantity) wr_item_qty
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_returns,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        wr_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq <span style="color:black;font-weight:bold;">IN</span> (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'2000-06-30'</span>,
+                            <span style="color:firebrick;">'2000-09-27'</span>,
+                            <span style="color:firebrick;">'2000-11-17'</span>)))
+                <span style="color:black;font-weight:bold;">AND</span> wr_returned_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    sr_items.item_id,
+    sr_item_qty,
+    (sr_item_qty * 1.0000) / (sr_item_qty + cr_item_qty + wr_item_qty) / 3.0000 * 100 sr_dev,
+cr_item_qty,
+(cr_item_qty * 1.0000) / (sr_item_qty + cr_item_qty + wr_item_qty) / 3.0000 * 100 cr_dev,
+wr_item_qty,
+(wr_item_qty * 1.0000) / (sr_item_qty + cr_item_qty + wr_item_qty) / 3.0000 * 100 wr_dev,
+(sr_item_qty + cr_item_qty + wr_item_qty) / 3.0 average
+<span style="color:black;font-weight:bold;">FROM</span>
+    sr_items,
+    cr_items,
+    wr_items
+<span style="color:black;font-weight:bold;">WHERE</span>
+    sr_items.item_id = cr_items.item_id
+    <span style="color:black;font-weight:bold;">AND</span> sr_items.item_id = wr_items.item_id
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    sr_items.item_id,
+    sr_item_qty
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ087.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.31</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ087">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ087">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ087">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ087.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.31</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ087">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ087">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ087">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.30</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ087">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ087">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ087">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.32</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ087">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ087">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ087">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.32</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ087">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ087">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ087">E</a>]</td><td>Merge pull request #382 from cwida/between
 

@@ -1,7 +1,179 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> cross_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_sk ss_item_sk
+    <span style="color:black;font-weight:bold;">FROM</span>
+        item,
+        (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                iss.i_brand_id brand_id,
+                iss.i_class_id class_id,
+                iss.i_category_id category_id
+            <span style="color:black;font-weight:bold;">FROM</span>
+                store_sales,
+                item iss,
+                date_dim d1
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                ss_item_sk = iss.i_item_sk
+                <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d1.d_date_sk
+                <span style="color:black;font-weight:bold;">AND</span> d1.d_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1999 <span style="color:black;font-weight:bold;">AND</span> 1999 + 2
+            <span style="color:black;font-weight:bold;">INTERSECT</span>
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                ics.i_brand_id,
+                ics.i_class_id,
+                ics.i_category_id
+            <span style="color:black;font-weight:bold;">FROM</span>
+                catalog_sales,
+                item ics,
+                date_dim d2
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                cs_item_sk = ics.i_item_sk
+                <span style="color:black;font-weight:bold;">AND</span> cs_sold_date_sk = d2.d_date_sk
+                <span style="color:black;font-weight:bold;">AND</span> d2.d_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1999 <span style="color:black;font-weight:bold;">AND</span> 1999 + 2
+            <span style="color:black;font-weight:bold;">INTERSECT</span>
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                iws.i_brand_id,
+                iws.i_class_id,
+                iws.i_category_id
+            <span style="color:black;font-weight:bold;">FROM</span>
+                web_sales,
+                item iws,
+                date_dim d3
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                ws_item_sk = iws.i_item_sk
+                <span style="color:black;font-weight:bold;">AND</span> ws_sold_date_sk = d3.d_date_sk
+                <span style="color:black;font-weight:bold;">AND</span> d3.d_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1999 <span style="color:black;font-weight:bold;">AND</span> 1999 + 2) x
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            i_brand_id = brand_id
+            <span style="color:black;font-weight:bold;">AND</span> i_class_id = class_id
+            <span style="color:black;font-weight:bold;">AND</span> i_category_id = category_id
+),
+avg_sales <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:black;font-weight:bold;">avg</span>(quantity * list_price) average_sales
+    <span style="color:black;font-weight:bold;">FROM</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ss_quantity quantity,
+            ss_list_price list_price
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales,
+            date_dim
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1999 <span style="color:black;font-weight:bold;">AND</span> 1999 + 2
+        <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            cs_quantity quantity,
+            cs_list_price list_price
+        <span style="color:black;font-weight:bold;">FROM</span>
+            catalog_sales,
+            date_dim
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            cs_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1999 <span style="color:black;font-weight:bold;">AND</span> 1999 + 2
+        <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ws_quantity quantity,
+            ws_list_price list_price
+        <span style="color:black;font-weight:bold;">FROM</span>
+            web_sales,
+            date_dim
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ws_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year <span style="color:black;font-weight:bold;">BETWEEN</span> 1999 <span style="color:black;font-weight:bold;">AND</span> 1999 + 2) x
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    this_year.channel ty_channel, this_year.i_brand_id ty_brand, this_year.i_class_id ty_class, this_year.i_category_id ty_category, this_year.sales ty_sales, this_year.number_sales ty_number_sales, last_year.channel ly_channel, last_year.i_brand_id ly_brand, last_year.i_class_id ly_class, last_year.i_category_id ly_category, last_year.sales ly_sales, last_year.number_sales ly_number_sales
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:firebrick;">'store'</span> channel,
+        i_brand_id,
+        i_class_id,
+        i_category_id,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_quantity * ss_list_price) sales,
+        <span style="color:black;font-weight:bold;">count</span>(*) number_sales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_item_sk <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                ss_item_sk
+            <span style="color:black;font-weight:bold;">FROM</span>
+                cross_items)
+            <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = i_item_sk
+            <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_week_seq = (
+                <span style="color:black;font-weight:bold;">SELECT</span>
+                    d_week_seq
+                <span style="color:black;font-weight:bold;">FROM</span>
+                    date_dim
+                <span style="color:black;font-weight:bold;">WHERE</span>
+                    d_year = 1999 + 1
+                    <span style="color:black;font-weight:bold;">AND</span> d_moy = 12
+                    <span style="color:black;font-weight:bold;">AND</span> d_dom = 11)
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_brand_id,
+                i_class_id,
+                i_category_id
+            <span style="color:black;font-weight:bold;">HAVING</span>
+                <span style="color:black;font-weight:bold;">sum</span>(ss_quantity * ss_list_price) > (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        average_sales
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        avg_sales)) this_year,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:firebrick;">'store'</span> channel,
+            i_brand_id,
+            i_class_id,
+            i_category_id,
+            <span style="color:black;font-weight:bold;">sum</span>(ss_quantity * ss_list_price) sales,
+            <span style="color:black;font-weight:bold;">count</span>(*) number_sales
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales,
+            item,
+            date_dim
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_item_sk <span style="color:black;font-weight:bold;">IN</span> (
+                <span style="color:black;font-weight:bold;">SELECT</span>
+                    ss_item_sk
+                <span style="color:black;font-weight:bold;">FROM</span>
+                    cross_items)
+                <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = i_item_sk
+                <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+                <span style="color:black;font-weight:bold;">AND</span> d_week_seq = (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_year = 1999
+                        <span style="color:black;font-weight:bold;">AND</span> d_moy = 12
+                        <span style="color:black;font-weight:bold;">AND</span> d_dom = 11)
+                <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                    i_brand_id,
+                    i_class_id,
+                    i_category_id
+                <span style="color:black;font-weight:bold;">HAVING</span>
+                    <span style="color:black;font-weight:bold;">sum</span>(ss_quantity * ss_list_price) > (
+                        <span style="color:black;font-weight:bold;">SELECT</span>
+                            average_sales
+                        <span style="color:black;font-weight:bold;">FROM</span>
+                            avg_sales)) last_year
+<span style="color:black;font-weight:bold;">WHERE</span>
+    this_year.i_brand_id = last_year.i_brand_id
+    <span style="color:black;font-weight:bold;">AND</span> this_year.i_class_id = last_year.i_class_id
+    <span style="color:black;font-weight:bold;">AND</span> this_year.i_category_id = last_year.i_category_id
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    this_year.channel,
+    this_year.i_brand_id,
+    this_year.i_class_id,
+    this_year.i_category_id
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ015.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>4.32</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ015">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ015">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ015">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ015.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>4.32</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ015">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ015">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ015">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>3.82</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ015">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ015">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ015">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>4.32</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ015">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ015">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ015">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>4.34</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ015">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ015">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ015">E</a>]</td><td>Merge pull request #382 from cwida/between
 

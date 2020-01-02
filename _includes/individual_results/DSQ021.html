@@ -1,7 +1,37 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    i_item_id,
+    i_item_desc,
+    i_category,
+    i_class,
+    i_current_price,
+    <span style="color:black;font-weight:bold;">sum</span>(cs_ext_sales_price) <span style="color:black;font-weight:bold;">AS</span> itemrevenue,
+    <span style="color:black;font-weight:bold;">sum</span>(cs_ext_sales_price) * 100.0000 / <span style="color:black;font-weight:bold;">sum</span>(sum(cs_ext_sales_price)) OVER (<span style="color:black;font-weight:bold;">PARTITION</span> <span style="color:black;font-weight:bold;">BY</span> i_class) <span style="color:black;font-weight:bold;">AS</span> revenueratio
+<span style="color:black;font-weight:bold;">FROM</span>
+    catalog_sales,
+    item,
+    date_dim
+<span style="color:black;font-weight:bold;">WHERE</span>
+    cs_item_sk = i_item_sk
+    <span style="color:black;font-weight:bold;">AND</span> i_category <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'Sports'</span>, <span style="color:firebrick;">'Books'</span>, <span style="color:firebrick;">'Home'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> cs_sold_date_sk = d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1999-02-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1999-03-24'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id,
+    i_item_desc,
+    i_category,
+    i_class,
+    i_current_price
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_category,
+    i_class,
+    i_item_id,
+    i_item_desc,
+    revenueratio
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ021.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.16</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ021">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ021">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ021">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ021.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.16</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ021">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ021">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ021">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.16</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ021">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ021">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ021">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.17</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ021">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ021">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ021">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.16</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ021">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ021">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ021">E</a>]</td><td>Merge pull request #382 from cwida/between
 

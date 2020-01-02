@@ -1,7 +1,35 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    p_brand,
+    p_type,
+    p_size,
+    <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ps_suppkey) <span style="color:black;font-weight:bold;">AS</span> supplier_cnt
+<span style="color:black;font-weight:bold;">FROM</span>
+    partsupp,
+    part
+<span style="color:black;font-weight:bold;">WHERE</span>
+    p_partkey = ps_partkey
+    <span style="color:black;font-weight:bold;">AND</span> p_brand <> <span style="color:firebrick;">'Brand#45'</span>
+    <span style="color:black;font-weight:bold;">AND</span> p_type <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'MEDIUM POLISHED%'</span>
+    <span style="color:black;font-weight:bold;">AND</span> p_size <span style="color:black;font-weight:bold;">IN</span> (49, 14, 23, 45, 19, 3, 36, 9)
+    <span style="color:black;font-weight:bold;">AND</span> ps_suppkey <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">IN</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            s_suppkey
+        <span style="color:black;font-weight:bold;">FROM</span>
+            supplier
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            s_comment <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Customer%Complaints%'</span>)
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    p_brand,
+    p_type,
+    p_size
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    supplier_cnt <span style="color:black;font-weight:bold;">DESC</span>,
+    p_brand,
+    p_type,
+    p_size;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/Q16.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.14</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=Q16">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=Q16">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=Q16">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/Q16.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.14</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=Q16">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=Q16">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=Q16">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.12</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=Q16">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=Q16">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=Q16">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.14</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=Q16">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=Q16">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=Q16">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.14</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=Q16">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=Q16">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=Q16">E</a>]</td><td>Merge pull request #382 from cwida/between
 

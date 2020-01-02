@@ -1,7 +1,34 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    i_item_id,
+    i_item_desc,
+    i_current_price
+<span style="color:black;font-weight:bold;">FROM</span>
+    item,
+    inventory,
+    date_dim,
+    catalog_sales
+<span style="color:black;font-weight:bold;">WHERE</span>
+    i_current_price <span style="color:black;font-weight:bold;">BETWEEN</span> 68 <span style="color:black;font-weight:bold;">AND</span> 68 + 30
+    <span style="color:black;font-weight:bold;">AND</span> inv_item_sk = i_item_sk
+    <span style="color:black;font-weight:bold;">AND</span> d_date_sk = inv_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-02-01'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-04-01'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">AND</span> i_manufact_id <span style="color:black;font-weight:bold;">IN</span> (677,
+        940,
+        694,
+        808)
+    <span style="color:black;font-weight:bold;">AND</span> inv_quantity_on_hand <span style="color:black;font-weight:bold;">BETWEEN</span> 100 <span style="color:black;font-weight:bold;">AND</span> 500
+    <span style="color:black;font-weight:bold;">AND</span> cs_item_sk = i_item_sk
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id,
+    i_item_desc,
+    i_current_price
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ040.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-warning"><b>T</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ040.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-warning"><b>T</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td class="table-warning"><b>T</b></td><td></td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td class="table-warning"><b>T</b></td><td></td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td class="table-warning"><b>T</b></td><td></td><td>Merge pull request #382 from cwida/between
 

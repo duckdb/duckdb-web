@@ -1,7 +1,78 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span> <span style="color:black;font-weight:bold;">DISTINCT</span>
+    (i_product_name)
+<span style="color:black;font-weight:bold;">FROM</span>
+    item i1
+<span style="color:black;font-weight:bold;">WHERE</span>
+    i_manufact_id <span style="color:black;font-weight:bold;">BETWEEN</span> 738 <span style="color:black;font-weight:bold;">AND</span> 738 + 40
+    <span style="color:black;font-weight:bold;">AND</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">count</span>(*) <span style="color:black;font-weight:bold;">AS</span> item_cnt
+        <span style="color:black;font-weight:bold;">FROM</span>
+            item
+        <span style="color:black;font-weight:bold;">WHERE</span> (i_manufact = i1.i_manufact
+            <span style="color:black;font-weight:bold;">AND</span> ((i_category = <span style="color:firebrick;">'Women'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'powder'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'khaki'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Ounce'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Oz'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'medium'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'extra large'</span>))
+                <span style="color:black;font-weight:bold;">OR</span> (i_category = <span style="color:firebrick;">'Women'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'brown'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'honeydew'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Bunch'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Ton'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'N/A'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'small'</span>))
+                <span style="color:black;font-weight:bold;">OR</span> (i_category = <span style="color:firebrick;">'Men'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'floral'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'deep'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'N/A'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Dozen'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'petite'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'petite'</span>))
+                <span style="color:black;font-weight:bold;">OR</span> (i_category = <span style="color:firebrick;">'Men'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'light'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'cornflower'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Box'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Pound'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'medium'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'extra large'</span>))))
+        <span style="color:black;font-weight:bold;">OR</span> (i_manufact = i1.i_manufact
+            <span style="color:black;font-weight:bold;">AND</span> ((i_category = <span style="color:firebrick;">'Women'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'midnight'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'snow'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Pallet'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Gross'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'medium'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'extra large'</span>))
+                <span style="color:black;font-weight:bold;">OR</span> (i_category = <span style="color:firebrick;">'Women'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'cyan'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'papaya'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Cup'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Dram'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'N/A'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'small'</span>))
+                <span style="color:black;font-weight:bold;">OR</span> (i_category = <span style="color:firebrick;">'Men'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'orange'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'frosted'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Each'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Tbl'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'petite'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'petite'</span>))
+                <span style="color:black;font-weight:bold;">OR</span> (i_category = <span style="color:firebrick;">'Men'</span>
+                    <span style="color:black;font-weight:bold;">AND</span> (i_color = <span style="color:firebrick;">'forest'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_color = <span style="color:firebrick;">'ghost'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_units = <span style="color:firebrick;">'Lb'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_units = <span style="color:firebrick;">'Bundle'</span>)
+                    <span style="color:black;font-weight:bold;">AND</span> (i_size = <span style="color:firebrick;">'medium'</span>
+                        <span style="color:black;font-weight:bold;">OR</span> i_size = <span style="color:firebrick;">'extra large'</span>))))) > 0
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_product_name
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ045.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.01</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ045">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ045">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ045">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ045.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.01</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ045">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ045">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ045">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.01</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ045">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ045">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ045">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.01</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ045">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ045">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ045">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.01</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ045">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ045">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ045">E</a>]</td><td>Merge pull request #382 from cwida/between
 

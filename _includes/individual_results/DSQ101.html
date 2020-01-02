@@ -1,7 +1,61 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> ssci <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        ss_customer_sk customer_sk,
+        ss_item_sk item_sk
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1200 <span style="color:black;font-weight:bold;">AND</span> 1200 + 11
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        ss_customer_sk,
+        ss_item_sk
+),
+csci <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        cs_bill_customer_sk customer_sk,
+        cs_item_sk item_sk
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_sales,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cs_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1200 <span style="color:black;font-weight:bold;">AND</span> 1200 + 11
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        cs_bill_customer_sk,
+        cs_item_sk
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> ssci.customer_sk IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">AND</span> csci.customer_sk IS <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) store_only,
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> ssci.customer_sk IS <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">AND</span> csci.customer_sk IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) catalog_only,
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> ssci.customer_sk IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">AND</span> csci.customer_sk IS <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) store_and_catalog
+<span style="color:black;font-weight:bold;">FROM</span>
+    ssci
+    <span style="color:black;font-weight:bold;">FULL</span> <span style="color:black;font-weight:bold;">OUTER</span> <span style="color:black;font-weight:bold;">JOIN</span> csci <span style="color:black;font-weight:bold;">ON</span> (ssci.customer_sk = csci.customer_sk
+        <span style="color:black;font-weight:bold;">AND</span> ssci.item_sk = csci.item_sk)
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ101.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>!</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ101.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>!</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td class="table-danger"><b>!</b></td><td></td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td class="table-danger"><b>!</b></td><td></td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td class="table-danger"><b>!</b></td><td></td><td>Merge pull request #382 from cwida/between
 

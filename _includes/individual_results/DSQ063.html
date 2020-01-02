@@ -1,7 +1,120 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> wss <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        d_week_seq,
+        ss_store_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Sunday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) sun_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Monday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) mon_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Tuesday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) tue_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Wednesday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) wed_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Thursday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) thu_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Friday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) fri_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Saturday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) sat_sales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        d_date_sk = ss_sold_date_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        d_week_seq,
+        ss_store_sk
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    s_store_name1,
+    s_store_id1,
+    d_week_seq1,
+    sun_sales1 / sun_sales2,
+    mon_sales1 / mon_sales2,
+    tue_sales1 / tue_sales2,
+    wed_sales1 / wed_sales2,
+    thu_sales1 / thu_sales2,
+    fri_sales1 / fri_sales2,
+    sat_sales1 / sat_sales2
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        s_store_name s_store_name1,
+        wss.d_week_seq d_week_seq1,
+        s_store_id s_store_id1,
+        sun_sales sun_sales1,
+        mon_sales mon_sales1,
+        tue_sales tue_sales1,
+        wed_sales wed_sales1,
+        thu_sales thu_sales1,
+        fri_sales fri_sales1,
+        sat_sales sat_sales1
+    <span style="color:black;font-weight:bold;">FROM</span>
+        wss,
+        store,
+        date_dim d
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        d.d_week_seq = wss.d_week_seq
+        <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1212 <span style="color:black;font-weight:bold;">AND</span> 1212 + 11) y,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            s_store_name s_store_name2,
+            wss.d_week_seq d_week_seq2,
+            s_store_id s_store_id2,
+            sun_sales sun_sales2,
+            mon_sales mon_sales2,
+            tue_sales tue_sales2,
+            wed_sales wed_sales2,
+            thu_sales thu_sales2,
+            fri_sales fri_sales2,
+            sat_sales sat_sales2
+        <span style="color:black;font-weight:bold;">FROM</span>
+            wss,
+            store,
+            date_dim d
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            d.d_week_seq = wss.d_week_seq
+            <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1212 + 12 <span style="color:black;font-weight:bold;">AND</span> 1212 + 23) x
+<span style="color:black;font-weight:bold;">WHERE</span>
+    s_store_id1 = s_store_id2
+    <span style="color:black;font-weight:bold;">AND</span> d_week_seq1 = d_week_seq2 - 52
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    s_store_name1,
+    s_store_id1,
+    d_week_seq1
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ063.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.74</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ063">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ063">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ063">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ063.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.74</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ063">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ063">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ063">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.73</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ063">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ063">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ063">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.74</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ063">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ063">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ063">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.74</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ063">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ063">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ063">E</a>]</td><td>Merge pull request #382 from cwida/between
 

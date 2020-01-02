@@ -1,7 +1,184 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> ss <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        s_store_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_ext_sales_price) <span style="color:black;font-weight:bold;">AS</span> sales,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_net_profit) <span style="color:black;font-weight:bold;">AS</span> profit
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        date_dim,
+        store
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-08-23'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-09-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        s_store_sk
+),
+sr <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        s_store_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(sr_return_amt) <span style="color:black;font-weight:bold;">AS</span> returns_,
+        <span style="color:black;font-weight:bold;">sum</span>(sr_net_loss) <span style="color:black;font-weight:bold;">AS</span> profit_loss
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_returns,
+        date_dim,
+        store
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        sr_returned_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-08-23'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-09-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> sr_store_sk = s_store_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        s_store_sk
+),
+cs <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        cs_call_center_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_ext_sales_price) <span style="color:black;font-weight:bold;">AS</span> sales,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_net_profit) <span style="color:black;font-weight:bold;">AS</span> profit
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_sales,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cs_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-08-23'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-09-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        cs_call_center_sk
+),
+cr <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        cr_call_center_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(cr_return_amount) <span style="color:black;font-weight:bold;">AS</span> returns_,
+        <span style="color:black;font-weight:bold;">sum</span>(cr_net_loss) <span style="color:black;font-weight:bold;">AS</span> profit_loss
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_returns,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cr_returned_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-08-23'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-09-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        cr_call_center_sk
+),
+ws <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        wp_web_page_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_ext_sales_price) <span style="color:black;font-weight:bold;">AS</span> sales,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_net_profit) <span style="color:black;font-weight:bold;">AS</span> profit
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_sales,
+        date_dim,
+        web_page
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ws_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-08-23'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-09-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> ws_web_page_sk = wp_web_page_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        wp_web_page_sk
+),
+wr <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        wp_web_page_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(wr_return_amt) <span style="color:black;font-weight:bold;">AS</span> returns_,
+        <span style="color:black;font-weight:bold;">sum</span>(wr_net_loss) <span style="color:black;font-weight:bold;">AS</span> profit_loss
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_returns,
+        date_dim,
+        web_page
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        wr_returned_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-08-23'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2000-09-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+        <span style="color:black;font-weight:bold;">AND</span> wr_web_page_sk = wp_web_page_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        wp_web_page_sk
+),
+results <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        channel,
+        id,
+        <span style="color:black;font-weight:bold;">sum</span>(sales) <span style="color:black;font-weight:bold;">AS</span> sales,
+        <span style="color:black;font-weight:bold;">sum</span>(returns_) <span style="color:black;font-weight:bold;">AS</span> returns_,
+        <span style="color:black;font-weight:bold;">sum</span>(profit) <span style="color:black;font-weight:bold;">AS</span> profit
+    <span style="color:black;font-weight:bold;">FROM</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:firebrick;">'store channel'</span> <span style="color:black;font-weight:bold;">AS</span> channel,
+            ss.s_store_sk <span style="color:black;font-weight:bold;">AS</span> id,
+            sales,
+            coalesce(returns_,
+                0) <span style="color:black;font-weight:bold;">AS</span> returns_,
+            (profit - coalesce(profit_loss,
+                    0)) <span style="color:black;font-weight:bold;">AS</span> profit
+        <span style="color:black;font-weight:bold;">FROM</span>
+            ss
+        <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> sr <span style="color:black;font-weight:bold;">ON</span> ss.s_store_sk = sr.s_store_sk
+<span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+<span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:firebrick;">'catalog channel'</span> <span style="color:black;font-weight:bold;">AS</span> channel,
+    cs_call_center_sk <span style="color:black;font-weight:bold;">AS</span> id,
+    sales,
+    returns_,
+    (profit - profit_loss) <span style="color:black;font-weight:bold;">AS</span> profit
+<span style="color:black;font-weight:bold;">FROM</span>
+    cs,
+    cr
+<span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+<span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:firebrick;">'web channel'</span> <span style="color:black;font-weight:bold;">AS</span> channel,
+    ws.wp_web_page_sk <span style="color:black;font-weight:bold;">AS</span> id,
+    sales,
+    coalesce(returns_,
+        0) returns_,
+    (profit - coalesce(profit_loss,
+            0)) <span style="color:black;font-weight:bold;">AS</span> profit
+<span style="color:black;font-weight:bold;">FROM</span>
+    ws
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> wr <span style="color:black;font-weight:bold;">ON</span> ws.wp_web_page_sk = wr.wp_web_page_sk) x
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    channel,
+    id
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    *
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        channel,
+        id,
+        sales,
+        returns_,
+        profit
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">UNION</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        channel,
+        <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">AS</span> id,
+        <span style="color:black;font-weight:bold;">sum</span>(sales) <span style="color:black;font-weight:bold;">AS</span> sales,
+        <span style="color:black;font-weight:bold;">sum</span>(returns_) <span style="color:black;font-weight:bold;">AS</span> returns_,
+        <span style="color:black;font-weight:bold;">sum</span>(profit) <span style="color:black;font-weight:bold;">AS</span> profit
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        channel
+    <span style="color:black;font-weight:bold;">UNION</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">AS</span> channel,
+        <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">AS</span> id,
+        <span style="color:black;font-weight:bold;">sum</span>(sales) <span style="color:black;font-weight:bold;">AS</span> sales,
+        <span style="color:black;font-weight:bold;">sum</span>(returns_) <span style="color:black;font-weight:bold;">AS</span> returns_,
+        <span style="color:black;font-weight:bold;">sum</span>(profit) <span style="color:black;font-weight:bold;">AS</span> profit
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results) foo
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    channel,
+    id
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ081.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.27</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ081">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ081">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ081">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ081.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.27</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ081">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ081">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ081">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.24</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ081">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ081">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ081">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.27</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ081">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ081">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ081">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.28</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ081">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ081">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ081">E</a>]</td><td>Merge pull request #382 from cwida/between
 

@@ -1,7 +1,76 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> results <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id,
+        s_state,
+        0 <span style="color:black;font-weight:bold;">AS</span> g_state,
+        ss_quantity agg1,
+        ss_list_price agg2,
+        ss_coupon_amt agg3,
+        ss_sales_price agg4
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        customer_demographics,
+        date_dim,
+        store,
+        item
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+        <span style="color:black;font-weight:bold;">AND</span> ss_cdemo_sk = cd_demo_sk
+        <span style="color:black;font-weight:bold;">AND</span> cd_gender = <span style="color:firebrick;">'M'</span>
+        <span style="color:black;font-weight:bold;">AND</span> cd_marital_status = <span style="color:firebrick;">'S'</span>
+        <span style="color:black;font-weight:bold;">AND</span> cd_education_status = <span style="color:firebrick;">'College'</span>
+        <span style="color:black;font-weight:bold;">AND</span> d_year = 2002
+        <span style="color:black;font-weight:bold;">AND</span> s_state = <span style="color:firebrick;">'TN'</span>
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    i_item_id, s_state, g_state, agg1, agg2, agg3, agg4
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id,
+        s_state,
+        0 <span style="color:black;font-weight:bold;">AS</span> g_state,
+        <span style="color:black;font-weight:bold;">avg</span>(agg1) agg1,
+        <span style="color:black;font-weight:bold;">avg</span>(agg2) agg2,
+        <span style="color:black;font-weight:bold;">avg</span>(agg3) agg3,
+        <span style="color:black;font-weight:bold;">avg</span>(agg4) agg4
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_item_id,
+        s_state
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id,
+        <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">AS</span> s_state,
+        1 <span style="color:black;font-weight:bold;">AS</span> g_state,
+        <span style="color:black;font-weight:bold;">avg</span>(agg1) agg1,
+        <span style="color:black;font-weight:bold;">avg</span>(agg2) agg2,
+        <span style="color:black;font-weight:bold;">avg</span>(agg3) agg3,
+        <span style="color:black;font-weight:bold;">avg</span>(agg4) agg4
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_item_id
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">AS</span> i_item_id,
+        <span style="color:black;font-weight:bold;">NULL</span> <span style="color:black;font-weight:bold;">AS</span> s_state,
+        1 <span style="color:black;font-weight:bold;">AS</span> g_state,
+        <span style="color:black;font-weight:bold;">avg</span>(agg1) agg1,
+        <span style="color:black;font-weight:bold;">avg</span>(agg2) agg2,
+        <span style="color:black;font-weight:bold;">avg</span>(agg3) agg3,
+        <span style="color:black;font-weight:bold;">avg</span>(agg4) agg4
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results) foo
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id,
+    s_state
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ030.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.51</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ030">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ030">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ030">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ030.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.51</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ030">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ030">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ030">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.45</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ030">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ030">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ030">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.51</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ030">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ030">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ030">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.49</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ030">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ030">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ030">E</a>]</td><td>Merge pull request #382 from cwida/between
 

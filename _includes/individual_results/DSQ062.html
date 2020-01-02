@@ -1,7 +1,119 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> ss_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_ext_sales_price) ss_item_rev
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq = (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date = <span style="color:firebrick;">'2000-01-03'</span>))
+                <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+),
+cs_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_ext_sales_price) cs_item_rev
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_sales,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cs_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq = (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date = <span style="color:firebrick;">'2000-01-03'</span>))
+                <span style="color:black;font-weight:bold;">AND</span> cs_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+),
+ws_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_ext_sales_price) ws_item_rev
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_sales,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ws_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq = (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date = <span style="color:firebrick;">'2000-01-03'</span>))
+                <span style="color:black;font-weight:bold;">AND</span> ws_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    ss_items.item_id,
+    ss_item_rev,
+    ss_item_rev / ((ss_item_rev + cs_item_rev + ws_item_rev) / 3) * 100 ss_dev,
+cs_item_rev,
+cs_item_rev / ((ss_item_rev + cs_item_rev + ws_item_rev) / 3) * 100 cs_dev,
+ws_item_rev,
+ws_item_rev / ((ss_item_rev + cs_item_rev + ws_item_rev) / 3) * 100 ws_dev,
+(ss_item_rev + cs_item_rev + ws_item_rev) / 3 average
+<span style="color:black;font-weight:bold;">FROM</span>
+    ss_items,
+    cs_items,
+    ws_items
+<span style="color:black;font-weight:bold;">WHERE</span>
+    ss_items.item_id = cs_items.item_id
+    <span style="color:black;font-weight:bold;">AND</span> ss_items.item_id = ws_items.item_id
+    <span style="color:black;font-weight:bold;">AND</span> ss_item_rev <span style="color:black;font-weight:bold;">BETWEEN</span> 0.9 * cs_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> 1.1 * cs_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> ss_item_rev <span style="color:black;font-weight:bold;">BETWEEN</span> 0.9 * ws_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> 1.1 * ws_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> cs_item_rev <span style="color:black;font-weight:bold;">BETWEEN</span> 0.9 * ss_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> 1.1 * ss_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> cs_item_rev <span style="color:black;font-weight:bold;">BETWEEN</span> 0.9 * ws_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> 1.1 * ws_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> ws_item_rev <span style="color:black;font-weight:bold;">BETWEEN</span> 0.9 * ss_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> 1.1 * ss_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> ws_item_rev <span style="color:black;font-weight:bold;">BETWEEN</span> 0.9 * cs_item_rev
+    <span style="color:black;font-weight:bold;">AND</span> 1.1 * cs_item_rev
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    ss_items.item_id,
+    ss_item_rev
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ062.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.95</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ062">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ062">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ062">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ062.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.95</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ062">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ062">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ062">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.86</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ062">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ062">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ062">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.96</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ062">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ062">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ062">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.96</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ062">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ062">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ062">E</a>]</td><td>Merge pull request #382 from cwida/between
 

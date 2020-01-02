@@ -1,6 +1,27 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    MIN(n.name) <span style="color:black;font-weight:bold;">AS</span> member_in_charnamed_movie
+<span style="color:black;font-weight:bold;">FROM</span>
+    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
+    company_name <span style="color:black;font-weight:bold;">AS</span> cn,
+    keyword <span style="color:black;font-weight:bold;">AS</span> k,
+    movie_companies <span style="color:black;font-weight:bold;">AS</span> mc,
+    movie_keyword <span style="color:black;font-weight:bold;">AS</span> mk,
+    name <span style="color:black;font-weight:bold;">AS</span> n,
+    title <span style="color:black;font-weight:bold;">AS</span> t
+<span style="color:black;font-weight:bold;">WHERE</span>
+    cn.country_code = <span style="color:firebrick;">'[us]'</span>
+    <span style="color:black;font-weight:bold;">AND</span> k.keyword = <span style="color:firebrick;">'character-name-in-title'</span>
+    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = t.id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = mk.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mk.keyword_id = k.id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = mc.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mc.company_id = cn.id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mc.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = mk.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mc.movie_id = mk.movie_id;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/IMDBQ064.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/IMDBQ064.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

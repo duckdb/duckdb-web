@@ -1,7 +1,69 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    cd_gender,
+    cd_marital_status,
+    cd_education_status,
+    <span style="color:black;font-weight:bold;">count</span>(*) cnt1,
+    cd_purchase_estimate,
+    <span style="color:black;font-weight:bold;">count</span>(*) cnt2,
+    cd_credit_rating,
+    <span style="color:black;font-weight:bold;">count</span>(*) cnt3
+<span style="color:black;font-weight:bold;">FROM</span>
+    customer c,
+    customer_address ca,
+    customer_demographics
+<span style="color:black;font-weight:bold;">WHERE</span>
+    c.c_current_addr_sk = ca.ca_address_sk
+    <span style="color:black;font-weight:bold;">AND</span> ca_state <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'KY'</span>, <span style="color:firebrick;">'GA'</span>, <span style="color:firebrick;">'NM'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> cd_demo_sk = c.c_current_cdemo_sk
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">EXISTS</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            *
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales,
+            date_dim
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            c.c_customer_sk = ss_customer_sk
+            <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year = 2001
+            <span style="color:black;font-weight:bold;">AND</span> d_moy <span style="color:black;font-weight:bold;">BETWEEN</span> 4 <span style="color:black;font-weight:bold;">AND</span> 4 + 2)
+    <span style="color:black;font-weight:bold;">AND</span> (<span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">EXISTS</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                *
+            <span style="color:black;font-weight:bold;">FROM</span>
+                web_sales,
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                c.c_customer_sk = ws_bill_customer_sk
+                <span style="color:black;font-weight:bold;">AND</span> ws_sold_date_sk = d_date_sk
+                <span style="color:black;font-weight:bold;">AND</span> d_year = 2001
+                <span style="color:black;font-weight:bold;">AND</span> d_moy <span style="color:black;font-weight:bold;">BETWEEN</span> 4 <span style="color:black;font-weight:bold;">AND</span> 4 + 2)
+            <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">EXISTS</span> (
+                <span style="color:black;font-weight:bold;">SELECT</span>
+                    *
+                <span style="color:black;font-weight:bold;">FROM</span>
+                    catalog_sales,
+                    date_dim
+                <span style="color:black;font-weight:bold;">WHERE</span>
+                    c.c_customer_sk = cs_ship_customer_sk
+                    <span style="color:black;font-weight:bold;">AND</span> cs_sold_date_sk = d_date_sk
+                    <span style="color:black;font-weight:bold;">AND</span> d_year = 2001
+                    <span style="color:black;font-weight:bold;">AND</span> d_moy <span style="color:black;font-weight:bold;">BETWEEN</span> 4 <span style="color:black;font-weight:bold;">AND</span> 4 + 2))
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        cd_gender,
+        cd_marital_status,
+        cd_education_status,
+        cd_purchase_estimate,
+        cd_credit_rating
+    <span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+        cd_gender,
+        cd_marital_status,
+        cd_education_status,
+        cd_purchase_estimate,
+        cd_credit_rating
+    <span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ073.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.42</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ073">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ073">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ073">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ073.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>0.42</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ073">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ073">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ073">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>0.47</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ073">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ073">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ073">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>0.43</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ073">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ073">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ073">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>0.43</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ073">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ073">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ073">E</a>]</td><td>Merge pull request #382 from cwida/between
 

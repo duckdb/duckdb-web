@@ -1,7 +1,51 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> ws_wh <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        ws1.ws_order_number,
+        ws1.ws_warehouse_sk wh1,
+        ws2.ws_warehouse_sk wh2
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_sales ws1,
+        web_sales ws2
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ws1.ws_order_number = ws2.ws_order_number
+        <span style="color:black;font-weight:bold;">AND</span> ws1.ws_warehouse_sk <> ws2.ws_warehouse_sk
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ws_order_number) <span style="color:black;font-weight:bold;">AS</span> "order <span style="color:black;font-weight:bold;">count</span>",
+    <span style="color:black;font-weight:bold;">sum</span>(ws_ext_ship_cost) <span style="color:black;font-weight:bold;">AS</span> "total shipping cost",
+    <span style="color:black;font-weight:bold;">sum</span>(ws_net_profit) <span style="color:black;font-weight:bold;">AS</span> "total net profit"
+<span style="color:black;font-weight:bold;">FROM</span>
+    web_sales ws1,
+    date_dim,
+    customer_address,
+    web_site
+<span style="color:black;font-weight:bold;">WHERE</span>
+    d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:firebrick;">'1999-02-01'</span>
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1999-04-02'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">AND</span> ws1.ws_ship_date_sk = d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> ws1.ws_ship_addr_sk = ca_address_sk
+    <span style="color:black;font-weight:bold;">AND</span> ca_state = <span style="color:firebrick;">'IL'</span>
+    <span style="color:black;font-weight:bold;">AND</span> ws1.ws_web_site_sk = web_site_sk
+    <span style="color:black;font-weight:bold;">AND</span> web_company_name = <span style="color:firebrick;">'pri'</span>
+    <span style="color:black;font-weight:bold;">AND</span> ws1.ws_order_number <span style="color:black;font-weight:bold;">IN</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ws_order_number
+        <span style="color:black;font-weight:bold;">FROM</span>
+            ws_wh)
+    <span style="color:black;font-weight:bold;">AND</span> ws1.ws_order_number <span style="color:black;font-weight:bold;">IN</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            wr_order_number
+        <span style="color:black;font-weight:bold;">FROM</span>
+            web_returns,
+            ws_wh
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            wr_order_number = ws_wh.ws_order_number)
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ws_order_number)
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
 
-		<h1>SQL Code</h1>
-		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
-		<img src="/images/graphs/DSQ099.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>1.45</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ099">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ099">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ099">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+</pre><img src="/images/graphs/DSQ099.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td><b>1.45</b></td><td>[<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-graph.html?name=DSQ099">Q</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stdout.html?name=DSQ099">L</a>/<a href="/benchmarks/logs/ffe9b3fdcecf101ed127513021ca097328198db5-stderr.html?name=DSQ099">E</a>]</td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
 
 This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c">d9a4</a></td><td>2020-01-01</td><td><b>1.37</b></td><td>[<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-graph.html?name=DSQ099">Q</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stdout.html?name=DSQ099">L</a>/<a href="/benchmarks/logs/d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c-stderr.html?name=DSQ099">E</a>]</td><td>Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks</td></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ce84f0caac134506f5c13773170176d5443f9463">ce84</a></td><td>2020-01-01</td><td><b>1.44</b></td><td>[<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-graph.html?name=DSQ099">Q</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stdout.html?name=DSQ099">L</a>/<a href="/benchmarks/logs/ce84f0caac134506f5c13773170176d5443f9463-stderr.html?name=DSQ099">E</a>]</td><td>Fix path to js files in generate_querygraph.py</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b">fe31</a></td><td>2019-12-31</td><td><b>1.44</b></td><td>[<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-graph.html?name=DSQ099">Q</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stdout.html?name=DSQ099">L</a>/<a href="/benchmarks/logs/fe31d9f6776a49a87c9e9d676fe9670f2c677f3b-stderr.html?name=DSQ099">E</a>]</td><td>Merge pull request #382 from cwida/between
 
