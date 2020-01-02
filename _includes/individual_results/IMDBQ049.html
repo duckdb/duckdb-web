@@ -1,40 +1,6 @@
-IMDBQ049 - [imdb]
-IMDB (JOB) Q49: SELECT MIN(mi_idx.info) AS rating,
-       MIN(t.title) AS northern_dark_movie
-FROM info_type AS it1,
-     info_type AS it2,
-     keyword AS k,
-     kind_type AS kt,
-     movie_info AS mi,
-     movie_info_idx AS mi_idx,
-     movie_keyword AS mk,
-     title AS t
-WHERE it1.info = 'countries'
-  AND it2.info = 'rating'
-  AND k.keyword IN ('murder',
-                    'murder-in-title',
-                    'blood',
-                    'violence')
-  AND kt.kind = 'movie'
-  AND mi.info IN ('Sweden',
-                  'Norway',
-                  'Germany',
-                  'Denmark',
-                  'Swedish',
-                  'Denish',
-                  'Norwegian',
-                  'German',
-                  'USA',
-                  'American')
-  AND mi_idx.info < '8.5'
-  AND t.production_year > 2010
-  AND kt.id = t.kind_id
-  AND t.id = mi.movie_id
-  AND t.id = mk.movie_id
-  AND t.id = mi_idx.movie_id
-  AND mk.movie_id = mi.movie_id
-  AND mk.movie_id = mi_idx.movie_id
-  AND mi.movie_id = mi_idx.movie_id
-  AND k.id = mk.keyword_id
-  AND it1.id = mi.info_type_id
-  AND it2.id = mi_idx.info_type_id;<img src="/images/graphs/IMDBQ049.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ049.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

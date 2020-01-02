@@ -1,17 +1,6 @@
-IMDBQ014 - [imdb]
-IMDB (JOB) Q14: SELECT MIN(mi_idx.info) AS rating,
-       MIN(t.title) AS movie_title
-FROM info_type AS it,
-     keyword AS k,
-     movie_info_idx AS mi_idx,
-     movie_keyword AS mk,
-     title AS t
-WHERE it.info ='rating'
-  AND k.keyword LIKE '%sequel%'
-  AND mi_idx.info > '2.0'
-  AND t.production_year > 1990
-  AND t.id = mi_idx.movie_id
-  AND t.id = mk.movie_id
-  AND mk.movie_id = mi_idx.movie_id
-  AND k.id = mk.keyword_id
-  AND it.id = mi_idx.info_type_id;<img src="/images/graphs/IMDBQ014.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ014.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

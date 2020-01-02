@@ -1,32 +1,6 @@
-IMDBQ046 - [imdb]
-IMDB (JOB) Q46: SELECT MIN(cn.name) AS producing_company,
-       MIN(miidx.info) AS rating,
-       MIN(t.title) AS movie_about_winning
-FROM company_name AS cn,
-     company_type AS ct,
-     info_type AS it,
-     info_type AS it2,
-     kind_type AS kt,
-     movie_companies AS mc,
-     movie_info AS mi,
-     movie_info_idx AS miidx,
-     title AS t
-WHERE cn.country_code ='[us]'
-  AND ct.kind ='production companies'
-  AND it.info ='rating'
-  AND it2.info ='release dates'
-  AND kt.kind ='movie'
-  AND t.title != ''
-  AND (t.title LIKE '%Champion%'
-       OR t.title LIKE '%Loser%')
-  AND mi.movie_id = t.id
-  AND it2.id = mi.info_type_id
-  AND kt.id = t.kind_id
-  AND mc.movie_id = t.id
-  AND cn.id = mc.company_id
-  AND ct.id = mc.company_type_id
-  AND miidx.movie_id = t.id
-  AND it.id = miidx.info_type_id
-  AND mi.movie_id = miidx.movie_id
-  AND mi.movie_id = mc.movie_id
-  AND miidx.movie_id = mc.movie_id;<img src="/images/graphs/IMDBQ046.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ046.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

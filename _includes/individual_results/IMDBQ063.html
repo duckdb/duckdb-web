@@ -1,20 +1,6 @@
-IMDBQ063 - [imdb]
-IMDB (JOB) Q63: SELECT MIN(n.name) AS member_in_charnamed_movie
-FROM cast_info AS ci,
-     company_name AS cn,
-     keyword AS k,
-     movie_companies AS mc,
-     movie_keyword AS mk,
-     name AS n,
-     title AS t
-WHERE k.keyword ='character-name-in-title'
-  AND n.name LIKE '%Bert%'
-  AND n.id = ci.person_id
-  AND ci.movie_id = t.id
-  AND t.id = mk.movie_id
-  AND mk.keyword_id = k.id
-  AND t.id = mc.movie_id
-  AND mc.company_id = cn.id
-  AND ci.movie_id = mc.movie_id
-  AND ci.movie_id = mk.movie_id
-  AND mc.movie_id = mk.movie_id;<img src="/images/graphs/IMDBQ063.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ063.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

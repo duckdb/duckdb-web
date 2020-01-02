@@ -1,59 +1,6 @@
-IMDBQ107 - [imdb]
-IMDB (JOB) Q107: SELECT MIN(mi.info) AS movie_budget,
-       MIN(mi_idx.info) AS movie_votes,
-       MIN(n.name) AS writer,
-       MIN(t.title) AS violent_liongate_movie
-FROM cast_info AS ci,
-     company_name AS cn,
-     info_type AS it1,
-     info_type AS it2,
-     keyword AS k,
-     movie_companies AS mc,
-     movie_info AS mi,
-     movie_info_idx AS mi_idx,
-     movie_keyword AS mk,
-     name AS n,
-     title AS t
-WHERE ci.note IN ('(writer)',
-                  '(head writer)',
-                  '(written by)',
-                  '(story)',
-                  '(story editor)')
-  AND cn.name LIKE 'Lionsgate%'
-  AND it1.info = 'genres'
-  AND it2.info = 'votes'
-  AND k.keyword IN ('murder',
-                    'violence',
-                    'blood',
-                    'gore',
-                    'death',
-                    'female-nudity',
-                    'hospital')
-  AND mc.note LIKE '%(Blu-ray)%'
-  AND mi.info IN ('Horror',
-                  'Thriller')
-  AND n.gender = 'm'
-  AND t.production_year > 2000
-  AND (t.title LIKE '%Freddy%'
-       OR t.title LIKE '%Jason%'
-       OR t.title LIKE 'Saw%')
-  AND t.id = mi.movie_id
-  AND t.id = mi_idx.movie_id
-  AND t.id = ci.movie_id
-  AND t.id = mk.movie_id
-  AND t.id = mc.movie_id
-  AND ci.movie_id = mi.movie_id
-  AND ci.movie_id = mi_idx.movie_id
-  AND ci.movie_id = mk.movie_id
-  AND ci.movie_id = mc.movie_id
-  AND mi.movie_id = mi_idx.movie_id
-  AND mi.movie_id = mk.movie_id
-  AND mi.movie_id = mc.movie_id
-  AND mi_idx.movie_id = mk.movie_id
-  AND mi_idx.movie_id = mc.movie_id
-  AND mk.movie_id = mc.movie_id
-  AND n.id = ci.person_id
-  AND it1.id = mi.info_type_id
-  AND it2.id = mi_idx.info_type_id
-  AND k.id = mk.keyword_id
-  AND cn.id = mc.company_id;<img src="/images/graphs/IMDBQ107.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ107.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

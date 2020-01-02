@@ -1,31 +1,6 @@
-IMDBQ024 - [imdb]
-IMDB (JOB) Q24: SELECT MIN(n.name) AS of_person,
-       MIN(t.title) AS biography_movie
-FROM aka_name AS an,
-     cast_info AS ci,
-     info_type AS it,
-     link_type AS lt,
-     movie_link AS ml,
-     name AS n,
-     person_info AS pi,
-     title AS t
-WHERE an.name LIKE '%a%'
-  AND it.info ='mini biography'
-  AND lt.link ='features'
-  AND n.name_pcode_cf BETWEEN 'A' AND 'F'
-  AND (n.gender='m'
-       OR (n.gender = 'f'
-           AND n.name LIKE 'B%'))
-  AND pi.note ='Volker Boehm'
-  AND t.production_year BETWEEN 1980 AND 1995
-  AND n.id = an.person_id
-  AND n.id = pi.person_id
-  AND ci.person_id = n.id
-  AND t.id = ci.movie_id
-  AND ml.linked_movie_id = t.id
-  AND lt.id = ml.link_type_id
-  AND it.id = pi.info_type_id
-  AND pi.person_id = an.person_id
-  AND pi.person_id = ci.person_id
-  AND an.person_id = ci.person_id
-  AND ci.movie_id = ml.linked_movie_id;<img src="/images/graphs/IMDBQ024.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ024.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

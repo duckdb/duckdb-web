@@ -1,30 +1,6 @@
-IMDBQ033 - [imdb]
-IMDB (JOB) Q33: SELECT MIN(an.name) AS alternative_name,
-       MIN(chn.name) AS voiced_character_name,
-       MIN(n.name) AS voicing_actress,
-       MIN(t.title) AS american_movie
-FROM aka_name AS an,
-     char_name AS chn,
-     cast_info AS ci,
-     company_name AS cn,
-     movie_companies AS mc,
-     name AS n,
-     role_type AS rt,
-     title AS t
-WHERE ci.note IN ('(voice)',
-                  '(voice: Japanese version)',
-                  '(voice) (uncredited)',
-                  '(voice: English version)')
-  AND cn.country_code ='[us]'
-  AND n.gender ='f'
-  AND n.name LIKE '%An%'
-  AND rt.role ='actress'
-  AND ci.movie_id = t.id
-  AND t.id = mc.movie_id
-  AND ci.movie_id = mc.movie_id
-  AND mc.company_id = cn.id
-  AND ci.role_id = rt.id
-  AND n.id = ci.person_id
-  AND chn.id = ci.person_role_id
-  AND an.person_id = n.id
-  AND an.person_id = ci.person_id;<img src="/images/graphs/IMDBQ033.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ033.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>

@@ -1,30 +1,6 @@
-IMDBQ038 - [imdb]
-IMDB (JOB) Q38: SELECT MIN(cn.name) AS from_company,
-       MIN(lt.link) AS movie_link_type,
-       MIN(t.title) AS non_polish_sequel_movie
-FROM company_name AS cn,
-     company_type AS ct,
-     keyword AS k,
-     link_type AS lt,
-     movie_companies AS mc,
-     movie_keyword AS mk,
-     movie_link AS ml,
-     title AS t
-WHERE cn.country_code !='[pl]'
-  AND (cn.name LIKE '%Film%'
-       OR cn.name LIKE '%Warner%')
-  AND ct.kind ='production companies'
-  AND k.keyword ='sequel'
-  AND lt.link LIKE '%follow%'
-  AND mc.note IS NULL
-  AND t.production_year BETWEEN 1950 AND 2000
-  AND lt.id = ml.link_type_id
-  AND ml.movie_id = t.id
-  AND t.id = mk.movie_id
-  AND mk.keyword_id = k.id
-  AND t.id = mc.movie_id
-  AND mc.company_type_id = ct.id
-  AND mc.company_id = cn.id
-  AND ml.movie_id = mk.movie_id
-  AND ml.movie_id = mc.movie_id
-  AND mk.movie_id = mc.movie_id;<img src="/images/graphs/IMDBQ038.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr>
+
+		<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"></pre>
+		<img src="/images/graphs/IMDBQ038.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ffe9b3fdcecf101ed127513021ca097328198db5">ffe9</a></td><td>2020-01-01</td><td class="table-danger"><b>C</b></td><td></td><td>Revert "Add cache after hash table probe that re-probes and caches if there are too few matches to avoid outputting small chunks"
+
+This reverts commit d9a40fa733c9b7365653cb5d4c4cfd7fd382e14c.</td></tr>
