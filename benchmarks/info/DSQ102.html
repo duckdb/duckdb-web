@@ -1,0 +1,33 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    i_item_id,
+    i_item_desc,
+    i_category,
+    i_class,
+    i_current_price,
+    <span style="color:black;font-weight:bold;">sum</span>(ss_ext_sales_price) <span style="color:black;font-weight:bold;">AS</span> itemrevenue,
+    <span style="color:black;font-weight:bold;">sum</span>(ss_ext_sales_price) * 100.0000 / <span style="color:black;font-weight:bold;">sum</span>(sum(ss_ext_sales_price)) OVER (<span style="color:black;font-weight:bold;">PARTITION</span> <span style="color:black;font-weight:bold;">BY</span> i_class) <span style="color:black;font-weight:bold;">AS</span> revenueratio
+<span style="color:black;font-weight:bold;">FROM</span>
+    store_sales,
+    item,
+    date_dim
+<span style="color:black;font-weight:bold;">WHERE</span>
+    ss_item_sk = i_item_sk
+    <span style="color:black;font-weight:bold;">AND</span> i_category <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'Sports'</span>, <span style="color:firebrick;">'Books'</span>, <span style="color:firebrick;">'Home'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1999-02-22'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1999-03-24'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id,
+    i_item_desc,
+    i_category,
+    i_class,
+    i_current_price
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_category,
+    i_class,
+    i_item_id,
+    i_item_desc,
+    revenueratio;
+
+</pre>

@@ -1,3 +1,6 @@
+# generate_descriptions.py
+# This file generates descriptions for display on the individual benchmark pages
+
 import os, sys, re
 import urllib
 from urllib.request import urlopen
@@ -16,10 +19,10 @@ def format_sql(sql):
 	return get_output(['pg_format', '--keyword-case', '2', '--spaces', '4', 'format.tmp.sql'])
 
 def get_output(process):
-	proc = subprocess.Popen(process, stdout=subprocess.PIPE)
+	proc = subprocess.Popen(process, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	return proc.stdout.read().decode('utf8')
 
-sql_codewords = ['COPY', 'HEADER', 'IN', 'SELECT', 'FROM', 'WHERE', 'GROUP', 'BY', 'ORDER', 'AS', 'JOIN', 'ON', 'DELIMITER', 'avg', 'sum', 'count', 'cast', 'SUM', 'INDEX', 'USING', 'ROWS', 'BETWEEN', 'PRECEDING', 'AND', 'OR', 'FOLLOWING', 'DESC', 'LIMIT', 'ASC', 'EXISTS', 'UNION', 'ALL', 'extract', 'FROM', 'LIKE', 'CASE', 'WHEN', 'ELSE', 'END', 'THEN', 'NOT', 'HAVING', 'WITH', 'DISTINCT', 'NULL', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'SUBSTRING', 'INTERSECT', 'PARTITION', 'BY', 'EXCEPT']
+sql_codewords = ['COPY', 'HEADER', 'IN', 'SELECT', 'FROM', 'WHERE', 'GROUP', 'BY', 'ORDER', 'AS', 'JOIN', 'ON', 'DELIMITER', 'avg', 'sum', 'count', 'cast', 'SUM', 'INDEX', 'USING', 'ROWS', 'BETWEEN', 'PRECEDING', 'AND', 'OR', 'FOLLOWING', 'DESC', 'LIMIT', 'ASC', 'EXISTS', 'UNION', 'ALL', 'extract', 'FROM', 'LIKE', 'CASE', 'WHEN', 'ELSE', 'END', 'THEN', 'NOT', 'HAVING', 'WITH', 'DISTINCT', 'NULL', 'LEFT', 'RIGHT', 'FULL', 'OUTER', 'SUBSTRING', 'INTERSECT', 'PARTITION', 'BY', 'EXCEPT', 'MIN', 'MAX', 'OVER', 'rank']
 string_regex = re.compile("('[^']+')")
 comment_regex = re.compile("(--[^\n]+)")
 
@@ -68,22 +71,29 @@ def style(code):
 	code = style_code_regex(code, comment_regex, comment_codestyle)
 	return code
 
-def update_benchmark(benchmark_name, con, c):
+def generate_benchmark_info(benchmark_name, con, c):
+	target_file = os.path.join('benchmarks', 'info', benchmark_name + ".html")
+	if os.path.isfile(target_file):
+		return
 	query = get_output([benchmark_runner, '--query', benchmark_name]).strip()
 	if len(query) == 0:
-		benchmark_info = get_output([benchmark_runner, '--info', benchmark_name]).strip()
-		result_html = """<h1>Description</h1><p>%s</p>""" % (benchmark_info,)
+		try:
+			benchmark_info = get_output([benchmark_runner, '--info', benchmark_name]).strip().split('\n', 1)[1]
+			result_html = """<h1>Description</h1><p>%s</p>""" % (benchmark_info,)
+		except:
+			result_html = """<h1>Description</h1><p>Benchmark description could not be generated.</p>"""
 	else:
 		query = format_sql(query)
 		result_html = """
 		<h1>SQL Code</h1>
 		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px">%s</pre>
 		"""% (style(query),)
-	c.execute("UPDATE benchmarks SET description=? WHERE name=?", (result_html, benchmark_name))
-	con.commit()
+		result_html = result_html.strip()
+	with open(target_file, 'w+') as f:
+		f.write(result_html)
 
 con = sqlite3.connect(sqlite_db_file)
 c = con.cursor()
 c.execute('SELECT name FROM benchmarks')
 for benchmark_name in [x[0] for x in c.fetchall()]:
-	update_benchmark(benchmark_name, con, c)
+	generate_benchmark_info(benchmark_name, con, c)

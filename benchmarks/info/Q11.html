@@ -1,0 +1,30 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    ps_partkey,
+    <span style="color:black;font-weight:bold;">sum</span>(ps_supplycost * ps_availqty) <span style="color:black;font-weight:bold;">AS</span> value
+<span style="color:black;font-weight:bold;">FROM</span>
+    partsupp,
+    supplier,
+    nation
+<span style="color:black;font-weight:bold;">WHERE</span>
+    ps_suppkey = s_suppkey
+    <span style="color:black;font-weight:bold;">AND</span> s_nationkey = n_nationkey
+    <span style="color:black;font-weight:bold;">AND</span> n_name = <span style="color:firebrick;">'GERMANY'</span>
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    ps_partkey
+<span style="color:black;font-weight:bold;">HAVING</span>
+    <span style="color:black;font-weight:bold;">sum</span>(ps_supplycost * ps_availqty) > (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">sum</span>(ps_supplycost * ps_availqty) * 0.0001000000
+        <span style="color:black;font-weight:bold;">FROM</span>
+            partsupp,
+            supplier,
+            nation
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ps_suppkey = s_suppkey
+            <span style="color:black;font-weight:bold;">AND</span> s_nationkey = n_nationkey
+            <span style="color:black;font-weight:bold;">AND</span> n_name = <span style="color:firebrick;">'GERMANY'</span>)
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    value <span style="color:black;font-weight:bold;">DESC</span>;
+
+</pre>

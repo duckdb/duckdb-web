@@ -1,0 +1,105 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> ss <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_ext_sales_price) total_sales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        date_dim,
+        customer_address,
+        item
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        i_item_id <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                i_item_id
+            <span style="color:black;font-weight:bold;">FROM</span>
+                item
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                i_category = <span style="color:firebrick;">'Music'</span>)
+            <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = i_item_sk
+            <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year = 1998
+            <span style="color:black;font-weight:bold;">AND</span> d_moy = 9
+            <span style="color:black;font-weight:bold;">AND</span> ss_addr_sk = ca_address_sk
+            <span style="color:black;font-weight:bold;">AND</span> ca_gmt_offset = - 5
+        <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+            i_item_id
+),
+cs <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_ext_sales_price) total_sales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_sales,
+        date_dim,
+        customer_address,
+        item
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        i_item_id <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                i_item_id
+            <span style="color:black;font-weight:bold;">FROM</span>
+                item
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                i_category = <span style="color:firebrick;">'Music'</span>)
+            <span style="color:black;font-weight:bold;">AND</span> cs_item_sk = i_item_sk
+            <span style="color:black;font-weight:bold;">AND</span> cs_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year = 1998
+            <span style="color:black;font-weight:bold;">AND</span> d_moy = 9
+            <span style="color:black;font-weight:bold;">AND</span> cs_bill_addr_sk = ca_address_sk
+            <span style="color:black;font-weight:bold;">AND</span> ca_gmt_offset = - 5
+        <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+            i_item_id
+),
+ws <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_ext_sales_price) total_sales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_sales,
+        date_dim,
+        customer_address,
+        item
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        i_item_id <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                i_item_id
+            <span style="color:black;font-weight:bold;">FROM</span>
+                item
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                i_category = <span style="color:firebrick;">'Music'</span>)
+            <span style="color:black;font-weight:bold;">AND</span> ws_item_sk = i_item_sk
+            <span style="color:black;font-weight:bold;">AND</span> ws_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_year = 1998
+            <span style="color:black;font-weight:bold;">AND</span> d_moy = 9
+            <span style="color:black;font-weight:bold;">AND</span> ws_bill_addr_sk = ca_address_sk
+            <span style="color:black;font-weight:bold;">AND</span> ca_gmt_offset = - 5
+        <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+            i_item_id
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    i_item_id,
+    <span style="color:black;font-weight:bold;">sum</span>(total_sales) total_sales
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        *
+    <span style="color:black;font-weight:bold;">FROM</span>
+        ss
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        *
+    <span style="color:black;font-weight:bold;">FROM</span>
+        cs
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        *
+    <span style="color:black;font-weight:bold;">FROM</span>
+        ws) tmp1
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_item_id,
+    total_sales
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

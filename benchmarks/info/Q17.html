@@ -1,0 +1,19 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:black;font-weight:bold;">sum</span>(l_extendedprice) / 7.0 <span style="color:black;font-weight:bold;">AS</span> avg_yearly
+<span style="color:black;font-weight:bold;">FROM</span>
+    lineitem,
+    part
+<span style="color:black;font-weight:bold;">WHERE</span>
+    p_partkey = l_partkey
+    <span style="color:black;font-weight:bold;">AND</span> p_brand = <span style="color:firebrick;">'Brand#23'</span>
+    <span style="color:black;font-weight:bold;">AND</span> p_container = <span style="color:firebrick;">'MED BOX'</span>
+    <span style="color:black;font-weight:bold;">AND</span> l_quantity < (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            0.2 * <span style="color:black;font-weight:bold;">avg</span>(l_quantity)
+        <span style="color:black;font-weight:bold;">FROM</span>
+            lineitem
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            l_partkey = p_partkey);
+
+</pre>

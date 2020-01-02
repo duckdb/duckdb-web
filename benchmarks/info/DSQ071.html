@@ -1,0 +1,217 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> results <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        d_moy,
+        s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(coalesce(ss_sales_price * ss_quantity,
+                0)) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        date_dim,
+        store,
+        item
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1200 <span style="color:black;font-weight:bold;">AND</span> 1200 + 11
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        d_moy,
+        s_store_id
+),
+results_rollup <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        d_moy,
+        s_store_id,
+        sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        d_moy
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        <span style="color:black;font-weight:bold;">NULL</span> d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        <span style="color:black;font-weight:bold;">NULL</span> d_year,
+        <span style="color:black;font-weight:bold;">NULL</span> d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        <span style="color:black;font-weight:bold;">NULL</span> i_product_name,
+        <span style="color:black;font-weight:bold;">NULL</span> d_year,
+        <span style="color:black;font-weight:bold;">NULL</span> d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class,
+        i_brand
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        <span style="color:black;font-weight:bold;">NULL</span> i_brand,
+        <span style="color:black;font-weight:bold;">NULL</span> i_product_name,
+        <span style="color:black;font-weight:bold;">NULL</span> d_year,
+        <span style="color:black;font-weight:bold;">NULL</span> d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category,
+        i_class
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        <span style="color:black;font-weight:bold;">NULL</span> i_class,
+        <span style="color:black;font-weight:bold;">NULL</span> i_brand,
+        <span style="color:black;font-weight:bold;">NULL</span> i_product_name,
+        <span style="color:black;font-weight:bold;">NULL</span> d_year,
+        <span style="color:black;font-weight:bold;">NULL</span> d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        i_category
+    <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:black;font-weight:bold;">NULL</span> i_category,
+        <span style="color:black;font-weight:bold;">NULL</span> i_class,
+        <span style="color:black;font-weight:bold;">NULL</span> i_brand,
+        <span style="color:black;font-weight:bold;">NULL</span> i_product_name,
+        <span style="color:black;font-weight:bold;">NULL</span> d_year,
+        <span style="color:black;font-weight:bold;">NULL</span> d_qoy,
+        <span style="color:black;font-weight:bold;">NULL</span> d_moy,
+        <span style="color:black;font-weight:bold;">NULL</span> s_store_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sumsales) sumsales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        results
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    *
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_class,
+        i_brand,
+        i_product_name,
+        d_year,
+        d_qoy,
+        d_moy,
+        s_store_id,
+        sumsales,
+        rank() OVER (<span style="color:black;font-weight:bold;">PARTITION</span> <span style="color:black;font-weight:bold;">BY</span> i_category <span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span> sumsales <span style="color:black;font-weight:bold;">DESC</span>) rk
+    <span style="color:black;font-weight:bold;">FROM</span> results_rollup) dw2
+<span style="color:black;font-weight:bold;">WHERE</span>
+    rk <= 100
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_category,
+    i_class,
+    i_brand,
+    i_product_name,
+    d_year,
+    d_qoy,
+    d_moy,
+    s_store_id,
+    sumsales,
+    rk
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

@@ -1,0 +1,70 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> customer_total_return <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        cr_returning_customer_sk <span style="color:black;font-weight:bold;">AS</span> ctr_customer_sk,
+        ca_state <span style="color:black;font-weight:bold;">AS</span> ctr_state,
+        <span style="color:black;font-weight:bold;">sum</span>(cr_return_amt_inc_tax) <span style="color:black;font-weight:bold;">AS</span> ctr_total_return
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_returns,
+        date_dim,
+        customer_address
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cr_returned_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_year = 2000
+        <span style="color:black;font-weight:bold;">AND</span> cr_returning_addr_sk = ca_address_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        cr_returning_customer_sk,
+        ca_state
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    c_customer_id,
+    c_salutation,
+    c_first_name,
+    c_last_name,
+    ca_street_number,
+    ca_street_name,
+    ca_street_type,
+    ca_suite_number,
+    ca_city,
+    ca_county,
+    ca_state,
+    ca_zip,
+    ca_country,
+    ca_gmt_offset,
+    ca_location_type,
+    ctr_total_return
+<span style="color:black;font-weight:bold;">FROM</span>
+    customer_total_return ctr1,
+    customer_address,
+    customer
+<span style="color:black;font-weight:bold;">WHERE</span>
+    ctr1.ctr_total_return > (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">avg</span>(ctr_total_return) * 1.2
+        <span style="color:black;font-weight:bold;">FROM</span>
+            customer_total_return ctr2
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ctr1.ctr_state = ctr2.ctr_state)
+    <span style="color:black;font-weight:bold;">AND</span> ca_address_sk = c_current_addr_sk
+    <span style="color:black;font-weight:bold;">AND</span> ca_state = <span style="color:firebrick;">'GA'</span>
+    <span style="color:black;font-weight:bold;">AND</span> ctr1.ctr_customer_sk = c_customer_sk
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    c_customer_id,
+    c_salutation,
+    c_first_name,
+    c_last_name,
+    ca_street_number,
+    ca_street_name,
+    ca_street_type,
+    ca_suite_number,
+    ca_city,
+    ca_county,
+    ca_state,
+    ca_zip,
+    ca_country,
+    ca_gmt_offset,
+    ca_location_type,
+    ctr_total_return
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

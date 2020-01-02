@@ -1,0 +1,22 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    c_count,
+    <span style="color:black;font-weight:bold;">count</span>(*) <span style="color:black;font-weight:bold;">AS</span> custdist
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        c_custkey,
+        <span style="color:black;font-weight:bold;">count</span>(o_orderkey)
+    <span style="color:black;font-weight:bold;">FROM</span>
+        customer
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">OUTER</span> <span style="color:black;font-weight:bold;">JOIN</span> orders <span style="color:black;font-weight:bold;">ON</span> c_custkey = o_custkey
+    <span style="color:black;font-weight:bold;">AND</span> o_comment <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%special%requests%'</span>
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    c_custkey) <span style="color:black;font-weight:bold;">AS</span> c_orders (c_custkey,
+        c_count)
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    c_count
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    custdist <span style="color:black;font-weight:bold;">DESC</span>,
+    c_count <span style="color:black;font-weight:bold;">DESC</span>;
+
+</pre>

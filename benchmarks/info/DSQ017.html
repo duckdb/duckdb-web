@@ -1,0 +1,38 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> cs_order_number) <span style="color:black;font-weight:bold;">AS</span> "order <span style="color:black;font-weight:bold;">count</span>",
+    <span style="color:black;font-weight:bold;">sum</span>(cs_ext_ship_cost) <span style="color:black;font-weight:bold;">AS</span> "total shipping cost",
+    <span style="color:black;font-weight:bold;">sum</span>(cs_net_profit) <span style="color:black;font-weight:bold;">AS</span> "total net profit"
+<span style="color:black;font-weight:bold;">FROM</span>
+    catalog_sales cs1,
+    date_dim,
+    customer_address,
+    call_center
+<span style="color:black;font-weight:bold;">WHERE</span>
+    d_date <span style="color:black;font-weight:bold;">BETWEEN</span> <span style="color:firebrick;">'2002-02-01'</span>
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'2002-04-02'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+    <span style="color:black;font-weight:bold;">AND</span> cs1.cs_ship_date_sk = d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> cs1.cs_ship_addr_sk = ca_address_sk
+    <span style="color:black;font-weight:bold;">AND</span> ca_state = <span style="color:firebrick;">'GA'</span>
+    <span style="color:black;font-weight:bold;">AND</span> cs1.cs_call_center_sk = cc_call_center_sk
+    <span style="color:black;font-weight:bold;">AND</span> cc_county = <span style="color:firebrick;">'Williamson County'</span>
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">EXISTS</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            *
+        <span style="color:black;font-weight:bold;">FROM</span>
+            catalog_sales cs2
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            cs1.cs_order_number = cs2.cs_order_number
+            <span style="color:black;font-weight:bold;">AND</span> cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk)
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">EXISTS</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            *
+        <span style="color:black;font-weight:bold;">FROM</span>
+            catalog_returns cr1
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            cs1.cs_order_number = cr1.cr_order_number)
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> cs_order_number)
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

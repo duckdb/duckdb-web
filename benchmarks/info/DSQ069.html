@@ -1,0 +1,56 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    s_store_name,
+    i_item_desc,
+    sc.revenue,
+    i_current_price,
+    i_wholesale_cost,
+    i_brand
+<span style="color:black;font-weight:bold;">FROM</span>
+    store,
+    item,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ss_store_sk,
+            <span style="color:black;font-weight:bold;">avg</span>(revenue) <span style="color:black;font-weight:bold;">AS</span> ave
+        <span style="color:black;font-weight:bold;">FROM</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                ss_store_sk,
+                ss_item_sk,
+                <span style="color:black;font-weight:bold;">sum</span>(ss_sales_price) <span style="color:black;font-weight:bold;">AS</span> revenue
+            <span style="color:black;font-weight:bold;">FROM</span>
+                store_sales,
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                ss_sold_date_sk = d_date_sk
+                <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1176 <span style="color:black;font-weight:bold;">AND</span> 1176 + 11
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                ss_store_sk,
+                ss_item_sk) sa
+        <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+            ss_store_sk) sb,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ss_store_sk,
+            ss_item_sk,
+            <span style="color:black;font-weight:bold;">sum</span>(ss_sales_price) <span style="color:black;font-weight:bold;">AS</span> revenue
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales,
+            date_dim
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_sold_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1176 <span style="color:black;font-weight:bold;">AND</span> 1176 + 11
+        <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+            ss_store_sk,
+            ss_item_sk) sc
+<span style="color:black;font-weight:bold;">WHERE</span>
+    sb.ss_store_sk = sc.ss_store_sk
+    <span style="color:black;font-weight:bold;">AND</span> sc.revenue <= 0.1 * sb.ave
+    <span style="color:black;font-weight:bold;">AND</span> s_store_sk = sc.ss_store_sk
+    <span style="color:black;font-weight:bold;">AND</span> i_item_sk = sc.ss_item_sk
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    s_store_name,
+    i_item_desc
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

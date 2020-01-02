@@ -1,0 +1,37 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    s_name,
+    s_address
+<span style="color:black;font-weight:bold;">FROM</span>
+    supplier,
+    nation
+<span style="color:black;font-weight:bold;">WHERE</span>
+    s_suppkey <span style="color:black;font-weight:bold;">IN</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ps_suppkey
+        <span style="color:black;font-weight:bold;">FROM</span>
+            partsupp
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ps_partkey <span style="color:black;font-weight:bold;">IN</span> (
+                <span style="color:black;font-weight:bold;">SELECT</span>
+                    p_partkey
+                <span style="color:black;font-weight:bold;">FROM</span>
+                    part
+                <span style="color:black;font-weight:bold;">WHERE</span>
+                    p_name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'forest%'</span>)
+                <span style="color:black;font-weight:bold;">AND</span> ps_availqty > (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        0.5 * <span style="color:black;font-weight:bold;">sum</span>(l_quantity)
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        lineitem
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        l_partkey = ps_partkey
+                        <span style="color:black;font-weight:bold;">AND</span> l_suppkey = ps_suppkey
+                        <span style="color:black;font-weight:bold;">AND</span> l_shipdate >= <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1994-01-01'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+                        <span style="color:black;font-weight:bold;">AND</span> l_shipdate < <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1995-01-01'</span> <span style="color:black;font-weight:bold;">AS</span> date)))
+            <span style="color:black;font-weight:bold;">AND</span> s_nationkey = n_nationkey
+            <span style="color:black;font-weight:bold;">AND</span> n_name = <span style="color:firebrick;">'CANADA'</span>
+        <span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+            s_name;
+
+</pre>

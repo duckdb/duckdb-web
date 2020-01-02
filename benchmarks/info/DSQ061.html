@@ -1,0 +1,78 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> v1 <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_category,
+        i_brand,
+        cc_name,
+        d_year,
+        d_moy,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_sales_price) sum_sales,
+        <span style="color:black;font-weight:bold;">avg</span>(<span style="color:black;font-weight:bold;">sum</span>(cs_sales_price)) OVER (<span style="color:black;font-weight:bold;">PARTITION</span> <span style="color:black;font-weight:bold;">BY</span> i_category,
+            i_brand,
+            cc_name,
+            d_year) avg_monthly_sales,
+        rank() OVER (<span style="color:black;font-weight:bold;">PARTITION</span> <span style="color:black;font-weight:bold;">BY</span> i_category,
+            i_brand,
+            cc_name <span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span> d_year,
+            d_moy) rn
+    <span style="color:black;font-weight:bold;">FROM</span> item,
+    catalog_sales,
+    date_dim,
+    call_center
+<span style="color:black;font-weight:bold;">WHERE</span> cs_item_sk = i_item_sk
+    <span style="color:black;font-weight:bold;">AND</span> cs_sold_date_sk = d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> cc_call_center_sk = cs_call_center_sk
+    <span style="color:black;font-weight:bold;">AND</span> (d_year = 1999
+    <span style="color:black;font-weight:bold;">OR</span> (d_year = 1999 - 1
+    <span style="color:black;font-weight:bold;">AND</span> d_moy = 12)
+    <span style="color:black;font-weight:bold;">OR</span> (d_year = 1999 + 1
+    <span style="color:black;font-weight:bold;">AND</span> d_moy = 1))
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    i_category,
+    i_brand,
+    cc_name,
+    d_year,
+    d_moy
+),
+v2 <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        v1.i_category,
+        v1.i_brand,
+        v1.cc_name,
+        v1.d_year,
+        v1.d_moy,
+        v1.avg_monthly_sales,
+        v1.sum_sales,
+        v1_lag.sum_sales psum,
+        v1_lead.sum_sales nsum
+    <span style="color:black;font-weight:bold;">FROM</span>
+        v1,
+        v1 v1_lag,
+        v1 v1_lead
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        v1.i_category = v1_lag.i_category
+        <span style="color:black;font-weight:bold;">AND</span> v1.i_category = v1_lead.i_category
+        <span style="color:black;font-weight:bold;">AND</span> v1.i_brand = v1_lag.i_brand
+        <span style="color:black;font-weight:bold;">AND</span> v1.i_brand = v1_lead.i_brand
+        <span style="color:black;font-weight:bold;">AND</span> v1. cc_name = v1_lag. cc_name
+        <span style="color:black;font-weight:bold;">AND</span> v1. cc_name = v1_lead. cc_name
+        <span style="color:black;font-weight:bold;">AND</span> v1.rn = v1_lag.rn + 1
+        <span style="color:black;font-weight:bold;">AND</span> v1.rn = v1_lead.rn - 1
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    *
+<span style="color:black;font-weight:bold;">FROM</span>
+    v2
+<span style="color:black;font-weight:bold;">WHERE</span>
+    d_year = 1999
+    <span style="color:black;font-weight:bold;">AND</span> avg_monthly_sales > 0
+    <span style="color:black;font-weight:bold;">AND</span> <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> avg_monthly_sales > 0 <span style="color:black;font-weight:bold;">THEN</span>
+        abs(sum_sales - avg_monthly_sales) / avg_monthly_sales
+    <span style="color:black;font-weight:bold;">ELSE</span>
+        <span style="color:black;font-weight:bold;">NULL</span>
+    <span style="color:black;font-weight:bold;">END</span> > 0.1
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    sum_sales - avg_monthly_sales
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

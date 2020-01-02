@@ -1,0 +1,84 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> my_customers <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span> <span style="color:black;font-weight:bold;">DISTINCT</span>
+        c_customer_sk,
+        c_current_addr_sk
+    <span style="color:black;font-weight:bold;">FROM</span> (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            cs_sold_date_sk sold_date_sk,
+            cs_bill_customer_sk customer_sk,
+            cs_item_sk item_sk
+        <span style="color:black;font-weight:bold;">FROM</span>
+            catalog_sales
+        <span style="color:black;font-weight:bold;">UNION</span> <span style="color:black;font-weight:bold;">ALL</span>
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            ws_sold_date_sk sold_date_sk,
+            ws_bill_customer_sk customer_sk,
+            ws_item_sk item_sk
+        <span style="color:black;font-weight:bold;">FROM</span>
+            web_sales) cs_or_ws_sales,
+        item,
+        date_dim,
+        customer
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> i_category = <span style="color:firebrick;">'Women'</span>
+        <span style="color:black;font-weight:bold;">AND</span> i_class = <span style="color:firebrick;">'maternity'</span>
+        <span style="color:black;font-weight:bold;">AND</span> c_customer_sk = cs_or_ws_sales.customer_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_moy = 12
+        <span style="color:black;font-weight:bold;">AND</span> d_year = 1998
+),
+my_revenue <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        c_customer_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_ext_sales_price) <span style="color:black;font-weight:bold;">AS</span> revenue
+    <span style="color:black;font-weight:bold;">FROM</span>
+        my_customers,
+        store_sales,
+        customer_address,
+        store,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        c_current_addr_sk = ca_address_sk
+        <span style="color:black;font-weight:bold;">AND</span> ca_county = s_county
+        <span style="color:black;font-weight:bold;">AND</span> ca_state = s_state
+        <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d_date_sk
+        <span style="color:black;font-weight:bold;">AND</span> c_customer_sk = ss_customer_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> ( <span style="color:black;font-weight:bold;">SELECT</span> <span style="color:black;font-weight:bold;">DISTINCT</span>
+                d_month_seq + 1
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_year = 1998
+                <span style="color:black;font-weight:bold;">AND</span> d_moy = 12)
+            <span style="color:black;font-weight:bold;">AND</span> ( <span style="color:black;font-weight:bold;">SELECT</span> <span style="color:black;font-weight:bold;">DISTINCT</span>
+                    d_month_seq + 3
+                <span style="color:black;font-weight:bold;">FROM</span>
+                    date_dim
+                <span style="color:black;font-weight:bold;">WHERE</span>
+                    d_year = 1998
+                    <span style="color:black;font-weight:bold;">AND</span> d_moy = 12)
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                c_customer_sk
+),
+segments <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:black;font-weight:bold;">cast</span>((revenue / 50) <span style="color:black;font-weight:bold;">AS</span> int) <span style="color:black;font-weight:bold;">AS</span> SEGMENT
+    <span style="color:black;font-weight:bold;">FROM</span>
+        my_revenue
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    SEGMENT,
+    <span style="color:black;font-weight:bold;">count</span>(*) <span style="color:black;font-weight:bold;">AS</span> num_customers,
+    SEGMENT * 50 <span style="color:black;font-weight:bold;">AS</span> segment_base
+<span style="color:black;font-weight:bold;">FROM</span>
+    segments
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    SEGMENT
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    SEGMENT,
+    num_customers
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

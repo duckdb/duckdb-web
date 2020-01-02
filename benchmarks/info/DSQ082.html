@@ -1,0 +1,97 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> ws <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        d_year <span style="color:black;font-weight:bold;">AS</span> ws_sold_year,
+        ws_item_sk,
+        ws_bill_customer_sk ws_customer_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_quantity) ws_qty,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_wholesale_cost) ws_wc,
+        <span style="color:black;font-weight:bold;">sum</span>(ws_sales_price) ws_sp
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_sales
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> web_returns <span style="color:black;font-weight:bold;">ON</span> wr_order_number = ws_order_number
+        <span style="color:black;font-weight:bold;">AND</span> ws_item_sk = wr_item_sk
+    <span style="color:black;font-weight:bold;">JOIN</span> date_dim <span style="color:black;font-weight:bold;">ON</span> ws_sold_date_sk = d_date_sk
+<span style="color:black;font-weight:bold;">WHERE</span>
+    wr_order_number IS <span style="color:black;font-weight:bold;">NULL</span>
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    d_year,
+    ws_item_sk,
+    ws_bill_customer_sk
+),
+cs <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        d_year <span style="color:black;font-weight:bold;">AS</span> cs_sold_year,
+        cs_item_sk,
+        cs_bill_customer_sk cs_customer_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_quantity) cs_qty,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_wholesale_cost) cs_wc,
+        <span style="color:black;font-weight:bold;">sum</span>(cs_sales_price) cs_sp
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_sales
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> catalog_returns <span style="color:black;font-weight:bold;">ON</span> cr_order_number = cs_order_number
+        <span style="color:black;font-weight:bold;">AND</span> cs_item_sk = cr_item_sk
+    <span style="color:black;font-weight:bold;">JOIN</span> date_dim <span style="color:black;font-weight:bold;">ON</span> cs_sold_date_sk = d_date_sk
+<span style="color:black;font-weight:bold;">WHERE</span>
+    cr_order_number IS <span style="color:black;font-weight:bold;">NULL</span>
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    d_year,
+    cs_item_sk,
+    cs_bill_customer_sk
+),
+ss <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        d_year <span style="color:black;font-weight:bold;">AS</span> ss_sold_year,
+        ss_item_sk,
+        ss_customer_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_quantity) ss_qty,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_wholesale_cost) ss_wc,
+        <span style="color:black;font-weight:bold;">sum</span>(ss_sales_price) ss_sp
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> store_returns <span style="color:black;font-weight:bold;">ON</span> sr_ticket_number = ss_ticket_number
+        <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = sr_item_sk
+    <span style="color:black;font-weight:bold;">JOIN</span> date_dim <span style="color:black;font-weight:bold;">ON</span> ss_sold_date_sk = d_date_sk
+<span style="color:black;font-weight:bold;">WHERE</span>
+    sr_ticket_number IS <span style="color:black;font-weight:bold;">NULL</span>
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    d_year,
+    ss_item_sk,
+    ss_customer_sk
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    ss_sold_year,
+    ss_item_sk,
+    ss_customer_sk,
+    round((ss_qty * 1.00) / (coalesce(ws_qty, 0) + coalesce(cs_qty, 0)), 2) ratio,
+    ss_qty store_qty,
+    ss_wc store_wholesale_cost,
+    ss_sp store_sales_price,
+    coalesce(ws_qty, 0) + coalesce(cs_qty, 0) other_chan_qty,
+    coalesce(ws_wc, 0) + coalesce(cs_wc, 0) other_chan_wholesale_cost,
+    coalesce(ws_sp, 0) + coalesce(cs_sp, 0) other_chan_sales_price
+<span style="color:black;font-weight:bold;">FROM</span>
+    ss
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> ws <span style="color:black;font-weight:bold;">ON</span> (ws_sold_year = ss_sold_year
+            <span style="color:black;font-weight:bold;">AND</span> ws_item_sk = ss_item_sk
+            <span style="color:black;font-weight:bold;">AND</span> ws_customer_sk = ss_customer_sk)
+    <span style="color:black;font-weight:bold;">LEFT</span> <span style="color:black;font-weight:bold;">JOIN</span> cs <span style="color:black;font-weight:bold;">ON</span> (cs_sold_year = ss_sold_year
+            <span style="color:black;font-weight:bold;">AND</span> cs_item_sk = ss_item_sk
+            <span style="color:black;font-weight:bold;">AND</span> cs_customer_sk = ss_customer_sk)
+<span style="color:black;font-weight:bold;">WHERE</span> (coalesce(ws_qty, 0) > 0
+    <span style="color:black;font-weight:bold;">OR</span> coalesce(cs_qty, 0) > 0)
+<span style="color:black;font-weight:bold;">AND</span> ss_sold_year = 2000
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    ss_sold_year,
+    ss_item_sk,
+    ss_customer_sk,
+    ss_qty <span style="color:black;font-weight:bold;">DESC</span>,
+    ss_wc <span style="color:black;font-weight:bold;">DESC</span>,
+    ss_sp <span style="color:black;font-weight:bold;">DESC</span>,
+    other_chan_qty,
+    other_chan_wholesale_cost,
+    other_chan_sales_price,
+    ratio
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

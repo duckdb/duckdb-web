@@ -1,3 +1,6 @@
+# benchmark_html.py
+# This script generates the benchmark HTML files for display on the website
+
 import numpy, os, sys, sqlite3, json
 import duckdb_query_graph
 
@@ -280,6 +283,12 @@ def create_html(database):
 		benchmark_id = benchmark_info[1]
 		groupname = benchmark_info[2]
 		description = benchmark_info[3]
+		# load the HTML description from disk, if it exists
+		description_file = os.path.join('benchmarks', 'info', benchmark_name + '.html')
+		if os.path.isfile(description_file):
+			with open(description_file, 'r') as descr_file:
+				description = descr_file.read()
+
 		with open(os.path.join('_includes', 'individual_results', benchmark_name + '.html'), 'w+') as f:
 			# first write the description
 			f.write("%s" % (description,))
