@@ -1,0 +1,40 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    <span style="color:black;font-weight:bold;">sum</span>(l_extendedprice * (1 - l_discount)) <span style="color:black;font-weight:bold;">AS</span> revenue
+<span style="color:black;font-weight:bold;">FROM</span>
+    lineitem,
+    part
+<span style="color:black;font-weight:bold;">WHERE</span> (p_partkey = l_partkey
+    <span style="color:black;font-weight:bold;">AND</span> p_brand = <span style="color:firebrick;">'Brand#12'</span>
+    <span style="color:black;font-weight:bold;">AND</span> p_container <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'SM CASE'</span>, <span style="color:firebrick;">'SM BOX'</span>, <span style="color:firebrick;">'SM PACK'</span>, <span style="color:firebrick;">'SM PKG'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> l_quantity >= 1
+    <span style="color:black;font-weight:bold;">AND</span> l_quantity <= 1 + 10
+    <span style="color:black;font-weight:bold;">AND</span> p_size <span style="color:black;font-weight:bold;">BETWEEN</span> 1 <span style="color:black;font-weight:bold;">AND</span> 5
+    <span style="color:black;font-weight:bold;">AND</span> l_shipmode <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'AIR'</span>, <span style="color:firebrick;">'AIR REG'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> l_shipinstruct = <span style="color:firebrick;">'DELIVER IN PERSON'</span>)
+    <span style="color:black;font-weight:bold;">OR</span> (p_partkey = l_partkey
+        <span style="color:black;font-weight:bold;">AND</span> p_brand = <span style="color:firebrick;">'Brand#23'</span>
+        <span style="color:black;font-weight:bold;">AND</span> p_container <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'MED BAG'</span>,
+            <span style="color:firebrick;">'MED BOX'</span>,
+            <span style="color:firebrick;">'MED PKG'</span>,
+            <span style="color:firebrick;">'MED PACK'</span>)
+        <span style="color:black;font-weight:bold;">AND</span> l_quantity >= 10
+        <span style="color:black;font-weight:bold;">AND</span> l_quantity <= 10 + 10
+        <span style="color:black;font-weight:bold;">AND</span> p_size <span style="color:black;font-weight:bold;">BETWEEN</span> 1 <span style="color:black;font-weight:bold;">AND</span> 10
+        <span style="color:black;font-weight:bold;">AND</span> l_shipmode <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'AIR'</span>,
+            <span style="color:firebrick;">'AIR REG'</span>)
+        <span style="color:black;font-weight:bold;">AND</span> l_shipinstruct = <span style="color:firebrick;">'DELIVER IN PERSON'</span>)
+    <span style="color:black;font-weight:bold;">OR</span> (p_partkey = l_partkey
+        <span style="color:black;font-weight:bold;">AND</span> p_brand = <span style="color:firebrick;">'Brand#34'</span>
+        <span style="color:black;font-weight:bold;">AND</span> p_container <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'LG CASE'</span>,
+            <span style="color:firebrick;">'LG BOX'</span>,
+            <span style="color:firebrick;">'LG PACK'</span>,
+            <span style="color:firebrick;">'LG PKG'</span>)
+        <span style="color:black;font-weight:bold;">AND</span> l_quantity >= 20
+        <span style="color:black;font-weight:bold;">AND</span> l_quantity <= 20 + 10
+        <span style="color:black;font-weight:bold;">AND</span> p_size <span style="color:black;font-weight:bold;">BETWEEN</span> 1 <span style="color:black;font-weight:bold;">AND</span> 15
+        <span style="color:black;font-weight:bold;">AND</span> l_shipmode <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'AIR'</span>,
+            <span style="color:firebrick;">'AIR REG'</span>)
+        <span style="color:black;font-weight:bold;">AND</span> l_shipinstruct = <span style="color:firebrick;">'DELIVER IN PERSON'</span>);
+
+</pre>

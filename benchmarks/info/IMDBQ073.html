@@ -1,0 +1,44 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    MIN(t.title) <span style="color:black;font-weight:bold;">AS</span> complete_downey_ironman_movie
+<span style="color:black;font-weight:bold;">FROM</span>
+    complete_cast <span style="color:black;font-weight:bold;">AS</span> cc,
+    comp_cast_type <span style="color:black;font-weight:bold;">AS</span> cct1,
+    comp_cast_type <span style="color:black;font-weight:bold;">AS</span> cct2,
+    char_name <span style="color:black;font-weight:bold;">AS</span> chn,
+    cast_info <span style="color:black;font-weight:bold;">AS</span> ci,
+    keyword <span style="color:black;font-weight:bold;">AS</span> k,
+    kind_type <span style="color:black;font-weight:bold;">AS</span> kt,
+    movie_keyword <span style="color:black;font-weight:bold;">AS</span> mk,
+    name <span style="color:black;font-weight:bold;">AS</span> n,
+    title <span style="color:black;font-weight:bold;">AS</span> t
+<span style="color:black;font-weight:bold;">WHERE</span>
+    cct1.kind = <span style="color:firebrick;">'cast'</span>
+    <span style="color:black;font-weight:bold;">AND</span> cct2.kind <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%complete%'</span>
+    <span style="color:black;font-weight:bold;">AND</span> chn.name <span style="color:black;font-weight:bold;">NOT</span> <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Sherlock%'</span>
+    <span style="color:black;font-weight:bold;">AND</span> (chn.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Tony%Stark%'</span>
+        <span style="color:black;font-weight:bold;">OR</span> chn.name <span style="color:black;font-weight:bold;">LIKE</span> <span style="color:firebrick;">'%Iron%Man%'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> k.keyword <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'superhero'</span>,
+        <span style="color:firebrick;">'sequel'</span>,
+        <span style="color:firebrick;">'second-part'</span>,
+        <span style="color:firebrick;">'marvel-comics'</span>,
+        <span style="color:firebrick;">'based-on-comic'</span>,
+        <span style="color:firebrick;">'tv-special'</span>,
+        <span style="color:firebrick;">'fight'</span>,
+        <span style="color:firebrick;">'violence'</span>)
+    <span style="color:black;font-weight:bold;">AND</span> kt.kind = <span style="color:firebrick;">'movie'</span>
+    <span style="color:black;font-weight:bold;">AND</span> t.production_year > 1950
+    <span style="color:black;font-weight:bold;">AND</span> kt.id = t.kind_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = mk.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = ci.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> t.id = cc.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = ci.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> mk.movie_id = cc.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> ci.movie_id = cc.movie_id
+    <span style="color:black;font-weight:bold;">AND</span> chn.id = ci.person_role_id
+    <span style="color:black;font-weight:bold;">AND</span> n.id = ci.person_id
+    <span style="color:black;font-weight:bold;">AND</span> k.id = mk.keyword_id
+    <span style="color:black;font-weight:bold;">AND</span> cct1.id = cc.subject_id
+    <span style="color:black;font-weight:bold;">AND</span> cct2.id = cc.status_id;
+
+</pre>

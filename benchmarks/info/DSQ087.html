@@ -1,0 +1,110 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> sr_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(sr_return_quantity) sr_item_qty
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_returns,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        sr_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq <span style="color:black;font-weight:bold;">IN</span> (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'2000-06-30'</span>,
+                            <span style="color:firebrick;">'2000-09-27'</span>,
+                            <span style="color:firebrick;">'2000-11-17'</span>)))
+                <span style="color:black;font-weight:bold;">AND</span> sr_returned_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+),
+cr_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(cr_return_quantity) cr_item_qty
+    <span style="color:black;font-weight:bold;">FROM</span>
+        catalog_returns,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        cr_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq <span style="color:black;font-weight:bold;">IN</span> (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'2000-06-30'</span>,
+                            <span style="color:firebrick;">'2000-09-27'</span>,
+                            <span style="color:firebrick;">'2000-11-17'</span>)))
+                <span style="color:black;font-weight:bold;">AND</span> cr_returned_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+),
+wr_items <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        i_item_id item_id,
+        <span style="color:black;font-weight:bold;">sum</span>(wr_return_quantity) wr_item_qty
+    <span style="color:black;font-weight:bold;">FROM</span>
+        web_returns,
+        item,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        wr_item_sk = i_item_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_date <span style="color:black;font-weight:bold;">IN</span> (
+            <span style="color:black;font-weight:bold;">SELECT</span>
+                d_date
+            <span style="color:black;font-weight:bold;">FROM</span>
+                date_dim
+            <span style="color:black;font-weight:bold;">WHERE</span>
+                d_week_seq <span style="color:black;font-weight:bold;">IN</span> (
+                    <span style="color:black;font-weight:bold;">SELECT</span>
+                        d_week_seq
+                    <span style="color:black;font-weight:bold;">FROM</span>
+                        date_dim
+                    <span style="color:black;font-weight:bold;">WHERE</span>
+                        d_date <span style="color:black;font-weight:bold;">IN</span> (<span style="color:firebrick;">'2000-06-30'</span>,
+                            <span style="color:firebrick;">'2000-09-27'</span>,
+                            <span style="color:firebrick;">'2000-11-17'</span>)))
+                <span style="color:black;font-weight:bold;">AND</span> wr_returned_date_sk = d_date_sk
+            <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+                i_item_id
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    sr_items.item_id,
+    sr_item_qty,
+    (sr_item_qty * 1.0000) / (sr_item_qty + cr_item_qty + wr_item_qty) / 3.0000 * 100 sr_dev,
+cr_item_qty,
+(cr_item_qty * 1.0000) / (sr_item_qty + cr_item_qty + wr_item_qty) / 3.0000 * 100 cr_dev,
+wr_item_qty,
+(wr_item_qty * 1.0000) / (sr_item_qty + cr_item_qty + wr_item_qty) / 3.0000 * 100 wr_dev,
+(sr_item_qty + cr_item_qty + wr_item_qty) / 3.0 average
+<span style="color:black;font-weight:bold;">FROM</span>
+    sr_items,
+    cr_items,
+    wr_items
+<span style="color:black;font-weight:bold;">WHERE</span>
+    sr_items.item_id = cr_items.item_id
+    <span style="color:black;font-weight:bold;">AND</span> sr_items.item_id = wr_items.item_id
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    sr_items.item_id,
+    sr_item_qty
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

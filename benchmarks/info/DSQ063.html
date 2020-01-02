@@ -1,0 +1,117 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">WITH</span> wss <span style="color:black;font-weight:bold;">AS</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        d_week_seq,
+        ss_store_sk,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Sunday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) sun_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Monday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) mon_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Tuesday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) tue_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Wednesday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) wed_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Thursday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) thu_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Friday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) fri_sales,
+        <span style="color:black;font-weight:bold;">sum</span>(
+            <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (d_day_name = <span style="color:firebrick;">'Saturday'</span>) <span style="color:black;font-weight:bold;">THEN</span>
+                ss_sales_price
+            <span style="color:black;font-weight:bold;">ELSE</span>
+                <span style="color:black;font-weight:bold;">NULL</span>
+            <span style="color:black;font-weight:bold;">END</span>) sat_sales
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales,
+        date_dim
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        d_date_sk = ss_sold_date_sk
+    <span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+        d_week_seq,
+        ss_store_sk
+)
+<span style="color:black;font-weight:bold;">SELECT</span>
+    s_store_name1,
+    s_store_id1,
+    d_week_seq1,
+    sun_sales1 / sun_sales2,
+    mon_sales1 / mon_sales2,
+    tue_sales1 / tue_sales2,
+    wed_sales1 / wed_sales2,
+    thu_sales1 / thu_sales2,
+    fri_sales1 / fri_sales2,
+    sat_sales1 / sat_sales2
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        s_store_name s_store_name1,
+        wss.d_week_seq d_week_seq1,
+        s_store_id s_store_id1,
+        sun_sales sun_sales1,
+        mon_sales mon_sales1,
+        tue_sales tue_sales1,
+        wed_sales wed_sales1,
+        thu_sales thu_sales1,
+        fri_sales fri_sales1,
+        sat_sales sat_sales1
+    <span style="color:black;font-weight:bold;">FROM</span>
+        wss,
+        store,
+        date_dim d
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        d.d_week_seq = wss.d_week_seq
+        <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+        <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1212 <span style="color:black;font-weight:bold;">AND</span> 1212 + 11) y,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            s_store_name s_store_name2,
+            wss.d_week_seq d_week_seq2,
+            s_store_id s_store_id2,
+            sun_sales sun_sales2,
+            mon_sales mon_sales2,
+            tue_sales tue_sales2,
+            wed_sales wed_sales2,
+            thu_sales thu_sales2,
+            fri_sales fri_sales2,
+            sat_sales sat_sales2
+        <span style="color:black;font-weight:bold;">FROM</span>
+            wss,
+            store,
+            date_dim d
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            d.d_week_seq = wss.d_week_seq
+            <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+            <span style="color:black;font-weight:bold;">AND</span> d_month_seq <span style="color:black;font-weight:bold;">BETWEEN</span> 1212 + 12 <span style="color:black;font-weight:bold;">AND</span> 1212 + 23) x
+<span style="color:black;font-weight:bold;">WHERE</span>
+    s_store_id1 = s_store_id2
+    <span style="color:black;font-weight:bold;">AND</span> d_week_seq1 = d_week_seq2 - 52
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    s_store_name1,
+    s_store_id1,
+    d_week_seq1
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

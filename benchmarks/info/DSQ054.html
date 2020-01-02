@@ -1,0 +1,85 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    s_store_name,
+    s_company_id,
+    s_street_number,
+    s_street_name,
+    s_street_type,
+    s_suite_number,
+    s_city,
+    s_county,
+    s_state,
+    s_zip,
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (sr_returned_date_sk - ss_sold_date_sk <= 30) <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) <span style="color:black;font-weight:bold;">AS</span> "30 days",
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (sr_returned_date_sk - ss_sold_date_sk > 30)
+            <span style="color:black;font-weight:bold;">AND</span> (sr_returned_date_sk - ss_sold_date_sk <= 60) <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) <span style="color:black;font-weight:bold;">AS</span> "31-60 days",
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (sr_returned_date_sk - ss_sold_date_sk > 60)
+            <span style="color:black;font-weight:bold;">AND</span> (sr_returned_date_sk - ss_sold_date_sk <= 90) <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) <span style="color:black;font-weight:bold;">AS</span> "61-90 days",
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (sr_returned_date_sk - ss_sold_date_sk > 90)
+            <span style="color:black;font-weight:bold;">AND</span> (sr_returned_date_sk - ss_sold_date_sk <= 120) <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) <span style="color:black;font-weight:bold;">AS</span> "91-120 days",
+    <span style="color:black;font-weight:bold;">sum</span>(
+        <span style="color:black;font-weight:bold;">CASE</span> <span style="color:black;font-weight:bold;">WHEN</span> (sr_returned_date_sk - ss_sold_date_sk > 120) <span style="color:black;font-weight:bold;">THEN</span>
+            1
+        <span style="color:black;font-weight:bold;">ELSE</span>
+            0
+        <span style="color:black;font-weight:bold;">END</span>) <span style="color:black;font-weight:bold;">AS</span> ">120 days"
+<span style="color:black;font-weight:bold;">FROM</span>
+    store_sales,
+    store_returns,
+    store,
+    date_dim d1,
+    date_dim d2
+<span style="color:black;font-weight:bold;">WHERE</span>
+    d2.d_year = 2001
+    <span style="color:black;font-weight:bold;">AND</span> d2.d_moy = 8
+    <span style="color:black;font-weight:bold;">AND</span> ss_ticket_number = sr_ticket_number
+    <span style="color:black;font-weight:bold;">AND</span> ss_item_sk = sr_item_sk
+    <span style="color:black;font-weight:bold;">AND</span> ss_sold_date_sk = d1.d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> sr_returned_date_sk = d2.d_date_sk
+    <span style="color:black;font-weight:bold;">AND</span> ss_customer_sk = sr_customer_sk
+    <span style="color:black;font-weight:bold;">AND</span> ss_store_sk = s_store_sk
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    s_store_name,
+    s_company_id,
+    s_street_number,
+    s_street_name,
+    s_street_type,
+    s_suite_number,
+    s_city,
+    s_county,
+    s_state,
+    s_zip
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    s_store_name,
+    s_company_id,
+    s_street_number,
+    s_street_name,
+    s_street_type,
+    s_suite_number,
+    s_city,
+    s_county,
+    s_state,
+    s_zip
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>

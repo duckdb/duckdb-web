@@ -1,0 +1,24 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    l_returnflag,
+    l_linestatus,
+    <span style="color:black;font-weight:bold;">sum</span>(l_quantity) <span style="color:black;font-weight:bold;">AS</span> sum_qty,
+    <span style="color:black;font-weight:bold;">sum</span>(l_extendedprice) <span style="color:black;font-weight:bold;">AS</span> sum_base_price,
+    <span style="color:black;font-weight:bold;">sum</span>(l_extendedprice * (1 - l_discount)) <span style="color:black;font-weight:bold;">AS</span> sum_disc_price,
+    <span style="color:black;font-weight:bold;">sum</span>(l_extendedprice * (1 - l_discount) * (1 + l_tax)) <span style="color:black;font-weight:bold;">AS</span> sum_charge,
+    <span style="color:black;font-weight:bold;">avg</span>(l_quantity) <span style="color:black;font-weight:bold;">AS</span> avg_qty,
+    <span style="color:black;font-weight:bold;">avg</span>(l_extendedprice) <span style="color:black;font-weight:bold;">AS</span> avg_price,
+    <span style="color:black;font-weight:bold;">avg</span>(l_discount) <span style="color:black;font-weight:bold;">AS</span> avg_disc,
+    <span style="color:black;font-weight:bold;">count</span>(*) <span style="color:black;font-weight:bold;">AS</span> count_order
+<span style="color:black;font-weight:bold;">FROM</span>
+    lineitem
+<span style="color:black;font-weight:bold;">WHERE</span>
+    l_shipdate <= <span style="color:black;font-weight:bold;">cast</span>(<span style="color:firebrick;">'1998-09-02'</span> <span style="color:black;font-weight:bold;">AS</span> date)
+<span style="color:black;font-weight:bold;">GROUP</span> <span style="color:black;font-weight:bold;">BY</span>
+    l_returnflag,
+    l_linestatus
+<span style="color:black;font-weight:bold;">ORDER</span> <span style="color:black;font-weight:bold;">BY</span>
+    l_returnflag,
+    l_linestatus;
+
+</pre>

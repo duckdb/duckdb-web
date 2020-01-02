@@ -1,8 +1,10 @@
+# generate_graphs.R
+# This script creates the performance over time graphs for each of the different benchmarks, and places them in the images/graphs folder
+
 library(RSQLite)
 library(ggplot2)
 library(ggthemes)
 library(grid)
-
 
 theme <- theme_economist(base_size=16) +
         theme(legend.position = "bottom", legend.direction = "horizontal",

@@ -1,0 +1,78 @@
+<h1>SQL Code</h1>
+		<pre style="font:courier-new;background-color:rgb(234,234,234);padding:10px;padding-left:20px"><span style="color:black;font-weight:bold;">SELECT</span>
+    *
+<span style="color:black;font-weight:bold;">FROM</span> (
+    <span style="color:black;font-weight:bold;">SELECT</span>
+        <span style="color:black;font-weight:bold;">avg</span>(ss_list_price) B1_LP,
+        <span style="color:black;font-weight:bold;">count</span>(ss_list_price) B1_CNT,
+        <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ss_list_price) B1_CNTD
+    <span style="color:black;font-weight:bold;">FROM</span>
+        store_sales
+    <span style="color:black;font-weight:bold;">WHERE</span>
+        ss_quantity <span style="color:black;font-weight:bold;">BETWEEN</span> 0 <span style="color:black;font-weight:bold;">AND</span> 5
+        <span style="color:black;font-weight:bold;">AND</span> (ss_list_price <span style="color:black;font-weight:bold;">BETWEEN</span> 8 <span style="color:black;font-weight:bold;">AND</span> 8 + 10
+            <span style="color:black;font-weight:bold;">OR</span> ss_coupon_amt <span style="color:black;font-weight:bold;">BETWEEN</span> 459 <span style="color:black;font-weight:bold;">AND</span> 459 + 1000
+            <span style="color:black;font-weight:bold;">OR</span> ss_wholesale_cost <span style="color:black;font-weight:bold;">BETWEEN</span> 57 <span style="color:black;font-weight:bold;">AND</span> 57 + 20)) B1,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">avg</span>(ss_list_price) B2_LP,
+            <span style="color:black;font-weight:bold;">count</span>(ss_list_price) B2_CNT,
+            <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ss_list_price) B2_CNTD
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_quantity <span style="color:black;font-weight:bold;">BETWEEN</span> 6 <span style="color:black;font-weight:bold;">AND</span> 10
+            <span style="color:black;font-weight:bold;">AND</span> (ss_list_price <span style="color:black;font-weight:bold;">BETWEEN</span> 90 <span style="color:black;font-weight:bold;">AND</span> 90 + 10
+                <span style="color:black;font-weight:bold;">OR</span> ss_coupon_amt <span style="color:black;font-weight:bold;">BETWEEN</span> 2323 <span style="color:black;font-weight:bold;">AND</span> 2323 + 1000
+                <span style="color:black;font-weight:bold;">OR</span> ss_wholesale_cost <span style="color:black;font-weight:bold;">BETWEEN</span> 31 <span style="color:black;font-weight:bold;">AND</span> 31 + 20)) B2,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">avg</span>(ss_list_price) B3_LP,
+            <span style="color:black;font-weight:bold;">count</span>(ss_list_price) B3_CNT,
+            <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ss_list_price) B3_CNTD
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_quantity <span style="color:black;font-weight:bold;">BETWEEN</span> 11 <span style="color:black;font-weight:bold;">AND</span> 15
+            <span style="color:black;font-weight:bold;">AND</span> (ss_list_price <span style="color:black;font-weight:bold;">BETWEEN</span> 142 <span style="color:black;font-weight:bold;">AND</span> 142 + 10
+                <span style="color:black;font-weight:bold;">OR</span> ss_coupon_amt <span style="color:black;font-weight:bold;">BETWEEN</span> 12214 <span style="color:black;font-weight:bold;">AND</span> 12214 + 1000
+                <span style="color:black;font-weight:bold;">OR</span> ss_wholesale_cost <span style="color:black;font-weight:bold;">BETWEEN</span> 79 <span style="color:black;font-weight:bold;">AND</span> 79 + 20)) B3,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">avg</span>(ss_list_price) B4_LP,
+            <span style="color:black;font-weight:bold;">count</span>(ss_list_price) B4_CNT,
+            <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ss_list_price) B4_CNTD
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_quantity <span style="color:black;font-weight:bold;">BETWEEN</span> 16 <span style="color:black;font-weight:bold;">AND</span> 20
+            <span style="color:black;font-weight:bold;">AND</span> (ss_list_price <span style="color:black;font-weight:bold;">BETWEEN</span> 135 <span style="color:black;font-weight:bold;">AND</span> 135 + 10
+                <span style="color:black;font-weight:bold;">OR</span> ss_coupon_amt <span style="color:black;font-weight:bold;">BETWEEN</span> 6071 <span style="color:black;font-weight:bold;">AND</span> 6071 + 1000
+                <span style="color:black;font-weight:bold;">OR</span> ss_wholesale_cost <span style="color:black;font-weight:bold;">BETWEEN</span> 38 <span style="color:black;font-weight:bold;">AND</span> 38 + 20)) B4,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">avg</span>(ss_list_price) B5_LP,
+            <span style="color:black;font-weight:bold;">count</span>(ss_list_price) B5_CNT,
+            <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ss_list_price) B5_CNTD
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_quantity <span style="color:black;font-weight:bold;">BETWEEN</span> 21 <span style="color:black;font-weight:bold;">AND</span> 25
+            <span style="color:black;font-weight:bold;">AND</span> (ss_list_price <span style="color:black;font-weight:bold;">BETWEEN</span> 122 <span style="color:black;font-weight:bold;">AND</span> 122 + 10
+                <span style="color:black;font-weight:bold;">OR</span> ss_coupon_amt <span style="color:black;font-weight:bold;">BETWEEN</span> 836 <span style="color:black;font-weight:bold;">AND</span> 836 + 1000
+                <span style="color:black;font-weight:bold;">OR</span> ss_wholesale_cost <span style="color:black;font-weight:bold;">BETWEEN</span> 17 <span style="color:black;font-weight:bold;">AND</span> 17 + 20)) B5,
+    (
+        <span style="color:black;font-weight:bold;">SELECT</span>
+            <span style="color:black;font-weight:bold;">avg</span>(ss_list_price) B6_LP,
+            <span style="color:black;font-weight:bold;">count</span>(ss_list_price) B6_CNT,
+            <span style="color:black;font-weight:bold;">count</span>(<span style="color:black;font-weight:bold;">DISTINCT</span> ss_list_price) B6_CNTD
+        <span style="color:black;font-weight:bold;">FROM</span>
+            store_sales
+        <span style="color:black;font-weight:bold;">WHERE</span>
+            ss_quantity <span style="color:black;font-weight:bold;">BETWEEN</span> 26 <span style="color:black;font-weight:bold;">AND</span> 30
+            <span style="color:black;font-weight:bold;">AND</span> (ss_list_price <span style="color:black;font-weight:bold;">BETWEEN</span> 154 <span style="color:black;font-weight:bold;">AND</span> 154 + 10
+                <span style="color:black;font-weight:bold;">OR</span> ss_coupon_amt <span style="color:black;font-weight:bold;">BETWEEN</span> 7326 <span style="color:black;font-weight:bold;">AND</span> 7326 + 1000
+                <span style="color:black;font-weight:bold;">OR</span> ss_wholesale_cost <span style="color:black;font-weight:bold;">BETWEEN</span> 7 <span style="color:black;font-weight:bold;">AND</span> 7 + 20)) B6
+<span style="color:black;font-weight:bold;">LIMIT</span> 100;
+
+</pre>
