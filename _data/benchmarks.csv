@@ -198,3 +198,5 @@ NotInList0256Entry,in
 NotInList0512Entry,in
 NotInList1024Entry,in
 NotInList2048Entry,in
+LineitemJoinAggregate,aggregate
+LineitemJoinAggregateWithFilter,aggregate
