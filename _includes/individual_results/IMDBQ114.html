@@ -6,6 +6,8 @@ from
  (select movie_id, count(*) as cnt from movie_companies group by movie_id) as mc
 where mc.movie_id = ci.movie_id and
       mc.movie_id = cc.movie_id and
-      ci.movie_id = cc.movie_id;<img src="/images/graphs/IMDBQ114.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/7e8502b08ca456af09f5ddbbdda0cbb9e99182ba">7e85</a></td><td>2020-01-19</td><td class="table-danger"><b>C</b></td><td></td><td>Switching to stock SQLite shell (#388)
+      ci.movie_id = cc.movie_id;<img src="/images/graphs/IMDBQ114.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/7b31ade87df68483ff73dbf5e99d8057571286d6">7b31</a></td><td>2020-01-20</td><td class="table-danger"><b>C</b></td><td></td><td>Using linenoise instead of readline for shell (#393)
+
+Also fixes a windows bug</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/7e8502b08ca456af09f5ddbbdda0cbb9e99182ba">7e85</a></td><td>2020-01-19</td><td class="table-danger"><b>C</b></td><td></td><td>Switching to stock SQLite shell (#388)
 
 We now build a statically linked command line interface `duckdb_cli` built from the stock SQLite shell.c sources.</td></tr>
