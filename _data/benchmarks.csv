@@ -200,3 +200,4 @@ NotInList1024Entry,in
 NotInList2048Entry,in
 LineitemJoinAggregate,aggregate
 LineitemJoinAggregateWithFilter,aggregate
+TPCHQ1IntKeys,aggregate
