@@ -202,3 +202,10 @@ LineitemJoinAggregate,aggregate
 LineitemJoinAggregateWithFilter,aggregate
 TPCHQ1IntKeys,aggregate
 LineitemCount,aggregate
+StringConcatShort,string
+StringConcatLong,string
+StringEquality,string
+StringGreaterThan,string
+StringLengthShort,string
+StringLengthLong,string
+StringAgg,string

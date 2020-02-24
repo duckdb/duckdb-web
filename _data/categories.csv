@@ -7,5 +7,6 @@ in,In
 micro,Micro
 startup,Startup
 storage,Storage
+string,String
 tpcds-sf1,TPC-DS
 tpch-sf1,TPC-H
