@@ -209,3 +209,9 @@ StringGreaterThan,string
 StringLengthShort,string
 StringLengthLong,string
 StringAgg,string
+StringEqualityShort,string
+StringEqualityLong,string
+StringGreaterThanShort,string
+StringGreaterThanLong,string
+StringAggShort,string
+StringAggLong,string
