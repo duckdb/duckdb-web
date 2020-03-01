@@ -215,3 +215,7 @@ StringGreaterThanShort,string
 StringGreaterThanLong,string
 StringAggShort,string
 StringAggLong,string
+CastIntToString,cast
+CastDoubleToString,cast
+CastStringToInt,cast
+CastStringToDouble,cast
