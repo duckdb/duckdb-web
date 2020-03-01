@@ -2,6 +2,7 @@ category,name
 aggregate,Aggregate
 append,Append
 bulkupdate,Bulk Update
+cast,Cast
 csv,CSV
 in,In
 micro,Micro
