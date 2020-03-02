@@ -24,10 +24,10 @@ For a more detailed description of the Python API, see the [/docs/current/python
 DuckDB can be installed for the R Environment for Statistical Computing using the following command:
 
 ```R
-remotes::install_github("cwida/duckdb/tools/rpkg", build = FALSE)
+install.packages("duckdb", repos=c("http://download.duckdb.org/alias/master/rstats/", "http://cran.rstudio.com"))
 ```
 
-DuckDB for R requires `remotes` to be installed. On Windows, you will also need Rtools installed. After installation, DuckDB can be used as follows:
+After installation, DuckDB can be used as follows:
 
 ```R
 library("DBI")
