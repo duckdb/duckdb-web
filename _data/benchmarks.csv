@@ -219,3 +219,7 @@ CastIntToString,cast
 CastDoubleToString,cast
 CastStringToInt,cast
 CastStringToDouble,cast
+CastDateToString,cast
+CastTimeToString,cast
+CastTimestampToString,cast
+FormatIntToString,cast
