@@ -223,3 +223,7 @@ CastDateToString,cast
 CastTimeToString,cast
 CastTimestampToString,cast
 FormatIntToString,cast
+StringInstr,string
+StringInstrNull,string
+StringRegex,string
+StringRegexNull,string
