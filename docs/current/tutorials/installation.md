@@ -10,6 +10,11 @@ DuckDB can be installed for Python using the following command:
 pip install duckdb
 ```
 
+You can also install DuckDB through conda like so:
+```bash
+conda install python-duckdb -c conda-forge
+```
+
 After installation, DuckDB can be used as follows:
 
 ```python
