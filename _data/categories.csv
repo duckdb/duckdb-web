@@ -6,6 +6,7 @@ cast,Cast
 csv,CSV
 in,In
 micro,Micro
+prefix_tpch,Prefix_Tpch
 startup,Startup
 storage,Storage
 string,String
