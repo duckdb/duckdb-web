@@ -279,3 +279,14 @@ PrefixLineitemPointer888,prefix_tpch
 PrefixLineitemLike,prefix_tpch
 PrefixLineitemInlinedLike,prefix_tpch
 PrefixLineitemPointerLike,prefix_tpch
+StringSuffixShort,string
+StringSuffixLong,string
+StringSuffixRegEX,string
+StringSuffixLikeShort,string
+StringSuffixLikeLong,string
+SuffixLineitemShort,suffix_tpch
+SuffixLineitemMedium,suffix_tpch
+SuffixLineitemLong,suffix_tpch
+SuffixLineitemLikeShort,suffix_tpch
+SuffixLineitemLikeMedium,suffix_tpch
+SuffixLineitemLikeLong,suffix_tpch
