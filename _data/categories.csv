@@ -10,5 +10,6 @@ prefix_tpch,Prefix_Tpch
 startup,Startup
 storage,Storage
 string,String
+suffix_tpch,Suffix_Tpch
 tpcds-sf1,TPC-DS
 tpch-sf1,TPC-H
