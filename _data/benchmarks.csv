@@ -290,3 +290,4 @@ SuffixLineitemLong,suffix_tpch
 SuffixLineitemLikeShort,suffix_tpch
 SuffixLineitemLikeMedium,suffix_tpch
 SuffixLineitemLikeLong,suffix_tpch
+DataSkipping,micro
