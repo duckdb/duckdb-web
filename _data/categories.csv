@@ -3,6 +3,7 @@ aggregate,Aggregate
 append,Append
 bulkupdate,Bulk Update
 cast,Cast
+contains_tpch,Contains_Tpch
 csv,CSV
 in,In
 micro,Micro
