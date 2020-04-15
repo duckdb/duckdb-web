@@ -1,14 +1,3 @@
-function GenerateValues(options) {
-	return [
-		Keyword("VALUES"),
-		OneOrMore(
-			Sequence([
-				Keyword("("),
-				OneOrMore(Expression(), ","),
-				Keyword(")")
-			]), Keyword(","))
-	]
-}
 
 function GenerateDistinctClause(options) {
 	return [
