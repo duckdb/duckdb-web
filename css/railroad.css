@@ -1,5 +1,7 @@
 svg {
 	background-color: hsl(30,20%,95%);
+}
+.limit-width svg {
 	max-width:100%;
 }
 path {

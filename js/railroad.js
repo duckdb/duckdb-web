@@ -1305,6 +1305,33 @@ function Stack(items) {
 	return new StackNode(items);
 }
 
+function AutomaticStack(items) {
+	var result_items = [];
+	var sequence_items = [];
+	var window_width = window.innerWidth;
+	if (window_width > 600) {
+		window_width = 600;
+	}
+	var padding = 200;
+	for (var i = 0; i <= items.length; i++) {
+		if (i < items.length) {
+			sequence_items.push(items[i]);
+			var test_sequence = new Sequence(sequence_items);
+			if (padding + test_sequence.width < window_width) {
+				// element fits in current node
+				continue;
+			}
+		}
+		if (sequence_items.length == 0) {
+			continue;
+		}
+		// element no longer fits! push a sequence of all previous elements
+		result_items.push(new Sequence(sequence_items));
+		sequence_items = []
+	}
+	return new StackNode(result_items);
+}
+
 function Optional(items, skip) {
 	return new OptionalNode(items, skip);
 }
