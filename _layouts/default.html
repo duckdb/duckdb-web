@@ -16,6 +16,9 @@
 	<link rel="stylesheet" href="/css/custom.css">
 	<link rel="icon" href="/images/logo-128.png">
 
+	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+	<link rel="stylesheet" href="/css/railroad.css">
+	{% endif %}
 </head>
 <body>
 
@@ -101,6 +104,9 @@
         </div>
 
 		<div id="main_content_wrap">
+			{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+			<div id="rrdiagram"></div>
+			{% endif %}
 			{{ content }}
 			{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
 			<table class="table">
@@ -113,6 +119,11 @@
 </div>
 
 <script src="/js/ui.js"></script>
+{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+<script src="/js/railroad.js"></script>
+<script src="/js/statements/{{ page.railroad }}"></script>
+{% endif %}
+
 
 </body>
 </html>

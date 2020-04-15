@@ -2,9 +2,10 @@ name,parent,url
 Home,Main,/index.html
 Documentation,Main,/docs/current/index.html
 Documentation/Installation,Main,/docs/current/tutorials/installation.html
-Documentation/Intro to SQL,Main,/docs/current/tutorials/sql.html
 Documentation/CSV Import,Main,/docs/current/sql/copy.html
 Documentation/Python API,Main,/docs/current/python/api.html
+Documentation/SQL,Main,/docs/current/sql/sql.html
+Documentation/SQL/Select,SQL,/docs/current/sql/statements/select.html
 Documentation/Data Types,Main,/docs/current/sql/types.html
 Documentation/Data Types/Boolean,Data Types,/docs/current/sql/types/boolean_type.html
 Documentation/Data Types/Numeric,Data Types,/docs/current/sql/types/numeric_types.html

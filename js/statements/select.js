@@ -18,7 +18,24 @@ function GenerateDistinctClause(options) {
 				Keyword("DISTINCT"),
 				Optional(Sequence([
 					Keyword("("),
-					OneOrMore(Expression("distinct-term"), ","),
+					OneOrMore(Expression(), ","),
+					Keyword(")"),
+				]) , "skip")
+			]),
+			Keyword("ALL")
+		])
+	]
+}
+
+function GenerateDistinctClause(options) {
+	return [
+		Choice(0, [
+			new Skip(),
+			Sequence([
+				Keyword("DISTINCT"),
+				Optional(Sequence([
+					Keyword("("),
+					OneOrMore(Expression(), ","),
 					Keyword(")"),
 				]) , "skip")
 			]),
@@ -121,6 +138,21 @@ function GenerateCommonTableExpression(options) {
 	]
 }
 
+function GenerateOrderBy(options) {
+	return [
+		Keyword("ORDER"),
+		Keyword("BY"),
+		OneOrMore(Sequence([
+			Expression(),
+			Choice(0, [
+				new Skip(),
+				Keyword("ASC"),
+				Keyword("DESC")
+			])
+		]), ",")
+	]
+}
+
 function GenerateSelectNode(options) {
 	return [Stack([
 		Sequence([
@@ -166,18 +198,7 @@ function GenerateSelectNode(options) {
 				])
 			]), "skip"),
 		Sequence([
-			Optional(Sequence([
-				Keyword("ORDER"),
-				Keyword("BY"),
-				OneOrMore(Sequence([
-					Expression(),
-					Choice(0, [
-						new Skip(),
-						Keyword("ASC"),
-						Keyword("DESC")
-					])
-				]), ",")
-			]))
+			Optional(Sequence(GenerateOrderBy(options)))
 		]),
 		Optional(Sequence([
 			Keyword("LIMIT"),
@@ -230,5 +251,4 @@ function Refresh(node_name, set_node) {
 
 options = {}
 Initialize()
-
 
