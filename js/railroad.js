@@ -1309,25 +1309,29 @@ function AutomaticStack(items) {
 	var result_items = [];
 	var sequence_items = [];
 	var window_width = window.innerWidth;
-	if (window_width > 600) {
-		window_width = 600;
+	if (window_width > 800) {
+		window_width = 800;
 	}
 	var padding = 200;
-	for (var i = 0; i <= items.length; i++) {
-		if (i < items.length) {
-			sequence_items.push(items[i]);
-			var test_sequence = new Sequence(sequence_items);
-			if (padding + test_sequence.width < window_width) {
-				// element fits in current node
-				continue;
+	for (var i = 0; i < items.length; i++) {
+		sequence_items.push(items[i]);
+		var test_sequence = new Sequence(sequence_items);
+		if (padding + test_sequence.width >= window_width) {
+			// no longer fits: generate a sequence from the previous items
+			if (sequence_items.length > 1) {
+				sequence_items.pop();
+				result_items.push(new Sequence(sequence_items));
+				sequence_items = [items[i]];
+			} else {
+				// this item by itself did not fit: just render it anyway
+				result_items.push(new Sequence(sequence_items));
+				sequence_items = [];
 			}
 		}
-		if (sequence_items.length == 0) {
-			continue;
-		}
-		// element no longer fits! push a sequence of all previous elements
+	}
+	if (sequence_items.length > 0) {
+		// items remain: push them into the result items set
 		result_items.push(new Sequence(sequence_items));
-		sequence_items = []
 	}
 	return new StackNode(result_items);
 }

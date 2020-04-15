@@ -11,15 +11,18 @@ function GenerateColumnList(options) {
 
 function GenerateCopyOptions(options) {
 	return [
-		ZeroOrMore(Choice(0, [
-			Sequence([Keyword("FORMAT"), Expression("format-type")]),
-			Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
-			Sequence([Keyword("NULL"), Expression("null-string")]),
-			Sequence([Keyword("HEADER"), Choice(0, [Keyword("TRUE"), Keyword("FALSE")])]),
-			Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
-			Sequence([Keyword("FORCE_QUOTE"), GenerateColumnList()]),
-			Sequence([Keyword("FORCE_NOT_NULL"), GenerateColumnList()])
-		]), ",", "skip")
+		Optional(Sequence([
+			Optional(Keyword("WITH"), "skip"),
+			OneOrMore(Choice(0, [
+				Sequence([Keyword("FORMAT"), Expression("format-type")]),
+				Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
+				Sequence([Keyword("NULL"), Expression("null-string")]),
+				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
+				Sequence([Keyword("FORCE_QUOTE"), GenerateColumnList()]),
+				Sequence([Keyword("FORCE_NOT_NULL"), GenerateColumnList()])
+			]), ",", "skip")
+		]), "skip")
 	]
 }
 
@@ -33,9 +36,10 @@ function GenerateCopyFrom(options = {}) {
 				OneOrMore(Expression("column-name"), Keyword(",")),
 				Keyword(")")
 			]), "skip"),
-			Keyword("FROM"),
-			Expression("file-name"),
-			Optional(Keyword("WITH"), "skip"),
+			Sequence([
+				Keyword("FROM"),
+				Expression("file-name")
+			]),
 			Expandable("copy-options", options, "copy-from-options", GenerateCopyOptions)
 		])
 	])
@@ -60,17 +64,20 @@ function GenerateCopyTo(options = {}) {
 					Keyword(")")
 				])
 			]),
-			Keyword("TO"),
-			Expression("file-name"),
-			Optional(Keyword("WITH"), "skip"),
+			Sequence([
+				Keyword("TO"),
+				Expression("file-name")
+			]),
 			Expandable("copy-options", options, "copy-to-options", GenerateCopyOptions)
 		])
 	])
 }
 
 function Initialize(options = {}) {
-	document.getElementById("rrdiagram").classList.add("limit-width");
-	document.getElementById("rrdiagram").innerHTML = GenerateCopyFrom(options).toString() + GenerateCopyTo(options).toString();
+	document.getElementById("rrdiagram1").classList.add("limit-width");
+	document.getElementById("rrdiagram2").classList.add("limit-width");
+	document.getElementById("rrdiagram1").innerHTML = GenerateCopyFrom(options).toString()
+	document.getElementById("rrdiagram2").innerHTML = GenerateCopyTo(options).toString();
 }
 
 function Refresh(node_name, set_node) {

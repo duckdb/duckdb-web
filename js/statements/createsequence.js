@@ -4,8 +4,10 @@ function GenerateCreateSequence(options = {}) {
 		AutomaticStack([
 			Keyword("CREATE"),
 			Optional(Choice(0, [Keyword("TEMPORARY"), Keyword("TEMP")]), "skip"),
-			Keyword("SEQUENCE"),
-			Expression("sequence-name"),
+			Sequence([
+				Keyword("SEQUENCE"),
+				Expression("sequence-name")
+			]),
 			Optional(Sequence([
 				Keyword("INCREMENT"),
 				Optional(Keyword("BY"), "skip"),
