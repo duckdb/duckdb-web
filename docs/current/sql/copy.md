@@ -2,30 +2,43 @@
 layout: default
 title: CSV Import/Export
 selected: Documentation/CSV Import
+railroad: copy.js
 ---
 # COPY
+`COPY` moves data between DuckDB tables and external Comma Separated Value (CSV) files.
+
+`COPY ... FROM` imports data into DuckDB from an external CSV file into an existing table.
+
+`COPY ... TO` exports data from DuckDB to an external CSV file.
+
+## Examples
+
+### CSV Import
 
 ```sql
-COPY table_name [ ( column_name [, ...] ) ]
-FROM 'filename'
-[ [ WITH ] (option [, ...]) ]
-
-COPY { table_name [ ( column_name [, ...] ) ] | ( query ) }
-TO 'filename'
-[ [ WITH ] (option [, ...]) ]
-
-where option can be one of:
-
-  FORMAT 'CSV'
-  DELIMITER 'delimiter_string'
-  NULL 'null_string'
-  HEADER [ boolean ]
-  QUOTE 'quote_string'
-  ESCAPE 'escape_string'
-  FORCE_QUOTE { ( column_name [, ...] ) | * }
-  FORCE_NOT_NULL ( column_name [, ...] )
-  ENCODING 'UTF8'
+-- Copy the contents of a comma-separated file 'test.csv' without a header into the table 'test'
+COPY test FROM 'test.csv';
+-- Copy the contents of a comma-separated file with a header into the 'category' table
+COPY category FROM 'categories.csv' ( HEADER );
+-- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
+COPY lineitem FROM 'lineitem.tbl' ( DELIMITER '|' );
+-- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
+COPY category(name) FROM 'names.csv';
 ```
+
+### CSV Export
+
+```sql
+-- Copy the contents of the 'lineitem' table to the file 'lineitem.tbl', where the columns are delimited by a pipe character ('|'), including a header line.
+COPY lineitem TO 'lineitem.tbl' ( DELIMITER '|', HEADER );
+-- Copy the l_orderkey column of the 'lineitem' table to the file 'orderkey.tbl'
+COPY lineitem(l_orderkey) TO 'orderkey.tbl' ( DELIMITER '|' );
+-- Copy the result of a query to the file 'query.csv', including a header with column names
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ',');
+```
+
+## Syntax
+<div id="rrdiagram"></div>
 
 ## Description
 
@@ -102,29 +115,3 @@ The values in each record are separated by the `DELIMITER` string. If the value 
 The CSV format has no standard way to distinguish a NULL value from an empty string. You can use `FORCE_NOT_NULL` to prevent `NULL` input comparisons for specific columns.
 
 In CSV format, all characters are significant. A quoted value surrounded by white space, or any characters other than `DELIMITER`, will include those characters. This can cause errors if you import data from a system that pads CSV lines with white space out to some fixed width. If such a situation arises you might need to preprocess the CSV file to remove the trailing white space, before importing the data into DuckDB.
-
-## Examples
-
-### CSV Import
-
-```sql
--- Copy the contents of a comma-separated file 'test.csv' without a header into the table 'test'
-COPY test FROM 'test.csv';
--- Copy the contents of a comma-separated file with a header into the 'category' table
-COPY category FROM 'categories.csv' ( HEADER );
--- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
-COPY lineitem FROM 'lineitem.tbl' ( DELIMITER '|' );
--- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
-COPY category(name) FROM 'names.csv';
-```
-
-### CSV Export
-
-```sql
--- Copy the contents of the 'lineitem' table to the file 'lineitem.tbl', where the columns are delimited by a pipe character ('|'), including a header line.
-COPY lineitem TO 'lineitem.tbl' ( DELIMITER '|', HEADER );
--- Copy the l_orderkey column of the 'lineitem' table to the file 'orderkey.tbl'
-COPY lineitem(l_orderkey) TO 'orderkey.tbl' ( DELIMITER '|' );
--- Copy the result of a query to the file 'query.csv', including a header with column names
-COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ',');
-```
