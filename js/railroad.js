@@ -1173,7 +1173,6 @@ and can be changed before creating a DiagramNode.
 		var text = FakeSVG('text', {x:x+this.width/2, y:y+4}, this.text);
 		text.attrs['class'] = this.element_class
 		if (this.on_click !== undefined) {
-			console.log(this.on_click);
 			text.attrs['onclick'] = this.on_click;
 		}
 		if(this.href)
@@ -1372,4 +1371,53 @@ function Expandable(text, options, node_name, expand_func) {
 	} else {
 		return Expression(text, "expandable", "Refresh(\"" + node_name + "\", true)");
 	}
+}
+
+function GenerateValues(options) {
+	return [
+		Keyword("VALUES"),
+		OneOrMore(
+			Sequence([
+				Keyword("("),
+				OneOrMore(Expression(), ","),
+				Keyword(")")
+			]), Keyword(","))
+	]
+}
+
+function GenerateQualifiedTableName(options, tname = "table-name") {
+	return Sequence([
+		Optional(Sequence([
+			Expression("schema-name"),
+			Keyword(".")
+		]), "skip"),
+		Expression(tname)
+	])
+}
+
+function GenerateTemporary(options) {
+	return Optional(Choice(0, [Keyword("TEMPORARY"), Keyword("TEMP")]), "skip");
+}
+
+function GenerateIfNotExists(options) {
+	return Optional(Sequence([
+		Keyword("IF"),
+		Keyword("NOT"),
+		Keyword("EXISTS")
+	]), "skip");
+}
+
+function GenerateOrReplace(options) {
+	return Optional(Sequence([
+		Keyword("OR"),
+		Keyword("REPLACE")
+	]), "skip");
+}
+
+function GenerateOptionalColumnList(options) {
+	return Optional(Sequence([
+			Keyword("("),
+			OneOrMore(Expression("column-name"), Keyword(",")),
+			Keyword(")")
+		]), "skip");
 }

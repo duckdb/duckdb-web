@@ -3,7 +3,7 @@ function GenerateCreateSequence(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("CREATE"),
-			Optional(Choice(0, [Keyword("TEMPORARY"), Keyword("TEMP")]), "skip"),
+			GenerateTemporary(options),
 			Sequence([
 				Keyword("SEQUENCE"),
 				Expression("sequence-name")

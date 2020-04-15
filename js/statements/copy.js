@@ -31,11 +31,7 @@ function GenerateCopyFrom(options = {}) {
 		AutomaticStack([
 			Keyword("COPY"),
 			Expression("table-name"),
-			Optional(Sequence([
-				Keyword("("),
-				OneOrMore(Expression("column-name"), Keyword(",")),
-				Keyword(")")
-			]), "skip"),
+			GenerateOptionalColumnList(options),
 			Sequence([
 				Keyword("FROM"),
 				Expression("file-name")
@@ -51,12 +47,9 @@ function GenerateCopyTo(options = {}) {
 		AutomaticStack([
 			Keyword("COPY"),
 			Choice(0, [
-				Sequence([Expression("table-name"),
-					Optional(Sequence([
-						Keyword("("),
-						OneOrMore(Expression("column-name"), Keyword(",")),
-						Keyword(")")
-					]), "skip")
+				Sequence([
+					Expression("table-name"),
+					GenerateOptionalColumnList(options)
 				]),
 				Sequence([
 					Keyword("("),
