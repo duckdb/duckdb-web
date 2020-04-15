@@ -1,16 +1,14 @@
 ---
 layout: default
-title: Sequences
-selected: Documentation/Sequences
+title: Create Sequence
+selected: Documentation/SQL/Create Sequence
+expanded: SQL
+railroad: createsequence.js
 ---
 # Create Sequence
 CREATE SEQUENCE -- define a new sequence generator
 ## Syntax
-```sql
-CREATE [ TEMPORARY | TEMP ] SEQUENCE name [ INCREMENT [ BY ] increment ]
-    [ MINVALUE minvalue | NO MINVALUE ] [ MAXVALUE maxvalue | NO MAXVALUE ]
-    [ START [ WITH ] start ] [ [ NO ] CYCLE ]
-```
+<div id="rrdiagram"></div>
 
 CREATE SEQUENCE creates a new sequence number generator.
 
