@@ -107,6 +107,7 @@ function GenerateTableOrSubquery(options) {
 				]),
 				Optional(Sequence([Keyword("AS"), Expression("table-alias")]), "skip")
 			]),
+
 			Expandable("join-clause", options, "join-clause", GenerateJoinClause)
 		])
 	]
@@ -131,64 +132,59 @@ function GenerateOrderBy(options) {
 	return [
 		Keyword("ORDER"),
 		Keyword("BY"),
-		OneOrMore(Sequence([
-			Expression(),
-			Choice(0, [
-				new Skip(),
-				Keyword("ASC"),
-				Keyword("DESC")
+		GenerateOrderTerms()
+	]
+}
+
+function GenerateSelectClause(options) {
+	return [
+		Keyword("SELECT"),
+		Expandable("distinct-clause", options, "distinct-clause", GenerateDistinctClause),
+		OneOrMore(Choice(0, [
+			Sequence([Expression(), Optional(Sequence([Keyword("AS"), Expression("alias")]), "skip")]),
+			Sequence([
+				Optional(Sequence([Expression("table-name"), Keyword(".")]), "skip"),
+				Keyword("*")
 			])
 		]), ",")
 	]
 }
 
-function GenerateSelectNode(options) {
-	return [Stack([
-		Sequence([
-			Keyword("SELECT"),
-			Expandable("distinct-clause", options, "distinct-clause", GenerateDistinctClause),
-			OneOrMore(Choice(0, [
-				Sequence([Expression(), Optional(Sequence([Keyword("AS"), Expression("alias")]), "skip")]),
-				Sequence([
-					Optional(Sequence([Expression("table-name"), Keyword(".")]), "skip"),
-					Keyword("*")
-				])
-			]), ",")
-		]),
-		Sequence([
-			Optional(Sequence([
-				Keyword("FROM"),
-				OneOrMore(Expandable("table-or-subquery", options, "table-or-subquery-1", GenerateTableOrSubquery), Keyword(","))
-			])),
-			Optional(
-				Sequence([
-					Keyword("WHERE"),
-					Expression()
-				])
-			)
-		]),
-		Sequence([
-			Optional(Sequence([
-				Keyword("GROUP"),
-				Keyword("BY"),
-				OneOrMore(Expression(), ","),
-			])),
-			Optional(Sequence([
-				Keyword("HAVING"),
-				Expression()
-			]))
-		]),
-		Optional(
-			Sequence([Sequence([
-					Keyword("WINDOW"),
-					Expression("window-name"),
-					Keyword("AS"),
-					Expression("window-definition")
-				])
-			]), "skip"),
-		Sequence([
-			Optional(Sequence(GenerateOrderBy(options)))
-		]),
+function GenerateFromClause(options) {
+	return [
+		Keyword("FROM"),
+		OneOrMore(Sequence(GenerateTableOrSubquery(options)), Keyword(","))
+	]
+}
+
+function GenerateGroupByClause(options) {
+	return [
+		Optional(Sequence([
+			Keyword("GROUP"),
+			Keyword("BY"),
+			OneOrMore(Expression(), ","),
+		])),
+		Optional(Sequence([
+			Keyword("HAVING"),
+			Expression()
+		]))
+	]
+}
+
+function GenerateWindowClause(options) {
+	return [
+		Keyword("WINDOW"),
+		OneOrMore(Sequence([
+				Expression("window-name"),
+				Keyword("AS"),
+				Expandable("window-definition", options, "window-definition", GenerateWindowSpec)
+		]), Keyword(","))
+	];
+}
+
+function GenerateLimitAndOrderBy(options) {
+	return [
+		Optional(Sequence(GenerateOrderBy(options))),
 		Optional(Sequence([
 			Keyword("LIMIT"),
 			Expression(),
@@ -197,6 +193,32 @@ function GenerateSelectNode(options) {
 				Expression()
 			]), "skip")
 		]))
+	]
+}
+
+function GenerateWhereClause(options) {
+	return [
+		Keyword("WHERE"),
+		Expression()
+	];
+}
+
+function GenerateSelectNode(options) {
+	return [Stack([
+		Sequence(
+			GenerateSelectClause(options)
+		),
+		Sequence([
+			Optional(Sequence(GenerateFromClause(options))),
+			Optional(
+				Sequence(GenerateWhereClause(options))
+			)
+		]),
+		Sequence(
+			GenerateGroupByClause(options)
+		),
+		Optional(Sequence(GenerateWindowClause(options)), "skip"),
+		Sequence(GenerateLimitAndOrderBy(options))
 	])]
 }
 
@@ -211,16 +233,22 @@ function GenerateSetOperation(options) {
 	]
 }
 
+function GenerateCTE(options) {
+	return [
+		Sequence([
+			Keyword("WITH"),
+			Optional(Keyword("RECURSIVE"), "skip"),
+			OneOrMore(
+				Sequence(GenerateCommonTableExpression()),
+				","
+			)
+		])]
+}
+
 function GenerateSelect(options = {}) {
 	return Diagram([
 		Stack([
-			Optional(
-				Sequence([
-					Keyword("WITH"),
-					Optional(Keyword("RECURSIVE"), "skip"),
-					OneOrMore(
-						Expandable("common-table-expr", options, "common-table-expr", GenerateCommonTableExpression), ",")
-				]), "skip"),
+			Optional(Expandable("common-table-expr", options, "common-table-expr", GenerateCTE), "skip"),
 			OneOrMore(Choice(0, [
 				Expandable("select-node", options, "select-node", GenerateSelectNode),
 				Expandable("values-list", options, "values", GenerateValues)
@@ -231,6 +259,23 @@ function GenerateSelect(options = {}) {
 
 function Initialize(options = {}) {
 	document.getElementById("rrdiagram").innerHTML = GenerateSelect(options).toString();
+	document.getElementById("rrdiagram2").innerHTML = Diagram(GenerateCTE(options)).toString();
+	document.getElementById("rrdiagram3").innerHTML = Diagram(GenerateSelectClause(options)).toString();
+	document.getElementById("rrdiagram4").innerHTML = Diagram(GenerateFromClause(options)).toString();
+	document.getElementById("rrdiagram5").innerHTML = Diagram(GenerateWhereClause(options)).toString();
+	document.getElementById("rrdiagram6").innerHTML = Diagram(GenerateGroupByClause(options)).toString();
+	document.getElementById("rrdiagram7").innerHTML = Diagram(GenerateWindowClause(options)).toString();
+	document.getElementById("rrdiagram8").innerHTML = Diagram(GenerateLimitAndOrderBy(options)).toString();
+	document.getElementById("rrdiagram9").innerHTML = Diagram(GenerateValues(options)).toString();
+
+	document.getElementById("rrdiagram2").classList.add("limit-width");
+	document.getElementById("rrdiagram3").classList.add("limit-width");
+	document.getElementById("rrdiagram4").classList.add("limit-width");
+	document.getElementById("rrdiagram5").classList.add("limit-width");
+	document.getElementById("rrdiagram6").classList.add("limit-width");
+	document.getElementById("rrdiagram7").classList.add("limit-width");
+	document.getElementById("rrdiagram8").classList.add("limit-width");
+	document.getElementById("rrdiagram9").classList.add("limit-width");
 }
 
 function Refresh(node_name, set_node) {
