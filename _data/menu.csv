@@ -2,9 +2,17 @@ name,parent,url
 Home,Main,/index.html
 Documentation,Main,/docs/current/index.html
 Documentation/Installation,Main,/docs/current/tutorials/installation.html
-Documentation/Intro to SQL,Main,/docs/current/tutorials/sql.html
 Documentation/CSV Import,Main,/docs/current/sql/copy.html
 Documentation/Python API,Main,/docs/current/python/api.html
+Documentation/SQL,Main,/docs/current/sql/sql.html
+Documentation/SQL/Select,SQL,/docs/current/sql/statements/select.html
+Documentation/SQL/Insert,SQL,/docs/current/sql/statements/insert.html
+Documentation/SQL/Delete,SQL,/docs/current/sql/statements/delete.html
+Documentation/SQL/Update,SQL,/docs/current/sql/statements/update.html
+Documentation/SQL/Create Table,SQL,/docs/current/sql/statements/createtable.html
+Documentation/SQL/Create View,SQL,/docs/current/sql/statements/createview.html
+Documentation/SQL/Create Sequence,SQL,/docs/current/sql/statements/createsequence.html
+Documentation/SQL/Drop,SQL,/docs/current/sql/statements/drop.html
 Documentation/Data Types,Main,/docs/current/sql/types.html
 Documentation/Data Types/Boolean,Data Types,/docs/current/sql/types/boolean_type.html
 Documentation/Data Types/Numeric,Data Types,/docs/current/sql/types/numeric_types.html
@@ -19,7 +27,6 @@ Documentation/Functions/Text Functions,Functions,/docs/current/sql/functions/cha
 Documentation/Functions/Pattern Matching,Functions,/docs/current/sql/functions/regex.html
 Documentation/Functions/Date Functions,Functions,/docs/current/sql/functions/date_functions.html
 Documentation/Functions/Timestamp Functions,Functions,/docs/current/sql/functions/timestamp_functions.html
-Documentation/Sequences,Main,/docs/current/sql/createsequence.html
 Documentation/Pragmas,Main,/docs/current/sql/pragmas.html
 -,Main,
 Github,Main,https://github.com/cwida/duckdb

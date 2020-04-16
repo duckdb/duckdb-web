@@ -1,16 +1,37 @@
 ---
 layout: default
-title: Sequences
-selected: Documentation/Sequences
+title: Create Sequence
+selected: Documentation/SQL/Create Sequence
+expanded: SQL
+railroad: createsequence.js
 ---
 # Create Sequence
-CREATE SEQUENCE -- define a new sequence generator
-## Syntax
+CREATE SEQUENCE creates a new sequence number generator.
+
+### Examples
+Create an ascending sequence called serial, starting at 101:
+
 ```sql
-CREATE [ TEMPORARY | TEMP ] SEQUENCE name [ INCREMENT [ BY ] increment ]
-    [ MINVALUE minvalue | NO MINVALUE ] [ MAXVALUE maxvalue | NO MAXVALUE ]
-    [ START [ WITH ] start ] [ [ NO ] CYCLE ]
+CREATE SEQUENCE serial START 101;
 ```
+
+Select the next number from this sequence:
+```sql
+SELECT nextval('serial');
+
+ nextval
+---------
+     101
+```
+
+Use this sequence in an INSERT command:
+
+```sql
+INSERT INTO distributors VALUES (nextval('serial'), 'nothing');
+```
+
+### Syntax
+<div id="rrdiagram"></div>
 
 CREATE SEQUENCE creates a new sequence number generator.
 
@@ -55,28 +76,6 @@ If `NO CYCLE` is specified, any calls to nextval after the sequence has reached 
 Use `DROP SEQUENCE` to remove a sequence.
 
 Sequences are based on bigint arithmetic, so the range cannot exceed the range of an eight-byte integer (-9223372036854775808 to 9223372036854775807).
-
-## Examples
-Create an ascending sequence called serial, starting at 101:
-
-```sql
-CREATE SEQUENCE serial START 101;
-```
-
-Select the next number from this sequence:
-```sql
-SELECT nextval('serial');
-
- nextval
----------
-     101
-```
-
-Use this sequence in an INSERT command:
-
-```sql
-INSERT INTO distributors VALUES (nextval('serial'), 'nothing');
-```
 
 <!-- Update the sequence value after a COPY FROM:
 
