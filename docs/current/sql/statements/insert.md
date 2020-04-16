@@ -3,10 +3,10 @@ layout: default
 title: Insert Statement
 selected: Documentation/SQL/Insert
 expanded: SQL
-railroad: insert.js
+railroad: statements/insert.js
 ---
 # Insert Statement
-INSERT INTO - insert a set of rows into a single table of the database.
+The INSERT statement inserts new data into a table.
 
 ### Examples
 ```sql
@@ -22,3 +22,13 @@ INSERT INTO tbl(i) VALUES (1), (DEFAULT), (3);
 
 ### Syntax
 <div id="rrdiagram"></div>
+
+INSERT inserts new rows into a table. One can insert one or more rows specified by value expressions, or zero or more rows resulting from a query.
+
+The target column names can be listed in any order. If no list of column names is given at all, the default is all the columns of the table in their declared order. The values supplied by the VALUES clause or query are associated with the column list left-to-right.
+
+Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or null if there is none.
+
+If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
+
+

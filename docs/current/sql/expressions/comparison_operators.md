@@ -1,10 +1,13 @@
 ---
 layout: default
 title: Comparisons
-selected: Documentation/Functions/Comparisons
-expanded: Functions
+selected: Documentation/Expressions/Comparisons
+expanded: Expressions
+railroad: expressions/comparison.js
 ---
 ## Comparison Operators
+<div id="rrdiagram2"></div>
+
 The table below shows the standard comparison operators. Whenever either of the input arguments is `NULL`, the output of the comparison is `NULL`.
 
 | Operator | Description | Example | Result |
@@ -16,8 +19,10 @@ The table below shows the standard comparison operators. Whenever either of the 
 | = | equal | NULL = NULL | NULL |
 | <> or != | not equal | 2 <> 2 | FALSE |
 
-## Comparison Predicates
-Besides the comparison operators there are also a set of comparison operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
+## BETWEEN and IS (NOT) NULL
+<div id="rrdiagram1"></div>
+
+Besides the stanadrd comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
 
 | Predicate | Description |
 |:---|:---|

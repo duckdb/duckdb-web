@@ -3,10 +3,10 @@ layout: default
 title: Create View
 selected: Documentation/SQL/Create View
 expanded: SQL
-railroad: createview.js
+railroad: statements/createview.js
 ---
 # Create View Statement
-CREATE View - this statement creates an empty view in the catalog.
+The CREATE VIEW statement defines a new view in the catalog.
 
 ### Examples
 ```sql
@@ -20,3 +20,10 @@ CREATE VIEW v1(a) AS SELECT 42;
 
 ### Syntax
 <div id="rrdiagram"></div>
+
+CREATE VIEW defines a view of a query. The view is not physically materialized. Instead, the query is run every time the view is referenced in a query.
+
+CREATE OR REPLACE VIEW is similar, but if a view of the same name already exists, it is replaced.
+
+If a schema name is given then the view is created in the specified schema. Otherwise it is created in the current schema. Temporary views exist in a special schema, so a schema name cannot be given when creating a temporary view. The name of the view must be distinct from the name of any other view or table in the same schema.
+
