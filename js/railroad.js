@@ -1421,3 +1421,98 @@ function GenerateOptionalColumnList(options) {
 			Keyword(")")
 		]), "skip");
 }
+
+function GenerateOrderTerms(options) {
+	return OneOrMore(Sequence([
+		Expression(),
+		Choice(0, [
+			new Skip(),
+			Keyword("ASC"),
+			Keyword("DESC")
+		])
+	]), ",")
+}
+
+
+function GenerateFrameSpec(options) {
+	return [
+		Choice(0, [
+			Keyword("RANGE"),
+			Keyword("ROWS")
+		]),
+		Choice(0, [
+			Sequence([
+				Keyword("BETWEEN"),
+				Choice(0, [
+					Sequence([
+						Keyword("UNBOUNDED"),
+						Keyword("PRECEDING")
+					]),
+					Sequence([
+						Expression(),
+						Keyword("PRECEDING")
+					]),
+					Sequence([
+						Keyword("CURRENT"),
+						Keyword("ROW")
+					]),
+					Sequence([
+						Expression(),
+						Keyword("FOLLOWING")
+					]),
+				]),
+				Keyword("AND"),
+				Choice(0, [
+					Sequence([
+						Expression(),
+						Keyword("PRECEDING")
+					]),
+					Sequence([
+						Keyword("CURRENT"),
+						Keyword("ROW")
+					]),
+					Sequence([
+						Expression(),
+						Keyword("FOLLOWING")
+					]),
+					Sequence([
+						Keyword("UNBOUNDED"),
+						Keyword("FOLLOWING")
+					])
+				]),
+			]),
+			Sequence([
+				Keyword("UNBOUNDED"),
+				Keyword("PRECEDING")
+			]),
+			Sequence([
+				Expression(),
+				Keyword("PRECEDING")
+			]),
+			Sequence([
+				Keyword("CURRENT"),
+				Keyword("ROW")
+			])
+		])
+	]
+}
+function GenerateWindowSpec(options) {
+	return [
+		Keyword("("),
+		Optional(Expression("base-window-name"), "skip"),
+		Stack([
+			Optional(Sequence([
+				Keyword("PARTITION"),
+				Keyword("BY"),
+				OneOrMore(Expression(), ",")
+			])),
+			Optional(Sequence([
+				Keyword("ORDER"),
+				Keyword("BY"),
+				GenerateOrderTerms()
+			])),
+			Expandable("frame-spec", options, "frame-spec", GenerateFrameSpec),
+		]),
+		Keyword(")")
+	]
+}
