@@ -16,7 +16,7 @@ The boolean type represents a statement of truth ("true" or "false"). In SQL, th
 SELECT TRUE, FALSE, NULL::BOOLEAN;
 ```
 
-While boolean values can be explicitly created using the literals `TRUE` and `FALSE`. However, they are most often created as a result of comparisons or conjunctions. For example, the comparison `i > 10` results in a boolean value. Boolean values can be used in the `WHERE` and `HAVING` clauses of a SQL statement to filter out tuples from the result. In this case, tuples for which the predicate evaluates to `TRUE` will pass the filter, and tuples for which the predicate evaluates to `FALSE` or `NULL` will be filtered out. Consider the following example:
+Boolean values can be explicitly created using the literals `TRUE` and `FALSE`. However, they are most often created as a result of comparisons or conjunctions. For example, the comparison `i > 10` results in a boolean value. Boolean values can be used in the `WHERE` and `HAVING` clauses of a SQL statement to filter out tuples from the result. In this case, tuples for which the predicate evaluates to `TRUE` will pass the filter, and tuples for which the predicate evaluates to `FALSE` or `NULL` will be filtered out. Consider the following example:
 
 ```sql
 -- create a table with the value (5), (15) and (NULL)
@@ -32,4 +32,4 @@ SELECT * FROM integers WHERE i > 10;
 ```
 
 ## Functions
-See [Logical Operators](../functions/logical_operators) and [Comparison Operators](../functions/comparison_operators).
+See [Logical Operators](../expressions/logical_operators) and [Comparison Operators](../expressions/comparison_operators).

@@ -3,10 +3,10 @@ layout: default
 title: Update Statement
 selected: Documentation/SQL/Update
 expanded: SQL
-railroad: update.js
+railroad: statements/update.js
 ---
 # Update Statement
-UPDATE - change the value of rows in a
+The UPDATE statement modifies the values of rows in a table.
 
 ### Examples
 ```sql
@@ -18,3 +18,6 @@ UPDATE tbl SET i=1, j = 2;
 
 ### Syntax
 <div id="rrdiagram"></div>
+
+UPDATE changes the values of the specified columns in all rows that satisfy the condition. Only the columns to be modified need be mentioned in the SET clause; columns not explicitly modified retain their previous values.
+

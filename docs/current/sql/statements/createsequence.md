@@ -3,7 +3,7 @@ layout: default
 title: Create Sequence
 selected: Documentation/SQL/Create Sequence
 expanded: SQL
-railroad: createsequence.js
+railroad: statements/createsequence.js
 ---
 # Create Sequence
 CREATE SEQUENCE creates a new sequence number generator.

@@ -3,15 +3,13 @@ layout: default
 title: Pattern Matching
 selected: Documentation/Functions/Pattern Matching
 expanded: Functions
+railroad: expressions/like.js
 ---
 ## Pattern Matching
 There are three separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), and POSIX-style regular expressions.
 
 ## LIKE
-```sql
-string LIKE pattern
-string NOT LIKE pattern
-```
+<div id="rrdiagram1"></div>
 
 The LIKE expression returns true if the string matches the supplied pattern. (As expected, the NOT LIKE expression returns false if LIKE returns true, and vice versa. An equivalent expression is NOT (string LIKE pattern).)
 
@@ -33,10 +31,7 @@ LIKE pattern matching always covers the entire string. Therefore, if it's desire
 <!--The key word ILIKE can be used instead of LIKE to make the match case-insensitive according to the active locale. This is not in the SQL standard.-->
 
 ## SIMILAR TO
-```sql
-string SIMILAR TO pattern
-string NOT SIMILAR TO pattern
-```
+<div id="rrdiagram2"></div>
 
 The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to LIKE, except that it interprets the pattern using a regular expression. Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
 
@@ -52,6 +47,7 @@ Some examples:
 ```
 
 ## Regular Expressions
+
 | Function | Description |
 |:---|:---|
 | regexp_matches(*string*, *pattern*) | returns `TRUE` if *string* contains the regexp *pattern*, `FALSE` otherwise |

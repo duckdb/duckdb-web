@@ -3,10 +3,10 @@ layout: default
 title: Delete Statement
 selected: Documentation/SQL/Delete
 expanded: SQL
-railroad: delete.js
+railroad: statements/delete.js
 ---
 # Delete Statement
-DELETE FROM - remove rows from a table in the database
+The DELETE statement removes rows from the table identified by the table-name.
 
 ### Examples
 ```sql
@@ -18,3 +18,7 @@ DELETE FROM tbl;
 
 ### Syntax
 <div id="rrdiagram"></div>
+
+The DELETE statement removes rows from the table identified by the table-name.
+
+If the WHERE clause is not present, all records in the table are deleted. If a WHERE clause is supplied, then only those rows for which the WHERE clause results in true are deleted. Rows for which the expression is false or NULL are retained.

@@ -19,14 +19,20 @@ Documentation/Data Types/Numeric,Data Types,/docs/current/sql/types/numeric_type
 Documentation/Data Types/Text,Data Types,/docs/current/sql/types/character_types.html
 Documentation/Data Types/Date,Data Types,/docs/current/sql/types/date_type.html
 Documentation/Data Types/Timestamp,Data Types,/docs/current/sql/types/timestamp_type.html
+Documentation/Expressions,Main,/docs/current/sql/expressions.html
+Documentation/Expressions/Logical,Expressions,/docs/current/sql/expressions/logical_operators.html
+Documentation/Expressions/Comparisons,Expressions,/docs/current/sql/expressions/comparison_operators.html
+Documentation/Expressions/Casting,Expressions,/docs/current/sql/expressions/cast.html
+Documentation/Expressions/Case,Expressions,/docs/current/sql/expressions/case.html
+Documentation/Expressions/Subqueries,Expressions,/docs/current/sql/expressions/subqueries.html
 Documentation/Functions,Main,/docs/current/sql/functions.html
-Documentation/Functions/Logical Functions,Functions,/docs/current/sql/functions/logical_operators.html
-Documentation/Functions/Comparisons,Functions,/docs/current/sql/functions/comparison_operators.html
 Documentation/Functions/Numeric Functions,Functions,/docs/current/sql/functions/numeric_functions.html
 Documentation/Functions/Text Functions,Functions,/docs/current/sql/functions/character_functions.html
 Documentation/Functions/Pattern Matching,Functions,/docs/current/sql/functions/regex.html
 Documentation/Functions/Date Functions,Functions,/docs/current/sql/functions/date_functions.html
 Documentation/Functions/Timestamp Functions,Functions,/docs/current/sql/functions/timestamp_functions.html
+Documentation/Aggregates,Main,/docs/current/sql/expressions/aggregates.html
+Documentation/Window Functions,Main,/docs/current/sql/expressions/window_functions.html
 Documentation/Pragmas,Main,/docs/current/sql/pragmas.html
 -,Main,
 Github,Main,https://github.com/cwida/duckdb
