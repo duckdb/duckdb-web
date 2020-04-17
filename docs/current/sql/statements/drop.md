@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Drop Statement
-selected: Documentation/SQL/DROP
+selected: Documentation/SQL/Drop
 expanded: SQL
 railroad: statements/drop.js
 ---
