@@ -26,7 +26,11 @@ function GenerateColumnConstraints(options) {
 					Keyword(")")
 				])
 			])
-		])
+		]),
+		Sequence([
+			Keyword("COLLATE"),
+			Expression("collation-name"),
+		]),
 	]), undefined, "skip")]
 }
 
