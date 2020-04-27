@@ -24,6 +24,7 @@ Documentation/Expressions/Logical,Expressions,/docs/current/sql/expressions/logi
 Documentation/Expressions/Comparisons,Expressions,/docs/current/sql/expressions/comparison_operators.html
 Documentation/Expressions/Casting,Expressions,/docs/current/sql/expressions/cast.html
 Documentation/Expressions/Case,Expressions,/docs/current/sql/expressions/case.html
+Documentation/Expressions/Collations,Expressions,/docs/current/sql/expressions/collations.html
 Documentation/Expressions/Subqueries,Expressions,/docs/current/sql/expressions/subqueries.html
 Documentation/Functions,Main,/docs/current/sql/functions.html
 Documentation/Functions/Numeric Functions,Functions,/docs/current/sql/functions/numeric_functions.html
