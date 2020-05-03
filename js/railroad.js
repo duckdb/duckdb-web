@@ -1516,3 +1516,38 @@ function GenerateWindowSpec(options) {
 		Keyword(")")
 	]
 }
+
+function GenerateColumnConstraints(options) {
+	return [ZeroOrMore(Choice(0, [
+		Sequence([
+			Keyword("PRIMARY"),
+			Keyword("KEY")
+		]),
+		Sequence([
+			Optional(Keyword("NOT")),
+			Keyword("NULL")
+		]),
+		Keyword("UNIQUE"),
+		Sequence([
+			Keyword("CHECK"),
+			Keyword("("),
+			Expression(),
+			Keyword(")")
+		]),
+		Sequence([
+			Keyword("DEFAULT"),
+			Choice(0, [
+				Expression("literal-value"),
+				Sequence([
+					Keyword("("),
+					Expression(),
+					Keyword(")")
+				])
+			])
+		]),
+		Sequence([
+			Keyword("COLLATE"),
+			Expression("collation-name"),
+		]),
+	]), undefined, "skip")]
+}
