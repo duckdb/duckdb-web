@@ -13,6 +13,7 @@ Documentation/SQL/Create Table,SQL,/docs/current/sql/statements/createtable.html
 Documentation/SQL/Create View,SQL,/docs/current/sql/statements/createview.html
 Documentation/SQL/Create Sequence,SQL,/docs/current/sql/statements/createsequence.html
 Documentation/SQL/Drop,SQL,/docs/current/sql/statements/drop.html
+Documentation/SQL/Alter Table,SQL,/docs/current/sql/statements/altertable.html
 Documentation/Data Types,Main,/docs/current/sql/types.html
 Documentation/Data Types/Boolean,Data Types,/docs/current/sql/types/boolean_type.html
 Documentation/Data Types/Numeric,Data Types,/docs/current/sql/types/numeric_types.html
