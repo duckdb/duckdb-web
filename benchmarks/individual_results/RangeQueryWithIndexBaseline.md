@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: RangeQueryWithIndexBaseline
 subtitle: Continuous Benchmarking
 selected: Micro

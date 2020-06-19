@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: PredicateOptimizationMod
 subtitle: Continuous Benchmarking
 selected: 

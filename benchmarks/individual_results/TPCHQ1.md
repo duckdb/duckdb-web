@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: TPCHQ1
 subtitle: Continuous Benchmarking
 selected: Startup

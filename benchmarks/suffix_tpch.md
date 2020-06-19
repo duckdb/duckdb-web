@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: Suffix_Tpch
 subtitle: Continuous Benchmarking
 selected: Suffix_Tpch

@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: SELECT1Disk
 subtitle: Continuous Benchmarking
 selected: Storage

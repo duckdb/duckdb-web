@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: PointQueryWithoutIndex
 subtitle: Continuous Benchmarking
 selected: Micro

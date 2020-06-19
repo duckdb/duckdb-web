@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: BulkUpdate
 subtitle: Continuous Benchmarking
 selected: Bulk Update

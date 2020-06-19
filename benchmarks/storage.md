@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: Storage
 subtitle: Continuous Benchmarking
 selected: Storage

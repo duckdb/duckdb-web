@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: StringContainsNullKMP
 subtitle: Continuous Benchmarking
 selected: String

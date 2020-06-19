@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: ContainsRegularLIKE
 subtitle: Continuous Benchmarking
 selected: Contains_Tpch

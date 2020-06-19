@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: TPCHCountDirectIO
 subtitle: Continuous Benchmarking
 selected: Startup

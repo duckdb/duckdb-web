@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: IndexCreationUniformRandomData
 subtitle: Continuous Benchmarking
 selected: Micro
