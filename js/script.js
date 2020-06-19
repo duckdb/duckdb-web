@@ -299,7 +299,7 @@ $(document).ready(function(){
 	}).addClass("externallink");
 	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
 	
-	console.log(location.hostname)
+	console.log(window.location.hostname)
 	
 	// IMAGE FIX NUR FÜR JETZT!
 	/*
