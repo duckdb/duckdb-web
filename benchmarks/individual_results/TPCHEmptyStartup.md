@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: TPCHEmptyStartup
 subtitle: Continuous Benchmarking
 selected: Startup

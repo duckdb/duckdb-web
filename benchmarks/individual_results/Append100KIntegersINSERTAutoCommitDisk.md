@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: Append100KIntegersINSERTAutoCommitDisk
 subtitle: Continuous Benchmarking
 selected: CSV

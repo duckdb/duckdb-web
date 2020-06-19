@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: StringContainsNullBM
 subtitle: Continuous Benchmarking
 selected: String

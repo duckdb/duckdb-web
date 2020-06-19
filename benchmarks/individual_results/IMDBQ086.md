@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: IMDBQ086
 subtitle: Continuous Benchmarking
 selected: IMDB

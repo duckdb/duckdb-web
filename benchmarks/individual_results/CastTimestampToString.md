@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: CastTimestampToString
 subtitle: Continuous Benchmarking
 selected: Cast

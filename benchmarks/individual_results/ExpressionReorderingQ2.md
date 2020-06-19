@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: ExpressionReorderingQ2
 subtitle: Continuous Benchmarking
 selected: 

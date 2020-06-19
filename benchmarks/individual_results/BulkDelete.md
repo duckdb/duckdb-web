@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: BulkDelete
 subtitle: Continuous Benchmarking
 selected: Bulk Update

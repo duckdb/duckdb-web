@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: NotInList0032Entry
 subtitle: Continuous Benchmarking
 selected: In

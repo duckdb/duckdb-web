@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: LineitemJoinAggregateWithFilter
 subtitle: Continuous Benchmarking
 selected: Aggregate

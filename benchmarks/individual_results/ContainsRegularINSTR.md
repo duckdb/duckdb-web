@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: ContainsRegularINSTR
 subtitle: Continuous Benchmarking
 selected: Contains_Tpch

@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: Append100KIntegersINSERTPrimary
 subtitle: Continuous Benchmarking
 selected: Append
