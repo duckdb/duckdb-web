@@ -85,7 +85,7 @@ print(res)
 > #### Note: 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb::duckdb_unregister()` method.
 
-Also refer to [the data import documentation](../../data/import) for more options of efficiently importing data.
+Also refer to [the data import documentation](/docs/data/import) for more options of efficiently importing data.
 
 ## dbplyr 
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Use `duckdb::src_duckdb()` to construct a dplyr table source. Here is an example:
