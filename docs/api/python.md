@@ -106,7 +106,7 @@ print(arr)
 
 ```
 
-Also refer to [the data import documentation](/docs/data/import/) for more options of efficiently importing data.
+Also refer to [the data import documentation](/docs/data/import) for more options of efficiently importing data.
 
 
 ## Relational API
