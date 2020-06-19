@@ -52,7 +52,6 @@ print(con.fetchall())
 
 ```
 
-> #### Note: 
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
@@ -73,7 +72,6 @@ You can now use the registered view to create a persistent table in DuckDB:
 ```python
 con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df_view')
 ```
-> #### Note: 
 > DuckDB keeps a reference to the Pandas data frame after registration. This prevents the data frame from being garbage-collected by the Python runtime. The reference is cleared when the connection is closed, but can also be cleared manually using the `unregister()` method.
 
 When retrieving the data from DuckDB back into Python, the standard method of calling `fetchall()` is inefficient as individual Python objects need to be created for every value in the result set. When retrieving a lot of data, this can become very slow.
