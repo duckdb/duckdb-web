@@ -292,13 +292,15 @@ $(document).ready(function(){
 	    contentlist = $('ul.sidenav').clone();
 	    $('#docusitemaphere').append(contentlist)
 	}
-	/*
+	
 	// Add class-name to external Links
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink");
 	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
-	*/
+	
+	console.log(location.hostname)
+	
 	// IMAGE FIX NUR FÜR JETZT!
 	/*
 	$('#main_content_wrap img').each(function() {
