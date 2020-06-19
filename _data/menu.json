@@ -1,0 +1,327 @@
+{
+  "toc2": [
+    {
+      "title": "Main",
+      "mainfolderitems": [
+        {
+          "page": "Documentation",
+          "subfolderitems": [
+            {
+              "page": "Installation",
+              "url": "/docs/installation/"
+            },
+            {
+              "page": "Data Import",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "/docs/data/overview"
+                },
+                {
+                  "page": "Importing Data",
+                  "url": "/docs/data/import"
+                },
+                {
+                  "page": "Insert Statements",
+                  "url": "/docs/data/insert"
+                },
+                {
+                  "page": "CSV Files",
+                  "url": "/docs/data/csv"
+                },
+                {
+                  "page": "Parquet Files",
+                  "url": "/docs/data/parquet"
+                },
+                {
+                  "page": "Appender",
+                  "url": "/docs/data/appender"
+                }]
+            },
+            {
+              "page": "Client APIs",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "/docs/api/overview"
+                },
+                {
+                  "page": "Python",
+                  "url": "/docs/api/python"
+                },
+                {
+                  "page": "R",
+                  "url": "/docs/api/r"
+                },
+                {
+                  "page": "Java",
+                  "url": "/docs/api/java"
+                }, 
+                {
+                  "page": "C",
+                  "url": "/docs/api/c"
+                },
+                {
+                  "page": "C++",
+                  "url": "/docs/api/cpp"
+                },               {
+                  "page": "CLI",
+                  "url": "/docs/api/cli"
+                }]
+            },
+            {
+              "page": "SQL",
+              "subsubfolderitems": [
+                {
+                  "page": "Indroduction",
+                  "url": "/docs/sql/introduction"
+                },
+                {
+                  "page": "Statements",
+                  "subsubsubfolderitems": [
+                  {
+                      "page": "Overview",
+                      "url": "/docs/sql/statements/overview"
+                    },
+                    {
+                      "page": "Select",
+                      "url": "/docs/sql/statements/select"
+                    },
+                    {
+                      "page": "Insert",
+                      "url": "/docs/sql/statements/insert"
+                    },
+                    {
+                      "page": "Delete",
+                      "url": "/docs/sql/statements/delete"
+                    },
+                    {
+                      "page": "Update",
+                      "url": "/docs/sql/statements/update"
+                    },
+                    {
+                      "page": "Create Table",
+                      "url": "/docs/sql/statements/create_table"
+                    },
+                    {
+                      "page": "Create View",
+                      "url": "/docs/sql/statements/create_view"
+                    },
+                    {
+                      "page": "Create Sequence",
+                      "url": "/docs/sql/statements/create_sequence"
+                    },
+                    {
+                      "page": "Drop",
+                      "url": "/docs/sql/statements/drop"
+                    },
+                    {
+                      "page": "Alter Table",
+                      "url": "/docs/sql/statements/alter_table"
+                    },
+                    {
+                      "page": "Copy",
+                      "url": "/docs/sql/statements/copy"
+                    }
+                  ]
+                },
+                {
+                  "page": "Data Types",
+                  "subsubsubfolderitems": [
+                    {
+                      "page": "Overview",
+                      "url": "/docs/sql/data_types/overview"
+                    },
+                    {
+                      "page": "Boolean",
+                      "url": "/docs/sql/data_types/boolean"
+                    },
+                    {
+                      "page": "Numeric",
+                      "url": "/docs/sql/data_types/numeric"
+                    },
+                    {
+                      "page": "Text",
+                      "url": "/docs/sql/data_types/text"
+                    },
+                    {
+                      "page": "Date",
+                      "url": "/docs/sql/data_types/date"
+                    },
+                    {
+                      "page": "Timestamp",
+                      "url": "/docs/sql/data_types/timestamp"
+                    }
+                  ]
+                },
+                {
+                "page": "Expressions",
+                "subsubsubfolderitems": [
+                  {
+                    "page": "Overview",
+                    "url": "/docs/sql/expressions/overview"
+                  },
+                  {
+                    "page": "Logical",
+                    "url": "/docs/sql/expressions/logical_operators"
+                  },
+                  {
+                    "page": "Comparisons",
+                    "url": "/docs/sql/expressions/comparison_operators"
+                  },
+                  {
+                    "page": "Casting",
+                    "url": "/docs/sql/expressions/cast"
+                  },
+                  {
+                    "page": "Case",
+                    "url": "/docs/sql/expressions/case"
+                  },
+                  {
+                    "page": "Collations",
+                    "url": "/docs/sql/expressions/collations"
+                  },
+                  {
+                    "page": "Subqueries",
+                    "url": "/docs/sql/expressions/subqueries"
+                  }
+                ]
+              },
+              {
+                "page": "Functions",
+                "subsubsubfolderitems": [
+                  {
+                    "page": "Overview",
+                    "url": "/docs/sql/functions/overview"
+                  },
+                  {
+                    "page": "Numeric Functions",
+                    "url": "/docs/sql/functions/numeric"
+                  },
+                  {
+                    "page": "Text Functions",
+                    "url": "/docs/sql/functions/char"
+                  },
+                  {
+                    "page": "Pattern Matching",
+                    "url": "/docs/sql/functions/patternmatching"
+                  },
+                  {
+                    "page": "Date Functions",
+                    "url": "/docs/sql/functions/date"
+                  },
+                  {
+                    "page": "Timestamp Functions",
+                    "url": "/docs/sql/functions/timestamp"
+                  }
+                ]
+              },
+              {
+                "page": "Indexes",
+                "url": "/docs/sql/indexes"
+              },
+              {
+                "page": "Aggregates",
+                "url": "/docs/sql/aggregates"
+              },
+              {
+                "page": "Window Functions",
+                "url": "/docs/sql/window_functions"
+              },
+              {
+                "page": "Pragmas",
+                "url": "/docs/sql/pragmas"
+              }
+              ]
+            },
+            {
+            "page": "Why DuckDB",
+            "url": "/docs/why_duckdb"
+          },
+          {
+            "page": "FAQ",
+            "url": "/docs/faq"
+          }
+          ]
+        },
+        {
+          "page": "Code of Conduct",
+          "url": "/code_of_conduct"
+        },
+        {
+          "page": "Live Demo",
+          "url": "/demo/"
+        },
+        {
+          "page": "Benchmarking",
+          "subfolderitems": [
+          {
+          "page": "Overview",
+              "url": "/benchmarks/index.html"
+          },
+          {
+          "page": "Append",
+              "url": "/benchmarks/append.html"
+          },
+          {
+          "page": "Aggregate",
+              "url": "/benchmarks/aggregate.html"
+          },
+          {
+          "page": "Bulk Update",
+              "url": "/benchmarks/bulkupdate.html"
+          },
+          {
+          "page": "Cast",
+              "url": "/benchmarks/cast.html"
+          },
+          {
+          "page": "Contains_Tpch",
+              "url": "/benchmarks/contains_tpch.html"
+          },
+          {
+          "page": "CSV",
+              "url": "/benchmarks/csv.html"
+          },
+          {
+          "page": "In",
+              "url": "/benchmarks/in.html"
+          },
+          {
+          "page": "Micro",
+              "url": "/benchmarks/micro.html"
+          },
+          {
+          "page": "Prefix_Tpch",
+              "url": "/benchmarks/prefix_tpch.html"
+          },
+          {
+          "page": "Startup",
+              "url": "/benchmarks/startup.html"
+          },
+          {
+          "page": "Storage",
+              "url": "/benchmarks/storage.html"
+          },
+          {
+          "page": "String",
+              "url": "/benchmarks/string.html"
+          },
+          {
+          "page": "Suffix_Tpch",
+              "url": "/benchmarks/suffix_tpch.html"
+          },
+          {
+          "page": "TPC-DS",
+              "url": "/benchmarks/tpcds.html"
+          },
+          {
+          "page": "TPC-H",
+              "url": "/benchmarks/tpch.html"
+          }
+          ]
+        }
+      ]
+    }
+  ]
+}

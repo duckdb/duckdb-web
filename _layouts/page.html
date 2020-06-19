@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% if page.title == "DuckDB" %}
+    <title>{{ page.title }}</title>
+	{% else %}
+    <title>DuckDB - {{ page.title }}</title>
+	{% endif %}
+
+	<link rel="stylesheet" href="/duckdb-web-new/css/main.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="{{ site.baseurl }}/images/favicon/site.webmanifest">
+	<link rel="mask-icon" href="{{ site.baseurl }}/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	{% if page.description %}
+	<meta name="description" content="{{page.description}}">
+	<meta property="og:description" content="{{page.description}}">
+	{% endif %}
+	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+	<link rel="stylesheet" href="/css/railroad.css">
+	{% endif %}
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="https://www.duckdb.org"><img class="img-inline img-logo" src="/duckdb-web-new/images/logo-128.png"/>DuckDB</a>
+
+            <ul class="pure-menu-list">
+			{% assign selected_pages = page.selected | split: '/' %}
+			{% assign selected_page = selected_pages | last %}
+			{% for item in site.data.menu %}
+				{% assign menu_pages = item.name | split: '/' %}
+				{% assign page_name = menu_pages | last %}
+				{% assign size = menu_pages | size %}
+				{% assign size = size | minus:2 %}
+				{% assign has_children = 0 %}
+				{% assign is_expanded = 0 %}
+				{% for item2 in site.data.menu %}
+					{% if page_name == item2.parent or page_name == "Benchmarking" %}
+						{% assign has_children = 1 %}
+					{% endif %}
+				{% endfor %}
+				{% if page_name == page.expanded %}
+					{% assign is_expanded = 1 %}
+				{% endif %}
+
+
+				{% if item.parent == "Main" or item.parent == page.expanded %}
+					{% if item.name == "-" %}
+					<li class="pure-menu-divider"></li>
+					{% else %}
+						{% if page_name == selected_page %}
+						<li class="pure-menu-item menu-item-divided pure-menu-selected">
+						{% else %}
+						<li class="pure-menu-item">
+						{% endif %}
+						<a href="{{ item.url }}" class="pure-menu-link">
+						{% for index in (0..size) %}
+							{{ "&nbsp;" }}
+						{% endfor%}
+						{% if is_expanded == 1 %}
+							&#9660;
+						{% elsif has_children == 1 %}
+							&#10148;
+						{% endif %}
+						{{ page_name }}
+						</a>
+						</li>
+					{% endif %}
+				{% endif %}
+
+				{% if page_name == "Benchmarking" and page.expanded == "Benchmarking" %}
+					{% for item in site.data.categories %}
+						{% assign item_name = item.name | downcase %}
+						{% assign item_name = item_name | remove: "-" %}
+						{% assign item_name = item_name | remove: " " %}
+
+						{% if item.name == selected_page %}
+						<li class="pure-menu-item menu-item-divided pure-menu-selected">
+						{% else %}
+						<li class="pure-menu-item">
+						{% endif %}
+						<a href="/benchmarks/{{ item_name }}.html" class="pure-menu-link">&nbsp;&nbsp;{{ item.name }}</a></li>
+					{% endfor %}
+				{% endif %}
+
+			{% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="header">
+            <h1 class="title">{{ page.title }}</h1>
+            <h2>{{ page.subtitle }}</h2>
+        </div>
+
+		<div id="main_content_wrap">
+			{{ content }}
+			{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
+			<table class="table">
+				{% include {{ page.benchmark }} %}
+			</table>
+			{% endif %}
+
+		</div>
+    </div>
+</div>
+
+<script src="/js/ui.js"></script>
+{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+<script src="/js/railroad.js"></script>
+<script src="/js/{{ page.railroad }}"></script>
+{% endif %}
+
+
+</body>
+</html>

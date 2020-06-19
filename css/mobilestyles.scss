@@ -1,0 +1,223 @@
+---
+---
+
+@media only screen and (max-width: 1200px) {
+	main .wrap,
+	body.landing .welcome .mainlinks ul{
+		max-width: 800px;
+	}
+	body.landing .welcome .mainlinks ul li{
+		min-width: 220px;
+	}
+}
+
+
+@media only screen and (max-width: 860px) {
+	main .wrap,
+	body.landing .welcome .mainlinks ul{
+		max-width: auto;
+		width: 100%;
+	}
+	body.landing .welcome .mainlinks ul li{
+		min-width: 220px;
+	}
+	.wrap.whyduckdb div.flex{
+		display: block;
+	}
+	body.documentation main .wrap.whyduckdb #main_content_wrap{
+		width: 100%;
+	}
+	.wrap.whyduckdb article{
+		width: 100%;
+	}
+	.wrap.whyduckdb .footnotes.mobilesups{
+		margin-left: 0;
+		width: 90%;
+		border-top: 1px solid #ebebeb;
+		margin-top: 50px;
+	}
+	.wrap.whyduckdb .footnotes.mobilesups div.sup{
+		position: relative;
+		margin-top: 20px;
+	}
+	footer .sitefooter .footercontent .gitbutton{
+		width: 150px;
+	}
+}
+
+@media only screen and (max-width: 770px) {
+	footer .sitefooter .footercontent div:nth-child(4){
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	body.landing .welcome .mainlinks ul li{
+		min-width: 160px;
+	}
+}
+
+@media only screen and (max-width: 660px) {
+	.hamburger{
+		display: block;
+	}
+	.notonmobile{
+		display: none;
+	}
+	footer .sitefooter .footercontent,
+	header .headerline .headercontent{
+		max-width: calc(100% - 30px);
+	}
+	header .headerline .headercontent .landingmenu nav > div:last-of-type{
+		display: none;
+	}
+	header .headerline .headercontent .landingmenu nav{
+		margin-right: 0px;
+		> div{
+			margin-left: 20px;
+		}
+	}
+	body.landing .welcome .mainlinks ul, body.landing .benefits .mainlinks ul{
+		max-width: 100%;
+		display: block;
+	}
+	body.landing .welcome h1{
+		font-size: 200%;
+	}
+	body.landing .benefits h1{
+		font-size: 145%;
+	}
+	body.landing .welcome .mainlinks ul li{
+		margin-top: 20px;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	body.landing .boxlayout .box{
+		width: 100%;
+		margin-bottom: 40px;
+	}
+	body.landing .boxlayout .box div:nth-child(2){
+		width: calc(100% - 100px);
+	}
+	body.landing .boxlayout,
+	body.landing .using{
+		display: block;
+	}
+	body.landing .install .environment ul{
+		/*flex-flow: column;*/
+	}
+	body.landing .using .box div:not(.icon){
+		padding-right: 0px;
+		width: calc(100% - 85px);
+	}
+	body.landing .docu .boxlayout .box:first-child{
+		padding-right: 0px;
+	}
+	body.landing .using .box {
+		margin-bottom: 50px;
+	}
+	body.landing .using .box:nth-child(2){
+		margin-bottom: 0px;
+	}
+	body.landing .using .box div.icon{
+		font-size: 75px;
+		width: 85px;
+	}
+	body.landing .docu .boxlayout .box .button{
+		width: 100%;
+		max-width: 100%;
+	}
+	footer .sitefooter .footercontent{
+		-ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		overflow: hidden;
+	}
+	footer .sitefooter .footercontent > div{
+		-webkit-box-flex: inherit;
+		    -ms-flex: inherit;
+		        flex: inherit;
+		width: 155px;
+	}
+	footer .sitefooter .footercontent > div:last-of-type{
+		width: 100%;
+	}
+	footer .sitefooter .footercontent .gitbutton{
+		width: 50%;
+		-webkit-transform: translateY(0);
+		    -ms-transform: translateY(0);
+		        transform: translateY(0);
+		margin-top: 20px;
+		float: left;
+	}
+	
+	body.documentation header .headerline .headercontent .landingmenu nav.mobile > div:last-of-type{
+		display: block;
+	}
+	body.documentation header .headerline .headercontent .landingmenu nav.mobile{
+		display: block;
+		div{
+			color: white;
+			font-size: 22px;
+			font-family: "DuckDB-Symbol";
+		}
+	}
+	body.documentation{
+		header .headerline .headercontent .landingmenu nav{
+			display: none;
+		}
+		.sidenavigation{
+			position: fixed;
+			right: 0;
+			width: 75%;
+			-webkit-transform: translateX(100%);
+			    -ms-transform: translateX(100%);
+			        transform: translateX(100%);
+			-webkit-transition: -webkit-transform .5s;
+			transition: -webkit-transform .5s;
+			-o-transition: transform .5s;
+			transition: transform .5s;
+			transition: transform .5s, -webkit-transform .5s;
+			padding-top: 14px;
+			&.slidein{
+				-webkit-transform: translateX(0%);
+				    -ms-transform: translateX(0%);
+				        transform: translateX(0%);
+			}
+		}
+		main{
+			overflow-x: hidden;
+		}
+		main .wrap{
+			width: 100%;
+			margin-left: 0;
+			padding: 15px;
+			-webkit-transition: opacity .5s;-o-transition: opacity .5s;transition: opacity .5s;
+			&.inactive{
+				opacity: .4;
+			}
+		}
+		.headlinebar{
+			left: 0px;
+			width: 100%;
+			padding-left: 15px;
+			font-size: 130%;
+		}
+		div.highlight{
+			width: 100%;
+		}
+		main .wrap .limit-width{
+			width: 108%;
+		}
+	}
+}
+
+@media only screen and (max-height: 840px) {
+
+}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	
+	
+	
+}

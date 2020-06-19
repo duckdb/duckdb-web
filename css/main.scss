@@ -1,0 +1,1107 @@
+---
+---
+
+/** DUCKDB MAIN CSS **/
+
+$duckDByellow: #fff100;
+$duckDBlightyellow: #fffee6;
+$duckDBgrey: #ebebeb;
+$duckDBblue: #e0f1fd;
+$duckDBlightgrey: #f5f5f5;
+$maxContentWidth: 950px;
+
+$fontMono:  "JetBrainsMono-Regular", "Lucida Console", monospace;
+$fontMonoBold: "JetBrainsMono-Bold", "Lucida Console", monospace;
+$fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
+$fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
+
+$fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
+$fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
+
+/** FONT IMPORT **/
+
+@font-face{
+    font-family: "SuisseIntl-Book";
+    src: url("webfont/SuisseIntl-Book-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebS.woff") format("woff");
+}
+@font-face{
+    font-family: "SuisseIntl-Bold";
+    src: url("webfont/SuisseIntl-Bold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Bold-WebS.woff") format("woff");
+}
+
+@font-face{
+    font-family: "DuckDB-Symbol";
+    src: url("webfont/DuckDB-Symbol.woff2") format("woff2"),url("webfont/DuckDB-Symbol.woff") format("woff");
+}
+
+@font-face{
+    font-family: "JetBrainsMono-Regular";
+    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Regular.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Regular.woff") format("woff");
+}
+@font-face{
+    font-family: "JetBrainsMono-Bold";
+    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold.woff") format("woff");
+}
+@font-face{
+    font-family: "JetBrainsMono-Italic";
+    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Italic.woff") format("woff");
+}
+@font-face{
+    font-family: "JetBrainsMono-Bold-Italic";
+    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold-Italic.woff") format("woff");
+}
+
+@import "hamburgers.min.css";
+
+
+*{
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;	
+}
+
+body{
+	font-size: 100%;
+	font-family: $fontSans;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+::-moz-selection {
+  background: $duckDByellow;
+}
+::selection {
+  background: $duckDByellow;
+}
+
+a, a:active, a:focus, button, button:active, button:focus {
+  outline: none;
+}
+
+p a{
+	color: black;
+	text-decoration: underline;
+	-webkit-transition: background-color .3s;
+	-o-transition: background-color .3s;
+	transition: background-color .3s;
+	&:hover{
+		background-color: $duckDByellow;
+		cursor: pointer;
+	}
+}
+
+ul {
+	list-style-type: '\2022 \00a0\00a0';
+}
+
+/** External Links in Fließtext **/ 
+a.externallink:hover{
+	background-color: $duckDBblue!important;
+}
+a.externallink:hover::after{
+	opacity: 1;
+	-webkit-transform: translate(0px, 0px);
+	    -ms-transform: translate(0px, 0px);
+	        transform: translate(0px, 0px);
+}
+a.externallink::after {
+  content: " \2197";
+  font-family: "DuckDB-Symbol";
+  position: absolute;
+  margin-left: -1px;
+  font-size: 10px;
+  opacity: 0;
+  -webkit-transform: translate(-10px, 5px);
+      -ms-transform: translate(-10px, 5px);
+          transform: translate(-10px, 5px);
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+a.externallink{
+	margin-right: 3px;
+}
+
+
+/** External Links in Header **/
+.external a::after{
+	content: "\E000";
+	font-family: "DuckDB-Symbol";
+	font-size: 90%;
+	top: -1px;
+	-webkit-transform: translateX(1px);
+	    -ms-transform: translateX(1px);
+	        transform: translateX(1px);
+	display: inline-block;
+	-webkit-transition: all .3s;
+	-o-transition: all .3s;
+	transition: all .3s;
+	opacity: 0;
+	color: white;
+	position: absolute;
+}
+.external a:hover::after{
+	-webkit-transform: translateX(5px);
+	    -ms-transform: translateX(5px);
+	        transform: translateX(5px);
+	opacity: 1;
+	color: $duckDByellow;
+}
+.external a:hover{
+	background-color: transparent!important;
+}
+
+
+.duckdbsymbol{
+	font-family: "DuckDB-Symbol";
+}
+
+a.blocklink{
+	display: block;
+	position: absolute;
+	z-index: 500;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	&:hover{
+		background-color: transparent!important;
+	}
+}
+
+img.downloadlogo{
+	height: 30px;
+	width: 130px;
+	position: absolute;
+	top: 10px;
+	left: 15px;
+	z-index: 999;
+	background: red;
+	opacity: 0!important;
+}
+
+header .headerline{
+	background-color: black;
+	height: 53px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9000;
+	.headercontent{
+		max-width: calc(100% - 60px);
+		margin: 0 auto;
+		color: white;
+		line-height: 53px;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		.duckdbhome{
+			font-size: 20px;
+			font-family: "DuckDB-Symbol";
+			a{
+				text-decoration: none;
+				color: $duckDByellow;
+				-webkit-transition: color .3s;
+				-o-transition: color .3s;
+				transition: color .3s;
+				&:hover{
+					color: white;
+				}
+			}
+		}
+		.landingmenu{
+			nav{
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				margin-right: 20px;
+				> div{
+					margin-left: 40px;
+					position: relative;
+				}
+				a{
+					color: white;
+					text-decoration: none;
+					-webkit-transition: color .3s;
+					-o-transition: color .3s;
+					transition: color .3s;
+					&:hover{
+						color: $duckDByellow;
+					}
+				}
+				.hasSub + ul{
+					padding: 7px 15px;
+					margin: 0;
+					background-color: $duckDByellow;
+					position: absolute;
+					top: 63px;
+					left: -10px;
+					-webkit-transition: all .3s ease;
+					-o-transition: all .3s ease;
+					transition: all .3s ease;
+					opacity: 0;
+					visibility: hidden;
+					li{
+						line-height: 29px;
+						font-size: 15px;
+						white-space: nowrap;
+						color: black;
+						a{
+							text-decoration: none;
+							color: black;
+						}
+					}
+					ul{
+						padding: 5px 12px;
+						margin-top: -6px;
+						margin-bottom: 5px;
+						li{
+							line-height: 20px;
+							font-size: 13px;
+						}
+					}
+				}
+				.hasSub + ul:hover{
+					opacity: 1;
+					visibility: visible;
+					-webkit-transform: translateY(-10px);
+					    -ms-transform: translateY(-10px);
+					        transform: translateY(-10px);
+				}
+				.hasSub{
+					cursor: pointer;
+					&:hover{ 
+						color: $duckDByellow;
+						& ~ ul{
+							opacity: 1;
+							visibility: visible;
+							-webkit-transform: translateY(-10px);
+							    -ms-transform: translateY(-10px);
+							        transform: translateY(-10px);
+							ul{
+								visibility: visible;
+							}
+						}
+						a{
+							color: $duckDByellow;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.hamburger{
+	padding: 3px;
+	margin-top: 3px;
+	display: none;
+}
+
+.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before{
+	background-color: #ffffff;
+	border-radius: 0px;
+	height: 2px;
+}
+
+.hamburger.is-active:hover, .hamburger:hover{
+	opacity: 1;
+}
+
+.hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner:after, .hamburger.is-active .hamburger-inner:before{
+	background-color: $duckDByellow;
+}
+
+main{
+	h1{
+		font-size: 130%;
+		font-weight: normal;
+		margin-bottom: 50px;
+	}
+	.wrap{
+		max-width: $maxContentWidth;
+		margin: 0 auto;
+	}
+	#main_content_wrap{
+		margin-top: 80px;
+	}
+}
+
+.scrolltop{
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	-webkit-transition: color .3s;
+	-o-transition: color .3s;
+	transition: color .3s;
+	cursor: pointer;
+	&:hover{
+		color: $duckDByellow;
+	}
+}
+
+footer{
+	.sitefooter{
+		background-color: darken($duckDBlightgrey,2);
+		.footercontent{
+			max-width: calc(100% - 60px);
+			margin: 0 auto;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: justify;
+			    -ms-flex-pack: justify;
+			        justify-content: space-between;
+			font-size: 80%;
+			> div{
+				-webkit-box-flex: 1;
+				    -ms-flex: 1 1 0px;
+				        flex: 1 1 0px;
+				overflow: hidden;
+				position: relative;
+				strong{
+					font-family: $fontSansBold;
+				}
+				&:first-child{
+					
+				}
+				a{
+					color: black;
+					text-decoration: none;
+					-webkit-transition: background-color .3s;
+					-o-transition: background-color .3s;
+					transition: background-color .3s;
+					&:hover{
+						background-color: $duckDByellow;
+					}
+				}
+			}
+			h4{
+				text-decoration: none;
+				font-family: $fontSansBold;
+				font-weight: normal;
+				margin-top: 0px;
+			}
+			.gitbutton{
+				width: 200px;
+				height: 30px;
+				border: 1px solid black;
+				text-align: center;
+				line-height: 30px;
+				float: right;
+				-webkit-transform: translateY(50%);
+				    -ms-transform: translateY(50%);
+				        transform: translateY(50%);
+				position: relative;
+				-webkit-transition: background-color .3s;
+				-o-transition: background-color .3s;
+				transition: background-color .3s;
+				img{
+					height: 20px;
+					width: auto;
+					vertical-align: -4px;
+					margin-right: 10px;
+				}
+				&:hover{
+					background-color: $duckDByellow;
+				}
+			}
+		}
+	}
+	.socialicons{
+		margin-top: 25px;
+		img{
+			max-width: 25px;
+			margin-right: 12px;
+		}
+	}
+}
+
+
+h1{
+	font-size: 145%;
+	font-weight: normal;
+	margin-bottom: 50px;
+}
+h2{
+	font-size: 140%;
+	font-weight: normal;
+	margin-bottom: 30px;
+}
+h3{
+	font-weight: normal;
+	font-size: 120%;
+}
+h4{
+	font-weight: normal;
+}
+h1 code{
+	background-color: transparent!important;
+	padding: 0!important;
+	font-size: 145%;
+	font-family: $fontMono!important;
+}
+h2 code{
+	background-color: transparent!important;
+	padding: 0!important;
+	font-size: 140%;
+	font-family: $fontMono!important;
+}
+h3 code{
+	background-color: transparent!important;
+	padding: 0!important;
+	font-size: 120%;
+	font-family: $fontMono!important;
+}
+
+/** SPECIAL LANDING PAGE **/
+
+body.landing{
+	section:nth-child(odd){
+		background-color: $duckDBlightgrey;
+	}
+	section{
+		padding: 80px 15px;
+	}
+	.welcome, .benefits{
+		width: 100%;
+		text-align: center;
+		margin-top: 53px;
+		h1{
+			max-width: 1000px;
+			margin: 0 auto;
+			font-size: 300%;
+			line-height: 1;
+		}
+		h2{
+			font-size: 145%;
+		}
+		.mainlinks{
+			ul{
+				list-style: none;
+				padding: 0px;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				    -ms-flex-pack: center;
+				        justify-content: center;
+				margin: 0 auto;
+				margin-top: 80px;
+				max-width: $maxContentWidth;
+				a{
+					text-decoration: none;
+					color: black;
+				}
+				li.highlighted{
+					background-color: black;
+					color: white;
+					&:hover{
+						background-color: black;
+						color: $duckDByellow;
+						border-color: black;
+					}
+				}
+				li{
+					min-width: 300px;
+					//flex: 1 1 0px;
+					border: 1px solid black;
+					margin-left: 10px;
+					margin-right: 10px;
+					padding: 0px 0px;
+					-webkit-transition: all .3s;
+					-o-transition: all .3s;
+					transition: all .3s;
+					height: 40px;
+					line-height: 40px;
+					background-color: transparent;
+					&:hover{
+						background-color:  $duckDByellow;
+						color: black;
+						border-color: black;
+					}
+				}
+			}
+		}
+	}
+	.benefits{
+		margin-top: 0;
+		h1{
+			font-size: 210%;
+		}
+	}
+	.boxlayout{
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		-ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		.box{
+			width: 50%;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			position: relative;
+			margin-bottom: 30px;
+			div:first-child{
+				width: 120px;
+				margin-top: 4px;
+			}
+			div:nth-child(2){
+				width: calc(100% - 150px);
+				max-width: 390px;
+				ul{
+					padding-left: 15px;
+					margin-top: 10px;
+					margin-bottom: 2px;
+					ul{
+						margin: 0;
+					}
+				}
+				span.duckdbsymbol{
+					font-size: 16px;
+					color: darken($duckDBgrey,20);
+				}
+				a{
+					color: darken($duckDBgrey,20);
+				}
+			}
+		}
+	}
+	.whyduckdb{
+		.boxlayout{
+			.box{
+				.duckdbsymbol{
+					font-size: 60px;
+				}
+				div.icon{
+					width: 90px;
+					height: 90px;
+					background-color: $duckDBlightgrey;
+					text-align: center;
+					display: table-cell; 
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+	.using{
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		.box{
+			-webkit-box-flex: 1;
+			    -ms-flex: 1 1 0px;
+			        flex: 1 1 0px;
+			position: relative;
+			overflow: hidden;
+			div.icon{
+				width: 90px;
+				float: left;
+				font-size: 85px;
+				margin-top: 10px;
+			}
+			div:not(.icon){
+				margin-top: 20px;
+				width: calc(100% - 90px);
+				float: left;
+				padding-left: 45px;
+				padding-right: 50px;
+			}
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style-type: '\2022 \00a0\00a0';
+				li{
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+	.docu{
+		.boxlayout{
+			.box{
+				display: block;
+				-webkit-box-flex: 1;
+				    -ms-flex: 1 1 0px;
+				        flex: 1 1 0px;
+				.button{
+					border: 1px solid black;
+					padding: 4px 0px;
+					color: black;
+					text-align: center;
+					width: 100%;
+					margin-top: 15px;
+					cursor: pointer;
+					-webkit-transition: all .3s;
+					-o-transition: all .3s;
+					transition: all .3s;
+					max-width: 320px;
+					&:hover{
+						background-color: $duckDByellow;
+						border: 1px solid black;
+					}
+				}
+				a:nth-child(3) .button{
+					color: white;
+					background-color: black;
+					&:hover{
+						border: 1px solid black;
+						color: $duckDByellow;
+					}
+				}
+				a:nth-child(2) .button{
+					margin-top: 40px;
+				}
+				div.quicklinks{
+					width: 100%;
+					position: relative;
+					overflow: hidden;
+					display: -webkit-box;
+					display: -ms-flexbox;
+					display: flex;
+					-webkit-box-pack: center;
+					    -ms-flex-pack: center;
+					        justify-content: center;
+					margin-top: 10px;
+				}
+				div.quickaccess{
+					border: 1px solid black;
+					padding: 10px 15px;
+					width: 50%;
+					margin-top: 0px;
+					//max-width: none;
+					&:first-child{
+						border-right: 0px;
+					}
+					li{
+						list-style-type: '\2022 \00a0\00a0';
+					}
+					p{
+						margin-bottom: 4px;
+						margin-top: 0px;
+					}
+					a{
+						color: black;
+						text-decoration: underline;
+						&:hover{
+							background-color: $duckDByellow;
+						}
+					}
+				}
+			}
+			.box:first-child{
+				padding-right: 40px;
+			}
+		}
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		
+	}
+	
+	.install{
+		p{
+			max-width: 450px;
+			margin-bottom: 50px;
+		}
+		.environment{
+			ul{
+				padding: 0;
+				margin: 0;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: justify;
+				    -ms-flex-pack: justify;
+				        justify-content: space-between;
+				list-style: none;
+				li{
+					-webkit-box-flex: 1;
+					    -ms-flex: 1 1 0px;
+					        flex: 1 1 0px;
+					-webkit-transition: all .3s;
+					-o-transition: all .3s;
+					transition: all .3s;
+					color: darken($duckDBgrey,20);
+					border-bottom: 1px solid black;
+					text-align: center;
+					cursor: pointer;
+					height: 40px;
+					line-height: 40px;
+					&:hover{
+						color: black;
+					}
+				}
+				li.active{
+					border-bottom: 3px solid black;
+					color: black;
+				}
+			}			
+		}
+		.result{
+			background-color: $duckDBlightgrey;
+			min-height: 80px;
+			font-family: $fontMono;
+			padding: 15px;
+			margin-top: 10px;
+			a{
+				text-decoration: none;
+				color: white;
+				background-color: black;
+				padding: 2px 30px;
+				font-family: $fontSans;
+				-webkit-transition: color .3s;
+				-o-transition: color .3s;
+				transition: color .3s;
+				&:hover{
+					color: $duckDByellow;					
+				}
+			}
+		}
+		.result + p{
+			color: darken($duckDBgrey,20);
+			max-width: 100%;
+			span{
+				margin-left: 15px;
+				margin-right: 15px;
+			}
+			span:first-child{
+				margin-left: 0px;
+			}
+		}
+		.hidden{
+			display: none;
+		}
+	}
+}
+
+
+
+/** DOCUMENTATION **/
+
+body.documentation{
+	nav.mobile{
+		display: none;
+	}
+	main .wrap{
+		width: calc(100% - 252px);
+		margin-left: 252px;
+		padding: 40px;
+		#main_content_wrap{
+			max-width: 720px;
+			margin-top: 100px;
+			img{
+				width: 100%;
+				height: auto;
+				margin-bottom: 50px;
+				margin-top: 50px;
+			}
+		}
+		h1{
+			font-size: 160%;
+			margin-bottom: 20px;
+			margin-top: 50px;
+		}
+		h2{
+			font-size: 140%;
+			margin-bottom: 10px;
+			margin-top: 40px;
+		}
+		h3{
+			font-size: 120%;
+			margin-bottom: 10px;
+			margin-top: 30px;
+		}
+		h2#notes{
+			margin-top: 5px;
+		}
+		a{
+			color: black;
+			background-color: white;
+			text-decoration: underline;
+			-webkit-transition: background-color .3s;
+			-o-transition: background-color .3s;
+			transition: background-color .3s;
+			&:hover{
+				background-color: $duckDByellow;
+				cursor: pointer;
+			}
+		}
+		.limit-width{
+			width: calc(100vw - 380px);
+		}
+	}
+	.headlinebar{
+		background-color: $duckDBlightgrey;
+		height: 53px;
+		line-height: 53px;
+		font-size: 190%;
+		top: 53px;
+		left: 252px;
+		padding-left: 40px;
+		position: absolute;
+		width: calc(100% - 252px);
+	}
+}
+.sidenavigation{
+	position: fixed;
+	top: 53px;
+	background-color: $duckDByellow;
+	width: 252px;
+	height: calc(100vh - 53px);
+	padding: 20px;
+	padding-left: 30px;
+	z-index: 999;
+	overflow: auto;
+	-webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	a{
+		color: black;
+		text-decoration: none;
+	}
+	ul{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		overflow: hidden;
+		position: relative;
+		zoom: 1;
+	}
+	li{
+		line-height: 26px;
+		cursor: pointer;
+		&.active{
+			text-decoration: underline;
+		}
+	}
+	li.active{
+		text-decoration: underline;	
+	}
+	li.hasSub span{
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+		display: inline-block;
+		font-size: 14px;
+		position: absolute;
+		-webkit-transform: translateX(-13px);
+		    -ms-transform: translateX(-13px);
+		        transform: translateX(-13px);
+	}
+	li.hasSub span.show::before{
+		content: ' \25BA';
+		font-family: "DuckDB-Symbol";
+	}
+	li.hasSub.opened span.show{
+		-webkit-transform: translateX(-13px) rotate(90deg);
+		    -ms-transform: translateX(-13px) rotate(90deg);
+		        transform: translateX(-13px) rotate(90deg);
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+		position: absolute;
+	}
+	ul.sidenav{
+		overflow: visible;
+		> ul{
+			padding-left: 20px;
+			overflow: hidden;
+			&.parentnav{
+				display: block;
+			}
+			ul{
+				padding-left: 20px;
+				overflow: hidden;
+				display: none;
+				li{
+					font-size: 14px;
+				}
+				&.parentnav{
+					display: block;
+				}
+				ul{
+					display: none; // Dritte Navigationsebene ausblenden 
+					li{
+						font-size: 12px;
+						line-height: 1.7;
+					}
+				}
+			}
+			> ul:nth-of-type(3){
+				display: block; // SQL ausklappen
+				&.parentnav{
+					display: block;
+				}
+			}
+		}
+		ul:nth-of-type(2){
+			display: none; // Benchmarking einklappen
+			&.parentnav{
+				display: block;
+			}
+		}
+	}
+}
+
+
+/** FAQ **/
+
+body.documentation main .wrap.frequentlyaskedquestions{
+	h1, h2, h3{
+		cursor: pointer;
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+		margin-top: 20px;
+	}
+	h2 + p, h1 + p , h3 + p {
+		display: none;
+		padding-left: 27px;
+		padding-bottom: 30px;
+	}
+	h3::before, h2::before, h1::before{
+		content: "\25BA";
+		font-size: 14px;
+		display: inline-block;
+		margin-right: 8px;
+		-webkit-transform: translateY(-3px);
+		    -ms-transform: translateY(-3px);
+		        transform: translateY(-3px);
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+	}
+	h3.open::before, h2.open::before, h1.open::before{
+		-webkit-transform: translateY(-3px) rotate(90deg);
+		    -ms-transform: translateY(-3px) rotate(90deg);
+		        transform: translateY(-3px) rotate(90deg);
+		-webkit-transition: -webkit-transform .3s;
+		transition: -webkit-transform .3s;
+		-o-transition: transform .3s;
+		transition: transform .3s;
+		transition: transform .3s, -webkit-transform .3s;
+	}
+}
+
+
+
+/** SPECIAL INSTALLATION PAGE **/
+
+body.installation{
+	h1{
+		font-size: 140%;
+		font-weight: normal;
+		margin-bottom: 50px;
+	}
+	h2{
+		font-size: 110%;
+		font-weight: normal;
+		margin-bottom: 7px;
+		-webkit-user-select: none;
+		   -moz-user-select: none;
+		    -ms-user-select: none;
+		        user-select: none;
+	}
+	.yourselection{
+		max-width: 780px;
+		position: relative;
+	}
+	.wrap{
+		margin-bottom: 100px;
+	}
+	.select{
+		ul{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: justify;
+			    -ms-flex-pack: justify;
+			        justify-content: space-between;
+			pointer-events: all;
+			/**margin-bottom: 53px;**/
+			li{
+				display: block;
+				background-color: $duckDBlightgrey;
+				border: 1px solid white;
+				border-left: 0px;
+				-webkit-box-flex: 1;
+				    -ms-flex: 1 1 0px;
+				        flex: 1 1 0px;
+				-webkit-transition: background-color .3s;
+				-o-transition: background-color .3s;
+				transition: background-color .3s;
+				cursor: pointer;
+				-webkit-user-select: none;
+				   -moz-user-select: none;
+				    -ms-user-select: none;
+				        user-select: none;
+				text-align: center;
+				height: 35px;
+				line-height: 35px;
+				span.versioninfo{
+					color: darken($duckDBlightgrey,40);
+				}
+			&:hover{
+				background-color: darken($duckDBlightgrey,10);
+				}
+			&.selected{
+				background-color: $duckDBblue;
+				}
+			}
+		}
+		&.inactive{
+			opacity: .4;
+			pointer-events: none;
+		}
+		&.inactive ul{
+			pointer-events: none;
+		}
+	}
+	.output{
+		.result{
+			font-family: $fontMono;
+			background-color: $duckDBlightgrey;
+			border-top: 0;
+			min-height: 100px;
+			padding: 10px;
+			font-size: 14px;
+			pre{
+				padding: 0;
+				margin: 0;
+			}
+		}
+	}
+	.possibleresults{
+		display: none;
+	}
+}
+
+
+
+

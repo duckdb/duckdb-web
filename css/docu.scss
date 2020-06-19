@@ -1,0 +1,642 @@
+---
+---
+
+/** DUCKDB DOCUMENTATION CONTENT CSS **/
+
+$duckDByellow: #fff100;
+$duckDBlightyellow: #fffee6;
+$duckDBgrey: #ebebeb;
+$duckDBlightgrey: #f5f5f5;
+$maxContentWidth: 1000px;
+$duckDBblue: #e0f1fd;
+
+$fontMono:  "JetBrainsMono-Regular", "Lucida Console", monospace;
+$fontMonoBold: "JetBrainsMono-Bold", "Lucida Console", monospace;
+$fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
+$fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
+
+$fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
+$fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
+
+body{
+	background-color: white;
+	font-size: 100%;
+}
+
+code,
+pre {
+	font-family: $fontMono;
+    font-size: 14px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    line-height: 1.4;
+}
+code.language-plaintext{
+	background-color: rgb(245, 245, 245);
+	font-family: $fontMonoBold;
+	border-radius: 7px; 
+	padding: 2px 5px 2px 5px;
+	margin: 0;
+}
+pre {
+    padding: 10px;
+    overflow: auto;
+    background-color: rgb(245, 245, 245);
+}
+code {
+    padding: 1px 0px;
+    margin: 0 3px;
+}
+
+pre code {
+    display: block;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+pre.highlight{
+	white-space: pre;
+	overflow-x: auto;
+}
+div.highlight{
+	width: calc(100vw - 380px);
+	max-width: 1000px;
+}
+blockquote {
+    margin: 0;
+    padding: 20px 20px 20px 20px;
+    background-color: $duckDBblue;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    p:last-child{
+	    margin-bottom: 0;
+    }
+}
+dl,
+ol,
+ul {
+    margin-bottom: 15px;
+}
+ul {
+    list-style-position: inside;
+    list-style-type: '\2022 \00a0\00a0';
+    padding: 0;
+    padding-left: 0px;
+    margin: 0;
+    ul{
+	    padding-left: 20px;
+    }
+}
+ul + p{
+	margin-top: 3px;
+	margin-bottom: 25px;
+}
+ol {
+    list-style-position: inside;
+    list-style: decimal;
+    padding-left: 20px;
+}
+dl dt {
+    font-weight: bold;
+}
+dl dd {
+    padding-left: 20px;
+    font-style: italic;
+}
+dl p {
+    padding-left: 20px;
+    font-style: italic;
+}
+hr {
+    height: 1px;
+    margin-bottom: 5px;
+    border: none;
+    background: url("../images/bg_hr.png") repeat-x center;
+}
+table {
+    border: 1px solid black;
+    margin-bottom: 20px;
+    text-align: left;
+    background-color: $duckDBlightgrey;
+    width: calc(100vw - 380px);
+	max-width: 1000px;
+}
+th {
+    padding: 7px;
+    font-weight: normal;
+    background: #000000;
+    color: #fff;
+    font-size: 14px;
+}
+td {
+    padding: 7px;
+    border: 1px solid white;
+    font-size: 14px;
+}
+form {
+    background: #f2f2f2;
+    padding: 20px;
+}
+.outer {
+    width: 100%;
+}
+.inner {
+    position: relative;
+    max-width: 640px;
+    padding: 20px 10px;
+    margin: 0 auto;
+}
+
+
+#main_content_wrap{
+	table{
+		code.language-plaintext{
+			padding: 0;
+			background-color: transparent;
+		}
+		em code{
+			font-family: $fontMonoItalicBold;
+			font-style: normal;
+		}
+	}
+	
+	table.bench{
+		a{
+			background-color: transparent;
+			&:hover{
+				background-color: $duckDByellow;
+			}
+		}
+		th a{
+			color: white;
+			&:hover{
+				color: black;
+			}
+		}
+	}
+}
+
+div.flex{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+}
+
+
+/** WHY DUCKDB **/
+
+.wrap.whyduckdb{
+	ul{
+		list-style-position: outside;
+		padding-left: 20px;
+	}
+	div.icon{
+		width: 90px;
+		height: 90px;
+		background-color: #f5f5f5;
+		text-align: center;
+		font-size: 60px;
+		padding-top: 9px;
+	}
+	div.headline{
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		padding-top: 60px;
+		h1{
+			margin-left: 20px;
+			margin-top: 30px;
+			font-size: 140%;
+		}
+	}
+	article{
+		width: 540px;
+		max-width: none;
+		min-width: none;
+		p{
+			text-align: justify;
+		}
+		h1:first-of-type{
+			margin-top: 0px;
+		}
+		sup{
+			font-size: 100%;
+			top: 0;
+			&::after{
+				content: "]"
+			}
+			&::before{
+				content: "["
+			}
+		}
+	}
+	.footnotes{
+		width: 280px;
+		margin-left: 40px;
+		font-size: 70%;
+		position: relative;
+		div.sup{
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: justify;
+			    -ms-flex-pack: justify;
+			        justify-content: space-between;
+			position: absolute;
+			sup{
+				min-width: 20px;
+				top: 0;
+				font-size: 70%;
+				display: inline-block;
+			}
+			p{
+				display: inline-block;
+				margin: 0;
+				margin-top: -8px;
+			}
+		}
+	}
+	div.flex{
+		-webkit-box-pack: start;
+		    -ms-flex-pack: start;
+		        justify-content: flex-start;
+	}
+}
+
+#docusitemaphere{
+	> ul > li.hasSub,
+	> ul > li{
+		font-size: 140%;
+		list-style: none;
+		margin-top: 40px;
+		margin-bottom: 10px;
+	}
+	> ul > ul > li.hasSub{
+		font-size: 100%;
+		margin-top: 20px;
+	}
+	> ul > ul > ul > li.hasSub{
+		margin-top: 10px;
+	}
+}
+
+
+
+/** SLATE IMPORT **/
+
+.highlight table td {
+    padding: 5px;
+}
+.highlight table pre {
+    margin: 0;
+}
+.highlight .cm {
+    color: #777772;
+    font-family: $fontMonoItalic;
+}
+.highlight .cp {
+    color: #797676;
+    font-family: $fontMonoBold;
+}
+.highlight .c1 {
+    color: #929292;
+    font-family: $fontMonoItalic;
+}
+.highlight .cs {
+    color: #797676;
+    font-family: $fontMonoItalicBold;
+}
+.highlight .c,
+.highlight .cd {
+    color: #777772;
+    font-family: $fontMonoItalic;
+}
+.highlight .err {
+    color: #a61717;
+    background-color: #e3d2d2;
+}
+.highlight .gd {
+    color: #000000;
+    background-color: #ffdddd;
+}
+.highlight .ge {
+    color: #000000;
+    font-family: $fontMonoItalic;
+}
+.highlight .gr {
+    color: #aa0000;
+}
+.highlight .gh {
+    color: #797676;
+}
+.highlight .gi {
+    color: #000000;
+    background-color: #ddffdd;
+}
+.highlight .go {
+    color: #888888;
+}
+.highlight .gp {
+    color: #555555;
+}
+.highlight .gs {
+    font-family: $fontMonoBold;
+}
+.highlight .gu {
+    color: #aaaaaa;
+}
+.highlight .gt {
+    color: #aa0000;
+}
+.highlight .kc {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .kd {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .kn {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .kp {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .kr {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .kt {
+    color: #445588;
+    font-family: $fontMonoBold;
+}
+.highlight .k,
+.highlight .kv {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .mf {
+    color: #009999;
+}
+.highlight .mh {
+    color: #009999;
+}
+.highlight .il {
+    color: #009999;
+}
+.highlight .mi {
+    color: #32cd32;
+}
+.highlight .mo {
+    color: #009999;
+}
+.highlight .m,
+.highlight .mb,
+.highlight .mx {
+    color: #009999;
+}
+.highlight .sb {
+    color: rgb(255,0,0);
+}
+.highlight .sc {
+    color: #d14;
+}
+.highlight .sd {
+    color: #d14;
+}
+.highlight .s2 {
+    color: rgb(255,0,0);
+}
+.highlight .se {
+    color: #d14;
+}
+.highlight .sh {
+    color: #d14;
+}
+.highlight .si {
+    color: #d14;
+}
+.highlight .sx {
+    color: #d14;
+}
+.highlight .sr {
+    color: #009926;
+}
+.highlight .s1 {
+    color: rgb(255,0,0);
+}
+.highlight .ss {
+    color: #990073;
+}
+.highlight .s {
+    color: rgb(255,0,0);
+}
+.highlight .na {
+    color: #008080;
+}
+.highlight .bp {
+    color: #797676;
+}
+.highlight .nb {
+    color: rgb(0,0,255);
+}
+.highlight .nc {
+    color: #445588;
+    font-family: $fontMonoBold;
+}
+.highlight .no {
+    color: #008080;
+}
+.highlight .nd {
+    color: #3c5d5d;
+    font-family: $fontMonoBold;
+}
+.highlight .ni {
+    color: #800080;
+}
+.highlight .ne {
+    color: #990000;
+    font-family: $fontMonoBold;
+}
+.highlight .nf {
+    color: black;
+    font-family: $fontMonoBold;
+}
+.highlight .nl {
+    color: #990000;
+    font-family: $fontMonoBold;
+}
+.highlight .nn {
+    color: #555555;
+}
+.highlight .nt {
+    color: #000080;
+}
+.highlight .vc {
+    color: #008080;
+}
+.highlight .vg {
+    color: #008080;
+}
+.highlight .vi {
+    color: #008080;
+}
+.highlight .nv {
+    color: #008080;
+}
+.highlight .ow {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .o {
+    color: #000000;
+    font-family: $fontMonoBold;
+}
+.highlight .w {
+    color: #bbbbbb;
+}
+.highlight {
+    background-color: rgb(245, 245, 245);
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #0F79D0;
+    text-shadow: none;
+    transition: color 0.5s ease;
+    transition: text-shadow 0.5s ease;
+    -webkit-transition: color 0.5s ease;
+    -webkit-transition: text-shadow 0.5s ease;
+    -moz-transition: color 0.5s ease;
+    -moz-transition: text-shadow 0.5s ease;
+    -o-transition: color 0.5s ease;
+    -o-transition: text-shadow 0.5s ease;
+    -ms-transition: color 0.5s ease;
+    -ms-transition: text-shadow 0.5s ease;
+}
+a:focus,
+a:hover {
+    text-decoration: underline;
+}
+cite,
+em {
+	font-family: $fontMonoItalic;
+	font-style: normal;
+}
+strong {
+    font-weight: normal;
+    font-family: $fontSansBold;
+}
+p{
+	line-height: 1.5;
+}
+p em{
+	font-family: $fontSans;
+	font-style: normal;
+}
+
+code em{
+	font-family: $fontMonoItalic;
+	font-style: normal;
+}
+p img {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+}
+
+
+@media screen and (max-width: 992px) {
+    img {
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    #downloads {
+        display: none;
+    }
+    .inner {
+        min-width: 320px;
+        max-width: 480px;
+    }
+    #project_title {
+        font-size: 32px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    h3 {
+        font-size: 21px;
+    }
+    h4 {
+        font-size: 18px;
+    }
+    h5 {
+        font-size: 14px;
+    }
+    h6 {
+        font-size: 12px;
+    }
+    code,
+    pre {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width: 320px) {
+    body {
+        font-size: 14px;
+    }
+    #downloads {
+        display: none;
+    }
+    .inner {
+        min-width: 240px;
+        max-width: 320px;
+    }
+    #project_title {
+        font-size: 28px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 21px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 14px;
+    }
+    h6 {
+        font-size: 12px;
+    }
+    code,
+    pre {
+        min-width: 240px;
+        max-width: 320px;
+        font-size: 11px;
+    }
+}

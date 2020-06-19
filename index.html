@@ -2,41 +2,213 @@
 layout: default
 title: DuckDB
 subtitle: An Embeddable Analytical Database
-selected: Home
+description: DuckDB is an embeddable SQL OLAP database management system. Simple, feature-rich, fast & open source.
+body_class: landing nowrap
 ---
-<p>DuckDB is an embedded database designed to execute analytical SQL queries fast while embedded in another process. It is designed to be easy to install and easy to use. DuckDB has no external dependencies. DuckDB has bindings for C/C++, Python and R.</p>
-
-<p>DuckDB is developed by the Database Architectures group of the CWI. It is open source and licensed under the MIT license. The source code can be found <a href="https://github.com/cwida/duckdb">here</a>. Installation instructions for DuckDB can be found <a href="/docs/current/tutorials/installation">here</a>.</p>
-
-<h2>Testing</h2>
-<p>While DuckDB is created by a research group, it is not intended to be a research prototype. DuckDB is intended to be a stable and mature database system.</p>
-
-<p>To facilitate this stability, DuckDB is intensively tested using <a href="https://travis-ci.org/cwida/duckdb">Continuous Integration</a>. DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL and MonetDB.</p>
-
-<p>In addition to this test suite, we run various tests that stress DuckDB under heavy load. We run the TPC-H and TPC-DS benchmarks, and run various tests in which DuckDB is used by many clients in parallel.</p>
-
-<h2>Documentation</h2>
-<p>Documentation can be found <a href="docs/current/index.html">here</a>.</p>
-
-<h2>Continuous Benchmarking</h2>
-<p>Continuous benchmarking is run on every commit to detect performance regressions in DuckDB. The set of benchmarks that are run on every commit can be found <a href="/benchmarks/index.html">here</a>.</p>
-
-<h2>Live Demo</h2>
-<p>We provide a <a href="https://duckdbdemo.project.cwi.nl">live demo of DuckDB</a>.</p>
-
-<h2>Projects using DuckDB</h2>
-<p>Here are some projects that we know of that use DuckDB. If you would like your project to be added here, open a GitHub issue.</p>
-<ul>
-<li><a href="https://CRAN.R-project.org/package=taxadb">taxadb: A High-Performance Local Taxonomic Database Interface</a></li>
-<li><a href="https://github.com/ankoh/duckdb.js">duckdb.js - DuckDB compiled to JavaScript (PoC)</a></li>
-<li><a href="https://github.com/phillc73/duckdf">SQL for R dataframes with DuckDB</a></li>
-
-<li><a href="https://github.com/marcboeker/go-duckdb">DuckDB bindings for Go</a></li>
-<li><a href="https://github.com/suketa/ruby-duckdb">DuckDB bindings for Ruby</a></li>
-<li><a href="https://github.com/RelationalAI-oss/DuckDB.jl">DuckDB bindings for Julia</a></li>
-<li><a href="https://github.com/conda-forge/python-duckdb-feedstock">DuckDB conda support</a></li>
 
 
+<section>
+	<div class="welcome">
+		<h1>DuckDB is an embeddable SQL <nobr>OLAP database</nobr> management system</h1>
+		<div class="mainlinks">
+			<ul>
+				<a href="#quickinstall"><li class="highlighted">Installation <span class="duckdbsymbol">&#x2193;</span> </li></a>
+				<a href="docs/"><li>Documentation</li></a>
+				<a href="demo/"><li>Live Demo</li></a>
+			</ul>
+		</div>
+	</div>
+</section>
 
 
-</ul>
+<section>
+	<div class="wrap">
+		
+		<div class="whyduckdb">
+		
+			<h2>Why DuckDB?</h2>
+			
+			<div class="boxlayout">
+				<div class="box">
+					<div>
+						<div class="icon"><span class="duckdbsymbol">&#xE100;</span></div>
+					</div>
+					<div>
+						<h3>Simple</h3>
+						<ul>
+							<li>In-process, embedded</li>
+							<li>C++11, no dependencies, single file build</li>
+							<li>APIs for Python/R/Java/…</li>
+						</ul>
+						<span class="duckdbsymbol">&#x2192;</span> <a href="{{ site.url }}{{ site.baseurl }}/docs/why_duckdb.html#duckdbissimple">more</a>
+					</div>
+				</div>
+			
+				<div class="box">
+					<div>
+						<div class="icon"><span class="duckdbsymbol">&#xE200;</span></div>
+					</div>
+					<div>
+						<h3>Feature-rich</h3>
+						<ul>
+							<li>Transactions, persistence</li>
+							<li>Extensive SQL support
+							<!-- 	<ul>
+									<li>Joins, aggregates, window functions</li>
+								</ul> -->
+							</li>
+<!--							<li>Runs on Windows, Linux, macOS, OpenBSD, Solaris, …</li> -->
+						</ul>
+						<span class="duckdbsymbol">&#x2192;</span> <a href="{{ site.url }}{{ site.baseurl }}/docs/why_duckdb.html#duckdbisfeaturerich">more</a>
+					</div>
+				</div>
+				
+				<div class="box">
+					<div>
+						<div class="icon"><span class="duckdbsymbol">&#xE300;</span></div>
+					</div>
+					<div>
+						<h3>Fast</h3>
+						<ul>
+							<li>Vectorized engine</li>
+							<li>Optimized for analytics</li>
+						</ul>
+						<span class="duckdbsymbol">&#x2192;</span> <a href="{{ site.url }}{{ site.baseurl }}/docs/why_duckdb.html#duckdbisfast">more</a>
+					</div>
+				</div>
+				
+				<div class="box">
+					<div>
+						<div class="icon"><span class="duckdbsymbol">&#xE400;</span></div>
+					</div>
+					<div>
+						<h3>Free</h3>
+						<ul>
+							<li>Free &amp; Open Source</li>
+							<li>Permissive MIT License</li>
+						</ul>
+						<span class="duckdbsymbol">&#x2192;</span> <a href="{{ site.url }}{{ site.baseurl }}/docs/why_duckdb.html#duckdbisfree">more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</section>
+
+
+<section>
+	<div class="benefits">
+		<h1>All the benefits of a database, <nobr>none of the hassle.</nobr></h1>
+	</div>
+</section>
+
+<section id="quickinstall">
+	<div class="wrap install">
+		<h2>Installation</h2>
+		<p>Choose your environment to use for DuckDB</p>
+		<div class="environment">
+			<ul>
+				<li data-id="ver-python" class="active">Python</li>
+				<li data-id="ver-r">R</li>
+				<li data-id="ver-java">Java</li>
+				<li data-id="ver-cplusplus">C++</li>
+				<li data-id="ver-cli">CLI</li>
+			</ul>
+		</div>
+		<div class="result">
+			pip install duckdb
+		</div>
+		<p>
+			<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span> | 
+			<span class="systemdetected">System detected: </span> | 
+			<span><a href="docs/installation/">Other Installations</a></span>
+		</p>
+		
+		<div class="hidden">
+			<p class="ver-python">pip install duckdb=={{ site.currentduckdbversion }}</p>
+			<p class="ver-r">install.packages("duckdb", repos=c("http://download.duckdb.org/alias/master/rstats/", "http://cran.rstudio.com"))</p>
+			<p class="ver-java">
+			&lt;dependency&gt;<br>
+				&nbsp;&nbsp;&lt;groupId&gt;org.duckdb&lt;/groupId&gt;<br>
+				&nbsp;&nbsp;&lt;artifactId&gt;duckdb_jdbc&lt;/artifactId&gt;<br>
+				&nbsp;&nbsp;&lt;version&gt;{{ site.currentduckdbversion }}&lt;/version&gt;<br>
+				&lt;/dependency&gt;<br><br>
+				<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
+			</p>
+			<p class="ver-cplusplus"><a href="https://github.com/cwida/duckdb/releases/download/{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip">libduckdb-osx-amd64.zip</a></a></p>
+			<p class="ver-cli"><a href="https://github.com/cwida/duckdb/releases/download/{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip">duckdb_cli-osx-amd64.zip</a></p>
+		</div>
+		
+	</div>
+</section>
+
+<section>
+	<div class="wrap">
+		<div class="using">
+			<div class="box">
+				<h2>When to use DuckDB</h2>
+				<div class="icon">
+					<span class="duckdbsymbol">&#xE600;</span>
+				</div>
+				<div>
+					<ul>
+						<li>Processing and storing tabular datasets, e.g. from CSV or Parquet files</li>
+						<li>Interactive data analysis, e.g. Joining & aggregate multiple large tables</li>
+						<li>Concurrent large changes, to multiple large tables, e.g. appending rows, adding/removing/ updating columns</li>
+						<li>Large result set transfer to client</li>
+					</ul>
+				</div>
+			</div>
+			<div class="box">
+				<h2>When to not use DuckDB</h2>
+				<div class="icon">
+					<span class="duckdbsymbol">&#xE500;</span>
+				</div>
+				<div>
+					<ul>
+						<li>Non-rectangular data sets, e.g. graphs, plaintext</li>
+						<li>High-volume transactional use cases (e.g. tracking orders in a webshop)</li>
+						<li>Large client/server installations for centralized enterprise data warehousing</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	
+
+<!--
+<section>
+	<div class="wrap docu">
+		<h2>Documentation</h2>
+		<div class="boxlayout">
+			<div class="box">
+				<p>The Documentation provides in-depth instructions about DuckDB technical features and capabilities.</p>
+				<a href="{{ site.url }}{{ site.baseurl }}/faq/"><div class="button">FAQ</div></a>
+				<a href="{{ site.url }}{{ site.baseurl }}/docs/"><div class="button">Documentation</div></a>
+			</div>
+			
+			<div class="box">
+				<p>Quick access to beginner topics <span class="duckdbsymbol">&#8595;</span> </p>
+				<div class="quicklinks">
+					<div class="quickaccess">
+						<p>Tutorials</p>
+						<li><a href="{{ site.url }}{{ site.baseurl }}/docs/installation/">Installation</a></li>
+						<li><a href="{{ site.url }}{{ site.baseurl }}docs/data/import">Data Import</a></li>
+						<li><a href="{{ site.url }}{{ site.baseurl }}/docs/api/overview">Client APIs</a></li>
+					</div>
+					<div class="quickaccess">
+						<p>The SQL Language</p>
+						<li><a href="{{ site.url }}{{ site.baseurl }}/docs/sql/introduction/">Introduction</a></li>
+						<li><a href="{{ site.url }}{{ site.baseurl }}/docs/sql/statements/select/">Statements</a></li>
+						<li><a href="{{ site.url }}{{ site.baseurl }}/docs/sql/data_types/introduction/">Data Types</a></li>
+						<li><a href="{{ site.url }}{{ site.baseurl }}/docs/sql/expressions/introduction/">Expressions</a></li>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+-->
+
+
