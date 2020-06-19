@@ -26,4 +26,4 @@ CREATE TABLE strings(
 The `varchar` field allows storage of unicode characters. Internally, the data is encoded as UTF-8.
 
 ## Functions
-See [Character Functions](../../functions/char) and [Pattern Matching](../../functions/patternmatching)
+See [Character Functions](/docs/sql/functions/char) and [Pattern Matching](/docs/sql/functions/patternmatching)
