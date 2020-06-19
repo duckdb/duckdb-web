@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: TPC-H
 subtitle: Continuous Benchmarking
 selected: TPC-H
