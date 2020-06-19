@@ -1,0 +1,237 @@
+---
+layout: docu
+title: DuckDB Installation
+body_class: installation
+---
+
+
+<div class="yourselection">
+	
+	<div class="version select">
+		<h3>Version</h3>
+		<ul class="version">
+			<li class="selected" data-id=".latest">
+				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(Latest Release)</span></div>
+			</li>
+			<li data-id=".master">
+				<div>GitHub master <span class="versioninfo">(Bleeding Edge)</span></div>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="evironment select">
+		<h3>Environment</h3>
+		<ul class="environment">
+			<li class="selected" data-id=".python">Python</li>
+			<li data-id=".r">R</li>
+			<li data-id=".java">Java</li>
+			<li data-id=".cplusplus">C/C++</li>
+			<li data-id=".cli">CLI</li>
+		</ul>
+	</div>
+	
+
+	<div class="installer select inactive">
+		<h3>Package</h3>
+		<ul class="pack">
+			<li data-id=".source">Source</li>
+			<li data-id=".binary">Binary</li>
+		</ul>
+	</div>
+	
+	<div class="platform select inactive">
+		<h3>Platform</h3>
+		<ul class="platform">
+			<li data-id=".win">Windows</li>
+			<li data-id=".macos">macOS</li>
+			<li data-id=".linux">Linux</li>
+		</ul>
+	</div>
+	
+
+	<div class="installartion output">
+		<h3>Installation</h3>
+		<div class="result" id="resultselection">
+			{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
+		</div>
+
+
+	</div>
+	
+	<div class="example output">
+		<h3>Example</h3>
+		<div class="result">
+{% highlight sql %}
+-- After installation, DuckDB can be used as follows
+import duckdb
+cursor = duckdb.connect(':memory:').cursor()
+print(cursor.execute('SELECT 42').fetchall())
+{% endhighlight %}
+		</div>
+	</div>
+	
+</div>
+
+
+<div class="possibleresults">
+	
+	<!-- Empty Results -->
+	<div class="latest master cplusplus"></div>
+	<div class="latest master cli"></div>
+	<div class="latest master cplusplus binary"></div>
+	<div class="latest master cli binary"></div>
+	<!-- End Empty Results -->
+	
+	
+	<div class="latest python">
+		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
+	</div>
+	
+	<div class="latest r">
+		{% highlight bash %}install.packages("duckdb", repos=c("http://download.duckdb.org/alias/v{{ site.currentduckdbversion }}/rstats/", "http://cran.rstudio.com")){% endhighlight %}
+	</div>
+	
+	<div class="latest java">
+{% highlight java %}
+<dependency>
+ <groupId>org.duckdb</groupId>
+ <artifactId>duckdb_jdbc</artifactId>
+ <version>{{ site.currentduckdbversion }}</version>
+</dependency>{% endhighlight %}
+	</div>
+	
+	<div class="latest cplusplus source">
+		<a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-src.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-src.zip</a>
+	</div>
+	
+	<div class="latest cli source">
+		coming soon
+	</div>
+	
+	<div class="latest cplusplus binary macos">
+		<a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip</a>
+	</div>
+	
+	<div class="latest cplusplus binary linux">
+		<a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip</a>
+	</div>
+	
+	<div class="latest cplusplus binary win">
+		Win 64 Bit: <a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip</a><br/><br/>
+		Win 32 Bit: <a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-i386.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-i386.zip</a>
+	</div>
+	
+	<div class="latest cli binary macos">
+		<a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip</a>
+	</div>
+	
+	<div class="latest cli binary linux">
+		<a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
+	</div>
+	
+	<div class="latest cli binary win">
+		Win 64 Bit: <a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a><br/><br/>
+		Win 32 Bit: <a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-i386.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-i386.zip</a>
+	</div>
+	
+	<div class="master python">
+		{% highlight bash %}pip install duckdb --pre --upgrade{% endhighlight %}
+	</div>
+	
+	<div class="master r">
+		{% highlight bash %}install.packages("duckdb", repos=c("http://download.duckdb.org/alias/master/rstats/", "http://cran.rstudio.com")){% endhighlight %}
+	</div>
+	
+	<div class="master java">
+		coming soon
+	</div>
+	
+	
+	<div class="master cplusplus source">
+		<a href="https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-src.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-src.zip</a>
+	</div>
+	
+	<div class="master cli source">
+		coming soon
+	</div>
+	
+	<div class="master cplusplus binary macos">
+		<a href="https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-osx-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-osx-amd64.zip</a>
+	</div>
+	
+	<div class="master cplusplus binary linux">
+		<a href="https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-linux-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-linux-amd64.zip</a>
+	</div>
+	
+	<div class="master cplusplus binary win">
+		Win 32 Bit: <a href="https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-windows-i386.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-windows-i386.zip</a><br/><br/>
+		Win 64 Bit: <a href="https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-windows-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-windows-amd64.zip</a>
+	</div>
+	
+	<div class="master cli binary macos">
+		<a href="https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-osx-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-osx-amd64.zip</a>
+	</div>
+	
+	<div class="master cli binary linux">
+		<a href="https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-linux-amd64.zip</a>
+	</div>
+	
+	<div class="master cli binary win">
+		Win 64 Bit: <a href="https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-windows-amd64.zip</a><br/><br/>
+		Win 32 Bit: <a href="https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-windows-i386.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/duckdb_cli-windows-i386.zip</a>
+	</div>
+	
+	
+	
+	
+	
+	
+	<div class="example python">
+{% highlight sql %}
+-- After installation, DuckDB can be used as follows
+import duckdb
+cursor = duckdb.connect(':memory:').cursor()
+print(cursor.execute('SELECT 42').fetchall())
+{% endhighlight %}
+	</div>
+	
+	<div class="example r">
+{% highlight sql %}
+-- After installation, DuckDB can be used as follows
+library("DBI")
+con <- dbConnect(duckdb::duckdb(), ":memory:")
+dbWriteTable(con, "iris", iris)
+dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"')
+{% endhighlight %}
+	</div>
+	
+	<div class="example java">
+{% highlight sql %}
+-- After installation, DuckDB can be used as follows
+coming soon
+{% endhighlight %}
+	</div>
+	
+	<div class="example cplusplus">
+{% highlight sql %}
+-- After installation, DuckDB can be used as follows
+coming soon
+{% endhighlight %}
+	</div>
+	
+	<div class="example cli">
+{% highlight sql %}
+-- After installation, DuckDB can be used as follows
+coming soon
+{% endhighlight %}
+	</div>
+	
+</div>
+
+<!--
+<h1>Embedding</h1>
+<p> As DuckDB is an embedded database, there is no database server to launch or client to connect to a running server. However, the database server can be embedded directly into an application using the C or C++ bindings. The main build process creates the shared library build/release/src/libduckdb.[so|dylib|dll] that can be linked against. A static library is built as well.
+
+For examples on how to embed DuckDB into your application, see the examples folder in the repository.</p>
+
+-->

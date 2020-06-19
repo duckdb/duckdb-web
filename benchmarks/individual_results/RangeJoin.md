@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: RangeJoin
 subtitle: Continuous Benchmarking
 selected: Micro

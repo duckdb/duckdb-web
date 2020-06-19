@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: ExpressionReorderingH28
 subtitle: Continuous Benchmarking
 selected: Expression_Reordering

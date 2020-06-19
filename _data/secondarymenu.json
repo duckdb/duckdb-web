@@ -1,0 +1,47 @@
+{
+  "toc2": [
+    {
+      "title": "Main",
+      "mainfolderitems": [
+        {
+          "page": "Documentation",
+          "url": "/docs/",
+          "subfolderitems": [
+            {
+              "page": "Installation",
+              "url": "/docs/installation/"
+            },
+            {
+              "page": "Data Import",
+              "url": "/docs/data/import"
+            },
+            {
+              "page": "Client APIs",
+              "url": "/docs/api/python"
+            },
+            {
+              "page": "SQL",
+              "url": "/docs/sql/introduction"
+            },
+            {
+              "page": "Why DuckDB",
+              "url": "/docs/why_duckdb"
+            },
+            {
+              "page": "FAQ",
+              "url": "/docs/faq"
+            },
+          ]
+        },
+        {
+          "page": "GitHub",
+          "url": "https://github.com/cwida/duckdb"
+        },
+        {
+          "page": "Contributing",
+          "url": "https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md"
+        }
+      ]
+    }
+  ]
+}

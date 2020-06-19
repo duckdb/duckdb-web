@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: TPCHSimpleAggr
 subtitle: Continuous Benchmarking
 selected: Startup

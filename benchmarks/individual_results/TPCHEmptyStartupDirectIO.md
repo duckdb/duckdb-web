@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: TPCHEmptyStartupDirectIO
 subtitle: Continuous Benchmarking
 selected: Startup

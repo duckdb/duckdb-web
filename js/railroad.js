@@ -1126,7 +1126,7 @@ and can be changed before creating a DiagramNode.
 		Path(x+gaps[0]+this.width,y).h(gaps[1]).addTo(this);
 		x += gaps[0];
 
-		FakeSVG('rect', {x:x, y:y-11, width:this.width, height:this.up+this.down, rx:10, ry:10}).addTo(this);
+		FakeSVG('rect', {x:x, y:y-11, width:this.width, height:this.up+this.down, rx:7, ry:7}).addTo(this);
 		var text = FakeSVG('text', {x:x+this.width/2, y:y+4}, this.text);
 		if(this.href)
 			FakeSVG('a', {'xlink:href': this.href}, [text]).addTo(this);

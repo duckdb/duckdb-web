@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: TPCHQ1IntKeys
 subtitle: Continuous Benchmarking
 selected: Aggregate
