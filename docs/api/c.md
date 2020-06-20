@@ -95,7 +95,7 @@ duckdb_destroy_result(&result);
 duckdb_destroy_prepare(&stmt);
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../../data/import) for better options.
+> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/import) for better options.
 
 
 
