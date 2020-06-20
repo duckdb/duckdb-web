@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: CSV
 subtitle: Continuous Benchmarking
 selected: CSV
