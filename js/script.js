@@ -71,7 +71,7 @@ $(document).ready(function(){
 			$('.platform.select ul li.selected').removeClass('selected');	
 			userSelection.platform = "";
 		}
-		if ( userSelection.environment == ".cplusplus" && $('.installer.select ul li.selected').length == 0){
+		if ( userSelection.environment == ".cplusplus" && $('.installer.select ul li.selected').length == 0 || userSelection.environment == ".cli" && $('.installer.select ul li.selected').length == 0){
 			$('.installer.select ul li[data-id=".binary"').addClass('selected');
 			$('.platform.select ul li[data-id="'+OSdatid+'"').addClass('selected');
 			userSelection.pack = ".binary";
