@@ -4,7 +4,7 @@ title: C API
 selected: Client APIs
 ---
 ## Installation
-The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page](/docs/installation?environment=cplusplus) for details.
 
 ## Basic API Usage
 DuckDB implements a custom C API modelled somewhat following the SQLite C API. See [duckdb.h](https://github.com/cwida/duckdb/blob/master/src/include/duckdb.h) for the full API definition.

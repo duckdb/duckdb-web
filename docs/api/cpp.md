@@ -4,7 +4,7 @@ title: C++ API
 selected: C++
 ---
 ## Installation
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../../installation#ENV_C) for details.
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](/docs/installation?environment=cplusplus) for details.
 
 ## Basic API Usage
 DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
