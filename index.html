@@ -117,7 +117,7 @@ body_class: landing nowrap
 			</ul>
 		</div>
 		<div class="result">
-			pip install duckdb
+			pip install duckdb=={{ site.currentduckdbversion }}
 		</div>
 		<p>
 			<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span> | 
@@ -127,7 +127,7 @@ body_class: landing nowrap
 		
 		<div class="hidden">
 			<p class="ver-python">pip install duckdb=={{ site.currentduckdbversion }}</p>
-			<p class="ver-r">install.packages("duckdb", repos=c("http://download.duckdb.org/alias/master/rstats/", "http://cran.rstudio.com"))</p>
+			<p class="ver-r">install.packages("duckdb", repos=c("http://download.duckdb.org/alias/v{{ site.currentduckdbversion }}/rstats/", "http://cran.rstudio.com"))</p>
 			<p class="ver-java">
 			&lt;dependency&gt;<br>
 				&nbsp;&nbsp;&lt;groupId&gt;org.duckdb&lt;/groupId&gt;<br>
@@ -136,8 +136,8 @@ body_class: landing nowrap
 				&lt;/dependency&gt;<br><br>
 				<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
 			</p>
-			<p class="ver-cplusplus"><a href="https://github.com/cwida/duckdb/releases/download/{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip">libduckdb-osx-amd64.zip</a></a></p>
-			<p class="ver-cli"><a href="https://github.com/cwida/duckdb/releases/download/{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip">duckdb_cli-osx-amd64.zip</a></p>
+			<p class="ver-cplusplus"><a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip">libduckdb-osx-amd64.zip</a></a></p>
+			<p class="ver-cli"><a href="https://github.com/cwida/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip">duckdb_cli-osx-amd64.zip</a></p>
 		</div>
 		
 	</div>
