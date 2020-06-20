@@ -7,7 +7,9 @@ selected: Client APIs
 The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page](/docs/installation?environment=cplusplus) for details.
 
 ## Basic API Usage
-DuckDB implements a custom C API modelled somewhat following the SQLite C API. See [duckdb.h](https://github.com/cwida/duckdb/blob/master/src/include/duckdb.h) for the full API definition.
+DuckDB implements a custom C API modelled somewhat following the SQLite C API. See [duckdb.h](https://github.com/cwida/duckdb/blob/master/src/include/duckdb.h) for the full API definition. 
+
+We also provide a SQLite API wrapper which means that if your applications is programmed against the SQLite C API, you can re-link to DuckDB and it should continue working. See the [`sqlite_api_wrapper`](https://github.com/cwida/duckdb/tree/master/tools/sqlite3_api_wrapper) folder in our source repository for more information. 
 
 ### Startup & Shutdown
 
@@ -95,7 +97,7 @@ duckdb_destroy_result(&result);
 duckdb_destroy_prepare(&stmt);
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/import) for better options.
+> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/overview) for better options.
 
 
 

@@ -59,14 +59,12 @@ body_class: installation
 	</div>
 	
 	<div class="example output">
-		<h3>Example</h3>
+		<h3>Usage Example</h3>
 		<div class="result">
-{% highlight sql %}
--- After installation, DuckDB can be used as follows
+{% highlight python %}
 import duckdb
-cursor = duckdb.connect(':memory:').cursor()
-print(cursor.execute('SELECT 42').fetchall())
-{% endhighlight %}
+cursor = duckdb.connect()
+print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		</div>
 	</div>
 	
@@ -186,44 +184,41 @@ print(cursor.execute('SELECT 42').fetchall())
 	
 	
 	
+
 	<div class="example python">
-{% highlight sql %}
--- After installation, DuckDB can be used as follows
+{% highlight python %}
 import duckdb
-cursor = duckdb.connect(':memory:').cursor()
-print(cursor.execute('SELECT 42').fetchall())
-{% endhighlight %}
+cursor = duckdb.connect()
+print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 	
 	<div class="example r">
-{% highlight sql %}
--- After installation, DuckDB can be used as follows
+{% highlight R %}
 library("DBI")
-con <- dbConnect(duckdb::duckdb(), ":memory:")
+con = dbConnect(duckdb::duckdb(), ":memory:")
 dbWriteTable(con, "iris", iris)
-dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"')
-{% endhighlight %}
+dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"'){% endhighlight %}
 	</div>
 	
 	<div class="example java">
-{% highlight sql %}
--- After installation, DuckDB can be used as follows
-coming soon
-{% endhighlight %}
+{% highlight java %}
+Class.forName("org.duckdb.DuckDBDriver");
+Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.execute("SELECT 42");{% endhighlight %}
 	</div>
 	
 	<div class="example cplusplus">
-{% highlight sql %}
--- After installation, DuckDB can be used as follows
-coming soon
-{% endhighlight %}
+{% highlight cpp %}
+DuckDB db(nullptr);
+Connection con(db);
+auto result = con.Query("SELECT 42");
+result->Print();{% endhighlight %}
 	</div>
 	
 	<div class="example cli">
-{% highlight sql %}
--- After installation, DuckDB can be used as follows
-coming soon
-{% endhighlight %}
+{% highlight bash %}
+./duckdb{% endhighlight %}
 	</div>
 	
 </div>

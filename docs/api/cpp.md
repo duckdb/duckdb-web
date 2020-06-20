@@ -51,7 +51,7 @@ DuckDB also supports prepared statements in the C++ API with the `Prepare()` met
 // TODO
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/import) for better options.
+> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/overview) for better options.
 
 
 

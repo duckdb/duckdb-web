@@ -6,15 +6,18 @@ expanded: SQL
 ---
 Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
-In the examples that follow, we assume that you have installed DuckDB. See [here](/docs/installation/) for information on how to install DuckDB. You can launch the shell of DuckDB in the installation directory ``build/release/tools/shell/shell``. Launching the shell should give you the following prompt:
+In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See [here](/docs/installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
 
 ```
+SQLite version DuckDB cbf92c4
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
-duckdb>
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite>
 ```
 
-Note that by launching the database like this, an **in-memory database is launched**. That means that no data is persisted on disk. To persist data on disk you should also pass a database path to the shell. The database will then be stored at that path and can be reloaded from disk later.
+
+> By launching the database like this, an **in-memory database is launched**. That means that no data is persisted on disk. To persist data on disk you should also pass a database path to the shell. The database will then be stored at that path and can be reloaded from disk later. Also please don't be confused that it says "SQLite" in the shell, we re-used SQLite's shell as-is and only replaced the backend with DuckDB.
 
 # Concepts
 DuckDB is a relational database management system (RDBMS). That means it is a system for managing data stored in relations. A relation is essentially a mathematical term for a table.
@@ -98,7 +101,7 @@ You could also have used `COPY` to load large amounts of data from CSV files. Th
 COPY weather FROM '/home/user/weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. You can read more about the `COPY` command in [COPY](/docs/sql/statements/copy). 
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](/docs/data/import) for more information.
 
 # Querying a Table
 To retrieve data from a table, the table is queried. A SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table weather, type:
