@@ -13,11 +13,11 @@
             },
             {
               "page": "Data Import",
-              "url": "/docs/data/import"
+              "url": "/docs/data/overview"
             },
             {
               "page": "Client APIs",
-              "url": "/docs/api/python"
+              "url": "/docs/api/overview"
             },
             {
               "page": "SQL",
