@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: Cast
 subtitle: Continuous Benchmarking
 selected: Cast
