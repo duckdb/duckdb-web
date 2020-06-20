@@ -69,9 +69,6 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [taxadb: A High-Performance Local Taxonomic Database Interface](https://CRAN.R-project.org/package=taxadb)
 * [duckdb.js - DuckDB compiled to JavaScript (PoC)](https://github.com/ankoh/duckdb.js)
 * [SQL for R dataframes with DuckDB](https://github.com/phillc73/duckdf)
-* [DuckDB bindings for Go](https://github.com/marcboeker/go-duckdb)
-* [DuckDB bindings for Ruby](https://github.com/suketa/ruby-duckdb)
-* [DuckDB bindings for Julia](https://github.com/RelationalAI-oss/DuckDB.jl)
 * [DuckDB conda support](https://github.com/conda-forge/python-duckdb-feedstock)
 
 
@@ -91,5 +88,6 @@ DuckDB uses some components from various Open-Source projects and draws inspirat
 * **UTF Wrangling:** DuckDB uses the [utf8proc](https://juliastrings.github.io/utf8proc/) library to check and normalize UTF8. 
 * **Test Framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test Cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
+* **Result Validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
 * **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) to generate random queries for additional testing.
 
