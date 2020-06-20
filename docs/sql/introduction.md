@@ -101,7 +101,7 @@ You could also have used `COPY` to load large amounts of data from CSV files. Th
 COPY weather FROM '/home/user/weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](/docs/data/import) for more information.
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](/docs/data/overview) for more information.
 
 # Querying a Table
 To retrieve data from a table, the table is queried. A SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table weather, type:
