@@ -10,7 +10,7 @@ There are many database management systems (DBMS) out there. But there is [no on
 
 <div class="headline" id="duckdbisfast">
 	<div class="icon"><span class="duckdbsymbol">&#xE300;</span></div>
-	<h1>Fast OLAP</h1>
+	<h1>Fast Analytical Queries</h1>
 </div>
 DuckDB is designed to support **analytical query workloads**, also known as [Online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing). These workloads are characterized by complex, relatively long-running queries that process significant portions of the stored dataset, for example aggregations over entire tables or joins between several large tables. Changes to the data are expected to be rather large-scale as well, with several rows being appended, or large portions of tables being changed or added at the same time. 
 
