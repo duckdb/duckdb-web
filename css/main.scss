@@ -769,7 +769,8 @@ body.landing{
 				-o-transition: color .3s;
 				transition: color .3s;
 				&:hover{
-					color: $duckDByellow;					
+					color: black;
+					background-color: $duckDByellow;
 				}
 			}
 		}
