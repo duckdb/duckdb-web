@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: Micro
 subtitle: Continuous Benchmarking
 selected: Micro

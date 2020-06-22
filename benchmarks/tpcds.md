@@ -1,5 +1,5 @@
 ---
-layout: docu
+layout: default
 title: TPC-DS
 subtitle: Continuous Benchmarking
 selected: TPC-DS
