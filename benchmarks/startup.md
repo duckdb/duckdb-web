@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: Startup
 subtitle: Continuous Benchmarking
 selected: Startup
