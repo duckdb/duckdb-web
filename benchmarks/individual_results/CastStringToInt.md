@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: CastStringToInt
 subtitle: Continuous Benchmarking
 selected: Cast

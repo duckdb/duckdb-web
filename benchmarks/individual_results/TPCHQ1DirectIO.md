@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: TPCHQ1DirectIO
 subtitle: Continuous Benchmarking
 selected: Startup

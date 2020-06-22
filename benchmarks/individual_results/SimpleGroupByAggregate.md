@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: SimpleGroupByAggregate
 subtitle: Continuous Benchmarking
 selected: Aggregate

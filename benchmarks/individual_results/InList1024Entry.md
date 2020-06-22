@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: InList1024Entry
 subtitle: Continuous Benchmarking
 selected: In

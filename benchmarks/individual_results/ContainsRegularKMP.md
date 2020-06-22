@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: ContainsRegularKMP
 subtitle: Continuous Benchmarking
 selected: Contains_Tpch

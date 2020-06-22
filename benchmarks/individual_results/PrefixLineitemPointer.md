@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: PrefixLineitemPointer
 subtitle: Continuous Benchmarking
 selected: Prefix_Tpch

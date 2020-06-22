@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: TPCHSimpleAggrDirectIO
 subtitle: Continuous Benchmarking
 selected: Startup

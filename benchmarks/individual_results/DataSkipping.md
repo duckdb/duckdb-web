@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: DataSkipping
 subtitle: Continuous Benchmarking
 selected: Micro
