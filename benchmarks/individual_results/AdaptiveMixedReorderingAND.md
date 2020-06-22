@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: AdaptiveMixedReorderingAND
 subtitle: Continuous Benchmarking
 selected: Expression_Reordering

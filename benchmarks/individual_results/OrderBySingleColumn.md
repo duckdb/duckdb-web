@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: OrderBySingleColumn
 subtitle: Continuous Benchmarking
 selected: Micro

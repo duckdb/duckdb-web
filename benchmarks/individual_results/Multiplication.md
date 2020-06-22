@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: Multiplication
 subtitle: Continuous Benchmarking
 selected: Micro

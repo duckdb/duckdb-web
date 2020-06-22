@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: LineitemGroupAggregate
 subtitle: Continuous Benchmarking
 selected: Aggregate

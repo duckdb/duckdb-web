@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: IndexCreationBaseline
 subtitle: Continuous Benchmarking
 selected: Micro
