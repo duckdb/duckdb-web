@@ -359,7 +359,7 @@ def create_html(database):
 		with open(os.path.join('benchmarks', 'individual_results', benchmark_name + '.md'), 'w+') as f:
 			pretty_name = get_group_name(groupname)
 			f.write("""---
-layout: default
+layout: docu
 title: %s
 subtitle: Continuous Benchmarking
 selected: %s
