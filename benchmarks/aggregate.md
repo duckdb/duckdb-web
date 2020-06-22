@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: Aggregate
 subtitle: Continuous Benchmarking
 selected: Aggregate
