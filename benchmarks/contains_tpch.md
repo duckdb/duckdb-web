@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: docu
 title: Contains_Tpch
 subtitle: Continuous Benchmarking
 selected: Contains_Tpch
