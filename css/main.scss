@@ -330,24 +330,12 @@ main{
 	}
 }
 
-.scrolltop{
-	width: 100%;
-	text-align: center;
-	font-size: 16px;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	-webkit-transition: color .3s;
-	-o-transition: color .3s;
-	transition: color .3s;
-	cursor: pointer;
-	&:hover{
-		color: $duckDByellow;
-	}
-}
+
 
 footer{
 	.sitefooter{
-		background-color: darken($duckDBlightgrey,2);
+		background-color: black;
+		color: white;
 		.footercontent{
 			max-width: calc(100% - 60px);
 			margin: 0 auto;
@@ -373,13 +361,13 @@ footer{
 					
 				}
 				a{
-					color: black;
+					color: white;
 					text-decoration: none;
-					-webkit-transition: background-color .3s;
-					-o-transition: background-color .3s;
-					transition: background-color .3s;
+					-webkit-transition: color .3s;
+					-o-transition: color .3s;
+					transition: color .3s;
 					&:hover{
-						background-color: $duckDByellow;
+						color: $duckDByellow;
 					}
 				}
 			}
@@ -389,10 +377,20 @@ footer{
 				font-weight: normal;
 				margin-top: 0px;
 			}
+			.scrolltop{
+				font-size: 16px;
+				-webkit-transition: color .3s;
+				-o-transition: color .3s;
+				transition: color .3s;
+				cursor: pointer;
+				&:hover{
+					color: $duckDByellow;
+				}
+			}
 			.gitbutton{
 				width: 200px;
 				height: 30px;
-				border: 1px solid black;
+				border: 1px solid white;
 				text-align: center;
 				line-height: 30px;
 				float: right;
@@ -400,17 +398,20 @@ footer{
 				    -ms-transform: translateY(50%);
 				        transform: translateY(50%);
 				position: relative;
-				-webkit-transition: background-color .3s;
-				-o-transition: background-color .3s;
-				transition: background-color .3s;
-				img{
-					height: 20px;
-					width: auto;
-					vertical-align: -4px;
-					margin-right: 10px;
-				}
+				-webkit-transition: color .3s, border-color .3s;
+				-o-transition: color .3s, border-color .3s;
+				transition: color .3s, border-color .3s;
 				&:hover{
-					background-color: $duckDByellow;
+					color: $duckDByellow;
+					border-color: $duckDByellow;
+				}
+				span{
+					margin-right: 10px;
+					font-size: 19px;
+					vertical-align: -3px;
+				}
+				a.externallink::after{
+					display: none!important;
 				}
 			}
 		}
