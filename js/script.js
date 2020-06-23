@@ -217,7 +217,7 @@ $(document).ready(function(){
     
     
     // Scroll Top Button 
-    $('div.scrolltop').click(function(){
+    $('.scrolltop').click(function(){
 	    $("html, body").animate({ scrollTop: 0 }, 600, 'swing');
 	    return false;
 	});
