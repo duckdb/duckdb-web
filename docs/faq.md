@@ -14,5 +14,9 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 ### Where do I find the DuckDB Logo?
 You can download the DuckDB Logo here: <br/> • Web: [png](/images/logo-dl/DuckDB_Logo.png) / [jpg](/images/logo-dl/DuckDB_Logo.jpg) <br/>  • Print: [svg](/images/logo-dl/DuckDB_Logo.svg) / [pdf](/images/logo-dl/DuckDB_Logo.pdf) <br/><br/>The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
+### How can I expand the DuckDB website?
+The DuckDB Website is hosted by GitHub pages, its repository is [here](
+https://github.com/cwida/duckdb-web). Pull requests to fix issues or generally expand the documentation section are very welcome.
+
 ### How is DuckDB related to MonetDB, MonetDBe or MonetDBLite?
 DuckDB is a new from-scratch development. There is no connection to MonetDB or MonetDBLite from an architectural perspective. We have borrowed ca. 200 lines of code related to date math however.
