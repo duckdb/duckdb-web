@@ -1,0 +1,66 @@
+matrix:
+  include:
+    - name: Python 3.7
+      os: linux
+      dist: bionic
+      language: python
+      python: 3.7
+
+      script:
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-python">([^<]+)</p>' | bash 
+        - python -c "import duckdb" 
+
+
+    - name: Python 2.7
+      os: linux
+      dist: bionic
+      language: python
+      python: 2.7
+
+      install:
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-python">([^<]+)</p>' | bash 
+
+      script:
+        - python -c "import duckdb" 
+
+
+    # - name: Python Package
+    #   os: windows
+    #   language: cpp
+
+    #   before_install:
+    #     - choco install python3 --version 3.7.3 --sidebyside -y --force --params "/InstallDir:C:\Python37-x64"
+    #     - setx path "%path%;C:\Python37-x64"
+
+    #   install:
+    #     - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-python">([^<]+)</p>' | bash 
+
+    #   script:
+    #     - python -c "import duckdb" 
+
+
+    - name: R Devel
+      os: linux
+      dist: bionic
+      language: r
+      r: devel
+
+      install: 
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-r">([^<]+)</p>' | R --no-save
+
+      script:
+        - R -e "library('duckdb')"
+
+
+    - name: R Devel
+      os: osx
+      osx_image: xcode11.5
+      language: r
+      r: devel
+
+      install: 
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-r">([^<]+)</p>' | R --no-save
+
+
+      script:
+        - R -e "library('duckdb')"
