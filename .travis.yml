@@ -1,32 +1,46 @@
 matrix:
   include:
-    - os: linux
+    - name: Python 3.7
+      os: linux
       dist: bionic
-      name: Linux Python 3.7
       language: python
       python: 3.7
 
       script:
-        - python scripts/test-instructions.py 'https://www.duckdb.org' '<div class="result">([^<]+)</div>' | bash 
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-python">([^<]+)</p>' | bash 
         - python -c "import duckdb" 
 
-    - os: linux
+
+    - name: Python 2.7
+      os: linux
       dist: bionic
-      name: Linux Python 2.7
       language: python
       python: 2.7
 
       script:
-        - python scripts/test-instructions.py 'https://www.duckdb.org' '<div class="result">([^<]+)</div>' | bash 
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-python">([^<]+)</p>' | bash 
         - python -c "import duckdb" 
 
 
-    - os: linux
-      name: Linux R Devel
-
+    - name: R Devel
+      os: linux
       dist: xenial
       language: r
       r: devel
+
+      script:
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-r">([^<]+)</p>' | R
+        - R -e "library('duckdb')"
+
+
+    - name: R Devel
+      os: osx
+      osx_image: xcode11.5
+      language: r
+      r: devel
+
+      install:
+        true
 
       script:
         - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-r">([^<]+)</p>' | R
