@@ -1,0 +1,23 @@
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      name: Linux Python 3.7
+      language: python
+      python: 3.7
+
+      script:
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<div class="result">([^<]+)</div>' | bash 
+        - python -c "import duckdb" 
+
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      name: Linux Python 2.7
+      language: python
+      python: 2.7
+
+      script:
+        - python scripts/test-instructions.py 'https://www.duckdb.org' '<div class="result">([^<]+)</div>' | bash 
+        - python -c "import duckdb" 
