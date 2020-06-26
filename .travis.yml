@@ -28,6 +28,8 @@ matrix:
       language: r
       r: devel
 
+      install: true
+
       script:
         - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-r">([^<]+)</p>' | R
         - R -e "library('duckdb')"
@@ -39,8 +41,7 @@ matrix:
       language: r
       r: devel
 
-      install:
-        true
+      install: true
 
       script:
         - python scripts/test-instructions.py 'https://www.duckdb.org' '<p class="ver-r">([^<]+)</p>' | R
