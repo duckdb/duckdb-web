@@ -12,4 +12,4 @@ The layout of documentation pages is "docu", the layout of the landing page is "
 ### 2. Values: "selected" & "expanded"
 If you create a new page, please make sure to define the "selected:" & "expanded:" value in the beginning of the Markdown file.
 
-
+### 3. Menu
