@@ -1,4 +1,4 @@
-# Readme
+# duckdb-web
 
 ## Layout
 The layout of documentation pages is "docu", the layout of the landing page is "default". 
