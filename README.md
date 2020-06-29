@@ -1,7 +1,7 @@
 # duckdb-web
 
 ## Notes
-Notes are visualized in light blue boxes. To create a note use the ">" (Quote) in Markdown.
+Notes are highlighted as light blue boxes. To create a note use the ">" (Quote) in Markdown.
 The Headline will be added automatically.
 
 ## Adding Pages
