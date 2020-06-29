@@ -9,4 +9,3 @@ The Headline "Note" will be added automatically.
 
 ## Side-Menu
 If you create a new page, please make sure to define the "selected:" & "expanded:" value in the beginning of the Markdown file.
-
