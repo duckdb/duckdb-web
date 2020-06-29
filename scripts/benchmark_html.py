@@ -425,7 +425,7 @@ benchmark: /individual_results/%s.html
 		out_html = os.path.join('_includes', 'benchmark_results', normalized_group + '.html')
 		with open(os.path.join('benchmarks', normalized_group + '.md'), 'w+') as f:
 			f.write("""---
-layout: default
+layout: docu
 title: %s
 subtitle: Continuous Benchmarking
 selected: %s
