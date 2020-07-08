@@ -1,3 +1,9 @@
+#rrdiagram1 + p,
+#rrdiagram2 + p,
+#rrdiagram3 + p,
+#rrdiagram4 + p{
+	margin-top: 0;
+}
 .railroad-diagram svg {
 	background-color: hsla(0, 0%, 100%, 1);
 }

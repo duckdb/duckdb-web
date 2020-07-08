@@ -230,4 +230,17 @@
 	body.landing .welcome .mainlinks ul{
 		margin-top: 60px;
 	}
+	footer .sitefooter .footercontent > div:last-of-type{
+		width: 50%;
+	}
+	footer .sitefooter .footercontent .gitbutton{
+		width: 92%;
+	}
+	.footercontent .duckdbsymbol.cwi{
+		margin-top: 15px;
+		transform: translate(40px, 54px);
+	}
+	footer .sitefooter .footercontent > div{
+		overflow: visible;
+	}
 }
