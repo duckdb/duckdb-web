@@ -394,9 +394,9 @@ footer{
 				text-align: center;
 				line-height: 30px;
 				float: right;
-				-webkit-transform: translateY(50%);
-				    -ms-transform: translateY(50%);
-				        transform: translateY(50%);
+				-webkit-transform: translateY(46%);
+				    -ms-transform: translateY(46%);
+				        transform: translateY(46%);
 				position: relative;
 				-webkit-transition: color .3s, border-color .3s;
 				-o-transition: color .3s, border-color .3s;
@@ -413,6 +413,10 @@ footer{
 				a.externallink::after{
 					display: none!important;
 				}
+			}
+			.cwi{
+				font-size: 31px;
+				margin-top: 11px;
 			}
 		}
 	}

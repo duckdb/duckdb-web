@@ -292,6 +292,7 @@ $(document).ready(function(){
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
 	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
+	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	
 
 });
