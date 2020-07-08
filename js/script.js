@@ -249,12 +249,6 @@ $(document).ready(function(){
 	$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseenter(function() {
 		animationduckDBicon.play();
 		animationduckDBicon.setDirection(1)
-		/*
-		animationduckDBicon.onComplete = function() {
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(1)
-		}
-		*/
 	})
 	
 	if ($('.wrap.livedemo').length =! 0){
@@ -296,26 +290,8 @@ $(document).ready(function(){
 	// Add class-name to external Links
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
-	}).addClass("externallink");
+	}).addClass("externallink").attr('target','_blank');
 	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
 	
-	//console.log(window.location.hostname)
-	
-	// IMAGE FIX NUR FÜR JETZT!
-	/*
-	$('#main_content_wrap img').each(function() {
-    	var imgsrc = $(this).attr('src');
-		$(this).attr('src','/duckdb-web-new'+imgsrc);
-	});
-	*/
-	// LINK BECHNMARK FIX FÜR JETZT!
-	/*
-	$('#main_content_wrap table td a').each(function() {
-    	var ahref = $(this).attr('href');
-    	if (ahref.indexOf("https") < 0){
-			$(this).attr('href','/duckdb-web-new'+ahref);
-    	}
-	});
-	*/
 
 });
