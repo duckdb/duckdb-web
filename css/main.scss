@@ -764,15 +764,11 @@ body.landing{
 			font-family: $fontMono;
 			padding: 15px;
 			margin-top: 10px;
-			a{
-				text-decoration: none;
-				color: white;
-				background-color: black;
-				padding: 2px 30px;
-				font-family: $fontSans;
-				-webkit-transition: color .3s;
-				-o-transition: color .3s;
-				transition: color .3s;
+			font-size: 14px;
+			a{	
+				color: black;
+				background-color: white;
+				font-family: $fontMono;
 				&:hover{
 					color: black;
 					background-color: $duckDByellow;
