@@ -1,0 +1,31 @@
+Q12_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q12 SF1: select
+ l_shipmode,
+ sum(case
+ when o_orderpriority = '1-URGENT'
+ or o_orderpriority = '2-HIGH'
+ then 1
+ else 0
+ end) as high_line_count,
+ sum(case
+ when o_orderpriority <> '1-URGENT'
+ and o_orderpriority <> '2-HIGH'
+ then 1
+ else 0
+ end) as low_line_count
+from
+ orders,
+ lineitem
+where
+ o_orderkey = l_orderkey
+ and l_shipmode in ('MAIL', 'SHIP')
+ and l_commitdate < l_receiptdate
+ and l_shipdate < l_commitdate
+ and l_receiptdate >= cast('1994-01-01' as date)
+ and l_receiptdate < cast('1995-01-01' as date)
+group by
+ l_shipmode
+order by
+ l_shipmode;<img src="/images/graphs/Q12_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.31</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q12_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q12_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q12_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.30</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q12_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q12_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q12_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>

@@ -1,0 +1,23 @@
+Q13_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q13 SF1: select
+ c_count,
+ count(*) as custdist
+from
+ (
+ select
+ c_custkey,
+ count(o_orderkey)
+ from
+ customer left outer join orders on
+ c_custkey = o_custkey
+ and o_comment not like '%special%requests%'
+ group by
+ c_custkey
+ ) as c_orders (c_custkey, c_count)
+group by
+ c_count
+order by
+ custdist desc,
+ c_count desc;<img src="/images/graphs/Q13_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.54</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q13_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q13_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q13_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.53</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q13_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q13_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q13_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>

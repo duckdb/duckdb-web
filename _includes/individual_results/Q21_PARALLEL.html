@@ -1,0 +1,43 @@
+Q21_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q21 SF1: select
+ s_name,
+ count(*) as numwait
+from
+ supplier,
+ lineitem l1,
+ orders,
+ nation
+where
+ s_suppkey = l1.l_suppkey
+ and o_orderkey = l1.l_orderkey
+ and o_orderstatus = 'F'
+ and l1.l_receiptdate > l1.l_commitdate
+ and exists (
+ select
+ *
+ from
+ lineitem l2
+ where
+ l2.l_orderkey = l1.l_orderkey
+ and l2.l_suppkey <> l1.l_suppkey
+ )
+ and not exists (
+ select
+ *
+ from
+ lineitem l3
+ where
+ l3.l_orderkey = l1.l_orderkey
+ and l3.l_suppkey <> l1.l_suppkey
+ and l3.l_receiptdate > l3.l_commitdate
+ )
+ and s_nationkey = n_nationkey
+ and n_name = 'SAUDI ARABIA'
+group by
+ s_name
+order by
+ numwait desc,
+ s_name
+limit 100;<img src="/images/graphs/Q21_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.48</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q21_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q21_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q21_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.48</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q21_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q21_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q21_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>

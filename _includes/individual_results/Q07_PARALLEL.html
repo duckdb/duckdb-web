@@ -1,0 +1,42 @@
+Q07_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q7 SF1: select
+ supp_nation,
+ cust_nation,
+ l_year,
+ sum(volume) as revenue
+from
+ (
+ select
+ n1.n_name as supp_nation,
+ n2.n_name as cust_nation,
+ extract(year from l_shipdate) as l_year,
+ l_extendedprice * (1 - l_discount) as volume
+ from
+ supplier,
+ lineitem,
+ orders,
+ customer,
+ nation n1,
+ nation n2
+ where
+ s_suppkey = l_suppkey
+ and o_orderkey = l_orderkey
+ and c_custkey = o_custkey
+ and s_nationkey = n1.n_nationkey
+ and c_nationkey = n2.n_nationkey
+ and (
+ (n1.n_name = 'FRANCE' and n2.n_name = 'GERMANY')
+ or (n1.n_name = 'GERMANY' and n2.n_name = 'FRANCE')
+ )
+ and l_shipdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)
+ ) as shipping
+group by
+ supp_nation,
+ cust_nation,
+ l_year
+order by
+ supp_nation,
+ cust_nation,
+ l_year;<img src="/images/graphs/Q07_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.48</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q07_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q07_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q07_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.49</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q07_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q07_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q07_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>

@@ -1,0 +1,40 @@
+Q15_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q15 SF1: select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	(select
+		l_suppkey as supplier_no,
+		sum(l_extendedprice * (1 - l_discount)) as total_revenue
+	from
+		lineitem
+	where
+		l_shipdate >= cast('1996-01-01' as date)
+		and l_shipdate < cast('1996-04-01' as date)
+	group by
+		supplier_no) revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			(select
+		l_suppkey as supplier_no,
+		sum(l_extendedprice * (1 - l_discount)) as total_revenue
+	from
+		lineitem
+	where
+		l_shipdate >= cast('1996-01-01' as date)
+		and l_shipdate < cast('1996-04-01' as date)
+	group by
+		supplier_no) revenue1
+	)
+order by
+	s_suppkey;<img src="/images/graphs/Q15_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.11</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q15_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q15_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q15_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.12</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q15_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q15_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q15_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>

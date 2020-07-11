@@ -1,0 +1,40 @@
+Q22_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q22 SF1: select
+ cntrycode,
+ count(*) as numcust,
+ sum(c_acctbal) as totacctbal
+from
+ (
+ select
+ substring(c_phone from 1 for 2) as cntrycode,
+ c_acctbal
+ from
+ customer
+ where
+ substring(c_phone from 1 for 2) in
+ ('13', '31', '23', '29', '30', '18', '17')
+ and c_acctbal > (
+ select
+ avg(c_acctbal)
+ from
+ customer
+ where
+ c_acctbal > 0.00
+ and substring(c_phone from 1 for 2) in
+ ('13', '31', '23', '29', '30', '18', '17')
+ )
+ and not exists (
+ select
+ *
+ from
+ orders
+ where
+ o_custkey = c_custkey
+ )
+ ) as custsale
+group by
+ cntrycode
+order by
+ cntrycode;<img src="/images/graphs/Q22_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.06</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q22_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q22_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q22_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.06</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q22_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q22_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q22_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>

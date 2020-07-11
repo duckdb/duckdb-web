@@ -1,0 +1,40 @@
+Q08_PARALLEL - [tpch-sf1-parallel]
+TPC-H Q8 SF1: select
+ o_year,
+ sum(case
+ when nation = 'BRAZIL' then volume
+ else 0
+ end) / sum(volume) as mkt_share
+from
+ (
+ select
+ extract(year from o_orderdate) as o_year,
+ l_extendedprice * (1 - l_discount) as volume,
+ n2.n_name as nation
+ from
+ part,
+ supplier,
+ lineitem,
+ orders,
+ customer,
+ nation n1,
+ nation n2,
+ region
+ where
+ p_partkey = l_partkey
+ and s_suppkey = l_suppkey
+ and l_orderkey = o_orderkey
+ and o_custkey = c_custkey
+ and c_nationkey = n1.n_nationkey
+ and n1.n_regionkey = r_regionkey
+ and r_name = 'AMERICA'
+ and s_nationkey = n2.n_nationkey
+ and o_orderdate between cast('1995-01-01' as date) and cast('1996-12-31' as date)
+ and p_type = 'ECONOMY ANODIZED STEEL'
+ ) as all_nations
+group by
+ o_year
+order by
+ o_year;<img src="/images/graphs/Q08_PARALLEL.png"/><tr class="table-header"><th>Commit</th><th>Date</th><th>Result</th><th>Logs</th><th>Message</th></tr><tr class="table-even"><td><a href="https://github.com/cwida/duckdb/commit/ebd9140890d7de62962c570d516fe4d39ce363b6">ebd9</a></td><td>2020-07-10</td><td><b>0.30</b></td><td>[<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-graph.html?name=Q08_PARALLEL">Q</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stdout.html?name=Q08_PARALLEL">L</a>/<a href="/benchmarks/logs/ebd9140890d7de62962c570d516fe4d39ce363b6-stderr.html?name=Q08_PARALLEL">E</a>]</td><td>Merge pull request #747 from cwida/parallelism
+
+Basic Parallelism Support</td></tr><tr class="table-odd"><td><a href="https://github.com/cwida/duckdb/commit/9ae259da4bd8dae264ded3a250591b743193954e">9ae2</a></td><td>2020-07-10</td><td><b>0.30</b></td><td>[<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-graph.html?name=Q08_PARALLEL">Q</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stdout.html?name=Q08_PARALLEL">L</a>/<a href="/benchmarks/logs/9ae259da4bd8dae264ded3a250591b743193954e-stderr.html?name=Q08_PARALLEL">E</a>]</td><td>Merge branch 'master' into parallelism</td></tr>
