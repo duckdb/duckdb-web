@@ -52,7 +52,7 @@
                 {
                   "page": "Java",
                   "url": "/docs/api/java"
-                }, 
+                },
                 {
                   "page": "C",
                   "url": "/docs/api/c"
@@ -147,6 +147,10 @@
                     {
                       "page": "Timestamp",
                       "url": "/docs/sql/data_types/timestamp"
+                    },
+                    {
+                      "page": "Blob",
+                      "url": "/docs/sql/data_types/blob"
                     }
                   ]
                 },
@@ -209,7 +213,11 @@
                   {
                     "page": "Timestamp Functions",
                     "url": "/docs/sql/functions/timestamp"
-                  }
+                  },
+                  {
+                    "page": "Blob Functions",
+                    "url": "/docs/sql/functions/blob"
+                  },
                 ]
               },
               {
