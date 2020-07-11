@@ -10,6 +10,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 |:---|:---|:---|
 | bigint | int8 | signed eight-byte integer |
 | boolean | bool | logical boolean (true/false) |
+| blob | bytea | variable-length binary data |
 | date |   | calendar date (year, month day) |
 | double | numeric | double precision floating-point number (8 bytes) |
 | integer | int, int4, signed | signed four-byte integer |
