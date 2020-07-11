@@ -62,8 +62,6 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |
 
 
-> ## Notes
->
 > It is recommended that the file name used in COPY always be specified as an absolute path.
 >
 > The values in each record are separated by the `DELIMITER` string. If the value contains the `DELIMITER` string, the `QUOTE` string, the `NULL` string, a carriage return, or line feed character, then the whole value is prefixed and suffixed by the `QUOTE` string, and any occurrence within the value of a `QUOTE` string or the `ESCAPE` string is preceded by the `ESCAPE` string. You can also use `FORCE_QUOTE` to force quotes when outputting non-`NULL` values in specific columns.
