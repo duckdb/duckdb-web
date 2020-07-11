@@ -14,3 +14,4 @@ string,String
 suffix_tpch,Suffix_Tpch
 tpcds-sf1,TPC-DS
 tpch-sf1,TPC-H
+tpch-sf1-parallel,Tpch Sf1 Parallel
