@@ -77,7 +77,6 @@ p_stmt.execute();
 p_stmt.close();
 ```
 
-> #### Note: 
 > Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/overview) for better options.
 
 
