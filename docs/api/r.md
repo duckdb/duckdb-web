@@ -60,7 +60,6 @@ print(res)
 # 2 chainsaw
 ```
 
-> #### Note: 
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
