@@ -1429,6 +1429,17 @@ function GenerateOrderTerms(options) {
 			new Skip(),
 			Keyword("ASC"),
 			Keyword("DESC")
+		]),
+		Choice(0, [
+			Skip(),
+			Sequence([
+				Keyword("NULLS"),
+				Keyword("FIRST")
+			]),
+			Sequence([
+				Keyword("NULLS"),
+				Keyword("LAST")
+			])
 		])
 	]), ",")
 }
