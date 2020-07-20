@@ -61,6 +61,8 @@ DuckDB also supports prepared statements in the C++ API with the `Prepare()` met
 The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
 These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
 
+#### CreateScalarFunction
+
 The `CreateScalarFunction()` methods automatically creates vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
 
 **1.** `template<typename TR, typename... Args> void CreateScalarFunction(string name, TR (*udf_func)(Args…))`
@@ -133,7 +135,9 @@ con.Query("SELECT udf_date(d) FROM dates")->Print();
 
 ```
 
-The interdface of the `CreateVectorizedFunction()` methods is very similar to the `CreateScalarFunction()`, the main difference is in the second argument that instead of receiving a generic function pointer (i.e., TR (*udf_func)(Args…)), it receives a vectorized function pointer of the type _scalar_function_t_:
+#### CreateVectorizedFunction
+
+The interface of the `CreateVectorizedFunction()` methods is very similar to the `CreateScalarFunction()`, the main difference is in the second argument that instead of receiving a generic function pointer (i.e., TR (*udf_func)(Args…)), it receives a vectorized function pointer of the type _scalar_function_t_:
 
 `typedef std::function<void(DataChunk &input, ExpressionState &expr, Vector &result)> scalar_function_t;`
 
