@@ -284,6 +284,26 @@ $(document).ready(function(){
 	})
 	
 	
+	// Landingpage Animation
+	if( $("body.landing").length != 0 ){
+		let duckDBcircled = document.getElementById('duckdbdanimationcircled');	
+	    let animationduckDBcircled = lottie.loadAnimation({
+	            container: duckDBcircled,
+	            renderer: 'svg',
+	            loop: false,
+	            autoplay: false,
+	            path: "/js/duckdbanimation-circle.json"
+	    });
+		$('#duckdbdanimationcircled').mouseenter(function() {
+			animationduckDBcircled.play();
+			animationduckDBcircled.setDirection(1)
+		})
+		$('#duckdbdanimationcircled').mouseleave(function() {
+			animationduckDBcircled.play();
+			animationduckDBcircled.setDirection(-1)
+		})
+	}
+	
 	// Appending "Note" to Blockquote
 	$('body.documentation #main_content_wrap blockquote').each(function() {
 		$(this).prepend("<h4>Note</h4>");
