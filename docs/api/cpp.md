@@ -183,7 +183,7 @@ The Vectorized UDF is a pointer of the type _scalar_function_t_:
 
 - **args** is a [DataChunk](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length;
 - **expr** is an [ExpressionState](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state;
-- **result**: is a [Vector](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/vector.hpp)] to store the result values.
+- **result**: is a [Vector](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/vector.hpp) to store the result values.
 
 There are different vector types to handle in a Vectorized UDF:
 - ConstantVector;
