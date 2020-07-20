@@ -103,7 +103,24 @@ $(document).ready(function(){
 			evaluation();
 		}
 	}
-	
+
+	if($('.archivedposts').length != 0){ // If Archive Page
+		var year = getUrlParameter('year');
+		var month = getUrlParameter('month');
+		$('.postpreview').hide();
+		$('.postpreview[data-year="'+year+'"][data-month="'+month+'"]').show();
+		
+		$('.collapse.show').removeClass('show');
+		$('.card-header[data-year="'+year+'"]').next('.collapse ').addClass('show');
+		$('.list-group a[data-year="'+year+'"][data-month="'+month+'"]').addClass('selected');
+		console.log(year, month);
+	}
+	if($('.newsarchive').length != 0){ // If general Blog Page
+		$('.archivesAccordian .card-header').click(function(){
+			console.log('clicked')
+			$(this).next('.collapse').slideToggle();
+		})
+	}
 	
 	// Select Everything when Clicking on Result-Div
 	function SelectText(element) {

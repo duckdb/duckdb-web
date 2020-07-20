@@ -43,6 +43,11 @@
 	footer .sitefooter .footercontent .gitbutton{
 		width: 150px;
 	}
+	.newswrap .postwrap{
+		width: 100%;
+		padding: 15px;
+		box-sizing: border-box;
+	}
 }
 
 @media only screen and (max-width: 770px) {
@@ -208,6 +213,43 @@
 		main .wrap .limit-width{
 			width: 108%;
 		}
+	}
+	
+	/** NEWS **/
+	
+	.newswrap{
+		display: block;
+		.sidebar{
+			width: 100%;
+			/*
+			position: fixed;
+			right: 0;
+			width: 75%;
+			-webkit-transform: translateX(100%);
+			    -ms-transform: translateX(100%);
+			        transform: translateX(100%);
+			-webkit-transition: -webkit-transform .5s;
+			transition: -webkit-transform .5s;
+			-o-transition: transform .5s;
+			transition: transform .5s;
+			transition: transform .5s, -webkit-transform .5s;
+			padding-top: 14px;
+			&.slidein{
+				-webkit-transform: translateX(0%);
+				    -ms-transform: translateX(0%);
+				        transform: translateX(0%);
+			}
+			*/
+		}
+	}
+	.newswrap .postwrap .infoline span:first-child{
+		margin-right: 30px;
+	}
+	.newswrap .sidebar .newsarchive{
+		margin-top: 0px;
+	}
+	.newswrap .sidebar .latestnews{
+		display: none;
 	}
 }
 
