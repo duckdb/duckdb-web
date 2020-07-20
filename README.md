@@ -14,3 +14,19 @@ Please define the `selected:` & `expanded:` value in the beginning of the Markdo
 
 ### 3. Menu
 There are two menus on the website, both have a json file from which they are generated. `menu.json` (located in the `_data` folder) is the main menu on the documentation page, `secondarymenu.json` is the small hover. To add or remove or change the menu you need to make the appropriate changes in these json files. 
+
+## News
+
+To add a blog post, all you need is to add a new .md-file to folder `_posts`. 
+The file name pattern should be like this: `2020-07-20-my-blog-post.md`. 
+
+**Front matter** of a single post: 
+
+	---
+	layout: post  
+	title:  "Your Post Title"  
+	author: Max Mustermann  
+	excerpt_separator: <!--more-->
+	---
+	
+Include the excerpt_separator `<!--more-->` when you wish to end the post preview. 
