@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% if page.title == "DuckDB" %}
+    <title>{{ page.title }}</title>
+	{% else %}
+    <title>DuckDB - {{ page.title }}</title>
+	{% endif %}
+	
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/blog.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css">
+	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+	<link rel="stylesheet" href="/css/railroad.css">
+	{% endif %}
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="{{ site.baseurl }}/images/favicon/site.webmanifest">
+	<link rel="mask-icon" href="{{ site.baseurl }}/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<meta property="og:image" content="https://duckdb.org/images/sharingduckdb.jpg" />
+	{% if page.description %}
+	<meta name="description" content="{{page.description}}">
+	<meta property="og:description" content="{{page.description}}">
+	{% endif %}
+	
+</head>
+<body {% if page.body_class %} class="{{ page.body_class }}" {% endif %}>
+	
+	<header>
+		<div class="headerline">
+			<div class="headercontent">
+				<div class="duckdbhome">
+					<!--<a href="{{ site.url }}{{ site.baseurl }}/">&#xe900;</a>-->
+					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/DuckDB_Logo_dl.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
+					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
+				</div>
+				<div class="landingmenu">
+					<nav>
+						{% if site.data.secondarymenu.toc2[0] %}
+							{% for item in site.data.secondarymenu.toc2 %}
+							    {% if item.mainfolderitems[0] %}
+							    {% for mainentry in item.mainfolderitems %}
+							    {% if mainentry.subfolderitems[0] %} <div> {% endif %}
+							        {% if mainentry.subfolderitems[0] %} <div class="hasSub" > {% endif %}
+							            {% if mainentry.url %}
+							                {% assign myurl = mainentry.url | slice: 0, 5 %}
+							                {% if myurl == 'https' or myurl == 'http:' %}
+							                <div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a></div>
+							                {% else %}
+							                <div><a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a></div>
+							                {% endif %}
+							            {% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
+							       {% if mainentry.subfolderitems[0] %}  </div> {% endif %}
+							
+							        {% if mainentry.subfolderitems[0] %}
+							            <ul>
+							                {% for entry in mainentry.subfolderitems %}
+							                <li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
+							                {% if entry.subsubfolderitems[0] %}
+							                <ul>
+							                    {% for subentry in entry.subsubfolderitems %}
+							                    <li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
+							                    {% endfor %}
+							                </ul>
+							                {% endif %}
+							                </li>
+							                {% endfor %}
+							            </ul>
+							        {% endif %}
+							    {% if mainentry.subfolderitems[0] %} </div> {% endif %}
+							    {% endfor %}
+							    {% endif %}
+							{% endfor %}
+						{% endif %}
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		
+		<div class="newswrap">
+		
+			<div class="postwrap">
+				<div class="postcontent">
+					{% if page.layoutpart == "postsoverview" %}
+						{{ content }}
+					{% else %}
+						<div class="singleentry">
+							<div class="infoline"><span>{{ page.date | date_to_long_string }}</span><span>{{ page.author }}</span></div>
+							<h1>{{ page.title }}</h1>
+							{{ content }}
+							<a href="/news/" class="backtoarchive"><span class="duckdbsymbol">&#8592;</span> back to news archive</a>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			
+			<div class="sidebar">
+				
+				<div class="newsarchive">
+					<h1>Archive</h1>
+					
+					<div class="archivesAccordian">
+					{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+					{% for year in postsByYear %}
+						<div class="card">
+						  	<div class="card-header" data-year="{{year.name}}">
+						        <div class="theyear" data-year="{{year.name}}">
+						          {{ year.name }}
+						        </div>
+						    </div>
+						    <div class="collapse {% if forloop.first %}show{% endif %}">
+						      <div class="card-body">
+								<div class="list-group">
+					  {% assign postsByMonth = year.items | group_by_exp:"post", "post.date | date: '%B'" %}
+					
+					  {% for month in postsByMonth %}
+					    {% for item in month.items limit: 1 %}
+					    			<div>
+						    			<a href="/news/archive/?year={{ item.date | date: '%Y' }}&month={{ item.date | date: '%B' }}" data-year="{{year.name}}" data-month="{{ month.name }}">{{ month.name }}</a>
+						    		</div>
+					    {% endfor %}
+					  {% endfor %}
+					  			</div>
+					  		</div>
+					  	</div>
+					{% endfor %}
+					</div>
+					
+				</div>
+				
+				<div class="latestnews">
+				
+					<h1>Latest</h1>
+					<ul>
+					  {% for post in site.posts limit:5 %}
+					    <li>
+					    	<a href="{{ post.url }}">{{ post.title }}</a>
+					    </li>
+					  {% endfor %}
+					</ul>
+				</div>
+				
+			</div>
+			
+			
+		</div>
+		
+		
+	</main>
+
+		
+	<footer>
+		<div class="sitefooter">
+			<div class="footercontent">
+				<div>
+					<strong>DuckDB</strong><br/>
+					SQLite for Analytics
+				</div>
+				<div>
+					<h4>Documentation</h4>
+					<a href="{{ site.url }}{{ site.baseurl }}/docs/installation/">Installation</a><br/>
+					<a href="{{ site.url }}{{ site.baseurl }}/docs/sql/introduction">SQL Introduction</a>
+				</div>
+				<div>
+					<h4>Internals</h4>
+					<a href="{{ site.url }}{{ site.baseurl }}/docs/faq">FAQs</a><br/>
+					<a href="{{ site.url }}{{ site.baseurl }}/code_of_conduct">Code of Conduct</a>
+				</div>
+				<div>
+					<span class="scrolltop duckdbsymbol">&#8593;</span>
+				</div>
+				<div>
+					<div class="duckdbsymbol cwi"><a href="https://www.cwi.nl" target="_blank">&#57440;</a></div>
+				</div>
+				<div>
+					<div class="gitbutton">
+						<a href="https://github.com/cwida/duckdb" target="_blank" class="blocklink"></a>
+						<span class="duckdbsymbol">&#xe050;</span>GitHub
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
+	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
+	<script src="{{ site.baseurl }}/js/script.js"></script>
+	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
+	<script src="/js/railroad.js"></script>
+	<script src="/js/{{ page.railroad }}"></script>
+	{% endif %}
+
+</body>
+</html>
