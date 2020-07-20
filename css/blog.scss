@@ -68,6 +68,13 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 			margin-top: 100px;
 			h1{
 				margin-bottom: 15px;
+				a{
+					color: black;
+					text-decoration: none;
+					&:hover{
+						text-decoration: underline;
+					}
+				}
 			}
 			ul{
 				list-style: none;
