@@ -53,6 +53,80 @@ DuckDB also supports prepared statements in the C++ API with the `Prepare()` met
 
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](/docs/data/overview) for better options.
 
-
-
 ### Streaming Queries
+
+
+### UDF API
+
+The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
+These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
+
+The `CreateScalarFunction()` methods automatically creates vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
+
+**1.** `template<typename TR, typename... Args> void CreateScalarFunction(string name, TR (*udf_func)(Args…))`
+
+- template parameters:
+    - **TR** is the return type of the UDF function;
+    - **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions);
+- **name**: is the name to register the UDF function;
+- **udf_func**: is a pointer to the UDF function.
+
+This method automatically discovers from the template typenames the corresponding SQLTypes:
+
+- bool → SQLType::BOOLEAN;
+- int8_t → SQLType::TINYINT;
+- int16_t → SQLType::SMALLINT
+- int32_t → SQLType::INTEGER
+- int64_t  → SQLType::BIGINT
+- float → SQLType::FLOAT
+- double → SQLType::DOUBLE
+- string_t → SQLType::VARCHAR
+
+An example of use would be:
+
+```c++
+bool bigger_than_four(int value) {
+    return value > 4;
+}
+
+connection.CreateScalarFunction<bool, int>("bigger_than_four", &bigger_than_four);
+
+connection.Query("SELECT bigger_than_four(i) FROM (VALUES(3), (5)) tbl(i)")->Print();
+```
+
+In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: INTEGER, TIME and DATE, then for disambiguation the users can use the following alternative function.
+
+**2.** `template<typename TR, typename... Args> void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`
+
+- template parameters:
+    - **TR** is the return type of the UDF function;
+    - **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions);
+- **name**: is the name to register the UDF function;
+- **args**: are the SQLType arguments that the function uses, which should match with the template Args types;
+- **ret_type**: is the SQLType of return of the function, which should match with the template TR type;
+- **udf_func**: is a pointer to the UDF function.
+
+This function checks the template types against the SQLTypes passed as arguments and they must match as follow:
+
+- SQLTypeId::BOOLEAN → bool
+- SQLTypeId::TINYINT → int8_t
+- SQLTypeId::SMALLINT → int16_t
+- SQLTypeId::DATE, SQLTypeId::TIME, SQLTypeId::INTEGER → int32_t
+- SQLTypeId::BIGINT, SQLTypeId::TIMESTAMP → int64_t
+- SQLTypeId::FLOAT, SQLTypeId::DOUBLE, SQLTypeId::DECIMAL → double
+- SQLTypeId::VARCHAR, SQLTypeId::CHAR, SQLTypeId::BLOB → string_t
+- SQLTypeId::VARBINARY → blob_t
+
+```c++
+date_t udf_date(date_t a) {
+	return a;
+}
+
+con.Query("CREATE TABLE dates (d DATE)");
+con.Query("INSERT INTO dates VALUES ('1992-01-01')");
+
+con.CreateScalarFunction<date_t, date_t>("udf_date", {SQLType::DATE}, SQLType::DATE, &udf_date);
+
+con.Query("SELECT udf_date(d) FROM dates")->Print();
+
+```
