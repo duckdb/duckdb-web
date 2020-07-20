@@ -7,7 +7,10 @@ $duckDBgrey: #b8b8b8;
 $fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
 $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
+
 .newswrap{
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	.postwrap{
 		position: relative;
@@ -40,6 +43,8 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 		a.continue{
 			color: $duckDBgrey;
 			text-decoration: none;
+			-webkit-transition: color .3s;
+			-o-transition: color .3s;
 			transition: color .3s;
 			&:hover{
 				color: black;
@@ -113,8 +118,8 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 			}
 			.card-body{
 				padding-left: 20px;
-				padding-top: 10px;
-				padding-bottom: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
 				font-size: 14px;
 				a{
 					color: black;
