@@ -144,13 +144,14 @@ The interdface of the `CreateVectorizedFunction()` methods is very similar to th
 There are two variants of the `CreateVectorizedFunction()` method as follows:
 
 
-**1.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, scalar_function_t udf_func)`
+**1.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
 
 - template parameters:
     - **TR** is the return type of the UDF function;
     - **Args** are the arguments up to 3 for the UDF function.
-- **name**: is the name to register the UDF function;
-- **udf_func**: is a _vectorized_ UDF function.
+- **name** is the name to register the UDF function;
+- **udf_func** is a _vectorized_ UDF function;
+- **varargs** The type of varargs to support, or SQLTypeId::INVALID (default value) if the function does not accept variable length arguments. 
 
 This function automatically discovers from the template typenames the corresponding SQLTypes:
 
@@ -188,7 +189,7 @@ con.CreateVectorizedFunction<int, int>("udf_unary_int_function", &udf_unary_func
 con.Query("SELECT udf_unary_int_function(999)")->Print();
 ```
 
-**2.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func)`
+**2.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
 
 ```c++
 // TODO
