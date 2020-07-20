@@ -62,12 +62,14 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 			margin-top: 85px;
 			h1{
 				margin-bottom: 15px;
+				font-size: 100%;
 			}
 		}
 		.latestnews{
 			margin-top: 100px;
 			h1{
 				margin-bottom: 15px;
+				font-size: 100%;
 				a{
 					color: black;
 					text-decoration: none;
@@ -84,6 +86,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 				li{
 					margin-bottom: 15px;
 					margin-top: 15px;
+					font-size: 14px;
 					a{
 						color: black;
 						text-decoration: none;
@@ -96,7 +99,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 		}
 		.archivesAccordian{
 			.theyear{
-				font-size: 130%;
+				font-size: 100%; /** zuvor 130% **/
 				padding-left: 10px;
 				cursor: pointer;
 				//font-family: $fontSansBold;
@@ -111,6 +114,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 				padding-left: 20px;
 				padding-top: 10px;
 				padding-bottom: 10px;
+				font-size: 14px;
 				a{
 					color: black;
 					text-decoration: none;
