@@ -141,9 +141,9 @@ The interface of the `CreateVectorizedFunction()` methods is very similar to the
 
 `typedef std::function<void(DataChunk &input, ExpressionState &expr, Vector &result)> scalar_function_t;`
 
-- **input** it a DataChunk that holds a set of input vectors for the UDF that all have the same length: [DataChunk](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/data_chunk.hpp);
-- **expr** is a ExpressionState that provides information to expresion state of the query: [ExpressionState](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/execution/expression_executor_state.hpp);
-- **result**: is a Vector to store the result values: [Vector](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/vector.hpp).
+- **input** it a [DataChunk](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length;
+- **expr** is an  [ExpressionState](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state;
+- **result**: is a [Vector](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/vector.hpp)] to store the result values.
 
 There are two variants of the `CreateVectorizedFunction()` method as follows:
 
