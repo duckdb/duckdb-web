@@ -94,7 +94,7 @@ connection.CreateScalarFunction<bool, int>("bigger_than_four", &bigger_than_four
 connection.Query("SELECT bigger_than_four(i) FROM (VALUES(3), (5)) tbl(i)")->Print();
 ```
 
-In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: INTEGER, TIME and DATE, then for disambiguation the users can use the following alternative function.
+In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: INTEGER, TIME and DATE, then for disambiguation the users can use the following overloaded method.
 
 **2.** `template<typename TR, typename... Args> void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`
 
@@ -117,16 +117,79 @@ This function checks the template types against the SQLTypes passed as arguments
 - SQLTypeId::VARCHAR, SQLTypeId::CHAR, SQLTypeId::BLOB → string_t
 - SQLTypeId::VARBINARY → blob_t
 
+An example of use would be:
+
 ```c++
-date_t udf_date(date_t a) {
+int32_t udf_date(int32_t a) {
 	return a;
 }
 
 con.Query("CREATE TABLE dates (d DATE)");
 con.Query("INSERT INTO dates VALUES ('1992-01-01')");
 
-con.CreateScalarFunction<date_t, date_t>("udf_date", {SQLType::DATE}, SQLType::DATE, &udf_date);
+con.CreateScalarFunction<int32_t, int32_t>("udf_date", {SQLType::DATE}, SQLType::DATE, &udf_date);
 
 con.Query("SELECT udf_date(d) FROM dates")->Print();
 
+```
+
+The interdface of the `CreateVectorizedFunction()` methods is very similar to the `CreateScalarFunction()`, the main difference is in the second argument that instead of receiving a generic function pointer (i.e., TR (*udf_func)(Args…)), it receives a vectorized function pointer of the type _scalar_function_t_:
+
+`typedef std::function<void(DataChunk &input, ExpressionState &expr, Vector &result)> scalar_function_t;`
+
+- **input** it a DataChunk that holds a set of input vectors for the UDF that all have the same length: [DataChunk](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/data_chunk.hpp);
+- **expr** is a ExpressionState that provides information to expresion state of the query: [ExpressionState](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/execution/expression_executor_state.hpp);
+- **result**: is a Vector to store the result values: [Vector](https://github.com/cwida/duckdb/blob/master/src/include/duckdb/common/types/vector.hpp).
+
+There are two variants of the `CreateVectorizedFunction()` method as follows:
+
+
+**1.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, scalar_function_t udf_func)`
+
+- template parameters:
+    - **TR** is the return type of the UDF function;
+    - **Args** are the arguments up to 3 for the UDF function.
+- **name**: is the name to register the UDF function;
+- **udf_func**: is a _vectorized_ UDF function.
+
+This function automatically discovers from the template typenames the corresponding SQLTypes:
+
+- bool → SQLType::BOOLEAN;
+- int8_t → SQLType::TINYINT;
+- int16_t → SQLType::SMALLINT
+- int32_t → SQLType::INTEGER
+- int64_t  → SQLType::BIGINT
+- float → SQLType::FLOAT
+- double → SQLType::DOUBLE
+- string_t → SQLType::VARCHAR
+
+An example of use would be:
+
+```c++
+/*
+* This vectorized function is a unary one that copies input values to the result vector
+*/
+static void udf_unary_function(DataChunk &input, ExpressionState &state, Vector &result) {
+	assert(input.column_count() == 1);
+	assert(input.data[0].type == TypeId::INTEGER);
+
+	result.vector_type = VectorType::FLAT_VECTOR;
+	auto result_data = FlatVector::GetData<int>(result);
+	auto ldata = FlatVector::GetData<int>(input.data[0]);
+
+	FlatVector::SetNullmask(result, FlatVector::Nullmask(input.data[0]));
+	for (idx_t i = 0; i < input.size(); i++) {
+		result_data[i] = ldata[i];
+	}
+}
+
+con.CreateVectorizedFunction<int, int>("udf_unary_int_function", &udf_unary_function);
+
+con.Query("SELECT udf_unary_int_function(999)")->Print();
+```
+
+**2.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func)`
+
+```c++
+// TODO
 ```
