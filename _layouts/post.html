@@ -97,7 +97,7 @@
 						{{ content }}
 					{% else %}
 						<div class="singleentry">
-							<div class="infoline"><span>{{ page.date | date_to_long_string }}</span><span>{{ page.author }}</span></div>
+							<div class="infoline"><span>{{ post.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
 							<h1>{{ page.title }}</h1>
 							{{ content }}
 							<a href="/news/" class="backtoarchive"><span class="duckdbsymbol">&#8592;</span> back to news archive</a>
