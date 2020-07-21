@@ -97,7 +97,7 @@
 						{{ content }}
 					{% else %}
 						<div class="singleentry">
-							<div class="infoline"><span>{{ post.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
+							<div class="infoline"><span>{{ page.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
 							<h1>{{ page.title }}</h1>
 							{{ content }}
 							<a href="/news/" class="backtoarchive"><span class="duckdbsymbol">&#8592;</span> back to news archive</a>
@@ -116,9 +116,7 @@
 					{% for year in postsByYear %}
 						<div class="card">
 						  	<div class="card-header" data-year="{{year.name}}">
-						        <div class="theyear" data-year="{{year.name}}">
-						          {{ year.name }}
-						        </div>
+						        <div class="theyear{% if forloop.first %} opened{% endif %}" data-year="{{year.name}}"><span></span>{{ year.name }}</div>
 						    </div>
 						    <div class="collapse {% if forloop.first %}show{% endif %}">
 						      <div class="card-body">
