@@ -99,7 +99,8 @@ This method automatically discovers from the template typenames the correspondin
 
 *In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: INTEGER, TIME and DATE, then for disambiguation the users can use the following overloaded method.
 
-**2.** `template<typename TR, typename... Args> void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`
+**2.** `template<typename TR, typename... Args>`\
+&nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`
 
 An example of use would be:
 
@@ -198,7 +199,8 @@ There are different vector types to handle in a Vectorized UDF:
 
 The general API of the `CreateVectorizedFunction()` method is as follows:
 
-**1.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
+**1.** `template<typename TR, typename... Args>`\
+&nbsp;&nbsp;&nbsp;`void CreateVectorizedFunction(string name, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
 
 - template parameters:
     - **TR** is the return type of the UDF function;
@@ -218,7 +220,8 @@ This method automatically discovers from the template typenames the correspondin
 - double → SQLType::DOUBLE
 - string_t → SQLType::VARCHAR
 
-**2.** `template<typename TR, typename... Args> void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
+**2.** `template<typename TR, typename... Args>`\
+&nbsp;&nbsp;&nbsp;`void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
 
 ```c++
 // TODO
