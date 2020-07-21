@@ -113,12 +113,11 @@ $(document).ready(function(){
 		$('.collapse.show').removeClass('show');
 		$('.card-header[data-year="'+year+'"]').next('.collapse ').addClass('show');
 		$('.list-group a[data-year="'+year+'"][data-month="'+month+'"]').addClass('selected');
-		console.log(year, month);
 	}
 	if($('.newsarchive').length != 0){ // If general Blog Page
 		$('.archivesAccordian .card-header').click(function(){
-			console.log('clicked')
 			$(this).next('.collapse').slideToggle();
+			$(this).children('.theyear').toggleClass('opened');
 		})
 	}
 	

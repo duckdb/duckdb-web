@@ -52,6 +52,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 		}
 		
 		.singleentry{
+			min-height: calc(100vh - 271px);
 			h1{
 				font-size: 140%;
 				margin-bottom: 30px;
@@ -109,6 +110,34 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 				cursor: pointer;
 				line-height: 26px;
 				//font-family: $fontSansBold;
+				span{
+					-webkit-transition: -webkit-transform .3s;
+					transition: -webkit-transform .3s;
+					-o-transition: transform .3s;
+					transition: transform .3s;
+					transition: transform .3s, -webkit-transform .3s;
+					display: inline-block;
+					font-size: 14px;
+					position: absolute;
+					-webkit-transform: translateX(-13px);
+					    -ms-transform: translateX(-13px);
+					        transform: translateX(-13px);
+				}
+				span::before{
+					content: '\25BA';
+					font-family: "DuckDB-Symbol";
+				}
+				&.opened span{
+					-webkit-transform: translateX(-13px) rotate(90deg);
+					    -ms-transform: translateX(-13px) rotate(90deg);
+					        transform: translateX(-13px) rotate(90deg);
+					-webkit-transition: -webkit-transform .3s;
+					transition: -webkit-transform .3s;
+					-o-transition: transform .3s;
+					transition: transform .3s;
+					transition: transform .3s, -webkit-transform .3s;
+					position: absolute;
+				}
 			}
 			.collapse{
 				display: none;
