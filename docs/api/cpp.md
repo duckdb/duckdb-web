@@ -78,7 +78,7 @@ connection.Query("SELECT bigger_than_four(i) FROM (VALUES(3), (5)) tbl(i)")->Pri
 The `CreateScalarFunction()` methods automatically creates vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
 
 **1.**`template<typename TR, typename... Args>`
-$~~~$`void CreateScalarFunction(string name, TR (*udf_func)(Args…))`
+&nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, TR (*udf_func)(Args…))`
 
 - template parameters:
     - **TR** is the return type of the UDF function;
