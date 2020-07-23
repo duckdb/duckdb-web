@@ -336,3 +336,6 @@ Q19_PARALLEL,tpch-sf1-parallel
 Q20_PARALLEL,tpch-sf1-parallel
 Q21_PARALLEL,tpch-sf1-parallel
 Q22_PARALLEL,tpch-sf1-parallel
+LineitemParquet,parquet
+LineitemParquetProjectionDirect,parquet
+LineitemParquetProjectionView,parquet
