@@ -12,6 +12,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
+	min-height: calc(100vh - 111px);
 	.postwrap{
 		position: relative;
 		width: calc(100% - 252px);
@@ -52,7 +53,6 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 		}
 		
 		.singleentry{
-			min-height: calc(100vh - 271px);
 			h1{
 				font-size: 140%;
 				margin-bottom: 30px;
