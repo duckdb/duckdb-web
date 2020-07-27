@@ -81,7 +81,6 @@ print(res)
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
 
-> #### Note: 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb::duckdb_unregister()` method.
 
 Also refer to [the data import documentation](/docs/data/overview) for more options of efficiently importing data.
