@@ -50,7 +50,7 @@ explain SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 We can see that the `logical_plan` contains the unoptimized query plan, involving a cross product and a `LIKE` operation. The optimized plan transforms this plan and pushes down the filters, transforming the cross product into a comparison join. It also recognizes that the `LIKE` operator only does prefix filtering, and transforms the more expensive `LIKE` operator into a cheaper `PREFIX` selection.
 
 ### Run-Time Profiling
-The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph. [Examples of these](http://localhost:4000/benchmarks/logs/e7eb7154848be520159d9e1ee744989b25d4c987-graph.html?name=Q20) can be found in the benchmarks section.
+The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph. [Examples of these](https://duckdb.org/benchmarks/logs/e7eb7154848be520159d9e1ee744989b25d4c987-graph.html?name=Q20) can be found in the benchmarks section.
 
 To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done with the following set of `PRAGMA` statements:
 
