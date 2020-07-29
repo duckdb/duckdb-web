@@ -217,7 +217,7 @@
                   {
                     "page": "Blob Functions",
                     "url": "/docs/sql/functions/blob"
-                  },
+                  }
                 ]
               },
               {
@@ -236,6 +236,15 @@
                 "page": "Pragmas",
                 "url": "/docs/sql/pragmas"
               }
+              ]
+            },
+            {
+              "page": "Development",
+              "subsubfolderitems": [
+                {
+                  "page": "Profiling",
+                  "url": "/docs/dev/profiling"
+                }
               ]
             },
             {
