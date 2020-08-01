@@ -217,8 +217,8 @@ First, it is always recommended to run in debug mode. This can be done by compil
 After that, a debugger can be attached to the program and the test can be debugged. In the sqllogictests it is normally difficult to break on a specific query, however, we have expanded the test suite so that a function called `query_break` is called with the line number `line` as parameter for every query that is run. This allows you to put a conditional breakpoint on a specific query. For example, if we want to break on line number 43 of the test file we can create the following break point:
 
 ```
-`gdb: break query_break if line==43`
-`lldb: break -n query_break -c line==43`
+gdb: break query_break if line==43
+lldb: break -n query_break -c line==43
 ```
 
 You can also skip certain queries from executing by placing `mode skip` in the file, followed by an optional `mode unskip`. Any queries between the two statements will not be executed.
