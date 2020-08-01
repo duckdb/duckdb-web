@@ -242,6 +242,10 @@
               "page": "Development",
               "subsubfolderitems": [
                 {
+                  "page": "Testing",
+                  "url": "/docs/dev/testing"
+                },
+                {
                   "page": "Profiling",
                   "url": "/docs/dev/profiling"
                 }
