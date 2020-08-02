@@ -41,7 +41,7 @@ The top of every file should contain a comment describing the name and group of 
 Any tests that are placed in the `test` directory are automatically added to the test suite. Note that the extension of the test is significant. SQLLogicTests should either use the `.test` extension, or the `.test_slow` extension. The `.test_slow` extension indicates that the test takes a while to run, and will only be run when all tests are explicitly run using `unittest *`. Tests with the extension `.test` will be included in the fast set of tests.
 
 ##### Row-Wise vs Value-Wise Result Ordering
-The result values of a query can be either supplied in row-wise order, with the individual values separeted by tabs, or in value-wise order. In value wise order the individual *values* of the query must appear in row, column order each on an individual line. Consider the following example in both row-wise and value-wise order:
+The result values of a query can be either supplied in row-wise order, with the individual values separated by tabs, or in value-wise order. In value wise order the individual *values* of the query must appear in row, column order each on an individual line. Consider the following example in both row-wise and value-wise order:
 
 ```sql
 # row-wise
@@ -167,14 +167,17 @@ Query verification performs extra validation to ensure that the underlying code 
 
 Query verification is very useful because it not only discovers bugs in optimizers, but also finds bugs in e.g. join implementations. This is because the unoptimized version will typically run using cross products instead. Because of this, query verification can be very slow to do when working with larger data sets. It is therefore recommended to turn on query verification for all unit tests, except those involving larger data sets (more than 10-100~ rows).
 
+##### Temporary Files
+For some tests (e.g. CSV/Parquet file format tests) it is necessary to create temporary files. Any temporary files should be created in the temporary testing directory. This directory can be used by placing the string `__TEST_DIR__` in a query. This string will be replaced by the path of the temporary testing directory.
+
+
 ##### Require & Extensions
 To avoid bloating the core system, certain functionality of DuckDB is available only as an extension. Tests can be build for those extensions by adding a `require` field in the test. If the extension is not loaded, any statements that occurs after the require field will be skipped. Examples of this are `require parquet` or `require icu`.
 
 Another usage is to limit a test to a specific vector size. For example, adding `require vector_size 512` to a test will prevent the test from being run unless the vector size greater than or equal to 512. This is useful because certain functionality is not supported for low vector sizes, but we run tests using a vector size of 2 in our CI.
 
-
 ##### Loops
-Loops can be used in sqllogictests when it is required to execute the same query many times but with slight modifications in constant values. Only simple, non-nested, loops are supported. For example, suppose we want to insert the values `0..100` into a table using insert statements:
+Loops can be used in sqllogictests when it is required to execute the same query many times but with slight modifications in constant values. Only simple, non-nested, loops are supported. For example, suppose we want to fire off 100 queries that check for the presence of the values 0..100 in a table:
 
 ```sql
 # create the table integers with the values 0..100
@@ -195,7 +198,7 @@ endloop
 ```
 
 ##### Data Generation
-Loops should be used sparingly. While it might seem tempting to use loops for inserting data using `INSERT INTO` statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
+Loops should be used sparingly. While it might be tempting to use loops for inserting data using `INSERT INTO` statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
 
 ```sql
 -- create the table integers with the values [0, 1, .., 98,  99]
