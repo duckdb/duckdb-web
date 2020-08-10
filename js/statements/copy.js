@@ -17,6 +17,8 @@ function GenerateCopyOptions(options) {
 				Sequence([Keyword("FORMAT"), Expression("format-type")]),
 				Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
 				Sequence([Keyword("NULL"), Expression("null-string")]),
+				Sequence([Keyword("DATEFORMAT"), Expression("date-format")]),
+				Sequence([Keyword("TIMESTAMPFORMAT"), Expression("timestamp-format")]),
 				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
 				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
 				Sequence([Keyword("FORCE_QUOTE"), GenerateColumnList()]),
