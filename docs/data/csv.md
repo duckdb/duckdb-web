@@ -60,6 +60,14 @@ SELECT * FROM ontime;
 |1988-01-02|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-03|AA           |New York, NY     |Los Angeles, CA|
 
+If we want to use the automatic format detection, we can set `FORMAT` to `CSV_AUTO` and omit the otherwise required configuration options.
+
+```sql
+CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
+COPY ontime FROM 'test.csv' ( FORMAT CSV_AUTO );
+SELECT * FROM ontime;
+```
+
 The detailed syntax description can be found [here](/docs/sql/statements/copy.html).
 
 ## Shell Import
