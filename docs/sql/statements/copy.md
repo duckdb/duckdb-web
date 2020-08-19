@@ -19,6 +19,8 @@ COPY test FROM 'test.csv';
 COPY category FROM 'categories.csv' ( HEADER );
 -- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
 COPY lineitem FROM 'lineitem.tbl' ( DELIMITER '|' );
+-- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the delimiter, quote character, and presence of a header are automatically detected
+COPY lineitem FROM 'lineitem.tbl' ( FORMAT CSV_AUTO );
 -- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
 COPY category(name) FROM 'names.csv';
 ```
