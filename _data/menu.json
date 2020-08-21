@@ -118,6 +118,10 @@
                     {
                       "page": "Copy",
                       "url": "/docs/sql/statements/copy"
+                    },
+                    {
+                      "page": "Export",
+                      "url": "/docs/sql/statements/export"
                     }
                   ]
                 },
