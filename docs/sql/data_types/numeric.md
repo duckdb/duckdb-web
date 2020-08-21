@@ -5,7 +5,7 @@ selected: Documentation/Data Types/Numeric
 expanded: Data Types
 ---
 ## Integer Types
-The types `tinyint`, `smallint`, `integer`, and `bigint` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
+The types `tinyint`, `smallint`, `integer`, `bigint` and `hugeint` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 
 | Name | Aliases | Min | Max |
 |:---|:---|---:|---:|
@@ -13,8 +13,23 @@ The types `tinyint`, `smallint`, `integer`, and `bigint` store whole numbers, th
 | smallint | int2 | -32767 | 32767 |
 | integer | int, int4, signed | -2147483647 | 2147483647 |
 | bigint | int8 | -9223372036854775808 | 9223372036854775808 |
+| hugeint | | -170141183460469231731687303715884105727 | 170141183460469231731687303715884105727 |
 
-The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The smallint type is generally only used if disk space is at a premium. The bigint type is designed to be used when the range of the integer type is insufficient.
+The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The smallint type is generally only used if disk space is at a premium. The bigint and hugeint types are designed to be used when the range of the integer type is insufficient.
+
+## Fixed-Point Decimals
+The data type `decimal` represents an exact fixed-point decimal value. When creating a value of type `decimal`, the `width` and `scale` can be specified to define which size of decimal values can be held in the field. The `width` field determines how many digits can be held, and the `scale` determines the amount of digits after the decimal point. For example, the type `DECIMAL(3,2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `width` and `scale` is `DECIMAL(18,3)`, if none are specified.
+
+Internally, decimals are represented as integers depending on their specified width.
+
+| Width | Internal | Size (Bytes) |
+|:---|:---|---:|
+| 1-4 | int16 | 2 |
+| 5-9 | int32 | 4 |
+| 10-18 | int64 | 8 |
+| 19-38 | int128 | 16 |
+
+Performance can be impacted by using too large decimals when not required. In particular decimal values with a width above 19 are very slow, as arithmetic involving the `int128` type is much more expensive than operations involving the `int32` or `int64` types. It is therefore recommended to stick with a width of `18` or below, unless there is a good reason for why this is insufficient.
 
 ## Floating-Point Types
 The data types `real` and `double` precision are inexact, variable-precision numeric types. In practice, these types are usually implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
@@ -22,7 +37,7 @@ The data types `real` and `double` precision are inexact, variable-precision num
 | Name | Aliases | Description |
 |:---|:---|:---|
 | real | float4 | single precision floating-point number (4 bytes)|
-| double | numeric | double precision floating-point number (8 bytes) |
+| double | | double precision floating-point number (8 bytes) |
 
 Inexact means that some values cannot be converted exactly to the internal format and are stored as approximations, so that storing and retrieving a value might show slight discrepancies. Managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here, except for the following points:
 

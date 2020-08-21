@@ -1562,3 +1562,33 @@ function GenerateColumnConstraints(options) {
 		]),
 	]), undefined, "skip")]
 }
+
+
+function GenerateColumnList(options) {
+	return Optional(
+		Sequence([
+			Keyword("("),
+			OneOrMore(Expression("column-name"), ","),
+			Keyword(")")
+		]), "skip"
+	)
+}
+
+function GenerateCopyOptions(options) {
+	return [
+		Optional(Sequence([
+			Optional(Keyword("WITH"), "skip"),
+			OneOrMore(Choice(0, [
+				Sequence([Keyword("FORMAT"), Expression("format-type")]),
+				Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
+				Sequence([Keyword("NULL"), Expression("null-string")]),
+				Sequence([Keyword("DATEFORMAT"), Expression("date-format")]),
+				Sequence([Keyword("TIMESTAMPFORMAT"), Expression("timestamp-format")]),
+				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
+				Sequence([Keyword("FORCE_QUOTE"), GenerateColumnList()]),
+				Sequence([Keyword("FORCE_NOT_NULL"), GenerateColumnList()])
+			]), ",", "skip")
+		]), "skip")
+	]
+}
