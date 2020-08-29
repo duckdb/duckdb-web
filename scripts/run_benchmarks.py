@@ -68,6 +68,8 @@ def build_optimized():
     log("Starting optimized build")
     # always rebuild
     os.system('rm -rf build')
+    os.environ['BUILD_BENCHMARK'] = '1'
+    os.environ['BUILD_TPCH'] = '1'
     proc = subprocess.Popen(['make', 'opt', '-j'], stdout=FNULL, stderr=subprocess.PIPE)
     proc.wait()
     if proc.returncode != 0:
