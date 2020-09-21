@@ -152,6 +152,8 @@ form {
 
 #main_content_wrap{
 	table{
+        -webkit-font-variant-ligatures: none;
+            font-variant-ligatures: none;
 		code.language-plaintext{
 			padding: 0;
 			background-color: transparent;
