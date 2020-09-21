@@ -119,7 +119,9 @@ table {
     text-align: left;
     background-color: $duckDBlightgrey;
     width: calc(100vw - 380px);
-	max-width: 1000px;
+    max-width: 1000px;
+    -webkit-font-variant-ligatures: none;
+            font-variant-ligatures: none;
 }
 th {
     padding: 7px;
@@ -157,6 +159,8 @@ form {
 		em code{
 			font-family: $fontMonoItalicBold;
 			font-style: normal;
+            -webkit-font-variant-ligatures: none;
+                font-variant-ligatures: none;
 		}
 	}
 	
