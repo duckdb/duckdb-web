@@ -9,13 +9,20 @@ The PRAGMA statement is an SQL extension adopted by DuckDB from SQLite. PRAGMA s
 Below is a list of supported PRAGMA statements.
 
 
-### table_info
+### database_list, show_tables, table_info, show
 ```sql
+-- list all databases, usually one
+PRAGMA database_list;
+-- list all tables
+PRAMA show_tables;
+-- get info for a specific table
 PRAGMA table_info('table_name');
--- equivalent to the following SQL: SELECT * FROM pragma_table_info('table_name');
+-- also show table structure, but slightly different format (for compatibility)
+PRAGMA show('table_name');
+
 ```
 
-Returns information about the columns of the table with name *table_name*. The exact format of the table returned is given below:
+`table_info` returns information about the columns of the table with name *table_name*. The exact format of the table returned is given below:
 
 ```sql
 cid INTEGER,        -- cid of the column
@@ -25,6 +32,39 @@ notnull BOOLEAN,    -- if the column is marked as NOT NULL
 dflt_value VARCHAR, -- default value of the column, or NULL if not specified
 pk BOOLEAN          -- part of the primary key or not
 ```
+
+### memory_limit, threads
+```sql
+-- set the memory limit
+PRAGMA memory_limit='1GB'
+-- set the amount of threads for parallel query execution
+PRAGMA threads=4
+```
+
+### collations, default_collation
+```sql
+-- list all available collations
+PRAGMA collations;
+-- set the default collation to one of the available ones
+PRAGMA default_collation='nocase';
+```
+
+
+### default_null_order, default_order
+```sql
+-- set the ordering for NULLs to be either NULLS FIRST or NULLS LAST
+PRAGMA default_null_order='NULLS LAST'
+-- set the default result set ordering direction to ASCENDING or DESCENDING
+PRAGMA default_order='DESCENDING'
+```
+
+
+### version
+```sql
+-- show DuckDB version
+PRAGMA version;
+```
+Note that this version currently shows the git short hash and not the release version (1.2.3 etc).
 
 ### enable_profiling, disable_profiling, profiling_output
 ```sql
@@ -63,3 +103,23 @@ The printing of profiling information can be disabled again using *disable_profi
 
 By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the pragma **profiling_output** can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
 
+
+### log_query_path, explain_output, enable_verification, disable_verification, force_parallelism, disable_force_parallelism
+```sql
+-- Set a path for query logging
+PRAGMA log_query_path='/tmp/duckdb_log/';
+-- Disable query logging again
+PRAGMA log_query_path='';
+-- either show 'all' or only 'optimized' plans in the EXPLAIN output
+PRAGMA explain_output='optimized';
+-- Enable query verification (for development)
+PRAGMA enable_verification;
+-- Disable query verification (for development)
+PRAGMA disable_verification;
+-- Enable force parallel query processing (for development)
+PRAGMA force_parallelism;
+-- Disable force parallel query processing (for development)
+PRAGMA disable_force_parallelism;
+```
+
+These are PRAGMAs mostly used for development and internal testing.
