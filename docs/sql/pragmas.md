@@ -36,9 +36,9 @@ pk BOOLEAN          -- part of the primary key or not
 ### memory_limit, threads
 ```sql
 -- set the memory limit
-PRAGMA memory_limit='1GB'
+PRAGMA memory_limit='1GB';
 -- set the amount of threads for parallel query execution
-PRAGMA threads=4
+PRAGMA threads=4;
 ```
 
 ### collations, default_collation
@@ -53,9 +53,9 @@ PRAGMA default_collation='nocase';
 ### default_null_order, default_order
 ```sql
 -- set the ordering for NULLs to be either NULLS FIRST or NULLS LAST
-PRAGMA default_null_order='NULLS LAST'
+PRAGMA default_null_order='NULLS LAST';
 -- set the default result set ordering direction to ASCENDING or DESCENDING
-PRAGMA default_order='DESCENDING'
+PRAGMA default_order='DESCENDING';
 ```
 
 
@@ -69,7 +69,7 @@ Note that this version currently shows the git short hash and not the release ve
 ### enable_profiling, disable_profiling, profiling_output
 ```sql
 -- enable profiling
-PRAGMA enable_profiling
+PRAGMA enable_profiling;
 -- enable profiling in a specified format
 PRAGMA enable_profiling=[json, query_tree]
 -- disable profiling
