@@ -45,6 +45,22 @@ DESCRIBE ontime;
 |OriginCityName|VARCHAR|YES |NULL|NULL   |NULL |
 |DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
 
+To determine the CSV dialect and data types automatically, we draw chunks of sample rows from all over the input file. If the auomatic detection does not succeed, we can try to increase the number of rows per samples (`SAMPLE_SIZE (DEFAULT: 100, MAX: 1024)`) or the amount of samples (`NUMBER_OF_SAMPLES (DEFAULT: 10, MAX: 2147483647)`) manually:
+
+```sql
+SELECT * FROM read_csv_auto('test.csv', SAMPLE_SIZE=1024, NUMBER_OF_SAMPLES=20);
+```
+
+If we set `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, or `HEADER` explicitly, we can bypass the automatic detection of this particular parameter:
+
+```sql
+SELECT * FROM read_csv_auto('test.csv', HEADER=TRUE);
+```
+
+Note:
+`read_csv_auto()` is an alias for `read_csv(AUTO_DETECT=TRUE)`.
+
+
 ## COPY Statement
 The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the `COPY` statement supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
 
@@ -60,15 +76,15 @@ SELECT * FROM ontime;
 |1988-01-02|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-03|AA           |New York, NY     |Los Angeles, CA|
 
-If we want to use the automatic format detection, we can set `FORMAT` to `CSV_AUTO` and omit the otherwise required configuration options.
+If we want to use the automatic format detection, we can set `AUTO_DETECT` to `TRUE` and omit the otherwise required configuration options.
 
 ```sql
 CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
-COPY ontime FROM 'test.csv' ( FORMAT CSV_AUTO );
+COPY ontime FROM 'test.csv' ( AUTO_DETECT TRUE );
 SELECT * FROM ontime;
 ```
 
-The detailed syntax description can be found [here](/docs/sql/statements/copy.html).
+More on the copy statement can be found [here](/docs/sql/statements/copy.html).
 
 ## Shell Import
 The DuckDB shell also offers a way of importing CSV files. This method is the same syntax as would be used in the SQLite shell. For this method we need to first create a table, then specify the parameters and then use the `.import` statement.
