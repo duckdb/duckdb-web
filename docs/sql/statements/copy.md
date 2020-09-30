@@ -20,7 +20,7 @@ COPY category FROM 'categories.csv' ( HEADER );
 -- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
 COPY lineitem FROM 'lineitem.tbl' ( DELIMITER '|' );
 -- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the delimiter, quote character, and presence of a header are automatically detected
-COPY lineitem FROM 'lineitem.tbl' ( FORMAT CSV_AUTO );
+COPY lineitem FROM 'lineitem.tbl' ( AUTO_DETECT TRUE );
 -- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
 COPY category(name) FROM 'names.csv';
 ```
@@ -64,6 +64,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `FORCE_QUOTE` | Forces quoting to be used for all non-NULL values in each specified column. `NULL` output is never quoted. If `*` is specified, non-`NULL` values will be quoted in all columns. This option is allowed only in `COPY ... TO`. |
 | `FORCE_NOT_NULL` | Do not match the specified columns' values against the null string. In the default case where the null string is empty, this means that empty values will be read as zero-length strings rather than nulls. This option is allowed only in `COPY ... FROM`. |
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |
+| `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. |
 
 
 > It is recommended that the file name used in COPY always be specified as an absolute path.
