@@ -14,7 +14,7 @@ Below is a list of supported PRAGMA statements.
 -- list all databases, usually one
 PRAGMA database_list;
 -- list all tables
-PRAMA show_tables;
+PRAGMA show_tables;
 -- get info for a specific table
 PRAGMA table_info('table_name');
 -- also show table structure, but slightly different format (for compatibility)
