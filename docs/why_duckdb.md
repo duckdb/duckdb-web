@@ -70,6 +70,11 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [duckdb.js - DuckDB compiled to JavaScript (PoC)](https://github.com/ankoh/duckdb.js)
 * [SQL for R dataframes with DuckDB](https://github.com/phillc73/duckdf)
 * [DuckDB conda support](https://github.com/conda-forge/python-duckdb-feedstock)
+* [DBT adapter for DuckDB](https://github.com/jwills/dbt-duckdb)
+* [newLISP bindings for DuckDB](https://github.com/luxint/duckdb)
+* [duckdb_engine - "Very very very basic" sqlalchemy driver for DuckDB](https://github.com/Mause/duckdb_engine)
+* [Toy DuckDB based timeseries database](https://github.com/berthubert/ducktime)
+* [PHP example to integrate DuckDB using PHP-FFI](https://github.com/thomasbley/php-duckdb-integration)
 
 
 ## Standing on the Shoulders of Giants
