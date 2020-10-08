@@ -390,7 +390,7 @@ lineitem : [
       data: {ref: ref},
       url: callback_prefix + '/query?query=SELECT+42',
       success: function(data) {
-        $("#duckdb_version").html(data.duckdb_version);
+        $("#duckdb_version").html('<a href="https://github.com/cwida/duckdb/search?q='+data.duckdb_version+'&type=commits">' + data.duckdb_version + '</a>');
         }
       });
 
