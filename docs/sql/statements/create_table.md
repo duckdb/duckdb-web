@@ -19,8 +19,8 @@ CREATE TABLE t1(id INTEGER, j VARCHAR, PRIMARY KEY(id, j));
 CREATE TABLE t1(i INTEGER NOT NULL, decimalnr DOUBLE CHECK(decimalnr<10), date DATE UNIQUE, time TIMESTAMP);
 -- create a table from the result of a query
 CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
--- create a table as the result of a CSV query
-CREATE TABLE ncvoters AS SELECT * FROM read_csv_auto('ncvoter_sample.tsv');
+-- create a table from a CSV file using AUTO-DETECT (i.e., Automatically detecting column names and types)
+CREATE TABLE t1 AS SELECT * FROM read_csv_auto ("path/file.csv")
 ```
 
 ### Syntax
