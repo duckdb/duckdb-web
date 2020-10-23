@@ -77,10 +77,11 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [PHP example to integrate DuckDB using PHP-FFI](https://github.com/thomasbley/php-duckdb-integration)
 * [DuckDB Foreign Data Wrapper for PostgreSQL](https://github.com/cwida/duckdb/issues/993)
 
+## Testimonials
+See our [DuckDB Testimonial Twitter Wall](twitter_wall)
 
 ## Standing on the Shoulders of Giants
 DuckDB uses some components from various Open-Source projects and draws inspiration from scientific publications. We are very greatful for this. Here is an overview:
-
 
 * **Execution engine:** The vectorized execution engine is inspired by the paper [MonetDB/X100: Hyper-Pipelining Query Execution](http://cidrdb.org/cidr2005/papers/P19.pdf) by Peter Boncz, Marcin Zukowski and Niels Nes.
 * **Optimizer:** DuckDB's optimizer draws inspiration from the papers [Dynamic programming strikes back](https://15721.courses.cs.cmu.edu/spring2020/papers/20-optimizer2/p539-moerkotte.pdf) by Guido Moerkotte and Thomas Neumman as well as [Unnesting Arbitrary Queries](http://www.btw-2015.de/res/proceedings/Hauptband/Wiss/Neumann-Unnesting_Arbitrary_Querie.pdf) by Thomas Neumann and Alfons Kemper.
@@ -96,4 +97,3 @@ DuckDB uses some components from various Open-Source projects and draws inspirat
 * **Test Cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result Validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
 * **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) to generate random queries for additional testing.
-
