@@ -20,7 +20,7 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 	<div class="icon"><span class="duckdbsymbol">&#xE100;</span></div>
 	<h1>Simple Operation</h1>
 </div>
-SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation central to its success. DuckDB adopts these ideas of simplicity and embedded operation. 
+SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DuckDB adopts these ideas of simplicity and embedded operation. 
 
 DuckDB has **no external dependencies**, neither for compilation nor during run-time. For releases, the entire source tree of DuckDB is compiled into two files, a header and an implementation file, a so-called "amalgamation". This greatly simplifies deployment and integration in other build processes. For building, all that is required to build DuckDB is a working C++11 compiler. 
 
