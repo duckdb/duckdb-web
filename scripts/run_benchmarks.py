@@ -54,6 +54,29 @@ CREATE TABLE timings(
     con.commit()
     con.close()
 
+def run_with_timeout(command, timeout):
+    def run_with_timeout_internal(proc):
+        proc.wait()
+
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    thread = threading.Thread(target=run_with_timeout_internal, args=(proc,))
+    thread.start()
+
+    thread.join(timeout)
+
+    stdout = proc.stdout.read().decode('utf8')
+    stderr = proc.stderr.read().decode('utf8')
+
+    if thread.is_alive():
+        log("Force terminating process...")
+        error_msg = "TIMEOUT"
+        proc.kill()
+        thread.join()
+        return (1, stdout, stderr, error_msg)
+    return (proc.returncode, stdout, stderr, "")
+
+
 def pull_new_changes():
     # pull from duckdb-web
     os.chdir(duckdb_web_base)
@@ -70,15 +93,14 @@ def build_optimized():
     os.system('rm -rf build')
     os.environ['BUILD_BENCHMARK'] = '1'
     os.environ['BUILD_TPCH'] = '1'
-    proc = subprocess.Popen(['make', 'opt', '-j'], stdout=FNULL, stderr=subprocess.PIPE)
-    proc.wait()
-    if proc.returncode != 0:
+
+    (return_code, stdout, stderr, error_msg) = run_with_timeout(['make', 'opt', '-j'], 1200)
+
+    if returncode != 0:
         print("Failed to compile, moving on to next commit")
-        while True:
-            line = proc.stderr.readline()
-            if len(line) == 0:
-                break
-            print(line)
+        print(stdout)
+        print(stderr)
+        print(error_msg)
         return False
     else:
         log("Finished optimized build")
@@ -117,6 +139,7 @@ def get_benchmark_list():
             benchmark_list.append(bname)
     return benchmark_list
 
+
 class RunBenchmark(object):
     def __init__(self, benchmark, log_file, stdout_name, stderr_name, out_file):
         self.benchmark = benchmark
@@ -128,26 +151,10 @@ class RunBenchmark(object):
         self.error_msg = ""
 
     def run(self, timeout):
-        def run_benchmark_target(self):
-            self.proc.wait()
+        command = [benchmark_runner, '--out=' + self.out_file, '--log=' + self.log_file, self.benchmark]
 
-        self.proc = subprocess.Popen([benchmark_runner, '--out=' + self.out_file, '--log=' + self.log_file, self.benchmark], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-        thread = threading.Thread(target=run_benchmark_target, args=(self,))
-        thread.start()
-
-        thread.join(timeout)
-
-        self.stdout = self.proc.stdout.read().decode('utf8')
-        self.stderr = self.proc.stderr.read().decode('utf8')
-
-        if thread.is_alive():
-            log("Force terminating process...")
-            self.error_msg = "TIMEOUT"
-            self.proc.kill()
-            thread.join()
-            return 1
-        return self.proc.returncode
+        (returncode, self.stdout, self.stderr, self.error_msg) = run_with_timeout(command, timeout)
+        return returncode
 
 def benchmark_already_ran(benchmark_id, commit_hash):
     # first check if this benchmark has already been run
