@@ -19,5 +19,7 @@ Below we collect some Tweets about DuckDB
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Lot of people use SQLite to locally run their analytical queries which are then quite often a bit slow. Luckily, I came around the <a href="https://twitter.com/duckdb?ref_src=twsrc%5Etfw">@duckdb</a> project recently that tries to be the SQLite-for-analytics. In a first test <a href="https://t.co/xFogQfqTha">https://t.co/xFogQfqTha</a> it already stands by the promise.</p>&mdash; Uwe L. Korn (@xhochy) <a href="https://twitter.com/xhochy/status/1185486008940404737?ref_src=twsrc%5Etfw">October 19, 2019</a></blockquote> 
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Congrats to <a href="https://twitter.com/hfmuehleisen?ref_src=twsrc%5Etfw">@hfmuehleisen</a> for the first release of his new database. Think of DuckDB as <a href="https://twitter.com/hashtag/SQLite?src=hash&amp;ref_src=twsrc%5Etfw">#SQLite</a> for analytics. <a href="https://t.co/sA1ae3GHxD">https://t.co/sA1ae3GHxD</a></p>&mdash; Andy Pavlo (@andy_pavlo) <a href="https://twitter.com/andy_pavlo/status/1145348013612765185?ref_src=twsrc%5Etfw">June 30, 2019</a></blockquote>
+
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
