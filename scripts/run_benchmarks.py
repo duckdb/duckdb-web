@@ -54,27 +54,43 @@ CREATE TABLE timings(
     con.commit()
     con.close()
 
+run_with_timeout_returncode = 0
 def run_with_timeout(command, timeout):
-    def run_with_timeout_internal(proc):
-        proc.wait()
+    global run_with_timeout_returncode
+    def run_with_timeout_internal(command):
+        global run_with_timeout_returncode
+        run_with_timeout_returncode = os.system(' '.join(command) + " > out.log 2>err.log")
 
-    proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-    thread = threading.Thread(target=run_with_timeout_internal, args=(proc,))
+    try:
+        os.remove('out.log')
+    except:
+        pass
+    try:
+        os.remove('err.log')
+    except:
+        pass
+    thread = threading.Thread(target=run_with_timeout_internal, args=(command,))
     thread.start()
 
     thread.join(timeout)
 
-    stdout = proc.stdout.read().decode('utf8')
-    stderr = proc.stderr.read().decode('utf8')
+    stdout = ""
+    stderr = ""
+    try:
+        with open('out.log', 'r') as f:
+            stdout = f.read()
+        with open('err.log', 'r') as f:
+            stderr = f.read()
+    except:
+        pass
 
     if thread.is_alive():
         log("Force terminating process...")
+        os.system('killall -9 benchmark_runner')
         error_msg = "TIMEOUT"
-        proc.kill()
         thread.join()
         return (1, stdout, stderr, error_msg)
-    return (proc.returncode, stdout, stderr, "")
+    return (run_with_timeout_returncode, stdout, stderr, "")
 
 
 def pull_new_changes():
@@ -96,7 +112,7 @@ def build_optimized():
 
     (return_code, stdout, stderr, error_msg) = run_with_timeout(['make', 'opt', '-j'], 1200)
 
-    if returncode != 0:
+    if return_code != 0:
         print("Failed to compile, moving on to next commit")
         print(stdout)
         print(stderr)
