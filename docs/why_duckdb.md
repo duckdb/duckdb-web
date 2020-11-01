@@ -75,7 +75,8 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [duckdb_engine - "Very very very basic" sqlalchemy driver for DuckDB](https://github.com/Mause/duckdb_engine)
 * [Toy DuckDB based timeseries database](https://github.com/berthubert/ducktime)
 * [PHP example to integrate DuckDB using PHP-FFI](https://github.com/thomasbley/php-duckdb-integration)
-* [DuckDB Foreign Data Wrapper for PostgreSQL](https://github.com/cwida/duckdb/issues/993)
+* [DuckDB Foreign Data Wrapper for PostgreSQL](https://github.com/alitrack/duckdb_fdw)
+* [Demo: CRUD operations with Qt5 and DuckDB](https://github.com/chilarai/qt-duckdb)
 
 ## Testimonials
 See our [DuckDB Testimonial Twitter Wall](twitter_wall)
