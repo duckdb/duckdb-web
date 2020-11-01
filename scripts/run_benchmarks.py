@@ -250,10 +250,6 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
     if not switch_to_commit(commit):
         log("Failed to switch to commit!")
         return
-    # now try to compile it
-    if not build_optimized():
-        log("Failed to build!")
-        return
 
     # get the commit hash, date and commit msg from the commit
     proc = subprocess.Popen(['git', 'rev-parse', 'HEAD'], stdout=subprocess.PIPE)
@@ -264,6 +260,11 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
     commit_msg = proc.stdout.read().decode('utf8').strip()
     if 'Merge pull request' not in commit_msg:
         log("Skipping commit " + commit + ", not a pull request merge (" + commit_msg + ")")
+        return
+
+    # now try to compile it
+    if not build_optimized():
+        log("Failed to build!")
         return
 
     # now run the benchmarks
