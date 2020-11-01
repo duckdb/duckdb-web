@@ -39,11 +39,11 @@ function GenerateJoinClause(options) {
 		OneOrMore(Sequence([
 				Sequence([
 					Optional(Keyword("NATURAL"), "skip"),
-					Choice(0,[
+					Optional(Choice(0,[
 						Keyword("INNER"),
 						Sequence([Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]), Optional(Keyword("OUTER"), "skip")]),
 						Keyword("CROSS")
-					]),
+					]), "skip"),
 					Keyword("JOIN")
 				]),
 				Expression("table-or-subquery"),
