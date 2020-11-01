@@ -262,6 +262,9 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
     date = proc.stdout.read().decode('utf8').strip()
     proc = subprocess.Popen(['git', 'show', '-s', '--format=%B', commit], stdout=subprocess.PIPE)
     commit_msg = proc.stdout.read().decode('utf8').strip()
+    if 'Merge pull request' not in commit_msg:
+        log("Skipping commit " + commit + ", not a pull request merge (" + commit_msg + ")")
+        return
 
     # now run the benchmarks
     benchmarks_to_run = get_benchmark_list()
