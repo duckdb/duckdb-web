@@ -33,7 +33,7 @@ for(idx in 1:nrow(benchmarks)) {
 	}
 	result[[2]] <- as.Date(result[[2]])
 
-	store_path <- paste0("images/graphs/", benchmark_name, ".png")
+	store_path <- paste0("../benchmark-results/graphs/", benchmark_id, ".png")
 	print(store_path)
 	png(store_path, width=1024, height=640)
 	fill <- "#4271AE"
