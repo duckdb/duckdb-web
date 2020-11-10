@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
-
+import duckdb_query_graph
 
 duckdb_web_base = os.getcwd()
 benchmark_dir = os.path.join('..', 'benchmark-results')
@@ -110,7 +110,19 @@ ORDER BY date DESC
 	messages = [x[2] for x in qresults]
 	timings  = [x[3] for x in qresults]
 	errors   = [x[4] for x in qresults]
+
 	profiles = [x[5] for x in qresults]
+	meta_info = []
+	graph_data = []
+	for profile_info in profiles:
+		try:
+			profile_data = '{ "result"' + profile_info.split('{ "result"')[1].replace('\\n', ' ').replace('\n', ' ')
+			generated_graph = duckdb_query_graph.generate_html(json.loads(profile_data))
+			meta_info.append(generated_graph['meta_info'])
+			graph_data.append(generated_graph['json'])
+		except:
+			meta_info.append(None)
+			graph_data.append(None)
 	stdouts  = [x[6] for x in qresults]
 	stderrs  = [x[7] for x in qresults]
 
@@ -120,7 +132,8 @@ ORDER BY date DESC
 					'message': messages,
 					'timing': timings,
 					'error': errors,
-					'profile': profiles,
+					'meta_info': meta_info,
+					'graph_data': graph_data,
 					'stdout': stdouts,
 					'stderr': stderrs})
 
