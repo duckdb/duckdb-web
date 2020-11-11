@@ -4,7 +4,7 @@ FNULL = open(os.devnull, 'w')
 benchmark_runner = os.path.join('build', 'release', 'benchmark', 'benchmark_runner')
 out_file = 'out.csv'
 log_file = 'out.log'
-default_start_commit = '32c1e53db960f545059b5269b01cf8f28138230b'
+default_start_commit = '46fb7ae593ada31acae9cdcb8a7cf5b017d62238'
 duckdb_base = os.path.join(os.getcwd(), '..', 'duckdb')
 duckdb_web_base = os.getcwd()
 sqlite_db_file = os.path.join(duckdb_web_base, 'benchmarks.db')
@@ -279,7 +279,7 @@ def write_benchmark_info(benchmark):
     # benchmark does not exist, write it to the database
     # get info and group
     # write to db
-    c.execute("INSERT INTO benchmarks (name, groupname, subgroup, description) VALUES (?, ?, ?, ?)", (benchmark, groupname, subgroup, description))
+    c.execute("INSERT INTO benchmarks (name, groupname, subgroup) VALUES (?, ?, ?)", (benchmark, groupname, subgroup, description))
     # now fetch the id
     return write_benchmark_info(benchmark)
 
