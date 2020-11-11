@@ -34,6 +34,9 @@ if not os.path.isdir(individual_benchmarks_dir):
 	os.mkdir(individual_benchmarks_dir)
 
 for groupname in groups:
+	if '[' in groupname or '.' in groupname or '/' in groupname:
+		print("WARNING: Skipping " + groupname + " for parquet file generation because it contains special characters")
+		continue
 	# get the 15 most recent commits that ran this benchmark
 	c.execute('''
 SELECT DISTINCT commits.hash, commits.date
