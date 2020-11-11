@@ -4,5 +4,5 @@ title: TPC-DS
 subtitle: Continuous Benchmarking
 selected: TPC-DS
 expanded: Benchmarking
-benchmark: /benchmark_results/tpcds.html
+benchmark_group: tpcds-sf1
 ---
