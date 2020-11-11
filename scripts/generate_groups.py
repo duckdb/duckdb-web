@@ -55,5 +55,6 @@ for line in lines:
 	else:
 		description.append(line)
 
+con.commit()
 
 
