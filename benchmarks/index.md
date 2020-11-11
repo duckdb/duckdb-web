@@ -18,4 +18,3 @@ Continuous benchmarking is run on every commit to detect performance regressions
 * [String](string.html)
 * [TPC-DS](tpcds.html)
 * [TPC-H](tpch.html)
-* [TPC-H (Parallel)](tpchsf1parallel.html)
