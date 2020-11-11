@@ -4,5 +4,5 @@ title: TPC-H
 subtitle: Continuous Benchmarking
 selected: TPC-H
 expanded: Benchmarking
-benchmark_group: tpch-sf1
+benchmark_group: tpch
 ---

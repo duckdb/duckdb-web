@@ -152,6 +152,7 @@ ORDER BY date DESC
 					'date': dates,
 					'message': messages,
 					'timing': timings,
+					'profile': profiles,
 					'error': errors,
 					'stdout': stdouts,
 					'stderr': stderrs})

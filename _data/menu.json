@@ -331,10 +331,6 @@
           {
           "page": "TPC-H",
               "url": "/benchmarks/tpch.html"
-          },
-          {
-          "page": "TPC-H (Parallel)",
-              "url": "/benchmarks/tpch-parallel.html"
           }
           ]
         }
