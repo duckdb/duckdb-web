@@ -49,6 +49,8 @@ CREATE TABLE timings(
     timings VARCHAR,
     error VARCHAR,
     profile VARCHAR,
+    meta_info VARCHAR,
+    graph_json VARCHAR,
     stdout VARCHAR,
     stderr VARCHAR);""")
     con.commit()
@@ -234,7 +236,7 @@ def run_benchmark(benchmark, benchmark_id, commit_hash):
     else:
         # insert data about benchmark into database
         print("Median timing: " + str(median))
-        c.execute("INSERT INTO timings (benchmark_id, hash, success, median, timings, profile, stdout, stderr) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (benchmark_id, commit_hash, True, median, timing_info, profile_info, stdout, stderr))
+        c.execute("INSERT INTO timings (benchmark_id, hash, success, median, timings, profile, stdout, stderr, meta_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'none')", (benchmark_id, commit_hash, True, median, timing_info, profile_info, stdout, stderr))
     con.commit()
 
 def write_benchmark_info(benchmark):

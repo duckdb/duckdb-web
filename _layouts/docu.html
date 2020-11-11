@@ -8,7 +8,8 @@
 	{% else %}
     <title>DuckDB - {{ page.title }}</title>
 	{% endif %}
-	
+
+	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css">
@@ -16,7 +17,7 @@
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/railroad.css">
 	{% endif %}
-	
+
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon/favicon-16x16.png">
@@ -31,10 +32,10 @@
 	<meta name="description" content="{{page.description}}">
 	<meta property="og:description" content="{{page.description}}">
 	{% endif %}
-	
+
 </head>
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
-	
+
 	<header>
 		<div class="headerline">
 			<div class="headercontent">
@@ -59,7 +60,7 @@
 							                {% endif %}
 							            {% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
 							       {% if mainentry.subfolderitems[0] %}  </div> {% endif %}
-							
+
 							        {% if mainentry.subfolderitems[0] %}
 							            <ul>
 							                {% for entry in mainentry.subfolderitems %}
@@ -94,10 +95,10 @@
 	</header>
 
 	<main>
-		
-		
+
+
 		<div class="sidenavigation" data-selected="{{page.selected}}" data-expanded="{{page.expanded}}">
-			
+
 			{% if site.data.menu.toc2[0] %}
 			    {% for item in site.data.menu.toc2 %}
 			    {% if item.mainfolderitems[0] %}
@@ -150,36 +151,50 @@
 			    {% endif %}
 			    {% endfor %}
 			{% endif %}
-		
+
 		</div>
-		
-		
-		
-		
-		
+
+
+
+
+
 		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
 			<div class="headlinebar">{{ page.title }}</div>
 			<div id="main_content_wrap">
-				
+
 				{{ content }}
-				
-				{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
-				<table class="table bench">
-					{% include {{ page.benchmark }} %}
+
+				{% if page.benchmark_group and page.benchmark_group != "" and page.benchmark_group != nil %}
+				{% if page.benchmark_group == "log" %}
+				<div id="log-data">
+				</div>
+				<script src="{{ site.baseurl }}/js/benchmarks/log.js"></script>
+				{% else %}
+				<div id="benchmark-header">
+				</div>
+				<table class="table bench" id="benchmark-table">
 				</table>
+
+				<script>
+				var benchmark_group = '{{ page.benchmark_group }}';
+				</script>
+				{% if page.benchmark_group == "individual_results" %}
+				<script src="{{ site.baseurl }}/js/benchmarks/render_individual.js"></script>
+				{% else %}
+				<script src="{{ site.baseurl }}/js/benchmarks/render_group_table.js"></script>
+				{% endif %}
+				{% endif %}
 				{% endif %}
 			</div>
-			
+
 		</div>
 
 	</main>
-	
-	
-	
-	
-	
-		
-	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
+
+
+
+
+
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
 	<script src="{{ site.baseurl }}/js/script.js"></script>
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
