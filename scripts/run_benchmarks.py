@@ -279,7 +279,7 @@ def write_benchmark_info(benchmark):
     # benchmark does not exist, write it to the database
     # get info and group
     # write to db
-    c.execute("INSERT INTO benchmarks (name, groupname, subgroup) VALUES (?, ?, ?)", (benchmark, groupname, subgroup))
+    c.execute("INSERT INTO benchmarks (name, groupname, subgroup) VALUES (?, ?, ?)", (display_name, groupname, subgroup))
     # now fetch the id
     return write_benchmark_info(benchmark)
 
