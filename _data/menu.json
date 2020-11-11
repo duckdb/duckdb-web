@@ -301,10 +301,6 @@
               "url": "/benchmarks/cast.html"
           },
           {
-          "page": "Contains_Tpch",
-              "url": "/benchmarks/contains_tpch.html"
-          },
-          {
           "page": "CSV",
               "url": "/benchmarks/csv.html"
           },
@@ -315,10 +311,6 @@
           {
           "page": "Micro",
               "url": "/benchmarks/micro.html"
-          },
-          {
-          "page": "Prefix_Tpch",
-              "url": "/benchmarks/prefix_tpch.html"
           },
           {
           "page": "Startup",
@@ -333,16 +325,16 @@
               "url": "/benchmarks/string.html"
           },
           {
-          "page": "Suffix_Tpch",
-              "url": "/benchmarks/suffix_tpch.html"
-          },
-          {
           "page": "TPC-DS",
               "url": "/benchmarks/tpcds.html"
           },
           {
           "page": "TPC-H",
               "url": "/benchmarks/tpch.html"
+          },
+          {
+          "page": "TPC-H (Parallel)",
+              "url": "/benchmarks/tpch-parallel.html"
           }
           ]
         }
