@@ -281,7 +281,13 @@ def write_benchmark_info(benchmark):
     # write to db
     c.execute("INSERT INTO benchmarks (name, groupname, subgroup) VALUES (?, ?, ?)", (display_name, groupname, subgroup))
     # now fetch the id
-    return write_benchmark_info(benchmark)
+    c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (display_name,))
+    results = c.fetchall()
+    if len(results) > 0:
+        # benchmark already exists, return the id
+        return (results[0][0], results[0][1])
+    print("Failed to insert tuple", display_name, groupname, subgroup)
+    exit(1)
 
 def run_benchmark_for_commit(commit, run_slow_benchmarks):
     log("Benchmarking commit " + commit)
