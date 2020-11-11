@@ -265,7 +265,7 @@ def get_benchmark_info(benchmark):
             subgroup = splits[1].strip()
             if len(subgroup) == 0:
                 subgroup = None
-    return [display_name, groupname, subgroup]
+    return (display_name, groupname, subgroup)
 
 
 def write_benchmark_info(benchmark):

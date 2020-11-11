@@ -38,7 +38,7 @@ if not os.path.isdir(individual_benchmarks_dir):
 
 for groupname in groups:
 	query = '''
-SELECT timings.hash, commits.date, benchmarks.name, timings.median, timings.success, benchmarks.id
+SELECT timings.hash, commits.date, benchmarks.name, benchmarks.subgroup, timings.median, timings.success, benchmarks.id
 FROM timings, benchmarks, commits
 WHERE benchmark_id=benchmarks.id
   AND commits.hash=timings.hash
@@ -51,13 +51,15 @@ ORDER BY benchmarks.name ASC, date DESC
 	hashes        = [x[0] for x in qresults]
 	dates         = [x[1] for x in qresults]
 	benchmarks    = [x[2] for x in qresults]
-	timings       = [x[3] for x in qresults]
-	successes     = [x[4] for x in qresults]
-	benchmark_ids = [x[5] for x in qresults]
+	subgroups     = [x[3] for x in qresults]
+	timings       = [x[4] for x in qresults]
+	successes     = [x[5] for x in qresults]
+	benchmark_ids = [x[6] for x in qresults]
 	df = pd.DataFrame({
 					'hash': hashes,
 					'date': dates,
 					'benchmark_name': benchmarks,
+					'subgroups': subgroups,
 					'benchmark_id': benchmark_ids,
 					'timing': timings,
 					'success': successes
@@ -68,12 +70,13 @@ ORDER BY benchmarks.name ASC, date DESC
 	pq.write_table(table, fname)
 
 # generate the benchmarks file with benchmark metadata
-c.execute("select id, name, groupname, description from benchmarks;")
+c.execute("select id, name, groupname, subgroup, description from benchmarks;")
 qresults = c.fetchall()
 ids = [x[0] for x in qresults]
 names = [x[1] for x in qresults]
 groups = [x[2] for x in qresults]
-descriptions = [x[3] for x in qresults]
+subgroups = [x[3] for x in qresults]
+descriptions = [x[4] for x in qresults]
 images = []
 # load the graphs from disk
 for i in range(len(ids)):
@@ -90,10 +93,29 @@ df = pd.DataFrame({
 				'id': ids,
 				'name': names,
 				'group': groups,
+				'subgroup': subgroups,
 				'description': descriptions,
 				'images': images})
 
 fname = os.path.join(benchmark_dir, "benchmarks.parquet")
+table = pa.Table.from_pandas(df)
+pq.write_table(table, fname)
+
+# generate the group data
+c.execute("select name, subgroup, display_name, description from groups;")
+qresults = c.fetchall()
+names = [x[0] for x in qresults]
+subgroups = [x[1] for x in qresults]
+display_names = [x[2] for x in qresults]
+descriptions = [x[3] for x in qresults]
+
+df = pd.DataFrame({
+				'name': names,
+				'subgroup': subgroups,
+				'display_name': display_names,
+				'description': descriptions})
+
+fname = os.path.join(benchmark_dir, "groups.parquet")
 table = pa.Table.from_pandas(df)
 pq.write_table(table, fname)
 
