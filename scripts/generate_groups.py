@@ -4,7 +4,7 @@ import subprocess
 import sqlite3
 
 duckdb_web_base = os.getcwd()
-duckdb_base = os.path.join(os.getcwd(), '..', 'duckdb-bugfix')
+duckdb_base = os.path.join(os.getcwd(), '..', 'duckdb')
 sqlite_db_file = os.path.join(duckdb_web_base, 'benchmarks.db')
 group_list = os.path.join(duckdb_base, 'benchmark', 'group_descriptions.list')
 
@@ -25,10 +25,10 @@ def flush_group(c, current_group,subgroup, display_name, description):
 	count = c.fetchall()[0][0]
 	if count == 0:
 		# no entry yet
-		c.execute('insert into groups (name, display_name, subgroup, description) values (?,?,?)', (current_group, display_name, subgroup, description))
+		c.execute('insert into groups (name, display_name, subgroup, description) values (?,?,?,?)', (current_group, display_name, subgroup, description))
 	else:
 		# entry exists, update it
-		c.execute('update groups set display_name=?, subgroup=?, description=? where name=?', (current_group, display_name, subgroup, description))
+		c.execute('update groups set display_name=?, subgroup=?, description=? where name=?', (display_name, subgroup, description, current_group))
 
 
 for line in lines:
