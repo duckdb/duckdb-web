@@ -24,9 +24,6 @@ c = con.cursor()
 c.execute("select distinct groupname from benchmarks where groupname is not null and groupname <> ''")
 groups = [x[0] for x in c.fetchall()]
 
-c.execute("select hash from commits order by date desc limit 15")
-commits = ["'" + x[0] + "'" for x in c.fetchall()]
-
 if not os.path.isdir(benchmark_dir):
 	os.mkdir(benchmark_dir)
 
@@ -37,6 +34,18 @@ if not os.path.isdir(individual_benchmarks_dir):
 	os.mkdir(individual_benchmarks_dir)
 
 for groupname in groups:
+	# get the 15 most recent commits that ran this benchmark
+	c.execute('''
+SELECT DISTINCT commits.hash, commits.date
+FROM commits, benchmarks, timings
+WHERE timings.benchmark_id=benchmarks.id
+  AND commits.hash=timings.hash
+  AND groupname = '%s'
+ORDER BY commits.date DESC
+LIMIT 15
+''' % (groupname,))
+	commits = ["'" + x[0] + "'" for x in c.fetchall()]
+
 	query = '''
 SELECT timings.hash, commits.date, benchmarks.name, benchmarks.subgroup, timings.median, timings.success, benchmarks.id
 FROM timings, benchmarks, commits
