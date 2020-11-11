@@ -34,6 +34,13 @@ CREATE TABLE benchmarks(
     id INTEGER PRIMARY KEY,
     name VARCHAR,
     groupname VARCHAR,
+    subgroup VARCHAR,
+    description VARCHAR);""")
+    c.execute("""
+CREATE TABLE groups(
+    name VARCHAR,
+    subgroup VARCHAR,
+    display_name VARCHAR,
     description VARCHAR);""")
     c.execute("""
 CREATE TABLE commits(
@@ -239,26 +246,40 @@ def run_benchmark(benchmark, benchmark_id, commit_hash):
         c.execute("INSERT INTO timings (benchmark_id, hash, success, median, timings, profile, stdout, stderr, meta_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'none')", (benchmark_id, commit_hash, True, median, timing_info, profile_info, stdout, stderr))
     con.commit()
 
+def get_benchmark_info(benchmark):
+    display_name = None
+    groupname = None
+    subgroup = None
+    proc = subprocess.Popen([benchmark_runner, '--info', benchmark], stdout=subprocess.PIPE)
+    lines = proc.stdout.read().decode('utf8').strip().split('\n')
+    for line in lines:
+        line = line.strip()
+        if len(line) == 0:
+            continue
+        splits = line.split(':')
+        if splits[0] == 'display_name':
+            display_name = splits[1].strip()
+        elif splits[0] == 'group':
+            groupname = splits[1].strip()
+        elif splits[0] == 'subgroup':
+            subgroup = splits[1].strip()
+            if len(subgroup) == 0:
+                subgroup = None
+    return [display_name, groupname, subgroup]
+
+
 def write_benchmark_info(benchmark):
+    (display_name, groupname, subgroup) = get_benchmark_info(benchmark)
     # first figure out if the benchmark is already in the database
-    c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (benchmark,))
+    c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (display_name,))
     results = c.fetchall()
     if len(results) > 0:
         # benchmark already exists, return the id
         return (results[0][0], results[0][1])
     # benchmark does not exist, write it to the database
     # get info and group
-    try:
-        proc = subprocess.Popen([benchmark_runner, '--info', benchmark], stdout=subprocess.PIPE)
-        description = proc.stdout.read().decode('utf8').strip()
-        # groupname = description.split('\n')[0].split(' - ')[1].strip().lstrip('[').rstrip(']')
-        proc = subprocess.Popen([benchmark_runner, '--group', benchmark], stdout=subprocess.PIPE)
-        groupname = proc.stdout.read().decode('utf8').strip().lstrip('[').rstrip(']')
-    except:
-        print("Could not figure out description or group name for benchmark " + benchmark)
-        raise
     # write to db
-    c.execute("INSERT INTO benchmarks (name, groupname, description) VALUES (?, ?, ?)", (benchmark, groupname, description))
+    c.execute("INSERT INTO benchmarks (name, groupname, subgroup, description) VALUES (?, ?, ?, ?)", (benchmark, groupname, subgroup, description))
     # now fetch the id
     return write_benchmark_info(benchmark)
 
