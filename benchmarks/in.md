@@ -4,5 +4,5 @@ title: In
 subtitle: Continuous Benchmarking
 selected: In
 expanded: Benchmarking
-benchmark: /benchmark_results/in.html
+benchmark_group: in
 ---

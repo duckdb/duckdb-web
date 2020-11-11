@@ -1,8 +1,8 @@
 ---
 layout: docu
-title: CSV
+title: Cast
 subtitle: Continuous Benchmarking
-selected: CSV
+selected: Cast
 expanded: Benchmarking
-benchmark: /benchmark_results/csv.html
+benchmark_group: csv
 ---
