@@ -270,6 +270,9 @@ def get_benchmark_info(benchmark):
 
 def write_benchmark_info(benchmark):
     (display_name, groupname, subgroup) = get_benchmark_info(benchmark)
+    if display_name is None:
+        log("Failed to fetch display name for benchmark ", benchmark)
+        return (None, None)
     # first figure out if the benchmark is already in the database
     c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (display_name,))
     results = c.fetchall()
@@ -281,13 +284,7 @@ def write_benchmark_info(benchmark):
     # write to db
     c.execute("INSERT INTO benchmarks (name, groupname, subgroup) VALUES (?, ?, ?)", (display_name, groupname, subgroup))
     # now fetch the id
-    c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (display_name,))
-    results = c.fetchall()
-    if len(results) > 0:
-        # benchmark already exists, return the id
-        return (results[0][0], results[0][1])
-    print("Failed to insert tuple", display_name, groupname, subgroup)
-    exit(1)
+    return write_benchmark_info(benchmark)
 
 def run_benchmark_for_commit(commit, run_slow_benchmarks):
     log("Benchmarking commit " + commit)
@@ -316,6 +313,9 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
     benchmarks_to_run = get_benchmark_list()
     for benchmark in benchmarks_to_run:
         (benchmark_id, groupname) = write_benchmark_info(benchmark)
+        if benchmark_id is None:
+            log("Failed to fetch benchmark id for benchmark ", benchmark)
+            return
         if groupname in ignored_benchmarks or (groupname in slow_benchmarks and not run_slow_benchmarks):
             continue
         run_benchmark(benchmark, benchmark_id, commit)
