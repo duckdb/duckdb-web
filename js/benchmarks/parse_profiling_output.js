@@ -227,7 +227,11 @@ function parse_profiling_output(graph_json) {
 		splits = node_extra_info.split('\n')
 		for(var i = 0; i < splits.length; i++) {
 			if (splits[i].length > 0) {
-				title += splits[i].replace('"', '') + "<br>"
+				var text = splits[i].replace('"', '');
+				if (text == "[INFOSEPARATOR]") {
+					text = "- - - - - -";
+				}
+				title += text + "<br>"
 			}
 		}
 		text_node["name"] = node_name + ' (' + node_timing + 's)';
