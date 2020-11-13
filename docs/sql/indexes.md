@@ -41,8 +41,10 @@ CREATE [ UNIQUE ] INDEX [ name ] ON table ({ column | ( expression )})
 ```sql
 -- Create an unique index 'films_id_idx' on the column id of table films.
 CREATE UNIQUE INDEX films_id_idx ON films (id);
--- Creates index 's_idx' that allows for duplicate values on column revenue of table films.
+-- Create index 's_idx' that allows for duplicate values on column revenue of table films.
 CREATE INDEX revenue_idx ON films (revenue);
+-- Create compound index 'gy_idx' on genre and year columns.
+CREATE INDEX gy_idx ON films (genre, year);
 -- Create index 'i_index' on the expression of the sum of columns j and k from table integers.
 CREATE INDEX i_index ON integers ((j+k))
 ```
