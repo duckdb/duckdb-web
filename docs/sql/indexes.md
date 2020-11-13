@@ -3,20 +3,27 @@ layout: docu
 title: Indexes
 selected: Documentation/Indexes
 ---
-An Adaptive Radix Tree is used as the index data structure of choice for DuckDB. Its mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Note that an index is automatically created for columns with a UNIQUE or PRIMARY KEY constrain.
+DuckDB currently uses two index types:
+
+* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) is automatically created for columns of all [general-purpose data types](/docs/sql/data_types/overview).
+* An [Adaptive Radix Tree](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.674.248&rep=rep1&type=pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index can be defined using `CREATE INDEX` and it is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint.
+
+Indexes are currently [not persistent](https://github.com/cwida/duckdb/issues/693). Min-max indexes, unique and primary key indexes are rebuilt upon startup while user-defined adaptive radix tree indexes are discared.
 
 # Create Index
 ```sql
 CREATE [ UNIQUE ] INDEX [ name ] ON table ({ column | ( expression )})
 ```
-CREATE INDEX constructs an index on the specified column(s) of the specified table. We currently only support unidimensional indexes of the following types:
+
+`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. We currently only support unidimensional indexes of the following types:
 
 | Name | Aliases | Description |
 |:---|:---|:---|
 | bigint | int8 | signed eight-byte integer |
 | integer | int, int4, signed | signed four-byte integer |
-| smallint | int2 | signed two-byte integer|
-| tinyint |   | signed one-byte integer|
+| smallint | int2 | signed two-byte integer |
+| tinyint |   | signed one-byte integer |
+| varchar | char, bpchar, text, string| variable-length character string |
 
 ### Parameters
 
