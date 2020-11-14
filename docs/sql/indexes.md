@@ -15,15 +15,7 @@ Indexes are currently [not persistent](https://github.com/cwida/duckdb/issues/69
 CREATE [ UNIQUE ] INDEX [ name ] ON table ({ column | ( expression )})
 ```
 
-`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. We currently only support unidimensional indexes of the following types:
-
-| Name | Aliases | Description |
-|:---|:---|:---|
-| bigint | int8 | signed eight-byte integer |
-| integer | int, int4, signed | signed four-byte integer |
-| smallint | int2 | signed two-byte integer |
-| tinyint |   | signed one-byte integer |
-| varchar | char, bpchar, text, string| variable-length character string |
+`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. We currently only support unidimensional indexes.
 
 ### Parameters
 
