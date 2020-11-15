@@ -15,7 +15,7 @@ Indexes are currently [not persistent](https://github.com/cwida/duckdb/issues/69
 
 <div id="rrdiagram1"></div>
 
-`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. We currently only support unidimensional indexes.
+`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/cwida/duckdb/issues/63).
 
 ### Parameters
 
