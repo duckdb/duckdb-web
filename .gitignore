@@ -297,3 +297,5 @@ third_party/sqllogictest
 Gemfile
 Gemfile.lock
 _site/
+
+.jekyll-cache/
