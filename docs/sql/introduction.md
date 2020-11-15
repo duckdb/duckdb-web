@@ -110,7 +110,7 @@ To retrieve data from a table, the table is queried. A SQL `SELECT` statement is
 SELECT * FROM weather;
 ```
 
-Here `*` is a shorthand for “all columns”. So the same result would be had with:
+Here `*` is a shorthand for "all columns". So the same result would be had with:
 
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date FROM weather;
@@ -146,7 +146,7 @@ This should give:
 
 Notice how the AS clause is used to relabel the output column. (The AS clause is optional.)
 
-A query can be “qualified” by adding a WHERE clause that specifies which rows are wanted. The WHERE clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (AND, OR, and NOT) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
+A query can be "qualified" by adding a WHERE clause that specifies which rows are wanted. The WHERE clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (AND, OR, and NOT) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
 
 ```sql
 SELECT * FROM weather
@@ -251,7 +251,7 @@ SELECT *
 
 This syntax is not as commonly used as the one above, but we show it here to help you understand the following topics.
 
-Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the weather table and for each row to find the matching cities row(s). If no matching row is found we want some “empty values” to be substituted for the cities table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
+Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the weather table and for each row to find the matching cities row(s). If no matching row is found we want some "empty values" to be substituted for the cities table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
 
 ```sql
 SELECT *
@@ -334,7 +334,7 @@ SELECT city, max(temp_lo)
  Hayward |  37
 (1 row)
 ```
-which gives us the same results for only the cities that have all temp_lo values below 40. Finally, if we only care about cities whose names begin with “S”, we can use the LIKE operator:
+which gives us the same results for only the cities that have all temp_lo values below 40. Finally, if we only care about cities whose names begin with "S", we can use the LIKE operator:
 
 ```sql
 SELECT city, max(temp_lo)
