@@ -40,7 +40,7 @@ DuckDB is deeply integrated into Python and R for efficient interactive data ana
 </div>
 While DuckDB is created by a research group, it is not intended to be a research prototype. DuckDB is intended to be a stable and mature database system.
 
-To facilitate this stability, DuckDB is intensively tested using [Continuous Integration](https://travis-ci.org/cwida/duckdb). DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes. 
+To facilitate this stability, DuckDB is intensively tested using [Continuous Integration](https://github.com/cwida/duckdb/actions). DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes. 
 
 In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the [TPC-H](http://www.tpc.org/tpch/) and [TPC-DS](http://www.tpc.org/tpcds/) benchmarks, and run various tests where DuckDB is used by many clients in parallel.
 
