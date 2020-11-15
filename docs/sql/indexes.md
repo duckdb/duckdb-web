@@ -4,12 +4,21 @@ title: Indexes
 selected: Documentation/Indexes
 railroad: statements/indexes.js
 ---
+## Index types
+
 DuckDB currently uses two index types:
 
-* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) is automatically created for columns of all [general-purpose data types](/docs/sql/data_types/overview). These indexes are persisted.
-* An [Adaptive Radix Tree](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.674.248&rep=rep1&type=pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`. Currently, Adaptive Radix Tree indexes are [not persistent](https://github.com/cwida/duckdb/issues/693). Unique and primary key indexes are rebuilt upon startup, while user-defined indexes are discarded.
+* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) is automatically created for columns of all [general-purpose data types](/docs/sql/data_types/overview).
+* An [Adaptive Radix Tree (ART)](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.674.248&rep=rep1&type=pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
 
-# Create Index
+Joins on columns with an ART index can make use of the [index join algorithm](https://en.wikipedia.org/wiki/Nested_loop_join#Index_join_variation). Forcing index joins is possible using [pragmas](/docs/sql/pragmas.md).
+
+## Persistence
+
+* Min-max indexes are persisted.
+* Currently, ART indexes are [not persisted](https://github.com/cwida/duckdb/issues/693). Unique and primary key indexes are rebuilt upon startup, while user-defined indexes are discarded.
+
+## Create Index
 
 <div id="rrdiagram1"></div>
 
@@ -39,7 +48,7 @@ CREATE INDEX gy_idx ON films (genre, year);
 CREATE INDEX i_index ON integers ((j+k))
 ```
 
-# Drop Index
+## Drop Index
 
 <div id="rrdiagram2"></div>
 
