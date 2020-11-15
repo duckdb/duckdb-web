@@ -72,7 +72,7 @@ INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
 
 Constants that are not numeric values (e.g. text and dates) must be surrounded by single quotes (`''`), as in the example. Input dates for the date type must be formatted as 'YYYY-MM-DD'.
 
-We can insert into the cities table in the same manner.
+We can insert into the *cities* table in the same manner.
 
 ```sql
 INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0);
@@ -85,7 +85,7 @@ INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
     VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
 ```
 
-You can list the columns in a different order if you wish or even omit some columns, e.g., if the prcp is unknown:
+You can list the columns in a different order if you wish or even omit some columns, e.g., if the *prcp* is unknown:
 
 ```sql
 INSERT INTO weather (date, city, temp_hi, temp_lo)
@@ -205,7 +205,7 @@ SELECT DISTINCT city
 ```
 
 # Joins Between Tables
-Thus far, our queries have only accessed one table at a time. Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a join query. As an example, say you wish to list all the weather records together with the location of the associated city. To do that, we need to compare the city column of each row of the weather table with the name column of all rows in the cities table, and select the pairs of rows where these values match.
+Thus far, our queries have only accessed one table at a time. Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a join query. As an example, say you wish to list all the weather records together with the location of the associated city. To do that, we need to compare the city column of each row of the *weather* table with the name column of all rows in the *cities* table, and select the pairs of rows where these values match.
 
 This would be accomplished by the following query:
 
@@ -224,8 +224,8 @@ SELECT *
 
 Observe two things about the result set:
 
-* There is no result row for the city of Hayward. This is because there is no matching entry in the cities table for Hayward, so the join ignores the unmatched rows in the weather table. We will see shortly how this can be fixed.
-* There are two columns containing the city name. This is correct because the lists of columns from the weather and cities tables are concatenated. In practice this is undesirable, though, so you will probably want to list the output columns explicitly rather than using `*`:
+* There is no result row for the city of Hayward. This is because there is no matching entry in the *cities* table for Hayward, so the join ignores the unmatched rows in the *weather* table. We will see shortly how this can be fixed.
+* There are two columns containing the city name. This is correct because the lists of columns from the *weather* and *cities* tables are concatenated. In practice this is undesirable, though, so you will probably want to list the output columns explicitly rather than using `*`:
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date, lon, lat
     FROM weather, cities
@@ -251,7 +251,7 @@ SELECT *
 
 This syntax is not as commonly used as the one above, but we show it here to help you understand the following topics.
 
-Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the weather table and for each row to find the matching cities row(s). If no matching row is found we want some "empty values" to be substituted for the cities table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
+Now we will figure out how we can get the Hayward records back in. What we want the query to do is to scan the *weather* table and for each row to find the matching cities row(s). If no matching row is found we want some "empty values" to be substituted for the *cities* table's columns. This kind of query is called an outer join. (The joins we have seen so far are inner joins.) The command looks like this:
 
 ```sql
 SELECT *
@@ -334,7 +334,7 @@ SELECT city, max(temp_lo)
  Hayward |  37
 (1 row)
 ```
-which gives us the same results for only the cities that have all temp_lo values below 40. Finally, if we only care about cities whose names begin with "S", we can use the LIKE operator:
+which gives us the same results for only the cities that have all *temp_lo* values below 40. Finally, if we only care about cities whose names begin with "S", we can use the LIKE operator:
 
 ```sql
 SELECT city, max(temp_lo)
