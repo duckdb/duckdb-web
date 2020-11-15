@@ -534,11 +534,6 @@ a:focus,
 a:hover {
     text-decoration: underline;
 }
-cite,
-em {
-	font-family: $fontMonoItalic;
-	font-style: normal;
-}
 strong {
     font-weight: normal;
     font-family: $fontSansBold;
@@ -548,12 +543,10 @@ p{
 }
 p em{
 	font-family: $fontSans;
-	font-style: normal;
 }
 
 code em{
 	font-family: $fontMonoItalic;
-	font-style: normal;
 }
 p img {
     display: inline;
