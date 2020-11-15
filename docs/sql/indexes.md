@@ -2,6 +2,7 @@
 layout: docu
 title: Indexes
 selected: Documentation/Indexes
+railroad: statements/indexes.js
 ---
 DuckDB currently uses two index types:
 
@@ -11,9 +12,8 @@ DuckDB currently uses two index types:
 Indexes are currently [not persistent](https://github.com/cwida/duckdb/issues/693). Min-max indexes, unique and primary key indexes are rebuilt upon startup while user-defined adaptive radix tree indexes are discared.
 
 # Create Index
-```sql
-CREATE [ UNIQUE ] INDEX [ name ] ON table ({ column | ( expression )})
-```
+
+<div id="rrdiagram1"></div>
 
 `CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. We currently only support unidimensional indexes.
 
@@ -42,11 +42,10 @@ CREATE INDEX i_index ON integers ((j+k))
 ```
 
 # Drop Index
-```sql
-DROP INDEX [ IF EXISTS ] name
-```
 
-DROP INDEX drops an existing index from the database system.
+<div id="rrdiagram2"></div>
+
+`DROP INDEX` drops an existing index from the database system.
 
 
 ### Parameters
