@@ -9,15 +9,15 @@ Here we provide an overview of how to perform simple operations in SQL. This tut
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See [here](/docs/installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
 
 ```
-SQLite version DuckDB cbf92c4
+DuckDB 5fb6fe57ab
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
-sqlite>
+D
 ```
 
 
-> By launching the database like this, an **in-memory database is launched**. That means that no data is persisted on disk. To persist data on disk you should also pass a database path to the shell. The database will then be stored at that path and can be reloaded from disk later. Also please don't be confused that it says "SQLite" in the shell, we re-used SQLite's shell as-is and only replaced the backend with DuckDB.
+> By launching the database like this, an **in-memory database is launched**. That means that no data is persisted on disk. To persist data on disk you should also pass a database path to the shell. The database will then be stored at that path and can be reloaded from disk later.
 
 # Concepts
 DuckDB is a relational database management system (RDBMS). That means it is a system for managing data stored in relations. A relation is essentially a mathematical term for a table.
