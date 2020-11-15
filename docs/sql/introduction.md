@@ -110,7 +110,7 @@ To retrieve data from a table, the table is queried. A SQL `SELECT` statement is
 SELECT * FROM weather;
 ```
 
-Here * is a shorthand for “all columns”. So the same result would be had with:
+Here `*` is a shorthand for “all columns”. So the same result would be had with:
 
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date FROM weather;
@@ -225,7 +225,7 @@ SELECT *
 Observe two things about the result set:
 
 * There is no result row for the city of Hayward. This is because there is no matching entry in the cities table for Hayward, so the join ignores the unmatched rows in the weather table. We will see shortly how this can be fixed.
-* There are two columns containing the city name. This is correct because the lists of columns from the weather and cities tables are concatenated. In practice this is undesirable, though, so you will probably want to list the output columns explicitly rather than using *:
+* There are two columns containing the city name. This is correct because the lists of columns from the weather and cities tables are concatenated. In practice this is undesirable, though, so you will probably want to list the output columns explicitly rather than using `*`:
 ```sql
 SELECT city, temp_lo, temp_hi, prcp, date, lon, lat
     FROM weather, cities
