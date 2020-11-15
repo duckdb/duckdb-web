@@ -29,4 +29,7 @@ The file name pattern should be like this: `2020-07-20-my-blog-post.md`.
 	excerpt_separator: <!--more-->
 	---
 	
-Include the excerpt_separator `<!--more-->` when you wish to end the post preview. 
+Include the excerpt_separator `<!--more-->` when you wish to end the post preview.
+
+## Building
+The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, run `jekyll serve`.
