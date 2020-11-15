@@ -45,10 +45,11 @@ DESCRIBE ontime;
 |OriginCityName|VARCHAR|YES |NULL|NULL   |NULL |
 |DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
 
-To determine the CSV dialect and data types automatically, we draw chunks of sample rows from all over the input file. If the auomatic detection does not succeed, we can try to increase the number of rows per samples (`SAMPLE_SIZE (DEFAULT: 100, MAX: 1024)`) or the amount of samples (`NUMBER_OF_SAMPLES (DEFAULT: 10, MAX: 2147483647)`) manually:
+| `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Note: Only the first max. 1024 rows will be used for dialect detection. |
+| `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
 
 ```sql
-SELECT * FROM read_csv_auto('test.csv', SAMPLE_SIZE=1024, NUMBER_OF_SAMPLES=20);
+SELECT * FROM read_csv_auto('test.csv', SAMPLE_SIZE=20000);
 ```
 
 If we set `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, or `HEADER` explicitly, we can bypass the automatic detection of this particular parameter:
