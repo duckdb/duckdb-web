@@ -59,7 +59,7 @@ Below is a full list of all available format specifiers.
 | `%-H` | Hour (24-hour clock) as a decimal number. | 0, 1, ..., 23 |
 | `%I` | Hour (12-hour clock) as a zero-padded decimal number. | 01, 02, ..., 12 |
 | `%-I` | Hour (12-hour clock) as a decimal number. | 1, 2, ... 12 |
-| `%p` | Locale’s AM or PM. | AM, PM |
+| `%p` | Locale's AM or PM. | AM, PM |
 | `%M` | Minute as a zero-padded decimal number. | 00, 01, ..., 59 |
 | `%-M` | Minute as a decimal number. | 0, 1, ..., 59 |
 | `%S` | Second as a zero-padded decimal number. | 00, 01, ..., 59 |
