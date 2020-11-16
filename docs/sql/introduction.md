@@ -64,7 +64,7 @@ DROP TABLE [tablename];
 ```
 
 # Populating a Table With Rows
-The INSERT statement is used to populate a table with rows:
+The insert statement is used to populate a table with rows:
 
 ```sql
 INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
