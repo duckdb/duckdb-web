@@ -26,6 +26,6 @@ INSERT INTO tbl(i) VALUES (1), (DEFAULT), (3);
 
 The target column names can be listed in any order. If no list of column names is given at all, the default is all the columns of the table in their declared order. The values supplied by the VALUES clause or query are associated with the column list left-to-right.
 
-Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or null if there is none.
+Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or `NULL` if there is none.
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.

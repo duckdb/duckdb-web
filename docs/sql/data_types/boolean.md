@@ -7,9 +7,9 @@ expanded: Data Types
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| boolean | bool | logical boolean (true/false) |
+| `BOOLEAN` | bool | logical boolean (true/false) |
 
-The boolean type represents a statement of truth ("true" or "false"). In SQL, the boolean field can also have a third state "unknown" which is represented by the SQL null value.
+The `BOOLEAN` type represents a statement of truth ("true" or "false"). In SQL, the boolean field can also have a third state "unknown" which is represented by the SQL NULL value.
 
 ```sql
 -- select the three possible values of a boolean column
