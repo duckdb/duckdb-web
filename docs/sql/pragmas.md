@@ -3,10 +3,10 @@ layout: docu
 title: Pragmas
 selected: Documentation/Pragmas
 ---
-The PRAGMA statement is an SQL extension adopted by DuckDB from SQLite. PRAGMA statements can be issued in a similar manner to regular SQL statements. PRAGMA commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
+The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
 # List of supported PRAGMA statements
-Below is a list of supported PRAGMA statements.
+Below is a list of supported `PRAGMA` statements.
 
 
 ### database_list, show_tables, table_info, show
@@ -122,4 +122,4 @@ PRAGMA force_parallelism;
 PRAGMA disable_force_parallelism;
 ```
 
-These are PRAGMAs mostly used for development and internal testing.
+These are `PRAGMA`s mostly used for development and internal testing.

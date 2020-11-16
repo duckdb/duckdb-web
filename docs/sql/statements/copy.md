@@ -67,9 +67,9 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. |
 
 
-> It is recommended that the file name used in COPY always be specified as an absolute path.
+> It is recommended that the file name used in `COPY` always be specified as an absolute path.
 >
-> The values in each record are separated by the `DELIMITER` string. If the value contains the `DELIMITER` string, the `QUOTE` string, the `NULL` string, a carriage return, or line feed character, then the whole value is prefixed and suffixed by the `QUOTE` string, and any occurrence within the value of a `QUOTE` string or the `ESCAPE` string is preceded by the `ESCAPE` string. You can also use `FORCE_QUOTE` to force quotes when outputting non-`NULL` values in specific columns.
+> The values in each record are separated by the `DELIMITER` string. If the value contains the `DELIMITER` string, the `QUOTE` string, the `NULL` string, a carriage return, or line feed character, then the whole value is prefixed and suffixed by the `QUOTE` string, and any occurrence within the value of a `QUOTE` string or the `ESCAPE` string is preceded by the `ESCAPE` string. You can also use `FORCE_QUOTE` to force quotes when outputting non-NULL values in specific columns.
 >
 > The CSV format has no standard way to distinguish a NULL value from an empty string. You can use `FORCE_NOT_NULL` to prevent `NULL` input comparisons for specific columns.
 >
