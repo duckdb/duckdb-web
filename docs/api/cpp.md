@@ -97,7 +97,7 @@ This method automatically discovers from the template typenames the correspondin
 - double → SQLType::DOUBLE
 - string_t → SQLType::VARCHAR
 
-*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: INTEGER, TIME and DATE, then for disambiguation the users can use the following overloaded method.
+*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.** `template<typename TR, typename... Args>`\
 &nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`

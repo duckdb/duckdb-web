@@ -156,7 +156,7 @@ SELECT 44-1;
 ```
 
 ##### Query Verification
-Many simple tests start by enabling query verification. This can be done through the following PRAGMA statement:
+Many simple tests start by enabling query verification. This can be done through the following `PRAGMA` statement:
 
 ```sql
 statement ok

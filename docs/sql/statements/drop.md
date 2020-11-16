@@ -5,7 +5,7 @@ selected: Documentation/SQL/Drop
 expanded: SQL
 railroad: statements/drop.js
 ---
-The DROP statement removes a catalog entry added previously with the CREATE command.
+The `DROP` statement removes a catalog entry added previously with the `CREATE` command.
 
 ### Examples
 ```sql
@@ -18,7 +18,7 @@ DROP VIEW IF EXISTS v1;
 ### Syntax
 <div id="rrdiagram"></div>
 
-The optional IF EXISTS clause suppresses the error that would normally result if the table does not exist.
+The optional `IF EXISTS` clause suppresses the error that would normally result if the table does not exist.
 
 By default (or if the `RESTRICT` clause is provided), the entry will not be dropped if there are any other objects that depend on it. If the `CASCADE` clause is provided then all the objects that are dependent on the object will be dropped as well.
 

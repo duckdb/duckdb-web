@@ -144,9 +144,9 @@ This should give:
 (3 rows)
 ```
 
-Notice how the AS clause is used to relabel the output column. (The AS clause is optional.)
+Notice how the `AS` clause is used to relabel the output column. (The `AS` clause is optional.)
 
-A query can be "qualified" by adding a WHERE clause that specifies which rows are wanted. The WHERE clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (AND, OR, and NOT) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
+A query can be "qualified" by adding a `WHERE` clause that specifies which rows are wanted. The `WHERE` clause contains a Boolean (truth value) expression, and only rows for which the Boolean expression is true are returned. The usual Boolean operators (`AND`, `OR`, and `NOT`) are allowed in the qualification. For example, the following retrieves the weather of San Francisco on rainy days:
 
 ```sql
 SELECT * FROM weather
@@ -197,7 +197,7 @@ SELECT DISTINCT city
 (2 rows)
 ```
 
-Here again, the result row ordering might vary. You can ensure consistent results by using DISTINCT and ORDER BY together:
+Here again, the result row ordering might vary. You can ensure consistent results by using `DISTINCT` and `ORDER BY` together:
 ```sql
 SELECT DISTINCT city
     FROM weather
@@ -269,7 +269,7 @@ SELECT *
 This query is called a left outer join because the table mentioned on the left of the join operator will have each of its rows in the output at least once, whereas the table on the right will only have those rows output that match some row of the left table. When outputting a left-table row for which there is no right-table match, empty (null) values are substituted for the right-table columns.
 
 # Aggregate Functions
-Like most other relational database products, DuckDB supports aggregate functions. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the count, sum, avg (average), max (maximum) and min (minimum) over a set of rows.
+Like most other relational database products, DuckDB supports aggregate functions. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
 As an example, we can find the highest low-temperature reading anywhere with:
 ```sql
@@ -287,7 +287,7 @@ If we wanted to know what city (or cities) that reading occurred in, we might tr
 ```sql
 SELECT city FROM weather WHERE temp_lo = max(temp_lo);     -- WRONG
 ```
-but this will not work since the aggregate max cannot be used in the WHERE clause. (This restriction exists because the WHERE clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.) However, as is often the case the query can be restated to accomplish the desired result, here by using a subquery:
+but this will not work since the aggregate max cannot be used in the `WHERE` clause. (This restriction exists because the `WHERE` clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.) However, as is often the case the query can be restated to accomplish the desired result, here by using a subquery:
 
 ```sql
 SELECT city FROM weather
@@ -303,7 +303,7 @@ SELECT city FROM weather
 
 This is OK because the subquery is an independent computation that computes its own aggregate separately from what is happening in the outer query.
 
-Aggregates are also very useful in combination with GROUP BY clauses. For example, we can get the maximum low temperature observed in each city with:
+Aggregates are also very useful in combination with `GROUP BY` clauses. For example, we can get the maximum low temperature observed in each city with:
 
 ```sql
 SELECT city, max(temp_lo)
@@ -334,7 +334,7 @@ SELECT city, max(temp_lo)
  Hayward |  37
 (1 row)
 ```
-which gives us the same results for only the cities that have all *temp_lo* values below 40. Finally, if we only care about cities whose names begin with "S", we can use the LIKE operator:
+which gives us the same results for only the cities that have all *temp_lo* values below 40. Finally, if we only care about cities whose names begin with "S", we can use the `LIKE` operator:
 
 ```sql
 SELECT city, max(temp_lo)
@@ -344,15 +344,15 @@ SELECT city, max(temp_lo)
     HAVING max(temp_lo) < 40;
 ```
 
-More information about the LIKE operator can be found [here](/docs/sql/functions/patternmatching).
+More information about the `LIKE` operator can be found [here](/docs/sql/functions/patternmatching).
 
-It is important to understand the interaction between aggregates and SQL's WHERE and HAVING clauses. The fundamental difference between WHERE and HAVING is this: WHERE selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas HAVING selects group rows after groups and aggregates are computed. Thus, the WHERE clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the HAVING clause always contains aggregate functions.
+It is important to understand the interaction between aggregates and SQL's `WHERE` and `HAVING` clauses. The fundamental difference between `WHERE` and `HAVING` is this: `WHERE` selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas `HAVING` selects group rows after groups and aggregates are computed. Thus, the `WHERE` clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the `HAVING` clause always contains aggregate functions.
 
 
-In the previous example, we can apply the city name restriction in WHERE, since it needs no aggregate. This is more efficient than adding the restriction to HAVING, because we avoid doing the grouping and aggregate calculations for all rows that fail the WHERE check.
+In the previous example, we can apply the city name restriction in `WHERE`, since it needs no aggregate. This is more efficient than adding the restriction to `HAVING`, because we avoid doing the grouping and aggregate calculations for all rows that fail the `WHERE` check.
 
 # Updates
-You can update existing rows using the UPDATE command. Suppose you discover the temperature readings are all off by 2 degrees after November 28. You can correct the data as follows:
+You can update existing rows using the `UPDATE` command. Suppose you discover the temperature readings are all off by 2 degrees after November 28. You can correct the data as follows:
 
 ```sql
 UPDATE weather
@@ -375,7 +375,7 @@ SELECT * FROM weather;
 ```
 
 # Deletions
-Rows can be removed from a table using the DELETE command. Suppose you are no longer interested in the weather of Hayward. Then you can do the following to delete those rows from the table:
+Rows can be removed from a table using the `DELETE` command. Suppose you are no longer interested in the weather of Hayward. Then you can do the following to delete those rows from the table:
 
 ```sql
 DELETE FROM weather WHERE city = 'Hayward';
@@ -401,4 +401,4 @@ One should be wary of statements of the form
 DELETE FROM tablename;
 ```
 
-Without a qualification, DELETE will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this!
+Without a qualification, `DELETE` will remove all rows from the given table, leaving it empty. The system will not request confirmation before doing this!

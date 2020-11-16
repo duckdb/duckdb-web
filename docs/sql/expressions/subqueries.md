@@ -40,7 +40,7 @@ SELECT course FROM grades WHERE grade = (SELECT MIN(grade) FROM grades);
 ## Exists
 <div id="rrdiagram2"></div>
 
-The EXISTS operator is used to test for the existence of any row inside the subquery. It returns either true when the subquery returns one or more records, or false otherwise. The exists clause is generally the most useful as a *correlated* subquery. However, it can be used as an uncorrelated subquery as well.
+The `EXISTS` operator is used to test for the existence of any row inside the subquery. It returns either true when the subquery returns one or more records, or false otherwise. The `EXISTS` clause is generally the most useful as a *correlated* subquery. However, it can be used as an uncorrelated subquery as well.
 
 For example, we can use it to figure out if there are any grades present for a given course:
 
@@ -55,9 +55,9 @@ SELECT EXISTS(SELECT * FROM grades WHERE course='History');
 ## In Clause
 <div id="rrdiagram3"></div>
 
-The IN clause checks containment of the left expression inside the result defined by the subquery or the set of expressions on the right side. The IN clause returns true if the expression is present in the RHS, false if the expression is not in the RHS and the RHS has no `NULL` values, or `NULL` if the expression is not in the RHS and the RHS has `NULL` values.
+The `IN` clause checks containment of the left expression inside the result defined by the subquery or the set of expressions on the right side. The `IN` clause returns true if the expression is present in the RHS, false if the expression is not in the RHS and the RHS has no `NULL` values, or `NULL` if the expression is not in the RHS and the RHS has `NULL` values.
 
-We can use the IN clause in a similar manner as we used the EXISTS clause:
+We can use the `IN` clause in a similar manner as we used the `EXISTS` clause:
 
 ```sql
 SELECT 'Math' IN (SELECT course FROM grades);
