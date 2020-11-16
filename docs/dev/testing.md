@@ -198,7 +198,7 @@ endloop
 ```
 
 ##### Data Generation
-Loops should be used sparingly. While it might be tempting to use loops for inserting data using `INSERT INTO` statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
+Loops should be used sparingly. While it might be tempting to use loops for inserting data using insert statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
 
 ```sql
 -- create the table integers with the values [0, 1, .., 98,  99]
