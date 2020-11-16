@@ -8,16 +8,16 @@ The table below shows all the built-in general-purpose data types. The alternati
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| bigint | int8 | signed eight-byte integer |
-| boolean | bool | logical boolean (true/false) |
-| blob | bytea | variable-length binary data |
-| date |   | calendar date (year, month day) |
-| double | numeric | double precision floating-point number (8 bytes) |
-| integer | int, int4, signed | signed four-byte integer |
-| real | float4 | single precision floating-point number (4 bytes)|
-| smallint | int2 | signed two-byte integer|
-| timestamp | datetime | time of day (no time zone) |
-| tinyint |   | signed one-byte integer|
-| varchar | char, bpchar, text, string| variable-length character string |
+| `BIGINT` | `INT8` | signed eight-byte integer |
+| `BOOLEAN` | `BOOL` | logical boolean (true/false) |
+| `BLOB` | `BYTEA` | variable-length binary data |
+| `DATE` |   | calendar date (year, month day) |
+| `DOUBLE` | `NUMERIC` | double precision floating-point number (8 bytes) |
+| `INTEGER` | `INT`, `INT4`, `SIGNED` | signed four-byte integer |
+| `REAL` | `FLOAT4` | single precision floating-point number (4 bytes)|
+| `SMALLINT` | `INT2` | signed two-byte integer|
+| `TIMESTAMP` | `DATETIME` | time of day (no time zone) |
+| `TINYINT` |   | signed one-byte integer|
+| `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
 ### More

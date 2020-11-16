@@ -53,7 +53,7 @@ After a sequence is created, you use the function `nextval` to operate on the se
 If `NO CYCLE` is specified, any calls to nextval after the sequence has reached its maximum value will return an error. If neither `CYCLE` or `NO CYCLE` are specified, `NO CYCLE` is the default.
 
 > Use `DROP SEQUENCE` to remove a sequence. 
-> Sequences are based on bigint arithmetic, so the range cannot exceed the range of an eight-byte integer (-9223372036854775808 to 9223372036854775807).
+> Sequences are based on `BIGINT` arithmetic, so the range cannot exceed the range of an eight-byte integer (-9223372036854775808 to 9223372036854775807).
 
 <!-- Update the sequence value after a `COPY FROM`:
 
