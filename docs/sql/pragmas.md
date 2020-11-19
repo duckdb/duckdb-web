@@ -120,6 +120,8 @@ PRAGMA disable_verification;
 PRAGMA force_parallelism;
 -- Disable force parallel query processing (for development)
 PRAGMA disable_force_parallelism;
+-- Force index joins where applicable
+PRAGMA force_index_join;
 ```
 
 These are `PRAGMA`s mostly used for development and internal testing.

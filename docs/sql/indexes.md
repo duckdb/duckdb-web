@@ -2,21 +2,27 @@
 layout: docu
 title: Indexes
 selected: Documentation/Indexes
+railroad: statements/indexes.js
 ---
-An Adaptive Radix Tree is used as the index data structure of choice for DuckDB. Its mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Note that an index is automatically created for columns with a UNIQUE or PRIMARY KEY constrain.
+## Index types
 
-# Create Index
-```sql
-CREATE [ UNIQUE ] INDEX [ name ] ON table ({ column | ( expression )})
-```
-CREATE INDEX constructs an index on the specified column(s) of the specified table. We currently only support unidimensional indexes of the following types:
+DuckDB currently uses two index types:
 
-| Name | Aliases | Description |
-|:---|:---|:---|
-| bigint | int8 | signed eight-byte integer |
-| integer | int, int4, signed | signed four-byte integer |
-| smallint | int2 | signed two-byte integer|
-| tinyint |   | signed one-byte integer|
+* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) is automatically created for columns of all [general-purpose data types](/docs/sql/data_types/overview).
+* An [Adaptive Radix Tree (ART)](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.674.248&rep=rep1&type=pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
+
+Joins on columns with an ART index can make use of the [index join algorithm](https://en.wikipedia.org/wiki/Nested_loop_join#Index_join_variation). Forcing index joins is possible using [pragmas](/docs/sql/pragmas.md).
+
+## Persistence
+
+* Min-max indexes are persisted.
+* Currently, ART indexes are [not persisted](https://github.com/cwida/duckdb/issues/693). Unique and primary key indexes are rebuilt upon startup, while user-defined indexes are discarded.
+
+## Create Index
+
+<div id="rrdiagram1"></div>
+
+`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/cwida/duckdb/issues/63).
 
 ### Parameters
 
@@ -34,18 +40,19 @@ CREATE INDEX constructs an index on the specified column(s) of the specified tab
 ```sql
 -- Create an unique index 'films_id_idx' on the column id of table films.
 CREATE UNIQUE INDEX films_id_idx ON films (id);
--- Creates index 's_idx' that allows for duplicate values on column revenue of table films.
+-- Create index 's_idx' that allows for duplicate values on column revenue of table films.
 CREATE INDEX revenue_idx ON films (revenue);
+-- Create compound index 'gy_idx' on genre and year columns.
+CREATE INDEX gy_idx ON films (genre, year);
 -- Create index 'i_index' on the expression of the sum of columns j and k from table integers.
 CREATE INDEX i_index ON integers ((j+k))
 ```
 
-# Drop Index
-```sql
-DROP INDEX [ IF EXISTS ] name
-```
+## Drop Index
 
-DROP INDEX drops an existing index from the database system.
+<div id="rrdiagram2"></div>
+
+`DROP INDEX` drops an existing index from the database system.
 
 
 ### Parameters
