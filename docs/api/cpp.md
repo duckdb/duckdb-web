@@ -88,16 +88,16 @@ The `CreateScalarFunction()` methods automatically creates vectorized scalar UDF
 
 This method automatically discovers from the template typenames the corresponding SQLTypes:
 
-- bool → SQLType::BOOLEAN;
-- int8_t → SQLType::TINYINT;
-- int16_t → SQLType::SMALLINT
-- int32_t → SQLType::INTEGER
-- int64_t  → SQLType::BIGINT
-- float → SQLType::FLOAT
-- double → SQLType::DOUBLE
-- string_t → SQLType::VARCHAR
+- `bool` → `SQLType::BOOLEAN`
+- `int8_t` → `SQLType::TINYINT`
+- `int16_t` → `SQLType::SMALLINT`
+- `int32_t` → `SQLType::INTEGER`
+- `int64_t`  →` SQLType::BIGINT`
+- `float` → `SQLType::FLOAT`
+- `double` → `SQLType::DOUBLE`
+- `string_t` → `SQLType::VARCHAR`
 
-*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: INTEGER, TIME and DATE, then for disambiguation the users can use the following overloaded method.
+*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.** `template<typename TR, typename... Args>`\
 &nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`

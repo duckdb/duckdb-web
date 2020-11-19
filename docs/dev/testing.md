@@ -5,7 +5,7 @@ selected: Documentation/Development/Testing
 expanded: Development
 ---
 
-Testing is vital to make sure that DuckDB works properly and keeps working properly. For that reason, we put a large emphasis on thorough and frequent testing. We run a batch of small tests on every commit using [Travis CI](https://travis-ci.org/github/cwida/duckdb), and run a more exhaustive batch of tests on pull requests and commits in the master branch.
+Testing is vital to make sure that DuckDB works properly and keeps working properly. For that reason, we put a large emphasis on thorough and frequent testing. We run a batch of small tests on every commit using [GitHub Actions](https://github.com/cwida/duckdb/actions), and run a more exhaustive batch of tests on pull requests and commits in the master branch.
 
 It is crucial that any new features that get added have correct tests that not only test the "happy path", but also test edge cases and incorrect usage of the feature. In this section, we describe how DuckDB tests are structured and how to make new tests for DuckDB.
 
@@ -156,7 +156,7 @@ SELECT 44-1;
 ```
 
 ##### Query Verification
-Many simple tests start by enabling query verification. This can be done through the following PRAGMA statement:
+Many simple tests start by enabling query verification. This can be done through the following `PRAGMA` statement:
 
 ```sql
 statement ok
@@ -198,7 +198,7 @@ endloop
 ```
 
 ##### Data Generation
-Loops should be used sparingly. While it might be tempting to use loops for inserting data using `INSERT INTO` statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
+Loops should be used sparingly. While it might be tempting to use loops for inserting data using insert statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
 
 ```sql
 -- create the table integers with the values [0, 1, .., 98,  99]
