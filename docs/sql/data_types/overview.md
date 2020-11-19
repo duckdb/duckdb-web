@@ -14,7 +14,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | date |   | calendar date (year, month day) |
 | double | numeric | double precision floating-point number (8 bytes) |
 | integer | int, int4, signed | signed four-byte integer |
-| real | float4 | single precision floating-point number (4 bytes)|
+| real | float, float4 | single precision floating-point number (4 bytes)|
 | smallint | int2 | signed two-byte integer|
 | timestamp | datetime | time of day (no time zone) |
 | tinyint |   | signed one-byte integer|
