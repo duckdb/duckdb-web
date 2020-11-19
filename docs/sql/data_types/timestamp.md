@@ -6,7 +6,7 @@ expanded: Data Types
 ---
 | Name | Aliases | Description |
 |:---|:---|:---|
-| timestamp | datetime | time of day (no time zone) |
+| `TIMESTAMP` | datetime | time of day (no time zone) |
 
 A timestamp specifies a combination of `DATE` (year, month, day) and a `TIME` (hour, minute, second, millisecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (YYYY-MM-DD hh:mm:ss).
 

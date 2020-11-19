@@ -5,7 +5,7 @@ selected: Documentation/SQL/Select
 expanded: SQL
 railroad: statements/select.js
 ---
-The SELECT statement retrieves rows from the database.
+The `SELECT` statement retrieves rows from the database.
 
 ### Examples
 ```sql
@@ -22,7 +22,7 @@ SELECT * FROM t1 JOIN t2 USING(a, b);
 ```
 
 ### Syntax
-The SELECT statement retrieves rows from the database. The canonical order of a select statement is as follows:
+The `SELECT` statement retrieves rows from the database. The canonical order of a select statement is as follows:
 
 ```sql
 SELECT select_list

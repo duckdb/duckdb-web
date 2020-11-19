@@ -55,22 +55,22 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `boolean` | Specifies whether the selected option should be turned on or off. You can write `TRUE`, `ON`, or `1` to enable the option, and `FALSE`, `OFF`, or `0` to disable it. The `boolean` value can also be omitted, in which case `TRUE` is assumed. |
 | `FORMAT` | Specifies the copy function to use. This defaults to `CSV`, but other options can be available (e.g. `PARQUET`). |
 | `DELIMITER` | Specifies the string that separates columns within each row (line) of the file. The default value is a comma (`,`). |
-| `NULL` | Specifies the string that represents a null value. The default is an empty string. Please note that in `COPY ... FROM` both an unquoted empty string and a quoted empty string represent a null value. If any other null string is specified, again both its quoted and its unquoted appearance represent a null value. `COPY ... TO` does not quote null values on output, even if `FORCE_QUOTE` is true. |
+| `NULL` | Specifies the string that represents a NULL value. The default is an empty string. Please note that in `COPY ... FROM` both an unquoted empty string and a quoted empty string represent a NULL value. If any other NULL string is specified, again both its quoted and its unquoted appearance represent a NULL value. `COPY ... TO` does not quote NULL values on output, even if `FORCE_QUOTE` is true. |
 | `HEADER` | Specifies that the file contains a header line with the names of each column in the file. Thus, `COPY ... FROM` ignores the first line when importing data, whereas on output (`COPY ... TO`) the first line of the file contains the column names of the exported columns. |
 | `QUOTE` | Specifies the quoting string to be used when a data value is quoted. The default is double-quote (`"`). |
 | `ESCAPE` | Specifies the string that should appear before a data character sequence that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
 | `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](/docs/sql/functions/dateformat) |
 | `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](/docs/sql/functions/dateformat) |
-| `FORCE_QUOTE` | Forces quoting to be used for all non-NULL values in each specified column. `NULL` output is never quoted. If `*` is specified, non-`NULL` values will be quoted in all columns. This option is allowed only in `COPY ... TO`. |
-| `FORCE_NOT_NULL` | Do not match the specified columns' values against the null string. In the default case where the null string is empty, this means that empty values will be read as zero-length strings rather than nulls. This option is allowed only in `COPY ... FROM`. |
+| `FORCE_QUOTE` | Forces quoting to be used for all non-NULL values in each specified column. `NULL` output is never quoted. If `*` is specified, non-NULL values will be quoted in all columns. This option is allowed only in `COPY ... TO`. |
+| `FORCE_NOT_NULL` | Do not match the specified columns' values against the NULL string. In the default case where the NULL string is empty, this means that empty values will be read as zero-length strings rather than NULLs. This option is allowed only in `COPY ... FROM`. |
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |
 | `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. |
 | `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Only the first max. 1024 rows will be used for dialect detection. |
 | `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
 
-> It is recommended that the file name used in COPY always be specified as an absolute path.
+> It is recommended that the file name used in `COPY` always be specified as an absolute path.
 >
-> The values in each record are separated by the `DELIMITER` string. If the value contains the `DELIMITER` string, the `QUOTE` string, the `NULL` string, a carriage return, or line feed character, then the whole value is prefixed and suffixed by the `QUOTE` string, and any occurrence within the value of a `QUOTE` string or the `ESCAPE` string is preceded by the `ESCAPE` string. You can also use `FORCE_QUOTE` to force quotes when outputting non-`NULL` values in specific columns.
+> The values in each record are separated by the `DELIMITER` string. If the value contains the `DELIMITER` string, the `QUOTE` string, the `NULL` string, a carriage return, or line feed character, then the whole value is prefixed and suffixed by the `QUOTE` string, and any occurrence within the value of a `QUOTE` string or the `ESCAPE` string is preceded by the `ESCAPE` string. You can also use `FORCE_QUOTE` to force quotes when outputting non-NULL values in specific columns.
 >
 > The CSV format has no standard way to distinguish a NULL value from an empty string. You can use `FORCE_NOT_NULL` to prevent `NULL` input comparisons for specific columns.
 >
