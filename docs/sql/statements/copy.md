@@ -65,7 +65,8 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `FORCE_NOT_NULL` | Do not match the specified columns' values against the null string. In the default case where the null string is empty, this means that empty values will be read as zero-length strings rather than nulls. This option is allowed only in `COPY ... FROM`. |
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |
 | `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. |
-
+| `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Only the first max. 1024 rows will be used for dialect detection. |
+| `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
 
 > It is recommended that the file name used in COPY always be specified as an absolute path.
 >
