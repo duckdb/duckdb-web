@@ -47,7 +47,7 @@ def get_benchmark_info(benchmark):
 
 keyword_codestyle = 'color:black;font-weight:bold;'
 string_codestyle = 'color:firebrick;'
-numeric_codestyle = 'color:gold;'
+numeric_codestyle = 'color:darkgreen;'
 comment_codestyle = 'color:green;'
 
 def wrap_in_span(codestyle):

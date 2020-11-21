@@ -109,7 +109,7 @@ def pull_new_changes():
     proc.wait()
     # pull from duckdb
     os.chdir(duckdb_base)
-    proc = subprocess.Popen(['git', 'pull'], stdout=FNULL)
+    proc = subprocess.Popen(['git', 'pull', 'origin', 'master'], stdout=FNULL)
     proc.wait()
 
 def build_optimized():
