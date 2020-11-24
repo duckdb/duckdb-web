@@ -7,6 +7,6 @@ expanded: Client APIs
 
 There are various client APIs for DuckDB. DuckDB's "native" API is [C++](cpp), with "official" wrappers available for [C](c), [Python](python), [R](r) and [Java](java). 
 
-There are also contributed third-party DuckDB wrappers for [Ruby](https://github.com/suketa/ruby-duckdb) and [Go](https://github.com/marcboeker/go-duckdb).
+There are also contributed third-party DuckDB wrappers for [Ruby](https://github.com/suketa/ruby-duckdb), [Go](https://github.com/marcboeker/go-duckdb) and [C#](https://github.com/Giorgi/DuckDB.NET).
 
 ### Pages in this Section
