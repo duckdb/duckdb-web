@@ -91,11 +91,10 @@ DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbpl
 ```R
 library("DBI")
 library("dplyr")
+con <- dbConnect(duckdb::duckdb())
+duckdb::duckdb_register(con, "flights", nycflights13::flights)
 
-dsrc = duckdb::src_duckdb()
-duckdb::duckdb_register(dsrc$con, "flights", nycflights13::flights)
-
-tbl(dsrc, "flights") %>% 
+tbl(con, "flights") %>% 
   group_by(dest) %>%
   summarise(delay = mean(dep_time))
 ```
