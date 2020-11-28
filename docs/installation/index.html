@@ -25,6 +25,7 @@ body_class: installation
 			<li class="selected" data-id=".python">Python</li>
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
+			<li data-id=".js">node.js</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".cli">CLI</li>
 		</ul>
@@ -90,12 +91,16 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 	
 	<div class="latest java">
-{% highlight java %}
+{% highlight xml %}
 <dependency>
  <groupId>org.duckdb</groupId>
  <artifactId>duckdb_jdbc</artifactId>
  <version>{{ site.currentduckdbversion }}</version>
 </dependency>{% endhighlight %}
+	</div>
+
+		<div class="latest js">
+{% highlight bash %}npm install duckdb{% endhighlight %}
 	</div>
 	
 	<div class="latest cplusplus source">
@@ -144,6 +149,11 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		coming soon
 	</div>
 	
+
+		<div class="master js">
+{% highlight bash %}npm install duckdb@next{% endhighlight %}
+	</div>
+
 	
 	<div class="master cplusplus source">
 		<a href="https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-src.zip" target="_blank">https://github.com/cwida/duckdb/releases/download/master-builds/libduckdb-src.zip</a>
