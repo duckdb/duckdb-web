@@ -218,6 +218,18 @@ Statement stmt = conn.createStatement();
 ResultSet rs = stmt.execute("SELECT 42");{% endhighlight %}
 	</div>
 	
+	<div class="example js">
+{% highlight javascript %}
+var duckdb = require('duckdb');
+var db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+db.all('SELECT 42 AS fortytwo', function(err, res) {
+  if (err) {
+    throw err;
+  }
+  console.log(res[0].fortytwo)
+});{% endhighlight %}
+	</div>
+
 	<div class="example cplusplus">
 {% highlight cpp %}
 DuckDB db(nullptr);
