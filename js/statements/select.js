@@ -63,11 +63,20 @@ function GenerateJoinClause(options) {
 	]
 }
 
+function GenerateTableSample(options) {
+	return [
+		Sequence([
+			Keyword("TABLESAMPLE")
+		].concat(GenerateSample(options)))
+	]
+}
+
 function GenerateTableReference(options) {
 	return [
 		Sequence([
 			Optional(Sequence([Expression("schema-name"), Keyword(".")]), "skip"),
 			Expression("table-name"),
+			Expandable("table-sample", options, "table-sample-reference", GenerateTableSample)
 		])
 	]
 }
@@ -80,6 +89,7 @@ function GenerateTableFunction(options) {
 			Keyword("("),
 			ZeroOrMore(Expression(), ","),
 			Keyword(")"),
+			Expandable("table-sample", options, "table-sample-function", GenerateTableSample)
 		])
 	]
 }
@@ -91,6 +101,7 @@ function GenerateSubquery(options) {
 				Keyword("("),
 				Expression("select-node"),
 				Keyword(")"),
+				Expandable("table-sample", options, "table-sample-subquery", GenerateTableSample)
 			])
 		])
 	]
@@ -267,6 +278,7 @@ function Initialize(options = {}) {
 	document.getElementById("rrdiagram7").innerHTML = Diagram(GenerateWindowClause(options)).toString();
 	document.getElementById("rrdiagram8").innerHTML = Diagram(GenerateLimitAndOrderBy(options)).toString();
 	document.getElementById("rrdiagram9").innerHTML = Diagram(GenerateValues(options)).toString();
+	document.getElementById("rrdiagram10").innerHTML = Diagram(GenerateSampleClause(options)).toString();
 
 	document.getElementById("rrdiagram2").classList.add("limit-width");
 	document.getElementById("rrdiagram3").classList.add("limit-width");
@@ -276,6 +288,7 @@ function Initialize(options = {}) {
 	document.getElementById("rrdiagram7").classList.add("limit-width");
 	document.getElementById("rrdiagram8").classList.add("limit-width");
 	document.getElementById("rrdiagram9").classList.add("limit-width");
+	document.getElementById("rrdiagram10").classList.add("limit-width");
 }
 
 function Refresh(node_name, set_node) {
