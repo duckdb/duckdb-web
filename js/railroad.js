@@ -1592,3 +1592,56 @@ function GenerateCopyOptions(options) {
 		]), "skip")
 	]
 }
+
+function GenerateSample(options) {
+	return [
+		Choice(0, [
+			Sequence([
+				Expression("sample-size"),
+				Choice(0, [
+					Skip(),
+					Keyword("%"),
+					Keyword("PERCENT"),
+					Keyword("ROWS")
+				]),
+				Optional(Sequence([
+					Keyword("("),
+					Expression("sampling-method"),
+					Optional(Sequence([
+						Keyword(","),
+						Expression("seed")
+					]), "skip"),
+					Keyword(")")
+				]), "skip")
+			]),
+			Sequence([
+				Optional(Expression("sampling-method"), "skip"),
+				Expression("("),
+				Expression("sample-size"),
+				Choice(0, [
+					Skip(),
+					Keyword("%"),
+					Keyword("PERCENT"),
+					Keyword("ROWS")
+				]),
+				Expression(")"),
+				Optional(Sequence([
+					Keyword("REPEATABLE"),
+					Keyword("("),
+					Expression("seed"),
+					Keyword(")")
+				]), "skip")
+			])
+		])
+	]
+}
+
+
+function GenerateSampleClause(options) {
+	return [
+		Sequence([
+			Keyword("USING"),
+			Keyword("SAMPLE")
+		].concat(GenerateSample(options)))
+	]
+}
