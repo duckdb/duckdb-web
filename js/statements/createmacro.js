@@ -8,6 +8,25 @@ function GenerateCreateMacro(options = {}) {
 				Keyword("FUNCTION"),
 				]
 			),
+			Optional(Sequence([
+				Expression("schema-name"),
+				Keyword(".")
+			]), "skip"),
+			Expression("macro-name"),
+			Keyword("("),
+			Optional(Sequence([
+				OneOrMore(Sequence([
+					Expression("param-name"),
+					], "skip"),
+				),
+				OneOrMore(Sequence([
+					Expression("param-name"),
+					Keyword("="),
+					Expression("default-value")
+					], "skip"),
+				)
+			]), "skip"),
+			Keyword(")"),
 			Keyword("AS"),
 			Expression("expr")
 		])
