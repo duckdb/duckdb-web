@@ -6,6 +6,7 @@ function GenerateDrop(options = {}) {
 			Keyword("DROP"),
 			Choice(3, [
 				Keyword("INDEX"),
+				Keyword("MACRO"),
 				Keyword("SCHEMA"),
 				Keyword("SEQUENCE"),
 				Keyword("TABLE"),
