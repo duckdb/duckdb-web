@@ -108,6 +108,10 @@
                       "url": "/docs/sql/statements/create_sequence"
                     },
                     {
+                      "page": "Create Macro",
+                      "url": "/docs/sql/statements/create_macro"
+                    },
+                    {
                       "page": "Drop",
                       "url": "/docs/sql/statements/drop"
                     },
