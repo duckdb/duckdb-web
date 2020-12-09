@@ -14,18 +14,16 @@ function GenerateCreateMacro(options = {}) {
 			]), "skip"),
 			Expression("macro-name"),
 			Keyword("("),
-			Optional(Sequence([
-				OneOrMore(Sequence([
-					Expression("param-name"),
-					], "skip"),
-				),
-				OneOrMore(Sequence([
-					Expression("param-name"),
-					Keyword("="),
-					Expression("default-value")
-					], "skip"),
-				)
-			]), "skip"),
+			ZeroOrMore(Sequence([
+				Expression("param-name"),
+				], "skip")
+			),
+			ZeroOrMore(Sequence([
+				Expression("param-name"),
+				Keyword("="),
+				Expression("default-value")
+				], "skip")
+			),
 			Keyword(")"),
 			Keyword("AS"),
 			Expression("expr")
