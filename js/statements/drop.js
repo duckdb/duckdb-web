@@ -5,6 +5,7 @@ function GenerateDrop(options = {}) {
 		AutomaticStack([
 			Keyword("DROP"),
 			Choice(3, [
+				Keyword("FUNCTION"),
 				Keyword("INDEX"),
 				Keyword("MACRO"),
 				Keyword("SCHEMA"),
