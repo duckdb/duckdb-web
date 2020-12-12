@@ -19,7 +19,7 @@ The DuckDB Website is hosted by GitHub pages, its repository is [here](
 https://github.com/cwida/duckdb-web). Pull requests to fix issues or generally expand the documentation section are very welcome.
 
 ### How is DuckDB related to MonetDB, MonetDBe or MonetDBLite?
-DuckDB is a new from-scratch development. There is no connection to MonetDB or MonetDBLite from an architectural perspective. We have borrowed ca. 200 lines of code related to date math however.
+DuckDB is a new from-scratch development. There is no connection to MonetDB or MonetDBLite, different architectures and no source code overlap.
 
 ### I benchmarked DuckDB and its slower than \[some other system\]
 In a departure from traditional academic systems research practise, we have at first focused our attention on correctness, not raw performance. So it is entirely possible DuckDB is slower than some other, more mature system at this point. That being said, we are now confident DuckDB produces correct query results, and are actively working to make it fast, too. So publishing benchmark numbers from the current preview releases is certainly interesting, but should not be taken as the definitive results on what the DuckDB architecture can or cannot do.
