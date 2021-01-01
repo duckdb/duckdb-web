@@ -5,14 +5,14 @@ selected: Documentation/Data Types/Numeric
 expanded: Data Types
 ---
 ## Integer Types
-The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` AND `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
+The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
 
 | Name | Aliases | Min | Max |
 |:---|:---|---:|---:|
-| `TINYINT` |   | -127 | 127 |
-| `SMALLINT` | `INT2` | -32767 | 32767 |
-| `INTEGER` | `INT`, `INT4`, `SIGNED` | -2147483647 | 2147483647 |
-| `BIGINT` | `INT8` | -9223372036854775808 | 9223372036854775808 |
+| `TINYINT` | `INT1` | -127 | 127 |
+| `SMALLINT` | `INT2`, `SHORT` | -32767 | 32767 |
+| `INTEGER` | `INT4`, `INT`, `SIGNED` | -2147483647 | 2147483647 |
+| `BIGINT` | `INT8`, `LONG` | -9223372036854775808 | 9223372036854775808 |
 | `HUGEINT` | | -170141183460469231731687303715884105727 | 170141183460469231731687303715884105727 |
 
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
@@ -37,7 +37,7 @@ The data types `REAL` and `DOUBLE` precision are inexact, variable-precision num
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `REAL` | `FLOAT4` | single precision floating-point number (4 bytes)|
-| `DOUBLE` | | double precision floating-point number (8 bytes) |
+| `DOUBLE` | `FLOAT8` | double precision floating-point number (8 bytes) |
 
 Inexact means that some values cannot be converted exactly to the internal format and are stored as approximations, so that storing and retrieving a value might show slight discrepancies. Managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here, except for the following points:
 

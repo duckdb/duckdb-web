@@ -8,16 +8,17 @@ The table below shows all the built-in general-purpose data types. The alternati
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `BIGINT` | `INT8` | signed eight-byte integer |
-| `BOOLEAN` | `BOOL` | logical boolean (true/false) |
-| `BLOB` | `BYTEA` | variable-length binary data |
+| `BIGINT` | `INT8`, `LONG` | signed eight-byte integer |
+| `BOOLEAN` | `BOOL`, `LOGICAL` | logical boolean (true/false) |
+| `BLOB` | `BYTEA`, `BINARY,` `VARBINARY` | variable-length binary data |
 | `DATE` |   | calendar date (year, month day) |
-| `DOUBLE` | `NUMERIC` | double precision floating-point number (8 bytes) |
-| `INTEGER` | `INT`, `INT4`, `SIGNED` | signed four-byte integer |
-| `REAL` | `FLOAT`, `FLOAT4` | single precision floating-point number (4 bytes)|
-| `SMALLINT` | `INT2` | signed two-byte integer|
+| `DOUBLE` | `FLOAT8`, `NUMERIC`, `DECIMAL` | double precision floating-point number (8 bytes) |
+| `HUGEINT` | | signed sixteen-byte integer|
+| `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
+| `REAL` | `FLOAT4`, `FLOAT` | single precision floating-point number (4 bytes)|
+| `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIMESTAMP` | `DATETIME` | time of day (no time zone) |
-| `TINYINT` |   | signed one-byte integer|
+| `TINYINT` | `INT1` | signed one-byte integer|
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
 ### More
