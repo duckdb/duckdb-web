@@ -32,7 +32,7 @@ This section describes functions and operators for examining and manipulating st
 | `rtrim(`*`text`*`)`| Removes any spaces from the right side of the string | `rtrim('    test  ')` |     test |
 | `rtrim(`*`text`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the string | `rtrim('>>>>test<<', '><')` | >>>>test |
 | *`string`*` SIMILAR TO `*`regex`* | Returns true if the string matches the regex; identical to regexp_full_match (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | false |
-| `strlen(`*`string`*`)` | Number of bytes in string | `length('🤦🏼‍♂️')` | 17 |
+| `strlen(`*`string`*`)` | Number of bytes in string | `length('🤦🏼‍♂️')` | 1 |
 | `strip_accents(`*`text`*`)`| Strips accents from text | `strip_accents('mühleisen')` | muhleisen |
 | `substring(`*`string`*`, `*`start`*`, `*`length`*`)` | Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substring('Hello', 2, 2)` | el |
 | `trim(`*`text`*`)`| Removes any spaces from either side of the string | `trim('    test  ')` | test |
