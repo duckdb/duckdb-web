@@ -63,6 +63,11 @@ The `GROUP BY` clause specifies which grouping columns should be used to perform
 
 The `WINDOW` clause allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
+## UNNEST clause
+<div id="rrdiagram11"></div>
+
+The `UNNEST` clause allows you to unnest lists such that a new row is created for each list element. Empty lists are turned into a single row with a `NULL` value for the unnested attribute.
+
 ## SAMPLE clause
 <div id="rrdiagram10"></div>
 
