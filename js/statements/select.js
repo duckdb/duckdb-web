@@ -193,6 +193,14 @@ function GenerateWindowClause(options) {
 	];
 }
 
+function GenerateUnnestClause(options) {
+	return [
+		Keyword("UNNEST"),
+		Expression(),
+		Keyword(",")
+	];
+}
+
 function GenerateLimitAndOrderBy(options) {
 	return [
 		Optional(Sequence(GenerateOrderBy(options))),
@@ -229,6 +237,7 @@ function GenerateSelectNode(options) {
 			GenerateGroupByClause(options)
 		),
 		Optional(Sequence(GenerateWindowClause(options)), "skip"),
+		Optional(Sequence(GenerateUnnestClause(options)), "skip"),
 		Sequence(GenerateLimitAndOrderBy(options))
 	])]
 }
@@ -276,6 +285,7 @@ function Initialize(options = {}) {
 	document.getElementById("rrdiagram5").innerHTML = Diagram(GenerateWhereClause(options)).toString();
 	document.getElementById("rrdiagram6").innerHTML = Diagram(GenerateGroupByClause(options)).toString();
 	document.getElementById("rrdiagram7").innerHTML = Diagram(GenerateWindowClause(options)).toString();
+	document.getElementById("rrdiagram11").innerHTML = Diagram(GenerateUnnestClause(options)).toString();
 	document.getElementById("rrdiagram8").innerHTML = Diagram(GenerateLimitAndOrderBy(options)).toString();
 	document.getElementById("rrdiagram9").innerHTML = Diagram(GenerateValues(options)).toString();
 	document.getElementById("rrdiagram10").innerHTML = Diagram(GenerateSampleClause(options)).toString();
