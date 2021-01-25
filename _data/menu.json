@@ -251,6 +251,10 @@
               {
                 "page": "Pragmas",
                 "url": "/docs/sql/pragmas"
+              },
+              {
+                "page": "Full Text Search",
+                "url": "/docs/sql/full_text_search"
               }
               ]
             },
