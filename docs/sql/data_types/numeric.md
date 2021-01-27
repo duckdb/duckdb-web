@@ -6,6 +6,7 @@ expanded: Data Types
 ---
 ## Integer Types
 The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole numbers, that is, numbers without fractional components, of various ranges. Attempts to store values outside of the allowed range will result in an error.
+The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` store whole unsigned numbers. Attempts to store negative numbers or values outside of the allowed range will result in an error
 
 | Name | Aliases | Min | Max |
 |:---|:---|---:|---:|
@@ -14,6 +15,10 @@ The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole n
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | -2147483647 | 2147483647 |
 | `BIGINT` | `INT8`, `LONG` | -9223372036854775808 | 9223372036854775808 |
 | `HUGEINT` | | -170141183460469231731687303715884105727 | 170141183460469231731687303715884105727 |
+| `UTINYINT` | - | 0 | 255 |
+| `USMALLINT` | -| 0 | 65535 |
+| `UINTEGER` | - | 0 | 4294967295 |
+| `UBIGINT` | - | 0 | 18446744073709551615 |
 
 The type integer is the common choice, as it offers the best balance between range, storage size, and performance. The `SMALLINT` type is generally only used if disk space is at a premium. The `BIGINT` and `HUGEINT` types are designed to be used when the range of the integer type is insufficient.
 

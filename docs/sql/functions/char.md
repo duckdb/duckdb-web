@@ -9,6 +9,7 @@ This section describes functions and operators for examining and manipulating st
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
+| `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` |
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(',', 'Banana', 'Apple', 'Melon')` | `Banana,Apple,Melon` |
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using fmt syntax | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` |
