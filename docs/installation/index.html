@@ -215,7 +215,7 @@ dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Specie
 Class.forName("org.duckdb.DuckDBDriver");
 Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 Statement stmt = conn.createStatement();
-ResultSet rs = stmt.execute("SELECT 42");{% endhighlight %}
+ResultSet rs = stmt.executeQuery("SELECT 42");{% endhighlight %}
 	</div>
 	
 	<div class="example js">
