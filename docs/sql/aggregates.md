@@ -11,36 +11,53 @@ Aggregates are functions that *combine* multiple rows into a single value. Aggre
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
 
 ## General Aggregate Functions
-argMin
-argMax
-variance (alias for var_samp)
+| Function | Description | Example | Alias |
+|:---|:---|:---|:---|
+| `argMax(arg,val)` |Calculates the arg value for a maximum val value. | `argMax(A,B)` | - |
+| `argMin(arg,val)` |Calculates the arg value for a minimum val value. | `argMin(A,B)` | - |
+| `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |
+| `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
+| `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
+| `bit_xor(arg)` |Returns the bitwise XOR of all bits in a given expression. | `bit_xor(A)` | - |
+| `bool_and(arg)` |Returns TRUE if every input value is TRUE, otherwise FALSE. | `bool_and(A)` | - |
+| `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool(A)` | - |
+| `count(arg)` |Calculates the number of tuples tuples in arg. | `sum(A)` | - |
+| `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
+| `max(arg)` |Returns the maximum value present in arg. | `sum(A)` | - |
+| `min(arg)` | Returns the minumum value present in arg. | `min(A)` | - |
+| `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
+| `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
 
 ## Approximate Aggregates
 The table below shows the available approximate aggregations.
 | Function | Description | Example |
 |:---|:---|:---|
-| `approx_count_distinct(x)` | Gives the approximate count of distintinct elements using HyperLogLog | `approx_count_distinct(A)` |
-| `approx_quantile(x,quantile)` | Gives the approximate quantile using T-Digest | `approx_quantile(A,0.5)` |
-| `reservoir_quantile(x,quantile,sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size | `reservoir_quantile(A,0.5,1024)` |
-
-approx_count_distinct
+| `approx_count_distinct(x)` | Gives the approximate count of distintinct elements using HyperLogLog. | `approx_count_distinct(A)` |
+| `approx_quantile(x,pos)` | Gives the approximate quantile using T-Digest. | `approx_quantile(A,0.5)` |
+| `reservoir_quantile(x,quantile,sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A,0.5,1024)` |
 
 ## Statistical Aggregates
 | Function | Description | Formula | Alias |
 |:---|:---|:---|:---|
 | `corr(y,x)` | Returns the correlation coefficient for non-null pairs in a group. | `COVAR_POP(y, x) / (STDDEV_POP(x) * STDDEV_POP(y))`| - |
 | `covar_pop(y,x)` | Returns the population covariance of input values. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
-| `stddev_pop(y,x)` | Returns the population standard deviation (square root of variance) of non-NULL values. | - | - |
-| `covar_pop(y,x)` | Returns the population covariance of input values. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
+| `entropy(x)` | Returns the log-2 entropy of count input-values. | - | - |
+| `kurtosis(x)` | Returns the excess kurtosis of all input values. | - | - |
+| `mode(x)` | Returns the most frequent value for the values within x. NULL values are ignored. | - | - |
+| `quantile(x,pos)` | Returns the exact quantile number between 0 and 1 . | - | - |
 | `regr_avgx(y,x)` | Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
 | `regr_avgy(y,x)` | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
-| `regr_count(y,x)` | Returns the number of non-null number pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
+| `regr_count(y,x)` | Returns the number of non-null number pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*)` | - |
 | `regr_intercept(y,x)` | Returns the intercept of the univariate linear regression line for non-null pairs in a group. | `AVG(y)-REGR_SLOPE(y,x)*AVG(x)` | - |
+| `stddev_pop(y,x)` | Returns the population standard deviation (square root of variance) of non-NULL values. | - | - |
 | `regr_r2(y,x)` | Returns the coefficient of determination for non-null pairs in a group. | - | - |
 | `regr_slope(y,x)` | Returns the slope of the linear regression line for non-null pairs in a group.| `COVAR_POP(x,y) / VAR_POP(x)` | - |
 | `regr_sxx(y,x)` | -  | `REGR_COUNT(y, x) * VAR_POP(x)` | - |
 | `regr_sxy(y,x)` | Returns the population covariance of input values. | `REGR_COUNT(y, x) * COVAR_POP(y, x) ` | - |
 | `regr_syy(y,x)` | - | `REGR_COUNT(y, x) * VAR_POP(y) f` | - |
-| `mode(x)` | Returns the most frequent value for the values within ${expr1}. NULL values are ignored. | - | - |
-| `covar_pop(y,x)` | Returns the population covariance of input values. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
+| `skewness(x)` | Returns the skewness of all input values. | - | - |
+| `stddev_pop(x)` | Returns the population standard deviation.  | `sqrt(var_pop(x))` | - |
+| `stddev_samp(x)` | Returns the sample standard deviation. | `sqrt(var_samp(x))` | `stddev(x)` |
+| `var_pop(x)` | Returns the population variance. | - | - |
+| `var_samp(x)` | Returns the sample variance of all input values. | `(SUM(x^2) - SUM(x)^2 / COUNT(x)) / (COUNT(x) - 1)` | `variance(arg,val)` |
 
