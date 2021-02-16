@@ -11,6 +11,8 @@ Aggregates are functions that *combine* multiple rows into a single value. Aggre
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
 
 ## General Aggregate Functions
+The table below shows the available general aggregate functions.
+
 | Function | Description | Example | Alias |
 |:---|:---|:---|:---|
 | `argMax(arg,val)` |Calculates the arg value for a maximum val value. | `argMax(A,B)` | - |
@@ -29,7 +31,8 @@ When the `DISTINCT` clause is provided, only distinct values are considered in t
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
 
 ## Approximate Aggregates
-The table below shows the available approximate aggregations.
+The table below shows the available approximate aggregate functions.
+
 | Function | Description | Example |
 |:---|:---|:---|
 | `approx_count_distinct(x)` | Gives the approximate count of distintinct elements using HyperLogLog. | `approx_count_distinct(A)` |
@@ -37,6 +40,8 @@ The table below shows the available approximate aggregations.
 | `reservoir_quantile(x,quantile,sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A,0.5,1024)` |
 
 ## Statistical Aggregates
+The table below shows the available statistical aggregate functions.
+
 | Function | Description | Formula | Alias |
 |:---|:---|:---|:---|
 | `corr(y,x)` | Returns the correlation coefficient for non-null pairs in a group. | `COVAR_POP(y, x) / (STDDEV_POP(x) * STDDEV_POP(y))`| - |
