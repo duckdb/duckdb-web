@@ -86,7 +86,7 @@ print(res)
 Also refer to [the data import documentation](/docs/data/overview) for more options of efficiently importing data.
 
 ## dbplyr 
-DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Use `duckdb::src_duckdb()` to construct a dplyr table source. Here is an example:
+DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
 
 ```R
 library("DBI")
