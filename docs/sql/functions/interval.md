@@ -11,4 +11,4 @@ This section describes functions and operators for examining and manipulating in
 | `date_part(`*`part`*`, `*`interval`*`)` | Get subfield (equivalent to *extract*) | `date_part('year', INTERVAL '14 months')` | 1 |
 | `extract(`*`part`* `from` *`interval`*`)` | Get subfield from a date | `extract('month' FROM INTERVAL '14 months')` | 2 |
 
-All date parts are defined for intervals except `dow`, 'isodow`, `doy`and `week`.
+All date parts are defined for intervals except `dow`, `isodow`, `doy`and `week`.
