@@ -1,3 +1,9 @@
+---
+layout: docu
+title: Time Functions
+selected: Documentation/Functions/Time Functions
+expanded: Functions
+---
 This section describes functions and operators for examining and manipulating time values.
 
 | Function | Description | Example | Result |
