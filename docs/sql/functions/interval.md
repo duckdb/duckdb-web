@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Interval Functions
-selected: Documentation/Functions/Date Functions
+selected: Documentation/Functions/Interval Functions
 expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating interval values.
