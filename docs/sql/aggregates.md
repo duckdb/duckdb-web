@@ -49,7 +49,7 @@ The table below shows the available statistical aggregate functions.
 | `entropy(x)` | Returns the log-2 entropy of count input-values. | - | - |
 | `kurtosis(x)` | Returns the excess kurtosis of all input values. | - | - |
 | `mode(x)` | Returns the most frequent value for the values within x. NULL values are ignored. | - | - |
-| `quantile(x,pos)` | Returns the exact quantile number between 0 and 1 . | - | - |
+| `quantile(x,pos)` | Returns the exact quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding exact quantiles . | - | - |
 | `regr_avgx(y,x)` | Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
 | `regr_avgy(y,x)` | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
 | `regr_count(y,x)` | Returns the number of non-null number pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*)` | - |
