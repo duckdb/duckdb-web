@@ -129,12 +129,14 @@
 			                        {% if subsubentry.url %} <a href="{{ site.baseurl }}{{ subsubentry.url }}"> {{ subsubentry.page }} {% if subsubentry.subsubsubsubfolderitems[0] %} <span class="show"></span> {% endif %} </a>
 			                        {% else %} {% if subsubentry.subsubsubsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ subsubentry.page }} {% endif %}
 			                    </li>
+								{% if subsubentry.subsubsubfolderitems[0] %}
 			                    <ul>
 			                        {% for subsubsubentry in subsubentry.subsubsubsubfolderitems %}
 			                        <li class="{% if page.url contains subsubsubentry.url %} active {% endif %}"><a href="{{ site.baseurl }}{{ subsubsubentry.url }}"> {{ subsubsubentry.page }} </a>
 			                        </li>
 			                        {% endfor %}
 			                    </ul>
+								{% endif %}
 			                    {% endif %}
 			                    {% endfor %}
 			                </ul>
