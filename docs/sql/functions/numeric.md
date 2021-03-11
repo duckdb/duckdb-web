@@ -15,7 +15,7 @@ The table below shows the available mathematical operators for numeric types.
 | `/` | division | `4 / 2` | 2 |
 | `%` | modulo (remainder) | `5 % 4` | 1 |
 | `&` | bitwise AND | `91 & 15` | 11 |
-| `|` | bitwise OR | `32 \| 3` | 35 |
+| `|` | bitwise OR | `32 | 3` | 35 |
 | `#` | bitwise XOR | `17 # 5` | 20 |
 | `<<` | bitwise shift left | `1 << 4` | 16 |
 | `>>` | bitwise shift right | `8 >> 2` | 2 |
