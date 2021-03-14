@@ -83,20 +83,31 @@ Enable the gathering and printing of profiling information after the execution o
 Below is an example output of the profiling information for the simple query ```SELECT 42```:
 
 ```
-<<Query Profiling Information>>
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││    Query Profiling Information    ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
 SELECT 42;
-<<Operator Tree>>
---------------------
-|    PROJECTION    |
-|        42        |
-|      (0.00s)     |
-|         1        |
---------------------
---------------------
-|    DUMMY_SCAN    |
-|      (0.00s)     |
-|         1        |
---------------------
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││        Total Time: 0.0001s        ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             42            │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             1             │
+│          (0.00s)          │
+└─────────────┬─────────────┘                             
+┌─────────────┴─────────────┐
+│         DUMMY_SCAN        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             1             │
+│          (0.00s)          │
+└───────────────────────────┘
 ```
 
 The printing of profiling information can be disabled again using *disable_profiling*.
