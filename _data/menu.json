@@ -159,6 +159,10 @@
                     {
                       "page": "Blob",
                       "url": "/docs/sql/data_types/blob"
+                    },
+                    {
+                      "page": "Nested",
+                      "url": "/docs/sql/data_types/nested"
                     }
                   ]
                 },
@@ -229,6 +233,10 @@
                   {
                     "page": "Blob Functions",
                     "url": "/docs/sql/functions/blob"
+                  },
+                  {
+                    "page": "Nested Functions",
+                    "url": "/docs/sql/functions/nested"
                   }
                 ]
               },
