@@ -6,7 +6,7 @@ railroad: expressions/window.js
 ---
 <div id="rrdiagram"></div>
 
-Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause. 
+Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER window-name` syntax.
 
 ## General-Purpose Window Functions
 The table below shows the available general window functions.
