@@ -25,9 +25,12 @@ The table below shows the available general aggregate functions.
 | `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool(A)` | - |
 | `count(arg)` |Calculates the number of tuples tuples in arg. | `sum(A)` | - |
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
+| `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `list(A)` | - |
+| `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `sum(A)` | - |
 | `min(arg)` | Returns the minumum value present in arg. | `min(A)` | - |
 | `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
+| `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat` |
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
 
 ## Approximate Aggregates
