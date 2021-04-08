@@ -5,7 +5,7 @@ selected: Documentation/SQL/Alter Table
 expanded: SQL
 railroad: statements/alter.js
 ---
-ALTER TABLE - changes the schema of an existing table in the catalog.
+The `ALTER TABLE` statement changes the schema of an existing table in the catalog.
 
 ### Examples
 ```sql
