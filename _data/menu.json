@@ -96,6 +96,10 @@
                       "url": "/docs/sql/statements/update"
                     },
                     {
+                      "page": "Create Schema",
+                      "url": "/docs/sql/statements/create_schema"
+                    },
+                    {
                       "page": "Create Table",
                       "url": "/docs/sql/statements/create_table"
                     },
