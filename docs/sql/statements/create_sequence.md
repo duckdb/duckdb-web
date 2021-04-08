@@ -5,7 +5,7 @@ selected: Documentation/SQL/Create Sequence
 expanded: SQL
 railroad: statements/createsequence.js
 ---
-`CREATE SEQUENCE` creates a new sequence number generator.
+The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
 ### Examples
 Create an ascending sequence called serial, starting at 101:
