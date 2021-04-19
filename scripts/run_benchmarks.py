@@ -294,7 +294,7 @@ def write_benchmark_info(benchmark):
     return insert_benchmark_info(display_name,groupname,subgroup)
 
 def run_arrow(commit_hash,column_name,experiment_name,duck_con):
-    import statistics
+    import statistics,duckdb
     duck_to_arrow = []
     arrow_to_duck = []
     for i in range(6):
@@ -312,9 +312,9 @@ def run_arrow(commit_hash,column_name,experiment_name,duck_con):
             duck_to_arrow.append(time_duck_to_arrow)
             arrow_to_duck.append(time_arrow_to_duck)
 
-    bechmark_info = insert_benchmark_info('duckdb -> arrow ' + experiment_name,'arrow_integration','')
+    (benchmark_id, groupname) = insert_benchmark_info('duckdb -> arrow ' + experiment_name,'arrow_integration','')
     c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(duck_to_arrow)))
-    bechmark_info = insert_benchmark_info('arrow -> duckdb ' + experiment_name,'arrow_integration','')
+    (benchmark_id, groupname) = insert_benchmark_info('arrow -> duckdb ' + experiment_name,'arrow_integration','')
     c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(arrow_to_duck)))
     con.commit()
 
