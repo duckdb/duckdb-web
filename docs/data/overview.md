@@ -20,6 +20,12 @@ Data can be efficiently loaded from CSV files using the `read_csv_auto` function
 SELECT * FROM read_csv_auto('test.csv');
 ```
 
+You can also load data from **compressed** (e.g. compressed with [gzip](https://www.gzip.org/)) CSV files, for example:
+
+```sql
+SELECT * FROM read_csv_auto('test.csv.gz');
+```
+
 See [here](/docs/data/csv) for a detailed description of CSV loading.
 
 ### Parquet Loading
