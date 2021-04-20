@@ -5,7 +5,7 @@ selected: Documentation/SQL/Create Table
 expanded: SQL
 railroad: statements/createtable.js
 ---
-CREATE TABLE - this statement creates table in the catalog.
+The `CREATE TABLE` statement creates a table in the catalog.
 
 ### Examples
 ```sql

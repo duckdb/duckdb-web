@@ -26,4 +26,4 @@ The table below shows the available general window functions.
 | `nth_value(expr any, nth integer)` | same type as **expr** | Returns `expr` evaluated at the nth row of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
 
 ## Aggregate Window Functions
-All [aggregate functions](docs/sql/aggregates) can be used in a windowing context.
+All [aggregate functions](aggregates) can be used in a windowing context.
