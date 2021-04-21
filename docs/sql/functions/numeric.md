@@ -15,7 +15,7 @@ The table below shows the available mathematical operators for numeric types.
 | `/` | division | `4 / 2` | 2 |
 | `%` | modulo (remainder) | `5 % 4` | 1 |
 | `&` | bitwise AND | `91 & 15` | 11 |
-| `|` | bitwise OR | `32 \| 3` | 35 |
+| `|` | bitwise OR | `32 | 3` | 35 |
 | `#` | bitwise XOR | `17 # 5` | 20 |
 | `<<` | bitwise shift left | `1 << 4` | 16 |
 | `>>` | bitwise shift right | `8 >> 2` | 2 |
@@ -46,7 +46,7 @@ The table below shows the available mathematical functions.
 | `radians(x)` | converts degrees to radians | `radians(90)` | 1.5707963267948966 |
 | `random()` | returns a random number between 0 and 1 | `random()` | ... |
 | `round(v numeric, s int)` | round to *s* decimal places | `round(42.4332, 2)` | 42.43 |
-| `setseed(x)` | sets the seed to be used for the random function | `setseed()` | |
+| `setseed(x)` | sets the seed to be used for the random function | `setseed(0.42)` | |
 | `sin(x)` | computes the sin of x | `sin(90)` | 0.8939966636005579 |
 | `sign(x)` | returns the sign of x as -1, 0 or 1 | `sign(-349)` | -1 |
 | `sqrt(x)` | returns the square root of the number | `sqrt(9)` | 3 |

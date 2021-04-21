@@ -8,7 +8,9 @@ This section describes functions and operators for examining and manipulating st
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
-| *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
+| *`string`* `\|\|` *`string`* | String concatenation | `'Duck' \|\| 'DB'` | `DuckDB` |
+| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s. Quoted string constants are not supported. | `duckdb[:4]` | `'Duck'` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('DuckDB, 4, NULL)` | `'DB'` |
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` |
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(',', 'Banana', 'Apple', 'Melon')` | `Banana,Apple,Melon` |
