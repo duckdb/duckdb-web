@@ -313,6 +313,10 @@
               "url": "/benchmarks/append.html"
           },
           {
+          "page": "Arrow Integration",
+              "url": "/benchmarks/arrow_integration.html"
+          },
+          {
           "page": "Aggregate",
               "url": "/benchmarks/aggregate.html"
           },
