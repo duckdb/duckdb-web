@@ -5,7 +5,7 @@ selected: Documentation/SQL/Insert
 expanded: SQL
 railroad: statements/insert.js
 ---
-The insert statement inserts new data into a table.
+The `INSERT` statement inserts new data into a table.
 
 ### Examples
 ```sql

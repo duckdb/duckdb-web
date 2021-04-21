@@ -9,7 +9,10 @@ function GenerateWindowFunction(options = {}) {
 			]), Keyword(",")),
 			Keyword(")"),
 			Keyword("OVER"),
-			Sequence(GenerateWindowSpec(options))
+			Choice(1,[
+				Sequence(GenerateWindowSpec(options)),
+				Expression("window-name")
+			])
 		])
 	])
 }

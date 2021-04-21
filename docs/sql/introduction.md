@@ -70,7 +70,7 @@ The insert statement is used to populate a table with rows:
 INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
 ```
 
-Constants that are not numeric values (e.g. text and dates) must be surrounded by single quotes (`''`), as in the example. Input dates for the date type must be formatted as 'YYYY-MM-DD'.
+Constants that are not numeric values (e.g. text and dates) must be surrounded by single quotes (`''`), as in the example. Input dates for the date type must be formatted as `'YYYY-MM-DD'`.
 
 We can insert into the *cities* table in the same manner.
 

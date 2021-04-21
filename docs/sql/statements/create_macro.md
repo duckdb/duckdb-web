@@ -5,7 +5,7 @@ selected: Documentation/SQL/Create Macro
 expanded: SQL
 railroad: statements/createmacro.js
 ---
-CREATE MACRO - this statement creates a scalar macro in the catalog.
+The `CREATE MACRO` statement creates a scalar macro in the catalog.
 
 ### Examples
 ```sql
