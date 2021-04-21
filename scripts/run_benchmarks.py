@@ -10,8 +10,6 @@ duckdb_web_base = os.getcwd()
 sqlite_db_file = os.path.join(duckdb_web_base, 'benchmarks.db')
 # 5 minute timeout per benchmark
 total_timeout = 300
-# run at most 30 commits per pull
-maximum_commit_count = 30
 # slow benchmarks are skipped for all commits except the most recent commit to speed up benchmarking
 # e.g. if a merge of 20+ commits is done, we don't want to run the slow benchmarks for all commits
 slow_benchmarks = ['imdb']
@@ -351,22 +349,14 @@ results = c.fetchall()
 if len(results) > 0:
     prev_hash = results[0][0]
 
+print("Running benchmarks since commit " + prev_hash)
+
 # get a list of all commits we need to run
 commit_list = get_list_of_commits(prev_hash)
 if len(commit_list) == 0:
     exit(1)
 
-# we limit the amount of commits we run at once
-if len(commit_list) > maximum_commit_count:
-    new_commit_list = []
-    interval = int(len(commit_list) / maximum_commit_count)
-    index = 0
-    while index < len(commit_list):
-        new_commit_list.append(commit_list[index])
-        index += interval
-    if commit_list[-1] not in new_commit_list:
-        new_commit_list.append(commit_list[-1])
-    commit_list = new_commit_list
+print("List of commits: " + str(commit_list))
 
 for commit in commit_list:
     is_final_commit = commit == commit_list[-1]
