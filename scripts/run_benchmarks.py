@@ -4,14 +4,12 @@ FNULL = open(os.devnull, 'w')
 benchmark_runner = os.path.join('build', 'release', 'benchmark', 'benchmark_runner')
 out_file = 'out.csv'
 log_file = 'out.log'
-default_start_commit = '46fb7ae593ada31acae9cdcb8a7cf5b017d62238'
+default_start_commit = '64f35b19a8571b6382504bbdeeb63a7d3bf1d94c'
 duckdb_base = os.path.join(os.getcwd(), '..', 'duckdb')
 duckdb_web_base = os.getcwd()
 sqlite_db_file = os.path.join(duckdb_web_base, 'benchmarks.db')
 # 5 minute timeout per benchmark
 total_timeout = 300
-# run at most 30 commits per pull
-maximum_commit_count = 30
 # slow benchmarks are skipped for all commits except the most recent commit to speed up benchmarking
 # e.g. if a merge of 20+ commits is done, we don't want to run the slow benchmarks for all commits
 slow_benchmarks = ['imdb']
@@ -118,7 +116,8 @@ def build_optimized():
     os.system('rm -rf build')
     os.environ['BUILD_BENCHMARK'] = '1'
     os.environ['BUILD_TPCH'] = '1'
-
+    os.environ['BUILD_PYTHON'] = '1'
+    os.environ['USER_SPACE'] = '1'
     (return_code, stdout, stderr, error_msg) = run_with_timeout(['make', 'opt', '-j'], 1200)
 
     if return_code != 0:
@@ -267,12 +266,7 @@ def get_benchmark_info(benchmark):
                 subgroup = None
     return (display_name, groupname, subgroup)
 
-
-def write_benchmark_info(benchmark):
-    (display_name, groupname, subgroup) = get_benchmark_info(benchmark)
-    if display_name is None:
-        log("Failed to fetch display name for benchmark " + benchmark)
-        return (None, None)
+def insert_benchmark_info(display_name,groupname,subgroup):
     # first figure out if the benchmark is already in the database
     c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (display_name,))
     results = c.fetchall()
@@ -283,8 +277,69 @@ def write_benchmark_info(benchmark):
     # get info and group
     # write to db
     c.execute("INSERT INTO benchmarks (name, groupname, subgroup) VALUES (?, ?, ?)", (display_name, groupname, subgroup))
-    # now fetch the id
-    return write_benchmark_info(benchmark)
+    c.execute("SELECT id, groupname FROM benchmarks WHERE name=?", (display_name,))
+    results = c.fetchall()
+    if len(results) > 0:
+        # benchmark already exists, return the id
+        return (results[0][0], results[0][1])
+
+
+def write_benchmark_info(benchmark):
+    (display_name, groupname, subgroup) = get_benchmark_info(benchmark)
+    if display_name is None:
+        log("Failed to fetch display name for benchmark " + benchmark)
+        return (None, None)
+    return insert_benchmark_info(display_name,groupname,subgroup)
+
+def run_arrow(commit_hash,column_name,experiment_name,duck_con):
+    import statistics,duckdb
+    duck_to_arrow = []
+    arrow_to_duck = []
+    for i in range(6):
+        duck_con.execute("select " + column_name +  " from t;")
+
+        start_time = time.time()
+        result = duck_con.fetch_arrow_table()
+        time_duck_to_arrow = time.time() - start_time
+
+        start_time = time.time()
+        result = duckdb.from_arrow_table(result)
+        time_arrow_to_duck = time.time() - start_time
+
+        if i!= 0:
+            duck_to_arrow.append(time_duck_to_arrow)
+            arrow_to_duck.append(time_arrow_to_duck)
+
+    (benchmark_id, groupname) = insert_benchmark_info('duckdb -> arrow ' + experiment_name,'arrow_integration','')
+    c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(duck_to_arrow)))
+    (benchmark_id, groupname) = insert_benchmark_info('arrow -> duckdb ' + experiment_name,'arrow_integration','')
+    c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(arrow_to_duck)))
+    con.commit()
+
+
+def run_arrow_benchmarks(commit_hash):
+    import duckdb
+    duck_con = duckdb.connect()
+    duck_con.execute ("""create temporary table t as 
+                select (RANDOM()*(100000)+10000000)::INTEGER int_val,
+                    CASE
+                        WHEN range%10=0 THEN NULL
+                        ELSE (RANDOM()*(100000)+10000000)::INTEGER
+                    END int_n_val,
+
+                    (RANDOM()*(100000)+10000000)::INTEGER::VARCHAR str_val,
+                     CASE
+                        WHEN range%10=0 THEN NULL
+                        ELSE (RANDOM()*(100000)+10000000)::INTEGER::VARCHAR
+                    END str_n_val
+
+                    from range(100000000);""")
+
+    run_arrow(commit_hash,'int_val','int',duck_con)
+    run_arrow(commit_hash,'int_n_val','int (null)',duck_con)
+    run_arrow(commit_hash,'str_val','str',duck_con)
+    run_arrow(commit_hash,'str_n_val','str (null)',duck_con)
+
 
 def run_benchmark_for_commit(commit, run_slow_benchmarks):
     log("Benchmarking commit " + commit)
@@ -319,6 +374,7 @@ def run_benchmark_for_commit(commit, run_slow_benchmarks):
         if groupname in ignored_benchmarks or (groupname in slow_benchmarks and not run_slow_benchmarks):
             continue
         run_benchmark(benchmark, benchmark_id, commit)
+    run_arrow_benchmarks(commit)
     # finished running this commit: insert it into the list of completed commits
     c.execute("SELECT * FROM commits WHERE hash=?", (commit,))
     if len(c.fetchall()) == 0:
@@ -351,22 +407,14 @@ results = c.fetchall()
 if len(results) > 0:
     prev_hash = results[0][0]
 
+print("Running benchmarks since commit " + prev_hash)
+
 # get a list of all commits we need to run
 commit_list = get_list_of_commits(prev_hash)
 if len(commit_list) == 0:
     exit(1)
 
-# we limit the amount of commits we run at once
-if len(commit_list) > maximum_commit_count:
-    new_commit_list = []
-    interval = int(len(commit_list) / maximum_commit_count)
-    index = 0
-    while index < len(commit_list):
-        new_commit_list.append(commit_list[index])
-        index += interval
-    if commit_list[-1] not in new_commit_list:
-        new_commit_list.append(commit_list[-1])
-    commit_list = new_commit_list
+print("List of commits: " + str(commit_list))
 
 for commit in commit_list:
     is_final_commit = commit == commit_list[-1]
