@@ -40,11 +40,8 @@ print(res)
 DuckDB also supports prepared statements in the R API with the `dbExecute` and `dbGetQuery` methods. Here is an example:
 
 ```R
-# insert a row using prepared statements
-dbExecute(con, "INSERT INTO items VALUES (?, ?, ?)", 'laptop', 2000, 1)
-
-# the parameters can also given as a list
-dbExecute(con, "INSERT INTO items VALUES (?, ?, ?)", list('chainsaw', 500, 10))
+# prepared statement parameters are given as a list
+dbExecute(con, "INSERT INTO items VALUES (?, ?, ?)", list('laptop', 2000, 1))
 
 # if you want to reuse a prepared statement multiple times, use dbSendStatement() and dbBind()
 stmt = dbSendStatement(con, "INSERT INTO items VALUES (?, ?, ?)")
@@ -53,11 +50,10 @@ dbBind(stmt, list('android', 3.5, 1))
 dbClearResult(stmt)
 
 # query the database using a prepared statement
-res = dbGetQuery(con, "SELECT item FROM items WHERE value > ?", 400)
+res = dbGetQuery(con, "SELECT item FROM items WHERE value > ?", list(400))
 print(res)
 #       item
-# 1   laptop
-# 2 chainsaw
+# 1 laptop
 ```
 
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
