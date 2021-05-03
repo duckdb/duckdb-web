@@ -83,6 +83,30 @@ The `SAMPLE` clause allows you to run the query on a sample from the base table.
 
 A `VALUES` list is a set of values that is supplied instead of a `SELECT` statement.
 
+## Row IDs
+
+For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/server.102/b14200/pseudocolumns008.htm) returns the row identifiers based on the physical storage.
+
+
+```
+D CREATE TABLE (id int, content string);
+D INSERT INTO t VALUES (42, 'hello'), (43, 'world');
+D SELECT rowid, id, content FROM t;
+┌───────┬────┬─────────┐
+│ rowid │ id │ content │
+├───────┼────┼─────────┤
+│ 0     │ 42 │ hello   │
+│ 1     │ 43 │ world   │
+└───────┴────┴─────────┘
+```
+
+In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later. Therefore, it is strongly recommended *not to use rowids as identifiers*.
+
+> The `rowid` values are stable within a transaction.
+
+> If there is a user-defined column named `rowid`, it shadows the `rowid` pseudocolumn.
+
+
 ## Common Table Expressions
 <div id="rrdiagram2"></div>
 
