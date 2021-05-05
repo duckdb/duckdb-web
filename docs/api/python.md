@@ -55,7 +55,7 @@ print(con.fetchall())
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
-Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org) dataframes. This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
+Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org). This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
 
 DuckDB supports "registering" a Pandas data frame as a virtual table, comparable to a SQL `VIEW`. Below is an example:
 
