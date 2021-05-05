@@ -164,7 +164,7 @@
 			<div class="headlinebar">{{ page.title }}</div>
 			<div id="main_content_wrap">
 
-				{{ content }}
+				{% include anchor_headings.html html=content %}
 
 				{% if page.benchmark_group and page.benchmark_group != "" and page.benchmark_group != nil %}
 				{% if page.benchmark_group == "log" %}
