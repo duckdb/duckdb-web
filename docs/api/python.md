@@ -55,7 +55,7 @@ print(con.fetchall())
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
-Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org) da. This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
+Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org) dataframes. This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
 
 DuckDB supports "registering" a Pandas data frame as a virtual table, comparable to a SQL `VIEW`. Below is an example:
 
@@ -76,7 +76,7 @@ con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df_view')
 
 When retrieving the data from DuckDB back into Python, the standard method of calling `fetchall()` is inefficient as individual Python objects need to be created for every value in the result set. When retrieving a lot of data, this can become very slow.
 
-In DuckDB, there are two additional methods that can be used to efficiently retrieve dat: `fetchnumpy()` and `fetchdf()`. `fetchnumpy()` fetches the data as a dictionary of `NumPy` arrays. `fetchdf()` fetches the data as a Pandas DataFrame.
+In DuckDB, there are two additional methods that can be used to efficiently retrieve data: `fetchnumpy()` and `fetchdf()`. `fetchnumpy()` fetches the data as a dictionary of `NumPy` arrays. `fetchdf()` fetches the data as a Pandas DataFrame.
 
 Below is an example of using this functionality:
 
