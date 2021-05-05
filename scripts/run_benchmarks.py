@@ -316,6 +316,29 @@ def run_arrow(commit_hash,column_name,experiment_name,duck_con):
     c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(arrow_to_duck)))
     con.commit()
 
+def run_arrow_parallel(commit_hash,duck_con):
+    import statistics,duckdb
+    batch_sizes = [1024, 100000, 1000000]
+    num_threads = [1,2,4,8]
+    data = (pyarrow.array(np.random.randint(800, size=100000000), type=pyarrow.int32()))
+    duckdb_conn = duckdb.connect()
+    for batch in batch_sizes:
+        for thread in num_threads:
+            tbl = pyarrow.Table.from_batches(pyarrow.Table.from_arrays([data],['a']).to_batches(batch))
+            rel = duckdb_conn.from_arrow_table(tbl)
+            duckdb_conn.execute("PRAGMA threads="+str(thread))
+            duckdb_conn.execute("PRAGMA force_parallelism")
+            total_times=[]
+            for i in range(6):
+                start_time = time.time()
+                result = rel.aggregate("(count(a))::INT").execute().fetchone()[0]
+                total_time = time.time() - start_time
+                if i!= 0:
+                    total_times.append(total_time)
+
+            (benchmark_id, groupname) = insert_benchmark_info('threads:' +str(thread) + ' batch_size:' +str(batch) ,'arrow_integration','')
+            c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(total_times)))
+    con.commit()
 
 def run_arrow_benchmarks(commit_hash):
     import duckdb
@@ -339,6 +362,7 @@ def run_arrow_benchmarks(commit_hash):
     run_arrow(commit_hash,'int_n_val','int (null)',duck_con)
     run_arrow(commit_hash,'str_val','str',duck_con)
     run_arrow(commit_hash,'str_n_val','str (null)',duck_con)
+    run_arrow_parallel(commit_hash,duck_con)
 
 
 def run_benchmark_for_commit(commit, run_slow_benchmarks):
