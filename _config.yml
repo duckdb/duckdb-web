@@ -14,13 +14,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: DuckDB
-email: info@duckdb.org
+email: quack@duckdb.org
 description: >- # this means to ignore newlines until "baseurl:"
   DuckDB is an embedded database designed to execute analytical SQL queries fast while embedded in another process. It is designed to be easy to install and easy to use. DuckDB has no external dependencies. DuckDB has bindings for C/C++, Python and R.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current Version of duckDB
-currentduckdbversion: 0.2.5
+currentduckdbversion: 0.2.6
 
 livereload: true
 # Build settings
