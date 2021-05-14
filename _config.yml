@@ -21,14 +21,14 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current Version of duckDB
 currentduckdbversion: 0.2.6
-
+highlighter: rouge
 livereload: true
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-  
+
 excerpt_separator: <!--more-->
 
 # Exclude from processing.

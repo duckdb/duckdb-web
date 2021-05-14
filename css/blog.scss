@@ -7,7 +7,14 @@ $duckDBgrey: #b8b8b8;
 $fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
 $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
-
+h4 {
+	font-size: 110%;
+	font-weight: bold;
+}
+h5 {
+	font-size: 100%;
+	font-weight: bold;
+}
 .newswrap{
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -40,7 +47,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 				}
 			}
 		}
-		a.backtoarchive, 
+		a.backtoarchive,
 		a.continue{
 			color: $duckDBgrey;
 			text-decoration: none;
@@ -51,7 +58,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 				color: black;
 			}
 		}
-		
+
 		.singleentry{
 			h1{
 				font-size: 140%;
