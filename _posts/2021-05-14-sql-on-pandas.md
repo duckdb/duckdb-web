@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 
 _TLDR: DuckDB, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames._
 
-Recently, an article was published [advocating for using SQL for Data Analysis](https://hakibenita.com/sql-for-data-analysis). Here at team DuckDB, we are huge fans of [SQL](https://en.wikipedia.org/wiki/SQL). It is a versatile and flexible language that allows the user to efficiently perform a wide variety of data transformations, without having to care about how the data is physically represented or how to do these data transformations in the optimal way.
+Recently, an article was published [advocating for using SQL for Data Analysis](https://hakibenita.com/sql-for-data-analysis). Here at team DuckDB, we are huge fans of [SQL](https://en.wikipedia.org/wiki/SQL). It is a versatile and flexible language that allows the user to efficiently perform a wide variety of data transformations, without having to care about how the data is physically represented or how to do these data transformations in the most optimal way.
 
 <!--more-->
 
@@ -52,13 +52,13 @@ The SQL table name `mydf` is interpreted as the local Python variable `mydf` tha
 Not only is this process painless, it is highly efficient. For many queries, you can use DuckDB to process data faster than Pandas, and with a much lower total memory usage, *without ever leaving the Pandas DataFrame binary format* ("Pandas-in, Pandas-out"). Unlike when using an external database system such as Postgres, the data transfer time of the input or the output is negligible (see Appendix A for details).
 
 # SQL on Pandas Performance
-To demonstrate the performance of DuckDB when executing SQL on Pandas DataFrames, we now present a number of benchmarks. The source code for the benchmarks is available for interactive use [in Google Collab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing). In these benchmarks, we operate *purely* on Pandas DataFrames. Both the DuckDB code and the Pandas code operates fully on a `Pandas-in, Pandas-out` basis.
+To demonstrate the performance of DuckDB when executing SQL on Pandas DataFrames, we now present a number of benchmarks. The source code for the benchmarks is available for interactive use [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing). In these benchmarks, we operate *purely* on Pandas DataFrames. Both the DuckDB code and the Pandas code operates fully on a `Pandas-in, Pandas-out` basis.
 
 #### Benchmark Setup and Data Set
 
 We run the benchmark entirely from within the Google Colab environment. For our benchmark dataset, we use the [infamous TPC-H data set](http://www.tpc.org/tpch/). Specifically, we focus on the `lineitem` and `orders` tables as these are the largest tables in the benchmark. The total dataset size is around 1GB in uncompressed CSV format ("scale factor" 1).
 
-As DuckDB is capable of using multiple processors (multi-threading), we include both a single-threaded variant and a variant with two threads. Note that while DuckDB can scale far beyond two threads, Google Collab only supports two.
+As DuckDB is capable of using multiple processors (multi-threading), we include both a single-threaded variant and a variant with two threads. Note that while DuckDB can scale far beyond two threads, Google Colab only supports two.
 
 #### Setup
 
@@ -426,7 +426,7 @@ GROUP BY l_returnflag,
          l_linestatus
 ```
 
-For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found in the colab.
+For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
 
 |    Name     | Time (s) |
 |-------------|----------|
