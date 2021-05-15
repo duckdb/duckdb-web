@@ -15,6 +15,8 @@ Recently, an article was published [advocating for using SQL for Data Analysis](
 
 For Data Science in Python, however, the [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org) libraries are irreplaceable. They serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup>. You can very effectively perform aggregations and data transformations in an external database system such as Postgres. However, you will need to convert that data back into NumPy or Pandas if you want to use it in libraries such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
 
+[1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
+
 #### SQL on Pandas
 We believe that combining Pandas and SQL is the way forward. DuckDB is uniquely positioned to make this process efficient and easy. As a short teaser, here is a code snippet that allows you to run SQL directly on a Pandas DataFrame using DuckDB.
 
@@ -28,8 +30,6 @@ print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
 ```
 
 In the rest of the article, we will go more in-depth into how this works and how fast it is.
-
-[1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
 
 # Data Integration & SQL on Pandas
 One of the core goals of DuckDB is that accessing data in common formats should be easy. DuckDB is fully capable of running queries in parallel *directly* on top of a Pandas DataFrame (or on a Parquet/CSV file, or on an Arrow table, …). A separate (time-consuming) import step is not necessary.
