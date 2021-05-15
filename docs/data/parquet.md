@@ -56,3 +56,15 @@ Here is an example that reads all the files that end with `.parquet` located in 
 -- read all files that match the glob pattern
 SELECT * FROM parquet_scan('test/*.parquet');
 ```
+
+### Writing to Parquet Files
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`).
+
+```sql
+-- write a query to a snappy compressed parquet file
+COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
+-- write "tbl" to a zstd compressed parquet file
+COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
+-- write a csv file to an uncompressed parquet file
+COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
+```
