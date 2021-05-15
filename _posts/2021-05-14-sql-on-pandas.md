@@ -16,7 +16,7 @@ Recently, an article was published [advocating for using SQL for Data Analysis](
 For Data Science in Python, however, the [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org) libraries are irreplaceable. They serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup>. You can very effectively perform aggregations and data transformations in an external database system such as Postgres. However, you will need to convert that data back into NumPy or Pandas if you want to use it in libraries such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
 
 #### SQL on Pandas
-Rather than abandoning Pandas in favor of SQL, we believe that *combining* Pandas and SQL is the way forward. DuckDB is uniquely positioned to make this process efficient and easy. As a short teaser, here is a code snippet that allows you to run SQL directly on a Pandas DataFrame using DuckDB.
+We believe that combining Pandas and SQL is the way forward. DuckDB is uniquely positioned to make this process efficient and easy. As a short teaser, here is a code snippet that allows you to run SQL directly on a Pandas DataFrame using DuckDB.
 
 ```py
 # to install: pip install duckdb
