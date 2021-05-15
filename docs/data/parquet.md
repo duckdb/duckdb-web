@@ -8,8 +8,15 @@ Parquet files are compressed columnar files that are efficient to load and proce
 SELECT * FROM parquet_scan('test.parquet');
 ```
 
+If your file ends in `.parquet`, the parquet_scan syntax is optional. The system will automatically infer that you are reading a Parquet file. 
+
+```sql
+SELECT * FROM 'test.parquet';
+```
+
 Unlike CSV files, parquet files are structured and as such are unambiguous to read. No parameters need to be passed to this function. The `parquet_scan` function will figure out the column names and column types present in the file and emit them.
 
+### Querying Parquet Files
 You can also insert the data into a table or create a table from the parquet file directly. This will load the data from the parquet file and insert it into the database.
 
 ```sql
@@ -28,5 +35,36 @@ CREATE VIEW people AS SELECT * FROM parquet_scan('test.parquet');
 SELECT * FROM people;
 ```
 
-# Partial Reading
+### Partial Reading
 DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
+
+DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
+
+### Multi-File Reads and Globs
+DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using the glob syntax.
+
+|  Wildcard  |                        Description                        |
+|------------|-----------------------------------------------------------|
+| `*`        | matches any number of any characters (including none)     |
+| `?`        | matches any single character                              |
+| `[abc]`    | matches one character given in the bracket                |
+| `[a-z]`    | matches one character from the range given in the bracket |
+
+Here is an example that reads all the files that end with `.parquet` located in the `test` folder:
+
+```sql
+-- read all files that match the glob pattern
+SELECT * FROM parquet_scan('test/*.parquet');
+```
+
+### Writing to Parquet Files
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`).
+
+```sql
+-- write a query to a snappy compressed parquet file
+COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
+-- write "tbl" to a zstd compressed parquet file
+COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
+-- write a csv file to an uncompressed parquet file
+COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
+```
