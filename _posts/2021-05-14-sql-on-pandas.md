@@ -18,7 +18,9 @@ For Data Science in Python, however, the [Pandas](https://pandas.pydata.org) and
 [1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
 
 #### SQL on Pandas
-We believe that combining Pandas and SQL is the way forward. DuckDB is uniquely positioned to make this process efficient and easy. As a short teaser, here is a code snippet that allows you to run SQL directly on a Pandas DataFrame using DuckDB.
+After your data has been converted into a Pandas DataFrame often additional data wrangling and analysis still need to be performed. SQL is a very powerful tool for performing these types of data transformations. Using DuckDB, it is possible to run SQL efficiently right on top of Pandas DataFrames.
+
+As a short teaser, here is a code snippet that allows you to do exactly that: run arbitrary SQL queries directly on Pandas DataFrames using DuckDB.
 
 ```py
 # to install: pip install duckdb
@@ -320,8 +322,6 @@ We see that the basic approach is extremely time consuming compared to the optim
 
 #### Takeaway
 Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in - and out - of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
-
-If you have enjoyed this, we would appreciate an [upvote on Hacker News](https://news.ycombinator.com/item?id=27152131).
 
 # Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
 
