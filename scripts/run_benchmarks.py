@@ -357,7 +357,7 @@ def run_arrow_parallel(commit_hash,duck_con):
             duckdb_conn.execute("PRAGMA threads="+str(thread))
             duckdb_conn.execute("PRAGMA force_parallelism")
             total_times=[]
-            for i in range(2): #It seems that multiple parallel reads break this
+            for i in range(6):
                 start_time = time.time()
                 result = rel.aggregate("(count(a))::INT").execute()
                 total_time = time.time() - start_time
