@@ -17,7 +17,7 @@ CREATE MACRO ifelse(a, b, c) AS CASE WHEN a THEN b ELSE c END;
 CREATE MACRO one() AS (SELECT 1);
 -- create a macro with a common table expression
 -- (parameter names get priority over column names: disambiguate using the table name)
-CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a);
+CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM cte);
 -- macro's are schema-dependent, and have an alias: FUNCTION
 CREATE FUNCTION main.myavg(x) AS SUM(x) / COUNT(x);
 -- create a macro with default constant parameters

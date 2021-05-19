@@ -19,7 +19,7 @@ $fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
 $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
 /** FONT IMPORT **/
-
+@import url(vs.css);
 @font-face{
     font-family: "SuisseIntl-Book";
     src: url("webfont/SuisseIntl-Book-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebS.woff") format("woff");
@@ -56,7 +56,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
 *{
 	-webkit-box-sizing: border-box;
-	box-sizing: border-box;	
+	box-sizing: border-box;
 }
 
 body{
@@ -93,7 +93,7 @@ ul {
 	list-style-type: '\2022 \00a0\00a0';
 }
 
-/** External Links in Fließtext **/ 
+/** External Links in Fließtext **/
 a.externallink:hover{
 	background-color: $duckDBblue!important;
 }
@@ -273,7 +273,7 @@ header .headerline{
 				}
 				.hasSub{
 					cursor: pointer;
-					&:hover{ 
+					&:hover{
 						color: $duckDByellow;
 						& ~ ul{
 							opacity: 1;
@@ -358,7 +358,7 @@ footer{
 					font-family: $fontSansBold;
 				}
 				&:first-child{
-					
+
 				}
 				a{
 					color: white;
@@ -598,7 +598,7 @@ body.landing{
 					height: 90px;
 					background-color: $duckDBlightgrey;
 					text-align: center;
-					display: table-cell; 
+					display: table-cell;
 					vertical-align: middle;
 				}
 			}
@@ -720,9 +720,9 @@ body.landing{
 			text-decoration: none;
 			color: black;
 		}
-		
+
 	}
-	
+
 	.install{
 		p{
 			max-width: 450px;
@@ -760,7 +760,7 @@ body.landing{
 					border-bottom: 3px solid black;
 					color: black;
 				}
-			}			
+			}
 		}
 		.result{
 			background-color: $duckDBlightgrey;
@@ -769,7 +769,7 @@ body.landing{
 			padding: 15px;
 			margin-top: 10px;
 			font-size: 14px;
-			a{	
+			a{
 				color: black;
 				background-color: white;
 				font-family: $fontMono;
@@ -896,7 +896,7 @@ body.documentation{
 		}
 	}
 	li.active{
-		text-decoration: underline;	
+		text-decoration: underline;
 	}
 	li.hasSub span{
 		-webkit-transition: -webkit-transform .3s;
@@ -945,7 +945,7 @@ body.documentation{
 					display: block;
 				}
 				ul{
-					display: none; // Dritte Navigationsebene ausblenden 
+					display: none; // Dritte Navigationsebene ausblenden
 					li{
 						font-size: 12px;
 						line-height: 1.7;
