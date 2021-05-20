@@ -4,7 +4,7 @@ FNULL = open(os.devnull, 'w')
 benchmark_runner = os.path.join('build', 'release', 'benchmark', 'benchmark_runner')
 out_file = 'out.csv'
 log_file = 'out.log'
-default_start_commit = '64f35b19a8571b6382504bbdeeb63a7d3bf1d94c'
+default_start_commit = '0109d4301b8ed005ca5396c177cf5ef36bef5274'
 duckdb_base = os.path.join(os.getcwd(), '..', 'duckdb')
 duckdb_web_base = os.getcwd()
 sqlite_db_file = os.path.join(duckdb_web_base, 'benchmarks.db')
@@ -292,7 +292,7 @@ def write_benchmark_info(benchmark):
     return insert_benchmark_info(display_name,groupname,subgroup)
 
 def run_arrow(commit_hash,column_name,experiment_name,duck_con):
-    import statistics,duckdb
+    import statistics,duckdb,pyarrow
     duck_to_arrow = []
     arrow_to_duck = []
     for i in range(6):
@@ -316,6 +316,57 @@ def run_arrow(commit_hash,column_name,experiment_name,duck_con):
     c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(arrow_to_duck)))
     con.commit()
 
+def run_arrow_tpch(commit_hash,duck_con):
+    #Only run Queries 1 and 6
+    import statistics,duckdb,pyarrow
+    query_times = []
+    tpch_queries = [1,6]
+    duck_con.execute("CALL dbgen(sf=1);")
+    tpch_tables = ['lineitem']
+    arrow_tables = []
+    for tpch_table in tpch_tables:
+        duck_tbl = duck_con.table(tpch_table)
+        arrow_tables.append(duck_tbl.arrow())
+        duck_arrow_table = duck_con.from_arrow_table(arrow_tables[-1])
+        duck_con.execute("DROP TABLE "+tpch_table)
+        duck_arrow_table.create(tpch_table)
+
+    for tpch_query in tpch_queries:
+        query = duck_con.execute("select query from tpch_queries() where query_nr="+str(tpch_query)).fetchone()[0]
+        for i in range(6):
+            start_time = time.time()
+            result = duck_con.execute(query)
+            q_time = time.time() - start_time
+            if i!= 0:
+                query_times.append(q_time)
+
+        (benchmark_id, groupname) = insert_benchmark_info('arrow tpch Q'+str(tpch_query),'arrow_integration','')
+        c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(query_times)))
+    con.commit()
+
+def run_arrow_parallel(commit_hash,duck_con):
+    import statistics,duckdb,pyarrow, numpy
+    batch_sizes = [1024, 100000, 1000000]
+    num_threads = [1,2,4,8]
+    data = (pyarrow.array(numpy.random.randint(800, size=100000000), type=pyarrow.int32()))
+    duckdb_conn = duckdb.connect()
+    for batch in batch_sizes:
+        for thread in num_threads:
+            tbl = pyarrow.Table.from_batches(pyarrow.Table.from_arrays([data],['a']).to_batches(batch))
+            rel = duckdb_conn.from_arrow_table(tbl)
+            duckdb_conn.execute("PRAGMA threads="+str(thread))
+            duckdb_conn.execute("PRAGMA force_parallelism")
+            total_times=[]
+            for i in range(6):
+                start_time = time.time()
+                result = rel.aggregate("(count(a))::INT").execute()
+                total_time = time.time() - start_time
+                if i!= 0:
+                    total_times.append(total_time)
+
+            (benchmark_id, groupname) = insert_benchmark_info('threads:' +str(thread) + ' batch_size:' +str(batch) ,'arrow_integration','')
+            c.execute("INSERT INTO timings (benchmark_id, hash, success, median) VALUES (?, ?, ?, ?)", (benchmark_id, commit_hash, True, statistics.median(total_times)))
+    con.commit()
 
 def run_arrow_benchmarks(commit_hash):
     import duckdb
@@ -339,6 +390,8 @@ def run_arrow_benchmarks(commit_hash):
     run_arrow(commit_hash,'int_n_val','int (null)',duck_con)
     run_arrow(commit_hash,'str_val','str',duck_con)
     run_arrow(commit_hash,'str_n_val','str (null)',duck_con)
+    run_arrow_parallel(commit_hash,duck_con)
+    run_arrow_tpch(commit_hash,duck_con)
 
 
 def run_benchmark_for_commit(commit, run_slow_benchmarks):
