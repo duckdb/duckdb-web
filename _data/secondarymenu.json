@@ -34,6 +34,10 @@
           ]
         },
         {
+          "page": "Blog",
+          "url": "/news/"
+        },
+        {
           "page": "GitHub",
           "url": "https://github.com/cwida/duckdb"
         },
