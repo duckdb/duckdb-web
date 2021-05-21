@@ -117,7 +117,8 @@
         {% capture anchor %}{{ anchor }} {{ include.anchorAttrs | replace: '%heading%', escaped_header | replace: '%html_id%', html_id }}{% endcapture %}
       {% endif %}
 
-      {% capture anchor %}<a style="text-decoration: none;" {{ anchor }}>&#x1F517</a>{% endcapture %}
+      {% capture anchor_start %}<a style="text-decoration: none;" {{ anchor }}>{% endcapture %}
+      {% capture anchor_end %}</a>{% endcapture %}
 
       <!-- In order to prevent adding extra space after a heading, we'll let the 'anchor' value contain it -->
       {% if beforeHeading %}
@@ -130,11 +131,7 @@
     {% capture new_heading %}
       <h{{ _hAttrToStrip }}
         {{ include.bodyPrefix }}
-        {% if beforeHeading %}
-          {{ anchor }}{{ header }}
-        {% else %}
-          {{ header }}{{ anchor }}
-        {% endif %}
+        {{ anchor_start }}{{ header }}{{ anchor_end }}
         {{ include.bodySuffix }}
       </h{{ headerLevel }}>
     {% endcapture %}
