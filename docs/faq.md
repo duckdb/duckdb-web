@@ -6,7 +6,7 @@ selected: FAQ
 
 
 ### Who makes DuckDB?
-DuckDB is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/cwida/duckdb/graphs/contributors) from all over the world. Mark, Hannes and some other contributors are employees at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, The Netherlands. CWI is the national research institute for mathematics and computer science in the Netherlands. 
+DuckDB is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/duckdb/duckdb/graphs/contributors) from all over the world. Mark, Hannes and some other contributors are employees at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, The Netherlands. CWI is the national research institute for mathematics and computer science in the Netherlands. 
 
 ### Why call it DuckDB?
 Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](https://static1.squarespace.com/static/51f8f4aae4b0cdf15da554e1/57023acae321408302d6b936/5973b537bebafb04b9520c3d/1500755312736/11_Wilbur_buiten_DQ1C0104.jpg?format=1000w). They are thus the perfect mascot for a versatile and resilient data management system. Also the logo designs itself.
@@ -16,7 +16,7 @@ You can download the DuckDB Logo here: <br/> • Web: [png](/images/logo-dl/Duck
 
 ### How can I expand the DuckDB website?
 The DuckDB Website is hosted by GitHub pages, its repository is [here](
-https://github.com/cwida/duckdb-web). Pull requests to fix issues or generally expand the documentation section are very welcome.
+https://github.com/duckdb/duckdb-web). Pull requests to fix issues or generally expand the documentation section are very welcome.
 
 ### How is DuckDB related to MonetDB, MonetDBe or MonetDBLite?
 DuckDB is a new from-scratch development. There is no connection to MonetDB or MonetDBLite, different architectures and no source code overlap.

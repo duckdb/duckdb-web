@@ -35,11 +35,11 @@
         },
         {
           "page": "GitHub",
-          "url": "https://github.com/cwida/duckdb"
+          "url": "https://github.com/duckdb/duckdb"
         },
         {
           "page": "Contributing",
-          "url": "https://github.com/cwida/duckdb/blob/master/CONTRIBUTING.md"
+          "url": "https://github.com/duckdb/duckdb/blob/master/CONTRIBUTING.md"
         }
       ]
     }

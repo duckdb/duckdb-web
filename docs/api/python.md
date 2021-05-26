@@ -110,4 +110,4 @@ Also refer to [the data import documentation](/docs/data/overview) for more opti
 
 
 ## Relational API
-In addition to the SQL API DuckDB supports a programmatic method to construct queries. See [https://github.com/cwida/duckdb/blob/master/examples/python/duckdb-python.py](https://github.com/cwida/duckdb/blob/master/examples/python/duckdb-python.py) for an example.
+In addition to the SQL API DuckDB supports a programmatic method to construct queries. See [https://github.com/duckdb/duckdb/blob/master/examples/python/duckdb-python.py](https://github.com/duckdb/duckdb/blob/master/examples/python/duckdb-python.py) for an example.
