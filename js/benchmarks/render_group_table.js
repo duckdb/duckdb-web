@@ -61,7 +61,7 @@ function generate_table(expected_subgroup) {
 	for(i in ordered_commits) {
 		var commit = ordered_commits[i];
 		table_html += '<th class="table-active">';
-		table_html += '<a href="https://github.com/cwida/duckdb/commit/' + commit[0] + '">';
+		table_html += '<a href="https://github.com/duckdb/duckdb/commit/' + commit[0] + '">';
 		table_html += commit[0].substring(0, 4)
 		table_html += '</a>';
 		table_html += '</th>';
