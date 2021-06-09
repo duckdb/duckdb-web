@@ -11,6 +11,8 @@ $(document).ready(function(){
 		if (navigator.appVersion.indexOf("X11")!=-1) { OSName="UNIX"; OSdatid=".linux" };
 		if (navigator.appVersion.indexOf("Linux")!=-1) { OSName="Linux"; OSdatid=".linux"};
 		$('.systemdetected').html('System detected: '+OSName);
+		$('.ver-cplusplus').not(OSdatid).remove()
+		$('.ver-cli').not(OSdatid).remove()
 	}
 	
 	// Installationshinweise Landingpage
