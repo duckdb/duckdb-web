@@ -7,11 +7,48 @@ expanded: Data Types
 | Name | Description |
 |:---|:---|
 | LIST | An ordered sequence of data values of the same type. |
-| STRUCT | A dictionary of data values. |
+| STRUCT | A dictionary of multiple named values, each name having the same type. |
 
-A `LIST` column can have values with different lengths, but they must all have the same underlying type. `LIST`s are typically used to store arrays of numbers.
 
-A `STRUCT` column must have the same entry names and data types for each value. The values are looked up in the `STRUCT` using string entry names. `STRUCT`s are typically used to nest rows into single columns.
+## Lists
 
-## Operators
-See [Nested Functions](../functions/nested).
+A `LIST` column can have values with different lengths, but they must all have the same underlying type.
+`LIST`s are typically used to store arrays of numbers, but can contain any uniform data type,
+including other `LIST`s and `STRUCT`s.
+`LIST`s are similar to Postgres's `ARRAY` type.
+
+Lists can be created using the [`LIST_VALUE(expr, ...)`](../functions/nested#listfunctions) function
+or the equivalent array notation `[expr, ...]` notation.
+The expressions can be constants or arbitrary expressions.
+
+## Structs
+
+Conceptually, a `STRUCT` column contains an ordered list of other columns called "entries".
+The entries are referenced by name using strings.
+Each value in the `STRUCT` column must have the same entry names,
+and each entry must have the same type.
+`STRUCT`s are typically used to nest multiple columns into a single column,
+and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
+`STRUCT`s are similar to Postgres's `ROW` type.
+
+Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#structfunctions) function
+or the equivalent array notation `{'name': expr, ...}` notation.
+The expressions can be constants or arbitrary expressions.
+
+## Comparison
+
+Nested types can be compared using all the [comparison operators](../expressions/comparison_operators).
+These comparisons can be used in [logical expressions](../expressions/logical_operators)
+for both `WHERE` and `HAVING` clauses, as well as for creating [Boolean values](./boolean).
+
+The ordering is defined positionally in the same way that words can be ordered in a dictionary.
+`NULL` values compare greater than all other values and are considered equal to each other.
+
+At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
+comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
+Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
+and a `NULL` nested value member will compare above a non-`NULL` nested value member.
+
+## Grouping and Joining
+
+Nested types can be used in `GROUP BY` clauses and as expressions for `JOIN`s.
