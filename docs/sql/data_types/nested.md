@@ -21,6 +21,15 @@ Lists can be created using the [`LIST_VALUE(expr, ...)`](../functions/nested#lis
 or the equivalent array notation `[expr, ...]` notation.
 The expressions can be constants or arbitrary expressions.
 
+```sql
+-- List of integers
+SELECT [1, 2, 3];
+-- List of strings with a NULL value
+SELECT ['duck', 'goose', NULL, 'heron'];
+-- List of lists with NULL values
+SELECT [['duck', 'goose', 'heron'], NULL, ['frog', 'toad'], []];
+```
+
 ## Structs
 
 Conceptually, a `STRUCT` column contains an ordered list of other columns called "entries".
@@ -34,6 +43,30 @@ and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#structfunctions) function
 or the equivalent array notation `{'name': expr, ...}` notation.
 The expressions can be constants or arbitrary expressions.
+
+```
+-- Struct of integers
+SELECT {'x': 1, 'y': 2, 'z': 3};
+-- Struct of strings with a NULL value
+SELECT {'yes:' 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
+-- Struct of structs with NULL values
+SELECT {'birds':
+            {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
+        'aliens':
+            NULL,
+        'amphibians':
+            {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
+        };
+```
+
+## Nesting
+
+`LIST`s and `STRUCT`s can be arbitrarily nested to any depth, so long as the type rules are observed.
+
+```
+-- Struct with lists
+SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['frog', 'toad']};
+```
 
 ## Comparison
 
