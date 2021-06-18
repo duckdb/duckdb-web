@@ -13,10 +13,10 @@ When the `DISTINCT` clause is provided, only distinct values are considered in t
 ## General Aggregate Functions
 The table below shows the available general aggregate functions.
 
-| Function | Description | Example | Alias |
+| Function | Description | Example | Alias(es) |
 |:---|:---|:---|:---|
-| `argMax(arg,val)` |Calculates the arg value for a maximum val value. | `argMax(A,B)` | - |
-| `argMin(arg,val)` |Calculates the arg value for a minimum val value. | `argMin(A,B)` | - |
+| `arg_max(arg,val)` |Calculates the arg value for a maximum val value. | `arg_max(A,B)` | `argMax(A,B)`, `max_by(A,b)` |
+| `arg_min(arg,val)` |Calculates the arg value for a minimum val value. | `arg_min(A,B)` | `argMin(A,B)`, `min_by(A,B)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |
 | `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
 | `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
