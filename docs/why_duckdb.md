@@ -62,6 +62,7 @@ DuckDB's main developers are public servants in The Netherlands. Our salaries ar
 * [DuckDB - An Embeddable Analytical Database](https://mirrors.dotsrc.org/fosdem/2020/H.2215/duckdb.mp4) (Video Presentation, ca 15min)
 * [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
 * [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
+* [The Case for In-Process Analytics](https://homepages.cwi.nl/~hannes/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
 
 ## Other Projects
 Here are some projects that we know of that use DuckDB. If you would like your project to be added here, open a GitHub issue.
