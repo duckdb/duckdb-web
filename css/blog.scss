@@ -7,7 +7,39 @@ $duckDBgrey: #b8b8b8;
 $fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
 $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
+img {
+	margin: 0 auto;
+	border:none;
+	display: flex;
+	justify-content: center;
+}
+table {
+	max-width:100%;
+	justify-content: center;
+	text-align: center;
+	margin: 6px auto;
+  }
+  table td, table th {
+	padding: 5px 10px;
+  }
+  table tbody td {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+  }
+  table thead {
+	background: #FEED36;
+	border-bottom: 3px solid #1E1E1E;
+  }
+  table thead th {
+	font-size: 15px;
+	font-weight: bold;
+	color: #000000;
+	text-align: center;
+  }
 h4 {
+	margin-block-start:0em;
+	margin-block-end:0em;
 	font-size: 110%;
 	font-weight: bold;
 }
