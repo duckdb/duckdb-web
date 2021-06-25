@@ -8,7 +8,8 @@ railroad: expressions/comparison.js
 ## Comparison Operators
 <div id="rrdiagram2"></div>
 
-The table below shows the standard comparison operators. Whenever either of the input arguments is `NULL`, the output of the comparison is `NULL`.
+The table below shows the standard comparison operators.
+Whenever either of the input arguments is `NULL`, the output of the comparison is `NULL`.
 
 | Operator | Description | Example | Result |
 |:---|:---|:---|:---|
@@ -18,6 +19,14 @@ The table below shows the standard comparison operators. Whenever either of the 
 | `>=` | greater than or equal to | `4 >= NULL` | `NULL` |
 | `=` | equal | `NULL = NULL` | `NULL` |
 | `<>` or `!=` | not equal | `2 <> 2` | `FALSE` |
+
+The table below shows the standard distinction operators.
+These operators treat `NULL` values as equal.
+
+| Operator | Description | Example | Result |
+|:---|:---|:---|:---|
+| `IS DISTINCT FROM` | equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `TRUE` |
+| `IS NOT DISTINCT FROM` | not equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `TRUE` |
 
 ## BETWEEN and IS (NOT) NULL
 <div id="rrdiagram1"></div>
