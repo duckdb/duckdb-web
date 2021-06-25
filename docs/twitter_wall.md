@@ -7,7 +7,10 @@ description: Tweets by people praising DuckDB
 
 Below we collect some Tweets about DuckDB
 
+
 <blockquote class="twitter-tweet" data-dnt="true"><p lang="en" dir="ltr">I don&#39;t know who needs to hear this, but if you need a in-memory database to play with in <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>, DuckDB has a more robust feature set than SQLite and is just as easy to use 🤓<br><br>🦆<a href="https://t.co/i3zpPd4eUE">https://t.co/i3zpPd4eUE</a></p>&mdash; Emily Riederer (@EmilyRiederer) <a href="https://twitter.com/EmilyRiederer/status/1307657305710788609?ref_src=twsrc%5Etfw">September 20, 2020</a></blockquote>
+
+<blockquote class="twitter-tweet" data-dnt="true"><p lang="en" dir="ltr">It is infinitely nicer to use <a href="https://twitter.com/duckdb?ref_src=twsrc%5Etfw">@duckdb</a> to quickly look at <a href="https://twitter.com/ApacheParquet?ref_src=twsrc%5Etfw">@ApacheParquet</a> files than using any of the horrible hadoop/spark things.</p>&mdash; fs111 (@fs111) <a href="https://twitter.com/fs111/status/1407622856121462784?ref_src=twsrc%5Etfw">June 23, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Not the answer you want, but the answer you need: For local DBs switch to DuckDB. <a href="https://t.co/x5FAj1ltSB">https://t.co/x5FAj1ltSB</a><br><br>(Otherwise, I’d check your 5432 port status. On Linux I’d use netstat. My guess is they support Mac too, but don’t know offhand.)</p>&mdash; Grant McDermott (@grant_mcdermott) <a href="https://twitter.com/grant_mcdermott/status/1320200123427663878?ref_src=twsrc%5Etfw">October 25, 2020</a></blockquote>
 

@@ -85,7 +85,7 @@ def background_color_output(output, r, g, b):
 	return '<div style="background-color:rgb(%d,%d,%d);">%s</div>' % (r, g, b, output)
 
 def write_commit(f, commit):
-	f.write('<a href="https://github.com/cwida/duckdb/commit/%s">%s</a>'  % (commit, commit[:4]))
+	f.write('<a href="https://github.com/duckdb/duckdb/commit/%s">%s</a>'  % (commit, commit[:4]))
 
 def get_group_name(key):
 	category_name = key.replace("[", "").replace("]", "").replace("-", " ").title()
