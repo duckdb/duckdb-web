@@ -14,7 +14,7 @@ Apache Parquet is the most common "Big Data" storage format for analytics. In Pa
 <!--more-->
 
 <img src="/images/blog/parquet.svg" alt="Example parquet file shown visually. The parquet file (taxi.parquet) is divided into row-groups that each have two columns (pickup_at and dropoff_at)"
-	title="Taxi Parquet File" class="parquet"/>
+	title="Taxi Parquet File" style="max-width:30%"/>
 
 The Parquet format has a number of properties that make it suitable for analytical use cases:
 
@@ -58,7 +58,7 @@ WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
 In this query, we read a single column from our Parquet file (`pickup_at`). Any other columns stored in the Parquet file can be entirely skipped, as we do not need them to answer our query.
 
 <img src="/images/blog/parquet-filter-svg.svg" alt="Projection & filter pushdown into parquet file example."
-	title="Filter Pushdown" class="parquet"/>
+	title="Filter Pushdown" style="max-width:30%"/>
 
 In addition, only rows that have a `pickup_at` between the 15th and the 20th of April 2019 influence the result of the query. Any rows that do not satisfy this predicate can be skipped.
 
