@@ -106,7 +106,7 @@ lineitem.agg(
 
 
 |    Name     | Time (s) |
-|-------------|----------|
+|:-------------|----------:|
 | DuckDB (1 Thread) | 0.079    |
 | DuckDB (2 Threads) | 0.048    |
 | Pandas      | 0.070    |
@@ -144,7 +144,7 @@ lineitem.groupby(
 ```
 
 |    Name     | Time (s) |
-|-------------|----------|
+|:-------------|----------:|
 | DuckDB (1 Thread) | 0.43     |
 | DuckDB (2 Threads)&nbsp; | 0.32     |
 | Pandas      | 0.84     |
@@ -214,7 +214,7 @@ result = filtered_df.groupby(
 ```
 
 |           Name             | Time (s) |
-|----------------------------|----------|
+|:----------------------------|----------:|
 | DuckDB (1 Thread)          | 0.60     |
 | DuckDB (2 Threads)         | 0.42     |
 | Pandas                     | 3.57     |
@@ -312,7 +312,7 @@ Both of these optimizations are automatically applied by DuckDB's query optimize
 
 
 |           Name           | Time (s) |
-|--------------------------|----------|
+|:--------------------------|----------:|
 | DuckDB (1 Thread)        | 1.05     |
 | DuckDB (2 Threads)       | 0.53     |
 | Pandas                   | 15.2     |
@@ -332,7 +332,7 @@ To showcase how costly this data transfer over a socket is, we have run a benchm
 In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-Byte integers (40MB) from Python to the PostgreSQL, SQLite and DuckDB databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
 
 |                    Name                     | Time (s) |
-|---------------------------------------------|----------|
+|:---------------------------------------------|----------:|
 | Pandas to Postgres using to_sql             | 111.25   |
 | Pandas to Postgres using temporary CSV file&nbsp;&nbsp; | 5.57     |
 | Pandas to SQLite using to_sql               | 6.80     |
@@ -343,7 +343,7 @@ While SQLite performs significantly better than Postgres here, it is still rathe
 Transferring query results or tables back from the SQL system into Pandas is another potential bottleneck. Using the built-in `read_sql_query` is extremely slow, but even the more optimized CSV route still takes at least a second for this tiny data set. DuckDB, on the other hand, also performs this transformation almost instantaneously.
 
 |                     Name                      | Time (s) |
-|-----------------------------------------------|----------|
+|:-----------------------------------------------|----------:|
 | PostgreSQL to Pandas using read_sql_query     | 7.08     |
 | PostgreSQL to Pandas using temporary CSV file | 1.29     |
 | SQLite to Pandas using read_sql_query         | 5.20     |
@@ -357,7 +357,7 @@ There is a package called [PandaSQL](https://pypi.org/project/pandasql/) that al
 Nevertheless, for good measure we have run the first Ungrouped Aggregate query in PandaSQL to time it. When we first tried to run the query on the original dataset, however, we ran into an out-of-memory error that crashed our colab session. For that reason, we have decided to run the benchmark again for PandaSQL using a sample of 10% of the original data set size (600K rows). Here are the results:
 
 |    Name     | Time (s)  |
-|-------------|-----------|
+|:-------------|-----------:|
 | DuckDB (1 Thread) |   0.023   |
 | DuckDB (2 Threads)&nbsp; |   0.014   |
 | Pandas      |   0.017   |
@@ -402,7 +402,7 @@ result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_ext
 ```
 
 |    Name                       | Time (s) |
-|-------------------------------|----------|
+|:-------------------------------|----------:|
 | DuckDB (1 Thread)             | 0.16     |
 | DuckDB (2 Threads)            | 0.14     |
 | Pandas                        | 7.87     |
@@ -431,7 +431,7 @@ GROUP BY l_returnflag,
 For Pandas we again create two versions. A naive version, and a manually optimized version. The exact code used can be found [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing).
 
 |    Name     | Time (s) |
-|-------------|----------|
+|:-------------|----------:|
 | DuckDB (1 Thread) | 1.04    |
 | DuckDB (2 Threads) | 0.89    |
 | Pandas      | 20.4    |
