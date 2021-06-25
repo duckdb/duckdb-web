@@ -94,12 +94,12 @@
 			<div class="postwrap">
 				<div class="postcontent">
 					{% if page.layoutpart == "postsoverview" %}
-						{{ content }}
+						{% include anchor_headings.html html=content %}
 					{% else %}
 						<div class="singleentry">
 							<div class="infoline"><span>{{ page.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
 							<h1>{{ page.title }}</h1>
-							{{ content }}
+							{% include anchor_headings.html html=content %}
 							<a href="/news/" class="backtoarchive"><span class="duckdbsymbol">&#8592;</span> back to news archive</a>
 						</div>
 					{% endif %}
@@ -184,7 +184,7 @@
 				</div>
 				<div>
 					<div class="gitbutton">
-						<a href="https://github.com/cwida/duckdb" target="_blank" class="blocklink"></a>
+						<a href="https://github.com/duckdb/duckdb" target="_blank" class="blocklink"></a>
 						<span class="duckdbsymbol">&#xe050;</span>GitHub
 					</div>
 				</div>

@@ -66,7 +66,7 @@ $.ajax({
 				var message = data.data[4][i];
 
 				table_html += "<td>";
-				table_html += '<a href="https://github.com/cwida/duckdb/commit/' + commit_hash + '">';
+				table_html += '<a href="https://github.com/duckdb/duckdb/commit/' + commit_hash + '">';
 				table_html += commit_hash.substring(0, 4)
 				table_html += '</a>';
 				table_html += "</td>";

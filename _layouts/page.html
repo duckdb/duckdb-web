@@ -111,7 +111,7 @@
         </div>
 
 		<div id="main_content_wrap">
-			{{ content }}
+			{% include anchor_headings.html html=content %}
 			{% if page.benchmark and page.benchmark != "" and page.benchmark != nil %}
 			<table class="table">
 				{% include {{ page.benchmark }} %}

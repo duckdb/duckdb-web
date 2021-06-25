@@ -37,8 +37,11 @@ SELECT * FROM parquet_scan('test.parquet');
 
 See [here](/docs/data/parquet) for a detailed description of Parquet loading.
 
-### Appender (C++)
-In C++, the `Appender` class can be used as an alternative for bulk data loading. The Appender class can be used to efficiently add rows to the database system without needing to use SQL.
+### Appender (C++ and Java)
+
+In C++ and Java, the appender can be used as an alternative for bulk data loading. This class can be used to efficiently add rows to the database system without needing to use SQL.
+
+C++:
 
 ```cpp
 Appender appender(con, "people");
@@ -46,5 +49,14 @@ appender.AppendRow(1, "Mark");
 appender.Close();
 ```
 
-See [here](/docs/data/appender) for a detailed description of the C++ appender.
+Java:
 
+```java
+con.createAppender("main", "people");
+appender.beginRow();
+appender.append("Mark");
+appender.endRow();
+appender.close();
+```
+
+See [here](/docs/data/appender) for a detailed description of the C++ appender.
