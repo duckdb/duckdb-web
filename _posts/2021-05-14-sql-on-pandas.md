@@ -13,7 +13,9 @@ Recently, an article was published [advocating for using SQL for Data Analysis](
 
 <!--more-->
 
-For Data Science in Python, however, the [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org) libraries are irreplaceable. They serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup>. You can very effectively perform aggregations and data transformations in an external database system such as Postgres. However, you will need to convert that data back into NumPy or Pandas if you want to use it in libraries such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
+While you can very effectively perform aggregations and data transformations in an external database system such as Postgres if your data is stored there, at some point you will need to convert that data back into [Pandas](https://pandas.pydata.org) and [NumPy](https://numpy.org). These libraries serve as the standard for data exchange between the vast ecosystem of Data Science libraries in Python<sup>1</sup> such as [scikit-learn](https://scikit-learn.org/stable/) or [TensorFlow](https://www.tensorflow.org).
+
+If you are reading from a file (e.g. a CSV or Parquet file) often your data will never be loaded into an external database system at all, and will instead be directly loaded into a Pandas DataFrame.
 
 [1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
 
@@ -111,7 +113,7 @@ lineitem.agg(
 | DuckDB (2 Threads) | 0.048    |
 | Pandas      | 0.070    |
 
-This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DuckDB performs similar to to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
+This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DuckDB performs similar to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
 
 ## Grouped Aggregate
 For our second query, we will run the same set of aggregates, but this time include a grouping condition. In SQL, we can do this by adding a GROUP BY clause to the query.
