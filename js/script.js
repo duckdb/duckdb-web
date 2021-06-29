@@ -333,6 +333,7 @@ $(document).ready(function(){
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	
 	// Shorten the News on Landingpage
+	/*
 	function add3Dots(string, limit){
 		var dots = " [...] ";
 		if(string.length > limit){
@@ -345,5 +346,5 @@ $(document).ready(function(){
 		$(this).text(shortened);
 		console.log(shortened)
 	})
-
+	*/
 });
