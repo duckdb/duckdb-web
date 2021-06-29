@@ -132,6 +132,13 @@
 		width: 100%;
 		max-width: 100%;
 	}
+	body.landing .newsblog .newswrap{
+		flex-wrap: wrap;
+		.postpreview{
+			width: 100%;
+			margin-bottom: 50px;
+		}
+	}
 	footer .sitefooter .footercontent{
 		-ms-flex-wrap: wrap;
 		    flex-wrap: wrap;
