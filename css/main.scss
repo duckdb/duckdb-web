@@ -802,6 +802,10 @@ body.landing{
 			margin-left: 50px;
 			color: darken($duckDBgrey,20);
 			text-decoration: none;
+			transition: color .3s;
+			&:hover{
+				color: black;
+			}
 		}
 		.newswrap{
 			display: flex;
