@@ -201,7 +201,7 @@ body_class: landing nowrap
 				<div class="postpreview" data-year="{{year}}" data-month="{{month}}">
 					<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 					<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-					{{ post.excerpt }}
+					<p>{{ post.content | strip_html | truncatewords: 50, " […]" }}</p>
 					<a href="{{ post.url }}" class="continue"><span class="duckdbsymbol">&#8594;</span> continue reading</a>
 				</div>
 				{% endfor %}
