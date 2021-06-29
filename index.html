@@ -189,6 +189,27 @@ body_class: landing nowrap
 	</div>
 </section>	
 
+
+<section>
+	<div class="wrap">
+		<div class="newsblog">
+			<h2>News</h2><a href="{{ site.url }}{{ site.baseurl }}/news" class="newsarchive"><span class="duckdbsymbol">&#x2192;</span> Archive</a>
+			<div class="newswrap">
+				{% for post in site.posts limit:3 %}
+				{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
+				{% capture month %}{{post.date | date: "%B"}}{% endcapture %}
+				<div class="postpreview" data-year="{{year}}" data-month="{{month}}">
+					<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
+					<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+					{{ post.excerpt }}
+					<a href="{{ post.url }}" class="continue"><span class="duckdbsymbol">&#8594;</span> continue reading</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+
 <!--
 <section>
 	<div class="wrap docu">
