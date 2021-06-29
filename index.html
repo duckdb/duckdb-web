@@ -193,7 +193,7 @@ body_class: landing nowrap
 <section>
 	<div class="wrap">
 		<div class="newsblog">
-			<h2>News</h2><a href="{{ site.url }}{{ site.baseurl }}/news" class="newsarchive"><span class="duckdbsymbol">&#x2192;</span> Archive</a>
+			<h2>Blog</h2><a href="{{ site.url }}{{ site.baseurl }}/news" class="newsarchive"><span class="duckdbsymbol">&#x2192;</span> Archive</a>
 			<div class="newswrap">
 				{% for post in site.posts limit:3 %}
 				{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
