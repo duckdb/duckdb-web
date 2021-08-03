@@ -227,14 +227,26 @@
                     "url": "/docs/sql/functions/date"
                   },
                   {
-                    "page": "Date Format",
-                    "url": "/docs/sql/functions/dateformat"
-                  },
-                  {
                     "page": "Timestamp Functions",
                     "url": "/docs/sql/functions/timestamp"
                   },
                   {
+                    "page": "Time Functions",
+                    "url": "/docs/sql/functions/time"
+                  },
+                  {
+                    "page": "Interval Functions",
+                    "url": "/docs/sql/functions/interval"
+                  },
+                  {
+                    "page": "Date Formats",
+                    "url": "/docs/sql/functions/dateformat"
+                  },
+                   {
+                    "page": "Date Parts",
+                    "url": "/docs/sql/functions/datepart"
+                  },
+                 {
                     "page": "Blob Functions",
                     "url": "/docs/sql/functions/blob"
                   },
