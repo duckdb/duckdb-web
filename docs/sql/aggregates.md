@@ -27,7 +27,7 @@ The table below shows the available general aggregate functions.
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
 | `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `list(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
-| `max(arg)` |Returns the maximum value present in arg. | `sum(A)` | - |
+| `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
 | `min(arg)` | Returns the minumum value present in arg. | `min(A)` | - |
 | `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
 | `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat` |
