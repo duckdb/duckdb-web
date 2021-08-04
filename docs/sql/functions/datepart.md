@@ -29,6 +29,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'dow'` | Day of the week (Sunday = 0, Saturday = 6) | | 2 |
 | `'isodow'` | ISO day of the week (Monday = 1, Sunday = 7) | | 2 |
 | `'week'` | Week number | `'weeks'`, `'w'` | 31 |
+| `'yearweek'` | Year and week number in `YYYYWW` format | | 202131 |
 | `'dayofyear'` | Day of the year (1-365/366) | `'doy'` | 215 |
 | `'quarter'` | Quarter of the year (1-4) | `'quarters'` | 3 |
 

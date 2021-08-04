@@ -30,4 +30,4 @@ The table below shows the available scalar functions for `TIME` types.
 | `minute(`*`time`*`)` | Extracts the minute component of a time | `minute(TIME '01:02:03.1234')` | 2 |
 | `second(`*`time`*`)` | Extracts the second component of a time | `second(TIME '01:02:03.1234')` | 3 |
 
-The only date parts that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
+The only [date parts](/docs/sql/functions/datepart) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
