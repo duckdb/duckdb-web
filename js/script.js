@@ -332,5 +332,19 @@ $(document).ready(function(){
 	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 	
-
+	// Shorten the News on Landingpage
+	/*
+	function add3Dots(string, limit){
+		var dots = " [...] ";
+		if(string.length > limit){
+			string = string.substring(0,limit) + dots;
+		}
+		return string;
+	}
+	$('body.landing .newsblog .postpreview p:not(:first-child)').each(function(){
+		var shortened = add3Dots($(this).text(), 200);
+		$(this).text(shortened);
+		console.log(shortened)
+	})
+	*/
 });
