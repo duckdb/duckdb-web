@@ -2,7 +2,8 @@
 layout: docu
 title: CSV Loading
 ---
-CSV loading is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a pain. CSV files exist with different delimiters, they can contain quoted values, have an optional header row (or even multiple!) or even be completely deformed. The CSV reader needs to cope with all of these different situations.
+
+CSV loading is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files exist with different delimiters, they can contain quoted values, have an optional header row (or even multiple!) or even be completely deformed. The CSV reader needs to cope with all of these different situations.
 
 The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file.
 
@@ -14,6 +15,23 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 1988-01-01|AA|New York, NY|Los Angeles, CA
 1988-01-02|AA|New York, NY|Los Angeles, CA
 1988-01-03|AA|New York, NY|Los Angeles, CA
+```
+
+### Examples
+```sql
+-- read a CSV file from disk, auto-infer options
+SELECT * FROM 'test.csv';
+-- read_csv with custom options
+SELECT * FROM read_csv_auto('test.csv', delim='|', header=True, columns={'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
+
+-- read a CSV file into a table
+CREATE TABLE ontime(FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCHAR, DestCityName VARCHAR);
+COPY ontime FROM 'test.csv' (AUTO_DETECT TRUE);
+-- alternatively, create a table without specifying the schema manually
+CREATE TABLE ontime AS SELECT * FROM 'test.csv';
+
+-- write the result of a query to a CSV file
+COPY (SELECT * FROM ontime) TO 'test.csv' WITH (HEADER 1, DELIMITER '|');
 ```
 
 # read_csv_auto function
@@ -86,20 +104,3 @@ SELECT * FROM ontime;
 ```
 
 More on the copy statement can be found [here](/docs/sql/statements/copy.html).
-
-## Shell Import
-The DuckDB shell also offers a way of importing CSV files. This method is the same syntax as would be used in the SQLite shell. For this method we need to first create a table, then specify the parameters and then use the `.import` statement.
-
-```sql
-.sep |
-.headers on
-CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
-.import test.csv ontime
-SELECT * FROM ontime;
-```
-
-|flightdate|uniquecarrier| origincityname  | destcityname  |
-|---------:|------------:|----------------:|--------------:|
-|1988-01-01|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-02|AA           |New York, NY     |Los Angeles, CA|
-|1988-01-03|AA           |New York, NY     |Los Angeles, CA|
