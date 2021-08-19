@@ -27,15 +27,15 @@ The table below shows the available scalar functions for `TIMESTAMP` types.
 | `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](/docs/sql/functions/datepart) boundaries between the timestamps | `date_diff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01')` | 1 |
 | `date_part(`*`part`*`, `*`timestamp`*`)` | Get [subfield](/docs/sql/functions/datepart) (equivalent to *extract*) | `date_part('minute', TIMESTAMP '1992-09-20 20:38:40')` | 38 |
 | `date_trunc(`*`part`*`, `*`timestamp`*`)` | Truncate to specified [precision](/docs/sql/functions/datepart) | `date_trunc('hour', TIMESTAMP '1992-09-20 20:38:40')` | 1992-09-20 20:00:00 |
-| `day(`*`timestamp`*`)` | Extracts the day of a timestamp | `dayname(TIMESTAMP '1992-03-22')` | Sunday |
-| `dayname(`*`timestamp`*`)` | The (English) name of the weekday | `day(TIMESTAMP '1992-03-22')` | 22 |
+| `day(`*`timestamp`*`)` | Extracts the day of a timestamp | `day(TIMESTAMP '1992-03-22')` | 22 |
+| `dayname(`*`timestamp`*`)` | The (English) name of the weekday | `dayname(TIMESTAMP '1992-03-22')` | Sunday |
 | `dayofweek(`*`timestamp`*`)` | Extracts the day of the week of a timestamp (0-6, 0 = Sunday, 6 = Saturday) | `dayofweek(TIMESTAMP '1992-03-22')` | 0 |
 | `dayofyear(`*`timestamp`*`)` | Extracts the day of the year of a timestamp (1-366) | `dayofyear(TIMESTAMP '1992-03-22')` | 81 |
 | `decade(`*`timestamp`*`)` | Extracts the decade of a timestamp | `decade(TIMESTAMP '1992-03-22')` | 199 |
 | `epoch(`*`timestamp`*`)` | Extracts the epoch of a timestamp in seconds | `epoch(TIMESTAMP '1992-03-22')` | 701222400 |
 | `epoch_ms(ms)` | Converts ms since epoch to a timestamp | `epoch_ms(701222400000)` | 1992-03-22 00:00:00 |
 | `extract(`*`field`* `from` *`timestamp`*`)` | Get [subfield](/docs/sql/functions/datepart) from a timestamp | `extract('hour' FROM TIMESTAMP '1992-09-20 20:38:48')` | 20 |
-| `greatest(`*`timestamp`*`, `*`timestamp`*`)` | The later of two timestamps | `least(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48` |
+| `greatest(`*`timestamp`*`, `*`timestamp`*`)` | The later of two timestamps | `greatest(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48` |
 | `hour(`*`timestamp`*`)` | Extracts the hour component of a timestamp | `hour(TIMESTAMP '1992-03-22 01:02:03.1234')` | 1 |
 | `isodow(`*`timestamp`*`)` | Extracts the ISO day of the week of a timestamp (1-7, 1 = Monday, 7 = Sunday) | `isodow(TIMESTAMP '1992-03-22')` | 7 |
 | `last_day(`*`timestamp`*`)` | The last day of the month. | `last_day(TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-31` |
