@@ -28,7 +28,7 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 | `date_trunc(`*`part`*`, `*`date`*`)` | Truncate to specified [precision](/docs/sql/functions/datepart) | `date_trunc('month', DATE '1992-03-07')` | `1992-03-01` |
 | `dayname(`*`date`*`)` | The (English) name of the weekday. | `monthname(DATE '1992-09-20')` | `Sunday` |
 | `extract(`*`part`* `from `*`date`*`)` | Get [subfield](/docs/sql/functions/datepart) from a date | `extract('year' FROM DATE '1992-09-20')` | `1992` |
-| `greatest(`*`date`*`, `*`date`*`)` | The later of two dates | `least(DATE '1992-09-20', DATE '1992-03-07')` | `1992-09-20` |
+| `greatest(`*`date`*`, `*`date`*`)` | The later of two dates | `greatest(DATE '1992-09-20', DATE '1992-03-07')` | `1992-09-20` |
 | `last_day(`*`date`*`)` | The last day of the month. | `last_day(DATE '1992-09-20')` | `1992-09-30` |
 | `least(`*`date`*`, `*`date`*`)` | The earlier of two dates | `least(DATE '1992-09-20', DATE '1992-03-07')` | `1992-03-07` |
 | `monthname(`*`date`*`)` | The (English) name of the month. | `monthname(DATE '1992-09-20')` | `September` |
