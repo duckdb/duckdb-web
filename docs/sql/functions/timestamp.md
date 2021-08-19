@@ -24,8 +24,9 @@ The table below shows the available scalar functions for `TIMESTAMP` types.
 | `age(`*`timestamp`*`)` | Subtract from current_date | `age(TIMESTAMP '1992-09-20')` | 26 years 9 mons 9 days |
 | `century(`*`timestamp`*`)` | Extracts the century of a timestamp | `century(TIMESTAMP '1992-03-22')` | 20 |
 | `current_timestamp` | Current date and time (start of current transaction) | | |
-| `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](/docs/sql/functions/datepart) boundaries between the timestamps | `date_diff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01')` | 1 |
+| `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](/docs/sql/functions/datepart) boundaries between the timestamps | `date_diff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` | 2 |
 | `date_part(`*`part`*`, `*`timestamp`*`)` | Get [subfield](/docs/sql/functions/datepart) (equivalent to *extract*) | `date_part('minute', TIMESTAMP '1992-09-20 20:38:40')` | 38 |
+| `date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of complete [partitions](/docs/sql/functions/datepart) between the timestamps | `date_sub('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` | 1 |
 | `date_trunc(`*`part`*`, `*`timestamp`*`)` | Truncate to specified [precision](/docs/sql/functions/datepart) | `date_trunc('hour', TIMESTAMP '1992-09-20 20:38:40')` | 1992-09-20 20:00:00 |
 | `day(`*`timestamp`*`)` | Extracts the day of a timestamp | `day(TIMESTAMP '1992-03-22')` | 22 |
 | `dayname(`*`timestamp`*`)` | The (English) name of the weekday | `dayname(TIMESTAMP '1992-03-22')` | Sunday |
