@@ -31,7 +31,7 @@ The table below shows the available general aggregate functions.
 | `count(arg)` |Calculates the number of tuples tuples in arg. | `count(A)` | - |
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
 | `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `histogram(A)` | - |
-| `last(arg)` |Returns the first value of a column. | `last(A)` | - |
+| `last(arg)` |Returns the last value of a column. | `last(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
 | `min(arg)` | Returns the minumum value present in arg. | `min(A)` | - |
