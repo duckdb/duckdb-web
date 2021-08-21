@@ -1,3 +1,10 @@
+function GenerateAggregateOrderBy(options = {}) {
+	return [
+		Keyword("ORDER"),
+		Keyword("BY"),
+		GenerateOrderTerms()
+	]
+}
 
 function GenerateAggregate(options = {}) {
 	return Diagram([
@@ -9,7 +16,8 @@ function GenerateAggregate(options = {}) {
 					Optional(Keyword("DISTINCT"), "skip"),
 					OneOrMore(Sequence([
 						Expression()
-					]), Keyword(","))
+					]), Keyword(",")),
+					Optional(Expandable("order-by", options, "order-by", GenerateAggregateOrderBy))
 				]),
 				new Skip()
 			]),
