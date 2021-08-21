@@ -10,6 +10,11 @@ Aggregates are functions that *combine* multiple rows into a single value. Aggre
 
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `COUNT` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
 
+When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
+Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results
+(e.g., `first`, `last`, `list` and `string_agg`). These can be made deterministic by ordering the arguments.
+For order-insensitive aggregates, this clause is parsed but ignored.
+
 ## General Aggregate Functions
 The table below shows the available general aggregate functions.
 
@@ -23,9 +28,10 @@ The table below shows the available general aggregate functions.
 | `bit_xor(arg)` |Returns the bitwise XOR of all bits in a given expression. | `bit_xor(A)` | - |
 | `bool_and(arg)` |Returns TRUE if every input value is TRUE, otherwise FALSE. | `bool_and(A)` | - |
 | `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool(A)` | - |
-| `count(arg)` |Calculates the number of tuples tuples in arg. | `sum(A)` | - |
+| `count(arg)` |Calculates the number of tuples tuples in arg. | `count(A)` | - |
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
-| `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `list(A)` | - |
+| `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `histogram(A)` | - |
+| `last(arg)` |Returns the first value of a column. | `last(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
 | `min(arg)` | Returns the minumum value present in arg. | `min(A)` | - |
