@@ -59,13 +59,12 @@ In this survey, he collected many sorting techniques that are known to the commu
 The cost of sorting is dominated by comparing values and moving data around.
 Anything that makes these two operations cheaper will have a big impact on the total runtime.
 
-There are two obvious ways to go about implementing a comparator when we have multiple `ORDER BY` clauses.
+There are two obvious ways to go about implementing a comparator when we have multiple `ORDER BY` clauses:
 
-1) loop through the clauses: Compare columns until we find one that is not equal, or until we have compared all columns.
+1. Loop through the clauses: Compare columns until we find one that is not equal, or until we have compared all columns.
 This is fairly complex already, as this requires a loop with an if/else inside of it for every single row of data.
 If we have columnar storage, this comparator has to jump between columns, [causing random access in memory](https://dl.acm.org/doi/10.1145/1409360.1409380).
-
-2) entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
+2. Entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
 This approach is especially inefficient when there are many duplicate values, as it requires multiple passes over the data.
 
 
@@ -120,19 +119,19 @@ The first bit is also flipped, to preserve order between positive and negative i
 If there are `NULL` values, these must be encoded using an additional byte (not shown in the example).
 
 With this binary string, we can now compare both columns at the same time by comparing only the binary string representation. 
-This can be done with a single `memcmp` in __C++__! The compiler will emit efficient assembly for this, even auto-generating [SIMD instructions](https://en.wikipedia.org/wiki/SIMD).
+This can be done with a single `memcmp` in __C++__! The compiler will emit efficient assembly for single function call, even auto-generating [SIMD instructions](https://en.wikipedia.org/wiki/SIMD).
 
-This technique solves one of the problems mentioned above, the function call overhead when using complex comparators.
+This technique solves one of the problems mentioned above, namely the function call overhead when using complex comparators.
 
 #### Radix Sort
 Now that we have a cheap comparator, we have to choose our sorting algorithm.
 Every computer science student learns about [comparison-based](https://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_sorts) sorting algorithms like [Quicksort](https://en.wikipedia.org/wiki/Quicksort) and [Merge sort](https://en.wikipedia.org/wiki/Merge_sort), which have _O (n_ log _n)_ time complexity, where _n_ is the number of records being sorted.
 
 However, there are also [distribution-based](https://en.wikipedia.org/wiki/Sorting_algorithm#Non-comparison_sorts) sorting algorithms, which typically have a time complexity of _O (n k)_, where _k_ is the width of the sorting key.
-This class of sorting algorithms scales much better with a larger _n_ because _k_ stays constant, whereas log _n_ does not.
+This class of sorting algorithms scales much better with a larger _n_ because _k_ is constant, whereas log _n_ is not.
 
 One such algorithm is [Radix sort](https://en.wikipedia.org/wiki/Radix_sort).
-This algorithm sorts the data by computing the data distribution with [Counting sort](https://en.wikipedia.org/wiki/Counting_sort),  multiple times until all digits have been counted.
+This algorithm sorts the data by computing the data distribution with [Counting sort](https://en.wikipedia.org/wiki/Counting_sort), multiple times until all digits have been counted.
 
 It may sound counter-intuitive to encode the sorting key columns such that we have a cheap comparator, and then choose a sorting algorithm that does not compare records.
 However, the encoding is necessary for Radix sort: Binary strings that produce a correct order with `memcmp` will produce a correct order if we do a byte-by-byte Radix sort.
@@ -141,15 +140,15 @@ However, the encoding is necessary for Radix sort: Binary strings that produce a
 DuckDB uses [Morsel-Driven Parallelism](https://15721.courses.cs.cmu.edu/spring2016/papers/p743-leis.pdf), a framework for parallel query execution.
 For the sorting operator, this means that multiple threads collect roughly an equal amount of data, in parallel, from the table.
 
-We use this parallelism for sorting by first heaving each thread sort the data it collects using our Radix sort.
+We use this parallelism for sorting by first having each thread sort the data it collects using our Radix sort.
 After this first sorting phase, each thread has one or more sorted blocks of data, which must be combined into the final sorted result.
 [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) is the algorithm of choice for this task.
 There are two main ways of implementing merge sort: [K-way merge](https://en.wikipedia.org/wiki/K-way_merge_algorithm) and [Cascade merge](https://en.wikipedia.org/wiki/Cascade_merge_sort).
 
-The K-way merge merges K lists into one sorted list, and is traditionally [used for external sorting (sorting more data than fits in memory)](https://en.wikipedia.org/wiki/External_sorting#External_merge_sort) because it minimizes I/O.
+K-way merge merges K lists into one sorted list in one pass, and is traditionally [used for external sorting (sorting more data than fits in memory)](https://en.wikipedia.org/wiki/External_sorting#External_merge_sort) because it minimizes I/O.
 Cascade merge merges two lists of sorted data at a time until only one sorted list remains, and is used for in-memory sorting because it is more efficient than K-way merge.
 We aim to have an implementation that has high in-memory performance, which gracefully degrades as we go over the limit of available memory.
-Therefore, we perform a cascade merge.
+Therefore, we choose cascade merge.
 
 In a cascade merge sort, we merge two blocks of sorted data at a time until only one sorted block remains.
 Naturally, we want to use all available threads to compute the merge.
@@ -171,7 +170,7 @@ For another trick to improve merge sort, see [the appendix](#predication).
 Besides comparisons, the other big cost of sorting is moving data around.
 DuckDB has a vectorized execution engine.
 Data is stored in a columnar layout, which is processed in batches (called chunks) at a time.
-This layout is great for analytical query processing because the chunks fit in the CPU cache, and it gives a lot of opportunities for the compiler to generate SIMD instructions
+This layout is great for analytical query processing because the chunks fit in the CPU cache, and it gives a lot of opportunities for the compiler to generate SIMD instructions.
 However, when the table is sorted, entire rows are shuffled around, rather than columns.
 
 We could stick to the columnar layout while sorting: Sort the key columns, then re-order the payload columns one by one.
@@ -181,7 +180,7 @@ Converting the columns to rows will make re-ordering rows much easier.
 This conversion is of course not free: Columns need to be copied to rows, and back from rows to columns again after sorting.
 
 Because we want to support external sorting, we have to store data in [buffer-managed](https://research.cs.wisc.edu/coral/minibase/bufMgr/bufMgr.html) blocks that can be offloaded to disk.
-Because we have to copy the data to these blocks anyway, converting the rows to columns becomes effectively free.
+Because we have to copy the input data to these blocks anyway, converting the rows to columns is effectively free.
 
 There are a few operators that are inherently row-based, such as joins and aggregations.
 DuckDB has a unified internal row layout for these operators, and we decided to use it for the sorting operator as well.
@@ -221,7 +220,7 @@ When we swizzle the pointers, the row layout and heap block look like this:
 <img src="/images/blog/sorting/heap_swizzled.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap"/>
 
 The pointers to the subsequent string values are also overwritten with an 8-byte relative offset, denoting how far this string is offset from the start of the row in the heap (hence every `stringA` has an offset of `0`: It is the first string in the row).
-Using relative offsets within rows rather than absolute offsets is very useful during merge sort, as these relative offsets stay constant, and do not need to be updated when a row is copied.
+Using relative offsets within rows rather than absolute offsets is very useful during sorting, as these relative offsets stay constant, and do not need to be updated when a row is copied.
 
 When the blocks need to be scanned to read the sorted result, we "unswizzle" the pointers, making them point to the string again.
 
@@ -233,7 +232,7 @@ All this reduces overhead when blocks need to be moved in and out of memory, whi
 <a name="comparison"></a>
 #### Comparison with Other Systems
 Now that we have covered most of the techniques that are used in our sorting implementation, we want to know how we compare to other systems.
-DuckDB is often used for interactive data analysis, and is therefore often compared to tools like pandas and [dplyr](https://dplyr.tidyverse.org).
+DuckDB is often used for interactive data analysis, and is therefore often compared to tools like [dplyr](https://dplyr.tidyverse.org).
 
 In this setting, people are usually running on laptops or PCs, therefore we will run these experiments on a 2020 MacBook Pro.
 This laptop has an [Apple M1 CPU](https://en.wikipedia.org/wiki/Apple_M1), which is [ARM](https://en.wikipedia.org/wiki/ARM_architecture)-based.
@@ -248,7 +247,7 @@ We will be comparing against the following systems:
 4. [SQLite](https://www.sqlite.org/index.html), version 3.36.0
 
 ClickHouse and HyPer are included in our comparison because they are analytical SQL engines with an emphasis on performance.
-Pandas and SQLite are included in our comparison because they can be used to perform relational operations within Python, which DuckDB does too.
+Pandas and SQLite are included in our comparison because they can be used to perform relational operations within Python, like DuckDB.
 Pandas operates fully in memory, whereas SQLite is a more traditional disk-based system.
 This list of systems should give us a good mix of single-/multi-threaded, and in-memory/external sorting.
 
@@ -275,17 +274,17 @@ There is no perfect solution to this problem, but this should give us a good com
 For Pandas we will use `sort_values` with `inplace=False` to mimic this query.
 
 In ClickHouse, temporary tables can only exist in memory, which is problematic for our out-of-core experiments.
-Therefore we will use a regular `TABLE`, but we also need to choose a table engine.
+Therefore we will use a regular `TABLE`, but then we also need to choose a table engine.
 Most of the table engines apply compression or create an index, which we do not want to measure.
-Therefore we have chosen the [File](https://clickhouse.tech/docs/en/engines/table-engines/special/file/#file) table engine, with format [Native](https://clickhouse.tech/docs/en/interfaces/formats/#native).
+Therefore we have chosen the simplest on-disk engine, which is [File](https://clickhouse.tech/docs/en/engines/table-engines/special/file/#file), with format [Native](https://clickhouse.tech/docs/en/interfaces/formats/#native).
 
 The table engine we chose for the input tables for ClickHouse is [MergeTree](https://clickhouse.tech/docs/en/engines/table-engines/mergetree-family/mergetree/#mergetree) with `ORDER BY tuple()`.
-We chose this because we encountered weird behavior with `File(Native)` input tables, where there was no difference in runtime between the queries `SELECT * FROM ... ORDER BY` and `SELECT col1 FROM ... ORDER BY`.
+We chose this because we encountered strange behavior with `File(Native)` input tables, where there was no difference in runtime between the queries `SELECT * FROM ... ORDER BY` and `SELECT col1 FROM ... ORDER BY`.
 Presumably, because all columns in the table were sorted regardless of how many there were selected.
 
 To measure stable end-to-end query time, we run each query 5 times and report the median run time.
-DuckDB is restarted for every query, to force it to read the input data from disk, like the other database systems.
-We cannot force pandas to read/write to/from disk, so both the input and output data frame will be in memory.
+DuckDB is restarted for each query, to force it to read the input data from disk, like the other database systems.
+We cannot force Pandas to read/write to/from disk, so both the input and output data frame will be in memory.
 DuckDB will not write the output table to disk unless there is not enough room to keep it in memory, and therefore also has a slight advantage.
 
 #### Random Integers
@@ -303,7 +302,7 @@ It writes intermediate sorted blocks to disk even if they fit in main-memory, th
 The performance of the other systems is in the same ballpark, with DuckDB and ClickHouse going toe-to-toe at around \~4 seconds for 100M integers.
 Because SQLite is so much slower, we will not include it in our next set of experiments (TPC-DS).
 
-DuckDB and ClickHouse both making very good use out of all available threads, with a single-threaded sorting in parallel, followed by a parallel merge sort
+DuckDB and ClickHouse both make very good use out of all available threads, with a single-threaded sort in parallel, followed by a parallel merge sort.
 We are not sure what strategy HyPer uses.
 For our next experiment, we will zoom in on multi-threading, and see how well ClickHouse and DuckDB scale with the number of threads (we were not able to set the number of threads for HyPer).
 
@@ -323,7 +322,7 @@ This is especially important to do in systems that use Quicksort because Quickso
 <img src="/images/blog/sorting/randints_sortedness.svg" alt="Sorting 100M integers with different sortedness" title="Sortedness Experiment" style="max-width:100%"/>
 
 Not surprisingly, all systems perform better on sorted data, sometimes by a large margin.
-ClickHouse, Pandas, and SQLite likely have some optimization here: e.g. keeping track of sortedness in the catalog, or checking sortedness while scanning the table.
+ClickHouse, Pandas, and SQLite likely have some optimization here: e.g. keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
 DuckDB and HyPer have only a very small difference in performance when the input data is sorted, and do not have such an optimization.
 For DuckDB the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
 
@@ -354,13 +353,13 @@ We will use `catalog_sales` table at SF10 and SF100, which does not fit in memor
 The data was generated using DuckDB's TPC-DS extension, then exported to CSV in a random order to undo any ordering patterns that could have been in the generated data.
  
 #### Catalog Sales (Numeric Types)
-Our first experiment on the `catalog_sales` table is selecting 1 column, then 2 columns, ... up to all 34, always ordering by `cs_quantity` and `cs_item_sk`.
+Our first experiment on the `catalog_sales` table is selecting 1 column, then 2 columns, ..., up to all 34, always ordering by `cs_quantity` and `cs_item_sk`.
 This experiment will tell us how well the different systems can re-order payload columns.
 
 <img src="/images/blog/sorting/tpcds_catalog_sales_payload.svg" alt="Increasing the number of payload columns for the catalog_sales table" title="Catalog Sales Payload Experiment" style="max-width:100%"/>
 
 We see similar trends at SF10 and SF100, but for SF100, at around 12 payload columns or so, the data does not fit in memory anymore, and ClickHouse and HyPer show a big drop in performance.
-ClickHouse switches to its external sorting strategy, which is much slower than its in-memory strategy.
+ClickHouse switches to an external sorting strategy, which is much slower than its in-memory strategy.
 Therefore, adding a few payload columns results in a runtime that is orders of magnitude higher.
 At 20 payload columns ClickHouse runs into the following error:
 ```
