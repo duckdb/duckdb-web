@@ -42,7 +42,7 @@ Drops a FTS index for the specified table.
 
 ### match_bm25
 ```
-match_bm25(input_id, query_string, fields=NULL, k=1.2, b=0.75, conjunctive=0)
+match_bm25(input_id, query_string, fields := NULL, k := 1.2, b:= 0.75, conjunctive := 0)
 ```
 When an index is built, this retrieval macro is created that can be used to search the index.
 
@@ -79,7 +79,7 @@ VALUES ('doc1', 'The mallard is a dabbling duck that breeds throughout the tempe
 PRAGMA create_fts_index('documents', 'document_identifier', 'text_content', 'author');
 -- search the 'author' field index for documents that are written by Hannes - this retrieves 'doc1'
 SELECT text_content, score
-FROM (SELECT *, fts_main_documents.match_bm25(document_identifier, 'Muhleisen', fields='author') AS score
+FROM (SELECT *, fts_main_documents.match_bm25(document_identifier, 'Muhleisen', fields := 'author') AS score
       FROM documents) sq
 WHERE score IS NOT NULL
   AND doc_version > 2
