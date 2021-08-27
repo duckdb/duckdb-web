@@ -28,8 +28,8 @@ Consider the following example query on a snippet of a TPC-DS table:
 ```sql
 SELECT c_customer_sk, c_birth_country, c_birth_year
 FROM customer
-ORDER BY birth_country DESC,
-         birth_year    ASC NULLS LAST;
+ORDER BY c_birth_country DESC,
+         c_birth_year    ASC NULLS LAST;
 ```
 Which yields:
 
