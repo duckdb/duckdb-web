@@ -252,7 +252,7 @@ Pandas operates fully in memory, whereas SQLite is a more traditional disk-based
 This list of systems should give us a good mix of single-/multi-threaded, and in-memory/external sorting.
 
 ClickHouse was built for M1 using [this guide](https://clickhouse.tech/docs/en/development/build-osx/).
-We have limited the number of threads that ClickHouse can use to 4, set the memory limit to 12GB, and `max_bytes_before_external_sort` to 10GB, following [this suggestion](https://clickhouse.tech/docs/en/sql-reference/statements/select/order-by/#implementation-details).
+We have set the memory limit to 12GB, and `max_bytes_before_external_sort` to 10GB, following [this suggestion](https://clickhouse.tech/docs/en/sql-reference/statements/select/order-by/#implementation-details).
 
 HyPer is [Tableau's data engine](https://www.tableau.com/products/new-features/hyper), created by the [database group at the University of Munich](http://db.in.tum.de).
 It does not run natively (yet) on ARM-based processors like the M1.
@@ -283,9 +283,10 @@ We chose this because we encountered strange behavior with `File(Native)` input 
 Presumably, because all columns in the table were sorted regardless of how many there were selected.
 
 To measure stable end-to-end query time, we run each query 5 times and report the median run time.
-DuckDB is restarted for each query, to force it to read the input data from disk, like the other database systems.
-We cannot force Pandas to read/write to/from disk, so both the input and output data frame will be in memory.
-DuckDB will not write the output table to disk unless there is not enough room to keep it in memory, and therefore also has a slight advantage.
+There are some differences in reading/writing tables between the systems.
+For instance, Pandas cannot read/write from/to disk, so both the input and output data frame will be in memory.
+DuckDB will not write the output table to disk unless there is not enough room to keep it in memory, and therefore also may have an advantage.
+However, sorting dominates the total runtime, so these differences are not that impactful.
 
 #### Random Integers
 We will start with a simple example.
@@ -314,7 +315,7 @@ Adding threads does not improve performance as much for DuckDB, because Radix So
 Both systems end up at about the same performance at 4 threads.
 
 Beyond 4 threads we do not see performance improve much more, due to the CPU architecture.
-For the rest of the experiments, we set both DuckDB and ClickHouse to use 4 threads.
+For all of the of other the experiments, we have set both DuckDB and ClickHouse to use 4 threads.
 
 For our last experiment with random integers, we will see how the sortedness of the input may impact performance.
 This is especially important to do in systems that use Quicksort because Quicksort performs much worse on inversely sorted data than on random data.
@@ -327,8 +328,6 @@ DuckDB and HyPer have only a very small difference in performance when the input
 For DuckDB the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
 
 Another interesting result is that DuckDB sorts data faster than some of the other systems can read already sorted data.
-Keeping track of the sortedness of a table is probably not worth the effort for DuckDB.
-Sorting is very fast anyway, and the sortedness has to be checked for every update.
 
 #### TPC-DS
 For the next comparison, we have improvised a relational sorting benchmark on two tables from the standard [TPC Decision Support benchmark (TPC-DS)](http://www.tpc.org/tpcds/).
