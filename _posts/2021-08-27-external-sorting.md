@@ -491,7 +491,7 @@ We have set the number of threads that DuckDB and ClickHouse use to 8 because we
 <img src="/images/blog/sorting/jewels_payload.svg" alt="Increasing the number of payload columns for the catalog_sales table (jewels)" title="Catalog Sales Payload Experiment (on bigger machine)" style="max-width:90%"/>
 
 Pandas performs comparatively worse than on the MacBook, because it has a single-threaded implementation, and this CPU has a lower single-thread performance.
-Again, Pandas crashes with an error:
+Again, Pandas crashes with an error (this machine does not dynamically increase swap):
 ```
 numpy.core._exceptions.MemoryError: Unable to allocate 6.32 GiB for an array with shape (6, 141430723) and data type float64
 ```
