@@ -1,7 +1,7 @@
 ---
 
 layout: post  
-title:  "Parallel External Sorting in DuckDB"
+title:  "Fastest table sort in the West - Redesigning DuckDB's sort"
 author: Laurens Kuiper  
 excerpt_separator: <!--more-->
 
