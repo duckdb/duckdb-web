@@ -17,23 +17,6 @@ function GenerateDistinctClause(options) {
 	]
 }
 
-function GenerateDistinctClause(options) {
-	return [
-		Choice(0, [
-			new Skip(),
-			Sequence([
-				Keyword("DISTINCT"),
-				Optional(Sequence([
-					Keyword("("),
-					OneOrMore(Expression(), ","),
-					Keyword(")"),
-				]) , "skip")
-			]),
-			Keyword("ALL")
-		])
-	]
-}
-
 function GenerateCommonTableExpression(options) {
 	return [
 		Expression("table-name"),
