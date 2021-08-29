@@ -6,6 +6,7 @@ function GenerateDistinctClause(options) {
 			Sequence([
 				Keyword("DISTINCT"),
 				Optional(Sequence([
+					Optional("ON"),
 					Keyword("("),
 					OneOrMore(Expression(), ","),
 					Keyword(")"),
