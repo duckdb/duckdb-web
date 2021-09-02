@@ -27,7 +27,20 @@ Consider the function `SIN(DOUBLE)`. This function takes as input argument a col
 
 ```sql
 explain SELECT SIN(1);
--- logical_plan|PROJECTION[sin(CAST[DOUBLE](1))]
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││       Physical Plan       ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│          0.841471         │
+└─────────────┬─────────────┘                             
+┌─────────────┴─────────────┐
+│         DUMMY_SCAN        │
+└───────────────────────────┘
 ```
 
 Generally, implicit casts only cast upwards. That is to say, we can implicitly cast an `INTEGER` to a `BIGINT`, but not the other way around.
