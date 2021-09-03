@@ -26,25 +26,41 @@ To demonstrate, see the below example:
 
 ```sql
 explain SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
--- logical_plan
--- PROJECTION[name]
---   FILTER[~~(name, Ma%)]
---     FILTER[sid=sid]
---       CROSS_PRODUCT
---           GET(students)
---           GET(exams)
--- logical_opt
--- PROJECTION[name]
---   COMPARISON_JOIN[INNER EQUAL(sid, sid)]
---     GET(exams)
---       FILTER[prefix(name, Ma)]
---     GET(students)        
--- physical_plan
--- PROJECTION[name]
---   HASH_JOIN[INNER sid=sid]
---     SEQ_SCAN[exams]
---     FILTER[prefix(name, Ma)]
---         SEQ_SCAN[students]  
+
+┌─────────────────────────────┐
+│┌───────────────────────────┐│
+││       Physical Plan       ││
+│└───────────────────────────┘│
+└─────────────────────────────┘
+┌───────────────────────────┐                             
+│         PROJECTION        │                             
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                             
+│            name           │                             
+└─────────────┬─────────────┘                                                          
+┌─────────────┴─────────────┐                             
+│         HASH_JOIN         │                             
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │                             
+│           INNER           ├──────────────┐              
+│          sid=sid          │              │              
+└─────────────┬─────────────┘              │                                           
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│          SEQ_SCAN         ││           FILTER          │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           exams           ││      prefix(name, Ma)     │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││                           │
+│            sid            ││                           │
+└───────────────────────────┘└─────────────┬─────────────┘                             
+                             ┌─────────────┴─────────────┐
+                             │          SEQ_SCAN         │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │          students         │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │            sid            │
+                             │            name           │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │ Filters: name>=Ma AND name│
+                             │  <Mb AND name IS NOT NULL │
+                             └───────────────────────────┘
 ```
 
 We can see that the `logical_plan` contains the unoptimized query plan, involving a cross product and a `LIKE` operation. The optimized plan transforms this plan and pushes down the filters, transforming the cross product into a comparison join. It also recognizes that the `LIKE` operator only does prefix filtering, and transforms the more expensive `LIKE` operator into a cheaper `PREFIX` selection.
