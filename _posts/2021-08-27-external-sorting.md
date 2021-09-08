@@ -300,7 +300,7 @@ From the initial table with integers, we have made 9 more tables, with 10M, 20M,
 
 Being a traditional disk-based database system, SQLite always opts for an external sorting strategy.
 It writes intermediate sorted blocks to disk even if they fit in main-memory, therefore it is much slower.
-The performance of the other systems is in the same ballpark, with DuckDB and ClickHouse going toe-to-toe at around \~4 seconds for 100M integers.
+The performance of the other systems is in the same ballpark, with DuckDB and ClickHouse going toe-to-toe with \~3 and \~4 seconds for 100M integers.
 Because SQLite is so much slower, we will not include it in our next set of experiments (TPC-DS).
 
 DuckDB and ClickHouse both make very good use out of all available threads, with a single-threaded sort in parallel, followed by a parallel merge sort.
@@ -310,7 +310,7 @@ For our next experiment, we will zoom in on multi-threading, and see how well Cl
 <img src="/images/blog/sorting/randints_threads.svg" alt="Sorting 100M random integers" title="Threads Experiment" style="max-width:70%"/>
 
 This plot demonstrates that Radix sort is very fast.
-DuckDB sorts 100M integers in just under 7 seconds using a single thread, which is much faster than ClickHouse.
+DuckDB sorts 100M integers in just under 5 seconds using a single thread, which is much faster than ClickHouse.
 Adding threads does not improve performance as much for DuckDB, because Radix Sort is so much faster than Merge Sort.
 Both systems end up at about the same performance at 4 threads.
 
@@ -394,8 +394,8 @@ Comparing strings is much, much more difficult than comparing integers, because 
 
 <img src="/images/blog/sorting/tpcds_customer_type_sort_barplot.svg" alt="Comparing sorting speed with different sorting key types" title="Customer Sort Type Experiment" style="max-width:100%"/>
 
-As expected, ordering by strings is more expensive than ordering by integers.
-All systems except Pandas have only a small difference between ordering by integers and ordering by strings.
+As expected, ordering by strings is more expensive than ordering by integers, except for HyPer, which is impressive.
+Pandas has only a slightly bigger difference between ordering by integers and ordering by strings than ClickHouse and DuckDB.
 This difference is explained by an expensive comparator between strings.
 Pandas uses [NumPy](https://numpy.org)'s sort, which is efficiently implemented in __C__.
 However, when this sorts strings, it has to use virtual function calls to compare a Python string object, which is slower than a simple "`<`" between integers in __C__.
@@ -407,8 +407,10 @@ We will either select all integer columns or all string columns and order by (`c
 
 <img src="/images/blog/sorting/tpcds_customer_type_payload_barplot.svg" alt="Comparing sorting speed with different payload types" title="Customer Payload Type Experiment" style="max-width:100%"/>
 
-As expected, re-ordering strings takes more time than re-ordering integers, but only by a little.
-This is true for every system HyPer, which is impressive considering that strings are difficult to deal with efficiently.
+As expected, re-ordering strings takes much more time than re-ordering integers.
+Pandas has an advantage here because it already has the strings in memory, and most likely only needs to re-order pointers to these strings.
+The database systems need to copy strings twice: Once when reading the input table, and again when creating the output table.
+Profiling in DuckDB reveals that the actual sorting takes less than a second at SF300, and most time is spent on (de)serializing strings.
 
 #### Conclusion
 DuckDB's new parallel sorting implementation can efficiently sort more data than fits in memory, making use of the speed of modern SSDs.
