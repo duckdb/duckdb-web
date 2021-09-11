@@ -794,6 +794,51 @@ body.landing{
 			display: none;
 		}
 	}
+	.newsblog{
+		h2{
+			display: inline;
+		}
+		a.newsarchive{
+			margin-left: 50px;
+			color: darken($duckDBgrey,20);
+			text-decoration: none;
+			transition: color .3s;
+			&:hover{
+				color: black;
+			}
+		}
+		.newswrap{
+			display: flex;
+			justify-content: space-between;
+			margin-top: 50px;
+			.postpreview{
+				width: 29%;
+				.date{
+					color: darken($duckDBgrey,20);
+					margin-bottom: 3px;
+				}
+				h3{
+					font-weight: normal;
+					a{
+						color: black;
+						text-decoration: inherit;
+					}
+				}
+				p{
+					hyphens: auto;
+				}
+				a.continue{
+					color: darken($duckDBgrey,20);
+					transition: color .3s;
+					text-decoration: none;
+					&:hover{
+						color: black;
+					}
+				}
+			}
+		}
+	}
+	
 }
 
 
@@ -1107,8 +1152,3 @@ body.installation{
 		display: none;
 	}
 }
-
-
-
-
-

@@ -58,16 +58,16 @@ PRAGMA default_null_order='NULLS LAST';
 PRAGMA default_order='DESCENDING';
 ```
 
-
 ### version
 ```sql
 -- show DuckDB version
 PRAGMA version;
 ```
-Note that this version currently shows the git short hash and not the release version (1.2.3 etc).
 
-### enable_profiling, disable_profiling, profiling_output
+### enable_progress_bar, enable_profiling, disable_profiling, profiling_output
 ```sql
+-- show progress bar when running queries
+PRAGMA enable_progress_bar
 -- enable profiling
 PRAGMA enable_profiling;
 -- enable profiling in a specified format

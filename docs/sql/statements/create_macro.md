@@ -21,7 +21,7 @@ CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM c
 -- macro's are schema-dependent, and have an alias: FUNCTION
 CREATE FUNCTION main.myavg(x) AS SUM(x) / COUNT(x);
 -- create a macro with default constant parameters
-CREATE MACRO add_default(a, b=5) AS a + b;
+CREATE MACRO add_default(a, b := 5) AS a + b;
 ```
 
 ### Syntax
@@ -44,7 +44,7 @@ SELECT add(1, 2);
 Macro's can have default parameters.
 ```sql
 -- b is a default parameter
-CREATE MACRO add_default(a, b=5) AS a + b;
+CREATE MACRO add_default(a, b := 5) AS a + b;
 -- the following will result in 42
 SELECT add_default(37);
 -- error! add_default only has one positional parameter
@@ -54,9 +54,9 @@ SELECT add_default(40, b=2);
 -- error! default parameters must come after positional parameters
 SELECT add_default(b=2, 40);
 -- the order of default parameters does not matter
-CREATE MACRO triple_add(a, b=5, c=10) AS a + b + c;
+CREATE MACRO triple_add(a, b := 5, c := 10) AS a + b + c;
 -- success!
-SELECT triple_add(40, c=1, b=1);
+SELECT triple_add(40, c := 1, b := 1);
 -- 42
 ```
 

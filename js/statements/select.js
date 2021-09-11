@@ -6,23 +6,7 @@ function GenerateDistinctClause(options) {
 			Sequence([
 				Keyword("DISTINCT"),
 				Optional(Sequence([
-					Keyword("("),
-					OneOrMore(Expression(), ","),
-					Keyword(")"),
-				]) , "skip")
-			]),
-			Keyword("ALL")
-		])
-	]
-}
-
-function GenerateDistinctClause(options) {
-	return [
-		Choice(0, [
-			new Skip(),
-			Sequence([
-				Keyword("DISTINCT"),
-				Optional(Sequence([
+					Keyword("ON"),
 					Keyword("("),
 					OneOrMore(Expression(), ","),
 					Keyword(")"),

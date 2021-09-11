@@ -55,7 +55,40 @@
                 },
                 {
                   "page": "C",
-                  "url": "/docs/api/c"
+                  "subsubsubfolderitems": [
+                      {
+                        "page": "Overview",
+                        "url": "/docs/api/c/overview"
+                      },
+                      {
+                        "page": "Startup",
+                        "url": "/docs/api/c/connect"
+                      },
+                      {
+                        "page": "Configure",
+                        "url": "/docs/api/c/config"
+                      },
+                      {
+                        "page": "Query",
+                        "url": "/docs/api/c/query"
+                      },
+                      {
+                        "page": "Types",
+                        "url": "/docs/api/c/types"
+                      },
+                      {
+                        "page": "Prepared Statements",
+                        "url": "/docs/api/c/prepared"
+                      },
+                      {
+                        "page": "Appender",
+                        "url": "/docs/api/c/appender"
+                      },
+                      {
+                        "page": "API Reference",
+                        "url": "/docs/api/c/api"
+                      }
+                  ]
                 },
                 {
                   "page": "C++",
@@ -227,14 +260,26 @@
                     "url": "/docs/sql/functions/date"
                   },
                   {
-                    "page": "Date Format",
-                    "url": "/docs/sql/functions/dateformat"
-                  },
-                  {
                     "page": "Timestamp Functions",
                     "url": "/docs/sql/functions/timestamp"
                   },
                   {
+                    "page": "Time Functions",
+                    "url": "/docs/sql/functions/time"
+                  },
+                  {
+                    "page": "Interval Functions",
+                    "url": "/docs/sql/functions/interval"
+                  },
+                  {
+                    "page": "Date Formats",
+                    "url": "/docs/sql/functions/dateformat"
+                  },
+                   {
+                    "page": "Date Parts",
+                    "url": "/docs/sql/functions/datepart"
+                  },
+                 {
                     "page": "Blob Functions",
                     "url": "/docs/sql/functions/blob"
                   },
