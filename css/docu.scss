@@ -35,7 +35,7 @@ pre {
 code.language-plaintext{
 	background-color: rgb(245, 245, 245);
 	font-family: $fontMonoBold;
-	border-radius: 7px; 
+	border-radius: 7px;
 	padding: 2px 5px 2px 5px;
 	margin: 0;
 }
@@ -109,8 +109,7 @@ dl p {
 hr {
     height: 1px;
     margin-bottom: 5px;
-    border: none;
-    background: url("../images/bg_hr.png") repeat-x center;
+    border: 1px solid black;
 }
 table {
     border: 1px solid black;
@@ -164,7 +163,7 @@ form {
                 font-variant-ligatures: none;
 		}
 	}
-	
+
 	table.bench{
 		a{
 			background-color: transparent;

@@ -12,6 +12,7 @@ Scalar subqueries are subqueries that return a single value. They can be used an
 
 Consider the following table:
 ### Grades
+
 | grade | course |
 |---:|:---|
 | 7 | Math |

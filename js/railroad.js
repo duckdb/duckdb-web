@@ -1687,8 +1687,7 @@ function GenerateTableReference(options) {
 	return [
 		Sequence([
 			Optional(Sequence([Expression("schema-name"), Keyword(".")]), "skip"),
-			Expression("table-name"),
-			Expandable("table-sample", options, "table-sample-reference", GenerateTableSample)
+			Expression("table-name")
 		])
 	]
 }
@@ -1700,8 +1699,7 @@ function GenerateTableFunction(options) {
 			Expression("table-function-name"),
 			Keyword("("),
 			ZeroOrMore(Expression(), ","),
-			Keyword(")"),
-			Expandable("table-sample", options, "table-sample-function", GenerateTableSample)
+			Keyword(")")
 		])
 	]
 }
@@ -1712,8 +1710,7 @@ function GenerateSubquery(options) {
 			Sequence([
 				Keyword("("),
 				Expression("select-node"),
-				Keyword(")"),
-				Expandable("table-sample", options, "table-sample-subquery", GenerateTableSample)
+				Keyword(")")
 			])
 		])
 	]
@@ -1728,7 +1725,8 @@ function GenerateTableOrSubquery(options) {
 					Expandable("table-function", options, "table-function", GenerateTableFunction),
 					Expandable("subquery", options, "subquery", GenerateSubquery)
 				]),
-				Optional(Sequence([Keyword("AS"), Expression("table-alias")]), "skip")
+				Optional(Sequence([Keyword("AS"), Expression("table-alias")]), "skip"),
+				Optional(Expandable("table-sample", options, "table-sample-reference", GenerateTableSample), "skip")
 			]),
 
 			Expandable("join-clause", options, "join-clause", GenerateJoinClause)
