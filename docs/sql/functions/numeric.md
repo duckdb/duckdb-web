@@ -29,7 +29,9 @@ The table below shows the available mathematical functions.
 |:---|:---|:---|:---|
 | `abs(x)` | absolute value | `abs(-17.4)` | 17.4 |
 | `acos(x)` | computes the arccosine of x | `acos(0.5)` | 1.0471975511965976 |
-| `atan2(x, y)` | computes the arctangent of x | `atan2(0.5, 0.5)` | 0.7853981633974483 |
+| `asin(x)` | computes the arcsine of x | `asin(0.5)` | 0.5235987755982989 |
+| `atan2(x)` | computes the arctangent of x | `atan2(0.5)` | 0.4636476090008061 |
+| `atan2(x, y)` | computes the arctangent (x, y) | `atan2(0.5, 0.5)` | 0.7853981633974483 |
 | `bit_count(x)` | returns the number of bits that are set | `bit_count(31)` | 5 |
 | `cbrt(x)` | returns the cube root of the number | `cbrt(8)` | 2 |
 | `ceil(x)` | rounds the number up | `ceil(17.4)` | 18 |
@@ -38,6 +40,8 @@ The table below shows the available mathematical functions.
 | `cot(x)` | computes the cotangent of x | `cot(0.5)` | 1.830487721712452 |
 | `degrees(x)` | converts radians to degrees | `degrees(pi())` | 180 |
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
+| `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
+| `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
 | `ln(x)` | computes the natural logarithm of *x* | `ln(2)` | 0.693 |
 | `log(x)` | computes the 10-log of *x* | `log(100)` | 2 |
 | `log2(x)` | computes the 2-log of *x* | `log2(8)` | 3 |
