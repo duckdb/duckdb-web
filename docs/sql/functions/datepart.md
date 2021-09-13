@@ -34,3 +34,14 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'quarter'` | Quarter of the year (1-4) | `'quarters'` | 3 |
 
 The parts above `'epoch'` are also used to specify `INTERVAL` types.
+
+There are dedicated extraction functions to get the certain subfields:
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `day(`*`date`*`)` | Day | `day(date '1992-02-15')` | `15` |
+| `month(`*`date`*`)` | Month | `month(date '1992-02-15')` | `2` |
+| `dayofyear(`*`date`*`)` | Day of year | `dayofyear(date '1992-02-15')` | `46` |
+| `week(`*`date`*`)` | Week | `week(date '1992-02-15')` | `7` |
+| `quarter(`*`date`*`)` | Quarter | `quarter(date '1992-02-15')` | `1` |
+| `year(`*`date`*`)` | Year | `year(date '1992-02-15')` | `1992` |
