@@ -27,10 +27,18 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 | `date_part(`*`part`*`, `*`date`*`)` | Get the [subfield](/docs/sql/functions/datepart) (equivalent to *extract*) | `date_part('year', DATE '1992-09-20')` | `1992` |
 | `date_sub(`*`part`*`, `*`startdate`*`, , `*`enddate`*`)` | The number of complete [partitions](/docs/sql/functions/datepart) between the dates | `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` | `1` |
 | `date_trunc(`*`part`*`, `*`date`*`)` | Truncate to specified [precision](/docs/sql/functions/datepart) | `date_trunc('month', DATE '1992-03-07')` | `1992-03-01` |
-| `dayname(`*`date`*`)` | The (English) name of the weekday. | `monthname(DATE '1992-09-20')` | `Sunday` |
+| `dayname(`*`date`*`)` | The (English) name of the weekday | `monthname(DATE '1992-09-20')` | `Sunday` |
 | `extract(`*`part`* `from `*`date`*`)` | Get [subfield](/docs/sql/functions/datepart) from a date | `extract('year' FROM DATE '1992-09-20')` | `1992` |
 | `greatest(`*`date`*`, `*`date`*`)` | The later of two dates | `greatest(DATE '1992-09-20', DATE '1992-03-07')` | `1992-09-20` |
-| `last_day(`*`date`*`)` | The last day of the month. | `last_day(DATE '1992-09-20')` | `1992-09-30` |
+| `last_day(`*`date`*`)` | The last day of the month | `last_day(DATE '1992-09-20')` | `1992-09-30` |
 | `least(`*`date`*`, `*`date`*`)` | The earlier of two dates | `least(DATE '1992-09-20', DATE '1992-03-07')` | `1992-03-07` |
-| `monthname(`*`date`*`)` | The (English) name of the month. | `monthname(DATE '1992-09-20')` | `September` |
+| `monthname(`*`date`*`)` | The (English) name of the month | `monthname(DATE '1992-09-20')` | `September` |
+| `weekofyear(`*`date`*`)` | The week of the year | `weekofyear(DATE '1992-09-20')` | `38` |
+| `dayofmonth(`*`date`*`)` | Day of month | `dayofmonth(DATE '1992-09-20')` | `20` |
+| `last_day(`*`date`*`)` | Last day of the corresponding month in the date | `last_day(DATE '1992-09-20')` | `1992-09-30` |
+| `weekday(`*`date`*`)` | Day of the week (Sunday = 0, Saturday = 6) | `weekday(DATE '1992-09-20')` | `0` |
+| `isodow(`*`date`*`)` | ISO day of the week (Monday = 1, Sunday = 7) | `isodow(DATE '1992-09-20')` | `7` |
+| `yearweek(`*`date`*`)` | Year and week of year | `yearweek(DATE '1992-09-20')` | `199238` |
 | `strftime(date, format)` | Converts a date to a string according to the [format string](/docs/sql/functions/dateformat) | `strftime(date '1992-01-01', '%a, %-d %B %Y')` | `Wed, 1 January 1992` |
+
+There are also dedicated extraction functions to get the [subfields](/docs/sql/functions/datepart).
