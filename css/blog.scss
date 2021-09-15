@@ -76,7 +76,7 @@ h5 {
 		position: relative;
 		width: calc(100% - 252px);
 		.postcontent{
-			max-width: 670px;
+			max-width: 680px;
 			margin: 0 auto;
 			margin-top: 80px;
 			margin-bottom: 80px;
@@ -112,6 +112,10 @@ h5 {
 			}
 			div.highlight{
 				max-width: 750px;
+			}
+			div.highlighter-rouge + table,
+			table + div.highlighter-rouge{
+				margin-top: 30px;
 			}
 		}
 		.infoline{
