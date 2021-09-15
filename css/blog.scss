@@ -7,6 +7,16 @@ $duckDBgrey: #b8b8b8;
 $fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
 $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
+@font-face{
+	font-family: "SuisseIntl-Regular";
+	src: url("webfont/SuisseIntl-Regular-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Regular-WebS.woff") format("woff");
+}
+
+@font-face{
+	font-family: "SuisseIntl-RegularItalic";
+	src: url("webfont/SuisseIntl-RegularItalic-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-RegularItalic-WebS.woff") format("woff");
+}
+
 img {
 	margin: 0 auto;
 	border:none;
@@ -89,6 +99,11 @@ h5 {
 				line-height: 29px;
 				margin-top: 30px;
 				margin-bottom: 30px;
+				font-family: "SuisseIntl-Regular", Helvetica, Arial, sans-serif;
+				i, em{
+					font-family: "SuisseIntl-RegularItalic", Helvetica, Arial, sans-serif;
+					font-style: normal;
+				}
 			}
 			h4{
 				font-size: 24px;
@@ -122,7 +137,7 @@ h5 {
 			color: $duckDBgrey;
 			margin-bottom: 15px;
 			span:first-child{
-				margin-right: 80px;
+				margin-right: 60px;
 			}
 		}
 		.postpreview{
