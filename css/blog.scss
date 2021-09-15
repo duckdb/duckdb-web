@@ -110,6 +110,9 @@ h5 {
 			table tbody tr:hover{
 				background-color: $duckDByellow;
 			}
+			div.highlight{
+				max-width: 750px;
+			}
 		}
 		.infoline{
 			color: $duckDBgrey;
