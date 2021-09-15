@@ -76,10 +76,40 @@ h5 {
 		position: relative;
 		width: calc(100% - 252px);
 		.postcontent{
-			max-width: 550px;
+			max-width: 670px;
 			margin: 0 auto;
 			margin-top: 80px;
 			margin-bottom: 80px;
+			h2{
+				font-size: 34px;
+				line-height: 44px;
+			}
+			p, ul li, ol li{
+				font-size: 19px;
+				line-height: 29px;
+				margin-top: 30px;
+				margin-bottom: 30px;
+			}
+			h4{
+				font-size: 24px;
+				line-height: 31px;
+				font-weight: normal;
+				margin-top: 60px;
+			}
+			table thead th{
+				color: white;
+				font-weight: normal;
+				text-align: right;
+				font-size: 14px;
+			}
+			table tbody td{
+				font-weight: normal;
+				text-align: right;
+				font-size: 14px;
+			}
+			table tbody tr:hover{
+				background-color: $duckDByellow;
+			}
 		}
 		.infoline{
 			color: $duckDBgrey;
@@ -113,7 +143,8 @@ h5 {
 
 		.singleentry{
 			h1{
-				font-size: 140%;
+				font-size: 34px;
+				line-height: 44px;
 				margin-bottom: 30px;
 			}
 		}
@@ -122,9 +153,11 @@ h5 {
 		width: 252px;
 		background-color: $duckDByellow;
 		padding: 30px;
-		position: relative;
+		position: fixed;
+		right: 0;
+		height: 100vh;
 		.newsarchive{
-			margin-top: 85px;
+			margin-top: 52px;
 			h1{
 				margin-bottom: 15px;
 				font-size: 100%;
