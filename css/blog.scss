@@ -100,6 +100,7 @@ h5 {
 				margin-top: 30px;
 				margin-bottom: 30px;
 				font-family: "SuisseIntl-Regular", Helvetica, Arial, sans-serif;
+				letter-spacing: .1px;
 				i, em{
 					font-family: "SuisseIntl-RegularItalic", Helvetica, Arial, sans-serif;
 					font-style: normal;
@@ -178,6 +179,7 @@ h5 {
 		position: fixed;
 		right: 0;
 		height: 100vh;
+		z-index: 800;
 		.newsarchive{
 			margin-top: 52px;
 			h1{
@@ -280,4 +282,9 @@ h5 {
 			}
 		}
 	}
+}
+
+footer{
+	position: relative;
+	z-index: 900;
 }

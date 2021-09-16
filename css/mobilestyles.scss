@@ -11,6 +11,12 @@
 	}
 }
 
+@media only screen and (max-width: 980px) {
+	.newswrap .postwrap .postcontent{
+		max-width: 550px;
+	}
+}
+
 
 @media only screen and (max-width: 860px) {
 	main .wrap,
@@ -47,6 +53,9 @@
 		width: 100%;
 		padding: 15px;
 		box-sizing: border-box;
+	}
+	.newswrap .sidebar{
+		display: none;
 	}
 }
 
