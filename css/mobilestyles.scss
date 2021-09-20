@@ -38,7 +38,7 @@
 	}
 	br.break,
 	nobr.break{
-	display: none
+	display: inline-flex;
 	}
 	body.landing .welcome .mainlinks ul li{
 		min-width: 220px;
