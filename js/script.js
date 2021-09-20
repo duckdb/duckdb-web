@@ -226,11 +226,18 @@ $(document).ready(function(){
     // Mobile Menu
     var hamburgers = document.querySelectorAll(".hamburger");
     if ($('.hamburger').length > 0) {
-	    $('.hamburger').click(function(){
-		    $(this).toggleClass('is-active');
-		    $('div.sidenavigation').toggleClass('slidein');
-			$('body.documentation main .wrap').toggleClass('inactive');
-	    })
+		$('.hamburger').click(function(){
+			if ($('body').hasClass('documentation') ){
+			    $(this).toggleClass('is-active');
+			    $('div.sidenavigation').toggleClass('slidein');
+				$('body.documentation main .wrap').toggleClass('inactive');
+			} else {
+				$(this).toggleClass('is-active');
+				$('.landingmenu nav').toggleClass('slidein');
+				$('body main').toggleClass('inactive');
+			}
+		})
+	
     }
     
     

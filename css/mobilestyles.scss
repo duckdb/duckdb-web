@@ -87,6 +87,9 @@
 	.hamburger{
 		display: block;
 	}
+	nav.mobile .hamburger{
+		display: block!important;
+	}
 	.notonmobile{
 		display: none;
 	}
@@ -95,12 +98,35 @@
 		max-width: calc(100% - 30px);
 	}
 	header .headerline .headercontent .landingmenu nav > div:last-of-type{
-		display: none;
+		//display: none;
 	}
-	header .headerline .headercontent .landingmenu nav{
+	header .headerline .headercontent .landingmenu nav:not(.mobile){
+		display: block;
+		width: 75%;
+		background: #fff100;
+		position: fixed;
+		right: 0;
+		top: 53px;
 		margin-right: 0px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		pointer-events: none;
+		transition: all .5s;
+		transform: translateX(100%);
 		> div{
 			margin-left: 20px;
+		}
+		&.slidein{
+			pointer-events: all;
+			transform: translateX(0%);
+		}
+	}
+	header .headerline .headercontent .landingmenu nav:not(.mobile){
+		div{
+			line-height: 40px;
+		}
+		a{
+			color: black;
 		}
 	}
 	body.landing .welcome .mainlinks ul, body.landing .benefits .mainlinks ul{
@@ -182,7 +208,9 @@
 		margin-top: 20px;
 		float: left;
 	}
-	
+	main.inactive{
+		opacity: .4;
+	}
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile > div:last-of-type{
 		display: block;
 	}
@@ -197,6 +225,7 @@
 	body.documentation{
 		header .headerline .headercontent .landingmenu nav{
 			display: none;
+			margin-right: 0;
 		}
 		.sidenavigation{
 			position: fixed;
