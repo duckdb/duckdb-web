@@ -355,13 +355,13 @@ footer{
 				overflow: visible;
 				position: relative;
 				strong{
-					font-family: $fontSansBold;
+					font-family: $fontSans;
 				}
 				&:first-child{
 
 				}
 				a{
-					color: white;
+					color: darken($duckDBgrey,20);
 					text-decoration: none;
 					-webkit-transition: color .3s;
 					-o-transition: color .3s;
