@@ -36,6 +36,10 @@
 		max-width: auto;
 		width: 100%;
 	}
+	br.break,
+	nobr.break{
+	display: none
+	}
 	body.landing .welcome .mainlinks ul li{
 		min-width: 220px;
 	}
