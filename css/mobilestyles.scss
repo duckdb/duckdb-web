@@ -36,7 +36,9 @@
 		max-width: auto;
 		width: 100%;
 	}
-	br.break,
+	br.break{
+	display: none;	
+	}	
 	nobr.break{
 	display: inline-flex;
 	}
