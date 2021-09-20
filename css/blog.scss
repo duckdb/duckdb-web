@@ -138,6 +138,10 @@ h5 {
 			table + div.highlighter-rouge{
 				margin-top: 30px;
 			}
+			.highlighter-rouge,
+			table{
+				margin-bottom: 50px;
+			}
 		}
 		.infoline{
 			color: $duckDBgrey;
