@@ -112,13 +112,13 @@
 		padding-bottom: 15px;
 		pointer-events: none;
 		transition: all .5s;
-		transform: translateX(100%);
+		right: -100%;
 		> div{
 			margin-left: 20px;
 		}
 		&.slidein{
 			pointer-events: all;
-			transform: translateX(0%);
+			right: 0%;
 		}
 	}
 	header .headerline .headercontent .landingmenu nav:not(.mobile){
