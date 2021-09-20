@@ -113,6 +113,7 @@
 		pointer-events: none;
 		transition: all .5s;
 		right: -100%;
+		height: calc(100vh - 53px);
 		> div{
 			margin-left: 20px;
 		}
