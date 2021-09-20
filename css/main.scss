@@ -361,7 +361,7 @@ footer{
 
 				}
 				a{
-					color: darken($duckDBgrey,20);
+					color: #878787;
 					text-decoration: none;
 					-webkit-transition: color .3s;
 					-o-transition: color .3s;
@@ -373,9 +373,10 @@ footer{
 			}
 			h4{
 				text-decoration: none;
-				font-family: $fontSansBold;
+				font-family: $fontSans;
 				font-weight: normal;
 				margin-top: 0px;
+				color: white;
 			}
 			.scrolltop{
 				font-size: 16px;
