@@ -512,6 +512,7 @@ body.landing{
 				li.highlighted{
 					background-color: black;
 					color: white;
+					border-color: black;
 					&:hover{
 						background-color: black;
 						color: $duckDByellow;
