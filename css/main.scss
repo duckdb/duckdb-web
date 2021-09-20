@@ -503,7 +503,7 @@ body.landing{
 				    -ms-flex-pack: center;
 				        justify-content: center;
 				margin: 0 auto;
-				margin-top: 80px;
+				margin-top: 30px;
 				max-width: $maxContentWidth;
 				a{
 					text-decoration: none;
@@ -521,16 +521,17 @@ body.landing{
 				li{
 					min-width: 300px;
 					//flex: 1 1 0px;
-					border: 1px solid black;
+					border: 1px solid #b8b8b8;
 					margin-left: 10px;
 					margin-right: 10px;
 					padding: 0px 0px;
 					-webkit-transition: all .3s;
 					-o-transition: all .3s;
 					transition: all .3s;
-					height: 40px;
-					line-height: 40px;
+					height: 32x;
+					line-height: 31px;
 					background-color: transparent;
+					font-size: 14px;
 					&:hover{
 						background-color:  $duckDByellow;
 						color: black;
