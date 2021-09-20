@@ -57,6 +57,12 @@ pre code {
 pre.highlight{
 	white-space: pre;
 	overflow-x: auto;
+    padding-bottom: 0px;
+    margin: 0;
+    code, pre{
+        margin-bottom: 15px;
+        margin-top: 5px;
+    }
 }
 div.highlight{
 	width: calc(100vw - 380px);
@@ -598,7 +604,7 @@ p img {
     }
     code,
     pre {
-        font-size: 11px;
+        font-size: 14px;
     }
 }
 @media screen and (max-width: 320px) {
@@ -637,6 +643,6 @@ p img {
     pre {
         min-width: 240px;
         max-width: 320px;
-        font-size: 11px;
+        font-size: 14px;
     }
 }

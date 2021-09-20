@@ -343,4 +343,12 @@
 	footer .sitefooter .footercontent > div{
 		overflow: visible;
 	}
+	.newswrap .postwrap .postcontent p, .newswrap .postwrap .postcontent ul li, .newswrap .postwrap .postcontent ol li{
+		font-size: 17px;
+		line-height: 29px;
+	}
+	.newswrap .postwrap .singleentry h1{
+		font-size: 30px; 
+		line-height: 34px; 
+	}
 }

@@ -24,7 +24,7 @@ img{
 	justify-content: center;
 }
 table {
-	max-width:100%;
+	min-width: 100%;
 	justify-content: center;
 	text-align: center;
 	margin: 6px auto;
@@ -92,7 +92,7 @@ h5 {
 			margin-bottom: 80px;
 			h2{
 				font-size: 34px;
-				line-height: 44px;
+				line-height: 39px;
 			}
 			p, ul li, ol li{
 				font-size: 19px;
@@ -105,6 +105,10 @@ h5 {
 					font-family: "SuisseIntl-RegularItalic", Helvetica, Arial, sans-serif;
 					font-style: normal;
 				}
+			}
+			ul li, ol li{
+				margin-top: 0;
+				margin-bottom: 0;
 			}
 			h4{
 				font-size: 24px;
@@ -163,11 +167,15 @@ h5 {
 				color: black;
 			}
 		}
+		a.backtoarchive{
+			margin-top: 15px;
+			display: inline-block;
+		}
 
 		.singleentry{
 			h1{
 				font-size: 34px;
-				line-height: 44px;
+				line-height: 39px;
 				margin-bottom: 30px;
 			}
 		}
