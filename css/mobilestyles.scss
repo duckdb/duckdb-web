@@ -130,6 +130,13 @@
 			color: black;
 		}
 	}
+	header .headerline .headercontent .landingmenu nav .hasSub + ul{
+		position: relative;
+		display: none;
+	}
+	header .headerline .headercontent .landingmenu nav .hasSub:hover ~ ul{
+		display: none;
+	}
 	body.landing .welcome .mainlinks ul, body.landing .benefits .mainlinks ul{
 		max-width: 100%;
 		display: block;
