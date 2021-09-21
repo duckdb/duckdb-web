@@ -1108,7 +1108,9 @@ body.installation{
 			li{
 				display: block;
 				background-color: $duckDBlightgrey;
+				color: darken($duckDBlightgrey,40);
 				border: 1px solid white;
+  				border-bottom: 1px solid rgba(0,0,0,0.2);
 				border-left: 0px;
 				-webkit-box-flex: 1;
 				    -ms-flex: 1 1 0px;
@@ -1131,7 +1133,9 @@ body.installation{
 				background-color: darken($duckDBlightgrey,10);
 				}
 			&.selected{
-				background-color: $duckDBblue;
+				 background-color: darken($duckDBlightgrey,10);
+				 border-bottom: 2px solid rgba(0,0,0,0.4);
+				 color: black;
 				}
 			}
 		}
