@@ -102,6 +102,9 @@
 	.notonmobile{
 		display: none;
 	}
+	p.system{
+	display: inline-flex;
+	}
 	footer .sitefooter .footercontent,
 	header .headerline .headercontent{
 		max-width: calc(100% - 30px);
