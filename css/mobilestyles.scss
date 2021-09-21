@@ -103,7 +103,10 @@
 		display: none;
 	}
 	p.system{
-	display: inline-flex;
+	display: inline-grid;
+		span{
+		margin-left: 0
+		}
 	}
 	footer .sitefooter .footercontent,
 	header .headerline .headercontent{
