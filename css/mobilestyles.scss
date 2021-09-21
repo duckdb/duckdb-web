@@ -104,9 +104,9 @@
 	}
 	p.system{
 	display: inline-grid;
-		span{
-		margin-left: 0;
-		}
+	}
+	body.landing .install .result+p span{
+	margin-left: 0px;
 	}
 	footer .sitefooter .footercontent,
 	header .headerline .headercontent{
