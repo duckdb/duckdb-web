@@ -1,7 +1,7 @@
 ---
 
 layout: post  
-title:  "Fastest table sort in the West - Redesigning DuckDB's sort"
+title:  "Fastest table sort in the West - Redesigning DuckDB’s sort"
 author: Laurens Kuiper  
 excerpt_separator: <!--more-->
 
