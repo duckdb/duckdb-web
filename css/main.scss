@@ -569,8 +569,8 @@ body.landing{
 			position: relative;
 			margin-bottom: 30px;
 			div:first-child{
-				width: 120px;
-				margin-top: 4px;
+				width: 135px;
+				margin-top: 0px;
 			}
 			div:nth-child(2){
 				width: calc(100% - 150px);
@@ -578,7 +578,9 @@ body.landing{
 				ul{
 					padding-left: 15px;
 					margin-top: 10px;
-					margin-bottom: 2px;
+					margin-bottom: 2px;+
+					font-size: 14px;
+					color: #4D4D4D;
 					ul{
 						margin: 0;
 					}
@@ -598,11 +600,11 @@ body.landing{
 		.boxlayout{
 			.box{
 				.duckdbsymbol{
-					font-size: 60px;
+					font-size: 70px;
 				}
 				div.icon{
-					width: 90px;
-					height: 90px;
+					width: 120px;
+					height: 120px;
 					background-color: $duckDBlightgrey;
 					text-align: center;
 					display: table-cell;
