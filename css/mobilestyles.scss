@@ -347,6 +347,10 @@
 	body.landing .boxlayout .box:last-child{
 		margin-bottom: 0;
 	}
+	body.landing .whyduckdb .boxlayout .box div.icon{
+		width: 110px;
+		height: 110px;
+	}
 	body.landing .install .result + p{
 		margin-bottom: 0;
 	}
