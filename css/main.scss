@@ -847,7 +847,7 @@ body.landing{
 				p{
 					hyphens: auto;
 				}
-				span{
+				span.duckdbsymbol{
 					color: darken($duckDBgrey,20);
 					margin-right: 5px;
 				}
