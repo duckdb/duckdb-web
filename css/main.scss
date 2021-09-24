@@ -347,12 +347,18 @@ footer{
 			    -ms-flex-pack: justify;
 			        justify-content: space-between;
 			font-size: 80%;
+			strong{
+			    	font-weight: normal;
+				}
 			> div{
 				-webkit-box-flex: 1;
 				    -ms-flex: 1 1 0px;
 				        flex: 1 1 0px;
 				overflow: visible;
 				position: relative;
+				span.info{
+					color: #878787;
+					}
 				strong{
 					font-family: $fontSans;
 				}
@@ -361,7 +367,7 @@ footer{
 				}
 				a{
 					color: #878787;
-					text-decoration: none;
+					text-decoration: underline;
 					-webkit-transition: color .3s;
 					-o-transition: color .3s;
 					transition: color .3s;
