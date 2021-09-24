@@ -597,6 +597,10 @@ body.landing{
 				a{
 					color: darken($duckDBgrey,20);
 					font-size: 14px;
+					&:hover{
+						background-color: $duckDByellow;
+						color: black;
+	}
 				}
 			}
 		}
@@ -846,10 +850,11 @@ body.landing{
 				a.continue{
 					color: darken($duckDBgrey,20);
 					transition: color .3s;
-					text-decoration: none;
+					text-decoration: underline;
 					font-size: 14px;
 					&:hover{
 						color: black;
+						background-color: $duckDByellow;
 					}
 				}
 			}
