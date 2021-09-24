@@ -847,6 +847,9 @@ body.landing{
 				p{
 					hyphens: auto;
 				}
+				span{
+					color: darken($duckDBgrey,20);				
+				}
 				a.continue{
 					color: darken($duckDBgrey,20);
 					transition: color .3s;
