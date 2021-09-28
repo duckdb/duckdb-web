@@ -343,9 +343,12 @@ footer{
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			-webkit-box-pack: justify;
+			/*-webkit-box-pack: justify;
 			    -ms-flex-pack: justify;
 			        justify-content: space-between;
+					*/
+			justify-content: center;
+			column-gap: 50px;
 			font-size: 14px;
 			strong{
 			    	font-weight: normal;

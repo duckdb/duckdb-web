@@ -33,6 +33,8 @@
 	footer .sitefooter .footercontent{
 		flex-wrap: wrap;
 		padding-bottom: 0px;
+		justify-content: space-between;
+		column-gap: 0;
 	}
 	footer .sitefooter .footercontent > div{
 		-webkit-box-flex: inherit;
