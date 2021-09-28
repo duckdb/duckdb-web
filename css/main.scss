@@ -352,9 +352,11 @@ footer{
 				color: $duckDByellow;
 				}
 			> div{
+				/*
 				-webkit-box-flex: 1;
 				    -ms-flex: 1 1 0px;
 				        flex: 1 1 0px;
+						*/
 				overflow: visible;
 				position: relative;
 				span.info{
@@ -395,12 +397,14 @@ footer{
 				}
 			}
 			.gitbutton{
-				width: 200px;
-				height: 30px;
+				width: auto;
+				height: 27px;
 				border: 1px solid white;
 				text-align: center;
-				line-height: 30px;
-				float: right;
+				line-height: 24px;
+				padding-left: 20px;
+				padding-right: 20px;
+				/*float: right;*/
 				-webkit-transform: translateY(46%);
 				    -ms-transform: translateY(46%);
 				        transform: translateY(46%);
@@ -427,6 +431,30 @@ footer{
 			        a{
 				color: white;
 				text-decoration: none;
+				}
+			}
+			.linktoduckdblabs{
+				color: #FF6900;
+				a{
+					text-decoration: none!important;
+				}
+				.button{
+					border: 1px solid #FF6900;
+					color: #FF6900;
+					text-decoration: none;
+					margin-top: 10px;
+					display: inline-block;
+					height: 27px;
+					line-height: 24px;
+					padding-left: 15px;
+					padding-right: 15px;
+					span.duckdbsymbol{
+						margin-right: 10px;
+						text-decoration: none!important;
+					}
+					span.url{
+						text-decoration: underline;
+					}
 				}
 			}
 		}

@@ -27,6 +27,24 @@
 	.singleentry div.highlight{
 		width: 100%;
 	}
+	footer .sitefooter .footercontent .gitbutton{
+		width: 150px;
+	}
+	footer .sitefooter .footercontent{
+		flex-wrap: wrap;
+		padding-bottom: 0px;
+	}
+	footer .sitefooter .footercontent > div{
+		-webkit-box-flex: inherit;
+			-ms-flex: inherit;
+				flex: inherit;
+		min-width: 155px;
+		width: 33%;
+		margin-bottom: 30px;
+	}
+	footer .sitefooter .footercontent div:nth-child(4){
+		display: none;
+	}
 }
 
 
@@ -67,9 +85,6 @@
 	.wrap.whyduckdb .footnotes.mobilesups div.sup{
 		position: relative;
 		margin-top: 20px;
-	}
-	footer .sitefooter .footercontent .gitbutton{
-		width: 150px;
 	}
 	.newswrap .postwrap{
 		width: 100%;
@@ -215,25 +230,19 @@
 		    flex-wrap: wrap;
 		overflow: hidden;
 	}
-	footer .sitefooter .footercontent > div{
-		-webkit-box-flex: inherit;
-		    -ms-flex: inherit;
-		        flex: inherit;
-		width: 155px;
-	}
-	footer .sitefooter .footercontent > div:last-of-type{
-		width: 100%;
-	}
+
 	footer .sitefooter .footercontent .gitbutton{
-		width: 50%;
 		-webkit-transform: translateY(0);
 		    -ms-transform: translateY(0);
 		        transform: translateY(0);
-		margin-top: 20px;
 		float: left;
+		margin-top: 5px;
 	}
 	main.inactive{
 		opacity: .4;
+	}
+	footer .sitefooter .footercontent .cwi{
+		margin-top: 1px;
 	}
 	body.documentation header .headerline .headercontent .landingmenu nav.mobile > div:last-of-type{
 		display: block;
@@ -339,6 +348,15 @@
 
 }
 
+@media only screen and (max-width: 580px) {
+	footer .sitefooter .footercontent > div{
+		width: 50%;
+	}
+	footer .sitefooter .footercontent .linktoduckdblabs .button,
+	footer .sitefooter .footercontent .gitbutton{
+		width: 170px;
+	}
+}
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 	
@@ -366,10 +384,14 @@
 	}
 	.footercontent .duckdbsymbol.cwi{
 		margin-top: 15px;
-		transform: translate(40px, 54px);
+		transform: translate(6px, 24px);
 	}
 	footer .sitefooter .footercontent > div{
 		overflow: visible;
+	}
+	footer .sitefooter .footercontent .linktoduckdblabs .button,
+	footer .sitefooter .footercontent .gitbutton{
+		width: 165px;
 	}
 	.newswrap .postwrap .postcontent p, .newswrap .postwrap .postcontent ul li, .newswrap .postwrap .postcontent ol li{
 		font-size: 17px;
