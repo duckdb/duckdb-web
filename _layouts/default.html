@@ -34,6 +34,11 @@
 	<meta name="twitter:image" content="https://duckdb.org/images/sharingduckdb.jpg">
 	<meta name="twitter:site" content="@duckdb" />
 	<meta property="og:title" content="DuckDB" />
+	{% if page.title == "DuckDB" %}
+	<meta property="og:title" content="DuckDB" />
+	{% else %}
+	<meta property="og:title" content="DuckDB - {{ page.title }}" />
+	{% endif %}
 
 	
 </head>
