@@ -30,7 +30,7 @@ or they may indicate that the data needs to be cleaned by smoothing.
 Trends may be present or relative changes may be more important for analysis than raw values.
 To help answer such questions, SQL introduced *analytic* (or *window*) functions in 2003.
 
-### Window Functions
+#### Window Functions
 
 Windowing breaks a relation up into independent *partitions*, *orders* those partitions,
 and then defines [various functions](/docs/sql/window_functions) that can be computed for each row.
@@ -87,7 +87,7 @@ That is a long list of complicated functionality!
 Making it all work relatively quickly has many pieces,
 so lets have a look at how they all get implemented in DuckDB.
 
-### Pipeline Breaking
+#### Pipeline Breaking
 
 The first thing to notice is that windowing is a "pipeline breaker".
 That is, the `Window` operator has to read all of its inputs before it can start computing a function.
@@ -128,7 +128,7 @@ and we found that the second query was over 20 times faster:
 Of course most analytic tasks that use windowing *do* require using the `Window` operator,
 and DuckDB uses a collection of modern techniques to make the performance as fast as possible.
 
-### Partitioning and Sorting
+#### Partitioning and Sorting
 
 At one time, windowing was implemented by sorting on both the partition and the ordering fields.
 This is resource intensive, both because the entire relation must be sorted,
@@ -153,14 +153,14 @@ Even though you can request multiple window functions,
 DuckDB will collect functions that use the same partitioning and ordering
 and share the layout of the data between those functions.
 
-### Aggregation
+#### Aggregation
 
 Most of the [general-purpose window functions](/docs/sql/window_functions) are straightforward to compute,
 but windowed aggregate functions can be expensive because they need to look at multiple values for each row.
 They often need to look at the same value multiple times, or repeatedly look at a large number of values,
 so over the years several approaches have been taken to improve performance.
 
-#### Basic Windowed Aggregation
+### Basic Windowed Aggregation
 
 Before explaining how DuckDB implements windowed aggregation,
 we need to take a short detour through how regular aggregates are implemented.
@@ -187,7 +187,7 @@ that can add or remove individual values incrementally.
 This is an improvement, but it can only be used for certain aggregates (for example, it doesn't work for `MIN`).
 Moreover, if the frame boundaries move around a lot, it can still degenerate to an `O(N^2)` run time.
 
-#### Segment Tree Aggregation
+### Segment Tree Aggregation
 
 Instead, DuckDB uses the *segment tree* approach from Leis et al. above.
 This works by building a tree on top of the entire partition with the aggregated values at the bottom.
@@ -200,7 +200,7 @@ To compute a value, the algorithm generates states for the ragged ends of the fr
 and *finalizes* the result from the last remaining state.
 This can be used for all combinable aggregates.
 
-#### General Windowed Aggregation
+### General Windowed Aggregation
 
 The biggest drawback of segment trees is the need to manage a potentially large number of intermediate states.
 For the simple states used for standard aggregates like `SUM`,
@@ -227,13 +227,13 @@ and the `quantile` function maintains a partially sorted list of frame indexes.
 ### Ordered Set Aggregates
 
 Window functions are often closely associated with some special
-["ordered set aggregates"](https://www.postgresql.org/docs/current/functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE)
+"[ordered set aggregates](https://www.postgresql.org/docs/current/functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE)"
 defined by the SQL standard.
 Some databases implement these functions using the `Window` operator,
 but this is rather inefficient as sorting the data (an `O(N log N)` operation) is not actually required.
 
 Instead, DuckDB has efficient implementations of `quantile_cont`, `quantile_disc`,
-and `mode` that use hash tables or selection, which have run time of `O(N)`.
+and `mode` that use hash tables or selection, which have run times of `O(N)`.
 Moreover, the `quantile` functions can take an array of quantile values,
 which further increases performance by sharing the partially ordered results
 among the different quantile values.
@@ -243,7 +243,8 @@ so the moving average example above can be modified to produce a moving inter-qu
 
 ```sql
 SELECT "Plant", "Date",
-    QUANTILE_CONT("KWh", [0.25, 0.5, 0.75]) OVER seven AS "KWh 7-day Moving IQR"
+    QUANTILE_CONT("KWh", [0.25, 0.5, 0.75]) OVER seven
+        AS "KWh 7-day Moving IQR"
 FROM "Generation History"
 WINDOW seven AS (
     PARTITION BY "Plant"
