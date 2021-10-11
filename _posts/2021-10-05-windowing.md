@@ -253,7 +253,7 @@ This technique can be used for all *combinable* aggregates.
 ### General Windowed Aggregation
 
 The biggest drawback of segment trees is the need to manage a potentially large number of intermediate states.
-For the simple states used for standard aggregates like `SUM`,
+For the simple states used for standard distributive aggregates like `SUM`,
 this is not a problem because the states are small,
 the tree keeps the number of states logarithmically low,
 and the state used to compute each value is also cheap.
@@ -263,7 +263,9 @@ Typically these are so-called *holistic* aggregates,
 where the value depends on all the values of the frame.
 Examples of such aggregates are `mode` and `quantile`,
 where each state may have to contain a copy of *all* the values seen so far.
-For large frames, this can be quite expensive.
+While segment trees *can* be used to implement moving versions of any combinable aggregate,
+this can be quite expensive for large, complex states -
+and this was not the original goal of the algorithm.
 
 To solve this problem, we use the approach from Wesley and Xu's
 [*Incremental Computation of Common Windowed Holistic Aggregates*](http://www.vldb.org/pvldb/vol9/p1221-wesley.pdf),
