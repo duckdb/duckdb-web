@@ -43,14 +43,14 @@ as well as some window-specific functions (such as `RANK()` and `NTH_VALUE(<expr
 
 Some window functions depend only on the partition boundary and the ordering,
 but a few (including all the aggregates) also use a *frame*.
-Frames are specified as a number of rows on either side (*preceding* or *following* the *current row*).
+Frames are specified as a number of rows on either side (*preceding* or *following*) of the *current row*.
 The distance can either be specified as a number of *rows* or a *range* of values
 using the partition's ordering value and a distance.
 
 <img src="/images/blog/windowing/framing.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
 Framing is the most confusing part of the windowing environment,
-so let's look at a very simple example and ignore the partitioning and ordering.
+so let's look at a very simple example and ignore the partitioning and ordering for a moment.
 
 ```sql
 SELECT points,
@@ -60,7 +60,7 @@ SELECT points,
 FROM results
 ```
 
-This just computes the `SUM` of each value and the values on either side:
+This query computes the `SUM` of each point and the points on either side of it:
 
 <img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
 
@@ -217,7 +217,7 @@ and we found that the join query was over 20 times faster on their data set:
 <img src="/images/blog/windowing/last-in-group.jpg" alt="Window takes 13 seconds, Join takes half a second" title="Figure 3: Last in Group Join vs Window Comparison" style="max-width:90%;width:90%;height:auto"/>
 
 Of course most analytic tasks that use windowing *do* require using the `Window` operator,
-and DuckDB uses a collection of modern techniques to make the performance as fast as possible.
+and DuckDB uses a collection of techniques to make the performance as fast as possible.
 
 #### Partitioning and Sorting
 
@@ -341,7 +341,7 @@ WINDOW seven AS (
 ORDER BY 1, 2
 ```
 
-Moving like this quantiles are
+Moving quantiles like this are
 [more robust to anomalies](https://blogs.sas.com/content/iml/2021/05/26/running-median-smoother.html),
 which makes them a valuable tool for data series analysis,
 but they are not generally implemented in most database systems.
@@ -361,7 +361,7 @@ Some databases implement these functions using the `Window` operator,
 but this is rather inefficient because sorting the data (an `O(N log N)` operation) is not required -
 it suffices to use
 Hoare's `O(N)`
-["FIND"](https://courses.cs.vt.edu/~cs3114/Summer15/Notes/Supplemental/p321-hoare.pdf)
+[`FIND`](https://courses.cs.vt.edu/~cs3114/Summer15/Notes/Supplemental/p321-hoare.pdf)
 algorithm as used in the STL's
 [`std::nth_element`](https://en.cppreference.com/w/cpp/algorithm/nth_element).
 DuckDB translates these ordered set aggregates to use the faster `quantile_cont`, `quantile_disc`,
@@ -369,7 +369,7 @@ and `mode` regular aggregate functions, thereby avoiding using windowing entirel
 
 ### Extensions
 
-The architecture also means that any new aggregates we add
+This architecture also means that any new aggregates we add
 can benefit from the existing windowing infrastructure.
 DuckDB is an open source project, and we welcome submissions of useful aggregate functions -
 or you can create your own domain-specific ones in your own fork.
