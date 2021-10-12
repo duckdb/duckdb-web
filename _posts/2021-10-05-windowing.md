@@ -47,40 +47,56 @@ Frames are specified as a number of rows on either side (*preceding* or *followi
 The distance can either be specified as a number of *rows* or a *range* of values
 using the partition's ordering value and a distance.
 
-<img src="/images/blog/windowing/framing.pdf" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/windowing/framing.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
+Framing is the most confusing part of the windowing environment,
+so let's look at a very simple example and ignore the partitioning and ordering.
+
+```sql
+SELECT points,
+    SUM(points) OVER (
+        ROWS BETWEEN 1 PREDECING
+                 AND 1 FOLLOWING) we
+FROM results
+```
+
+This just computes the `SUM` of each value and the values on either side:
+
+<img src="/images/blog/windowing/moving-sum.jpg" alt="Moving SUM of three values" title="Figure 2: A moving SUM of three values" style="max-width:90%;width:90%;height:auto"/>
+
+Notice that at the edge of the partition, there are only two values added together.
 
 #### Power Generation Example
 
-Let's look at an example of a window function query.
-Suppose we have some power plant generation data (ignore the last column for a moment):
+Now let's look at a concrete example of a window function query.
+Suppose we have some power plant generation data:
 
-| Plant | Date | MWh | MWh 7-day<br>Moving Average |
-|:---|:---|---:|---:|
-| Boston | 2019-01-02 | 564337 | 517450.75 |
-| Boston | 2019-01-03 | 507405 | 508793.20 |
-| Boston | 2019-01-04 | 528523 | 508529.83 |
-| Boston | 2019-01-05 | 469538 | 523459.85 |
-| Boston | 2019-01-06 | 474163 | 526067.14 |
-| Boston | 2019-01-07 | 507213 | 524938.71 |
-| Boston | 2019-01-08 | 613040 | 518294.57 |
-| Boston | 2019-01-09 | 582588 | 520665.42 |
-| Boston | 2019-01-10 | 499506 | 528859.00 |
-| Boston | 2019-01-11 | 482014 | 532466.66 |
-| Boston | 2019-01-12 | 486134 | 516352.00 |
-| Boston | 2019-01-13 | 531518 | 499793.00 |
-| Worcester | 2019-01-02 | 118860 | 104768.25 |
-| Worcester | 2019-01-03 | 101977 | 102713.00 |
-| Worcester | 2019-01-04 | 106054 | 102249.50 |
-| Worcester | 2019-01-05 | 92182 | 104621.57 |
-| Worcester | 2019-01-06 | 94492 | 103856.71 |
-| Worcester | 2019-01-07 | 99932 | 103094.85 |
-| Worcester | 2019-01-08 | 118854 | 101345.14 |
-| Worcester | 2019-01-09 | 113506 | 102313.85 |
-| Worcester | 2019-01-10 | 96644 | 104125.00 |
-| Worcester | 2019-01-11 | 93806 | 104823.83 |
-| Worcester | 2019-01-12 | 98963 | 102017.80 |
-| Worcester | 2019-01-13 | 107170 | 99145.75 |
+| Plant | Date | MWh |
+|:---|:---|---:|
+| Boston | 2019-01-02 | 564337 |
+| Boston | 2019-01-03 | 507405 |
+| Boston | 2019-01-04 | 528523 |
+| Boston | 2019-01-05 | 469538 |
+| Boston | 2019-01-06 | 474163 |
+| Boston | 2019-01-07 | 507213 |
+| Boston | 2019-01-08 | 613040 |
+| Boston | 2019-01-09 | 582588 |
+| Boston | 2019-01-10 | 499506 |
+| Boston | 2019-01-11 | 482014 |
+| Boston | 2019-01-12 | 486134 |
+| Boston | 2019-01-13 | 531518 |
+| Worcester | 2019-01-02 | 118860 |
+| Worcester | 2019-01-03 | 101977 |
+| Worcester | 2019-01-04 | 106054 |
+| Worcester | 2019-01-05 | 92182 |
+| Worcester | 2019-01-06 | 94492 |
+| Worcester | 2019-01-07 | 99932 |
+| Worcester | 2019-01-08 | 118854 |
+| Worcester | 2019-01-09 | 113506 |
+| Worcester | 2019-01-10 | 96644 |
+| Worcester | 2019-01-11 | 93806 |
+| Worcester | 2019-01-12 | 98963 |
+| Worcester | 2019-01-13 | 107170 |
 
 The data is noisy, so we want to compute a 7 day moving average for each plant.
 To do this, we can use this window query:
@@ -103,7 +119,34 @@ It partitions the data by `Plant` (to keep the different power plants' data sepa
 orders each plant's partition by `Date` (to put the energy measurements next to each other),
 and uses a `RANGE` frame of three days on either side of each day for the `AVG`
 (to handle any missing days).
-The result is the last column of the table.
+Here is the result:
+
+| Plant | Date | MWh 7-day<br>Moving Average |
+|:---|:---|---:|
+| Boston | 2019-01-02 | 517450.75 |
+| Boston | 2019-01-03 | 508793.20 |
+| Boston | 2019-01-04 | 508529.83 |
+| Boston | 2019-01-05 | 523459.85 |
+| Boston | 2019-01-06 | 526067.14 |
+| Boston | 2019-01-07 | 524938.71 |
+| Boston | 2019-01-08 | 518294.57 |
+| Boston | 2019-01-09 | 520665.42 |
+| Boston | 2019-01-10 | 528859.00 |
+| Boston | 2019-01-11 | 532466.66 |
+| Boston | 2019-01-12 | 516352.00 |
+| Boston | 2019-01-13 | 499793.00 |
+| Worcester | 2019-01-02 | 104768.25 |
+| Worcester | 2019-01-03 | 102713.00 |
+| Worcester | 2019-01-04 | 102249.50 |
+| Worcester | 2019-01-05 | 104621.57 |
+| Worcester | 2019-01-06 | 103856.71 |
+| Worcester | 2019-01-07 | 103094.85 |
+| Worcester | 2019-01-08 | 101345.14 |
+| Worcester | 2019-01-09 | 102313.85 |
+| Worcester | 2019-01-10 | 104125.00 |
+| Worcester | 2019-01-11 | 104823.83 |
+| Worcester | 2019-01-12 | 102017.80 |
+| Worcester | 2019-01-13 | 99145.75 |
 
 You can request multiple different `OVER` clauses in the same `SELECT`, and each will be computed separately.
 Often, however, you want to use the same window for multiple functions,
@@ -120,6 +163,8 @@ WINDOW seven AS (
               AND INTERVAL 3 DAYS FOLLOWING)
 ORDER BY 1, 2
 ```
+
+This would be useful, for example, if one wanted the 7-day moving  `MIN` and `MAX` as well for a box-and-whisker plot.
 
 ## Under the Feathers
 
@@ -155,21 +200,21 @@ A much faster way to do this is to use a self join to filter the table
 to contain only the last (`MAX`) value of the `DATE` field:
 
 ```sql
-SELECT "Plant", "MWh"
+SELECT table."Plant", "MWh"
 FROM table,
     (SELECT "Plant", MAX("Date") AS "Date"
-     FROM table GROUP BY 1) dates
-WHERE table."Plant" = dates."Plant"
-  AND table."Date" = dates."Date"
+     FROM table GROUP BY 1) lasts
+WHERE table."Plant" = lasts."Plant"
+  AND table."Date" = lasts."Date"
 ```
 
 This join query requires two scans of the table, but the only materialised data is the filtering table
 (which is probably much smaller than the original table), and there is no sorting at all.
 
-This query showed up [in a user's blog](https://bwlewis.github.io/duckdb_and_r/last/last.html)
+This type of query showed up [in a user's blog](https://bwlewis.github.io/duckdb_and_r/last/last.html)
 and we found that the join query was over 20 times faster on their data set:
 
-<img src="/images/blog/windowing/last-in-group.jpg" alt="Window takes 13 seconds, Join takes half a second" title="Last in Group Performance Comparison" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/windowing/last-in-group.jpg" alt="Window takes 13 seconds, Join takes half a second" title="Figure 3: Last in Group Join vs Window Comparison" style="max-width:90%;width:90%;height:auto"/>
 
 Of course most analytic tasks that use windowing *do* require using the `Window` operator,
 and DuckDB uses a collection of modern techniques to make the performance as fast as possible.
@@ -184,20 +229,20 @@ Fortunately, there are faster ways to implement this step.
 
 To reduce resource consumption, DuckDB uses the partitioning scheme from Leis et al.'s
 [*Efficient Processing of Window Functions in Analytical SQL Queries*](http://www.vldb.org/pvldb/vol8/p1058-leis.pdf)
-and breaks the partitions up into 1024 chunks using hashing.
+and breaks the partitions up into 1024 chunks using `O(N)` hashing.
 The chunks still need to be sorted on all the fields because there may be hash collisions,
 but each partition can now be 1024 times smaller, which reduces the runtime significantly.
 Moreover, the partitions can easily be extracted and processed in parallel.
 
-Sorting in DuckDB recently got a [big performance boost](/2021/08/27/external-sorting)
+Sorting in DuckDB recently got a [big performance boost](/2021/08/27/external-sorting),
 along with the ability to work on partitions that were larger than memory.
 This functionality has been also added to the `Window` operator,
 resulting in a 33% improvement in the last-in-group example:
 
-<img src="/images/blog/windowing/last-in-group-sort.jpg" alt="Window takes X seconds, Join takes half a second" title="Last in Group Sorting Performance Comparison" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/windowing/last-in-group-sort.jpg" alt="Window takes X seconds, Join takes half a second" title="Figure 4: Last in Group Sorting Performance Improvement" style="max-width:90%;width:90%;height:auto"/>
 
 As a final optimisation, even though you can request multiple window functions,
-DuckDB will collect functions that use the same partitioning and ordering
+DuckDB will collect functions that use the same partitioning and ordering,
 and share the data layout between those functions.
 
 #### Aggregation
@@ -242,7 +287,7 @@ Instead of adding more functions, DuckDB uses the *segment tree* approach from L
 This works by building a tree on top of the entire partition with the aggregated values at the bottom.
 Values are combined into states at nodes above them in the tree until there is a single root:
 
-<img src="/images/blog/windowing/segment-tree.pdf" alt="Segment Tree for SUM aggregation" title="Figure 5: Segment Tree for sum aggregation. Only the red nodes (7, 13, 20) have to be aggregated to compute the sum of 7, 3, 10, 6, 2, 8, 4" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/windowing/segment-tree.png" alt="Segment Tree for SUM aggregation" title="Figure 5: Segment Tree for sum aggregation. Only the red nodes (7, 13, 20) have to be aggregated to compute the sum of 7, 3, 10, 6, 2, 8, 4" style="max-width:90%;width:90%;height:auto"/>
 
 To compute a value, the algorithm generates states for the ragged ends of the frame,
 *combines* states in the tree above the values in the frame,
