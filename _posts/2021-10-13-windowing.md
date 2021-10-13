@@ -47,7 +47,7 @@ Frames are specified as a number of rows on either side (*preceding* or *followi
 The distance can either be specified as a number of *rows* or a *range* of values
 using the partition's ordering value and a distance.
 
-<img src="/images/blog/windowing/framing.png" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/windowing/framing.svg" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
 Framing is the most confusing part of the windowing environment,
 so let's look at a very simple example and ignore the partitioning and ordering for a moment.
