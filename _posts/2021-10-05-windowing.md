@@ -164,7 +164,8 @@ WINDOW seven AS (
 ORDER BY 1, 2
 ```
 
-This would be useful, for example, if one wanted the 7-day moving  `MIN` and `MAX` as well for a box-and-whisker plot.
+This would be useful, for example,
+if one also wanted the 7-day moving  `MIN` and `MAX`  to show the bounds of the data.
 
 ## Under the Feathers
 
