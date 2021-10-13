@@ -33,7 +33,7 @@ or they may indicate that the data needs to be cleaned by smoothing.
 Trends may be present or relative changes may be more important for analysis than raw values.
 To help answer such questions, SQL introduced *analytic* (or *window*) functions in 2003.
 
-#### Window Functions
+### Window Functions
 
 Windowing works by breaking a relation up into independent *partitions*, *ordering* those partitions,
 and then defining [various functions](/docs/sql/window_functions) that can be computed for each row
@@ -66,7 +66,7 @@ This query computes the `SUM` of each point and the points on either side of it:
 
 Notice that at the edge of the partition, there are only two values added together.
 
-#### Power Generation Example
+### Power Generation Example
 
 Now let's look at a concrete example of a window function query.
 Suppose we have some power plant generation data:
@@ -173,7 +173,7 @@ That is a long list of complicated functionality!
 Making it all work relatively quickly has many pieces,
 so lets have a look at how they all get implemented in DuckDB.
 
-#### Pipeline Breaking
+### Pipeline Breaking
 
 The first thing to notice is that windowing is a "pipeline breaker".
 That is, the `Window` operator has to read all of its inputs before it can start computing a function.
@@ -220,7 +220,7 @@ and we found that the join query was over 20 times faster on their data set:
 Of course most analytic tasks that use windowing *do* require using the `Window` operator,
 and DuckDB uses a collection of techniques to make the performance as fast as possible.
 
-#### Partitioning and Sorting
+### Partitioning and Sorting
 
 At one time, windowing was implemented by sorting on both the partition and the ordering fields
 and then finding the partition boundaries.
@@ -246,14 +246,14 @@ As a final optimisation, even though you can request multiple window functions,
 DuckDB will collect functions that use the same partitioning and ordering,
 and share the data layout between those functions.
 
-#### Aggregation
+### Aggregation
 
 Most of the [general-purpose window functions](/docs/sql/window_functions) are straightforward to compute,
 but windowed aggregate functions can be expensive because they need to look at multiple values for each row.
 They often need to look at the same value multiple times, or repeatedly look at a large number of values,
 so over the years several approaches have been taken to improve performance.
 
-### Naïve Windowed Aggregation
+#### Naïve Windowed Aggregation
 
 Before explaining how DuckDB implements windowed aggregation,
 we need to take a short detour through how ordinary aggregates are implemented.
@@ -282,7 +282,7 @@ but it can only be used for certain aggregates.
 For example, it doesn't work for `MIN`) because you don't know if there are multiple duplicate minima.
 Moreover, if the frame boundaries move around a lot, it can still degenerate to an `O(N^2)` run time.
 
-### Segment Tree Aggregation
+#### Segment Tree Aggregation
 
 Instead of adding more functions, DuckDB uses the *segment tree* approach from Leis et al. above.
 This works by building a tree on top of the entire partition with the aggregated values at the bottom.
@@ -296,7 +296,7 @@ and *finalizes* the result from the last remaining state.
 So in the example above (Figure 5 from Leis et al.) only three values need to be added instead of 7.
 This technique can be used for all *combinable* aggregates.
 
-### General Windowed Aggregation
+#### General Windowed Aggregation
 
 The biggest drawback of segment trees is the need to manage a potentially large number of intermediate states.
 For the simple states used for standard distributive aggregates like `SUM`,
@@ -353,7 +353,7 @@ or [complex](https://ndesmo.github.io/blog/oracle-moving-metrics/).
 DuckDB's implementation uses the standard window notation,
 which means you don't have to learn new syntax or pull the data out into another tool.
 
-### Ordered Set Aggregates
+#### Ordered Set Aggregates
 
 Window functions are often closely associated with some special
 "[ordered set aggregates](https://www.postgresql.org/docs/current/functions-aggregate.html#FUNCTIONS-ORDEREDSET-TABLE)"
@@ -368,7 +368,7 @@ algorithm as used in the STL's
 DuckDB translates these ordered set aggregates to use the faster `quantile_cont`, `quantile_disc`,
 and `mode` regular aggregate functions, thereby avoiding using windowing entirely.
 
-### Extensions
+#### Extensions
 
 This architecture also means that any new aggregates we add
 can benefit from the existing windowing infrastructure.
@@ -378,7 +378,7 @@ At some point we hope to have a UDF architecture that will allow plug-in aggrega
 and the simplicity and power of the interface will let these plugins leverage the notational
 simplicity and run time performance that the internal functions enjoy.
 
-#### Conclusion
+## Conclusion
 
 DuckDB's windowing implementation uses a variety of techniques
 to speed up what can be the slowest part of an analytic query.
