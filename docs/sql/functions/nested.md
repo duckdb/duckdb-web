@@ -22,6 +22,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | *`list`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s | `l[1:2]` | `[5, 6]` |
 | `array_length(`*`list`*`)` | Return the length of the list |  `array_length([1, 2, 3])` | `3` |
 | `len(`*`list`*`)` | Alias for `array_length` | `len([1, 2, 3])` | `3` |
+| `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
 
 ## Struct Functions
 
