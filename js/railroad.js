@@ -1716,6 +1716,18 @@ function GenerateSubquery(options) {
 	]
 }
 
+function GenerateValuesFromClause(options) {
+	return [
+		Sequence([
+			Keyword("("),
+			Sequence(
+				GenerateValues()
+			),
+			Keyword(")")
+		])
+	]
+}
+
 function GenerateTableOrSubquery(options) {
 	return [
 		Choice(0, [
@@ -1723,7 +1735,8 @@ function GenerateTableOrSubquery(options) {
 				Choice(0,[
 					Expandable("table-reference", options, "table-reference", GenerateTableReference),
 					Expandable("table-function", options, "table-function", GenerateTableFunction),
-					Expandable("subquery", options, "subquery", GenerateSubquery)
+					Expandable("subquery", options, "subquery", GenerateSubquery),
+					Expandable("values", options, "values", GenerateValuesFromClause)
 				]),
 				Optional(Sequence([Keyword("AS"), Expression("table-alias")]), "skip"),
 				Optional(Expandable("table-sample", options, "table-sample-reference", GenerateTableSample), "skip")
@@ -1732,4 +1745,175 @@ function GenerateTableOrSubquery(options) {
 			Expandable("join-clause", options, "join-clause", GenerateJoinClause)
 		])
 	]
+}
+
+
+function GenerateDistinctClause(options) {
+	return [
+		Choice(0, [
+			new Skip(),
+			Sequence([
+				Keyword("DISTINCT"),
+				Optional(Sequence([
+					Keyword("ON"),
+					Keyword("("),
+					OneOrMore(Expression(), ","),
+					Keyword(")"),
+				]) , "skip")
+			]),
+			Keyword("ALL")
+		])
+	]
+}
+
+function GenerateCommonTableExpression(options) {
+	return [
+		Expression("table-name"),
+		Optional(Sequence([
+			Keyword("("),
+			OneOrMore(Expression("column-name"), Keyword(",")),
+			Keyword(")")
+		]), "skip"),
+		Keyword("AS"),
+		Keyword("("),
+		Expression("select-node"),
+		Keyword(")")
+	]
+}
+
+function GenerateOrderBy(options) {
+	return [
+		Keyword("ORDER"),
+		Keyword("BY"),
+		GenerateOrderTerms()
+	]
+}
+
+function GenerateSelectClause(options) {
+	return [
+		Keyword("SELECT"),
+		Expandable("distinct-clause", options, "distinct-clause", GenerateDistinctClause),
+		OneOrMore(Choice(0, [
+			Sequence([Expression(), Optional(Sequence([Keyword("AS"), Expression("alias")]), "skip")]),
+			Sequence([
+				Optional(Sequence([Expression("table-name"), Keyword(".")]), "skip"),
+				Keyword("*")
+			])
+		]), ",")
+	]
+}
+
+function GenerateFromClause(options) {
+	return [
+		Keyword("FROM"),
+		OneOrMore(Sequence(GenerateTableOrSubquery(options)), Keyword(","))
+	]
+}
+
+function GenerateGroupByClause(options) {
+	return [
+		Optional(Sequence([
+			Keyword("GROUP"),
+			Keyword("BY"),
+			OneOrMore(
+				Choice(0, [
+				Expression(),
+				Sequence([
+					Keyword("GROUPING"),
+					Keyword("SETS"),
+					Keyword("("),
+					OneOrMore(Sequence([
+						Keyword("("),
+						ZeroOrMore(Expression(), ","),
+						Keyword(")")
+					]), ","),
+					Keyword(")")
+				]),
+				Sequence([
+					Choice(0, [Keyword("CUBE"), Keyword("ROLLUP")]),
+					Keyword("("),
+					OneOrMore(Expression(), ","),
+					Keyword(")")
+				])
+			]), ","),
+		])),
+		Optional(Sequence([
+			Keyword("HAVING"),
+			Expression()
+		]))
+	]
+}
+
+function GenerateWindowClause(options) {
+	return [
+		Keyword("WINDOW"),
+		OneOrMore(Sequence([
+				Expression("window-name"),
+				Keyword("AS"),
+				Expandable("window-definition", options, "window-definition", GenerateWindowSpec)
+		]), Keyword(","))
+	];
+}
+
+function GenerateLimitAndOrderBy(options) {
+	return [
+		Optional(Sequence(GenerateOrderBy(options))),
+		Optional(Sequence([
+			Keyword("LIMIT"),
+			Expression(),
+			Optional(Sequence([
+				Keyword("OFFSET"),
+				Expression()
+			]), "skip")
+		]))
+	]
+}
+
+function GenerateWhereClause(options) {
+	return [
+		Keyword("WHERE"),
+		Expression()
+	];
+}
+
+function GenerateSelectNode(options) {
+	return [Stack([
+		Sequence(
+			GenerateSelectClause(options)
+		),
+		Sequence([
+			Optional(Sequence(GenerateFromClause(options))),
+			Optional(
+				Sequence(GenerateWhereClause(options))
+			)
+		]),
+		Sequence(
+			GenerateGroupByClause(options)
+		),
+		Optional(Sequence(GenerateWindowClause(options)), "skip"),
+		Sequence(GenerateLimitAndOrderBy(options))
+	])]
+}
+
+function GenerateSetOperation(options) {
+	return [
+		Choice(0, [
+			Keyword("UNION"),
+			Keyword("UNION ALL"),
+			Keyword("INTERSECT"),
+			Keyword("EXCEPT")
+		])
+	]
+}
+
+function GenerateCTE(options) {
+	return [
+		Sequence([
+			Keyword("WITH"),
+			Optional(Keyword("RECURSIVE"), "skip"),
+			OneOrMore(
+				Sequence(GenerateCommonTableExpression()),
+				","
+			)
+		])]
 }
