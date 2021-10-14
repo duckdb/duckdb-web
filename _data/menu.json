@@ -167,6 +167,59 @@
                   ]
                 },
                 {
+                  "page": "Query Syntax",
+                  "subsubsubfolderitems": [
+                    {
+                      "page": "FROM",
+                      "url": "/docs/sql/query_syntax/from"
+                    },
+                    {
+                      "page": "WHERE",
+                      "url": "/docs/sql/query_syntax/where"
+                    },
+                    {
+                      "page": "GROUP BY",
+                      "url": "/docs/sql/query_syntax/groupby"
+                    },
+                    {
+                      "page": "GROUPING SETS",
+                      "url": "/docs/sql/query_syntax/grouping_sets"
+                    },
+                    {
+                      "page": "HAVING",
+                      "url": "/docs/sql/query_syntax/having"
+                    },
+                    {
+                      "page": "ORDER BY",
+                      "url": "/docs/sql/query_syntax/orderby"
+                    },
+                    {
+                      "page": "LIMIT",
+                      "url": "/docs/sql/query_syntax/limit"
+                    },
+                    {
+                      "page": "SAMPLE",
+                      "url": "/docs/sql/query_syntax/sample"
+                    },
+                    {
+                      "page": "UNNEST",
+                      "url": "/docs/sql/query_syntax/unnest"
+                    },
+                    {
+                      "page": "WITH",
+                      "url": "/docs/sql/query_syntax/with"
+                    },
+                    {
+                      "page": "WINDOW",
+                      "url": "/docs/sql/query_syntax/window"
+                    },
+                    {
+                      "page": "VALUES",
+                      "url": "/docs/sql/query_syntax/values"
+                    }
+                  ]
+                },
+                {
                   "page": "Data Types",
                   "subsubsubfolderitems": [
                     {
