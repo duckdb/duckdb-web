@@ -390,4 +390,4 @@ It aims to be the SQLite for Analytics,
 and provides a fast and efficient database system with zero external dependencies.
 It is available not just for Python, but also for C/C++, R, Java, and more.
 
-[Discuss this post on Hacker News](https://news.ycombinator.com/item?id=28328657)
+[Discuss this post on Hacker News](https://news.ycombinator.com/newest)
