@@ -19,7 +19,7 @@ If you are reading from a file (e.g. a CSV or Parquet file) often your data will
 
 [1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
 
-#### SQL on Pandas
+## SQL on Pandas
 After your data has been converted into a Pandas DataFrame often additional data wrangling and analysis still need to be performed. SQL is a very powerful tool for performing these types of data transformations. Using DuckDB, it is possible to run SQL efficiently right on top of Pandas DataFrames.
 
 As a short teaser, here is a code snippet that allows you to do exactly that: run arbitrary SQL queries directly on Pandas DataFrames using DuckDB.
@@ -35,7 +35,7 @@ print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
 
 In the rest of the article, we will go more in-depth into how this works and how fast it is.
 
-# Data Integration & SQL on Pandas
+## Data Integration & SQL on Pandas
 One of the core goals of DuckDB is that accessing data in common formats should be easy. DuckDB is fully capable of running queries in parallel *directly* on top of a Pandas DataFrame (or on a Parquet/CSV file, or on an Arrow table, …). A separate (time-consuming) import step is not necessary.
 
 DuckDB can also write query results directly to any of these formats. You can use DuckDB to process a Pandas DataFrame in parallel using SQL, and convert the result back to a Pandas DataFrame again, so you can then use the result in other Data Science libraries.
@@ -55,16 +55,16 @@ The SQL table name `mydf` is interpreted as the local Python variable `mydf` tha
 
 Not only is this process painless, it is highly efficient. For many queries, you can use DuckDB to process data faster than Pandas, and with a much lower total memory usage, *without ever leaving the Pandas DataFrame binary format* ("Pandas-in, Pandas-out"). Unlike when using an external database system such as Postgres, the data transfer time of the input or the output is negligible (see Appendix A for details).
 
-# SQL on Pandas Performance
+## SQL on Pandas Performance
 To demonstrate the performance of DuckDB when executing SQL on Pandas DataFrames, we now present a number of benchmarks. The source code for the benchmarks is available for interactive use [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing). In these benchmarks, we operate *purely* on Pandas DataFrames. Both the DuckDB code and the Pandas code operates fully on a `Pandas-in, Pandas-out` basis.
 
-#### Benchmark Setup and Data Set
+### Benchmark Setup and Data Set
 
 We run the benchmark entirely from within the Google Colab environment. For our benchmark dataset, we use the [infamous TPC-H data set](http://www.tpc.org/tpch/). Specifically, we focus on the `lineitem` and `orders` tables as these are the largest tables in the benchmark. The total dataset size is around 1GB in uncompressed CSV format ("scale factor" 1).
 
 As DuckDB is capable of using multiple processors (multi-threading), we include both a single-threaded variant and a variant with two threads. Note that while DuckDB can scale far beyond two threads, Google Colab only supports two.
 
-#### Setup
+### Setup
 
 First we need to install DuckDB. This is a simple one-liner.
 
@@ -83,7 +83,7 @@ orders = duckdb.query(
 ).to_df()
 ```
 
-#### Ungrouped Aggregates
+### Ungrouped Aggregates
 
 For our first query, we will run a set of ungrouped aggregates over the Pandas DataFrame. Here is the SQL query:
 
@@ -115,7 +115,7 @@ lineitem.agg(
 
 This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DuckDB performs similar to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
 
-## Grouped Aggregate
+### Grouped Aggregate
 For our second query, we will run the same set of aggregates, but this time include a grouping condition. In SQL, we can do this by adding a GROUP BY clause to the query.
 
 ```sql
@@ -153,7 +153,7 @@ lineitem.groupby(
 
 This query is already getting more complex, and while Pandas does a decent job, it is a factor two slower than the single-threaded version of DuckDB. DuckDB has a highly optimized aggregate hash-table implementation that will perform both the grouping and the computation of all the aggregates in a single pass over the data.
 
-## Grouped Aggregate with a Filter
+### Grouped Aggregate with a Filter
 
 Now suppose that we don't want to perform an aggregate over all of the data, but instead only want to select a subset of the data to aggregate. We can do this by adding a filter clause that removes any tuples we are not interested in. In SQL, we can accomplish this through the `WHERE` clause.
 
@@ -227,7 +227,7 @@ While the manual projection pushdown significantly speeds up the query in Pandas
 Due to its holistic query optimizer and efficient query processor, DuckDB performs significantly better on this query.
 
 
-## Joins
+### Joins
 For the final query, we will join (`merge` in Pandas) the lineitem table with the orders table, and apply a filter that only selects orders which have the status we are interested in. This leads us to the following query in SQL:
 
 ```sql
@@ -322,10 +322,10 @@ Both of these optimizations are automatically applied by DuckDB's query optimize
 
 We see that the basic approach is extremely time consuming compared to the optimized version. This demonstrates the usefulness of the automatic query optimizer. Even after optimizing, the Pandas code is still significantly slower than DuckDB because it stores intermediate results in memory after the individual filters and joins.
 
-#### Takeaway
+### Takeaway
 Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in - and out - of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
 
-# Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
+## Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
 
 Traditional SQL engines use the Client-Server paradigm, which means that a client program connects through a socket to a server. Queries are run on the server, and results are sent back down to the client afterwards. This is the same when using for example Postgres from Python. Unfortunately, this transfer [is a serious bottleneck](http://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf). In-process engines such as SQLite or DuckDB do not run into this problem.
 
@@ -352,7 +352,7 @@ Transferring query results or tables back from the SQL system into Pandas is ano
 | DuckDB to Pandas                              | 0.04     |
 
 
-# Appendix B: Comparison to PandaSQL
+## Appendix B: Comparison to PandaSQL
 
 There is a package called [PandaSQL](https://pypi.org/project/pandasql/) that also provides the facilities of running SQL directly on top of Pandas. However, it is built using the to_sql and from_sql infrastructure that we have seen is extremely slow in Appendix A.
 
@@ -367,12 +367,12 @@ Nevertheless, for good measure we have run the first Ungrouped Aggregate query i
 
 We can see that PandaSQL (powered by SQLite) is around 1000X~ slower than either Pandas or DuckDB on this straightforward benchmark. The performance difference was so large we have opted not to run the other benchmarks for PandaSQL.
 
-# Appendix C: Query on Parquet Directly
+## Appendix C: Query on Parquet Directly
 In the benchmarks above, we fully read the parquet files into Pandas. However, DuckDB also has the capability of directly running queries on top of Parquet files (in parallel!). In this appendix, we show the performance of this compared to loading the file into Python first.
 
 For the benchmark, we will run two queries: the simplest query (the ungrouped aggregate) and the most complex query (the final join) and compare the cost of running this query directly on the Parquet file, compared to loading it into Pandas using the `read_parquet` function.
 
-#### Setup
+### Setup
 In DuckDB, we can create a view over the Parquet file using the following query. This allows us to run queries over the Parquet file as if it was a regular table. Note that we do not need to worry about projection pushdown at all: we can just do a `SELECT *` and DuckDB's optimizer will take care of only projecting the required columns at query time.
 
 ```sql
@@ -380,7 +380,7 @@ CREATE VIEW lineitem_parquet AS SELECT * FROM 'lineitemsf1.snappy.parquet';
 CREATE VIEW orders_parquet AS SELECT * FROM 'orders.parquet';
 ```
 
-#### Ungrouped Aggregate
+### Ungrouped Aggregate
 After we have set up this view, we can run the same queries we ran before, but this time against the `lineitem_parquet` table.
 
 ```sql

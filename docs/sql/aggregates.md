@@ -76,3 +76,17 @@ The table below shows the available statistical aggregate functions.
 | `var_pop(x)` | Returns the population variance. | - | - |
 | `var_samp(x)` | Returns the sample variance of all input values. | `(SUM(x^2) - SUM(x)^2 / COUNT(x)) / (COUNT(x) - 1)` | `variance(arg,val)` |
 
+## Ordered Set Aggregate Functions
+The table below shows the available "ordered set" aggregate functions.
+These functions are specified using the `WITHIN GROUP(ORDER BY sort_expression)` syntax,
+and they are converted to an equivalent aggregate function that takes the ordering expression
+as the first argument.
+
+| Function | Equivalent |
+|:---|:---|
+| `mode() WITHIN GROUP (ORDER BY sort_expression)` | `mode(sort_expression)` |
+| `percentile_cont(fraction) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_cont(sort_expression, fraction)` |
+| `percentile_cont(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_cont(sort_expression, fractions)` |
+| `percentile_disc(fraction) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fraction)` |
+| `percentile_disc(fractions) WITHIN GROUP (ORDER BY sort_expression)` | `quantile_disc(sort_expression, fractions)` |
+
