@@ -16,7 +16,6 @@ The table below shows the available mathematical operators for numeric types.
 | `%` | modulo (remainder) | `5 % 4` | 1 |
 | `&` | bitwise AND | `91 & 15` | 11 |
 | `|` | bitwise OR | `32 | 3` | 35 |
-| `XOR` | bitwise XOR | `XOR(17, 5)` | 20 |
 | `<<` | bitwise shift left | `1 << 4` | 16 |
 | `>>` | bitwise shift right | `8 >> 2` | 2 |
 
@@ -54,4 +53,5 @@ The table below shows the available mathematical functions.
 | `sin(x)` | computes the sin of x | `sin(90)` | 0.8939966636005579 |
 | `sign(x)` | returns the sign of x as -1, 0 or 1 | `sign(-349)` | -1 |
 | `sqrt(x)` | returns the square root of the number | `sqrt(9)` | 3 |
+| `xor(x)` | bitwise XOR | `xor(17, 5)` | 20 |
 | `tan(x)` | computes the tangent of x | `tan(90)` | -1.995200412208242 |
