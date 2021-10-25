@@ -294,8 +294,6 @@ third_party/sqllogictest
 .last_benchmarked_commit
 
 .sass-cache/
-Gemfile
-Gemfile.lock
 _site/
 
 .jekyll-cache/
