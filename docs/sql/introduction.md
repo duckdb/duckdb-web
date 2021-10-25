@@ -119,11 +119,11 @@ SELECT city, temp_lo, temp_hi, prcp, date FROM weather;
 The output should be:
 
 ```
-     city      | temp_lo | temp_hi | prcp |    date
----------------+----------+----------+---------------+------------
- San Francisco |      46  |      50  |      0.25     | 1994-11-27
- San Francisco |      43  |      57  |         0     | 1994-11-29
- Hayward       |      37  |      54  |               | 1994-11-29
+     city      | temp_lo | temp_hi  | prcp |    date
+---------------+---------+----------+------+------------
+ San Francisco |     46  |      50  | 0.25 | 1994-11-27
+ San Francisco |     43  |      57  | 0.0  | 1994-11-29
+ Hayward       |     37  |      54  |      | 1994-11-29
 (3 rows)
 ```
 
@@ -156,8 +156,8 @@ SELECT * FROM weather
 Result:
 ```
      city      | temp_lo | temp_hi | prcp |    date
----------------+----------+----------+---------------+------------
- San Francisco |      46  |      50  |       0.25    | 1994-11-27
+---------------+---------+---------+------+------------
+ San Francisco |     46  |      50 | 0.25 | 1994-11-27
 ```
 
 You can request that the results of a query be returned in sorted order:
@@ -170,7 +170,7 @@ SELECT * FROM weather
      city      | temp_lo | temp_hi | prcp |    date
 ---------------+---------+---------+------+------------
  Hayward       |      37 |      54 |      | 1994-11-29
- San Francisco |      43 |      57 |    0 | 1994-11-29
+ San Francisco |      43 |      57 | 0.0  | 1994-11-29
  San Francisco |      46 |      50 | 0.25 | 1994-11-27
  ```
 
