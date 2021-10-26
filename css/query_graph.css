@@ -26,8 +26,6 @@ body { background: #fff; }
 
 .tree-node {
 	padding: 2px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
 	border-radius: 3px;
 	background-color: #ffffff;
 	border: 1px solid #000;
