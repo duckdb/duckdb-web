@@ -32,5 +32,5 @@ The file name pattern should be like this: `2020-07-20-my-blog-post.md`.
 Include the excerpt_separator `<!--more-->` when you wish to end the post preview.
 
 ## Building
-The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, install the minima theme `gem install "jekyll-theme-minima"` and
-run `jekyll serve`.
+The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, install the minima theme `bundle` and
+run `bundle exec jekyll serve --livereload`.
