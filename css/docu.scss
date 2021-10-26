@@ -124,8 +124,8 @@ table {
     background-color: $duckDBlightgrey;
     width: calc(100vw - 380px);
     max-width: 1000px;
-    -webkit-font-variant-ligatures: none;
-            font-variant-ligatures: none;
+    font-variant-numeric: tabular-nums;
+    font-variant-ligatures: none;
 }
 th {
     padding: 7px;
