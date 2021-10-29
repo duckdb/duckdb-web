@@ -166,7 +166,7 @@ The following figure shows our current web filesystem in action. The sequence di
     <img src="/images/blog/webfs.svg"
         alt="Example Web Filesystem shown visually"
         title="Web Filesystem"
-        style="width: 90%; max-width:800px"
+        style="width:100%; max-width:800px"
         />
 </p>
 
@@ -188,8 +188,7 @@ The most promising feature for DuckDB-Wasm is [exception handling](https://githu
     <img src="/images/blog/wasm-eh.png"
         alt="Exception handling shown visually"
         title="WebAssembly Exceptions"
-        width=500
-        style="border-radius:4px;border:1px solid rgb(200,200,200);"
+        style="width:100%; max-width:600px;border-radius:4px;border:1px solid rgb(200,200,200);"
         />
 </p>
 
