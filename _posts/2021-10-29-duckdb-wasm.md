@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 
 _TLDR: DuckDB-Wasm is an in-process analytical SQL database for the browser. 
 It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js.
-You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org).
+You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org)._
 
 <!--more-->
 
@@ -29,7 +29,9 @@ In the past, such analysis tasks have therefore been pushed to servers that tie 
 
 The processing capabilities of browsers were boosted tremendously 4 years ago with the introduction of WebAssembly:
 
-> WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications. [...] The Wasm stack machine is designed to be encoded in a size- and load-time efficient binary format. WebAssembly aims to execute at native speed by taking advantage of common hardware capabilities available on a wide range of platforms.
+> WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
+> [...] 
+> The Wasm stack machine is designed to be encoded in a size- and load-time efficient binary format. WebAssembly aims to execute at native speed by taking advantage of common hardware capabilities available on a wide range of platforms.
 > (ref: https://webassembly.org/)
 
 Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us [game engines](https://blog.unity.com/technology/webassembly-is-here), [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
@@ -163,7 +165,7 @@ The following figure shows our current web filesystem in action. The sequence di
     <img src="/images/blog/webfs.svg"
         alt="Example Web Filesystem shown visually"
         title="Web Filesystem"
-        style="width: 80%; max-width:800px; padding:8px; border-radius:4px; border:1px solid rgb(200,200,200)"
+        style="width: 90%; max-width:800px"
         />
 </p>
 
