@@ -22,7 +22,7 @@ You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org).
 
 ## Efficient Analytics in the Browser
 
-Web browsers have evolved to a universal computation platform that even runs in your car. The rise of the web browser is accompanied by increasing requirements for the browser programming language JavaScript.
+The web browser has evolved to a universal computation platform that even runs in your car. Its rise has been accompanied by increasing requirements for the browser programming language JavaScript.
 JavaScript was, first and foremost, designed to be very flexible which comes at the cost of a reduced processing efficiency compared to native languages like C++.
 This becomes particularly apparent when considering the execution times of more complex data analysis tasks that often fall behind the native execution by orders of magnitude.
 In the past, such analysis tasks have therefore been pushed to servers that tie any client-side processing to additional round-trips over the internet and introduce their own set of scalability problems.
