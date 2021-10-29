@@ -37,7 +37,7 @@ The processing capabilities of browsers were boosted tremendously 4 years ago wi
 
 Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us [game engines](https://blog.unity.com/technology/webassembly-is-here), [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
 
-As an in-process analytical database, DuckDB has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem and HTTP servers driven by plain SQL input.
+As an in-process analytical database, DuckDB has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
 In this blog post, we want to introduce the library and present challenges on our journey towards a browser-native OLAP database.
 
 *DuckDB-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/duckdb/duckdb-wasm/discussions).*
@@ -237,13 +237,13 @@ const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 
-*You can also test the features and selected bundle in your browser using the web shell command `.config` .*
+*You can also test the features and selected bundle in your browser using the web shell command `.features` .*
 
 ## Multithreading
 
 In 2018, the Spectre and Meltdown vulnerabilities sent crippling shockwaves through the internet. Today, we are facing the repercussions of these events, in particular in software that runs arbitrary user code - such as web browsers. Shortly after the publications, all major browser vendors restricted the use of `SharedArrayBuffers` to prevent dangerous timing attacks. `SharedArrayBuffers` are raw buffers that can be shared among web workers for global state and an alternative to the browser-specific message passing. These restrictions had detrimental effects on WebAssembly modules since  `SharedArrayBuffers` are neccessary for the implementation of POSIX threads in WebAssembly.
 
-Without `SharedArrayBuffers`, WebAssembly modules can run in a dedicated web worker to unblock the main event loop but won't be able to spawn additional workers for parallel computations within the same instance. By default, we therefore cannot unleash the parallel query execution of DuckDB in the web. However, browser vendors have recently started to reenable `SharedArrayBuffers for Websites that are [cross-origin-isolated](https://web.dev/coop-coep/). A website is cross-origin-isolated if it ships the main document with the following HTTP headers:
+Without `SharedArrayBuffers`, WebAssembly modules can run in a dedicated web worker to unblock the main event loop but won't be able to spawn additional workers for parallel computations within the same instance. By default, we therefore cannot unleash the parallel query execution of DuckDB in the web. However, browser vendors have recently started to reenable `SharedArrayBuffers` for websites that are [cross-origin-isolated](https://web.dev/coop-coep/). A website is cross-origin-isolated if it ships the main document with the following HTTP headers:
 
 ```
 Cross-Origin-Embedded-Policy: require-corp
