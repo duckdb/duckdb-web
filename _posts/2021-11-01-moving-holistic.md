@@ -1,0 +1,136 @@
+---
+
+layout: post
+title:  "Fast Moving Holistic Aggregates"
+author: Richard Wesley
+excerpt_separator: <!--more-->
+
+---
+
+_TLDR: DuckDB, a free and Open-Source analytical data management system, has a windowing API
+that can compute complex moving aggregates like inter-quartile ranges and median absolute deviation._
+
+In a [previous post](/2021/10/13/windowing.html),
+we described the DuckDB windowing architecture and mentioned the support for
+some advanced moving aggregates.
+In this post, we will compare the performance various possible moving implementations of these functions
+and explain how our faster implementations work.
+
+<!--more-->
+
+## What is an Aggregate Function?
+
+When people think of aggregate functions, they typically have something simple in mind such as `SUM` or `AVG`.
+But more generally, what an aggregate function does is _summarise_ a set of values into a single value.
+Such summaries can be arbitrarily complex, and involve any data type.
+For example, DuckDB provides aggregates for concatenating strings (`STRING_AGG`)
+and constructing lists (`LIST`).
+
+These sets of values can come from anywhere, but in SQL they come from either a `GROUP BY` clause
+or an `OVER` windowing specification.
+For some aggregates (like `STRING_AGG`) the order of the values can change the result.
+This is not a problem for windowing because `OVER` clauses can specify an ordering,
+but in a `GROUP BY` clause, the values are unordered,
+so some order sensitive aggregates can include a `WITHIN GROUP(ORDER BY <expr>)` to specify the order of the values.
+
+### Holistic Aggregates
+
+All of the basic SQL aggregate functions like `SUM` and `MAX` can be computed
+by reading values one at a time and throwing them away.
+But there are some functions that need to keep track of manu (or even all) of the values.
+These are called _holistic_ aggregates, and they require more care when implementing them.
+Here are some examples that DuckDB currently supports:
+
+| Function | Description|
+|:---|:---|
+| `mode(x)` | The most common value in a set |
+| `median(x)` | The middle value of a set |
+| `quantile_disc(x, <frac>)` | The exact value corresponding to a fractional position. |
+| `quantile_cont(x, <frac>)` | The interpolated value corresponding to a fractional position. |
+| `quantile_disc(x, [<frac>...])` | A list of the exact values corresponding to a list of fractional positions. |
+| `quantile_cont(x, [<frac>...])` | A list of the interpolated value corresponding to a list of fractional positions. |
+| `mad(x)` | The median of the absolute values of the differences of each value from the median. |
+
+There are a number of ways that we might implement these functions,
+and our goal is to determine which is the fastest.
+In what follows, we will describe several approaches and then at the end provide some benchmark results
+to justify our choices.
+
+## Grouping Aggregation
+
+In the previous post on windowing,
+we explained the component operations used to implement a generic aggregate function.
+For the listed holistic aggregates, we will now get more specific.
+
+### Mode
+
+The `mode` function returns the most common value.
+One common way to implement it is to accumulate all the values in the state,
+sort them and then scan for the longest run.
+The states can be combined by concatenation,
+which lets us compute it in parallel and build segment trees for windowing.
+This approach is very time-consuming because of the sort.
+It may also use more memory than necessary if there are heavy-hitters in the list,
+which is typically what `mode` is being used to find.
+
+Another way to implement `mode` is to use a hash table for the state that maps values to counts.
+If we also track the largest value and count seen so far,
+we can just return that value when we finalize the aggregate.
+With this approach can also implement the combine operation by merging two hash tables together.
+With a combine operation, we can now parallelise ordinary `GROUP BY` queries
+and build segment trees to compute `OVER` clauses.
+
+Unfortunately, as we will see later, this segment tree approach for windowing is quite slow!
+The overhead of combining the hash tables for the segment trees turns out to be about 5% slower
+than just building a new hash table for each row in the window.
+Instead, for a moving `mode` we could make a single hash table and update it every time the frame moves,
+removing the old values, adding the new values, and updating the value/count pair.
+At times the old mode value may lose its top ranking,
+but we can check for that and recompute it if it changes.
+This approach is much faster, and in our benchmark it come in between 15 and 55 times faster than the other two.
+
+### Quantile
+
+The `quantile` function variants all extract the value(s) at a given fraction (or fractions) of the way
+through the list.
+There are variations depending on whether the values are discrete or quantitative
+(that is, they have a distance and can be interpolated),
+or whether a the fraction is a single value or a list of values,
+but they can all be implemented in similar ways.
+
+Similarly to `mode`, a common way to implement `quantile` is to collect all the values,
+sort them, and then read out the values at the given fractions.
+Once again, states can be combined by concatenation,
+which lets us compute it in parallel and build segment trees for windowing.
+
+Sorting is `O(N log N)`, but happily for `quantile` we can use a related algorithm called `QuickSelect`,
+which can find a positional value in only `O(N)` time.
+This algorithm may be familiar as the `std::nth_element` function in the C++ standard library.
+
+With this approach, we get a faster implementation of single-fraction `quantile` without sorting.
+If we extend it to lists of fractions, we can leverage the fact that each call to `nth_element`
+partially orders the list, which improves performance.
+
+Once again, however, the segment tree approach ends up being about 5% slower
+than just starting from scratch for each value.
+To really improve the performance of moving quantiles,
+we note that the partial order probably does not change much between frames.
+If we maintain a list of indirect indicies into the window and call `nth_element`
+to reorder the partially ordered indicies instead of the values themselves.
+In the common case where the frame has the same size,
+we can even check to see whether the new value disrupts the partial ordering at all,
+and skip the reordering!
+With this approach, we can obtain a significant performance boost of 1.5-10 times.
+
+Maintaining the partial ordering can also be used to boost the performance of the
+median absolute deviation (or `mad`) function.
+Unfortunately, the second partial ordering can't use the single value trick
+because the function being used to order will have changed if the datat median changes,
+but the values are still probably not far off, which improves the performance of `nth_element`.
+
+## Measurements
+
+if you have read this far, you have been very patient,
+and we will now show you the numbers:
+
+<img src="/images/blog/holistic/performance.svg" alt="Holistic Aggregate Benchmarks" title="Figure 1: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
