@@ -57,7 +57,8 @@ The table below shows the available statistical aggregate functions.
 | `covar_pop(y,x)` | Returns the population covariance of input values. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
 | `entropy(x)` | Returns the log-2 entropy of count input-values. | - | - |
 | `kurtosis(x)` | Returns the excess kurtosis of all input values. | - | - |
-| `mad(x)` | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. | - | - |
+| `mad(x)` | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. | `MEDIAN(ABS(x-MEDIAN(x)))` | - |
+| `median(x)` | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitiative values are averaged and ordinal values return the lower value. | `QUANTILE_CONT(x, 0.5)` | - |
 | `mode(x)` | Returns the most frequent value for the values within x. NULL values are ignored. | - | - |
 | `quantile_cont(x,pos)` | Returns the intepolated quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding intepolated quantiles. | - | - |
 | `quantile_disc(x,pos)` | Returns the exact quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding exact quantiles. | - | `quantile` |
