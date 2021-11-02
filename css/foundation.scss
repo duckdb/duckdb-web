@@ -60,12 +60,14 @@ body.foundation{
 			display: flex;
 			column-gap: 20px;
 			color: #7D7D7D;
-			margin-top: 40px;
+			margin-top: 48px;
 			> div{
 				width: 33%;
 			}
 			.level{
 				border-radius: 2px;
+				border-top-left-radius: 0px;
+				border-top-right-radius: 0px;
 				border: 1px solid #dbdbdb;
 				box-sizing: border-box;
 				padding: 20px;
@@ -111,7 +113,18 @@ body.foundation{
 				}
 			}
 			.silver{
-				border-top: 8px solid #979797;
+				/*border-top: 8px solid #979797;*/
+				&::before{
+					display: block;
+					content: "";
+					border-top: 8px solid #979797;
+					border-top-left-radius: 2px;
+					border-top-right-radius: 2px;
+					width: calc(100% + 2px);
+					position: absolute;
+					top: -8px;
+					left: -1px;
+				}
 				.button{
 					background-color: #979797;
 					&:hover{
@@ -124,7 +137,18 @@ body.foundation{
 				}
 			}
 			.gold{
-				border-top: 8px solid #C09600;
+				/*border-top: 8px solid #C09600;*/
+				&::before{
+					display: block;
+					content: "";
+					border-top: 8px solid #C09600;
+					border-top-left-radius: 2px;
+					border-top-right-radius: 2px;
+					width: calc(100% + 2px);
+					position: absolute;
+					top: -8px;
+					left: -1px;
+				}
 				.button{
 					background-color: #C09600;
 					&:hover{
