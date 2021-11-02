@@ -354,4 +354,47 @@ $(document).ready(function(){
 		console.log(shortened)
 	})
 	*/
+	
+	// FOUNDATION PAGE SCRIPTS
+	if($('body').hasClass('foundation') && $('section.form').length){
+		var hash = window.location.hash.replace('#', '');
+		console.log(hash)
+		if( hash.length ){
+			$('div.select .select-text').val(hash);
+		}
+		
+		// AJAX FORM SEND
+		$("#ajaxForm").submit(function(e){
+			e.preventDefault();
+			var action = $(this).attr("action");
+			
+			$('#ajaxForm button[type="submit"]').hide();
+			$('#ajaxForm .lds-ellipsis').fadeIn();
+			
+			$.ajax({
+				type: "POST",
+				url: action,
+				crossDomain: true,
+				data: new FormData(this),
+				dataType: "json",
+				processData: false,
+				contentType: false,
+				headers: {
+					"Accept": "application/json"
+				}
+			}).done(function() {
+				$('#ajaxForm').addClass('inactive');
+				$('#ajaxForm .lds-ellipsis').hide();
+				$('.success').addClass('is-active');
+			}).fail(function() {
+				alert('An error occurred! Please try again later.');
+				$('#ajaxForm button[type="submit"]').show();
+				$('#ajaxForm .lds-ellipsis').hide();
+			});
+			
+		});
+	
+	}
+	
+	
 });
