@@ -8,13 +8,14 @@ excerpt_separator: <!--more-->
 ---
 
 _TLDR: DuckDB, a free and Open-Source analytical data management system, has a windowing API
-that can compute complex moving aggregates like inter-quartile ranges and median absolute deviation._
+that can compute complex moving aggregates like inter-quartile ranges and median absolute deviation
+much faster than the default approaches._
 
 In a [previous post](/2021/10/13/windowing.html),
 we described the DuckDB windowing architecture and mentioned the support for
 some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
-and explain how our faster implementations work.
+and explain how DuckDB's faster implementations work.
 
 <!--more-->
 
@@ -37,9 +38,10 @@ so some order sensitive aggregates can include a `WITHIN GROUP(ORDER BY <expr>)`
 
 All of the basic SQL aggregate functions like `SUM` and `MAX` can be computed
 by reading values one at a time and throwing them away.
-But there are some functions that need to keep track of manu (or even all) of the values.
-These are called _holistic_ aggregates, and they require more care when implementing them.
-Here are some examples that DuckDB currently supports:
+But there are some functions that potentially need to keep track of all the values.
+These are called _holistic_ aggregates, and they require more care when implementing.
+
+Here are some examples of holistic aggregates that DuckDB currently supports:
 
 | Function | Description|
 |:---|:---|
@@ -52,62 +54,65 @@ Here are some examples that DuckDB currently supports:
 | `mad(x)` | The median of the absolute values of the differences of each value from the median. |
 
 There are a number of ways that we might implement these functions,
-and our goal is to determine which is the fastest.
-In what follows, we will describe several approaches and then at the end provide some benchmark results
-to justify our choices.
+and in what follows we will describe several approaches.
+At the end we will benchmark them to determine which is the fastest.
 
 ## Grouping Aggregation
 
-In the previous post on windowing,
-we explained the component operations used to implement a generic aggregate function.
-For the listed holistic aggregates, we will now get more specific.
+In the [previous post on windowing](/2021/10/13/windowing.html),
+we explained the component operations used to implement a generic aggregate function (initialize, update, finalize, combine and window).
+In this post, we will dig into how they are implemented for these complex aggregates.
 
 ### Mode
 
-The `mode` function returns the most common value.
+The `mode` function returns the most common value in a set.
 One common way to implement it is to accumulate all the values in the state,
 sort them and then scan for the longest run.
+(This is why the standard refer to it as an "ordered-set aggregate".)
 The states can be combined by concatenation,
-which lets us compute it in parallel and build segment trees for windowing.
-This approach is very time-consuming because of the sort.
-It may also use more memory than necessary if there are heavy-hitters in the list,
-which is typically what `mode` is being used to find.
+which lets us compute the mode in parallel and build segment trees for windowing.
+This approach is very time-consuming because of the sorting -
+and may also use more memory than necessary if there are heavy-hitters in the list
+(which is typically what `mode` is being used to find.)
 
 Another way to implement `mode` is to use a hash table for the state that maps values to counts.
 If we also track the largest value and count seen so far,
 we can just return that value when we finalize the aggregate.
-With this approach can also implement the combine operation by merging two hash tables together.
-With a combine operation, we can now parallelise ordinary `GROUP BY` queries
+This approach can also implement the combine operation by merging two hash tables together.
+With a combine operation, we can parallelise ordinary `GROUP BY` queries
 and build segment trees to compute `OVER` clauses.
 
-Unfortunately, as we will see later, this segment tree approach for windowing is quite slow!
+Unfortunately, as the benchmarks below demonstrate, this segment tree approach for windowing is quite slow!
 The overhead of combining the hash tables for the segment trees turns out to be about 5% slower
 than just building a new hash table for each row in the window.
-Instead, for a moving `mode` we could make a single hash table and update it every time the frame moves,
+But for a moving `mode` computation,
+we could instead make a single hash table and update it every time the frame moves,
 removing the old values, adding the new values, and updating the value/count pair.
 At times the old mode value may lose its top ranking,
 but we can check for that and recompute it if it changes.
-This approach is much faster, and in our benchmark it come in between 15 and 55 times faster than the other two.
+This approach is much faster,
+and in our benchmark it come in between 15 and 55 times faster than the other two.
 
 ### Quantile
 
 The `quantile` function variants all extract the value(s) at a given fraction (or fractions) of the way
 through the list.
-There are variations depending on whether the values are discrete or quantitative
-(that is, they have a distance and can be interpolated),
-or whether a the fraction is a single value or a list of values,
+There are variations depending on whether the values are ordinal (i.e., they can be ordered)
+or quantitative (i.e., they have a distance and the values can be interpolated),
+or on whether the fraction is a single value or a list of values,
 but they can all be implemented in similar ways.
 
-Similarly to `mode`, a common way to implement `quantile` is to collect all the values,
+Like `mode`, a common way to implement `quantile` is to collect all the values,
 sort them, and then read out the values at the given fractions.
 Once again, states can be combined by concatenation,
 which lets us compute it in parallel and build segment trees for windowing.
 
 Sorting is `O(N log N)`, but happily for `quantile` we can use a related algorithm called `QuickSelect`,
-which can find a positional value in only `O(N)` time.
-This algorithm may be familiar as the `std::nth_element` function in the C++ standard library.
+which can find a positional value in only `O(N)` time by partially sorting the array.
+You may have run into this algorithm if you have ever used the
+`std::nth_element` algorithm in the C++ standard library.
 
-With this approach, we get a faster implementation of single-fraction `quantile` without sorting.
+With this algorithm, we can create a faster implementation of single-fraction `quantile` without sorting.
 If we extend it to lists of fractions, we can leverage the fact that each call to `nth_element`
 partially orders the list, which improves performance.
 
@@ -125,12 +130,66 @@ With this approach, we can obtain a significant performance boost of 1.5-10 time
 Maintaining the partial ordering can also be used to boost the performance of the
 median absolute deviation (or `mad`) function.
 Unfortunately, the second partial ordering can't use the single value trick
-because the function being used to order will have changed if the datat median changes,
-but the values are still probably not far off, which improves the performance of `nth_element`.
+because the "function" being used to partially order the values will have changed if the data median changes.
+Still, the values are still probably not far off,
+which again improves the performance of `nth_element`.
 
-## Measurements
+## Micro-Benchmarks
 
-if you have read this far, you have been very patient,
-and we will now show you the numbers:
+To benchmark the various implementations, we run moving window queries against a 10M table of integers:
 
-<img src="/images/blog/holistic/performance.svg" alt="Holistic Aggregate Benchmarks" title="Figure 1: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
+```sql
+create table rank100 as
+    select b % 100 as a, b from range(10000000) tbl(b)
+```
+
+The results are then re-aggregated down to one row to remove the impact of streaming the results.
+The frames are 100 elements wide, and the test is repeated with a fixed trailing frame:
+
+```sql
+select quantile_cont(a, [0.25, 0.5, 0.75]) over (
+    order by b asc
+    rows between 100 preceding and current row) as iqr
+from rank100
+```
+
+and a variable frame that moves pseudo-randomly around the current value:
+
+```sql
+select quantile_cont(a, [0.25, 0.5, 0.75]) over (
+    order by b asc
+    rows between mod(b * 47, 521) preceding and 100 - mod(b * 47, 521) following) as iqr
+from rank100
+```
+
+The two examples here are the inter-quartile range queries;
+the other queries use the single argument aggregates `median`, `mad` and `mode`.
+
+As a final step, we ran the same query with `count(*)`,
+which uses all the same code pathways as the other benchmarks, but is trivial to compute.
+That overhead was subtracted from the run times to give the algorithm timings:
+
+<img src="/images/blog/holistic/benchmarks.svg" alt="Holistic Aggregate Benchmarks" title="Figure 1: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
+
+As can be seen, there is a substantial benefit from implementing the window operation
+for all of these aggregates, often on the order of a factor of ten.
+
+An unexpected finding was that the segment tree approach for these complex states
+is always slower (by about 5%) than simply creating the state for each output row.
+This suggests that when writing combinable complex aggregates,
+it is well worth benchmarking the aggregate
+and then considering providing a window operation instead of deferring to the segment tree machinery.
+
+## Conclusion
+
+DuckDB's aggregate API enables aggregate functions to define a windowing operation
+that can significantly improve the performance of moving window computations for complex aggregates.
+This functionality has been used to significantly speed up windowing for several statistical aggregates,
+such as mode, inter-quartile ranges and median absolute deviation.
+
+DuckDB is a free and open-source database management system (MIT licensed).
+It aims to be the SQLite for Analytics,
+and provides a fast and efficient database system with zero external dependencies.
+It is available not just for Python, but also for C/C++, R, Java, and more.
+
+[Discuss this post on Hacker News](https://news.ycombinator.com/newest)
