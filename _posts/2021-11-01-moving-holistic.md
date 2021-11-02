@@ -26,13 +26,7 @@ But more generally, what an aggregate function does is _summarise_ a set of valu
 Such summaries can be arbitrarily complex, and involve any data type.
 For example, DuckDB provides aggregates for concatenating strings (`STRING_AGG`)
 and constructing lists (`LIST`).
-
-These sets of values can come from anywhere, but in SQL they come from either a `GROUP BY` clause
-or an `OVER` windowing specification.
-For some aggregates (like `STRING_AGG`) the order of the values can change the result.
-This is not a problem for windowing because `OVER` clauses can specify an ordering,
-but in a `GROUP BY` clause, the values are unordered,
-so some order sensitive aggregates can include a `WITHIN GROUP(ORDER BY <expr>)` to specify the order of the values.
+In SQL, aggregated sets come from either a `GROUP BY` clause or an `OVER` windowing specification.
 
 ### Holistic Aggregates
 
@@ -41,7 +35,22 @@ by reading values one at a time and throwing them away.
 But there are some functions that potentially need to keep track of all the values.
 These are called _holistic_ aggregates, and they require more care when implementing.
 
-Here are some examples of holistic aggregates that DuckDB currently supports:
+For some aggregates (like `STRING_AGG`) the order of the values can change the result.
+This is not a problem for windowing because `OVER` clauses can specify an ordering,
+but in a `GROUP BY` clause, the values are unordered.
+To handle this, order sensitive aggregates can include a `WITHIN GROUP(ORDER BY <expr>)` clause
+to specify the order of the values.
+Because the values must all be collected and sorted,
+aggregates that use the `WITHIN GROUP` clause are holistic.
+
+### Statistical Holistic Aggregates
+
+Because sorting the arguments to a windowed aggregate can be specified with the `OVER` clause,
+you might wonder if there are any other kinds of holistic aggregates that do not use sorting,
+or which use an ordering different from the ordering in the `OVER` clause.
+It turns out that there are a number of important statistical functions that
+turn into holistic aggregates in SQL.
+In particular, here are the statistical holistic aggregates that DuckDB currently supports:
 
 | Function | Description|
 |:---|:---|
@@ -53,19 +62,25 @@ Here are some examples of holistic aggregates that DuckDB currently supports:
 | `quantile_cont(x, [<frac>...])` | A list of the interpolated value corresponding to a list of fractional positions. |
 | `mad(x)` | The median of the absolute values of the differences of each value from the median. |
 
-There are a number of ways that we might implement these functions,
+Where things get really interesting is when we try to compute moving versions of these aggregates.
+For example, computing a moving `AVG` is fairly straightforward:
+You can subtract values that have left the frame and add in the new ones,
+or use the segment tree approach from the [previous post on windowing](/2021/10/13/windowing.html).
+Computing a moving median is not as simple.
+
+There are a number of ways that we might implement moving versions of these aggregates,
 and in what follows we will describe several approaches.
 At the end we will benchmark them to determine which is the fastest.
 
-## Grouping Aggregation
+## Moving Holistic Aggregation
 
 In the [previous post on windowing](/2021/10/13/windowing.html),
 we explained the component operations used to implement a generic aggregate function (initialize, update, finalize, combine and window).
-In this post, we will dig into how they are implemented for these complex aggregates.
+In the rest of this post, we will dig into how they can be implemented for these complex aggregates.
 
 ### Mode
 
-The `mode` function returns the most common value in a set.
+The `mode` aggregate returns the most common value in a set.
 One common way to implement it is to accumulate all the values in the state,
 sort them and then scan for the longest run.
 (This is why the standard refer to it as an "ordered-set aggregate".)
@@ -90,12 +105,19 @@ we could instead make a single hash table and update it every time the frame mov
 removing the old values, adding the new values, and updating the value/count pair.
 At times the old mode value may lose its top ranking,
 but we can check for that and recompute it if it changes.
+
+In this example, the 4-element frame (green) moves one space to the right for each value:
+
+<img src="/images/blog/holistic/mode.svg" alt="Mode Example" title="Figure 1: Mode Example" style="max-width:90%;width:90%;height:auto"/>
+
+When the mode is unchanged (blue) it can be used directly.
+When the mode becomes ambiguous (orange), we must recan the table.
 This approach is much faster,
-and in our benchmark it come in between 15 and 55 times faster than the other two.
+and in the benchmarks it comes in between 15 and 55 times faster than the other two.
 
 ### Quantile
 
-The `quantile` function variants all extract the value(s) at a given fraction (or fractions) of the way
+The `quantile` aggregate variants all extract the value(s) at a given fraction (or fractions) of the way
 through the list.
 There are variations depending on whether the values are ordinal (i.e., they can be ordered)
 or quantitative (i.e., they have a distance and the values can be interpolated),
@@ -111,6 +133,19 @@ Sorting is `O(N log N)`, but happily for `quantile` we can use a related algorit
 which can find a positional value in only `O(N)` time by partially sorting the array.
 You may have run into this algorithm if you have ever used the
 `std::nth_element` algorithm in the C++ standard library.
+We can even get tricker, and notice when a new value does not change the partial ordering.
+In that case, we can just reuse the previous value.
+
+In this example, we have a 3-element frame (green) that moves one space to the right for each value:
+
+<img src="/images/blog/holistic/median.svg" alt="Median Example" title="Figure 2: Median Example" style="max-width:90%;width:90%;height:auto"/>
+
+The median values in orange must be computed from scratch.
+Notice that in the example, this only happens at the start of the window.
+The median values in white are computed using the existing partial ordering.
+In the example, this happens when the frame changes size.
+Finally, the median values in blue do not require reordering
+because the new value is the same as the old value.
 
 With this algorithm, we can create a faster implementation of single-fraction `quantile` without sorting.
 If we extend it to lists of fractions, we can leverage the fact that each call to `nth_element`
@@ -127,8 +162,10 @@ we can even check to see whether the new value disrupts the partial ordering at 
 and skip the reordering!
 With this approach, we can obtain a significant performance boost of 1.5-10 times.
 
+### Median Absolute Deviation (MAD)
+
 Maintaining the partial ordering can also be used to boost the performance of the
-median absolute deviation (or `mad`) function.
+median absolute deviation (or `mad`) aggregate.
 Unfortunately, the second partial ordering can't use the single value trick
 because the "function" being used to partially order the values will have changed if the data median changes.
 Still, the values are still probably not far off,
@@ -169,7 +206,7 @@ As a final step, we ran the same query with `count(*)`,
 which uses all the same code pathways as the other benchmarks, but is trivial to compute.
 That overhead was subtracted from the run times to give the algorithm timings:
 
-<img src="/images/blog/holistic/benchmarks.svg" alt="Holistic Aggregate Benchmarks" title="Figure 1: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/holistic/benchmarks.svg" alt="Holistic Aggregate Benchmarks" title="Figure 2: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
 
 As can be seen, there is a substantial benefit from implementing the window operation
 for all of these aggregates, often on the order of a factor of ten.
