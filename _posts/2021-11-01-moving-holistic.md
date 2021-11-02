@@ -9,13 +9,13 @@ excerpt_separator: <!--more-->
 
 _TLDR: DuckDB, a free and Open-Source analytical data management system, has a windowing API
 that can compute complex moving aggregates like inter-quartile ranges and median absolute deviation
-much faster than the default approaches._
+much faster than the conventional approaches._
 
 In a [previous post](/2021/10/13/windowing.html),
 we described the DuckDB windowing architecture and mentioned the support for
 some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
-and explain how DuckDB's faster implementations work.
+and explain how DuckDB's performant implementations work.
 
 <!--more-->
 
@@ -47,7 +47,7 @@ aggregates that use the `WITHIN GROUP` clause are holistic.
 
 Because sorting the arguments to a windowed aggregate can be specified with the `OVER` clause,
 you might wonder if there are any other kinds of holistic aggregates that do not use sorting,
-or which use an ordering different from the ordering in the `OVER` clause.
+or which use an ordering different from the one in the `OVER` clause.
 It turns out that there are a number of important statistical functions that
 turn into holistic aggregates in SQL.
 In particular, here are the statistical holistic aggregates that DuckDB currently supports:
@@ -66,9 +66,15 @@ Where things get really interesting is when we try to compute moving versions of
 For example, computing a moving `AVG` is fairly straightforward:
 You can subtract values that have left the frame and add in the new ones,
 or use the segment tree approach from the [previous post on windowing](/2021/10/13/windowing.html).
-Computing a moving median is not as simple.
 
-There are a number of ways that we might implement moving versions of these aggregates,
+Computing a moving median is not as easy.
+Each frame has a different set of values to aggregate.
+Moreover, the median does not have to be based on the order of the data.
+For example, to compute a moving median of some measurement over time,
+the ordering used for the median is not the same as the ordering of the data.
+The other aggregates have the same problem.
+
+There are a number of ways that we can implement moving versions of these aggregates,
 and in what follows we will describe several approaches.
 At the end we will benchmark them to determine which is the fastest.
 
@@ -83,16 +89,17 @@ In the rest of this post, we will dig into how they can be implemented for these
 The `mode` aggregate returns the most common value in a set.
 One common way to implement it is to accumulate all the values in the state,
 sort them and then scan for the longest run.
-(This is why the standard refer to it as an "ordered-set aggregate".)
-The states can be combined by concatenation,
+(This is why the SQL standard refers to it as an "ordered-set aggregate".)
+These states can be combined by concatenation,
 which lets us compute the mode in parallel and build segment trees for windowing.
-This approach is very time-consuming because of the sorting -
-and may also use more memory than necessary if there are heavy-hitters in the list
+This approach is very time-consuming because sorting is `O(N log N)`.
+It may also use more memory than necessary if there are heavy-hitters in the list
 (which is typically what `mode` is being used to find.)
 
-Another way to implement `mode` is to use a hash table for the state that maps values to counts.
-If we also track the largest value and count seen so far,
-we can just return that value when we finalize the aggregate.
+Another way to implement `mode` is to use a hash map for the state that maps values to counts.
+Hash tables are typically `O(N)` for accumulation, which is an improvement on sorting.
+If we also track the largest count seen so far,
+we can just return the corresponding value when we finalize the aggregate.
 This approach can also implement the combine operation by merging two hash tables together.
 With a combine operation, we can parallelise ordinary `GROUP BY` queries
 and build segment trees to compute `OVER` clauses.
@@ -118,14 +125,15 @@ and in the benchmarks it comes in between 15 and 55 times faster than the other 
 ### Quantile
 
 The `quantile` aggregate variants all extract the value(s) at a given fraction (or fractions) of the way
-through the list.
-There are variations depending on whether the values are ordinal (i.e., they can be ordered)
-or quantitative (i.e., they have a distance and the values can be interpolated),
-or on whether the fraction is a single value or a list of values,
+through the ordered list of values in the set.
+There are variations depending on whether the values are
+quantitative (i.e., they have a distance and the values can be interpolated)
+or merely ordinal (i.e., they can be ordered, but ties have to be broken.)
+Other variations depend on whether the fraction is a single value or a list of values,
 but they can all be implemented in similar ways.
 
 Like `mode`, a common way to implement `quantile` is to collect all the values,
-sort them, and then read out the values at the given fractions.
+sort them, and then read out the values at the requested positions.
 Once again, states can be combined by concatenation,
 which lets us compute it in parallel and build segment trees for windowing.
 
@@ -133,8 +141,17 @@ Sorting is `O(N log N)`, but happily for `quantile` we can use a related algorit
 which can find a positional value in only `O(N)` time by partially sorting the array.
 You may have run into this algorithm if you have ever used the
 `std::nth_element` algorithm in the C++ standard library.
-We can even get tricker, and notice when a new value does not change the partial ordering.
-In that case, we can just reuse the previous value.
+Once again, however, the segment tree approach ends up being about 5% slower
+than just starting from scratch for each value.
+
+To really improve the performance of moving quantiles,
+we note that the partial order probably does not change much between frames.
+If we maintain a list of indirect indicies into the window and call `nth_element`
+to reorder the partially ordered indicies instead of the values themselves.
+In the common case where the frame has the same size,
+we can even check to see whether the new value disrupts the partial ordering at all,
+and skip the reordering!
+With this approach, we can obtain a significant performance boost of 1.5-10 times.
 
 In this example, we have a 3-element frame (green) that moves one space to the right for each value:
 
@@ -146,21 +163,20 @@ The median values in white are computed using the existing partial ordering.
 In the example, this happens when the frame changes size.
 Finally, the median values in blue do not require reordering
 because the new value is the same as the old value.
-
 With this algorithm, we can create a faster implementation of single-fraction `quantile` without sorting.
-If we extend it to lists of fractions, we can leverage the fact that each call to `nth_element`
-partially orders the list, which improves performance.
 
-Once again, however, the segment tree approach ends up being about 5% slower
-than just starting from scratch for each value.
-To really improve the performance of moving quantiles,
-we note that the partial order probably does not change much between frames.
-If we maintain a list of indirect indicies into the window and call `nth_element`
-to reorder the partially ordered indicies instead of the values themselves.
-In the common case where the frame has the same size,
-we can even check to see whether the new value disrupts the partial ordering at all,
-and skip the reordering!
-With this approach, we can obtain a significant performance boost of 1.5-10 times.
+### Inter-Quartile Ranges (IQR)
+
+We can extend this algorithm to lists of fractions by leveraging the fact that each call to `nth_element`
+partially orders the values, which further improves performance.
+The "reuse" trick can be generalised to distinguish between fractions that are undisturbed
+and ones that need to be recomputed.
+
+A common application of multiple fractions is computing inter-quartile ranges
+by using the fraction list `[0.25, 0.5, 0.75]`.
+This is the fraction list we use for the multiple fraction benchmarks.
+Combined with moving `MIN` and `MAX`,
+this moving aggregate can be used to generate the data for aa moving box-and-whisker plot.
 
 ### Median Absolute Deviation (MAD)
 
@@ -202,11 +218,11 @@ from rank100
 The two examples here are the inter-quartile range queries;
 the other queries use the single argument aggregates `median`, `mad` and `mode`.
 
-As a final step, we ran the same query with `count(*)`,
-which uses all the same code pathways as the other benchmarks, but is trivial to compute.
+As a final step, we ran the same query with `COUNT(*)`,
+which uses the same overhead pathways as the other benchmarks, but is trivial to compute.
 That overhead was subtracted from the run times to give the algorithm timings:
 
-<img src="/images/blog/holistic/benchmarks.svg" alt="Holistic Aggregate Benchmarks" title="Figure 2: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
+<img src="/images/blog/holistic/benchmarks.svg" alt="Holistic Aggregate Benchmarks" title="Figure 3: Holistic Aggregate Benchmarks" style="max-width:90%;width:90%;height:auto"/>
 
 As can be seen, there is a substantial benefit from implementing the window operation
 for all of these aggregates, often on the order of a factor of ten.
