@@ -1,0 +1,54 @@
+---
+layout: default
+title: DuckDB Foundation
+subtitle: An In-Process Analytical Database
+description: The independent non-profit DuckDB Foundation safeguards the long-term maintenance and development of DuckDB. 
+body_class: foundation nowrap
+add_css: foundation.css
+---
+
+<section class="form">
+	<div class="wrap">
+		<h1>Support</h1>
+	</div>
+	<div class="wrap">
+		<div class="formwrap {{ product.name }}">
+		<form id="ajaxForm" action="https://getform.io/f/ee0d2abb-8c1c-4903-90b6-ae6627c612c3" method="POST">
+			<div class="group halfsize">
+				<input type="text" name="firstname" required="required" placeholder=" " /><span class="highlight"></span><span class="bar"></span>
+				<label>First Name*</label>
+			</div>
+			<div class="group halfsize">
+				<input type="text" name="lastname" required="required" placeholder=" " /><span class="highlight"></span><span class="bar"></span>
+				<label>Last Name*</label>
+			</div>
+			<div class="group">
+				<input type="text" name="email" required="required" /><span class="highlight"></span><span class="bar"></span>
+				<label>Email*</label>
+			</div>
+			<div class="group select">
+				<select class="select-text" name="membership" required>
+					<option value="" disabled selected></option>
+					<option value="silver">Silver – € 10.000 / Year</option>
+					<option value="gold">Gold – € 100.000 / Year</option>
+				</select>
+				<span class="select-highlight"></span>
+				<span class="select-bar"></span>
+				<label class="select-label">Membership</label>
+			</div>
+			<div class="group">
+				<textarea type="textarea" name="message" rows="5" placeholder=" "></textarea><span class="highlight"></span><span class="bar"></span>
+				<label>Your message to us</label>
+			</div>
+			<!-- checkbox handle --> 
+			<!--<input type="checkbox" name="subscribe" value="yes" checked>-->
+			<input type="hidden" name="subscribe" value="no">
+			<button type="submit">Send <span></span></button>
+			<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+			<div class="success">
+				<div>Thanks for contacting us! We will get in touch with you shortly.</div>
+			</div>
+		</form>
+		</div>
+	</div>
+</section>

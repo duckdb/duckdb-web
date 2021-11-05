@@ -233,11 +233,12 @@ header .headerline{
 				}
 				.hasSub + ul{
 					padding: 7px 15px;
+					padding-right: 20px;
 					margin: 0;
 					background-color: $duckDByellow;
 					position: absolute;
 					top: 63px;
-					left: -10px;
+					left: -3px;
 					-webkit-transition: all .3s ease;
 					-o-transition: all .3s ease;
 					transition: all .3s ease;
@@ -272,6 +273,11 @@ header .headerline{
 				}
 				.hasSub{
 					cursor: pointer;
+					a::after{
+						content: "\E010";
+						font-family: "DuckDB-Symbol";
+						margin-left: 3px;
+					}
 					&:hover{
 						color: $duckDByellow;
 						& ~ ul{
@@ -316,7 +322,7 @@ header .headerline{
 
 main{
 	h1{
-		font-size: 130%;
+		font-size: 24px;
 		font-weight: normal;
 		margin-bottom: 50px;
 	}
