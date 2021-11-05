@@ -55,7 +55,7 @@ so let's look at a very simple example and ignore the partitioning and ordering 
 ```sql
 SELECT points,
     SUM(points) OVER (
-        ROWS BETWEEN 1 PREDECING
+        ROWS BETWEEN 1 PRECEDING
                  AND 1 FOLLOWING) we
 FROM results
 ```
