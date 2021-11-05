@@ -29,7 +29,9 @@ The table below shows the available general aggregate functions.
 | `bool_and(arg)` |Returns TRUE if every input value is TRUE, otherwise FALSE. | `bool_and(A)` | - |
 | `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool(A)` | - |
 | `count(arg)` |Calculates the number of tuples tuples in arg. | `count(A)` | - |
+| `favg(arg)` |Calculates the average using a more accurate floating point summation (Kahan Sum). | `favg(A)` | - |
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |
+| `fsum(arg)` |Calculates the sum using a more accurate floating point summation (Kahan Sum). | `fsum(A)` | `sumKahan`, `kahan_sum` |
 | `histogram(arg)` |Returns a `LIST` of `STRUCT`s with the fields `bucket` and `count`. | `histogram(A)` | - |
 | `last(arg)` |Returns the last value of a column. | `last(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |

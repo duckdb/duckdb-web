@@ -130,7 +130,7 @@ Here is a simple `ROW` frame query, using an aggregate function:
 ```sql
 SELECT points,
     SUM(points) OVER (
-        ROWS BETWEEN 1 PREDECING
+        ROWS BETWEEN 1 PRECEDING
                  AND 1 FOLLOWING) we
 FROM results
 ```

@@ -1,0 +1,119 @@
+---
+layout: default
+title: DuckDB Foundation
+subtitle: An In-Process Analytical Database
+description: The independent non-profit DuckDB Foundation safeguards the long-term maintenance and development of DuckDB. 
+body_class: foundation
+add_css: foundation.css
+---
+
+<section class="foundation">
+	<h1>DuckDB Foundation</h1>
+	<div>
+		<div>
+			<p>
+				The independent non-profit DuckDB Foundation safeguards the long-term maintenance and development of DuckDB. The foundation holds much of the intellectual property (IP) of the project. A number of organizations have thankfully chosen to support the DuckDB project through membership in the DuckDB Foundation. The foundation collects membership dues from those supporters. Supporters form the foundation advisory board which proposes development roadmap items. Membership dues are spent to implement the collectively agreed-upon road map.
+			</p>
+			<p>
+				All collected funds go directly to DuckDB development.<br/>
+				The foundation is non-profit.
+			</p>
+		</div>
+		<div>
+			<img src="{{ '/images/foundation.svg' | relative_url }}">
+		</div>
+	</div>
+</section>
+
+<section class="membership">
+	<h2>Membership levels</h2>
+	<div class="levels">
+		<div class="level silver">
+			<div class="head">
+				<h3>Silver</h3>
+				<div class="price">€ 10.000 <span>EUR / Year</span></div>
+				<p>Have a say in where DuckDB is going</p>
+			</div>
+			<a href="support/#silver"><div class="button">Get in touch<span></span></div></a>
+			<ul>
+				<li>Access to internal roadmap discussion forum</li>
+				<li>Voting rights for foundation advisory board</li>
+				<li>Company logo on the DuckDB Website if so desired</li>
+				<li>Priority handling of bug reports on the issue tracker</li>
+				<li>DuckDB T-Shirts for your team</li>
+			</ul>
+		</div>
+		<div class="level gold">
+			<div class="head">
+				<h3>Gold</h3>
+				<div class="price">€ 100.000 <span>EUR / Year</span></div>
+				<p>Safeguard your investment</p>
+			</div>
+			<a href="support/#gold"><div class="button">Get in touch<span></span></div></a>
+			<ul>
+				<li>All of Silver level plus</li>
+				<li>Guaranteed seat in foundation advisory board</li>
+				<li>Private and direct communication with the DuckDB developers on technical questions</li>
+				<li>Expert advice on schema and query optimization and API usage</li>
+				<li>Integration of test cases with private queries or data into the DuckDB CI (We guarantee we will never break those tests)</li>
+				<li>Preferential conditions when contracting with DuckDB Labs</li>
+				<li>DuckDB Hoodies</li>
+			</ul>
+		</div>
+		<div class="info">
+			For any other inquiries contact the DuckDB foundation at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#102;&#111;&#117;&#110;&#100;&#97;&#116;&#105;&#111;&#110;&#64;&#100;&#117;&#99;&#107;&#100;&#98;&#46;&#111;&#114;&#103;">&#102;&#111;&#117;&#110;&#100;&#97;&#116;&#105;&#111;&#110;&#64;&#100;&#117;&#99;&#107;&#100;&#98;&#46;&#111;&#114;&#103;</a>
+		</div>
+	</div>
+	
+</section>
+
+
+<section class="supporters">
+	<h2>Supporters</h2>
+	<p>Current foundation supporters that have chosen to be publicly named.</p>
+	{% if site.data.supporters.gold %}
+	<div class="supporterboard gold">
+		Gold membership
+		<ul>
+			{% for supporter in site.data.supporters.gold %}
+			<li><img src="{{ '/images/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></li>
+			{% endfor %}
+		</ul> 
+	</div>
+	{% endif %}
+	{% if site.data.supporters.silver %}
+	<div class="supporterboard silver">
+		Silver membership
+		<ul>
+			{% for supporter in site.data.supporters.silver %}
+			<li><img src="{{ '/images/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+</section>
+
+
+<section class="about">
+	<h2>Foundation Board</h2>
+	<div class="teammembers">
+		<div class="member">
+			<div class="portrait" style="background-image: url({{ '/images/team/hannes_muehleisen.jpg' | relative_url }})"></div>
+			<div class="info">
+				<span class="name">Hannes Mühleisen</span>
+			</div>
+		</div>
+		<div class="member">
+			<div class="portrait" style="background-image: url({{ '/images/team/mark_raasveldt.jpg' | relative_url }})"></div>
+			<div class="info">
+				<span class="name">Mark Raasveldt</span>
+			</div>
+		</div>
+		<div class="member">
+			<div class="portrait" style="background-image: url({{ '/images/team/peter_boncz.jpg' | relative_url }})"></div>
+			<div class="info">
+				<span class="name">Peter Boncz</span>
+			</div>
+		</div>
+	</div>
+</section>
