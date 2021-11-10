@@ -52,6 +52,7 @@ Some examples:
 |:---|:---|
 | `regexp_matches(`*`string`*`, `*`pattern`*`)` | returns `TRUE` if  *string* contains the regexp *pattern*, `FALSE` otherwise |
 | `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | if *string* contains the regexp *pattern*, replaces the matching part with *replacement* |
+| `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | if *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `TRUE` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
@@ -72,4 +73,14 @@ regexp_replace('abc', '(b|c)', 'X')        -- aXc
 regexp_replace('abc', '(b|c)', '\1\1\1\1') -- abbbbc
 regexp_replace('abc', '(.*)c', '\1e')      -- abe
 regexp_replace('abc', '(a)(b)', '\2\1')    -- bac
+```
+
+The `regexp_extract` function is used to extract a part of a string that matches the regexp pattern. A specific capturing group within the pattern can be extracted using the *`idx`* parameter. If *`idx`* is not specified, it defaults to 0, extracting the first match with the whole pattern.
+
+```sql
+regexp_extract('abc', '.b.')     -- abc
+regexp_extract('abc', '.b.', 0)  -- abc
+regexp_extract('abc', '.b.', 1)  -- (empty)
+regexp_extract('abc', '([a-z])(b)', 1) -- a
+regexp_extract('abc', '([a-z])(b)', 2) -- b
 ```
