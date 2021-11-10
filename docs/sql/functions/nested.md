@@ -89,6 +89,21 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 └─────────────────────┘
 ```
 
+## `generate_subscripts`
+
+The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
+
+```
+SELECT generate_subscripts([4,5,6], 1) AS i;
+┌───┐
+│ i │
+├───┤
+│ 1 │
+│ 2 │
+│ 3 │
+└───┘
+```
+
 ## Related Functions
 
 There are also [aggregate functions](../aggregates) `list` and `histogram` that produces lists and lists of structs.
