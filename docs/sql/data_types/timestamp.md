@@ -18,4 +18,4 @@ SELECT TIMESTAMP '1992-09-20 14:30:00';
 ```
 
 ## Functions
-See [Timestamp Functions and Operators](/docs/sql/functions/timestamp)
+See [Timestamp Functions](/docs/sql/functions/timestamp).
