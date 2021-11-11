@@ -19,10 +19,16 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
 | `list_value(`*`any`*`, ...)` | Create a `LIST` containing the argument values. | `list_value(4, 5, 6)` | `[4, 5, 6]` |
 | *`list`*`[`*`index`*`]` | Alias for `list_extract`. | `l[2]` | `6` |
-| *`list`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s | `l[1:2]` | `[5, 6]` |
-| `array_length(`*`list`*`)` | Return the length of the list |  `array_length([1, 2, 3])` | `3` |
-| `len(`*`list`*`)` | Alias for `array_length` | `len([1, 2, 3])` | `3` |
+| *`list`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s. | `l[1:2]` | `[5, 6]` |
+| `array_length(`*`list`*`)` | Return the length of the list. |  `array_length([1, 2, 3])` | `3` |
+| `len(`*`list`*`)` | Alias for `array_length`. | `len([1, 2, 3])` | `3` |
 | `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
+| `list_concat(`*`list1`*`, `*`list2`*`)` | Concatenates two lists. | `list_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6]` |
+| `list_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `list_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `array_concat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `array_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `list_append(`*`list`*`, `*`element`*`)` | Appends `element` to `list`. | `list_append([2, 3], 4)` | `[2, 3, 4`] |
+| `list_prepend(`*`list`*`, `*`element`*`)` | Prepends `element` to `list`. | `list_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
 
 ## Struct Functions
 

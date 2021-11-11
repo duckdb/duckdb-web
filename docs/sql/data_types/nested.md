@@ -85,3 +85,6 @@ and a `NULL` nested value member will compare above a non-`NULL` nested value me
 ## Grouping and Joining
 
 Nested types can be used in `GROUP BY` clauses and as expressions for `JOIN`s.
+
+## Functions
+See [Nested Functions](/docs/sql/functions/nested).
