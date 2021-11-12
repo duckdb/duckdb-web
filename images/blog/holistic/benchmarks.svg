@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 528 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:10;">
+    <g id="Trim">
+        <g transform="matrix(0.674994,0,0,-0.674994,-6.48847,302.629)">
+            <rect x="0" y="0" width="800" height="470" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,1.61146,279.004)">
+            <rect x="0" y="43" width="774" height="337" style="fill:white;"/>
+        </g>
+        <text x="5.661px" y="46.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(51,51,51);">Aggreg<tspan x="34.111px " y="46.131px ">a</tspan>te	<tspan x="54.261px " y="46.131px ">I</tspan>mplem<tspan x="83.553px " y="46.131px ">e</tspan>ntati<tspan x="105.848px " y="46.131px ">o</tspan>n</text>
+        <g>
+            <clipPath id="_clip1">
+                <rect x="119.735" y="21.831" width="404.997" height="28.35"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <text x="306.414px" y="32.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(51,51,51);">Fra<tspan x="318.429px " y="32.631px ">m</tspan>in<tspan x="333.245px " y="32.631px ">g</tspan></text>
+                <text x="211.809px" y="46.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">ﬁ<tspan x="216.865px 221.668px 226.015px " y="46.131px 46.131px 46.131px ">xed</tspan></text>
+                <text x="407.61px" y="46.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">var<tspan x="419.733px " y="46.131px ">i</tspan>ab<tspan x="431.788px " y="46.131px ">l</tspan>e</text>
+                <g transform="matrix(0,-0.674994,0.674994,0,80.9233,61.9934)">
+                    <path d="M-38.5,58.5L38.5,58.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,282.747,263.817)">
+                    <path d="M260.5,58.5L337.5,58.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,484.57,465.64)">
+                    <path d="M559.5,58.5L636.5,58.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+            </g>
+        </g>
+        <g>
+            <clipPath id="_clip2">
+                <rect x="119.735" y="210.83" width="404.997" height="39.825"/>
+            </clipPath>
+            <g clip-path="url(#_clip2)">
+                <g transform="matrix(0,0.674994,-0.674994,0,122.098,213.192)">
+                    <path d="M-2.5,2.5L2.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,155.848,179.442)">
+                    <path d="M47.5,2.5L52.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,189.597,145.693)">
+                    <path d="M97.5,2.5L102.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,223.347,111.943)">
+                    <path d="M147.5,2.5L152.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,256.422,78.8682)">
+                    <path d="M196.5,2.5L201.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,290.172,45.1185)">
+                    <path d="M246.5,2.5L251.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,323.921,11.3688)">
+                    <path d="M296.5,2.5L301.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <text x="121.36px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">0</text>
+                <text x="151.734px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">5</text>
+                <text x="183.058px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">1<tspan x="187.91px " y="225.679px ">0</tspan></text>
+                <text x="216.808px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">1<tspan x="221.66px " y="225.679px ">5</tspan></text>
+                <text x="249.883px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">2<tspan x="254.734px " y="225.679px ">0</tspan></text>
+                <text x="283.633px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">2<tspan x="288.484px " y="225.679px ">5</tspan></text>
+                <text x="311.307px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">3<tspan x="316.159px " y="225.679px ">0</tspan></text>
+                <text x="194.006px" y="242.554px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(51,51,51);">C<tspan x="199.366px 204.097px 211.414px 216.268px 221.05px 223.835px 228.103px 230.421px 235.299px 237.395px 244.713px " y="242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px ">ompute Time</tspan></text>
+                <text x="323.183px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">0</text>
+                <text x="353.558px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">5</text>
+                <text x="384.882px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">1<tspan x="389.733px " y="225.679px ">0</tspan></text>
+                <text x="418.631px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">1<tspan x="423.483px " y="225.679px ">5</tspan></text>
+                <text x="451.706px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">2<tspan x="456.558px " y="225.679px ">0</tspan></text>
+                <text x="485.456px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">2<tspan x="490.307px " y="225.679px ">5</tspan></text>
+                <text x="513.131px" y="225.679px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">3<tspan x="517.982px " y="225.679px ">0</tspan></text>
+                <text x="395.829px" y="242.554px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(51,51,51);">C<tspan x="401.189px 405.92px 413.237px 418.091px 422.873px 425.658px 429.926px 432.245px 437.122px 439.219px 446.536px " y="242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px 242.554px ">ompute Time</tspan></text>
+                <g transform="matrix(0,0.674994,-0.674994,0,323.921,213.192)">
+                    <path d="M-2.5,2.5L2.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,357.671,179.442)">
+                    <path d="M47.5,2.5L52.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,391.421,145.693)">
+                    <path d="M97.5,2.5L102.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,425.17,111.943)">
+                    <path d="M147.5,2.5L152.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,458.245,78.8682)">
+                    <path d="M196.5,2.5L201.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,491.995,45.1185)">
+                    <path d="M246.5,2.5L251.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,525.745,11.3688)">
+                    <path d="M296.5,2.5L301.5,2.5" style="fill:none;fill-rule:nonzero;stroke:rgb(245,245,245);stroke-width:1px;stroke-linecap:butt;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,80.9233,223.992)">
+                    <path d="M-38.5,58.5L38.5,58.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,282.747,425.815)">
+                    <path d="M260.5,58.5L337.5,58.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,484.57,627.639)">
+                    <path d="M559.5,58.5L636.5,58.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+            </g>
+        </g>
+        <text x="5.661px" y="59.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Me<tspan x="17.257px 22.408px 24.802px " y="59.631px 59.631px 59.631px ">dia</tspan>n</text>
+        <g>
+            <text x="54.261px" y="59.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Seg<tspan x="68.08px " y="59.631px ">m</tspan>en<tspan x="85.074px " y="59.631px ">t</tspan></text>
+            <text x="90.036px" y="59.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Tre<tspan x="102.877px " y="59.631px ">e</tspan></text>
+            <text x="54.261px" y="73.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Na<tspan x="64.887px 67.313px 71.589px " y="73.131px 73.131px 73.131px ">ïve</tspan></text>
+            <text x="54.261px" y="86.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">W<tspan x="61.322px 63.796px 68.955px 74.185px 79.292px " y="86.631px 86.631px 86.631px 86.631px 86.631px ">indow</tspan></text>
+            <text x="87.378px" y="86.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">A<tspan x="93.098px 97.708px " y="86.631px 86.631px ">PI</tspan></text>
+        </g>
+        <text x="5.661px" y="100.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">IQ<tspan x="14.173px " y="100.131px ">R</tspan></text>
+        <g>
+            <text x="54.261px" y="100.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Seg<tspan x="68.08px " y="100.131px ">m</tspan>en<tspan x="85.074px " y="100.131px ">t</tspan></text>
+            <text x="90.036px" y="100.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Tre<tspan x="102.877px " y="100.131px ">e</tspan></text>
+            <text x="54.261px" y="113.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Na<tspan x="64.887px 67.313px 71.589px " y="113.63px 113.63px 113.63px ">ïve</tspan></text>
+            <text x="54.261px" y="127.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">W<tspan x="61.322px 63.796px 68.955px 74.185px 79.292px " y="127.13px 127.13px 127.13px 127.13px 127.13px ">indow</tspan></text>
+            <text x="87.378px" y="127.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">A<tspan x="93.098px 97.708px " y="127.13px 127.13px ">PI</tspan></text>
+        </g>
+        <text x="5.661px" y="140.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">MA<tspan x="18.412px " y="140.63px ">D</tspan></text>
+        <g>
+            <text x="54.261px" y="140.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Seg<tspan x="68.08px " y="140.63px ">m</tspan>en<tspan x="85.074px " y="140.63px ">t</tspan></text>
+            <text x="90.036px" y="140.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Tre<tspan x="102.877px " y="140.63px ">e</tspan></text>
+            <text x="54.261px" y="154.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Na<tspan x="64.887px 67.313px 71.589px " y="154.13px 154.13px 154.13px ">ïve</tspan></text>
+            <text x="54.261px" y="167.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">W<tspan x="61.322px 63.796px 68.955px 74.185px 79.292px " y="167.63px 167.63px 167.63px 167.63px 167.63px ">indow</tspan></text>
+            <text x="87.378px" y="167.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">A<tspan x="93.098px 97.708px " y="167.63px 167.63px ">PI</tspan></text>
+        </g>
+        <text x="5.661px" y="181.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Mo<tspan x="17.511px " y="181.13px ">d</tspan>e</text>
+        <g>
+            <text x="54.261px" y="181.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Seg<tspan x="68.08px " y="181.13px ">m</tspan>en<tspan x="85.074px " y="181.13px ">t</tspan></text>
+            <text x="90.036px" y="181.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Tre<tspan x="102.877px " y="181.13px ">e</tspan></text>
+            <text x="54.261px" y="194.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">Na<tspan x="64.887px 67.313px 71.589px " y="194.63px 194.63px 194.63px ">ïve</tspan></text>
+            <text x="54.261px" y="208.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">W<tspan x="61.322px 63.796px 68.955px 74.185px 79.292px " y="208.13px 208.13px 208.13px 208.13px 208.13px ">indow</tspan></text>
+            <text x="87.378px" y="208.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;fill:rgb(102,102,102);">A<tspan x="93.098px 97.708px " y="208.13px 208.13px ">PI</tspan></text>
+        </g>
+        <g transform="matrix(-0.674994,0,0,-0.674994,120.41,49.506)">
+            <path d="M0,0L176,0" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(-0.674994,0,0,-0.674994,120.41,130.505)">
+            <path d="M0,60L176,60" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(-0.674994,0,0,-0.674994,120.41,211.505)">
+            <path d="M0,120L176,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(-0.674994,0,0,-0.674994,120.41,292.504)">
+            <path d="M0,180L176,180" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(-0.674994,0,0,-0.674994,120.41,373.503)">
+            <path d="M0,240L176,240" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,211.505)">
+            <rect x="0" y="0" width="598" height="240" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,240.529)">
+            <rect x="0" y="43" width="598" height="197" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,211.505)">
+            <rect x="0" y="0" width="598" height="240" style="fill:white;"/>
+        </g>
+        <g>
+            <clipPath id="_clip3">
+                <rect x="120.41" y="49.506" width="201.823" height="161.999"/>
+            </clipPath>
+            <g clip-path="url(#_clip3)">
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,211.505)">
+                    <rect x="0" y="0" width="299" height="240" style="fill:white;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,73.4984,163.918)">
+                    <path d="M-69.5,119.5L169.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,107.248,197.667)">
+                    <path d="M-19.5,119.5L219.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,140.998,231.417)">
+                    <path d="M30.5,119.5L269.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,174.073,264.492)">
+                    <path d="M79.5,119.5L318.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,207.822,298.241)">
+                    <path d="M129.5,119.5L368.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,241.572,331.991)">
+                    <path d="M179.5,119.5L418.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+            </g>
+        </g>
+        <g>
+            <clipPath id="_clip4">
+                <rect x="322.234" y="49.506" width="201.823" height="161.999"/>
+            </clipPath>
+            <g clip-path="url(#_clip4)">
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,211.505)">
+                    <rect x="299" y="0" width="299" height="240" style="fill:white;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,275.322,365.741)">
+                    <path d="M229.5,119.5L468.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,309.071,399.491)">
+                    <path d="M279.5,119.5L518.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,342.821,433.24)">
+                    <path d="M329.5,119.5L568.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,375.896,466.315)">
+                    <path d="M378.5,119.5L617.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,409.646,500.065)">
+                    <path d="M428.5,119.5L667.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,-0.674994,0.674994,0,443.395,533.814)">
+                    <path d="M478.5,119.5L717.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(242,242,242);stroke-width:1px;"/>
+                </g>
+            </g>
+        </g>
+        <g transform="matrix(0,-0.674994,0.674994,0,39.7486,130.168)">
+            <clipPath id="_clip5">
+                <rect x="-120.5" y="119.5" width="240" height="299"/>
+            </clipPath>
+            <g clip-path="url(#_clip5)">
+                <path d="M-119.5,119.5L119.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;stroke-dasharray:1,2;"/>
+            </g>
+        </g>
+        <g transform="matrix(0,-0.674994,0.674994,0,241.572,331.991)">
+            <clipPath id="_clip6">
+                <rect x="178.5" y="119.5" width="240" height="299"/>
+            </clipPath>
+            <g clip-path="url(#_clip6)">
+                <path d="M179.5,119.5L418.5,119.5" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;stroke-dasharray:1,2;"/>
+            </g>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,117.68)">
+            <rect x="0" y="43" width="15" height="15" style="fill:rgb(89,161,79);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,90.6806)">
+            <rect x="0" y="23" width="142" height="15" style="fill:rgb(78,121,167);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,63.6808)">
+            <rect x="0" y="3" width="163" height="15" style="fill:rgb(242,142,43);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,198.68)">
+            <rect x="0" y="103" width="43" height="15" style="fill:rgb(89,161,79);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,171.68)">
+            <rect x="0" y="83" width="212" height="15" style="fill:rgb(78,121,167);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,144.68)">
+            <rect x="0" y="63" width="231" height="15" style="fill:rgb(242,142,43);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,279.679)">
+            <rect x="0" y="163" width="51" height="15" style="fill:rgb(89,161,79);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,252.679)">
+            <rect x="0" y="143" width="241" height="15" style="fill:rgb(78,121,167);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,225.679)">
+            <rect x="0" y="123" width="255" height="15" style="fill:rgb(242,142,43);"/>
+        </g>
+        <g>
+            <clipPath id="_clip7">
+                <rect x="120.41" y="171.005" width="201.823" height="40.5"/>
+            </clipPath>
+            <g clip-path="url(#_clip7)">
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,360.678)">
+                    <rect x="0" y="223" width="20" height="15" style="fill:rgb(89,161,79);"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,333.679)">
+                    <rect x="0" y="203" width="1124" height="15" style="fill:rgb(78,121,167);"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,306.679)">
+                    <rect x="0" y="183" width="1188" height="15" style="fill:rgb(242,142,43);"/>
+                </g>
+            </g>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,117.68)">
+            <rect x="299" y="43" width="64" height="15" style="fill:rgb(89,161,79);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,90.6806)">
+            <rect x="299" y="23" width="147" height="15" style="fill:rgb(78,121,167);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,63.6808)">
+            <rect x="299" y="3" width="168" height="15" style="fill:rgb(242,142,43);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,198.68)">
+            <rect x="299" y="103" width="139" height="15" style="fill:rgb(89,161,79);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,171.68)">
+            <rect x="299" y="83" width="217" height="15" style="fill:rgb(78,121,167);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,144.68)">
+            <rect x="299" y="63" width="237" height="15" style="fill:rgb(242,142,43);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,279.679)">
+            <rect x="299" y="163" width="173" height="15" style="fill:rgb(89,161,79);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,252.679)">
+            <rect x="299" y="143" width="241" height="15" style="fill:rgb(78,121,167);"/>
+        </g>
+        <g transform="matrix(0.674994,0,0,-0.674994,120.41,225.679)">
+            <rect x="299" y="123" width="264" height="15" style="fill:rgb(242,142,43);"/>
+        </g>
+        <g>
+            <clipPath id="_clip8">
+                <rect x="322.234" y="171.005" width="201.823" height="40.5"/>
+            </clipPath>
+            <g clip-path="url(#_clip8)">
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,360.678)">
+                    <rect x="299" y="223" width="68" height="15" style="fill:rgb(89,161,79);"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,333.679)">
+                    <rect x="299" y="203" width="1125" height="15" style="fill:rgb(78,121,167);"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,306.679)">
+                    <rect x="299" y="183" width="1201" height="15" style="fill:rgb(242,142,43);"/>
+                </g>
+            </g>
+        </g>
+        <g>
+            <text x="233.135px" y="59.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="238.03px 242.926px 245.263px " y="59.631px 59.631px 59.631px ">6.4</tspan></text>
+            <text x="218.96px" y="73.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="223.856px 228.751px 231.088px " y="73.131px 73.131px 73.131px ">4.3</tspan></text>
+        </g>
+        <text x="133.235px" y="86.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="138.153px 140.513px " y="86.631px 86.631px ">.5</tspan></text>
+        <g>
+            <text x="279.034px" y="100.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="283.93px 288.826px 291.163px " y="100.131px 100.131px 100.131px ">3.2</tspan></text>
+            <text x="266.209px" y="113.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="271.105px 276.001px 278.338px " y="113.63px 113.63px 113.63px ">1.3</tspan></text>
+        </g>
+        <text x="152.135px" y="127.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">4<tspan x="157.053px 159.412px " y="127.13px 127.13px ">.4</tspan></text>
+        <g>
+            <text x="295.234px" y="140.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="300.13px 305.026px 307.363px " y="140.63px 140.63px 140.63px ">5.6</tspan></text>
+            <text x="285.784px" y="154.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="290.68px 295.576px 297.913px " y="154.13px 154.13px 154.13px ">4.2</tspan></text>
+        </g>
+        <text x="157.535px" y="167.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">5<tspan x="162.453px 164.812px " y="167.63px 167.63px ">.2</tspan></text>
+        <g>
+            <text x="299.959px" y="181.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="304.844px 309.729px 314.613px 316.939px " y="181.13px 181.13px 181.13px 181.13px ">19.2</tspan></text>
+            <text x="299.959px" y="194.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="304.844px 309.729px 314.613px 316.939px " y="194.63px 194.63px 194.63px 194.63px ">12.8</tspan></text>
+        </g>
+        <text x="136.61px" y="208.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="141.528px 143.888px " y="208.13px 208.13px ">.0</tspan></text>
+        <g>
+            <text x="438.333px" y="59.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="443.229px 448.125px 450.462px " y="59.631px 59.631px 59.631px ">6.8</tspan></text>
+            <text x="424.158px" y="73.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="429.054px 433.95px 436.287px " y="73.131px 73.131px 73.131px ">4.7</tspan></text>
+        </g>
+        <text x="368.133px" y="86.631px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">6<tspan x="373.052px 375.411px " y="86.631px 86.631px ">.4</tspan></text>
+        <g>
+            <text x="484.907px" y="100.131px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="489.803px 494.699px 497.036px " y="100.131px 100.131px 100.131px ">3.8</tspan></text>
+            <text x="471.408px" y="113.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="476.303px 481.199px 483.536px " y="113.63px 113.63px 113.63px ">1.8</tspan></text>
+        </g>
+        <text x="418.758px" y="127.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="423.654px 428.55px 430.887px " y="127.13px 127.13px 127.13px ">3.9</tspan></text>
+        <g>
+            <text x="503.132px" y="140.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="508.028px 512.924px 515.261px " y="140.63px 140.63px 140.63px ">6.5</tspan></text>
+            <text x="487.607px" y="154.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">2<tspan x="492.503px 497.399px 499.736px " y="154.13px 154.13px 154.13px ">4.1</tspan></text>
+        </g>
+        <text x="441.708px" y="167.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="446.604px 451.5px 453.837px " y="167.63px 167.63px 167.63px ">7.3</tspan></text>
+        <g>
+            <text x="501.782px" y="181.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="506.667px 511.552px 516.437px 518.763px " y="181.13px 181.13px 181.13px 181.13px ">20.5</tspan></text>
+            <text x="501.782px" y="194.63px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">1<tspan x="506.667px 511.552px 516.437px 518.763px " y="194.63px 194.63px 194.63px 194.63px ">12.8</tspan></text>
+        </g>
+        <text x="370.833px" y="208.13px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:8.1px;">6<tspan x="375.751px 378.111px " y="208.13px 208.13px ">.9</tspan></text>
+        <g>
+            <text x="4.311px" y="12.381px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13.5px;fill:rgb(51,51,51);">C<tspan x="13.537px 21.715px 34.203px 42.585px 50.848px 55.783px " y="12.381px 12.381px 12.381px 12.381px 12.381px 12.381px ">ompute</tspan></text>
+            <text x="64.323px" y="12.381px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13.5px;fill:rgb(51,51,51);">T<tspan x="72.744px 76.532px 89.02px " y="12.381px 12.381px 12.381px ">ime</tspan></text>
+            <text x="98.315px" y="12.381px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13.5px;fill:rgb(51,51,51);">b<tspan x="106.697px " y="12.381px ">y</tspan></text>
+            <text x="116.561px" y="12.381px" style="font-family:'LucidaGrande', 'Lucida Grande', sans-serif;font-weight:500;font-size:13.5px;fill:rgb(51,51,51);">W<tspan x="127.995px 131.782px 140.045px 148.427px 156.605px 166.892px 170.679px 178.942px 187.245px 191.402px 195.176px 207.664px 216.046px 219.834px 227.24px 239.729px 247.135px 255.398px 260.332px 267.673px 272.607px 276.395px 284.572px " y="12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px 12.381px ">indowing Implementation</tspan></text>
+        </g>
+        <g>
+            <clipPath id="_clip9">
+                <rect x="120.41" y="49.506" width="201.823" height="161.999"/>
+            </clipPath>
+            <g clip-path="url(#_clip9)">
+                <g transform="matrix(0,0.674994,-0.674994,0,201.41,130.505)">
+                    <path d="M-120,120L120,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,403.233,-71.318)">
+                    <path d="M179,120L419,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,49.506)">
+                    <path d="M0,0L299,0" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,130.505)">
+                    <path d="M0,60L299,60" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,211.505)">
+                    <path d="M0,120L299,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,292.504)">
+                    <path d="M0,180L299,180" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,373.503)">
+                    <path d="M0,240L299,240" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+            </g>
+        </g>
+        <g>
+            <clipPath id="_clip10">
+                <rect x="322.234" y="49.506" width="201.823" height="161.999"/>
+            </clipPath>
+            <g clip-path="url(#_clip10)">
+                <g transform="matrix(0,0.674994,-0.674994,0,403.233,-71.318)">
+                    <path d="M179,120L419,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0,0.674994,-0.674994,0,605.056,-273.141)">
+                    <path d="M478,120L718,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,49.506)">
+                    <path d="M0,0L598,0" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,130.505)">
+                    <path d="M0,60L598,60" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,211.505)">
+                    <path d="M0,120L598,120" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,292.504)">
+                    <path d="M0,180L598,180" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(0.674994,0,0,-0.674994,120.41,373.503)">
+                    <path d="M0,240L598,240" style="fill:none;fill-rule:nonzero;stroke:rgb(203,203,203);stroke-width:1px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
