@@ -18,7 +18,7 @@ PRAGMA default_null_order='nulls_last';
 SELECT * FROM duckdb_settings();
 ```
 
-## **Option Reference**
+## **Configuration Reference**
 
 Below is a list of all available settings.
 
