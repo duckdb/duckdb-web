@@ -19,7 +19,9 @@ SELECT * FROM duckdb_settings();
 ```
 
 ## **Option Reference**
+
 Below is a list of all available settings.
+
 |          name          |                                                                   description                                                                   | input_type | default_value |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|------------|---------------|
 | access_mode            | Access mode of the database ([AUTOMATIC], READ_ONLY or READ_WRITE)                                                                              | VARCHAR    | automatic     |

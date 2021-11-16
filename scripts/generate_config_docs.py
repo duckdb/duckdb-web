@@ -38,9 +38,9 @@ if option_split not in text:
 
 text = text.split(option_split)[0]
 
-text += option_split + '\n' + 'Below is a list of all available settings.'
+text += option_split + '\n\n' + 'Below is a list of all available settings.'
 
-text += '\n' + stdout
+text += '\n\n' + stdout + '\n'
 
 with open(doc_file, 'w+') as f:
 	f.write(text)
