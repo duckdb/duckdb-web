@@ -59,7 +59,7 @@ if len(stderr) != 0:
 	print(stderr)
 	exit(1)
 
-option_split = '## **Option Reference**'
+option_split = '## **Configuration Reference**'
 doc_file = 'docs/sql/configuration.md'
 
 with open(doc_file, 'r') as f:
