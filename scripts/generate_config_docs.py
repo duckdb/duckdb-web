@@ -39,7 +39,9 @@ FROM (
 SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
 	FIRST(CASE WHEN name='memory_limit' OR name='max_memory'
 	THEN '75% of RAM'
-	ELSE value END) AS default_value
+	WHEN name='threads' OR name='worker_threads'
+	THEN '# Cores'
+	ELSE UPPER(value) END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
 GROUP BY description, input_type
