@@ -8,7 +8,7 @@ This section describes functions and operators for examining and manipulating st
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
-| *`string`* `\|\|` *`string`* | String concatenation | `'Duck' \|\| 'DB'` | `DuckDB` |
+| *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
 | *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[3]` | `'k'` |
 | *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s. | `'DuckDB'[:4]` | `'Duck'` |
 | `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (0-based) index. | `array_extract('DuckDB, 1)` | `'u'` |
