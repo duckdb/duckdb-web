@@ -231,6 +231,10 @@
                       "url": "/docs/sql/data_types/boolean"
                     },
                     {
+                      "page": "User",
+                      "url": "/docs/sql/data_types/user"
+                    },
+                    {
                       "page": "Numeric",
                       "url": "/docs/sql/data_types/numeric"
                     },
