@@ -1,7 +1,7 @@
 ---
 layout: docu
-title: User Types
-selected: Documentation/Data Types/User
+title: Enum Types
+selected: Documentation/Data Types/Enum
 expanded: Data Types
 ---
 | Name | Description |
@@ -10,7 +10,7 @@ expanded: Data Types
 
 ## Enums
 
-An `ENUM` type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an Enum holding all possible days. Enums are particularly interesting for string columns with high cardinality. This is because the column only stores a numerical reference to the string in the Enum dictionary, resulting in immense saves in disk storage and faster query performance.
+An `ENUM` type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an Enum holding all possible days. Enums are particularly interesting for string columns with high cardinality. This is because the column only stores a numerical reference to the string in the Enum dictionary, resulting in immense savings in disk storage and faster query performance.
 
 
 ### Enum Definition
@@ -26,7 +26,7 @@ CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
 -- This will fail since the mood type already exists
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy', 'anxious');
 
--- This will fail since Enums can not hold null values
+-- This will fail since Enums cannot hold null values
 CREATE TYPE breed AS ENUM ('maltese', NULL);
 
 -- This will fail since Enum values must be unique
@@ -35,7 +35,7 @@ CREATE TYPE breed AS ENUM ('maltese', 'maltese');
 ```
 
 ### Enum Usage
-To use an existing enum, we need to create a table with a column referencing it. For example:
+After an enum has been created, it can be used anywhere a standard built-in type is used. For example, we can create a table with a column that references the enum.
 ```sql
 -- Creates a table person, with attributes name (string type) and current_mood (mood type)
 CREATE TABLE person (
@@ -91,10 +91,12 @@ SELECT * FROM person_2 where current_mood = past_mood;
 
 
 ### Enum Removal
-Enum types are removed using the command: 
+Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command: 
 ```sql 
 DROP TYPE ${enum_name}
 ``` 
+Note that any dependent must be removed before dropping the enum, or the enum must be dropped with the additional `CASCADE` parameter.
+
 For example:
 ```sql
 -- This will fail since person has a catalog dependency to the mood type

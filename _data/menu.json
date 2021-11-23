@@ -231,8 +231,8 @@
                       "url": "/docs/sql/data_types/boolean"
                     },
                     {
-                      "page": "User",
-                      "url": "/docs/sql/data_types/user"
+                      "page": "Enum",
+                      "url": "/docs/sql/data_types/enum"
                     },
                     {
                       "page": "Numeric",
