@@ -25,8 +25,9 @@ The `EXPLAIN` statement displays three query plans that show what the plan looks
 To demonstrate, see the below example:
 
 ```sql
-explain SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
-
+EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+```
+```
 ┌─────────────────────────────┐
 │┌───────────────────────────┐│
 ││       Physical Plan       ││
@@ -66,9 +67,72 @@ explain SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 We can see that the `logical_plan` contains the unoptimized query plan, involving a cross product and a `LIKE` operation. The optimized plan transforms this plan and pushes down the filters, transforming the cross product into a comparison join. It also recognizes that the `LIKE` operator only does prefix filtering, and transforms the more expensive `LIKE` operator into a cheaper `PREFIX` selection.
 
 ### Run-Time Profiling
-The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph. [Examples of these](https://duckdb.org/benchmarks/logs/e7eb7154848be520159d9e1ee744989b25d4c987-graph.html?name=Q20) can be found in the benchmarks section.
+The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph. [Examples of these](benchmarks/logs/e7eb7154848be520159d9e1ee744989b25d4c987-graph.html?name=Q20) can be found in the [benchmarks section](/benchmarks).
 
-To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done with the following set of `PRAGMA` statements:
+To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done as follows (using the default output format of the profiler, `query_tree`):
+
+```sql
+PRAGMA enable_profiling;
+
+SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+```
+```
+┌─────────────────────────────────────┐
+│┌───────────────────────────────────┐│
+││        Total Time: 0.0003s        ││
+│└───────────────────────────────────┘│
+└─────────────────────────────────────┘
+┌───────────────────────────┐
+│         PROJECTION        │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            name           │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│             2             │
+│          (0.00s)          │
+└─────────────┬─────────────┘
+┌─────────────┴─────────────┐
+│         HASH_JOIN         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           INNER           │
+│          sid=sid          ├──────────────┐
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │              │
+│             2             │              │
+│          (0.00s)          │              │
+└─────────────┬─────────────┘              │
+┌─────────────┴─────────────┐┌─────────────┴─────────────┐
+│          SEQ_SCAN         ││           FILTER          │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│           exams           ││      prefix(name, Ma)     │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│            sid            ││             1             │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││          (0.00s)          │
+│             5             ││                           │
+│          (0.00s)          ││                           │
+└───────────────────────────┘└─────────────┬─────────────┘
+                             ┌─────────────┴─────────────┐
+                             │          SEQ_SCAN         │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │          students         │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │            sid            │
+                             │            name           │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │ Filters: name>=Ma AND name│
+                             │  <Mb AND name IS NOT NULL │
+                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+                             │             1             │
+                             │          (0.00s)          │
+                             └───────────────────────────┘
+
+┌──────┐
+│ name │
+├──────┤
+│ Mark │
+│ Mark │
+└──────┘
+```
+
+It is also possible to save the query plan to a file, e.g. in JSON format:
 
 ```sql
 -- enable profiling in json format
@@ -102,6 +166,3 @@ duckdb_query_graph.generate.generate('/path/to/file.json', '/path/to/out.html')
 
 This will show us the following query graph:
 ![Example Query Graph](example-querygraph.png)
-
-
-
