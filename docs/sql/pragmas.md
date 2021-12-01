@@ -71,14 +71,15 @@ PRAGMA enable_progress_bar
 -- enable profiling
 PRAGMA enable_profiling;
 -- enable profiling in a specified format
-PRAGMA enable_profiling=[json, query_tree]
+PRAGMA enable_profiling=[json, query_tree, query_tree_optimizer]
 -- disable profiling
 PRAGMA disable_profiling;
--- specifies a directory to save the profiling output to
-PRAGMA profiling_output=/path/to/directory;
+-- specify a file to save the profiling output to
+PRAGMA profiling_output='/path/to/file.json';
+PRAGMA profile_output='/path/to/file.json';
 ```
 
-Enable the gathering and printing of profiling information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json* or *query_tree*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+Enable the gathering and printing of [profiling](/docs/dev/profiling) information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
 
 Below is an example output of the profiling information for the simple query ```SELECT 42```:
 
