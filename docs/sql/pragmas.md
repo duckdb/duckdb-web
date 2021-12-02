@@ -67,7 +67,7 @@ PRAGMA version;
 ### enable_progress_bar, enable_profiling, disable_profiling, profiling_output
 ```sql
 -- show progress bar when running queries
-PRAGMA enable_progress_bar
+PRAGMA enable_progress_bar;
 -- enable profiling
 PRAGMA enable_profiling;
 -- enable profiling in a specified format
