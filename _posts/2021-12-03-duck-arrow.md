@@ -1,7 +1,7 @@
 ---
 
 layout: post  
-title:  "DuckDB quacks Arrow: <br/> A zero-copy data integration between Arrow and DuckDB"
+title:  "DuckDB quacks Arrow: A zero-copy data integration between Arrow and DuckDB"
 author: Pedro Holanda and Jonathan Keane
 excerpt_separator: <!--more-->
 
