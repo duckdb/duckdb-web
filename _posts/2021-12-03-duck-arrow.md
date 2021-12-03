@@ -95,14 +95,15 @@ install.packages("arrow")
 ```
 
 To execute the sample-examples in this section, we need to download the following custom parquet files:
- - https://github.com/duckdb/duckdb-web/blob/master/_posts/data/integers.parquet?raw=true
- - https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet
+ - [integers.parquet](https://github.com/duckdb/duckdb-web/blob/master/_posts/data/integers.parquet?raw=true)
+ - [lineitemsf1.snappy.parquet](https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet)
 
 
 #### Python
 
 There are two ways in Python of querying data from Arrow:
 1. Through the Relational API
+
 ```py
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
@@ -118,6 +119,7 @@ arrow_table_from_duckdb = rel_from_arrow.arrow()
 ```
 
 2. By using replacement scans and querying the object directly with SQL:
+
 ```py
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
