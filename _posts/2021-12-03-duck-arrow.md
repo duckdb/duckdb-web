@@ -1,10 +1,20 @@
-# DuckDB quacks Arrow: <br/> A zero-copy data integration between Arrow and DuckDB
+---
+
+layout: post  
+title:  "DuckDB quacks Arrow: <br/> A zero-copy data integration between Arrow and DuckDB"
+author: Pedro Holanda and Jonathan Keane
+excerpt_separator: <!--more-->
+
+---
+
 <img src="https://raw.githubusercontent.com/duckdb/duckdb-web/master/_posts/images/duck-arrow.png"
      alt="DuckDB-Arrow"
      width=100
      />
 
 *TLDR: The zero-copy integration between DuckDB and Apache Arrow allows for rapid analysis of larger than memory datasets in Python and R using either SQL or relational APIs.*
+
+<!--more-->
 
 Part of [Apache Arrow](https://arrow.apache.org) is an in-memory data format optimized for analytical libraries. Like Pandas and R Dataframes, it uses a columnar data model. But the Arrow project contains more than just the format: The Arrow C++ library, which is accessible in Python, R, and Ruby via bindings, has additional features that allow you to compute efficiently on datasets. These additional features are on top of the implementation of the in-memory format described above. The datasets may span multiple files in Parquet, CSV, or other formats, and files may even be on remote or cloud storage like HDFS or Amazon S3. The Arrow C++ query engine supports the streaming of query results, has an efficient implementation of complex data types (e.g., Lists, Structs, Maps), and can perform important scan optimizations like Projection and Filter Pushdown.
 
