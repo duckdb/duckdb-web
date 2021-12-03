@@ -11,7 +11,6 @@ excerpt_separator: <!--more-->
 
 This post is a collaboration with and cross-posted on [the Arrow blog](https://arrow.apache.org/blog/).
 
-<!--more-->
 Part of [Apache Arrow](https://arrow.apache.org) is an in-memory data format optimized for analytical libraries. Like Pandas and R Dataframes, it uses a columnar data model. But the Arrow project contains more than just the format: The Arrow C++ library, which is accessible in Python, R, and Ruby via bindings, has additional features that allow you to compute efficiently on datasets. These additional features are on top of the implementation of the in-memory format described above. The datasets may span multiple files in Parquet, CSV, or other formats, and files may even be on remote or cloud storage like HDFS or Amazon S3. The Arrow C++ query engine supports the streaming of query results, has an efficient implementation of complex data types (e.g., Lists, Structs, Maps), and can perform important scan optimizations like Projection and Filter Pushdown.
 
 [DuckDB](https://www.duckdb.org) is a new analytical data management system that is designed to run complex SQL queries within other processes. DuckDB has bindings for R and Python, among others. DuckDB can query Arrow datasets directly and stream query results back to Arrow. This integration allows users to query Arrow data using DuckDB's SQL Interface and API, while taking advantage of DuckDB's parallel vectorized execution engine, without requiring any extra data copying.
@@ -21,6 +20,9 @@ There are three main aspects that make this integration unique:
 1. **Larger Than Memory Analysis:** Since both libraries support streaming query results, we are capable of executing on data without fully loading it from disk. Instead, we can execute one batch at a time. This allows us to execute queries on data that is bigger than memory.
 2. **Complex Data Types:** DuckDB can efficiently process complex data types that can be stored in Arrow vectors, including arbitrarily nested structs, lists, and maps.
 3. **Advanced Optimizer:** DuckDB's state-of-the-art optimizer can push down filters and projections directly into Arrow scans. As a result, only relevant columns and partitions will be read, allowing the system to e.g., take advantage of partition elimination in Parquet files. This significantly accelerates query execution.
+
+<!--more-->
+
 
 For those that are just interested in benchmarks, you can jump ahead [benchmark section below](#Benchmark Comparison).
 
@@ -104,6 +106,7 @@ To execute the sample-examples in this section, we need to download the followin
 
 There are two ways in Python of querying data from Arrow:
 1. Through the Relational API
+
 ```py
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
@@ -119,6 +122,7 @@ arrow_table_from_duckdb = rel_from_arrow.arrow()
 ```
 
 2. By using replacement scans and querying the object directly with SQL:
+
 ```py
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
