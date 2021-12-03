@@ -7,11 +7,6 @@ excerpt_separator: <!--more-->
 
 ---
 
-<img src="https://raw.githubusercontent.com/duckdb/duckdb-web/master/_posts/images/duck-arrow.png"
-     alt="DuckDB-Arrow"
-     width=100
-     />
-
 *TLDR: The zero-copy integration between DuckDB and Apache Arrow allows for rapid analysis of larger than memory datasets in Python and R using either SQL or relational APIs.*
 
 <!--more-->
