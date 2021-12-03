@@ -23,6 +23,8 @@ There are three main aspects that make this integration unique:
 
 For those that are just interested in benchmarks, you can jump ahead [benchmark section below](#Benchmark Comparison).
 
+This post is a collaboration with and cross-posted on [the Arrow blog](https://example.com) as well.
+
 ## Quick Tour
 Before diving into the details of the integration, in this section we provide a quick motivating example of how powerful and simple to use is the DuckDB-Arrow integration. With a few lines of code, you can already start querying Arrow datasets. Say you want to analyze the infamous [NYC Taxi Dataset](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and figure out if groups tip more or less than single riders.
 
