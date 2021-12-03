@@ -103,6 +103,7 @@ To execute the sample-examples in this section, we need to download the followin
 
 There are two ways in Python of querying data from Arrow:
 1. Through the Relational API
+
 ```py
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
@@ -118,6 +119,7 @@ arrow_table_from_duckdb = rel_from_arrow.arrow()
 ```
 
 2. By using replacement scans and querying the object directly with SQL:
+
 ```py
 # Reads Parquet File to an Arrow Table
 arrow_table = pq.read_table('integers.parquet')
