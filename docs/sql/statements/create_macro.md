@@ -22,6 +22,8 @@ CREATE MACRO plus_one(a) AS (WITH cte AS (SELECT 1 AS a) SELECT cte.a + a FROM c
 CREATE FUNCTION main.myavg(x) AS SUM(x) / COUNT(x);
 -- create a macro with default constant parameters
 CREATE MACRO add_default(a, b := 5) AS a + b;
+-- create a macro arr_append (with a functionality equivalent to array_append)
+CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 ```
 
 ### Syntax
