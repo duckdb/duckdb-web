@@ -15,10 +15,10 @@ The table below shows the available mathematical operators for `INTERVAL` types.
 | `+` | addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | 1992-03-27 |
 | `+` | addition to a `TIMESTAMP` | `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` | 1992-03-27 01:02:03 |
 | `+` | addition to a `TIME` | `TIME '01:02:03' + INTERVAL 5 HOUR` | 06:02:03 |
-| `-` | subtraction of an `INTERVAL` | `INTERVAL 5 HOUR' - INTERVAL 1 HOUR'` | INTERVAL 4 HOUR |
-| `-` | subtraction from a `DATE` | `DATE '1992-03-27' - INTERVAL 5 DAY'` | 1992-03-22 |
-| `-` | subtraction from a `TIMESTAMP` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY'` | 1992-03-22 01:02:03 |
-| `-` | subtraction from a `TIME` | `TIME '06:02:03' - INTERVAL 5 HOUR'` | 01:02:03 |
+| `-` | subtraction of an `INTERVAL` | `INTERVAL 5 HOUR - INTERVAL 1 HOUR` | INTERVAL 4 HOUR |
+| `-` | subtraction from a `DATE` | `DATE '1992-03-27' - INTERVAL 5 DAY` | 1992-03-22 |
+| `-` | subtraction from a `TIMESTAMP` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | 1992-03-22 01:02:03 |
+| `-` | subtraction from a `TIME` | `TIME '06:02:03' - INTERVAL 5 HOUR` | 01:02:03 |
 
 ## Interval Functions
 The table below shows the available scalar functions for `INTERVAL` types.
@@ -33,7 +33,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | `to_hours(`*`integer`*`)` | Construct a hour interval | `to_hours(5)` | INTERVAL 5 HOUR |
 | `to_minutes(`*`integer`*`)` | Construct a minute interval | `to_minutes(5)` | INTERVAL 5 MINUTE |
 | `to_seconds(`*`integer`*`)` | Construct a second interval | `to_seconds(5)` | INTERVAL 5 SECOND |
-| `to_milliseconds(`*`integer`*`)` | Construct a millisecond interval | `to_milliseconds(5)` | INTERVAL 5000 SECOND |
-| `to_microseconds(`*`integer`*`)` | Construct a microsecond interval | `to_microseconds(5)` | INTERVAL 5000000 SECOND |
+| `to_milliseconds(`*`integer`*`)` | Construct a millisecond interval | `to_milliseconds(5)` | INTERVAL 5 MILLISECOND |
+| `to_microseconds(`*`integer`*`)` | Construct a microsecond interval | `to_microseconds(5)` | INTERVAL 5 MICROSECOND |
 
 All [date parts](/docs/sql/functions/datepart) are defined for intervals except `dow`, `isodow`, `doy`, `week` and `yearweek`.
