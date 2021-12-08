@@ -165,13 +165,19 @@ h5 {
 		.postpreview{
 			margin: 0 auto;
 			margin-top: 80px;
-			margin-bottom: 80px;
+			margin-bottom: 60px;
 			h2{
 				a{
 					color: black;
 					text-decoration: none;
 				}
 			}
+		 	hr {
+			    	margin-top: 50px;
+				border: none;
+				height: 0.5px;
+				background-color: $duckDBgrey;
+			}	
 		}
 		a.backtoarchive,
 		a.continue{
