@@ -12,6 +12,8 @@ SELECT * FROM 'test.parquet';
 DESCRIBE SELECT * FROM 'test.parquet';
 -- create a table from a parquet file
 CREATE TABLE test AS SELECT * FROM 'test.parquet';
+-- if the file does not end in ".parquet", use the parquet_scan function
+SELECT * FROM parquet_scan('test.parq');
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
 -- query the metadata of a parquet file
