@@ -8,7 +8,7 @@ This section describes functions and operators for examining and manipulating ne
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:---|:---|:---|:---|:---|
-| LIST | An ordered sequence of data values of the same type. | Each row must have the same data type within each LIST, but can have any number of elements. | [1, 2, 3] | VARCHAR[ ] |
+| LIST | An ordered sequence of data values of the same type. | Each row must have the same data type within each LIST, but can have any number of elements. | [1, 2, 3] | INT[ ] |
 | STRUCT | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | {'i': 42, 'j': 'a'} | STRUCT<i: INT, j: VARCHAR> |
 | MAP | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP<INT, VARCHAR> |
 
@@ -34,6 +34,8 @@ SELECT ['duck', 'goose', NULL, 'heron'];
 SELECT [['duck', 'goose', 'heron'], NULL, ['frog', 'toad'], []];
 -- Create a list with the list_value function
 SELECT list_value(1, 2, 3);
+-- Create a table with an integer list column and a varchar list column
+CREATE TABLE list_table (int_list INT[], varchar_list VARCHAR[]);
 ```
 ### Retrieving from Lists
 Retrieving one or more values from a list can be accomplished using brackets and slicing notation, or through [list functions](../functions/nested#list-functions) like `list_extract`. Multiple equivalent functions are provided as aliases for compatibility with systems that refer to lists as arrays. For example, the function `array_slice`.
@@ -189,6 +191,8 @@ select map([1, 5], [42.001, -32.1]);
 -- Keys and/or values can also be nested types.
 -- This returns {[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}
 select map([['a', 'b'], ['c', 'd']], [[1.1, 2.2], [3.3, 4.4]]);
+-- Create a table with a map column that has integer keys and double values
+CREATE TABLE map_table (map_col MAP(INT,DOUBLE));
 ```
 ### Retrieving from Maps
 `MAP`s use bracket notation for retrieving values. This is due to the variety of types that can be used as a `MAP`'s key. Selecting from a `MAP` also returns a `LIST` rather than an individual value.
