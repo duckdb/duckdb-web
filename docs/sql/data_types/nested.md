@@ -112,6 +112,30 @@ SELECT ({'x space': 1, 'y': 2, 'z': 3})['x space'];
 -- The struct_extract function is also equivalent. This returns 1
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3},'x space');
 ```
+Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
+
+#### No dots
+```sql
+SELECT part1 FROM tbl
+```
+1. part1 is a column
+
+#### One dot
+```sql
+SELECT part1.part2 FROM tbl
+```
+1. part1 is a table, part2 is a column
+2. part1 is a column, part2 is a property of that column
+
+#### Two (or more) dots
+```sql
+SELECT part1.part2.part3 FROM tbl
+```
+1. part1 is a schema, part2 is a table, part3 is a column
+2. part1 is a table, part2 is a column, part3 is a property of that column
+3. part1 is a column, part2 is a property of that column, part3 is a property of that column
+
+Any extra parts (e.g. .part4.part5 etc) are always treated as properties
 
 ### Creating Structs with the Row function
 The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key. Using a `row` function on the columns of this example table produces the output below.
@@ -150,7 +174,31 @@ FROM t1;
 
 
 ## Maps
+`MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s have different restrictions than structs and thus open additional use cases. `MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `INT`s to `VARCHAR`s). `MAP`s may also have duplicate keys. This is possible and useful because maps are ordered. `MAP`s `MAP`s are also more forgiving when extracting values, as they return an empty list if a key is not found rather than throwing an error as structs do.
 
+In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. `STRUCT`s may not have duplicate keys.
+
+To construct a `MAP`, use the `map` function. Provide a list of keys as the first parameter, and a list of values for the second.
+
+### Creating Maps
+```sql
+-- A map with integer keys and varchar values. This returns {1=a, 5=e}
+select map([1, 5], ['a', 'e']);
+-- A map with integer keys and numeric values. This returns {1=42.001, 5=-32.100} 
+select map([1, 5], [42.001, -32.1]);
+-- Keys and/or values can also be nested types.
+-- This returns {[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}
+select map([['a', 'b'], ['c', 'd']], [[1.1, 2.2], [3.3, 4.4]]);
+```
+### Retrieving from Maps
+`MAP`s use bracket notation for retrieving values. This is due to the variety of types that can be used as a `MAP`'s key. Selecting from a `MAP` also returns a `LIST` rather than an individual value.
+```sql
+-- Use bracket notation to retrieve a list containing the value at a key's location. This returns [42]
+SELECT map([100, 5], [42, 43])[100];
+-- To retrieve the underlying value, use list selection syntax to grab the 0th element.
+-- This returns 42
+SELECT map([100, 5], [42, 43])[100][0];
+```
 
 ## Nesting
 
