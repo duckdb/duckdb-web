@@ -148,7 +148,7 @@ The `row` function can be used to automatically convert multiple columns to a si
 #### Row function example:
 ```sql
 SELECT 
-    row(my_column,another_column) as my_struct_column
+    row(my_column, another_column) as my_struct_column
 FROM t1;
 ```
 
@@ -158,12 +158,12 @@ FROM t1;
 | {'my_column': 1, 'another_column': a} |
 | {'my_column': 2, 'another_column': b} |
 
-The `row` function may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is an incrementing number (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
+The `row` function may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
 
 #### Row function example with a column name, a constant, and an expression as input:
 ```sql
 SELECT 
-    row(my_column,42,my_column + 1) as my_struct_column
+    row(my_column, 42, my_column + 1) as my_struct_column
 FROM t1;
 ```
 #### Example Output:
