@@ -65,12 +65,12 @@ SELECT array_slice(['a','b','c'],1,3);
 ```
 ## Structs
 
-Conceptually, a `STRUCT` column contains an ordered list of other columns called "entries".
-The entries are referenced by name using strings. This document refers to those entry names as keys.
-Each row in the `STRUCT` column must have the same keys. Each key must have the same type of value for each row.
+Conceptually, a `STRUCT` column contains an ordered list of other columns called "entries". The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. Each key must have the same type of value for each row.
+
 `STRUCT`s are typically used to nest multiple columns into a single column,
 and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
-`STRUCT`s are similar to Postgres's `ROW` type. DuckDB also includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
+
+`STRUCT`s are similar to Postgres's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
 
 Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function
 or the equivalent array notation `{'name': expr, ...}` notation.
@@ -95,22 +95,27 @@ SELECT {'birds':
         'amphibians':
             {'yes':'frog', 'maybe': 'salamander', 'huh': 'dragon', 'no':'toad'}
         };
+-- Create a struct from columns and/or expressions using the row function.
+-- This returns {'x': 1, 'v2': 2, 'y': a}
+SELECT row(x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
+-- If using multiple expressions when creating a struct, the row function is optional
+-- This also returns {'x': 1, 'v2': 2, 'y': a}
+SELECT (x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 ```
 ### Retrieving from Structs
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions](../functions/nested#struct-functions) like `struct_extract`.
 ```sql
 -- Use dot notation to retrieve the value at a key's location. This returns 1
--- Note that we wrap the struct creation in parenthesis so that it happens first.
--- This is only needed in our basic examples here, not when working with a struct column
-SELECT ({'x': 1, 'y': 2, 'z': 3}).x;
+-- The subquery generates a struct column "a", which we then query with a.x
+SELECT a.x FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
 -- If key contains a space, simply wrap it in double quotes. This returns 1
 -- Note: Use double quotes not single quotes 
 -- This is because this action is most similar to selecting a column from within the struct
-SELECT ({'x space': 1, 'y': 2, 'z': 3})."x space";
+SELECT a."x space" FROM (SELECT {'x space':1, 'y':2, 'z':3} as a);
 -- Bracket notation may also be used. This returns 1
 -- Note: Use single quotes since the goal is to specify a certain string key. 
 -- Only constant expressions may be used inside the brackets (no columns)
-SELECT ({'x space': 1, 'y': 2, 'z': 3})['x space'];
+SELECT a['x space'] FROM (SELECT {'x space':1, 'y':2, 'z':3} as a);
 -- The struct_extract function is also equivalent. This returns 1
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3},'x space');
 ```
@@ -140,7 +145,9 @@ SELECT part1.part2.part3 FROM tbl
 Any extra parts (e.g. .part4.part5 etc) are always treated as properties
 
 ### Creating Structs with the Row function
-The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key. Using a `row` function on the columns of this example table produces the output below.
+The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key.
+
+When converting multiple expressions into a `STRUCT`, the `row` function name is optional - a set of parenthesis is all that is needed.
 #### Example data table named t1:
 | my_column | another_column |
 |:---|:---|
@@ -150,33 +157,37 @@ The `row` function can be used to automatically convert multiple columns to a si
 #### Row function example:
 ```sql
 SELECT 
-    row(my_column, another_column) as my_struct_column
+    row(my_column, another_column) as my_struct_column,
+    (my_column, another_column) as identical_struct_column
 FROM t1;
 ```
 
 #### Example Output:
-| my_struct_column |
-|:---|
-| {'my_column': 1, 'another_column': a} |
-| {'my_column': 2, 'another_column': b} |
+| my_struct_column | identical_struct_column |
+|:---|:---|
+| {'my_column': 1, 'another_column': a} | {'my_column': 1, 'another_column': a} |
+| {'my_column': 2, 'another_column': b} | {'my_column': 2, 'another_column': b} |
 
-The `row` function may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
+The `row` function (or simplified parenthesis syntax) may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
 
 #### Row function example with a column name, a constant, and an expression as input:
 ```sql
 SELECT 
-    row(my_column, 42, my_column + 1) as my_struct_column
+    row(my_column, 42, my_column + 1) as my_struct_column,
+    (my_column, 42, my_column + 1) as identical_struct_column
 FROM t1;
 ```
 #### Example Output:
-| my_struct_column |
-|:---|
-| {'my_column': 1, 'v2': 42, 'v3': 2} |
-| {'my_column': 2, 'v2': 42, 'v3': 3} |
+| my_struct_column | identical_struct_column |
+|:---|:---|
+| {'my_column': 1, 'v2': 42, 'v3': 2} | {'my_column': 1, 'v2': 42, 'v3': 2} |
+| {'my_column': 2, 'v2': 42, 'v3': 3} | {'my_column': 2, 'v2': 42, 'v3': 3} |
 
 
 ## Maps
-`MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s have different restrictions than structs and thus open additional use cases. `MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `INT`s to `VARCHAR`s). `MAP`s may also have duplicate keys. This is possible and useful because maps are ordered. `MAP`s `MAP`s are also more forgiving when extracting values, as they return an empty list if a key is not found rather than throwing an error as structs do.
+`MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s do not need to have the same keys present on each row, and thus open additional use cases. `MAP`s are useful when the schema is unknown beforehand, and when adding or removing keys in subsequent rows. Their flexibility is a key differentiator.
+
+`MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `INT`s to `VARCHAR`s). `MAP`s may also have duplicate keys. This is possible and useful because maps are ordered. `MAP`s are also more forgiving when extracting values, as they return an empty list if a key is not found rather than throwing an error as structs do.
 
 In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. `STRUCT`s may not have duplicate keys.
 
