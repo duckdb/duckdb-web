@@ -149,6 +149,7 @@ The `row` function can be used to automatically convert multiple columns to a si
 
 When converting multiple expressions into a `STRUCT`, the `row` function name is optional - a set of parenthesis is all that is needed.
 #### Example data table named t1:
+
 | my_column | another_column |
 |:---|:---|
 | 1 | a |
@@ -163,6 +164,7 @@ FROM t1;
 ```
 
 #### Example Output:
+
 | my_struct_column | identical_struct_column |
 |:---|:---|
 | {'my_column': 1, 'another_column': a} | {'my_column': 1, 'another_column': a} |
@@ -178,6 +180,7 @@ SELECT
 FROM t1;
 ```
 #### Example Output:
+
 | my_struct_column | identical_struct_column |
 |:---|:---|
 | {'my_column': 1, 'v2': 42, 'v3': 2} | {'my_column': 1, 'v2': 42, 'v3': 2} |
