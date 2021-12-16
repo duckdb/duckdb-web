@@ -54,6 +54,49 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 @import "hamburgers.min.css";
 
 
+@mixin button {
+	color: black;
+	height: 30px;
+	display: inline-block;
+	background-color: black;
+	line-height: 30px;
+	padding-left: 8px;
+	padding-right: 25px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color .3s;
+	span::after{
+		content: "→";
+		font-family: "DuckDB-Symbol";
+		margin-left: 4px;
+		transition: transform .3s;
+		position: absolute;
+	}
+	&:hover span::after{
+		transform: translateX(3px);
+	}
+}
+
+@mixin textlink {
+	color: darken($duckDBgrey,20);
+	text-decoration: underline;
+	font-size: 14px;
+	transition: color .3s;
+	span::after{
+		content: "→";
+		font-family: "DuckDB-Symbol";
+		margin-left: 6px;
+		transition: transform .3s;
+		position: absolute;
+		text-decoration: none;
+		line-height: 1.5;
+	}
+	&:hover span::after{
+		transform: translateX(3px);
+	}
+}
+
+
 *{
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -636,11 +679,12 @@ body.landing{
 					font-size: 14px;
 					color: darken($duckDBgrey,20);
 				}
-				a{
+				a{	
+					@include textlink();
 					color: darken($duckDBgrey,20);
 					font-size: 14px;
 					&:hover{
-						background-color: $duckDByellow;
+						//background-color: $duckDByellow;
 						color: black;
 	}
 				}
@@ -860,10 +904,12 @@ body.landing{
 			display: inline;
 		}
 		a.newsarchive{
-			margin-left: 50px;
-			color: darken($duckDBgrey,20);
+			margin-left: 40px;
+			@include textlink();
 			text-decoration: none;
-			transition: color .3s;
+			span::after{
+				line-height: 2.4;
+			}
 			&:hover{
 				color: black;
 			}
@@ -894,13 +940,11 @@ body.landing{
 					margin-right: 5px;
 				}
 				a.continue{
-					color: darken($duckDBgrey,20);
-					transition: color .3s;
-					text-decoration: underline;
+					@include textlink();
 					font-size: 14px;
 					&:hover{
 						color: black;
-						background-color: $duckDByellow;
+						//background-color: $duckDByellow;
 					}
 				}
 			}
