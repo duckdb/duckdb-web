@@ -17,6 +17,49 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 	src: url("webfont/SuisseIntl-RegularItalic-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-RegularItalic-WebS.woff") format("woff");
 }
 
+@mixin button {
+	color: black;
+	height: 30px;
+	display: inline-block;
+	background-color: black;
+	line-height: 30px;
+	padding-left: 8px;
+	padding-right: 25px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color .3s;
+	span::after{
+		content: "→";
+		font-family: "DuckDB-Symbol";
+		margin-left: 4px;
+		transition: transform .3s;
+		position: absolute;
+	}
+	&:hover span::after{
+		transform: translateX(3px);
+	}
+}
+
+@mixin textlink {
+	color: $duckDBgrey;
+	//color: darken($duckDBgrey,20);
+	text-decoration: underline;
+	font-size: 14px;
+	transition: color .3s;
+	span::after{
+		content: "→";
+		font-family: "DuckDB-Symbol";
+		margin-left: 6px;
+		transition: transform .3s;
+		position: absolute;
+		text-decoration: none;
+		line-height: 1.5;
+	}
+	&:hover span::after{
+		transform: translateX(3px);
+	}
+}
+
 img{
 	margin: 0 auto;
 	border:none;
@@ -159,33 +202,33 @@ h5 {
 			color: $duckDBgrey;
 			margin-bottom: 15px;
 			span:first-child{
-				margin-right: 60px;
+				margin-right: 40px;
 			}
 		}
 		.postpreview{
 			margin: 0 auto;
 			margin-top: 80px;
-			margin-bottom: 60px;
+		        padding-bottom: 60px;
+		        border-bottom: 1px solid rgba(230, 230, 230, 1);
 			h2{
 				a{
 					color: black;
 					text-decoration: none;
 				}
 			}
-		 	hr {
-			    	margin-top: 50px;
-				border: none;
-				height: 0.5px;
-				background-color: $duckDBgrey;
-			}	
+		 	
 		}
 		a.backtoarchive,
 		a.continue{
-			color: $duckDBgrey;
 			text-decoration: none;
 			-webkit-transition: color .3s;
 			-o-transition: color .3s;
 			transition: color .3s;
+			@include textlink();
+			font-size: 100%;
+			span::after{
+				line-height: 1.2;
+			}
 			&:hover{
 				color: black;
 			}
