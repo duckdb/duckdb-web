@@ -14,14 +14,20 @@ DESCRIBE SELECT * FROM 'test.parquet';
 CREATE TABLE test AS SELECT * FROM 'test.parquet';
 -- if the file does not end in ".parquet", use the parquet_scan function
 SELECT * FROM parquet_scan('test.parq');
+-- use list parameter to read 3 parquet files and treat them as a single table 
+SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
+-- use a list of globs to read all parquet files from 2 specific folders
+SELECT * FROM parquet_scan(['folder1/*.parquet','folder2/*.parquet']);
 -- query the metadata of a parquet file
 SELECT * FROM parquet_metadata('test.parquet');
 -- query the schema of a parquet file
 SELECT * FROM parquet_schema('test.parquet');
 -- write the results of a query to a parquet file
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');
+-- export the table contents of the entire database as parquet
+EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
 ### Single-File Reads
@@ -40,8 +46,17 @@ SELECT * FROM 'test.parquet';
 Unlike CSV files, parquet files are structured and as such are unambiguous to read. No parameters need to be passed to this function. The `parquet_scan` function will figure out the column names and column types present in the file and emit them.
 
 ### Multi-File Reads and Globs
-DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using the glob syntax.
+DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
+#### List Parameter
+The parquet_scan function can accept a list of filenames as the input parameter. See the [nested types documentation](https://duckdb.org/docs/sql/data_types/nested.html) for more details on lists.
+```sql
+-- read 3 parquet files and treat them as a single table 
+SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+```
+
+#### Glob Syntax
+Any file name input to the parquet_scan function can either be an exact filename, or use a glob syntax to read multple files that match a pattern.
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
 | `*`        | matches any number of any characters (including none)     |
@@ -56,12 +71,20 @@ Here is an example that reads all the files that end with `.parquet` located in 
 SELECT * FROM parquet_scan('test/*.parquet');
 ```
 
+#### List of Globs
+The glob syntax and the list input parameter can be combined to scan files that meet one of multiple patterns.
+
+```sql
+-- Read all parquet files from 2 specific folders
+SELECT * FROM parquet_scan(['folder1/*.parquet','folder2/*.parquet']);
+```
+
 ### Partial Reading
 DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
 
 DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
-See [our blog post on this](https://duckdb.org/2021/06/25/querying-parquet.html) for more information.
+Filter and projection pushdown provide significant performance benefits. See [our blog post on this](https://duckdb.org/2021/06/25/querying-parquet.html) for more information.
 
 ### Inserts and Views
 You can also insert the data into a table or create a table from the parquet file directly. This will load the data from the parquet file and insert it into the database.
@@ -154,4 +177,10 @@ COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
 COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
 -- write a csv file to an uncompressed parquet file
 COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
+```
+
+DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](https://duckdb.org/docs/sql/statements/export.html) for more details.
+```sql
+-- export the table contents of the entire database as parquet
+EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
