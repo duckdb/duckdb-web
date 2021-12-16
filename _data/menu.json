@@ -256,15 +256,15 @@
                     },
                     {
                       "page":"List",
-                      "url": "/docs/sql/data_types/nested/list"
+                      "url": "/docs/sql/data_types/list"
                     },
                     {
                       "page":"Struct",
-                      "url": "/docs/sql/data_types/nested/struct"
+                      "url": "/docs/sql/data_types/struct"
                     },
                     {
                       "page":"Map",
-                      "url": "/docs/sql/data_types/nested/map"
+                      "url": "/docs/sql/data_types/map"
                     }
                   ]
                 },
