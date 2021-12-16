@@ -106,7 +106,7 @@
 							<div class="infoline"><span>{{ page.date | date: "%Y-%m-%d" }}</span><span>{{ page.author }}</span></div>
 							<h1>{{ page.title }}</h1>
 							{% include anchor_headings.html html=content %}
-							<a href="/news/" class="backtoarchive"><span class="duckdbsymbol">&#8592;</span> back to news archive</a>
+							<a href="/news/" class="backtoarchive">back to news archive <span></span></a>
 						</div>
 					{% endif %}
 				</div>
@@ -181,6 +181,8 @@
 					<h4>Internals</h4>
 					<a href="{{ site.url }}{{ site.baseurl }}/docs/faq">FAQs</a><br/>
 					<a href="{{ site.url }}{{ site.baseurl }}/code_of_conduct">Code of Conduct</a>
+					<a href="{{ site.url }}{{ site.baseurl }}/foundation/">Foundation</a>
+
 				</div>
 				<div>
 					<span class="scrolltop duckdbsymbol">&#8593;</span>
