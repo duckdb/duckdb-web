@@ -61,11 +61,13 @@ SELECT {'birds':
 
 ## Nesting
 
-`LIST`s and `STRUCT`s can be arbitrarily nested to any depth, so long as the type rules are observed.
+`LIST`s, `STRUCT`s, and `MAP`s can be arbitrarily nested to any depth, so long as the type rules are observed.
 
 ```
 -- Struct with lists
 SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['frog', 'toad']};
+-- Struct with list of maps
+SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
 ```
 
 ## Comparison
