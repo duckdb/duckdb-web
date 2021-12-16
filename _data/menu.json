@@ -254,10 +254,25 @@
                       "page": "Blob",
                       "url": "/docs/sql/data_types/blob"
                     },
-                    {
-                      "page": "Nested",
-                      "url": "/docs/sql/data_types/nested"
-                    }
+                    
+                        {
+                          "page":"Nested Overview",
+                          "url": "/docs/sql/data_types/nested/overview"
+                        },
+                        {
+                          "page":"List",
+                          "url": "/docs/sql/data_types/nested/list"
+                        },
+                        {
+                          "page":"Struct",
+                          "url": "/docs/sql/data_types/nested/struct"
+                        },
+                        {
+                          "page":"Map",
+                          "url": "/docs/sql/data_types/nested/map"
+                        }
+                      
+                    
                   ]
                 },
                 {
