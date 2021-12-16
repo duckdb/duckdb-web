@@ -11,11 +11,6 @@ layoutpart: postsoverview
 	<div class="infoline"><span>{{ post.date | date: "%Y-%m-%d" }}</span><span>{{ post.author }}</span></div>
 	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
 	{{ post.excerpt }}
-<<<<<<< HEAD
-	<a href="{{ post.url }}" class="continue"><span class="duckdbsymbol">&#8594;</span> continue reading</a>
-	<hr>
-=======
 	<a href="{{ post.url }}" class="continue">continue reading <span></span></a>
->>>>>>> a56802346631e20c76de435b493c4ec4b6e490a4
 </div>
 {% endfor %}
