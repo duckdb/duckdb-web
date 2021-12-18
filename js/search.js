@@ -2,8 +2,8 @@
 // full-text search. Search results will include 'title' and 'category' (plus the
 // id field, that is always stored and returned)
 const miniSearch = new MiniSearch({
-fields: ['title', 'text'],
-storeFields: ['title', 'text', 'category', 'url']
+fields: ['title', 'text', 'blurb'],
+storeFields: ['title', 'text', 'category', 'url', 'blurb']
 })
 
 // read GET parameters (https://stackoverflow.com/questions/12049620/how-to-get-get-variables-value-in-javascript)
@@ -29,10 +29,11 @@ if ($_GET['q']!==undefined) {
 	miniSearch.addAll(documents)
 
 	// Search for documents:
-	let results = miniSearch.search($_GET['q'], { boost: { title: 2 }, prefix: true, fuzzy: 0.2});
-
+	let results = miniSearch.search($_GET['q'], { boost: { title: 100, blurb: 20 }, prefix: true, fuzzy: 0.2});
+	console.log(results);
 	let search_div = document.getElementById("search_results");
 	let search_html = "";
+	let max_index = 20;
 	for(let i = 0; i < results.length; i++) {
 		search_html += "<div class='search_result'>";
 		search_html += "<h2 class='search_title'>";
@@ -41,9 +42,12 @@ if ($_GET['q']!==undefined) {
 		search_html += "</a>";
 		search_html += "</h2>";
 		search_html += "<div class='search_text'>";
-		search_html += results[i].text;
+		search_html += results[i].blurb;
 		search_html += "</div>";
 		search_html += "</div>";
+		if (i >= max_index) {
+			break;
+		}
 	}
 	search_div.innerHTML = search_html;
 }
