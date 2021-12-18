@@ -1,0 +1,16 @@
+{
+	"data": [
+		{
+			"title": "Select Statement",
+			"text": "The SELECT statement retrieves rows from the database",
+			"category": "docs",
+			"url": "../docs/sql/statements/select"
+		},
+		{
+			"title": "Update Statement",
+			"text": "The UPDATE statement modifies the values of rows in a table.",
+			"category": "docs",
+			"url": "../docs/sql/statements/update.md"
+		}
+	]
+}
