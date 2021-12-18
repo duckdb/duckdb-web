@@ -5,6 +5,8 @@ const miniSearch = new MiniSearch({
 fields: ['title', 'text', 'blurb'],
 storeFields: ['title', 'text', 'category', 'url', 'blurb']
 })
+// Add documents to the index
+miniSearch.addAll(documents)
 
 // read GET parameters (https://stackoverflow.com/questions/12049620/how-to-get-get-variables-value-in-javascript)
 // lord knows why this needs a regex and hasn't been part of the JS standard since day 1
@@ -23,14 +25,9 @@ if(document.location.toString().indexOf('?') !== -1) {
        $_GET[aux[0]] = aux[1];
     }
 }
-//get the 'index' query parameter
-if ($_GET['q']!==undefined) {
-	// Add documents to the index
-	miniSearch.addAll(documents)
-
+function perform_search(query) {
 	// Search for documents:
-	let results = miniSearch.search($_GET['q'], { boost: { title: 100, blurb: 20 }, prefix: true, fuzzy: 0.2});
-	console.log(results);
+	let results = miniSearch.search(query, { boost: { title: 100, blurb: 2 }, prefix: true, fuzzy: 0.2});
 	let search_div = document.getElementById("search_results");
 	let search_html = "";
 	let max_index = 20;
@@ -51,3 +48,15 @@ if ($_GET['q']!==undefined) {
 	}
 	search_div.innerHTML = search_html;
 }
+
+//get the 'index' query parameter
+if ($_GET['q']!==undefined) {
+	perform_search($_GET['q']);
+}
+
+function on_update(e) {
+	perform_search(e.target.value);
+}
+
+let text_div = document.getElementById("q");
+text_div.addEventListener('keyup', on_update);
