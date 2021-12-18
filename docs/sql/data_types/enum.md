@@ -3,6 +3,7 @@ layout: docu
 title: Enum Types
 selected: Documentation/Data Types/Enum
 expanded: Data Types
+blurb: The ENUM type represents a dictionary data structure with all possible unique values of a column.
 ---
 | Name | Description |
 |:---|:---|
@@ -10,14 +11,14 @@ expanded: Data Types
 
 ## Enums
 
-An `ENUM` type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an Enum holding all possible days. Enums are particularly interesting for string columns with high cardinality. This is because the column only stores a numerical reference to the string in the Enum dictionary, resulting in immense savings in disk storage and faster query performance.
+The `ENUM` type represents a dictionary data structure with all possible unique values of a column. For example, a column storing the days of the week can be an Enum holding all possible days. Enums are particularly interesting for string columns with high cardinality. This is because the column only stores a numerical reference to the string in the Enum dictionary, resulting in immense savings in disk storage and faster query performance.
 
 
 ### Enum Definition
-Enum types are created using the command: 
-```sql 
+Enum types are created using the command:
+```sql
 CREATE TYPE ${enum_name} AS ENUM ([${value_1},${value_2},...])
-``` 
+```
 For example:
 ```sql
 -- Creates new user defined type 'mood' as an Enum
@@ -91,10 +92,10 @@ SELECT * FROM person_2 where current_mood = past_mood;
 
 
 ### Enum Removal
-Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command: 
-```sql 
+Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command:
+```sql
 DROP TYPE ${enum_name}
-``` 
+```
 Note that any dependent must be removed before dropping the enum, or the enum must be dropped with the additional `CASCADE` parameter.
 
 For example:

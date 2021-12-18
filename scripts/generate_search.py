@@ -30,23 +30,28 @@ def extract_text(parse_node):
 def sanitize_input(text):
 	return re.sub('\s+', ' ', re.sub('[^\w\s_-]', ' ', text.lower())).strip()
 
-def extract_blurb(text):
-	candidate_splits = ['\n', '.', '|']
-	candidate_positions = [text.find(candidate) for candidate in candidate_splits]
-	best_candidate = None
-	best_position = len(text)
-	for i in range(len(candidate_splits)):
-		if candidate_positions[i] < 0:
-			continue
-		if candidate_positions[i] < best_position:
-			best_position = candidate_positions[i]
-			best_candidate = candidate_splits[i]
-	if best_candidate is None:
-		return ''
-	return text.split(best_candidate)[0]
+def extract_blurb(parse_node):
+	for child in parse_node.children:
+		if type(child) == marko.block.Paragraph:
+			return extract_text(parse_node)
+	return ''
 
 def sanitize_blurb(text):
-	return re.sub('\s+', ' ', text.replace('\n', ' ').replace('\r', ' ')).replace('"', '').replace("'", '').strip()
+	BLURB_THRESHOLD = 120
+	text = text.replace('"', '').strip()
+	if len(text) > BLURB_THRESHOLD:
+		splits = text.split(' ')
+		text = ''
+		first_split = True
+		for split in splits:
+			if len(text) + len(split) > BLURB_THRESHOLD:
+				text += '...'
+				break
+			if not first_split:
+				text += ' '
+			text += split
+			first_split = False
+	return text
 
 def index_file(fname):
 	if fname in skipped_files:
@@ -61,6 +66,7 @@ def index_file(fname):
 		exit(1)
 	title = ''
 	text = ''
+	blurb = ''
 	# parse header info
 	lines = splits[1].split('\n')
 	for line in lines:
@@ -70,17 +76,18 @@ def index_file(fname):
 		line_splits = line.split(':', 1)
 		if len(line_splits) != 2:
 			continue
-		if line_splits[0].strip().lower() != 'title':
-			continue
-		title = line_splits[1].strip()
-		break
+		if line_splits[0].strip().lower() == 'title':
+			title = line_splits[1].strip()
+		if line_splits[0].strip().lower() == 'blurb':
+			blurb = sanitize_blurb(line_splits[1].strip())
 	if len(title) == 0:
 		print(f"No title found for file '{fname}' missing header?")
 		exit(1)
 	# parse main markdown file
 	markdown_result = marko.parse(splits[2])
 	text = extract_text(markdown_result)
-	blurb = sanitize_blurb(extract_blurb(text))
+	if len(blurb) == 0:
+		blurb = sanitize_blurb(extract_blurb(markdown_result))
 	text = sanitize_input(text)
 	file_list.append({
 		'title': title,
