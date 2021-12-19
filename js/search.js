@@ -2,7 +2,7 @@
 // full-text search. Search results will include 'title' and 'category' (plus the
 // id field, that is always stored and returned)
 const miniSearch = new MiniSearch({
-fields: ['title', 'text', 'blurb'],
+fields: ['title', 'text', 'category', 'blurb'],
 storeFields: ['title', 'text', 'category', 'url', 'blurb']
 })
 // Add documents to the index
@@ -27,16 +27,25 @@ if(document.location.toString().indexOf('?') !== -1) {
 }
 function perform_search(query) {
 	// Search for documents:
-	let results = miniSearch.search(query, { boost: { title: 100, blurb: 2 }, prefix: true, fuzzy: 0.2});
+	let results = miniSearch.search(query, { boost: { title: 100, category: 20, blurb: 2 }, prefix: true, fuzzy: 0.2});
 	let search_div = document.getElementById("search_results");
 	let search_html = "";
 	let max_index = 20;
 	for(let i = 0; i < results.length; i++) {
-		search_html += "<div class='search_result'>";
+		search_html += "<div class='search_result ";
+		if (i % 2 == 0) {
+			search_html += "search_result_even";
+		} else {
+			search_html += "search_result_uneven";
+		}
+		search_html += "'>"
 		search_html += "<h2 class='search_title'>";
 		search_html += "<a href='" + results[i].url + "'>";
 		search_html += results[i].title;
-		search_html += "</a>";
+		search_html += "</a> ";
+		search_html += "<span class='search_category'>";
+		search_html += results[i].category;
+		search_html += "</span>";
 		search_html += "</h2>";
 		search_html += "<div class='search_text'>";
 		search_html += results[i].blurb;

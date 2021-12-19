@@ -53,6 +53,13 @@ def sanitize_blurb(text):
 			first_split = False
 	return text
 
+def sanitize_category(category):
+	category = category.replace('_', ' ')
+	if category == 'sql':
+		return 'SQL'
+	else:
+		return category.title()
+
 def index_file(fname):
 	if fname in skipped_files:
 		return
@@ -67,6 +74,7 @@ def index_file(fname):
 	title = ''
 	text = ''
 	blurb = ''
+	category = ''
 	# parse header info
 	lines = splits[1].split('\n')
 	for line in lines:
@@ -80,6 +88,9 @@ def index_file(fname):
 			title = line_splits[1].strip()
 		if line_splits[0].strip().lower() == 'blurb':
 			blurb = sanitize_blurb(line_splits[1].strip())
+		if line_splits[0].strip().lower() == 'category':
+			category = line_splits[1].strip()
+
 	if len(title) == 0:
 		print(f"No title found for file '{fname}' missing header?")
 		exit(1)
@@ -88,11 +99,14 @@ def index_file(fname):
 	text = extract_text(markdown_result)
 	if len(blurb) == 0:
 		blurb = sanitize_blurb(extract_blurb(markdown_result))
+	if len(category) == 0:
+		splits = fname.split(os.path.sep)
+		category = sanitize_category(splits[len(splits) - 2])
 	text = sanitize_input(text)
 	file_list.append({
 		'title': title,
 		'text': text,
-		'category': 'docs',
+		'category': category,
 		'url': '../' + fname.replace('.md', ''),
 		'blurb': blurb
 	})
