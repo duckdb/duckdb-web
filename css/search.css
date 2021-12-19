@@ -1,0 +1,10 @@
+.search_result {
+	width:100%;
+	margin:0px;
+	padding:2px;
+}
+.search_category {
+	float:right;
+	text-align:right;
+	font-size:10px;
+}
