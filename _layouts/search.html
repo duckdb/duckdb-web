@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% if page.title == "DuckDB" %}
+    <title>{{ page.title }}</title>
+	{% else %}
+    <title>DuckDB - {{ page.title }}</title>
+	{% endif %}
+
+	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/normalize.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/search.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="{{ site.baseurl }}/images/favicon/site.webmanifest">
+	<link rel="mask-icon" href="{{ site.baseurl }}/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<meta property="og:image" content="https://duckdb.org/images/sharingduckdb.jpg" />
+	{% if page.description %}
+	<meta name="description" content="{{page.description}}">
+	<meta property="og:description" content="{{page.description}}">
+	{% endif %}
+	<script>
+
+	const documents = [
+	{% for entry in site.data.search_data.data %}
+		{
+			id: {{ forloop.index }},
+			title: "{{ entry.title }}",
+			text: "{{ entry.text }}",
+			category: "{{ entry.category }}",
+			url: "{{ entry.url }}",
+			blurb: "{{ entry.blurb }}",
+		}
+	    {% unless forloop.last %},{% endunless %}
+	{% endfor %}
+	]
+	</script>
+</head>
+<body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
+
+	<header>
+		<div class="headerline">
+			<div class="headercontent">
+				<div class="duckdbhome">
+					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/DuckDB_Logo_dl.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
+					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
+				</div>
+				<div class="landingmenu">
+					<nav>
+						{% if site.data.secondarymenu.toc2[0] %}
+							{% for item in site.data.secondarymenu.toc2 %}
+							    {% if item.mainfolderitems[0] %}
+							    {% for mainentry in item.mainfolderitems %}
+							    {% if mainentry.subfolderitems[0] %} <div> {% endif %}
+							        {% if mainentry.subfolderitems[0] %} <div class="hasSub" > {% endif %}
+							            {% if mainentry.url %}
+							                {% assign myurl = mainentry.url | slice: 0, 5 %}
+							                {% if myurl == 'https' or myurl == 'http:' %}
+							                <div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a></div>
+							                {% else %}
+							                <div><a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a></div>
+							                {% endif %}
+							            {% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
+							       {% if mainentry.subfolderitems[0] %}  </div> {% endif %}
+
+							        {% if mainentry.subfolderitems[0] %}
+							            <ul>
+							                {% for entry in mainentry.subfolderitems %}
+							                <li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
+							                {% if entry.subsubfolderitems[0] %}
+							                <ul>
+							                    {% for subentry in entry.subsubfolderitems %}
+							                    <li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
+							                    {% endfor %}
+							                </ul>
+							                {% endif %}
+							                </li>
+							                {% endfor %}
+							            </ul>
+							        {% endif %}
+							    {% if mainentry.subfolderitems[0] %} </div> {% endif %}
+							    {% endfor %}
+							    {% endif %}
+							{% endfor %}
+						{% endif %}
+					</nav>
+					<nav class="mobile">
+						<div class="hamburger hamburger--squeeze">
+							<div class="hamburger-box">
+								<div class="hamburger-inner"></div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+
+
+		<div class="sidenavigation" data-selected="{{page.selected}}" data-expanded="{{page.expanded}}">
+
+			{% if site.data.menu.toc2[0] %}
+			    {% for item in site.data.menu.toc2 %}
+			    {% if item.mainfolderitems[0] %}
+			    <ul class="sidenav">
+			        {% for mainentry in item.mainfolderitems %}
+			        <li class="{% if page.url contains mainentry.url %}active {% endif %}{% if mainentry.subfolderitems[0] %}hasSub{% endif %}">
+			            {% if mainentry.url %} {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>  {% else %} {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} {{ mainentry.page }} {% endif %} </li>
+			        {% if mainentry.subfolderitems[0] %}
+			        <ul>
+			            {% for entry in mainentry.subfolderitems %}
+			            {% if mainentry.subfolderitems %}
+			            <li class="{% if page.url contains entry.url %} active {% endif %}{% if entry.subsubfolderitems[0] %}hasSub{% endif %}">
+			                {% if entry.url %} {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ entry.page }} {% endif %}
+			            </li>
+			            {% endif %}
+			            {% if entry.subsubfolderitems[0] %}
+			            <ul>
+			                {% for subentry in entry.subsubfolderitems %}
+			                {% if entry.subsubfolderitems %}
+			                <li class="{% if page.url contains subentry.url %} active {% endif %}{% if subentry.subsubsubfolderitems[0] %}hasSub{% endif %}">
+			                    {% if subentry.url %} {% if subentry.subsubsubfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {% if subentry.subsubsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ subentry.page }} {% endif %}
+			                </li>
+			                {% if subentry.subsubsubfolderitems[0] %}
+			                <ul>
+			                    {% for subsubentry in subentry.subsubsubfolderitems %}
+			                    {% if subentry.subsubsubfolderitems %}
+			                    <li class="{% if page.url contains subsubentry.url %} active {% endif %}">
+			                        {% if subsubentry.url %} <a href="{{ site.baseurl }}{{ subsubentry.url }}"> {{ subsubentry.page }} {% if subsubentry.subsubsubsubfolderitems[0] %} <span class="show"></span> {% endif %} </a>
+			                        {% else %} {% if subsubentry.subsubsubsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ subsubentry.page }} {% endif %}
+			                    </li>
+								{% if subsubentry.subsubsubfolderitems[0] %}
+			                    <ul>
+			                        {% for subsubsubentry in subsubentry.subsubsubsubfolderitems %}
+			                        <li class="{% if page.url contains subsubsubentry.url %} active {% endif %}"><a href="{{ site.baseurl }}{{ subsubsubentry.url }}"> {{ subsubsubentry.page }} </a>
+			                        </li>
+			                        {% endfor %}
+			                    </ul>
+								{% endif %}
+			                    {% endif %}
+			                    {% endfor %}
+			                </ul>
+			                {% endif %}
+			                {% endif %}
+			                {% endfor %}
+			            </ul>
+			            {% endif %}
+			            {% endfor %}
+			        </ul>
+			        {% endif %}
+			        {% endfor %}
+			    </ul>
+			    {% endif %}
+			    {% endfor %}
+			{% endif %}
+
+		</div>
+
+		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
+			<div class="headlinebar">{{ page.title }}</div>
+			<div id="main_content_wrap">
+
+				<form autocomplete="off">
+					<div class="autocomplete" style="width:300px;">
+						<input id="q" type="text" name="q" placeholder="DuckDB">
+					</div>
+				</form>
+
+				{% include anchor_headings.html html=content %}
+
+			</div>
+			<div id="search_results">
+
+			</div>
+		</div>
+
+	</main>
+
+	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
+	<script src="{{ site.baseurl }}/js/script.js"></script>
+	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
+	<script src="{{ site.baseurl }}/js/search.js"></script>
+
+</body>
+</html>

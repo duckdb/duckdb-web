@@ -3,6 +3,7 @@ layout: docu
 title: Data Types
 selected: Documentation/Data Types
 expanded: Data Types
+blurb: The table below shows all the built-in general-purpose data types.
 ---
 The table below shows all the built-in general-purpose data types. The alternatives listed in the aliases column can be used to refer to these types as well, however, note that the aliases are not part of the SQL standard and hence might not be accepted by other database engines.
 
