@@ -173,9 +173,12 @@
 			<div class="headlinebar">{{ page.title }}</div>
 			<div id="main_content_wrap">
 
-				<form>
-				<input type="text" id="q" name="q">
+				<form autocomplete="off">
+					<div class="autocomplete" style="width:300px;">
+						<input id="q" type="text" name="q" placeholder="DuckDB">
+					</div>
 				</form>
+
 				{% include anchor_headings.html html=content %}
 
 			</div>
