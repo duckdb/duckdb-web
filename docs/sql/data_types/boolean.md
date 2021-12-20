@@ -3,6 +3,7 @@ layout: docu
 title: Boolean Type
 selected: Documentation/Data Types/Boolean
 expanded: Data Types
+blurb: The BOOLEAN type represents a statement of truth ("true" or "false").
 ---
 
 | Name | Aliases | Description |

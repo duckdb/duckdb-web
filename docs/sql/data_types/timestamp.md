@@ -3,6 +3,7 @@ layout: docu
 title: Timestamp Type
 selected: Documentation/Data Types/Timestamp
 expanded: Data Types
+blurb: A timestamp specifies a combination of date (year, month, day) and a time (hour, minute, second, millisecond).
 ---
 | Name | Aliases | Description |
 |:---|:---|:---|
