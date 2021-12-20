@@ -9,14 +9,13 @@ expanded: Nested
 
 Conceptually, a `STRUCT` column contains an ordered list of other columns called "entries". The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. Each key must have the same type of value for each row.
 
-`STRUCT`s are typically used to nest multiple columns into a single column,
-and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
+`STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
 `STRUCT`s are similar to Postgres's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
 
-Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function
-or the equivalent array notation `{'name': expr, ...}` notation.
-The expressions can be constants or arbitrary expressions.
+See the [data types overview](/docs/sql/data_types/overview) for a comparison between nested data types.
+
+Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
 
 ### Creating Structs
 ```sql
@@ -128,26 +127,6 @@ FROM t1;
 | {'my_column': 1, 'v2': 42, 'v3': 2} | {'my_column': 1, 'v2': 42, 'v3': 2} |
 | {'my_column': 2, 'v2': 42, 'v3': 3} | {'my_column': 2, 'v2': 42, 'v3': 3} |
 
-## Comparison with other nested types
-DuckDB supports three nested data types: lists, structs, and maps. Each supports different use cases and has a different structure. 
-
-| Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
-|:---|:---|:---|:---|:---|
-| [LIST](/docs/sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each LIST, but can have any number of elements. | [1, 2, 3] | INT[ ] |
-| [STRUCT](/docs/sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | {'i': 42, 'j': 'a'} | STRUCT<i: INT, j: VARCHAR> |
-| [MAP](/docs/sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP<INT, VARCHAR> |
-
-## Nesting
-
-`LIST`s, `STRUCT`s, and `MAP`s can be arbitrarily nested to any depth, so long as the type rules are observed.
-
-```sql
--- Struct with lists
-SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['frog', 'toad']};
--- Struct with list of maps
-SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
-```
-
 ## Comparison Operators
 
 Nested types can be compared using all the [comparison operators](../expressions/comparison_operators).
@@ -161,10 +140,6 @@ At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
 Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
-
-## Grouping and Joining
-
-Nested types can be used in `GROUP BY` clauses and as expressions for `JOIN`s.
 
 ## Functions
 See [Nested Functions](/docs/sql/functions/nested).

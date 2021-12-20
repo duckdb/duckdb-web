@@ -5,6 +5,7 @@ selected: Documentation/Data Types
 expanded: Data Types
 blurb: The table below shows all the built-in general-purpose data types.
 ---
+## General-Purpose Data Types
 The table below shows all the built-in general-purpose data types. The alternatives listed in the aliases column can be used to refer to these types as well, however, note that the aliases are not part of the SQL standard and hence might not be accepted by other database engines.
 
 | Name | Aliases | Description |
@@ -29,9 +30,23 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `UUID` | | UUID data type |
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
-In addition, the composite types `ROW`, `MAP` and `ARRAY` are supported.
+## Nested / Composite Types
+DuckDB supports three nested data types: `LIST`, `STRUCT` and `MAP`. Each supports different use cases and has a different structure. 
 
-* (Multi-dimensional) arrays can be created by appending square brackets `[]` after the type, e.g. `INT[]` to create an integer array.
-* `ROW` can be created by specifying the individual columns that reside within the row, e.g. `ROW(a INTEGER, b VARCHAR)`. Note that rows can be nested, and can also contain arrays.
+| Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
+|:---|:---|:---|:---|:---|
+| [LIST](/docs/sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each LIST, but can have any number of elements. | [1, 2, 3] | INT[ ] |
+| [STRUCT](/docs/sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | {'i': 42, 'j': 'a'} | STRUCT<i: INT, j: VARCHAR> |
+| [MAP](/docs/sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP<INT, VARCHAR> |
 
-### More
+## Nesting
+
+`LIST`s, `STRUCT`s, and `MAP`s can be arbitrarily nested to any depth, so long as the type rules are observed.
+
+```sql
+-- Struct with lists
+SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['frog', 'toad']};
+-- Struct with list of maps
+SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
+```
+## Links to Detailed Documentation
