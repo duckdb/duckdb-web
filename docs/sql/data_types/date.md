@@ -3,6 +3,7 @@ layout: docu
 title: Date Types
 selected: Documentation/Data Types/Date
 expanded: Data Types
+blurb: A date specifies a combination of year, month and day.
 ---
 | Name | Aliases | Description |
 |:---|:---|:---|
