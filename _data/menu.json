@@ -93,6 +93,10 @@
                 {
                   "page": "C++",
                   "url": "/docs/api/cpp"
+                },
+                {
+                  "page": "Node.js",
+                  "url": "/docs/api/nodejs"
                 },               {
                   "page": "CLI",
                   "url": "/docs/api/cli"
