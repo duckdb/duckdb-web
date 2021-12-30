@@ -187,10 +187,19 @@
 				{% endif %}
 				{% endif %}
 				{% endif %}
+				<div style='visibility:hidden'>
+					{% for item in site.data.versions %}
+					{% assign basename = page.path | replace: "docs/", "" %}
+					{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
+					VERSION: {{ item.version }} <br/>
+					FILENAME: {{ filename }}  <br/>
+					{% capture exists %}{% file_exists {{ filename }} %}{% endcapture %}
+					EXISTS: {{ exists }} <br/>
+					{% endfor %}
+				</div>
 			</div>
 
 		</div>
-
 	</main>
 
 
