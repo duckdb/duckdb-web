@@ -108,5 +108,5 @@ DROP TABLE person_2;
 
 -- This successfully removes the mood type.
 -- Another option would be to DROP TYPE mood CASCADE (Drops the type and its dependents)
-DROP TABLE mood
+DROP TYPE mood
 ```
