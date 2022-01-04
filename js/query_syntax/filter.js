@@ -11,7 +11,7 @@ function GenerateFilterClause(options = {}) {
 		Keyword("FILTER"),
 		Keyword("("),
 		Keyword("WHERE"),
-		Expression('filter_expr'),
+		Expression('expr'),
 		Keyword(")")
 	]
 }
@@ -32,8 +32,10 @@ function GenerateAggregate(options = {}) {
 				new Skip()
 			]),
 			Keyword(")"),
-			Optional(Expandable("filter-clause",options,"filter-clause",GenerateFilterClause)),
-            Optional(Expandable("window-clause",options,"window-clause",GeneratePartialWindowFunction))
+			Optional(Expandable("filter-clause",options,"filter-clause",GenerateFilterClause))
+			//Currently Filters are not supported in Window functions
+			// ,
+            // Optional(Expandable("window-clause",options,"window-clause",GeneratePartialWindowFunction))
 		])
 	])
 }
