@@ -44,10 +44,10 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
-| `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | 42 |
-| `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `SELECT element_at(map([100, 5], [42, 43]),100);` | 42 |
-| `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality( map([4, 2], ['a', 'b']) );` | 2 |
-| `map()` | Returns an empty map. | `map()` | {} |
+| `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | `[a]` |
+| `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `element_at(map([100, 5], [42, 43]),100);` | `[42]` |
+| `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality( map([4, 2], ['a', 'b']) );` | `2` |
+| `map()` | Returns an empty map. | `map()` | `{}` |
 
 ## Range Functions
 
