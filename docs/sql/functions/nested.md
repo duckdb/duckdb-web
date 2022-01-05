@@ -41,6 +41,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
 
 ## Map Functions
+
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | 42 |
