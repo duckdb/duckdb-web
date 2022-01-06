@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 800 550" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g id="Time" transform="matrix(0.898236,0,0,0.196744,79.5794,223.407)">
+        <path d="M48.041,219.327L65.178,309.25L45,217.125L65.178,125L48.041,214.923L778.959,214.923L761.822,125L782,217.125L761.822,309.25L778.959,219.327L48.041,219.327Z"/>
+    </g>
+    <g transform="matrix(1,0,0,1,3,-28.5)">
+        <text x="39.961px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Instants</text>
+    </g>
+    <g id="Hour-11" serif:id="Hour 11" transform="matrix(0.249245,0,0,0.958482,585.921,95.8433)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(4.01212,0,0,1.04332,-1104.81,96.5137)">
+            <text x="382.043px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">1<tspan x="393.609px " y="242.596px ">1</tspan></text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.43px;stroke-dasharray:1.43,1.43;"/>
+    </g>
+    <g id="Hour-10" serif:id="Hour 10" transform="matrix(0.249245,0,0,0.958065,420.645,95.979)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(4.01212,0,0,1.04377,-1131.78,96.4141)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">10</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.43px;stroke-dasharray:1.43,1.43;"/>
+    </g>
+    <g id="Hour-09" serif:id="Hour 09" transform="matrix(0.249245,0,0,0.958065,255.368,95.979)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(4.01212,0,0,1.04377,-1104.81,96.4141)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">09</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.43px;stroke-dasharray:1.43,1.43;"/>
+    </g>
+    <g id="Hour-08" serif:id="Hour 08" transform="matrix(0.249245,0,0,0.958065,90.0906,95.979)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(4.01212,0,0,1.04377,-1131.78,96.4141)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">08</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.43px;stroke-dasharray:1.43,1.43;"/>
+    </g>
+    <g id="Hour-111" serif:id="Hour 11" transform="matrix(0.249245,0,0,0.958482,585.921,-220.157)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(4.01212,0,0,1.04332,-1104.81,95.4704)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">03</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.43px;stroke-dasharray:1.43,1.43;"/>
+    </g>
+    <g id="Hour-02" serif:id="Hour 02" transform="matrix(0.499326,0,0,0.958065,225.358,-220.021)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(2.0027,0,0,1.04377,-458.625,96.2576)">
+            <text x="440.852px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">02</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;stroke-dasharray:1.31,1.31;"/>
+    </g>
+    <g id="Hour-01" serif:id="Hour 01" transform="matrix(0.249245,0,0,0.958065,90.0906,-220.021)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(255,157,166);"/>
+        <g transform="matrix(4.01212,0,0,1.04377,-1131.78,95.3704)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">01</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.43px;stroke-dasharray:1.43,1.43;"/>
+    </g>
+    <g id="Day" transform="matrix(0.996979,0,0,0.958482,0.362538,60.3795)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(84,162,75);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,55.3045,96.6218)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">15</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g id="Day1" serif:id="Day" transform="matrix(0.996979,0,0,0.958482,0.362538,-182.621)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(84,162,75);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,55.3045,96.6218)">
+            <text x="381.152px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">15</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g id="Day2" serif:id="Day" transform="matrix(0.996979,0,0,0.958482,0.362538,132.379)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(238,202,59);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,55.3045,96.6218)">
+            <text x="364.471px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">00:00</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g id="Day3" serif:id="Day" transform="matrix(0.499326,0,0,0.958482,60.0809,-256.621)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(238,202,59);"/>
+        <g transform="matrix(2.0027,0,0,1.04332,-347.676,96.364)">
+            <text x="364.775px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">-07:00</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;stroke-dasharray:1.31,1.31;"/>
+    </g>
+    <g id="Day4" serif:id="Day" transform="matrix(0.499326,0,0,0.958482,390.635,-256.621)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(238,202,59);"/>
+        <g transform="matrix(2.0027,0,0,1.04332,-329.652,96.364)">
+            <text x="355.775px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">-08:00</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;stroke-dasharray:1.31,1.31;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-268,245.422)">
+        <text x="327.65px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Hours</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-268,283.743)">
+        <text x="328.012px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Of<tspan x="348.764px 354.32px " y="182.163px 182.163px ">fs</tspan>et</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-268,-67.023)">
+        <text x="327.65px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Hours</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-268,-107.703)">
+        <text x="328.012px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Of<tspan x="348.764px 354.32px " y="182.163px 182.163px ">fs</tspan>et</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-268,210.422)">
+        <text x="335.434px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Days</text>
+    </g>
+    <g id="Month" transform="matrix(0.996979,0,0,0.958482,0.362538,24.9156)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(245,133,24);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,55.3045,96.0624)">
+            <text x="339.146px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">November</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g id="Month1" serif:id="Month" transform="matrix(0.996979,0,0,0.958482,0.362538,-144.084)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(245,133,24);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,55.3045,96.0624)">
+            <text x="339.146px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">November</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-268,177.422)">
+        <text x="315.414px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Months</text>
+    </g>
+    <g id="Years" transform="matrix(0.996979,0,0,0.958482,0.362538,-11.5067)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(76,120,168);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,82.3864,96.364)">
+            <text x="346.609px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">2021</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g id="Years1" serif:id="Years" transform="matrix(0.996979,0,0,0.958482,0.362538,-107.507)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(76,120,168);"/>
+        <g transform="matrix(1.00303,0,0,1.04332,82.3864,96.364)">
+            <text x="346.609px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">2021</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.02px;stroke-dasharray:1.02,1.02;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,3,19.5)">
+        <text x="59.59px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Y<tspan x="71.094px 82.217px " y="301.788px 301.788px ">ea</tspan>rs</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-268.5,-28.7027)">
+        <text x="335.434px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Days</text>
+    </g>
+    <g transform="matrix(1,0,0,1,-268.5,3.29732)">
+        <text x="315.414px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Months</text>
+    </g>
+    <g transform="matrix(1,0,0,1,2.5,-77.625)">
+        <text x="59.59px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Y<tspan x="71.094px 82.217px " y="301.788px 301.788px ">ea</tspan>rs</text>
+    </g>
+    <g transform="matrix(1,0,0,1,388.66,206.375)">
+        <text x="43.448px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">UTC</text>
+    </g>
+    <g transform="matrix(1,0,0,1,349.554,-268.625)">
+        <text x="46.513px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Los <tspan x="83.212px 96.552px " y="301.788px 301.788px ">An</tspan>geles</text>
+    </g>
+</svg>

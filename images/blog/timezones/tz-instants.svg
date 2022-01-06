@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 800 160" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g id="Time" transform="matrix(0.898236,0,0,0.196744,84.0794,-21.3925)">
+        <path d="M48.041,217.125L65.178,309.25L45,217.125L65.178,125L48.041,217.125L778.959,217.125L761.822,125L782,217.125L761.822,309.25L778.959,217.125L48.041,217.125Z" style="stroke:black;stroke-width:3.08px;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,7.5,-273.3)">
+        <text x="39.961px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Instants</text>
+    </g>
+    <g id="Day" transform="matrix(0.5,0,0,0.958482,64.5,-184.42)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(84,162,75);"/>
+        <g transform="matrix(2,0,0,1.04332,-278.68,96.6218)">
+            <text x="351.492px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">31</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;"/>
+    </g>
+    <g id="Day1" serif:id="Day" transform="matrix(0.5,0,0,0.958482,395.5,-184.42)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(84,162,75);"/>
+        <g transform="matrix(2,0,0,1.04332,-278.68,96.6218)">
+            <text x="351.492px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">01</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-263.5,-34.3772)">
+        <text x="335.434px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Days</text>
+    </g>
+    <g id="Month" transform="matrix(0.5,0,0,0.958482,64.5,-219.884)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(245,133,24);"/>
+        <g transform="matrix(2,0,0,1.04332,-463.68,96.364)">
+            <text x="401.987px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">December</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;"/>
+    </g>
+    <g id="Month1" serif:id="Month" transform="matrix(0.5,0,0,0.958482,395.5,-219.884)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(245,133,24);"/>
+        <g transform="matrix(2,0,0,1.04332,-463.68,96.364)">
+            <text x="414.649px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">January</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-263.5,-67.3772)">
+        <text x="315.414px" y="182.163px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Months</text>
+    </g>
+    <g id="Years" transform="matrix(0.5,0,0,0.958482,64.5,-256.306)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(76,120,168);"/>
+        <g transform="matrix(2,0,0,1.04332,-327.598,93.3838)">
+            <text x="362.604px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">1969</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;"/>
+    </g>
+    <g id="Years1" serif:id="Years" transform="matrix(0.5,0,0,0.958482,395.5,-256.306)">
+        <rect x="120" y="325" width="662" height="31" style="fill:rgb(76,120,168);"/>
+        <g transform="matrix(2,0,0,1.04332,-340.598,96.364)">
+            <text x="369.104px" y="242.596px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:24px;">1970</text>
+        </g>
+        <rect x="120" y="325" width="662" height="31" style="fill:none;stroke:black;stroke-width:1.31px;"/>
+    </g>
+    <g transform="matrix(1,0,0,1,7.5,-225.3)">
+        <text x="59.59px" y="301.788px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:20px;">Y<tspan x="71.094px 82.217px " y="301.788px 301.788px ">ea</tspan>rs</text>
+    </g>
+    <g transform="matrix(0.5,0,0,0.5,243,-92.6746)">
+        <circle cx="425" cy="228" r="7" style="stroke:black;stroke-width:4px;"/>
+    </g>
+</svg>
