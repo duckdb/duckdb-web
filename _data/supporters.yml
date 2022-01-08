@@ -1,6 +1,14 @@
 gold:
   - name: Voltron Data
-    url: https://voltrondata.com/
+    url: https://voltrondata.com
     logoimg: voltrondata.svg
     
 silver:
+  - name: Hex
+    url: https://hex.tech
+    logoimg: hex.svg
+    
+  - name: Watershed
+    url: https://watershedclimate.com
+    logoimg: watershed.svg
+    
