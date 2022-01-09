@@ -18,6 +18,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 ```
 
 ### Examples
+
 ```sql
 -- read a CSV file from disk, auto-infer options
 SELECT * FROM 'test.csv';
@@ -33,6 +34,27 @@ CREATE TABLE ontime AS SELECT * FROM 'test.csv';
 -- write the result of a query to a CSV file
 COPY (SELECT * FROM ontime) TO 'test.csv' WITH (HEADER 1, DELIMITER '|');
 ```
+
+
+# Parameters
+
+| Name | Description |
+|:---|:---|
+| `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. `read_csv_auto` defaults to true for this parameter, `read_csv` defaults to false. |
+| `COLUMNS` | A struct that specifies the column names and column types contained within the CSV file (e.g. `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred. |
+| `SEP` or `DELIM` | Specifies the string that separates columns within each row (line) of the file. The default value is a comma (`,`). |
+| `NULLSTR` | Specifies the string that represents a NULL value. The default is an empty string. |
+| `HEADER` | Specifies that the file contains a header line with the names of each column in the file. |
+| `QUOTE` | Specifies the quoting string to be used when a data value is quoted. The default is double-quote (`"`). |
+| `ESCAPE` | Specifies the string that should appear before a data character sequence that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
+| `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](/docs/sql/functions/dateformat) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](/docs/sql/functions/dateformat) |
+| `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Note: Only the first max. 1024 rows will be used for dialect detection. |
+| `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
+| `NORMALIZE_NAMES` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. |
+| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. |
+| `FILENAME` | Boolean value that specifies whether or not an extra `FILENAME` column should be included in the result. |
+| `SKIP` | The number of lines at the top of the file to skip. |
 
 # read_csv_auto function
 The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
@@ -62,9 +84,6 @@ DESCRIBE ontime;
 |UniqueCarrier |VARCHAR|YES |NULL|NULL   |NULL |
 |OriginCityName|VARCHAR|YES |NULL|NULL   |NULL |
 |DestCityName  |VARCHAR|YES |NULL|NULL   |NULL |
-
-| `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Note: Only the first max. 1024 rows will be used for dialect detection. |
-| `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
 
 ```sql
 SELECT * FROM read_csv_auto('test.csv', SAMPLE_SIZE=20000);
