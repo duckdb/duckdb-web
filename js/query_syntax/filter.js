@@ -6,16 +6,6 @@ function GenerateAggregateOrderBy(options = {}) {
 	]
 }
 
-function GenerateFilterClause(options = {}) {
-	return [
-		Keyword("FILTER"),
-		Keyword("("),
-		Keyword("WHERE"),
-		Expression('expr'),
-		Keyword(")")
-	]
-}
-
 function GenerateAggregate(options = {}) {
 	return Diagram([
 		AutomaticStack([
@@ -32,10 +22,10 @@ function GenerateAggregate(options = {}) {
 				new Skip()
 			]),
 			Keyword(")"),
-			Optional(Expandable("filter-clause",options,"filter-clause",GenerateFilterClause))
+			Optional(Sequence(GenerateFilterClause()))
 			//Currently Filters are not supported in Window functions
 			// ,
-            // Optional(Expandable("window-clause",options,"window-clause",GeneratePartialWindowFunction))
+            // Optional(Sequence(GeneratePartialWindowFunction()))
 		])
 	])
 }

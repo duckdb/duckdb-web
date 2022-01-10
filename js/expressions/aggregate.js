@@ -6,16 +6,6 @@ function GenerateAggregateOrderBy(options = {}) {
 	]
 }
 
-function GenerateFilterClause(options = {}) {
-	return [
-		Keyword("FILTER"),
-		Keyword("("),
-		Keyword("WHERE"),
-		Expression('filter_expr'),
-		Keyword(")")
-	]
-}
-
 function GenerateAggregate(options = {}) {
 	return Diagram([
 		AutomaticStack([
@@ -32,7 +22,7 @@ function GenerateAggregate(options = {}) {
 				new Skip()
 			]),
 			Keyword(")"),
-			Optional(Expandable("filter-clause",options,"filter-clause",GenerateFilterClause)),
+			Optional(Sequence(GenerateFilterClause())),
 		])
 	])
 }
