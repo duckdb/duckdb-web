@@ -76,7 +76,7 @@ add_css: foundation.css
 		Gold membership
 		<ul>
 			{% for supporter in site.data.supporters.gold %}
-			<li><img src="{{ '/images/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></li>
+			<li><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></li>
 			{% endfor %}
 		</ul> 
 	</div>
@@ -86,7 +86,7 @@ add_css: foundation.css
 		Silver membership
 		<ul>
 			{% for supporter in site.data.supporters.silver %}
-			<li><img src="{{ '/images/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></li>
+			<li><img src="{{ '/images/foundation/' | append: supporter.logoimg | relative_url }}" alt="{{ supporter.name }}"></li>
 			{% endfor %}
 		</ul>
 	</div>
