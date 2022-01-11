@@ -1917,3 +1917,13 @@ function GenerateCTE(options) {
 			)
 		])]
 }
+
+function GenerateFilterClause(options = {}) {
+	return [
+		Keyword("FILTER"),
+		Keyword("("),
+		Keyword("WHERE"),
+		Expression('filter_expr'),
+		Keyword(")")
+	]
+}

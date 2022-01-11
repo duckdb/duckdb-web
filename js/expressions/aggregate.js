@@ -8,7 +8,7 @@ function GenerateAggregateOrderBy(options = {}) {
 
 function GenerateAggregate(options = {}) {
 	return Diagram([
-		Sequence([
+		AutomaticStack([
 			Expression("aggregate-name"),
 			Keyword("("),
 			Choice(0, [
@@ -21,7 +21,8 @@ function GenerateAggregate(options = {}) {
 				]),
 				new Skip()
 			]),
-			Keyword(")")
+			Keyword(")"),
+			Optional(Sequence(GenerateFilterClause())),
 		])
 	])
 }

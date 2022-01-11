@@ -225,6 +225,10 @@
                     {
                       "page": "VALUES",
                       "url": "/docs/sql/query_syntax/values"
+                    },
+                    {
+                      "page": "FILTER",
+                      "url": "/docs/sql/query_syntax/filter"
                     }
                   ]
                 },
