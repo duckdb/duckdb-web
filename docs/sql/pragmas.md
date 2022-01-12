@@ -41,6 +41,25 @@ PRAGMA memory_limit='1GB';
 PRAGMA threads=4;
 ```
 
+### database_size
+```sql
+-- get the file and memory size of each database
+PRAGMA database_size;
+```
+
+`database_size` returns information about the file and memory size of each table. The column types of the returned results are given below:
+
+```sql
+database_size VARCHAR, -- total block count times the block size
+block_size BIGINT,     -- database block size
+total_blocks BIGINT,   -- total blocks in the database
+used_blocks BIGINT,    -- used blocks in the database
+free_blocks BIGINT,    -- free blocks in the database
+wal_size VARCHAR,      -- write ahead log size
+memory_usage VARCHAR,  -- memory used by the database buffer manager
+memory_limit VARCHAR   -- maximum memory allowed for the database
+```
+
 ### collations, default_collation
 ```sql
 -- list all available collations
