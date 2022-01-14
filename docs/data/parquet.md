@@ -57,6 +57,7 @@ SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 
 #### Glob Syntax
 Any file name input to the parquet_scan function can either be an exact filename, or use a glob syntax to read multple files that match a pattern.
+
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
 | `*`        | matches any number of any characters (including none)     |
