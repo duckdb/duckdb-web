@@ -36,4 +36,4 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | `to_milliseconds(`*`integer`*`)` | Construct a millisecond interval | `to_milliseconds(5)` | INTERVAL 5 MILLISECOND |
 | `to_microseconds(`*`integer`*`)` | Construct a microsecond interval | `to_microseconds(5)` | INTERVAL 5 MICROSECOND |
 
-All [date parts](/docs/sql/functions/datepart) are defined for intervals except `dow`, `isodow`, `doy`, `week` and `yearweek`.
+Only the documented [date parts](/docs/sql/functions/datepart) are defined for intervals.

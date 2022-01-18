@@ -3,20 +3,74 @@ layout: docu
 title: Timestamp Type
 selected: Documentation/Data Types/Timestamp
 expanded: Data Types
-blurb: A timestamp specifies a combination of date (year, month, day) and a time (hour, minute, second, millisecond).
+blurb: A timestamp specifies a combination of a date (year, month, day) and a time (hour, minute, second, millisecond).
 ---
+Timestamps represent points in absolute time, usually called *instants*.
+DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
+
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `TIMESTAMP` | datetime | time of day (no time zone) |
+| `TIMESTAMP` | datetime | time of day (ignores time zone) |
+| `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | time of day (uses time zone) |
 
-A timestamp specifies a combination of `DATE` (year, month, day) and a `TIME` (hour, minute, second, millisecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss`).
+A timestamp specifies a combination of `DATE` (year, month, day) and a `TIME` (hour, minute, second, millisecond). Timestamps can be created using the `TIMESTAMP` keyword, where the data must be formatted according to the ISO 8601 format (`YYYY-MM-DD hh:mm:ss[.zzzzzz][+-TT[:tt]]`).
 
 ```sql
--- 11:30 AM at 20 September, 1992
+-- 11:30 AM at 20 September, 1992 GMT
 SELECT TIMESTAMP '1992-09-20 11:30:00';
--- 2:30 PM at 20 September, 1992
+-- 2:30 PM at 20 September, 1992 GMT
 SELECT TIMESTAMP '1992-09-20 14:30:00';
 ```
 
 ## Functions
 See [Timestamp Functions](/docs/sql/functions/timestamp).
+
+## Time Zones
+The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
+The built in ICU extension implements all the binning and arithmetic functions using the
+[International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
+
+To set the time zone to use, load the ICU extension and use the `Set TimeZone` command:
+
+```sql
+require icu
+
+Set TimeZone='Americas/Los_Angeles';
+```
+
+Time binning operations for `TIMESTAMPTZ` will then be implemented using the given time zone.
+
+A list of available time zones can be pulled from the `pg_timezone_names()` table function:
+
+```sql
+SELECT name, abbrev, utc_offset FROM pg_timezone_names() ORDER BY name;
+```
+
+## Calendars
+The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command:
+
+```sql
+require icu
+
+Set Calendar='japanese';
+```
+
+Time binning operations for `TIMESTAMPTZ` will then be implemented using the given calendar.
+In  this example, the `era` part will now report the Japanese imperial era number.
+
+A list of available calendars can be pulled from the `icu_calendar_names()` table function:
+
+```sql
+SELECT name FROM icu_calendar_names() ORDER BY 1;
+```
+
+## Settings
+The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
+They can be looked from in the `duckdb_settings()` table function:
+
+```sql
+SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
+-- Americas/Los_Angeles
+SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
+-- gregorian
+```
