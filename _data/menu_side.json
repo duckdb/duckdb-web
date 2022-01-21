@@ -1,0 +1,96 @@
+{
+  "sidemenu": [
+    {
+      "page": "Development",
+      "slug": "/dev/",
+      "mainfolderitems": [
+        {
+          "page": "Testing",
+          "url": "/dev/testing"
+        },
+        {
+          "page": "Profiling",
+          "url": "/dev/profiling"
+        }
+      ]
+    },
+    {
+      "page": "Why DuckDB",
+      "url": "/why_duckdb"
+    },
+    {
+      "page": "FAQ",
+      "url": "/faq"
+    },
+    {
+      "page": "Code of Conduct",
+      "url": "/code_of_conduct"
+    },
+    {
+      "page": "Live Demo",
+      "url": "/demo/"
+    },
+    {
+      "page": "Benchmarking",
+      "slug": "/benchmarks/",
+      "mainfolderitems": [
+      {
+      "page": "Overview",
+          "url": "/benchmarks/"
+      },
+      {
+      "page": "Append",
+          "url": "/benchmarks/append"
+      },
+      {
+      "page": "Arrow Integration",
+          "url": "/benchmarks/arrow_integration"
+      },
+      {
+      "page": "Aggregate",
+          "url": "/benchmarks/aggregate"
+      },
+      {
+      "page": "Bulk Update",
+          "url": "/benchmarks/bulkupdate"
+      },
+      {
+      "page": "Cast",
+          "url": "/benchmarks/cast"
+      },
+      {
+      "page": "CSV",
+          "url": "/benchmarks/csv"
+      },
+      {
+      "page": "In",
+          "url": "/benchmarks/in"
+      },
+      {
+      "page": "Micro",
+          "url": "/benchmarks/micro"
+      },
+      {
+      "page": "Startup",
+          "url": "/benchmarks/startup"
+      },
+      {
+      "page": "Storage",
+          "url": "/benchmarks/storage"
+      },
+      {
+      "page": "String",
+          "url": "/benchmarks/string"
+      },
+      {
+      "page": "TPC-DS",
+          "url": "/benchmarks/tpcds"
+      },
+      {
+      "page": "TPC-H",
+          "url": "/benchmarks/tpch"
+      }
+      ]
+    }
+  ]
+}

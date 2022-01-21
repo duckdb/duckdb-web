@@ -150,29 +150,7 @@ $(document).ready(function(){
 	$('.sidenavigation .hasSub').click(function(){
 		$(this).next('ul').slideToggle();
 	});
-	
-	if($('.sidenavigation').length != 0){
-    	$('li.active').closest("ul").addClass("parentnav");
-    	$('.parentnav').parents("ul").addClass("parentnav");
-    	
-    	$('.sidenavigation ul:visible').prev("li.hasSub").addClass("opened");
-    	$('li.active').closest("ul").prev("li").addClass("opened");
-    	
-    	$('.sidenavigation ul li.hasSub').each(function() {
-	    	var pagename = $(this).text().replace(/\s+/g, '').toLowerCase();
-			$(this).addClass(pagename);
-		});
-		
-		var selected = $('.sidenavigation').attr("data-selected");
-		var expanded = $('.sidenavigation').attr("data-expanded").replace(/\s+/g, '').toLowerCase();
-		if(selected.length != 0){
-			$(".sidenavigation ul li a:contains(" + selected + ")").parent('li').addClass('active');
-		}
-		if(expanded.length != 0){
-			$(".sidenavigation ul li." + expanded).addClass('opened').next('ul').show();
-		}
-    }
-    
+	   
     
     // arrows in menu 
     $('.sidenavigation .hasSub').click(function(){
@@ -247,19 +225,6 @@ $(document).ready(function(){
 	    return false;
 	});
     
-    
-	// Footnote Alignment
-	/*
-	if($('.wrap.whyduckdb').length != 0 && windowWidth > 860){
-		$('.wrap.whyduckdb article sup').each(function(){
-			var supnr = $(this).text();
-			var supoffset = $( this ).position().top;
-			$('.wrap.whyduckdb .footnotes div.sup[data-id="'+supnr+'"]').css('top', supoffset-132);
-		})
-	} else if($('.wrap.whyduckdb').length != 0 && windowWidth <= 860){
-		$('.wrap.whyduckdb .footnotes').addClass('mobilesups');
-	}
-	*/
 	
 	// Header Animation
 	let duckDBicon = document.getElementById('duckdbanimation');	
@@ -321,15 +286,19 @@ $(document).ready(function(){
 	// Appending Content-List of Overview-Pages
 	if (window.location.href.indexOf("overview") > -1) {
 	    //contentlist = $('li.opened ~ .parentnav li.active ~ li').clone();
-	    contentlist = $('li.opened.'+expanded+' ~ .parentnav li.active ~ li').clone();
-	    
-	    $('#main_content_wrap').append(contentlist)
+	    // ontentlist = $('li.opened.'+expanded+' ~ .parentnav li.active ~ li').clone();
+		var selector = 'li.opened a[href="' + window.location.pathname + '"]';
+		clonedUL = $(selector).parent().parent().clone();
+		clonedUL.find(selector).parent().remove();
+		clonedUL.find('ul').show();
+	    $('#main_content_wrap').append(clonedUL);
 	}
 	
 	// Appending Content-List of Documentation
 	if ( $('.wrap.documentation') != 0 ) {
-	    contentlist = $('ul.sidenav').clone();
-	    $('#docusitemaphere').append(contentlist)
+	    contentlist = $('ul.sidenav').clone()
+		console.log(contentlist);
+	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
 	}
 	
 	// Add class-name to external Links
@@ -338,22 +307,7 @@ $(document).ready(function(){
 	}).addClass("externallink").attr('target','_blank');
 	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
-	
-	// Shorten the News on Landingpage
-	/*
-	function add3Dots(string, limit){
-		var dots = " [...] ";
-		if(string.length > limit){
-			string = string.substring(0,limit) + dots;
-		}
-		return string;
-	}
-	$('body.landing .newsblog .postpreview p:not(:first-child)').each(function(){
-		var shortened = add3Dots($(this).text(), 200);
-		$(this).text(shortened);
-		console.log(shortened)
-	})
-	*/
+
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
@@ -395,6 +349,24 @@ $(document).ready(function(){
 		});
 	
 	}
+	
+	
+	// CHANGE DOC VERSION
+	$('.versionsidebar ul li').click(function(){
+		var clickedversion = $(this).text();
+		var docversion = getUrlParameter('ver');
+		if( docversion ){
+			var pathname = window.location.pathname.split("/docs/archive/"+docversion);
+		} else {
+			var pathname = window.location.pathname.split("/docs");
+		}
+		
+		if( $(this).hasClass('latest') ){
+			var versionurl = "/docs"+pathname[1]
+		} else {
+			var versionurl = "/docs/archive/"+clickedversion+pathname[1]+"?ver="+clickedversion;
+		}
+	})
 	
 	
 });
