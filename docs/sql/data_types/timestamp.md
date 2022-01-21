@@ -30,11 +30,16 @@ The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitab
 The built in ICU extension implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
-To set the time zone to use, load the ICU extension and use the `Set TimeZone` command:
+To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled
+with several DuckDB clients (including Python), so this step can be skipped in those cases.
 
 ```sql
 require icu
+```
 
+Next, use the `Set TimeZone` command:
+
+```sql
 Set TimeZone='Americas/Los_Angeles';
 ```
 
@@ -43,11 +48,20 @@ Time binning operations for `TIMESTAMPTZ` will then be implemented using the giv
 A list of available time zones can be pulled from the `pg_timezone_names()` table function:
 
 ```sql
-SELECT name, abbrev, utc_offset FROM pg_timezone_names() ORDER BY name;
+SELECT 
+    name,
+    abbrev,
+    utc_offset 
+FROM pg_timezone_names() 
+ORDER BY 
+    name;
 ```
 
+
 ## Calendars
-The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command:
+The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command.
+Note that the `require icu` step is only required if the DuckDB client does not bundle the
+ICU extension. 
 
 ```sql
 require icu
