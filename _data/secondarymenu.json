@@ -25,11 +25,11 @@
             },
             {
               "page": "Why DuckDB",
-              "url": "/docs/why_duckdb"
+              "url": "/why_duckdb"
             },
             {
               "page": "FAQ",
-              "url": "/docs/faq"
+              "url": "/faq"
             },
           ]
         },
