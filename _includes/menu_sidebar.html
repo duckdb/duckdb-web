@@ -9,7 +9,7 @@
 		{% assign urlParts = urlString | split: "/"  %}
 		{% assign startingUrl = startingUrl | append: "/" %}
 	{% else %}
-		{% assign versionviewed = site.currentduckdbversion %}
+		{% assign versionviewed = "current" %}
 		{% assign startingUrl = "/" %}
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}

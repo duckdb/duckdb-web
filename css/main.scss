@@ -962,7 +962,8 @@ body.documentation{
 			&:hover ~ .versionsidebar{
 				transform: translateX(0px);
 			}
-			.versionsidebar:hover{
+			.versionsidebar:hover, 
+			.versionsidebar.active{
 				transform: translateX(0px);
 			}
 		}

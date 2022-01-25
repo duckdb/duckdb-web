@@ -86,7 +86,7 @@
 				<div class="versionsidebar">
 					<span>Version: </span>
 					<ul>
-					<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentduckdbversion }} (latest)</a></li>
+					<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>current</a></li>
 					
 					{% assign candidate_pages = "" | split: ','  %}
 					{% for site_page in site.pages %}
@@ -103,8 +103,7 @@
 							{% endif %}
 						{% endfor %}	
 						{% if exists == true %}
-							{% assign version_urlappendix = '?ver=' | append: item.version %}
-							<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" | append: version_urlappendix }}'>{{ item.version }}</a></li>
+							<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
 						{% endif %}
 					{% endfor %}
 					</ul>
