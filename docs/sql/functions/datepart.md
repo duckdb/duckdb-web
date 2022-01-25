@@ -12,6 +12,8 @@ The fields are specified as strings that contain the part name of the field.
 Below is a full list of all available date part specifiers.
 The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 
+### Usable as Date Part Specifiers and in Intervals
+
 | Specifier | Description | Synonyms | Example |
 |:---|:---|:---|:---|
 | `'year'` | Gregorian year | `'y'`, `'years'` | 2021 |
@@ -26,6 +28,11 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'second'` | Seconds | `'seconds'`, `'s'` | 44 |
 | `'minute'` | Minutes | `'minutes'`, `'m'` | 59 |
 | `'hour'` | Hours | `'hours'`, `'h'` | 11 |
+
+### Usable in Date Part Specifiers Only
+
+| Specifier | Description | Synonyms | Example |
+|:---|:---|:---|:---|
 | `'epoch'` | Seconds since 1970-01-01 | | 1627991984 |
 | `'dayofweek'` | Day of the week (Sunday = 0, Saturday = 6) | `'weekday'`, `'dow'` | 2 |
 | `'isodow'` | ISO day of the week (Monday = 1, Sunday = 7) | | 2 |
@@ -38,7 +45,6 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'timezone_hour'` | Time zone offset hour portion | | 0 |
 | `'timezone_minute'` | Time zone offset minute portion | | 0 |
 
-The parts above `'epoch'` are also used to specify `INTERVAL` types.
 Note that the time zone parts are all zero unless a time zone plugin such as ICU
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
 
