@@ -33,12 +33,7 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 | `last_day(`*`date`*`)` | The last day of the month | `last_day(DATE '1992-09-20')` | `1992-09-30` |
 | `least(`*`date`*`, `*`date`*`)` | The earlier of two dates | `least(DATE '1992-09-20', DATE '1992-03-07')` | `1992-03-07` |
 | `monthname(`*`date`*`)` | The (English) name of the month | `monthname(DATE '1992-09-20')` | `September` |
-| `weekofyear(`*`date`*`)` | The week of the year | `weekofyear(DATE '1992-09-20')` | `38` |
-| `dayofmonth(`*`date`*`)` | Day of month | `dayofmonth(DATE '1992-09-20')` | `20` |
 | `last_day(`*`date`*`)` | Last day of the corresponding month in the date | `last_day(DATE '1992-09-20')` | `1992-09-30` |
-| `weekday(`*`date`*`)` | Day of the week (Sunday = 0, Saturday = 6) | `weekday(DATE '1992-09-20')` | `0` |
-| `isodow(`*`date`*`)` | ISO day of the week (Monday = 1, Sunday = 7) | `isodow(DATE '1992-09-20')` | `7` |
-| `yearweek(`*`date`*`)` | Year and week of year | `yearweek(DATE '1992-09-20')` | `199238` |
 | `strftime(date, format)` | Converts a date to a string according to the [format string](/docs/sql/functions/dateformat) | `strftime(date '1992-01-01', '%a, %-d %B %Y')` | `Wed, 1 January 1992` |
 
 There are also dedicated extraction functions to get the [subfields](/docs/sql/functions/datepart).
