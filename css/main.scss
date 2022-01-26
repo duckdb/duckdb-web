@@ -21,34 +21,34 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 /** FONT IMPORT **/
 @import url(vs.css);
 @font-face{
-    font-family: "SuisseIntl-Book";
-    src: url("webfont/SuisseIntl-Book-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebS.woff") format("woff");
+	font-family: "SuisseIntl-Book";
+	src: url("webfont/SuisseIntl-Book-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebS.woff") format("woff");
 }
 @font-face{
-    font-family: "SuisseIntl-Bold";
-    src: url("webfont/SuisseIntl-Bold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Bold-WebS.woff") format("woff");
-}
-
-@font-face{
-    font-family: "DuckDB-Symbol";
-    src: url("webfont/DuckDB-Symbol.woff2") format("woff2"),url("webfont/DuckDB-Symbol.woff") format("woff");
+	font-family: "SuisseIntl-Bold";
+	src: url("webfont/SuisseIntl-Bold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Bold-WebS.woff") format("woff");
 }
 
 @font-face{
-    font-family: "JetBrainsMono-Regular";
-    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Regular.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Regular.woff") format("woff");
+	font-family: "DuckDB-Symbol";
+	src: url("webfont/DuckDB-Symbol.woff2") format("woff2"),url("webfont/DuckDB-Symbol.woff") format("woff");
+}
+
+@font-face{
+	font-family: "JetBrainsMono-Regular";
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Regular.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Regular.woff") format("woff");
 }
 @font-face{
-    font-family: "JetBrainsMono-Bold";
-    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold.woff") format("woff");
+	font-family: "JetBrainsMono-Bold";
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold.woff") format("woff");
 }
 @font-face{
-    font-family: "JetBrainsMono-Italic";
-    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Italic.woff") format("woff");
+	font-family: "JetBrainsMono-Italic";
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Italic.woff") format("woff");
 }
 @font-face{
-    font-family: "JetBrainsMono-Bold-Italic";
-    src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold-Italic.woff") format("woff");
+	font-family: "JetBrainsMono-Bold-Italic";
+	src: url("webfont/JetBrainsMono/woff2/JetBrainsMono-Bold-Italic.woff2") format("woff2"),url("webfont/JetBrainsMono/woff/JetBrainsMono-Bold-Italic.woff") format("woff");
 }
 
 @import "hamburgers.min.css";
@@ -143,8 +143,8 @@ a.externallink:hover{
 a.externallink:hover::after{
 	opacity: 1;
 	-webkit-transform: translate(0px, 0px);
-	    -ms-transform: translate(0px, 0px);
-	        transform: translate(0px, 0px);
+		-ms-transform: translate(0px, 0px);
+			transform: translate(0px, 0px);
 }
 a.externallink::after {
   content: " \2197";
@@ -154,8 +154,8 @@ a.externallink::after {
   font-size: 10px;
   opacity: 0;
   -webkit-transform: translate(-10px, 5px);
-      -ms-transform: translate(-10px, 5px);
-          transform: translate(-10px, 5px);
+	  -ms-transform: translate(-10px, 5px);
+		  transform: translate(-10px, 5px);
   -webkit-transition: all .3s;
   -o-transition: all .3s;
   transition: all .3s;
@@ -172,8 +172,8 @@ a.externallink{
 	font-size: 90%;
 	top: -1px;
 	-webkit-transform: translateX(1px);
-	    -ms-transform: translateX(1px);
-	        transform: translateX(1px);
+		-ms-transform: translateX(1px);
+			transform: translateX(1px);
 	display: inline-block;
 	-webkit-transition: all .3s;
 	-o-transition: all .3s;
@@ -184,8 +184,8 @@ a.externallink{
 }
 .external a:hover::after{
 	-webkit-transform: translateX(5px);
-	    -ms-transform: translateX(5px);
-	        transform: translateX(5px);
+		-ms-transform: translateX(5px);
+			transform: translateX(5px);
 	opacity: 1;
 	color: $duckDByellow;
 }
@@ -239,8 +239,8 @@ header .headerline{
 		display: -ms-flexbox;
 		display: flex;
 		-webkit-box-pack: justify;
-		    -ms-flex-pack: justify;
-		        justify-content: space-between;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 		.duckdbhome{
 			font-size: 20px;
 			font-family: "DuckDB-Symbol";
@@ -311,8 +311,8 @@ header .headerline{
 					opacity: 1;
 					visibility: visible;
 					-webkit-transform: translateY(-10px);
-					    -ms-transform: translateY(-10px);
-					        transform: translateY(-10px);
+						-ms-transform: translateY(-10px);
+							transform: translateY(-10px);
 				}
 				.hasSub{
 					cursor: pointer;
@@ -327,8 +327,8 @@ header .headerline{
 							opacity: 1;
 							visibility: visible;
 							-webkit-transform: translateY(-10px);
-							    -ms-transform: translateY(-10px);
-							        transform: translateY(-10px);
+								-ms-transform: translateY(-10px);
+									transform: translateY(-10px);
 							ul{
 								visibility: visible;
 							}
@@ -387,28 +387,23 @@ footer{
 		.footercontent{
 			max-width: calc(100% - 60px);
 			margin: 0 auto;
-			padding-top: 30px;
-			padding-bottom: 30px;
+			padding-top: 45px;
+			padding-bottom: 45px;
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
 			/*-webkit-box-pack: justify;
-			    -ms-flex-pack: justify;
-			        justify-content: space-between;
+				-ms-flex-pack: justify;
+					justify-content: space-between;
 					*/
 			justify-content: center;
-			column-gap: 50px;
+			column-gap: 80px;
 			font-size: 14px;
 			strong{
-			    	font-weight: normal;
+					font-weight: normal;
 				color: $duckDByellow;
 				}
 			> div{
-				/*
-				-webkit-box-flex: 1;
-				    -ms-flex: 1 1 0px;
-				        flex: 1 1 0px;
-						*/
 				overflow: visible;
 				position: relative;
 				span.info{
@@ -436,77 +431,18 @@ footer{
 				font-family: $fontSans;
 				font-weight: normal;
 				margin-top: 0px;
+				margin-bottom: 4px;
 				color: white;
 			}
-			.scrolltop{
-				font-size: 16px;
-				-webkit-transition: color .3s;
-				-o-transition: color .3s;
-				transition: color .3s;
-				cursor: pointer;
-				&:hover{
-					color: $duckDByellow;
-				}
+			img.duckdbfooter{
+				width: 120px;
+				height: auto;
 			}
-			.gitbutton{
-				width: auto;
-				height: 27px;
-				border: 1px solid white;
-				text-align: center;
-				line-height: 24px;
-				padding-left: 20px;
-				padding-right: 20px;
-				/*float: right;*/
-				-webkit-transform: translateY(46%);
-				    -ms-transform: translateY(46%);
-				        transform: translateY(46%);
-				position: relative;
-				-webkit-transition: color .3s, border-color .3s;
-				-o-transition: color .3s, border-color .3s;
-				transition: color .3s, border-color .3s;
-				&:hover{
-					color: $duckDByellow;
-					border-color: $duckDByellow;
-				}
-				span{
-					margin-right: 10px;
-					font-size: 19px;
-					vertical-align: -3px;
-				}
-				a.externallink::after{
-					display: none!important;
-				}
-			}
-			.cwi{
-				font-size: 31px;
-				margin-top: 11px;
-			        a{
-				color: white;
+			.icons a{
 				text-decoration: none;
-				}
-			}
-			.linktoduckdblabs{
-				color: #FF6900;
-				a{
-					text-decoration: none!important;
-				}
-				.button{
-					border: 1px solid #FF6900;
-					color: #FF6900;
-					text-decoration: none;
-					margin-top: 10px;
-					display: inline-block;
-					height: 27px;
-					line-height: 24px;
-					padding-left: 15px;
-					padding-right: 15px;
-					span.duckdbsymbol{
-						margin-right: 10px;
-						text-decoration: none!important;
-					}
-					span.url{
-						text-decoration: none;
-					}
+				font-size: 25px;
+				span{
+					margin-right: 4px;
 				}
 			}
 		}
@@ -594,8 +530,8 @@ body.landing{
 				display: -ms-flexbox;
 				display: flex;
 				-webkit-box-pack: center;
-				    -ms-flex-pack: center;
-				        justify-content: center;
+					-ms-flex-pack: center;
+						justify-content: center;
 				margin: 0 auto;
 				margin-top: 50px;
 				max-width: $maxContentWidth;
@@ -647,10 +583,10 @@ body.landing{
 		display: -ms-flexbox;
 		display: flex;
 		-webkit-box-pack: justify;
-		    -ms-flex-pack: justify;
-		        justify-content: space-between;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 		-ms-flex-wrap: wrap;
-		    flex-wrap: wrap;
+			flex-wrap: wrap;
 		.box{
 			width: 50%;
 			display: -webkit-box;
@@ -713,12 +649,12 @@ body.landing{
 		display: -ms-flexbox;
 		display: flex;
 		-webkit-box-pack: justify;
-		    -ms-flex-pack: justify;
-		        justify-content: space-between;
+			-ms-flex-pack: justify;
+				justify-content: space-between;
 		.box{
 			-webkit-box-flex: 1;
-			    -ms-flex: 1 1 0px;
-			        flex: 1 1 0px;
+				-ms-flex: 1 1 0px;
+					flex: 1 1 0px;
 			position: relative;
 			overflow: hidden;
 			div.icon{
@@ -749,8 +685,8 @@ body.landing{
 			.box{
 				display: block;
 				-webkit-box-flex: 1;
-				    -ms-flex: 1 1 0px;
-				        flex: 1 1 0px;
+					-ms-flex: 1 1 0px;
+						flex: 1 1 0px;
 				.button{
 					border: 1px solid black;
 					padding: 4px 0px;
@@ -787,8 +723,8 @@ body.landing{
 					display: -ms-flexbox;
 					display: flex;
 					-webkit-box-pack: center;
-					    -ms-flex-pack: center;
-					        justify-content: center;
+						-ms-flex-pack: center;
+							justify-content: center;
 					margin-top: 10px;
 				}
 				div.quickaccess{
@@ -840,13 +776,13 @@ body.landing{
 				display: -ms-flexbox;
 				display: flex;
 				-webkit-box-pack: justify;
-				    -ms-flex-pack: justify;
-				        justify-content: space-between;
+					-ms-flex-pack: justify;
+						justify-content: space-between;
 				list-style: none;
 				li{
 					-webkit-box-flex: 1;
-					    -ms-flex: 1 1 0px;
-					        flex: 1 1 0px;
+						-ms-flex: 1 1 0px;
+							flex: 1 1 0px;
 					-webkit-transition: all .3s;
 					-o-transition: all .3s;
 					transition: all .3s;
@@ -1011,16 +947,83 @@ body.documentation{
 	}
 	.headlinebar{
 		background-color: $duckDBlightgrey;
-		height: 53px;
-		line-height: 53px;
+		height: 52px;
+		line-height: 52px;
 		font-size: 190%;
 		top: 53px;
 		left: 252px;
 		padding-left: 40px;
 		position: absolute;
 		width: calc(100% - 252px);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		> div.version{
+			font-size: 14px;
+			color: rgba(184, 184, 184, 1);
+			padding-right: 30px;
+			cursor: pointer;
+			background-color: $duckDBlightgrey;
+			z-index: 500;
+			.selectedversion{
+				color: black;
+				text-decoration: underline;
+				margin-left: 10px;
+				
+			}
+			&::after{
+				content: "\E010";
+				font-family: "DuckDB-Symbol";
+				margin-left: 5px;
+				text-decoration: none;
+				color: black;
+			}
+			&:hover ~ .versionsidebar{
+				transform: translateX(0px);
+			}
+			.versionsidebar:hover{
+				transform: translateX(0px);
+			}
+		}
 	}
 }
+.versionsidebar{
+	position: fixed;
+	top: 50px;
+	height: calc(100vh - 50px);
+	right: 0;
+	width: 135px;
+	background-color: $duckDByellow;
+	padding: 20px;
+	padding-top: 13px;
+	transform: translateX(140px);
+	transition: transform .3s;
+	z-index: 400;
+	> ul{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		li{
+			line-height: 1.8;
+			font-size: 14px;
+			cursor: pointer;
+			&:hover{
+				text-decoration: underline;
+			}
+			a{
+				text-decoration: none!important;
+			}
+		}
+	}
+	&:hover{
+		transform: translateX(0px);
+	}
+	>span{
+		font-size: 14px;
+		line-height: 1;
+	}
+}
+
 .sidenavigation{
 	position: fixed;
 	top: 53px;
@@ -1032,7 +1035,7 @@ body.documentation{
 	z-index: 999;
 	overflow: auto;
 	-webkit-box-sizing: border-box;
-	    box-sizing: border-box;
+		box-sizing: border-box;
 	a{
 		color: black;
 		text-decoration: none;
@@ -1050,6 +1053,9 @@ body.documentation{
 		cursor: pointer;
 		&.active{
 			text-decoration: underline;
+			&.hasSub {
+				text-decoration: none;
+			}
 		}
 	}
 	li.active{
@@ -1065,8 +1071,8 @@ body.documentation{
 		font-size: 14px;
 		position: absolute;
 		-webkit-transform: translateX(-13px);
-		    -ms-transform: translateX(-13px);
-		        transform: translateX(-13px);
+			-ms-transform: translateX(-13px);
+				transform: translateX(-13px);
 	}
 	li.hasSub span.show::before{
 		content: ' \25BA';
@@ -1074,8 +1080,8 @@ body.documentation{
 	}
 	li.hasSub.opened span.show{
 		-webkit-transform: translateX(-13px) rotate(90deg);
-		    -ms-transform: translateX(-13px) rotate(90deg);
-		        transform: translateX(-13px) rotate(90deg);
+			-ms-transform: translateX(-13px) rotate(90deg);
+				transform: translateX(-13px) rotate(90deg);
 		-webkit-transition: -webkit-transform .3s;
 		transition: -webkit-transform .3s;
 		-o-transition: transform .3s;
@@ -1109,12 +1115,14 @@ body.documentation{
 					}
 				}
 			}
+			/*
 			> ul:nth-of-type(3){
 				display: block; // SQL ausklappen
 				&.parentnav{
 					display: block;
 				}
 			}
+			*/
 		}
 		ul:nth-of-type(2){
 			display: none; // Benchmarking einklappen
@@ -1149,8 +1157,8 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		display: inline-block;
 		margin-right: 8px;
 		-webkit-transform: translateY(-3px);
-		    -ms-transform: translateY(-3px);
-		        transform: translateY(-3px);
+			-ms-transform: translateY(-3px);
+				transform: translateY(-3px);
 		-webkit-transition: -webkit-transform .3s;
 		transition: -webkit-transform .3s;
 		-o-transition: transform .3s;
@@ -1159,8 +1167,8 @@ body.documentation main .wrap.frequentlyaskedquestions{
 	}
 	h3.open::before, h2.open::before, h1.open::before{
 		-webkit-transform: translateY(-3px) rotate(90deg);
-		    -ms-transform: translateY(-3px) rotate(90deg);
-		        transform: translateY(-3px) rotate(90deg);
+			-ms-transform: translateY(-3px) rotate(90deg);
+				transform: translateY(-3px) rotate(90deg);
 		-webkit-transition: -webkit-transform .3s;
 		transition: -webkit-transform .3s;
 		-o-transition: transform .3s;
@@ -1185,8 +1193,8 @@ body.installation{
 		margin-bottom: 7px;
 		-webkit-user-select: none;
 		   -moz-user-select: none;
-		    -ms-user-select: none;
-		        user-select: none;
+			-ms-user-select: none;
+				user-select: none;
 	}
 	.yourselection{
 		max-width: 780px;
@@ -1204,8 +1212,8 @@ body.installation{
 			display: -ms-flexbox;
 			display: flex;
 			-webkit-box-pack: justify;
-			    -ms-flex-pack: justify;
-			        justify-content: space-between;
+				-ms-flex-pack: justify;
+					justify-content: space-between;
 			pointer-events: all;
 			/**margin-bottom: 53px;**/
 			li{
@@ -1213,19 +1221,19 @@ body.installation{
 				background-color: $duckDBlightgrey;
 				color: darken($duckDBlightgrey,40);
 				border: 1px solid white;
-  				border-bottom: 1px solid rgba(0,0,0,0.2);
+				  border-bottom: 1px solid rgba(0,0,0,0.2);
 				border-left: 0px;
 				-webkit-box-flex: 1;
-				    -ms-flex: 1 1 0px;
-				        flex: 1 1 0px;
+					-ms-flex: 1 1 0px;
+						flex: 1 1 0px;
 				-webkit-transition: background-color .3s;
 				-o-transition: background-color .3s;
 				transition: background-color .3s;
 				cursor: pointer;
 				-webkit-user-select: none;
 				   -moz-user-select: none;
-				    -ms-user-select: none;
-				        user-select: none;
+					-ms-user-select: none;
+						user-select: none;
 				text-align: center;
 				height: 35px;
 				line-height: 35px;

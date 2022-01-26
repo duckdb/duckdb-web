@@ -57,44 +57,9 @@
 					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
 				</div>
 				<div class="landingmenu">
-					<nav>
-						{% if site.data.secondarymenu.toc2[0] %}
-							{% for item in site.data.secondarymenu.toc2 %}
-							    {% if item.mainfolderitems[0] %}
-							    {% for mainentry in item.mainfolderitems %}
-							    {% if mainentry.subfolderitems[0] %} <div> {% endif %}
-							        {% if mainentry.subfolderitems[0] %} <div class="hasSub" > {% endif %}
-							            {% if mainentry.url %}
-							                {% assign myurl = mainentry.url | slice: 0, 5 %}
-							                {% if myurl == 'https' or myurl == 'http:' %}
-							                <div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a></div>
-							                {% else %}
-							                <div><a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a></div>
-							                {% endif %}
-							            {% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
-							       {% if mainentry.subfolderitems[0] %}  </div> {% endif %}
-
-							        {% if mainentry.subfolderitems[0] %}
-							            <ul>
-							                {% for entry in mainentry.subfolderitems %}
-							                <li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
-							                {% if entry.subsubfolderitems[0] %}
-							                <ul>
-							                    {% for subentry in entry.subsubfolderitems %}
-							                    <li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
-							                    {% endfor %}
-							                </ul>
-							                {% endif %}
-							                </li>
-							                {% endfor %}
-							            </ul>
-							        {% endif %}
-							    {% if mainentry.subfolderitems[0] %} </div> {% endif %}
-							    {% endfor %}
-							    {% endif %}
-							{% endfor %}
-						{% endif %}
-					</nav>
+					
+					{% include menu_secondary.html %}
+					
 					<nav class="mobile">
 						<div class="hamburger hamburger--squeeze">
 							<div class="hamburger-box">
@@ -109,65 +74,7 @@
 
 	<main>
 
-
-		<div class="sidenavigation" data-selected="{{page.selected}}" data-expanded="{{page.expanded}}">
-
-			{% if site.data.menu.toc2[0] %}
-			    {% for item in site.data.menu.toc2 %}
-			    {% if item.mainfolderitems[0] %}
-			    <ul class="sidenav">
-			        {% for mainentry in item.mainfolderitems %}
-			        <li class="{% if page.url contains mainentry.url %}active {% endif %}{% if mainentry.subfolderitems[0] %}hasSub{% endif %}">
-			            {% if mainentry.url %} {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>  {% else %} {% if mainentry.subfolderitems[0] %} <span class="show"></span> {% endif %} {{ mainentry.page }} {% endif %} </li>
-			        {% if mainentry.subfolderitems[0] %}
-			        <ul>
-			            {% for entry in mainentry.subfolderitems %}
-			            {% if mainentry.subfolderitems %}
-			            <li class="{% if page.url contains entry.url %} active {% endif %}{% if entry.subsubfolderitems[0] %}hasSub{% endif %}">
-			                {% if entry.url %} {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {% if entry.subsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ entry.page }} {% endif %}
-			            </li>
-			            {% endif %}
-			            {% if entry.subsubfolderitems[0] %}
-			            <ul>
-			                {% for subentry in entry.subsubfolderitems %}
-			                {% if entry.subsubfolderitems %}
-			                <li class="{% if page.url contains subentry.url %} active {% endif %}{% if subentry.subsubsubfolderitems[0] %}hasSub{% endif %}">
-			                    {% if subentry.url %} {% if subentry.subsubsubfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {% if subentry.subsubsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ subentry.page }} {% endif %}
-			                </li>
-			                {% if subentry.subsubsubfolderitems[0] %}
-			                <ul>
-			                    {% for subsubentry in subentry.subsubsubfolderitems %}
-			                    {% if subentry.subsubsubfolderitems %}
-			                    <li class="{% if page.url contains subsubentry.url %} active {% endif %}">
-			                        {% if subsubentry.url %} <a href="{{ site.baseurl }}{{ subsubentry.url }}"> {{ subsubentry.page }} {% if subsubentry.subsubsubsubfolderitems[0] %} <span class="show"></span> {% endif %} </a>
-			                        {% else %} {% if subsubentry.subsubsubsubfolderitems[0] %} <span class="show"></span> {% endif %} {{ subsubentry.page }} {% endif %}
-			                    </li>
-								{% if subsubentry.subsubsubfolderitems[0] %}
-			                    <ul>
-			                        {% for subsubsubentry in subsubentry.subsubsubsubfolderitems %}
-			                        <li class="{% if page.url contains subsubsubentry.url %} active {% endif %}"><a href="{{ site.baseurl }}{{ subsubsubentry.url }}"> {{ subsubsubentry.page }} </a>
-			                        </li>
-			                        {% endfor %}
-			                    </ul>
-								{% endif %}
-			                    {% endif %}
-			                    {% endfor %}
-			                </ul>
-			                {% endif %}
-			                {% endif %}
-			                {% endfor %}
-			            </ul>
-			            {% endif %}
-			            {% endfor %}
-			        </ul>
-			        {% endif %}
-			        {% endfor %}
-			    </ul>
-			    {% endif %}
-			    {% endfor %}
-			{% endif %}
-
-		</div>
+		{% include menu_sidebar.html %}
 
 		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
 			<div class="headlinebar">{{ page.title }}</div>

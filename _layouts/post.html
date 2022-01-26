@@ -45,44 +45,9 @@
 					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
 				</div>
 				<div class="landingmenu">
-					<nav>
-						{% if site.data.secondarymenu.toc2[0] %}
-							{% for item in site.data.secondarymenu.toc2 %}
-							    {% if item.mainfolderitems[0] %}
-							    {% for mainentry in item.mainfolderitems %}
-							    {% if mainentry.subfolderitems[0] %} <div> {% endif %}
-							        {% if mainentry.subfolderitems[0] %} <div class="hasSub" > {% endif %}
-							            {% if mainentry.url %}
-							                {% assign myurl = mainentry.url | slice: 0, 5 %}
-							                {% if myurl == 'https' or myurl == 'http:' %}
-							                <div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a></div>
-							                {% else %}
-							                <div><a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a></div>
-							                {% endif %}
-							            {% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
-							       {% if mainentry.subfolderitems[0] %}  </div> {% endif %}
-							
-							        {% if mainentry.subfolderitems[0] %}
-							            <ul>
-							                {% for entry in mainentry.subfolderitems %}
-							                <li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
-							                {% if entry.subsubfolderitems[0] %}
-							                <ul>
-							                    {% for subentry in entry.subsubfolderitems %}
-							                    <li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
-							                    {% endfor %}
-							                </ul>
-							                {% endif %}
-							                </li>
-							                {% endfor %}
-							            </ul>
-							        {% endif %}
-							    {% if mainentry.subfolderitems[0] %} </div> {% endif %}
-							    {% endfor %}
-							    {% endif %}
-							{% endfor %}
-						{% endif %}
-					</nav>
+					
+					{% include menu_secondary.html %}
+					
 					<div class="hamburger hamburger--squeeze">
 						<div class="hamburger-box">
 							<div class="hamburger-inner"></div>
@@ -165,49 +130,7 @@
 	</main>
 
 		
-	<footer>
-		<div class="sitefooter">
-			<div class="footercontent">
-				<div>
-					<strong>DuckDB</strong><br/>
-					<span class="info">SQLite for Analytics</span>
-				</div>
-				<div>
-					<h4>Documentation</h4>
-					<a href="{{ site.url }}{{ site.baseurl }}/docs/installation/">Installation</a><br/>
-					<a href="{{ site.url }}{{ site.baseurl }}/docs/sql/introduction">SQL Introduction</a>
-				</div>
-				<div>
-					<h4>Internals</h4>
-					<a href="{{ site.url }}{{ site.baseurl }}/docs/faq">FAQs</a><br/>
-					<a href="{{ site.url }}{{ site.baseurl }}/code_of_conduct">Code of Conduct</a><br/>
-					<a href="{{ site.url }}{{ site.baseurl }}/foundation/">Foundation</a>
-
-				</div>
-				<div>
-					<span class="scrolltop duckdbsymbol">&#8593;</span>
-				</div>
-				<div>
-					<div class="linktoduckdblabs">
-						Looking for commercial support?<br/>
-						<a href="https://duckdblabs.com/" target="_blank">
-						<div class="button">
-							<span class="duckdbsymbol">&#xe710;</span><span class="url">duckdblabs.com</span>
-						</div>
-						</a>
-					</div>
-				</div>
-				<div>
-					<div class="gitbutton">
-						<a href="https://github.com/duckdb/duckdb" target="_blank" class="blocklink"></a>
-						<span class="duckdbsymbol">&#xe050;</span>GitHub
-					</div>
-				</div>
-				<div>
-				</div>
-			</div>
-		</div>
-	</footer>
+	{% include footer.html %}
 	
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
