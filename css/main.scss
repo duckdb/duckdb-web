@@ -392,10 +392,6 @@ footer{
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			/*-webkit-box-pack: justify;
-				-ms-flex-pack: justify;
-					justify-content: space-between;
-					*/
 			justify-content: center;
 			column-gap: 80px;
 			font-size: 14px;
@@ -406,15 +402,6 @@ footer{
 			> div{
 				overflow: visible;
 				position: relative;
-				span.info{
-					color: #878787;
-					}
-				strong{
-					font-family: $fontSans;
-				}
-				&:first-child{
-
-				}
 				a{
 					color: #878787;
 					text-decoration: underline;
@@ -437,6 +424,7 @@ footer{
 			img.duckdbfooter{
 				width: 120px;
 				height: auto;
+				transform: translateY(-3px);
 			}
 			.icons a{
 				text-decoration: none;
@@ -445,13 +433,6 @@ footer{
 					margin-right: 4px;
 				}
 			}
-		}
-	}
-	.socialicons{
-		margin-top: 25px;
-		img{
-			max-width: 25px;
-			margin-right: 12px;
 		}
 	}
 }
@@ -981,7 +962,8 @@ body.documentation{
 			&:hover ~ .versionsidebar{
 				transform: translateX(0px);
 			}
-			.versionsidebar:hover{
+			.versionsidebar:hover, 
+			.versionsidebar.active{
 				transform: translateX(0px);
 			}
 		}

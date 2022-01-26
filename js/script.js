@@ -99,7 +99,6 @@ $(document).ready(function(){
 		var environment = "."+getUrlParameter('environment');
 		
 		if (environment !== '.undefined'){
-			console.log('ddd'+ environment)
 			$('.yourselection ul.environment li.selected').removeClass('selected')
 			$('.yourselection ul.environment li[data-id="'+environment+'"]').addClass('selected')
 			evaluation();
@@ -297,7 +296,6 @@ $(document).ready(function(){
 	// Appending Content-List of Documentation
 	if ( $('.wrap.documentation') != 0 ) {
 	    contentlist = $('ul.sidenav').clone()
-		console.log(contentlist);
 	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
 	}
 	
@@ -312,7 +310,6 @@ $(document).ready(function(){
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
 		var hash = window.location.hash.replace('#', '');
-		console.log(hash)
 		if( hash.length ){
 			$('div.select .select-text').val(hash);
 		}
@@ -352,6 +349,7 @@ $(document).ready(function(){
 	
 	
 	// CHANGE DOC VERSION
+	/*
 	$('.versionsidebar ul li').click(function(){
 		var clickedversion = $(this).text();
 		var docversion = getUrlParameter('ver');
@@ -366,6 +364,12 @@ $(document).ready(function(){
 		} else {
 			var versionurl = "/docs/archive/"+clickedversion+pathname[1]+"?ver="+clickedversion;
 		}
+	})
+	*/
+	
+	// VERSION FIX ON MOBILE
+	$('.headlinebar .version').click(function(){
+		$('.versionsidebar').toggleClass('active');
 	})
 	
 	
