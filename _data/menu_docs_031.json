@@ -267,10 +267,6 @@
                   "url": "timestamp"
                 },
                 {
-                  "page": "Interval",
-                  "url": "interval"
-                },
-                {
                   "page": "Blob",
                   "url": "blob"
                 },
