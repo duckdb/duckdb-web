@@ -16,6 +16,6 @@ silver:
     url: https://noteable.io
     logoimg: noteable.png
 
- - name: Mode
+  - name: Mode
     url: https://mode.com
     logoimg: mode.svg
