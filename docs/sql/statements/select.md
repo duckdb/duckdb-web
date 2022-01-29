@@ -35,7 +35,7 @@ ORDER BY order_expr
 LIMIT n
 ```
 
-Optionally, the `SELECT` statement can be prefixed with a `WITH` clause.
+Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](/docs/sql/query_syntax/with).
 
 As the `SELECT` statement is so complex, we have split up the syntax diagrams into several parts. The full syntax diagram can be found at the bottom of the page.
 
