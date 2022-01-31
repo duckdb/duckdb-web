@@ -139,14 +139,16 @@ WITH RECURSIVE paths(startPerson, endPerson, path, endPersonReached) AS (
    SELECT person1id AS startPerson,
           person2id AS endPerson,
           [person1id, person2id]::bigint[] AS path,
-          max(CASE WHEN person2id = 3 THEN true ELSE false END) OVER () AS endPersonReached
+          max(CASE WHEN person2id = 3 THEN true ELSE false END)
+            OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS endPersonReached
      FROM knows
     WHERE person1id = 1
  UNION ALL
    SELECT paths.startPerson AS startPerson,
           person2id AS endPerson,
           array_append(path, person2id) AS path,
-          max(CASE WHEN person2id = 3 THEN true ELSE false END) OVER () AS endPersonReached
+          max(CASE WHEN person2id = 3 THEN true ELSE false END)
+            OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS endPersonReached
      FROM paths
      JOIN knows
        ON person1id = paths.endPerson
