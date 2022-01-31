@@ -4,31 +4,37 @@ title: Nested Functions
 selected: Documentation/Functions/Nested Functions
 expanded: Functions
 ---
-This section describes functions and operators for examining and manipulating nested values. There are two nested data types: lists and structs.
+This section describes functions and operators for examining and manipulating nested values. There are three nested data types: lists, structs, and maps.
 
 ## List Functions
 
 In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
+<!-- This follows the order of shorthand, core/main function (list_), other list_ aliases, array_ aliases -->
+
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | *`list`*`[`*`index`*`]` | Bracket notation serves as an alias for `list_extract`. | `l[2]` | `6` |
-| `array_extract(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `array_extract(l, 2)` | `6` |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `array_slice(l, 1, NULL)` | `[5,6]` |
-| `list_element(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `list_element(l, 2)` | `6` |
 | `list_extract(`*`list`*`, `*`index`*`)` | Extract the `index`th (0-based) value from the list. | `list_extract(l, 2)` | `6` |
-| `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
+| `list_element(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `list_element(l, 2)` | `6` |
+| `array_extract(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `array_extract(l, 2)` | `6` |
+| *`list`*`[`*`begin`*`:`*`end`*`]` | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s. | `l[1:2]` | `[5, 6]` |
+| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `list_slice(l, 1, NULL)` | `[5,6]` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 1, NULL)` | `[5,6]` |
 | `list_value(`*`any`*`, ...)` | Create a `LIST` containing the argument values. | `list_value(4, 5, 6)` | `[4, 5, 6]` |
-| *`list`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s. | `l[1:2]` | `[5, 6]` |
-| `array_length(`*`list`*`)` | Return the length of the list. |  `array_length([1, 2, 3])` | `3` |
-| `len(`*`list`*`)` | Alias for `array_length`. | `len([1, 2, 3])` | `3` |
+| `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
+| `len(`*`list`*`)` | Return the length of the list. | `len([1, 2, 3])` | `3` |
+| `array_length(`*`list`*`)` | Alias for `len`. |  `array_length([1, 2, 3])` | `3` |
 | `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
 | `list_concat(`*`list1`*`, `*`list2`*`)` | Concatenates two lists. | `list_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6]` |
 | `list_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `list_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
 | `array_concat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
 | `array_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `list_prepend(`*`element`*`, `*`list`*`)` | Prepends `element` to `list`. | `list_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
+| `array_prepend(`*`element`*`, `*`list`*`)` | Alias for `list_prepend`. | `array_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
 | `list_append(`*`list`*`, `*`element`*`)` | Appends `element` to `list`. | `list_append([2, 3], 4)` | `[2, 3, 4`] |
-| `list_prepend(`*`list`*`, `*`element`*`)` | Prepends `element` to `list`. | `list_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
+| `array_append(`*`list`*`, `*`element`*`)` | Alias for `list_append`. | `array_append([2, 3], 4)` | `[2, 3, 4`] |
+
 
 ## Struct Functions
 
