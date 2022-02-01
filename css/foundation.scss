@@ -65,9 +65,6 @@ body.foundation{
 				width: 33%;
 			}
 			.level{
-				border-radius: 2px;
-				border-top-left-radius: 0px;
-				border-top-right-radius: 0px;
 				border: 1px solid #dbdbdb;
 				box-sizing: border-box;
 				padding: 20px;
@@ -118,8 +115,6 @@ body.foundation{
 					display: block;
 					content: "";
 					border-top: 8px solid #979797;
-					border-top-left-radius: 2px;
-					border-top-right-radius: 2px;
 					width: calc(100% + 2px);
 					position: absolute;
 					top: -8px;
@@ -142,8 +137,6 @@ body.foundation{
 					display: block;
 					content: "";
 					border-top: 8px solid #C09600;
-					border-top-left-radius: 2px;
-					border-top-right-radius: 2px;
 					width: calc(100% + 2px);
 					position: absolute;
 					top: -8px;
