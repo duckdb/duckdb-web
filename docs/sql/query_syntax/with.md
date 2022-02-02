@@ -135,12 +135,13 @@ WHERE startPerson = 1;
 `WITH RECURSIVE` can be used to find all unweighted shortest paths between two nodes. The following query returns all unweighted shortest paths between person 1 and person 3:
 
 ```sql
-WITH RECURSIVE paths(startPerson, endPerson, path, endPersonReached) AS (
+WITH RECURSIVE paths(startPerson, endPerson, path, endReached) AS (
    SELECT person1id AS startPerson,
           person2id AS endPerson,
           [person1id, person2id]::bigint[] AS path,
           max(CASE WHEN person2id = 3 THEN true ELSE false END)
-            OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS endPersonReached
+            OVER (ROWS BETWEEN UNBOUNDED PRECEDING
+                           AND UNBOUNDED FOLLOWING) AS endReached
      FROM knows
     WHERE person1id = 1
  UNION ALL
@@ -148,12 +149,13 @@ WITH RECURSIVE paths(startPerson, endPerson, path, endPersonReached) AS (
           person2id AS endPerson,
           array_append(path, person2id) AS path,
           max(CASE WHEN person2id = 3 THEN true ELSE false END)
-            OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS endPersonReached
+            OVER (ROWS BETWEEN UNBOUNDED PRECEDING
+                           AND UNBOUNDED FOLLOWING) AS endReached
      FROM paths
      JOIN knows
        ON person1id = paths.endPerson
     WHERE person2id != ALL(paths.path)
-      AND NOT paths.endPersonReached
+      AND NOT paths.endReached
 )
 SELECT startPerson, endPerson, path
 FROM paths
