@@ -373,6 +373,10 @@
               {
                 "page": "Nested Functions",
                 "url": "nested"
+              },
+              {
+                "page": "Utility Functions",
+                "url": "utility"
               }
             ]
           },

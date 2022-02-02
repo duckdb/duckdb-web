@@ -14,6 +14,8 @@ The table below shows the available mathematical operators for numeric types.
 | `*` | multiplication | `2 * 3` | 6 |
 | `/` | division | `4 / 2` | 2 |
 | `%` | modulo (remainder) | `5 % 4` | 1 |
+| `**` | exponent | `3 ** 4` | 81 |
+| `^` | exponent (alias for `**`) | `3 ^ 4` | 81 |
 | `&` | bitwise AND | `91 & 15` | 11 |
 | `|` | bitwise OR | `32 | 3` | 35 |
 | `<<` | bitwise shift left | `1 << 4` | 16 |
@@ -27,6 +29,7 @@ The table below shows the available mathematical functions.
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | `abs(x)` | absolute value | `abs(-17.4)` | 17.4 |
+| `@` | absolute value (parentheses optional if operating on a column) | `@(-2)` | 2 |
 | `acos(x)` | computes the arccosine of x | `acos(0.5)` | 1.0471975511965976 |
 | `asin(x)` | computes the arcsine of x | `asin(0.5)` | 0.5235987755982989 |
 | `atan2(x)` | computes the arctangent of x | `atan2(0.5)` | 0.4636476090008061 |
