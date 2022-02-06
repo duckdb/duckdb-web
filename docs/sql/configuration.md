@@ -18,6 +18,10 @@ PRAGMA default_null_order='nulls_last';
 
 -- show a list of all available settings
 SELECT * FROM duckdb_settings();
+
+-- return the current value of a specific setting
+-- this example returns 'automatic'
+SELECT current_setting('access_mode'); 
 ```
 
 ## **Configuration Reference**
