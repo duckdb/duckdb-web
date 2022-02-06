@@ -51,8 +51,8 @@ SELECT (['a','b','c'])[1:3];
 SELECT (['a','b','c'])[:2];
 -- Use a negative index to grab the last 2 elements. This returns ['b','c']
 SELECT (['a','b','c'])[-2:];
--- The array_slice function is also supported. This returns ['b','c']
-SELECT array_slice(['a','b','c'],1,3);
+-- The list_slice function syntax is also supported. This returns ['b','c']
+SELECT list_slice(['a','b','c'],1,3);
 ```
 
 ## Ordering
