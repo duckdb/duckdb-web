@@ -80,7 +80,7 @@
 			<div class="sidebar">
 				
 				<div class="newsarchive">
-					<h1>Archive</h1>
+					<h1><a href="/news/">Archive</a></h1>
 					
 					<div class="archivesAccordian">
 					{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
