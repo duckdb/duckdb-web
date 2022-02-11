@@ -397,6 +397,10 @@
             "url": "samples"
           },
           {
+            "page": "Catalog Functions",
+            "url": "catalog_functions"
+          },
+          {
             "page": "Configuration",
             "url": "configuration"
           },
