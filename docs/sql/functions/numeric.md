@@ -42,6 +42,7 @@ The table below shows the available mathematical functions.
 | `cos(x)` | computes the cosine of x | `cos(90)` | -0.4480736161291701 |
 | `cot(x)` | computes the cotangent of x | `cot(0.5)` | 1.830487721712452 |
 | `degrees(x)` | converts radians to degrees | `degrees(pi())` | 180 |
+| `even(x)` | round to next even number by rounding away from zero. | `even(2.9)` | 4 |
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
 | `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
