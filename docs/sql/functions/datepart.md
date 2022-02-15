@@ -36,7 +36,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'epoch'` | Seconds since 1970-01-01 | | 1627991984 |
 | `'dayofweek'` | Day of the week (Sunday = 0, Saturday = 6) | `'weekday'`, `'dow'` | 2 |
 | `'isodow'` | ISO day of the week (Monday = 1, Sunday = 7) | | 2 |
-| `'isoyear'` | ISO Year number (Starts on Monday of week containing Jan 4th ) | | 2021 |
+| `'isoyear'` | ISO Year number (Starts on Monday of week containing Jan 4th) | | 2021 |
 | `'week'` | Week number | `'weeks'`, `'w'` | 31 |
 | `'yearweek'` | ISO year and week number in `YYYYWW` format | | 202131 |
 | `'dayofyear'` | Day of the year (1-365/366) | `'doy'` | 215 |
@@ -70,7 +70,7 @@ There are dedicated extraction functions to get certain subfields:
 | `dayofweek(`*`date`*`)` | Numeric weekday (Sunday = 0, Saturday = 6) | `dayofweek(date '1992-02-15')` | `6` |
 | `weekday(`*`date`*`)` | Numeric weekday synonym (Sunday = 0, Saturday = 6) | `weekday(date '1992-02-15')` | `6` |
 | `isodow(`*`date`*`)` | Numeric ISO weekday (Monday = 1, Sunday = 7) | `isodow(date '1992-02-15')` | `6` |
-| `isoyear(`*`date`*`)` | ISO Year number (Starts on Monday of week containing Jan 4th ) | `isoyear(date '2022-01-01')` | `2021` |
+| `isoyear(`*`date`*`)` | ISO Year number (Starts on Monday of week containing Jan 4th) | `isoyear(date '2022-01-01')` | `2021` |
 | `week(`*`date`*`)` | ISO Week | `week(date '1992-02-15')` | `7` |
 | `weekofyear(`*`date`*`)` | ISO Week (synonym) | `weekofyear(date '1992-02-15')` | `7` |
 | `dayofyear(`*`date`*`)` | Numeric ISO weekday (Monday = 1, Sunday = 7) | `isodow(date '1992-02-15')` | `46` |
