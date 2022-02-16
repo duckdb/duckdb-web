@@ -21,6 +21,8 @@ This section describes functions and operators for examining and manipulating st
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if `search_string` is found within `string` | `contains('abc','a')` | `true` |
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using fmt syntax | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` |
+| `instr(`*`string`*`, `*`characters`*`)`| Return location of first occurrence of `characters` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test','es')` | 2 |
+| `lcase(`*`string`*`)` | Alias of `lower`. Convert *string* to lower case | `lcase('Hello')` | `hello` |
 | `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('hello', 2)` | `he` |
 | `length(`*`string`*`)` | Number of characters in *string* | `length('Hello')` | `5` |
 | *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` |
@@ -30,6 +32,7 @@ This section describes functions and operators for examining and manipulating st
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 10, '>')` | `>>>>>hello` |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` |
 | `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left side of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` |
+| `ucase(`*`string`*`)`| Alias of `upper`. Convert *string* to upper case | `ucase('Hello')` | `HELLO` |
 | `upper(`*`string`*`)`| Convert *string* to upper case | `upper('Hello')` | `HELLO` |
 | `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using printf syntax | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     |
 | `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `regexp_full_match('anabanana', '(an)*')` | `false` |
@@ -47,8 +50,20 @@ This section describes functions and operators for examining and manipulating st
 | `strip_accents(`*`string`*`)`| Strips accents from *string* | `strip_accents('mühleisen')` | `muhleisen` |
 | `string_split(`*`string`*`, `*`separator`*`)` | Splits the *string* along the *separator* | `string_split('hello␣world', '␣')` | `['hello', 'world']` |
 | `string_split_regex(`*`string`*`, `*`regex`*`)` | Splits the *string* along the *regex* | `string_split_regex('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
+| `substr(`*`string`*`, `*`start`*`, `*`length`*`)` | Alias of `substring`. Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substr('Hello', 2, 2)` | `el` |
 | `substring(`*`string`*`, `*`start`*`, `*`length`*`)` | Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substring('Hello', 2, 2)` | `el` |
+| `strpos(`*`string`*`, `*`characters`*`)`| Alias of `instr`. Return location of first occurrence of `characters` in `string`, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
 | `to_base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of base64. | `to_base64('A'::blob)` | `QQ==` |
 | `trim(`*`string`*`)`| Removes any spaces from either side of the *string* | `trim('␣␣␣␣test␣␣')` | `test` |
 | `trim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from either side of the *string* | `trim('>>>>test<<', '><')` | `test` |
 | `unicode(`*`string`*`)`| Returns the unicode code of the first character of the *string* | `unicode('ü')` | `252` |
+
+
+## Text Similarity Functions
+These functions are used to measure the similarity of two strings using various metrics. 
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `hamming(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `hamming('duck','luck')` | 1 |
+| `jaccard(`*`string`*`,` *`string`*`)` | The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaccard('duck','luck')` | 0.6 |
+| `levenshtein(`*`string`*`,` *`string`*`)` | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `levenshtein('duck','db')` | 3 |
