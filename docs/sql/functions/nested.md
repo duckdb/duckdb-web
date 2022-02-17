@@ -52,6 +52,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 |:---|:---|:---|:---|
 | `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | `[a]` |
 | `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `element_at(map([100, 5], [42, 43]),100);` | `[42]` |
+| `map_extract(`*`map, key`*`)` | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `map_extract(map([100, 5], [42, 43]),100);` | `[42]` |
 | `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality( map([4, 2], ['a', 'b']) );` | `2` |
 | `map()` | Returns an empty map. | `map()` | `{}` |
 

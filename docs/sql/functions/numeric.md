@@ -52,6 +52,7 @@ The table below shows the available mathematical functions.
 | `ln(x)` | computes the natural logarithm of *x* | `ln(2)` | 0.693 |
 | `log(x)` | computes the 10-log of *x* | `log(100)` | 2 |
 | `log2(x)` | computes the 2-log of *x* | `log2(8)` | 3 |
+| `log10(x)` | alias of `log`. computes the 10-log of *x* | `log10(1000)` | 3 |
 | `pi()` | returns the value of pi | `pi()` | 3.141592653589793 |
 | `pow(x, y)` | computes x to the power of y | `pow(2, 3)` | 8 |
 | `radians(x)` | converts degrees to radians | `radians(90)` | 1.5707963267948966 |
