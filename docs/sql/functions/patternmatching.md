@@ -29,6 +29,13 @@ Some examples:
 'abc' NOT LIKE '%c'  -- FALSE
 ```
 
+The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale. 
+
+```sql
+'abc' ILIKE '%C' -- TRUE
+'abc' NOT ILIKE '%C' -- FALSE
+```
+
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
 
 Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](/docs/sql/functions/char) for details.
@@ -39,7 +46,15 @@ Additionally, the function `like_escape` has the same functionality as a `LIKE` 
 'azc' LIKE 'a$%c' ESCAPE '$'  -- FALSE
 ```
 
-<!--The key word ILIKE can be used instead of LIKE to make the match case-insensitive according to the active locale. This is not in the SQL standard.-->
+There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance Postgres compatibility.
+
+| LIKE-style | Postgres-style |
+|:---|:---|
+| `LIKE` | `~~` |
+| `NOT LIKE` | `!~~` |
+| `ILIKE` | `~~*` |
+| `NOT ILIKE` | `!~~*` |
+
 
 ## SIMILAR TO
 <div id="rrdiagram2"></div>
@@ -56,6 +71,13 @@ Some examples:
 'abc' SIMILAR TO '.*(b|d).*' -- TRUE
 'abc' SIMILAR TO '(b|c).*'   -- FALSE
 ```
+
+There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
+
+| SIMILAR TO-style | POSIX-style |
+|:---|:---|
+| `SIMILAR TO` | `~` |
+| `NOT SIMILAR TO` | `!~` |
 
 ## Regular Expressions
 
