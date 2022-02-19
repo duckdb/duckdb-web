@@ -53,8 +53,10 @@ The table below shows the available mathematical functions.
 | `log(x)` | computes the 10-log of *x* | `log(100)` | 2 |
 | `log2(x)` | computes the 2-log of *x* | `log2(8)` | 3 |
 | `log10(x)` | alias of `log`. computes the 10-log of *x* | `log10(1000)` | 3 |
+| `nextafter(x, y)` | return the next floating point value after *x* in the direction of *y* | `nextafter(1::float, 2::float)` | 1.0000001 |
 | `pi()` | returns the value of pi | `pi()` | 3.141592653589793 |
 | `pow(x, y)` | computes x to the power of y | `pow(2, 3)` | 8 |
+| `power(x, y)` | Alias of `pow`. computes x to the power of y | `power(2, 3)` | 8 |
 | `radians(x)` | converts degrees to radians | `radians(90)` | 1.5707963267948966 |
 | `random()` | returns a random number between 0 and 1 | `random()` | various |
 | `round(v numeric, s int)` | round to *s* decimal places | `round(42.4332, 2)` | 42.43 |
