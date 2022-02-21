@@ -15,6 +15,8 @@ The `LIKE` expression returns true if the string matches the supplied pattern. (
 
 If pattern does not contain percent signs or underscores, then the pattern only represents the string itself; in that case `LIKE` acts like the equals operator. An underscore (`_`) in pattern stands for (matches) any single character; a percent sign (`%`) matches any sequence of zero or more characters.
 
+`LIKE` pattern matching always covers the entire string. Therefore, if it's desired to match a sequence anywhere within a string, the pattern must start and end with a percent sign.
+
 Some examples:
 
 ```sql
@@ -24,11 +26,35 @@ Some examples:
 'abc' LIKE 'c'   -- FALSE
 'abc' LIKE 'c%'  -- FALSE
 'abc' LIKE '%c'  -- TRUE
+'abc' NOT LIKE '%c'  -- FALSE
 ```
 
-`LIKE` pattern matching always covers the entire string. Therefore, if it's desired to match a sequence anywhere within a string, the pattern must start and end with a percent sign.
+The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensitive according to the active locale. 
 
-<!--The key word ILIKE can be used instead of LIKE to make the match case-insensitive according to the active locale. This is not in the SQL standard.-->
+```sql
+'abc' ILIKE '%C' -- TRUE
+'abc' NOT ILIKE '%C' -- FALSE
+```
+
+To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
+
+Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](/docs/sql/functions/char) for details.
+
+```sql
+--Search for strings with 'a' then a literal percent sign then 'c'
+'a%c' LIKE 'a$%c' ESCAPE '$'  -- TRUE
+'azc' LIKE 'a$%c' ESCAPE '$'  -- FALSE
+```
+
+There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance Postgres compatibility.
+
+| LIKE-style | Postgres-style |
+|:---|:---|
+| `LIKE` | `~~` |
+| `NOT LIKE` | `!~~` |
+| `ILIKE` | `~~*` |
+| `NOT ILIKE` | `!~~*` |
+
 
 ## SIMILAR TO
 <div id="rrdiagram2"></div>
@@ -45,6 +71,13 @@ Some examples:
 'abc' SIMILAR TO '.*(b|d).*' -- TRUE
 'abc' SIMILAR TO '(b|c).*'   -- FALSE
 ```
+
+There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
+
+| SIMILAR TO-style | POSIX-style |
+|:---|:---|
+| `SIMILAR TO` | `~` |
+| `NOT SIMILAR TO` | `!~` |
 
 ## Regular Expressions
 

@@ -373,6 +373,10 @@
               {
                 "page": "Nested Functions",
                 "url": "nested"
+              },
+              {
+                "page": "Utility Functions",
+                "url": "utility"
               }
             ]
           },
@@ -391,6 +395,10 @@
           {
             "page": "Samples",
             "url": "samples"
+          },
+          {
+            "page": "Catalog Functions",
+            "url": "catalog_functions"
           },
           {
             "page": "Configuration",

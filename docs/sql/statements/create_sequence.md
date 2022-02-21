@@ -23,6 +23,16 @@ SELECT nextval('serial');
      101
 ```
 
+Optionally you may also view the current number from this sequence. 
+Note that the `nextval` function must have already been called before calling `currval`.
+```sql
+SELECT currval('serial');
+
+ currval
+---------
+     101
+```
+
 Use this sequence in an `INSERT` command:
 
 ```sql

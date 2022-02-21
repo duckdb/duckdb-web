@@ -4,7 +4,13 @@ function GenerateLike(options = {}) {
 		Expression("string"),
 		Optional(Keyword("NOT"), "skip"),
 		Keyword("LIKE"),
-		Expression("pattern")
+		Expression("pattern"),
+		Optional(
+			Sequence([
+				Keyword('ESCAPE'),
+				Expression('escape_character')
+			])
+		)
 	])
 }
 

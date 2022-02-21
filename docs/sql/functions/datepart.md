@@ -73,6 +73,7 @@ There are dedicated extraction functions to get certain subfields:
 | `isoyear(`*`date`*`)` | ISO Year number (Starts on Monday of week containing Jan 4th) | `isoyear(date '2022-01-01')` | `2021` |
 | `week(`*`date`*`)` | ISO Week | `week(date '1992-02-15')` | `7` |
 | `weekofyear(`*`date`*`)` | ISO Week (synonym) | `weekofyear(date '1992-02-15')` | `7` |
+| `yearweek(`*`date`*`)` | `BIGINT` of combined ISO Year number and 2-digit version of ISO Week number | `yearweek(date '1992-02-15')` | `199207` |
 | `dayofyear(`*`date`*`)` | Numeric ISO weekday (Monday = 1, Sunday = 7) | `isodow(date '1992-02-15')` | `46` |
 | `quarter(`*`date`*`)` | Quarter | `quarter(date '1992-02-15')` | `1` |
 | `era(`*`date`*`)` | Calendar era | `era(date '0044-03-15 (BC)')` | `0` |
