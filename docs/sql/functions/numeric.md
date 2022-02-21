@@ -67,4 +67,3 @@ The table below shows the available mathematical functions.
 | `xor(x)` | bitwise XOR | `xor(17, 5)` | 20 |
 | `tan(x)` | computes the tangent of x | `tan(90)` | -1.995200412208242 |
 | `@` | absolute value (parentheses optional if operating on a column) | `@(-2)` | 2 |
-| `!__postfix` | See `!` operator. Factorial of x. Computes the product of the current integer and all integers below it. Function name must be wrapped in double quotes. | `"!__postfix"(5)` | 120 |

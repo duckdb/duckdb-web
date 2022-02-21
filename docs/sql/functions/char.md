@@ -33,11 +33,9 @@ This section describes functions and operators for examining and manipulating st
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 10, '>')` | `>>>>>hello` |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` |
 | `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left side of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` |
+| `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `'202cb962ac59075b964b07152d234b70'` |
 | `nfc_normalize(`*`string`*`)`| Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. | `nfc_normalize('ardèch')` | ``arde`ch`` |
 | `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](/docs/sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
-| `ucase(`*`string`*`)`| Alias of `upper`. Convert *string* to upper case | `ucase('Hello')` | `HELLO` |
-| `upper(`*`string`*`)`| Convert *string* to upper case | `upper('Hello')` | `HELLO` |
-| `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `'202cb962ac59075b964b07152d234b70'` |
 | `ord(`*`string`*`)`| Return ASCII character code of the leftmost character in a string.  | `ord('ü')` | `252` |
 | `position(`*`search_string`*` in `*`string`*`)` | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `position('b' in 'abc')` | `2` |
 | `prefix(`*`string`*`, `*`search_string`*`)` | Return true if *string* starts with *search_string*. | `prefix('abc', 'ab')` | `true` |
@@ -69,7 +67,9 @@ This section describes functions and operators for examining and manipulating st
 | `to_base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of base64. | `to_base64('A'::blob)` | `QQ==` |
 | `trim(`*`string`*`)`| Removes any spaces from either side of the *string* | `trim('␣␣␣␣test␣␣')` | `test` |
 | `trim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from either side of the *string* | `trim('>>>>test<<', '><')` | `test` |
+| `ucase(`*`string`*`)`| Alias of `upper`. Convert *string* to upper case | `ucase('Hello')` | `HELLO` |
 | `unicode(`*`string`*`)`| Returns the unicode code of the first character of the *string* | `unicode('ü')` | `252` |
+| `upper(`*`string`*`)`| Convert *string* to upper case | `upper('Hello')` | `HELLO` |
 
 
 ## Text Similarity Functions
