@@ -36,6 +36,7 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 | `greatest(`*`date`*`, `*`date`*`)` | The later of two dates | `greatest(DATE '1992-09-20', DATE '1992-03-07')` | `1992-09-20` |
 | `last_day(`*`date`*`)` | The last day of the corresponding month in the date | `last_day(DATE '1992-09-20')` | `1992-09-30` |
 | `least(`*`date`*`, `*`date`*`)` | The earlier of two dates | `least(DATE '1992-09-20', DATE '1992-03-07')` | `1992-03-07` |
+| `make_date(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`)` | The date for the given parts | `make_date(1992, 9, 20)` | `1992-09-20` |
 | `monthname(`*`date`*`)` | The (English) name of the month | `monthname(DATE '1992-09-20')` | `September` |
 | `strftime(date, format)` | Converts a date to a string according to the [format string](/docs/sql/functions/dateformat) | `strftime(date '1992-01-01', '%a, %-d %B %Y')` | `Wed, 1 January 1992` |
 
