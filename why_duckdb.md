@@ -84,7 +84,7 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [DuckDB backend](https://fugue-tutorials.readthedocs.io/tutorials/integrations/duckdb.html) for [Fugue](https://github.com/fugue-project/fugue)
 
 ## Testimonials
-See our [DuckDB Testimonial Twitter Wall](twitter_wall)
+See our [DuckDB Testimonial Twitter Wall](/docs/twitter_wall)
 
 ## Standing on the Shoulders of Giants
 DuckDB uses some components from various Open-Source projects and draws inspiration from scientific publications. We are very greatful for this. Here is an overview:
