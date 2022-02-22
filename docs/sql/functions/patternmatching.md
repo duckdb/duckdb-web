@@ -6,7 +6,7 @@ expanded: Functions
 railroad: expressions/like.js
 ---
 ## Pattern Matching
-There are three separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), and POSIX-style regular expressions.
+There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
 ## LIKE
 <div id="rrdiagram1"></div>
@@ -42,8 +42,11 @@ Additionally, the function `like_escape` has the same functionality as a `LIKE` 
 
 ```sql
 --Search for strings with 'a' then a literal percent sign then 'c'
-'a%c' LIKE 'a$%c' ESCAPE '$'  -- TRUE
-'azc' LIKE 'a$%c' ESCAPE '$'  -- FALSE
+'a%c' LIKE 'a$%c' ESCAPE '$'        -- TRUE
+'azc' LIKE 'a$%c' ESCAPE '$'        -- FALSE
+
+--Case insensitive ILIKE with ESCAPE
+'A%c' ILIKE 'a$%c' ESCAPE '$';      --TRUE
 ```
 
 There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance Postgres compatibility.
@@ -70,6 +73,7 @@ Some examples:
 'abc' SIMILAR TO 'a'         -- FALSE
 'abc' SIMILAR TO '.*(b|d).*' -- TRUE
 'abc' SIMILAR TO '(b|c).*'   -- FALSE
+'abc' NOT SIMILAR TO 'abc'   -- FALSE
 ```
 
 There are also alternative characters that can be used as keywords in place of `SIMILAR TO` expressions. These follow POSIX syntax.
@@ -78,6 +82,38 @@ There are also alternative characters that can be used as keywords in place of `
 |:---|:---|
 | `SIMILAR TO` | `~` |
 | `NOT SIMILAR TO` | `!~` |
+
+## GLOB
+<div id="rrdiagram3"></div>
+
+The `GLOB` operator returns true or false if the string matches the `GLOB` pattern. The `GLOB` operator is most commonly used when searching for filenames that follow a specific pattern (for example a specific file extension). Use the question mark (`?`) wildcard to match any single character, and use the asterisk (`*`) to match zero or more characters. In addition, use bracket syntax (`[ ]`) to match any single character contained within the brackets, or within the character range specified by the brackets. An exclamation mark (`!`) may be used inside the first bracket to search for a character that is not contained within the brackets. To learn more, visit the [Glob Programming Wikipedia page](https://en.wikipedia.org/wiki/Glob_(programming)).
+
+Some examples:
+
+```sql
+'best.txt' GLOB '*.txt'            -- TRUE
+'best.txt' GLOB '????.txt'         -- TRUE
+'best.txt' GLOB '?.txt'            -- FALSE
+'best.txt' GLOB '[abc]est.txt'     -- TRUE
+'best.txt' GLOB '[a-z]est.txt'     -- TRUE
+
+-- The bracket syntax is case sensitive
+'Best.txt' GLOB '[a-z]est.txt'     -- FALSE
+'Best.txt' GLOB '[a-zA-Z]est.txt'  -- TRUE
+
+-- The ! applies to all characters within the brackets
+'Best.txt' GLOB '[!a-zA-Z]est.txt' -- FALSE
+
+-- To negate a GLOB operator, negate the entire expression 
+-- (NOT GLOB is not valid syntax)
+NOT 'best.txt' GLOB '*.txt'        -- FALSE
+```
+
+Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
+
+| GLOB-style | Symbolic-style |
+|:---|:---|
+| `GLOB` | `~~~` |
 
 ## Regular Expressions
 
