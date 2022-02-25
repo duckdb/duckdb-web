@@ -23,6 +23,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 1, NULL)` | `[5,6]` |
 | `list_value(`*`any`*`, ...)` | Create a `LIST` containing the argument values. | `list_value(4, 5, 6)` | `[4, 5, 6]` |
 | `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
+| `list_contains(`*`list`*`, `*`element`*`)` | Checks if `element` is in `list`. | `list_contains([1,2,3], 1)` | true |
 | `len(`*`list`*`)` | Return the length of the list. | `len([1, 2, 3])` | `3` |
 | `array_length(`*`list`*`)` | Alias for `len`. |  `array_length([1, 2, 3])` | `3` |
 | `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
@@ -34,6 +35,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_prepend(`*`element`*`, `*`list`*`)` | Alias for `list_prepend`. | `array_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
 | `list_append(`*`list`*`, `*`element`*`)` | Appends `element` to `list`. | `list_append([2, 3], 4)` | `[2, 3, 4`] |
 | `array_append(`*`list`*`, `*`element`*`)` | Alias for `list_append`. | `array_append([2, 3], 4)` | `[2, 3, 4`] |
+| `array_contains(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `array_contains([1,2,3], 1)` | true |
 
 
 ## Struct Functions
