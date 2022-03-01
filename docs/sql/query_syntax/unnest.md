@@ -9,7 +9,7 @@ The `UNNEST` function is used to unnest a list by one level. The function can be
 
 When `UNNEST` is combined with regular scalar expressions, those expressions are repeated for every entry in the list. When multiple lists are unnested in the same `SELECT` clause, the lists are unnested side-by-side. If one list is longer than the other, the shorter list will be padded with `NULL` values.
 
-An empty list and a `NULL` list will both unnest to zero elements.
+An empty list and a `NULL` list will both unnest to zero elements. Untyped and types `NULL` arguments will both return zero rows.
 
 ## Examples
 ```sql
@@ -23,4 +23,8 @@ SELECT UNNEST([1, 2, 3]), 10;
 SELECT UNNEST(l) + 10 FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
 -- empty result
 SELECT UNNEST([]);
+-- zero rows (untyped NULL)
+SELECT UNNEST(NULL);
+-- zero rows (typed NULL)
+SELECT UNNEST(NULL::int[]);
 ```

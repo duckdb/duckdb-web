@@ -34,7 +34,14 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_prepend(`*`element`*`, `*`list`*`)` | Alias for `list_prepend`. | `array_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
 | `list_append(`*`list`*`, `*`element`*`)` | Appends `element` to `list`. | `list_append([2, 3], 4)` | `[2, 3, 4`] |
 | `array_append(`*`list`*`, `*`element`*`)` | Alias for `list_append`. | `array_append([2, 3], 4)` | `[2, 3, 4`] |
-
+| `list_contains(`*`list`*`, `*`element`*`)` | Returns true if the list contains the element. | `list_contains([1, 2, NULL], 1)` | `true` |
+| `list_has(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `list_has([1, 2, NULL], 1)` | `true` |
+| `array_contains(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `array_contains([1, 2, NULL], 1)` | `true` |
+| `array_has(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `array_has([1, 2, NULL], 1)` | `true` |
+| `list_position(`*`list`*`, `*`element`*`)` | Returns the index of the element if the list contains the element. | `list_contains([1, 2, NULL], 2)` | `2` |
+| `list_indexof(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `list_indexof([1, 2, NULL], 2)` | `2` |
+| `array_position(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `array_position([1, 2, NULL], 2)` | `2` |
+| `array_indexof(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `array_indexof([1, 2, NULL], 2)` | `2` |
 
 ## Struct Functions
 
