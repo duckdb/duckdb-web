@@ -85,7 +85,7 @@ For each table, the [`rowid` pseudocolumn](https://docs.oracle.com/cd/B19306_01/
 
 
 ```
-D CREATE TABLE (id int, content string);
+D CREATE TABLE t(id int, content string);
 D INSERT INTO t VALUES (42, 'hello'), (43, 'world');
 D SELECT rowid, id, content FROM t;
 ┌───────┬────┬─────────┐
