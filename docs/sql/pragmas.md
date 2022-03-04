@@ -134,6 +134,13 @@ The printing of profiling information can be disabled again using *disable_profi
 
 By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` **profiling_output** can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
 
+### disable_optimizer, enable_optimizer
+```sql
+-- disables the query optimizer
+PRAGMA disable_optimizer;
+-- enables the query optimizer
+PRAGMA enable_optimizer;
+```
 
 ### log_query_path, explain_output, enable_verification, disable_verification, force_parallelism, disable_force_parallelism
 ```sql

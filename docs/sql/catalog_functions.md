@@ -54,3 +54,11 @@ The table function that describes the catalog information for columns is `inform
 | `numeric_precision` |If data_type identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null.|`INTEGER`| `18` |
 | `numeric_scale` |If data_type identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null.|`INTEGER`| `2` |
 | `datetime_precision` |If data_type identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is null.|`INTEGER`| `0` |
+
+## Catalog Functions
+Several functions are also provided to see details about the schemas that are configured in the database.
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `current_schema()` | Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'` |
+| `current_schemas(boolean)` | Return list of schemas. Pass a parameter of `True` to include implicit schemas. | `current_schemas(true)` | `['temp', 'main', 'pg_catalog']` |
