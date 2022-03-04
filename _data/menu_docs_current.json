@@ -399,11 +399,21 @@
           {
             "page": "Pragmas",
             "url": "pragmas"
-          },
-          {
-            "page": "Full Text Search",
-            "url": "full_text_search"
           }
+          ]
+        },
+        {
+          "page": "Extensions",
+          "slug": "extensions",
+          "subfolderitems": [
+            {
+              "page": "Full Text Search",
+              "url": "full_text_search"
+            },
+            {
+              "page": "JSON",
+              "url": "json"
+            }
           ]
         }
       ]
