@@ -5,7 +5,10 @@ selected: Documentation/JSON
 ---
 The __json__ extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
-# TODO talk about JSON logical type
+## JSON Type
+The JSON extension makes use of the **JSON** logical type.
+The **JSON** logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as **VARCHAR**, i.e., a regular string.
+All JSON creation functions return values of this type.
 
 ## JSON Functions
 The following scalar JSON functions can be used to gain information about the stored JSON values.
