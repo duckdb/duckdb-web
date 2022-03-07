@@ -1,7 +1,7 @@
 ---
 layout: post  
 title:  "Parallel Grouped Aggregation in DuckDB"
-author: Hannes Mühleisen
+author: Hannes Mühleisen and Mark Raasveldt
 excerpt_separator: <!--more-->
 ---
 
