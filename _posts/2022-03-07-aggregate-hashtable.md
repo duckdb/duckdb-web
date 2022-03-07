@@ -155,7 +155,7 @@ Now let's discuss some results. We start with varying the amount of rows in the 
 </div>
 
 
-For the next experiment, we fix the amount of rows at 100M (the largest size we experimented with) and show the full behavior when increasing the group size. We can see again how DuckDB consistently exhibits good scaling behavior when increasing group size, because it can effectively parallelize all phases of aggregation as outlined above.
+For the next experiment, we fix the amount of rows at 100M (the largest size we experimented with) and show the full behavior when increasing the group size. We can see again how DuckDB consistently exhibits good scaling behavior when increasing group size, because it can effectively parallelize all phases of aggregation as outlined above. If you are interested in how we generated those plots, the plotting [script is available, too](https://gist.github.com/hannes/9b0e47625290b8af78de88e1d26441c0).
 
 
 
