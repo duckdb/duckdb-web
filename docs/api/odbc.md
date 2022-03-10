@@ -4,9 +4,11 @@ title: ODBC API
 selected: Client APIs
 ---
 ## ODBC driver
-The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavours of database management systems (DBMSs). Someone can see the ODBC API composed of two components: the Driver Manager (DM) and the ODBC drivers.
+The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of database management systems (DBMSs).
+Someone can see the ODBC API composed of the Driver Manager (DM) and the ODBC drivers.
 
-The DM is part of the operational system library, e.g., unixODBC, which manages the communications between the user applications and the ODBC drivers. Typically, applications are linked against the DM that based on Data Source Name (DSN) to look up for the correct ODBC driver.
+The DM is part of the system library, e.g., unixODBC, which manages the communications between the user applications and the ODBC drivers.
+Typically, applications are linked against the DM, which uses Data Source Name (DSN) to look up the correct ODBC driver.
 <!--- with dynamically linkage call the ODBC driver. -->
 
 The ODBC driver is a DBMS implementation of the ODBC API, which handles all the internals of that DBMS.
@@ -15,18 +17,22 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 
 ## DuckDB ODBC Assets
 
-DuckDB releases the ODBC driver as assets for Linux and Windows.
+DuckDB supports the ODBC version 3.0 according to the [core level conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15). 
 
-They can be downloaded from the [Latest Release of DuckBD](https://github.com/duckdb/duckdb/releases).
+We release the ODBC driver as assets for Linux and Windows.
+Users can download them from the from the [Latest Release of DuckBD](https://github.com/duckdb/duckdb/releases).
 There, there are two assets: **duckdb\_odbc-linux-amd64.zip** and **duckdb\_odbc-windows-amd64.zip**).
+
+These assets have specific driver artifacts to the corresponding operating system.
 
 ## Linux Setup
 The ODBC setup on Linux is based on files, the well-known **.odbc.ini** and **.odbcinst.ini**.
-These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcuted as `~/`). The DM gives the priority to the user configuration files and then to the system files.
+These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcuted as `~/`).
+The DM prioritizes the user configuration files and then the system files.
 
-### The ".odbc.ini" file
+### The ".odbc.ini" File
 
-The **.odbc.ini** contains the DSNs for the drivers, in which can exist specific knobs.
+The **.odbc.ini** contains the DSNs for the drivers, which can have specific knobs.
 
 An example of **.odbc.ini** with DuckDB would be:
 
@@ -38,13 +44,14 @@ Database=:memory:
 
 **[DuckDB]**: between the brackets is a DSN for the DuckDB.
 
-**Driver**: describes the name of the driver, which will contains more configuration details in the **.odbcinst.ini**.
+**Driver**: it describes the driver's name, and other configurations will be placed in the **.odbcinst.ini**.
 
-**Database**: describes the database name used by the DuckDB, it can also contain a file path to a `.db` in the system.
+**Database**: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
 
-### The ".odbcinst.ini" file
+### The ".odbcinst.ini" File
 
-The **.odbcinst.ini** contains general configutaions for the ODBC installed drivers in the system. A driver section start with the driver name between brackets, then it follows specific configuration knobs belonging to that driver.
+The **.odbcinst.ini** contains general configurations for the ODBC installed drivers in the system.
+A driver section starts with the driver name between brackets, and then it follows specific configuration knobs belonging to that driver.
 
 An example of **.odbcinst.ini** with the DuckDB driver would be:
 
@@ -58,36 +65,39 @@ Driver = /home/<user>/duckdb/build/release/tools/odbc/libduckdb_odbc.so
 ```
 
 
-**[ODBC]**: this is the DM configuration section.
+**[ODBC]**: it is the DM configuration section.
 
-**Trace**: enabling the ODBC trace file with the option `yes`.
+**Trace**: it enables the ODBC trace file using the option `yes`.
 
-**TraceFile**: absolute system file path of the ODBC trace file.
+**TraceFile**: the absolute system file path for the ODBC trace file.
 
 
 **[DuckDB Driver]**: the section of the DuckDB installed driver.
 
-**Driver**: absolute system file path of the DuckDB driver. 
+**Driver**: the absolute system file path of the DuckDB driver. 
 
 
 
 ## Windows Setup
-The ODBC setup on Windows is based on registry keys. The ODBC entries can be placed at the current user registry key (HKCU) or at the system registry key (HKLM).
+The ODBC setup on Windows is based on registry keys ([Registry Entries for ODBC Components
+](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15)).
+The ODBC entries can be placed at the current user registry key (`HKCU`) or the system registry key (`HKLM`).
 
 We have tested and used the system entries based on `HKLM->SOFTWARE->ODBC`.
-In that registry there are two subkeys: `ODBC.INI` and `ODBCINST.INI`.
+In that registry, there are two subkeys: `ODBC.INI` and `ODBCINST.INI`.
 
-In the `ODBC.INI`, users usually insert DSN entries for the drivers.
-For example, the DSN registry for DuckDB would look like:
+The `ODBC.INI` is where users usually insert DSN registry entries for the drivers.
+For example, the DSN registry for DuckDB would look like this:
 
 ![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
 
 
+The `ODBCINST.INI` contains one entry for each ODBC driver and other keys predefined for [Windows ODBC configuration](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15).
 
+### ODBC Windows Installer
 
+To simplify and facilitate the installation process, we provide the ODBC installer (`odbc_install.exe`) with the Windows asset.
 
-
-
-
+Users can just run: `odbc_install.exe /Install`, and all required Windows registries will be configured using the default database `:memory:`.
 
 
