@@ -81,7 +81,9 @@ In that registry there are two subkeys: `ODBC.INI` and `ODBCINST.INI`.
 In general, in the `ODBC.INI` users insert DSN entries for the drivers.
 For example, the DSN registry for DuckDB would look like:
 
-![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](odbc_img/odbc_ini-registry-entry.jpeg)
+![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
+
+<img src="/images/blog/odbc/odbc_ini-registry-entry.png" alt="DuckDB DSN Windows Registry Entry" title="Figure 1: DuckDB DSN Windows Registry Entry" style="max-width:90%;width:90%;height:auto"/>
 
 
 
