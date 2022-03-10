@@ -17,17 +17,17 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 
 ## DuckDB ODBC Assets
 
-DuckDB supports the ODBC version 3.0 according to the [core level conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15). 
+DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15). 
 
 We release the ODBC driver as assets for Linux and Windows.
-Users can download them from the from the [Latest Release of DuckBD](https://github.com/duckdb/duckdb/releases).
-There, there are two assets: **duckdb\_odbc-linux-amd64.zip** and **duckdb\_odbc-windows-amd64.zip**).
+Users can download them from the [Latest Release of DuckBD](https://github.com/duckdb/duckdb/releases).
 
+There, there are two assets: **duckdb\_odbc-linux-amd64.zip** and **duckdb\_odbc-windows-amd64.zip**).
 These assets have specific driver artifacts to the corresponding operating system.
 
 ## Linux Setup
 The ODBC setup on Linux is based on files, the well-known **.odbc.ini** and **.odbcinst.ini**.
-These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcuted as `~/`).
+These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcut as `~/`).
 The DM prioritizes the user configuration files and then the system files.
 
 ### The ".odbc.ini" File
@@ -87,6 +87,7 @@ We have tested and used the system entries based on `HKLM->SOFTWARE->ODBC`.
 In that registry, there are two subkeys: `ODBC.INI` and `ODBCINST.INI`.
 
 The `ODBC.INI` is where users usually insert DSN registry entries for the drivers.
+
 For example, the DSN registry for DuckDB would look like this:
 
 ![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
