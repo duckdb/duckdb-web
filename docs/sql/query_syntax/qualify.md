@@ -4,10 +4,10 @@ title: QUALIFY Clause
 selected: Documentation/SQL/Query Syntax/Qualify
 expanded: SQL
 railroad: query_syntax/qualify.js
-blurb: The QUALIFY clause is used to filter the result of a WINDOW function.
+blurb: The QUALIFY clause is used to filter the results of WINDOW functions.
 ---
 
-The `QUALIFY` clause is used to filter the result of [`WINDOW` functions](/docs/sql/window_functions). This filtering of results is similar to how a [`HAVING` clause](/docs/sql/query_syntax/having) filters the results of aggregate functions applied based on the [`GROUP BY` clause](/docs/sql/query_syntax/groupby). 
+The `QUALIFY` clause is used to filter the results of [`WINDOW` functions](/docs/sql/window_functions). This filtering of results is similar to how a [`HAVING` clause](/docs/sql/query_syntax/having) filters the results of aggregate functions applied based on the [`GROUP BY` clause](/docs/sql/query_syntax/groupby). 
 
 The `QUALIFY` clause avoids the need for a subquery or [WITH clause](/docs/sql/query_syntax/with) to perform this filtering (much like `HAVING` avoids a subquery). An example using a `WITH` clause instead of `QUALIFY` is included below the `QUALIFY` examples.
 
