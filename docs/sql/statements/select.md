@@ -23,14 +23,17 @@ SELECT * FROM t1 JOIN t2 USING(a, b);
 ```
 
 ### Syntax
-The `SELECT` statement retrieves rows from the database. The canonical order of a select statement is as follows:
+The `SELECT` statement retrieves rows from the database. The canonical order of a select statement is as follows, with less common clauses being indented:
 
 ```sql
 SELECT select_list
 FROM tables
+    USING SAMPLE sample_expr
 WHERE condition
 GROUP BY groups
 HAVING group_filter
+    WINDOW window_expr
+    QUALIFY qualify_filter
 ORDER BY order_expr
 LIMIT n
 ```
@@ -49,6 +52,11 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 
 [The `FROM` clause](/docs/sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
+## SAMPLE clause
+<div id="rrdiagram10"></div>
+
+[The `SAMPLE` clause](/docs/sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e. after any joins, but before the where clause or any aggregates). See the [sample](/docs/sql/samples) page for more information.
+
 ## WHERE clause
 <div id="rrdiagram5"></div>
 
@@ -64,10 +72,10 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 
 [The `WINDOW` clause](/docs/sql/query_syntax/window) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
-## SAMPLE clause
-<div id="rrdiagram10"></div>
+## QUALIFY clause
+<div id="rrdiagram11"></div>
 
-[The `SAMPLE` clause](/docs/sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e. after any joins, but before the where clause or any aggregates). See the [sample](/docs/sql/samples) page for more information.
+[The `QUALIFY` clause](/docs/sql/query_syntax/qualify) is used to filter the result of [`WINDOW` functions](/docs/sql/window_functions).
 
 ## ORDER BY/LIMIT clause
 <div id="rrdiagram8"></div>

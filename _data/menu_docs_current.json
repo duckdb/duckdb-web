@@ -229,6 +229,10 @@
                   "url": "window"
                 },
                 {
+                  "page": "QUALIFY",
+                  "url": "qualify"
+                },
+                {
                   "page": "VALUES",
                   "url": "values"
                 }
