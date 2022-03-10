@@ -4,14 +4,14 @@ title: ODBC API
 selected: Client APIs
 ---
 ## ODBC driver
-The ODBC (Open Database Connectivity) API is a C-style library that provides access to different flavours of database management systems (DBMSs). Someone can see the ODBC API composed of two components: the Driver Manager (DM) and the ODBC drivers.
+The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavours of database management systems (DBMSs). Someone can see the ODBC API composed of two components: the Driver Manager (DM) and the ODBC drivers.
 
-The DM is part of the operational system library, .e.g, unixODBC, which manages the communications between the user applications and the ODBC drivers. Typically, applications are linked against the DM that based on Data Source Name (DSN) to look up for the correct ODBC driver.
+The DM is part of the operational system library, e.g., unixODBC, which manages the communications between the user applications and the ODBC drivers. Typically, applications are linked against the DM that based on Data Source Name (DSN) to look up for the correct ODBC driver.
 <!--- with dynamically linkage call the ODBC driver. -->
 
-The ODBC driver is a DBMS implementation of the ODBC API, which handles all the internals of the DBMS.
+The ODBC driver is a DBMS implementation of the ODBC API, which handles all the internals of that DBMS.
 
-The DM maps user application calls for ODBC functions to the correct ODBC driver that performs the specified function and returns the proper values.
+The DM maps user application calls of ODBC functions to the correct ODBC driver that performs the specified function and returns the proper values.
 
 ## DuckDB ODBC Assets
 
@@ -28,7 +28,7 @@ These files can be placed at the system `/etc` directory or at the user home dir
 
 The **.odbc.ini** contains the DSNs for the drivers, in which can exist specific knobs.
 
-An example of **.odbcinst.ini** with DuckDB would be:
+An example of **.odbc.ini** with DuckDB would be:
 
 ```
 [DuckDB]
@@ -44,7 +44,7 @@ Database=:memory:
 
 ### The ".odbcinst.ini" file
 
-The **.odbcinst.ini** contains general configurtaions for the ODBC installed drivers in the system. A driver section start with the driver name between brackets, then it follows specific configuration knobs belonging to that driver.
+The **.odbcinst.ini** contains general configutaions for the ODBC installed drivers in the system. A driver section start with the driver name between brackets, then it follows specific configuration knobs belonging to that driver.
 
 An example of **.odbcinst.ini** with the DuckDB driver would be:
 
@@ -72,18 +72,17 @@ Driver = /home/<user>/duckdb/build/release/tools/odbc/libduckdb_odbc.so
 
 
 ## Windows Setup
-## Windows Setup
 The ODBC setup on Windows is based on registry keys. The ODBC entries can be placed at the current user registry key (HKCU) or at the system registry key (HKLM).
 
 We have tested and used the system entries based on `HKLM->SOFTWARE->ODBC`.
 In that registry there are two subkeys: `ODBC.INI` and `ODBCINST.INI`.
 
-In general, in the `ODBC.INI` users insert DSN entries for the drivers.
+In the `ODBC.INI`, users usually insert DSN entries for the drivers.
 For example, the DSN registry for DuckDB would look like:
 
 ![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
 
-<img src="/images/blog/odbc/odbc_ini-registry-entry.png" alt="DuckDB DSN Windows Registry Entry" title="Figure 1: DuckDB DSN Windows Registry Entry" style="max-width:90%;width:90%;height:auto"/>
+
 
 
 
