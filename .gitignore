@@ -299,3 +299,7 @@ Gemfile.lock
 _site/
 
 .jekyll-cache/
+duckdb_functions_join_docs_with_notes.tab.txt
+duckdb_functions_join_docs.tab
+duckdb_functions.tab
+docs/sql/functions/descriptions.txt

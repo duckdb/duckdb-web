@@ -1891,6 +1891,7 @@ function GenerateSelectNode(options) {
 			GenerateGroupByClause(options)
 		),
 		Optional(Sequence(GenerateWindowClause(options)), "skip"),
+		Optional(Sequence(GenerateQualifyClause(options)), "skip"),
 		Sequence(GenerateLimitAndOrderBy(options))
 	])]
 }
@@ -1925,5 +1926,12 @@ function GenerateFilterClause(options = {}) {
 		Keyword("WHERE"),
 		Expression('filter_expr'),
 		Keyword(")")
+	]
+}
+
+function GenerateQualifyClause(options = {}) {
+	return [
+		Keyword("QUALIFY"),
+		Expression("window_function_expr")
 	]
 }

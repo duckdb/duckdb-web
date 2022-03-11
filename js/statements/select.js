@@ -23,6 +23,7 @@ function Initialize(options = {}) {
 	document.getElementById("rrdiagram8").innerHTML = Diagram(GenerateLimitAndOrderBy(options)).toString();
 	document.getElementById("rrdiagram9").innerHTML = Diagram(GenerateValues(options)).toString();
 	document.getElementById("rrdiagram10").innerHTML = Diagram(GenerateSampleClause(options)).toString();
+	document.getElementById("rrdiagram11").innerHTML = Diagram(GenerateQualifyClause(options)).toString();
 
 	document.getElementById("rrdiagram2").classList.add("limit-width");
 	document.getElementById("rrdiagram3").classList.add("limit-width");
@@ -33,6 +34,7 @@ function Initialize(options = {}) {
 	document.getElementById("rrdiagram8").classList.add("limit-width");
 	document.getElementById("rrdiagram9").classList.add("limit-width");
 	document.getElementById("rrdiagram10").classList.add("limit-width");
+	document.getElementById("rrdiagram11").classList.add("limit-width");
 }
 
 function Refresh(node_name, set_node) {
