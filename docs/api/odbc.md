@@ -104,6 +104,13 @@ Users can just run: `odbc_install.exe /Install`, and all required Windows regist
 
 ### DSN Windows Setup
 
-After the installation, it is possible to change the default DSN configuration or add a new one using the Windows ODBC config tool: `odbcad32.exe`.
+After the installation, it is possible to change the default DSN configuration or add a new one using the Windows ODBC config tool `odbcad32.exe`:
 
-![DuckDB Windows DSN Setup](/images/blog/odbc/windows_DSN_setup.png)
+![Windows ODBC Config Tool](/images/blog/odbc/odbcad32_exe.png)
+
+
+Selecting the default DSN (i.e., `DuckDB`) or add a new configuration, the following setup window will display:
+
+![DuckDB Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
+
+For now, it is possible to set the DSN and the database file path associated with that DSN.
