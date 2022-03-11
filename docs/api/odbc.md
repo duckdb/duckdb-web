@@ -102,3 +102,8 @@ To simplify and facilitate the installation process, we provide the ODBC install
 Users can just run: `odbc_install.exe /Install`, and all required Windows registries will be configured using the default database `:memory:`.
 
 
+### DSN Windows Setup
+
+After the installation, it is possible to change the default DSN configuration or add a new one using the Windows ODBC config tool: `odbcad32.exe`.
+
+![DuckDB Windows DSN Setup](/images/blog/odbc/windows_DSN_setup.png)
