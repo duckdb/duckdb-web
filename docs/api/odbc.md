@@ -4,7 +4,7 @@ title: ODBC API
 selected: Client APIs
 ---
 ## ODBC driver
-The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of database management systems (DBMSs).
+The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
 Someone can see the ODBC API composed of the Driver Manager (DM) and the ODBC drivers.
 
 The DM is part of the system library, e.g., unixODBC, which manages the communications between the user applications and the ODBC drivers.
