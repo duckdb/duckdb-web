@@ -57,14 +57,16 @@ DuckDB's main developers are public servants in The Netherlands. Our salaries ar
 * [DuckDB: an Embeddable Analytical Database](https://hannes.muehleisen.org/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
 
 
-## Presentations
-* [DuckDB – The SQLite for Analytics](https://www.youtube.com/watch?v=PFUZlNQIndo) (Video Presentation, ca. 1h)
-* [DuckDB - An Embeddable Analytical Database](https://mirrors.dotsrc.org/fosdem/2020/H.2215/duckdb.mp4) (Video Presentation, ca 15min)
-* [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
-* [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
+## Media
+* [Move Your Database To The Data And Speed Up Your Analytics With DuckDB (Data Engineering Podcast)](https://www.dataengineeringpodcast.com/duckdb-in-process-olap-database-episode-270/) (Podcast, ca. 1:20h)
+* [DuckDB, An In-Process Analytical DBMS (NYC Data Hackers)](https://www.youtube.com/watch?v=Z-6SnP6yzgo) (Video Presentation, ca. 1:30h)
+* [DuckDB – The SQLite for Analytics (CMU Database Group - Quarantine Tech Talks)](https://www.youtube.com/watch?v=PFUZlNQIndo) (Video Presentation, ca. 1h)
+* [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://mirrors.dotsrc.org/fosdem/2020/H.2215/duckdb.mp4) (Video Presentation, ca 15min)
+* [Push-Based Execution in DuckDB (CWI Database Architectures Seminar)](https://www.youtube.com/watch?v=MA0OsvYFGrc) (Video Presentation, ca. 1h)
+* [Fastest Table Sort in the West - Redesigning DuckDB’s Sort (DSDSD)](https://www.youtube.com/watch?v=m6Yg2sXGui0) (Video Presentation, ca. 20min)
 * [The Case for In-Process Analytics](https://homepages.cwi.nl/~hannes/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
-* [Push-Based Execution in DuckDB](https://www.youtube.com/watch?v=MA0OsvYFGrc) (Video Presentation, ca. 1h)
-* [Fastest Table Sort in the West - Redesigning DuckDB’s Sort](https://www.youtube.com/watch?v=m6Yg2sXGui0) (Video Presentation, ca. 20min)
+* [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
+* [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
 
 ## Other Projects
 Here are some projects that we know of that use DuckDB. If you would like your project to be added here, open a GitHub issue.
