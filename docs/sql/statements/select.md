@@ -107,6 +107,7 @@ D SELECT rowid, id, content FROM t;
 In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later. Therefore, it is strongly recommended *not to use rowids as identifiers*.
 
 > The `rowid` values are stable within a transaction.
+> The `rowid` type is 
 
 > If there is a user-defined column named `rowid`, it shadows the `rowid` pseudocolumn.
 
