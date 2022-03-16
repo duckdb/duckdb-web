@@ -104,7 +104,7 @@ WITH RECURSIVE paths(startPerson, endPerson, path) AS (
    SELECT -- define the path as the first edge of the traversal
         person1id AS startPerson,
         person2id AS endPerson,
-        [person1id, person2id]::bigint[] AS path
+        [person1id, person2id] AS path
      FROM knows
    UNION ALL
    SELECT -- concatenate new edge to the path
@@ -142,7 +142,7 @@ WHERE startPerson = 1;
 WITH RECURSIVE paths(startPerson, endPerson, path, endReached) AS (
    SELECT person1id AS startPerson,
           person2id AS endPerson,
-          [person1id, person2id]::bigint[] AS path,
+          [person1id, person2id] AS path,
           max(CASE WHEN person2id = 3 THEN true ELSE false END)
             OVER (ROWS BETWEEN UNBOUNDED PRECEDING
                            AND UNBOUNDED FOLLOWING) AS endReached
