@@ -11,12 +11,12 @@ The `WITH` clause allows you to specify common table expressions (CTEs). Regular
 
 ```sql
 -- create a CTE called "cte" and use it in the main query
-WITH cte AS (SELECT 42)
+WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
 ```
 ┌────┐
-│ 42 │
+│ x  │
 ├────┤
 │ 42 │
 └────┘
@@ -24,15 +24,15 @@ SELECT * FROM cte;
 ```sql
 -- create two CTEs, where the second CTE references the first CTE
 WITH cte AS (SELECT 42 AS i),
-     cte2 AS (SELECT i*100 FROM cte)
+     cte2 AS (SELECT i*100 AS x FROM cte)
 SELECT * FROM cte2;
 ```
 ```
-┌─────────┐
-│ i * 100 │
-├─────────┤
-│ 4200    │
-└─────────┘
+┌──────┐
+│  x   │
+├──────┤
+│ 4200 │
+└──────┘
 ```
 
 ### Recursive CTE examples
@@ -40,6 +40,8 @@ SELECT * FROM cte2;
 #### Tree traversal
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hiearchy of tags:
+
+![](with-recursive-tree-example.png)
 
 ```sql
 CREATE TABLE tag(id int, name varchar, subclassof int);
@@ -85,6 +87,8 @@ The `WITH RECURSIVE` clause can be used to express graph traversal on arbitrary 
 
 Take the following undirected social graph:
 
+![](with-recursive-graph-example.png)
+
 ```sql
 CREATE TABLE knows(person1id int, person2id int);
 INSERT INTO knows VALUES (1, 2), (1, 4), (2, 3), (2, 4), (3, 4), (5, 6);
@@ -100,7 +104,7 @@ WITH RECURSIVE paths(startPerson, endPerson, path) AS (
    SELECT -- define the path as the first edge of the traversal
         person1id AS startPerson,
         person2id AS endPerson,
-        [person1id, person2id]::bigint[] AS path
+        [person1id, person2id] AS path
      FROM knows
    UNION ALL
    SELECT -- concatenate new edge to the path
@@ -138,7 +142,7 @@ WHERE startPerson = 1;
 WITH RECURSIVE paths(startPerson, endPerson, path, endReached) AS (
    SELECT person1id AS startPerson,
           person2id AS endPerson,
-          [person1id, person2id]::bigint[] AS path,
+          [person1id, person2id] AS path,
           max(CASE WHEN person2id = 3 THEN true ELSE false END)
             OVER (ROWS BETWEEN UNBOUNDED PRECEDING
                            AND UNBOUNDED FOLLOWING) AS endReached
