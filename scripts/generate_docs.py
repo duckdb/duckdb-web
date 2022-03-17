@@ -21,6 +21,17 @@ docs_map = {
 	'Helpers': None,
 	'Date/Time/Timestamp Helpers': 'docs/api/c/types.md',
 	'Hugeint Helpers': 'docs/api/c/types.md',
+	'Decimal Helpers': 'docs/api/c/types.md',
+	'Value Interface': 'docs/api/c/value.md',
+	'Logical Type Interface': 'docs/api/c/types.md',
+	'Data Chunk Interface': 'docs/api/c/data_chunk.md',
+	'Vector Interface': 'docs/api/c/data_chunk.md',
+	'Validity Mask Functions': 'docs/api/c/data_chunk.md',
+	'Table Functions': 'docs/api/c/table_functions.md',
+	'Table Function Bind': 'docs/api/c/table_functions.md',
+	'Table Function Init': 'docs/api/c/table_functions.md',
+	'Table Function': 'docs/api/c/table_functions.md',
+	'Replacement Scans': 'docs/api/c/replacement_scans.md',
 	'Prepared Statements': 'docs/api/c/prepared.md',
 	'Appender': 'docs/api/c/appender.md',
 	'Arrow Interface': None
@@ -112,6 +123,16 @@ const
 duckdb_arrow
 duckdb_arrow_schema
 duckdb_arrow_array
+duckdb_logical_type
+duckdb_data_chunk
+duckdb_vector
+duckdb_logical_type
+duckdb_value
+duckdb_table_function
+duckdb_bind_info
+duckdb_init_info
+duckdb_function_info
+duckdb_replacement_scan_info
 '''
 
 keywords = [x.strip() for x in keyword_list.split('\n') if len(x.strip()) > 0]

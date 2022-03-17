@@ -111,7 +111,7 @@ The resulting prepared statement object
 
 ### **duckdb_destroy_prepare**
 ---
-Closes the prepared statement and de-allocates all memory allocated for that connection.
+Closes the prepared statement and de-allocates all memory allocated for the statement.
 
 #### **Syntax**
 ---

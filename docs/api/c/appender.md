@@ -64,6 +64,7 @@ duckdb_appender_destroy(&appender);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_varchar_length">duckdb_append_varchar_length</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">val</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_blob">duckdb_append_blob</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="k">data</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_null">duckdb_append_null</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_append_data_chunk">duckdb_append_data_chunk</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
 </code></pre></div></div>
 ### **duckdb_appender_create**
 ---
@@ -103,7 +104,7 @@ The resulting appender object.
 Returns the error message associated with the given appender.
 If the appender has no error message, this returns `nullptr` instead.
 
-The error message should be freed using `duckdb_free`.
+The error message should not be freed. It will be de-allocated when `duckdb_appender_destroy` is called.
 
 #### **Syntax**
 ---
@@ -484,5 +485,34 @@ Append a NULL value to the appender (of any type).
 </span>  <span class="kt">duckdb_appender</span> <span class="k">appender
 </span>);
 </code></pre></div></div>
+<br>
+
+### **duckdb_append_data_chunk**
+---
+Appends a pre-filled data chunk to the specified appender.
+
+The types of the data chunk must exactly match the types of the table, no casting is performed.
+If the types do not match or the appender is in an invalid state, DuckDBError is returned.
+If the append is successful, DuckDBSuccess is returned.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_append_data_chunk</span>(<span class="k">
+</span>  <span class="kt">duckdb_appender</span> <span class="k">appender</span>,<span class="k">
+</span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `appender`
+
+The appender to append to.
+* `chunk`
+
+The data chunk to append.
+* `returns`
+
+The return state.
+
 <br>
 

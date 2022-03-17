@@ -100,12 +100,13 @@ a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_result">duckdb_destroy_result</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_column_name">duckdb_column_name</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_column_type">duckdb_column_type</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_column_logical_type">duckdb_column_logical_type</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_column_count">duckdb_column_count</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_row_count">duckdb_row_count</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_rows_changed">duckdb_rows_changed</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_column_data">duckdb_column_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
 <span class="kt">bool</span> *<span class="nf"><a href="#duckdb_nullmask_data">duckdb_nullmask_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
-<span class="kt">char</span> *<span class="nf"><a href="#duckdb_result_error">duckdb_result_error</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_result_error">duckdb_result_error</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 </code></pre></div></div>
 ### **duckdb_query**
 ---
@@ -214,6 +215,35 @@ The column type of the specified column.
 
 <br>
 
+### **duckdb_column_logical_type**
+---
+Returns the logical column type of the specified column.
+
+The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
+
+Returns `NULL` if the column is out of range.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_column_logical_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">col
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `result`
+
+The result object to fetch the column type from.
+* `col`
+
+The column index.
+* `returns`
+
+The logical column type of the specified column.
+
+<br>
+
 ### **duckdb_column_count**
 ---
 Returns the number of columns present in a the result object.
@@ -280,9 +310,9 @@ The number of rows changed.
 
 ### **duckdb_column_data**
 ---
-Returns the data of a specific column of a result in columnar format. This is the fastest way of accessing data in a
-query result, as no conversion or type checking must be performed (outside of the original switch). If performance
-is a concern, it is recommended to use this API over the `duckdb_value` functions.
+**DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
+
+Returns the data of a specific column of a result in columnar format.
 
 The function returns a dense array which contains the result data. The exact type stored in the array depends on the
 corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact type by which the data should be
@@ -317,6 +347,8 @@ The column data of the specified column.
 
 ### **duckdb_nullmask_data**
 ---
+**DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
+
 Returns the nullmask of a specific column of a result in columnar format. The nullmask indicates for every row
 whether or not the corresponding row is `NULL`. If a row is `NULL`, the values present in the array provided
 by `duckdb_column_data` are undefined.
@@ -360,7 +392,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 
 #### **Syntax**
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_result_error</span>(<span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_result_error</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>

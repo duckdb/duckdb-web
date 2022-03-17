@@ -8,7 +8,11 @@ DuckDB is a strongly typed database system. As such, every column has a single t
 over the entire column. That is to say, a column that is labeled as an `INTEGER` column will only contain `INTEGER`
 values.
 
-The supported types are listed below:
+DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
+
+Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g. integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
+
+
 
 ```c
 typedef enum DUCKDB_TYPE {
@@ -30,35 +34,21 @@ typedef enum DUCKDB_TYPE {
   DUCKDB_TYPE_INTERVAL,
   DUCKDB_TYPE_HUGEINT,
   DUCKDB_TYPE_VARCHAR,
-  DUCKDB_TYPE_BLOB
+  DUCKDB_TYPE_BLOB,
+  DUCKDB_TYPE_DECIMAL,
+  DUCKDB_TYPE_TIMESTAMP_S,
+  DUCKDB_TYPE_TIMESTAMP_MS,
+  DUCKDB_TYPE_TIMESTAMP_NS,
+  DUCKDB_TYPE_ENUM,
+  DUCKDB_TYPE_LIST,
+  DUCKDB_TYPE_STRUCT,
+  DUCKDB_TYPE_MAP,
+  DUCKDB_TYPE_UUID,
+  DUCKDB_TYPE_JSON
 } duckdb_type;
 ```
 
-The type of a column in the result can be obtained using the `duckdb_column_type` function. The internal type of the
-columns is especially relevant for correct usage of the `duckdb_column_data` function.
-
-The mapping from column type to internal type is provided in the table below.
-
-|      Column Type      |    Data Type     |
-|-----------------------|------------------|
-| DUCKDB_TYPE_BOOLEAN   | bool             |
-| DUCKDB_TYPE_TINYINT   | int8_t           |
-| DUCKDB_TYPE_SMALLINT  | int16_t          |
-| DUCKDB_TYPE_INTEGER   | int32_t          |
-| DUCKDB_TYPE_BIGINT    | int64_t          |
-| DUCKDB_TYPE_UTINYINT  | uint8_t          |
-| DUCKDB_TYPE_USMALLINT | uint16_t         |
-| DUCKDB_TYPE_UINTEGER  | uint32_t         |
-| DUCKDB_TYPE_UBIGINT   | uint64_t         |
-| DUCKDB_TYPE_FLOAT     | float            |
-| DUCKDB_TYPE_DOUBLE    | double           |
-| DUCKDB_TYPE_TIMESTAMP | duckdb_timestamp |
-| DUCKDB_TYPE_DATE      | duckdb_date      |
-| DUCKDB_TYPE_TIME      | duckdb_time      |
-| DUCKDB_TYPE_INTERVAL  | duckdb_interval  |
-| DUCKDB_TYPE_HUGEINT   | duckdb_hugeint   |
-| DUCKDB_TYPE_VARCHAR   | const char*      |
-| DUCKDB_TYPE_BLOB      | duckdb_blob      |
+The enum type of a column in the result can be obtained using the `duckdb_column_type` function. The logical type of a column can be obtained using the `duckdb_column_logical_type` function.
 
 #### **duckdb_value**
 The `duckdb_value` functions will auto-cast values as required. For example, it is no problem to use
@@ -71,85 +61,22 @@ The exception to the auto-cast rule is the `duckdb_value_varchar_internal` funct
 
 > Note that `duckdb_value_varchar` and `duckdb_value_blob` require the result to be de-allocated using `duckdb_free`.
 
-#### **duckdb_column_data**
-The `duckdb_column_data` returns a pointer to an internal array within the result. The type of the elements of the array
-depends on the internal type of the column, as obtained using `duckdb_column_type`. The corresponding null values can
-be obtained using the `duckdb_nullmask_data` function.
+#### **duckdb_result_get_chunk**
 
-The exact data types can be seen in the table above. For numeric types, the internal types of the columns are standard built-in types. For example, for a column of type `DUCKDB_TYPE_INTEGER` the internal type is a `int32_t`. For text
-(varchar) columns, the internal type is a pointer to a null-terminated string.
+The `duckdb_result_get_chunk` function can be used to read data chunks from a DuckDB result set, and is the most efficient way of reading data from a DuckDB result using the C API. It is also the only way of reading data of certain types from a DuckDB result. For example, the `duckdb_value` functions do not support structural reading of composite types (lists or structs) or more complex types like enums and decimals.
 
-For dates, times, timestamps, blobs, intervals and hugeints, the internal types are DuckDB-specific structs as defined below:
-
-```c
-//! Days are stored as days since 1970-01-01
-//! Use the duckdb_from_date/duckdb_to_date function to extract individual information
-typedef struct {
-	int32_t days;
-} duckdb_date;
-
-//! Time is stored as microseconds since 00:00:00
-//! Use the duckdb_from_time/duckdb_to_time function to extract individual information
-typedef struct {
-	int64_t micros;
-} duckdb_time;
-
-//! Timestamps are stored as microseconds since 1970-01-01
-//! Use the duckdb_from_timestamp/duckdb_to_timestamp function to extract individual information
-typedef struct {
-	int64_t micros;
-} duckdb_timestamp;
-
-typedef struct {
-	int32_t months;
-	int32_t days;
-	int64_t micros;
-} duckdb_interval;
-
-//! Hugeints are composed in a (lower, upper) component
-//! The value of the hugeint is upper * 2^64 + lower
-//! For easy usage, the functions duckdb_hugeint_to_double/duckdb_double_to_hugeint are recommended
-typedef struct {
-	uint64_t lower;
-	int64_t upper;
-} duckdb_hugeint;
-
-typedef struct {
-	void *data;
-	idx_t size;
-} duckdb_blob;
-```
-
-For hugeints, dates, times and timestamps there are also several helper functions available in order to facilitate easier usage of these types. See the API reference below for the available functions.
-
-```c
-// helper structs, as used by the Date/Time/Timestamp Helpers
-typedef struct {
-	int32_t year;
-	int8_t month;
-	int8_t day;
-} duckdb_date_struct;
-
-typedef struct {
-	int8_t hour;
-	int8_t min;
-	int8_t sec;
-	int32_t micros;
-} duckdb_time_struct;
-
-typedef struct {
-	duckdb_date_struct date;
-	duckdb_time_struct time;
-} duckdb_timestamp_struct;
-```
+For more information about data chunks, see the [documentation on data chunks](data_chunk).
 
 ## **API Reference**
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_boolean">duckdb_value_boolean</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_result_get_chunk">duckdb_result_get_chunk</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">chunk_index</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_result_chunk_count">duckdb_result_chunk_count</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
+<span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_boolean">duckdb_value_boolean</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">int8_t</span> <span class="nf"><a href="#duckdb_value_int8">duckdb_value_int8</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">int16_t</span> <span class="nf"><a href="#duckdb_value_int16">duckdb_value_int16</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">int32_t</span> <span class="nf"><a href="#duckdb_value_int32">duckdb_value_int32</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">int64_t</span> <span class="nf"><a href="#duckdb_value_int64">duckdb_value_int64</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_value_hugeint">duckdb_value_hugeint</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
+<span class="k">duckdb_decimal</span> <span class="nf"><a href="#duckdb_value_decimal">duckdb_value_decimal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_value_uint8">duckdb_value_uint8</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">uint16_t</span> <span class="nf"><a href="#duckdb_value_uint16">duckdb_value_uint16</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_value_uint32">duckdb_value_uint32</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
@@ -177,6 +104,78 @@ typedef struct {
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_hugeint_to_double">duckdb_hugeint_to_double</a></span>(<span class="kt">duckdb_hugeint</span> <span class="k">val</span>);
 <span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_double_to_hugeint">duckdb_double_to_hugeint</a></span>(<span class="kt">double</span> <span class="k">val</span>);
 </code></pre></div></div>
+#### **Decimal Helpers**
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_decimal_to_double">duckdb_decimal_to_double</a></span>(<span class="k">duckdb_decimal</span> <span class="k">val</span>);
+</code></pre></div></div>
+#### **Logical Type Interface**
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
+<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_scale">duckdb_decimal_scale</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_decimal_internal_type">duckdb_decimal_internal_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_enum_internal_type">duckdb_enum_internal_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_enum_dictionary_size">duckdb_enum_dictionary_size</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">char</span> *<span class="nf"><a href="#duckdb_enum_dictionary_value">duckdb_enum_dictionary_value</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_list_type_child_type">duckdb_list_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
+</code></pre></div></div>
+### **duckdb_result_get_chunk**
+---
+Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
+
+This function supersedes all `duckdb_value` functions, as well as the `duckdb_column_data` and `duckdb_nullmask_data`
+functions. It results in significantly better performance, and should be preferred in newer code-bases.
+
+If this function is used, none of the other result functions can be used and vice versa (i.e. this function cannot be
+mixed with the legacy result functions).
+
+Use `duckdb_result_chunk_count` to figure out how many chunks there are in the result.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="k">duckdb_result_get_chunk</span>(<span class="k">
+</span>  <span class="kt">duckdb_result</span> <span class="k">result</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">chunk_index
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `result`
+
+The result object to fetch the data chunk from.
+* `chunk_index`
+
+The chunk index to fetch from.
+* `returns`
+
+The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
+
+<br>
+
+### **duckdb_result_chunk_count**
+---
+Returns the number of data chunks present in the result.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_result_chunk_count</span>(<span class="k">
+</span>  <span class="kt">duckdb_result</span> <span class="k">result
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `result`
+
+The result object
+* `returns`
+
+The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
+
+<br>
+
 ### **duckdb_value_boolean**
 ---
 #### **Syntax**
@@ -282,6 +281,24 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 * `returns`
 
 The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
+
+<br>
+
+### **duckdb_value_decimal**
+---
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_decimal</span> <span class="k">duckdb_value_decimal</span>(<span class="k">
+</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">row
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `returns`
+
+The duckdb_decimal value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
@@ -709,6 +726,320 @@ The double value.
 * `returns`
 
 The converted `duckdb_hugeint` element.
+
+<br>
+
+### **duckdb_decimal_to_double**
+---
+Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="k">duckdb_decimal_to_double</span>(<span class="k">
+</span>  <span class="k">duckdb_decimal</span> <span class="k">val
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `val`
+
+The decimal value.
+* `returns`
+
+The converted `double` element.
+
+<br>
+
+### **duckdb_create_logical_type**
+---
+Creates a `duckdb_logical_type` from a standard primitive type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+This should not be used with `DUCKDB_TYPE_DECIMAL`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_logical_type</span>(<span class="k">
+</span>  <span class="k">duckdb_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The primitive type to create.
+* `returns`
+
+The logical type type.
+
+<br>
+
+### **duckdb_get_type_id**
+---
+Retrieves the type class of a `duckdb_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_get_type_id</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The type id
+
+<br>
+
+### **duckdb_decimal_width**
+---
+Retrieves the width of a decimal type.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_decimal_width</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The width of the decimal type
+
+<br>
+
+### **duckdb_decimal_scale**
+---
+Retrieves the scale of a decimal type.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="k">duckdb_decimal_scale</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The scale of the decimal type
+
+<br>
+
+### **duckdb_decimal_internal_type**
+---
+Retrieves the internal storage type of a decimal type.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_decimal_internal_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The internal type of the decimal type
+
+<br>
+
+### **duckdb_enum_internal_type**
+---
+Retrieves the internal storage type of an enum type.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_enum_internal_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The internal type of the enum type
+
+<br>
+
+### **duckdb_enum_dictionary_size**
+---
+Retrieves the dictionary size of the enum type
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="k">duckdb_enum_dictionary_size</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The dictionary size of the enum type
+
+<br>
+
+### **duckdb_enum_dictionary_value**
+---
+Retrieves the dictionary value at the specified position from the enum.
+
+The result must be freed with `duckdb_free`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_enum_dictionary_value</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `index`
+
+The index in the dictionary
+* `returns`
+
+The string value of the enum type. Must be freed with `duckdb_free`.
+
+<br>
+
+### **duckdb_list_type_child_type**
+---
+Retrieves the child type of the given list type.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_list_type_child_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### **duckdb_struct_type_child_count**
+---
+Returns the number of children of a struct type.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_struct_type_child_count</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The number of children of a struct type.
+
+<br>
+
+### **duckdb_struct_type_child_name**
+---
+Retrieves the name of the struct child.
+
+The result must be freed with `duckdb_free`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_struct_type_child_name</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `index`
+
+The child index
+* `returns`
+
+The name of the struct type. Must be freed with `duckdb_free`.
+
+<br>
+
+### **duckdb_struct_type_child_type**
+---
+Retrieves the child type of the given struct type at the specified index.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_struct_type_child_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `index`
+
+The child index
+* `returns`
+
+The child type of the struct type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### **duckdb_destroy_logical_type**
+---
+Destroys the logical type and de-allocates all memory allocated for that type.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_logical_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> *<span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type to destroy.
 
 <br>
 

@@ -75,6 +75,14 @@
                     "url": "query"
                   },
                   {
+                    "page": "Data Chunks",
+                    "url": "data_chunk"
+                  },
+                  {
+                    "page": "Values",
+                    "url": "value"
+                  },
+                  {
                     "page": "Types",
                     "url": "types"
                   },
@@ -85,6 +93,14 @@
                   {
                     "page": "Appender",
                     "url": "appender"
+                  },
+                  {
+                    "page": "Table Functions",
+                    "url": "table_functions"
+                  },
+                  {
+                    "page": "Replacement Scans",
+                    "url": "replacement_scans"
                   },
                   {
                     "page": "API Reference",
