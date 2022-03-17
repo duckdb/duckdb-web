@@ -99,3 +99,4 @@ def recursive_copy(source, target):
 
 
 recursive_copy('docs', folder)
+copy_file('_data/menu_docs_current.json', '_data/menu_docs_%s.json' % (version.replace('.', ''),), )
