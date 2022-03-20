@@ -48,7 +48,7 @@ The expressions can be constants or arbitrary expressions.
 -- Struct of integers
 SELECT {'x': 1, 'y': 2, 'z': 3};
 -- Struct of strings with a NULL value
-SELECT {'yes:' 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
+SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
 -- Struct of structs with NULL values
 SELECT {'birds':
             {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
