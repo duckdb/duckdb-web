@@ -12,6 +12,10 @@
               "url": "/docs/installation/"
             },
             {
+              "page": "How-To Guides",
+              "url": "/docs/guides/index"
+            },
+            {
               "page": "Data Import",
               "url": "/docs/data/overview"
             },
