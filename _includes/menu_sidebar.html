@@ -17,19 +17,33 @@
 	{%- assign menudocfile = "menu_docs_" | append: versionviewed | replace: ".", "" -%}
 
 	<ul class="sidenav">
-	
 		{% if site.data[menudocfile].docsmenu %}
 			{% for item in site.data[menudocfile].docsmenu %}
-			
+				{% if item.slug == nil %}
+					{% assign slugParts = item.url | split: "/" %}
+				{% else %}
+					{% assign slugParts = item.slug | split: "/" %}
+				{% endif %}
+				{% assign urlContains = true %}
+				{% for slugPart in slugParts %}
+					{% if urlParts contains slugPart %}
+					{% else %}
+						{% assign urlContains = false %}
+					{% endif %}
+				{% endfor %}
+				{% assign base_slash = '' %}
+				{% if item.slug != nil and item.url != nil %}
+					{% assign base_slash = '/' %}
+				{% endif %}
 				<li class="item-menu
-					{% if urlParts contains item.slug %}active {% endif %}
+					{% if urlContains %}active {% endif %}
 					{% if item.mainfolderitems[0] %}hasSub{% endif %} 
-					{% if urlParts contains item.slug %} opened {% endif %}
+					{% if urlContains %} opened {% endif %}
 				">
-				{% if item.url %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ site.baseurl }}/{{item.slug}}{{startingUrl}}{{ item.url }}">{{ item.page }}</a>  {% else %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }} {% endif %} </li>
+				{% if item.url %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} <a href="{{ base_slash }}{{ site.baseurl }}{{item.slug}}{{startingUrl}}{{ item.url }}">{{ item.page }}</a>  {% else %} {% if item.mainfolderitems[0] %} <span class="show"></span> {% endif %} {{ item.page }} {% endif %} </li>
 			
 				{% if item.mainfolderitems[0] %}
-					<ul style="display: {% if urlParts contains item.slug %}block;{% else %}none{% endif %}">
+					<ul style="display: {% if urlContains %}block;{% else %}none{% endif %}">
 						{% for mainentry in item.mainfolderitems %}
 						<li class="mainentry-menu
 								{% if urlParts[2] == mainentry.url %} active {% endif %}

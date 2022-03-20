@@ -29,10 +29,10 @@ SELECT * FROM read_csv_auto('test.csv.gz');
 See [here](/docs/data/csv) for a detailed description of CSV loading.
 
 ### Parquet Loading
-Parquet files can be efficiently loaded and queried using the `parquet_scan` function.
+Parquet files can be efficiently loaded and queried using the `read_parquet` function.
 
 ```sql
-SELECT * FROM parquet_scan('test.parquet');
+SELECT * FROM read_parquet('test.parquet');
 ```
 
 See [here](/docs/data/parquet) for a detailed description of Parquet loading.

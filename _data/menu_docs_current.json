@@ -1,14 +1,108 @@
 {
   "docsmenu": [
     {
+      "page": "Installation",
+      "url": "docs/installation"
+    },
+    {
+      "page": "Guides",
+      "open": true,
+      "slug": "docs/guides",
+      "url": "index",
+      "mainfolderitems": [
+        {
+          "page": "Data Import & Export",
+          "slug": "import",
+          "subfolderitems": [
+            {
+              "page": "CSV Import",
+              "url": "csv_import"
+            },
+            {
+              "page": "CSV Export",
+              "url": "csv_export"
+            },
+            {
+              "page": "Parquet Import",
+              "url": "parquet_import"
+            },
+            {
+              "page": "Parquet Export",
+              "url": "parquet_export"
+            },
+            {
+              "page": "Query Parquet",
+              "url": "query_parquet"
+            },
+            {
+              "page": "HTTP Parquet Import",
+              "url": "http_import"
+            },
+            {
+              "page": "S3 Parquet Import",
+              "url": "s3_import"
+            }
+          ]
+        },
+        {
+          "page": "Meta Queries",
+          "slug": "meta",
+          "subfolderitems": [
+            {
+              "page": "List Tables",
+              "url": "list_tables"
+            },
+            {
+              "page": "Describe",
+              "url": "describe"
+            },
+            {
+              "page": "Summarize",
+              "url": "summarize"
+            },
+            {
+              "page": "Inspect Query Plan",
+              "url": "explain"
+            },
+            {
+              "page": "Profile Queries",
+              "url": "explain_analyze"
+            }
+          ]
+        },
+        {
+          "page": "Python",
+          "slug": "python",
+          "subfolderitems": [
+            {
+              "page": "Install",
+              "url": "install"
+            },
+            {
+              "page": "Execute SQL",
+              "url": "execute_sql"
+            },
+            {
+              "page": "SQL on Pandas",
+              "url": "sql_on_pandas"
+            },
+            {
+              "page": "Import From Pandas",
+              "url": "import_pandas"
+            },
+            {
+              "page": "Export To Pandas",
+              "url": "export_pandas"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "page": "Documentation",
       "open": true,
       "slug": "docs",
       "mainfolderitems": [
-        {
-          "page": "Installation",
-          "url": "installation"
-        },
         {
           "page": "Data Import",
           "slug": "data",
@@ -417,8 +511,8 @@
             "url": "samples"
           },
           {
-            "page": "Catalog Functions",
-            "url": "catalog_functions"
+            "page": "Information Schema",
+            "url": "information_schema"
           },
           {
             "page": "Configuration",

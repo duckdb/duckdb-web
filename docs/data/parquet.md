@@ -12,14 +12,14 @@ SELECT * FROM 'test.parquet';
 DESCRIBE SELECT * FROM 'test.parquet';
 -- create a table from a parquet file
 CREATE TABLE test AS SELECT * FROM 'test.parquet';
--- if the file does not end in ".parquet", use the parquet_scan function
-SELECT * FROM parquet_scan('test.parq');
+-- if the file does not end in ".parquet", use the read_parquet function
+SELECT * FROM read_parquet('test.parq');
 -- use list parameter to read 3 parquet files and treat them as a single table 
-SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
 -- use a list of globs to read all parquet files from 2 specific folders
-SELECT * FROM parquet_scan(['folder1/*.parquet','folder2/*.parquet']);
+SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
 -- query the metadata of a parquet file
 SELECT * FROM parquet_metadata('test.parquet');
 -- query the schema of a parquet file
@@ -31,32 +31,32 @@ EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
 ### Single-File Reads
-DuckDB includes an efficient Parquet reader in the form of the `parquet_scan` function.
+DuckDB includes an efficient Parquet reader in the form of the `read_parquet` function.
 
 ```sql
-SELECT * FROM parquet_scan('test.parquet');
+SELECT * FROM read_parquet('test.parquet');
 ```
 
-If your file ends in `.parquet`, the parquet_scan syntax is optional. The system will automatically infer that you are reading a Parquet file.
+If your file ends in `.parquet`, the read_parquet syntax is optional. The system will automatically infer that you are reading a Parquet file.
 
 ```sql
 SELECT * FROM 'test.parquet';
 ```
 
-Unlike CSV files, parquet files are structured and as such are unambiguous to read. No parameters need to be passed to this function. The `parquet_scan` function will figure out the column names and column types present in the file and emit them.
+Unlike CSV files, parquet files are structured and as such are unambiguous to read. No parameters need to be passed to this function. The `read_parquet` function will figure out the column names and column types present in the file and emit them.
 
 ### Multi-File Reads and Globs
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
-The parquet_scan function can accept a list of filenames as the input parameter. See the [nested types documentation](https://duckdb.org/docs/sql/data_types/nested.html) for more details on lists.
+The read_parquet function can accept a list of filenames as the input parameter. See the [nested types documentation](https://duckdb.org/docs/sql/data_types/nested.html) for more details on lists.
 ```sql
 -- read 3 parquet files and treat them as a single table 
-SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
+SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 #### Glob Syntax
-Any file name input to the parquet_scan function can either be an exact filename, or use a glob syntax to read multple files that match a pattern.
+Any file name input to the read_parquet function can either be an exact filename, or use a glob syntax to read multple files that match a pattern.
 
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
@@ -69,7 +69,7 @@ Here is an example that reads all the files that end with `.parquet` located in 
 
 ```sql
 -- read all files that match the glob pattern
-SELECT * FROM parquet_scan('test/*.parquet');
+SELECT * FROM read_parquet('test/*.parquet');
 ```
 
 #### List of Globs
@@ -77,7 +77,7 @@ The glob syntax and the list input parameter can be combined to scan files that 
 
 ```sql
 -- Read all parquet files from 2 specific folders
-SELECT * FROM parquet_scan(['folder1/*.parquet','folder2/*.parquet']);
+SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
 ```
 
 ### Partial Reading
@@ -92,16 +92,16 @@ You can also insert the data into a table or create a table from the parquet fil
 
 ```sql
 -- insert the data from the parquet file in the table
-INSERT INTO people SELECT * FROM parquet_scan('test.parquet');
+INSERT INTO people SELECT * FROM read_parquet('test.parquet');
 -- create a table directly from a parquet file
-CREATE TABLE people AS SELECT * FROM parquet_scan('test.parquet');
+CREATE TABLE people AS SELECT * FROM read_parquet('test.parquet');
 ```
 
-If you wish to keep the data stored inside the parquet file, but want to query the parquet file directly, you can create a view over the `parquet_scan` function. You can then query the parquet file as if it were a built-in table.
+If you wish to keep the data stored inside the parquet file, but want to query the parquet file directly, you can create a view over the `read_parquet` function. You can then query the parquet file as if it were a built-in table.
 
 ```sql
 -- create a view over the parquet file
-CREATE VIEW people AS SELECT * FROM parquet_scan('test.parquet');
+CREATE VIEW people AS SELECT * FROM read_parquet('test.parquet');
 -- query the parquet file
 SELECT * FROM people;
 ```

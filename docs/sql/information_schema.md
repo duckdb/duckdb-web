@@ -1,12 +1,12 @@
 ---
 layout: docu
-title: Catalog Functions
-selected: Documentation/Catalog
+title: Information Schema
+selected: Documentation/Information Schema
 ---
-Catalog functions are table functions that return tables describing the catalog entries of the database. These tables can be filtered to obtain information about a specific column or table.
+The views in the `information_schema` are SQL-standard views that describe the catalog entries of the database. These views can be filtered to obtain information about a specific column or table.
 
 ## Database, Catalog and Schema
-The top level catalog table function is `information_schema_schemata`. It lists the catalogs and the schemas present in the database and has the following layout:
+The top level catalog view is `information_schema.schemata`. It lists the catalogs and the schemas present in the database and has the following layout:
 
 | Column | Description | Type | Example |
 |:---|:---|:---|:---|
@@ -19,7 +19,7 @@ The top level catalog table function is `information_schema_schemata`. It lists 
 | `sql_path` |The file system location of the database. Currently unimplemented. | `VARCHAR` | `NULL` |
 
 ## Tables and Views
-The table function that describes the catalog information for tables and views is `information_schema_tables`. It lists the tables present in the database and has the following layout:
+The view that describes the catalog information for tables and views is `information_schema.tables`. It lists the tables present in the database and has the following layout:
 
 | Column | Description | Type | Example |
 |:---|:---|:---|:---|
@@ -37,7 +37,7 @@ The table function that describes the catalog information for tables and views i
 | `commit_action` |Not yet implemented.| `VARCHAR` | `'NO'` |
 
 ## Columns
-The table function that describes the catalog information for columns is `information_schema_columns`. It lists the column present in the database and has the following layout:
+The view that describes the catalog information for columns is `information_schema.columns`. It lists the column present in the database and has the following layout:
 
 | Column | Description | Type | Example |
 |:---|:---|:---|:---|
