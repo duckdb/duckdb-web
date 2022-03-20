@@ -22,7 +22,7 @@ Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions
 -- Struct of integers
 SELECT {'x': 1, 'y': 2, 'z': 3};
 -- Struct of strings with a NULL value
-SELECT {'yes:' 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
+SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
 -- Struct with a different type for each key
 SELECT {'key1': 'string', 'key2': 1, 'key3': 12.345};
 -- Struct using the struct_pack function. 
