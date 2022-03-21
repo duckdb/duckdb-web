@@ -95,6 +95,16 @@
               "url": "export_pandas"
             }
           ]
+        },
+        {
+          "page": "SQL Editors",
+          "slug": "sql_editors",
+          "subfolderitems": [
+            {
+              "page": "DBeaver SQL IDE",
+              "url": "dbeaver"
+            }
+          ]
         }
       ]
     },

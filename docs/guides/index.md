@@ -35,3 +35,6 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to execute SQL on a Pandas DataFrame](/docs/guides/python/sql_on_pandas)
 * [How to create a table from a Pandas DataFrame](/docs/guides/python/import_pandas)
 * [How to export data to a Pandas DataFrame](/docs/guides/python/export_pandas)
+
+## SQL Editors / IDE's
+* [How to set up the DBeaver SQL IDE](/docs/guides/sql_editors/dbeaver)
