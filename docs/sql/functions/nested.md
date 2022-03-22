@@ -42,6 +42,10 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_indexof(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `list_indexof([1, 2, NULL], 2)` | `2` |
 | `array_position(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `array_position([1, 2, NULL], 2)` | `2` |
 | `array_indexof(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `array_indexof([1, 2, NULL], 2)` | `2` |
+| `list_aggregate(`*`list`*`, `*`name`*`)` | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates](nested#list-aggregates) section for more details. | `list_aggregate([1, 2, NULL], 'min')` | `1` |
+| `list_aggr(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `list_aggr([1, 2, NULL], 'min')` | `1` |
+| `array_aggregate(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `array_aggregate([1, 2, NULL], 'min')` | `1` |
+| `array_aggr(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `array_aggr([1, 2, NULL], 'min')` | `1` |
 
 ## Struct Functions
 
@@ -112,6 +116,23 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 │ 1992-02-01 00:00:00 │
 └─────────────────────┘
 ```
+
+## List Aggregates
+
+The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g. `min`, `histogram` or `sum`.
+
+```sql
+SELECT list_aggregate([1, 2, -4, NULL], 'min');
+-- -4
+
+SELECT list_sum([2, 4, 8, 42]);
+-- 56
+
+SELECT list_min([[1, 2], [NULL], [2, 10, 3]]);
+-- [1, 2]
+```
+
+The following is a list of existing rewrites. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
 
 ## `generate_subscripts`
 
