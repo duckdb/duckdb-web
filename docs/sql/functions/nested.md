@@ -125,14 +125,25 @@ The function `list_aggregate` allows the execution of arbitrary existing aggrega
 SELECT list_aggregate([1, 2, -4, NULL], 'min');
 -- -4
 
+SELECT list_aggregate([2, 4, 8, 42], 'sum');
+-- 56
+
+SELECT list_aggregate([[1, 2], [NULL], [2, 10, 3]], 'last');
+-- [2, 10, 3]
+```
+
+The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
+
+```sql
+SELECT list_min([1, 2, -4, NULL]);
+-- -4
+
 SELECT list_sum([2, 4, 8, 42]);
 -- 56
 
-SELECT list_min([[1, 2], [NULL], [2, 10, 3]]);
--- [1, 2]
+SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
+-- [2, 10, 3]
 ```
-
-The following is a list of existing rewrites. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
 
 ## `generate_subscripts`
 
