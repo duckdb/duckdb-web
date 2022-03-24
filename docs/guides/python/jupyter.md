@@ -6,7 +6,7 @@ selected: Jupyter Notebooks
 
 # DuckDB in Jupyter Notebooks
 DuckDB's Python client can be used directly in Jupyter notebooks with no additional configration if desired. 
-However, additional libraries can be used to add syntax highlighting and simplify SQL development. 
+However, additional libraries can be used to simplify SQL query development. 
 This guide will describe how to utilize those additional libraries. 
 See other guides in the Python section for how to use DuckDB and Python together.  
 As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DuckDB directly may be desirable. However, the difference is typically quite small.  
@@ -14,14 +14,13 @@ As a small note, for maximum performance converting large output datasets to Pan
 ## Library Installation
 Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
 1. [Pandas](https://github.com/pandas-dev/pandas)
-    * Clean table visualizations and compatiblity with other analysis
+    * Clean table visualizations and compatibility with other analysis
 2. [ipython-sql](https://github.com/catherinedevlin/ipython-sql)
     * Convert a Jupyter code cell into a SQL cell
-    * SQL syntax highlighting
 3. [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
     * Used by ipython-sql to connect to databases
 4. [duckdb_engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
-    * Allows SQLAlchemy to connect to DuckDB
+    * Used by SQLAlchemy to connect to DuckDB
 
 ```python
 pip install duckdb
@@ -45,7 +44,7 @@ import sqlalchemy
 # No need to import duckdb_engine
 #  SQLAlchemy will auto-detect the driver needed based on your connection string!
 
-# Import ipython-sql SQL syntax highlighting Jupyter extension
+# Import ipython-sql Jupyter extension to create SQL cells
 %load_ext sql
 ```
 
@@ -91,7 +90,7 @@ DuckDB is able to find and query any dataframe stored as a variable in the Jupyt
 test_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
                                   "j":["one", "two", "three"]})
 ```
-The dataframe can be specified just like any other table in the `FROM` clause.  
+The dataframe being queried can be specified just like any other table in the `FROM` clause.  
 ```sql
 %sql output_df << SELECT sum(i) as total_i FROM test_df
 ```
