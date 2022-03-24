@@ -78,7 +78,7 @@ ORDER BY ALL DESC
 LIMIT 5
 ```
 
-To return query results into a variable for future usage, use `<<` as an assignment operator.
+To return query results into a Pandas dataframe for future usage, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ```sql
 %sql my_df << SELECT 'Off and flying!' as a_duckdb_column
