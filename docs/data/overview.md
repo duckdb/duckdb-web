@@ -2,7 +2,11 @@
 layout: docu
 title: Importing Data
 ---
-The first step to using a database system is to insert data into that system. DuckDB provides several data ingestion methods that allow you to easily and efficiently fill up the database. In this section, we provide an overview of these methods so you can select which one is correct for you.
+<!-- not sure if this section should be abstracted into its own page, or where it would be best placed, feel free to move -->
+### Create a Connection (in-memory or persistant file)
+To use DuckDB, you must first create a connection to a database. The connection typically takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process). See [API docs](docs/api/overview) for client-specfic usage. 
+
+Once connected to a database system, you can access its data or insert data into that system. DuckDB provides several data ingestion methods that allow you to easily and efficiently fill up the database. In this section, we provide an overview of these methods so you can select which one is correct for you.
 
 ### Insert Statements
 Insert statements are the standard way of loading data into a database system. They are suitable for quick prototyping, but should be avoided for bulk loading as they have significant per-row overhead.
