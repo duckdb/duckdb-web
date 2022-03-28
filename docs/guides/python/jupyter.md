@@ -7,9 +7,12 @@ selected: Jupyter Notebooks
 # DuckDB in Jupyter Notebooks
 DuckDB's Python client can be used directly in Jupyter notebooks with no additional configration if desired. 
 However, additional libraries can be used to simplify SQL query development. 
-This guide will describe how to utilize those additional libraries. 
+This guide will describe how to utilize those additional libraries.
 See other guides in the Python section for how to use DuckDB and Python together.  
+  
 As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DuckDB directly may be desirable. However, the difference is typically quite small.  
+
+This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
 ## Library Installation
 Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
@@ -23,6 +26,8 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
     * Used by SQLAlchemy to connect to DuckDB
 
 ```python
+# Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
+# Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
 
 # Install Jupyter Notebook
@@ -87,13 +92,13 @@ This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ## Querying Pandas Dataframes
 DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
 ```python
-test_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
+input_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
                                   "j":["one", "two", "three"]})
 ```
 The dataframe being queried can be specified just like any other table in the `FROM` clause.  
 ```sql
-%sql output_df << SELECT sum(i) as total_i FROM test_df
+%sql output_df << SELECT sum(i) as total_i FROM input_df
 ```
 
-## Total Workflow Example - Querying Pandas Dataframes
-<img src="/images/guides/jupyter_querying_pandas_dfs.png" alt="Total Jupyter Workflow" title="Total Jupyter Workflow"/>
+## Summary
+You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!
