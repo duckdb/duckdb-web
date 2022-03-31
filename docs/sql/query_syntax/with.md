@@ -85,93 +85,133 @@ WHERE source = 'Oasis';
 
 The `WITH RECURSIVE` clause can be used to express graph traversal on arbitrary graphs. However, if the graph has cycles, the query must perform cycle detection to prevent infinite loops.
 
-Take the following undirected social graph:
+Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
 ![](with-recursive-graph-example.png)
 
 ```sql
-CREATE TABLE knows(person1id int, person2id int);
-INSERT INTO knows VALUES (1, 2), (1, 4), (2, 3), (2, 4), (3, 4), (5, 6);
-INSERT INTO knows SELECT person2id, person1id FROM knows;
+CREATE TABLE edge(node1id int, node2id int);
+INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5), (3, 8), (3, 10), (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
 Note that there is a cycle e.g. between nodes 1, 2, and 4. To detect cycles, the query stores the path in a [list](/docs/sql/data_types/list) and, before adding a new edge, checks whether its endpoint has been visited before.
 
-The following query returns all paths from person 1:
+The following query returns **all paths** from node 1:
 
 ```sql
-WITH RECURSIVE paths(startPerson, endPerson, path) AS (
+WITH RECURSIVE paths(startNode, endNode, path) AS (
    SELECT -- define the path as the first edge of the traversal
-        person1id AS startPerson,
-        person2id AS endPerson,
-        [person1id, person2id] AS path
-     FROM knows
+        node1id AS startNode,
+        node2id AS endNode,
+        [node1id, node2id] AS path
+     FROM edge
+     WHERE startNode = 1
    UNION ALL
    SELECT -- concatenate new edge to the path
-        paths.startPerson AS startPerson,
-        person2id AS endPerson,
-        array_append(path, person2id) AS path
+        paths.startNode AS startNode,
+        node2id AS endNode,
+        array_append(path, node2id) AS path
      FROM paths
-     JOIN knows ON paths.endPerson = knows.person1id
-    WHERE knows.person2id != ALL(paths.path) -- detect cycles
+     JOIN edge ON paths.endNode = node1id
+    WHERE node2id != ALL(paths.path) -- detect cycles
 )
-SELECT startPerson, endPerson, path
+SELECT startNode, endNode, path
 FROM paths
-WHERE startPerson = 1;
+ORDER BY length(path), path;
 ```
 ```
-┌─────────────┬───────────┬──────────────┐
-│ startPerson │ endPerson │     path     │
-├─────────────┼───────────┼──────────────┤
-│ 1           │ 2         │ [1, 2]       │
-│ 1           │ 4         │ [1, 4]       │
-│ 1           │ 3         │ [1, 4, 3]    │
-│ 1           │ 4         │ [1, 2, 4]    │
-│ 1           │ 2         │ [1, 4, 2]    │
-│ 1           │ 3         │ [1, 2, 3]    │
-│ 1           │ 2         │ [1, 4, 3, 2] │
-│ 1           │ 3         │ [1, 2, 4, 3] │
-│ 1           │ 4         │ [1, 2, 3, 4] │
-│ 1           │ 3         │ [1, 4, 2, 3] │
-└─────────────┴───────────┴──────────────┘
+┌───────────┬─────────┬───────────────┐
+│ startNode │ endNode │     path      │
+├───────────┼─────────┼───────────────┤
+│ 1         │ 3       │ [1, 3]        │
+│ 1         │ 5       │ [1, 5]        │
+│ 1         │ 5       │ [1, 3, 5]     │
+│ 1         │ 8       │ [1, 3, 8]     │
+│ 1         │ 10      │ [1, 3, 10]    │
+│ 1         │ 3       │ [1, 5, 3]     │
+│ 1         │ 4       │ [1, 5, 4]     │
+│ 1         │ 8       │ [1, 5, 8]     │
+│ 1         │ 4       │ [1, 3, 5, 4]  │
+│ 1         │ 8       │ [1, 3, 5, 8]  │
+│ 1         │ 8       │ [1, 5, 3, 8]  │
+│ 1         │ 10      │ [1, 5, 3, 10] │
+└───────────┴─────────┴───────────────┘
 ```
 
-`WITH RECURSIVE` can be used to find all unweighted shortest paths between two nodes. The following query returns all unweighted shortest paths between person 1 and person 3:
+To enumerate **all unweighted shortest paths**, run:
 
 ```sql
-WITH RECURSIVE paths(startPerson, endPerson, path, endReached) AS (
-   SELECT person1id AS startPerson,
-          person2id AS endPerson,
-          [person1id, person2id] AS path,
-          max(CASE WHEN person2id = 3 THEN true ELSE false END)
-            OVER (ROWS BETWEEN UNBOUNDED PRECEDING
-                           AND UNBOUNDED FOLLOWING) AS endReached
-     FROM knows
-    WHERE person1id = 1
- UNION ALL
-   SELECT paths.startPerson AS startPerson,
-          person2id AS endPerson,
-          array_append(path, person2id) AS path,
-          max(CASE WHEN person2id = 3 THEN true ELSE false END)
+WITH RECURSIVE paths(startNode, endNode, path) AS (
+   SELECT -- define the path as the first edge of the traversal
+        node1id AS startNode,
+        node2id AS endNode,
+        [node1id, node2id] AS path
+     FROM edge
+     WHERE startNode = 1
+   UNION ALL
+   SELECT -- concatenate new edge to the path
+        paths.startNode AS startNode,
+        node2id AS endNode,
+        array_append(path, node2id) AS path
+     FROM paths
+     JOIN edge ON paths.endNode = node1id
+       -- prevent from adding nodes that were visited previously
+    WHERE NOT EXISTS (SELECT 1 FROM paths previous_paths WHERE list_contains(previous_paths.path, node2id))
+)
+SELECT startNode, endNode, path
+FROM paths
+ORDER BY length(path), path;
+```
+
+```
+┌───────────┬─────────┬────────────┐
+│ startNode │ endNode │    path    │
+├───────────┼─────────┼────────────┤
+│ 1         │ 3       │ [1, 3]     │
+│ 1         │ 5       │ [1, 5]     │
+│ 1         │ 8       │ [1, 3, 8]  │
+│ 1         │ 10      │ [1, 3, 10] │
+│ 1         │ 4       │ [1, 5, 4]  │
+│ 1         │ 8       │ [1, 5, 8]  │
+└───────────┴─────────┴────────────┘
+```
+
+`WITH RECURSIVE` can also be used to find **all unweighted shortest paths between two given nodes**. The following query returns all unweighted shortest paths between node 1 and node 8:
+
+```sql
+WITH RECURSIVE paths(startNode, endNode, path, endReached) AS (
+   SELECT -- define the path as the first edge of the traversal
+        node1id AS startNode,
+        node2id AS endNode,
+        [node1id, node2id] AS path,
+        (node2id = 8) AS endReached
+     FROM edge
+     WHERE startNode = 1
+   UNION ALL
+   SELECT -- concatenate new edge to the path
+        paths.startNode AS startNode,
+        node2id AS endNode,
+        array_append(path, node2id) AS path,
+        max(CASE WHEN node2id = 8 THEN 1 ELSE 0 END)
             OVER (ROWS BETWEEN UNBOUNDED PRECEDING
                            AND UNBOUNDED FOLLOWING) AS endReached
      FROM paths
-     JOIN knows
-       ON person1id = paths.endPerson
-    WHERE person2id != ALL(paths.path)
-      AND NOT paths.endReached
+     JOIN edge ON paths.endNode = node1id
+    WHERE NOT EXISTS (SELECT 1 FROM paths previous_paths WHERE list_contains(previous_paths.path, node2id))
+      AND paths.endReached = 0
 )
-SELECT startPerson, endPerson, path
+SELECT startNode, endNode, path
 FROM paths
-WHERE endPerson = 3;
+WHERE endNode = 8
+ORDER BY length(path), path;
 ```
 ```
-┌─────────────┬───────────┬───────────┐
-│ startPerson │ endPerson │   path    │
-├─────────────┼───────────┼───────────┤
-│ 1           │ 3         │ [1, 4, 3] │
-│ 1           │ 3         │ [1, 2, 3] │
-└─────────────┴───────────┴───────────┘
+┌───────────┬─────────┬───────────┐
+│ startNode │ endNode │   path    │
+├───────────┼─────────┼───────────┤
+│ 1         │ 8       │ [1, 3, 8] │
+│ 1         │ 8       │ [1, 5, 8] │
+└───────────┴─────────┴───────────┘
 ```
 
 ## Common Table Expressions
