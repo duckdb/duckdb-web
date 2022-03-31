@@ -83,6 +83,10 @@
               "url": "execute_sql"
             },
             {
+              "page": "Jupyter Notebooks",
+              "url": "jupyter"
+            },
+            {
               "page": "SQL on Pandas",
               "url": "sql_on_pandas"
             },
@@ -95,8 +99,16 @@
               "url": "export_pandas"
             },
             {
-              "page": "Jupyter Notebooks",
-              "url": "jupyter"
+              "page": "SQL on Arrow",
+              "url": "sql_on_arrow"
+            },
+            {
+              "page": "Import From Arrow",
+              "url": "import_arrow"
+            },
+            {
+              "page": "Export To Arrow",
+              "url": "export_arrow"
             }
           ]
         },
