@@ -62,7 +62,9 @@ print(con.fetchall())
 ## Efficient Transfer
 Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org), or [Apache Arrow](https://arrow.apache.org/). This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
 
-By default, DuckDB will automatically be able to query a Pandas dataframe or Arrow table that is stored in a Python variable by name. DuckDB also supports "registering" a data frame as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a data frame that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
+By default, DuckDB will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](/docs/guides/index#python-client) for more examples.
+
+DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 ```python
 import pandas as pd
@@ -72,7 +74,7 @@ con.fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-If your Pandas data frame is stored in another location, here is an example of manually registering it:
+If your Pandas DataFrame is stored in another location, here is an example of manually registering it:
 ```python
 import pandas as pd
 my_dictionary = {}
@@ -91,11 +93,11 @@ con.execute('SELECT * FROM arrow_table')
 con.fetchall()
 ```
 
-You can also create a persistent table in DuckDB from the contents of the data frame (or the view):
+You can also create a persistent table in DuckDB from the contents of the DataFrame (or the view):
 ```python
 con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df')
 ```
-> DuckDB keeps a reference to the Pandas or Arrow data frame after registration. This prevents the data frame from being garbage-collected by the Python runtime. The reference is cleared when the connection is closed, but can also be cleared manually using the `unregister()` method.
+> DuckDB keeps a reference to the Pandas DataFrame or Arrow object after registration. This prevents them from being garbage-collected by the Python runtime. The reference is cleared when the connection is closed, but can also be cleared manually using the `unregister()` method.
 
 When retrieving the data from DuckDB back into Python, the standard method of calling `fetchall()` is inefficient as individual Python objects need to be created for every value in the result set. When retrieving a lot of data, this can become very slow.
 
@@ -118,7 +120,7 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 Below are some examples using this functionality. See the Python [guides](/docs/guides/index#python-client) for more examples.
 
 ```python
-# fetch as pandas data frame
+# fetch as Pandas DataFrame
 df = con.execute("SELECT * FROM items").fetchdf()
 print(df)
 #        item   value  count
