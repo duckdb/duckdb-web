@@ -34,7 +34,7 @@ DuckDB releases the ODBC driver as asset. For linux, download it from <a href="h
 
 # Step 2: Extracting ODBC artifacts
 
-Run unzip to extract the files:
+Run unzip to extract the files to a permanent directory:
 
 ```bash
 mkdir duckdb_odbc
@@ -46,7 +46,7 @@ unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 The `unixodbc_setup.sh` script aids the configuration of the DuckDB ODBC Driver.
 It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
 
-In a terminal window, change to the `duckdb_odbc` directory, and run the following commands with level options `-u` or `-s` either to configure DuckDB ODBC.
+In a terminal window, change to the `duckdb_odbc` permanent directory, and run the following commands with level options `-u` or `-s` either to configure DuckDB ODBC.
 
 ## User-level ODBC setup (**-u**)
 

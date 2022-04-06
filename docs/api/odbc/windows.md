@@ -23,7 +23,9 @@ DuckDB releases the ODBC driver as asset. For Windows, download it from <a href=
 
 # Step 2: Extracting ODBC artifacts
 
-Unsing PowerShell, run unzip to extract the files:
+Unzip the file to a permanent directory (e.g., duckdb_odbc).
+
+An example with `PowerShell` and `unzip` command would be:
 
 ```PowerShell
 mkdir duckdb_odbc
@@ -35,9 +37,9 @@ unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 The `odbc_install.exe` aids the configuration of the DuckDB ODBC Driver on Windows.
 It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
 
-In the `duckdb_odbc` directory, double-click on the `odbc_install.exe`.
+Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_install.exe`.
 
-Windows administrator privileges is required, in case of a non-administrator a User Account Control window shall display:
+Windows administrator privileges is required, in case of a non-administrator a User Account Control shall display:
 
 <img src="/images/blog/odbc/windows_privileges.png" style="width: 60%; height: 60%"/>
 
