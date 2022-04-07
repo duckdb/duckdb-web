@@ -118,6 +118,10 @@
       "slug": "docs",
       "mainfolderitems": [
         {
+          "page": "Connect",
+          "url": "connect"
+        },
+        {
           "page": "Data Import",
           "slug": "data",
           "subfolderitems": [
