@@ -13,7 +13,7 @@ The `CREATE TABLE` statement creates a table in the catalog.
 CREATE TABLE t1(i INTEGER, j INTEGER);
 -- create a table with a primary key
 CREATE TABLE t1(id INTEGER PRIMARY KEY, j VARCHAR);
--- create a table with a composte primary key
+-- create a table with a composite primary key
 CREATE TABLE t1(id INTEGER, j VARCHAR, PRIMARY KEY(id, j));
 -- create a table with various different types and constraints
 CREATE TABLE t1(i INTEGER NOT NULL, decimalnr DOUBLE CHECK(decimalnr<10), date DATE UNIQUE, time TIMESTAMP);
