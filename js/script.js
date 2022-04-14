@@ -62,14 +62,21 @@ $(document).ready(function(){
 		
 
 		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc"){
-			$('.installer.select, .platform.select').removeClass('inactive');	
+			$('.installer.select, .platform.select').removeClass('inactive');
 		} else {
 			$('.installer.select, .platform.select').addClass('inactive');
 			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
 			userSelection.pack = "";
 			userSelection.platform = "";
 		}
-		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source"){
+		if ( userSelection.version == ".master" && (userSelection.environment == ".cplusplus" || userSelection.environment == ".odbc") ) {
+			$('.installer.select, .platform.select').addClass('inactive');
+			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
+			userSelection.pack = "";
+			userSelection.platform = "";
+		}
+
+		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source" ) {
 			$('.platform.select').addClass('inactive');
 			$('.platform.select ul li.selected').removeClass('selected');	
 			userSelection.platform = "";
