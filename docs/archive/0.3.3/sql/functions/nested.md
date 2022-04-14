@@ -1,0 +1,165 @@
+---
+layout: docu
+title: Nested Functions
+selected: Documentation/Functions/Nested Functions
+expanded: Functions
+---
+This section describes functions and operators for examining and manipulating nested values. There are three nested data types: lists, structs, and maps.
+
+## List Functions
+
+In the descriptions, `l` is the three element list `[4, 5, 6]`.
+
+<!-- This follows the order of shorthand, core/main function (list_), other list_ aliases, array_ aliases -->
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| *`list`*`[`*`index`*`]` | Bracket notation serves as an alias for `list_extract`. | `l[2]` | `6` |
+| `list_extract(`*`list`*`, `*`index`*`)` | Extract the `index`th (0-based) value from the list. | `list_extract(l, 2)` | `6` |
+| `list_element(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `list_element(l, 2)` | `6` |
+| `array_extract(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `array_extract(l, 2)` | `6` |
+| *`list`*`[`*`begin`*`:`*`end`*`]` | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s. | `l[1:2]` | `[5, 6]` |
+| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `list_slice(l, 1, NULL)` | `[5,6]` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 1, NULL)` | `[5,6]` |
+| `list_value(`*`any`*`, ...)` | Create a `LIST` containing the argument values. | `list_value(4, 5, 6)` | `[4, 5, 6]` |
+| `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
+| `len(`*`list`*`)` | Return the length of the list. | `len([1, 2, 3])` | `3` |
+| `array_length(`*`list`*`)` | Alias for `len`. |  `array_length([1, 2, 3])` | `3` |
+| `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
+| `list_concat(`*`list1`*`, `*`list2`*`)` | Concatenates two lists. | `list_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6]` |
+| `list_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `list_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `array_concat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `array_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
+| `list_prepend(`*`element`*`, `*`list`*`)` | Prepends `element` to `list`. | `list_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
+| `array_prepend(`*`element`*`, `*`list`*`)` | Alias for `list_prepend`. | `array_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
+| `list_append(`*`list`*`, `*`element`*`)` | Appends `element` to `list`. | `list_append([2, 3], 4)` | `[2, 3, 4`] |
+| `array_append(`*`list`*`, `*`element`*`)` | Alias for `list_append`. | `array_append([2, 3], 4)` | `[2, 3, 4`] |
+| `list_contains(`*`list`*`, `*`element`*`)` | Returns true if the list contains the element. | `list_contains([1, 2, NULL], 1)` | `true` |
+| `list_has(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `list_has([1, 2, NULL], 1)` | `true` |
+| `array_contains(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `array_contains([1, 2, NULL], 1)` | `true` |
+| `array_has(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `array_has([1, 2, NULL], 1)` | `true` |
+| `list_position(`*`list`*`, `*`element`*`)` | Returns the index of the element if the list contains the element. | `list_contains([1, 2, NULL], 2)` | `2` |
+| `list_indexof(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `list_indexof([1, 2, NULL], 2)` | `2` |
+| `array_position(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `array_position([1, 2, NULL], 2)` | `2` |
+| `array_indexof(`*`list`*`, `*`element`*`)` | Alias for `list_position`. | `array_indexof([1, 2, NULL], 2)` | `2` |
+| `list_aggregate(`*`list`*`, `*`name`*`)` | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates](nested#list-aggregates) section for more details. | `list_aggregate([1, 2, NULL], 'min')` | `1` |
+| `list_aggr(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `list_aggr([1, 2, NULL], 'min')` | `1` |
+| `array_aggregate(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `array_aggregate([1, 2, NULL], 'min')` | `1` |
+| `array_aggr(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `array_aggr([1, 2, NULL], 'min')` | `1` |
+
+## Struct Functions
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'}).s` | `string` |
+| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'})['s']` | `string` |
+| `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct. | `struct_extract(s, 'i')` | `4` |
+| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
+
+## Map Functions
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | `[a]` |
+| `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `element_at(map([100, 5], [42, 43]),100);` | `[42]` |
+| `map_extract(`*`map, key`*`)` | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `map_extract(map([100, 5], [42, 43]),100);` | `[42]` |
+| `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality( map([4, 2], ['a', 'b']) );` | `2` |
+| `map()` | Returns an empty map. | `map()` | `{}` |
+
+## Range Functions
+
+The functions *`range`* and *`generate_series`* create a list of values in the range between `start` and `stop`.
+The `start` parameter is inclusive.
+For the `range` function, the `stop` parameter is exclusive, while for `generate_series`, it is inclusive.
+
+Based on the number of arguments, the following variants exist:
+
+* `range(`*`start`*`, `*`stop`*`, `*`step`*`)`
+* `range(`*`start`*`, `*`stop`*`)`
+* `range(`*`stop`*`)`
+* `generate_series(`*`start`*`, `*`stop`*`, `*`step`*`)`
+* `generate_series(`*`start`*`, `*`stop`*`)`
+* `generate_series(`*`stop`*`)`
+
+The default value of `start` is 0 and the default value of `step` is 1.
+
+```sql
+SELECT range(5);
+-- [0, 1, 2, 3, 4]
+
+SELECT range(2, 5);
+-- [2, 3, 4]
+
+SELECT range(2, 5, 3);
+-- [2]
+
+SELECT generate_series(5);
+-- [0, 1, 2, 3, 4, 5]
+
+SELECT generate_series(2, 5);
+-- [2, 3, 4, 5]
+
+SELECT generate_series(2, 5, 3);
+-- [2, 5]
+```
+
+Date ranges are also supported:
+
+```
+SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
+
+┌─────────────────────┐
+│        range        │
+├─────────────────────┤
+│ 1992-01-01 00:00:00 │
+│ 1992-02-01 00:00:00 │
+└─────────────────────┘
+```
+
+## List Aggregates
+
+The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g. `min`, `histogram` or `sum`.
+
+```sql
+SELECT list_aggregate([1, 2, -4, NULL], 'min');
+-- -4
+
+SELECT list_aggregate([2, 4, 8, 42], 'sum');
+-- 56
+
+SELECT list_aggregate([[1, 2], [NULL], [2, 10, 3]], 'last');
+-- [2, 10, 3]
+```
+
+The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
+
+```sql
+SELECT list_min([1, 2, -4, NULL]);
+-- -4
+
+SELECT list_sum([2, 4, 8, 42]);
+-- 56
+
+SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
+-- [2, 10, 3]
+```
+
+## `generate_subscripts`
+
+The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
+
+```
+SELECT generate_subscripts([4,5,6], 1) AS i;
+┌───┐
+│ i │
+├───┤
+│ 1 │
+│ 2 │
+│ 3 │
+└───┘
+```
+
+## Related Functions
+
+There are also [aggregate functions](../aggregates) `list` and `histogram` that produces lists and lists of structs.
