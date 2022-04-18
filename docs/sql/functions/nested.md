@@ -14,13 +14,13 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
-| *`list`*`[`*`index`*`]` | Bracket notation serves as an alias for `list_extract`. | `l[2]` | `6` |
-| `list_extract(`*`list`*`, `*`index`*`)` | Extract the `index`th (1-based) value from the list. | `list_extract(l, 2)` | `6` |
-| `list_element(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `list_element(l, 2)` | `6` |
-| `array_extract(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `array_extract(l, 2)` | `6` |
-| *`list`*`[`*`begin`*`:`*`end`*`]` | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s. | `l[1:2]` | `[5, 6]` |
-| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `list_slice(l, 1, NULL)` | `[5,6]` |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 1, NULL)` | `[5,6]` |
+| *`list`*`[`*`index`*`]` | Bracket notation serves as an alias for `list_extract`. | `l[3]` | `6` |
+| `list_extract(`*`list`*`, `*`index`*`)` | Extract the `index`th (1-based) value from the list. | `list_extract(l, 3)` | `6` |
+| `list_element(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `list_element(l, 3)` | `6` |
+| `array_extract(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `array_extract(l, 3)` | `6` |
+| *`list`*`[`*`begin`*`:`*`end`*`]` | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s. | `l[2:3]` | `[5, 6]` |
+| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `list_slice(l, 2, NULL)` | `[5,6]` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 2, NULL)` | `[5,6]` |
 | `list_value(`*`any`*`, ...)` | Create a `LIST` containing the argument values. | `list_value(4, 5, 6)` | `[4, 5, 6]` |
 | `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
 | `len(`*`list`*`)` | Return the length of the list. | `len([1, 2, 3])` | `3` |
