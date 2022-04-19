@@ -18,12 +18,17 @@ To load the `HTTPFS` extension for usage, use the `LOAD` SQL command:
 LOAD httpfs;
 ```
 
-After loading the `HTTPFS` extension, set up the credentials and S3 region to read data from using the following commands:
+After loading the `HTTPFS` extension, set up the credentials and S3 region to read data. You may either use an access key and secret, or a token.
 
 ```sql
 SET s3_region='us-east-1';
 SET s3_access_key_id='<AWS access key id>';
 SET s3_secret_access_key='<AWS secret access key>';
+```
+The alternative is to use a token:
+```sql
+SET s3_region='us-east-1';
+SET s3_session_token='<AWS session token>';
 ```
 
 After the `HTTPFS` extension is set up and the S3 credentials are correctly configured, Parquet files can be read from S3 using the following command:
