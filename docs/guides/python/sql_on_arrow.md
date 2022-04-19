@@ -90,3 +90,21 @@ arrow_scanner = ds.Scanner.from_dataset(my_arrow_dataset, filter=scanner_filter)
 # query the Apache Arrow scanner "arrow_scanner" and return as an Arrow Table
 results = con.execute("SELECT * FROM arrow_scanner").arrow()
 ```
+
+## Apache Arrow RecordBatchReaders
+[Arrow RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) are a reader for Arrow's streaming binary format and can also be queried directly as if they were tables. This streaming format is useful when sending Arrow data for tasks like interprocess communication or communicating between language runtimes.  
+```python
+import duckdb
+import pyarrow as pa
+
+# connect to an in-memory database
+con = duckdb.connect()
+
+my_recordbatch = pa.RecordBatch.from_pydict({'i':[1,2,3,4],
+                                             'j':["one", "two", "three", "four"]})
+
+my_recordbatchreader = pa.ipc.RecordBatchReader.from_batches(my_recordbatch.schema, [my_recordbatch])
+
+# query the Apache Arrow RecordBatchReader "my_recordbatchreader" and return as an Arrow Table
+results = con.execute("SELECT * FROM my_recordbatchreader WHERE i = 2").arrow()
+```
