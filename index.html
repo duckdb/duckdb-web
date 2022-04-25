@@ -25,11 +25,11 @@ body_class: landing nowrap
 
 <section>
 	<div class="wrap">
-		
+
 		<div class="whyduckdb">
-		
+
 			<h2>Why DuckDB?</h2>
-			
+
 			<div class="boxlayout">
 				<div class="box">
 					<div>
@@ -45,7 +45,7 @@ body_class: landing nowrap
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbissimple">more <span></span></a>
 					</div>
 				</div>
-			
+
 				<div class="box">
 					<div>
 						<div class="icon"><span class="duckdbsymbol">&#xE200;</span></div>
@@ -65,7 +65,7 @@ body_class: landing nowrap
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfeaturerich">more <span></span></a>
 					</div>
 				</div>
-				
+
 				<div class="box">
 					<div>
 						<div class="icon"><span class="duckdbsymbol">&#xE300;</span></div>
@@ -81,7 +81,7 @@ body_class: landing nowrap
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfast">more <span></span></a>
 					</div>
 				</div>
-				
+
 				<div class="box">
 					<div>
 						<div class="icon"><span class="duckdbsymbol">&#xE400;</span></div>
@@ -97,7 +97,7 @@ body_class: landing nowrap
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </section>
 
@@ -120,17 +120,18 @@ body_class: landing nowrap
 				<li data-id="ver-js">node.js</li>
 				<li data-id="ver-cplusplus">C++</li>
 				<li data-id="ver-cli">CLI</li>
+				<li data-id="ver-odbc">ODBC</li>
 			</ul>
 		</div>
 		<div class="result">
 			pip install duckdb=={{ site.currentduckdbversion }}
 		</div>
 		<p class="system">
-			<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span>  
-			<span class="systemdetected">System detected: </span>  
+			<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span>
+			<span class="systemdetected">System detected: </span>
 			<span><a href="docs/installation/">Other Installations</a></span>
 		</p>
-		
+
 		<div class="hidden">
 			<p class="ver-python">pip install duckdb=={{ site.currentduckdbversion }}</p>
 			<p class="ver-r">install.packages("duckdb")</p>
@@ -149,8 +150,11 @@ body_class: landing nowrap
 			<p class="ver-cli macos"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip</a></p>
 			<p class="ver-cli linux"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a></p>
 			<p class="ver-cli win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a></p>
+			<p class="ver-odbc linux"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a></p>
+			<p class="ver-odbc win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a></p>
+
 		</div>
-		
+
 	</div>
 </section>
 
@@ -186,7 +190,7 @@ body_class: landing nowrap
 			</div>
 		</div>
 	</div>
-</section>	
+</section>
 
 
 <section>
@@ -248,7 +252,7 @@ body_class: landing nowrap
 				<a href="{{ site.url }}{{ site.baseurl }}/faq/"><div class="button">FAQ</div></a>
 				<a href="{{ site.url }}{{ site.baseurl }}/docs/"><div class="button">Documentation</div></a>
 			</div>
-			
+
 			<div class="box">
 				<p>Quick access to beginner topics <span class="duckdbsymbol">&#8595;</span> </p>
 				<div class="quicklinks">
@@ -271,5 +275,3 @@ body_class: landing nowrap
 	</div>
 </section>
 -->
-
-

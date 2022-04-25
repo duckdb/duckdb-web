@@ -233,6 +233,24 @@
               "url": "wasm"
             },
             {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                  {
+                    "page": "Overview",
+                    "url": "overview"
+                  },
+                  {
+                    "page": "Linux Setup",
+                    "url": "linux"
+                  },
+                  {
+                    "page": "Windows Setup",
+                    "url": "windows"
+                  }
+              ]
+            },
+            {
               "page": "CLI",
               "url": "cli"
             }]
