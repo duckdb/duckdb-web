@@ -23,7 +23,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `SMALLINT` | `INT2`, `SHORT` | signed two-byte integer|
 | `TIME` | | time of day (no time zone) |
 | `TIMESTAMP` | `DATETIME` | combination of time and date |
-| `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date using timezone |
+| `TIMESTAMP WITH TIME ZONE` | `TIMESTAMPTZ` | combination of time and date that uses the current time zone |
 | `TINYINT` | `INT1` | signed one-byte integer|
 | `UBIGINT` | | unsigned eight-byte integer |
 | `UINTEGER` | | unsigned four-byte integer |
