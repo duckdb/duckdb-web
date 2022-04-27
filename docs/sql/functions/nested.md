@@ -19,8 +19,10 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_element(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `list_element(l, 3)` | `6` |
 | `array_extract(`*`list`*`, `*`index`*`)` | Alias for `list_extract`. | `array_extract(l, 3)` | `6` |
 | *`list`*`[`*`begin`*`:`*`end`*`]` | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s. | `l[2:3]` | `[5, 6]` |
-| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `list_slice(l, 2, NULL)` | `[5,6]` |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 2, NULL)` | `[5,6]` |
+| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. | `list_slice(l, 2, NULL)` | `[5, 6]` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice. | `array_slice(l, 2, NULL)` | `[5, 6]` |
+| `array_pop_front(`*`list`*`)` | Returns the list without the first element. | `array_pop_front(l)` | `[5, 6]` |
+| `array_pop_back(`*`list`*`)` | Returns the list without the last element. | `array_pop_back(l)` | `[4, 5]` |
 | `list_value(`*`any`*`, ...)` | Create a `LIST` containing the argument values. | `list_value(4, 5, 6)` | `[4, 5, 6]` |
 | `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
 | `len(`*`list`*`)` | Return the length of the list. | `len([1, 2, 3])` | `3` |
@@ -32,8 +34,10 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
 | `list_prepend(`*`element`*`, `*`list`*`)` | Prepends `element` to `list`. | `list_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
 | `array_prepend(`*`element`*`, `*`list`*`)` | Alias for `list_prepend`. | `array_prepend(3, [4, 5, 6])` | `[3, 4, 5, 6`] |
+| `array_push_front(`*`list`*`, `*`element`*`)` | Alias for `list_prepend`. | `array_push_front(l, 3)` | `[3, 4, 5,6]` |
 | `list_append(`*`list`*`, `*`element`*`)` | Appends `element` to `list`. | `list_append([2, 3], 4)` | `[2, 3, 4`] |
 | `array_append(`*`list`*`, `*`element`*`)` | Alias for `list_append`. | `array_append([2, 3], 4)` | `[2, 3, 4`] |
+| `array_push_back(`*`list`*`, `*`element`*`)` | Alias for `list_append`. | `array_push_back(l, 7)` | `[4, 5, 6, 7]` |
 | `list_contains(`*`list`*`, `*`element`*`)` | Returns true if the list contains the element. | `list_contains([1, 2, NULL], 1)` | `true` |
 | `list_has(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `list_has([1, 2, NULL], 1)` | `true` |
 | `array_contains(`*`list`*`, `*`element`*`)` | Alias for `list_contains`. | `array_contains([1, 2, NULL], 1)` | `true` |
@@ -46,6 +50,10 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_aggr(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `list_aggr([1, 2, NULL], 'min')` | `1` |
 | `array_aggregate(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `array_aggregate([1, 2, NULL], 'min')` | `1` |
 | `array_aggr(`*`list`*`, `*`name`*`)` | Alias for `list_aggregate`. | `array_aggr([1, 2, NULL], 'min')` | `1` |
+| `list_sort(`*`list`*`)` | Sorts the elements of the list. See the [Sorting Lists](nested#sorting-lists) section for more details about the sorting order and the null sorting order. | `list_sort([3, 6, 1, 2])` | `[1, 2, 3, 6]` |
+| `array_sort(`*`list`*`)` | Alias for `list_sort`. | `array_sort([3, 6, 1, 2])` | `[1, 2, 3, 6]` |
+| `list_reverse_sort(`*`list`*`)` | Sorts the elements of the list in reverse order. See the [Sorting Lists](nested#sorting-lists) section for more details about the null sorting order. | `list_reverse_sort([3, 6, 1, 2])` | `[6, 3, 2, 1]` |
+| `array_reverse_sort(`*`list`*`)` | Alias for `list_reverse_sort`. | `array_reverse_sort([3, 6, 1, 2])` | `[6, 3, 2, 1]` |
 
 ## Struct Functions
 
@@ -143,6 +151,45 @@ SELECT list_sum([2, 4, 8, 42]);
 
 SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 -- [2, 10, 3]
+```
+
+## Sorting Lists
+
+The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
+
+By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e. the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby.md) PRAGMA statements.
+
+`list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the NULL sort order and can be either `NULLS FIRST` or `NULLS LAST`.
+
+```sql
+-- default sort order and default NULL sort order
+SELECT list_sort([1, 3, NULL, 5, NULL, -5])
+----
+[NULL, NULL, -5, 1, 3, 5]
+
+-- only providing the sort order
+SELECT list_sort([1, 3, NULL, 2], 'ASC')
+----
+[NULL, 1, 2, 3]
+
+-- providing the sort order and the NULL sort order
+SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST')
+----
+[NULL, 3, 2, 1]
+```
+
+`list_reverse_sort` has an optional second parameter providing the NULL sort order. It can be either `NULLS FIRST` or `NULLS LAST`.
+
+```sql
+-- default NULL sort order
+SELECT list_sort([1, 3, NULL, 5, NULL, -5])
+----
+[NULL, NULL, -5, 1, 3, 5]
+
+-- providing the NULL sort order
+SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
+----
+[3, 2, 1, NULL]
 ```
 
 ## `generate_subscripts`
