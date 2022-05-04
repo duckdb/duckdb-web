@@ -109,6 +109,10 @@
             {
               "page": "Export To Arrow",
               "url": "export_arrow"
+            },
+            {
+              "page": "DuckDB with Ibis",
+              "url": "ibis"
             }
           ]
         },
