@@ -4,6 +4,17 @@ title: Parquet
 ---
 Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
+### Installing and loading `parquet` extension
+
+The support for `parquet` files is enabled via extension, you can install and load the extension first:
+
+```sql
+-- run once
+install 'parquet';
+-- run before usage
+load 'parquet';
+```
+
 ### Examples
 ```sql
 -- read a single parquet file
