@@ -192,6 +192,26 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
 [3, 2, 1, NULL]
 ```
 
+## Lambda Functions
+
+### Transform
+
+`transform(list, lambda)`
+
+Returns a list that is the result of applying the lambda function to each element of the input list. The lambda function must have exactly one left-hand side parameter. The return type of the lambda function defines the type of the list elements.
+
+### Filter
+
+`filter(list, lambda)`
+
+Constructs a list from those elements of the input list for which the lambda function returns true. The lambda function must have exactly one left-hand side parameter and its return type must be of type BOOLEAN.
+
+### Reduce
+
+`reduce(list, lambda)`
+
+Returns a single value reduced from list. Invokes the lambda function for each element in the list in order. The first element of the list is taken as the initial state. The lambda function must have exactly two left-hand side parameters. The return type of the lambda function defines the type of the result value.
+
 ## `generate_subscripts`
 
 The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
