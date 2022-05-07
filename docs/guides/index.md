@@ -45,7 +45,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to export data to Apache Arrow](/docs/guides/python/export_arrow)
 
 ### Python Library Integrations
-* [How to use DuckDB with Ibis](/docs/guides/python/ibis)
+* [How to use Ibis to query DuckDB with or without SQL](/docs/guides/python/ibis)
 
 
 ## SQL Editors / IDE's
