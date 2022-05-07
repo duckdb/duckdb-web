@@ -5,7 +5,7 @@ selected: DuckDB with Ibis
 ---
 
 [Ibis](https://ibis-project.org/) is a Python library that allows queries to be written in a pythonic relational style and then be compiled into SQL.
-Ibis supports multiple database backends, including [DuckDB](https://ibis-project.org/docs/dev/backends/DuckDB/) by using [DuckDB's SQLAlchemy driver](https://github.com/Mause/duckdb_engine). 
+Ibis supports multiple database backends, including [DuckDB](https://ibis-project.org/docs/dev/backends/DuckDB/) by using [DuckDB's SQLAlchemy driver](https://github.com/Mause/duckdb_engine). Ibis expressions can also be combined with SQL statements.
 
 # Installation
 To install only the DuckDB backend for Ibis, use the commands below. See the [Ibis DuckDB installation instructions](https://ibis-project.org/docs/dev/backends/DuckDB/) for a conda alternative. Note that DuckDB support was added in Ibis version 3.0.0.
@@ -48,7 +48,7 @@ print(duckdb_types_table['type_category', 'type_size'].distinct().compile())
 ```
 
 | type_category | type_size |
-|---------------|-----------|
+|:---|:---|
 | BOOLEAN       | 1         |
 | NUMERIC       | 1         |
 | NUMERIC       | 2         |
@@ -82,7 +82,7 @@ print(duckdb_types_table['type_name','type_category', 'type_size']
 ```
 
 | type_name | type_category | type_size |
-|-----------|---------------|-----------|
+|:---|:---|:---|
 | DECIMAL   | NUMERIC       | NaN       |
 | TINYINT   | NUMERIC       | 1         |
 | UTINYINT  | NUMERIC       | 1         |
@@ -125,7 +125,7 @@ print(duckdb_types_table.sql("""
 ```  
 
 | type_category |   avg_size_rank    |
-|---------------|--------------------|
+|:---|:---|
 | NUMERIC       | 4.583333333333333  |
 | COMPOSITE     | 3.6666666666666665 |
 | BOOLEAN       | 3.0                |
