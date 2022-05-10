@@ -18,6 +18,17 @@ function GenerateTableConstraints(options) {
 			Keyword("("),
 			Expression(),
 			Keyword(")")
+		]),
+		Sequence([
+			Keyword("FOREIGN"),
+			Keyword("KEY"),
+			Keyword("("),
+			OneOrMore(Expression("column-name"), ","),
+			Keyword("REFERENCES"),
+			Expression("foreign-table"),
+			Keyword("("),
+			OneOrMore(Expression("column-name"), ","),
+			Keyword(")")
 		])
 	]), ",", "skip")]
 }
@@ -27,6 +38,7 @@ function GenerateCreateTable(options = {}) {
 		AutomaticStack([
 			Sequence([
 				Keyword("CREATE"),
+				GenerateOrReplace(),
 				GenerateTemporary(),
 				Keyword("TABLE")
 			]),

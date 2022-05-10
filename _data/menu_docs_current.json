@@ -114,6 +114,10 @@
               "page": "Relational API on Pandas",
               "url": "relational_api_pandas"
             },
+
+              "page": "DuckDB with Ibis",
+              "url": "ibis"
+            }
           ]
         },
         {
@@ -133,6 +137,10 @@
       "open": true,
       "slug": "docs",
       "mainfolderitems": [
+        {
+          "page": "Connect",
+          "url": "connect"
+        },
         {
           "page": "Data Import",
           "slug": "data",
@@ -243,6 +251,24 @@
             {
               "page": "WASM",
               "url": "wasm"
+            },
+            {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                  {
+                    "page": "Overview",
+                    "url": "overview"
+                  },
+                  {
+                    "page": "Linux Setup",
+                    "url": "linux"
+                  },
+                  {
+                    "page": "Windows Setup",
+                    "url": "windows"
+                  }
+              ]
             },
             {
               "page": "CLI",

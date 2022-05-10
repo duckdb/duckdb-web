@@ -2,6 +2,10 @@ gold:
   - name: Voltron Data
     url: https://voltrondata.com
     logoimg: voltrondata.svg
+  
+  - name: Relational AI
+    url: https://relational.ai
+    logoimg: relational-ai.svg
     
 silver:
   - name: Hex

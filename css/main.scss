@@ -491,6 +491,9 @@ body.landing{
 	}
 	section{
 		padding: 70px 15px;
+		&.reducedpadding{
+			padding: 40px 15px;
+		}
 	}
 	.welcome, .benefits{
 		width: 100%;
@@ -850,6 +853,7 @@ body.landing{
 				}
 				h3{
 					font-weight: normal;
+					font-size: 20px;
 					a{
 						color: black;
 						text-decoration: inherit;
@@ -857,7 +861,7 @@ body.landing{
 				}
 				p{
 					hyphens: auto;
-					font-size: 14px;
+					font-size: 16px;
 				}
 				span.duckdbsymbol{
 					color: darken($duckDBgrey,20);
@@ -874,7 +878,19 @@ body.landing{
 			}
 		}
 	}
-	
+	.stickerbanner{
+		display: flex;
+		> div{
+			width: 50%;
+		}
+		.button{
+			@include button();
+			background-color: $duckDByellow;
+			span::after{
+				line-height: 27px;
+			}
+		}
+	}
 }
 
 

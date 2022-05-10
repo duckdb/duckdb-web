@@ -23,24 +23,6 @@ Not all casts are possible. For example, it is not possible to convert an `INTEG
 ## Implicit Casting
 In many situations, the system will add casts by itself. This is called *implicit* casting. This happens for example when a function is called with an argument that does not match the type of the function, but can be casted to the desired type.
 
-Consider the function `SIN(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `SIN(1)`. If we look at the `EXPLAIN` output, we will see that the integer is converted into a double before being passed to the `SIN` function:
-
-```sql
-explain SELECT SIN(1);
-
-┌─────────────────────────────┐
-│┌───────────────────────────┐│
-││       Physical Plan       ││
-│└───────────────────────────┘│
-└─────────────────────────────┘
-┌───────────────────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          0.841471         │
-└─────────────┬─────────────┘                             
-┌─────────────┴─────────────┐
-│         DUMMY_SCAN        │
-└───────────────────────────┘
-```
+Consider the function `SIN(DOUBLE)`. This function takes as input argument a column of type `DOUBLE`, however, it can be called with an integer as well: `SIN(1)`. The integer is converted into a double before being passed to the `SIN` function.
 
 Generally, implicit casts only cast upwards. That is to say, we can implicitly cast an `INTEGER` to a `BIGINT`, but not the other way around.
