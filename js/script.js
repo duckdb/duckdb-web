@@ -13,6 +13,7 @@ $(document).ready(function(){
 		$('.systemdetected').html('System detected: '+OSName);
 		$('.ver-cplusplus').not(OSdatid).remove()
 		$('.ver-cli').not(OSdatid).remove()
+		$('.ver-odbc').not(OSdatid).remove()
 	}
 	
 	// Installationshinweise Landingpage
@@ -60,20 +61,27 @@ $(document).ready(function(){
 		if(platfromSelection){ userSelection.platform = platfromSelection; }
 		
 
-		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli"){
-			$('.installer.select, .platform.select').removeClass('inactive');	
+		if ( userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc"){
+			$('.installer.select, .platform.select').removeClass('inactive');
 		} else {
 			$('.installer.select, .platform.select').addClass('inactive');
 			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
 			userSelection.pack = "";
 			userSelection.platform = "";
 		}
-		if ( userSelection.environment == ".cplusplus" && userSelection.pack == ".source" || userSelection.environment == ".cli" && userSelection.pack == ".source"){
+		if ( userSelection.version == ".master" && (userSelection.environment == ".cplusplus" || userSelection.environment == ".odbc") ) {
+			$('.installer.select, .platform.select').addClass('inactive');
+			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
+			userSelection.pack = "";
+			userSelection.platform = "";
+		}
+
+		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && userSelection.pack == ".source" ) {
 			$('.platform.select').addClass('inactive');
 			$('.platform.select ul li.selected').removeClass('selected');	
 			userSelection.platform = "";
 		}
-		if ( userSelection.environment == ".cplusplus" && $('.installer.select ul li.selected').length == 0 || userSelection.environment == ".cli" && $('.installer.select ul li.selected').length == 0){
+		if ( (userSelection.environment == ".cplusplus" || userSelection.environment == ".cli" || userSelection.environment == ".odbc") && $('.installer.select ul li.selected').length == 0){
 			$('.installer.select ul li[data-id=".binary"').addClass('selected');
 			$('.platform.select ul li[data-id="'+OSdatid+'"').addClass('selected');
 			userSelection.pack = ".binary";

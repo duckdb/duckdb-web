@@ -1557,6 +1557,13 @@ function GenerateColumnConstraints(options) {
 			])
 		]),
 		Sequence([
+			Keyword("REFERENCES"),
+			Expression("foreign-table"),
+			Keyword("("),
+			OneOrMore(Expression("column-name"), ","),
+			Keyword(")")
+		]),
+		Sequence([
 			Keyword("COLLATE"),
 			Expression("collation-name"),
 		]),

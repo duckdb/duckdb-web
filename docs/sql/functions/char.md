@@ -9,10 +9,10 @@ This section describes functions and operators for examining and manipulating st
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
-| *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[3]` | `'k'` |
+| *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` |
 | *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s. | `'DuckDB'[:4]` | `'Duck'` |
-| `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (0-based) index. | `array_extract('DuckDB, 1)` | `'u'` |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('DuckDB, 4, NULL)` | `'DB'` |
+| `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('DuckDB', 2)` | `'u'` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `'DB'` |
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` |
 | `base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of to_base64. | `base64('A'::blob)` | `'QQ=='` |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` |
@@ -27,8 +27,8 @@ This section describes functions and operators for examining and manipulating st
 | `length(`*`string`*`)` | Number of characters in *string* | `length('Hello')` | `5` |
 | *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` |
 | `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](/docs/sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
-| `list_element(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_element('DuckDB, 1)` | `'u'` |
-| `list_extract(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_extract('DuckDB, 1)` | `'u'` |
+| `list_element(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_element('DuckDB', 2)` | `'u'` |
+| `list_extract(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_extract('DuckDB', 2)` | `'u'` |
 | `lower(`*`string`*`)` | Convert *string* to lower case | `lower('Hello')` | `hello` |
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 10, '>')` | `>>>>>hello` |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` |

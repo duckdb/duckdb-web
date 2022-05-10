@@ -47,5 +47,9 @@ The guides section contains compact how-to guides that are focused on achieving 
 ### Relational API
 * [How to query Pandas DataFrames with the Relational API](/docs/guides/python/relational_api_pandas)
 
+### Python Library Integrations
+* [How to use Ibis to query DuckDB with or without SQL](/docs/guides/python/ibis)
+
+
 ## SQL Editors / IDE's
 * [How to set up the DBeaver SQL IDE](/docs/guides/sql_editors/dbeaver)

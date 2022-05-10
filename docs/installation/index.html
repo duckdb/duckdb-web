@@ -6,7 +6,7 @@ body_class: installation
 
 
 <div class="yourselection">
-	
+
 	<div class="version select">
 		<h3>Version</h3>
 		<ul class="version">
@@ -18,7 +18,7 @@ body_class: installation
 			</li>
 		</ul>
 	</div>
-	
+
 	<div class="evironment select">
 		<h3>Environment</h3>
 		<ul class="environment">
@@ -28,9 +28,10 @@ body_class: installation
 			<li data-id=".js">node.js</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".cli">CLI</li>
+			<li data-id=".odbc">ODBC</li>
 		</ul>
 	</div>
-	
+
 
 	<div class="installer select inactive">
 		<h3>Package</h3>
@@ -39,7 +40,7 @@ body_class: installation
 			<li data-id=".binary">Binary</li>
 		</ul>
 	</div>
-	
+
 	<div class="platform select inactive">
 		<h3>Platform</h3>
 		<ul class="platform">
@@ -48,7 +49,7 @@ body_class: installation
 			<li data-id=".linux">Linux</li>
 		</ul>
 	</div>
-	
+
 
 	<div class="installartion output">
 		<h3>Installation</h3>
@@ -58,7 +59,7 @@ body_class: installation
 
 
 	</div>
-	
+
 	<div class="example output">
 		<h3>Usage Example</h3>
 		<div class="result">
@@ -68,28 +69,29 @@ cursor = duckdb.connect()
 print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		</div>
 	</div>
-	
+
 </div>
 
 
 <div class="possibleresults">
-	
+
 	<!-- Empty Results -->
 	<div class="latest master cplusplus"></div>
 	<div class="latest master cli"></div>
-	<div class="latest master cplusplus binary"></div>
+	<div class="latest master odbc"></div>
 	<div class="latest master cli binary"></div>
+	<div class="master odbc"></div>
 	<!-- End Empty Results -->
-	
-	
+
+
 	<div class="latest python">
 		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
 	</div>
-	
+
 	<div class="latest r">
 		{% highlight bash %}install.packages("duckdb"){% endhighlight %}
 	</div>
-	
+
 	<div class="latest java">
 {% highlight xml %}
 <dependency>
@@ -102,106 +104,108 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		<div class="latest js">
 {% highlight bash %}npm install duckdb{% endhighlight %}
 	</div>
-	
+
 	<div class="latest cplusplus source">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-src.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-src.zip</a>
 	</div>
-	
+
 	<div class="latest cli source">
 		coming soon
 	</div>
-	
+
+	<div class="latest odbc source">
+	</div>
+
 	<div class="latest cplusplus binary macos">
 		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-osx-amd64.zip</a>
 	</div>
-	
+
 	<div class="latest cplusplus binary linux">
 		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip</a><br/><br/>
 		Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-i386.zip</a><br/><br/>
 		Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-rpi.zip</a>
 	</div>
-	
+
 	<div class="latest cplusplus binary win">
 		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip</a><br/><br/>
 		Win 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-i386.zip</a>
 	</div>
-	
+
 	<div class="latest cli binary macos">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-amd64.zip</a>
+		<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip</a>
 	</div>
-	
+
 	<div class="latest cli binary linux">
 		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a><br/><br/>
 		Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip</a><br/><br/>
 		Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip</a>
 	</div>
-	
+
 	<div class="latest cli binary win">
 		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a><br/><br/>
 		Win 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-i386.zip</a>
 	</div>
-	
+
+	<div class="latest odbc binary linux">
+		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a><br/><br/>
+		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
+		{% highlight bash %}./unixodbc_setup.sh --help {% endhighlight %}
+	</div>
+
+	<div class="latest odbc binary macos">
+	</div>
+
+	<div class="latest odbc binary win">
+		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a><br/><br/>
+		./odbc_install.exe <span style="opacity: 0.5;"><font color="black">(double-click)</font>
+	</div>
+
 	<div class="master python">
 		{% highlight bash %}pip install duckdb --pre --upgrade{% endhighlight %}
 	</div>
-	
+
 	<div class="master r">
 		{% highlight bash %}install.packages("https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_r_src.tar.gz", repos = NULL){% endhighlight %}
 	</div>
-	
+
 	<div class="master java">
 		coming soon
 	</div>
-	
+
 
 		<div class="master js">
 {% highlight bash %}npm install duckdb@next{% endhighlight %}
 	</div>
 
-	
+
 	<div class="master cplusplus source">
 		<a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-src.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-src.zip</a>
 	</div>
-	
+
 	<div class="master cli source">
 		coming soon
 	</div>
-	
-	<div class="master cplusplus binary macos">
-		<a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-osx-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-osx-amd64.zip</a>
+
+	<div class="master odbc source">
+		<a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-src.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-src.zip</a>
 	</div>
-	
-	<div class="master cplusplus binary linux">
-		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-linux-amd64.zip</a><br/><br/>
-		Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-linux-i386.zip</a><br/><br/>
-		Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-linux-rpi.zip</a>
-	</div>
-	
-	<div class="master cplusplus binary win">
-		Win 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-windows-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-windows-i386.zip</a><br/><br/>
-		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/libduckdb-windows-amd64.zip</a>
-	</div>
-	
+
 	<div class="master cli binary macos">
 		<a href="https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-osx-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-osx-amd64.zip</a>
 	</div>
-	
+
 	<div class="master cli binary linux">
 		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-linux-amd64.zip</a><br/><br/>
 		Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-linux-i386.zip</a><br/><br/>
 		Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-linux-rpi.zip</a>
 	</div>
-	
+
 	<div class="master cli binary win">
 		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-windows-amd64.zip</a><br/><br/>
 		Win 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-windows-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/master-builds/duckdb_cli-windows-i386.zip</a>
 	</div>
-	
-	
-	
-	
-	
-	
+
+
 
 	<div class="example python">
 {% highlight python %}
@@ -209,7 +213,7 @@ import duckdb
 cursor = duckdb.connect()
 print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
-	
+
 	<div class="example r">
 {% highlight R %}
 library("DBI")
@@ -217,7 +221,7 @@ con = dbConnect(duckdb::duckdb(), ":memory:")
 dbWriteTable(con, "iris", iris)
 dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"'){% endhighlight %}
 	</div>
-	
+
 	<div class="example java">
 {% highlight java %}
 Class.forName("org.duckdb.DuckDBDriver");
@@ -225,7 +229,7 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 Statement stmt = conn.createStatement();
 ResultSet rs = stmt.executeQuery("SELECT 42");{% endhighlight %}
 	</div>
-	
+
 	<div class="example js">
 {% highlight javascript %}
 var duckdb = require('duckdb');
@@ -245,12 +249,15 @@ Connection con(db);
 auto result = con.Query("SELECT 42");
 result->Print();{% endhighlight %}
 	</div>
-	
+
 	<div class="example cli">
 {% highlight bash %}
 ./duckdb{% endhighlight %}
 	</div>
-	
+
+	<div class="example odbc">
+	</div>
+
 </div>
 
 <!--
