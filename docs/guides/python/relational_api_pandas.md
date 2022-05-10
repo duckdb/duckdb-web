@@ -6,7 +6,7 @@ selected: Relational API and Pandas
 
 # How to use the Relational API to query Pandas
 
-DuckDB offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DuckDB can optimize their execution. These operators can act on Pandas DataFrames, DuckDB tables or views (which can point to any underlying storage format that DuckDB can read, such as csv or parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning to a DataFrame.
+DuckDB offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DuckDB can optimize their execution. These operators can act on Pandas DataFrames, DuckDB tables or views (which can point to any underlying storage format that DuckDB can read, such as csv or parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning a DataFrame.
 
 ```python
 import duckdb
