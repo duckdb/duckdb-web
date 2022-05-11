@@ -15,6 +15,8 @@ The table below shows the available mathematical operators for `TIMESTAMP` types
 | `-` | subtraction of `TIMESTAMP`s | `TIMESTAMP '1992-03-27' - TIMESTAMP '1992-03-22'` | `5 days` |
 | `-` | subtraction of an `INTERVAL` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | `1992-03-22 01:02:03` |
 
+Adding to or subtracting from [infinite values](/docs/sql/types/timestamp#special-values) produces the same infinite value.
+
 ## Timestamp Functions
 The table below shows the available scalar functions for `TIMESTAMP` types.
 
@@ -43,6 +45,10 @@ The table below shows the available scalar functions for `TIMESTAMP` types.
 
 There are also dedicated extraction functions to get the [subfields](/docs/sql/functions/datepart).
 
+Functions applied to infinite dates will either return the same infinite dates 
+(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
+In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`. 
+
 ## Timestamp Table Functions
 The table below shows the available table functions for `TIMESTAMP` types.
 
@@ -50,3 +56,5 @@ The table below shows the available table functions for `TIMESTAMP` types.
 |:---|:---|:---|:---|
 | `generate_series(`*`timestamp`*`, `*`timestamp`*`, `*`interval`*`)` | Generate a table of timestamps in the closed range, stepping by the interval | `generate_series(TIMESTAMP '2001-04-10', TIMESTAMP '2001-04-11', INTERVAL 30 MINUTE)`
 | `range(`*`timestamp`*`, `*`timestamp`*`, `*`interval`*`)` | Generate a table of timestamps in the half open range, stepping by the interval | `range(TIMESTAMP '2001-04-10', TIMESTAMP '2001-04-11', INTERVAL 30 MINUTE)`
+
+Infinite values are not allowed as table function bounds.
