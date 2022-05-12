@@ -69,6 +69,7 @@ SELECT
     age,
     sum(civility) as total_civility
 FROM star_wars_universe
+GROUP BY ALL
 ORDER BY ALL
 -- ORDER BY age, total_civility
 ```
