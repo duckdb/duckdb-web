@@ -22,6 +22,27 @@ SELECT TIMESTAMP '1992-09-20 11:30:00';
 SELECT TIMESTAMP '1992-09-20 14:30:00';
 ```
 
+## Special Values
+
+There are also three special date values that can be used on input:
+
+| Input String | Valid Types                       | Description                                    |
+|:-------------|:----------------------------------|:-----------------------------------------------|
+| epoch	       | timestamp, timestamptz            | 1970-01-01 00:00:00+00 (Unix system time zero) |
+| infinity	   | timestamp, timestamptz            | later than all other time stamps               |
+| -infinity	   | timestamp, timestamptz            | earlier than all other time stamps             |
+
+The values `infinity` and `-infinity` are specially represented inside the system and will be displayed unchanged; 
+but `epoch` is simply a notational shorthand that will be converted to the time stamp value when read.
+
+```sql
+SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
+```
+
+| Negative  | Epoch              | Positive |
+|:----------|:-------------------|:---------|
+| -infinity | 1970-01-01 00:00:00| infinity |
+
 ## Functions
 See [Timestamp Functions](/docs/sql/functions/timestamp).
 
