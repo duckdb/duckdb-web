@@ -1,0 +1,235 @@
+filepath	current_header	Function	Description	Example	Result	Operator	Specifier	Synonyms
+docs\sql\functions\blob.md 	 	 `octet_length(`*`blob`*`)` 	 Number of bytes in blob 	 `octet_length('\xAABB'::BLOB)` 	2			
+docs\sql\functions\char.md 	 	 *`string`*`[`*`index`*`]` 	 Alias for `array_extract`. 	 `'DuckDB'[3]` 	 `'k'`			
+docs\sql\functions\char.md 	 	 *`string`*`[`*`begin`*`:`*`end`*`]` 	 Alias for `array_slice`. Missing arguments are interprete as `NULL`s. 	 `'DuckDB'[:4]` 	 `'Duck'`			
+docs\sql\functions\char.md 	 	 `array_extract(`*`list`*`, `*`index`*`)` 	 Extract a single character using a (0-based) index. 	 `array_extract('DuckDB, 1)` 	 `'u'`			
+docs\sql\functions\char.md 	 	 `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` 	 Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. 	 `array_slice('DuckDB, 4, NULL)` 	 `'DB'`			
+docs\sql\functions\char.md 	 	 `ascii(`*`string`*`)`	 Returns an integer that represents the Unicode code point of the first character of the *string* 	 `ascii('Ω')` 	 `937`			
+docs\sql\functions\char.md 	 	 `concat(`*`string`*`, ...)` 	 Concatenate many strings together 	 `concat('Hello', ' ', 'World')` 	 `Hello World`			
+docs\sql\functions\char.md 	 	 `concat_ws(`*`separator`*`, `*`string`*`, ...)` 	 Concatenate strings together separated by the specified separator 	 `concat_ws(',', 'Banana', 'Apple', 'Melon')` 	 `Banana,Apple,Melon`			
+docs\sql\functions\char.md 	 	 `format(`*`format`*`, `*`parameters`*`...)` 	 Formats a string using fmt syntax 	" `format('Benchmark ""{}"" took {} seconds', 'CSV', 42)` "	" `Benchmark ""CSV"" took 42 seconds`"			
+docs\sql\functions\char.md 	 	 `left(`*`string`*`, `*`count`*`)`	 Extract the left-most count characters 	 `left('hello', 2)` 	 `he`			
+docs\sql\functions\char.md 	 	 `length(`*`string`*`)` 	 Number of characters in *string* 	 `length('Hello')` 	 `5`			
+docs\sql\functions\char.md 	 	 *`string`*` LIKE `*`target`* 	 Returns true if the *string* matches the like specifier (see [Pattern Matching](/docs/sql/functions/patternmatching)) 	 `'hello' LIKE '%lo'` 	 `true`			
+docs\sql\functions\char.md 	 	 `list_element(`*`string`*`, `*`index`*`)` 	 An alias for `array_extract`. 	 `list_element('DuckDB, 1)` 	 `'u'`			
+docs\sql\functions\char.md 	 	 `list_extract(`*`string`*`, `*`index`*`)` 	 An alias for `array_extract`. 	 `list_extract('DuckDB, 1)` 	 `'u'`			
+docs\sql\functions\char.md 	 	 `lower(`*`string`*`)` 	 Convert *string* to lower case 	 `lower('Hello')` 	 `hello`			
+docs\sql\functions\char.md 	 	 `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`	 Pads the *string*  with the character from the left until it has count characters 	 `lpad('hello', 10, '>')` 	 `>>>>>hello`			
+docs\sql\functions\char.md 	 	 `ltrim(`*`string`*`)`	 Removes any spaces from the left side of the *string* 	 `ltrim('␣␣␣␣test␣␣')` 	 `test␣␣`			
+docs\sql\functions\char.md 	 	 `ltrim(`*`string`*`, `*`characters`*`)`	 Removes any occurrences of any of the *characters* from the left side of the *string* 	 `ltrim('>>>>test<<', '><')` 	 `test<<`			
+docs\sql\functions\char.md 	 	 `upper(`*`string`*`)`	 Convert *string* to upper case 	 `upper('Hello')` 	 `HELLO`			
+docs\sql\functions\char.md 	 	 `printf(`*`format`*`, `*`parameters`*`...)` 	 Formats a *string* using printf syntax 	" `printf('Benchmark ""%s"" took %d seconds', 'CSV', 42)` "	" `Benchmark ""CSV"" took 42 seconds`"			
+docs\sql\functions\char.md 	 	 `regexp_full_match(`*`string`*`, `*`regex`*`)`	 Returns true if the entire *string* matches the *regex* (see [Pattern Matching](/docs/sql/functions/patternmatching)) 	 `regexp_full_match('anabanana', '(an)*')` 	 `false`			
+docs\sql\functions\char.md 	 	 `regexp_matches(`*`string`*`, `*`regex`*`)`	 Returns true if a part of *string* matches the *regex* (see [Pattern Matching](/docs/sql/functions/patternmatching)) 	 `regexp_matches('anabanana', '(an)*')` 	 `true`			
+docs\sql\functions\char.md 	 	 `regexp_replace(`*`string`*`, `*`regex`*`, `*`replacement`*`, `*`modifiers`*`)`	 Replaces the first occurrence of *regex* with the *replacement*, use `'g'` modifier to replace all occurrences instead (see [Pattern Matching](/docs/sql/functions/patternmatching)) 	 `select regexp_replace('hello', '[lo]', '-')` 	 `he-lo`			
+docs\sql\functions\char.md 	 	 `repeat(`*`string`*`, `*`count`*`)`	 Repeats the *string* *count* number of times 	 `repeat('A', 5)` 	 `AAAAA`			
+docs\sql\functions\char.md 	 	 `replace(`*`string`*`, `*`source`*`, `*`target`*`)`	 Replaces any occurrences of the *source* with *target* in *string* 	 `replace('hello', 'l', '-')` 	 `he--o`			
+docs\sql\functions\char.md 	 	 `reverse(`*`string`*`)`	 Reverses the *string* 	 `reverse('hello')` 	 `olleh`			
+docs\sql\functions\char.md 	 	 `right(`*`string`*`, `*`count`*`)`	 Extract the right-most *count* characters 	 `right('hello', 3)` 	 `llo`			
+docs\sql\functions\char.md 	 	 `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`	 Pads the *string* with the character from the right until it has *count* characters 	 `rpad('hello', 10, '<')` 	 `hello<<<<<`			
+docs\sql\functions\char.md 	 	 `rtrim(`*`string`*`)`	 Removes any spaces from the right side of the *string* 	 `rtrim('␣␣␣␣test␣␣')` 	 `␣␣␣␣test`			
+docs\sql\functions\char.md 	 	 `rtrim(`*`string`*`, `*`characters`*`)`	 Removes any occurrences of any of the *characters* from the right side of the *string* 	 `rtrim('>>>>test<<', '><')` 	 `>>>>test`			
+docs\sql\functions\char.md 	 	 *`string`*` SIMILAR TO `*`regex`* 	 Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](/docs/sql/functions/patternmatching)) 	 `'hello' SIMILAR TO 'l+'` 	 `false`			
+docs\sql\functions\char.md 	 	 `strlen(`*`string`*`)` 	 Number of bytes in *string* 	 `length('🤦🏼‍♂️')` 	 `1`			
+docs\sql\functions\char.md 	 	 `strip_accents(`*`string`*`)`	 Strips accents from *string* 	 `strip_accents('mühleisen')` 	 `muhleisen`			
+docs\sql\functions\char.md 	 	 `string_split(`*`string`*`, `*`separator`*`)` 	 Splits the *string* along the *separator* 	 `string_split('hello␣world', '␣')` 	 `['hello', 'world']`			
+docs\sql\functions\char.md 	 	 `string_split_regex(`*`string`*`, `*`regex`*`)` 	 Splits the *string* along the *regex* 	 `string_split_regex('hello␣world; 42', ';?␣')` 	 `['hello', 'world', '42']`			
+docs\sql\functions\char.md 	 	 `substring(`*`string`*`, `*`start`*`, `*`length`*`)` 	 Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. 	 `substring('Hello', 2, 2)` 	 `el`			
+docs\sql\functions\char.md 	 	 `trim(`*`string`*`)`	 Removes any spaces from either side of the *string* 	 `trim('␣␣␣␣test␣␣')` 	 `test`			
+docs\sql\functions\char.md 	 	 `trim(`*`string`*`, `*`characters`*`)`	 Removes any occurrences of any of the *characters* from either side of the *string* 	 `trim('>>>>test<<', '><')` 	 `test`			
+docs\sql\functions\char.md 	 	 `unicode(`*`string`*`)`	 Returns the unicode code of the first character of the *string* 	 `unicode('ü')` 	 `252`			
+docs\sql\functions\date.md 	 Date Operators		 addition of an `INTERVAL` 	 `DATE '1992-03-22' + INTERVAL 5 DAY` 	 1992-03-27	 `+` 		
+docs\sql\functions\date.md 	 Date Operators		 subtraction of `DATE`s 	 `DATE '1992-03-27' - DATE '1992-03-22'` 	 5	 `-` 		
+docs\sql\functions\date.md 	 Date Operators		 subtraction of an `INTERVAL` 	 `DATE '1992-03-27' - INTERVAL 5 DAY'` 	 1992-03-22	 `-` 		
+docs\sql\functions\date.md 	 Date Functions	 `date_diff(`*`part`*`, `*`startdate`*`, , `*`enddate`*`)` 	 The number of [partition](/docs/sql/functions/datepart) boundaries between the dates 	 `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` 	 `2`			
+docs\sql\functions\date.md 	 Date Functions	 `date_part(`*`part`*`, `*`date`*`)` 	 Get the [subfield](/docs/sql/functions/datepart) (equivalent to *extract*) 	 `date_part('year', DATE '1992-09-20')` 	 `1992`			
+docs\sql\functions\date.md 	 Date Functions	 `date_sub(`*`part`*`, `*`startdate`*`, , `*`enddate`*`)` 	 The number of complete [partitions](/docs/sql/functions/datepart) between the dates 	 `date_sub('month', DATE '1992-09-15', DATE '1992-11-14')` 	 `1`			
+docs\sql\functions\date.md 	 Date Functions	 `date_trunc(`*`part`*`, `*`date`*`)` 	 Truncate to specified [precision](/docs/sql/functions/datepart) 	 `date_trunc('month', DATE '1992-03-07')` 	 `1992-03-01`			
+docs\sql\functions\date.md 	 Date Functions	 `dayname(`*`date`*`)` 	 The (English) name of the weekday 	 `monthname(DATE '1992-09-20')` 	 `Sunday`			
+docs\sql\functions\date.md 	 Date Functions	 `extract(`*`part`* `from `*`date`*`)` 	 Get [subfield](/docs/sql/functions/datepart) from a date 	 `extract('year' FROM DATE '1992-09-20')` 	 `1992`			
+docs\sql\functions\date.md 	 Date Functions	 `greatest(`*`date`*`, `*`date`*`)` 	 The later of two dates 	 `greatest(DATE '1992-09-20', DATE '1992-03-07')` 	 `1992-09-20`			
+docs\sql\functions\date.md 	 Date Functions	 `last_day(`*`date`*`)` 	 The last day of the month 	 `last_day(DATE '1992-09-20')` 	 `1992-09-30`			
+docs\sql\functions\date.md 	 Date Functions	 `least(`*`date`*`, `*`date`*`)` 	 The earlier of two dates 	 `least(DATE '1992-09-20', DATE '1992-03-07')` 	 `1992-03-07`			
+docs\sql\functions\date.md 	 Date Functions	 `monthname(`*`date`*`)` 	 The (English) name of the month 	 `monthname(DATE '1992-09-20')` 	 `September`			
+docs\sql\functions\date.md 	 Date Functions	 `last_day(`*`date`*`)` 	 Last day of the corresponding month in the date 	 `last_day(DATE '1992-09-20')` 	 `1992-09-30`			
+docs\sql\functions\date.md 	 Date Functions	 `strftime(date, format)` 	 Converts a date to a string according to the [format string](/docs/sql/functions/dateformat) 	 `strftime(date '1992-01-01', '%a, %-d %B %Y')` 	 `Wed, 1 January 1992`			
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Full weekday name. 	 Sunday, Monday, ...			 `%A` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Weekday as a decimal number. 	 0, 1, ..., 6			 `%w` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Day of the month as a zero-padded decimal. 	 01, 02, ..., 31			 `%d` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Day of the month as a decimal number. 	 1, 2, ..., 30			 `%-d` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Abbreviated month name. 	 Jan, Feb, ..., Dec			 `%b` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Full month name. 	 January, February, ...			 `%B` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Month as a zero-padded decimal number. 	 01, 02, ..., 12			 `%m` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Month as a decimal number. 	 1, 2, ..., 12			 `%-m` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Year without century as a zero-padded decimal number. 	 00, 01, ..., 99			 `%y` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Year without century as a decimal number. 	 0, 1, ..., 99			 `%-y` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Year with century as a decimal number. 	 2013, 2019 etc.			 `%Y` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Hour (24-hour clock) as a zero-padded decimal number. 	 00, 01, ..., 23			 `%H` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Hour (24-hour clock) as a decimal number. 	 0, 1, ..., 23			 `%-H` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Hour (12-hour clock) as a zero-padded decimal number. 	 01, 02, ..., 12			 `%I` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Hour (12-hour clock) as a decimal number. 	 1, 2, ... 12			 `%-I` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Locale's AM or PM. 	 AM, PM			 `%p` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Minute as a zero-padded decimal number. 	 00, 01, ..., 59			 `%M` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Minute as a decimal number. 	 0, 1, ..., 59			 `%-M` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Second as a zero-padded decimal number. 	 00, 01, ..., 59			 `%S` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Second as a decimal number. 	 0, 1, ..., 59			 `%-S` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Millisecond as a decimal number, zero-padded on the left. 	 000 - 999			 `%g` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Microsecond as a decimal number, zero-padded on the left. 	 000000 - 999999			 `%f` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 UTC offset in the form +HHMM or -HHMM. 				 `%z` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Time zone name. 				 `%Z` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Day of the year as a zero-padded decimal number. 	 001, 002, ..., 366			 `%j` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Day of the year as a decimal number. 	 1, 2, ..., 366			 `%-j` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Week number of the year (Sunday as the first day of the week). 	 00, 01, ..., 53			 `%U` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 Week number of the year (Monday as the first day of the week). 	 00, 01, ..., 53			 `%W` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 ISO date and time representation 	 1992-03-02 10:30:20			 `%c` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 ISO date representation 	 1992-03-02			 `%x` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 ISO time representation 	 10:30:20			 `%X` 	
+docs\sql\functions\dateformat.md 	 Format Specifiers		 A literal '%' character. 	 %			 `%%` 	
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Gregorian month 	8			 `'month'` 	 `'mon'`, `'months'`, `'mons'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Gregorian day 	3			 `'day'` 	 `'days'`, `'d'`, `'dayofmonth'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Gregorian decade 	202			 `'decade'` 	 `'decades'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Gregorian century 	21			 `'century'` 	 `'centuries'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Gregorian millennium 	3			 `'millennium'` 	 `'millenia'`, `'millenium'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Quarter of the year (1-4) 	3			 `'quarter'` 	 `'quarters'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Sub-minute microseconds 	44123456			 `'microseconds'` 	 `'microsecond'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Sub-minute milliseconds 	44123			 `'milliseconds'` 	 `'millisecond'`, `'ms'`, `'msec'`, `'msecs'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Seconds 	44			 `'second'` 	 `'seconds'`, `'s'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Minutes 	59			 `'minute'` 	 `'minutes'`, `'m'` 
+docs\sql\functions\datepart.md 	 Usable as Date Part Specifiers and in Intervals		 Hours 	11			 `'hour'` 	 `'hours'`, `'h'` 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Day of the week (Sunday = 0, Saturday = 6) 	2			 `'dayofweek'` 	 `'weekday'`, `'dow'` 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 ISO day of the week (Monday = 1, Sunday = 7) 	2			 `'isodow'` 	 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 ISO Year number (Starts on Monday of week containing Jan 4th ) 	2021			 `'isoyear'` 	 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Week number 	31			 `'week'` 	 `'weeks'`, `'w'` 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 ISO year and week number in `YYYYWW` format 	202131			 `'yearweek'` 	 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Day of the year (1-365/366) 	215			 `'dayofyear'` 	 `'doy'` 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Gregorian era (CE/AD, BCE/BC) 	1			 `'era'` 	 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Time zone offset in seconds 	0			 `'timezone'` 	 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Time zone offset hour portion 	0			 `'timezone_hour'` 	 
+docs\sql\functions\datepart.md 	 Usable in Date Part Specifiers Only		 Time zone offset minute portion 	0			 `'timezone_minute'` 	 
+docs\sql\functions\datepart.md 	 Part Functions	 `month(`*`date`*`)` 	 Month 	 `month(date '1992-02-15')` 	 `2`			
+docs\sql\functions\datepart.md 	 Part Functions	 `day(`*`date`*`)` 	 Day 	 `day(date '1992-02-15')` 	 `15`			
+docs\sql\functions\datepart.md 	 Part Functions	 `dayofmonth(`*`date`*`)` 	 Day (synonym) 	 `dayofmonth(date '1992-02-15')` 	 `15`			
+docs\sql\functions\datepart.md 	 Part Functions	 `decade(`*`date`*`)` 	 Decade (year / 10) 	 `decade(date '1992-02-15')` 	 `199`			
+docs\sql\functions\datepart.md 	 Part Functions	 `century(`*`date`*`)` 	 Century 	 `century(date '1992-02-15')` 	 `20`			
+docs\sql\functions\datepart.md 	 Part Functions	 `millennium(`*`date`*`)` 	 Millennium 	 `millennium(date '1992-02-15')` 	 `2`			
+docs\sql\functions\datepart.md 	 Part Functions	 `quarter(`*`date`*`)` 	 Quarter 	 `quarter(date '1992-02-15')` 	 `1`			
+docs\sql\functions\datepart.md 	 Part Functions	 `microsecond(`*`date`*`)` 	 Sub-minute microseconds 	 `microsecond(timestamp '2021-08-03 11:59:44.123456')` 	 `44123456`			
+docs\sql\functions\datepart.md 	 Part Functions	 `millisecond(`*`date`*`)` 	 Sub-minute milliseconds 	 `millisecond(timestamp '2021-08-03 11:59:44.123456')` 	 `44123`			
+docs\sql\functions\datepart.md 	 Part Functions	 `second(`*`date`*`)` 	 Seconds 	 `second(timestamp '2021-08-03 11:59:44.123456')` 	 `44`			
+docs\sql\functions\datepart.md 	 Part Functions	 `minute(`*`date`*`)` 	 Minutes 	 `minute(timestamp '2021-08-03 11:59:44.123456')` 	 `59`			
+docs\sql\functions\datepart.md 	 Part Functions	 `hour(`*`date`*`)` 	 Hours 	 `hour(timestamp '2021-08-03 11:59:44.123456')` 	 `11`			
+docs\sql\functions\datepart.md 	 Part Functions	 `epoch(`*`date`*`)` 	 Seconds since 1970-01-01 	 `epoch(date '1992-02-15')` 	 `698112000`			
+docs\sql\functions\datepart.md 	 Part Functions	 `dayofweek(`*`date`*`)` 	 Numeric weekday (Sunday = 0, Saturday = 6) 	 `dayofweek(date '1992-02-15')` 	 `6`			
+docs\sql\functions\datepart.md 	 Part Functions	 `weekday(`*`date`*`)` 	 Numeric weekday synonym (Sunday = 0, Saturday = 6) 	 `weekday(date '1992-02-15')` 	 `6`			
+docs\sql\functions\datepart.md 	 Part Functions	 `isodow(`*`date`*`)` 	 Numeric ISO weekday (Monday = 1, Sunday = 7) 	 `isodow(date '1992-02-15')` 	 `6`			
+docs\sql\functions\datepart.md 	 Part Functions	 `isoyear(`*`date`*`)` 	 ISO Year number (Starts on Monday of week containing Jan 4th ) 	 `isoyear(date '2022-01-01')` 	 `2021`			
+docs\sql\functions\datepart.md 	 Part Functions	 `week(`*`date`*`)` 	 ISO Week 	 `week(date '1992-02-15')` 	 `7`			
+docs\sql\functions\datepart.md 	 Part Functions	 `weekofyear(`*`date`*`)` 	 ISO Week (synonym) 	 `weekofyear(date '1992-02-15')` 	 `7`			
+docs\sql\functions\datepart.md 	 Part Functions	 `dayofyear(`*`date`*`)` 	 Numeric ISO weekday (Monday = 1, Sunday = 7) 	 `isodow(date '1992-02-15')` 	 `46`			
+docs\sql\functions\datepart.md 	 Part Functions	 `quarter(`*`date`*`)` 	 Quarter 	 `quarter(date '1992-02-15')` 	 `1`			
+docs\sql\functions\datepart.md 	 Part Functions	 `era(`*`date`*`)` 	 Calendar era 	 `era(date '0044-03-15 (BC)')` 	 `0`			
+docs\sql\functions\datepart.md 	 Part Functions	 `timezone(`*`date`*`)` 	 Time Zone offset in minutes 	 `timezone(date '1992-02-15')` 	 `0`			
+docs\sql\functions\datepart.md 	 Part Functions	 `timezone_hour(`*`date`*`)` 	 Time zone offset hour portion 	 `timezone_hour(date '1992-02-15')` 	 `0`			
+docs\sql\functions\datepart.md 	 Part Functions	 `timezone_minute(`*`date`*`)` 	 Time zone offset minutes portion 	 `timezone_minute(date '1992-02-15')` 	 `0`			
+docs\sql\functions\interval.md 	 Interval Operators		 addition to a `DATE` 	 `DATE '1992-03-22' + INTERVAL 5 DAY` 	 1992-03-27	 `+` 		
+docs\sql\functions\interval.md 	 Interval Operators		 addition to a `TIMESTAMP` 	 `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` 	 1992-03-27 01:02:03	 `+` 		
+docs\sql\functions\interval.md 	 Interval Operators		 addition to a `TIME` 	 `TIME '01:02:03' + INTERVAL 5 HOUR` 	 06:02:03	 `+` 		
+docs\sql\functions\interval.md 	 Interval Operators		 subtraction of an `INTERVAL` 	 `INTERVAL 5 HOUR - INTERVAL 1 HOUR` 	 INTERVAL 4 HOUR	 `-` 		
+docs\sql\functions\interval.md 	 Interval Operators		 subtraction from a `DATE` 	 `DATE '1992-03-27' - INTERVAL 5 DAY` 	 1992-03-22	 `-` 		
+docs\sql\functions\interval.md 	 Interval Operators		 subtraction from a `TIMESTAMP` 	 `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` 	 1992-03-22 01:02:03	 `-` 		
+docs\sql\functions\interval.md 	 Interval Operators		 subtraction from a `TIME` 	 `TIME '06:02:03' - INTERVAL 5 HOUR` 	 01:02:03	 `-` 		
+docs\sql\functions\interval.md 	 Interval Functions	 `extract(`*`part`* `from` *`interval`*`)` 	 Get [subfield](/docs/sql/functions/datepart) from a date 	 `extract('month' FROM INTERVAL '14 months')` 	 2			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_years(`*`integer`*`)` 	 Construct a year interval 	 `to_years(5)` 	 INTERVAL 5 YEAR			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_months(`*`integer`*`)` 	 Construct a month interval 	 `to_months(5)` 	 INTERVAL 5 MONTH			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_days(`*`integer`*`)` 	 Construct a day interval 	 `to_days(5)` 	 INTERVAL 5 DAY			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_hours(`*`integer`*`)` 	 Construct a hour interval 	 `to_hours(5)` 	 INTERVAL 5 HOUR			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_minutes(`*`integer`*`)` 	 Construct a minute interval 	 `to_minutes(5)` 	 INTERVAL 5 MINUTE			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_seconds(`*`integer`*`)` 	 Construct a second interval 	 `to_seconds(5)` 	 INTERVAL 5 SECOND			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_milliseconds(`*`integer`*`)` 	 Construct a millisecond interval 	 `to_milliseconds(5)` 	 INTERVAL 5 MILLISECOND			
+docs\sql\functions\interval.md 	 Interval Functions	 `to_microseconds(`*`integer`*`)` 	 Construct a microsecond interval 	 `to_microseconds(5)` 	 INTERVAL 5 MICROSECOND			
+docs\sql\functions\nested.md 	 List Functions	 `array_extract(`*`list`*`, `*`index`*`)` 	 Alias for `list_extract`. 	 `array_extract(l, 2)` 	 `6`			
+docs\sql\functions\nested.md 	 List Functions	 `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` 	 Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted. 	 `array_slice(l, 1, NULL)` 	 `[5,6]`			
+docs\sql\functions\nested.md 	 List Functions	 `list_element(`*`list`*`, `*`index`*`)` 	 Alias for `list_extract`. 	 `list_element(l, 2)` 	 `6`			
+docs\sql\functions\nested.md 	 List Functions	 `list_extract(`*`list`*`, `*`index`*`)` 	 Extract the `index`th (0-based) value from the list. 	 `list_extract(l, 2)` 	 `6`			
+docs\sql\functions\nested.md 	 List Functions	 `list_pack(`*`any`*`, ...)` 	 Alias for `list_value`. 	 `list_pack(4, 5, 6)` 	 `[4, 5, 6]`			
+docs\sql\functions\nested.md 	 List Functions	 `list_value(`*`any`*`, ...)` 	 Create a `LIST` containing the argument values. 	 `list_value(4, 5, 6)` 	 `[4, 5, 6]`			
+docs\sql\functions\nested.md 	 List Functions	 *`list`*`[`*`begin`*`:`*`end`*`]` 	 Alias for `array_slice`. Missing arguments are interprete as `NULL`s. 	 `l[1:2]` 	 `[5, 6]`			
+docs\sql\functions\nested.md 	 List Functions	 `array_length(`*`list`*`)` 	 Return the length of the list. 	  `array_length([1, 2, 3])` 	 `3`			
+docs\sql\functions\nested.md 	 List Functions	 `len(`*`list`*`)` 	 Alias for `array_length`. 	 `len([1, 2, 3])` 	 `3`			
+docs\sql\functions\nested.md 	 List Functions	 `unnest(`*`list`*`)` 	 Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  	 `unnest([1, 2, 3])` 	 `1`, `2`, `3`			
+docs\sql\functions\nested.md 	 List Functions	 `list_concat(`*`list1`*`, `*`list2`*`)` 	 Concatenates two lists. 	 `list_concat([2, 3], [4, 5, 6])` 	 `[2, 3, 4, 5, 6]`			
+docs\sql\functions\nested.md 	 List Functions	 `list_cat(`*`list1`*`, `*`list2`*`)` 	 Alias for `list_concat`. 	 `list_cat([2, 3], [4, 5, 6])` 	 `[2, 3, 4, 5, 6`]			
+docs\sql\functions\nested.md 	 List Functions	 `array_concat(`*`list1`*`, `*`list2`*`)` 	 Alias for `list_concat`. 	 `array_concat([2, 3], [4, 5, 6])` 	 `[2, 3, 4, 5, 6`]			
+docs\sql\functions\nested.md 	 List Functions	 `array_cat(`*`list1`*`, `*`list2`*`)` 	 Alias for `list_concat`. 	 `array_cat([2, 3], [4, 5, 6])` 	 `[2, 3, 4, 5, 6`]			
+docs\sql\functions\nested.md 	 List Functions	 `list_append(`*`list`*`, `*`element`*`)` 	 Appends `element` to `list`. 	 `list_append([2, 3], 4)` 	 `[2, 3, 4`]			
+docs\sql\functions\nested.md 	 List Functions	 `list_prepend(`*`list`*`, `*`element`*`)` 	 Prepends `element` to `list`. 	 `list_prepend(3, [4, 5, 6])` 	 `[3, 4, 5, 6`]			
+docs\sql\functions\nested.md 	 Struct Functions	 *`struct`*`[`*`entry`*`]` 	 Bracket notation serves as an alias for `struct_extract`. 	 `({'i': 3, 's': 'string'})['s']` 	 `string`			
+docs\sql\functions\nested.md 	 Struct Functions	 `row(`*`any`*`, ...)` 	 Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. 	 `row(i, i % 4, i / 4)` 	 `{'i': 3, 'v2': 3, 'v3': 0}`			
+docs\sql\functions\nested.md 	 Struct Functions	 `struct_extract(`*`struct`*`, `*`'entry'`*`)` 	 Extract the named entry from the struct. 	 `struct_extract(s, 'i')` 	 `4`			
+docs\sql\functions\nested.md 	 Struct Functions	 `struct_pack(`*`name := any`*`, ...)` 	 Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. 	 `struct_pack(i := 4, s := 'string')` 	 `{'i': 3, 's': 'string'}`			
+docs\sql\functions\nested.md 	 Map Functions	 `element_at(`*`map, key`*`)` 	 Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. 	 `element_at(map([100, 5], [42, 43]),100);` 	 `[42]`			
+docs\sql\functions\nested.md 	 Map Functions	 `cardinality(`*`map`*`)` 	 Return the size of the map (or the number of entries in the map). 	 `cardinality( map([4, 2], ['a', 'b']) );` 	 `2`			
+docs\sql\functions\nested.md 	 Map Functions	 `map()` 	 Returns an empty map. 	 `map()` 	 `{}`			
+docs\sql\functions\numeric.md 	 Numeric Operators		 subtraction 	 `2 - 3` 	-1	 `-` 		
+docs\sql\functions\numeric.md 	 Numeric Operators		 multiplication 	 `2 * 3` 	6	 `*` 		
+docs\sql\functions\numeric.md 	 Numeric Operators		 division 	 `4 / 2` 	2	 `/` 		
+docs\sql\functions\numeric.md 	 Numeric Operators		 modulo (remainder) 	 `5 % 4` 	1	 `%` 		
+docs\sql\functions\numeric.md 	 Numeric Operators		 bitwise AND 	 `91 & 15` 	11	 `&` 		
+docs\sql\functions\numeric.md 	 Numeric Operators		 bitwise shift left 	 `1 << 4` 	16	 `<<` 		
+docs\sql\functions\numeric.md 	 Numeric Operators		 bitwise shift right 	 `8 >> 2` 	2	 `>>` 		
+docs\sql\functions\numeric.md 	 Numeric Functions	 `acos(x)` 	 computes the arccosine of x 	 `acos(0.5)` 	 1.0471975511965976			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `asin(x)` 	 computes the arcsine of x 	 `asin(0.5)` 	 0.5235987755982989			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `atan2(x)` 	 computes the arctangent of x 	 `atan2(0.5)` 	 0.4636476090008061			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `atan2(x, y)` 	 computes the arctangent (x, y) 	 `atan2(0.5, 0.5)` 	 0.7853981633974483			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `bit_count(x)` 	 returns the number of bits that are set 	 `bit_count(31)` 	 5			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `cbrt(x)` 	 returns the cube root of the number 	 `cbrt(8)` 	 2			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `ceil(x)` 	 rounds the number up 	 `ceil(17.4)` 	 18			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `chr(x)` 	 returns a character which is corresponding the the ASCII code value or Unicode code point 	 `chr(65)` 	 A			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `cos(x)` 	 computes the cosine of x 	 `cos(90)` 	 -0.4480736161291701			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `cot(x)` 	 computes the cotangent of x 	 `cot(0.5)` 	 1.830487721712452			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `degrees(x)` 	 converts radians to degrees 	 `degrees(pi())` 	 180			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `floor(x)` 	 rounds the number down 	 `floor(17.4)` 	 17			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `greatest(x1, x2, ...)` 	 selects the largest value 	 `greatest(3, 2, 4, 4)` 	 4			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `least(x1, x2, ...)` 	 selects the smallest value 	 `least(3, 2, 4, 4)` 	 2			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `ln(x)` 	 computes the natural logarithm of *x* 	 `ln(2)` 	 0.693			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `log(x)` 	 computes the 10-log of *x* 	 `log(100)` 	 2			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `log2(x)` 	 computes the 2-log of *x* 	 `log2(8)` 	 3			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `pi()` 	 returns the value of pi 	 `pi()` 	 3.141592653589793			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `pow(x, y)` 	 computes x to the power of y 	 `pow(2, 3)` 	 8			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `radians(x)` 	 converts degrees to radians 	 `radians(90)` 	 1.5707963267948966			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `random()` 	 returns a random number between 0 and 1 	 `random()` 	 ...			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `round(v numeric, s int)` 	 round to *s* decimal places 	 `round(42.4332, 2)` 	 42.43			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `setseed(x)` 	 sets the seed to be used for the random function 	 `setseed(0.42)` 				
+docs\sql\functions\numeric.md 	 Numeric Functions	 `sin(x)` 	 computes the sin of x 	 `sin(90)` 	 0.8939966636005579			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `sign(x)` 	 returns the sign of x as -1, 0 or 1 	 `sign(-349)` 	 -1			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `sqrt(x)` 	 returns the square root of the number 	 `sqrt(9)` 	 3			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `xor(x)` 	 bitwise XOR 	 `xor(17, 5)` 	 20			
+docs\sql\functions\numeric.md 	 Numeric Functions	 `tan(x)` 	 computes the tangent of x 	 `tan(90)` 	 -1.995200412208242			
+docs\sql\functions\patternmatching.md 	 Regular Expressions	 `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; 	 if *string* contains the regexp *pattern*, replaces the matching part with *replacement*					
+docs\sql\functions\patternmatching.md 	 Regular Expressions	 `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; 	 if *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx*					
+docs\sql\functions\time.md 	 Time Operators		 subtraction of an `INTERVAL` 	 `TIME '06:02:03' - INTERVAL 5 HOUR'` 	 01:02:03	 `-` 		
+docs\sql\functions\time.md 	 Time Functions	 `date_diff(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` 	 The number of [partition](/docs/sql/functions/datepart) boundaries between the times 	 `date_diff('hour', TIME '01:02:03', TIME '06:01:03')` 	5			
+docs\sql\functions\time.md 	 Time Functions	 `date_part(`*`part`*`, `*`time`*`)` 	 Get [subfield](/docs/sql/functions/datepart) (equivalent to *extract*) 	 `date_part('minute', TIME '14:21:13')` 	21			
+docs\sql\functions\time.md 	 Time Functions	 `date_sub(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` 	 The number of complete [partitions](/docs/sql/functions/datepart) between the times 	 `date_sub('hour', TIME '01:02:03', TIME '06:01:03')` 	4			
+docs\sql\functions\time.md 	 Time Functions	 `extract(`*`part`* `from` *`time`*`)` 	 Get subfield from a date 	 `extract('hour' FROM TIME '14:21:13')` 	14			
+docs\sql\functions\timestamp.md 	 Timestamp Operators		 subtraction of `TIMESTAMP`s 	 `TIMESTAMP '1992-03-27' - TIMESTAMP '1992-03-22'` 	 `5 days`	 `-` 		
+docs\sql\functions\timestamp.md 	 Timestamp Operators		 subtraction of an `INTERVAL` 	 `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` 	 `1992-03-22 01:02:03`	 `-` 		
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `age(`*`timestamp`*`)` 	 Subtract from current_date 	 `age(TIMESTAMP '1992-09-20')` 	 `29 years 1 month 27 days 12:39:00.844`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `century(`*`timestamp`*`)` 	 Extracts the century of a timestamp 	 `century(TIMESTAMP '1992-03-22')` 	 `20`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `current_timestamp` 	 Current date and time (start of current transaction) 	 				
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` 	 The number of [partition](/docs/sql/functions/datepart) boundaries between the timestamps 	 `date_diff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` 	 `2`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `date_part(`*`part`*`, `*`timestamp`*`)` 	 Get [subfield](/docs/sql/functions/datepart) (equivalent to *extract*) 	 `date_part('minute', TIMESTAMP '1992-09-20 20:38:40')` 	 `38`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` 	 The number of complete [partitions](/docs/sql/functions/datepart) between the timestamps 	 `date_sub('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` 	 `1`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `date_trunc(`*`part`*`, `*`timestamp`*`)` 	 Truncate to specified [precision](/docs/sql/functions/datepart) 	 `date_trunc('hour', TIMESTAMP '1992-09-20 20:38:40')` 	 `1992-09-20 20:00:00`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `dayname(`*`timestamp`*`)` 	 The (English) name of the weekday 	 `dayname(TIMESTAMP '1992-03-22')` 	 `Sunday`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `epoch_ms(ms)` 	 Converts ms since epoch to a timestamp 	 `epoch_ms(701222400000)` 	 `1992-03-22 00:00:00`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `extract(`*`field`* `from` *`timestamp`*`)` 	 Get [subfield](/docs/sql/functions/datepart) from a timestamp 	 `extract('hour' FROM TIMESTAMP '1992-09-20 20:38:48')` 	 `20`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `greatest(`*`timestamp`*`, `*`timestamp`*`)` 	 The later of two timestamps 	 `greatest(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` 	 `1992-09-20 20:38:48`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `last_day(`*`timestamp`*`)` 	 The last day of the month. 	 `last_day(TIMESTAMP '1992-03-22 01:02:03.1234')` 	 `1992-03-31`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `least(`*`timestamp`*`, `*`timestamp`*`)` 	 The earlier of two timestamps 	 `least(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` 	 `1992-03-22 01:02:03.1234`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `monthname(`*`timestamp`*`)` 	 The (English) name of the month. 	 `monthname(TIMESTAMP '1992-09-20')` 	 `September`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `now()` 	 Current date and time (start of current transaction) 	 				
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `strftime(timestamp, format)` 	 Converts timestamp to string according to the [format string](/docs/sql/functions/dateformat) 	 `strftime(timestamp '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` 	 `Wed, 1 January 1992 - 08:38:40 PM`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `strptime(text, format)` 	 Converts string to timestamp according to the [format string](/docs/sql/functions/dateformat) 	 `strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')` 	 `1992-01-01 20:38:40`			
+docs\sql\functions\timestamp.md 	 Timestamp Functions	 `to_timestamp(`*`sec`*`)` 	 Converts sec since epoch to a timestamp 	 `to_timestamp(701222400)` 	 `1992-03-22 00:00:00`			
+docs\sql\functions\timestamp.md 	 Timestamp Table Functions	 `range(`*`timestamp`*`, `*`timestamp`*`, `*`interval`*`)` 	 Generate a table of timestamps in the half open range, stepping by the interval 	 `range(TIMESTAMP '2001-04-10', TIMESTAMP '2001-04-11', INTERVAL 30 MINUTE)`				

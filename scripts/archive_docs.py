@@ -4,6 +4,12 @@ import shutil
 import datetime
 import subprocess
 
+# Usage instructions: 
+# Update _config.yml to specify the new version number
+# Add a new row to /_data/versions.csv with the new version number
+# Run this script. More options below, but as an example:
+# 	run this script in the top level docs directory like: python scripts/archive_docs.py 0.3.4
+
 if len(sys.argv) < 2:
 	print("Usage: python scripts/archive_docs.py [version] [--noconfirm] [--date=YYYY-MM-DD]")
 	print("If date is specified, this script will copy docs that existed at that specific date")
@@ -56,7 +62,7 @@ ignored_files = ['.DS_Store', 'archive', 'faq.md', 'twitter_wall.md', 'why_duckd
 version = arguments[1]
 folder = os.path.join('docs', 'archive', version)
 
-print(f"Archiving current docs for version \"{version}\" to path \"{folder}\"")
+print(f"Archiving current docs for version \"{version}\" to path \"{folder}\". Remember to update _config.yml and /_data/versions.csv also.")
 if confirm:
     result = input("Continue with archival (y/n)?\n")
     if result != 'y':
