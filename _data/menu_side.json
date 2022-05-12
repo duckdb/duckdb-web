@@ -28,7 +28,7 @@
     },
     {
       "page": "Live Demo",
-      "url": "/demo/"
+      "url": "https://shell.duckdb.org"
     },
     {
       "page": "Benchmarking",
