@@ -2,12 +2,13 @@
   "docsmenu": [
     {
       "page": "Installation",
-      "url": "docs/installation"
+      "slug": "installation/",
+      "url": "index"
     },
     {
       "page": "Guides",
       "open": true,
-      "slug": "docs/guides",
+      "slug": "guides/",
       "url": "index",
       "mainfolderitems": [
         {
@@ -131,7 +132,7 @@
     {
       "page": "Documentation",
       "open": true,
-      "slug": "docs",
+      "slug": "",
       "mainfolderitems": [
         {
           "page": "Connect",
