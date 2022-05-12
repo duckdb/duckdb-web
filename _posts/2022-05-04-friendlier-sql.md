@@ -54,7 +54,7 @@ Now changes to a query can be made in only one place instead of two! Plus this p
 Not only does this dramatically simplify many queries, it also makes the above `EXCLUDE` and `REPLACE` clauses useful in far more situations. Imagine if we wanted to adjust the above query by no longer considering the level of scum and villainy in each specific cantina:
 ```sql
 SELECT
-    * EXCLUDE (cantinas, booths),
+    * EXCLUDE (cantinas, booths, scum, villainy),
     SUM(scum + villainy) as total_scum_and_villainy
 FROM star_wars_locations
 GROUP BY ALL
