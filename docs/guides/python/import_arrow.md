@@ -17,10 +17,10 @@ con = duckdb.connect()
 
 my_arrow = pa.Table.from_pydict({'a':[42]})
 
-# create the table "my_table" from the DataFrame "my_df"
+# create the table "my_table" from the DataFrame "my_arrow"
 con.execute("CREATE TABLE my_table AS SELECT * FROM my_arrow")
 
-# insert into the table "my_table" from the DataFrame "my_df"
+# insert into the table "my_table" from the DataFrame "my_arrow"
 con.execute("INSERT INTO my_table SELECT * FROM my_arrow")
 ```
 
