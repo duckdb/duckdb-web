@@ -10,7 +10,7 @@ selected: Import From Apache Arrow
 
 ```py
 import duckdb
-import pyarrow
+import pyarrow as pa
 
 # connect to an in-memory database
 con = duckdb.connect()
