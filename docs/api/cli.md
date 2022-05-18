@@ -151,7 +151,7 @@ D SELECT 'quacking intensifies' AS incoming_ducks;
 ```
 
 The output appearance can also be adjusted with the `.separator` command. If using an export mode that relies on a separator (`csv` or `tabs` for example), the separator will be reset when the mode is changed. For example, `.mode csv` will set the separator to a comma (`,`). Using `.separator "|"` will then convert the output to be pipe separated.
-```command
+```sql
 D .mode csv
 D SELECT 1 AS col_1, 2 AS col_2
 > UNION ALL
@@ -162,7 +162,7 @@ col_1,col_2
 1,2
 10,20
 ```
-```command
+```sql
 D .separator "|"
 D SELECT 1 AS col_1, 2 AS col_2
 > UNION ALL
