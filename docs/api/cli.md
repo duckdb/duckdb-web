@@ -22,7 +22,7 @@ D
 Once the CLI has been opened, enter a SQL statement followed by a semicolon, then hit enter and it will be executed. Results will be displayed in a table in the terminal. If a semicolon is omitted, hitting enter will allow for multi-line SQL statements to be entered. 
 
 ```sql
-D select 'quack' as my_column;
+D SELECT 'quack' AS my_column;
 ```
 
 | my_column |
@@ -30,9 +30,9 @@ D select 'quack' as my_column;
 | quack     |
 
 ```sql
-D select
->     'nicely formatted quack' as my_column,
->     'excited quacking' as another_column;
+D SELECT
+>     'nicely formatted quack' AS my_column,
+>     'excited quacking' AS another_column;
 ```
 
 |       my_column        |  another_column  |
@@ -124,4 +124,52 @@ D .help sh
 ```
 
 ## Output Formats
-The `.mode` command may be used to change the appearance of the tables returned in the terminal output. 
+The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by piping the terminal output to a file, for example. Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
+* ascii
+* box
+* csv
+* column
+* html
+* insert
+* json
+* line
+* list
+* markdown
+* quote
+* table
+* tabs
+* tcl
+
+```sql
+D .mode markdown
+D SELECT 'quacking intensifies' AS incoming_ducks;
+```
+```
+|    incoming_ducks    |
+|----------------------|
+| quacking intensifies |
+```
+
+The output appearance can also be adjusted with the `.separator` command. If using an export mode that relies on a separator (`csv` or `tabs` for example), the separator will be reset when the mode is changed. For example, `.mode csv` will set the separator to a comma (`,`). Using `.separator "|"` will then convert the output to be pipe separated.
+```command
+D .mode csv
+D SELECT 1 AS col_1, 2 AS col_2
+> UNION ALL
+> SELECT 10 AS col1, 20 AS col_2;
+```
+```
+col_1,col_2
+1,2
+10,20
+```
+```command
+D .separator "|"
+D SELECT 1 AS col_1, 2 AS col_2
+> UNION ALL
+> SELECT 10 AS col1, 20 AS col_2;
+```
+```
+col_1|col_2
+1|2
+10|20
+```
