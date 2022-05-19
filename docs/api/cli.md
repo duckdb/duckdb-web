@@ -4,9 +4,9 @@ title: CLI API
 selected: CLI
 ---
 ## Installation
-The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, MacOS, and Linux. Please see the [installation page](/docs/installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section). For pre-release versions, download the executable file that is produced from [GitHub Actions](https://github.com/duckdb/duckdb/actions).
+The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, MacOS, and Linux. Please see the [installation page](/docs/installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section). For pre-release versions, download the executable file that is produced from [GitHub Actions](https://github.com/duckdb/duckdb/actions) or compile DuckDB from source.
 
-The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html).
+The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
 ## Getting Started
 Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell environment, use the command `./duckdb` instead. By default, this will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a D on the final line.
@@ -42,7 +42,7 @@ D SELECT
 The CLI supports all of DuckDB's rich SQL syntax including `SELECT`, `CREATE`, and `ALTER` statements, etc. 
 
 ## Special Commands (Dot Commands)
-In addition to SQL syntax, special commands may be entered that are specific to the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command:
+In addition to SQL syntax, special dot commands may be entered that are specific to the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command:
 
 ```command
 D .help
@@ -172,4 +172,56 @@ D SELECT 1 AS col_1, 2 AS col_2
 col_1|col_2
 1|2
 10|20
+```
+
+## Querying the Database Schema
+All DuckDB clients support [querying the database schema with SQL](/docs/sql/information_schema), but the CLI has additional dot commands that can make it easier to understand the contents of a database.
+The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](/docs/sql/functions/patternmatching#like).
+
+```sql
+D CREATE TABLE swimmers AS SELECT 'duck' as animal;
+D CREATE TABLE fliers AS SELECT 'duck' as animal;
+D CREATE TABLE walkers AS SELECT 'duck' as animal;
+D .tables
+```
+```command
+fliers    swimmers  walkers
+```
+
+For example, to filter to only tables that contain an "l", use the `LIKE` pattern `%l%`.
+```sql
+D .tables %l%
+```
+```command
+fliers   walkers
+```
+
+The `.schema` command will show all of the SQL statements used to define the schema of the database. 
+
+```command
+D .schema
+```
+```command
+CREATE TABLE fliers(animal VARCHAR);;
+CREATE TABLE swimmers(animal VARCHAR);;
+CREATE TABLE walkers(animal VARCHAR);;
+```
+
+## Opening Database Files
+In addition to connecting to a database when opening the CLI, a new database connection can be made by using the `.open` command. If no additional parameters are supplied, a new in-memory database connection is created. This database will not be persisted when the CLI connection is closed. 
+
+```command
+D .open
+```
+
+The `.open` command optionally accepts several options, but the final parameter can be used to indicate a path to a persistent database (or where one should be created). The special string `:memory:` can also be used to open a temporary in-memory database.
+
+```command
+D .open persistent.duckdb
+```
+
+One important parameter accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
+
+```command
+D .open --readonly preexisting.duckdb
 ```
