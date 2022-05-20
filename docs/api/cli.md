@@ -4,7 +4,7 @@ title: CLI API
 selected: CLI
 ---
 ## Installation
-The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, MacOS, and Linux. Please see the [installation page](/docs/installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section). For pre-release versions, download the executable file that is produced from [GitHub Actions](https://github.com/duckdb/duckdb/actions) or compile DuckDB from source.
+The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](/docs/installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section). For pre-release versions, download the executable file that is produced from GitHub Actions ([Mac](https://github.com/duckdb/duckdb/actions?query=workflow%3AOSX+is%3Asuccess+branch%3Amaster), [Linux](https://github.com/duckdb/duckdb/actions?query=workflow%3ALinuxRelease+is%3Asuccess+branch%3Amaster), or [Windows](https://github.com/duckdb/duckdb/actions?query=workflow%3AWindows+is%3Asuccess+branch%3Amaster++)) or compile DuckDB from source.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
@@ -40,6 +40,8 @@ D SELECT
 | nicely formatted quack | excited quacking |
 
 The CLI supports all of DuckDB's rich SQL syntax including `SELECT`, `CREATE`, and `ALTER` statements, etc. 
+
+To exit the CLI, press Ctrl-C. If using a persistent database, it will automatically checkpoint (save the latest edits to disk) and close. This will remove the .WAL file (the Write-Ahead-Log) and consolidate all of your data into the single file database.
 
 ## Special Commands (Dot Commands)
 In addition to SQL syntax, special dot commands may be entered that are specific to the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command:
@@ -124,7 +126,7 @@ D .help sh
 ```
 
 ## Output Formats
-The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by piping the terminal output to a file, for example. Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
+The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
 * ascii
 * box
 * csv
@@ -225,3 +227,26 @@ One important parameter accepted by `.open` is the `--readonly` flag. This disal
 ```command
 D .open --readonly preexisting.duckdb
 ```
+
+## Writing Results to a File
+
+By default, the DuckDB CLI sends results to standard output. However, this can be modified using either the `.output` or `.once` commands. The only parameter to these commands is the desired output file location. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
+
+In this example, the output format is changed to markdown, the destination is identified as a markdown file, and then DuckDB will write the output of the SQL statement to that file. Output is then reverted to standard output.
+```sql
+D .mode markdown
+D .output my_results.md
+D SELECT 'taking flight' AS output_column;
+D .output
+D SELECT 'back to the terminal' as displayed_column;
+```
+```command
+|   displayed_column   |
+|----------------------|
+| back to the terminal |
+```
+
+TODO: Document -e and -x
+
+
+Output can also be sent to a temporary .csv file and automatically displayed in the user's default spreadsheet program using the `.excel` command.  
