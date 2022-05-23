@@ -141,6 +141,7 @@ The `.mode` command may be used to change the appearance of the tables returned 
 * table
 * tabs
 * tcl
+* trash
 
 ```sql
 D .mode markdown
@@ -230,7 +231,7 @@ D .open --readonly preexisting.duckdb
 
 ## Writing Results to a File
 
-By default, the DuckDB CLI sends results to standard output. However, this can be modified using either the `.output` or `.once` commands. The only parameter to these commands is the desired output file location. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
+By default, the DuckDB CLI sends results to standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
 
 In this example, the output format is changed to markdown, the destination is identified as a markdown file, and then DuckDB will write the output of the SQL statement to that file. Output is then reverted to standard output.
 ```sql
@@ -246,7 +247,15 @@ D SELECT 'back to the terminal' as displayed_column;
 | back to the terminal |
 ```
 
-TODO: Document -e and -x
+<!-- TODO: Document .output -e and -x -->
 
+By passing special flags to the `.once` command, query results can also be sent to a temporary file and automatically opened in the user's default program. Use either the `-e` flag for a text file (opened in the default text editor), or the `-x` flag for a csv file (opened in the default spreadsheet editor). This is useful for more detailed inspection of query results, especially if there is a relatively large result set. The `.excel` command is equivalent to `.once -x`. 
 
-Output can also be sent to a temporary .csv file and automatically displayed in the user's default spreadsheet program using the `.excel` command.  
+```sql
+D .once -e
+D select 'quack' as hello;
+```
+The results then open in the default text file editor of the system, for example:
+
+<img src="/images/cli_docs_output_to_text_editor.jpg" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
+
