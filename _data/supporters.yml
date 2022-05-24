@@ -23,3 +23,7 @@ silver:
   - name: Mode
     url: https://mode.com
     logoimg: mode.svg
+
+  - name: Rill
+    url: https://www.rilldata.com
+    logoimg: rill.svg
