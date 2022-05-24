@@ -8,8 +8,10 @@ The DuckDB CLI (Command Line Interface) is a single, dependency free executable.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
+
 ## Getting Started
-Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell environment, use the command `./duckdb` instead. By default, this will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a D on the final line.
+Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell environment, use the command `./duckdb` instead. To see additional command line options to use when starting the CLI, use the command `duckdb --help`.
+By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a D on the final line.
 
 ```command
 v0.3.4 662041e2b
@@ -241,21 +243,105 @@ D SELECT 'taking flight' AS output_column;
 D .output
 D SELECT 'back to the terminal' as displayed_column;
 ```
+
+The file my_results.md will then contain:
 ```command
 |   displayed_column   |
 |----------------------|
 | back to the terminal |
 ```
 
+A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](/docs/sql/statements/copy#csv-export), but the CLI-specific commands may be used to write a CSV instead if desired.
+
+```sql
+D .mode csv
+D .once my_output_file.csv
+D SELECT 1 AS col_1, 2 AS col_2
+> UNION ALL
+> SELECT 10 AS col1, 20 AS col_2;
+```
+
+The file my_output_file.csv will then contain:
+```
+col_1,col_2
+1,2
+10,20
+```
 <!-- TODO: Document .output -e and -x -->
 
 By passing special flags to the `.once` command, query results can also be sent to a temporary file and automatically opened in the user's default program. Use either the `-e` flag for a text file (opened in the default text editor), or the `-x` flag for a csv file (opened in the default spreadsheet editor). This is useful for more detailed inspection of query results, especially if there is a relatively large result set. The `.excel` command is equivalent to `.once -x`. 
 
 ```sql
 D .once -e
-D select 'quack' as hello;
+D SELECT 'quack' AS hello;
 ```
 The results then open in the default text file editor of the system, for example:
 
 <img src="/images/cli_docs_output_to_text_editor.jpg" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
 
+## Import Data from CSV
+
+
+
+<!-- TODO: Document importing from CSV -->
+
+
+
+
+## Reading SQL From a File
+The DuckDB CLI can read both SQL commands and dot commands from an external file intead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused. 
+
+The `.read` command requires only one argument: the path to the file containing the SQL and/or commands to execute. After running the commands in the file, control will revert back to the terminal. Output from the execution of that file is governed by the same `.output` and `.once` commands that have been discussed previously. This allows the output to be displayed back to the terminal, as in the first example below, or out to another file, as in the second example. 
+
+In this example, the file `select_example.sql` is located in the same directory as duckdb.exe and contains the following SQL statement:
+```sql
+SELECT
+    *
+FROM generate_series(5);
+```
+To execute it from the CLI, the `.read` command is used.
+```command
+D .read select_example.sql
+```
+The output below is returned to the terminal by default (but can be adjusted using the `.output` or `.once` commands):
+| generate_series |
+|-----------------|
+| 0               |
+| 1               |
+| 2               |
+| 3               |
+| 4               |
+| 5               |
+
+
+Multiple commands, including both SQL and dot commands, can also be run in a single `.read` command. In this example, the file `write_markdown_to_file.sql` is located in the same directory as duckdb.exe and contains the following commands:
+```sql
+.mode markdown
+.output series.md
+SELECT
+    *
+FROM generate_series(5);
+```
+
+To execute it from the CLI, the `.read` command is used as before.
+```command
+D .read write_markdown_to_file.sql
+```
+
+In this case, no output is returned to the terminal. Instead, the file `series.md` is created (or replaced if it already existed) with the markdown-formatted results shown here:
+```
+| generate_series |
+|-----------------|
+| 0               |
+| 1               |
+| 2               |
+| 3               |
+| 4               |
+| 5               |
+```
+
+<!-- The edit function does not appear to work -->
+
+
+
+<!-- TODO: Document query parameters -->
