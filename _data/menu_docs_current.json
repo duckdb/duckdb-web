@@ -348,6 +348,10 @@
               "slug": "query_syntax",
               "subsubfolderitems": [
                 {
+                  "page": "SELECT",
+                  "url": "select"
+                },
+                {
                   "page": "FROM",
                   "url": "from"
                 },

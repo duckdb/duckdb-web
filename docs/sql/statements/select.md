@@ -45,7 +45,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 ## SELECT clause
 <div id="rrdiagram3"></div>
 
-The `SELECT` clause specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions.
+[The `SELECT` clause](/docs/sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions.
 
 ## FROM clause
 <div id="rrdiagram4"></div>
@@ -107,7 +107,6 @@ D SELECT rowid, id, content FROM t;
 In the current storage, these identifiers are contiguous unsigned integers (0, 1, ...) if no rows were deleted. Deletions introduce gaps in the rowids which may be reclaimed later. Therefore, it is strongly recommended *not to use rowids as identifiers*.
 
 > The `rowid` values are stable within a transaction.
-> The `rowid` type is 
 
 > If there is a user-defined column named `rowid`, it shadows the `rowid` pseudocolumn.
 
