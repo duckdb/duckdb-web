@@ -225,7 +225,7 @@ The `.open` command optionally accepts several options, but the final parameter 
 D .open persistent.duckdb
 ```
 
-One important parameter accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
+One important option accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
 
 ```command
 D .open --readonly preexisting.duckdb
@@ -233,9 +233,9 @@ D .open --readonly preexisting.duckdb
 
 ## Writing Results to a File
 
-By default, the DuckDB CLI sends results to standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
+By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
 
-In this example, the output format is changed to markdown, the destination is identified as a markdown file, and then DuckDB will write the output of the SQL statement to that file. Output is then reverted to standard output.
+In this example, the output format is changed to markdown, the destination is identified as a markdown file, and then DuckDB will write the output of the SQL statement to that file. Output is then reverted to standard output using `.output` with no parameter.
 ```sql
 D .mode markdown
 D .output my_results.md
@@ -246,10 +246,16 @@ D SELECT 'back to the terminal' as displayed_column;
 
 The file my_results.md will then contain:
 ```command
+| output_column |
+|---------------|
+| taking flight |
+```
+
+The terminal will then display:
+
 |   displayed_column   |
 |----------------------|
 | back to the terminal |
-```
 
 A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](/docs/sql/statements/copy#csv-export), but the CLI-specific commands may be used to write a CSV instead if desired.
 
@@ -269,7 +275,7 @@ col_1,col_2
 ```
 <!-- TODO: Document .output -e and -x -->
 
-By passing special flags to the `.once` command, query results can also be sent to a temporary file and automatically opened in the user's default program. Use either the `-e` flag for a text file (opened in the default text editor), or the `-x` flag for a csv file (opened in the default spreadsheet editor). This is useful for more detailed inspection of query results, especially if there is a relatively large result set. The `.excel` command is equivalent to `.once -x`. 
+By passing special options (flags) to the `.once` command, query results can also be sent to a temporary file and automatically opened in the user's default program. Use either the `-e` flag for a text file (opened in the default text editor), or the `-x` flag for a csv file (opened in the default spreadsheet editor). This is useful for more detailed inspection of query results, especially if there is a relatively large result set. The `.excel` command is equivalent to `.once -x`. 
 
 ```sql
 D .once -e
@@ -280,13 +286,28 @@ The results then open in the default text file editor of the system, for example
 <img src="/images/cli_docs_output_to_text_editor.jpg" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
 
 ## Import Data from CSV
+DuckDB supports [SQL syntax to directly query or import CSV files](/docs/data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the csv file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv_auto` examples in the import docs](/docs/data/csv).
 
+For demostration purposes, an example CSV file is generated by changing to CSV mode and setting an output file location.
+```sql
+D .mode csv
+D .output import_example.csv
+D SELECT 1 AS col_1, 2 AS col_2 UNION ALL SELECT 10 AS col1, 20 AS col_2;
+```
+<!-- TODO: If automatic table creation is added, document it! -->
 
+Next, a table is created with the desired schema and the CSV is imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
+```sql
+D .mode csv
+D .output
+D create table test_table (col_1 int, col_2 int);
+D .import import_example.csv test_table --skip 1
+```
 
-<!-- TODO: Document importing from CSV -->
-
-
-
+Note that the `.import` command utilizes the current `.mode` and `.separator` settings when identifying the structure of the data to import. The `--csv` option can be used to override that behavior. 
+```sql
+D .import import_example.csv test_table --skip 1 --csv
+```
 
 ## Reading SQL From a File
 The DuckDB CLI can read both SQL commands and dot commands from an external file intead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused. 
@@ -303,7 +324,8 @@ To execute it from the CLI, the `.read` command is used.
 ```command
 D .read select_example.sql
 ```
-The output below is returned to the terminal by default (but can be adjusted using the `.output` or `.once` commands):
+The output below is returned to the terminal by default (but can be adjusted using the `.output` or `.once` commands):  
+
 | generate_series |
 |-----------------|
 | 0               |
@@ -314,7 +336,7 @@ The output below is returned to the terminal by default (but can be adjusted usi
 | 5               |
 
 
-Multiple commands, including both SQL and dot commands, can also be run in a single `.read` command. In this example, the file `write_markdown_to_file.sql` is located in the same directory as duckdb.exe and contains the following commands:
+Multiple commands, including both SQL and dot commands, can also be run in a single `.read` command. In this example, the file `write_markdown_to_file.sql` is located in the same directory as duckdb.exe and contains the following commands:  
 ```sql
 .mode markdown
 .output series.md
@@ -342,6 +364,12 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 <!-- The edit function does not appear to work -->
 
+## Loading Extensions
+The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](/docs/extensions/overview) for details.
 
+```command
+D install 'fts';
+D load 'fts';
+```
 
-<!-- TODO: Document query parameters -->
+<!-- SQL parameters do not appear to work -->
