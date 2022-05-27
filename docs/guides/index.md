@@ -44,6 +44,9 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to create a DuckDB table from Apache Arrow](/docs/guides/python/import_arrow)
 * [How to export data to Apache Arrow](/docs/guides/python/export_arrow)
 
+### Relational API
+* [How to query Pandas DataFrames with the Relational API](/docs/guides/python/relational_api_pandas)
+
 ### Python Library Integrations
 * [How to use Ibis to query DuckDB with or without SQL](/docs/guides/python/ibis)
 

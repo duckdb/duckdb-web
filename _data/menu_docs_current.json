@@ -112,6 +112,10 @@
               "url": "export_arrow"
             },
             {
+              "page": "Relational API on Pandas",
+              "url": "relational_api_pandas"
+            },
+            {
               "page": "DuckDB with Ibis",
               "url": "ibis"
             }
@@ -402,6 +406,10 @@
                 {
                   "page": "VALUES",
                   "url": "values"
+                },
+                {
+                  "page": "FILTER",
+                  "url": "filter"
                 }
               ]
             },
