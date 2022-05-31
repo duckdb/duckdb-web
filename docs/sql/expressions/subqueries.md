@@ -56,7 +56,7 @@ SELECT EXISTS(SELECT * FROM grades WHERE course='History');
 ## In Operator
 <div id="rrdiagram3"></div>
 
-The `IN` operator checks containment of the left expression inside the result defined by the subquery or the set of expressions on the right side. The `IN` operator returns true if the expression is present in the RHS, false if the expression is not in the RHS and the RHS has no `NULL` values, or `NULL` if the expression is not in the RHS and the RHS has `NULL` values.
+The `IN` operator checks containment of the left expression inside the result defined by the subquery or the set of expressions on the right hand side (RHS). The `IN` operator returns true if the expression is present in the RHS, false if the expression is not in the RHS and the RHS has no `NULL` values, or `NULL` if the expression is not in the RHS and the RHS has `NULL` values.
 
 We can use the `IN` operator in a similar manner as we used the `EXISTS` operator:
 
