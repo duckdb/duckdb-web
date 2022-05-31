@@ -17,25 +17,6 @@ function GenerateExists(options = {}) {
 	])
 }
 
-function GenerateIn(options = {}) {
-	return Diagram([
-		Optional(Keyword("NOT"), "skip"),
-		Keyword("IN"),
-		Choice(0, [
-			Sequence([
-				Keyword("("),
-				Expression("select-node"),
-				Keyword(")")
-			]),
-			Sequence([
-				Keyword("("),
-				OneOrMore(Expression(), ","),
-				Keyword(")")
-			])
-		])
-	])
-}
-
 function Initialize(options = {}) {
 	document.getElementById("rrdiagram1").classList.add("limit-width");
 	document.getElementById("rrdiagram1").innerHTML = GenerateScalarSubquery(options).toString();

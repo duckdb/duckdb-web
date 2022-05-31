@@ -1981,3 +1981,16 @@ function GenerateQualifyClause(options = {}) {
 		Expression("window_function_expr")
 	]
 }
+
+function GenerateIn(options = {}) {
+	return Diagram([
+		Optional(Keyword("NOT"), "skip"),
+		Keyword("IN"),
+		Keyword("("),
+		Choice(0, [
+			Expression("select-node"),
+			OneOrMore(Expression(), ","),
+		]),
+		Keyword(")")
+	])
+}
