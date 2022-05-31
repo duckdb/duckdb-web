@@ -4,13 +4,18 @@ title: CLI API
 selected: CLI
 ---
 ## Installation
-The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](/docs/installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section). For pre-release versions, download the executable file that is produced from GitHub Actions ([Mac](https://github.com/duckdb/duckdb/actions?query=workflow%3AOSX+is%3Asuccess+branch%3Amaster), [Linux](https://github.com/duckdb/duckdb/actions?query=workflow%3ALinuxRelease+is%3Asuccess+branch%3Amaster), or [Windows](https://github.com/duckdb/duckdb/actions?query=workflow%3AWindows+is%3Asuccess+branch%3Amaster++)) or compile DuckDB from source.
+The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](/docs/installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section). 
+
+For pre-release versions, you may compile from source, or download the executable file that is produced from GitHub Actions:
+* [Linux](https://github.com/duckdb/duckdb/actions?query=workflow%3ALinuxRelease+is%3Asuccess+branch%3Amaster)
+* [Mac](https://github.com/duckdb/duckdb/actions?query=workflow%3AOSX+is%3Asuccess+branch%3Amaster)
+* [Windows](https://github.com/duckdb/duckdb/actions?query=workflow%3AWindows+is%3Asuccess+branch%3Amaster++)
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
 
 ## Getting Started
-Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell environment, use the command `./duckdb` instead. To see additional command line options to use when starting the CLI, use the command `duckdb --help`.
+Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead. To see additional command line options to use when starting the CLI, use the command `duckdb --help`.
 By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a D on the final line.
 
 ```command
@@ -43,15 +48,13 @@ D SELECT
 
 The CLI supports all of DuckDB's rich SQL syntax including `SELECT`, `CREATE`, and `ALTER` statements, etc. 
 
-To exit the CLI, press Ctrl-C. If using a persistent database, it will automatically checkpoint (save the latest edits to disk) and close. This will remove the .WAL file (the Write-Ahead-Log) and consolidate all of your data into the single file database.
+To exit the CLI, press Ctrl-D if your platform supports it. Otherwise press Ctrl-C. If using a persistent database, it will automatically checkpoint (save the latest edits to disk) and close. This will remove the .WAL file (the Write-Ahead-Log) and consolidate all of your data into the single file database.
 
 ## Special Commands (Dot Commands)
 In addition to SQL syntax, special dot commands may be entered that are specific to the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command:
 
 ```command
 D .help
-```
-```command
 .auth ON|OFF             Show authorizer callbacks
 .backup ?DB? FILE        Backup DB (default "main") to FILE
 .bail on|off             Stop after hitting an error.  Default OFF
@@ -288,7 +291,7 @@ The results then open in the default text file editor of the system, for example
 ## Import Data from CSV
 DuckDB supports [SQL syntax to directly query or import CSV files](/docs/data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the csv file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv_auto` examples in the import docs](/docs/data/csv).
 
-For demostration purposes, an example CSV file is generated by changing to CSV mode and setting an output file location.
+In this example, a CSV file is generated by changing to CSV mode and setting an output file location:  
 ```sql
 D .mode csv
 D .output import_example.csv
@@ -296,7 +299,7 @@ D SELECT 1 AS col_1, 2 AS col_2 UNION ALL SELECT 10 AS col1, 20 AS col_2;
 ```
 <!-- TODO: If automatic table creation is added, document it! -->
 
-Next, a table is created with the desired schema and the CSV is imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
+Now that the CSV has been written, a table can be created with the desired schema and the CSV can be imported. The output is reset to the terminal to avoid continuing to edit the output file specified above. The `--skip N` option is used to ignore the first row of data since it is a header row and the table has already been created with the correct column names.
 ```sql
 D .mode csv
 D .output
