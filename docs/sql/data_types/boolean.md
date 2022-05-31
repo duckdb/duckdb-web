@@ -32,5 +32,24 @@ SELECT * FROM integers WHERE i > 10;
 -- The result is (15)
 ```
 
+## Conjunctions
+The `AND`/`OR` conjunctions can be used to combine boolean values.
+
+Below is a truth table for the `AND` conjunction (i.e. `x AND y`).
+
+|  X  | X AND TRUE  | X AND FALSE | X AND NULL  |
+|-------|-------|-------|-------|
+| TRUE  | TRUE  | FALSE | NULL  |
+| FALSE | FALSE | FALSE | FALSE |
+| NULL  | NULL  | FALSE | NULL  |
+
+Below is a truth table for the `OR` conjunction (i.e. `x OR y`).
+
+|  X   | X OR TRUE | X OR FALSE | X OR NULL |
+|-------|------|-------|------|
+| TRUE  | TRUE | TRUE  | TRUE |
+| FALSE | TRUE | FALSE | NULL |
+| NULL  | TRUE | NULL  | NULL |
+
 ## Expressions
 See [Logical Operators](../expressions/logical_operators) and [Comparison Operators](../expressions/comparison_operators).

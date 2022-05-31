@@ -422,6 +422,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "NULL Values",
+                  "url": "nulls"
+                },
+                {
                   "page": "Boolean",
                   "url": "boolean"
                 },
@@ -490,6 +494,10 @@
               {
                 "page": "Case",
                 "url": "case"
+              },
+              {
+                "page": "In",
+                "url": "in"
               },
               {
                 "page": "Collations",
