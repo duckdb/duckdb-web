@@ -6,7 +6,7 @@ expanded: Data Types
 blurb: The NULL value represents a missing value.
 ---
 
-`NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as "we don't know the value of this field".
+`NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as "the value of this field is unknown".
 
 ```sql
 -- insert a null value into a table
@@ -55,7 +55,9 @@ SELECT COALESCE(NULL, NULL);
 
 ## NULL and Aggregate Functions
 
-`NULL` values are ignored in most aggregate functions.
+`NULL` values are ignored in most aggregate functions. 
+
+Aggregate functions that do not ignore `NULL` values include: `FIRST`, `LAST`, `LIST`, and `ARRAY_AGG`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](/docs/sql/query_syntax/filter) can be used.
 
 ```sql
 CREATE TABLE integers(i INTEGER);
