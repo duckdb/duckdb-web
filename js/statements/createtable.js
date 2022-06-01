@@ -24,6 +24,7 @@ function GenerateTableConstraints(options) {
 			Keyword("KEY"),
 			Keyword("("),
 			OneOrMore(Expression("column-name"), ","),
+			Keyword(")"),
 			Keyword("REFERENCES"),
 			Expression("foreign-table"),
 			Keyword("("),
