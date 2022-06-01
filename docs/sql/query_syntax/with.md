@@ -39,7 +39,7 @@ SELECT * FROM cte2;
 
 #### Tree traversal
 
-`WITH RECURSIVE` can be used to traverse trees. For example, take a hiearchy of tags:
+`WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
 ![](with-recursive-tree-example.png)
 
