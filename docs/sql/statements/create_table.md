@@ -22,6 +22,7 @@ CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
 -- create a table from a CSV file using AUTO-DETECT (i.e., Automatically detecting column names and types)
 CREATE TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
 ```
+### Temporary Tables
 
 Temporary tables can be created using a `CREATE TEMP TABLE` statement (see diagram below). 
 Temporary tables are session scoped (similar to Postgres for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped. 
@@ -35,12 +36,16 @@ CREATE TEMP TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
 SET temp_directory='/path/to/directory/';
 ```
 
+### Create or Replace
+
 The `CREATE OR REPLACE` syntax allows a new table to be created or for an existing table to be overwritten by the new table. This is shorthand for dropping the existing table and then creating the new one.
 
 ```sql
 -- create a table with two integer columns (i and j) even if t1 already exists
 CREATE OR REPLACE TABLE t1(i INTEGER, j INTEGER);
 ```
+
+### If Not Exists
 
 The `IF NOT EXISTS` syntax will only proceed with the creation of the table if it does not already exist. If the table already exists, no action will be taken and the existing table will remain in the database. 
 
@@ -49,16 +54,27 @@ The `IF NOT EXISTS` syntax will only proceed with the creation of the table if i
 CREATE TABLE IF NOT EXISTS t1(i INTEGER, j INTEGER);
 ```
 
-The `[type] [GENERATED ALWAYS] AS ( expr ) [VIRTUAL|STORED]` syntax will create a generated column, these columns can not be inserted into directly. Instead their data is generated from their expression, which can reference other (regular or generated) columns of the table.
+### Generated Columns
 
-Because an expression has a return type, it is also possible to leave out the type when declaring a generated column, its type will then be derived from the expression.
+The `[type] [GENERATED ALWAYS] AS ( expr ) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
+
+It is also possible to leave out the type when declaring a generated column. Since an expression has a return type, its type will be automatically derived from the expression.
   
-Generated columns come in two varieties; `VIRTUAL` and `STORED`.  
+Generated columns come in two varieties: `VIRTUAL` and `STORED`.  
 The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).  
 
 The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).  
 
 Currently only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
+
+```sql
+-- The simplest syntax for a generated column. 
+-- The type is derived from the expression, and it is assume to be VIRTUAL
+CREATE TABLE t1(x FLOAT, two_x GENERATED ALWAYS AS (2 * x))
+
+-- Fully specifying the same generated column for completeness
+CREATE TABLE t1(x FLOAT, two_x FLOAT GENERATED ALWAYS AS (2 * x) VIRTUAL)
+```
 
 ### Syntax
 <div id="rrdiagram"></div>
