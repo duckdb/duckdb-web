@@ -49,5 +49,16 @@ The `IF NOT EXISTS` syntax will only proceed with the creation of the table if i
 CREATE TABLE IF NOT EXISTS t1(i INTEGER, j INTEGER);
 ```
 
+The `[type] [GENERATED ALWAYS] AS ( expr ) [VIRTUAL|STORED]` syntax will create a generated column, these columns can not be inserted into directly. Instead their data is generated from their expression, which can reference other (regular or generated) columns of the table.
+
+Because an expression has a return type, it is also possible to leave out the type when declaring a generated column, its type will then be derived from the expression.
+  
+Generated columns come in two varieties; `VIRTUAL` and `STORED`.  
+The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).  
+
+The data of stored generated columns is stored on disk and is computed every time the data of their dependencies change (through an insert/update/drop statement).  
+
+Currently only the `VIRTUAL` kind is supported, and it is also the default option if the last field is left blank.
+
 ### Syntax
 <div id="rrdiagram"></div>
