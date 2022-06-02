@@ -34,6 +34,23 @@ function GenerateTableConstraints(options) {
 	]), ",", "skip")]
 }
 
+function GenerateGeneratedColumnDefinition(options) {
+	return [
+		Sequence([
+			Sequence([
+				GenerateOptionalType(),
+				GenerateGeneratedColumnSyntax(),
+			]),
+			Sequence([
+				Keyword("("),
+				Expression("expr"),
+				Keyword(")"),
+				GenerateOptionalGeneratedType(),
+			])
+		])
+	];
+}
+
 function GenerateOptionalType(options) {
 	return Optional(Sequence([
 		Expression("type-name"),
@@ -78,18 +95,7 @@ function GenerateCreateTable(options = {}) {
 									Expression("type-name"),
 									Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
 								]),
-								Sequence([
-									Sequence([
-										GenerateOptionalType(),
-										GenerateGeneratedColumnSyntax(),
-									]),
-									Sequence([
-										Keyword("("),
-										Expression("expr"),
-										Keyword(")"),
-										GenerateOptionalGeneratedType(),
-									])
-								]),
+								Expandable("generated-column", options, "generated-column", GenerateGeneratedColumnDefinition),
 							])
 						]), ","),
 						Expandable("table-constraints", options, "table-constraints", GenerateTableConstraints),
