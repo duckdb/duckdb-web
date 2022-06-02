@@ -34,6 +34,30 @@ function GenerateTableConstraints(options) {
 	]), ",", "skip")]
 }
 
+function GenerateOptionalType(options) {
+	return Optional(Sequence([
+		Expression("type-name"),
+	]), "skip");
+}
+
+function GenerateGeneratedColumnSyntax(options) {
+	return Sequence([
+		Optional(Sequence([
+			Keyword("GENERATED"),
+			Keyword("ALWAYS"),
+		]), "skip"),
+		Keyword("AS")
+	]);
+}
+
+function GenerateOptionalGeneratedType(options) {
+	return OptionalSequence(
+		Choice(0, [
+			Keyword("VIRTUAL"),
+			Keyword("STORED")
+		]), "skip");
+}
+
 function GenerateCreateTable(options = {}) {
 	return Diagram([
 		AutomaticStack([
@@ -47,16 +71,30 @@ function GenerateCreateTable(options = {}) {
 				GenerateIfNotExists(),
 				GenerateQualifiedTableName()
 			]),
-			Choice(0, [
+			Choice(1, [
 				AutomaticStack([
-					Keyword("("),
-					OneOrMore(Sequence([
-						Expression("column-name"),
-						Expression("type-name"),
-						Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
-					]), ","),
-					Expandable("table-constraints", options, "table-constraints", GenerateTableConstraints),
-					Keyword(")")
+					Sequence([
+						Keyword("("),
+						OneOrMore(Sequence([
+							Expression("column-name"),
+							Choice(0, [
+								Sequence([
+									Expression("type-name"),
+									Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
+								]),
+								Sequence([
+									GenerateOptionalType(),
+									GenerateGeneratedColumnSyntax(),
+									Keyword("("),
+									Expression("expr"),
+									Keyword(")"),
+									GenerateOptionalGeneratedType(),
+								]),
+							])
+						]), ","),
+						Expandable("table-constraints", options, "table-constraints", GenerateTableConstraints),
+						Keyword(")")
+					])
 				]),
 				Sequence([
 					Keyword("AS"),
