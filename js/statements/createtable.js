@@ -51,11 +51,7 @@ function GenerateGeneratedColumnSyntax(options) {
 }
 
 function GenerateOptionalGeneratedType(options) {
-	return OptionalSequence(
-		Choice(0, [
-			Keyword("VIRTUAL"),
-			Keyword("STORED")
-		]), "skip");
+	return Optional(Choice(0, [Keyword("VIRTUAL"), Keyword("STORED")]), "skip");
 }
 
 function GenerateCreateTable(options = {}) {
@@ -83,12 +79,16 @@ function GenerateCreateTable(options = {}) {
 									Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
 								]),
 								Sequence([
-									GenerateOptionalType(),
-									GenerateGeneratedColumnSyntax(),
-									Keyword("("),
-									Expression("expr"),
-									Keyword(")"),
-									GenerateOptionalGeneratedType(),
+									Sequence([
+										GenerateOptionalType(),
+										GenerateGeneratedColumnSyntax(),
+									]),
+									Sequence([
+										Keyword("("),
+										Expression("expr"),
+										Keyword(")"),
+										GenerateOptionalGeneratedType(),
+									])
 								]),
 							])
 						]), ","),
