@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS t1(i INTEGER, j INTEGER);
 
 The `[type] [GENERATED ALWAYS] AS ( expr ) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
 
-It is also possible to leave out the type when declaring a generated column. Since an expression has a return type, its type will be automatically derived from the expression.
+When possible, DuckDB will infer the type of the generated column based on the expression's return type. This often allows the type to be left out when declaring a generated column. 
   
 Generated columns come in two varieties: `VIRTUAL` and `STORED`.  
 The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).  
@@ -70,7 +70,7 @@ Currently only the `VIRTUAL` kind is supported, and it is also the default optio
 ```sql
 -- The simplest syntax for a generated column. 
 -- The type is derived from the expression, and it is assume to be VIRTUAL
-CREATE TABLE t1(x FLOAT, two_x GENERATED ALWAYS AS (2 * x))
+CREATE TABLE t1(x FLOAT, two_x AS (2 * x))
 
 -- Fully specifying the same generated column for completeness
 CREATE TABLE t1(x FLOAT, two_x FLOAT GENERATED ALWAYS AS (2 * x) VIRTUAL)
