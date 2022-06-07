@@ -34,6 +34,8 @@ The table below shows the available scalar functions for `TIMESTAMP` types.
 | `epoch_ms(ms)` | Converts ms since epoch to a timestamp | `epoch_ms(701222400000)` | `1992-03-22 00:00:00` |
 | `extract(`*`field`* `from` *`timestamp`*`)` | Get [subfield](/docs/sql/functions/datepart) from a timestamp | `extract('hour' FROM TIMESTAMP '1992-09-20 20:38:48')` | `20` |
 | `greatest(`*`timestamp`*`, `*`timestamp`*`)` | The later of two timestamps | `greatest(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48` |
+| `isfinite(`*`timestamp`*`)` | Returns true if the timestamp is finite, false otherwise | `isfinite(TIMESTAMP '1992-03-07')` | true |
+| `isinf(`*`timestamp`*`)` | Returns true if the timestamp is infinite, false otherwise | `isinf(TIMESTAMP '-infinity')` | true |
 | `last_day(`*`timestamp`*`)` | The last day of the month. | `last_day(TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-31` |
 | `least(`*`timestamp`*`, `*`timestamp`*`)` | The earlier of two timestamps | `least(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-22 01:02:03.1234` |
 | `make_timestamp(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)` | The timestamp for the given parts | `make_timestamp(1992, 9, 20, 13, 34, 27.123456)` | `1992-09-20 13:34:27.123456` |
@@ -45,9 +47,9 @@ The table below shows the available scalar functions for `TIMESTAMP` types.
 
 There are also dedicated extraction functions to get the [subfields](/docs/sql/functions/datepart).
 
-Functions applied to infinite dates will either return the same infinite dates 
+Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
-In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`. 
+In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`.
 
 ## Timestamp Table Functions
 The table below shows the available table functions for `TIMESTAMP` types.
