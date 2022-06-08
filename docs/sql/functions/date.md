@@ -34,6 +34,8 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 | `date_trunc(`*`part`*`, `*`date`*`)` | Truncate to specified [precision](/docs/sql/functions/datepart) | `date_trunc('month', DATE '1992-03-07')` | `1992-03-01` |
 | `datetrunc(`*`part`*`, `*`date`*`)` | Alias of date_trunc. Truncate to specified [precision](/docs/sql/functions/datepart) | `datetrunc('month', DATE '1992-03-07')` | `1992-03-01` |
 | `dayname(`*`date`*`)` | The (English) name of the weekday | `dayname(DATE '1992-09-20')` | `Sunday` |
+| `isfinite(`*`date`*`)` | Returns true if the date is finite, false otherwise | `isfinite(DATE '1992-03-07')` | true |
+| `isinf(`*`date`*`)` | Returns true if the date is infinite, false otherwise | `isinf(DATE '-infinity')` | true |
 | `extract(`*`part`* `from `*`date`*`)` | Get [subfield](/docs/sql/functions/datepart) from a date | `extract('year' FROM DATE '1992-09-20')` | `1992` |
 | `greatest(`*`date`*`, `*`date`*`)` | The later of two dates | `greatest(DATE '1992-09-20', DATE '1992-03-07')` | `1992-09-20` |
 | `last_day(`*`date`*`)` | The last day of the corresponding month in the date | `last_day(DATE '1992-09-20')` | `1992-09-30` |
@@ -44,6 +46,6 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 
 There are also dedicated extraction functions to get the [subfields](/docs/sql/functions/datepart).
 
-Functions applied to infinite dates will either return the same infinite dates 
+Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
-In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`. 
+In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`.

@@ -22,7 +22,8 @@ The table below shows the available mathematical operators for numeric types.
 | `>>` | bitwise shift right | `8 >> 2` | 2 |
 | `!` | factorial of x. Computes the product of the current integer and all integers below it  | `4!` | 24 |
 
-The modulo, bitwise, and factorial operators work only on integral data types, whereas the others are available for all numeric data types.
+The modulo, bitwise, and factorial operators work only on integral data types,
+whereas the others are available for all numeric data types.
 
 ## Numeric Functions
 The table below shows the available mathematical functions.
@@ -47,6 +48,9 @@ The table below shows the available mathematical functions.
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
 | `gamma(x)` | interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
+| `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | true |
+| `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf(Infinity)` | true |
+| `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan(NaN)` | true |
 | `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
 | `lgamma(x)` | computes the log of the `gamma` function. | `lgamma(2)` | 0 |
 | `ln(x)` | computes the natural logarithm of *x* | `ln(2)` | 0.693 |
