@@ -13,9 +13,29 @@ function GenerateInsert(options = {}) {
 					Keyword("DEFAULT"),
 					Keyword("VALUES")
 				])
-			])
+			]),
+			Optional( 
+				Expandable("returning-clause", options, "returning-clause", GenerateReturning),
+				"skip"
+			)
 		])
 	])
+}
+
+function GenerateReturning(options) {
+	return [
+		Sequence([
+			Keyword("RETURNING"),
+			Optional(Keyword("*"), "skip"),
+			Choice(0, [
+				new Skip(),
+				OneOrMore(
+					Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),				
+					","
+				),
+			]),
+		])
+	]
 }
 
 function Initialize(options = {}) {
