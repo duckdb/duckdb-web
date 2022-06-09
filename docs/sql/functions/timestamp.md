@@ -15,7 +15,7 @@ The table below shows the available mathematical operators for `TIMESTAMP` types
 | `-` | subtraction of `TIMESTAMP`s | `TIMESTAMP '1992-03-27' - TIMESTAMP '1992-03-22'` | `5 days` |
 | `-` | subtraction of an `INTERVAL` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | `1992-03-22 01:02:03` |
 
-Adding to or subtracting from [infinite values](/docs/sql/types/timestamp#special-values) produces the same infinite value.
+Adding to or subtracting from [infinite values](/docs/sql/data_types/timestamp#special-values) produces the same infinite value.
 
 ## Timestamp Functions
 The table below shows the available scalar functions for `TIMESTAMP` types.

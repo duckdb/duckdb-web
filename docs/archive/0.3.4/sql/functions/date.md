@@ -16,7 +16,7 @@ The table below shows the available mathematical operators for `DATE` types.
 | `-` | subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | 5 |
 | `-` | subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY'` | 1992-03-22 |
 
-Adding to or subtracting from [infinite values](/docs/sql/types/date#special-values) produces the same infinite value.
+Adding to or subtracting from [infinite values](/docs/sql/data_types/date#special-values) produces the same infinite value.
 
 ## Date Functions
 The table below shows the available functions for `DATE` types.
@@ -44,6 +44,6 @@ Dates can also be manipulated with the [timestamp functions](/docs/sql/functions
 
 There are also dedicated extraction functions to get the [subfields](/docs/sql/functions/datepart).
 
-Functions applied to infinite dates will either return the same infinite dates 
+Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
-In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`. 
+In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`.

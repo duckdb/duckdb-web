@@ -16,7 +16,7 @@ The table below shows the available mathematical operators for `DATE` types.
 | `-` | subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | 5 |
 | `-` | subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY'` | 1992-03-22 |
 
-Adding to or subtracting from [infinite values](/docs/sql/types/date#special-values) produces the same infinite value.
+Adding to or subtracting from [infinite values](/docs/sql/data_types/date#special-values) produces the same infinite value.
 
 ## Date Functions
 The table below shows the available functions for `DATE` types.
