@@ -6,7 +6,7 @@ expanded: SQL
 ---
 Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
-In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See [here](/docs/installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
+In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See [here](../installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
 
 ```
 DuckDB 5fb6fe57ab
@@ -101,7 +101,7 @@ You could also have used `COPY` to load large amounts of data from CSV files. Th
 COPY weather FROM '/home/user/weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](/docs/data/overview) for more information.
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](../data/overview) for more information.
 
 # Querying a Table
 To retrieve data from a table, the table is queried. A SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table weather, type:
@@ -344,7 +344,7 @@ SELECT city, max(temp_lo)
     HAVING max(temp_lo) < 40;
 ```
 
-More information about the `LIKE` operator can be found [here](/docs/sql/functions/patternmatching).
+More information about the `LIKE` operator can be found [here](../sql/functions/patternmatching).
 
 It is important to understand the interaction between aggregates and SQL's `WHERE` and `HAVING` clauses. The fundamental difference between `WHERE` and `HAVING` is this: `WHERE` selects input rows before groups and aggregates are computed (thus, it controls which rows go into the aggregate computation), whereas `HAVING` selects group rows after groups and aggregates are computed. Thus, the `WHERE` clause must not contain aggregate functions; it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates. On the other hand, the `HAVING` clause always contains aggregate functions.
 

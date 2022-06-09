@@ -61,4 +61,4 @@ In addition to ordinary numeric values, the floating-point types have several sp
 These represent the IEEE 754 special values "infinity", "negative infinity", and "not-a-number", respectively. (On a machine whose floating-point arithmetic does not follow IEEE 754, these values will probably not work as expected.) When writing these values as constants in an SQL command, you must put quotes around them, for example: `UPDATE table SET x = '-Infinity'`. On input, these strings are recognized in a case-insensitive manner.
 
 ## Functions
-See [Numeric Functions and Operators](/docs/sql/functions/numeric)
+See [Numeric Functions and Operators](../../sql/functions/numeric)

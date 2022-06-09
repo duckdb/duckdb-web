@@ -84,7 +84,7 @@ WHERE source = 'Oasis';
 #### Graph traversal
 
 The `WITH RECURSIVE` clause can be used to express graph traversal on arbitrary graphs. However, if the graph has cycles, the query must perform cycle detection to prevent infinite loops.
-One way to achieve this is to store the path of a traversal in a [list](/docs/sql/data_types/list) and, before extending the path with a new edge, check whether its endpoint has been visited before (see the example later).
+One way to achieve this is to store the path of a traversal in a [list](../../sql/data_types/list) and, before extending the path with a new edge, check whether its endpoint has been visited before (see the example later).
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
@@ -192,7 +192,7 @@ ORDER BY length(path), path;
 
 ##### Enumerate unweighted shortest paths between two nodes
 
-`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function](/docs/sql/window_functions) which checks whether the end node is among the newly added nodes.
+`WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function](../../sql/window_functions) which checks whether the end node is among the newly added nodes.
 
 The following query returns all unweighted shortest paths between nodes 1 (start node) and 8 (end node):
 

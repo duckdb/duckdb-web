@@ -97,14 +97,6 @@
               "url": "cpp"
             },
             {
-              "page": "Node.js",
-              "url": "nodejs"
-            },
-            {
-              "page": "WASM",
-              "url": "wasm"
-            },
-            {
               "page": "CLI",
               "url": "cli"
             }]
@@ -247,10 +239,6 @@
                   "url": "boolean"
                 },
                 {
-                  "page": "Enum",
-                  "url": "enum"
-                },
-                {
                   "page": "Numeric",
                   "url": "numeric"
                 },
@@ -271,16 +259,8 @@
                   "url": "blob"
                 },
                 {
-                  "page":"List",
-                  "url": "list"
-                },
-                {
-                  "page":"Struct",
-                  "url": "struct"
-                },
-                {
-                  "page":"Map",
-                  "url": "map"
+                  "page":"Nested",
+                  "url": "nested"
                 }
               ]
             },
@@ -387,10 +367,6 @@
           {
             "page": "Samples",
             "url": "samples"
-          },
-          {
-            "page": "Configuration",
-            "url": "configuration"
           },
           {
             "page": "Pragmas",

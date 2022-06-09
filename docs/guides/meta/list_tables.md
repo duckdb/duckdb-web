@@ -41,7 +41,7 @@ Below is an example of `DESCRIBE` without any parameters on the `TPC-H` dataset.
 └────────────┴────────────────────────────────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────┴───────────┘
 ```
 
-The SQL-standard [`information_schema`](/docs/sql/information_schema) views are also defined. 
+The SQL-standard [`information_schema`](../../sql/information_schema) views are also defined. 
 
 DuckDB also defines `sqlite_master`, and many [Postgres system catalog tables](https://www.postgresql.org/docs/14/catalogs.html) for compatibility with SQLite and Postgres respectively.
 

@@ -25,4 +25,4 @@ SELECT 'English' IN ('CS', 'Math', NULL);
 
 `NOT IN` can be used to check if an element is not present in the set. `X NOT IN Y` is equivalent to `NOT(X IN Y)`.
 
-The `IN` operator can also be used with a subquery that returns a single column. See the [subqueries page for more information](/docs/sql/expressions/subqueries).
+The `IN` operator can also be used with a subquery that returns a single column. See the [subqueries page for more information](../../sql/expressions/subqueries).

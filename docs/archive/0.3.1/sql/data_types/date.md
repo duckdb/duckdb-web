@@ -16,4 +16,4 @@ SELECT DATE '1992-09-20';
 ```
 
 ## Functions
-See [Date Functions and Operators](/docs/sql/functions/date)
+See [Date Functions and Operators](../../sql/functions/date)

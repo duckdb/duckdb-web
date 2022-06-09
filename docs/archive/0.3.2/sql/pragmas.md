@@ -98,7 +98,7 @@ PRAGMA profiling_output='/path/to/file.json';
 PRAGMA profile_output='/path/to/file.json';
 ```
 
-Enable the gathering and printing of [profiling](/docs/dev/profiling) information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+Enable the gathering and printing of [profiling](../dev/profiling) information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
 
 Below is an example output of the profiling information for the simple query ```SELECT 42```:
 
@@ -158,7 +158,7 @@ PRAGMA force_index_join;
 These are `PRAGMA`s mostly used for development and internal testing.
 
 ### create_fts_index, drop_fts_index
-Only available when the FTS extension is built, [documented here](/docs/sql/full_text_search).
+Only available when the FTS extension is built, [documented here](../sql/full_text_search).
 
 
 ### temp directory for spilling data to disk -- defaults to .tmp

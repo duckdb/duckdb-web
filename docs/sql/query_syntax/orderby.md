@@ -17,7 +17,7 @@ PRAGMA default_null_order='NULLS LAST';
 PRAGMA default_order='DESC';
 ```
 
-Text is sorted using the binary comparison collation by default, which means values are sorted on their binary UTF8 values. While this works well for ASCII text (e.g. for English language data), the sorting order can be incorrect for other languages. For this purpose, DuckDB provides collations. For more information on collations, see the [Collation page](/docs/sql/expressions/collations).
+Text is sorted using the binary comparison collation by default, which means values are sorted on their binary UTF8 values. While this works well for ASCII text (e.g. for English language data), the sorting order can be incorrect for other languages. For this purpose, DuckDB provides collations. For more information on collations, see the [Collation page](../../sql/expressions/collations).
 
 ### Examples
 
