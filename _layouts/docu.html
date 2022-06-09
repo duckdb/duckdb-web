@@ -44,9 +44,9 @@
 					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
 				</div>
 				<div class="landingmenu">
-					
+
 					{% include menu_secondary.html %}
-					
+
 					<nav class="mobile">
 						<div class="hamburger hamburger--squeeze">
 							<div class="hamburger-box">
@@ -64,7 +64,7 @@
 
 		{% include menu_sidebar.html %}
 
-		
+
 		{% assign current_url = page.url | split:'/docs/' %}
 		{% if page.path contains "archive/" %}
 			{% for item in site.data.versions %}
@@ -80,20 +80,32 @@
 		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
 			<div class="headlinebar">
 				<div>{{ page.title }}</div>
-				
+
 				{% if page.url contains '/docs/' %}
 				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
 				<div class="versionsidebar">
 					<span>Version: </span>
 					<ul>
-					<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>current</a></li>
-					
+
 					{% assign candidate_pages = "" | split: ','  %}
 					{% for site_page in site.pages %}
 						{% if site_page.name == page.name %}
 							{% assign candidate_pages = candidate_pages | push: site_page.path %}
 						{% endif %}
 					{% endfor %}
+					<!-- check the current page -->
+					{% assign filename = "docs/" | append: basename %}
+					{% assign exists = "false" %}
+					{% for page_name in candidate_pages %}
+						{% if page_name == filename %}
+							{% assign exists = true %}
+						{% endif %}
+					{% endfor %}
+
+					{% if exists == true %}
+						<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>current</a></li>
+					{% endif %}
+					<!-- check the archived pages -->
 					{% for item in site.data.versions %}
 						{% assign filename = "docs/archive/" | append: item.version | append: "/" | append: basename %}
 						{% assign exists = "false" %}
@@ -101,7 +113,7 @@
 							{% if page_name == filename %}
 								{% assign exists = true %}
 							{% endif %}
-						{% endfor %}	
+						{% endfor %}
 						{% if exists == true %}
 							<li><a href='{{ site.baseurl }}/{{ filename | replace: ".md", "" }}'>{{ item.version }}</a></li>
 						{% endif %}
@@ -109,12 +121,12 @@
 					</ul>
 				</div>
 				{% endif %}
-				
+
 			</div>
 			<div id="main_content_wrap">
-	
+
 				{% include anchor_headings.html html=content %}
-				
+
 				{% if page.benchmark_group and page.benchmark_group != "" and page.benchmark_group != nil %}
 				{% if page.benchmark_group == "log" %}
 				<div id="log-data">
