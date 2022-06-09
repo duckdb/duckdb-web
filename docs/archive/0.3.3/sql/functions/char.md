@@ -25,8 +25,8 @@ This section describes functions and operators for examining and manipulating st
 | `lcase(`*`string`*`)` | Alias of `lower`. Convert *string* to lower case | `lcase('Hello')` | `hello` |
 | `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('hello', 2)` | `he` |
 | `length(`*`string`*`)` | Number of characters in *string* | `length('Hello')` | `5` |
-| *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` |
-| `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](/docs/sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
+| *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` |
+| `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
 | `list_element(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_element('DuckDB, 1)` | `'u'` |
 | `list_extract(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_extract('DuckDB, 1)` | `'u'` |
 | `lower(`*`string`*`)` | Convert *string* to lower case | `lower('Hello')` | `hello` |
@@ -35,14 +35,14 @@ This section describes functions and operators for examining and manipulating st
 | `ltrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the left side of the *string* | `ltrim('>>>>test<<', '><')` | `test<<` |
 | `md5(`*`value`*`)` | Returns the [MD5 hash](https://en.wikipedia.org/wiki/MD5) of the *value*  | `md5('123')` | `'202cb962ac59075b964b07152d234b70'` |
 | `nfc_normalize(`*`string`*`)`| Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. | `nfc_normalize('ardèch')` | ``arde`ch`` |
-| `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](/docs/sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
+| `not_like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns false if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
 | `ord(`*`string`*`)`| Return ASCII character code of the leftmost character in a string.  | `ord('ü')` | `252` |
 | `position(`*`search_string`*` in `*`string`*`)` | Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `position('b' in 'abc')` | `2` |
 | `prefix(`*`string`*`, `*`search_string`*`)` | Return true if *string* starts with *search_string*. | `prefix('abc', 'ab')` | `true` |
 | `printf(`*`format`*`, `*`parameters`*`...)` | Formats a *string* using printf syntax | `printf('Benchmark "%s" took %d seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds`     |
-| `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `regexp_full_match('anabanana', '(an)*')` | `false` |
-| `regexp_matches(`*`string`*`, `*`regex`*`)`| Returns true if a part of *string* matches the *regex* (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `regexp_matches('anabanana', '(an)*')` | `true` |
-| `regexp_replace(`*`string`*`, `*`regex`*`, `*`replacement`*`, `*`modifiers`*`)`| Replaces the first occurrence of *regex* with the *replacement*, use `'g'` modifier to replace all occurrences instead (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |
+| `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* (see [Pattern Matching](../../sql/functions/patternmatching)) | `regexp_full_match('anabanana', '(an)*')` | `false` |
+| `regexp_matches(`*`string`*`, `*`regex`*`)`| Returns true if a part of *string* matches the *regex* (see [Pattern Matching](../../sql/functions/patternmatching)) | `regexp_matches('anabanana', '(an)*')` | `true` |
+| `regexp_replace(`*`string`*`, `*`regex`*`, `*`replacement`*`, `*`modifiers`*`)`| Replaces the first occurrence of *regex* with the *replacement*, use `'g'` modifier to replace all occurrences instead (see [Pattern Matching](../../sql/functions/patternmatching)) | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |
 | `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
 | `repeat(`*`string`*`, `*`count`*`)`| Repeats the *string* *count* number of times | `repeat('A', 5)` | `AAAAA` |
 | `replace(`*`string`*`, `*`source`*`, `*`target`*`)`| Replaces any occurrences of the *source* with *target* in *string* | `replace('hello', 'l', '-')` | `he--o` |
@@ -51,7 +51,7 @@ This section describes functions and operators for examining and manipulating st
 | `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string* with the character from the right until it has *count* characters | `rpad('hello', 10, '<')` | `hello<<<<<` |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` |
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` |
-| *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](/docs/sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` |
+| *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` |
 | `strlen(`*`string`*`)` | Number of bytes in *string* | `length('🤦🏼‍♂️')` | `1` |
 | `strpos(`*`string`*`, `*`search_string`*`)`| Alias of `instr`. Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
 | `strip_accents(`*`string`*`)`| Strips accents from *string* | `strip_accents('mühleisen')` | `muhleisen` |

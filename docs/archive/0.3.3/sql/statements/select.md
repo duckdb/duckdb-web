@@ -38,7 +38,7 @@ ORDER BY order_expr
 LIMIT n
 ```
 
-Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](/docs/sql/query_syntax/with).
+Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](../../sql/query_syntax/with).
 
 As the `SELECT` statement is so complex, we have split up the syntax diagrams into several parts. The full syntax diagram can be found at the bottom of the page.
 
@@ -50,42 +50,42 @@ The `SELECT` clause specifies the list of columns that will be returned by the q
 ## FROM clause
 <div id="rrdiagram4"></div>
 
-[The `FROM` clause](/docs/sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
+[The `FROM` clause](../../sql/query_syntax/from) specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together, or another `SELECT` query inside a subquery node.
 
 ## SAMPLE clause
 <div id="rrdiagram10"></div>
 
-[The `SAMPLE` clause](/docs/sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e. after any joins, but before the where clause or any aggregates). See the [sample](/docs/sql/samples) page for more information.
+[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e. after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
 
 ## WHERE clause
 <div id="rrdiagram5"></div>
 
-[The `WHERE` clause](/docs/sql/query_syntax/where) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
+[The `WHERE` clause](../../sql/query_syntax/where) specifies any filters to apply to the data. This allows you to select only a subset of the data in which you are interested. Logically the `WHERE` clause is applied immediately after the `FROM` clause.
 
 ## GROUP BY/HAVING clause
 <div id="rrdiagram6"></div>
 
-[The `GROUP BY` clause](/docs/sql/query_syntax/groupby) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
+[The `GROUP BY` clause](../../sql/query_syntax/groupby) specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause. If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 
 ## WINDOW clause
 <div id="rrdiagram7"></div>
 
-[The `WINDOW` clause](/docs/sql/query_syntax/window) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
+[The `WINDOW` clause](../../sql/query_syntax/window) allows you to specify named windows that can be used within window functions. These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
 
 ## QUALIFY clause
 <div id="rrdiagram11"></div>
 
-[The `QUALIFY` clause](/docs/sql/query_syntax/qualify) is used to filter the result of [`WINDOW` functions](/docs/sql/window_functions).
+[The `QUALIFY` clause](../../sql/query_syntax/qualify) is used to filter the result of [`WINDOW` functions](../../sql/window_functions).
 
 ## ORDER BY/LIMIT clause
 <div id="rrdiagram8"></div>
 
-[`ORDER BY`](/docs/sql/query_syntax/orderby) and [`LIMIT`](/docs/sql/query_syntax/limit) are output modifiers. Logically they are applied at the very end of the query. The `LIMIT` clause restricts the amount of rows fetched, and the `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
+[`ORDER BY`](../../sql/query_syntax/orderby) and [`LIMIT`](../../sql/query_syntax/limit) are output modifiers. Logically they are applied at the very end of the query. The `LIMIT` clause restricts the amount of rows fetched, and the `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 
 ## VALUES list
 <div id="rrdiagram9"></div>
 
-[A `VALUES` list](/docs/sql/query_syntax/values) is a set of values that is supplied instead of a `SELECT` statement.
+[A `VALUES` list](../../sql/query_syntax/values) is a set of values that is supplied instead of a `SELECT` statement.
 
 ## Row IDs
 

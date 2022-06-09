@@ -51,13 +51,13 @@ SELECT COALESCE(NULL, NULL);
 
 ## NULL and Conjunctions
 
-`NULL` values have special semantics in `AND`/`OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation](/docs/sql/data_types/boolean).
+`NULL` values have special semantics in `AND`/`OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation](../../sql/data_types/boolean).
 
 ## NULL and Aggregate Functions
 
 `NULL` values are ignored in most aggregate functions. 
 
-Aggregate functions that do not ignore `NULL` values include: `FIRST`, `LAST`, `LIST`, and `ARRAY_AGG`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](/docs/sql/query_syntax/filter) can be used.
+Aggregate functions that do not ignore `NULL` values include: `FIRST`, `LAST`, `LIST`, and `ARRAY_AGG`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause](../../sql/query_syntax/filter) can be used.
 
 ```sql
 CREATE TABLE integers(i INTEGER);

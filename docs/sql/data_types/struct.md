@@ -13,7 +13,7 @@ Conceptually, a `STRUCT` column contains an ordered list of other columns called
 
 `STRUCT`s are similar to Postgres's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
 
-See the [data types overview](/docs/sql/data_types/overview) for a comparison between nested data types.
+See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
 Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
 
@@ -142,4 +142,4 @@ Comparing nested value _members_ , however, uses the internal nested value rules
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions
-See [Nested Functions](/docs/sql/functions/nested).
+See [Nested Functions](../../sql/functions/nested).

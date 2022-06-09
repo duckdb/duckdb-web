@@ -11,7 +11,7 @@ Insert statements are the standard way of loading data into a database system. T
 INSERT INTO people VALUES (1, 'Mark');
 ```
 
-See [here](/docs/data/insert) for a more detailed description of insert statements.
+See [here](../data/insert) for a more detailed description of insert statements.
 
 ### CSV Loading
 Data can be efficiently loaded from CSV files using the `read_csv_auto` function or the `COPY` statement.
@@ -26,7 +26,7 @@ You can also load data from **compressed** (e.g. compressed with [gzip](https://
 SELECT * FROM read_csv_auto('test.csv.gz');
 ```
 
-See [here](/docs/data/csv) for a detailed description of CSV loading.
+See [here](../data/csv) for a detailed description of CSV loading.
 
 ### Parquet Loading
 Parquet files can be efficiently loaded and queried using the `read_parquet` function.
@@ -35,7 +35,7 @@ Parquet files can be efficiently loaded and queried using the `read_parquet` fun
 SELECT * FROM read_parquet('test.parquet');
 ```
 
-See [here](/docs/data/parquet) for a detailed description of Parquet loading.
+See [here](../data/parquet) for a detailed description of Parquet loading.
 
 ### Appender (C++ and Java)
 
@@ -59,4 +59,4 @@ appender.endRow();
 appender.close();
 ```
 
-See [here](/docs/data/appender) for a detailed description of the C++ appender.
+See [here](../data/appender) for a detailed description of the C++ appender.

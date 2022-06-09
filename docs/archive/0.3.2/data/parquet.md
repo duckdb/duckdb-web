@@ -49,7 +49,7 @@ Unlike CSV files, parquet files are structured and as such are unambiguous to re
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
-The parquet_scan function can accept a list of filenames as the input parameter. See the [nested types documentation](/docs/sql/data_types/overview) for more details on lists.
+The parquet_scan function can accept a list of filenames as the input parameter. See the [nested types documentation](../sql/data_types/overview) for more details on lists.
 ```sql
 -- read 3 parquet files and treat them as a single table
 SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
@@ -180,7 +180,7 @@ COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
 COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
 ```
 
-DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](/docs/sql/statements/export) for more details.
+DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../sql/statements/export) for more details.
 ```sql
 -- export the table contents of the entire database as parquet
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);

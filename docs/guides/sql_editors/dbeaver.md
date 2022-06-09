@@ -6,7 +6,7 @@ selected: DBeaver SQL IDE
 
 # How to set up DBeaver SQL IDE for DuckDB
 
-[DBeaver](https://dbeaver.io/) is a powerful and popular desktop sql editor and integrated development environment (IDE). It has both an open source and enterprise version. It is useful for visually inspecting the available tables in DuckDB and for quickly building complex queries. DuckDB's [JDBC connector](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc) allows DBeaver to query DuckDB files, and by extension, any other files that DuckDB can access ([like parquet files](/docs/guides/import/query_parquet)).  
+[DBeaver](https://dbeaver.io/) is a powerful and popular desktop sql editor and integrated development environment (IDE). It has both an open source and enterprise version. It is useful for visually inspecting the available tables in DuckDB and for quickly building complex queries. DuckDB's [JDBC connector](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc) allows DBeaver to query DuckDB files, and by extension, any other files that DuckDB can access ([like parquet files](../../guides/import/query_parquet)).  
 
 1. Install DBeaver using the download links and instructions found at their [download page](https://dbeaver.io/download/).  
 

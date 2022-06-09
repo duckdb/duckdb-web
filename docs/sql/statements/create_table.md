@@ -26,7 +26,7 @@ CREATE TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
 
 Temporary tables can be created using a `CREATE TEMP TABLE` statement (see diagram below). 
 Temporary tables are session scoped (similar to Postgres for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped. 
-Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](/docs/sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained. 
+Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained. 
 
 ```sql
 -- create a temporary table from a CSV file using AUTO-DETECT (i.e., Automatically detecting column names and types)

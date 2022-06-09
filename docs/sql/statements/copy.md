@@ -59,8 +59,8 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `HEADER` | Specifies that the file contains a header line with the names of each column in the file. Thus, `COPY ... FROM` ignores the first line when importing data, whereas on output (`COPY ... TO`) the first line of the file contains the column names of the exported columns. |
 | `QUOTE` | Specifies the quoting string to be used when a data value is quoted. The default is double-quote (`"`). |
 | `ESCAPE` | Specifies the string that should appear before a data character sequence that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
-| `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](/docs/sql/functions/dateformat) |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](/docs/sql/functions/dateformat) |
+| `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) |
 | `FORCE_QUOTE` | Forces quoting to be used for all non-NULL values in each specified column. `NULL` output is never quoted. If `*` is specified, non-NULL values will be quoted in all columns. This option is allowed only in `COPY ... TO`. |
 | `FORCE_NOT_NULL` | Do not match the specified columns' values against the NULL string. In the default case where the NULL string is empty, this means that empty values will be read as zero-length strings rather than NULLs. This option is allowed only in `COPY ... FROM`. |
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |

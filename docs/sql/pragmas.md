@@ -165,7 +165,7 @@ PRAGMA force_index_join;
 These are `PRAGMA`s mostly used for development and internal testing.
 
 ### create_fts_index, drop_fts_index
-Only available when the FTS extension is built, [documented here](/docs/extensions/full_text_search).
+Only available when the FTS extension is built, [documented here](../extensions/full_text_search).
 
 
 ### temp directory for spilling data to disk -- defaults to .tmp
