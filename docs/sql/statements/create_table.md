@@ -69,7 +69,7 @@ Currently only the `VIRTUAL` kind is supported, and it is also the default optio
 
 ```sql
 -- The simplest syntax for a generated column. 
--- The type is derived from the expression, and the varient defaults to VIRTUAL
+-- The type is derived from the expression, and the variant defaults to VIRTUAL
 CREATE TABLE t1(x FLOAT, two_x AS (2 * x))
 
 -- Fully specifying the same generated column for completeness
