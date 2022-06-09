@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: '3.9'
 
-    - name: Link Checker
-      run: |
-        pip install linkchecker --user
-        linkchecker www.duckdb.org
+      - name: Link Checker
+        run: |
+          pip install linkchecker --user
+          linkchecker www.duckdb.org
