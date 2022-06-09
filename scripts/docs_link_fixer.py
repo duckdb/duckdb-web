@@ -26,7 +26,7 @@ def cleanup_links_in_directory(current_path, depth = 0):
 			if new_text == text:
 				continue
 			if check_only:
-				print(f"Found absolute link to documentation in file {abs_path}")
+				print(f"Found absolute link to documentation in file {abs_path}!")
 				exit(1)
 			with open(abs_path, 'w+') as f:
 				f.write(new_text)

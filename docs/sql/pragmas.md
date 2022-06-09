@@ -98,7 +98,7 @@ PRAGMA profiling_output='/path/to/file.json';
 PRAGMA profile_output='/path/to/file.json';
 ```
 
-Enable the gathering and printing of [profiling](/dev/profiling) information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
+Enable the gathering and printing of profiling information after the execution of a query. Optionally, the format of the resulting profiling information can be specified as either *json*, *query_tree*, or *query_tree_optimizer*. The default format is *query_tree*, which prints the physical operator tree together with the timings and cardinalities of each operator in the tree to the screen.
 
 Below is an example output of the profiling information for the simple query ```SELECT 42```:
 
