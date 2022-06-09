@@ -3,6 +3,7 @@ on: [push]
 jobs:
   LinkChecker:
     name: Link Checker
+    if: github.repository == 'duckdb/duckdb-web'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
