@@ -3,7 +3,10 @@ function GenerateCast(options = {}) {
 	return Diagram([
 		Choice(0,[
 			Sequence([
-				Keyword("CAST"),
+				Choice(0, [
+					Keyword("CAST"),
+					Keyword("TRY_CAST")
+				]),
 				Keyword("("),
 				Expression(),
 				Keyword("AS"),
