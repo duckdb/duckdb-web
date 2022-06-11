@@ -18,4 +18,4 @@ jobs:
       - name: Link Checker
         run: |
           pip install linkchecker --user
-          linkchecker www.duckdb.org
+          linkchecker www.duckdb.org --check-extern --ignore-url ".*hannes.*"
