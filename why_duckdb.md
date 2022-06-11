@@ -49,7 +49,7 @@ In addition to this test suite, we run various tests that stress DuckDB under he
 	<div class="icon"><span class="duckdbsymbol">&#xE400;</span></div>
 	<h1>Free &amp; Open Source License</h1>
 </div>
-DuckDB's main developers are public servants in The Netherlands. Our salaries are paid from taxes. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in The Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DuckDB is Open Source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct](../code_of_conduct).
+DuckDB's development started while the main developers were public servants in The Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in The Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DuckDB is Open Source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct](../code_of_conduct).
 
 
 ## Peer-Reviewed Papers
