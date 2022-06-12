@@ -25,7 +25,7 @@ The exact behavior of the cast depends on the source and destination types. For 
 
 Not all casts are possible. For example, it is not possible to convert an `INTEGER` to a `DATE`. Casts may also throw errors when the cast could not be successfully performed. For example, trying trying to cast the string `'hello'` to an `INTEGER` will result in an error being thrown.
 
-`TRY_CAST` can be used in case the preferred behavior is not to throw an error, but to instead return a `NULL` value. `TRY_CAST` will never throw an error, and will instead return `NULL` if a cast is not possible.
+`TRY_CAST` can be used when the preferred behavior is not to throw an error, but instead to return a `NULL` value. `TRY_CAST` will never throw an error, and will instead return `NULL` if a cast is not possible.
 
 ## Implicit Casting
 In many situations, the system will add casts by itself. This is called *implicit* casting. This happens for example when a function is called with an argument that does not match the type of the function, but can be casted to the desired type.
