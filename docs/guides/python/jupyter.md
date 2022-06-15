@@ -5,7 +5,7 @@ selected: Jupyter Notebooks
 ---
 
 # DuckDB in Jupyter Notebooks
-DuckDB's Python client can be used directly in Jupyter notebooks with no additional configration if desired. 
+DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 
 However, additional libraries can be used to simplify SQL query development. 
 This guide will describe how to utilize those additional libraries.
 See other guides in the Python section for how to use DuckDB and Python together.  
