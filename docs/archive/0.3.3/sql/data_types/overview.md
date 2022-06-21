@@ -37,8 +37,8 @@ DuckDB supports three nested data types: `LIST`, `STRUCT` and `MAP`. Each suppor
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:---|:---|:---|:---|:---|
 | [LIST](../../sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each LIST, but can have any number of elements. | [1, 2, 3] | INT[ ] |
-| [STRUCT](../../sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | {'i': 42, 'j': 'a'} | STRUCT<i: INT, j: VARCHAR> |
-| [MAP](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP<INT, VARCHAR> |
+| [STRUCT](../../sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | {'i': 42, 'j': 'a'} | STRUCT(i INT, j VARCHAR) |
+| [MAP](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP(INT, VARCHAR) |
 
 ## Nesting
 
