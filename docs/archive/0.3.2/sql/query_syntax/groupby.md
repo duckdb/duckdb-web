@@ -9,7 +9,7 @@ The `GROUP BY` clause specifies which grouping columns should be used to perform
 
 When a `GROUP BY` clause is specified, all tuples that have matching data in the grouping columns (i.e. all tuples that belong to the same group) will be combined. The values of the grouping columns themselves are unchanged, and any other columns can be combined using an aggregate function (such as `COUNT`, `SUM`, `AVG`, etc).
 
-Normally, the `GROUP BY` clause groups along a single dimension. Using the [GROUPING SETS, CUBE or ROLLUP clauses](/docs/sql/query_syntax/grouping_sets) it is possible to group along multiple dimensions. See the [GROUPING SETS](/docs/sql/query_syntax/grouping_sets) page for more information.
+Normally, the `GROUP BY` clause groups along a single dimension. Using the [GROUPING SETS, CUBE or ROLLUP clauses](../../sql/query_syntax/grouping_sets) it is possible to group along multiple dimensions. See the [GROUPING SETS](../../sql/query_syntax/grouping_sets) page for more information.
 
 ### Examples
 

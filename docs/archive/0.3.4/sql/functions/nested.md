@@ -27,7 +27,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_pack(`*`any`*`, ...)` | Alias for `list_value`. | `list_pack(4, 5, 6)` | `[4, 5, 6]` |
 | `len(`*`list`*`)` | Return the length of the list. | `len([1, 2, 3])` | `3` |
 | `array_length(`*`list`*`)` | Alias for `len`. |  `array_length([1, 2, 3])` | `3` |
-| `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
+| `unnest(`*`list`*`)` | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](../../sql/query_syntax/unnest) for more details.  | `unnest([1, 2, 3])` | `1`, `2`, `3` |
 | `list_concat(`*`list1`*`, `*`list2`*`)` | Concatenates two lists. | `list_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6]` |
 | `list_cat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `list_cat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
 | `array_concat(`*`list1`*`, `*`list2`*`)` | Alias for `list_concat`. | `array_concat([2, 3], [4, 5, 6])` | `[2, 3, 4, 5, 6`] |
