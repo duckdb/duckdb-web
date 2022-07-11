@@ -1,0 +1,3 @@
+duckdb --pre
+sphinx
+pandas-stubs
