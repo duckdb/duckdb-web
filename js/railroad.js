@@ -1735,6 +1735,21 @@ function GenerateValuesFromClause(options) {
 	]
 }
 
+function GenerateTableAlias(options) {
+	return [
+		Sequence([
+			Optional(Keyword("AS")),
+			Expression("table-alias"),
+			Optional(
+				Sequence([
+					Keyword("("),
+					OneOrMore(Expression("column-alias"), ","),
+					Keyword(")")
+				]), "skip")
+		])
+	]
+}
+
 function GenerateTableOrSubquery(options) {
 	return [
 		Choice(0, [
@@ -1745,7 +1760,7 @@ function GenerateTableOrSubquery(options) {
 					Expandable("subquery", options, "subquery", GenerateSubquery),
 					Expandable("values", options, "values", GenerateValuesFromClause)
 				]),
-				Optional(Sequence([Keyword("AS"), Expression("table-alias")]), "skip"),
+				Optional(Expandable("table-alias", options, "table-alias", GenerateTableAlias), "skip"),
 				Optional(Expandable("table-sample", options, "table-sample-reference", GenerateTableSample), "skip")
 			]),
 
@@ -1796,15 +1811,39 @@ function GenerateOrderBy(options) {
 	]
 }
 
+function GenerateStarOptions(options) {
+	return [
+		Optional(
+			Sequence([
+				Keyword("EXCLUDE"),
+				Keyword("("),
+				OneOrMore(Expression("exclude-name"), ","),
+				Keyword(")"),
+			]), "skip"),
+			Optional(
+				Sequence([
+					Keyword("REPLACE"),
+					Keyword("("),
+					OneOrMore(Sequence([
+						Expression(),
+						Keyword("AS"),
+						Expression("column-name")
+					]), ","),
+					Keyword(")"),
+				]), "skip")
+	]
+}
+
 function GenerateSelectClause(options) {
 	return [
 		Keyword("SELECT"),
 		Expandable("distinct-clause", options, "distinct-clause", GenerateDistinctClause),
 		OneOrMore(Choice(0, [
-			Sequence([Expression(), Optional(Sequence([Keyword("AS"), Expression("alias")]), "skip")]),
+			Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),
 			Sequence([
 				Optional(Sequence([Expression("table-name"), Keyword(".")]), "skip"),
-				Keyword("*")
+				Keyword("*"),
+				Expandable("star-options", options, "star-options", GenerateStarOptions)
 			])
 		]), ",")
 	]
@@ -1941,4 +1980,17 @@ function GenerateQualifyClause(options = {}) {
 		Keyword("QUALIFY"),
 		Expression("window_function_expr")
 	]
+}
+
+function GenerateIn(options = {}) {
+	return Diagram([
+		Optional(Keyword("NOT"), "skip"),
+		Keyword("IN"),
+		Keyword("("),
+		Choice(0, [
+			Expression("select-node"),
+			OneOrMore(Expression(), ","),
+		]),
+		Keyword(")")
+	])
 }

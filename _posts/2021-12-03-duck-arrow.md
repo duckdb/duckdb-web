@@ -1,6 +1,6 @@
 ---
 
-layout: post  
+layout: post
 title:  "DuckDB quacks Arrow: A zero-copy data integration between Apache Arrow and DuckDB"
 author: Pedro Holanda and Jonathan Keane
 excerpt_separator: <!--more-->
@@ -211,9 +211,9 @@ The preceding R code shows in low-level detail how the data is streaming. We pro
 Here we demonstrate in a simple benchmark the performance difference between querying Arrow datasets with DuckDB and querying Arrow datasets with Pandas.
 For both the Projection and Filter pushdown comparison, we will use Arrow tables. That is due to Pandas not being capable of consuming Arrow stream objects.
 
-For the NYC Taxi benchmarks, we used the [scilens diamonds configuration](https://www.monetdb.org/wiki/Scilens-configuration-standard) and for the TPC-H benchmarks, we used an m1 MacBook Pro. In both cases, parallelism in DuckDB was used (which is now on by default).
+For the NYC Taxi benchmarks, we used the scilens diamonds configuration and for the TPC-H benchmarks, we used an m1 MacBook Pro. In both cases, parallelism in DuckDB was used (which is now on by default).
 
-For the comparison with Pandas, note that DuckDB runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. DuckDB's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them them in the `read_parquet()` call. 
+For the comparison with Pandas, note that DuckDB runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. DuckDB's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them them in the `read_parquet()` call.
 
 ### Projection Pushdown
 

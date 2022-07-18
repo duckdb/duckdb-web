@@ -42,6 +42,9 @@ autoconf/autom4te.cache
 #==============================================================================#
 # Directories to ignore (do not add trailing '/'s, they skip symlinks).
 #==============================================================================#
+# Metadata created when running jekyll locally
+.jekyll-metadata
+
 # External projects that are tracked independently.
 projects/*
 !projects/*.*

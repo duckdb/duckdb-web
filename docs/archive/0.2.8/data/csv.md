@@ -85,7 +85,7 @@ COPY ontime FROM 'test.csv' ( AUTO_DETECT TRUE );
 SELECT * FROM ontime;
 ```
 
-More on the copy statement can be found [here](/docs/sql/statements/copy.html).
+More on the copy statement can be found [here](../sql/statements/copy.html).
 
 ## Shell Import
 The DuckDB shell also offers a way of importing CSV files. This method is the same syntax as would be used in the SQLite shell. For this method we need to first create a table, then specify the parameters and then use the `.import` statement.

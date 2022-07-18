@@ -3,7 +3,7 @@
     {
       "page": "Documentation",
       "open": true,
-      "slug": "docs",
+      "slug": "",
       "mainfolderitems": [
         {
           "page": "Installation",
@@ -185,10 +185,6 @@
                   "url": "boolean"
                 },
                 {
-                  "page": "Enum",
-                  "url": "enum"
-                },
-                {
                   "page": "Numeric",
                   "url": "numeric"
                 },
@@ -209,16 +205,8 @@
                   "url": "blob"
                 },
                 {
-                  "page":"List",
-                  "url": "list"
-                },
-                {
-                  "page":"Struct",
-                  "url": "struct"
-                },
-                {
-                  "page":"Map",
-                  "url": "map"
+                  "page":"Nested",
+                  "url": "nested"
                 }
               ]
             },

@@ -11,7 +11,7 @@ expanded: Nested
 
 `MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `INT`s to `VARCHAR`s). `MAP`s may also have duplicate keys. This is possible and useful because maps are ordered. `MAP`s are also more forgiving when extracting values, as they return an empty list if a key is not found rather than throwing an error as structs do.
 
-In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. `STRUCT`s may not have duplicate keys. See the [data types overview](/docs/sql/data_types/overview) for a comparison between nested data types.
+In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. `STRUCT`s may not have duplicate keys. See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
 To construct a `MAP`, use the `map` function. Provide a list of keys as the first parameter, and a list of values for the second.
 
@@ -58,4 +58,4 @@ Comparing nested value _members_ , however, uses the internal nested value rules
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions
-See [Nested Functions](/docs/sql/functions/nested).
+See [Nested Functions](../../sql/functions/nested).

@@ -14,7 +14,7 @@ DESCRIBE SELECT * FROM 'test.parquet';
 CREATE TABLE test AS SELECT * FROM 'test.parquet';
 -- if the file does not end in ".parquet", use the parquet_scan function
 SELECT * FROM parquet_scan('test.parq');
--- use list parameter to read 3 parquet files and treat them as a single table 
+-- use list parameter to read 3 parquet files and treat them as a single table
 SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
@@ -49,9 +49,9 @@ Unlike CSV files, parquet files are structured and as such are unambiguous to re
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
-The parquet_scan function can accept a list of filenames as the input parameter. See the [nested types documentation](https://duckdb.org/docs/sql/data_types/nested.html) for more details on lists.
+The parquet_scan function can accept a list of filenames as the input parameter. See the [nested types documentation](../sql/data_types/overview) for more details on lists.
 ```sql
--- read 3 parquet files and treat them as a single table 
+-- read 3 parquet files and treat them as a single table
 SELECT * FROM parquet_scan(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
@@ -180,7 +180,7 @@ COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
 COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
 ```
 
-DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](https://duckdb.org/docs/sql/statements/export.html) for more details.
+DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../sql/statements/export) for more details.
 ```sql
 -- export the table contents of the entire database as parquet
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);

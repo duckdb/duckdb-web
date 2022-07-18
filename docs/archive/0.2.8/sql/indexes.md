@@ -8,10 +8,10 @@ railroad: statements/indexes.js
 
 DuckDB currently uses two index types:
 
-* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) is automatically created for columns of all [general-purpose data types](/docs/sql/data_types/overview).
+* A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) is automatically created for columns of all [general-purpose data types](../sql/data_types/overview).
 * An [Adaptive Radix Tree (ART)](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.674.248&rep=rep1&type=pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
 
-Joins on columns with an ART index can make use of the [index join algorithm](https://en.wikipedia.org/wiki/Nested_loop_join#Index_join_variation). Forcing index joins is possible using [pragmas](/docs/sql/pragmas.md).
+Joins on columns with an ART index can make use of the [index join algorithm](https://en.wikipedia.org/wiki/Nested_loop_join#Index_join_variation). Forcing index joins is possible using [pragmas](../sql/pragmas.md).
 
 ## Persistence
 

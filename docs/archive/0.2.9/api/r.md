@@ -4,7 +4,7 @@ title: R API
 selected: Client APIs
 ---
 ## Installation
-The DuckDB R API can be installed using `install.packages`. Please see the [installation page](/docs/installation?environment=r) for details.
+The DuckDB R API can be installed using `install.packages`. Please see the [installation page](../installation?environment=r) for details.
 
 ## Basic API Usage
 The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://db.rstudio.com/dbi/).
@@ -79,7 +79,7 @@ print(res)
 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb::duckdb_unregister()` method.
 
-Also refer to [the data import documentation](/docs/data/overview) for more options of efficiently importing data.
+Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
 ## dbplyr 
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
