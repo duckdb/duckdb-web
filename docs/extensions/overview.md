@@ -23,6 +23,8 @@ You can check the list of core and installed extensions with the following query
 select * From duckdb_extensions();
 ```
 
+## All available extensions
+
 | Extension name   | Description                                                          |
 | ---------------- | -------------------------------------------------------------------- |
 | fts              | Adds support for Full-Text Search Indexes                            |
@@ -36,18 +38,8 @@ select * From duckdb_extensions();
 | tpcds            | Adds TPC-DS data generation and query support                        |
 | tpch             | Adds TPC-H data generation and query support                         |
 
-## All available extensions
+## Extension specific documentation
 
 <!--
 any extensions that have their own pages will automatically be added to a table of contents that is rendered directly below this list.
-each extension should eventually have it's own page, and be removed from this list.
 -->
-
- * excel
- * httpfs
- * icu
- * parquet
- * substrait
- * tpch
- * tpcds
- * visualizer
