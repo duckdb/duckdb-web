@@ -38,7 +38,7 @@ select * From duckdb_extensions();
 | tpcds            | Adds TPC-DS data generation and query support                        |
 | tpch             | Adds TPC-H data generation and query support                         |
 
-## Extension specific documentation
+## Pages in this Section
 
 <!--
 any extensions that have their own pages will automatically be added to a table of contents that is rendered directly below this list.
