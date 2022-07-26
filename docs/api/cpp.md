@@ -48,7 +48,8 @@ The `MaterializedQueryResult` instance contains firstly two fields that indicate
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
 ```c++
-// TODO
+std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a WHERE i=$1");
+std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
