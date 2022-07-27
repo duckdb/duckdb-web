@@ -10,6 +10,7 @@ excerpt_separator: <!--more-->
      width=200
  />
  
+<!--more-->
 
 *TLDR: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.*
 
