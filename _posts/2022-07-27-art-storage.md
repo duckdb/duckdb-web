@@ -87,28 +87,28 @@ Below you can see the same nodes as before in a TRIE node of 8 bits. In reality,
 
 <img src="/images/blog/ART/art-4.png"
      alt="Art Node 4"
-     width=300
+     width=500
  />
  
 **Node 16** : Node 16 holds up to 16 different keys. Like node 4, each key is stored in a one-byte array, with one pointer per key. With its total size being 144 bytes (16\*1 + 16\*8). Like Node 4, the pointer array is aligned with the key array.
 
 <img src="/images/blog/ART/art-16.png"
      alt="Art Node 16"
-     width=300
+     width=500
  />
  
 **Node 48** : Node 48 holds up to 48 different keys. When a key is present in this node, the one-byte array position representing that key will hold an index into the pointer array that points to the child of that key. Its total size is 640 bytes (256\*1 + 48\*8). Note that the pointer array and the key array are not aligned anymore. The key array points to the position in the pointer array where the pointer of that key is stored (e.g., the key 255 in the key array is set to 2 because the position 2 of the pointer array points to the child pertinent to that key).
 
 <img src="/images/blog/ART/art-48.png"
      alt="Art Node 48"
-     width=400
+     width=500
  />
  
 **Node 256**: Node 256 holds up to 256 different keys, hence all possible values in the distribution. It only has a pointer vector, if the pointer is set, the key exists, and it points to its child. Its total size is 2048 bytes (256 pointers * 8 bytes).
 
 <img src="/images/blog/ART/art-256.png"
      alt="Art Node 256"
-     width=400
+     width=500
  />
 
 For the example in the previous section, we could use a ```Node 4``` instead of a ```Node 256``` to store the keys, since we only have 3 keys present. Hence it would look like the following:
@@ -146,6 +146,7 @@ INSERT INTO fk_integers VALUES (4)
 ```
 
 2. Range Queries. Highly selective range queries on indexed columns will also use the ART index underneath.
+
 ```sql
 CREATE TABLE integers(i INTEGER PRIMARY KEY)
 # Insert unique values into ART
@@ -156,6 +157,7 @@ SELECT * FROM integers where i >=8
 
 
 3. Joins. Joins with a small number of matches will also utilize existing ART indexes.
+
 ```sql
 # Optionally you can always force index joins with the following pragma
 PRAGMA force_index_join;
@@ -170,6 +172,7 @@ SELECT * FROM t1 INNER JOIN t2 on (t1.i = t2.i)
 ```
 
 4. Indexes over expressions. ART indexes can also be used to quickly look up expressions.
+
 ``` sql 
 CREATE TABLE integers(i INTEGER, j INTEGER)
 
