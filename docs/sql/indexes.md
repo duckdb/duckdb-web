@@ -45,7 +45,7 @@ CREATE INDEX revenue_idx ON films (revenue);
 -- Create compound index 'gy_idx' on genre and year columns.
 CREATE INDEX gy_idx ON films (genre, year);
 -- Create index 'i_index' on the expression of the sum of columns j and k from table integers.
-CREATE INDEX i_index ON integers ((j+k))
+CREATE INDEX i_index ON integers ((j+k));
 ```
 
 ## Drop Index
