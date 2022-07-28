@@ -10,6 +10,42 @@ title: Python Client API
 
 <p>Python Client API</p>
 <span class="target" id="module-duckdb"></span><p>DuckDB is an embeddable SQL OLAP Database Management System</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="duckdb.threadsafety">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">threadsafety</span></span><em class="property"><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#duckdb.threadsafety" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Indicates that this package is threadsafe</p>
+</dd>
+</dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="duckdb.apilevel">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">apilevel</span></span><em class="property"><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#duckdb.apilevel" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Indicates which Python DBAPI version this package implements</p>
+</dd>
+</dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="duckdb.paramstyle">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">paramstyle</span></span><em class="property"><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#duckdb.paramstyle" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Indicates which parameter style duckdb supports</p>
+</dd>
+</dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="duckdb.default_connection">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">default_connection</span></span><em class="property"><span class="w"> </span><span class="pre">duckdb.DuckDBPyConnection</span></em><a class="headerlink" href="#duckdb.default_connection" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>The connection that is used by default if you don&#8217;t explicitly pass one to the root methods in this module</p>
+</dd>
+</dl>
+
 <dl class="py exception">
 <dt class="sig sig-object py" id="duckdb.BinderException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">BinderException</span></span><a class="headerlink" href="#duckdb.BinderException" title="Permalink to this definition">&#182;</a>
