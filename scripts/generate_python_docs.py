@@ -55,8 +55,11 @@ def post_process(filename:Path):
 
     filename = splitext(filename)[0] + ".md"
 
+    contents = tostring(doc, pretty_print=True).decode()
+    contents = '\n'.join(line.lstrip() for line in contents.splitlines())
+
     with open(filename, "w") as fh:
-        fh.write(FRONTMATTER + tostring(doc, pretty_print=True).decode())
+        fh.write(FRONTMATTER + contents)
 
 
 def main():

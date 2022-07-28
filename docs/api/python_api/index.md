@@ -5,10 +5,10 @@ selected: Documentation/Python/Client API
 title: Python Client API
 ---
 <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <p>Python Client API</p>
+<div class="bodywrapper">
+<div class="body" role="main">
+
+<p>Python Client API</p>
 <span class="target" id="module-duckdb"></span><p>DuckDB is an embeddable SQL OLAP Database Management System</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="duckdb.BinderException">
@@ -1544,8 +1544,7 @@ title: Python Client API
 
 
 
-            <div class="clearer"></div>
-          </div>
-        </div>
-      </div>
-      
+<div class="clearer"></div>
+</div>
+</div>
+</div>
