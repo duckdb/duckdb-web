@@ -53,3 +53,6 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## SQL Editors / IDE's
 * [How to set up the DBeaver SQL IDE](../guides/sql_editors/dbeaver)
+
+## Data Viewers
+* [How to use Tad to view tabular data files and DuckDb databases](../guides/data_viewers/tad)
