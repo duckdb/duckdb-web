@@ -46,7 +46,7 @@ In reality, Tries can also be used for numeric data types. However, storing them
 
 To have more realistic examples, from this point onwards, all depictions in this post will be with bit representations. In DuckDB, the fan-out is always 8 bits. However, for simplicity, the following examples in this blog post will have a fan-out of 2 bits.
 
-In the example below, we have a Trie that indexes the values 7, 10, and 14. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by ```*```) or null (represented by ```Ø```). Similar to the string Trie we had before, each level of the Trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
+In the example below, we have a Trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by ```*```) or null (represented by ```Ø```). Similar to the string Trie we had before, each level of the Trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
 
 <img src="/images/blog/ART/2-bit-trie.png"
      alt="2-bit Trie"
