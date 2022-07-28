@@ -8,7 +8,6 @@ title: Python Client API
 <div class="bodywrapper">
 <div class="body" role="main">
 
-<p>Python Client API</p>
 <span class="target" id="module-duckdb"></span><p>DuckDB is an embeddable SQL OLAP Database Management System</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="duckdb.threadsafety">
