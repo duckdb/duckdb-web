@@ -68,7 +68,6 @@ The table below shows the available statistical aggregate functions.
 | `regr_avgy(y,x)` | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
 | `regr_count(y,x)` | Returns the number of non-null number pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*)` | - |
 | `regr_intercept(y,x)` | Returns the intercept of the univariate linear regression line for non-null pairs in a group. | `AVG(y)-REGR_SLOPE(y,x)*AVG(x)` | - |
-| `stddev_pop(y,x)` | Returns the population standard deviation (square root of variance) of non-NULL values. | - | - |
 | `regr_r2(y,x)` | Returns the coefficient of determination for non-null pairs in a group. | - | - |
 | `regr_slope(y,x)` | Returns the slope of the linear regression line for non-null pairs in a group.| `COVAR_POP(x,y) / VAR_POP(x)` | - |
 | `regr_sxx(y,x)` | -  | `REGR_COUNT(y, x) * VAR_POP(x)` | - |
