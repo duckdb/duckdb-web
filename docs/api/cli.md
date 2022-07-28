@@ -182,6 +182,17 @@ col_1|col_2
 10|20
 ```
 
+## Prepared Statements
+The DuckDB CLI supports executing prepared statements in addition to normal `SELECT` statements. To create a prepared
+statement, use the `PREPARE` statement
+```sql
+D PREPARE S1 AS SELECT * FROM my_table WHERE my_column < $1 OR my_column > $2;
+```
+To run the prepared statement with parameters, use the `EXECUTE` statement
+```sql
+D EXECUTE S1(42, 101);
+```
+
 ## Querying the Database Schema
 All DuckDB clients support [querying the database schema with SQL](../sql/information_schema), but the CLI has additional dot commands that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../sql/functions/patternmatching#like).
