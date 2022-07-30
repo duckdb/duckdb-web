@@ -107,7 +107,7 @@ title: Python Client API
 <p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.append">
-<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span>, df: pandas.DataFrame, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.append" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span>, <span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.append" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Append the passed Data.Frame to the named table</p>
@@ -175,13 +175,13 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>df(self: duckdb.DuckDBPyConnection) -&gt; object</p></li>
+<li><p>df(self: duckdb.DuckDBPyConnection) -&gt; pandas.DataFrame</p></li>
 </ol>
 <p>Fetch a result as Data.Frame following execute()</p>
 <ol class="arabic simple" start="2">
-<li><p>df(self: duckdb.DuckDBPyConnection, df: object) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>df(self: duckdb.DuckDBPyConnection, df: pandas.DataFrame) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
-<p>Create a relation object from the Data.Frame in df (alias of from_df)</p>
+<p>Create a relation object from the Data.Frame in df. This is an alias of from_df</p>
 </dd>
 </dl>
 
@@ -223,7 +223,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_df">
-<span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Fetch a result as Data.Frame following execute()</p>
@@ -232,7 +232,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_df_chunk">
-<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">vectors_per_chunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_df_chunk" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">vectors_per_chunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_df_chunk" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Fetch a chunk of the result as Data.Frame following execute()</p>
@@ -259,7 +259,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchdf">
-<span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchdf" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchdf" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Fetch a result as Data.Frame following execute()</p>
@@ -304,7 +304,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_df">
-<span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Create a relation object from the Data.Frame in df</p>
@@ -583,7 +583,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.df">
-<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Transforms the relation object into a Data.Frame</p>
@@ -896,7 +896,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_df">
-<span class="sig-name descname"><span class="pre">to_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">to_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Transforms the relation object into a Data.Frame</p>
@@ -1006,7 +1006,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.df">
-<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd></dd>
 </dl>
@@ -1031,14 +1031,14 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetch_df">
-<span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd></dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetch_df_chunk">
-<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df_chunk" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df_chunk" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd></dd>
 </dl>
@@ -1052,7 +1052,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetchdf">
-<span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchdf" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchdf" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd></dd>
 </dl>
@@ -1301,7 +1301,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.aggregate">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">aggr_expr:</span> <span class="pre">str</span></span>, <span class="n"><span class="pre">group_expr:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.aggregate" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">aggr_expr:</span> <span class="pre">str</span></span>, <span class="n"><span class="pre">group_expr:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.aggregate" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Compute the aggregate aggr_expr by the optional groups group_expr on Data.frame df</p>
@@ -1310,7 +1310,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.alias">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">alias</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">alias:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.alias" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">alias</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">alias:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.alias" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Create a relation from Data.Frame df with the passed alias</p>
@@ -1337,7 +1337,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.df" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Create a relation object from the Data.Frame df</p>
@@ -1346,7 +1346,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.distinct">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">distinct</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.distinct" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">distinct</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.distinct" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Compute the distinct rows from Data.Frame df</p>
@@ -1355,7 +1355,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.filter">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">filter_expr:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.filter" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">filter_expr:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.filter" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Filter the Data.Frame df by the filter in filter_expr</p>
@@ -1382,7 +1382,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.from_df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Create a relation object from the Data.Frame df</p>
@@ -1396,11 +1396,11 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>from_parquet(file_name: str, binary_as_string: bool, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7efdb2aa9030&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>from_parquet(file_name: str, binary_as_string: bool, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7f7241f055f0&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Creates a relation object from the Parquet file in file_name</p>
 <ol class="arabic simple" start="2">
-<li><p>from_parquet(file_name: str, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7efdb2aa9030&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>from_parquet(file_name: str, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7f7241f055f0&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Creates a relation object from the Parquet file in file_name</p>
 </dd>
@@ -1435,7 +1435,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.limit">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">n:</span> <span class="pre">int</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.limit" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">limit</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">n:</span> <span class="pre">int</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.limit" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Retrieve the first n rows from the Data.Frame df</p>
@@ -1444,7 +1444,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.order">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">order_expr:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.order" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">order_expr:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.order" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Reorder the Data.Frame df by order_expr</p>
@@ -1453,7 +1453,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.project">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">project</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">project_expr:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.project" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">project</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">project_expr:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.project" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Project the Data.Frame df by the projection in project_expr</p>
@@ -1471,7 +1471,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.query_df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">query_df</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">virtual_table_name:</span> <span class="pre">str</span></span>, <span class="n"><span class="pre">sql_query:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span></span><a class="headerlink" href="#duckdb.query_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">query_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">virtual_table_name:</span> <span class="pre">str</span></span>, <span class="n"><span class="pre">sql_query:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span></span><a class="headerlink" href="#duckdb.query_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Run the given SQL query in sql_query on the view named virtual_table_name that contains the content of Data.Frame df</p>
@@ -1570,7 +1570,7 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.write_csv">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span>df: pandas.DataFrame, <span class="n"><span class="pre">file_name:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.write_csv" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">write_csv</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">df:</span> <span class="pre">pandas.DataFrame</span></span>, <span class="n"><span class="pre">file_name:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.write_csv" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Write the Data.Frame df to a CSV file in file_name</p>
