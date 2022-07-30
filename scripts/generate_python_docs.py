@@ -21,11 +21,7 @@ title: Python Client API
 class JekyllTranslator(HTML5Translator):
     def visit_desc_parameter(self, node):
         txt = node.astext()
-        if txt == "df: object":
-            # FIXME: duckdb uses object types for pandas
-            self.body.append("df: pandas.DataFrame")
-            raise SkipChildren()
-        elif " = <duckdb." in txt:
+        if " = <duckdb." in txt:
             # FIXME: duckdb uses class instances as default params
             self.body.append(txt.split(" = ")[0] + " = None")
             raise SkipChildren()
