@@ -59,7 +59,7 @@ def post_process(filename:Path):
 
 
 def main():
-    destdir = join(dirname(__file__), "../docs/api/python_api/")
+    destdir = join(dirname(__file__), "../docs/api/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
         confdir=None,
