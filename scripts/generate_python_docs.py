@@ -68,6 +68,7 @@ def main():
         confoverrides={
             "project": "duckdb",
             "extensions": [
+                "sphinx.ext.intersphinx",
                 "sphinx.ext.autodoc",
                 "generate_python_docs",
             ],
@@ -76,6 +77,9 @@ def main():
             "html_copy_source": False,
             "html_show_sphinx": False,
             "html_use_index": False,
+            "intersphinx_mapping": {
+                "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None)
+            }
         },
         buildername="jekyll",
     )
