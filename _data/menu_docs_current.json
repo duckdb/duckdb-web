@@ -177,7 +177,17 @@
             },
             {
               "page": "Python",
-              "url": "python"
+              "slug": "python",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
             },
             {
               "page": "R",

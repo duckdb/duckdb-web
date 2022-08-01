@@ -21,11 +21,7 @@ title: Python Client API
 class JekyllTranslator(HTML5Translator):
     def visit_desc_parameter(self, node):
         txt = node.astext()
-        if txt == "df: object":
-            # FIXME: duckdb uses object types for pandas
-            self.body.append("df: pandas.DataFrame")
-            raise SkipChildren()
-        elif " = <duckdb." in txt:
+        if " = <duckdb." in txt:
             # FIXME: duckdb uses class instances as default params
             self.body.append(txt.split(" = ")[0] + " = None")
             raise SkipChildren()
@@ -63,7 +59,7 @@ def post_process(filename:Path):
 
 
 def main():
-    destdir = join(dirname(__file__), "../docs/api/python_api/")
+    destdir = join(dirname(__file__), "../docs/api/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
         confdir=None,
@@ -72,6 +68,7 @@ def main():
         confoverrides={
             "project": "duckdb",
             "extensions": [
+                "sphinx.ext.intersphinx",
                 "sphinx.ext.autodoc",
                 "generate_python_docs",
             ],
@@ -80,6 +77,9 @@ def main():
             "html_copy_source": False,
             "html_show_sphinx": False,
             "html_use_index": False,
+            "intersphinx_mapping": {
+                "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None)
+            }
         },
         buildername="jekyll",
     )
