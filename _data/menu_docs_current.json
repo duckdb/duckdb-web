@@ -626,6 +626,14 @@
             {
               "page": "JSON",
               "url": "json"
+            },
+            {
+              "page": "SQLite Scanner",
+              "url": "sqlite_scanner"
+            },
+            {
+              "page": "Postgres Scanner",
+              "url": "postgres_scanner"
             }
           ]
         }
