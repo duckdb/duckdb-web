@@ -139,6 +139,7 @@ The `.mode` command may be used to change the appearance of the tables returned 
 * html
 * insert
 * json
+* jsonlines
 * line
 * list
 * markdown
