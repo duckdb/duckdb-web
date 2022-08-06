@@ -348,6 +348,15 @@ title: Python Client API
 </dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.get_substrait_json">
+<span class="sig-name descname"><span class="pre">get_substrait_json</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_substrait_json" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Serialize a query to protobuf on the JSON format</p>
+</dd>
+</dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.get_table_names">
 <span class="sig-name descname"><span class="pre">get_table_names</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_table_names" title="Permalink to this definition">&#182;</a>
 </dt>
@@ -1427,6 +1436,15 @@ title: Python Client API
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.get_substrait">
 <span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">get_substrait</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">query:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.get_substrait" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Serialize a query object to protobuf</p>
+</dd>
+</dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="duckdb.get_substrait_json">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">get_substrait_json</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">query:</span> <span class="pre">str</span></span>, connection: duckdb.DuckDBPyConnection = None, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.get_substrait_json" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Serialize a query object to protobuf</p>
