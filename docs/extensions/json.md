@@ -93,13 +93,15 @@ SELECT j->'species'->>[0,1] FROM example;
 The following functions are used to create JSON.
 
 | Function | Description |
-|:---|:---|:---|
+|:---|:---|
 | `to_json(`*`any`*`)` | Create **JSON** from a value of *`any`* type. Our **LIST** is converted to a JSON array, and our **STRUCT** and **MAP** are converted to a JSON object |
 | `json_quote(`*`any`*`)` | Alias for `to_json` |
 | `array_to_json(`*`list`*`)` | Alias for `to_json` that only accepts **LIST** |
 | `row_to_json(`*`list`*`)` | Alias for `to_json` that only accepts **STRUCT** |
 | `json_array([`*`any`*`, ...])` | Create a JSON array from *`any`* number of values |
 | `json_object([`*`key`*`,`*`value`*`, ...])` | Create a JSON object from any number of *`key`*, *`value`* pairs |
+| `read_json_objects(`*`filename`*`)`   | Read 1 or more json objects from a file |
+| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_ndjson_objects`         |
 
 Examples:
 ```sql
