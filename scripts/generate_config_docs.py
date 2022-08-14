@@ -34,6 +34,8 @@ for keyword in keywords:
 
 cmd = f'''
 .mode markdown
+INSTALL httpfs;
+LOAD httpfs;
 SELECT substr(name, 2, (LEN(name) - 2)::int) AS name, {description_replacement} description, input_type, default_value
 FROM (
 SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
