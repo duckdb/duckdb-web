@@ -90,7 +90,7 @@ The simplest window function is `ROW_NUMBER()`.
 This function just computes the 1-based row number within the partition using the query:
 
 ```sql
-SELECT "Plant", "Date", ROW_NUMBER AS "Row"
+SELECT "Plant", "Date", row_number() over () AS "Row"
 FROM "History"
 ORDER BY 1, 2
 ```
