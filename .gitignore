@@ -305,3 +305,4 @@ duckdb_functions_join_docs.tab
 duckdb_functions.tab
 docs/sql/functions/descriptions.txt
 venv/
+node_modules/

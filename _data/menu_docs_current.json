@@ -261,7 +261,17 @@
             },
             {
               "page": "Node.js",
-              "url": "nodejs"
+              "slug": "nodejs",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
             },
             {
               "page": "WASM",
