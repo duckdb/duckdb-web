@@ -1,0 +1,43 @@
+on:
+  schedule:
+    - cron: "0 0 * * 1"  # run once a week on mondays
+  workflow_dispatch: {}  # allow running manually from the github ui
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+name: Update docs
+jobs:
+  update_docs:
+    name: Update docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v3
+      - run: npm install jsdoc-to-markdown
+      - run: pip install -r requirements.txt -U
+      - run: pip install duckdb --pre -U  # grab the latest duckdb python dev version
+      - run: gh repo clone duckdb/duckdb
+      - name: download latest duckdb cli binary
+        run: |
+          RUN_ID=$(gh run list --branch master --repo duckdb/duckdb --limit 1 --workflow LinuxRelease --json databaseId --jq '.[0].databaseId')
+          gh run download $RUN_ID --repo duckdb/duckdb --name duckdb-binaries-linux
+          mkdir -p duckdb/build/debug
+          unzip duckdb_cli-linux-amd64.zip -d duckdb/build/debug
+
+      - name: Update docs
+        uses: technote-space/create-pr-action@v2
+        with:
+          EXECUTE_COMMANDS: |
+            ./scripts/generate_all_docs.sh duckdb
+
+            # remove things we don't want commited
+            rm *.zip
+            rm -rf duckdb
+          COMMIT_MESSAGE: "chore: auto update docs"
+          COMMIT_NAME: "GitHub Actions"
+          COMMIT_EMAIL: "example@example.com"
+          PR_BRANCH_NAME: "chore-update-docs-${PR_ID}"
+          PR_TITLE: "chore: auto update docs"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
