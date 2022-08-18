@@ -1,5 +1,11 @@
-#!/usr/bin/env sh
-set -Eeuo pipefail
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "${1-}" = "" ]
+then
+    echo >&2 "usage: $0 duckdb_dir"
+    exit 1
+fi
 
 DUCKDB=$1;
 echo "Generating docs using duckdb source in $DUCKDB"
