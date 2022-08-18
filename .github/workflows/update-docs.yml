@@ -34,7 +34,7 @@ jobs:
 
             # remove things we don't want commited
             rm *.zip
-            rm -rf duckdb
+            rm -rf duckdb 
           COMMIT_MESSAGE: "chore: auto update docs"
           COMMIT_NAME: "GitHub Actions"
           COMMIT_EMAIL: "example@example.com"
