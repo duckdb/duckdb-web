@@ -66,7 +66,7 @@ require icu
 Next, use the `Set TimeZone` command:
 
 ```sql
-Set TimeZone='Americas/Los_Angeles';
+Set TimeZone='America/Los_Angeles';
 ```
 
 Time binning operations for `TIMESTAMPTZ` will then be implemented using the given time zone.
@@ -111,7 +111,7 @@ They can be looked from in the `duckdb_settings()` table function:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
--- Americas/Los_Angeles
+-- America/Los_Angeles
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
 -- gregorian
 ```
