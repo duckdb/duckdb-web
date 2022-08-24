@@ -109,6 +109,9 @@ For more information about data chunks, see the [documentation on data chunks](d
 </code></pre></div></div>
 #### **Logical Type Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_list_type">duckdb_create_list_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_map_type">duckdb_create_map_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="k">value_type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_decimal_type">duckdb_create_decimal_type</a></span>(<span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_scale">duckdb_decimal_scale</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
@@ -117,6 +120,8 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_enum_dictionary_size">duckdb_enum_dictionary_size</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_enum_dictionary_value">duckdb_enum_dictionary_value</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_list_type_child_type">duckdb_list_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_key_type">duckdb_map_type_key_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_value_type">duckdb_map_type_value_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
@@ -770,7 +775,78 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 The primitive type to create.
 * `returns`
 
-The logical type type.
+The logical type.
+
+<br>
+
+### **duckdb_create_list_type**
+---
+Creates a list type from its child type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_list_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The child type of list type to create.
+* `returns`
+
+The logical type.
+
+<br>
+
+### **duckdb_create_map_type**
+---
+Creates a map type from its key type and value type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_map_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>,<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">value_type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The key type and value type of map type to create.
+* `returns`
+
+The logical type.
+
+<br>
+
+### **duckdb_create_decimal_type**
+---
+Creates a `duckdb_logical_type` of type decimal with the specified width and scale
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_decimal_type</span>(<span class="k">
+</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
+</span>  <span class="kt">uint8_t</span> <span class="k">scale
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `width`
+
+The width of the decimal type
+* `scale`
+
+The scale of the decimal type
+* `returns`
+
+The logical type.
 
 <br>
 
@@ -947,6 +1023,52 @@ The logical type object
 * `returns`
 
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### **duckdb_map_type_key_type**
+---
+Retrieves the key type of the given map type.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_key_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The key type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### **duckdb_map_type_value_type**
+---
+Retrieves the value type of the given map type.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_value_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The value type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 

@@ -83,6 +83,7 @@ selected: API Reference
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_prepare_error">duckdb_prepare_error</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_nparams">duckdb_nparams</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_param_type">duckdb_param_type</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_clear_bindings">duckdb_clear_bindings</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_boolean">duckdb_bind_boolean</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">bool</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int8">duckdb_bind_int8</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int8_t</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int16">duckdb_bind_int16</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int16_t</span> <span class="k">val</span>);
@@ -106,15 +107,26 @@ selected: API Reference
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared">duckdb_execute_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared_arrow">duckdb_execute_prepared_arrow</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="k">out_result</span>);
 </code></pre></div></div>
+### **Pending Result Interface**
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_pending_prepared">duckdb_pending_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="k">duckdb_pending_result</span> *<span class="k">out_result</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_pending">duckdb_destroy_pending</a></span>(<span class="k">duckdb_pending_result</span> *<span class="k">pending_result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_pending_error">duckdb_pending_error</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
+<span class="k">duckdb_pending_state</span> <span class="nf"><a href="#duckdb_pending_execute_task">duckdb_pending_execute_task</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_pending">duckdb_execute_pending</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
+</code></pre></div></div>
 ### **Value Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_value">duckdb_destroy_value</a></span>(<span class="kt">duckdb_value</span> *<span class="k">value</span>);
 <span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_create_varchar">duckdb_create_varchar</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">text</span>);
+<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_create_varchar_length">duckdb_create_varchar_length</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">text</span>, <span class="kt">idx_t</span> <span class="k">length</span>);
 <span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_create_int64">duckdb_create_int64</a></span>(<span class="kt">int64_t</span> <span class="k">val</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_get_varchar">duckdb_get_varchar</a></span>(<span class="kt">duckdb_value</span> <span class="k">value</span>);
 <span class="kt">int64_t</span> <span class="nf"><a href="#duckdb_get_int64">duckdb_get_int64</a></span>(<span class="kt">duckdb_value</span> <span class="k">value</span>);
 </code></pre></div></div>
 ### **Logical Type Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_list_type">duckdb_create_list_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_map_type">duckdb_create_map_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="k">value_type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_decimal_type">duckdb_create_decimal_type</a></span>(<span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_scale">duckdb_decimal_scale</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
@@ -123,6 +135,8 @@ selected: API Reference
 <span class="kt">uint32_t</span> <span class="nf"><a href="#duckdb_enum_dictionary_size">duckdb_enum_dictionary_size</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_enum_dictionary_value">duckdb_enum_dictionary_value</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_list_type_child_type">duckdb_list_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_key_type">duckdb_map_type_key_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_map_type_value_type">duckdb_map_type_value_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
@@ -162,7 +176,9 @@ selected: API Reference
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_extra_info">duckdb_table_function_set_extra_info</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">void</span> *<span class="k">extra_info</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_bind">duckdb_table_function_set_bind</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_bind_t</span> <span class="k">bind</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_init">duckdb_table_function_set_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_local_init">duckdb_table_function_set_local_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_function">duckdb_table_function_set_function</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_t</span> <span class="k">function</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_supports_projection_pushdown">duckdb_table_function_supports_projection_pushdown</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">bool</span> <span class="k">pushdown</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_register_table_function">duckdb_register_table_function</a></span>(<span class="kt">duckdb_connection</span> <span class="k">con</span>, <span class="kt">duckdb_table_function</span> <span class="k">function</span>);
 </code></pre></div></div>
 ### **Table Function Bind**
@@ -171,18 +187,23 @@ selected: API Reference
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_bind_get_parameter_count">duckdb_bind_get_parameter_count</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>);
 <span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_bind_get_parameter">duckdb_bind_get_parameter</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_bind_data">duckdb_bind_set_bind_data</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">bind_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_cardinality">duckdb_bind_set_cardinality</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">cardinality</span>, <span class="kt">bool</span> <span class="k">is_exact</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_error">duckdb_bind_set_error</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 ### **Table Function Init**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_init_get_extra_info">duckdb_init_get_extra_info</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_init_get_bind_data">duckdb_init_get_bind_data</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_init_data">duckdb_init_set_init_data</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">init_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_init_get_column_count">duckdb_init_get_column_count</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_init_get_column_index">duckdb_init_get_column_index</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">column_index</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_max_threads">duckdb_init_set_max_threads</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">max_threads</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_error">duckdb_init_set_error</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 ### **Table Function**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_extra_info">duckdb_function_get_extra_info</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_bind_data">duckdb_function_get_bind_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_init_data">duckdb_function_get_init_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
+<span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_local_init_data">duckdb_function_get_local_init_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_function_set_error">duckdb_function_set_error</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 ### **Replacement Scans**
@@ -229,6 +250,15 @@ selected: API Reference
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_arrow_rows_changed">duckdb_arrow_rows_changed</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_query_arrow_error">duckdb_query_arrow_error</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_arrow">duckdb_destroy_arrow</a></span>(<span class="kt">duckdb_arrow</span> *<span class="k">result</span>);
+</code></pre></div></div>
+### **Threading Information**
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_execute_tasks">duckdb_execute_tasks</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>, <span class="kt">idx_t</span> <span class="k">max_tasks</span>);
+<span class="k">duckdb_task_state</span> <span class="nf"><a href="#duckdb_create_task_state">duckdb_create_task_state</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_execute_tasks_state">duckdb_execute_tasks_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_execute_n_tasks_state">duckdb_execute_n_tasks_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>, <span class="kt">idx_t</span> <span class="k">max_tasks</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_finish_execution">duckdb_finish_execution</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
+<span class="kt">bool</span> <span class="nf"><a href="#duckdb_task_state_is_finished">duckdb_task_state_is_finished</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_task_state">duckdb_destroy_task_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
 </code></pre></div></div>
 ### **duckdb_open**
 ---
@@ -775,7 +805,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 ---
 * `result`
 
-The result object to fetch the nullmask from.
+The result object to fetch the error from.
 * `returns`
 
 The error of the result.
@@ -1592,6 +1622,18 @@ The parameter type
 
 <br>
 
+### **duckdb_clear_bindings**
+---
+Clear the params bind to the prepared statement.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_clear_bindings</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
+</span>);
+</code></pre></div></div>
+<br>
+
 ### **duckdb_bind_boolean**
 ---
 Binds a bool value to the prepared statement at the specified index.
@@ -1926,6 +1968,132 @@ The query result.
 
 <br>
 
+### **duckdb_pending_prepared**
+---
+Executes the prepared statement with the given bound parameters, and returns a pending result.
+The pending result represents an intermediate structure for a query that is not yet fully executed.
+The pending result can be used to incrementally execute a query, returning control to the client between tasks.
+
+Note that after calling `duckdb_pending_prepared`, the pending result should always be destroyed using
+`duckdb_destroy_pending`, even if this function returns DuckDBError.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_pending_prepared</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
+</span>  <span class="k">duckdb_pending_result</span> *<span class="k">out_result
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `prepared_statement`
+
+The prepared statement to execute.
+* `out_result`
+
+The pending query result.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### **duckdb_destroy_pending**
+---
+Closes the pending result and de-allocates all memory allocated for the result.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_pending</span>(<span class="k">
+</span>  <span class="k">duckdb_pending_result</span> *<span class="k">pending_result
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `pending_result`
+
+The pending result to destroy.
+
+<br>
+
+### **duckdb_pending_error**
+---
+Returns the error message contained within the pending result.
+
+The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_pending` is called.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_pending_error</span>(<span class="k">
+</span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `result`
+
+The pending result to fetch the error from.
+* `returns`
+
+The error of the pending result.
+
+<br>
+
+### **duckdb_pending_execute_task**
+---
+Executes a single task within the query, returning whether or not the query is ready.
+
+If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
+If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_task function should be called again.
+If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
+
+The error message can be obtained by calling duckdb_pending_error on the pending_result.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_pending_state</span> <span class="k">duckdb_pending_execute_task</span>(<span class="k">
+</span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `pending_result`
+
+The pending result to execute a task within..
+* `returns`
+
+The state of the pending result after the execution.
+
+<br>
+
+### **duckdb_execute_pending**
+---
+Fully execute a pending query result, returning the final query result.
+
+If duckdb_pending_execute_task has been called until DUCKDB_PENDING_RESULT_READY was returned, this will return fast.
+Otherwise, all remaining tasks must be executed first.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_execute_pending</span>(<span class="k">
+</span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>,<span class="k">
+</span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `pending_result`
+
+The pending result to execute.
+* `out_result`
+
+The result object.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
 ### **duckdb_destroy_value**
 ---
 Destroys the value and de-allocates all memory allocated for that type.
@@ -1946,7 +2114,7 @@ The value to destroy.
 
 ### **duckdb_create_varchar**
 ---
-Creates a value from a varchar
+Creates a value from a null-terminated string
 
 #### **Syntax**
 ---
@@ -1958,7 +2126,32 @@ Creates a value from a varchar
 ---
 * `value`
 
-The varchar value
+The null-terminated string
+* `returns`
+
+The value. This must be destroyed with `duckdb_destroy_value`.
+
+<br>
+
+### **duckdb_create_varchar_length**
+---
+Creates a value from a string
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_create_varchar_length</span>(<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">text</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">length
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `value`
+
+The text
+* `length`
+
+The length of the text
 * `returns`
 
 The value. This must be destroyed with `duckdb_destroy_value`.
@@ -2049,7 +2242,78 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 The primitive type to create.
 * `returns`
 
-The logical type type.
+The logical type.
+
+<br>
+
+### **duckdb_create_list_type**
+---
+Creates a list type from its child type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_list_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The child type of list type to create.
+* `returns`
+
+The logical type.
+
+<br>
+
+### **duckdb_create_map_type**
+---
+Creates a map type from its key type and value type.
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_map_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>,<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">value_type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The key type and value type of map type to create.
+* `returns`
+
+The logical type.
+
+<br>
+
+### **duckdb_create_decimal_type**
+---
+Creates a `duckdb_logical_type` of type decimal with the specified width and scale
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_decimal_type</span>(<span class="k">
+</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
+</span>  <span class="kt">uint8_t</span> <span class="k">scale
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `width`
+
+The width of the decimal type
+* `scale`
+
+The scale of the decimal type
+* `returns`
+
+The logical type.
 
 <br>
 
@@ -2226,6 +2490,52 @@ The logical type object
 * `returns`
 
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### **duckdb_map_type_key_type**
+---
+Retrieves the key type of the given map type.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_key_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The key type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### **duckdb_map_type_value_type**
+---
+Retrieves the value type of the given map type.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_map_type_value_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `type`
+
+The logical type object
+* `returns`
+
+The value type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
@@ -2956,6 +3266,28 @@ The init function
 
 <br>
 
+### **duckdb_table_function_set_local_init**
+---
+Sets the thread-local init function of the table function
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_local_init</span>(<span class="k">
+</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
+</span>  <span class="k">duckdb_table_function_init_t</span> <span class="k">init
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `table_function`
+
+The table function
+* `init`
+
+The init function
+
+<br>
+
 ### **duckdb_table_function_set_function**
 ---
 Sets the main function of the table function
@@ -2975,6 +3307,32 @@ The table function
 * `function`
 
 The function
+
+<br>
+
+### **duckdb_table_function_supports_projection_pushdown**
+---
+Sets whether or not the given table function supports projection pushdown.
+
+If this is set to true, the system will provide a list of all required columns in the `init` stage through
+the `duckdb_init_get_column_count` and `duckdb_init_get_column_index` functions.
+If this is set to false (the default), the system will expect all columns to be projected.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_supports_projection_pushdown</span>(<span class="k">
+</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
+</span>  <span class="kt">bool</span> <span class="k">pushdown
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `table_function`
+
+The table function
+* `pushdown`
+
+True if the table function supports projection pushdown, false otherwise.
 
 <br>
 
@@ -3128,6 +3486,29 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
+### **duckdb_bind_set_cardinality**
+---
+Sets the cardinality estimate for the table function, used for optimization.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_bind_set_cardinality</span>(<span class="k">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">cardinality</span>,<span class="k">
+</span>  <span class="kt">bool</span> <span class="k">is_exact
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The bind data object.
+* `is_exact`
+
+Whether or not the cardinality estimate is exact, or an approximation
+
+<br>
+
 ### **duckdb_bind_set_error**
 ---
 Report that an error has occurred while calling bind.
@@ -3221,6 +3602,78 @@ The callback that will be called to destroy the init data (if any)
 
 <br>
 
+### **duckdb_init_get_column_count**
+---
+Returns the number of projected columns.
+
+This function must be used if projection pushdown is enabled to figure out which columns to emit.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_init_get_column_count</span>(<span class="k">
+</span>  <span class="kt">duckdb_init_info</span> <span class="k">info
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `returns`
+
+The number of projected columns.
+
+<br>
+
+### **duckdb_init_get_column_index**
+---
+Returns the column index of the projected column at the specified position.
+
+This function must be used if projection pushdown is enabled to figure out which columns to emit.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_init_get_column_index</span>(<span class="k">
+</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">column_index
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `column_index`
+
+The index at which to get the projected column index, from 0..duckdb_init_get_column_count(info)
+* `returns`
+
+The column index of the projected column.
+
+<br>
+
+### **duckdb_init_set_max_threads**
+---
+Sets how many threads can process this table function in parallel (default: 1)
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_init_set_max_threads</span>(<span class="k">
+</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">max_threads
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `max_threads`
+
+The maximum amount of threads that can process this table function
+
+<br>
+
 ### **duckdb_init_set_error**
 ---
 Report that an error has occurred while calling init.
@@ -3290,11 +3743,32 @@ The bind data object
 
 ### **duckdb_function_get_init_data**
 ---
-Gets the init data set by `duckdb_bind_set_init_data` during the bind.
+Gets the init data set by `duckdb_init_set_init_data` during the init.
 
 #### **Syntax**
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_init_data</span>(<span class="k">
+</span>  <span class="kt">duckdb_function_info</span> <span class="k">info
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `returns`
+
+The init data object
+
+<br>
+
+### **duckdb_function_get_local_init_data**
+---
+Gets the thread-local init data set by `duckdb_init_set_init_data` during the local_init.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_local_init_data</span>(<span class="k">
 </span>  <span class="kt">duckdb_function_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
@@ -4046,6 +4520,165 @@ Closes the result and de-allocates all memory allocated for the arrow result.
 * `result`
 
 The result to destroy.
+
+<br>
+
+### **duckdb_execute_tasks**
+---
+Execute DuckDB tasks on this thread.
+
+Will return after `max_tasks` have been executed, or if there are no more tasks present.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_execute_tasks</span>(<span class="k">
+</span>  <span class="kt">duckdb_database</span> <span class="k">database</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">max_tasks
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `database`
+
+The database object to execute tasks for
+* `max_tasks`
+
+The maximum amount of tasks to execute
+
+<br>
+
+### **duckdb_create_task_state**
+---
+Creates a task state that can be used with duckdb_execute_tasks_state to execute tasks until
+duckdb_finish_execution is called on the state.
+
+duckdb_destroy_state should be called on the result in order to free memory.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_task_state</span> <span class="k">duckdb_create_task_state</span>(<span class="k">
+</span>  <span class="kt">duckdb_database</span> <span class="k">database
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `database`
+
+The database object to create the task state for
+* `returns`
+
+The task state that can be used with duckdb_execute_tasks_state.
+
+<br>
+
+### **duckdb_execute_tasks_state**
+---
+Execute DuckDB tasks on this thread.
+
+The thread will keep on executing tasks forever, until duckdb_finish_execution is called on the state.
+Multiple threads can share the same duckdb_task_state.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_execute_tasks_state</span>(<span class="k">
+</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `state`
+
+The task state of the executor
+
+<br>
+
+### **duckdb_execute_n_tasks_state**
+---
+Execute DuckDB tasks on this thread.
+
+The thread will keep on executing tasks until either duckdb_finish_execution is called on the state,
+max_tasks tasks have been executed or there are no more tasks to be executed.
+
+Multiple threads can share the same duckdb_task_state.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_execute_n_tasks_state</span>(<span class="k">
+</span>  <span class="k">duckdb_task_state</span> <span class="k">state</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">max_tasks
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `state`
+
+The task state of the executor
+* `max_tasks`
+
+The maximum amount of tasks to execute
+* `returns`
+
+The amount of tasks that have actually been executed
+
+<br>
+
+### **duckdb_finish_execution**
+---
+Finish execution on a specific task.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_finish_execution</span>(<span class="k">
+</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `state`
+
+The task state to finish execution
+
+<br>
+
+### **duckdb_task_state_is_finished**
+---
+Check if the provided duckdb_task_state has finished execution
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_task_state_is_finished</span>(<span class="k">
+</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `state`
+
+The task state to inspect
+* `returns`
+
+Whether or not duckdb_finish_execution has been called on the task state
+
+<br>
+
+### **duckdb_destroy_task_state**
+---
+Destroys the task state returned from duckdb_create_task_state.
+
+Note that this should not be called while there is an active duckdb_execute_tasks_state running
+on the task state.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_task_state</span>(<span class="k">
+</span>  <span class="k">duckdb_task_state</span> <span class="k">state
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `state`
+
+The task state to clean up
 
 <br>
 

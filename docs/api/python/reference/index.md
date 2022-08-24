@@ -73,6 +73,15 @@ title: Python Client API
 </dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="duckdb.ConnectionException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ConnectionException</span></span><a class="headerlink" href="#duckdb.ConnectionException" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Bases: <a class="reference internal" href="#duckdb.OperationalError" title="duckdb.OperationalError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OperationalError</span></code></a></p>
+</dd>
+</dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="duckdb.ConstraintException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ConstraintException</span></span><a class="headerlink" href="#duckdb.ConstraintException" title="Permalink to this definition">&#182;</a>
 </dt>
@@ -116,7 +125,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.arrow">
-<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.arrow" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.Table</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.arrow" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Fetch a result as Arrow table following execute()</p>
@@ -214,7 +223,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_arrow_table">
-<span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_arrow_table" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.Table</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_arrow_table" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Fetch a result as Arrow table following execute()</p>
@@ -241,7 +250,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetch_record_batch">
-<span class="sig-name descname"><span class="pre">fetch_record_batch</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_record_batch" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_record_batch</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.RecordBatchReader</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetch_record_batch" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Fetch an Arrow RecordBatchReader following execute()</p>
@@ -263,6 +272,15 @@ title: Python Client API
 </dt>
 <dd>
 <p>Fetch a result as Data.Frame following execute()</p>
+</dd>
+</dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.fetchmany">
+<span class="sig-name descname"><span class="pre">fetchmany</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span>, <span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.fetchmany" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Fetch the next set of rows from a result following execute</p>
 </dd>
 </dl>
 
@@ -502,10 +520,10 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.arrow">
-<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.arrow" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.Table</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.arrow" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Transforms the relation object into a Arrow table</p>
+<p>Execute and fetch all rows as an Arrow Table</p>
 </dd>
 </dl>
 
@@ -595,7 +613,7 @@ title: Python Client API
 <span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Transforms the relation object into a Data.Frame</p>
+<p>Execute and fetch all rows as a pandas DataFrame</p>
 </dd>
 </dl>
 
@@ -647,7 +665,25 @@ title: Python Client API
 <span class="sig-name descname"><span class="pre">fetchall</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchall" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Execute and fetch all rows</p>
+<p>Execute and fetch all rows as a list of tuples</p>
+</dd>
+</dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchmany">
+<span class="sig-name descname"><span class="pre">fetchmany</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchmany" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Execute and fetch the next set of rows as a list of tuples</p>
+</dd>
+</dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.fetchnumpy">
+<span class="sig-name descname"><span class="pre">fetchnumpy</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchnumpy" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Execute and fetch all rows as a Python dict mapping each column to one numpy arrays</p>
 </dd>
 </dl>
 
@@ -656,7 +692,7 @@ title: Python Client API
 <span class="sig-name descname"><span class="pre">fetchone</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.fetchone" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Execute and fetch a single row</p>
+<p>Execute and fetch a single row as a tuple</p>
 </dd>
 </dl>
 
@@ -833,10 +869,10 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.record_batch">
-<span class="sig-name descname"><span class="pre">record_batch</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.record_batch" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">record_batch</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.RecordBatchReader</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.record_batch" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Transforms the relation object into a Arrow Record Batch Reader</p>
+<p>Execute and return an Arrow Record Batch Reader that yields all rows</p>
 </dd>
 </dl>
 
@@ -896,10 +932,10 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_arrow_table">
-<span class="sig-name descname"><span class="pre">to_arrow_table</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_arrow_table" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">to_arrow_table</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.Table</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_arrow_table" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Transforms the relation object into a Arrow table</p>
+<p>Execute and fetch all rows as an Arrow Table</p>
 </dd>
 </dl>
 
@@ -908,7 +944,7 @@ title: Python Client API
 <span class="sig-name descname"><span class="pre">to_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Transforms the relation object into a Data.Frame</p>
+<p>Execute and fetch all rows as a pandas DataFrame</p>
 </dd>
 </dl>
 
@@ -932,17 +968,9 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.union">
-<span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span>, <span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span>, <span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DuckDBPyRelation.union" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="n"><span class="pre">union_rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.union" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>union(self: duckdb.DuckDBPyRelation, union_rel: duckdb.DuckDBPyRelation) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create the set union of this relation object with another relation object in other_rel</p>
-<ol class="arabic simple" start="2">
-<li><p>union(self: duckdb.DuckDBPyRelation, arg0: duckdb.DuckDBPyRelation) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
 <p>Create the set union of this relation object with another relation object in other_rel</p>
 </dd>
 </dl>
@@ -994,9 +1022,11 @@ title: Python Client API
 <p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.arrow">
-<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.arrow" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">arrow</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.Table</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.arrow" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch all rows as an Arrow Table</p>
+</dd>
 </dl>
 
 <dl class="py method">
@@ -1017,24 +1047,26 @@ title: Python Client API
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.df">
 <span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.df" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch all rows as a pandas DataFrame</p>
+</dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetch_arrow_reader">
-<span class="sig-name descname"><span class="pre">fetch_arrow_reader</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">approx_batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_arrow_reader" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_arrow_reader</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">approx_batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.RecordBatchReader</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_arrow_reader" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Fetch Result as an Arrow Record Batch Reader</p>
+<p>Fetch all rows as an Arrow Record Batch Reader</p>
 </dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetch_arrow_table">
-<span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_arrow_table" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_arrow_table</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000000</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">pyarrow.lib.Table</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_arrow_table" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Fetch Result as an Arrow Table</p>
+<p>Fetch all rows as an Arrow Table</p>
 </dd>
 </dl>
 
@@ -1042,42 +1074,63 @@ title: Python Client API
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetch_df">
 <span class="sig-name descname"><span class="pre">fetch_df</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch all rows as a pandas DataFrame</p>
+</dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetch_df_chunk">
-<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df_chunk" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">fetch_df_chunk</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">num_of_vectors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetch_df_chunk" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch a chunk of rows as a pandas DataFrame</p>
+</dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetchall">
 <span class="sig-name descname"><span class="pre">fetchall</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchall" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch all rows as a list of tuples</p>
+</dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetchdf">
 <span class="sig-name descname"><span class="pre">fetchdf</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchdf" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch all rows as a pandas DataFrame</p>
+</dd>
+</dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetchmany">
+<span class="sig-name descname"><span class="pre">fetchmany</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchmany" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Fetch the next set of rows as a list of tuples</p>
+</dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetchnumpy">
 <span class="sig-name descname"><span class="pre">fetchnumpy</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchnumpy" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch all rows as a Python dict mapping each column to one numpy arrays</p>
+</dd>
 </dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyResult.fetchone">
 <span class="sig-name descname"><span class="pre">fetchone</span></span><span class="sig-paren">(</span><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyResult" title="duckdb.DuckDBPyResult"><span class="pre">duckdb.DuckDBPyResult</span></a></span>, <span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyResult.fetchone" title="Permalink to this definition">&#182;</a>
 </dt>
-<dd></dd>
+<dd>
+<p>Fetch a single row as a tuple</p>
+</dd>
 </dl>
 
 </dd>
@@ -1405,11 +1458,11 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>from_parquet(file_name: str, binary_as_string: bool, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7ff554f04af0&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>from_parquet(file_name: str, binary_as_string: bool, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7fabec825130&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Creates a relation object from the Parquet file in file_name</p>
 <ol class="arabic simple" start="2">
-<li><p>from_parquet(file_name: str, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7ff554f04af0&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>from_parquet(file_name: str, connection: duckdb.DuckDBPyConnection = &lt;duckdb.DuckDBPyConnection object at 0x7fabec825130&gt;) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Creates a relation object from the Parquet file in file_name</p>
 </dd>

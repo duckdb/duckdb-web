@@ -400,7 +400,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 ---
 * `result`
 
-The result object to fetch the nullmask from.
+The result object to fetch the error from.
 * `returns`
 
 The error of the result.
