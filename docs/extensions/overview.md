@@ -16,6 +16,11 @@ LOAD 'fts';
 
 If you are using the Python API client, you can install and load them with the `load_extension(name: str)` and `install_extension(name: str)` methods.
 
+## Unsigned extensions
+
+All verified extensions are signed, if you wish to load your own extensions or extensions from untrusted third-parties you'll need to enable the `allow_unsigned_extensions` flag.  
+To load unsigned extensions using the CLI, you'll need to pass the `-unsigned` flag to it on startup.
+
 ## Listing extensions
 
 You can check the list of core and installed extensions with the following query:
