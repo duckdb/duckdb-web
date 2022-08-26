@@ -20,6 +20,7 @@
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
 			<li data-id=".js">node.js</li>
+			<li data-id=".julia">Julia</li>
 			<li data-id=".cplusplus">C/C++</li>
 			<li data-id=".cli">CLI</li>
 			<li data-id=".odbc">ODBC</li>
@@ -77,6 +78,24 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	<div class="master odbc"></div>
 	<!-- End Empty Results -->
 
+	<div class="latest julia">
+		{%- highlight julia -%}
+using Pkg
+Pkg.add("DuckDB"){%- endhighlight -%}
+	</div>
+
+	<div class="example julia">
+		{%- highlight julia -%}
+# create a new in-memory database
+con = DBInterface.connect(DuckDB.DB, ":memory:")
+
+# create a table
+DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
+	</div>
+
+	<div class="master julia">
+		Not available
+	</div>
 
 	<div class="latest python">
 		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
