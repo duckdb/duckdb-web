@@ -18,22 +18,12 @@ title: Python Client API
 """
 
 
-class JekyllTranslator(HTML5Translator):
-    def visit_desc_parameter(self, node):
-        txt = node.astext()
-        if " = <duckdb." in txt:
-            # FIXME: duckdb uses class instances as default params
-            self.body.append(txt.split(" = ")[0] + " = None")
-            raise SkipChildren()
-
-
 class JekyllBuilder(StandaloneHTMLBuilder):
     name = "jekyll"
     format = "markdown"
     epilog = __("The jekyll files are in %(outdir)s.")
 
     allow_parallel = True
-    default_translator_class = JekyllTranslator
 
     def copy_static_files(self) -> None:
         pass
@@ -78,7 +68,8 @@ def main():
             "html_show_sphinx": False,
             "html_use_index": False,
             "intersphinx_mapping": {
-                "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None)
+                "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+                "pyarrow": ("https://arrow.apache.org/docs/", None)
             }
         },
         buildername="jekyll",
