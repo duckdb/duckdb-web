@@ -22,7 +22,7 @@ con = dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=FALSE)
 # to use a database file (shared between processes)
 con = dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=TRUE)
 ```
-Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`.
+Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown=TRUE)`
 
 ### Querying
 DuckDB supports the standard DBI methods to send queries and retreive result sets. `dbExecute()` is meant for queries where no results are expected like `CREATE TABLE` or `UPDATE` etc. and `dbGetQuery()` is meant to be used for queries that produce results (e.g. `SELECT`). Below an example.
