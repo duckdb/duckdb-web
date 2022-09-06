@@ -1,5 +1,7 @@
 ---
-layout: docu title: HTTPFS selected: Documentation/HTTPFS
+layout: docu
+title: HTTPFS
+selected: Documentation/HTTPFS
 ---
 The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote
 files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension
@@ -70,8 +72,7 @@ SET s3_endpoint='<domain>.<tld>:<port>';
 Switching between path-style and vhost-style urls (see [AWS docs]()) is possible using:
 
 ```sql
-SET
-s3_url_style='path';
+SET s3_url_style='path';
 ```
 
 However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the
