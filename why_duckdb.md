@@ -6,7 +6,7 @@ description: Here, we try to explain what goals DuckDB has and why and how we tr
 
 ---
 
-There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](http://cs.brown.edu/research/db/publications/fits_all.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
+There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](http://cs.brown.edu/research/db/publications/fits_all.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (column-oriented) DBMS](https://en.wikipedia.org/wiki/Column-oriented_DBMS) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
 
 <div class="headline" id="duckdbisfast">
 	<div class="icon"><span class="duckdbsymbol">&#xE300;</span></div>
