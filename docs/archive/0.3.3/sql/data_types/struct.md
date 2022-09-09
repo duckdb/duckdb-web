@@ -44,12 +44,6 @@ SELECT row(x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 SELECT (x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 ```
 
-### Adding field(s)/value(s) to Structs
-```sql
--- Add to a Struct of integers
-SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4);
-```
-
 ### Retrieving from Structs
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions](../functions/nested#struct-functions) like `struct_extract`.
 ```sql
