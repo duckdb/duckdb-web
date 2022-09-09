@@ -49,13 +49,14 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 ## Struct Functions
 
-| Function | Description | Example | Result |
-|:---|:---|:---|:---|
-| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'}).s` | `string` |
-| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'})['s']` | `string` |
-| `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
-| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct. | `struct_extract(s, 'i')` | `4` |
-| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
+| Function                                              | Description                                                                                                                                                                                                                | Example                              | Result                       |
+|:------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|:-----------------------------|
+| *`struct`*`.`*`entry`*                                | Dot notation serves as an alias for `struct_extract`.                                                                                                                                                                      | `({'i': 3, 's': 'string'}).s`        | `string`                     |
+| *`struct`*`[`*`entry`*`]`                             | Bracket notation serves as an alias for `struct_extract`.                                                                                                                                                                  | `({'i': 3, 's': 'string'})['s']`     | `string`                     |
+| `row(`*`any`*`, ...)`                                 | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)`               | `{'i': 3, 'v2': 3, 'v3': 0}` |
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)`         | Extract the named entry from the struct.                                                                                                                                                                                   | `struct_extract(s, 'i')`             | `4`                          |
+| `struct_pack(`*`name := any`*`, ...)`                 | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`    |
+| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/values(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                             | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
 
 ## Map Functions
 
