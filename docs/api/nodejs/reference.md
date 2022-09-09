@@ -31,6 +31,7 @@ selected: Client APIs
         * [.asyncIterator()](#module_duckdb..QueryResult+asyncIterator)
     * [~Database](#module_duckdb..Database)
         * [.close(callback)](#module_duckdb..Database+close) ⇒ <code>void</code>
+        * [.close_internal(callback)](#module_duckdb..Database+close_internal) ⇒ <code>void</code>
         * [.wait(callback)](#module_duckdb..Database+wait) ⇒ <code>void</code>
         * [.serialize(callback)](#module_duckdb..Database+serialize) ⇒ <code>void</code>
         * [.parallelize(callback)](#module_duckdb..Database+parallelize) ⇒ <code>void</code>
@@ -71,6 +72,8 @@ selected: Client APIs
 <a name="module_duckdb..Connection+run"></a>
 
 #### connection.run(sql, ...params, callback) ⇒ <code>void</code>
+Run a SQL statement and trigger a callback when done
+
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
 
 | Param | Type |
@@ -82,6 +85,8 @@ selected: Client APIs
 <a name="module_duckdb..Connection+all"></a>
 
 #### connection.all(sql, ...params, callback) ⇒ <code>void</code>
+Run a SQL query and triggers the callback once for all result rows
+
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
 
 | Param | Type |
@@ -93,6 +98,8 @@ selected: Client APIs
 <a name="module_duckdb..Connection+each"></a>
 
 #### connection.each(sql, ...params, callback) ⇒ <code>void</code>
+Runs a SQL query and triggers the callback for each result row
+
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
 
 | Param | Type |
@@ -128,6 +135,8 @@ Register a User Defined Function
 <a name="module_duckdb..Connection+prepare"></a>
 
 #### connection.prepare(sql, ...params, callback) ⇒ <code>Statement</code>
+Prepare a SQL query for execution
+
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
 
 | Param | Type |
@@ -139,6 +148,8 @@ Register a User Defined Function
 <a name="module_duckdb..Connection+exec"></a>
 
 #### connection.exec(sql, ...params, callback) ⇒ <code>void</code>
+Execute a SQL query
+
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
 
 | Param | Type |
@@ -273,6 +284,7 @@ Main database interface
 
 * [~Database](#module_duckdb..Database)
     * [.close(callback)](#module_duckdb..Database+close) ⇒ <code>void</code>
+    * [.close_internal(callback)](#module_duckdb..Database+close_internal) ⇒ <code>void</code>
     * [.wait(callback)](#module_duckdb..Database+wait) ⇒ <code>void</code>
     * [.serialize(callback)](#module_duckdb..Database+serialize) ⇒ <code>void</code>
     * [.parallelize(callback)](#module_duckdb..Database+parallelize) ⇒ <code>void</code>
@@ -290,6 +302,19 @@ Main database interface
 <a name="module_duckdb..Database+close"></a>
 
 #### database.close(callback) ⇒ <code>void</code>
+Closes database instance
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param |
+| --- |
+| callback | 
+
+<a name="module_duckdb..Database+close_internal"></a>
+
+#### database.close\_internal(callback) ⇒ <code>void</code>
+Internal method. Do not use, call Connection#close instead
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param |
@@ -299,11 +324,13 @@ Main database interface
 <a name="module_duckdb..Database+wait"></a>
 
 #### database.wait(callback) ⇒ <code>void</code>
+Triggers callback when all scheduled database tasks have completed.
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
-| Param | Description |
-| --- | --- |
-| callback | TODO: what does this do? |
+| Param |
+| --- |
+| callback | 
 
 <a name="module_duckdb..Database+serialize"></a>
 
@@ -330,6 +357,8 @@ TODO: what does this do?
 <a name="module_duckdb..Database+connect"></a>
 
 #### database.connect(path) ⇒ <code>Connection</code>
+Create a new database connection
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Description |
@@ -339,7 +368,7 @@ TODO: what does this do?
 <a name="module_duckdb..Database+interrupt"></a>
 
 #### database.interrupt(callback) ⇒ <code>void</code>
-TODO: what does this do?
+Supposedly interrupt queries, but currently does not do anything.
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
@@ -350,6 +379,8 @@ TODO: what does this do?
 <a name="module_duckdb..Database+prepare"></a>
 
 #### database.prepare(sql) ⇒ <code>Statement</code>
+Prepare a SQL query for execution
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param |
@@ -359,6 +390,8 @@ TODO: what does this do?
 <a name="module_duckdb..Database+run"></a>
 
 #### database.run(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#run using a built-in default connection
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -370,6 +403,8 @@ TODO: what does this do?
 <a name="module_duckdb..Database+each"></a>
 
 #### database.each(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#each using a built-in default connection
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -381,6 +416,8 @@ TODO: what does this do?
 <a name="module_duckdb..Database+all"></a>
 
 #### database.all(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#apply using a built-in default connection
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -392,6 +429,8 @@ TODO: what does this do?
 <a name="module_duckdb..Database+exec"></a>
 
 #### database.exec(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#exec using a built-in default connection
+
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -403,9 +442,7 @@ TODO: what does this do?
 <a name="module_duckdb..Database+register"></a>
 
 #### database.register(name, return_type, fun) ⇒ <code>this</code>
-Register a User Defined Function
-
-Convenience method for Connection#register
+Convenience method for Connection#register using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
@@ -418,9 +455,7 @@ Convenience method for Connection#register
 <a name="module_duckdb..Database+unregister"></a>
 
 #### database.unregister(name) ⇒ <code>this</code>
-Unregister a User Defined Function
-
-Convenience method for Connection#unregister
+Convenience method for Connection#unregister using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
