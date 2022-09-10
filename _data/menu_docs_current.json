@@ -42,6 +42,10 @@
             {
               "page": "S3 Parquet Import",
               "url": "s3_import"
+            },
+            {
+              "page": "S3 Parquet Export",
+              "url": "s3_export"
             }
           ]
         },
@@ -636,6 +640,10 @@
             {
               "page": "JSON",
               "url": "json"
+            },
+            {
+              "page": "HTTPFS",
+              "url": "httpfs"
             },
             {
               "page": "SQLite Scanner",
