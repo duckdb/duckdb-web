@@ -204,6 +204,13 @@ a.externallink:hover{
 	font-family: "DuckDB-Symbol";
 }
 
+.onlymobile{
+	display: none;
+}
+.notonmobile{
+	display: block;
+}
+
 a.blocklink{
 	display: block;
 	position: absolute;
@@ -1283,3 +1290,57 @@ body.installation{
 }
 
 
+.discord{
+	height: 55px;
+	color: white;
+	background-color: #4E5FE7;
+	margin-top: 53px;
+	position: relative;
+	width: 100%;
+	/*display: flex;*/
+	justify-content: center;
+	align-items: center;
+	column-gap: 40px;
+	overflow: hidden;
+	display: none;
+	> svg{
+		width: 35px;
+		height: auto;
+	}
+	.button{
+		border: 1px solid white;
+		padding: 4px 27px 4px 10px;
+		display: block;
+		color: white;
+		text-decoration: none;
+		span::after{
+			content: "→";
+			font-family: "DuckDB-Symbol";
+			margin-left: 4px;
+			transition: transform .3s;
+			position: absolute;
+		}
+		&:hover span::after{
+			transform: translateX(3px);
+		}
+		&.externallink:hover{
+			background-color: transparent!important;
+			cursor: pointer;
+		}
+	}
+	.button.notonmobile{
+		display: block;
+	}
+	.button.onlymobile{
+		display: none;
+	}
+	p{
+		font-size: 120%;
+	}
+	.discordclose{
+		position: absolute;
+		right: 30px;
+		top: 19px;
+		cursor: pointer;
+	}
+}

@@ -381,4 +381,40 @@ $(document).ready(function(){
 	})
 	
 	
+	
+	// LOCAL STORAGE
+	function setWithExpiry(key, value, ttl) {
+		const now = new Date()
+		const item = {
+			value: value,
+			expiry: now.getTime() + ttl,
+		}
+		localStorage.setItem(key, JSON.stringify(item))
+	}
+	function getWithExpiry(key) {
+		const itemStr = localStorage.getItem(key)
+		if (!itemStr) {
+			return null
+		}
+		const item = JSON.parse(itemStr)
+		const now = new Date()
+		if (now.getTime() > item.expiry) {
+			localStorage.removeItem(key)
+			return null
+		}
+		return item.value
+	}
+	// CLOSE DISCORD BANNER ON HOME PAGE
+	const showdiscord = getWithExpiry("discordBanner");
+	if(showdiscord == false){
+		$('.discord').css('display', 'none');
+	} else {
+		$('.discord').css('display', 'flex');
+	}
+	$('.discordclose').click(function(){
+		setWithExpiry('discordBanner', false, 300000); // 900000 = 15 min
+		//$('.discord').slideUp();
+		$('.discord').animate({ height: 0 }, 300);
+	});
+	
 });
