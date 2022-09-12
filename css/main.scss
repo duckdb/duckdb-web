@@ -1293,7 +1293,7 @@ body.installation{
 .discord{
 	height: 55px;
 	color: white;
-	background-color: #4E5FE7;
+	background-color: #5865f2;
 	margin-top: 53px;
 	position: relative;
 	width: 100%;
@@ -1322,10 +1322,10 @@ body.installation{
 		}
 		&:hover span::after{
 			transform: translateX(3px);
-			color: #4E5FE7;
+			color: #5865f2;
 		}
 		&:hover{
-			color: #4E5FE7;
+			color: #5865f2;
 			background-color: white;
 		}
 	}
