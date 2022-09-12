@@ -412,7 +412,7 @@ $(document).ready(function(){
 		$('.discord').css('display', 'flex');
 	}
 	$('.discordclose').click(function(){
-		setWithExpiry('discordBanner', false, 300000); // 900000 = 15 min
+		setWithExpiry('discordBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
 		//$('.discord').slideUp();
 		$('.discord').animate({ height: 0 }, 300);
 	});
