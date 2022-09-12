@@ -43,7 +43,6 @@ SELECT row(x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 -- This also returns {'x': 1, 'v2': 2, 'y': a}
 SELECT (x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 ```
-
 ### Retrieving from Structs
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions](../functions/nested#struct-functions) like `struct_extract`.
 ```sql
