@@ -311,7 +311,7 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.landingmenu .external a.externallink, .mainlinks a.externallink').removeClass('externallink'); // Remove Class from header elements
+	$('.landingmenu .external a.externallink, .mainlinks a.externallink, .discord a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 
 	

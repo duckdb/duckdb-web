@@ -1312,19 +1312,21 @@ body.installation{
 		display: block;
 		color: white;
 		text-decoration: none;
+		transition: color .4s, background .4s;
 		span::after{
 			content: "→";
 			font-family: "DuckDB-Symbol";
 			margin-left: 4px;
-			transition: transform .3s;
+			transition: transform .3s, color .3s;
 			position: absolute;
 		}
 		&:hover span::after{
 			transform: translateX(3px);
+			color: #4E5FE7;
 		}
-		&.externallink:hover{
-			background-color: transparent!important;
-			cursor: pointer;
+		&:hover{
+			color: #4E5FE7;
+			background-color: white;
 		}
 	}
 	.button.notonmobile{
