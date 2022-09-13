@@ -84,7 +84,7 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [DuckDB Foreign Data Wrapper for PostgreSQL](https://github.com/alitrack/duckdb_fdw)
 * [Demo: CRUD operations with Qt5 and DuckDB](https://github.com/chilarai/qt-duckdb)
 * [Elixir driver](https://github.com/mpope9/exduckdb) and [Ecto adapter](https://github.com/mpope9/ecto_duckdb/) for DuckDB
-* [DuckDB backend](https://fugue-tutorials.readthedocs.io/tutorials/integrations/duckdb.html) for [Fugue](https://github.com/fugue-project/fugue)
+* [DuckDB backend](https://fugue-tutorials.readthedocs.io/tutorials/integrations/backends/duckdb.html) for [Fugue](https://github.com/fugue-project/fugue)
 
 ## Testimonials
 See our [DuckDB Testimonial Twitter Wall](/docs/twitter_wall)
