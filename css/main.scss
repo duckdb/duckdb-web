@@ -493,7 +493,7 @@ h3 code{
 /** SPECIAL LANDING PAGE **/
 
 body.landing{
-	section:nth-child(odd){
+	section:nth-child(even){
 		background-color: $duckDBlightgrey;
 	}
 	section{
