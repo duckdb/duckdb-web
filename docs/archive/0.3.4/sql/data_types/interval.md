@@ -6,7 +6,7 @@ expanded: Data Types
 blurb: An interval specifies a period of time measured in units of a specific date part like years, days, seconds, or others.
 ---
 Intervals represent a period of time. This period can be measured in a variety of units,
-for example years, days, or seconds. See the [Date Part Functions docs](/docs/sql/functions/datepart) for a list of available
+for example years, days, or seconds. See the [Date Part Functions docs](../../sql/functions/datepart) for a list of available
 date parts for use with an `INTERVAL`.
 
 
@@ -15,7 +15,7 @@ date parts for use with an `INTERVAL`.
 | `INTERVAL` | Period of time |
 
 An `INTERVAL` can be generated directly or can be a result of a function (for example, calculating the difference between two timestamps). 
-Intervals can be used to modify `DATE`, `TIMESTAMP`, or `TIMESTAMP WITH TIME ZONE` data types. See the [Interval Operators](/docs/sql/functions/interval) for details.
+Intervals can be used to modify `DATE`, `TIMESTAMP`, or `TIMESTAMP WITH TIME ZONE` data types. See the [Interval Operators](../../sql/functions/interval) for details.
 
 ```sql
 -- Each Date Part can be either singular or plural
@@ -48,4 +48,4 @@ SELECT INTERVAL '1.5' YEARS; --WARNING! This returns 1 year!
 ```
 
 ## Functions
-See [Interval Functions](/docs/sql/functions/interval).
+See [Interval Functions](../../sql/functions/interval).

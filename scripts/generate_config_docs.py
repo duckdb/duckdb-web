@@ -34,6 +34,8 @@ for keyword in keywords:
 
 cmd = f'''
 .mode markdown
+INSTALL httpfs;
+LOAD httpfs;
 SELECT substr(name, 2, (LEN(name) - 2)::int) AS name, {description_replacement} description, input_type, default_value
 FROM (
 SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
@@ -41,6 +43,8 @@ SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
 	THEN '75% of RAM'
 	WHEN name='threads' OR name='worker_threads'
 	THEN '# Cores'
+	WHEN name='TimeZone'
+	THEN 'System timezone'
 	ELSE UPPER(value) END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'

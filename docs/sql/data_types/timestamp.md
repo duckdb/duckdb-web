@@ -44,7 +44,7 @@ SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
 | -infinity | 1970-01-01 00:00:00| infinity |
 
 ## Functions
-See [Timestamp Functions](/docs/sql/functions/timestamp).
+See [Timestamp Functions](../../sql/functions/timestamp).
 
 ## Time Zones
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
@@ -66,7 +66,7 @@ require icu
 Next, use the `Set TimeZone` command:
 
 ```sql
-Set TimeZone='Americas/Los_Angeles';
+Set TimeZone='America/Los_Angeles';
 ```
 
 Time binning operations for `TIMESTAMPTZ` will then be implemented using the given time zone.
@@ -83,7 +83,7 @@ ORDER BY
     name;
 ```
 
-You can also find a reference table of available time zones [here](/docs/sql/data_types/timezones).
+You can also find a reference table of available time zones [here](../../sql/data_types/timezones).
 
 ## Calendars
 The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command.
@@ -111,7 +111,7 @@ They can be looked from in the `duckdb_settings()` table function:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
--- Americas/Los_Angeles
+-- America/Los_Angeles
 SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
 -- gregorian
 ```

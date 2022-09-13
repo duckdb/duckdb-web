@@ -52,6 +52,7 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_prepare_error">duckdb_prepare_error</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_nparams">duckdb_nparams</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_param_type">duckdb_param_type</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_clear_bindings">duckdb_clear_bindings</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_boolean">duckdb_bind_boolean</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">bool</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int8">duckdb_bind_int8</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int8_t</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int16">duckdb_bind_int16</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int16_t</span> <span class="k">val</span>);
@@ -196,6 +197,18 @@ The parameter index.
 
 The parameter type
 
+<br>
+
+### **duckdb_clear_bindings**
+---
+Clear the params bind to the prepared statement.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_clear_bindings</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
+</span>);
+</code></pre></div></div>
 <br>
 
 ### **duckdb_bind_boolean**

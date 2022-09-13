@@ -177,7 +177,17 @@
             },
             {
               "page": "Python",
-              "url": "python"
+              "slug": "python",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
             },
             {
               "page": "R",
@@ -186,6 +196,10 @@
             {
               "page": "Java",
               "url": "java"
+            },
+            {
+              "page": "Julia",
+              "url": "julia"
             },
             {
               "page": "C",
@@ -247,7 +261,17 @@
             },
             {
               "page": "Node.js",
-              "url": "nodejs"
+              "slug": "nodejs",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
             },
             {
               "page": "WASM",
@@ -612,6 +636,14 @@
             {
               "page": "JSON",
               "url": "json"
+            },
+            {
+              "page": "SQLite Scanner",
+              "url": "sqlite_scanner"
+            },
+            {
+              "page": "Postgres Scanner",
+              "url": "postgres_scanner"
             }
           ]
         }

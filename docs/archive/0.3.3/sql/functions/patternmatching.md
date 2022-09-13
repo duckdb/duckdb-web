@@ -38,7 +38,7 @@ The keyword `ILIKE` can be used instead of `LIKE` to make the match case-insensi
 
 To search within a string for a character that is a wildcard (`%` or `_`), the pattern must use an `ESCAPE` clause and an escape character to indicate the wildcard should be treated as a literal character instead of a wildcard. See an example below.
 
-Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](/docs/sql/functions/char) for details.
+Additionally, the function `like_escape` has the same functionality as a `LIKE` expression with an `ESCAPE` clause, but using function syntax. See the [Text Functions Docs](../../sql/functions/char) for details.
 
 ```sql
 --Search for strings with 'a' then a literal percent sign then 'c'

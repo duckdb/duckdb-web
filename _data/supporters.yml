@@ -6,6 +6,10 @@ gold:
   - name: Relational AI
     url: https://relational.ai
     logoimg: relational-ai.svg
+ 
+  - name: Mode
+    url: https://mode.com
+    logoimg: mode.svg
     
 silver:
   - name: Hex
@@ -19,10 +23,6 @@ silver:
   - name: Noteable
     url: https://noteable.io
     logoimg: noteable.png
-
-  - name: Mode
-    url: https://mode.com
-    logoimg: mode.svg
 
   - name: Rill
     url: https://www.rilldata.com

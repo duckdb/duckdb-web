@@ -5,7 +5,7 @@ selected: Configure
 ---
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
-settings can be changed later on using [PRAGMA statements](/docs/sql/pragmas) as well. The configuration object
+settings can be changed later on using [PRAGMA statements](../../sql/pragmas) as well. The configuration object
 should be created, filled with values and passed to `duckdb_open_ext`.
 
 ### **Example**

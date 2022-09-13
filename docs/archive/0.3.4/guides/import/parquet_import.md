@@ -29,4 +29,4 @@ Alternatively, the `COPY` statement can also be used to load data from a Parquet
 COPY tbl FROM 'input.parquet' (FORMAT PARQUET);
 ```
 
-For additional options, see the [Parquet Loading reference](/docs/data/parquet).
+For additional options, see the [Parquet Loading reference](../../data/parquet).

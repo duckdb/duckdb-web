@@ -4,7 +4,7 @@ title: R API
 selected: Client APIs
 ---
 ## Installation
-The DuckDB R API can be installed using `install.packages`. Please see the [installation page](/docs/installation?environment=r) for details.
+The DuckDB R API can be installed using `install.packages`. Please see the [installation page](../installation?environment=r) for details.
 
 ## Basic API Usage
 The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://db.rstudio.com/dbi/).
@@ -22,7 +22,7 @@ con = dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=FALSE)
 # to use a database file (shared between processes)
 con = dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=TRUE)
 ```
-Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`.
+Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown=TRUE)`
 
 ### Querying
 DuckDB supports the standard DBI methods to send queries and retreive result sets. `dbExecute()` is meant for queries where no results are expected like `CREATE TABLE` or `UPDATE` etc. and `dbGetQuery()` is meant to be used for queries that produce results (e.g. `SELECT`). Below an example.
@@ -84,7 +84,7 @@ print(res)
 
 > DuckDB keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb::duckdb_unregister()` method.
 
-Also refer to [the data import documentation](/docs/data/overview) for more options of efficiently importing data.
+Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
 ## dbplyr 
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:

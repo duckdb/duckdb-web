@@ -91,7 +91,7 @@ INSERT INTO knows VALUES (1, 2), (1, 4), (2, 3), (2, 4), (3, 4), (5, 6);
 INSERT INTO knows SELECT person2id, person1id FROM knows;
 ```
 
-Note that there is a cycle e.g. between nodes 1, 2, and 4. To detect cycles, the query stores the path in a [list](/docs/sql/data_types/list) and, before adding a new edge, checks whether its endpoint has been visited before.
+Note that there is a cycle e.g. between nodes 1, 2, and 4. To detect cycles, the query stores the path in a [list](../../sql/data_types/list) and, before adding a new edge, checks whether its endpoint has been visited before.
 
 The following query returns all paths from person 1:
 

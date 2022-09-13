@@ -4,7 +4,7 @@ title: Python API
 selected: Client APIs
 ---
 ## Installation
-The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](/docs/installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
+The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
 
 ## Basic API Usage
 The standard DuckDB Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html).
@@ -111,7 +111,7 @@ print(arr)
 
 ```
 
-Also refer to [the data import documentation](/docs/data/overview) for more options of efficiently importing data.
+Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
 
 ## Relational API

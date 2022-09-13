@@ -14,7 +14,9 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_extra_info">duckdb_table_function_set_extra_info</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">void</span> *<span class="k">extra_info</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_bind">duckdb_table_function_set_bind</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_bind_t</span> <span class="k">bind</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_init">duckdb_table_function_set_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_local_init">duckdb_table_function_set_local_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_function">duckdb_table_function_set_function</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_t</span> <span class="k">function</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_supports_projection_pushdown">duckdb_table_function_supports_projection_pushdown</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">bool</span> <span class="k">pushdown</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_register_table_function">duckdb_register_table_function</a></span>(<span class="kt">duckdb_connection</span> <span class="k">con</span>, <span class="kt">duckdb_table_function</span> <span class="k">function</span>);
 </code></pre></div></div>
 #### **Table Function Bind**
@@ -23,18 +25,23 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_bind_get_parameter_count">duckdb_bind_get_parameter_count</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>);
 <span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_bind_get_parameter">duckdb_bind_get_parameter</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_bind_data">duckdb_bind_set_bind_data</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">bind_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_cardinality">duckdb_bind_set_cardinality</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">cardinality</span>, <span class="kt">bool</span> <span class="k">is_exact</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_error">duckdb_bind_set_error</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 #### **Table Function Init**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_init_get_extra_info">duckdb_init_get_extra_info</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_init_get_bind_data">duckdb_init_get_bind_data</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_init_data">duckdb_init_set_init_data</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">init_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_init_get_column_count">duckdb_init_get_column_count</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_init_get_column_index">duckdb_init_get_column_index</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">column_index</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_max_threads">duckdb_init_set_max_threads</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">max_threads</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_init_set_error">duckdb_init_set_error</a></span>(<span class="kt">duckdb_init_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 #### **Table Function**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_extra_info">duckdb_function_get_extra_info</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_bind_data">duckdb_function_get_bind_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_init_data">duckdb_function_get_init_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
+<span class="kt">void</span> *<span class="nf"><a href="#duckdb_function_get_local_init_data">duckdb_function_get_local_init_data</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_function_set_error">duckdb_function_set_error</a></span>(<span class="kt">duckdb_function_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 ### **duckdb_create_table_function**
@@ -189,6 +196,28 @@ The init function
 
 <br>
 
+### **duckdb_table_function_set_local_init**
+---
+Sets the thread-local init function of the table function
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_set_local_init</span>(<span class="k">
+</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
+</span>  <span class="k">duckdb_table_function_init_t</span> <span class="k">init
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `table_function`
+
+The table function
+* `init`
+
+The init function
+
+<br>
+
 ### **duckdb_table_function_set_function**
 ---
 Sets the main function of the table function
@@ -208,6 +237,32 @@ The table function
 * `function`
 
 The function
+
+<br>
+
+### **duckdb_table_function_supports_projection_pushdown**
+---
+Sets whether or not the given table function supports projection pushdown.
+
+If this is set to true, the system will provide a list of all required columns in the `init` stage through
+the `duckdb_init_get_column_count` and `duckdb_init_get_column_index` functions.
+If this is set to false (the default), the system will expect all columns to be projected.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_supports_projection_pushdown</span>(<span class="k">
+</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
+</span>  <span class="kt">bool</span> <span class="k">pushdown
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `table_function`
+
+The table function
+* `pushdown`
+
+True if the table function supports projection pushdown, false otherwise.
 
 <br>
 
@@ -361,6 +416,29 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
+### **duckdb_bind_set_cardinality**
+---
+Sets the cardinality estimate for the table function, used for optimization.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_bind_set_cardinality</span>(<span class="k">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">cardinality</span>,<span class="k">
+</span>  <span class="kt">bool</span> <span class="k">is_exact
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The bind data object.
+* `is_exact`
+
+Whether or not the cardinality estimate is exact, or an approximation
+
+<br>
+
 ### **duckdb_bind_set_error**
 ---
 Report that an error has occurred while calling bind.
@@ -454,6 +532,78 @@ The callback that will be called to destroy the init data (if any)
 
 <br>
 
+### **duckdb_init_get_column_count**
+---
+Returns the number of projected columns.
+
+This function must be used if projection pushdown is enabled to figure out which columns to emit.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_init_get_column_count</span>(<span class="k">
+</span>  <span class="kt">duckdb_init_info</span> <span class="k">info
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `returns`
+
+The number of projected columns.
+
+<br>
+
+### **duckdb_init_get_column_index**
+---
+Returns the column index of the projected column at the specified position.
+
+This function must be used if projection pushdown is enabled to figure out which columns to emit.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_init_get_column_index</span>(<span class="k">
+</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">column_index
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `column_index`
+
+The index at which to get the projected column index, from 0..duckdb_init_get_column_count(info)
+* `returns`
+
+The column index of the projected column.
+
+<br>
+
+### **duckdb_init_set_max_threads**
+---
+Sets how many threads can process this table function in parallel (default: 1)
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_init_set_max_threads</span>(<span class="k">
+</span>  <span class="kt">duckdb_init_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">max_threads
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `max_threads`
+
+The maximum amount of threads that can process this table function
+
+<br>
+
 ### **duckdb_init_set_error**
 ---
 Report that an error has occurred while calling init.
@@ -523,11 +673,32 @@ The bind data object
 
 ### **duckdb_function_get_init_data**
 ---
-Gets the init data set by `duckdb_bind_set_init_data` during the bind.
+Gets the init data set by `duckdb_init_set_init_data` during the init.
 
 #### **Syntax**
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_init_data</span>(<span class="k">
+</span>  <span class="kt">duckdb_function_info</span> <span class="k">info
+</span>);
+</code></pre></div></div>
+#### **Parameters**
+---
+* `info`
+
+The info object
+* `returns`
+
+The init data object
+
+<br>
+
+### **duckdb_function_get_local_init_data**
+---
+Gets the thread-local init data set by `duckdb_init_set_init_data` during the local_init.
+
+#### **Syntax**
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_function_get_local_init_data</span>(<span class="k">
 </span>  <span class="kt">duckdb_function_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>

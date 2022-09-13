@@ -4,7 +4,7 @@ title: Python API
 selected: Client APIs
 ---
 ## Installation
-The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](/docs/installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
+The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
 
 ## Basic API Usage
 The standard DuckDB Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html).
@@ -62,7 +62,7 @@ print(con.fetchall())
 ## Efficient Transfer
 Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org), or [Apache Arrow](https://arrow.apache.org/). This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
 
-By default, DuckDB will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](/docs/guides/index#python-client) for more examples.
+By default, DuckDB will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../guides/index#python-client) for more examples.
 
 DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
@@ -117,7 +117,7 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 * `fetch_record_batch(chunk_size)` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) with `chunk_size` rows per batch 
 
 
-Below are some examples using this functionality. See the Python [guides](/docs/guides/index#python-client) for more examples.
+Below are some examples using this functionality. See the Python [guides](../guides/index#python-client) for more examples.
 
 ```python
 # fetch as Pandas DataFrame
@@ -155,7 +155,7 @@ print(tbl.to_pandas())
 
 ```
 
-Also refer to [the data import documentation](/docs/data/overview) for more options of efficiently importing data.
+Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
 
 ## Relational API

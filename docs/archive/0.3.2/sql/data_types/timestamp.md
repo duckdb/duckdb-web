@@ -23,7 +23,7 @@ SELECT TIMESTAMP '1992-09-20 14:30:00';
 ```
 
 ## Functions
-See [Timestamp Functions](/docs/sql/functions/timestamp).
+See [Timestamp Functions](../../sql/functions/timestamp).
 
 ## Time Zones
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
@@ -62,7 +62,7 @@ ORDER BY
     name;
 ```
 
-You can also find a reference table of available time zones [here](/docs/sql/data_types/timezones).
+You can also find a reference table of available time zones [here](../../sql/data_types/timezones).
 
 ## Calendars
 The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command.

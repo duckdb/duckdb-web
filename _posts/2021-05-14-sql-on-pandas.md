@@ -329,7 +329,7 @@ Using DuckDB, you can take advantage of the powerful and expressive SQL language
 
 Traditional SQL engines use the Client-Server paradigm, which means that a client program connects through a socket to a server. Queries are run on the server, and results are sent back down to the client afterwards. This is the same when using for example Postgres from Python. Unfortunately, this transfer [is a serious bottleneck](http://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf). In-process engines such as SQLite or DuckDB do not run into this problem.
 
-To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite and DuckDB. The source code for the benchmark can be found [here](https://gist.github.com/hannesmuehleisen/a95a39a1eda63aeb0ca13fd82d1ba49c).
+To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite and DuckDB. The source code for the benchmark can be found [here](https://gist.github.com/hannes/a95a39a1eda63aeb0ca13fd82d1ba49c).
 
 In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-Byte integers (40MB) from Python to the PostgreSQL, SQLite and DuckDB databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
 
