@@ -62,6 +62,19 @@ print(con.fetchall())
 ## Efficient Transfer
 Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org), or [Apache Arrow](https://arrow.apache.org/). This API works with entire columns of data instead of scalar values and is therefore far more efficient. 
 
+### Pandas.DataFrame 'object' columns
+This is not true for pandas.DataFrame columns of an `object` dtype, since this stores values of arbitrary type.  
+To convert these columns to DuckDB, we first go through an analyze phase before converting the values.
+
+In this analyze phase a sample of all the rows of the column are analyzed to determine the target type.
+This sample size is by default set to 1000, but can be changed by setting the `pandas_analyze_sample` config option.
+```py
+# example setting the sample size to 100000
+duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
+```
+
+### Registering Python Objects
+
 By default, DuckDB will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../guides/index#python-client) for more examples.
 
 DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
