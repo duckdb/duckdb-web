@@ -73,7 +73,7 @@ This sample size is by default set to 1000, but can be changed by setting the `p
 duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 ```
 
-### Registering
+### Registering Python Objects
 
 By default, DuckDB will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../guides/index#python-client) for more examples.
 
