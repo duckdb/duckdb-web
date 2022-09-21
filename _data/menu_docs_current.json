@@ -652,6 +652,10 @@
             {
               "page": "Postgres Scanner",
               "url": "postgres_scanner"
+            },
+            {
+              "page": "Substrait",
+              "url": "substrait"
             }
           ]
         }
