@@ -35,22 +35,20 @@ duckdb_close(&db);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_connect">duckdb_connect</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>, <span class="kt">duckdb_connection</span> *<span class="k">out_connection</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_disconnect">duckdb_disconnect</a></span>(<span class="kt">duckdb_connection</span> *<span class="k">connection</span>);
 </code></pre></div></div>
-
 ### duckdb_open
-
+---
 Creates a new database or opens an existing database file stored at the the given path.
 If no path is given a new in-memory database is created instead.
 
 #### Syntax
-
+---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_open</span>(<span class="k">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>,<span class="k">
 </span>  <span class="kt">duckdb_database</span> *<span class="k">out_database
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
+---
 * `path`
 
 Path to the database file on disk, or `nullptr` or `:memory:` to open an in-memory database.
@@ -64,11 +62,11 @@ The result database object.
 <br>
 
 ### duckdb_open_ext
-
+---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
 
 #### Syntax
-
+---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_open_ext</span>(<span class="k">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>,<span class="k">
 </span>  <span class="kt">duckdb_database</span> *<span class="k">out_database</span>,<span class="k">
@@ -77,7 +75,7 @@ Extended version of duckdb_open. Creates a new database or opens an existing dat
 </span>);
 </code></pre></div></div>
 #### Parameters
-
+---
 * `path`
 
 Path to the database file on disk, or `nullptr` or `:memory:` to open an in-memory database.
@@ -98,20 +96,20 @@ Note that the error must be freed using `duckdb_free`.
 <br>
 
 ### duckdb_close
-
+---
 Closes the specified database and de-allocates all memory allocated for that database.
 This should be called after you are done with any database allocated through `duckdb_open`.
 Note that failing to call `duckdb_close` (in case of e.g. a program crash) will not cause data corruption.
 Still it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
-
+---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_close</span>(<span class="k">
 </span>  <span class="kt">duckdb_database</span> *<span class="k">database
 </span>);
 </code></pre></div></div>
 #### Parameters
-
+---
 * `database`
 
 The database object to shut down.
@@ -119,19 +117,19 @@ The database object to shut down.
 <br>
 
 ### duckdb_connect
-
+---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
 
 #### Syntax
-
+---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_connect</span>(<span class="k">
 </span>  <span class="kt">duckdb_database</span> <span class="k">database</span>,<span class="k">
 </span>  <span class="kt">duckdb_connection</span> *<span class="k">out_connection
 </span>);
 </code></pre></div></div>
 #### Parameters
-
+---
 * `database`
 
 The database file to connect to.
@@ -145,17 +143,17 @@ The result connection object.
 <br>
 
 ### duckdb_disconnect
-
+---
 Closes the specified connection and de-allocates all memory allocated for that connection.
 
 #### Syntax
-
+---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_disconnect</span>(<span class="k">
 </span>  <span class="kt">duckdb_connection</span> *<span class="k">connection
 </span>);
 </code></pre></div></div>
 #### Parameters
-
+---
 * `connection`
 
 The connection to close.
