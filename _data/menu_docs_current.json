@@ -134,7 +134,18 @@
               "url": "dbeaver"
             }
           ]
+        },
+        {
+          "page": "Data Viewers",
+          "slug": "data_viewers",
+          "subfolderitems": [
+            {
+              "page": "Tad",
+              "url": "tad"
+            }
+          ]
         }
+
       ]
     },
     {
