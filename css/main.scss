@@ -1345,3 +1345,54 @@ body.installation{
 		cursor: pointer;
 	}
 }
+
+
+/** GENERATED HTML FIXES FOR DOCUMENTATION **/
+div.bodywrapper{
+	dl dt{
+		font-family: $fontMonoBold;
+		font-weight: normal;
+		a.headerlink{
+			opacity: 0;
+			transition: opacity .3s;
+			padding-left: 4px;
+		}
+		.sig-prename,
+		.property span.pre{
+			font-family: $fontMono;
+		}
+	}
+	dl{
+		p{
+			margin-top: 4px;
+			margin-bottom: 30px;
+			padding-left: 0;
+			font-style: normal;
+		}
+		dd{
+			padding-left: 0;
+		}
+	}
+	dl dd,
+	em.sig-param{
+		font-style: normal;
+		.n{
+			font-weight: normal;
+			font-family: $fontMono;
+		}
+	}
+	a.reference.internal{
+		text-decoration: none;
+	}
+	dt.sig-object{
+		background-color: whitesmoke;
+		border-radius: 7px;
+		padding: 2px 5px 2px 5px;
+		display: inline-block;
+		&:hover{
+			a.headerlink{
+				opacity: 1;
+			}
+		}
+	}
+}
