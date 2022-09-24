@@ -173,16 +173,16 @@ def add_function(function_prototype, documentation, group):
 	docs_str = '\n'.join(documentation) + '\n'
 	(docs_str, parameters) = extract_parameters(docs_str)
 	docs_string = ''
-	docs_string += '### **' + function_name + '**\n'
+	docs_string += '### ' + function_name + '\n'
 	docs_string +='---\n'
 	docs_string += docs_str
-	docs_string += '#### **Syntax**\n'
+	docs_string += '#### Syntax\n'
 	docs_string +='---\n'
 	docs_string += quick_docs_start()
 	docs_string += highlight_function_prototype(format_function(function_prototype_str), None) + '\n'
 	docs_string += quick_docs_end()
 	if len(parameters) > 0:
-		docs_string += '#### **Parameters**\n'
+		docs_string += '#### Parameters\n'
 		docs_string +='---\n'
 		for parameter_pair in parameters:
 			docs_string += "* `" + parameter_pair[0] + '`\n\n'
@@ -224,7 +224,7 @@ for line in lines:
 				code = []
 				docs = []
 
-api_ref_split = '## **API Reference**'
+api_ref_split_options = ['## **API Reference**', '## API Reference']
 group_docs = {}
 for doc_pair in documentation_list:
 	doc_text = doc_pair[0]
@@ -237,10 +237,15 @@ for doc_pair in documentation_list:
 def replace_docs_in_file(file_name, group_name, docs_string_for_this_group):
 	with open(file_name, 'r') as f:
 		text = f.read()
-	if api_ref_split not in text:
+	found = False
+	for api_ref_split in api_ref_split_options:
+		if api_ref_split in text:
+			text = text.rsplit(api_ref_split, 1)[0] + api_ref_split + '\n' + docs_string_for_this_group
+			found = True
+			break
+	if not found:
 		print("API ref split not found in file " + file_name + " for group " + group_name)
 		exit(1)
-	text = text.rsplit(api_ref_split, 1)[0] + api_ref_split + '\n' + docs_string_for_this_group
 	with open(file_name, 'w+') as f:
 		f.write(text)
 
@@ -260,7 +265,7 @@ for group_name in docs_map.keys():
 	else:
 		quick_docs = file_docs[file_name][0]
 		docs_string_for_this_group = file_docs[file_name][1]
-		quick_docs += '#### **' + group_name + '**\n'
+		quick_docs += '#### ' + group_name + '\n'
 		quick_docs += quick_docs_start()
 	for entry in group_docs[group_name]:
 		quick_docs += entry[1] + '\n'

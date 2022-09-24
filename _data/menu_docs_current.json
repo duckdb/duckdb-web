@@ -42,6 +42,10 @@
             {
               "page": "S3 Parquet Import",
               "url": "s3_import"
+            },
+            {
+              "page": "S3 Parquet Export",
+              "url": "s3_export"
             }
           ]
         },
@@ -130,7 +134,18 @@
               "url": "dbeaver"
             }
           ]
+        },
+        {
+          "page": "Data Viewers",
+          "slug": "data_viewers",
+          "subfolderitems": [
+            {
+              "page": "Tad",
+              "url": "tad"
+            }
+          ]
         }
+
       ]
     },
     {
@@ -177,7 +192,17 @@
             },
             {
               "page": "Python",
-              "url": "python"
+              "slug": "python",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
             },
             {
               "page": "R",
@@ -186,6 +211,10 @@
             {
               "page": "Java",
               "url": "java"
+            },
+            {
+              "page": "Julia",
+              "url": "julia"
             },
             {
               "page": "C",
@@ -247,7 +276,17 @@
             },
             {
               "page": "Node.js",
-              "url": "nodejs"
+              "slug": "nodejs",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
             },
             {
               "page": "WASM",
@@ -612,6 +651,22 @@
             {
               "page": "JSON",
               "url": "json"
+            },
+            {
+              "page": "HTTPFS",
+              "url": "httpfs"
+            },
+            {
+              "page": "SQLite Scanner",
+              "url": "sqlite_scanner"
+            },
+            {
+              "page": "Postgres Scanner",
+              "url": "postgres_scanner"
+            },
+            {
+              "page": "Substrait",
+              "url": "substrait"
             }
           ]
         }

@@ -109,6 +109,9 @@
 	.notonmobile{
 		display: none;
 	}
+	.onlymobile{
+		display: block;
+	}
 	p.system{
 	display: inline-grid;
 	}
@@ -287,6 +290,25 @@
 		}
 		> div:nth-child(2){
 			display: none;
+		}
+	}
+	
+	.discord{
+		column-gap: 25px;
+		>p{
+			display: none;
+		}
+		>svg{
+			margin-left: -40px;
+		}
+		.button.notonmobile{
+			display: none;
+		}
+		.button.onlymobile{
+			display: block;
+		}
+		.discordclose{
+			right: 25px;
 		}
 	}
 	

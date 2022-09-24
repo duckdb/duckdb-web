@@ -108,7 +108,7 @@ a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
 <span class="kt">bool</span> *<span class="nf"><a href="#duckdb_nullmask_data">duckdb_nullmask_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_result_error">duckdb_result_error</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 </code></pre></div></div>
-### **duckdb_query**
+### duckdb_query
 ---
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
 If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
@@ -117,7 +117,7 @@ If the query fails to execute, DuckDBError is returned and the error message can
 Note that after running `duckdb_query`, `duckdb_destroy_result` must be called on the result object even if the
 query fails, otherwise the error stored within the result will not be freed correctly.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_query</span>(<span class="k">
 </span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
@@ -125,7 +125,7 @@ query fails, otherwise the error stored within the result will not be freed corr
 </span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `connection`
 
@@ -142,17 +142,17 @@ The query result.
 
 <br>
 
-### **duckdb_destroy_result**
+### duckdb_destroy_result
 ---
 Closes the result and de-allocates all memory allocated for that connection.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_result</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -160,21 +160,21 @@ The result to destroy.
 
 <br>
 
-### **duckdb_column_name**
+### duckdb_column_name
 ---
 Returns the column name of the specified column. The result should not need be freed; the column names will
 automatically be destroyed when the result is destroyed.
 
 Returns `NULL` if the column is out of range.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_column_name</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -188,20 +188,20 @@ The column name of the specified column.
 
 <br>
 
-### **duckdb_column_type**
+### duckdb_column_type
 ---
 Returns the column type of the specified column.
 
 Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_type</span> <span class="k">duckdb_column_type</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -215,7 +215,7 @@ The column type of the specified column.
 
 <br>
 
-### **duckdb_column_logical_type**
+### duckdb_column_logical_type
 ---
 Returns the logical column type of the specified column.
 
@@ -223,14 +223,14 @@ The return type of this call should be destroyed with `duckdb_destroy_logical_ty
 
 Returns `NULL` if the column is out of range.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_column_logical_type</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -244,17 +244,17 @@ The logical column type of the specified column.
 
 <br>
 
-### **duckdb_column_count**
+### duckdb_column_count
 ---
 Returns the number of columns present in a the result object.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_column_count</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -265,17 +265,17 @@ The number of columns present in the result object.
 
 <br>
 
-### **duckdb_row_count**
+### duckdb_row_count
 ---
 Returns the number of rows present in a the result object.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_row_count</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -286,18 +286,18 @@ The number of rows present in the result object.
 
 <br>
 
-### **duckdb_rows_changed**
+### duckdb_rows_changed
 ---
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
 queries. For other queries the rows_changed will be 0.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_rows_changed</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -308,7 +308,7 @@ The number of rows changed.
 
 <br>
 
-### **duckdb_column_data**
+### duckdb_column_data
 ---
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
@@ -324,14 +324,14 @@ int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
 printf("Data for row %d: %d\n", row, data[row]);
 ```
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_column_data</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -345,7 +345,7 @@ The column data of the specified column.
 
 <br>
 
-### **duckdb_nullmask_data**
+### duckdb_nullmask_data
 ---
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
@@ -363,14 +363,14 @@ printf("Data for row %d: %d\n", row, data[row]);
 }
 ```
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="k">duckdb_nullmask_data</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
@@ -384,23 +384,23 @@ The nullmask of the specified column.
 
 <br>
 
-### **duckdb_result_error**
+### duckdb_result_error
 ---
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
 
 The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.
 
-#### **Syntax**
+#### Syntax
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_result_error</span>(<span class="k">
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
-#### **Parameters**
+#### Parameters
 ---
 * `result`
 
-The result object to fetch the nullmask from.
+The result object to fetch the error from.
 * `returns`
 
 The error of the result.

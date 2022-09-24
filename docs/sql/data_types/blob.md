@@ -15,6 +15,8 @@ The blob (**B**inary **L**arge **OB**ject) type represents an arbitrary binary o
 ```sql
 -- create a blob value with a single byte (170)
 SELECT '\xAA'::BLOB;
+-- create a blob value with three bytes (170, 171, 172)
+SELECT '\xAA\xAB\xAC'::BLOB;
 -- create a blob value with two bytes (65, 66)
 SELECT 'AB'::BLOB;
 ```

@@ -18,6 +18,8 @@ SELECT * FROM read_parquet('test.parq');
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- read all files that match the glob pattern
 SELECT * FROM 'test/*.parquet';
+-- read all files that match the glob pattern, and include a "filename" column that specifies which file each row came from
+SELECT * FROM read_parquet('test/*.parquet', filename=true);
 -- use a list of globs to read all parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
 -- query the metadata of a parquet file
@@ -78,6 +80,19 @@ The glob syntax and the list input parameter can be combined to scan files that 
 ```sql
 -- Read all parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
+```
+
+#### Filenames
+The `filename` parameter can be passed into the `read_parquet` function to include an extra `filename` column that specifies for each row from which file it was read. For example:
+
+```sql
+SELECT * FROM parquet_scan('data/parquet-testing/glob/*', filename=true) ORDER BY i;
+┌───┬───┬──────────────────────────────────────┐
+│ i │ j │               filename               │
+├───┼───┼──────────────────────────────────────┤
+│ 1 │ a │ data/parquet-testing/glob/t1.parquet │
+│ 2 │ b │ data/parquet-testing/glob/t2.parquet │
+└───┴───┴──────────────────────────────────────┘
 ```
 
 ### Partial Reading

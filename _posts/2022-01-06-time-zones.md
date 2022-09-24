@@ -149,7 +149,7 @@ SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
 TimeZone    Europe/Amsterdam    The current time zone   VARCHAR
 
 -- Choose a time zone.
-SET TimeZone='Americas/Los_Angeles';
+SET TimeZone='America/Los_Angeles';
 
 -- Emulate Postgres' time zone table
 SELECT name, abbrev, utc_offset 

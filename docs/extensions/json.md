@@ -100,6 +100,7 @@ The following functions are used to create JSON.
 | `row_to_json(`*`list`*`)` | Alias for `to_json` that only accepts **STRUCT** |
 | `json_array([`*`any`*`, ...])` | Create a JSON array from *`any`* number of values |
 | `json_object([`*`key`*`,`*`value`*`, ...])` | Create a JSON object from any number of *`key`*, *`value`* pairs |
+| `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two json documents together |
 | `read_json_objects(`*`filename`*`)`   | Read 1 or more json objects from a file |
 | `read_ndjson_objects(`*`filename`*`)` | Alias for `read_ndjson_objects`         |
 
@@ -117,6 +118,8 @@ SELECT json_array(42, 'duck', NULL);
 -- [42,"duck",null]
 SELECT json_object('duck', 42);
 -- {"duck":42}
+SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
+-- {"goose":123,"duck":42}
 ```
 
 ## JSON Aggregate Functions

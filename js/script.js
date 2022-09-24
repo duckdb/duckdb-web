@@ -311,7 +311,7 @@ $(document).ready(function(){
 	$('a').filter(function() {
 		return this.hostname && this.hostname !== location.hostname;
 	}).addClass("externallink").attr('target','_blank');
-	$('.landingmenu .external a.externallink').removeClass('externallink'); // Remove Class from header elements
+	$('.landingmenu .external a.externallink, .mainlinks a.externallink, .discord a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
 
 	
@@ -380,5 +380,41 @@ $(document).ready(function(){
 		$('.versionsidebar').toggleClass('active');
 	})
 	
+	
+	
+	// LOCAL STORAGE
+	function setWithExpiry(key, value, ttl) {
+		const now = new Date()
+		const item = {
+			value: value,
+			expiry: now.getTime() + ttl,
+		}
+		localStorage.setItem(key, JSON.stringify(item))
+	}
+	function getWithExpiry(key) {
+		const itemStr = localStorage.getItem(key)
+		if (!itemStr) {
+			return null
+		}
+		const item = JSON.parse(itemStr)
+		const now = new Date()
+		if (now.getTime() > item.expiry) {
+			localStorage.removeItem(key)
+			return null
+		}
+		return item.value
+	}
+	// CLOSE DISCORD BANNER ON HOME PAGE
+	const showdiscord = getWithExpiry("discordBanner");
+	if(showdiscord == false){
+		$('.discord').css('display', 'none');
+	} else {
+		$('.discord').css('display', 'flex');
+	}
+	$('.discordclose').click(function(){
+		setWithExpiry('discordBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
+		//$('.discord').slideUp();
+		$('.discord').animate({ height: 0 }, 300);
+	});
 	
 });
