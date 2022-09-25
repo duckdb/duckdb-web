@@ -101,8 +101,8 @@ The following functions are used to create JSON.
 | `json_array([`*`any`*`, ...])` | Create a JSON array from *`any`* number of values |
 | `json_object([`*`key`*`,`*`value`*`, ...])` | Create a JSON object from any number of *`key`*, *`value`* pairs |
 | `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two json documents together |
-| `read_json_objects(`*`filename`*`)`   | Read 1 or more json objects from a file |
-| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_ndjson_objects`         |
+| `read_json_objects(`*`filename`*`)`   | Read 1 or more newline-delimited json objects from a file |
+| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects`         |
 
 Examples:
 ```sql
