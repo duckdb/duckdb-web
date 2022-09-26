@@ -8,8 +8,8 @@ title: Python Client API
 <div class="bodywrapper">
 <div class="body" role="main">
 
-<span class="target" id="module-duckdb"></span><p>DuckDB is an embeddable SQL OLAP Database Management System</p>
-<dl class="py data">
+<p>DuckDB is an embeddable SQL OLAP Database Management System</p>
+<span class="target" id="module-duckdb"></span><dl class="py data">
 <dt class="sig sig-object py" id="duckdb.threadsafety">
 <span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">threadsafety</span></span><em class="property"><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#duckdb.threadsafety" title="Permalink to this definition">&#182;</a>
 </dt>
