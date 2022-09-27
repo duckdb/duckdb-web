@@ -32,7 +32,7 @@ All [aggregate functions](aggregates) can be used in a windowing context.
 
 Windowing works by breaking a relation up into independent *partitions*,
 *ordering* those partitions,
-and then computing a new column for each row as a function the nearby values.
+and then computing a new column for each row as a function of the nearby values.
 Some window functions depend only on the partition boundary and the ordering,
 but a few (including all the aggregates) also use a *frame*.
 Frames are specified as a number of rows on either side (*preceding* or *following*) of the *current row*.
