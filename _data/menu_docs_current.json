@@ -122,6 +122,10 @@
             {
               "page": "DuckDB with Ibis",
               "url": "ibis"
+            },
+            {
+              "page": "DuckDB with Polars",
+              "url": "polars"
             }
           ]
         },

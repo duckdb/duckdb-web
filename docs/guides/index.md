@@ -49,6 +49,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ### Python Library Integrations
 * [How to use Ibis to query DuckDB with or without SQL](../guides/python/ibis)
+* [How to use DuckDB with Polars DataFrames via Apache Arrow](../guides/python/polars)
 
 
 ## SQL Editors / IDE's
