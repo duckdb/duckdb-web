@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Querying Postgres tables directly from DuckDB"
+title:  "Querying Postgres Tables Directly From DuckDB"
 author: Hannes Mühleisen
 excerpt_separator: <!--more-->
 ---
