@@ -19,7 +19,7 @@ excerpt_separator: <!--more-->
 ## Introduction
 PostgreSQL is the world's most advanced open source database ([self-proclaimed](https://www.postgresql.org)). From its [interesting beginnings as an academic DBMS](https://dsf.berkeley.edu/papers/ERL-M90-34.pdf), it has evolved over the past 30 years into a fundamental workhorse of our digital environment. 
 
-PostgreSQL is designed for traditional [transactional use cases, "OLTP"](https://en.wikipedia.org/wiki/Online_transaction_processing), where rows in tables are created, updated and removed concurrently, and it excels at them. But this design decision makes PostgreSQL far less suitable for [analytical use cases, "OLAP"](https://en.wikipedia.org/wiki/Online_analytical_processing), where large chunks of tables are read to create summaries of the stored data. Yet there are many use cases where both transactional and analytical use cases are important, for example when trying to gain the latest business intelligence insights into transactional data.
+PostgreSQL is designed for traditional [transactional use cases, "OLTP"](https://en.wikipedia.org/wiki/Online_transaction_processing), where rows in tables are created, updated and removed concurrently, and it excels at this. But this design decision makes PostgreSQL far less suitable for [analytical use cases, "OLAP"](https://en.wikipedia.org/wiki/Online_analytical_processing), where large chunks of tables are read to create summaries of the stored data. Yet there are many use cases where both transactional and analytical use cases are important, for example when trying to gain the latest business intelligence insights into transactional data.
 
 There have been [some attempts to build database management systems that do well on both workloads, "HTAP"](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), but in general many design decisions between OLTP and OLAP systems are hard trade-offs, making this endeavour difficult. Accepting that [one size does not fit all after all](http://cs.brown.edu/~ugur/fits_all.pdf), systems are often separated, with the transactional application data living in a purpose-built system like PostgreSQL, and a copy of the data being stored in an entirely different DBMS. Using a purpose-built analytical system speeds up analytical queries by several orders of magnitude.
 
@@ -29,11 +29,11 @@ But the design space is not as black and white as it seems. For example, the OLA
 
  To allow for fast and consistent analytical reads of Postgres databases, we designed and implemented the "Postgres Scanner". This scanner leverages the *binary transfer mode* of the Postgres client-server protocol (See the [Implementation Section](#Implementation) for more details.), allowing us to efficiently transform and use the data directly in DuckDB.
      
-Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without requiring to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files](https://duckdb.org/docs/data/parquet), [CSV files](https://duckdb.org/docs/data/csv), [SQLite files](https://github.com/duckdblabs/sqlite_scanner), [Pandas](https://duckdb.org/docs/guides/python/sql_on_pandas), [R](https://duckdb.org/docs/api/r#efficient-transfer) and [Julia](https://duckdb.org/docs/api/julia#scanning-dataframes) data frames as well as [Apache Arrow sources](https://duckdb.org/docs/guides/python/sql_on_arrow). This new extension adds the capability to directly query PostgreSQL tables from DuckDB. 
+Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files](https://duckdb.org/docs/data/parquet), [CSV files](https://duckdb.org/docs/data/csv), [SQLite files](https://github.com/duckdblabs/sqlite_scanner), [Pandas](https://duckdb.org/docs/guides/python/sql_on_pandas), [R](https://duckdb.org/docs/api/r#efficient-transfer) and [Julia](https://duckdb.org/docs/api/julia#scanning-dataframes) data frames as well as [Apache Arrow sources](https://duckdb.org/docs/guides/python/sql_on_arrow). This new extension adds the capability to directly query PostgreSQL tables from DuckDB. 
 
 
 ## Usage
-The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdblabs/postgresscanner), but its directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
+The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdblabs/postgresscanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
 ```SQL
 INSTALL postgres_scanner;
 ```
@@ -55,7 +55,7 @@ The tables in the database are registered as views in DuckDB, you can list them 
 ```SQL
 PRAGMA show_tables;
 ```
-Then you can query those views normally using SQL. Again, no data is being copied, this is just a virtual view on the tables in your Postgres table. 
+Then you can query those views normally using SQL. Again, no data is being copied, this is just a virtual view on the tables in your Postgres database. 
 
 If you prefer to not attach all tables, but just query a single table, that is possible using the `POSTGRES_SCAN` and `POSTGRES_SCAN_PUSHDOWN` table-producing functions directly, e.g.
 
@@ -99,7 +99,7 @@ COPY (
      ctid BETWEEN '(P_MIN,0)'::tid AND '(P_MAX,0)'::tid
    ) TO STDOUT (FORMAT binary);
 ```
-This way, we can efficiently scan the table in parallel while not relying on the schema in any way. Because page size is fixed in Postgres, this also has the added bonus of equalizing the effort to read a subset of the page independent of the amount of columns in each row. 
+This way, we can efficiently scan the table in parallel while not relying on the schema in any way. Because page size is fixed in Postgres, this also has the added bonus of equalizing the effort to read a subset of the page independent of the number of columns in each row. 
 
 "But wait!", you will say, according to the documentation the tuple ID is not stable and may be changed by operations such as `VACUUM ALL`. How can you use it for synchronizing parallel scans? This is true, and could be problematic, but we found a solution: 
 
@@ -109,7 +109,7 @@ Of course a transactional database such as Postgres is expected to run transacti
 
 
 ### Projection and Selection Push-Down
-DuckDB's query optimizer moves selections (filters on rows) and projections (removal of unused columns) as low as possible in the query plan (push down), and even instructs the lowermost scan operators to already perform those operations if they support them. For the Postgres scanner, we have implemented both push down variants. Projections are rather straightforward - we can immediately instruct Postgres to only retrieve the columns the query is using. This of course also reduces the amount of bytes that need to be transferred, which speeds up queries. For selections, we construct a SQL filter expression from the pushed down filters. For example, if we run a query like `SELECT l_returnflag, l_linestatus FROM lineitem WHERE l_shipdate < '1998-09-02'` through the Postgres scanner, it would run the following queries:
+DuckDB's query optimizer moves selections (filters on rows) and projections (removal of unused columns) as low as possible in the query plan (push down), and even instructs the lowermost scan operators to perform those operations if they support them. For the Postgres scanner, we have implemented both push down variants. Projections are rather straightforward - we can immediately instruct Postgres to only retrieve the columns the query is using. This of course also reduces the number of bytes that need to be transferred, which speeds up queries. For selections, we construct a SQL filter expression from the pushed down filters. For example, if we run a query like `SELECT l_returnflag, l_linestatus FROM lineitem WHERE l_shipdate < '1998-09-02'` through the Postgres scanner, it would run the following queries:
 
 ```SQL
 COPY (
