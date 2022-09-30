@@ -21,9 +21,9 @@ PostgreSQL is the world's most advanced open source database (self-proclaimed). 
 
 PostgreSQL is designed for traditional [transactional use cases, "OLTP"](https://en.wikipedia.org/wiki/Online_transaction_processing), where rows in tables are created, updated and removed concurrently, and it excels at them. But this design decision makes PostgreSQL far less suitable for [analytical use cases, "OLAP"](https://en.wikipedia.org/wiki/Online_analytical_processing), where large chunks of tables are read to create summaries of the stored data. Yet there are many use cases where both transactional and analytical use cases are important, for example when trying to gain the latest business intelligence insights into transactional data.
 
-There have been [some attempts to build database management systems that do well on both workloads, "HTAP"](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), but in general many design decisions between OLTP and OLAP systems are hard trade-offs, making this endeavour difficult. Accepting that [one size does not fit all after all](http://cs.brown.edu/~ugur/fits_all.pdf), systems are often separated, with the transactional application data living in a purpose-built system like PostgreSQL, and a copy of the data being stored in an entirely different DBMS like ClickHouse (or DuckDB of course). Using a purpose-built analytical system speeds up analytical queries by several orders of magnitude.
+There have been [some attempts to build database management systems that do well on both workloads, "HTAP"](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), but in general many design decisions between OLTP and OLAP systems are hard trade-offs, making this endeavour difficult. Accepting that [one size does not fit all after all](http://cs.brown.edu/~ugur/fits_all.pdf), systems are often separated, with the transactional application data living in a purpose-built system like PostgreSQL, and a copy of the data being stored in an entirely different DBMS. Using a purpose-built analytical system speeds up analytical queries by several orders of magnitude.
 
-Unfortunately, maintaining a second DBMS with a copy of the data for analytical purposes can be problematic: The copy will immediately be outdated as new transactions are processed, requiring a complex and non-trivial synchronization setup. Storing two copies of the database also will require twice the storage space. For example, OLTP systems like PostgreSQL traditionally use a row-based data representation, and OLAP systems tend to favor a chunked-columnar data representation. You can't have both without maintaining a copy of the data with all the issues that brings with it. Also, the SQL syntaxes between whatever OLAP system you're using and Postgres may differ quite significantly.
+Unfortunately, maintaining a copy of the data for analytical purposes can be problematic: The copy will immediately be outdated as new transactions are processed, requiring a complex and non-trivial synchronization setup. Storing two copies of the database also will require twice the storage space. For example, OLTP systems like PostgreSQL traditionally use a row-based data representation, and OLAP systems tend to favor a chunked-columnar data representation. You can't have both without maintaining a copy of the data with all the issues that brings with it. Also, the SQL syntaxes between whatever OLAP system you're using and Postgres may differ quite significantly.
 
 But the design space is not as black and white as it seems. For example, the OLAP performance in systems like DuckDB does not only come from a chunked-columnar on-disk data representation. Much of DuckDB's performance comes from its vectorized query processing engine that is custom-tuned for analytical queries. What if DuckDB was able to somehow *read data stored in PostgreSQL*? While it seems daunting, we have embarked on a quest to make just this possible. Below we describe the design and implementation of a new extension to DuckDB, the so-called "Postgres Scanner".
      
@@ -42,9 +42,9 @@ LOAD postgres_scanner;
 
 To make a Postgres database accessible to DuckDB, use the `POSTGRES_ATTACH` command:
 ```SQL
-CALL postgres_attach('');
+CALL postgres_attach('dbname=myshinydb');
 ```
-`postgres_attach` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=myshinydb'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters:
+`postgres_attach` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=myshinydb'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters to the function:
  * `source_schema` the name of a non-standard schema name in Postgres to get tables from. Default is `public`.
  * `overwrite` whether we should overwrite existing views in the target schema, default is `false`.
 * `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
@@ -58,19 +58,19 @@ Then you can query those views normally using SQL. Again, no data is being copie
 If you prefer to not attach all tables, but just query a single table, that is possible using the `POSTGRES_SCAN` and `POSTGRES_SCAN_PUSHDOWN` table-producing functions directly, e.g.
 
 ```SQL
-SELECT * FROM postgres_scan('', 'public', 'mytable');
-SELECT * FROM postgres_scan_pushdown('', 'public', 'mytable');
+SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'mytable');
+SELECT * FROM postgres_scan_pushdown('dbname=myshinydb', 'public', 'mytable');
 
 ```
 
 Both functions takes three unnamed string parameters, the `libpq` connection string (see above), a Postgres schema name and a table name. The schema name is often `public`. As the name suggest, the variant with "pushdown" in the name will perform selection pushdown as described below.
 
-The Postgres scanner will only be able to read actual tables, hence views are not supported. However, you can of course recreate such views within DuckDB, the syntax should be exactly the same!
+The Postgres scanner will only be able to read actual tables, views are not supported. However, you can of course recreate such views within DuckDB, the syntax should be exactly the same!
 
 ## Implementation
 From an architectural perspective, the Postgres Scanner is implemented as a plug-in extension for DuckDB that provides a so-called table scan function (`postgres_scan`) in DuckDB. There are many such functions in DuckDB and in extensions, such as the Parquet and CSV readers, Arrow readers etc. 
 
-The Postgres Scanner uses the standard `libpq`, which it statically links in. Ironically, this makes the Postgres Scanner easier to install than the other Postgres clients. However, Postgres' normal client-server protocol is [quite slow](https://ir.cwi.nl/pub/26415/p852-muehleisen.pdf), so we spent quite some time optimizing this. As a note, DuckDB's [SQLite Scanner](https://github.com/duckdblabs/sqlite_scanner) does not face this issue, as SQLite is also an in-process database.
+The Postgres Scanner uses the standard `libpq` library, which it statically links in. Ironically, this makes the Postgres Scanner easier to install than the other Postgres clients. However, Postgres' normal client-server protocol is [quite slow](https://ir.cwi.nl/pub/26415/p852-muehleisen.pdf), so we spent quite some time optimizing this. As a note, DuckDB's [SQLite Scanner](https://github.com/duckdblabs/sqlite_scanner) does not face this issue, as SQLite is also an in-process database.
 
 We actually implemented a prototype direct reader for Postgres' database files, but while performance was great, there is the issue that committed but not yet checkpointed data would not be stored in the heap files yet. In addition, if a checkpoint was currently running, our reader would frequently overtake the checkpointer, causing additional inconsistencies. We abandoned that approach since we want to be able to query an actively used Postgres database and believe that consistency is important. Another architectural option would have been to implement a DuckDB Foreign Data Wrapper (FDW) for Postgres similar to [duckdb_fdw](https://github.com/alitrack/duckdb_fdw) but while this could improve the protocol situation, deployment of a postgres extension is quite risky on production servers so we expect few people will be able to do so.
 
@@ -86,7 +86,7 @@ This query will start reading the contents of `lineitem` and write them directly
 
 
 ### Parallelization
-DuckDB supports automatic intra-query parallelization through pipeline parallelism, so we also want to parallelize scans on Postgres tables: Our scan operator opens multiple connections to Postgres, and reads subsets of the table from each. To efficiently split up reading the table, we use Postgres' rather obscure *TID Scan* (Tuple ID) operator, which allows a query to surgically read a specified range of tuple IDs from a table. The Tuple IDs have the form `(page, tuple)`. We parallelize our scan of a Postgres table based on database page ranges expressed in TIDs. Each scan task reads 1000 pages currently. For example, to read a table consisting of 2500 pages, we would start three scan tasks with TID ranges `[(0,0),(999,0)]`, `[(1000,0),(1999,0)]` and `[(2000,0),(4294967295,0)]`. Having an open bound for the last range is important because the number of pages (`relpages`) in a table in the `pg_class` table is merely an estimate. For a given page range (P_MIN, P_MAX), our query from above is thus extended to look like this:
+DuckDB supports automatic intra-query parallelization through pipeline parallelism, so we also want to parallelize scans on Postgres tables: Our scan operator opens multiple connections to Postgres, and reads subsets of the table from each. To efficiently split up reading the table, we use Postgres' rather obscure *TID Scan* (Tuple ID) operator, which allows a query to surgically read a specified range of tuple IDs from a table. The Tuple IDs have the form `(page, tuple)`. We parallelize our scan of a Postgres table based on database page ranges expressed in TIDs. Each scan task reads 1000 pages currently. For example, to read a table consisting of 2500 pages, we would start three scan tasks with TID ranges `[(0,0),(999,0)]`, `[(1000,0),(1999,0)]` and `[(2000,0),(UINT32_MAX,0)]`. Having an open bound for the last range is important because the number of pages (`relpages`) in a table in the `pg_class` table is merely an estimate. For a given page range (P_MIN, P_MAX), our query from above is thus extended to look like this:
 
 ```SQL
 COPY (
@@ -156,7 +156,7 @@ To investigate the performance of the Postgres Scanner, we ran the well-known TP
 |22    |   0.03|            0.15|     0.15|
 
 
-Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqeries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10x faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
+Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10x faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
 
 ## Other Use Cases
 
@@ -164,7 +164,7 @@ The Postgres Scanner can also be used to combine live Postgres data with pre-cac
 
 ```SQL
 INSERT INTO my_table_duckdb_cache
-SELECT * FROM postgres_scan('', 'public', 'my_table') 
+SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'my_table') 
 WHERE incrementing_id_column > (SELECT MAX(incrementing_id_column) FROM my_table_duckdb_cache);
 
 SELECT * FROM my_table_duckdb_cache;
@@ -174,7 +174,7 @@ This provides faster query performance with fully up to date query results, at t
 
 DuckDB has built-in support to write query results to Parquet files. The Postgres scanner provides a rather simple way to write Postgres tables to Parquet files, it can even directly write to S3 if desired. For example,
 ```SQL
-COPY(SELECT * FROM postgres_scan('', 'public', 'lineitem')) TO 'lineitem.parquet' (FORMAT PARQUET);
+COPY(SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO 'lineitem.parquet' (FORMAT PARQUET);
 ```
 
 
