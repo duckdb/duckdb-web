@@ -17,7 +17,7 @@ excerpt_separator: <!--more-->
 
 
 ## Introduction
-PostgreSQL is the world's most advanced open source database (self-proclaimed). From its [interesting beginnings as an academic DBMS](https://dsf.berkeley.edu/papers/ERL-M90-34.pdf), it has evolved over the past 30 years into a fundamental workhorse of our digital environment. 
+PostgreSQL is the world's most advanced open source database ([self-proclaimed](https://www.postgresql.org)). From its [interesting beginnings as an academic DBMS](https://dsf.berkeley.edu/papers/ERL-M90-34.pdf), it has evolved over the past 30 years into a fundamental workhorse of our digital environment. 
 
 PostgreSQL is designed for traditional [transactional use cases, "OLTP"](https://en.wikipedia.org/wiki/Online_transaction_processing), where rows in tables are created, updated and removed concurrently, and it excels at them. But this design decision makes PostgreSQL far less suitable for [analytical use cases, "OLAP"](https://en.wikipedia.org/wiki/Online_analytical_processing), where large chunks of tables are read to create summaries of the stored data. Yet there are many use cases where both transactional and analytical use cases are important, for example when trying to gain the latest business intelligence insights into transactional data.
 
@@ -122,12 +122,10 @@ COPY (
 -- and so on
 ```
 
-As you can see, the projection and selection pushdown has expanded the queries ran against Postgres accordingly.
+As you can see, the projection and selection pushdown has expanded the queries ran against Postgres accordingly. Using the selection push-down is optional. There may be cases where running a filter in Postgres is actually slower than transferring the data and running the filter in DuckDB, for example when filters are not very selective (many rows match).
 
 
 ## Performance
-
-
 To investigate the performance of the Postgres Scanner, we ran the well-known TPC-H benchmark on DuckDB using its internal storage format, on Postgres also using its internal format and with DuckDB reading from Postgres using the new Postgres Scanner. We used DuckDB 0.5.1 and Postgres 14.5, all experiments were run on a MacBook Pro with an M1 Max CPU. The experiment script [is available](https://gist.github.com/hannes/d2f0914a8e0ed0fb235040b9981c58a7). We run "scale factor" 1 of TPCH, creating a dataset of roughly 1 GB with ca. 6 M rows in the biggest table, `lineitem`. Each of the 22 TPC-H benchmark queries was run 5 times, and we report the median run time in seconds. The time breakdown is given in the following table. 
 
 |query | duckdb| duckdb/postgres| postgres|
