@@ -4,6 +4,24 @@ title: Aggregate Functions
 selected: Documentation/Aggregates
 railroad: expressions/aggregate.js
 ---
+
+## Examples
+```sql
+-- produce a single row containing the sum of the "amount" column
+SELECT SUM(amount) FROM sales;
+-- produce one row per unique region, containing the sum of "amount" for each group
+SELECT region, SUM(amount) FROM sales GROUP BY region;
+-- return only the regions that have a sum of "amount" higher than 100
+SELECT region FROM sales GROUP BY region HAVING SUM(amount) > 100;
+-- return the number of unique values in the "region" column
+SELECT COUNT(DISTINCT region) FROM sales;
+-- return two values, the total sum of "amount" and the sum of "amount" minus columns where the region is "north"
+SELECT SUM(amount), SUM(amount) FILTER (region != 'north') FROM sales;
+-- returns a list of all regions in order of the "amount" column
+SELECT LIST(region ORDER BY amount DESC) FROM sales;
+```
+
+## Syntax
 <div id="rrdiagram"></div>
 
 Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. As such, aggregates can only be used in the `SELECT` and `HAVING` clauses of a SQL query.
