@@ -213,6 +213,10 @@ samp {
   font-size: 1em;
 }
 
+code {
+  font-variant-ligatures: none;
+}
+
 /*
  * Improves readability of pre-formatted text in all browsers
  */

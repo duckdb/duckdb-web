@@ -1969,7 +1969,7 @@ function GenerateFilterClause(options = {}) {
 	return [
 		Keyword("FILTER"),
 		Keyword("("),
-		Keyword("WHERE"),
+		Optional(Keyword("WHERE"), "skip"),
 		Expression('filter_expr'),
 		Keyword(")")
 	]

@@ -4,6 +4,22 @@ title: Window Functions
 selected: Documentation/Window Functions
 railroad: expressions/window.js
 ---
+
+## Examples
+```sql
+-- generate a "row_number" column containing incremental identifiers for each row
+SELECT row_number() OVER () FROM sales;
+-- generate a "row_number" column, by order of time
+SELECT row_number() OVER (ORDER BY time) FROM sales;
+-- generate a "row_number" column, by order of time partitioned by region
+SELECT row_number() OVER (PARTITION BY region ORDER BY time) FROM sales;
+-- compute the difference between the current amount, and the previous amount, by order of time
+SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
+-- compute the percentage of the total amount of sales per region for each row
+SELECT amount / SUM(amount) OVER (PARTITION BY region) FROM sales;
+```
+
+## Syntax
 <div id="rrdiagram"></div>
 
 Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER window-name` syntax.
