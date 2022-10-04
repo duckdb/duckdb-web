@@ -29,7 +29,8 @@ input[type=submit] {
 	color: #fff;
 }
 .autocomplete-items {
-	position: absolute;
+	/* relative position does not cover up the search results */
+	position: relative;
 	border: 1px solid #d4d4d4;
 	border-bottom: none;
 	border-top: none;
