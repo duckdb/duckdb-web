@@ -10,6 +10,10 @@ gold:
   - name: Mode
     url: https://mode.com
     logoimg: mode.svg
+
+  - name: MotherDuck
+    url: https://motherduck.com
+    logoimg: motherduck.svg  
     
 silver:
   - name: Hex
