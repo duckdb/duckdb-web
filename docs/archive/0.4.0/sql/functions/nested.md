@@ -157,7 +157,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
 
-By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e. the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby.md) PRAGMA statements.
+By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e. the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby) PRAGMA statements.
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the NULL sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 
