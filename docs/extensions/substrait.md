@@ -84,9 +84,9 @@ con.execute("LOAD('substrait')")
 ### R
 Before using the extension you must remember to properly load it. To load an extension in R, you must execute the sql commands within a connection.
 ```r
-con <- dbConnect(duckdb::duckdb(config=list("allow_unsigned_extensions"="true")))
-dbExecute(con, "LOAD('substrait')")
+con <- dbConnect(duckdb::duckdb())
 dbExecute(con, "INSTALL('substrait')"))
+dbExecute(con, "LOAD('substrait')")
 ```
 1) Blob Generation
      
