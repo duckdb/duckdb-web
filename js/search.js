@@ -159,8 +159,11 @@ inp.addEventListener("keydown", function(e) {
 		/*If the ENTER key is pressed, prevent the form from being submitted,*/
 		e.preventDefault();
 		if (currentFocus > -1) {
-		/*and simulate a click on the "active" item:*/
-		if (x) x[currentFocus].click();
+			/*and simulate a click on the "active" item:*/
+			if (x) x[currentFocus].click();
+		} else {
+			/*Close the suggestion list on enter so that the user can view the main document list */
+			closeAllLists();
 		}
 	}
 });
