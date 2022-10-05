@@ -21,7 +21,7 @@ my_arrow_table = pa.Table.from_pydict({'i':[1,2,3,4],
                                        'j':["one", "two", "three", "four"]})
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow Table
-results = con.execute("SELECT * FROM my_arrow_dataset WHERE i = 2").arrow()
+results = con.execute("SELECT * FROM my_arrow_table WHERE i = 2").arrow()
 ```
 
 ## Apache Arrow Datasets
