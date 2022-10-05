@@ -9,7 +9,9 @@ The main goal of this extension is to support a both production and consumption 
 This extension is mainly exposed via 3 different APIs. 1) The SQL API, 2) The Python API, 3) The R API.
 Here we depict how to consume and produce substrait query plans in each API.
 
+<!--
 Additionally, see the [repo](https://github.com/duckdblabs/substrait) for further usage details.
+-->
 
 ### SQL
 In the SQL API, users can generate substrait plans (into a blob or a JSON) and consume substrait plans.
