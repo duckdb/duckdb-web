@@ -40,9 +40,10 @@ jobs:
             }
 
             if (good) {
-              console.log('good commit', commit.sha);
+              console.log("found a successful build: " + commit.sha);
             } else {
-              console.log('nothing good to be found here');
+              console.log("couldn't find a successful build");
+              return;
             }
 
             const workflows = await github.actions.listWorkflowRunsForRepo({
