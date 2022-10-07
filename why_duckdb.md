@@ -85,6 +85,7 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [Demo: CRUD operations with Qt5 and DuckDB](https://github.com/chilarai/qt-duckdb)
 * [Elixir driver](https://github.com/mpope9/exduckdb) and [Ecto adapter](https://github.com/mpope9/ecto_duckdb/) for DuckDB
 * [DuckDB backend](https://fugue-tutorials.readthedocs.io/tutorials/integrations/backends/duckdb.html) for [Fugue](https://github.com/fugue-project/fugue)
+* [StabilitySort](https://gitlab.com/baaron/StabilitySort) bioinformatics tool for finding unstable variants from predicted AlphaFold2 structures  
 
 ## Testimonials
 See our [DuckDB Testimonial Twitter Wall](/docs/twitter_wall)
