@@ -91,7 +91,7 @@ Note that the `require icu` step is only required if the DuckDB client does not 
 ICU extension. 
 
 ```sql
-require icu
+load icu
 
 Set Calendar='japanese';
 ```

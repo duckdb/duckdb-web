@@ -580,7 +580,11 @@
                 "page": "Timestamp Functions",
                 "url": "timestamp"
               },
-              {
+               {
+                "page": "Timestamp With Time Zone Functions",
+                "url": "timestamptz"
+              },
+             {
                 "page": "Time Functions",
                 "url": "time"
               },
