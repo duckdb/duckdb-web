@@ -31,3 +31,7 @@ silver:
   - name: Rill
     url: https://www.rilldata.com
     logoimg: rill.svg
+    
+  - name: Omni
+    url: https://www.exploreomni.com
+    logoimg: omni.svg
