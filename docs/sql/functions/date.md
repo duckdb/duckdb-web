@@ -24,7 +24,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
-| `current_date` | Current date (at start of current transaction) | | |
+| `current_date` | Current date (at start of current transaction) | `current_date` | `2022-10-08` |
 | `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the dates | `date_diff('month', DATE '1992-09-15', DATE '1992-11-14')` | `2` |
 | `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the dates | `datediff('month', DATE '1992-09-15', DATE '1992-11-14')` | `2` |
 | `date_part(`*`part`*`, `*`date`*`)` | Get the [subfield](../../sql/functions/datepart) (equivalent to `extract`) | `date_part('year', DATE '1992-09-20')` | `1992` |
@@ -43,6 +43,7 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | `make_date(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`)` | The date for the given parts | `make_date(1992, 9, 20)` | `1992-09-20` |
 | `monthname(`*`date`*`)` | The (English) name of the month | `monthname(DATE '1992-09-20')` | `September` |
 | `strftime(date, format)` | Converts a date to a string according to the [format string](../../sql/functions/dateformat) | `strftime(date '1992-01-01', '%a, %-d %B %Y')` | `Wed, 1 January 1992` |
+| `today()` | Current date (start of current transaction) | `today()` | `2022-10-08` |
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
 

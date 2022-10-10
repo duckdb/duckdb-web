@@ -66,8 +66,8 @@ Below is a full list of all available format specifiers.
 | `%-S` | Second as a decimal number. | 0, 1, ..., 59 |
 | `%g` | Millisecond as a decimal number, zero-padded on the left. | 000 - 999 |
 | `%f` | Microsecond as a decimal number, zero-padded on the left. | 000000 - 999999 |
-| `%z` | UTC offset in the form +HHMM or -HHMM. |  |
-| `%Z` | Time zone name. |   |
+| `%z` | UTC offset in the form +HHMM or -HHMM. | -0700 |
+| `%Z` | Time zone name. | Europe/Amsterdam  |
 | `%j` | Day of the year as a zero-padded decimal number. | 001, 002, ..., 366 |
 | `%-j` | Day of the year as a decimal number. | 1, 2, ..., 366 |
 | `%U` | Week number of the year (Sunday as the first day of the week). | 00, 01, ..., 53 |
