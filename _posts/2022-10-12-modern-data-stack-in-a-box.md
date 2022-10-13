@@ -13,6 +13,8 @@ excerpt_separator: <!--more-->
 
 *TLDR: A fast, free, and open-source Modern Data Stack (MDS) can now be fully deployed on your laptop or to a single machine using the combination of [DuckDB](https://duckdb.org/), [Meltano](https://meltano.com/), [dbt](https://www.getdbt.com/), and [Apache Superset](https://superset.apache.org/).*
 
+This post is a collaboration with Jacob Matson and cross-posted on [dataduel.co](https://www.dataduel.co/modern-data-stack-in-a-box-with-duckdb/).
+
 ## Summary
 There is a large volume of literature ([1](https://www.startdataengineering.com/post/scale-data-pipelines/), [2](https://www.databricks.com/session_na21/scaling-your-data-pipelines-with-apache-spark-on-kubernetes), [3](https://towardsdatascience.com/scaling-data-products-delivery-using-domain-oriented-data-pipelines-869ca9461892)) about scaling data pipelines. “Use Kafka! Build a lake house! Don't build a lake house, use Snowflake! Don't use Snowflake, use XYZ!” However, with advances in hardware and the rapid maturation of data software, there is a simpler approach. This article will light up the path to highly performant single node analytics with an MDS-in-a-box open source stack: Meltano, DuckDB, dbt, & Apache Superset on Windows using Windows Subsystem for Linux (WSL). There are many options within the MDS, so if you are using another stack to build an MDS-in-a-box, please share it with the community on the DuckDB [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/)! Or just stop by for a friendly debate about our choice of tools!
 
