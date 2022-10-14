@@ -39,7 +39,7 @@ The table below shows the available mathematical functions.
 | `cbrt(x)` | returns the cube root of the number | `cbrt(8)` | 2 |
 | `ceil(x)` | rounds the number up | `ceil(17.4)` | 18 |
 | `ceiling(x)` | rounds the number up. Alias of `ceil`. | `ceiling(17.4)` | 18 |
-| `chr(x)` | returns a character which is corresponding the the ASCII code value or Unicode code point | `chr(65)` | A |
+| `chr(x)` | returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A |
 | `cos(x)` | computes the cosine of x | `cos(90)` | -0.4480736161291701 |
 | `cot(x)` | computes the cotangent of x | `cot(0.5)` | 1.830487721712452 |
 | `degrees(x)` | converts radians to degrees | `degrees(pi())` | 180 |
