@@ -11,6 +11,7 @@ selected: API Reference
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_close">duckdb_close</a></span>(<span class="kt">duckdb_database</span> *<span class="k">database</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_connect">duckdb_connect</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>, <span class="kt">duckdb_connection</span> *<span class="k">out_connection</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_disconnect">duckdb_disconnect</a></span>(<span class="kt">duckdb_connection</span> *<span class="k">connection</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_library_version">duckdb_library_version</a></span>();
 </code></pre></div></div>
 ### **Configuration**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_create_config">duckdb_create_config</a></span>(<span class="kt">duckdb_config</span> *<span class="k">out_config</span>);
@@ -210,6 +211,7 @@ selected: API Reference
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_add_replacement_scan">duckdb_add_replacement_scan</a></span>(<span class="kt">duckdb_database</span> <span class="k">db</span>, <span class="k">duckdb_replacement_callback_t</span> <span class="k">replacement</span>, <span class="kt">void</span> *<span class="k">extra_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">delete_callback</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_replacement_scan_set_function_name">duckdb_replacement_scan_set_function_name</a></span>(<span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">function_name</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_replacement_scan_add_parameter">duckdb_replacement_scan_add_parameter</a></span>(<span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>, <span class="kt">duckdb_value</span> <span class="k">parameter</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_replacement_scan_set_error">duckdb_replacement_scan_set_error</a></span>(<span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
 </code></pre></div></div>
 ### **Appender**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_create">duckdb_appender_create</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table</span>, <span class="kt">duckdb_appender</span> *<span class="k">out_appender</span>);
@@ -383,6 +385,20 @@ Closes the specified connection and de-allocates all memory allocated for that c
 
 The connection to close.
 
+<br>
+
+### duckdb_library_version
+---
+Returns the version of the linked DuckDB, with a version postfix for dev versions
+
+Usually used for developing C extensions that must return this for a compatibility check.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_library_version</span>(<span class="k">
+</span>  <span class="k">
+</span>);
+</code></pre></div></div>
 <br>
 
 ### duckdb_create_config
@@ -3877,6 +3893,28 @@ The info object
 * `parameter`
 
 The parameter to add.
+
+<br>
+
+### duckdb_replacement_scan_set_error
+---
+Report that an error has occurred while executing the replacement scan.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_replacement_scan_set_error</span>(<span class="k">
+</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `info`
+
+The info object
+* `error`
+
+The error message
 
 <br>
 
