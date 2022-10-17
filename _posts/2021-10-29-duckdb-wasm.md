@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 
 ---
 
-_TLDR: DuckDB-Wasm is an in-process analytical SQL database for the browser. 
+_TLDR: [DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. 
 It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js.
 You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)._
 
@@ -89,13 +89,13 @@ await db.importCSVFromPath('data.csv', {
 
 // ..., from JSON documents in row-major format
 await db.registerFileText("rows.json", `[
-    { “col1”: 1, “col2”: “foo” },
-    { “col1”: 2, “col2”: “bar” },
+    { "col1": 1, "col2": "foo" },
+    { "col1": 2, "col2": "bar" },
 ]`);
 // ... or column-major format
 await db.registerFileText("columns.json", `{
-    “col1”: [1, 2],
-    “col2”: [“foo”, “bar”]
+    "col1": [1, 2],
+    "col2": ["foo", "bar"]
 }`);
 // ... with typed insert options
 await db.importJSONFromPath('rows.json', { name: 'rows' });
@@ -182,7 +182,7 @@ WebAssembly 1.0 has landed in all major browsers. The WebAssembly Community Grou
 
 The rapid pace of this development presents challenges and opportunities for library authors. On the one hand, the different features find their way into the browsers at different speeds which leads to a fractured space of post-MVP functionality. On the other hand, features can bring flat performance improvements and are therefore indispensable when aiming for a maximum performance.
 
-The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DuckDB and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DuckDB does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as “zero-cost exceptions” as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
+The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DuckDB and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DuckDB does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
 
 <p align="center">
     <img src="/images/blog/wasm-eh.png"
