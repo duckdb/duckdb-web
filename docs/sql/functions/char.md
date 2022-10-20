@@ -23,8 +23,10 @@ This section describes functions and operators for examining and manipulating st
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test','es')` | 2 |
 | `lcase(`*`string`*`)` | Alias of `lower`. Convert *string* to lower case | `lcase('Hello')` | `hello` |
-| `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('hello', 2)` | `he` |
-| `length(`*`string`*`)` | Number of characters in *string* | `length('Hello')` | `5` |
+| `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('Hello🦆', 2)` | `He` |
+| `left_grapheme(`*`string`*`, `*`count`*`)`| Extract the left-most grapheme clusters | `left_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` | `🤦🏼‍♂️` |
+| `length(`*`string`*`)` | Number of characters in *string* | `length('Hello🦆')` | `6` |
+| `length_grapheme(`*`string`*`)` | Number of grapheme clusters in *string* | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')` | `2` |
 | *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` |
 | `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
 | `list_element(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_element('DuckDB', 2)` | `'u'` |
@@ -47,7 +49,8 @@ This section describes functions and operators for examining and manipulating st
 | `repeat(`*`string`*`, `*`count`*`)`| Repeats the *string* *count* number of times | `repeat('A', 5)` | `AAAAA` |
 | `replace(`*`string`*`, `*`source`*`, `*`target`*`)`| Replaces any occurrences of the *source* with *target* in *string* | `replace('hello', 'l', '-')` | `he--o` |
 | `reverse(`*`string`*`)`| Reverses the *string* | `reverse('hello')` | `olleh` |
-| `right(`*`string`*`, `*`count`*`)`| Extract the right-most *count* characters | `right('hello', 3)` | `llo` |
+| `right(`*`string`*`, `*`count`*`)`| Extract the right-most *count* characters | `right('Hello🦆', 3)` | `lo🦆` |
+| `right_grapheme(`*`string`*`, `*`count`*`)`| Extract the right-most *count* grapheme clusters | `right_grapheme('🤦🏼‍♂️🤦🏽‍♀️', 1)` | `🤦🏽‍♀️` |
 | `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string* with the character from the right until it has *count* characters | `rpad('hello', 10, '<')` | `hello<<<<<` |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` |
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` |
@@ -62,6 +65,7 @@ This section describes functions and operators for examining and manipulating st
 | `string_to_array(`*`string`*`, `*`separator`*`)` | Alias of `string_split`. Splits the *string* along the *separator* | `string_to_array('hello␣world', '␣')` | `['hello', 'world']` |
 | `substr(`*`string`*`, `*`start`*`, `*`length`*`)` | Alias of `substring`. Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substr('Hello', 2, 2)` | `el` |
 | `substring(`*`string`*`, `*`start`*`, `*`length`*`)` | Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substring('Hello', 2, 2)` | `el` |
+| `substring_grapheme(`*`string`*`, `*`start`*`, `*`length`*`)` | Extract substring of *length* grapheme clusters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` | `🤦🏽‍♀️🦆` |
 | `suffix(`*`string`*`, `*`search_string`*`)` | Return true if *string* ends with *search_string*. | `suffix('abc', 'bc')` | `true` |
 | `strpos(`*`string`*`, `*`characters`*`)`| Alias of `instr`. Return location of first occurrence of `characters` in `string`, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
 | `to_base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of base64. | `to_base64('A'::blob)` | `QQ==` |
