@@ -20,6 +20,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 ##### HTTP & S3
 * [How to load a Parquet file directly from HTTP(s)](../guides/import/http_import)
 * [How to load a Parquet file directly from S3](../guides/import/s3_import)
+* [How to load a Parquet file directly from GCS](../guides/import/gcs_import)
 
 ## SQL: Meta Queries
 
