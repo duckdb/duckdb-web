@@ -126,6 +126,10 @@
             {
               "page": "DuckDB with Polars",
               "url": "polars"
+            },
+            {
+              "page": "DuckDB with Vaex",
+              "url": "vaex"
             }
           ]
         },
