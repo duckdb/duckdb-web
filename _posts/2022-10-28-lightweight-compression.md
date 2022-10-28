@@ -17,7 +17,7 @@ When working with large amounts of data, compression is critical for reducing st
 
 <!--more-->
 
-Column store formats, such as DuckDB's native file format or [Parquet](https://duckdb.org/2021/06/25/querying-parquet.html), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
+Column store formats, such as DuckDB's native file format or [Parquet](/2021/06/25/querying-parquet.html), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
 
 DuckDB added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DuckDB has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DuckDB works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
 
@@ -77,7 +77,7 @@ On the flip side, these algorithms are ineffective if the specific patterns they
 ## Compression Framework
 Because of the advantages described above, DuckDB uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DuckDB's compression framework must first decide on which algorithm to use to store the data of each column.
 
-DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](https://duckdb.org/2021/06/25/querying-parquet.html) - but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
+DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](/2021/06/25/querying-parquet.html) - but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
 
 <img src="/images/compression/storageformat.png"
      alt="Visualization of the storage format of DuckDB"
