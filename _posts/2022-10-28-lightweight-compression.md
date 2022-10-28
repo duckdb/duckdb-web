@@ -20,7 +20,7 @@ Column store formats, such as DuckDB's native file format or [Parquet](/2021/06/
 
 DuckDB added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DuckDB has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DuckDB works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
 
-|        Version         |  Taxi  | On Time | Lineitem |     NOTES      |      Date      |
+|        Version         |  Taxi  | On Time | Lineitem |     Notes      |      Date      |
 |------------------------|-------:|--------:|---------:|----------------|----------------|
 | DuckDB v0.2.8          | 15.3GB | 1.73GB  | 0.85GB   | Uncompressed   | July 2021      |
 | DuckDB v0.2.9          | 11.2GB | 1.25GB  | 0.79GB   | RLE + Constant | September 2021 |
@@ -28,7 +28,7 @@ DuckDB added support for compression [at the end of last year](https://github.co
 | DuckDB v0.3.3          | 6.9GB  | 0.23GB  | 0.32GB   | Dictionary     | April 2022     |
 | DuckDB v0.5.0          | 6.6GB  | 0.21GB  | 0.29GB   | FOR            | September 2022 |
 | DuckDB dev             | 4.8GB  | 0.21GB  | 0.17GB   | FSST + Chimp   | `NOW()`        |
-| CSV                    | 17.0GB | 1.1GB   | 0.72GB   |                |                |
+| CSV                    | 17.0GB | 1.11GB  | 0.72GB   |                |                |
 | Parquet (Uncompressed) | 4.5GB  | 0.12GB  | 0.31GB   |                |                |
 | Parquet (Snappy)       | 3.2GB  | 0.11GB  | 0.18GB   |                |                |
 | Parquet (ZSTD)         | 2.6GB  | 0.08GB  | 0.15GB   |                |                |
@@ -40,7 +40,7 @@ As an example of this concept, let us consider the following two data sets.
 
 <img src="/images/compression/exampledata.png"
      alt="Example data set with predictable and noisy data"
-     width=100%
+     width="100%"
      />
 
 The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g. `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
@@ -80,7 +80,7 @@ DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` row
 
 <img src="/images/compression/storageformat.png"
      alt="Visualization of the storage format of DuckDB"
-     width=100%
+     width="100%"
      />
 
 The compression framework operates within the context of the individual *Column Segments*. It operates in two phases. First, the data in the column segment is *analyzed*. In this phase, we scan the data in the segment and find out the best compression algorithm for that particular segment. After that, the *compression* is performed, and the compressed data is written to the blocks on disk.
@@ -96,7 +96,7 @@ Constant encoding is the most straightforward compression algorithm in DuckDB. C
 
 <img src="/images/compression/constant.png"
      alt="Data set stored both uncompressed and with constant compression"
-     width=100%
+     width="100%"
      />
 
 When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable - in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g. a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
@@ -106,7 +106,7 @@ When applicable, this encoding technique leads to tremendous space savings. Whil
 
 <img src="/images/compression/rle.png"
      alt="Data set stored both uncompressed and with RLE compression"
-     width=100%
+     width="100%"
      />
 
 RLE is powerful when there are many repeating values in the data. This might occur when data is sorted or partitioned on a particular attribute. It is also useful for columns that have many missing (`NULL`) values. 
@@ -117,7 +117,7 @@ Bit Packing is a compression technique that takes advantage of the fact that int
 
 <img src="/images/compression/bitpacking.png"
      alt="Data set stored both uncompressed and with bitpacking compression"
-     width=100%
+     width="100%"
      />
 
 For bit packing compression, we keep track of the maximum value for every 1024 values. The maximum value determines the bit packing width, which is the number of bits necessary to store that value. For example, when storing a set of values with a maximum value of 32, the bit packing width is 5 bits, down from the 32 bits per value that would be required to store uncompressed four-byte integers.
@@ -129,7 +129,7 @@ Frame of Reference encoding is an extension of bit packing, where we also includ
 
 <img src="/images/compression/for.png"
      alt="Data set stored both uncompressed and with FOR compression"
-     width=100%
+     width="100%"
      />
 
 While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e. the offset since 1970-01-01 in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
@@ -140,7 +140,7 @@ Dictionary encoding works by extracting common values into a separate dictionary
 
 <img src="/images/compression/dictionary.png"
      alt="Data set stored both uncompressed and with Dictionary compression"
-     width=100%
+     width="100%"
      />
 
 Dictionary encoding is particularly efficient when storing text columns with many duplicate entries. The much larger text values can be replaced by small numbers, which can in turn be efficiently bit packed together.
@@ -150,7 +150,7 @@ Dictionary encoding is particularly efficient when storing text columns with man
 
 <img src="/images/compression/fsst.png"
      alt="Data set stored both uncompressed and with FSST compression"
-     width=100%
+     width="100%"
      />
 
 For those interested in learning more, watch the talk by [Peter Boncz here](https://www.youtube.com/watch?v=uJ1KO_UMrQk).
