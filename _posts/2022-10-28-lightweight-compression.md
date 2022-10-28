@@ -5,7 +5,6 @@ author: Mark Raasveldt
 excerpt_separator: <!--more-->
 ---
 
-# Lightweight Compression in DuckDB
 <img src="/images/compression/matroshka-duck.png"
      alt="Matroshka Ducks (ducks going from big to small)"
      width=200px
@@ -41,7 +40,7 @@ As an example of this concept, let us consider the following two data sets.
 
 <img src="/images/compression/exampledata.png"
      alt="Example data set with predictable and noisy data"
-     max-width=250px
+     width=100%
      />
 
 The constant data set can be compressed by simply storing the value of the pattern and how many times the pattern repeats (e.g. `1x8`). The random noise, on the other hand, has no pattern, and is therefore not compressible.
@@ -81,7 +80,7 @@ DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` row
 
 <img src="/images/compression/storageformat.png"
      alt="Visualization of the storage format of DuckDB"
-     max-width=250px
+     width=100%
      />
 
 The compression framework operates within the context of the individual *Column Segments*. It operates in two phases. First, the data in the column segment is *analyzed*. In this phase, we scan the data in the segment and find out the best compression algorithm for that particular segment. After that, the *compression* is performed, and the compressed data is written to the blocks on disk.
@@ -97,7 +96,7 @@ Constant encoding is the most straightforward compression algorithm in DuckDB. C
 
 <img src="/images/compression/constant.png"
      alt="Data set stored both uncompressed and with constant compression"
-     max-width=250px
+     width=100%
      />
 
 When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable - in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g. a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
@@ -107,7 +106,7 @@ When applicable, this encoding technique leads to tremendous space savings. Whil
 
 <img src="/images/compression/rle.png"
      alt="Data set stored both uncompressed and with RLE compression"
-     max-width=250px
+     width=100%
      />
 
 RLE is powerful when there are many repeating values in the data. This might occur when data is sorted or partitioned on a particular attribute. It is also useful for columns that have many missing (`NULL`) values. 
@@ -118,7 +117,7 @@ Bit Packing is a compression technique that takes advantage of the fact that int
 
 <img src="/images/compression/bitpacking.png"
      alt="Data set stored both uncompressed and with bitpacking compression"
-     max-width=250px
+     width=100%
      />
 
 For bit packing compression, we keep track of the maximum value for every 1024 values. The maximum value determines the bit packing width, which is the number of bits necessary to store that value. For example, when storing a set of values with a maximum value of 32, the bit packing width is 5 bits, down from the 32 bits per value that would be required to store uncompressed four-byte integers.
@@ -130,7 +129,7 @@ Frame of Reference encoding is an extension of bit packing, where we also includ
 
 <img src="/images/compression/for.png"
      alt="Data set stored both uncompressed and with FOR compression"
-     max-width=250px
+     width=100%
      />
 
 While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e. the offset since 1970-01-01 in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
@@ -141,7 +140,7 @@ Dictionary encoding works by extracting common values into a separate dictionary
 
 <img src="/images/compression/dictionary.png"
      alt="Data set stored both uncompressed and with Dictionary compression"
-     max-width=250px
+     width=100%
      />
 
 Dictionary encoding is particularly efficient when storing text columns with many duplicate entries. The much larger text values can be replaced by small numbers, which can in turn be efficiently bit packed together.
@@ -151,7 +150,7 @@ Dictionary encoding is particularly efficient when storing text columns with man
 
 <img src="/images/compression/fsst.png"
      alt="Data set stored both uncompressed and with FSST compression"
-     max-width=250px
+     width=100%
      />
 
 For those interested in learning more, watch the talk by [Peter Boncz here](https://www.youtube.com/watch?v=uJ1KO_UMrQk).
@@ -169,21 +168,20 @@ SELECT * EXCLUDE (column_path, segment_id, start, stats, persistent, block_id, b
 FROM pragma_storage_info('taxi')
 USING SAMPLE 10 ROWS
 ORDER BY row_group_id;
-┌──────────────┬───────────────────┬───────────┬──────────────┬───────┬─────────────┐
-│ row_group_id │    column_name    │ column_id │ segment_type │ count │ compression │
-├──────────────┼───────────────────┼───────────┼──────────────┼───────┼─────────────┤
-│ 0            │ mta_tax           │ 14        │ FLOAT        │ 65536 │ RLE         │
-│ 20           │ extra             │ 13        │ FLOAT        │ 65536 │ Chimp       │
-│ 24           │ dropoff_at        │ 2         │ TIMESTAMP    │ 16384 │ BitPacking  │
-│ 59           │ dropoff_longitude │ 9         │ VALIDITY     │ 65536 │ Constant    │
-│ 140          │ pickup_at         │ 1         │ VALIDITY     │ 65536 │ Constant    │
-│ 145          │ pickup_at         │ 1         │ VALIDITY     │ 65536 │ Constant    │
-│ 167          │ total_amount      │ 17        │ FLOAT        │ 65536 │ Chimp       │
-│ 168          │ tip_amount        │ 15        │ FLOAT        │ 65536 │ RLE         │
-│ 191          │ tolls_amount      │ 16        │ VALIDITY     │ 65536 │ Constant    │
-│ 195          │ dropoff_at        │ 2         │ TIMESTAMP    │ 52224 │ BitPacking  │
-└──────────────┴───────────────────┴───────────┴──────────────┴───────┴─────────────┘
 ```
+
+| row_group_id |    column_name     | column_id | segment_type | count | compression  |
+|--------------|--------------------|-----------|--------------|-------|--------------|
+| 4            | extra              | 13        | FLOAT        | 65536 | Chimp        |
+| 20           | tip_amount         | 15        | FLOAT        | 65536 | Chimp        |
+| 26           | pickup_latitude    | 6         | VALIDITY     | 65536 | Constant     |
+| 46           | tolls_amount       | 16        | FLOAT        | 65536 | RLE          |
+| 73           | store_and_fwd_flag | 8         | VALIDITY     | 65536 | Uncompressed |
+| 96           | total_amount       | 17        | VALIDITY     | 65536 | Constant     |
+| 111          | total_amount       | 17        | VALIDITY     | 65536 | Constant     |
+| 141          | pickup_at          | 1         | TIMESTAMP    | 52224 | BitPacking   |
+| 201          | pickup_longitude   | 5         | VALIDITY     | 65536 | Constant     |
+| 209          | passenger_count    | 3         | TINYINT      | 65536 | BitPacking   |
 
 ## Conclusion & Future Goals
 Compression has been tremendously successful in DuckDB, and we have made great strides in reducing the storage requirements of the system. We are still actively working on extending compression within DuckDB, and are looking to improve the compression ratio of the system even further, both by improving our existing techniques and implementing several others. Our goal is to achieve compression on par with Parquet with Snappy, while using only lightweight specialized compression techniques that are very fast to operate on. 
