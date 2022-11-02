@@ -9,6 +9,16 @@
 	body.landing .welcome .mainlinks ul li{
 		min-width: 160px;
 	}
+	.searchoverlay > div .shortcuts{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.searchoverlay > div form input,
+	.autocomplete{
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 980px) {
@@ -364,6 +374,14 @@
 	}
 	footer .sitefooter .footercontent > div:first-child{
 		width: 100%;
+	}
+	.searchoverlay{
+		z-index: 1000;
+	}
+	.searchoverlay > div{
+		left: 0;
+		width: 100%;
+		padding: 25px 15px 15px 15px;
 	}
 }
 
