@@ -27,11 +27,8 @@
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
-	<meta property="og:image" content="https://duckdb.org/images/sharingduckdb.jpg" />
-	{% if page.description %}
-	<meta name="description" content="{{page.description}}">
-	<meta property="og:description" content="{{page.description}}">
-	{% endif %}
+
+	{% seo title=false %}
 
 </head>
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
