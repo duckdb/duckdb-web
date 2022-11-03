@@ -383,6 +383,10 @@
 		width: 100%;
 		padding: 25px 15px 15px 15px;
 	}
+	.searchoverlay > div form input{
+		background: white;
+		padding-left: 10px;
+	}
 }
 
 @media only screen and (max-height: 840px) {
