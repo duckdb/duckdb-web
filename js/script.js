@@ -216,10 +216,13 @@ $(document).ready(function(){
 			    $(this).toggleClass('is-active');
 			    $('div.sidenavigation').toggleClass('slidein');
 				$('body.documentation main .wrap').toggleClass('inactive');
+				if ( $('body').hasClass('documentation') ){
+					toggleMobileSearchIcon();
+				}
 			} else {
 				$(this).toggleClass('is-active');
 				$('.landingmenu nav').toggleClass('slidein');
-				$('body main').toggleClass('inactive');
+				$('body main').toggleClass('inactive');	
 			}
 		})
 	
@@ -234,19 +237,30 @@ $(document).ready(function(){
     
 	
 	// Header Animation
+	if( $('.hamburger').is(':visible') ){
+		var animationpath = "/js/duckdbanimation_search.json"
+	} else {
+		var animationpath = "/js/duckdbanimation.json"
+	}
 	let duckDBicon = document.getElementById('duckdbanimation');	
     let animationduckDBicon = lottie.loadAnimation({
             container: duckDBicon,
             renderer: 'svg',
             loop: false,
             autoplay: false,
-            path: "/js/duckdbanimation.json"
+            path: animationpath
     });
     
-	$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseenter(function() {
-		animationduckDBicon.play();
-		animationduckDBicon.setDirection(1)
-	})
+	if( !$('.hamburger').is(':visible') ){
+		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseenter(function() {
+			animationduckDBicon.play();
+			animationduckDBicon.setDirection(1)
+		})
+		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseleave(function() {
+			animationduckDBicon.play();
+			animationduckDBicon.setDirection(-1)
+		})
+	}
 	
 	if ($('.wrap.livedemo').length =! 0){
 		lottie.loadAnimation({
@@ -257,11 +271,6 @@ $(document).ready(function(){
 		  path: "/js/duckdbanimationloop.json"
 		});
 	}
-	
-	$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseleave(function() {
-		animationduckDBicon.play();
-		animationduckDBicon.setDirection(-1)
-	})
 	
 	
 	// Landingpage Animation
@@ -415,6 +424,117 @@ $(document).ready(function(){
 		setWithExpiry('discordBanner', false, 172800000); // 900000 = 15 min, 172800000 = 2 days
 		//$('.discord').slideUp();
 		$('.discord').animate({ height: 0 }, 300);
+	});
+
+	
+	// SEARCH 
+	var base_url = window.location.origin;
+	var resultSelected;
+	var toggleMobileSearchIcon = function(){
+		if( $('.hamburger').hasClass('is-active') ){
+			animationduckDBicon.play();
+			animationduckDBicon.setDirection(1);
+		} else {
+			animationduckDBicon.play();
+			animationduckDBicon.setDirection(-1);
+		}
+	}
+	var toggleSearch = function(){
+		if( $('body').hasClass('search') ){
+			$('.searchoverlay').removeClass('active');
+			$('body').removeClass('search');
+		} else {
+			$('.searchoverlay').addClass('active');
+			$('body').addClass('search');
+			$( ".searchoverlay form input" ).focus();
+		}
+	}
+	$(window).keydown(function (e){
+		// close Search on ESC
+		if( ( e.which === 27 ) && $('body').hasClass('search') ){
+			$('.searchoverlay').removeClass('active');
+			$('body').removeClass('search');
+		}
+		// open search on cmd/ctrl + k
+		if ( e.metaKey && ( e.which === 75 ) || e.ctrlKey && ( e.which === 75 ) ) {
+			if( $('body').hasClass('documentation') ){
+				toggleSearch();
+			}
+		}
+		// de-focus input when on enter or follow the result-link
+		if ( e.which === 13  && $('body').hasClass('search') ){
+			if( $('.search_result.selected').length ){
+				var link = $('.search_result.selected').find('a').attr('href');
+				document.location.href = link.slice(2);;
+			} else {
+				$( ".searchoverlay form input" ).blur();
+			}
+		}
+		
+		// scroll through results with up and down keys
+		if ( !($("input").is(":focus")) && e.which === 40 && $('body').hasClass('search') || !($("input").is(":focus")) && e.which === 38 && $('body').hasClass('search') ) {
+			var result = $('.search_result');
+			if(e.which === 40){
+				if(resultSelected){
+					resultSelected.removeClass('selected');
+					next = resultSelected.next();
+					if(next.length > 0){
+						resultSelected = next.addClass('selected');
+					}else{
+						resultSelected = result.eq(0).addClass('selected');
+					}
+				}else{
+					resultSelected = result.eq(0).addClass('selected');
+				}
+			}else if(e.which === 38){
+				if(resultSelected){
+					resultSelected.removeClass('selected');
+					next = resultSelected.prev();
+					if(next.length > 0){
+						resultSelected = next.addClass('selected');
+					}else{
+						resultSelected = result.last().addClass('selected');
+					}
+				}else{
+					resultSelected = result.last().addClass('selected');
+				}
+			}
+		}
+	});
+	
+	$('nav .search_icon').click(function(){
+		toggleSearch();
+	});
+	$('.searchoverlay').click(function(e){
+		if (e.target !== this)
+			return;
+		toggleSearch();
+	});
+	$('.searchoverlay .empty_input').click(function(){
+		$(".searchoverlay form input").val('').focus();
+		$("#search_results").empty();
+	})
+	if( $('.hamburger').is(':visible') ){
+		$('.duckdbhome a').click(function(e){
+			if ( $('.hamburger').hasClass('is-active') ){
+				e.preventDefault();
+				toggleSearch();
+				if( $('body').hasClass('search') ){
+					$('body.documentation main .wrap.inactive').removeClass('inactive');
+					$('.sidenavigation').fadeOut();
+				} else {
+					$('.sidenavigation').fadeIn();
+					$('body.documentation main .wrap').addClass('inactive');
+				}
+			}
+		})
+	}
+	$('.hamburger').click(function(){
+		if( !$(this).hasClass('is-active') && $('body').hasClass('search') ){
+			toggleSearch();
+			$('.sidenavigation').fadeIn();
+			$('body.documentation main .wrap.inactive').removeClass('inactive');
+		}
 	});
 	
 });

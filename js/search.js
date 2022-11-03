@@ -39,17 +39,17 @@ function perform_search(query) {
 			search_html += "search_result_uneven";
 		}
 		search_html += "'>"
-		search_html += "<h2 class='search_title'>";
 		search_html += "<a href='" + results[i].url + "'>";
-		search_html += results[i].title;
 		search_html += "</a> ";
-		search_html += "<span class='search_category'>";
-		search_html += results[i].category;
-		search_html += "</span>";
+		search_html += "<h2 class='search_title'>";
+		search_html += results[i].title;
 		search_html += "</h2>";
 		search_html += "<div class='search_text'>";
 		search_html += results[i].blurb;
 		search_html += "</div>";
+		search_html += "<span class='search_category'>";
+		search_html += results[i].category;
+		search_html += "</span>";
 		search_html += "</div>";
 		if (i >= max_index) {
 			break;

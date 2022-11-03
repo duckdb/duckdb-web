@@ -351,9 +351,26 @@ header .headerline{
 						}
 					}
 				}
+				.search_icon{
+					width: 17px;
+					height: 53px;
+					background-image: url("data:image/svg+xml,%3Csvg width='15' height='14' viewBox='0 0 15 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.073 9.312 14 13.238' stroke='%23fff' stroke-width='1.5'/%3E%3Ccircle cx='5.923' cy='5.923' r='5.173' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E");
+					background-repeat: no-repeat;
+					background-size: contain;
+					background-position: center center;
+					cursor: pointer;
+					display: none;
+					&:hover{
+						background-image: url("data:image/svg+xml,%3Csvg width='15' height='14' viewBox='0 0 15 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.073 9.312 14 13.238' stroke='%23FFEF00' stroke-width='1.5'/%3E%3Ccircle cx='5.923' cy='5.923' r='5.173' stroke='%23FFEF00' stroke-width='1.5'/%3E%3C/svg%3E");
+					} 
+				}
 			}
 		}
 	}
+}
+
+body.documentation header .headerline .headercontent .landingmenu nav .search_icon{
+	display: block;
 }
 
 .hamburger{
@@ -1428,3 +1445,5 @@ div.bodywrapper{
 		}
 	}
 }
+
+@import url(search.css);
