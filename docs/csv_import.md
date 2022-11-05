@@ -59,6 +59,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `FORCE_QUOTE` | Forces quoting to be used for all non-NULL values in each specified column. `NULL` output is never quoted. If `*` is specified, non-NULL values will be quoted in all columns. This option is allowed only in `COPY ... TO`. |
 | `FORCE_NOT_NULL` | Do not match the specified columns' values against the NULL string. In the default case where the NULL string is empty, this means that empty values will be read as zero-length strings rather than NULLs. This option is allowed only in `COPY ... FROM`. |
 | `ENCODING` | If this option is used, its value must be `UTF8`. With any other encoding an error will be thrown. |
+| `IGNORE_ERRORS` | If this option is used, all errors related to the data will be ignored and the problematic rows are skipped. |
 
   
 > ## Notes
