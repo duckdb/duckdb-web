@@ -6,6 +6,7 @@ from sphinx.application import Sphinx
 from sphinx.builders.html import StandaloneHTMLBuilder
 from sphinx.writers.html5 import HTML5Translator
 from docutils.nodes import SkipChildren
+import duckdb
 
 
 FRONTMATTER = """\
@@ -49,6 +50,8 @@ def post_process(filename:Path):
 
 
 def main():
+    print('generating against duckdb version', duckdb.__version__)
+
     destdir = join(dirname(__file__), "../docs/api/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
