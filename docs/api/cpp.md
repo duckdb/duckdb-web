@@ -31,7 +31,7 @@ Connections expose the `Query()` method to send a SQL query string to DuckDB fro
 con.Query("CREATE TABLE integers(i INTEGER, j INTEGER)");
 
 // insert three rows into the table
-con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)";
+con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)");
 
 MaterializedQueryResult result = con.Query("SELECT * FROM integers");
 if (!result->success) {
