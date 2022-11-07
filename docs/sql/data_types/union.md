@@ -60,8 +60,8 @@ The only exception to this is when casting a `UNION` to `VARCHAR`, in which case
 ### Casting to unions
 A type can always be implicitly cast to a `UNION` if it can be implicitly cast to one of the `UNION` member types.
 
-- If there are multiple candidates, the lowest cast cost is used. 
-- If the cast still is ambiguous, i.e. there are multiple candidates with the same implicit casting cost, an error is raised. 
+- If there are multiple candidates, the built in implicit casting priority rules determine the target type. For example, a `FLOAT -> UNION(i INT, v VARCHAR)` cast will always cast the `FLOAT` to the `INT` member before `VARCHAR`.
+- If the cast still is ambiguous, i.e. there are multiple candidates with the same implicit casting priority, an error is raised. This usually happens when the `UNION` contains multiple members of the same type, e.g. a `FLOAT -> UNION(i INT, num INT)` is always ambiguous.
 
 So how do we disambiguate if we want to create a `UNION` with multiple members of the same type? By using the `union_value` function, which takes a keyword argument specifying the tag. For example, `union_value(num := 2::INT)` will create a `UNION` with a single member of type `INT` with the tag `num`. This can then be used to disambiguate in an explicit (or implicit, read on below!) `UNION` to `UNION` cast, like `CAST(union_value(b := 2) AS UNION(a INT, b INT))`.
 
