@@ -12,22 +12,28 @@ selected: Client APIs
     * [~Connection](#module_duckdb..Connection)
         * [.run(sql, ...params, callback)](#module_duckdb..Connection+run) ⇒ <code>void</code>
         * [.all(sql, ...params, callback)](#module_duckdb..Connection+all) ⇒ <code>void</code>
+        * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Connection+arrowIPCAll) ⇒ <code>void</code>
+        * [.arrowIPCStream(sql, ...params, callback)](#module_duckdb..Connection+arrowIPCStream) ⇒
         * [.each(sql, ...params, callback)](#module_duckdb..Connection+each) ⇒ <code>void</code>
         * [.stream(sql, ...params)](#module_duckdb..Connection+stream)
-        * [.register(name, return_type, fun)](#module_duckdb..Connection+register) ⇒ <code>void</code>
+        * [.register_udf(name, return_type, fun)](#module_duckdb..Connection+register_udf) ⇒ <code>void</code>
         * [.prepare(sql, ...params, callback)](#module_duckdb..Connection+prepare) ⇒ <code>Statement</code>
         * [.exec(sql, ...params, callback)](#module_duckdb..Connection+exec) ⇒ <code>void</code>
-        * [.register_bulk(name, return_type, callback)](#module_duckdb..Connection+register_bulk) ⇒ <code>void</code>
-        * [.unregister(name, return_type, callback)](#module_duckdb..Connection+unregister) ⇒ <code>void</code>
+        * [.register_udf_bulk(name, return_type, callback)](#module_duckdb..Connection+register_udf_bulk) ⇒ <code>void</code>
+        * [.unregister_udf(name, return_type, callback)](#module_duckdb..Connection+unregister_udf) ⇒ <code>void</code>
+        * [.register_buffer(name, array, force, callback)](#module_duckdb..Connection+register_buffer) ⇒ <code>void</code>
+        * [.unregister_buffer(name, callback)](#module_duckdb..Connection+unregister_buffer) ⇒ <code>void</code>
     * [~Statement](#module_duckdb..Statement)
         * [.get()](#module_duckdb..Statement+get)
         * [.run(sql, ...params, callback)](#module_duckdb..Statement+run) ⇒ <code>void</code>
         * [.all(sql, ...params, callback)](#module_duckdb..Statement+all) ⇒ <code>void</code>
+        * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Statement+arrowIPCAll) ⇒ <code>void</code>
         * [.each(sql, ...params, callback)](#module_duckdb..Statement+each) ⇒ <code>void</code>
         * [.finalize(sql, ...params, callback)](#module_duckdb..Statement+finalize) ⇒ <code>void</code>
         * [.stream(sql, ...params)](#module_duckdb..Statement+stream)
     * [~QueryResult](#module_duckdb..QueryResult)
         * [.nextChunk()](#module_duckdb..QueryResult+nextChunk) ⇒
+        * [.nextIpcBuffer()](#module_duckdb..QueryResult+nextIpcBuffer) ⇒
         * [.asyncIterator()](#module_duckdb..QueryResult+asyncIterator)
     * [~Database](#module_duckdb..Database)
         * [.close(callback)](#module_duckdb..Database+close) ⇒ <code>void</code>
@@ -39,11 +45,16 @@ selected: Client APIs
         * [.interrupt(callback)](#module_duckdb..Database+interrupt) ⇒ <code>void</code>
         * [.prepare(sql)](#module_duckdb..Database+prepare) ⇒ <code>Statement</code>
         * [.run(sql, ...params, callback)](#module_duckdb..Database+run) ⇒ <code>void</code>
+        * [.scanArrowIpc(sql, ...params, callback)](#module_duckdb..Database+scanArrowIpc) ⇒ <code>void</code>
         * [.each(sql, ...params, callback)](#module_duckdb..Database+each) ⇒ <code>void</code>
         * [.all(sql, ...params, callback)](#module_duckdb..Database+all) ⇒ <code>void</code>
+        * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Database+arrowIPCAll) ⇒ <code>void</code>
+        * [.arrowIPCStream(sql, ...params, callback)](#module_duckdb..Database+arrowIPCStream) ⇒ <code>void</code>
         * [.exec(sql, ...params, callback)](#module_duckdb..Database+exec) ⇒ <code>void</code>
-        * [.register(name, return_type, fun)](#module_duckdb..Database+register) ⇒ <code>this</code>
-        * [.unregister(name)](#module_duckdb..Database+unregister) ⇒ <code>this</code>
+        * [.register_udf(name, return_type, fun)](#module_duckdb..Database+register_udf) ⇒ <code>this</code>
+        * [.register_buffer(name)](#module_duckdb..Database+register_buffer) ⇒ <code>this</code>
+        * [.unregister_buffer(name)](#module_duckdb..Database+unregister_buffer) ⇒ <code>this</code>
+        * [.unregister_udf(name)](#module_duckdb..Database+unregister_udf) ⇒ <code>this</code>
         * [.get()](#module_duckdb..Database+get)
     * [~ERROR](#module_duckdb..ERROR) : <code>number</code>
     * [~OPEN_READONLY](#module_duckdb..OPEN_READONLY) : <code>number</code>
@@ -61,13 +72,17 @@ selected: Client APIs
 * [~Connection](#module_duckdb..Connection)
     * [.run(sql, ...params, callback)](#module_duckdb..Connection+run) ⇒ <code>void</code>
     * [.all(sql, ...params, callback)](#module_duckdb..Connection+all) ⇒ <code>void</code>
+    * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Connection+arrowIPCAll) ⇒ <code>void</code>
+    * [.arrowIPCStream(sql, ...params, callback)](#module_duckdb..Connection+arrowIPCStream) ⇒
     * [.each(sql, ...params, callback)](#module_duckdb..Connection+each) ⇒ <code>void</code>
     * [.stream(sql, ...params)](#module_duckdb..Connection+stream)
-    * [.register(name, return_type, fun)](#module_duckdb..Connection+register) ⇒ <code>void</code>
+    * [.register_udf(name, return_type, fun)](#module_duckdb..Connection+register_udf) ⇒ <code>void</code>
     * [.prepare(sql, ...params, callback)](#module_duckdb..Connection+prepare) ⇒ <code>Statement</code>
     * [.exec(sql, ...params, callback)](#module_duckdb..Connection+exec) ⇒ <code>void</code>
-    * [.register_bulk(name, return_type, callback)](#module_duckdb..Connection+register_bulk) ⇒ <code>void</code>
-    * [.unregister(name, return_type, callback)](#module_duckdb..Connection+unregister) ⇒ <code>void</code>
+    * [.register_udf_bulk(name, return_type, callback)](#module_duckdb..Connection+register_udf_bulk) ⇒ <code>void</code>
+    * [.unregister_udf(name, return_type, callback)](#module_duckdb..Connection+unregister_udf) ⇒ <code>void</code>
+    * [.register_buffer(name, array, force, callback)](#module_duckdb..Connection+register_buffer) ⇒ <code>void</code>
+    * [.unregister_buffer(name, callback)](#module_duckdb..Connection+unregister_buffer) ⇒ <code>void</code>
 
 <a name="module_duckdb..Connection+run"></a>
 
@@ -88,6 +103,34 @@ Run a SQL statement and trigger a callback when done
 Run a SQL query and triggers the callback once for all result rows
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
+| callback |  | 
+
+<a name="module_duckdb..Connection+arrowIPCAll"></a>
+
+#### connection.arrowIPCAll(sql, ...params, callback) ⇒ <code>void</code>
+Run a SQL query and serialize the result into the Apache Arrow IPC format (requires arrow extension to be loaded)
+
+**Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
+| callback |  | 
+
+<a name="module_duckdb..Connection+arrowIPCStream"></a>
+
+#### connection.arrowIPCStream(sql, ...params, callback) ⇒
+Run a SQL query, returns a IpcResultStreamIterator that allows streaming the result into the Apache Arrow IPC format
+(requires arrow extension to be loaded)
+
+**Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
+**Returns**: IpcResultStreamIterator  
 
 | Param | Type |
 | --- | --- |
@@ -118,9 +161,9 @@ Runs a SQL query and triggers the callback for each result row
 | sql |  | 
 | ...params | <code>\*</code> | 
 
-<a name="module_duckdb..Connection+register"></a>
+<a name="module_duckdb..Connection+register_udf"></a>
 
-#### connection.register(name, return_type, fun) ⇒ <code>void</code>
+#### connection.register\_udf(name, return_type, fun) ⇒ <code>void</code>
 Register a User Defined Function
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -158,9 +201,9 @@ Execute a SQL query
 | ...params | <code>\*</code> | 
 | callback |  | 
 
-<a name="module_duckdb..Connection+register_bulk"></a>
+<a name="module_duckdb..Connection+register_udf_bulk"></a>
 
-#### connection.register\_bulk(name, return_type, callback) ⇒ <code>void</code>
+#### connection.register\_udf\_bulk(name, return_type, callback) ⇒ <code>void</code>
 Register a User Defined Function
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -171,9 +214,9 @@ Register a User Defined Function
 | return_type | 
 | callback | 
 
-<a name="module_duckdb..Connection+unregister"></a>
+<a name="module_duckdb..Connection+unregister_udf"></a>
 
-#### connection.unregister(name, return_type, callback) ⇒ <code>void</code>
+#### connection.unregister\_udf(name, return_type, callback) ⇒ <code>void</code>
 Unregister a User Defined Function
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -182,6 +225,33 @@ Unregister a User Defined Function
 | --- |
 | name | 
 | return_type | 
+| callback | 
+
+<a name="module_duckdb..Connection+register_buffer"></a>
+
+#### connection.register\_buffer(name, array, force, callback) ⇒ <code>void</code>
+Register a Buffer to be scanned using the Apache Arrow IPC scanner
+(requires arrow extension to be loaded)
+
+**Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
+
+| Param |
+| --- |
+| name | 
+| array | 
+| force | 
+| callback | 
+
+<a name="module_duckdb..Connection+unregister_buffer"></a>
+
+#### connection.unregister\_buffer(name, callback) ⇒ <code>void</code>
+Unregister the Buffer
+
+**Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
+
+| Param |
+| --- |
+| name | 
 | callback | 
 
 <a name="module_duckdb..Statement"></a>
@@ -193,6 +263,7 @@ Unregister a User Defined Function
     * [.get()](#module_duckdb..Statement+get)
     * [.run(sql, ...params, callback)](#module_duckdb..Statement+run) ⇒ <code>void</code>
     * [.all(sql, ...params, callback)](#module_duckdb..Statement+all) ⇒ <code>void</code>
+    * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Statement+arrowIPCAll) ⇒ <code>void</code>
     * [.each(sql, ...params, callback)](#module_duckdb..Statement+each) ⇒ <code>void</code>
     * [.finalize(sql, ...params, callback)](#module_duckdb..Statement+finalize) ⇒ <code>void</code>
     * [.stream(sql, ...params)](#module_duckdb..Statement+stream)
@@ -217,6 +288,17 @@ Not implemented
 <a name="module_duckdb..Statement+all"></a>
 
 #### statement.all(sql, ...params, callback) ⇒ <code>void</code>
+**Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
+| callback |  | 
+
+<a name="module_duckdb..Statement+arrowIPCAll"></a>
+
+#### statement.arrowIPCAll(sql, ...params, callback) ⇒ <code>void</code>
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -264,11 +346,20 @@ Not implemented
 
 * [~QueryResult](#module_duckdb..QueryResult)
     * [.nextChunk()](#module_duckdb..QueryResult+nextChunk) ⇒
+    * [.nextIpcBuffer()](#module_duckdb..QueryResult+nextIpcBuffer) ⇒
     * [.asyncIterator()](#module_duckdb..QueryResult+asyncIterator)
 
 <a name="module_duckdb..QueryResult+nextChunk"></a>
 
 #### queryResult.nextChunk() ⇒
+**Kind**: instance method of [<code>QueryResult</code>](#module_duckdb..QueryResult)  
+**Returns**: data chunk  
+<a name="module_duckdb..QueryResult+nextIpcBuffer"></a>
+
+#### queryResult.nextIpcBuffer() ⇒
+Function to fetch the next result blob of an Arrow IPC Stream in a zero-copy way.
+(requires arrow extension to be loaded)
+
 **Kind**: instance method of [<code>QueryResult</code>](#module_duckdb..QueryResult)  
 **Returns**: data chunk  
 <a name="module_duckdb..QueryResult+asyncIterator"></a>
@@ -292,11 +383,16 @@ Main database interface
     * [.interrupt(callback)](#module_duckdb..Database+interrupt) ⇒ <code>void</code>
     * [.prepare(sql)](#module_duckdb..Database+prepare) ⇒ <code>Statement</code>
     * [.run(sql, ...params, callback)](#module_duckdb..Database+run) ⇒ <code>void</code>
+    * [.scanArrowIpc(sql, ...params, callback)](#module_duckdb..Database+scanArrowIpc) ⇒ <code>void</code>
     * [.each(sql, ...params, callback)](#module_duckdb..Database+each) ⇒ <code>void</code>
     * [.all(sql, ...params, callback)](#module_duckdb..Database+all) ⇒ <code>void</code>
+    * [.arrowIPCAll(sql, ...params, callback)](#module_duckdb..Database+arrowIPCAll) ⇒ <code>void</code>
+    * [.arrowIPCStream(sql, ...params, callback)](#module_duckdb..Database+arrowIPCStream) ⇒ <code>void</code>
     * [.exec(sql, ...params, callback)](#module_duckdb..Database+exec) ⇒ <code>void</code>
-    * [.register(name, return_type, fun)](#module_duckdb..Database+register) ⇒ <code>this</code>
-    * [.unregister(name)](#module_duckdb..Database+unregister) ⇒ <code>this</code>
+    * [.register_udf(name, return_type, fun)](#module_duckdb..Database+register_udf) ⇒ <code>this</code>
+    * [.register_buffer(name)](#module_duckdb..Database+register_buffer) ⇒ <code>this</code>
+    * [.unregister_buffer(name)](#module_duckdb..Database+unregister_buffer) ⇒ <code>this</code>
+    * [.unregister_udf(name)](#module_duckdb..Database+unregister_udf) ⇒ <code>this</code>
     * [.get()](#module_duckdb..Database+get)
 
 <a name="module_duckdb..Database+close"></a>
@@ -400,11 +496,22 @@ Convenience method for Connection#run using a built-in default connection
 | ...params | <code>\*</code> | 
 | callback |  | 
 
+<a name="module_duckdb..Database+scanArrowIpc"></a>
+
+#### database.scanArrowIpc(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#scanArrowIpc using a built-in default connection
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
+| callback |  | 
+
 <a name="module_duckdb..Database+each"></a>
 
 #### database.each(sql, ...params, callback) ⇒ <code>void</code>
-Convenience method for Connection#each using a built-in default connection
-
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -426,10 +533,10 @@ Convenience method for Connection#apply using a built-in default connection
 | ...params | <code>\*</code> | 
 | callback |  | 
 
-<a name="module_duckdb..Database+exec"></a>
+<a name="module_duckdb..Database+arrowIPCAll"></a>
 
-#### database.exec(sql, ...params, callback) ⇒ <code>void</code>
-Convenience method for Connection#exec using a built-in default connection
+#### database.arrowIPCAll(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#arrowIPCAll using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
@@ -439,10 +546,36 @@ Convenience method for Connection#exec using a built-in default connection
 | ...params | <code>\*</code> | 
 | callback |  | 
 
-<a name="module_duckdb..Database+register"></a>
+<a name="module_duckdb..Database+arrowIPCStream"></a>
 
-#### database.register(name, return_type, fun) ⇒ <code>this</code>
-Convenience method for Connection#register using a built-in default connection
+#### database.arrowIPCStream(sql, ...params, callback) ⇒ <code>void</code>
+Convenience method for Connection#arrowIPCStream using a built-in default connection
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
+| callback |  | 
+
+<a name="module_duckdb..Database+exec"></a>
+
+#### database.exec(sql, ...params, callback) ⇒ <code>void</code>
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param | Type |
+| --- | --- |
+| sql |  | 
+| ...params | <code>\*</code> | 
+| callback |  | 
+
+<a name="module_duckdb..Database+register_udf"></a>
+
+#### database.register\_udf(name, return_type, fun) ⇒ <code>this</code>
+Register a User Defined Function
+
+Convenience method for Connection#register_udf
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
@@ -452,10 +585,38 @@ Convenience method for Connection#register using a built-in default connection
 | return_type | 
 | fun | 
 
-<a name="module_duckdb..Database+unregister"></a>
+<a name="module_duckdb..Database+register_buffer"></a>
 
-#### database.unregister(name) ⇒ <code>this</code>
-Convenience method for Connection#unregister using a built-in default connection
+#### database.register\_buffer(name) ⇒ <code>this</code>
+Register a buffer containing serialized data to be scanned from DuckDB.
+
+Convenience method for Connection#unregister_buffer
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param |
+| --- |
+| name | 
+
+<a name="module_duckdb..Database+unregister_buffer"></a>
+
+#### database.unregister\_buffer(name) ⇒ <code>this</code>
+Unregister a Buffer
+
+Convenience method for Connection#unregister_buffer
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param |
+| --- |
+| name | 
+
+<a name="module_duckdb..Database+unregister_udf"></a>
+
+#### database.unregister\_udf(name) ⇒ <code>this</code>
+Unregister a UDF
+
+Convenience method for Connection#unregister_udf
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
