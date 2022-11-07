@@ -103,6 +103,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 #### Hugeint Helpers
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_hugeint_to_double">duckdb_hugeint_to_double</a></span>(<span class="kt">duckdb_hugeint</span> <span class="k">val</span>);
 <span class="kt">duckdb_hugeint</span> <span class="nf"><a href="#duckdb_double_to_hugeint">duckdb_double_to_hugeint</a></span>(<span class="kt">double</span> <span class="k">val</span>);
+<span class="k">duckdb_decimal</span> <span class="nf"><a href="#duckdb_double_to_decimal">duckdb_double_to_decimal</a></span>(<span class="kt">double</span> <span class="k">val</span>, <span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
 </code></pre></div></div>
 #### Decimal Helpers
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf"><a href="#duckdb_decimal_to_double">duckdb_decimal_to_double</a></span>(<span class="k">duckdb_decimal</span> <span class="k">val</span>);
@@ -731,6 +732,31 @@ The double value.
 * `returns`
 
 The converted `duckdb_hugeint` element.
+
+<br>
+
+### duckdb_double_to_decimal
+---
+Converts a double value to a duckdb_decimal object.
+
+If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_decimal</span> <span class="k">duckdb_double_to_decimal</span>(<span class="k">
+</span>  <span class="kt">double</span> <span class="k">val</span>,<span class="k">
+</span>  <span class="kt">uint8_t</span> <span class="k">width</span>,<span class="k">
+</span>  <span class="kt">uint8_t</span> <span class="k">scale
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `val`
+
+The double value.
+* `returns`
+
+The converted `duckdb_decimal` element.
 
 <br>
 
