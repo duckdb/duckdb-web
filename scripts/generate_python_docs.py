@@ -6,6 +6,11 @@ from sphinx.application import Sphinx
 from sphinx.builders.html import StandaloneHTMLBuilder
 from sphinx.writers.html5 import HTML5Translator
 from docutils.nodes import SkipChildren
+
+import pandas
+print(pandas)
+print(pandas.DataFrame)
+
 import duckdb
 
 
