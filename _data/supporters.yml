@@ -13,7 +13,11 @@ gold:
 
   - name: MotherDuck
     url: https://motherduck.com
-    logoimg: motherduck.svg  
+    logoimg: motherduck.svg
+    
+  - name: Posit
+    url: https://posit.co
+    logoimg: posit.svg
     
 silver:
   - name: Hex
