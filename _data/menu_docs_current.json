@@ -561,6 +561,10 @@
                 "url": "overview"
               },
               {
+                "page": "Enum Functions",
+                "url": "enum"
+              },
+              {
                 "page": "Numeric Functions",
                 "url": "numeric"
               },
