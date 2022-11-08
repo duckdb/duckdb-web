@@ -85,6 +85,15 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality( map([4, 2], ['a', 'b']) );` | `2` |
 | `map()` | Returns an empty map. | `map()` | `{}` |
 
+## Union Functions
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| *`union`*`.`*`tag`* | Dot notation serves as an alias for `union_extract`.| `(union_value(k := 'hello')).k` | `string` |
+| `union_extract(`*`union`*`, `*`'tag'`*`)` | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected | `union_extract(s, 'k')` | `hello` |
+| `union_value(`*`tag := any`*`)` | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')` | `'hello'::UNION(k VARCHAR)`| 
+| `union_tag(`*`union`*`)` | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). | `union_tag(union_value(k := 'foo'))`  | `'k'` |
+
 ## Range Functions
 
 The functions *`range`* and *`generate_series`* create a list of values in the range between `start` and `stop`.
