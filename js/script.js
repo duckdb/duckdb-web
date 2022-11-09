@@ -465,7 +465,7 @@ $(document).ready(function(){
 		if ( e.which === 13  && $('body').hasClass('search') ){
 			if( $('.search_result.selected').length ){
 				var link = $('.search_result.selected').find('a').attr('href');
-				document.location.href = link.slice(2);;
+				document.location.href = link
 			} else {
 				$( ".searchoverlay form input" ).blur();
 			}
