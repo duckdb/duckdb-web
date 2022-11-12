@@ -139,7 +139,7 @@ function_list = {}
 
 def extract_functions(text, full_path):
 	functions = re.findall(r'\n[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]', text)
-	for function_name, contents in functions:
+	for function in functions:
 		name = sanitize_function(re.sub('\s+', ' ', extract_markdown_text(function[0].strip()).strip()))
 		desc = name + " - " + sanitize_desc(re.sub('\s+', ' ', extract_markdown_text(function[1].strip()).strip()))
 		if '--' in name:
