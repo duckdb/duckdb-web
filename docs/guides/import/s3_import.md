@@ -44,7 +44,7 @@ After the `HTTPFS` extension is set up and the S3 configuration is set correctly
 SELECT * FROM read_parquet('s3://<bucket>/<file>');
 ```
 
-For GCS, the Interoperability API enables you to have access to it like an S3 connection.
+For Google Cloud Storage (GCS), the Interoperability API enables you to have access to it like an S3 connection.
 You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and declare them:
 
 ```sql
