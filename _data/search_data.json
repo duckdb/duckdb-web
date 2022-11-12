@@ -1,6 +1,83 @@
 {
 	"data": [
 		{
+			"title": "!",
+			"text": "! - factorial of x. computes the product of the current integer and all integers below it",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "! - factorial of x. Computes the product of the current integer and all integers below it"
+		},
+		{
+			"title": "%",
+			"text": "% - modulo (remainder)",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "% - modulo (remainder)"
+		},
+		{
+			"title": "&",
+			"text": "& - bitwise and",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "& - bitwise AND"
+		},
+		{
+			"title": "*",
+			"text": "* - multiplication",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "* - multiplication"
+		},
+		{
+			"title": "**",
+			"text": "** - exponent",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "** - exponent"
+		},
+		{
+			"title": "+",
+			"text": "+ - addition of an interval",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "+ - addition of an INTERVAL"
+		},
+		{
+			"title": "-",
+			"text": "- - subtraction of an interval",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "- - subtraction of an INTERVAL"
+		},
+		{
+			"title": "/",
+			"text": "/ - division",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "/ - division"
+		},
+		{
+			"title": "<<",
+			"text": "<< - bitwise shift left",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "<< - bitwise shift left"
+		},
+		{
+			"title": ">>",
+			"text": ">> - bitwise shift right",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": ">> - bitwise shift right"
+		},
+		{
+			"title": "@",
+			"text": "@ - absolute value (parentheses optional if operating on a column)",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "@ - absolute value (parentheses optional if operating on a column)"
+		},
+		{
 			"title": "Aggregate Functions",
 			"text": "examples -- produce a single row containing the sum of the amount column select sum amount from sales -- produce one row per unique region containing the sum of amount for each group select region sum amount from sales group by region -- return only the regions that have a sum of amount higher than 100 select region from sales group by region having sum amount 100 -- return the number of unique values in the region column select count distinct region from sales -- return two values the total sum of amount and the sum of amount minus columns where the region is north select sum amount sum amount filter region north from sales -- returns a list of all regions in order of the amount column select list region order by amount desc from sales syntax aggregates are functions that combine multiple rows into a single value aggregates are different from scalar functions and window functions because they change the cardinality of the result as such aggregates can only be used in the select and having clauses of a sql query when the distinct clause is provided only distinct values are considered in the computation of the aggregate this is typically used in combination with the count aggregate to get the number of distinct elements but it can be used together with any aggregate function in the system when the order by clause is provided the values being aggregated are sorted before applying the function usually this is not important but there are some order-sensitive aggregates that can have indeterminate results e g first last list and string_agg these can be made deterministic by ordering the arguments for order-insensitive aggregates this clause is parsed but ignored general aggregate functions the table below shows the available general aggregate functions function description example alias es --- --- --- --- arg_max arg val calculates the arg value for a maximum val value arg_max a b argmax a b max_by a b arg_min arg val calculates the arg value for a minimum val value arg_min a b argmin a b min_by a b avg arg calculates the average value for all tuples in arg avg a - bit_and arg returns the bitwise and of all bits in a given expression bit_and a - bit_or arg returns the bitwise or of all bits in a given expression bit_or a - bit_xor arg returns the bitwise xor of all bits in a given expression bit_xor a - bool_and arg returns true if every input value is true otherwise false bool_and a - bool_or arg returns true if any input value is true otherwise false bool a - count arg calculates the number of tuples tuples in arg count a - favg arg calculates the average using a more accurate floating point summation kahan sum favg a - first arg returns the first value of a column first a arbitrary a fsum arg calculates the sum using a more accurate floating point summation kahan sum fsum a sumkahan kahan_sum histogram arg returns a list of struct s with the fields bucket and count histogram a - last arg returns the last value of a column last a - list arg returns a list containing all the values of a column list a array_agg max arg returns the maximum value present in arg max a - min arg returns the minumum value present in arg min a - product arg calculates the product of all tuples in arg product a - string_agg arg sep concatenates the column string values with a separator string_agg s group_concat sum arg calculates the sum value for all tuples in arg sum a - approximate aggregates the table below shows the available approximate aggregate functions function description example --- --- --- approx_count_distinct x gives the approximate count of distintinct elements using hyperloglog approx_count_distinct a approx_quantile x pos gives the approximate quantile using t-digest approx_quantile a 0 5 reservoir_quantile x quantile sample_size 8192 gives the approximate quantile using reservoir sampling the sample size is optional and uses 8192 as a default size reservoir_quantile a 0 5 1024 statistical aggregates the table below shows the available statistical aggregate functions function description formula alias --- --- --- --- corr y x returns the correlation coefficient for non-null pairs in a group covar_pop y x stddev_pop x stddev_pop y - covar_pop y x returns the population covariance of input values sum x y - sum x sum y count count - entropy x returns the log-2 entropy of count input-values - - kurtosis x returns the excess kurtosis of all input values - - mad x returns the median absolute deviation for the values within x null values are ignored temporal types return a positive interval median abs x-median x - median x returns the middle value of the set null values are ignored for even value counts quantitiative values are averaged and ordinal values return the lower value quantile_cont x 0 5 - mode x returns the most frequent value for the values within x null values are ignored - - quantile_cont x pos returns the intepolated quantile number between 0 and 1 if pos is a list of float s then the result is a list of the corresponding intepolated quantiles - - quantile_disc x pos returns the exact quantile number between 0 and 1 if pos is a list of float s then the result is a list of the corresponding exact quantiles - quantile regr_avgx y x returns the average of the independent variable for non-null pairs in a group where x is the independent variable and y is the dependent variable - - regr_avgy y x returns the average of the dependent variable for non-null pairs in a group where x is the independent variable and y is the dependent variable - - regr_count y x returns the number of non-null number pairs in a group sum x y - sum x sum y count count - regr_intercept y x returns the intercept of the univariate linear regression line for non-null pairs in a group avg y -regr_slope y x avg x - regr_r2 y x returns the coefficient of determination for non-null pairs in a group - - regr_slope y x returns the slope of the linear regression line for non-null pairs in a group covar_pop x y var_pop x - regr_sxx y x - regr_count y x var_pop x - regr_sxy y x returns the population covariance of input values regr_count y x covar_pop y x - regr_syy y x - regr_count y x var_pop y f - skewness x returns the skewness of all input values - - stddev_pop x returns the population standard deviation sqrt var_pop x - stddev_samp x returns the sample standard deviation sqrt var_samp x stddev x var_pop x returns the population variance - - var_samp x returns the sample variance of all input values sum x 2 - sum x 2 count x count x - 1 variance arg val ordered set aggregate functions the table below shows the available ordered set aggregate functions these functions are specified using the within group order by sort_expression syntax and they are converted to an equivalent aggregate function that takes the ordering expression as the first argument function equivalent --- --- mode within group order by sort_expression mode sort_expression percentile_cont fraction within group order by sort_expression quantile_cont sort_expression fraction percentile_cont fractions within group order by sort_expression quantile_cont sort_expression fractions percentile_disc fraction within group order by sort_expression quantile_disc sort_expression fraction percentile_disc fractions within group order by sort_expression quantile_disc sort_expression fractions",
 			"category": "SQL",
@@ -337,6 +414,13 @@
 			"blurb": "Polars  is a DataFrames library built in Rust with bindings for Python and Node.js. It uses   Apache Arrow's columnar..."
 		},
 		{
+			"title": "Enum Functions",
+			"text": "this section describes functions and operators for examining and manipulating enum values the examples assume an enum type created as create type mood as enum sad ok happy anxious these functions can take null or a specific value of the type as argument s with the exception of enum_range_boundary the result depends only on the type of the argument and not on its value function description example result --- --- --- --- enum_first enum returns the first value of the input enum type enum_first null mood sad enum_last enum returns the last value of the input enum type enum_last null mood anxious enum_range enum returns all values of the input enum type as an array enum_range null mood sad ok happy anxious enum_range_boundary enum enum returns the range between the two given enum values as an array the values must be of the same enum type when the first parameter is null the result starts with the first value of the enum type when the second parameter is null the result ends with the last value of the enum type enum_range_boundary null happy mood sad ok happy",
+			"category": "Functions",
+			"url": "/docs/sql/functions/enum",
+			"blurb": "This section describes functions and operators for examining and manipulating  ENUM  values.  The examples assume an enum..."
+		},
+		{
 			"title": "Enum Types",
 			"text": "name description --- --- enum dictionary encoding representing all possible string values of a column enums the enum type represents a dictionary data structure with all possible unique values of a column for example a column storing the days of the week can be an enum holding all possible days enums are particularly interesting for string columns with high cardinality this is because the column only stores a numerical reference to the string in the enum dictionary resulting in immense savings in disk storage and faster query performance enum definition enum types are created using the command create type enum_name as enum value_1 value_2 for example -- creates new user defined type mood as an enum create type mood as enum sad ok happy -- this will fail since the mood type already exists create type mood as enum sad ok happy anxious -- this will fail since enums cannot hold null values create type breed as enum maltese null -- this will fail since enum values must be unique create type breed as enum maltese maltese enum usage after an enum has been created it can be used anywhere a standard built-in type is used for example we can create a table with a column that references the enum -- creates a table person with attributes name string type and current_mood mood type create table person name text current_mood mood -- inserts tuples in the person table insert into person values pedro happy mark null pagliacci sad mr mackey ok -- this will fail since the mood type does not have a quackity-quack value insert into person values hannes quackity-quack -- the string sad is cast to the type mood returning a numerical reference value -- this makes the comparison a numerical comparison instead of a string comparison select from person where current_mood sad ---- pagliacci enum vs strings duckdb enums are automatically cast to varchar types whenever necessary this characteristic allows for enum columns to be used in any varchar function in addition it also allows for comparisons between different enum columns or an enum and a varchar column for example -- regexp_matches is a function that takes a varchar hence current_mood is cast to varchar select regexp_matches current_mood a from person ---- true false true false create type new_mood as enum happy anxious create table person_2 name text current_mood mood future_mood new_mood past_mood varchar -- since current_mood and future_mood are constructed on different enums -- duckdb will cast both enums to strings and perform a string comparison select from person_2 where current_mood future_mood -- since current_mood is an enum -- duckdb will cast the current_mood enum to varchar and perform a string comparison select from person_2 where current_mood past_mood enum removal enum types are stored in the catalog and a catalog dependency is added to each table that uses them it is possible to drop an enum from the catalog using the following command drop type enum_name note that any dependent must be removed before dropping the enum or the enum must be dropped with the additional cascade parameter for example -- this will fail since person has a catalog dependency to the mood type drop type mood drop table person drop table person_2 -- this successfully removes the mood type -- another option would be to drop type mood cascade drops the type and its dependents drop type mood",
 			"category": "Data Types",
@@ -492,7 +576,7 @@
 		},
 		{
 			"title": "Indexes",
-			"text": "index types duckdb currently uses two index types a min-max index is automatically created for columns of all general-purpose data types an adaptive radix tree art is mainly used to ensure primary key constraints and to speed up point and very highly selective i e 0 1 queries such an index is automatically created for columns with a unique or primary key constraint and can be defined using create index joins on columns with an art index can make use of the index join algorithm forcing index joins is possible using pragmas persistence min-max indexes are persisted art indexes are persisted as of the latest development release create index create index constructs an index on the specified column s of the specified table compound indexes on multiple columns expressions are supported currently unidimensional indexes are supported multidimensional indexes are not supported parameters name description --- --- unique causes the system to check for duplicate values in the table when the index is created if data already exist and each time data is added attempts to insert or update data that would result in duplicate entries will generate an error name the name of the index to be created table the name of the table to be indexed column the name of the column to be indexed expression an expression based on one or more columns of the table the expression usually must be written with surrounding parentheses as shown in the syntax however the parentheses can be omitted if the expression has the form of a function call examples -- create an unique index films_id_idx on the column id of table films create unique index films_id_idx on films id -- create index s_idx that allows for duplicate values on column revenue of table films create index revenue_idx on films revenue -- create compound index gy_idx on genre and year columns create index gy_idx on films genre year -- create index i_index on the expression of the sum of columns j and k from table integers create index i_index on integers j k drop index drop index drops an existing index from the database system parameters name description --- --- if exists do not throw an error if the index does not exist name the name of an index to remove examples -- remove the index title_idx drop index title_idx",
+			"text": "index types duckdb currently uses two index types a min-max index is automatically created for columns of all general-purpose data types an adaptive radix tree art is mainly used to ensure primary key constraints and to speed up point and very highly selective i e 0 1 queries such an index is automatically created for columns with a unique or primary key constraint and can be defined using create index joins on columns with an art index can make use of the index join algorithm forcing index joins is possible using pragmas persistence min-max indexes are persisted art indexes are persisted as of the latest development release create index create index constructs an index on the specified column s of the specified table compound indexes on multiple columns expressions are supported currently unidimensional indexes are supported multidimensional indexes are not supported parameters name description --- --- unique causes the system to check for duplicate values in the table when the index is created if data already exist and each time data is added attempts to insert or update data that would result in duplicate entries will generate an error name the name of the index to be created table the name of the table to be indexed column the name of the column to be indexed expression an expression based on one or more columns of the table the expression usually must be written with surrounding parentheses as shown in the syntax however the parentheses can be omitted if the expression has the form of a function call examples -- create a unique index films_id_idx on the column id of table films create unique index films_id_idx on films id -- create index s_idx that allows for duplicate values on column revenue of table films create index s_idx on films revenue -- create compound index gy_idx on genre and year columns create index gy_idx on films genre year -- create index i_index on the expression of the sum of columns j and k from table integers create index i_index on integers j k drop index drop index drops an existing index from the database system parameters name description --- --- if exists do not throw an error if the index does not exist name the name of an index to remove examples -- remove the index title_idx drop index title_idx",
 			"category": "SQL",
 			"url": "/docs/sql/indexes",
 			"blurb": "Index types   DuckDB currently uses two index types:     A   min-max index  is automatically created for columns of all  ..."
@@ -611,7 +695,7 @@
 		},
 		{
 			"title": "Nested Functions",
-			"text": "this section describes functions and operators for examining and manipulating nested values there are three nested data types lists structs and maps list functions in the descriptions l is the three element list 4 5 6 function description example result -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --------------------------------------- ------------- list index bracket notation serves as an alias for list_extract l 3 6 list_extract list index extract the index th 1-based value from the list list_extract l 3 6 list_element list index alias for list_extract list_element l 3 6 array_extract list index alias for list_extract array_extract l 3 6 list begin end bracket notation with colon is an alias for list_slice missing arguments are interpreted as null s l 2 3 5 6 list_slice list begin end extract a sublist using slice conventions null s are interpreted as the bounds of the list negative values are accepted list_slice l 2 null 5 6 array_slice list begin end alias for list_slice array_slice l 2 null 5 6 array_pop_front list returns the list without the first element array_pop_front l 5 6 array_pop_back list returns the list without the last element array_pop_back l 4 5 list_value any create a list containing the argument values list_value 4 5 6 4 5 6 list_pack any alias for list_value list_pack 4 5 6 4 5 6 len list return the length of the list len 1 2 3 3 array_length list alias for len array_length 1 2 3 3 unnest list unnests a list by one level note that this is a special function that alters the cardinality of the result see the unnest page for more details unnest 1 2 3 1 2 3 list_concat list1 list2 concatenates two lists list_concat 2 3 4 5 6 2 3 4 5 6 list_cat list1 list2 alias for list_concat list_cat 2 3 4 5 6 2 3 4 5 6 array_concat list1 list2 alias for list_concat array_concat 2 3 4 5 6 2 3 4 5 6 array_cat list1 list2 alias for list_concat array_cat 2 3 4 5 6 2 3 4 5 6 list_prepend element list prepends element to list list_prepend 3 4 5 6 3 4 5 6 array_prepend element list alias for list_prepend array_prepend 3 4 5 6 3 4 5 6 array_push_front list element alias for list_prepend array_push_front l 3 3 4 5 6 list_append list element appends element to list list_append 2 3 4 2 3 4 array_append list element alias for list_append array_append 2 3 4 2 3 4 array_push_back list element alias for list_append array_push_back l 7 4 5 6 7 list_contains list element returns true if the list contains the element list_contains 1 2 null 1 true list_has list element alias for list_contains list_has 1 2 null 1 true array_contains list element alias for list_contains array_contains 1 2 null 1 true array_has list element alias for list_contains array_has 1 2 null 1 true list_position list element returns the index of the element if the list contains the element list_contains 1 2 null 2 2 list_indexof list element alias for list_position list_indexof 1 2 null 2 2 array_position list element alias for list_position array_position 1 2 null 2 2 array_indexof list element alias for list_position array_indexof 1 2 null 2 2 list_aggregate list name executes the aggregate function name on the elements of list see the list aggregates section for more details list_aggregate 1 2 null min 1 list_aggr list name alias for list_aggregate list_aggr 1 2 null min 1 array_aggregate list name alias for list_aggregate array_aggregate 1 2 null min 1 array_aggr list name alias for list_aggregate array_aggr 1 2 null min 1 list_sort list sorts the elements of the list see the sorting lists section for more details about the sorting order and the null sorting order list_sort 3 6 1 2 1 2 3 6 array_sort list alias for list_sort array_sort 3 6 1 2 1 2 3 6 list_reverse_sort list sorts the elements of the list in reverse order see the sorting lists section for more details about the null sorting order list_reverse_sort 3 6 1 2 6 3 2 1 array_reverse_sort list alias for list_reverse_sort array_reverse_sort 3 6 1 2 6 3 2 1 list_transform list lambda returns a list that is the result of applying the lambda function to each element of the input list see the lambda functions section for more details list_transform l x - x 1 5 6 7 array_transform list lambda alias for list_transform array_transform l x - x 1 5 6 7 list_apply list lambda alias for list_transform list_apply l x - x 1 5 6 7 array_apply list lambda alias for list_transform array_apply l x - x 1 5 6 7 list_filter list lambda constructs a list from those elements of the input list for which the lambda function returns true see the lambda functions section for more details list_filter l x - x 4 5 6 array_filter list lambda alias for list_filter array_filter l x - x 4 5 6 struct functions function description example result --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --- --- struct entry dot notation serves as an alias for struct_extract i 3 s string s string struct entry bracket notation serves as an alias for struct_extract i 3 s string s string row any create a struct containing the argument values if the values are column references the entry name will be the column name otherwise it will be the string vn where n is the 1-based position of the argument row i i 4 i 4 i 3 v2 3 v3 0 struct_extract struct entry extract the named entry from the struct struct_extract s i 4 struct_pack name any create a struct containing the argument values the entry name will be the bound variable name struct_pack i 4 s string i 3 s string struct_insert struct name any add field s value s to an existing struct with the argument values the entry name s will be the bound variable name s struct_insert a 1 b 2 a 1 b 2 map functions function description example result --- --- --- --- map entry alias for element_at map 100 5 a b 100 a element_at map key return a list containing the value for a given key or an empty list if the key is not contained in the map the type of the key provided in the second parameter must match the type of the map s keys else an error is returned element_at map 100 5 42 43 100 42 map_extract map key alias of element_at return a list containing the value for a given key or an empty list if the key is not contained in the map the type of the key provided in the second parameter must match the type of the map s keys else an error is returned map_extract map 100 5 42 43 100 42 cardinality map return the size of the map or the number of entries in the map cardinality map 4 2 a b 2 map returns an empty map map range functions the functions range and generate_series create a list of values in the range between start and stop the start parameter is inclusive for the range function the stop parameter is exclusive while for generate_series it is inclusive based on the number of arguments the following variants exist range start stop step range start stop range stop generate_series start stop step generate_series start stop generate_series stop the default value of start is 0 and the default value of step is 1 select range 5 -- 0 1 2 3 4 select range 2 5 -- 2 3 4 select range 2 5 3 -- 2 select generate_series 5 -- 0 1 2 3 4 5 select generate_series 2 5 -- 2 3 4 5 select generate_series 2 5 3 -- 2 5 date ranges are also supported select from range date 1992-01-01 date 1992-03-01 interval 1 month range 1992-01-01 00 00 00 1992-02-01 00 00 00 list aggregates the function list_aggregate allows the execution of arbitrary existing aggregate functions on the elements of a list its first argument is the list column its second argument is the aggregate function name e g min histogram or sum select list_aggregate 1 2 -4 null min -- -4 select list_aggregate 2 4 8 42 sum -- 56 select list_aggregate 1 2 null 2 10 3 last -- 2 10 3 the following is a list of existing rewrites rewrites simplify the use of the list aggregate function by only taking the list column as their argument list_avg list_var_samp list_var_pop list_stddev_pop list_stddev_samp list_sem list_approx_count_distinct list_bit_xor list_bit_or list_bit_and list_bool_and list_bool_or list_count list_entropy list_last list_first list_kurtosis list_min list_max list_product list_skewness list_sum list_string_agg list_mode list_median list_mad and list_histogram select list_min 1 2 -4 null -- -4 select list_sum 2 4 8 42 -- 56 select list_last 1 2 null 2 10 3 -- 2 10 3 sorting lists the function list_sort sorts the elements of a list either in ascending or descending order in addition it allows to provide whether null values should be moved to the beginning or to the end of the list by default if no modifiers are provided duckdb sorts asc nulls first i e the values are sorted in ascending order and null values are placed first this is identical to the default sort order of sqlite the default sort order can be changed using these pragma statements list_sort leaves it open to the user whether they want to use the default sort order or a custom order list_sort takes up to two additional optional parameters the second parameter provides the sort order and can be either asc or desc the third parameter provides the null sort order and can be either nulls first or nulls last -- default sort order and default null sort order select list_sort 1 3 null 5 null -5 ---- null null -5 1 3 5 -- only providing the sort order select list_sort 1 3 null 2 asc ---- null 1 2 3 -- providing the sort order and the null sort order select list_sort 1 3 null 2 desc nulls first ---- null 3 2 1 list_reverse_sort has an optional second parameter providing the null sort order it can be either nulls first or nulls last -- default null sort order select list_sort 1 3 null 5 null -5 ---- null null -5 1 3 5 -- providing the null sort order select list_reverse_sort 1 3 null 2 nulls last ---- 3 2 1 null lambda functions parameter1 parameter2 - expression if the lambda function has only one parameter then the brackets can be omitted the parameters can have any names param - param 1 duck - contains concat duck db duck x y - x y transform list_transform list lambda returns a list that is the result of applying the lambda function to each element of the input list the lambda function must have exactly one left-hand side parameter the return type of the lambda function defines the type of the list elements -- incrementing each list element by one select list_transform 1 2 null 3 x - x 1 ---- 2 3 null 4 -- transforming strings select list_transform duck a b duck - concat duck db ---- duckdb adb bdb -- combining lambda functions with other functions select list_transform 5 null 6 x - coalesce x 0 1 ---- 6 1 7 filter list_filter list lambda constructs a list from those elements of the input list for which the lambda function returns true the lambda function must have exactly one left-hand side parameter and its return type must be of type boolean -- filter out negative values select list_filter 5 -6 null 7 x - x 0 ---- 5 7 -- divisible by 2 and 5 select list_filter list_filter 2 4 3 1 20 10 3 30 x - x 2 0 y - y 5 0 ---- 20 10 30 -- in combination with range to construct lists select list_filter 1 2 3 4 x - x 1 from range 4 ---- 1 2 3 4 2 3 4 3 4 4 lambda functions can be arbitrarily nested -- nested lambda functions to get all squares of even list elements select list_transform list_filter 0 1 2 3 4 5 x - x 2 0 y - y y ---- 0 4 16 generate_subscripts the generate_subscript arr dim function generates indexes along the dim th dimension of array arr select generate_subscripts 4 5 6 1 as i i 1 2 3 related functions there are also aggregate functions list and histogram that produces lists and lists of structs unnest is used to unnest a list by one level",
+			"text": "this section describes functions and operators for examining and manipulating nested values there are three nested data types lists structs and maps list functions in the descriptions l is the three element list 4 5 6 function description example result -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --------------------------------------- ------------- list index bracket notation serves as an alias for list_extract l 3 6 list_extract list index extract the index th 1-based value from the list list_extract l 3 6 list_element list index alias for list_extract list_element l 3 6 array_extract list index alias for list_extract array_extract l 3 6 list begin end bracket notation with colon is an alias for list_slice missing arguments are interpreted as null s l 2 3 5 6 list_slice list begin end extract a sublist using slice conventions null s are interpreted as the bounds of the list negative values are accepted list_slice l 2 null 5 6 array_slice list begin end alias for list_slice array_slice l 2 null 5 6 array_pop_front list returns the list without the first element array_pop_front l 5 6 array_pop_back list returns the list without the last element array_pop_back l 4 5 list_value any create a list containing the argument values list_value 4 5 6 4 5 6 list_pack any alias for list_value list_pack 4 5 6 4 5 6 len list return the length of the list len 1 2 3 3 array_length list alias for len array_length 1 2 3 3 unnest list unnests a list by one level note that this is a special function that alters the cardinality of the result see the unnest page for more details unnest 1 2 3 1 2 3 list_concat list1 list2 concatenates two lists list_concat 2 3 4 5 6 2 3 4 5 6 list_cat list1 list2 alias for list_concat list_cat 2 3 4 5 6 2 3 4 5 6 array_concat list1 list2 alias for list_concat array_concat 2 3 4 5 6 2 3 4 5 6 array_cat list1 list2 alias for list_concat array_cat 2 3 4 5 6 2 3 4 5 6 list_prepend element list prepends element to list list_prepend 3 4 5 6 3 4 5 6 array_prepend element list alias for list_prepend array_prepend 3 4 5 6 3 4 5 6 array_push_front list element alias for list_prepend array_push_front l 3 3 4 5 6 list_append list element appends element to list list_append 2 3 4 2 3 4 array_append list element alias for list_append array_append 2 3 4 2 3 4 array_push_back list element alias for list_append array_push_back l 7 4 5 6 7 list_contains list element returns true if the list contains the element list_contains 1 2 null 1 true list_has list element alias for list_contains list_has 1 2 null 1 true array_contains list element alias for list_contains array_contains 1 2 null 1 true array_has list element alias for list_contains array_has 1 2 null 1 true list_position list element returns the index of the element if the list contains the element list_contains 1 2 null 2 2 list_indexof list element alias for list_position list_indexof 1 2 null 2 2 array_position list element alias for list_position array_position 1 2 null 2 2 array_indexof list element alias for list_position array_indexof 1 2 null 2 2 list_aggregate list name executes the aggregate function name on the elements of list see the list aggregates section for more details list_aggregate 1 2 null min 1 list_aggr list name alias for list_aggregate list_aggr 1 2 null min 1 array_aggregate list name alias for list_aggregate array_aggregate 1 2 null min 1 array_aggr list name alias for list_aggregate array_aggr 1 2 null min 1 list_sort list sorts the elements of the list see the sorting lists section for more details about the sorting order and the null sorting order list_sort 3 6 1 2 1 2 3 6 array_sort list alias for list_sort array_sort 3 6 1 2 1 2 3 6 list_reverse_sort list sorts the elements of the list in reverse order see the sorting lists section for more details about the null sorting order list_reverse_sort 3 6 1 2 6 3 2 1 array_reverse_sort list alias for list_reverse_sort array_reverse_sort 3 6 1 2 6 3 2 1 list_transform list lambda returns a list that is the result of applying the lambda function to each element of the input list see the lambda functions section for more details list_transform l x - x 1 5 6 7 array_transform list lambda alias for list_transform array_transform l x - x 1 5 6 7 list_apply list lambda alias for list_transform list_apply l x - x 1 5 6 7 array_apply list lambda alias for list_transform array_apply l x - x 1 5 6 7 list_filter list lambda constructs a list from those elements of the input list for which the lambda function returns true see the lambda functions section for more details list_filter l x - x 4 5 6 array_filter list lambda alias for list_filter array_filter l x - x 4 5 6 struct functions function description example result --- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --- --- struct entry dot notation serves as an alias for struct_extract i 3 s string s string struct entry bracket notation serves as an alias for struct_extract i 3 s string s string row any create a struct containing the argument values if the values are column references the entry name will be the column name otherwise it will be the string vn where n is the 1-based position of the argument row i i 4 i 4 i 3 v2 3 v3 0 struct_extract struct entry extract the named entry from the struct struct_extract s i 4 struct_pack name any create a struct containing the argument values the entry name will be the bound variable name struct_pack i 4 s string i 3 s string struct_insert struct name any add field s value s to an existing struct with the argument values the entry name s will be the bound variable name s struct_insert a 1 b 2 a 1 b 2 map functions function description example result --- --- --- --- map entry alias for element_at map 100 5 a b 100 a element_at map key return a list containing the value for a given key or an empty list if the key is not contained in the map the type of the key provided in the second parameter must match the type of the map s keys else an error is returned element_at map 100 5 42 43 100 42 map_extract map key alias of element_at return a list containing the value for a given key or an empty list if the key is not contained in the map the type of the key provided in the second parameter must match the type of the map s keys else an error is returned map_extract map 100 5 42 43 100 42 cardinality map return the size of the map or the number of entries in the map cardinality map 4 2 a b 2 map returns an empty map map union functions function description example result --- --- --- --- union tag dot notation serves as an alias for union_extract union_value k hello k string union_extract union tag extract the value with the named tags from the union null if the tag is not currently selected union_extract s k hello union_value tag any create a single member union containing the argument value the tag of the value will be the bound variable name union_value k hello hello union k varchar union_tag union retrieve the currently selected tag of the union as an enum union_tag union_value k foo k range functions the functions range and generate_series create a list of values in the range between start and stop the start parameter is inclusive for the range function the stop parameter is exclusive while for generate_series it is inclusive based on the number of arguments the following variants exist range start stop step range start stop range stop generate_series start stop step generate_series start stop generate_series stop the default value of start is 0 and the default value of step is 1 select range 5 -- 0 1 2 3 4 select range 2 5 -- 2 3 4 select range 2 5 3 -- 2 select generate_series 5 -- 0 1 2 3 4 5 select generate_series 2 5 -- 2 3 4 5 select generate_series 2 5 3 -- 2 5 date ranges are also supported select from range date 1992-01-01 date 1992-03-01 interval 1 month range 1992-01-01 00 00 00 1992-02-01 00 00 00 list aggregates the function list_aggregate allows the execution of arbitrary existing aggregate functions on the elements of a list its first argument is the list column its second argument is the aggregate function name e g min histogram or sum select list_aggregate 1 2 -4 null min -- -4 select list_aggregate 2 4 8 42 sum -- 56 select list_aggregate 1 2 null 2 10 3 last -- 2 10 3 the following is a list of existing rewrites rewrites simplify the use of the list aggregate function by only taking the list column as their argument list_avg list_var_samp list_var_pop list_stddev_pop list_stddev_samp list_sem list_approx_count_distinct list_bit_xor list_bit_or list_bit_and list_bool_and list_bool_or list_count list_entropy list_last list_first list_kurtosis list_min list_max list_product list_skewness list_sum list_string_agg list_mode list_median list_mad and list_histogram select list_min 1 2 -4 null -- -4 select list_sum 2 4 8 42 -- 56 select list_last 1 2 null 2 10 3 -- 2 10 3 sorting lists the function list_sort sorts the elements of a list either in ascending or descending order in addition it allows to provide whether null values should be moved to the beginning or to the end of the list by default if no modifiers are provided duckdb sorts asc nulls first i e the values are sorted in ascending order and null values are placed first this is identical to the default sort order of sqlite the default sort order can be changed using these pragma statements list_sort leaves it open to the user whether they want to use the default sort order or a custom order list_sort takes up to two additional optional parameters the second parameter provides the sort order and can be either asc or desc the third parameter provides the null sort order and can be either nulls first or nulls last -- default sort order and default null sort order select list_sort 1 3 null 5 null -5 ---- null null -5 1 3 5 -- only providing the sort order select list_sort 1 3 null 2 asc ---- null 1 2 3 -- providing the sort order and the null sort order select list_sort 1 3 null 2 desc nulls first ---- null 3 2 1 list_reverse_sort has an optional second parameter providing the null sort order it can be either nulls first or nulls last -- default null sort order select list_sort 1 3 null 5 null -5 ---- null null -5 1 3 5 -- providing the null sort order select list_reverse_sort 1 3 null 2 nulls last ---- 3 2 1 null lambda functions parameter1 parameter2 - expression if the lambda function has only one parameter then the brackets can be omitted the parameters can have any names param - param 1 duck - contains concat duck db duck x y - x y transform list_transform list lambda returns a list that is the result of applying the lambda function to each element of the input list the lambda function must have exactly one left-hand side parameter the return type of the lambda function defines the type of the list elements -- incrementing each list element by one select list_transform 1 2 null 3 x - x 1 ---- 2 3 null 4 -- transforming strings select list_transform duck a b duck - concat duck db ---- duckdb adb bdb -- combining lambda functions with other functions select list_transform 5 null 6 x - coalesce x 0 1 ---- 6 1 7 filter list_filter list lambda constructs a list from those elements of the input list for which the lambda function returns true the lambda function must have exactly one left-hand side parameter and its return type must be of type boolean -- filter out negative values select list_filter 5 -6 null 7 x - x 0 ---- 5 7 -- divisible by 2 and 5 select list_filter list_filter 2 4 3 1 20 10 3 30 x - x 2 0 y - y 5 0 ---- 20 10 30 -- in combination with range to construct lists select list_filter 1 2 3 4 x - x 1 from range 4 ---- 1 2 3 4 2 3 4 3 4 4 lambda functions can be arbitrarily nested -- nested lambda functions to get all squares of even list elements select list_transform list_filter 0 1 2 3 4 5 x - x 2 0 y - y y ---- 0 4 16 generate_subscripts the generate_subscript arr dim function generates indexes along the dim th dimension of array arr select generate_subscripts 4 5 6 1 as i i 1 2 3 related functions there are also aggregate functions list and histogram that produces lists and lists of structs unnest is used to unnest a list by one level",
 			"category": "Functions",
 			"url": "/docs/sql/functions/nested",
 			"blurb": "This section describes functions and operators for examining and manipulating nested values. There are three nested data..."
@@ -639,7 +723,7 @@
 		},
 		{
 			"title": "Numeric Types",
-			"text": "integer types the types tinyint smallint integer bigint and hugeint store whole numbers that is numbers without fractional components of various ranges attempts to store values outside of the allowed range will result in an error the types utinyint usmallint uinteger ubigint store whole unsigned numbers attempts to store negative numbers or values outside of the allowed range will result in an error name aliases min max --- --- --- --- tinyint int1 -128 127 smallint int2 short -32768 32767 integer int4 int signed -2147483648 2147483647 bigint int8 long -9223372036854775808 9223372036854775807 hugeint -170141183460469231731687303715884105727 170141183460469231731687303715884105727 utinyint - 0 255 usmallint - 0 65535 uinteger - 0 4294967295 ubigint - 0 18446744073709551615 the type integer is the common choice as it offers the best balance between range storage size and performance the smallint type is generally only used if disk space is at a premium the bigint and hugeint types are designed to be used when the range of the integer type is insufficient -170141183460469231731687303715884105728 -1 127 is not representable by the internal structure fixed-point decimals the data type decimal width scale represents an exact fixed-point decimal value when creating a value of type decimal the width and scale can be specified to define which size of decimal values can be held in the field the width field determines how many digits can be held and the scale determines the amount of digits after the decimal point for example the type decimal 3 2 can fit the value 1 23 but cannot fit the value 12 3 or the value 1 234 the default width and scale is decimal 18 3 if none are specified internally decimals are represented as integers depending on their specified width width internal size bytes --- --- --- 1-4 int16 2 5-9 int32 4 10-18 int64 8 19-38 int128 16 performance can be impacted by using too large decimals when not required in particular decimal values with a width above 19 are very slow as arithmetic involving the int128 type is much more expensive than operations involving the int32 or int64 types it is therefore recommended to stick with a width of 18 or below unless there is a good reason for why this is insufficient floating-point types the data types real and double precision are inexact variable-precision numeric types in practice these types are usually implementations of ieee standard 754 for binary floating-point arithmetic single and double precision respectively to the extent that the underlying processor operating system and compiler support it name aliases description --- --- --- real float4 single precision floating-point number 4 bytes double float8 double precision floating-point number 8 bytes inexact means that some values cannot be converted exactly to the internal format and are stored as approximations so that storing and retrieving a value might show slight discrepancies managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here except for the following points if you require exact storage and calculations such as for monetary amounts use the numeric type instead if you want to do complicated calculations with these types for anything important especially if you rely on certain behavior in boundary cases infinity underflow you should evaluate the implementation carefully comparing two floating-point values for equality might not always work as expected on most platforms the real type has a range of at least 1e-37 to 1e 37 with a precision of at least 6 decimal digits the double type typically has a range of around 1e-307 to 1e 308 with a precision of at least 15 digits values that are too large or too small will cause an error rounding might take place if the precision of an input number is too high numbers too close to zero that are not representable as distinct from zero will cause an underflow error in addition to ordinary numeric values the floating-point types have several special values infinity -infinity nan these represent the ieee 754 special values infinity negative infinity and not-a-number respectively on a machine whose floating-point arithmetic does not follow ieee 754 these values will probably not work as expected when writing these values as constants in an sql command you must put quotes around them for example update table set x -infinity on input these strings are recognized in a case-insensitive manner functions see numeric functions and operators",
+			"text": "integer types the types tinyint smallint integer bigint and hugeint store whole numbers that is numbers without fractional components of various ranges attempts to store values outside of the allowed range will result in an error the types utinyint usmallint uinteger ubigint store whole unsigned numbers attempts to store negative numbers or values outside of the allowed range will result in an error name aliases min max --- --- --- --- tinyint int1 -128 127 smallint int2 short -32768 32767 integer int4 int signed -2147483648 2147483647 bigint int8 long -9223372036854775808 9223372036854775807 hugeint -170141183460469231731687303715884105727 170141183460469231731687303715884105727 utinyint - 0 255 usmallint - 0 65535 uinteger - 0 4294967295 ubigint - 0 18446744073709551615 the type integer is the common choice as it offers the best balance between range storage size and performance the smallint type is generally only used if disk space is at a premium the bigint and hugeint types are designed to be used when the range of the integer type is insufficient -170141183460469231731687303715884105728 -1 127 is not representable by the internal structure fixed-point decimals the data type decimal width scale represents an exact fixed-point decimal value when creating a value of type decimal the width and scale can be specified to define which size of decimal values can be held in the field the width field determines how many digits can be held and the scale determines the amount of digits after the decimal point for example the type decimal 3 2 can fit the value 1 23 but cannot fit the value 12 3 or the value 1 234 the default width and scale is decimal 18 3 if none are specified internally decimals are represented as integers depending on their specified width width internal size bytes --- --- --- 1-4 int16 2 5-9 int32 4 10-18 int64 8 19-38 int128 16 performance can be impacted by using too large decimals when not required in particular decimal values with a width above 19 are very slow as arithmetic involving the int128 type is much more expensive than operations involving the int32 or int64 types it is therefore recommended to stick with a width of 18 or below unless there is a good reason for why this is insufficient floating-point types the data types real and double precision are inexact variable-precision numeric types in practice these types are usually implementations of ieee standard 754 for binary floating-point arithmetic single and double precision respectively to the extent that the underlying processor operating system and compiler support it name aliases description --- --- --- real float4 float single precision floating-point number 4 bytes double float8 double precision floating-point number 8 bytes inexact means that some values cannot be converted exactly to the internal format and are stored as approximations so that storing and retrieving a value might show slight discrepancies managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here except for the following points if you require exact storage and calculations such as for monetary amounts use the numeric type instead if you want to do complicated calculations with these types for anything important especially if you rely on certain behavior in boundary cases infinity underflow you should evaluate the implementation carefully comparing two floating-point values for equality might not always work as expected on most platforms the real type has a range of at least 1e-37 to 1e 37 with a precision of at least 6 decimal digits the double type typically has a range of around 1e-307 to 1e 308 with a precision of at least 15 digits values that are too large or too small will cause an error rounding might take place if the precision of an input number is too high numbers too close to zero that are not representable as distinct from zero will cause an underflow error in addition to ordinary numeric values the floating-point types have several special values infinity -infinity nan these represent the ieee 754 special values infinity negative infinity and not-a-number respectively on a machine whose floating-point arithmetic does not follow ieee 754 these values will probably not work as expected when writing these values as constants in an sql command you must put quotes around them for example update table set x -infinity on input these strings are recognized in a case-insensitive manner functions see numeric functions and operators",
 			"category": "Data Types",
 			"url": "/docs/sql/data_types/numeric",
 			"blurb": "Numeric types are used to store numbers, and come in different shapes and sizes."
@@ -800,7 +884,7 @@
 		},
 		{
 			"title": "SQL Introduction",
-			"text": "here we provide an overview of how to perform simple operations in sql this tutorial is only intended to give you an introduction and is in no way a complete tutorial on sql this tutorial is adapted from the postgresql tutorial in the examples that follow we assume that you have installed the duckdb command line interface cli shell see here for information on how to install the cli if you build from the source tree you can launch the cli from the build directory build release duckdb launching the shell should give you the following prompt duckdb 5fb6fe57ab enter help for usage hints connected to a transient in-memory database use open filename to reopen on a persistent database d by launching the database like this an in-memory database is launched that means that no data is persisted on disk to persist data on disk you should also pass a database path to the shell the database will then be stored at that path and can be reloaded from disk later concepts duckdb is a relational database management system rdbms that means it is a system for managing data stored in relations a relation is essentially a mathematical term for a table each table is a named collection of rows each row of a given table has the same set of named columns and each column is of a specific data type tables themselves are stored inside schemas and a collection of schemas constitutes the entire database that you can access creating a new table you can create a new table by specifying the table name along with all column names and their types create table weather city varchar temp_lo integer -- minimum temperature on a day temp_hi integer -- maximum temperature on a day prcp real date date you can enter this into the shell with the line breaks the command is not terminated until the semicolon white space i e spaces tabs and newlines can be used freely in sql commands that means you can type the command aligned differently than above or even all on one line two dash characters -- introduce comments whatever follows them is ignored up to the end of the line sql is case insensitive about key words and identifiers except when identifiers are double-quoted to preserve the case not done above in the sql command we first specify the type of command that we want to perform create table after that follows the parameters for the command first the table name weather is given then the column names and column types follow city varchar specifies that the table has a column called city that is of type varchar varchar specifies a data type that can store text of arbitrary length the temperature fields are stored in an integer type a type that stores integer numbers i e whole numbers without a decimal point real columns store single precision floating-point numbers i e numbers with a decimal point date stores a date i e year month day combination date only stores the specific day not a time associated with that day duckdb supports the standard sql types integer smallint real double decimal char n varchar n date time and timestamp the second example will store cities and their associated geographical location create table cities name varchar lat decimal lon decimal finally it should be mentioned that if you don t need a table any longer or want to recreate it differently you can remove it using the following command drop table tablename populating a table with rows the insert statement is used to populate a table with rows insert into weather values san francisco 46 50 0 25 1994-11-27 constants that are not numeric values e g text and dates must be surrounded by single quotes as in the example input dates for the date type must be formatted as yyyy-mm-dd we can insert into the cities table in the same manner insert into cities values san francisco -194 0 53 0 the syntax used so far requires you to remember the order of the columns an alternative syntax allows you to list the columns explicitly insert into weather city temp_lo temp_hi prcp date values san francisco 43 57 0 0 1994-11-29 you can list the columns in a different order if you wish or even omit some columns e g if the prcp is unknown insert into weather date city temp_hi temp_lo values 1994-11-29 hayward 54 37 many developers consider explicitly listing the columns better style than relying on the order implicitly please enter all the commands shown above so you have some data to work with in the following sections you could also have used copy to load large amounts of data from csv files this is usually faster because the copy command is optimized for this application while allowing less flexibility than insert an example would be copy weather from home user weather csv where the file name for the source file must be available on the machine running the process there are many other ways of loading data into duckdb see the corresponding documentation section for more information querying a table to retrieve data from a table the table is queried a sql select statement is used to do this the statement is divided into a select list the part that lists the columns to be returned a table list the part that lists the tables from which to retrieve the data and an optional qualification the part that specifies any restrictions for example to retrieve all the rows of table weather type select from weather here is a shorthand for all columns so the same result would be had with select city temp_lo temp_hi prcp date from weather the output should be city temp_lo temp_hi prcp date --------------- --------- ---------- ------ ------------ san francisco 46 50 0 25 1994-11-27 san francisco 43 57 0 0 1994-11-29 hayward 37 54 1994-11-29 3 rows you can write expressions not just simple column references in the select list for example you can do select city temp_hi temp_lo 2 as temp_avg date from weather this should give city temp_avg date --------------- ---------- ------------ san francisco 48 1994-11-27 san francisco 50 1994-11-29 hayward 45 1994-11-29 3 rows notice how the as clause is used to relabel the output column the as clause is optional a query can be qualified by adding a where clause that specifies which rows are wanted the where clause contains a boolean truth value expression and only rows for which the boolean expression is true are returned the usual boolean operators and or and not are allowed in the qualification for example the following retrieves the weather of san francisco on rainy days select from weather where city san francisco and prcp 0 0 result city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ san francisco 46 50 0 25 1994-11-27 you can request that the results of a query be returned in sorted order select from weather order by city city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ hayward 37 54 1994-11-29 san francisco 43 57 0 0 1994-11-29 san francisco 46 50 0 25 1994-11-27 in this example the sort order isn t fully specified and so you might get the san francisco rows in either order but you d always get the results shown above if you do select from weather order by city temp_lo you can request that duplicate rows be removed from the result of a query select distinct city from weather city --------------- hayward san francisco 2 rows here again the result row ordering might vary you can ensure consistent results by using distinct and order by together select distinct city from weather order by city joins between tables thus far our queries have only accessed one table at a time queries can access multiple tables at once or access the same table in such a way that multiple rows of the table are being processed at the same time a query that accesses multiple rows of the same or different tables at one time is called a join query as an example say you wish to list all the weather records together with the location of the associated city to do that we need to compare the city column of each row of the weather table with the name column of all rows in the cities table and select the pairs of rows where these values match this would be accomplished by the following query select from weather cities where city name city temp_lo temp_hi prcp date name lon lat --------------- --------- --------- ------ ------------ --------------- ----- ---- san francisco 46 50 0 25 1994-11-27 san francisco -194 53 san francisco 43 57 0 1994-11-29 san francisco -194 53 2 rows observe two things about the result set there is no result row for the city of hayward this is because there is no matching entry in the cities table for hayward so the join ignores the unmatched rows in the weather table we will see shortly how this can be fixed there are two columns containing the city name this is correct because the lists of columns from the weather and cities tables are concatenated in practice this is undesirable though so you will probably want to list the output columns explicitly rather than using select city temp_lo temp_hi prcp date lon lat from weather cities where city name since the columns all had different names the parser automatically found which table they belong to if there were duplicate column names in the two tables you d need to qualify the column names to show which one you meant as in select weather city weather temp_lo weather temp_hi weather prcp weather date cities lon cities lat from weather cities where cities name weather city it is widely considered good style to qualify all column names in a join query so that the query won t fail if a duplicate column name is later added to one of the tables join queries of the kind seen thus far can also be written in this alternative form select from weather inner join cities on weather city cities name this syntax is not as commonly used as the one above but we show it here to help you understand the following topics now we will figure out how we can get the hayward records back in what we want the query to do is to scan the weather table and for each row to find the matching cities row s if no matching row is found we want some empty values to be substituted for the cities table s columns this kind of query is called an outer join the joins we have seen so far are inner joins the command looks like this select from weather left outer join cities on weather city cities name city temp_lo temp_hi prcp date name lon lat --------------- --------- --------- ------ ------------ --------------- ----- ---- san francisco 46 50 0 25 1994-11-27 san francisco -194 53 san francisco 43 57 0 1994-11-29 san francisco -194 53 hayward 37 54 1994-11-29 3 rows this query is called a left outer join because the table mentioned on the left of the join operator will have each of its rows in the output at least once whereas the table on the right will only have those rows output that match some row of the left table when outputting a left-table row for which there is no right-table match empty null values are substituted for the right-table columns aggregate functions like most other relational database products duckdb supports aggregate functions an aggregate function computes a single result from multiple input rows for example there are aggregates to compute the count sum avg average max maximum and min minimum over a set of rows as an example we can find the highest low-temperature reading anywhere with select max temp_lo from weather max ----- 46 1 row if we wanted to know what city or cities that reading occurred in we might try select city from weather where temp_lo max temp_lo -- wrong but this will not work since the aggregate max cannot be used in the where clause this restriction exists because the where clause determines which rows will be included in the aggregate calculation so obviously it has to be evaluated before aggregate functions are computed however as is often the case the query can be restated to accomplish the desired result here by using a subquery select city from weather where temp_lo select max temp_lo from weather city --------------- san francisco 1 row this is ok because the subquery is an independent computation that computes its own aggregate separately from what is happening in the outer query aggregates are also very useful in combination with group by clauses for example we can get the maximum low temperature observed in each city with select city max temp_lo from weather group by city city max --------------- ----- hayward 37 san francisco 46 2 rows which gives us one output row per city each aggregate result is computed over the table rows matching that city we can filter these grouped rows using having select city max temp_lo from weather group by city having max temp_lo 40 city max --------- ----- hayward 37 1 row which gives us the same results for only the cities that have all temp_lo values below 40 finally if we only care about cities whose names begin with s we can use the like operator select city max temp_lo from weather where city like s -- 1 group by city having max temp_lo 40 more information about the like operator can be found here it is important to understand the interaction between aggregates and sql s where and having clauses the fundamental difference between where and having is this where selects input rows before groups and aggregates are computed thus it controls which rows go into the aggregate computation whereas having selects group rows after groups and aggregates are computed thus the where clause must not contain aggregate functions it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates on the other hand the having clause always contains aggregate functions in the previous example we can apply the city name restriction in where since it needs no aggregate this is more efficient than adding the restriction to having because we avoid doing the grouping and aggregate calculations for all rows that fail the where check updates you can update existing rows using the update command suppose you discover the temperature readings are all off by 2 degrees after november 28 you can correct the data as follows update weather set temp_hi temp_hi - 2 temp_lo temp_lo - 2 where date 1994-11-28 look at the new state of the data select from weather city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ san francisco 46 50 0 25 1994-11-27 san francisco 41 55 0 1994-11-29 hayward 35 52 1994-11-29 3 rows deletions rows can be removed from a table using the delete command suppose you are no longer interested in the weather of hayward then you can do the following to delete those rows from the table delete from weather where city hayward all weather records belonging to hayward are removed select from weather city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ san francisco 46 50 0 25 1994-11-27 san francisco 41 55 0 1994-11-29 2 rows one should be wary of statements of the form delete from tablename without a qualification delete will remove all rows from the given table leaving it empty the system will not request confirmation before doing this",
+			"text": "here we provide an overview of how to perform simple operations in sql this tutorial is only intended to give you an introduction and is in no way a complete tutorial on sql this tutorial is adapted from the postgresql tutorial in the examples that follow we assume that you have installed the duckdb command line interface cli shell see here for information on how to install the cli if you build from the source tree you can launch the cli from the build directory build release duckdb launching the shell should give you the following prompt duckdb 5fb6fe57ab enter help for usage hints connected to a transient in-memory database use open filename to reopen on a persistent database d by launching the database like this an in-memory database is launched that means that no data is persisted on disk to persist data on disk you should also pass a database path to the shell the database will then be stored at that path and can be reloaded from disk later concepts duckdb is a relational database management system rdbms that means it is a system for managing data stored in relations a relation is essentially a mathematical term for a table each table is a named collection of rows each row of a given table has the same set of named columns and each column is of a specific data type tables themselves are stored inside schemas and a collection of schemas constitutes the entire database that you can access creating a new table you can create a new table by specifying the table name along with all column names and their types create table weather city varchar temp_lo integer -- minimum temperature on a day temp_hi integer -- maximum temperature on a day prcp real date date you can enter this into the shell with the line breaks the command is not terminated until the semicolon white space i e spaces tabs and newlines can be used freely in sql commands that means you can type the command aligned differently than above or even all on one line two dash characters -- introduce comments whatever follows them is ignored up to the end of the line sql is case insensitive about key words and identifiers in the sql command we first specify the type of command that we want to perform create table after that follows the parameters for the command first the table name weather is given then the column names and column types follow city varchar specifies that the table has a column called city that is of type varchar varchar specifies a data type that can store text of arbitrary length the temperature fields are stored in an integer type a type that stores integer numbers i e whole numbers without a decimal point real columns store single precision floating-point numbers i e numbers with a decimal point date stores a date i e year month day combination date only stores the specific day not a time associated with that day duckdb supports the standard sql types integer smallint real double decimal char n varchar n date time and timestamp the second example will store cities and their associated geographical location create table cities name varchar lat decimal lon decimal finally it should be mentioned that if you don t need a table any longer or want to recreate it differently you can remove it using the following command drop table tablename populating a table with rows the insert statement is used to populate a table with rows insert into weather values san francisco 46 50 0 25 1994-11-27 constants that are not numeric values e g text and dates must be surrounded by single quotes as in the example input dates for the date type must be formatted as yyyy-mm-dd we can insert into the cities table in the same manner insert into cities values san francisco -194 0 53 0 the syntax used so far requires you to remember the order of the columns an alternative syntax allows you to list the columns explicitly insert into weather city temp_lo temp_hi prcp date values san francisco 43 57 0 0 1994-11-29 you can list the columns in a different order if you wish or even omit some columns e g if the prcp is unknown insert into weather date city temp_hi temp_lo values 1994-11-29 hayward 54 37 many developers consider explicitly listing the columns better style than relying on the order implicitly please enter all the commands shown above so you have some data to work with in the following sections you could also have used copy to load large amounts of data from csv files this is usually faster because the copy command is optimized for this application while allowing less flexibility than insert an example would be copy weather from home user weather csv where the file name for the source file must be available on the machine running the process there are many other ways of loading data into duckdb see the corresponding documentation section for more information querying a table to retrieve data from a table the table is queried a sql select statement is used to do this the statement is divided into a select list the part that lists the columns to be returned a table list the part that lists the tables from which to retrieve the data and an optional qualification the part that specifies any restrictions for example to retrieve all the rows of table weather type select from weather here is a shorthand for all columns so the same result would be had with select city temp_lo temp_hi prcp date from weather the output should be city temp_lo temp_hi prcp date --------------- --------- ---------- ------ ------------ san francisco 46 50 0 25 1994-11-27 san francisco 43 57 0 0 1994-11-29 hayward 37 54 1994-11-29 3 rows you can write expressions not just simple column references in the select list for example you can do select city temp_hi temp_lo 2 as temp_avg date from weather this should give city temp_avg date --------------- ---------- ------------ san francisco 48 1994-11-27 san francisco 50 1994-11-29 hayward 45 1994-11-29 3 rows notice how the as clause is used to relabel the output column the as clause is optional a query can be qualified by adding a where clause that specifies which rows are wanted the where clause contains a boolean truth value expression and only rows for which the boolean expression is true are returned the usual boolean operators and or and not are allowed in the qualification for example the following retrieves the weather of san francisco on rainy days select from weather where city san francisco and prcp 0 0 result city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ san francisco 46 50 0 25 1994-11-27 you can request that the results of a query be returned in sorted order select from weather order by city city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ hayward 37 54 1994-11-29 san francisco 43 57 0 0 1994-11-29 san francisco 46 50 0 25 1994-11-27 in this example the sort order isn t fully specified and so you might get the san francisco rows in either order but you d always get the results shown above if you do select from weather order by city temp_lo you can request that duplicate rows be removed from the result of a query select distinct city from weather city --------------- hayward san francisco 2 rows here again the result row ordering might vary you can ensure consistent results by using distinct and order by together select distinct city from weather order by city joins between tables thus far our queries have only accessed one table at a time queries can access multiple tables at once or access the same table in such a way that multiple rows of the table are being processed at the same time a query that accesses multiple rows of the same or different tables at one time is called a join query as an example say you wish to list all the weather records together with the location of the associated city to do that we need to compare the city column of each row of the weather table with the name column of all rows in the cities table and select the pairs of rows where these values match this would be accomplished by the following query select from weather cities where city name city temp_lo temp_hi prcp date name lon lat --------------- --------- --------- ------ ------------ --------------- ----- ---- san francisco 46 50 0 25 1994-11-27 san francisco -194 53 san francisco 43 57 0 1994-11-29 san francisco -194 53 2 rows observe two things about the result set there is no result row for the city of hayward this is because there is no matching entry in the cities table for hayward so the join ignores the unmatched rows in the weather table we will see shortly how this can be fixed there are two columns containing the city name this is correct because the lists of columns from the weather and cities tables are concatenated in practice this is undesirable though so you will probably want to list the output columns explicitly rather than using select city temp_lo temp_hi prcp date lon lat from weather cities where city name since the columns all had different names the parser automatically found which table they belong to if there were duplicate column names in the two tables you d need to qualify the column names to show which one you meant as in select weather city weather temp_lo weather temp_hi weather prcp weather date cities lon cities lat from weather cities where cities name weather city it is widely considered good style to qualify all column names in a join query so that the query won t fail if a duplicate column name is later added to one of the tables join queries of the kind seen thus far can also be written in this alternative form select from weather inner join cities on weather city cities name this syntax is not as commonly used as the one above but we show it here to help you understand the following topics now we will figure out how we can get the hayward records back in what we want the query to do is to scan the weather table and for each row to find the matching cities row s if no matching row is found we want some empty values to be substituted for the cities table s columns this kind of query is called an outer join the joins we have seen so far are inner joins the command looks like this select from weather left outer join cities on weather city cities name city temp_lo temp_hi prcp date name lon lat --------------- --------- --------- ------ ------------ --------------- ----- ---- san francisco 46 50 0 25 1994-11-27 san francisco -194 53 san francisco 43 57 0 1994-11-29 san francisco -194 53 hayward 37 54 1994-11-29 3 rows this query is called a left outer join because the table mentioned on the left of the join operator will have each of its rows in the output at least once whereas the table on the right will only have those rows output that match some row of the left table when outputting a left-table row for which there is no right-table match empty null values are substituted for the right-table columns aggregate functions like most other relational database products duckdb supports aggregate functions an aggregate function computes a single result from multiple input rows for example there are aggregates to compute the count sum avg average max maximum and min minimum over a set of rows as an example we can find the highest low-temperature reading anywhere with select max temp_lo from weather max ----- 46 1 row if we wanted to know what city or cities that reading occurred in we might try select city from weather where temp_lo max temp_lo -- wrong but this will not work since the aggregate max cannot be used in the where clause this restriction exists because the where clause determines which rows will be included in the aggregate calculation so obviously it has to be evaluated before aggregate functions are computed however as is often the case the query can be restated to accomplish the desired result here by using a subquery select city from weather where temp_lo select max temp_lo from weather city --------------- san francisco 1 row this is ok because the subquery is an independent computation that computes its own aggregate separately from what is happening in the outer query aggregates are also very useful in combination with group by clauses for example we can get the maximum low temperature observed in each city with select city max temp_lo from weather group by city city max --------------- ----- hayward 37 san francisco 46 2 rows which gives us one output row per city each aggregate result is computed over the table rows matching that city we can filter these grouped rows using having select city max temp_lo from weather group by city having max temp_lo 40 city max --------- ----- hayward 37 1 row which gives us the same results for only the cities that have all temp_lo values below 40 finally if we only care about cities whose names begin with s we can use the like operator select city max temp_lo from weather where city like s -- 1 group by city having max temp_lo 40 more information about the like operator can be found here it is important to understand the interaction between aggregates and sql s where and having clauses the fundamental difference between where and having is this where selects input rows before groups and aggregates are computed thus it controls which rows go into the aggregate computation whereas having selects group rows after groups and aggregates are computed thus the where clause must not contain aggregate functions it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates on the other hand the having clause always contains aggregate functions in the previous example we can apply the city name restriction in where since it needs no aggregate this is more efficient than adding the restriction to having because we avoid doing the grouping and aggregate calculations for all rows that fail the where check updates you can update existing rows using the update command suppose you discover the temperature readings are all off by 2 degrees after november 28 you can correct the data as follows update weather set temp_hi temp_hi - 2 temp_lo temp_lo - 2 where date 1994-11-28 look at the new state of the data select from weather city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ san francisco 46 50 0 25 1994-11-27 san francisco 41 55 0 1994-11-29 hayward 35 52 1994-11-29 3 rows deletions rows can be removed from a table using the delete command suppose you are no longer interested in the weather of hayward then you can do the following to delete those rows from the table delete from weather where city hayward all weather records belonging to hayward are removed select from weather city temp_lo temp_hi prcp date --------------- --------- --------- ------ ------------ san francisco 46 50 0 25 1994-11-27 san francisco 41 55 0 1994-11-29 2 rows one should be wary of statements of the form delete from tablename without a qualification delete will remove all rows from the given table leaving it empty the system will not request confirmation before doing this",
 			"category": "SQL",
 			"url": "/docs/sql/introduction",
 			"blurb": "Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an..."
@@ -853,6 +937,13 @@
 			"category": "Docs",
 			"url": "/docs/index",
 			"blurb": ""
+		},
+		{
+			"title": "Specifier",
+			"text": "specifier - description",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "Specifier - Description"
 		},
 		{
 			"title": "Statements Overview",
@@ -953,6 +1044,13 @@
 			"blurb": "The  UNNEST  function is used to unnest a list by one level. The function can be used as a regular scalar function, but..."
 		},
 		{
+			"title": "Union",
+			"text": "union data type a union type not to be confused with the sql union operator is a nested type capable of holding one of multiple alternative values much like the union in c the main difference being that these union types are tagged unions and thus always carry a discriminator tag which signals which alternative it is currently holding even if the inner value itself is null union types are thus more similar to c 17 s std variant rust s enum or the sum type present in most functional languages union types must always have at least one member and while they can contain multiple members of the same type the tag names must be unique union types can have at most 256 members under the hood union types are implemented on top of struct types and simply keep the tag as the first entry union values can be created with the union_value tag expr function or by casting from a member type example -- create a table with a union column create table tbl1 u union num int str varchar -- any type can be implicitly cast to a union containing the type -- any union can also be implicitly cast to a another union if -- the source union members are a subset of the targets -- note only if the cast is unambiguous -- more details in the union casts section below insert into tbl1 values 1 two union_value str three -- union use the member types varchar cast functions when casting to varchar select u from tbl1 -- returns -- 1 -- two -- three -- select all the str members select union_extract u str from tbl1 -- alternatively you can use dot syntax like with structs select u str from tbl1 -- returns -- null -- two -- three -- select the currently active tag from the union as an enum select union_tag u from tbl1 -- returns -- num -- str -- str union casts compared to other nested types union s allow a set of implicit casts to facilitate unintrusive and natural usage when working with their members as subtypes however these casts have been designed with two principles in mind to avoid ambiguity and to avoid casts that could lead to loss of information this prevents union s from being completely transparent while still allowing union types to have a supertype relationship with their members thus union types can t be implicitly cast to any of their member types in general since the information in the other members not matching the target type would be lost if you want to coerce a union into one of its members you should use the union_extract function explicitly instead the only exception to this is when casting a union to varchar in which case the members will all use their corresponding varchar casts since everything can be cast to varchar this is safe in a sense casting to unions a type can always be implicitly cast to a union if it can be implicitly cast to one of the union member types if there are multiple candidates the built in implicit casting priority rules determine the target type for example a float - union i int v varchar cast will always cast the float to the int member before varchar if the cast still is ambiguous i e there are multiple candidates with the same implicit casting priority an error is raised this usually happens when the union contains multiple members of the same type e g a float - union i int num int is always ambiguous so how do we disambiguate if we want to create a union with multiple members of the same type by using the union_value function which takes a keyword argument specifying the tag for example union_value num 2 int will create a union with a single member of type int with the tag num this can then be used to disambiguate in an explicit or implicit read on below union to union cast like cast union_value b 2 as union a int b int casting between unions union types can be cast between each other if the source type is a subset of the target type in other words all the tags in the source union must be present in the target union and all the types of the matching tags must be implicitly castable between source and target in essence this means that union types are covariant with respect to their members ok source target comments ---- --------------------- ----------------------- ------------------------------------ union a a b b union a a b b c c union a a b b union a a b c if b can be implicitly cast to c union a a b b c c union a a b b union a a b b union a a b c if b can t be implicitly cast to c union a b d union a b c comparison and sorting since union types are implemented on top of struct types internally they can be used with all the comparison operators as well as in both where and having clauses with the same semantics as struct s the tag is always stored as the first struct entry which ensures that the union types are compared and ordered by tag first functions see nested functions",
+			"category": "Data Types",
+			"url": "/docs/sql/data_types/union",
+			"blurb": "Union Data Type   A  UNION    type  (not to be confused with the SQL  UNION  operator) is a nested type capable of..."
+		},
+		{
 			"title": "Update Statement",
 			"text": "the update statement modifies the values of rows in a table examples -- for every row where i is null set the value to 0 instead update tbl set i 0 where i is null -- set all values of i to 1 and all values of j to 2 update tbl set i 1 j 2 syntax update changes the values of the specified columns in all rows that satisfy the condition only the columns to be modified need be mentioned in the set clause columns not explicitly modified retain their previous values",
 			"category": "Statements",
@@ -1007,6 +1105,1392 @@
 			"category": "SQL",
 			"url": "/docs/sql/window_functions",
 			"blurb": "Examples  -- generate a row_number column containing incremental identifiers for each row SELECT row_number() OVER ()..."
+		},
+		{
+			"title": "`",
+			"text": "` - `",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "` - `"
+		},
+		{
+			"title": "abs",
+			"text": "abs(x) - absolute value",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "abs(x) - absolute value"
+		},
+		{
+			"title": "acos",
+			"text": "acos(x) - computes the arccosine of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "acos(x) - computes the arccosine of x"
+		},
+		{
+			"title": "age",
+			"text": "age(timestamptz) - subtract from current_date",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "age(timestamptz) - Subtract from current_date"
+		},
+		{
+			"title": "array_extract",
+			"text": "array_extract(list, index) - extract a single character using a (1-based) index.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "array_extract(list, index) - Extract a single character using a (1-based) index."
+		},
+		{
+			"title": "array_pop_back",
+			"text": "array_pop_back(list) - returns the list without the last element.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "array_pop_back(list) - Returns the list without the last element."
+		},
+		{
+			"title": "array_pop_front",
+			"text": "array_pop_front(list) - returns the list without the first element.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "array_pop_front(list) - Returns the list without the first element."
+		},
+		{
+			"title": "array_slice",
+			"text": "array_slice(list, begin, end) - extract a string using slice conventions. null s are interpreted as the bounds of the string. negative values are accepted.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "array_slice(list, begin, end) - Extract a string using slice conventions. NULL s are interpreted as the bounds of the..."
+		},
+		{
+			"title": "ascii",
+			"text": "ascii(string) - returns an integer that represents the unicode code point of the first character of the string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "ascii(string) - Returns an integer that represents the Unicode code point of the first character of the string"
+		},
+		{
+			"title": "asin",
+			"text": "asin(x) - computes the arcsine of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "asin(x) - computes the arcsine of x"
+		},
+		{
+			"title": "atan",
+			"text": "atan(x) - computes the arctangent of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "atan(x) - computes the arctangent of x"
+		},
+		{
+			"title": "atan2",
+			"text": "atan2(x, y) - computes the arctangent (x, y)",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "atan2(x, y) - computes the arctangent (x, y)"
+		},
+		{
+			"title": "bit_count",
+			"text": "bit_count(x) - returns the number of bits that are set",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "bit_count(x) - returns the number of bits that are set"
+		},
+		{
+			"title": "bit_length",
+			"text": "bit_length(string) - number of bits in a string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "bit_length(string) - Number of bits in a string."
+		},
+		{
+			"title": "cardinality",
+			"text": "cardinality(map) - return the size of the map (or the number of entries in the map).",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "cardinality(map) - Return the size of the map (or the number of entries in the map)."
+		},
+		{
+			"title": "cbrt",
+			"text": "cbrt(x) - returns the cube root of the number",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "cbrt(x) - returns the cube root of the number"
+		},
+		{
+			"title": "ceil",
+			"text": "ceil(x) - rounds the number up",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "ceil(x) - rounds the number up"
+		},
+		{
+			"title": "century",
+			"text": "century(timestamp) - extracts the century of a timestamp",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "century(timestamp) - Extracts the century of a timestamp"
+		},
+		{
+			"title": "chr",
+			"text": "chr(x) - returns a character which is corresponding the ascii code value or unicode code point",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "chr(x) - returns a character which is corresponding the ASCII code value or Unicode code point"
+		},
+		{
+			"title": "coalesce",
+			"text": "coalesce(expr, ...) - return the first expression that evaluates to a non- null value. accepts 1 or more parameters. each expression can be a column, literal value, function result, or many others.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "coalesce(expr, ...) - Return the first expression that evaluates to a non- NULL value. Accepts 1 or more parameters. Each..."
+		},
+		{
+			"title": "concat",
+			"text": "concat(string, ...) - concatenate many strings together",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "concat(string, ...) - Concatenate many strings together"
+		},
+		{
+			"title": "concat_ws",
+			"text": "concat_ws(separator, string, ...) - concatenate strings together separated by the specified separator",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "concat_ws(separator, string, ...) - Concatenate strings together separated by the specified separator"
+		},
+		{
+			"title": "contains",
+			"text": "contains(string, search_string) - return true if search_string is found within string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "contains(string, search_string) - Return true if search_string is found within string"
+		},
+		{
+			"title": "cos",
+			"text": "cos(x) - computes the cosine of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "cos(x) - computes the cosine of x"
+		},
+		{
+			"title": "cot",
+			"text": "cot(x) - computes the cotangent of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "cot(x) - computes the cotangent of x"
+		},
+		{
+			"title": "current_date",
+			"text": "current_date - current date (at start of current transaction)",
+			"category": "Date Functions",
+			"url": "/docs/sql/functions/date",
+			"blurb": "current_date - Current date (at start of current transaction)"
+		},
+		{
+			"title": "current_schema",
+			"text": "current_schema() - return the name of the currently active schema. default is main.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "current_schema() - Return the name of the currently active schema. Default is main."
+		},
+		{
+			"title": "current_schemas",
+			"text": "current_schemas(boolean) - return list of schemas. pass a parameter of true to include implicit schemas.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "current_schemas(boolean) - Return list of schemas. Pass a parameter of True to include implicit schemas."
+		},
+		{
+			"title": "current_setting",
+			"text": "current_setting(setting_name) - return the current value of the configuration setting",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "current_setting(setting_name) - Return the current value of the configuration setting"
+		},
+		{
+			"title": "current_time",
+			"text": "current_time - current time (start of current transaction)",
+			"category": "Time Functions",
+			"url": "/docs/sql/functions/time",
+			"blurb": "current_time - Current time (start of current transaction)"
+		},
+		{
+			"title": "current_timestamp",
+			"text": "current_timestamp - current date and time (start of current transaction)",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "current_timestamp - Current date and time (start of current transaction)"
+		},
+		{
+			"title": "currval",
+			"text": "currval(sequence_name) - return the current value of the sequence. note that nextval must be called at least once prior to calling currval.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "currval(sequence_name) - Return the current value of the sequence. Note that nextval must be called at least once prior..."
+		},
+		{
+			"title": "date_diff",
+			"text": "date_diff(part, startdate, enddate) - the number of partition boundaries between the timestamps",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "date_diff(part, startdate, enddate) - The number of partition boundaries between the timestamps"
+		},
+		{
+			"title": "date_part",
+			"text": "date_part(part, timestamptz) - get subfield (equivalent to extract )",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "date_part(part, timestamptz) - Get subfield (equivalent to extract )"
+		},
+		{
+			"title": "date_sub",
+			"text": "date_sub(part, startdate, enddate) - the number of complete partitions between the timestamps",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "date_sub(part, startdate, enddate) - The number of complete partitions between the timestamps"
+		},
+		{
+			"title": "date_trunc",
+			"text": "date_trunc(part, timestamptz) - truncate to specified precision",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "date_trunc(part, timestamptz) - Truncate to specified precision"
+		},
+		{
+			"title": "day",
+			"text": "day(date) - day",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "day(date) - Day"
+		},
+		{
+			"title": "dayname",
+			"text": "dayname(timestamp) - the (english) name of the weekday",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "dayname(timestamp) - The (English) name of the weekday"
+		},
+		{
+			"title": "dayofmonth",
+			"text": "dayofmonth(date) - day (synonym)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "dayofmonth(date) - Day (synonym)"
+		},
+		{
+			"title": "dayofweek",
+			"text": "dayofweek(date) - numeric weekday (sunday = 0, saturday = 6)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "dayofweek(date) - Numeric weekday (Sunday = 0, Saturday = 6)"
+		},
+		{
+			"title": "dayofyear",
+			"text": "dayofyear(date) - numeric iso weekday (monday = 1, sunday = 7)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "dayofyear(date) - Numeric ISO weekday (Monday = 1, Sunday = 7)"
+		},
+		{
+			"title": "decade",
+			"text": "decade(date) - decade (year / 10)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "decade(date) - Decade (year / 10)"
+		},
+		{
+			"title": "decode",
+			"text": "decode(blob) - convert blob to varchar. fails if blob is not valid utf-8.",
+			"category": "Blob Functions",
+			"url": "/docs/sql/functions/blob",
+			"blurb": "decode(blob) - Convert blob to varchar. Fails if blob is not valid utf-8."
+		},
+		{
+			"title": "degrees",
+			"text": "degrees(x) - converts radians to degrees",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "degrees(x) - converts radians to degrees"
+		},
+		{
+			"title": "element_at",
+			"text": "element_at(map, key) - return a list containing the value for a given key or an empty list if the key is not contained in the map. the type of the key provided in the second parameter must match the type of the map's keys else an error is returned.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "element_at(map, key) - Return a list containing the value for a given key or an empty list if the key is not contained in..."
+		},
+		{
+			"title": "encode",
+			"text": "encode(string) - convert varchar to blob. converts utf-8 characters into literal encoding.",
+			"category": "Blob Functions",
+			"url": "/docs/sql/functions/blob",
+			"blurb": "encode(string) - Convert varchar to blob. Converts utf-8 characters into literal encoding."
+		},
+		{
+			"title": "enum_first",
+			"text": "enum_first(enum) - returns the first value of the input enum type.",
+			"category": "Enum Functions",
+			"url": "/docs/sql/functions/enum",
+			"blurb": "enum_first(enum) - Returns the first value of the input enum type."
+		},
+		{
+			"title": "enum_last",
+			"text": "enum_last(enum) - returns the last value of the input enum type.",
+			"category": "Enum Functions",
+			"url": "/docs/sql/functions/enum",
+			"blurb": "enum_last(enum) - Returns the last value of the input enum type."
+		},
+		{
+			"title": "enum_range",
+			"text": "enum_range(enum) - returns all values of the input enum type as an array.",
+			"category": "Enum Functions",
+			"url": "/docs/sql/functions/enum",
+			"blurb": "enum_range(enum) - Returns all values of the input enum type as an array."
+		},
+		{
+			"title": "enum_range_boundary",
+			"text": "enum_range_boundary(enum, enum) - returns the range between the two given enum values as an array. the values must be of the same enum type. when the first parameter is null , the result starts with the first value of the enum type. when the second parameter is null , the result ends with the last value of the enum type.",
+			"category": "Enum Functions",
+			"url": "/docs/sql/functions/enum",
+			"blurb": "enum_range_boundary(enum, enum) - Returns the range between the two given enum values as an array. The values must be of..."
+		},
+		{
+			"title": "epoch",
+			"text": "epoch(timestamp) - converts a timestamp to the seconds since the epoch",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "epoch(timestamp) - Converts a timestamp to the seconds since the epoch"
+		},
+		{
+			"title": "epoch_ms",
+			"text": "epoch_ms(ms) - converts ms since epoch to a timestamp",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "epoch_ms(ms) - Converts ms since epoch to a timestamp"
+		},
+		{
+			"title": "era",
+			"text": "era(date) - calendar era",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "era(date) - Calendar era"
+		},
+		{
+			"title": "even",
+			"text": "even(x) - round to next even number by rounding away from zero.",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "even(x) - round to next even number by rounding away from zero."
+		},
+		{
+			"title": "extract",
+			"text": "extract(field from timestamptz) - get subfield from a timestamp with time zone",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "extract(field from timestamptz) - Get subfield from a timestamp with time zone"
+		},
+		{
+			"title": "factorial",
+			"text": "factorial(x) - see ! operator. computes the product of the current integer and all integers below it",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "factorial(x) - See ! operator. Computes the product of the current integer and all integers below it"
+		},
+		{
+			"title": "floor",
+			"text": "floor(x) - rounds the number down",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "floor(x) - rounds the number down"
+		},
+		{
+			"title": "format",
+			"text": "format(format, parameters ...) - formats a string using fmt syntax",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "format(format, parameters ...) - Formats a string using fmt syntax"
+		},
+		{
+			"title": "from_base64",
+			"text": "from_base64(string) - convert a base64 encoded string to a character string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "from_base64(string) - Convert a base64 encoded string to a character string."
+		},
+		{
+			"title": "gamma",
+			"text": "gamma(x) - interpolation of (x-1) factorial (so decimal inputs are allowed)",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "gamma(x) - interpolation of (x-1) factorial (so decimal inputs are allowed)"
+		},
+		{
+			"title": "get_current_timestamp",
+			"text": "get_current_timestamp() - current date and time (start of current transaction)",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "get_current_timestamp() - Current date and time (start of current transaction)"
+		},
+		{
+			"title": "greatest",
+			"text": "greatest(timestamptz, timestamptz) - the later of two timestamps",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "greatest(timestamptz, timestamptz) - The later of two timestamps"
+		},
+		{
+			"title": "hamming",
+			"text": "hamming(string, string) - the number of positions with different characters for 2 strings of equal length. different case is considered different.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "hamming(string, string) - The number of positions with different characters for 2 strings of equal length. Different case..."
+		},
+		{
+			"title": "hour",
+			"text": "hour(date) - hours",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "hour(date) - Hours"
+		},
+		{
+			"title": "icu_sort_key",
+			"text": "icu_sort_key(string, collator) - surrogate key used to sort special characters according to the specific locale. collator parameter is optional. valid only when icu extension is installed.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "icu_sort_key(string, collator) - Surrogate key used to sort special characters according to the specific locale. Collator..."
+		},
+		{
+			"title": "instr",
+			"text": "instr(string, search_string) - return location of first occurrence of search_string in string , counting from 1. returns 0 if no match found.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "instr(string, search_string) - Return location of first occurrence of search_string in string , counting from 1. Returns..."
+		},
+		{
+			"title": "isfinite",
+			"text": "isfinite(timestamptz) - returns true if the timestamp with time zone is finite, false otherwise",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "isfinite(timestamptz) - Returns true if the timestamp with time zone is finite, false otherwise"
+		},
+		{
+			"title": "isinf",
+			"text": "isinf(timestamptz) - returns true if the timestamp with time zone is infinite, false otherwise",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "isinf(timestamptz) - Returns true if the timestamp with time zone is infinite, false otherwise"
+		},
+		{
+			"title": "isnan",
+			"text": "isnan(x) - returns true if the floating point value is not a number, false otherwise",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "isnan(x) - Returns true if the floating point value is not a number, false otherwise"
+		},
+		{
+			"title": "isodow",
+			"text": "isodow(date) - numeric iso weekday (monday = 1, sunday = 7)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "isodow(date) - Numeric ISO weekday (Monday = 1, Sunday = 7)"
+		},
+		{
+			"title": "isoyear",
+			"text": "isoyear(date) - iso year number (starts on monday of week containing jan 4th)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "isoyear(date) - ISO Year number (Starts on Monday of week containing Jan 4th)"
+		},
+		{
+			"title": "jaccard",
+			"text": "jaccard(string, string) - the jaccard similarity between two strings. different case is considered different. returns a number between 0 and 1.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "jaccard(string, string) - The Jaccard similarity between two strings. Different case is considered different. Returns a..."
+		},
+		{
+			"title": "jaro_similarity",
+			"text": "jaro_similarity(string, string) - the jaro similarity between two strings. different case is considered different. returns a number between 0 and 1.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "jaro_similarity(string, string) - The Jaro similarity between two strings. Different case is considered different...."
+		},
+		{
+			"title": "jaro_winkler_similarity",
+			"text": "jaro_winkler_similarity(string, string) - the jaro-winkler similarity between two strings. different case is considered different. returns a number between 0 and 1.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "jaro_winkler_similarity(string, string) - The Jaro-Winkler similarity between two strings. Different case is considered..."
+		},
+		{
+			"title": "last_day",
+			"text": "last_day(timestamptz) - the last day of the month.",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "last_day(timestamptz) - The last day of the month."
+		},
+		{
+			"title": "least",
+			"text": "least(timestamptz, timestamptz) - the earlier of two timestamps",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "least(timestamptz, timestamptz) - The earlier of two timestamps"
+		},
+		{
+			"title": "left",
+			"text": "left(string, count) - extract the left-most count characters",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "left(string, count) - Extract the left-most count characters"
+		},
+		{
+			"title": "left_grapheme",
+			"text": "left_grapheme(string, count) - extract the left-most grapheme clusters",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "left_grapheme(string, count) - Extract the left-most grapheme clusters"
+		},
+		{
+			"title": "len",
+			"text": "len(list) - return the length of the list.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "len(list) - Return the length of the list."
+		},
+		{
+			"title": "length",
+			"text": "length(string) - number of characters in string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "length(string) - Number of characters in string"
+		},
+		{
+			"title": "length_grapheme",
+			"text": "length_grapheme(string) - number of grapheme clusters in string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "length_grapheme(string) - Number of grapheme clusters in string"
+		},
+		{
+			"title": "levenshtein",
+			"text": "levenshtein(string, string) - the minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. different case is considered different.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "levenshtein(string, string) - The minimum number of single-character edits (insertions, deletions or substitutions)..."
+		},
+		{
+			"title": "lgamma",
+			"text": "lgamma(x) - computes the log of the gamma function.",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "lgamma(x) - computes the log of the gamma function."
+		},
+		{
+			"title": "like_escape",
+			"text": "like_escape(string, like_specifier, escape_character) - returns true if the string matches the like_specifier (see pattern matching ). escape_character is used to search for wildcard characters in the string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "like_escape(string, like_specifier, escape_character) - Returns true if the string matches the like_specifier (see..."
+		},
+		{
+			"title": "list_aggregate",
+			"text": "list_aggregate(list, name) - executes the aggregate function name on the elements of list. see the list aggregates section for more details.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_aggregate(list, name) - Executes the aggregate function name on the elements of list. See the List Aggregates..."
+		},
+		{
+			"title": "list_append",
+			"text": "list_append(list, element) - appends element to list.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_append(list, element) - Appends element to list."
+		},
+		{
+			"title": "list_concat",
+			"text": "list_concat(list1, list2) - concatenates two lists.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_concat(list1, list2) - Concatenates two lists."
+		},
+		{
+			"title": "list_contains",
+			"text": "list_contains(list, element) - returns true if the list contains the element.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_contains(list, element) - Returns true if the list contains the element."
+		},
+		{
+			"title": "list_extract",
+			"text": "list_extract(list, index) - extract the index th (1-based) value from the list.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_extract(list, index) - Extract the index th (1-based) value from the list."
+		},
+		{
+			"title": "list_filter",
+			"text": "list_filter(list, lambda) - constructs a list from those elements of the input list for which the lambda function returns true. see the lambda functions section for more details.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_filter(list, lambda) - Constructs a list from those elements of the input list for which the lambda function returns..."
+		},
+		{
+			"title": "list_position",
+			"text": "list_position(list, element) - returns the index of the element if the list contains the element.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_position(list, element) - Returns the index of the element if the list contains the element."
+		},
+		{
+			"title": "list_prepend",
+			"text": "list_prepend(element, list) - prepends element to list.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_prepend(element, list) - Prepends element to list."
+		},
+		{
+			"title": "list_reverse_sort",
+			"text": "list_reverse_sort(list) - sorts the elements of the list in reverse order. see the sorting lists section for more details about the null sorting order.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_reverse_sort(list) - Sorts the elements of the list in reverse order. See the Sorting Lists section for more details..."
+		},
+		{
+			"title": "list_slice",
+			"text": "list_slice(list, begin, end) - extract a sublist using slice conventions. null s are interpreted as the bounds of the list. negative values are accepted.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_slice(list, begin, end) - Extract a sublist using slice conventions. NULL s are interpreted as the bounds of the..."
+		},
+		{
+			"title": "list_sort",
+			"text": "list_sort(list) - sorts the elements of the list. see the sorting lists section for more details about the sorting order and the null sorting order.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_sort(list) - Sorts the elements of the list. See the Sorting Lists section for more details about the sorting order..."
+		},
+		{
+			"title": "list_transform",
+			"text": "list_transform(list, lambda) - returns a list that is the result of applying the lambda function to each element of the input list. see the lambda functions section for more details.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_transform(list, lambda) - Returns a list that is the result of applying the lambda function to each element of the..."
+		},
+		{
+			"title": "list_value",
+			"text": "list_value(any, ...) - create a list containing the argument values.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "list_value(any, ...) - Create a LIST containing the argument values."
+		},
+		{
+			"title": "ln",
+			"text": "ln(x) - computes the natural logarithm of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "ln(x) - computes the natural logarithm of x"
+		},
+		{
+			"title": "log",
+			"text": "log(x) - computes the 10-log of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "log(x) - computes the 10-log of x"
+		},
+		{
+			"title": "log2",
+			"text": "log2(x) - computes the 2-log of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "log2(x) - computes the 2-log of x"
+		},
+		{
+			"title": "lower",
+			"text": "lower(string) - convert string to lower case",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "lower(string) - Convert string to lower case"
+		},
+		{
+			"title": "lpad",
+			"text": "lpad(string, count, character) - pads the string with the character from the left until it has count characters",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "lpad(string, count, character) - Pads the string with the character from the left until it has count characters"
+		},
+		{
+			"title": "ltrim",
+			"text": "ltrim(string, characters) - removes any occurrences of any of the characters from the left side of the string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "ltrim(string, characters) - Removes any occurrences of any of the characters from the left side of the string"
+		},
+		{
+			"title": "make_date",
+			"text": "make_date(bigint, bigint, bigint) - the date for the given parts",
+			"category": "Date Functions",
+			"url": "/docs/sql/functions/date",
+			"blurb": "make_date(bigint, bigint, bigint) - The date for the given parts"
+		},
+		{
+			"title": "make_time",
+			"text": "make_time(bigint, bigint, double) - the time for the given parts",
+			"category": "Time Functions",
+			"url": "/docs/sql/functions/time",
+			"blurb": "make_time(bigint, bigint, double) - The time for the given parts"
+		},
+		{
+			"title": "make_timestamp",
+			"text": "make_timestamp(bigint, bigint, bigint, bigint, bigint, double) - the timestamp for the given parts",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "make_timestamp(bigint, bigint, bigint, bigint, bigint, double) - The timestamp for the given parts"
+		},
+		{
+			"title": "make_timestamptz",
+			"text": "make_timestamptz(bigint, bigint, bigint, bigint, bigint, double, string) - the timestamp with time zone for the given parts and time zone",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "make_timestamptz(bigint, bigint, bigint, bigint, bigint, double, string) - The timestamp with time zone for the given..."
+		},
+		{
+			"title": "map",
+			"text": "map() - returns an empty map.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "map() - Returns an empty map."
+		},
+		{
+			"title": "md5",
+			"text": "md5(string) - return an md5 one-way hash of the string.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "md5(string) - Return an md5 one-way hash of the string."
+		},
+		{
+			"title": "microsecond",
+			"text": "microsecond(date) - sub-minute microseconds",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "microsecond(date) - Sub-minute microseconds"
+		},
+		{
+			"title": "microseconds",
+			"text": "microseconds - sub-minute microseconds",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "microseconds - Sub-minute microseconds"
+		},
+		{
+			"title": "millennium",
+			"text": "millennium(date) - millennium",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "millennium(date) - Millennium"
+		},
+		{
+			"title": "millisecond",
+			"text": "millisecond(date) - sub-minute milliseconds",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "millisecond(date) - Sub-minute milliseconds"
+		},
+		{
+			"title": "milliseconds",
+			"text": "milliseconds - sub-minute milliseconds",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "milliseconds - Sub-minute milliseconds"
+		},
+		{
+			"title": "minute",
+			"text": "minute(date) - minutes",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "minute(date) - Minutes"
+		},
+		{
+			"title": "mismatches",
+			"text": "mismatches(string, string) - the number of positions with different characters for 2 strings of equal length. different case is considered different.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "mismatches(string, string) - The number of positions with different characters for 2 strings of equal length. Different..."
+		},
+		{
+			"title": "month",
+			"text": "month(date) - month",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "month(date) - Month"
+		},
+		{
+			"title": "monthname",
+			"text": "monthname(timestamp) - the (english) name of the month.",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "monthname(timestamp) - The (English) name of the month."
+		},
+		{
+			"title": "nextafter",
+			"text": "nextafter(x, y) - return the next floating point value after x in the direction of y",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "nextafter(x, y) - return the next floating point value after x in the direction of y"
+		},
+		{
+			"title": "nextval",
+			"text": "nextval(sequence_name) - return the following value of the sequence.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "nextval(sequence_name) - Return the following value of the sequence."
+		},
+		{
+			"title": "nfc_normalize",
+			"text": "nfc_normalize(string) - convert string to unicode nfc normalized string. useful for comparisons and ordering if text data is mixed between nfc normalized and not.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "nfc_normalize(string) - Convert string to Unicode NFC normalized string. Useful for comparisons and ordering if text data..."
+		},
+		{
+			"title": "not_like_escape",
+			"text": "not_like_escape(string, like_specifier, escape_character) - returns false if the string matches the like_specifier (see pattern matching ). escape_character is used to search for wildcard characters in the string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "not_like_escape(string, like_specifier, escape_character) - Returns false if the string matches the like_specifier (see..."
+		},
+		{
+			"title": "now",
+			"text": "now() - current date and time (start of current transaction)",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "now() - Current date and time (start of current transaction)"
+		},
+		{
+			"title": "octet_length",
+			"text": "octet_length(blob) - number of bytes in blob",
+			"category": "Blob Functions",
+			"url": "/docs/sql/functions/blob",
+			"blurb": "octet_length(blob) - Number of bytes in blob"
+		},
+		{
+			"title": "ord",
+			"text": "ord(string) - return ascii character code of the leftmost character in a string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "ord(string) - Return ASCII character code of the leftmost character in a string."
+		},
+		{
+			"title": "pg_typeof",
+			"text": "pg_typeof(expression) - returns the lower case name of the data type of the result of the expression. for postgres compatibility.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "pg_typeof(expression) - Returns the lower case name of the data type of the result of the expression. For Postgres..."
+		},
+		{
+			"title": "pi",
+			"text": "pi() - returns the value of pi",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "pi() - returns the value of pi"
+		},
+		{
+			"title": "position",
+			"text": "position(search_string in string) - return location of first occurrence of search_string in string , counting from 1. returns 0 if no match found.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "position(search_string in string) - Return location of first occurrence of search_string in string , counting from 1...."
+		},
+		{
+			"title": "pow",
+			"text": "pow(x, y) - computes x to the power of y",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "pow(x, y) - computes x to the power of y"
+		},
+		{
+			"title": "prefix",
+			"text": "prefix(string, search_string) - return true if string starts with search_string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "prefix(string, search_string) - Return true if string starts with search_string."
+		},
+		{
+			"title": "printf",
+			"text": "printf(format, parameters ...) - formats a string using printf syntax",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "printf(format, parameters ...) - Formats a string using printf syntax"
+		},
+		{
+			"title": "quarter",
+			"text": "quarter(date) - quarter",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "quarter(date) - Quarter"
+		},
+		{
+			"title": "radians",
+			"text": "radians(x) - converts degrees to radians",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "radians(x) - converts degrees to radians"
+		},
+		{
+			"title": "random",
+			"text": "random() - returns a random number between 0 and 1",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "random() - returns a random number between 0 and 1"
+		},
+		{
+			"title": "regexp_full_match",
+			"text": "regexp_full_match(string, regex) - returns true if the entire string matches the regex (see pattern matching )",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "regexp_full_match(string, regex) - Returns true if the entire string matches the regex (see Pattern Matching )"
+		},
+		{
+			"title": "regexp_matches",
+			"text": "regexp_matches(string, regex) - returns true if a part of string matches the regex (see pattern matching )",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "regexp_matches(string, regex) - Returns true if a part of string matches the regex (see Pattern Matching )"
+		},
+		{
+			"title": "regexp_replace",
+			"text": "regexp_replace(string, regex, replacement, modifiers) - replaces the first occurrence of regex with the replacement , use 'g' modifier to replace all occurrences instead (see pattern matching )",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "regexp_replace(string, regex, replacement, modifiers) - Replaces the first occurrence of regex with the replacement , use..."
+		},
+		{
+			"title": "repeat",
+			"text": "repeat(string, count) - repeats the string count number of times",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "repeat(string, count) - Repeats the string count number of times"
+		},
+		{
+			"title": "replace",
+			"text": "replace(string, source, target) - replaces any occurrences of the source with target in string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "replace(string, source, target) - Replaces any occurrences of the source with target in string"
+		},
+		{
+			"title": "reverse",
+			"text": "reverse(string) - reverses the string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "reverse(string) - Reverses the string"
+		},
+		{
+			"title": "right",
+			"text": "right(string, count) - extract the right-most count characters",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "right(string, count) - Extract the right-most count characters"
+		},
+		{
+			"title": "right_grapheme",
+			"text": "right_grapheme(string, count) - extract the right-most count grapheme clusters",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "right_grapheme(string, count) - Extract the right-most count grapheme clusters"
+		},
+		{
+			"title": "round",
+			"text": "round(v numeric, s int) - round to s decimal places",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "round(v numeric, s int) - round to s decimal places"
+		},
+		{
+			"title": "row",
+			"text": "row(any, ...) - create a struct containing the argument values. if the values are column references, the entry name will be the column name; otherwise it will be the string 'vn' where n is the (1-based) position of the argument.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "row(any, ...) - Create a STRUCT containing the argument values. If the values are column references, the entry name will..."
+		},
+		{
+			"title": "rpad",
+			"text": "rpad(string, count, character) - pads the string with the character from the right until it has count characters",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "rpad(string, count, character) - Pads the string with the character from the right until it has count characters"
+		},
+		{
+			"title": "rtrim",
+			"text": "rtrim(string, characters) - removes any occurrences of any of the characters from the right side of the string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "rtrim(string, characters) - Removes any occurrences of any of the characters from the right side of the string"
+		},
+		{
+			"title": "second",
+			"text": "second(date) - seconds",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "second(date) - Seconds"
+		},
+		{
+			"title": "setseed",
+			"text": "setseed(x) - sets the seed to be used for the random function",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "setseed(x) - sets the seed to be used for the random function"
+		},
+		{
+			"title": "sign",
+			"text": "sign(x) - returns the sign of x as -1, 0 or 1",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "sign(x) - returns the sign of x as -1, 0 or 1"
+		},
+		{
+			"title": "sin",
+			"text": "sin(x) - computes the sin of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "sin(x) - computes the sin of x"
+		},
+		{
+			"title": "sqrt",
+			"text": "sqrt(x) - returns the square root of the number",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "sqrt(x) - returns the square root of the number"
+		},
+		{
+			"title": "stats",
+			"text": "stats(expression) - returns a string with statistics about the expression. expression can be a column, constant, or sql expression.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "stats(expression) - Returns a string with statistics about the expression. Expression can be a column, constant, or SQL..."
+		},
+		{
+			"title": "strftime",
+			"text": "strftime(timestamptz, format) - converts timestamp with time zone to string according to the format string",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "strftime(timestamptz, format) - Converts timestamp with time zone to string according to the format string"
+		},
+		{
+			"title": "string LIKE target",
+			"text": "string like target - returns true if the string matches the like specifier (see pattern matching )",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "string LIKE target - Returns true if the string matches the like specifier (see Pattern Matching )"
+		},
+		{
+			"title": "string SIMILAR TO regex",
+			"text": "string similar to regex - returns true if the string matches the regex ; identical to regexp_full_match (see pattern matching )",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "string SIMILAR TO regex - Returns true if the string matches the regex ; identical to regexp_full_match (see Pattern..."
+		},
+		{
+			"title": "string_split",
+			"text": "string_split(string, separator) - splits the string along the separator",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "string_split(string, separator) - Splits the string along the separator"
+		},
+		{
+			"title": "string_split_regex",
+			"text": "string_split_regex(string, regex) - splits the string along the regex",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "string_split_regex(string, regex) - Splits the string along the regex"
+		},
+		{
+			"title": "strip_accents",
+			"text": "strip_accents(string) - strips accents from string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "strip_accents(string) - Strips accents from string"
+		},
+		{
+			"title": "strlen",
+			"text": "strlen(string) - number of bytes in string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "strlen(string) - Number of bytes in string"
+		},
+		{
+			"title": "strptime",
+			"text": "strptime(text, format) - converts string to timestamp with time zone according to the format string if %z is specified.",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "strptime(text, format) - Converts string to timestamp with time zone according to the format string if %Z is specified."
+		},
+		{
+			"title": "struct_extract",
+			"text": "struct_extract(struct, entry) - extract the named entry from the struct.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "struct_extract(struct, entry) - Extract the named entry from the struct."
+		},
+		{
+			"title": "struct_insert",
+			"text": "struct_insert(struct, name := any, ...) - add field(s)/value(s) to an existing struct with the argument values. the entry name(s) will be the bound variable name(s).",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "struct_insert(struct, name := any, ...) - Add field(s)/value(s) to an existing STRUCT with the argument values. The entry..."
+		},
+		{
+			"title": "struct_pack",
+			"text": "struct_pack(name := any, ...) - create a struct containing the argument values. the entry name will be the bound variable name.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "struct_pack(name := any, ...) - Create a STRUCT containing the argument values. The entry name will be the bound variable..."
+		},
+		{
+			"title": "substring",
+			"text": "substring(string, start, length) - extract substring of length characters starting from character start. note that a start value of 1 refers to the first character of the string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "substring(string, start, length) - Extract substring of length characters starting from character start. Note that a..."
+		},
+		{
+			"title": "substring_grapheme",
+			"text": "substring_grapheme(string, start, length) - extract substring of length grapheme clusters starting from character start. note that a start value of 1 refers to the first character of the string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "substring_grapheme(string, start, length) - Extract substring of length grapheme clusters starting from character start...."
+		},
+		{
+			"title": "suffix",
+			"text": "suffix(string, search_string) - return true if string ends with search_string.",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "suffix(string, search_string) - Return true if string ends with search_string."
+		},
+		{
+			"title": "tan",
+			"text": "tan(x) - computes the tangent of x",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "tan(x) - computes the tangent of x"
+		},
+		{
+			"title": "timezone",
+			"text": "timezone(date) - time zone offset in minutes",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "timezone(date) - Time Zone offset in minutes"
+		},
+		{
+			"title": "timezone_hour",
+			"text": "timezone_hour(date) - time zone offset hour portion",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "timezone_hour(date) - Time zone offset hour portion"
+		},
+		{
+			"title": "timezone_minute",
+			"text": "timezone_minute(date) - time zone offset minutes portion",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "timezone_minute(date) - Time zone offset minutes portion"
+		},
+		{
+			"title": "to_days",
+			"text": "to_days(integer) - construct a day interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_days(integer) - Construct a day interval"
+		},
+		{
+			"title": "to_hours",
+			"text": "to_hours(integer) - construct a hour interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_hours(integer) - Construct a hour interval"
+		},
+		{
+			"title": "to_microseconds",
+			"text": "to_microseconds(integer) - construct a microsecond interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_microseconds(integer) - Construct a microsecond interval"
+		},
+		{
+			"title": "to_milliseconds",
+			"text": "to_milliseconds(integer) - construct a millisecond interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_milliseconds(integer) - Construct a millisecond interval"
+		},
+		{
+			"title": "to_minutes",
+			"text": "to_minutes(integer) - construct a minute interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_minutes(integer) - Construct a minute interval"
+		},
+		{
+			"title": "to_months",
+			"text": "to_months(integer) - construct a month interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_months(integer) - Construct a month interval"
+		},
+		{
+			"title": "to_seconds",
+			"text": "to_seconds(integer) - construct a second interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_seconds(integer) - Construct a second interval"
+		},
+		{
+			"title": "to_timestamp",
+			"text": "to_timestamp(sec) - converts sec since epoch to a timestamp",
+			"category": "Timestamp Functions",
+			"url": "/docs/sql/functions/timestamp",
+			"blurb": "to_timestamp(sec) - Converts sec since epoch to a timestamp"
+		},
+		{
+			"title": "to_years",
+			"text": "to_years(integer) - construct a year interval",
+			"category": "Interval Functions",
+			"url": "/docs/sql/functions/interval",
+			"blurb": "to_years(integer) - Construct a year interval"
+		},
+		{
+			"title": "today",
+			"text": "today() - current date (start of current transaction)",
+			"category": "Date Functions",
+			"url": "/docs/sql/functions/date",
+			"blurb": "today() - Current date (start of current transaction)"
+		},
+		{
+			"title": "transaction_timestamp",
+			"text": "transaction_timestamp() - current date and time (start of current transaction)",
+			"category": "Timestamptz Functions",
+			"url": "/docs/sql/functions/timestamptz",
+			"blurb": "transaction_timestamp() - Current date and time (start of current transaction)"
+		},
+		{
+			"title": "trim",
+			"text": "trim(string, characters) - removes any occurrences of any of the characters from either side of the string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "trim(string, characters) - Removes any occurrences of any of the characters from either side of the string"
+		},
+		{
+			"title": "txid_current",
+			"text": "txid_current() - returns the current transaction's id (a bigint ). it will assign a new one if the current transaction does not have one already.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "txid_current() - Returns the current transaction's ID (a BIGINT ). It will assign a new one if the current transaction..."
+		},
+		{
+			"title": "typeof",
+			"text": "typeof(expression) - returns the name of the data type of the result of the expression.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "typeof(expression) - Returns the name of the data type of the result of the expression."
+		},
+		{
+			"title": "unicode",
+			"text": "unicode(string) - returns the unicode code of the first character of the string",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "unicode(string) - Returns the unicode code of the first character of the string"
+		},
+		{
+			"title": "union_extract",
+			"text": "union_extract(union, tag) - extract the value with the named tags from the union. null if the tag is not currently selected",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "union_extract(union, tag) - Extract the value with the named tags from the union. NULL if the tag is not currently..."
+		},
+		{
+			"title": "union_tag",
+			"text": "union_tag(union) - retrieve the currently selected tag of the union as an enum.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "union_tag(union) - Retrieve the currently selected tag of the union as an Enum."
+		},
+		{
+			"title": "union_value",
+			"text": "union_value(tag := any) - create a single member union containing the argument value. the tag of the value will be the bound variable name.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "union_value(tag := any) - Create a single member UNION containing the argument value. The tag of the value will be the..."
+		},
+		{
+			"title": "unnest",
+			"text": "unnest(list) - unnests a list by one level. note that this is a special function that alters the cardinality of the result. see the unnest page for more details.",
+			"category": "Nested Functions",
+			"url": "/docs/sql/functions/nested",
+			"blurb": "unnest(list) - Unnests a list by one level. Note that this is a special function that alters the cardinality of the..."
+		},
+		{
+			"title": "upper",
+			"text": "upper(string) - convert string to upper case",
+			"category": "Char Functions",
+			"url": "/docs/sql/functions/char",
+			"blurb": "upper(string) - Convert string to upper case"
+		},
+		{
+			"title": "uuid",
+			"text": "uuid() - return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "uuid() - Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687."
+		},
+		{
+			"title": "version",
+			"text": "version() - return the currently active version of duckdb in this format: v0.3.2",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "version() - Return the currently active version of DuckDB in this format: v0.3.2"
+		},
+		{
+			"title": "week",
+			"text": "week(date) - iso week",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "week(date) - ISO Week"
+		},
+		{
+			"title": "weekday",
+			"text": "weekday(date) - numeric weekday synonym (sunday = 0, saturday = 6)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "weekday(date) - Numeric weekday synonym (Sunday = 0, Saturday = 6)"
+		},
+		{
+			"title": "weekofyear",
+			"text": "weekofyear(date) - iso week (synonym)",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "weekofyear(date) - ISO Week (synonym)"
+		},
+		{
+			"title": "xor",
+			"text": "xor(x) - bitwise xor",
+			"category": "Numeric Functions",
+			"url": "/docs/sql/functions/numeric",
+			"blurb": "xor(x) - bitwise XOR"
+		},
+		{
+			"title": "year",
+			"text": "year(date) - year",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "year(date) - Year"
+		},
+		{
+			"title": "yearweek",
+			"text": "yearweek(date) - bigint of combined iso year number and 2-digit version of iso week number",
+			"category": "Datepart Functions",
+			"url": "/docs/sql/functions/datepart",
+			"blurb": "yearweek(date) - BIGINT of combined ISO Year number and 2-digit version of ISO Week number"
 		}
 	]
 }

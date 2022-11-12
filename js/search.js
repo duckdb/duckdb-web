@@ -29,7 +29,7 @@ function bold_blurb(blurb, query) {
 	if (blurb === undefined) {
 		return blurb
 	}
-	const querySplits = query.split(" ");
+	const querySplits = query.toLowerCase().split(" ");
 	for(splitIndex in querySplits) {
 		let startIndex = 0
 		let split = querySplits[splitIndex]
