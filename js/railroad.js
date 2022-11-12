@@ -1834,17 +1834,38 @@ function GenerateStarOptions(options) {
 	]
 }
 
+function GenerateStarExpression(options, index) {
+	return [
+		Optional(Sequence([Expression("table-name"), Keyword(".")]), "skip"),
+		Keyword("*"),
+		Expandable("star-options", options, "star-options" + index, GenerateStarOptions)
+	]
+}
+
+function GenerateStarClause(options) {
+	return [
+		Choice(0, [
+			Sequence(GenerateStarExpression(options, "-1")),
+			Sequence([
+				Keyword("COLUMNS"),
+				Keyword("("),
+				Choice(0, [
+					Sequence(GenerateStarExpression(options, "-2")),
+					Expression("regex")
+				]),
+				Keyword(")")
+			])
+		])
+	]
+}
+
 function GenerateSelectClause(options) {
 	return [
 		Keyword("SELECT"),
 		Expandable("distinct-clause", options, "distinct-clause", GenerateDistinctClause),
 		OneOrMore(Choice(0, [
 			Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),
-			Sequence([
-				Optional(Sequence([Expression("table-name"), Keyword(".")]), "skip"),
-				Keyword("*"),
-				Expandable("star-options", options, "star-options", GenerateStarOptions)
-			])
+			Sequence(GenerateStarClause(options))
 		]), ",")
 	]
 }

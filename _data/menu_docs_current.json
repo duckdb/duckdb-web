@@ -551,6 +551,10 @@
                 "url": "in"
               },
               {
+                "page": "Star",
+                "url": "star"
+              },
+              {
                 "page": "Collations",
                 "url": "collations"
               },
