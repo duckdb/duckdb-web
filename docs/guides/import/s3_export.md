@@ -39,7 +39,7 @@ After the `HTTPFS` extension is set up and the S3 credentials are correctly conf
 COPY <table_name> TO 's3://bucket/file.parquet';
 ```
 
-Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API. Create you [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and declare them:
+Similarly, Google Cloud Storage (GCS) is supported through the Interoperability API. You need to create [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and declare them:
 
 ```sql
 SET s3_endpoint='storage.googleapis.com';
