@@ -58,6 +58,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 * [How to use Ibis to query DuckDB with or without SQL](../guides/python/ibis)
 * [How to use DuckDB with Polars DataFrames via Apache Arrow](../guides/python/polars)
+* [How to use DuckDB with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
 
 ## SQL Editors / IDE's
 
