@@ -130,12 +130,56 @@ D .help sh
 .show                    Show the current values for various settings
 ```
 
+## Configuring the CLI
+
+The various options above can be used to configure the CLI. On start-up, the CLI reads and executes all commands in the file `~/.duckdbrc`. This allows you to store the configuration state of the CLI. For example, if you wish to change the `NULL` value display and the prompt, you may create the following `~/.duckdbrc` file. 
+
+```
+.prompt 'D '
+.null NULL
+```
+
+## Syntax Highlighting
+By default the shell includes support for syntax highlighting. Syntax highlighting can be disabled using the `.highlight off` command.
+
+The colors of the syntax highlighting can also be configured using the following commands.
+
+```
+D .constant
+Error: Expected usage: .constant [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
+D .keyword
+Error: Expected usage: .keyword [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
+D .keywordcode
+Error: Expected usage: .keywordcode [terminal_code]
+D .constantcode
+Error: Expected usage: .constantcode [terminal_code]
+```
+
+## Auto-Complete
+The shell offers context-aware auto-complete of SQL queries. Auto-complete is triggered by pressing the tab character. The shell auto-completes four different groups: (1) keywords, (2) table names + table functions, (3) column names + scalar functions, and (4) file names. The shell looks at the position in the SQL statement to determine which of these auto-completions to trigger. For example:
+
+```sql
+S -> SELECT
+
+SELECT s -> student_id
+
+SELECT student_id F -> FROM
+
+
+SELECT student_id FROM g -> grades
+
+SELECT student_id FROM 'd -> data/
+
+SELECT student_id FROM 'data/ -> data/grades.csv
+```
+
 ## Output Formats
 The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
 * ascii
 * box
 * csv
 * column
+* duckbox
 * html
 * insert
 * json
