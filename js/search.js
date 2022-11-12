@@ -30,9 +30,8 @@ function bold_blurb(blurb, query) {
 		return blurb
 	}
 	const querySplits = query.toLowerCase().split(" ");
-	for(splitIndex in querySplits) {
+	for(let split of querySplits) {
 		let startIndex = 0
-		let split = querySplits[splitIndex]
 		let splitLength = split.length
 		while(true) {
 			let index = blurb.toLowerCase().indexOf(split, startIndex)

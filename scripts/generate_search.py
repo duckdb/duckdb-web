@@ -138,20 +138,20 @@ def sanitize_desc(text):
 function_list = {}
 
 def extract_functions(text, full_path):
-	functions = re.findall('\n[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]', text)
-	for function in functions:
+	functions = re.findall(r'\n[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]', text)
+	for function_name, contents in functions:
 		name = sanitize_function(re.sub('\s+', ' ', extract_markdown_text(function[0].strip()).strip()))
 		desc = name + " - " + sanitize_desc(re.sub('\s+', ' ', extract_markdown_text(function[1].strip()).strip()))
 		if '--' in name:
 			continue
-		if name.lower() == 'function' or name.lower() == 'operator':
+		if name.lower() in ('function', 'operator'):
 			continue
 		if 'alias' in desc.lower():
 			continue
 		name = re.sub('[(][^)]*[)]', '', name)
 		function_list[name] = {
 			'title': name,
-			'text': re.sub('\s+', ' ', desc.strip().lower()),
+			'text': re.sub(r'\s+', ' ', desc.strip().lower()),
 			'category': os.path.basename(full_path).replace('.md', '').title() + " Functions",
 			'url': '/' + full_path.replace('.md', ''),
 			'blurb': sanitize_blurb(desc)
@@ -166,8 +166,7 @@ for file in files:
 		text = f.read()
 	extract_functions(text, full_path)
 
-for name in function_list.keys():
-	file_list.append(function_list[name])
+file_list.extend(function_list.values())
 
 file_list = sorted(file_list, key=lambda x: x['title'])
 result_text = """{
