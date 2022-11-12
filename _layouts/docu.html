@@ -27,11 +27,8 @@
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-config" content="{{ site.baseurl }}/images/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
-	<meta property="og:image" content="https://duckdb.org/images/sharingduckdb.jpg" />
-	{% if page.description %}
-	<meta name="description" content="{{page.description}}">
-	<meta property="og:description" content="{{page.description}}">
-	{% endif %}
+
+	{% seo title=false %}
 
 </head>
 <body class="documentation{% if page.body_class %} {{ page.body_class }} {% endif %}">
@@ -150,13 +147,31 @@
 				{% endif %}
 			</div>
 
+			<div class="searchoverlay">
+				<div>
+					<form autocomplete="off">
+						<div class="autocomplete">
+							<div class="empty_input"></div>
+							<input id="q" type="text" name="q" placeholder="Search docs">
+						</div>
+					</form>
+					<div id="search_results"></div>
+					<div class="shortcuts">
+						Search Shortcut <span>cmd</span> + <span>k</span> | <span>ctrl</span> + <span>k</span>
+					</div>
+				</div>
+			</div>
+
 		</div>
 
 	</main>
-
-
-
-
+	
+	
+	<script>
+	const documents = {{ site.data.search_data.data | jsonify }}.map((item, id) => ({id, ...item}));
+	</script>
+	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
+	<script src="{{ site.baseurl }}/js/search.js"></script>
 
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
 	<script src="{{ site.baseurl }}/js/script.js"></script>

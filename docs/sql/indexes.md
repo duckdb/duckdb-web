@@ -38,10 +38,10 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 ### Examples
 
 ```sql
--- Create an unique index 'films_id_idx' on the column id of table films.
+-- Create a unique index 'films_id_idx' on the column id of table films.
 CREATE UNIQUE INDEX films_id_idx ON films (id);
 -- Create index 's_idx' that allows for duplicate values on column revenue of table films.
-CREATE INDEX revenue_idx ON films (revenue);
+CREATE INDEX s_idx ON films (revenue);
 -- Create compound index 'gy_idx' on genre and year columns.
 CREATE INDEX gy_idx ON films (genre, year);
 -- Create index 'i_index' on the expression of the sum of columns j and k from table integers.

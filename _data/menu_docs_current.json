@@ -511,6 +511,10 @@
                 {
                   "page":"Map",
                   "url": "map"
+                },
+                {
+                  "page":"Union",
+                  "url": "union"
                 }
               ]
             },
@@ -559,6 +563,10 @@
               {
                 "page": "Overview",
                 "url": "overview"
+              },
+              {
+                "page": "Enum Functions",
+                "url": "enum"
               },
               {
                 "page": "Numeric Functions",

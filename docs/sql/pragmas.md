@@ -142,7 +142,7 @@ PRAGMA disable_optimizer;
 PRAGMA enable_optimizer;
 ```
 
-### log_query_path, explain_output, enable_verification, disable_verification, force_parallelism, disable_force_parallelism
+### log_query_path, explain_output, enable_verification, disable_verification, verify_parallelism, disable_verify_parallelism
 ```sql
 -- Set a path for query logging
 PRAGMA log_query_path='/tmp/duckdb_log/';
@@ -155,9 +155,9 @@ PRAGMA enable_verification;
 -- Disable query verification (for development)
 PRAGMA disable_verification;
 -- Enable force parallel query processing (for development)
-PRAGMA force_parallelism;
+PRAGMA verify_parallelism;
 -- Disable force parallel query processing (for development)
-PRAGMA disable_force_parallelism;
+PRAGMA disable_verify_parallelism;
 -- Force index joins where applicable
 PRAGMA force_index_join;
 ```

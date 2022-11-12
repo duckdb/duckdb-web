@@ -43,7 +43,7 @@ The data types `REAL` and `DOUBLE` precision are inexact, variable-precision num
 
 | Name | Aliases | Description |
 |:---|:---|:---|
-| `REAL` | `FLOAT4` | single precision floating-point number (4 bytes) |
+| `REAL` | `FLOAT4`, `FLOAT` | single precision floating-point number (4 bytes) |
 | `DOUBLE` | `FLOAT8` | double precision floating-point number (8 bytes) |
 
 Inexact means that some values cannot be converted exactly to the internal format and are stored as approximations, so that storing and retrieving a value might show slight discrepancies. Managing these errors and how they propagate through calculations is the subject of an entire branch of mathematics and computer science and will not be discussed here, except for the following points:

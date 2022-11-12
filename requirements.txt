@@ -1,6 +1,7 @@
 # used to generate python api docs
 duckdb --pre
 sphinx
+pandas
 pandas-stubs
 lxml
 

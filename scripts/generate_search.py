@@ -107,7 +107,7 @@ def index_file(fname):
 		'title': title,
 		'text': text,
 		'category': category,
-		'url': '../' + fname.replace('.md', ''),
+		'url': '/' + fname.replace('.md', ''),
 		'blurb': blurb
 	})
 
@@ -141,6 +141,7 @@ index_dir(base_dir)
 # 	]
 # }
 
+file_list = sorted(file_list, key=lambda x: x['title'])
 result_text = """{
 	"data": ["""
 for i in range(len(file_list)):

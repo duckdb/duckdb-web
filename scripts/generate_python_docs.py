@@ -7,6 +7,12 @@ from sphinx.builders.html import StandaloneHTMLBuilder
 from sphinx.writers.html5 import HTML5Translator
 from docutils.nodes import SkipChildren
 
+import pandas
+print(pandas)
+print(pandas.DataFrame)
+
+import duckdb
+
 
 FRONTMATTER = """\
 ---
@@ -49,6 +55,8 @@ def post_process(filename:Path):
 
 
 def main():
+    print('generating against duckdb version', duckdb.__version__)
+
     destdir = join(dirname(__file__), "../docs/api/python/reference/")
     app = Sphinx(
         srcdir=destdir + "templates",
@@ -68,8 +76,8 @@ def main():
             "html_show_sphinx": False,
             "html_use_index": False,
             "intersphinx_mapping": {
-                "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
-                "pyarrow": ("https://arrow.apache.org/docs/", None)
+                "pandas": ("https://pandas.pydata.org/pandas-docs/version/1.5.1/", None),
+                "pyarrow": ("https://arrow.apache.org/docs/9.0/", None)
             }
         },
         buildername="jekyll",
