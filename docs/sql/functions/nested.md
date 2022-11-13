@@ -61,8 +61,15 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_filter(`*`list`*`, `*`lambda`*`)`           | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions](nested#lambda-functions) section for more details.   | `list_filter(l, x -> x > 4)`           | `[5, 6]`     |
 | `array_filter(`*`list`*`, `*`lambda`*`)`          | Alias for `list_filter`.                                                                                                                                                            | `array_filter(l, x -> x > 4)`          | `[5, 6]`     |
 
+## List Comprehension
+Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
-
+```sql
+SELECT [lower(x) for x in strings] FROM (VALUES (['Hello', '', 'World'])) t(strings);
+-- ['hello', '', 'world']
+SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'World'])) t(strings);
+-- [HELLO, WORLD]
+```
 
 ## Struct Functions
 
