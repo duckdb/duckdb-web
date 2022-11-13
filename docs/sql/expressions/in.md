@@ -6,7 +6,6 @@ expanded: Expressions
 railroad: expressions/in.js
 ---
 
-## In Operator
 <div id="rrdiagram"></div>
 
 The `IN` operator checks containment of the left expression inside the set of expressions on the right hand side (RHS). The `IN` operator returns true if the expression is present in the RHS, false if the expression is not in the RHS and the RHS has no `NULL` values, or `NULL` if the expression is not in the RHS and the RHS has `NULL` values.
