@@ -124,22 +124,49 @@ def index_dir(dirname):
 
 index_dir(base_dir)
 
-# {
-# 	"data": [
-# 		{
-# 			"title": "Select Statement",
-# 			"text": "The SELECT statement retrieves rows from the database",
-# 			"category": "docs",
-# 			"url": "../docs/sql/statements/select"
-# 		},
-# 		{
-# 			"title": "Update Statement",
-# 			"text": "The UPDATE statement modifies the values of rows in a table.",
-# 			"category": "docs",
-# 			"url": "../docs/sql/statements/update.md"
-# 		}
-# 	]
-# }
+# extract functions
+def extract_markdown_text(text):
+	parse_node = marko.parse(text)
+	return extract_text(parse_node)
+
+def sanitize_function(text):
+	return text.replace(' , ', ', ').replace('( ', '(').replace(' )', ')').replace("'", '')
+
+def sanitize_desc(text):
+	return text.replace(' .', '.')
+
+function_list = {}
+
+def extract_functions(text, full_path):
+	functions = re.findall(r'\n[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]', text)
+	for function in functions:
+		name = sanitize_function(re.sub('\s+', ' ', extract_markdown_text(function[0].strip()).strip()))
+		desc = name + " - " + sanitize_desc(re.sub('\s+', ' ', extract_markdown_text(function[1].strip()).strip()))
+		if '--' in name:
+			continue
+		if name.lower() in ('function', 'operator'):
+			continue
+		if 'alias' in desc.lower():
+			continue
+		name = re.sub('[(][^)]*[)]', '', name)
+		function_list[name] = {
+			'title': name,
+			'text': re.sub(r'\s+', ' ', desc.strip().lower()),
+			'category': os.path.basename(full_path).replace('.md', '').title() + " Functions",
+			'url': '/' + full_path.replace('.md', ''),
+			'blurb': sanitize_blurb(desc)
+		}
+
+function_dir = os.path.sep.join('docs/sql/functions'.split('/'))
+files = os.listdir(function_dir)
+files.sort()
+for file in files:
+	full_path = os.path.join(function_dir, file)
+	with open(full_path, 'r') as f:
+		text = f.read()
+	extract_functions(text, full_path)
+
+file_list.extend(function_list.values())
 
 file_list = sorted(file_list, key=lambda x: x['title'])
 result_text = """{

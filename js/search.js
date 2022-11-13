@@ -25,6 +25,26 @@ if(document.location.toString().indexOf('?') !== -1) {
        $_GET[aux[0]] = aux[1];
     }
 }
+function bold_blurb(blurb, query) {
+	if (blurb === undefined) {
+		return blurb
+	}
+	const querySplits = query.toLowerCase().split(" ");
+	for(let split of querySplits) {
+		let startIndex = 0
+		let splitLength = split.length
+		while(true) {
+			let index = blurb.toLowerCase().indexOf(split, startIndex)
+			if (index < 0) {
+				break
+			}
+			blurb = blurb.substr(0, index) + "<b>" + blurb.substr(index, splitLength) + "</b>" + blurb.substr(index + splitLength)
+			startIndex = index + splitLength + 7
+		}
+	}
+	return blurb
+}
+
 function perform_search(query) {
 	// Search for documents:
 	let results = miniSearch.search(query, { boost: { title: 100, category: 20, blurb: 2 }, prefix: true, fuzzy: 0.2});
@@ -42,10 +62,10 @@ function perform_search(query) {
 		search_html += "<a href='" + results[i].url + "'>";
 		search_html += "</a> ";
 		search_html += "<h2 class='search_title'>";
-		search_html += results[i].title;
+		search_html += bold_blurb(results[i].title, query);
 		search_html += "</h2>";
 		search_html += "<div class='search_text'>";
-		search_html += results[i].blurb;
+		search_html += bold_blurb(results[i].blurb, query);
 		search_html += "</div>";
 		search_html += "<span class='search_category'>";
 		search_html += results[i].category;
