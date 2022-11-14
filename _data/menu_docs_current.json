@@ -46,6 +46,14 @@
             {
               "page": "S3 Parquet Export",
               "url": "s3_export"
+            },
+            {
+              "page": "SQLite Import",
+              "url": "query_sqlite"
+            },
+            {
+              "page": "Postgres Import",
+              "url": "query_postgres"
             }
           ]
         },
