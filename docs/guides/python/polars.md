@@ -5,7 +5,7 @@ selected: DuckDB with Polars
 ---
 
 [Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. 
-Polars can output results as Apache Arrow ([which is often a zero-copy operation](https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.to_arrow.html)), and DuckDB can read those results directly. 
+Polars can output results as Apache Arrow ([which is often a zero-copy operation](https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.to_arrow.html)), and DuckDB can read those results directly. 
 DuckDB can also rapidly [output results to Apache Arrow](/docs/guides/python/export_arrow), which can be easily converted to a Polars DataFrame. 
 Due to the interoperability of Apache Arrow, workflows can alternate between DuckDB and Polars with ease! 
 
