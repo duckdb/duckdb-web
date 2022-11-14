@@ -15,6 +15,11 @@ skip_types = [
 	marko.block.HTMLBlock
 ]
 
+
+def normal_whitespace(desc: str) -> str:
+	return re.sub(r'\s+', ' ', desc.strip())
+
+
 def extract_text(parse_node):
 	if not hasattr(parse_node, 'children'):
 		return ''
@@ -28,7 +33,7 @@ def extract_text(parse_node):
 	return result
 
 def sanitize_input(text):
-	return re.sub('\s+', ' ', re.sub('[^\w\s_-]', ' ', text.lower())).strip()
+	return normal_whitespace(re.sub(r'[^\w\s_-]', ' ', text.lower())).strip()
 
 def extract_blurb(parse_node):
 	for child in parse_node.children:
@@ -140,22 +145,23 @@ function_list = {}
 def extract_functions(text, full_path):
 	functions = re.findall(r'\n[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]([^|\n]+)[|]', text)
 	for function in functions:
-		name = sanitize_function(re.sub('\s+', ' ', extract_markdown_text(function[0].strip()).strip()))
-		desc = name + " - " + sanitize_desc(re.sub('\s+', ' ', extract_markdown_text(function[1].strip()).strip()))
+		name = sanitize_function(normal_whitespace(extract_markdown_text(function[0].strip()).strip()))
+		desc = name + " - " + sanitize_desc(normal_whitespace(extract_markdown_text(function[1].strip()).strip()))
 		if '--' in name:
 			continue
 		if name.lower() in ('function', 'operator'):
 			continue
 		if 'alias' in desc.lower():
 			continue
-		name = re.sub('[(][^)]*[)]', '', name)
+		name = re.sub(r'[(][^)]*[)]', '', name)
 		function_list[name] = {
 			'title': name,
-			'text': re.sub(r'\s+', ' ', desc.strip().lower()),
+			'text': normal_whitespace(desc.lower()),
 			'category': os.path.basename(full_path).replace('.md', '').title() + " Functions",
 			'url': '/' + full_path.replace('.md', ''),
 			'blurb': sanitize_blurb(desc)
 		}
+
 
 function_dir = os.path.sep.join('docs/sql/functions'.split('/'))
 files = os.listdir(function_dir)
