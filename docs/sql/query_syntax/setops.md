@@ -6,7 +6,7 @@ expanded: SQL
 railroad: query_syntax/setops.js
 ---
 
-Set operations allow queries to be combined according to [set operation semantics](https://en.wikipedia.org/wiki/Set_(mathematics)). Set operations refer to the `UNION [ALL]`, `INTERSECT` and `EXCEPT` clauses.
+Set operations allow queries to be combined according to [set operation semantics](https://en.wikipedia.org/wiki/Set_(mathematics)#Basic_operations). Set operations refer to the `UNION [ALL]`, `INTERSECT` and `EXCEPT` clauses.
 
 Traditional set operations unify queries **by column position**, and require the to-be-combined queries to have the same number of input columns. If the columns are not of the same type, casts may be added.  The result will use the column names from the first query.
 
