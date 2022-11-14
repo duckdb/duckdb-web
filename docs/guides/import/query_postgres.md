@@ -27,13 +27,13 @@ SELECT * FROM postgres_scan('', 'public', 'mytable');
 
 The first parameter to the `postgres_scan` function is the [postgres connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
 
-Alternatively, the entire file can be attached using the `sqlite_attach` command. This creates views over all of the tables in the file that allow you to query the tables using regular SQL syntax.
+Alternatively, the entire file can be attached using the `postgres_attach` command. This creates views over all of the tables in the Postgres database that allow you to query the tables using regular SQL syntax.
 
 ```sql
--- attach the SQLite file "test.db"
-CALL sqlite_attach('test.db');
+-- attach the Postgres database using the given connection string
+CALL postgres_attach('');
 -- the table "tbl_name" can now be queried as if it is a regular table
 SELECT * FROM tbl_name;
 ```
 
-For more information see the [SQLite scanner documentation](/docs/extensions/postgres_scanner).
+For more information see the [Postgres scanner documentation](/docs/extensions/postgres_scanner).
