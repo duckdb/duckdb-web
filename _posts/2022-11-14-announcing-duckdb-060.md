@@ -131,7 +131,7 @@ FROM tbl SELECT l_orderkey;
 INSERT INTO tbl2 FROM tbl1;
 ```
 
-**COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the Clickhouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` compression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
+**COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/duckdb/duckdb/pull/5120), inspired by [the Clickhouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
 
 ```sql
 CREATE TABLE obs(id INT, val1 INT, val2 INT);
