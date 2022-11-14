@@ -112,6 +112,8 @@ This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4
 CREATE TABLE messages(u UNION(num INT, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
+```
+```
 SELECT * FROM messages;
 ┌─────────────┐
 │      u      │
@@ -147,6 +149,8 @@ This release adds support for [the `COLUMNS` expression](https://github.com/duck
 CREATE TABLE obs(id INT, val1 INT, val2 INT);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
 SELECT MIN(COLUMNS(*)), COUNT(*) from obs;
+```
+```
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
 │ min(obs.id) │ min(obs.val1) │ min(obs.val2) │ count_star() │
 ├─────────────┼───────────────┼───────────────┼──────────────┤
@@ -158,6 +162,8 @@ The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE`
 
 ```sql
 SELECT COLUMNS('val[0-9]+') from obs;
+```
+```
 ┌──────┬──────┐
 │ val1 │ val2 │
 ├──────┼──────┤
@@ -172,6 +178,8 @@ List comprehension is an elegant and powerful way of defining operations on list
 
 ```sql
 SELECT [x + 1 for x in [1, 2, 3]] AS l;
+```
+```
 ┌───────────┐
 │     l     │
 ├───────────┤
@@ -273,7 +281,7 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
-```sql
+```
 D copy lineitem to 'lineitem-big.parquet';
  32% ▕███████████████████▏                                        ▏ 
 ```
