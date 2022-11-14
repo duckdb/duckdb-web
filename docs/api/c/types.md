@@ -89,6 +89,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">duckdb_interval</span> <span class="nf"><a href="#duckdb_value_interval">duckdb_value_interval</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_value_varchar">duckdb_value_varchar</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_value_varchar_internal">duckdb_value_varchar_internal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
+<span class="k">duckdb_string</span> <span class="nf"><a href="#duckdb_value_string_internal">duckdb_value_string_internal</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">duckdb_blob</span> <span class="nf"><a href="#duckdb_value_blob">duckdb_value_blob</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">bool</span> <span class="nf"><a href="#duckdb_value_is_null">duckdb_value_is_null</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 </code></pre></div></div>
@@ -500,10 +501,13 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 </code></pre></div></div>
 #### Parameters
 ---
+* `DEPRECATED`
+
+use duckdb_value_string instead. This function does not work correctly if the string contains null bytes.
 * `returns`
 
-The char* value at the specified location, or nullptr if the value cannot be converted.
-The result must be freed with `duckdb_free`.
+The text value at the specified location as a null-terminated string, or nullptr if the value cannot be
+converted. The result must be freed with `duckdb_free`.
 
 <br>
 
@@ -519,6 +523,35 @@ The result must be freed with `duckdb_free`.
 </code></pre></div></div>
 #### Parameters
 ---
+* `DEPRECATED`
+
+use duckdb_value_string_internal instead. This function does not work correctly if the string contains
+null bytes.
+* `returns`
+
+The char* value at the specified location. ONLY works on VARCHAR columns and does not auto-cast.
+If the column is NOT a VARCHAR column this function will return NULL.
+
+The result must NOT be freed.
+
+<br>
+
+### duckdb_value_string_internal
+---
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">duckdb_string</span> <span class="k">duckdb_value_string_internal</span>(<span class="k">
+</span>  <span class="kt">duckdb_result</span> *<span class="k">result</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">col</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">row
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `DEPRECATED`
+
+use duckdb_value_string_internal instead. This function does not work correctly if the string contains
+null bytes.
 * `returns`
 
 The char* value at the specified location. ONLY works on VARCHAR columns and does not auto-cast.
