@@ -22,44 +22,10 @@ jobs:
       - run: pip install -r requirements.txt -U
       - run: pip install duckdb --pre -U  # grab the latest duckdb python dev version
       - run: gh repo clone duckdb/duckdb
-      - uses: actions/github-script@v6
-        id: workflow-id
-        with:
-          script: |
-            const commits = (await github.repos.listCommits({owner: 'duckdb', repo: 'duckdb', sha: 'master'})).data;
-
-            let commit, good;
-            for (commit of commits) {
-              const statuses = (await github.repos.listCommitStatusesForRef({
-                  owner: 'duckdb',
-                  repo: 'duckdb',
-                  ref: commit.sha
-              })).data;
-
-              if (statuses.length === 0) continue;
-
-              good = statuses.every(status => status.state === 'success');
-              if (good) break;
-            }
-
-            if (good) {
-              console.log("found a successful build: " + commit.sha);
-            } else {
-              console.log("couldn't find a successful build");
-              return;
-            }
-
-            const workflows = await github.actions.listWorkflowRunsForRepo({
-              owner: 'duckdb',
-              repo: 'duckdb',
-              head_sha: commit.sha,
-            });
-
-            const workflow = workflows.data.workflow_runs.find(workflow => workflow.name === 'LinuxRelease');
-            return workflow.id;
       - name: download latest duckdb cli binary
         run: |
-          gh run download ${{ steps.workflow-id.outputs.result }} --repo duckdb/duckdb --name duckdb-binaries-linux
+          RUN_ID=$(gh run list --branch master --repo duckdb/duckdb --limit 1 --workflow LinuxRelease --json databaseId --jq '.[0].databaseId')
+          gh run download $RUN_ID --repo duckdb/duckdb --name duckdb-binaries-linux
           mkdir -p duckdb/build/debug
           unzip duckdb_cli-linux-amd64.zip -d duckdb/build/debug
 
