@@ -78,7 +78,7 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [DuckDB conda support](https://github.com/conda-forge/python-duckdb-feedstock)
 * [DBT adapter for DuckDB](https://github.com/jwills/dbt-duckdb)
 * [newLISP bindings for DuckDB](https://github.com/luxint/duckdb)
-* [duckdb_engine - "Very very very basic" sqlalchemy driver for DuckDB](https://github.com/Mause/duckdb_engine)
+* [duckdb_engine - SQLAlchemy driver for DuckDB](https://github.com/Mause/duckdb_engine)
 * [Toy DuckDB based timeseries database](https://github.com/berthubert/ducktime)
 * [PHP example to integrate DuckDB using PHP-FFI](https://github.com/thomasbley/php-duckdb-integration)
 * [DuckDB Foreign Data Wrapper for PostgreSQL](https://github.com/alitrack/duckdb_fdw)
