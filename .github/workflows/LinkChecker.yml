@@ -1,5 +1,7 @@
 name: LinkChecker
-on: [push]
+on:
+  push:
+    branches: [master]
 jobs:
   LinkChecker:
     name: Link Checker
