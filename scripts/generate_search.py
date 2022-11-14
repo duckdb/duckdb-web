@@ -33,7 +33,7 @@ def extract_text(parse_node):
 	return result
 
 def sanitize_input(text):
-	return normal_whitespace(re.sub('[^\w\s_-]', ' ', text.lower())).strip()
+	return normal_whitespace(re.sub(r'[^\w\s_-]', ' ', text.lower())).strip()
 
 def extract_blurb(parse_node):
 	for child in parse_node.children:
@@ -153,7 +153,7 @@ def extract_functions(text, full_path):
 			continue
 		if 'alias' in desc.lower():
 			continue
-		name = re.sub('[(][^)]*[)]', '', name)
+		name = re.sub(r'[(][^)]*[)]', '', name)
 		function_list[name] = {
 			'title': name,
 			'text': normal_whitespace(desc.lower()),
