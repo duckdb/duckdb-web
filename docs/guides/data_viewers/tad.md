@@ -12,7 +12,7 @@ source code is available on [github](https://github.com/antonycourtney/tad).
 Tad is a low friction way to explore tabular data files (CSV and Parquet) as well as 
 SQLite and DuckDb database files. A dirty little secret of the data world is that workflows often involve using commercial spreadsheet apps like Excel to take a quick peek at the contents of a tabular data file (like a CSV) before analysis work begins. Tad provides a pleasant (and free) alternative to this, and (thanks to DuckDb!) is much faster than Excel at opening CSV files. How much faster?  On a 2019 MacBook Pro, opening MetObjects.csv, a 230 MB CSV with 450k rows takes around 33 seconds to open with the latest version of Excel. This same file opens in under 5 seconds in Tad.  
 
-Unlike commcercial spreadsheet applications, Tad also natively supports Parquet files. Since DuckDb operates on Parquet files in place without an extra import step, the speed for opening Parquet files is pretty mind-blowing.  Here is Tad browsing a directory of multi-million-row Parquet files from the TPC-H-SF10 benchmark data set:
+Unlike commercial spreadsheet applications, Tad also natively supports Parquet files. Since DuckDb operates on Parquet files in place without an extra import step, the speed for opening Parquet files is pretty mind-blowing.  Here is Tad browsing a directory of multi-million-row Parquet files from the TPC-H-SF10 benchmark data set:
 
 ![Tad-parquet](/images/guides/tad-parquet-browsing.gif)
 
