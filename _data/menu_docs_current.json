@@ -465,6 +465,10 @@
                 {
                   "page": "FILTER",
                   "url": "filter"
+                },
+                {
+                  "page": "Set Operations",
+                  "url": "setops"
                 }
               ]
             },
