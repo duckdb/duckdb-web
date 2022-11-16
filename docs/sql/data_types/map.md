@@ -33,9 +33,9 @@ CREATE TABLE map_table (map_col MAP(INT,DOUBLE));
 -- Use bracket notation to retrieve a list containing the value at a key's location. This returns [42]
 -- Note that the expression in bracket notation must match the type of the map's key
 SELECT map([100, 5], [42, 43])[100];
--- To retrieve the underlying value, use list selection syntax to grab the 0th element.
+-- To retrieve the underlying value, use list selection syntax to grab the first element.
 -- This returns 42
-SELECT map([100, 5], [42, 43])[100][0];
+SELECT map([100, 5], [42, 43])[100][1];
 -- If the element is not in the map, an empty list will be returned. Returns []
 -- Note that the expression in bracket notation must match the type of the map's key else an error is returned
 SELECT map([100, 5], [42, 43])[123];
