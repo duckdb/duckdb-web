@@ -19,8 +19,8 @@ In the SQL API, users can generate substrait plans (into a blob or a JSON) and c
 Before using the extension, you must always properly install and load it. 
 To install and load the released version of the substrait library, you must execute the following SQL commands.
 ```sql
-INSTALL('substrait');
-LOAD('substrait')
+INSTALL substrait;
+LOAD substrait;
 ```
 
 ### Blob Generation
@@ -30,7 +30,7 @@ To generate a substrait blob the ```get_substrait(SQL)``` function must be calle
 CREATE TABLE crossfit (exercise text,dificulty_level int);
 INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);
      
-CALL get_substrait('select count(exercise) as exercise from crossfit where dificulty_level <=5')
+CALL get_substrait('select count(exercise) as exercise from crossfit where dificulty_level <=5');
 ----
 \x12\x09\x1A\x07\x10\x01\x1A\x03lte\x12\x11\x1A\x0F\x10\x02\x1A\x0Bis_not_null\x12\x09\x1A\x07\x10\x03\x1A\x03and\x12\x10\x1A\x0E\x10\x04\x1A\x0Acount_star\x1A\xCB\x01\x12\xC8\x01\x0A\xBB\x01:\xB8\x01\x12\xAB\x01"\xA8\x01\x12\x97\x01\x0A\x94\x01\x12.\x0A\x08exercise\x0A\x0Fdificulty_level\x12\x11\x0A\x07\xB2\x01\x04\x08\x0D\x18\x01\x0A\x04*\x02\x10\x01\x18\x02\x1AJ\x1AH\x08\x03\x1A\x04\x0A\x02\x10\x01""\x1A \x1A\x1E\x08\x01\x1A\x04*\x02\x10\x01"\x0C\x1A\x0A\x12\x08\x0A\x04\x12\x02\x08\x01"\x00"\x06\x1A\x04\x0A\x02(\x05"\x1A\x1A\x18\x1A\x16\x08\x02\x1A\x04*\x02\x10\x01"\x0C\x1A\x0A\x12\x08\x0A\x04\x12\x02\x08\x01"\x00"\x0A\x0A\x06\x0A\x02\x08\x01\x0A\x00\x10\x01:\x0A\x0A\x08crossfit\x1A\x00"\x0A\x0A\x08\x08\x04*\x04:\x02\x10\x01\x1A\x08\x12\x06\x0A\x02\x12\x00"\x00\x12\x08exercise
 ```
@@ -39,7 +39,7 @@ CALL get_substrait('select count(exercise) as exercise from crossfit where dific
 
 To generate a json representing  the substrait plan the ```get_substrait_json(SQL)``` function must be called with a valid SQL select query.
 ```sql
-CALL get_substrait_json('select count(exercise) as exercise from crossfit where dificulty_level <=5')
+CALL get_substrait_json('select count(exercise) as exercise from crossfit where dificulty_level <=5');
 ----
 {"extensions":[{"extensionFunction":{"functionAnchor":1,"name":"lte"}},{"extensionFunction":{"functionAnchor":2,"name":"is_not_null"}},{"extensionFunction":{"functionAnchor":3,"name":"and"}},{"extensionFunction":{"functionAnchor":4,"name":"count_star"}}],"relations":[{"root":{"input":{"project":{"input":{"aggregate":{"input":{"read":{"baseSchema":{"names":["exercise","dificulty_level"],"struct":{"types":[{"varchar":{"length":13,"nullability":"NULLABILITY_NULLABLE"}},{"i32":{"nullability":"NULLABILITY_NULLABLE"}}],"nullability":"NULLABILITY_REQUIRED"}},"filter":{"scalarFunction":{"functionReference":3,"outputType":{"bool":{"nullability":"NULLABILITY_NULLABLE"}},"arguments":[{"value":{"scalarFunction":{"functionReference":1,"outputType":{"i32":{"nullability":"NULLABILITY_NULLABLE"}},"arguments":[{"value":{"selection":{"directReference":{"structField":{"field":1}},"rootReference":{}}}},{"value":{"literal":{"i32":5}}}]}}},{"value":{"scalarFunction":{"functionReference":2,"outputType":{"i32":{"nullability":"NULLABILITY_NULLABLE"}},"arguments":[{"value":{"selection":{"directReference":{"structField":{"field":1}},"rootReference":{}}}}]}}}]}},"projection":{"select":{"structItems":[{"field":1},{}]},"maintainSingularStruct":true},"namedTable":{"names":["crossfit"]}}},"groupings":[{}],"measures":[{"measure":{"functionReference":4,"outputType":{"i64":{"nullability":"NULLABILITY_NULLABLE"}}}}]}},"expressions":[{"selection":{"directReference":{"structField":{}},"rootReference":{}}}]}},"names":["exercise"]}}]}
 ```
@@ -48,7 +48,7 @@ CALL get_substrait_json('select count(exercise) as exercise from crossfit where 
 
 To consume a substrait blob the ```from_substrait(blob)``` function must be called with a valid substrait BLOB plan.
 ```sql
-CALL from_substrait('\x12\x07\x1A\x05\x1A\x03lte\x12\x11\x1A\x0F\x10\x01\x1A\x0Bis_not_null\x12\x09\x1A\x07\x10\x02\x1A\x03and\x12\x10\x1A\x0E\x10\x03\x1A\x0Acount_star\x1A\xA4\x01\x12\xA1\x01\x0A\x94\x01:\x91\x01\x12\x86\x01"\x83\x01\x12y:w\x12c\x12a\x12+\x0A)\x12\x1B\x0A\x08exercise\x0A\x0Fdificulty_level:\x0A\x0A\x08crossfit\x1A2\x1A0\x08\x02"\x18\x1A\x16\x1A\x14"\x0A\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01"\x06\x1A\x04\x0A\x02(\x05"\x12\x1A\x10\x1A\x0E\x08\x01"\x0A\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01\x1A\x06\x12\x04\x0A\x02\x12\x00\x1A\x00"\x04\x0A\x02\x08\x03\x1A\x06\x12\x04\x0A\x02\x12\x00\x12\x08exercise'::BLOB)
+CALL from_substrait('\x12\x07\x1A\x05\x1A\x03lte\x12\x11\x1A\x0F\x10\x01\x1A\x0Bis_not_null\x12\x09\x1A\x07\x10\x02\x1A\x03and\x12\x10\x1A\x0E\x10\x03\x1A\x0Acount_star\x1A\xA4\x01\x12\xA1\x01\x0A\x94\x01:\x91\x01\x12\x86\x01"\x83\x01\x12y:w\x12c\x12a\x12+\x0A)\x12\x1B\x0A\x08exercise\x0A\x0Fdificulty_level:\x0A\x0A\x08crossfit\x1A2\x1A0\x08\x02"\x18\x1A\x16\x1A\x14"\x0A\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01"\x06\x1A\x04\x0A\x02(\x05"\x12\x1A\x10\x1A\x0E\x08\x01"\x0A\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01\x1A\x06\x12\x04\x0A\x02\x12\x00\x1A\x00"\x04\x0A\x02\x08\x03\x1A\x06\x12\x04\x0A\x02\x12\x00\x12\x08exercise'::BLOB);
 ----
 2
 ```
@@ -59,19 +59,20 @@ Before using the extension you must remember to properly load it. To load an ext
 import duckdb
 
 con = duckdb.connect()
-con.execute("INSTALL('substrait')");
-con.execute("LOAD('substrait')")
+con.install_extension("substrait")
+con.load_extension("substrait")
 ```
 
 ### Blob Generation
 
 To generate a substrait blob the ```get_substrait(SQL)``` function must be called, from a connection, with a valid SQL select query.
 ```python
-con.execute('CREATE TABLE crossfit (exercise text,dificulty_level int);')
-con.execute("INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);")
-     
-proto_bytes =  con.get_substrait("select count(exercise) as exercise from crossfit where dificulty_level <=5")     
+con.execute(query='CREATE TABLE crossfit (exercise text,dificulty_level int);')
+con.execute(query="INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);")
+
+proto_bytes = con.get_substrait(query="select count(exercise) as exercise from crossfit where dificulty_level <=5").fetchone()[0]    
 ```
+
 
 ### Json Generation
 
@@ -84,7 +85,7 @@ json =  con.get_substrait_json("select count(exercise) as exercise from crossfit
      
 To consume a substrait blob the ```from_substrait(blob)``` function must be called, from the connection, with a valid substrait BLOB plan.
 ```python
-query_result = con.from_substrait(proto_bytes)
+query_result = con.from_substrait(proto=proto_bytes)
 ```
 
 ## R
