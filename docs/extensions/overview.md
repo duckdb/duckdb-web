@@ -25,23 +25,29 @@ To load unsigned extensions using the CLI, you'll need to pass the `-unsigned` f
 
 You can check the list of core and installed extensions with the following query:
 ```sql
-select * From duckdb_extensions();
+select * from duckdb_extensions();
 ```
 
 ## All available extensions
 
-| Extension name   | Description                                                          |
-| ---------------- | -------------------------------------------------------------------- |
-| fts              | Adds support for Full-Text Search Indexes                            |
-| httpfs           | Adds support for reading and writing files over a HTTP(S) connection |
-| icu              | Adds support for time zones and collations using the ICU library     |
-| json             | Adds support for JSON operations                                     |
-| parquet          | Adds support for reading and writing parquet files                   |
-| postgres_scanner | Adds support for reading from a Postgres database                    |
-| sqlite_scanner   | Adds support for reading SQLite database files                       |
+|  Extension name   |                             Description                              |     Aliases     |
+|-------------------|----------------------------------------------------------------------|-----------------|
+| excel             |                                                                      |                 |
+| fts               | Adds support for Full-Text Search Indexes                            |                 |
+| httpfs            | Adds support for reading and writing files over a HTTP(S) connection | http, https, s3 |
+| icu               | Adds support for time zones and collations using the ICU library     |                 |
+| inet              | Adds support for IP-related data types and functions                 |                 |
+| jemalloc          | Overwrites system allocator with JEMalloc                            |                 |
+| json              | Adds support for JSON operations                                     |                 |
+| parquet           | Adds support for reading and writing parquet files                   |                 |
+| postgres_scanner  | Adds support for reading from a Postgres database                    | postgres        |
+| sql_auto_complete |                                                                      |                 |
+| sqlite_scanner    | Adds support for reading SQLite database files                       | sqlite, sqlite3 |
 | substrait        | Adds support for the Substrait integration                           |
-| tpcds            | Adds TPC-DS data generation and query support                        |
-| tpch             | Adds TPC-H data generation and query support                         |
+| tpcds             | Adds TPC-DS data generation and query support                        |                 |
+| tpch              | Adds TPC-H data generation and query support                         |                 |
+| visualizer        |                                                                      |                 |
+
 
 ## Pages in this Section
 
