@@ -6,7 +6,38 @@
       "mainfolderitems": [
         {
           "page": "Testing",
-          "url": "/dev/testing"
+          "url": "/dev/testing",
+          "slug": "sqllogictest",
+          "subfolderitems": [
+            {
+              "page": "SQLLogicTest",
+              "url": "/dev/sqllogictest/intro"
+            },
+            {
+              "page": "Debugging",
+              "url": "/dev/sqllogictest/debugging"
+            },
+            {
+              "page": "Result Verification",
+              "url": "/dev/sqllogictest/result_verification"
+            },
+            {
+              "page": "Persistent",
+              "url": "/dev/sqllogictest/persistent_testing"
+            },
+            {
+              "page": "Loops",
+              "url": "/dev/sqllogictest/loops"
+            },
+            {
+              "page": "Multiple Connections",
+              "url": "/dev/sqllogictest/multiple_connections"
+            },
+            {
+              "page": "Catch",
+              "url": "/dev/sqllogictest/catch"
+            }
+          ]
         },
         {
           "page": "Profiling",
