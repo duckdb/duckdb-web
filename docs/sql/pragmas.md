@@ -9,17 +9,20 @@ The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGM
 Below is a list of supported `PRAGMA` statements.
 
 
-### database_list, show_tables, table_info, show
+### database_list, show_tables, show_tables_expanded, table_info, show, functions
 ```sql
--- list all databases, usually one
+-- List all databases, usually one
 PRAGMA database_list;
--- list all tables
+-- List all tables
 PRAGMA show_tables;
--- get info for a specific table
+-- List all tables, with extra information, similar to DESCRIBE
+PRAGMA show_tables_expanded;
+-- Get info for a specific table
 PRAGMA table_info('table_name');
--- also show table structure, but slightly different format (for compatibility)
+-- Also show table structure, but slightly different format (for compatibility)
 PRAGMA show('table_name');
-
+-- List all functions
+PRAGMA functions;
 ```
 
 `table_info` returns information about the columns of the table with name *table_name*. The exact format of the table returned is given below:
@@ -83,17 +86,19 @@ PRAGMA default_order='DESCENDING';
 PRAGMA version;
 ```
 
-### enable_progress_bar, enable_profiling, disable_profiling, profiling_output
+### enable_progress_bar, disable_progress_bar, enable_profiling, disable_profiling, profiling_output
 ```sql
--- show progress bar when running queries
+-- Show progress bar when running queries
 PRAGMA enable_progress_bar;
--- enable profiling
+-- Don't show a progress bar for running queries
+PRAGMA disable_progress_bar;
+-- Enable profiling
 PRAGMA enable_profiling;
--- enable profiling in a specified format
+-- Enable profiling in a specified format
 PRAGMA enable_profiling=[json, query_tree, query_tree_optimizer]
--- disable profiling
+-- Disable profiling
 PRAGMA disable_profiling;
--- specify a file to save the profiling output to
+-- Specify a file to save the profiling output to
 PRAGMA profiling_output='/path/to/file.json';
 PRAGMA profile_output='/path/to/file.json';
 ```
@@ -167,6 +172,51 @@ These are `PRAGMA`s mostly used for development and internal testing.
 ### create_fts_index, drop_fts_index
 Only available when the FTS extension is built, [documented here](../extensions/full_text_search).
 
+### verify_external, disable_verify_external
+```sql
+-- Enable verification of external operators
+PRAGMA verify_external;
+-- Disable verification of external operators
+PRAGMA disable_verify_external;
+```
+
+### verify_serializer, disable_verify_serializer
+```sql
+-- Enable verification of round-trip capabilities for supported Logical Plans
+PRAGMA verify_serializer;
+-- Disable verification of round-trip capabilities
+PRAGMA disable_verify_serializer;
+```
+
+### enable_object_cache, disable_object_cache
+```sql
+-- Enable caching of objects for e.g. Parquet metadata
+PRAGMA enable_object_cache;
+-- Disable caching of objects
+PRAGMA disable_object_cache;
+```
+
+### force_checkpoint
+```sql
+-- When CHECKPOINT is called when no changes are made, force a CHECKPOINT regardless.
+PRAGMA force_checkpoint;
+```
+
+### enable_print_progress_bar, disable_print_progress_bar
+```sql
+-- Enable printing of the progress bar, if it's enabled
+PRAGMA enable_print_progress_bar;
+-- Disable printing of the progress bar
+PRAGMA disable_print_progress_bar;
+```
+
+### enable_checkpoint_on_shutdown, disable_checkpoint_on_shutdown
+```sql
+-- Run a CHECKPOINT on successful shutdown and delete the WAL, to leave only a single database file behind
+PRAGMA enable_checkpoint_on_shutdown;
+-- Don't run a CHECKPOINT on shutdown
+PRAGMA disable_checkpoint_on_shutdown;
+```
 
 ### temp directory for spilling data to disk -- defaults to .tmp
 ```sql
