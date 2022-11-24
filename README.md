@@ -23,4 +23,4 @@ Finally, navigate to the directory where you have cloned duckdb-web and run `bun
 
 ## Generating code docs
 
-Much of the documentation in this repository is automatically generated from the duckdb source code, or compiled binaries. The scripts that do this work are called from [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh)
+Much of the documentation in this repository is automatically generated from the duckdb source code, or compiled binaries. The scripts that do this work are called from [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh).
