@@ -53,7 +53,7 @@ Below we will discuss why that is.
 To achieve good performance when sorting tables, a custom sorting implementation is needed. We are - of course - not the first to implement relational sorting, so we dove into the literature to look for guidance.
 
 
-In 2006 the famous Goetz Graefe wrote a survey on [implementing sorting in database systems](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=F975C21F899ED842450004647077C121?doi=10.1.1.83.1080&rep=rep1&type=pdf).
+In 2006 the famous Goetz Graefe wrote a survey on [implementing sorting in database systems](http://wwwlgis.informatik.uni-kl.de/archiv/wwwdvs.informatik.uni-kl.de/courses/DBSREAL/SS2005/Vorlesungsunterlagen/Implementing_Sorting.pdf).
 In this survey, he collected many sorting techniques that are known to the community. This is a great guideline if you are about to start implementing sorting for tables.
 
 The cost of sorting is dominated by comparing values and moving data around.

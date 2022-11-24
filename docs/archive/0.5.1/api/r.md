@@ -7,7 +7,7 @@ selected: Client APIs
 The DuckDB R API can be installed using `install.packages`. Please see the [installation page](../installation?environment=r) for details.
 
 ## Basic API Usage
-The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://db.rstudio.com/dbi/).
+The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://solutions.rstudio.com/db/r-packages/dbi/).
 
 ### Startup & Shutdown
 
