@@ -69,12 +69,10 @@ We can see that the `logical_plan` contains the unoptimized query plan, involvin
 ### Run-Time Profiling
 The query plan helps understand the performance characteristics of the system. However, often it is also necessary to look at the performance numbers of individual operators and the cardinalities that pass through them. For this, you can create a query-profile graph.
 
-To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done as follows (using the default output format of the profiler, `query_tree`):
+To create the query graphs it is first necessary to gather the necessary data by running the query. In order to do that, we must first enable the run-time profiling. This can be done by prefixing the query with `EXPLAIN ANALYZE`:
 
 ```sql
-PRAGMA enable_profiling;
-
-SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
+EXPLAIN ANALYZE SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 ```
 ```
 ┌─────────────────────────────────────┐
