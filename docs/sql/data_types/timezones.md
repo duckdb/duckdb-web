@@ -11,32 +11,32 @@ blurb: A reference list for Time Zones.
 An up-to-date version of this list can be pulled from the pg_timezone_names() table function:
 
 ```sql
-SELECT 
+SELECT
     name,
     abbrev,
-    utc_offset 
-FROM pg_timezone_names() 
-ORDER BY 
+    utc_offset
+FROM pg_timezone_names()
+ORDER BY
     name;
 ```
 
 
 |               name               |              abbrev              | utc_offset |
-|----------------------------------|----------------------------------|------------|
+|----------------------------------|----------------------------------|-----------:|
 | ACT                              | ACT                              | 09:30:00   |
 | AET                              | AET                              | 10:00:00   |
 | AGT                              | AGT                              | -03:00:00  |
 | ART                              | ART                              | 02:00:00   |
 | AST                              | AST                              | -09:00:00  |
-| Africa/Abidjan                   | Africa/Abidjan                   | 00:00:00   |
-| Africa/Accra                     | Africa/Accra                     | 00:00:00   |
+| Africa/Abidjan                   | Iceland                          | 00:00:00   |
+| Africa/Accra                     | Iceland                          | 00:00:00   |
 | Africa/Addis_Ababa               | EAT                              | 03:00:00   |
 | Africa/Algiers                   | Africa/Algiers                   | 01:00:00   |
 | Africa/Asmara                    | EAT                              | 03:00:00   |
 | Africa/Asmera                    | EAT                              | 03:00:00   |
-| Africa/Bamako                    | Africa/Bamako                    | 00:00:00   |
+| Africa/Bamako                    | Iceland                          | 00:00:00   |
 | Africa/Bangui                    | Africa/Bangui                    | 01:00:00   |
-| Africa/Banjul                    | Africa/Banjul                    | 00:00:00   |
+| Africa/Banjul                    | Iceland                          | 00:00:00   |
 | Africa/Bissau                    | Africa/Bissau                    | 00:00:00   |
 | Africa/Blantyre                  | CAT                              | 02:00:00   |
 | Africa/Brazzaville               | Africa/Brazzaville               | 01:00:00   |
@@ -44,24 +44,24 @@ ORDER BY
 | Africa/Cairo                     | ART                              | 02:00:00   |
 | Africa/Casablanca                | Africa/Casablanca                | 00:00:00   |
 | Africa/Ceuta                     | Africa/Ceuta                     | 01:00:00   |
-| Africa/Conakry                   | Africa/Conakry                   | 00:00:00   |
-| Africa/Dakar                     | Africa/Dakar                     | 00:00:00   |
+| Africa/Conakry                   | Iceland                          | 00:00:00   |
+| Africa/Dakar                     | Iceland                          | 00:00:00   |
 | Africa/Dar_es_Salaam             | EAT                              | 03:00:00   |
 | Africa/Djibouti                  | EAT                              | 03:00:00   |
 | Africa/Douala                    | Africa/Douala                    | 01:00:00   |
 | Africa/El_Aaiun                  | Africa/El_Aaiun                  | 00:00:00   |
-| Africa/Freetown                  | Africa/Freetown                  | 00:00:00   |
+| Africa/Freetown                  | Iceland                          | 00:00:00   |
 | Africa/Gaborone                  | CAT                              | 02:00:00   |
 | Africa/Harare                    | CAT                              | 02:00:00   |
 | Africa/Johannesburg              | Africa/Johannesburg              | 02:00:00   |
-| Africa/Juba                      | Africa/Juba                      | 03:00:00   |
+| Africa/Juba                      | Africa/Juba                      | 02:00:00   |
 | Africa/Kampala                   | EAT                              | 03:00:00   |
 | Africa/Khartoum                  | Africa/Khartoum                  | 02:00:00   |
 | Africa/Kigali                    | CAT                              | 02:00:00   |
 | Africa/Kinshasa                  | Africa/Kinshasa                  | 01:00:00   |
 | Africa/Lagos                     | Africa/Lagos                     | 01:00:00   |
 | Africa/Libreville                | Africa/Libreville                | 01:00:00   |
-| Africa/Lome                      | Africa/Lome                      | 00:00:00   |
+| Africa/Lome                      | Iceland                          | 00:00:00   |
 | Africa/Luanda                    | Africa/Luanda                    | 01:00:00   |
 | Africa/Lubumbashi                | CAT                              | 02:00:00   |
 | Africa/Lusaka                    | CAT                              | 02:00:00   |
@@ -74,18 +74,18 @@ ORDER BY
 | Africa/Nairobi                   | EAT                              | 03:00:00   |
 | Africa/Ndjamena                  | Africa/Ndjamena                  | 01:00:00   |
 | Africa/Niamey                    | Africa/Niamey                    | 01:00:00   |
-| Africa/Nouakchott                | Africa/Nouakchott                | 00:00:00   |
-| Africa/Ouagadougou               | Africa/Ouagadougou               | 00:00:00   |
+| Africa/Nouakchott                | Iceland                          | 00:00:00   |
+| Africa/Ouagadougou               | Iceland                          | 00:00:00   |
 | Africa/Porto-Novo                | Africa/Porto-Novo                | 01:00:00   |
 | Africa/Sao_Tome                  | Africa/Sao_Tome                  | 00:00:00   |
-| Africa/Timbuktu                  | Africa/Timbuktu                  | 00:00:00   |
+| Africa/Timbuktu                  | Iceland                          | 00:00:00   |
 | Africa/Tripoli                   | Libya                            | 02:00:00   |
 | Africa/Tunis                     | Africa/Tunis                     | 01:00:00   |
 | Africa/Windhoek                  | Africa/Windhoek                  | 02:00:00   |
 | America/Adak                     | America/Adak                     | -10:00:00  |
 | America/Anchorage                | AST                              | -09:00:00  |
-| America/Anguilla                 | America/Anguilla                 | -04:00:00  |
-| America/Antigua                  | America/Antigua                  | -04:00:00  |
+| America/Anguilla                 | PRT                              | -04:00:00  |
+| America/Antigua                  | PRT                              | -04:00:00  |
 | America/Araguaina                | America/Araguaina                | -03:00:00  |
 | America/Argentina/Buenos_Aires   | AGT                              | -03:00:00  |
 | America/Argentina/Catamarca      | America/Argentina/Catamarca      | -03:00:00  |
@@ -100,7 +100,7 @@ ORDER BY
 | America/Argentina/San_Luis       | America/Argentina/San_Luis       | -03:00:00  |
 | America/Argentina/Tucuman        | America/Argentina/Tucuman        | -03:00:00  |
 | America/Argentina/Ushuaia        | America/Argentina/Ushuaia        | -03:00:00  |
-| America/Aruba                    | America/Aruba                    | -04:00:00  |
+| America/Aruba                    | PRT                              | -04:00:00  |
 | America/Asuncion                 | America/Asuncion                 | -04:00:00  |
 | America/Atikokan                 | America/Atikokan                 | -05:00:00  |
 | America/Atka                     | America/Atka                     | -10:00:00  |
@@ -109,7 +109,7 @@ ORDER BY
 | America/Barbados                 | America/Barbados                 | -04:00:00  |
 | America/Belem                    | America/Belem                    | -03:00:00  |
 | America/Belize                   | America/Belize                   | -06:00:00  |
-| America/Blanc-Sablon             | America/Blanc-Sablon             | -04:00:00  |
+| America/Blanc-Sablon             | PRT                              | -04:00:00  |
 | America/Boa_Vista                | America/Boa_Vista                | -04:00:00  |
 | America/Bogota                   | America/Bogota                   | -05:00:00  |
 | America/Boise                    | America/Boise                    | -07:00:00  |
@@ -122,19 +122,19 @@ ORDER BY
 | America/Cayenne                  | America/Cayenne                  | -03:00:00  |
 | America/Cayman                   | America/Cayman                   | -05:00:00  |
 | America/Chicago                  | CST                              | -06:00:00  |
-| America/Chihuahua                | America/Chihuahua                | -07:00:00  |
+| America/Chihuahua                | America/Chihuahua                | -06:00:00  |
 | America/Coral_Harbour            | America/Coral_Harbour            | -05:00:00  |
 | America/Cordoba                  | America/Cordoba                  | -03:00:00  |
 | America/Costa_Rica               | America/Costa_Rica               | -06:00:00  |
-| America/Creston                  | America/Creston                  | -07:00:00  |
+| America/Creston                  | PNT                              | -07:00:00  |
 | America/Cuiaba                   | America/Cuiaba                   | -04:00:00  |
-| America/Curacao                  | America/Curacao                  | -04:00:00  |
+| America/Curacao                  | PRT                              | -04:00:00  |
 | America/Danmarkshavn             | America/Danmarkshavn             | 00:00:00   |
-| America/Dawson                   | America/Dawson                   | -08:00:00  |
+| America/Dawson                   | America/Dawson                   | -07:00:00  |
 | America/Dawson_Creek             | America/Dawson_Creek             | -07:00:00  |
 | America/Denver                   | Navajo                           | -07:00:00  |
 | America/Detroit                  | America/Detroit                  | -05:00:00  |
-| America/Dominica                 | America/Dominica                 | -04:00:00  |
+| America/Dominica                 | PRT                              | -04:00:00  |
 | America/Edmonton                 | America/Edmonton                 | -07:00:00  |
 | America/Eirunepe                 | America/Eirunepe                 | -05:00:00  |
 | America/El_Salvador              | America/El_Salvador              | -06:00:00  |
@@ -146,8 +146,8 @@ ORDER BY
 | America/Godthab                  | America/Godthab                  | -03:00:00  |
 | America/Goose_Bay                | America/Goose_Bay                | -04:00:00  |
 | America/Grand_Turk               | America/Grand_Turk               | -05:00:00  |
-| America/Grenada                  | America/Grenada                  | -04:00:00  |
-| America/Guadeloupe               | America/Guadeloupe               | -04:00:00  |
+| America/Grenada                  | PRT                              | -04:00:00  |
+| America/Guadeloupe               | PRT                              | -04:00:00  |
 | America/Guatemala                | America/Guatemala                | -06:00:00  |
 | America/Guayaquil                | America/Guayaquil                | -05:00:00  |
 | America/Guyana                   | America/Guyana                   | -04:00:00  |
@@ -171,16 +171,16 @@ ORDER BY
 | America/Kentucky/Louisville      | America/Kentucky/Louisville      | -05:00:00  |
 | America/Kentucky/Monticello      | America/Kentucky/Monticello      | -05:00:00  |
 | America/Knox_IN                  | America/Knox_IN                  | -06:00:00  |
-| America/Kralendijk               | America/Kralendijk               | -04:00:00  |
+| America/Kralendijk               | PRT                              | -04:00:00  |
 | America/La_Paz                   | America/La_Paz                   | -04:00:00  |
 | America/Lima                     | America/Lima                     | -05:00:00  |
 | America/Los_Angeles              | PST                              | -08:00:00  |
 | America/Louisville               | America/Louisville               | -05:00:00  |
-| America/Lower_Princes            | America/Lower_Princes            | -04:00:00  |
+| America/Lower_Princes            | PRT                              | -04:00:00  |
 | America/Maceio                   | America/Maceio                   | -03:00:00  |
 | America/Managua                  | America/Managua                  | -06:00:00  |
 | America/Manaus                   | America/Manaus                   | -04:00:00  |
-| America/Marigot                  | America/Marigot                  | -04:00:00  |
+| America/Marigot                  | PRT                              | -04:00:00  |
 | America/Martinique               | America/Martinique               | -04:00:00  |
 | America/Matamoros                | America/Matamoros                | -06:00:00  |
 | America/Mazatlan                 | America/Mazatlan                 | -07:00:00  |
@@ -194,7 +194,7 @@ ORDER BY
 | America/Monterrey                | America/Monterrey                | -06:00:00  |
 | America/Montevideo               | America/Montevideo               | -03:00:00  |
 | America/Montreal                 | America/Montreal                 | -05:00:00  |
-| America/Montserrat               | America/Montserrat               | -04:00:00  |
+| America/Montserrat               | PRT                              | -04:00:00  |
 | America/Nassau                   | America/Nassau                   | -05:00:00  |
 | America/New_York                 | America/New_York                 | -05:00:00  |
 | America/Nipigon                  | America/Nipigon                  | -05:00:00  |
@@ -203,13 +203,14 @@ ORDER BY
 | America/North_Dakota/Beulah      | America/North_Dakota/Beulah      | -06:00:00  |
 | America/North_Dakota/Center      | America/North_Dakota/Center      | -06:00:00  |
 | America/North_Dakota/New_Salem   | America/North_Dakota/New_Salem   | -06:00:00  |
-| America/Ojinaga                  | America/Ojinaga                  | -07:00:00  |
+| America/Nuuk                     | America/Nuuk                     | -03:00:00  |
+| America/Ojinaga                  | America/Ojinaga                  | -06:00:00  |
 | America/Panama                   | America/Panama                   | -05:00:00  |
 | America/Pangnirtung              | America/Pangnirtung              | -05:00:00  |
 | America/Paramaribo               | America/Paramaribo               | -03:00:00  |
 | America/Phoenix                  | PNT                              | -07:00:00  |
 | America/Port-au-Prince           | America/Port-au-Prince           | -05:00:00  |
-| America/Port_of_Spain            | America/Port_of_Spain            | -04:00:00  |
+| America/Port_of_Spain            | PRT                              | -04:00:00  |
 | America/Porto_Acre               | America/Porto_Acre               | -05:00:00  |
 | America/Porto_Velho              | America/Porto_Velho              | -04:00:00  |
 | America/Puerto_Rico              | PRT                              | -04:00:00  |
@@ -229,41 +230,41 @@ ORDER BY
 | America/Scoresbysund             | America/Scoresbysund             | -01:00:00  |
 | America/Shiprock                 | Navajo                           | -07:00:00  |
 | America/Sitka                    | America/Sitka                    | -09:00:00  |
-| America/St_Barthelemy            | America/St_Barthelemy            | -04:00:00  |
+| America/St_Barthelemy            | PRT                              | -04:00:00  |
 | America/St_Johns                 | CNT                              | -03:30:00  |
-| America/St_Kitts                 | America/St_Kitts                 | -04:00:00  |
-| America/St_Lucia                 | America/St_Lucia                 | -04:00:00  |
-| America/St_Thomas                | America/St_Thomas                | -04:00:00  |
-| America/St_Vincent               | America/St_Vincent               | -04:00:00  |
+| America/St_Kitts                 | PRT                              | -04:00:00  |
+| America/St_Lucia                 | PRT                              | -04:00:00  |
+| America/St_Thomas                | PRT                              | -04:00:00  |
+| America/St_Vincent               | PRT                              | -04:00:00  |
 | America/Swift_Current            | America/Swift_Current            | -06:00:00  |
 | America/Tegucigalpa              | America/Tegucigalpa              | -06:00:00  |
 | America/Thule                    | America/Thule                    | -04:00:00  |
 | America/Thunder_Bay              | America/Thunder_Bay              | -05:00:00  |
 | America/Tijuana                  | America/Tijuana                  | -08:00:00  |
 | America/Toronto                  | America/Toronto                  | -05:00:00  |
-| America/Tortola                  | America/Tortola                  | -04:00:00  |
+| America/Tortola                  | PRT                              | -04:00:00  |
 | America/Vancouver                | America/Vancouver                | -08:00:00  |
-| America/Virgin                   | America/Virgin                   | -04:00:00  |
-| America/Whitehorse               | America/Whitehorse               | -08:00:00  |
+| America/Virgin                   | PRT                              | -04:00:00  |
+| America/Whitehorse               | America/Whitehorse               | -07:00:00  |
 | America/Winnipeg                 | America/Winnipeg                 | -06:00:00  |
 | America/Yakutat                  | America/Yakutat                  | -09:00:00  |
 | America/Yellowknife              | America/Yellowknife              | -07:00:00  |
-| Antarctica/Casey                 | Antarctica/Casey                 | 08:00:00   |
+| Antarctica/Casey                 | Antarctica/Casey                 | 11:00:00   |
 | Antarctica/Davis                 | Antarctica/Davis                 | 07:00:00   |
 | Antarctica/DumontDUrville        | Antarctica/DumontDUrville        | 10:00:00   |
-| Antarctica/Macquarie             | Antarctica/Macquarie             | 11:00:00   |
+| Antarctica/Macquarie             | Antarctica/Macquarie             | 10:00:00   |
 | Antarctica/Mawson                | Antarctica/Mawson                | 05:00:00   |
-| Antarctica/McMurdo               | NST                              | 12:00:00   |
+| Antarctica/McMurdo               | NZ                               | 12:00:00   |
 | Antarctica/Palmer                | Antarctica/Palmer                | -03:00:00  |
 | Antarctica/Rothera               | Antarctica/Rothera               | -03:00:00  |
-| Antarctica/South_Pole            | NST                              | 12:00:00   |
+| Antarctica/South_Pole            | NZ                               | 12:00:00   |
 | Antarctica/Syowa                 | Antarctica/Syowa                 | 03:00:00   |
 | Antarctica/Troll                 | Antarctica/Troll                 | 00:00:00   |
 | Antarctica/Vostok                | Antarctica/Vostok                | 06:00:00   |
 | Arctic/Longyearbyen              | Arctic/Longyearbyen              | 01:00:00   |
 | Asia/Aden                        | Asia/Aden                        | 03:00:00   |
 | Asia/Almaty                      | Asia/Almaty                      | 06:00:00   |
-| Asia/Amman                       | Asia/Amman                       | 02:00:00   |
+| Asia/Amman                       | Asia/Amman                       | 03:00:00   |
 | Asia/Anadyr                      | Asia/Anadyr                      | 12:00:00   |
 | Asia/Aqtau                       | Asia/Aqtau                       | 05:00:00   |
 | Asia/Aqtobe                      | Asia/Aqtobe                      | 05:00:00   |
@@ -285,7 +286,7 @@ ORDER BY
 | Asia/Chungking                   | CTT                              | 08:00:00   |
 | Asia/Colombo                     | Asia/Colombo                     | 05:30:00   |
 | Asia/Dacca                       | BST                              | 06:00:00   |
-| Asia/Damascus                    | Asia/Damascus                    | 02:00:00   |
+| Asia/Damascus                    | Asia/Damascus                    | 03:00:00   |
 | Asia/Dhaka                       | BST                              | 06:00:00   |
 | Asia/Dili                        | Asia/Dili                        | 09:00:00   |
 | Asia/Dubai                       | Asia/Dubai                       | 04:00:00   |
@@ -311,7 +312,7 @@ ORDER BY
 | Asia/Khandyga                    | Asia/Khandyga                    | 09:00:00   |
 | Asia/Kolkata                     | IST                              | 05:30:00   |
 | Asia/Krasnoyarsk                 | Asia/Krasnoyarsk                 | 07:00:00   |
-| Asia/Kuala_Lumpur                | Asia/Kuala_Lumpur                | 08:00:00   |
+| Asia/Kuala_Lumpur                | Singapore                        | 08:00:00   |
 | Asia/Kuching                     | Asia/Kuching                     | 08:00:00   |
 | Asia/Kuwait                      | Asia/Kuwait                      | 03:00:00   |
 | Asia/Macao                       | Asia/Macao                       | 08:00:00   |
@@ -370,7 +371,7 @@ ORDER BY
 | Atlantic/Madeira                 | Atlantic/Madeira                 | 00:00:00   |
 | Atlantic/Reykjavik               | Iceland                          | 00:00:00   |
 | Atlantic/South_Georgia           | Atlantic/South_Georgia           | -02:00:00  |
-| Atlantic/St_Helena               | Atlantic/St_Helena               | 00:00:00   |
+| Atlantic/St_Helena               | Iceland                          | 00:00:00   |
 | Atlantic/Stanley                 | Atlantic/Stanley                 | -03:00:00  |
 | Australia/ACT                    | AET                              | 10:00:00   |
 | Australia/Adelaide               | Australia/Adelaide               | 09:30:00   |
@@ -415,7 +416,7 @@ ORDER BY
 | Canada/Newfoundland              | CNT                              | -03:30:00  |
 | Canada/Pacific                   | Canada/Pacific                   | -08:00:00  |
 | Canada/Saskatchewan              | Canada/Saskatchewan              | -06:00:00  |
-| Canada/Yukon                     | Canada/Yukon                     | -08:00:00  |
+| Canada/Yukon                     | Canada/Yukon                     | -07:00:00  |
 | Chile/Continental                | Chile/Continental                | -04:00:00  |
 | Chile/EasterIsland               | Chile/EasterIsland               | -06:00:00  |
 | Cuba                             | Cuba                             | -05:00:00  |
@@ -485,6 +486,7 @@ ORDER BY
 | Europe/Kaliningrad               | Europe/Kaliningrad               | 02:00:00   |
 | Europe/Kiev                      | Europe/Kiev                      | 02:00:00   |
 | Europe/Kirov                     | Europe/Kirov                     | 03:00:00   |
+| Europe/Kyiv                      | Europe/Kyiv                      | 02:00:00   |
 | Europe/Lisbon                    | Portugal                         | 00:00:00   |
 | Europe/Ljubljana                 | Europe/Ljubljana                 | 01:00:00   |
 | Europe/London                    | GB                               | 00:00:00   |
@@ -493,7 +495,7 @@ ORDER BY
 | Europe/Malta                     | Europe/Malta                     | 01:00:00   |
 | Europe/Mariehamn                 | Europe/Mariehamn                 | 02:00:00   |
 | Europe/Minsk                     | Europe/Minsk                     | 03:00:00   |
-| Europe/Monaco                    | Europe/Monaco                    | 01:00:00   |
+| Europe/Monaco                    | ECT                              | 01:00:00   |
 | Europe/Moscow                    | W-SU                             | 03:00:00   |
 | Europe/Nicosia                   | Europe/Nicosia                   | 02:00:00   |
 | Europe/Oslo                      | Europe/Oslo                      | 01:00:00   |
@@ -519,7 +521,7 @@ ORDER BY
 | Europe/Vatican                   | Europe/Vatican                   | 01:00:00   |
 | Europe/Vienna                    | Europe/Vienna                    | 01:00:00   |
 | Europe/Vilnius                   | Europe/Vilnius                   | 02:00:00   |
-| Europe/Volgograd                 | Europe/Volgograd                 | 04:00:00   |
+| Europe/Volgograd                 | Europe/Volgograd                 | 03:00:00   |
 | Europe/Warsaw                    | Poland                           | 01:00:00   |
 | Europe/Zagreb                    | Europe/Zagreb                    | 01:00:00   |
 | Europe/Zaporozhye                | Europe/Zaporozhye                | 02:00:00   |
@@ -563,8 +565,8 @@ ORDER BY
 | Mexico/BajaSur                   | Mexico/BajaSur                   | -07:00:00  |
 | Mexico/General                   | Mexico/General                   | -06:00:00  |
 | NET                              | NET                              | 04:00:00   |
-| NST                              | NST                              | 12:00:00   |
-| NZ                               | NST                              | 12:00:00   |
+| NST                              | NZ                               | 12:00:00   |
+| NZ                               | NZ                               | 12:00:00   |
 | NZ-CHAT                          | NZ-CHAT                          | 12:45:00   |
 | Navajo                           | Navajo                           | -07:00:00  |
 | PLT                              | PLT                              | 05:00:00   |
@@ -574,7 +576,7 @@ ORDER BY
 | PST                              | PST                              | -08:00:00  |
 | PST8PDT                          | PST8PDT                          | -08:00:00  |
 | Pacific/Apia                     | MIT                              | 13:00:00   |
-| Pacific/Auckland                 | NST                              | 12:00:00   |
+| Pacific/Auckland                 | NZ                               | 12:00:00   |
 | Pacific/Bougainville             | Pacific/Bougainville             | 11:00:00   |
 | Pacific/Chatham                  | NZ-CHAT                          | 12:45:00   |
 | Pacific/Chuuk                    | Pacific/Chuuk                    | 10:00:00   |
@@ -590,6 +592,7 @@ ORDER BY
 | Pacific/Guam                     | Pacific/Guam                     | 10:00:00   |
 | Pacific/Honolulu                 | Pacific/Honolulu                 | -10:00:00  |
 | Pacific/Johnston                 | Pacific/Johnston                 | -10:00:00  |
+| Pacific/Kanton                   | Pacific/Kanton                   | 13:00:00   |
 | Pacific/Kiritimati               | Pacific/Kiritimati               | 14:00:00   |
 | Pacific/Kosrae                   | Pacific/Kosrae                   | 11:00:00   |
 | Pacific/Kwajalein                | Kwajalein                        | 12:00:00   |
@@ -603,8 +606,8 @@ ORDER BY
 | Pacific/Pago_Pago                | Pacific/Pago_Pago                | -11:00:00  |
 | Pacific/Palau                    | Pacific/Palau                    | 09:00:00   |
 | Pacific/Pitcairn                 | Pacific/Pitcairn                 | -08:00:00  |
-| Pacific/Pohnpei                  | Pacific/Pohnpei                  | 11:00:00   |
-| Pacific/Ponape                   | Pacific/Ponape                   | 11:00:00   |
+| Pacific/Pohnpei                  | SST                              | 11:00:00   |
+| Pacific/Ponape                   | SST                              | 11:00:00   |
 | Pacific/Port_Moresby             | Pacific/Port_Moresby             | 10:00:00   |
 | Pacific/Rarotonga                | Pacific/Rarotonga                | -10:00:00  |
 | Pacific/Saipan                   | Pacific/Saipan                   | 10:00:00   |
