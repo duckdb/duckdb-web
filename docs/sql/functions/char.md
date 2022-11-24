@@ -8,6 +8,7 @@ This section describes functions and operators for examining and manipulating st
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
+| *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` |
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
 | *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` |
 | *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interprete as `NULL`s. | `'DuckDB'[:4]` | `'Duck'` |
@@ -18,7 +19,7 @@ This section describes functions and operators for examining and manipulating st
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` |
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(',', 'Banana', 'Apple', 'Melon')` | `Banana,Apple,Melon` |
-| `contains(`*`string`*`, `*`search_string`*`)` | Return true if `search_string` is found within `string` | `contains('abc','a')` | `true` |
+| `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc','a')` | `true` |
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using fmt syntax | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test','es')` | 2 |
@@ -54,9 +55,10 @@ This section describes functions and operators for examining and manipulating st
 | `rpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string* with the character from the right until it has *count* characters | `rpad('hello', 10, '<')` | `hello<<<<<` |
 | `rtrim(`*`string`*`)`| Removes any spaces from the right side of the *string* | `rtrim('␣␣␣␣test␣␣')` | `␣␣␣␣test` |
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` |
+| `starts_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc','a')` | `true` |
 | *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` |
 | `strlen(`*`string`*`)` | Number of bytes in *string* | `length('🤦🏼‍♂️')` | `1` |
-| `strpos(`*`string`*`, `*`search_string`*`)`| Alias of `instr`. Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
+| `strpos(`*`string`*`, `*`search_string`*`)`| Alias of `instr`. Return location of first occurrence of *search_string* in *string*, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
 | `strip_accents(`*`string`*`)`| Strips accents from *string* | `strip_accents('mühleisen')` | `muhleisen` |
 | `str_split(`*`string`*`, `*`separator`*`)` | Alias of `string_split`. Splits the *string* along the *separator* | `str_split('hello␣world', '␣')` | `['hello', 'world']` |
 | `str_split_regex(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `str_split_regex('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
@@ -67,7 +69,7 @@ This section describes functions and operators for examining and manipulating st
 | `substring(`*`string`*`, `*`start`*`, `*`length`*`)` | Extract substring of *length* characters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substring('Hello', 2, 2)` | `el` |
 | `substring_grapheme(`*`string`*`, `*`start`*`, `*`length`*`)` | Extract substring of *length* grapheme clusters starting from character *start*. Note that a *start* value of `1` refers to the *first* character of the string. | `substring_grapheme('🦆🤦🏼‍♂️🤦🏽‍♀️🦆', 3, 2)` | `🤦🏽‍♀️🦆` |
 | `suffix(`*`string`*`, `*`search_string`*`)` | Return true if *string* ends with *search_string*. | `suffix('abc', 'bc')` | `true` |
-| `strpos(`*`string`*`, `*`characters`*`)`| Alias of `instr`. Return location of first occurrence of `characters` in `string`, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
+| `strpos(`*`string`*`, `*`characters`*`)`| Alias of `instr`. Return location of first occurrence of *characters* in *string*, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
 | `to_base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of base64. | `to_base64('A'::blob)` | `QQ==` |
 | `trim(`*`string`*`)`| Removes any spaces from either side of the *string* | `trim('␣␣␣␣test␣␣')` | `test` |
 | `trim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from either side of the *string* | `trim('>>>>test<<', '><')` | `test` |
