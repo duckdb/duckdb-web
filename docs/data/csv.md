@@ -23,7 +23,7 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 -- read a CSV file from disk, auto-infer options
 SELECT * FROM 'test.csv';
 -- read_csv with custom options
-SELECT * FROM read_csv_auto('test.csv', delim='|', header=True, columns={'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
+SELECT * FROM read_csv('test.csv', delim='|', header=True, columns={'FlightDate': 'DATE', 'UniqueCarrier': 'VARCHAR', 'OriginCityName': 'VARCHAR', 'DestCityName': 'VARCHAR'});
 -- read a CSV from stdin, auto-infer options
 cat data/csv/issue2471.csv | duckdb -c "select * from read_csv_auto('/dev/stdin')"
 
