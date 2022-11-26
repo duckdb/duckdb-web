@@ -87,13 +87,31 @@ The `filename` parameter can be passed into the `read_parquet` function to inclu
 
 ```sql
 SELECT * FROM parquet_scan('data/parquet-testing/glob/*', filename=true) ORDER BY i;
-┌───┬───┬──────────────────────────────────────┐
-│ i │ j │               filename               │
-├───┼───┼──────────────────────────────────────┤
-│ 1 │ a │ data/parquet-testing/glob/t1.parquet │
-│ 2 │ b │ data/parquet-testing/glob/t2.parquet │
-└───┴───┴──────────────────────────────────────┘
 ```
+
+The following is a table of the columns returned by this query.
+
+| i | j |               filename               |
+|---|---|--------------------------------------|
+| 1 | a | data/parquet-testing/glob/t1.parquet |
+| 2 | b | data/parquet-testing/glob/t2.parquet |
+
+
+#### Row Numbers
+Passing the `file_row_number` parameter to the `read_parquet` function allows you to add a `file_row_number` column for each row, specifying from which row of each file it was read.
+```sql
+SELECT first_name, last_name, email, file_row_number FROM parquet_scan('userdata1.parquet', file_row_number=true) limit 5;
+```
+
+The following is a table of the columns returned by this query.
+
+| first_name | last_name |          email           | file_row_number |
+|------------|-----------|--------------------------|-----------------|
+| Amanda     | Jordan    | ajordan0@com.com         | 0               |
+| Albert     | Freeman   | afreeman1@is.gd          | 1               |
+| Evelyn     | Morgan    | emorgan2@altervista.org  | 2               |
+| Denise     | Riley     | driley3@gmpg.org         | 3               |
+| Carlos     | Burns     | cburns4@miitbeian.gov.cn | 4               |
 
 ### Partial Reading
 DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
