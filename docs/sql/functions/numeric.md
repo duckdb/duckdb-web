@@ -49,8 +49,8 @@ The table below shows the available mathematical functions.
 | `gamma(x)` | interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
 | `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | true |
-| `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf(Infinity)` | true |
-| `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan(NaN)` | true |
+| `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf('Infinity'::float)` | true |
+| `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan('NaN'::float)` | true |
 | `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
 | `lgamma(x)` | computes the log of the `gamma` function. | `lgamma(2)` | 0 |
 | `ln(x)` | computes the natural logarithm of *x* | `ln(2)` | 0.693 |
