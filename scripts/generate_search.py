@@ -1,6 +1,7 @@
 import os
 import marko
 import re
+import json
 
 base_dir = 'docs'
 
@@ -162,9 +163,6 @@ def extract_functions(text, full_path):
 			'blurb': sanitize_blurb(desc)
 		}
 
-def sanitize_json_text(text):
-	return text.replace('"', '\\"')
-
 function_dir = os.path.sep.join('docs/sql/functions'.split('/'))
 files = os.listdir(function_dir)
 files.sort()
@@ -176,30 +174,5 @@ for file in files:
 
 file_list.extend(function_list.values())
 
-file_list = sorted(file_list, key=lambda x: x['title'])
-result_text = """{
-	"data": ["""
-for i in range(len(file_list)):
-	file = file_list[i]
-	title = file['title']
-	text = file['text']
-	category = file['category']
-	url = file['url']
-	blurb = file['blurb']
-	result_text += "\n\t\t{\n"
-	result_text += f'\t\t\t"title": "{sanitize_json_text(title)}",\n'
-	result_text += f'\t\t\t"text": "{sanitize_json_text(text)}",\n'
-	result_text += f'\t\t\t"category": "{sanitize_json_text(category)}",\n'
-	result_text += f'\t\t\t"url": "{sanitize_json_text(url)}",\n'
-	result_text += f'\t\t\t"blurb": "{sanitize_json_text(blurb)}"'
-	result_text += "\n\t\t}"
-	if i + 1 < len(file_list):
-		result_text += ","
-
-result_text += """
-	]
-}
-"""
-
 with open('_data/search_data.json', 'w+') as f:
-	f.write(result_text)
+	json.dump({'data': sorted(file_list, key=lambda x: x['title'])}, f, indent='\t')
