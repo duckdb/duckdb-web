@@ -2,6 +2,7 @@ import os
 import marko
 import re
 import json
+from textwrap import shorten
 
 base_dir = 'docs'
 
@@ -45,19 +46,7 @@ def extract_blurb(parse_node):
 def sanitize_blurb(text):
 	BLURB_THRESHOLD = 120
 	text = text.replace('"', '').strip()
-	if len(text) > BLURB_THRESHOLD:
-		splits = text.split(' ')
-		text = ''
-		first_split = True
-		for split in splits:
-			if len(text) + len(split) > BLURB_THRESHOLD:
-				text += '...'
-				break
-			if not first_split:
-				text += ' '
-			text += split
-			first_split = False
-	return text
+	return shorten(text, width=BLURB_THRESHOLD, placeholder='...')
 
 def sanitize_category(category):
 	category = category.replace('_', ' ')
