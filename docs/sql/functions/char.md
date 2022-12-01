@@ -57,7 +57,7 @@ This section describes functions and operators for examining and manipulating st
 | `rtrim(`*`string`*`, `*`characters`*`)`| Removes any occurrences of any of the *characters* from the right side of the *string* | `rtrim('>>>>test<<', '><')` | `>>>>test` |
 | `starts_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* begins with *search_string* | `starts_with('abc','a')` | `true` |
 | *`string`*` SIMILAR TO `*`regex`* | Returns `true` if the *string* matches the *regex*; identical to `regexp_full_match` (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' SIMILAR TO 'l+'` | `false` |
-| `strlen(`*`string`*`)` | Number of bytes in *string* | `strlen('🤦🏼‍♂️')` | `2` |
+| `strlen(`*`string`*`)` | Number of bytes in *string* | `strlen('🦆')` | `4` |
 | `strpos(`*`string`*`, `*`search_string`*`)`| Alias of `instr`. Return location of first occurrence of *search_string* in *string*, counting from 1. Returns 0 if no match found. | `strpos('test test','es')` | 2 |
 | `strip_accents(`*`string`*`)`| Strips accents from *string* | `strip_accents('mühleisen')` | `muhleisen` |
 | `str_split(`*`string`*`, `*`separator`*`)` | Alias of `string_split`. Splits the *string* along the *separator* | `str_split('hello␣world', '␣')` | `['hello', 'world']` |
