@@ -429,6 +429,40 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 <!-- The edit function does not appear to work -->
 
+A file may also be read/processed before the CLI opens, via the `-init` switch:
+```
+$ ./duckdb -init select_example.sql
+-- Loading resources from select_example.sql
+| generate_series |
+|-----------------|
+| 0               |
+| 1               |
+| 2               |
+| 3               |
+| 4               |
+| 5               |
+v0.6.1-dev83 dfae126ebb
+Enter ".help" for usage hints.
+D  
+```
+
+## Non-interactive usage
+
+To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
+```
+$ ./duckdb < select_example.sql
+| generate_series |
+|-----------------|
+| 0               |
+| 1               |
+| 2               |
+| 3               |
+| 4               |
+| 5               |
+$
+
+```
+
 ## Loading Extensions
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
