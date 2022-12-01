@@ -162,6 +162,8 @@ def extract_functions(text, full_path):
 			'blurb': sanitize_blurb(desc)
 		}
 
+def sanitize_json_text(text):
+	return text.replace('"', '\\"')
 
 function_dir = os.path.sep.join('docs/sql/functions'.split('/'))
 files = os.listdir(function_dir)
@@ -185,11 +187,11 @@ for i in range(len(file_list)):
 	url = file['url']
 	blurb = file['blurb']
 	result_text += "\n\t\t{\n"
-	result_text += f'\t\t\t"title": "{title}",\n'
-	result_text += f'\t\t\t"text": "{text}",\n'
-	result_text += f'\t\t\t"category": "{category}",\n'
-	result_text += f'\t\t\t"url": "{url}",\n'
-	result_text += f'\t\t\t"blurb": "{blurb}"'
+	result_text += f'\t\t\t"title": "{sanitize_json_text(title)}",\n'
+	result_text += f'\t\t\t"text": "{sanitize_json_text(text)}",\n'
+	result_text += f'\t\t\t"category": "{sanitize_json_text(category)}",\n'
+	result_text += f'\t\t\t"url": "{sanitize_json_text(url)}",\n'
+	result_text += f'\t\t\t"blurb": "{sanitize_json_text(blurb)}"'
 	result_text += "\n\t\t}"
 	if i + 1 < len(file_list):
 		result_text += ","

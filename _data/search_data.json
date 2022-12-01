@@ -2319,7 +2319,7 @@
 		},
 		{
 			"title": "timezone",
-			"text": "timezone(text, timestamptz) - use the date parts of the timestamp in the given time zone to construct a timestamp. effectively, the result is a "local" time.",
+			"text": "timezone(text, timestamptz) - use the date parts of the timestamp in the given time zone to construct a timestamp. effectively, the result is a \"local\" time.",
 			"category": "Timestamptz Functions",
 			"url": "/docs/sql/functions/timestamptz",
 			"blurb": "timezone(text, timestamptz) - Use the date parts of the timestamp in the given time zone to construct a timestamp...."
