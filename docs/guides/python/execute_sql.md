@@ -20,7 +20,7 @@ After connecting, SQL queries can be executed using the `execute` command.
 results = con.execute("SELECT 42").fetchall()
 ```
 
-By default, a list of Python objects is returned. Use `df` if you would like the result to be returned as a Python dataframe instead.
+By default, a list of Python objects is returned. Use `df` if you would like the result to be returned as a Python pandas dataframe instead.
 
 ```py
 results = con.execute("SELECT 42").df()
