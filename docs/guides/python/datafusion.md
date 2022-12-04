@@ -20,7 +20,7 @@ pip install --quiet pyarrow
 ```
 
 # DataFusion to DuckDB
-To convert from DataFusion to DuckDB, first save DataFusion results into Arrow batches using the `collect` function. Then include that Arrow Table in the `FROM` clause of a DuckDB query. This example was based on the DataFusion Readme.
+To convert from DataFusion to DuckDB, first save DataFusion results into Arrow batches using the `collect` function, and then create an Arrow table using PyArrow's `Table.from_batches` function. Then include that Arrow Table in the `FROM` clause of a DuckDB query.
 
 As a note, Pandas is not required as a first step prior to using DataFusion, but was helpful for generating example data to reuse in the second example below.
 
@@ -74,7 +74,7 @@ output = duckdb.query("""
   SELECT 
     fruits,
     first(sum_A_by_fruits) as sum_A
-  FROM polars_to_arrow
+  FROM datafusion_to_arrow
   GROUP BY ALL
   ORDER BY ALL
 """).arrow()
