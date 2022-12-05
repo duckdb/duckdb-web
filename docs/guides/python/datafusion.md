@@ -14,9 +14,7 @@ This example workflow is also available as a [Google Collab notebook](https://co
 # Installation
 
 ```python
-pip install --quiet duckdb
-pip install --quiet datafusion
-pip install --quiet pyarrow
+pip install --quiet duckdb datafusion pyarrow
 ```
 
 # DataFusion to DuckDB
