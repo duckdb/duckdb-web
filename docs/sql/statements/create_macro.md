@@ -5,7 +5,12 @@ selected: Documentation/SQL/Create Macro
 expanded: SQL
 railroad: statements/createmacro.js
 ---
-The `CREATE MACRO` statement creates a scalar macro in the catalog.
+The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog. 
+A macro may only be a single `SELECT` statement (similar to a `VIEW`), but it has the benefit of accepting parameters.
+For a scalar macro, `CREATE MACRO` is followed by the name of the macro, and optionally parameters within a set of parentheses. The keyword `AS` is next, followed by the text of the macro. By design, a scalar macro may only return a single value.
+For a table macro, the syntax is the similar to a scalar macro except `AS` is replaced with `AS TABLE`. A table macro may return a table of arbitrary size and shape. 
+
+If a `MACRO` is temporary, it is only usable within the same database connection and is deleted when the connection is closed.
 
 ### Examples
 ```sql
@@ -24,6 +29,18 @@ CREATE FUNCTION main.myavg(x) AS SUM(x) / COUNT(x);
 CREATE MACRO add_default(a, b := 5) AS a + b;
 -- create a macro arr_append (with a functionality equivalent to array_append)
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
+
+-- TABLE MACROS
+-- create a table macro without parameters
+CREATE MACRO static_table() AS TABLE SELECT 'Hello' as column1, 'World' as column2;
+-- create a table macro with parameters (that can be of any type)
+CREATE MACRO dynamic_table(col1_value,col2_value) AS TABLE SELECT col1_value as column1, col2_value as column2;
+-- create a table macro that returns multiple rows. 
+-- It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends)
+CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value,col2_value) AS TABLE 
+    SELECT col1_value as column1, col2_value as column2 
+    UNION ALL 
+    SELECT 'Hello' as col1_value, 456 as col2_value;
 ```
 
 ### Syntax
