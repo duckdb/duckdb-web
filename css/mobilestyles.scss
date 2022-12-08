@@ -229,6 +229,17 @@
 			margin-bottom: 50px;
 		}
 	}
+	.newswrap .headlinebar{
+		padding-left: 15px;
+	}
+	.newswrap .postwrap .post-list ul li{
+		align-items: flex-start;
+	}
+	.newswrap .postwrap .post-list ul li div.date{
+		margin-right: 15px;
+		font-size: 10px;
+		width: 75px;
+	}
 	main.inactive{
 		opacity: .4;
 	}
