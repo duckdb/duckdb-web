@@ -16,11 +16,11 @@ To use DuckDB, you must first create a connection object that represents the dat
 ```R
 library("DBI")
 # to start an in-memory database
-con <- dbConnect(duckdb::duckdb(), dbdir=":memory:")
+con <- dbConnect(duckdb::duckdb(), dbdir = ":memory:")
 # to use a database file (not shared between processes)
-con <- dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=FALSE)
+con <- dbConnect(duckdb::duckdb(), dbdir = "my-db.duckdb", read_only = FALSE)
 # to use a database file (shared between processes)
-con <- dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=TRUE)
+con <- dbConnect(duckdb::duckdb(), dbdir = "my-db.duckdb", read_only = TRUE)
 ```
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown=TRUE)`
 
