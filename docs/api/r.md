@@ -16,11 +16,11 @@ To use DuckDB, you must first create a connection object that represents the dat
 ```R
 library("DBI")
 # to start an in-memory database
-con = dbConnect(duckdb::duckdb(), dbdir=":memory:")
+con <- dbConnect(duckdb::duckdb(), dbdir=":memory:")
 # to use a database file (not shared between processes)
-con = dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=FALSE)
+con <- dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=FALSE)
 # to use a database file (shared between processes)
-con = dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=TRUE)
+con <- dbConnect(duckdb::duckdb(), dbdir="my-db.duckdb", read_only=TRUE)
 ```
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown=TRUE)`
 
@@ -34,7 +34,7 @@ dbExecute(con, "CREATE TABLE items(item VARCHAR, value DECIMAL(10,2), count INTE
 dbExecute(con, "INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 
 # retrieve the items again
-res = dbGetQuery(con, "SELECT * FROM items")
+res <- dbGetQuery(con, "SELECT * FROM items")
 print(res)
 #     item value count
 # 1  jeans  20.0     1
@@ -49,13 +49,13 @@ DuckDB also supports prepared statements in the R API with the `dbExecute` and `
 dbExecute(con, "INSERT INTO items VALUES (?, ?, ?)", list('laptop', 2000, 1))
 
 # if you want to reuse a prepared statement multiple times, use dbSendStatement() and dbBind()
-stmt = dbSendStatement(con, "INSERT INTO items VALUES (?, ?, ?)")
+stmt <- dbSendStatement(con, "INSERT INTO items VALUES (?, ?, ?)")
 dbBind(stmt, list('iphone', 300, 2))
 dbBind(stmt, list('android', 3.5, 1))
 dbClearResult(stmt)
 
 # query the database using a prepared statement
-res = dbGetQuery(con, "SELECT item FROM items WHERE value > ?", list(400))
+res <- dbGetQuery(con, "SELECT item FROM items WHERE value > ?", list(400))
 print(res)
 #       item
 # 1 laptop
@@ -67,7 +67,7 @@ print(res)
 To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DuckDB and populates it with the data frame contents. For example:
 ```R
 dbWriteTable(con, "iris_table", iris)
-res = dbGetQuery(con, "SELECT * FROM iris_table LIMIT 1")
+res <- dbGetQuery(con, "SELECT * FROM iris_table LIMIT 1")
 print(res)
 #   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 # 1          5.1         3.5          1.4         0.2  setosa
@@ -76,7 +76,7 @@ It is also possible to "register" a R data frame as a virtual table, comparable 
 
 ```R
 duckdb::duckdb_register(con, "iris_view", iris)
-res = dbGetQuery(con, "SELECT * FROM iris_view LIMIT 1")
+res <- dbGetQuery(con, "SELECT * FROM iris_view LIMIT 1")
 print(res)
 #   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 # 1          5.1         3.5          1.4         0.2  setosa
@@ -95,9 +95,10 @@ library("dplyr")
 con <- dbConnect(duckdb::duckdb())
 duckdb::duckdb_register(con, "flights", nycflights13::flights)
 
-tbl(con, "flights") %>% 
-  group_by(dest) %>%
-  summarise(delay = mean(dep_time))
+tbl(con, "flights") |>
+  group_by(dest) |>
+  summarise(delay = mean(dep_time, na.rm = TURE)) |>
+  collect()
 ```
 
 
