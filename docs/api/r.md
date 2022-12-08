@@ -97,7 +97,7 @@ duckdb::duckdb_register(con, "flights", nycflights13::flights)
 
 tbl(con, "flights") |>
   group_by(dest) |>
-  summarise(delay = mean(dep_time, na.rm = TURE)) |>
+  summarise(delay = mean(dep_time, na.rm = TRUE)) |>
   collect()
 ```
 
