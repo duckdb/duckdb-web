@@ -4,6 +4,26 @@ title: News
 layoutpart: postsoverview
 ---
 
+<div class="post-list">
+{% for post in site.posts %}
+	{% assign currentdate = post.date | date: "%Y" %}
+	{% if currentdate != date %}
+		{% unless forloop.first %}</ul>{% endunless %}
+		<h1 id="y{{post.date | date: "%Y"}}">{{ currentdate }}</h1>
+		<ul>
+		{% assign date = currentdate %}
+	{% endif %}
+		<li>
+			<a href="{{ post.url }}"></a>
+			<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
+			<div class="title">{{ post.title }}</div>
+		</li>
+	{% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+</div>
+
+
+{% comment %}
 {% for post in site.posts limit:15 %}
 {% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
 {% capture month %}{{post.date | date: "%B"}}{% endcapture %}
@@ -14,3 +34,4 @@ layoutpart: postsoverview
 	<a href="{{ post.url }}" class="continue">continue reading <span></span></a>
 </div>
 {% endfor %}
+{% endcomment %}
