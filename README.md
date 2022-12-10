@@ -5,7 +5,7 @@
 </div>
 <p>&nbsp;</p>
 
-This repository hosts the source code for the [DuckDB Website](www.duckdb.org). Please file any  questions or issues relating to the website or documentation here.
+This repository hosts the source code for the [DuckDB Website](https://www.duckdb.org). Please file any  questions or issues relating to the website or documentation here.
 
 The main DuckDB repository is hosted [here](https://github.com/duckdb/duckdb).
 
