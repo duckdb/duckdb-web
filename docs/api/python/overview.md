@@ -61,6 +61,7 @@ print(con.fetchall())
 # query using $ notation for prepared statement and reused values
 con.execute("select $1, $1, $2", ["duck", "goose"])
 print(con.fetchall())
+# [('duck', 'duck', 'goose')]
 ```
 
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See below for better options.
