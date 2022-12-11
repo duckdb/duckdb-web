@@ -42,7 +42,10 @@ print(con.fetchall())
 
 The `description` property of the connection object contains the column names as per the standard.
 
-DuckDB also supports prepared statements in the API with the `execute` and `executemany` methods. In this case, the parameters are passed as an additional parameter after a query that contains `?` placeholders. Here is an example:
+DuckDB also supports prepared statements in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter.
+
+Here are some examples:
+
 ```python
 # insert a row using prepared statements
 con.execute("INSERT INTO items VALUES (?, ?, ?)", ['laptop', 2000, 1])
@@ -55,6 +58,9 @@ con.execute("SELECT item FROM items WHERE value > ?", [400])
 print(con.fetchall())
 # [('laptop',), ('chainsaw',)]
 
+# query using $ notation for prepared statement and reused values
+con.execute("select $1, $1, $2", ["duck", "goose"])
+print(con.fetchall())
 ```
 
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See below for better options.
