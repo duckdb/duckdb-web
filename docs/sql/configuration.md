@@ -3,7 +3,9 @@ layout: docu
 title: Configuration
 selected: Documentation/Configuration
 ---
-DuckDB has a number of configuration options that can be used to change the behavior of the system. The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
+DuckDB has a number of configuration options that can be used to change the behavior of the system.  
+The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
+They can also be reset to their original values using the `RESET` statement.
 
 ### Examples
 ```sql
@@ -21,7 +23,10 @@ SELECT * FROM duckdb_settings();
 
 -- return the current value of a specific setting
 -- this example returns 'automatic'
-SELECT current_setting('access_mode'); 
+SELECT current_setting('access_mode');
+
+-- reset the memory limit of the system back to the default
+RESET memory_limit;
 ```
 
 ## **Configuration Reference**
