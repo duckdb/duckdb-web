@@ -111,6 +111,12 @@ selected: API Reference
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared">duckdb_execute_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared_arrow">duckdb_execute_prepared_arrow</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="k">out_result</span>);
 </code></pre></div></div>
+### **Extract Statements**
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_extract_statements">duckdb_extract_statements</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="k">duckdb_extracted_statements</span> *<span class="k">out_extracted_statements</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_prepare_extracted_statement">duckdb_prepare_extracted_statement</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements</span>, <span class="kt">idx_t</span> <span class="k">index</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_extract_statements_error">duckdb_extract_statements_error</a></span>(<span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_extracted">duckdb_destroy_extracted</a></span>(<span class="k">duckdb_extracted_statements</span> *<span class="k">extracted_statements</span>);
+</code></pre></div></div>
 ### **Pending Result Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_pending_prepared">duckdb_pending_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="k">duckdb_pending_result</span> *<span class="k">out_result</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_pending">duckdb_destroy_pending</a></span>(<span class="k">duckdb_pending_result</span> *<span class="k">pending_result</span>);
@@ -130,6 +136,7 @@ selected: API Reference
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_list_type">duckdb_create_list_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_map_type">duckdb_create_map_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="k">value_type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_union_type">duckdb_create_union_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>, <span class="kt">idx_t</span> <span class="k">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_decimal_type">duckdb_create_decimal_type</a></span>(<span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
@@ -144,6 +151,9 @@ selected: API Reference
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_union_type_member_count">duckdb_union_type_member_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">char</span> *<span class="nf"><a href="#duckdb_union_type_member_name">duckdb_union_type_member_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_union_type_member_type">duckdb_union_type_member_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
 </code></pre></div></div>
 ### **Data Chunk Interface**
@@ -2060,6 +2070,110 @@ The query result.
 
 <br>
 
+### duckdb_extract_statements
+---
+Extract all statements from a query.
+Note that after calling `duckdb_extract_statements`, the extracted statements should always be destroyed using
+`duckdb_destroy_extracted`, even if no statements were extracted.
+If the extract fails, `duckdb_extract_statements_error` can be called to obtain the reason why the extract failed.
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_extract_statements</span>(<span class="k">
+</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>,<span class="k">
+</span>  <span class="k">duckdb_extracted_statements</span> *<span class="k">out_extracted_statements
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `connection`
+
+The connection object
+* `query`
+
+The SQL query to extract
+* `out_extracted_statements`
+
+The resulting extracted statements object
+* `returns`
+
+The number of extracted statements or 0 on failure.
+
+<br>
+
+### duckdb_prepare_extracted_statement
+---
+Prepare an extracted statement.
+Note that after calling `duckdb_prepare_extracted_statement`, the prepared statement should always be destroyed using
+`duckdb_destroy_prepare`, even if the prepare fails.
+If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason why the prepare failed.
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_prepare_extracted_statement</span>(<span class="k">
+</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
+</span>  <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index</span>,<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `connection`
+
+The connection object
+* `extracted_statements`
+
+The extracted statements object
+* `index`
+
+The index of the extracted statement to prepare
+* `out_prepared_statement`
+
+The resulting prepared statement object
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### duckdb_extract_statements_error
+---
+Returns the error message contained within the extracted statements.
+The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_extracted` is called.
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_extract_statements_error</span>(<span class="k">
+</span>  <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `result`
+
+The extracted statements to fetch the error from.
+* `returns`
+
+The error of the extracted statements.
+
+<br>
+
+### duckdb_destroy_extracted
+---
+De-allocates all memory allocated for the extracted statements.
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_extracted</span>(<span class="k">
+</span>  <span class="k">duckdb_extracted_statements</span> *<span class="k">extracted_statements
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `extracted_statements`
+
+The extracted statements to destroy.
+
+<br>
+
 ### duckdb_pending_prepared
 ---
 Executes the prepared statement with the given bound parameters, and returns a pending result.
@@ -2377,6 +2491,33 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 * `type`
 
 The key type and value type of map type to create.
+* `returns`
+
+The logical type.
+
+<br>
+
+### duckdb_create_union_type
+---
+Creates a UNION type from the passed types array
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_union_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">member_count
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `types`
+
+The array of types that the union should consist of.
+* `type_amount`
+
+The size of the types array.
 * `returns`
 
 The logical type.
@@ -2703,6 +2844,81 @@ The child index
 * `returns`
 
 The child type of the struct type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### duckdb_union_type_member_count
+---
+Returns the number of members that the union type has.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_union_type_member_count</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `type`
+
+The logical type (union) object
+* `returns`
+
+The number of members of a union type.
+
+<br>
+
+### duckdb_union_type_member_name
+---
+Retrieves the name of the union member.
+
+The result must be freed with `duckdb_free`
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_union_type_member_name</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `type`
+
+The logical type object
+* `index`
+
+The child index
+* `returns`
+
+The name of the union member. Must be freed with `duckdb_free`.
+
+<br>
+
+### duckdb_union_type_member_type
+---
+Retrieves the child type of the given union member at the specified index.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_union_type_member_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `type`
+
+The logical type object
+* `index`
+
+The child index
+* `returns`
+
+The child type of the union member. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
