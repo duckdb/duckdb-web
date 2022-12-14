@@ -7,7 +7,10 @@ expanded: Testing
 
 When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in the section "Catch Tests". However, in most cases you should write your tests in plain SQL.
 
-For testing plain SQL we use an extended version of the SQL logic test suite, adopted from [SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki). Every test is a single self-contained file located in the `test/sql` directory. The test describes a series of SQL statements, together with either the expected result, a `statement ok` indicator, or a `statement error` indicator. An example of a  test file is shown below:
+For testing plain SQL we use an extended version of the SQL logic test suite, adopted from [SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki). Every test is a single self-contained file located in the `test/sql` directory.
+To run tests located outside of the default `test` directory, specify `--test-dir <root_directory>` and make sure provided test file paths are relative to that root directory.
+
+The test describes a series of SQL statements, together with either the expected result, a `statement ok` indicator, or a `statement error` indicator. An example of a  test file is shown below:
 
 ```sql
 # name: test/sql/projection/test_simple_projection.test
