@@ -48,7 +48,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `is_nullable` |`true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values.| `BOOLEAN` |
 | `data_type` |The name of the column datatype.| `VARCHAR` |
 | `data_type_id` |The internal identifier of the column data type| `BIGINT` |
-| `character_maximum_length` |The maximum number of characters for any value held by this column.| `INTEGER` |
+| `character_maximum_length` |Always `NULL`. DuckDb [text types](./data_types/text) do not enforce a value length restriction based on a length type parameter.| `INTEGER` |
 | `numeric_precision` |The number of units (in the base indicated by `numeric_precision_radix`) used for storing column values. For integral and approximate numeric types, this is the number of bits. For decimal types, this is the number of digits positions.| `INTEGER` |
 | `numeric_precision_radix` |The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions.| `INTEGER` |
 | `numeric_scale` |Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e. the number of digits that may appear after the decimal separator). | `INTEGER` |
@@ -65,7 +65,7 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `table_name` |The SQL name of the table on which the constraint is defined.| `VARCHAR` |
 | `table_oid` |Internal identifier (name) of the table object on which the constraint is defined.| `BIGINT` |
 | `constraint_index` |Indicates the position of the constraint as it appears in its table definition.| `BIGINT` |
-| `constraint_type` |Indicates the type of constraint. Applicable values are `FOREIGN KEY`, `PRIMARY KEY`, `NOT NULL`, `UNIQUE`. | `VARCHAR` |
+| `constraint_type` |Indicates the type of constraint. Applicable values are `CHECK`, `FOREIGN KEY`, `PRIMARY KEY`, `NOT NULL`, `UNIQUE`. | `VARCHAR` |
 | `constraint_text` |The definition of the constraint expressed as a SQL-phrase. (Not necessarily a complete or syntactically valid DDL-statement.)| `VARCHAR` |
 | `expression` |Always `NULL`. (?)| `VARCHAR` |
 | `constraint_column_indexes` |An array of table column indexes referring to the columns that appear in the constraint definition| `BIGINT[]` |
