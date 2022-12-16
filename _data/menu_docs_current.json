@@ -148,6 +148,10 @@
             {
               "page": "DBeaver SQL IDE",
               "url": "dbeaver"
+            },
+            {
+              "page": "Rill Data Developer",
+              "url": "rill"
             }
           ]
         },
