@@ -20,7 +20,9 @@ Each new page requires at least 2 edits:
 The addition of a new guide requires one additional edit:
 * Add a link to the new page within the Guides landing page: docs/guides/index.md
 
-Please test your changes using the steps listed in the Building section below.
+**Please test your changes using the steps listed in the Building section below.**
+
+**When creating a PR, please check the box to "Allow edits from maintainers".**
 
 Please enclose code in blocks that are tagged with the appropriate language. (Ex: \`\`\`sql CODE HERE \`\`\`). 
 
