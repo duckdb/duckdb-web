@@ -179,18 +179,10 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.df">
-<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.DuckDBPyConnection.df" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_as_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>df(self: duckdb.DuckDBPyConnection, <a href="#id1"><span class="problematic" id="id2">*</span></a>, date_as_object: bool = False) -&gt; pandas.DataFrame</p></li>
-</ol>
 <p>Fetch a result as Data.Frame following execute()</p>
-<ol class="arabic simple" start="2">
-<li><p>df(self: duckdb.DuckDBPyConnection, df: pandas.DataFrame) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the Data.Frame in df. This is an alias of from_df</p>
 </dd>
 </dl>
 
@@ -353,6 +345,15 @@ title: Python Client API
 </dt>
 <dd>
 <p>Create a query object from protobuf plan</p>
+</dd>
+</dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.from_substrait_json">
+<span class="sig-name descname"><span class="pre">from_substrait_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.from_substrait_json" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Create a query object from a JSON protobuf plan</p>
 </dd>
 </dl>
 
@@ -1483,6 +1484,15 @@ title: Python Client API
 </dt>
 <dd>
 <p>Creates a query object from the substrait plan</p>
+</dd>
+</dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="duckdb.from_substrait_json">
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_substrait_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_substrait_json" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Serialize a query object to protobuf</p>
 </dd>
 </dl>
 

@@ -61,6 +61,7 @@
 		<div class="newswrap">
 		
 			<div class="postwrap">
+				<div class="headlinebar">Blog</div>
 				<div class="postcontent">
 					{% if page.layoutpart == "postsoverview" %}
 						{% include anchor_headings.html html=content %}
@@ -79,32 +80,12 @@
 				
 				<div class="newsarchive">
 					<h1><a href="/news/">Archive</a></h1>
-					
-					<div class="archivesAccordian">
 					{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+					<ul>
 					{% for year in postsByYear %}
-						<div class="card">
-						  	<div class="card-header" data-year="{{year.name}}">
-						        <div class="theyear{% if forloop.first %} opened{% endif %}" data-year="{{year.name}}"><span></span>{{ year.name }}</div>
-						    </div>
-						    <div class="collapse {% if forloop.first %}show{% endif %}">
-						      <div class="card-body">
-								<div class="list-group">
-					  {% assign postsByMonth = year.items | group_by_exp:"post", "post.date | date: '%B'" %}
-					
-					  {% for month in postsByMonth %}
-					    {% for item in month.items limit: 1 %}
-					    			<div>
-						    			<a href="/news/archive/?year={{ item.date | date: '%Y' }}&month={{ item.date | date: '%B' }}" data-year="{{year.name}}" data-month="{{ month.name }}">{{ month.name }}</a>
-						    		</div>
-					    {% endfor %}
-					  {% endfor %}
-					  			</div>
-					  		</div>
-					  	</div>
+						<li><a href="/news/#y{{year.name}}">{{year.name}}</a></li>
 					{% endfor %}
-					</div>
-					
+					</ul>
 				</div>
 				
 				<div class="latestnews">
