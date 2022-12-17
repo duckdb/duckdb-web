@@ -113,6 +113,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_logical_type">duckdb_create_logical_type</a></span>(<span class="k">duckdb_type</span> <span class="k">type</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_list_type">duckdb_create_list_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_map_type">duckdb_create_map_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="k">value_type</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_union_type">duckdb_create_union_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>, <span class="kt">idx_t</span> <span class="k">member_count</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_create_decimal_type">duckdb_create_decimal_type</a></span>(<span class="kt">uint8_t</span> <span class="k">width</span>, <span class="kt">uint8_t</span> <span class="k">scale</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_get_type_id">duckdb_get_type_id</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">uint8_t</span> <span class="nf"><a href="#duckdb_decimal_width">duckdb_decimal_width</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
@@ -127,6 +128,9 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_struct_type_child_count">duckdb_struct_type_child_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">char</span> *<span class="nf"><a href="#duckdb_struct_type_child_name">duckdb_struct_type_child_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_struct_type_child_type">duckdb_struct_type_child_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_union_type_member_count">duckdb_union_type_member_count</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">char</span> *<span class="nf"><a href="#duckdb_union_type_member_name">duckdb_union_type_member_name</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_union_type_member_type">duckdb_union_type_member_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
 </code></pre></div></div>
 ### duckdb_result_get_chunk
@@ -885,6 +889,33 @@ The logical type.
 
 <br>
 
+### duckdb_create_union_type
+---
+Creates a UNION type from the passed types array
+The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_create_union_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">member_types</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">member_names</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">member_count
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `types`
+
+The array of types that the union should consist of.
+* `type_amount`
+
+The size of the types array.
+* `returns`
+
+The logical type.
+
+<br>
+
 ### duckdb_create_decimal_type
 ---
 Creates a `duckdb_logical_type` of type decimal with the specified width and scale
@@ -1205,6 +1236,81 @@ The child index
 * `returns`
 
 The child type of the struct type. Must be destroyed with `duckdb_destroy_logical_type`.
+
+<br>
+
+### duckdb_union_type_member_count
+---
+Returns the number of members that the union type has.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_union_type_member_count</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `type`
+
+The logical type (union) object
+* `returns`
+
+The number of members of a union type.
+
+<br>
+
+### duckdb_union_type_member_name
+---
+Retrieves the name of the union member.
+
+The result must be freed with `duckdb_free`
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="k">duckdb_union_type_member_name</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `type`
+
+The logical type object
+* `index`
+
+The child index
+* `returns`
+
+The name of the union member. Must be freed with `duckdb_free`.
+
+<br>
+
+### duckdb_union_type_member_type
+---
+Retrieves the child type of the given union member at the specified index.
+
+The result must be freed with `duckdb_destroy_logical_type`
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_union_type_member_type</span>(<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">index
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `type`
+
+The logical type object
+* `index`
+
+The child index
+* `returns`
+
+The child type of the union member. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
 
