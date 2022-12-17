@@ -37,6 +37,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to install the Python client](../guides/python/install)
 * [How to execute SQL queries](../guides/python/execute_sql)
 * [How to easily query DuckDB in Jupyter Notebooks](../guides/python/jupyter)
+* [How to use Multiple Python Threads with DuckDB](../guides/python/multiple_threads)
 
 ### Pandas
 
