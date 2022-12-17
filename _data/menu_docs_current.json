@@ -142,6 +142,10 @@
             {
               "page": "DuckDB with Vaex",
               "url": "vaex"
+            },
+            {
+              "page": "DuckDB with DataFusion",
+              "url": "datafusion"
             }
           ]
         },
