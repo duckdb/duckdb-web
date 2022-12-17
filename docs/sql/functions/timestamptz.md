@@ -36,7 +36,7 @@ they are always available.
 With no time zone extension loaded, `TIMESTAMPTZ` values will be cast to and from strings
 using offset notation.
 This will let you specify an instant correctly without access to time zone information.
-For portability, `TIMESTAMPTZ` values will be always be displayed using GMT offsets:
+For portability, `TIMESTAMPTZ` values will always be displayed using GMT offsets:
 
 ```sql
 select '2022-10-08 13:13:34-07'::TIMESTAMPTZ'
