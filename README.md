@@ -20,6 +20,13 @@ Each new page requires at least 2 edits:
 The addition of a new guide requires one additional edit:
 * Add a link to the new page within the Guides landing page: docs/guides/index.md
 
+Each new page must also be added to the Search feature. Either manually edit the file _data/search_data.json or:
+* Install Python
+* Clone this repo and navigate to it
+* Create a new Python virtual environment
+* pip install -r requirements.txt
+* python scripts/generate_search.py
+
 **Please test your changes using the steps listed in the Building section below.**
 
 **When creating a PR, please check the box to "Allow edits from maintainers".**
