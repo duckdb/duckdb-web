@@ -36,7 +36,7 @@ they are always available.
 With no time zone extension loaded, `TIMESTAMPTZ` values will be cast to and from strings
 using offset notation.
 This will let you specify an instant correctly without access to time zone information.
-Without a time zone extension, `TIMESTAMPTZ` values will be displayed using GMT offsets:
+For portability, `TIMESTAMPTZ` values will always be displayed using GMT offsets:
 
 ```sql
 select '2022-10-08 13:13:34-07'::TIMESTAMPTZ'
@@ -86,17 +86,25 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 | `make_timestamptz(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`, `*`string`*`)` | The timestamp with time zone for the given parts and time zone | `make_timestamptz(1992, 9, 20, 15, 34, 27.123456, 'CET')` | `1992-09-20 05:34:27.123456-07` |
 | `strftime(`*`timestamptz`*`, `*`format`*`)` | Converts timestamp with time zone to string according to the [format string](../../sql/functions/dateformat) | `strftime(timestamptz '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` | `Wed, 1 January 1992 - 08:38:40 PM` |
 | `strptime(`*`text`*`, `*`format`*`)` | Converts string to timestamp with time zone according to the [format string](../../sql/functions/dateformat) if `%Z` is specified. | `strptime('Wed, 1 January 1992 - 08:38:40 PST', '%a, %-d %B %Y - %H:%M:%S %Z')` | `1992-01-01 08:38:40-08` |
-| `timezone(`*`text`*`, `*`timestamp`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` | `2001-02-16 19:38:40-08` |
-| `timezone(`*`text`*`, `*`timestamptz`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` | `2001-02-16 18:38:40` |
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
 
-### Infinities
+## ICU Timestamp Without Time Zone Functions
+The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
+These functions assume that the `TIMESTAMP` is a "local timestamp".
 
-Functions applied to infinite dates will either return the same infinite dates
-(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
-In general, if the function needs to examine the parts of the infinite temporal value,
-the result will be `NULL`.
+A local timestamp is effectively a way of encoding the part values from a time zone into a single value.
+They should be used with caution because the produced values can contain gaps and ambiguities thanks to daylight savings time.
+Often the same functionality can be implemented more reliably using the `struct` variant of the `date_part` function.
+
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `current_time()` | Returns a `TIME` whose GMT bin values correspond to local time in the current time zone. | `current_time()` | `08:47:56.497` |
+| `current_localtimestamp()` | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. | `current_localtimestamp()` | `2022-12-17 08:47:56.497` |
+| `localtime` | Synonym for the `current_time()` function call. | `localtime` | `2022-12-17 08:47:56.497` |
+| `localtimestamp` | Synonym for the `current_localtimestamp()` function call. | `localtimestamp` | `2022-12-17 08:47:56.497` |
+| `timezone(`*`text`*`, `*`timestamp`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` | `2001-02-16 19:38:40-08` |
+| `timezone(`*`text`*`, `*`timestamptz`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` | `2001-02-16 18:38:40` |
 
 ### At Time Zone
 
@@ -109,10 +117,13 @@ timestamp with time zone '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver'
 -- 2001-02-16 18:38:40
 ```
 
-These operations are intended to allow queries to work with "local" timestamps.
-A local timestamp is effectively a way of encoding the part values from a time zone into a single value.
-They should be used with caution because the produced values can contain gaps and ambiguities thanks to daylight savings time.
-Often the same functionality can be implemented more reliably using the `struct` variant of the `date_part` function.
+## Infinities
+
+Functions applied to infinite dates will either return the same infinite dates
+(e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
+In general, if the function needs to examine the parts of the infinite temporal value,
+the result will be `NULL`.
+
 
 ## Calendars
 
