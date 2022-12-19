@@ -10,10 +10,14 @@ function GenerateUpdate(options = {}) {
 					Sequence([
 						Expression("column-name"),
 						Keyword("="),
-						Expression()
+						Choice(0, [
+							Expression(),
+							Expression("subquery")
+						]),
 					]), Keyword(",")
 				)
 			]),
+			Optional(Expandable("from-node",options,"from-node",GenerateFromClause)),
 			Optional(Sequence([
 				Keyword("WHERE"),
 				Expression()
