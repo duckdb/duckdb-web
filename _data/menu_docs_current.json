@@ -128,6 +128,10 @@
               "url": "relational_api_pandas"
             },
             {
+              "page": "Multiple Python Threads",
+              "url": "multiple_threads"
+            },
+            {
               "page": "DuckDB with Ibis",
               "url": "ibis"
             },
@@ -138,6 +142,10 @@
             {
               "page": "DuckDB with Vaex",
               "url": "vaex"
+            },
+            {
+              "page": "DuckDB with DataFusion",
+              "url": "datafusion"
             }
           ]
         },

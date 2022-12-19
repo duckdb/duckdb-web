@@ -26,6 +26,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | `date_part(`*`part`*`, `*`interval`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('year', INTERVAL '14 months')` | 1 |
+| `datepart(`*`part`*`, `*`interval`*`)` | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `datepart('year', INTERVAL '14 months')` | 1 |
 | `extract(`*`part`* `from` *`interval`*`)` | Get [subfield](../../sql/functions/datepart) from a date | `extract('month' FROM INTERVAL '14 months')` | 2 |
 | `to_years(`*`integer`*`)` | Construct a year interval | `to_years(5)` | INTERVAL 5 YEAR |
 | `to_months(`*`integer`*`)` | Construct a month interval | `to_months(5)` | INTERVAL 5 MONTH |

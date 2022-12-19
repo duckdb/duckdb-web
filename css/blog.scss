@@ -9,7 +9,7 @@ $fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
 
 @font-face{
 	font-family: "SuisseIntl-Regular";
-	src: url("webfont/SuisseIntl-Regular-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Regular-WebS.woff") format("woff");
+	src: url("webfont/SuisseIntl-Regular-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-Regular-WebXL.woff") format("woff");
 }
 
 @font-face{
@@ -138,7 +138,7 @@ h5 {
 		.postcontent{
 			max-width: 680px;
 			margin: 0 auto;
-			margin-top: 70px;
+			margin-top: 140px;
 			margin-bottom: 80px;
 			h1{
 				margin-top: 60px;}
@@ -212,6 +212,7 @@ h5 {
 				margin-right: 40px;
 			}
 		}
+		/*
 		.postpreview{
 			margin: 0 auto;
 			margin-top: 80px;
@@ -225,6 +226,7 @@ h5 {
 			}
 		 	
 		}
+		*/
 		a.backtoarchive,
 		a.continue{
 			text-decoration: none;
@@ -252,6 +254,68 @@ h5 {
 				margin-bottom: 30px;
 			}
 		}
+		.post-list{
+			h1{
+				font-size: 28px;
+				margin-bottom: 15px;
+				&.first-child{
+					margin-top: 100px;
+				}
+			}
+			ul{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				li{
+					border-bottom: 1px solid #D0D0D0;
+					position: relative;
+					display: flex;
+					align-items: center;
+					padding-top: 20px;
+					padding-bottom: 20px;
+					font-family: $fontSans;
+					transition: background-color .2s;
+					&:hover{
+						background-color: #f8f8f8;
+					}
+					> a{
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						top: 0;
+						left: 0;
+						color: inherit;
+						text-decoration: none;
+					}
+					div.date{
+						font-family: $fontSans;
+						background-color: #E1E1E1;
+						font-size: 12px;
+						width: 94px;
+						text-align: center;
+						text-transform: uppercase;
+						font-feature-settings: 'tnum' on;
+						margin-right: 30px;
+						line-height: 1.9;
+						flex-shrink: 0;
+					}
+					div.title{
+						line-height: 1.2;
+					}
+				}
+			}
+		}
+	}
+	.headlinebar{
+		background-color: #f5f5f5;
+		height: 52px;
+		line-height: 52px;
+		font-size: 32px;
+		top: 53px;
+		position: absolute;
+		padding-left: 30px;
+		left: 0;
+		width: 100%;
 	}
 	.sidebar{
 		width: 252px;
@@ -261,15 +325,9 @@ h5 {
 		right: 0;
 		height: 100vh;
 		z-index: 800;
+		.latestnews,
 		.newsarchive{
-			margin-top: 52px;
-			h1{
-				margin-bottom: 15px;
-				font-size: 100%;
-			}
-		}
-		.latestnews{
-			margin-top: 100px;
+			margin-top: 60px;
 			h1{
 				margin-bottom: 15px;
 				font-size: 100%;
@@ -300,66 +358,14 @@ h5 {
 				}
 			}
 		}
-		.archivesAccordian{
-			.theyear{
-				font-size: 100%; /** zuvor 130% **/
-				padding-left: 10px;
-				cursor: pointer;
-				line-height: 26px;
-				//font-family: $fontSansBold;
-				span{
-					-webkit-transition: -webkit-transform .3s;
-					transition: -webkit-transform .3s;
-					-o-transition: transform .3s;
-					transition: transform .3s;
-					transition: transform .3s, -webkit-transform .3s;
-					display: inline-block;
-					font-size: 14px;
-					position: absolute;
-					-webkit-transform: translateX(-13px);
-					    -ms-transform: translateX(-13px);
-					        transform: translateX(-13px);
-				}
-				span::before{
-					content: '\25BA';
-					font-family: "DuckDB-Symbol";
-				}
-				&.opened span{
-					-webkit-transform: translateX(-13px) rotate(90deg);
-					    -ms-transform: translateX(-13px) rotate(90deg);
-					        transform: translateX(-13px) rotate(90deg);
-					-webkit-transition: -webkit-transform .3s;
-					transition: -webkit-transform .3s;
-					-o-transition: transform .3s;
-					transition: transform .3s;
-					transition: transform .3s, -webkit-transform .3s;
-					position: absolute;
-				}
+		.newsarchive{
+			h1{
+				margin-bottom: 15px;
+				font-size: 100%;
 			}
-			.collapse{
-				display: none;
-				&.show{
-					display: block;
-				}
-			}
-			.card-body{
-				padding-left: 20px;
-				padding-top: 5px;
-				padding-bottom: 5px;
-				font-size: 14px;
-				a{
-					color: black;
-					text-decoration: none;
-					&:hover{
-						text-decoration: underline;
-					}
-				}
-				.list-group > div{
-					padding-bottom: 5px;
-					a.selected{
-						text-decoration: underline;
-					}
-				}
+			ul li{
+				margin: 4px 0px;
+				font-feature-settings: 'tnum' on;
 			}
 		}
 	}
