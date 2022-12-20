@@ -675,6 +675,10 @@
             "url": "information_schema"
           },
           {
+            "page": "Metadata Functions",
+            "url": "duckdb_table_functions"
+          },
+          {
             "page": "Configuration",
             "url": "configuration"
           },
