@@ -5,7 +5,7 @@ selected: Documentation/Metadata Functions
 ---
 DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`. 
 
-The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statment, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
+The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
 Table functions are still functions, and you should write parenthesis after the function name to call it to obtain its returned resultset: 
 
@@ -130,7 +130,7 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `expressions` |Always `NULL`| `VARCHAR` |
 | `sql` |The definition of the index, expressed as a `CREATE INDEX` SQL statement.| `VARCHAR` |
   
-Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e. those indexes created by explicit [`CREATE INDEX`](../indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
+Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e. those indexes created by explicit [`CREATE INDEX`](./indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
 
 ## duckdb_keywords
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
@@ -150,7 +150,7 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `internal` |`true` if this is an internal (built-in) schema, `false` if this is a user-defined schema.| `BOOLEAN` |
 | `sql` |Always `NULL`| `VARCHAR` |
 
-The [`information_schema.schemata`](./information_schema#schemata) system view provides a more standardized way to obtain metadata about database schemas.
+The [`information_schema.schemata`](./information_schema) system view provides a more standardized way to obtain metadata about database schemas.
 
 ## duckdb_sequences
 The `duckdb_sequences()` function provides metadata about the sequences available in the DuckDB instance.
@@ -202,7 +202,7 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `column_count` |The number of columns defined by this object| `BIGINT` |
 | `index_count` |The number of indexes associated with this table. This number includes all secondary indexes, as well as internal indexes generated to maintain `PRIMARY KEY` and/or `UNIQUE` constraints.| `BIGINT` |
 | `check_constraint_count` |The number of check constraints active on columns within the table.| `BIGINT` |
-| `sql` |The definition of this object, expressed as SQL [`CREATE TABLE`-statement](./statments/create_table).| `VARCHAR` |
+| `sql` |The definition of this object, expressed as SQL [`CREATE TABLE`-statement](./statements/create_table).| `VARCHAR` |
 
 The [`information_schema.tables`](./information_schema#tables) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
