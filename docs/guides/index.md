@@ -37,6 +37,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to install the Python client](../guides/python/install)
 * [How to execute SQL queries](../guides/python/execute_sql)
 * [How to easily query DuckDB in Jupyter Notebooks](../guides/python/jupyter)
+* [How to use Multiple Python Threads with DuckDB](../guides/python/multiple_threads)
 
 ### Pandas
 
@@ -59,10 +60,13 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to use Ibis to query DuckDB with or without SQL](../guides/python/ibis)
 * [How to use DuckDB with Polars DataFrames via Apache Arrow](../guides/python/polars)
 * [How to use DuckDB with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
+* [How to use DuckDB with DataFusion via Apache Arrow](../guides/python/datafusion)
 
 ## SQL Editors / IDE's
 
 * [How to set up the DBeaver SQL IDE](../guides/sql_editors/dbeaver)
+* [How to set up Rill Data Developer](../guides/sql_editors/rill)
+
 
 ## Data Viewers
 

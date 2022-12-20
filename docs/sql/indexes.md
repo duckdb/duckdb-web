@@ -13,10 +13,12 @@ DuckDB currently uses two index types:
 
 Joins on columns with an ART index can make use of the [index join algorithm](https://en.wikipedia.org/wiki/Nested_loop_join#Index_join_variation). Forcing index joins is possible using [pragmas](../sql/pragmas).
 
+> ART indexes must currently be able to fit in-memory. Avoid creating ART indexes if the index does not fit in memory.
+
 ## Persistence
 
 * Min-max indexes are persisted.
-* ART indexes are [persisted as of the latest development release](https://github.com/duckdb/duckdb/pull/4022).
+* ART indexes are persisted.
 
 ## Create Index
 

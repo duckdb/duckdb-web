@@ -5,9 +5,37 @@
 </div>
 <p>&nbsp;</p>
 
-This repository hosts the source code for the [DuckDB Website](www.duckdb.org). Please file any  questions or issues relating to the website or documentation here.
+This repository hosts the source code for the [DuckDB Website](https://www.duckdb.org). Please file any  questions or issues relating to the website or documentation here.
 
 The main DuckDB repository is hosted [here](https://github.com/duckdb/duckdb).
+
+## Adding a new page
+
+First, thank you for your contribution!
+
+Each new page requires at least 2 edits:
+* The creation of a new markdown page with the documentation. Please follow the format of another .md file in the docs folder.
+* Add a link to the new page within _data/menu_docs_current.json. This populates the dropdown menus.
+
+The addition of a new guide requires one additional edit:
+* Add a link to the new page within the Guides landing page: docs/guides/index.md
+
+Each new page must also be added to the Search feature. Either manually edit the file _data/search_data.json or:
+* Install Python
+* Clone this repo and navigate to it
+* Create a new Python virtual environment
+* pip install -r requirements.txt
+* python scripts/generate_search.py
+
+**Please test your changes using the steps listed in the Building section below.**
+
+**When creating a PR, please check the box to "Allow edits from maintainers".**
+
+Please enclose code in blocks that are tagged with the appropriate language. (Ex: \`\`\`sql CODE HERE \`\`\`). 
+
+All examples should be self contained and reproducible if possible, meaning that any example tables are created as a part of the documentation.
+
+Feedback is welcome on these contribution steps as well!
 
 ## Building
 

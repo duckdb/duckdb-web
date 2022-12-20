@@ -26,10 +26,15 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `age(`*`timestamp`*`)` | Subtract from current_date | `age(TIMESTAMP '1992-09-20')` | `29 years 1 month 27 days 12:39:00.844` |
 | `century(`*`timestamp`*`)` | Extracts the century of a timestamp | `century(TIMESTAMP '1992-03-22')` | `20` |
 | `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps | `date_diff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` | `2` |
+| `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps | `datediff('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` | `2` |
 | `date_part(`*`part`*`, `*`timestamp`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('minute', TIMESTAMP '1992-09-20 20:38:40')` | `38` |
-| `date_part([`*`part`*`, ...], `*`timestamp`*`)` | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must beconstant. | `date_part(['year', 'month', 'day'], TIMESTAMP '1992-09-20 20:38:40')` | `{year: 1992, month: 9, day: 20}` |
+| `datepart(`*`part`*`, `*`timestamp`*`)` | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `datepart('minute', TIMESTAMP '1992-09-20 20:38:40')` | `38` |
+| `date_part([`*`part`*`, ...], `*`timestamp`*`)` | Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. | `date_part(['year', 'month', 'day'], TIMESTAMP '1992-09-20 20:38:40')` | `{year: 1992, month: 9, day: 20}` |
+| `datepart([`*`part`*`, ...], `*`timestamp`*`)` | Alias of date_part. Get the listed [subfields](../../sql/functions/datepart) as a `struct`. The list must be constant. | `datepart(['year', 'month', 'day'], TIMESTAMP '1992-09-20 20:38:40')` | `{year: 1992, month: 9, day: 20}` |
 | `date_sub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of complete [partitions](../../sql/functions/datepart) between the timestamps | `date_sub('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` | `1` |
+| `datesub(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_sub. The number of complete [partitions](../../sql/functions/datepart) between the timestamps | `datesub('hour', TIMESTAMP '1992-09-30 23:59:59', TIMESTAMP '1992-10-01 01:58:00')` | `1` |
 | `date_trunc(`*`part`*`, `*`timestamp`*`)` | Truncate to specified [precision](../../sql/functions/datepart) | `date_trunc('hour', TIMESTAMP '1992-09-20 20:38:40')` | `1992-09-20 20:00:00` |
+| `datetrunc(`*`part`*`, `*`timestamp`*`)` | Alias of date_trunc. Truncate to specified [precision](../../sql/functions/datepart) | `datetrunc('hour', TIMESTAMP '1992-09-20 20:38:40')` | `1992-09-20 20:00:00` |
 | `dayname(`*`timestamp`*`)` | The (English) name of the weekday | `dayname(TIMESTAMP '1992-03-22')` | `Sunday` |
 | `epoch(`*`timestamp`*`)` | Converts a timestamp to the seconds since the epoch | `epoch('2022-11-07 08:43:04'::TIMESTAMP);` | `1667810584` |
 | `epoch_ms(`*`ms`*`)` | Converts ms since epoch to a timestamp | `epoch_ms(701222400000)` | `1992-03-22 00:00:00` |
