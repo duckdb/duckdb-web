@@ -222,3 +222,30 @@ PRAGMA disable_checkpoint_on_shutdown;
 ```sql
 PRAGMA temp_directory='/path/to/temp.tmp'
 ```
+
+### storage_info
+
+```sql
+PRAGMA storage_info('table_name');
+```
+
+returns the following, per column in the given table
+
+| name           | type      | description                                           |
+|----------------|-----------|-------------------------------------------------------|
+| `row_group_id` | `BIGINT`  ||
+| `column_name`  | `VARCHAR` ||
+| `column_id`    | `BIGINT`  ||
+| `column_path`  | `VARCHAR` ||
+| `segment_id`   | `BIGINT`  ||
+| `segment_type` | `VARCHAR` ||
+| `start`        | `BIGINT`  | The start row id of this chunk                        |
+| `count`        | `BIGINT`  | The amount of entries in this storage chunk           |
+| `compression`  | `VARCHAR` | Compression type used for this column - see blog post |
+| `stats`        | `VARCHAR` ||
+| `has_updates`  | `BOOLEAN` ||
+| `persistent`   | `BOOLEAN` | false if temporary table                              |
+| `block_id`     | `BIGINT`  | empty unless persistent                               |
+| `block_offset` | `BIGINT`  | empty unless persistent                               |
+
+See [Storage](/internals/storage) for more information.
