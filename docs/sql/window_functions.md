@@ -215,6 +215,35 @@ ORDER BY 1, 2
 
 The three window functions will also share the data layout, which will improve performance.
 
+Multiple windows can be defined in the same `WINDOW` clause by comma-separating them:
+
+```sql
+SELECT "Plant", "Date",
+    MIN("MWh") OVER seven AS "MWh 7-day Moving Minimum",
+    AVG("MWh") OVER seven AS "MWh 7-day Moving Average",
+    MAX("MWh") OVER seven AS "MWh 7-day Moving Maximum",
+    MIN("MWh") OVER three AS "MWh 3-day Moving Minimum",
+    AVG("MWh") OVER three AS "MWh 3-day Moving Average",
+    MAX("MWh") OVER three AS "MWh 3-day Moving Maximum"
+FROM "Generation History"
+WINDOW
+    seven AS (
+        PARTITION BY "Plant"
+        ORDER BY "Date" ASC
+        RANGE BETWEEN INTERVAL 3 DAYS PRECEDING
+                  AND INTERVAL 3 DAYS FOLLOWING),
+    three AS (
+        PARTITION BY "Plant"
+        ORDER BY "Date" ASC
+        RANGE BETWEEN INTERVAL 1 DAYS PRECEDING
+        AND INTERVAL 1 DAYS FOLLOWING)
+ORDER BY 1, 2
+```
+
+The queries above do not use a number of clauses commonly found in select statements, like
+`WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
+the canonical order of a select statement [here](../sql/statements/select).
+
 ### Box and Whisker Queries
 
 All aggregates can be used as windowing functions, including the complex statistical functions.
