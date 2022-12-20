@@ -3,9 +3,9 @@ layout: docu
 title: Storage
 ---
 
-The DuckDB internal storage format is currently in flux, and is expected to change constantly until we reach v1.0.0.
+The DuckDB internal storage format is currently in flux, and is expected to change with each release until we reach v1.0.0.
 
-DuckDB files start with a `uint64_t` indicating the block size (for the main header), four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
+DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
 A simple example of reading the storage version using python is below.
 
 ```py
