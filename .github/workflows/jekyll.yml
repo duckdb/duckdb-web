@@ -56,3 +56,25 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+
+  LinkChecker:
+    name: Link Checker
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - run: pip install linkchecker --user
+
+      - name: Link Checker
+        run: |
+          linkchecker www.duckdb.org --check-extern --ignore-url ".*hannes.*" --file-output html/utf-8/report.html
+      - run: cat report.html >> $GITHUB_STEP_SUMMARY
+        if: success() || failure()
