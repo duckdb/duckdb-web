@@ -1,4 +1,4 @@
-  ---
+---
 layout: docu
 title: Storage
 ---
