@@ -85,19 +85,19 @@ p_stmt.close();
 Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/latest/org/duckdb/DuckDBResultSet.html#arrowExportStream(java.lang.Object,long)) for type signatures
 
 ```java
-import org.apache.arrow.memory.BufferAllocator;
+import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
+import org.duckdb.DuckDBResultSet;
 
 var conn = DriverManager.getConnection("jdbc:duckdb:");
-var p_stmt = conn.prepareStatement("select description from location");
-var resultset = (DuckDBResultSet)p_stmt.executeQuery();
+var p_stmt = conn.prepareStatement("SELECT * from generate_series(2000)");
+var resultset = (DuckDBResultSet) p_stmt.executeQuery();
 
-try (var allocator = new BufferAllocator()) {
-  var stream = (ArrowReader)resultset.arrowExportStream(allocator, 2048);
-
-  assert stream.loadNextBatch();
-  var vectorSchema = schemaRoot.getVectorSchemaRoot();
-
-  var vector = vectorSchema.getVector("description");
+try (var allocator = new RootAllocator()) {
+  try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
+    while (reader.loadNextBatch()) {
+      System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
+    }
+  }
 }
 ```
