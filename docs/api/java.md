@@ -9,6 +9,7 @@ The DuckDB Java JDBC API can be installed from [Maven Central](https://search.ma
 ## Basic API Usage
 DuckDB's JDBC API implements the main parts of the standard Java Database Connectivity (JDBC) API, version 4.0. Describing JDBC is beyond the scope of this page, see the [official documentation](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html) for details. Below we focus on the DuckDB-specific parts. 
 
+Refer to the externally hosted [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc) for more information about our extensions to the JDBC specification, or the below [Arrow Methods](#arrow-methods)
 
 ### Startup & Shutdown
 In JDBC, database connections are created through the standard `java.sql.DriverManager` class.  The driver should auto-register in the DriverManager, if that does not work for some reason, you can enforce registration like so:
@@ -79,5 +80,24 @@ p_stmt.close();
 
 > Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
+### Arrow Methods
 
+Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/latest/org/duckdb/DuckDBResultSet.html#arrowExportStream(java.lang.Object,long)) for type signatures
 
+```java
+import org.apache.arrow.memory.BufferAllocator;
+import org.apache.arrow.vector.ipc.ArrowReader;
+
+var conn = DriverManager.getConnection("jdbc:duckdb:");
+var p_stmt = conn.prepareStatement("select description from location");
+var resultset = (DuckDBResultSet)p_stmt.executeQuery();
+
+try (var allocator = new BufferAllocator()) {
+  var stream = (ArrowReader)resultset.arrowExportStream(allocator, 2048);
+
+  assert stream.loadNextBatch();
+  var vectorSchema = schemaRoot.getVectorSchemaRoot();
+
+  var vector = vectorSchema.getVector("description");
+}
+```
