@@ -86,6 +86,8 @@ Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/lates
 
 #### Arrow Export
 
+The following demonstrates exporting an arrow stream and consuming it using the java arrow bindings
+
 ```java
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
@@ -106,28 +108,28 @@ try (var allocator = new RootAllocator()) {
 
 #### Arrow Import
 
+The following demonstrates consuming an arrow stream from the java arrow bindings
+
 ```java
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBConnection;
 
 // arrow stuff
-try (var allocator = new RootAllocator()) {
-  try (ArrowStreamReader reader = null) {/* should not be null of course */
-    try (var arrow_array_stream = ArrowArrayStream.allocateNew(allocator)) {
-      Data.exportArrayStream(allocator, reader, arrow_array_stream);
+try (var allocator = new RootAllocator();
+     ArrowStreamReader reader = null; /* should not be null of course */
+     var arrow_array_stream = ArrowArrayStream.allocateNew(allocator)) {
+  Data.exportArrayStream(allocator, reader, arrow_array_stream);
 
-      // duckdb stuff
-      try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
-        conn.registerArrowStream("adsf", arrow_array_stream);
+  // duckdb stuff
+  try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
+    conn.registerArrowStream("adsf", arrow_array_stream);
 
-        // run a query
-        try (Statement stmt = conn.createStatement()) {
-          try (ResultSet rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM adsf")) {
-            rs.next();
-            System.out.println(rs.getInt(1));
-          }
-        }
+    // run a query
+    try (var stmt = conn.createStatement();
+         var rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM adsf")) {
+      while (rs.next()) {
+        System.out.println(rs.getInt(1));
       }
     }
   }
