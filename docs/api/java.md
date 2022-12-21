@@ -112,34 +112,23 @@ import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBConnection;
 
 // arrow stuff
-var allocator = new RootAllocator();
-ArrowStreamReader reader = null; /* should not be null of course */
-var arrow_array_stream = ArrowArrayStream.allocateNew(allocator);
-Data.exportArrayStream(allocator, reader, arrow_array_stream);
-
-// duckdb stuff
-var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
-conn.registerArrowStream("adsf", arrow_array_stream);
-
-// run a query
-Statement stmt = conn.createStatement();
-ResultSet rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM adsf");
-rs.next();
-System.out.println(rs.getInt(1));
-rs.close();
-
-// clean up
-stmt.close();
-conn.close();
-arrow_array_stream.close();
-reader.close();
-allocator.close();
-
-
 try (var allocator = new RootAllocator()) {
-  try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
-    while (reader.loadNextBatch()) {
-      System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
+  try (ArrowStreamReader reader = null) {/* should not be null of course */
+    try (var arrow_array_stream = ArrowArrayStream.allocateNew(allocator)) {
+      Data.exportArrayStream(allocator, reader, arrow_array_stream);
+
+      // duckdb stuff
+      try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
+        conn.registerArrowStream("adsf", arrow_array_stream);
+
+        // run a query
+        try (Statement stmt = conn.createStatement()) {
+          try (ResultSet rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM adsf")) {
+            rs.next();
+            System.out.println(rs.getInt(1));
+          }
+        }
+      }
     }
   }
 }
