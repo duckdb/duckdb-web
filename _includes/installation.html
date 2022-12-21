@@ -182,11 +182,27 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="master java">
-		<p>MacOS Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Apush+workflow%3AOSX" target="_blank">the "OSX" CI runs</a></p>
-
-		<p>Linux Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Apush+workflow%3ALinuxRelease" target="_blank">the "LinuxRelease" CI runs</a></p>
-
-		<p>Windows Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Apush+workflow%3AWindows" target="_blank">the "Windows" CI runs</a></p>
+		Java master builds are available in the sonatype snapshots repository, which can be accessed with the following:
+		{% highlight xml %}
+			<dependency>
+				<groupId>org.duckdb</groupId>
+				<artifactId>duckdb_jdbc</artifactId>
+				<version>{{ site.nextjavaversion }}-SNAPSHOT</version>
+			</dependency>
+		
+			...
+		
+			<repositories>
+				<repository>
+					<id>oss-sonatype</id>
+					<name>oss-sonatype</name>
+					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		{% endhighlight %}
 	</div>
 
 
