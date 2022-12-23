@@ -399,7 +399,11 @@
                 {
                   "page": "Export",
                   "url": "export"
-                }
+                },
+                {
+                  "page": "Attach",
+                  "url": "attach"
+                },
               ]
             },
             {
