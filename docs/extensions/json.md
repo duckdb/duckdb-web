@@ -23,6 +23,7 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of array lengths |
 | `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of **OBJECT**, **ARRAY**, **BIGINT**, **UBIGINT**, **VARCHAR**, **BOOLEAN**, **NULL**. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of types |
 | `json_structure(`*`json`*`)` | Return the structure of *`json`*. Throws an error if the structure is inconsistent (incompatible types in an array) |
+| `json_contains(`*`json`*`, `*`value`*`)` | Returns true if *`value`* is contained in *`json`* |
 
 Examples:
 ```sql
