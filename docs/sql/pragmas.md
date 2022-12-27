@@ -19,6 +19,7 @@ PRAGMA show_tables;
 PRAGMA show_tables_expanded;
 -- Get info for a specific table
 PRAGMA table_info('table_name');
+CALL pragma_table_info('table_name');
 -- Also show table structure, but slightly different format (for compatibility)
 PRAGMA show('table_name');
 -- List all functions
@@ -48,6 +49,7 @@ PRAGMA threads=4;
 ```sql
 -- get the file and memory size of each database
 PRAGMA database_size;
+CALL pragma_database_size();
 ```
 
 `database_size` returns information about the file and memory size of each table. The column types of the returned results are given below:
@@ -84,6 +86,7 @@ PRAGMA default_order='DESCENDING';
 ```sql
 -- show DuckDB version
 PRAGMA version;
+CALL pragma_version();
 ```
 
 ### enable_progress_bar, disable_progress_bar, enable_profiling, disable_profiling, profiling_output
@@ -227,6 +230,7 @@ PRAGMA temp_directory='/path/to/temp.tmp'
 
 ```sql
 PRAGMA storage_info('table_name');
+CALL pragma_storage_info('table_name');
 ```
 
 returns the following, per column in the given table
