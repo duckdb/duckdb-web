@@ -18,6 +18,7 @@ ignored_functions = {
     "|",
     "~",
     "^",
+    "@",
     "**",
     # part of extensions
     "dsdgen",
@@ -34,7 +35,7 @@ ignored_functions = {
 }
 
 functions = duckdb.default_connection.execute(
-    "select distinct function_name from duckdb_functions()",
+    "select distinct function_name from duckdb_functions() where schema_name != 'pg_catalog'",
 ).fetchall()
 
 functions = sorted(list({function for (function,) in functions} - ignored_functions))
