@@ -15,9 +15,13 @@ The `ENUM` type represents a dictionary data structure with all possible unique 
 
 
 ### Enum Definition
-Enum types are created using the command:
+Enum types are created from either a hardcoded set of values or from a select statement that returns a single column of varchars. The set of values in the select statement will be deduplicated, but if the enum is created from a hardcoded set there may not be any duplicates.
 ```sql
+-- Create enum using hardcoded values
 CREATE TYPE ${enum_name} AS ENUM ([${value_1},${value_2},...])
+
+-- Create enum using a select statement that returns a single column of varchars
+CREATE TYPE ${enum_name} AS ENUM (${SELECT expression})
 ```
 For example:
 ```sql
@@ -33,7 +37,23 @@ CREATE TYPE breed AS ENUM ('maltese', NULL);
 -- This will fail since Enum values must be unique
 CREATE TYPE breed AS ENUM ('maltese', 'maltese');
 
+-- Create an enum from a select statement
+-- First create an example table of values
+CREATE TABLE my_inputs AS 
+    SELECT 'duck'  AS my_varchar UNION ALL
+    SELECT 'duck'  AS my_varchar UNION ALL
+    SELECT 'goose' AS my_varchar;
+
+-- Create an enum using the unique string values in the my_varchar column
+CREATE TYPE birds AS ENUM (SELECT my_varchar FROM my_inputs);
+
+-- Show the available values in the birds enum using the enum_range function
+SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
+
+| my_enum_range |
+|---------------|
+| [duck, goose] |
 
 ### Enum Usage
 After an enum has been created, it can be used anywhere a standard built-in type is used. For example, we can create a table with a column that references the enum.
