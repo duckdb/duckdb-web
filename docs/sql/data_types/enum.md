@@ -56,6 +56,14 @@ SELECT * FROM person WHERE current_mood = 'sad';
 ----
 Pagliacci
 
+-- If you are importing data from a file, you can create an Enum for a VARCHAR column before importing
+-- The subquery select automatically selects only distinct values
+CREATE TYPE mood AS ENUM (SELECT mood FROM 'path/to/file.csv');
+
+-- Then you can create a table with the ENUM type and import using any data import statement
+CREATE TABLE person(name text, current_mood mood);
+COPY person FROM 'path/to/file.csv' (AUTO_DETECT TRUE);
+
 ```
 
 ### Enum Vs. Strings
