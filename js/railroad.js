@@ -1589,12 +1589,19 @@ function GenerateCopyOptions(options) {
 				Sequence([Keyword("FORMAT"), Expression("format-type")]),
 				Sequence([Keyword("DELIMITER"), Expression("delimiter")]),
 				Sequence([Keyword("NULL"), Expression("null-string")]),
+				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("QUOTE"), Expression("quote-string")]),
+				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
 				Sequence([Keyword("DATEFORMAT"), Expression("date-format")]),
 				Sequence([Keyword("TIMESTAMPFORMAT"), Expression("timestamp-format")]),
-				Sequence([Keyword("HEADER"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
-				Sequence([Keyword("ESCAPE"), Expression("escape-string")]),
 				Sequence([Keyword("FORCE_QUOTE"), GenerateColumnList()]),
-				Sequence([Keyword("FORCE_NOT_NULL"), GenerateColumnList()])
+				Sequence([Keyword("FORCE_NOT_NULL"), GenerateColumnList()]),
+				Sequence([Keyword("ENCODING"), Expression("UTF8")]),
+				Sequence([Keyword("AUTO_DETECT"),  Choice(0, [Keyword("TRUE"), Keyword("FALSE")])]),
+				Sequence([Keyword("SAMPLE_SIZE"), Expression("sample-size")]),
+				Sequence([Keyword("COMPRESSION"), Choice(0, [Expression('UNCOMPRESSED'),Expression('SNAPPY'),Expression('GZIP'),Expression('ZSTD')])]),
+				Sequence([Keyword("CODEC"), Choice(0, [Expression('UNCOMPRESSED'),Expression('SNAPPY'),Expression('GZIP'),Expression('ZSTD')])]),
+				Sequence([Keyword("ROW_GROUP_SIZE"), Expression("parquet-row_group_size")]),
 			]), ",", "skip")
 		]), "skip")
 	]

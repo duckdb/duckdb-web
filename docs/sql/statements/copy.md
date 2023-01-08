@@ -67,6 +67,9 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ','
 | `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. |
 | `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Only the first max. 1024 rows will be used for dialect detection. |
 | `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
+| `COMPRESSION` | Option to compress the file. Value can be `UNCOMPRESSED`, `GZIP`, `SNAPPY`, or `ZSTD`. |
+| `CODEC` | Alias for compression, but only valid for Parquet files. Option to compress the file. Value can be `UNCOMPRESSED`, `GZIP`, `SNAPPY`, or `ZSTD`. |
+| `ROW_GROUP_SIZE` | Option for Parquet writing. Specifies the minimum number of rows in a parquet row group, with a minimum value equal to DuckDB’s vector size (currently 2048, but adjustable when compiling DuckDB). A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset. |
 
 > It is recommended that the file name used in `COPY` always be specified as an absolute path.
 >
