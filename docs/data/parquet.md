@@ -28,6 +28,8 @@ SELECT * FROM parquet_metadata('test.parquet');
 SELECT * FROM parquet_schema('test.parquet');
 -- write the results of a query to a parquet file
 COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet');
+-- write the results from a query to a parquet file with specific compression and row_group_size
+COPY (FROM generate_series(100000)) TO 'test.parquet' (FORMAT 'parquet', COMPRESSION 'ZSTD', ROW_GROUP_SIZE 100000);
 -- export the table contents of the entire database as parquet
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
@@ -202,7 +204,11 @@ Below is a table of the columns returned by `parquet_schema`.
 | logical_type    | VARCHAR |
 
 ### Writing to Parquet Files
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`).
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. 
+
+You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`). `COMPRESSION` is an alias for `CODEC` and can be used instead with the same options. 
+
+The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB). A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset. Compression algorithms are only applied per row group, so the larger the row group size, the more opportunities to compress the data. DuckDB can read parquet row groups in parallel even within the same file and uses predicate pushdown to only scan the row groups whose metadata ranges match the `WHERE` clause of the query. However there is some overhead associated with reading the metadata in each group. A good approach would be to ensure that within each file, the total number of row groups is at least as large as the number of CPU threads used to query that file. More row groups beyond the thread count would improve the speed of highly selective queries, but slow down queries that must scan the whole file like aggregations.
 
 ```sql
 -- write a query to a snappy compressed parquet file
@@ -211,6 +217,8 @@ COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT 'parquet')
 COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
 -- write a csv file to an uncompressed parquet file
 COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
+-- write a query to a parquet file with ZSTD compression (same as CODEC) and row_group_size
+COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet' (FORMAT 'parquet', COMPRESSION 'ZSTD', ROW_GROUP_SIZE 100000);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../sql/statements/export) for more details.
