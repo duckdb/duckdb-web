@@ -204,7 +204,7 @@ Below is a table of the columns returned by `parquet_schema`.
 | logical_type    | VARCHAR |
 
 ### Writing to Parquet Files
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. 
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. Parameter values can be passed in with or without wrapping in single quotes.
 
 You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`). `COMPRESSION` is an alias for `CODEC` and can be used instead with the same options. 
 
@@ -218,7 +218,7 @@ COPY tbl TO 'result-zstd.parquet' (FORMAT 'PARQUET', CODEC 'ZSTD')
 -- write a csv file to an uncompressed parquet file
 COPY 'test.csv' TO 'result-uncompressed.parquet' (FORMAT 'PARQUET', CODEC 'UNCOMPRESSED')
 -- write a query to a parquet file with ZSTD compression (same as CODEC) and row_group_size
-COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet' (FORMAT 'parquet', COMPRESSION 'ZSTD', ROW_GROUP_SIZE 100000);
+COPY (FROM generate_series(100000)) TO 'row-groups-zstd.parquet' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../sql/statements/export) for more details.
