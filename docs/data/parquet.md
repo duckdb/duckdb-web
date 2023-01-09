@@ -204,7 +204,9 @@ Below is a table of the columns returned by `parquet_schema`.
 | logical_type    | VARCHAR |
 
 ### Writing to Parquet Files
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. Parameter values can be passed in with or without wrapping in single quotes.
+DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](/docs/sql/statements/copy) for details, including all possible parameters for the copy statement.
+
+Parameter values can be passed in with or without wrapping in single quotes.
 
 You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`). `COMPRESSION` is an alias for `CODEC` and can be used instead with the same options. 
 

@@ -21,7 +21,7 @@ EXPORT DATABASE 'target_directory' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_
 IMPORT DATABASE 'target_directory'
 ```
 
-For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](../../data/parquet#writing-to-parquet-files).
+For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](/docs/data/parquet#writing-to-parquet-files), and the [Copy Statement page](/docs/sql/statements/copy).
 
 ### Syntax
 <div id="rrdiagram"></div>
