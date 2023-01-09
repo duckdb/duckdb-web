@@ -67,6 +67,7 @@ The table below shows the available mathematical functions.
 | `setseed(x)` | sets the seed to be used for the random function | `setseed(0.42)` | |
 | `sin(x)` | computes the sin of x | `sin(90)` | 0.8939966636005579 |
 | `sign(x)` | returns the sign of x as -1, 0 or 1 | `sign(-349)` | -1 |
+| `signbit(x)` | returns whether the signbit is set or not | `signbit(-0.0)` | true |
 | `sqrt(x)` | returns the square root of the number | `sqrt(9)` | 3 |
 | `xor(x)` | bitwise XOR | `xor(17, 5)` | 20 |
 | `tan(x)` | computes the tangent of x | `tan(90)` | -1.995200412208242 |
