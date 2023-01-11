@@ -16,18 +16,18 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 
 | Specifier | Description | Synonyms | Example |
 |:---|:---|:---|:---|
-| `'year'` | Gregorian year | `'y'`, `'years'` | 2021 |
+| `'year'` | Gregorian year | `'yr'`, `'y'`, `'years'`, `'yrs'` | 2021 |
 | `'month'` | Gregorian month | `'mon'`, `'months'`, `'mons'` | 8 |
 | `'day'` | Gregorian day | `'days'`, `'d'`, `'dayofmonth'` | 3 |
-| `'decade'` | Gregorian decade | `'decades'` | 202 |
-| `'century'` | Gregorian century | `'centuries'` | 21 |
-| `'millennium'` | Gregorian millennium | `'millenia'`, `'millenium'` | 3 |
+| `'decade'` | Gregorian decade | `'dec'`, `'decades'`, `'decs'` | 202 |
+| `'century'` | Gregorian century | `'cent'`, `'centuries'`, `'c'` | 21 |
+| `'millennium'` | Gregorian millennium | `'mil'`, `'millenniums'`, `'millenia'`, `'mils'`, `'millenium'` | 3 |
 | `'quarter'` | Quarter of the year (1-4) | `'quarters'` | 3 |
-| `'microseconds'` | Sub-minute microseconds | `'microsecond'` | 44123456 |
-| `'milliseconds'` | Sub-minute milliseconds | `'millisecond'`, `'ms'`, `'msec'`, `'msecs'` | 44123 |
-| `'second'` | Seconds | `'seconds'`, `'s'` | 44 |
-| `'minute'` | Minutes | `'minutes'`, `'m'` | 59 |
-| `'hour'` | Hours | `'hours'`, `'h'` | 11 |
+| `'microseconds'` | Sub-minute microseconds | `'microsecond'`, `'us'`, `'usec'`, `'usecs'`, `'usecond'`, `'useconds'` | 44123456 |
+| `'milliseconds'` | Sub-minute milliseconds | `'millisecond'`, `'ms'`, `'msec'`, `'msecs'`, `'msecond'`, `'mseconds'` | 44123 |
+| `'second'` | Seconds | `'sec'`, `'seconds'`, `'secs'`, `'s'` | 44 |
+| `'minute'` | Minutes | `'min'`, `'minutes'`, `'mins'`, `'m'` | 59 |
+| `'hour'` | Hours | `'hr'`, `'hours'`, `'hrs'`, `'h'` | 11 |
 
 ### Usable in Date Part Specifiers Only
 
