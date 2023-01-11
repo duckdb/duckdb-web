@@ -9,7 +9,7 @@ function GenerateCopyFrom(options = {}) {
 				Keyword("FROM"),
 				Expression("file-name")
 			]),
-			Expandable("copy-options", options, "copy-from-options", GenerateCopyOptions)
+			Expandable("copy-from-options", options, "copy-from-options", GenerateCopyFromOptions)
 		])
 	])
 }
@@ -34,7 +34,7 @@ function GenerateCopyTo(options = {}) {
 				Keyword("TO"),
 				Expression("file-name")
 			]),
-			Expandable("copy-options", options, "copy-to-options", GenerateCopyOptions)
+			Expandable("copy-to-options", options, "copy-to-options", GenerateCopyToOptions)
 		])
 	])
 }
