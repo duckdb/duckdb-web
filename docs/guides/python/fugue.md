@@ -82,7 +82,7 @@ pandas_df = fa.as_pandas(fa.fugue_sql(query, engine="duckdb"))
 
 The `fugue_sql()` function automatically returns the last DataFrame of the query. When using the `TRANSFORM` function, FugueSQL will bring the DuckDB table to Pandas to execute the Python code. By using `TRANSFORM`, there is no more need to break up the SQL to invoke Python code. FugueSQL is a first-class interface for defining the end-to-end logic.
 
-Because we used the `"duckdb"` engine, the output of the query will be a DuckDB DataFrame. It can be converted to Pandas by using `as_pandas()`.
+Because we used the `"duckdb"` engine, the output of the query will be a DuckDB DataFrame. It can be converted to Pandas by using `as_pandas()`. Also notice FugueSQL can handle multiple `SELECT` statements in one query.
 
 # Distributing with SparkSQL
 
