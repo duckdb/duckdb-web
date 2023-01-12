@@ -24,6 +24,7 @@ selected: Client APIs
         * [.register_buffer(name, array, force, callback)](#module_duckdb..Connection+register_buffer) ⇒ <code>void</code>
         * [.unregister_buffer(name, callback)](#module_duckdb..Connection+unregister_buffer) ⇒ <code>void</code>
     * [~Statement](#module_duckdb..Statement)
+        * [.sql](#module_duckdb..Statement+sql) ⇒
         * [.get()](#module_duckdb..Statement+get)
         * [.run(sql, ...params, callback)](#module_duckdb..Statement+run) ⇒ <code>void</code>
         * [.all(sql, ...params, callback)](#module_duckdb..Statement+all) ⇒ <code>void</code>
@@ -260,6 +261,7 @@ Unregister the Buffer
 **Kind**: inner class of [<code>duckdb</code>](#module_duckdb)  
 
 * [~Statement](#module_duckdb..Statement)
+    * [.sql](#module_duckdb..Statement+sql) ⇒
     * [.get()](#module_duckdb..Statement+get)
     * [.run(sql, ...params, callback)](#module_duckdb..Statement+run) ⇒ <code>void</code>
     * [.all(sql, ...params, callback)](#module_duckdb..Statement+all) ⇒ <code>void</code>
@@ -268,6 +270,12 @@ Unregister the Buffer
     * [.finalize(sql, ...params, callback)](#module_duckdb..Statement+finalize) ⇒ <code>void</code>
     * [.stream(sql, ...params)](#module_duckdb..Statement+stream)
 
+<a name="module_duckdb..Statement+sql"></a>
+
+#### statement.sql ⇒
+**Kind**: instance property of [<code>Statement</code>](#module_duckdb..Statement)  
+**Returns**: sql contained in statement  
+**Field**:   
 <a name="module_duckdb..Statement+get"></a>
 
 #### statement.get()

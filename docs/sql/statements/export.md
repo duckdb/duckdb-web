@@ -15,10 +15,13 @@ EXPORT DATABASE 'target_directory';
 EXPORT DATABASE 'target_directory' (FORMAT CSV, DELIMITER '|');
 -- export the table contents as parquet
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
-
+-- export as parquet, compressed with ZSTD, with a row_group_size of 100000
+EXPORT DATABASE 'target_directory' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 100000);
 --reload the database again
 IMPORT DATABASE 'target_directory'
 ```
+
+For details regarding the writing of Parquet files, see the [Parquet Files page in the Data Import section](/docs/data/parquet#writing-to-parquet-files), and the [Copy Statement page](/docs/sql/statements/copy).
 
 ### Syntax
 <div id="rrdiagram"></div>

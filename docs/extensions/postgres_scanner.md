@@ -51,5 +51,7 @@ SELECT * FROM POSTGRES_SCAN('', 'public', 'mytable');
 
 `POSTGRES_SCAN` takes three string parameters, the `libpq` connection string (see above), a Postgres schema name and a table name. The schema name is often `public`.
 
+To use `filter_pushdown` use the `POSTGRES_SCAN_PUSHDOWN` function.
+
 ## Extra Information
 See [the repo](https://github.com/duckdblabs/postgresscanner) for the source code of the extension, or the [official announcement](../../2022/09/30/postgres-scanner) for implementation details and background.

@@ -5,7 +5,7 @@ function GenerateExport(options = {}) {
 			Keyword("EXPORT"),
 			Keyword("DATABASE"),
 			Expression("directory-name"),
-			Expandable("copy-options", options, "copy-from-options", GenerateCopyOptions)
+			Expandable("copy-to-options", options, "copy-from-options", GenerateCopyToOptions)
 		])
 	])
 }

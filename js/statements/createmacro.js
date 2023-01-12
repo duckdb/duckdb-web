@@ -26,6 +26,7 @@ function GenerateCreateMacro(options = {}) {
 			),
 			Keyword(")"),
 			Keyword("AS"),
+			Optional("TABLE"),
 			Expression("expr")
 		])
 	])

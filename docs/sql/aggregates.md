@@ -38,14 +38,14 @@ The table below shows the available general aggregate functions.
 
 | Function | Description | Example | Alias(es) |
 |:---|:---|:---|:---|
-| `arg_max(arg,val)` |Calculates the arg value for a maximum val value. | `arg_max(A,B)` | `argMax(A,B)`, `max_by(A,b)` |
-| `arg_min(arg,val)` |Calculates the arg value for a minimum val value. | `arg_min(A,B)` | `argMin(A,B)`, `min_by(A,B)` |
+| `arg_max(arg,val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A,B)` | `argMax(A,B)`, `max_by(A,b)` |
+| `arg_min(arg,val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A,B)` | `argMin(A,B)`, `min_by(A,B)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |
 | `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
 | `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
 | `bit_xor(arg)` |Returns the bitwise XOR of all bits in a given expression. | `bit_xor(A)` | - |
 | `bool_and(arg)` |Returns TRUE if every input value is TRUE, otherwise FALSE. | `bool_and(A)` | - |
-| `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool(A)` | - |
+| `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool_or(A)` | - |
 | `count(arg)` |Calculates the number of tuples tuples in arg. | `count(A)` | - |
 | `favg(arg)` |Calculates the average using a more accurate floating point summation (Kahan Sum). | `favg(A)` | - |
 | `first(arg)` |Returns the first value of a column. | `first(A)` |`arbitrary(A)` |

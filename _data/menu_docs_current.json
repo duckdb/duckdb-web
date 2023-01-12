@@ -128,6 +128,10 @@
               "url": "relational_api_pandas"
             },
             {
+              "page": "Multiple Python Threads",
+              "url": "multiple_threads"
+            },
+            {
               "page": "DuckDB with Ibis",
               "url": "ibis"
             },
@@ -138,6 +142,10 @@
             {
               "page": "DuckDB with Vaex",
               "url": "vaex"
+            },
+            {
+              "page": "DuckDB with DataFusion",
+              "url": "datafusion"
             }
           ]
         },
@@ -148,6 +156,10 @@
             {
               "page": "DBeaver SQL IDE",
               "url": "dbeaver"
+            },
+            {
+              "page": "Rill Data Developer",
+              "url": "rill"
             }
           ]
         },
@@ -399,7 +411,11 @@
                 {
                   "page": "Export",
                   "url": "export"
-                }
+                },
+                {
+                  "page": "Attach",
+                  "url": "attach"
+                },
               ]
             },
             {
@@ -661,6 +677,10 @@
           {
             "page": "Information Schema",
             "url": "information_schema"
+          },
+          {
+            "page": "Metadata Functions",
+            "url": "duckdb_table_functions"
           },
           {
             "page": "Configuration",

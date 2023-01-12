@@ -35,7 +35,7 @@ function GenerateAlterColumnOptions(options) {
 	]
 }
 
-function GenerateCreateSequence(options = {}) {
+function GenerateAlterTable(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("ALTER"),
@@ -83,7 +83,7 @@ function GenerateCreateSequence(options = {}) {
 
 function Initialize(options = {}) {
 	document.getElementById("rrdiagram").classList.add("limit-width");
-	document.getElementById("rrdiagram").innerHTML = GenerateCreateSequence(options).toString();
+	document.getElementById("rrdiagram").innerHTML = GenerateAlterTable(options).toString();
 }
 
 function Refresh(node_name, set_node) {

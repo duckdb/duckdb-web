@@ -16,17 +16,17 @@ $fontMonoItalic: "JetBrainsMono-Italic", "Lucida Console", monospace;
 $fontMonoItalicBold: "JetBrainsMono-Bold-Italic", "Lucida Console", monospace;
 
 $fontSans: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
-$fontSansBold: "SuisseIntl-Bold", Helvetica, Arial, sans-serif;
+$fontSansBold: "SuisseIntl-SemiBold", Helvetica, Arial, sans-serif;
 
 /** FONT IMPORT **/
 @import url(vs.css);
 @font-face{
 	font-family: "SuisseIntl-Book";
-	src: url("webfont/SuisseIntl-Book-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebS.woff") format("woff");
+	src: url("webfont/SuisseIntl-Book-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebXL.woff") format("woff");
 }
 @font-face{
-	font-family: "SuisseIntl-Bold";
-	src: url("webfont/SuisseIntl-Bold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-Bold-WebS.woff") format("woff");
+	font-family: "SuisseIntl-SemiBold";
+	src: url("webfont/SuisseIntl-SemiBold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebS.woff") format("woff");
 }
 
 @font-face{
@@ -134,6 +134,11 @@ p a{
 
 ul{
 	list-style-type: '\2022 \00a0\00a0';
+}
+
+strong{
+	font-family: $fontSansBold;
+	font-weight: normal;
 }
 
 /** External Links in Fließtext **/
