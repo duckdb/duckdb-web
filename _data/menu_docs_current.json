@@ -136,6 +136,10 @@
               "url": "ibis"
             },
             {
+              "page": "DuckDB with Fugue",
+              "url": "fugue"
+            },
+            {
               "page": "DuckDB with Polars",
               "url": "polars"
             },
