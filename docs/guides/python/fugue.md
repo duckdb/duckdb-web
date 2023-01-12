@@ -35,7 +35,7 @@ df.to_parquet("/tmp/f.parquet")
 ```
 Here, the file is loaded, processed, and then saved in the query.
 ```python
-from fugue.api import fugue_sql_flow
+import fugue.api as fa
 
 query = """
 df = LOAD "/tmp/f.parquet"
@@ -46,14 +46,12 @@ res = SELECT *
 
 SAVE res OVERWRITE "/tmp/f2.parquet"
 """
-fugue_sql_flow(query, engine="duckdb")
+fa.fugue_sql_flow(query, engine="duckdb")
 ```
 
 For other available keywords, check the [SQL Operators](https://fugue-tutorials.readthedocs.io/tutorials/fugue_sql/operators.html) available.
 
 There is also a [Jupyter extension](https://github.com/fugue-project/fugue-jupyter) for FugueSQL to be used inside a notebook with syntax highlighting. To use it with DuckDB, simply use `%%fsql duckdb` as the cell magic.
-
-![img](https://camo.githubusercontent.com/9b7687c0e29d78d73c4046be8b5d983844c74dfed1b88bc4a9a92dc95e0957d9/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f3730302f312a363039312d5263724f507969664a544c6a6f30616e412e676966)
 
 # Running Python/Pandas Functions
 
@@ -67,19 +65,24 @@ def new_col(df: pd.DataFrame) -> pd.DataFrame:
 ```
 
 ```python
-from fugue.api import fugue_sql
-
 query = """
 df = LOAD "/tmp/f.parquet"
 
-SELECT *
-  FROM df
-TRANSFORM USING new_col
+df2 = SELECT *
+        FROM df
+       WHERE a < 3
+
+df3 = TRANSFORM df2 USING new_col
+
+SELECT *, a+b AS c
+  FROM df3
  """
-pandas_df = fugue_sql(query, engine="duckdb")
+pandas_df = fa.as_pandas(fa.fugue_sql(query, engine="duckdb"))
 ```
 
 The `fugue_sql()` function automatically returns the last DataFrame of the query. When using the `TRANSFORM` function, FugueSQL will bring the DuckDB table to Pandas to execute the Python code. By using `TRANSFORM`, there is no more need to break up the SQL to invoke Python code. FugueSQL is a first-class interface for defining the end-to-end logic.
+
+Because we used the `"duckdb"` engine, the output of the query will be a DuckDB DataFrame. It can be converted to Pandas by using `as_pandas()`.
 
 # Distributing with SparkSQL
 
@@ -89,11 +92,16 @@ One of the features of Fugue is that the same code will be able to run on top of
 query = """
 df = LOAD "/tmp/f.parquet"
 
-SELECT *
-  FROM df
-TRANSFORM USING new_col
+df2 = SELECT *
+        FROM df
+       WHERE a < 3
+
+df3 = TRANSFORM df2 USING new_col
+
+SELECT *, a+b AS c
+  FROM df3
  """
-spark_df = fugue_sql(query, engine="spark")
+spark_df = fa.fugue_sql(query, engine="spark")
 ```
 
 The output of the code above will be a Spark DataFrame.
