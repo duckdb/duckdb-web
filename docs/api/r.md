@@ -101,4 +101,13 @@ tbl(con, "flights") |>
   collect()
 ```
 
+When using dbplyr, CSV and Parquet files can be read using the `dplyr::tbl` function.
 
+```R
+write.csv(mtcars, "mtcars.csv")
+
+tbl(con, "mtcars.csv") |>
+  group_by(cyl) |>
+  summarise(across(disp:wt, .fns = mean)) |>
+  collect()
+```
