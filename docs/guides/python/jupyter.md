@@ -147,11 +147,11 @@ WHERE trip_distance < 6.3
 ```
 
 To create a histogram, call %sqlplot histogram, and pass the name of the table, the column you want to plot, and the number of bins. 
-Similarly to what we did in the Boxplot example, we’re using --with short-trips so JupySQL uses the query we defined and only plots such data subset.
+We’re using --with short-trips so JupySQL uses the query we defined and only plots such data subset.
 
 ```python
 %sqlplot histogram --table short-trips --column trip_distance --bins 10 --with short-trips
 ```
 
 ## Summary
-You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!
+You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! You can plot massive datasets directly through the engine (avoiding pandas inefficiency). Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!
