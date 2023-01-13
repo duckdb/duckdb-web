@@ -19,25 +19,28 @@ This example workflow is also available as a [Google Collab notebook](https://co
 
 ## Library Installation
 Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
-1. [Pandas](https://github.com/pandas-dev/pandas)
-    * Clean table visualizations and compatibility with other analysis
-2. [jupysql](https://github.com/ploomber/jupysql)
+1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
-3. [duckdb_engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
+2. [duckdb_engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB
+3. [Pandas](https://github.com/pandas-dev/pandas)
+    * Clean table visualizations and compatibility with other analysis
+4. [matplotlib](https://github.com/matplotlib/matplotlib)
+    * Plotting with Python
 
 ```python
 # Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
 # Otherwise, see Google Collab link above for an in-notebook example
 pip install duckdb
 
-# Install Jupyter Notebook (Note: you can also install Jupyter Lab via jupyterlab) 
+# Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab) 
 pip install notebook
 
 # Install supporting libraries
-pip install pandas       # conda install pandas
 pip install jupysql
 pip install duckdb-engine
+pip install pandas       # conda install pandas (in case pip fails)
+pip install matplotlib
 ```
 
 ## Library Import and Configuration
@@ -80,6 +83,12 @@ SELECT
 FROM duckdb_functions()
 ORDER BY ALL DESC
 LIMIT 5
+```
+
+To return query results into a Pandas dataframe for future usage, use `<<` as an assignment operator.
+This can be used with both the `%sql` and `%%sql` Jupyter magics.
+```sql
+%sql my_df << SELECT 'Off and flying!' as a_duckdb_column
 ```
 
 ## Querying Pandas Dataframes
