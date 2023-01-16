@@ -56,6 +56,7 @@ selected: Client APIs
         * [.register_buffer(name)](#module_duckdb..Database+register_buffer) ⇒ <code>this</code>
         * [.unregister_buffer(name)](#module_duckdb..Database+unregister_buffer) ⇒ <code>this</code>
         * [.unregister_udf(name)](#module_duckdb..Database+unregister_udf) ⇒ <code>this</code>
+        * [.registerReplacementScan(fun)](#module_duckdb..Database+registerReplacementScan) ⇒ <code>this</code>
         * [.get()](#module_duckdb..Database+get)
     * [~ERROR](#module_duckdb..ERROR) : <code>number</code>
     * [~OPEN_READONLY](#module_duckdb..OPEN_READONLY) : <code>number</code>
@@ -401,6 +402,7 @@ Main database interface
     * [.register_buffer(name)](#module_duckdb..Database+register_buffer) ⇒ <code>this</code>
     * [.unregister_buffer(name)](#module_duckdb..Database+unregister_buffer) ⇒ <code>this</code>
     * [.unregister_udf(name)](#module_duckdb..Database+unregister_udf) ⇒ <code>this</code>
+    * [.registerReplacementScan(fun)](#module_duckdb..Database+registerReplacementScan) ⇒ <code>this</code>
     * [.get()](#module_duckdb..Database+get)
 
 <a name="module_duckdb..Database+close"></a>
@@ -631,6 +633,17 @@ Convenience method for Connection#unregister_udf
 | Param |
 | --- |
 | name | 
+
+<a name="module_duckdb..Database+registerReplacementScan"></a>
+
+#### database.registerReplacementScan(fun) ⇒ <code>this</code>
+Register a table replace scan function
+
+**Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
+
+| Param | Description |
+| --- | --- |
+| fun | Replacement scan function |
 
 <a name="module_duckdb..Database+get"></a>
 
