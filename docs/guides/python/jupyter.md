@@ -49,7 +49,7 @@ Next, open a Jupyter Notebook and import the relevant libraries.
 import duckdb
 import pandas as pd
 # No need to import duckdb_engine
-#  SQLAlchemy will auto-detect the driver needed based on the connection string!
+#  jupysql will auto-detect the driver needed based on the connection string!
 
 # Import jupysql Jupyter extension to create SQL cells
 %load_ext sql
