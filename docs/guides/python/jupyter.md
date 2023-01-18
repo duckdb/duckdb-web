@@ -11,7 +11,7 @@ This guide will describe how to utilize those additional libraries.
 See other guides in the Python section for how to use DuckDB and Python together.  
 
 In this example, we used the [jupysql](https://github.com/ploomber/jupysql) package which is a direct fork of [ipython-sql](https://github.com/catherinedevlin/ipython-sql).
-The main difference is that `Jupysql` is well maintained, has newer features and bug fixes.
+The main difference is that `Jupysql` is well maintained, and has both newer features and bug fixes.
   
 As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DuckDB directly may be desirable. However, the difference is typically quite small.  
 
@@ -49,7 +49,7 @@ Next, open a Jupyter Notebook and import the relevant libraries.
 import duckdb
 import pandas as pd
 # No need to import duckdb_engine
-#  SQLAlchemy will auto-detect the driver needed based on your connection string!
+#  SQLAlchemy will auto-detect the driver needed based on the connection string!
 
 # Import jupysql Jupyter extension to create SQL cells
 %load_ext sql
@@ -63,7 +63,7 @@ Set configrations on jupysql to directly output data to Pandas and to simplify t
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string. 
-You may either connect to an in memory DuckDB, or a file backed db.
+Either connect to an in memory DuckDB, or a file backed db.
 ```python
 %sql duckdb:///:memory:
 # %sql duckdb:///path/to/file.db
@@ -103,55 +103,57 @@ The dataframe being queried can be specified just like any other table in the `F
 ```
 
 ## Visualizing DuckDB Data
-The most common way for plotting datasets in Python is to load them using pandas and then use matplotlib or seaborn for plotting.
-This approach requires loading all your data into memory which is highly inefficient.
+The most common way to plot datasets in Python is to load them using Pandas and then use matplotlib or seaborn for plotting.
+This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine. 
-This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, allowing you to efficiently plot massive datasets. 
+This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets. 
 
-### Download data
-In this example, we will query a .parquet file using DuckDB.
+### Install and Load DuckDB httpfs extension
+DuckDB's [httpfs extension](https://duckdb.org/docs/extensions/httpfs) allows parquet and csv files to be queried remotely over http. 
+These examples query a parquet file that contains historical taxi data from NYC. 
+Using the parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than download the entire file. 
+DuckDB can be used to process [local parquet files as well](https://duckdb.org/docs/data/parquet), which may be desirable if querying the entire parquet file, or running multiple queries that require large subsets of the file.
 
-```python
-from pathlib import Path
-from urllib.request import urlretrieve
-
-if not Path("yellow_tripdata_2021-01.parquet").is_file():
-    urlretrieve("https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet",
-                "yellow_tripdata_2021-01.parquet")
+```sql
+%%sql
+INSTALL httpfs;
+LOAD httpfs;
 ```
-
-Load the extension and connect to an in-memory DuckDB database:
-```python
-%sql duckdb://
-```
-Note: We’ll be using a sample dataset that contains historical taxi data from NYC (from the above cell).
 
 ### Boxplot & Histogram
-To create a boxplot, call `%sqlplot boxplot`, and pass the name of the table, 
-and the column you want to plot.
+To create a boxplot, call `%sqlplot boxplot`, passing the name of the table and the column to plot.
+In this case, the name of the table is the URL of the remotely stored parquet file.
 
 ```python
-%sqlplot boxplot --table yellow_tripdata_2021-01.parquet --column trip_distance
+%sqlplot boxplot --table https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet --column trip_distance
 ```
 
-Now, let’s create a query that filters by the 90th percentile. 
-Note that we’re using the --save, and --no-execute functions. 
-This tells JupySQL to store the query, but skips execution. We’ll reference it in our next plotting call.
+
+![image](https://user-images.githubusercontent.com/52226177/213212690-fbd21774-3174-4a22-a2de-e1df8d8b4575.png)
+
+
+Now, create a query that filters by the 90th percentile. 
+Note the use of the `--save`, and `--no-execute` functions. 
+This tells JupySQL to store the query, but skips execution. It will be referenced in the next plotting call.
 
 
 ```python
 %%sql --save short-trips --no-execute
 SELECT *
-FROM "yellow_tripdata_2021-01.parquet"
+FROM "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
 WHERE trip_distance < 6.3
 ```
 
-To create a histogram, call %sqlplot histogram, and pass the name of the table, the column you want to plot, and the number of bins. 
-We’re using --with short-trips so JupySQL uses the query we defined and only plots such data subset.
+To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot, and the number of bins. 
+This uses `--with short-trips` so JupySQL uses the query defined previously and therefore only plots a subset of the data.
 
 ```python
 %sqlplot histogram --table short-trips --column trip_distance --bins 10 --with short-trips
 ```
 
+
+![image](https://user-images.githubusercontent.com/52226177/213212777-0009bbb2-ac30-4a19-a275-51e92b04a330.png)
+
+
 ## Summary
-You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! You can plot massive datasets directly through the engine (avoiding pandas inefficiency). Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!
+You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! You can plot massive datasets directly through the engine (avoiding both the download of the entire file and loading all of it into Pandas in memory). Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!
