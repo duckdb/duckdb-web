@@ -31,7 +31,7 @@ When the `DISTINCT` clause is provided, only distinct values are considered in t
 When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results
 (e.g., `first`, `last`, `list` and `string_agg`). These can be made deterministic by ordering the arguments.
-For order-insensitive aggregates, this clause is parsed but ignored.
+For order-insensitive aggregates, this clause is parsed and applied, which is inefficient, but still produces the same result.
 
 ## General Aggregate Functions
 The table below shows the available general aggregate functions.
