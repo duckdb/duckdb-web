@@ -1,3 +1,17 @@
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/data/search_data.json');
+xhr.onreadystatechange = function(event) {
+	if (this.readyState === 4) {
+		const { data } = JSON.parse(this.responseText);
+		let documents = data.map((item, id) => ({id, ...item}));
+
+		// Add documents to the index
+		miniSearch.addAll(documents)
+		miniPredictor.addAll(documents);
+	}
+}
+xhr.send();
+
 // Create a search engine that indexes the 'title' and 'text' fields for
 // full-text search. Search results will include 'title' and 'category' (plus the
 // id field, that is always stored and returned)
@@ -5,8 +19,6 @@ const miniSearch = new MiniSearch({
 	fields: ['title', 'text', 'category', 'blurb'],
 	storeFields: ['title', 'text', 'category', 'url', 'blurb']
 })
-// Add documents to the index
-miniSearch.addAll(documents)
 
 // read GET parameters (https://stackoverflow.com/questions/12049620/how-to-get-get-variables-value-in-javascript)
 // lord knows why this needs a regex and hasn't been part of the JS standard since day 1
@@ -97,15 +109,10 @@ text_div.addEventListener('input', on_update);
 // autocomplete
 // see https://www.w3schools.com/howto/howto_js_autocomplete.asp
 inp = document.getElementById("q")
-mini_docs = []
-for (i in documents) {
-	mini_docs.push({'id': documents[i].id, 'title': documents[i].title, 'category': documents[i].category, 'blurb': documents[i].blurb });
-}
 const miniPredictor = new MiniSearch({
 	fields: ['title', 'category', 'blurb'],
 	storeFields: ['title', 'category', 'blurb']
 })
-miniPredictor.addAll(mini_docs);
 /*the autocomplete function takes two arguments,
 the text field element and an array of possible autocompleted values:*/
 var currentFocus;

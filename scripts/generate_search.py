@@ -163,5 +163,5 @@ for file in files:
 
 file_list.extend(function_list.values())
 
-with open('_data/search_data.json', 'w+') as f:
+with open('data/search_data.json', 'w+') as f:
 	json.dump({'data': sorted(file_list, key=lambda x: x['title'])}, f, indent='\t')

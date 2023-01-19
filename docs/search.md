@@ -16,8 +16,5 @@ selected: Search
 
 <div id="search_results"></div>
 
-<script>
-const documents = {{ site.data.search_data.data | jsonify }}.map((item, id) => ({id, ...item}));
-</script>
 <script src="{{ site.baseurl }}/js/minisearch.js"></script>
 <script src="{{ site.baseurl }}/js/search.js"></script>
