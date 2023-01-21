@@ -38,6 +38,7 @@ The table below shows the available general aggregate functions.
 
 | Function | Description | Example | Alias(es) |
 |:---|:---|:---|:---|
+| `any_value(arg)` |Returns the first _non-null_ value from arg. | `any_value(A)` | - |
 | `arg_max(arg,val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A,B)` | `argMax(A,B)`, `max_by(A,b)` |
 | `arg_min(arg,val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A,B)` | `argMin(A,B)`, `min_by(A,B)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |
