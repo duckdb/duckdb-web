@@ -43,6 +43,8 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | `make_date(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`)` | The date for the given parts | `make_date(1992, 9, 20)` | `1992-09-20` |
 | `monthname(`*`date`*`)` | The (English) name of the month | `monthname(DATE '1992-09-20')` | `September` |
 | `strftime(date, format)` | Converts a date to a string according to the [format string](../../sql/functions/dateformat) | `strftime(date '1992-01-01', '%a, %-d %B %Y')` | `Wed, 1 January 1992` |
+| `time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`origin`*`])` | Truncate `date` by the specified interval `bucket_width`. Buckets are aligned relative to `origin`. `origin` defaults to 2000-01-03 for buckets that don't include a month or year interval, and to 2000-01-01 for month and year buckets. | `time_bucket(INTERVAL '2 weeks', DATE '1992-04-20', DATE '1992-04-01')` | `1992-04-15` |
+| `time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`offset`*`])` | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset`. `offset` defaults to 0. | `time_bucket(INTERVAL '2 months', DATE '1992-04-20', INTERVAL '1 month')` | `1992-04-01` |
 | `today()` | Current date (start of current transaction) | `today()` | `2022-10-08` |
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
