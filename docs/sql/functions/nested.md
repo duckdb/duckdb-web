@@ -63,7 +63,8 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_distinct(`*`list`*`)`                       | Removes all duplicates and NULLs from a list. Does not preserve the original order.                                                                                                 | `list_distinct([1, 1, NULL, -3, 1, 5])`  | `[1, 5, -3]`      |
 | `array_distinct(`*`list`*`)`                      | Alias for `list_distinct`.                                                                                                                                                          | `array_distinct([1, 1, NULL, -3, 1, 5])` | `[1, 5, -3]`      |
 | `list_unique(`*`list`*`)`                         | Counts the unique elements of a list.                                                                                                                                               | `list_unique([1, 1, NULL, -3, 1, 5])`    | `3`               |
-| `array_unique(`*`list`*`)`          | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
+| `array_unique(`*`list`*`)`                        | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
+| `list_any_value(`*`list`*`)`                      | Returns the first non-null value in the list                                                                                                                                        | `list_any_value([NULL, -3])`             | `-3`              |
 
 ## List Comprehension
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
