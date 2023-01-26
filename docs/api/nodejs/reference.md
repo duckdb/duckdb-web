@@ -382,6 +382,14 @@ Main database interface
 
 **Kind**: inner property of [<code>duckdb</code>](#module_duckdb)  
 
+| Param | Description |
+| --- | --- |
+| path | path to database file or :memory: for in-memory database |
+| access_mode | access mode |
+| config | the configuration object |
+| callback | callback function |
+
+
 * [~Database](#module_duckdb..Database)
     * [.close(callback)](#module_duckdb..Database+close) ⇒ <code>void</code>
     * [.close_internal(callback)](#module_duckdb..Database+close_internal) ⇒ <code>void</code>
