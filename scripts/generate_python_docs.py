@@ -78,7 +78,7 @@ def main():
             "intersphinx_mapping": {
                 "pandas": ("https://pandas.pydata.org/pandas-docs/version/1.5.1/", None),
                 "pyarrow": ("https://arrow.apache.org/docs/9.0/", None),
-                "fsspec": ("https://filesystem-spec.readthedocs.io/en/2023.1.0/", None)
+                "fsspec": ("https://filesystem-spec.readthedocs.io/en/latest/", None)
             }
         },
         buildername="jekyll",
