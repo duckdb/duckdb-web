@@ -25,7 +25,7 @@ jobs:
       - run: gh repo clone duckdb/duckdb
       - name: download latest duckdb cli binary
         run: |
-          RUN_ID=$(gh run list --branch master --repo duckdb/duckdb --workflow LinuxRelease -q '.[] | select(.conclusion == "success")' --json conclusion,databaseId --jq '.[0].databaseId')
+          RUN_ID=$(gh run list --branch master --repo duckdb/duckdb --workflow LinuxRelease -q '.[] | select(.conclusion == "success").databaseId' --json conclusion,databaseId | head -n 1)
           gh run download $RUN_ID --repo duckdb/duckdb --name duckdb-binaries-linux
           mkdir -p duckdb/build/debug
           unzip duckdb_cli-linux-amd64.zip -d duckdb/build/debug
