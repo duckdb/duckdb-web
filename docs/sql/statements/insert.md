@@ -17,6 +17,10 @@ INSERT INTO tbl SELECT * FROM other_tbl;
 INSERT INTO tbl(i) VALUES (1), (2), (3);
 -- explicitly insert the default value into a column
 INSERT INTO tbl(i) VALUES (1), (DEFAULT), (3);
+-- assuming tbl has a primary key/unique constraint, do nothing on conflict
+INSERT OR IGNORE tbl(i) VALUES(1);
+-- or update the table with the new values instead
+INSERT OR REPLACE tbl(i) VALUES(1);
 ```
 
 ### Syntax
@@ -29,6 +33,28 @@ The target column names can be listed in any order. If no list of column names i
 Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or `NULL` if there is none.
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
+
+## On Conflict Clause
+
+An `ON CONFLICT` clause can be used to perform a certain action on conflicts that arise from `UNIQUE` or `PRIMARY KEY` constraints.
+
+Optionally you can provide a `conflict_target`, which is a group of columns that an Index indexes on, or if left out, all `UNIQUE` or `PRIMARY KEY` constraint(s) on the table are targeted.
+
+When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
+If a conflict does not meet this condition, an error will be thrown instead, and the entire operation is aborted.
+
+Because we need a way to refer to both the **to-be-inserted** tuple and the **existing** tuple, we introduce the special `excluded` qualifier.
+When the `excluded` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise it refers to the **existing** tuple
+This special qualifier can be used within the `WHERE` clauses and `SET` expressions of the `ON CONFLICT` clause.
+
+There are two supported actions:
+
+- `DO NOTHING`
+Causes the error(s) to be ignored, and the values are not inserted or updated.
+
+- `DO UPDATE`
+Causes the an `UPDATE` to be performed on the row(s) of the table instead. The `SET` expressions that follow determine how these rows are updated.
+Optionally you can provide an additional `WHERE` clause that can filter the rows to perform the update on even further. The conflicts that don't meet this condition are ignored instead.
 
 ### Returning Clause
 
