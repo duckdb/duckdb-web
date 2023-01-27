@@ -5,7 +5,11 @@ layout: docu
 
 > NOTICE: This feature is experimental, and is subject to change
 
-DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's `httpfs` extension does not support (eg, Azure, Alibaba).
+DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's `httpfs` extension does not support.
+
+`fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations).
+
+### Example
 
 The following is an example of using `fsspec` to query a file in Google Cloud Storage (instead of using their s3 inter-compatibility api).
 
@@ -28,7 +32,7 @@ conn.execute('select * from 'gcs:///bucket/file.csv')
 data = conn.fetchall()
 ```
 
-# Potential issues
+### Potential issues
 
 Please also note, that as these filesystems are not implemented in C++, their performance may not be comparable to the ones provided by the `httpfs` extension.
 It's also worth noting that as they are third party libraries, they may contain bugs that are beyond our control.
