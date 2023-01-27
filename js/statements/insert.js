@@ -3,17 +3,19 @@ function GenerateInsert(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("INSERT"),
-			Optional(
+			Choice(0, [
+				new Skip(),
 				Keyword("OR REPLACE"),
-				Keyword("OR IGNORE")
-			),
+				Keyword("OR IGNORE"),
+			]),
 			Keyword("INTO"),
 			GenerateQualifiedTableName(),
 			Optional(
-				Sequence(
+				Sequence([
 					Keyword("AS"),
 					GenerateQualifiedTableName()
-				)
+				]),
+				"skip"
 			),
 			GenerateOptionalColumnList(),
 			Choice(0, [
@@ -53,7 +55,8 @@ function GenerateOnConflict(options) {
 						Sequence([
 							Keyword("WHERE"),
 							Expression()
-						])
+						]),
+						"skip"
 					)
 				]),
 				"skip"
@@ -72,7 +75,7 @@ function GenerateOnConflict(options) {
 					Optional(Sequence([
 						Keyword("WHERE"),
 						Expression()
-					]))
+					]), "skip")
 				]),
 				Sequence([
 					Keyword("DO NOTHING")

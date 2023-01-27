@@ -56,6 +56,9 @@ Causes the error(s) to be ignored, and the values are not inserted or updated.
 Causes the an `UPDATE` to be performed on the row(s) of the table instead. The `SET` expressions that follow determine how these rows are updated.
 Optionally you can provide an additional `WHERE` clause that can filter the rows to perform the update on even further. The conflicts that don't meet this condition are ignored instead.
 
+`INSERT OR REPLACE` can be used as an alias for `ON CONFLICT DO UPDATE SET (c1 = excluded.c1, c2 = excluded.c2, ..)`
+`INSERT OR IGNORE` can be used as an alias for `ON CONFLICT DO NOTHING`
+
 ### Returning Clause
 
 The `RETURNING` clause may be used to return the contents of the rows that were inserted. This can be useful if some columns are calculated upon insert. For example, if the table contains an automatically incrementing primary key, then the `RETURNING` clause will include the automatically created primary key. This is also useful in the case of generated columns.

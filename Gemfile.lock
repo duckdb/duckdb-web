@@ -205,6 +205,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
+    webrick (1.8.1)
     zeitwerk (2.6.0)
 
 PLATFORMS
@@ -257,6 +258,7 @@ DEPENDENCIES
   rouge (~> 3.26)
   safe_yaml (= 1.0.5)
   sass (= 3.7.4)
+  webrick (~> 1.8)
 
 BUNDLED WITH
    2.3.17
