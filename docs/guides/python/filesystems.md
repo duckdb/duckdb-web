@@ -25,7 +25,7 @@ from fsspec import filesystem
 conn = duckdb.connect()
 conn.register_filesystem(filesystem('gcs'))  # this line will throw an exception if the appropriate filesystem interface is not installed
 
-conn.execute('select * from 'gcs:///bucket/file.csv')
+conn.execute("select * from read_csv_auto('gcs:///bucket/file.csv')")
 
 data = conn.fetchall()
 ```
