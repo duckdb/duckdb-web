@@ -30,5 +30,5 @@ data = conn.fetchall()
 
 # Potential issues
 
-Please also note, that as these filesystems are implemented in C++, their performance may not be comparable to the ones provided by the `httpfs` extension.
+Please also note, that as these filesystems are not implemented in C++, their performance may not be comparable to the ones provided by the `httpfs` extension.
 It's also worth noting that as they are third party libraries, they may contain bugs that are beyond our control.
