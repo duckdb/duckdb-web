@@ -3,7 +3,7 @@ title: Filesystems
 layout: docu
 ---
 
-> NOTICE: This feature is experimental, and is subject to change
+> This feature is experimental, and is subject to change
 
 DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's `httpfs` extension does not support.
 
