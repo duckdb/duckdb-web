@@ -52,9 +52,10 @@ PRAGMA database_size;
 CALL pragma_database_size();
 ```
 
-`database_size` returns information about the file and memory size of each table. The column types of the returned results are given below:
+`database_size` returns information about the file and memory size of each database. The column types of the returned results are given below:
 
 ```sql
+database_name VARCHAR, -- database name
 database_size VARCHAR, -- total block count times the block size
 block_size BIGINT,     -- database block size
 total_blocks BIGINT,   -- total blocks in the database
