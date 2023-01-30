@@ -49,14 +49,18 @@ This special qualifier can be used within the `WHERE` clauses and `SET` expressi
 
 There are two supported actions:
 
-1. `DO NOTHING`
-* Causes the error(s) to be ignored, and the values are not inserted or updated.
+1. `DO NOTHING`  
+Causes the error(s) to be ignored, and the values are not inserted or updated.
 
-1. `DO UPDATE`
-* Causes the an `UPDATE` to be performed on the row(s) of the table instead. The `SET` expressions that follow determine how these rows are updated.
-* Optionally you can provide an additional `WHERE` clause that can filter the rows to perform the update on even further. The conflicts that don't meet this condition are ignored instead.
+2. `DO UPDATE`  
+Causes the `INSERT` to turn into an `UPDATE` on the conflicting row(s) instead.  
+The `SET` expressions that follow determine how these rows are updated.  
+Optionally you can provide an additional `WHERE` clause that can exclude certain rows from the update.  
+The conflicts that don't meet this condition are ignored instead.
 
-`INSERT OR REPLACE` is a shorter syntax alternative to `ON CONFLICT DO UPDATE SET (c1 = excluded.c1, c2 = excluded.c2, ..)`.
+`INSERT OR REPLACE` is a shorter syntax alternative to `ON CONFLICT DO UPDATE SET (c1 = excluded.c1, c2 = excluded.c2, ..)`.  
+It updates every column of the **existing** row to the new values of the **to-be-inserted** row.
+  
 `INSERT OR IGNORE` is a shorter syntax alternative to `ON CONFLICT DO NOTHING`.
 
 
