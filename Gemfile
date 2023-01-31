@@ -45,3 +45,5 @@ gem "nokogiri", "1.13.10"
 gem "rouge", "~> 3.26"
 gem "safe_yaml", "1.0.5"
 gem "sass", "3.7.4"
+
+gem "webrick", "~> 1.8"

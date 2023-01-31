@@ -66,3 +66,5 @@ SELECT * FROM original;
 | 1   | new value   |
 | 2   | new value 2 |
 
+### Upsert (Insert or Update)
+See the [Insert documentation](/docs/sql/statements/insert#on-conflict-clause) for details.

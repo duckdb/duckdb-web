@@ -3,8 +3,20 @@ function GenerateInsert(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("INSERT"),
+			Choice(0, [
+				new Skip(),
+				Keyword("OR REPLACE"),
+				Keyword("OR IGNORE"),
+			]),
 			Keyword("INTO"),
 			GenerateQualifiedTableName(),
+			Optional(
+				Sequence([
+					Keyword("AS"),
+					GenerateQualifiedTableName()
+				]),
+				"skip"
+			),
 			GenerateOptionalColumnList(),
 			Choice(0, [
 				Sequence(GenerateValues(options)),
@@ -14,12 +26,63 @@ function GenerateInsert(options = {}) {
 					Keyword("VALUES")
 				])
 			]),
+			Optional(
+				Expandable("on-conflict-clause", options, "on-confict-clause", GenerateOnConflict),
+				"skip"
+			),
 			Optional( 
 				Expandable("returning-clause", options, "returning-clause", GenerateReturning),
 				"skip"
 			)
 		])
 	])
+}
+
+function GenerateOnConflict(options) {
+	return [
+		Sequence([
+			Keyword("ON CONFLICT"),
+			// (c1, c2) WHERE <expr>
+			Optional(
+				Sequence([
+					Keyword("("),
+					OneOrMore(
+						Expression("column-name"),
+						Keyword(",")
+					),
+					Keyword(")"),
+					Optional(
+						Sequence([
+							Keyword("WHERE"),
+							Expression()
+						]),
+						"skip"
+					)
+				]),
+				"skip"
+			),
+			Choice(0, [
+				Sequence([
+					Keyword("DO UPDATE"),
+					Keyword("SET"),
+					OneOrMore(
+						Sequence([
+							Expression("column-name"),
+							Keyword("="),
+							Expression(),
+						]), Keyword(",")
+					),
+					Optional(Sequence([
+						Keyword("WHERE"),
+						Expression()
+					]), "skip")
+				]),
+				Sequence([
+					Keyword("DO NOTHING")
+				])
+			])
+		])
+	]
 }
 
 function GenerateReturning(options) {
@@ -30,7 +93,7 @@ function GenerateReturning(options) {
 			Choice(0, [
 				new Skip(),
 				OneOrMore(
-					Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),				
+					Sequence([Expression(), Optional(Sequence([Optional(Keyword("AS")), Expression("alias")]), "skip")]),
 					","
 				),
 			]),
