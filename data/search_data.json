@@ -1174,7 +1174,7 @@
 			"text": "getting started with duckdb-wasm a great starting point is to read the duckdb-wasm launch blog post another great resource is the github repository for details see the full duckdb-wasm api documentation",
 			"category": "Api",
 			"url": "/docs/api/wasm",
-			"blurb": "Getting Started with DuckDB-WASM A great starting point is to read the DuckDB-WASM launch blog post ! Another great..."
+			"blurb": "Getting Started with DuckDB-Wasm A great starting point is to read the DuckDB-Wasm launch blog post ! Another great..."
 		},
 		{
 			"title": "Window Functions",
