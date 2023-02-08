@@ -274,6 +274,7 @@ selected: API Reference
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_finish_execution">duckdb_finish_execution</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
 <span class="kt">bool</span> <span class="nf"><a href="#duckdb_task_state_is_finished">duckdb_task_state_is_finished</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_task_state">duckdb_destroy_task_state</a></span>(<span class="k">duckdb_task_state</span> <span class="k">state</span>);
+<span class="kt">bool</span> <span class="nf"><a href="#duckdb_execution_is_finished">duckdb_execution_is_finished</a></span>(<span class="kt">duckdb_connection</span> <span class="k">con</span>);
 </code></pre></div></div>
 ### duckdb_open
 ---
@@ -5009,6 +5010,24 @@ on the task state.
 * `state`
 
 The task state to clean up
+
+<br>
+
+### duckdb_execution_is_finished
+---
+Returns true if execution of the current query is finished.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_execution_is_finished</span>(<span class="k">
+</span>  <span class="kt">duckdb_connection</span> <span class="k">con
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `con`
+
+The connection on which to check
 
 <br>
 
