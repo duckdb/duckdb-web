@@ -25,6 +25,10 @@ $fontSansBold: "SuisseIntl-SemiBold", Helvetica, Arial, sans-serif;
 	src: url("webfont/SuisseIntl-Book-WebXL.woff2") format("woff2"),url("webfont/SuisseIntl-Book-WebXL.woff") format("woff");
 }
 @font-face{
+	font-family: "SuisseIntl-Medium";
+	src: url("webfont/SuisseIntl-Medium-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebS.woff") format("woff");
+}
+@font-face{
 	font-family: "SuisseIntl-SemiBold";
 	src: url("webfont/SuisseIntl-SemiBold-WebS.woff2") format("woff2"),url("webfont/SuisseIntl-SemiBold-WebS.woff") format("woff");
 }
@@ -821,24 +825,29 @@ body.landing{
 						justify-content: space-between;
 				list-style: none;
 				li{
+					/*
 					-webkit-box-flex: 1;
 						-ms-flex: 1 1 0px;
 							flex: 1 1 0px;
+					*/
+					flex: auto;
+					flex-grow: 3;
 					-webkit-transition: all .3s;
 					-o-transition: all .3s;
 					transition: all .3s;
 					color: darken($duckDBgrey,20);
-					border-bottom: 1px solid black;
+					border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 					text-align: center;
 					cursor: pointer;
 					height: 40px;
 					line-height: 40px;
+					white-space: nowrap;
 					&:hover{
 						color: black;
 					}
 				}
 				li.active{
-					border-bottom: 3px solid black;
+					border-bottom: 2px solid black;
 					color: black;
 				}
 			}
@@ -944,6 +953,57 @@ body.landing{
 	}
 }
 
+body.landing label.onlymobile,
+body.installation .evironment label.onlymobile{
+	position: relative;
+	&::after{
+		content: "\E010";
+		font-family: "DuckDB-Symbol";
+		right: 10px;
+		top: 4px;
+		padding: 0 0 2px;
+		position: absolute;
+		pointer-events: none;
+		font-size: 20px;
+		color: white;
+	}
+}
+.environmentselect{
+	width: 100%;
+	/*border: 1px solid #b8b8b8;*/
+	border: none;
+	background: black;
+	color: white;
+	border-radius: 0;
+	height: 35px;
+	padding-left: 9px;
+	font-family: "SuisseIntl-Book", Helvetica, Arial, sans-serif;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	cursor: pointer;
+}
+
+body.installation{
+	.environmentselect{
+		background-color: darken($duckDBlightgrey,5);
+		color: black;
+		border: none;
+		border-bottom: 2px solid rgba(0,0,0,0.4);
+		&:focus, &:active{
+			outline: 0;
+			border: none;
+			border-radius: 0;
+			border-bottom: 2px solid rgba(0,0,0,0.4);
+		}
+	}
+}
+body.installation .evironment label.onlymobile{
+	&::after{
+		color: black;
+	}
+}
+
 
 
 /** DOCUMENTATION **/
@@ -980,6 +1040,7 @@ body.documentation{
 			font-size: 21px;
 			margin-bottom: 10px;
 			margin-top: 30px;
+			font-family: "SuisseIntl-Medium";
 		}
 		h4{
 			font-size: 19px;
@@ -1248,6 +1309,9 @@ body.documentation main .wrap.frequentlyaskedquestions{
 /** SPECIAL INSTALLATION PAGE **/
 
 body.installation{
+	main .wrap, main .wrap #main_content_wrap{
+		max-width: 100%;
+	}
 	h1{
 		font-size: 140%;
 		font-weight: normal;
@@ -1263,8 +1327,9 @@ body.installation{
 				user-select: none;
 	}
 	.yourselection{
-		max-width: 780px;
+		
 		position: relative;
+		max-width: 780px;
 	}
 	.wrap{
 		margin-bottom: 100px;
@@ -1284,14 +1349,13 @@ body.installation{
 			/**margin-bottom: 53px;**/
 			li{
 				display: block;
+				white-space: nowrap;
 				background-color: $duckDBlightgrey;
 				color: darken($duckDBlightgrey,40);
 				border: 1px solid white;
-				  border-bottom: 1px solid rgba(0,0,0,0.2);
+				border-bottom: 1px solid rgba(0,0,0,0.2);
 				border-left: 0px;
-				-webkit-box-flex: 1;
-					-ms-flex: 1 1 0px;
-						flex: 1 1 0px;
+				flex: auto;
 				-webkit-transition: background-color .3s;
 				-o-transition: background-color .3s;
 				transition: background-color .3s;
