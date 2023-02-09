@@ -16,14 +16,23 @@ $(document).ready(function(){
 		$('.ver-odbc').not(OSdatid).remove()
 	}
 	
-	// Installationshinweise Landingpage
+	// Installation instructions on landingpage
+	var landingpageevaluation = function(environment){
+		var result = $('.install .hidden .'+environment).html();
+		$('.install .result').html(result);		
+	}
 	$('.environment ul li').click(function(){
 		var environment = $(this).attr("data-id");
 		$('.environment ul li.active').removeClass('active');
 		$(this).addClass('active');
-		var result = $('.install .hidden .'+environment).html();
-		$('.install .result').html(result);		
+		landingpageevaluation(environment);
 	});
+	$('body.landing .environmentselect').on('change', function() {
+		landingpageevaluation(this.value);
+	});
+	var environment = $('.environment ul li.active').attr("data-id");
+	landingpageevaluation(environment);
+	
 	
 	// Get URL Parameter
 	var getUrlParameter = function getUrlParameter(sParam) {
@@ -51,7 +60,11 @@ $(document).ready(function(){
 		var versionSelection = $('.yourselection ul.version li.selected').attr('data-id');
 		if(versionSelection){ userSelection.version = versionSelection; }
 		
-		var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
+		if( $("body.installation .evironment .onlymobile").is(":visible") ){
+			var environmentSelection = $('body.installation .environmentselect').val();
+		} else {
+			var environmentSelection = $('.yourselection ul.environment li.selected').attr('data-id');
+		}
 		if(environmentSelection){ userSelection.environment = environmentSelection; }
 		
 		var packSelection = $('.yourselection ul.pack li.selected').attr('data-id');
@@ -112,6 +125,13 @@ $(document).ready(function(){
 			evaluation();
 		}
 	}
+	$('body.installation .environmentselect').on('change', function() {
+		evaluation();
+	});
+	if( $('body.installation').length ){
+		evaluation();
+	}
+	
 
 	if($('.archivedposts').length != 0){ // If Archive Page
 		var year = getUrlParameter('year');

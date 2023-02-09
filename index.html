@@ -127,18 +127,30 @@ body_class: landing nowrap
 		<p>Choose your environment to use for DuckDB</p>
 		<div class="environment">
 			<ul>
-				<li data-id="ver-python" class="active">Python</li>
+				<li data-id="ver-cli" class="active">Command Line</li>
+				<li data-id="ver-python">Python</li>
 				<li data-id="ver-r">R</li>
 				<li data-id="ver-java">Java</li>
 				<li data-id="ver-js">node.js</li>
 				<li data-id="ver-julia">Julia</li>
 				<li data-id="ver-cplusplus">C++</li>
-				<li data-id="ver-cli">CLI</li>
 				<li data-id="ver-odbc">ODBC</li>
 			</ul>
 		</div>
+		<label class="onlymobile">
+			<select name="environment" class="environmentselect onlymobile">
+				<option value="ver-cli">Command Line</option>
+				<option value="ver-python">Python</option>
+				<option value="ver-r">R</option>
+				<option value="ver-java">Java</option>
+				<option value="ver-js">node.js</option>
+				<option value="ver-julia">Julia</option>
+				<option value="ver-cplusplus">C++</option>
+				<option value="ver-odbc">ODBC</option>
+			</select>
+		</label>
 		<div class="result">
-			pip install duckdb=={{ site.currentduckdbversion }}
+			<a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
 		</div>
 		<p class="system">
 			<span>Latest release: DuckDB {{ site.currentduckdbversion }}</span>
@@ -158,11 +170,7 @@ body_class: landing nowrap
 				<a href="https://search.maven.org/artifact/org.duckdb/duckdb_jdbc/{{ site.currentduckdbversion }}/jar">More Options</a>
 			</p>
 			<p class="ver-js">npm install duckdb</p>
-			<div class="ver-julia">
-			{%- highlight julia -%}
-using Pkg
-Pkg.add("DuckDB"){%- endhighlight -%}
-			</div>
+			<p class="ver-julia">using Pkg<br/>Pkg.add("DuckDB")</p>
 			<p class="ver-cplusplus macos"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-osx-universal.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/libduckdb-osx-universal.zip</a></p>
 			<p class="ver-cplusplus linux"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip</a></p>
 			<p class="ver-cplusplus win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip</a></p>
@@ -171,6 +179,7 @@ Pkg.add("DuckDB"){%- endhighlight -%}
 			<p class="ver-cli win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com<wbr>/duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a></p>
 			<p class="ver-odbc linux"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a></p>
 			<p class="ver-odbc win"><a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/<wbr>duckdb/<wbr>duckdb/<wbr>releases/<wbr>download/<wbr>v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a></p>
+			<p class="ver-odbc macos">Not available</p>
 
 		</div>
 
