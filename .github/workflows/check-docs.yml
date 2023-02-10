@@ -1,0 +1,27 @@
+on:
+  schedule:
+    - cron: "0 0 * * 1-5"  # run on week days
+  workflow_dispatch: {}  # allow running manually from the github ui
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+name: Check docs
+jobs:
+  update_docs:
+    name: Check docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: pip install wheel pip -U
+      - run: pip install -r requirements.txt -U
+      - run: pip install duckdb --pre -U
+      # - run: gh repo clone duckdb/duckdb
+
+      - run: python3 scripts/check_for_missing_docs.py >> $GITHUB_STEP_SUMMARY
+        if: success() || failure()
