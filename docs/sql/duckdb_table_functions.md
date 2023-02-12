@@ -37,10 +37,12 @@ The `duckdb_columns()` function provides metadata about the columns available in
 
 | Column | Description | Type |
 |:---|:---|:---|
-| `schema_oid` |Internal identifier of the schema object that contains the table of the column.| `BIGINT` |
+| `database_name` | The name of the database that contains the column object. | VARCHAR |
+| `database_oid` | Internal identifier of the database that contains the column object. | BIGINT |
 | `schema_name` |The SQL name of the schema that contains the table object that defines this column.| `VARCHAR` |
-| `table_oid` |Internal identifier (name) of the table object that defines the column.| `BIGINT` |
+| `schema_oid` |Internal identifier of the schema object that contains the table of the column.| `BIGINT` |
 | `table_name` |The SQL name of the table that defines the column.| `VARCHAR` |
+| `table_oid` |Internal identifier (name) of the table object that defines the column.| `BIGINT` |
 | `column_name` |The SQL name of the column.| `VARCHAR` |
 | `column_index` |The unique position of the column within its table.| `INTEGER` |
 | `internal` |`true` if this column built-in, `false` if it is user-defined.| `BOOLEAN` |
@@ -60,6 +62,8 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` | The name of the database that contains the constraint. | VARCHAR |
+| `database_oid` | Internal identifier of the database that contains the constraint. | BIGINT |
 | `schema_name` |The SQL name of the schema that contains the table on which the constraint is defined.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the table on which the constraint is defined.| `BIGINT` |
 | `table_name` |The SQL name of the table on which the constraint is defined.| `VARCHAR` |
@@ -70,6 +74,18 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `expression` |If constraint is a check constraint, the definition of the condition being checked, otherwise `NULL`.| `VARCHAR` |
 | `constraint_column_indexes` |An array of table column indexes referring to the columns that appear in the constraint definition| `BIGINT[]` |
 | `constraint_column_names` |An array of table column names appearing in the constraint definition| `VARCHAR[]` |
+
+## duckdb_databases
+The `duckdb_databases()` function lists the databases that are accessible from within the current DuckDB process.
+Apart from the database associated at startup, the list also includes databases that were [attached](./statements/attach.html) later on to the duckdb process
+
+| Column | Description | Type |
+|:---|:---|:---|
+| `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | VARCHAR |
+| `database_oid` | The internal identifier of the database. | VARCHAR |
+| `path` | The file path associated with the database. | VARCHAR |
+| `internal` | True indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
+| `type` | The type indicates the type of RDBMS implemented by the attached datase. For duckDB databases, that value is `duckdb`. 
 
 ## duckdb_dependencies
 The `duckdb_dependencies()` function provides metadata about the dependencies available in the DuckDB instance.
@@ -96,12 +112,12 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `description` |Human readable text that describes the extension's functionality.| `VARCHAR` |
 | `aliases` |List of alternative names for this extension.| `VARCHAR[]` |
 
-
 ## duckdb_functions
 The `duckdb_functions()` function provides metadata about the functions available in the DuckDB instance.
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` |The name of the database that contains this function.| `VARCHAR` |
 | `schema_name` |The SQL name of the schema where the function resides.| `VARCHAR` |
 | `function_name` |The SQL name of the function.| `VARCHAR` |
 | `function_type` |The function kind. Value is one of: `table`,`scalar`,`aggregate`,`pragma`,`macro`| `VARCHAR` |
@@ -112,13 +128,15 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 | `varargs` |The name of the data type in case the function has a variable number of arguments, or `NULL` if the function does not have a variable number of arguments.| `VARCHAR` |
 | `macro_definition` |If this is a [macro](./statements/create_macro), the SQL expression that defines it.| `VARCHAR` |
 | `has_side_effects` |`false` if this is a pure function. `true` if this function changes the database state (like sequence funtions `nextval()` and `curval()`).| `BOOLEAN` |
-
+| `function_oid` | The internal identifier for this function | BIGINT |
 
 ## duckdb_indexes
 The `duckdb_indexes()` function provides metadata about secondary indexes available in the DuckDB instance.
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` |The name of the database that contains this index.| `VARCHAR` |
+| `database_oid` | Internal identifier of the database containing the index. | BIGINT |
 | `schema_name` |The SQL name of the schema that contains the table with the secondary index.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object.| `BIGINT` |
 | `index_name` |The SQL name of this secondary index| `VARCHAR` |
@@ -146,6 +164,8 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | Column | Description | Type |
 |:---|:---|:---|
 | `oid` |Internal identifier of the schema object.| `BIGINT` |
+| `database_name` |The name of the database that contains this schema.| `VARCHAR` |
+| `database_oid` | Internal identifier of the database containing the schema. | BIGINT |
 | `schema_name` |The SQL name of the schema.| `VARCHAR` |
 | `internal` |`true` if this is an internal (built-in) schema, `false` if this is a user-defined schema.| `BOOLEAN` |
 | `sql` |Always `NULL`| `VARCHAR` |
@@ -157,6 +177,8 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` |The name of the database that contains this sequence | `VARCHAR` |
+| `database_oid` | Internal identifier of the database containing the sequence. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the sequence object.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the sequence object.| `BIGINT` |
 | `sequence_name` |The SQL name that identifies the sequence within the schema.| `VARCHAR` |
@@ -191,6 +213,8 @@ The `duckdb_tables()` function provides metadata about the base tables available
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` |The name of the database that contains this table | `VARCHAR` |
+| `database_oid` | Internal identifier of the database containing the table. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the base table.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the base table.| `BIGINT` |
 | `table_name` |The SQL name of the base table.| `VARCHAR` |
@@ -207,14 +231,16 @@ The `duckdb_tables()` function provides metadata about the base tables available
 The [`information_schema.tables`](./information_schema#tables) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
 ## duckdb_types
-The `duckdb_types()` function provides metadata about the types available in the DuckDB instance.
+The `duckdb_types()` function provides metadata about the data types available in the DuckDB instance.
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` |The name of the database that contains this schema. | `VARCHAR` |
+| `database_oid` | Internal identifier of the database that contains- the data type. | BIGINT |
 | `schema_name` |The SQL name of the schema containing the type definition. Always `main`.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object.| `BIGINT` |
-| `type_oid` |The internal identifier of the data type object. If `NULL`, then this is an alias of the type (as identified by the value in the `logical_type` column).| `BIGINT` |
 | `type_name` |The name or alias of this data type.| `VARCHAR` |
+| `type_oid` |The internal identifier of the data type object. If `NULL`, then this is an alias of the type (as identified by the value in the `logical_type` column).| `BIGINT` |
 | `type_size` |The number of bytes required to represent a value of this type in memory.| `BIGINT` |
 | `logical_type` |The 'canonical' name of this data type. The same `logical_type` may be referenced by several types having different `type_name`s. | `VARCHAR` |
 | `type_category` |The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
@@ -225,6 +251,8 @@ The `duckdb_views()` function provides metadata about the views available in the
 
 | Column | Description | Type |
 |:---|:---|:---|
+| `database_name` |The name of the database that contains this view| `VARCHAR` |
+| `database_oid` | Internal identifier of the database that contains this view. | BIGINT |
 | `schema_name` |The SQL name of the schema where the view resides.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the view.| `BIGINT` |
 | `view_name` |The SQL name of the view object.| `VARCHAR` |
