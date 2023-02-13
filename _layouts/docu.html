@@ -100,7 +100,7 @@
 					{% endfor %}
 
 					{% if exists == true %}
-						<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>current</a></li>
+						<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>dev</a></li>
 					{% endif %}
 					<!-- check the archived pages -->
 					{% for item in site.data.versions %}
