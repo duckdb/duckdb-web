@@ -10,7 +10,7 @@ excerpt_separator: <!--more-->
      width=200px
      />
 
-The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) was native to North America.
+The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
 
 To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
@@ -22,7 +22,6 @@ The new release contains many improvements to the JSON support, new SQL features
 #### Data Ingestion/Export Improvements
 
 **JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](http://ndjson.org) and regular JSON are supported.
-
 
 ```sql
 FROM 'data/json/with_list.json';
@@ -36,7 +35,7 @@ FROM 'data/json/with_list.json';
 | 4  | [Broadcast, News]                |
 | 5  | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [hive-partitioned Parquet and CSV files](https://duckdb.org/docs/extensions/httpfs#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. For example:
+**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [hive-partitioned Parquet and CSV files](https://duckdb.org/docs/extensions/httpfs#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
@@ -71,7 +70,7 @@ Note that currently the parallel writing is currently limited to non-insertion o
 
 #### Multi-Database Support 
 
-**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries.
+**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like Github, for example) may also be attached.
 
 ```sql
 ATTACH 'new_db.db';
@@ -82,7 +81,7 @@ DETACH new_db;
 
 See the [documentation for more information](https://duckdb.org/docs/sql/statements/attach).
 
-**SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. The [SQLite extension](https://github.com/duckdblabs/sqlite_scanner) makes use of this to add native support to SQLite database files to DuckDB.
+**SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdblabs/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE SQLITE);
@@ -118,7 +117,7 @@ FROM movies;
 
 See the [documentation for more information](https://duckdb.org/docs/sql/statements/insert#on-conflict-clause).
 
-**Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data. 
+**Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.  
 
 **Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DuckDB offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file - as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
 
@@ -199,6 +198,45 @@ duckdb.sql('select min(l_orderkey) from lineitem').show()
 ├─────────────────┤
 │               1 │
 └─────────────────┘
+```
+
+**Polars Integration.** This release adds support for tight integration with the [Polars DataFrame library](https://github.com/pola-rs/polars), similar to our integration with Pandas DataFrames. Results can be converted to Polars DataFrames using the `.pl()` function.
+
+
+```py
+import duckdb
+duckdb.sql('select 42').pl()
+```
+
+```
+shape: (1, 1)
+┌─────┐
+│ 42  │
+│ --- │
+│ i32 │
+╞═════╡
+│ 42  │
+└─────┘
+```
+
+In addition, Polars DataFrames can be directly queried using the SQL interface.
+
+```py
+import duckdb
+import polars as pl
+df = pl.DataFrame._from_dict({'a': 42})
+duckdb.sql('select * from df').pl()
+```
+
+```
+shape: (1, 1)
+┌─────┐
+│ a   │
+│ --- │
+│ i64 │
+╞═════╡
+│ 42  │
+└─────┘
 ```
 
 **fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DuckDB will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DuckDB yet, such as FTP.
