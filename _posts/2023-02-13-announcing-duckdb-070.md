@@ -139,10 +139,10 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 
 **Query Building.** This release introduces easier incremental query building using the Python API by allowing relations to be queried. This allows you to decompose long SQL queries into multiple smaller SQL queries, and allows you to easily inspect query intermediates.
 
-```
-import duckdb
-lineitem = duckdb.sql('FROM lineitem.parquet')
-lineitem.limit(3).show()
+```py
+>>> import duckdb
+>>> lineitem = duckdb.sql('FROM lineitem.parquet')
+>>> lineitem.limit(3).show()
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │      varchar      │  varchar   │       varchar        │
@@ -153,8 +153,8 @@ lineitem.limit(3).show()
 ├────────────┴───────────┴───────────┴───┴───────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
-lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
-lineitem_filtered.limit(3).show()
+>>> lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
+>>> lineitem_filtered.limit(3).show()
 ┌────────────┬───────────┬───────────┬───┬────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │ l_shipinstruct │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │    varchar     │  varchar   │       varchar        │
@@ -165,7 +165,7 @@ lineitem_filtered.limit(3).show()
 ├────────────┴───────────┴───────────┴───┴────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                 16 columns (6 shown) │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
-duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
+>>> duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
 ┌─────────────────┬─────────────────┐
 │ min(l_orderkey) │ max(l_orderkey) │
 │      int32      │      int32      │
@@ -178,9 +178,9 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 
 **Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/duckdb/duckdb/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well - which can be directly queried again.
 
-```
-lineitem = duckdb.read_csv('lineitem.csv')
-lineitem.limit(3).show()
+```py
+>>> lineitem = duckdb.read_csv('lineitem.csv')
+>>> lineitem.limit(3).show()
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │      varchar      │  varchar   │       varchar        │
@@ -191,7 +191,7 @@ lineitem.limit(3).show()
 ├────────────┴───────────┴───────────┴───┴───────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
-duckdb.sql('select min(l_orderkey) from lineitem').show()
+>>> duckdb.sql('select min(l_orderkey) from lineitem').show()
 ┌─────────────────┐
 │ min(l_orderkey) │
 │      int32      │
@@ -240,6 +240,8 @@ shape: (1, 1)
 ```
 
 **fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DuckDB will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DuckDB yet, such as FTP.
+
+Have a look at the [guide](https://duckdb.org/docs/guides/python/filesystems) for more information
 
 #### Storage Improvements
 
