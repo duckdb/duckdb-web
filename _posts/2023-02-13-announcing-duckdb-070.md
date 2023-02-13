@@ -143,6 +143,8 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 >>> import duckdb
 >>> lineitem = duckdb.sql('FROM lineitem.parquet')
 >>> lineitem.limit(3).show()
+```
+```
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │      varchar      │  varchar   │       varchar        │
@@ -153,8 +155,12 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 ├────────────┴───────────┴───────────┴───┴───────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+```py
 >>> lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
 >>> lineitem_filtered.limit(3).show()
+```
+```
 ┌────────────┬───────────┬───────────┬───┬────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │ l_shipinstruct │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │    varchar     │  varchar   │       varchar        │
@@ -165,7 +171,11 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 ├────────────┴───────────┴───────────┴───┴────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                 16 columns (6 shown) │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+```py
 >>> duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
+```
+```
 ┌─────────────────┬─────────────────┐
 │ min(l_orderkey) │ max(l_orderkey) │
 │      int32      │      int32      │
@@ -181,6 +191,8 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 ```py
 >>> lineitem = duckdb.read_csv('lineitem.csv')
 >>> lineitem.limit(3).show()
+```
+```
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │      varchar      │  varchar   │       varchar        │
@@ -191,7 +203,11 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 ├────────────┴───────────┴───────────┴───┴───────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+```py
 >>> duckdb.sql('select min(l_orderkey) from lineitem').show()
+```
+```
 ┌─────────────────┐
 │ min(l_orderkey) │
 │      int32      │
