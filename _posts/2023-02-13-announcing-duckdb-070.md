@@ -257,6 +257,15 @@ shape: (1, 1)
 
 **fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DuckDB will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DuckDB yet, such as FTP.
 
+```py
+import duckdb
+from fsspec import filesystem
+
+duckdb.register_filesystem(filesystem('gcs'))
+
+data = duckdb.query("select * from read_csv_auto('gcs:///bucket/file.csv')").fetchall()
+```
+
 Have a look at the [guide](https://duckdb.org/docs/guides/python/filesystems) for more information
 
 #### Storage Improvements
