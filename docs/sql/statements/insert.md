@@ -18,9 +18,9 @@ INSERT INTO tbl(i) VALUES (1), (2), (3);
 -- explicitly insert the default value into a column
 INSERT INTO tbl(i) VALUES (1), (DEFAULT), (3);
 -- assuming tbl has a primary key/unique constraint, do nothing on conflict
-INSERT OR IGNORE tbl(i) VALUES(1);
+INSERT OR IGNORE INTO tbl(i) VALUES(1);
 -- or update the table with the new values instead
-INSERT OR REPLACE tbl(i) VALUES(1);
+INSERT OR REPLACE INTO tbl(i) VALUES(1);
 ```
 
 ### Syntax
