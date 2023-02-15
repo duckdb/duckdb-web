@@ -22,12 +22,10 @@ then you can register whichever filesystem you'd like to query
 import duckdb
 from fsspec import filesystem
 
-conn = duckdb.connect()
-conn.register_filesystem(filesystem('gcs'))  # this line will throw an exception if the appropriate filesystem interface is not installed
+# this line will throw an exception if the appropriate filesystem interface is not installed
+duckdb.register_filesystem(filesystem('gcs'))
 
-conn.execute("select * from read_csv_auto('gcs:///bucket/file.csv')")
-
-data = conn.fetchall()
+duckdb.sql("select * from read_csv_auto('gcs:///bucket/file.csv')")
 ```
 
 ### Potential issues
