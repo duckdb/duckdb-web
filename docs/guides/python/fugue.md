@@ -12,7 +12,7 @@ There are three main use cases for FugueSQL with DuckDB:
 2. Running Python/Pandas code alongside SQL code seamlessly
 3. Testing code on small data, and then running it on SparkSQL or dask-sql when ready to scale
 
-For any questions, see the [FugueSQL](https://fugue-tutorials.readthedocs.io/tutorials/quick_look/ten_minutes_sql.html#) tutorials or message in the [Fugue Slack](http://slack.fugue.ai/).
+For any questions, see the [FugueSQL](https://fugue-tutorials.readthedocs.io/tutorials/quick_look/ten_minutes_sql.html#) tutorials or message in the [Fugue Slack](http://slack.fugue.ai/). You can also follow along with [this Collab Notebook](https://colab.research.google.com/drive/10J84_Ydq6NdYUqOOSidN495ERfwZ6N4_?usp=sharing). 
 
 # Installation
 
@@ -61,7 +61,7 @@ There will be operations that Python or Pandas can express more succinctly than 
 # schema: *, b_cumsum:int
 def new_col(df: pd.DataFrame) -> pd.DataFrame:
     df = df.sort_values("b")
-    return df.assign(c=df['b'].cumsum())
+    return df.assign(b_cumsum=df['b'].cumsum())
 ```
 
 ```python
