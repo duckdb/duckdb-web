@@ -11,7 +11,7 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 * `df()` fetches the data as a Pandas DataFrame
 * `fetchdf()` is an alias of `df()`
 * `fetch_df()` is an alias of `df()`
-* `fetch_df_chunk(vector_multiple)` fetches a portion of the results into a DataFrame. The number of rows returned in each chunk is the vector size (1024 by default) * vector_multiple (1 by default).
+* `fetch_df_chunk(vector_multiple)` fetches a portion of the results into a DataFrame. The number of rows returned in each chunk is the vector size (2048 by default) * vector_multiple (1 by default).
 
 ### Apache Arrow
 * `arrow()` fetches the data as an [Arrow table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html)
