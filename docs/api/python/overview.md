@@ -73,12 +73,13 @@ duckdb.sql('SELECT 42').fetchnumpy() # NumPy Arrays
 ```
 
 ## Writing Data To Disk
-DuckDB supports writing Relation objects directly to disk in a variety of formats.
+DuckDB supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](/docs/sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
 
 ```py
 import duckdb
-duckdb.sql('SELECT 42').write_parquet('out.parquet')   # Write to a Parquet file
-duckdb.sql('SELECT 42').write_csv('out.csv')           # Write to a CSV file
+duckdb.sql('SELECT 42').write_parquet('out.parquet') # Write to a Parquet file
+duckdb.sql('SELECT 42').write_csv('out.csv')         # Write to a CSV file
+duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
 ```
 
 ## Persistent Storage
