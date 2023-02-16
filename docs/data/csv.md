@@ -41,8 +41,8 @@ Below are parameters that can be passed in to the CSV reader.
 | `HEADER` | Specifies that the file contains a header line with the names of each column in the file. |
 | `QUOTE` | Specifies the quoting string to be used when a data value is quoted. The default is double-quote (`"`). |
 | `ESCAPE` | Specifies the string that should appear before a data character sequence that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
-| `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) |
+| `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](/docs/sql/functions/dateformat) |
+| `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](/docs/sql/functions/dateformat) |
 | `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Note: Only the first max. 1024 rows will be used for dialect detection. |
 | `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
 | `NORMALIZE_NAMES` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. |
@@ -116,4 +116,4 @@ COPY ontime FROM 'flights.csv' ( AUTO_DETECT TRUE );
 SELECT * FROM ontime;
 ```
 
-More on the copy statement can be found [here](../../sql/statements/copy.html).
+More on the copy statement can be found [here](/docs/sql/statements/copy.html).
