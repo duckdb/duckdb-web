@@ -203,12 +203,9 @@
             },
             {
               "page": "CSV Files",
+              "url": "csv",
               "slug": "csv",
               "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
                 {
                   "page": "Auto Detection",
                   "url": "auto_detection"
