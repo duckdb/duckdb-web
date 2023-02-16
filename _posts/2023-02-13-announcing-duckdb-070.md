@@ -240,7 +240,7 @@ In addition, Polars DataFrames can be directly queried using the SQL interface.
 ```py
 import duckdb
 import polars as pl
-df = pl.DataFrame._from_dict({'a': 42})
+df = pl.DataFrame({'a': 42})
 duckdb.sql('select * from df').pl()
 ```
 
