@@ -828,17 +828,17 @@
 		},
 		{
 			"title": "Parquet Import",
-			"text": "how to run a query directly on a parquet file to run a query directly on a parquet file use the read_parquet function in the from clause of a query select from read_parquet input parquet the parquet file will be processed in parallel filters will be automatically pushed down into the parquet scan and only the relevant columns will be read automatically for more information see the blog post querying parquet with precision using duckdb",
-			"category": "Import",
-			"url": "/docs/guides/import/query_parquet",
-			"blurb": "How to run a query directly on a Parquet file To run a query directly on a Parquet file, use the read_parquet..."
-		},
-		{
-			"title": "Parquet Import",
 			"text": "how to load a parquet file into a table to read data from a parquet file use the read_parquet function in the from clause of a query select from read_parquet input parquet to create a new table using the result from a query use create table as from a select statement create table new_tbl as select from read_parquet input parquet to load data into an existing table from a query use insert into from a select statement insert into tbl select from read_parquet input parquet alternatively the copy statement can also be used to load data from a parquet file into an existing table copy tbl from input parquet format parquet for additional options see the parquet loading reference",
 			"category": "Import",
 			"url": "/docs/guides/import/parquet_import",
 			"blurb": "How to load a Parquet file into a table To read data from a Parquet file, use the read_parquet function in the FROM..."
+		},
+		{
+			"title": "Parquet Import",
+			"text": "how to run a query directly on a parquet file to run a query directly on a parquet file use the read_parquet function in the from clause of a query select from read_parquet input parquet the parquet file will be processed in parallel filters will be automatically pushed down into the parquet scan and only the relevant columns will be read automatically for more information see the blog post querying parquet with precision using duckdb",
+			"category": "Import",
+			"url": "/docs/guides/import/query_parquet",
+			"blurb": "How to run a query directly on a Parquet file To run a query directly on a Parquet file, use the read_parquet..."
 		},
 		{
 			"title": "Pattern Matching",
