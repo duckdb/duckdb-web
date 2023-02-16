@@ -214,12 +214,12 @@
                   "url": "auto_detection"
                 },
                 {
-                  "page": "Types",
-                  "url": "types"
-                },
-                {
                   "page": "Multiple Files",
                   "url": "multiple_files"
+                },
+                {
+                  "page": "Tips",
+                  "url": "tips"
                 }
               ]
             },
