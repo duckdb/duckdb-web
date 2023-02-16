@@ -246,6 +246,18 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Data Ingestion",
+                  "url": "data_ingestion"
+                },
+                {
+                  "page": "Result Conversion",
+                  "url": "result_conversion"
+                },
+                {
+                  "page": "DB API",
+                  "url": "dbapi"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 }

@@ -84,7 +84,7 @@ See the [documentation for more information](https://duckdb.org/docs/sql/stateme
 **SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdblabs/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
-ATTACH 'sqlite_file.db' AS sqlite (TYPE SQLITE);
+ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
 CREATE TABLE sqlite.tbl(i INTEGER);
 INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
@@ -139,10 +139,12 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 
 **Query Building.** This release introduces easier incremental query building using the Python API by allowing relations to be queried. This allows you to decompose long SQL queries into multiple smaller SQL queries, and allows you to easily inspect query intermediates.
 
+```py
+>>> import duckdb
+>>> lineitem = duckdb.sql('FROM lineitem.parquet')
+>>> lineitem.limit(3).show()
 ```
-import duckdb
-lineitem = duckdb.sql('FROM lineitem.parquet')
-lineitem.limit(3).show()
+```
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │      varchar      │  varchar   │       varchar        │
@@ -153,8 +155,12 @@ lineitem.limit(3).show()
 ├────────────┴───────────┴───────────┴───┴───────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
-lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
-lineitem_filtered.limit(3).show()
+```
+```py
+>>> lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
+>>> lineitem_filtered.limit(3).show()
+```
+```
 ┌────────────┬───────────┬───────────┬───┬────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │ l_shipinstruct │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │    varchar     │  varchar   │       varchar        │
@@ -165,7 +171,11 @@ lineitem_filtered.limit(3).show()
 ├────────────┴───────────┴───────────┴───┴────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                 16 columns (6 shown) │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
-duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
+```
+```py
+>>> duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
+```
+```
 ┌─────────────────┬─────────────────┐
 │ min(l_orderkey) │ max(l_orderkey) │
 │      int32      │      int32      │
@@ -178,9 +188,11 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 
 **Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/duckdb/duckdb/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well - which can be directly queried again.
 
+```py
+>>> lineitem = duckdb.read_csv('lineitem.csv')
+>>> lineitem.limit(3).show()
 ```
-lineitem = duckdb.read_csv('lineitem.csv')
-lineitem.limit(3).show()
+```
 ┌────────────┬───────────┬───────────┬───┬───────────────────┬────────────┬──────────────────────┐
 │ l_orderkey │ l_partkey │ l_suppkey │ … │  l_shipinstruct   │ l_shipmode │      l_comment       │
 │   int32    │   int32   │   int32   │   │      varchar      │  varchar   │       varchar        │
@@ -191,7 +203,11 @@ lineitem.limit(3).show()
 ├────────────┴───────────┴───────────┴───┴───────────────────┴────────────┴──────────────────────┤
 │ 3 rows                                                                    16 columns (6 shown) │
 └────────────────────────────────────────────────────────────────────────────────────────────────┘
-duckdb.sql('select min(l_orderkey) from lineitem').show()
+```
+```py
+>>> duckdb.sql('select min(l_orderkey) from lineitem').show()
+```
+```
 ┌─────────────────┐
 │ min(l_orderkey) │
 │      int32      │
@@ -224,7 +240,7 @@ In addition, Polars DataFrames can be directly queried using the SQL interface.
 ```py
 import duckdb
 import polars as pl
-df = pl.DataFrame._from_dict({'a': 42})
+df = pl.DataFrame({'a': 42})
 duckdb.sql('select * from df').pl()
 ```
 
@@ -240,6 +256,17 @@ shape: (1, 1)
 ```
 
 **fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DuckDB will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DuckDB yet, such as FTP.
+
+```py
+import duckdb
+from fsspec import filesystem
+
+duckdb.register_filesystem(filesystem('gcs'))
+
+data = duckdb.query("select * from read_csv_auto('gcs:///bucket/file.csv')").fetchall()
+```
+
+Have a look at the [guide](https://duckdb.org/docs/guides/python/filesystems) for more information
 
 #### Storage Improvements
 
