@@ -207,7 +207,22 @@
             },
             {
               "page": "CSV Files",
-              "url": "csv"
+              "url": "csv",
+              "slug": "csv",
+              "subsubfolderitems": [
+                {
+                  "page": "Auto Detection",
+                  "url": "auto_detection"
+                },
+                {
+                  "page": "Multiple Files",
+                  "url": "multiple_files"
+                },
+                {
+                  "page": "Tips",
+                  "url": "tips"
+                }
+              ]
             },
             {
               "page": "Parquet Files",
