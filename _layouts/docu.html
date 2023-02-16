@@ -6,7 +6,7 @@
 	{% if page.title == "DuckDB" %}
 	<title>{{ page.title }}</title>
 	{% else %}
-	<title>DuckDB - {{ page.title }}</title>
+	<title>{{ page.title }} - DuckDB</title>
 	{% endif %}
 
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
@@ -100,7 +100,7 @@
 					{% endfor %}
 
 					{% if exists == true %}
-						<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>current</a></li>
+						<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>dev</a></li>
 					{% endif %}
 					<!-- check the archived pages -->
 					{% for item in site.data.versions %}
@@ -167,9 +167,6 @@
 	</main>
 	
 	
-	<script>
-	const documents = {{ site.data.search_data.data | jsonify }}.map((item, id) => ({id, ...item}));
-	</script>
 	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
 	<script src="{{ site.baseurl }}/js/search.js"></script>
 

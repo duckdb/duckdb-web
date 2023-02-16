@@ -39,14 +39,13 @@ Feedback is welcome on these contribution steps as well!
 
 ## Building
 
-The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, install ruby, and run `bundler` to install the dependencies. If you are on Windows, you must then run these two commands:
+The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, install Ruby (using the version specified in the .ruby-version file), and run `bundler` to install the dependencies. If you are on Windows, you must then run these two commands:
 
 ```sh
 gem uninstall eventmachine
 gem install eventmachine --platform ruby
 ```
 
-You might have to install `webrick` to get `jekyll serve` to work, you can do so by running `gem install webrick`.
 Finally, navigate to the directory where you have cloned duckdb-web and run `bundler exec jekyll serve`. The website can then be browsed by going to `localhost:4000` in your browser.
 
 ## Generating code docs

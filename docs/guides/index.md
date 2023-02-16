@@ -38,6 +38,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to execute SQL queries](../guides/python/execute_sql)
 * [How to easily query DuckDB in Jupyter Notebooks](../guides/python/jupyter)
 * [How to use Multiple Python Threads with DuckDB](../guides/python/multiple_threads)
+* [How to use fsspec filesystems with DuckDB](../guides/python/filesystems)
 
 ### Pandas
 

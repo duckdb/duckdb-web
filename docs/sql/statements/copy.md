@@ -64,7 +64,7 @@ Zero or more copy options may be provided as a part of the copy operation. The `
 
 | Name | To / From | Description |
 |:---|:---|:---|
-| `FORMAT` | To & From | Specifies the copy function to use. This defaults to `CSV`, but other options can be available (e.g. `PARQUET`). |
+| `FORMAT` | To & From | Specifies the copy function to use. This defaults to `CSV`, but other options can be available (e.g. `PARQUET`, `JSON`). |
 | `DELIMITER` | To & From | Specifies the string that separates columns within each row (line) of the file. The default value is a comma (`,`). |
 | `NULL` | To & From | Specifies the string that represents a NULL value. The default is an empty string. Please note that in `COPY ... FROM` both an unquoted empty string and a quoted empty string represent a NULL value. If any other NULL string is specified, again both its quoted and its unquoted appearance represent a NULL value. `COPY ... TO` does not quote NULL values on output, even if `FORCE_QUOTE` is true. |
 | `HEADER` | To & From | Specifies that the file contains a header line with the names of each column in the file. Thus, `COPY ... FROM` ignores the first line when importing data, whereas on output (`COPY ... TO`) the first line of the file contains the column names of the exported columns. |

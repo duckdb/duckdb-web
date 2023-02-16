@@ -12,14 +12,11 @@ All results of a query can be exported to an [Apache Arrow Table](https://arrow.
 import duckdb
 import pyarrow as pa
 
-# connect to an in-memory database
-con = duckdb.connect()
-
 my_arrow_table = pa.Table.from_pydict({'i':[1,2,3,4],
                                        'j':["one", "two", "three", "four"]})
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow Table
-results = con.execute("SELECT * FROM my_arrow_table").arrow()
+results = duckdb.sql("SELECT * FROM my_arrow_table").arrow()
 ```
 
 ## Export as a RecordBatchReader
@@ -27,15 +24,12 @@ results = con.execute("SELECT * FROM my_arrow_table").arrow()
 import duckdb
 import pyarrow as pa
 
-# connect to an in-memory database
-con = duckdb.connect()
-
 my_arrow_table = pa.Table.from_pydict({'i':[1,2,3,4],
                                        'j':["one", "two", "three", "four"]})
                                        
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow RecordBatchReader
 chunk_size = 1_000_000
-results = con.execute("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)
+results = duckdb.sql("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)
 
 # Loop through the results. A StopIteration exception is thrown when the RecordBatchReader is empty
 while True:

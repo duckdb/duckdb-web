@@ -1,6 +1,14 @@
 ---
 ---
 
+@media only screen and (max-width: 1300px) {
+	body.installation .select ul.environment{
+		li{
+			flex: auto;
+		}
+	}
+}
+
 @media only screen and (max-width: 1200px) {
 	main .wrap,
 	body.landing .welcome .mainlinks ul{
@@ -24,6 +32,14 @@
 @media only screen and (max-width: 980px) {
 	.singleentry table{
 		margin: 0px;
+	}
+	body.installation{
+		.evironment .onlymobile{
+			display: block;
+		}
+		ul.environment{
+			display: none;
+		}
 	}
 }
 
@@ -106,6 +122,16 @@
 @media only screen and (max-width: 700px) {
 	body.landing .welcome .mainlinks ul li{
 		min-width: 160px;
+	}
+	.environmentselect.onlymobile,
+	body.landing label.onlymobile{
+		display: block;
+	}
+	body.landing .install .environment{
+		display: none;
+	}
+	body.landing .install p{
+		margin-bottom: 25px;
 	}
 }
 
@@ -412,6 +438,7 @@
 	footer .sitefooter .footercontent .gitbutton{
 		width: 170px;
 	}
+	
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -444,5 +471,12 @@
 	}
 	body.documentation .headlinebar > div.version{
 		color: #f5f5f5
+	}
+	body.installation .select ul li span.versioninfo{
+		display: none;
+	}
+	body.installation .output .result a{
+		word-break: break-all;
+		word-break: break-word;
 	}
 }

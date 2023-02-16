@@ -31,13 +31,14 @@ When the `DISTINCT` clause is provided, only distinct values are considered in t
 When the `ORDER BY` clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results
 (e.g., `first`, `last`, `list` and `string_agg`). These can be made deterministic by ordering the arguments.
-For order-insensitive aggregates, this clause is parsed but ignored.
+For order-insensitive aggregates, this clause is parsed and applied, which is inefficient, but still produces the same result.
 
 ## General Aggregate Functions
 The table below shows the available general aggregate functions.
 
 | Function | Description | Example | Alias(es) |
 |:---|:---|:---|:---|
+| `any_value(arg)` |Returns the first _non-null_ value from arg. | `any_value(A)` | - |
 | `arg_max(arg,val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A,B)` | `argMax(A,B)`, `max_by(A,b)` |
 | `arg_min(arg,val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A,B)` | `argMin(A,B)`, `min_by(A,B)` |
 | `avg(arg)` |Calculates the average value for all tuples in arg. | `avg(A)` | - |

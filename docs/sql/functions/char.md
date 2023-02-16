@@ -15,6 +15,7 @@ This section describes functions and operators for examining and manipulating st
 | `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('DuckDB', 2)` | `'u'` |
 | `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `'DB'` |
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` |
+| `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` |
 | `base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of to_base64. | `base64('A'::blob)` | `'QQ=='` |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` |
@@ -79,7 +80,7 @@ This section describes functions and operators for examining and manipulating st
 
 
 ## Text Similarity Functions
-These functions are used to measure the similarity of two strings using various metrics. 
+These functions are used to measure the similarity of two strings using various metrics.
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|

@@ -150,6 +150,10 @@
             {
               "page": "DuckDB with DataFusion",
               "url": "datafusion"
+            },
+            {
+              "page": "DuckDB with fsspec filesystems",
+              "url": "filesystems"
             }
           ]
         },
@@ -229,6 +233,18 @@
                 {
                   "page": "Overview",
                   "url": "overview"
+                },
+                {
+                  "page": "Data Ingestion",
+                  "url": "data_ingestion"
+                },
+                {
+                  "page": "Result Conversion",
+                  "url": "result_conversion"
+                },
+                {
+                  "page": "DB API",
+                  "url": "dbapi"
                 },
                 {
                   "page": "API Reference",
@@ -321,7 +337,7 @@
               ]
             },
             {
-              "page": "WASM",
+              "page": "Wasm",
               "url": "wasm"
             },
             {
