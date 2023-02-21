@@ -181,23 +181,27 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 ## Output Formats
 The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
-* ascii
-* box
-* csv
-* column
-* duckbox
-* html
-* insert
-* json
-* jsonlines
-* line
-* list
-* markdown
-* quote
-* table
-* tabs
-* tcl
-* trash
+
+|    mode    |                  description                 |
+|------------|----------------------------------------------|
+| ascii      | Columns/rows delimited by 0x1F and 0x1E      |
+| box        | Tables using unicode box-drawing characters  |
+| csv        | Comma-separated values                       |
+| column     | Output in columns.  (See .width)             |
+| duckbox    | Tables with extensive features               |
+| html       | HTML <table> code                            |
+| insert     | SQL insert statements for TABLE              |
+| json       | Results in a JSON array                      |
+| jsonlines  | Results in a NDJSON                          |
+| latex      | LaTeX tabular environment code               |
+| line       | One value per line                           |
+| list       | Values delimited by "\|"                     |
+| markdown   | Markdown table format                        |
+| quote      | Escape answers as for SQL                    |
+| table      | ASCII-art table                              |
+| tabs       | Tab-separated values                         |
+| tcl        | TCL list elements                            |
+| trash      | No output                                    |
 
 ```sql
 D .mode markdown
@@ -443,7 +447,7 @@ $ ./duckdb -init select_example.sql
 | 5               |
 v0.6.1-dev83 dfae126ebb
 Enter ".help" for usage hints.
-D  
+D
 ```
 
 ## Non-interactive usage
