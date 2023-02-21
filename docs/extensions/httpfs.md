@@ -7,6 +7,9 @@ The __httpfs__ extension is a loadable extension implementing a file system that
 files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension
 supports reading/writing/globbing files.
 
+Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
+Depending on the client you use, you might have to `INSTALL httpfs` on first use, and use `LOAD httpfs` at the start of every session.
+
 # HTTP(S)
 
 With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV and
