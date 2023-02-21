@@ -189,7 +189,7 @@ The `.mode` command may be used to change the appearance of the tables returned 
 | csv        | Comma-separated values                       |
 | column     | Output in columns.  (See .width)             |
 | duckbox    | Tables with extensive features               |
-| html       | HTML <table> code                            |
+| html       | HTML `<table>` code                          |
 | insert     | SQL insert statements for TABLE              |
 | json       | Results in a JSON array                      |
 | jsonlines  | Results in a NDJSON                          |
