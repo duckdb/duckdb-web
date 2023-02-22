@@ -54,12 +54,12 @@ stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 ```
 
 ```java
-ResultSet rs = stmt.executeQuery("SELECT * FROM items");
-while (rs.next()) {
-	System.out.println(rs.getString(1));
-	System.out.println(rs.getInt(3));
+try (ResultSet rs = stmt.executeQuery("SELECT * FROM items")) {
+    while (rs.next()) {
+        System.out.println(rs.getString(1));
+        System.out.println(rs.getInt(3));
+    }
 }
-rs.close()
 // jeans
 // 1
 // hammer
@@ -69,15 +69,14 @@ rs.close()
 DuckDB also supports prepared statements as per the JDBC API:
 
 ```java
-PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO test VALUES (?, ?, ?);");
-
-p_stmt.setString(1, "chainsaw");
-p_stmt.setDouble(2, 500.0);
-p_stmt.setInt(3, 42);
-p_stmt.execute();
-
-// more calls to execute() possible
-p_stmt.close();
+try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO test VALUES (?, ?, ?);")) {
+    p_stmt.setString(1, "chainsaw");
+    p_stmt.setDouble(2, 500.0);
+    p_stmt.setInt(3, 42);
+    p_stmt.execute();
+    
+    // more calls to execute() possible
+}
 ```
 
 > Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
@@ -95,11 +94,10 @@ import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
 import org.duckdb.DuckDBResultSet;
 
-var conn = DriverManager.getConnection("jdbc:duckdb:");
-var p_stmt = conn.prepareStatement("SELECT * from generate_series(2000)");
-var resultset = (DuckDBResultSet) p_stmt.executeQuery();
-
-try (var allocator = new RootAllocator()) {
+try (var conn = DriverManager.getConnection("jdbc:duckdb:");
+     var p_stmt = conn.prepareStatement("SELECT * from generate_series(2000)");
+     var resultset = (DuckDBResultSet) p_stmt.executeQuery();
+     var allocator = new RootAllocator()) {
   try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
     while (reader.loadNextBatch()) {
       System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
