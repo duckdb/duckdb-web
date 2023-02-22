@@ -34,11 +34,13 @@ ro_prop.setProperty("duckdb.read_only", "true");
 Connection conn_ro = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", ro_prop);
 ```
 
-The JDBC `DriverManager` API is a relatively poor fit for embedded database management systems such as DuckDB. If you would like to create **multiple connections to the same database**, it would be somewhat logical to just create additional connections with the same URL. This is however only supported for read-only connections. If you would like to create multiple read-write connections to the same database file or the same in-memory database instance, you can use the custom `duplicate()` method like so:
+Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnecttion#duplicate()` method like so:
 
 ```java
 Connection conn2 = ((DuckDBConnection) conn).duplicate();
 ```
+
+Multiple connections are allowed, but mixing read-write and read-only connections is unsupported.
 
 ### Querying
 DuckDB supports the standard JDBC methods to send queries and retreive result sets. First a `Statement` object has to be created from the `Connection`, this object can then be used to send queries using `execute` and `executeQuery`. `execute()` is meant for queries where no results are expected like `CREATE TABLE` or `UPDATE` etc. and `executeQuery()` is meant to be used for queries that produce results (e.g. `SELECT`). Below two examples. See also the JDBC [`Statement`](https://docs.oracle.com/javase/7/docs/api/java/sql/Statement.html) and [`ResultSet`](https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html) documentations.
