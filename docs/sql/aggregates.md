@@ -45,6 +45,7 @@ The table below shows the available general aggregate functions.
 | `bit_and(arg)` |Returns the bitwise AND of all bits in a given expression . | `bit_and(A)` | - |
 | `bit_or(arg)` |Returns the bitwise OR of all bits in a given expression.  | `bit_or(A)` | - |
 | `bit_xor(arg)` |Returns the bitwise XOR of all bits in a given expression. | `bit_xor(A)` | - |
+| `bitstring_agg(arg)` |Returns a bitstring with bits set for each distinct value. | `bitstring_agg(A)` | - |
 | `bool_and(arg)` |Returns TRUE if every input value is TRUE, otherwise FALSE. | `bool_and(A)` | - |
 | `bool_or(arg)` |Returns TRUE if any input value is TRUE, otherwise FALSE. | `bool_or(A)` | - |
 | `count(arg)` |Calculates the number of tuples tuples in arg. | `count(A)` | - |

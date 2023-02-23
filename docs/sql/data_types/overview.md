@@ -11,6 +11,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | Name | Aliases | Description |
 |:---|:---|:---|
 | `BIGINT` | `INT8`, `LONG` | signed eight-byte integer |
+| `BIT` | `BITSTRING` | string of 1's and 0's |
 | `BOOLEAN` | `BOOL`, `LOGICAL` | logical boolean (true/false) |
 | `BLOB` | `BYTEA`, `BINARY,` `VARBINARY` | variable-length binary data |
 | `DATE` |   | calendar date (year, month day) |
