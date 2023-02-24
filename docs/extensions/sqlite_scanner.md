@@ -118,5 +118,13 @@ SET GLOBAL sqlite_all_varchar=true;
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
 
+## Running more than once
+
+If you want to run the `sqlite_scan` procedure more than once in the same DuckDB session, you'll need to pass in the `overwrite` flag, as shown below:
+
+```sql
+CALL sqlite_attach('sakila.db', overwrite=true);
+```
+
 ## Extra Information
 See [the repo](https://github.com/duckdblabs/sqlite_scanner) for the source code of the extension.

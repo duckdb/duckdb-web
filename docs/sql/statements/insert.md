@@ -17,6 +17,10 @@ INSERT INTO tbl SELECT * FROM other_tbl;
 INSERT INTO tbl(i) VALUES (1), (2), (3);
 -- explicitly insert the default value into a column
 INSERT INTO tbl(i) VALUES (1), (DEFAULT), (3);
+-- assuming tbl has a primary key/unique constraint, do nothing on conflict
+INSERT OR IGNORE INTO tbl(i) VALUES(1);
+-- or update the table with the new values instead
+INSERT OR REPLACE INTO tbl(i) VALUES(1);
 ```
 
 ### Syntax
@@ -29,6 +33,36 @@ The target column names can be listed in any order. If no list of column names i
 Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or `NULL` if there is none.
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
+
+## On Conflict Clause
+
+An `ON CONFLICT` clause can be used to perform a certain action on conflicts that arise from `UNIQUE` or `PRIMARY KEY` constraints.
+
+Optionally you can provide a `conflict_target`, which is a group of columns that an Index indexes on, or if left out, all `UNIQUE` or `PRIMARY KEY` constraint(s) on the table are targeted.
+
+When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
+If a conflict does not meet this condition, an error will be thrown instead, and the entire operation is aborted.
+
+Because we need a way to refer to both the **to-be-inserted** tuple and the **existing** tuple, we introduce the special `excluded` qualifier.
+When the `excluded` qualifier is provided, the reference refers to the **to-be-inserted** tuple, otherwise it refers to the **existing** tuple
+This special qualifier can be used within the `WHERE` clauses and `SET` expressions of the `ON CONFLICT` clause.
+
+There are two supported actions:
+
+1. `DO NOTHING`  
+Causes the error(s) to be ignored, and the values are not inserted or updated.
+
+2. `DO UPDATE`  
+Causes the `INSERT` to turn into an `UPDATE` on the conflicting row(s) instead.  
+The `SET` expressions that follow determine how these rows are updated.  
+Optionally you can provide an additional `WHERE` clause that can exclude certain rows from the update.  
+The conflicts that don't meet this condition are ignored instead.
+
+`INSERT OR REPLACE` is a shorter syntax alternative to `ON CONFLICT DO UPDATE SET (c1 = excluded.c1, c2 = excluded.c2, ..)`.  
+It updates every column of the **existing** row to the new values of the **to-be-inserted** row.
+  
+`INSERT OR IGNORE` is a shorter syntax alternative to `ON CONFLICT DO NOTHING`.
+
 
 ### Returning Clause
 

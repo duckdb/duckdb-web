@@ -38,6 +38,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to execute SQL queries](../guides/python/execute_sql)
 * [How to easily query DuckDB in Jupyter Notebooks](../guides/python/jupyter)
 * [How to use Multiple Python Threads with DuckDB](../guides/python/multiple_threads)
+* [How to use fsspec filesystems with DuckDB](../guides/python/filesystems)
 
 ### Pandas
 
@@ -58,6 +59,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 ### Python Library Integrations
 
 * [How to use Ibis to query DuckDB with or without SQL](../guides/python/ibis)
+* [How to use FugueSQL to use DuckDB with Python/Pandas functions](../guides/python/fugue)
 * [How to use DuckDB with Polars DataFrames via Apache Arrow](../guides/python/polars)
 * [How to use DuckDB with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
 * [How to use DuckDB with DataFusion via Apache Arrow](../guides/python/datafusion)

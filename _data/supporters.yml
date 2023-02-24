@@ -39,3 +39,7 @@ silver:
   - name: Omni
     url: https://www.exploreomni.com
     logoimg: omni.svg
+        
+  - name: Liquid Analytics
+    url: https://www.liquidanalytics.com/
+    logoimg: liquidanalytics.svg

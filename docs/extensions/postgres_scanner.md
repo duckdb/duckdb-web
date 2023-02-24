@@ -19,7 +19,7 @@ LOAD postgres;
 
 To make a Postgres database accessible to DuckDB, use the `POSTGRES_ATTACH` command:
 
-```SQL
+```sql
 -- load all data from "public" schema of the postgres instance running on localhost into the schema "main"  
 CALL POSTGRES_ATTACH('');
 -- attach the database with the given schema, loading tables from the source schema "public" into the target schema "abc"
@@ -36,7 +36,7 @@ CALL postgres_attach('dbname=postgres user=postgres host=127.0.0.1', source_sche
 
 The tables in the database are registered as views in DuckDB, you can list them as follows:
 
-```SQL
+```sql
 PRAGMA show_tables;
 ```
 
@@ -45,7 +45,7 @@ Then you can query those views normally using SQL.
 ## Querying individual tables
 If you prefer to not attach all tables, but just query a single table, that is possible using the `POSTGRES_SCAN` function, e.g.
 
-```SQL
+```sql
 SELECT * FROM POSTGRES_SCAN('', 'public', 'mytable');
 ```
 
@@ -54,4 +54,4 @@ SELECT * FROM POSTGRES_SCAN('', 'public', 'mytable');
 To use `filter_pushdown` use the `POSTGRES_SCAN_PUSHDOWN` function.
 
 ## Extra Information
-See [the repo](https://github.com/duckdblabs/postgresscanner) for the source code of the extension, or the [official announcement](../../2022/09/30/postgres-scanner) for implementation details and background.
+See [the repo](https://github.com/duckdblabs/postgresscanner) for the source code of the extension, or the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.

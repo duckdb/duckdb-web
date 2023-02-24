@@ -136,6 +136,10 @@
               "url": "ibis"
             },
             {
+              "page": "DuckDB with Fugue",
+              "url": "fugue"
+            },
+            {
               "page": "DuckDB with Polars",
               "url": "polars"
             },
@@ -146,6 +150,10 @@
             {
               "page": "DuckDB with DataFusion",
               "url": "datafusion"
+            },
+            {
+              "page": "DuckDB with fsspec filesystems",
+              "url": "filesystems"
             }
           ]
         },
@@ -199,7 +207,22 @@
             },
             {
               "page": "CSV Files",
-              "url": "csv"
+              "url": "csv",
+              "slug": "csv",
+              "subsubfolderitems": [
+                {
+                  "page": "Auto Detection",
+                  "url": "auto_detection"
+                },
+                {
+                  "page": "Multiple Files",
+                  "url": "multiple_files"
+                },
+                {
+                  "page": "Tips",
+                  "url": "tips"
+                }
+              ]
             },
             {
               "page": "Parquet Files",
@@ -225,6 +248,22 @@
                 {
                   "page": "Overview",
                   "url": "overview"
+                },
+                {
+                  "page": "Data Ingestion",
+                  "url": "data_ingestion"
+                },
+                {
+                  "page": "Result Conversion",
+                  "url": "result_conversion"
+                },
+                {
+                  "page": "DB API",
+                  "url": "dbapi"
+                },
+                {
+                  "page": "Relational API",
+                  "url": "relational_api"
                 },
                 {
                   "page": "API Reference",
@@ -317,7 +356,7 @@
               ]
             },
             {
-              "page": "WASM",
+              "page": "Wasm",
               "url": "wasm"
             },
             {

@@ -16,19 +16,31 @@
 	<div class="evironment select">
 		<h3>Environment</h3>
 		<ul class="environment">
-			<li class="selected" data-id=".python">Python</li>
+			<li data-id=".cli" class="selected">Command Line</li>
+			<li data-id=".python">Python</li>
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
 			<li data-id=".js">node.js</li>
 			<li data-id=".julia">Julia</li>
 			<li data-id=".cplusplus">C/C++</li>
-			<li data-id=".cli">CLI</li>
 			<li data-id=".odbc">ODBC</li>
 		</ul>
+		<label class="onlymobile">
+			<select name="environment" class="environmentselect onlymobile">
+				<option value=".cli">Command Line</option>
+				<option value=".python">Python</option>
+				<option value=".r">R</option>
+				<option value=".java">Java</option>
+				<option value=".js">node.js</option>
+				<option value=".julia">Julia</option>
+				<option value=".cplusplus">C/C++</option>
+				<option value=".odbc">ODBC</option>
+			</select>
+		</label>
 	</div>
 
 
-	<div class="installer select inactive">
+	<div class="installer select">
 		<h3>Package</h3>
 		<ul class="pack">
 			<li data-id=".source">Source</li>
@@ -36,7 +48,7 @@
 		</ul>
 	</div>
 
-	<div class="platform select inactive">
+	<div class="platform select">
 		<h3>Platform</h3>
 		<ul class="platform">
 			<li data-id=".win">Windows</li>
@@ -49,7 +61,9 @@
 	<div class="installartion output">
 		<h3>Installation</h3>
 		<div class="result" id="resultselection">
-			{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
+			Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a><br/><br/>
+			Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip</a><br/><br/>
+			Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip</a>
 		</div>
 
 

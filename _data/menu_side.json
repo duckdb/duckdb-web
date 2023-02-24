@@ -40,6 +40,10 @@
           ]
         },
         {
+          "page": "Storage Versions & Format",
+          "url": "/internals/storage"
+        },
+        {
           "page": "Profiling",
           "url": "/dev/profiling"
         }

@@ -7,18 +7,20 @@ expanded: Nested
 
 ## Map Data Type
 
-`MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s do not need to have the same keys present on each row, and thus open additional use cases. `MAP`s are useful when the schema is unknown beforehand, and when adding or removing keys in subsequent rows. Their flexibility is a key differentiator.
+`MAP`s are similar to `STRUCT`s in that they are an ordered list of "entries" where a key maps to a value. However, `MAP`s do not need to have the same keys present on each row, and thus open additional use cases. `MAP`s are useful when the schema is unknown beforehand; their flexibility is a key differentiator.
 
-`MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `INT`s to `VARCHAR`s). `MAP`s may also have duplicate keys. This is possible and useful because maps are ordered. `MAP`s are also more forgiving when extracting values, as they return an empty list if a key is not found rather than throwing an error as structs do.
+`MAP`s must have a single type for all keys, and a single type for all values. Keys and values can be any type, and the type of the keys does not need to match the type of the values (Ex: a `MAP` of `INT`s to `VARCHAR`s). `MAP`s may not have duplicate keys. `MAP`s return an empty list if a key is not found rather than throwing an error as structs do.
 
-In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. `STRUCT`s may not have duplicate keys. See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
+In contrast, `STRUCT`s must have string keys, but each key may have a value of a different type. See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
-To construct a `MAP`, use the `map` function. Provide a list of keys as the first parameter, and a list of values for the second.
+To construct a `MAP`, use the `map` function. Provide a list of keys as the first parameter, and a list of values for the second. Alternatively use the `map_from_entries` function.
 
 ### Creating Maps
 ```sql
 -- A map with integer keys and varchar values. This returns {1=a, 5=e}
 select map([1, 5], ['a', 'e']);
+-- Alternatively use the map_from_entries function. This returns {1=a, 5=e}
+select map_from_entries([(1, 'a'), (5, 'e')]);
 -- A map with integer keys and numeric values. This returns {1=42.001, 5=-32.100} 
 select map([1, 5], [42.001, -32.1]);
 -- Keys and/or values can also be nested types.
@@ -28,7 +30,7 @@ select map([['a', 'b'], ['c', 'd']], [[1.1, 2.2], [3.3, 4.4]]);
 CREATE TABLE map_table (map_col MAP(INT,DOUBLE));
 ```
 ### Retrieving from Maps
-`MAP`s use bracket notation for retrieving values. This is due to the variety of types that can be used as a `MAP`'s key. Selecting from a `MAP` also returns a `LIST` rather than an individual value.
+`MAP`s use bracket notation for retrieving values. Selecting from a `MAP` returns a `LIST` rather than an individual value, with an empty `LIST` meaning that the key was not found. 
 ```sql
 -- Use bracket notation to retrieve a list containing the value at a key's location. This returns [42]
 -- Note that the expression in bracket notation must match the type of the map's key
