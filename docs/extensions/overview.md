@@ -48,6 +48,52 @@ select * from duckdb_extensions();
 | tpch              | Adds TPC-H data generation and query support                         |                 |
 | visualizer        |                                                                      |                 |
 
+## Downloading extensions directly from S3
+
+Downloading an extension directly could be helpful when building a lambda or container that uses DuckDB.
+DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable. 
+As a result, a direct URL to the file must be used. 
+To directly download an extension file, use the following format:  
+
+```
+https://extensions.duckdb.org/v{release_version_number}/{platform_name}/{extension_name}.duckdb_extension.gz
+```
+For example:
+```
+https://extensions.duckdb.org/v0.7.0/windows_amd64/json.duckdb_extension.gz
+```
+
+The list of supported platforms may increase over time, but the current list of platforms includes:
+* linux_amd64_gcc4
+* linux_amd64
+* linux_arm64
+* osx_amd64
+* osx_arm64
+* windows_amd64
+
+See above for a list of extension names and how to pull the latest list of extensions.
+
+
+## Loading an extension from local storage
+Extensions are stored in gzip format, so they must be unzipped prior to use. 
+There are many methods to decompress gzip. Here is a Python example:
+
+```python
+import gzip
+import shutil
+
+with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
+   with open('httpfs.duckdb_extension', 'wb') as f_out:
+     shutil.copyfileobj(f_in, f_out)
+```
+
+After unzipping, the install and load commands can be used with the path to the .duckdb_extension file. 
+For example, if the file was unzipped into the same directory as where DuckDB is being executed:
+```sql
+install 'httpfs.duckdb_extension';
+load 'httpfs.duckdb_extension';
+```
+
 
 ## Pages in this Section
 
