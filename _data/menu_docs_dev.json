@@ -262,6 +262,10 @@
                   "url": "dbapi"
                 },
                 {
+                  "page": "Relational API",
+                  "url": "relational_api"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 }
