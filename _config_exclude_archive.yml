@@ -1,0 +1,2 @@
+# bundler exec jekyll serve --incremental --config _config.yml,_config_exclude_archive.yml
+exclude: ['docs/archive']
