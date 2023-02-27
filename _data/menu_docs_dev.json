@@ -572,6 +572,10 @@
                   "url": "blob"
                 },
                 {
+                  "page":"Bitstring",
+                  "url": "bitstring"
+                },
+                {
                   "page":"List",
                   "url": "list"
                 },
@@ -686,6 +690,10 @@
              {
                 "page": "Blob Functions",
                 "url": "blob"
+              },
+              {
+                "page": "Bitstring Functions",
+                "url": "bitstring"
               },
               {
                 "page": "Nested Functions",
