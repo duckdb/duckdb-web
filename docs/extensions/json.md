@@ -23,7 +23,7 @@ These functions have the following parameters:
 | Name | Description |
 |:---|:---|
 | `maximum_object_size` | The maximum size of a JSON object (in bytes), defaults to 1MB |
-| `format` | Defaults to `'unstructured'`, which can read pretty-printed JSON. When set to `'newline_delimited` only newline-delimited JSON can be read, which can be read in parallel. Set to `'auto'` to automatically detect |
+| `lines` | Defaults to `'false'`, which can read pretty-printed JSON. When set to `'true` only newline-delimited JSON can be read, which can be read in parallel. Set to `'auto'` to automatically detect |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is equal to `'newline_delimited'`) |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.csv.gz** will use gzip, **t.csv** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. |
 
@@ -53,6 +53,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 | Name | Description |
 |:---|:---|
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g. `{'key1': 'INTEGER', 'key2': 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred |
+| `json_format` | Defaults to `'records'`, or to `'auto'` for `read_json_auto`. Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']` |
 | `auto_detect` | Option for JSON parsing. If `true`, the parser will attempt to detect the names of the keys and data types of the values automatically. `read_json_auto` defaults to `true` for this parameter, `read_json` defaults to `false` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file. Defaults to 2048 |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Defaults to -1 to fully detect nested JSON types |
@@ -93,6 +94,59 @@ SELECT goose, duck FROM '*.json.gz'; -- equivalent
 | [1, 2, 3] | 42 |
 | [4, 5, 6] | 43 |
 
+DuckDB can read (and auto-detect) a variety of formats, specified with the `json_format` parameter.
+Querying a JSON file that contains an `'array_of_records'`, e.g.:
+```json
+[
+  {
+    "duck": 42,
+    "goose": 4.2
+  },
+  {
+    "duck": 43,
+    "goose": 4.3
+  }
+]
+```
+Can be queried exactly the same as a JSON file that contains `'records'`, e.g.:
+```json
+{
+  "duck": 42,
+  "goose": 4.2
+}
+{
+  "duck": 43,
+  "goose": 4.3
+}
+```
+Both can be read as the table:
+
+| duck | goose |
+|:---|:---|
+| 42 | 4.2 |
+| 43 | 4.3 |
+
+Note that the `lines` parameter is independent of `json_format`, i.e., any JSON format can be either pretty-printed or newline-delimited.
+
+If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DuckDB can still read it.
+Considered the following two JSON files:
+```json
+[1, 2, 3]
+[4, 5, 6]
+```
+And similarly:
+```json
+[
+  [1, 2, 3],
+  [4, 5, 6]
+]
+```
+By reading the first example with `json_format='values'` and the second example with `json_format='array_of_values'`, you will get the same result:
+
+| json |
+|:---|
+| [1, 2, 3] |
+| [4, 5, 6] |
 
 ## JSON Import/Export
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).

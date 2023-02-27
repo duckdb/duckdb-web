@@ -7,6 +7,9 @@ The __httpfs__ extension is a loadable extension implementing a file system that
 files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension
 supports reading/writing/globbing files.
 
+Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
+Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
+
 # HTTP(S)
 
 With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV and
@@ -178,6 +181,24 @@ works for both CSV and Parquet:
 
 ```sql
 COPY table_name TO 's3://bucket/file.extension';
+```
+
+Partioned copy to S3 also works:
+
+```sql
+COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b));
+```
+
+An automatic check is performed for existing files/directories, which is currently quite conservative (and on S3 will add a bit of latency). To disable this check and force writing, an `ALLOW_OVERWRITE` flag is added:
+
+```sql
+COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b), ALLOW_OVERWRITE TRUE);
+```
+
+The naming scheme of the written files looks like this:
+
+```text
+s3://my-bucket/partitioned/part_col_a=<val>/part_col_b=<val>/data_<thread_number>.parquet
 ```
 
 ### Configuration
