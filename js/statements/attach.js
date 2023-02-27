@@ -5,7 +5,7 @@ function GenerateAttachOptions(options) {
 		Sequence([
 			OneOrMore(Choice(0, [
 				Sequence([Keyword("READ_ONLY"), Choice(0, [new Skip(), Keyword("TRUE"), Keyword("FALSE")])]),
-				Sequence([Keyword("TYPE"), Choice(1, [Keyword("duckdb"), Keyword("sqlite")])])
+				Sequence([Keyword("TYPE"), Choice(0, [Keyword("sqlite")])])
 			]), ",", "skip")
 		]),
 		Keyword(')'),
