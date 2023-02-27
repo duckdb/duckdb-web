@@ -8,7 +8,7 @@ files. For pure HTTP(S), only file reading is supported. For object storage usin
 supports reading/writing/globbing files.
 
 Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
-Depending on the client you use, you might have to `INSTALL httpfs` on first use, and use `LOAD httpfs` at the start of every session.
+Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
 
 # HTTP(S)
 
