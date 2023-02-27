@@ -9,8 +9,11 @@
       "page": "Guides",
       "open": true,
       "slug": "guides/",
-      "url": "index",
       "mainfolderitems": [
+        {
+          "page": "Overview",
+          "url": "index"
+        },
         {
           "page": "Data Import & Export",
           "slug": "import",
@@ -207,9 +210,12 @@
             },
             {
               "page": "CSV Files",
-              "url": "csv",
               "slug": "csv",
               "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "/data/csv"
+                },
                 {
                   "page": "Auto Detection",
                   "url": "auto_detection"

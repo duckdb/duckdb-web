@@ -6,9 +6,12 @@
       "mainfolderitems": [
         {
           "page": "Testing",
-          "url": "/dev/testing",
           "slug": "sqllogictest",
           "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "/dev/testing"
+            },
             {
               "page": "SQLLogicTest",
               "url": "/dev/sqllogictest/intro"
@@ -48,6 +51,10 @@
           "url": "/dev/profiling"
         }
       ]
+    },
+    {
+      "page": "Sitemap",
+      "url": "/docs"
     },
     {
       "page": "Why DuckDB",
