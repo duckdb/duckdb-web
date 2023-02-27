@@ -27,10 +27,6 @@ silver:
   - name: Watershed
     url: https://watershedclimate.com
     logoimg: watershed.svg
-    
-  - name: Noteable
-    url: https://noteable.io
-    logoimg: noteable.png
 
   - name: Rill
     url: https://www.rilldata.com
@@ -43,3 +39,7 @@ silver:
   - name: Liquid Analytics
     url: https://www.liquidanalytics.com/
     logoimg: liquidanalytics.svg
+
+  - name: Summer Forever
+    url: https://www.summer.io/
+    logoimg: summer.svg
