@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!-- DISCLAIMER: this code is not supposed to make Web dev hipsters from 2017 happy -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title>VU DB Course - SQL</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/docs.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <!--<link rel="stylesheet" href="css/show-hint.css" /> -->
+    <style>
+      .bs-docs-sidebar .nav>.active:focus>a, .bs-docs-sidebar .nav>.active:hover>a, .bs-docs-sidebar .nav>.active>a {
+      padding-left: 18px;
+      font-weight: 700;
+      color: #337ab7;
+      background-color: transparent;
+      border-left: 2px solid #337ab7;
+      }
+      .CodeMirror {
+      height: 6em;
+      display: block;
+      }
+      .alert {
+      margin-top: 10px;
+      }
+      h2, h3 {
+      margin-top: 50px;
+      }
+      #offline-warning {
+      position: fixed;
+      bottom: 10px;
+      z-index: 100;
+      }
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <script src="js/sql.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/codemirror-sql.js"></script>
+    <script src="js/vocdata.js"></script>
+    <script>
+      var db = new SQL.Database();
+      db.run(vocdata);
+      
+      var logged_in = false;
+      
+      window.onload = function() {
+        $('.sql-challenge').each(function(i, e) {
+          var id = "sql-challenge-"+$.attr(e, 'data-id');
+          var ele = $.parseHTML(`<div class="panel panel-default" id="${id}">
+            <div class="panel-body">
+              <button type="button" class="btn" style="float: left; margin-top: 4px" onclick='query("${id}", ${$.attr(e, 'data-expres')})'><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+              <textarea class="CodeMirror">${$.attr(e, 'data-query')}</textarea>
+              <div class="alert" role="alert" style="display: none"><span class="message"></span></div>
+              <div class="tables" style="display:none">
+              </div>
+            </div>
+          </div>`)[0];
+      
+          $(e).replaceWith(ele);
+      
+          ele.editor = CodeMirror.fromTextArea($(ele).find("textarea")[0], {
+            mode: 'text/x-sql',
+            indentWithTabs: true,
+            smartIndent: true,
+            lineNumbers: true,
+            matchBrackets : true,
+            lineWrapping: true
+          });
+        });
+      }
+      
+      function renderresult(res, title) {
+        if (res.length < 1) {
+          return "<div>(Empty Query Result)</div>";
+        }
+        var tdata = "<table class=\"table table-condensed table-striped\"><caption>"+title+"</caption><thead><tr><th>#</th>";
+        for (c = 0; c < res[0].columns.length; c++) {
+          tdata += "<th>" + res[0].columns[c] + "</th>";
+        }
+        tdata += "</tr></thead><tbody>";
+        for (r = 0; r < res[0].values.length; r++) {
+         tdata += "<tr>";
+         if (res[0].values.length > 12 && r == 10) {
+          tdata += "<th></th><td colspan='"+res[0].columns.length+"'>...</td>"
+          r = res[0].values.length-2;
+          continue;
+        }
+        tdata += "<th>"+(r+1)+"</th>";
+        for (c = 0; c < res[0].columns.length; c++) {
+          if (res[0].values[r][c] == null) {
+            res[0].values[r][c] = "<span style='color: gray'>NULL</span>"
+          }
+          tdata += "<td>" + res[0].values[r][c] + "</td>";
+        }
+        tdata += "</tr>";
+      } 
+      tdata += "</tbody></table";
+      return tdata;
+      }
+      
+    function query(id, expres) {
+      var editorEle = $("#"+id)[0]
+      // uuugly
+      var tables = $($(editorEle).find(".tables")[0]);
+      var message = $($(editorEle).find(".alert")[0]);
+      var messageCntnt = $(message.find(".message")[0]);
+      
+      
+      message.hide();
+      tables.empty().hide();
+      var query = editorEle.editor.getValue().trim();
+      
+      if (query == "") {
+        message.removeClass('alert-success').addClass('alert-warning').show();
+        messageCntnt.text("No query was entered in the text box above.")
+        return;
+      }
+      
+      try {
+        var res = db.exec(query);
+      
+        console.log(JSON.stringify(res));
+        if (!expres) {
+          tables.append(renderresult(res, "Query Result")).show();
+          return;
+        }
+      
+        if(JSON.stringify(res) === JSON.stringify(expres)) {
+          message.removeClass('alert-warning').addClass('alert-success').show();
+          messageCntnt.text("Query is correct, " + great[Math.floor(Math.random()*great.length)]);
+          $("#" + id + " button").css('background-color', '#D0F0C0');
+         tables.append(renderresult(res, "Query Result")).show();
+       } else {
+        message.removeClass('alert-success').addClass('alert-warning').show();
+        messageCntnt.text("Query result is not as expected. Modify your query and try again.")
+        tables.append(renderresult(res, "Your Query Result")).append(renderresult(expres, "Expected Query Result")).show();
+      }
+      }
+      catch(err) {
+        message.removeClass('alert-success').addClass('alert-warning').show();
+        messageCntnt.text("Query failed: " + err.message)
+      }
+    }
+    </script>
+    </head>
+  <body>
+    <div class="container bs-docs-container">
+      <div class="row">
+        <div class="col-md-9" role="main">
+          <div class="bs-docs-section">
+            <h1>SQL (Structured Query Language) Querying</h1>
+           
+
+
+            <h2 id="intro">Introduction</h2>
+            <div id="offline-warning" class="alert alert-warning" role="alert" style="display: none">
+              <span class="message">You may have lost Internet connectivity.</span>
+            </div>
+            <p>
+              SQL is a declarative data manipulation languate. Simple <code>SELECT</code> queries follow the general form of 
+              <code>
+                SELECT [projection] FROM [tables] WHERE [selection] <!--[output modifiers];-->
+              </code>
+              .
+            </p>
+            <ul>
+              <li><code>[projection]</code> can be column names from the tables, constants or comutations between them. A <code>*</code> stands for "all columns".</li>
+              <li><code>[tables]</code> can be one or multiple table names.</li>
+              <li><code>[selection]</code> is a set of logical data filter conditions combined with <code>AND</code> or <code>OR</code></li>
+              <!--   <li><code>[output modifiers]</code> change the result structure. Popular output modifiers are <code>ORDER BY</code> or <code>LIMIT</code>.</li> -->
+            </ul>
+            <p>
+              Most of the query parts are optional. A very simple query is <code>SELECT 42</code>, which results in a single-row single-column result set containing the value <code>42</code>. A more common simple query is <code>SELECT * FROM sometable</code>, which retrieves all row from <code>sometable</code>. In the following, we will slowly expand from these simple queries.
+            </p>
+            <p>For the more formally inclined, you can look at <a href="https://sqlite.org/lang_select.html">SQLite's formal grammar for <code>SELECT</code> queries</a></p>
+            <p>
+              The sample data used below is based on the material published in the book J.R. Bruijn, F.S. Gaastra and I. Schaar, Dutch-Asiatic Shipping in the 17th and 18th Centuries, which gives an account of the trips made to the East and ships returned safely (or wrecked on the way). This is the main table, <code>voyages</code>:
+            </p>
+            <div id="data1">
+              <script>
+                $("#data1").append(renderresult(db.exec("SELECT * from voyages"), ""));
+              </script>
+            </div>
+            <p>The exercises here will work as follows: For every task, you write a SQL query into the text box and press the "play" button left of it. This will execute the query and check the result. The following query is already given, so you can directly run it. Try it, you will see the query result. If you get the result right, the task box turns green and the result is recorded.
+            </p>
+            <div class='sql-challenge' data-id='intro-example' data-expres='false' data-query="SELECT boatname, master, departure_date, tonnage FROM voyages"></div>
+            
+
+
+            <h2 id="basic-select">Basic Queries</h2>
+          
+
+            <h3 id="basic-select-project">Projections</h3>
+            <p>
+              Projections determine the <b>columns</b> that are retrieved from the database. Columns are usually data, but can also be the the result of computation on the data or constants. Several columns can be specified in the query separated by <code>,</code>. For example, <code>SELECT boatname, master FROM voyages</code> retrieves the two columns <code>boatname</code> and <code>master</code> from the table <code>voyages</code>. 
+            </p>
+            <div class="well">
+              For the first task, write a query below that retrieves the boat name and the departure date from the table <code>voyages</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-project1' data-expres='[{"columns":["boatname","departure_date"],"values":[["FAAM",1759],["TEILINGEN",1759],["VASCO DA GAMA",1777],["AFRIKAAN",1772],["EENSGEZINDHEID",1768],["MARIA LOUISA",1758],["BROEDERSLUST",1757],["BEVERWIJK",1773],["BERKHOUT",1787],["LEVIATHAN",1787],["VLIJT",1775],["HELENA LOUISA",1772],["DUIFJE",1762],["SURSEANCE",1760],["PHOENICWR",1782],["SCHOONDERLOO",1781],["LUCHTBOL",1784],["OOSTZAANDAM",1778],["ZEEMEEUW",1755],["TEXELSTROOM",1774],["EENPARIGHEID",1752],["ZWAAN",1769],["DORDRECHT",1764],["DRAAK",1764],["KRAAI",1755],["MENTOR",1778],["HOORNWEG",1758],["HORSSEN",1758],["STANDVASTIGHEID",1758],["VREDENBURG",1758],["ALBLASSERDAM",1754],["BLITTERSWIJK",1789],["VROUWE AGATHA",1763],["HAASJE",1763],["STRALEN",1760],["CHRISTOFFEL COLUMBUS",1787],["SNELHEID",1772],["GOUVERNEUR FALCK",1769],["DRIE GEBROEDERS",1768],["BARBESTEIN",1762],["STAR",1768],["VROUWE KATHARINA JOHANNA",1766],["MAKASSAR",1778],["CONSTITUTIE",1761],["GEERTRUIDA EN PETRONELLA",1761],["NIEUWSTAD",1760],["GOUVERNEUR-GENERAAL MOSSEL",1780],["RUSTHOF",1780],["UNIE",1780],["WESTKAPELLE",1780],["BUITENVERWACHTING",1766],["VROUWE MARIA KORNELIA",1754],["OOSTHUIZEN",1777],["ZEELAND",1777],["LEIDEN",1760],["ROZENBURG",1760],["JONKVROUWE SIBILLA ANTHOINETTA",1780],["VERWACHTING",1776],["VOORLAND",1762],["DRECHTERLAND",1788],["CASTOR",1786],["DUIFJE",1786],["GOUDA",1786],["DEMERARY",1784],["GERECHTIGHEID",1768],["FAAM",1764],["RESOLUTIE",1788],["MARIA LOUISA",1769],["TEXELSTROOM",1757],["KRAAI",1784],["EXPEDITIE",1766],["AFRIKAAN",1765],["HOUGLY",1761],["KROMHOUT",1761],["MENTOR",1761],["SURSEANCE",1761],["CEYLON",1771],["MAKASSAR",1771],["NOORD-HOLLAND",1771],["STANDVASTIGHEID",1771],["VLIJT",1771],["SIAM",1770],["WASHINGTON",1770],["ZEELELIE",1770],["ZWAAN",1770],["ALBLASSERDAM",1793],["ZUIDPOOL",1793],["MEERMIN",1793],["JONGE BONIFACIUS",1793],["LOUISA ANTHONY",1793],["VERTROUWEN",1793]]}]' data-query="SELECT 1"></div>
+            <p>
+              We can also modify the data we retrieve. For example, the (pointless) query <code>SELECT number, number + 1 FROM voyages</code> will add <code>1</code> to every value in the <code>numbers</code> column. A quite large amount of computation is possible here, comparable to common programming languages. 
+            </p>
+            <div class="well">
+              Write a query below that retrieves the boat name and the tonnage multiplied by <code>2</code> from the table <code>voyages</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-project2' data-expres='[{"columns":["boatname","tonnage*2"],"values":[["FAAM",272],["TEILINGEN",2300],["VASCO DA GAMA",2300],["AFRIKAAN",1760],["EENSGEZINDHEID",1768],["MARIA LOUISA",272],["BROEDERSLUST",1372],["BEVERWIJK",2300],["BERKHOUT",2300],["LEVIATHAN",2300],["VLIJT",272],["HELENA LOUISA",360],["DUIFJE",800],["SURSEANCE",1536],["PHOENICWR",2300],["SCHOONDERLOO",1760],["LUCHTBOL",272],["OOSTZAANDAM",1300],["ZEEMEEUW",272],["TEXELSTROOM",1560],["EENPARIGHEID",1200],["ZWAAN",2300],["DORDRECHT",1796],["DRAAK",2300],["KRAAI",272],["MENTOR",1120],["HOORNWEG",1760],["HORSSEN",1760],["STANDVASTIGHEID",1416],["VREDENBURG",2300],["ALBLASSERDAM",2300],["BLITTERSWIJK",2300],["VROUWE AGATHA",1800],["HAASJE",272],["STRALEN",1760],["CHRISTOFFEL COLUMBUS",2300],["SNELHEID",272],["GOUVERNEUR FALCK",2300],["DRIE GEBROEDERS",1656],["BARBESTEIN",2300],["STAR",272],["VROUWE KATHARINA JOHANNA",1800],["MAKASSAR",2300],["CONSTITUTIE",1760],["GEERTRUIDA EN PETRONELLA",1928],["NIEUWSTAD",1760],["GOUVERNEUR-GENERAAL MOSSEL",2300],["RUSTHOF",1760],["UNIE",2300],["WESTKAPELLE",2300],["BUITENVERWACHTING",2300],["VROUWE MARIA KORNELIA",2300],["OOSTHUIZEN",1760],["ZEELAND",2312],["LEIDEN",2300],["ROZENBURG",1760],["JONKVROUWE SIBILLA ANTHOINETTA",2300],["VERWACHTING",1200],["VOORLAND",2300],["DRECHTERLAND",2300],["CASTOR",1300],["DUIFJE",800],["GOUDA",800],["DEMERARY",2300],["GERECHTIGHEID",2300],["FAAM",272],["RESOLUTIE",1060],["MARIA LOUISA",272],["TEXELSTROOM",1560],["KRAAI",272],["EXPEDITIE",272],["AFRIKAAN",1760],["HOUGLY",2300],["KROMHOUT",1760],["MENTOR",1120],["SURSEANCE",1536],["CEYLON",1800],["MAKASSAR",2300],["NOORD-HOLLAND",1788],["STANDVASTIGHEID",1416],["VLIJT",272],["SIAM",1760],["WASHINGTON",2300],["ZEELELIE",2300],["ZWAAN",2300],["ALBLASSERDAM",2300],["ZUIDPOOL",1800],["MEERMIN",1000],["JONGE BONIFACIUS",976],["LOUISA ANTHONY",1280],["VERTROUWEN",1780]]}]' data-query="SELECT 1"></div>
+            <p>
+              In the previous task, you can see that the column name of the result of the computation on the <code>tonnage</code> column is <code>tonnage*2</code>. This is sometimes quite unhandy, especially when continuing to use that column in some computation. For this reason, columns and computation results can be renamed using the <code>AS</code> keyword. For example, <code>SELECT boatname AS shipname FROM voyages</code> will retrieve the boatname column, but name it <code>shipname</code>. 
+            </p>
+            <div class="well">
+              Write a query below that retrieves the boat name and the tonnage multiplied by <code>2</code> <b>renamed to</b> <code>tonnage_times_two</code> from the table <code>voyages</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-project3' data-expres='[{"columns":["boatname","tonnage_times_two"],"values":[["FAAM",272],["TEILINGEN",2300],["VASCO DA GAMA",2300],["AFRIKAAN",1760],["EENSGEZINDHEID",1768],["MARIA LOUISA",272],["BROEDERSLUST",1372],["BEVERWIJK",2300],["BERKHOUT",2300],["LEVIATHAN",2300],["VLIJT",272],["HELENA LOUISA",360],["DUIFJE",800],["SURSEANCE",1536],["PHOENICWR",2300],["SCHOONDERLOO",1760],["LUCHTBOL",272],["OOSTZAANDAM",1300],["ZEEMEEUW",272],["TEXELSTROOM",1560],["EENPARIGHEID",1200],["ZWAAN",2300],["DORDRECHT",1796],["DRAAK",2300],["KRAAI",272],["MENTOR",1120],["HOORNWEG",1760],["HORSSEN",1760],["STANDVASTIGHEID",1416],["VREDENBURG",2300],["ALBLASSERDAM",2300],["BLITTERSWIJK",2300],["VROUWE AGATHA",1800],["HAASJE",272],["STRALEN",1760],["CHRISTOFFEL COLUMBUS",2300],["SNELHEID",272],["GOUVERNEUR FALCK",2300],["DRIE GEBROEDERS",1656],["BARBESTEIN",2300],["STAR",272],["VROUWE KATHARINA JOHANNA",1800],["MAKASSAR",2300],["CONSTITUTIE",1760],["GEERTRUIDA EN PETRONELLA",1928],["NIEUWSTAD",1760],["GOUVERNEUR-GENERAAL MOSSEL",2300],["RUSTHOF",1760],["UNIE",2300],["WESTKAPELLE",2300],["BUITENVERWACHTING",2300],["VROUWE MARIA KORNELIA",2300],["OOSTHUIZEN",1760],["ZEELAND",2312],["LEIDEN",2300],["ROZENBURG",1760],["JONKVROUWE SIBILLA ANTHOINETTA",2300],["VERWACHTING",1200],["VOORLAND",2300],["DRECHTERLAND",2300],["CASTOR",1300],["DUIFJE",800],["GOUDA",800],["DEMERARY",2300],["GERECHTIGHEID",2300],["FAAM",272],["RESOLUTIE",1060],["MARIA LOUISA",272],["TEXELSTROOM",1560],["KRAAI",272],["EXPEDITIE",272],["AFRIKAAN",1760],["HOUGLY",2300],["KROMHOUT",1760],["MENTOR",1120],["SURSEANCE",1536],["CEYLON",1800],["MAKASSAR",2300],["NOORD-HOLLAND",1788],["STANDVASTIGHEID",1416],["VLIJT",272],["SIAM",1760],["WASHINGTON",2300],["ZEELELIE",2300],["ZWAAN",2300],["ALBLASSERDAM",2300],["ZUIDPOOL",1800],["MEERMIN",1000],["JONGE BONIFACIUS",976],["LOUISA ANTHONY",1280],["VERTROUWEN",1780]]}]' data-query="SELECT 1"></div>
+          
+
+            <h3 id="basic-select-select">Selections</h3>
+            <p>
+              To determine which <b>rows</b> are retrieved, we can filter the table with some criteria in the <code>WHERE</code> clause. For example, the query <code>SELECT boatname FROM voyages WHERE number > 8395</code> will only retrieve voyages where the value for the <code>number</code> column is greater than <code>8395</code>. Note that the <code>number</code> column is not mentioned in the projection list, this is common.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the boat name for boats with a tonnage of less than <code>150</code> from the table <code>voyages</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-select1' data-expres='[{"columns":["boatname"],"values":[["FAAM"],["MARIA LOUISA"],["VLIJT"],["LUCHTBOL"],["ZEEMEEUW"],["KRAAI"],["HAASJE"],["SNELHEID"],["STAR"],["FAAM"],["MARIA LOUISA"],["KRAAI"],["EXPEDITIE"],["VLIJT"]]}]' data-query="SELECT 1"></div>
+            <p>You can specify multiple such filter criteria and connect them with Boolean logic using <code>AND</code> and <code>OR</code>. For example, the query <code>SELECT boatname FROM voyages WHERE number > 8395 AND type_of_boat = 'fluit'</code> will only retrieve rows where both conditions are met.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the boat name only for boats with a tonnage of less than <code>150</code> <b>and for ships departing from the harbour of Batavia</b> from the table <code>voyages</code>. Note that string constants (<code>Batavia</code>) need to be quoted with single quotes in SQL, like so: <code>'Batavia'</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-select2' data-expres='[{"columns":["boatname"],"values":[["FAAM"],["VLIJT"],["LUCHTBOL"],["KRAAI"],["HAASJE"],["MARIA LOUISA"],["KRAAI"],["EXPEDITIE"],["VLIJT"]]}]' data-query="SELECT 1"></div>
+            <p>One special case for selections are <code>NULL</code> values. Those typically cannot be filtered out with (non-)equality checks (because <code>NULL != NULL</code>, but have special syntax. In particular, <code>WHERE departure_date IS NULL</code> selects rows where <code>departure_date</code> has the value <code>NULL</code>, <code>WHERE departure_date IS NOT NULL</code> does the opposite.
+            </p>
+            <p>Another special case is string pattern matching. Sometimes, we want not to compare exact equality of strings, but use pattern matching instead (much like regular expressions). SQL uses the <code>LIKE</code> keyword for this. Patterns can contain two special "magic" characters, <code>%</code> and <code>_</code>. <code>%</code> matches an arbitrary number (zero or more) characters, <code>_</code> matches a single arbitrary character. For example, if one wanted to retrieve all boat names from the <code>voyages</code> table where the boat name starts with <code>D</code>, the query would be <code>SELECT boatname FROM voyages WHERE boatname LIKE 'D%'</code>. If we wanted to retrieve all five-character boat names starting with <code>D</code>, we would use <code>LIKE 'D____'</code>. There is also the <code>ILIKE</code> (Borat) variant, which is case-insensitive.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the boat name and the master only for boats where the type of boat is not <code>NULL</code> and the boat name consists of five-characters ending with <code>AI</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-selec3' data-expres='[{"columns":["boatname","master"],"values":[["KRAAI","Swerus Magnus Cederborg"],["KRAAI","Jakob Sem"]]}]' data-query="SELECT 1"></div>
+         
+
+            <h3 id="basic-select-outputmod">Output Modifiers</h3>
+            <p>
+              Sometimes we want to change the result set independent from the query. Two common tasks are limiting the amount of rows that are retrieved (keyword <code>LIMIT</code>) and changing the ordering of the result set (keyword <code>ORDER BY</code>. Using <code>LIMIT</code> is generally a good idea since databases can grow to billions of records and they will duly output all of them if so instructed.
+            </p>
+            <p>
+              Note that the relational model does not specify an explicit order of rows, hence it is important to specify an order when using <code>LIMIT</code>. For example, to retrieve the first five boat names in alphabetical order, we can use the query <code>SELECT boatname FROM voyages ORDER BY boatname LIMIT 5;</code>. We can order by multiple columns and use the <code>DESC</code> keyword to invert the order.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the top six boat names ordered by tonnage.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-outputmod' data-expres='[{"columns":["boatname"],"values":[["FAAM"],["MARIA LOUISA"],["VLIJT"],["LUCHTBOL"],["ZEEMEEUW"],["KRAAI"]]}]' data-query="SELECT 1"></div>
+           
+
+            <h3 id="basic-select-combined">All Combined</h3>
+            <p>Now, let's combine all of the above in a single query.</p>
+            <div class="well">
+              Write a query below that retrieves the boat name and the tonnage divided by <code>2</code> renamed to <code>half_tonnage</code> from the table <code>voyages</code> for boats built after <code>1788</code> and the chamber code is <code>A</code>. The result should be ordered by departure date and only include the top 3 results.
+            </div>
+            <div class='sql-challenge' data-id='intro-select-combined' data-expres='[{"columns":["boatname","half_tonnage"],"values":[["BUITENVERWACHTING",575],["WASHINGTON",575],["CEYLON",450]]}]' data-query="SELECT 1"></div>
+          
+
+
+            <h2 id="basic-aggregate">Aggregation Queries</h2>
+            <p>Often, we are not interested in "raw" data, but aggregates like averages or counts. These can be expressed in SQL by adding an additional <code>GROUP BY</code> clause after the <code>WHERE</code> clause of the query. In addition, the projection list is modified by adding aggregation functions and groups. The commonly supported aggregate functions are <code>COUNT</code>, <code>MIN</code>, <code>MAX</code> and <code>AVG</code>.
+            </p>
+          
+
+            <h3 id="basic-aggregate-ungrouped">Ungrouped Aggregation</h3>
+            <p>
+              The easiest case of aggregating values is aggregating without a <code>GROUP BY</code> clause. In this case, the grouping is implicit and all rows fall into a single group. For example, the query <code>SELECT MIN(number) FROM voyages</code> will compute the smallest value for the column <code>number</code>.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the maximum tonnage as the column <code>max_tonnage</code> from the <code>voyages</code> table.
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-ungrouped' data-expres='[{"columns":["max_tonnage"],"values":[[1156]]}]' data-query="SELECT 1"></div>
+            
+
+            <h3 id="basic-aggregate-single">Single-Column Groups</h3>
+            <p>
+              The next step of aggregation is the aggregation by a group determined by the values in the data. For example, the query <code>SELECT type_of_boat, COUNT() AS n FROM voyages GROUP BY type_of_boat</code> generates the aggregate <code>COUNT</code> for each distinct value of <code>type_of_boat</code>. Its important to know that the projection of the query (the part behind the <code>SELECT</code>) can only contain column names of columns that are used in the <code>GROUP BY</code> part of the query as well. All other columns need to be wrapped in an aggregation function.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the <code>chamber</code> and the maximum tonnage for each distinct value of <code>chamber</code> as the column <code>max_tonnage</code> from the <code>voyages</code> table grouped by <code>chamber</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-group1' data-expres='[{"columns":["chamber","max_tonnage"],"values":[["A",1150],["D",880],["E",1150],["H",900],["R",1150],["Z",1156]]}]' data-query="SELECT 1"></div>
+       
+
+            <h3 id="basic-aggregate-multi">Multi-Column Groups</h3>
+            <p>
+              We can also group by multiple columns. In this case, all combinations of values between the two columns that occur in the data are grouping values. The query will simply list all grouping columns separated by <code>,</code> after the <code>GROUP BY</code> keyword.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the chamber, the type of boat, and the number of tuples in each group as the column <code>n</code> from the <code>voyages</code> table grouped by <code>chamber</code> <b>and</b> <code>type_of_boat</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-group2' data-expres='[{"columns":["chamber","type_of_boat","n"],"values":[["A",null,28],["A","fluit",7],["A","fregat",1],["A","hoeker",5],["A","paketboot",6],["A","pink",2],["D",null,3],["D","paketboot",2],["E",null,4],["E","paketboot",1],["H",null,5],["H","paketboot",1],["R",null,6],["R","paketboot",1],["Z",null,15],["Z","paketboot",3],["Z","pink",1]]}]' data-query="SELECT 1"></div>
+          
+
+            <h3 id="basic-aggregate-filter">Filtering Values and Groups</h3>
+            <p>In one of the previous excersises, we have seen how we can select (<code>WHERE ...</code>) only part of the table to be relevant to the query. This also applies to groups. For example, before grouping, we might decide to filter out values. We can also filter out groups based on their aggregation values using the <code>HAVING</code> keyword.
+            </p>
+            <p>
+              For example, we could aggregate only the type of boat for chamber <code>A</code> using a query like <code>SELECT type_of_boat, COUNT() AS n FROM voyages WHERE chamber = 'A' GROUP BY type_of_boat</code>. The logic here tells the database to conceptually first compute the result of the <code>WHERE</code> clause and then run the aggregation according to the <code>GROUP BY</code> column. The result of this query is:
+            </p>
+            <div id="example1">
+              <script>
+                $("#example1").append(renderresult(db.exec("SELECT type_of_boat, COUNT() AS n FROM voyages WHERE chamber = 'A' GROUP BY type_of_boat"), ""));
+              </script>
+            </div>
+            <div class="well">
+              Write a query below that retrieves the departure harbour and the number of tuples in each group as the column <code>n</code> from the <code>voyages</code> table grouped by <code>departure_harbour</code> while filtering out rows where the field <code>departure_harbour</code> is <code>NULL</code> (<code>IS NOT NULL</code>, see above).
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-group3' data-expres='[{"columns":["departure_harbour","n"],"values":[["Batavia",57],["Bengal",2],["Ceylon",11],["China",10],["The Cape",7],["Tuticorin",1]]}]' data-query="SELECT 1"></div>
+            <p>
+              From the previous result, we have seen some groups with low values for <code>n</code>. Let's say we want to remove those. For this we can use the <code>HAVING</code> clause, which operates on the result of aggregation functions. For example, we can modify the example from above to not consider boat types for which the <code>COUNT</code> value in <code>n</code> is less than <code>5</code>: <code>SELECT type_of_boat, COUNT() AS n FROM voyages GROUP BY type_of_boat HAVING n > 5</code>. All expressions that can used following the <code>SELECT</code> in a grouped query are acceptable in the <code>HAVING</code> clause to filter the groups.
+            </p>
+            <div class="well">
+              Write a query below that retrieves the <code>chamber</code> and sum of <code>tonnage</code> as field <code>s</code> from the <code>voyages</code> table grouped by <code>chamber</code> while filtering out groups where the sum of tonnage is less than or equal to <code>5000</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-group4' data-expres='[{"columns":["chamber","s"],"values":[["A",39730],["R",5434],["Z",15516]]}]' data-query="SELECT 1"></div>
+            <h3 id="basic-aggregate-distinct">Distinct Values</h3>
+            <p>A special case of grouping is the <code>DISTINCT</code> keyword. It retrieves the set of unique values from a set of columns. An example is <code>SELECT DISTINCT type_of_boat FROM voyages</code>. This is set-equivalent to the query <code>SELECT type_of_boat FROM voyages GROUP BY type_of_boat</code>. Try it!
+            </p>
+            <div class="well">
+              Write a query below that retrieves all unique values for departure harbour from the <code>voyages</code> table.
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-distinct' data-expres='[{"columns":["departure_harbour"],"values":[["Batavia"],["China"],["Ceylon"],["The Cape"],["Tuticorin"],["Bengal"],[null]]}]' data-query="SELECT 1"></div>
+
+
+            <h3 id="basic-aggregate-combined">All Combined</h3>
+            <p>Now let's try to combine a lot of what we have learned so far about grouping (and before).</p>
+            <div class="well">
+              Write a query below that retrieves the departure harbour, the departure date, the amount of voyages (rows) as column <code>n</code>, the minimum and maximum tonnage in each group (<code>min_t</code> / <code>max_t</code>) from the <code>voyages</code> table. Group by departure harbour and departure date. Filter out rows where departure harbour is <code>NULL</code> or equal to <code>Batavia</code>. Filter the groups to have at least two voyages in them.
+            </div>
+            <div class='sql-challenge' data-id='intro-aggregate-group6' data-expres='[{"columns":["departure_harbour","departure_date","n","min_t","max_t"],"values":[["Ceylon",1768,2,136,1150],["Ceylon",1787,3,1150,1150],["Ceylon",1793,2,900,1150],["China",1770,4,880,1150],["China",1777,3,880,1156],["The Cape",1786,3,400,650]]}]' data-query="SELECT 1"></div>
+
+
+
+            <h2 id="basic-join">Join</h2>
+            <p>One of the most powerful features of relational databases is the <code>JOIN</code>, the horizontal combination of two tables according to the data. For example, if one table contains information about voyages and another table contains information about the invoices (value of ship's cargo) for those voyages, the <code>JOIN</code> operator can be used to combine the two.
+            </p>
+            <p>
+              To extend the example, we use an additional table, <code>chambers</code>, which contains the expansion of the VOC chamber (department) code we used in the previous section:
+            </p>
+            <div id="data2">
+              <script>
+                $("#data2").append(renderresult(db.exec("SELECT * from chambers"), ""));
+              </script>
+            </div>
+            <p>
+              We will also use the table <code>invoices</code>, which contains the total amount of money charged for a voyage:
+            </p>
+            <div id="data3">
+              <script>
+                $("#data3").append(renderresult(db.exec("SELECT * from invoices"), ""));
+              </script>
+            </div>
+
+
+            <h3 id="basic-join-equi">Equi-Join</h3>
+            <p>The basic form of <code>JOIN</code> is the "Equi-Join". "Equi" stands for "Equality" and means that values have to be equal to create a match for the join. In SQL, there are various syntaxes for this, but generally we need to name the two tables in the <code>FROM</code> clause and then either immediately or later in the <code>WHERE</code> specify the columns that should be considered.
+            </p>
+            <p>
+              For example, we can join the <code>voyages</code> table and the <code>chambers</code> using an Equi-Join on the respective <code>chamber</code> columns to add the actual chamber name to the output with <code>SELECT boatname, chamber, name FROM voyages JOIN chambers USING (chamber) LIMIT 5;</code>. The result of this query is:
+            </p>
+            <div id="data4">
+              <script>
+                $("#data4").append(renderresult(db.exec("SELECT boatname, chamber, name FROM voyages join chambers USING (chamber) LIMIT 5"), ""));
+              </script>
+            </div>
+            <p>
+              Note the list of tables in the <code>FROM</code> clause and the <code>USING</code> keyword, which specifies that values from the column <code>chamber</code>, which exists in both tables, should be compared to generate the join result. There are at least two equivalent ways to formulate this query. First, the join condition can also be more verbose: <code>SELECT boatname, voyages.chamber, name FROM voyages JOIN chambers ON voyages.chamber = chambers.chamber LIMIT 5;</code>. Here, we use the <code>ON</code> keyword to specify a more precise and expressive join condition. We explicitly name the tables from which the join columns are coming using the <code>tablename.columname</code> syntax. We also explicitly use the <code>=</code> comparision operator. Both of these definitions are implicit when using <code>USING</code>. The <code>USING</code> keyword also adds an implicit projection which removes one of the <code>chamber</code> results from the result set. The <code>ON</code> version does not, this is why we need to explicitly name one of them in the <code>SELECT</code> part of the query. Second, the join condition can also be in the <code>WHERE</code> clause of the query: <code>SELECT boatname, voyages.chamber, name FROM voyages JOIN chambers WHERE voyages.chamber = chambers.chamber LIMIT 5;</code>. This method of specifying a join condition is widespread, but confusing and thus discouraged. <!--Finally, the <code>JOIN</code> keyword can also be replaced by a comma <code>,</code>, which is also widespread.-->
+            </p>
+            <p>In the result above, also note how several rows from <code>voyages</code> (# 1, 3 and 5) are joined up with the same row from <code>chambers</code>. This is normal and expected behavior, rows are re-used if they match multiple rows in the join partner.
+            </p>
+            <p>Now try to write a JOIN query yourself!</p>
+            <div class="well">
+              Join the <code>voyages</code> and <code>invoices</code> table using equality on the <code>number</code> column. Project only the <code>boatname</code> and <code>invoice</code> column.
+            </div>
+            <div class='sql-challenge' data-id='intro-join1' data-expres='[{"columns":["boatname","invoice"],"values":[["FAAM",9189],["TEILINGEN",628],["TEILINGEN",134267],["VASCO DA GAMA",164435],["AFRIKAAN",112641],["AFRIKAAN",1087],["EENSGEZINDHEID",88076],["BROEDERSLUST",515],["BROEDERSLUST",144452],["BEVERWIJK",428],["BEVERWIJK",308892],["BERKHOUT",241684],["LEVIATHAN",240504],["VLIJT",7121],["SURSEANCE",95528],["PHOENICWR",120743],["SCHOONDERLOO",109783],["LUCHTBOL",7890],["OOSTZAANDAM",107331],["TEXELSTROOM",96548],["EENPARIGHEID",79382],["ZWAAN",134499],["DORDRECHT",129221],["DRAAK",153204],["KRAAI",8849],["MENTOR",74441],["HOORNWEG",81217],["HORSSEN",81582],["STANDVASTIGHEID",69494],["VREDENBURG",112921],["ALBLASSERDAM",739545],["BLITTERSWIJK",789590],["VROUWE AGATHA",111728],["HAASJE",6222],["STRALEN",85864],["CHRISTOFFEL COLUMBUS",189317],["GOUVERNEUR FALCK",228507],["DRIE GEBROEDERS",107625],["BARBESTEIN",248209],["VROUWE KATHARINA JOHANNA",152856],["MAKASSAR",181647],["CONSTITUTIE",84541],["GEERTRUIDA EN PETRONELLA",152421],["NIEUWSTAD",113163],["GOUVERNEUR-GENERAAL MOSSEL",133393],["RUSTHOF",115076],["UNIE",187030],["WESTKAPELLE",138049],["BUITENVERWACHTING",156338],["VROUWE MARIA KORNELIA",133731],["OOSTHUIZEN",686906],["ZEELAND",880794],["LEIDEN",80993],["LEIDEN",55288],["ROZENBURG",677410],["JONKVROUWE SIBILLA ANTHOINETTA",330617],["VERWACHTING",203086],["VOORLAND",195785],["DRECHTERLAND",112132],["DEMERARY",135474],["GERECHTIGHEID",94894],["MARIA LOUISA",10379],["AFRIKAAN",39482],["AFRIKAAN",30122],["HOUGLY",139517],["KROMHOUT",null],["KROMHOUT",110574],["MENTOR",61361],["SURSEANCE",81527],["CEYLON",105616],["MAKASSAR",124126],["NOORD-HOLLAND",108272],["STANDVASTIGHEID",91988],["VLIJT",7226],["SIAM",550442],["WASHINGTON",698006],["ZEELELIE",716139],["ZWAAN",714079],["ALBLASSERDAM",457491],["ZUIDPOOL",365373],["JONGE BONIFACIUS",50232],["LOUISA ANTHONY",85711],["VERTROUWEN",106435]]}]' data-query="SELECT 1"></div>
+            <p>Joins can (of course) use more than one pair of columns to determine that a match is present. For example, the query <code>SELECT boatname, invoice FROM voyages JOIN invoices USING (number, chamber)</code> joins the two tables by checking equality for <b>both</b> the <code>number</code> and <code>chamber</code> columns. The equivalent form with the <code>ON</code> keyword would be <code>SELECT boatname, invoice FROM voyages JOIN invoices ON voyages.number = invoices.number AND voyages.chamber = invoices.chamber</code>. </p>
+            </p>
+
+
+            <h3 id="basic-join-natural">Natural Join</h3>
+            <p>
+              A special case of the Equi-join is the <code>NATURAL JOIN</code>. What it does is perform a join between two tables while using <b>all</b> columns from both tables with matching names as join criteria. The following two queries are equivalent: <code>SELECT boatname, invoice FROM voyages JOIN invoices USING (number, chamber)</code> and <code>SELECT boatname, invoice FROM voyages NATURAL JOIN invoices</code>, because the columns <code>number</code> and <code>chamber</code> are the only column names the two tables have in common. Think of natural joins as syntactic sugar, which often reduces readability of your query due to its implicit nature.
+            </p>
+            <h3 id="basic-join-outer">Outer Join</h3>
+            <p>The previous section used (by default) what is called an <code>INNER JOIN</code>. Here, only rows where a match in the other table is found for are candidates for the result. There is also an opposite version, the <code>LEFT OUTER JOIN</code> (The <code>OUTER</code> keyword is optional). Here, all rows from the left side of the join (the table named first) are included in the result. If a matching row from the right side is found, it is joined. If none is found, the left row is still returned with the missing fields from the right side set to <code>NULL</code>
+            </p>
+            <div class="well">
+              Not all rows in the <code>voyages</code> table have a match in the <code>invoices</code> table. Use a <code>LEFT OUTER JOIN</code> on <code>number</code> and a filter for <code>invoice</code> equal to <code>NULL</code> to only retrieve rows where no match was found. Retrieve only the <code>number</code> column.
+            </div>
+            <div class='sql-challenge' data-id='intro-join2' data-expres='[{"columns":["number"],"values":[[8305],[8311],[8312],[8318],[8336],[8340],[8360],[8361],[8362],[8365],[8366],[8368],[8369],[8370],[8384],[8398]]}]' data-query="SELECT 1"></div>
+          
+
+            <h3 id="basic-join-self">Self-Join</h3>
+            <p>A powerful use case of joins in SQL is the self-join. Here, we combine the table with itself, which can for example be used to express queries about relationships between rows in the same table. In our dataset, we have such a relationship with the <code>next_voyage</code> column in the <code>voyages</code> table. This column indicates the next voyage number of a particular ship. Since both table have the same name in a self-join, it is required to rename them using the <code>AS</code> statement to unique temporary table names. For example, <code>SELECT v1.boatname FROM voyages AS v1 where v1.chamber='A'</code> demonstrates such a renaming.
+            <div class="well">
+              Retrieve all voyages where the next voyage of a ship was for a different chamber. Project ot boatname, and the two (differing) chambers as <code>c1</code> and <code>c2</code>.
+            </div>
+            <div class='sql-challenge' data-id='intro-join3' data-expres='[{"columns":["boatname","c1","c2"],"values":[["AFRIKAAN","E","H"],["ZWAAN","Z","A"],["STANDVASTIGHEID","R","Z"]]}]' data-query="SELECT 1"></div>
+
+
+            <h3 id="basic-join-multi">More Tables</h3>
+            <p>We can join over more than two tables by chaining <code>JOIN</code> keywords. We also use multiple <code>ON</code> or <code>USING</code> statements to define the join criteria.
+
+           <div class="well">
+              Join all three tables <code>voyages</code>, <code>invoices</code> and <code>chambers</code>. Join <code>voyages</code> and <code>invoices</code> on the <code>number</code> and <code>chamber</code> columns, and the resulting table with <code>chambers</code> using only <code>chamber</code> column. Limit the result set to 5 rows.
+            </div>
+            <div class='sql-challenge' data-id='intro-join4' data-expres='[{"columns":["boatname","name","invoice"],"values":[["FAAM","Amsterdam",9189],["TEILINGEN","Rotterdam",134267],["VASCO DA GAMA","Amsterdam",164435],["AFRIKAAN","Enkhuizen",112641],["EENSGEZINDHEID","Amsterdam",88076]]}]' data-query="SELECT 1"></div>
+
+
+            <h2 id="basic-subqueries">Subqueries</h2>
+            <p>SQL supports nested queries, the so-called subqueries. They can be used in all parts of the query and often simplify query expression as opposed to a <code>JOIN</code>. Other uses are creation of more convenient join partners or computation of projection results. These queries mostly differ in the allowed cardinality of their results. In projections, they can only return a single value whiled in the <code>FROM</code>clause, entire tables may be produced.</p>
+          
+
+            <h3 id="basic-subqueries-where">Filters</h3>
+            <p>Subqueries in a <code>WHERE</code> clause are typically comparing an attribute, either against a single value (e.g. using <code>=</code>) or against a set of values (e.g. with <code>IN</code> or <code>EXISTS</code>). In both cases, it is possible to refer to tuple variables from the enclosing query but not the other way around. Subqueries are enclosed in brackets <code>()</code> and are otherwise complete queries on their own. For example, the rather over-complicated query <code>SELECT boatname FROM voyages WHERE tonnage = (SELECT 884)</code> uses a subquery to retrieve all ships with a tonnage of <code>884</code>.</p>
+
+          <div class="well">
+            Use a subquery in the <code>WHERE</code> clause to retrieve boat names from the <code>voyages</code> table where there is no matching entry in the <code>invoices</code> table for the particular voyage number. Use a subquery with either <code>NOT IN</code> or <code>NOT EXISTS</code> (with a reference to the outer query).
+            </div>
+            <div class='sql-challenge' data-id='intro-subquery1' data-expres='[{"columns":["boatname"],"values":[["CASTOR"],["DUIFJE"],["DUIFJE"],["EXPEDITIE"],["FAAM"],["GOUDA"],["HELENA LOUISA"],["KRAAI"],["MARIA LOUISA"],["MEERMIN"],["RESOLUTIE"],["SNELHEID"],["STAR"],["TEXELSTROOM"],["ZEEMEEUW"]]}]' data-query="SELECT 1"></div>
+
+            <h3 id="basic-subqueries-from">Tables</h3>
+
+            <p>The result of a subquery is also a table, hence they can also be used to use a subquery result where a table could be used, i.e. the <code>FROM</code> clause. For example, the (again) over-complicated query <code>SELECT number FROM (SELECT * FROM voyages) AS v</code> uses a table-creating subquery. Note how we have to use the <code>AS</code> clause to give the table created by the subquery a name. We often use subqueries to avoid complex filter conditions after joining tables.</p>
+
+           <div class="well">
+           Use a subquery in the <code>FROM</code> clause to only retrieve <code>invoices</code> from chamber <code>'H'</code> and the <code>invoice</code> amount of larger than <code>10000</code> and join the result with the <code>voyages</code> table using the <code>number</code> column. Project to only retrieve the <code>boatname</code> and the <code>invoice</code> amount of the join result. Order by <code>invoice</code> amount.
+            </div>
+            <div class='sql-challenge' data-id='intro-subquery2' data-expres='[{"columns":["boatname","invoice"],"values":[["AFRIKAAN",30122],["KROMHOUT",110574],["NIEUWSTAD",113163],["VROUWE KATHARINA JOHANNA",152856],["OOSTHUIZEN",686906]]}]' data-query="SELECT 1"></div>
+
+            <h2 id="basic-sets">Set Operations</h3>
+            <p>SQL is grounded in the set semantics of the relational model. Hence, result sets can be interpreted as sets of tuples and we can use set operations to modify them. The most common set operation is the <code>UNION</code>, but intersections and set differences are also possible. These operators are often used to combine tuples from different relations.</p>
+
+            <h3 id="basic-sets-union">Unions</h3>
+            <p>The <code>UNION</code> keyword combines two result sets while eliminating duplicates, the <code>UNION ALL</code> keyword does the same while keeping duplicates. For example, the query <code>SELECT name, chamber FROM chambers UNION ALL SELECT boatname, chamber FROM voyages</code> will stack the otherwise unrelated boat and chamber names into one result set. Often, constants are also selected to denote the source of the respective tables.
+            </p>
+                <div class="well">
+                Use the <code>UNION</code> keyword to add a (modern-day) <code>province</code> column to the <code>chambers</code> values. <code>'Noord-Holland</code> for <code>'Amsterdam'</code>, <code>'Hoorn'</code> and <code>'Enkhuizen'</code>, <code>'Zeeland</code> for <code>'Zeeland'</code>, <code>'Zuid-Holland</code> for <code>'Delft'</code> and <code>'Rotterdam'</code>. Select chamber code, name and province. Order entire result set by chamber code.
+            </div>
+            <div class='sql-challenge' data-id='intro-set1' data-expres='[{"columns":["chamber","name","province"],"values":[["A","Amsterdam","Noord-Holland"],["D","Delft","Zuid-Holland"],["E","Enkhuizen","Noord-Holland"],["H","Hoorn","Noord-Holland"],["R","Rotterdam","Zuid-Holland"],["Z","Zeeland","Zeeland"]]}]' data-query="SELECT 1"></div>
+
+<br><br>
+            <p><small>You made it to the end, congratulations.</small></p>
+
+          </div>
+          <!-- /bs-docs-section -->
+        </div>
+        <!-- /col -->
+        <div class="col-md-3" role="complementary">
+          <nav class="bs-docs-sidebar hidden-print hidden-sm hidden-xs affix-top">
+            <ul class="nav bs-docs-sidenav">
+              <li class="">
+                <a href="#intro">Introduction</a> 
+              </li>
+              <li class="">
+                <a href="#basic-select">Basic Queries</a> 
+                <ul class="nav">
+                  <li class=""><a href="#basic-select-project">Projections</a></li>
+                  <li class=""><a href="#basic-select-select">Selections</a></li>
+                  <li class=""><a href="#basic-select-outputmod">Output Modifiers</a></li>
+                  <li class=""><a href="#basic-select-combined">All Combined</a></li>
+                </ul>
+              </li>
+              <li class="">
+                <a href="#basic-aggregate">Aggregation</a> 
+                <ul class="nav">
+                  <li class=""><a href="#basic-aggregate-ungrouped">Ungrouped Aggregation</a></li>
+                  <li class=""><a href="#basic-aggregate-single">Single-Column Groups</a></li>
+                  <li class=""><a href="#basic-aggregate-multi">Multi-Column Groups</a></li>
+                  <li class=""><a href="#basic-aggregate-filter">Filtering Values and Groups</a></li>
+                  <li class=""><a href="#basic-aggregate-distinct">Distinct Values</a></li>
+                  <li class=""><a href="#basic-aggregate-combined">All Combined</a></li>
+                </ul>
+              </li>
+              <li class="">
+                <a href="#basic-join">Join</a> 
+                <ul class="nav">
+                  <li class=""><a href="#basic-join-equi">Equi-Join</a></li>
+                  <li class=""><a href="#basic-join-natural">Natural Join</a></li>
+                  <li class=""><a href="#basic-join-outer">Outer Join</a></li>
+                  <li class=""><a href="#basic-join-self">Self-Join</a></li>
+                  <li class=""><a href="#basic-join-multi">More Tables</a></li>
+                </ul>
+              </li>
+
+              <li class="">
+                <a href="#basic-subqueries">Subqueries</a> 
+                <ul class="nav">
+                  <li class=""><a href="#basic-subqueries-where">Filters</a></li>
+                  <li class=""><a href="#basic-subqueries-from">Tables</a></li>
+                </ul>
+              </li>
+
+   <li class="">
+                <a href="#basic-sets">Set Operations</a> 
+                <ul class="nav">
+                  <li class=""><a href="#basic-sets-union">Unions</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- /col -->
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /bs-docs-container -->
+  </body>
+</html>
