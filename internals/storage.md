@@ -22,7 +22,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB versions                                             |
 |-----------------|-------------------------------------------------------------|
-| 43              | v0.7.0                                                      |
+| 43              | v0.7.0, v0.7.1                                              |
 | 42              | [#5544](https://github.com/duckdb/duckdb/pull/5544) onwards |
 | 41              | [#5768](https://github.com/duckdb/duckdb/pull/5768) onwards |
 | 40              | [#5491](https://github.com/duckdb/duckdb/pull/5491) onwards |
