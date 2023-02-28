@@ -20,5 +20,6 @@ C++ tests can be written using the [Catch framework](/dev/sqllogictest/catch).
 
 ### Client Connector Tests
 
-DuckDB also has tests for various client connectors. These are generally written 
+DuckDB also has tests for various client connectors. These are generally written in the relevant client language, and can be found in `tools/*/tests`.
+They also double as documentation of what should be doable from a given client.
 
