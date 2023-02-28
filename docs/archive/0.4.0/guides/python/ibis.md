@@ -14,7 +14,7 @@ pip install 'ibis-framework[duckdb]' # duckdb, sqlalchemy, duckdb_engine and mor
 ```
 
 # Querying DuckDB with Ibis
-The following example is loosely borrowed from the [Introduction to Ibis tutorial](https://ibis-project.org/tutorial/01-Introduction-to-Ibis/), which uses SQLite.  
+The following example is loosely borrowed from the [Introduction to Ibis tutorial](https://nbviewer.org/github/ibis-project/ibis-examples/blob/main/tutorial/01-Introduction-to-Ibis.ipynb), which uses SQLite.  
 First, we import Ibis, set it to interactive mode (just for demo purposes - it is faster to not use this option!), and then connect to an in-memory DuckDB instance. We can then inspect the tables in our database. 
 
 ```python
