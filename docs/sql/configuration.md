@@ -35,8 +35,8 @@ Below is a list of all available settings.
 
 |                   name                   |                                                                       description                                                                       | input_type |  default_value   |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------|------------------|
-| Calendar                                 | The current calendar                                                                                                                                    | VARCHAR    | GREGORIAN        |
-| TimeZone                                 | The current time zone                                                                                                                                   | VARCHAR    | System timezone  |
+| Calendar                                 | The current calendar                                                                                                                                    | VARCHAR    | System (locale) calendar        |
+| TimeZone                                 | The current time zone                                                                                                                                   | VARCHAR    | System (locale) timezone  |
 | access_mode                              | Access mode of the database (**AUTOMATIC**, **READ_ONLY** or **READ_WRITE**)                                                                            | VARCHAR    | AUTOMATIC        |
 | allow_unsigned_extensions                | Allow to load extensions with invalid or missing signatures                                                                                             | BOOLEAN    | FALSE            |
 | binary_as_string                         | In Parquet files, interpret binary data as a string.                                                                                                    | BOOLEAN    |                  |
