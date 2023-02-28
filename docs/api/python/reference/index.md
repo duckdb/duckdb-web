@@ -367,7 +367,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.get_substrait">
-<span class="sig-name descname"><span class="pre">get_substrait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_substrait" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">get_substrait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_substrait" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Serialize a query to protobuf</p>
@@ -376,7 +376,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyConnection.get_substrait_json">
-<span class="sig-name descname"><span class="pre">get_substrait_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_substrait_json" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">get_substrait_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyConnection.get_substrait_json" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Serialize a query to protobuf on the JSON format</p>
@@ -1127,6 +1127,24 @@ title: Python Client API
 </dd>
 </dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_table">
+<span class="sig-name descname"><span class="pre">to_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_table" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Creates a new table named table_name with the contents of the relation object</p>
+</dd>
+</dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.to_view">
+<span class="sig-name descname"><span class="pre">to_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.to_view" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Creates a view named view_name that refers to the relation object</p>
+</dd>
+</dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.type">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.type" title="Permalink to this definition">&#182;</a>
@@ -1786,11 +1804,11 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id19"><span class="problematic" id="id20">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Serialize a query to protobuf</p>
 <ol class="arabic simple" start="2">
-<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id21"><span class="problematic" id="id22">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Serialize a query object to protobuf</p>
 </dd>
@@ -1803,11 +1821,11 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id23"><span class="problematic" id="id24">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Serialize a query to protobuf on the JSON format</p>
 <ol class="arabic simple" start="2">
-<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id25"><span class="problematic" id="id26">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Serialize a query object to protobuf</p>
 </dd>
@@ -1936,11 +1954,11 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>read_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id19"><span class="problematic" id="id20">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>read_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id27"><span class="problematic" id="id28">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Create a relation object from the Parquet files in file_glob</p>
 <ol class="arabic simple" start="2">
-<li><p>read_parquet(file_globs: List[str], binary_as_string: bool = False, <a href="#id21"><span class="problematic" id="id22">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>read_parquet(file_globs: List[str], binary_as_string: bool = False, <a href="#id29"><span class="problematic" id="id30">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Create a relation object from the Parquet files in file_globs</p>
 </dd>
