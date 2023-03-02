@@ -136,14 +136,6 @@ D .help sh
 .show                    Show the current values for various settings
 ```
 
-## Configuring the CLI
-
-The various options above can be used to configure the CLI. On start-up, the CLI reads and executes all commands in the file `~/.duckdbrc`. This allows you to store the configuration state of the CLI. For example, if you wish to change the `NULL` value display and the prompt, you may create the following `~/.duckdbrc` file.
-
-```
-.prompt 'D '
-.null NULL
-```
 
 ## Syntax Highlighting
 By default the shell includes support for syntax highlighting. Syntax highlighting can be disabled using the `.highlight off` command.
@@ -433,22 +425,44 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 <!-- The edit function does not appear to work -->
 
-A file may also be read/processed before the CLI opens, via the `-init` switch:
+## Configuring the CLI
+
+The various dot commands above can be used to configure the CLI. On start-up, the CLI reads and executes all commands in the file `~/.duckdbrc`. This allows you to store the configuration state of the CLI. 
+This file is passed to a `.read` command at startup, so any series of dot commands and SQL commands may be included. 
+You may also point to a different initialization file using the `-init` switch.
+
+As an example, a file in the same directory as the DuckDB CLI named `select_example` will change the DuckDB prompt to be a duck head and run a SQL statement.
+Note that the duck head is built with unicode characters and does not always work in all terminal environments (like Windows, unless running with WSL and using the Windows Terminal).
+```sql
+-- Duck head prompt
+.prompt '⚫◗ '
+-- Example SQL statement
+select 'Begin quacking!' as "Ready, Set, ..."
 ```
-$ ./duckdb -init select_example.sql
--- Loading resources from select_example.sql
-| generate_series |
-|-----------------|
-| 0               |
-| 1               |
-| 2               |
-| 3               |
-| 4               |
-| 5               |
-v0.6.1-dev83 dfae126ebb
+
+To invoke that file on intialization, use this command:
+
+```
+$ ./duckdb -init select_example
+
+```
+This outputs:
+```
+-- Loading resources from /home/<user>/.duckdbrc
+┌─────────────────┐
+│ Ready, Set, ... │
+│     varchar     │
+├─────────────────┤
+│ Begin quacking! │
+└─────────────────┘
+v<version> <git hash>
 Enter ".help" for usage hints.
-D
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+⚫◗
 ```
+
+
 
 ## Non-interactive usage
 
@@ -467,6 +481,20 @@ $
 
 ```
 
+To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
+
+```sql
+./duckdb :memory: "SELECT 42 as the_answer"
+```
+```
+┌────────────┐
+│ the_answer │
+│   int32    │
+├────────────┤
+│         42 │
+└────────────┘
+```
+
 ## Loading Extensions
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
@@ -476,3 +504,39 @@ D load 'fts';
 ```
 
 <!-- SQL parameters do not appear to work -->
+
+## Reading from stdin and writing to stdout
+
+When in a Unix environment, it can be useful to pipe data between multiple commands. 
+DuckDB is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
+
+This command will create an example csv:
+```sql
+COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
+```
+
+First, read a file and pipe it to the duckdb cli executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
+
+```sql
+cat test.csv | ./duckdb :memory: "SELECT * FROM read_csv_auto('/dev/stdin')"
+```
+```
+┌───────┐
+│ woot  │
+│ int32 │
+├───────┤
+│    42 │
+│    43 │
+└───────┘
+```
+
+To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
+
+```sql
+cat test.csv | ./duckdb :memory: "COPY (SELECT * FROM read_csv_auto('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+```
+```
+woot
+42
+43
+```
