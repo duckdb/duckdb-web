@@ -30,7 +30,7 @@ PRAGMA functions;
 
 ```sql
 cid INTEGER,        -- cid of the column
-name VARCHAR,       -- name fo the column
+name VARCHAR,       -- name of the column
 type VARCHAR,       -- type of the column
 notnull BOOLEAN,    -- if the column is marked as NOT NULL
 dflt_value VARCHAR, -- default value of the column, or NULL if not specified
