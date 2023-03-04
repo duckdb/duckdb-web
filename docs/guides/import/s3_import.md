@@ -4,7 +4,7 @@ title: S3 or GCS Parquet Import
 selected: S3 or GCS Parquet Import
 ---
 
-# How to load a Parquet file directly from S3 or GCS
+# How to load a Parquet file directly from S3, GCS or R2
 
 To load a Parquet file from S3, the `HTTPFS` extension is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
@@ -57,4 +57,19 @@ Please note you will need to use the `s3://` URL to read your data.
 
 ```sql
 SELECT * FROM read_parquet('s3://<gcs_bucket>/<file>');
+```
+
+For Cloudflare R2, the [S3 Compatability API](https://developers.cloudflare.com/r2/data-access/s3-api/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets. You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/data-access/s3-api/tokens/) and update the `s3_endpoint` used:
+
+```sql
+SET s3_region="auto"
+SET s3_endpoint='<your-account-id>.r2.cloudflarestorage.com';
+SET s3_access_key_id='key_id';
+SET s3_secret_access_key='access_key';
+```
+
+Note that you will need to use the `s3://` URL to read your data from R2:
+
+```sql
+SELECT * FROM read_parquet('s3://<r2_bucket_name>/<file>');
 ```
