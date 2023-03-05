@@ -133,6 +133,7 @@ regexp_matches('abc', '^a$')       -- FALSE
 regexp_matches('abc', '.*(b|d).*') -- TRUE
 regexp_matches('abc', '(b|c).*')   -- TRUE
 regexp_matches('abc', '^(b|c).*')  -- FALSE
+regexp_matches('abc', '(?i)A')     -- TRUE
 ```
 
 The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where d is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Below are some examples:
@@ -153,3 +154,5 @@ regexp_extract('abc', '.b.', 1)  -- (empty)
 regexp_extract('abc', '([a-z])(b)', 1) -- a
 regexp_extract('abc', '([a-z])(b)', 2) -- b
 ```
+
+DuckDB uses RE2 as its regex engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
