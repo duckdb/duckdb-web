@@ -20,6 +20,8 @@ SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 SELECT * FROM 'test/*.parquet';
 -- read all files that match the glob pattern, and include a "filename" column that specifies which file each row came from
 SELECT * FROM read_parquet('test/*.parquet', filename=true);
+-- read all files that match the glob pattern, but match by column name rather than position
+SELECT * FROM read_parquet('test/*.parquet', UNION_BY_NAME=TRUE);
 -- use a list of globs to read all parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
 -- query the metadata of a parquet file
@@ -83,6 +85,32 @@ The glob syntax and the list input parameter can be combined to scan files that 
 -- Read all parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
 ```
+
+#### Union by Name
+When combining multiple parquet files, by default DuckDB uses a `UNION ALL` operator. 
+This combines columns based on their position (their order from left to right in an output table). 
+However, this does not handle the situation where multiple files have different schemas. 
+The `UNION_BY_NAME` option for read_parquet allows for the parquet reader to combine multiple files by matching on column names rather than position. 
+If a file has a different column, a new column is created in the output, and `NULL`s are populated for files without that column.
+See the [Set Operations page](/docs/sql/query_syntax/setops) for more details.
+
+```sql
+-- Create 2 example files with different schemas
+COPY (SELECT 1 as column1) to 'test.parquet' (FORMAT PARQUET);
+COPY (SELECT 2 as column2) to 'test2.parquet' (FORMAT PARQUET);
+
+-- Match by column name. Include the filename as well to illustrate what is happening
+SELECT 
+    filename,
+    column1,
+    column2 
+FROM read_parquet('test*.parquet', UNION_BY_NAME=TRUE, FILENAME=TRUE);
+```
+
+|   filename    | column1 | column2 |
+|---------------|---------|---------|
+| test.parquet  | 1       | NULL    |
+| test2.parquet | NULL    | 2       |
 
 #### Filenames
 The `filename` parameter can be passed into the `read_parquet` function to include an extra `filename` column that specifies for each row from which file it was read. For example:

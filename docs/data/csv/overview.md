@@ -51,6 +51,7 @@ Below are parameters that can be passed in to the CSV reader.
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. |
 | `FILENAME` | Boolean value that specifies whether or not an extra `FILENAME` column should be included in the result. |
 | `SKIP` | The number of lines at the top of the file to skip. |
+| `UNION_BY_NAME` | If reading multiple files, stack them by matching column names rather than position. This allows for schemas to be different across files. |
 
 # read_csv_auto function
 The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
