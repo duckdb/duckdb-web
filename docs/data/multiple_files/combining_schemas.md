@@ -22,7 +22,7 @@ Below is an example of how both methods work.
 
 ### Union By Position
 
-By default, DuckDB unifies the columns of these different files **by position**. For example, consider the following two files:
+By default, DuckDB unifies the columns of these different files **by position**. This means that the first column in each file is combined together, as well as the second column in each file, etc. For example, consider the following two files:
 
 **flights1.csv**
 ```
@@ -44,6 +44,8 @@ Reading the two files at the same time will produce the following result set:
 | 1988-01-01 | AA            | New York, NY   | Los Angeles, CA |
 | 1988-01-02 | AA            | New York, NY   | Los Angeles, CA |
 | 1988-01-03 | AA            | New York, NY   | Los Angeles, CA |
+
+This is equivalent to the SQL construct [`UNION ALL`](../../sql/query_syntax/setops#union-all).
 
 ### Union By Name
 
@@ -74,3 +76,5 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            |
 
+
+This is equivalent to the SQL construct [`UNION ALL BY NAME`](../../sql/query_syntax/setops#union-all-by-name).
