@@ -46,8 +46,7 @@ The __httpfs__ extension supports reading/writing/globbing files on object stora
 
 ## Requirements
 
-The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/),
-and [Google cloud](https://cloud.google.com/storage/docs/interoperability). Other services that implement the S3 API
+The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API
 should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for
 each __httpfs__ feature.
 
