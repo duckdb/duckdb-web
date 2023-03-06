@@ -35,6 +35,7 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-redirect-from
 excerpt_separator: <!--more-->
 
 twitter:
