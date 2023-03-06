@@ -1,0 +1,41 @@
+---
+layout: docu
+title: Partitioned Writes
+---
+
+### Examples
+
+```sql
+-- write a table to a hive partitioned data set of parquet files
+COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
+-- write a table to a hive partitioned data set of CSV files, allowing overwrites
+COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), ALLOW_OVERWRITE 1);
+```
+
+### Partitioned Writes
+When the `partition_by` clause is specified for the `COPY` statement, the files are written in a [hive partitioned](hive_partitioning) folder hierarchy. The target is the name of the root directory (in the example above: `orders`). The files are written in-order in the file hierarchy. Currently, one file is written per thread to each directory.
+
+```
+orders
+├── year=2021
+│    ├── month=1
+│    │   ├── data_1.parquet
+│    │   └── data_2.parquet
+│    └── month=2
+│        └── data_1.parquet
+└── year=2022
+     ├── month=11
+     │   ├── data_1.parquet
+     │   └── data_2.parquet
+     └── month=12
+         └── data_1.parquet
+```
+
+The values of the partitions are automatically extracted from the data. Note that it can be very expensive to write many partitions as many files will be created. The ideal partition count depends on how large your data set is.
+
+> Writing data into many small partitions is expensive. It is generally recommended to have at least  `100MB` of data per partition. 
+
+
+#### Overwriting
+
+By default the partitioned write will not allow overwriting existing directories. Use the `ALLOW_OVERWRITE` option to allow overwriting an existing directory.

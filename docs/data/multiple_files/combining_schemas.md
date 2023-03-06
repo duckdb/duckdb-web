@@ -1,20 +1,26 @@
 ---
 layout: docu
-title: Reading Multiple CSV Files
+title: Combining Schemas
 ---
 
-DuckDB can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
+### Examples
 
 ```sql
--- read all files with a name ending in ".csv" in the folder "dir"
-SELECT * FROM 'dir/*.csv';
--- read all files with a name ending in ".csv", two directories deep
-SELECT * FROM '*/*/*.csv';
--- read the CSV files 'flights1.csv' and 'flights2.csv'
-SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'])
+-- read a set of CSV files combining columns by position
+SELECT * FROM read_csv_auto('flights*.csv')
+-- read a set of CSV files combining columns by name 
+SELECT * FROM read_csv_auto('flights*.csv', union_by_name=True)
 ```
 
-#### Union By Position
+### Combining Schemas
+
+When reading from multiple files, we have to **combine schemas** from those files. That is because each file has its own schema that can differ from the other files. DuckDB offers two ways of unifying schemas of multiple files: **by column position** and **by column name**.
+
+By default, DuckDB reads the schema of the first file provided, and then unifies columns in subsequent files by column position. This works correctly as long as all files have the same schema. If the schema of the files differs, you might want to use the `union_by_name` option  to allow DuckDB to construct the schema by reading all of the names instead.
+
+Below is an example of how both methods work.
+
+### Union By Position
 
 By default, DuckDB unifies the columns of these different files **by position**. For example, consider the following two files:
 
@@ -39,9 +45,7 @@ Reading the two files at the same time will produce the following result set:
 | 1988-01-02 | AA            | New York, NY   | Los Angeles, CA |
 | 1988-01-03 | AA            | New York, NY   | Los Angeles, CA |
 
-This works correctly, as long as all CSV files have the same schema. If the schema of the files differs, however, this no longer works. This might occur if columns have been added in later files, for example.
-
-#### Union By Name
+### Union By Name
 
 If you are processing multiple files that have different schemas, perhaps because columns have been added or renamed, it might be desirable to unify the columns of different files **by name** instead. This can be done by providing the `union_by_name` option. For example, consider the following two files, where `flights2.csv` has an extra column (`UniqueCarrier`):
 
@@ -70,17 +74,3 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            |
 
-
-#### Filename
-
-The `filename` argument can be used to add an extra `filename` column to the result that indicates which row came from which file. For example:
-
-```sql
-SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True, filename=True)
-```
-
-| FlightDate | OriginCityName |  DestCityName   | UniqueCarrier |   filename   |
-|------------|----------------|-----------------|---------------|--------------|
-| 1988-01-01 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
-| 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
-| 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
