@@ -71,6 +71,12 @@ Optionally, the endpoint can be configured in case a non-AWS object storage serv
 SET s3_endpoint='<domain>.<tld>:<port>';
 ```
 
+If the endpoint is not SSL-enabled then run: 
+
+```sql
+SET s3_use_ssl=false;
+```
+
 Switching between path-style and vhost-style urls (see [AWS docs]()) is possible using:
 
 ```sql
