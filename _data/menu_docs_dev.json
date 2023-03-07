@@ -221,8 +221,22 @@
                   "url": "auto_detection"
                 },
                 {
-                  "page": "Multiple Files",
-                  "url": "multiple_files"
+                  "page": "Tips",
+                  "url": "tips"
+                }
+              ]
+            },
+            {
+              "page": "Parquet Files",
+              "slug": "parquet",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Metadata",
+                  "url": "metadata"
                 },
                 {
                   "page": "Tips",
@@ -231,8 +245,32 @@
               ]
             },
             {
-              "page": "Parquet Files",
-              "url": "parquet"
+              "page": "Multiple Files",
+              "slug": "multiple_files",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Combining Schemas",
+                  "url": "combining_schemas"
+                }
+              ]
+            },
+            {
+              "page": "Partitioning",
+              "slug": "partitioning",
+              "subsubfolderitems": [
+                {
+                  "page": "Hive Partitioning",
+                  "url": "hive_partitioning"
+                },
+                {
+                  "page": "Partitioned Writes",
+                  "url": "partitioned_writes"
+                }
+              ]
             },
             {
               "page": "Appender",

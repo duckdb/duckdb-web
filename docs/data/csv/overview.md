@@ -28,29 +28,42 @@ COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 ### CSV Loading
 CSV loading is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
-The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](/docs/data/csv/auto_detection) for more information.
+The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](auto_detection) for more information.
 
 Below are parameters that can be passed in to the CSV reader. 
 
 # Parameters
 
-| Name | Description |
-|:---|:---|
-| `AUTO_DETECT` | Option for CSV parsing. If `TRUE`, the parser will attempt to detect the input format and data types automatically. `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, and `HEADER` parameters become optional. `read_csv_auto` defaults to true for this parameter, `read_csv` defaults to false. |
-| `COLUMNS` | A struct that specifies the column names and column types contained within the CSV file (e.g. `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred. |
-| `SEP` or `DELIM` | Specifies the string that separates columns within each row (line) of the file. The default value is a comma (`,`). |
-| `NULLSTR` | Specifies the string that represents a NULL value. The default is an empty string. |
-| `HEADER` | Specifies that the file contains a header line with the names of each column in the file. |
-| `QUOTE` | Specifies the quoting string to be used when a data value is quoted. The default is double-quote (`"`). |
-| `ESCAPE` | Specifies the string that should appear before a data character sequence that matches the `QUOTE` value. The default is the same as the `QUOTE` value (so that the quoting string is doubled if it appears in the data). |
-| `DATEFORMAT` | Specifies the date format to use when parsing dates. See [Date Format](/docs/sql/functions/dateformat) |
-| `TIMESTAMPFORMAT` | Specifies the date format to use when parsing timestamps. See [Date Format](/docs/sql/functions/dateformat) |
-| `SAMPLE_SIZE` | Option to define number of sample rows for automatic CSV type detection. Chunks of sample rows will be drawn from different locations of the input file. Set to `-1` to scan the entire input file. Note: Only the first max. 1024 rows will be used for dialect detection. |
-| `ALL_VARCHAR` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
-| `NORMALIZE_NAMES` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. |
-| `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. |
-| `FILENAME` | Boolean value that specifies whether or not an extra `FILENAME` column should be included in the result. |
-| `SKIP` | The number of lines at the top of the file to skip. |
+| Name | Description | Type | Default |
+|:---|:---|:----|:----|
+| `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. | bool | false |
+| `auto_detect` | Enables [auto detection of parameters](auto_detection) | bool | true |
+| `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g. `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `struct` | `(empty)` |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `decimal_separator` | The decimal separator of numbers | varchar | `.` |
+| `delim` or `sep` | Specifies the string that separates columns within each row (line) of the file. | varchar | `,` |
+| `escape` | Specifies the string that should appear before a data character sequence that matches the `quote` value. | varchar | `"` |
+| `filename` | Whether or not an extra `filename` column should be included in the result. | bool | false |
+| `force_not_null` | Do not match the specified columns' values against the NULL string. In the default case where the NULL string is empty, this means that empty values will be read as zero-length strings rather than NULLs. | varchar[] | [] |
+| `header` | Specifies that the file contains a header line with the names of each column in the file. | bool | false |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | bool | false |
+| `ignore_errors` | Option to ignore any parsing errors encountered - and instead ignore rows with errors. | bool | false |
+| `max_line_size` | The maximum line size in bytes | bigint | 2097152 |
+| `names` | The column names as a list. [Example here](tips#provide-names-if-the-file-does-not-contain-a-header). | varchar[] | `(empty)` |
+| `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | bool | false |
+| `nullstr` | Specifies the string that represents a NULL value. | varchar | `(empty)` |
+| `parallel` | Whether or not the experimental parallel CSV reader is used. | bool | false |
+| `quote` | Specifies the quoting string to be used when a data value is quoted. | varchar | `"` |
+| `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | bigint | 20480 |
+| `skip` | The number of lines at the top of the file to skip. | bigint | 0 |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | varchar[] or struct | `(empty)` |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
+
+### Writing
+
+The contents of tables or the result of queries can be written directly to a CSV file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
 # read_csv_auto function
 The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
@@ -91,8 +104,7 @@ If we set `DELIM`/`SEP`, `QUOTE`, `ESCAPE`, or `HEADER` explicitly, we can bypas
 SELECT * FROM read_csv_auto('flights.csv', HEADER=TRUE);
 ```
 
-Note:
-`read_csv_auto()` is an alias for `read_csv(AUTO_DETECT=TRUE)`.
+Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
 
 ## COPY Statement
