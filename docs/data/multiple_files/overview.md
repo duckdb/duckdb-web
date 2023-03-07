@@ -53,6 +53,8 @@ Any file name input to the read_parquet function can either be an exact filename
 | `[abc]`    | matches one character given in the bracket                |
 | `[a-z]`    | matches one character from the range given in the bracket |
 
+Note that the `?` wildcard in globs is not supported for reads over S3 due to HTTP encoding issues. 
+
 Here is an example that reads all the files that end with `.parquet` located in the `test` folder:
 
 ```sql
