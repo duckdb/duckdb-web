@@ -93,13 +93,13 @@ The below options are applicable when writing `CSV` files.
 |:---|:---|:----|:----|
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `force_quote` | The list of columns to always add quotes to, even if not required. | varchar[] | `[]` |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
-| `delim` or `sep` | The character that is written to separate columns within each row (line) of the file. | varchar | `,` |
+| `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `delim` or `sep` | The character that is written to separate columns within each row. | varchar | `,` |
 | `escape` | The character that should appear before a character that matches the `quote` value. | varchar | `"` |
 | `header` | Whether or not to write a header for the CSV file. | bool | false |
 | `nullstr` | The string that is written to represent a NULL value. | varchar | `(empty)` |
 | `quote` | The quoting character to be used when a data value is quoted. | varchar | `"` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 
 
 ## Parquet Options
@@ -118,5 +118,5 @@ The below options are applicable when writing `JSON` files.
 
 | Name | Description | Type | Default |
 |:---|:---|:----|:----|
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
