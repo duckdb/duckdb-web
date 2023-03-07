@@ -12,7 +12,7 @@ railroad: statements/copy.js
 -- read a CSV file into the lineitem table - using auto-detected options
 COPY lineitem FROM 'lineitem.csv' (AUTO_DETECT TRUE);
 -- read a parquet file into the lineitem table
-COPY lineitem FROM `lineitem.pq` (FORMAT PARQUET);
+COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
 
 -- write a table to a CSV file
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
