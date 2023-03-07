@@ -15,7 +15,7 @@ COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 ### Hive Partitioning
 Hive partitionining is a [partitioning strategy](https://en.wikipedia.org/wiki/Partition_(database)) that is used to split a table into multiple files based on **partition keys**. The files are organized into folders. Within each folder, the **partition key** has a value that is determined by the name of the folder. 
 
-Below is an example of a hive partitioned file hierarchy. The files are partitioned on two keys (`year` and `order`).
+Below is an example of a hive partitioned file hierarchy. The files are partitioned on two keys (`year` and `month`).
 
 ```
 orders
