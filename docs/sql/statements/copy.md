@@ -81,7 +81,7 @@ The below options are applicable to all formats written with `COPY`.
 |:---|:---|:----|:----|
 | `allow_overwrite` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | bool | false |
 | `format` | Specifies the copy function to use. The default is selected from the file extension (e.g. `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | varchar | auto |
-| `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../partitioning/partitioned_writes). | varchar[] | (empty) |
+| `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | varchar[] | (empty) |
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | bool | false |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | bool | auto |
 

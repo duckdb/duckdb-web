@@ -42,7 +42,7 @@ While DuckDB is created by a research group, it is not intended to be a research
 
 To facilitate this stability, DuckDB is intensively tested using [Continuous Integration](https://github.com/duckdb/duckdb/actions). DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes.
 
-In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the [TPC-H](https://www.tpc.org/tpch/) and [TPC-DS](https://www.tpc.org/tpcds/) benchmarks, and run various tests where DuckDB is used by many clients in parallel.
+In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the TPC-H and TPC-DS benchmarks, and run various tests where DuckDB is used by many clients in parallel.
 
 
 <div class="headline" id="duckdbisfree">
