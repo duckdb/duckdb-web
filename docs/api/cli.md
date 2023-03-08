@@ -508,7 +508,7 @@ D load 'fts';
 ## Reading from stdin and writing to stdout
 
 When in a Unix environment, it can be useful to pipe data between multiple commands. 
-DuckDB is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
+DuckDB is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`/dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
 
 This command will create an example csv:
 ```sql
