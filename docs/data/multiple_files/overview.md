@@ -85,3 +85,23 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True
 | 1988-01-01 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
 | 1988-01-02 | New York, NY   | Los Angeles, CA | NULL          | flights1.csv |
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
+
+
+### Glob function to find filenames
+The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
+It accepts one parameter: the path to search (which may include glob patterns). 
+
+```sql
+-- Search the current directory for all files
+SELECT * FROM glob('*');
+```
+
+|     file      |
+|---------------|
+| duckdb.exe    |
+| test.csv      |
+| test.json     |
+| test.parquet  |
+| test2.csv     |
+| test2.parquet |
+| todos.json    |

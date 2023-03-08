@@ -27,3 +27,10 @@ The functions below are difficult to categorize into specific function types and
 | `typeof(expression)` | Returns the name of the data type of the result of the expression. | `typeof('abc')` | `'VARCHAR'` |
 | `uuid()` | Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687. | `uuid()` | various |
 | `version()` | Return the currently active version of DuckDB in this format: `v0.3.2` | `version()` | various |
+
+## Utility Table Functions
+A table function is used in place of a table in a `FROM` clause.
+
+| Function | Description | Example |
+|:---|:---|:---|
+| `glob(`*`search_path`*`)` | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](./patternmatching). | `glob('*')` |
