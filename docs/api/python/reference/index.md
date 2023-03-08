@@ -780,7 +780,7 @@ title: Python Client API
 
 <dl class="py method">
 <dt class="sig sig-object py" id="duckdb.DuckDBPyRelation.explain">
-<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.explain" title="Permalink to this definition">&#182;</a>
+<span class="sig-name descname"><span class="pre">explain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self:</span> <span class="pre">duckdb.DuckDBPyRelation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type:</span> <span class="pre">duckdb::ExplainType</span> <span class="pre">=</span> <span class="pre">'standard'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.explain" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd></dd>
 </dl>
@@ -1265,12 +1265,61 @@ title: Python Client API
 </dd>
 </dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="duckdb.ExplainType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">ExplainType</span></span><a class="headerlink" href="#duckdb.ExplainType" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>STANDARD</p>
+<p>ANALYZE</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duckdb.ExplainType.ANALYZE">
+<span class="sig-name descname"><span class="pre">ANALYZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ExplainType.ANALYZE:</span> <span class="pre">1&gt;</span></em><a class="headerlink" href="#duckdb.ExplainType.ANALYZE" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duckdb.ExplainType.STANDARD">
+<span class="sig-name descname"><span class="pre">STANDARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;ExplainType.STANDARD:</span> <span class="pre">0&gt;</span></em><a class="headerlink" href="#duckdb.ExplainType.STANDARD" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="duckdb.ExplainType.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#duckdb.ExplainType.name" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="duckdb.ExplainType.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#duckdb.ExplainType.value" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+</dd>
+</dl>
+
 <dl class="py exception">
 <dt class="sig sig-object py" id="duckdb.FatalException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">FatalException</span></span><a class="headerlink" href="#duckdb.FatalException" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
 <p>Bases: <a class="reference internal" href="#duckdb.Error" title="duckdb.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></a></p>
+</dd>
+</dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="duckdb.HTTPException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">HTTPException</span></span><a class="headerlink" href="#duckdb.HTTPException" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd>
+<p>Bases: <a class="reference internal" href="#duckdb.IOException" title="duckdb.IOException"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOException</span></code></a></p>
 </dd>
 </dl>
 
