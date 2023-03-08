@@ -68,6 +68,8 @@ SELECT a['x space'] FROM (SELECT {'x space':1, 'y':2, 'z':3} as a);
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3},'x space');
 ```
 
+#### Struct.*
+
 Rather than retrieving a single key from a struct, star notation (`*`) can be used to retrieve all keys from a struct as separate columns. 
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
 
