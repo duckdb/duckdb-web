@@ -92,6 +92,16 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
 
+## ICU Timestamp Table Functions
+The table below shows the available table functions for `TIMESTAMP WITH TIME ZONE` types.
+
+| Function | Description | Example |
+|:---|:---|:---|
+| `generate_series(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval | `generate_series(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
+| `range(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
+
+Infinite values are not allowed as table function bounds.
+
 ## ICU Timestamp Without Time Zone Functions
 The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
 These functions assume that the `TIMESTAMP` is a "local timestamp".
