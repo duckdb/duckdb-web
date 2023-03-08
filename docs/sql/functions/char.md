@@ -23,6 +23,7 @@ This section describes functions and operators for examining and manipulating st
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc','a')` | `true` |
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using fmt syntax | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` |
 | `from_base64(`*`string`*`)`| Convert a base64 encoded string to a character string. | `from_base64('QQ==')` | `'A'` |
+| `hash(`*`value`*`)` | Returns an integer with the hash of the _value_ | `hash('🦆')` | `2595805878642663834` |
 | `instr(`*`string`*`, `*`search_string`*`)`| Return location of first occurrence of `search_string` in `string`, counting from 1. Returns 0 if no match found. | `instr('test test','es')` | 2 |
 | `lcase(`*`string`*`)` | Alias of `lower`. Convert *string* to lower case | `lcase('Hello')` | `hello` |
 | `left(`*`string`*`, `*`count`*`)`| Extract the left-most count characters | `left('Hello🦆', 2)` | `He` |
