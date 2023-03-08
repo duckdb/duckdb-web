@@ -115,6 +115,27 @@ Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 |:---|:---|
 | `GLOB` | `~~~` |
 
+### Glob function to find filenames
+The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
+It accepts one parameter: the path to search (which may include glob patterns). 
+
+```sql
+-- Search the current directory for all files
+SELECT * FROM glob('*');
+```
+
+|     file      |
+|---------------|
+| duckdb.exe    |
+| test.csv      |
+| test.json     |
+| test.parquet  |
+| test2.csv     |
+| test2.parquet |
+| todos.json    |
+
+
+
 ## Regular Expressions
 
 | Function | Description |
