@@ -76,6 +76,10 @@ This is particularly useful when a prior operation creates a struct of unknown s
 SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
 ```
 
+| x | y | z |
+|:---|:---|:---|
+| 1 | 2 | 3 |
+
 ### Dot Notation Order of Operations
 
 Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
