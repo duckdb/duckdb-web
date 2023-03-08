@@ -67,6 +67,17 @@ SELECT a['x space'] FROM (SELECT {'x space':1, 'y':2, 'z':3} as a);
 -- The struct_extract function is also equivalent. This returns 1
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3},'x space');
 ```
+
+Rather than retrieving a single key from a struct, star notation (`*`) can be used to retrieve all keys from a struct as separate columns. 
+This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.
+
+```sql
+-- All keys within a struct can be returned as separate columns using *
+SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
+```
+
+### Dot Notation Order of Operations
+
 Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
 
 #### No dots
