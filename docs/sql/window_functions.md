@@ -32,6 +32,7 @@ The table below shows the available general window functions.
 | `row_number()` | `bigint` | The number of the current row within the partition, counting from 1. | `row_number()` |
 | `rank()` | `bigint` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
 | `dense_rank()` | `bigint` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
+| `rank_dense()` | `bigint` | Alias for `dense_rank`. | `rank_dense()` |
 | `percent_rank()` | `double` | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. | `percent_rank()` |
 | `cume_dist()` | `double` | The cumulative distribution: (number of partition rows preceding or peer with current row) / total partition rows. | `cume_dist()` |
 | `ntile(num_buckets integer)` | `bigint` | An integer ranging from 1 to the argument value, dividing the partition as equally as possible. | `ntile(4)` |
@@ -40,9 +41,27 @@ The table below shows the available general window functions.
 | `first_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the first row of the window frame. | `first_value(column)` |
 | `last_value(expr any)` | same type as **expr** | Returns `expr` evaluated at the row that is the last row of the window frame. | `last_value(column)` |
 | `nth_value(expr any, nth integer)` | same type as **expr** | Returns `expr` evaluated at the nth row of the window frame (counting from 1); null if no such row. | `nth_value(column, 2)` |
+| `first(expr any)` | same type as **expr** | Alias for `first_value`. | `first(column)` |
+| `last(expr any)` | same type as **expr** | Alias for `last_value`. | `last(column)` |
 
 ## Aggregate Window Functions
 All [aggregate functions](aggregates) can be used in a windowing context.
+
+## Ignoring NULLs
+
+The following functions support the `IGNORE NULLS` specification:
+
+| Function | Description | Example |
+|:---|:---|
+| `lag(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lag(column, 3 IGNORE NULLS)` |
+| `lead(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lead(column, 3 IGNORE NULLS)` |
+| `first_value(expr any)` | Skips leading `NULL`s | `first_value(column IGNORE NULLS)` |
+| `last_value(expr any)` | Skips trailing `NULL`s | `last_value(column IGNORE NULLS)` |
+| `nth_value(expr any, nth integer)` | Skips `NULL` values when counting. | `nth_value(column, 2 IGNORE NULLS)` |
+
+Note that there is no comma separating the arguments from the `IGNORE NULLS` specification.
+
+The inverse of `IGNORE NULLS` is `RESPECT NULLS`, which is the default for all functions.
 
 ## Evaluation
 
