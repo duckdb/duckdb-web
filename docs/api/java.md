@@ -69,7 +69,7 @@ try (ResultSet rs = stmt.executeQuery("SELECT * FROM items")) {
 DuckDB also supports prepared statements as per the JDBC API:
 
 ```java
-try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO test VALUES (?, ?, ?);")) {
+try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES (?, ?, ?);")) {
     p_stmt.setString(1, "chainsaw");
     p_stmt.setDouble(2, 500.0);
     p_stmt.setInt(3, 42);
