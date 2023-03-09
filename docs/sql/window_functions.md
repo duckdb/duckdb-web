@@ -52,7 +52,7 @@ All [aggregate functions](aggregates) can be used in a windowing context.
 The following functions support the `IGNORE NULLS` specification:
 
 | Function | Description | Example |
-|:---|:---|
+|:---|:---|:---|
 | `lag(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lag(column, 3 IGNORE NULLS)` |
 | `lead(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lead(column, 3 IGNORE NULLS)` |
 | `first_value(expr any)` | Skips leading `NULL`s | `first_value(column IGNORE NULLS)` |
