@@ -498,7 +498,7 @@
                 {
                   "page": "Attach",
                   "url": "attach"
-                },
+                }
               ]
             },
             {
@@ -510,7 +510,7 @@
                   "url": "select"
                 },
                 {
-                  "page": "FROM",
+                  "page": "FROM & JOIN",
                   "url": "from"
                 },
                 {
