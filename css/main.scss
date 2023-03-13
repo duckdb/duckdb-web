@@ -424,14 +424,14 @@ footer{
 		background-color: black;
 		color: white;
 		.footercontent{
-			max-width: calc(100% - 60px);
+			max-width: 980px;
 			margin: 0 auto;
-			padding-top: 45px;
-			padding-bottom: 45px;
+			padding: 45px 30px;
+			//padding-bottom: 45px;
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			justify-content: center;
+			justify-content: space-between;
 			column-gap: 80px;
 			font-size: 14px;
 			strong{
@@ -470,6 +470,13 @@ footer{
 				font-size: 25px;
 				span{
 					margin-right: 4px;
+				}
+			}
+			.tmhints{
+				a{
+					font-size: 11px;
+					color: #878787;
+					text-decoration: none;
 				}
 			}
 		}
@@ -1512,6 +1519,21 @@ div.bodywrapper{
 				opacity: 1;
 			}
 		}
+	}
+}
+
+body.tmguidelines{
+	h1, h2{
+		font-size: 24px;
+		a{
+			color: inherit;
+		}
+	}
+	p + h2{
+		margin-top: 60px;
+	}
+	#main_content_wrap{
+		padding-bottom: 80px;	
 	}
 }
 

@@ -158,6 +158,9 @@
 	header .headerline .headercontent{
 		max-width: calc(100% - 30px);
 	}
+	footer .sitefooter .footercontent{
+		padding: 45px 0px;
+	}
 	header .headerline .headercontent .landingmenu nav > div:last-of-type{
 		//display: none;
 	}
