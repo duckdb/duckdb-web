@@ -33,7 +33,7 @@ COPY (SELECT * FROM todos) TO 'todos.json';
 
 ### JSON Loading
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
-While it is not a very efficient format for tabular data, it is very commonly used, as a data interchange format.
+While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
 The DuckDB JSON reader can automatically infer which configuration flags to use by analyzing the JSON file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the JSON reader cannot figure out the correct configuration, it is possible to manually configure the JSON reader to correctly parse the JSON file.
 
@@ -48,14 +48,96 @@ Below are parameters that can be passed in to the JSON reader.
 | `ignore_errors` | Whether to ignore parse errors (only possible when `lines` is `'true'`) | bool | false |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.json.gz** will use gzip, **t.json** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | varchar | `'auto'` |
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g. `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | struct | `(empty)` |
-| `json_format` | Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']` | varchar | `'records'` |
+| `json_format` | Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']`. See examples below. | varchar | `'records'` |
 | `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | bool | `false` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `2048` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
 
-When using `read_json_auto`, everything parameter that supports auto-detection is enabled.
+When using `read_json_auto`, every parameter that supports auto-detection is enabled.
+
+### Examples of json_format settings
+The JSON extension can attempt to determine the format of a JSON file when setting `json_format` to `auto`.  
+Here are some example JSON files and the corresponding `json_format` settings that should be used.
+
+In each of the below cases, the `json_format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
+A query of this shape would work in each case:
+```sql
+SELECT * FROM filename.json;
+```
+
+#### records
+The records setting can be used to parse newline-delimited JSON.
+Each line is a JSON object (or record).
+
+```json
+{"key1":"value1", "key2": "value1"}
+{"key1":"value2", "key2": "value2"}
+{"key1":"value3", "key2": "value3"}
+```
+```sql
+SELECT * FROM read_json_auto(records.json, json_format=records);
+```
+
+|  key1  |  key2  |
+|--------|--------|
+| value1 | value1 |
+| value2 | value2 |
+| value3 | value3 |
+
+#### array_of_records
+If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
+```json
+[
+    {"key1":"value1", "key2": "value1"},
+    {"key1":"value2", "key2": "value2"},
+    {"key1":"value3", "key2": "value3"}
+]
+```
+```sql
+SELECT * FROM read_json_auto(array_of_records.json, json_format=array_of_records);
+```
+
+|  key1  |  key2  |
+|--------|--------|
+| value1 | value1 |
+| value2 | value2 |
+| value3 | value3 |
+
+#### values
+In the case of values, DuckDB can even handle files that are not valid JSON.
+Here, each row is treated as its own JSON value.
+```json
+["value1","value2"]
+["value3","value4"]
+```
+```sql
+SELECT * FROM read_json_auto(values.json, json_format=values);
+```
+
+|       json       |
+|------------------|
+| [value1, value2] |
+| [value3, value4] |
+
+#### array_of_values
+If the JSON file contains a JSON array that does not contain objects, `array_of_values` may be used.
+```json
+[
+    "value1",
+    "value2",
+    "value3"
+]
+```
+```sql
+SELECT * FROM read_json_auto(array_of_values.json, json_format=array_of_values);
+```
+|  json  |
+|--------|
+| value1 |
+| value2 |
+| value3 |
 
 ### Writing
 
