@@ -44,7 +44,9 @@ SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
 	WHEN name='threads' OR name='worker_threads'
 	THEN '# Cores'
 	WHEN name='TimeZone'
-	THEN 'System timezone'
+	THEN 'System (locale) timezone'
+	WHEN name='Calendar'
+	THEN 'System (locale) calendar'
 	ELSE UPPER(value) END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
