@@ -148,6 +148,8 @@ By reading the first example with `json_format='values'` and the second example 
 | [1, 2, 3] |
 | [4, 5, 6] |
 
+For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](https://duckdb.org/2023/03/03/json.html).
+
 ## JSON Import/Export
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
 
