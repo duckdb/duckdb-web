@@ -37,6 +37,15 @@ SELECT * FROM read_parquet('test.parquet');
 
 See [here](../data/parquet) for a detailed description of Parquet loading.
 
+### JSON Loading
+JSON files can be efficiently loaded and queried using the `read_json_auto` function.
+
+```sql
+SELECT * from read_json_auto('test.json');
+```
+
+See [here](../data/json) for a detailed description of JSON loading.
+
 ### Appender (C++ and Java)
 
 In C++ and Java, the appender can be used as an alternative for bulk data loading. This class can be used to efficiently add rows to the database system without needing to use SQL.

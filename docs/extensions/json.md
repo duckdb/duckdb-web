@@ -16,16 +16,16 @@ The following two table functions are used to read JSON:
 | Function | Description |
 |:---|:---|
 | `read_json_objects(`*`filename`*`)`   | Read 1 JSON objects from **filename**, where **filename** can be list of files, or a glob pattern |
-| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'newline_delimited'` |
+| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **lines** set to `'true'` |
 
 These functions have the following parameters:
 
-| Name | Description |
-|:---|:---|
-| `maximum_object_size` | The maximum size of a JSON object (in bytes), defaults to 1MB |
-| `lines` | Defaults to `'false'`, which can read pretty-printed JSON. When set to `'true` only newline-delimited JSON can be read, which can be read in parallel. Set to `'auto'` to automatically detect |
-| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is equal to `'newline_delimited'`) |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.csv.gz** will use gzip, **t.csv** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. |
+| Name | Description | Type | Default
+|:---|:---|:---|:---|
+| `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `1048576` |
+| `lines` | When set to `'true` only newline-delimited JSON can be read, which can be read in parallel, When set to `'false'`, pretty-printed JSON can be read. Set to `'auto'` to automatically detect | varchar | `'false'` |
+| `ignore_errors` | Whether to ignore parse errors (only possible when `lines` is `'true'`) | bool | false |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.json.gz** will use gzip, **t.json** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | varchar | `'auto'` |
 
 Examples:
 ```sql
@@ -44,21 +44,21 @@ DuckDB also supports reading JSON as a table, using the following functions:
 | Function | Description |
 |:---|:---|
 | `read_json(`*`filename`*`)`   | Read JSON from **filename**, where **filename** can be list of files, or a glob pattern |
-| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **format** set to `'newline_delimited'` |
+| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **lines** set to `'true'` |
 | `read_json_auto(`*`filename`*`)`   | Read 1 json objects from **filename**, where **filename** can be list of files, or a glob pattern |
-| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter **format** set to `'newline_delimited'` |
+| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter **lines** set to `'true'` |
 
-Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
+Besides the `maximum_object_size`, `lines`, `ignore_errors` and `compression`, these functions have additional parameters:
 
-| Name | Description |
-|:---|:---|
-| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g. `{'key1': 'INTEGER', 'key2': 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred |
-| `json_format` | Defaults to `'records'`, or to `'auto'` for `read_json_auto`. Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']` |
-| `auto_detect` | Option for JSON parsing. If `true`, the parser will attempt to detect the names of the keys and data types of the values automatically. `read_json_auto` defaults to `true` for this parameter, `read_json` defaults to `false` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file. Defaults to 2048 |
-| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Defaults to -1 to fully detect nested JSON types |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) |
+| Name | Description | Type | Default |
+|:---|:---|:---|:---|
+| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g. `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | struct | `(empty)` |
+| `json_format` | Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']` | varchar | `'records'` |
+| `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | bool | `false` |
+| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `2048` |
+| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
 
 Examples:
 ```sql
@@ -147,6 +147,8 @@ By reading the first example with `json_format='values'` and the second example 
 |:---|
 | [1, 2, 3] |
 | [4, 5, 6] |
+
+For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](https://duckdb.org/2023/03/03/json.html).
 
 ## JSON Import/Export
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).

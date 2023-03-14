@@ -51,6 +51,14 @@
               "url": "s3_export"
             },
             {
+              "page": "JSON Import",
+              "url": "json_import"
+            },
+            {
+              "page": "JSON Export",
+              "url": "json_export"
+            },
+            {
               "page": "SQLite Import",
               "url": "query_sqlite"
             },
@@ -241,6 +249,16 @@
                 {
                   "page": "Tips",
                   "url": "tips"
+                }
+              ]
+            },
+            {
+              "page": "JSON Files",
+              "slug": "json",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
                 }
               ]
             },
