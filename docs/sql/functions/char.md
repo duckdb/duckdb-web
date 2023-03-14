@@ -49,6 +49,8 @@ This section describes functions and operators for examining and manipulating st
 | `regexp_matches(`*`string`*`, `*`regex`*`)`| Returns true if a part of *string* matches the *regex* (see [Pattern Matching](../../sql/functions/patternmatching)) | `regexp_matches('anabanana', '(an)*')` | `true` |
 | `regexp_replace(`*`string`*`, `*`regex`*`, `*`replacement`*`, `*`modifiers`*`)`| Replaces the first occurrence of *regex* with the *replacement*, use `'g'` modifier to replace all occurrences instead (see [Pattern Matching](../../sql/functions/patternmatching)) | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |
 | `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
+| `regexp_extract(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])` | Split the *string* along the *regex* and extract first occurrence of *group* | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` | `hello` |
+| `regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])` | Split the *string* along the *regex* and extract all occurrences of *group* | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` | `[hello, world]` |
 | `repeat(`*`string`*`, `*`count`*`)`| Repeats the *string* *count* number of times | `repeat('A', 5)` | `AAAAA` |
 | `replace(`*`string`*`, `*`source`*`, `*`target`*`)`| Replaces any occurrences of the *source* with *target* in *string* | `replace('hello', 'l', '-')` | `he--o` |
 | `reverse(`*`string`*`)`| Reverses the *string* | `reverse('hello')` | `olleh` |
