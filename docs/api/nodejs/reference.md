@@ -3,6 +3,22 @@ layout: docu
 title: NodeJS API
 selected: Client APIs
 ---
+## Modules
+
+<dl>
+<dt><a href="#module_duckdb">duckdb</a></dt>
+<dd></dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#DuckDbError">DuckDbError</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#HTTPError">HTTPError</a> : <code>object</code></dt>
+<dd></dd>
+</dl>
+
 <a name="module_duckdb"></a>
 
 ## duckdb
@@ -701,3 +717,30 @@ Currently ignored
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
+<a name="DuckDbError"></a>
+
+## DuckDbError : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| errno | <code>number</code> | -1 for DuckDB errors |
+| message | <code>string</code> | Error message |
+| code | <code>string</code> | 'DUCKDB_NODEJS_ERROR' for DuckDB errors |
+| errorType | <code>string</code> | DuckDB error type code (eg, HTTP, IO, Catalog) |
+
+<a name="HTTPError"></a>
+
+## HTTPError : <code>object</code>
+**Kind**: global typedef  
+**Extends**: [<code>DuckDbError</code>](#DuckDbError)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| statusCode | <code>number</code> | HTTP response status code |
+| reason | <code>string</code> | HTTP response reason |
+| response | <code>string</code> | HTTP response body |
+| headers | <code>object</code> | HTTP headers |
+
