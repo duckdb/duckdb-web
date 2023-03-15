@@ -1329,6 +1329,35 @@ title: Python Client API
 </dt>
 <dd>
 <p>Bases: <a class="reference internal" href="#duckdb.IOException" title="duckdb.IOException"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOException</span></code></a></p>
+<p>Thrown when an error occurs in the httpfs extension, or whilst downloading an extension.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duckdb.HTTPException.body">
+<span class="sig-name descname"><span class="pre">body</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#duckdb.HTTPException.body" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duckdb.HTTPException.headers">
+<span class="sig-name descname"><span class="pre">headers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#duckdb.HTTPException.headers" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duckdb.HTTPException.reason">
+<span class="sig-name descname"><span class="pre">reason</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#duckdb.HTTPException.reason" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duckdb.HTTPException.status_code">
+<span class="sig-name descname"><span class="pre">status_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#duckdb.HTTPException.status_code" title="Permalink to this definition">&#182;</a>
+</dt>
+<dd></dd>
+</dl>
+
 </dd>
 </dl>
 
