@@ -51,6 +51,7 @@ Below are parameters that can be passed in to the CSV reader.
 | `ignore_errors` | Option to ignore any parsing errors encountered - and instead ignore rows with errors. | bool | false |
 | `max_line_size` | The maximum line size in bytes | bigint | 2097152 |
 | `names` | The column names as a list. [Example here](tips#provide-names-if-the-file-does-not-contain-a-header). | varchar[] | `(empty)` |
+| `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | varchar | `(empty)` |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | bool | false |
 | `nullstr` | Specifies the string that represents a NULL value. | varchar | `(empty)` |
 | `parallel` | Whether or not the experimental parallel CSV reader is used. | bool | false |
