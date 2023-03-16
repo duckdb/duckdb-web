@@ -125,6 +125,19 @@ PIVOT Cities ON Year USING SUM(Population) as total, MAX(Population) as max GROU
 
 
 
+To only create a separate column for specific values within a column in the `ON` clause, add an `IN` clause.
+Let's say for example that we wanted to forget about the year 2020 for no particular reason...
+```sql
+PIVOT Cities ON Year IN (2000, 2010) USING SUM(Population) GROUP BY Country;
+```
+
+| Country | 2000 | 2010 |
+|---------|------|------|
+| NL      | 1005 | 1065 |
+| US      | 8579 | 8783 |
+
+
+
 ### Simplified Pivot Full Syntax Diagram
 Below is the full syntax diagram of the `PIVOT` statement. 
 
