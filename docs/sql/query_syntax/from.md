@@ -6,11 +6,13 @@ expanded: SQL
 railroad: query_syntax/from.js
 blurb: The FROM clause can contain a single table, a combination of multiple tables that are joined together, or another SELECT query inside a subquery node.
 ---
-The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together using `JOIN` clauses, or another `SELECT` query inside a subquery node.
+The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together using `JOIN` clauses, or another `SELECT` query inside a subquery node. DuckDB has a `FROM`-first syntax which enables you to also query without a `SELECT` statement.
 
 ### Examples
 
 ```sql
+--  select all columns from the table called "table_name", displaying up to 40 lines (20 first, 20 last)
+FROM table_name;
 -- select all columns from the table called "table_name"
 SELECT * FROM table_name;
 -- select all columns from the table called "table_name" in the schema "schema_name
