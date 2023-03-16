@@ -17,6 +17,7 @@
 		<h3>Environment</h3>
 		<ul class="environment">
 			<li data-id=".cli" class="selected">Command Line</li>
+			<li data-id=".tea">Command Line (tea.xyz)</li>
 			<li data-id=".python">Python</li>
 			<li data-id=".r">R</li>
 			<li data-id=".java">Java</li>
@@ -113,6 +114,10 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 
 	<div class="latest python">
 		{% highlight bash %}pip install duckdb=={{ site.currentduckdbversion }}{% endhighlight %}
+	</div>
+	
+	<div class="latest tea">
+		{% highlight bash %}sh <(curl https://tea.xyz) +duckdb.org{% endhighlight %}
 	</div>
 
 	<div class="latest r">
