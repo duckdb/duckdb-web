@@ -31,7 +31,7 @@ CREATE TABLE list_table (int_list INT[], varchar_list VARCHAR[]);
 ### Retrieving from Lists
 Retrieving one or more values from a list can be accomplished using brackets and slicing notation, or through [list functions](../functions/nested#list-functions) like `list_extract`. Multiple equivalent functions are provided as aliases for compatibility with systems that refer to lists as arrays. For example, the function `array_slice`.
 ```sql
--- Retrieve an element from a list using brackets. This returns 'c'
+-- Retrieve an element from a list using brackets. This returns 'b'
 -- Note that we wrap the list creation in parenthesis so that it happens first.
 -- This is only needed in our basic examples here, not when working with a list column
 -- For example, this can't be parsed: SELECT ['a','b','c'][1]
@@ -40,19 +40,19 @@ SELECT (['a','b','c'])[2];
 SELECT (['a','b','c'])[-1];
 -- Any expression that evaluates to an integer can be used to retrieve a list value
 -- This includes using a column to determine which index to retrieve
--- This returns 'c'
+-- This returns 'b'
 SELECT (['a','b','c'])[1 + 1];
 -- The list_extract function may also be used in place of brackets for selecting individual elements. 
--- This returns c
+-- This returns b
 SELECT list_extract(['a','b','c'], 2);
--- Retrieve multiple list values using a bracketed slice syntax. This returns ['b','c']
-SELECT (['a','b','c'])[1:3];
+-- Retrieve multiple list values using a bracketed slice syntax. This returns ['a','b']
+SELECT (['a','b','c'])[1:2];
 -- Single sided slices are also supported. Here, grab the first 2 elements. This returns ['a','b']
 SELECT (['a','b','c'])[:2];
 -- Use a negative index to grab the last 2 elements. This returns ['b','c']
 SELECT (['a','b','c'])[-2:];
 -- The list_slice function syntax is also supported. This returns ['b','c']
-SELECT list_slice(['a','b','c'],1,3);
+SELECT list_slice(['a','b','c'],2,3);
 ```
 
 ## Ordering

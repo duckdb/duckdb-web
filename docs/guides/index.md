@@ -19,6 +19,11 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to export a table to a Parquet file](../guides/import/parquet_export)
 * [How to run a query directly on a Parquet file](../guides/import/query_parquet)
 
+##### JSON Files
+
+* [How to load a JSON file into a table](../guides/import/json_import)
+* [How to export a table to a JSON file](../guides/import/json_export)
+
 ##### HTTP, S3 and GCP
 
 * [How to load a Parquet file directly from HTTP(s)](../guides/import/http_import)

@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "0 0 * * 1"  # run once a week on mondays
+    - cron: "0 5 * * 1"  # run once a week on mondays
   workflow_dispatch: {}  # allow running manually from the github ui
 
 env:
