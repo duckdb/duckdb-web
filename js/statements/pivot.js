@@ -21,7 +21,10 @@ function GeneratePivot(options) {
 					Keyword("ON"),
 					OneOrMore(
 						Sequence([
-							Expression("pivot-column"),
+							Choice(0, [
+								Expression("pivot-column"),
+								Expression("pivot-expr"),
+							]),
 							Optional(
 								Sequence([
 									Keyword("IN"),
@@ -52,11 +55,70 @@ function GeneratePivot(options) {
 		])
 	])
 }
+/*
+FROM [dataset] 
+PIVOT (
+    [aggregate_expression(s)]
+    FOR 
+        [pivot_column_1] IN ([in-list])
+        [pivot_column_2] IN ([in-list])
+        ...
+    GROUP BY [group_by_expression(s)]
+)
+*/
+function GenerateSQLStandardPivot(options) {
+	return Diagram([
+		AutomaticStack([
+			Keyword("FROM"),
+			Choice(0, [
+				Expression("table-name"),
+				Expression("view-name"),
+				Expression("table-function-name"),
+				Sequence([
+					Keyword('('),
+					Expression("select-node"),
+					Keyword(')'),
+				])
+			]),
+			Choice(0, [
+				Keyword("PIVOT")
+			]),
+			Keyword("("),
+			OneOrMore(
+				Sequence([
+					Expression("aggregate-expr"),
+					Optional(Sequence([Optional(Keyword("AS")), Expression("alias")])),
+				]), ","),
+			Keyword("FOR"),
+			Sequence([
+				OneOrMore(
+					Sequence([
+						Expression("pivot-column"),
+						Sequence([
+							Keyword("IN"),
+							Keyword("("),
+							Expression("in-list"),
+							Keyword(")"),
+						])
+					]), ",")
+			]),
+			Optional(
+				Sequence([
+					Keyword("GROUP BY"),
+					OneOrMore(Expression("group-by-expr"), ","),
+				]),
+				"skip"),
+			Keyword(")"),
+		])
+	])
+}
 
 function Initialize(options = {}) {
 	document.getElementById("rrdiagram").classList.add("limit-width");
 	document.getElementById("rrdiagram").innerHTML = GeneratePivot(options).toString();
 
+	document.getElementById("rrdiagram2").classList.add("limit-width");
+	document.getElementById("rrdiagram2").innerHTML = GenerateSQLStandardPivot(options).toString();
 }
 
 function Refresh(node_name, set_node) {
