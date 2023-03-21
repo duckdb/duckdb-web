@@ -301,8 +301,47 @@ PIVOT (
     GROUP BY [rows(s)]
 )
 ```
-Note that no commas separate the expressions in the `FOR` clause!
+Unlike the simplified syntax, the `IN` clause must be specified for each column to be pivoted.
+If you are interested in dynamic pivoting, the simplified syntax is recommended.
 
+Note that no commas separate the expressions in the `FOR` clause, but that `value` and `GROUP BY` expressions must be comma-separated!
+
+### Examples
+
+This example uses a single value expression, a single column expression, and a single row expression:
+```sql
+FROM Cities 
+PIVOT (
+    SUM(Population) 
+    FOR 
+        Year IN (2000, 2010, 2020) 
+    GROUP BY Country
+);
+```
+
+| Country | 2000 | 2010 | 2020 |
+|---------|------|------|------|
+| NL      | 1005 | 1065 | 1158 |
+| US      | 8579 | 8783 | 9510 |
+
+This example is somewhat contrived, but serves as an example of using multiple value expressions and multiple columns in the `FOR` clause. 
+
+```sql
+FROM Cities 
+PIVOT (
+    SUM(Population) as total,
+    COUNT(Population) as count
+    FOR 
+        Year IN (2000, 2010, 2020) 
+        Country in ('NL', 'US')
+);
+```
+
+|     Name      | 2000_NL_total | 2000_NL_count | 2000_US_total | 2000_US_count | 2010_NL_total | 2010_NL_count | 2010_US_total | 2010_US_count | 2020_NL_total | 2020_NL_count | 2020_US_total | 2020_US_count |
+|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|
+| Amsterdam     | 1005          | 1             | NULL          | 0             | 1065          | 1             | NULL          | 0             | 1158          | 1             | NULL          | 0             |
+| Seattle       | NULL          | 0             | 564           | 1             | NULL          | 0             | 608           | 1             | NULL          | 0             | 738           | 1             |
+| New York City | NULL          | 0             | 8015          | 1             | NULL          | 0             | 8175          | 1             | NULL          | 0             | 8772          | 1             |
 
 ### SQL Standard Pivot Full Syntax Diagram
 Below is the full syntax diagram of the SQL Standard version of the `PIVOT` statement. 
