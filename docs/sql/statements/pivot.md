@@ -6,18 +6,6 @@ expanded: SQL
 railroad: statements/pivot.js
 blurb: The PIVOT statement allows values within a column to be separated into their own columns.
 ---
-<!-- 
-TODO: 
-    Add to menu 
-    Build RR diagram
-    Document Pivot
-        Short form syntax
-        Long form syntax
-    Document UnPivot
-        Separate document?
-        Short
-        Long
--->
 
 The `PIVOT` statement allows distinct values within a column to be separated into their own columns.
 The values within those new columns are calculated using an aggregate function on the subset of rows that match each distinct value.
