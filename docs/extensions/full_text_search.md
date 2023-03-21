@@ -11,7 +11,7 @@ The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to 
 ### PRAGMA create_fts_index
 ```
 create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwords='english',
-                 ignore='(\\.|[^a-z])+', strip_accents=TRUE, lower=TRUE, overwrite=FALSE)
+                 ignore='(\\.|[^a-z])+', strip_accents=1, lower=1, overwrite=0)
 ```
 `PRAGMA` that creates a FTS index for the specified table.
 
@@ -23,9 +23,9 @@ create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwor
 |`stemmer`|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used. Defaults to `'porter'`|
 |`stopwords`|`VARCHAR`|Qualified name of table containing a single `VARCHAR` column containing the desired stopwords, or `'none'` if no stopwords are to be used. Defaults to `'english'` for a pre-defined list of 571 English stopwords|
 |`ignore`|`VARCHAR`|Regular expression of patterns to be ignored. Defaults to `'(\\.|[^a-z])+'`, ignoring all escaped and non-alphabetic lowercase characters|
-|`strip_accents`|`BOOLEAN`|Whether to remove accents (e.g. convert `á` to `a`). Defaults to `TRUE`|
-|`lower`|`BOOLEAN`|Whether to convert all text to lowercase. Defaults to `TRUE`|
-|`overwrite`|`BOOLEAN`|Whether to overwrite an existing index on a table. Defaults to `FALSE`|
+|`strip_accents`|`BOOLEAN`|Whether to remove accents (e.g. convert `á` to `a`). Defaults to `1`|
+|`lower`|`BOOLEAN`|Whether to convert all text to lowercase. Defaults to `1`|
+|`overwrite`|`BOOLEAN`|Whether to overwrite an existing index on a table. Defaults to `0`|
 
 This `PRAGMA` builds the index under a newly created schema. The schema will be named after the input table: if an index is created on table `'main.table_name'`, then the schema will be named `'fts_main_table_name'`.
 
