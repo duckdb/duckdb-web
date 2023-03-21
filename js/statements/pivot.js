@@ -55,17 +55,7 @@ function GeneratePivot(options) {
 		])
 	])
 }
-/*
-FROM [dataset] 
-PIVOT (
-    [aggregate_expression(s)]
-    FOR 
-        [pivot_column_1] IN ([in-list])
-        [pivot_column_2] IN ([in-list])
-        ...
-    GROUP BY [group_by_expression(s)]
-)
-*/
+
 function GenerateSQLStandardPivot(options) {
 	return Diagram([
 		AutomaticStack([
@@ -100,7 +90,7 @@ function GenerateSQLStandardPivot(options) {
 							Expression("in-list"),
 							Keyword(")"),
 						])
-					]), ",")
+					]), " ")
 			]),
 			Optional(
 				Sequence([
