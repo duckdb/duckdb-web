@@ -194,6 +194,7 @@ PIVOT Cities on Year USING SUM(Population) GROUP BY Country, Name;
 
 ### Using PIVOT within a SELECT statement
 The `PIVOT` statement may be included within a SELECT statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
+This allows for a `PIVOT` to be used alongside other SQL logic, as well as for multiple `PIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `PIVOT` keyword can be thought of as taking its place.
 ```sql
@@ -213,16 +214,54 @@ FROM (
 ) pivot_alias;
 ```
 
+#### Multiple Pivots
+Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined together or manipulated in other ways.
+
+For example, if two `PIVOT` statments share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
+```sql
+FROM
+    (PIVOT Cities ON Year USING SUM(Population) GROUP BY Country) year_pivot
+JOIN
+    (PIVOT Cities ON Name USING SUM(Population) GROUP BY Country) name_pivot
+USING (Country);
+```
+
+| Country | 2000 | 2010 | 2020 | Amsterdam | New York City | Seattle |
+|---------|------|------|------|-----------|---------------|---------|
+| NL      | 1005 | 1065 | 1158 | 3228      |               |         |
+| US      | 8579 | 8783 | 9510 |           | 24962         | 1910    |
+
+
 ### Internals
 Pivoting is implemented entirely as rewrites into SQL queries. 
 Each `PIVOT` is implemented as set of aggregations with `FILTER` clauses.
+Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
+
+DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
+In order to automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
+[`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns. 
+Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
+
+After the `IN` clauses has been populated with `ENUM`s, the query is re-written again into a set of aggregations with `FILTER` clauses.
 
 For example:
 ```sql
 PIVOT Cities ON Year USING SUM(Population);
 ```
 
-becomes:
+is initially translated into:
+```sql
+CREATE TEMPORARY TYPE __pivot_enum_0_0 AS ENUM (
+    SELECT DISTINCT 
+        Year::VARCHAR 
+    FROM Cities 
+    ORDER BY 
+        Year
+    );
+PIVOT Cities ON Year IN __pivot_enum_0_0 USING SUM(Population);
+```
+
+and finally translated into:
 ```sql
 SELECT 
     Country,
@@ -234,7 +273,13 @@ FROM Cities
 GROUP BY ALL;
 ```
 
-<!-- TODO: Describe the Enums! -->
+This produces the result:
+
+| Country |     Name      | 2000 | 2010 | 2020 |
+|---------|---------------|------|------|------|
+| NL      | Amsterdam     | 1005 | 1065 | 1158 |
+| US      | Seattle       | 564  | 608  | 738  |
+| US      | New York City | 8015 | 8175 | 8772 |
 
 
 ### Simplified Pivot Full Syntax Diagram
