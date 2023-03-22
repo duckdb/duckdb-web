@@ -230,7 +230,7 @@ In order to automatically detect the columns that should be created as a result 
 [`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns. 
 Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
 
-After the `IN` clauses has been populated with `ENUM`s, the query is re-written again into a set of aggregations with `FILTER` clauses.
+After the `IN` clauses have been populated with `ENUM`s, the query is re-written again into a set of aggregations with `FILTER` clauses.
 
 For example:
 ```sql
