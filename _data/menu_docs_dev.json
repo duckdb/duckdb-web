@@ -516,6 +516,10 @@
                 {
                   "page": "Attach",
                   "url": "attach"
+                },
+                {
+                  "page": "Pivot",
+                  "url": "pivot"
                 }
               ]
             },
