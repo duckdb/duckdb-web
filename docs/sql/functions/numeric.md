@@ -47,7 +47,7 @@ The table below shows the available mathematical functions.
 | `factorial(x)` | See `!` operator. Computes the product of the current integer and all integers below it | `factorial(4)` | 24 |
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
 | `gamma(x)` | interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
-| `gcd(x, x)` | computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
+| `gcd(x, y)` | computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
 | `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | true |
 | `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf('Infinity'::float)` | true |
