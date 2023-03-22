@@ -61,4 +61,27 @@ print(con.fetchall())
 # [('duck', 'duck', 'goose')]
 ```
 
+### Named parameters
+
+Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.  
+When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument  
+An example use:
+```py
+import duckdb
+
+duckdb.execute("""
+  select
+    $my_param,
+    $other_param,
+    $also_param
+""",
+  {
+    'my_param': 5,
+    'other_param': 'DuckDB',
+    'also_param': [42]
+  }
+ ).fetchall()
+# [(5, 'DuckDB', [42])]
+```
+
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
