@@ -48,11 +48,13 @@ The table below shows the available mathematical functions.
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
 | `gamma(x)` | interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
 | `gcd(x, y)` | computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
+| `greatest_common_divisor(x, y)` | computes the greatest common divisor of x and y | `greatest_common_divisor(42, 57)` | 3 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
 | `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | true |
 | `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf('Infinity'::float)` | true |
 | `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan('NaN'::float)` | true |
 | `lcm(x, y)` | computes the least common multiple of x and y | `lcm(42, 57)` | 798 |
+| `least_common_multiple(x, y)` | computes the least common multiple of x and y | `least_common_multiple(42, 57)` | 798 |
 | `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
 | `lgamma(x)` | computes the log of the `gamma` function. | `lgamma(2)` | 0 |
 | `ln(x)` | computes the natural logarithm of *x* | `ln(2)` | 0.693 |
