@@ -922,7 +922,7 @@ Returns the number of data chunks present in the result.
 The result object
 * `returns`
 
-The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
+Number of data chunks present in the result.
 
 <br>
 
