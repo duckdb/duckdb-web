@@ -28,6 +28,91 @@ SELECT * FROM table_name TABLESAMPLE 10%;
 -- select a sample of 10 rows from a table
 SELECT * FROM table_name TABLESAMPLE 10 ROWS;
 ```
+### Joins
+
+Joins are a fundamental relational operation used to connect two tables or relations horizontally.
+The relations are referred to as the _left_ and _right_ sides of the join
+based on how they are written in the join clause.
+Each result row has the columns from both relations.
+
+A join uses a rule to match pairs of rows from each relation.
+Often this is a predicate, but there are other implied rules that may be specified.
+Rows that do not have any matches can also be returned if an `OUTER` join is specified.
+Outer joins can be one of:
+
+* `LEFT` (All rows from the left relation appear at least once)
+* `RIGHT` (All rows from the right relation appear at least once)
+* `FULL` (All rows from both relations appear at least once)
+
+A join that is not `OUTER` is `INNER` (only rows that get paired are returned).
+
+#### Cross Product Joins
+
+The simplest type of join is a `CROSS JOIN`. 
+There are no conditions for this type of join, 
+and it just returns all the possible pairs.
+
+```sql
+-- return all pairs of rows
+SELECT a.*, b.* FROM a CROSS JOIN b
+```
+
+#### Conditional Joins
+
+Most joins are specified by a predicate that connects 
+attributes from one side to attributes from the other side.
+The conditions can be explicitly specified using an `ON` clause
+with the join (clearer) or implied by the `WHERE` clause (old-fashioned).
+
+```sql
+-- return the regions for the nations
+SELECT n.*, r.*
+FROM l_nations n, JOIN l_regions r ON (n_regionkey = r_regionkey)
+```
+
+If the column names are the same and are required to be equal,
+then the simpler `USING` syntax can be used:
+
+```sql
+-- return the regions for the nations
+SELECT n.*, r.*
+FROM l_nations n, JOIN l_regions r USING (regionkey)
+```
+
+The expressions to not have to be equalities - any predicate can be used:
+
+```sql
+-- return the pairs of jobs where one ran longer but cost less
+SELECT s1.t_id, s2.t_id 
+FROM west s1, west s2
+WHERE s1.time > s2.time 
+  AND s1.cost < s2.cost;
+```
+
+#### Positional Joins
+
+When working with data frames or other embedded tables of the same size, 
+the rows may have a natural correspondence based on their physical order.
+In scripting languages, this is easily expressed using a loop:
+
+```cpp
+for (i=0;i<n;i++) 
+    f(t1.a[i], t2.b[i])
+```
+
+It is difficult to express this in standard SQL because 
+relational tables are not ordered, but imported tables (like data frames)
+or disk files (like CSVs or Parquet files) do have a natural ordering.
+
+Connecting them using this ordering is called a _positional join_:
+
+```sql
+-- treat two data frames as a single table
+SELECT df1.*, df2.*
+FROM df1 POSITIONAL JOIN df2
+```
+
+Positional joins are always `FULL OUTER` joins.
 
 ### Syntax
 <div id="rrdiagram"></div>

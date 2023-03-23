@@ -1690,12 +1690,20 @@ function GenerateJoinClause(options) {
 		Expression("table-or-subquery"),
 		OneOrMore(Sequence([
 				Sequence([
-					Optional(Keyword("NATURAL"), "skip"),
-					Optional(Choice(0,[
-						Keyword("INNER"),
-						Sequence([Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]), Optional(Keyword("OUTER"), "skip")]),
-						Keyword("CROSS")
-					]), "skip"),
+					Choice(0,[
+						Sequence([
+							Optional(Keyword("NATURAL"), "skip"),
+							Optional(Choice(0,[
+								Keyword("INNER"),
+								Sequence([
+									Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]), 
+									Optional(Keyword("OUTER"), "skip")
+								])
+							]), "skip")
+						]),
+						Keyword("CROSS"),
+						Keyword("POSITIONAL")
+					]),
 					Keyword("JOIN")
 				]),
 				Expression("table-or-subquery"),
