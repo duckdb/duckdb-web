@@ -37,7 +37,10 @@ Each result row has the columns from both relations.
 
 A join uses a rule to match pairs of rows from each relation.
 Often this is a predicate, but there are other implied rules that may be specified.
-Rows that do not have any matches can also be returned if an `OUTER` join is specified.
+
+#### Outer Joins
+
+Rows that do not have any matches can still be returned if an `OUTER` join is specified.
 Outer joins can be one of:
 
 * `LEFT` (All rows from the left relation appear at least once)
@@ -45,6 +48,8 @@ Outer joins can be one of:
 * `FULL` (All rows from both relations appear at least once)
 
 A join that is not `OUTER` is `INNER` (only rows that get paired are returned).
+
+When an unpaired row is returned, the attributes from the other table are set to `NULL`.
 
 #### Cross Product Joins
 
@@ -113,6 +118,39 @@ FROM df1 POSITIONAL JOIN df2
 ```
 
 Positional joins are always `FULL OUTER` joins.
+
+#### As-Of Joins
+
+A common operation when working with temporal or similarly-ordered data
+is to find the nearest (first) event in a reference table (such as prices).
+This is called an _as-of join_:
+
+```sql
+-- attach prices to stock trades
+SELECT t.*, p.price
+FROM trades t ASOF JOIN prices p 
+  ON t.symbol = p.symbol AND t.when >= p.when
+
+-- same query with USING, but the last attribute must be the inequality
+SELECT t.*, p.price
+FROM trades t ASOF JOIN prices p USING (symbol, when)
+```
+
+The `ASOF` join requires at least one inequality condition on the ordering field,
+and the left table must be side that is greater in that inequality.
+Any other conditions must be equalities (or `NOT DISTINCT`).
+This means that the left/right order of the tables is significant.
+
+`ASOF` joins only pair each left side row with at most one right side row.
+It can be specified as an `OUTER` join to find unpaired rows 
+(e.g., trades without prices or prices which have no trades.)
+
+```sql
+-- attach prices or NULLs to stock trades
+SELECT t.*, p.price
+FROM trades t ASOF LEFT JOIN prices p 
+  ON t.symbol = p.symbol AND t.when >= p.when
+```
 
 ### Syntax
 <div id="rrdiagram"></div>
