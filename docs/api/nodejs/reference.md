@@ -148,7 +148,7 @@ Run a SQL query, returns a IpcResultStreamIterator that allows streaming the res
 (requires arrow extension to be loaded)
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
-**Returns**: IpcResultStreamIterator  
+**Returns**: Promise<IpcResultStreamIterator>  
 
 | Param | Type |
 | --- | --- |
