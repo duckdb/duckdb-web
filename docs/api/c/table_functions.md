@@ -11,6 +11,7 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_table_function">duckdb_destroy_table_function</a></span>(<span class="kt">duckdb_table_function</span> *<span class="k">table_function</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_name">duckdb_table_function_set_name</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_add_parameter">duckdb_table_function_add_parameter</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
+<span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_add_named_parameter">duckdb_table_function_add_named_parameter</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_extra_info">duckdb_table_function_set_extra_info</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">void</span> *<span class="k">extra_info</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_bind">duckdb_table_function_set_bind</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_bind_t</span> <span class="k">bind</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_init">duckdb_table_function_set_init</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="k">duckdb_table_function_init_t</span> <span class="k">init</span>);
@@ -24,6 +25,7 @@ The table function API can be used to define a table function that can then be c
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_add_result_column">duckdb_bind_add_result_column</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">duckdb_logical_type</span> <span class="k">type</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_bind_get_parameter_count">duckdb_bind_get_parameter_count</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>);
 <span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_bind_get_parameter">duckdb_bind_get_parameter</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
+<span class="kt">duckdb_value</span> <span class="nf"><a href="#duckdb_bind_get_named_parameter">duckdb_bind_get_named_parameter</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_bind_data">duckdb_bind_set_bind_data</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">void</span> *<span class="k">bind_data</span>, <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_cardinality">duckdb_bind_set_cardinality</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">idx_t</span> <span class="k">cardinality</span>, <span class="kt">bool</span> <span class="k">is_exact</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_bind_set_error">duckdb_bind_set_error</a></span>(<span class="kt">duckdb_bind_info</span> <span class="k">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error</span>);
@@ -120,6 +122,32 @@ Adds a parameter to the table function.
 * `table_function`
 
 The table function
+* `type`
+
+The type of the parameter to add.
+
+<br>
+
+### duckdb_table_function_add_named_parameter
+---
+Adds a named parameter to the table function.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_table_function_add_named_parameter</span>(<span class="k">
+</span>  <span class="kt">duckdb_table_function</span> <span class="k">table_function</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>,<span class="k">
+</span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `table_function`
+
+The table function
+* `name`
+
+The name of the parameter
 * `type`
 
 The type of the parameter to add.
@@ -384,6 +412,33 @@ The info object
 * `index`
 
 The index of the parameter to get
+* `returns`
+
+The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
+
+<br>
+
+### duckdb_bind_get_named_parameter
+---
+Retrieves a named parameter with the given name.
+
+The result must be destroyed with `duckdb_destroy_value`.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="k">duckdb_bind_get_named_parameter</span>(<span class="k">
+</span>  <span class="kt">duckdb_bind_info</span> <span class="k">info</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `info`
+
+The info object
+* `name`
+
+The name of the parameter
 * `returns`
 
 The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
