@@ -194,7 +194,7 @@ ICU can also perform binning operations for some non-Gregorian calendars.
 We have added support for these calendars via a `Calendar` setting and the `icu_calendar_names` table function:
 
 ```sql
-require icu
+load icu;
 
 -- Show the current calendar. The default is set to ICU's current locale.
 query IIII
