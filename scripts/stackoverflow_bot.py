@@ -1,5 +1,6 @@
 import os
 import duckdb 
+import html
 import json
 import requests
 
@@ -11,7 +12,7 @@ def post_to_discord(title, url, profile_image):
         "username": "Stack Overflow",
         "embeds": [
             {
-                "title": title,
+                "title": html.unescape(title),
                 "color": 16023588,
                 "thumbnail": {"url": profile_image},
                 "description": url
