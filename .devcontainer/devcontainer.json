@@ -14,7 +14,12 @@
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [3000],
+	"forwardPorts": [
+		// Jekyll server
+		4000,
+		// Live reload server
+		35729
+	],
 
 	// Uncomment the next line to run commands after the container is created.
 	"postCreateCommand": "bundler && bundler exec jekyll serve --incremental"
