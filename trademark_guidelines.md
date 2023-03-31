@@ -29,10 +29,10 @@ Written materials must refer to the project as “DuckDB” in the first and mos
 
 Logos using the duck graphical and/or textual element, or otherwise derived from the DuckDB logos are also not allowed.
 
-Domain names relating to products or services based on the DuckDBcontaining “duck” are not permitted without written permission from the the DuckDB Foundation. Events, books, and merchandise have their own guidelines. Please contact us for details. 
+Domain names relating to products or services containing “duck” are not permitted without written permission from the the DuckDB Foundation. Events, books, and merchandise have their own guidelines. Please contact us for details. 
 
 ## Questions? Contact us
 
 The DuckDB Foundation may grant permission to apply DuckDB trademarks (including graphic logos) for merchandise that promotes the DuckDB project, software or community. Permission to apply DuckDB trademarks will ordinarily be denied for merchandise that disparages DuckDB software or projects or that would serve to detract from the value of DuckDB software. As a rule of thumb you may assume the following uses of DuckDB trademarks are probably infringing: 1) Confusingly similar software product names; 2) Software service offerings that are for anything other than official DuckDB software; and 3) Company names that may be associated in customer's minds with the DuckDB project, software or community. 
 
-We appreciate the community’s help in respecting these guidelines. If you have any questions about the DuckDB trademark guidelines or policy, or if you wish to request permission for any specific use case, please email us <address@duckdb.com> and CC <trademarks@duckdb.com>. 
+We appreciate the community’s help in respecting these guidelines. If you have any questions about the DuckDB trademark guidelines or policy, or if you wish to request permission for any specific use case, please email us <quack@duckdb.com>.
