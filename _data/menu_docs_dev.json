@@ -520,6 +520,10 @@
                 {
                   "page": "Pivot",
                   "url": "pivot"
+                },
+                {
+                  "page": "Checkpoint",
+                  "url": "checkpoint"
                 }
               ]
             },

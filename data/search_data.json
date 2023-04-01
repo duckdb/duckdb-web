@@ -295,6 +295,13 @@
 			"blurb": "Casting refers to the process of changing the type of a row from one type to another. The standard SQL syntax for..."
 		},
 		{
+			"title": "Checkpoint",
+			"text": "the checkpoint statement synchronizes data in the write-ahead log wal to the database data file for in-memory databases this statement will succeed with no effect examples -- synchronize data in the default database checkpoint -- synchronize data in the specified database checkpoint file_db -- abort any in-progress transactions to synchronize the data force checkpoint syntax transactions the default checkpoint command will fail if there are any running transactions including force will abort any transactions and execute the checkpoint operation",
+			"category": "Statements",
+			"url": "/docs/sql/statements/checkpoint",
+			"blurb": "The CHECKPOINT statement synchronizes data in the write-ahead log (WAL) to the database data file. For in-memory..."
+		},
+		{
 			"title": "Client APIs Overview",
 			"text": "there are various client apis for duckdb duckdb s native api is c with official wrappers available for c python r java node js webassembly wasm odbc api julia and a command line interface cli there are also contributed third-party duckdb wrappers for ruby go c rust and common lisp pages in this section",
 			"category": "Api",
