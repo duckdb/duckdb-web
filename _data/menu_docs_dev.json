@@ -436,6 +436,10 @@
                   {
                     "page": "Windows Setup",
                     "url": "windows"
+                  },
+                  {
+                    "page": "MacOS Setup",
+                    "url": "macos"
                   }
               ]
             },
