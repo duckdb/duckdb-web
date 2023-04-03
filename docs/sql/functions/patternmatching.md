@@ -138,11 +138,14 @@ SELECT * FROM glob('*');
 
 ## Regular Expressions
 
-| Function | Description |
-|:---|:---|
-| `regexp_matches(`*`string`*`, `*`pattern`*`)` | returns `TRUE` if  *string* contains the regexp *pattern*, `FALSE` otherwise |
-| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | if *string* contains the regexp *pattern*, replaces the matching part with *replacement* |
-| `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | if *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* |
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* | `regexp_full_match('anabanana', '(an)*')` | `false` |
+| `regexp_matches(`*`string`*`, `*`pattern`*`)` | returns `TRUE` if  *string* contains the regexp *pattern*, `FALSE` otherwise | `regexp_matches('anabanana', '(an)*')` | `true` |
+| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | if *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |
+| `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
+| `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | if *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` | `hello` |
+| `regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])` | Split the *string* along the *regex* and extract all occurrences of *group* | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` | `[hello, world]` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `TRUE` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
