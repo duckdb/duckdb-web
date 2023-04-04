@@ -15,12 +15,12 @@ First, thank you for your contribution!
 
 Each new page requires at least 2 edits:
 * The creation of a new markdown page with the documentation. Please follow the format of another .md file in the docs folder.
-* Add a link to the new page within _data/menu_docs_current.json. This populates the dropdown menus.
+* Add a link to the new page within _data/menu_docs_dev.json. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
 * Add a link to the new page within the Guides landing page: docs/guides/index.md
 
-Each new page must also be added to the Search feature. Either manually edit the file _data/search_data.json or:
+Each new page must also be added to the Search feature. Either manually edit the file data/search_data.json or:
 * Install Python
 * Clone this repo and navigate to it
 * Create a new Python virtual environment

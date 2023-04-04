@@ -295,6 +295,13 @@
 			"blurb": "Casting refers to the process of changing the type of a row from one type to another. The standard SQL syntax for..."
 		},
 		{
+			"title": "Checkpoint",
+			"text": "the checkpoint statement synchronizes data in the write-ahead log wal to the database data file for in-memory databases this statement will succeed with no effect examples -- synchronize data in the default database checkpoint -- synchronize data in the specified database checkpoint file_db -- abort any in-progress transactions to synchronize the data force checkpoint syntax checkpoint operations happen automatically based on the wal size see configuration this statement is for manual checkpoint actions behavior the default checkpoint command will fail if there are any running transactions including force will abort any transactions and execute the checkpoint operation also see the related pragma for further behavior modification",
+			"category": "Statements",
+			"url": "/docs/sql/statements/checkpoint",
+			"blurb": "The CHECKPOINT statement synchronizes data in the write-ahead log (WAL) to the database data file. For in-memory..."
+		},
+		{
 			"title": "Client APIs Overview",
 			"text": "there are various client apis for duckdb duckdb s native api is c with official wrappers available for c python r java node js webassembly wasm odbc api julia and a command line interface cli there are also contributed third-party duckdb wrappers for ruby go c rust and common lisp pages in this section",
 			"category": "Api",
@@ -1262,7 +1269,7 @@
 		},
 		{
 			"title": "Utility Functions",
-			"text": "utility functions the functions below are difficult to categorize into specific function types and are broadly useful function description example result --- --- --- --- alias column return the name of the column alias column1 column1 coalesce expr return the first expression that evaluates to a non- null value accepts 1 or more parameters each expression can be a column literal value function result or many others coalesce null null default_string default_string current_schema return the name of the currently active schema default is main current_schema main current_schemas boolean return list of schemas pass a parameter of true to include implicit schemas current_schemas true temp main pg_catalog current_setting setting_name return the current value of the configuration setting current_setting access_mode automatic currval sequence_name return the current value of the sequence note that nextval must be called at least once prior to calling currval currval my_sequence_name 1 gen_random_uuid alias of uuid return a random uuid similar to this eeccb8c5-9943-b2bb-bb5e-222f4e14b687 gen_random_uuid various hash value returns an integer with the hash of the value hash 2595805878642663834 icu_sort_key string collator surrogate key used to sort special characters according to the specific locale collator parameter is optional valid only when icu extension is installed icu_sort_key \u00f6 de 460145960106 md5 string return an md5 one-way hash of the string md5 123 202cb962ac59075b964b07152d234b70 nextval sequence_name return the following value of the sequence nextval my_sequence_name 2 pg_typeof expression returns the lower case name of the data type of the result of the expression for postgres compatibility pg_typeof abc varchar stats expression returns a string with statistics about the expression expression can be a column constant or sql expression stats 5 min 5 max 5 has null false txid_current returns the current transaction s id a bigint it will assign a new one if the current transaction does not have one already txid_current various typeof expression returns the name of the data type of the result of the expression typeof abc varchar uuid return a random uuid similar to this eeccb8c5-9943-b2bb-bb5e-222f4e14b687 uuid various version return the currently active version of duckdb in this format v0 3 2 version various utility table functions a table function is used in place of a table in a from clause function description example --- --- --- glob search_path return filenames found at the location indicated by the search_path in a single column named file the search_path may contain glob pattern matching syntax glob",
+			"text": "utility functions the functions below are difficult to categorize into specific function types and are broadly useful function description example result ---------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------------------------------- -------------------------------------- alias column return the name of the column alias column1 column1 checkpoint database synchronize wal with file for optional database without interrupting transactions checkpoint my_db success boolean coalesce expr return the first expression that evaluates to a non- null value accepts 1 or more parameters each expression can be a column literal value function result or many others coalesce null null default_string default_string current_schema return the name of the currently active schema default is main current_schema main current_schemas boolean return list of schemas pass a parameter of true to include implicit schemas current_schemas true temp main pg_catalog current_setting setting_name return the current value of the configuration setting current_setting access_mode automatic currval sequence_name return the current value of the sequence note that nextval must be called at least once prior to calling currval currval my_sequence_name 1 force_checkpoint database synchronize wal with file for optional database interrupting transactions force_checkpoint my_db success boolean gen_random_uuid alias of uuid return a random uuid similar to this eeccb8c5-9943-b2bb-bb5e-222f4e14b687 gen_random_uuid various hash value returns an integer with the hash of the value hash 2595805878642663834 icu_sort_key string collator surrogate key used to sort special characters according to the specific locale collator parameter is optional valid only when icu extension is installed icu_sort_key \u00f6 de 460145960106 md5 string return an md5 one-way hash of the string md5 123 202cb962ac59075b964b07152d234b70 nextval sequence_name return the following value of the sequence nextval my_sequence_name 2 pg_typeof expression returns the lower case name of the data type of the result of the expression for postgres compatibility pg_typeof abc varchar stats expression returns a string with statistics about the expression expression can be a column constant or sql expression stats 5 min 5 max 5 has null false txid_current returns the current transaction s id a bigint it will assign a new one if the current transaction does not have one already txid_current various typeof expression returns the name of the data type of the result of the expression typeof abc varchar uuid return a random uuid similar to this eeccb8c5-9943-b2bb-bb5e-222f4e14b687 uuid various version return the currently active version of duckdb in this format v0 3 2 version various utility table functions a table function is used in place of a table in a from clause function description example --- --- --- glob search_path return filenames found at the location indicated by the search_path in a single column named file the search_path may contain glob pattern matching syntax glob",
 			"category": "Functions",
 			"url": "/docs/sql/functions/utility",
 			"blurb": "Utility Functions The functions below are difficult to categorize into specific function types and are broadly..."
@@ -1455,6 +1462,13 @@
 			"category": "Timestamp Functions",
 			"url": "/docs/sql/functions/timestamp",
 			"blurb": "century(timestamp) - Extracts the century of a timestamp"
+		},
+		{
+			"title": "checkpoint",
+			"text": "checkpoint(database) - synchronize wal with file for (optional) database without interrupting transactions.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "checkpoint(database) - Synchronize WAL with file for (optional) database without interrupting transactions."
 		},
 		{
 			"title": "chr",
@@ -1749,6 +1763,13 @@
 			"category": "Numeric Functions",
 			"url": "/docs/sql/functions/numeric",
 			"blurb": "floor(x) - rounds the number down"
+		},
+		{
+			"title": "force_checkpoint",
+			"text": "force_checkpoint(database) - synchronize wal with file for (optional) database interrupting transactions.",
+			"category": "Utility Functions",
+			"url": "/docs/sql/functions/utility",
+			"blurb": "force_checkpoint(database) - Synchronize WAL with file for (optional) database interrupting transactions."
 		},
 		{
 			"title": "format",
