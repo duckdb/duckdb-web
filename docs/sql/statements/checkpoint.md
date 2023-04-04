@@ -22,6 +22,11 @@ FORCE CHECKPOINT;
 ### Syntax
 <div id="rrdiagram1"></div>
 
-### Transactions
+Checkpoint operations happen automatically based on the WAL size (see [Configuration](../configuration)). This
+statement is for manual checkpoint actions.
+
+### Behavior
 The default `CHECKPOINT` command will fail if there are any running transactions. Including `FORCE` will abort any
 transactions and execute the checkpoint operation.
+
+Also see the related [pragma](../pragmas#force_checkpoint) for further behavior modification.
