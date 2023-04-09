@@ -400,13 +400,35 @@ $(document).ready(function(){
 		}
 	})
 	*/
+
+	var outdatedLinks = [
+		'https://duckdb.org/docs/archive/0.6.1/index',
+		'https://duckdb.org/docs/archive/0.5.1/index',
+		'https://duckdb.org/docs/archive/0.4.0/index',
+		'https://duckdb.org/docs/archive/0.3.4/index',
+		'https://duckdb.org/docs/archive/0.3.3/index',
+		'https://duckdb.org/docs/archive/0.3.2/index',
+		'https://duckdb.org/docs/archive/0.3.1/index',
+		'https://duckdb.org/docs/archive/0.3.0/index',
+		'https://duckdb.org/docs/archive/0.2.9/index',
+		'https://duckdb.org/docs/archive/0.2.8/index'
+	  ];
+	  
+	  if (outdatedLinks.includes(window.location.href)) {
 	
-	// VERSION FIX ON MOBILE
-	$('.headlinebar .version').click(function(){
-		$('.versionsidebar').toggleClass('active');
-	})
+		var popup = document.createElement('div');
+		popup.innerHTML = 'This documentation version is outdated. Please refer to the latest <a href="http://127.0.0.1:4000/docs/archive/0.7.1/index">documentation</a>.';
+		popup.style.backgroundColor = 'yellow';
+		popup.style.padding = '10px';
+		popup.style.textAlign = 'center';
+		popup.style.zIndex = '9999';
+		document.querySelector('.headerline').appendChild(popup);
+	  
 	
-	
+		popup.addEventListener('click', function() {
+		  popup.style.display = 'none';
+		});
+	  }
 	
 	// LOCAL STORAGE
 	function setWithExpiry(key, value, ttl) {
