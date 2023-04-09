@@ -417,7 +417,7 @@ $(document).ready(function(){
 	  if (outdatedLinks.includes(window.location.href)) {
 	
 		var popup = document.createElement('div');
-		popup.innerHTML = 'This documentation version is outdated. Please refer to the latest <a href="http://127.0.0.1:4000/docs/archive/0.7.1/index">documentation</a>.';
+		popup.innerHTML = 'This documentation version is outdated. Please refer to the latest <a href="https://duckdb.org/docs/archive/0.7.1/index">documentation</a>.';
 		popup.style.backgroundColor = 'yellow';
 		popup.style.padding = '10px';
 		popup.style.textAlign = 'center';
