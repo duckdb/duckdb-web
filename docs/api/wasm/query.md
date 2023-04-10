@@ -24,6 +24,7 @@ for await (const batch of await conn.send<{ v: arrow.Int }>(`
 `)) {
     // ...
 }
+
 // Close the connection to release memory
 await conn.close();
 ```

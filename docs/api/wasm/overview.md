@@ -18,6 +18,4 @@ Another great resource is the [Github repository](https://github.com/duckdb/duck
 
 For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
 
-_DuckDB-Wasm is fast! If you're here for performance numbers, head over to [our benchmarks](https://shell.duckdb.org/versus)._
-
 ### Pages in this Section

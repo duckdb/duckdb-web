@@ -20,7 +20,7 @@ const worker_url = URL.createObjectURL(
   new Blob([`importScripts("${bundle.mainWorker!}");`], {type: 'text/javascript'})
 );
 
-// Instantiate the asynchronus version of DuckDB-wasm
+// Instantiate the asynchronus version of DuckDB-Wasm
 const worker = new Worker(worker_url);
 const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
@@ -45,7 +45,7 @@ const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
 };
 // Select a bundle based on browser checks
 const bundle = await duckdb.selectBundle(MANUAL_BUNDLES);
-// Instantiate the asynchronus version of DuckDB-wasm
+// Instantiate the asynchronus version of DuckDB-Wasm
 const worker = new Worker(bundle.mainWorker!);
 const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
@@ -93,7 +93,7 @@ const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
 };
 // Select a bundle based on browser checks
 const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
-// Instantiate the asynchronus version of DuckDB-wasm
+// Instantiate the asynchronous version of DuckDB-Wasm
 const worker = new Worker(bundle.mainWorker!);
 const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
