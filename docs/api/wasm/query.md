@@ -4,7 +4,7 @@ title: Query
 selected: Client APIs
 ---
 
-DuckDB-wasm provides functions to querying the data. Queries is run sequentially. 
+DuckDB-Wasm provides functions to querying the data. Queries are run sequentially. 
 
 First, a connection need to be created by calling [connect](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#connect). Then, queries can be run by calling [query](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#query) or [send](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#send).
 

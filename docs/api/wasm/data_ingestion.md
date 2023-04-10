@@ -4,9 +4,9 @@ title: Data Ingestion
 selected: Client APIs
 ---
 
-DuckDB-wasm has multiple way to import data. 
+DuckDB-Wasm has multiple way to import data.
 
-Basically, there are two steps to import data into DuckDB.
+There are two steps to import data into DuckDB.
 
 First, the data file is imported into a local file system using register functions ([registerEmptyFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerEmptyFileBuffer), [registerFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileBuffer), [registerFileHandle](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileHandle), [registerFileText](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileText), [registerFileURL](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileURL)).
 

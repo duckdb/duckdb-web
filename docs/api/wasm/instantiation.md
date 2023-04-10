@@ -4,7 +4,7 @@ title: Instantiation
 selected: Client APIs
 ---
 
-DuckDB-wasm has multiple ways to be instantiated depending on the use case.
+DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
 
 ## Instantiation
 cdn(jsdelivr)
