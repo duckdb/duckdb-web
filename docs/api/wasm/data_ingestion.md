@@ -4,7 +4,7 @@ title: Data Ingestion
 selected: Client APIs
 ---
 
-DuckDB-Wasm has multiple way to import data.
+DuckDB-Wasm has multiple ways to import data, depending on the format of the data.
 
 There are two steps to import data into DuckDB.
 
