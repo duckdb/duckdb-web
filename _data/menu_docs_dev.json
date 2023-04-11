@@ -419,7 +419,29 @@
             },
             {
               "page": "Wasm",
-              "url": "wasm"
+              "slug": "wasm",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Instantiation",
+                  "url": "instantiation"
+                },
+                {
+                  "page": "Data Ingestion",
+                  "url": "data_ingestion"
+                },
+                {
+                  "page": "Query",
+                  "url": "query"
+                },
+                {
+                  "page": "Extensions",
+                  "url": "extensions"
+                }
+              ]
             },
             {
               "page": "ODBC",
