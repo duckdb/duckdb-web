@@ -77,6 +77,6 @@ jobs:
 
       - name: Link Checker
         run: |
-          linkchecker www.duckdb.org --check-extern --ignore-url ".*hannes.*" --file-output html/utf-8/report.html
+          linkchecker https://duckdb.org/ --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
       - run: cat report.html >> $GITHUB_STEP_SUMMARY
         if: success() || failure()

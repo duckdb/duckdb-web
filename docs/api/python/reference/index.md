@@ -1820,17 +1820,9 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.from_arrow">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.from_arrow" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrow_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_arrow" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>from_arrow(arrow_object: object, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from an Arrow object</p>
-<ol class="arabic simple" start="2">
-<li><p>from_arrow(arrow_object: object, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
 <p>Create a relation object from an Arrow object</p>
 </dd>
 </dl>
@@ -1846,17 +1838,9 @@ title: Python Client API
 
 <dl class="py function">
 <dt class="sig sig-object py" id="duckdb.from_df">
-<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duckdb.from_df" title="Permalink to this definition">&#182;</a>
+<span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.5.1)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyConnection" title="duckdb.DuckDBPyConnection"><span class="pre">duckdb.DuckDBPyConnection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.DuckDBPyRelation"><span class="pre">duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.from_df" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>from_df(df: pandas.DataFrame = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Create a relation object from the DataFrame in df</p>
-<ol class="arabic simple" start="2">
-<li><p>from_df(df: pandas.DataFrame, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
 <p>Create a relation object from the DataFrame df</p>
 </dd>
 </dl>
@@ -1875,14 +1859,6 @@ title: Python Client API
 <li><p>from_parquet(file_globs: List[str], binary_as_string: bool = False, <a href="#id13"><span class="problematic" id="id14">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Create a relation object from the Parquet files in file_globs</p>
-<ol class="arabic simple" start="3">
-<li><p>from_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id15"><span class="problematic" id="id16">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Creates a relation object from the Parquet files in file_glob</p>
-<ol class="arabic simple" start="4">
-<li><p>from_parquet(file_globs: List[str], binary_as_string: bool = False, <a href="#id17"><span class="problematic" id="id18">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Creates a relation object from the Parquet files in file_globs</p>
 </dd>
 </dl>
 
@@ -1912,11 +1888,11 @@ title: Python Client API
 <ol class="arabic simple">
 <li><p>from_substrait(proto: bytes, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
-<p>Create a query object from protobuf plan</p>
+<p>Creates a query object from the substrait plan</p>
 <ol class="arabic simple" start="2">
 <li><p>from_substrait(proto: bytes, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
-<p>Creates a query object from the substrait plan</p>
+<p>Create a query object from protobuf plan</p>
 </dd>
 </dl>
 
@@ -1936,13 +1912,13 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id19"><span class="problematic" id="id20">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Serialize a query to protobuf</p>
-<ol class="arabic simple" start="2">
-<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id21"><span class="problematic" id="id22">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id15"><span class="problematic" id="id16">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Serialize a query object to protobuf</p>
+<ol class="arabic simple" start="2">
+<li><p>get_substrait(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id17"><span class="problematic" id="id18">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
+</ol>
+<p>Serialize a query to protobuf</p>
 </dd>
 </dl>
 
@@ -1953,13 +1929,13 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id23"><span class="problematic" id="id24">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
-</ol>
-<p>Serialize a query to protobuf on the JSON format</p>
-<ol class="arabic simple" start="2">
-<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id25"><span class="problematic" id="id26">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id19"><span class="problematic" id="id20">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Serialize a query object to protobuf</p>
+<ol class="arabic simple" start="2">
+<li><p>get_substrait_json(query: str, connection: duckdb.DuckDBPyConnection = None, <a href="#id21"><span class="problematic" id="id22">*</span></a>, enable_optimizer: bool = True) -&gt; duckdb.DuckDBPyRelation</p></li>
+</ol>
+<p>Serialize a query to protobuf on the JSON format</p>
 </dd>
 </dl>
 
@@ -2086,11 +2062,11 @@ title: Python Client API
 <dd>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>read_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id27"><span class="problematic" id="id28">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>read_parquet(file_glob: str, binary_as_string: bool = False, <a href="#id23"><span class="problematic" id="id24">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Create a relation object from the Parquet files in file_glob</p>
 <ol class="arabic simple" start="2">
-<li><p>read_parquet(file_globs: List[str], binary_as_string: bool = False, <a href="#id29"><span class="problematic" id="id30">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
+<li><p>read_parquet(file_globs: List[str], binary_as_string: bool = False, <a href="#id25"><span class="problematic" id="id26">*</span></a>, file_row_number: bool = False, filename: bool = False, hive_partitioning: bool = False, union_by_name: bool = False, compression: object = None, connection: duckdb.DuckDBPyConnection = None) -&gt; duckdb.DuckDBPyRelation</p></li>
 </ol>
 <p>Create a relation object from the Parquet files in file_globs</p>
 </dd>
