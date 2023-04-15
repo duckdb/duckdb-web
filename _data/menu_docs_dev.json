@@ -493,7 +493,7 @@
                   "url": "alter_table"
                 },
                 {
-                  "page": "Attach",
+                  "page": "Attach/Detach",
                   "url": "attach"
                 },
                 {
@@ -551,6 +551,10 @@
                 {
                   "page": "Select",
                   "url": "select"
+                },
+                {
+                  "page": "Set/Reset",
+                  "url": "set"
                 },
                 {
                   "page": "Update",
