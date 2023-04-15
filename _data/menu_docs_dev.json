@@ -497,6 +497,10 @@
                   "url": "attach"
                 },
                 {
+                  "page": "Call",
+                  "url": "call"
+                },
+                {
                   "page": "Checkpoint",
                   "url": "checkpoint"
                 },

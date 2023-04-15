@@ -46,7 +46,7 @@ gem uninstall eventmachine
 gem install eventmachine --platform ruby
 ```
 
-Finally, navigate to the directory where you have cloned duckdb-web and run `bundler exec jekyll serve`. The website can then be browsed by going to `localhost:4000` in your browser.
+Finally, navigate to the directory where you have cloned duckdb-web and run `bundler exec jekyll serve` (this will take about a bit to be ready). The website can then be browsed by going to `localhost:4000` in your browser.
 
 ## Generating code docs
 
