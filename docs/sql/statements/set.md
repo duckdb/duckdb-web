@@ -33,5 +33,7 @@ The `RESET` statement changes the given DuckDB configuration option to the defau
 * session - Configuration value is used (or reset) only for the current session attached to a DuckDB instance.
 * global - Configuration value is used (or reset) across the entire DuckDB instance.
 
+When not specified, the default scope for the configuration option is used. For most options this is global.
+
 ### Configuration
 See the [Configuration](../configuration) page for the full list of configuration options.
