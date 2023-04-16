@@ -559,6 +559,10 @@
                 {
                   "page": "Update",
                   "url": "update"
+                },
+                {
+                  "page": "Vacuum",
+                  "url": "vacuum"
                 }
               ]
             },
