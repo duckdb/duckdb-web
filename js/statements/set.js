@@ -2,6 +2,7 @@ function GenerateSet(options = {}) {
     return Diagram([
         AutomaticStack([
             Keyword("SET"),
+            Choice(0, [new Skip(), Keyword("LOCAL"), Keyword("SESSION"), Keyword("GLOBAL")]),
             Expression("configuration-option"),
             Choice(0, ["=", Keyword("TO")]),
             Expression("configuration-value")
@@ -13,6 +14,7 @@ function GenerateReset(options = {}) {
     return Diagram([
         AutomaticStack([
             Keyword("RESET"),
+            Choice(0, [new Skip(), Keyword("local"), Keyword("session"), Keyword("global")]),
             Expression("configuration-option")
         ])
     ])
