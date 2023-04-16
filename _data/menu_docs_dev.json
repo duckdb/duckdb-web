@@ -561,6 +561,10 @@
                   "url": "update"
                 },
                 {
+                  "page": "Use",
+                  "url": "use"
+                },
+                {
                   "page": "Vacuum",
                   "url": "vacuum"
                 }
