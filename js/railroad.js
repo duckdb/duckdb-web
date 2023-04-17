@@ -1685,33 +1685,58 @@ function GenerateSampleClause(options) {
 	]
 }
 
+function GenerateJoinType(options) {
+	return [
+		Optional(Choice(0,[
+			Keyword("INNER"),
+			Sequence([
+				Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]), 
+				Optional(Keyword("OUTER"), "skip")
+			])
+		]), "skip")
+	]
+}
+
+function GenerateJoinCondition(options) {
+	return [
+		Optional(Choice(0, [
+			Sequence([
+				Keyword("ON"),
+				Expression()
+			]),
+			Sequence([
+				Keyword("USING"),
+				Keyword("("),
+				OneOrMore(Expression("column-name"), ","),
+				Keyword(")")
+			])
+		]), "skip")
+	]
+}
+
 function GenerateJoinClause(options) {
 	return [
 		Expression("table-or-subquery"),
-		OneOrMore(Sequence([
-				Sequence([
-					Optional(Keyword("NATURAL"), "skip"),
-					Optional(Choice(0,[
-						Keyword("INNER"),
-						Sequence([Choice(0, [Keyword("LEFT"), Keyword("RIGHT"), Keyword("FULL")]), Optional(Keyword("OUTER"), "skip")]),
-						Keyword("CROSS")
-					]), "skip"),
-					Keyword("JOIN")
-				]),
-				Expression("table-or-subquery"),
-				Choice(0, [
+		OneOrMore(
+			Sequence([
+				Choice(0,[
 					Sequence([
-						Keyword("ON"),
-						Expression()
+						Optional(
+							Choice(0,[
+								Keyword("NATURAL"),
+								Keyword("ASOF")
+							]), 
+							"skip"),
+						Expandable("join-type", options, "join-type", GenerateJoinType),
 					]),
-					Sequence([
-						Keyword("USING"),
-						Keyword("("),
-						OneOrMore(Expression("column-name"), ","),
-						Keyword(")")
-					])
-				])
-			]))
+					Keyword("CROSS"), 
+					Keyword("POSITIONAL")
+				]),
+				Keyword("JOIN"),
+				Expression("table-or-subquery"),
+				Expandable("join-conditions", options, "join-conditions", GenerateJoinCondition)
+			])
+		)
 	]
 }
 

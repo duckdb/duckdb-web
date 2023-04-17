@@ -133,6 +133,7 @@ If the JSON file contains a JSON array that does not contain objects, `array_of_
 ```sql
 SELECT * FROM read_json_auto(array_of_values.json, json_format=array_of_values);
 ```
+
 |  json  |
 |--------|
 | value1 |

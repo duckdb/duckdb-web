@@ -1,0 +1,29 @@
+name: Discord stackoverflow bot 
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 11 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.repository == 'duckdb/duckdb-web'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+          cache: 'pip'
+          
+      - run: pip install duckdb requests
+
+      - name: Trigger StackOverflow Bot
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          python3 ./scripts/stackoverflow_bot.py
