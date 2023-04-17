@@ -3,7 +3,7 @@ function GenerateUse(options = {}) {
         AutomaticStack([
             Keyword("USE"),
             Expression("database-name"),
-            Optional(Expression(".schema-name"), "skip")
+            Optional(Sequence([Keyword("."), Expression("schema-name")]), "skip")
         ])
     ])
 }

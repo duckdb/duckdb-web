@@ -6,19 +6,20 @@ expanded: SQL
 railroad: statements/vacuum.js
 ---
 
-The `VACUUM` statement garbage collects DuckDB.
+The `VACUUM` statement is primarily in place for PostgreSQL compatibility.
 
 ### Examples
 ```sql
--- Clean up all tables in all databases.
+-- No-op.
 VACUUM;
--- Clean up everything, then run analyze.
+-- Rebuild database statistics.
 VACUUM ANALYZE;
--- Garbage collect the given database and column.
-VACUUM memory.main.my_table(my_column);
+-- Rebuild statistics for the table & column.
+VACUUM ANALYZE memory.main.my_table(my_column);
 ```
 
 ### Syntax
 <div id="rrdiagram1"></div>
 
-The `VACUUM` statement is modeled on the PostgreSQL [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) statement.
+The `VACUUM` statement alone does nothing. `VACUUM ANALYZE` will recompute table statistics if they
+have become stale due to table updates or deletions.
