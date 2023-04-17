@@ -428,8 +428,7 @@ DuckDB is a free and open-source database management system (MIT licensed). It a
 Listen to Laurens' appearance on the Disseminate podcast:
 * [Spotify](https://open.spotify.com/show/6IQIF9oRSf0FPjBUj0AkYA)
 * [Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5hY2FzdC5jb20vcHVibGljL3Nob3dzL2Rpc3NlbWluYXRl)
-* [Apple](https://podcasts.apple.com/us/podcast/disseminate-the-computer-science-research-podcast/id1631350873 
-)
+* [Apple](https://podcasts.apple.com/us/podcast/disseminate-the-computer-science-research-podcast/id1631350873)
 
 <a name="predication"></a>
 #### Appendix A: Predication
