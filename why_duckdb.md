@@ -68,6 +68,7 @@ DuckDB's development started while the main developers were public servants in T
 * [The Case for In-Process Analytics](https://homepages.cwi.nl/~hannes/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
 * [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
 * [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
+* [DuckDB: Introducing a New Class of Data Management Systems (I/O Magazine, ICT Research Platform Nederland)](https://ict-research.nl/wordpress/wp-content/uploads/2023/04/IO-magazine-NR1-2023.pdf#page=10) (article)
 
 ## Other Projects
 Here are some projects that we know of that use DuckDB. If you would like your project to be added here, open a GitHub issue.
