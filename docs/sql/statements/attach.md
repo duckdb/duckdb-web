@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Attach
+title: Attach/Detach
 selected: Documentation/SQL/Attach
 expanded: SQL
 railroad: statements/attach.js

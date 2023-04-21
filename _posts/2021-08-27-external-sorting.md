@@ -423,6 +423,13 @@ DuckDB is a free and open-source database management system (MIT licensed). It a
 
 [Discuss this post on Hacker News](https://news.ycombinator.com/item?id=28328657)
 
+[Read our paper on sorting at ICDE '23](https://hannes.muehleisen.org/publications/ICDE2023-sorting.pdf)
+
+Listen to Laurens' appearance on the Disseminate podcast:
+* [Spotify](https://open.spotify.com/show/6IQIF9oRSf0FPjBUj0AkYA)
+* [Google](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5hY2FzdC5jb20vcHVibGljL3Nob3dzL2Rpc3NlbWluYXRl)
+* [Apple](https://podcasts.apple.com/us/podcast/disseminate-the-computer-science-research-podcast/id1631350873)
+
 <a name="predication"></a>
 #### Appendix A: Predication
 Another technique we have used to speed up merge sort is _predication_.

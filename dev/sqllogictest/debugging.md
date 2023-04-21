@@ -13,7 +13,7 @@ After that, a debugger can be attached to the program and the test can be debugg
 
 ```
 gdb: break query_break if line==43
-lldb: break -n query_break -c line==43
+lldb: break s -n query_break -c line==43
 ```
 
 You can also skip certain queries from executing by placing `mode skip` in the file, followed by an optional `mode unskip`. Any queries between the two statements will not be executed.

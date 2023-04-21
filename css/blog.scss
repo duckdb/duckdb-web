@@ -141,10 +141,6 @@ h5 {
 			margin-top: 140px;
 			margin-bottom: 80px;
 			h1{
-				margin-top: 60px;}
-			h2{
-				font-size: 34px;
-				line-height: 39px;
 				margin-top: 60px;
 			}
 			blockquote p {
@@ -166,6 +162,15 @@ h5 {
 			ul li, ol li{
 				margin-top: 0;
 				margin-bottom: 0;
+			}
+			iframe{
+				outline: 0;
+				border: 1px solid #D0D0D0;
+			}
+			h2{
+				font-size: 31px;
+				line-height: 35px;
+				margin-top: 60px;
 			}
 			h3{
 				font-size: 28px;
