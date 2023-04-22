@@ -5,7 +5,7 @@ redirect_from:
   - /docs/data/csv/multiple_files
 ---
 
-DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read. See the [combining schemas][combining_schemas] page for tips on reading files with different schemas.
+DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read. See the [combining schemas](combining_schemas) page for tips on reading files with different schemas.
 
 ### CSV
 
