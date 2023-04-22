@@ -445,6 +445,14 @@
               "url": "r"
             },
             {
+              "page": "Rust",
+              "url": "rust"
+            },
+            {
+              "page": "Scala",
+              "url": "scala"
+            },
+            {
               "page": "Wasm",
               "slug": "wasm",
               "subsubfolderitems": [
