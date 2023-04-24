@@ -187,6 +187,10 @@
           "slug": "data_viewers",
           "subfolderitems": [
             {
+              "page": "Tableau",
+              "url": "tableau"
+            },
+            {
               "page": "Tad",
               "url": "tad"
             }

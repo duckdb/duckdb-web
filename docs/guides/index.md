@@ -77,4 +77,5 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Data Viewers
 
-* [How to use Tad to view tabular data files and DuckDb databases](../guides/data_viewers/tad)
+* [How to use Tad to view tabular data files and DuckDB databases](../guides/data_viewers/tad)
+* [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)
