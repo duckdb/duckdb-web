@@ -453,6 +453,10 @@
               "url": "scala"
             },
             {
+              "page": "Swift",
+              "url": "swift"
+            },
+            {
               "page": "Wasm",
               "slug": "wasm",
               "subsubfolderitems": [
