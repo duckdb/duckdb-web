@@ -36,6 +36,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-redirect-from
+  - jekyll-sitemap
 excerpt_separator: <!--more-->
 
 twitter:
