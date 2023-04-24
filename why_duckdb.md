@@ -65,7 +65,7 @@ DuckDB's development started while the main developers were public servants in T
 * [DuckDB Testing - Present and Future (DBTest 2022 Keynote)](https://www.youtube.com/watch?v=BgC79Zt2fPs) (Video Presentation, ca 1h)
 * [Push-Based Execution in DuckDB (CWI Database Architectures Seminar)](https://www.youtube.com/watch?v=MA0OsvYFGrc) (Video Presentation, ca. 1h)
 * [Fastest Table Sort in the West - Redesigning DuckDB’s Sort (DSDSD)](https://www.youtube.com/watch?v=m6Yg2sXGui0) (Video Presentation, ca. 20min)
-* [The Case for In-Process Analytics](https://homepages.cwi.nl/~hannes/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
+* [The Case for In-Process Analytics](/pdf/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
 * [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
 * [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
 
