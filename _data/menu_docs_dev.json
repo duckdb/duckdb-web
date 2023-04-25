@@ -15,6 +15,20 @@
           "url": "index"
         },
         {
+          "page": "DuckDB Features",
+          "slug": "duckdb_features",
+          "subfolderitems": [
+            {
+              "page": "ASOF JOIN",
+              "url": "asof_join"
+            },
+            {
+              "page": "Full Text Search",
+              "url": "full_text_search"
+            }
+          ]
+        },
+        {
           "page": "Data Import & Export",
           "slug": "import",
           "subfolderitems": [

@@ -6,6 +6,11 @@ selected: Guides
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.
 
+## DuckDB SQL
+
+* [ASOF Join](../guides/duckdb_features/asof_join)
+* [Full Text Search](../guides/duckdb_features/full_text_search)
+
 ## SQL: Data Import & Export
 
 ##### CSV Files
