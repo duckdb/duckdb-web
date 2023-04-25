@@ -31,7 +31,7 @@ These operators treat `NULL` values as equal.
 ## BETWEEN and IS (NOT) NULL
 <div id="rrdiagram1"></div>
 
-Besides the stanadrd comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
+Besides the standard comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
 
 | Predicate | Description |
 |:---|:---|
