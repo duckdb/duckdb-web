@@ -6,14 +6,6 @@ selected: DuckDB Full Text Search
 
 Here's an example of building a full text index of Shakespeare's plays.
 
-We'll use an existing table that has the data we're concerned about.
-
-Details on how this file was generated are here:
-- https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html
-- The Columns are:  line_id, play_name, line_number, speaker, text_entry.
-- The line_id "KL/2.4.132" means King Lear, Act 2, Scene 4, Line 132.
-- We need a unique key for each row in order for full text searching to work.
-
 ```SQL
 create table corpus as
   select * from read_parquet(
@@ -22,21 +14,23 @@ create table corpus as
 
 ```
 describe corpus;
-┌─────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
-│ column_name │ column_type │  null   │   key   │ default │ extra │
-│   varchar   │   varchar   │ varchar │ varchar │ varchar │ int32 │
-├─────────────┼─────────────┼─────────┼─────────┼─────────┼───────┤
-│ line_id     │ VARCHAR     │ YES     │         │         │       │
-│ play_name   │ VARCHAR     │ YES     │         │         │       │
-│ line_number │ VARCHAR     │ YES     │         │         │       │
-│ speaker     │ VARCHAR     │ YES     │         │         │       │
-│ text_entry  │ VARCHAR     │ YES     │         │         │       │
-└─────────────┴─────────────┴─────────┴─────────┴─────────┴───────┘
+┌─────────────┬─────────────┬─────────┐
+│ column_name │ column_type │  null   │
+├─────────────┼─────────────┼─────────┤
+│ line_id     │ VARCHAR     │ YES     │
+│ play_name   │ VARCHAR     │ YES     │
+│ line_number │ VARCHAR     │ YES     │
+│ speaker     │ VARCHAR     │ YES     │
+│ text_entry  │ VARCHAR     │ YES     │
+└─────────────┴─────────────┴─────────┘
 ```
 
-Create the index. Parameters are table name, key column,
-and the column(s) to index.  We will just index the single column
-text_entry, which contains the text of the lines in the play.
+the text of each line is in `text_entry`, and a unique key for each
+line is in `line_id`.
+
+First, we create the index, specifying the table name, the unique id
+column, and the column(s) to index.  We will just index the single column
+`text_entry`, which contains the text of the lines in the play.
 
 ```SQL
 INSTALL 'fts';
@@ -44,7 +38,9 @@ LOAD fts;
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```
 
-The table is now ready to query. Rows with no match return a null score.
+The table is now ready to query using the
+[Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25)
+ranking function.  Rows with no match return a null score.
 
 What does Shakespeare say about butter?
 
@@ -79,3 +75,10 @@ SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
 
 Unlike standard indexes, full text indexes don't auto-updated, so you need to
 `PRAGMA drop_fts_index(my_fts_index)` and recreate it.
+
+## Note on generating the corpus table
+
+Details are [here](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
+- The Columns are:  line_id, play_name, line_number, speaker, text_entry.
+- We need a unique key for each row in order for full text searching to work.
+- The line_id "KL/2.4.132" means King Lear, Act 2, Scene 4, Line 132.
