@@ -81,7 +81,7 @@ When an update statement is executed on a column that is present in an index - t
 
 ##### Over-Eager Unique Constraint Checking
 
-Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this - transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not yet actually been removed from the index yet. For example:
+Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this - transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not actually been removed from the index yet. For example:
 
 ```sql
 CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR);
