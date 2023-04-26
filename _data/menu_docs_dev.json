@@ -843,6 +843,10 @@
             "url": "configuration"
           },
           {
+            "page": "Constraints",
+            "url": "constraints"
+          },
+          {
             "page": "Indexes",
             "url": "indexes"
           },
