@@ -4,64 +4,78 @@ title: DuckDB Full Text Search
 selected: DuckDB Full Text Search
 ---
 
-Here's a simple "hello world" full text search example using the easily accessible
-(and parsable!) kjv.txt. Note that everything past the table creation can
-be done in the duckdb cli.
+Here's an example of building a full text index of Shakespeare's plays.
 
-First, some code to read kjv.txt and create a table for it.
+We'll use an existing table that has the data we're concerned about.
 
-```python
-% cat duckdb-full-text-search.py
+Details on how this file was generated are here:
+- https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html
+- The Columns are:  line_id, play_name, line_number, speaker, text_entry.
+- The line_id "KL/2.4.132" means King Lear, Act 2, Scene 4, Line 132.
+- We need a unique key for each row in order for full text searching to work.
 
-import re
-import duckdb
-
-# -------- prepare the data -----------
-fd = open('kjv.txt') # https://www.o-bible.com/download/kjv.txt
-fd.readline() # skip first line
-data = []
-for line in fd.readlines():
-    line = line.rstrip()
-    # book, chap, verse, body = re.match(r'(\d?[A-Za-z]+)(\d+):(\d+)\s+(.*)', line).groups()
-    ref, body = re.match(r'(\d?[A-Za-z]+\d+:\d+)\s+(.*)', line).groups()
-    data.append((ref,body,))
-
-# -------- create the table -----------
-db = duckdb.connect('fts_demo.ddb')
-db.cursor().execute("CREATE TABLE corpus(ref TEXT, body TEXT)")
-db.cursor().executemany("INSERT INTO corpus(ref, body) VALUES($1, $2)", data)
+```SQL
+create table corpus as
+  select * from read_parquet(
+    'https://github.com/marhar/duckdb_tools/raw/main/full-text-shakespeare/shakespeare.parquet');
 ```
 
-Everything else we need to do can be done in the DuckDB CLI.
+```
+describe corpus;
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬───────┐
+│ column_name │ column_type │  null   │   key   │ default │ extra │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ int32 │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼───────┤
+│ line_id     │ VARCHAR     │ YES     │         │         │       │
+│ play_name   │ VARCHAR     │ YES     │         │         │       │
+│ line_number │ VARCHAR     │ YES     │         │         │       │
+│ speaker     │ VARCHAR     │ YES     │         │         │       │
+│ text_entry  │ VARCHAR     │ YES     │         │         │       │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴───────┘
+```
 
-```sql
+Create the index. Parameters are table name, key column,
+and the column(s) to index.  We will just index the single column
+text_entry, which contains the text of the lines in the play.
+
+```SQL
 INSTALL 'fts';
 LOAD fts;
-
--- create the index on table corpus, pk ref, indexing ref and body.
-PRAGMA create_fts_index('corpus', 'ref', 'ref', 'body');
+PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```
 
-Now we can issue full text queries against that index.  Let's look for "whale".
+The table is now ready to query. Rows with no match return a null score.
+
+What does Shakespeare say about butter?
 
 ```
-SELECT fts_main_corpus.match_bm25(ref, 'whale') AS score,
-  ref, body AS "search for 'whale'"
-FROM corpus
-WHERE score IS NOT NULL
-ORDER BY score;
-
-┌───────────────────┬──────────┬───────────────────────────────────────────────┐
-│       score       │   ref    │              search for 'whale'               │
-│      double       │ varchar  │                    varchar                    │
-├───────────────────┼──────────┼───────────────────────────────────────────────┤
-│   2.7248255618541 │ Eze32:2  │ Son of man, take up a lamentation for Phara…  │
-│ 3.839526928067141 │ Ge1:21   │ And God created great whales, and every liv…  │
-│ 3.839526928067141 │ Mat12:40 │ For as Jonas was three days and three night…  │
-│ 6.497660955190547 │ Job7:12  │ Am I a sea, or a whale, that thou settest a…  │
-└───────────────────┴──────────┴───────────────────────────────────────────────┘
+SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
+    line_id,play_name,speaker,text_entry
+  FROM corpus
+  WHERE score IS NOT NULL
+  ORDER BY score;
+┌───────────────────┬─────────────┬──────────────────────┬──────────────┬──────────────────────────────────────────────┐
+│       score       │   line_id   │      play_name       │   speaker    │                  text_entry                  │
+│      double       │   varchar   │       varchar        │   varchar    │                   varchar                    │
+├───────────────────┼─────────────┼──────────────────────┼──────────────┼──────────────────────────────────────────────┤
+│ 2.683490686835495 │ H4/2.4.115  │ Henry IV             │ PRINCE HENRY │ Didst thou never see Titan kiss a dish of …  │
+│ 3.781282331450016 │ H4/1.2.21   │ Henry IV             │ FALSTAFF     │ prologue to an egg and butter.               │
+│ 3.781282331450016 │ H4/2.1.55   │ Henry IV             │ Chamberlain  │ They are up already, and call for eggs and…  │
+│ 3.781282331450016 │ H4/4.2.21   │ Henry IV             │ FALSTAFF     │ toasts-and-butter, with hearts in their be…  │
+│ 3.781282331450016 │ H4/4.2.62   │ Henry IV             │ PRINCE HENRY │ already made thee butter. But tell me, Jac…  │
+│ 3.781282331450016 │ AWW/4.1.40  │ Alls well that end…  │ PAROLLES     │ butter-womans mouth and buy myself another…  │
+│ 3.781282331450016 │ AWW/5.2.9   │ Alls well that end…  │ Clown        │ henceforth eat no fish of fortunes butteri…  │
+│ 3.781282331450016 │ AYLI/3.2.93 │ As you like it       │ TOUCHSTONE   │ right butter-womens rank to market.          │
+│ 3.781282331450016 │ KL/2.4.132  │ King Lear            │ Fool         │ kindness to his horse, buttered his hay.     │
+│ 3.781282331450016 │ MWW/2.2.260 │ Merry Wives of Win…  │ FALSTAFF     │ Hang him, mechanical salt-butter rogue! I …  │
+│ 3.781282331450016 │ MWW/2.2.284 │ Merry Wives of Win…  │ FORD         │ rather trust a Fleming with my butter, Par…  │
+│ 3.781282331450016 │ MWW/3.5.7   │ Merry Wives of Win…  │ FALSTAFF     │ Ill have my brains taen out and buttered, …  │
+│ 3.781282331450016 │ MWW/3.5.102 │ Merry Wives of Win…  │ FALSTAFF     │ to heat as butter; a man of continual diss…  │
+│ 6.399093176300027 │ H4/2.4.494  │ Henry IV             │ Carrier      │ As fat as butter.                            │
+├───────────────────┴─────────────┴──────────────────────┴──────────────┴──────────────────────────────────────────────┤
+│ 14 rows                                                                                                    5 columns │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 Unlike standard indexes, full text indexes don't auto-updated, so you need to
 `PRAGMA drop_fts_index(my_fts_index)` and recreate it.
-
