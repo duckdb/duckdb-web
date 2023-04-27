@@ -15,8 +15,8 @@
           "url": "index"
         },
         {
-          "page": "DuckDB Features",
-          "slug": "duckdb_features",
+          "page": "SQL Features",
+          "slug": "sql_features",
           "subfolderitems": [
             {
               "page": "ASOF JOIN",
