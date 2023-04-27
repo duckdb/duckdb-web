@@ -4,6 +4,7 @@ title: DuckDB Full Text Search
 selected: DuckDB Full Text Search
 ---
 
+A full text index allows for a query to quickly search for all occurences of individual words within longer text strings.
 Here's an example of building a full text index of Shakespeare's plays.
 
 ```SQL
@@ -73,8 +74,8 @@ SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Unlike standard indexes, full text indexes don't auto-updated, so you need to
-`PRAGMA drop_fts_index(my_fts_index)` and recreate it.
+Unlike standard indexes, full text indexes don't auto-update as the underlying data is changed, so you need to
+`PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
 
 ## Note on generating the corpus table
 
