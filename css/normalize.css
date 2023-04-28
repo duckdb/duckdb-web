@@ -19,7 +19,7 @@ hgroup,
 nav,
 section,
 summary {
-  display: block;
+  display: list-item;
 }
 
 /*
