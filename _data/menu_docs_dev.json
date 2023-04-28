@@ -917,6 +917,10 @@
             {
               "page": "Substrait",
               "url": "substrait"
+            },
+            {
+              "page": "Spatial",
+              "url": "spatial"
             }
           ]
         }
