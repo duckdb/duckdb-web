@@ -17,7 +17,10 @@ footer,
 header,
 hgroup,
 nav,
-section,
+section {
+  display: block;
+}
+
 summary {
   display: list-item;
 }
