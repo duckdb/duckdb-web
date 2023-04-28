@@ -44,6 +44,7 @@ SELECT * FROM prices;
 ```sql
 SELECT * FROM sales;
 ```
+```
 ┌─────────┬─────────────────────┬──────────┐
 │  item   │      sale_time      │ quantity │
 │ varchar │      timestamp      │  int32   │
