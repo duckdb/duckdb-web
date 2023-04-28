@@ -7,14 +7,16 @@ selected: DuckDB Full Text Search
 A full text index allows for a query to quickly search for all occurences of individual words within longer text strings.
 Here's an example of building a full text index of Shakespeare's plays.
 
-```SQL
+```sql
 create table corpus as
   select * from read_parquet(
     'https://github.com/marhar/duckdb_tools/raw/main/full-text-shakespeare/shakespeare.parquet');
 ```
 
-```
+```sql
 describe corpus;
+```
+```
 ┌─────────────┬─────────────┬─────────┐
 │ column_name │ column_type │  null   │
 ├─────────────┼─────────────┼─────────┤
@@ -33,7 +35,7 @@ First, we create the index, specifying the table name, the unique id
 column, and the column(s) to index.  We will just index the single column
 `text_entry`, which contains the text of the lines in the play.
 
-```SQL
+```sql
 INSTALL 'fts';
 LOAD fts;
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
@@ -45,12 +47,14 @@ ranking function.  Rows with no match return a null score.
 
 What does Shakespeare say about butter?
 
-```
+```sql
 SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
     line_id,play_name,speaker,text_entry
   FROM corpus
   WHERE score IS NOT NULL
   ORDER BY score;
+```
+```
 ┌───────────────────┬─────────────┬──────────────────────┬──────────────┬──────────────────────────────────────────────┐
 │       score       │   line_id   │      play_name       │   speaker    │                  text_entry                  │
 │      double       │   varchar   │       varchar        │   varchar    │                   varchar                    │
