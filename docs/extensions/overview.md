@@ -42,6 +42,7 @@ select * from duckdb_extensions();
 | parquet           | Adds support for reading and writing parquet files                   |                 |
 | postgres_scanner  | Adds support for reading from a Postgres database                    | postgres        |
 | autocomplete | Adds supports for autocomplete in the shell          |                 |
+| spatial           | Adds support for geospatial data processing                          |                 |
 | sqlite_scanner    | Adds support for reading SQLite database files                       | sqlite, sqlite3 |
 | substrait        | Adds support for the Substrait integration                           |
 | tpcds             | Adds TPC-DS data generation and query support                        |                 |
