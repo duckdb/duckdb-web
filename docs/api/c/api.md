@@ -64,6 +64,7 @@ selected: API Reference
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nf"><a href="#duckdb_malloc">duckdb_malloc</a></span>(<span class="kt">size_t</span> <span class="k">size</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_free">duckdb_free</a></span>(<span class="kt">void</span> *<span class="k">ptr</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_vector_size">duckdb_vector_size</a></span>();
+<span class="kt">bool</span> <span class="nf"><a href="#duckdb_string_is_inlined">duckdb_string_is_inlined</a></span>(<span class="k">duckdb_string_t</span> <span class="k">string</span>);
 </code></pre></div></div>
 ### **Date/Time/Timestamp Helpers**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nf"><a href="#duckdb_from_date">duckdb_from_date</a></span>(<span class="kt">duckdb_date</span> <span class="k">date</span>);
@@ -289,6 +290,7 @@ selected: API Reference
 ---
 Creates a new database or opens an existing database file stored at the the given path.
 If no path is given a new in-memory database is created instead.
+The instantiated database should be closed with 'duckdb_close'
 
 #### Syntax
 ---
@@ -370,6 +372,7 @@ The database object to shut down.
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
+The instantiated connection should be closed using 'duckdb_disconnect'
 
 #### Syntax
 ---
@@ -1400,6 +1403,20 @@ This is the amount of tuples that will fit into a data chunk created by `duckdb_
 
 The vector size.
 
+<br>
+
+### duckdb_string_is_inlined
+---
+Whether or not the duckdb_string_t value is inlined.
+This means that the data of the string does not have a separate allocation.
+
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_string_is_inlined</span>(<span class="k">
+</span>  <span class="k">duckdb_string_t</span> <span class="k">string
+</span>);
+</code></pre></div></div>
 <br>
 
 ### duckdb_from_date
