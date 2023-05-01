@@ -3,7 +3,7 @@ layout: docu
 title: Spatial
 selected: Documentation/Spatial
 ---
-The __spatial__ extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
+The __spatial__ extension provides support for geospatial data processing in DuckDB.
 
 ## GEOMETRY type
 The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type is probably works very different from what you'd expect. 
@@ -51,16 +51,16 @@ Construct new geometries from other geometries or other data.
 | GEOMETRY ST_Boundary(GEOMETRY)                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_Buffer(GEOMETRY)                           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_Centroid(GEOMETRY)                         | 🧭        | 🦆        | 🦆             | 🦆          | 🦆              |
-| GEOMETRY ST_Collect(LIST(GEOMETRY))                    | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| GEOMETRY ST_Collect(GEOMETRY[])                    | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
 | GEOMETRY ST_Normalize(GEOMETRY)                        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_SimplifyPreserveTopology(GEOMETRY, DOUBLE) | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_Simplify(GEOMETRY, DOUBLE)                 | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_Union(GEOMETRY, GEOMETRY)                  | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_Intersection(GEOMETRY, GEOMETRY)           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_MakeLine                                   | 🦆        |          | 🦆             |            |                |
+| GEOMETRY ST_MakeLine(GEOMETRY[])                                   | 🦆        |          | 🦆             |            |                |
 | GEOMETRY ST_Envelope(GEOMETRY)                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_FlipCoordinates(GEOMETRY)                  | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-| GEOMETRY ST_Transform(GEOMETRY)                        | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| GEOMETRY ST_Transform(GEOMETRY, VARCHAR, VARCHAR)                        | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
 
 
 ### Spatial Properties
