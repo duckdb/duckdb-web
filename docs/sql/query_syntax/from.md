@@ -149,10 +149,22 @@ It can be specified as an `OUTER` join to find unpaired rows
 
 ```sql
 -- attach prices or NULLs to stock trades
-SELECT t.*, p.price
+SELECT *
 FROM trades t ASOF LEFT JOIN prices p 
   ON t.symbol = p.symbol AND t.when >= p.when
 ```
+
+If you use the `USING` syntax with a `SELECT *`, the query will return the left side (probe) column
+values for the matches, not the right side (build) column values:
+
+```sql
+SELECT *
+FROM trades t ASOF LEFT JOIN prices p 
+  ON t.symbol = p.symbol AND t.when >= p.when
+-- Returns symbol, trades.when, price
+```
+
+To get the `prices` time, you will need to list the columns explicitly. 
 
 ### Syntax
 <div id="rrdiagram"></div>
