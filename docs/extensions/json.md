@@ -166,7 +166,7 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of array lengths |
 | `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of **OBJECT**, **ARRAY**, **BIGINT**, **UBIGINT**, **VARCHAR**, **BOOLEAN**, **NULL**. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of types |
 | `json_keys(`*`json `*`[, `*`path`*`])` | Returns the keys of `json` as a **LIST** of **VARCHAR**, if `json` is a JSON object. If *`path`* is specified, return the keys of the JSON object at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of **LIST** of **VARCHAR** |
-| `json_structure(`*`json`*`)` | Return the structure of *`json`*. Throws an error if the structure is inconsistent (incompatible types in an array) |
+| `json_structure(`*`json`*`)` | Return the structure of *`json`*. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
 | `json_contains(`*`json_haystack`*`, `*`json_needle`*`)` | Returns `true` if *`json_needle`* is contained in *`json_haystack`*. Both parameters are of JSON type, but *`json_needle`* can also be a numeric value or a string, however the string must be wrapped in double quotes |
 
 Examples:
@@ -197,12 +197,12 @@ SELECT json_keys FROM example;
 SELECT json_structure(j) FROM example;
 -- {"family":"VARCHAR","species":["VARCHAR"]}
 SELECT json_structure('["duck",{"family":"anatidae"}]');
--- Invalid Input Error: Inconsistent JSON structure
-SELECT json_contains('{"key":"value"}','"value"');
+-- ["JSON"]
+SELECT json_contains('{"key":"value"}', '"value"');
 -- true
-SELECT json_contains('{"key":1}',1);
+SELECT json_contains('{"key":1}', 1);
 -- true
-SELECT json_contains('{"top_key":{"key":"value"}}','{"key":"value"}');
+SELECT json_contains('{"top_key":{"key":"value"}}', '{"key":"value"}');
 -- true
 ```
 
