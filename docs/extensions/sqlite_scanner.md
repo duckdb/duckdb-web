@@ -99,7 +99,7 @@ INSERT INTO numbers VALUES ('hello');
 
 DuckDB is a strongly typed database system, as such, it requires all columns to have defined types and the system rigorously checks data for correctness.
 
-When querying SQLite using DuckDB, a mapping of column types must be chosen. DuckDB follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
+When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
 
 1. If the declared type contains the string "INT" then it is translated into the type `BIGINT`
 2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then it is translated into `VARCHAR`.
