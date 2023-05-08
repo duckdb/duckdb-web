@@ -132,10 +132,6 @@ This is called an _as-of join_:
 SELECT t.*, p.price
 FROM trades t ASOF JOIN prices p 
   ON t.symbol = p.symbol AND t.when >= p.when
-
--- same query with USING, but the last attribute must be the inequality
-SELECT t.*, p.price
-FROM trades t ASOF JOIN prices p USING (symbol, when)
 ```
 
 The `ASOF` join requires at least one inequality condition on the ordering field,
@@ -143,7 +139,7 @@ and the left table must be side that is greater in that inequality.
 Any other conditions must be equalities (or `NOT DISTINCT`).
 This means that the left/right order of the tables is significant.
 
-`ASOF` joins only pair each left side row with at most one right side row.
+`ASOF` joins each left side row with at most one right side row.
 It can be specified as an `OUTER` join to find unpaired rows 
 (e.g., trades without prices or prices which have no trades.)
 
@@ -154,17 +150,24 @@ FROM trades t ASOF LEFT JOIN prices p
   ON t.symbol = p.symbol AND t.when >= p.when
 ```
 
-If you use the `USING` syntax with a `SELECT *`, the query will return the left side (probe) column
-values for the matches, not the right side (build) column values:
+`ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
+but the *last* attribute in the list must be the inequality:
 
 ```sql
 SELECT *
-FROM trades t ASOF LEFT JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when
--- Returns symbol, trades.when, price
+FROM trades t ASOF JOIN prices p USING (symbol, when)
+-- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
-To get the `prices` time, you will need to list the columns explicitly. 
+If you combine `USING` with a `SELECT *` like this, 
+the query will return the left side (probe) column values for the matches, 
+not the right side (build) column values. 
+To get the `prices` times in the example, you will need to list the columns explicitly:
+
+```sql
+SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
+FROM trades t ASOF LEFT JOIN prices p USING (symbol, when)
+```
 
 ### Syntax
 <div id="rrdiagram"></div>
