@@ -207,6 +207,10 @@
             {
               "page": "Tad",
               "url": "tad"
+            },
+            {
+              "page": "YouPlot",
+              "url": "youplot"
             }
           ]
         }
