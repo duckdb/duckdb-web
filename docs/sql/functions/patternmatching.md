@@ -161,6 +161,35 @@ regexp_matches('abc', '^(b|c).*')  -- FALSE
 regexp_matches('abc', '(?i)A')     -- TRUE
 ```
 
+The `regexp_matches` function also supports the following options.
+
+| Option | Description |
+|:---|:---|
+|`'c'`|case-sensitive matching|
+|`'i'`|case-insensitive matching|
+|`'l'`|match literals instead of regular expression tokens|
+|`'m'`, `'n'`, `'p'`|newline sensitive matching|
+|`'s'`| non-newline sensitive matching|
+|`'g'`| global replace, only available for regexp_replace|
+
+```sql
+regexp_matches('abcd', 'ABC', 'c')-- FALSE
+regexp_matches('abcd', 'ABC', 'i') -- TRUE
+regexp_matches('ab^/$cd', '^/$', 'l') -- TRUE
+regexp_matches('hello\nworld', 'hello.world', 'p') -- FALSE
+regexp_matches('hello\nworld', 'hello.world', 's') -- TRUE
+```
+
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the `RE2` library doesn't match '.' to newline.
+
+| Original | Optimized equivalent |
+|:---|:---|
+|`regexp_matches('hello world', '^hello', 's')`|`prefix('hello world', 'hello')`|
+|`regexp_matches('hello world', 'world$', 's')`|`suffix('hello world', 'world')`|
+|`regexp_matches('hello world', 'hello.world', 's')`|`LIKE 'hello_world'`|
+|`regexp_matches('hello world', 'he.*rld', 's')`|`LIKE '%he%rld'`|
+
+
 The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where d is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Below are some examples:
 
 ```sql
