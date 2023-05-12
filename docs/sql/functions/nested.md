@@ -185,6 +185,18 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 -- [2, 10, 3]
 ```
 
+### array_to_string
+
+Concatenates list/array elements using an optional delimiter.
+```sql
+SELECT array_to_string([1, 2, 3], '-') AS str;
+-- 1-2-3
+
+-- this is equivalent to the following SQL
+SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
+-- 1-2-3
+```
+
 ## Sorting Lists
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
