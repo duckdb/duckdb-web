@@ -10,15 +10,15 @@ The DuckDB internal storage format is currently in flux, and is expected to chan
 When you update duckdb and open a database file, you might encounter an error message about incompatible storage formats, pointing to this page.
 To move your database(s) to newer format you only need the older and the newer duckdb executable.
 
-Opening your database file with older duckdb and usign the SQL statement `"EXPORT DATABASE 'tmp';"` allows to save the whole state of the current database in use inside folder `tmp`.
+Opening your database file with the older duckdb and using the SQL statement `"EXPORT DATABASE 'tmp';"` allows you to save the whole state of the current database in use inside folder `tmp`.
 `tmp` content will be overridden, so choose an empty/non yet existing folder.
 
-Starting then the newer duckdb and executing `"IMPORT DATABASE 'tmp';"` (pointing to the previously populated folder) allow to load the database, that can be then saved to the file you pointed duckdb to.
+Then starting the newer duckdb and execute `"IMPORT DATABASE 'tmp';"` (pointing to the previously populated folder) allows you to load the database, which can be then saved to the file you pointed duckdb to.
 
 A bash two-liner (to be adapted with the right file names and executable locations) is:
 ```bash
-user@device $ /older/version/duckddb mydata.db -c "EXPORT DATABASE 'tmp';"
-user@device $ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp';"
+$ /older/version/duckdb mydata.db -c "EXPORT DATABASE 'tmp';"
+$ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp';"
 ```
 
 After this `mydata.db` will be untouched with the old format, `mydata.new.db` will contain the same data but in a format accessible from more recent duckdb, and folder `tmp` will old the same data in an universal format as different files.
@@ -30,7 +30,7 @@ Check [EXPORT documentation](docs/sql/statements/export) for more details on the
 DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
 
 ```bash
-user@device $ hexdump -n 20 -C mydata.db
+$ hexdump -n 20 -C mydata.db
 00000000  01 d0 e2 63 9c 13 39 3e  44 55 43 4b 2b 00 00 00  |...c..9>DUCK+...|
 00000010  00 00 00 00                                       |....|
 00000014

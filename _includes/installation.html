@@ -142,16 +142,12 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 		<br/>
 		git checkout v{{ site.currentduckdbversion }}
 		<br/>
-		git submodule init --update
-		<br/>
 		make -j8
 	</div>
 	<div class="master cli source">
 		git clone https://github.com/duckdb/duckdb.git
 		<br/>
 		cd duckdb
-		<br/>
-		git submodule init --update
 		<br/>
 		make -j8
 	</div>
