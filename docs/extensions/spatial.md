@@ -21,11 +21,11 @@ All of these are implicitly castable to `GEOMETRY` but with a conversion cost, s
 ## Spatial scalar Functions
 The spatial extension implements a large number of scalar functions and overloads. Most of these are implemented using the [GEOS](https://libgeos.org/) library, but we'd like to implement more of them natively in this extension to better utilize DuckDB's vectorized execution and memory management. The following symbols are used to indicate which implementation is used:
 
-- 🧭 - GEOS - functions that are implemented using the [GEOS](https://libgeos.org/) library
+🧭 - GEOS - functions that are implemented using the [GEOS](https://libgeos.org/) library
 
-- 🦆 - DuckDB - functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
+🦆 - DuckDB - functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
 
-- 🔄 - CAST(GEOMETRY) - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
+🔄 - CAST(GEOMETRY) - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
 
 The currently implemented spatial functions can roughly be categorized into the following groups:
 
@@ -187,3 +187,6 @@ WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 - `FORMAT`: is the only required option and must be set to `GDAL` to use the GDAL based copy function.
 - `DRIVER`: is the GDAL driver to use for the export. See the table above for a list of available drivers.
 - `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
+
+## Extra Information
+See [the repo](https://github.com/duckdblabs/duckdb_spatial) for the source code of the extension, or the [blog post](/2023/04/28/spatial).
