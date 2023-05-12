@@ -53,7 +53,7 @@ Any file name input to the read_parquet function can either be an exact filename
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
 | `*`        | matches any number of any characters (including none)     |
-| `**'       | matches any number of subdirectories (including none)     |
+| `**`       | matches any number of subdirectories (including none)     |
 | `?`        | matches any single character                              |
 | `[abc]`    | matches one character given in the bracket                |
 | `[a-z]`    | matches one character from the range given in the bracket |
