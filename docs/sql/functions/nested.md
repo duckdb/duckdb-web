@@ -161,7 +161,7 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 
 The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g. `min`, `histogram` or `sum`.
 
-`list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments provide customization options to tailor the aggregation process according to specific requirements.
+`list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments are passed directly to the aggregate function, which serves as the second argument of `list_aggregate`.
 
 ```sql
 SELECT list_aggregate([1, 2, -4, NULL], 'min');
