@@ -161,6 +161,8 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 
 The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g. `min`, `histogram` or `sum`.
 
+`list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments provide customization options to tailor the aggregation process according to specific requirements.
+
 ```sql
 SELECT list_aggregate([1, 2, -4, NULL], 'min');
 -- -4
@@ -170,6 +172,9 @@ SELECT list_aggregate([2, 4, 8, 42], 'sum');
 
 SELECT list_aggregate([[1, 2], [NULL], [2, 10, 3]], 'last');
 -- [2, 10, 3]
+
+SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|')
+-- 2|4|8|42
 ```
 
 The following is a list of existing rewrites. Rewrites simplify the use of the list aggregate function by only taking the list (column) as their argument. `list_avg`, `list_var_samp`, `list_var_pop`, `list_stddev_pop`, `list_stddev_samp`, `list_sem`, `list_approx_count_distinct`, `list_bit_xor`, `list_bit_or`, `list_bit_and`, `list_bool_and`, `list_bool_or`, `list_count`, `list_entropy`, `list_last`, `list_first`, `list_kurtosis`, `list_min`, `list_max`, `list_product`, `list_skewness`, `list_sum`, `list_string_agg`, `list_mode`, `list_median`, `list_mad` and `list_histogram`.
