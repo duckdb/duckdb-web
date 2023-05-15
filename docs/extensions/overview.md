@@ -71,6 +71,7 @@ The list of supported platforms may increase over time, but the current list of 
 * osx_amd64
 * osx_arm64
 * windows_amd64
+* windows_amd64_rtools
 
 See above for a list of extension names and how to pull the latest list of extensions.
 
