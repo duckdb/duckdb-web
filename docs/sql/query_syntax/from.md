@@ -98,7 +98,7 @@ WHERE s1.time > s2.time
 
 #### Semi and Anti Joins
 
-Semi joins allow a user to return rows from the left table that have at last one match in the right table. Anti joins allow a user to return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the resulting table will never have more rows than the left hand side table. Semi anti joins provide the same logic as [(NOT) IN](../expressions/in) statements.
+Semi joins return rows from the left table that have at last one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result  will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [(NOT) IN](../expressions/in) statements.
 
 ```sql
 -- return a list of cars that have a valid region.
@@ -109,7 +109,7 @@ ON cars.region = region.id;
 
 ```sql
 -- return a list of cars with no recorded safety data.
-SELECT s1.t_id, s2.t_id 
+SELECT cars.name, cars.manufacturer
 FROM cars ANTI JOIN safety_data
 ON cars.safety_report_id = safety_data.report_id;
 ```
