@@ -35,7 +35,7 @@ Each column not present in the explicit or implicit column list will be filled w
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
 
-### `BY POSITION`
+### BY POSITION
 
 The order that values are inserted into the columns of the table is determined by the order that the columns were declared in.
 This can be overriden by providing column names as part of the target, for example:
@@ -46,7 +46,7 @@ INSERT INTO tbl(b, a) VALUES (5, 42);
 This will insert `5` into `b` and `42` into `a`.
 The values supplied by the VALUES clause or query are associated with the column list left-to-right.
 
-### `BY NAME`
+### BY NAME
 
 The names of the column list of the SELECT statement are matched against the column names of the table to determine the order that values should be inserted into the table, even if the order of the columns in the table differs from the order of the values in the SELECT statement.
 For example:
@@ -56,7 +56,10 @@ INSERT INTO tbl BY NAME (select 42 as b);
 ```
 This will insert `42` into `b` and insert `NULL` (or its default value) into `a`.
 
-It's important to note that when using `INSERT INTO <table> BY NAME`, the column names specified in the SELECT statement must match the column names in the table. If a column name is misspelled or does not exist in the table, an error will occur. It's not a problem however if columns are missing from the SELECT statement, as those will be filled with the default value.
+It's important to note that when using `INSERT INTO <table> BY NAME`, the column names specified in the SELECT statement must match the column names in the table.  
+If a column name is misspelled or does not exist in the table, an error will occur.  
+
+This is not a problem however if columns are missing from the SELECT statement, as those will be filled with the default value.
 
 ## On Conflict Clause
 
