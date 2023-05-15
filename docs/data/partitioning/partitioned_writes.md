@@ -42,7 +42,7 @@ By default the partitioned write will not allow overwriting existing directories
 
 #### Filename pattern
 
-By default files will be named `data_0.parquet` or `data_1.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
+By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
 * `{i}` will be replaced by an index
 * `{uuid}` will be replaced by a 128 bits long UUID
 
