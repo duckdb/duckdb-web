@@ -328,6 +328,10 @@
                   "url": "relational_api"
                 },
                 {
+                  "page": "Function API",
+                  "url": "function"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 }
