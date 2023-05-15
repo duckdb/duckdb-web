@@ -42,6 +42,12 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_has(`*`list`*`, `*`element`*`)`             | Alias for `list_contains`.                                                                                                                                                          | `list_has([1, 2, NULL], 1)`              | `true`            |
 | `array_contains(`*`list`*`, `*`element`*`)`       | Alias for `list_contains`.                                                                                                                                                          | `array_contains([1, 2, NULL], 1)`        | `true`            |
 | `array_has(`*`list`*`, `*`element`*`)`            | Alias for `list_contains`.                                                                                                                                                          | `array_has([1, 2, NULL], 1)`             | `true`            |
+| `list_intersect(`*`list1`*`, `*`list2`*`)`        | Returns a list of all the elements that exist in both l1 and l2, without duplicates.                                                                                                | `list_intersect([1,2,3], [2,3,4])`       | `[2, 3]`          |
+| `array_intersect(`*`list1`*`, `*`list2`*`)`       | Alias for `list_intersect`.                                                                                                                                                         | `array_intersect([1,2,3], [2,3,4])`      | `[2, 3]`          |
+| `list_has_any(`*`list1`*`, `*`list2`*`)`          | Returns true if any elements exist is both lists.                                                                                                                                   | `list_has_any([1,2,3], [2,3,4])`         | `true`            |
+| `array_has_any(`*`list1`*`, `*`list2`*`)`         | Alias for `list_has_any`.                                                                                                                                                           | `array_has_any([1,2,3], [2,3,4])`        | `true`            |
+| `list_has_all(`*`list`*`, `*`sub-list`*`)`        | Returns true if all elements of sub-list exist in list.                                                                                                                             | `list_has_all(l, [4,6])`                 | `true`            |
+| `array_has_all(`*`list`*`, `*`sub-list`*`)`       | Alias for `list_has_all`                                                                                                                                                            | `array_has_all(l, [4,6])`                | `true`            |
 | `list_position(`*`list`*`, `*`element`*`)`        | Returns the index of the element if the list contains the element.                                                                                                                  | `list_contains([1, 2, NULL], 2)`         | `2`               |
 | `list_indexof(`*`list`*`, `*`element`*`)`         | Alias for `list_position`.                                                                                                                                                          | `list_indexof([1, 2, NULL], 2)`          | `2`               |
 | `array_position(`*`list`*`, `*`element`*`)`       | Alias for `list_position`.                                                                                                                                                          | `array_position([1, 2, NULL], 2)`        | `2`               |
@@ -65,6 +71,16 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_unique(`*`list`*`)`                         | Counts the unique elements of a list.                                                                                                                                               | `list_unique([1, 1, NULL, -3, 1, 5])`    | `3`               |
 | `array_unique(`*`list`*`)`                        | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
 | `list_any_value(`*`list`*`)`                      | Returns the first non-null value in the list                                                                                                                                        | `list_any_value([NULL, -3])`             | `-3`              |
+
+## List Operators
+The following operators are supported for lists:
+
+| Operator | Description                                                                               | Example                    | Result          |
+|----------|-------------------------------------------------------------------------------------------|----------------------------|-----------------|
+| `&&`     | Alias for `list_intersect`                                                                | `[1,2,3,4,5] && [2,5,5,6]` | `[2,5]`         |
+| `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1,2,3,4] @> [3,4,3]`     | `true`          |
+| `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1,4] <@ [1,2,3,4]`       | `true`          |
+| `\|\|`   | Alias for `list_concat`                                                                   | `[1,2,3] \|\| [4,5,6]`     | `[1,2,3,4,5,6]` |
 
 ## List Comprehension
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
