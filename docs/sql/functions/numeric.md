@@ -12,7 +12,8 @@ The table below shows the available mathematical operators for numeric types.
 | `+` | addition | `2 + 3` | 5 |
 | `-` | subtraction | `2 - 3` | -1 |
 | `*` | multiplication | `2 * 3` | 6 |
-| `/` | division | `4 / 2` | 2 |
+| `/` | float division | `5 / 2` | 2.5 |
+| `//` | division | `5 // 2` | 2 |
 | `%` | modulo (remainder) | `5 % 4` | 1 |
 | `**` | exponent | `3 ** 4` | 81 |
 | `^` | exponent (alias for `**`) | `3 ^ 4` | 81 |
@@ -21,6 +22,10 @@ The table below shows the available mathematical operators for numeric types.
 | `<<` | bitwise shift left | `1 << 4` | 16 |
 | `>>` | bitwise shift right | `8 >> 2` | 2 |
 | `!` | factorial of x. Computes the product of the current integer and all integers below it  | `4!` | 24 |
+
+There are two division operators: `/` and `//`.<br/>
+They are equivalent when at least one of the operands is a FLOAT or a DOUBLE.<br/>
+When both operands are integers, `/` performs floating points division (`5 / 2 = 2.5`) while `//` performs integer division (`5 // 2 = 2`).
 
 The modulo, bitwise, and factorial operators work only on integral data types,
 whereas the others are available for all numeric data types.
