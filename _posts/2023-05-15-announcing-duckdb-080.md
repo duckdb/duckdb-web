@@ -17,11 +17,21 @@ To install the new version, please visit the [installation guide](https://duckdb
 <!--more-->
 
 #### What's new in 0.8.0
-There have been too many changes to discuss them each in detail, but we would like to highlight the new pivot and unpivot statements, improvements to parallel data import/export, time series joins, recursive globbing, lazy-loading of storage metadata, user-defined functions for Python, Arrow Database Connectivity Support and the Swift Integration. Below is a summary of those new features with examples, starting with two breaking changes in our SQL dialect.
+There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features! 
+* New pivot and unpivot statements
+* Improvements to parallel data import/export
+* Time series joins
+* Recursive globbing
+* Lazy-loading of storage metadata for faster startup times
+* User-defined functions for Python
+* Arrow Database Connectivity (ADBC) support 
+* New Swift integration
+
+Below is a summary of those new features with examples, starting with two breaking changes in our SQL dialect that are designed to produce more intuitive results by default.
 
 
 #### Breaking SQL Changes
-This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). The old behavior can be restored using the following settings:
+This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DuckDB is stil in Beta, we recognize that many DuckDB queries are already used in production. So, the old behavior can be restored using the following settings:
 
 ```sql
 SET integer_division=true;
@@ -55,7 +65,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 
 #### New SQL Features
 
-[**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. Here is a short example:
+[**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
 
 ```sql
 CREATE TABLE sales(year INT, amount INT);
@@ -96,6 +106,8 @@ Please [refer to the documentation](/docs/guides/sql_features/asof_join.html) fo
 
 [**Default Parallel CSV Reader.**](https://github.com/duckdb/duckdb/pull/6977). In this release, the parallel CSV reader has been vastly improved and is now the default CSV reader. We would like to thank everyone that has tried out the experimental reader for their valuable feedback and reports. The `experimental_parallel_csv` flag has been deprecated and is no longer required. The parallel CSV reader enables much more efficient reading of large CSV files. 
 
+<!-- Would it be possible to include the data size and hardware used? -->
+
 ```sql
 CREATE TABLE lineitem AS FROM lineitem.csv;
 ```
@@ -129,7 +141,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 #### Storage Improvements
 
-[**Lazy-Loading Table Metadata**.](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indices and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries.
+[**Lazy-Loading Table Metadata**.](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indices and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
 
 |         Query          | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
 |------------------------|--------|--------|-------|---------|
