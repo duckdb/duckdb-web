@@ -30,7 +30,9 @@ The type of python function, either `native` or `arrow`.
 The way NULL value parameters should be handled.
 
 `exception_handling: Optional[str]`  
-The way exceptions that occurred during execution of the function should be handled.
+The way exceptions that occurred during execution of the function should be handled.  
+
+To remove a previously created function, use `remove_function`, the only parameter this needs is `name: str`.
 
 ### Type Annotation
 
