@@ -9,7 +9,7 @@ title: Partitioned Writes
 -- write a table to a hive partitioned data set of parquet files
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 -- write a table to a hive partitioned data set of CSV files, allowing overwrites
-COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), ALLOW_OVERWRITE 1);
+COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE 1);
 ```
 
 ### Partitioned Writes
@@ -38,4 +38,17 @@ The values of the partitions are automatically extracted from the data. Note tha
 
 #### Overwriting
 
-By default the partitioned write will not allow overwriting existing directories. Use the `ALLOW_OVERWRITE` option to allow overwriting an existing directory.
+By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
+
+#### Filename pattern
+
+By default files will be named `data_0.parquet` or `data_1.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create filenames specified by the user:
+* `{i}` will be replaced by an index
+* `{uuid}` will be replaced by a 128 bits long UUID
+
+```sql
+-- write a table to a hive partitioned data set of .parquet files, with unique filenames
+COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "orders_{i}");
+-- write a table to a hive partitioned data set of .parquet files, with unique filenames
+COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN "file_{uuid}");
+```
