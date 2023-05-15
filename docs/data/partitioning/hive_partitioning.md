@@ -60,6 +60,9 @@ orders
          └── file5.parquet
 ```
 
+#### Autodetection
+By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `HIVE_PARTITIONING` flag is enabled. The autodetection will look at the names of the folders and search for a 'key'='value' pattern. This behaviour can be overridden by setting the `HIVE_PARTITIONING` flag manually.
+
 #### Writing Partitioned Files
 
 See the [Partitioned Writes](partitioned_writes) section.
