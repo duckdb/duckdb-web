@@ -34,8 +34,9 @@ The following two table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
-| `read_json_objects(`*`filename`*`)`   | Read 1 JSON objects from **filename**, where **filename** can be list of files, or a glob pattern |
+| `read_json_objects(`*`filename`*`)`   | Read 1 JSON objects from **filename**, where **filename** can also be a list of files, or a glob pattern |
 | `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'newline_delimited'` |
+| `read_json_objects_auto(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'auto'` |
 
 These functions have the following parameters:
 
@@ -45,6 +46,8 @@ These functions have the following parameters:
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | bool | false |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.json.gz** will use gzip, **t.json** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | varchar | `'auto'` |
+| `filename` | Whether or not an extra `filename` column should be included in the result. | bool | false |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../data/partitioning/hive_partitioning). | bool | false |
 
 The `format` parameter specifies how to read the JSON from a file.
 With `'unstructured'`, the top-level JSON is read, e.g.:
@@ -93,7 +96,7 @@ DuckDB also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
 |:---|:---|
-| `read_json(`*`filename`*`)`   | Read JSON from **filename**, where **filename** can be list of files, or a glob pattern |
+| `read_json(`*`filename`*`)`   | Read JSON from **filename**, where **filename** can also be a list of files, or a glob pattern |
 | `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **format** set to `'newline_delimited'` |
 | `read_json_auto(`*`filename`*`)`   | Alias for `read_json` with all auto-detection enabled |
 | `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter **format** set to `'newline_delimited'` |
@@ -109,6 +112,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas). | bool | false |
 
 Example usage:
 ```sql
