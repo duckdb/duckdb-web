@@ -24,8 +24,8 @@ The table below shows the available mathematical operators for numeric types.
 | `~` | bitwise negation | `~15` | -16 |
 | `!` | factorial of x. Computes the product of the current integer and all integers below it  | `4!` | 24 |
 
-There are two division operators: `/` and `//`.<br/>
-They are equivalent when at least one of the operands is a FLOAT or a DOUBLE.<br/>
+There are two division operators: `/` and `//`.
+They are equivalent when at least one of the operands is a FLOAT or a DOUBLE.
 When both operands are integers, `/` performs floating points division (`5 / 2 = 2.5`) while `//` performs integer division (`5 // 2 = 2`).
 
 The modulo, bitwise, and negation and factorial operators work only on integral data types,
