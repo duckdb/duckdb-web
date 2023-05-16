@@ -5,7 +5,7 @@ selected: Client APIs
 ---
 
 You can create a DuckDB function out of a python function so it can be used in SQL queries.
-Just like regular [functions](../../sql/functions/overview.md) they need to have a name, a return type and parameter types.
+Just like regular [functions](../../sql/functions/overview) they need to have a name, a return type and parameter types.
 
 ### Creating Functions
 
