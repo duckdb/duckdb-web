@@ -191,6 +191,10 @@
               "url": "dbeaver"
             },
             {
+              "page": "Harlequin SQL IDE",
+              "url": "harlequin"
+            },
+            {
               "page": "Rill Data Developer",
               "url": "rill"
             }

@@ -77,6 +77,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 ## SQL Editors / IDE's
 
 * [How to set up the DBeaver SQL IDE](../guides/sql_editors/dbeaver)
+* [How to use the Harlequin terminal-based SQL IDE](../guides/sql_editors/harlequin)
 * [How to set up Rill Data Developer](../guides/sql_editors/rill)
 
 
