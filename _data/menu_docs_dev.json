@@ -591,6 +591,10 @@
                   "url": "set"
                 },
                 {
+                  "page": "Unpivot",
+                  "url": "unpivot"
+                },
+                {
                   "page": "Update",
                   "url": "update"
                 },
