@@ -8,7 +8,8 @@ The `DuckDBPyType` class represents a type instance of our [data types](../../sq
 
 ### Converting from other types
 
-Using the implicit conversion powers provided to us by pybind11 we have set up conversions from many existing types, including python builtin types.
+To make the API as easy to use as possible, we have added implicit conversions from existing type objects to a DuckDBPyType instance.
+This means that wherever a DuckDBPyType object is expected, it is also possible to provide any of the options listed below.
 
 #### Python Builtins
 The table below shows the mapping of Python Builtin type to DuckDB type.
