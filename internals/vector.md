@@ -9,7 +9,7 @@ title: Execution Format
 ### Data Flow
 
 DuckDB uses a vectorized query execution model. This means that our operators are optimized to work on Vectors of a fixed size.
-This fized size is commonly referred to in the code as `STANDARD_VECTOR_SIZE`.  
+This fixed size is commonly referred to in the code as `STANDARD_VECTOR_SIZE`.  
 The default STANDARD_VECTOR_SIZE is 2048 tuples.
 
 ### Internals
