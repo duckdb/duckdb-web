@@ -54,6 +54,9 @@ Below are parameters that can be passed in to the JSON reader.
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
+| `filename` | Whether or not an extra `filename` column should be included in the result. | bool | false |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | bool | false |
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../multiple_files/combining_schemas). | bool | false |
 
 When using `read_json_auto`, every parameter that supports auto-detection is enabled.
 
