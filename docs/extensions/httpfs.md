@@ -12,7 +12,7 @@ Depending on the client you use, no action may be required, or you might have to
 
 # HTTP(S)
 
-With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV and
+With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV, JSON, and
 Parquet files.
 
 ```sql

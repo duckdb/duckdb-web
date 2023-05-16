@@ -10,24 +10,74 @@ The JSON extension makes use of the **JSON** logical type.
 The **JSON** logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as **VARCHAR**, i.e., a regular string.
 All JSON creation functions return values of this type.
 
+We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
+```sql
+-- Cast JSON to our STRUCT type
+SELECT '{"duck":42}'::JSON::STRUCT(duck INTEGER);
+-- {'duck': 42}
+
+-- And back:
+SELECT {duck: 42}::JSON;
+-- {"duck":42}
+```
+
+This works for our nested types as shown in the example, but also for non-nested types:
+```sql
+select '2023-05-12'::DATE::JSON;
+-- "2023-05-12"
+```
+
+The only exception to this behavior is the cast from `VARCHAR` to `JSON`, which does not alter the data, but instead parses and validates the contents of the `VARCHAR` as JSON.
+
 ## JSON Table Functions
 The following two table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
 | `read_json_objects(`*`filename`*`)`   | Read 1 JSON objects from **filename**, where **filename** can be list of files, or a glob pattern |
-| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **lines** set to `'true'` |
+| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'newline_delimited'` |
 
 These functions have the following parameters:
 
 | Name | Description | Type | Default
 |:---|:---|:---|:---|
-| `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `1048576` |
-| `lines` | When set to `'true` only newline-delimited JSON can be read, which can be read in parallel, When set to `'false'`, pretty-printed JSON can be read. Set to `'auto'` to automatically detect | varchar | `'false'` |
-| `ignore_errors` | Whether to ignore parse errors (only possible when `lines` is `'true'`) | bool | false |
+| `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `16777216` |
+| `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
+| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | bool | false |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.json.gz** will use gzip, **t.json** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | varchar | `'auto'` |
 
-Examples:
+The `format` parameter specifies how to read the JSON from a file.
+With `'unstructured'`, the top-level JSON is read, e.g.:
+```json
+{
+  "duck": 42
+}
+{
+  "goose": [1,2,3]
+}
+```
+Will result in two objects being read.
+
+With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
+```json
+{"duck": 42}
+{"goose": [1,2,3]}
+```
+Will also result in two objects being read.
+
+With `'array'`, each array element is read, e.g.:
+```json
+[
+  {
+    "duck": 42
+  },
+  {
+    "goose": [1,2,3]
+  }
+```
+Again, will result in two objects being read.
+
+Example usage:
 ```sql
 SELECT * FROM read_json_objects('my_file1.json');
 -- {"duck":42,"goose":[1,2,3]}
@@ -44,23 +94,23 @@ DuckDB also supports reading JSON as a table, using the following functions:
 | Function | Description |
 |:---|:---|
 | `read_json(`*`filename`*`)`   | Read JSON from **filename**, where **filename** can be list of files, or a glob pattern |
-| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **lines** set to `'true'` |
-| `read_json_auto(`*`filename`*`)`   | Read 1 json objects from **filename**, where **filename** can be list of files, or a glob pattern |
-| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter **lines** set to `'true'` |
+| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **format** set to `'newline_delimited'` |
+| `read_json_auto(`*`filename`*`)`   | Alias for `read_json` with all auto-detection enabled |
+| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter **format** set to `'newline_delimited'` |
 
-Besides the `maximum_object_size`, `lines`, `ignore_errors` and `compression`, these functions have additional parameters:
+Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g. `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | struct | `(empty)` |
-| `json_format` | Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']` | varchar | `'records'` |
+| `records` | Can be one of `['auto', 'true', 'false']` | varchar | `'records'` |
 | `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | bool | `false` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `2048` |
+| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `20480` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
 
-Examples:
+Example usage:
 ```sql
 SELECT * FROM read_json('my_file1.json', columns={duck: 'INTEGER'});
 ```
@@ -83,7 +133,6 @@ FROM read_json(['my_file1.json','my_file2.json'],
 | 43 | [4, 5, 6] | 3.3 |
 
 DuckDB can automatically detect the types like so:
-
 ```sql
 SELECT goose, duck FROM read_json_auto('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
@@ -94,8 +143,8 @@ SELECT goose, duck FROM '*.json.gz'; -- equivalent
 | [1, 2, 3] | 42 |
 | [4, 5, 6] | 43 |
 
-DuckDB can read (and auto-detect) a variety of formats, specified with the `json_format` parameter.
-Querying a JSON file that contains an `'array_of_records'`, e.g.:
+DuckDB can read (and auto-detect) a variety of formats, specified with the `format` parameter.
+Querying a JSON file that contains an `'array'`, e.g.:
 ```json
 [
   {
@@ -108,7 +157,8 @@ Querying a JSON file that contains an `'array_of_records'`, e.g.:
   }
 ]
 ```
-Can be queried exactly the same as a JSON file that contains `'records'`, e.g.:
+
+Can be queried exactly the same as a JSON file that contains `'unstructured'` JSON, e.g.:
 ```json
 {
   "duck": 42,
@@ -126,32 +176,57 @@ Both can be read as the table:
 | 42 | 4.2 |
 | 43 | 4.3 |
 
-Note that the `lines` parameter is independent of `json_format`, i.e., any JSON format can be either pretty-printed or newline-delimited.
-
 If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DuckDB can still read it.
-Considered the following two JSON files:
+This is specified with the `records` parameter.
+The `records` parameter specifies whether the JSON contains records that should be unpacked into individual columns, i.e., reading the following file with `records`:
 ```json
-[1, 2, 3]
-[4, 5, 6]
+{"duck": 42, "goose": [1,2,3]}
+{"duck": 43, "goose": [4,5,6]}
 ```
-And similarly:
-```json
-[
-  [1, 2, 3],
-  [4, 5, 6]
-]
-```
-By reading the first example with `json_format='values'` and the second example with `json_format='array_of_values'`, you will get the same result:
+Results in two columns:
+
+| duck | goose |
+|:---|:---|
+| 42 | [1,2,3] |
+| 42 | [4,5,6] |
+
+You can read the same file with `records` set to `'false'`, to get a single column, which is a `STRUCT` containing the data:
 
 | json |
 |:---|
-| [1, 2, 3] |
-| [4, 5, 6] |
+| {'duck': 42, 'goose': [1, 2, 3]} |
+ |{'duck': 43, 'goose': [4, 5, 6]} |
 
 For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](https://duckdb.org/2023/03/03/json.html).
 
 ## JSON Import/Export
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
+
+By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY TRUE`, i.e.,
+```sql
+COPY (SELECT * FROM range(5)) TO 'my.json' (ARRAY TRUE);
+```
+Will create the following file:
+```json
+[
+  {"range":0},
+  {"range":1},
+  {"range":2},
+  {"range":3},
+  {"range":4}
+]
+```
+
+This can be read like so:
+```sql
+CREATE TABLE test (range BIGINT);
+COPY test FROM 'my.json' (ARRAY TRUE);
+```
+
+The format can be detected automatically the format like so:
+```sql
+COPY test FROM 'my.json' (AUTO_DETECT TRUE);
+```
 
 ## JSON Scalar Functions
 The following scalar JSON functions can be used to gain information about the stored JSON values.
@@ -166,10 +241,35 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of array lengths |
 | `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of **OBJECT**, **ARRAY**, **BIGINT**, **UBIGINT**, **VARCHAR**, **BOOLEAN**, **NULL**. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of types |
 | `json_keys(`*`json `*`[, `*`path`*`])` | Returns the keys of `json` as a **LIST** of **VARCHAR**, if `json` is a JSON object. If *`path`* is specified, return the keys of the JSON object at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of **LIST** of **VARCHAR** |
-| `json_structure(`*`json`*`)` | Return the structure of *`json`*. Throws an error if the structure is inconsistent (incompatible types in an array) |
+| `json_structure(`*`json`*`)` | Return the structure of *`json`*. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
 | `json_contains(`*`json_haystack`*`, `*`json_needle`*`)` | Returns `true` if *`json_needle`* is contained in *`json_haystack`*. Both parameters are of JSON type, but *`json_needle`* can also be a numeric value or a string, however the string must be wrapped in double quotes |
 
-Examples:
+The JSONPointer syntax separates each field with a `/`.
+For example, to extract the first element of the array with key `"duck"`, you can do:
+```sql
+SELECT json_extract('{"duck":[1,2,3]}', '/duck/0');
+-- 1
+```
+
+The JSONPath syntax separates fields with a `.`, and accesses array elements with `[i]`, and always starts with `$`. Using the same example, we can do:
+```sql
+SELECT json_extract('{"duck":[1,2,3]}', '$.duck[0]');
+-- 1
+```
+
+JSONPath is more expressive, and can also access from the back of lists:
+```sql
+SELECT json_extract('{"duck":[1,2,3]}', '$.duck[#-1]');
+-- 3
+```
+
+JSONPath also allows escaping syntax tokens, using double quotes:
+```sql
+SELECT json_extract('{"duck.goose":[1,2,3]}', '$."duck.goose"[1]');
+-- 2
+```
+
+Other examples:
 ```sql
 CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
@@ -197,12 +297,12 @@ SELECT json_keys FROM example;
 SELECT json_structure(j) FROM example;
 -- {"family":"VARCHAR","species":["VARCHAR"]}
 SELECT json_structure('["duck",{"family":"anatidae"}]');
--- Invalid Input Error: Inconsistent JSON structure
-SELECT json_contains('{"key":"value"}','"value"');
+-- ["JSON"]
+SELECT json_contains('{"key":"value"}', '"value"');
 -- true
-SELECT json_contains('{"key":1}',1);
+SELECT json_contains('{"key":1}', 1);
 -- true
-SELECT json_contains('{"top_key":{"key":"value"}}','{"key":"value"}');
+SELECT json_contains('{"top_key":{"key":"value"}}', '{"key":"value"}');
 -- true
 ```
 

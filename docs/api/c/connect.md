@@ -40,6 +40,7 @@ duckdb_close(&db);
 ---
 Creates a new database or opens an existing database file stored at the the given path.
 If no path is given a new in-memory database is created instead.
+The instantiated database should be closed with 'duckdb_close'
 
 #### Syntax
 ---
@@ -121,6 +122,7 @@ The database object to shut down.
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
+The instantiated connection should be closed using 'duckdb_disconnect'
 
 #### Syntax
 ---
