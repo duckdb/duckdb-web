@@ -61,7 +61,7 @@ https://extensions.duckdb.org/v{release_version_number}/{platform_name}/{extensi
 ```
 For example:
 ```
-https://extensions.duckdb.org/v0.7.1/windows_amd64/json.duckdb_extension.gz
+https://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
 ```
 
 The list of supported platforms may increase over time, but the current list of platforms includes:
