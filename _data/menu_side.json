@@ -49,6 +49,10 @@
         {
           "page": "Profiling",
           "url": "/dev/profiling"
+        },
+        {
+          "page": "Building",
+          "url": "/dev/building"
         }
       ]
     },
