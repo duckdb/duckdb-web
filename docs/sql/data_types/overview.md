@@ -16,7 +16,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `BLOB` | `BYTEA`, `BINARY,` `VARBINARY` | variable-length binary data |
 | `DATE` |   | calendar date (year, month day) |
 | `DOUBLE` | `FLOAT8`, `NUMERIC`, `DECIMAL` | double precision floating-point number (8 bytes) |
-| `DECIMAL(s, p)` | | fixed-precision floating point number with the given scale and precision |
+| `DECIMAL(w, s)` | | fixed-precision floating point number with the given width (precision) and scale |
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
