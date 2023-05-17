@@ -14,6 +14,8 @@ The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This rel
 
 To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
+> Note: The release build is still in progress so artifacts and extensions might still be missing.
+
 <!--more-->
 
 #### What's new in 0.8.0
