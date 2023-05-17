@@ -13,7 +13,7 @@ SELECT * FROM 'todos.json';
 -- read_json with custom options
 SELECT *
 FROM read_json('todos.json',
-               json_format='array_of_records',
+               format='array',
                columns={userId: 'UBIGINT',
                         id: 'UBIGINT',
                         title: 'VARCHAR',
@@ -43,33 +43,36 @@ Below are parameters that can be passed in to the JSON reader.
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `1048576` |
-| `lines` | When set to `'true` only newline-delimited JSON can be read, which can be read in parallel, When set to `'false'`, pretty-printed JSON can be read. Set to `'auto'` to automatically detect | varchar | `'false'` |
-| `ignore_errors` | Whether to ignore parse errors (only possible when `lines` is `'true'`) | bool | false |
+| `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `16777216` |
+| `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
+| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | bool | false |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. **t.json.gz** will use gzip, **t.json** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | varchar | `'auto'` |
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g. `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | struct | `(empty)` |
-| `json_format` | Can be one of `['auto', 'records', 'array_of_records', 'values', 'array_of_values']`. See examples below. | varchar | `'records'` |
+| `records` | Can be one of `['auto', 'true', 'false']` | varchar | `'records'` |
 | `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | bool | `false` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `2048` |
+| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `20480` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `'iso'` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `'iso'`|
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
+| `filename` | Whether or not an extra `filename` column should be included in the result. | bool | false |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | bool | false |
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../multiple_files/combining_schemas). | bool | false |
 
 When using `read_json_auto`, every parameter that supports auto-detection is enabled.
 
-### Examples of json_format settings
-The JSON extension can attempt to determine the format of a JSON file when setting `json_format` to `auto`.  
-Here are some example JSON files and the corresponding `json_format` settings that should be used.
+### Examples of format settings
+The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.  
+Here are some example JSON files and the corresponding `format` settings that should be used.
 
-In each of the below cases, the `json_format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
+In each of the below cases, the `format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
 A query of this shape would work in each case:
 ```sql
 SELECT * FROM filename.json;
 ```
 
-#### records
-The records setting can be used to parse newline-delimited JSON.
-Each line is a JSON object (or record).
+#### Format: newline_delimited
+With `format='newline_delimited'` newline-delimited JSON can be parsed.
+Each line is a JSON.
 
 ```json
 {"key1":"value1", "key2": "value1"}
@@ -77,7 +80,7 @@ Each line is a JSON object (or record).
 {"key1":"value3", "key2": "value3"}
 ```
 ```sql
-SELECT * FROM read_json_auto(records.json, json_format=records);
+SELECT * FROM read_json_auto(records.json, format=newline_delimited);
 ```
 
 |  key1  |  key2  |
@@ -86,7 +89,7 @@ SELECT * FROM read_json_auto(records.json, json_format=records);
 | value2 | value2 |
 | value3 | value3 |
 
-#### array_of_records
+#### Format: array
 If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
 ```json
 [
@@ -96,7 +99,7 @@ If the JSON file contains a JSON array of objects (pretty-printed or not), `arra
 ]
 ```
 ```sql
-SELECT * FROM read_json_auto(array_of_records.json, json_format=array_of_records);
+SELECT * FROM read_json_auto(array.json, format=array);
 ```
 
 |  key1  |  key2  |
@@ -105,40 +108,79 @@ SELECT * FROM read_json_auto(array_of_records.json, json_format=array_of_records
 | value2 | value2 |
 | value3 | value3 |
 
-#### values
-In the case of values, DuckDB can even handle files that are not valid JSON.
-Here, each row is treated as its own JSON value.
+#### Format: unstructured
+
+If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
 ```json
-["value1","value2"]
-["value3","value4"]
+{
+    "key1":"value1",
+    "key2": "value1"
+}
+{
+    "key1":"value2",
+    "key2": "value2"
+}
+{
+    "key1":"value3",
+    "key2": "value3"
+}
 ```
 ```sql
-SELECT * FROM read_json_auto(values.json, json_format=values);
+SELECT * FROM read_json_auto(unstructured.json, format=unstructured);
 ```
 
-|       json       |
-|------------------|
-| [value1, value2] |
-| [value3, value4] |
+|  key1  |  key2  |
+|--------|--------|
+| value1 | value1 |
+| value2 | value2 |
+| value3 | value3 |
 
-#### array_of_values
-If the JSON file contains a JSON array that does not contain objects, `array_of_values` may be used.
+### Examples of records settings
+The JSON extension can attempt to determine whether a JSON file contains records when setting `records=auto`.
+When `records=true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
+
+Continuing with the same example file from before:
 ```json
-[
-    "value1",
-    "value2",
-    "value3"
-]
+{"key1":"value1", "key2": "value1"}
+{"key1":"value2", "key2": "value2"}
+{"key1":"value3", "key2": "value3"}
 ```
 ```sql
-SELECT * FROM read_json_auto(array_of_values.json, json_format=array_of_values);
+SELECT * FROM read_json_auto(records.json, records=true);
 ```
 
-|  json  |
-|--------|
-| value1 |
-| value2 |
-| value3 |
+|  key1  |  key2  |
+|--------|--------|
+| value1 | value1 |
+| value2 | value2 |
+| value3 | value3 |
+
+When `records=false`, the JSON extension will not unpack the top-level objects, and create `STRUCT`s instead:
+```sql
+SELECT * FROM read_json_auto(records.json, records=false);
+```
+
+|               json               |
+|----------------------------------|
+| {'key1': value1, 'key2': value1} |
+| {'key1': value2, 'key2': value2} |
+| {'key1': value3, 'key2': value3} |
+
+This is especially useful if we have non-object JSON, for example:
+```json
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+```
+```sql
+SELECT * FROM read_json_auto(arrays.json, records=false);
+```
+
+|   json    |
+|-----------|
+| [1, 2, 3] |
+| [4, 5, 6] |
+| [7, 8, 9] |
 
 ### Writing
 

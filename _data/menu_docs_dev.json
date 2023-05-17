@@ -191,6 +191,10 @@
               "url": "dbeaver"
             },
             {
+              "page": "Harlequin SQL IDE",
+              "url": "harlequin"
+            },
+            {
               "page": "Rill Data Developer",
               "url": "rill"
             }
@@ -457,6 +461,10 @@
                   "url": "relational_api"
                 },
                 {
+                  "page": "Types API",
+                  "url": "types"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 }
@@ -589,6 +597,10 @@
                 {
                   "page": "Set/Reset",
                   "url": "set"
+                },
+                {
+                  "page": "Unpivot",
+                  "url": "unpivot"
                 },
                 {
                   "page": "Update",

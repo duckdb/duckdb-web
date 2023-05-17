@@ -47,6 +47,10 @@
           "url": "/internals/storage"
         },
         {
+          "page": "Execution Format",
+          "url": "/internals/vector"
+        },
+        {
           "page": "Profiling",
           "url": "/dev/profiling"
         }

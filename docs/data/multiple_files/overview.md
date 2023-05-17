@@ -14,6 +14,8 @@ DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at 
 SELECT * FROM 'dir/*.csv';
 -- read all files with a name ending in ".csv", two directories deep
 SELECT * FROM '*/*/*.csv';
+-- read all files with a name ending in ".csv", at any depth in the folder "dir"
+SELECT * FROM 'dir/**/*.csv';
 -- read the CSV files 'flights1.csv' and 'flights2.csv'
 SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'])
 -- read the CSV files 'flights1.csv' and 'flights2.csv', unifying schemas by name and outputting a `filename` column
@@ -29,6 +31,8 @@ SELECT * FROM 'test/*.parquet';
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- Read all parquet files from 2 specific folders
 SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
+-- read all parquet files that match the glob pattern at any depth
+SELECT * FROM read_parquet('dir/**/*.parquet');
 ```
 
 
@@ -49,6 +53,7 @@ Any file name input to the read_parquet function can either be an exact filename
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|
 | `*`        | matches any number of any characters (including none)     |
+| `**`       | matches any number of subdirectories (including none)     |
 | `?`        | matches any single character                              |
 | `[abc]`    | matches one character given in the bracket                |
 | `[a-z]`    | matches one character from the range given in the bracket |
