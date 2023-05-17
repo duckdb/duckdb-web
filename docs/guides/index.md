@@ -6,6 +6,11 @@ selected: Guides
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.
 
+## DuckDB SQL
+
+* [ASOF Join](../guides/sql_features/asof_join)
+* [Full Text Search](../guides/sql_features/full_text_search)
+
 ## SQL: Data Import & Export
 
 ##### CSV Files
@@ -72,9 +77,11 @@ The guides section contains compact how-to guides that are focused on achieving 
 ## SQL Editors / IDE's
 
 * [How to set up the DBeaver SQL IDE](../guides/sql_editors/dbeaver)
+* [How to use the Harlequin terminal-based SQL IDE](../guides/sql_editors/harlequin)
 * [How to set up Rill Data Developer](../guides/sql_editors/rill)
 
 
 ## Data Viewers
 
-* [How to use Tad to view tabular data files and DuckDb databases](../guides/data_viewers/tad)
+* [How to use Tad to view tabular data files and DuckDB databases](../guides/data_viewers/tad)
+* [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)

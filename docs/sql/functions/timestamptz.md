@@ -68,7 +68,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
-| `age(`*`timestamptz`*`, `*`timestamptz`*`)` | Subtract arguments, resulting in the time difference between the two timestamps | `age(TIMESTAMP '2001-04-10', TIMESTAMP '1992-09-20')` | `8 years 6 months 20 days` |
+| `age(`*`timestamptz`*`, `*`timestamptz`*`)` | Subtract arguments, resulting in the time difference between the two timestamps | `age(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '1992-09-20')` | `8 years 6 months 20 days` |
 | `age(`*`timestamptz`*`)` | Subtract from current_date | `age(TIMESTAMP '1992-09-20')` | `29 years 1 month 27 days 12:39:00.844` |
 | `date_diff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the timestamps | `date_diff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` | `2` |
 | `datediff(`*`part`*`, `*`startdate`*`, `*`enddate`*`)` | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the timestamps | `datediff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')` | `2` |

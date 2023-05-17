@@ -12,7 +12,8 @@ The table below shows the available mathematical operators for numeric types.
 | `+` | addition | `2 + 3` | 5 |
 | `-` | subtraction | `2 - 3` | -1 |
 | `*` | multiplication | `2 * 3` | 6 |
-| `/` | division | `4 / 2` | 2 |
+| `/` | float division | `5 / 2` | 2.5 |
+| `//` | division | `5 // 2` | 2 |
 | `%` | modulo (remainder) | `5 % 4` | 1 |
 | `**` | exponent | `3 ** 4` | 81 |
 | `^` | exponent (alias for `**`) | `3 ^ 4` | 81 |
@@ -20,9 +21,14 @@ The table below shows the available mathematical operators for numeric types.
 | `|` | bitwise OR | `32 | 3` | 35 |
 | `<<` | bitwise shift left | `1 << 4` | 16 |
 | `>>` | bitwise shift right | `8 >> 2` | 2 |
+| `~` | bitwise negation | `~15` | -16 |
 | `!` | factorial of x. Computes the product of the current integer and all integers below it  | `4!` | 24 |
 
-The modulo, bitwise, and factorial operators work only on integral data types,
+There are two division operators: `/` and `//`.
+They are equivalent when at least one of the operands is a FLOAT or a DOUBLE.
+When both operands are integers, `/` performs floating points division (`5 / 2 = 2.5`) while `//` performs integer division (`5 // 2 = 2`).
+
+The modulo, bitwise, and negation and factorial operators work only on integral data types,
 whereas the others are available for all numeric data types.
 
 ## Numeric Functions
@@ -39,7 +45,6 @@ The table below shows the available mathematical functions.
 | `cbrt(x)` | returns the cube root of the number | `cbrt(8)` | 2 |
 | `ceil(x)` | rounds the number up | `ceil(17.4)` | 18 |
 | `ceiling(x)` | rounds the number up. Alias of `ceil`. | `ceiling(17.4)` | 18 |
-| `chr(x)` | returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A |
 | `cos(x)` | computes the cosine of x | `cos(90)` | -0.4480736161291701 |
 | `cot(x)` | computes the cotangent of x | `cot(0.5)` | 1.830487721712452 |
 | `degrees(x)` | converts radians to degrees | `degrees(pi())` | 180 |
@@ -47,10 +52,14 @@ The table below shows the available mathematical functions.
 | `factorial(x)` | See `!` operator. Computes the product of the current integer and all integers below it | `factorial(4)` | 24 |
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
 | `gamma(x)` | interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
+| `gcd(x, y)` | computes the greatest common divisor of x and y | `gcd(42, 57)` | 3 |
+| `greatest_common_divisor(x, y)` | computes the greatest common divisor of x and y | `greatest_common_divisor(42, 57)` | 3 |
 | `greatest(x1, x2, ...)` | selects the largest value | `greatest(3, 2, 4, 4)` | 4 |
 | `isfinite(x)` | Returns true if the floating point value is finite, false otherwise | `isfinite(5.5)` | true |
 | `isinf(x)` | Returns true if the floating point value is infinite, false otherwise | `isinf('Infinity'::float)` | true |
 | `isnan(x)` | Returns true if the floating point value is not a number, false otherwise | `isnan('NaN'::float)` | true |
+| `lcm(x, y)` | computes the least common multiple of x and y | `lcm(42, 57)` | 798 |
+| `least_common_multiple(x, y)` | computes the least common multiple of x and y | `least_common_multiple(42, 57)` | 798 |
 | `least(x1, x2, ...)` | selects the smallest value | `least(3, 2, 4, 4)` | 2 |
 | `lgamma(x)` | computes the log of the `gamma` function. | `lgamma(2)` | 0 |
 | `ln(x)` | computes the natural logarithm of *x* | `ln(2)` | 0.693 |

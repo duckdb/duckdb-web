@@ -158,6 +158,9 @@
 	header .headerline .headercontent{
 		max-width: calc(100% - 30px);
 	}
+	footer .sitefooter .footercontent{
+		padding: 45px 0px;
+	}
 	header .headerline .headercontent .landingmenu nav > div:last-of-type{
 		//display: none;
 	}
@@ -465,6 +468,10 @@
 	.newswrap .postwrap .singleentry h1{
 		font-size: 30px; 
 		line-height: 34px; 
+	}
+	.newswrap .postwrap .singleentry h2{
+		font-size: 28px; 
+		line-height: 30px; 
 	}
 	footer .sitefooter .footercontent > div{
 		width: 100%;

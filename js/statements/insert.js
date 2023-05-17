@@ -19,6 +19,11 @@ function GenerateInsert(options = {}) {
 			),
 			GenerateOptionalColumnList(),
 			Choice(0, [
+				new Skip(),
+				Keyword("BY POSITION"),
+				Keyword("BY NAME"),
+			]),
+			Choice(0, [
 				Sequence(GenerateValues(options)),
 				Expression("select-node"),
 				Sequence([

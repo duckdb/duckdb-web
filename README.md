@@ -15,17 +15,10 @@ First, thank you for your contribution!
 
 Each new page requires at least 2 edits:
 * The creation of a new markdown page with the documentation. Please follow the format of another .md file in the docs folder.
-* Add a link to the new page within _data/menu_docs_current.json. This populates the dropdown menus.
+* Add a link to the new page within _data/menu_docs_dev.json. This populates the dropdown menus.
 
 The addition of a new guide requires one additional edit:
 * Add a link to the new page within the Guides landing page: docs/guides/index.md
-
-Each new page must also be added to the Search feature. Either manually edit the file _data/search_data.json or:
-* Install Python
-* Clone this repo and navigate to it
-* Create a new Python virtual environment
-* pip install -r requirements.txt
-* python scripts/generate_search.py
 
 **Please test your changes using the steps listed in the Building section below.**
 
@@ -39,6 +32,8 @@ Feedback is welcome on these contribution steps as well!
 
 ## Building
 
+### Locally
+
 The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, install Ruby (using the version specified in the .ruby-version file), and run `bundler` to install the dependencies. If you are on Windows, you must then run these two commands:
 
 ```sh
@@ -46,7 +41,19 @@ gem uninstall eventmachine
 gem install eventmachine --platform ruby
 ```
 
-Finally, navigate to the directory where you have cloned duckdb-web and run `bundler exec jekyll serve`. The website can then be browsed by going to `localhost:4000` in your browser.
+### With a Dev Container
+
+Click the green Code button to the top right to open a new codespace with this repository initialized.
+
+### Run dev server
+
+Navigate to the directory where you have cloned duckdb-web and run
+
+```sh
+bundler exec jekyll serve --incremental --config _config.yml,_config_exclude_archive.yml --livereload
+```
+
+The website can then be browsed by going to `localhost:4000` in your browser.
 
 ## Generating code docs
 

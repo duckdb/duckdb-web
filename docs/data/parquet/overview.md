@@ -53,13 +53,12 @@ Parquet files are self-describing, as such far fewer parameters are required tha
 
 ### read_parquet function
 
-Files can be read using the `read_parquet` function.
+| Function                                          | Description                                                                                                                                                                         | Example                                  |
+|:--------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
+| `read_parquet(`*`path(s)`*`, *)`           | Read Parquet file(s)                                                                                                                                | `SELECT * FROM read_parquet('test.parquet');`                     |
+| `parquet_scan(`*`path(s)`*`, *)`           | Alias for `read_parquet`                                                                                                                                | `SELECT * FROM parquet_scan('test.parquet');`                     |
 
-```sql
-SELECT * FROM read_parquet('test.parquet');
-```
-
-If your file ends in `.parquet`, the read_parquet syntax is optional. The system will automatically infer that you are reading a Parquet file.
+If your file ends in `.parquet`, the function syntax is optional. The system will automatically infer that you are reading a Parquet file.
 
 ```sql
 SELECT * FROM 'test.parquet';

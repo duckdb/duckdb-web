@@ -15,6 +15,20 @@
           "url": "index"
         },
         {
+          "page": "SQL Features",
+          "slug": "sql_features",
+          "subfolderitems": [
+            {
+              "page": "ASOF JOIN",
+              "url": "asof_join"
+            },
+            {
+              "page": "Full Text Search",
+              "url": "full_text_search"
+            }
+          ]
+        },
+        {
           "page": "Data Import & Export",
           "slug": "import",
           "subfolderitems": [
@@ -177,6 +191,10 @@
               "url": "dbeaver"
             },
             {
+              "page": "Harlequin SQL IDE",
+              "url": "harlequin"
+            },
+            {
               "page": "Rill Data Developer",
               "url": "rill"
             }
@@ -186,6 +204,10 @@
           "page": "Data Viewers",
           "slug": "data_viewers",
           "subfolderitems": [
+            {
+              "page": "Tableau",
+              "url": "tableau"
+            },
             {
               "page": "Tad",
               "url": "tad"
@@ -213,10 +235,6 @@
               "url": "overview"
             },
             {
-              "page": "Insert Statements",
-              "url": "insert"
-            },
-            {
               "page": "CSV Files",
               "slug": "csv",
               "subsubfolderitems": [
@@ -227,24 +245,6 @@
                 {
                   "page": "Auto Detection",
                   "url": "auto_detection"
-                },
-                {
-                  "page": "Tips",
-                  "url": "tips"
-                }
-              ]
-            },
-            {
-              "page": "Parquet Files",
-              "slug": "parquet",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Metadata",
-                  "url": "metadata"
                 },
                 {
                   "page": "Tips",
@@ -277,6 +277,24 @@
               ]
             },
             {
+              "page": "Parquet Files",
+              "slug": "parquet",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Metadata",
+                  "url": "metadata"
+                },
+                {
+                  "page": "Tips",
+                  "url": "tips"
+                }
+              ]
+            },
+            {
               "page": "Partitioning",
               "slug": "partitioning",
               "subsubfolderitems": [
@@ -293,7 +311,12 @@
             {
               "page": "Appender",
               "url": "appender"
-            }]
+            },
+            {
+              "page": "Insert Statements",
+              "url": "insert"
+            }
+          ]
         },
         {
           "page": "Client APIs",
@@ -302,6 +325,112 @@
             {
               "page": "Overview",
               "url": "overview"
+            },
+            {
+              "page": "C",
+              "slug": "c",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Startup",
+                  "url": "connect"
+                },
+                {
+                  "page": "Configure",
+                  "url": "config"
+                },
+                {
+                  "page": "Query",
+                  "url": "query"
+                },
+                {
+                  "page": "Data Chunks",
+                  "url": "data_chunk"
+                },
+                {
+                  "page": "Values",
+                  "url": "value"
+                },
+                {
+                  "page": "Types",
+                  "url": "types"
+                },
+                {
+                  "page": "Prepared Statements",
+                  "url": "prepared"
+                },
+                {
+                  "page": "Appender",
+                  "url": "appender"
+                },
+                {
+                  "page": "Table Functions",
+                  "url": "table_functions"
+                },
+                {
+                  "page": "Replacement Scans",
+                  "url": "replacement_scans"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "api"
+                }
+              ]
+            },
+            {
+              "page": "C++",
+              "url": "cpp"
+            },
+            {
+              "page": "CLI",
+              "url": "cli"
+            },
+            {
+              "page": "Java",
+              "url": "java"
+            },
+            {
+              "page": "Julia",
+              "url": "julia"
+            },
+            {
+              "page": "Node.js",
+              "slug": "nodejs",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "API Reference",
+                  "url": "reference"
+                }
+              ]
+            },
+            {
+              "page": "ODBC",
+              "slug": "odbc",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Linux Setup",
+                  "url": "linux"
+                },
+                {
+                  "page": "Windows Setup",
+                  "url": "windows"
+                },
+                {
+                  "page": "MacOS Setup",
+                  "url": "macos"
+                }
+              ]
             },
             {
               "page": "Python",
@@ -342,110 +471,42 @@
               "url": "r"
             },
             {
-              "page": "Java",
-              "url": "java"
+              "page": "Rust",
+              "url": "rust"
             },
             {
-              "page": "Julia",
-              "url": "julia"
+              "page": "Scala",
+              "url": "scala"
             },
             {
-              "page": "C",
-              "slug": "c",
-              "subsubfolderitems": [
-                  {
-                    "page": "Overview",
-                    "url": "overview"
-                  },
-                  {
-                    "page": "Startup",
-                    "url": "connect"
-                  },
-                  {
-                    "page": "Configure",
-                    "url": "config"
-                  },
-                  {
-                    "page": "Query",
-                    "url": "query"
-                  },
-                  {
-                    "page": "Data Chunks",
-                    "url": "data_chunk"
-                  },
-                  {
-                    "page": "Values",
-                    "url": "value"
-                  },
-                  {
-                    "page": "Types",
-                    "url": "types"
-                  },
-                  {
-                    "page": "Prepared Statements",
-                    "url": "prepared"
-                  },
-                  {
-                    "page": "Appender",
-                    "url": "appender"
-                  },
-                  {
-                    "page": "Table Functions",
-                    "url": "table_functions"
-                  },
-                  {
-                    "page": "Replacement Scans",
-                    "url": "replacement_scans"
-                  },
-                  {
-                    "page": "API Reference",
-                    "url": "api"
-                  }
-              ]
+              "page": "Swift",
+              "url": "swift"
             },
             {
-              "page": "C++",
-              "url": "cpp"
-            },
-            {
-              "page": "Node.js",
-              "slug": "nodejs",
+              "page": "Wasm",
+              "slug": "wasm",
               "subsubfolderitems": [
                 {
                   "page": "Overview",
                   "url": "overview"
                 },
                 {
-                  "page": "API Reference",
-                  "url": "reference"
+                  "page": "Instantiation",
+                  "url": "instantiation"
+                },
+                {
+                  "page": "Data Ingestion",
+                  "url": "data_ingestion"
+                },
+                {
+                  "page": "Query",
+                  "url": "query"
+                },
+                {
+                  "page": "Extensions",
+                  "url": "extensions"
                 }
               ]
-            },
-            {
-              "page": "Wasm",
-              "url": "wasm"
-            },
-            {
-              "page": "ODBC",
-              "slug": "odbc",
-              "subsubfolderitems": [
-                  {
-                    "page": "Overview",
-                    "url": "overview"
-                  },
-                  {
-                    "page": "Linux Setup",
-                    "url": "linux"
-                  },
-                  {
-                    "page": "Windows Setup",
-                    "url": "windows"
-                  }
-              ]
-            },
-            {
-              "page": "CLI",
-              "url": "cli"
             }]
         },
         {
@@ -466,24 +527,36 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Select",
-                  "url": "select"
+                  "page": "Alter Table",
+                  "url": "alter_table"
                 },
                 {
-                  "page": "Insert",
-                  "url": "insert"
+                  "page": "Attach/Detach",
+                  "url": "attach"
                 },
                 {
-                  "page": "Delete",
-                  "url": "delete"
+                  "page": "Call",
+                  "url": "call"
                 },
                 {
-                  "page": "Update",
-                  "url": "update"
+                  "page": "Checkpoint",
+                  "url": "checkpoint"
+                },
+                {
+                  "page": "Copy",
+                  "url": "copy"
+                },
+                {
+                  "page": "Create Macro",
+                  "url": "create_macro"
                 },
                 {
                   "page": "Create Schema",
                   "url": "create_schema"
+                },
+                {
+                  "page": "Create Sequence",
+                  "url": "create_sequence"
                 },
                 {
                   "page": "Create Table",
@@ -494,32 +567,48 @@
                   "url": "create_view"
                 },
                 {
-                  "page": "Create Sequence",
-                  "url": "create_sequence"
-                },
-                {
-                  "page": "Create Macro",
-                  "url": "create_macro"
+                  "page": "Delete",
+                  "url": "delete"
                 },
                 {
                   "page": "Drop",
                   "url": "drop"
                 },
                 {
-                  "page": "Alter Table",
-                  "url": "alter_table"
-                },
-                {
-                  "page": "Copy",
-                  "url": "copy"
-                },
-                {
                   "page": "Export",
                   "url": "export"
                 },
                 {
-                  "page": "Attach",
-                  "url": "attach"
+                  "page": "Insert",
+                  "url": "insert"
+                },
+                {
+                  "page": "Pivot",
+                  "url": "pivot"
+                },
+                {
+                  "page": "Select",
+                  "url": "select"
+                },
+                {
+                  "page": "Set/Reset",
+                  "url": "set"
+                },
+                {
+                  "page": "Unpivot",
+                  "url": "unpivot"
+                },
+                {
+                  "page": "Update",
+                  "url": "update"
+                },
+                {
+                  "page": "Use",
+                  "url": "use"
+                },
+                {
+                  "page": "Vacuum",
+                  "url": "vacuum"
                 }
               ]
             },
@@ -602,56 +691,56 @@
                   "url": "overview"
                 },
                 {
-                  "page": "NULL Values",
-                  "url": "nulls"
-                },
-                {
-                  "page": "Boolean",
-                  "url": "boolean"
-                },
-                {
-                  "page": "Enum",
-                  "url": "enum"
-                },
-                {
-                  "page": "Numeric",
-                  "url": "numeric"
-                },
-                {
-                  "page": "Text",
-                  "url": "text"
-                },
-                {
-                  "page": "Date",
-                  "url": "date"
-                },
-                {
-                  "page": "Timestamp",
-                  "url": "timestamp"
-                },
-                {
-                  "page": "Interval",
-                  "url": "interval"
+                  "page":"Bitstring",
+                  "url": "bitstring"
                 },
                 {
                   "page": "Blob",
                   "url": "blob"
                 },
                 {
-                  "page":"Bitstring",
-                  "url": "bitstring"
+                  "page": "Boolean",
+                  "url": "boolean"
+                },
+                {
+                  "page": "Date",
+                  "url": "date"
+                },
+                {
+                  "page": "Enum",
+                  "url": "enum"
+                },
+                {
+                  "page": "Interval",
+                  "url": "interval"
                 },
                 {
                   "page":"List",
                   "url": "list"
                 },
                 {
+                  "page":"Map",
+                  "url": "map"
+                },
+                {
+                  "page": "NULL Values",
+                  "url": "nulls"
+                },
+                {
+                  "page": "Numeric",
+                  "url": "numeric"
+                },
+                {
                   "page":"Struct",
                   "url": "struct"
                 },
                 {
-                  "page":"Map",
-                  "url": "map"
+                  "page": "Text",
+                  "url": "text"
+                },
+                {
+                  "page": "Timestamp",
+                  "url": "timestamp"
                 },
                 {
                   "page":"Union",
@@ -668,32 +757,32 @@
                 "url": "overview"
               },
               {
-                "page": "Logical",
-                "url": "logical_operators"
-              },
-              {
-                "page": "Comparisons",
-                "url": "comparison_operators"
+                "page": "Case",
+                "url": "case"
               },
               {
                 "page": "Casting",
                 "url": "cast"
               },
               {
-                "page": "Case",
-                "url": "case"
+                "page": "Collations",
+                "url": "collations"
+              },
+              {
+                "page": "Comparisons",
+                "url": "comparison_operators"
               },
               {
                 "page": "In",
                 "url": "in"
               },
               {
-                "page": "Star",
-                "url": "star"
+                "page": "Logical",
+                "url": "logical_operators"
               },
               {
-                "page": "Collations",
-                "url": "collations"
+                "page": "Star",
+                "url": "star"
               },
               {
                 "page": "Subqueries",
@@ -710,60 +799,60 @@
                 "url": "overview"
               },
               {
-                "page": "Enum Functions",
-                "url": "enum"
+                "page": "Bitstring Functions",
+                "url": "bitstring"
               },
               {
-                "page": "Numeric Functions",
-                "url": "numeric"
+                "page": "Blob Functions",
+                "url": "blob"
               },
               {
-                "page": "Text Functions",
-                "url": "char"
-              },
-              {
-                "page": "Pattern Matching",
-                "url": "patternmatching"
+                "page": "Date Format Functions",
+                "url": "dateformat"
               },
               {
                 "page": "Date Functions",
                 "url": "date"
               },
               {
-                "page": "Timestamp Functions",
-                "url": "timestamp"
+                "page": "Date Part Functions",
+                "url": "datepart"
               },
-               {
-                "page": "Timestamp With Time Zone Functions",
-                "url": "timestamptz"
-              },
-             {
-                "page": "Time Functions",
-                "url": "time"
+              {
+                "page": "Enum Functions",
+                "url": "enum"
               },
               {
                 "page": "Interval Functions",
                 "url": "interval"
               },
               {
-                "page": "Date Formats",
-                "url": "dateformat"
-              },
-               {
-                "page": "Date Parts",
-                "url": "datepart"
-              },
-             {
-                "page": "Blob Functions",
-                "url": "blob"
-              },
-              {
-                "page": "Bitstring Functions",
-                "url": "bitstring"
-              },
-              {
                 "page": "Nested Functions",
                 "url": "nested"
+              },
+              {
+                "page": "Numeric Functions",
+                "url": "numeric"
+              },
+              {
+                "page": "Pattern Matching",
+                "url": "patternmatching"
+              },
+              {
+                "page": "Text Functions",
+                "url": "char"
+              },
+              {
+                "page": "Time Functions",
+                "url": "time"
+              },
+              {
+                "page": "Timestamp Functions",
+                "url": "timestamp"
+              },
+              {
+                "page": "Timestamp With Time Zone Functions",
+                "url": "timestamptz"
               },
               {
                 "page": "Utility Functions",
@@ -772,20 +861,20 @@
             ]
           },
           {
-            "page": "Indexes",
-            "url": "indexes"
-          },
-          {
             "page": "Aggregates",
             "url": "aggregates"
           },
           {
-            "page": "Window Functions",
-            "url": "window_functions"
+            "page": "Configuration",
+            "url": "configuration"
           },
           {
-            "page": "Samples",
-            "url": "samples"
+            "page": "Constraints",
+            "url": "constraints"
+          },
+          {
+            "page": "Indexes",
+            "url": "indexes"
           },
           {
             "page": "Information Schema",
@@ -796,12 +885,16 @@
             "url": "duckdb_table_functions"
           },
           {
-            "page": "Configuration",
-            "url": "configuration"
-          },
-          {
             "page": "Pragmas",
             "url": "pragmas"
+          },
+          {
+            "page": "Samples",
+            "url": "samples"
+          },
+          {
+            "page": "Window Functions",
+            "url": "window_functions"
           }
           ]
         },
@@ -818,24 +911,28 @@
               "url": "full_text_search"
             },
             {
-              "page": "JSON",
-              "url": "json"
-            },
-            {
               "page": "HTTPFS",
               "url": "httpfs"
             },
             {
-              "page": "SQLite Scanner",
-              "url": "sqlite_scanner"
+              "page": "JSON",
+              "url": "json"
             },
             {
               "page": "Postgres Scanner",
               "url": "postgres_scanner"
             },
             {
+              "page": "SQLite Scanner",
+              "url": "sqlite_scanner"
+            },
+            {
               "page": "Substrait",
               "url": "substrait"
+            },
+            {
+              "page": "Spatial",
+              "url": "spatial"
             }
           ]
         }

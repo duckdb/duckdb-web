@@ -12,7 +12,7 @@ Depending on the client you use, no action may be required, or you might have to
 
 # HTTP(S)
 
-With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV and
+With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV, JSON, and
 Parquet files.
 
 ```sql
@@ -77,7 +77,9 @@ If the endpoint is not SSL-enabled then run:
 SET s3_use_ssl=false;
 ```
 
-Switching between path-style and vhost-style urls (see [AWS docs]()) is possible using:
+Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#path-style-url-ex)
+and [vhost-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#virtual-host-style-url-ex)
+urls  is possible using:
 
 ```sql
 SET s3_url_style='path';
@@ -98,6 +100,22 @@ Alternatively, session tokens are also supported and can be used instead:
 
 ```sql
 SET s3_session_token='<AWS session token>';
+```
+
+### Per-Request Configuration
+Aside from the global S3 configuration described above, specific configuration values can be used on a per-request
+basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3
+URL as query parameters. All the individual configuration values listed above can be set as query parameters.
+
+For instance,
+```
+s3://bucket/file.parquet?s3_access_key_id=accessKey&s3_secret_access_key=secretKey
+```
+or
+```sql
+SELECT *
+FROM 's3://bucket/file.parquet?s3_region=region&s3_session_token=session_token' T1
+INNER JOIN 's3://bucket/file.csv?s3_access_key_id=accessKey&s3_secret_access_key=secretKey' T2;
 ```
 
 ## Reading

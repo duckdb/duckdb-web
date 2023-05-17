@@ -65,9 +65,10 @@ DuckDB's development started while the main developers were public servants in T
 * [DuckDB Testing - Present and Future (DBTest 2022 Keynote)](https://www.youtube.com/watch?v=BgC79Zt2fPs) (Video Presentation, ca 1h)
 * [Push-Based Execution in DuckDB (CWI Database Architectures Seminar)](https://www.youtube.com/watch?v=MA0OsvYFGrc) (Video Presentation, ca. 1h)
 * [Fastest Table Sort in the West - Redesigning DuckDB’s Sort (DSDSD)](https://www.youtube.com/watch?v=m6Yg2sXGui0) (Video Presentation, ca. 20min)
-* [The Case for In-Process Analytics](https://homepages.cwi.nl/~hannes/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
+* [The Case for In-Process Analytics](/pdf/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
 * [1000 days of DuckDB - The Pareto Principle still holds](http://dsdsd.da.cwi.nl/slides/dsdsd-duckdb.pdf) (Slides)
 * [DuckDB - an Embeddable Analytical RDBMS](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf) (Slides)
+* [DuckDB: Introducing a New Class of Data Management Systems (I/O Magazine, ICT Research Platform Nederland)](https://ict-research.nl/wordpress/wp-content/uploads/2023/04/IO-magazine-NR1-2023.pdf#page=10) (article)
 
 ## Other Projects
 Here are some projects that we know of that use DuckDB. If you would like your project to be added here, open a GitHub issue.
@@ -86,7 +87,7 @@ Here are some projects that we know of that use DuckDB. If you would like your p
 * [Elixir driver](https://github.com/mpope9/exduckdb) and [Ecto adapter](https://github.com/mpope9/ecto_duckdb/) for DuckDB
 * [DuckDB backend](https://fugue-tutorials.readthedocs.io/tutorials/integrations/backends/duckdb.html) for [Fugue](https://github.com/fugue-project/fugue)
 * [StabilitySort](https://gitlab.com/baaron/StabilitySort) bioinformatics tool for finding unstable variants from predicted AlphaFold2 structures  
-* [Extract and load data from APIs to DuckDB using data load tool](https://dlthub.com/docs/destinations#duckdb)
+* [Extract and load data from APIs to DuckDB using data load tool](https://dlthub.com/docs/destinations/duckdb)
 
 ## Testimonials
 See our [DuckDB Testimonial Twitter Wall](/docs/twitter_wall)
@@ -99,11 +100,14 @@ DuckDB uses some components from various Open-Source projects and draws inspirat
 * **Concurrency control:** Our MVCC implementation is inspired by the paper [Fast Serializable Multi-Version Concurrency Control for Main-Memory Database Systems](https://db.in.tum.de/~muehlbau/papers/mvcc.pdf) by Thomas Neumann, Tobias Mühlbauer and Alfons Kemper.
 * **Secondary Indexes:** DuckDB has support for secondary indexes based on the paper [The Adaptive Radix Tree: ARTful Indexing for Main-Memory Databases](https://db.in.tum.de/~leis/papers/ART.pdf) by Viktor Leis, Alfons Kemper and Thomas Neumann.
 * **SQL Window Functions:** DuckDB's window functions implementation uses Segment Tree Aggregation as described in the paper "Efficient Processing of Window Functions in Analytical SQL Queries" by Viktor Leis, Kan Kundhikanjana, Alfons Kemper and Thomas Neumann.
+* **SQL Inequality Joins:** DuckDB's inequality join implementation uses the IEJoin algorithm as described in the paper [Lightning Fast and Space Efficient Inequality Joins](https://vldb.org/pvldb/vol8/p2074-khayyat.pdf) by 
+Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
 * **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://pelotondb.io).
 * **Shell:** We use the [SQLite shell](https://sqlite.org/cli.html) to work with DuckDB.
 * **Regular Expressions:** DuckDB uses Google's [RE2](https://github.com/google/re2) regular expression engine.
 * **String Formatting:** DuckDB uses the [fmt](https://github.com/fmtlib/fmt) string formatting library.
 * **UTF Wrangling:** DuckDB uses the [utf8proc](https://juliastrings.github.io/utf8proc/) library to check and normalize UTF8.
+* **Collation and Time:** DuckDB uses the [ICU](https://unicode-org.github.io/icu/) library for collation, time zone, and calendar support.
 * **Test Framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test Cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result Validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.

@@ -138,11 +138,15 @@ SELECT * FROM glob('*');
 
 ## Regular Expressions
 
-| Function | Description |
-|:---|:---|
-| `regexp_matches(`*`string`*`, `*`pattern`*`)` | returns `TRUE` if  *string* contains the regexp *pattern*, `FALSE` otherwise |
-| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | if *string* contains the regexp *pattern*, replaces the matching part with *replacement* |
-| `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | if *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* |
+| Function | Description | Example | Result |
+|:---|:---|:---|:---|
+| `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* | `regexp_full_match('anabanana', '(an)*')` | `false` |
+| `regexp_matches(`*`string`*`, `*`pattern`*`)` | returns `TRUE` if  *string* contains the regexp *pattern*, `FALSE` otherwise | `regexp_matches('anabanana', '(an)*')` | `true` |
+| `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | if *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |
+| `regexp_split_to_array(`*`string`*`, `*`regex`*`)` | Alias of `string_split_regex`. Splits the *string* along the *regex* | `regexp_split_to_array('hello␣world; 42', ';?␣')` | `['hello', 'world', '42']` |
+| `regexp_extract(`*`string`*`, `*`pattern `*`[, `*`idx`*`])`; | if *string* contains the regexp *pattern*, returns the capturing group specified by optional parameter *idx* | `regexp_extract('hello_world', '([a-z ]+)_?', 1)` | `hello` |
+| `regexp_extract(`*`string`*`, `*`pattern `*`, `*`name_list`*`)`; | if *string* contains the regexp *pattern*, returns the capturing groups as a struct with corresponding names from *name_list* | `regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd'])` | `{'y':'2023', 'm':'04', 'd':'15'}` |
+| `regexp_extract_all(`*`string`*`, `*`regex`*`[, `*`group`*` = 0])` | Split the *string* along the *regex* and extract all occurrences of *group* | `regexp_extract_all('hello_world', '([a-z ]+)_?', 1)` | `[hello, world]` |
 
 The `regexp_matches` function is similar to the `SIMILAR TO` operator, however, it does not require the entire string to match. Instead, `regexp_matches` returns `TRUE` if the string merely contains the pattern (unless the special tokens `^` and `$` are used to anchor the regular expression to the start and end of the string). Below are some examples:
 
@@ -156,6 +160,35 @@ regexp_matches('abc', '(b|c).*')   -- TRUE
 regexp_matches('abc', '^(b|c).*')  -- FALSE
 regexp_matches('abc', '(?i)A')     -- TRUE
 ```
+
+The `regexp_matches` function also supports the following options.
+
+| Option | Description |
+|:---|:---|
+|`'c'`|case-sensitive matching|
+|`'i'`|case-insensitive matching|
+|`'l'`|match literals instead of regular expression tokens|
+|`'m'`, `'n'`, `'p'`|newline sensitive matching|
+|`'s'`| non-newline sensitive matching|
+|`'g'`| global replace, only available for regexp_replace|
+
+```sql
+regexp_matches('abcd', 'ABC', 'c')-- FALSE
+regexp_matches('abcd', 'ABC', 'i') -- TRUE
+regexp_matches('ab^/$cd', '^/$', 'l') -- TRUE
+regexp_matches('hello\nworld', 'hello.world', 'p') -- FALSE
+regexp_matches('hello\nworld', 'hello.world', 's') -- TRUE
+```
+
+The `regexp_matches` operator will be optimized to the `LIKE` operator when possible. To achieve the best results, the `'s'` option should be passed. By default the `RE2` library doesn't match '.' to newline.
+
+| Original | Optimized equivalent |
+|:---|:---|
+|`regexp_matches('hello world', '^hello', 's')`|`prefix('hello world', 'hello')`|
+|`regexp_matches('hello world', 'world$', 's')`|`suffix('hello world', 'world')`|
+|`regexp_matches('hello world', 'hello.world', 's')`|`LIKE 'hello_world'`|
+|`regexp_matches('hello world', 'he.*rld', 's')`|`LIKE '%he%rld'`|
+
 
 The `regexp_replace` function can be used to replace the part of a string that matches the regexp pattern with a replacement string. The notation `\d` (where d is a number indicating the group) can be used to refer to groups captured in the regular expression in the replacement string. Below are some examples:
 
@@ -175,5 +208,16 @@ regexp_extract('abc', '.b.', 1)  -- (empty)
 regexp_extract('abc', '([a-z])(b)', 1) -- a
 regexp_extract('abc', '([a-z])(b)', 2) -- b
 ```
+
+If *`ids`* is a `LIST` of strings, then `regexp_extract` will return the corresponding capture groups as fields of a `STRUCT`:
+
+```sql
+regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd']) -- {'y':'2023', 'm':'04', 'd':'15'}
+regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd']) -- {'y':'2023', 'm':'04', 'd':'15'}
+regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']) -- error
+```
+
+If the number of column names is less than the number of capture groups, then only the first groups are returned.
+If the number of column names is greater, then an error is generated.
 
 DuckDB uses RE2 as its regex engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)

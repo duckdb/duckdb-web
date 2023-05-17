@@ -15,6 +15,9 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 ### Where do I find the DuckDB Logo?
 You can download the DuckDB Logo here: <br/> • Web: [png](/images/logo-dl/DuckDB_Logo.png) / [jpg](/images/logo-dl/DuckDB_Logo.jpg) <br/>  • Print: [svg](/images/logo-dl/DuckDB_Logo.svg) / [pdf](/images/logo-dl/DuckDB_Logo.pdf) <br/><br/>The DuckDB logo & website were designed by [Jonathan Auch](http://jonathan-auch.de) & [Max Wohlleber](https://maxwohlleber.de).
 
+### Where do I find DuckDB trademark use guidelines?
+You can find the guidelines for DuckDB™ [here](/trademark_guidelines).
+
 ### How can I expand the DuckDB website?
 The DuckDB Website is hosted by GitHub pages, its repository is [here](
 https://github.com/duckdb/duckdb-web). Pull requests to fix issues or generally expand the documentation section are very welcome.

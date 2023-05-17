@@ -18,6 +18,7 @@ This section describes functions and operators for examining and manipulating st
 | `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` |
 | `base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of to_base64. | `base64('A'::blob)` | `'QQ=='` |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` |
+| `chr(`*`x`*`)` | returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` |
 | `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(',', 'Banana', 'Apple', 'Melon')` | `Banana,Apple,Melon` |
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc','a')` | `true` |
@@ -94,4 +95,5 @@ These functions are used to measure the similarity of two strings using various 
 | `jaro_similarity(`*`string`*`,` *`string`*`)` | The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_similarity('duck','duckdb')` | 0.88 |
 | `jaro_winkler_similarity(`*`string`*`,` *`string`*`)` | The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_winkler_similarity('duck','duckdb')` | 0.93 |
 | `levenshtein(`*`string`*`,` *`string`*`)` | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `levenshtein('duck','db')` | 3 |
+| `damerau_levenshtein(`*`string`*`,` *`string`*`)` | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different. | `damerau_levenshtein('duckdb', 'udckbd')` | 2 |
 | `mismatches(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `mismatches('duck','luck')` | 1 |
