@@ -54,14 +54,14 @@ For example:
 ```sql
 select * from range(1000) order by 1 desc;
 ```
-Instead of duplicating the result of the `range` result and sorting that, we can use the same data, but just represent it in a different shape.  
+Instead of duplicating the result of the `range` result and sorting that, we can use the same data but represent it in a different shape.  
 How the dictionary vector works internally is that it adds a layer of indirection between the requested index and the retrieved index.  
 In the example above a request for the data at index 0 would instead retrieve the data at index 999.
 
 #### SEQUENCE_VECTOR
 
 Sequence vectors are used when the data is a sequence with a fixed increment.  
-Instead of storing all the elements, we just store the beginning and the increment.
+Instead of storing all the elements, we only need to store the beginning and the increment.
 
 ### Nested Types
 
@@ -88,11 +88,11 @@ For structs, the `auxiliary` is used to store a list of "child" Vectors.
 The `data` and `buffer` variables are unused by a struct Vector.
 
 #### MAP
-Internally `MAP` is just a `LIST[STRUCT(key KEY_TYPE, value VALUE_TYPE)]`.
+Internally `MAP` is represented as a `LIST[STRUCT(key KEY_TYPE, value VALUE_TYPE)]`.
 
 #### UNION
 Internally `UNION` utilizes the same structure as a `STRUCT`.
-The first "child" is always occupied by the Tag Vector of the UNION, which records for each row which of the UNION's types applies to that row.
+The first "child" is always occupied by the Tag Vector of the UNION, which records for each row which of the UNION's types apply to that row.
 
 ### Strings
 
