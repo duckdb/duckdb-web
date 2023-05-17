@@ -117,7 +117,10 @@ In our execution format `string_t` has the feature to "inline" strings that are 
 When this flag is set, we disable this and don't inline small strings.
 
 #### `DISABLE_MEMORY_SAFETY`
-Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, including preventing dereferencing `nullptr`, or index out of bounds errors.  
+Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, these checks include:  
+- Making sure `nullptr` is never dereferenced.  
+- Making sure index out of bounds accesses don't trigger a crash.  
+
 With this flag enabled we remove these checks, this is mostly done to check that the performance hit of these checks is negligible.
 
 #### `DESTROY_UNPINNED_BLOCKS`
