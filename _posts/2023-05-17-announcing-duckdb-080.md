@@ -104,7 +104,7 @@ Please [refer to the documentation](/docs/guides/sql_features/asof_join.html) fo
 
 #### Data Integration Improvements
 
-[**Default Parallel CSV Reader.**](https://github.com/duckdb/duckdb/pull/6977). In this release, the parallel CSV reader has been vastly improved and is now the default CSV reader. We would like to thank everyone that has tried out the experimental reader for their valuable feedback and reports. The `experimental_parallel_csv` flag has been deprecated and is no longer required. The parallel CSV reader enables much more efficient reading of large CSV files. 
+[**Default Parallel CSV Reader**](https://github.com/duckdb/duckdb/pull/6977). In this release, the parallel CSV reader has been vastly improved and is now the default CSV reader. We would like to thank everyone that has tried out the experimental reader for their valuable feedback and reports. The `experimental_parallel_csv` flag has been deprecated and is no longer required. The parallel CSV reader enables much more efficient reading of large CSV files. 
 
 <!-- Would it be possible to include the data size and hardware used? -->
 
@@ -116,7 +116,7 @@ CREATE TABLE lineitem AS FROM lineitem.csv;
 |--------|--------|
 | 4.1s   | 1.2s   |
 
-**Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV and JSON Writing](https://github.com/duckdb/duckdb/pull/7368).** This release includes support for parallel *order-preserving* writing of Parquet, CSV and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
+**Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV and JSON Writing](https://github.com/duckdb/duckdb/pull/7368)**. This release includes support for parallel *order-preserving* writing of Parquet, CSV and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
 
 ```sql
 COPY lineitem TO 'lineitem.csv';
@@ -141,7 +141,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 #### Storage Improvements
 
-[**Lazy-Loading Table Metadata**.](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indices and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
+[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indices and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
 
 |         Query          | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
 |------------------------|--------|--------|-------|---------|
