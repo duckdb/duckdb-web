@@ -9,35 +9,16 @@ Just like regular [functions](../../sql/functions/overview) they need to have a 
 
 ### Creating Functions
 
-The `create_function` method is used to add a function, the parameters to this method are:  
+The `create_function` method is used to add a function.  
+More information about this method can be found [here](../python/reference/#duckdb.DuckDBPyConnection.create_function).
 
-`name: str`  
-The name that will be used to identify the function.  
-  
-`function: Callable`  
-The python function that will be used.
-
-`argument_type_list: Optional[List]`  
-The types of the arguments that the function expects.
-
-`return_type: Optional[DuckDBPyType]`  
-The type of the value returned from the function.
-
-`type: Optional[str]`  
-The type of python function, either `native` or `arrow`.
-
-`null_handling: Optional[str]`  
-The way NULL value parameters should be handled.
-
-`exception_handling: Optional[str]`  
-The way exceptions that occurred during execution of the function should be handled.  
-
-To remove a previously created function, use `remove_function`, the only parameter this needs is `name: str`.
+The `remove_function` method can be used to remove a previously created function.
+More information about this method can be found [here](../python/reference/#duckdb.DuckDBPyConnection.remove_function).
 
 ### Type Annotation
 
-When the function has type annotation it's often possible to leave out all of the optional parameters.
-Using `DuckDBPyType` we can implicitly convert many known types to DuckDBs type system.
+When the function has type annotation it's often possible to leave out all of the optional parameters.  
+Using `DuckDBPyType` we can implicitly convert many known types to DuckDBs type system.  
 For example:
 ```python
 import duckdb
@@ -62,18 +43,21 @@ By default when functions receive a NULL value, this instantly returns NULL, as 
 When this is not desired, you need to explicitly set this parameter to `'special'`.
 
 ```py
+import duckdb
+from duckdb.typing import *
+
 def dont_intercept_null(x):
 	return 5
 
-duckdb.register_scalar_udf('dont_intercept', dont_intercept_null, [BIGINT], BIGINT)
+duckdb.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT)
 res = duckdb.sql("""
 	select dont_intercept(NULL)
 """).fetchall()
 print(res)
 # [(None,)]
 
-duckdb.unregister_udf('dont_intercept')
-duckdb.register_scalar_udf('dont_intercept', dont_intercept_null, [BIGINT], BIGINT, null_handling='special')
+duckdb.remove_function('dont_intercept')
+duckdb.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT, null_handling='special')
 res = duckdb.sql("""
 	select dont_intercept(NULL)
 """).fetchall()
@@ -87,10 +71,13 @@ By default, when an exception is thrown from the python function, we'll forward 
 If you want to disable this behavior, and instead return null, you'll need to set this parameter to `'return_null'`
 
 ```py
+import duckdb
+from duckdb.typing import *
+
 def will_throw():
     raise ValueError("ERROR")
 
-duckdb.register_scalar_udf('throws', will_throw, [], BIGINT)
+duckdb.create_function('throws', will_throw, [], BIGINT)
 try:
     res = duckdb.sql("""
         select throws()
@@ -98,7 +85,7 @@ try:
 except duckdb.InvalidInputException as e:
     print(e)
 
-duckdb.register_scalar_udf('doesnt_throw', will_throw, [], BIGINT, exception_handling='return_null')
+duckdb.create_function('doesnt_throw', will_throw, [], BIGINT, exception_handling='return_null')
 res = duckdb.sql("""
     select doesnt_throw()
 """).fetchall()
@@ -130,7 +117,7 @@ def random_date():
 	fake = Faker()
 	return fake.date_between()
 
-duckdb.register_scalar_udf('random_date', random_date, [], DATE)
+duckdb.create_function('random_date', random_date, [], DATE)
 res = duckdb.sql('select random_date()').fetchall()
 print(res)
 # [(datetime.date(2019, 5, 15),)]
