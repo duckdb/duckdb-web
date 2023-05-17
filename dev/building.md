@@ -45,7 +45,7 @@ BUILD_PYTHON=1 make debug
 ```
 
 #### `BUILD_PYTHON`
-When this flag is set, the [Python](../docs/api/python/overview.md) package is built.
+When this flag is set, the [Python](../docs/api/python/overview) package is built.
 
 #### `BUILD_SHELL`
 When this flag is set, the [CLI](../docs/api/cli) is built, this is usually enabled by default.
