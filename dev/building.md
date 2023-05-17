@@ -32,8 +32,11 @@ This build is a shorthand for `release` with `BUILD_BENCHMARK=1` set.
 This creates a build and then runs [clang tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
 The CI will also run this check, causing it to fail if this check fails.
 
-#### `format-fix` | `format-master`
-This doesn't actually create a build, but uses [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to check for format issues in the code.  
+#### `format-fix` | `format-changes` | `format-master`
+This doesn't actually create a build, but uses the following format checkers to check for style issues:
+- [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to fix format issues in the code.  
+- [cmake-format]() to fix format issues in the CMakeLists.txt files.  
+
 The CI will also run this check, causing it to fail if this check fails.
 
 ### Package Flags
@@ -120,7 +123,8 @@ With this flag enabled we remove these checks, this is mostly done to check that
 When previously pinned blocks in the BufferManager are unpinned, with this flag enabled we destroy them instantly to make sure that there aren't situations where this memory is still being used, despite not being pinned.
 
 #### `DEBUG_STACKTRACE`
-When a crash or assertion hit occurs in a test, print a stack trace. This is useful for debugging when a crash occurs in a hard to debug through a debugger query / long running query.
+When a crash or assertion hit occurs in a test, print a stack trace.  
+This is useful when debugging a crash that is hard to pinpoint with a debugger attached.
 
 ### Miscellaneous Flags
 
