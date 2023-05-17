@@ -1909,7 +1909,12 @@ function GenerateStarClause(options) {
 				Keyword("("),
 				Choice(0, [
 					Sequence(GenerateStarExpression(options, "-2")),
-					Expression("regex")
+					Expression("regex"),
+					Sequence([
+						Expression("c"),
+						Keyword("->"),
+						Expression("lambda-filter")
+					])
 				]),
 				Keyword(")")
 			])
