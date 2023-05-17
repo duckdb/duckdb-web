@@ -48,7 +48,7 @@ BUILD_PYTHON=1 make debug
 When this flag is set, the [Python](../docs/api/python/overview.md) package is built.
 
 #### `BUILD_SHELL`
-When this flag is set, the [CLI](../docs/api/cli.md) is built, this is usually enabled by default.
+When this flag is set, the [CLI](../docs/api/cli) is built, this is usually enabled by default.
 
 #### `BUILD_BENCHMARK`
 When this flag is set, our in-house Benchmark testing suite is built.
