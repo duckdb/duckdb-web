@@ -461,6 +461,10 @@
                   "url": "function"
                 },
                 {
+                  "page": "Types API",
+                  "url": "types"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 }

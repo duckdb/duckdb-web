@@ -45,6 +45,8 @@ pip install matplotlib
 
 ## Library Import and Configuration
 Next, open a Jupyter Notebook and import the relevant libraries. 
+It's possible to have `%sql` commands and `duckdb.sql` share the same [default connection](dbapi) by providing `duckdb:///:default:` as the SQLAlchemy connection string.
+
 ```python
 import duckdb
 import pandas as pd
@@ -63,9 +65,10 @@ Set configrations on jupysql to directly output data to Pandas and to simplify t
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string. 
-Either connect to an in memory DuckDB, or a file backed db.
+Either connect to a new in-memory DuckDB, the default connection or a file backed db.
 ```python
-%sql duckdb:///:memory:
+%sql duckdb:///:default:
+# %sql duckdb:///:memory:
 # %sql duckdb:///path/to/file.db
 ```
 
