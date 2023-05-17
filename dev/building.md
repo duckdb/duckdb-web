@@ -8,6 +8,9 @@ expanded: Development
 To build DuckDB we use a Makefile which in turn calls into CMake.  
 It's not advised to directly call CMake, as the Makefile sets certain variables that are crucial to properly building the package.
 
+When building with CMake it's possible to specify a generator, we advice using [Ninja](https://ninja-build.org/manual.html) as the generator.  
+The Makefile will check the `GEN` environment variable for `'ninja'` to set this CMake flag to use Ninja.
+
 ### Build Type
 
 DuckDB can be built in many different settings, most of these correspond directly to CMake but not all of them.
@@ -35,7 +38,7 @@ The CI will also run this check, causing it to fail if this check fails.
 #### `format-fix` | `format-changes` | `format-master`
 This doesn't actually create a build, but uses the following format checkers to check for style issues:
 - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to fix format issues in the code.  
-- [cmake-format]() to fix format issues in the CMakeLists.txt files.  
+- [cmake-format](https://cmake-format.readthedocs.io/en/latest/) to fix format issues in the CMakeLists.txt files.  
 
 The CI will also run this check, causing it to fail if this check fails.
 
@@ -54,20 +57,20 @@ When this flag is set, the [Python](../docs/api/python/overview) package is buil
 When this flag is set, the [CLI](../docs/api/cli) is built, this is usually enabled by default.
 
 #### `BUILD_BENCHMARK`
-When this flag is set, our in-house Benchmark testing suite is built.
-More information about this can be found [here](https://github.com/duckdb/duckdb/tree/master/benchmark).
+When this flag is set, our in-house Benchmark testing suite is built.  
+More information about this can be found [here](https://github.com/duckdb/duckdb/blob/master/benchmark/README.md).
 
 #### `BUILD_JDBC`
-When this flag is set, the `[Java](../docs/api/java.md) package is built.
+When this flag is set, the [Java](../docs/api/java) package is built.
 
 #### `BUILD_ODBC`
-When this flag is set, the [ODBC](../docs/api/odbc/overview.md) package is built.
+When this flag is set, the [ODBC](../docs/api/odbc/overview) package is built.
 
 #### `BUILD_R`
-When this flag is set, the [R](../docs/api/r.md) package is built.
+When this flag is set, the [R](../docs/api/r) package is built.
 
 #### `BUILD_NODE`
-When this flag is set, the [Node](../docs/api/nodejs/overview.md) package is built.
+When this flag is set, the [Node](../docs/api/nodejs/overview) package is built.
 
 ### Extension Flags
 
@@ -77,7 +80,7 @@ For every in-tree extension that is maintained by core DuckDB there exists a fla
 When this flag is set, the [AutoComplete](https://github.com/duckdb/duckdb/pull/4921) extension is built.
 
 #### `BUILD_ICU`
-When this flag is set, the [ICU](../_posts/2022-01-06-time-zones.md) extension is built.
+When this flag is set, the [ICU](../2022/01/06/time-zones.html) extension is built.
 
 #### `BUILD_TPCH`
 When this flag is set, the [TPCH](https://www.tpc.org/tpch/) extension is built, this enables TPCH-H data generation and query support using `dbgen`.
@@ -89,16 +92,16 @@ When this flag is set, the [TPCDS](https://www.tpc.org/tpcds/) extension is buil
 When this flag is set, the [TPCE](https://www.tpc.org/tpce/) extension is built, unlike TPC-H and TPC-DS this does not enable data generation and query support, but does enable tests for TPC-E through our test suite.
 
 #### `BUILD_FTS`
-When this flag is set, the [Full Text Search](../docs/extensions/full_text_search.md) extension is built.
+When this flag is set, the [Full Text Search](../docs/extensions/full_text_search) extension is built.
 
 #### `BUILD_VISUALIZER`
 When this flag is set, the [Visualizer](https://github.com/duckdb/duckdb/pull/1832) extension is built.
 
 #### `BUILD_HTTPFS`
-When this flag is set, the [HTTP File System](../docs/extensions/httpfs.md) extension is built.
+When this flag is set, the [HTTP File System](../docs/extensions/httpfs) extension is built.
 
 #### `BUILD_JSON`
-When this flag is set, the [JSON](../docs/extensions/json.md) extension is built.
+When this flag is set, the [JSON](../docs/extensions/json) extension is built.
 
 #### `BUILD_INET`
 When this flag is set, the [INET](https://github.com/duckdb/duckdb/pull/4785) extension is built.
@@ -133,9 +136,9 @@ This is useful when debugging a crash that is hard to pinpoint with a debugger a
 ### Miscellaneous Flags
 
 #### `DISABLE_UNITY`
-To improve compilation time, we use [Unity Build](https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html) to combine translation units.
+To improve compilation time, we use [Unity Build](https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html) to combine translation units.  
 This can however hide include bugs, this flag disables using the unity build so these errors can be detected.
 
 #### `DISABLE_SANITIZER`
-In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.
+In some situations, running an executable that has been built with sanitizers enabled is not support / can cause problems. Julia is an example of this.  
 With this flag enabled, the sanitizers are disabled for the build.
