@@ -20,7 +20,7 @@ This build runs with all the debug information, including symbols, assertions an
 The special debug defines are not automatically set for this build however.
 
 #### `relassert`
-This build does not trigger the `#ifdef DEBUG` code blocks, but still has debug symbols that make it possible to step through the execution with line number  information and `D_ASSERT` lines are still checked in this build.
+This build does not trigger the `#ifdef DEBUG` code blocks, but still has debug symbols that make it possible to step through the execution with line number information and `D_ASSERT` lines are still checked in this build.
 
 #### `reldebug`
 This build is similar to `relassert` in many ways, only assertions are also stripped in this build.
