@@ -7,6 +7,23 @@ selected: Client APIs
 You can create a DuckDB function out of a python function so it can be used in SQL queries.
 Just like regular [functions](../../sql/functions/overview) they need to have a name, a return type and parameter types.
 
+Example using a python function that calls a third party library.
+```py
+import duckdb
+import duckdb
+from duckdb.typing import *
+from faker import Faker
+
+def random_name():
+	fake = Faker()
+	return fake.name()
+
+duckdb.create_function('random_name', random_name, [], VARCHAR)
+res = duckdb.sql('select random_name()').fetchall()
+print(res)
+# [('Gerald Ashley',)]
+```
+
 ### Creating Functions
 
 The `create_function` method is used to add a function.  
