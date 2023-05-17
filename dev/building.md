@@ -109,7 +109,8 @@ When this flag is set, the [SQLSmith](https://github.com/duckdb/duckdb/pull/3410
 ### Debug Flags
 
 #### `CRASH_ON_ASSERT`
-When an assertion triggers (`D_ASSERT(condition);` in the code), this throws an InternalException. With this flag enabled it instead directly causes a crash.
+`D_ASSERT(condition)` is used all throughout the code, these will throw an InternalException in debug builds.  
+With this flag enabled, when the assertion triggers it will instead directly cause a crash.
 
 #### `DISABLE_STRING_INLINE`
 In our execution format `string_t` has the feature to "inline" strings that are under a certain length (12 bytes), this means they don't require a separate allocation.  
