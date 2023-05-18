@@ -29,6 +29,10 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load a JSON file into a table](../guides/import/json_import)
 * [How to export a table to a JSON file](../guides/import/json_export)
 
+##### Excel Files with the Spatial Extension
+* [How to load an Excel file into a table](../guides/import/excel_import)
+* [How to export a table to an Excel file](../guides/import/excel_export)
+
 ##### HTTP, S3 and GCP
 
 * [How to load a Parquet file directly from HTTP(s)](../guides/import/http_import)

@@ -73,6 +73,14 @@
               "url": "json_export"
             },
             {
+              "page": "Excel Import",
+              "url": "excel_import"
+            },
+            {
+              "page": "Excel Export",
+              "url": "excel_export"
+            },
+            {
               "page": "SQLite Import",
               "url": "query_sqlite"
             },
