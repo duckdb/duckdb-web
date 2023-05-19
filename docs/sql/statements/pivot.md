@@ -221,8 +221,8 @@ USING (Country);
 
 
 ### Internals
-Pivoting is implemented entirely as rewrites into SQL queries. 
-Each `PIVOT` is implemented as set of aggregations with `FILTER` clauses.
+Pivoting is implemented as a combination of SQL query re-writing and a dedicated `PhysicalPivot` operator for higher performance. 
+Each `PIVOT` is implemented as set of aggregations into lists and then the dedicated `PhysicalPivot` operator converts those lists into column names and values.
 Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
 
 DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
@@ -230,7 +230,7 @@ In order to automatically detect the columns that should be created as a result 
 [`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns. 
 Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.
 
-After the `IN` clauses have been populated with `ENUM`s, the query is re-written again into a set of aggregations with `FILTER` clauses.
+After the `IN` clauses have been populated with `ENUM`s, the query is re-written again into a set of aggregations into lists.
 
 For example:
 ```sql
@@ -251,17 +251,25 @@ PIVOT Cities ON Year IN __pivot_enum_0_0 USING SUM(Population);
 
 and finally translated into:
 ```sql
-SELECT 
-    Country,
-    Name,
-    SUM(Population) FILTER (Year=2000) AS "2000",
-    SUM(Population) FILTER (Year=2010) AS "2010",
-    SUM(Population) FILTER (Year=2020) AS "2020"
-FROM Cities
+SELECT Country, Name, LIST(Year), LIST(population_sum)
+FROM (
+    SELECT Country, Name, Year, SUM(population) AS population_sum
+    FROM Cities
+    GROUP BY ALL
+)
 GROUP BY ALL;
 ```
 
 This produces the result:
+
+| Country |     Name      |    list("YEAR")    | list(population_sum) |
+|---------|---------------|--------------------|----------------------|
+| NL      | Amsterdam     | [2000, 2010, 2020] | [1005, 1065, 1158]   |
+| US      | Seattle       | [2000, 2010, 2020] | [564, 608, 738]      |
+| US      | New York City | [2000, 2010, 2020] | [8015, 8175, 8772]   |
+
+The `PhysicalPivot` operator converts those lists into column names and values to return this result:
+
 
 | Country |     Name      | 2000 | 2010 | 2020 |
 |---------|---------------|------|------|------|
