@@ -4,6 +4,12 @@ function GenerateUpdate(options = {}) {
 		AutomaticStack([
 			Keyword("UPDATE"),
 			GenerateQualifiedTableName(),
+			Optional(
+				Sequence([
+					Optional(Keyword('AS')),
+					Expression('table-alias')
+				])
+			),
 			Sequence([
 				Keyword("SET"),
 				OneOrMore(
