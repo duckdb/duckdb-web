@@ -23,7 +23,7 @@ $ /newer/duckdb mydata.new.db -c "IMPORT DATABASE 'tmp';"
 
 After this `mydata.db` will be untouched with the old format, `mydata.new.db` will contain the same data but in a format accessible from more recent duckdb, and folder `tmp` will old the same data in an universal format as different files.
 
-Check [EXPORT documentation](docs/sql/statements/export) for more details on the syntax.
+Check [EXPORT documentation](../docs/sql/statements/export) for more details on the syntax.
 
 ## Storage header
 
