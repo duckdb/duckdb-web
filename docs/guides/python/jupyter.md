@@ -12,8 +12,7 @@ See other guides in the Python section for how to use DuckDB and Python together
 
 In this example, we used the [jupysql](https://github.com/ploomber/jupysql) package which is a direct fork of [ipython-sql](https://github.com/catherinedevlin/ipython-sql).
 The main difference is that `Jupysql` is well maintained, and has both newer features and bug fixes.
-  
-As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DuckDB directly may be desirable. However, the difference is typically quite small.  
+
 
 This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
