@@ -8,7 +8,7 @@ excerpt_separator: <!--more-->
 
 Subqueries in SQL are a powerful abstraction that allow simple queries to be used as composable building blocks. They allow you to break down complex problems into smaller parts, and subsequently make it easier to write, understand and maintain large and complex queries.
 
-DuckDB uses a state-of-the-art subquery decorrelation optimizer that allows subqueries to be executed very efficiently. As a result, users can freely use subqueries to create expressive queries without having to worry about manually rewriting subqueries into joins. For more information, skip to the [Performance](#Performance) section.
+DuckDB uses a state-of-the-art subquery decorrelation optimizer that allows subqueries to be executed very efficiently. As a result, users can freely use subqueries to create expressive queries without having to worry about manually rewriting subqueries into joins. For more information, skip to the [Performance](#performance) section.
 
 ### Types of Subqueries
 
@@ -71,7 +71,7 @@ For example, suppose that we want to find all of the shortest flights *for each 
 PREPARE min_distance_per_carrier AS
 SELECT MIN(distance)
 FROM ontime
-WHERE uniquecarrier=$1;
+WHERE uniquecarrier=?;
 ```
 
 We can execute this prepared statement to obtain the minimum distance for a specific carrier.
@@ -95,6 +95,7 @@ WHERE distance=(
      WHERE uniquecarrier=ontime_outer.uniquecarrier
 );
 ```
+
 | uniquecarrier |    origincityname    |     destcityname     | flightdate | distance |
 |---------------|----------------------|----------------------|------------|----------|
 | AS            | Wrangell, AK         | Petersburg, AK       | 2017-01-01 | 31.0     |
@@ -134,7 +135,7 @@ We can obtain a list of all flights on a given route past a certain date using t
 PREPARE flights_after_date AS
 SELECT uniquecarrier, origincityname, destcityname, flightdate, distance
 FROM ontime
-WHERE origin=$1 AND dest=$2 AND flightdate>$3;
+WHERE origin=? AND dest=? AND flightdate>?;
 ```
 
 ```sql
