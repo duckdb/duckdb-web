@@ -219,9 +219,11 @@ WHERE uniquecarrier = ANY (
 
 #### Performance
 
-Logically, correlated subqueries are executed *once per row*. As such, it is natural to think that correlated subqueries are very expensive and should be avoided for performance reasons.
+Whereas scalar subqueries are logically executed *once*, correlated subqueries are logically executed *once per row*. As such, it is natural to think that correlated subqueries are very expensive and should be avoided for performance reasons.
 
 While that is true in many SQL systems, it is not the case in DuckDB. In DuckDB, subqueries are **always** *decorrelated*. DuckDB uses a state-of-the-art subquery decorrelation algorithm as described in the [Unnesting Arbitrary Queries](https://cs.emis.de/LNI/Proceedings/Proceedings241/383.pdf) paper. This allows all subqueries to be decorrelated and executed as a single, much more efficient, query.
+
+In DuckDB, correlation does not imply performance degradation.
 
 If we look at the query plan for the correlated scalar subquery using `EXPLAIN`, we can see that the query has been transformed into a hash aggregate followed by a hash join. This allows the query to be executed very efficiently.
 
@@ -263,7 +265,7 @@ We can see the drastic performance difference that subquery decorrelation has wh
 | 0.06s  | >48 Hours    | >48 Hours  |
 
 
-As Postgres and SQLite do not de-correlate the subquery, the query is not just *logically*, but *actually* executed once for every row. As the subquery involves a full table scan, this moves the query from linear complexity, O(n), to quadratic complexity, O(n<sup>2</sup>).
+As Postgres and SQLite do not de-correlate the subquery, the query is not just *logically*, but *actually* executed once for every row. As a result, the subquery is executed *4 million times* in those systems, which takes an immense amount of time.
 
 In this case, it is possible to manually decorrelate the query and generate the following SQL:
 
