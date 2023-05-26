@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(Correlated) Subqueries in SQL"
+title:  "Correlated Subqueries in SQL"
 author: Mark Raasveldt
 excerpt_separator: <!--more-->
 ---
