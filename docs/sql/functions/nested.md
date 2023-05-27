@@ -99,7 +99,7 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | `map()` | Returns an empty map. | `map()` | `{}` |
 | `map_keys(`*`map`*`)` | Return a list of all keys in the map. | `map_keys(map([100, 5], [42, 43]))` | `[100, 42]` |
 | `map_values(`*`map`*`)` | Return a list of all values in the map. | `map_values(map([100, 5], [42, 43]))` | `[5, 33]` |
-| `map_entries(`*`map`*`)` | Return a list of struct(k, v) for each key-value pair in the map. | `map_keys(map([100, 5], [42, 43]))` | `[{'k': 100, 'v': 42}, {'k': 5, 'v': 43}]` |
+| `map_entries(`*`map`*`)` | Return a list of struct(k, v) for each key-value pair in the map. | `map_entries(map([100, 5], [42, 43]))` | `[{'k': 100, 'v': 42}, {'k': 5, 'v': 43}]` |
 
 ## Union Functions
 
