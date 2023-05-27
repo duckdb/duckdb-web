@@ -48,6 +48,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `last_day(`*`timestamp`*`)` | The last day of the month. | `last_day(TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-31` |
 | `least(`*`timestamp`*`, `*`timestamp`*`)` | The earlier of two timestamps | `least(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-22 01:02:03.1234` |
 | `make_timestamp(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)` | The timestamp for the given parts | `make_timestamp(1992, 9, 20, 13, 34, 27.123456)` | `1992-09-20 13:34:27.123456` |
+| `make_timestamp(`*`microseconds`*`)` | The timestamp for the given number of µs since the epoch | `make_timestamp(1667810584123456)` | `2022-11-07 08:43:04.123456` |
 | `monthname(`*`timestamp`*`)` | The (English) name of the month. | `monthname(TIMESTAMP '1992-09-20')` | `September` |
 | `strftime(`*`timestamp`*`, `*`format`*`)` | Converts timestamp to string according to the [format string](../../sql/functions/dateformat) | `strftime(timestamp '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` | `Wed, 1 January 1992 - 08:38:40 PM` |
 | `strptime(`*`text`*`, `*`format`*`)` | Converts string to timestamp according to the [format string](../../sql/functions/dateformat). Throws on failure. | `strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')` | `1992-01-01 20:38:40` |
@@ -68,7 +69,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 The table below shows the available table functions for `TIMESTAMP` types.
 
 | Function | Description | Example |
-|:---|:---|:---|:---|
+|:---|:---|:---|
 | `generate_series(`*`timestamp`*`, `*`timestamp`*`, `*`interval`*`)` | Generate a table of timestamps in the closed range, stepping by the interval | `generate_series(TIMESTAMP '2001-04-10', TIMESTAMP '2001-04-11', INTERVAL 30 MINUTE)`
 | `range(`*`timestamp`*`, `*`timestamp`*`, `*`interval`*`)` | Generate a table of timestamps in the half open range, stepping by the interval | `range(TIMESTAMP '2001-04-10', TIMESTAMP '2001-04-11', INTERVAL 30 MINUTE)`
 
