@@ -51,9 +51,9 @@ SELECT COALESCE(NULL, NULL);
 
 `IFNULL` is a two-argument version of `COALESCE`
 ```sql
-SELECT IFNULL(NULL, 'NULL');
--- NULL
-SELECT IFNULL(1, 'NULL');
+SELECT IFNULL(NULL, 'default_string');
+-- default_string
+SELECT IFNULL(1, 'default_string');
 -- 1
 ```
 
