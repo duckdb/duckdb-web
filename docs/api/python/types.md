@@ -4,7 +4,7 @@ title: Types API
 selected: Client APIs
 ---
 
-The `DuckDBPyType` class represents a type instance of our [data types](../../sql/data_types/overview.md)
+The `DuckDBPyType` class represents a type instance of our [data types](../../sql/data_types/overview).
 
 ### Converting from other types
 

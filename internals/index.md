@@ -36,7 +36,7 @@ The binder converts all nodes into their **bound** equivalents. In the binder ph
 * Aggregate/window functions are extracted
 
 The following conversions happen:
-* SQLStatement -> [BoundSQLStatement](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_sql_statement.hpp)
+* SQLStatement -> [BoundStatement](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_statement.hpp)
 * QueryNode -> [BoundQueryNode](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_query_node.hpp)
 * TableRef -> [BoundTableRef](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_tableref.hpp)
 * ParsedExpression -> [Expression](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/expression.hpp)

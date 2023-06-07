@@ -77,7 +77,7 @@ SELECT s.*, p.unit_price, s.quantity * p.unit_price AS total
 └─────────┴─────────────────────┴──────────┴────────────┴───────┘
 ```
 
-The `ASOF JOIN` picks a good price for the 18:30 sale.  the `ON s.sale_item >= pp.ticker_time`
+The `ASOF JOIN` picks a good price for the 18:30 sale.  the `ON s.sale_time >= pp.ticker_time`
 will cause the nearest lower value (in this case, for 18:00) to be used.
 
 ```sql

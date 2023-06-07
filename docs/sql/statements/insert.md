@@ -65,7 +65,8 @@ This is not a problem however if columns are missing from the SELECT statement, 
 
 An `ON CONFLICT` clause can be used to perform a certain action on conflicts that arise from `UNIQUE` or `PRIMARY KEY` constraints.
 
-Optionally you can provide a `conflict_target`, which is a group of columns that an Index indexes on, or if left out, all `UNIQUE` or `PRIMARY KEY` constraint(s) on the table are targeted.
+A `conflict_target` may also be provided, which is a group of columns that an Index indexes on, or if left out, all `UNIQUE` or `PRIMARY KEY` constraint(s) on the table are targeted.
+The `conflict_target` is optional unless using a `DO UPDATE` (see below) and there are multiple unique/primary key constraints on the table.
 
 When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
 If a conflict does not meet this condition, an error will be thrown instead, and the entire operation is aborted.
