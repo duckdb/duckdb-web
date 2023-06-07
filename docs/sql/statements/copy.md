@@ -120,10 +120,13 @@ The below options are applicable when writing `Parquet` files.
 |:---|:---|:----|:----|
 | `compression` | The compression format to use (uncompressed, snappy, gzip or zstd). | varchar | snappy |
 | `row_group_size` | The target size of each row-group. | bigint | 122880 |
-| `field_ids` | The `field_id` for each column | struct | `(empty)` |
+| `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | struct | `(empty)` |
 
 Some examples of `FIELD_IDS` are:
 ```sql
+-- Assign field_ids automatically
+COPY (SELECT 128 AS i)
+TO 'my.parquet' (FIELD_IDS 'auto');
 -- Sets the field_id of column 'i' to 42
 COPY (SELECT 128 AS i)
 TO 'my.parquet' (FIELD_IDS {i: 42});
