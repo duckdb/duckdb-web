@@ -36,7 +36,7 @@ The binder converts all nodes into their **bound** equivalents. In the binder ph
 * Aggregate/window functions are extracted
 
 The following conversions happen:
-* SQLStatement -> [BoundSQLStatement](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_sql_statement.hpp)
+* SQLStatement -> [BoundStatement](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_statement.hpp)
 * QueryNode -> [BoundQueryNode](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_query_node.hpp)
 * TableRef -> [BoundTableRef](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/bound_tableref.hpp)
 * ParsedExpression -> [Expression](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/expression.hpp)
@@ -57,7 +57,7 @@ After the logical planner has created the logical query tree, the optimizers are
 The column binding resolver converts logical [BoundColumnRefExpresion](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/expression/bound_columnref_expression.hpp) nodes that refer to a column of a specific table into [BoundReferenceExpression](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/planner/expression/bound_reference_expression.hpp) nodes that refer to a specific index into the DataChunks that are passed around in the execution engine.
 
 # Physical Plan Generator
-The physical plan generator converts the resulting logical operator tree into a [PhysicalOperator](https://github.com/duckdb/duckdb/blob/master/src/include/execution/physical_operator.hpp) tree.
+The physical plan generator converts the resulting logical operator tree into a [PhysicalOperator](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/execution/physical_operator.hpp) tree.
 
 # Execution
 In the execution phase, the physical operators are executed to produce the query result. The execution model is a vectorized volcano model, where [DataChunks](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/common/types/data_chunk.hpp) are pulled from the root node of the physical operator tree. Each PhysicalOperator itself defines how it grants its result. A [PhysicalTableScan](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/execution/operator/scan/physical_table_scan.hpp) node will pull the chunk from the base tables on disk, whereas a [PhysicalHashJoin](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/execution/operator/join/physical_hash_join.hpp) will perform a hash join between the output obtained from its child nodes.

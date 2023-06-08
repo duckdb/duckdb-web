@@ -13,6 +13,8 @@ railroad: statements/copy.js
 COPY lineitem FROM 'lineitem.csv' (AUTO_DETECT TRUE);
 -- read a parquet file into the lineitem table
 COPY lineitem FROM 'lineitem.pq' (FORMAT PARQUET);
+-- read a json file into the lineitem table - using auto-detected options
+COPY lineitem FROM 'lineitem.json' (FORMAT JSON, AUTO_DETECT TRUE);
 
 -- write a table to a CSV file
 COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
@@ -43,6 +45,10 @@ COPY lineitem FROM 'lineitem.tbl' ( AUTO_DETECT TRUE );
 COPY category(name) FROM 'names.csv';
 -- Read the contents of a parquet file 'lineitem.parquet' into the lineitem table
 COPY lineitem FROM 'lineitem.parquet' ( FORMAT PARQUET );
+-- Read the contents of a newline-delimited json file 'lineitem.ndjson' into the lineitem table
+COPY lineitem FROM 'lineitem.ndjson' ( FORMAT JSON );
+-- Read the contents of a json file 'lineitem.json' into the lineitem table
+COPY lineitem FROM 'lineitem.json' ( FORMAT JSON, ARRAY TRUE );
 ```
 
 ## Syntax
@@ -64,6 +70,10 @@ COPY lineitem(l_orderkey) TO 'orderkey.tbl' ( DELIMITER '|' );
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ',');
 -- Copy the result of a query to the Parquet file 'query.parquet'
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.parquet' (FORMAT PARQUET);
+-- Copy the result of a query to the newline-delimited JSON file 'query.ndjson'
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
+-- Copy the result of a query to the JSON file 'query.json'
+COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
 ```
 
 ## Syntax
@@ -118,5 +128,7 @@ The below options are applicable when writing `JSON` files.
 
 | Name | Description | Type | Default |
 |:---|:---|:----|:----|
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
+| `array` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | bool | `false` |

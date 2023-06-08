@@ -16,7 +16,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `BLOB` | `BYTEA`, `BINARY,` `VARBINARY` | variable-length binary data |
 | `DATE` |   | calendar date (year, month day) |
 | `DOUBLE` | `FLOAT8`, `NUMERIC`, `DECIMAL` | double precision floating-point number (8 bytes) |
-| `DECIMAL(s, p)` | | fixed-precision floating point number with the given scale and precision |
+| `DECIMAL(prec, scale)` | | fixed-precision number with the given width (precision) and scale |
 | `HUGEINT` | | signed sixteen-byte integer|
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | signed four-byte integer |
 | `INTERVAL` |  | date / time delta |
@@ -34,22 +34,25 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
 ## Nested / Composite Types
-DuckDB supports three nested data types: `LIST`, `STRUCT` and `MAP`. Each supports different use cases and has a different structure. 
+DuckDB supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Each supports different use cases and has a different structure. 
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:---|:---|:---|:---|:---|
 | [LIST](../../sql/data_types/list) | An ordered sequence of data values of the same type. | Each row must have the same data type within each LIST, but can have any number of elements. | [1, 2, 3] | INT[ ] |
 | [STRUCT](../../sql/data_types/struct) | A dictionary of multiple named values, where each key is a string, but the value can be a different type for each key. | Each row must have the same keys. | {'i': 42, 'j': 'a'} | STRUCT(i INT, j VARCHAR) |
 | [MAP](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP(INT, VARCHAR) |
+| [UNION](../../sql/data_types/union) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator "tag" value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | union_value(num := 2) | UNION(num INT, text VARCHAR) |
 
 ## Nesting
 
-`LIST`s, `STRUCT`s, and `MAP`s can be arbitrarily nested to any depth, so long as the type rules are observed.
+`LIST`s, `STRUCT`s, `MAP`s and `UNION`s can be arbitrarily nested to any depth, so long as the type rules are observed.
 
 ```sql
 -- Struct with lists
 SELECT {'birds': ['duck', 'goose', 'heron'], 'aliens': NULL, 'amphibians': ['frog', 'toad']};
 -- Struct with list of maps
 SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
+-- A list of unions
+SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num INTEGER)];
 ```
 ## Links to Detailed Documentation

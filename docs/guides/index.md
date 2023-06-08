@@ -29,6 +29,10 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load a JSON file into a table](../guides/import/json_import)
 * [How to export a table to a JSON file](../guides/import/json_export)
 
+##### Excel Files with the Spatial Extension
+* [How to load an Excel file into a table](../guides/import/excel_import)
+* [How to export a table to an Excel file](../guides/import/excel_export)
+
 ##### HTTP, S3 and GCP
 
 * [How to load a Parquet file directly from HTTP(s)](../guides/import/http_import)
@@ -77,6 +81,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 ## SQL Editors / IDE's
 
 * [How to set up the DBeaver SQL IDE](../guides/sql_editors/dbeaver)
+* [How to use the Harlequin terminal-based SQL IDE](../guides/sql_editors/harlequin)
 * [How to set up Rill Data Developer](../guides/sql_editors/rill)
 
 
@@ -84,3 +89,4 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 * [How to use Tad to view tabular data files and DuckDB databases](../guides/data_viewers/tad)
 * [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)
+* [How to draw command-line plots with DuckDB and YouPlot](../guides/data_viewers/youplot)

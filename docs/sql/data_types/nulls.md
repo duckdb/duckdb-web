@@ -49,6 +49,14 @@ SELECT COALESCE(NULL, NULL);
 -- NULL
 ```
 
+`IFNULL` is a two-argument version of `COALESCE`
+```sql
+SELECT IFNULL(NULL, 'default_string');
+-- default_string
+SELECT IFNULL(1, 'default_string');
+-- 1
+```
+
 ## NULL and Conjunctions
 
 `NULL` values have special semantics in `AND`/`OR` conjunctions. For the ternary logic truth tables, see the [Boolean Type documentation](../../sql/data_types/boolean).

@@ -73,6 +73,14 @@
               "url": "json_export"
             },
             {
+              "page": "Excel Import",
+              "url": "excel_import"
+            },
+            {
+              "page": "Excel Export",
+              "url": "excel_export"
+            },
+            {
               "page": "SQLite Import",
               "url": "query_sqlite"
             },
@@ -191,6 +199,10 @@
               "url": "dbeaver"
             },
             {
+              "page": "Harlequin SQL IDE",
+              "url": "harlequin"
+            },
+            {
               "page": "Rill Data Developer",
               "url": "rill"
             }
@@ -207,6 +219,10 @@
             {
               "page": "Tad",
               "url": "tad"
+            },
+            {
+              "page": "YouPlot",
+              "url": "youplot"
             }
           ]
         }
@@ -453,6 +469,14 @@
                   "url": "relational_api"
                 },
                 {
+                  "page": "Function API",
+                  "url": "function"
+                },
+                {
+                  "page": "Types API",
+                  "url": "types"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
                 }
@@ -585,6 +609,10 @@
                 {
                   "page": "Set/Reset",
                   "url": "set"
+                },
+                {
+                  "page": "Unpivot",
+                  "url": "unpivot"
                 },
                 {
                   "page": "Update",

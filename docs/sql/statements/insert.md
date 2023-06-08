@@ -28,17 +28,45 @@ INSERT OR REPLACE INTO tbl(i) VALUES(1);
 
 `INSERT INTO` inserts new rows into a table. One can insert one or more rows specified by value expressions, or zero or more rows resulting from a query.
 
-The target column names can be listed in any order. If no list of column names is given at all, the default is all the columns of the table in their declared order. The values supplied by the VALUES clause or query are associated with the column list left-to-right.
+## Insert Column Order
 
+It's possible to provide an optional insert column order, this can either be `BY POSITION` (the default) or `BY NAME`.
 Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or `NULL` if there is none.
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
+
+### BY POSITION
+
+The order that values are inserted into the columns of the table is determined by the order that the columns were declared in.
+This can be overriden by providing column names as part of the target, for example:
+```sql
+CREATE TABLE tbl(a INTEGER, b INTEGER);
+INSERT INTO tbl(b, a) VALUES (5, 42);
+```
+This will insert `5` into `b` and `42` into `a`.
+The values supplied by the VALUES clause or query are associated with the column list left-to-right.
+
+### BY NAME
+
+The names of the column list of the SELECT statement are matched against the column names of the table to determine the order that values should be inserted into the table, even if the order of the columns in the table differs from the order of the values in the SELECT statement.
+For example:
+```sql
+CREATE TABLE tbl(a INTEGER, b INTEGER);
+INSERT INTO tbl BY NAME (select 42 as b);
+```
+This will insert `42` into `b` and insert `NULL` (or its default value) into `a`.
+
+It's important to note that when using `INSERT INTO <table> BY NAME`, the column names specified in the SELECT statement must match the column names in the table.  
+If a column name is misspelled or does not exist in the table, an error will occur.  
+
+This is not a problem however if columns are missing from the SELECT statement, as those will be filled with the default value.
 
 ## On Conflict Clause
 
 An `ON CONFLICT` clause can be used to perform a certain action on conflicts that arise from `UNIQUE` or `PRIMARY KEY` constraints.
 
-Optionally you can provide a `conflict_target`, which is a group of columns that an Index indexes on, or if left out, all `UNIQUE` or `PRIMARY KEY` constraint(s) on the table are targeted.
+A `conflict_target` may also be provided, which is a group of columns that an Index indexes on, or if left out, all `UNIQUE` or `PRIMARY KEY` constraint(s) on the table are targeted.
+The `conflict_target` is optional unless using a `DO UPDATE` (see below) and there are multiple unique/primary key constraints on the table.
 
 When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
 If a conflict does not meet this condition, an error will be thrown instead, and the entire operation is aborted.

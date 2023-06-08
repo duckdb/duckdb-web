@@ -12,8 +12,7 @@ See other guides in the Python section for how to use DuckDB and Python together
 
 In this example, we used the [jupysql](https://github.com/ploomber/jupysql) package which is a direct fork of [ipython-sql](https://github.com/catherinedevlin/ipython-sql).
 The main difference is that `Jupysql` is well maintained, and has both newer features and bug fixes.
-  
-As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DuckDB directly may be desirable. However, the difference is typically quite small.  
+
 
 This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
@@ -45,6 +44,8 @@ pip install matplotlib
 
 ## Library Import and Configuration
 Next, open a Jupyter Notebook and import the relevant libraries. 
+It's possible to have `%sql` commands and `duckdb.sql` share the same [default connection](../../api/python/dbapi) by providing `duckdb:///:default:` as the SQLAlchemy connection string.
+
 ```python
 import duckdb
 import pandas as pd
@@ -63,9 +64,10 @@ Set configrations on jupysql to directly output data to Pandas and to simplify t
 ```
 
 Connect jupysql to DuckDB using a SQLAlchemy-style connection string. 
-Either connect to an in memory DuckDB, or a file backed db.
+Either connect to a new in-memory DuckDB, the default connection or a file backed db.
 ```python
-%sql duckdb:///:memory:
+%sql duckdb:///:default:
+# %sql duckdb:///:memory:
 # %sql duckdb:///path/to/file.db
 ```
 

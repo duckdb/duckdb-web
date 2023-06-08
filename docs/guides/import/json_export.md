@@ -9,7 +9,7 @@ selected: JSON Export
 To export the data from a table to a JSON file, use the `COPY` statement.
 
 ```sql
-COPY tbl TO 'output.json' (HEADER, DELIMITER ',');
+COPY tbl TO 'output.json';
 ```
 
 The result of queries can also be directly exported to a JSON file.

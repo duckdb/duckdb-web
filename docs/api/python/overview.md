@@ -95,6 +95,9 @@ con.sql('CREATE TABLE test(i INTEGER)')
 con.sql('INSERT INTO test VALUES (42)')
 # query the table
 con.table('test').show()
+# explicitly close the connection
+con.close()
+# Note: connections also closed implicitly when they go out of scope
 ```
 
 The connection object and the `duckdb` module can be used interchangeably - they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.

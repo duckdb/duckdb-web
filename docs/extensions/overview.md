@@ -32,6 +32,7 @@ select * from duckdb_extensions();
 
 |  Extension name   |                             Description                              |     Aliases     |
 |-------------------|----------------------------------------------------------------------|-----------------|
+| autocomplete | Adds supports for autocomplete in the shell          |                 |
 | excel             |                                                                      |                 |
 | fts               | Adds support for Full-Text Search Indexes                            |                 |
 | httpfs            | Adds support for reading and writing files over a HTTP(S) connection | http, https, s3 |
@@ -41,7 +42,6 @@ select * from duckdb_extensions();
 | json              | Adds support for JSON operations                                     |                 |
 | parquet           | Adds support for reading and writing parquet files                   |                 |
 | postgres_scanner  | Adds support for reading from a Postgres database                    | postgres        |
-| autocomplete | Adds supports for autocomplete in the shell          |                 |
 | spatial           | Adds support for geospatial data processing                          |                 |
 | sqlite_scanner    | Adds support for reading SQLite database files                       | sqlite, sqlite3 |
 | substrait        | Adds support for the Substrait integration                           |
@@ -61,7 +61,7 @@ https://extensions.duckdb.org/v{release_version_number}/{platform_name}/{extensi
 ```
 For example:
 ```
-https://extensions.duckdb.org/v0.7.0/windows_amd64/json.duckdb_extension.gz
+https://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
 ```
 
 The list of supported platforms may increase over time, but the current list of platforms includes:
@@ -71,6 +71,7 @@ The list of supported platforms may increase over time, but the current list of 
 * osx_amd64
 * osx_arm64
 * windows_amd64
+* windows_amd64_rtools
 
 See above for a list of extension names and how to pull the latest list of extensions.
 
