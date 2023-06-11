@@ -69,7 +69,7 @@ SELECT add_default(37);
 -- error! add_default only has one positional parameter
 SELECT add_default(40, 2);
 -- success! default parameters are used by assigning them like so
-SELECT add_default(40, b=2);
+SELECT add_default(40, b:=2);
 -- error! default parameters must come after positional parameters
 SELECT add_default(b=2, 40);
 -- the order of default parameters does not matter
