@@ -2,10 +2,6 @@ gold:
   - name: Voltron Data
     url: https://voltrondata.com
     logoimg: voltrondata.svg
-  
-  - name: Relational AI
-    url: https://relational.ai
-    logoimg: relational-ai.svg
  
   - name: Mode
     url: https://mode.com
@@ -27,6 +23,10 @@ silver:
   - name: Watershed
     url: https://watershedclimate.com
     logoimg: watershed.svg
+    
+  - name: Relational AI
+    url: https://relational.ai
+    logoimg: relational-ai.svg
 
   - name: Rill
     url: https://www.rilldata.com
