@@ -203,6 +203,10 @@
               "url": "harlequin"
             },
             {
+              "page": "qStudio SQL IDE",
+              "url": "qStudio"
+            },
+            {
               "page": "Rill Data Developer",
               "url": "rill"
             }
