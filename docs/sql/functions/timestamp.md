@@ -38,6 +38,9 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `dayname(`*`timestamp`*`)` | The (English) name of the weekday | `dayname(TIMESTAMP '1992-03-22')` | `Sunday` |
 | `epoch(`*`timestamp`*`)` | Converts a timestamp to the seconds since the epoch | `epoch('2022-11-07 08:43:04'::TIMESTAMP);` | `1667810584` |
 | `epoch_ms(`*`ms`*`)` | Converts ms since epoch to a timestamp | `epoch_ms(701222400000)` | `1992-03-22 00:00:00` |
+| `epoch_ms(`*`timestamp`*`)` | Return the total number of milliseconds since the epoch | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123` |
+| `epoch_us(`*`timestamp`*`)` | Return the total number of microseconds since the epoch | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123456` |
+| `epoch_ns(`*`timestamp`*`)` | Return the total number of nanooseconds since the epoch | `epoch_ns(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123456000` |
 | `extract(`*`field`* `from` *`timestamp`*`)` | Get [subfield](../../sql/functions/datepart) from a timestamp | `extract('hour' FROM TIMESTAMP '1992-09-20 20:38:48')` | `20` |
 | `greatest(`*`timestamp`*`, `*`timestamp`*`)` | The later of two timestamps | `greatest(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48` |
 | `isfinite(`*`timestamp`*`)` | Returns true if the timestamp is finite, false otherwise | `isfinite(TIMESTAMP '1992-03-07')` | true |
@@ -45,6 +48,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `last_day(`*`timestamp`*`)` | The last day of the month. | `last_day(TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-31` |
 | `least(`*`timestamp`*`, `*`timestamp`*`)` | The earlier of two timestamps | `least(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-03-22 01:02:03.1234` |
 | `make_timestamp(`*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`bigint`*`, `*`double`*`)` | The timestamp for the given parts | `make_timestamp(1992, 9, 20, 13, 34, 27.123456)` | `1992-09-20 13:34:27.123456` |
+| `make_timestamp(`*`µs`*`)` | The timestamp for the number of s since the epoch | `make_timestamp(0)` | `1970-01-01 00:00:00` |
 | `monthname(`*`timestamp`*`)` | The (English) name of the month. | `monthname(TIMESTAMP '1992-09-20')` | `September` |
 | `strftime(`*`timestamp`*`, `*`format`*`)` | Converts timestamp to string according to the [format string](../../sql/functions/dateformat) | `strftime(timestamp '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')` | `Wed, 1 January 1992 - 08:38:40 PM` |
 | `strptime(`*`text`*`, `*`format`*`)` | Converts string to timestamp according to the [format string](../../sql/functions/dateformat). Throws on failure. | `strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')` | `1992-01-01 20:38:40` |
