@@ -353,7 +353,7 @@ D .import import_example.csv test_table --skip 1 --csv
 ```
 
 ## Reading SQL From a File
-The DuckDB CLI can read both SQL commands and dot commands from an external file intead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.
+The DuckDB CLI can read both SQL commands and dot commands from an external file instead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.
 
 The `.read` command requires only one argument: the path to the file containing the SQL and/or commands to execute. After running the commands in the file, control will revert back to the terminal. Output from the execution of that file is governed by the same `.output` and `.once` commands that have been discussed previously. This allows the output to be displayed back to the terminal, as in the first example below, or out to another file, as in the second example.
 
@@ -422,7 +422,7 @@ Note that the duck head is built with unicode characters and does not always wor
 select 'Begin quacking!' as "Ready, Set, ..."
 ```
 
-To invoke that file on intialization, use this command:
+To invoke that file on initialization, use this command:
 
 ```
 $ ./duckdb -init select_example
