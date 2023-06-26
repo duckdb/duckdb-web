@@ -120,32 +120,7 @@ The below options are applicable when writing `Parquet` files.
 |:---|:---|:----|:----|
 | `compression` | The compression format to use (uncompressed, snappy, gzip or zstd). | varchar | snappy |
 | `row_group_size` | The target size of each row-group. | bigint | 122880 |
-| `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | struct | `(empty)` |
 
-Some examples of `FIELD_IDS` are:
-```sql
--- Assign field_ids automatically
-COPY (SELECT 128 AS i)
-TO 'my.parquet' (FIELD_IDS 'auto');
--- Sets the field_id of column 'i' to 42
-COPY (SELECT 128 AS i)
-TO 'my.parquet' (FIELD_IDS {i: 42});
--- Sets the field_id of column 'i' to 42, and column 'j' to 43
-COPY (SELECT 128 AS i, 256 AS j)
-TO 'my.parquet' (FIELD_IDS {i: 42, j: 43});
--- Sets the field_id of column 'my_struct' to 43,
--- and column 'i' (nested inside 'my_struct') to 43
-COPY (SELECT {i: 128} AS my_struct)
-TO 'my.parquet' (FIELD_IDS {my_struct: {__duckdb_field_id: 42, i: 43}});
--- Sets the field_id of column 'my_list' to 42, 
--- and column 'element' (default name of list child) to 43
-COPY (SELECT [128, 256] AS my_list)
-TO 'my.parquet' (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
--- Sets the field_id of colum 'my_map' to 42, 
--- and columns 'key' and 'value' (default names of map children) to 43 and 44
-COPY (SELECT map {'key1' : 128, 'key2': 256} my_map)
-TO 'my.parquet' (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}});
-```
 
 ## JSON Options
 
