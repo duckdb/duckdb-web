@@ -328,7 +328,7 @@ SELECT
 [1, 2, 3, 4]
 
 -- If the list has multiple levels of lists, 
--- only the first level of sub-lists are concatenated into a single list
+-- only the first level of sub-lists is concatenated into a single list
 SELECT 
     flatten([
         [
@@ -344,7 +344,7 @@ SELECT
 [[1, 2], [3, 4], [5, 6], [7, 8]] 
 ```
 
-The behavior of the flatten function also has specific behavior when handling `NULL` values
+The behavior of the flatten function also has specific behavior when handling `NULL` values:
 ```sql
 -- If the entire input to flatten is NULL, return NULL
 SELECT flatten(NULL);
@@ -356,14 +356,17 @@ SELECT flatten([NULL]);
 ----
 []
 
--- If the sub-list in a list of lists only contains NULL, do not modify the sub-list
+-- If the sub-list in a list of lists only contains NULL, 
+-- do not modify the sub-list
 -- (Note the extra set of parentheses vs. the prior example)
 SELECT flatten([[NULL]]);
 ----
 [NULL]
 
--- Even if the only contents of each sub-list is NULL, still concatenate them together
--- Note that no de-duplication occurs when flattening. See list_distinct function for de-duplication.
+-- Even if the only contents of each sub-list is NULL,
+-- still concatenate them together
+-- Note that no de-duplication occurs when flattening. 
+-- See list_distinct function for de-duplication.
 SELECT flatten([[NULL],[NULL]]);
 ----
 [NULL, NULL]
@@ -375,6 +378,8 @@ The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along 
 
 ```sql
 SELECT generate_subscripts([4,5,6], 1) AS i;
+```
+```
 ┌───┐
 │ i │
 ├───┤
