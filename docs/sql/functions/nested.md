@@ -318,9 +318,55 @@ SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * 
 The flatten function is a scalar function that converts a list of lists into a single list by concatenating each sub-list together.
 Note that this only flattens one level at a time, not all levels of sub-lists. 
 ```sql
-
+-- Convert a list of lists into a single list
+SELECT 
+    flatten([
+        [1, 2],
+        [3, 4]
+    ]);
 ----
+[1, 2, 3, 4]
 
+-- If the list has multiple levels of lists, 
+-- only the first level of sub-lists are concatenated into a single list
+SELECT 
+    flatten([
+        [
+            [1, 2],
+            [3, 4],
+        ],
+        [
+            [5, 6],
+            [7, 8],
+        ]
+    ]);
+----
+[[1, 2], [3, 4], [5, 6], [7, 8]] 
+```
+
+The behavior of the flatten function also has specific behavior when handling `NULL` values
+```sql
+-- If the entire input to flatten is NULL, return NULL
+SELECT flatten(NULL);
+----
+NULL
+
+-- If a list whose only entry is NULL is flattened, return an empty list
+SELECT flatten([NULL]);
+----
+[]
+
+-- If the sub-list in a list of lists only contains NULL, do not modify the sub-list
+-- (Note the extra set of parentheses vs. the prior example)
+SELECT flatten([[NULL]]);
+----
+[NULL]
+
+-- Even if the only contents of each sub-list is NULL, still concatenate them together
+-- Note that no de-duplication occurs when flattening. See list_distinct function for de-duplication.
+SELECT flatten([[NULL],[NULL]]);
+----
+[NULL, NULL]
 ```
 
 ## `generate_subscripts`
