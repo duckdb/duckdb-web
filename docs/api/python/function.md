@@ -128,7 +128,7 @@ print(res)
 
 ### Side Effects
 
-By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same output.  
+By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same input. 
 If your function does not follow that rule, for example when your function makes use of randomness, then you will need to mark this function as having `side_effects`.
 
 For example, this function will produce a new count for every invocation
