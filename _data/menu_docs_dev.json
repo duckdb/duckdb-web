@@ -484,11 +484,6 @@
                   "page": "API Reference",
                   "url": "reference"
                 }
-                ,
-                {
-                  "page": "Python UDFs",
-                  "url": "udf"
-                }
               ]
             },
             {

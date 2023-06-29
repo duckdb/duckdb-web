@@ -4,7 +4,7 @@ title: Python Function API
 selected: Client APIs
 ---
 
-You can create a DuckDB function out of a python function so it can be used in SQL queries.
+You can create a DuckDB User Defined Function (UDF) out of a python function so it can be used in SQL queries.
 Just like regular [functions](../../sql/functions/overview) they need to have a name, a return type and parameter types.
 
 Example using a python function that calls a third party library.
@@ -26,11 +26,27 @@ print(res)
 
 ### Creating Functions
 
-The `create_function` method is used to add a function.  
-More information about this method can be found [here](../python/reference/#duckdb.DuckDBPyConnection.create_function).
+To register a Python UDF, simply use the `create_function` method from a DuckDB connection. Here is the syntax:
+```python 
+import duckdb
+con = duckdb.connect()
+con.create_function(name, function, argument_type_list, return_type, type, null_handling)
+```
 
-The `remove_function` method can be used to remove a previously created function.
-More information about this method can be found [here](../python/reference/#duckdb.DuckDBPyConnection.remove_function).
+The `create_function` method requires the following parameters:
+
+1. **Name**: A string representing the unique name of the UDF within the connection catalog.
+2. **Function**: The Python function you wish to register as a UDF.
+3. **Argument Type List**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
+4. **Return Type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
+5. **Type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type='arrow'` to use PyArrow Tables.
+6. **Null Handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling='special'`.
+
+To unregister a UDF, you can call the `remove_function` method with the UDF name:
+
+```python
+con.remove_function(name)
+```
 
 ### Type Annotation
 
