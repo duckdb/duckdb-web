@@ -7,6 +7,8 @@ title: Hive Partitioning
 
 ```sql
 -- read data from a hive partitioned data set
+SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning=1);
+-- parquet_scan is an alias of read_parquet, so they are equivalent
 SELECT * FROM parquet_scan('orders/*/*/*.parquet', hive_partitioning=1);
 -- write a table to a hive partitioned data set
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
@@ -36,7 +38,7 @@ orders
 Files stored in this hierarchy can be read using the `hive_partitioning` flag.
 
 ```sql
-SELECT * FROM parquet_scan('orders/*/*/*.parquet', hive_partitioning=1);
+SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning=1);
 ```
 
 When we specify the `hive_partitioning` flag, the values of the columns will be read from the directories.
@@ -46,7 +48,7 @@ Filters on the partition keys are automatically pushed down into the files. This
 
 ```sql
 SELECT *
-FROM parquet_scan('orders/*/*/*.parquet', hive_partitioning=1)
+FROM read_parquet('orders/*/*/*.parquet', hive_partitioning=1)
 WHERE year=2022 AND month=11;
 ```
 
