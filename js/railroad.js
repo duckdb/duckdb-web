@@ -1423,25 +1423,46 @@ function GenerateOptionalColumnList(options) {
 }
 
 function GenerateOrderTerms(options) {
-	return OneOrMore(Sequence([
-		Expression(),
-		Choice(0, [
-			new Skip(),
-			Keyword("ASC"),
-			Keyword("DESC")
-		]),
-		Choice(0, [
-			Skip(),
-			Sequence([
-				Keyword("NULLS"),
-				Keyword("FIRST")
+	return Choice(0, [
+		OneOrMore(Sequence([
+			Expression(),
+			Choice(0, [
+				new Skip(),
+				Keyword("ASC"),
+				Keyword("DESC")
 			]),
-			Sequence([
-				Keyword("NULLS"),
-				Keyword("LAST")
+			Choice(0, [
+				Skip(),
+				Sequence([
+					Keyword("NULLS"),
+					Keyword("FIRST")
+				]),
+				Sequence([
+					Keyword("NULLS"),
+					Keyword("LAST")
+				])
 			])
-		])
-	]), ",")
+		]), ","),
+		Sequence([
+			Keyword("ALL"),
+			Choice(0, [
+				new Skip(),
+				Keyword("ASC"),
+				Keyword("DESC")
+			]),
+			Choice(0, [
+				Skip(),
+				Sequence([
+					Keyword("NULLS"),
+					Keyword("FIRST")
+				]),
+				Sequence([
+					Keyword("NULLS"),
+					Keyword("LAST")
+				])
+			])
+		]),
+	])
 }
 
 
@@ -1987,7 +2008,7 @@ function GenerateWindowClause(options) {
 
 function GenerateLimitAndOrderBy(options) {
 	return [
-		Optional(Sequence(GenerateOrderBy(options))),
+		Sequence(GenerateOrderBy(options)),
 		Optional(Sequence([
 			Keyword("LIMIT"),
 			Expression(),
