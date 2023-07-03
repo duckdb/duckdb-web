@@ -1966,27 +1966,30 @@ function GenerateGroupByClause(options) {
 		Optional(Sequence([
 			Keyword("GROUP"),
 			Keyword("BY"),
-			OneOrMore(
-				Choice(0, [
-				Expression(),
-				Sequence([
-					Keyword("GROUPING"),
-					Keyword("SETS"),
-					Keyword("("),
-					OneOrMore(Sequence([
+			Choice(0,[
+				OneOrMore(
+					Choice(0, [
+					Expression(),
+					Sequence([
+						Keyword("GROUPING"),
+						Keyword("SETS"),
 						Keyword("("),
-						ZeroOrMore(Expression(), ","),
+						OneOrMore(Sequence([
+							Keyword("("),
+							ZeroOrMore(Expression(), ","),
+							Keyword(")")
+						]), ","),
 						Keyword(")")
-					]), ","),
-					Keyword(")")
-				]),
-				Sequence([
-					Choice(0, [Keyword("CUBE"), Keyword("ROLLUP")]),
-					Keyword("("),
-					OneOrMore(Expression(), ","),
-					Keyword(")")
-				])
-			]), ","),
+					]),
+					Sequence([
+						Choice(0, [Keyword("CUBE"), Keyword("ROLLUP")]),
+						Keyword("("),
+						OneOrMore(Expression(), ","),
+						Keyword(")")
+					])
+				]), ","),
+				Keyword("ALL"),
+			]),
 		])),
 		Optional(Sequence([
 			Keyword("HAVING"),
