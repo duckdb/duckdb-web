@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Storage
+expanded: Development
 ---
 
 The DuckDB internal storage format is currently in flux, and is expected to change with each release until we reach v1.0.0.
