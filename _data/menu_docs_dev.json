@@ -587,6 +587,10 @@
                   "url": "create_view"
                 },
                 {
+                  "page": "Create Type",
+                  "url": "create_type"
+                },
+                {
                   "page": "Delete",
                   "url": "delete"
                 },
