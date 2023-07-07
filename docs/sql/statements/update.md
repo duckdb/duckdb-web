@@ -66,5 +66,19 @@ SELECT * FROM original;
 | 1   | new value   |
 | 2   | new value 2 |
 
+### Update from Same Table
+The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.
+In this example `as true_original` and `as new` are both required. 
+
+```sql
+UPDATE original as true_original
+    SET value = (
+        SELECT
+            new.value || ' a change!' as value
+        FROM original as new
+        WHERE true_original.key = new.key
+    );
+```
+
 ### Upsert (Insert or Update)
 See the [Insert documentation](/docs/sql/statements/insert#on-conflict-clause) for details.

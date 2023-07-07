@@ -28,20 +28,27 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `len(`*`list`*`)`                                 | Return the length of the list.                                                                                                                                                      | `len([1, 2, 3])`                         | `3`               |
 | `array_length(`*`list`*`)`                        | Alias for `len`.                                                                                                                                                                    | `array_length([1, 2, 3])`                | `3`               |
 | `unnest(`*`list`*`)`                              | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](/docs/sql/query_syntax/unnest) for more details. | `unnest([1, 2, 3])`                      | `1`, `2`, `3`     |
+| `flatten(`*`list_of_lists`*`)`                    | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](nested#flatten)).                                                          | `flatten([[1, 2], [3, 4]])`              | `[1, 2, 3, 4]`    |
 | `list_concat(`*`list1`*`, `*`list2`*`)`           | Concatenates two lists.                                                                                                                                                             | `list_concat([2, 3], [4, 5, 6])`         | `[2, 3, 4, 5, 6]` |
-| `list_cat(`*`list1`*`, `*`list2`*`)`              | Alias for `list_concat`.                                                                                                                                                            | `list_cat([2, 3], [4, 5, 6])`            | `[2, 3, 4, 5, 6`] |
-| `array_concat(`*`list1`*`, `*`list2`*`)`          | Alias for `list_concat`.                                                                                                                                                            | `array_concat([2, 3], [4, 5, 6])`        | `[2, 3, 4, 5, 6`] |
-| `array_cat(`*`list1`*`, `*`list2`*`)`             | Alias for `list_concat`.                                                                                                                                                            | `array_cat([2, 3], [4, 5, 6])`           | `[2, 3, 4, 5, 6`] |
-| `list_prepend(`*`element`*`, `*`list`*`)`         | Prepends `element` to `list`.                                                                                                                                                       | `list_prepend(3, [4, 5, 6])`             | `[3, 4, 5, 6`]    |
-| `array_prepend(`*`element`*`, `*`list`*`)`        | Alias for `list_prepend`.                                                                                                                                                           | `array_prepend(3, [4, 5, 6])`            | `[3, 4, 5, 6`]    |
+| `list_cat(`*`list1`*`, `*`list2`*`)`              | Alias for `list_concat`.                                                                                                                                                            | `list_cat([2, 3], [4, 5, 6])`            | `[2, 3, 4, 5, 6]` |
+| `array_concat(`*`list1`*`, `*`list2`*`)`          | Alias for `list_concat`.                                                                                                                                                            | `array_concat([2, 3], [4, 5, 6])`        | `[2, 3, 4, 5, 6]` |
+| `array_cat(`*`list1`*`, `*`list2`*`)`             | Alias for `list_concat`.                                                                                                                                                            | `array_cat([2, 3], [4, 5, 6])`           | `[2, 3, 4, 5, 6]` |
+| `list_prepend(`*`element`*`, `*`list`*`)`         | Prepends `element` to `list`.                                                                                                                                                       | `list_prepend(3, [4, 5, 6])`             | `[3, 4, 5, 6]`    |
+| `array_prepend(`*`element`*`, `*`list`*`)`        | Alias for `list_prepend`.                                                                                                                                                           | `array_prepend(3, [4, 5, 6])`            | `[3, 4, 5, 6]`    |
 | `array_push_front(`*`list`*`, `*`element`*`)`     | Alias for `list_prepend`.                                                                                                                                                           | `array_push_front(l, 3)`                 | `[3, 4, 5,6]`     |
-| `list_append(`*`list`*`, `*`element`*`)`          | Appends `element` to `list`.                                                                                                                                                        | `list_append([2, 3], 4)`                 | `[2, 3, 4`]       |
-| `array_append(`*`list`*`, `*`element`*`)`         | Alias for `list_append`.                                                                                                                                                            | `array_append([2, 3], 4)`                | `[2, 3, 4`]       |
+| `list_append(`*`list`*`, `*`element`*`)`          | Appends `element` to `list`.                                                                                                                                                        | `list_append([2, 3], 4)`                 | `[2, 3, 4]`       |
+| `array_append(`*`list`*`, `*`element`*`)`         | Alias for `list_append`.                                                                                                                                                            | `array_append([2, 3], 4)`                | `[2, 3, 4]`       |
 | `array_push_back(`*`list`*`, `*`element`*`)`      | Alias for `list_append`.                                                                                                                                                            | `array_push_back(l, 7)`                  | `[4, 5, 6, 7]`    |
 | `list_contains(`*`list`*`, `*`element`*`)`        | Returns true if the list contains the element.                                                                                                                                      | `list_contains([1, 2, NULL], 1)`         | `true`            |
 | `list_has(`*`list`*`, `*`element`*`)`             | Alias for `list_contains`.                                                                                                                                                          | `list_has([1, 2, NULL], 1)`              | `true`            |
 | `array_contains(`*`list`*`, `*`element`*`)`       | Alias for `list_contains`.                                                                                                                                                          | `array_contains([1, 2, NULL], 1)`        | `true`            |
 | `array_has(`*`list`*`, `*`element`*`)`            | Alias for `list_contains`.                                                                                                                                                          | `array_has([1, 2, NULL], 1)`             | `true`            |
+| `list_intersect(`*`list1`*`, `*`list2`*`)`        | Returns a list of all the elements that exist in both l1 and l2, without duplicates.                                                                                                | `list_intersect([1,2,3], [2,3,4])`       | `[2, 3]`          |
+| `array_intersect(`*`list1`*`, `*`list2`*`)`       | Alias for `list_intersect`.                                                                                                                                                         | `array_intersect([1,2,3], [2,3,4])`      | `[2, 3]`          |
+| `list_has_any(`*`list1`*`, `*`list2`*`)`          | Returns true if any elements exist is both lists.                                                                                                                                   | `list_has_any([1,2,3], [2,3,4])`         | `true`            |
+| `array_has_any(`*`list1`*`, `*`list2`*`)`         | Alias for `list_has_any`.                                                                                                                                                           | `array_has_any([1,2,3], [2,3,4])`        | `true`            |
+| `list_has_all(`*`list`*`, `*`sub-list`*`)`        | Returns true if all elements of sub-list exist in list.                                                                                                                             | `list_has_all(l, [4,6])`                 | `true`            |
+| `array_has_all(`*`list`*`, `*`sub-list`*`)`       | Alias for `list_has_all`                                                                                                                                                            | `array_has_all(l, [4,6])`                | `true`            |
 | `list_position(`*`list`*`, `*`element`*`)`        | Returns the index of the element if the list contains the element.                                                                                                                  | `list_contains([1, 2, NULL], 2)`         | `2`               |
 | `list_indexof(`*`list`*`, `*`element`*`)`         | Alias for `list_position`.                                                                                                                                                          | `list_indexof([1, 2, NULL], 2)`          | `2`               |
 | `array_position(`*`list`*`, `*`element`*`)`       | Alias for `list_position`.                                                                                                                                                          | `array_position([1, 2, NULL], 2)`        | `2`               |
@@ -65,6 +72,18 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_unique(`*`list`*`)`                         | Counts the unique elements of a list.                                                                                                                                               | `list_unique([1, 1, NULL, -3, 1, 5])`    | `3`               |
 | `array_unique(`*`list`*`)`                        | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
 | `list_any_value(`*`list`*`)`                      | Returns the first non-null value in the list                                                                                                                                        | `list_any_value([NULL, -3])`             | `-3`              |
+| `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`  | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                             | `list_resize([1,2,3], 5, 0)`             | `[1, 2, 3, 0, 0]` |
+| `array_resize(`*`list`*`, `*`size`*`[, `*`value`*`])` | Alias for `list_resize`.                                                                                                                                                        | `array_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
+
+## List Operators
+The following operators are supported for lists:
+
+| Operator | Description                                                                               | Example                    | Result          |
+|----------|-------------------------------------------------------------------------------------------|----------------------------|-----------------|
+| `&&`     | Alias for `list_intersect`                                                                | `[1,2,3,4,5] && [2,5,5,6]` | `[2,5]`         |
+| `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1,2,3,4] @> [3,4,3]`     | `true`          |
+| `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1,4] <@ [1,2,3,4]`       | `true`          |
+| `\|\|`   | Alias for `list_concat`                                                                   | `[1,2,3] \|\| [4,5,6]`     | `[1,2,3,4,5,6]` |
 
 ## List Comprehension
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
@@ -78,14 +97,14 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 
 ## Struct Functions
 
-| Function | Description                                                                                                                                                                                                                | Example | Result |
-|:---|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---|:---|
-| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`.                                                                                                                                                                      | `({'i': 3, 's': 'string'}).s` | `string` |
-| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`.                                                                                                                                                                  | `({'i': 3, 's': 'string'})['s']` | `string` |
-| `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
-| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct.                                                                                                                                                                                   | `struct_extract(s, 'i')` | `4` |
-| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
-| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                             | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
+| Function                                              | Description                                                                                                                                                                                                                | Example                              | Result                       |
+|:------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|:-----------------------------|
+| *`struct`*`.`*`entry`*                                | Dot notation serves as an alias for `struct_extract`.                                                                                                                                                                      | `({'i': 3, 's': 'string'}).s`        | `string`                     |
+| *`struct`*`[`*`entry`*`]`                             | Bracket notation serves as an alias for `struct_extract`.                                                                                                                                                                  | `({'i': 3, 's': 'string'})['s']`     | `string`                     |
+| `row(`*`any`*`, ...)`                                 | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)`               | `{'i': 3, 'v2': 3, 'v3': 0}` |
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)`         | Extract the named entry from the struct.                                                                                                                                                                                   | `struct_extract(s, 'i')`             | `4`                          |
+| `struct_pack(`*`name := any`*`, ...)`                 | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`    |
+| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                              | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
 
 ## Map Functions
 
@@ -103,12 +122,12 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 
 ## Union Functions
 
-| Function | Description | Example | Result |
-|:---|:---|:---|:---|
-| *`union`*`.`*`tag`* | Dot notation serves as an alias for `union_extract`.| `(union_value(k := 'hello')).k` | `string` |
-| `union_extract(`*`union`*`, `*`'tag'`*`)` | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected | `union_extract(s, 'k')` | `hello` |
-| `union_value(`*`tag := any`*`)` | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')` | `'hello'::UNION(k VARCHAR)`| 
-| `union_tag(`*`union`*`)` | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). | `union_tag(union_value(k := 'foo'))`  | `'k'` |
+| Function                                  | Description                                                                                                         | Example                              | Result                      |
+|:------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|:-------------------------------------|:----------------------------|
+| *`union`*`.`*`tag`*                       | Dot notation serves as an alias for `union_extract`.                                                                | `(union_value(k := 'hello')).k`      | `string`                    |
+| `union_extract(`*`union`*`, `*`'tag'`*`)` | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected                   | `union_extract(s, 'k')`              | `hello`                     |
+| `union_value(`*`tag := any`*`)`           | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')`          | `'hello'::UNION(k VARCHAR)` | 
+| `union_tag(`*`union`*`)`                  | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum).                           | `union_tag(union_value(k := 'foo'))` | `'k'`                       |
 
 ## Range Functions
 
@@ -312,13 +331,79 @@ SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * 
 [0, 4, 16]
 ```
 
+## Flatten
+
+The flatten function is a scalar function that converts a list of lists into a single list by concatenating each sub-list together.
+Note that this only flattens one level at a time, not all levels of sub-lists. 
+```sql
+-- Convert a list of lists into a single list
+SELECT 
+    flatten([
+        [1, 2],
+        [3, 4]
+    ]);
+----
+[1, 2, 3, 4]
+
+-- If the list has multiple levels of lists, 
+-- only the first level of sub-lists is concatenated into a single list
+SELECT 
+    flatten([
+        [
+            [1, 2],
+            [3, 4],
+        ],
+        [
+            [5, 6],
+            [7, 8],
+        ]
+    ]);
+----
+[[1, 2], [3, 4], [5, 6], [7, 8]] 
+```
+
+In general, the input to the flatten function should be a list of lists (not a single level list). 
+However, the behavior of the flatten function has specific behavior when handling empty lists and `NULL` values.
+```sql
+-- If the input list is empty, return an empty list
+SELECT flatten([]);
+----
+[]
+
+-- If the entire input to flatten is NULL, return NULL
+SELECT flatten(NULL);
+----
+NULL
+
+-- If a list whose only entry is NULL is flattened, return an empty list
+SELECT flatten([NULL]);
+----
+[]
+
+-- If the sub-list in a list of lists only contains NULL, 
+-- do not modify the sub-list
+-- (Note the extra set of parentheses vs. the prior example)
+SELECT flatten([[NULL]]);
+----
+[NULL]
+
+-- Even if the only contents of each sub-list is NULL,
+-- still concatenate them together
+-- Note that no de-duplication occurs when flattening. 
+-- See list_distinct function for de-duplication.
+SELECT flatten([[NULL],[NULL]]);
+----
+[NULL, NULL]
+```
 
 ## `generate_subscripts`
 
 The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
 
-```
+```sql
 SELECT generate_subscripts([4,5,6], 1) AS i;
+```
+```
 ┌───┐
 │ i │
 ├───┤

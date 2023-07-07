@@ -1,6 +1,7 @@
 ---
 layout: docu
 title: Execution Format
+expanded: Development
 ---
 
 `Vector` is the container format used to store in-memory data during execution.  
