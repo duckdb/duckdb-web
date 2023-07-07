@@ -43,6 +43,12 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_has(`*`list`*`, `*`element`*`)`             | Alias for `list_contains`.                                                                                                                                                          | `list_has([1, 2, NULL], 1)`              | `true`            |
 | `array_contains(`*`list`*`, `*`element`*`)`       | Alias for `list_contains`.                                                                                                                                                          | `array_contains([1, 2, NULL], 1)`        | `true`            |
 | `array_has(`*`list`*`, `*`element`*`)`            | Alias for `list_contains`.                                                                                                                                                          | `array_has([1, 2, NULL], 1)`             | `true`            |
+| `list_intersect(`*`list1`*`, `*`list2`*`)`        | Returns a list of all the elements that exist in both l1 and l2, without duplicates.                                                                                                | `list_intersect([1,2,3], [2,3,4])`       | `[2, 3]`          |
+| `array_intersect(`*`list1`*`, `*`list2`*`)`       | Alias for `list_intersect`.                                                                                                                                                         | `array_intersect([1,2,3], [2,3,4])`      | `[2, 3]`          |
+| `list_has_any(`*`list1`*`, `*`list2`*`)`          | Returns true if any elements exist is both lists.                                                                                                                                   | `list_has_any([1,2,3], [2,3,4])`         | `true`            |
+| `array_has_any(`*`list1`*`, `*`list2`*`)`         | Alias for `list_has_any`.                                                                                                                                                           | `array_has_any([1,2,3], [2,3,4])`        | `true`            |
+| `list_has_all(`*`list`*`, `*`sub-list`*`)`        | Returns true if all elements of sub-list exist in list.                                                                                                                             | `list_has_all(l, [4,6])`                 | `true`            |
+| `array_has_all(`*`list`*`, `*`sub-list`*`)`       | Alias for `list_has_all`                                                                                                                                                            | `array_has_all(l, [4,6])`                | `true`            |
 | `list_position(`*`list`*`, `*`element`*`)`        | Returns the index of the element if the list contains the element.                                                                                                                  | `list_contains([1, 2, NULL], 2)`         | `2`               |
 | `list_indexof(`*`list`*`, `*`element`*`)`         | Alias for `list_position`.                                                                                                                                                          | `list_indexof([1, 2, NULL], 2)`          | `2`               |
 | `array_position(`*`list`*`, `*`element`*`)`       | Alias for `list_position`.                                                                                                                                                          | `array_position([1, 2, NULL], 2)`        | `2`               |
@@ -67,6 +73,16 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_unique(`*`list`*`)`                        | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
 | `list_any_value(`*`list`*`)`                      | Returns the first non-null value in the list                                                                                                                                        | `list_any_value([NULL, -3])`             | `-3`              |
 
+## List Operators
+The following operators are supported for lists:
+
+| Operator | Description                                                                               | Example                    | Result          |
+|----------|-------------------------------------------------------------------------------------------|----------------------------|-----------------|
+| `&&`     | Alias for `list_intersect`                                                                | `[1,2,3,4,5] && [2,5,5,6]` | `[2,5]`         |
+| `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1,2,3,4] @> [3,4,3]`     | `true`          |
+| `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1,4] <@ [1,2,3,4]`       | `true`          |
+| `\|\|`   | Alias for `list_concat`                                                                   | `[1,2,3] \|\| [4,5,6]`     | `[1,2,3,4,5,6]` |
+
 ## List Comprehension
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
@@ -79,14 +95,14 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 
 ## Struct Functions
 
-| Function | Description                                                                                                                                                                                                                | Example | Result |
-|:---|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---|:---|
-| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`.                                                                                                                                                                      | `({'i': 3, 's': 'string'}).s` | `string` |
-| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`.                                                                                                                                                                  | `({'i': 3, 's': 'string'})['s']` | `string` |
-| `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
-| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct.                                                                                                                                                                                   | `struct_extract(s, 'i')` | `4` |
-| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
-| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                             | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
+| Function                                              | Description                                                                                                                                                                                                                | Example                              | Result                       |
+|:------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|:-----------------------------|
+| *`struct`*`.`*`entry`*                                | Dot notation serves as an alias for `struct_extract`.                                                                                                                                                                      | `({'i': 3, 's': 'string'}).s`        | `string`                     |
+| *`struct`*`[`*`entry`*`]`                             | Bracket notation serves as an alias for `struct_extract`.                                                                                                                                                                  | `({'i': 3, 's': 'string'})['s']`     | `string`                     |
+| `row(`*`any`*`, ...)`                                 | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)`               | `{'i': 3, 'v2': 3, 'v3': 0}` |
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)`         | Extract the named entry from the struct.                                                                                                                                                                                   | `struct_extract(s, 'i')`             | `4`                          |
+| `struct_pack(`*`name := any`*`, ...)`                 | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`    |
+| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                              | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
 
 ## Map Functions
 
@@ -104,12 +120,12 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 
 ## Union Functions
 
-| Function | Description | Example | Result |
-|:---|:---|:---|:---|
-| *`union`*`.`*`tag`* | Dot notation serves as an alias for `union_extract`.| `(union_value(k := 'hello')).k` | `string` |
-| `union_extract(`*`union`*`, `*`'tag'`*`)` | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected | `union_extract(s, 'k')` | `hello` |
-| `union_value(`*`tag := any`*`)` | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')` | `'hello'::UNION(k VARCHAR)`| 
-| `union_tag(`*`union`*`)` | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). | `union_tag(union_value(k := 'foo'))`  | `'k'` |
+| Function                                  | Description                                                                                                         | Example                              | Result                      |
+|:------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|:-------------------------------------|:----------------------------|
+| *`union`*`.`*`tag`*                       | Dot notation serves as an alias for `union_extract`.                                                                | `(union_value(k := 'hello')).k`      | `string`                    |
+| `union_extract(`*`union`*`, `*`'tag'`*`)` | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected                   | `union_extract(s, 'k')`              | `hello`                     |
+| `union_value(`*`tag := any`*`)`           | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')`          | `'hello'::UNION(k VARCHAR)` | 
+| `union_tag(`*`union`*`)`                  | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum).                           | `union_tag(union_value(k := 'foo'))` | `'k'`                       |
 
 ## Range Functions
 
