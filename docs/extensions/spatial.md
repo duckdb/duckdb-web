@@ -101,7 +101,10 @@ Compute relationships and spatial predicates between geometries.
 
 
 ## Spatial Table Functions
-The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables.
+The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables. For example to create a new table from a GeoJSON file, you can use the following query:
+```sql
+CREATE TABLE <table> AS SELECT * FROM ST_Read('some/file/path/filename.json');
+```
 
 `ST_Read` can take a number of optional arguments, the full signature is: 
 ```sql

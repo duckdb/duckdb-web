@@ -10,7 +10,7 @@ The top level catalog view is `information_schema.schemata`. It lists the catalo
 
 | Column | Description | Type | Example |
 |:---|:---|:---|:---|
-| `catalog_name` |Name of the database that the schema is contained in. Not yet implemented. | `VARCHAR` | `NULL` |
+| `catalog_name` |Name of the database that the schema is contained in. | `VARCHAR` | `NULL` |
 | `schema_name` |Name of the schema. | `VARCHAR` | `'main'` |
 | `schema_owner` |Name of the owner of the schema. Not yet implemented. | `VARCHAR` | `NULL` |
 | `default_character_set_catalog` |Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
@@ -23,7 +23,7 @@ The view that describes the catalog information for tables and views is `informa
 
 | Column | Description | Type | Example |
 |:---|:---|:---|:---|
-| `table_catalog` |The catalog the table or view belongs to. Not yet implemented.| `VARCHAR` | `NULL` |
+| `table_catalog` |The catalog the table or view belongs to.| `VARCHAR` | `NULL` |
 | `table_schema` |The schema the table or view belongs to.| `VARCHAR` | `'main'` |
 | `table_name` |The name of the table or view.| `VARCHAR` | `'widgets'` |
 | `table_type` |The type of table. One of: `BASE TABLE`, `LOCAL TEMPORARY`, `VIEW`.| `VARCHAR` | `'BASE TABLE'` |
@@ -41,7 +41,7 @@ The view that describes the catalog information for columns is `information_sche
 
 | Column | Description | Type | Example |
 |:---|:---|:---|:---|
-| `table_catalog` |Name of the database containing the table. Not yet implemented.| `VARCHAR` | `NULL` |
+| `table_catalog` |Name of the database containing the table.| `VARCHAR` | `NULL` |
 | `table_schema` |Name of the schema containing the table.| `VARCHAR` | `'main'` |
 | `table_name` |Name of the table.| `VARCHAR` | `'widgets'` |
 | `column_name` |Name of the column. | `VARCHAR` | `'price'` |

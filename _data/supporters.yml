@@ -2,14 +2,6 @@ gold:
   - name: Voltron Data
     url: https://voltrondata.com
     logoimg: voltrondata.svg
-  
-  - name: Relational AI
-    url: https://relational.ai
-    logoimg: relational-ai.svg
- 
-  - name: Mode
-    url: https://mode.com
-    logoimg: mode.svg
 
   - name: MotherDuck
     url: https://motherduck.com
@@ -20,6 +12,10 @@ gold:
     logoimg: posit.svg
     
 silver:
+  - name: Mode
+    url: https://mode.com
+    logoimg: mode.svg
+    
   - name: Hex
     url: https://hex.tech
     logoimg: hex.svg
@@ -27,6 +23,10 @@ silver:
   - name: Watershed
     url: https://watershedclimate.com
     logoimg: watershed.svg
+    
+  - name: Relational AI
+    url: https://relational.ai
+    logoimg: relational-ai.svg
 
   - name: Rill
     url: https://www.rilldata.com
@@ -43,3 +43,7 @@ silver:
   - name: Summer Forever
     url: https://www.summer.io/
     logoimg: summer.svg
+    
+  - name: Hugging Face
+    url: https://huggingface.co/
+    logoimg: huggingface.svg

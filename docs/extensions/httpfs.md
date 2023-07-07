@@ -37,6 +37,9 @@ SELECT COUNT(*) FROM 'https://domain.tld/file.parquet';
 Scanning multiple files over HTTP(S) is also supported:
 
 ```sql
+SELECT * FROM read_parquet(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
+
+-- parquet_scan is an alias of read_parquet, so they are equivalent
 SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
 ```
 
@@ -129,7 +132,7 @@ SELECT * FROM 's3://bucket/file.extension';
 Multiple files are also possible, for example:
 
 ```sql
-SELECT * FROM parquet_scan(['s3://bucket/file1.parquet', 's3://bucket/file2.parquet']);
+SELECT * FROM read_parquet(['s3://bucket/file1.parquet', 's3://bucket/file2.parquet']);
 ```
 
 ### Glob
@@ -138,7 +141,7 @@ File globbing is implemented using the ListObjectV2 API call and allows to use f
 multiple files, for example:
 
 ```sql
-SELECT * from parquet_scan('s3://bucket/*.parquet')
+SELECT * from read_parquet('s3://bucket/*.parquet')
 ```
 
 This query matches all files in the root of the bucket with the parquet extension.
@@ -147,13 +150,13 @@ Several features for matching are supported, such as `*` to match any number of 
 character or `[0-9]` for a single character in a range of characters:
 
 ```sql
-SELECT COUNT(*) FROM parquet_scan('s3://bucket/folder*/100?/t[0-9].parquet')
+SELECT COUNT(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet')
 ```
 
 A useful feature when using globs is the `filename` option which adds a column with the file that a row originated from:
 
 ```sql
-SELECT * FROM parquet_scan('s3://bucket/*.parquet', FILENAME = 1);
+SELECT * FROM read_parquet('s3://bucket/*.parquet', FILENAME = 1);
 ```
 
 could for example result in:
@@ -178,7 +181,7 @@ s3://bucket/year=2014/file.parquet
 If scanning these files with the HIVE_PARTITIONING option enabled:
 
 ```sql
-SELECT * FROM parquet_scan('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1);
+SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1);
 ```
 
 could result in:
@@ -194,7 +197,7 @@ however, these columns behave just like regular columns. For example, filters ca
 columns:
 
 ```sql
-SELECT * FROM parquet_scan('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;
+SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;
 ```
 
 ## Writing

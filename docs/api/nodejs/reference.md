@@ -13,6 +13,10 @@ selected: Client APIs
 ## Typedefs
 
 <dl>
+<dt><a href="#ColumnInfo">ColumnInfo</a> : <code>object</code></dt>
+<dd></dd>
+<dt><a href="#TypeInfo">TypeInfo</a> : <code>object</code></dt>
+<dd></dd>
 <dt><a href="#DuckDbError">DuckDbError</a> : <code>object</code></dt>
 <dd></dd>
 <dt><a href="#HTTPError">HTTPError</a> : <code>object</code></dt>
@@ -48,6 +52,7 @@ selected: Client APIs
         * [.each(sql, ...params, callback)](#module_duckdb..Statement+each) ⇒ <code>void</code>
         * [.finalize(sql, ...params, callback)](#module_duckdb..Statement+finalize) ⇒ <code>void</code>
         * [.stream(sql, ...params)](#module_duckdb..Statement+stream)
+        * [.columns()](#module_duckdb..Statement+columns) ⇒ [<code>Array.&lt;ColumnInfo&gt;</code>](#ColumnInfo)
     * [~QueryResult](#module_duckdb..QueryResult)
         * [.nextChunk()](#module_duckdb..QueryResult+nextChunk) ⇒
         * [.nextIpcBuffer()](#module_duckdb..QueryResult+nextIpcBuffer) ⇒
@@ -286,6 +291,7 @@ Unregister the Buffer
     * [.each(sql, ...params, callback)](#module_duckdb..Statement+each) ⇒ <code>void</code>
     * [.finalize(sql, ...params, callback)](#module_duckdb..Statement+finalize) ⇒ <code>void</code>
     * [.stream(sql, ...params)](#module_duckdb..Statement+stream)
+    * [.columns()](#module_duckdb..Statement+columns) ⇒ [<code>Array.&lt;ColumnInfo&gt;</code>](#ColumnInfo)
 
 <a name="module_duckdb..Statement+sql"></a>
 
@@ -364,6 +370,11 @@ Not implemented
 | sql |  | 
 | ...params | <code>\*</code> | 
 
+<a name="module_duckdb..Statement+columns"></a>
+
+#### statement.columns() ⇒ [<code>Array.&lt;ColumnInfo&gt;</code>](#ColumnInfo)
+**Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
+**Returns**: [<code>Array.&lt;ColumnInfo&gt;</code>](#ColumnInfo) - - Array of column names and types  
 <a name="module_duckdb..QueryResult"></a>
 
 ### duckdb~QueryResult
@@ -717,6 +728,29 @@ Currently ignored
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
+<a name="ColumnInfo"></a>
+
+## ColumnInfo : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Column name |
+| type | [<code>TypeInfo</code>](#TypeInfo) | Column type |
+
+<a name="TypeInfo"></a>
+
+## TypeInfo : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | Type ID |
+| [alias] | <code>string</code> | SQL type alias |
+| sql_type | <code>string</code> | SQL type name |
+
 <a name="DuckDbError"></a>
 
 ## DuckDbError : <code>object</code>

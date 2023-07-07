@@ -110,6 +110,34 @@ print(res)
 # [(None,)]
 ```
 
+### Side Effects
+
+By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same output.  
+If your function does not follow that rule, for example when your function makes use of randomness, then you will need to mark this function as having `side_effects`.
+
+For example, this function will produce a new count for every invocation
+```python
+def count() -> int:
+    old = count.counter;
+    count.counter += 1
+    return old
+count.counter = 0
+```
+
+If we create this function without marking it as having side effects, the result will be the following:
+```python
+con = duckdb.connect()
+con.create_function('my_counter', count, side_effects=False)
+res = con.sql('select my_counter() from range(10)').fetchall()
+# [(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
+```
+Which is obviously not the desired result, when we add `side_effects=True`, the result is as we would expect:
+```python
+con.create_function('my_counter', count, side_effects=True)
+res = con.sql('select my_counter() from range(10)').fetchall()
+# [(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,)]
+```
+
 ### Python Function Types
 
 Currently two function types are supported, `native` (default) and `arrow`.
