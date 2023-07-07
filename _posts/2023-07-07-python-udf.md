@@ -1,13 +1,13 @@
 ---
 
 layout: post
-title:  "From Waddle to Flying: Quickly expanding DuckDB's functionality with Scalar Python UDFs."
+title:  "From Waddle to Flying: Quickly expanding DuckDB's functionality with Scalar Python UDFs"
 author: Pedro Holanda, Thijs Bruineman and Phillip Cloud
 excerpt_separator: <!--more-->
 
 ---
 
-<img src="images/blog/bird-dance.gif"
+<img src="/images/blog/bird-dance.gif"
      alt="DuckDB-Waddle-fly"
      width=100
      />
