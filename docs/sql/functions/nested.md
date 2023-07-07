@@ -72,6 +72,8 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_unique(`*`list`*`)`                         | Counts the unique elements of a list.                                                                                                                                               | `list_unique([1, 1, NULL, -3, 1, 5])`    | `3`               |
 | `array_unique(`*`list`*`)`                        | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
 | `list_any_value(`*`list`*`)`                      | Returns the first non-null value in the list                                                                                                                                        | `list_any_value([NULL, -3])`             | `-3`              |
+| `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`  | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                             | `list_resize([1,2,3], 5, 0)`             | `[1, 2, 3, 0, 0]` |
+| `array_resize(`*`list`*`, `*`size`*`[, `*`value`*`])` | Alias for `list_resize`.                                                                                                                                                        | `array_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
 
 ## List Operators
 The following operators are supported for lists:
