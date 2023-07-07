@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 
 ---
 
-<img src="images/blog/bird-dance.gif"
+<img src="/images/blog/bird-dance.gif"
      alt="DuckDB-Waddle-fly"
      width=100
      />
