@@ -35,12 +35,14 @@ con.create_function(name, function, argument_type_list, return_type, type, null_
 
 The `create_function` method requires the following parameters:
 
-1. **Name**: A string representing the unique name of the UDF within the connection catalog.
-2. **Function**: The Python function you wish to register as a UDF.
-3. **Argument Type List**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
-4. **Return Type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
-5. **Type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type='arrow'` to use PyArrow Tables.
-6. **Null Handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling='special'`.
+1. **name**: A string representing the unique name of the UDF within the connection catalog.
+2. **function**: The Python function you wish to register as a UDF.
+3. **return_type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
+3. **parameters**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
+5. **type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type='arrow'` to use PyArrow Tables.
+6. **null_handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling='special'`.
+7. **exception_handling** (Optional): By default, when an exception is thrown from the python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `null`, by set this parameter to `'return_null'`
+8. **side_effects** (Optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
 
 To unregister a UDF, you can call the `remove_function` method with the UDF name:
 
