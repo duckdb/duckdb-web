@@ -7,9 +7,6 @@ excerpt_separator: <!--more-->
 
 ---
 
-
-<img src="/images/blog/jason-duck.png" alt="DuckDB-Waddle-fly" width=100/>
-
 <img src="images/pythonudf/bird-dance.gif"
      alt="DuckDB-Waddle-fly"
      width=100
@@ -19,11 +16,11 @@ excerpt_separator: <!--more-->
 
 User Defined Functions (UDFs) enable users to extend the functionality of a Database Management System (DBMS) to perform domain-specific tasks that are not implemented as built-in functions. For instance, users who frequently need to export private data can benefit from an anonymization function that masks the local part of an email while preserving the domain. Ideally, this function would be executed directly in the DBMS. This approach offers several advantages:
 
-1) **Safety.** The sensitive data never leaves the DBMS process. 
-2) **Performance.** The function could be executed using the same execution model (e.g., streaming results, beyond-memory execution) of the DBMS, and without any unnecessary transformations.
-3) **Easy Use.** UDFs can be seamlessly integrated into SQL queries, allowing users to leverage the power of SQL to call the functions. This eliminates the need for passing data through a separate database connector and executing external code. The functions can be utilized in various SQL contexts(e.g., subqueries, join conditions).
+1) **Performance.** The function could be executed using the same execution model (e.g., streaming results, beyond-memory execution) of the DBMS, and without any unnecessary transformations.
+2) **Easy Use.** UDFs can be seamlessly integrated into SQL queries, allowing users to leverage the power of SQL to call the functions. This eliminates the need for passing data through a separate database connector and executing external code. The functions can be utilized in various SQL contexts(e.g., subqueries, join conditions).
+3) **Safety.** The sensitive data never leaves the DBMS process. 
 
-There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DuckDB process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. UDFs are typically only supported in low-level languages (e.g., C/C++), which are the languages primarily used for implementing DBMSs (unless performance is not a major concern). Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
+There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DuckDB process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
 
 DuckDB followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=DuckDBLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/duckdb/duckdb/pull/7171) of Scalar Python UDFs to DuckDB.
 
@@ -97,12 +94,11 @@ from faker import Faker
 def random_date():
      fake = Faker()
      return fake.date_between()
+```
 
-# Registering the Python function in DuckDB using create_function
-# Since our function doesn't require any inputs, we can pass an empty list as the argument_type_list
-# As the function returns a date, we specify DATE from duckdb.typing as the return_type
-# Note that since our random_date function returns a built-in Python type (datetime.date), we don't need to specify the UDF type
+We then have to register the Python function in DuckDB using `create_function`. Since our function doesn't require any inputs, we can pass an empty list as the `argument_type_list`. As the function returns a date, we specify `DATE` from `duckdb.typing` as the `return_type`. Note that since our `random_date()` function returns a built-in Python type (`datetime.date`), we don't need to specify the UDF type.
 
+```py
 # To exemplify the effect of side-effect, let's first run the function without marking it.
 duckdb.create_function('random_date', random_date, [], DATE)
 
@@ -240,10 +236,11 @@ arrow_res = con.sql("select sum(add_arrow_type(i)) from numbers").fetchall()
 | Built-In    | 5.37     |
 | PyArrow     | 0.35     |
 
-We can observe a performance difference of more than one order of magnitude between the two UDFs. The difference in performance is primarily due to two factors:
+We can observe a performance difference of more than one order of magnitude between the two UDFs. The difference in performance is primarily due to three factors:
 
-1) The PyArrow UDF does not require any data copying.
-2) The PyArrow UDF is executed in a vectorized fashion, processing chunks of data instead of individual rows.
+1) In Python, object construction and general use is rather slow. This is due to to several reasons, including automatic memory management, interpretation, and dynamic typing.
+2) The PyArrow UDF does not require any data copying.
+3) The PyArrow UDF is executed in a vectorized fashion, processing chunks of data instead of individual rows.
 
 
 ### Python UDFs Vs External Functions
