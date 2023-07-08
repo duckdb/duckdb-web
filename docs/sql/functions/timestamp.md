@@ -39,8 +39,9 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `epoch(`*`timestamp`*`)` | Converts a timestamp to seconds since the epoch | `epoch('2022-11-07 08:43:04'::TIMESTAMP);` | `1667810584` |
 | `epoch_ms(`*`timestamp`*`)` | Converts a timestamp to milliseconds since the epoch | `epoch_ms('2022-11-07 08:43:04.123456'::TIMESTAMP);` | `1667810584123` |
 | `epoch_ms(`*`ms`*`)` | Converts ms since epoch to a timestamp | `epoch_ms(701222400000)` | `1992-03-22 00:00:00` |
-| `epoch_us(`*`timestamp`*`)` | Converts a timestamp to microseconds since the epoch | `epoch_us('2022-11-07 08:43:04.123456'::TIMESTAMP);` | `1667810584123456` |
-| `epoch_ns(`*`timestamp`*`)` | Converts a timestamp to nanoseconds since the epoch | `epoch_ns('2022-11-07 08:43:04.123456'::TIMESTAMP);` | `1667810584123456000` |
+| `epoch_ms(`*`timestamp`*`)` | Return the total number of milliseconds since the epoch | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123` |
+| `epoch_us(`*`timestamp`*`)` | Return the total number of microseconds since the epoch | `epoch_ms(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123456` |
+| `epoch_ns(`*`timestamp`*`)` | Return the total number of nanoseconds since the epoch | `epoch_ns(timestamp '2021-08-03 11:59:44.123456')` | `1627991984123456000` |
 | `extract(`*`field`* `from` *`timestamp`*`)` | Get [subfield](../../sql/functions/datepart) from a timestamp | `extract('hour' FROM TIMESTAMP '1992-09-20 20:38:48')` | `20` |
 | `greatest(`*`timestamp`*`, `*`timestamp`*`)` | The later of two timestamps | `greatest(TIMESTAMP '1992-09-20 20:38:48', TIMESTAMP '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48` |
 | `isfinite(`*`timestamp`*`)` | Returns true if the timestamp is finite, false otherwise | `isfinite(TIMESTAMP '1992-03-07')` | true |
@@ -55,7 +56,7 @@ The table below shows the available scalar functions for `TIMESTAMP` values.
 | `strptime(`*`text`*`, `*`format-list`*`)` | Converts string to timestamp applying the [format strings](../../sql/functions/dateformat) in the list until one succeeds. Throws on failure. | `strptime('4/15/2023 10:56:00', ['%d/%m/%Y %H:%M:%S', '%m/%d/%Y %H:%M:%S'])` | `2023-04-15 10:56:00` |
 | `time_bucket(`*`bucket_width`*`, `*`timestamp`*`[, `*`origin`*`])` | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are aligned relative to `origin` timestamp. `origin` defaults to 2000-01-03 00:00:00 for buckets that don't include a month or year interval, and to 2000-01-01 00:00:00 for month and year buckets. | `time_bucket(INTERVAL '2 weeks', TIMESTAMP '1992-04-20 15:26:00', TIMESTAMP '1992-04-01 00:00:00')` | `1992-04-15 00:00:00` |
 | `time_bucket(`*`bucket_width`*`, `*`timestamp`*`[, `*`offset`*`])` | Truncate `timestamp` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. | `time_bucket(INTERVAL '10 minutes', TIMESTAMP '1992-04-20 15:26:00-07', INTERVAL '5 minutes')` | `1992-04-20 15:25:00` |
-| `to_timestamp(`*`sec`*`)` | Converts sec since epoch to a timestamp | `to_timestamp(701222400)` | `1992-03-22 00:00:00` |
+| `to_timestamp(`*`sec`*`)` | Converts sec since epoch to a timestamp with time zone | `to_timestamp(1284352323.5)` | `2010-09-13 04:32:03.5+00` |
 | `try_strptime(`*`text`*`, `*`format`*`)` | Converts string to timestamp according to the [format string](../../sql/functions/dateformat). Returns `NULL` on failure. | `try_strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')` | `1992-01-01 20:38:40` |
 | `try_strptime(`*`text`*`, `*`format-list`*`)` | Converts string to timestamp applying the [format strings](../../sql/functions/dateformat) in the list until one succeeds. Returns `NULL` on failure. | `try_strptime('4/15/2023 10:56:00', ['%d/%m/%Y %H:%M:%S', '%m/%d/%Y %H:%M:%S'])` | `2023-04-15 10:56:00` |
 
