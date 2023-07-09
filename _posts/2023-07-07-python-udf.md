@@ -34,7 +34,7 @@ The two approaches exhibit two key differences:
 
 2) **Vectorization.** PyArrow Table functions operate on a chunk level, processing chunks of data containing up to 2048 rows. This approach maximizes cache locality and leverages vectorization. On the other hand, the built-in types UDF implementation operates on a per-row basis.
 
-This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#BenchmarkComparison). If you want to see a detailed description of the Python UDF API, please refer to our [documentation](https://duckdb.org/docs/api/python/function).
+This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation](https://duckdb.org/docs/api/python/function).
 
 ## Python UDFs
 This section depicts several practical examples of using Python UDFs. Each example uses a different type of Python UDF.
