@@ -112,6 +112,8 @@ selected: API Reference
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_null">duckdb_bind_null</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared">duckdb_execute_prepared</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_prepared_arrow">duckdb_execute_prepared_arrow</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="k">out_result</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_scan">duckdb_arrow_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="k">duckdb_arrow_stream</span> <span class="k">arrow</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_array_scan">duckdb_arrow_array_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="k">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="k">arrow_array</span>, <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream</span>);
 </code></pre></div></div>
 ### **Extract Statements**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_extract_statements">duckdb_extract_statements</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="k">duckdb_extracted_statements</span> *<span class="k">out_extracted_statements</span>);
@@ -2112,6 +2114,72 @@ The prepared statement to execute.
 * `out_result`
 
 The query result.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### duckdb_arrow_scan
+---
+Scans the Arrow stream and creates a view with the given name.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_arrow_scan</span>(<span class="k">
+</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>,<span class="k">
+</span>  <span class="k">duckdb_arrow_stream</span> <span class="k">arrow
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `connection`
+
+The connection on which to execute the scan.
+* `table_name`
+
+Name of the temporary view to create.
+* `arrow`
+
+Arrow stream wrapper.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### duckdb_arrow_array_scan
+---
+Scans the Arrow array and creates a view with the given name.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_arrow_array_scan</span>(<span class="k">
+</span>  <span class="kt">duckdb_connection</span> <span class="k">connection</span>,<span class="k">
+</span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>,<span class="k">
+</span>  <span class="kt">duckdb_arrow_schema</span> <span class="k">arrow_schema</span>,<span class="k">
+</span>  <span class="kt">duckdb_arrow_array</span> <span class="k">arrow_array</span>,<span class="k">
+</span>  <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `connection`
+
+The connection on which to execute the scan.
+* `table_name`
+
+Name of the temporary view to create.
+* `arrow_schema`
+
+Arrow schema wrapper.
+* `arrow_array`
+
+Arrow array wrapper.
+* `out_stream`
+
+Output array stream that wraps around the passed schema, for releasing/deleting once done.
 * `returns`
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
