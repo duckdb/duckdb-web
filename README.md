@@ -50,7 +50,7 @@ Click the green Code button to the top right to open a new codespace with this r
 Navigate to the directory where you have cloned `duckdb-web` and run:
 
 ```sh
-bundler exec jekyll serve --incremental --config _config.yml,_config_exclude_archive.yml --livereload
+scripts/serve.sh
 ```
 
 The website can then be browsed by going to `localhost:4000` in your browser.
