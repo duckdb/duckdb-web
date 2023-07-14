@@ -40,7 +40,9 @@ module Jekyll
           }
         }
         tbody {
-          Dir.glob('/home/me/duckdb/src/core_functions/**/*.json').each do |file|
+          files = Dir.glob('/home/me/duckdb/src/core_functions/**/*.json')
+          div "No files found" if files.size == 0
+          files.each do |file|
             puts "reading from #{file}"
             json = File.open file
             json = JSON.load json
