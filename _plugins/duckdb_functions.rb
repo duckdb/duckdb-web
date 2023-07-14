@@ -49,7 +49,7 @@ module Jekyll
               puts function['name']
 
               tr {
-                td "<a href=\"TODO\">#{function['name']}(#{function['parameters']})</a>"
+                td "#{function['name']}(#{function['parameters']})"
                 td function['description']
                 td "<pre><code>#{function['example']}</code></pre>"
                 td function['aliases'].join(', ') if function['aliases']
