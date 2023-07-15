@@ -43,12 +43,10 @@ module Jekyll
           files = Dir.glob('/home/me/duckdb/src/core_functions/**/*.json')
           div "No files found" if files.size == 0
           files.each do |file|
-            puts "reading from #{file}"
             json = File.open file
             json = JSON.load json
 
             json.each do |function|
-              puts function['name']
 
               tr {
                 td "#{function['name']}(#{function['parameters']})"
