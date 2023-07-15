@@ -1,5 +1,20 @@
 require 'json'
 
+def code(child)
+  "`#{child}`"
+end
+
+def bold(i)
+  "*#{i}*"
+end
+
+def render_function(function)
+  params = function['parameters']
+  params = params.split(',').map { |it| bold(code(it)) }.join('`, `')
+
+  "#{code(function['name'] + '(')}#{params}#{code(')')}"
+end
+
 class Html
   attr_accessor :html
 
@@ -49,9 +64,9 @@ module Jekyll
             json.each do |function|
 
               tr {
-                td "#{function['name']}(#{function['parameters']})"
+                td render_function(function)
                 td function['description']
-                td "<pre><code>#{function['example']}</code></pre>"
+                td code(function['example'])
                 td function['aliases'].join(', ') if function['aliases']
               }
             end
