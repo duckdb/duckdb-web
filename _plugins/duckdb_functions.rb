@@ -1,4 +1,5 @@
 require 'json'
+require 'jekyll'
 
 def code(child)
   "`#{child}`"
@@ -43,6 +44,9 @@ module Jekyll
     end
 
     def render(context)
+      site = context.registers[:site]
+      @converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+
       html = Html.new
       html.h2 "Functions"
       html.table {
@@ -75,6 +79,10 @@ module Jekyll
       }
 
       html.html
+    end
+
+    def markdown_to_html(i)
+      @converter.convert(i)
     end
   end
 end
