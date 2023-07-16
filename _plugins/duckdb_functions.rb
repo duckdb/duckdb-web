@@ -76,7 +76,7 @@ module Jekyll
                 example = function['example']
                 td(this.markdown_to_html(code(example))) unless example.empty? or example.nil?
 
-                td(this.markdown_to_html(function['aliases'])) if function['aliases']
+                td(this.markdown_to_html(function['aliases'].map { |it| code(it) }.join(', '))) if function['aliases']
               }
             end
           end
