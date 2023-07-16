@@ -9,7 +9,7 @@ def bold(i)
   "*#{i}*"
 end
 
-def render_function(function)
+def _render_function(function)
   params = function['parameters']
   params = params.split(',').map { |it| bold(code(it)) }.join('`, `')
 
@@ -47,6 +47,8 @@ module Jekyll
       site = context.registers[:site]
       @converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
 
+      this = self
+
       html = Html.new
       html.h2 "Functions"
       html.table {
@@ -68,10 +70,13 @@ module Jekyll
             json.each do |function|
 
               tr {
-                td render_function(function)
+                td this.render_function(function)
                 td function['description']
-                td code(function['example'])
-                td function['aliases'].join(', ') if function['aliases']
+
+                example = function['example']
+                td(this.markdown_to_html(code(example))) unless example.empty? or example.nil?
+
+                td(this.markdown_to_html(function['aliases'])) if function['aliases']
               }
             end
           end
@@ -83,6 +88,10 @@ module Jekyll
 
     def markdown_to_html(i)
       @converter.convert(i)
+    end
+
+    def render_function(function)
+      markdown_to_html(_render_function(function))
     end
   end
 end
