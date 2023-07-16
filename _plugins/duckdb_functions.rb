@@ -36,10 +36,10 @@ end
 
 module Jekyll
   class DuckDBFunctionsTag < Liquid::Tag
+    @tag_name = ''
+
     def initialize(tag_name, text, tokens)
-      puts tag_name
-      puts text
-      puts tokens
+      @tag_name = tag_name
       super
     end
 
