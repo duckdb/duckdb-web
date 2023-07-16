@@ -11,7 +11,7 @@ end
 
 def _render_function(function)
   params = function['parameters']
-  params = params.split(',').map { |it| bold(code(it)) }.join('`, `')
+  params = params.split(',').map { |it| bold(code(it)) }.join('`, `') if params
 
   "#{code(function['name'] + '(')}#{params}#{code(')')}"
 end
