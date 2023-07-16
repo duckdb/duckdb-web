@@ -64,11 +64,12 @@ module Jekyll
           files = Dir.glob('/home/me/duckdb/src/core_functions/**/*.json')
           div "No files found" if files.size == 0
           files.each do |file|
-            json = File.open file
-            json = JSON.load json
+            json = JSON.load File.open file
+            category = File.basename File.dirname file
+            Jekyll.logger.info(@tag_name, "Loaded #{json.size} #{category} functions from #{file}")
 
             json.each do |function|
-
+              function['category'] = category
               tr {
                 td this.render_function(function)
                 td function['description']
