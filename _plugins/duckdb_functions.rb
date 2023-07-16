@@ -34,6 +34,21 @@ class Html
   end
 end
 
+# @return [Array<Object>, nil]
+def get_functions
+  files = Dir.glob('/home/me/duckdb/src/core_functions/**/*.json')
+  throw "No files found" if files.size == 0
+  files.map do |file|
+    functions = JSON.load File.open file
+    category = File.basename File.dirname file
+    functions.each do |function|
+      function['category'] = category
+      puts function['type']
+    end
+    functions
+  end.flatten!
+end
+
 module Jekyll
   class DuckDBFunctionsTag < Liquid::Tag
     @tag_name = ''
@@ -52,7 +67,6 @@ module Jekyll
       this = self
 
       html = Html.new
-      html.h2 "Functions"
       html.table {
         thead {
           tr {
@@ -63,26 +77,21 @@ module Jekyll
           }
         }
         tbody {
-          files = Dir.glob('/home/me/duckdb/src/core_functions/**/*.json')
-          div "No files found" if files.size == 0
-          files.each do |file|
-            json = JSON.load File.open file
-            category = File.basename File.dirname file
-            filtered = json.filter { |function| this.select_function(filter_expression, function) }
-            Jekyll.logger.info(@tag_name, "Loaded #{filtered.size} #{category} functions")
+          functions = get_functions
+          Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
+          filtered = functions.filter { |function| this.select_function(filter_expression, function) }
+          Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
 
-            filtered.each do |function|
-              function['category'] = category
-              tr {
-                td this.render_function(function)
-                td function['description']
+          filtered.each do |function|
+            tr {
+              td this.render_function(function)
+              td function['description']
 
-                example = function['example']
-                td(this.markdown_to_html(code(example))) unless example.empty? or example.nil?
+              example = function['example']
+              td(this.markdown_to_html(code(example))) unless example.nil? or example.empty?
 
-                td(this.markdown_to_html(function['aliases'].map { |it| code(it) }.join(', '))) if function['aliases']
-              }
-            end
+              td(this.markdown_to_html(function['aliases'].map { |it| code(it) }.join(', '))) if function['aliases']
+            }
           end
         }
       }
