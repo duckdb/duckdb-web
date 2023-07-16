@@ -3,5 +3,5 @@ title: test
 layout: docu
 ---
 
-{% duckdb_functions "filter expression goes here" %}
+{% duckdb_functions function['type'] == 'scalar_function' %}
 

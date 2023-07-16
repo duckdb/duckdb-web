@@ -37,16 +37,18 @@ end
 module Jekyll
   class DuckDBFunctionsTag < Liquid::Tag
     @tag_name = ''
+    @filter_expression = ''
 
     def initialize(tag_name, text, tokens)
       @tag_name = tag_name
+      @filter_expression = text
       super
     end
 
     def render(context)
       site = context.registers[:site]
       @converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
-
+      filter_expression = Liquid::Template.parse(@filter_expression).render context
       this = self
 
       html = Html.new
@@ -66,9 +68,10 @@ module Jekyll
           files.each do |file|
             json = JSON.load File.open file
             category = File.basename File.dirname file
-            Jekyll.logger.info(@tag_name, "Loaded #{json.size} #{category} functions from #{file}")
+            filtered = json.filter { |function| this.select_function(filter_expression, function) }
+            Jekyll.logger.info(@tag_name, "Loaded #{filtered.size} #{category} functions")
 
-            json.each do |function|
+            filtered.each do |function|
               function['category'] = category
               tr {
                 td this.render_function(function)
@@ -93,6 +96,21 @@ module Jekyll
 
     def render_function(function)
       markdown_to_html(_render_function(function))
+    end
+
+    # @param [string] filter_expression
+    # @param [Object] function
+    def select_function(filter_expression, function)
+      def get_binding(function)
+        binding  # binding is an instance of the variable resolution scope
+      end
+
+      begin
+        eval(filter_expression, get_binding(function))
+      rescue => e
+        Jekyll.logger.error(@tag_name, "Failed to select function with expression #{filter_expression}: #{e}")
+        false
+      end
     end
   end
 end
