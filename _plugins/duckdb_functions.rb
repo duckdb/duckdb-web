@@ -49,6 +49,14 @@ def get_functions
   end.flatten!
 end
 
+
+# @param [String] example
+def get_result(example)
+  args = ['/home/me/duckdb/build/debug/duckdb', '-json', '-c', "select #{example} as result"]
+  json_load = JSON.load IO.popen(args, :err => File::NULL).gets
+  (json_load[0]['result'] unless json_load.nil?).to_s
+end
+
 module Jekyll
   class DuckDBFunctionsTag < Liquid::Tag
     @tag_name = ''
@@ -73,6 +81,7 @@ module Jekyll
             th "Function"
             th "Description"
             th "Example"
+            th "Result"
             th "Aliases"
           }
         }
@@ -88,7 +97,11 @@ module Jekyll
               td function['description']
 
               example = function['example']
-              td(this.markdown_to_html(code(example))) unless example.nil? or example.empty?
+              unless example.nil? or example.empty?
+                td(this.markdown_to_html(code(example)))
+                result = get_result example
+                td(this.markdown_to_html code result)
+              end
 
               td(this.markdown_to_html(function['aliases'].map { |it| code(it) }.join(', '))) if function['aliases']
             }
