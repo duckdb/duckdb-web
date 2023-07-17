@@ -101,10 +101,18 @@ module Jekyll
               unless example.nil? or example.empty?
                 td(this.markdown_to_html(code(example)))
                 result = get_result example
-                td(this.markdown_to_html code result) unless result.nil? or result.empty?
+                if result.nil? or result.empty?
+                  td('')
+                else
+                  td(this.markdown_to_html code result)
+                end
               end
 
-              td(this.markdown_to_html(function['aliases'].map { |it| code(it) }.join(', '))) if function['aliases']
+              if function['aliases']
+                td(this.markdown_to_html(function['aliases'].map { |it| code(it) }.join(', ')))
+              else
+                td('')
+              end
             }
           end
         }
