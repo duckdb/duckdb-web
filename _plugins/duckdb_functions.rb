@@ -36,7 +36,7 @@ end
 
 # @return [Array<Object>, nil]
 def get_functions
-  files = Dir.glob('/home/me/duckdb/src/core_functions/**/*.json')
+  files = Dir.glob('duckdb/src/core_functions/**/*.json')
   throw "No files found" if files.size == 0
   files.map do |file|
     functions = JSON.load File.open file
