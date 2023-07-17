@@ -331,7 +331,7 @@
 		},
 		{
 			"title": "Client APIs Overview",
-			"text": "there are various client apis for duckdb duckdb s native api is c with official wrappers available for c python r java node js webassembly wasm odbc api julia and a command line interface cli there are also contributed third-party duckdb wrappers for ruby go c rust and common lisp pages in this section",
+			"text": "there are various client apis for duckdb duckdb s native api is c with official wrappers available for c python r java node js webassembly wasm odbc api julia and a command line interface cli there are also contributed third-party duckdb wrappers for c by giorgi common lisp by ak-coram crystal by amauryt go by marcboeker ruby by suketa rust by wangfenjin pages in this section",
 			"category": "Api",
 			"url": "/docs/api/overview",
 			"blurb": "There are various client APIs for DuckDB. DuckDB's native API is C++ , with official wrappers available for C ,..."
@@ -499,7 +499,7 @@
 		},
 		{
 			"title": "Drop Statement",
-			"text": "the drop statement removes a catalog entry added previously with the create command examples -- delete the table with the name tbl drop table tbl -- drop the view with the name v1 do not throw an error if the view does not exist drop view if exists v1 syntax the optional if exists clause suppresses the error that would normally result if the table does not exist by default or if the restrict clause is provided the entry will not be dropped if there are any other objects that depend on it if the cascade clause is provided then all the objects that are dependent on the object will be dropped as well create schema myschema create table myschema t1 i integer -- error cannot drop myschema because the table myschema t1 depends on it drop schema myschema -- cascade drops both myschema and myschema 1 drop schema myschema cascade",
+			"text": "the drop statement removes a catalog entry added previously with the create command examples -- delete the table with the name tbl drop table tbl -- drop the view with the name v1 do not throw an error if the view does not exist drop view if exists v1 syntax the optional if exists clause suppresses the error that would normally result if the table does not exist by default or if the restrict clause is provided the entry will not be dropped if there are any other objects that depend on it if the cascade clause is provided then all the objects that are dependent on the object will be dropped as well create schema myschema create table myschema t1 i integer -- error cannot drop myschema because the table myschema t1 depends on it drop schema myschema -- cascade drops both myschema and myschema t1 drop schema myschema cascade",
 			"category": "Statements",
 			"url": "/docs/sql/statements/drop",
 			"blurb": "The DROP statement removes a catalog entry added previously with the CREATE command. Examples -- delete the table..."
