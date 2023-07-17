@@ -43,7 +43,6 @@ def get_functions
     category = File.basename File.dirname file
     functions.each do |function|
       function['category'] = category
-      puts function['type']
     end
     functions
   end.flatten!
@@ -52,7 +51,9 @@ end
 
 # @param [String] example
 def get_result(example)
-  args = ['/home/me/duckdb/build/debug/duckdb', '-json', '-c', "select #{example} as result"]
+  exe = '/home/me/duckdb/build/debug/duckdb'
+  return unless File.exists exe
+  args = [exe, '-json', '-c', "select #{example} as result"]
   json_load = JSON.load IO.popen(args, :err => File::NULL).gets
   (json_load[0]['result'] unless json_load.nil?).to_s
 end
