@@ -115,7 +115,7 @@ tbl(con, "mtcars.csv") |>
 ```R
 dbExecute(con, "COPY flights TO 'dataset' (FORMAT PARQUET, PARTITION_BY (year, month))")
 
-tbl(con, "read_parquet('dataset/*/*/*.parquet', hive_partitioning=1)") |>
+tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning=1)") |>
   filter(month == "3") |>
   summarise(delay = mean(dep_time, na.rm = TRUE)) |>
   collect()
