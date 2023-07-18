@@ -153,8 +153,9 @@ FROM trades t ASOF JOIN prices p
   ON t.symbol = p.symbol AND t.when >= p.when
 ```
 
-The `ASOF` join requires at least one inequality condition on the ordering field,
-and the left table must be side that is greater in that inequality.
+The `ASOF` join requires at least one inequality condition on the ordering field.
+The inequality can be any inequality condition (`>=`, `>`, `<=`, `<`)
+on any data type, but the most common form is `>=` on a temporal type.
 Any other conditions must be equalities (or `NOT DISTINCT`).
 This means that the left/right order of the tables is significant.
 
@@ -170,7 +171,8 @@ FROM trades t ASOF LEFT JOIN prices p
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
-but the *last* attribute in the list must be the inequality:
+but the *last* attribute in the list must be the inequality, 
+which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
