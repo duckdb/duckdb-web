@@ -90,6 +90,15 @@ PRAGMA version;
 CALL pragma_version();
 ```
 
+### platform
+`platform` returns an identifier for the platform the current DuckDB executable has been compiled for.
+This matches the platform_name as described [on the extension loading explainer](../../extensions/overview#downloading-extensions-directly-from-s3).
+```sql
+-- show platform of current DuckDB executable
+PRAGMA platform;
+CALL pragma_platform();
+```
+
 ### enable_progress_bar, disable_progress_bar, enable_profiling, disable_profiling, profiling_output
 ```sql
 -- Show progress bar when running queries
