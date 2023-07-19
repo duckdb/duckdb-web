@@ -52,7 +52,7 @@ end
 # @param [String] example
 def get_result(example)
   exe = '/home/me/duckdb/build/debug/duckdb'
-  return unless File.exists? exe
+  return unless File.exist? exe
   args = [exe, '-json', '-c', "select #{example} as result"]
   json_load = JSON.load IO.popen(args, :err => File::NULL).gets
   (json_load[0]['result'] unless json_load.nil?).to_s
