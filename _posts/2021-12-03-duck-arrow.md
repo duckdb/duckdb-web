@@ -213,7 +213,7 @@ For both the Projection and Filter pushdown comparison, we will use Arrow tables
 
 For the NYC Taxi benchmarks, we used the scilens diamonds configuration and for the TPC-H benchmarks, we used an m1 MacBook Pro. In both cases, parallelism in DuckDB was used (which is now on by default).
 
-For the comparison with Pandas, note that DuckDB runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. DuckDB's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them them in the `read_parquet()` call.
+For the comparison with Pandas, note that DuckDB runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. DuckDB's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them in the `read_parquet()` call.
 
 ### Projection Pushdown
 
@@ -368,6 +368,6 @@ In the table above, we also depict the comparison of peak memory usage between D
 ## Conclusion and Feedback
 In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
 
-Last but not least, if you encounter any problems when using our integration, please open an issue in in either [DuckDB's - issue tracker](https://github.com/duckdb/duckdb/issues)  or [Arrow's - issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
+Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's - issue tracker](https://github.com/duckdb/duckdb/issues)  or [Arrow's - issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
 
 [^1]: In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.
