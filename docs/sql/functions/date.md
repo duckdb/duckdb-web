@@ -49,7 +49,8 @@ Dates can also be manipulated with the [timestamp functions](../../sql/functions
 | `time_bucket(`*`bucket_width`*`, `*`date`*`[, `*`offset`*`])` | Truncate `date` by the specified interval `bucket_width`. Buckets are offset by `offset` interval. | `time_bucket(INTERVAL '2 months', DATE '1992-04-20', INTERVAL '1 month')` | `1992-04-01` |
 | `today()` | Current date (start of current transaction) | `today()` | `2022-10-08` |
 
-There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
+There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart#part-functions).
+A few examples include extracting the day from a date, or the day of the week from a date. 
 
 Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
