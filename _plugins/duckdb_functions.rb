@@ -45,7 +45,7 @@ def get_functions
       function['category'] = category
     end
     functions
-  end.flatten!
+  end.flatten!.sort_by{|f| f['name']}
 end
 
 
