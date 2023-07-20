@@ -11,7 +11,7 @@ end
 
 def _render_function(function)
   params = function['parameters']
-  params = params.split(',').map { |it| bold(code(it)) }.join('`, `') if params
+  params = params.map { |it| bold(code(it)) }.join('`, `') if params
 
   "#{code(function['name'] + '(')}#{params}#{code(')')}"
 end
@@ -36,26 +36,7 @@ end
 
 # @return [Array<Object>, nil]
 def get_functions
-  files = Dir.glob('duckdb/src/core_functions/**/*.json')
-  throw "No files found" if files.size == 0
-  files.map do |file|
-    functions = JSON.load File.open file
-    category = File.basename File.dirname file
-    functions.each do |function|
-      function['category'] = category
-    end
-    functions
-  end.flatten!.sort_by{|f| f['name']}
-end
-
-
-# @param [String] example
-def get_result(example)
-  exe = '/home/me/duckdb/build/debug/duckdb'
-  return unless File.exist? exe
-  args = [exe, '-json', '-c', "select #{example} as result"]
-  json_load = JSON.load IO.popen(args, :err => File::NULL).gets
-  (json_load[0]['result'] unless json_load.nil?).to_s
+  JSON.load File.open 'docs/functions.json'
 end
 
 module Jekyll
@@ -89,7 +70,7 @@ module Jekyll
         tbody {
           functions = get_functions
           Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
-          filtered = functions.filter { |function| this.select_function(filter_expression, function) }
+          filtered = functions.filter { |function| this.select_function(filter_expression, function) }.sort_by{|f| f['name']}
           Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
 
           filtered.each do |function|
@@ -100,8 +81,8 @@ module Jekyll
               example = function['example']
               unless example.nil? or example.empty?
                 td(this.markdown_to_html(code(example)))
-                result = get_result example
-                if result.nil? or result.empty?
+                result = function['result']
+                if result.nil?
                   td('')
                 else
                   td(this.markdown_to_html code result)
