@@ -71,7 +71,7 @@ SELECT
     count(i) FILTER (WHERE year IS NULL) as "NULLs"
 FROM stacked_data;
 
---This syntax produces the same results as the the FILTER clauses above
+--This syntax produces the same results as the FILTER clauses above
 SELECT
     count(CASE WHEN year = 2022 THEN i END) as "2022",
     count(CASE WHEN year = 2023 THEN i END) as "2023",

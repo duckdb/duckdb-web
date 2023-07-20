@@ -29,7 +29,7 @@ Written materials must refer to the project as “DuckDB” in the first and mos
 
 Logos using the duck graphical and/or textual element, or otherwise derived from the DuckDB logos are also not allowed.
 
-Domain names relating to products or services containing “duck” are not permitted without written permission from the the DuckDB Foundation. Events, books, and merchandise have their own guidelines. Please contact us for details. 
+Domain names relating to products or services containing “duck” are not permitted without written permission from the DuckDB Foundation. Events, books, and merchandise have their own guidelines. Please contact us for details. 
 
 ## Questions? Contact us
 

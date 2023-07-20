@@ -242,7 +242,7 @@ arrow_res = con.sql("select sum(add_arrow_type(i)) from numbers").fetchall()
 
 We can observe a performance difference of more than one order of magnitude between the two UDFs. The difference in performance is primarily due to three factors:
 
-1) In Python, object construction and general use is rather slow. This is due to to several reasons, including automatic memory management, interpretation, and dynamic typing.
+1) In Python, object construction and general use is rather slow. This is due to several reasons, including automatic memory management, interpretation, and dynamic typing.
 2) The PyArrow UDF does not require any data copying.
 3) The PyArrow UDF is executed in a vectorized fashion, processing chunks of data instead of individual rows.
 
