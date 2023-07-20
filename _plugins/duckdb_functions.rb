@@ -13,7 +13,7 @@ def _render_function(function)
   params = function['parameters']
   params = params.map { |it| bold(code(it)) }.join('`, `') if params
 
-  "#{code(function['name'] + '(')}#{params}#{code(')')}"
+  "`#{function['name']}(`#{params}`)`"
 end
 
 class Html
