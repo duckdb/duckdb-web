@@ -1,0 +1,2938 @@
+[
+  {
+    "name": "!__postfix",
+    "parameters": [
+      "x"
+    ],
+    "description": "factorial of x. Computes the product of the current integer and all integers below it",
+    "example": "4!",
+    "type": "scalar_function",
+    "struct": "FactorialOperatorFun",
+    "aliases": [
+      "factorial"
+    ],
+    "category": "math",
+    "result": "24"
+  },
+  {
+    "name": "&",
+    "parameters": [
+      "left",
+      "right"
+    ],
+    "description": "Bitwise AND",
+    "example": "91 & 15",
+    "type": "scalar_function_set",
+    "struct": "BitwiseAndFun",
+    "category": "operators",
+    "result": 11
+  },
+  {
+    "name": "**",
+    "parameters": [
+      "x",
+      "y"
+    ],
+    "description": "computes x to the power of y",
+    "example": "pow(2, 3)",
+    "type": "scalar_function",
+    "struct": "PowOperatorFun",
+    "aliases": [
+      "pow",
+      "power",
+      "^"
+    ],
+    "category": "math",
+    "result": 8.0
+  },
+  {
+    "name": "<<",
+    "parameters": [
+      "input"
+    ],
+    "description": "bitwise shift left",
+    "example": "1 << 4",
+    "type": "scalar_function_set",
+    "struct": "LeftShiftFun",
+    "category": "operators",
+    "result": 16
+  },
+  {
+    "name": ">>",
+    "parameters": [
+      "input"
+    ],
+    "description": "bitwise shift right",
+    "example": "8 >> 2",
+    "type": "scalar_function_set",
+    "struct": "RightShiftFun",
+    "category": "operators",
+    "result": 2
+  },
+  {
+    "name": "@",
+    "parameters": [
+      "x"
+    ],
+    "description": "absolute value",
+    "example": "abs(-17.4)",
+    "type": "scalar_function_set",
+    "struct": "AbsOperatorFun",
+    "aliases": [
+      "abs"
+    ],
+    "category": "math",
+    "result": 17.4
+  },
+  {
+    "name": "^@",
+    "parameters": [
+      "string",
+      "search_string"
+    ],
+    "description": "Return true if string begins with search_string",
+    "example": "starts_with('abc','a')",
+    "type": "scalar_function",
+    "struct": "StartsWithOperatorFun",
+    "aliases": [
+      "starts_with"
+    ],
+    "category": "string",
+    "result": true
+  },
+  {
+    "name": "acos",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the arccosine of x",
+    "example": "acos(0.5)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 1.0471975511965979
+  },
+  {
+    "name": "age",
+    "parameters": [
+      "timestamp",
+      "timestamp"
+    ],
+    "description": "Subtract arguments, resulting in the time difference between the two timestamps",
+    "example": "age(TIMESTAMP '2001-04-10', TIMESTAMP '1992-09-20')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "8 years 6 months 20 days"
+  },
+  {
+    "name": "alias",
+    "parameters": [
+      "expr"
+    ],
+    "description": "Returns the name of a given expression",
+    "example": "alias(42 + 1)",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "result"
+  },
+  {
+    "name": "approx_count_distinct",
+    "parameters": [
+      "x"
+    ],
+    "description": "Computes the approximate count of distinct elements using HyperLogLog.",
+    "example": "approx_count_distinct(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "approx_quantile",
+    "parameters": [
+      "x",
+      "pos"
+    ],
+    "description": "Computes the approximate quantile using T-Digest.",
+    "example": "approx_quantile(A,0.5)",
+    "type": "aggregate_function_set",
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "name": "arg_max",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the maximum val. Calculates the arg expression at that row.",
+    "example": "arg_max(A,B)",
+    "type": "aggregate_function_set",
+    "aliases": [
+      "argmax",
+      "max_by"
+    ],
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "arg_min",
+    "parameters": [
+      "arg",
+      "val"
+    ],
+    "description": "Finds the row with the minimum val. Calculates the arg expression at that row.",
+    "example": "arg_min(A,B)",
+    "type": "aggregate_function_set",
+    "aliases": [
+      "argmin",
+      "min_by"
+    ],
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "ascii",
+    "parameters": [
+      "string"
+    ],
+    "description": "Returns an integer that represents the Unicode code point of the first character of the string.",
+    "example": "ascii('\u03a9')",
+    "type": "scalar_function",
+    "struct": "ASCIIFun",
+    "category": "string",
+    "result": 937
+  },
+  {
+    "name": "asin",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the arcsine of x",
+    "example": "asin(0.5)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 0.5235987755982989
+  },
+  {
+    "name": "atan",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the arctangent of x",
+    "example": "atan(0.5)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 0.4636476090008061
+  },
+  {
+    "name": "atan2",
+    "parameters": [
+      "x",
+      "y"
+    ],
+    "description": "computes the arctangent (x, y)",
+    "example": "atan2(0.5, 0.5)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 0.7853981633974483
+  },
+  {
+    "name": "avg",
+    "parameters": [
+      "x"
+    ],
+    "description": "Calculates the average value for all tuples in x.",
+    "example": "SUM(x) / COUNT(*)",
+    "type": "aggregate_function_set",
+    "aliases": [
+      "mean"
+    ],
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "bar",
+    "parameters": [
+      "x",
+      "min",
+      "max",
+      "width"
+    ],
+    "description": "Draw a band whose width is proportional to (x - min) and equal to width characters when x = max. width defaults to 80.",
+    "example": "bar(5, 0, 20, 10)",
+    "type": "scalar_function_set",
+    "category": "string",
+    "result": "\u2588\u2588\u258c"
+  },
+  {
+    "name": "bin",
+    "parameters": [
+      "value"
+    ],
+    "description": "Converts the value to binary representation",
+    "example": "bin(42)",
+    "type": "scalar_function_set",
+    "aliases": [
+      "to_binary"
+    ],
+    "category": "string",
+    "result": "101010"
+  },
+  {
+    "name": "bit_and",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns the bitwise AND of all bits in a given expression.",
+    "example": "bit_and(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "bit_count",
+    "parameters": [
+      "x"
+    ],
+    "description": "returns the number of bits that are set",
+    "example": "bit_count(31)",
+    "type": "scalar_function_set",
+    "category": "math",
+    "result": 5
+  },
+  {
+    "name": "bit_or",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns the bitwise OR of all bits in a given expression.",
+    "example": "bit_or(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "bit_position",
+    "parameters": [
+      "substring",
+      "bitstring"
+    ],
+    "description": "Returns first starting index of the specified substring within bits, or zero if it\u2019s not present. The first (leftmost) bit is indexed 1",
+    "example": "bit_position('010'::BIT, '1110101'::BIT)",
+    "type": "scalar_function",
+    "category": "bit",
+    "result": 4
+  },
+  {
+    "name": "bit_xor",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns the bitwise XOR of all bits in a given expression.",
+    "example": "bit_xor(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "bitstring",
+    "parameters": [
+      "bitstring",
+      "length"
+    ],
+    "description": "Pads the bitstring until the specified length.",
+    "example": "bitstring('1010'::BIT, 7)",
+    "struct": "BitStringFun",
+    "type": "scalar_function",
+    "category": "bit",
+    "result": "0001010"
+  },
+  {
+    "name": "bitstring_agg",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns a bitstring with bits set for each distinct value.",
+    "example": "bitstring_agg(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "bool_and",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns TRUE if every input value is TRUE, otherwise FALSE.",
+    "example": "bool_and(A)",
+    "type": "aggregate_function",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "bool_or",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns TRUE if any input value is TRUE, otherwise FALSE.",
+    "example": "bool_or(A)",
+    "type": "aggregate_function",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "cardinality",
+    "parameters": [
+      "map"
+    ],
+    "description": "Return the size of the map (or the number of entries in the map).",
+    "example": "cardinality( map([4, 2], ['a', 'b']) );",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "2"
+  },
+  {
+    "name": "cbrt",
+    "parameters": [
+      "x"
+    ],
+    "description": "returns the cube root of x",
+    "example": "cbrt(8)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 2.0
+  },
+  {
+    "name": "ceil",
+    "parameters": [
+      "x"
+    ],
+    "description": "rounds the number up",
+    "example": "ceil(17.4)",
+    "type": "scalar_function_set",
+    "aliases": [
+      "ceiling"
+    ],
+    "category": "math",
+    "result": 18.0
+  },
+  {
+    "name": "century",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the century component from a date or timestamp",
+    "example": "century(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 21
+  },
+  {
+    "name": "chr",
+    "parameters": [
+      "code_point"
+    ],
+    "description": "returns a character which is corresponding the ASCII code value or Unicode code point",
+    "example": "chr(65)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "A"
+  },
+  {
+    "name": "corr",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the correlation coefficient for non-null pairs in a group.",
+    "example": "COVAR_POP(y, x) / (STDDEV_POP(x) * STDDEV_POP(y))",
+    "type": "aggregate_function",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "cos",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the cos of x",
+    "example": "cos(90)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": -0.4480736161291701
+  },
+  {
+    "name": "cot",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the cotangent of x",
+    "example": "cot(0.5)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 1.830487721712452
+  },
+  {
+    "name": "covar_pop",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the population covariance of input values.",
+    "example": "(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*)",
+    "type": "aggregate_function",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "covar_samp",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the sample covariance for non-null pairs in a group.",
+    "example": "(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / (COUNT(*) - 1)",
+    "type": "aggregate_function",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "current_database",
+    "parameters": [],
+    "description": "Return the name of the currently active database.",
+    "example": "current_database()",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "memory"
+  },
+  {
+    "name": "current_date",
+    "description": "Returns the current date",
+    "example": "current_date()",
+    "type": "scalar_function",
+    "aliases": [
+      "today"
+    ],
+    "parameters": [],
+    "category": "date",
+    "result": "2023-07-20"
+  },
+  {
+    "name": "current_query",
+    "parameters": [],
+    "description": "Returns the current query as a string",
+    "example": "current_query()",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "SELECT current_query() AS result"
+  },
+  {
+    "name": "current_schema",
+    "parameters": [],
+    "description": "Return the name of the currently active schema. Default is main.",
+    "example": "current_schema()",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "main"
+  },
+  {
+    "name": "current_schemas",
+    "parameters": [
+      "include_implicit"
+    ],
+    "description": "Return list of schemas. Pass a parameter of True to include implicit schemas.",
+    "example": "current_schemas(true)",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "[main, main, main, pg_catalog]"
+  },
+  {
+    "name": "current_setting",
+    "parameters": [
+      "setting_name"
+    ],
+    "description": "Return the current value of the configuration setting",
+    "example": "current_setting('access_mode')",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "automatic"
+  },
+  {
+    "name": "damerau_levenshtein",
+    "parameters": [
+      "str1",
+      "str2"
+    ],
+    "description": "Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different.",
+    "example": "damerau_levenshtein('hello', 'world')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": 4
+  },
+  {
+    "name": "date_diff",
+    "parameters": [
+      "part",
+      "startdate",
+      "enddate"
+    ],
+    "description": "The number of partition boundaries between the timestamps",
+    "example": "date_diff('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')",
+    "type": "scalar_function_set",
+    "aliases": [
+      "datediff"
+    ],
+    "category": "date",
+    "result": 2
+  },
+  {
+    "name": "date_part",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Get subfield (equivalent to extract)",
+    "example": "date_part('minute', TIMESTAMP '1992-09-20 20:38:40')",
+    "type": "scalar_function_set",
+    "aliases": [
+      "datepart"
+    ],
+    "category": "date",
+    "result": 38
+  },
+  {
+    "name": "date_sub",
+    "parameters": [
+      "part",
+      "startdate",
+      "enddate"
+    ],
+    "description": "The number of complete partitions between the timestamps",
+    "example": "date_sub('hour', TIMESTAMPTZ '1992-09-30 23:59:59', TIMESTAMPTZ '1992-10-01 01:58:00')",
+    "type": "scalar_function_set",
+    "aliases": [
+      "datesub"
+    ],
+    "category": "date",
+    "result": 1
+  },
+  {
+    "name": "date_trunc",
+    "parameters": [
+      "part",
+      "timestamp"
+    ],
+    "description": "Truncate to specified precision",
+    "example": "date_trunc('hour', TIMESTAMPTZ '1992-09-20 20:38:40')",
+    "type": "scalar_function_set",
+    "aliases": [
+      "datetrunc"
+    ],
+    "category": "date",
+    "result": "1992-09-20 20:00:00+00"
+  },
+  {
+    "name": "day",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the day component from a date or timestamp",
+    "example": "day(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 3
+  },
+  {
+    "struct": "DayNameFun",
+    "name": "dayname",
+    "parameters": [
+      "ts"
+    ],
+    "description": "The (English) name of the weekday.",
+    "example": "dayname(TIMESTAMP '1992-03-22')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "Sunday"
+  },
+  {
+    "struct": "DayOfMonthFun",
+    "name": "dayofmonth",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the dayofmonth component from a date or timestamp",
+    "example": "dayofmonth(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 3
+  },
+  {
+    "struct": "DayOfWeekFun",
+    "name": "dayofweek",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the dayofweek component from a date or timestamp",
+    "example": "dayofweek(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 2
+  },
+  {
+    "struct": "DayOfYearFun",
+    "name": "dayofyear",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the dayofyear component from a date or timestamp",
+    "example": "dayofyear(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 215
+  },
+  {
+    "name": "decade",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the decade component from a date or timestamp",
+    "example": "decade(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 202
+  },
+  {
+    "name": "decode",
+    "parameters": [
+      "blob"
+    ],
+    "description": "Convert blob to varchar. Fails if blob is not valid utf-8.",
+    "example": "decode('\\\\xC3\\\\xBC'::BLOB)",
+    "type": "scalar_function",
+    "category": "blob",
+    "result": null
+  },
+  {
+    "name": "degrees",
+    "parameters": [
+      "x"
+    ],
+    "description": "converts radians to degrees",
+    "example": "degrees(pi())",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 180.0
+  },
+  {
+    "name": "encode",
+    "parameters": [
+      "string"
+    ],
+    "description": "Convert varchar to blob. Converts utf-8 characters into literal encoding.",
+    "example": "encode('my_string_with_\u00fc')",
+    "type": "scalar_function",
+    "category": "blob",
+    "result": "my_string_with_\\xC3\\xBC"
+  },
+  {
+    "name": "entropy",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the log-2 entropy of count input-values.",
+    "example": "",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "enum_code",
+    "parameters": [
+      "enum"
+    ],
+    "description": "Returns the numeric value backing the given enum value",
+    "example": "enum_code('happy'::mood)",
+    "type": "scalar_function",
+    "category": "enum",
+    "result": null
+  },
+  {
+    "name": "enum_first",
+    "parameters": [
+      "enum"
+    ],
+    "description": "Returns the first value of the input enum type.",
+    "example": "enum_first(null::mood)",
+    "type": "scalar_function",
+    "category": "enum",
+    "result": null
+  },
+  {
+    "name": "enum_last",
+    "parameters": [
+      "enum"
+    ],
+    "description": "Returns the last value of the input enum type.",
+    "example": "enum_last(null::mood)",
+    "type": "scalar_function",
+    "category": "enum",
+    "result": null
+  },
+  {
+    "name": "enum_range",
+    "parameters": [
+      "enum"
+    ],
+    "description": "Returns all values of the input enum type as an array.",
+    "example": "enum_range(null::mood)",
+    "type": "scalar_function",
+    "category": "enum",
+    "result": null
+  },
+  {
+    "name": "enum_range_boundary",
+    "parameters": [
+      "start",
+      "end"
+    ],
+    "description": "Returns the range between the two given enum values as an array. The values must be of the same enum type. When the first parameter is NULL, the result starts with the first value of the enum type. When the second parameter is NULL, the result ends with the last value of the enum type.",
+    "example": "enum_range_boundary(NULL, 'happy'::mood)",
+    "type": "scalar_function",
+    "category": "enum",
+    "result": null
+  },
+  {
+    "name": "epoch",
+    "parameters": [
+      "temporal"
+    ],
+    "description": "Extract the epoch component from a temporal type",
+    "example": "epoch(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 1627991984
+  },
+  {
+    "name": "epoch_ms",
+    "parameters": [
+      "temporal"
+    ],
+    "description": "Extract the epoch component in milliseconds from a temporal type",
+    "example": "epoch_ms(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 1627991984123
+  },
+  {
+    "name": "epoch_ns",
+    "parameters": [
+      "temporal"
+    ],
+    "description": "Extract the epoch component in nanoseconds from a temporal type",
+    "example": "epoch_ns(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 1627991984123456000
+  },
+  {
+    "name": "epoch_us",
+    "parameters": [
+      "temporal"
+    ],
+    "description": "Extract the epoch component in microseconds from a temporal type",
+    "example": "epoch_us(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 1627991984123456
+  },
+  {
+    "name": "era",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the era component from a date or timestamp",
+    "example": "era(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 1
+  },
+  {
+    "name": "error",
+    "parameters": [
+      "message"
+    ],
+    "description": "Throws the given error message",
+    "example": "error('access_mode')",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": null
+  },
+  {
+    "name": "even",
+    "parameters": [
+      "x"
+    ],
+    "description": "round to next even number by rounding away from zero.",
+    "example": "even(2.9)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 4.0
+  },
+  {
+    "name": "exp",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes e to the power of x",
+    "example": "exp(1)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 2.718281828459045
+  },
+  {
+    "name": "favg",
+    "parameters": [
+      "x"
+    ],
+    "description": "Calculates the average using a more accurate floating point summation (Kahan Sum)",
+    "example": "favg(A)",
+    "type": "aggregate_function",
+    "struct": "FAvgFun",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "flatten",
+    "parameters": [
+      "nested_list"
+    ],
+    "description": "Flatten a nested list by one level",
+    "example": "flatten([[1, 2, 3], [4, 5]])",
+    "struct": "ListFlattenFun",
+    "type": "scalar_function",
+    "category": "list",
+    "result": "[1, 2, 3, 4, 5]"
+  },
+  {
+    "name": "floor",
+    "parameters": [
+      "x"
+    ],
+    "description": "rounds the number down",
+    "example": "floor(17.4)",
+    "type": "scalar_function_set",
+    "category": "math",
+    "result": 17.0
+  },
+  {
+    "name": "format",
+    "parameters": [
+      "format",
+      "parameters..."
+    ],
+    "description": "Formats a string using fmt syntax",
+    "example": "format('Benchmark \"{}\" took {} seconds', 'CSV', 42)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "Benchmark \"CSV\" took 42 seconds"
+  },
+  {
+    "name": "format_bytes",
+    "parameters": [
+      "bytes"
+    ],
+    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16KB)",
+    "example": "format_bytes(1000 * 16)",
+    "type": "scalar_function",
+    "aliases": [
+      "formatReadableDecimalSize"
+    ],
+    "category": "string",
+    "result": "16KB"
+  },
+  {
+    "name": "from_base64",
+    "parameters": [
+      "string"
+    ],
+    "description": "Convert a base64 encoded string to a character string.",
+    "example": "from_base64('QQ==')",
+    "type": "scalar_function",
+    "category": "blob",
+    "result": "A"
+  },
+  {
+    "name": "gamma",
+    "parameters": [
+      "x"
+    ],
+    "description": "interpolation of (x-1) factorial (so decimal inputs are allowed)",
+    "example": "gamma(5.5)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 52.34277778455352
+  },
+  {
+    "name": "generate_series",
+    "parameters": [
+      "start",
+      "stop",
+      "step"
+    ],
+    "description": "Create a list of values between start and stop - the stop parameter is inclusive",
+    "example": "generate_series(2, 5, 3)",
+    "type": "scalar_function_set",
+    "category": "list",
+    "result": "[2, 5]"
+  },
+  {
+    "name": "get_bit",
+    "parameters": [
+      "bitstring",
+      "index"
+    ],
+    "description": "Extracts the nth bit from bitstring; the first (leftmost) bit is indexed 0.",
+    "example": "get_bit('0110010'::BIT, 2)",
+    "type": "scalar_function",
+    "category": "bit",
+    "result": 1
+  },
+  {
+    "struct": "CurrentTimeFun",
+    "name": "get_current_time",
+    "description": "Returns the current time",
+    "example": "get_current_time()",
+    "type": "scalar_function",
+    "parameters": [],
+    "category": "date",
+    "result": "05:28:09.711"
+  },
+  {
+    "name": "get_current_timestamp",
+    "description": "Returns the current timestamp",
+    "example": "get_current_timestamp()",
+    "type": "scalar_function",
+    "aliases": [
+      "now",
+      "transaction_timestamp"
+    ],
+    "parameters": [],
+    "category": "date",
+    "result": "2023-07-20 05:28:10.243+00"
+  },
+  {
+    "name": "greatest",
+    "parameters": [
+      "arg1",
+      " arg2",
+      " ..."
+    ],
+    "description": "Returns the highest value of the set of input parameters.",
+    "example": "greatest(42, 84)",
+    "type": "scalar_function_set",
+    "category": "generic",
+    "result": 84
+  },
+  {
+    "name": "greatest_common_divisor",
+    "parameters": [
+      "x",
+      "y"
+    ],
+    "description": "computes the greatest common divisor of x and y",
+    "example": "greatest_common_divisor(42, 57)",
+    "type": "scalar_function_set",
+    "aliases": [
+      "gcd"
+    ],
+    "category": "math",
+    "result": 3
+  },
+  {
+    "name": "hamming",
+    "parameters": [
+      "str1",
+      "str2"
+    ],
+    "description": "The number of positions with different characters for 2 strings of equal length. Different case is considered different.",
+    "example": "hamming('duck','luck')",
+    "type": "scalar_function",
+    "aliases": [
+      "mismatches"
+    ],
+    "category": "string",
+    "result": 1
+  },
+  {
+    "name": "hash",
+    "parameters": [
+      "param"
+    ],
+    "description": "Returns an integer with the hash of the value. Note that this is not a cryptographic hash.",
+    "example": "hash('\ud83e\udd86')",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "2595805878642663834"
+  },
+  {
+    "name": "hex",
+    "parameters": [
+      "value"
+    ],
+    "description": "Converts the value to hexadecimal representation",
+    "example": "hex(42)",
+    "type": "scalar_function_set",
+    "aliases": [
+      "to_hex"
+    ],
+    "category": "string",
+    "result": "2A"
+  },
+  {
+    "name": "histogram",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns a LIST of STRUCTs with the fields bucket and count.",
+    "example": "histogram(A)",
+    "type": "aggregate_function_set",
+    "extra_functions": [
+      "static AggregateFunction GetHistogramUnorderedMap(LogicalType &type);"
+    ],
+    "category": "nested",
+    "result": null
+  },
+  {
+    "struct": "HoursFun",
+    "name": "hour",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the hour component from a date or timestamp",
+    "example": "hour(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 11
+  },
+  {
+    "name": "in_search_path",
+    "parameters": [
+      "database_name",
+      "schema_name"
+    ],
+    "description": "Returns whether or not the database/schema are in the search path.",
+    "example": "in_search_path('memory', 'main')",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": true
+  },
+  {
+    "name": "instr",
+    "parameters": [
+      "haystack",
+      "needle"
+    ],
+    "description": "Return location of first occurrence of needle in haystack, counting from 1. Returns 0 if no match found.",
+    "example": "instr('test test','es')",
+    "type": "scalar_function",
+    "aliases": [
+      "strpos",
+      "position"
+    ],
+    "category": "string",
+    "result": 2
+  },
+  {
+    "name": "isfinite",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns true if the floating point value is finite, false otherwise",
+    "example": "isfinite(5.5)",
+    "type": "scalar_function_set",
+    "struct": "IsFiniteFun",
+    "category": "math",
+    "result": true
+  },
+  {
+    "name": "isinf",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns true if the floating point value is infinite, false otherwise",
+    "example": "isinf('Infinity'::float)",
+    "type": "scalar_function_set",
+    "struct": "IsInfiniteFun",
+    "category": "math",
+    "result": true
+  },
+  {
+    "name": "isnan",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns true if the floating point value is not a number, false otherwise",
+    "example": "isnan('NaN'::FLOAT)",
+    "type": "scalar_function_set",
+    "struct": "IsNanFun",
+    "category": "math",
+    "result": true
+  },
+  {
+    "struct": "ISODayOfWeekFun",
+    "name": "isodow",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the isodow component from a date or timestamp",
+    "example": "isodow(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 2
+  },
+  {
+    "struct": "ISOYearFun",
+    "name": "isoyear",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the isoyear component from a date or timestamp",
+    "example": "isoyear(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 2021
+  },
+  {
+    "name": "jaccard",
+    "parameters": [
+      "str1",
+      "str2"
+    ],
+    "description": "The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1.",
+    "example": "jaccard('duck','luck')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": 0.6
+  },
+  {
+    "name": "jaro_similarity",
+    "parameters": [
+      "str1",
+      "str2"
+    ],
+    "description": "The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1.",
+    "example": "jaro_similarity('duck','duckdb')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": 0.8888888888888888
+  },
+  {
+    "name": "jaro_winkler_similarity",
+    "parameters": [
+      "str1",
+      "str2"
+    ],
+    "description": "The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1.",
+    "example": "jaro_winkler_similarity('duck','duckdb')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": 0.9333333333333333
+  },
+  {
+    "name": "kahan_sum",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Calculates the sum using a more accurate floating point summation (Kahan Sum).",
+    "example": "kahan_sum(A)",
+    "type": "aggregate_function",
+    "aliases": [
+      "fsum",
+      "sumkahan"
+    ],
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "kurtosis",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the excess kurtosis (Fisher\u2019s definition) of all input values, with a bias correction according to the sample size",
+    "example": "",
+    "type": "aggregate_function",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "last_day",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Returns the last day of the month",
+    "example": "last_day(TIMESTAMP '1992-03-22 01:02:03.1234')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "1992-03-31"
+  },
+  {
+    "name": "least",
+    "parameters": [
+      "arg1",
+      " arg2",
+      " ..."
+    ],
+    "description": "Returns the lowest value of the set of input parameters.",
+    "example": "least(42, 84)",
+    "type": "scalar_function_set",
+    "category": "generic",
+    "result": 42
+  },
+  {
+    "name": "least_common_multiple",
+    "parameters": [
+      "x",
+      "y"
+    ],
+    "description": "computes the least common multiple of x and y",
+    "example": "least_common_multiple(42, 57)",
+    "type": "scalar_function_set",
+    "aliases": [
+      "lcm"
+    ],
+    "category": "math",
+    "result": 798
+  },
+  {
+    "name": "left",
+    "parameters": [
+      "string",
+      "count"
+    ],
+    "description": "Extract the left-most count characters",
+    "example": "left('Hello\ud83e\udd86', 2)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "He"
+  },
+  {
+    "name": "left_grapheme",
+    "parameters": [
+      "string",
+      "count"
+    ],
+    "description": "Extract the left-most count grapheme clusters",
+    "example": "left_grapheme('\ud83e\udd26\ud83c\udffc\u200d\u2642\ufe0f\ud83e\udd26\ud83c\udffd\u200d\u2640\ufe0f', 1)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "\ud83e\udd26\ud83c\udffc\u200d\u2642\ufe0f"
+  },
+  {
+    "name": "levenshtein",
+    "parameters": [
+      "str1",
+      "str2"
+    ],
+    "description": "The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different.",
+    "example": "levenshtein('duck','db')",
+    "type": "scalar_function",
+    "aliases": [
+      "editdist3"
+    ],
+    "category": "string",
+    "result": 3
+  },
+  {
+    "name": "lgamma",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the log of the gamma function.",
+    "example": "lgamma(2)",
+    "type": "scalar_function",
+    "struct": "LogGammaFun",
+    "category": "math",
+    "result": 0.0
+  },
+  {
+    "name": "list",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns a LIST containing all the values of a column.",
+    "example": "list(A)",
+    "type": "aggregate_function",
+    "aliases": [
+      "array_agg"
+    ],
+    "category": "nested",
+    "result": null
+  },
+  {
+    "name": "list_aggregate",
+    "parameters": [
+      "list",
+      "name"
+    ],
+    "description": "Executes the aggregate function name on the elements of list.",
+    "example": "list_aggregate([1, 2, NULL], 'min')",
+    "type": "scalar_function",
+    "aliases": [
+      "array_aggregate",
+      "list_aggr",
+      "array_aggr",
+      "aggregate"
+    ],
+    "category": "list",
+    "result": 1
+  },
+  {
+    "name": "list_distinct",
+    "parameters": [
+      "list"
+    ],
+    "description": "Removes all duplicates and NULLs from a list. Does not preserve the original order.",
+    "example": "list_distinct([1, 1, NULL, -3, 1, 5])",
+    "type": "scalar_function",
+    "aliases": [
+      "array_distinct"
+    ],
+    "category": "list",
+    "result": "[5, -3, 1]"
+  },
+  {
+    "name": "list_filter",
+    "parameters": [
+      "list",
+      "lambda"
+    ],
+    "description": "Constructs a list from those elements of the input list for which the lambda function returns true.",
+    "example": "list_filter([3, 4, 5], x -> x > 4)",
+    "type": "scalar_function",
+    "aliases": [
+      "array_filter",
+      "filter"
+    ],
+    "category": "list",
+    "result": "[5]"
+  },
+  {
+    "name": "list_reverse_sort",
+    "parameters": [
+      "list"
+    ],
+    "description": "Sorts the elements of the list in reverse order.",
+    "example": "list_reverse_sort([3, 6, 1, 2])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "array_reverse_sort"
+    ],
+    "category": "list",
+    "result": "[6, 3, 2, 1]"
+  },
+  {
+    "name": "list_slice",
+    "parameters": [
+      "list",
+      "begin",
+      "end"
+    ],
+    "description": "Extract a sublist using slice conventions. NULLs are interpreted as the bounds of the LIST. Negative values are accepted.",
+    "example": "list_slice(l, 2, NULL)",
+    "type": "scalar_function",
+    "aliases": [
+      "array_slice"
+    ],
+    "category": "list",
+    "result": null
+  },
+  {
+    "name": "list_sort",
+    "parameters": [
+      "list"
+    ],
+    "description": "Sorts the elements of the list.",
+    "example": "list_sort([3, 6, 1, 2])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "array_sort"
+    ],
+    "category": "list",
+    "result": "[1, 2, 3, 6]"
+  },
+  {
+    "name": "list_transform",
+    "parameters": [
+      "list",
+      "lambda"
+    ],
+    "description": "Returns a list that is the result of applying the lambda function to each element of the input list. See the Lambda Functions section for more details.",
+    "example": "list_transform([1, 2, 3], x -> x + 1)",
+    "type": "scalar_function",
+    "aliases": [
+      "array_transform",
+      "list_apply",
+      "array_apply",
+      "apply"
+    ],
+    "category": "list",
+    "result": "[2, 3, 4]"
+  },
+  {
+    "name": "list_unique",
+    "parameters": [
+      "list"
+    ],
+    "description": "Counts the unique elements of a list.",
+    "example": "list_unique([1, 1, NULL, -3, 1, 5])",
+    "type": "scalar_function",
+    "aliases": [
+      "array_unique"
+    ],
+    "category": "list",
+    "result": "3"
+  },
+  {
+    "name": "list_value",
+    "parameters": [
+      "any",
+      "..."
+    ],
+    "description": "Create a LIST containing the argument values.",
+    "example": "list_value(4, 5, 6)",
+    "type": "scalar_function",
+    "aliases": [
+      "list_pack"
+    ],
+    "category": "list",
+    "result": "[4, 5, 6]"
+  },
+  {
+    "name": "ln",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the natural logarithm of x",
+    "example": "ln(2)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 0.6931471805599453
+  },
+  {
+    "name": "log10",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the 10-log of x",
+    "example": "log10(1000)",
+    "type": "scalar_function",
+    "aliases": [
+      "log"
+    ],
+    "category": "math",
+    "result": 3.0
+  },
+  {
+    "name": "log2",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the 2-log of x",
+    "example": "log2(8)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 3.0
+  },
+  {
+    "name": "lpad",
+    "parameters": [
+      "string",
+      "count",
+      "character"
+    ],
+    "description": "Pads the string with the character from the left until it has count characters",
+    "example": "lpad('hello', 10, '>')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": ">>>>>hello"
+  },
+  {
+    "name": "ltrim",
+    "parameters": [
+      "string",
+      "characters"
+    ],
+    "description": "Removes any occurrences of any of the characters from the left side of the string",
+    "example": "ltrim('>>>>test<<', '><')",
+    "type": "scalar_function_set",
+    "category": "string",
+    "result": "test<<"
+  },
+  {
+    "name": "mad",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive INTERVAL.\t",
+    "example": "MEDIAN(ABS(x-MEDIAN(x)))",
+    "type": "aggregate_function_set",
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "name": "make_date",
+    "parameters": [
+      "year",
+      "month",
+      "day"
+    ],
+    "description": "The date for the given parts",
+    "example": "make_date(1992, 9, 20)",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "1992-09-20"
+  },
+  {
+    "name": "make_time",
+    "parameters": [
+      "hour",
+      "minute",
+      "seconds"
+    ],
+    "description": "The time for the given parts",
+    "example": "make_time(13, 34, 27.123456)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "13:34:27.123456"
+  },
+  {
+    "name": "make_timestamp",
+    "parameters": [
+      "year",
+      "month",
+      "day",
+      "hour",
+      "minute",
+      "seconds"
+    ],
+    "description": "The timestamp for the given parts",
+    "example": "make_timestamp(1992, 9, 20, 13, 34, 27.123456)",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "1992-09-20 13:34:27.123456"
+  },
+  {
+    "name": "map",
+    "parameters": [
+      "keys",
+      "values"
+    ],
+    "description": "Creates a map from a set of keys and values.",
+    "example": "map(['key1', 'key2'], ['val1', 'val2'])",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "{key1=val1, key2=val2}"
+  },
+  {
+    "name": "map_concat",
+    "parameters": [
+      "any",
+      "..."
+    ],
+    "description": "Returns a map created from merging the input maps, on key collision the value is taken from the last map with that key",
+    "example": "map_concat(map([1,2], ['a', 'b']), map([2,3], ['c', 'd']));",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "{1=a, 2=c, 3=d}"
+  },
+  {
+    "name": "map_entries",
+    "parameters": [
+      "map"
+    ],
+    "description": "Returns the map entries as a list of keys/values",
+    "example": "map_entries(map(['key'], ['val']))",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "[{'k': key, 'v': val}]"
+  },
+  {
+    "name": "map_extract",
+    "parameters": [
+      "map",
+      "key"
+    ],
+    "description": "Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map\u2019s keys else an error is returned.",
+    "example": "map_extract(map(['key'], ['val']), 'key')",
+    "type": "scalar_function",
+    "aliases": [
+      "element_at"
+    ],
+    "category": "map",
+    "result": "[val]"
+  },
+  {
+    "name": "map_from_entries",
+    "parameters": [
+      "map"
+    ],
+    "description": "Returns a map created from the entries of the array",
+    "example": "map_from_entries([{k: 5, v: 'val1'}, {k: 3, v: 'val2'}]);",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "{5=val1, 3=val2}"
+  },
+  {
+    "name": "map_keys",
+    "parameters": [
+      "map"
+    ],
+    "description": "Returns the keys of a map as a list",
+    "example": "map_keys(map(['key'], ['val']))",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "[key]"
+  },
+  {
+    "name": "map_values",
+    "parameters": [
+      "map"
+    ],
+    "description": "Returns the values of a map as a list",
+    "example": "map_values(map(['key'], ['val']))",
+    "type": "scalar_function",
+    "category": "map",
+    "result": "[val]"
+  },
+  {
+    "name": "max",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns the maximum value present in arg.",
+    "example": "max(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "md5",
+    "parameters": [
+      "value"
+    ],
+    "description": "Returns the MD5 hash of the value as a string",
+    "example": "md5('123')",
+    "type": "scalar_function",
+    "struct": "MD5Fun",
+    "category": "string",
+    "result": "202cb962ac59075b964b07152d234b70"
+  },
+  {
+    "name": "md5_number",
+    "parameters": [
+      "value"
+    ],
+    "description": "Returns the MD5 hash of the value as an INT128",
+    "example": "md5_number('123')",
+    "type": "scalar_function",
+    "struct": "MD5NumberFun",
+    "category": "string",
+    "result": "149263671248412135425768892945843956768"
+  },
+  {
+    "name": "md5_number_lower",
+    "parameters": [
+      "value"
+    ],
+    "description": "Returns the MD5 hash of the value as an INT128",
+    "example": "md5_number_lower('123')",
+    "type": "scalar_function",
+    "struct": "MD5NumberLowerFun",
+    "category": "string",
+    "result": "8091599832034528150"
+  },
+  {
+    "name": "md5_number_upper",
+    "parameters": [
+      "value"
+    ],
+    "description": "Returns the MD5 hash of the value as an INT128",
+    "example": "md5_number_upper('123')",
+    "type": "scalar_function",
+    "struct": "MD5NumberUpperFun",
+    "category": "string",
+    "result": "6559309979213966368"
+  },
+  {
+    "name": "median",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the middle value of the set. NULL values are ignored. For even value counts, quantitiative values are averaged and ordinal values return the lower value.",
+    "example": "QUANTILE_CONT(x, 0.5)",
+    "type": "aggregate_function_set",
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "struct": "MicrosecondsFun",
+    "name": "microsecond",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the microsecond component from a date or timestamp",
+    "example": "microsecond(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 44123456
+  },
+  {
+    "name": "millennium",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the millennium component from a date or timestamp",
+    "example": "millennium(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 3
+  },
+  {
+    "struct": "MillisecondsFun",
+    "name": "millisecond",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the millisecond component from a date or timestamp",
+    "example": "millisecond(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 44123
+  },
+  {
+    "name": "min",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Returns the minimum value present in arg.",
+    "example": "min(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "struct": "MinutesFun",
+    "name": "minute",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the minute component from a date or timestamp",
+    "example": "minute(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 59
+  },
+  {
+    "name": "mode",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the most frequent value for the values within x. NULL values are ignored.",
+    "example": "",
+    "type": "aggregate_function_set",
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "name": "month",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the month component from a date or timestamp",
+    "example": "month(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 8
+  },
+  {
+    "struct": "MonthNameFun",
+    "name": "monthname",
+    "parameters": [
+      "ts"
+    ],
+    "description": "The (English) name of the month.",
+    "example": "monthname(TIMESTAMP '1992-09-20')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "September"
+  },
+  {
+    "name": "nextafter",
+    "parameters": [
+      "x",
+      " y"
+    ],
+    "description": "return the next floating point value after x in the direction of y",
+    "example": "nextafter(1::float, 2::float)",
+    "type": "scalar_function_set",
+    "struct": "NextAfterFun",
+    "category": "math",
+    "result": 1.0000001192092896
+  },
+  {
+    "name": "pi",
+    "description": "returns the value of pi",
+    "example": "pi()",
+    "type": "scalar_function",
+    "parameters": [],
+    "category": "math",
+    "result": 3.141592653589793
+  },
+  {
+    "name": "printf",
+    "parameters": [
+      "format",
+      "parameters..."
+    ],
+    "description": "Formats a string using printf syntax",
+    "example": "printf('Benchmark \"%s\" took %d seconds', 'CSV', 42)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "Benchmark \"CSV\" took 42 seconds"
+  },
+  {
+    "name": "product",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Calculates the product of all tuples in arg.",
+    "example": "product(A)",
+    "type": "aggregate_function",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "quantile_cont",
+    "parameters": [
+      "x",
+      "pos"
+    ],
+    "description": "Returns the intepolated quantile number between 0 and 1 . If pos is a LIST of FLOATs, then the result is a LIST of the corresponding intepolated quantiles.\t",
+    "example": "",
+    "type": "aggregate_function_set",
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "name": "quantile_disc",
+    "parameters": [
+      "x",
+      "pos"
+    ],
+    "description": "Returns the exact quantile number between 0 and 1 . If pos is a LIST of FLOATs, then the result is a LIST of the corresponding exact quantiles.",
+    "example": "",
+    "type": "aggregate_function_set",
+    "aliases": [
+      "quantile"
+    ],
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "name": "quarter",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the quarter component from a date or timestamp",
+    "example": "quarter(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 3
+  },
+  {
+    "name": "radians",
+    "parameters": [
+      "x"
+    ],
+    "description": "converts degrees to radians",
+    "example": "radians(90)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 1.5707963267948966
+  },
+  {
+    "name": "random",
+    "description": "returns a random number between 0 and 1",
+    "example": "random()",
+    "type": "scalar_function",
+    "parameters": [],
+    "category": "random",
+    "result": 0.4729174713138491
+  },
+  {
+    "name": "range",
+    "parameters": [
+      "start",
+      "stop",
+      "step"
+    ],
+    "description": "Create a list of values between start and stop - the stop parameter is exclusive",
+    "example": "range(2, 5, 3)",
+    "type": "scalar_function_set",
+    "struct": "ListRangeFun",
+    "category": "list",
+    "result": "[2]"
+  },
+  {
+    "name": "regr_avgx",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable.",
+    "example": "",
+    "type": "aggregate_function",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_avgy",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable.",
+    "example": "",
+    "type": "aggregate_function",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_count",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the number of non-null number pairs in a group.",
+    "example": "(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*)",
+    "type": "aggregate_function",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_intercept",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the intercept of the univariate linear regression line for non-null pairs in a group.",
+    "example": "AVG(y)-REGR_SLOPE(y,x)*AVG(x)",
+    "type": "aggregate_function",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_r2",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the coefficient of determination for non-null pairs in a group.",
+    "example": "",
+    "type": "aggregate_function",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_slope",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the slope of the linear regression line for non-null pairs in a group.",
+    "example": "COVAR_POP(x,y) / VAR_POP(x)",
+    "type": "aggregate_function",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_sxx",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "",
+    "example": "REGR_COUNT(y, x) * VAR_POP(x)",
+    "type": "aggregate_function",
+    "struct": "RegrSXXFun",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_sxy",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "Returns the population covariance of input values",
+    "example": "REGR_COUNT(y, x) * COVAR_POP(y, x)",
+    "type": "aggregate_function",
+    "struct": "RegrSXYFun",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "regr_syy",
+    "parameters": [
+      "y",
+      "x"
+    ],
+    "description": "",
+    "example": "REGR_COUNT(y, x) * VAR_POP(y)",
+    "type": "aggregate_function",
+    "struct": "RegrSYYFun",
+    "category": "regression",
+    "result": null
+  },
+  {
+    "name": "repeat",
+    "parameters": [
+      "string",
+      "count"
+    ],
+    "description": "Repeats the string count number of times",
+    "example": "repeat('A', 5)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "AAAAA"
+  },
+  {
+    "name": "replace",
+    "parameters": [
+      "string",
+      "source",
+      "target"
+    ],
+    "description": "Replaces any occurrences of the source with target in string",
+    "example": "replace('hello', 'l', '-')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "he--o"
+  },
+  {
+    "name": "reservoir_quantile",
+    "parameters": [
+      "x",
+      "quantile",
+      "sample_size"
+    ],
+    "description": "Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size.",
+    "example": "reservoir_quantile(A,0.5,1024)",
+    "type": "aggregate_function_set",
+    "category": "holistic",
+    "result": null
+  },
+  {
+    "name": "reverse",
+    "parameters": [
+      "string"
+    ],
+    "description": "Reverses the string",
+    "example": "reverse('hello')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "olleh"
+  },
+  {
+    "name": "right",
+    "parameters": [
+      "string",
+      "count"
+    ],
+    "description": "Extract the right-most count characters",
+    "example": "right('Hello\ud83e\udd86', 3)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "lo\ud83e\udd86"
+  },
+  {
+    "name": "right_grapheme",
+    "parameters": [
+      "string",
+      "count"
+    ],
+    "description": "Extract the right-most count grapheme clusters",
+    "example": "right_grapheme('\ud83e\udd26\ud83c\udffc\u200d\u2642\ufe0f\ud83e\udd26\ud83c\udffd\u200d\u2640\ufe0f', 1)",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "\ud83e\udd26\ud83c\udffd\u200d\u2640\ufe0f"
+  },
+  {
+    "name": "round",
+    "parameters": [
+      "x",
+      "precision"
+    ],
+    "description": "round to s decimal places",
+    "example": "round(42.4332, 2)",
+    "type": "scalar_function_set",
+    "category": "math",
+    "result": 42.43
+  },
+  {
+    "name": "rpad",
+    "parameters": [
+      "string",
+      "count",
+      "character"
+    ],
+    "description": "Pads the string with the character from the right until it has count characters",
+    "example": "rpad('hello', 10, '<')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "hello<<<<<"
+  },
+  {
+    "name": "rtrim",
+    "parameters": [
+      "string",
+      "characters"
+    ],
+    "description": "Removes any occurrences of any of the characters from the right side of the string",
+    "example": "rtrim('>>>>test<<', '><')",
+    "type": "scalar_function_set",
+    "category": "string",
+    "result": ">>>>test"
+  },
+  {
+    "struct": "SecondsFun",
+    "name": "second",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the second component from a date or timestamp",
+    "example": "second(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 44
+  },
+  {
+    "name": "sem",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the standard error of the mean",
+    "example": "",
+    "type": "aggregate_function",
+    "struct": "StandardErrorOfTheMeanFun",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "set_bit",
+    "parameters": [
+      "bitstring",
+      "index",
+      "new_value"
+    ],
+    "description": "Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring.",
+    "example": "set_bit('0110010'::BIT, 2, 0)",
+    "type": "scalar_function",
+    "category": "bit",
+    "result": "0100010"
+  },
+  {
+    "name": "setseed",
+    "description": "sets the seed to be used for the random function",
+    "example": "setseed(0.42)",
+    "type": "scalar_function",
+    "parameters": [],
+    "category": "random",
+    "result": null
+  },
+  {
+    "name": "sign",
+    "parameters": [
+      "x"
+    ],
+    "description": "returns the sign of x as -1, 0 or 1",
+    "example": "sign(-349)",
+    "type": "scalar_function_set",
+    "category": "math",
+    "result": -1
+  },
+  {
+    "name": "signbit",
+    "parameters": [
+      "x"
+    ],
+    "description": "returns whether the signbit is set or not",
+    "example": "signbit(-0.0)",
+    "type": "scalar_function_set",
+    "struct": "SignBitFun",
+    "category": "math",
+    "result": false
+  },
+  {
+    "name": "sin",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the sin of x",
+    "example": "sin(90)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 0.8939966636005579
+  },
+  {
+    "name": "skewness",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the skewness of all input values.",
+    "example": "skewness(A)",
+    "type": "aggregate_function",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "sqrt",
+    "parameters": [
+      "x"
+    ],
+    "description": "returns the square root of x",
+    "example": "sqrt(4)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": 2.0
+  },
+  {
+    "name": "stats",
+    "parameters": [
+      "expression"
+    ],
+    "description": "Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression.",
+    "example": "stats(5)",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "[Min: 5, Max: 5][Has Null: false, Has No Null: true][Approx Unique: 1]"
+  },
+  {
+    "name": "stddev_pop",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the population standard deviation.",
+    "example": "sqrt(var_pop(x))",
+    "type": "aggregate_function",
+    "struct": "StdDevPopFun",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "stddev_samp",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the sample standard deviation",
+    "example": "sqrt(var_samp(x))",
+    "type": "aggregate_function",
+    "aliases": [
+      "stddev"
+    ],
+    "struct": "StdDevSampFun",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "struct": "StrfTimeFun",
+    "name": "strftime",
+    "parameters": [
+      "text",
+      "format"
+    ],
+    "description": "Converts timestamp to string according to the format string",
+    "example": "strftime(timestamp '1992-01-01 20:38:40', '%a, %-d %B %Y - %I:%M:%S %p')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "Wed, 1 January 1992 - 08:38:40 PM"
+  },
+  {
+    "name": "string_agg",
+    "parameters": [
+      "str",
+      "arg"
+    ],
+    "description": "Concatenates the column string values with an optional separator.",
+    "example": "string_agg(A, '-)",
+    "type": "aggregate_function_set",
+    "aliases": [
+      "group_concat"
+    ],
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "string_split",
+    "parameters": [
+      "string",
+      "separator"
+    ],
+    "description": "Splits the string along the separator",
+    "example": "string_split('hello-world', '-')",
+    "type": "scalar_function",
+    "aliases": [
+      "str_split",
+      "string_to_array",
+      "split"
+    ],
+    "category": "string",
+    "result": "[hello, world]"
+  },
+  {
+    "name": "string_split_regex",
+    "parameters": [
+      "string",
+      "separator"
+    ],
+    "description": "Splits the string along the regex",
+    "example": "string_split_regex('hello\u2423world; 42', ';?\u2423')",
+    "type": "scalar_function_set",
+    "aliases": [
+      "str_split_regex",
+      "regexp_split_to_array"
+    ],
+    "category": "string",
+    "result": "[hello, world; 42]"
+  },
+  {
+    "struct": "StrpTimeFun",
+    "name": "strptime",
+    "parameters": [
+      "text",
+      "format"
+    ],
+    "description": "Converts string to timestamp with time zone according to the format string if %Z is specified.",
+    "example": "strptime('Wed, 1 January 1992 - 08:38:40 PST', '%a, %-d %B %Y - %H:%M:%S %Z')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "1992-01-01 16:38:40+00"
+  },
+  {
+    "name": "struct_insert",
+    "parameters": [
+      "struct",
+      "any"
+    ],
+    "description": "Add field(s)/value(s) to an existing STRUCT with the argument values. The entry name(s) will be the bound variable name(s).",
+    "example": "struct_insert({'a': 1}, b := 2)",
+    "type": "scalar_function",
+    "category": "struct",
+    "result": "{'a': 1, 'b': 2}"
+  },
+  {
+    "name": "struct_pack",
+    "parameters": [
+      "any"
+    ],
+    "description": "Create a STRUCT containing the argument values. The entry name will be the bound variable name",
+    "example": "struct_pack(i := 4, s := 'string')",
+    "type": "scalar_function",
+    "aliases": [
+      "row"
+    ],
+    "category": "struct",
+    "result": "{'i': 4, 's': string}"
+  },
+  {
+    "name": "sum",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Calculates the sum value for all tuples in arg.",
+    "example": "sum(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "sum_no_overflow",
+    "parameters": [
+      "arg"
+    ],
+    "description": "Calculates the sum value for all tuples in arg without overflow checks.",
+    "example": "sum_no_overflow(A)",
+    "type": "aggregate_function_set",
+    "category": "distributive",
+    "result": null
+  },
+  {
+    "name": "tan",
+    "parameters": [
+      "x"
+    ],
+    "description": "computes the tan of x",
+    "example": "tan(90)",
+    "type": "scalar_function",
+    "category": "math",
+    "result": -1.995200412208242
+  },
+  {
+    "name": "time_bucket",
+    "parameters": [
+      "bucket_width",
+      "timestamp",
+      "origin"
+    ],
+    "description": "Truncate timestamptz by the specified interval bucket_width. Buckets are aligned relative to origin timestamptz. origin defaults to 2000-01-03 00:00:00+00 for buckets that don\u2019t include a month or year interval, and to 2000-01-01 00:00:00+00 for month and year buckets.",
+    "example": "time_bucket(INTERVAL '2 weeks', TIMESTAMP '1992-04-20 15:26:00-07', TIMESTAMP '1992-04-01 00:00:00-07')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "1992-04-15 07:00:00"
+  },
+  {
+    "name": "timezone",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the timezone component from a date or timestamp",
+    "example": "timezone(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 0
+  },
+  {
+    "name": "timezone_hour",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the timezone_hour component from a date or timestamp",
+    "example": "timezone_hour(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 0
+  },
+  {
+    "name": "timezone_minute",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the timezone_minute component from a date or timestamp",
+    "example": "timezone_minute(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 0
+  },
+  {
+    "name": "to_base64",
+    "parameters": [
+      "blob"
+    ],
+    "description": "Convert a blob to a base64 encoded string.",
+    "example": "base64('A'::blob)",
+    "type": "scalar_function",
+    "aliases": [
+      "base64"
+    ],
+    "category": "blob",
+    "result": "QQ=="
+  },
+  {
+    "name": "to_days",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a day interval",
+    "example": "to_days(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "5 days"
+  },
+  {
+    "name": "to_hours",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a hour interval",
+    "example": "to_hours(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "05:00:00"
+  },
+  {
+    "name": "to_microseconds",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a microsecond interval",
+    "example": "to_microseconds(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "00:00:00.000005"
+  },
+  {
+    "name": "to_milliseconds",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a millisecond interval",
+    "example": "to_milliseconds(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "00:00:00.005"
+  },
+  {
+    "name": "to_minutes",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a minute interval",
+    "example": "to_minutes(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "00:05:00"
+  },
+  {
+    "name": "to_months",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a month interval",
+    "example": "to_months(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "5 months"
+  },
+  {
+    "name": "to_seconds",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a second interval",
+    "example": "to_seconds(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "00:00:05"
+  },
+  {
+    "name": "to_timestamp",
+    "parameters": [
+      "sec"
+    ],
+    "description": "Converts secs since epoch to a timestamp with time zone",
+    "example": "to_timestamp(1284352323.5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "2010-09-13 04:32:03.5+00"
+  },
+  {
+    "name": "to_years",
+    "parameters": [
+      "integer"
+    ],
+    "description": "Construct a year interval",
+    "example": "to_years(5)",
+    "type": "scalar_function",
+    "category": "date",
+    "result": "5 years"
+  },
+  {
+    "name": "translate",
+    "parameters": [
+      "string",
+      "from",
+      "to"
+    ],
+    "description": "Replaces each character in string that matches a character in the from set with the corresponding character in the to set. If from is longer than to, occurrences of the extra characters in from are deleted.",
+    "example": "translate('12345', '143', 'ax')",
+    "type": "scalar_function",
+    "category": "string",
+    "result": "a2x5"
+  },
+  {
+    "name": "trim",
+    "parameters": [
+      "string",
+      "characters"
+    ],
+    "description": "Removes any occurrences of any of the characters from either side of the string",
+    "example": "trim('>>>>test<<', '><')",
+    "type": "scalar_function_set",
+    "category": "string",
+    "result": "test"
+  },
+  {
+    "name": "trunc",
+    "parameters": [
+      "x"
+    ],
+    "description": "truncates the number",
+    "example": "trunc(17.4)",
+    "type": "scalar_function_set",
+    "category": "math",
+    "result": 17.0
+  },
+  {
+    "struct": "TryStrpTimeFun",
+    "name": "try_strptime",
+    "parameters": [
+      "text",
+      "format"
+    ],
+    "description": "Converts string to timestamp using the format string (timestamp with time zone if %Z is specified). Returns NULL on failure.",
+    "example": "try_strptime('Wed, 1 January 1992 - 08:38:40 PM', '%a, %-d %B %Y - %I:%M:%S %p')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": "1992-01-01 20:38:40"
+  },
+  {
+    "name": "txid_current",
+    "parameters": [],
+    "description": "Returns the current transaction\u2019s ID (a BIGINT). It will assign a new one if the current transaction does not have one already.",
+    "example": "txid_current()",
+    "struct": "CurrentTransactionIdFun",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": 56
+  },
+  {
+    "name": "typeof",
+    "parameters": [
+      "expression"
+    ],
+    "description": "Returns the name of the data type of the result of the expression.",
+    "example": "typeof('abc')",
+    "struct": "TypeOfFun",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "VARCHAR"
+  },
+  {
+    "name": "unbin",
+    "parameters": [
+      "value"
+    ],
+    "description": "Converts a value from binary representation to a blob",
+    "example": "unbin('0110')",
+    "type": "scalar_function",
+    "aliases": [
+      "from_binary"
+    ],
+    "category": "string",
+    "result": "\\x06"
+  },
+  {
+    "name": "unhex",
+    "parameters": [
+      "value"
+    ],
+    "description": "Converts a value from hexadecimal representation to a blob",
+    "example": "unhex('2A')",
+    "type": "scalar_function",
+    "aliases": [
+      "from_hex"
+    ],
+    "category": "string",
+    "result": "*"
+  },
+  {
+    "name": "unicode",
+    "parameters": [
+      "str"
+    ],
+    "description": "Returns the unicode codepoint of the first character of the string",
+    "example": "unicode('\u00fc')",
+    "type": "scalar_function",
+    "aliases": [
+      "ord"
+    ],
+    "category": "string",
+    "result": 252
+  },
+  {
+    "name": "union_extract",
+    "parameters": [
+      "union",
+      "tag"
+    ],
+    "description": "Extract the value with the named tags from the union. NULL if the tag is not currently selected",
+    "example": "union_extract(s, 'k')",
+    "type": "scalar_function",
+    "category": "union",
+    "result": null
+  },
+  {
+    "name": "union_tag",
+    "parameters": [
+      "union"
+    ],
+    "description": "Retrieve the currently selected tag of the union as an Enum.",
+    "example": "union_tag(union_value(k := 'foo'))",
+    "type": "scalar_function",
+    "category": "union",
+    "result": "k"
+  },
+  {
+    "name": "union_value",
+    "parameters": [
+      "tag"
+    ],
+    "description": "Create a single member UNION containing the argument value. The tag of the value will be the bound variable name.",
+    "example": "union_value(k := 'hello')",
+    "type": "scalar_function",
+    "category": "union",
+    "result": "hello"
+  },
+  {
+    "name": "uuid",
+    "description": "Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687",
+    "example": "uuid()",
+    "type": "scalar_function",
+    "struct": "UUIDFun",
+    "aliases": [
+      "gen_random_uuid"
+    ],
+    "parameters": [],
+    "category": "random",
+    "result": "111e1179-01dd-4f7e-9a67-139fa9b2236c"
+  },
+  {
+    "name": "var_pop",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the population variance.",
+    "example": "",
+    "type": "aggregate_function",
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "var_samp",
+    "parameters": [
+      "x"
+    ],
+    "description": "Returns the sample variance of all input values.",
+    "example": "(SUM(x^2) - SUM(x)^2 / COUNT(x)) / (COUNT(x) - 1)",
+    "type": "aggregate_function",
+    "aliases": [
+      "variance"
+    ],
+    "category": "algebraic",
+    "result": null
+  },
+  {
+    "name": "vector_type",
+    "parameters": [
+      "col"
+    ],
+    "description": "Returns the VectorType of a given column",
+    "example": "vector_type(col)",
+    "type": "scalar_function",
+    "category": "debug",
+    "result": null
+  },
+  {
+    "name": "version",
+    "parameters": [],
+    "description": "Return the currently active version of DuckDB in this format: v0.3.2\t",
+    "example": "version()",
+    "type": "scalar_function",
+    "category": "generic",
+    "result": "v0.8.2-dev1862"
+  },
+  {
+    "name": "week",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the week component from a date or timestamp",
+    "example": "week(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 31
+  },
+  {
+    "struct": "WeekDayFun",
+    "name": "weekday",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the weekday component from a date or timestamp",
+    "example": "weekday(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 2
+  },
+  {
+    "struct": "WeekOfYearFun",
+    "name": "weekofyear",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the weekofyear component from a date or timestamp",
+    "example": "weekofyear(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 31
+  },
+  {
+    "name": "xor",
+    "parameters": [
+      "left",
+      "right"
+    ],
+    "description": "Bitwise XOR",
+    "example": "xor(17, 5)",
+    "type": "scalar_function_set",
+    "struct": "BitwiseXorFun",
+    "category": "operators",
+    "result": 20
+  },
+  {
+    "name": "year",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the year component from a date or timestamp",
+    "example": "year(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 2021
+  },
+  {
+    "struct": "YearWeekFun",
+    "name": "yearweek",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the yearweek component from a date or timestamp",
+    "example": "yearweek(timestamp '2021-08-03 11:59:44.123456')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": 202131
+  },
+  {
+    "name": "|",
+    "parameters": [
+      "left",
+      "right"
+    ],
+    "description": "Bitwise OR",
+    "example": "32 & 3",
+    "type": "scalar_function_set",
+    "struct": "BitwiseOrFun",
+    "category": "operators",
+    "result": 0
+  },
+  {
+    "name": "~",
+    "parameters": [
+      "input"
+    ],
+    "description": "Bitwise NOT",
+    "example": "~15",
+    "type": "scalar_function_set",
+    "struct": "BitwiseNotFun",
+    "category": "operators",
+    "result": -16
+  }
+]
