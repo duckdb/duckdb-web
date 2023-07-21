@@ -59,11 +59,14 @@ DuckDB's development started while the main developers were public servants in T
 * [DuckDB: an Embeddable Analytical Database](/pdf/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
 
 ## Media
+* [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss) (Technical talk, ca. 40min)
+* [DuckCon #3](https://www.youtube.com/watch?v=9p_sQfy8uuk&list=PLzIMXBizEZjhy6QG4Eqoe9k9NgBa-w67Y) (Latest updates and technical talks about projects using DuckDB)
+* [DuckDB keynote (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU) (Keynote presentation, ca. 10 min)
 * [DuckDB – The SQLite for Analytics (CMU Database Group - Quarantine Tech Talks)](https://www.youtube.com/watch?v=PFUZlNQIndo) (Video Presentation, ca. 1h)
-* [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://mirrors.dotsrc.org/fosdem/2020/H.2215/duckdb.mp4) (Video Presentation, ca 15min)
+* [DuckDB - An Embeddable Analytical Database (FOSDEM)](https://mirrors.dotsrc.org/fosdem/2020/H.2215/duckdb.mp4) (Video Presentation, ca. 15min)
 * [Move Your Database To The Data And Speed Up Your Analytics With DuckDB (Data Engineering Podcast)](https://www.dataengineeringpodcast.com/duckdb-in-process-olap-database-episode-270/) (Podcast, ca. 1:20h)
 * [DuckDB, An In-Process Analytical DBMS (NYC Data Hackers)](https://www.youtube.com/watch?v=Z-6SnP6yzgo) (Video Presentation, ca. 1:30h)
-* [DuckDB Testing - Present and Future (DBTest 2022 Keynote)](https://www.youtube.com/watch?v=BgC79Zt2fPs) (Video Presentation, ca 1h)
+* [DuckDB Testing - Present and Future (DBTest 2022 Keynote)](https://www.youtube.com/watch?v=BgC79Zt2fPs) (Video Presentation, ca. 1h)
 * [Push-Based Execution in DuckDB (CWI Database Architectures Seminar)](https://www.youtube.com/watch?v=MA0OsvYFGrc) (Video Presentation, ca. 1h)
 * [Fastest Table Sort in the West - Redesigning DuckDB’s Sort (DSDSD)](https://www.youtube.com/watch?v=m6Yg2sXGui0) (Video Presentation, ca. 20min)
 * [The Case for In-Process Analytics](/pdf/sigmod2021-muehleisen-inprocess-slides.pdf) (Slides)
