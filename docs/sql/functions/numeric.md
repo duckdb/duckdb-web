@@ -49,6 +49,7 @@ The table below shows the available mathematical functions.
 | `cot(x)` | computes the cotangent of x | `cot(0.5)` | 1.830487721712452 |
 | `degrees(x)` | converts radians to degrees | `degrees(pi())` | 180 |
 | `even(x)` | round to next even number by rounding away from zero. | `even(2.9)` | 4 |
+| `exp(x)` | computes `e ** x` | `exp(0.693)` | 2 |
 | `factorial(x)` | See `!` operator. Computes the product of the current integer and all integers below it | `factorial(4)` | 24 |
 | `floor(x)` | rounds the number down | `floor(17.4)` | 17 |
 | `gamma(x)` | interpolation of (x-1) factorial (so decimal inputs are allowed) | `gamma(5.5)` | 52.34277778455352 |
