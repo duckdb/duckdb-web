@@ -11,7 +11,7 @@ Time zone support is a common request for temporal analytics, but the rules are 
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).
 DuckDB already provided collated string comparisons using ICU via an extension (to avoid dependencies),
 and we have now connected the existing ICU calendar and time zone functions to the main code 
-via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. The ICU extension is pre-bundled in DuckDB's Python and R clients and can be optionally installed in the remaining clients.
+via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. The ICU extension is pre-bundled in DuckDB's Python client and can be optionally installed in the remaining clients.
 
 In this post, we will describe how time works in DuckDB and what time zone functionality has been added.
 
