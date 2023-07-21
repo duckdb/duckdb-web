@@ -53,9 +53,10 @@ DuckDB's development started while the main developers were public servants in T
 
 
 ## Peer-Reviewed Papers
-* [Data Management for Data Science - Towards Embedded Analytics](https://www.duckdb.org/pdf/CIDR2020-raasveldt-muehleisen-duckdb.pdf) (CIDR 2020)
-* [DuckDB: an Embeddable Analytical Database](https://www.duckdb.org/pdf/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
-
+* [These Rows Are Made for Sorting and That's Just What We'll Do](/pdf/ICDE2023-kuiper-muehleisen-sorting.pdf) (ICDE 2023)
+* [DuckDB-Wasm: Fast Analytical Processing for the Web](/pdf/VLDB2022-kohn-duckdb-wasm.pdf) (VLDB 2022 Demo)
+* [Data Management for Data Science - Towards Embedded Analytics](/pdf/CIDR2020-raasveldt-muehleisen-duckdb.pdf) (CIDR 2020)
+* [DuckDB: an Embeddable Analytical Database](/pdf/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
 
 ## Media
 * [DuckDB – The SQLite for Analytics (CMU Database Group - Quarantine Tech Talks)](https://www.youtube.com/watch?v=PFUZlNQIndo) (Video Presentation, ca. 1h)
