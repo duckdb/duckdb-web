@@ -514,7 +514,7 @@
     ],
     "parameters": [],
     "category": "date",
-    "result": "2023-07-20"
+    "result": "2023-07-23"
   },
   {
     "name": "current_query",
@@ -705,10 +705,10 @@
       "blob"
     ],
     "description": "Convert blob to varchar. Fails if blob is not valid utf-8.",
-    "example": "decode('\\\\xC3\\\\xBC'::BLOB)",
+    "example": "decode('\\xC3\\xBC'::BLOB)",
     "type": "scalar_function",
     "category": "blob",
-    "result": null
+    "result": "\u00fc"
   },
   {
     "name": "degrees",
@@ -1003,7 +1003,7 @@
     "type": "scalar_function",
     "parameters": [],
     "category": "date",
-    "result": "05:28:09.711"
+    "result": "14:04:22.524"
   },
   {
     "name": "get_current_timestamp",
@@ -1016,7 +1016,7 @@
     ],
     "parameters": [],
     "category": "date",
-    "result": "2023-07-20 05:28:10.243+00"
+    "result": "2023-07-23 14:04:22.538+00"
   },
   {
     "name": "greatest",
@@ -2362,7 +2362,7 @@
       "arg"
     ],
     "description": "Concatenates the column string values with an optional separator.",
-    "example": "string_agg(A, '-)",
+    "example": "string_agg(A, '-')",
     "type": "aggregate_function_set",
     "aliases": [
       "group_concat"
@@ -2520,6 +2520,19 @@
     "type": "scalar_function_set",
     "category": "date",
     "result": 0
+  },
+  {
+    "name": "to_base",
+    "parameters": [
+      "number",
+      "radix",
+      "min_length"
+    ],
+    "description": "Converts a value to a string in the given base radix, optionally padding with leading zeros to the minimum length",
+    "example": "to_base(42, 16)",
+    "type": "scalar_function_set",
+    "category": "string",
+    "result": "2A"
   },
   {
     "name": "to_base64",
@@ -2837,7 +2850,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.8.2-dev1862"
+    "result": "v0.8.2-dev2044"
   },
   {
     "name": "week",
@@ -2917,11 +2930,11 @@
       "right"
     ],
     "description": "Bitwise OR",
-    "example": "32 & 3",
+    "example": "32 | 3",
     "type": "scalar_function_set",
     "struct": "BitwiseOrFun",
     "category": "operators",
-    "result": 0
+    "result": 35
   },
   {
     "name": "~",

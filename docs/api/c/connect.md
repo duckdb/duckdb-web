@@ -38,7 +38,7 @@ duckdb_close(&db);
 </code></pre></div></div>
 ### duckdb_open
 ---
-Creates a new database or opens an existing database file stored at the given path.
+Creates a new database or opens an existing database file stored at the the given path.
 If no path is given a new in-memory database is created instead.
 The instantiated database should be closed with 'duckdb_close'
 
@@ -65,7 +65,7 @@ The result database object.
 
 ### duckdb_open_ext
 ---
-Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
+Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
 
 #### Syntax
 ---
