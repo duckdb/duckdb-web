@@ -514,7 +514,7 @@
     ],
     "parameters": [],
     "category": "date",
-    "result": "2023-07-23"
+    "result": "2023-07-24"
   },
   {
     "name": "current_query",
@@ -1003,7 +1003,7 @@
     "type": "scalar_function",
     "parameters": [],
     "category": "date",
-    "result": "14:04:22.524"
+    "result": "05:03:27.174"
   },
   {
     "name": "get_current_timestamp",
@@ -1016,7 +1016,7 @@
     ],
     "parameters": [],
     "category": "date",
-    "result": "2023-07-23 14:04:22.538+00"
+    "result": "2023-07-24 05:03:27.187+00"
   },
   {
     "name": "greatest",
