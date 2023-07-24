@@ -79,7 +79,7 @@ jobs:
         run: linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}
-        if: success() || failure()
+        if: always()
 
       - name: Link Checker on everything
         run: linkchecker https://duckdb.org/ --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
