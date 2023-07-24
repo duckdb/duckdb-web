@@ -40,7 +40,7 @@ The table below shows the available mathematical functions.
 | `acos(x)` | computes the arccosine of x | `acos(0.5)` | 1.0471975511965976 |
 | `asin(x)` | computes the arcsine of x | `asin(0.5)` | 0.5235987755982989 |
 | `atan(x)` | computes the arctangent of x | `atan(0.5)` | 0.4636476090008061 |
-| `atan2(x, y)` | computes the arctangent (x, y) | `atan2(0.5, 0.5)` | 0.7853981633974483 |
+| `atan2(y, x)` | computes the arctangent (y, x) | `atan2(0.5, 0.5)` | 0.7853981633974483 |
 | `bit_count(x)` | returns the number of bits that are set | `bit_count(31)` | 5 |
 | `cbrt(x)` | returns the cube root of the number | `cbrt(8)` | 2 |
 | `ceil(x)` | rounds the number up | `ceil(17.4)` | 18 |
