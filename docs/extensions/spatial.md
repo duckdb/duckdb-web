@@ -32,14 +32,14 @@ The currently implemented spatial functions can roughly be categorized into the 
 ### Geometry Conversion
 Convert between geometries and other formats. 
 
-| Scalar functions                  | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D         |
-| --------------------------------- | -------- | -------- | ------------- | ---------- | -------------- |
-| VARCHAR ST_AsHEXWKB(GEOMETRY)     | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-| VARCHAR ST_AsText(GEOMETRY)       | 🧭        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
-| WKB_BLOB ST_AsWKB(GEOMETRY)       | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-| GEOMETRY ST_GeomFromText(VARCHAR) | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_GeomFromWKB(BLOB)     | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
-| VARCHAR ST_AsGeoJSON(VARCHAR)     | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
+| Scalar functions                  | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D          |
+|-----------------------------------|----------|----------|---------------|------------|-----------------|
+| VARCHAR ST_AsGeoJSON(GEOMETRY)    | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
+| VARCHAR ST_AsHEXWKB(GEOMETRY)     | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
+| VARCHAR ST_AsText(GEOMETRY)       | 🧭       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
+| WKB_BLOB ST_AsWKB(GEOMETRY)       | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
+| GEOMETRY ST_GeomFromText(VARCHAR) | 🧭       | 🔄       | 🔄           | 🔄         | 🔄 (as POLYGON) |
+| GEOMETRY ST_GeomFromWKB(BLOB)     | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
 
 ### Geometry Construction
 Construct new geometries from other geometries or other data.
