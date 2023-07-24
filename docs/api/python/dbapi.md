@@ -44,7 +44,7 @@ If you want to create a second connection to an existing database, you can use t
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `close()`.  Once the last connection to a database instance is closed, the database instance is closed as well.
 
 ### Querying
-SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone` and `fetchall` methods on the connection. Below is a short example:
+SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone` and `fetchall` methods on the connection. `fetchall` will retrieve all results and complete the transaction. `fetchone` will retrieve a single row of results each time that it is invoked until no more results are available. The transaction will only close once `fetchone` is called and there are no more results remaining (the return value will be `None`). As an example, in the case of a query only returning a single row, `fetchone` should be called once to retrieve the results and a second time to close the transaction. Below are some short examples:
 
 ```python
 # create a table
@@ -55,7 +55,16 @@ con.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 # retrieve the items again
 con.execute("SELECT * FROM items")
 print(con.fetchall())
-# [('jeans', 20.0, 1), ('hammer', 42.2, 2)]
+# [('jeans', Decimal('20.00'), 1), ('hammer', Decimal('42.20'), 2)]
+
+# retrieve the items one at a time
+con.execute("SELECT * FROM items")
+print(con.fetchone())
+# ('jeans', Decimal('20.00'), 1)
+print(con.fetchone())
+# ('hammer', Decimal('42.20'), 2)
+print(con.fetchone()) # This closes the transaction. Any subsequent calls to .fetchone will return None
+# None
 ```
 
 The `description` property of the connection object contains the column names as per the standard.
