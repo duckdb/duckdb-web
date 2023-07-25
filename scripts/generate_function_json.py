@@ -10,6 +10,13 @@ args = parser.parse_args()
 
 
 def get_result(example: str) -> str:
+    if example == 'current_date':
+        return '2023-07-23'
+    elif example == 'get_current_time':
+        return '14:04:22.524'
+    elif example == 'get_current_timestamp':
+        return '2023-07-23 14:04:22.538+00'
+
     try:
         out = check_output(
             [
