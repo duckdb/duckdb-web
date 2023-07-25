@@ -226,14 +226,14 @@
   {
     "name": "atan2",
     "parameters": [
-      "x",
-      "y"
+      "y",
+      "x"
     ],
-    "description": "computes the arctangent (x, y)",
-    "example": "atan2(0.5, 0.5)",
+    "description": "computes the arctangent (y, x)",
+    "example": "atan2(1.0, 0.0)",
     "type": "scalar_function",
     "category": "math",
-    "result": 0.7853981633974483
+    "result": 1.5707963267948966
   },
   {
     "name": "avg",
@@ -514,7 +514,7 @@
     ],
     "parameters": [],
     "category": "date",
-    "result": "2023-07-24"
+    "result": "2023-07-25"
   },
   {
     "name": "current_query",
@@ -1003,7 +1003,7 @@
     "type": "scalar_function",
     "parameters": [],
     "category": "date",
-    "result": "05:03:27.174"
+    "result": "01:13:29.911"
   },
   {
     "name": "get_current_timestamp",
@@ -1016,7 +1016,7 @@
     ],
     "parameters": [],
     "category": "date",
-    "result": "2023-07-24 05:03:27.187+00"
+    "result": "2023-07-25 01:13:29.921+00"
   },
   {
     "name": "greatest",
