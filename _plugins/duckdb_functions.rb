@@ -10,14 +10,20 @@ def bold(i)
 end
 
 def _render_function(function)
-  params = function['parameters']
-  params = params.map { |it| bold(code(it)) }.join('`, `') if params
-
   name = function['name']
+  params = function['parameters']
+  params = params.map { |it| bold(code(it)) } if params
+
   if name =~ /^[[:punct:]]+$/
-    "#{params[0]} `#{function['name']}` #{params[1]}"
+    if params.size == 2 # infix
+      "#{params[0]} `#{name}` #{params[1]}"
+    elsif ['@'].include? name # prefix
+      "`#{name}`#{params[0]}"
+    else # postfix
+      "#{params[0]}`#{name}`"
+    end
   else
-    "`#{function['name']}(`#{params}`)`"
+    "`#{name}(`#{params.join('`, `')}`)`"
   end
 end
 
