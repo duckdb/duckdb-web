@@ -2,6 +2,7 @@
 
 require 'json'
 require 'jekyll'
+require 'word_wrap'
 
 def code(child)
   "`#{child}`"
@@ -52,6 +53,18 @@ def get_functions
   JSON.parse File.read 'docs/functions.json'
 end
 
+def generate_index(page, filtered)
+  filtered.map do |function|
+    {
+      'title' => function['name'],
+      'text' => function['description'],
+      'category' => "#{page['title'].capitalize} Functions",
+      'url' => page['url'].gsub(/\.html/, ''),
+      'blurb' => WordWrap.ww(function['description'], 120)
+    }
+  end
+end
+
 module Jekyll
   class DuckDBFunctionsTag < Liquid::Tag
     @tag_name = ''
@@ -65,9 +78,17 @@ module Jekyll
 
     def render(context)
       site = context.registers[:site]
+      page = context.registers[:page]
       @converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
       filter_expression = Liquid::Template.parse(@filter_expression).render context
       this = self
+
+      functions = get_functions
+      Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
+      filtered = functions.filter { |function| this.select_function(filter_expression, function) }.sort_by { |f| f['name'] }
+      Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
+
+      puts generate_index(page, filtered)
 
       html = Html.new
       html.table {
@@ -81,11 +102,6 @@ module Jekyll
           }
         }
         tbody {
-          functions = get_functions
-          Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
-          filtered = functions.filter { |function| this.select_function(filter_expression, function) }.sort_by{|f| f['name']}
-          Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
-
           filtered.each do |function|
             tr {
               td this.render_function(function)

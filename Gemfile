@@ -43,3 +43,4 @@ gem "safe_yaml", "1.0.5"
 gem "sass", "3.7.4"
 
 gem "webrick", "~> 1.8"
+gem 'word_wrap', '~> 1.0'
