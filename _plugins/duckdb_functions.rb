@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'jekyll'
 
@@ -5,8 +7,8 @@ def code(child)
   "`#{child}`"
 end
 
-def bold(i)
-  "*#{i}*"
+def bold(child)
+  "*#{child}*"
 end
 
 def _render_function(function)
@@ -34,20 +36,20 @@ class Html
     @html = ""
   end
 
-  def method_missing(m, *args, &block)
-    @html += "<#{m}>"
+  def method_missing(symbol, *args, &block)
+    @html += "<#{symbol}>"
     if block_given?
-      instance_eval &block
-    elsif args.length > 0
+      instance_eval(&block)
+    elsif !args.empty?
       @html += args.join(' ')
     end
-    @html += "</#{m}>"
+    @html += "</#{symbol}>"
   end
 end
 
 # @return [Array<Object>, nil]
 def get_functions
-  JSON.load File.open 'docs/functions.json'
+  JSON.parse File.read 'docs/functions.json'
 end
 
 module Jekyll
@@ -90,7 +92,7 @@ module Jekyll
               td function['description']
 
               example = function['example']
-              unless example.nil? or example.empty?
+              unless example.nil? || example.empty?
                 td(this.markdown_to_html(code(example)))
                 result = function['result']
                 if result.nil?
@@ -113,8 +115,8 @@ module Jekyll
       html.html
     end
 
-    def markdown_to_html(i)
-      @converter.convert(i)
+    def markdown_to_html(input)
+      @converter.convert(input)
     end
 
     def render_function(function)
@@ -130,7 +132,7 @@ module Jekyll
 
       begin
         eval(filter_expression, get_binding(function))
-      rescue => e
+      rescue StandardError => e
         Jekyll.logger.error(@tag_name, "Failed to select function with expression #{filter_expression}: #{e}")
         false
       end
