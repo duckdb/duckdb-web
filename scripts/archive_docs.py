@@ -9,6 +9,7 @@ import subprocess
 # Add a new row to /_data/versions.csv with the new version number
 # Run this script. More options below, but as an example:
 # 	run this script in the top level docs directory like: python scripts/archive_docs.py 0.3.4
+# When testing, run a clean (non-incremental) serve: jekyll serve
 
 if len(sys.argv) < 2:
 	print("Usage: python scripts/archive_docs.py [version] [--noconfirm] [--date=YYYY-MM-DD]")
