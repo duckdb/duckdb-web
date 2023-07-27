@@ -41,7 +41,7 @@ SELECT * FROM cte2;
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
-![](with-recursive-tree-example.png)
+![](/images/examples/with-recursive-tree-example.png)
 
 ```sql
 CREATE TABLE tag(id int, name varchar, subclassof int);
@@ -88,7 +88,7 @@ One way to achieve this is to store the path of a traversal in a [list](../../sq
 
 Take the following directed graph from the [LDBC Graphalytics benchmark](https://arxiv.org/pdf/2011.15028.pdf):
 
-![](with-recursive-graph-example.png)
+![](/images/examples/with-recursive-graph-example.png)
 
 ```sql
 CREATE TABLE edge(node1id int, node2id int);
