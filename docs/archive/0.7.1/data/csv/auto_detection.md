@@ -9,7 +9,7 @@ When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag se
 * Detect the types of each of the columns
 * Detect whether or not the file has a header row
 
-By default the system will try to auto-detect all options. However, options can be individually overriden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g. `read_csv_auto('file.csv', delimiter='|')`).
+By default the system will try to auto-detect all options. However, options can be individually overriden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g. `read_csv_auto('file.csv', delim='|')`).
 
 The detection works by operating on a sample of the file. The size of the sample can be modified by setting the `sample_size` parameter. The default sample size is `20480` rows. Setting the `sample_size` parameter to `-1` means the entire file is read for sampling. The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file. If we are reading from a file in which we cannot jump - such as a `.gz` compressed CSV file or `stdin` - samples are taken only from the beginning of the file.
 
@@ -21,7 +21,7 @@ The following dialects are considered for automatic dialect detection.
 
 | Parameters | Considered Values |
 |------------|-------------------|
-| delimiter  | , | ; \t          |
+| delim      | , | ; \t          |
 | quote      | " ' (empty)       |
 | escape     | " ' \\ (empty)    |
 
