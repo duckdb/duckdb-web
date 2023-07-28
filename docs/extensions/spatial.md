@@ -6,7 +6,7 @@ selected: Documentation/Spatial
 The __spatial__ extension provides support for geospatial data processing in DuckDB.
 
 ## GEOMETRY type
-The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type is probably works very different from what you'd expect. 
+The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect. 
 
 In short, while the `GEOMETRY` type is a binary representation of "geometry" data made up out of sets of vertices (pairs of X and Y `double` precision floats), it actually stores one of several geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their "collection" equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively. 
 
