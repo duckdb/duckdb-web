@@ -49,7 +49,7 @@ def main():
                 {
                     **function,
                     'parameters': (
-                        function['parameters'].split(',')
+                        [x.strip() for x in function['parameters'].split(',')]
                         if function.get('parameters')
                         else
                         []
