@@ -1022,8 +1022,8 @@
     "name": "greatest",
     "parameters": [
       "arg1",
-      " arg2",
-      " ..."
+      "arg2",
+      "..."
     ],
     "description": "Returns the highest value of the set of input parameters.",
     "example": "greatest(42, 84)",
@@ -1277,8 +1277,8 @@
     "name": "least",
     "parameters": [
       "arg1",
-      " arg2",
-      " ..."
+      "arg2",
+      "..."
     ],
     "description": "Returns the lowest value of the set of input parameters.",
     "example": "least(42, 84)",
@@ -1868,7 +1868,7 @@
     "name": "nextafter",
     "parameters": [
       "x",
-      " y"
+      "y"
     ],
     "description": "return the next floating point value after x in the direction of y",
     "example": "nextafter(1::float, 2::float)",
