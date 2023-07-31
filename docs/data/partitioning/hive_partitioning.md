@@ -63,7 +63,17 @@ orders
 ```
 
 #### Autodetection
-By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `HIVE_PARTITIONING` flag is enabled automatically. The autodetection will look at the names of the folders and search for a 'key'='value' pattern. This behaviour can be overridden by setting the `HIVE_PARTITIONING` flag manually.
+By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a 'key'='value' pattern. This behaviour can be overridden by setting the `hive_partitioning` flag manually.
+
+#### Hive types
+`hive_types` is a way to specify the logical types of the hive partitions in a struct:
+
+```sql
+FROM read_parquet('dir/**/*.parquet', hive_partitioning=1, hive_types={'release':date,'orders':bigint});
+```
+
+`hive_types` will be autodetected for the following types: `DATE`, `TIMESTAMP` and `BIGINT`. To switch off the autodetection, the flag `hive_types_autocast=0` can be set.
+
 
 #### Writing Partitioned Files
 
