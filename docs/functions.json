@@ -2850,7 +2850,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.8.2-dev2044"
+    "result": "v0.8.2-dev2278"
   },
   {
     "name": "week",
