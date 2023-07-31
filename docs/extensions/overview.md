@@ -30,24 +30,25 @@ select * from duckdb_extensions();
 
 ## All available extensions
 
-|  Extension name   |                             Description                              |     Aliases     |
-|-------------------|----------------------------------------------------------------------|-----------------|
-| autocomplete | Adds supports for autocomplete in the shell          |                 |
-| excel             |                                                                      |                 |
-| fts               | Adds support for Full-Text Search Indexes                            |                 |
-| httpfs            | Adds support for reading and writing files over a HTTP(S) connection | http, https, s3 |
-| icu               | Adds support for time zones and collations using the ICU library     |                 |
-| inet              | Adds support for IP-related data types and functions                 |                 |
-| jemalloc          | Overwrites system allocator with JEMalloc                            |                 |
-| json              | Adds support for JSON operations                                     |                 |
-| parquet           | Adds support for reading and writing parquet files                   |                 |
-| postgres_scanner  | Adds support for reading from a Postgres database                    | postgres        |
-| spatial           | Adds support for geospatial data processing                          |                 |
-| sqlite_scanner    | Adds support for reading SQLite database files                       | sqlite, sqlite3 |
-| substrait        | Adds support for the Substrait integration                           |
-| tpcds             | Adds TPC-DS data generation and query support                        |                 |
-| tpch              | Adds TPC-H data generation and query support                         |                 |
-| visualizer        |                                                                      |                 |
+| Extension name                         | Description                                                          | Aliases         |
+| -------------------------------------- | -------------------------------------------------------------------- | --------------- |
+| autocomplete                           | Adds supports for autocomplete in the shell                          |                 |
+| [arrow](../guides/python/sql_on_arrow) | A zero-copy data integration between Apache Arrow and DuckDB         |                 |
+| excel                                  |                                                                      |                 |
+| [fts](full_text_search)                | Adds support for Full-Text Search Indexes                            |                 |
+| httpfs                                 | Adds support for reading and writing files over a HTTP(S) connection | http, https, s3 |
+| icu                                    | Adds support for time zones and collations using the ICU library     |                 |
+| inet                                   | Adds support for IP-related data types and functions                 |                 |
+| jemalloc                               | Overwrites system allocator with JEMalloc                            |                 |
+| [json](json)                           | Adds support for JSON operations                                     |                 |
+| parquet                                | Adds support for reading and writing parquet files                   |                 |
+| [postgres_scanner](postgres_scanner)   | Adds support for reading from a Postgres database                    | postgres        |
+| [spatial](spatial)                     | Adds support for geospatial data processing                          |                 |
+| [sqlite_scanner](sqlite_scanner)       | Adds support for reading SQLite database files                       | sqlite, sqlite3 |
+| [substrait](substrait)                 | Support substrait query plans in DuckDB                              |                 |
+| tpcds                                  | Adds TPC-DS data generation and query support                        |                 |
+| tpch                                   | Adds TPC-H data generation and query support                         |                 |
+| visualizer                             |                                                                      |                 |
 
 ## Downloading extensions directly from S3
 
