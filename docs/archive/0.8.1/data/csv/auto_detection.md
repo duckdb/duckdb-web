@@ -21,7 +21,7 @@ The following dialects are considered for automatic dialect detection.
 
 | Parameters | Considered Values |
 |------------|-------------------|
-| delimiter  | , | ; \t          |
+| delimiter  | , \| ; \t         |
 | quote      | " ' (empty)       |
 | escape     | " ' \\ (empty)    |
 
