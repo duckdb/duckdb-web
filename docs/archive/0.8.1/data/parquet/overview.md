@@ -2,7 +2,7 @@
 layout: docu
 title: Parquet Loading
 redirect_from:
-  - /docs/data/parquet
+  - /docs/archive/0.8.1/data/parquet
 ---
 
 ### Examples
