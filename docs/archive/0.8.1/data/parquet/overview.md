@@ -2,7 +2,7 @@
 layout: docu
 title: Parquet Loading
 redirect_from:
-  - /docs/data/parquet
+  - /docs/archive/0.8.1/data/parquet
 ---
 
 ### Examples
@@ -71,7 +71,7 @@ DuckDB supports projection pushdown into the Parquet file itself. That is to say
 
 DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
-Filter and projection pushdown provide significant performance benefits. See [our blog post on this](../../../2021/06/25/querying-parquet.html) for more information.
+Filter and projection pushdown provide significant performance benefits. See [our blog post on this](/2021/06/25/querying-parquet.html) for more information.
 
 ### Inserts and Views
 You can also insert the data into a table or create a table from the parquet file directly. This will load the data from the parquet file and insert it into the database.
