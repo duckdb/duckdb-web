@@ -7,7 +7,7 @@ selected: Extensions
 This extension, contrary to its name, does not provide support for reading Excel files.
 Instead, see our guides for Excel [Import](../guides/import/excel_import) and [Export](../guides/import/excel_export).
 
-It instead provides a function that wraps the number formatting functionality of the i18npool library, which formats numbers per excels formatting rules
+It instead provides a function that wraps the number formatting functionality of the i18npool library, which formats numbers per Excel's formatting rules
 
 | Function                                        | Description                                                          | Example                           | Result    |
 |:------------------------------------------------|:---------------------------------------------------------------------|:----------------------------------|:----------|
