@@ -3,7 +3,7 @@ layout: docu
 title: Spatial
 selected: Documentation/Spatial
 ---
-The __spatial__ extension provides support for geospatial data processing in DuckDB.
+The `spatial` extension provides support for geospatial data processing in DuckDB.
 
 ## GEOMETRY type
 The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar with geospatial data and GIS tooling, this type probably works very different from what you'd expect. 
