@@ -47,3 +47,7 @@ silver:
   - name: Hugging Face
     url: https://huggingface.co/
     logoimg: huggingface.svg
+
+  - name: STOIC
+    url: https://stoic.com/
+    logoimg: stoic.svg
