@@ -120,6 +120,7 @@ The below options are applicable when writing `Parquet` files.
 |:---|:---|:----|:----|
 | `compression` | The compression format to use (uncompressed, snappy, gzip or zstd). | varchar | snappy |
 | `row_group_size` | The target size of each row-group. | bigint | 122880 |
+| `row_group_size_bytes` | The target size (in bytes) of each row-group. This option is only used when `SET preserve_insertion_order=false;` | bigint | `row_group_size * 1024` |
 | `field_ids` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | struct | `(empty)` |
 
 Some examples of `FIELD_IDS` are:
