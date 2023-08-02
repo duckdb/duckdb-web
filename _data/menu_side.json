@@ -55,6 +55,10 @@
           "url": "/dev/profiling"
         },
         {
+          "page": "Release Dates",
+          "url": "/dev/release-dates"
+        },
+        {
           "page": "Building",
           "url": "/dev/building"
         }
