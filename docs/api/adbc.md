@@ -17,6 +17,7 @@ In this section, we will describe the main functions that exist in ADBC, along w
 
 ### Database
 Set of functions that operate on a database.
+
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `DatabaseNew` | Allocate a new (but uninitialized) database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
@@ -26,6 +27,7 @@ Set of functions that operate on a database.
 
 ### Connection
 A set of functions that create and destroy a connection to interact with a database.
+
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `ConnectionNew` | Allocate a new (but uninitialized) connection.| `(AdbcConnection*, AdbcError*)` | `AdbcConnectionNew(&adbc_connection, &adbc_error)` |
@@ -36,7 +38,9 @@ A set of functions that create and destroy a connection to interact with a datab
 
 FIXME: These are still pending on Thijs' PR
 A set of functions that retrieve metadata about the database. In general, these functions will return Arrow objects, specifically an ArrowArrayStream.
+
 | Function Name | Description | Arguments | Example |
+|:---|:---|:---|:---|
 | `ConnectionGetInfo` | Get metadata about the database/driver. | `(AdbcConnection*, uint32_t*, size_t, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` | 
 | `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table.| `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` | 
@@ -44,7 +48,9 @@ A set of functions that retrieve metadata about the database. In general, these 
 
 
 A set of functions with transaction semantics for the connection. By default, all connections start with auto-commit mode on, but this can be turned off via the ConnectionSetOption function.
+
 | Function Name | Description | Arguments | Example |
+|:---|:---|:---|:---|
 | `ConnectionCommit` | Commit any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionCommit(&adbc_connection, &adbc_error)` |
 | `ConnectionRollback` | Rollback any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRollback(&adbc_connection, &adbc_error)` | 
 
@@ -52,14 +58,15 @@ A set of functions with transaction semantics for the connection. By default, al
 Statements hold state related to query execution. They represent both one-off queries and prepared statements. They can be reused; however, doing so will invalidate prior result sets from that statement.
 
 The functions used to create, destroy, and set options for a statement:
+
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `StatementNew` | Create a new statement for a given connection.| `(AdbcConnection*, AdbcStatement*, AdbcError*)` | `AdbcStatementNew(&adbc_connection, &adbc_statement, &adbc_error)` |
 | `StatementRelease` | Destroy a statement. | `(AdbcStatement*, AdbcError*)` | `AdbcStatementRelease(&adbc_statement, &adbc_error)` |
 | `StatementSetOption` | Set a string option on a statement. | `(AdbcStatement*, const char*, const char*, AdbcError*)` | `StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "TABLE_NAME", &adbc_error)` |
 
-
 Functions related to query execution:
+
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `StatementSetSqlQuery` | Set the SQL query to execute. The query can then be executed with StatementExecuteQuery.| `(AdbcStatement*, const char*, AdbcError*)` | `AdbcStatementSetSqlQuery(&adbc_statement, "SELECT * FROM TABLE", &adbc_error)` |
@@ -68,13 +75,12 @@ Functions related to query execution:
 | `StatementPrepare` | Turn this statement into a prepared statement to be  executed multiple times.| `(AdbcStatement*, AdbcError*)` | `AdbcStatementPrepare(&adbc_statement, &adbc_error)` |
 
 Functions related to binding, used for bulk insertion or in prepared statements.
+
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `StatementBind` | Bind Arrow Array. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArray*, ArrowSchema*, AdbcError*)` | `StatementBind(&adbc_statement,&input_data, &adbc_error)` |
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |
 | `StatementGetParameterSchema` | Get the schema for bound parameters. Should be called after StatementPrepare.| `(AdbcStatement*, ArrowSchema*, AdbcError*)` | `StatementGetParameterSchema(&adbc_statement,&schema, &adbc_error)` |
-
-
 
 ## C++ Example
 We begin our example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
