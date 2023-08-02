@@ -957,6 +957,10 @@
             {
               "page": "Spatial",
               "url": "spatial"
+            },            
+            {
+              "page": "Excel",
+              "url": "excel"
             }
           ]
         }
