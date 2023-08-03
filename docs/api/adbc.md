@@ -5,7 +5,7 @@ selected: Client APIs
 ---
 
 # The Arrow Database Connectivity (ADBC)
-The [ADBC](https://arrow.apache.org/adbc/0.5.1/index.html), (Arrow Database Connectivity), similar to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow](https://duckdb.org/2021/12/03/duck-arrow.html) to efficiently transfer data.
+The [ADBC](https://arrow.apache.org/adbc/0.5.1/index.html) (Arrow Database Connectivity), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow](https://duckdb.org/2021/12/03/duck-arrow.html) to efficiently transfer data.
 
 DuckDB's ADBC driver currently supports version 0.5.1 of ADBC.
 
