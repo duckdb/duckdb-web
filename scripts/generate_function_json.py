@@ -48,6 +48,7 @@ def main():
             functions += [
                 {
                     **function,
+                    'name': function['name'].replace('__postfix', ''),
                     'parameters': (
                         [x.strip() for x in function['parameters'].split(',')]
                         if function.get('parameters')

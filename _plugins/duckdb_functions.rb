@@ -1,19 +1,33 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'jekyll'
+require 'word_wrap'
 
 def code(child)
   "`#{child}`"
 end
 
-def bold(i)
-  "*#{i}*"
+def bold(child)
+  "*#{child}*"
 end
 
 def _render_function(function)
+  name = function['name']
   params = function['parameters']
-  params = params.map { |it| bold(code(it)) }.join('`, `') if params
+  params = params.map { |it| bold(code(it)) } if params
 
-  "`#{function['name']}(`#{params}`)`"
+  if name =~ /^[[:punct:]]+$/
+    if params.size == 2 # infix
+      "#{params[0]} `#{name}` #{params[1]}"
+    elsif ['@'].include? name # prefix
+      "`#{name}`#{params[0]}"
+    else # postfix
+      "#{params[0]}`#{name}`"
+    end
+  else
+    "`#{name}(`#{params.join('`, `')}`)`"
+  end
 end
 
 class Html
@@ -23,20 +37,32 @@ class Html
     @html = ""
   end
 
-  def method_missing(m, *args, &block)
-    @html += "<#{m}>"
+  def method_missing(symbol, *args, &block)
+    @html += "<#{symbol}>"
     if block_given?
-      instance_eval &block
-    elsif args.length > 0
+      instance_eval(&block)
+    elsif !args.empty?
       @html += args.join(' ')
     end
-    @html += "</#{m}>"
+    @html += "</#{symbol}>"
   end
 end
 
 # @return [Array<Object>, nil]
 def get_functions
-  JSON.load File.open 'docs/functions.json'
+  JSON.parse File.read 'docs/functions.json'
+end
+
+def generate_index(page, filtered)
+  filtered.map do |function|
+    {
+      'title' => function['name'],
+      'text' => function['description'],
+      'category' => "#{page['title'].capitalize} Functions",
+      'url' => page['url'].gsub(/\.html/, ''),
+      'blurb' => WordWrap.ww(function['description'], 120)
+    }
+  end
 end
 
 module Jekyll
@@ -52,9 +78,17 @@ module Jekyll
 
     def render(context)
       site = context.registers[:site]
+      page = context.registers[:page]
       @converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
       filter_expression = Liquid::Template.parse(@filter_expression).render context
       this = self
+
+      functions = get_functions
+      Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
+      filtered = functions.filter { |function| this.select_function(filter_expression, function) }.sort_by { |f| f['name'] }
+      Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
+
+      puts generate_index(page, filtered)
 
       html = Html.new
       html.table {
@@ -68,18 +102,13 @@ module Jekyll
           }
         }
         tbody {
-          functions = get_functions
-          Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
-          filtered = functions.filter { |function| this.select_function(filter_expression, function) }.sort_by{|f| f['name']}
-          Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
-
           filtered.each do |function|
             tr {
               td this.render_function(function)
               td function['description']
 
               example = function['example']
-              unless example.nil? or example.empty?
+              unless example.nil? || example.empty?
                 td(this.markdown_to_html(code(example)))
                 result = function['result']
                 if result.nil?
@@ -102,8 +131,8 @@ module Jekyll
       html.html
     end
 
-    def markdown_to_html(i)
-      @converter.convert(i)
+    def markdown_to_html(input)
+      @converter.convert(input)
     end
 
     def render_function(function)
@@ -119,7 +148,7 @@ module Jekyll
 
       begin
         eval(filter_expression, get_binding(function))
-      rescue => e
+      rescue StandardError => e
         Jekyll.logger.error(@tag_name, "Failed to select function with expression #{filter_expression}: #{e}")
         false
       end
