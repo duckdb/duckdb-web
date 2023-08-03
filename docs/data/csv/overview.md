@@ -135,4 +135,4 @@ COPY ontime FROM 'flights.csv' ( AUTO_DETECT TRUE );
 SELECT * FROM ontime;
 ```
 
-More on the copy statement can be found [here](/docs/sql/statements/copy.html).
+More on the copy statement can be found [here](/docs/sql/statements/copy).
