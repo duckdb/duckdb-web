@@ -60,7 +60,7 @@ each __httpfs__ feature.
 | File glob | [ListObjectV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)|
 | File writes | [Multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html)|
 
-## Configuration
+## Configuring S3
 
 To be able to read or write from S3, the correct region should be set:
 

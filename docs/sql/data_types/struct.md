@@ -128,7 +128,7 @@ SELECT
 FROM t1;
 ```
 
-#### Example Output:
+**Example Output:**
 
 | my_struct_column | identical_struct_column |
 |:---|:---|
@@ -144,7 +144,8 @@ SELECT
     (my_column, 42, my_column + 1) as identical_struct_column
 FROM t1;
 ```
-#### Example Output:
+
+**Example Output:**
 
 | my_struct_column | identical_struct_column |
 |:---|:---|

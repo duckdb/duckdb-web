@@ -308,3 +308,5 @@ docs/sql/functions/descriptions.txt
 venv/
 node_modules/
 vendor/
+
+duckdb-docs.*

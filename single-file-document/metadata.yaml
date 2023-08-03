@@ -1,0 +1,9 @@
+---
+title: 'DuckDB documentation'
+header-includes:
+- |
+  ```{=latex}
+  \setlength{\tabcolsep}{7pt}
+  \usepackage{xltxtra}
+  ```
+---

@@ -26,7 +26,7 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 
 `CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/duckdb/duckdb/issues/63).
 
-### Parameters
+### Parameters for `CREATE INDEX`
 
 | Name | Description |
 |:---|:---|
@@ -37,7 +37,7 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 |`expression`|An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call.|
 
 
-### Examples
+### Examples for `CREATE INDEX``
 
 ```sql
 -- Create a unique index 'films_id_idx' on the column id of table films.
@@ -57,14 +57,14 @@ CREATE INDEX i_index ON integers ((j+k));
 `DROP INDEX` drops an existing index from the database system.
 
 
-### Parameters
+### Parameters for `DROP INDEX`
 
 | Name | Description |
 |:---|:---|
 |`IF EXISTS`|Do not throw an error if the index does not exist.|
 |`name`|The name of an index to remove.|
 
-### Examples
+### Examples for `DROP INDEX`
 
 ```sql
 -- Remove the index title_idx.

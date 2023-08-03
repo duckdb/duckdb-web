@@ -51,7 +51,7 @@ COPY lineitem FROM 'lineitem.ndjson' ( FORMAT JSON );
 COPY lineitem FROM 'lineitem.json' ( FORMAT JSON, ARRAY TRUE );
 ```
 
-## Syntax
+## Copy From Syntax
 <div id="rrdiagram1"></div>
 
 
@@ -76,7 +76,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
 ```
 
-## Syntax
+## Copy To Syntax
 <div id="rrdiagram2"></div>
 
 ## Copy Options
