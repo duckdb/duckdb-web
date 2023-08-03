@@ -6,10 +6,12 @@ jobs:
     name: runner / vale
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Remove archive docs
         run: |
           rm -rf docs/archive
-      - uses: actions/checkout@v3
       - uses: errata-ai/vale-action@reviewdog
         with:
           files: docs/
+          filter_mode: nofilter
+          fail_on_error: true
