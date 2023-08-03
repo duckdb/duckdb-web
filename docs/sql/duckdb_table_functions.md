@@ -53,7 +53,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `character_maximum_length` |Always `NULL`. DuckDB [text types](./data_types/text) do not enforce a value length restriction based on a length type parameter.| `INTEGER` |
 | `numeric_precision` |The number of units (in the base indicated by `numeric_precision_radix`) used for storing column values. For integral and approximate numeric types, this is the number of bits. For decimal types, this is the number of digits positions.| `INTEGER` |
 | `numeric_precision_radix` |The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions.| `INTEGER` |
-| `numeric_scale` |Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e. the number of digits that may appear after the decimal separator). | `INTEGER` |
+| `numeric_scale` |Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
 The [`information_schema.columns`](./information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
@@ -148,7 +148,7 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `expressions` |Always `NULL`| `VARCHAR` |
 | `sql` |The definition of the index, expressed as a `CREATE INDEX` SQL statement.| `VARCHAR` |
   
-Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e. those indexes created by explicit [`CREATE INDEX`](./indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
+Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](./indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
 
 ## duckdb_keywords
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.

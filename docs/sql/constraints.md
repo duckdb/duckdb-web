@@ -33,7 +33,7 @@ INSERT INTO students VALUES (NULL);
 
 #### Primary Key/Unique
 
-Primary key or unique constraints define a column, or set of columns, that are a unique identifier for a row in the table. The constraint enforces that the specified columns are *unique* within a table, i.e. that at most one row contains the given values for the set of columns.
+Primary key or unique constraints define a column, or set of columns, that are a unique identifier for a row in the table. The constraint enforces that the specified columns are *unique* within a table, i.e., that at most one row contains the given values for the set of columns.
 
 ```sql
 CREATE TABLE students(id INTEGER PRIMARY KEY, name VARCHAR);

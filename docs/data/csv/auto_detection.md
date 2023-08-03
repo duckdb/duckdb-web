@@ -9,7 +9,7 @@ When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag se
 * Detect the types of each of the columns
 * Detect whether or not the file has a header row
 
-By default the system will try to auto-detect all options. However, options can be individually overriden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g. `read_csv_auto('file.csv', delim='|')`).
+By default the system will try to auto-detect all options. However, options can be individually overriden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g., `read_csv_auto('file.csv', delim='|')`).
 
 The detection works by operating on a sample of the file. The size of the sample can be modified by setting the `sample_size` parameter. The default sample size is `20480` rows. Setting the `sample_size` parameter to `-1` means the entire file is read for sampling. The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file. If we are reading from a file in which we cannot jump - such as a `.gz` compressed CSV file or `stdin` - samples are taken only from the beginning of the file.
 
@@ -60,9 +60,9 @@ The type detection works by attempting to convert the values in each column to t
 | `TIMESTAMP` |
 | `VARCHAR`   |
 
-Note everything can be cast to `VARCHAR`. This type has the lowest priority - i.e. columns are converted to `VARCHAR` if they cannot be cast to anything else. In `flights.csv` the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
+Note everything can be cast to `VARCHAR`. This type has the lowest priority - i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In `flights.csv` the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
-The detected types can be individually overriden using the `types` option. This option takes either a list of types (e.g. `types=[INT, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name -> type` map which overrides options of individual columns (e.g. `types={'quarter': INT}`).
+The detected types can be individually overriden using the `types` option. This option takes either a list of types (e.g., `types=[INT, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name -> type` map which overrides options of individual columns (e.g., `types={'quarter': INT}`).
 
 The type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
 
@@ -82,7 +82,7 @@ As part of the auto-detection, the system tries to figure out if dates and times
 
 If the ambiguities cannot be resolved by looking at the data the system has a list of preferences for which date format to use. If the system choses incorrectly, the user can specify the `dateformat` and `timestampformat` options manually.
 
-The system considers the following formats for dates (`dateformat`). Higher entries are chosen over lower entries in case of ambiguities (i.e. ISO 8601 is preferred over `MM-DD-YYYY`).
+The system considers the following formats for dates (`dateformat`). Higher entries are chosen over lower entries in case of ambiguities (i.e., ISO 8601 is preferred over `MM-DD-YYYY`).
 
 | dateformat |
 |------------|

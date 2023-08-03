@@ -2513,7 +2513,7 @@ title: Python Client API
 <span class="sig-prename descclassname"><span class="pre">duckdb.</span></span><span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#duckdb.tokenize" title="Permalink to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Tokenizes a SQL string, returning a list of (position, type) tuples that can be used for e.g. syntax highlighting</p>
+<p>Tokenizes a SQL string, returning a list of (position, type) tuples that can be used for e.g., syntax highlighting</p>
 </dd>
 </dl>
 

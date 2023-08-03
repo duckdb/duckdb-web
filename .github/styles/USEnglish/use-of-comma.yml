@@ -1,7 +1,9 @@
 extends: substitution
 message: Use '%s' instead of '%s'
 level: error
-ignorecase: true
+ignorecase: false
 swap:
-  "e.g. ": "e.g., "
-  "i.e. ": "i.e., "
+  'e\.g\. ': 'e.g., '
+  'E\.g\. ': 'e.g., '
+  'i\.e\. ': 'i.e., '
+  'I\.e\. ': 'i.e., '

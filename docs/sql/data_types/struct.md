@@ -107,7 +107,7 @@ SELECT part1.part2.part3 FROM tbl
 2. part1 is a table, part2 is a column, part3 is a property of that column
 3. part1 is a column, part2 is a property of that column, part3 is a property of that column
 
-Any extra parts (e.g. .part4.part5 etc) are always treated as properties
+Any extra parts (e.g., .part4.part5 etc) are always treated as properties
 
 ### Creating Structs with the Row function
 The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key.

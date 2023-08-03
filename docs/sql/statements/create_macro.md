@@ -79,7 +79,7 @@ SELECT triple_add(40, c := 1, b := 1);
 -- 42
 ```
 
-When macro's are used, they are expanded (i.e. replaced with the original expression), and the parameters within the expanded expression are replaced with the supplied arguments. Step by step:
+When macro's are used, they are expanded (i.e., replaced with the original expression), and the parameters within the expanded expression are replaced with the supplied arguments. Step by step:
 ```sql
 -- the 'add' macro we defined above is used in a query
 SELECT add(40, 2);

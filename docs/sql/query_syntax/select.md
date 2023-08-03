@@ -35,7 +35,7 @@ SELECT MIN(COLUMNS(*)) FROM addresses;
 
 ### Select List
 
-The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table - every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g. `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system. 
+The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table - every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system. 
 
 #### Star Expressions
 

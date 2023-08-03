@@ -165,7 +165,7 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 
 ## List Aggregates
 
-The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g. `min`, `histogram` or `sum`.
+The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g., `min`, `histogram` or `sum`.
 
 `list_aggregate` accepts additional arguments after the aggregate function name. These extra arguments are passed directly to the aggregate function, which serves as the second argument of `list_aggregate`.
 
@@ -212,7 +212,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
 
-By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e. the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby) PRAGMA statements.
+By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e., the values are sorted in ascending order and NULL values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [these](../query_syntax/orderby) PRAGMA statements.
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the NULL sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 

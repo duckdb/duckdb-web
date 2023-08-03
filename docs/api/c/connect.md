@@ -3,7 +3,7 @@ layout: docu
 title: C API - Startup & Shutdown
 selected: Startup
 ---
-To use DuckDB, you must first initialize a `duckdb_database` handle using `duckdb_open()`. `duckdb_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process).
+To use DuckDB, you must first initialize a `duckdb_database` handle using `duckdb_open()`. `duckdb_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process).
 
 With the `duckdb_database` handle, you can create one or many `duckdb_connection` using `duckdb_connect()`. While individual connections are thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection to allow for the best parallel performance.
 
@@ -103,7 +103,7 @@ Note that the error must be freed using `duckdb_free`.
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
 This should be called after you are done with any database allocated through `duckdb_open`.
-Note that failing to call `duckdb_close` (in case of e.g. a program crash) will not cause data corruption.
+Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
 Still it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax

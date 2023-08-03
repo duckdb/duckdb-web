@@ -245,7 +245,7 @@ If all values are valid, this function MIGHT return NULL!
 
 The validity mask is a bitset that signifies null-ness within the data chunk.
 It is a series of uint64_t values, where each uint64_t value contains validity for 64 tuples.
-The bit is set to 1 if the value is valid (i.e. not NULL) or 0 if the value is invalid (i.e. NULL).
+The bit is set to 1 if the value is valid (i.e., not NULL) or 0 if the value is invalid (i.e., NULL).
 
 Validity of a specific value can be obtained like this:
 
@@ -472,7 +472,7 @@ The child vector
 
 ### duckdb_validity_row_is_valid
 ---
-Returns whether or not a row is valid (i.e. not NULL) in the given validity mask.
+Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
 
 #### Syntax
 ---

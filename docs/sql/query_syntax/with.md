@@ -96,7 +96,7 @@ INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5),
   (3, 8), (3, 10), (5, 3), (5, 4), (5, 8), (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
-Note that the graph contains directed cycles, e.g. between nodes 1, 2, and 5.
+Note that the graph contains directed cycles, e.g., between nodes 1, 2, and 5.
 
 ##### Enumerate all paths from a node
 
@@ -144,7 +144,7 @@ ORDER BY length(path), path;
 └───────────┴─────────┴───────────────┘
 ```
 
-Note that the result of this query is not restricted to shortest paths, e.g. for node 5, the results include paths `[1, 5]` and `[1, 3, 5]`.
+Note that the result of this query is not restricted to shortest paths, e.g., for node 5, the results include paths `[1, 5]` and `[1, 3, 5]`.
 
 ##### Enumerate unweighted shortest paths from a node
 

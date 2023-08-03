@@ -55,7 +55,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 ## SAMPLE clause
 <div id="rrdiagram10"></div>
 
-[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e. after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
+[The `SAMPLE` clause](../../sql/query_syntax/sample) allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a data set. The sample clause is applied right after anything in the `from` clause (i.e., after any joins, but before the where clause or any aggregates). See the [sample](../../sql/samples) page for more information.
 
 ## WHERE clause
 <div id="rrdiagram5"></div>

@@ -90,7 +90,7 @@ The below options are applicable to all formats written with `COPY`.
 | Name | Description | Type | Default |
 |:---|:---|:----|:----|
 | `allow_overwrite` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | bool | false |
-| `format` | Specifies the copy function to use. The default is selected from the file extension (e.g. `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | varchar | auto |
+| `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | varchar | auto |
 | `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | varchar[] | (empty) |
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | bool | false |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | bool | auto |
@@ -101,7 +101,7 @@ The below options are applicable when writing `CSV` files.
 
 | Name | Description | Type | Default |
 |:---|:---|:----|:----|
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `force_quote` | The list of columns to always add quotes to, even if not required. | varchar[] | `[]` |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 | `delim` or `sep` | The character that is written to separate columns within each row. | varchar | `,` |
@@ -155,7 +155,7 @@ The below options are applicable when writing `JSON` files.
 
 | Name | Description | Type | Default |
 |:---|:---|:----|:----|
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g. `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 | `array` | Whether to write a JSON array. If `true`, a JSON array of records is written, if `false`, newline-delimited JSON is written | bool | `false` |
