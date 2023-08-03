@@ -10,7 +10,7 @@ values.
 
 DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
 
-Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g. integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
+Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g., integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
 
 
 
@@ -143,7 +143,7 @@ The result must be destroyed with `duckdb_destroy_data_chunk`.
 This function supersedes all `duckdb_value` functions, as well as the `duckdb_column_data` and `duckdb_nullmask_data`
 functions. It results in significantly better performance, and should be preferred in newer code-bases.
 
-If this function is used, none of the other result functions can be used and vice versa (i.e. this function cannot be
+If this function is used, none of the other result functions can be used and vice versa (i.e., this function cannot be
 mixed with the legacy result functions).
 
 Use `duckdb_result_chunk_count` to figure out how many chunks there are in the result.

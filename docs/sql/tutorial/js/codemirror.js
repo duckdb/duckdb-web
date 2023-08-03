@@ -5412,7 +5412,7 @@ BranchChunk.prototype.insertInner = function (at, lines, height) {
     if (at <= sz) {
       child.insertInner(at, lines, height)
       if (child.lines && child.lines.length > 50) {
-        // To avoid memory thrashing when child.lines is huge (e.g. first view of a large file), it's never spliced.
+        // To avoid memory thrashing when child.lines is huge (e.g., first view of a large file), it's never spliced.
         // Instead, small slices are taken. They're taken in order because sequential memory accesses are fastest.
         var remaining = child.lines.length % 25 + 25
         for (var pos = remaining; pos < child.lines.length;) {

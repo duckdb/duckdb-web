@@ -939,7 +939,7 @@
     "parameters": [
       "bytes"
     ],
-    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16KB)",
+    "description": "Converts bytes to a human-readable presentation (e.g., 16000 -> 16KB)",
     "example": "format_bytes(1000 * 16)",
     "type": "scalar_function",
     "aliases": [

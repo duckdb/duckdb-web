@@ -90,7 +90,7 @@ The amount of config options available.
 ### duckdb_get_config_flag
 ---
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
-display configuration options. This will succeed unless `index` is out of range (i.e. `>= duckdb_config_count`).
+display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
 
 The result name or description MUST NOT be freed.
 

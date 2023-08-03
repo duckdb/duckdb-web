@@ -59,7 +59,7 @@ ALTER TABLE integers RENAME i TO j;
 ALTER TABLE integers RENAME COLUMN j TO k;
 ```
 
-The `RENAME COLUMN` clause renames a single column within a table. Any constraints that rely on this name (e.g. `CHECK` constraints) are automatically updated. However, note that any views that rely on this column name are **not** automatically updated.
+The `RENAME COLUMN` clause renames a single column within a table. Any constraints that rely on this name (e.g., `CHECK` constraints) are automatically updated. However, note that any views that rely on this column name are **not** automatically updated.
 
 ### ADD COLUMN
 

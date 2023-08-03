@@ -59,7 +59,7 @@ PRAGMA show_tables;
 └────────────────────────┘
 ```
 
-Then you can query those views normally using SQL, e.g. using the example queries from sakila-examples.sql
+Then you can query those views normally using SQL, e.g., using the example queries from sakila-examples.sql
 
 ```sql
 SELECT cat.name category_name, 

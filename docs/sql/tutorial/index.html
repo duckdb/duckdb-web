@@ -420,7 +420,7 @@
           
 
             <h3 id="basic-subqueries-where">Filters</h3>
-            <p>Subqueries in a <code>WHERE</code> clause are typically comparing an attribute, either against a single value (e.g. using <code>=</code>) or against a set of values (e.g. with <code>IN</code> or <code>EXISTS</code>). In both cases, it is possible to refer to tuple variables from the enclosing query but not the other way around. Subqueries are enclosed in brackets <code>()</code> and are otherwise complete queries on their own. For example, the rather over-complicated query <code>SELECT boatname FROM voyages WHERE tonnage = (SELECT 884)</code> uses a subquery to retrieve all ships with a tonnage of <code>884</code>.</p>
+            <p>Subqueries in a <code>WHERE</code> clause are typically comparing an attribute, either against a single value (e.g., using <code>=</code>) or against a set of values (e.g., with <code>IN</code> or <code>EXISTS</code>). In both cases, it is possible to refer to tuple variables from the enclosing query but not the other way around. Subqueries are enclosed in brackets <code>()</code> and are otherwise complete queries on their own. For example, the rather over-complicated query <code>SELECT boatname FROM voyages WHERE tonnage = (SELECT 884)</code> uses a subquery to retrieve all ships with a tonnage of <code>884</code>.</p>
 
           <div class="well">
             Use a subquery in the <code>WHERE</code> clause to retrieve boat names from the <code>voyages</code> table where there is no matching entry in the <code>invoices</code> table for the particular voyage number. Use a subquery with either <code>NOT IN</code> or <code>NOT EXISTS</code> (with a reference to the outer query).
@@ -429,7 +429,7 @@
 
             <h3 id="basic-subqueries-from">Tables</h3>
 
-            <p>The result of a subquery is also a table, hence they can also be used to use a subquery result where a table could be used, i.e. the <code>FROM</code> clause. For example, the (again) over-complicated query <code>SELECT number FROM (SELECT * FROM voyages) AS v</code> uses a table-creating subquery. Note how we have to use the <code>AS</code> clause to give the table created by the subquery a name. We often use subqueries to avoid complex filter conditions after joining tables.</p>
+            <p>The result of a subquery is also a table, hence they can also be used to use a subquery result where a table could be used, i.e., the <code>FROM</code> clause. For example, the (again) over-complicated query <code>SELECT number FROM (SELECT * FROM voyages) AS v</code> uses a table-creating subquery. Note how we have to use the <code>AS</code> clause to give the table created by the subquery a name. We often use subqueries to avoid complex filter conditions after joining tables.</p>
 
            <div class="well">
            Use a subquery in the <code>FROM</code> clause to only retrieve <code>invoices</code> from chamber <code>'H'</code> and the <code>invoice</code> amount of larger than <code>10000</code> and join the result with the <code>voyages</code> table using the <code>number</code> column. Project to only retrieve the <code>boatname</code> and the <code>invoice</code> amount of the join result. Order by <code>invoice</code> amount.

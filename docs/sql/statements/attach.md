@@ -81,7 +81,7 @@ CREATE TABLE new_db.tbl(i INTEGER);
 CREATE TABLE my_schema.tbl(i INTEGER);
 ```
 
-If we create a conflict (i.e. we have both a schema and a catalog with the same name) the system requests that a fully qualified path is used instead:
+If we create a conflict (i.e., we have both a schema and a catalog with the same name) the system requests that a fully qualified path is used instead:
 
 ```sql
 CREATE SCHEMA new_db;

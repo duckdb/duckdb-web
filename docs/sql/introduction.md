@@ -43,7 +43,7 @@ White space (i.e., spaces, tabs, and newlines) can be used freely in SQL command
 
 In the SQL command, we first specify the type of command that we want to perform: `CREATE TABLE`. After that follows the parameters for the command. First, the table name, *weather*, is given. Then the column names and column types follow.
 
-`city VARCHAR` specifies that the table has a column called *city* that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e. whole numbers without a decimal point). `REAL`  columns store single precision floating-point numbers (i.e. numbers with a decimal point). `DATE` stores a date (i.e. year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
+`city VARCHAR` specifies that the table has a column called *city* that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e., whole numbers without a decimal point). `REAL`  columns store single precision floating-point numbers (i.e., numbers with a decimal point). `DATE` stores a date (i.e., year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
 
 DuckDB supports the standard SQL types `INTEGER`, `SMALLINT`, `REAL`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
 
@@ -70,7 +70,7 @@ The insert statement is used to populate a table with rows:
 INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
 ```
 
-Constants that are not numeric values (e.g. text and dates) must be surrounded by single quotes (`''`), as in the example. Input dates for the date type must be formatted as `'YYYY-MM-DD'`.
+Constants that are not numeric values (e.g., text and dates) must be surrounded by single quotes (`''`), as in the example. Input dates for the date type must be formatted as `'YYYY-MM-DD'`.
 
 We can insert into the *cities* table in the same manner.
 

@@ -355,7 +355,7 @@ Note that the error must be freed using `duckdb_free`.
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
 This should be called after you are done with any database allocated through `duckdb_open`.
-Note that failing to call `duckdb_close` (in case of e.g. a program crash) will not cause data corruption.
+Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
 Still it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
@@ -517,7 +517,7 @@ The amount of config options available.
 ### duckdb_get_config_flag
 ---
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
-display configuration options. This will succeed unless `index` is out of range (i.e. `>= duckdb_config_count`).
+display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
 
 The result name or description MUST NOT be freed.
 
@@ -906,7 +906,7 @@ The result must be destroyed with `duckdb_destroy_data_chunk`.
 This function supersedes all `duckdb_value` functions, as well as the `duckdb_column_data` and `duckdb_nullmask_data`
 functions. It results in significantly better performance, and should be preferred in newer code-bases.
 
-If this function is used, none of the other result functions can be used and vice versa (i.e. this function cannot be
+If this function is used, none of the other result functions can be used and vice versa (i.e., this function cannot be
 mixed with the legacy result functions).
 
 Use `duckdb_result_chunk_count` to figure out how many chunks there are in the result.
@@ -3332,7 +3332,7 @@ If all values are valid, this function MIGHT return NULL!
 
 The validity mask is a bitset that signifies null-ness within the data chunk.
 It is a series of uint64_t values, where each uint64_t value contains validity for 64 tuples.
-The bit is set to 1 if the value is valid (i.e. not NULL) or 0 if the value is invalid (i.e. NULL).
+The bit is set to 1 if the value is valid (i.e., not NULL) or 0 if the value is invalid (i.e., NULL).
 
 Validity of a specific value can be obtained like this:
 
@@ -3559,7 +3559,7 @@ The child vector
 
 ### duckdb_validity_row_is_valid
 ---
-Returns whether or not a row is valid (i.e. not NULL) in the given validity mask.
+Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
 
 #### Syntax
 ---
@@ -5329,7 +5329,7 @@ The result must be destroyed with `duckdb_destroy_data_chunk`.
 
 This function can only be used on duckdb_results created with 'duckdb_pending_prepared_streaming'
 
-If this function is used, none of the other result functions can be used and vice versa (i.e. this function cannot be
+If this function is used, none of the other result functions can be used and vice versa (i.e., this function cannot be
 mixed with the legacy result functions or the materialized result functions).
 
 It is not known beforehand how many chunks will be returned by this result.

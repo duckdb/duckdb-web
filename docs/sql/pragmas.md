@@ -203,7 +203,7 @@ PRAGMA disable_verify_serializer;
 
 ### enable_object_cache, disable_object_cache
 ```sql
--- Enable caching of objects for e.g. Parquet metadata
+-- Enable caching of objects for e.g., Parquet metadata
 PRAGMA enable_object_cache;
 -- Disable caching of objects
 PRAGMA disable_object_cache;
