@@ -36,12 +36,10 @@ A set of functions that create and destroy a connection to interact with a datab
 | `ConnectionRelease` | Destroy this connection. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRelease(&adbc_connection, &adbc_error)` |
 
 
-FIXME: These are still pending on Thijs' PR
 A set of functions that retrieve metadata about the database. In general, these functions will return Arrow objects, specifically an ArrowArrayStream.
 
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
-| `ConnectionGetInfo` | Get metadata about the database/driver. | `(AdbcConnection*, uint32_t*, size_t, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` | 
 | `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table.| `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` | 
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
@@ -78,9 +76,7 @@ Functions related to binding, used for bulk insertion or in prepared statements.
 
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
-| `StatementBind` | Bind Arrow Array. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArray*, ArrowSchema*, AdbcError*)` | `StatementBind(&adbc_statement,&input_data, &adbc_error)` |
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |
-| `StatementGetParameterSchema` | Get the schema for bound parameters. Should be called after StatementPrepare.| `(AdbcStatement*, ArrowSchema*, AdbcError*)` | `StatementGetParameterSchema(&adbc_statement,&schema, &adbc_error)` |
 
 ## C++ Example
 We begin our example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
