@@ -427,6 +427,10 @@
               ]
             },
             {
+              "page": "ADBC",
+              "url": "adbc"
+            },
+            {
               "page": "ODBC",
               "slug": "odbc",
               "subsubfolderitems": [

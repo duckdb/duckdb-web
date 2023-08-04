@@ -20,9 +20,13 @@ CREATE TABLE ontime(FlightDate DATE, UniqueCarrier VARCHAR, OriginCityName VARCH
 COPY ontime FROM 'flights.csv' (AUTO_DETECT TRUE);
 -- alternatively, create a table without specifying the schema manually
 CREATE TABLE ontime AS SELECT * FROM 'flights.csv';
+-- we can use the FROM-first syntax to omit 'SELECT *'
+CREATE TABLE ontime AS FROM 'flights.csv';
 
 -- write the result of a query to a CSV file
 COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
+-- we can use the FROM-first syntax to omit 'SELECT *'
+COPY (FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 ```
 
 ### CSV Loading
