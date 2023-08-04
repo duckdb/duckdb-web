@@ -21,6 +21,8 @@ CREATE TABLE t1(i INTEGER NOT NULL, decimalnr DOUBLE CHECK(decimalnr<10), date D
 CREATE TABLE t1 AS SELECT 42 AS i, 84 AS j;
 -- create a table from a CSV file using AUTO-DETECT (i.e., Automatically detecting column names and types)
 CREATE TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
+-- we can use the FROM-first syntax to omit 'SELECT *'
+CREATE TABLE t1 AS FROM read_csv_auto ('path/file.csv');
 ```
 ### Temporary Tables
 
