@@ -48,7 +48,7 @@ you will need to make sure the file was created with a file-compatible version o
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
 * MacOS Desktop.
-  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094935) the DuckDB JDBC driver. This will a file called `duckdb_jdbc-osx-universal.jar`.
+  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094935) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc-osx-universal.jar`.
   * Copy it to the `~/Library/Tableau/Drivers/` folder.
 * Windows Desktop.
   * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094936) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc.jar`.
@@ -73,6 +73,10 @@ and using Tableau-provided Postgres dialect.
 
 ![tableau-postgres](/images/guides/tableau/tableau-osx-jdbc.png)
 
+However, functionality will be missing such as MEDIAN and PERCENTILE aggregate functions. 
+To make the data source connection more compatible with the PostgreSQL dialect, 
+please use the DuckDB taco connector as described below.
+
 # Installing the Tableau DuckDB Connector
 
 While it is possible to use the Tableau-provided Postgres dialect to communicate with the DuckDB JDBC driver,
@@ -82,9 +86,10 @@ and [is more compatible](https://github.com/hawkfish/duckdb-taco/blob/main/table
 than the provided Postgres dialect.
 
 The documentation on how to install and use the connector is in its repository,
-but essentially you will need the `duckdb_jdbc.taco` file from the `duckdb-taco/packaged-connector` directory.
+but essentially you will need the 
+[`duckdb_jdbc.taco`](https://github.com/hawkfish/duckdb-taco/raw/main/packaged-connector/duckdb_jdbc.taco) file.
 The current version of the Taco is not signed, you will need to launch Tableau with signature validation disabled.
-(Despite what the Tableau documentation days, the real security risk is in the JDBC driver code,
+(Despite what the Tableau documentation says, the real security risk is in the JDBC driver code,
 not the small amount of JavaScript in the Taco.)
 
 ## Server (Online)
@@ -115,7 +120,9 @@ do shell script "\"/Applications/Tableau Desktop 2023.2.app/Contents/MacOS/Table
 quit
 ```
 
-Create this file with Script Editor and save it as a packaged application. You can then double-click it to launch Tableau. You will need to change the application name when you get upgrades.
+Create this file with Script Editor (in `/Applications/Utilities`) and save it as a packaged application. 
+You can then double-click it to launch Tableau. 
+You will need to change the application name in the script when you get upgrades.
 
 ## Windows Desktop
 
