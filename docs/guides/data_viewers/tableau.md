@@ -62,14 +62,24 @@ Also, check that there is only one version of the driver installed as there are 
   * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094936) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc.jar`.
   * Copy it to the `C:\Program Files\Tableau\Drivers` directory. 
 
+# Using the Postgres Dialect
+
+If you just want to do something simple, you can try connecting directly to the JDBC driver 
+and using Tableau-provided Postgres dialect.
+
+1. Create a DuckDB file containing your views and/or data.
+2. Launch Tableau
+3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter jdbc:duckdb:/User/username/path/to/database.db. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
+
+![tableau-postgres](/images/guides/tableau/tableau-osx-jdbc.png)
+
 # Installing the Tableau DuckDB Connector
 
 While it is possible to use the Tableau-provided Postgres dialect to communicate with the DuckDB JDBC driver,
 we strongly recommend using the [DuckDB "taco" connector](https://github.com/hawkfish/duckdb-taco).
-This connector has been fully tested against the Tableau dialect generator and is more compatible 
+This connector has been fully tested against the Tableau dialect generator 
+and [is more compatible](https://github.com/hawkfish/duckdb-taco/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
 than the provided Postgres dialect.
-The connector developer was the architect of Tableau's internal dialect system 
-and is very familiar with connectivity issues.
 
 The documentation on how to install and use the connector is in its repository,
 but essentially you will need the `duckdb_jdbc.taco` file from the `duckdb-taco/packaged-connector` directory.
