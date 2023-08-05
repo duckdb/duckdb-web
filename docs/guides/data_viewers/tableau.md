@@ -4,7 +4,7 @@ title: Tableau - A Data Visualisation Tool
 selected: Tableau - A Data Visualisation Tool
 ---
 
-# Visualising DuckDB databases with Tableau
+# Visualising DuckDB Data Sets With Tableau
 
 [Tableau](https://www.tableau.com/) is a popular commercial data visualisation tool. 
 In addition to a large number of built in connectors,
@@ -17,9 +17,8 @@ or in a remote data bucket that is accessible from the server.
 
 ## Database Creation
 
-The Tableau connection process requires a physical DuckDB database,
-so all data sets need to be created and saved within a DuckDB database file.
-The data sets do not actually need to be imported into DuckDB tables;
+When using a DuckDB database file
+the data sets do not actually need to be imported into DuckDB tables;
 it suffices to create views of the data.
 For example, this will create a view of the `h2oai` parquet test file in the current DuckDB code base:
 
@@ -29,35 +28,81 @@ CREATE VIEW h2oai AS (
 );
 ```
 
-
 Note that you should use full path names to local files so that they can be found from inside Tableau.
 Also note that you will need to use a version of the driver that is compatible (i.e., from the same release) 
-as the database format you are using.
+as the database format used by the DuckDB tool (e.g., Python module, command line) that was used to create the file.
 
-# Connecting Tableau Desktop to DuckDB
+# Installing the JDBC Driver
 
-Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) for Tableau to use.
-Note that Tableau needs to be restarted any time you add or modify drivers.
+Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) 
+for Tableau to use.
+For now, we recommend using the latest bleeding edge JDBC driver (0.8.2) as a number of fixes have been made 
+for time compatibility.
+Note that Tableau (both Desktop and Server versions) need to be restarted any time you add or modify drivers.
 
-## MacOS
+## Driver Links
 
-As of this writing, the MacOS DuckDB ODBC Driver seems to crash 
-the Tableau Protocol Server (a sub-process used to isolate drivers from the main application).
-This means you should use the JDBC driver for now.
+The links here are for a recent version of the JDBC driver that is compatible with Tableau.
+If you wish to connect to a database file,
+you will need to make sure the file was created with a file-compatible version of DuckDB.
+Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
-### Install the DuckDB JDBC Driver:
+* MacOS Desktop.
+  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094935) the DuckDB JDBC driver. This will a file called `duckdb_jdbc-osx-universal.jar`.
+  * Copy it to the `~/Library/Tableau/Drivers/` folder.
+* Windows Desktop.
+  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094936) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc.jar`.
+  * Copy it to the `C:\Program Files\Tableau\Drivers` directory. 
+* Linux Server.
+  * Download the DuckDB JDBC driver appropriate for your architecture, either
+    * [AMD64](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094934) or
+    * [AARCH64](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094932).
+  * Copy it to the `/opt/tableau/tableau_driver/jdbc`.
+* Windows Server.
+  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094936) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc.jar`.
+  * Copy it to the `C:\Program Files\Tableau\Drivers` directory. 
 
-1. [Download](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_jdbc-osx-universal.jar) the DuckDB JDBC driver. This is a file called `duckdb_jdbc-osx-universal.jar`. Make sure this is from the same build as the version of DuckDB used to create the database file!
-2. Follow the [Tableau directions](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) and copy this file to either `/Library/JDBC` (for access by all users) or `~/Library/JDBC` (for access by your login alone) (e.g., `cp ~/Downloads/duckdb_jdbc-osx-universal.jar ~/Library/JDBC`)
+# Installing the Tableau DuckDB Connector
 
-### Connect to your data
+While it is possible to use the Tableau-provided Postgres dialect to communicate with the DuckDB JDBC driver,
+we strongly recommend using the [DuckDB "taco" connector](https://github.com/hawkfish/duckdb-taco).
+This connector has been fully tested against the Tableau dialect generator and is more compatible 
+than the provided Postgres dialect.
+The connector developer was the architect of Tableau's internal dialect system 
+and is very familiar with connectivity issues.
 
-3. Create a  DuckDB file containing your views and/or data.
-4. Launch Tableau
-5. Under Connect > To a Server > More... click on "Other Databases (JDBC)"  This will bring up the connection dialogue box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose `PostgreSQL`. the rest of the fields can be ignored:
+The documentation on how to install and use the connector is in its repository,
+but essentially you will need the `duckdb_jdbc.taco` file from the `duckdb-taco/packaged-connector` directory.
+The current version of the Taco is not signed, you will need to launch Tableau with signature validation disabled.
+(Despite what the Tableau documentation days, the real security risk is in the JDBC driver code,
+not the small amount of JavaScript in the Taco.)
 
-![tableau-osx-jdbc](/images/guides/tableau/tableau-osx-jdbc.png)
+## Server (Online)
 
+On Linux, copy the Taco file to `/opt/tableau/connectors`.
+On Windows, copy the Taco file to `C:\Program Files\Tableau\Connectors`.
+Then issue the commands to disable signature validation:
+
+```sh
+$ tsm configuration set -k native_api.disable_verify_connector_plugin_signature -v true
+$ tsm pending-changes apply
+```
+The last command will restart the server with the new settings.
+
+## MacOS Desktop
+
+Copy the Taco file to the `/Users/[MacOS User]/Documents/My Tableau Repository/Connectors` folder.
+Then launch Tableau Desktop from the Terminal with the the command line argument to disable signature validation:
+
+```sh
+$ /Applications/Tableau\ Desktop\ <year>.<quarter>.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
+```
+
+## Windows Desktop
+
+Copy the Taco file to the `C:\Users\[Windows User]\Documents\My Tableau Repository\Connectors` directory.
+Then launch Tableau Desktop from a shell with the the `-DDisableVerifyConnectorPluginSignature=true` argument 
+to disable signature validation.
 
 # Output
 
