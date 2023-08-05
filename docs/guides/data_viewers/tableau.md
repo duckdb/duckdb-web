@@ -71,7 +71,7 @@ and using Tableau-provided Postgres dialect.
 2. Launch Tableau
 3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter jdbc:duckdb:/User/username/path/to/database.db. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
-![tableau-postgres](/images/guides/tableau/tableau-osx-jdbc.png)
+<img src='/images/guides/tableau/tableau-osx-jdbc.png' alt='tableau-postgres' width = 50%>
 
 However, functionality will be missing such as MEDIAN and PERCENTILE aggregate functions. 
 To make the data source connection more compatible with the PostgreSQL dialect, 
@@ -124,7 +124,7 @@ Create this file with [the Script Editor](https://support.apple.com/guide/script
 (located in `/Applications/Utilities`) 
 and [save it as a packaged application](https://support.apple.com/guide/script-editor/save-a-script-as-an-app-scpedt1072/mac):
 
-![tableau-applescript](/images/guides/tableau/applescript.png)
+<img src='/images/guides/tableau/applescript.png' alt='tableau-applescript' width=50%>
 
 You can then double-click it to launch Tableau. 
 You will need to change the application name in the script when you get upgrades.
