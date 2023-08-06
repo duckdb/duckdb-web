@@ -169,7 +169,8 @@ $(document).ready(function(){
 	    }
 	}
 	$('.installartion.output .result').click(function(){
-		SelectText('resultselection')
+		// TODO: add a button to code blocks to allow for easier copying, instead of this
+		// SelectText('resultselection')
 	})
 	
 
