@@ -149,30 +149,6 @@ $(document).ready(function(){
 			$(this).children('.theyear').toggleClass('opened');
 		})
 	}
-	
-	// Select Everything when Clicking on Result-Div
-	function SelectText(element) {
-	    var doc = document
-	        , text = doc.getElementById(element)
-	        , range, selection
-	    ;    
-	    if (doc.body.createTextRange) {
-	        range = document.body.createTextRange();
-	        range.moveToElementText(text);
-	        range.select();
-	    } else if (window.getSelection) {
-	        selection = window.getSelection();        
-	        range = document.createRange();
-	        range.selectNodeContents(text);
-	        selection.removeAllRanges();
-	        selection.addRange(range);
-	    }
-	}
-	$('.installartion.output .result').click(function(){
-		// TODO: add a button to code blocks to allow for easier copying, instead of this
-		// SelectText('resultselection')
-	})
-	
 
 	// Sidenavigation Documentation
 	$('.sidenavigation .hasSub').click(function(){
