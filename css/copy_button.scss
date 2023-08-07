@@ -1,0 +1,25 @@
+---
+---
+
+@mixin hover-opacity($element) {
+    #{$element}.highlight > button {
+        opacity: 0;
+        right: 1.2rem;
+        top: 1.2rem;
+        transition: all 0.2s ease-out;
+        border-radius: 4px;
+    }
+
+    #{$element}.highlight:hover > button {
+        opacity: 1;
+    }
+
+    #{$element}.highlight > button:active,
+    #{$element}.highlight > button:focus,
+    #{$element}.highlight > button:hover {
+        opacity: 1
+    }
+}
+
+@include hover-opacity(pre);
+@include hover-opacity(figure);

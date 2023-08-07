@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/docu.css">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/mobilestyles.css">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/copy_button.css">
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/railroad.css">
 	{% endif %}
@@ -165,13 +166,14 @@
 		</div>
 
 	</main>
-	
-	
+
+
 	<script src="{{ site.baseurl }}/js/minisearch.js"></script>
 	<script src="{{ site.baseurl }}/js/search.js"></script>
 
 	<script src="{{ site.baseurl }}/js/lottie.min.js"></script>
 	<script src="{{ site.baseurl }}/js/script.js"></script>
+	<script src="{{ site.baseurl }}/js/copy_button.js"></script>
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 	<script src="{{ site.baseurl }}/js/railroad.js"></script>
 	<script src="{{ site.baseurl }}/js/{{ page.railroad }}"></script>
