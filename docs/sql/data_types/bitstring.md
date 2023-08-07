@@ -25,5 +25,5 @@ SELECT '101010'::BIT
 SELECT bitstring('0101011', 12);
 ```
 
-## Functions
+### Functions
 See [Bitstring Functions](../functions/bitstring).

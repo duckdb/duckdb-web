@@ -6,7 +6,7 @@ expanded: Data Types
 blurb: A reference list for Time Zones.
 ---
 
-## Time Zone Reference List
+### Time Zone Reference List
 
 An up-to-date version of this list can be pulled from the pg_timezone_names() table function:
 

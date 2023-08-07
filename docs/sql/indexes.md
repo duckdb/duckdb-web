@@ -4,7 +4,8 @@ title: Indexes
 selected: Documentation/Indexes
 railroad: statements/indexes.js
 ---
-## Index types
+
+### Index types
 
 DuckDB currently uses two index types:
 
@@ -15,18 +16,18 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 
 > ART indexes must currently be able to fit in-memory. Avoid creating ART indexes if the index does not fit in memory.
 
-## Persistence
+### Persistence
 
 * Min-max indexes are persisted.
 * ART indexes are persisted.
 
-## Create Index
+### Create Index
 
 <div id="rrdiagram1"></div>
 
 `CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/duckdb/duckdb/issues/63).
 
-### Parameters for `CREATE INDEX`
+#### Parameters for `CREATE INDEX`
 
 | Name | Description |
 |:---|:---|
@@ -37,7 +38,7 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 |`expression`|An expression based on one or more columns of the table. The expression usually must be written with surrounding parentheses, as shown in the syntax. However, the parentheses can be omitted if the expression has the form of a function call.|
 
 
-### Examples for `CREATE INDEX``
+#### Examples for `CREATE INDEX``
 
 ```sql
 -- Create a unique index 'films_id_idx' on the column id of table films.
@@ -50,36 +51,36 @@ CREATE INDEX gy_idx ON films (genre, year);
 CREATE INDEX i_index ON integers ((j+k));
 ```
 
-## Drop Index
+### Drop Index
 
 <div id="rrdiagram2"></div>
 
 `DROP INDEX` drops an existing index from the database system.
 
 
-### Parameters for `DROP INDEX`
+#### Parameters for `DROP INDEX`
 
 | Name | Description |
 |:---|:---|
 |`IF EXISTS`|Do not throw an error if the index does not exist.|
 |`name`|The name of an index to remove.|
 
-### Examples for `DROP INDEX`
+#### Examples for `DROP INDEX`
 
 ```sql
 -- Remove the index title_idx.
 DROP INDEX title_idx;
 ```
 
-## Index Limitations
+### Index Limitations
 
 ART indexes create a secondary copy of the data in a second location - this complicates processing, particularly when combined with transactions. Certain limitations apply when it comes to modifying data that is also stored in secondary indexes.
 
-##### Updates become Deletes and Inserts
+###### Updates become Deletes and Inserts
 
 When an update statement is executed on a column that is present in an index - the statement is transformed into a *delete* of the original row followed by an *insert*. This has certain performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-##### Over-Eager Unique Constraint Checking
+###### Over-Eager Unique Constraint Checking
 
 Due to the presence of transactions, data can only be removed from the index after (1) the transaction that performed the delete is committed, and (2) no further transactions exist that refer to the old entry still present in the index. As a result of this - transactions that perform *deletions followed by insertions* may trigger unexpected unique constraint violations, as the deleted tuple has not actually been removed from the index yet. For example:
 

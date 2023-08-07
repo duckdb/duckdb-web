@@ -28,14 +28,14 @@ INSERT OR REPLACE INTO tbl(i) VALUES(1);
 
 `INSERT INTO` inserts new rows into a table. One can insert one or more rows specified by value expressions, or zero or more rows resulting from a query.
 
-## Insert Column Order
+### Insert Column Order
 
 It's possible to provide an optional insert column order, this can either be `BY POSITION` (the default) or `BY NAME`.
 Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or `NULL` if there is none.
 
 If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
 
-### BY POSITION
+#### BY POSITION
 
 The order that values are inserted into the columns of the table is determined by the order that the columns were declared in.
 This can be overriden by providing column names as part of the target, for example:
@@ -46,7 +46,7 @@ INSERT INTO tbl(b, a) VALUES (5, 42);
 This will insert `5` into `b` and `42` into `a`.
 The values supplied by the VALUES clause or query are associated with the column list left-to-right.
 
-### BY NAME
+#### BY NAME
 
 The names of the column list of the SELECT statement are matched against the column names of the table to determine the order that values should be inserted into the table, even if the order of the columns in the table differs from the order of the values in the SELECT statement.
 For example:
@@ -61,7 +61,7 @@ If a column name is misspelled or does not exist in the table, an error will occ
 
 This is not a problem however if columns are missing from the SELECT statement, as those will be filled with the default value.
 
-## On Conflict Clause
+### ON CONFLICT Clause
 
 An `ON CONFLICT` clause can be used to perform a certain action on conflicts that arise from `UNIQUE` or `PRIMARY KEY` constraints.
 
@@ -92,7 +92,7 @@ It updates every column of the **existing** row to the new values of the **to-be
 `INSERT OR IGNORE` is a shorter syntax alternative to `ON CONFLICT DO NOTHING`.
 
 
-### Returning Clause
+### RETURNING Clause
 
 The `RETURNING` clause may be used to return the contents of the rows that were inserted. This can be useful if some columns are calculated upon insert. For example, if the table contains an automatically incrementing primary key, then the `RETURNING` clause will include the automatically created primary key. This is also useful in the case of generated columns.
 

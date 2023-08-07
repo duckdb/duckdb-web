@@ -10,9 +10,7 @@ Data chunks and vectors are what DuckDB uses natively to store and represent dat
 
 The primary manner of interfacing with data chunks is by obtaining the internal vectors of the data chunk using the `duckdb_data_chunk_get_vector` method, and subsequently using the `duckdb_vector_get_data` and `duckdb_vector_get_validity` methods to read the internal data and the validity mask of the vector. For composite types (list and struct vectors), `duckdb_list_vector_get_child` and `duckdb_struct_vector_get_child` should be used to read child vectors.
 
-
-
-## **API Reference**
+### **API Reference**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_create_data_chunk">duckdb_create_data_chunk</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">types</span>, <span class="kt">idx_t</span> <span class="k">column_count</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_data_chunk">duckdb_destroy_data_chunk</a></span>(<span class="kt">duckdb_data_chunk</span> *<span class="k">chunk</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_data_chunk_reset">duckdb_data_chunk_reset</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);

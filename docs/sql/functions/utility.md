@@ -5,7 +5,6 @@ selected: Documentation/Functions/Utility Functions
 expanded: Functions
 ---
 
-## Utility Functions
 The functions below are difficult to categorize into specific function types and are broadly useful. 
 
 | Function| Description| Example| Result|
@@ -32,7 +31,7 @@ The functions below are difficult to categorize into specific function types and
 | `uuid()`| Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687.| `uuid()` | various |
 | `version()` | Return the currently active version of DuckDB in this format: `v0.3.2` | `version()`| various |
 
-## Utility Table Functions
+### Utility Table Functions
 A table function is used in place of a table in a `FROM` clause.
 
 | Function | Description | Example |

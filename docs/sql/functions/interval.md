@@ -6,7 +6,7 @@ expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating `INTERVAL` values.
 
-## Interval Operators
+### Interval Operators
 The table below shows the available mathematical operators for `INTERVAL` types.
 
 | Operator | Description | Example | Result |
@@ -20,7 +20,7 @@ The table below shows the available mathematical operators for `INTERVAL` types.
 | `-` | subtraction from a `TIMESTAMP` | `TIMESTAMP '1992-03-27 01:02:03' - INTERVAL 5 DAY` | 1992-03-22 01:02:03 |
 | `-` | subtraction from a `TIME` | `TIME '06:02:03' - INTERVAL 5 HOUR` | 01:02:03 |
 
-## Interval Functions
+### Interval Functions
 The table below shows the available scalar functions for `INTERVAL` types.
 
 | Function | Description | Example | Result |

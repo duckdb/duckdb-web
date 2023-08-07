@@ -14,7 +14,7 @@ Then, the data file is imported into DuckDB using insert functions ([insertArrow
 
 [Insert statements](../../data/insert) can also be used to import data.
 
-## Data Import
+### Data Import
 
 Open & Close connection
 

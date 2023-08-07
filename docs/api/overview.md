@@ -17,3 +17,4 @@ There are also contributed third-party DuckDB wrappers for:
 - [Rust](https://github.com/wangfenjin/duckdb-rs), by [wangfenjin](https://github.com/wangfenjin)
 
 ### Pages in this Section
+

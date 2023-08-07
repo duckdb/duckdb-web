@@ -5,7 +5,7 @@ selected: Documentation/Window Functions
 railroad: expressions/window.js
 ---
 
-## Examples
+### Examples
 ```sql
 -- generate a "row_number" column containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
@@ -19,12 +19,12 @@ SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 SELECT amount / SUM(amount) OVER (PARTITION BY region) FROM sales;
 ```
 
-## Syntax
+### Syntax
 <div id="rrdiagram"></div>
 
 Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER window-name` syntax.
 
-## General-Purpose Window Functions
+### General-Purpose Window Functions
 The table below shows the available general window functions.
 
 | Function | Return Type | Description | Example |
@@ -44,10 +44,10 @@ The table below shows the available general window functions.
 | `first(expr any)` | same type as **expr** | Alias for `first_value`. | `first(column)` |
 | `last(expr any)` | same type as **expr** | Alias for `last_value`. | `last(column)` |
 
-## Aggregate Window Functions
+### Aggregate Window Functions
 All [aggregate functions](aggregates) can be used in a windowing context.
 
-## Ignoring NULLs
+### Ignoring NULLs
 
 The following functions support the `IGNORE NULLS` specification:
 
@@ -63,7 +63,7 @@ Note that there is no comma separating the arguments from the `IGNORE NULLS` spe
 
 The inverse of `IGNORE NULLS` is `RESPECT NULLS`, which is the default for all functions.
 
-## Evaluation
+### Evaluation
 
 Windowing works by breaking a relation up into independent *partitions*,
 *ordering* those partitions,
@@ -79,7 +79,7 @@ and this diagram visually illustrates computation environment:
 
 <img src="/images/blog/windowing/framing.svg" alt="The Window Computation Environment" title="Figure 1: The Window Computation Environment" style="max-width:90%;width:90%;height:auto"/>
 
-### Partition and Ordering
+#### Partition and Ordering
 
 Partitioning breaks the relation up into independent, unrelated pieces.
 Partitioning is optional, and if none is specified then the entire relation is treated as a single partition.
@@ -147,7 +147,7 @@ Note that even though the function is computed with an `ORDER BY` clause,
 the result does not have to be sorted,
 so the `SELECT` also needs to be explicitly sorted if that is desired.
 
-### Framing
+#### Framing
 
 Framing specifies a set of rows relative to each row where the function is evaluated.
 The distance from the current row is given as an expression either `PRECEDING` or `FOLLOWING` the current row.
@@ -158,7 +158,7 @@ and it has to support addition and subtraction (i.e., numbers or `INTERVAL`s).
 The default values for frames are from `UNBOUNDED PRECEDING` to `CURRENT ROW`.
 It is invalid for a frame to start after it ends.
 
-#### `ROW` Framing
+##### `ROW` Framing
 
 Here is a simple `ROW` frame query, using an aggregate function:
 
@@ -176,7 +176,7 @@ This query computes the `SUM` of each point and the points on either side of it:
 Notice that at the edge of the partition, there are only two values added together.
 This is because frames are cropped to the edge of the partition.
 
-#### `RANGE` Framing
+##### `RANGE` Framing
 
 Returning to the power data, suppose the data is noisy.
 We might want to compute a 7 day moving average for each plant to smooth out the noise.
@@ -212,7 +212,7 @@ This is the result:
 | Worcester | 2019-01-04 | 102249.50 |
 | ... | ... | ... |
 
-### `WINDOW` Clauses
+#### `WINDOW` Clauses
 
 Multiple different `OVER` clauses can be specified in the same `SELECT`, and each will be computed separately.
 Often, however, we want to use the same layout for multiple window functions.
@@ -263,7 +263,7 @@ The queries above do not use a number of clauses commonly found in select statem
 `WHERE`, `GROUP BY`, etc. For more complex queries you can find where `WINDOW` clauses fall in
 the canonical order of a select statement [here](../sql/statements/select).
 
-### Box and Whisker Queries
+#### Box and Whisker Queries
 
 All aggregates can be used as windowing functions, including the complex statistical functions.
 These function implementations have been optimised for windowing,

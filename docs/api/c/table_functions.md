@@ -6,7 +6,7 @@ selected: Table Functions
 
 The table function API can be used to define a table function that can then be called from within DuckDB in the `FROM` clause of a query.
 
-## **API Reference**
+### **API Reference**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="nf"><a href="#duckdb_create_table_function">duckdb_create_table_function</a></span>();
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_table_function">duckdb_destroy_table_function</a></span>(<span class="kt">duckdb_table_function</span> *<span class="k">table_function</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_table_function_set_name">duckdb_table_function_set_name</a></span>(<span class="kt">duckdb_table_function</span> <span class="k">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);

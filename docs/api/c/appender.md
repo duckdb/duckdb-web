@@ -36,7 +36,7 @@ duckdb_appender_end_row(appender);
 duckdb_appender_destroy(&appender);
 ```
 
-## **API Reference**
+### **API Reference**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_create">duckdb_appender_create</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table</span>, <span class="kt">duckdb_appender</span> *<span class="k">out_appender</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_appender_error">duckdb_appender_error</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_appender_flush">duckdb_appender_flush</a></span>(<span class="kt">duckdb_appender</span> <span class="k">appender</span>);

@@ -4,8 +4,6 @@ title: Execute SQL
 selected: Execute SQL
 ---
 
-# How to execute SQL queries
-
 SQL queries can be executed using the `duckdb.sql` command.
 
 ```py

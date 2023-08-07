@@ -13,7 +13,7 @@ The values within those new columns are calculated using an aggregate function o
 DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting. 
 `PIVOT_WIDER` may also be used in place of the `PIVOT` keyword.
 
-## Simplified Pivot Syntax
+### Simplified Pivot Syntax
 
 The full syntax diagram is below, but the simplified `PIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
 ```sql
@@ -24,7 +24,7 @@ GROUP BY [row(s)]
 ```
 The `ON`, `USING`, and `GROUP BY` clauses are each optional, but they may not all be omitted.
 
-### Example Data
+#### Example Data
 All examples use the dataset produced by the queries below:
 ```sql
 CREATE TABLE Cities(Country VARCHAR, Name VARCHAR, Year INT, Population INT);
@@ -54,7 +54,7 @@ FROM Cities;
 | US      | New York City | 2010 | 8175       |
 | US      | New York City | 2020 | 8772       |
 
-### PIVOT ON and USING
+#### PIVOT ON and USING
 
 Use the `PIVOT` statement below to create a separate column for each year and calculate the total population in each.
 The `ON` clause specifies which column(s) to split into separate columns.
@@ -84,7 +84,7 @@ This query produces a result that is identical to the one above:
 PIVOT Cities ON Year USING FIRST(Population);
 ```
 
-### PIVOT ON, USING, and GROUP BY
+#### PIVOT ON, USING, and GROUP BY
 By default, the `PIVOT` statement retains all columns not specified in the `ON` or `USING` clauses. 
 To include only certain columns and further aggregate, specify columns in the `GROUP BY` clause. 
 This is equivalent to the rows parameter of a spreadsheet pivot table.
@@ -100,7 +100,7 @@ PIVOT Cities ON Year USING SUM(Population) GROUP BY Country;
 | US      | 8579 | 8783 | 9510 |
 
 
-### IN filter for ON clause
+#### IN filter for ON clause
 To only create a separate column for specific values within a column in the `ON` clause, use an optional `IN` expression.
 Let's say for example that we wanted to forget about the year 2020 for no particular reason...
 ```sql
@@ -113,10 +113,10 @@ PIVOT Cities ON Year IN (2000, 2010) USING SUM(Population) GROUP BY Country;
 | US      | 8579 | 8783 |
 
 
-### Multiple expressions per clause
+#### Multiple expressions per clause
 Multiple columns can be specified in the `ON` and `GROUP BY` clauses, and multiple aggregate expressions can be included in the `USING` clause.
 
-#### Multiple ON columns and ON expressions
+##### Multiple ON columns and ON expressions
 Multiple columns can be pivoted out into their own columns. 
 DuckDB will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a cartesian product).
 
@@ -149,7 +149,7 @@ PIVOT Cities on Country || '_' || Name USING SUM(Population);
 | 2020 | 1158         | 8772             | 738        |
 
 
-#### Multiple USING expressions
+##### Multiple USING expressions
 An alias may also be included for each expression in the `USING` clause. 
 It will be appended to the generated column names after an underscore (`_`).
 This makes the column naming convention much cleaner when multiple expressions are included in the `USING` clause.
@@ -165,7 +165,7 @@ PIVOT Cities ON Year USING SUM(Population) as total, MAX(Population) as max GROU
 | US      | 8579       | 8015     | 8783       | 8175     | 9510       | 8772     |
 
 
-#### Multiple GROUP BY columns
+##### Multiple GROUP BY columns
 Multiple `GROUP BY` columns may also be provided. 
 Note that column names must be used rather than column positions (1, 2, etc.), and that expressions are not supported in the `GROUP BY` clause.
 
@@ -180,7 +180,7 @@ PIVOT Cities on Year USING SUM(Population) GROUP BY Country, Name;
 | US      | New York City | 8015 | 8175 | 8772 |
 
 
-### Using PIVOT within a SELECT statement
+#### Using PIVOT within a SELECT statement
 The `PIVOT` statement may be included within a SELECT statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
 This allows for a `PIVOT` to be used alongside other SQL logic, as well as for multiple `PIVOT`s to be used in one query.
 
@@ -202,7 +202,7 @@ FROM (
 ) pivot_alias;
 ```
 
-#### Multiple Pivots
+##### Multiple Pivots
 Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined together or manipulated in other ways.
 
 For example, if two `PIVOT` statments share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
@@ -220,7 +220,7 @@ USING (Country);
 | US      | 8579 | 8783 | 9510 | NULL      | 24962         | 1910    |
 
 
-### Internals
+#### Internals
 Pivoting is implemented as a combination of SQL query re-writing and a dedicated `PhysicalPivot` operator for higher performance. 
 Each `PIVOT` is implemented as set of aggregations into lists and then the dedicated `PhysicalPivot` operator converts those lists into column names and values.
 Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
@@ -278,13 +278,13 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 | US      | New York City | 8015 | 8175 | 8772 |
 
 
-### Simplified Pivot Full Syntax Diagram
+#### Simplified Pivot Full Syntax Diagram
 Below is the full syntax diagram of the `PIVOT` statement. 
 
 <div id="rrdiagram"></div>
 
 
-## SQL Standard Pivot Syntax
+### SQL Standard Pivot Syntax
 The full syntax diagram is below, but the SQL Standard `PIVOT` syntax can be summarized as:
 ```sql
 FROM [dataset] 
@@ -302,7 +302,7 @@ If you are interested in dynamic pivoting, the simplified syntax is recommended.
 
 Note that no commas separate the expressions in the `FOR` clause, but that `value` and `GROUP BY` expressions must be comma-separated!
 
-### Examples
+#### Examples
 
 This example uses a single value expression, a single column expression, and a single row expression:
 ```sql
@@ -339,7 +339,7 @@ PIVOT (
 | Seattle       | NULL          | 0             | 564           | 1             | NULL          | 0             | 608           | 1             | NULL          | 0             | 738           | 1             |
 | New York City | NULL          | 0             | 8015          | 1             | NULL          | 0             | 8175          | 1             | NULL          | 0             | 8772          | 1             |
 
-### SQL Standard Pivot Full Syntax Diagram
+#### SQL Standard Pivot Full Syntax Diagram
 Below is the full syntax diagram of the SQL Standard version of the `PIVOT` statement. 
 
 <div id="rrdiagram2"></div>

@@ -4,9 +4,7 @@ title: S3 or GCS Parquet Import
 selected: S3 or GCS Parquet Import
 ---
 
-# How to load a Parquet file directly from S3, GCS or R2
-
-To load a Parquet file from S3, the `HTTPFS` extension is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
+To load a Parquet file from S3, GCS or R2, the `HTTPFS` extension is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;

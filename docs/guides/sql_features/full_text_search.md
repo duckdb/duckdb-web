@@ -83,7 +83,7 @@ SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
 Unlike standard indexes, full text indexes don't auto-update as the underlying data is changed, so you need to
 `PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
 
-## Note on generating the corpus table
+### Note on generating the corpus table
 
 Details are [here](https://duckdb.blogspot.com/2023/04/generating-shakespeare-corpus-for-full.html)
 - The Columns are:  line_id, play_name, line_number, speaker, text_entry.

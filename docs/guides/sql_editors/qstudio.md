@@ -10,18 +10,17 @@ qStudio bundles a DuckDB database within it's setup allowing easy creation of Du
 
 ![qStudio IDE](/images/guides/qstudio.png)
 
-# Installing qStudio
+### Installing qStudio
 
 qStudio can be downloaded free from [qStudio](https://www.timestored.com/qstudio/).
 
-
-# Create New DuckDB Database
+### Create New DuckDB Database
 
 To create a new duckdb database, go to File -> New DuckDB Database:
 
 ![qStudio IDE](/images/guides/qstudio-new-database.png)
 
-# Running Queries
+### Running Queries
 
 To open the example SQL demo bundled with qStudio go to Help -> Open DuckDB example .sql
 

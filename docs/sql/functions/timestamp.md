@@ -6,7 +6,7 @@ expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating `TIMESTAMP` values.
 
-## Timestamp Operators
+### Timestamp Operators
 The table below shows the available mathematical operators for `TIMESTAMP` types.
 
 | Operator | Description | Example | Result |
@@ -17,7 +17,7 @@ The table below shows the available mathematical operators for `TIMESTAMP` types
 
 Adding to or subtracting from [infinite values](../../sql/data_types/timestamp#special-values) produces the same infinite value.
 
-## Timestamp Functions
+### Timestamp Functions
 The table below shows the available scalar functions for `TIMESTAMP` values.
 
 | Function | Description | Example | Result |
@@ -66,7 +66,7 @@ Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
 In general, if the function needs to examine the parts of the infinite date, the result will be `NULL`.
 
-## Timestamp Table Functions
+### Timestamp Table Functions
 The table below shows the available table functions for `TIMESTAMP` types.
 
 | Function | Description | Example |

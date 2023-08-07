@@ -8,7 +8,7 @@ Default [extensions](../../extensions/overview) currently enabled in DuckDB-Wasm
 
 JSON and Excel are build-time opt-in.
 
-## Dynamic (= runtime) extension loading
+### Dynamic (= runtime) extension loading
 
 Dynamic extension loading is currently experimental, participate in the [tracking issue](https://github.com/duckdb/duckdb-wasm/issues/1202) or try it on the experimental deployment at: https://shellwip.duckdb.org.
 

@@ -7,7 +7,7 @@ expanded: Functions
 This section describes functions and operators for examining and manipulating bit values.
 Bitstrings must be of equal length when performing the bitwise operands AND, OR and XOR. When bit shifting, the original length of the string is preserved.
 
-## Bitstring Operators
+### Bitstring Operators
 The table below shows the available mathematical operators for `BIT` type.
 
 | Operator | Description | Example | Result |
@@ -20,7 +20,7 @@ The table below shows the available mathematical operators for `BIT` type.
 | `>>` | bitwise shift right | `'1001011'::BIT >> 3` | `0001001` |
 
 
-## Bitstring Functions
+### Bitstring Functions
 The table below shows the available scalar functions for `BIT` type.
 
 | Function | Description | Example | Result |
@@ -34,7 +34,7 @@ The table below shows the available scalar functions for `BIT` type.
 | `octet_length(`*`bitstring`*`)` | Returns the number of bytes in the bitstring. | `octet_length('1101011'::BIT)` | `1` |
 | `set_bit(`*`bitstring`*`, `*`index`*`, `*`new_value`*`)` | Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring. | `set_bit('0110010'::BIT, 2, 0)` | `0100010` |
 
-## Bitstring Aggregate Functions
+### Bitstring Aggregate Functions
 These aggregate functions are available for `BIT` type.
 
 | Function | Description | Example |
@@ -45,7 +45,7 @@ These aggregate functions are available for `BIT` type.
 | `bitstring_agg(arg)` |Returns a bitstring with bits set for each distinct value. | `bitstring_agg(A)` |
 | `bitstring_agg(arg, min, max)` |Returns a bitstring with bits set for each distinct value. | `bitstring_agg(A, 1, 42)` |
 
-### Bitstring Aggregation
+#### Bitstring Aggregation
 The `BITSTRING_AGG` function takes any integer type as input and returns a bitstring with bits set for each distinct value. 
 The left-most bit represents the smallest value in the column and the right-most bit the maximum value. If possible, the min and max are retrieved from the column statistics. Otherwise, it is also possible to provide the min and max values.  
   

@@ -3,15 +3,14 @@ title: Nested Functions
 layout: docu
 ---
 
-## List Functions
+### List Functions
 {% duckdb_functions function['category'] == 'list' %}
 
-## Map Functions
+### Map Functions
 {% duckdb_functions function['category'] == 'map' %}
 
-## Struct Functions
+### Struct Functions
 {% duckdb_functions function['category'] == 'struct' %}
 
-## Union Functions
+### Union Functions
 {% duckdb_functions function['category'] == 'union' %}
-

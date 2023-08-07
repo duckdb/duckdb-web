@@ -7,7 +7,7 @@ expanded: Functions
 This section describes functions and operators for examining and manipulating string values. `␣` denotes a space character.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:---|:-----|:---|:---|
 | *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` |
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
 | *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` |
@@ -83,12 +83,12 @@ This section describes functions and operators for examining and manipulating st
 | `unicode(`*`string`*`)`| Returns the unicode code of the first character of the *string* | `unicode('ü')` | `252` |
 | `upper(`*`string`*`)`| Convert *string* to upper case | `upper('Hello')` | `HELLO` |
 
+### Text Similarity Functions
 
-## Text Similarity Functions
 These functions are used to measure the similarity of two strings using various metrics.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:---|:------|:---|:---|
 | `editdist3(`*`string`*`,` *`string`*`)` | Alias of `levenshtein` for SQLite compatibility. The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `editdist3('duck','db')` | 3 |
 | `hamming(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `hamming('duck','luck')` | 1 |
 | `jaccard(`*`string`*`,` *`string`*`)` | The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaccard('duck','luck')` | 0.6 |

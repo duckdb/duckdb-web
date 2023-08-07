@@ -8,7 +8,6 @@ blurb: An interval specifies a period of time measured in units of a specific da
 
 Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or substracting them.
 
-
 | Name | Description |
 |:---|:---|
 | `INTERVAL` | Period of time |
@@ -36,7 +35,7 @@ SELECT INTERVAL '1 month 1 day';
 SELECT INTERVAL '1.5' YEARS; --WARNING! This returns 2 years!
 ```
 
-## Details
+### Details
 
 The interval class represents a period of time using three distinct components: the *month*, *day* and *microsecond*. These three components are required because there is no direct translation between them. For example, a month does not correspond to a fixed amount of days. That depends on *which month is referenced*. February has fewer days than March.
 
@@ -46,7 +45,7 @@ The division into components makes the interval class suitable for adding or sub
 SELECT DATE '2000-01-01' + INTERVAL (i) MONTH FROM range(12) t(i);
 ```
 
-## Difference Between Dates
+### Difference Between Dates
 
 If we subtract two timestamps from one another, we obtain an interval describing the difference between the timestamps with the *days and microseconds* components. For example:
 
@@ -72,7 +71,7 @@ SELECT datediff('month', TIMESTAMP '2000-01-01 11:00:00', TIMESTAMP '2000-02-01 
 └───────┘
 ```
 
-## Functions
+### Functions
 See the [Date Part Functions docs](../../sql/functions/datepart) for a list of available
 date parts for use with an `INTERVAL`.
 

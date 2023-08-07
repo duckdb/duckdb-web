@@ -4,8 +4,6 @@ title: Excel Import
 selected: Excel Import
 ---
 
-# How to load an Excel file into a table
-
 To read data from an Excel file, install and load the spatial extension, then use the `st_read` function in the `FROM` clause of a query. 
 Use the `layer` parameter to specify the Excel worksheet name.
 

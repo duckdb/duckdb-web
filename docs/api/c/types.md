@@ -4,6 +4,8 @@ title: C API - Types
 selected: Types
 ---
 
+### Strong typing
+
 DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant
 over the entire column. That is to say, a column that is labeled as an `INTEGER` column will only contain `INTEGER`
 values.
@@ -11,8 +13,6 @@ values.
 DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
 
 Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g., integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
-
-
 
 ```c
 typedef enum DUCKDB_TYPE {
@@ -67,7 +67,7 @@ The `duckdb_result_get_chunk` function can be used to read data chunks from a Du
 
 For more information about data chunks, see the [documentation on data chunks](data_chunk).
 
-## **API Reference**
+### **API Reference**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_result_get_chunk">duckdb_result_get_chunk</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">chunk_index</span>);
 <span class="kt">bool</span> <span class="nf"><a href="#duckdb_result_is_streaming">duckdb_result_is_streaming</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_result_chunk_count">duckdb_result_chunk_count</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);

@@ -188,7 +188,7 @@ SELECT * FROM read_json_auto(arrays.json, records=false);
 
 The contents of tables or the result of queries can be written directly to a JSON file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
-# read_json_auto function
+### read_json_auto function
 The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 
 ```sql

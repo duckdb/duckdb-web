@@ -29,7 +29,7 @@ SELECT current_setting('access_mode');
 RESET memory_limit;
 ```
 
-## **Configuration Reference**
+### **Configuration Reference**
 
 Below is a list of all available settings.
 

@@ -5,7 +5,7 @@ selected: Documentation/Data Types
 expanded: Data Types
 blurb: The table below shows all the built-in general-purpose data types.
 ---
-## General-Purpose Data Types
+### General-Purpose Data Types
 The table below shows all the built-in general-purpose data types. The alternatives listed in the aliases column can be used to refer to these types as well, however, note that the aliases are not part of the SQL standard and hence might not be accepted by other database engines.
 
 | Name | Aliases | Description |
@@ -33,7 +33,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `UUID` | | UUID data type |
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
-## Nested / Composite Types
+### Nested / Composite Types
 DuckDB supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Each supports different use cases and has a different structure. 
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
@@ -43,7 +43,7 @@ DuckDB supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Eac
 | [MAP](../../sql/data_types/map) | A dictionary of multiple named values, each key having the same type and each value having the same type. Keys and values can be any type and can be different types from one another. | Rows may have different keys. | map([1,2],['a','b']) | MAP(INT, VARCHAR) |
 | [UNION](../../sql/data_types/union) | A union of multiple alternative data types, storing one of them in each value at a time. A union also contains a discriminator "tag" value to inspect and access the currently set member type. | Rows may be set to different member types of the union. | union_value(num := 2) | UNION(num INT, text VARCHAR) |
 
-## Nesting
+### Nesting
 
 `LIST`s, `STRUCT`s, `MAP`s and `UNION`s can be arbitrarily nested to any depth, so long as the type rules are observed.
 
@@ -55,4 +55,4 @@ SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
 -- A list of unions
 SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num INTEGER)];
 ```
-## Links to Detailed Documentation
+### Links to Detailed Documentation

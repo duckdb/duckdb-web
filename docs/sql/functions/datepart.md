@@ -8,11 +8,11 @@ expanded: Functions
 The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types.
 The fields are specified as strings that contain the part name of the field.
 
-## Part Specifiers
+### Part Specifiers
 Below is a full list of all available date part specifiers.
 The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 
-### Usable as Date Part Specifiers and in Intervals
+#### Usable as Date Part Specifiers and in Intervals
 
 | Specifier | Description | Synonyms | Example |
 |:---|:---|:---|:---|
@@ -29,7 +29,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 | `'second'` | Seconds | `'sec'`, `'seconds'`, `'secs'`, `'s'` | 44 |
 | `'year'` | Gregorian year | `'yr'`, `'y'`, `'years'`, `'yrs'` | 2021 |
 
-### Usable in Date Part Specifiers Only
+#### Usable in Date Part Specifiers Only
 
 | Specifier | Description | Synonyms | Example |
 |:---|:---|:---|:---|
@@ -48,7 +48,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 Note that the time zone parts are all zero unless a time zone plugin such as ICU
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
 
-### Part Functions
+#### Part Functions
 There are dedicated extraction functions to get certain subfields:
 
 | Function | Description | Example | Result |

@@ -86,7 +86,7 @@ Options:
 -D driver_path: the driver file path (i.e., the path for libduckdb_odbc.so), the default is using the base script directory
 ```
 
-#### Step 4 (optional):  Configure the ODBC Driver
+#### Step 4 (optional): Configure the ODBC Driver
 
 The ODBC setup on Linux is based on files, the well-known `.odbc.ini` and `.odbcinst.ini`.
 These files can be placed at the system `/etc` directory or at the user home directory `/home/<user>` (shortcut as `~/`).

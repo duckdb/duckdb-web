@@ -6,7 +6,7 @@ selected: Documentation/SQLite Scanner
 
 The `sqlite` extension allows DuckDB to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DuckDB tables.
 
-## Loading the Extension
+### Loading the Extension
 
 In order to use the SQLite extension it must first be installed and loaded. This can be done using the following commands:
 
@@ -15,7 +15,7 @@ INSTALL sqlite;
 LOAD sqlite;
 ```
 
-## Usage
+### Usage
 
 To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
 
@@ -82,7 +82,7 @@ ORDER  BY revenue DESC
 LIMIT  5; 
 ```
 
-## Querying individual tables
+### Querying individual tables
 
 Instead of attaching, you can also query individual tables using the `sqlite_scan` function.
 
@@ -90,7 +90,7 @@ Instead of attaching, you can also query individual tables using the `sqlite_sca
 SELECT * FROM sqlite_scan('sakila.db', 'film');
 ```
 
-## Data Types
+### Data Types
 
 SQLite is a [weakly typed database system](https://www.sqlite.org/datatype3.html). As such, when storing data in a SQLite table, types are not enforced. The following is valid SQL in SQLite:
 
@@ -123,7 +123,7 @@ SET GLOBAL sqlite_all_varchar=true;
 
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
 
-## Running more than once
+### Running more than once
 
 If you want to run the `sqlite_scan` procedure more than once in the same DuckDB session, you'll need to pass in the `overwrite` flag, as shown below:
 
@@ -131,5 +131,5 @@ If you want to run the `sqlite_scan` procedure more than once in the same DuckDB
 CALL sqlite_attach('sakila.db', overwrite=true);
 ```
 
-## Extra Information
+### Extra Information
 See [the repo](https://github.com/duckdblabs/sqlite_scanner) for the source code of the extension.

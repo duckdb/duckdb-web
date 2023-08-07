@@ -5,10 +5,10 @@ selected: Documentation/Functions/Pattern Matching
 expanded: Functions
 railroad: expressions/like.js
 ---
-## Pattern Matching
+### Pattern Matching
 There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
-## LIKE
+### LIKE
 <div id="rrdiagram1"></div>
 
 The `LIKE` expression returns true if the string matches the supplied pattern. (As expected, the `NOT LIKE` expression returns false if `LIKE` returns true, and vice versa. An equivalent expression is `NOT (string LIKE pattern)`.)
@@ -59,7 +59,7 @@ There are also alternative characters that can be used as keywords in place of `
 | `NOT ILIKE` | `!~~*` |
 
 
-## SIMILAR TO
+### SIMILAR TO
 <div id="rrdiagram2"></div>
 
 The `SIMILAR TO` operator returns true or false depending on whether its pattern matches the given string. It is similar to `LIKE`, except that it interprets the pattern using a regular expression. Like `LIKE`, the `SIMILAR TO` operator succeeds only if its pattern matches the entire string; this is unlike common regular expression behavior where the pattern can match any part of the string.
@@ -83,7 +83,7 @@ There are also alternative characters that can be used as keywords in place of `
 | `SIMILAR TO` | `~` |
 | `NOT SIMILAR TO` | `!~` |
 
-## GLOB
+### GLOB
 <div id="rrdiagram3"></div>
 
 The `GLOB` operator returns true or false if the string matches the `GLOB` pattern. The `GLOB` operator is most commonly used when searching for filenames that follow a specific pattern (for example a specific file extension). Use the question mark (`?`) wildcard to match any single character, and use the asterisk (`*`) to match zero or more characters. In addition, use bracket syntax (`[ ]`) to match any single character contained within the brackets, or within the character range specified by the brackets. An exclamation mark (`!`) may be used inside the first bracket to search for a character that is not contained within the brackets. To learn more, visit the [Glob Programming Wikipedia page](https://en.wikipedia.org/wiki/Glob_(programming)).
@@ -115,7 +115,7 @@ Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 |:---|:---|
 | `GLOB` | `~~~` |
 
-### Glob function to find filenames
+#### Glob function to find filenames
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
 It accepts one parameter: the path to search (which may include glob patterns). 
 
@@ -136,7 +136,7 @@ SELECT * FROM glob('*');
 
 
 
-## Regular Expressions
+### Regular Expressions
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|

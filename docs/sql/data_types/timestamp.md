@@ -22,7 +22,7 @@ SELECT TIMESTAMP '1992-09-20 11:30:00';
 SELECT TIMESTAMP '1992-09-20 14:30:00';
 ```
 
-## Special Values
+### Special Values
 
 There are also three special date values that can be used on input:
 
@@ -43,10 +43,10 @@ SELECT '-infinity'::TIMESTAMP, 'epoch'::TIMESTAMP, 'infinity'::TIMESTAMP;
 |:----------|:-------------------|:---------|
 | -infinity | 1970-01-01 00:00:00| infinity |
 
-## Functions
+### Functions
 See [Timestamp Functions](../../sql/functions/timestamp).
 
-## Time Zones
+### Time Zones
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
 The built in ICU extension implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
@@ -86,7 +86,7 @@ ORDER BY
 
 You can also find a reference table of available time zones [here](../../sql/data_types/timezones).
 
-## Calendars
+### Calendars
 The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command.
 Note that the `require icu` step is only required if the DuckDB client does not bundle the
 ICU extension. 
@@ -106,7 +106,7 @@ A list of available calendars can be pulled from the `icu_calendar_names()` tabl
 SELECT name FROM icu_calendar_names() ORDER BY 1;
 ```
 
-## Settings
+### Settings
 The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
 They can be looked from in the `duckdb_settings()` table function:
 

@@ -3,15 +3,15 @@ layout: docu
 title: C++ API
 selected: C++
 ---
-## Installation
+### Installation
 The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
 
-## Basic API Usage
+### Basic API Usage
 DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
 
 > The standard source distribution of `libduckdb` contains an "amalgamation" of the DuckDB sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
 
-### Startup & Shutdown
+#### Startup & Shutdown
 
 To use DuckDB, you must first initialize a `DuckDB` instance using its constructor. `DuckDB()` takes as parameter the database file to read and write from. The special value `nullptr` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process). The second parameter to the `DuckDB` constructor is an optional `DBConfig` object. In `DBConfig`, you can set various database parameters, for example the read/write mode or memory limits. The `DuckDB` constructor may throw exceptions, for example if the database file is not usable.
 
@@ -23,7 +23,7 @@ DuckDB db(nullptr);
 Connection con(db);
 ```
 
-### Querying
+#### Querying
 Connections expose the `Query()` method to send a SQL query string to DuckDB from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
 
 ```c++
@@ -54,15 +54,15 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
-### Streaming Queries
+#### Streaming Queries
 
 
-### UDF API
+#### UDF API
 
 The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
 These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
 
-#### CreateScalarFunction
+##### CreateScalarFunction
 
 The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a _SELECT_ statement, for instance:
 
@@ -138,7 +138,7 @@ This function checks the template types against the SQLTypes passed as arguments
 - SQLTypeId::VARCHAR, SQLTypeId::CHAR, SQLTypeId::BLOB → string_t
 - SQLTypeId::VARBINARY → blob_t
 
-#### CreateVectorizedFunction
+##### CreateVectorizedFunction
 
 The `CreateVectorizedFunction()` methods register a vectorized UDF such as:
 

@@ -8,7 +8,7 @@ DuckDB-Wasm provides functions for querying data. Queries are run sequentially.
 
 First, a connection need to be created by calling [connect](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#connect). Then, queries can be run by calling [query](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#query) or [send](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#send).
 
-## Query Execution
+### Query Execution
 
 ```ts
 // Create a new connection
@@ -29,7 +29,7 @@ for await (const batch of await conn.send<{ v: arrow.Int }>(`
 await conn.close();
 ```
 
-## Prepared Statements
+### Prepared Statements
 
 ```ts
 // Create a new connection
@@ -48,7 +48,7 @@ await stmt.close();
 await conn.close();
 ```
 
-## Arrow Table to JSON
+### Arrow Table to JSON
 
 ```ts
 // Create a new connection
@@ -66,7 +66,7 @@ const result = arrowResult.toArray().map((row) => row.toJSON());
 await conn.close();
 ```
 
-## Export Parquet
+### Export Parquet
 
 ```ts
 // Create a new connection

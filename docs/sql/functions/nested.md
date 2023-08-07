@@ -6,7 +6,7 @@ expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating nested values. There are three nested data types: lists, structs, and maps.
 
-## List Functions
+### List Functions
 
 In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
@@ -69,7 +69,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`  | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                             | `list_resize([1,2,3], 5, 0)`             | `[1, 2, 3, 0, 0]` |
 | `array_resize(`*`list`*`, `*`size`*`[, `*`value`*`])` | Alias for `list_resize`.                                                                                                                                                        | `array_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
 
-## List Comprehension
+### List Comprehension
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql
@@ -79,7 +79,7 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 -- [HELLO, WORLD]
 ```
 
-## Struct Functions
+### Struct Functions
 
 | Function | Description                                                                                                                                                                                                                | Example | Result |
 |:---|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---|:---|
@@ -90,7 +90,7 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
 | `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                             | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
 
-## Map Functions
+### Map Functions
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
@@ -104,7 +104,7 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | `map_values(`*`map`*`)` | Return a list of all values in the map. | `map_values(map([100, 5], [42, 43]))` | `[5, 33]` |
 | `map_entries(`*`map`*`)` | Return a list of struct(k, v) for each key-value pair in the map. | `map_entries(map([100, 5], [42, 43]))` | `[{'k': 100, 'v': 42}, {'k': 5, 'v': 43}]` |
 
-## Union Functions
+### Union Functions
 
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
@@ -113,7 +113,7 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | `union_value(`*`tag := any`*`)` | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')` | `'hello'::UNION(k VARCHAR)`| 
 | `union_tag(`*`union`*`)` | Retrieve the currently selected tag of the union as an [Enum](../../sql/data_types/enum). | `union_tag(union_value(k := 'foo'))`  | `'k'` |
 
-## Range Functions
+### Range Functions
 
 The functions *`range`* and *`generate_series`* create a list of values in the range between `start` and `stop`.
 The `start` parameter is inclusive.
@@ -165,7 +165,7 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 └─────────────────────┘
 ```
 
-## List Aggregates
+### List Aggregates
 
 The function `list_aggregate` allows the execution of arbitrary existing aggregate functions on the elements of a list. Its first argument is the list (column), its second argument is the aggregate function name, e.g., `min`, `histogram` or `sum`.
 
@@ -198,7 +198,7 @@ SELECT list_last([[1, 2], [NULL], [2, 10, 3]]);
 -- [2, 10, 3]
 ```
 
-### array_to_string
+#### array_to_string
 
 Concatenates list/array elements using an optional delimiter.
 ```sql
@@ -210,7 +210,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 -- 1-2-3
 ```
 
-## Sorting Lists
+### Sorting Lists
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether NULL values should be moved to the beginning or to the end of the list.
 
@@ -249,7 +249,7 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
 [3, 2, 1, NULL]
 ```
 
-## Lambda Functions
+### Lambda Functions
 
 `(parameter1, parameter2, ...) -> expression`. If the lambda function has only one parameter, then the brackets can be omitted. The parameters can have any names.
 
@@ -259,7 +259,7 @@ duck -> CONTAINS(CONCAT(duck, 'DB'), 'duck')
 (x, y) -> x + y
 ```
 
-### Transform
+#### Transform
 
 `list_transform(list, lambda)`
 
@@ -282,7 +282,7 @@ SELECT list_transform([5, NULL, 6], x -> COALESCE(x, 0) + 1)
 [6, 1, 7]
 ```
 
-### Filter
+#### Filter
 
 `list_filter(list, lambda)`
 
@@ -318,7 +318,7 @@ SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * 
 [0, 4, 16]
 ```
 
-## Flatten
+### Flatten
 
 The flatten function is a scalar function that converts a list of lists into a single list by concatenating each sub-list together.
 Note that this only flattens one level at a time, not all levels of sub-lists. 
@@ -384,7 +384,7 @@ SELECT flatten([[NULL],[NULL]]);
 [NULL, NULL]
 ```
 
-## `generate_subscripts`
+### `generate_subscripts`
 
 The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
 
@@ -402,7 +402,7 @@ SELECT generate_subscripts([4,5,6], 1) AS i;
 └───┘
 ```
 
-## Related Functions
+### Related Functions
 
 There are also [aggregate functions](/docs/sql/aggregates) `list` and `histogram` that produces lists and lists of structs.
 [UNNEST](/docs/sql/query_syntax/unnest) is used to unnest a list by one level.

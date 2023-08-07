@@ -11,7 +11,7 @@ If you must use insert statements to load data in a loop, avoid executing the st
  
 > If you absolutely must use insert statements in a loop to load data, wrap them in calls to `BEGIN TRANSACTION` and `COMMIT`.
 
-## Syntax
+### Syntax
 An example of using `INSERT INTO` to load data in a table is as follows:
 
 ```sql

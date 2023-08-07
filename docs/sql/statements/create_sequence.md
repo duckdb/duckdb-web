@@ -48,7 +48,7 @@ If a schema name is given then the sequence is created in the specified schema. 
 
 After a sequence is created, you use the function `nextval` to operate on the sequence.
 
-## Parameters
+### Parameters
 
 | Name | Description |
 |:---|:---|

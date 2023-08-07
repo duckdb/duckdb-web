@@ -5,7 +5,7 @@ selected: Documentation/SQL/Query Syntax/UNNEST
 expanded: SQL
 ---
 
-## Examples
+### Examples
 ```sql
 -- unnest a list, generating 3 rows (1, 2, 3)
 SELECT UNNEST([1, 2, 3]);
@@ -17,7 +17,7 @@ SELECT UNNEST([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := True);
 
 The `UNNEST` function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. `UNNEST` with the `recursive` parameter will unnest lists and structs of multiple levels.
 
-### Unnesting Lists
+#### Unnesting Lists
 
 ```sql
 -- unnest a list, generating 3 rows (1, 2, 3)
@@ -38,7 +38,7 @@ SELECT UNNEST(NULL);
 
 An empty list and a `NULL` list will both unnest to zero elements.
 
-### Unnesting Structs
+#### Unnesting Structs
 
 ```sql
 -- unnesting a struct, generating two columns (a, b)
@@ -49,7 +49,7 @@ SELECT UNNEST({'a': 42, 'b': {'x': 84}});
 
 `UNNEST` on a struct will emit one column per entry in the struct.
 
-### Recursive Unnest
+#### Recursive Unnest
 
 ```sql
 -- unnesting a list of lists recursively, generating 5 rows (1, 2, 3, 4, 5)

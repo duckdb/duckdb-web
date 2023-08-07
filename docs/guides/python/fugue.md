@@ -14,7 +14,7 @@ There are three main use cases for FugueSQL with DuckDB:
 
 For any questions, see the [FugueSQL](https://fugue-tutorials.readthedocs.io/tutorials/quick_look/ten_minutes_sql.html#) tutorials or message in the [Fugue Slack](http://slack.fugue.ai/). You can also follow along with [this Collab Notebook](https://colab.research.google.com/drive/10J84_Ydq6NdYUqOOSidN495ERfwZ6N4_?usp=sharing). 
 
-# Installation
+### Installation
 
 ```python
 pip install -U 'fugue[duckdb]'
@@ -22,7 +22,7 @@ pip install -U 'fugue[duckdb]'
 
 This will install DuckDB and Fugue together.
 
-# Simplified SQL Syntax 
+### Simplified SQL Syntax 
 
 Fugue is compatible with standard SQL, but also extends it with additional keywords and syntax. For example, the `LOAD` and `SAVE` keywords can be used to load and save files, and the `=` operator can be used for intermediate tables. The code below shows an example.
 
@@ -53,7 +53,7 @@ For other available keywords, check the [SQL Operators](https://fugue-tutorials.
 
 There is also a [Jupyter extension](https://github.com/fugue-project/fugue-jupyter) for FugueSQL to be used inside a notebook with syntax highlighting. To use it with DuckDB, simply use `%%fsql duckdb` as the cell magic.
 
-# Running Python/Pandas Functions
+### Running Python/Pandas Functions
 
 There will be operations that Python or Pandas can express more succinctly than SQL. For example, we can use the Pandas `cumsum()` method to get the cumulative sum of a column. Annotated Python or Pandas code can be invoked using the `TRANSFORM` keyword. In the example below, a Python function is defined, and then invoked in the FugueSQL query.
 
@@ -84,7 +84,7 @@ The `fugue_sql()` function automatically returns the last DataFrame of the query
 
 Because we used the `"duckdb"` engine, the output of the query will be a DuckDB DataFrame. It can be converted to Pandas by using `as_pandas()`. Also notice FugueSQL can handle multiple `SELECT` statements in one query.
 
-# Distributing with SparkSQL
+### Distributing with SparkSQL
 
 One of the features of Fugue is that the same code will be able to run on top of Spark and Dask, just by changing the execution engine. This allows users to prototype locally with DuckDB on smaller data, and then bring the execution to a Spark cluster when ready to execute on the full-sized data. Developing on Spark can be cumbersome even if using the local version of Spark. DuckDB will significantly speed up iterations because of its fast execution.
 

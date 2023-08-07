@@ -240,5 +240,5 @@ ORDER BY length(path), path;
 └───────────┴─────────┴───────────┘
 ```
 
-## Common Table Expressions
+### Common Table Expressions
 <div id="rrdiagram"></div>

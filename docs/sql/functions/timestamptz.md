@@ -15,7 +15,7 @@ such as the ICU extension that ships with DuckDB.
 In the examples below, the current time zone is presumed to be America/Los_Angeles
 using the Gregorian calendar.
 
-## Built-in Timestamp With Time Zone Functions
+### Built-in Timestamp With Time Zone Functions
 
 The table below shows the available scalar functions for `TIMESTAMP WITH TIME ZONE` values.
 Since these functions do not involve binning or display,
@@ -32,7 +32,7 @@ they are always available.
 | `now()` | Current date and time (start of current transaction) | `now()` | `2022-10-08 12:44:46.122-07`|
 | `transaction_timestamp()` | Current date and time (start of current transaction) | `transaction_timestamp()` | `2022-10-08 12:44:46.122-07`|
 
-## Timestamp With Time Zone Strings
+### Timestamp With Time Zone Strings
 With no time zone extension loaded, `TIMESTAMPTZ` values will be cast to and from strings
 using offset notation.
 This will let you specify an instant correctly without access to time zone information.
@@ -51,7 +51,7 @@ select '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
 -- 2022-10-08 04:13:34-07
 ```
 
-## ICU Timestamp With Time Zone Operators
+### ICU Timestamp With Time Zone Operators
 The table below shows the available mathematical operators for `TIMESTAMP WITH TIME ZONE` values
 provided by the ICU extension.
 
@@ -63,7 +63,7 @@ provided by the ICU extension.
 
 Adding to or subtracting from [infinite values](../../sql/data_types/timestamp#special-values) produces the same infinite value.
 
-## ICU Timestamp With Time Zone Functions
+### ICU Timestamp With Time Zone Functions
 The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME ZONE` values.
 
 | Function | Description | Example | Result |
@@ -96,7 +96,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
 
-## ICU Timestamp Table Functions
+### ICU Timestamp Table Functions
 The table below shows the available table functions for `TIMESTAMP WITH TIME ZONE` types.
 
 | Function | Description | Example |
@@ -106,7 +106,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 
 Infinite values are not allowed as table function bounds.
 
-## ICU Timestamp Without Time Zone Functions
+### ICU Timestamp Without Time Zone Functions
 The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
 These functions assume that the `TIMESTAMP` is a "local timestamp".
 
@@ -123,7 +123,7 @@ Often the same functionality can be implemented more reliably using the `struct`
 | `timezone(`*`text`*`, `*`timestamp`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in GMT to construct a timestamp in the given time zone. Effectively, the argument is a "local" time. | `timezone('America/Denver', TIMESTAMP '2001-02-16 20:38:40')` | `2001-02-16 19:38:40-08` |
 | `timezone(`*`text`*`, `*`timestamptz`*`)` | Use the [date parts](../../sql/functions/datepart) of the timestamp in the given time zone to construct a timestamp. Effectively, the result is a "local" time. | `timezone('America/Denver', TIMESTAMPTZ '2001-02-16 20:38:40-05')` | `2001-02-16 18:38:40` |
 
-### At Time Zone
+#### At Time Zone
 
 The `AT TIME ZONE` syntax is syntactic sugar for the (two argument) `timezone` function listed above:
 
@@ -134,7 +134,7 @@ timestamp with time zone '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver'
 -- 2001-02-16 18:38:40
 ```
 
-## Infinities
+### Infinities
 
 Functions applied to infinite dates will either return the same infinite dates
 (e.g, `greatest`) or `NULL` (e.g., `date_part`) depending on what "makes sense".
@@ -142,7 +142,7 @@ In general, if the function needs to examine the parts of the infinite temporal 
 the result will be `NULL`.
 
 
-## Calendars
+### Calendars
 
 The ICU extension also supports [non-Gregorian calendars](../../sql/data_types/timestamp#calendars).
 If such a calendar is current, then the display and binning operations will use that calendar.

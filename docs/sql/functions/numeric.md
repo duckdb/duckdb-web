@@ -1,10 +1,10 @@
 ---
 layout: docu
-title: Numeric Functions
-selected: Documentation/Functions/Numeric Functions
+title: Numeric Operators and Functions
+selected: Documentation/Functions/Numeric Operators and Functions
 expanded: Functions
 ---
-## Numeric Operators
+### Numeric Operators
 The table below shows the available mathematical operators for numeric types.
 
 | Operator | Description | Example | Result |
@@ -31,7 +31,7 @@ When both operands are integers, `/` performs floating points division (`5 / 2 =
 The modulo, bitwise, and negation and factorial operators work only on integral data types,
 whereas the others are available for all numeric data types.
 
-## Numeric Functions
+### Numeric Functions
 The table below shows the available mathematical functions.
 
 | Function | Description | Example | Result |

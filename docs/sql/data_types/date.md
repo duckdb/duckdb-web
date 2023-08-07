@@ -5,6 +5,7 @@ selected: Documentation/Data Types/Date
 expanded: Data Types
 blurb: A date specifies a combination of year, month and day.
 ---
+
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
 | `DATE` |         | calendar date (year, month day) |
@@ -16,7 +17,7 @@ A date specifies a combination of year, month and day. DuckDB follows the SQL st
 SELECT DATE '1992-09-20';
 ```
 
-## Special Values
+### Special Values
 
 There are also three special date values that can be used on input:
 
@@ -37,5 +38,5 @@ SELECT '-infinity'::DATE, 'epoch'::DATE, 'infinity'::DATE;
 |:----------|:-----------|:---------|
 | -infinity | 1970-01-01 | infinity |
 
-## Functions
+### Functions
 See [Date Functions](../../sql/functions/date).
