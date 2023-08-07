@@ -19,11 +19,11 @@ Dialect detection works by attempting to parse the samples using the set of cons
 
 The following dialects are considered for automatic dialect detection.
 
-| Parameters | Considered Values |
-|------------|-------------------|
-| delim      | , \| ; \t         |
-| quote      | " ' (empty)       |
-| escape     | " ' \\ (empty)    |
+| Parameters | Considered Values   |
+|------------|---------------------|
+| delim      | `,` `|` `;` `\t`    |
+| quote      | `"` `'` (empty)     |
+| escape     | `"` `'` `\` (empty) |
 
 
 Consider the following example file.
@@ -86,23 +86,23 @@ The system considers the following formats for dates (`dateformat`). Higher entr
 
 | dateformat |
 |------------|
-| ISO 8601   |
-| %y-%m-%d   |
-| %Y-%m-%d   |
-| %d-%m-%y   |
-| %d-%m-%Y   |
-| %m-%d-%y   |
-| %m-%d-%Y   |
+| `ISO 8601` |
+| `%y-%m-%d` |
+| `%Y-%m-%d` |
+| `%d-%m-%y` |
+| `%d-%m-%Y` |
+| `%m-%d-%y` |
+| `%m-%d-%Y` |
 
 The system considers the following formats for timestamps (`timestampformat`). Higher entries are chosen over lower entries in case of ambiguities.
 
-|   timestampformat    |
-|----------------------|
-| ISO 8601             |
-| %y-%m-%d %H:%M:%S    |
-| %Y-%m-%d %H:%M:%S    |
-| %d-%m-%y %H:%M:%S    |
-| %d-%m-%Y %H:%M:%S    |
-| %m-%d-%y %I:%M:%S %p |
-| %m-%d-%Y %I:%M:%S %p |
-| %Y-%m-%d %H:%M:%S.%f |
+|   timestampformat      |
+|------------------------|
+| `ISO 8601`             |
+| `%y-%m-%d %H:%M:%S`    |
+| `%Y-%m-%d %H:%M:%S`    |
+| `%d-%m-%y %H:%M:%S`    |
+| `%d-%m-%Y %H:%M:%S`    |
+| `%m-%d-%y %I:%M:%S %p` |
+| `%m-%d-%Y %I:%M:%S %p` |
+| `%Y-%m-%d %H:%M:%S.%f` |

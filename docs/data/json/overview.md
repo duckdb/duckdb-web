@@ -160,11 +160,11 @@ When `records=false`, the JSON extension will not unpack the top-level objects, 
 SELECT * FROM read_json_auto(records.json, records=false);
 ```
 
-|               json               |
-|----------------------------------|
-| {'key1': value1, 'key2': value1} |
-| {'key1': value2, 'key2': value2} |
-| {'key1': value3, 'key2': value3} |
+|                json                |
+|------------------------------------|
+| `{'key1': value1, 'key2': value1}` |
+| `{'key1': value2, 'key2': value2}` |
+| `{'key1': value3, 'key2': value3}` |
 
 This is especially useful if we have non-object JSON, for example:
 ```json
@@ -176,11 +176,11 @@ This is especially useful if we have non-object JSON, for example:
 SELECT * FROM read_json_auto(arrays.json, records=false);
 ```
 
-|   json    |
-|-----------|
-| [1, 2, 3] |
-| [4, 5, 6] |
-| [7, 8, 9] |
+|     json    |
+|-------------|
+| `[1, 2, 3]` |
+| `[4, 5, 6]` |
+| `[7, 8, 9]` |
 
 ### Writing
 

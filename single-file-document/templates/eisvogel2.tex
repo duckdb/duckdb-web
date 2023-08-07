@@ -129,6 +129,23 @@ $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
 \usepackage{amsmath,amssymb}
+\usepackage{xltxtra}
+\usepackage{newunicodechar}
+
+\newcommand{\xelatexemoji}[1]{\raisebox{-0.15em}{\includegraphics[height=1em]{emojis/#1}}}
+
+\newunicodechar{❌}{\xelatexemoji{274c}}
+\newunicodechar{✅}{\xelatexemoji{2705}}
+\newunicodechar{🔄}{\xelatexemoji{1f504}}
+\newunicodechar{🦆}{\xelatexemoji{1f986}}
+\newunicodechar{🧭}{\xelatexemoji{1f9ed}}
+\newunicodechar{🤦}{\xelatexemoji{1f926}}
+\newunicodechar{◗}{\xelatexemoji{25d7}}
+\newunicodechar{⚫}{\xelatexemoji{26ab}}
+\newunicodechar{🏼}{\xelatexemoji{1f3fc}}
+\newunicodechar{🏽}{\xelatexemoji{1f3fd}}
+\newunicodechar{␣}{\textvisiblespace}
+
 $if(linestretch)$
 \usepackage{setspace}
 $else$
@@ -1008,6 +1025,8 @@ $include-before$
 
 $endfor$
 $if(toc)$
+% add ToC to ToC
+\setuptoc{toc}{totoc}
 $if(toc-title)$
 \renewcommand*\contentsname{$toc-title$}
 $endif$

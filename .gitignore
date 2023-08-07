@@ -82,7 +82,6 @@ build/
 *.lo
 *.la
 *~
-*.pdf
 !pdf/*.pdf
 *.swp
 a.out
@@ -308,21 +307,3 @@ docs/sql/functions/descriptions.txt
 venv/
 node_modules/
 vendor/
-
-## Core latex/pdflatex auxiliary files:
-*.aux
-*.lof
-*.log
-*.lot
-*.fls
-*.out
-*.toc
-*.fmt
-*.fot
-*.cb
-*.cb2
-.*.lb
-*.fdb_latexmk
-
-# generated document files
-duckdb-docs.*
