@@ -47,20 +47,11 @@ If you wish to connect to a database file,
 you will need to make sure the file was created with a file-compatible version of DuckDB.
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
-* MacOS Desktop.
-  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094935) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc-osx-universal.jar`.
-  * Copy it to the `~/Library/Tableau/Drivers/` folder.
-* Windows Desktop.
-  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094936) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc.jar`.
-  * Copy it to the `C:\Program Files\Tableau\Drivers` directory. 
-* Linux Server.
-  * Download the DuckDB JDBC driver appropriate for your architecture, either
-    * [AMD64](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094934) or
-    * [AARCH64](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094932).
-  * Copy it to the `/opt/tableau/tableau_driver/jdbc`.
-* Windows Server.
-  * [Download](https://github.com/duckdb/duckdb/suites/14840102996/artifacts/845094936) the DuckDB JDBC driver. This will be a file called `duckdb_jdbc.jar`.
-  * Copy it to the `C:\Program Files\Tableau\Drivers` directory. 
+Download the [snapshot jar](https://oss.sonatype.org/service/local/repositories/snapshots/content/org/duckdb/duckdb_jdbc/0.9.0-SNAPSHOT/duckdb_jdbc-0.9.0-20230806.020824-235.jar)
+
+* MacOS: Copy it to `~/Library/Tableau/Drivers/`
+* Windows: Copy it to `C:\Program Files\Tableau\Drivers`
+* Linux: Copy it to `/opt/tableau/tableau_driver/jdbc`.
 
 # Using the Postgres Dialect
 
