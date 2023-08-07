@@ -87,6 +87,7 @@ module Jekyll
       Jekyll.logger.info(@tag_name, "Loaded #{functions.size} functions")
       filtered = functions.filter { |function| this.select_function(filter_expression, function) }.sort_by { |f| f['name'] }
       Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
+      throw "No functions found for filter: #{filter_expression}" if filtered.empty?
 
       puts generate_index(page, filtered)
 
