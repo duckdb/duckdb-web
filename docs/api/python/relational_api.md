@@ -16,7 +16,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(10000000000) tbl(id)');
 rel.show()
 ```
-```
+
+```text
 ┌────────────────────────┐
 │           id           │
 │         int64          │
@@ -73,7 +74,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 duckdb.sql('SELECT SUM(id) FROM rel').show()
 ```
-```
+
+```text
 ┌──────────────┐
 │   sum(id)    │
 │    int128    │
@@ -93,7 +95,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.aggregate('id % 2 AS g, sum(id), min(id), max(id)')
 ```
-```
+
+```text
 ┌───────┬──────────────┬─────────┬─────────┐
 │   g   │   sum(id)    │ min(id) │ max(id) │
 │ int64 │    int128    │  int64  │  int64  │
@@ -112,7 +115,8 @@ r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
 r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
 r1.except_(r2).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -134,7 +138,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.filter('id > 5').limit(3).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -154,7 +159,8 @@ r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
 r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
 r1.intersect(r2).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -176,7 +182,8 @@ r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)').set_alias('r1');
 r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)').set_alias('r2');
 r1.join(r2, 'r1.id + 10 = r2.id').show()
 ```
-```
+
+```text
 ┌───────┬───────┐
 │  id   │  id   │
 │ int64 │ int64 │
@@ -198,7 +205,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.limit(3).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -218,7 +226,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.order('id DESC').limit(3).show()
 ```
-```
+
+```text
 ┌────────┐
 │   id   │
 │ int64  │
@@ -238,7 +247,8 @@ import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.project('id + 10 AS id_plus_ten').limit(3).show()
 ```
-```
+
+```text
 ┌─────────────┐
 │ id_plus_ten │
 │    int64    │
@@ -258,7 +268,8 @@ r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
 r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)');
 r1.union(r2).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -275,7 +286,6 @@ r1.union(r2).show()
 │    14 │
 └───────┘
 ```
-
 
 #### Result Output
 The result of relations can be converted to various types of Python structures, see the [result conversion page](result_conversion) for more information.

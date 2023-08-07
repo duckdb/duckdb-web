@@ -32,6 +32,7 @@ COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
 ### JSON Loading
+
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
@@ -39,7 +40,7 @@ The DuckDB JSON reader can automatically infer which configuration flags to use 
 
 Below are parameters that can be passed in to the JSON reader.
 
-# Parameters
+#### Parameters
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
@@ -71,6 +72,7 @@ SELECT * FROM filename.json;
 ```
 
 #### Format: newline_delimited
+
 With `format='newline_delimited'` newline-delimited JSON can be parsed.
 Each line is a JSON.
 
@@ -229,7 +231,7 @@ FROM read_json_auto('todos.json',
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
 
-## COPY Statement
+### COPY Statement
 The `COPY` statement can be used to load data from a JSON file into a table. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the JSON file to load from plus any configuration options separately.
 
 ```sql

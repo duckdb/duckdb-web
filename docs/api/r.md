@@ -3,10 +3,13 @@ layout: docu
 title: R API
 selected: Client APIs
 ---
+
 ## Installation
+
 The DuckDB R API can be installed using `install.packages`. Please see the [installation page](../installation?environment=r) for details.
 
 ## Basic API Usage
+
 The standard DuckDB R API implements the [DBI interface](https://CRAN.R-project.org/package=DBI) for R. If you are not familiar with DBI yet, see [here for an introduction](https://solutions.rstudio.com/db/r-packages/DBI/).
 
 ### Startup & Shutdown
@@ -41,7 +44,6 @@ print(res)
 # 2 hammer  42.2     2
 ```
 
-
 DuckDB also supports prepared statements in the R API with the `dbExecute` and `dbGetQuery` methods. Here is an example:
 
 ```R
@@ -64,6 +66,7 @@ print(res)
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
+
 To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DuckDB and populates it with the data frame contents. For example:
 ```R
 dbWriteTable(con, "iris_table", iris)
@@ -86,7 +89,8 @@ print(res)
 
 Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
-## dbplyr 
+## dbplyr
+
 DuckDB also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
 
 ```R

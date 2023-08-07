@@ -19,7 +19,7 @@ Hive partitionining is a [partitioning strategy](https://en.wikipedia.org/wiki/P
 
 Below is an example of a hive partitioned file hierarchy. The files are partitioned on two keys (`year` and `month`).
 
-```
+```command
 orders
 ├── year=2021
 │    ├── month=1
@@ -54,7 +54,7 @@ WHERE year=2022 AND month=11;
 
 When executing this query, only the following files will be read:
 
-```
+```command
 orders
 └── year=2022
      └── month=11
@@ -73,7 +73,6 @@ FROM read_parquet('dir/**/*.parquet', hive_partitioning=1, hive_types={'release'
 ```
 
 `hive_types` will be autodetected for the following types: `DATE`, `TIMESTAMP` and `BIGINT`. To switch off the autodetection, the flag `hive_types_autocast=0` can be set.
-
 
 #### Writing Partitioned Files
 

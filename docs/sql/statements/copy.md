@@ -6,7 +6,7 @@ expanded: SQL
 railroad: statements/copy.js
 ---
 
-# Examples
+### Examples
 
 ```sql
 -- read a CSV file into the lineitem table - using auto-detected options
@@ -27,7 +27,7 @@ COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRES
 `COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
 
 
-# Copy From
+### Copy From
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
 If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns
@@ -51,12 +51,10 @@ COPY lineitem FROM 'lineitem.ndjson' ( FORMAT JSON );
 COPY lineitem FROM 'lineitem.json' ( FORMAT JSON, ARRAY TRUE );
 ```
 
-## Copy From Syntax
+#### Copy From Syntax
 <div id="rrdiagram1"></div>
 
-
-
-# Copy To
+### Copy To
 `COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
@@ -76,10 +74,10 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.ndjson' (FORMAT JSON);
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
 ```
 
-## Copy To Syntax
+#### Copy To Syntax
 <div id="rrdiagram2"></div>
 
-## Copy Options
+#### Copy Options
 
 Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
 
@@ -95,7 +93,7 @@ The below options are applicable to all formats written with `COPY`.
 | `per_thread_output` | Generate one file per thread, rather than one file in total. This allows for faster parallel writing. | bool | false |
 | `use_tmp_file` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | bool | auto |
 
-## CSV Options
+### CSV Options
 
 The below options are applicable when writing `CSV` files.
 
@@ -112,7 +110,7 @@ The below options are applicable when writing `CSV` files.
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 
 
-## Parquet Options
+### Parquet Options
 
 The below options are applicable when writing `Parquet` files.
 
@@ -148,8 +146,7 @@ COPY (SELECT map {'key1' : 128, 'key2': 256} my_map)
 TO 'my.parquet' (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}});
 ```
 
-
-## JSON Options
+### JSON Options
 
 The below options are applicable when writing `JSON` files.
 

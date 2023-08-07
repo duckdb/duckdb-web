@@ -6,14 +6,14 @@ selected: DuckDB with Polars
 
 [Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. DuckDB can read Polars DataFrames and convert query results to Polars DataFrames. It does this internally using the efficient Apache Arrow integration. Note that the `pyarrow` library must be installed for the integration to work.
 
-# Installation
+### Installation
 
 ```python
 pip install duckdb
 pip install -U 'polars[pyarrow]'
 ```
 
-# Polars to DuckDB
+### Polars to DuckDB
 DuckDB can natively query Polars DataFrames by referring to the name of Polars DataFrames as they exist in the current scope.
 
 ```python
@@ -31,7 +31,7 @@ df = pl.DataFrame(
 duckdb.sql('SELECT * FROM df').show()
 ```
 
-# DuckDB to Polars
+### DuckDB to Polars
 DuckDB can output results as Polars DataFrames using the `.pl()` result-conversion method.
 
 ```python

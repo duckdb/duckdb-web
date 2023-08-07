@@ -20,7 +20,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_extract(`*`list`*`, `*`index`*`)`          | Alias for `list_extract`.                                                                                                                                                           | `array_extract(l, 3)`                    | `6`               |
 | *`list`*`[`*`begin`*`:`*`end`*`]`                 | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s.                                                                             | `l[2:3]`                                 | `[5, 6]`          |
 | `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`  | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted.                                                       | `list_slice(l, 2, NULL)`                 | `[5, 6]`          |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice.                                                                                                                                                               | `array_slice(l, 2, NULL)`                | `[5, 6]`          |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for `list_slice`.                                                                                                                                                             | `array_slice(l, 2, NULL)`                | `[5, 6]`          |
 | `array_pop_front(`*`list`*`)`                     | Returns the list without the first element.                                                                                                                                         | `array_pop_front(l)`                     | `[5, 6]`          |
 | `array_pop_back(`*`list`*`)`                      | Returns the list without the last element.                                                                                                                                          | `array_pop_back(l)`                      | `[4, 5]`          |
 | `list_value(`*`any`*`, ...)`                      | Create a `LIST` containing the argument values.                                                                                                                                     | `list_value(4, 5, 6)`                    | `[4, 5, 6]`       |
@@ -152,9 +152,11 @@ SELECT generate_series(2, 5, 3);
 
 Date ranges are also supported:
 
-```
+```sql
 SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
+```
 
+```command
 ┌─────────────────────┐
 │        range        │
 ├─────────────────────┤
@@ -250,7 +252,8 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
 ## Lambda Functions
 
 `(parameter1, parameter2, ...) -> expression`. If the lambda function has only one parameter, then the brackets can be omitted. The parameters can have any names.
-```
+
+```sql
 param -> param > 1
 duck -> CONTAINS(CONCAT(duck, 'DB'), 'duck')
 (x, y) -> x + y
@@ -319,6 +322,7 @@ SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * 
 
 The flatten function is a scalar function that converts a list of lists into a single list by concatenating each sub-list together.
 Note that this only flattens one level at a time, not all levels of sub-lists. 
+
 ```sql
 -- Convert a list of lists into a single list
 SELECT 
@@ -387,7 +391,8 @@ The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along 
 ```sql
 SELECT generate_subscripts([4,5,6], 1) AS i;
 ```
-```
+
+```command
 ┌───┐
 │ i │
 ├───┤

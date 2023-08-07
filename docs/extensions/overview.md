@@ -24,6 +24,7 @@ To load unsigned extensions using the CLI, you'll need to pass the `-unsigned` f
 ## Listing extensions
 
 You can check the list of core and installed extensions with the following query:
+
 ```sql
 select * from duckdb_extensions();
 ```
@@ -57,11 +58,13 @@ DuckDB extensions are stored in public S3 buckets, but the directory structure o
 As a result, a direct URL to the file must be used. 
 To directly download an extension file, use the following format:  
 
-```
+```text
 https://extensions.duckdb.org/v{release_version_number}/{platform_name}/{extension_name}.duckdb_extension.gz
 ```
+
 For example:
-```
+
+```text
 https://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
 ```
 
@@ -92,11 +95,11 @@ with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
 
 After unzipping, the install and load commands can be used with the path to the .duckdb_extension file. 
 For example, if the file was unzipped into the same directory as where DuckDB is being executed:
+
 ```sql
 install 'httpfs.duckdb_extension';
 load 'httpfs.duckdb_extension';
 ```
-
 
 ## Pages in this Section
 

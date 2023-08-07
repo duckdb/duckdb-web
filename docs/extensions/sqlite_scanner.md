@@ -20,6 +20,7 @@ LOAD sqlite;
 To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
 
 For example with the bundled `sakila.db` file:
+
 ```sql
 ATTACH 'sakila.db' (TYPE sqlite);
 -- or
@@ -31,7 +32,8 @@ The tables in the file are registered as views in DuckDB, you can list them as f
 ```sql
 PRAGMA show_tables;
 ```
-```
+
+```command
 ┌────────────────────────┐
 │          name          │
 ├────────────────────────┤

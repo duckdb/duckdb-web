@@ -5,11 +5,12 @@ selected: Documentation/Full Text Search
 ---
 Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
 
-# API
+### API
 The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
 
-### PRAGMA create_fts_index
-```
+#### PRAGMA create_fts_index
+
+```python
 create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwords='english',
                  ignore='(\\.|[^a-z])+', strip_accents=1, lower=1, overwrite=0)
 ```
@@ -29,8 +30,9 @@ create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwor
 
 This `PRAGMA` builds the index under a newly created schema. The schema will be named after the input table: if an index is created on table `'main.table_name'`, then the schema will be named `'fts_main_table_name'`.
 
-### PRAGMA drop_fts_index
-```
+#### PRAGMA drop_fts_index
+
+```python
 drop_fts_index(input_table)
 ```
 
@@ -40,8 +42,9 @@ Drops a FTS index for the specified table.
 |:--|:--|:--|
 |input_table|`VARCHAR`|Qualified name of input table e.g., `'table_name'` or `'main.table_name'`|
 
-### match_bm25
-```
+#### match_bm25
+
+```python
 match_bm25(input_id, query_string, fields := NULL, k := 1.2, b:= 0.75, conjunctive := 0)
 ```
 When an index is built, this retrieval macro is created that can be used to search the index.
@@ -55,10 +58,12 @@ When an index is built, this retrieval macro is created that can be used to sear
 |b|`DOUBLE`|Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75`|
 |conjunctive|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
 
-### stem
-```
+#### stem
+
+```python
 stem(input_string, stemmer)
 ```
+
 Reduces words to their base. Used internally by the extension.
 
 | Name | Type | Description |
@@ -67,7 +72,7 @@ Reduces words to their base. Used internally by the extension.
 |stemmer|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
 
 
-# Example Usage
+### Example Usage
 
 ```sql
 -- create a table and fill it with text data
@@ -92,6 +97,6 @@ WHERE score IS NOT NULL
 ORDER BY score DESC;
 ```
 
-# Caveats
+### Caveats
 
 Note that the FTS index will not update automatically when input table changes. A workaround of this limitation can be recreating the index to refresh.

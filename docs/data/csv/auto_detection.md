@@ -29,7 +29,8 @@ The following dialects are considered for automatic dialect detection.
 Consider the following example file.
 
 **flights.csv**
-```
+
+```csv
 FlightDate|UniqueCarrier|OriginCityName|DestCityName
 1988-01-01|AA|New York, NY|Los Angeles, CA
 1988-01-02|AA|New York, NY|Los Angeles, CA

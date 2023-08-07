@@ -4,10 +4,9 @@ title: Export To Apache Arrow
 selected: Export To Apache Arrow
 ---
 
-# How to export data to Apache Arrow
 All results of a query can be exported to an [Apache Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) using the `arrow` function. Alternatively, results can be returned as a [RecordBatchReader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) using the `fetch_record_batch` function and results can be read one batch at a time. In addition, relations built using DuckDB's [Relational API](../../guides/python/relational_api_pandas) can also be exported.
 
-## Export to an Arrow Table
+### Export to an Arrow Table
 ```py
 import duckdb
 import pyarrow as pa
@@ -19,7 +18,7 @@ my_arrow_table = pa.Table.from_pydict({'i':[1,2,3,4],
 results = duckdb.sql("SELECT * FROM my_arrow_table").arrow()
 ```
 
-## Export as a RecordBatchReader
+### Export as a RecordBatchReader
 ```python
 import duckdb
 import pyarrow as pa
@@ -41,7 +40,7 @@ while True:
         break
 ```
 
-## Export from Relational API
+### Export from Relational API
 Arrow objects can also be exported from the Relational API. A relation can be converted to an Arrow table using the `arrow` or `to_arrow_table` functions, or a record batch using `record_batch`.  
 A result can be exported to an Arrow table with `arrow` or the alias `fetch_arrow_table`, or to a RecordBatchReader using `fetch_arrow_reader`. 
 ```python

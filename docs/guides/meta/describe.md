@@ -20,7 +20,7 @@ DESCRIBE tbl;
 
 Below is an example of `DESCRIBE` on the `lineitem` table of TPC-H.
 
-```
+```text
 ┌─────────────────┬───────────────┬──────┬──────┬─────────┬───────┐
 │   column_name   │  column_type  │ null │ key  │ default │ extra │
 ├─────────────────┼───────────────┼──────┼──────┼─────────┼───────┤

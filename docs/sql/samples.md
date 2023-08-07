@@ -8,12 +8,13 @@ railroad: statements/samples.js
 Samples are used to randomly select a subset of a dataset.
 
 ### Examples
+
 ```sql
 -- select a sample of 5 rows from "tbl" using reservoir sampling
 SELECT * FROM tbl USING SAMPLE 5;
 -- select a sample of 10% of the table using system sampling (cluster sampling)
 SELECT * FROM tbl USING SAMPLE 10%;
--- select a sample of 10% of the table using bernoulli sampling
+-- select a sample of 10% of the table using Bernoulli sampling
 SELECT * FROM tbl USING SAMPLE 10 PERCENT (bernoulli);
 -- select a sample of 50 rows of the table using reservoir sampling with a fixed seed (100)
 SELECT * FROM tbl USING SAMPLE reservoir(50 ROWS) REPEATABLE (100);
@@ -37,7 +38,7 @@ Samples require a *sample size*, which is an indication of how many elements wil
 Samples are probablistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `PRAGMA threads=1`). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
 
 ### reservoir
-Reservoir sampling is a stream sampling technique that selects a random sample by keeping a *reservoir* of size equal to the sample size, and randomly replacing elements as more elements come in. Reservoir sampling allows us to specify *exactly* how many elements we want in the resulting sample (by selecting the size of the reservoir). As a result, reservoir sampling *always* outputs the same amount of elements, unlike system and bernoulli sampling.
+Reservoir sampling is a stream sampling technique that selects a random sample by keeping a *reservoir* of size equal to the sample size, and randomly replacing elements as more elements come in. Reservoir sampling allows us to specify *exactly* how many elements we want in the resulting sample (by selecting the size of the reservoir). As a result, reservoir sampling *always* outputs the same amount of elements, unlike system and Bernoulli sampling.
 
 Reservoir sampling is only recommended for small sample sizes, and is not recommended for use with percentages. That is because reservoir sampling needs to materialize the entire sample and randomly replace tuples within the materialized sample. The larger the sample size, the higher the performance hit incurred by this process.
 
@@ -46,12 +47,12 @@ Reservoir sampling also incurs an additional performance penalty when multi-proc
 > Avoid using Reservoir Sample with large sample sizes if possible. Reservoir sampling requires the entire sample to be materialized in memory.
 
 ### bernoulli
-Bernoulli sampling can only be used when a sampling percentage is specified. It is rather straightforward: every tuple in the underlying table is included with a chance equal to the specified percentage. As a result, bernoulli sampling can return a different number of tuples even if the same percentage is specified. The amount of rows will generally be more or less equal to the specified percentage of the table, but there will be some variance.
+Bernoulli sampling can only be used when a sampling percentage is specified. It is rather straightforward: every tuple in the underlying table is included with a chance equal to the specified percentage. As a result, Bernoulli sampling can return a different number of tuples even if the same percentage is specified. The amount of rows will generally be more or less equal to the specified percentage of the table, but there will be some variance.
 
-Because bernoulli sampling is completely independent (there is no shared state), there is no penalty for using bernoulli sampling together with multiple threads.
+Because Bernoulli sampling is completely independent (there is no shared state), there is no penalty for using Bernoulli sampling together with multiple threads.
 
 ### system
-System sampling is a variant of bernoulli sampling with one crucial difference: every *vector* is included with a chance equal to the sampling percentage. This is a form of cluster sampling. System sampling is more efficient than bernoulli sampling, as no per-tuple selections have to be performed. There is almost no extra overhead for using system sampling, whereas bernoulli sampling can add additional cost as it has to perform random number generation for every single tuple.
+System sampling is a variant of Bernoulli sampling with one crucial difference: every *vector* is included with a chance equal to the sampling percentage. This is a form of cluster sampling. System sampling is more efficient than Bernoulli sampling, as no per-tuple selections have to be performed. There is almost no extra overhead for using system sampling, whereas Bernoulli sampling can add additional cost as it has to perform random number generation for every single tuple.
 
 System sampling is not suitable for smaller data sets as the granularity of the sampling is on the order of ~1000 tuples. That means that if system sampling is used for small data sets (e.g., 100 rows) either all the data will be filtered out, or all the data will be included.
 
@@ -60,7 +61,7 @@ The `TABLESAMPLE` and `USING SAMPLE` clauses are identical in terms of syntax an
 
 The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with the `USING SAMPLE` clause, i.e., the following two queries are identical:
 
-```
+```sql
 -- sample 20% of tbl BEFORE the join
 SELECT * FROM tbl TABLESAMPLE RESERVOIR(20%), tbl2 WHERE tbl.i=tbl2.i;
 -- sample 20% of tbl BEFORE the join

@@ -27,7 +27,7 @@ When using the `jdbc:duckdb:`  URL alone, an **in-memory database** is created. 
 
 It is possible to open a DuckDB database file in **read-only** mode. This is for example useful if multiple Java processes want to read the same database file at the same time. To open an existing database file in read-only mode, set the connection property `duckdb.read_only` like so:
 
-```scala 
+```scala
 val ro_prop = new Properties();
 ro_prop.setProperty("duckdb.read_only", "true");
 val conn_ro = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", ro_prop);
@@ -78,5 +78,3 @@ p_stmt.close();
 ```
 
 > Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
-
-

@@ -27,7 +27,8 @@ print(res)
 ### Creating Functions
 
 To register a Python UDF, simply use the `create_function` method from a DuckDB connection. Here is the syntax:
-```python 
+
+```python
 import duckdb
 con = duckdb.connect()
 con.create_function(name, function, argument_type_list, return_type, type, null_handling)

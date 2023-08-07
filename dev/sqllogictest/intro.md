@@ -53,7 +53,7 @@ Query verification performs extra validation to ensure that the underlying code 
 Query verification is very useful because it not only discovers bugs in optimizers, but also finds bugs in e.g. join implementations. This is because the unoptimized version will typically run using cross products instead. Because of this, query verification can be very slow to do when working with larger data sets. It is therefore recommended to turn on query verification for all unit tests, except those involving larger data sets (more than 10-100~ rows).
 
 
-### Editors & Syntax Highlighting
+#### Editors & Syntax Highlighting
 The SQLLogicTests are not exactly an industry standard, but several other systems have adopted them as well. Parsing sqllogictests is intentionally simple. All statements have to be separated by empty lines. For that reason, writing a syntax highlighter is not extremely difficult.
 
 A syntax highlighter exists for [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=benesch.sqllogictest). We have also [made a fork that supports the DuckDB dialect of the sqllogictests](https://github.com/Mytherin/vscode-sqllogictest). You can use the fork by installing the original, then copying the `syntaxes/sqllogictest.tmLanguage.json` into the installed extension (on MacOS this is located in `~/.vscode/extensions/benesch.sqllogictest-0.1.1`).

@@ -32,7 +32,7 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 
 Below are parameters that can be passed in to the CSV reader. 
 
-# Parameters
+#### Parameters
 
 | Name | Description | Type | Default |
 |:---|:---|:----|:----|
@@ -62,11 +62,11 @@ Below are parameters that can be passed in to the CSV reader.
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | varchar[] or struct | `(empty)` |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
 
-### Writing
+#### Writing
 
 The contents of tables or the result of queries can be written directly to a CSV file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
-# read_csv_auto function
+#### read_csv_auto function
 The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
 
 ```sql
@@ -107,8 +107,7 @@ SELECT * FROM read_csv_auto('flights.csv', HEADER=TRUE);
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
-
-## COPY Statement
+#### COPY Statement
 The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the `COPY` statement supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
 
 ```sql

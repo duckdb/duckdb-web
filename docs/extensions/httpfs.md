@@ -10,7 +10,7 @@ supports reading/writing/globbing files.
 Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
 Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
 
-# HTTP(S)
+### HTTP(S)
 
 With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV, JSON, and
 Parquet files.
@@ -43,7 +43,7 @@ SELECT * FROM read_parquet(['https://domain.tld/file1.parquet', 'https://domain.
 SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.tld/file2.parquet']);
 ```
 
-# S3
+### S3
 
 The __httpfs__ extension supports reading/writing/globbing files on object storage servers using the S3 API.
 
@@ -60,7 +60,7 @@ each __httpfs__ feature.
 | File glob | [ListObjectV2](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)|
 | File writes | [Multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html)|
 
-## Configuring S3
+#### Configuring S3
 
 To be able to read or write from S3, the correct region should be set:
 
@@ -105,13 +105,13 @@ Alternatively, session tokens are also supported and can be used instead:
 SET s3_session_token='<AWS session token>';
 ```
 
-### Per-Request Configuration
+#### Per-Request Configuration
 Aside from the global S3 configuration described above, specific configuration values can be used on a per-request
 basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3
 URL as query parameters. All the individual configuration values listed above can be set as query parameters.
 
 For instance,
-```
+```text
 s3://bucket/file.parquet?s3_access_key_id=accessKey&s3_secret_access_key=secretKey
 ```
 or
@@ -121,7 +121,7 @@ FROM 's3://bucket/file.parquet?s3_region=region&s3_session_token=session_token' 
 INNER JOIN 's3://bucket/file.csv?s3_access_key_id=accessKey&s3_secret_access_key=secretKey' T2;
 ```
 
-## Reading
+#### Reading
 
 Reading files from S3 is now as simple as:
 
@@ -135,7 +135,7 @@ Multiple files are also possible, for example:
 SELECT * FROM read_parquet(['s3://bucket/file1.parquet', 's3://bucket/file2.parquet']);
 ```
 
-### Glob
+#### Glob
 
 File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match
 multiple files, for example:
@@ -172,7 +172,7 @@ DuckDB also offers support for the Hive partitioning scheme. In the Hive partiti
 separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file
 path. So for example let us consider three parquet files Hive paritioned by year:
 
-```
+```text
 s3://bucket/year=2012/file.parquet
 s3://bucket/year=2013/file.parquet
 s3://bucket/year=2014/file.parquet
@@ -200,7 +200,7 @@ columns:
 SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;
 ```
 
-## Writing
+#### Writing
 
 Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3
 works for both CSV and Parquet:
@@ -227,7 +227,7 @@ The naming scheme of the written files looks like this:
 s3://my-bucket/partitioned/part_col_a=<val>/part_col_b=<val>/data_<thread_number>.parquet
 ```
 
-### Configuration
+#### Configuration
 
 Some additional configuration options exist for the S3 upload, though the default values should suffice for most use cases.
 

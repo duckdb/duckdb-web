@@ -15,7 +15,7 @@ COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IG
 ### Partitioned Writes
 When the `partition_by` clause is specified for the `COPY` statement, the files are written in a [hive partitioned](hive_partitioning) folder hierarchy. The target is the name of the root directory (in the example above: `orders`). The files are written in-order in the file hierarchy. Currently, one file is written per thread to each directory.
 
-```
+```command
 orders
 ├── year=2021
 │    ├── month=1

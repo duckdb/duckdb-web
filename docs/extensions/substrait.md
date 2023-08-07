@@ -25,7 +25,7 @@ LOAD substrait;
 
 ### Blob Generation in SQL
 
-To generate a substrait blob the ```get_substrait(SQL)``` function must be called with a valid SQL select query.
+To generate a substrait blob the `get_substrait(SQL)` function must be called with a valid SQL select query.
 ```sql
 CREATE TABLE crossfit (exercise text,dificulty_level int);
 INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);
@@ -37,7 +37,7 @@ CALL get_substrait('select count(exercise) as exercise from crossfit where dific
 
 ### Json Generation in SQL
 
-To generate a json representing  the substrait plan the ```get_substrait_json(SQL)``` function must be called with a valid SQL select query.
+To generate a json representing  the substrait plan the `get_substrait_json(SQL)` function must be called with a valid SQL select query.
 ```sql
 CALL get_substrait_json('select count(exercise) as exercise from crossfit where dificulty_level <=5');
 ----
@@ -46,7 +46,7 @@ CALL get_substrait_json('select count(exercise) as exercise from crossfit where 
 
 ### Blob Consumption in SQL
 
-To consume a substrait blob the ```from_substrait(blob)``` function must be called with a valid substrait BLOB plan.
+To consume a substrait blob the `from_substrait(blob)` function must be called with a valid substrait BLOB plan.
 ```sql
 CALL from_substrait('\x12\x07\x1A\x05\x1A\x03lte\x12\x11\x1A\x0F\x10\x01\x1A\x0Bis_not_null\x12\x09\x1A\x07\x10\x02\x1A\x03and\x12\x10\x1A\x0E\x10\x03\x1A\x0Acount_star\x1A\xA4\x01\x12\xA1\x01\x0A\x94\x01:\x91\x01\x12\x86\x01"\x83\x01\x12y:w\x12c\x12a\x12+\x0A)\x12\x1B\x0A\x08exercise\x0A\x0Fdificulty_level:\x0A\x0A\x08crossfit\x1A2\x1A0\x08\x02"\x18\x1A\x16\x1A\x14"\x0A\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01"\x06\x1A\x04\x0A\x02(\x05"\x12\x1A\x10\x1A\x0E\x08\x01"\x0A\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01\x1A\x08\x12\x06\x0A\x04\x12\x02\x08\x01\x1A\x06\x12\x04\x0A\x02\x12\x00\x1A\x00"\x04\x0A\x02\x08\x03\x1A\x06\x12\x04\x0A\x02\x12\x00\x12\x08exercise'::BLOB);
 ----
@@ -65,7 +65,7 @@ con.load_extension("substrait")
 
 ### Blob Generation in Python
 
-To generate a substrait blob the ```get_substrait(SQL)``` function must be called, from a connection, with a valid SQL select query.
+To generate a substrait blob the `get_substrait(SQL)` function must be called, from a connection, with a valid SQL select query.
 ```python
 con.execute(query='CREATE TABLE crossfit (exercise text,dificulty_level int);')
 con.execute(query="INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);")
@@ -76,14 +76,14 @@ proto_bytes = con.get_substrait(query="select count(exercise) as exercise from c
 
 ### Json Generation in Python
 
-To generate a json representing  the substrait plan the ```get_substrait_json(SQL)``` function, from a connection, must be called with a valid SQL select query.
+To generate a json representing  the substrait plan the `get_substrait_json(SQL)` function, from a connection, must be called with a valid SQL select query.
 ```python
 json =  con.get_substrait_json("select count(exercise) as exercise from crossfit where dificulty_level <=5").fetchone()[0]
 ```
 
 ### Blob Consumption in Python
      
-To consume a substrait blob the ```from_substrait(blob)``` function must be called, from the connection, with a valid substrait BLOB plan.
+To consume a substrait blob the `from_substrait(blob)` function must be called, from the connection, with a valid substrait BLOB plan.
 ```python
 query_result = con.from_substrait(proto=proto_bytes)
 ```
@@ -98,7 +98,7 @@ dbExecute(con, "LOAD('substrait')")
 
 ### Blob Generation
 
-To generate a substrait blob the ```duckdb_get_substrait(con,SQL)``` function must be called, with a connection and a valid SQL select query.
+To generate a substrait blob the `duckdb_get_substrait(con,SQL)` function must be called, with a connection and a valid SQL select query.
 ```r
 dbExecute(con, "CREATE TABLE crossfit (exercise text,dificulty_level int);")
 dbExecute(con, "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);")
@@ -108,14 +108,14 @@ proto_bytes <- duckdb::duckdb_get_substrait(con, "select * from integers limit 5
 
 ### Json Generation
 
-To generate a json representing  the substrait plan  ```duckdb_get_substrait_json(con,SQL)``` function, with a connection and a valid SQL select query.
+To generate a json representing  the substrait plan  `duckdb_get_substrait_json(con,SQL)` function, with a connection and a valid SQL select query.
 ```r
 json <- duckdb::duckdb_get_substrait_json(con, "select count(exercise) as exercise from crossfit where dificulty_level <=5")
 ```
 
 ### Blob Consumption
 
-To consume a substrait blob the ```duckdb_prepare_substrait(con,blob)``` function must be called, with a connection and a valid substrait BLOB plan.
+To consume a substrait blob the `duckdb_prepare_substrait(con,blob)` function must be called, with a connection and a valid substrait BLOB plan.
 ```r
  result <- duckdb::duckdb_prepare_substrait(con, proto_bytes)
  df <- dbFetch(result)

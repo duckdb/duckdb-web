@@ -4,8 +4,6 @@ title: Parquet Import
 selected: Parquet Import
 ---
 
-# How to load a Parquet file into a table
-
 To read data from a Parquet file, use the `read_parquet` function in the `FROM` clause of a query. 
 
 ```sql
