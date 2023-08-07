@@ -18,7 +18,7 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 
 <div class="headline" id="duckdbissimple">
 	<div class="icon"><span class="duckdbsymbol">&#xE100;</span></div>
-	<h1>Simple Operation</h1>
+	<h1>Simple and Portable Deployment</h1>
 </div>
 SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DuckDB adopts these ideas of simplicity and embedded operation.
 
@@ -32,7 +32,7 @@ For DuckDB, there is no DBMS server software to install, update and maintain. Du
 </div>
 DuckDB provides serious data management features. There is extensive support for **complex queries** in SQL with a large function library, window functions etc. DuckDB provides **transactional guarantees** (ACID properties) through our custom, bulk-optimized [Multi-Version Concurrency Control (MVCC)](https://en.wikipedia.org/wiki/Multiversion_concurrency_control). Data can be stored in persistent, **single-file databases**. DuckDB supports secondary indexes to speed up queries trying to find a single table entry.
 
-DuckDB is deeply integrated into Python and R for efficient interactive data analysis. DuckDB provides APIs for Java, C, C++, and others.
+DuckDB is deeply integrated into Python and R for efficient interactive data analysis. DuckDB provides APIs for Java, C, C++, Julia, Swift, and others.
 
 <div class="headline" id="duckdbtesting">
 	<div class="icon"><span class="duckdbsymbol">&#xE250;</span></div>

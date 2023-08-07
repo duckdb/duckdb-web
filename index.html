@@ -28,7 +28,7 @@ body_class: landing nowrap
 		<div class="mainlinks">
 			<ul>
 				<a href="#quickinstall"><li class="highlighted">Installation <span class="duckdbsymbol">&#x2193;</span> </li></a>
-				<a href="docs/"><li>Documentation</li></a>
+				<a href="/docs/archive/{{ site.currentduckdbversion }}"><li>Documentation</li></a>
 				<a href="https://shell.duckdb.org"><li>Live Demo</li></a>
 			</ul>
 		</div>
@@ -49,11 +49,12 @@ body_class: landing nowrap
 						<div class="icon"><span class="duckdbsymbol">&#xE100;</span></div>
 					</div>
 					<div>
-						<h3>Simple</h3>
+						<h3>Simple and portable</h3>
 						<ul>
 							<li>In-process, serverless</li>
-							<li>C++11, no dependencies, single file build</li>
-							<li>APIs for Python/R/Java/…</li>
+							<li>C++11, no dependencies, single-file build</li>
+							<li>APIs for Python, R, Java, Julia, Swift, …</li>
+							<li>Runs on Windows, Linux, macOS, OpenBSD, …</li>
 						</ul>
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbissimple">more <span></span></a>
 					</div>
@@ -68,12 +69,8 @@ body_class: landing nowrap
 						<ul>
 							<li>Transactions, persistence</li>
 							<li>Extensive SQL support</li>
-							<li>Direct Parquet & CSV querying</li>
-							<!-- 	<ul>
-									<li>Joins, aggregates, window functions</li>
-								</ul> -->
-							</li>
-<!--							<li>Runs on Windows, Linux, macOS, OpenBSD, Solaris, …</li> -->
+							<li>Direct Parquet, CSV, and JSON querying</li>
+							<li>Joins, aggregates, window functions</li>
 						</ul>
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfeaturerich">more <span></span></a>
 					</div>
@@ -86,10 +83,10 @@ body_class: landing nowrap
 					<div>
 						<h3>Fast</h3>
 						<ul>
-							<li>Vectorized engine</li>
 							<li>Optimized for analytics</li>
-							<li>Parallel query processing</li>
-
+							<li>Vectorized and parallel engine</li>
+							<li>Larger than memory processing</li>
+							<li>Parallel Parquet, CSV, and NDJSON loaders</li>
 						</ul>
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfast">more <span></span></a>
 					</div>
@@ -100,10 +97,11 @@ body_class: landing nowrap
 						<div class="icon"><span class="duckdbsymbol">&#xE400;</span></div>
 					</div>
 					<div>
-						<h3>Free</h3>
+						<h3>Free and extensible</h3>
 						<ul>
-							<li>Free &amp; Open Source</li>
+							<li>Free &amp; open-source</li>
 							<li>Permissive MIT License</li>
+							<li>Flexible extension mechanism</li>
 						</ul>
 						<a class="readmore" href="{{ site.url }}{{ site.baseurl }}/why_duckdb.html#duckdbisfree">more <span></span></a>
 					</div>
