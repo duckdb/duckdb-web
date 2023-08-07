@@ -20,16 +20,11 @@ def concat(of, header_level, docs_root, doc_path):
 
         # parse YAML header and add header to the beginning of the content based on the "title" attribute
         doc_groups = doc_text.split("---\n")
-
-
-
         header = yaml.safe_load(doc_groups[1])
         of.write(f"""{"#" * header_level} {header["title"]}""")
 
+        # the rest of the string (after the second horizontal bar) is the main body of the document
         doc_text = "---\n".join(doc_groups[2:])
-        print(doc_groups)
-        print(header)
-        print(doc_text)
 
         # add path labels to headers at the beginning of the file
         path_label = full_path \
