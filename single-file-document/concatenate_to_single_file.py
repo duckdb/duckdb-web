@@ -14,13 +14,22 @@ def concat(of, header_level, docs_root, doc_path):
 
     with open(full_path) as doc_file:
         doc_text = doc_file.read()
+
+        # drop "Pages in this Section"
+        doc_text = doc_text.replace("### Pages in this Section", "")
+
         # parse YAML header and add header to the beginning of the content based on the "title" attribute
-        yaml_match = re.match("^---$((.|\n)*?)^---$", doc_text, flags=re.MULTILINE).groups(1)
-        if yaml_match:
-            header = yaml.safe_load(yaml_match[0])
-            of.write(f"""{"#" * header_level} {header["title"]}""")
-            # strip the YAML header
-            doc_text = re.sub("^---$((.|\n)*)?^---$", "", doc_text, flags=re.MULTILINE)
+        doc_groups = doc_text.split("---\n")
+
+
+
+        header = yaml.safe_load(doc_groups[1])
+        of.write(f"""{"#" * header_level} {header["title"]}""")
+
+        doc_text = "---\n".join(doc_groups[2:])
+        print(doc_groups)
+        print(header)
+        print(doc_text)
 
         # add path labels to headers at the beginning of the file
         path_label = full_path \
