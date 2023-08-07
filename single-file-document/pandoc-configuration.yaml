@@ -7,7 +7,7 @@ metadata-file: metadata.yaml
 template: eisvogel2.tex
 pdf-engine: xelatex
 table-of-contents: true
-toc-depth: 2
+toc-depth: 3
 top-level-division: chapter
 variables:
   book: true

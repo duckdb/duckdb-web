@@ -3,8 +3,8 @@ import os
 import re
 import yaml
 import textwrap
-from datetime import datetime
-from datetime import timezone
+from datetime import datetime, timezone
+import argparse
 
 
 def concat(of, header_level, docs_root, doc_path):
@@ -24,7 +24,7 @@ def concat(of, header_level, docs_root, doc_path):
         of.write(f"""{"#" * header_level} {header["title"]}""")
 
         # the rest of the string (after the second horizontal bar) is the main body of the document
-        doc_text = "---\n".join(doc_groups[2:])
+        doc_text = "\n".join(doc_groups[2:])
 
         # add path labels to headers at the beginning of the file
         path_label = full_path \
@@ -33,6 +33,13 @@ def concat(of, header_level, docs_root, doc_path):
             .replace("../", "") \
             .replace("/", ":")
         of.write(f" {{#{path_label}}}\n")
+
+        # increase indentation of headers in the document -- they should be at least level 5 (i.e. ##### Title)
+        # - for top-level (header_level = 2), increase indentation by 3
+        # - for mid-level (header_level = 3), increase indentation by 2
+        # - for the lowest-level (header_level = 4), increase indentation by 1
+        extra_header_levels = "#" * (5 - header_level)
+        doc_text = re.sub(r"^### ", f"###{extra_header_levels} ", doc_text, flags=re.MULTILINE)
 
         # replace blog post paths to the full URL
         doc_text = re.sub(
@@ -83,7 +90,7 @@ def concat(of, header_level, docs_root, doc_path):
         of.write(doc_text_with_new_headers)
 
 
-def add_to_documentation(data, of, chapter_title):
+def add_to_documentation(data, of, chapter_title, verbose):
     of.write(f"# {chapter_title}\n\n")
     chapter_json = [x for x in data["docsmenu"] if x["page"] == chapter_title][0]
     chapter_slug = chapter_json["slug"]
@@ -95,7 +102,8 @@ def add_to_documentation(data, of, chapter_title):
         main_slug = main_level_page.get("slug")
 
         if main_url:
-            print(f"- {main_url}")
+            if verbose:
+                print(f"- {main_url}")
             concat(of, 2, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
@@ -103,14 +111,16 @@ def add_to_documentation(data, of, chapter_title):
         else:
             continue
 
-        print(f"- {main_slug}")
+        if verbose:
+            print(f"- {main_slug}")
         for subfolder_page in main_level_page["subfolderitems"]:
             subfolder_page_title = subfolder_page["page"]
             subfolder_url = subfolder_page.get("url")
             subfolder_slug = subfolder_page.get("slug")
 
             if subfolder_url:
-                print(f"  - {main_slug}/{subfolder_url}")
+                if verbose:
+                    print(f"  - {main_slug}/{subfolder_url}")
                 concat(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
@@ -118,12 +128,21 @@ def add_to_documentation(data, of, chapter_title):
             else:
                 continue
 
-            print(f"  - {main_slug}/{subfolder_slug}")
+            if verbose:
+                print(f"  - {main_slug}/{subfolder_slug}")
             for subsubfolder_page in subfolder_page["subsubfolderitems"]:
                 subsubfolder_url = subsubfolder_page.get("url")
 
-                print(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                if verbose:
+                    print(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
                 concat(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--verbose', action='store_true')
+args = parser.parse_args()
+verbose = args.verbose
 
 
 # get version number
@@ -145,8 +164,8 @@ docs_root = "../docs"
 with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.md", "w") as of:
     data = json.load(menu_docs_file)
 
-    add_to_documentation(data, of, "Documentation")
-    add_to_documentation(data, of, "Guides")
+    add_to_documentation(data, of, "Documentation", verbose)
+    add_to_documentation(data, of, "Guides", verbose)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
