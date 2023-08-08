@@ -8,7 +8,7 @@ You can create a DuckDB User Defined Function (UDF) out of a python function so 
 Just like regular [functions](../../sql/functions/overview) they need to have a name, a return type and parameter types.
 
 Example using a python function that calls a third party library.
-```py
+```python
 import duckdb
 import duckdb
 from duckdb.typing import *
@@ -78,7 +78,7 @@ If only the parameter list types can be inferred, you'll need to pass in `None` 
 By default when functions receive a NULL value, this instantly returns NULL, as part of the default null handling.  
 When this is not desired, you need to explicitly set this parameter to `'special'`.
 
-```py
+```python
 import duckdb
 from duckdb.typing import *
 
@@ -106,7 +106,7 @@ print(res)
 By default, when an exception is thrown from the python function, we'll forward (re-throw) the exception.  
 If you want to disable this behavior, and instead return null, you'll need to set this parameter to `'return_null'`
 
-```py
+```python
 import duckdb
 from duckdb.typing import *
 
@@ -171,7 +171,7 @@ This will let the system know to provide arrow arrays of up to `STANDARD_VECTOR_
 
 When the function type is set to `native` the function will be provided with a single tuple at a time, and expect only a single value to be returned.  
 This can be useful to interact with python libraries that don't operate on Arrow, such as `faker`:
-```py
+```python
 import duckdb
 
 from duckdb.typing import *

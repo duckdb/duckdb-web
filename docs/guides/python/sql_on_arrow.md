@@ -9,7 +9,7 @@ DuckDB can query multiple different types of Apache Arrow objects.
 ### Apache Arrow Tables
 [Arrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) stored in local variables can be queried as if they are regular tables within DuckDB.
 
-```py
+```python
 import duckdb
 import pyarrow as pa
 

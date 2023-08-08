@@ -8,7 +8,7 @@ selected: Import From Pandas
 
 To create a table from a Pandas DataFrame, run:
 
-```py
+```python
 import duckdb
 import pandas
 
