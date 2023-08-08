@@ -121,13 +121,6 @@
 		},
 		{
 			"title": "Bitstring Functions",
-			"text": "duckdb_functions function category bit",
-			"category": "Functions",
-			"url": "/docs/test/functions/bitstring",
-			"blurb": "{% duckdb_functions function['category'] == 'bit' %}"
-		},
-		{
-			"title": "Bitstring Functions",
 			"text": "this section describes functions and operators for examining and manipulating bit values bitstrings must be of equal length when performing the bitwise operands and or and xor when bit shifting the original length of the string is preserved bitstring operators the table below shows the available mathematical operators for bit type operator description example result --- --- --- --- bitwise and 10101 bit 10001 bit 10001 bitwise or 1011 bit 0001 bit 1011 xor bitwise xor xor 101 bit 001 bit 100 bitwise not 101 bit 010 bitwise shift left 1001011 bit 3 1011000 bitwise shift right 1001011 bit 3 0001001 bitstring functions the table below shows the available scalar functions for bit type function description example result --- --- --- --- bit_count bitstring returns the number of set bits in the bitstring bit_count 1101011 bit 5 bit_length bitstring returns the number of bits in the bitstring bit_length 1101011 bit 7 bit_position substring bitstring returns first starting index of the specified substring within bits or zero if it s not present the first leftmost bit is indexed 1 bit_position 010 bit 1110101 bit 4 bitstring bitstring length returns a bitstring of determined length bitstring 1010 bit 7 0001010 get_bit bitstring index extracts the nth bit from bitstring the first leftmost bit is indexed 0 get_bit 0110010 bit 2 1 length bitstring alias for bit_length length 1101011 bit 7 octet_length bitstring returns the number of bytes in the bitstring octet_length 1101011 bit 1 set_bit bitstring index new_value sets the nth bit in bitstring to newvalue the first leftmost bit is indexed 0 returns a new bitstring set_bit 0110010 bit 2 0 0100010 bitstring aggregate functions these aggregate functions are available for bit type function description example --- --- --- bit_and arg returns the bitwise and operation performed on all bitstrings in a given expression bit_and a bit_or arg returns the bitwise or operation performed on all bitstrings in a given expression bit_or a bit_xor arg returns the bitwise xor operation performed on all bitstrings in a given expression bit_xor a bitstring_agg arg returns a bitstring with bits set for each distinct value bitstring_agg a bitstring_agg arg min max returns a bitstring with bits set for each distinct value bitstring_agg a 1 42 bitstring aggregation the bitstring_agg function takes any integer type as input and returns a bitstring with bits set for each distinct value the left-most bit represents the smallest value in the column and the right-most bit the maximum value if possible the min and max are retrieved from the column statistics otherwise it is also possible to provide the min and max values the combination of bit_count and bitstring_agg could be used as an alternative to count distinct with possible performance improvements in cases of low cardinality and dense values",
 			"category": "Functions",
 			"url": "/docs/sql/functions/bitstring",
@@ -139,13 +132,6 @@
 			"category": "Data Types",
 			"url": "/docs/sql/data_types/bitstring",
 			"blurb": "The bitstring type are strings of 1's and 0's."
-		},
-		{
-			"title": "Blob Functions",
-			"text": "duckdb_functions function category blob",
-			"category": "Functions",
-			"url": "/docs/test/functions/blob",
-			"blurb": "{% duckdb_functions function['category'] == 'blob' %}"
 		},
 		{
 			"title": "Blob Functions",
@@ -478,13 +464,6 @@
 		},
 		{
 			"title": "Date Functions",
-			"text": "duckdb_functions function category date",
-			"category": "Functions",
-			"url": "/docs/test/functions/date",
-			"blurb": "{% duckdb_functions function['category'] == 'date' %}"
-		},
-		{
-			"title": "Date Functions",
 			"text": "this section describes functions and operators for examining and manipulating date values date operators the table below shows the available mathematical operators for date types operator description example result --- --- --- --- addition of days integers date 1992-03-22 5 1992-03-27 addition of an interval date 1992-03-22 interval 5 day 1992-03-27 addition of a variable interval select date 1992-03-22 interval 1 day d days from values 5 11 as d days 1992-03-27 1992-04-02 - subtraction of date s date 1992-03-27 - date 1992-03-22 5 - subtraction of an interval date 1992-03-27 - interval 5 day 1992-03-22 - subtraction of a variable interval select date 1992-03-27 - interval 1 day d days from values 5 11 as d days 1992-03-22 1992-03-16 adding to or subtracting from infinite values produces the same infinite value date functions the table below shows the available functions for date types dates can also be manipulated with the timestamp functions through type promotion function description example result --- --- --- --- current_date current date at start of current transaction current_date 2022-10-08 date_diff part startdate enddate the number of partition boundaries between the dates date_diff month date 1992-09-15 date 1992-11-14 2 datediff part startdate enddate alias of date_diff the number of partition boundaries between the dates datediff month date 1992-09-15 date 1992-11-14 2 date_part part date get the subfield equivalent to extract date_part year date 1992-09-20 1992 datepart part date alias of date_part get the subfield equivalent to extract datepart year date 1992-09-20 1992 date_sub part startdate enddate the number of complete partitions between the dates date_sub month date 1992-09-15 date 1992-11-14 1 datesub part startdate enddate alias of date_sub the number of complete partitions between the dates datesub month date 1992-09-15 date 1992-11-14 1 date_trunc part date truncate to specified precision date_trunc month date 1992-03-07 1992-03-01 datetrunc part date alias of date_trunc truncate to specified precision datetrunc month date 1992-03-07 1992-03-01 dayname date the english name of the weekday dayname date 1992-09-20 sunday isfinite date returns true if the date is finite false otherwise isfinite date 1992-03-07 true isinf date returns true if the date is infinite false otherwise isinf date -infinity true extract part from date get subfield from a date extract year from date 1992-09-20 1992 greatest date date the later of two dates greatest date 1992-09-20 date 1992-03-07 1992-09-20 last_day date the last day of the corresponding month in the date last_day date 1992-09-20 1992-09-30 least date date the earlier of two dates least date 1992-09-20 date 1992-03-07 1992-03-07 make_date bigint bigint bigint the date for the given parts make_date 1992 9 20 1992-09-20 monthname date the english name of the month monthname date 1992-09-20 september strftime date format converts a date to a string according to the format string strftime date 1992-01-01 a -d b y wed 1 january 1992 time_bucket bucket_width date origin truncate date by the specified interval bucket_width buckets are aligned relative to origin date origin defaults to 2000-01-03 for buckets that don t include a month or year interval and to 2000-01-01 for month and year buckets time_bucket interval 2 weeks date 1992-04-20 date 1992-04-01 1992-04-15 time_bucket bucket_width date offset truncate date by the specified interval bucket_width buckets are offset by offset interval time_bucket interval 2 months date 1992-04-20 interval 1 month 1992-04-01 today current date start of current transaction today 2022-10-08 there are also dedicated extraction functions to get the subfields a few examples include extracting the day from a date or the day of the week from a date functions applied to infinite dates will either return the same infinite dates e g greatest or null e g date_part depending on what makes sense in general if the function needs to examine the parts of the infinite date the result will be null",
 			"category": "Functions",
 			"url": "/docs/sql/functions/date",
@@ -590,13 +569,6 @@
 		},
 		{
 			"title": "Enum Functions",
-			"text": "duckdb_functions function category enum",
-			"category": "Functions",
-			"url": "/docs/test/functions/enum",
-			"blurb": "{% duckdb_functions function['category'] == 'enum' %}"
-		},
-		{
-			"title": "Enum Functions",
 			"text": "this section describes functions and operators for examining and manipulating enum values the examples assume an enum type created as create type mood as enum sad ok happy anxious these functions can take null or a specific value of the type as argument s with the exception of enum_range_boundary the result depends only on the type of the argument and not on its value function description example result --- --- --- --- enum_code enum_value returns the numeric value backing the given enum value enum_code happy mood 2 enum_first enum returns the first value of the input enum type enum_first null mood sad enum_last enum returns the last value of the input enum type enum_last null mood anxious enum_range enum returns all values of the input enum type as an array enum_range null mood sad ok happy anxious enum_range_boundary enum enum returns the range between the two given enum values as an array the values must be of the same enum type when the first parameter is null the result starts with the first value of the enum type when the second parameter is null the result ends with the last value of the enum type enum_range_boundary null happy mood sad ok happy",
 			"category": "Functions",
 			"url": "/docs/sql/functions/enum",
@@ -671,13 +643,6 @@
 			"category": "Expressions",
 			"url": "/docs/sql/expressions/overview",
 			"blurb": "An expression is a combination of values, operators and functions. Expressions are highly composable, and range from..."
-		},
-		{
-			"title": "Extensions",
-			"text": "default extensions currently enabled in duckdb-wasm are parquet and fts httpfs is a specific re-implementation that comes bundled by default json and excel are build-time opt-in dynamic runtime extension loading dynamic extension loading is currently experimental participate in the tracking issue or try it on the experimental deployment at https shellwip duckdb org include iframe html src https shellwip duckdb org",
-			"category": "Wasm",
-			"url": "/docs/api/wasm/extensions",
-			"blurb": "Default extensions currently enabled in DuckDB-Wasm are Parquet and FTS. HTTPFS is a specific re-implementation that..."
 		},
 		{
 			"title": "Extensions",
@@ -946,13 +911,6 @@
 			"blurb": "Map Data Type MAP s are similar to STRUCT s in that they are an ordered list of entries where a key maps to a value...."
 		},
 		{
-			"title": "Math Functions",
-			"text": "duckdb_functions function category math",
-			"category": "Functions",
-			"url": "/docs/test/functions/math",
-			"blurb": "{% duckdb_functions function['category'] == 'math' %}"
-		},
-		{
 			"title": "Multiple Python Threads",
 			"text": "multiple reader and writer threads example this demonstrates how to simultaneously insert into and read from a duckdb database across multiple python threads this could be useful in scenarios where new data is flowing in and an analysis should be periodically re-run note that this is all within a single python process see the faq for details on duckdb concurrency feel free to follow along in this google collaboratory notebook setup first import duckdb and several modules from the python standard library then connect to a file-backed duckdb database and create an example table to store inserted data this table will track the name of the thread that completed the insert and automatically insert the timestamp when that insert occured using the default expression import duckdb from threading import thread current_thread import random duckdb_con duckdb connect my_peristent_db duckdb duckdb_con duckdb connect pass in no parameters for an in memory database duckdb_con execute create or replace table my_inserts thread_name varchar insert_time timestamp default current_timestamp reader and writer functions next define functions to be executed by the writer and reader threads each thread must use the cursor method to create a thread-local connection to the same duckdb file based on the original connection this approach also works with in-memory duckdb databases def write_from_thread duckdb_con create a duckdb connection specifically for this thread local_con duckdb_con cursor insert a row with the name of the thread insert_time is auto-generated thread_name str current_thread name result local_con execute insert into my_inserts thread_name values thread_name fetchall def read_from_thread duckdb_con create a duckdb connection specifically for this thread local_con duckdb_con cursor query the current row count thread_name str current_thread name results local_con execute select as thread_name count as row_counter current_timestamp from my_inserts thread_name fetchall print results create threads we define how many writers and readers to use and define a list to track all of the threads that will be created then create first writer and then reader threads next shuffle them so that they will be kicked off in a random order to simulate simultaneous writers and readers note that the threads have not yet been executed only defined write_thread_count 50 read_thread_count 5 threads create multiple writer and reader threads in the same process pass in the same connection as an argument for i in range write_thread_count threads append thread target write_from_thread args duckdb_con name write_thread_ str i for j in range read_thread_count threads append thread target read_from_thread args duckdb_con name read_thread_ str j shuffle the threads to simulate a mix of readers and writers random seed 6 set the seed to ensure consistent results when testing random shuffle threads run threads and show results now kick off all threads to run in parallel then wait for all of them to finish before printing out the results note that the timestamps of readers and writers are interspersed as expected due to the randomization kick off all threads in parallel for thread in threads thread start ensure all threads complete before printing final results for thread in threads thread join print duckdb_con execute select from my_inserts order by insert_time df",
 			"category": "Python",
@@ -965,13 +923,6 @@
 			"category": "Data Types",
 			"url": "/docs/sql/data_types/nulls",
 			"blurb": "The NULL value represents a missing value."
-		},
-		{
-			"title": "Nested Functions",
-			"text": "list functions duckdb_functions function category list map functions duckdb_functions function category map struct functions duckdb_functions function category struct union functions duckdb_functions function category union",
-			"category": "Functions",
-			"url": "/docs/test/functions/nested",
-			"blurb": "List Functions {% duckdb_functions function['category'] == 'list' %} Map Functions {% duckdb_functions..."
 		},
 		{
 			"title": "Nested Functions",
@@ -1042,13 +993,6 @@
 			"category": "Query Syntax",
 			"url": "/docs/sql/query_syntax/orderby",
 			"blurb": "ORDER BY is an output modifier. Logically it is applied near the very end of the query (just prior to LIMIT or OFFSET..."
-		},
-		{
-			"title": "Overview",
-			"text": "a href bitstring bitstring functions a a href blob blob functions a a href dateformat date format functions a a href date date functions a a href datepart date part functions a a href enum enum functions a a href interval interval functions a a href nested nested functions a a href numeric numeric functions a a href patternmatching pattern matching a a href char text functions a a href time time functions a a href timestamp timestamp functions a a href timestamptz timestamp with time zone functions a a href utility utility functions a",
-			"category": "Functions",
-			"url": "/docs/test/functions/overview",
-			"blurb": ""
 		},
 		{
 			"title": "Parquet Export",
@@ -1366,13 +1310,6 @@
 			"blurb": ""
 		},
 		{
-			"title": "String Functions",
-			"text": "duckdb_functions function category string",
-			"category": "Functions",
-			"url": "/docs/test/functions/char",
-			"blurb": "{% duckdb_functions function['category'] == 'string' %}"
-		},
-		{
 			"title": "Struct",
 			"text": "struct data type conceptually a struct column contains an ordered list of columns called entries the entries are referenced by name using strings this document refers to those entry names as keys each row in the struct column must have the same keys the names of the struct entries are part of the schema each row in a struct column must have the same layout the names of the struct entries are case-insensitive struct s are typically used to nest multiple columns into a single column and the nested column can be of any type including other struct s and list s struct s are similar to postgres s row type the key difference is that duckdb struct s require the same keys in each row of a struct column this allows duckdb to provide significantly improved performance by fully utilizing its vectorized execution engine and also enforces type consistency for improved correctness duckdb includes a row function as a special way to produce a struct but does not have a row data type see an example below and the nested functions docs for details see the data types overview for a comparison between nested data types structs can be created using the struct_pack name expr function or the equivalent array notation name expr notation the expressions can be constants or arbitrary expressions creating structs -- struct of integers select x 1 y 2 z 3 -- struct of strings with a null value select yes duck maybe goose huh null no heron -- struct with a different type for each key select key1 string key2 1 key3 12 345 -- struct using the struct_pack function -- note the lack of single quotes around the keys and the use of the operator select struct_pack key1 value1 key2 42 -- struct of structs with null values select birds yes duck maybe goose huh null no heron aliens null amphibians yes frog maybe salamander huh dragon no toad -- create a struct from columns and or expressions using the row function -- this returns x 1 v2 2 y a select row x x 1 y from select 1 as x a as y -- if using multiple expressions when creating a struct the row function is optional -- this also returns x 1 v2 2 y a select x x 1 y from select 1 as x a as y adding field s value s to structs -- add to a struct of integers select struct_insert a 1 b 2 c 3 d 4 retrieving from structs retrieving a value from a struct can be accomplished using dot notation bracket notation or through struct functions like struct_extract -- use dot notation to retrieve the value at a key s location this returns 1 -- the subquery generates a struct column a which we then query with a x select a x from select x 1 y 2 z 3 as a -- if key contains a space simply wrap it in double quotes this returns 1 -- note use double quotes not single quotes -- this is because this action is most similar to selecting a column from within the struct select a x space from select x space 1 y 2 z 3 as a -- bracket notation may also be used this returns 1 -- note use single quotes since the goal is to specify a certain string key -- only constant expressions may be used inside the brackets no columns select a x space from select x space 1 y 2 z 3 as a -- the struct_extract function is also equivalent this returns 1 select struct_extract x space 1 y 2 z 3 x space struct rather than retrieving a single key from a struct star notation can be used to retrieve all keys from a struct as separate columns this is particularly useful when a prior operation creates a struct of unknown shape or if a query must handle any potential struct keys -- all keys within a struct can be returned as separate columns using select a from select x 1 y 2 z 3 as a x y z --- --- --- 1 2 3 dot notation order of operations referring to structs with dot notation can be ambiguous with referring to schemas and tables in general duckdb looks for columns first then for struct keys within columns duckdb resolves references in these orders using the first match to occur no dots select part1 from tbl part1 is a column one dot select part1 part2 from tbl part1 is a table part2 is a column part1 is a column part2 is a property of that column two or more dots select part1 part2 part3 from tbl part1 is a schema part2 is a table part3 is a column part1 is a table part2 is a column part3 is a property of that column part1 is a column part2 is a property of that column part3 is a property of that column any extra parts e g part4 part5 etc are always treated as properties creating structs with the row function the row function can be used to automatically convert multiple columns to a single struct column the name of each input column is used as a key and the value of each column becomes the struct s value at that key when converting multiple expressions into a struct the row function name is optional - a set of parenthesis is all that is needed example data table named t1 my_column another_column --- --- 1 a 2 b row function example select row my_column another_column as my_struct_column my_column another_column as identical_struct_column from t1 example output my_struct_column identical_struct_column --- --- my_column 1 another_column a my_column 1 another_column a my_column 2 another_column b my_column 2 another_column b the row function or simplified parenthesis syntax may also be used with arbitrary expressions as input rather than column names in the case of an expression a key will be automatically generated in the format of vn where n is a number that refers to its parameter location in the row function ex v1 v2 etc this can be combined with column names as an input in the same call to the row function this example uses the same input table as above row function example with a column name a constant and an expression as input select row my_column 42 my_column 1 as my_struct_column my_column 42 my_column 1 as identical_struct_column from t1 example output my_struct_column identical_struct_column --- --- my_column 1 v2 42 v3 2 my_column 1 v2 42 v3 2 my_column 2 v2 42 v3 3 my_column 2 v2 42 v3 3 comparison operators nested types can be compared using all the comparison operators these comparisons can be used in logical expressions for both where and having clauses as well as for creating boolean values the ordering is defined positionally in the same way that words can be ordered in a dictionary null values compare greater than all other values and are considered equal to each other at the top level null nested values obey standard sql null comparison rules comparing a null nested value to a non- null nested value produces a null result comparing nested value members however uses the internal nested value rules for null s and a null nested value member will compare above a non- null nested value member functions see nested functions",
 			"category": "Data Types",
@@ -1511,13 +1448,6 @@
 			"category": "Statements",
 			"url": "/docs/sql/statements/use",
 			"blurb": "The USE statement selects a database and optional schema to use as the default. Examples --- Sets the 'memory'..."
-		},
-		{
-			"title": "Utility Functions",
-			"text": "duckdb_functions function category generic function category random",
-			"category": "Functions",
-			"url": "/docs/test/functions/utility",
-			"blurb": "{% duckdb_functions function['category'] == 'generic' || function['category'] == 'random' %}"
 		},
 		{
 			"title": "Utility Functions",
