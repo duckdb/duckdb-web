@@ -115,7 +115,7 @@ Create this file with [the Script Editor](https://support.apple.com/guide/script
 (located in `/Applications/Utilities`) 
 and [save it as a packaged application](https://support.apple.com/guide/script-editor/save-a-script-as-an-app-scpedt1072/mac):
 
-<img src='/images/guides/tableau/applescript.png' alt='tableau-applescript' width=50%>
+![tableau-applescript](/images/guides/tableau/applescript.png)
 
 You can then double-click it to launch Tableau. 
 You will need to change the application name in the script when you get upgrades.
