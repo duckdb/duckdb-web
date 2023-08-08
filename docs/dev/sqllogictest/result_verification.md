@@ -3,6 +3,8 @@ layout: docu
 title: SQLLogicTest - Result Verification
 selected: Development/Testing/Result Verification
 expanded: Testing
+redirect_from:
+  - /dev/sqllogictest/result_verification
 ---
 
 The standard way of verifying results of queries is using the `query` statement, followed by the letter `I` times the number of columns that are expected in the result. After the query, four dashes (`----`) are expected followed by the result values separated by tabs. For example,
