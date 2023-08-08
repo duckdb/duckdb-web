@@ -9,7 +9,8 @@ base_dir = 'docs'
 skipped_files = [
 	'docs/search.md',
 	'docs/twitter_wall.md',
-	'docs/archive'
+	'docs/archive',
+	'docs/test',
 ]
 
 file_list = []
