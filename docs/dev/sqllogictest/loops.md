@@ -41,14 +41,14 @@ endloop
 
 `foreach` also has a number of preset combinations that should be used when required. In this manner, when new combinations are added to the preset, old tests will automatically pick up these new combinations.
 
-|      Preset      |                           Expansion                            |
-|------------------|----------------------------------------------------------------|
-| `<compression>`` | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
-| `<signed>``      | `tinyint smallint integer bigint hugeint`                      |
-| `<unsigned>``    | `utinyint usmallint uinteger ubigint`                          |
-| `<integral>``    | `<signed> <unsigned>`                                          |
-| `<numeric>``     | `<integral> float double`                                      |
-| `<alltypes>``    | `<numeric> bool interval varchar json`                         |
+|      Preset     |                           Expansion                            |
+|-----------------|----------------------------------------------------------------|
+| `<compression>` | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
+| `<signed>`      | `tinyint smallint integer bigint hugeint`                      |
+| `<unsigned>`    | `utinyint usmallint uinteger ubigint`                          |
+| `<integral>`    | `<signed> <unsigned>`                                          |
+| `<numeric>`     | `<integral> float double`                                      |
+| `<alltypes>`    | `<numeric> bool interval varchar json`                         |
 
 > Use large loops sparingly. Executing hundreds of thousands of SQL statements will slow down tests unnecessarily. Do not use loops for inserting data.
 
