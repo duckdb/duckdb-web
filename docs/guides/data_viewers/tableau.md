@@ -42,7 +42,7 @@ Note that Tableau (both Desktop and Server versions) need to be restarted any ti
 
 ## Driver Links
 
-The links here are for a recent version of the JDBC driver that is compatible with Tableau.
+The link here is for a recent version of the JDBC driver that is compatible with Tableau.
 If you wish to connect to a database file,
 you will need to make sure the file was created with a file-compatible version of DuckDB.
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
@@ -60,9 +60,9 @@ and using Tableau-provided Postgres dialect.
 
 1. Create a DuckDB file containing your views and/or data.
 2. Launch Tableau
-3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter jdbc:duckdb:/User/username/path/to/database.db. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
+3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
-<img src='/images/guides/tableau/tableau-osx-jdbc.png' alt='tableau-postgres' width = 50%>
+![Tableau Postgres](/images/guides/tableau/tableau-osx-jdbc.png)
 
 However, functionality will be missing such as MEDIAN and PERCENTILE aggregate functions. 
 To make the data source connection more compatible with the PostgreSQL dialect, 
