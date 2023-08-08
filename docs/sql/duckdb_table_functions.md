@@ -127,7 +127,7 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 | `parameter_types` |If the function has parameters, a list of logical data type names corresponding to the parameter list.| `VARCHAR[]` |
 | `varargs` |The name of the data type in case the function has a variable number of arguments, or `NULL` if the function does not have a variable number of arguments.| `VARCHAR` |
 | `macro_definition` |If this is a [macro](./statements/create_macro), the SQL expression that defines it.| `VARCHAR` |
-| `has_side_effects` |`false` if this is a pure function. `true` if this function changes the database state (like sequence funtions `nextval()` and `curval()`).| `BOOLEAN` |
+| `has_side_effects` |`false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`).| `BOOLEAN` |
 | `function_oid` | The internal identifier for this function | BIGINT |
 
 ## duckdb_indexes
@@ -183,7 +183,7 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `schema_oid` |Internal identifier of the schema object that contains the sequence object.| `BIGINT` |
 | `sequence_name` |The SQL name that identifies the sequence within the schema.| `VARCHAR` |
 | `sequence_oid` |The internal identifier of this sequence object.| `BIGINT` |
-| `temporary` |Wheter this sequence is temporary. Temporary sequences are transient and only visible within the current connection.| `BOOLEAN` |
+| `temporary` |Whether this sequence is temporary. Temporary sequences are transient and only visible within the current connection.| `BOOLEAN` |
 | `start_value` |The initial value of the sequence. This value will be returned when `nextval()` is called for the very first time on this sequence.| `BIGINT` |
 | `min_value` |The minimum value of the sequence.| `BIGINT` |
 | `max_value` |The maximum value of the sequence.| `BIGINT` |
@@ -220,7 +220,7 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `table_name` |The SQL name of the base table.| `VARCHAR` |
 | `table_oid` |Internal identifier of the base table object.| `BIGINT` |
 | `internal` |`false` if this is a user-defined table. | `BOOLEAN` |
-| `temporary` |Wheter this is a temporary table. Temporary tables are not persisted and only visible within the current connection.| `BOOLEAN` |
+| `temporary` |Whether this is a temporary table. Temporary tables are not persisted and only visible within the current connection.| `BOOLEAN` |
 | `has_primary_key` |`true` if this table object defines a `PRIMARY KEY`.| `BOOLEAN` |
 | `estimated_size` |The estimated number of rows in the table.| `BIGINT` |
 | `column_count` |The number of columns defined by this object| `BIGINT` |

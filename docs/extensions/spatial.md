@@ -118,9 +118,9 @@ ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, ope
 - `sibling_files` (default: `[]`): A list of sibling files that are required to open the file. E.g., the `ESRI Shapefile` driver requires a `.shx` file to be present. Although most of the time these can be discovered automatically.
 - `spatial_filter_box` (default: `NULL`): If set to a `BOX_2D`, the table function will only return rows that intersect with the given bounding box. Similar to `spatial_filter`.
 
-Note that GDAL is single-threaded, so this table function will not be able to make full use of parllelism. We're planning to implement support for the most common vector formats natively in this extension with additional table functions in the future. 
+Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism. We're planning to implement support for the most common vector formats natively in this extension with additional table functions in the future.
 
-We currently support over 50 different formats. You can generate the following table of supported GDAL drivers youself by executing `SELECT * FROM ST_Drivers()`.
+We currently support over 50 different formats. You can generate the following table of supported GDAL drivers yourself by executing `SELECT * FROM ST_Drivers()`.
 
 | short_name     | long_name                                           | can_create | can_copy | can_open | help_url                                           |
 | -------------- | --------------------------------------------------- | ---------- | -------- | -------- | -------------------------------------------------- |

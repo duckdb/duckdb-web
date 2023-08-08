@@ -4,7 +4,7 @@ title: DuckDB Full Text Search
 selected: DuckDB Full Text Search
 ---
 
-A full text index allows for a query to quickly search for all occurences of individual words within longer text strings.
+A full text index allows for a query to quickly search for all occurrences of individual words within longer text strings.
 Here's an example of building a full text index of Shakespeare's plays.
 
 ```sql

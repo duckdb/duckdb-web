@@ -205,7 +205,7 @@ FROM (
 #### Multiple Pivots
 Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined together or manipulated in other ways.
 
-For example, if two `PIVOT` statments share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
+For example, if two `PIVOT` statements share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
 ```sql
 FROM
     (PIVOT Cities ON Year USING SUM(Population) GROUP BY Country) year_pivot

@@ -6,7 +6,7 @@ expanded: Data Types
 blurb: An interval specifies a period of time measured in units of a specific date part like years, days, seconds, or others.
 ---
 
-Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or substracting them.
+Intervals represent a period of time. This period can be measured in a specific unit or combination of units, for example years, days, or seconds. Intervals are generally used to *modify* timestamps or dates by either adding or subtracting them.
 
 
 | Name | Description |

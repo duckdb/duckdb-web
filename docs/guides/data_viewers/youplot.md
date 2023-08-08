@@ -66,7 +66,7 @@ This tells `uplot` to draw a bar plot, use a comma-seperated delimiter (`-d,`), 
 
 ## Bonus round! stdin + stdout
 
-Maybe you're piping some data through `jq`. Maybe you're downloading a JSON file from somewhere. You can also tell DuckDB to read the data from another proess by changing the filename to `/dev/stdin`.
+Maybe you're piping some data through `jq`. Maybe you're downloading a JSON file from somewhere. You can also tell DuckDB to read the data from another process by changing the filename to `/dev/stdin`.
 
 Let's combine this with a quick `curl` from GitHub to see what a certain user has been up to lately.
 
