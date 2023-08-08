@@ -36,7 +36,7 @@ Feedback is welcome on these contribution steps as well!
 
 The site is built using [Jekyll](https://jekyllrb.com/). To build the site locally, install Ruby (using the version specified in the `.ruby-version` file), and run `bundler` to install the dependencies. If you are on Windows, you must then run these two commands:
 
-```sh
+```bash
 gem uninstall eventmachine
 gem install eventmachine --platform ruby
 ```
@@ -49,7 +49,7 @@ Click the green Code button to the top right to open a new codespace with this r
 
 Navigate to the directory where you have cloned `duckdb-web` and run:
 
-```sh
+```bash
 scripts/serve.sh
 ```
 

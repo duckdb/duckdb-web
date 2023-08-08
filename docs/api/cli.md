@@ -124,7 +124,7 @@ By default the shell includes support for syntax highlighting. Syntax highlighti
 
 The colors of the syntax highlighting can also be configured using the following commands.
 
-```
+```command
 D .constant
 Error: Expected usage: .constant [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
 D .keyword
@@ -181,31 +181,36 @@ The `.mode` command may be used to change the appearance of the tables returned 
 D .mode markdown
 D SELECT 'quacking intensifies' AS incoming_ducks;
 ```
-```
+
+```text
 |    incoming_ducks    |
 |----------------------|
 | quacking intensifies |
 ```
 
 The output appearance can also be adjusted with the `.separator` command. If using an export mode that relies on a separator (`csv` or `tabs` for example), the separator will be reset when the mode is changed. For example, `.mode csv` will set the separator to a comma (`,`). Using `.separator "|"` will then convert the output to be pipe separated.
+
 ```sql
 D .mode csv
 D SELECT 1 AS col_1, 2 AS col_2
 > UNION ALL
 > SELECT 10 AS col1, 20 AS col_2;
 ```
-```
+
+```csv
 col_1,col_2
 1,2
 10,20
 ```
+
 ```sql
 D .separator "|"
 D SELECT 1 AS col_1, 2 AS col_2
 > UNION ALL
 > SELECT 10 AS col1, 20 AS col_2;
 ```
-```
+
+```csv
 col_1|col_2
 1|2
 10|20
@@ -249,7 +254,8 @@ The `.schema` command will show all of the SQL statements used to define the sch
 ```command
 D .schema
 ```
-```command
+
+```sql
 CREATE TABLE fliers(animal VARCHAR);;
 CREATE TABLE swimmers(animal VARCHAR);;
 CREATE TABLE walkers(animal VARCHAR);;
@@ -296,9 +302,11 @@ The file my_results.md will then contain:
 
 The terminal will then display:
 
+```command
 |   displayed_column   |
 |----------------------|
 | back to the terminal |
+```
 
 A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../sql/statements/copy#csv-export), but the CLI-specific commands may be used to write a CSV instead if desired.
 
@@ -311,7 +319,8 @@ D SELECT 1 AS col_1, 2 AS col_2
 ```
 
 The file my_output_file.csv will then contain:
-```
+
+```csv
 col_1,col_2
 1,2
 10,20
@@ -369,6 +378,7 @@ D .read select_example.sql
 ```
 The output below is returned to the terminal by default (but can be adjusted using the `.output` or `.once` commands):
 
+```command
 | generate_series |
 |-----------------|
 | 0               |
@@ -377,7 +387,7 @@ The output below is returned to the terminal by default (but can be adjusted usi
 | 3               |
 | 4               |
 | 5               |
-
+```
 
 Multiple commands, including both SQL and dot commands, can also be run in a single `.read` command. In this example, the file `write_markdown_to_file.sql` is located in the same directory as duckdb.exe and contains the following commands:
 ```sql
@@ -394,7 +404,8 @@ D .read write_markdown_to_file.sql
 ```
 
 In this case, no output is returned to the terminal. Instead, the file `series.md` is created (or replaced if it already existed) with the markdown-formatted results shown here:
-```
+
+```command
 | generate_series |
 |-----------------|
 | 0               |
@@ -424,12 +435,12 @@ select 'Begin quacking!' as "Ready, Set, ..."
 
 To invoke that file on initialization, use this command:
 
-```
+```command
 $ ./duckdb -init select_example
+```
 
-```
 This outputs:
-```
+```command
 -- Loading resources from /home/<user>/.duckdbrc
 ┌─────────────────┐
 │ Ready, Set, ... │
@@ -444,12 +455,11 @@ Use ".open FILENAME" to reopen on a persistent database.
 ⚫◗
 ```
 
-
-
 ## Non-interactive usage
 
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
-```
+
+```command
 $ ./duckdb < select_example.sql
 | generate_series |
 |-----------------|
@@ -468,7 +478,8 @@ To execute a command with SQL text passed in directly from the command line, cal
 ```sql
 ./duckdb :memory: "SELECT 42 as the_answer"
 ```
-```
+
+```text
 ┌────────────┐
 │ the_answer │
 │   int32    │
@@ -502,7 +513,8 @@ First, read a file and pipe it to the duckdb cli executable. As arguments to the
 ```sql
 cat test.csv | ./duckdb :memory: "SELECT * FROM read_csv_auto('/dev/stdin')"
 ```
-```
+
+```text
 ┌───────┐
 │ woot  │
 │ int32 │
@@ -517,7 +529,8 @@ To write back to stdout, the copy command can be used with the `/dev/stdout` fil
 ```sql
 cat test.csv | ./duckdb :memory: "COPY (SELECT * FROM read_csv_auto('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
 ```
-```
+
+```csv
 woot
 42
 43

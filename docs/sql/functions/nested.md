@@ -152,9 +152,11 @@ SELECT generate_series(2, 5, 3);
 
 Date ranges are also supported:
 
-```
+```sql
 SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
+```
 
+```command
 ┌─────────────────────┐
 │        range        │
 ├─────────────────────┤
@@ -250,7 +252,8 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
 ## Lambda Functions
 
 `(parameter1, parameter2, ...) -> expression`. If the lambda function has only one parameter, then the brackets can be omitted. The parameters can have any names.
-```
+
+```sql
 param -> param > 1
 duck -> CONTAINS(CONCAT(duck, 'DB'), 'duck')
 (x, y) -> x + y
@@ -387,7 +390,8 @@ The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along 
 ```sql
 SELECT generate_subscripts([4,5,6], 1) AS i;
 ```
-```
+
+```command
 ┌───┐
 │ i │
 ├───┤

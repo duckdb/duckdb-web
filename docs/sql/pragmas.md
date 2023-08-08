@@ -120,7 +120,7 @@ Enable the gathering and printing of profiling information after the execution o
 
 Below is an example output of the profiling information for the simple query ```SELECT 42```:
 
-```
+```command
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
 ││    Query Profiling Information    ││

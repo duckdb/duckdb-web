@@ -8,7 +8,7 @@ Here we provide an overview of how to perform simple operations in SQL. This tut
 
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See [here](../installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
 
-```
+```command
 DuckDB 5fb6fe57ab
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
@@ -118,7 +118,7 @@ SELECT city, temp_lo, temp_hi, prcp, date FROM weather;
 
 The output should be:
 
-```
+```text
      city      | temp_lo | temp_hi  | prcp |    date
 ---------------+---------+----------+------+------------
  San Francisco |     46  |      50  | 0.25 | 1994-11-27
@@ -135,7 +135,7 @@ SELECT city, (temp_hi+temp_lo)/2 AS temp_avg, date FROM weather;
 
 This should give:
 
-```
+```text
      city      | temp_avg |    date
 ---------------+----------+------------
  San Francisco |       48 | 1994-11-27
@@ -154,7 +154,8 @@ SELECT * FROM weather
 ```
 
 Result:
-```
+
+```text
      city      | temp_lo | temp_hi | prcp |    date
 ---------------+---------+---------+------+------------
  San Francisco |     46  |      50 | 0.25 | 1994-11-27
@@ -166,13 +167,13 @@ SELECT * FROM weather
     ORDER BY city;
 ```
 
-```
+```text
      city      | temp_lo | temp_hi | prcp |    date
 ---------------+---------+---------+------+------------
  Hayward       |      37 |      54 |      | 1994-11-29
  San Francisco |      43 |      57 | 0.0  | 1994-11-29
  San Francisco |      46 |      50 | 0.25 | 1994-11-27
- ```
+```
 
 In this example, the sort order isn't fully specified, and so you might get the San Francisco rows in either order. But you'd always get the results shown above if you do:
 
@@ -183,13 +184,12 @@ SELECT * FROM weather
 
 You can request that duplicate rows be removed from the result of a query:
 
-
 ```sql
 SELECT DISTINCT city
     FROM weather;
 ```
 
-```
+```text
      city
 ---------------
  Hayward
@@ -214,7 +214,8 @@ SELECT *
     FROM weather, cities
     WHERE city = name;
 ```
-```
+
+```text
      city      | temp_lo | temp_hi | prcp |    date    |     name      | lon | lat
 ---------------+---------+---------+------+------------+---------------+-----+----
  San Francisco |      46 |      50 | 0.25 | 1994-11-27 | San Francisco | -194|  53
@@ -257,7 +258,8 @@ Now we will figure out how we can get the Hayward records back in. What we want 
 SELECT *
     FROM weather LEFT OUTER JOIN cities ON (weather.city = cities.name);
 ```
-```
+
+```text
      city      | temp_lo | temp_hi | prcp |    date    |     name      | lon | lat
 ---------------+---------+---------+------+------------+---------------+-----+----
  San Francisco |      46 |      50 | 0.25 | 1994-11-27 | San Francisco | -194| 53
@@ -272,10 +274,12 @@ This query is called a left outer join because the table mentioned on the left o
 Like most other relational database products, DuckDB supports aggregate functions. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
 As an example, we can find the highest low-temperature reading anywhere with:
+
 ```sql
 SELECT max(temp_lo) FROM weather;
 ```
-```
+
+```text
  max
 -----
   46
@@ -287,6 +291,7 @@ If we wanted to know what city (or cities) that reading occurred in, we might tr
 ```sql
 SELECT city FROM weather WHERE temp_lo = max(temp_lo);     -- WRONG
 ```
+
 but this will not work since the aggregate max cannot be used in the `WHERE` clause. (This restriction exists because the `WHERE` clause determines which rows will be included in the aggregate calculation; so obviously it has to be evaluated before aggregate functions are computed.) However, as is often the case the query can be restated to accomplish the desired result, here by using a subquery:
 
 ```sql
@@ -294,7 +299,7 @@ SELECT city FROM weather
     WHERE temp_lo = (SELECT max(temp_lo) FROM weather);
 ```
 
-```
+```text
      city
 ---------------
  San Francisco
@@ -311,7 +316,7 @@ SELECT city, max(temp_lo)
     GROUP BY city;
 ```
 
-```
+```text
      city      | max
 ---------------+-----
  Hayward       |  37
@@ -328,7 +333,7 @@ SELECT city, max(temp_lo)
     HAVING max(temp_lo) < 40;
 ```
 
-```
+```text
   city   | max
 ---------+-----
  Hayward |  37
@@ -365,7 +370,7 @@ Look at the new state of the data:
 SELECT * FROM weather;
 ```
 
-```
+```text
      city      | temp_lo | temp_hi | prcp |    date
 ---------------+---------+---------+------+------------
  San Francisco |      46 |      50 | 0.25 | 1994-11-27
@@ -387,7 +392,7 @@ All weather records belonging to Hayward are removed.
 SELECT * FROM weather;
 ```
 
-```
+```text
      city      | temp_lo | temp_hi | prcp |    date
 ---------------+---------+---------+------+------------
  San Francisco |      46 |      50 | 0.25 | 1994-11-27

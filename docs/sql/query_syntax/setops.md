@@ -80,7 +80,7 @@ The `UNION (ALL) BY NAME` clause can be used to combine rows from different tabl
 SELECT * FROM capitals UNION BY NAME SELECT * FROM weather;
 ```
 
-```
+```command
 ┌───────────┬─────────┬─────────┬────────────┐
 │   city    │ country │ degrees │    date    │
 │  varchar  │ varchar │  int32  │    date    │

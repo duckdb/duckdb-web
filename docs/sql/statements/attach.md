@@ -94,7 +94,7 @@ When running queries on multiple databases, the system opens separate transactio
 
 While multiple transactions can be active at a time - the system only supports *writing* to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:
 
-```
+```command
 Attempting to write to database "db2" in a transaction that has already modified database "db1" - a single transaction can only write to a single attached database.
 ```
 

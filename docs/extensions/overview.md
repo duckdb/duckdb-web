@@ -57,11 +57,13 @@ DuckDB extensions are stored in public S3 buckets, but the directory structure o
 As a result, a direct URL to the file must be used. 
 To directly download an extension file, use the following format:  
 
-```
+```text
 https://extensions.duckdb.org/v{release_version_number}/{platform_name}/{extension_name}.duckdb_extension.gz
 ```
+
 For example:
-```
+
+```text
 https://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
 ```
 

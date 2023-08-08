@@ -8,14 +8,14 @@ selected: Execute SQL
 
 SQL queries can be executed using the `duckdb.sql` command.
 
-```py
+```python
 import duckdb
 duckdb.sql("SELECT 42").show()
 ```
 
 By default this will create a relation object. The result can be converted to various formats using the result conversion functions. For example, the `fetchall` method can be used to convert the result to Python objects.
 
-```py
+```python
 results = duckdb.sql("SELECT 42").fetchall()
 print(results)
 # [(42,)]
@@ -23,7 +23,7 @@ print(results)
 
 Several other result objects exist. For example, you can use `df` to convert the result to a Pandas DataFrame.
 
-```py
+```python
 results = duckdb.sql("SELECT 42").df()
 print(results)
 #    42
@@ -34,7 +34,7 @@ By default, a global in-memory connection will be used. Any data stored in files
 
 After connecting, SQL queries can be executed using the `sql` command.
 
-```py
+```python
 con = duckdb.connect('file.db')
 con.sql('CREATE TABLE integers(i INTEGER)')
 con.sql('INSERT INTO integers VALUES (42)')

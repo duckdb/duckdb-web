@@ -8,7 +8,7 @@ selected: Import From Apache Arrow
 
 `CREATE TABLE AS` and `INSERT INTO` can be used to create a table from any query. We can then create tables or insert into existing tables by referring to referring to the Apache Arrow object in the query. This example imports from an [Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), but DuckDB can query different Apache Arrow formats as seen in the [SQL on Arrow guide](../../guides/python/sql_on_arrow).
 
-```py
+```python
 import duckdb
 import pyarrow as pa
 

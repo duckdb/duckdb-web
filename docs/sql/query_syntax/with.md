@@ -14,20 +14,23 @@ The `WITH` clause allows you to specify common table expressions (CTEs). Regular
 WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
-```
+
+```command
 ┌────┐
 │ x  │
 ├────┤
 │ 42 │
 └────┘
 ```
+
 ```sql
 -- create two CTEs, where the second CTE references the first CTE
 WITH cte AS (SELECT 42 AS i),
      cte2 AS (SELECT i*100 AS x FROM cte)
 SELECT * FROM cte2;
 ```
-```
+
+```command
 ┌──────┐
 │  x   │
 ├──────┤
@@ -73,7 +76,8 @@ SELECT path
 FROM tag_hierarchy
 WHERE source = 'Oasis';
 ```
-```
+
+```command
 ┌───────────────────────────┐
 │           path            │
 ├───────────────────────────┤
@@ -125,7 +129,8 @@ SELECT startNode, endNode, path
 FROM paths
 ORDER BY length(path), path;
 ```
-```
+
+```command
 ┌───────────┬─────────┬───────────────┐
 │ startNode │ endNode │     path      │
 ├───────────┼─────────┼───────────────┤
@@ -177,7 +182,7 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```
+```command
 ┌───────────┬─────────┬────────────┐
 │ startNode │ endNode │    path    │
 ├───────────┼─────────┼────────────┤
@@ -225,7 +230,8 @@ FROM paths
 WHERE endNode = 8
 ORDER BY length(path), path;
 ```
-```
+
+```command
 ┌───────────┬─────────┬───────────┐
 │ startNode │ endNode │   path    │
 ├───────────┼─────────┼───────────┤

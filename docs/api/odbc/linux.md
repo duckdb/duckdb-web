@@ -100,7 +100,7 @@ The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs
 
 An example of `.odbc.ini` with DuckDB would be:
 
-```
+```ini
 [DuckDB]
 Driver = DuckDB Driver
 Database=:memory:
@@ -119,7 +119,7 @@ A driver section starts with the driver name between brackets, and then it follo
 
 An example of `.odbcinst.ini` with the DuckDB driver would be:
 
-```
+```ini
 [ODBC]
 Trace = yes
 TraceFile = /tmp/odbctrace

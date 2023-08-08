@@ -11,12 +11,13 @@ Relations can be created from SQL queries using the `duckdb.sql` method. Alterna
 
 For example, here we create a relation from a SQL query:
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(10000000000) tbl(id)');
 rel.show()
 ```
-```
+
+```text
 ┌────────────────────────┐
 │           id           │
 │         int64          │
@@ -68,12 +69,13 @@ Outside of SQL queries, the following methods are provided to construct relation
 
 Relation objects can be queried through SQL through so-called **replacement scans**. If you have a relation object stored in a variable, you can refer to that variable as if it was a SQL table (in the `FROM` clause). This allows you to incrementally build queries using relation objects.
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 duckdb.sql('SELECT SUM(id) FROM rel').show()
 ```
-```
+
+```text
 ┌──────────────┐
 │   sum(id)    │
 │    int128    │
@@ -88,12 +90,13 @@ There are a number of operations that can be performed on relations. These are a
 ##### **aggregate(expr, groups = {})**
 Apply an (optionally grouped) aggregate over the relation. The system will automatically group by any columns that are not aggregates.
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.aggregate('id % 2 AS g, sum(id), min(id), max(id)')
 ```
-```
+
+```text
 ┌───────┬──────────────┬─────────┬─────────┐
 │   g   │   sum(id)    │ min(id) │ max(id) │
 │ int64 │    int128    │  int64  │  int64  │
@@ -106,13 +109,14 @@ rel.aggregate('id % 2 AS g, sum(id), min(id), max(id)')
 ##### **except_(rel)**
 Select all rows in the first relation, that do not occur in the second relation. The relations must have the same number of columns.
 
-```py
+```python
 import duckdb
 r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
 r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
 r1.except_(r2).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -129,12 +133,13 @@ r1.except_(r2).show()
 
 Apply the given condition to the relation, filtering any rows that do not satisfy the condition.
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.filter('id > 5').limit(3).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -148,13 +153,14 @@ rel.filter('id > 5').limit(3).show()
 ##### **intersect(rel)**
 Select the intersection of two relations - returning all rows that occur in both relations. The relations must have the same number of columns.
 
-```py
+```python
 import duckdb
 r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
 r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
 r1.intersect(r2).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -170,13 +176,14 @@ r1.intersect(r2).show()
 ##### **join(rel, condition, type = 'inner')**
 Combine two relations, joining them based on the provided condition. 
 
-```py
+```python
 import duckdb
 r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)').set_alias('r1');
 r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)').set_alias('r2');
 r1.join(r2, 'r1.id + 10 = r2.id').show()
 ```
-```
+
+```text
 ┌───────┬───────┐
 │  id   │  id   │
 │ int64 │ int64 │
@@ -193,12 +200,13 @@ r1.join(r2, 'r1.id + 10 = r2.id').show()
 
 Select the first *n* rows, optionally offset by *offset*.
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.limit(3).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
@@ -213,12 +221,13 @@ rel.limit(3).show()
 
 Sort the relation by the given set of expressions.
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.order('id DESC').limit(3).show()
 ```
-```
+
+```text
 ┌────────┐
 │   id   │
 │ int64  │
@@ -233,12 +242,13 @@ rel.order('id DESC').limit(3).show()
 
 Apply the given expression to each row in the relation.
 
-```py
+```python
 import duckdb
 rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.project('id + 10 AS id_plus_ten').limit(3).show()
 ```
-```
+
+```text
 ┌─────────────┐
 │ id_plus_ten │
 │    int64    │
@@ -252,13 +262,14 @@ rel.project('id + 10 AS id_plus_ten').limit(3).show()
 ##### **union(rel)**
 Combine two relations, returning all rows in `r1` followed by all rows in `r2`. The relations must have the same number of columns.
 
-```py
+```python
 import duckdb
 r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
 r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)');
 r1.union(r2).show()
 ```
-```
+
+```text
 ┌───────┐
 │  id   │
 │ int64 │
