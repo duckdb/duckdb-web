@@ -2,6 +2,8 @@
 layout: docu
 title: DuckDB Internals
 selected: Internals
+redirect_from:
+  - /internals
 ---
 On this page is a brief description of the internals of the DuckDB engine.
 

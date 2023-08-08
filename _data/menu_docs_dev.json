@@ -969,6 +969,76 @@
           ]
         }
       ]
+    },
+    {
+      "page": "Development",
+      "slug": "dev/",
+      "mainfolderitems": [
+        {
+          "page": "Testing",
+          "slug": "sqllogictest",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "SQLLogicTest",
+              "url": "intro"
+            },
+            {
+              "page": "Debugging",
+              "url": "debugging"
+            },
+            {
+              "page": "Result Verification",
+              "url": "result_verification"
+            },
+            {
+              "page": "Persistent",
+              "url": "persistent_testing"
+            },
+            {
+              "page": "Loops",
+              "url": "loops"
+            },
+            {
+              "page": "Multiple Connections",
+              "url": "multiple_connections"
+            },
+            {
+              "page": "Catch",
+              "url": "catch"
+            }
+          ]
+        },
+        {
+          "page": "Internals",
+          "slug": "internals",
+          "subfolderitems": [
+            {
+              "page": "Storage Versions & Format",
+              "url": "storage"
+            },
+            {
+              "page": "Execution Format",
+              "url": "vector"
+            }
+          ]
+        },
+        {
+          "page": "Profiling",
+          "url": "profiling"
+        },
+        {
+          "page": "Release Dates",
+          "url": "release-dates"
+        },
+        {
+          "page": "Building",
+          "url": "building"
+        }
+      ]
     }
   ]
 }

@@ -3,6 +3,8 @@ layout: docu
 title: SQLLogicTest - Loops
 selected: Documentation/Development/SQLLogicTest/Loops
 expanded: Testing
+redirect_from:
+  - /dev/sqllogictest/loops
 ---
 
 Loops can be used in sqllogictests when it is required to execute the same query many times but with slight modifications in constant values. For example, suppose we want to fire off 100 queries that check for the presence of the values `0..100` in a table:
@@ -41,14 +43,14 @@ endloop
 
 `foreach` also has a number of preset combinations that should be used when required. In this manner, when new combinations are added to the preset, old tests will automatically pick up these new combinations.
 
-|      Preset      |                           Expansion                            |
-|------------------|----------------------------------------------------------------|
-| `<compression>`` | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
-| `<signed>``      | `tinyint smallint integer bigint hugeint`                      |
-| `<unsigned>``    | `utinyint usmallint uinteger ubigint`                          |
-| `<integral>``    | `<signed> <unsigned>`                                          |
-| `<numeric>``     | `<integral> float double`                                      |
-| `<alltypes>``    | `<numeric> bool interval varchar json`                         |
+|      Preset     |                           Expansion                            |
+|-----------------|----------------------------------------------------------------|
+| `<compression>` | `none uncompressed rle bitpacking dictionary fsst chimp patas` |
+| `<signed>`      | `tinyint smallint integer bigint hugeint`                      |
+| `<unsigned>`    | `utinyint usmallint uinteger ubigint`                          |
+| `<integral>`    | `<signed> <unsigned>`                                          |
+| `<numeric>`     | `<integral> float double`                                      |
+| `<alltypes>`    | `<numeric> bool interval varchar json`                         |
 
 > Use large loops sparingly. Executing hundreds of thousands of SQL statements will slow down tests unnecessarily. Do not use loops for inserting data.
 
