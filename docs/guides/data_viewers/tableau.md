@@ -62,7 +62,7 @@ and using Tableau-provided Postgres dialect.
 2. Launch Tableau
 3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter jdbc:duckdb:/User/username/path/to/database.db. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
-<img src='/images/guides/tableau/tableau-osx-jdbc.png' alt='tableau-postgres' width = 50%>
+![Tableau Postgres](/images/guides/tableau/tableau-osx-jdbc.png)
 
 However, functionality will be missing such as MEDIAN and PERCENTILE aggregate functions. 
 To make the data source connection more compatible with the PostgreSQL dialect, 
