@@ -11,7 +11,7 @@ In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
 Tableau has two main versions: Desktop and Online (Server).
-* For Desktop, connecting to a DuckDB database is similar to working in an embedded environemnt like Python.
+* For Desktop, connecting to a DuckDB database is similar to working in an embedded environment like Python.
 * For Online, since DuckDB is in-process, the data needs to be either on the server itself
 or in a remote data bucket that is accessible from the server.
 

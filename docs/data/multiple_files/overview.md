@@ -48,7 +48,7 @@ SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 #### Glob Syntax
-Any file name input to the read_parquet function can either be an exact filename, or use a glob syntax to read multple files that match a pattern.
+Any file name input to the read_parquet function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
 
 |  Wildcard  |                        Description                        |
 |------------|-----------------------------------------------------------|

@@ -86,7 +86,7 @@ Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
 
 After the configuration, for validate the installation, it is possible to use a odbc client. unixODBC use a command line tool called `isql`.
 
-Use the DSN defined in `odbc.ini` as a paramet of `isql`. 
+Use the DSN defined in `odbc.ini` as a parameter of `isql`.
 
 ```
 isql DuckDB

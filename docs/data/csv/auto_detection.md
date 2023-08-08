@@ -9,7 +9,7 @@ When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag se
 * Detect the types of each of the columns
 * Detect whether or not the file has a header row
 
-By default the system will try to auto-detect all options. However, options can be individually overriden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g., `read_csv_auto('file.csv', delim='|')`).
+By default the system will try to auto-detect all options. However, options can be individually overridden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv_auto` with an explicit delimiter (e.g., `read_csv_auto('file.csv', delim='|')`).
 
 The detection works by operating on a sample of the file. The size of the sample can be modified by setting the `sample_size` parameter. The default sample size is `20480` rows. Setting the `sample_size` parameter to `-1` means the entire file is read for sampling. The way sampling is performed depends on the type of file. If we are reading from a regular file on disk, we will jump into the file and try to sample from different locations in the file. If we are reading from a file in which we cannot jump - such as a `.gz` compressed CSV file or `stdin` - samples are taken only from the beginning of the file.
 
@@ -62,7 +62,7 @@ The type detection works by attempting to convert the values in each column to t
 
 Note everything can be cast to `VARCHAR`. This type has the lowest priority - i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In `flights.csv` the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
-The detected types can be individually overriden using the `types` option. This option takes either a list of types (e.g., `types=[INT, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name -> type` map which overrides options of individual columns (e.g., `types={'quarter': INT}`).
+The detected types can be individually overridden using the `types` option. This option takes either a list of types (e.g., `types=[INT, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name -> type` map which overrides options of individual columns (e.g., `types={'quarter': INT}`).
 
 The type detection can be entirely disabled by using the `all_varchar` option. If this is set all columns will remain as `VARCHAR` (as they originally occur in the CSV file).
 
@@ -72,7 +72,7 @@ Header detection works by checking if the candidate header row deviates from the
 
 In files that do not have a header row, the column names are generated as `column0`, `column1`, etc.
 
-Note that headers cannot be detected correctly if all columns are of type `VARCHAR` - as in this case the system cannot distinguish the header row from the other rows in the file. In this case the system assumes the file has no header. This can be overriden using the `header` option.
+Note that headers cannot be detected correctly if all columns are of type `VARCHAR` - as in this case the system cannot distinguish the header row from the other rows in the file. In this case the system assumes the file has no header. This can be overridden using the `header` option.
 
 ### Dates and Timestamps
 

@@ -56,7 +56,7 @@ import pandas as pd
 %load_ext sql
 ```
 
-Set configrations on jupysql to directly output data to Pandas and to simplify the output that is printed to the notebook.  
+Set configurations on jupysql to directly output data to Pandas and to simplify the output that is printed to the notebook.
 ```python
 %config SqlMagic.autopandas = True
 %config SqlMagic.feedback = False

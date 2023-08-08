@@ -59,7 +59,7 @@ Please note you will need to use the `s3://` URL to read your data.
 SELECT * FROM read_parquet('s3://<gcs_bucket>/<file>');
 ```
 
-For Cloudflare R2, the [S3 Compatability API](https://developers.cloudflare.com/r2/data-access/s3-api/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets. You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/data-access/s3-api/tokens/) and update the `s3_endpoint` used:
+For Cloudflare R2, the [S3 Compatibility API](https://developers.cloudflare.com/r2/data-access/s3-api/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets. You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/data-access/s3-api/tokens/) and update the `s3_endpoint` used:
 
 ```sql
 SET s3_region="auto"

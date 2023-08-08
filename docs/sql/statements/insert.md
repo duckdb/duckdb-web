@@ -38,7 +38,7 @@ If the expression for any column is not of the correct data type, automatic type
 ### BY POSITION
 
 The order that values are inserted into the columns of the table is determined by the order that the columns were declared in.
-This can be overriden by providing column names as part of the target, for example:
+This can be overridden by providing column names as part of the target, for example:
 ```sql
 CREATE TABLE tbl(a INTEGER, b INTEGER);
 INSERT INTO tbl(b, a) VALUES (5, 42);

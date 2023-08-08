@@ -57,7 +57,7 @@ The table below shows the available general aggregate functions.
 | `last(arg)` |Returns the last value of a column. | `last(A)` | - |
 | `list(arg)` |Returns a `LIST` containing all the values of a column. | `list(A)` |`array_agg` |
 | `max(arg)` |Returns the maximum value present in arg. | `max(A)` | - |
-| `min(arg)` | Returns the minumum value present in arg. | `min(A)` | - |
+| `min(arg)` | Returns the minimum value present in arg. | `min(A)` | - |
 | `product(arg)` |Calculates the product of all tuples in arg | `product(A)` | - |
 | `string_agg(arg, sep)` |Concatenates the column string values with a separator | `string_agg(S, ',')` | `group_concat` |
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
@@ -67,7 +67,7 @@ The table below shows the available approximate aggregate functions.
 
 | Function | Description | Example |
 |:---|:---|:---|
-| `approx_count_distinct(x)` | Gives the approximate count of distintinct elements using HyperLogLog. | `approx_count_distinct(A)` |
+| `approx_count_distinct(x)` | Gives the approximate count of distinct elements using HyperLogLog. | `approx_count_distinct(A)` |
 | `approx_quantile(x,pos)` | Gives the approximate quantile using T-Digest. | `approx_quantile(A,0.5)` |
 | `reservoir_quantile(x,quantile,sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A,0.5,1024)` |
 
@@ -82,9 +82,9 @@ The table below shows the available statistical aggregate functions.
 | `entropy(x)` | Returns the log-2 entropy of count input-values. | - | - |
 | `kurtosis(x)` | Returns the excess kurtosis (Fisher's definition) of all input values, with a bias correction according to the sample size. | - | - |
 | `mad(x)` | Returns the median absolute deviation for the values within x. NULL values are ignored. Temporal types return a positive `INTERVAL`. | `MEDIAN(ABS(x-MEDIAN(x)))` | - |
-| `median(x)` | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitiative values are averaged and ordinal values return the lower value. | `QUANTILE_CONT(x, 0.5)` | - |
+| `median(x)` | Returns the middle value of the set. NULL values are ignored. For even value counts, quantitative values are averaged and ordinal values return the lower value. | `QUANTILE_CONT(x, 0.5)` | - |
 | `mode(x)` | Returns the most frequent value for the values within x. NULL values are ignored. | - | - |
-| `quantile_cont(x,pos)` | Returns the intepolated quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding intepolated quantiles. | - | - |
+| `quantile_cont(x,pos)` | Returns the interpolated quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. | - | - |
 | `quantile_disc(x,pos)` | Returns the exact quantile number between 0 and 1 . If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding exact quantiles. | - | `quantile` |
 | `regr_avgx(y,x)` | Returns the average of the independent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
 | `regr_avgy(y,x)` | Returns the average of the dependent variable for non-null pairs in a group, where x is the independent variable and y is the dependent variable. | - | - |
