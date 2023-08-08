@@ -58,7 +58,7 @@ Below are parameters that can be passed in to the CSV reader.
 | `new_line` | Set the new line character(s) in the file. Options are `'\r'`,`'\n'`, or `'\r\n'`. | varchar | `(empty)` |
 | `normalize_names` | Boolean value that specifies whether or not column names should be normalized, removing any non-alphanumeric characters from them. | bool | false |
 | `nullstr` | Specifies the string that represents a NULL value. | varchar | `(empty)` |
-| `parallel` | Whether or not the experimental parallel CSV reader is used. | bool | false |
+| `parallel` | Whether or not the parallel CSV reader is used. | bool | true |
 | `quote` | Specifies the quoting string to be used when a data value is quoted. | varchar | `"` |
 | `sample_size` | The number of sample rows for [auto detection of parameters](auto_detection). | bigint | 20480 |
 | `skip` | The number of lines at the top of the file to skip. | bigint | 0 |
