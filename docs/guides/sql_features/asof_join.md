@@ -29,7 +29,8 @@ We can see that we have a unit_price defined for each hour, but not for half hou
 ```sql
 SELECT * FROM prices;
 ```
-```
+
+```console
 ┌─────────────────────┬────────────┐
 │     ticker_time     │ unit_price │
 │      timestamp      │   int64    │
@@ -41,10 +42,12 @@ SELECT * FROM prices;
 │ 2001-01-01 00:20:00 │          4 │
 └─────────────────────┴────────────┘
 ```
+
 ```sql
 SELECT * FROM sales;
 ```
-```
+
+```console
 ┌─────────┬─────────────────────┬──────────┐
 │  item   │      sale_time      │ quantity │
 │ varchar │      timestamp      │  int32   │
@@ -66,7 +69,8 @@ SELECT s.*, p.unit_price, s.quantity * p.unit_price AS total
  FROM sales s LEFT JOIN prices p
    ON s.sale_time = p.ticker_time;
 ```
-```
+
+```console
 ┌─────────┬─────────────────────┬──────────┬────────────┬───────┐
 │  item   │      sale_time      │ quantity │ unit_price │ total │
 │ varchar │      timestamp      │  int32   │   int64    │ int64 │
@@ -87,7 +91,8 @@ SELECT s.*, p.unit_price, s.quantity * p.unit_price AS total_cost
   FROM sales s ASOF LEFT JOIN prices p
     ON s.sale_time >= p.ticker_time;
 ```
-```
+
+```console
 ┌─────────┬─────────────────────┬──────────┬────────────┬────────────┐
 │  item   │      sale_time      │ quantity │ unit_price │ total_cost │
 │ varchar │      timestamp      │  int32   │   int64    │   int64    │

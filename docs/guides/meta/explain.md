@@ -20,7 +20,7 @@ SET explain_output='all';
 
 Below is an example of running `EXPLAIN` on `Q1` of the TPC-H benchmark.
 
-```
+```console
 ┌───────────────────────────┐
 │          ORDER_BY         │
 │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │

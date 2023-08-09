@@ -60,7 +60,7 @@ The `TABLESAMPLE` and `USING SAMPLE` clauses are identical in terms of syntax an
 
 The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with the `USING SAMPLE` clause, i.e., the following two queries are identical:
 
-```
+```sql
 -- sample 20% of tbl BEFORE the join
 SELECT * FROM tbl TABLESAMPLE RESERVOIR(20%), tbl2 WHERE tbl.i=tbl2.i;
 -- sample 20% of tbl BEFORE the join

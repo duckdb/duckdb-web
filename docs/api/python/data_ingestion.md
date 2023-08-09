@@ -7,7 +7,7 @@ selected: Client APIs
 #### CSV Files
 CSV files can be read using the `read_csv` function, called either from within Python or directly from within SQL. By default, the `read_csv` function attempts to auto-detect the CSV settings by sampling from the provided file. 
 
-```py
+```python
 import duckdb
 # read from a file using fully auto-detected settings
 duckdb.read_csv('example.csv')
@@ -30,7 +30,7 @@ See the [CSV Loading](../../data/csv) page for more information.
 #### Parquet Files
 Parquet files can be read using the `read_parquet` function, called either from within Python or directly from within SQL.
 
-```py
+```python
 import duckdb
 # read from a single Parquet file
 duckdb.read_parquet('example.parquet')
@@ -47,7 +47,7 @@ See the [Parquet Loading](../../data/parquet) page for more information.
 #### JSON Files
 JSON files can be read using the `read_json` function, called either from within Python or directly from within SQL. By default, the `read_json` function will automatically detect if a file contains newline-delimited JSON or regular JSON, and will detect the schema of the objects stored within the JSON file.
 
-```py
+```python
 import duckdb
 # read from a single JSON file
 duckdb.read_json('example.json')
@@ -106,7 +106,7 @@ This sample size is by default set to 1000.
 If the type picked during the analyze step is wrong, this will result in a "Failed to cast value:" error, in which case you will need to increase the sample size.
 
 The sample size can be changed by setting the `pandas_analyze_sample` config option.
-```py
+```python
 # example setting the sample size to 100000
 duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 ```

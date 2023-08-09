@@ -39,7 +39,8 @@ SELECT course, type, COUNT(*)
 FROM students
 GROUP BY GROUPING SETS ((course, type), course, type, ());
 ```
-```
+
+```console
 ┌────────┬──────────┬──────────────┐
 │ course │   type   │ count_star() │
 ├────────┼──────────┼──────────────┤

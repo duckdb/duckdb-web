@@ -17,7 +17,8 @@ Rill Developer makes it effortless to transform your datasets with SQL and creat
 
 ## Install
 You can get started in less than 2 minutes with Rill's installation script (Mac and Linux):
-```
+
+```bash
 curl -s https://cdn.rilldata.com/install.sh | bash
 ```
 
@@ -32,14 +33,14 @@ In Rill, all data sources, data models, and dashboard definitions are saved as R
 
 For this tutorial, let's checkout an example project from the git repository:
 
-```
+```bash
 git clone https://github.com/rilldata/rill-developer-example.git
 cd rill-developer-example
 ```
 
 Alternatively, you can create a new, empty Rill project:
 
-```
+```bash
 rill init --project my-project
 cd my-project
 ```
@@ -48,7 +49,7 @@ cd my-project
 
 Now it's time to start the application:
 
-```
+```bash
 rill start
 ```
 

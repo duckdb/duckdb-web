@@ -39,7 +39,7 @@ $ hexdump -n 20 -C mydata.db
 
 A simple example of reading the storage version using python is below.
 
-```py
+```python
 import struct
 
 pattern = struct.Struct('<8x4sQ')

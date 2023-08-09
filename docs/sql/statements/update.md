@@ -81,4 +81,4 @@ UPDATE original as true_original
 ```
 
 ### Upsert (Insert or Update)
-See the [Insert documentation](/docs/sql/statements/insert#on-conflict-clause) for details.
+See the [Insert documentation](insert#on-conflict-clause) for details.

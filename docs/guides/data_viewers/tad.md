@@ -29,26 +29,32 @@ There are three ways to launch Tad:
   1. **Application Icon**: You can double click on the Tad application icon to open Tad.  Use <strong>File...Open</strong> and the standard file open dialog to open a tabular data file in any of the supported file formats.
   2. **Context Menu or Drag and Drop**: The installation process registers Tad as a viewer for the supported file format extensions. On any <code>.csv</code> or <code> parquet</code>file in the Finder (macOS) or Explorer (Windows), use <strong>Open With...</strong> and select <strong>Tad</strong> to open the file in Tad.
   3. **Command Line**: Once Tad is installed and available on your PATH, simply type:
-```
+
+```bash
 $ tad somefile.csv
 ```
+
 to launch Tad to explore the file. You can also open <code>.tad</code> files (previously saved Tad view configurations) and all the other supported file types via the command line.
 
 # Browsing Database Files
 
 Of particular interest to DuckDb users, Tad can serve as a lightweight browser for DuckDb and SQLite database files.  Just run:
-```sh
+
+```bash
 $ tad myDatabase.duckdb
 ```
+
 from the command line to get a browsable view of the tables in a DuckDb database file.
 This also works for sqlite databases (files with a `.sqlite` extension).
 
 # Peeking Under The Bonnet
 
 If for some reason you want to see the gnarly details of the SQL queries that Tad is constructing and executing, you can use the <code>-f</code> option on the command line to keep Tad in the foreground and <code>--show-queries</code> to get Tad to print the generated SQL queries like so:
-```
+
+```bash
 $ tad -f --show-queries somefile.csv
 ```
+
 Not for the faint-hearted.
 
 # Downloading and Installing Tad

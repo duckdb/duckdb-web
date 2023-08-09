@@ -27,7 +27,8 @@ To demonstrate, see the below example:
 ```sql
 EXPLAIN SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 ```
-```
+
+```console
 ┌─────────────────────────────┐
 │┌───────────────────────────┐│
 ││       Physical Plan       ││
@@ -74,7 +75,8 @@ To create the query graphs it is first necessary to gather the necessary data by
 ```sql
 EXPLAIN ANALYZE SELECT name FROM students JOIN exams USING (sid) WHERE name LIKE 'Ma%';
 ```
-```
+
+```console
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
 ││        Total Time: 0.0003s        ││

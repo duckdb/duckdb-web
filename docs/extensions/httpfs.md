@@ -111,7 +111,7 @@ basis. This allows for use of multiple sets of credentials, regions, etc. These 
 URL as query parameters. All the individual configuration values listed above can be set as query parameters.
 
 For instance,
-```
+```text
 s3://bucket/file.parquet?s3_access_key_id=accessKey&s3_secret_access_key=secretKey
 ```
 or
@@ -172,7 +172,7 @@ DuckDB also offers support for the Hive partitioning scheme. In the Hive partiti
 separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file
 path. So for example let us consider three parquet files Hive paritioned by year:
 
-```
+```text
 s3://bucket/year=2012/file.parquet
 s3://bucket/year=2013/file.parquet
 s3://bucket/year=2014/file.parquet

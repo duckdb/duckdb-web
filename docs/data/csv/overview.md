@@ -39,7 +39,7 @@ Below are parameters that can be passed in to the CSV reader.
 # Parameters
 
 | Name | Description | Type | Default |
-|:---|:---|:----|:----|
+|:------|:--------|:---|:---|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. | bool | false |
 | `auto_detect` | Enables [auto detection of parameters](auto_detection) | bool | true |
 | `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `struct` | `(empty)` |
@@ -78,7 +78,7 @@ SELECT * FROM read_csv_auto('flights.csv');
 ```
 
 |FlightDate|UniqueCarrier| OriginCityName  | DestCityName  |
-|---------:|------------:|----------------:|--------------:|
+|----------|-------------|-----------------|---------------|
 |1988-01-01|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-02|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-03|AA           |New York, NY     |Los Angeles, CA|
@@ -93,7 +93,7 @@ DESCRIBE ontime;
 ```
 
 |Field         |Type   |Null|Key |Default|Extra|
-|-------------:|------:|---:|---:|------:|----:|
+|--------------|-------|----|----|-------|-----|
 |FlightDate    |DATE   |YES |NULL|NULL   |NULL |
 |UniqueCarrier |VARCHAR|YES |NULL|NULL   |NULL |
 |OriginCityName|VARCHAR|YES |NULL|NULL   |NULL |
@@ -122,7 +122,7 @@ SELECT * FROM ontime;
 ```
 
 |flightdate|uniquecarrier| origincityname  | destcityname  |
-|---------:|------------:|----------------:|--------------:|
+|----------|-------------|-----------------|---------------|
 |1988-01-01|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-02|AA           |New York, NY     |Los Angeles, CA|
 |1988-01-03|AA           |New York, NY     |Los Angeles, CA|
@@ -135,4 +135,4 @@ COPY ontime FROM 'flights.csv' ( AUTO_DETECT TRUE );
 SELECT * FROM ontime;
 ```
 
-More on the copy statement can be found [here](/docs/sql/statements/copy.html).
+More on the copy statement can be found [here](../../sql/statements/copy).
