@@ -3,6 +3,8 @@ import os
 import shutil
 import datetime
 import subprocess
+import frontmatter
+
 
 # Usage instructions: 
 # Update _config.yml to specify the new version number
@@ -79,10 +81,22 @@ def list_tree(source):
 		output = [os.path.basename(x) for x in output if len(x) > 0]
 		return output
 
-def copy_file(source_path, target_path):
+def copy_file(source_path, target_path, version):
 	print(f"{source_path} -> {target_path}")
 	if revision == None:
-		shutil.copy(source_path, target_path)
+		if source_path.endswith(".md"):
+			with open(source_path) as f, open(target_path, "w") as of:
+				# parse YAML metadata and adjust the "redirect_from" field
+				doc = frontmatter.load(f)
+
+				redirect_from_field = doc.get("redirect_from")
+				if redirect_from_field:
+					redirect_from_field_to_archive = [x.replace("docs/", f"docs/archive/{version}/") for x in redirect_from_field]
+					doc["redirect_from"] = redirect_from_field_to_archive
+
+				of.write(frontmatter.dumps(doc))
+		else:
+			shutil.copy(source_path, target_path)
 	else:
 		output = execute_and_get_output(git_show_cmd + [revision + ':' + source_path])
 		file_content = output
@@ -91,7 +105,7 @@ def copy_file(source_path, target_path):
 
 
 
-def recursive_copy(source, target):
+def recursive_copy(source, target, version):
 	if not os.path.exists(target):
 		os.mkdir(target)
 	for fname in list_tree(source):
@@ -100,10 +114,10 @@ def recursive_copy(source, target):
 		source_path = os.path.join(source, fname)
 		target_path = os.path.join(target, fname)
 		if os.path.isfile(source_path):
-			copy_file(source_path, target_path)
+			copy_file(source_path, target_path, version)
 		elif os.path.isdir(source_path):
-			recursive_copy(source_path, target_path)
+			recursive_copy(source_path, target_path, version)
 
 
-recursive_copy('docs', folder)
-copy_file('_data/menu_docs_dev.json', '_data/menu_docs_%s.json' % (version.replace('.', ''),), )
+recursive_copy('docs', folder, version)
+copy_file('_data/menu_docs_dev.json', '_data/menu_docs_%s.json' % (version.replace('.', ''),), version)
