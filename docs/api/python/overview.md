@@ -73,7 +73,7 @@ duckdb.sql('SELECT 42').fetchnumpy() # NumPy Arrays
 ```
 
 ## Writing Data To Disk
-DuckDB supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](/docs/sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
+DuckDB supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](../../sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
 
 ```python
 import duckdb

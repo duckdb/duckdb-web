@@ -36,4 +36,4 @@ CALL postgres_attach('');
 SELECT * FROM tbl_name;
 ```
 
-For more information see the [Postgres scanner documentation](/docs/extensions/postgres_scanner).
+For more information see the [Postgres scanner documentation](../../extensions/postgres_scanner).

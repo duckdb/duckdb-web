@@ -34,4 +34,4 @@ CALL sqlite_attach('test.db');
 SELECT * FROM tbl_name;
 ```
 
-For more information see the [SQLite scanner documentation](/docs/extensions/sqlite_scanner).
+For more information see the [SQLite scanner documentation](../../extensions/sqlite_scanner).
