@@ -12,7 +12,7 @@ Functions are ...
 
 `duckdb_functions` table function shows the list of functions currently built into the system.
 
-```command
+```console
 D select distinct on(function_name) function_name, function_type, return_type, parameters, parameter_types from duckdb_functions() where function_type='scalar' limit 10;
 ┌────────────────┬───────────────┬─────────────┬──────────────────────────┬──────────────────────────────────────┐
 │ function_name  │ function_type │ return_type │        parameters        │           parameter_types            │

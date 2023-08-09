@@ -109,7 +109,7 @@ SELECT 42, 84 UNION ALL SELECT 10, 20;
 
 The expected output hashes for every query in the test file will then be printed to the terminal, as follows:
 
-```command
+```console
 ================================================================================
 SQL Query
 SELECT 42, 84 UNION ALL SELECT 10, 20;

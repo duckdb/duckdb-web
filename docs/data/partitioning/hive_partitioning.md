@@ -19,7 +19,7 @@ Hive partitioning is a [partitioning strategy](https://en.wikipedia.org/wiki/Par
 
 Below is an example of a hive partitioned file hierarchy. The files are partitioned on two keys (`year` and `month`).
 
-```command
+```console
 orders
 ├── year=2021
 │    ├── month=1
@@ -54,7 +54,7 @@ WHERE year=2022 AND month=11;
 
 When executing this query, only the following files will be read:
 
-```command
+```console
 orders
 └── year=2022
      └── month=11

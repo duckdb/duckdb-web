@@ -17,7 +17,7 @@ create table corpus as
 describe corpus;
 ```
 
-```command
+```console
 ┌─────────────┬─────────────┬─────────┐
 │ column_name │ column_type │  null   │
 ├─────────────┼─────────────┼─────────┤
@@ -56,7 +56,7 @@ SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
   ORDER BY score;
 ```
 
-```command
+```console
 ┌───────────────────┬─────────────┬──────────────────────┬──────────────┬──────────────────────────────────────────────┐
 │       score       │   line_id   │      play_name       │   speaker    │                  text_entry                  │
 │      double       │   varchar   │       varchar        │   varchar    │                   varchar                    │

@@ -15,7 +15,7 @@ WITH cte AS (SELECT 42 AS x)
 SELECT * FROM cte;
 ```
 
-```command
+```console
 ┌────┐
 │ x  │
 ├────┤
@@ -30,7 +30,7 @@ WITH cte AS (SELECT 42 AS i),
 SELECT * FROM cte2;
 ```
 
-```command
+```console
 ┌──────┐
 │  x   │
 ├──────┤
@@ -77,7 +77,7 @@ FROM tag_hierarchy
 WHERE source = 'Oasis';
 ```
 
-```command
+```console
 ┌───────────────────────────┐
 │           path            │
 ├───────────────────────────┤
@@ -130,7 +130,7 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```command
+```console
 ┌───────────┬─────────┬───────────────┐
 │ startNode │ endNode │     path      │
 ├───────────┼─────────┼───────────────┤
@@ -182,7 +182,7 @@ FROM paths
 ORDER BY length(path), path;
 ```
 
-```command
+```console
 ┌───────────┬─────────┬────────────┐
 │ startNode │ endNode │    path    │
 ├───────────┼─────────┼────────────┤
@@ -231,7 +231,7 @@ WHERE endNode = 8
 ORDER BY length(path), path;
 ```
 
-```command
+```console
 ┌───────────┬─────────┬───────────┐
 │ startNode │ endNode │   path    │
 ├───────────┼─────────┼───────────┤

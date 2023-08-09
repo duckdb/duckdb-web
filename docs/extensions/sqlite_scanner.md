@@ -32,7 +32,7 @@ The tables in the file are registered as views in DuckDB, you can list them as f
 PRAGMA show_tables;
 ```
 
-```command
+```console
 ┌────────────────────────┐
 │          name          │
 ├────────────────────────┤
