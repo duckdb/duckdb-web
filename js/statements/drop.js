@@ -7,11 +7,15 @@ function GenerateDrop(options = {}) {
 			Choice(3, [
 				Keyword("FUNCTION"),
 				Keyword("INDEX"),
-				Keyword("MACRO"),
+				Sequence([
+					Keyword("MACRO"),
+					Optional(Keyword("TABLE"), "skip")
+				]),
 				Keyword("SCHEMA"),
 				Keyword("SEQUENCE"),
 				Keyword("TABLE"),
 				Keyword("VIEW"),
+				Keyword("TYPE"),
 			]),
 			Optional(Sequence([
 				Keyword("IF"),
