@@ -88,6 +88,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Data Viewers
 
+* [How to deploy a data website with Evidence and DuckDB](../guides/data_viewers/evidence)
 * [How to use Tad to view tabular data files and DuckDB databases](../guides/data_viewers/tad)
 * [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)
 * [How to draw command-line plots with DuckDB and YouPlot](../guides/data_viewers/youplot)

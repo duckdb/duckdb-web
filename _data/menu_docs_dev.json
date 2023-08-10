@@ -217,6 +217,10 @@
           "slug": "data_viewers",
           "subfolderitems": [
             {
+              "page": "Evidence",
+              "url": "evidence"
+            },
+            {
               "page": "Tableau",
               "url": "tableau"
             },
