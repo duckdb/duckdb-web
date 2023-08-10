@@ -4,17 +4,15 @@ title: Evidence - Business Intelligence as Code
 selected: Evidence - Business Intelligence as Code
 ---
 
+![Evidence](/images/guides/evidence/code-and-preview.png)
+
+## What is Evidence?
+
 [Evidence](https://evidence.dev/) is an open-source, code-based alternative to drag-and-drop BI tools.
 
 It enables you to build reports and analyses using just SQL and markdown.
 
-![Evidence](/images/guides/evidence/code-and-preview-border.png)
-
 ## Why Evidence?
-
-Evidence aims to enable data analysts to deliver reliable, clear, and valuable reporting products driven by live data.
-
-It equips analysts with a higher leverage workflow than dragging-and-dropping charts and filters onto a dashboard:
 
 - **Code-driven workflows**: Use your IDE, version control, and CI/CD tools
 - **First-class text support**: Add context, explanation and insight to your reports using markdown
@@ -51,7 +49,11 @@ You can connect Evidence to a local database or Motherduck. Evidence also comes 
 
 ## Publish
 
-You can host your Evidence project on [Netlify](https://docs.evidence.dev/deployment/netlify) or [Vercel](https://docs.evidence.dev/deployment/vercel). [Evidence Cloud](https://docs.evidence.dev/deployment/netlify) offers authentication, scheduled refreshing and other enterprise features.
+You can host your Evidence project on [Netlify](https://docs.evidence.dev/deployment/netlify) or [Vercel](https://docs.evidence.dev/deployment/vercel).
+
+Alternatively [Evidence Cloud](https://docs.evidence.dev/deployment/netlify) offers additional enterprise features including authentication, scheduled data refresh, personalized domains, and more.
+
+
 
 ## Support
 
