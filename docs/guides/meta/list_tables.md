@@ -4,8 +4,6 @@ title: List Tables
 selected: List Tables
 ---
 
-# How to list all tables
-
 The `SHOW TABLES` command can be used to obtain a list of all tables within the selected schema.
 
 ```sql

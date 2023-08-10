@@ -4,8 +4,6 @@ title: Explain
 selected: Explain
 ---
 
-# How to view the query plan of a query
-
 In order to view the query plan of a query, prepend `EXPLAIN` to a query.
 
 ```sql

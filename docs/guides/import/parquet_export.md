@@ -4,8 +4,6 @@ title: Parquet Export
 selected: Parquet Export
 ---
 
-# How to export a table to a Parquet file
-
 To export the data from a table to a Parquet file, use the `COPY` statement.
 
 ```sql

@@ -4,8 +4,6 @@ title: Excel Export
 selected: Excel Export
 ---
 
-# How to export a table to an Excel file
-
 To export the data from a table to an Excel file, install and load the spatial extension, then use the `COPY` statement.
 The file will contain one worksheet with the same name as the file, but without the .xlsx extension.
 

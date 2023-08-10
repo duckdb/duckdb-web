@@ -4,8 +4,6 @@ title: Tableau - A Data Visualisation Tool
 selected: Tableau - A Data Visualisation Tool
 ---
 
-# Visualising DuckDB Data Sets With Tableau
-
 [Tableau](https://www.tableau.com/) is a popular commercial data visualisation tool. 
 In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.

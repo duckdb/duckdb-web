@@ -4,8 +4,6 @@ title: Node.js API
 selected: Client APIs
 ---
 
-# DuckDB Node Bindings
-
 This package provides a node.js API for [DuckDB](https://github.com/duckdb/duckdb), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
 
 Load the package and create a database object:

@@ -4,8 +4,6 @@ title: CSV Export
 selected: CSV Export
 ---
 
-# How to export a table to a CSV file
-
 To export the data from a table to a CSV file, use the `COPY` statement.
 
 ```sql

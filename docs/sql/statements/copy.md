@@ -6,7 +6,7 @@ expanded: SQL
 railroad: statements/copy.js
 ---
 
-# Examples
+#### Examples
 
 ```sql
 -- read a CSV file into the lineitem table - using auto-detected options

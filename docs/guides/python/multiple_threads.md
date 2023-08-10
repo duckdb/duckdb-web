@@ -4,8 +4,7 @@ title: Multiple Python Threads
 selected: Multiple Python Threads
 ---
 
-# Multiple Reader and Writer Threads Example
-This demonstrates how to simultaneously insert into and read from a DuckDB database across multiple Python threads. 
+This page demonstrates how to simultaneously insert into and read from a DuckDB database across multiple Python threads. 
 This could be useful in scenarios where new data is flowing in and an analysis should be periodically re-run. 
 Note that this is all within a single Python process (see the [FAQ](/faq) for details on DuckDB concurrency).
 Feel free to follow along in this [Google Collaboratory Notebook](https://colab.research.google.com/drive/190NB2m-LIfDcMamCY5lIzaD2OTMnYclB?usp=sharing).
