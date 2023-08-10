@@ -23,7 +23,7 @@ It removes the need for a standalone SQL editor or console when using your datab
 
 _The first time you use the extension, you may be prompted to install DuckDB._
 
-![Install and Connect](/images/guides/vscode/install.gif)
+![Install and Connect](https://github.com/evidence-dev/sqltools-duckdb-driver/blob/master/docs/images/install.gif?raw=true)
 
 ## Features
 
