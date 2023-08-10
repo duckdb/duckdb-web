@@ -4,8 +4,6 @@ title: JSON Export
 selected: JSON Export
 ---
 
-# How to export a table to a JSON file
-
 To export the data from a table to a JSON file, use the `COPY` statement.
 
 ```sql

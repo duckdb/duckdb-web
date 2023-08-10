@@ -4,8 +4,6 @@ title: CLI Charting - Using DuckDB with CLI tools
 selected: CLI Charting - Using DuckDB with CLI tools
 ---
 
-# How to use DuckDB with CLI tools
-
 DuckDB can be used with CLI graphing tools to quickly pipe input to stdout to graph your data in one line.
 
 [YouPlot](https://github.com/red-data-tools/YouPlot) is a Ruby-based CLI tool for drawing visually pleasing plots on the terminal. It can accept input from other programs by piping data from `stdin`. It takes tab-separated (or delimiter of your choice) data and can easily generate various types of plots including bar, line, histogram and scatter.

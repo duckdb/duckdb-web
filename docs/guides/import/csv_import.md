@@ -4,8 +4,6 @@ title: CSV Import
 selected: CSV Import
 ---
 
-# How to load a CSV file into a table
-
 To read data from a CSV file, use the `read_csv_auto` function in the `FROM` clause of a query. 
 
 ```sql

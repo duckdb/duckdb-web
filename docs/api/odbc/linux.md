@@ -4,10 +4,8 @@ title: ODBC API - Linux
 selected: Linux
 ---
 
-# Driver Manager: unixODBC
-
 A driver manager is required to manage communication between applications and the ODBC driver.
-We tested and support the unixODBC that is a complete ODBC driver manager for Linux.
+We tested and support `unixODBC` that is a complete ODBC driver manager for Linux.
 Users can install it from the command line:
 
 ## Debian SO flavors

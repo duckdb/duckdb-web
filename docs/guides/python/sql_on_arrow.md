@@ -4,7 +4,6 @@ title: SQL on Apache Arrow
 selected: SQL on Apache Arrow
 ---
 
-# How to execute SQL on Apache Arrow
 DuckDB can query multiple different types of Apache Arrow objects. 
 
 ## Apache Arrow Tables

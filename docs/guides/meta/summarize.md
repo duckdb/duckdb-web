@@ -4,8 +4,6 @@ title: Summarize
 selected: Summarize
 ---
 
-# How to quickly get a feel for a dataset using summarize
-
 The `SUMMARIZE` command can be used to easily compute a number of aggregates over a table or a query. The `SUMMARIZE` command launches a query that computes a number of aggregates over all columns, including `min`, `max`, `avg`, `std` and `approx_unique`.
 
 In order to summarize the contents of a table, use `SUMMARIZE` followed by the table name.

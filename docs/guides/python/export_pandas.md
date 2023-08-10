@@ -4,8 +4,6 @@ title: Export To Pandas
 selected: Export To Pandas
 ---
 
-# How to export data to a Pandas DataFrame
-
 The result of a query can be converted to a Pandas DataFrame using the `df()` function.
 
 

@@ -4,8 +4,6 @@ title: JSON Import
 selected: JSON Import
 ---
 
-# How to load a JSON file into a table
-
 To read data from a JSON file, use the `read_json_auto` function in the `FROM` clause of a query. 
 
 ```sql

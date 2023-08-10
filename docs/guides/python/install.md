@@ -4,8 +4,6 @@ title: Install the Python Client
 selected: Install
 ---
 
-# Installing the Python Client
-
 The latest release of the Python client can be installed using `pip`.
 
 ```bash
