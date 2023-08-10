@@ -209,6 +209,10 @@
             {
               "page": "Rill Data Developer",
               "url": "rill"
+            },
+            {
+              "page": "VSCode Extension",
+              "url": "vscode"
             }
           ]
         },
