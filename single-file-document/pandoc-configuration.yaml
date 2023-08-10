@@ -1,0 +1,19 @@
+data-dir: .
+input-file: duckdb-docs.md
+output-file: duckdb-docs.pdf
+from: markdown_github+header_attributes-smart
+to: pdf
+metadata-file: metadata.yaml
+template: eisvogel2.tex
+pdf-engine: xelatex
+table-of-contents: true
+toc-depth: 3
+top-level-division: chapter
+variables:
+  book: true
+  titlepage: true
+  titlepage-color: F5F5F5
+  titlepage-logo: ../images/duckdb-logo.pdf
+  titlepage-rule-color: FFF100
+  titlepage-rule-height: 20
+  urlcolor: blue
