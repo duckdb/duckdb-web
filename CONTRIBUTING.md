@@ -8,8 +8,7 @@ This project and everyone participating in it is governed by a [Code of Conduct]
 
 Before submitting a contribution, please check whether your contribution is eligible.
 
-1. Before creating a new page, please do a search for the proposed page in the [existing documentation](https://duckdb.org/docs/).
-   You can start a search by using the search button or pressing <kbd>Ctrl</kbd> + <kbd>K</kbd> (Linux, Windows) or <kbd>Cmd</kbd> + <kbd>K</kbd> (MacOS).
+1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
 2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [`awesome-duckdb` community repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Adding a new page
@@ -34,12 +33,12 @@ The addition of a new guide requires one additional edit:
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). 
 * The title of the page should be encoded in the front matter's `title` property. The body of the pages should not repeat this title word-by-word.
-* Use **4 spaces** for indentation.
 
 ### SQL style guide
 
 * Use SQL uppercase keywords, e.g., `SELECT ... FROM ...`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
+* Use **4 spaces** for indentation.
 
 ### Spelling
 
@@ -64,7 +63,7 @@ The addition of a new guide requires one additional edit:
 ## Achive and generated pages
 
 * The archive pages (e.g., <https://duckdb.org/docs/archive/0.5.1/>) contain documentation for old versions. Do not edit these pages.
-* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_docs.py`](scripts/generate_docs.py) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).
+* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).
 
 ## Notice
 
