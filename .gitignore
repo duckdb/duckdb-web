@@ -82,7 +82,7 @@ build/
 *.lo
 *.la
 *~
-*.pdf
+/*.pdf
 !pdf/*.pdf
 *.swp
 a.out

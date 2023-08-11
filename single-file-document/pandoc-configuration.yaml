@@ -7,10 +7,11 @@ metadata-file: metadata.yaml
 template: eisvogel2.tex
 pdf-engine: xelatex
 table-of-contents: true
-toc-depth: 3
-top-level-division: chapter
+toc-depth: 4
+top-level-division: part
 variables:
   book: true
+  numbersections: true
   titlepage: true
   titlepage-color: F5F5F5
   titlepage-logo: ../images/duckdb-logo.pdf

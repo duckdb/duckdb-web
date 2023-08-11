@@ -7,4 +7,5 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 python3 concatenate_to_single_file.py $@
 rm -f duckdb-docs.pdf
+pandoc --defaults pandoc-configuration.yaml --to=latex --output duckdb-docs.tex
 pandoc --defaults pandoc-configuration.yaml
