@@ -13,15 +13,10 @@ single-file-document/generate_single_file_documentation.sh
 
 ## Generate PDF with Docker
 
-Navigate to the repository root and run Docker:
+If you do not have Pandoc installed, you can build with Docker using:
 
 ```bash
-cd $(git rev-parse --show-toplevel)
-docker run \
-     --volume "$(pwd):/data" \
-     --workdir /data/single-file-document \
-     pandoc/extra \
-     --defaults pandoc-configuration.yaml
+single-file-document/generate_single_file_documentation.sh --docker
 ```
 
 ## Generate LaTeX code
