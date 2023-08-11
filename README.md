@@ -53,7 +53,33 @@ Navigate to the directory where you have cloned `duckdb-web` and run:
 scripts/serve.sh
 ```
 
+### Run dev server in Docker
+
+Build the container using:
+
+```sh
+scripts/docker-build.sh
+```
+
+Serve the website (latest only, archives excluded) with:
+
+```sh
+scripts/docker-serve.sh
+```
+
 The website can then be browsed by going to `localhost:4000` in your browser.
+
+Serve the full website with:
+
+```sh
+scripts/docker-serve-full.sh
+```
+
+To stop the container, run:
+
+```sh
+scripts/docker-stop.sh
+```
 
 ## Generating code docs
 
