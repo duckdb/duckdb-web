@@ -48,3 +48,4 @@ DuckDB Labs employs the core contributors of the DuckDB project.\
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
 MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
 [See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership.html).
+To learn more about MotherDuck, see the [MotherDuck documentation](https://motherduck.com/docs).

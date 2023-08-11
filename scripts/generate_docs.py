@@ -173,9 +173,9 @@ def add_function(function_prototype, documentation, group):
 	docs_str = '\n'.join(documentation) + '\n'
 	(docs_str, parameters) = extract_parameters(docs_str)
 	docs_string = ''
-	docs_string += '### ' + function_name + '\n'
+	docs_string += f'### `{function_name}`\n'
 	docs_string +='---\n'
-	docs_string += docs_str
+	docs_string += docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ')
 	docs_string += '#### Syntax\n'
 	docs_string +='---\n'
 	docs_string += quick_docs_start()

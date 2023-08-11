@@ -1,0 +1,2 @@
+JEKYLL_DOCKER_IMAGE_NAME=duckdb-web-jekyll-img
+JEKYLL_DOCKER_CONTAINER_NAME=duckdb-web-jekyll
