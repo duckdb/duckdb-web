@@ -31,8 +31,9 @@ The addition of a new guide requires one additional edit:
 ### Syntax
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
-* Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). 
 * The title of the page should be encoded in the front matter's `title` property. The body of the pages should not repeat this title word-by-word.
+* Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
+* Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
 
 ### SQL style guide
 
