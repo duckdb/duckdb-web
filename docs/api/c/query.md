@@ -108,7 +108,7 @@ a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
 <span class="kt">bool</span> *<span class="nf"><a href="#duckdb_nullmask_data">duckdb_nullmask_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_result_error">duckdb_result_error</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 </code></pre></div></div>
-### duckdb_query
+### `duckdb_query`
 ---
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
 If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
@@ -142,7 +142,7 @@ The query result.
 
 <br>
 
-### duckdb_destroy_result
+### `duckdb_destroy_result`
 ---
 Closes the result and de-allocates all memory allocated for that connection.
 
@@ -160,7 +160,7 @@ The result to destroy.
 
 <br>
 
-### duckdb_column_name
+### `duckdb_column_name`
 ---
 Returns the column name of the specified column. The result should not need be freed; the column names will
 automatically be destroyed when the result is destroyed.
@@ -188,7 +188,7 @@ The column name of the specified column.
 
 <br>
 
-### duckdb_column_type
+### `duckdb_column_type`
 ---
 Returns the column type of the specified column.
 
@@ -215,7 +215,7 @@ The column type of the specified column.
 
 <br>
 
-### duckdb_column_logical_type
+### `duckdb_column_logical_type`
 ---
 Returns the logical column type of the specified column.
 
@@ -244,7 +244,7 @@ The logical column type of the specified column.
 
 <br>
 
-### duckdb_column_count
+### `duckdb_column_count`
 ---
 Returns the number of columns present in a the result object.
 
@@ -265,7 +265,7 @@ The number of columns present in the result object.
 
 <br>
 
-### duckdb_row_count
+### `duckdb_row_count`
 ---
 Returns the number of rows present in a the result object.
 
@@ -286,7 +286,7 @@ The number of rows present in the result object.
 
 <br>
 
-### duckdb_rows_changed
+### `duckdb_rows_changed`
 ---
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
 queries. For other queries the rows_changed will be 0.
@@ -308,7 +308,7 @@ The number of rows changed.
 
 <br>
 
-### duckdb_column_data
+### `duckdb_column_data`
 ---
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
@@ -345,7 +345,7 @@ The column data of the specified column.
 
 <br>
 
-### duckdb_nullmask_data
+### `duckdb_nullmask_data`
 ---
 **DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
 
@@ -384,7 +384,7 @@ The nullmask of the specified column.
 
 <br>
 
-### duckdb_result_error
+### `duckdb_result_error`
 ---
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
 

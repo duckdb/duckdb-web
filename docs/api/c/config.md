@@ -43,7 +43,7 @@ duckdb_close(&db);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_set_config">duckdb_set_config</a></span>(<span class="kt">duckdb_config</span> <span class="k">config</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">option</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_config">duckdb_destroy_config</a></span>(<span class="kt">duckdb_config</span> *<span class="k">config</span>);
 </code></pre></div></div>
-### duckdb_create_config
+### `duckdb_create_config`
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
@@ -67,7 +67,7 @@ The result configuration object.
 
 <br>
 
-### duckdb_config_count
+### `duckdb_config_count`
 ---
 This returns the total amount of configuration options available for usage with `duckdb_get_config_flag`.
 
@@ -87,7 +87,7 @@ The amount of config options available.
 
 <br>
 
-### duckdb_get_config_flag
+### `duckdb_get_config_flag`
 ---
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
 display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
@@ -119,7 +119,7 @@ A description of the configuration flag.
 
 <br>
 
-### duckdb_set_config
+### `duckdb_set_config`
 ---
 Sets the specified option for the specified configuration. The configuration option is indicated by name.
 To obtain a list of config options, see `duckdb_get_config_flag`.
@@ -153,7 +153,7 @@ The value to set the configuration flag to.
 
 <br>
 
-### duckdb_destroy_config
+### `duckdb_destroy_config`
 ---
 Destroys the specified configuration option and de-allocates all memory allocated for the object.
 

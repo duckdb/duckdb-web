@@ -38,7 +38,7 @@ duckdb_close(&db);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_disconnect">duckdb_disconnect</a></span>(<span class="kt">duckdb_connection</span> *<span class="k">connection</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_library_version">duckdb_library_version</a></span>();
 </code></pre></div></div>
-### duckdb_open
+### `duckdb_open`
 ---
 Creates a new database or opens an existing database file stored at the the given path.
 If no path is given a new in-memory database is created instead.
@@ -65,7 +65,7 @@ The result database object.
 
 <br>
 
-### duckdb_open_ext
+### `duckdb_open_ext`
 ---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
 
@@ -99,7 +99,7 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
-### duckdb_close
+### `duckdb_close`
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
 This should be called after you are done with any database allocated through `duckdb_open`.
@@ -120,7 +120,7 @@ The database object to shut down.
 
 <br>
 
-### duckdb_connect
+### `duckdb_connect`
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
@@ -147,7 +147,7 @@ The result connection object.
 
 <br>
 
-### duckdb_interrupt
+### `duckdb_interrupt`
 ---
 Interrupt running query
 
@@ -165,7 +165,7 @@ The connection to interruot
 
 <br>
 
-### duckdb_query_progress
+### `duckdb_query_progress`
 ---
 Get progress of the running query
 
@@ -186,7 +186,7 @@ The working connection
 
 <br>
 
-### duckdb_disconnect
+### `duckdb_disconnect`
 ---
 Closes the specified connection and de-allocates all memory allocated for that connection.
 
@@ -204,7 +204,7 @@ The connection to close.
 
 <br>
 
-### duckdb_library_version
+### `duckdb_library_version`
 ---
 Returns the version of the linked DuckDB, with a version postfix for dev versions
 

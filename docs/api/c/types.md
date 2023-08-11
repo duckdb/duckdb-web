@@ -134,7 +134,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_union_type_member_type">duckdb_union_type_member_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
 </code></pre></div></div>
-### duckdb_result_get_chunk
+### `duckdb_result_get_chunk`
 ---
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
 
@@ -169,7 +169,7 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
-### duckdb_result_is_streaming
+### `duckdb_result_is_streaming`
 ---
 Checks if the type of the internal result is StreamQueryResult.
 
@@ -190,7 +190,7 @@ Whether or not the result object is of the type StreamQueryResult
 
 <br>
 
-### duckdb_result_chunk_count
+### `duckdb_result_chunk_count`
 ---
 Returns the number of data chunks present in the result.
 
@@ -211,7 +211,7 @@ Number of data chunks present in the result.
 
 <br>
 
-### duckdb_value_boolean
+### `duckdb_value_boolean`
 ---
 #### Syntax
 ---
@@ -229,7 +229,7 @@ The boolean value at the specified location, or false if the value cannot be con
 
 <br>
 
-### duckdb_value_int8
+### `duckdb_value_int8`
 ---
 #### Syntax
 ---
@@ -247,7 +247,7 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 
 <br>
 
-### duckdb_value_int16
+### `duckdb_value_int16`
 ---
 #### Syntax
 ---
@@ -265,7 +265,7 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### duckdb_value_int32
+### `duckdb_value_int32`
 ---
 #### Syntax
 ---
@@ -283,7 +283,7 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### duckdb_value_int64
+### `duckdb_value_int64`
 ---
 #### Syntax
 ---
@@ -301,7 +301,7 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### duckdb_value_hugeint
+### `duckdb_value_hugeint`
 ---
 #### Syntax
 ---
@@ -319,7 +319,7 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 
 <br>
 
-### duckdb_value_decimal
+### `duckdb_value_decimal`
 ---
 #### Syntax
 ---
@@ -337,7 +337,7 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 
 <br>
 
-### duckdb_value_uint8
+### `duckdb_value_uint8`
 ---
 #### Syntax
 ---
@@ -355,7 +355,7 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### duckdb_value_uint16
+### `duckdb_value_uint16`
 ---
 #### Syntax
 ---
@@ -373,7 +373,7 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-### duckdb_value_uint32
+### `duckdb_value_uint32`
 ---
 #### Syntax
 ---
@@ -391,7 +391,7 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-### duckdb_value_uint64
+### `duckdb_value_uint64`
 ---
 #### Syntax
 ---
@@ -409,7 +409,7 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-### duckdb_value_float
+### `duckdb_value_float`
 ---
 #### Syntax
 ---
@@ -427,7 +427,7 @@ The float value at the specified location, or 0 if the value cannot be converted
 
 <br>
 
-### duckdb_value_double
+### `duckdb_value_double`
 ---
 #### Syntax
 ---
@@ -445,7 +445,7 @@ The double value at the specified location, or 0 if the value cannot be converte
 
 <br>
 
-### duckdb_value_date
+### `duckdb_value_date`
 ---
 #### Syntax
 ---
@@ -463,7 +463,7 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 
 <br>
 
-### duckdb_value_time
+### `duckdb_value_time`
 ---
 #### Syntax
 ---
@@ -481,7 +481,7 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 
 <br>
 
-### duckdb_value_timestamp
+### `duckdb_value_timestamp`
 ---
 #### Syntax
 ---
@@ -499,7 +499,7 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 
 <br>
 
-### duckdb_value_interval
+### `duckdb_value_interval`
 ---
 #### Syntax
 ---
@@ -517,7 +517,7 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 
 <br>
 
-### duckdb_value_varchar
+### `duckdb_value_varchar`
 ---
 #### Syntax
 ---
@@ -539,7 +539,7 @@ converted. The result must be freed with `duckdb_free`.
 
 <br>
 
-### duckdb_value_varchar_internal
+### `duckdb_value_varchar_internal`
 ---
 #### Syntax
 ---
@@ -564,7 +564,7 @@ The result must NOT be freed.
 
 <br>
 
-### duckdb_value_string_internal
+### `duckdb_value_string_internal`
 ---
 #### Syntax
 ---
@@ -589,7 +589,7 @@ The result must NOT be freed.
 
 <br>
 
-### duckdb_value_blob
+### `duckdb_value_blob`
 ---
 #### Syntax
 ---
@@ -608,7 +608,7 @@ value cannot be converted. The resulting "blob.data" must be freed with `duckdb_
 
 <br>
 
-### duckdb_value_is_null
+### `duckdb_value_is_null`
 ---
 #### Syntax
 ---
@@ -626,7 +626,7 @@ Returns true if the value at the specified index is NULL, and false otherwise.
 
 <br>
 
-### duckdb_from_date
+### `duckdb_from_date`
 ---
 Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_date_struct`).
 
@@ -647,7 +647,7 @@ The `duckdb_date_struct` with the decomposed elements.
 
 <br>
 
-### duckdb_to_date
+### `duckdb_to_date`
 ---
 Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 
@@ -668,7 +668,7 @@ The `duckdb_date` element.
 
 <br>
 
-### duckdb_from_time
+### `duckdb_from_time`
 ---
 Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
 
@@ -689,7 +689,7 @@ The `duckdb_time_struct` with the decomposed elements.
 
 <br>
 
-### duckdb_to_time
+### `duckdb_to_time`
 ---
 Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
 
@@ -710,7 +710,7 @@ The `duckdb_time` element.
 
 <br>
 
-### duckdb_from_timestamp
+### `duckdb_from_timestamp`
 ---
 Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 
@@ -731,7 +731,7 @@ The `duckdb_timestamp_struct` with the decomposed elements.
 
 <br>
 
-### duckdb_to_timestamp
+### `duckdb_to_timestamp`
 ---
 Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 
@@ -752,7 +752,7 @@ The `duckdb_timestamp` element.
 
 <br>
 
-### duckdb_hugeint_to_double
+### `duckdb_hugeint_to_double`
 ---
 Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
 
@@ -773,7 +773,7 @@ The converted `double` element.
 
 <br>
 
-### duckdb_double_to_hugeint
+### `duckdb_double_to_hugeint`
 ---
 Converts a double value to a duckdb_hugeint object.
 
@@ -796,7 +796,7 @@ The converted `duckdb_hugeint` element.
 
 <br>
 
-### duckdb_double_to_decimal
+### `duckdb_double_to_decimal`
 ---
 Converts a double value to a duckdb_decimal object.
 
@@ -821,7 +821,7 @@ The converted `duckdb_decimal` element.
 
 <br>
 
-### duckdb_decimal_to_double
+### `duckdb_decimal_to_double`
 ---
 Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
 
@@ -842,7 +842,7 @@ The converted `double` element.
 
 <br>
 
-### duckdb_create_logical_type
+### `duckdb_create_logical_type`
 ---
 Creates a `duckdb_logical_type` from a standard primitive type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -866,7 +866,7 @@ The logical type.
 
 <br>
 
-### duckdb_create_list_type
+### `duckdb_create_list_type`
 ---
 Creates a list type from its child type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -888,7 +888,7 @@ The logical type.
 
 <br>
 
-### duckdb_create_map_type
+### `duckdb_create_map_type`
 ---
 Creates a map type from its key type and value type.
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -911,7 +911,7 @@ The logical type.
 
 <br>
 
-### duckdb_create_union_type
+### `duckdb_create_union_type`
 ---
 Creates a UNION type from the passed types array
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -938,7 +938,7 @@ The logical type.
 
 <br>
 
-### duckdb_create_decimal_type
+### `duckdb_create_decimal_type`
 ---
 Creates a `duckdb_logical_type` of type decimal with the specified width and scale
 The resulting type should be destroyed with `duckdb_destroy_logical_type`.
@@ -964,7 +964,7 @@ The logical type.
 
 <br>
 
-### duckdb_get_type_id
+### `duckdb_get_type_id`
 ---
 Retrieves the type class of a `duckdb_logical_type`.
 
@@ -985,7 +985,7 @@ The type id
 
 <br>
 
-### duckdb_decimal_width
+### `duckdb_decimal_width`
 ---
 Retrieves the width of a decimal type.
 
@@ -1006,7 +1006,7 @@ The width of the decimal type
 
 <br>
 
-### duckdb_decimal_scale
+### `duckdb_decimal_scale`
 ---
 Retrieves the scale of a decimal type.
 
@@ -1027,7 +1027,7 @@ The scale of the decimal type
 
 <br>
 
-### duckdb_decimal_internal_type
+### `duckdb_decimal_internal_type`
 ---
 Retrieves the internal storage type of a decimal type.
 
@@ -1048,7 +1048,7 @@ The internal type of the decimal type
 
 <br>
 
-### duckdb_enum_internal_type
+### `duckdb_enum_internal_type`
 ---
 Retrieves the internal storage type of an enum type.
 
@@ -1069,7 +1069,7 @@ The internal type of the enum type
 
 <br>
 
-### duckdb_enum_dictionary_size
+### `duckdb_enum_dictionary_size`
 ---
 Retrieves the dictionary size of the enum type
 
@@ -1090,7 +1090,7 @@ The dictionary size of the enum type
 
 <br>
 
-### duckdb_enum_dictionary_value
+### `duckdb_enum_dictionary_value`
 ---
 Retrieves the dictionary value at the specified position from the enum.
 
@@ -1117,7 +1117,7 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 
 <br>
 
-### duckdb_list_type_child_type
+### `duckdb_list_type_child_type`
 ---
 Retrieves the child type of the given list type.
 
@@ -1140,7 +1140,7 @@ The child type of the list type. Must be destroyed with `duckdb_destroy_logical_
 
 <br>
 
-### duckdb_map_type_key_type
+### `duckdb_map_type_key_type`
 ---
 Retrieves the key type of the given map type.
 
@@ -1163,7 +1163,7 @@ The key type of the map type. Must be destroyed with `duckdb_destroy_logical_typ
 
 <br>
 
-### duckdb_map_type_value_type
+### `duckdb_map_type_value_type`
 ---
 Retrieves the value type of the given map type.
 
@@ -1186,7 +1186,7 @@ The value type of the map type. Must be destroyed with `duckdb_destroy_logical_t
 
 <br>
 
-### duckdb_struct_type_child_count
+### `duckdb_struct_type_child_count`
 ---
 Returns the number of children of a struct type.
 
@@ -1207,7 +1207,7 @@ The number of children of a struct type.
 
 <br>
 
-### duckdb_struct_type_child_name
+### `duckdb_struct_type_child_name`
 ---
 Retrieves the name of the struct child.
 
@@ -1234,7 +1234,7 @@ The name of the struct type. Must be freed with `duckdb_free`.
 
 <br>
 
-### duckdb_struct_type_child_type
+### `duckdb_struct_type_child_type`
 ---
 Retrieves the child type of the given struct type at the specified index.
 
@@ -1261,7 +1261,7 @@ The child type of the struct type. Must be destroyed with `duckdb_destroy_logica
 
 <br>
 
-### duckdb_union_type_member_count
+### `duckdb_union_type_member_count`
 ---
 Returns the number of members that the union type has.
 
@@ -1282,7 +1282,7 @@ The number of members of a union type.
 
 <br>
 
-### duckdb_union_type_member_name
+### `duckdb_union_type_member_name`
 ---
 Retrieves the name of the union member.
 
@@ -1309,7 +1309,7 @@ The name of the union member. Must be freed with `duckdb_free`.
 
 <br>
 
-### duckdb_union_type_member_type
+### `duckdb_union_type_member_type`
 ---
 Retrieves the child type of the given union member at the specified index.
 
@@ -1336,7 +1336,7 @@ The child type of the union member. Must be destroyed with `duckdb_destroy_logic
 
 <br>
 
-### duckdb_destroy_logical_type
+### `duckdb_destroy_logical_type`
 ---
 Destroys the logical type and de-allocates all memory allocated for that type.
 

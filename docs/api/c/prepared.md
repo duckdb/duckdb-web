@@ -80,7 +80,7 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_scan">duckdb_arrow_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="k">duckdb_arrow_stream</span> <span class="k">arrow</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_array_scan">duckdb_arrow_array_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="k">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="k">arrow_array</span>, <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream</span>);
 </code></pre></div></div>
-### duckdb_prepare
+### `duckdb_prepare`
 ---
 Create a prepared statement object from a query.
 
@@ -114,7 +114,7 @@ The resulting prepared statement object
 
 <br>
 
-### duckdb_destroy_prepare
+### `duckdb_destroy_prepare`
 ---
 Closes the prepared statement and de-allocates all memory allocated for the statement.
 
@@ -132,7 +132,7 @@ The prepared statement to destroy.
 
 <br>
 
-### duckdb_prepare_error
+### `duckdb_prepare_error`
 ---
 Returns the error message associated with the given prepared statement.
 If the prepared statement has no error message, this returns `nullptr` instead.
@@ -156,7 +156,7 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-### duckdb_nparams
+### `duckdb_nparams`
 ---
 Returns the number of parameters that can be provided to the given prepared statement.
 
@@ -176,7 +176,7 @@ The prepared statement to obtain the number of parameters for.
 
 <br>
 
-### duckdb_param_type
+### `duckdb_param_type`
 ---
 Returns the parameter type for the parameter at the given index.
 
@@ -203,7 +203,7 @@ The parameter type
 
 <br>
 
-### duckdb_clear_bindings
+### `duckdb_clear_bindings`
 ---
 Clear the params bind to the prepared statement.
 
@@ -215,7 +215,7 @@ Clear the params bind to the prepared statement.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_parameter_index
+### `duckdb_bind_parameter_index`
 ---
 Retrieve the index of the parameter for the prepared statement, identified by name
 
@@ -229,7 +229,7 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_boolean
+### `duckdb_bind_boolean`
 ---
 Binds a bool value to the prepared statement at the specified index.
 
@@ -243,7 +243,7 @@ Binds a bool value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_int8
+### `duckdb_bind_int8`
 ---
 Binds an int8_t value to the prepared statement at the specified index.
 
@@ -257,7 +257,7 @@ Binds an int8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_int16
+### `duckdb_bind_int16`
 ---
 Binds an int16_t value to the prepared statement at the specified index.
 
@@ -271,7 +271,7 @@ Binds an int16_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_int32
+### `duckdb_bind_int32`
 ---
 Binds an int32_t value to the prepared statement at the specified index.
 
@@ -285,7 +285,7 @@ Binds an int32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_int64
+### `duckdb_bind_int64`
 ---
 Binds an int64_t value to the prepared statement at the specified index.
 
@@ -299,7 +299,7 @@ Binds an int64_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_hugeint
+### `duckdb_bind_hugeint`
 ---
 Binds an duckdb_hugeint value to the prepared statement at the specified index.
 
@@ -313,7 +313,7 @@ Binds an duckdb_hugeint value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_decimal
+### `duckdb_bind_decimal`
 ---
 Binds a duckdb_decimal value to the prepared statement at the specified index.
 
@@ -327,7 +327,7 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_uint8
+### `duckdb_bind_uint8`
 ---
 Binds an uint8_t value to the prepared statement at the specified index.
 
@@ -341,7 +341,7 @@ Binds an uint8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_uint16
+### `duckdb_bind_uint16`
 ---
 Binds an uint16_t value to the prepared statement at the specified index.
 
@@ -355,7 +355,7 @@ Binds an uint16_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_uint32
+### `duckdb_bind_uint32`
 ---
 Binds an uint32_t value to the prepared statement at the specified index.
 
@@ -369,7 +369,7 @@ Binds an uint32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_uint64
+### `duckdb_bind_uint64`
 ---
 Binds an uint64_t value to the prepared statement at the specified index.
 
@@ -383,7 +383,7 @@ Binds an uint64_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_float
+### `duckdb_bind_float`
 ---
 Binds an float value to the prepared statement at the specified index.
 
@@ -397,7 +397,7 @@ Binds an float value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_double
+### `duckdb_bind_double`
 ---
 Binds an double value to the prepared statement at the specified index.
 
@@ -411,7 +411,7 @@ Binds an double value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_date
+### `duckdb_bind_date`
 ---
 Binds a duckdb_date value to the prepared statement at the specified index.
 
@@ -425,7 +425,7 @@ Binds a duckdb_date value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_time
+### `duckdb_bind_time`
 ---
 Binds a duckdb_time value to the prepared statement at the specified index.
 
@@ -439,7 +439,7 @@ Binds a duckdb_time value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_timestamp
+### `duckdb_bind_timestamp`
 ---
 Binds a duckdb_timestamp value to the prepared statement at the specified index.
 
@@ -453,7 +453,7 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_interval
+### `duckdb_bind_interval`
 ---
 Binds a duckdb_interval value to the prepared statement at the specified index.
 
@@ -467,7 +467,7 @@ Binds a duckdb_interval value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_varchar
+### `duckdb_bind_varchar`
 ---
 Binds a null-terminated varchar value to the prepared statement at the specified index.
 
@@ -481,7 +481,7 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_varchar_length
+### `duckdb_bind_varchar_length`
 ---
 Binds a varchar value to the prepared statement at the specified index.
 
@@ -496,7 +496,7 @@ Binds a varchar value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_blob
+### `duckdb_bind_blob`
 ---
 Binds a blob value to the prepared statement at the specified index.
 
@@ -511,7 +511,7 @@ Binds a blob value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_bind_null
+### `duckdb_bind_null`
 ---
 Binds a NULL value to the prepared statement at the specified index.
 
@@ -524,7 +524,7 @@ Binds a NULL value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### duckdb_execute_prepared
+### `duckdb_execute_prepared`
 ---
 Executes the prepared statement with the given bound parameters, and returns a materialized query result.
 
@@ -552,7 +552,7 @@ The query result.
 
 <br>
 
-### duckdb_execute_prepared_arrow
+### `duckdb_execute_prepared_arrow`
 ---
 Executes the prepared statement with the given bound parameters, and returns an arrow query result.
 
@@ -577,7 +577,7 @@ The query result.
 
 <br>
 
-### duckdb_arrow_scan
+### `duckdb_arrow_scan`
 ---
 Scans the Arrow stream and creates a view with the given name.
 
@@ -606,7 +606,7 @@ Arrow stream wrapper.
 
 <br>
 
-### duckdb_arrow_array_scan
+### `duckdb_arrow_array_scan`
 ---
 Scans the Arrow array and creates a view with the given name.
 
