@@ -535,3 +535,11 @@ woot
 42
 43
 ```
+
+## Using rlwrap
+
+You can use the [`rlwrap`](https://github.com/hanslub42/rlwrap) readline wrapper as follows:
+
+```bash
+rlwrap --substitute-prompt="> " duckdb -batch
+```
