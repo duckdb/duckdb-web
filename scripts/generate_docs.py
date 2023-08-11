@@ -175,7 +175,7 @@ def add_function(function_prototype, documentation, group):
 	docs_string = ''
 	docs_string += f'### `{function_name}`\n'
 	docs_string +='---\n'
-	docs_string += docs_str
+	docs_string += docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ')
 	docs_string += '#### Syntax\n'
 	docs_string +='---\n'
 	docs_string += quick_docs_start()
