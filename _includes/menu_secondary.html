@@ -1,5 +1,6 @@
 <nav>
 	<div class="search_icon"></div>
+	{% assign archive_url_slug = '/docs/archive/' | append: site.currentduckdbversion %}
 	{% if site.data.secondarymenu.toc2[0] %}
 		{% for item in site.data.secondarymenu.toc2 %}
 			{% if item.mainfolderitems[0] %}
@@ -20,11 +21,11 @@
 				{% if mainentry.subfolderitems[0] %}
 					<ul>
 						{% for entry in mainentry.subfolderitems %}
-						<li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
+						<li>&nbsp;{% if entry.url %} <a href="{{ site.baseurl }}{{ entry.url | replace: '/docs', archive_url_slug }}">{{ entry.page }}</a> {% else %} {{ entry.page }} {% endif %}  </li>
 						{% if entry.subsubfolderitems[0] %}
 						<ul>
 							{% for subentry in entry.subsubfolderitems %}
-							<li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
+							<li>&nbsp;&nbsp;{% if subentry.url %}<a href="{{ site.baseurl }}{{ subentry.url | replace: '/docs', archive_url_slug }}">{{ subentry.page }}</a> {% else %} {{ subentry.page }} {% endif %} </li>
 							{% endfor %}
 						</ul>
 						{% endif %}
