@@ -40,7 +40,7 @@ FROM students
 GROUP BY GROUPING SETS ((course, type), course, type, ());
 ```
 
-```console
+```text
 ┌────────┬──────────┬──────────────┐
 │ course │   type   │ count_star() │
 ├────────┼──────────┼──────────────┤

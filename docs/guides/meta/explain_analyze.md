@@ -16,7 +16,7 @@ Note that the **cumulative** wall-clock time that is spent on every operator is 
 
 Below is an example of running `EXPLAIN ANALYZE` on `Q1` of the TPC-H benchmark.
 
-```console
+```text
 ┌─────────────────────────────────────┐
 │┌───────────────────────────────────┐│
 ││        Total Time: 0.0496s        ││

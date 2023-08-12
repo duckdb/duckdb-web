@@ -8,7 +8,7 @@ Here we provide an overview of how to perform simple operations in SQL. This tut
 
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See [here](../installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
 
-```console
+```text
 DuckDB 5fb6fe57ab
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.

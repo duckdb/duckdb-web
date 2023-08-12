@@ -166,7 +166,7 @@ Date ranges are also supported:
 SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 ```
 
-```console
+```text
 ┌─────────────────────┐
 │        range        │
 ├─────────────────────┤
@@ -405,7 +405,7 @@ The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along 
 SELECT generate_subscripts([4,5,6], 1) AS i;
 ```
 
-```console
+```text
 ┌───┐
 │ i │
 ├───┤
