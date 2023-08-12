@@ -523,7 +523,6 @@
         },
         {
           "page": "SQL",
-          "open": true,
           "slug": "sql",
           "subfolderitems": [
             {
