@@ -18,7 +18,7 @@ The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific
 Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead. To see additional command line options to use when starting the CLI, use the command `duckdb --help`.
 By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
 
-```console
+```text
 v0.3.4 662041e2b
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
@@ -53,7 +53,7 @@ To exit the CLI, press `Ctrl`-`D` if your platform supports it. Otherwise press 
 ## Special Commands (Dot Commands)
 In addition to SQL syntax, special dot commands may be entered that are specific to the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command:
 
-```console
+```text
 D .help
 .bail on|off             Stop after hitting an error.  Default OFF
 .binary on|off           Turn binary output on or off.  Default OFF
@@ -109,10 +109,10 @@ Note that the above list of methods is extensive, and DuckDB supports only a sub
 
 As an example of passing an argument to a dot command, the `.help` text may be filtered by passing in a text string as the second argument.
 
-```console
+```text
 D .help sh
 ```
-```console
+```text
 .sha3sum ...             Compute a SHA3 hash of database content
 .shell CMD ARGS...       Run CMD ARGS... in a system shell
 .show                    Show the current values for various settings
@@ -124,7 +124,7 @@ By default the shell includes support for syntax highlighting. Syntax highlighti
 
 The colors of the syntax highlighting can also be configured using the following commands.
 
-```console
+```text
 D .constant
 Error: Expected usage: .constant [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
 D .keyword
@@ -237,7 +237,7 @@ D CREATE TABLE fliers AS SELECT 'duck' as animal;
 D CREATE TABLE walkers AS SELECT 'duck' as animal;
 D .tables
 ```
-```console
+```text
 fliers    swimmers  walkers
 ```
 
@@ -245,13 +245,13 @@ For example, to filter to only tables that contain an "l", use the `LIKE` patter
 ```sql
 D .tables %l%
 ```
-```console
+```text
 fliers   walkers
 ```
 
 The `.schema` command will show all of the SQL statements used to define the schema of the database.
 
-```console
+```text
 D .schema
 ```
 
@@ -264,19 +264,19 @@ CREATE TABLE walkers(animal VARCHAR);;
 ## Opening Database Files
 In addition to connecting to a database when opening the CLI, a new database connection can be made by using the `.open` command. If no additional parameters are supplied, a new in-memory database connection is created. This database will not be persisted when the CLI connection is closed.
 
-```console
+```text
 D .open
 ```
 
 The `.open` command optionally accepts several options, but the final parameter can be used to indicate a path to a persistent database (or where one should be created). The special string `:memory:` can also be used to open a temporary in-memory database.
 
-```console
+```text
 D .open persistent.duckdb
 ```
 
 One important option accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
 
-```console
+```text
 D .open --readonly preexisting.duckdb
 ```
 
@@ -294,7 +294,7 @@ D SELECT 'back to the terminal' as displayed_column;
 ```
 
 The file my_results.md will then contain:
-```console
+```text
 | output_column |
 |---------------|
 | taking flight |
@@ -302,7 +302,7 @@ The file my_results.md will then contain:
 
 The terminal will then display:
 
-```console
+```text
 |   displayed_column   |
 |----------------------|
 | back to the terminal |
@@ -373,12 +373,12 @@ SELECT
 FROM generate_series(5);
 ```
 To execute it from the CLI, the `.read` command is used.
-```console
+```text
 D .read select_example.sql
 ```
 The output below is returned to the terminal by default (but can be adjusted using the `.output` or `.once` commands):
 
-```console
+```text
 | generate_series |
 |-----------------|
 | 0               |
@@ -399,13 +399,13 @@ FROM generate_series(5);
 ```
 
 To execute it from the CLI, the `.read` command is used as before.
-```console
+```text
 D .read write_markdown_to_file.sql
 ```
 
 In this case, no output is returned to the terminal. Instead, the file `series.md` is created (or replaced if it already existed) with the markdown-formatted results shown here:
 
-```console
+```text
 | generate_series |
 |-----------------|
 | 0               |
@@ -435,12 +435,12 @@ select 'Begin quacking!' as "Ready, Set, ..."
 
 To invoke that file on initialization, use this command:
 
-```console
+```text
 $ ./duckdb -init select_example
 ```
 
 This outputs:
-```console
+```text
 -- Loading resources from /home/<user>/.duckdbrc
 ┌─────────────────┐
 │ Ready, Set, ... │
@@ -459,7 +459,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 
-```console
+```text
 $ ./duckdb < select_example.sql
 | generate_series |
 |-----------------|
@@ -491,7 +491,7 @@ To execute a command with SQL text passed in directly from the command line, cal
 ## Loading Extensions
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
-```console
+```text
 D install 'fts';
 D load 'fts';
 ```
