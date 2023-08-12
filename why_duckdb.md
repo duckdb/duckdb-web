@@ -75,23 +75,7 @@ DuckDB's development started while the main developers were public servants in T
 * [DuckDB: Introducing a New Class of Data Management Systems (I/O Magazine, ICT Research Platform Nederland)](https://ict-research.nl/wordpress/wp-content/uploads/2023/04/IO-magazine-NR1-2023.pdf#page=10) (article)
 
 ## Other Projects
-Here are some projects that we know of that use DuckDB. If you would like your project to be added here, open a GitHub issue.
-
-* [taxadb: A High-Performance Local Taxonomic Database Interface](https://CRAN.R-project.org/package=taxadb)
-* [duckdb.js - DuckDB compiled to JavaScript (PoC)](https://github.com/ankoh/duckdb.js)
-* [SQL for R dataframes with DuckDB](https://github.com/phillc73/duckdf)
-* [DuckDB conda support](https://github.com/conda-forge/python-duckdb-feedstock)
-* [DBT adapter for DuckDB](https://github.com/jwills/dbt-duckdb)
-* [newLISP bindings for DuckDB](https://github.com/luxint/duckdb)
-* [duckdb_engine - SQLAlchemy driver for DuckDB](https://github.com/Mause/duckdb_engine)
-* [Toy DuckDB based timeseries database](https://github.com/berthubert/ducktime)
-* [PHP example to integrate DuckDB using PHP-FFI](https://github.com/thomasbley/php-duckdb-integration)
-* [DuckDB Foreign Data Wrapper for PostgreSQL](https://github.com/alitrack/duckdb_fdw)
-* [Demo: CRUD operations with Qt5 and DuckDB](https://github.com/chilarai/qt-duckdb)
-* [Elixir driver](https://github.com/mpope9/exduckdb) and [Ecto adapter](https://github.com/mpope9/ecto_duckdb/) for DuckDB
-* [DuckDB backend](https://fugue-tutorials.readthedocs.io/tutorials/integrations/backends/duckdb.html) for [Fugue](https://github.com/fugue-project/fugue)
-* [StabilitySort](https://gitlab.com/baaron/StabilitySort) bioinformatics tool for finding unstable variants from predicted AlphaFold2 structures  
-* [Extract and load data from APIs to DuckDB using data load tool](https://dlthub.com/docs/dlt-ecosystem/destinations/duckdb)
+To learn about projects using DuckDB, visit the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Testimonials
 See our [DuckDB Testimonial Twitter Wall](/docs/twitter_wall)
