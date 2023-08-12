@@ -182,7 +182,9 @@ con.Query("SELECT udf_vectorized_int(i) FROM integers")->Print();
 
 The Vectorized UDF is a pointer of the type _scalar_function_t_:
 
-`typedef std::function<void(DataChunk &args, ExpressionState &expr, Vector &result)> scalar_function_t;`
+```c++
+typedef std::function<void(DataChunk &args, ExpressionState &expr, Vector &result)> scalar_function_t;
+```
 
 - **args** is a [DataChunk](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length;
 - **expr** is an [ExpressionState](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state;

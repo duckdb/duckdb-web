@@ -271,7 +271,9 @@ duck -> CONTAINS(CONCAT(duck, 'DB'), 'duck')
 
 ### Transform
 
-`list_transform(list, lambda)`
+```sql
+list_transform(list, lambda)
+```
 
 Returns a list that is the result of applying the lambda function to each element of the input list. The lambda function must have exactly one left-hand side parameter. The return type of the lambda function defines the type of the list elements.
 
@@ -294,7 +296,9 @@ SELECT list_transform([5, NULL, 6], x -> COALESCE(x, 0) + 1)
 
 ### Filter
 
-`list_filter(list, lambda)`
+```sql
+list_filter(list, lambda)
+```
 
 Constructs a list from those elements of the input list for which the lambda function returns true. The lambda function must have exactly one left-hand side parameter and its return type must be of type `BOOLEAN`.
 
