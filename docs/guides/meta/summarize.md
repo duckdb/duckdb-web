@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Summarize
-selected: Summarize
 ---
 
 The `SUMMARIZE` command can be used to easily compute a number of aggregates over a table or a query. The `SUMMARIZE` command launches a query that computes a number of aggregates over all columns, including `min`, `max`, `avg`, `std` and `approx_unique`.

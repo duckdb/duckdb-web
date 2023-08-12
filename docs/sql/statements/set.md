@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Set/Reset
-selected: Documentation/SQL/Set
-expanded: SQL
 railroad: statements/set.js
 ---
 

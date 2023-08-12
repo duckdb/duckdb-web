@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: GROUP BY Clause
-selected: Documentation/SQL/Query Syntax/Group By
-expanded: SQL
 railroad: query_syntax/groupby.js
 ---
 The `GROUP BY` clause specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause.

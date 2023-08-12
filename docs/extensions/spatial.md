@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Spatial
-selected: Documentation/Spatial
 ---
 The `spatial` extension provides support for geospatial data processing in DuckDB.
 

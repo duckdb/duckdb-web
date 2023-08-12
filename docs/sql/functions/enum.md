@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Enum Functions
-selected: Documentation/Functions/Enum Functions
-expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating `ENUM` values.
 The examples assume an enum type created as:

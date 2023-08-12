@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: NodeJS API
-selected: Client APIs
 ---
 ## Modules
 

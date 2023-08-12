@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Excel Import
-selected: Excel Import
 ---
 
 To read data from an Excel file, install and load the spatial extension, then use the `st_read` function in the `FROM` clause of a query. 

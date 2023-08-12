@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Call
-selected: Documentation/SQL/Call
-expanded: SQL
 railroad: statements/call.js
 ---
 

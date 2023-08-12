@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Relational API
-selected: Client APIs
 ---
 
 The Relational API is an alternative API that can be used to incrementally construct queries. The API is centered around `DuckDBPyRelation` nodes. The relations can be seen as symbolic representations of SQL queries. They do not hold any data - and nothing is executed - until a method that triggers execution is called.

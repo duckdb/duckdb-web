@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Aggregate Functions
-selected: Documentation/Aggregates
 railroad: expressions/aggregate.js
 ---
 

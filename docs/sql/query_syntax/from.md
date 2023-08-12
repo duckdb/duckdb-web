@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: FROM & JOIN Clauses
-selected: Documentation/SQL/Query Syntax/From
-expanded: SQL
 railroad: query_syntax/from.js
 blurb: The FROM clause can contain a single table, a combination of multiple tables that are joined together, or another SELECT query inside a subquery node.
 ---

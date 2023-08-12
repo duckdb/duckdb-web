@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Create Sequence
-selected: Documentation/SQL/Create Sequence
-expanded: SQL
 railroad: statements/createsequence.js
 ---
 The `CREATE SEQUENCE` statement creates a new sequence number generator.

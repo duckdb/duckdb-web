@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Window Functions
-selected: Documentation/Window Functions
 railroad: expressions/window.js
 ---
 

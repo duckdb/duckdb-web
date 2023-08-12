@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Drop Statement
-selected: Documentation/SQL/Drop
-expanded: SQL
 railroad: statements/drop.js
 ---
 The `DROP` statement removes a catalog entry added previously with the `CREATE` command.

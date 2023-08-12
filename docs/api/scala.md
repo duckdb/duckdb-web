@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Scala JDBC API
-selected: Client APIs
 ---
 ## Installation
 The DuckDB Java JDBC API can be used in Scala and can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page](../installation?environment=java) for details.

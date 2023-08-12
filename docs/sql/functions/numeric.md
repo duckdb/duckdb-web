@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Numeric Functions
-selected: Documentation/Functions/Numeric Functions
-expanded: Functions
 ---
 ## Numeric Operators
 The table below shows the available mathematical operators for numeric types.

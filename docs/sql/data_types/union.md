@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Union
-selected: Documentation/Data Types/Union
-expanded: Nested
 ---
 
 ## Union Data Type

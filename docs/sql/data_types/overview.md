@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Data Types
-selected: Documentation/Data Types
-expanded: Data Types
 blurb: The table below shows all the built-in general-purpose data types.
 ---
 ## General-Purpose Data Types

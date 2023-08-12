@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Struct
-selected: Documentation/Data Types/Struct
-expanded: Nested
 ---
 
 ## Struct Data Type

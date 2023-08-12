@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: FILTER Clause
-selected: Documentation/SQL/Query Syntax/Filter
-expanded: SQL
 railroad: query_syntax/filter.js
 ---
 The `FILTER` clause may optionally follow an aggregate function in a `SELECT` statement. This will filter the rows of data that are fed into the aggregate function in the same way that a `WHERE` clause filters rows, but localized to the specific aggregate function. `FILTER`s are not currently able to be used when the aggregate function is in a windowing context. 

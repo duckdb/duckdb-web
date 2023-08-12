@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Comparisons
-selected: Documentation/Expressions/Comparisons
-expanded: Expressions
 railroad: expressions/comparison.js
 ---
 ## Comparison Operators

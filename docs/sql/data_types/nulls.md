@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: NULL Values
-selected: Documentation/Data Types/NULL Values
-expanded: Data Types
 blurb: The NULL value represents a missing value.
 ---
 

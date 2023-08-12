@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Pivot Statement
-selected: Documentation/SQL/Pivot
-expanded: SQL
 railroad: statements/pivot.js
 blurb: The PIVOT statement allows values within a column to be separated into their own columns.
 ---

@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Parquet Import
-selected: Parquet Import
 ---
 
 To read data from a Parquet file, use the `read_parquet` function in the `FROM` clause of a query. 

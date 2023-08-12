@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Parquet Import
-selected: Parquet Import
 ---
 
 To run a query directly on a Parquet file, use the `read_parquet` function in the `FROM` clause of a query. 

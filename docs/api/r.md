@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: R API
-selected: Client APIs
 ---
 ## Installation
 The DuckDB R API can be installed using `install.packages`. Please see the [installation page](../installation?environment=r) for details.

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Numeric Types
-selected: Documentation/Data Types/Numeric
-expanded: Data Types
 blurb: Numeric types are used to store numbers, and come in different shapes and sizes.
 ---
 ## Integer Types

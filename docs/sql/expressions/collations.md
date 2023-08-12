@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Collations
-selected: Documentation/Expressions/Collations
-expanded: Expressions
 railroad: expressions/collate.js
 ---
 <div id="rrdiagram"></div>

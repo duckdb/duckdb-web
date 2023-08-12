@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: CSV Export
-selected: CSV Export
 ---
 
 To export the data from a table to a CSV file, use the `COPY` statement.

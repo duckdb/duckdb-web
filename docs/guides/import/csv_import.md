@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: CSV Import
-selected: CSV Import
 ---
 
 To read data from a CSV file, use the `read_csv_auto` function in the `FROM` clause of a query. 

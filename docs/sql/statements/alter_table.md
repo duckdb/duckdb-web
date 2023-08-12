@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Alter Table
-selected: Documentation/SQL/Alter Table
-expanded: SQL
 railroad: statements/alter.js
 ---
 

@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: C API - Data Chunks
-selected: Data Chunks
 ---
 
 Data chunks represent a horizontal slice of a table. They hold a number of vectors, that can each hold up to the `VECTOR_SIZE` rows. The vector size can be obtained through the `duckdb_vector_size` function and is configurable, but is usually set to `2048`.

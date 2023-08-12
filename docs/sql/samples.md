@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Samples
-selected: Documentation/Samples
 railroad: statements/samples.js
 ---
 

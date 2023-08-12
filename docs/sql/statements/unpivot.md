@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Unpivot Statement
-selected: Documentation/SQL/Unpivot
-expanded: SQL
 railroad: statements/unpivot.js
 blurb: The UNPIVOT statement allows columns to be stacked into rows that indicate the prior column name and value.
 ---

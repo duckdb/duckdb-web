@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: ORDER BY Clause
-selected: Documentation/SQL/Query Syntax/Order By
-expanded: SQL
 railroad: query_syntax/orderby.js
 ---
 

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: List
-selected: Documentation/Data Types/List
-expanded: Nested
 ---
 
 ## List Data Type

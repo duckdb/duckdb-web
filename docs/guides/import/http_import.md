@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: HTTP Parquet Import
-selected: HTTP Parquet Import
 ---
 
 To load a Parquet file over `http(s)`, the `HTTPFS` extension is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.

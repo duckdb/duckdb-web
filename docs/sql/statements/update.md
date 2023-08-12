@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Update Statement
-selected: Documentation/SQL/Update
-expanded: SQL
 railroad: statements/update.js
 ---
 The `UPDATE` statement modifies the values of rows in a table.

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Map
-selected: Documentation/Data Types/Map
-expanded: Nested
 ---
 
 ## Map Data Type

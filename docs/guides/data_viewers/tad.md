@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Tad - A Tabular Data Viewer
-selected: Tad - A Tabular Data Viewer
 ---
 
 [Tad](https://www.tadviewer.com) is a fast, free cross-platform tabular data viewer application powered by DuckDB.  There are [pre-built binary installers](https://github.com/antonycourtney/tad/releases/latest) available for Mac, Windows and Linux, and full

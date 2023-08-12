@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Set Operations
-selected: Documentation/SQL/Query Syntax/Set Operations
-expanded: SQL
 railroad: query_syntax/setops.js
 ---
 

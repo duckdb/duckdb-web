@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Data Ingestion
-selected: Client APIs
 ---
 
 #### CSV Files

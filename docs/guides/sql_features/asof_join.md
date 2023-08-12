@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: DuckDB ASOF Join
-selected: DuckDB ASOF Join
 ---
 
 Problem: we have a time-based price table; Traditional joins against this table get NULL

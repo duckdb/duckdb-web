@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Timestamp Functions
-selected: Documentation/Functions/Timestamp Functions
-expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating `TIMESTAMP` values.
 

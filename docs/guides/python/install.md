@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Install the Python Client
-selected: Install
 ---
 
 The latest release of the Python client can be installed using `pip`.

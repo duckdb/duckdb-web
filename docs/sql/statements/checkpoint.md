@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Checkpoint
-selected: Documentation/SQL/Checkpoint
-expanded: SQL
 railroad: statements/checkpoint.js
 ---
 

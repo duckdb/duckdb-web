@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Create Macro
-selected: Documentation/SQL/Create Macro
-expanded: SQL
 railroad: statements/createmacro.js
 ---
 The `CREATE MACRO` statement can create a scalar or table macro (function) in the catalog. 

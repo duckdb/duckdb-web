@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Time Zones
-selected: Documentation/Data Types/Timestamp
-expanded: Data Types
 blurb: A reference list for Time Zones.
 ---
 

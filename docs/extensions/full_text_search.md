@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Full Text Search
-selected: Documentation/Full Text Search
 ---
 Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
 

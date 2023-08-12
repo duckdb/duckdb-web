@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Vacuum
-selected: Documentation/SQL/Vacuum
-expanded: SQL
 railroad: statements/vacuum.js
 ---
 

@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Query
-selected: Client APIs
 ---
 
 DuckDB-Wasm provides functions for querying data. Queries are run sequentially. 

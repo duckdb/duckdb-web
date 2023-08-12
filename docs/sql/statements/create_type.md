@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Create Type
-selected: Documentation/SQL/Create Type
-expanded: SQL
 railroad: statements/createtype.js
 ---
 The `CREATE Type` statement defines a new type in the catalog.

@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Jupyter Notebooks
-selected: Jupyter Notebooks
 ---
 
 DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 

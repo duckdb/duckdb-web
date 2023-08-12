@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Node.js API
-selected: Client APIs
 ---
 
 This package provides a node.js API for [DuckDB](https://github.com/duckdb/duckdb), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
