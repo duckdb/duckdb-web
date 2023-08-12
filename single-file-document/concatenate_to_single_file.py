@@ -17,6 +17,10 @@ def path_to_label(docs_root_absolute_path, path):
 
 
 def concat(of, header_level, docs_root_absolute_path, docs_root, doc_path):
+    # skip index files
+    if doc_path.endswith("index"):
+        return
+    
     full_path = f"{docs_root}/{doc_path}.md"
     if not os.path.exists(full_path):
         full_path = f"{docs_root}/{doc_path}/index.md"
