@@ -80,6 +80,7 @@
 				<div>{{ page.title }}</div>
 
 				{% if page.url contains '/docs/' %}
+				<div class="sourcelink"><a href='https://github.com/duckdb/duckdb-web/tree/master/docs/{{ basename }}' title="Improve this page">Page Source</a></div>
 				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
 				<div class="versionsidebar">
 					<span>Version: </span>

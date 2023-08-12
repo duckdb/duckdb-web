@@ -1096,7 +1096,17 @@ body.documentation{
 		width: calc(100% - 252px);
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: right;
+		> div.sourcelink{
+			font-size: 14px;
+			color: rgba(184, 184, 184, 1);
+			padding-right: 20px;
+			margin-left: auto;
+			margin-top: 1px;
+			cursor: pointer;
+			background-color: $duckDBlightgrey;
+			z-index: 500;
+		}
 		> div.version{
 			font-size: 14px;
 			color: rgba(184, 184, 184, 1);
