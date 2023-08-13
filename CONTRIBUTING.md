@@ -31,9 +31,15 @@ The addition of a new guide requires one additional edit:
 ### Syntax
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
-* The title of the page should be encoded in the front matter's `title` property. The body of the pages should not repeat this title word-by-word.
-* Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
+* Do not hard-wrap lines in blocks of text.
+* Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). To display blocks of text without a language (e.g., console outputs), use \`\`\`text ... \`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
+* Always format SQL code, variable names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
+
+### Headers
+
+* The title of the page should be encoded in the front matter's `title` property. The body of the pages should not repeat this title word-by-word.
+* In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
 
 ### SQL style guide
 
@@ -53,12 +59,15 @@ The addition of a new guide requires one additional edit:
 ## Cross-references
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
+* Use descriptive links:
+    * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
+    * :x: `see [here](../../sql/statements/copy)`
 * Use relative URLs without the `.html` extension:
     * :white_check_mark: `../../sql/statements/copy`
     * :x: `../../sql/statements/copy.html`
     * :x: `/docs/sql/statements/copy`
     * :x: `https://duckdb.org/docs/sql/statements/copy`
-* Referencing a specific section is possible using the label of the section:
+* Reference a specific section when possible:
     * :white_check_mark: `../../sql/statements/copy#copy-from`
 
 ## Achive and generated pages
