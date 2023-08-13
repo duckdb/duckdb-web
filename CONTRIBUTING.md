@@ -38,7 +38,7 @@ The addition of a new guide requires one additional edit:
 
 ### Headers
 
-* The title of the page should be encoded in the front matter's `title` property. The body of the pages should not repeat this title word-by-word.
+* The title of the page should be encoded in the front matter's `title` property. The body of the page should not start with a repetition of this title.
 * In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
 
 ### SQL style guide
