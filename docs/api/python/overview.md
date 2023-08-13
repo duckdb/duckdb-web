@@ -37,7 +37,7 @@ duckdb.sql('SELECT * FROM "example.parquet"') # directly query a Parquet file
 duckdb.sql('SELECT * FROM "example.json"')    # directly query a JSON file
 ```
 
-#### DataFrames
+### DataFrames
 DuckDB can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables. 
 
 ```python

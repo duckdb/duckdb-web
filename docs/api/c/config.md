@@ -7,7 +7,7 @@ Configuration options can be provided to change different settings of the databa
 settings can be changed later on using [PRAGMA statements](../../sql/pragmas) as well. The configuration object
 should be created, filled with values and passed to `duckdb_open_ext`.
 
-### **Example**
+## **Example**
 ```c
 duckdb_database db;
 duckdb_config config;

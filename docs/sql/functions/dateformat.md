@@ -5,7 +5,7 @@ title: Date Format
 
 The `strftime` and `strptime` functions can be used to convert between dates/timestamps and strings. This is often required when parsing CSV files, displaying output to the user or transferring information between programs. Because there are many possible date representations, these functions accept a format string that describes how the date or timestamp should be structured.
 
-##### strftime examples
+## strftime examples
 `strftime(timestamp, format)` converts timestamps or dates to strings according to the specified pattern.
 
 ```sql
@@ -15,7 +15,7 @@ SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 -- Monday, 2 March 1992 - 08:32:45 PM
 ```
 
-##### strptime examples
+## strptime examples
 `strptime(string, format)` converts strings to timestamps according to the specified pattern.
 
 ```sql
@@ -25,7 +25,7 @@ SELECT strptime('Monday, 2 March 1992 - 08:32:45 PM', '%A, %-d %B %Y - %I:%M:%S 
 -- 1992-03-02 20:32:45
 ```
 
-##### CSV Parsing
+## CSV Parsing
 The date formats can also be specified during CSV parsing, either in the `COPY` statement or in the `read_csv` function. This can be done by either specifying a `DATEFORMAT` or a `TIMESTAMPFORMAT` (or both). `DATEFORMAT` will be used for converting dates, and `TIMESTAMPFORMAT` will be used for converting timestamps. Below are some examples for how to use this:
 
 ```sql
@@ -36,7 +36,7 @@ COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %
 SELECT * FROM read_csv('test.csv', dateformat='%m/%d/%Y');
 ```
 
-##### Format Specifiers
+## Format Specifiers
 Below is a full list of all available format specifiers.
 
 | Specifier | Description | Example |

@@ -4,7 +4,7 @@ title: Full Text Search
 ---
 Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
 
-# API
+## API
 The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
 
 ### PRAGMA create_fts_index
@@ -66,7 +66,7 @@ Reduces words to their base. Used internally by the extension.
 |stemmer|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
 
 
-# Example Usage
+## Example Usage
 
 ```sql
 -- create a table and fill it with text data
@@ -91,6 +91,4 @@ WHERE score IS NOT NULL
 ORDER BY score DESC;
 ```
 
-# Caveats
-
-Note that the FTS index will not update automatically when input table changes. A workaround of this limitation can be recreating the index to refresh.
+> The FTS index will not update automatically when input table changes. A workaround of this limitation can be recreating the index to refresh.

@@ -5,7 +5,7 @@ railroad: query_syntax/with.js
 ---
 The `WITH` clause allows you to specify common table expressions (CTEs). Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query. CTEs can reference each-other and can be nested.
 
-### Basic CTE examples
+## Basic CTE examples
 
 ```sql
 -- create a CTE called "cte" and use it in the main query
@@ -36,9 +36,9 @@ SELECT * FROM cte2;
 └──────┘
 ```
 
-### Recursive CTE examples
+## Recursive CTE examples
 
-#### Tree traversal
+### Tree traversal
 
 `WITH RECURSIVE` can be used to traverse trees. For example, take a hierarchy of tags:
 
@@ -83,7 +83,7 @@ WHERE source = 'Oasis';
 └───────────────────────────┘
 ```
 
-#### Graph traversal
+### Graph traversal
 
 The `WITH RECURSIVE` clause can be used to express graph traversal on arbitrary graphs. However, if the graph has cycles, the query must perform cycle detection to prevent infinite loops.
 One way to achieve this is to store the path of a traversal in a [list](../../sql/data_types/list) and, before extending the path with a new edge, check whether its endpoint has been visited before (see the example later).
@@ -100,7 +100,7 @@ INSERT INTO edge VALUES (1, 3), (1, 5), (2, 4), (2, 5), (2, 10), (3, 1), (3, 5),
 
 Note that the graph contains directed cycles, e.g., between nodes 1, 2, and 5.
 
-##### Enumerate all paths from a node
+#### Enumerate all paths from a node
 
 The following query returns **all paths** starting in node 1:
 
@@ -149,7 +149,7 @@ ORDER BY length(path), path;
 
 Note that the result of this query is not restricted to shortest paths, e.g., for node 5, the results include paths `[1, 5]` and `[1, 3, 5]`.
 
-##### Enumerate unweighted shortest paths from a node
+#### Enumerate unweighted shortest paths from a node
 
 In most cases, enumerating all paths is not practical or feasible. Instead, only the **(unweighted) shortest paths** are of interest. To find these, the second half of the `WITH RECURSIVE` query should be adjusted such that it only includes a node if it has not yet been visited. This is implemented by using a subquery that checks if any of the previous paths includes the node:
 
@@ -193,7 +193,7 @@ ORDER BY length(path), path;
 └───────────┴─────────┴────────────┘
 ```
 
-##### Enumerate unweighted shortest paths between two nodes
+#### Enumerate unweighted shortest paths between two nodes
 
 `WITH RECURSIVE` can also be used to find **all (unweighted) shortest paths between two nodes**. To ensure that the recursive query is stopped as soon as we reach the end node, we use a [window function](../../sql/window_functions) which checks whether the end node is among the newly added nodes.
 

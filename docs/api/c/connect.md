@@ -8,7 +8,7 @@ With the `duckdb_database` handle, you can create one or many `duckdb_connection
 
 All `duckdb_connection`s have to explicitly be disconnected with `duckdb_disconnect()` and the `duckdb_database` has to be explicitly closed with `duckdb_close()` to avoid memory and file handle leaking.
 
-### Example
+## Example
 ```c
 duckdb_database db;
 duckdb_connection con;

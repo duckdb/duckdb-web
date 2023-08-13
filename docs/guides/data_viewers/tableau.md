@@ -29,7 +29,7 @@ Note that you should use full path names to local files so that they can be foun
 Also note that you will need to use a version of the driver that is compatible (i.e., from the same release) 
 as the database format used by the DuckDB tool (e.g., Python module, command line) that was used to create the file.
 
-# Installing the JDBC Driver
+## Installing the JDBC Driver
 
 Tableau provides documentation on how to [install a JDBC driver](https://help.tableau.com/current/pro/desktop/en-us/jdbc_tableau.htm) 
 for Tableau to use.
@@ -37,7 +37,7 @@ For now, we recommend using the latest bleeding edge JDBC driver (0.8.2) as a nu
 for time compatibility.
 Note that Tableau (both Desktop and Server versions) need to be restarted any time you add or modify drivers.
 
-## Driver Links
+### Driver Links
 
 The link here is for a recent version of the JDBC driver that is compatible with Tableau.
 If you wish to connect to a database file,
@@ -50,7 +50,7 @@ Download the [snapshot jar](https://oss.sonatype.org/service/local/repositories/
 * Windows: Copy it to `C:\Program Files\Tableau\Drivers`
 * Linux: Copy it to `/opt/tableau/tableau_driver/jdbc`.
 
-# Using the Postgres Dialect
+## Using the Postgres Dialect
 
 If you just want to do something simple, you can try connecting directly to the JDBC driver 
 and using Tableau-provided Postgres dialect.
@@ -65,7 +65,7 @@ However, functionality will be missing such as MEDIAN and PERCENTILE aggregate f
 To make the data source connection more compatible with the PostgreSQL dialect, 
 please use the DuckDB taco connector as described below.
 
-# Installing the Tableau DuckDB Connector
+## Installing the Tableau DuckDB Connector
 
 While it is possible to use the Tableau-provided Postgres dialect to communicate with the DuckDB JDBC driver,
 we strongly recommend using the [DuckDB "taco" connector](https://github.com/hawkfish/duckdb-taco).
@@ -80,7 +80,7 @@ The current version of the Taco is not signed, so you will need to launch Tablea
 (Despite what the Tableau documentation says, the real security risk is in the JDBC driver code,
 not the small amount of JavaScript in the Taco.)
 
-## Server (Online)
+### Server (Online)
 
 On Linux, copy the Taco file to `/opt/tableau/connectors`.
 On Windows, copy the Taco file to `C:\Program Files\Tableau\Connectors`.
@@ -92,7 +92,7 @@ $ tsm pending-changes apply
 ```
 The last command will restart the server with the new settings.
 
-## MacOS Desktop
+### MacOS Desktop
 
 Copy the Taco file to the `/Users/[MacOS User]/Documents/My Tableau Repository/Connectors` folder.
 Then launch Tableau Desktop from the Terminal with the the command line argument to disable signature validation:
@@ -117,13 +117,13 @@ and [save it as a packaged application](https://support.apple.com/guide/script-e
 You can then double-click it to launch Tableau. 
 You will need to change the application name in the script when you get upgrades.
 
-## Windows Desktop
+### Windows Desktop
 
 Copy the Taco file to the `C:\Users\[Windows User]\Documents\My Tableau Repository\Connectors` directory.
 Then launch Tableau Desktop from a shell with the the `-DDisableVerifyConnectorPluginSignature=true` argument 
 to disable signature validation.
 
-# Output
+## Output
 
 Once loaded, you can run queries against your data!
 Here is the result of the first h2oai benchmark query from the parquet test file:

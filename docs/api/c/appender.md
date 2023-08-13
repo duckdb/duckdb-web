@@ -13,7 +13,7 @@ the row should be finished by calling `duckdb_appender_end_row`. After all rows 
 Note that `duckdb_appender_destroy` should always be called on the resulting appender, even if the function returns
 `DuckDBError`.
 
-### **Example**
+## **Example**
 ```c
 duckdb_query(con, "CREATE TABLE people(id INTEGER, name VARCHAR)", NULL);
 

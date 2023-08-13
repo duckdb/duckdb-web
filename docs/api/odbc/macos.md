@@ -13,14 +13,13 @@ Users can install it from the command line:
 brew install unixodbc 
 ```
 
-
-# Step 1: Download ODBC Driver
+## Step 1: Download ODBC Driver
 
 DuckDB releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
 **libduckdb_odbc.dylib**: the DuckDB driver compiled to MacOS (with Intel and Apple M1 support).
 
-# Step 2: Extracting ODBC artifacts
+## Step 2: Extracting ODBC artifacts
 
 Run unzip to extract the files to a permanent directory:
 
@@ -30,7 +29,7 @@ unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 ```
 
 
-# Step 3:  Configure the ODBC Driver
+## Step 3:  Configure the ODBC Driver
 
 
 ### The `odbc.ini` or `.odbc.ini` File
@@ -79,7 +78,7 @@ Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
 
 **Driver**: the absolute system file path of the DuckDB driver.
 
-# Step 4 (optionnal): Test the ODBC driver
+## Step 4 (optionnal): Test the ODBC driver
 
 After the configuration, for validate the installation, it is possible to use a odbc client. unixODBC use a command line tool called `isql`.
 
