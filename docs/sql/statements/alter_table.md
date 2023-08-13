@@ -101,6 +101,8 @@ ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
 
 The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column. Note that this does not modify any existing data in the column. Dropping the default is equivalent to setting the default value to NULL.
 
-### NOTES
+> At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise you will get a "Dependency Error."
 
-At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise you will get a "Dependency Error."
+### ADD/DROP CONSTRAINT
+
+> The `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
