@@ -38,6 +38,9 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_path):
         doc_body = doc_body.replace("### Pages in this Section", "")
         doc_body = doc_body.replace("### More", "")
 
+        # drop lines containing "---", pandoc interprets these as h2 headers
+        doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
+
         # add path labels to headers at the beginning of the file
         path_label = full_path \
             .replace("../docs/", "") \
@@ -47,16 +50,9 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_path):
         
         of.write(f" {{#{path_label}}}\n")
 
-        #######################################################################################
-        # TODO I may not agree with these indentation levels now ..... let's think it through #
-        #######################################################################################
-
-        # increase indentation of headers in the document -- they should be at least level 5 (i.e. ##### Title)
-        # - for top-level (header_level = 2), increase indentation by 3
-        # - for mid-level (header_level = 3), increase indentation by 2
-        # - for the lowest-level (header_level = 4), increase indentation by 1
-        extra_header_levels = "#" * (5 - header_level)
-        doc_body = re.sub(r"^### ", f"###{extra_header_levels} ", doc_body, flags=re.MULTILINE)
+        # move headers h2-h4 down by 3 levels (to h5-h7)
+        extra_header_levels = 3*"#"
+        doc_body = re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
 
         # replace blog post paths to the full URL
         doc_body = re.sub(
