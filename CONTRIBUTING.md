@@ -53,7 +53,7 @@ The addition of a new guide requires one additional edit:
 
 ## Examples
 
-* Examples that illustrate the use of features are very welcome.
+* Examples that illustrate the use of features are very welcome. Where applicable, consider starting the page with a few simple examples that demonstrate the most common uses of the feature described.
 * All examples should be self-contained and reproducible if possible, meaning that any example tables must be created as a part of the documentation.
 
 ## Cross-references
