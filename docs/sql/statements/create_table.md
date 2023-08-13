@@ -56,6 +56,87 @@ The `IF NOT EXISTS` syntax will only proceed with the creation of the table if i
 CREATE TABLE IF NOT EXISTS t1(i INTEGER, j INTEGER);
 ```
 
+### Check Constraints
+
+A `CHECK` constraint is an expression that must be satisfied by the values of every row in the table.
+
+```sql
+CREATE TABLE t1(
+    id INTEGER PRIMARY KEY,
+    percentage INTEGER CHECK(0 <= percentage AND percentage <= 100)
+);
+INSERT INTO t1 VALUES (1, 5);
+INSERT INTO t1 VALUES (2, -1);
+-- Error: Constraint Error: CHECK constraint failed: t1
+INSERT INTO t1 VALUES (3, 101);
+-- Error: Constraint Error: CHECK constraint failed: t1
+```
+
+```sql
+CREATE TABLE t2(id INTEGER PRIMARY KEY, x INTEGER, y INTEGER CHECK(x < y));
+INSERT INTO t2 VALUES (1, 5, 10);
+INSERT INTO t2 VALUES (2, 5, 3);
+-- Error: Constraint Error: CHECK constraint failed: t2
+```
+
+`CHECK` constraints can also be added as part of the `CONSTRAINTS` clause:
+
+```sql
+CREATE TABLE t3(
+    id INTEGER PRIMARY KEY,
+    x INTEGER,
+    y INTEGER,
+    CONSTRAINT x_smaller_than_y CHECK(x < y)
+);
+INSERT INTO t3 VALUES (1, 5, 10);
+INSERT INTO t3 VALUES (2, 5, 3);
+-- Error: Constraint Error: CHECK constraint failed: t3
+```
+
+### Foreign Key Constraints
+
+A `FOREIGN KEY` is a column (or set of columns) that references another table's primary key. Foreign keys check referential integrity, i.e., the referred primary key must exist in the other table upon insertion.
+
+```sql
+CREATE TABLE t1(id INTEGER PRIMARY KEY, j VARCHAR);
+CREATE TABLE t2(
+    id INTEGER PRIMARY KEY,
+    t1_id INTEGER,
+    FOREIGN KEY (t1_id) REFERENCES t1(id)
+);
+
+-- example
+INSERT INTO t1 VALUES (1, 'a');
+INSERT INTO t2 VALUES (1, 1);
+INSERT INTO t2 VALUES (2, 2);
+-- Error: Constraint Error: Violates foreign key constraint because key "id: 2" does not exist in the referenced table
+```
+
+Foreign keys can be defined on composite primary keys:
+
+```sql
+CREATE TABLE t3(id INTEGER, j VARCHAR, PRIMARY KEY(id, j));
+CREATE TABLE t4(
+    id INTEGER PRIMARY KEY, t3_id INTEGER, t3_j VARCHAR,
+    FOREIGN KEY (t3_id, t3_j) REFERENCES t3(id, j)
+);
+
+-- example
+INSERT INTO t3 VALUES (1, 'a');
+INSERT INTO t4 VALUES (1, 1, 'a');
+INSERT INTO t4 VALUES (2, 1, 'b');
+-- Error: Constraint Error: Violates foreign key constraint because key "id: 1, j: b" does not exist in the referenced table
+```
+
+Foreign keys can also be defined on unique columns:
+
+```sql
+CREATE TABLE t5(id INTEGER UNIQUE, j VARCHAR);
+CREATE TABLE t6(id INTEGER PRIMARY KEY, t5_id INTEGER, FOREIGN KEY (t5_id) REFERENCES t5(id));
+```
+
+> Foreign keys with cascading deletes (`ON DELETE CASCADE`) can be defined in `CREATE TABLE` statements but they are not enforced, i.e., an attempt to delete a row that has a foreign key pointing to it will result in a Constraint Error.
+
 ### Generated Columns
 
 The `[type] [GENERATED ALWAYS] AS ( expr ) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
