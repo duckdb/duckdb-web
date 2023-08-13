@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Enum Types
-selected: Documentation/Data Types/Enum
-expanded: Data Types
 blurb: The ENUM type represents a dictionary data structure with all possible unique values of a column.
 ---
 | Name | Description |

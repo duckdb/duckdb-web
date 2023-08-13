@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Configuration
-selected: Documentation/Configuration
 ---
 DuckDB has a number of configuration options that can be used to change the behavior of the system.  
 The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.

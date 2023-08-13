@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Excel Export
-selected: Excel Export
 ---
 
 To export the data from a table to an Excel file, install and load the spatial extension, then use the `COPY` statement.

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Constraints
-selected: Documentation/SQL/Constraints
-expanded: SQL
 railroad: statements/constraints.js
 ---
 

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Interval Type
-selected: Documentation/Data Types/Interval
-expanded: Data Types
 blurb: An interval specifies a period of time measured in units of a specific date part like years, days, seconds, or others.
 ---
 

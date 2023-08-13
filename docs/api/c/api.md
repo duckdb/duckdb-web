@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: C API - Complete API
-selected: API Reference
 ---
 
 ## **API Reference**

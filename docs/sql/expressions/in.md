@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: IN Operator
-selected: Documentation/Expressions/In
-expanded: Expressions
 railroad: expressions/in.js
 ---
 

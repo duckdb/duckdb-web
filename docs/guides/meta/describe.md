@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Describe
-selected: Describe
 ---
 
 In order to view the schema of the result of a query, prepend `DESCRIBE` to a query.

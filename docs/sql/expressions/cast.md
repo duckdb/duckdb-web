@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Casting
-selected: Documentation/Expressions/Casting
-expanded: Expressions
 railroad: expressions/cast.js
 ---
 <div id="rrdiagram"></div>

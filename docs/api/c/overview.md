@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: C API - Overview
-selected: Overview
-expanded: C
 ---
 
 DuckDB implements a custom C API modelled somewhat following the SQLite C API. The API is contained in the `duckdb.h` header. Continue to [Startup & Shutdown](connect) to get started, or check out the [Full API overview](api).

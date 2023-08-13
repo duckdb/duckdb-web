@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Utility Functions
-selected: Documentation/Functions/Utility Functions
-expanded: Functions
 ---
 
 ## Utility Functions

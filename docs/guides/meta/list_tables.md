@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: List Tables
-selected: List Tables
 ---
 
 The `SHOW TABLES` command can be used to obtain a list of all tables within the selected schema.

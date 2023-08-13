@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Blob Type
-selected: Documentation/Data Types/Blob
-expanded: Data Types
 blurb: The blob (Binary Large OBject) type represents an arbitrary binary object stored in the database system.
 ---
 

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: HAVING Clause
-selected: Documentation/SQL/Query Syntax/Having
-expanded: SQL
 railroad: query_syntax/groupby.js
 ---
 

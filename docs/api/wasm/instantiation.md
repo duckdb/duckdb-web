@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Instantiation
-selected: Client APIs
 ---
 
 DuckDB-Wasm has multiple ways to be instantiated depending on the use case.

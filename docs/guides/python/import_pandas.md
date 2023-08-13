@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Import From Pandas
-selected: Import From Pandas
 ---
 
 `CREATE TABLE AS` and `INSERT INTO` can be used to create a table from any query. We can then create tables or insert into existing tables by referring to referring to the Pandas DataFrame in the query.

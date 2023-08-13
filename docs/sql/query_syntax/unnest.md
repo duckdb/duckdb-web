@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: UNNEST
-selected: Documentation/SQL/Query Syntax/UNNEST
-expanded: SQL
 ---
 
 ## Examples

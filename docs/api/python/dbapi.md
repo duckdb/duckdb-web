@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Python DB API
-selected: Client APIs
 ---
 
 The standard DuckDB Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html).

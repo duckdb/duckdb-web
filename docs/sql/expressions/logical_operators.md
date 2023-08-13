@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Logical Operators
-selected: Documentation/Expressions/Logical
-expanded: Expressions
 railroad: expressions/logical.js
 ---
 <div id="rrdiagram"></div>

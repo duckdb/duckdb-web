@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: VALUES Clause
-selected: Documentation/SQL/Query Syntax/Values
-expanded: SQL
 railroad: query_syntax/values.js
 ---
 The `VALUES` clause is used to specify a fixed number of rows. The `VALUES` clause can be used as a stand-alone statement, as part of the `FROM` clause, or as input to an `INSERT INTO` statement.

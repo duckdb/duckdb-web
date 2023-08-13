@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Date Parts
-selected: Documentation/Functions/Date Parts
-expanded: Functions
 ---
 
 The `date_part` and `date_diff` and `date_trunc` functions can be used to manipulate the fields of temporal types.

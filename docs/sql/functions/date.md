@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Date Functions
-selected: Documentation/Functions/Date Functions
-expanded: Functions
 ---
 This section describes functions and operators for examining and manipulating date values.
 

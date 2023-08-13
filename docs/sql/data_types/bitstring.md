@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Bitstring Type
-selected: Documentation/Data Types/Bit
-expanded: Data Types
 blurb: The bitstring type are strings of 1's and 0's.
 ---
 

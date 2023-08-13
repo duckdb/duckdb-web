@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: SELECT Clause
-selected: Documentation/SQL/Query Syntax/Select
-expanded: SQL
 railroad: query_syntax/select.js
 blurb: The SELECT clause specifies the list of columns that will be returned by the query.
 ---

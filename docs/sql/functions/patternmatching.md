@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Pattern Matching
-selected: Documentation/Functions/Pattern Matching
-expanded: Functions
 railroad: expressions/like.js
 ---
 ## Pattern Matching

@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Multiple Python Threads
-selected: Multiple Python Threads
 ---
 
 This page demonstrates how to simultaneously insert into and read from a DuckDB database across multiple Python threads. 

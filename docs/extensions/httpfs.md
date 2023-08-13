@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: HTTPFS
-selected: Documentation/HTTPFS
 ---
 The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote
 files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension

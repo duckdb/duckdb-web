@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Create View
-selected: Documentation/SQL/Create View
-expanded: SQL
 railroad: statements/createview.js
 ---
 The `CREATE VIEW` statement defines a new view in the catalog.

@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Subqueries
-selected: Documentation/Expressions/Subqueries
-expanded: Expressions
 railroad: expressions/subqueries.js
 ---
 ## Scalar Subquery

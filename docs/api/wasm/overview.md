@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: DuckDB Wasm
-selected: Client APIs
 redirect_from:
   - /docs/api/wasm
 

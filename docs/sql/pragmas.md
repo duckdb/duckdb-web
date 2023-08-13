@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Pragmas
-selected: Documentation/Pragmas
 ---
 The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 

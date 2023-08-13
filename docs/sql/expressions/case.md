@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Case Statement
-selected: Documentation/Expressions/Case
-expanded: Expressions
 railroad: expressions/case.js
 ---
 <div id="rrdiagram"></div>

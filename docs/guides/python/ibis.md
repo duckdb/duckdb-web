@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: DuckDB with Ibis
-selected: DuckDB with Ibis
 ---
 
 [Ibis](https://ibis-project.org/) is a Python library that allows queries to be written in a pythonic relational style and then be compiled into SQL.

@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: C API - Types
-selected: Types
 ---
 
 DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant

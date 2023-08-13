@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Explain
-selected: Explain
 ---
 
 In order to view the query plan of a query, prepend `EXPLAIN` to a query.

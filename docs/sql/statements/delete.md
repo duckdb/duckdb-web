@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Delete Statement
-selected: Documentation/SQL/Delete
-expanded: SQL
 railroad: statements/delete.js
 ---
 The `DELETE` statement removes rows from the table identified by the table-name.

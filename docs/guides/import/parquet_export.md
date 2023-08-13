@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Parquet Export
-selected: Parquet Export
 ---
 
 To export the data from a table to a Parquet file, use the `COPY` statement.

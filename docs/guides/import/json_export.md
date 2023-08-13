@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: JSON Export
-selected: JSON Export
 ---
 
 To export the data from a table to a JSON file, use the `COPY` statement.

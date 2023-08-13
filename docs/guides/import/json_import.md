@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: JSON Import
-selected: JSON Import
 ---
 
 To read data from a JSON file, use the `read_json_auto` function in the `FROM` clause of a query. 

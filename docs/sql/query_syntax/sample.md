@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: SAMPLE Clause
-selected: Documentation/SQL/Query Syntax/Sample
-expanded: SQL
 railroad: query_syntax/sample.js
 ---
 

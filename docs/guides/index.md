@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Guides
-selected: Guides
 ---
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.

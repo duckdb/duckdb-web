@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: S3 Parquet Export
-selected: S3 Parquet Export
 ---
 
 To write a Parquet file to S3, the `HTTPFS` extension is required. This can be installed use the `INSTALL` SQL command. This only needs to be run once.

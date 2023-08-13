@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Indexes
-selected: Documentation/Indexes
 railroad: statements/indexes.js
 ---
 ## Index types

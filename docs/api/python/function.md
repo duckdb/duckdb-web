@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Python Function API
-selected: Client APIs
 ---
 
 You can create a DuckDB User Defined Function (UDF) out of a python function so it can be used in SQL queries.

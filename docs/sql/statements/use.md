@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Use
-selected: Documentation/SQL/Use
-expanded: SQL
 railroad: statements/use.js
 ---
 

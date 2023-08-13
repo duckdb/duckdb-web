@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: WITH Clause
-selected: Documentation/SQL/Query Syntax/With
-expanded: SQL
 railroad: query_syntax/with.js
 ---
 The `WITH` clause allows you to specify common table expressions (CTEs). Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query. CTEs can reference each-other and can be nested.

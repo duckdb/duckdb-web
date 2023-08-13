@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Star Expression
-selected: Documentation/Expressions/Star
-expanded: Expressions
 railroad: expressions/star.js
 ---
 

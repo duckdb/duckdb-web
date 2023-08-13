@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: DuckDB with DataFusion
-selected: DuckDB with DataFusion
 ---
 
 [DataFusion](https://github.com/apache/arrow-datafusion-python/) is a DataFrame and SQL library built in Rust with bindings for Python. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model.

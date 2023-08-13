@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: SQL on Apache Arrow
-selected: SQL on Apache Arrow
 ---
 
 DuckDB can query multiple different types of Apache Arrow objects. 

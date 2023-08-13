@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Search
-selected: Search
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/css/search.css">

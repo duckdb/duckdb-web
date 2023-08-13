@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: SQL on Pandas
-selected: SQL on Pandas
 ---
 
 Pandas DataFrames stored in local variables can be queried as if they are regular tables within DuckDB.

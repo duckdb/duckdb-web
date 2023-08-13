@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Execute SQL
-selected: Execute SQL
 ---
 
 SQL queries can be executed using the `duckdb.sql` command.
