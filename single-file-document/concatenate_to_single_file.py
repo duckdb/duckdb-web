@@ -186,7 +186,7 @@ with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.m
     data = json.load(menu_docs_file)
 
     add_to_documentation(docs_root_absolute_path, data, of, "Documentation", verbose)
-    #add_to_documentation(data, of, "Guides", verbose)
+    add_to_documentation(docs_root_absolute_path, data, of, "Guides", verbose)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
