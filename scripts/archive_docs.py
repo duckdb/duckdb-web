@@ -60,7 +60,7 @@ if date != None:
 			revision = splits[0]
 	print(f"Formatting for {revision} (committed on {rev_date})")
 
-ignored_files = ['.DS_Store', 'archive', 'faq.md', 'twitter_wall.md', 'why_duckdb.md']
+ignored_files = ['.DS_Store', 'archive', 'faq.md', 'why_duckdb.md']
 
 version = arguments[1]
 folder = os.path.join('docs', 'archive', version)

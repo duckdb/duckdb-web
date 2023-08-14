@@ -26,16 +26,24 @@ The addition of a new guide requires one additional edit:
 
 **When creating a PR, please check the box to "Allow edits from maintainers".**
 
-## Formatting
+## Style guide
+
+Please adhere the following style guide when submitting a pull request.
 
 ### Syntax
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
-* The title of the page should be encoded in the front matter's `title` property. The body of the pages should not repeat this title word-by-word.
-* Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
+* Do not hard-wrap lines in blocks of text.
+* Enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). To display blocks of text without a language (e.g., console outputs), use \`\`\`text ... \`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
+* Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 
-### SQL style guide
+### Headers
+
+* The title of the page should be encoded in the front matter's `title` property. The body of the page should not start with a repetition of this title.
+* In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
+
+### SQL style
 
 * Use SQL uppercase keywords, e.g., `SELECT ... FROM ...`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
@@ -47,19 +55,23 @@ The addition of a new guide requires one additional edit:
 
 ## Examples
 
-* Examples that illustrate the use of features are very welcome.
+* Examples that illustrate the use of features are very welcome. Where applicable, consider starting the page with a few simple examples that demonstrate the most common uses of the feature described.
 * All examples should be self-contained and reproducible if possible, meaning that any example tables must be created as a part of the documentation.
 
 ## Cross-references
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
+* Use descriptive links:
+    * :white_check_mark: ```see [the `COPY` statement](../../sql/statements/copy)```
+    * :x: `see [here](../../sql/statements/copy)`
 * Use relative URLs without the `.html` extension:
     * :white_check_mark: `../../sql/statements/copy`
     * :x: `../../sql/statements/copy.html`
     * :x: `/docs/sql/statements/copy`
     * :x: `https://duckdb.org/docs/sql/statements/copy`
-* Referencing a specific section is possible using the label of the section:
+* Reference a specific section when possible:
     * :white_check_mark: `../../sql/statements/copy#copy-from`
+* Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
 
 ## Achive and generated pages
 

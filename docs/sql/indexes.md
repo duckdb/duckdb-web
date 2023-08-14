@@ -23,7 +23,9 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 
 <div id="rrdiagram1"></div>
 
-`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/duckdb/duckdb/issues/63).
+`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported.
+
+> Unidimensional indexes are supported, while multidimensional indexes are not yet supported.
 
 ### Parameters
 
