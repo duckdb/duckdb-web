@@ -133,7 +133,7 @@ CREATE TABLE t5(id INTEGER UNIQUE, j VARCHAR);
 CREATE TABLE t6(id INTEGER PRIMARY KEY, t5_id INTEGER, FOREIGN KEY (t5_id) REFERENCES t5(id));
 ```
 
-> Foreign keys with cascading deletes (`ON DELETE CASCADE`) can be defined in `CREATE TABLE` statements but they are not enforced, i.e., an attempt to delete a row that has a foreign key pointing to it will result in a Constraint Error.
+> Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
 
 ### Generated Columns
 
