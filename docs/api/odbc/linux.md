@@ -17,7 +17,7 @@ sudo apt get install unixodbc
 
 ```bash
 sudo yum install unixodbc
-## or
+# or
 sudo dnf install unixodbc
 ```
 
