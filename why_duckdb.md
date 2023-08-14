@@ -77,9 +77,6 @@ DuckDB's development started while the main developers were public servants in T
 ## Other Projects
 To learn about projects using DuckDB, visit the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
 
-## Testimonials
-See our [DuckDB Testimonial Twitter Wall](/docs/twitter_wall)
-
 ## Standing on the Shoulders of Giants
 DuckDB uses some components from various Open-Source projects and draws inspiration from scientific publications. We are very grateful for this. Here is an overview:
 
