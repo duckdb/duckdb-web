@@ -55,6 +55,8 @@ SELECT DISTINCT city FROM addresses;
 
 The `DISTINCT` clause can be used to return **only** the unique rows in the result - so that any duplicate rows are filtered out.
 
+> Queries starting with `SELECT DISTINCT` run deduplication, which is an expensive operation. Therefore, only use `DISTINCT` if necessary.
+
 #### Distinct On Clause
 
 ```sql
@@ -63,6 +65,8 @@ SELECT DISTINCT ON(country) city, population FROM cities ORDER BY population DES
 ```
 
 The `DISTINCT ON` clause returns only one row per unique value in the set of expressions as defined in the `ON` clause. If an `ORDER BY` clause is present, the row that is returned is the first row that is encountered *as per the `ORDER BY`* criteria. If an `ORDER BY` clause is not present, the first row that is encountered is not defined and can be any row in the table.
+
+> When querying large data sets, using `DISTINCT` on all columns can be expensive. Therefore, consider using `DISTINCT ON` on a column (or a set of columns) which guaranetees a sufficient degree of uniqueness for your results. For example, using `DISTINCT ON` on the key column(s) of a table guarantees full uniqueness.
 
 #### Aggregates
 ```sql

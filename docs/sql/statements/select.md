@@ -20,6 +20,8 @@ SELECT * FROM tbl ORDER BY i DESC LIMIT 3;
 SELECT * FROM t1 JOIN t2 USING(a, b);
 -- use column indexes to select the first and third column from the table "tbl"
 SELECT #1, #3 FROM tbl;
+-- select all unique cities from the addresses table
+SELECT DISTINCT city FROM addresses;
 ```
 
 ### Syntax
@@ -45,7 +47,7 @@ As the `SELECT` statement is so complex, we have split up the syntax diagrams in
 ## SELECT clause
 <div id="rrdiagram3"></div>
 
-[The `SELECT` clause](../../sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions.
+[The `SELECT` clause](../../sql/query_syntax/select) specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions. The `DISTINCT` keyword ensures that only unique tuples are returned.
 
 ## FROM clause
 <div id="rrdiagram4"></div>
