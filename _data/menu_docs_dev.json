@@ -169,10 +169,6 @@
               "url": "ibis"
             },
             {
-              "page": "DuckDB with Fugue",
-              "url": "fugue"
-            },
-            {
               "page": "DuckDB with Polars",
               "url": "polars"
             },
@@ -207,10 +203,6 @@
             {
               "page": "Tableau",
               "url": "tableau"
-            },
-            {
-              "page": "Tad",
-              "url": "tad"
             },
             {
               "page": "YouPlot",
