@@ -72,7 +72,6 @@ The guides section contains compact how-to guides that are focused on achieving 
 ### Python Library Integrations
 
 * [How to use Ibis to query DuckDB with or without SQL](../guides/python/ibis)
-* [How to use FugueSQL to use DuckDB with Python/Pandas functions](../guides/python/fugue)
 * [How to use DuckDB with Polars DataFrames via Apache Arrow](../guides/python/polars)
 * [How to use DuckDB with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
 * [How to use DuckDB with DataFusion via Apache Arrow](../guides/python/datafusion)
@@ -83,6 +82,5 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Data Viewers
 
-* [How to use Tad to view tabular data files and DuckDB databases](../guides/data_viewers/tad)
 * [How to Visualise DuckDB databases with Tableau](../guides/data_viewers/tableau)
 * [How to draw command-line plots with DuckDB and YouPlot](../guides/data_viewers/youplot)
