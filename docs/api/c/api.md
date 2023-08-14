@@ -130,6 +130,7 @@ title: C API - Complete API
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_pending_error">duckdb_pending_error</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
 <span class="k">duckdb_pending_state</span> <span class="nf"><a href="#duckdb_pending_execute_task">duckdb_pending_execute_task</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_execute_pending">duckdb_execute_pending</a></span>(<span class="k">duckdb_pending_result</span> <span class="k">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="k">out_result</span>);
+<span class="kt">bool</span> <span class="nf"><a href="#duckdb_pending_execution_is_finished">duckdb_pending_execution_is_finished</a></span>(<span class="k">duckdb_pending_state</span> <span class="k">pending_state</span>);
 </code></pre></div></div>
 ### **Value Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_value">duckdb_destroy_value</a></span>(<span class="kt">duckdb_value</span> *<span class="k">value</span>);
@@ -2498,6 +2499,28 @@ The result object.
 * `returns`
 
 `DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+### `duckdb_pending_execution_is_finished`
+---
+Returns whether a duckdb_pending_state is finished executing. For example if `pending_state` is
+DUCKDB_PENDING_RESULT_READY, this function will return true.
+
+#### Syntax
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_pending_execution_is_finished</span>(<span class="k">
+</span>  <span class="k">duckdb_pending_state</span> <span class="k">pending_state
+</span>);
+</code></pre></div></div>
+#### Parameters
+---
+* `pending_state`
+
+The pending state on which to decide whether to finish execution.
+* `returns`
+
+Boolean indicating pending execution should be considered finished.
 
 <br>
 

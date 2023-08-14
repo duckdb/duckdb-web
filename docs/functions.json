@@ -939,7 +939,7 @@
     "parameters": [
       "bytes"
     ],
-    "description": "Converts bytes to a human-readable presentation (e.g., 16000 -> 16KB)",
+    "description": "Converts bytes to a human-readable presentation (e.g. 16000 -> 16KB)",
     "example": "format_bytes(1000 * 16)",
     "type": "scalar_function",
     "aliases": [
@@ -2851,7 +2851,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.8.2-dev2509"
+    "result": "v0.8.2-dev2809"
   },
   {
     "name": "week",
