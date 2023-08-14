@@ -429,7 +429,7 @@ Note that the duck head is built with unicode characters and does not always wor
 -- Duck head prompt
 .prompt '⚫◗ '
 -- Example SQL statement
-select 'Begin quacking!' as "Ready, Set, ..."
+SELECT 'Begin quacking!' as "Ready, Set, ..."
 ```
 
 To invoke that file on initialization, use this command:

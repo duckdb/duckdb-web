@@ -22,7 +22,7 @@ SELECT {duck: 42}::JSON;
 
 This works for our nested types as shown in the example, but also for non-nested types:
 ```sql
-select '2023-05-12'::DATE::JSON;
+SELECT '2023-05-12'::DATE::JSON;
 -- "2023-05-12"
 ```
 

@@ -37,7 +37,7 @@ This will let you specify an instant correctly without access to time zone infor
 For portability, `TIMESTAMPTZ` values will always be displayed using GMT offsets:
 
 ```sql
-select '2022-10-08 13:13:34-07'::TIMESTAMPTZ'
+SELECT '2022-10-08 13:13:34-07'::TIMESTAMPTZ'
 -- 2022-10-08 20:13:34+00
 ```
 
@@ -45,7 +45,7 @@ If a time zone extension such as ICU is loaded, then a time zone can be parsed f
 and cast to a representation in the local time zone:
 
 ```sql
-select '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
+SELECT '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
 -- 2022-10-08 04:13:34-07
 ```
 
