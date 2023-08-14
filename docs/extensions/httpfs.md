@@ -140,7 +140,7 @@ File globbing is implemented using the ListObjectV2 API call and allows to use f
 multiple files, for example:
 
 ```sql
-SELECT * from read_parquet('s3://bucket/*.parquet')
+SELECT * FROM read_parquet('s3://bucket/*.parquet')
 ```
 
 This query matches all files in the root of the bucket with the parquet extension.

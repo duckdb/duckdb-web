@@ -41,7 +41,7 @@ See [here](../data/parquet) for a detailed description of Parquet loading.
 JSON files can be efficiently loaded and queried using the `read_json_auto` function.
 
 ```sql
-SELECT * from read_json_auto('test.json');
+SELECT * FROM read_json_auto('test.json');
 ```
 
 See [here](../data/json) for a detailed description of JSON loading.

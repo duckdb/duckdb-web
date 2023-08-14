@@ -16,14 +16,14 @@ To construct a `MAP`, use the bracket syntax preceded by the `MAP` keyword.
 ### Creating Maps
 ```sql
 -- A map with varchar keys and integer values. This returns {key1=1, key2=5}
-select map { 'key1': 1, 'key2': 5 };
+SELECT map { 'key1': 1, 'key2': 5 };
 -- Alternatively use the map_from_entries function. This returns {key1=1, key2=5}
-select map_from_entries([(key1, 1), (key2, 5)]);
+SELECT map_from_entries([(key1, 1), (key2, 5)]);
 -- A map with integer keys and numeric values. This returns {1=42.001, 5=-32.100} 
-select map { 1: 42.001, 5: -32.1 };
+SELECT map { 1: 42.001, 5: -32.1 };
 -- Keys and/or values can also be nested types.
 -- This returns {[a, b]=[1.1, 2.2], [c, d]=[3.3, 4.4]}
-select map { ['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4] };
+SELECT map { ['a', 'b']: [1.1, 2.2], ['c', 'd']: [3.3, 4.4] };
 -- Create a table with a map column that has integer keys and double values
 CREATE TABLE map_table (map_col MAP(INT, DOUBLE));
 ```

@@ -7,8 +7,8 @@ To read data from an Excel file, install and load the spatial extension, then us
 Use the `layer` parameter to specify the Excel worksheet name.
 
 ```sql
-install spatial; -- Only needed once per DuckDB connection
-load spatial; -- Only needed once per DuckDB connection
+INSTALL spatial; -- Only needed once per DuckDB connection
+LOAD spatial; -- Only needed once per DuckDB connection
 
 SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
 ```
@@ -16,8 +16,8 @@ SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
 To create a new table using the result from a query, use `CREATE TABLE AS` from a `SELECT` statement.
 
 ```sql
-install spatial; -- Only needed once per DuckDB connection
-load spatial; -- Only needed once per DuckDB connection
+INSTALL spatial; -- Only needed once per DuckDB connection
+LOAD spatial; -- Only needed once per DuckDB connection
 
 CREATE TABLE new_tbl AS 
 SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
@@ -25,8 +25,8 @@ SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');
 To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement.
 
 ```sql
-install spatial; -- Only needed once per DuckDB connection
-load spatial; -- Only needed once per DuckDB connection
+INSTALL spatial; -- Only needed once per DuckDB connection
+LOAD spatial; -- Only needed once per DuckDB connection
 
 INSERT INTO tbl
 SELECT * FROM st_read('test_excel.xlsx', layer='Sheet1');

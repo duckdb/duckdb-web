@@ -24,7 +24,7 @@ To load unsigned extensions using the CLI, you'll need to pass the `-unsigned` f
 
 You can check the list of core and installed extensions with the following query:
 ```sql
-select * from duckdb_extensions();
+SELECT * FROM duckdb_extensions();
 ```
 
 ## All available extensions
@@ -94,8 +94,8 @@ with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
 After unzipping, the install and load commands can be used with the path to the .duckdb_extension file. 
 For example, if the file was unzipped into the same directory as where DuckDB is being executed:
 ```sql
-install 'httpfs.duckdb_extension';
-load 'httpfs.duckdb_extension';
+INSTALL 'httpfs.duckdb_extension';
+LOAD 'httpfs.duckdb_extension';
 ```
 
 
