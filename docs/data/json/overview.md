@@ -5,7 +5,7 @@ redirect_from:
   - /docs/data/json
 ---
 
-### Examples
+## Examples
 
 ```sql
 -- read a JSON file from disk, auto-infer options
@@ -31,7 +31,7 @@ CREATE TABLE todos AS SELECT * FROM 'todos.json';
 COPY (SELECT * FROM todos) TO 'todos.json';
 ```
 
-### JSON Loading
+## JSON Loading
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
@@ -39,7 +39,7 @@ The DuckDB JSON reader can automatically infer which configuration flags to use 
 
 Below are parameters that can be passed in to the JSON reader.
 
-# Parameters
+## Parameters
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
@@ -60,7 +60,7 @@ Below are parameters that can be passed in to the JSON reader.
 
 When using `read_json_auto`, every parameter that supports auto-detection is enabled.
 
-### Examples of format settings
+## Examples of format settings
 The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.  
 Here are some example JSON files and the corresponding `format` settings that should be used.
 
@@ -70,7 +70,7 @@ A query of this shape would work in each case:
 SELECT * FROM filename.json;
 ```
 
-#### Format: newline_delimited
+### Format: newline_delimited
 With `format='newline_delimited'` newline-delimited JSON can be parsed.
 Each line is a JSON.
 
@@ -89,7 +89,7 @@ SELECT * FROM read_json_auto(records.json, format=newline_delimited);
 | value2 | value2 |
 | value3 | value3 |
 
-#### Format: array
+### Format: array
 If the JSON file contains a JSON array of objects (pretty-printed or not), `array_of_objects` may be used.
 ```json
 [
@@ -108,7 +108,7 @@ SELECT * FROM read_json_auto(array.json, format=array);
 | value2 | value2 |
 | value3 | value3 |
 
-#### Format: unstructured
+### Format: unstructured
 
 If the JSON file contains JSON that is not newline-delimited or an array, `unstructured` may be used.
 ```json
@@ -135,7 +135,7 @@ SELECT * FROM read_json_auto(unstructured.json, format=unstructured);
 | value2 | value2 |
 | value3 | value3 |
 
-### Examples of records settings
+## Examples of records settings
 The JSON extension can attempt to determine whether a JSON file contains records when setting `records=auto`.
 When `records=true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
 
@@ -182,11 +182,11 @@ SELECT * FROM read_json_auto(arrays.json, records=false);
 | [4, 5, 6] |
 | [7, 8, 9] |
 
-### Writing
+## Writing
 
 The contents of tables or the result of queries can be written directly to a JSON file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
-# read_json_auto function
+## read_json_auto function
 The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 
 ```sql

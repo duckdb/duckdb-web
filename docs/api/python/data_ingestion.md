@@ -3,7 +3,7 @@ layout: docu
 title: Data Ingestion
 ---
 
-#### CSV Files
+## CSV Files
 CSV files can be read using the `read_csv` function, called either from within Python or directly from within SQL. By default, the `read_csv` function attempts to auto-detect the CSV settings by sampling from the provided file. 
 
 ```python
@@ -26,7 +26,7 @@ duckdb.sql("SELECT * FROM read_csv_auto('example.csv')")
 
 See the [CSV Loading](../../data/csv) page for more information.
 
-#### Parquet Files
+## Parquet Files
 Parquet files can be read using the `read_parquet` function, called either from within Python or directly from within SQL.
 
 ```python
@@ -43,7 +43,7 @@ duckdb.sql("SELECT * FROM read_parquet('example.parquet')")
 
 See the [Parquet Loading](../../data/parquet) page for more information.
 
-#### JSON Files
+## JSON Files
 JSON files can be read using the `read_json` function, called either from within Python or directly from within SQL. By default, the `read_json` function will automatically detect if a file contains newline-delimited JSON or regular JSON, and will detect the schema of the objects stored within the JSON file.
 
 ```python
@@ -58,7 +58,7 @@ duckdb.sql("SELECT * FROM 'example.json'")
 duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 ```
 
-#### DataFrames & Arrow Tables
+## DataFrames & Arrow Tables
 
 DuckDB is automatically able to query a Pandas DataFrame, Polars DataFrame, or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
 
@@ -92,7 +92,7 @@ con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df')
 con.execute('INSERT INTO test_df_table SELECT * FROM test_df')
 ```
 
-##### Pandas DataFrames - 'object' columns
+### Pandas DataFrames - 'object' columns
 
 pandas.DataFrame columns of an `object` dtype require some special care, since this stores values of arbitrary type.
 

@@ -17,12 +17,12 @@ D
 
 > By launching the database like this, an **in-memory database is launched**. That means that no data is persisted on disk. To persist data on disk you should also pass a database path to the shell. The database will then be stored at that path and can be reloaded from disk later.
 
-# Concepts
+## Concepts
 DuckDB is a relational database management system (RDBMS). That means it is a system for managing data stored in relations. A relation is essentially a mathematical term for a table.
 
 Each table is a named collection of rows. Each row of a given table has the same set of named columns, and each column is of a specific data type. Tables themselves are stored inside schemas, and a collection of schemas constitutes the entire database that you can access.
 
-# Creating a New Table
+## Creating a New Table
 You can create a new table by specifying the table name, along with all column names and their types:
 
 ```sql
@@ -61,7 +61,7 @@ Finally, it should be mentioned that if you don't need a table any longer or wan
 DROP TABLE [tablename];
 ```
 
-# Populating a Table With Rows
+## Populating a Table With Rows
 The insert statement is used to populate a table with rows:
 
 ```sql
@@ -101,7 +101,7 @@ COPY weather FROM '/home/user/weather.csv';
 
 Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](../data/overview) for more information.
 
-# Querying a Table
+## Querying a Table
 To retrieve data from a table, the table is queried. A SQL `SELECT` statement is used to do this. The statement is divided into a select list (the part that lists the columns to be returned), a table list (the part that lists the tables from which to retrieve the data), and an optional qualification (the part that specifies any restrictions). For example, to retrieve all the rows of table weather, type:
 
 ```sql
@@ -202,7 +202,7 @@ SELECT DISTINCT city
     ORDER BY city;
 ```
 
-# Joins Between Tables
+## Joins Between Tables
 Thus far, our queries have only accessed one table at a time. Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a join query. As an example, say you wish to list all the weather records together with the location of the associated city. To do that, we need to compare the city column of each row of the *weather* table with the name column of all rows in the *cities* table, and select the pairs of rows where these values match.
 
 This would be accomplished by the following query:
@@ -268,7 +268,7 @@ SELECT *
 
 This query is called a left outer join because the table mentioned on the left of the join operator will have each of its rows in the output at least once, whereas the table on the right will only have those rows output that match some row of the left table. When outputting a left-table row for which there is no right-table match, empty (null) values are substituted for the right-table columns.
 
-# Aggregate Functions
+## Aggregate Functions
 Like most other relational database products, DuckDB supports aggregate functions. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
 As an example, we can find the highest low-temperature reading anywhere with:
@@ -354,7 +354,7 @@ It is important to understand the interaction between aggregates and SQL's `WHER
 
 In the previous example, we can apply the city name restriction in `WHERE`, since it needs no aggregate. This is more efficient than adding the restriction to `HAVING`, because we avoid doing the grouping and aggregate calculations for all rows that fail the `WHERE` check.
 
-# Updates
+## Updates
 You can update existing rows using the `UPDATE` command. Suppose you discover the temperature readings are all off by 2 degrees after November 28. You can correct the data as follows:
 
 ```sql
@@ -377,7 +377,7 @@ SELECT * FROM weather;
 (3 rows)
 ```
 
-# Deletions
+## Deletions
 Rows can be removed from a table using the `DELETE` command. Suppose you are no longer interested in the weather of Hayward. Then you can do the following to delete those rows from the table:
 
 ```sql

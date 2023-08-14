@@ -5,7 +5,7 @@ redirect_from:
   - /docs/data/parquet
 ---
 
-### Examples
+## Examples
 ```sql
 -- read a single parquet file
 SELECT * FROM 'test.parquet';
@@ -37,10 +37,10 @@ COPY (FROM generate_series(100000)) TO 'test.parquet' (FORMAT 'parquet', COMPRES
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
-### Parquet Files
+## Parquet Files
 Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
-# Parameters
+## Parameters
 Parquet files are self-describing, as such far fewer parameters are required than with CSV files. Nevertheless, there are a number of options exposed that can be passed to the `read_parquet` function, or the `COPY` statement.
 
 | Name | Description | Type | Default |
@@ -51,7 +51,7 @@ Parquet files are self-describing, as such far fewer parameters are required tha
 | `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | bool | false |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
 
-### read_parquet function
+## read_parquet function
 
 | Function                                          | Description                                                                                                                                                                         | Example                                  |
 |:--------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
@@ -66,14 +66,14 @@ SELECT * FROM 'test.parquet';
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
-### Partial Reading
+## Partial Reading
 DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
 
 DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
 Filter and projection pushdown provide significant performance benefits. See [our blog post on this](/2021/06/25/querying-parquet.html) for more information.
 
-### Inserts and Views
+## Inserts and Views
 You can also insert the data into a table or create a table from the parquet file directly. This will load the data from the parquet file and insert it into the database.
 
 ```sql
@@ -92,7 +92,7 @@ CREATE VIEW people AS SELECT * FROM read_parquet('test.parquet');
 SELECT * FROM people;
 ```
 
-### Writing to Parquet Files
+## Writing to Parquet Files
 DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](../../sql/statements/copy) for details, including all possible parameters for the copy statement.
 
 ```sql
@@ -112,7 +112,7 @@ DuckDB's `EXPORT` command can be used to export an entire database to a series o
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
-### Installing and loading `parquet` extension
+## Installing and loading `parquet` extension
 
 The support for `parquet` files is enabled via extension. The extension is bundled with almost all clients. However, if your client does not bundle the Parquet extension, the extension must be installed and loaded separately.
 

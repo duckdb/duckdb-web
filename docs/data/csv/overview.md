@@ -5,7 +5,7 @@ redirect_from:
   - /docs/data/csv
 ---
 
-### Examples
+## Examples
 
 ```sql
 -- read a CSV file from disk, auto-infer options
@@ -29,14 +29,14 @@ COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 COPY (FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 ```
 
-### CSV Loading
+## CSV reader
 CSV loading is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
 The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](auto_detection) for more information.
 
-Below are parameters that can be passed in to the CSV reader. 
+## Parameters
 
-# Parameters
+Below are parameters that can be passed in to the CSV reader. 
 
 | Name | Description | Type | Default |
 |:------|:--------|:---|:---|
@@ -66,11 +66,7 @@ Below are parameters that can be passed in to the CSV reader.
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | varchar[] or struct | `(empty)` |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
 
-### Writing
-
-The contents of tables or the result of queries can be written directly to a CSV file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
-
-# read_csv_auto function
+## read_csv_auto function
 The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
 
 ```sql
@@ -111,9 +107,9 @@ SELECT * FROM read_csv_auto('flights.csv', HEADER=TRUE);
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
+## Writing using the COPY statement
 
-## COPY Statement
-The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the `COPY` statement supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
+The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the [`COPY`` statement](../../sql/statements/copy#copy-to) supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
 
 ```sql
 CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
@@ -134,5 +130,3 @@ CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCH
 COPY ontime FROM 'flights.csv' ( AUTO_DETECT TRUE );
 SELECT * FROM ontime;
 ```
-
-More on the copy statement can be found [here](../../sql/statements/copy).

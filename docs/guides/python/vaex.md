@@ -8,14 +8,14 @@ Vaex DataFrames can export data as Apache Arrow Table, which can be directly use
 
 The following example shows how one can use both DuckDB and Vaex DataFrame for a simple exploratory work.
 
-# Installation
+## Installation
 
 ```python
 pip install duckdb
 pip install vaex
 ```
 
-# Vaex DataFrame to DuckDB
+## Vaex DataFrame to DuckDB
 A Vaex DataFrame can be exported as an Arrow Table via the `to_arrow_table()` method. This operation does not take extra memory if the data being exported is already in memory or memory-mapped. The exported Arrow Table can be queried directly via DuckDB.
 
 Let's use the well known Titanic dataset that also ships with Vaex, to do some operations like filling missing values and creating new columns. Then we will export the DataFrame to an Arrow Table:
@@ -56,7 +56,7 @@ query_result_arrow_table = duckdb.query('''
 ''').arrow()
 ```
 
-# DuckDB to Vaex DataFrame
+## DuckDB to Vaex DataFrame
 The output of a DuckDB query can be an Arrow Table, which can be easily converted to a Vaex DataFrame via the `vaex.from_arrow_table()` method. One can also pass data around via [Pandas](https://pandas.pydata.org/docs/) DataFrames, but Arrow is faster.
 
 We can use the query result from above and convert it to a vaex DataFrame:

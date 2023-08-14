@@ -200,7 +200,7 @@ FROM (
 ) pivot_alias;
 ```
 
-#### Multiple Pivots
+### Multiple Pivots
 Each `PIVOT` can be treated as if it were a `SELECT` node, so they can be joined together or manipulated in other ways.
 
 For example, if two `PIVOT` statements share the same `GROUP BY` expression, they can be joined together using the columns in the `GROUP BY` clause into a wider pivot.
@@ -218,7 +218,7 @@ USING (Country);
 | US      | 8579 | 8783 | 9510 | NULL      | 24962         | 1910    |
 
 
-### Internals
+## Internals
 Pivoting is implemented as a combination of SQL query re-writing and a dedicated `PhysicalPivot` operator for higher performance. 
 Each `PIVOT` is implemented as set of aggregations into lists and then the dedicated `PhysicalPivot` operator converts those lists into column names and values.
 Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
@@ -276,7 +276,7 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 | US      | New York City | 8015 | 8175 | 8772 |
 
 
-### Simplified Pivot Full Syntax Diagram
+## Simplified Pivot Full Syntax Diagram
 Below is the full syntax diagram of the `PIVOT` statement. 
 
 <div id="rrdiagram"></div>
@@ -300,7 +300,7 @@ If you are interested in dynamic pivoting, the simplified syntax is recommended.
 
 Note that no commas separate the expressions in the `FOR` clause, but that `value` and `GROUP BY` expressions must be comma-separated!
 
-### Examples
+## Examples
 
 This example uses a single value expression, a single column expression, and a single row expression:
 ```sql
