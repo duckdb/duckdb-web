@@ -54,7 +54,7 @@ The `COLUMNS` expression can be used to execute the same expression on multiple 
 ```sql
 CREATE TABLE numbers(id int, number int);
 INSERT INTO numbers VALUES (1, 10), (2, 20), (3, NULL);
-SELECT MIN(COLUMNS(*)), COUNT(COLUMNS(*)) from numbers;
+SELECT MIN(COLUMNS(*)), COUNT(COLUMNS(*)) FROM numbers;
 ```
 
 | min(numbers.id) | min(numbers.number) | count(numbers.id) | count(numbers.number) |
@@ -64,7 +64,7 @@ SELECT MIN(COLUMNS(*)), COUNT(COLUMNS(*)) from numbers;
 The `*` expression in the `COLUMNS` statement can also contain `EXCLUDE` or `REPLACE`, similar to regular star expressions.
 
 ```sql
-SELECT MIN(COLUMNS(* REPLACE (number + id AS number))), COUNT(COLUMNS(* EXCLUDE (number))) from numbers;
+SELECT MIN(COLUMNS(* REPLACE (number + id AS number))), COUNT(COLUMNS(* EXCLUDE (number))) FROM numbers;
 ```
 
 | min(numbers.id) | min(number := (number + id)) | count(numbers.id) |

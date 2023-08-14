@@ -24,7 +24,7 @@ To load unsigned extensions using the CLI, you'll need to pass the `-unsigned` f
 
 You can check the list of core and installed extensions with the following query:
 ```sql
-SELECT * from duckdb_extensions();
+SELECT * FROM duckdb_extensions();
 ```
 
 ## All available extensions
