@@ -26,22 +26,24 @@ The addition of a new guide requires one additional edit:
 
 **When creating a PR, please check the box to "Allow edits from maintainers".**
 
-## Formatting
+## Style guide
+
+Please adhere the following style guide when submitting a pull request.
 
 ### Syntax
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
-* Please enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). To display blocks of text without a language (e.g., console outputs), use \`\`\`text ... \`\`\`.
+* Enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). To display blocks of text without a language (e.g., console outputs), use \`\`\`text ... \`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
-* Always format SQL code, variable names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
+* Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 
 ### Headers
 
 * The title of the page should be encoded in the front matter's `title` property. The body of the page should not start with a repetition of this title.
 * In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
 
-### SQL style guide
+### SQL style
 
 * Use SQL uppercase keywords, e.g., `SELECT ... FROM ...`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/archive/0.8.1/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
