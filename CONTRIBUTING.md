@@ -69,6 +69,7 @@ The addition of a new guide requires one additional edit:
     * :x: `https://duckdb.org/docs/sql/statements/copy`
 * Reference a specific section when possible:
     * :white_check_mark: `../../sql/statements/copy#copy-from`
+* Do **not** link related GitHub issues/discussions. This allows the documentation to be self-contained.
 
 ## Achive and generated pages
 
