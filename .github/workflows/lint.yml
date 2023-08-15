@@ -3,7 +3,6 @@ on: [pull_request]
 
 jobs:
   lint_markdown:
-    name: runner / vale
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,4 +27,4 @@ jobs:
       with:
         options: "--check --skip-string-normalization --verbose"
         src: "./scripts"
-        version: "21.5b1"
+        version: "23.7.0"
