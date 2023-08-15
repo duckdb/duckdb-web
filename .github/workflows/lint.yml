@@ -17,12 +17,11 @@ jobs:
       - uses: articulate/actions-markdownlint@v1
         with:
           files: 'docs/**/*.md'
-          ignore: node_modules
-          version: 0.28.1
 
   lint_python:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - uses: psf/black@stable
       with:
         options: "--check --skip-string-normalization --verbose"
