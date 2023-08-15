@@ -14,9 +14,9 @@ jobs:
           files: docs/
           filter_mode: nofilter
           fail_on_error: false
-      - uses: articulate/actions-markdownlint@v1
+      - uses: articulate/actions-markdownlint@master
         with:
-          config: .github/markdownlintconfig.rb
+          config: .github/markdownlintconfig.jsonc
           files: 'docs/**/*.md'
 
   lint_python:
