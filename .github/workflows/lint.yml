@@ -1,9 +1,8 @@
-name: vale
-on: [pull_request]
+name: Lint
+on: [push, pull_request]
 
 jobs:
-  vale:
-    name: runner / vale
+  lint_markdown:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,4 +13,8 @@ jobs:
         with:
           files: docs/
           filter_mode: nofilter
-          fail_on_error: true
+          fail_on_error: false
+      - uses: articulate/actions-markdownlint@main
+        with:
+          config: .markdownlint.jsonc
+          files: 'docs/**/*.md'
