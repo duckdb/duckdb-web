@@ -1,3 +1,5 @@
 {
-    "tags": ["headers"]
+    "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+    "default": false,
+    "MD001": true
 }
