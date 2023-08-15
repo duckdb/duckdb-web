@@ -79,6 +79,7 @@ It is not required that the `duckdb_bind` family of functions matches the prepar
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_scan">duckdb_arrow_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="k">duckdb_arrow_stream</span> <span class="k">arrow</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_arrow_array_scan">duckdb_arrow_array_scan</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="k">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="k">arrow_array</span>, <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream</span>);
 </code></pre></div></div>
+
 ### `duckdb_prepare`
 ---
 Create a prepared statement object from a query.
@@ -96,6 +97,7 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 </span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -113,6 +115,7 @@ The resulting prepared statement object
 
 <br>
 
+
 ### `duckdb_destroy_prepare`
 ---
 Closes the prepared statement and de-allocates all memory allocated for the statement.
@@ -123,6 +126,7 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 </span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -130,6 +134,7 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 The prepared statement to destroy.
 
 <br>
+
 
 ### `duckdb_prepare_error`
 ---
@@ -144,6 +149,7 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -154,6 +160,7 @@ The prepared statement to obtain the error from.
 The error message, or `nullptr` if there is none.
 
 <br>
+
 
 ### `duckdb_nparams`
 ---
@@ -167,6 +174,7 @@ Returns 0 if the query was not successfully prepared.
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -174,6 +182,7 @@ Returns 0 if the query was not successfully prepared.
 The prepared statement to obtain the number of parameters for.
 
 <br>
+
 
 ### `duckdb_param_type`
 ---
@@ -188,6 +197,7 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 </span>  <span class="kt">idx_t</span> <span class="k">param_idx
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -202,6 +212,7 @@ The parameter type
 
 <br>
 
+
 ### `duckdb_clear_bindings`
 ---
 Clear the params bind to the prepared statement.
@@ -213,6 +224,7 @@ Clear the params bind to the prepared statement.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_parameter_index`
 ---
@@ -228,6 +240,7 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_boolean`
 ---
 Binds a bool value to the prepared statement at the specified index.
@@ -241,6 +254,7 @@ Binds a bool value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_int8`
 ---
@@ -256,6 +270,7 @@ Binds an int8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_int16`
 ---
 Binds an int16_t value to the prepared statement at the specified index.
@@ -269,6 +284,7 @@ Binds an int16_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_int32`
 ---
@@ -284,6 +300,7 @@ Binds an int32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_int64`
 ---
 Binds an int64_t value to the prepared statement at the specified index.
@@ -297,6 +314,7 @@ Binds an int64_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_hugeint`
 ---
@@ -312,6 +330,7 @@ Binds an duckdb_hugeint value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_decimal`
 ---
 Binds a duckdb_decimal value to the prepared statement at the specified index.
@@ -325,6 +344,7 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_uint8`
 ---
@@ -340,6 +360,7 @@ Binds an uint8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_uint16`
 ---
 Binds an uint16_t value to the prepared statement at the specified index.
@@ -353,6 +374,7 @@ Binds an uint16_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_uint32`
 ---
@@ -368,6 +390,7 @@ Binds an uint32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_uint64`
 ---
 Binds an uint64_t value to the prepared statement at the specified index.
@@ -381,6 +404,7 @@ Binds an uint64_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_float`
 ---
@@ -396,6 +420,7 @@ Binds an float value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_double`
 ---
 Binds an double value to the prepared statement at the specified index.
@@ -409,6 +434,7 @@ Binds an double value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_date`
 ---
@@ -424,6 +450,7 @@ Binds a duckdb_date value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_time`
 ---
 Binds a duckdb_time value to the prepared statement at the specified index.
@@ -437,6 +464,7 @@ Binds a duckdb_time value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_timestamp`
 ---
@@ -452,6 +480,7 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_interval`
 ---
 Binds a duckdb_interval value to the prepared statement at the specified index.
@@ -466,6 +495,7 @@ Binds a duckdb_interval value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_varchar`
 ---
 Binds a null-terminated varchar value to the prepared statement at the specified index.
@@ -479,6 +509,7 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_varchar_length`
 ---
@@ -495,6 +526,7 @@ Binds a varchar value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_blob`
 ---
 Binds a blob value to the prepared statement at the specified index.
@@ -510,6 +542,7 @@ Binds a blob value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_null`
 ---
 Binds a NULL value to the prepared statement at the specified index.
@@ -522,6 +555,7 @@ Binds a NULL value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_execute_prepared`
 ---
@@ -537,6 +571,7 @@ between calls to this function.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -550,6 +585,7 @@ The query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_execute_prepared_arrow`
 ---
@@ -562,6 +598,7 @@ Executes the prepared statement with the given bound parameters, and returns an 
 </span>  <span class="kt">duckdb_arrow</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -575,6 +612,7 @@ The query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_arrow_scan`
 ---
@@ -588,6 +626,7 @@ Scans the Arrow stream and creates a view with the given name.
 </span>  <span class="k">duckdb_arrow_stream</span> <span class="k">arrow
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -605,6 +644,7 @@ Arrow stream wrapper.
 
 <br>
 
+
 ### `duckdb_arrow_array_scan`
 ---
 Scans the Arrow array and creates a view with the given name.
@@ -619,6 +659,7 @@ Scans the Arrow array and creates a view with the given name.
 </span>  <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`

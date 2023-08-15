@@ -133,6 +133,7 @@ For more information about data chunks, see the [documentation on data chunks](d
 <span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_union_type_member_type">duckdb_union_type_member_type</a></span>(<span class="kt">duckdb_logical_type</span> <span class="k">type</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_logical_type">duckdb_destroy_logical_type</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">type</span>);
 </code></pre></div></div>
+
 ### `duckdb_result_get_chunk`
 ---
 Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
@@ -154,6 +155,7 @@ Use `duckdb_result_chunk_count` to figure out how many chunks there are in the r
 </span>  <span class="kt">idx_t</span> <span class="k">chunk_index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -168,6 +170,7 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
+
 ### `duckdb_result_is_streaming`
 ---
 Checks if the type of the internal result is StreamQueryResult.
@@ -178,6 +181,7 @@ Checks if the type of the internal result is StreamQueryResult.
 </span>  <span class="kt">duckdb_result</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -189,6 +193,7 @@ Whether or not the result object is of the type StreamQueryResult
 
 <br>
 
+
 ### `duckdb_result_chunk_count`
 ---
 Returns the number of data chunks present in the result.
@@ -199,6 +204,7 @@ Returns the number of data chunks present in the result.
 </span>  <span class="kt">duckdb_result</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -210,6 +216,7 @@ Number of data chunks present in the result.
 
 <br>
 
+
 ### `duckdb_value_boolean`
 ---
 #### Syntax
@@ -220,6 +227,7 @@ Number of data chunks present in the result.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -227,6 +235,7 @@ Number of data chunks present in the result.
 The boolean value at the specified location, or false if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int8`
 ---
@@ -238,6 +247,7 @@ The boolean value at the specified location, or false if the value cannot be con
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -245,6 +255,7 @@ The boolean value at the specified location, or false if the value cannot be con
 The int8_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int16`
 ---
@@ -256,6 +267,7 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -263,6 +275,7 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 The int16_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int32`
 ---
@@ -274,6 +287,7 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -281,6 +295,7 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 The int32_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int64`
 ---
@@ -292,6 +307,7 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -299,6 +315,7 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 The int64_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_hugeint`
 ---
@@ -310,6 +327,7 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -317,6 +335,7 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_decimal`
 ---
@@ -328,6 +347,7 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -335,6 +355,7 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 The duckdb_decimal value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint8`
 ---
@@ -346,6 +367,7 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -353,6 +375,7 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 The uint8_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint16`
 ---
@@ -364,6 +387,7 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -371,6 +395,7 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 The uint16_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint32`
 ---
@@ -382,6 +407,7 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -389,6 +415,7 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 The uint32_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint64`
 ---
@@ -400,6 +427,7 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -407,6 +435,7 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 The uint64_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_float`
 ---
@@ -418,6 +447,7 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -425,6 +455,7 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 The float value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_double`
 ---
@@ -436,6 +467,7 @@ The float value at the specified location, or 0 if the value cannot be converted
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -443,6 +475,7 @@ The float value at the specified location, or 0 if the value cannot be converted
 The double value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_date`
 ---
@@ -454,6 +487,7 @@ The double value at the specified location, or 0 if the value cannot be converte
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -461,6 +495,7 @@ The double value at the specified location, or 0 if the value cannot be converte
 The duckdb_date value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_time`
 ---
@@ -472,6 +507,7 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -479,6 +515,7 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 The duckdb_time value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_timestamp`
 ---
@@ -490,6 +527,7 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -497,6 +535,7 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 The duckdb_timestamp value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_interval`
 ---
@@ -508,6 +547,7 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -515,6 +555,7 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 The duckdb_interval value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_varchar`
 ---
@@ -526,6 +567,7 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `DEPRECATED`
@@ -538,6 +580,7 @@ converted. The result must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_value_varchar_internal`
 ---
 #### Syntax
@@ -548,6 +591,7 @@ converted. The result must be freed with `duckdb_free`.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `DEPRECATED`
@@ -562,6 +606,7 @@ If the column is NOT a VARCHAR column this function will return NULL.
 The result must NOT be freed.
 
 <br>
+
 
 ### `duckdb_value_string_internal`
 ---
@@ -573,6 +618,7 @@ The result must NOT be freed.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `DEPRECATED`
@@ -588,6 +634,7 @@ The result must NOT be freed.
 
 <br>
 
+
 ### `duckdb_value_blob`
 ---
 #### Syntax
@@ -598,6 +645,7 @@ The result must NOT be freed.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -606,6 +654,7 @@ The duckdb_blob value at the specified location. Returns a blob with blob.data s
 value cannot be converted. The resulting "blob.data" must be freed with `duckdb_free.`
 
 <br>
+
 
 ### `duckdb_value_is_null`
 ---
@@ -617,6 +666,7 @@ value cannot be converted. The resulting "blob.data" must be freed with `duckdb_
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -624,6 +674,7 @@ value cannot be converted. The resulting "blob.data" must be freed with `duckdb_
 Returns true if the value at the specified index is NULL, and false otherwise.
 
 <br>
+
 
 ### `duckdb_from_date`
 ---
@@ -635,6 +686,7 @@ Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_da
 </span>  <span class="kt">duckdb_date</span> <span class="k">date
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `date`
@@ -646,6 +698,7 @@ The `duckdb_date_struct` with the decomposed elements.
 
 <br>
 
+
 ### `duckdb_to_date`
 ---
 Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
@@ -656,6 +709,7 @@ Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 </span>  <span class="kt">duckdb_date_struct</span> <span class="k">date
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `date`
@@ -667,6 +721,7 @@ The `duckdb_date` element.
 
 <br>
 
+
 ### `duckdb_from_time`
 ---
 Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
@@ -677,6 +732,7 @@ Decompose a `duckdb_time` object into hour, minute, second and microsecond (stor
 </span>  <span class="kt">duckdb_time</span> <span class="k">time
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `time`
@@ -688,6 +744,7 @@ The `duckdb_time_struct` with the decomposed elements.
 
 <br>
 
+
 ### `duckdb_to_time`
 ---
 Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
@@ -698,6 +755,7 @@ Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_ti
 </span>  <span class="kt">duckdb_time_struct</span> <span class="k">time
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `time`
@@ -709,6 +767,7 @@ The `duckdb_time` element.
 
 <br>
 
+
 ### `duckdb_from_timestamp`
 ---
 Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
@@ -719,6 +778,7 @@ Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 </span>  <span class="kt">duckdb_timestamp</span> <span class="k">ts
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `ts`
@@ -730,6 +790,7 @@ The `duckdb_timestamp_struct` with the decomposed elements.
 
 <br>
 
+
 ### `duckdb_to_timestamp`
 ---
 Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
@@ -740,6 +801,7 @@ Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 </span>  <span class="kt">duckdb_timestamp_struct</span> <span class="k">ts
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `ts`
@@ -751,6 +813,7 @@ The `duckdb_timestamp` element.
 
 <br>
 
+
 ### `duckdb_hugeint_to_double`
 ---
 Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
@@ -761,6 +824,7 @@ Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` colum
 </span>  <span class="kt">duckdb_hugeint</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -771,6 +835,7 @@ The hugeint value.
 The converted `double` element.
 
 <br>
+
 
 ### `duckdb_double_to_hugeint`
 ---
@@ -784,6 +849,7 @@ If the conversion fails because the double value is too big the result will be 0
 </span>  <span class="kt">double</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -794,6 +860,7 @@ The double value.
 The converted `duckdb_hugeint` element.
 
 <br>
+
 
 ### `duckdb_double_to_decimal`
 ---
@@ -809,6 +876,7 @@ If the conversion fails because the double value is too big, or the width/scale 
 </span>  <span class="kt">uint8_t</span> <span class="k">scale
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -820,6 +888,7 @@ The converted `duckdb_decimal` element.
 
 <br>
 
+
 ### `duckdb_decimal_to_double`
 ---
 Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
@@ -830,6 +899,7 @@ Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` colum
 </span>  <span class="k">duckdb_decimal</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -840,6 +910,7 @@ The decimal value.
 The converted `double` element.
 
 <br>
+
 
 ### `duckdb_create_logical_type`
 ---
@@ -854,6 +925,7 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 </span>  <span class="k">duckdb_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -864,6 +936,7 @@ The primitive type to create.
 The logical type.
 
 <br>
+
 
 ### `duckdb_create_list_type`
 ---
@@ -876,6 +949,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -886,6 +960,7 @@ The child type of list type to create.
 The logical type.
 
 <br>
+
 
 ### `duckdb_create_map_type`
 ---
@@ -899,6 +974,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">value_type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -909,6 +985,7 @@ The key type and value type of map type to create.
 The logical type.
 
 <br>
+
 
 ### `duckdb_create_union_type`
 ---
@@ -923,6 +1000,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">idx_t</span> <span class="k">member_count
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `types`
@@ -937,6 +1015,7 @@ The logical type.
 
 <br>
 
+
 ### `duckdb_create_decimal_type`
 ---
 Creates a `duckdb_logical_type` of type decimal with the specified width and scale
@@ -949,6 +1028,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">uint8_t</span> <span class="k">scale
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `width`
@@ -963,6 +1043,7 @@ The logical type.
 
 <br>
 
+
 ### `duckdb_get_type_id`
 ---
 Retrieves the type class of a `duckdb_logical_type`.
@@ -973,6 +1054,7 @@ Retrieves the type class of a `duckdb_logical_type`.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -984,6 +1066,7 @@ The type id
 
 <br>
 
+
 ### `duckdb_decimal_width`
 ---
 Retrieves the width of a decimal type.
@@ -994,6 +1077,7 @@ Retrieves the width of a decimal type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1005,6 +1089,7 @@ The width of the decimal type
 
 <br>
 
+
 ### `duckdb_decimal_scale`
 ---
 Retrieves the scale of a decimal type.
@@ -1015,6 +1100,7 @@ Retrieves the scale of a decimal type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1026,6 +1112,7 @@ The scale of the decimal type
 
 <br>
 
+
 ### `duckdb_decimal_internal_type`
 ---
 Retrieves the internal storage type of a decimal type.
@@ -1036,6 +1123,7 @@ Retrieves the internal storage type of a decimal type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1047,6 +1135,7 @@ The internal type of the decimal type
 
 <br>
 
+
 ### `duckdb_enum_internal_type`
 ---
 Retrieves the internal storage type of an enum type.
@@ -1057,6 +1146,7 @@ Retrieves the internal storage type of an enum type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1068,6 +1158,7 @@ The internal type of the enum type
 
 <br>
 
+
 ### `duckdb_enum_dictionary_size`
 ---
 Retrieves the dictionary size of the enum type
@@ -1078,6 +1169,7 @@ Retrieves the dictionary size of the enum type
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1088,6 +1180,7 @@ The logical type object
 The dictionary size of the enum type
 
 <br>
+
 
 ### `duckdb_enum_dictionary_value`
 ---
@@ -1102,6 +1195,7 @@ The result must be freed with `duckdb_free`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1116,6 +1210,7 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_list_type_child_type`
 ---
 Retrieves the child type of the given list type.
@@ -1128,6 +1223,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1138,6 +1234,7 @@ The logical type object
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
+
 
 ### `duckdb_map_type_key_type`
 ---
@@ -1151,6 +1248,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1161,6 +1259,7 @@ The logical type object
 The key type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
+
 
 ### `duckdb_map_type_value_type`
 ---
@@ -1174,6 +1273,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1185,6 +1285,7 @@ The value type of the map type. Must be destroyed with `duckdb_destroy_logical_t
 
 <br>
 
+
 ### `duckdb_struct_type_child_count`
 ---
 Returns the number of children of a struct type.
@@ -1195,6 +1296,7 @@ Returns the number of children of a struct type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1205,6 +1307,7 @@ The logical type object
 The number of children of a struct type.
 
 <br>
+
 
 ### `duckdb_struct_type_child_name`
 ---
@@ -1219,6 +1322,7 @@ The result must be freed with `duckdb_free`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1233,6 +1337,7 @@ The name of the struct type. Must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_struct_type_child_type`
 ---
 Retrieves the child type of the given struct type at the specified index.
@@ -1246,6 +1351,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1260,6 +1366,7 @@ The child type of the struct type. Must be destroyed with `duckdb_destroy_logica
 
 <br>
 
+
 ### `duckdb_union_type_member_count`
 ---
 Returns the number of members that the union type has.
@@ -1270,6 +1377,7 @@ Returns the number of members that the union type has.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1280,6 +1388,7 @@ The logical type (union) object
 The number of members of a union type.
 
 <br>
+
 
 ### `duckdb_union_type_member_name`
 ---
@@ -1294,6 +1403,7 @@ The result must be freed with `duckdb_free`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1308,6 +1418,7 @@ The name of the union member. Must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_union_type_member_type`
 ---
 Retrieves the child type of the given union member at the specified index.
@@ -1321,6 +1432,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -1335,6 +1447,7 @@ The child type of the union member. Must be destroyed with `duckdb_destroy_logic
 
 <br>
 
+
 ### `duckdb_destroy_logical_type`
 ---
 Destroys the logical type and de-allocates all memory allocated for that type.
@@ -1345,6 +1458,7 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`

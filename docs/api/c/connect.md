@@ -37,6 +37,7 @@ duckdb_close(&db);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_disconnect">duckdb_disconnect</a></span>(<span class="kt">duckdb_connection</span> *<span class="k">connection</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_library_version">duckdb_library_version</a></span>();
 </code></pre></div></div>
+
 ### `duckdb_open`
 ---
 Creates a new database or opens an existing database file stored at the the given path.
@@ -50,6 +51,7 @@ The instantiated database should be closed with 'duckdb_close'
 </span>  <span class="kt">duckdb_database</span> *<span class="k">out_database
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `path`
@@ -64,6 +66,7 @@ The result database object.
 
 <br>
 
+
 ### `duckdb_open_ext`
 ---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
@@ -77,6 +80,7 @@ Extended version of duckdb_open. Creates a new database or opens an existing dat
 </span>  <span class="kt">char</span> **<span class="k">out_error
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `path`
@@ -98,6 +102,7 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_close`
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
@@ -111,6 +116,7 @@ Still it is recommended to always correctly close a database object after you ar
 </span>  <span class="kt">duckdb_database</span> *<span class="k">database
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `database`
@@ -118,6 +124,7 @@ Still it is recommended to always correctly close a database object after you ar
 The database object to shut down.
 
 <br>
+
 
 ### `duckdb_connect`
 ---
@@ -132,6 +139,7 @@ The instantiated connection should be closed using 'duckdb_disconnect'
 </span>  <span class="kt">duckdb_connection</span> *<span class="k">out_connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `database`
@@ -146,6 +154,7 @@ The result connection object.
 
 <br>
 
+
 ### `duckdb_interrupt`
 ---
 Interrupt running query
@@ -156,6 +165,7 @@ Interrupt running query
 </span>  <span class="kt">duckdb_connection</span> <span class="k">connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -163,6 +173,7 @@ Interrupt running query
 The connection to interruot
 
 <br>
+
 
 ### `duckdb_query_progress`
 ---
@@ -174,6 +185,7 @@ Get progress of the running query
 </span>  <span class="kt">duckdb_connection</span> <span class="k">connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -185,6 +197,7 @@ The working connection
 
 <br>
 
+
 ### `duckdb_disconnect`
 ---
 Closes the specified connection and de-allocates all memory allocated for that connection.
@@ -195,6 +208,7 @@ Closes the specified connection and de-allocates all memory allocated for that c
 </span>  <span class="kt">duckdb_connection</span> *<span class="k">connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -202,6 +216,7 @@ Closes the specified connection and de-allocates all memory allocated for that c
 The connection to close.
 
 <br>
+
 
 ### `duckdb_library_version`
 ---

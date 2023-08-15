@@ -291,6 +291,7 @@ title: C API - Complete API
 ### **Streaming Result Interface**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_stream_fetch_chunk">duckdb_stream_fetch_chunk</a></span>(<span class="kt">duckdb_result</span> <span class="k">result</span>);
 </code></pre></div></div>
+
 ### `duckdb_open`
 ---
 Creates a new database or opens an existing database file stored at the the given path.
@@ -304,6 +305,7 @@ The instantiated database should be closed with 'duckdb_close'
 </span>  <span class="kt">duckdb_database</span> *<span class="k">out_database
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `path`
@@ -318,6 +320,7 @@ The result database object.
 
 <br>
 
+
 ### `duckdb_open_ext`
 ---
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
@@ -331,6 +334,7 @@ Extended version of duckdb_open. Creates a new database or opens an existing dat
 </span>  <span class="kt">char</span> **<span class="k">out_error
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `path`
@@ -352,6 +356,7 @@ Note that the error must be freed using `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_close`
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
@@ -365,6 +370,7 @@ Still it is recommended to always correctly close a database object after you ar
 </span>  <span class="kt">duckdb_database</span> *<span class="k">database
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `database`
@@ -372,6 +378,7 @@ Still it is recommended to always correctly close a database object after you ar
 The database object to shut down.
 
 <br>
+
 
 ### `duckdb_connect`
 ---
@@ -386,6 +393,7 @@ The instantiated connection should be closed using 'duckdb_disconnect'
 </span>  <span class="kt">duckdb_connection</span> *<span class="k">out_connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `database`
@@ -400,6 +408,7 @@ The result connection object.
 
 <br>
 
+
 ### `duckdb_interrupt`
 ---
 Interrupt running query
@@ -410,6 +419,7 @@ Interrupt running query
 </span>  <span class="kt">duckdb_connection</span> <span class="k">connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -417,6 +427,7 @@ Interrupt running query
 The connection to interruot
 
 <br>
+
 
 ### `duckdb_query_progress`
 ---
@@ -428,6 +439,7 @@ Get progress of the running query
 </span>  <span class="kt">duckdb_connection</span> <span class="k">connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -439,6 +451,7 @@ The working connection
 
 <br>
 
+
 ### `duckdb_disconnect`
 ---
 Closes the specified connection and de-allocates all memory allocated for that connection.
@@ -449,6 +462,7 @@ Closes the specified connection and de-allocates all memory allocated for that c
 </span>  <span class="kt">duckdb_connection</span> *<span class="k">connection
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -456,6 +470,7 @@ Closes the specified connection and de-allocates all memory allocated for that c
 The connection to close.
 
 <br>
+
 
 ### `duckdb_library_version`
 ---
@@ -471,6 +486,7 @@ Usually used for developing C extensions that must return this for a compatibili
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_create_config`
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
@@ -484,6 +500,7 @@ This will always succeed unless there is a malloc failure.
 </span>  <span class="kt">duckdb_config</span> *<span class="k">out_config
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `out_config`
@@ -494,6 +511,7 @@ The result configuration object.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_config_count`
 ---
@@ -507,6 +525,7 @@ This should not be called in a loop as it internally loops over all the options.
 </span>  <span class="k">
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -514,6 +533,7 @@ This should not be called in a loop as it internally loops over all the options.
 The amount of config options available.
 
 <br>
+
 
 ### `duckdb_get_config_flag`
 ---
@@ -530,6 +550,7 @@ The result name or description MUST NOT be freed.
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_description
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `index`
@@ -546,6 +567,7 @@ A description of the configuration flag.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_set_config`
 ---
@@ -564,6 +586,7 @@ This can fail if either the name is invalid, or if the value provided for the op
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">option
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `duckdb_config`
@@ -581,6 +604,7 @@ The value to set the configuration flag to.
 
 <br>
 
+
 ### `duckdb_destroy_config`
 ---
 Destroys the specified configuration option and de-allocates all memory allocated for the object.
@@ -591,6 +615,7 @@ Destroys the specified configuration option and de-allocates all memory allocate
 </span>  <span class="kt">duckdb_config</span> *<span class="k">config
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `config`
@@ -598,6 +623,7 @@ Destroys the specified configuration option and de-allocates all memory allocate
 The configuration object to destroy.
 
 <br>
+
 
 ### `duckdb_query`
 ---
@@ -616,6 +642,7 @@ query fails, otherwise the error stored within the result will not be freed corr
 </span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -633,6 +660,7 @@ The query result.
 
 <br>
 
+
 ### `duckdb_destroy_result`
 ---
 Closes the result and de-allocates all memory allocated for that connection.
@@ -643,6 +671,7 @@ Closes the result and de-allocates all memory allocated for that connection.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -650,6 +679,7 @@ Closes the result and de-allocates all memory allocated for that connection.
 The result to destroy.
 
 <br>
+
 
 ### `duckdb_column_name`
 ---
@@ -665,6 +695,7 @@ Returns `NULL` if the column is out of range.
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -679,6 +710,7 @@ The column name of the specified column.
 
 <br>
 
+
 ### `duckdb_column_type`
 ---
 Returns the column type of the specified column.
@@ -692,6 +724,7 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -705,6 +738,7 @@ The column index.
 The column type of the specified column.
 
 <br>
+
 
 ### `duckdb_column_logical_type`
 ---
@@ -721,6 +755,7 @@ Returns `NULL` if the column is out of range.
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -735,6 +770,7 @@ The logical column type of the specified column.
 
 <br>
 
+
 ### `duckdb_column_count`
 ---
 Returns the number of columns present in a the result object.
@@ -745,6 +781,7 @@ Returns the number of columns present in a the result object.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -756,6 +793,7 @@ The number of columns present in the result object.
 
 <br>
 
+
 ### `duckdb_row_count`
 ---
 Returns the number of rows present in a the result object.
@@ -766,6 +804,7 @@ Returns the number of rows present in a the result object.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -776,6 +815,7 @@ The result object.
 The number of rows present in the result object.
 
 <br>
+
 
 ### `duckdb_rows_changed`
 ---
@@ -788,6 +828,7 @@ queries. For other queries the rows_changed will be 0.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -798,6 +839,7 @@ The result object.
 The number of rows changed.
 
 <br>
+
 
 ### `duckdb_column_data`
 ---
@@ -822,6 +864,7 @@ printf("Data for row %d: %d\n", row, data[row]);
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -835,6 +878,7 @@ The column index.
 The column data of the specified column.
 
 <br>
+
 
 ### `duckdb_nullmask_data`
 ---
@@ -861,6 +905,7 @@ printf("Data for row %d: %d\n", row, data[row]);
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -875,6 +920,7 @@ The nullmask of the specified column.
 
 <br>
 
+
 ### `duckdb_result_error`
 ---
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
@@ -887,6 +933,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -897,6 +944,7 @@ The result object to fetch the error from.
 The error of the result.
 
 <br>
+
 
 ### `duckdb_result_get_chunk`
 ---
@@ -919,6 +967,7 @@ Use `duckdb_result_chunk_count` to figure out how many chunks there are in the r
 </span>  <span class="kt">idx_t</span> <span class="k">chunk_index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -933,6 +982,7 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
+
 ### `duckdb_result_is_streaming`
 ---
 Checks if the type of the internal result is StreamQueryResult.
@@ -943,6 +993,7 @@ Checks if the type of the internal result is StreamQueryResult.
 </span>  <span class="kt">duckdb_result</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -954,6 +1005,7 @@ Whether or not the result object is of the type StreamQueryResult
 
 <br>
 
+
 ### `duckdb_result_chunk_count`
 ---
 Returns the number of data chunks present in the result.
@@ -964,6 +1016,7 @@ Returns the number of data chunks present in the result.
 </span>  <span class="kt">duckdb_result</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -975,6 +1028,7 @@ Number of data chunks present in the result.
 
 <br>
 
+
 ### `duckdb_value_boolean`
 ---
 #### Syntax
@@ -985,6 +1039,7 @@ Number of data chunks present in the result.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -992,6 +1047,7 @@ Number of data chunks present in the result.
 The boolean value at the specified location, or false if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int8`
 ---
@@ -1003,6 +1059,7 @@ The boolean value at the specified location, or false if the value cannot be con
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1010,6 +1067,7 @@ The boolean value at the specified location, or false if the value cannot be con
 The int8_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int16`
 ---
@@ -1021,6 +1079,7 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1028,6 +1087,7 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 The int16_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int32`
 ---
@@ -1039,6 +1099,7 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1046,6 +1107,7 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 The int32_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_int64`
 ---
@@ -1057,6 +1119,7 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1064,6 +1127,7 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 The int64_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_hugeint`
 ---
@@ -1075,6 +1139,7 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1082,6 +1147,7 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_decimal`
 ---
@@ -1093,6 +1159,7 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1100,6 +1167,7 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 The duckdb_decimal value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint8`
 ---
@@ -1111,6 +1179,7 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1118,6 +1187,7 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 The uint8_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint16`
 ---
@@ -1129,6 +1199,7 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1136,6 +1207,7 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 The uint16_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint32`
 ---
@@ -1147,6 +1219,7 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1154,6 +1227,7 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 The uint32_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_uint64`
 ---
@@ -1165,6 +1239,7 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1172,6 +1247,7 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 The uint64_t value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_float`
 ---
@@ -1183,6 +1259,7 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1190,6 +1267,7 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 The float value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_double`
 ---
@@ -1201,6 +1279,7 @@ The float value at the specified location, or 0 if the value cannot be converted
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1208,6 +1287,7 @@ The float value at the specified location, or 0 if the value cannot be converted
 The double value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_date`
 ---
@@ -1219,6 +1299,7 @@ The double value at the specified location, or 0 if the value cannot be converte
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1226,6 +1307,7 @@ The double value at the specified location, or 0 if the value cannot be converte
 The duckdb_date value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_time`
 ---
@@ -1237,6 +1319,7 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1244,6 +1327,7 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 The duckdb_time value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_timestamp`
 ---
@@ -1255,6 +1339,7 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1262,6 +1347,7 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 The duckdb_timestamp value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_interval`
 ---
@@ -1273,6 +1359,7 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1280,6 +1367,7 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 The duckdb_interval value at the specified location, or 0 if the value cannot be converted.
 
 <br>
+
 
 ### `duckdb_value_varchar`
 ---
@@ -1291,6 +1379,7 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `DEPRECATED`
@@ -1303,6 +1392,7 @@ converted. The result must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_value_varchar_internal`
 ---
 #### Syntax
@@ -1313,6 +1403,7 @@ converted. The result must be freed with `duckdb_free`.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `DEPRECATED`
@@ -1327,6 +1418,7 @@ If the column is NOT a VARCHAR column this function will return NULL.
 The result must NOT be freed.
 
 <br>
+
 
 ### `duckdb_value_string_internal`
 ---
@@ -1338,6 +1430,7 @@ The result must NOT be freed.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `DEPRECATED`
@@ -1353,6 +1446,7 @@ The result must NOT be freed.
 
 <br>
 
+
 ### `duckdb_value_blob`
 ---
 #### Syntax
@@ -1363,6 +1457,7 @@ The result must NOT be freed.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1371,6 +1466,7 @@ The duckdb_blob value at the specified location. Returns a blob with blob.data s
 value cannot be converted. The resulting "blob.data" must be freed with `duckdb_free.`
 
 <br>
+
 
 ### `duckdb_value_is_null`
 ---
@@ -1382,6 +1478,7 @@ value cannot be converted. The resulting "blob.data" must be freed with `duckdb_
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1389,6 +1486,7 @@ value cannot be converted. The resulting "blob.data" must be freed with `duckdb_
 Returns true if the value at the specified index is NULL, and false otherwise.
 
 <br>
+
 
 ### `duckdb_malloc`
 ---
@@ -1401,6 +1499,7 @@ should be freed using `duckdb_free`.
 </span>  <span class="kt">size_t</span> <span class="k">size
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `size`
@@ -1412,6 +1511,7 @@ A pointer to the allocated memory region.
 
 <br>
 
+
 ### `duckdb_free`
 ---
 Free a value returned from `duckdb_malloc`, `duckdb_value_varchar` or `duckdb_value_blob`.
@@ -1422,6 +1522,7 @@ Free a value returned from `duckdb_malloc`, `duckdb_value_varchar` or `duckdb_va
 </span>  <span class="kt">void</span> *<span class="k">ptr
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `ptr`
@@ -1429,6 +1530,7 @@ Free a value returned from `duckdb_malloc`, `duckdb_value_varchar` or `duckdb_va
 The memory region to de-allocate.
 
 <br>
+
 
 ### `duckdb_vector_size`
 ---
@@ -1441,6 +1543,7 @@ This is the amount of tuples that will fit into a data chunk created by `duckdb_
 </span>  <span class="k">
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -1448,6 +1551,7 @@ This is the amount of tuples that will fit into a data chunk created by `duckdb_
 The vector size.
 
 <br>
+
 
 ### `duckdb_string_is_inlined`
 ---
@@ -1463,6 +1567,7 @@ This means that the data of the string does not have a separate allocation.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_from_date`
 ---
 Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_date_struct`).
@@ -1473,6 +1578,7 @@ Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_da
 </span>  <span class="kt">duckdb_date</span> <span class="k">date
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `date`
@@ -1484,6 +1590,7 @@ The `duckdb_date_struct` with the decomposed elements.
 
 <br>
 
+
 ### `duckdb_to_date`
 ---
 Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
@@ -1494,6 +1601,7 @@ Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 </span>  <span class="kt">duckdb_date_struct</span> <span class="k">date
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `date`
@@ -1505,6 +1613,7 @@ The `duckdb_date` element.
 
 <br>
 
+
 ### `duckdb_from_time`
 ---
 Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
@@ -1515,6 +1624,7 @@ Decompose a `duckdb_time` object into hour, minute, second and microsecond (stor
 </span>  <span class="kt">duckdb_time</span> <span class="k">time
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `time`
@@ -1526,6 +1636,7 @@ The `duckdb_time_struct` with the decomposed elements.
 
 <br>
 
+
 ### `duckdb_to_time`
 ---
 Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
@@ -1536,6 +1647,7 @@ Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_ti
 </span>  <span class="kt">duckdb_time_struct</span> <span class="k">time
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `time`
@@ -1547,6 +1659,7 @@ The `duckdb_time` element.
 
 <br>
 
+
 ### `duckdb_from_timestamp`
 ---
 Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
@@ -1557,6 +1670,7 @@ Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 </span>  <span class="kt">duckdb_timestamp</span> <span class="k">ts
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `ts`
@@ -1568,6 +1682,7 @@ The `duckdb_timestamp_struct` with the decomposed elements.
 
 <br>
 
+
 ### `duckdb_to_timestamp`
 ---
 Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
@@ -1578,6 +1693,7 @@ Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 </span>  <span class="kt">duckdb_timestamp_struct</span> <span class="k">ts
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `ts`
@@ -1589,6 +1705,7 @@ The `duckdb_timestamp` element.
 
 <br>
 
+
 ### `duckdb_hugeint_to_double`
 ---
 Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
@@ -1599,6 +1716,7 @@ Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` colum
 </span>  <span class="kt">duckdb_hugeint</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -1609,6 +1727,7 @@ The hugeint value.
 The converted `double` element.
 
 <br>
+
 
 ### `duckdb_double_to_hugeint`
 ---
@@ -1622,6 +1741,7 @@ If the conversion fails because the double value is too big the result will be 0
 </span>  <span class="kt">double</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -1632,6 +1752,7 @@ The double value.
 The converted `duckdb_hugeint` element.
 
 <br>
+
 
 ### `duckdb_double_to_decimal`
 ---
@@ -1647,6 +1768,7 @@ If the conversion fails because the double value is too big, or the width/scale 
 </span>  <span class="kt">uint8_t</span> <span class="k">scale
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -1658,6 +1780,7 @@ The converted `duckdb_decimal` element.
 
 <br>
 
+
 ### `duckdb_decimal_to_double`
 ---
 Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
@@ -1668,6 +1791,7 @@ Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` colum
 </span>  <span class="k">duckdb_decimal</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `val`
@@ -1678,6 +1802,7 @@ The decimal value.
 The converted `double` element.
 
 <br>
+
 
 ### `duckdb_prepare`
 ---
@@ -1696,6 +1821,7 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 </span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -1713,6 +1839,7 @@ The resulting prepared statement object
 
 <br>
 
+
 ### `duckdb_destroy_prepare`
 ---
 Closes the prepared statement and de-allocates all memory allocated for the statement.
@@ -1723,6 +1850,7 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 </span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -1730,6 +1858,7 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 The prepared statement to destroy.
 
 <br>
+
 
 ### `duckdb_prepare_error`
 ---
@@ -1744,6 +1873,7 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -1754,6 +1884,7 @@ The prepared statement to obtain the error from.
 The error message, or `nullptr` if there is none.
 
 <br>
+
 
 ### `duckdb_nparams`
 ---
@@ -1767,6 +1898,7 @@ Returns 0 if the query was not successfully prepared.
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -1774,6 +1906,7 @@ Returns 0 if the query was not successfully prepared.
 The prepared statement to obtain the number of parameters for.
 
 <br>
+
 
 ### `duckdb_param_type`
 ---
@@ -1788,6 +1921,7 @@ Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the stat
 </span>  <span class="kt">idx_t</span> <span class="k">param_idx
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -1802,6 +1936,7 @@ The parameter type
 
 <br>
 
+
 ### `duckdb_clear_bindings`
 ---
 Clear the params bind to the prepared statement.
@@ -1813,6 +1948,7 @@ Clear the params bind to the prepared statement.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_parameter_index`
 ---
@@ -1828,6 +1964,7 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_boolean`
 ---
 Binds a bool value to the prepared statement at the specified index.
@@ -1841,6 +1978,7 @@ Binds a bool value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_int8`
 ---
@@ -1856,6 +1994,7 @@ Binds an int8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_int16`
 ---
 Binds an int16_t value to the prepared statement at the specified index.
@@ -1869,6 +2008,7 @@ Binds an int16_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_int32`
 ---
@@ -1884,6 +2024,7 @@ Binds an int32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_int64`
 ---
 Binds an int64_t value to the prepared statement at the specified index.
@@ -1897,6 +2038,7 @@ Binds an int64_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_hugeint`
 ---
@@ -1912,6 +2054,7 @@ Binds an duckdb_hugeint value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_decimal`
 ---
 Binds a duckdb_decimal value to the prepared statement at the specified index.
@@ -1925,6 +2068,7 @@ Binds a duckdb_decimal value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_uint8`
 ---
@@ -1940,6 +2084,7 @@ Binds an uint8_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_uint16`
 ---
 Binds an uint16_t value to the prepared statement at the specified index.
@@ -1953,6 +2098,7 @@ Binds an uint16_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_uint32`
 ---
@@ -1968,6 +2114,7 @@ Binds an uint32_t value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_uint64`
 ---
 Binds an uint64_t value to the prepared statement at the specified index.
@@ -1981,6 +2128,7 @@ Binds an uint64_t value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_float`
 ---
@@ -1996,6 +2144,7 @@ Binds an float value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_double`
 ---
 Binds an double value to the prepared statement at the specified index.
@@ -2009,6 +2158,7 @@ Binds an double value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_date`
 ---
@@ -2024,6 +2174,7 @@ Binds a duckdb_date value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_time`
 ---
 Binds a duckdb_time value to the prepared statement at the specified index.
@@ -2037,6 +2188,7 @@ Binds a duckdb_time value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_timestamp`
 ---
@@ -2052,6 +2204,7 @@ Binds a duckdb_timestamp value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_interval`
 ---
 Binds a duckdb_interval value to the prepared statement at the specified index.
@@ -2066,6 +2219,7 @@ Binds a duckdb_interval value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_varchar`
 ---
 Binds a null-terminated varchar value to the prepared statement at the specified index.
@@ -2079,6 +2233,7 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_bind_varchar_length`
 ---
@@ -2095,6 +2250,7 @@ Binds a varchar value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_blob`
 ---
 Binds a blob value to the prepared statement at the specified index.
@@ -2110,6 +2266,7 @@ Binds a blob value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_bind_null`
 ---
 Binds a NULL value to the prepared statement at the specified index.
@@ -2122,6 +2279,7 @@ Binds a NULL value to the prepared statement at the specified index.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_execute_prepared`
 ---
@@ -2137,6 +2295,7 @@ between calls to this function.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -2150,6 +2309,7 @@ The query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_execute_prepared_arrow`
 ---
@@ -2162,6 +2322,7 @@ Executes the prepared statement with the given bound parameters, and returns an 
 </span>  <span class="kt">duckdb_arrow</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -2175,6 +2336,7 @@ The query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_arrow_scan`
 ---
@@ -2188,6 +2350,7 @@ Scans the Arrow stream and creates a view with the given name.
 </span>  <span class="k">duckdb_arrow_stream</span> <span class="k">arrow
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -2205,6 +2368,7 @@ Arrow stream wrapper.
 
 <br>
 
+
 ### `duckdb_arrow_array_scan`
 ---
 Scans the Arrow array and creates a view with the given name.
@@ -2219,6 +2383,7 @@ Scans the Arrow array and creates a view with the given name.
 </span>  <span class="k">duckdb_arrow_stream</span> *<span class="k">out_stream
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -2242,6 +2407,7 @@ Output array stream that wraps around the passed schema, for releasing/deleting 
 
 <br>
 
+
 ### `duckdb_extract_statements`
 ---
 Extract all statements from a query.
@@ -2256,6 +2422,7 @@ If the extract fails, `duckdb_extract_statements_error` can be called to obtain 
 </span>  <span class="k">duckdb_extracted_statements</span> *<span class="k">out_extracted_statements
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -2273,6 +2440,7 @@ The number of extracted statements or 0 on failure.
 
 <br>
 
+
 ### `duckdb_prepare_extracted_statement`
 ---
 Prepare an extracted statement.
@@ -2288,6 +2456,7 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 </span>  <span class="kt">duckdb_prepared_statement</span> *<span class="k">out_prepared_statement
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -2308,6 +2477,7 @@ The resulting prepared statement object
 
 <br>
 
+
 ### `duckdb_extract_statements_error`
 ---
 Returns the error message contained within the extracted statements.
@@ -2318,6 +2488,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 </span>  <span class="k">duckdb_extracted_statements</span> <span class="k">extracted_statements
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -2329,6 +2500,7 @@ The error of the extracted statements.
 
 <br>
 
+
 ### `duckdb_destroy_extracted`
 ---
 De-allocates all memory allocated for the extracted statements.
@@ -2338,6 +2510,7 @@ De-allocates all memory allocated for the extracted statements.
 </span>  <span class="k">duckdb_extracted_statements</span> *<span class="k">extracted_statements
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `extracted_statements`
@@ -2345,6 +2518,7 @@ De-allocates all memory allocated for the extracted statements.
 The extracted statements to destroy.
 
 <br>
+
 
 ### `duckdb_pending_prepared`
 ---
@@ -2362,6 +2536,7 @@ Note that after calling `duckdb_pending_prepared`, the pending result should alw
 </span>  <span class="k">duckdb_pending_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -2375,6 +2550,7 @@ The pending query result.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_pending_prepared_streaming`
 ---
@@ -2392,6 +2568,7 @@ Note that after calling `duckdb_pending_prepared_streaming`, the pending result 
 </span>  <span class="k">duckdb_pending_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `prepared_statement`
@@ -2406,6 +2583,7 @@ The pending query result.
 
 <br>
 
+
 ### `duckdb_destroy_pending`
 ---
 Closes the pending result and de-allocates all memory allocated for the result.
@@ -2416,6 +2594,7 @@ Closes the pending result and de-allocates all memory allocated for the result.
 </span>  <span class="k">duckdb_pending_result</span> *<span class="k">pending_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `pending_result`
@@ -2423,6 +2602,7 @@ Closes the pending result and de-allocates all memory allocated for the result.
 The pending result to destroy.
 
 <br>
+
 
 ### `duckdb_pending_error`
 ---
@@ -2436,6 +2616,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 </span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -2446,6 +2627,7 @@ The pending result to fetch the error from.
 The error of the pending result.
 
 <br>
+
 
 ### `duckdb_pending_execute_task`
 ---
@@ -2463,6 +2645,7 @@ The error message can be obtained by calling duckdb_pending_error on the pending
 </span>  <span class="k">duckdb_pending_result</span> <span class="k">pending_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `pending_result`
@@ -2473,6 +2656,7 @@ The pending result to execute a task within..
 The state of the pending result after the execution.
 
 <br>
+
 
 ### `duckdb_execute_pending`
 ---
@@ -2488,6 +2672,7 @@ Otherwise, all remaining tasks must be executed first.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `pending_result`
@@ -2502,6 +2687,7 @@ The result object.
 
 <br>
 
+
 ### `duckdb_pending_execution_is_finished`
 ---
 Returns whether a duckdb_pending_state is finished executing. For example if `pending_state` is
@@ -2513,6 +2699,7 @@ DUCKDB_PENDING_RESULT_READY, this function will return true.
 </span>  <span class="k">duckdb_pending_state</span> <span class="k">pending_state
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `pending_state`
@@ -2524,6 +2711,7 @@ Boolean indicating pending execution should be considered finished.
 
 <br>
 
+
 ### `duckdb_destroy_value`
 ---
 Destroys the value and de-allocates all memory allocated for that type.
@@ -2534,6 +2722,7 @@ Destroys the value and de-allocates all memory allocated for that type.
 </span>  <span class="kt">duckdb_value</span> *<span class="k">value
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `value`
@@ -2541,6 +2730,7 @@ Destroys the value and de-allocates all memory allocated for that type.
 The value to destroy.
 
 <br>
+
 
 ### `duckdb_create_varchar`
 ---
@@ -2552,6 +2742,7 @@ Creates a value from a null-terminated string
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">text
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `value`
@@ -2562,6 +2753,7 @@ The null-terminated string
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
+
 
 ### `duckdb_create_varchar_length`
 ---
@@ -2574,6 +2766,7 @@ Creates a value from a string
 </span>  <span class="kt">idx_t</span> <span class="k">length
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `value`
@@ -2588,6 +2781,7 @@ The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
+
 ### `duckdb_create_int64`
 ---
 Creates a value from an int64
@@ -2598,6 +2792,7 @@ Creates a value from an int64
 </span>  <span class="kt">int64_t</span> <span class="k">val
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `value`
@@ -2608,6 +2803,7 @@ The bigint value
 The value. This must be destroyed with `duckdb_destroy_value`.
 
 <br>
+
 
 ### `duckdb_get_varchar`
 ---
@@ -2620,6 +2816,7 @@ The result must be destroyed with `duckdb_free`.
 </span>  <span class="kt">duckdb_value</span> <span class="k">value
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `value`
@@ -2631,6 +2828,7 @@ The string value. This must be destroyed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_get_int64`
 ---
 Obtains an int64 of the given value.
@@ -2641,6 +2839,7 @@ Obtains an int64 of the given value.
 </span>  <span class="kt">duckdb_value</span> <span class="k">value
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `value`
@@ -2651,6 +2850,7 @@ The value
 The int64 value, or 0 if no conversion is possible
 
 <br>
+
 
 ### `duckdb_create_logical_type`
 ---
@@ -2665,6 +2865,7 @@ This should not be used with `DUCKDB_TYPE_DECIMAL`.
 </span>  <span class="k">duckdb_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2675,6 +2876,7 @@ The primitive type to create.
 The logical type.
 
 <br>
+
 
 ### `duckdb_create_list_type`
 ---
@@ -2687,6 +2889,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2697,6 +2900,7 @@ The child type of list type to create.
 The logical type.
 
 <br>
+
 
 ### `duckdb_create_map_type`
 ---
@@ -2710,6 +2914,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">value_type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2720,6 +2925,7 @@ The key type and value type of map type to create.
 The logical type.
 
 <br>
+
 
 ### `duckdb_create_union_type`
 ---
@@ -2734,6 +2940,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">idx_t</span> <span class="k">member_count
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `types`
@@ -2748,6 +2955,7 @@ The logical type.
 
 <br>
 
+
 ### `duckdb_create_decimal_type`
 ---
 Creates a `duckdb_logical_type` of type decimal with the specified width and scale
@@ -2760,6 +2968,7 @@ The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">uint8_t</span> <span class="k">scale
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `width`
@@ -2774,6 +2983,7 @@ The logical type.
 
 <br>
 
+
 ### `duckdb_get_type_id`
 ---
 Retrieves the type class of a `duckdb_logical_type`.
@@ -2784,6 +2994,7 @@ Retrieves the type class of a `duckdb_logical_type`.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2795,6 +3006,7 @@ The type id
 
 <br>
 
+
 ### `duckdb_decimal_width`
 ---
 Retrieves the width of a decimal type.
@@ -2805,6 +3017,7 @@ Retrieves the width of a decimal type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2816,6 +3029,7 @@ The width of the decimal type
 
 <br>
 
+
 ### `duckdb_decimal_scale`
 ---
 Retrieves the scale of a decimal type.
@@ -2826,6 +3040,7 @@ Retrieves the scale of a decimal type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2837,6 +3052,7 @@ The scale of the decimal type
 
 <br>
 
+
 ### `duckdb_decimal_internal_type`
 ---
 Retrieves the internal storage type of a decimal type.
@@ -2847,6 +3063,7 @@ Retrieves the internal storage type of a decimal type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2858,6 +3075,7 @@ The internal type of the decimal type
 
 <br>
 
+
 ### `duckdb_enum_internal_type`
 ---
 Retrieves the internal storage type of an enum type.
@@ -2868,6 +3086,7 @@ Retrieves the internal storage type of an enum type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2879,6 +3098,7 @@ The internal type of the enum type
 
 <br>
 
+
 ### `duckdb_enum_dictionary_size`
 ---
 Retrieves the dictionary size of the enum type
@@ -2889,6 +3109,7 @@ Retrieves the dictionary size of the enum type
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2899,6 +3120,7 @@ The logical type object
 The dictionary size of the enum type
 
 <br>
+
 
 ### `duckdb_enum_dictionary_value`
 ---
@@ -2913,6 +3135,7 @@ The result must be freed with `duckdb_free`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2927,6 +3150,7 @@ The string value of the enum type. Must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_list_type_child_type`
 ---
 Retrieves the child type of the given list type.
@@ -2939,6 +3163,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2949,6 +3174,7 @@ The logical type object
 The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
+
 
 ### `duckdb_map_type_key_type`
 ---
@@ -2962,6 +3188,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2972,6 +3199,7 @@ The logical type object
 The key type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
 
 <br>
+
 
 ### `duckdb_map_type_value_type`
 ---
@@ -2985,6 +3213,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -2996,6 +3225,7 @@ The value type of the map type. Must be destroyed with `duckdb_destroy_logical_t
 
 <br>
 
+
 ### `duckdb_struct_type_child_count`
 ---
 Returns the number of children of a struct type.
@@ -3006,6 +3236,7 @@ Returns the number of children of a struct type.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3016,6 +3247,7 @@ The logical type object
 The number of children of a struct type.
 
 <br>
+
 
 ### `duckdb_struct_type_child_name`
 ---
@@ -3030,6 +3262,7 @@ The result must be freed with `duckdb_free`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3044,6 +3277,7 @@ The name of the struct type. Must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_struct_type_child_type`
 ---
 Retrieves the child type of the given struct type at the specified index.
@@ -3057,6 +3291,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3071,6 +3306,7 @@ The child type of the struct type. Must be destroyed with `duckdb_destroy_logica
 
 <br>
 
+
 ### `duckdb_union_type_member_count`
 ---
 Returns the number of members that the union type has.
@@ -3081,6 +3317,7 @@ Returns the number of members that the union type has.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3091,6 +3328,7 @@ The logical type (union) object
 The number of members of a union type.
 
 <br>
+
 
 ### `duckdb_union_type_member_name`
 ---
@@ -3105,6 +3343,7 @@ The result must be freed with `duckdb_free`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3119,6 +3358,7 @@ The name of the union member. Must be freed with `duckdb_free`.
 
 <br>
 
+
 ### `duckdb_union_type_member_type`
 ---
 Retrieves the child type of the given union member at the specified index.
@@ -3132,6 +3372,7 @@ The result must be freed with `duckdb_destroy_logical_type`
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3146,6 +3387,7 @@ The child type of the union member. Must be destroyed with `duckdb_destroy_logic
 
 <br>
 
+
 ### `duckdb_destroy_logical_type`
 ---
 Destroys the logical type and de-allocates all memory allocated for that type.
@@ -3156,6 +3398,7 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `type`
@@ -3163,6 +3406,7 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 The logical type to destroy.
 
 <br>
+
 
 ### `duckdb_create_data_chunk`
 ---
@@ -3175,6 +3419,7 @@ Creates an empty DataChunk with the specified set of types.
 </span>  <span class="kt">idx_t</span> <span class="k">column_count
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `types`
@@ -3189,6 +3434,7 @@ The data chunk.
 
 <br>
 
+
 ### `duckdb_destroy_data_chunk`
 ---
 Destroys the data chunk and de-allocates all memory allocated for that chunk.
@@ -3199,6 +3445,7 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 </span>  <span class="kt">duckdb_data_chunk</span> *<span class="k">chunk
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `chunk`
@@ -3206,6 +3453,7 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 The data chunk to destroy.
 
 <br>
+
 
 ### `duckdb_data_chunk_reset`
 ---
@@ -3217,6 +3465,7 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `chunk`
@@ -3224,6 +3473,7 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 The data chunk to reset.
 
 <br>
+
 
 ### `duckdb_data_chunk_get_column_count`
 ---
@@ -3235,6 +3485,7 @@ Retrieves the number of columns in a data chunk.
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `chunk`
@@ -3245,6 +3496,7 @@ The data chunk to get the data from
 The number of columns in the data chunk
 
 <br>
+
 
 ### `duckdb_data_chunk_get_vector`
 ---
@@ -3260,6 +3512,7 @@ It does NOT need to be destroyed.
 </span>  <span class="kt">idx_t</span> <span class="k">col_idx
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `chunk`
@@ -3271,6 +3524,7 @@ The vector
 
 <br>
 
+
 ### `duckdb_data_chunk_get_size`
 ---
 Retrieves the current number of tuples in a data chunk.
@@ -3281,6 +3535,7 @@ Retrieves the current number of tuples in a data chunk.
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `chunk`
@@ -3291,6 +3546,7 @@ The data chunk to get the data from
 The number of tuples in the data chunk
 
 <br>
+
 
 ### `duckdb_data_chunk_set_size`
 ---
@@ -3303,6 +3559,7 @@ Sets the current number of tuples in a data chunk.
 </span>  <span class="kt">idx_t</span> <span class="k">size
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `chunk`
@@ -3313,6 +3570,7 @@ The data chunk to set the size in
 The number of tuples in the data chunk
 
 <br>
+
 
 ### `duckdb_vector_get_column_type`
 ---
@@ -3326,6 +3584,7 @@ The result must be destroyed with `duckdb_destroy_logical_type`.
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3336,6 +3595,7 @@ The vector get the data from
 The type of the vector
 
 <br>
+
 
 ### `duckdb_vector_get_data`
 ---
@@ -3350,6 +3610,7 @@ How to read or write values depends on the type of the vector.
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3360,6 +3621,7 @@ The vector to get the data from
 The data pointer
 
 <br>
+
 
 ### `duckdb_vector_get_validity`
 ---
@@ -3385,6 +3647,7 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3395,6 +3658,7 @@ The vector to get the data from
 The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
+
 
 ### `duckdb_vector_ensure_validity_writable`
 ---
@@ -3409,6 +3673,7 @@ This allows null values to be written to the vector, regardless of whether a val
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3416,6 +3681,7 @@ This allows null values to be written to the vector, regardless of whether a val
 The vector to alter
 
 <br>
+
 
 ### `duckdb_vector_assign_string_element`
 ---
@@ -3429,6 +3695,7 @@ Assigns a string element in the vector at the specified location.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">str
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3443,6 +3710,7 @@ The null-terminated string
 
 <br>
 
+
 ### `duckdb_vector_assign_string_element_len`
 ---
 Assigns a string element in the vector at the specified location.
@@ -3456,6 +3724,7 @@ Assigns a string element in the vector at the specified location.
 </span>  <span class="kt">idx_t</span> <span class="k">str_len
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3473,6 +3742,7 @@ The length of the string (in bytes)
 
 <br>
 
+
 ### `duckdb_list_vector_get_child`
 ---
 Retrieves the child vector of a list vector.
@@ -3485,6 +3755,7 @@ The resulting vector is valid as long as the parent vector is valid.
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3496,6 +3767,7 @@ The child vector
 
 <br>
 
+
 ### `duckdb_list_vector_get_size`
 ---
 Returns the size of the child vector of the list
@@ -3506,6 +3778,7 @@ Returns the size of the child vector of the list
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3516,6 +3789,7 @@ The vector
 The size of the child list
 
 <br>
+
 
 ### `duckdb_list_vector_set_size`
 ---
@@ -3528,6 +3802,7 @@ Sets the total size of the underlying child-vector of a list vector.
 </span>  <span class="kt">idx_t</span> <span class="k">size
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3542,6 +3817,7 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
+
 ### `duckdb_list_vector_reserve`
 ---
 Sets the total capacity of the underlying child-vector of a list.
@@ -3553,6 +3829,7 @@ Sets the total capacity of the underlying child-vector of a list.
 </span>  <span class="kt">idx_t</span> <span class="k">required_capacity
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3567,6 +3844,7 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
+
 ### `duckdb_struct_vector_get_child`
 ---
 Retrieves the child vector of a struct vector.
@@ -3580,6 +3858,7 @@ The resulting vector is valid as long as the parent vector is valid.
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `vector`
@@ -3594,6 +3873,7 @@ The child vector
 
 <br>
 
+
 ### `duckdb_validity_row_is_valid`
 ---
 Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
@@ -3605,6 +3885,7 @@ Returns whether or not a row is valid (i.e., not NULL) in the given validity mas
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `validity`
@@ -3618,6 +3899,7 @@ The row index
 true if the row is valid, false otherwise
 
 <br>
+
 
 ### `duckdb_validity_set_row_validity`
 ---
@@ -3634,6 +3916,7 @@ to ensure that there is a validity mask to write to.
 </span>  <span class="kt">bool</span> <span class="k">valid
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `validity`
@@ -3648,6 +3931,7 @@ Whether or not to set the row to valid, or invalid
 
 <br>
 
+
 ### `duckdb_validity_set_row_invalid`
 ---
 In a validity mask, sets a specific row to invalid.
@@ -3661,6 +3945,7 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `validity`
@@ -3671,6 +3956,7 @@ The validity mask
 The row index
 
 <br>
+
 
 ### `duckdb_validity_set_row_valid`
 ---
@@ -3685,6 +3971,7 @@ Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `validity`
@@ -3695,6 +3982,7 @@ The validity mask
 The row index
 
 <br>
+
 
 ### `duckdb_create_table_function`
 ---
@@ -3708,6 +3996,7 @@ The return value should be destroyed with `duckdb_destroy_table_function`.
 </span>  <span class="k">
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -3715,6 +4004,7 @@ The return value should be destroyed with `duckdb_destroy_table_function`.
 The table function object.
 
 <br>
+
 
 ### `duckdb_destroy_table_function`
 ---
@@ -3726,6 +4016,7 @@ Destroys the given table function object.
 </span>  <span class="kt">duckdb_table_function</span> *<span class="k">table_function
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3733,6 +4024,7 @@ Destroys the given table function object.
 The table function to destroy
 
 <br>
+
 
 ### `duckdb_table_function_set_name`
 ---
@@ -3745,6 +4037,7 @@ Sets the name of the given table function.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3755,6 +4048,7 @@ The table function
 The name of the table function
 
 <br>
+
 
 ### `duckdb_table_function_add_parameter`
 ---
@@ -3767,6 +4061,7 @@ Adds a parameter to the table function.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3777,6 +4072,7 @@ The table function
 The type of the parameter to add.
 
 <br>
+
 
 ### `duckdb_table_function_add_named_parameter`
 ---
@@ -3790,6 +4086,7 @@ Adds a named parameter to the table function.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3804,6 +4101,7 @@ The type of the parameter to add.
 
 <br>
 
+
 ### `duckdb_table_function_set_extra_info`
 ---
 Assigns extra information to the table function that can be fetched during binding, etc.
@@ -3816,6 +4114,7 @@ Assigns extra information to the table function that can be fetched during bindi
 </span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3830,6 +4129,7 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
+
 ### `duckdb_table_function_set_bind`
 ---
 Sets the bind function of the table function
@@ -3841,6 +4141,7 @@ Sets the bind function of the table function
 </span>  <span class="k">duckdb_table_function_bind_t</span> <span class="k">bind
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3851,6 +4152,7 @@ The table function
 The bind function
 
 <br>
+
 
 ### `duckdb_table_function_set_init`
 ---
@@ -3863,6 +4165,7 @@ Sets the init function of the table function
 </span>  <span class="k">duckdb_table_function_init_t</span> <span class="k">init
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3873,6 +4176,7 @@ The table function
 The init function
 
 <br>
+
 
 ### `duckdb_table_function_set_local_init`
 ---
@@ -3885,6 +4189,7 @@ Sets the thread-local init function of the table function
 </span>  <span class="k">duckdb_table_function_init_t</span> <span class="k">init
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3895,6 +4200,7 @@ The table function
 The init function
 
 <br>
+
 
 ### `duckdb_table_function_set_function`
 ---
@@ -3907,6 +4213,7 @@ Sets the main function of the table function
 </span>  <span class="k">duckdb_table_function_t</span> <span class="k">function
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3917,6 +4224,7 @@ The table function
 The function
 
 <br>
+
 
 ### `duckdb_table_function_supports_projection_pushdown`
 ---
@@ -3933,6 +4241,7 @@ If this is set to false (the default), the system will expect all columns to be 
 </span>  <span class="kt">bool</span> <span class="k">pushdown
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `table_function`
@@ -3943,6 +4252,7 @@ The table function
 True if the table function supports projection pushdown, false otherwise.
 
 <br>
+
 
 ### `duckdb_register_table_function`
 ---
@@ -3959,6 +4269,7 @@ If the function is incomplete or a function with this name already exists DuckDB
 </span>  <span class="kt">duckdb_table_function</span> <span class="k">function
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `con`
@@ -3973,6 +4284,7 @@ Whether or not the registration was successful.
 
 <br>
 
+
 ### `duckdb_bind_get_extra_info`
 ---
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
@@ -3983,6 +4295,7 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 </span>  <span class="kt">duckdb_bind_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -3993,6 +4306,7 @@ The info object
 The extra info
 
 <br>
+
 
 ### `duckdb_bind_add_result_column`
 ---
@@ -4006,6 +4320,7 @@ Adds a result column to the output of the table function.
 </span>  <span class="kt">duckdb_logical_type</span> <span class="k">type
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4020,6 +4335,7 @@ The logical type of the column
 
 <br>
 
+
 ### `duckdb_bind_get_parameter_count`
 ---
 Retrieves the number of regular (non-named) parameters to the function.
@@ -4030,6 +4346,7 @@ Retrieves the number of regular (non-named) parameters to the function.
 </span>  <span class="kt">duckdb_bind_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4040,6 +4357,7 @@ The info object
 The number of parameters
 
 <br>
+
 
 ### `duckdb_bind_get_parameter`
 ---
@@ -4054,6 +4372,7 @@ The result must be destroyed with `duckdb_destroy_value`.
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4068,6 +4387,7 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
+
 ### `duckdb_bind_get_named_parameter`
 ---
 Retrieves a named parameter with the given name.
@@ -4081,6 +4401,7 @@ The result must be destroyed with `duckdb_destroy_value`.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4095,6 +4416,7 @@ The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
 
 <br>
 
+
 ### `duckdb_bind_set_bind_data`
 ---
 Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
@@ -4107,6 +4429,7 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 </span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4121,6 +4444,7 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
+
 ### `duckdb_bind_set_cardinality`
 ---
 Sets the cardinality estimate for the table function, used for optimization.
@@ -4133,6 +4457,7 @@ Sets the cardinality estimate for the table function, used for optimization.
 </span>  <span class="kt">bool</span> <span class="k">is_exact
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4143,6 +4468,7 @@ The bind data object.
 Whether or not the cardinality estimate is exact, or an approximation
 
 <br>
+
 
 ### `duckdb_bind_set_error`
 ---
@@ -4155,6 +4481,7 @@ Report that an error has occurred while calling bind.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4166,6 +4493,7 @@ The error message
 
 <br>
 
+
 ### `duckdb_init_get_extra_info`
 ---
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
@@ -4176,6 +4504,7 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 </span>  <span class="kt">duckdb_init_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4186,6 +4515,7 @@ The info object
 The extra info
 
 <br>
+
 
 ### `duckdb_init_get_bind_data`
 ---
@@ -4200,6 +4530,7 @@ For tracking state, use the init data instead.
 </span>  <span class="kt">duckdb_init_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4210,6 +4541,7 @@ The info object
 The bind data object
 
 <br>
+
 
 ### `duckdb_init_set_init_data`
 ---
@@ -4223,6 +4555,7 @@ Sets the user-provided init data in the init object. This object can be retrieve
 </span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">destroy
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4237,6 +4570,7 @@ The callback that will be called to destroy the init data (if any)
 
 <br>
 
+
 ### `duckdb_init_get_column_count`
 ---
 Returns the number of projected columns.
@@ -4249,6 +4583,7 @@ This function must be used if projection pushdown is enabled to figure out which
 </span>  <span class="kt">duckdb_init_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4259,6 +4594,7 @@ The info object
 The number of projected columns.
 
 <br>
+
 
 ### `duckdb_init_get_column_index`
 ---
@@ -4273,6 +4609,7 @@ This function must be used if projection pushdown is enabled to figure out which
 </span>  <span class="kt">idx_t</span> <span class="k">column_index
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4287,6 +4624,7 @@ The column index of the projected column.
 
 <br>
 
+
 ### `duckdb_init_set_max_threads`
 ---
 Sets how many threads can process this table function in parallel (default: 1)
@@ -4298,6 +4636,7 @@ Sets how many threads can process this table function in parallel (default: 1)
 </span>  <span class="kt">idx_t</span> <span class="k">max_threads
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4308,6 +4647,7 @@ The info object
 The maximum amount of threads that can process this table function
 
 <br>
+
 
 ### `duckdb_init_set_error`
 ---
@@ -4320,6 +4660,7 @@ Report that an error has occurred while calling init.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4331,6 +4672,7 @@ The error message
 
 <br>
 
+
 ### `duckdb_function_get_extra_info`
 ---
 Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`
@@ -4341,6 +4683,7 @@ Retrieves the extra info of the function as set in `duckdb_table_function_set_ex
 </span>  <span class="kt">duckdb_function_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4351,6 +4694,7 @@ The info object
 The extra info
 
 <br>
+
 
 ### `duckdb_function_get_bind_data`
 ---
@@ -4365,6 +4709,7 @@ For tracking state, use the init data instead.
 </span>  <span class="kt">duckdb_function_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4376,6 +4721,7 @@ The bind data object
 
 <br>
 
+
 ### `duckdb_function_get_init_data`
 ---
 Gets the init data set by `duckdb_init_set_init_data` during the init.
@@ -4386,6 +4732,7 @@ Gets the init data set by `duckdb_init_set_init_data` during the init.
 </span>  <span class="kt">duckdb_function_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4396,6 +4743,7 @@ The info object
 The init data object
 
 <br>
+
 
 ### `duckdb_function_get_local_init_data`
 ---
@@ -4407,6 +4755,7 @@ Gets the thread-local init data set by `duckdb_init_set_init_data` during the lo
 </span>  <span class="kt">duckdb_function_info</span> <span class="k">info
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4417,6 +4766,7 @@ The info object
 The init data object
 
 <br>
+
 
 ### `duckdb_function_set_error`
 ---
@@ -4429,6 +4779,7 @@ Report that an error has occurred while executing the function.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4439,6 +4790,7 @@ The info object
 The error message
 
 <br>
+
 
 ### `duckdb_add_replacement_scan`
 ---
@@ -4453,6 +4805,7 @@ Add a replacement scan definition to the specified database
 </span>  <span class="k">duckdb_delete_callback_t</span> <span class="k">delete_callback
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `db`
@@ -4470,6 +4823,7 @@ The delete callback to call on the extra data, if any
 
 <br>
 
+
 ### `duckdb_replacement_scan_set_function_name`
 ---
 Sets the replacement function name to use. If this function is called in the replacement callback,
@@ -4482,6 +4836,7 @@ the replacement scan is performed. If it is not called, the replacement callback
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">function_name
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4492,6 +4847,7 @@ The info object
 The function name to substitute.
 
 <br>
+
 
 ### `duckdb_replacement_scan_add_parameter`
 ---
@@ -4504,6 +4860,7 @@ Adds a parameter to the replacement scan function.
 </span>  <span class="kt">duckdb_value</span> <span class="k">parameter
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4514,6 +4871,7 @@ The info object
 The parameter to add.
 
 <br>
+
 
 ### `duckdb_replacement_scan_set_error`
 ---
@@ -4526,6 +4884,7 @@ Report that an error has occurred while executing the replacement scan.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">error
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `info`
@@ -4536,6 +4895,7 @@ The info object
 The error message
 
 <br>
+
 
 ### `duckdb_appender_create`
 ---
@@ -4550,6 +4910,7 @@ Creates an appender object.
 </span>  <span class="kt">duckdb_appender</span> *<span class="k">out_appender
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -4570,6 +4931,7 @@ The resulting appender object.
 
 <br>
 
+
 ### `duckdb_appender_error`
 ---
 Returns the error message associated with the given appender.
@@ -4583,6 +4945,7 @@ The error message should not be freed. It will be de-allocated when `duckdb_appe
 </span>  <span class="kt">duckdb_appender</span> <span class="k">appender
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `appender`
@@ -4593,6 +4956,7 @@ The appender to get the error from.
 The error message, or `nullptr` if there is none.
 
 <br>
+
 
 ### `duckdb_appender_flush`
 ---
@@ -4608,6 +4972,7 @@ are done with the appender.
 </span>  <span class="kt">duckdb_appender</span> <span class="k">appender
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `appender`
@@ -4618,6 +4983,7 @@ The appender to flush.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_appender_close`
 ---
@@ -4631,6 +4997,7 @@ This is generally not necessary. Call `duckdb_appender_destroy` instead.
 </span>  <span class="kt">duckdb_appender</span> <span class="k">appender
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `appender`
@@ -4641,6 +5008,7 @@ The appender to flush and close.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_appender_destroy`
 ---
@@ -4653,6 +5021,7 @@ all memory associated with the appender.
 </span>  <span class="kt">duckdb_appender</span> *<span class="k">appender
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `appender`
@@ -4663,6 +5032,7 @@ The appender to flush, close and destroy.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_appender_begin_row`
 ---
@@ -4676,6 +5046,7 @@ A nop function, provided for backwards compatibility reasons. Does nothing. Only
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_appender_end_row`
 ---
 Finish the current row of appends. After end_row is called, the next row can be appended.
@@ -4686,6 +5057,7 @@ Finish the current row of appends. After end_row is called, the next row can be 
 </span>  <span class="kt">duckdb_appender</span> <span class="k">appender
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `appender`
@@ -4696,6 +5068,7 @@ The appender.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_append_bool`
 ---
@@ -4710,6 +5083,7 @@ Append a bool value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_int8`
 ---
 Append an int8_t value to the appender.
@@ -4722,6 +5096,7 @@ Append an int8_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_int16`
 ---
@@ -4736,6 +5111,7 @@ Append an int16_t value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_int32`
 ---
 Append an int32_t value to the appender.
@@ -4748,6 +5124,7 @@ Append an int32_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_int64`
 ---
@@ -4762,6 +5139,7 @@ Append an int64_t value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_hugeint`
 ---
 Append a duckdb_hugeint value to the appender.
@@ -4774,6 +5152,7 @@ Append a duckdb_hugeint value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_uint8`
 ---
@@ -4788,6 +5167,7 @@ Append a uint8_t value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_uint16`
 ---
 Append a uint16_t value to the appender.
@@ -4800,6 +5180,7 @@ Append a uint16_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_uint32`
 ---
@@ -4814,6 +5195,7 @@ Append a uint32_t value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_uint64`
 ---
 Append a uint64_t value to the appender.
@@ -4826,6 +5208,7 @@ Append a uint64_t value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_float`
 ---
@@ -4840,6 +5223,7 @@ Append a float value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_double`
 ---
 Append a double value to the appender.
@@ -4852,6 +5236,7 @@ Append a double value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_date`
 ---
@@ -4866,6 +5251,7 @@ Append a duckdb_date value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_time`
 ---
 Append a duckdb_time value to the appender.
@@ -4878,6 +5264,7 @@ Append a duckdb_time value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_timestamp`
 ---
@@ -4892,6 +5279,7 @@ Append a duckdb_timestamp value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_interval`
 ---
 Append a duckdb_interval value to the appender.
@@ -4905,6 +5293,7 @@ Append a duckdb_interval value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_varchar`
 ---
 Append a varchar value to the appender.
@@ -4917,6 +5306,7 @@ Append a varchar value to the appender.
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_varchar_length`
 ---
@@ -4932,6 +5322,7 @@ Append a varchar value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_blob`
 ---
 Append a blob value to the appender.
@@ -4946,6 +5337,7 @@ Append a blob value to the appender.
 </code></pre></div></div>
 <br>
 
+
 ### `duckdb_append_null`
 ---
 Append a NULL value to the appender (of any type).
@@ -4957,6 +5349,7 @@ Append a NULL value to the appender (of any type).
 </span>);
 </code></pre></div></div>
 <br>
+
 
 ### `duckdb_append_data_chunk`
 ---
@@ -4973,6 +5366,7 @@ If the append is successful, DuckDBSuccess is returned.
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `appender`
@@ -4986,6 +5380,7 @@ The data chunk to append.
 The return state.
 
 <br>
+
 
 ### `duckdb_query_arrow`
 ---
@@ -5004,6 +5399,7 @@ query fails, otherwise the error stored within the result will not be freed corr
 </span>  <span class="kt">duckdb_arrow</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -5021,6 +5417,7 @@ The query result.
 
 <br>
 
+
 ### `duckdb_query_arrow_schema`
 ---
 Fetch the internal arrow schema from the arrow result.
@@ -5032,6 +5429,7 @@ Fetch the internal arrow schema from the arrow result.
 </span>  <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5045,6 +5443,7 @@ The output schema.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_query_arrow_array`
 ---
@@ -5060,6 +5459,7 @@ So consume the out_array before calling this function again.
 </span>  <span class="kt">duckdb_arrow_array</span> *<span class="k">out_array
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5074,6 +5474,7 @@ The output array.
 
 <br>
 
+
 ### `duckdb_arrow_column_count`
 ---
 Returns the number of columns present in a the arrow result object.
@@ -5084,6 +5485,7 @@ Returns the number of columns present in a the arrow result object.
 </span>  <span class="kt">duckdb_arrow</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5095,6 +5497,7 @@ The number of columns present in the result object.
 
 <br>
 
+
 ### `duckdb_arrow_row_count`
 ---
 Returns the number of rows present in a the arrow result object.
@@ -5105,6 +5508,7 @@ Returns the number of rows present in a the arrow result object.
 </span>  <span class="kt">duckdb_arrow</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5115,6 +5519,7 @@ The result object.
 The number of rows present in the result object.
 
 <br>
+
 
 ### `duckdb_arrow_rows_changed`
 ---
@@ -5127,6 +5532,7 @@ INSERT/UPDATE/DELETE queries. For other queries the rows_changed will be 0.
 </span>  <span class="kt">duckdb_arrow</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5137,6 +5543,7 @@ The result object.
 The number of rows changed.
 
 <br>
+
 
 ### `duckdb_query_arrow_error`
 ---
@@ -5151,6 +5558,7 @@ The error message should not be freed. It will be de-allocated when `duckdb_dest
 </span>  <span class="kt">duckdb_arrow</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5162,6 +5570,7 @@ The error of the result.
 
 <br>
 
+
 ### `duckdb_destroy_arrow`
 ---
 Closes the result and de-allocates all memory allocated for the arrow result.
@@ -5172,6 +5581,7 @@ Closes the result and de-allocates all memory allocated for the arrow result.
 </span>  <span class="kt">duckdb_arrow</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -5179,6 +5589,7 @@ Closes the result and de-allocates all memory allocated for the arrow result.
 The result to destroy.
 
 <br>
+
 
 ### `duckdb_execute_tasks`
 ---
@@ -5193,6 +5604,7 @@ Will return after `max_tasks` have been executed, or if there are no more tasks 
 </span>  <span class="kt">idx_t</span> <span class="k">max_tasks
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `database`
@@ -5203,6 +5615,7 @@ The database object to execute tasks for
 The maximum amount of tasks to execute
 
 <br>
+
 
 ### `duckdb_create_task_state`
 ---
@@ -5217,6 +5630,7 @@ duckdb_destroy_state should be called on the result in order to free memory.
 </span>  <span class="kt">duckdb_database</span> <span class="k">database
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `database`
@@ -5227,6 +5641,7 @@ The database object to create the task state for
 The task state that can be used with duckdb_execute_tasks_state.
 
 <br>
+
 
 ### `duckdb_execute_tasks_state`
 ---
@@ -5241,6 +5656,7 @@ Multiple threads can share the same duckdb_task_state.
 </span>  <span class="k">duckdb_task_state</span> <span class="k">state
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `state`
@@ -5248,6 +5664,7 @@ Multiple threads can share the same duckdb_task_state.
 The task state of the executor
 
 <br>
+
 
 ### `duckdb_execute_n_tasks_state`
 ---
@@ -5265,6 +5682,7 @@ Multiple threads can share the same duckdb_task_state.
 </span>  <span class="kt">idx_t</span> <span class="k">max_tasks
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `state`
@@ -5279,6 +5697,7 @@ The amount of tasks that have actually been executed
 
 <br>
 
+
 ### `duckdb_finish_execution`
 ---
 Finish execution on a specific task.
@@ -5289,6 +5708,7 @@ Finish execution on a specific task.
 </span>  <span class="k">duckdb_task_state</span> <span class="k">state
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `state`
@@ -5296,6 +5716,7 @@ Finish execution on a specific task.
 The task state to finish execution
 
 <br>
+
 
 ### `duckdb_task_state_is_finished`
 ---
@@ -5307,6 +5728,7 @@ Check if the provided duckdb_task_state has finished execution
 </span>  <span class="k">duckdb_task_state</span> <span class="k">state
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `state`
@@ -5317,6 +5739,7 @@ The task state to inspect
 Whether or not duckdb_finish_execution has been called on the task state
 
 <br>
+
 
 ### `duckdb_destroy_task_state`
 ---
@@ -5331,6 +5754,7 @@ on the task state.
 </span>  <span class="k">duckdb_task_state</span> <span class="k">state
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `state`
@@ -5338,6 +5762,7 @@ on the task state.
 The task state to clean up
 
 <br>
+
 
 ### `duckdb_execution_is_finished`
 ---
@@ -5349,6 +5774,7 @@ Returns true if execution of the current query is finished.
 </span>  <span class="kt">duckdb_connection</span> <span class="k">con
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `con`
@@ -5356,6 +5782,7 @@ Returns true if execution of the current query is finished.
 The connection on which to check
 
 <br>
+
 
 ### `duckdb_stream_fetch_chunk`
 ---
@@ -5377,6 +5804,7 @@ It is not known beforehand how many chunks will be returned by this result.
 </span>  <span class="kt">duckdb_result</span> <span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`

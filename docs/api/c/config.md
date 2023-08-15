@@ -42,6 +42,7 @@ duckdb_close(&db);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_set_config">duckdb_set_config</a></span>(<span class="kt">duckdb_config</span> <span class="k">config</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">option</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_config">duckdb_destroy_config</a></span>(<span class="kt">duckdb_config</span> *<span class="k">config</span>);
 </code></pre></div></div>
+
 ### `duckdb_create_config`
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
@@ -55,6 +56,7 @@ This will always succeed unless there is a malloc failure.
 </span>  <span class="kt">duckdb_config</span> *<span class="k">out_config
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `out_config`
@@ -65,6 +67,7 @@ The result configuration object.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_config_count`
 ---
@@ -78,6 +81,7 @@ This should not be called in a loop as it internally loops over all the options.
 </span>  <span class="k">
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `returns`
@@ -85,6 +89,7 @@ This should not be called in a loop as it internally loops over all the options.
 The amount of config options available.
 
 <br>
+
 
 ### `duckdb_get_config_flag`
 ---
@@ -101,6 +106,7 @@ The result name or description MUST NOT be freed.
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_description
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `index`
@@ -117,6 +123,7 @@ A description of the configuration flag.
 `DuckDBSuccess` on success or `DuckDBError` on failure.
 
 <br>
+
 
 ### `duckdb_set_config`
 ---
@@ -135,6 +142,7 @@ This can fail if either the name is invalid, or if the value provided for the op
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">option
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `duckdb_config`
@@ -152,6 +160,7 @@ The value to set the configuration flag to.
 
 <br>
 
+
 ### `duckdb_destroy_config`
 ---
 Destroys the specified configuration option and de-allocates all memory allocated for the object.
@@ -162,6 +171,7 @@ Destroys the specified configuration option and de-allocates all memory allocate
 </span>  <span class="kt">duckdb_config</span> *<span class="k">config
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `config`

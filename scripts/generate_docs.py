@@ -172,7 +172,7 @@ def add_function(function_prototype, documentation, group):
 	function_name = extract_function_name(function_prototype_str)
 	docs_str = '\n'.join(documentation) + '\n'
 	(docs_str, parameters) = extract_parameters(docs_str)
-	docs_string = ''
+	docs_string = '\n'
 	docs_string += f'### `{function_name}`\n'
 	docs_string +='---\n'
 	docs_string += docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ')
@@ -182,7 +182,7 @@ def add_function(function_prototype, documentation, group):
 	docs_string += highlight_function_prototype(format_function(function_prototype_str), None) + '\n'
 	docs_string += quick_docs_end()
 	if len(parameters) > 0:
-		docs_string += '#### Parameters\n'
+		docs_string += '\n#### Parameters\n'
 		docs_string +='---\n'
 		for parameter_pair in parameters:
 			docs_string += "* `" + parameter_pair[0] + '`\n\n'

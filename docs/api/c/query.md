@@ -107,6 +107,7 @@ a `DUCKDB_TYPE_BIGINT` column will provide unpredictable results!
 <span class="kt">bool</span> *<span class="nf"><a href="#duckdb_nullmask_data">duckdb_nullmask_data</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>, <span class="kt">idx_t</span> <span class="k">col</span>);
 <span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_result_error">duckdb_result_error</a></span>(<span class="kt">duckdb_result</span> *<span class="k">result</span>);
 </code></pre></div></div>
+
 ### `duckdb_query`
 ---
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
@@ -124,6 +125,7 @@ query fails, otherwise the error stored within the result will not be freed corr
 </span>  <span class="kt">duckdb_result</span> *<span class="k">out_result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `connection`
@@ -141,6 +143,7 @@ The query result.
 
 <br>
 
+
 ### `duckdb_destroy_result`
 ---
 Closes the result and de-allocates all memory allocated for that connection.
@@ -151,6 +154,7 @@ Closes the result and de-allocates all memory allocated for that connection.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -158,6 +162,7 @@ Closes the result and de-allocates all memory allocated for that connection.
 The result to destroy.
 
 <br>
+
 
 ### `duckdb_column_name`
 ---
@@ -173,6 +178,7 @@ Returns `NULL` if the column is out of range.
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -187,6 +193,7 @@ The column name of the specified column.
 
 <br>
 
+
 ### `duckdb_column_type`
 ---
 Returns the column type of the specified column.
@@ -200,6 +207,7 @@ Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -213,6 +221,7 @@ The column index.
 The column type of the specified column.
 
 <br>
+
 
 ### `duckdb_column_logical_type`
 ---
@@ -229,6 +238,7 @@ Returns `NULL` if the column is out of range.
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -243,6 +253,7 @@ The logical column type of the specified column.
 
 <br>
 
+
 ### `duckdb_column_count`
 ---
 Returns the number of columns present in a the result object.
@@ -253,6 +264,7 @@ Returns the number of columns present in a the result object.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -264,6 +276,7 @@ The number of columns present in the result object.
 
 <br>
 
+
 ### `duckdb_row_count`
 ---
 Returns the number of rows present in a the result object.
@@ -274,6 +287,7 @@ Returns the number of rows present in a the result object.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -284,6 +298,7 @@ The result object.
 The number of rows present in the result object.
 
 <br>
+
 
 ### `duckdb_rows_changed`
 ---
@@ -296,6 +311,7 @@ queries. For other queries the rows_changed will be 0.
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -306,6 +322,7 @@ The result object.
 The number of rows changed.
 
 <br>
+
 
 ### `duckdb_column_data`
 ---
@@ -330,6 +347,7 @@ printf("Data for row %d: %d\n", row, data[row]);
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -343,6 +361,7 @@ The column index.
 The column data of the specified column.
 
 <br>
+
 
 ### `duckdb_nullmask_data`
 ---
@@ -369,6 +388,7 @@ printf("Data for row %d: %d\n", row, data[row]);
 </span>  <span class="kt">idx_t</span> <span class="k">col
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
@@ -383,6 +403,7 @@ The nullmask of the specified column.
 
 <br>
 
+
 ### `duckdb_result_error`
 ---
 Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
@@ -395,6 +416,7 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 </span>  <span class="kt">duckdb_result</span> *<span class="k">result
 </span>);
 </code></pre></div></div>
+
 #### Parameters
 ---
 * `result`
