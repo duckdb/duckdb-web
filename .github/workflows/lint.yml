@@ -16,6 +16,7 @@ jobs:
           fail_on_error: false
       - uses: articulate/actions-markdownlint@v1
         with:
+          config: .github/markdownlintconfig.rb
           files: 'docs/**/*.md'
 
   lint_python:
