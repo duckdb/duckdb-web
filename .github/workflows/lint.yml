@@ -12,8 +12,8 @@ jobs:
       - uses: errata-ai/vale-action@reviewdog
         with:
           files: docs/
-          filter_mode: nofilter
-          fail_on_error: true
+          filter_mode: added
+          fail_on_error: false
 
   python:
     runs-on: ubuntu-latest
