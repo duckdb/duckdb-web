@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 import argparse
 import pathlib
 import frontmatter
+import logging
 
 
 # Function to convert a path (a link from in a Markdown document) to a label.
@@ -125,7 +126,7 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_file_path):
         of.write(doc_body_with_new_headers)
 
 
-def add_to_documentation(docs_root_absolute_path, data, of, chapter_title, verbose):
+def add_to_documentation(docs_root_absolute_path, data, of, chapter_title):
     of.write(f"# {chapter_title}\n\n")
     chapter_json = [x for x in data["docsmenu"] if x["page"] == chapter_title][0]
     chapter_slug = chapter_json["slug"]
@@ -137,8 +138,7 @@ def add_to_documentation(docs_root_absolute_path, data, of, chapter_title, verbo
         main_slug = main_level_page.get("slug")
 
         if main_url:
-            if verbose:
-                print(f"- {main_url}")
+            logging.info(f"- {main_url}")
             concat(of, 2, docs_root_absolute_path, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
@@ -146,16 +146,14 @@ def add_to_documentation(docs_root_absolute_path, data, of, chapter_title, verbo
         else:
             continue
 
-        if verbose:
-            print(f"- {main_slug}")
+        logging.info(f"- {main_slug}")
         for subfolder_page in main_level_page["subfolderitems"]:
             subfolder_page_title = subfolder_page["page"]
             subfolder_url = subfolder_page.get("url")
             subfolder_slug = subfolder_page.get("slug")
 
             if subfolder_url:
-                if verbose:
-                    print(f"  - {main_slug}/{subfolder_url}")
+                logging.info(f"  - {main_slug}/{subfolder_url}")
                 concat(of, 3, docs_root_absolute_path, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
@@ -163,13 +161,11 @@ def add_to_documentation(docs_root_absolute_path, data, of, chapter_title, verbo
             else:
                 continue
 
-            if verbose:
-                print(f"  - {main_slug}/{subfolder_slug}")
+            logging.info(f"  - {main_slug}/{subfolder_slug}")
             for subsubfolder_page in subfolder_page["subsubfolderitems"]:
                 subsubfolder_url = subsubfolder_page.get("url")
 
-                if verbose:
-                    print(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
                 concat(of, 4, docs_root_absolute_path, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
@@ -179,6 +175,8 @@ parser.add_argument('--verbose', action='store_true')
 args = parser.parse_args()
 verbose = args.verbose
 
+if verbose:
+    logging.getLogger().setLevel(logging.INFO)
 
 # get version number
 with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") as metadata_file:
@@ -200,8 +198,8 @@ docs_root_absolute_path = pathlib.Path(docs_root).resolve()
 with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.md", "w") as of:
     data = json.load(menu_docs_file)
 
-    add_to_documentation(docs_root_absolute_path, data, of, "Documentation", verbose)
-    add_to_documentation(docs_root_absolute_path, data, of, "Guides", verbose)
+    add_to_documentation(docs_root_absolute_path, data, of, "Documentation")
+    add_to_documentation(docs_root_absolute_path, data, of, "Guides")
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
