@@ -47,6 +47,12 @@ def reduce_clutter_in_doc(doc_body):
     return doc_body
 
 
+def move_headers_down(doc_body):
+    # move headers h2-h4 down by 3 levels (to h5-h7)
+    extra_header_levels = 3*"#"
+    return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
+
+
 def doc_path_to_page_header_header_label(doc_file_full_path):
     return doc_file_full_path \
         .replace("../docs/", "") \
@@ -55,7 +61,67 @@ def doc_path_to_page_header_header_label(doc_file_full_path):
         .replace("/", ":")
 
 
-def concat(of, header_level, docs_root, doc_file_path):
+def adjust_links_in_doc_body(doc_body):
+    # replace blog post paths to the full URL
+    doc_body = re.sub(
+            r"\(/(20[0-9][0-9]/[0-9][0-9]/[0-9][0-9])/",
+            r"(https://duckdb.org/\1/",
+            doc_body
+        )
+
+    # use relative path for images
+    doc_body = doc_body.replace("](/images", "](../images")
+    return doc_body
+
+
+# change links to filenames to links to headers
+def change_link(doc_body, doc_file_path):
+    # match links but do not match image definitions (which start with a '!' character) within the link
+    matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body)
+    for match in matches:
+        original_link = match[1]
+        if original_link.startswith("http://") or original_link.startswith("https://"):
+            continue
+        link_parts = original_link.split("#")
+
+        # we step up one level to navigate from the Markdown file to the directory,
+        # then we concatenate the rest of the path
+        link_path = link_parts[0]
+
+        link_to_label = linked_path_to_label(doc_file_path, link_path)
+        # if there was an anchor target in the link (#some-item),
+        # we append it using double colons as separator (::some-item)
+        if len(link_parts) > 1:
+            link_to_label = link_to_label + "::" + link_parts[1]
+
+        old_link = f"{match[0]}({original_link})"
+        new_link = f"{match[0]}(#{link_to_label})"
+        doc_body = doc_body.replace(old_link, new_link)
+    return doc_body
+
+
+# add labels to sections within documents
+# e.g., the sql/statements/copy.md file's "Copy To" section gets the label {#sql:statements:copy::copy-to}
+def adjust_headers(doc_body, doc_header_label):
+    doc_body_with_new_headers = ""
+    for line in doc_body.splitlines():
+        matches = re.findall(r"^(#+)( ?)(.*)$", line)
+        if matches:
+            match = matches[0]
+            header_title = match[2]
+            header_label = header_title \
+                .lower() \
+                .replace(" ", "-")
+            header_label = re.sub("[^-_0-9a-z]", "", header_label)
+
+            new_header = f"{match[0]} {match[2]} {{#{doc_header_label}::{header_label}}}"
+            doc_body_with_new_headers += new_header + "\n"
+        else:
+            doc_body_with_new_headers += line + "\n"
+    return doc_body_with_new_headers
+
+
+def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
         return
@@ -72,73 +138,20 @@ def concat(of, header_level, docs_root, doc_file_path):
         doc_title = doc["title"]
         doc_body = doc.content
 
-        doc_body = reduce_clutter_in_doc(doc_body)
-
         # add header at the beginning of the item with an accompanying label
-        # e.g. for the guides/sql_features/ slug, the title is
-
+        # e.g., for the guides/sql_features/ slug, the title is
         doc_header_label = doc_path_to_page_header_header_label(doc_file_full_path)
         of.write(f"""{"#" * header_level} {doc_title} {{#{doc_header_label}}}\n""")
 
-        # move headers h2-h4 down by 3 levels (to h5-h7)
-        extra_header_levels = 3*"#"
-        doc_body = re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
+        # process document body
+        doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = move_headers_down(doc_body)
+        doc_body = adjust_links_in_doc_body(doc_body)
+        doc_body = adjust_headers(doc_body, doc_header_label)
+        doc_body = change_link(doc_body, doc_file_path)
 
-        # replace blog post paths to the full URL
-        doc_body = re.sub(
-                r"\(/(20[0-9][0-9]/[0-9][0-9]/[0-9][0-9])/",
-                r"(https://duckdb.org/\1/",
-                doc_body
-            )
-
-        # use relative path for images
-        doc_body = doc_body.replace(
-                "](/images",
-                "](../images"
-            )
-
-        # add labels to sections within documents
-        # e.g., the sql/statements/copy.md file's "Copy To" section gets the label {#sql:statements:copy::copy-to}
-        doc_body_with_new_headers = ""
-        for line in doc_body.splitlines():
-            matches = re.findall(r"^(#+)( ?)(.*)$", line)
-            if matches:
-                match = matches[0]
-                header_title = match[2]
-                header_label = header_title \
-                    .lower() \
-                    .replace(" ", "-")
-                header_label = re.sub("[^-_0-9a-z]", "", header_label)
-
-                new_header = f"{match[0]} {match[2]} {{#{doc_header_label}::{header_label}}}"
-                doc_body_with_new_headers += new_header + "\n"
-            else:
-                doc_body_with_new_headers += line + "\n"
-
-        # change links to filenames to links to headers
-        # do not match images (which have a '!' character) within the link
-        matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body_with_new_headers)
-        for match in matches:
-            original_link = match[1]
-            if original_link.startswith("http://") or original_link.startswith("https://"):
-                continue
-            link_parts = original_link.split("#")
-
-            # we step up one level to navigate from the Markdown file to the directory,
-            # then we concatenate the rest of the path
-            link_path = link_parts[0]
-
-            link_to_label = linked_path_to_label(doc_file_path, link_path)
-            # if there was an anchor target in the link (#some-item),
-            # we append it using double colons as separator (::some-item)
-            if len(link_parts) > 1:
-                link_to_label = link_to_label + "::" + link_parts[1]
-
-            old_link = f"{match[0]}({original_link})"
-            new_link = f"{match[0]}(#{link_to_label})"
-            doc_body_with_new_headers = doc_body_with_new_headers.replace(old_link, new_link)
-
-        of.write(doc_body_with_new_headers)
+        # write to output
+        of.write(doc_body)
 
 
 def add_to_documentation(docs_root, data, of, chapter_title):
@@ -157,10 +170,10 @@ def add_to_documentation(docs_root, data, of, chapter_title):
 
         if main_url:
             logging.info(f"- {main_url}")
-            concat(of, 2, docs_root, f"{chapter_slug}{main_url}")
+            concatenate_page_to_output(of, 2, docs_root, f"{chapter_slug}{main_url}")
 
         if main_slug:
-            # e.g. "## SQL Features {#guides:sql_features}"
+            # e.g., "## SQL Features {#guides:sql_features}"
             of.write(f"## {main_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}') }}}\n\n")
         else:
             continue
@@ -173,7 +186,7 @@ def add_to_documentation(docs_root, data, of, chapter_title):
 
             if subfolder_url:
                 logging.info(f"  - {main_slug}/{subfolder_url}")
-                concat(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
+                concatenate_page_to_output(of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
 
             if subfolder_slug:
                 of.write(f"### {subfolder_page_title} {{#{ linked_path_to_label(docs_index_file_path, f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
@@ -185,7 +198,7 @@ def add_to_documentation(docs_root, data, of, chapter_title):
                 subsubfolder_url = subsubfolder_page.get("url")
 
                 logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
-                concat(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                concatenate_page_to_output(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
 
