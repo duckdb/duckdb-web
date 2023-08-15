@@ -1,4 +1,3 @@
-
 import os
 import sqlite3
 
@@ -15,8 +14,11 @@ results = c.fetchall()
 con = sqlite3.connect(benchmarks_db)
 c = con.cursor()
 for result in results:
-	benchmark_name = result[0]
-	benchmark_description = result[1]
-	c.execute('UPDATE benchmarks SET description=? WHERE name=?', (benchmark_description, benchmark_name))
+    benchmark_name = result[0]
+    benchmark_description = result[1]
+    c.execute(
+        'UPDATE benchmarks SET description=? WHERE name=?',
+        (benchmark_description, benchmark_name),
+    )
 
 con.commit()
