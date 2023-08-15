@@ -31,11 +31,30 @@ def path_to_label(doc_file_path, link_relative_path):
     return label
 
 
+def reduce_clutter_in_doc(doc_body):
+    # drop "Pages in this Section" and "More" sections
+    doc_body = doc_body.replace("### Pages in this Section", "")
+    doc_body = doc_body.replace("### More", "")
+
+    # drop lines containing "---", pandoc interprets these as h2 headers
+    doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
+    return doc_body
+
+
+def doc_path_to_label(doc_file_full_path):
+    return doc_file_full_path \
+        .replace("../docs/", "") \
+        .replace(".md", "") \
+        .replace("../", "") \
+        .replace("/", ":")
+
+
 def concat(of, header_level, docs_root_absolute_path, docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
         return
     
+    # determine the full path
     doc_file_full_path = f"{docs_root}/{doc_file_path}.md"
     if not os.path.exists(doc_file_full_path):
         doc_file_full_path = f"{docs_root}/{doc_file_path}/index.md"
@@ -47,23 +66,11 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_file_path):
         doc_title = doc["title"]
         doc_body = doc.content
 
-        of.write(f"""{"#" * header_level} {doc_title}""")
-
-        # drop "Pages in this Section" and "More" sections
-        doc_body = doc_body.replace("### Pages in this Section", "")
-        doc_body = doc_body.replace("### More", "")
-
-        # drop lines containing "---", pandoc interprets these as h2 headers
-        doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
+        doc_body = reduce_clutter_in_doc(doc_body)
 
         # add path labels to headers at the beginning of the file
-        path_label = doc_file_full_path \
-            .replace("../docs/", "") \
-            .replace(".md", "") \
-            .replace("../", "") \
-            .replace("/", ":")
-        
-        of.write(f" {{#{path_label}}}\n")
+        doc_header_label = doc_path_to_label(doc_file_full_path)
+        of.write(f"""{"#" * header_level} {doc_title} {{#{doc_header_label}}}\n""")
 
         # move headers h2-h4 down by 3 levels (to h5-h7)
         extra_header_levels = 3*"#"
@@ -95,7 +102,7 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_file_path):
                     .replace(" ", "-")
                 header_label = re.sub("[^-_0-9a-z]", "", header_label)
 
-                new_header = f"{match[0]} {match[2]} {{#{path_label}::{header_label}}}"
+                new_header = f"{match[0]} {match[2]} {{#{doc_header_label}::{header_label}}}"
                 doc_body_with_new_headers += new_header + "\n"
             else:
                 doc_body_with_new_headers += line + "\n"
