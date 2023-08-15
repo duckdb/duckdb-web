@@ -3,6 +3,8 @@ layout: docu
 title: Combining Schemas
 ---
 
+<!-- markdownlint-disable MD036 -->
+
 ### Examples
 
 ```sql

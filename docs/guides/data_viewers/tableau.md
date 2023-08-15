@@ -103,7 +103,7 @@ $ /Applications/Tableau\ Desktop\ <year>.<quarter>.app/Contents/MacOS/Tableau -D
 
 You can also package this up with AppleScript by using the following script:
 
-```
+```tableau
 do shell script "\"/Applications/Tableau Desktop 2023.2.app/Contents/MacOS/Tableau\" -DDisableVerifyConnectorPluginSignature=true"
 quit
 ```
