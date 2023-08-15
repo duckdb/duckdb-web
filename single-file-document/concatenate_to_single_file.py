@@ -9,23 +9,37 @@ import pathlib
 import frontmatter
 
 
-def path_to_label(docs_root_absolute_path, path):
-    resolved_path = str(pathlib.Path(str(docs_root_absolute_path) + '/' + path).resolve().relative_to(docs_root_absolute_path))
-    resolved_path = re.sub(r"\.md$", "", resolved_path)
-    resolved_path = resolved_path.replace("/", ":")
-    return resolved_path
+# Function to convert a path (a link from in a Markdown document) to a label.
+# The conversion includes resolving the leading "../" navigation steps with the actual path, removing the ".md"
+# extension from the filename and replacing slash characters ("/") with colons (":") for the label.
+#
+# For example, for the inputs:
+# - doc_file_path="docs/sql/query_syntax/select.md"
+# - link_path="../expressions/star"
+#
+# the function will compute:
+# - resolved_path="docs/sql/expressions/star.md"
+#
+# which will turn into the LaTeX label:
+# - label="docs:sql:expressions:star"
+def path_to_label(doc_file_path, link_relative_path):
+    doc_dir_path = f"{doc_file_path}/.."
+    link_full_path = f"{doc_dir_path}/{link_relative_path}"
+    resolved_path = os.path.relpath(link_full_path)
+    label = re.sub(r"\.md$", "", str(resolved_path)).replace("/", ":")
+    return label
 
 
-def concat(of, header_level, docs_root_absolute_path, docs_root, doc_path):
+def concat(of, header_level, docs_root_absolute_path, docs_root, doc_file_path):
     # skip index files
-    if doc_path.endswith("index"):
+    if doc_file_path.endswith("index"):
         return
     
-    full_path = f"{docs_root}/{doc_path}.md"
-    if not os.path.exists(full_path):
-        full_path = f"{docs_root}/{doc_path}/index.md"
+    doc_file_full_path = f"{docs_root}/{doc_file_path}.md"
+    if not os.path.exists(doc_file_full_path):
+        doc_file_full_path = f"{docs_root}/{doc_file_path}/index.md"
 
-    with open(full_path) as doc_file:
+    with open(doc_file_full_path) as doc_file:
         # parse YAML header and add header to the beginning of the content based on the "title" attribute
         # with a corresponding label to allow cross-references to target this header
         doc = frontmatter.load(doc_file)
@@ -42,7 +56,7 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_path):
         doc_body = re.sub(r"^---$", "", doc_body, flags=re.MULTILINE)
 
         # add path labels to headers at the beginning of the file
-        path_label = full_path \
+        path_label = doc_file_full_path \
             .replace("../docs/", "") \
             .replace(".md", "") \
             .replace("../", "") \
@@ -96,8 +110,9 @@ def concat(of, header_level, docs_root_absolute_path, docs_root, doc_path):
 
             # we step up one level to navigate from the Markdown file to the directory,
             # then we concatenate the rest of the path
-            link_path = f"{doc_path}/../{link_parts[0]}"
-            link_to_label = path_to_label(docs_root_absolute_path, link_path)
+            link_path = link_parts[0]
+
+            link_to_label = path_to_label(doc_file_path, link_path)
             # if there was an anchor target in the link (#some-item),
             # we append it using double colons as separator (::some-item)
             if len(link_parts) > 1:
