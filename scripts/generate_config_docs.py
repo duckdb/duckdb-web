@@ -28,11 +28,9 @@ keywords = [
     'READ_WRITE',
 ]
 
-description_replacement = 'description'
+description_replacement = "description.replace('e.g. ', 'e.g., ')"
 for keyword in keywords:
-    description_replacement = (
-        f"replace({description_replacement}, '{keyword}', '**{keyword}**')"
-    )
+    description_replacement += f".replace('{keyword}', '**{keyword}**')"
 
 cmd = f'''
 .mode markdown
