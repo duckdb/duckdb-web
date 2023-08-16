@@ -89,7 +89,7 @@ module Jekyll
       Jekyll.logger.info(@tag_name, "Filtered down to #{filtered.size} functions with expression: #{filter_expression}")
       throw "No functions found for filter: #{filter_expression}" if filtered.empty?
 
-      puts generate_index(page, filtered)
+      Jekyll.logger.info(@tag_name, "Indexed functions: #{generate_index(page, filtered).size}")
 
       html = Html.new
       html.table {
