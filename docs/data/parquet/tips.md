@@ -18,6 +18,7 @@ SELECT * FROM read_parquet('flights*.parquet', union_by_name=True);
 ### Tips for writing Parquet files
 
 #### Enabling `per_thread_output`
+
 If the final number of parquet files is not important, writing one file per thread can significantly improve performance.
 Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
 

@@ -17,6 +17,7 @@ The detection works by operating on a sample of the file. The size of the sample
 
 
 ### Dialect Detection
+
 Dialect detection works by attempting to parse the samples using the set of considered values. The detected dialect is the dialect that has (1) a consistent number of columns for each row, and (2) the highest number of columns for each row.
 
 The following dialects are considered for automatic dialect detection.

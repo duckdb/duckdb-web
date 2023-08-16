@@ -36,4 +36,5 @@ SELECT '-infinity'::DATE, 'epoch'::DATE, 'infinity'::DATE;
 | -infinity | 1970-01-01 | infinity |
 
 ## Functions
+
 See [Date Functions](../../sql/functions/date).

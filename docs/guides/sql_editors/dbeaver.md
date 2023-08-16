@@ -35,6 +35,7 @@ title: DBeaver SQL IDE
 
 
 ## Alternative Driver Installation
+
 1. If not prompted to install the DuckDB driver when testing your connection, return to the "Connect to a database" dialog and click "Edit Driver Settings".  
 <img src="/images/guides/DBeaver_edit_driver_settings.png" alt="DBeaver Edit Driver Settings" title="DBeaver Edit Driver Settings"/>
 

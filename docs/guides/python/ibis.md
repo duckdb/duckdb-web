@@ -7,12 +7,14 @@ title: DuckDB with Ibis
 Ibis supports multiple database backends, including [DuckDB](https://ibis-project.org/backends/DuckDB/) by using [DuckDB's SQLAlchemy driver](https://github.com/Mause/duckdb_engine). Ibis expressions can also be combined with SQL statements.
 
 ## Installation
+
 To install only the DuckDB backend for Ibis, use the commands below. See the [Ibis DuckDB installation instructions](https://ibis-project.org/backends/DuckDB/) for a conda alternative. Note that DuckDB support was added in Ibis version 3.0.0.
 ```python
 pip install 'ibis-framework[duckdb]' # duckdb, sqlalchemy, duckdb_engine and more are installed as dependencies
 ```
 
 ## Querying DuckDB with Ibis
+
 The following example is loosely borrowed from the [Introduction to Ibis tutorial](https://nbviewer.org/github/ibis-project/ibis-examples/blob/main/tutorial/01-Introduction-to-Ibis.ipynb), which uses SQLite.
 First, we import Ibis, set it to interactive mode (just for demo purposes - it is faster to not use this option!), and then connect to an in-memory DuckDB instance. We can then inspect the tables in our database. 
 
@@ -101,6 +103,7 @@ FROM (SELECT t1.type_name AS type_name, t1.type_category AS type_category, t1.ty
 FROM duckdb_types AS t1 
 WHERE t1.type_category = CAST(? AS TEXT)) AS t0 ORDER BY t0.type_size
 ```
+
 ## Combining SQL and Ibis Expressions
 
 Ibis can also be used to combine SQL and relational operators. SQL can precede or follow Ibis relational operations. 

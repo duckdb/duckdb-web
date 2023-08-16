@@ -14,6 +14,7 @@ Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simp
 `UNION` values can be created with the [`UNION_VALUE(tag := expr)`](../functions/nested#union-functions) function or by [casting from a member type](#casting-to-unions).
 
 ### Example 
+
 ```sql
 -- Create a table with a union column
 CREATE TABLE tbl1(u UNION(num INT, str VARCHAR));
@@ -48,6 +49,7 @@ SELECT union_tag(u) FROM tbl1;
 ```
 
 ## Union casts
+
 Compared to other nested types, `UNION`s allow a set of implicit casts to facilitate unintrusive and natural usage when working with their members as "subtypes".
 However, these casts have been designed with two principles in mind, to avoid ambiguity and to avoid casts that could lead to loss of information. This prevents `UNION`s from being completely "transparent", while still allowing `UNION` types to have a "supertype" relationship with their members.
 
@@ -56,6 +58,7 @@ Thus `UNION` types can't be implicitly cast to any of their member types in gene
 The only exception to this is when casting a `UNION` to `VARCHAR`, in which case the members will all use their corresponding `VARCHAR` casts. Since everything can be cast to `VARCHAR`, this is "safe" in a sense. 
 
 ### Casting to unions
+
 A type can always be implicitly cast to a `UNION` if it can be implicitly cast to one of the `UNION` member types.
 
 - If there are multiple candidates, the built in implicit casting priority rules determine the target type. For example, a `FLOAT -> UNION(i INT, v VARCHAR)` cast will always cast the `FLOAT` to the `INT` member before `VARCHAR`.
@@ -64,6 +67,7 @@ A type can always be implicitly cast to a `UNION` if it can be implicitly cast t
 So how do we disambiguate if we want to create a `UNION` with multiple members of the same type? By using the `union_value` function, which takes a keyword argument specifying the tag. For example, `union_value(num := 2::INT)` will create a `UNION` with a single member of type `INT` with the tag `num`. This can then be used to disambiguate in an explicit (or implicit, read on below!) `UNION` to `UNION` cast, like `CAST(union_value(b := 2) AS UNION(a INT, b INT))`.
 
 ### Casting between unions
+
 `UNION` types can be cast between each other if the source type is a "subset" of the target type. In other words, all the tags in the source `UNION` must be present in the target `UNION`, and all the types of the matching tags must be implicitly castable between source and target. In essence, this means that `UNION` types are covariant with respect to their members.
 
 
@@ -77,8 +81,10 @@ So how do we disambiguate if we want to create a `UNION` with multiple members o
 
 
 ## Comparison and Sorting
+
 Since `UNION` types are implemented on top of `STRUCT` types internally, they can be used with all the comparison operators as well as in both `WHERE` and `HAVING` clauses with [the same semantics as `STRUCT`s](struct#comparison-operators). The "tag" is always stored as the first struct entry, which ensures that the `UNION` types are compared and ordered by "tag" first.
 
 ## Functions
+
 See [Nested Functions](../../sql/functions/nested#union-functions).
     

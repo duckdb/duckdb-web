@@ -83,6 +83,7 @@ This section describes functions and operators for examining and manipulating st
 
 
 ## Text Similarity Functions
+
 These functions are used to measure the similarity of two strings using various metrics.
 
 | Function | Description | Example | Result |

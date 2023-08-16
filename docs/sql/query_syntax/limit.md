@@ -30,4 +30,5 @@ LIMIT 5;
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>

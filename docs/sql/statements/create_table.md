@@ -6,6 +6,7 @@ railroad: statements/createtable.js
 The `CREATE TABLE` statement creates a table in the catalog.
 
 ### Examples
+
 ```sql
 -- create a table with two integer columns (i and j)
 CREATE TABLE t1(i INTEGER, j INTEGER);
@@ -22,6 +23,7 @@ CREATE TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
 -- we can use the FROM-first syntax to omit 'SELECT *'
 CREATE TABLE t1 AS FROM read_csv_auto ('path/file.csv');
 ```
+
 ### Temporary Tables
 
 Temporary tables can be created using a `CREATE TEMP TABLE` statement (see diagram below). 
@@ -158,4 +160,5 @@ CREATE TABLE t1(x FLOAT, two_x FLOAT GENERATED ALWAYS AS (2 * x) VIRTUAL)
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>

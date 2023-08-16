@@ -74,6 +74,7 @@ duckdb.sql('select my_func(42)')
 If only the parameter list types can be inferred, you'll need to pass in `None` as `argument_type_list`.
 
 ## Null Handling
+
 By default when functions receive a NULL value, this instantly returns NULL, as part of the default null handling.  
 When this is not desired, you need to explicitly set this parameter to `'special'`.
 

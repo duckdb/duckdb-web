@@ -79,6 +79,7 @@ See above for a list of extension names and how to pull the latest list of exten
 
 
 ## Loading an extension from local storage
+
 Extensions are stored in gzip format, so they must be unzipped prior to use. 
 There are many methods to decompress gzip. Here is a Python example:
 

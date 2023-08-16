@@ -37,9 +37,11 @@ SELECT * FROM read_parquet('dir/**/*.parquet');
 
 
 ### Multi-File Reads and Globs
+
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
+
 The read_parquet function can accept a list of filenames as the input parameter.
 
 ```sql
@@ -48,6 +50,7 @@ SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
 #### Glob Syntax
+
 Any file name input to the read_parquet function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
 
 |  Wildcard  |                        Description                        |
@@ -68,6 +71,7 @@ SELECT * FROM read_parquet('test/*.parquet');
 ```
 
 #### List of Globs
+
 The glob syntax and the list input parameter can be combined to scan files that meet one of multiple patterns.
 
 ```sql
@@ -93,6 +97,7 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True
 
 
 ### Glob function to find filenames
+
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
 It accepts one parameter: the path to search (which may include glob patterns). 
 

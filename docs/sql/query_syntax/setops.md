@@ -11,6 +11,7 @@ Traditional set operations unify queries **by column position**, and require the
 DuckDB also supports `UNION BY NAME`, which joins columns by name instead of by position. `UNION BY NAME` does not require the inputs to have the same number of columns. `NULL` values will be added in case of missing columns. 
 
 ## Examples
+
 ```sql
 -- the values [0..10) and [0..5)
 SELECT * FROM range(10) t1 UNION ALL SELECT * FROM range(5) t2;
@@ -25,9 +26,11 @@ SELECT 24 AS id UNION ALL BY NAME SELECT 'Amsterdam' as City;
 ```
 
 ## Syntax
+
 <div id="rrdiagram"></div>
 
 ## Example Table
+
 ```sql
 CREATE TABLE capitals(city VARCHAR, country VARCHAR);
 INSERT INTO capitals VALUES ('Amsterdam', 'NL'), ('Berlin', 'Germany');

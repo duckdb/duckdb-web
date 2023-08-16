@@ -6,6 +6,7 @@ railroad: statements/createsequence.js
 The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
 ### Examples
+
 Create an ascending sequence called serial, starting at 101:
 
 ```sql
@@ -38,6 +39,7 @@ INSERT INTO distributors VALUES (nextval('serial'), 'nothing');
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 `CREATE SEQUENCE` creates a new sequence number generator.

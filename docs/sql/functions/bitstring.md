@@ -6,6 +6,7 @@ This section describes functions and operators for examining and manipulating bi
 Bitstrings must be of equal length when performing the bitwise operands AND, OR and XOR. When bit shifting, the original length of the string is preserved.
 
 ## Bitstring Operators
+
 The table below shows the available mathematical operators for `BIT` type.
 
 | Operator | Description | Example | Result |
@@ -19,6 +20,7 @@ The table below shows the available mathematical operators for `BIT` type.
 
 
 ## Bitstring Functions
+
 The table below shows the available scalar functions for `BIT` type.
 
 | Function | Description | Example | Result |
@@ -33,6 +35,7 @@ The table below shows the available scalar functions for `BIT` type.
 | `set_bit(`*`bitstring`*`, `*`index`*`, `*`new_value`*`)` | Sets the nth bit in bitstring to newvalue; the first (leftmost) bit is indexed 0. Returns a new bitstring. | `set_bit('0110010'::BIT, 2, 0)` | `0100010` |
 
 ## Bitstring Aggregate Functions
+
 These aggregate functions are available for `BIT` type.
 
 | Function | Description | Example |
@@ -44,6 +47,7 @@ These aggregate functions are available for `BIT` type.
 | `bitstring_agg(arg, min, max)` |Returns a bitstring with bits set for each distinct value. | `bitstring_agg(A, 1, 42)` |
 
 ### Bitstring Aggregation
+
 The `BITSTRING_AGG` function takes any integer type as input and returns a bitstring with bits set for each distinct value. 
 The left-most bit represents the smallest value in the column and the right-most bit the maximum value. If possible, the min and max are retrieved from the column statistics. Otherwise, it is also possible to provide the min and max values.  
   

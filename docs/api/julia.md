@@ -35,6 +35,7 @@ print(results)
 ```
 
 ## Scanning DataFrames
+
 The DuckDB Julia package also provides support for querying Julia DataFrames. Note that the DataFrames are directly read by DuckDB - they are not inserted or copied into the database itself.
 
 If you wish to load data from a DataFrame into a DuckDB table you can run a `CREATE TABLE AS` or `INSERT INTO` query.
@@ -58,4 +59,5 @@ print(results)
 ```
 
 ## Original Julia Connector
+
 Credits to kimmolinna for the [original DuckDB Julia connector](https://github.com/kimmolinna/DuckDB.jl).

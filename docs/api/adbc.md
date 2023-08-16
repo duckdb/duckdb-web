@@ -10,10 +10,12 @@ DuckDB's ADBC driver currently supports version 0.5.1 of ADBC.
 Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.5.1/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
 
 ## Implemented Functionality
+
 The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition` and `StatementExecutePartitions` functions. Both of these functions exist to support systems that internally partition the query results, which does not apply to DuckDB.
 In this section, we will describe the main functions that exist in ADBC, along with the arguments they take and provide examples for each function.
 
 ### Database
+
 Set of functions that operate on a database.
 
 | Function Name | Description | Arguments | Example |
@@ -24,6 +26,7 @@ Set of functions that operate on a database.
 | `DatabaseRelease` | Destroy the database.| `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` | 
 
 ### Connection
+
 A set of functions that create and destroy a connection to interact with a database.
 
 | Function Name | Description | Arguments | Example |
@@ -51,6 +54,7 @@ A set of functions with transaction semantics for the connection. By default, al
 | `ConnectionRollback` | Rollback any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRollback(&adbc_connection, &adbc_error)` | 
 
 ### Statement
+
 Statements hold state related to query execution. They represent both one-off queries and prepared statements. They can be reused; however, doing so will invalidate prior result sets from that statement.
 
 The functions used to create, destroy, and set options for a statement:
@@ -77,6 +81,7 @@ Functions related to binding, used for bulk insertion or in prepared statements.
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |
 
 ## C++ Example
+
 We begin our example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
 
 ```cpp

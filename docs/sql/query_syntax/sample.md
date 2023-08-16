@@ -24,4 +24,5 @@ USING SAMPLE 10 ROWS;
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>

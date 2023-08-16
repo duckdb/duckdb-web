@@ -50,6 +50,7 @@ FROM monthly_sales;
     Can also show the quarterly example. -->
 
 ### UNPIVOT Manually
+
 The most typical `UNPIVOT` transformation is to take already pivoted data and re-stack it into a column each for the name and value.
 In this case, all months will be stacked into a `month` column and a `sales` column.
 
@@ -84,6 +85,7 @@ INTO
 
 
 ### UNPIVOT Dynamically using Columns Expression
+
 In many cases, the number of columns to unpivot is not easy to predetermine ahead of time. 
 In the case of this dataset, the query above would have to change each time a new month is added. 
 The [`columns` expression](../expressions/star#columns) can be used to select all columns that are not `empid` or `dept`. 
@@ -121,6 +123,7 @@ INTO
 
 
 ### UNPIVOT into multiple value columns
+
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
 To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter. 
@@ -150,6 +153,7 @@ UNPIVOT monthly_sales
 
 
 ### Using UNPIVOT within a SELECT statement
+
 The `UNPIVOT` statement may be included within a SELECT statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
 This allows for an `UNPIVOT` to be used alongside other SQL logic, as well as for multiple `UNPIVOT`s to be used in one query.
 
@@ -186,6 +190,7 @@ FROM (
 
 
 ### Internals
+
 Unpivoting is implemented entirely as rewrites into SQL queries. 
 Each `UNPIVOT` is implemented as set of `UNNEST` functions, operating on a list of the column names and a list of the column values.
 If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
@@ -237,12 +242,14 @@ This produces the same result as the initial example:
 
 
 ### Simplified Unpivot Full Syntax Diagram
+
 Below is the full syntax diagram of the `UNPIVOT` statement. 
 
 <div id="rrdiagram"></div>
 
 
 ## SQL Standard Unpivot Syntax
+
 The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be summarized as:
 ```sql
 FROM [dataset]
@@ -255,6 +262,7 @@ UNPIVOT [INCLUDE NULLS] (
 Note that only one column can be included in the `name-column-name` expression. 
 
 ### SQL Standard Unpivot manually
+
 To complete the basic `UNPIVOT` operation using the SQL standard syntax, only a few additions are needed.
 
 ```sql
@@ -286,6 +294,7 @@ FROM monthly_sales UNPIVOT (
 | 3     | cars        | Jun   | 600   |
 
 ### SQL Standard Unpivot Dynamically using Columns Expression
+
 The [`columns` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
 This will continue to work even if additional `month` columns are added to the dataset. 
 It produces the same result as the query above.
@@ -298,6 +307,7 @@ FROM monthly_sales UNPIVOT (
 ```
 
 ### SQL Standard UNPIVOT into multiple value columns
+
 The `UNPIVOT` statement has additional flexibility: more than 2 destination columns are supported. 
 This can be useful when the goal is to reduce the extent to which a dataset is pivoted, but not completely stack all pivoted columns.
 To demonstrate this, the query below will generate a dataset with a separate column for the number of each month within the quarter (month 1, 2, or 3), and a separate row for each quarter. 
@@ -331,6 +341,7 @@ UNPIVOT (
 
 
 ### SQL Standard Unpivot Full Syntax Diagram
+
 Below is the full syntax diagram of the SQL Standard version of the `UNPIVOT` statement. 
 
 <div id="rrdiagram2"></div>

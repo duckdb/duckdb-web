@@ -5,6 +5,7 @@ title: Time Functions
 This section describes functions and operators for examining and manipulating `TIME` values.
 
 ## Time Operators
+
 The table below shows the available mathematical operators for `TIME` types.
 
 | Operator | Description | Example | Result |
@@ -13,6 +14,7 @@ The table below shows the available mathematical operators for `TIME` types.
 | `-` | subtraction of an `INTERVAL` | `TIME '06:02:03' - INTERVAL 5 HOUR'` | 01:02:03 |
 
 ## Time Functions
+
 The table below shows the available scalar functions for `TIME` types.
 
 | Function | Description | Example | Result |

@@ -83,4 +83,5 @@ WHERE
 | pg_catalog  | format_pg_type  | 2             |
 
 ### Syntax
+
 <div id="rrdiagram"></div>

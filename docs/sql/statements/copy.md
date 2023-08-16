@@ -26,6 +26,7 @@ COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRES
 
 
 ### Copy From
+
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
 If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns
@@ -50,9 +51,11 @@ COPY lineitem FROM 'lineitem.json' ( FORMAT JSON, ARRAY TRUE );
 ```
 
 #### Syntax
+
 <div id="rrdiagram1"></div>
 
 ### Copy To
+
 `COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
@@ -73,6 +76,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
 ```
 
 #### Syntax
+
 <div id="rrdiagram2"></div>
 
 #### Copy Options

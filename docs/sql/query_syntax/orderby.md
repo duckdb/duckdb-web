@@ -14,6 +14,7 @@ The expressions may begin with either an arbitrary scalar expression (which coul
 Each expression can optionally be followed by an order modifier (`ASC` or `DESC`, default is `ASC`), and/or a `NULL` order modifier (`NULLS FIRST` or `NULLS LAST`, default is `NULLS LAST`).
 
 ### ORDER BY ALL
+
 The `ALL` keyword indicates that the output should be sorted by every column in order from left to right. 
 The direction of this sort may be modified using either `ORDER BY ALL ASC` or `ORDER BY ALL DESC` and/or `NULLS FIRST` or `NULLS LAST`.
 Note that `ALL` may not be used in combination with other expressions in the `ORDER BY` clause - it must be by itself.
@@ -75,6 +76,7 @@ ORDER BY city COLLATE DE;
 ```
 
 #### ORDER BY ALL Examples
+
 ```sql
 -- Order from left to right (by address, then by city, then by zip) in ascending order
 SELECT *
@@ -107,4 +109,5 @@ ORDER BY ALL DESC
 
 
 ### Syntax
+
 <div id="rrdiagram"></div>

@@ -68,6 +68,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `array_resize(`*`list`*`, `*`size`*`[, `*`value`*`])` | Alias for `list_resize`.                                                                                                                                                        | `array_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
 
 ## List Operators
+
 The following operators are supported for lists:
 
 | Operator | Description                                                                               | Example                    | Result          |
@@ -78,6 +79,7 @@ The following operators are supported for lists:
 | `\|\|`   | Alias for `list_concat`                                                                   | `[1,2,3] \|\| [4,5,6]`     | `[1,2,3,4,5,6]` |
 
 ## List Comprehension
+
 Python-style list comprehension can be used to compute expressions over elements in a list. For example:
 
 ```sql

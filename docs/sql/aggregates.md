@@ -5,6 +5,7 @@ railroad: expressions/aggregate.js
 ---
 
 ## Examples
+
 ```sql
 -- produce a single row containing the sum of the "amount" column
 SELECT SUM(amount) FROM sales;
@@ -21,6 +22,7 @@ SELECT LIST(region ORDER BY amount DESC) FROM sales;
 ```
 
 ## Syntax
+
 <div id="rrdiagram"></div>
 
 Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. As such, aggregates can only be used in the `SELECT` and `HAVING` clauses of a SQL query.
@@ -33,6 +35,7 @@ Usually this is not important, but there are some order-sensitive aggregates tha
 For order-insensitive aggregates, this clause is parsed and applied, which is inefficient, but still produces the same result.
 
 ## General Aggregate Functions
+
 The table below shows the available general aggregate functions.
 
 | Function | Description | Example | Alias(es) |
@@ -62,6 +65,7 @@ The table below shows the available general aggregate functions.
 | `sum(arg)` |Calculates the sum value for all tuples in arg. | `sum(A)` | - |
 
 ## Approximate Aggregates
+
 The table below shows the available approximate aggregate functions.
 
 | Function | Description | Example |
@@ -71,6 +75,7 @@ The table below shows the available approximate aggregate functions.
 | `reservoir_quantile(x,quantile,sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A,0.5,1024)` |
 
 ## Statistical Aggregates
+
 The table below shows the available statistical aggregate functions.
 
 | Function | Description | Formula | Alias |
@@ -101,6 +106,7 @@ The table below shows the available statistical aggregate functions.
 | `var_samp(x)` | Returns the sample variance of all input values. | `(SUM(x^2) - SUM(x)^2 / COUNT(x)) / (COUNT(x) - 1)` | `variance(arg,val)` |
 
 ## Ordered Set Aggregate Functions
+
 The table below shows the available "ordered set" aggregate functions.
 These functions are specified using the `WITHIN GROUP(ORDER BY sort_expression)` syntax,
 and they are converted to an equivalent aggregate function that takes the ordering expression

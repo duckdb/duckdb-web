@@ -8,6 +8,7 @@ settings can be changed later on using [PRAGMA statements](../../sql/pragmas) as
 should be created, filled with values and passed to `duckdb_open_ext`.
 
 ## **Example**
+
 ```c
 duckdb_database db;
 duckdb_config config;
@@ -36,6 +37,7 @@ duckdb_close(&db);
 ```
 
 ## **API Reference**
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_create_config">duckdb_create_config</a></span>(<span class="kt">duckdb_config</span> *<span class="k">out_config</span>);
 <span class="kt">size_t</span> <span class="nf"><a href="#duckdb_config_count">duckdb_config_count</a></span>();
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_get_config_flag">duckdb_get_config_flag</a></span>(<span class="kt">size_t</span> <span class="k">index</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="k">out_description</span>);
@@ -44,6 +46,7 @@ duckdb_close(&db);
 </code></pre></div></div>
 
 ### `duckdb_create_config`
+
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
 through `duckdb_open_ext`.
@@ -51,6 +54,7 @@ through `duckdb_open_ext`.
 This will always succeed unless there is a malloc failure.
 
 #### Syntax
+
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_create_config</span>(<span class="k">
 </span>  <span class="kt">duckdb_config</span> *<span class="k">out_config
@@ -58,6 +62,7 @@ This will always succeed unless there is a malloc failure.
 </code></pre></div></div>
 
 #### Parameters
+
 ---
 * `out_config`
 
@@ -70,12 +75,14 @@ The result configuration object.
 
 
 ### `duckdb_config_count`
+
 ---
 This returns the total amount of configuration options available for usage with `duckdb_get_config_flag`.
 
 This should not be called in a loop as it internally loops over all the options.
 
 #### Syntax
+
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="k">duckdb_config_count</span>(<span class="k">
 </span>  <span class="k">
@@ -83,6 +90,7 @@ This should not be called in a loop as it internally loops over all the options.
 </code></pre></div></div>
 
 #### Parameters
+
 ---
 * `returns`
 
@@ -92,6 +100,7 @@ The amount of config options available.
 
 
 ### `duckdb_get_config_flag`
+
 ---
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
 display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
@@ -99,6 +108,7 @@ display configuration options. This will succeed unless `index` is out of range 
 The result name or description MUST NOT be freed.
 
 #### Syntax
+
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_get_config_flag</span>(<span class="k">
 </span>  <span class="kt">size_t</span> <span class="k">index</span>,<span class="k">
@@ -108,6 +118,7 @@ The result name or description MUST NOT be freed.
 </code></pre></div></div>
 
 #### Parameters
+
 ---
 * `index`
 
@@ -126,6 +137,7 @@ A description of the configuration flag.
 
 
 ### `duckdb_set_config`
+
 ---
 Sets the specified option for the specified configuration. The configuration option is indicated by name.
 To obtain a list of config options, see `duckdb_get_config_flag`.
@@ -135,6 +147,7 @@ In the source code, configuration options are defined in `config.cpp`.
 This can fail if either the name is invalid, or if the value provided for the option is invalid.
 
 #### Syntax
+
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_set_config</span>(<span class="k">
 </span>  <span class="kt">duckdb_config</span> <span class="k">config</span>,<span class="k">
@@ -144,6 +157,7 @@ This can fail if either the name is invalid, or if the value provided for the op
 </code></pre></div></div>
 
 #### Parameters
+
 ---
 * `duckdb_config`
 
@@ -162,10 +176,12 @@ The value to set the configuration flag to.
 
 
 ### `duckdb_destroy_config`
+
 ---
 Destroys the specified configuration option and de-allocates all memory allocated for the object.
 
 #### Syntax
+
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_config</span>(<span class="k">
 </span>  <span class="kt">duckdb_config</span> *<span class="k">config
@@ -173,6 +189,7 @@ Destroys the specified configuration option and de-allocates all memory allocate
 </code></pre></div></div>
 
 #### Parameters
+
 ---
 * `config`
 

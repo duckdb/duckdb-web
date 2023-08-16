@@ -4,6 +4,7 @@ title: Querying Parquet Metadata
 ---
 
 ### Parquet Metadata
+
 The `parquet_metadata` function can be used to query the metadata contained within a Parquet file, which reveals various internal details of the Parquet file such as the statistics of the different columns. This can be useful for figuring out what kind of skipping is possible in Parquet files, or even to obtain a quick overview of what the different columns contain.
 
 ```sql
@@ -40,6 +41,7 @@ Below is a table of the columns returned by `parquet_metadata`.
 
 
 ### Parquet Schema
+
 The `parquet_schema` function can be used to query the internal schema contained within a Parquet file. Note that this is the schema as it is contained within the metadata of the Parquet file. If you want to figure out the column names and types contained within a Parquet file it is easier to use `DESCRIBE`.
 
 ```sql

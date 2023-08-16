@@ -4,6 +4,7 @@ title: UNNEST
 ---
 
 ## Examples
+
 ```sql
 -- unnest a list, generating 3 rows (1, 2, 3)
 SELECT UNNEST([1, 2, 3]);

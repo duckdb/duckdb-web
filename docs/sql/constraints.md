@@ -7,6 +7,7 @@ railroad: statements/constraints.js
 In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [create table statement](statements/create_table). In certain cases, constraints can also be added to a table using the [alter table statement](statements/alter_table), but this is not currently supported for all constraints.
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 #### Check

@@ -9,6 +9,7 @@ Note that this is all within a single Python process (see the [FAQ](/faq) for de
 Feel free to follow along in this [Google Collaboratory Notebook](https://colab.research.google.com/drive/190NB2m-LIfDcMamCY5lIzaD2OTMnYclB?usp=sharing).
 
 ## Setup
+
 First, import duckdb and several modules from the Python standard library. 
 Then connect to a file-backed DuckDB database and create an example table to store inserted data. 
 This table will track the name of the thread that completed the insert and automatically insert the timestamp when that insert occurred using the [`DEFAULT` expression](../../sql/statements/create_table#syntax).
@@ -28,6 +29,7 @@ duckdb_con.execute("""
 ```
 
 ## Reader and Writer Functions
+
 Next, define functions to be executed by the writer and reader threads. 
 Each thread must use the `.cursor()` method to create a thread-local connection to the same DuckDB file based on the original connection. 
 This approach also works with in-memory DuckDB databases.
@@ -59,6 +61,7 @@ def read_from_thread(duckdb_con):
 ```
 
 ## Create Threads
+
 We define how many writers and readers to use, and define a list to track all of the Threads that will be created.
 Then, create first writer and then reader Threads. 
 Next, shuffle them so that they will be kicked off in a random order to simulate simultaneous writers and readers.
@@ -86,6 +89,7 @@ random.shuffle(threads)
 ```
 
 ## Run Threads and Show Results
+
 Now, kick off all threads to run in parallel, then wait for all of them to finish before printing out the results. 
 Note that the timestamps of readers and writers are interspersed as expected due to the randomization.
 ```python

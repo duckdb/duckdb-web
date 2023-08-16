@@ -3,6 +3,7 @@ layout: docu
 title: Numeric Functions
 ---
 ## Numeric Operators
+
 The table below shows the available mathematical operators for numeric types.
 
 | Operator | Description | Example | Result |
@@ -30,6 +31,7 @@ The modulo, bitwise, and negation and factorial operators work only on integral 
 whereas the others are available for all numeric data types.
 
 ## Numeric Functions
+
 The table below shows the available mathematical functions.
 
 | Function | Description | Example | Result |
