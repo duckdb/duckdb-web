@@ -122,30 +122,7 @@
 
 			</div>
 			<div id="main_content_wrap">
-
 				{% include anchor_headings.html html=content %}
-
-				{% if page.benchmark_group and page.benchmark_group != "" and page.benchmark_group != nil %}
-				{% if page.benchmark_group == "log" %}
-				<div id="log-data">
-				</div>
-				<script src="{{ site.baseurl }}/js/benchmarks/log.js"></script>
-				{% else %}
-				<div id="benchmark-header">
-				</div>
-				<div id="benchmark-table">
-				</div>
-
-				<script>
-				var benchmark_group = '{{ page.benchmark_group }}';
-				</script>
-				{% if page.benchmark_group == "individual_results" %}
-				<script src="{{ site.baseurl }}/js/benchmarks/render_individual.js"></script>
-				{% else %}
-				<script src="{{ site.baseurl }}/js/benchmarks/render_group_table.js"></script>
-				{% endif %}
-				{% endif %}
-				{% endif %}
 			</div>
 
 			<div class="searchoverlay">
