@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   # Build job
-  build:
+  build_html:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -44,6 +44,34 @@ jobs:
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v2
 
+  build_pdf:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://pandoc/extra:3.1.1.0
+      options: --entrypoint=sh
+    defaults:
+      run:
+        working-directory: single-file-document
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        run: |
+          PYTHONUNBUFFERED=1
+          apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+          python3 -m ensurepip
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+      - name: Concatenate files
+        run: python3 concatenate_to_single_file.py
+      - name: Convert with pandoc
+        run: pandoc --defaults pandoc-configuration.yaml
+      - name: Move artifact
+        run: mkdir -p ../_site && mv duckdb-docs.pdf ../_site
+      - name: Upload artifact
+        # Automatically uploads an artifact from the './_site' directory by default
+        uses: actions/upload-pages-artifact@v2
+      
   # Deployment job
   deploy:
     environment:
@@ -51,7 +79,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     if: github.ref == 'refs/heads/master' && github.repository == 'duckdb/duckdb-web'
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build_html, build_pdf]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
