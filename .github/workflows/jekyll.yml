@@ -40,9 +40,10 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload HTML artifact
+        with:
+          name: html_artifact
+          path: _site
 
   build_pdf:
     runs-on: ubuntu-latest
@@ -67,11 +68,31 @@ jobs:
       - name: Convert with pandoc
         run: pandoc --defaults pandoc-configuration.yaml
       - name: Move artifact
-        run: mkdir -p ../_site && mv duckdb-docs.pdf ../_site
-      - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
+        run: |
+          mkdir -p ../_pdf
+          mv duckdb-docs.pdf ../_pdf
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pdf_artifact
+          path: _pdf
+
+  package_into_a_single_artifact:
+    runs-on: ubuntu-latest
+    needs: [build_html, build_pdf]
+    steps:
+      # download both the html and the pdf artifacts into the _site directory
+      - uses: actions/download-artifact@v3
+        with:
+          name: html_artifact
+          path: _site
+      - uses: actions/download-artifact@v3
+        with:
+          name: pdf_artifact
+          path: _site
+      - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v2
-      
+
   # Deployment job
   deploy:
     environment:
@@ -79,7 +100,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     if: github.ref == 'refs/heads/master' && github.repository == 'duckdb/duckdb-web'
     runs-on: ubuntu-latest
-    needs: [build_html, build_pdf]
+    needs: package_into_a_single_artifact
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
