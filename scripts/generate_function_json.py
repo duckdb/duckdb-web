@@ -27,9 +27,9 @@ def get_result(example: str) -> str:
                 '-c',
                 'LOAD icu;',
                 '-c',
-                f'SELECT {example.strip(";")} AS result'
+                f'SELECT {example.strip(";")} AS result',
             ],
-            stderr=PIPE
+            stderr=PIPE,
         )
         rows = json.loads(out.splitlines()[-1])
         return rows[0]['result']
@@ -52,11 +52,12 @@ def main():
                     'parameters': (
                         [x.strip() for x in function['parameters'].split(',')]
                         if function.get('parameters')
-                        else
-                        []
+                        else []
                     ),
                     'category': category,
-                    'result': get_result(function['example']) if function.get('example') else None
+                    'result': get_result(function['example'])
+                    if function.get('example')
+                    else None,
                 }
                 for function in json.load(fh)
             ]
@@ -64,11 +65,8 @@ def main():
     functions = sorted(functions, key=lambda fn: fn['name'])
 
     with open('docs/functions.json', 'w') as fh:
-        json.dump(
-            functions,
-            fh,
-            indent=2
-        )
+        json.dump(functions, fh, indent=2)
+
 
 if __name__ == '__main__':
     main()
