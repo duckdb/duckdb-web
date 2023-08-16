@@ -6,31 +6,33 @@ import csv
 import io
 
 if len(sys.argv) < 2:
-	print("Expected usage: python3 scripts/generate_docs.py /path/to/duckdb")
-	exit(1)
+    print("Expected usage: python3 scripts/generate_docs.py /path/to/duckdb")
+    exit(1)
 
 db_path = sys.argv[1]
 
 keywords = [
-	'STANDARD',
-	'DETAILED',
-	'ALL',
-	'OPTIMIZED_ONLY',
-	'PHYSICAL_ONLY',
-	'JSON',
-	'QUERY_TREE',
-	'ASC',
-	'DESC',
-	'NULLS_FIRST',
-	'NULLS_LAST',
-	'AUTOMATIC',
-	'READ_ONLY',
-	'READ_WRITE'
+    'STANDARD',
+    'DETAILED',
+    'ALL',
+    'OPTIMIZED_ONLY',
+    'PHYSICAL_ONLY',
+    'JSON',
+    'QUERY_TREE',
+    'ASC',
+    'DESC',
+    'NULLS_FIRST',
+    'NULLS_LAST',
+    'AUTOMATIC',
+    'READ_ONLY',
+    'READ_WRITE',
 ]
 
 description_replacement = 'description'
 for keyword in keywords:
-	description_replacement = f"replace({description_replacement}, '{keyword}', '**{keyword}**')"
+    description_replacement = (
+        f"replace({description_replacement}, '{keyword}', '**{keyword}**')"
+    )
 
 cmd = f'''
 .mode markdown
@@ -57,25 +59,30 @@ ORDER BY 1
 '''
 
 
-res = subprocess.run(db_path, input=bytearray(cmd, 'utf8'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+res = subprocess.run(
+    db_path,
+    input=bytearray(cmd, 'utf8'),
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+)
 stdout = res.stdout.decode('utf8').strip()
 stderr = res.stderr.decode('utf8').strip()
 
 if len(stderr) != 0:
-	print("Failed to run command " + cmd)
-	print(stdout)
-	print(stderr)
-	exit(1)
+    print("Failed to run command " + cmd)
+    print(stdout)
+    print(stderr)
+    exit(1)
 
 option_split = '## **Configuration Reference**'
 doc_file = 'docs/sql/configuration.md'
 
 with open(doc_file, 'r') as f:
-	text = f.read()
+    text = f.read()
 
 if option_split not in text:
-	print("Could not find " + option_split)
-	exit(1)
+    print("Could not find " + option_split)
+    exit(1)
 
 text = text.split(option_split)[0]
 
@@ -86,4 +93,4 @@ text += '\n\n' + stdout + '\n'
 text = text.replace('**QUERY_TREE**_OPTIMIZER', '**QUERY_TREE_OPTIMIZER**')
 
 with open(doc_file, 'w+') as f:
-	f.write(text)
+    f.write(text)

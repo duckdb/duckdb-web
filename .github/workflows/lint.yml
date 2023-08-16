@@ -2,7 +2,7 @@ name: Lint
 on: [push, pull_request]
 
 jobs:
-  lint_markdown:
+  markdown:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,3 +18,14 @@ jobs:
         with:
           config: .markdownlint.jsonc
           files: 'docs/**/*.md'
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: psf/black@stable
+      with:
+        options: "--check --skip-string-normalization --verbose --diff --color"
+        src: "./scripts"
+        version: "23.7.0"
+
