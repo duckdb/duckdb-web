@@ -5,6 +5,7 @@ title: Date Functions
 This section describes functions and operators for examining and manipulating date values.
 
 ## Date Operators
+
 The table below shows the available mathematical operators for `DATE` types.
 
 | Operator | Description | Example | Result |
@@ -19,6 +20,7 @@ The table below shows the available mathematical operators for `DATE` types.
 Adding to or subtracting from [infinite values](../../sql/data_types/date#special-values) produces the same infinite value.
 
 ## Date Functions
+
 The table below shows the available functions for `DATE` types.
 Dates can also be manipulated with the [timestamp functions](../../sql/functions/timestamp) through type promotion.
 

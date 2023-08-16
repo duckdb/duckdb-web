@@ -5,10 +5,12 @@ title: Pragmas
 The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
 ## List of supported PRAGMA statements
+
 Below is a list of supported `PRAGMA` statements.
 
 
 ### database_list, show_tables, show_tables_expanded, table_info, show, functions
+
 ```sql
 -- List all databases, usually one
 PRAGMA database_list;
@@ -37,6 +39,7 @@ pk BOOLEAN          -- part of the primary key or not
 ```
 
 ### memory_limit, threads
+
 ```sql
 -- set the memory limit
 PRAGMA memory_limit='1GB';
@@ -45,6 +48,7 @@ PRAGMA threads=4;
 ```
 
 ### database_size
+
 ```sql
 -- get the file and memory size of each database
 PRAGMA database_size;
@@ -66,6 +70,7 @@ memory_limit VARCHAR   -- maximum memory allowed for the database
 ```
 
 ### collations, default_collation
+
 ```sql
 -- list all available collations
 PRAGMA collations;
@@ -75,6 +80,7 @@ PRAGMA default_collation='nocase';
 
 
 ### default_null_order, default_order
+
 ```sql
 -- set the ordering for NULLs to be either NULLS FIRST or NULLS LAST
 PRAGMA default_null_order='NULLS LAST';
@@ -83,6 +89,7 @@ PRAGMA default_order='DESCENDING';
 ```
 
 ### version
+
 ```sql
 -- show DuckDB version
 PRAGMA version;
@@ -90,6 +97,7 @@ CALL pragma_version();
 ```
 
 ### platform
+
 `platform` returns an identifier for the platform the current DuckDB executable has been compiled for.
 This matches the platform_name as described [on the extension loading explainer](../extensions/overview#downloading-extensions-directly-from-s3).
 ```sql
@@ -99,6 +107,7 @@ CALL pragma_platform();
 ```
 
 ### enable_progress_bar, disable_progress_bar, enable_profiling, disable_profiling, profiling_output
+
 ```sql
 -- Show progress bar when running queries
 PRAGMA enable_progress_bar;
@@ -152,6 +161,7 @@ The printing of profiling information can be disabled again using *disable_profi
 By default, profiling information is printed to the console. However, if you prefer to write the profiling information to a file the `PRAGMA` **profiling_output** can be used to write to a specified file. **Note that the file contents will be overwritten for every new query that is issued, hence the file will only contain the profiling information of the last query that is run.**
 
 ### disable_optimizer, enable_optimizer
+
 ```sql
 -- disables the query optimizer
 PRAGMA disable_optimizer;
@@ -160,6 +170,7 @@ PRAGMA enable_optimizer;
 ```
 
 ### log_query_path, explain_output, enable_verification, disable_verification, verify_parallelism, disable_verify_parallelism
+
 ```sql
 -- Set a path for query logging
 PRAGMA log_query_path='/tmp/duckdb_log/';
@@ -182,9 +193,11 @@ PRAGMA force_index_join;
 These are `PRAGMA`s mostly used for development and internal testing.
 
 ### create_fts_index, drop_fts_index
+
 Only available when the FTS extension is built, [documented here](../extensions/full_text_search).
 
 ### verify_external, disable_verify_external
+
 ```sql
 -- Enable verification of external operators
 PRAGMA verify_external;
@@ -193,6 +206,7 @@ PRAGMA disable_verify_external;
 ```
 
 ### verify_serializer, disable_verify_serializer
+
 ```sql
 -- Enable verification of round-trip capabilities for supported Logical Plans
 PRAGMA verify_serializer;
@@ -201,6 +215,7 @@ PRAGMA disable_verify_serializer;
 ```
 
 ### enable_object_cache, disable_object_cache
+
 ```sql
 -- Enable caching of objects for e.g., Parquet metadata
 PRAGMA enable_object_cache;
@@ -209,12 +224,14 @@ PRAGMA disable_object_cache;
 ```
 
 ### force_checkpoint
+
 ```sql
 -- When CHECKPOINT is called when no changes are made, force a CHECKPOINT regardless.
 PRAGMA force_checkpoint;
 ```
 
 ### enable_print_progress_bar, disable_print_progress_bar
+
 ```sql
 -- Enable printing of the progress bar, if it's enabled
 PRAGMA enable_print_progress_bar;
@@ -223,6 +240,7 @@ PRAGMA disable_print_progress_bar;
 ```
 
 ### enable_checkpoint_on_shutdown, disable_checkpoint_on_shutdown
+
 ```sql
 -- Run a CHECKPOINT on successful shutdown and delete the WAL, to leave only a single database file behind
 PRAGMA enable_checkpoint_on_shutdown;
@@ -231,6 +249,7 @@ PRAGMA disable_checkpoint_on_shutdown;
 ```
 
 ### temp directory for spilling data to disk -- defaults to .tmp
+
 ```sql
 PRAGMA temp_directory='/path/to/temp.tmp'
 ```

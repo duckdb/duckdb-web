@@ -7,6 +7,7 @@ railroad: statements/attach.js
 The `ATTACH` statement adds a new database file to the catalog that can be read from and written to.
 
 ### Examples
+
 ```sql
 -- attach the database "file.db" with the alias inferred from the name ("file")
 ATTACH 'file.db';
@@ -27,16 +28,19 @@ USE file;
 ```
 
 ### Syntax
+
 <div id="rrdiagram1"></div>
 
 `ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files. 
 
 ### Detach
+
 <div id="rrdiagram2"></div>
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
 
 ### Name Qualification
+
 The fully qualified name of catalog objects contains the *catalog*, the *schema* and the *name* of the object. For example:
 
 ```sql
@@ -88,6 +92,7 @@ CREATE TABLE new_db.tbl(i INTEGER);
 ```
 
 ### Transactional Semantics
+
 When running queries on multiple databases, the system opens separate transactions per database. The transactions are started *lazily* by default - when a given database is referenced for the first time in a query, a transaction for that database will be started. `SET immediate_transaction_mode=true` can be toggled to change this behavior to eagerly start transactions in all attached databases instead.
 
 While multiple transactions can be active at a time - the system only supports *writing* to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:

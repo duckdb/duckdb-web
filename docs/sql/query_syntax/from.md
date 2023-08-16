@@ -28,6 +28,7 @@ SELECT * FROM table_name TABLESAMPLE 10%;
 -- select a sample of 10 rows from a table
 SELECT * FROM table_name TABLESAMPLE 10 ROWS;
 ```
+
 ### Joins
 
 Joins are a fundamental relational operation used to connect two tables or relations horizontally.
@@ -189,4 +190,5 @@ FROM trades t ASOF LEFT JOIN prices p USING (symbol, when)
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>

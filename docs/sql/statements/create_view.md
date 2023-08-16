@@ -6,6 +6,7 @@ railroad: statements/createview.js
 The `CREATE VIEW` statement defines a new view in the catalog.
 
 ### Examples
+
 ```sql
 -- create a simple view
 CREATE VIEW v1 AS SELECT * FROM tbl;
@@ -16,6 +17,7 @@ CREATE VIEW v1(a) AS SELECT 42;
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 `CREATE VIEW` defines a view of a query. The view is not physically materialized. Instead, the query is run every time the view is referenced in a query.

@@ -4,6 +4,7 @@ title: Data Ingestion
 ---
 
 ## CSV Files
+
 CSV files can be read using the `read_csv` function, called either from within Python or directly from within SQL. By default, the `read_csv` function attempts to auto-detect the CSV settings by sampling from the provided file. 
 
 ```python
@@ -27,6 +28,7 @@ duckdb.sql("SELECT * FROM read_csv_auto('example.csv')")
 See the [CSV Loading](../../data/csv) page for more information.
 
 ## Parquet Files
+
 Parquet files can be read using the `read_parquet` function, called either from within Python or directly from within SQL.
 
 ```python
@@ -44,6 +46,7 @@ duckdb.sql("SELECT * FROM read_parquet('example.parquet')")
 See the [Parquet Loading](../../data/parquet) page for more information.
 
 ## JSON Files
+
 JSON files can be read using the `read_json` function, called either from within Python or directly from within SQL. By default, the `read_json` function will automatically detect if a file contains newline-delimited JSON or regular JSON, and will detect the schema of the objects stored within the JSON file.
 
 ```python

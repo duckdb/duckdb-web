@@ -11,6 +11,7 @@ For a table macro, the syntax is similar to a scalar macro except `AS` is replac
 If a `MACRO` is temporary, it is only usable within the same database connection and is deleted when the connection is closed.
 
 ### Examples
+
 ```sql
 -- create a macro that adds two expressions (a and b)
 CREATE MACRO add(a, b) AS a + b;
@@ -42,6 +43,7 @@ CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value,col2_value) AS TABLE
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 

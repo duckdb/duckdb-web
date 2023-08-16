@@ -69,6 +69,7 @@ For now, it is possible to set the DSN and the database file path associated wit
 
 
 ## More Detailed Windows Setup
+
 The ODBC setup on Windows is based on registry keys (see [Registry Entries for ODBC Components
 ](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15)).
 The ODBC entries can be placed at the current user registry key (`HKCU`) or the system registry key (`HKLM`).

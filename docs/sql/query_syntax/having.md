@@ -24,4 +24,5 @@ HAVING AVG(income) > 2 * MEDIAN(income);
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>

@@ -7,6 +7,7 @@ redirect_from:
 ---
 DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
 
+<!-- markdownlint-disable-next-line -->
 {% include iframe.html src="https://shell.duckdb.org" %}
 
 DuckDB-Wasm offers a layered API, it can be embedded as a [JavaScript + WebAssembly library](https://www.npmjs.com/package/@duckdb/duckdb-wasm), as a [Web shell](https://www.npmjs.com/package/@duckdb/duckdb-wasm-shell), or [built from source](https://github.com/duckdb/duckdb-wasm) according to your needs.

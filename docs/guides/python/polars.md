@@ -13,6 +13,7 @@ pip install -U 'polars[pyarrow]'
 ```
 
 ## Polars to DuckDB
+
 DuckDB can natively query Polars DataFrames by referring to the name of Polars DataFrames as they exist in the current scope.
 
 ```python
@@ -31,6 +32,7 @@ duckdb.sql('SELECT * FROM df').show()
 ```
 
 ## DuckDB to Polars
+
 DuckDB can output results as Polars DataFrames using the `.pl()` result-conversion method.
 
 ```python

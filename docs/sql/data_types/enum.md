@@ -13,6 +13,7 @@ The `ENUM` type represents a dictionary data structure with all possible unique 
 
 
 ### Enum Definition
+
 Enum types are created from either a hardcoded set of values or from a select statement that returns a single column of varchars. The set of values in the select statement will be deduplicated, but if the enum is created from a hardcoded set there may not be any duplicates.
 ```sql
 -- Create enum using hardcoded values
@@ -54,6 +55,7 @@ SELECT enum_range(NULL::birds) AS my_enum_range;
 | [duck, goose] |
 
 ### Enum Usage
+
 After an enum has been created, it can be used anywhere a standard built-in type is used. For example, we can create a table with a column that references the enum.
 ```sql
 -- Creates a table person, with attributes name (string type) and current_mood (mood type)
@@ -85,6 +87,7 @@ COPY person FROM 'path/to/file.csv' (AUTO_DETECT TRUE);
 ```
 
 ### Enum Vs. Strings
+
 DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for `ENUM` columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different `ENUM` columns, or an `ENUM` and a `VARCHAR` column.
 
 For example:
@@ -118,6 +121,7 @@ SELECT * FROM person_2 where current_mood = past_mood;
 
 
 ### Enum Removal
+
 Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command:
 ```sql
 DROP TYPE ${enum_name}

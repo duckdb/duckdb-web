@@ -31,6 +31,7 @@ they are always available.
 | `transaction_timestamp()` | Current date and time (start of current transaction) | `transaction_timestamp()` | `2022-10-08 12:44:46.122-07`|
 
 ## Timestamp With Time Zone Strings
+
 With no time zone extension loaded, `TIMESTAMPTZ` values will be cast to and from strings
 using offset notation.
 This will let you specify an instant correctly without access to time zone information.
@@ -50,6 +51,7 @@ SELECT '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
 ```
 
 ## ICU Timestamp With Time Zone Operators
+
 The table below shows the available mathematical operators for `TIMESTAMP WITH TIME ZONE` values
 provided by the ICU extension.
 
@@ -62,6 +64,7 @@ provided by the ICU extension.
 Adding to or subtracting from [infinite values](../../sql/data_types/timestamp#special-values) produces the same infinite value.
 
 ## ICU Timestamp With Time Zone Functions
+
 The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME ZONE` values.
 
 | Function | Description | Example | Result |
@@ -95,6 +98,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 There are also dedicated extraction functions to get the [subfields](../../sql/functions/datepart).
 
 ## ICU Timestamp Table Functions
+
 The table below shows the available table functions for `TIMESTAMP WITH TIME ZONE` types.
 
 | Function | Description | Example |
@@ -105,6 +109,7 @@ The table below shows the available table functions for `TIMESTAMP WITH TIME ZON
 Infinite values are not allowed as table function bounds.
 
 ## ICU Timestamp Without Time Zone Functions
+
 The table below shows the ICU provided scalar functions that operate on plain `TIMESTAMP` values.
 These functions assume that the `TIMESTAMP` is a "local timestamp".
 

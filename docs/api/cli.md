@@ -3,6 +3,7 @@ layout: docu
 title: CLI API
 ---
 ## Installation
+
 The DuckDB CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](../installation/index) under the CLI tab, or download the version for your environment from the [DuckDB GitHub releases page](https://github.com/duckdb/duckdb/releases/) (in the "Assets" section).
 
 For pre-release versions, you may compile from source, or download the executable file that is produced from GitHub Actions:
@@ -14,6 +15,7 @@ The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific
 
 
 ## Getting Started
+
 Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead. To see additional command line options to use when starting the CLI, use the command `duckdb --help`.
 By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
 
@@ -50,6 +52,7 @@ The CLI supports all of DuckDB's rich SQL syntax including `SELECT`, `CREATE`, a
 To exit the CLI, press `Ctrl`-`D` if your platform supports it. Otherwise press `Ctrl`-`C`. If using a persistent database, it will automatically checkpoint (save the latest edits to disk) and close. This will remove the .WAL file (the Write-Ahead-Log) and consolidate all of your data into the single file database.
 
 ## Special Commands (Dot Commands)
+
 In addition to SQL syntax, special dot commands may be entered that are specific to the CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command:
 
 ```text
@@ -119,6 +122,7 @@ D .help sh
 
 
 ## Syntax Highlighting
+
 By default the shell includes support for syntax highlighting. Syntax highlighting can be disabled using the `.highlight off` command.
 
 The colors of the syntax highlighting can also be configured using the following commands.
@@ -135,6 +139,7 @@ Error: Expected usage: .constantcode [terminal_code]
 ```
 
 ## Auto-Complete
+
 The shell offers context-aware auto-complete of SQL queries. Auto-complete is triggered by pressing the tab character. The shell auto-completes four different groups: (1) keywords, (2) table names + table functions, (3) column names + scalar functions, and (4) file names. The shell looks at the position in the SQL statement to determine which of these auto-completions to trigger. For example:
 
 ```sql
@@ -153,6 +158,7 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 ```
 
 ## Output Formats
+
 The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
 
 |    mode    |                  description                 |
@@ -216,6 +222,7 @@ col_1|col_2
 ```
 
 ## Prepared Statements
+
 The DuckDB CLI supports executing prepared statements in addition to normal `SELECT` statements. To create a prepared
 statement, use the `PREPARE` statement
 ```sql
@@ -227,6 +234,7 @@ D EXECUTE S1(42, 101);
 ```
 
 ## Querying the Database Schema
+
 All DuckDB clients support [querying the database schema with SQL](../sql/information_schema), but the CLI has additional dot commands that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../sql/functions/patternmatching#like).
 
@@ -261,6 +269,7 @@ CREATE TABLE walkers(animal VARCHAR);;
 ```
 
 ## Opening Database Files
+
 In addition to connecting to a database when opening the CLI, a new database connection can be made by using the `.open` command. If no additional parameters are supplied, a new in-memory database connection is created. This database will not be persisted when the CLI connection is closed.
 
 ```text
@@ -337,6 +346,7 @@ The results then open in the default text file editor of the system, for example
 <img src="/images/cli_docs_output_to_text_editor.jpg" alt="cli_docs_output_to_text_editor" title="Output to text editor" style="width:293px;"/>
 
 ## Import Data from CSV
+
 DuckDB supports [SQL syntax to directly query or import CSV files](../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the csv file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv_auto` examples in the import docs](../data/csv).
 
 In this example, a CSV file is generated by changing to CSV mode and setting an output file location:
@@ -361,6 +371,7 @@ D .import import_example.csv test_table --skip 1 --csv
 ```
 
 ## Reading SQL From a File
+
 The DuckDB CLI can read both SQL commands and dot commands from an external file instead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.
 
 The `.read` command requires only one argument: the path to the file containing the SQL and/or commands to execute. After running the commands in the file, control will revert back to the terminal. Output from the execution of that file is governed by the same `.output` and `.once` commands that have been discussed previously. This allows the output to be displayed back to the terminal, as in the first example below, or out to another file, as in the second example.
@@ -488,6 +499,7 @@ To execute a command with SQL text passed in directly from the command line, cal
 ```
 
 ## Loading Extensions
+
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
 ```text

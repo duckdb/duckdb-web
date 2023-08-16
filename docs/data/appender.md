@@ -33,6 +33,7 @@ for performance reasons. That means that, while appending, the rows might not be
 
 
 ### Date, Time and Timestamps
+
 While numbers and strings are rather self-explanatory, dates, times and timestamps require some explanation. They can be directly appended using the methods provided by `duckdb::Date`, `duckdb::Time` or `duckdb::Timestamp`. They can also be appended using the internal `duckdb::Value` type, however, this adds some additional overheads and should be avoided if possible.
 
 Below is a short example:

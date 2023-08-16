@@ -7,6 +7,7 @@ The `date_part` and `date_diff` and `date_trunc` functions can be used to manipu
 The fields are specified as strings that contain the part name of the field.
 
 ## Part Specifiers
+
 Below is a full list of all available date part specifiers.
 The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
 
@@ -47,6 +48,7 @@ Note that the time zone parts are all zero unless a time zone plugin such as ICU
 has been installed to support `TIMESTAMP WITH TIME ZONE`.
 
 ### Part Functions
+
 There are dedicated extraction functions to get certain subfields:
 
 | Function | Description | Example | Result |

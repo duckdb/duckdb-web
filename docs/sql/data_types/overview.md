@@ -4,6 +4,7 @@ title: Data Types
 blurb: The table below shows all the built-in general-purpose data types.
 ---
 ## General-Purpose Data Types
+
 The table below shows all the built-in general-purpose data types. The alternatives listed in the aliases column can be used to refer to these types as well, however, note that the aliases are not part of the SQL standard and hence might not be accepted by other database engines.
 
 | Name | Aliases | Description |
@@ -32,6 +33,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
 ## Nested / Composite Types
+
 DuckDB supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Each supports different use cases and has a different structure. 
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
@@ -53,4 +55,5 @@ SELECT {'test': [map([1, 5], [42.1, 45]), map([1, 5], [42.1, 45])]};
 -- A list of unions
 SELECT [union_value(num := 2), union_value(str := 'ABC')::UNION(str VARCHAR, num INTEGER)];
 ```
+
 ## Links to Detailed Documentation

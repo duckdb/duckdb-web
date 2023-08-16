@@ -6,6 +6,7 @@ railroad: statements/update.js
 The `UPDATE` statement modifies the values of rows in a table.
 
 ### Examples
+
 ```sql
 -- for every row where "i" is NULL, set the value to 0 instead
 UPDATE tbl SET i=0 WHERE i IS NULL;
@@ -14,11 +15,13 @@ UPDATE tbl SET i=1, j = 2;
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 `UPDATE` changes the values of the specified columns in all rows that satisfy the condition. Only the columns to be modified need be mentioned in the `SET` clause; columns not explicitly modified retain their previous values.
 
 ### Update from Other Table
+
 A table can be updated based upon values from another table. This can be done by specifying a table in a `FROM` clause, or using a sub-select statement. Both approaches have the benefit of completing the `UPDATE` operation in bulk for increased performance.
 
 ```sql
@@ -65,6 +68,7 @@ SELECT * FROM original;
 | 2   | new value 2 |
 
 ### Update from Same Table
+
 The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.
 In this example `as true_original` and `as new` are both required. 
 
@@ -79,4 +83,5 @@ UPDATE original as true_original
 ```
 
 ### Upsert (Insert or Update)
+
 See the [Insert documentation](insert#on-conflict-clause) for details.

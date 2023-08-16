@@ -14,6 +14,7 @@ See the [data types overview](../../sql/data_types/overview) for a comparison be
 Lists can be created using the [`LIST_VALUE(expr, ...)`](../functions/nested#list-functions) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions.
 
 ### Creating Lists
+
 ```sql
 -- List of integers
 SELECT [1, 2, 3];
@@ -26,7 +27,9 @@ SELECT list_value(1, 2, 3);
 -- Create a table with an integer list column and a varchar list column
 CREATE TABLE list_table (int_list INT[], varchar_list VARCHAR[]);
 ```
+
 ### Retrieving from Lists
+
 Retrieving one or more values from a list can be accomplished using brackets and slicing notation, or through [list functions](../functions/nested#list-functions) like `list_extract`. Multiple equivalent functions are provided as aliases for compatibility with systems that refer to lists as arrays. For example, the function `array_slice`.
 ```sql
 -- Note that we wrap the list creation in parenthesis so that it happens first.
@@ -46,13 +49,16 @@ Retrieving one or more values from a list can be accomplished using brackets and
 | `SELECT list_slice(['a','b','c'],2,3)`              | ['b', 'c'] |
 
 ## Ordering
+
 The ordering is defined positionally. `NULL` values compare greater than all other values and are considered equal to each other.
 
 ## Null Comparisons
+
 At the top level, `NULL` nested values obey standard SQL `NULL` comparison rules:
 comparing a `NULL` nested value to a non-`NULL` nested value produces a `NULL` result.
 Comparing nested value _members_ , however, uses the internal nested value rules for `NULL`s,
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions
+
 See [Nested Functions](../../sql/functions/nested).

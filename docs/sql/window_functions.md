@@ -5,6 +5,7 @@ railroad: expressions/window.js
 ---
 
 ## Examples
+
 ```sql
 -- generate a "row_number" column containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
@@ -19,11 +20,13 @@ SELECT amount / SUM(amount) OVER (PARTITION BY region) FROM sales;
 ```
 
 ## Syntax
+
 <div id="rrdiagram"></div>
 
 Window functions can only be used in the `SELECT` clause. To share `OVER` specifications between functions, use the statement's `WINDOW` clause and use the `OVER window-name` syntax.
 
 ## General-Purpose Window Functions
+
 The table below shows the available general window functions.
 
 | Function | Return Type | Description | Example |
@@ -44,6 +47,7 @@ The table below shows the available general window functions.
 | `last(expr any)` | same type as **expr** | Alias for `last_value`. | `last(column)` |
 
 ## Aggregate Window Functions
+
 All [aggregate functions](aggregates) can be used in a windowing context.
 
 ## Ignoring NULLs

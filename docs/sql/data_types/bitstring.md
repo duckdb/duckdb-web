@@ -24,4 +24,5 @@ SELECT bitstring('0101011', 12);
 ```
 
 ## Functions
+
 See [Bitstring Functions](../functions/bitstring).

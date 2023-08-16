@@ -29,6 +29,7 @@ SELECT MIN(COLUMNS(*)) FROM addresses;
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 ### Select List
@@ -69,6 +70,7 @@ The `DISTINCT ON` clause returns only one row per unique value in the set of exp
 > When querying large data sets, using `DISTINCT` on all columns can be expensive. Therefore, consider using `DISTINCT ON` on a column (or a set of columns) which guaranetees a sufficient degree of uniqueness for your results. For example, using `DISTINCT ON` on the key column(s) of a table guarantees full uniqueness.
 
 #### Aggregates
+
 ```sql
 -- return the total number of rows in the addresses table
 SELECT COUNT(*) FROM addresses;
@@ -79,6 +81,7 @@ SELECT city, COUNT(*) FROM addresses GROUP BY city;
 [Aggregate functions](../aggregates) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`](groupby)).
 
 #### Window Functions
+
 ```sql
 -- generate a "row_number" column containing incremental identifiers for each row
 SELECT row_number() OVER () FROM sales;
@@ -89,6 +92,7 @@ SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 [Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.
 
 #### Unnest
+
 ```sql
 -- unnest an array by one level
 SELECT UNNEST([1, 2, 3]);

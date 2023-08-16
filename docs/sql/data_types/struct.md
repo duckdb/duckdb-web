@@ -16,6 +16,7 @@ See the [data types overview](../../sql/data_types/overview) for a comparison be
 Structs can be created using the [`STRUCT_PACK(name := expr, ...)`](../functions/nested#struct-functions) function or the equivalent array notation `{'name': expr, ...}` notation. The expressions can be constants or arbitrary expressions.
 
 ### Creating Structs
+
 ```sql
 -- Struct of integers
 SELECT {'x': 1, 'y': 2, 'z': 3};
@@ -43,12 +44,14 @@ SELECT (x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 ```
 
 ### Adding field(s)/value(s) to Structs
+
 ```sql
 -- Add to a Struct of integers
 SELECT struct_insert({'a': 1, 'b': 2, 'c': 3}, d := 4);
 ```
 
 ### Retrieving from Structs
+
 Retrieving a value from a struct can be accomplished using dot notation, bracket notation, or through [struct functions](../functions/nested#struct-functions) like `struct_extract`.
 ```sql
 -- Use dot notation to retrieve the value at a key's location. This returns 1
@@ -85,12 +88,14 @@ SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
 Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
 
 #### No dots
+
 ```sql
 SELECT part1 FROM tbl
 ```
 1. part1 is a column
 
 #### One dot
+
 ```sql
 SELECT part1.part2 FROM tbl
 ```
@@ -98,6 +103,7 @@ SELECT part1.part2 FROM tbl
 2. part1 is a column, part2 is a property of that column
 
 #### Two (or more) dots
+
 ```sql
 SELECT part1.part2.part3 FROM tbl
 ```
@@ -108,9 +114,11 @@ SELECT part1.part2.part3 FROM tbl
 Any extra parts (e.g., .part4.part5 etc) are always treated as properties
 
 ### Creating Structs with the Row function
+
 The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key.
 
 When converting multiple expressions into a `STRUCT`, the `row` function name is optional - a set of parenthesis is all that is needed.
+
 #### Example data table named t1:
 
 | my_column | another_column |
@@ -119,6 +127,7 @@ When converting multiple expressions into a `STRUCT`, the `row` function name is
 | 2 | b |
 
 #### Row function example:
+
 ```sql
 SELECT 
     row(my_column, another_column) as my_struct_column,
@@ -136,12 +145,14 @@ FROM t1;
 The `row` function (or simplified parenthesis syntax) may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
 
 #### Row function example with a column name, a constant, and an expression as input:
+
 ```sql
 SELECT 
     row(my_column, 42, my_column + 1) as my_struct_column,
     (my_column, 42, my_column + 1) as identical_struct_column
 FROM t1;
 ```
+
 #### Example Output:
 
 | my_struct_column | identical_struct_column |
@@ -164,4 +175,5 @@ Comparing nested value _members_ , however, uses the internal nested value rules
 and a `NULL` nested value member will compare above a non-`NULL` nested value member.
 
 ## Functions
+
 See [Nested Functions](../../sql/functions/nested).

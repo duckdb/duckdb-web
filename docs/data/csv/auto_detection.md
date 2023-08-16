@@ -3,6 +3,8 @@ layout: docu
 title: CSV Auto Detection
 ---
 
+<!-- markdownlint-disable MD036 -->
+
 When using `read_csv_auto`, or reading a CSV file with the `auto_detect` flag set, the system tries to automatically infer how to read the CSV file. This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
 
 * Detect the dialect of the CSV file (delimiter, quoting rule, escape)
@@ -15,6 +17,7 @@ The detection works by operating on a sample of the file. The size of the sample
 
 
 ### Dialect Detection
+
 Dialect detection works by attempting to parse the samples using the set of considered values. The detected dialect is the dialect that has (1) a consistent number of columns for each row, and (2) the highest number of columns for each row.
 
 The following dialects are considered for automatic dialect detection.

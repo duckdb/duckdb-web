@@ -5,6 +5,7 @@ title: JSON
 The __json__ extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
 ## JSON Type
+
 The JSON extension makes use of the **JSON** logical type.
 The **JSON** logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as **VARCHAR**, i.e., a regular string.
 All JSON creation functions return values of this type.
@@ -29,6 +30,7 @@ SELECT '2023-05-12'::DATE::JSON;
 The only exception to this behavior is the cast from `VARCHAR` to `JSON`, which does not alter the data, but instead parses and validates the contents of the `VARCHAR` as JSON.
 
 ## JSON Table Functions
+
 The following two table functions are used to read JSON:
 
 | Function | Description |
@@ -203,6 +205,7 @@ You can read the same file with `records` set to `'false'`, to get a single colu
 For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](https://duckdb.org/2023/03/03/json.html).
 
 ## JSON Import/Export
+
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
 
 By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY TRUE`, i.e.,
@@ -232,6 +235,7 @@ COPY test FROM 'my.json' (AUTO_DETECT TRUE);
 ```
 
 ## JSON Scalar Functions
+
 The following scalar JSON functions can be used to gain information about the stored JSON values.
 With the exception of `json_valid(`*`json`*`)`, all JSON functions produce an error when invalid JSON is supplied.
 
@@ -310,6 +314,7 @@ SELECT json_contains('{"top_key":{"key":"value"}}', '{"key":"value"}');
 ```
 
 ## JSON Extraction Functions
+
 There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the **JSON** logical type.
 These functions supports the same two location notations as the previous functions.
 
@@ -346,6 +351,7 @@ SELECT j->'species'->>[0,1] FROM example;
 ```
 
 ## JSON Creation Functions
+
 The following functions are used to create JSON.
 
 | Function | Description |
@@ -377,6 +383,7 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 ```
 
 ## JSON Aggregate Functions
+
 There are three JSON aggregate functions.
 
 | Function | Description |
@@ -403,6 +410,7 @@ SELECT json_group_structure(j) FROM example;
 ```
 
 ## Transforming JSON
+
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can "extract" all values at once, transforming JSON to the nested types **LIST** and **STRUCT**.
 
@@ -434,6 +442,7 @@ SELECT json_transform_strict(j, '{"family":"TINYINT","coolness":"DOUBLE"}') FROM
 ```
 
 ## De/Serializing SQL to JSON and vice versa
+
 The JSON extension also provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.
 
 | Function | Type | Description |

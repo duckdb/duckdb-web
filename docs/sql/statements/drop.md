@@ -6,6 +6,7 @@ railroad: statements/drop.js
 The `DROP` statement removes a catalog entry added previously with the `CREATE` command.
 
 ### Examples
+
 ```sql
 -- delete the table with the name "tbl"
 DROP TABLE tbl;
@@ -14,6 +15,7 @@ DROP VIEW IF EXISTS v1;
 ```
 
 ### Syntax
+
 <div id="rrdiagram"></div>
 
 The optional `IF EXISTS` clause suppresses the error that would normally result if the table does not exist.

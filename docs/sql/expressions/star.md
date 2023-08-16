@@ -5,6 +5,7 @@ railroad: expressions/star.js
 ---
 
 ### Examples
+
 ```sql
 -- select all columns present in the FROM clause
 SELECT * FROM table_name;
@@ -25,6 +26,7 @@ SELECT COLUMNS('number\d+') FROM addresses;
 <div id="rrdiagram"></div>
 
 ### Star Expression
+
 The `*` expression can be used in a `SELECT` statement to select all columns that are projected in the `FROM` clause.
 
 ```sql
@@ -34,6 +36,7 @@ SELECT * FROM tbl;
 The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 
 #### EXCLUDE Clause
+
 `EXCLUDE` allows us to exclude specific columns from the `*` expression.
 
 ```sql
@@ -41,6 +44,7 @@ SELECT * EXCLUDE (col) FROM tbl;
 ```
 
 #### Replace Clause
+
 `REPLACE` allows us to replace specific columns with different expressions.
 
 ```sql
@@ -85,6 +89,7 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 
 
 ### COLUMNS Regular Expression
+
 `COLUMNS` supports passing a regex in as a string constant:
 
 ```sql
@@ -98,6 +103,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 | 3  | NULL   |
 
 ### COLUMNS Lambda Function
+
 `COLUMNS` also supports passing in a lambda function. The lambda function will be evaluated for all columns present in the `FROM` clause, and only columns that match the lambda function will be returned. This allows the execution of arbitrary expressions in order to select columns.
 
 ```sql

@@ -25,6 +25,7 @@ GROUP BY ROLLUP (city, street_name);
 ```
 
 ### Description
+
 `GROUPING SETS` perform the same aggregate across different `GROUP BY clauses` in a single query.
 
 ```sql
@@ -89,4 +90,5 @@ The `ROLLUP` clause will produce all "sub-groups" of a grouping set, e.g., `ROLL
 `GROUPING` (alias `GROUPING_ID`) is a special aggregate function that can be used in combination with grouping sets. The `GROUPING` function takes as parameters a group, and returns 0 if the group is included in the grouping for that row, or 1 otherwise. This is primarily useful because the grouping columns by which we do not aggregate return NULL, which is ambiguous with groups that are actually the value `NULL`. The `GROUPING` (or `GROUPING_ID`) function can be used to distinguish these two cases.
 
 ### Syntax
+
 <div id="rrdiagram"></div>

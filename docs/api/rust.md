@@ -3,9 +3,11 @@ layout: docu
 title: Rust API
 ---
 ## Installation
+
 The DuckDB Rust API can be installed from [crates.io](https://crates.io/crates/duckdb). Please see the [docs.rs](http://docs.rs/duckdb) for details.
 
 ## Basic API Usage
+
 duckdb-rs is an ergonomic wrapper based on the [DuckDB C API](https://github.com/duckdb/duckdb/blob/master/src/include/duckdb.h), please refer to the [README](https://github.com/duckdb/duckdb-rs) for details.
 
 ### Startup & Shutdown

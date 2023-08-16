@@ -1,0 +1,22 @@
+{
+    "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+    "default": true,
+    "MD033": false,
+    "MD007": false,
+    "MD012": false,
+    "MD013": false,
+    "MD031": false,
+    "MD010": false,
+    "MD009": false,
+    "MD028": false,
+    "MD014": false,
+    "MD037": false,
+    "MD029": false,
+    "MD049": false,
+    "MD032": false,
+    "MD026": {"punctuation": ".,;!。，；：！"},
+    "MD038": false,
+    "MD024": false,
+    "MD050": false,
+    "MD045": false // TODO: fixme
+}

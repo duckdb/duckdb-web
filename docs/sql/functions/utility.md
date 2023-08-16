@@ -4,6 +4,7 @@ title: Utility Functions
 ---
 
 ## Utility Functions
+
 The functions below are difficult to categorize into specific function types and are broadly useful. 
 
 | Function| Description| Example| Result|
@@ -31,6 +32,7 @@ The functions below are difficult to categorize into specific function types and
 | `version()` | Return the currently active version of DuckDB in this format: `v0.3.2` | `version()`| various |
 
 ## Utility Table Functions
+
 A table function is used in place of a table in a `FROM` clause.
 
 | Function | Description | Example |

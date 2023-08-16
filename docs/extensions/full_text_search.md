@@ -5,9 +5,11 @@ title: Full Text Search
 Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
 
 ## API
+
 The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
 
 ### PRAGMA create_fts_index
+
 ```python
 create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwords='english',
                  ignore='(\\.|[^a-z])+', strip_accents=1, lower=1, overwrite=0)
@@ -29,6 +31,7 @@ create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwor
 This `PRAGMA` builds the index under a newly created schema. The schema will be named after the input table: if an index is created on table `'main.table_name'`, then the schema will be named `'fts_main_table_name'`.
 
 ### PRAGMA drop_fts_index
+
 ```python
 drop_fts_index(input_table)
 ```
@@ -40,6 +43,7 @@ Drops a FTS index for the specified table.
 |input_table|`VARCHAR`|Qualified name of input table e.g., `'table_name'` or `'main.table_name'`|
 
 ### match_bm25
+
 ```python
 match_bm25(input_id, query_string, fields := NULL, k := 1.2, b:= 0.75, conjunctive := 0)
 ```
@@ -55,6 +59,7 @@ When an index is built, this retrieval macro is created that can be used to sear
 |conjunctive|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
 
 ### stem
+
 ```python
 stem(input_string, stemmer)
 ```

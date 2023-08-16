@@ -15,6 +15,7 @@ The main difference is that `Jupysql` is well maintained, and has both newer fea
 This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
 ## Library Installation
+
 Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
@@ -41,6 +42,7 @@ pip install matplotlib
 ```
 
 ## Library Import and Configuration
+
 Next, open a Jupyter Notebook and import the relevant libraries. 
 It's possible to have `%sql` commands and `duckdb.sql` share the same [default connection](../../api/python/dbapi) by providing `duckdb:///:default:` as the SQLAlchemy connection string.
 
@@ -70,6 +72,7 @@ Either connect to a new in-memory DuckDB, the default connection or a file backe
 ```
 
 ## Querying DuckDB
+
 Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DF.
 ```sql
 %sql SELECT 'Off and flying!' as a_duckdb_column
@@ -92,6 +95,7 @@ This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ```
 
 ## Querying Pandas Dataframes
+
 DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
 ```python
 input_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
@@ -103,12 +107,14 @@ The dataframe being queried can be specified just like any other table in the `F
 ```
 
 ## Visualizing DuckDB Data
+
 The most common way to plot datasets in Python is to load them using Pandas and then use matplotlib or seaborn for plotting.
 This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine. 
 This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets. 
 
 ### Install and Load DuckDB httpfs extension
+
 DuckDB's [httpfs extension](../../extensions/httpfs) allows parquet and csv files to be queried remotely over http. 
 These examples query a parquet file that contains historical taxi data from NYC. 
 Using the parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than download the entire file. 
@@ -121,6 +127,7 @@ LOAD httpfs;
 ```
 
 ### Boxplot & Histogram
+
 To create a boxplot, call `%sqlplot boxplot`, passing the name of the table and the column to plot.
 In this case, the name of the table is the URL of the remotely stored parquet file.
 
@@ -156,4 +163,5 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 
 
 ## Summary
+
 You now have the ability to alternate between SQL and Pandas in a simple and highly performant way! You can plot massive datasets directly through the engine (avoiding both the download of the entire file and loading all of it into Pandas in memory). Dataframes can be read as tables in SQL, and SQL results can be output into Dataframes. Happy analyzing!

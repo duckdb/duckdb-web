@@ -239,4 +239,5 @@ ORDER BY length(path), path;
 ```
 
 ## Common Table Expressions
+
 <div id="rrdiagram"></div>

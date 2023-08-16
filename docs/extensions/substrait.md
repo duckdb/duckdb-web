@@ -13,6 +13,7 @@ Additionally, see the [repo](https://github.com/duckdblabs/substrait) for furthe
 -->
 
 ## SQL
+
 In the SQL API, users can generate substrait plans (into a blob or a JSON) and consume substrait plans.
 
 Before using the extension, you must always properly install and load it. 
@@ -53,6 +54,7 @@ CALL from_substrait('\x12\x07\x1A\x05\x1A\x03lte\x12\x11\x1A\x0F\x10\x01\x1A\x0B
 ```
 
 ## Python
+
 Before using the extension you must remember to properly load it. To load an extension in python, you must execute the sql commands within a connection.
 ```python
 import duckdb
@@ -88,6 +90,7 @@ query_result = con.from_substrait(proto=proto_bytes)
 ```
 
 ## R
+
 Before using the extension you must remember to properly load it. To load an extension in R, you must execute the sql commands within a connection.
 ```r
 con <- dbConnect(duckdb::duckdb())
