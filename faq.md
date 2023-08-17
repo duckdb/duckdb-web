@@ -20,7 +20,9 @@ You can find the guidelines for DuckDB™ [here](/trademark_guidelines).
 
 ### How can I expand the DuckDB website?
 The DuckDB Website is hosted by GitHub pages, its repository is [here](
-https://github.com/duckdb/duckdb-web). Pull requests to fix issues or generally expand the documentation section are very welcome.
+https://github.com/duckdb/duckdb-web).
+Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
+Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb/blob/master/CONTRIBUTING.md).
 
 ### I benchmarked DuckDB and its slower than \[some other system\]
 In a departure from traditional academic systems research practise, we have at first focused our attention on correctness, not raw performance. So it is entirely possible DuckDB is slower than some other, more mature system at this point. That being said, we are now confident DuckDB produces correct query results, and are actively working to make it fast, too. So publishing benchmark numbers from the current preview releases is certainly interesting, but should not be taken as the definitive results on what the DuckDB architecture can or cannot do.
