@@ -159,7 +159,7 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 ```
 
 
-![image](https://user-images.githubusercontent.com/52226177/213212777-0009bbb2-ac30-4a19-a275-51e92b04a330.png)
+![image](/images/trip-distance-histogram.png)
 
 
 ## Summary
