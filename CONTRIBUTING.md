@@ -34,9 +34,11 @@ Please adhere the following style guide when submitting a pull request.
 
 * Use [GitHub's Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for formatting.
 * Do not hard-wrap lines in blocks of text.
-* Enclose code in blocks that are tagged with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`). To display blocks of text without a language (e.g., console outputs), use \`\`\`text ... \`\`\`.
+* Format code blocks with the appropriate language (e.g., \`\`\`sql CODE HERE \`\`\`).
+* To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT HERE \`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
+* When presenting SQL statements, do not include the DuckDB prompt (`D `) in the documentation.
 
 ### Headers
 
