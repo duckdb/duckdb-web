@@ -146,7 +146,7 @@ penguins.head()
 
 ## Common operations
 
-Ibis has a collection of useful table methods to manipulate and query the data in a table (or tables).
+Ibis has a collection of useful table methods to manipulate and query the data in a table.
 
 ### filter
 
