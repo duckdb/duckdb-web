@@ -12,7 +12,7 @@
 						{% if myurl == 'https' or myurl == 'http:' %}
 						<div class="external"><a href="{{ mainentry.url }}" target="_blank" >{{ mainentry.page }}</a></div>
 						{% else %}
-						<div><a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>
+						<div><a href="{{ site.baseurl }}{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a>
 				</div>
 						{% endif %}
 					{% else %} <a href="{{ site.baseurl }}{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
