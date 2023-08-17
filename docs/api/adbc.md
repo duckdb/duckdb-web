@@ -80,9 +80,15 @@ Functions related to binding, used for bulk insertion or in prepared statements.
 |:---|:---|:---|:---|
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |
 
-## C++ Example
+## Examples
 
-We begin our example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
+Regardless of the programming language being used, there are two database
+options which will be required to utilize ADBC with DuckDB. The first one is the `driver`, which takes a path to the DuckDB library. The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DuckDB database. If not set, a memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so
+with various different language environments.
+
+### C++
+
+We begin our C++ example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
 
 ```cpp
 AdbcError adbc_error;
@@ -92,7 +98,8 @@ AdbcStatement adbc_statement;
 ArrowArrayStream arrow_stream;
 ```
 
-We can then initialize our database variable. Before initializing the database, we need to set two database options. The first one is the `driver`, which takes a path to the DuckDB library. The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DuckDB database. If not set, a memory database is created. After configuring all the necessary options, we can proceed to initialize our database.
+We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` variables as mentioned above. Then we set the `path` option and initialize the database.
+
 ```cpp
 AdbcDatabaseNew(&adbc_database, &adbc_error);
 AdbcDatabaseSetOption(&adbc_database, "driver", "path/to/libduckdb.dylib", &adbc_error);
@@ -122,4 +129,120 @@ Besides running queries, we can also ingest data via `arrow_streams`. For this w
 StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "AnswerToEverything", &adbc_error);
 StatementBindStream(&adbc_statement, &arrow_stream, &adbc_error);
 StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
+```
+
+### Python
+
+The first thing to do is to use `pip` and install the ADBC Driver manager.
+
+```shell
+pip install adbc_driver_manager
+```
+
+You will also need the `pyarrow` package to directly access Apache Arrow
+formatted result sets.
+```shell
+pip install pyarrow
+```
+
+The full documentation for the `adbc_driver_manager` package can be found
+[here](https://arrow.apache.org/adbc/0.5.1/python/api/adbc_driver_manager.html).
+
+As with C++, we need to provide initialization options for an `AdbcDatabase` object. 
+
+```python
+import adbc_driver_manager
+options = {
+    "driver": "path/to/libduckdb.dylib",
+    "entrypoint": "duckdb_adbc_init",
+    "path": "test.db",
+}
+
+with adbc_driver_manager.AdbcDatabase(**options) as db:
+    with adbc_driver_manager.AdbcConnection(db) as conn:
+        pass
+```
+
+It is also possible to leverage the duckdb Python library directly:
+```python
+import duckdb
+import adbc_driver_manager
+options = {
+    "driver": duckdb.__file__,
+    "entrypoint": "duckdb_adbc_init",
+    "path": "test.db",
+}
+
+with adbc_driver_manager.AdbcDatabase(**options) as db:
+    with adbc_driver_manager.AdbcConnection(db) as conn:
+        pass
+```
+
+Now that we have a connection initialized, we can initialize a statement
+for running queries. Calling `execute_query` returns an `adbc_driver_manager.ArrowArrayStreamHandle` which can be used by the `pyarrow` package to create a `RecordBatchReader` like so:
+
+```python
+import pyarrow
+...
+
+with adbc_driver_manager.AdbcDatabase(**options) as db:
+    with adbc_driver_manager.AdbcConnection(db) as conn:
+        with adbc_driver_manager.AdbcStatement(conn) as stmt:
+            stmt.set_sql_query("SELECT 42")
+            handle, rows = stmt.execute_query()
+            rdr = pyarrow.RecordBatchReader._import_from_c(handle.address)
+            table = rdr.read_all()
+```
+
+Data can also be ingested via `arrow_streams`. We just need to set options
+on the statement to bind the stream of data and execute the query.
+
+```python
+# create db / conn
+data = pyarrow.record_batch(
+    [[1, 2, 3, 4], ["a", "b", "c", "d"]],
+    names=["ints", "strs"],
+)
+
+def _bind(stmt, batch):
+    array = adbc_driver_manager.ArrowArrayHandle()
+    schema = adbc_driver_manager.ArrowSchemaHandle()
+    batch._export_to_c(array.address, schema.address)
+    stmt.bind(array, schema)
+
+with adbc_driver_manager.AdbcStatement(conn) as stmt:
+    stmt.set_options(**{adbc_driver_manager.INGEST_OPTION_TARGET_TABLE: "AnswerToEverything"})
+    _bind(stmt, data)
+    stmt.execute_update()
+```
+
+#### DBAPI (PEP 249)
+
+The Python ADBC module also provides a higher-level API in the style of the DBAPI standard. This makes it much more natural and familiar for interacting with databases in Python using ADBC.
+
+```python
+import duckdb
+import adbc_driver_manager.dbapi
+
+conn = adbc_driver_manager.dbapi.connect(
+    driver=duckdb.__file__,
+    entrypoint="duckdb_adbc_init",
+)
+
+with conn.cursor() as cur:
+    cur.execute("SELECT 1")
+    assert cur.fetchone() == (1,)
+
+conn.close()
+```
+
+Cursors are also able to retrieve data as PyArrow tables or pandas dataframes.
+
+```python
+with conn.cursor() as cur:
+    cur.execute("SELECT 1")
+    # as a pyarrow table
+    tbl = cur.fetch_arrow_table()
+    # as a pandas dataframe
+    df = cur.fetch_df()
 ```
