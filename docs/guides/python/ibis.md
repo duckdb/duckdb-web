@@ -84,7 +84,7 @@ DatabaseTable: penguins
   year              int64
 ```
 
-Ibis is lazily evaluated, so instead of seeing the data, we see the schema of the table, instead. To peek at the data, we can call `head` and then `to_pandas` to get the first few rows of the table as a pandas DataFrame.
+Ibis is lazily evaluated, so instead of seeing the data, we see the schema of the table. To peek at the data, we can call `head` and then `to_pandas` to get the first few rows of the table as a pandas DataFrame.
 
 ```python
 penguins.head().to_pandas()
