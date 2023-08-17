@@ -136,7 +136,7 @@ In this case, the name of the table is the URL of the remotely stored parquet fi
 ```
 
 
-![image](https://user-images.githubusercontent.com/52226177/213212690-fbd21774-3174-4a22-a2de-e1df8d8b4575.png)
+![Boxplot of the trip_distance column](/images/trip-distance-boxplot.png)
 
 
 Now, create a query that filters by the 90th percentile. 
@@ -159,7 +159,7 @@ This uses `--with short-trips` so JupySQL uses the query defined previously and 
 ```
 
 
-![image](/images/trip-distance-histogram.png)
+![Histogram of the trip_distance column](/images/trip-distance-histogram.png)
 
 
 ## Summary
