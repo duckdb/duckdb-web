@@ -119,7 +119,7 @@ r0 := DatabaseTable: penguins
 Limit[r0, n=5]
 ```
 
-Ibis returns results as a pandas DataFrame using `to_pandas`, but isn't using pandas to perform any of the computation. The query is executed by the backend (DuckDB). Only when `to_pandas` is called does Ibis then pull back the results and convert them into a DataFrame.
+Ibis returns results as a pandas DataFrame using `to_pandas`, but isn't using pandas to perform any of the computation. The query is executed by DuckDB. Only when `to_pandas` is called does Ibis then pull back the results and convert them into a DataFrame.
 
 ## Interactive mode
 
