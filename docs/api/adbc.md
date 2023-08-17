@@ -146,52 +146,54 @@ pip install pyarrow
 ```
 
 The full documentation for the `adbc_driver_manager` package can be found
-[here](https://arrow.apache.org/adbc/0.5.1/python/api/adbc_driver_manager.html).
+[here](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
-As with C++, we need to provide initialization options for an `AdbcDatabase` object. 
-
+As with C++, we need to provide initialization options 
 ```python
-import adbc_driver_manager
-options = {
-    "driver": "path/to/libduckdb.dylib",
-    "entrypoint": "duckdb_adbc_init",
-    "path": "test.db",
-}
+import adbc_driver_manager.dbapi
+conn = adbc_driver_manager.dbapi.connect(
+    driver="path/to/libduckdb.dylib",
+    entrypoint="duckdb_adbc_init",
+    db_kwargs={"path": "test.db"},
+)
 
-with adbc_driver_manager.AdbcDatabase(**options) as db:
-    with adbc_driver_manager.AdbcConnection(db) as conn:
-        pass
+with conn.cursor() as cur:
+    pass
+
+conn.close()
 ```
 
 It is also possible to leverage the duckdb Python library directly:
 ```python
 import duckdb
-import adbc_driver_manager
-options = {
-    "driver": duckdb.__file__,
-    "entrypoint": "duckdb_adbc_init",
-    "path": "test.db",
-}
+import adbc_driver_manager.dbapi
+conn = adbc_driver_manager.dbapi.connect(
+    driver=duckdb.__file__,
+    entrypoint="duckdb_adbc_init",
+    db_kwargs={"path": "test.db"}
+)
 
-with adbc_driver_manager.AdbcDatabase(**options) as db:
-    with adbc_driver_manager.AdbcConnection(db) as conn:
-        pass
+with conn.cursor() as cur:
+    pass
+
+conn.close()
 ```
 
-Now that we have a connection initialized, we can initialize a statement
-for running queries. Calling `execute_query` returns an `adbc_driver_manager.ArrowArrayStreamHandle` which can be used by the `pyarrow` package to create a `RecordBatchReader` like so:
+Now that we have a connection initialized, we can initialize a cursor
+for running queries. 
 
 ```python
 import pyarrow
 ...
 
-with adbc_driver_manager.AdbcDatabase(**options) as db:
-    with adbc_driver_manager.AdbcConnection(db) as conn:
-        with adbc_driver_manager.AdbcStatement(conn) as stmt:
-            stmt.set_sql_query("SELECT 42")
-            handle, rows = stmt.execute_query()
-            rdr = pyarrow.RecordBatchReader._import_from_c(handle.address)
-            table = rdr.read_all()
+with conn.cursor() as cur:
+    cur.execute("SELECT 42")
+    # fetch as a pyarrow table
+    tbl = cur.fetch_arrow_table()
+    # alternately as a pandas dataframe
+    df = cur.fetch_df()
+    # you can also use fetchone/fetchall
+    # and fetchmany as per DBAPI (PEP 249)
 ```
 
 Data can also be ingested via `arrow_streams`. We just need to set options
@@ -204,45 +206,6 @@ data = pyarrow.record_batch(
     names=["ints", "strs"],
 )
 
-def _bind(stmt, batch):
-    array = adbc_driver_manager.ArrowArrayHandle()
-    schema = adbc_driver_manager.ArrowSchemaHandle()
-    batch._export_to_c(array.address, schema.address)
-    stmt.bind(array, schema)
-
-with adbc_driver_manager.AdbcStatement(conn) as stmt:
-    stmt.set_options(**{adbc_driver_manager.INGEST_OPTION_TARGET_TABLE: "AnswerToEverything"})
-    _bind(stmt, data)
-    stmt.execute_update()
-```
-
-#### DBAPI (PEP 249)
-
-The Python ADBC module also provides a higher-level API in the style of the DBAPI standard. This makes it much more natural and familiar for interacting with databases in Python using ADBC.
-
-```python
-import duckdb
-import adbc_driver_manager.dbapi
-
-conn = adbc_driver_manager.dbapi.connect(
-    driver=duckdb.__file__,
-    entrypoint="duckdb_adbc_init",
-)
-
 with conn.cursor() as cur:
-    cur.execute("SELECT 1")
-    assert cur.fetchone() == (1,)
-
-conn.close()
-```
-
-Cursors are also able to retrieve data as PyArrow tables or pandas dataframes.
-
-```python
-with conn.cursor() as cur:
-    cur.execute("SELECT 1")
-    # as a pyarrow table
-    tbl = cur.fetch_arrow_table()
-    # as a pandas dataframe
-    df = cur.fetch_df()
+    cur.adbc_ingest("AnswerToEverything", data)        
 ```
