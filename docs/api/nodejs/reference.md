@@ -25,7 +25,6 @@ title: NodeJS API
 <a name="module_duckdb"></a>
 
 ## duckdb
-
 **Summary**: these jsdoc annotations are still a work in progress - feedback and suggestions are welcome!  
 
 * [duckdb](#module_duckdb)
@@ -90,7 +89,6 @@ title: NodeJS API
 <a name="module_duckdb..Connection"></a>
 
 ### duckdb~Connection
-
 **Kind**: inner class of [<code>duckdb</code>](#module_duckdb)  
 
 * [~Connection](#module_duckdb..Connection)
@@ -111,7 +109,6 @@ title: NodeJS API
 <a name="module_duckdb..Connection+run"></a>
 
 #### connection.run(sql, ...params, callback) ⇒ <code>void</code>
-
 Run a SQL statement and trigger a callback when done
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -125,7 +122,6 @@ Run a SQL statement and trigger a callback when done
 <a name="module_duckdb..Connection+all"></a>
 
 #### connection.all(sql, ...params, callback) ⇒ <code>void</code>
-
 Run a SQL query and triggers the callback once for all result rows
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -139,7 +135,6 @@ Run a SQL query and triggers the callback once for all result rows
 <a name="module_duckdb..Connection+arrowIPCAll"></a>
 
 #### connection.arrowIPCAll(sql, ...params, callback) ⇒ <code>void</code>
-
 Run a SQL query and serialize the result into the Apache Arrow IPC format (requires arrow extension to be loaded)
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -153,7 +148,6 @@ Run a SQL query and serialize the result into the Apache Arrow IPC format (requi
 <a name="module_duckdb..Connection+arrowIPCStream"></a>
 
 #### connection.arrowIPCStream(sql, ...params, callback) ⇒
-
 Run a SQL query, returns a IpcResultStreamIterator that allows streaming the result into the Apache Arrow IPC format
 (requires arrow extension to be loaded)
 
@@ -169,7 +163,6 @@ Run a SQL query, returns a IpcResultStreamIterator that allows streaming the res
 <a name="module_duckdb..Connection+each"></a>
 
 #### connection.each(sql, ...params, callback) ⇒ <code>void</code>
-
 Runs a SQL query and triggers the callback for each result row
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -183,7 +176,6 @@ Runs a SQL query and triggers the callback for each result row
 <a name="module_duckdb..Connection+stream"></a>
 
 #### connection.stream(sql, ...params)
-
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
 
 | Param | Type |
@@ -194,7 +186,6 @@ Runs a SQL query and triggers the callback for each result row
 <a name="module_duckdb..Connection+register_udf"></a>
 
 #### connection.register\_udf(name, return_type, fun) ⇒ <code>void</code>
-
 Register a User Defined Function
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -209,7 +200,6 @@ Register a User Defined Function
 <a name="module_duckdb..Connection+prepare"></a>
 
 #### connection.prepare(sql, ...params, callback) ⇒ <code>Statement</code>
-
 Prepare a SQL query for execution
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -223,7 +213,6 @@ Prepare a SQL query for execution
 <a name="module_duckdb..Connection+exec"></a>
 
 #### connection.exec(sql, ...params, callback) ⇒ <code>void</code>
-
 Execute a SQL query
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -237,7 +226,6 @@ Execute a SQL query
 <a name="module_duckdb..Connection+register_udf_bulk"></a>
 
 #### connection.register\_udf\_bulk(name, return_type, callback) ⇒ <code>void</code>
-
 Register a User Defined Function
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -251,7 +239,6 @@ Register a User Defined Function
 <a name="module_duckdb..Connection+unregister_udf"></a>
 
 #### connection.unregister\_udf(name, return_type, callback) ⇒ <code>void</code>
-
 Unregister a User Defined Function
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -265,7 +252,6 @@ Unregister a User Defined Function
 <a name="module_duckdb..Connection+register_buffer"></a>
 
 #### connection.register\_buffer(name, array, force, callback) ⇒ <code>void</code>
-
 Register a Buffer to be scanned using the Apache Arrow IPC scanner
 (requires arrow extension to be loaded)
 
@@ -281,7 +267,6 @@ Register a Buffer to be scanned using the Apache Arrow IPC scanner
 <a name="module_duckdb..Connection+unregister_buffer"></a>
 
 #### connection.unregister\_buffer(name, callback) ⇒ <code>void</code>
-
 Unregister the Buffer
 
 **Kind**: instance method of [<code>Connection</code>](#module_duckdb..Connection)  
@@ -294,7 +279,6 @@ Unregister the Buffer
 <a name="module_duckdb..Statement"></a>
 
 ### duckdb~Statement
-
 **Kind**: inner class of [<code>duckdb</code>](#module_duckdb)  
 
 * [~Statement](#module_duckdb..Statement)
@@ -311,21 +295,18 @@ Unregister the Buffer
 <a name="module_duckdb..Statement+sql"></a>
 
 #### statement.sql ⇒
-
 **Kind**: instance property of [<code>Statement</code>](#module_duckdb..Statement)  
 **Returns**: sql contained in statement  
 **Field**:   
 <a name="module_duckdb..Statement+get"></a>
 
 #### statement.get()
-
 Not implemented
 
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 <a name="module_duckdb..Statement+run"></a>
 
 #### statement.run(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -337,7 +318,6 @@ Not implemented
 <a name="module_duckdb..Statement+all"></a>
 
 #### statement.all(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -349,7 +329,6 @@ Not implemented
 <a name="module_duckdb..Statement+arrowIPCAll"></a>
 
 #### statement.arrowIPCAll(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -361,7 +340,6 @@ Not implemented
 <a name="module_duckdb..Statement+each"></a>
 
 #### statement.each(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -373,7 +351,6 @@ Not implemented
 <a name="module_duckdb..Statement+finalize"></a>
 
 #### statement.finalize(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -385,7 +362,6 @@ Not implemented
 <a name="module_duckdb..Statement+stream"></a>
 
 #### statement.stream(sql, ...params)
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 
 | Param | Type |
@@ -396,13 +372,11 @@ Not implemented
 <a name="module_duckdb..Statement+columns"></a>
 
 #### statement.columns() ⇒ [<code>Array.&lt;ColumnInfo&gt;</code>](#ColumnInfo)
-
 **Kind**: instance method of [<code>Statement</code>](#module_duckdb..Statement)  
 **Returns**: [<code>Array.&lt;ColumnInfo&gt;</code>](#ColumnInfo) - - Array of column names and types  
 <a name="module_duckdb..QueryResult"></a>
 
 ### duckdb~QueryResult
-
 **Kind**: inner class of [<code>duckdb</code>](#module_duckdb)  
 
 * [~QueryResult](#module_duckdb..QueryResult)
@@ -413,13 +387,11 @@ Not implemented
 <a name="module_duckdb..QueryResult+nextChunk"></a>
 
 #### queryResult.nextChunk() ⇒
-
 **Kind**: instance method of [<code>QueryResult</code>](#module_duckdb..QueryResult)  
 **Returns**: data chunk  
 <a name="module_duckdb..QueryResult+nextIpcBuffer"></a>
 
 #### queryResult.nextIpcBuffer() ⇒
-
 Function to fetch the next result blob of an Arrow IPC Stream in a zero-copy way.
 (requires arrow extension to be loaded)
 
@@ -428,12 +400,10 @@ Function to fetch the next result blob of an Arrow IPC Stream in a zero-copy way
 <a name="module_duckdb..QueryResult+asyncIterator"></a>
 
 #### queryResult.asyncIterator()
-
 **Kind**: instance method of [<code>QueryResult</code>](#module_duckdb..QueryResult)  
 <a name="module_duckdb..Database"></a>
 
 ### duckdb~Database
-
 Main database interface
 
 **Kind**: inner property of [<code>duckdb</code>](#module_duckdb)  
@@ -472,7 +442,6 @@ Main database interface
 <a name="module_duckdb..Database+close"></a>
 
 #### database.close(callback) ⇒ <code>void</code>
-
 Closes database instance
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -484,7 +453,6 @@ Closes database instance
 <a name="module_duckdb..Database+close_internal"></a>
 
 #### database.close\_internal(callback) ⇒ <code>void</code>
-
 Internal method. Do not use, call Connection#close instead
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -496,7 +464,6 @@ Internal method. Do not use, call Connection#close instead
 <a name="module_duckdb..Database+wait"></a>
 
 #### database.wait(callback) ⇒ <code>void</code>
-
 Triggers callback when all scheduled database tasks have completed.
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -508,7 +475,6 @@ Triggers callback when all scheduled database tasks have completed.
 <a name="module_duckdb..Database+serialize"></a>
 
 #### database.serialize(callback) ⇒ <code>void</code>
-
 TODO: what does this do?
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -520,7 +486,6 @@ TODO: what does this do?
 <a name="module_duckdb..Database+parallelize"></a>
 
 #### database.parallelize(callback) ⇒ <code>void</code>
-
 TODO: what does this do?
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -532,7 +497,6 @@ TODO: what does this do?
 <a name="module_duckdb..Database+connect"></a>
 
 #### database.connect(path) ⇒ <code>Connection</code>
-
 Create a new database connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -544,7 +508,6 @@ Create a new database connection
 <a name="module_duckdb..Database+interrupt"></a>
 
 #### database.interrupt(callback) ⇒ <code>void</code>
-
 Supposedly interrupt queries, but currently does not do anything.
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -556,7 +519,6 @@ Supposedly interrupt queries, but currently does not do anything.
 <a name="module_duckdb..Database+prepare"></a>
 
 #### database.prepare(sql) ⇒ <code>Statement</code>
-
 Prepare a SQL query for execution
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -568,7 +530,6 @@ Prepare a SQL query for execution
 <a name="module_duckdb..Database+run"></a>
 
 #### database.run(sql, ...params, callback) ⇒ <code>void</code>
-
 Convenience method for Connection#run using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -582,7 +543,6 @@ Convenience method for Connection#run using a built-in default connection
 <a name="module_duckdb..Database+scanArrowIpc"></a>
 
 #### database.scanArrowIpc(sql, ...params, callback) ⇒ <code>void</code>
-
 Convenience method for Connection#scanArrowIpc using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -596,7 +556,6 @@ Convenience method for Connection#scanArrowIpc using a built-in default connecti
 <a name="module_duckdb..Database+each"></a>
 
 #### database.each(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -608,7 +567,6 @@ Convenience method for Connection#scanArrowIpc using a built-in default connecti
 <a name="module_duckdb..Database+all"></a>
 
 #### database.all(sql, ...params, callback) ⇒ <code>void</code>
-
 Convenience method for Connection#apply using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -622,7 +580,6 @@ Convenience method for Connection#apply using a built-in default connection
 <a name="module_duckdb..Database+arrowIPCAll"></a>
 
 #### database.arrowIPCAll(sql, ...params, callback) ⇒ <code>void</code>
-
 Convenience method for Connection#arrowIPCAll using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -636,7 +593,6 @@ Convenience method for Connection#arrowIPCAll using a built-in default connectio
 <a name="module_duckdb..Database+arrowIPCStream"></a>
 
 #### database.arrowIPCStream(sql, ...params, callback) ⇒ <code>void</code>
-
 Convenience method for Connection#arrowIPCStream using a built-in default connection
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -650,7 +606,6 @@ Convenience method for Connection#arrowIPCStream using a built-in default connec
 <a name="module_duckdb..Database+exec"></a>
 
 #### database.exec(sql, ...params, callback) ⇒ <code>void</code>
-
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 
 | Param | Type |
@@ -662,7 +617,6 @@ Convenience method for Connection#arrowIPCStream using a built-in default connec
 <a name="module_duckdb..Database+register_udf"></a>
 
 #### database.register\_udf(name, return_type, fun) ⇒ <code>this</code>
-
 Register a User Defined Function
 
 Convenience method for Connection#register_udf
@@ -678,7 +632,6 @@ Convenience method for Connection#register_udf
 <a name="module_duckdb..Database+register_buffer"></a>
 
 #### database.register\_buffer(name) ⇒ <code>this</code>
-
 Register a buffer containing serialized data to be scanned from DuckDB.
 
 Convenience method for Connection#unregister_buffer
@@ -692,7 +645,6 @@ Convenience method for Connection#unregister_buffer
 <a name="module_duckdb..Database+unregister_buffer"></a>
 
 #### database.unregister\_buffer(name) ⇒ <code>this</code>
-
 Unregister a Buffer
 
 Convenience method for Connection#unregister_buffer
@@ -706,7 +658,6 @@ Convenience method for Connection#unregister_buffer
 <a name="module_duckdb..Database+unregister_udf"></a>
 
 #### database.unregister\_udf(name) ⇒ <code>this</code>
-
 Unregister a UDF
 
 Convenience method for Connection#unregister_udf
@@ -720,7 +671,6 @@ Convenience method for Connection#unregister_udf
 <a name="module_duckdb..Database+registerReplacementScan"></a>
 
 #### database.registerReplacementScan(fun) ⇒ <code>this</code>
-
 Register a table replace scan function
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
@@ -732,63 +682,54 @@ Register a table replace scan function
 <a name="module_duckdb..Database+get"></a>
 
 #### database.get()
-
 Not implemented
 
 **Kind**: instance method of [<code>Database</code>](#module_duckdb..Database)  
 <a name="module_duckdb..ERROR"></a>
 
 ### duckdb~ERROR : <code>number</code>
-
 Check that errno attribute equals this to check for a duckdb error
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_READONLY"></a>
 
 ### duckdb~OPEN\_READONLY : <code>number</code>
-
 Open database in readonly mode
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_READWRITE"></a>
 
 ### duckdb~OPEN\_READWRITE : <code>number</code>
-
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_CREATE"></a>
 
 ### duckdb~OPEN\_CREATE : <code>number</code>
-
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_FULLMUTEX"></a>
 
 ### duckdb~OPEN\_FULLMUTEX : <code>number</code>
-
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_SHAREDCACHE"></a>
 
 ### duckdb~OPEN\_SHAREDCACHE : <code>number</code>
-
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_PRIVATECACHE"></a>
 
 ### duckdb~OPEN\_PRIVATECACHE : <code>number</code>
-
 Currently ignored
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="ColumnInfo"></a>
 
 ## ColumnInfo : <code>object</code>
-
 **Kind**: global typedef  
 **Properties**
 
@@ -800,7 +741,6 @@ Currently ignored
 <a name="TypeInfo"></a>
 
 ## TypeInfo : <code>object</code>
-
 **Kind**: global typedef  
 **Properties**
 
@@ -813,7 +753,6 @@ Currently ignored
 <a name="DuckDbError"></a>
 
 ## DuckDbError : <code>object</code>
-
 **Kind**: global typedef  
 **Properties**
 
@@ -827,7 +766,6 @@ Currently ignored
 <a name="HTTPError"></a>
 
 ## HTTPError : <code>object</code>
-
 **Kind**: global typedef  
 **Extends**: [<code>DuckDbError</code>](#DuckDbError)  
 **Properties**

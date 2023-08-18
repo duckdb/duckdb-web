@@ -12,7 +12,6 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 
 
 ## **API Reference**
-
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nf"><a href="#duckdb_create_data_chunk">duckdb_create_data_chunk</a></span>(<span class="kt">duckdb_logical_type</span> *<span class="k">types</span>, <span class="kt">idx_t</span> <span class="k">column_count</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_destroy_data_chunk">duckdb_destroy_data_chunk</a></span>(<span class="kt">duckdb_data_chunk</span> *<span class="k">chunk</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_data_chunk_reset">duckdb_data_chunk_reset</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
@@ -40,23 +39,18 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_invalid">duckdb_validity_set_row_invalid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_valid">duckdb_validity_set_row_valid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 </code></pre></div></div>
-
 ### `duckdb_create_data_chunk`
-
 ---
 Creates an empty DataChunk with the specified set of types.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="k">duckdb_create_data_chunk</span>(<span class="k">
 </span>  <span class="kt">duckdb_logical_type</span> *<span class="k">types</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">column_count
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `types`
 
@@ -70,22 +64,17 @@ The data chunk.
 
 <br>
 
-
 ### `duckdb_destroy_data_chunk`
-
 ---
 Destroys the data chunk and de-allocates all memory allocated for that chunk.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_destroy_data_chunk</span>(<span class="k">
 </span>  <span class="kt">duckdb_data_chunk</span> *<span class="k">chunk
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `chunk`
 
@@ -93,22 +82,17 @@ The data chunk to destroy.
 
 <br>
 
-
 ### `duckdb_data_chunk_reset`
-
 ---
 Resets a data chunk, clearing the validity masks and setting the cardinality of the data chunk to 0.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_data_chunk_reset</span>(<span class="k">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `chunk`
 
@@ -116,22 +100,17 @@ The data chunk to reset.
 
 <br>
 
-
 ### `duckdb_data_chunk_get_column_count`
-
 ---
 Retrieves the number of columns in a data chunk.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_data_chunk_get_column_count</span>(<span class="k">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `chunk`
 
@@ -142,9 +121,7 @@ The number of columns in the data chunk
 
 <br>
 
-
 ### `duckdb_data_chunk_get_vector`
-
 ---
 Retrieves the vector at the specified column index in the data chunk.
 
@@ -152,16 +129,13 @@ The pointer to the vector is valid for as long as the chunk is alive.
 It does NOT need to be destroyed.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="k">duckdb_data_chunk_get_vector</span>(<span class="k">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">col_idx
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `chunk`
 
@@ -172,22 +146,17 @@ The vector
 
 <br>
 
-
 ### `duckdb_data_chunk_get_size`
-
 ---
 Retrieves the current number of tuples in a data chunk.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_data_chunk_get_size</span>(<span class="k">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `chunk`
 
@@ -198,23 +167,18 @@ The number of tuples in the data chunk
 
 <br>
 
-
 ### `duckdb_data_chunk_set_size`
-
 ---
 Sets the current number of tuples in a data chunk.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_data_chunk_set_size</span>(<span class="k">
 </span>  <span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">size
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `chunk`
 
@@ -225,24 +189,19 @@ The number of tuples in the data chunk
 
 <br>
 
-
 ### `duckdb_vector_get_column_type`
-
 ---
 Retrieves the column type of the specified vector.
 
 The result must be destroyed with `duckdb_destroy_logical_type`.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="k">duckdb_vector_get_column_type</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -253,9 +212,7 @@ The type of the vector
 
 <br>
 
-
 ### `duckdb_vector_get_data`
-
 ---
 Retrieves the data pointer of the vector.
 
@@ -263,15 +220,12 @@ The data pointer can be used to read or write values from the vector.
 How to read or write values depends on the type of the vector.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="k">duckdb_vector_get_data</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -282,9 +236,7 @@ The data pointer
 
 <br>
 
-
 ### `duckdb_vector_get_validity`
-
 ---
 Retrieves the validity mask pointer of the specified vector.
 
@@ -303,15 +255,12 @@ bool is_valid = validity_mask[entry_idx] & (1 << idx_in_entry);
 Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> *<span class="k">duckdb_vector_get_validity</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -322,9 +271,7 @@ The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
 
-
 ### `duckdb_vector_ensure_validity_writable`
-
 ---
 Ensures the validity mask is writable by allocating it.
 
@@ -332,15 +279,12 @@ After this function is called, `duckdb_vector_get_validity` will ALWAYS return n
 This allows null values to be written to the vector, regardless of whether a validity mask was present before.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_vector_ensure_validity_writable</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -348,14 +292,11 @@ The vector to alter
 
 <br>
 
-
 ### `duckdb_vector_assign_string_element`
-
 ---
 Assigns a string element in the vector at the specified location.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_vector_assign_string_element</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
@@ -363,9 +304,7 @@ Assigns a string element in the vector at the specified location.
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">str
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -379,14 +318,11 @@ The null-terminated string
 
 <br>
 
-
 ### `duckdb_vector_assign_string_element_len`
-
 ---
 Assigns a string element in the vector at the specified location.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_vector_assign_string_element_len</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
@@ -395,9 +331,7 @@ Assigns a string element in the vector at the specified location.
 </span>  <span class="kt">idx_t</span> <span class="k">str_len
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -414,24 +348,19 @@ The length of the string (in bytes)
 
 <br>
 
-
 ### `duckdb_list_vector_get_child`
-
 ---
 Retrieves the child vector of a list vector.
 
 The resulting vector is valid as long as the parent vector is valid.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="k">duckdb_list_vector_get_child</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -442,22 +371,17 @@ The child vector
 
 <br>
 
-
 ### `duckdb_list_vector_get_size`
-
 ---
 Returns the size of the child vector of the list
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="k">duckdb_list_vector_get_size</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -468,23 +392,18 @@ The size of the child list
 
 <br>
 
-
 ### `duckdb_list_vector_set_size`
-
 ---
 Sets the total size of the underlying child-vector of a list vector.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_list_vector_set_size</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">size
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -498,23 +417,18 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
-
 ### `duckdb_list_vector_reserve`
-
 ---
 Sets the total capacity of the underlying child-vector of a list.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_list_vector_reserve</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">required_capacity
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -528,25 +442,20 @@ The duckdb state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
-
 ### `duckdb_struct_vector_get_child`
-
 ---
 Retrieves the child vector of a struct vector.
 
 The resulting vector is valid as long as the parent vector is valid.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="k">duckdb_struct_vector_get_child</span>(<span class="k">
 </span>  <span class="kt">duckdb_vector</span> <span class="k">vector</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">index
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `vector`
 
@@ -560,23 +469,18 @@ The child vector
 
 <br>
 
-
 ### `duckdb_validity_row_is_valid`
-
 ---
 Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="k">duckdb_validity_row_is_valid</span>(<span class="k">
 </span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `validity`
 
@@ -590,9 +494,7 @@ true if the row is valid, false otherwise
 
 <br>
 
-
 ### `duckdb_validity_set_row_validity`
-
 ---
 In a validity mask, sets a specific row to either valid or invalid.
 
@@ -600,7 +502,6 @@ Note that `duckdb_data_chunk_ensure_validity_writable` should be called before c
 to ensure that there is a validity mask to write to.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_validity_set_row_validity</span>(<span class="k">
 </span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
@@ -608,9 +509,7 @@ to ensure that there is a validity mask to write to.
 </span>  <span class="kt">bool</span> <span class="k">valid
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `validity`
 
@@ -624,25 +523,20 @@ Whether or not to set the row to valid, or invalid
 
 <br>
 
-
 ### `duckdb_validity_set_row_invalid`
-
 ---
 In a validity mask, sets a specific row to invalid.
 
 Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_validity_set_row_invalid</span>(<span class="k">
 </span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `validity`
 
@@ -653,25 +547,20 @@ The row index
 
 <br>
 
-
 ### `duckdb_validity_set_row_valid`
-
 ---
 In a validity mask, sets a specific row to valid.
 
 Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
 
 #### Syntax
-
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_validity_set_row_valid</span>(<span class="k">
 </span>  <span class="kt">uint64_t</span> *<span class="k">validity</span>,<span class="k">
 </span>  <span class="kt">idx_t</span> <span class="k">row
 </span>);
 </code></pre></div></div>
-
 #### Parameters
-
 ---
 * `validity`
 
