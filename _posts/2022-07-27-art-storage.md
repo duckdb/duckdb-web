@@ -23,9 +23,11 @@ This blog post will describe how DuckDB stores and loads ART indexes. In particu
 
 
 ### ART Index
+
 Adaptive Radix Trees are, in essence, [Tries](https://en.wikipedia.org/wiki/Trie) that apply vertical and horizontal compression to create compact index structures.
 
 #### [Trie](https://en.wikipedia.org/wiki/Trie)
+
 Tries are tree data structures, where each tree level holds information on part of the dataset. They are commonly exemplified with strings. In the figure below, you can see a Trie representation of a table containing the strings "pedro", "paulo" and "peri" The root node represents the first character "p" with children "a" (from paulo) and "e" (from pedro and peri), and so on.
 
 <img src="/images/blog/ART/string-trie.png"
@@ -56,6 +58,7 @@ In the example below, we have a Trie that indexes the values 7, 10, and 12. You 
 One can quickly notice that this Trie representation is wasteful on two different fronts. First, many nodes only have one child (i.e., one path), which could be collapsed by vertical compression (i.e., Radix Tree). Second, many nodes have null pointers, storing space without any information in them, which could be resolved with horizontal compression.
 
 #### Vertical Compression (i.e., [Radix Trees](https://en.wikipedia.org/wiki/Radix_tree))
+
 The basic idea of vertical compression is that we collapse paths with nodes that only have one child. To support this, nodes store a prefix variable containing the collapsed path to that node. You can see a representation of this in the figure below. For example, one can see that the first four nodes have only one child. These nodes can be collapsed to the third node (i.e., the first one that bifurcates) as a prefix path. When performing lookups, the key must match all values included in the prefix path. 
 
 <img src="/images/blog/ART/2-bit-collapse-trie.png"
@@ -74,6 +77,7 @@ Below you can see the resulting Trie after vertical compression. This Trie varia
 
 
 #### Horizontal Compression (i.e., ART)
+
 To fully understand the design decisions behind ART indexes, we must first extend the 2-bit fan-out to 8-bits, the commonly found fan-out for database systems.
 
 <img src="/images/blog/ART/8-bit-radix-tree.png"
@@ -121,6 +125,7 @@ For the example in the previous section, we could use a ```Node 4``` instead of 
  />
 
 ### ART In DuckDB
+
 When considering which index structure to implement in DuckDB, we wanted a structure that could be used to keep PK/FK/Unique constraints while also being able to speed up range queries and Joins. Database systems commonly implement [Hash-Tables](https://en.wikipedia.org/wiki/Hash_table) for constraint checks and [BP-Trees](https://en.wikipedia.org/wiki/B%2B_tree) for range queries. However, we saw in ART Indexes an opportunity to diminish the code complexity by having one data structures for two use cases. The main characteristics that ART Index provides that we take advantage of are:
 1. Compact Structure. Since the ART internal nodes are rather small, they can fit in CPU caches, being a more cache-conscious structure than BP-Trees.
 2. Fast Point Queries. The worst case for an ART point query is O(k), which is sufficiently fast for constraint checking.
@@ -129,6 +134,7 @@ When considering which index structure to implement in DuckDB, we wanted a struc
 5. Maintainability. Using one structure for both constraint checks and range queries instead of two is more code efficient and maintainable.
 
 #### What is it used for?
+
 As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 1. Data Constraints. Primary key, Foreign Keys, and Unique constraints are all maintained by an ART Index. When inserting data in a tuple with a constraint, this will effectively try to perform an insertion in the ART index and fail if the tuple already exists.
@@ -188,12 +194,14 @@ SELECT i FROM integers  where i+j = 2
 ```
 
 ### ART Storage
+
 There are two main constraints when storing ART indexes, 
 
 1) The index must be stored in an order that allows for lazy-loading. Otherwise, we would have to fully load the index, including nodes that might be unnecessary to queries that would be executed in that session;
 2) It must not increase the node size. Otherwise, we diminish the cache-conscious effectiveness of the ART index.
 
 #### Post-Order Traversal
+
 To allow for lazy loading, we must store all children of a node, collect the information of where each child is stored, and then, when storing the actual node, we store the disk information of each of its children. To perform this type of operation, we do a post-order traversal.
 
 The post-order traversal is shown in the figure below. The circles in red represent the numeric order where the nodes will be stored. If we start from the root node (i.e., Node 4 with storage order 10), we must first store both children (i.e., Node 16 with storage order 8 and the Leaf with storage order 9). This goes on recursively for each of its children.
@@ -236,6 +244,7 @@ Node 256 would increase 2048 bytes (256 * (4+4)), causing it to double its curre
  
 
 #### Pointer Swizzling
+
 To avoid the increase in sizes of ART nodes, we decided to implement [Swizzlable Pointers](https://en.wikipedia.org/wiki/Pointer_swizzling) and use them instead of regular pointers.
 
 The idea is that we don't need all 64 bits (i.e., 48 bits give you an address space of 256 terabyte, supporting any of the current architectures, more [here](https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space) and [here](https://en.wikipedia.org/wiki/64-bit_computing).) in a pointer to point to a memory address (. Hence we can use the most significant bit as a flag (i.e., the Swizzle Flag). 
@@ -250,6 +259,7 @@ In the following figure, you can see a visual representation of DuckDB's Swizzla
 
 
 ### Benchmarks
+
 To evaluate the benefits and disadvantages of our current storage implementation, we run a benchmark (Available at this [Colab Link](https://colab.research.google.com/drive/1lidiFNswQfxdmYlsufXUT80IFpyluEF3?usp=sharing)), where we create a table containing 50,000,000 integral elements with a primary key constraint on top of them. 
 ```python
 con = duckdb.connect("vault.db") 
@@ -260,6 +270,7 @@ con.execute("INSERT INTO integers SELECT * FROM range(50000000);")
 We run this benchmark on two different versions of DuckDB, one where the index is not stored (i.e., v0.4.0), which means it is always in memory and fully reconstructed at a database restart, and another one where the index is stored (i.e., bleeding-edge version), using the lazy-loading technique described previously.
 
 #### Storing Time
+
 We first measure the additional cost of serializing our index.
 ```python 
 cur_time = time.time()
@@ -278,6 +289,7 @@ We can see storing the index is 2x more expensive than not storing the index. Th
 
 
 #### Load Time
+
 We now measure the loading time of restarting our database.
 ``` python
 cur_time = time.time()
@@ -294,6 +306,7 @@ Here we can see a two-order magnitude difference in the times of loading the dat
 
 
 #### Query Time (Cold)
+
 We now measure the cold query time (i.e., the Database has just been restarted, which means that in the ```Storage``` version, the index does not exist in memory yet.) of running point queries on our index. We run 5000 point queries, equally spaced on 10000 elements in our distribution. We use this value to always force the point queries to load a large number of unused nodes.
 
 ```python
@@ -314,6 +327,7 @@ In general, each query is 3x more expensive in the persisted storage format. Thi
 2) Block Pinning. At every node, we must pin and unpin the blocks where they are stored.
 
 #### Query Time (Hot)
+
 In this experiment, we execute the same queries as in the previous section.
 
 <img src="/images/blog/ART/hot-run.png"
@@ -325,6 +339,7 @@ The times in both versions are comparable since all the nodes in the storage ver
 In conclusion, when stored indexes are in active use, they present similar performance to fully in-memory indexes.
 
 ### Future Work
+
 ART index storage has been a long-standing issue in DuckDB, with multiple users claiming it a missing feature that created an impediment for them to use DuckDB. Although now storing and lazily loading ART indexes is possible, there are many future paths we can still pursue to make the ART-Index more performant. Here I list what I believe are the most important next steps:
 1. Caching Pinned Blocks. In our current implementation, blocks are constantly pinned and unpinned, even though blocks can store multiple nodes and are most likely reused continuously through lookups. Smartly caching them will result in drastic savings for queries that trigger node loading.
 2. Bulk Loading. Our ART-Index currently does not support bulk loading. This means that nodes will be constantly resized when creating an index over a column since elements will be inserted one by one. If we bulk-load the data, we can know exactly which Nodes we must create for that dataset, hence avoiding these frequent resizes.
@@ -334,8 +349,9 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 6. Combined Pointer/Row Id Leaves. Our current leaf node format allows for storing values that are repeated over multiple tuples. However, since ART indexes are commonly used to keep unique key constraints (e.g., Primary Keys), and a unique ```row_id``` fits in the same pointer size space, a lot of space can be saved by using the child pointers to point to the actual ```row_id``` instead of creating an actual leaf node that only stores one ```row_id```.
 
 ### Road Map
+>
 > It's tough to make predictions, especially about the future  
->  --  Yogi Berra
+> --  Yogi Berra
 
 Art Indexes are a core part of both constraint enforcement and keeping access speed up in DuckDB. And as depicted in the previous section, there are many distinct paths we can take in our bag of ART goodies, with advantages for completely different use cases.
 
