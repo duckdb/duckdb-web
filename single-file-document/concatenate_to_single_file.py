@@ -229,6 +229,9 @@ docs_root = "../docs"
 with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.md", "w") as of:
     data = json.load(menu_docs_file)
 
+    with open("cover-page.md") as cover_page_file:
+        of.write(cover_page_file.read())
+
     add_to_documentation(docs_root, data, of, "Documentation")
     add_to_documentation(docs_root, data, of, "Guides")
 
