@@ -2,14 +2,18 @@
 
 set -xeuo pipefail
 
-fix=${1-}
+fix=''
+check=''
+while getopts "f" opt; do
+    case $opt in
+        f) fix="--fix"
+           check='--check --diff';;
+        *) exit
+    esac
+done
 
 npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix
 
-check=''
-if [ -z $fix ]; then
-    check='--check --diff'
-fi
 black scripts --skip-string-normalization $check
 
 vale sync
