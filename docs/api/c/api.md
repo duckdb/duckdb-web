@@ -108,6 +108,7 @@ title: C API - Complete API
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_nparams">duckdb_nparams</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
 <span class="k">duckdb_type</span> <span class="nf"><a href="#duckdb_param_type">duckdb_param_type</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_clear_bindings">duckdb_clear_bindings</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_value">duckdb_bind_value</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">duckdb_value</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_parameter_index">duckdb_bind_parameter_index</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="k">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">name</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_boolean">duckdb_bind_boolean</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">bool</span> <span class="k">val</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_bind_int8">duckdb_bind_int8</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>, <span class="kt">idx_t</span> <span class="k">param_idx</span>, <span class="kt">int8_t</span> <span class="k">val</span>);
@@ -317,6 +318,7 @@ title: C API - Complete API
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query_arrow">duckdb_query_arrow</a></span>(<span class="kt">duckdb_connection</span> <span class="k">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="k">query</span>, <span class="kt">duckdb_arrow</span> *<span class="k">out_result</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query_arrow_schema">duckdb_query_arrow_schema</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema</span>);
+<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_prepared_arrow_schema">duckdb_prepared_arrow_schema</a></span>(<span class="kt">duckdb_prepared_statement</span> <span class="k">prepared</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema</span>);
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_query_arrow_array">duckdb_query_arrow_array</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>, <span class="kt">duckdb_arrow_array</span> *<span class="k">out_array</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_arrow_column_count">duckdb_arrow_column_count</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_arrow_row_count">duckdb_arrow_row_count</a></span>(<span class="kt">duckdb_arrow</span> <span class="k">result</span>);
@@ -2220,6 +2222,23 @@ Clear the params bind to the prepared statement.
 ---
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_clear_bindings</span>(<span class="k">
 </span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement
+</span>);
+</code></pre></div></div>
+<br>
+
+
+### `duckdb_bind_value`
+
+---
+Binds a value to the prepared statement at the specified index.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_bind_value</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared_statement</span>,<span class="k">
+</span>  <span class="kt">idx_t</span> <span class="k">param_idx</span>,<span class="k">
+</span>  <span class="kt">duckdb_value</span> <span class="k">val
 </span>);
 </code></pre></div></div>
 <br>
@@ -6130,6 +6149,36 @@ Fetch the internal arrow schema from the arrow result.
 * `result`
 
 The result to fetch the schema from.
+* `out_schema`
+
+The output schema.
+* `returns`
+
+`DuckDBSuccess` on success or `DuckDBError` on failure.
+
+<br>
+
+
+### `duckdb_prepared_arrow_schema`
+
+---
+Fetch the internal arrow schema from the prepared statement.
+
+#### Syntax
+
+---
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_prepared_arrow_schema</span>(<span class="k">
+</span>  <span class="kt">duckdb_prepared_statement</span> <span class="k">prepared</span>,<span class="k">
+</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="k">out_schema
+</span>);
+</code></pre></div></div>
+
+#### Parameters
+
+---
+* `result`
+
+The prepared statement to fetch the schema from.
 * `out_schema`
 
 The output schema.
