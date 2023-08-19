@@ -191,11 +191,11 @@ def add_function(function_prototype, documentation, group):
     function_name = extract_function_name(function_prototype_str)
     docs_str = '\n'.join(documentation) + '\n'
     (docs_str, parameters) = extract_parameters(docs_str)
-    docs_string = ''
-    docs_string += f'### `{function_name}`\n'
+    docs_string = '\n'
+    docs_string += f'### `{function_name}`\n\n'
     docs_string += '---\n'
-    docs_string += docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ')
-    docs_string += '#### Syntax\n'
+    docs_string += docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ').strip() +'\n' if docs_str else ''
+    docs_string += '\n#### Syntax\n\n'
     docs_string += '---\n'
     docs_string += quick_docs_start()
     docs_string += (
@@ -204,7 +204,7 @@ def add_function(function_prototype, documentation, group):
     )
     docs_string += quick_docs_end()
     if len(parameters) > 0:
-        docs_string += '#### Parameters\n'
+        docs_string += '\n#### Parameters\n\n'
         docs_string += '---\n'
         for parameter_pair in parameters:
             docs_string += "* `" + parameter_pair[0] + '`\n\n'
@@ -273,7 +273,7 @@ def replace_docs_in_file(file_name, group_name, docs_string_for_this_group):
             text = (
                 text.rsplit(api_ref_split, 1)[0]
                 + api_ref_split
-                + '\n'
+                + '\n\n'
                 + docs_string_for_this_group
             )
             found = True
@@ -303,7 +303,7 @@ for group_name in docs_map.keys():
     else:
         quick_docs = file_docs[file_name][0]
         docs_string_for_this_group = file_docs[file_name][1]
-        quick_docs += '#### ' + group_name + '\n'
+        quick_docs += '\n#### ' + group_name + '\n\n'
         quick_docs += quick_docs_start()
     for entry in group_docs[group_name]:
         quick_docs += entry[1] + '\n'
@@ -324,8 +324,8 @@ for entry in documentation_list:
     group_name = entry[1]
     if group_name is not current_group_name:
         if current_group_name is not None:
-            total_quick_docs += quick_docs_end()
-        total_quick_docs += '### **' + group_name + '**\n'
+            total_quick_docs += quick_docs_end() + '\n'
+        total_quick_docs += '### **' + group_name + '**\n\n'
 
         total_quick_docs += quick_docs_start()
         current_group_name = group_name
