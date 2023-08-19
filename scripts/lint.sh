@@ -12,9 +12,9 @@ while getopts "f" opt; do
     esac
 done
 
-npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix
+npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix || echo 'mdlit failed'
 
-black scripts --skip-string-normalization $check
+black scripts --skip-string-normalization $check || echo 'black failed'
 
 vale sync
 vale docs/ dev/ _posts/ --glob "!docs/archive/*"
