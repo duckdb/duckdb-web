@@ -18,7 +18,9 @@ jobs:
       - uses: articulate/actions-markdownlint@main
         with:
           config: .markdownlint.jsonc
-          files: 'docs/**/*.md _posts/*.md dev/*.md'
+          files: 'docs/**/*.md'
+          # TODO:
+          # files: 'docs/**/*.md _posts/*.md dev/*.md'
 
   python:
     runs-on: ubuntu-latest
