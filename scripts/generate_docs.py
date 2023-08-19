@@ -303,7 +303,7 @@ for group_name in docs_map.keys():
     else:
         quick_docs = file_docs[file_name][0]
         docs_string_for_this_group = file_docs[file_name][1]
-        quick_docs += '\n#### ' + group_name + '\n\n'
+        quick_docs += '\n### ' + group_name + '\n\n'
         quick_docs += quick_docs_start()
     for entry in group_docs[group_name]:
         quick_docs += entry[1] + '\n'
