@@ -21,7 +21,9 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 <span class="kt">idx_t</span> <span class="nf"><a href="#duckdb_data_chunk_get_size">duckdb_data_chunk_get_size</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_data_chunk_set_size">duckdb_data_chunk_set_size</a></span>(<span class="kt">duckdb_data_chunk</span> <span class="k">chunk</span>, <span class="kt">idx_t</span> <span class="k">size</span>);
 </code></pre></div></div>
+
 #### Vector Interface
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nf"><a href="#duckdb_vector_get_column_type">duckdb_vector_get_column_type</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
 <span class="kt">void</span> *<span class="nf"><a href="#duckdb_vector_get_data">duckdb_vector_get_data</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
 <span class="kt">uint64_t</span> *<span class="nf"><a href="#duckdb_vector_get_validity">duckdb_vector_get_validity</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>);
@@ -34,7 +36,9 @@ The primary manner of interfacing with data chunks is by obtaining the internal 
 <span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_list_vector_reserve">duckdb_list_vector_reserve</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">required_capacity</span>);
 <span class="kt">duckdb_vector</span> <span class="nf"><a href="#duckdb_struct_vector_get_child">duckdb_struct_vector_get_child</a></span>(<span class="kt">duckdb_vector</span> <span class="k">vector</span>, <span class="kt">idx_t</span> <span class="k">index</span>);
 </code></pre></div></div>
+
 #### Validity Mask Functions
+
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf"><a href="#duckdb_validity_row_is_valid">duckdb_validity_row_is_valid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_validity">duckdb_validity_set_row_validity</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>, <span class="kt">bool</span> <span class="k">valid</span>);
 <span class="kt">void</span> <span class="nf"><a href="#duckdb_validity_set_row_invalid">duckdb_validity_set_row_invalid</a></span>(<span class="kt">uint64_t</span> *<span class="k">validity</span>, <span class="kt">idx_t</span> <span class="k">row</span>);
