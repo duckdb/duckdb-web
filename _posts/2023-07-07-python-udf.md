@@ -37,9 +37,11 @@ The two approaches exhibit two key differences:
 This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation](https://duckdb.org/docs/api/python/function).
 
 ## Python UDFs
+
 This section depicts several practical examples of using Python UDFs. Each example uses a different type of Python UDF.
 
 ### Quick-Tour
+
 To demonstrate the usage of Python UDFs in DuckDB, let's consider the following example. We have a dictionary called `world_cup_titles` that maps countries to the number of World Cups they have won. We want to create a Python UDF that takes a country name as input, searches for the corresponding value in the dictionary, and returns the number of World Cups won by that country. If the country is not found in the dictionary, the UDF will return `NULL`.
 
 Here's an example implementation:
@@ -82,6 +84,7 @@ con.sql("SELECT country, wc_titles(country) as world_cups from countries").fetch
 ```
 
 ### Generating Fake Data with Faker (Built-In Type UDF)
+
 Here is an example that demonstrates the usage of the [Faker library](https://faker.readthedocs.io/en/master/)  to generate a scalar function in DuckDB, which returns randomly generated dates. The function, named `random_date`, does not require any inputs and outputs a `DATE` column. Since Faker utilizes built-in Python types, the function directly returns them.
 One important thing to notice is that a function that is not deterministic based on its input must be marked as having `side_effects`.
 
@@ -118,6 +121,7 @@ res = duckdb.sql('select random_date() from range (3)').fetchall()
 ```
 
 ### Swap String Case (PyArrow Type UDF)
+
 One issue with using built-in types is that you don't benefit from zero-copy, vectorization and cache locality. Using PyArrow as a UDF type should be favored to leverage these optimizations.
 
 To demonstrate a PyArrow function, let's consider a simple example where we want to transform lowercase characters to uppercase and uppercase characters to lowercase. Fortunately, PyArrow already has a function for this in the compute engine, and it's as simple as calling `pc.utf8_swapcase(x)`.
@@ -197,10 +201,12 @@ df = expr.execute()
 By utilizing Python UDFs in DuckDB with Ibis, you can seamlessly incorporate machine learning models and perform predictions directly within your Ibis code and SQL queries. The example demonstrates how to predict taxi fare costs based on distance using a PyTorch model, showcasing the integration of machine learning capabilities within DuckDB's SQL environment driven by Ibis.
 
 ## Benchmarks
+
 In this section, we will perform simple benchmark comparisons to demonstrate the performance differences between two different types of Python UDFs. The benchmark will measure the execution time, and peak memory consumption. The benchmarks are executed 5 times, and the median value is considered. The benchmark is conducted on a Mac Apple M1 with 16GB of RAM.
 
 
 ### Built-In Python Vs PyArrow
+
 To benchmark these UDF types, we create UDFs that take an integral column as input, add one to each value, and return the result. The code used for this benchmark section can be found [here](https://gist.github.com/pdet/ebd201475581756c29e4533a8fa4106e). 
 
 ```python
@@ -248,6 +254,7 @@ We can observe a performance difference of more than one order of magnitude betw
 
 
 ### Python UDFs Vs External Functions
+
 Here we compare the usage of a Python UDF with an external function. In this case, we have a function that calculates the sum of the lengths of all strings in a column. You can find the code used for this benchmark section [here](https://gist.github.com/pdet/2907290725539d390df7981e799ed593).
 
 ```python
@@ -302,6 +309,7 @@ exec_external(con)
 Here we can see that there is no significant regression in performance when utilizing UDFs. However, you still have the benefits of safer execution and the utilization of SQL. In our example, we can also notice that the external function materializes the entire query, resulting in a 5x higher peak memory consumption compared to the UDF approach.
 
 ## Conclusions and Further Development
+
 Scalar Python UDFs are now supported in DuckDB, marking a significant milestone in extending the functionality of the database. This enhancement empowers users to perform complex computations using a high-level language. Additionally, Python UDFs can leverage DuckDB's zero-copy integration with Arrow, eliminating data transfer costs and ensuring efficient query execution.
 
 While the introduction of Python UDFs is a major step forward, our work in this area is ongoing. Our roadmap includes the following focus areas:

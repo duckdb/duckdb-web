@@ -17,6 +17,7 @@ To install the new version, please visit the [installation guide](https://duckdb
 <!--more-->
 
 #### What's in 0.7.0
+
 The new release contains many improvements to the JSON support, new SQL features, improvements to data ingestion and export, and other new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
 
 #### Data Ingestion/Export Improvements

@@ -17,6 +17,7 @@ To install the new version, please visit the [installation guide](https://duckdb
 <!--more-->
 
 #### What's new in 0.8.0
+
 There have been too many changes to discuss them each in detail, but we would like to highlight several particularly exciting features! 
 * New pivot and unpivot statements
 * Improvements to parallel data import/export
@@ -31,6 +32,7 @@ Below is a summary of those new features with examples, starting with two breaki
 
 
 #### Breaking SQL Changes
+
 This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DuckDB is stil in Beta, we recognize that many DuckDB queries are already used in production. So, the old behavior can be restored using the following settings:
 
 ```sql
@@ -176,4 +178,5 @@ See the [documentation](/docs/api/python/function) for more information.
 [**Swift Integration**](https://duckdb.org/2023/04/21/swift.html). DuckDB has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DuckDB Swift API allows developers on all swift platforms to harness DuckDB using a native Swift interface with support for Swift features like strong typing and concurrency.
 
 #### Final Thoughts
+
 The full release notes can be [found on Github](https://github.com/duckdb/duckdb/releases/tag/v0.8.0). We would like to thank all of the contributors for their hard work on improving DuckDB.

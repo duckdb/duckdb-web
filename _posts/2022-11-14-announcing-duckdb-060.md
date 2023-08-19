@@ -17,9 +17,11 @@ To install the new version, please visit the [installation guide](https://duckdb
 <!--more-->
 
 #### What's in 0.6.0
+
 The new release contains many improvements to the storage system, general performance improvements, memory management improvements and new features. Below is a summary of the most impactful changes, together with the linked PRs that implement the features.
 
 #### Storage Improvements
+
 As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements](https://duckdb.org/2022/10/28/lightweight-compression.html). 
 
 **Optimistic writing to disk.** In previous DuckDB versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
@@ -64,6 +66,7 @@ The compression ratio of a dataset containing temperatures of cities stored as d
 | Patas | 10.2MB |
 
 #### Performance Improvements
+
 DuckDB aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
 
@@ -94,6 +97,7 @@ The timings of creating an index on a single column with 16 million values is sh
 **Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g. `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
 #### SQL Syntax Improvements
+
 SQL is the primary way of interfacing with DuckDB - and DuckDB [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
@@ -198,6 +202,7 @@ This release further improves on that by greatly optimizing the [out-of-core has
 **jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on MacOS or Windows, and as such we continue using the standard allocators there (at least for now).
 
 #### Shell Improvements
+
 DuckDB has a command-line interface that is adapted from SQLite's command line interface, and therefore supports an extremely similar interface to SQLite. All of the tables in this blog post have been generated using the `.mode markdown` in the CLI.
 
 The DuckDB shell also offers several improvements over the SQLite shell, such as syntax highlighting, and this release includes a few new goodies.

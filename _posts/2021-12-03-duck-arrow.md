@@ -25,9 +25,11 @@ This integration is unique because it uses zero-copy streaming of data between D
 For those that are just interested in benchmarks, you can jump ahead [benchmark section below](#Benchmark Comparison).
 
 ## Quick Tour
+
 Before diving into the details of the integration, in this section we provide a quick motivating example of how powerful and simple to use is the DuckDB-Arrow integration. With a few lines of code, you can already start querying Arrow datasets. Say you want to analyze the infamous [NYC Taxi Dataset](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and figure out if groups tip more or less than single riders.
 
 ### R
+
 Both Arrow and DuckDB support dplyr pipelines for people more comfortable with using dplyr for their data analysis. The Arrow package includes two helper functions that allow us to pass data back and forth between Arrow and DuckDB (`to_duckdb()` and `to_arrow()`).
 This is especially useful in cases where something is supported in one of Arrow or DuckDB but not the other. For example, if you find a complex dplyr pipeline where the SQL translation doesn't work with DuckDB, use `to_arrow()` before the pipeline to use the Arrow engine. Or, if you have a function (e.g., windowed aggregates) that aren't yet implemented in Arrow, use `to_duckdb()` to use the DuckDB engine. All while not paying any cost to (re)serialize the data when you pass it back and forth!
 
@@ -58,6 +60,7 @@ ds %>%
 ```
 
 ### Python
+
 The workflow in Python is as simple as it is in R. In this example we use DuckDB's Relational API.
 
 ``` python
@@ -96,8 +99,8 @@ install.packages("arrow")
 ```
 
 To execute the sample-examples in this section, we need to download the following custom parquet files:
- - https://github.com/duckdb/duckdb-web/blob/master/_posts/data/integers.parquet?raw=true
- - https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet
+ - <https://github.com/duckdb/duckdb-web/blob/master/_posts/data/integers.parquet?raw=true>
+ - <https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet>
 
 
 #### Python
@@ -163,6 +166,7 @@ result <- dbSendQuery(con, "SELECT * FROM arrow_table")
 ```
 
 ### Streaming Data from/to Arrow
+
 In the previous section, we depicted how to interact with Arrow tables. However, Arrow also allows users to interact with the data in a streaming fashion. Either consuming it (e.g., from an Arrow Dataset) or producing it (e.g., returning a RecordBatchReader). And of course, DuckDB is able to consume Datasets and produce RecordBatchReaders. This example uses the NYC Taxi Dataset, stored in Parquet files partitioned by year and month, which we can download through the Arrow R package:
 ```R
 arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
@@ -170,6 +174,7 @@ arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
 
 
 #### Python
+
 ```py
 # Reads dataset partitioning it in year/month folder
 nyc_dataset = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
@@ -184,7 +189,9 @@ record_batch_reader = query.fetch_record_batch()
 # This retrieves the first batch
 chunk = record_batch_reader.read_next_batch()
 ```
+
 #### R
+
 ```r
 # Reads dataset partitioning it in year/month folder
 nyc_dataset = open_dataset("nyc-taxi/", partitioning = c("year", "month"))
@@ -366,6 +373,7 @@ The difference in times between DuckDB and Pandas is a combination of all the in
 In the table above, we also depict the comparison of peak memory usage between DuckDB (Streaming) and Pandas (Fully-Materializing).  In DuckDB, we only need to load the row-group of interest into memory. Hence our memory usage is low. We also have constant memory usage since we only have to keep one of these row groups in-memory at a time. Pandas, on the other hand, has to fully materialize all Parquet files when executing the query. Because of this, we see a constant steep increase in its memory consumption. **The total difference in memory consumption of the two solutions is around 3 orders of magnitude.**
 
 ## Conclusion and Feedback
+
 In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
 
 Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's - issue tracker](https://github.com/duckdb/duckdb/issues)  or [Arrow's - issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.

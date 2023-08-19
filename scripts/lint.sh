@@ -2,10 +2,20 @@
 
 set -xeuo pipefail
 
-npx markdownlint-cli docs/ --config .markdownlint.jsonc --ignore docs/archive
-# --fix
+fix=''
+check=''
+while getopts "f" opt; do
+    case $opt in
+        f) fix="--fix"
+           check='--check --diff';;
+        *) exit
+    esac
+done
 
-black scripts --skip-string-normalization
+npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore docs/archive $fix
+
+black scripts --skip-string-normalization $check
 
 vale sync
-vale docs/ --glob "!docs/archive/*"
+vale docs/ dev/ _posts/ --glob "!docs/archive/*"
+

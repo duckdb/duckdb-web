@@ -19,6 +19,7 @@ lldb: break s -n query_break -c line==43
 You can also skip certain queries from executing by placing `mode skip` in the file, followed by an optional `mode unskip`. Any queries between the two statements will not be executed.
 
 ##### Triggering which tests to run
+
 When running the unittest program, by default all the fast tests are run. A specific test can be run by adding the name of the test as an argument. For the SQLLogicTests, this is the relative path to the test file.
 
 ```bash

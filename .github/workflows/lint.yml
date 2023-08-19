@@ -11,7 +11,10 @@ jobs:
           rm -rf docs/archive
       - uses: errata-ai/vale-action@reviewdog
         with:
-          files: docs/
+          files: |
+            docs/
+            _posts/
+            dev/
           filter_mode: added
           fail_on_error: false
       - uses: articulate/actions-markdownlint@main
