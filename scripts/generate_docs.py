@@ -194,7 +194,11 @@ def add_function(function_prototype, documentation, group):
     docs_string = '\n'
     docs_string += f'### `{function_name}`\n\n'
     docs_string += '---\n'
-    docs_string += docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ').strip() +'\n' if docs_str else ''
+    docs_string += (
+        docs_str.replace('e.g. ', 'e.g., ').replace('i.e. ', 'i.e., ').strip() + '\n'
+        if docs_str
+        else ''
+    )
     docs_string += '\n#### Syntax\n\n'
     docs_string += '---\n'
     docs_string += quick_docs_start()
