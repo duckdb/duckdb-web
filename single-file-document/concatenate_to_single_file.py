@@ -75,6 +75,14 @@ def adjust_links_in_doc_body(doc_body):
             doc_body
         )
 
+    # replace relative installation page links,
+    # while keeping the optional '?environment=...' query strings
+    doc_body = re.sub(
+            r"\[installation page\]\([./]*installation((\?)[a-zA-Z0-9=]+)?\)",
+            r"[installation page](https://duckdb.org/docs/installation/\1)",
+            doc_body
+        )
+
     # use relative path for images
     doc_body = doc_body.replace("](/images", "](../images")
     return doc_body
