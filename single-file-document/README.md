@@ -24,7 +24,7 @@ single-file-document/generate_single_file_documentation.sh --docker
 To generate the intermediate LaTeX code produced by Pandoc, run:
 
 ```bash
-pandoc --defaults pandoc-configuration.yaml --to=latex --output duckdb-docs.tex
+single-file-document/generate_latex.sh
 ```
 
 ## Notes
