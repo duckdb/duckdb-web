@@ -83,6 +83,9 @@ def adjust_links_in_doc_body(doc_body):
             doc_body
         )
 
+    # replace links to data sets to point to the website
+    doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
+
     # use relative path for images
     doc_body = doc_body.replace("](/images", "](../images")
     return doc_body
