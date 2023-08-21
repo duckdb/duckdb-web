@@ -99,7 +99,7 @@ install.packages("arrow")
 ```
 
 To execute the sample-examples in this section, we need to download the following custom parquet files:
- - <https://github.com/duckdb/duckdb-web/blob/master/_posts/data/integers.parquet?raw=true>
+ - <https://github.com/duckdb/duckdb-web/blob/main/_posts/data/integers.parquet?raw=true>
  - <https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet>
 
 
