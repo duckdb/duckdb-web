@@ -27,6 +27,12 @@ def linked_path_to_label(doc_file_path, link_relative_path):
     # ensure that the path is relative
     if link_relative_path.startswith('/'):
         link_relative_path = link_relative_path[1:]
+
+    # for links pointing within the same document - [example](#section_header) -
+    # we set the document's filename to the link path
+    if link_relative_path == "":
+        link_relative_path = doc_file_path.split("/")[-1]
+
     # find the containing directory
     doc_dir_path = f"{doc_file_path}/.."
     # compose the full path and get the relative path
