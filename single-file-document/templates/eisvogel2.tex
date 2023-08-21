@@ -129,6 +129,7 @@ $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
 \usepackage{amsmath,amssymb}
+%% <patch for the DuckDB documentation>
 \usepackage{xltxtra}
 \usepackage{newunicodechar}
 
@@ -145,6 +146,9 @@ $endif$
 \newunicodechar{🏼}{\xelatexemoji{1f3fc}}
 \newunicodechar{🏽}{\xelatexemoji{1f3fd}}
 \newunicodechar{␣}{\textvisiblespace}
+
+\renewcommand\_{\textunderscore\allowbreak}
+%% </patch for the DuckDB documentation>
 
 $if(linestretch)$
 \usepackage{setspace}
@@ -1025,8 +1029,10 @@ $include-before$
 
 $endfor$
 $if(toc)$
+%% <patch for the DuckDB documentation>
 % add ToC to ToC
 \setuptoc{toc}{totoc}
+%% </patch for the DuckDB documentation>
 $if(toc-title)$
 \renewcommand*\contentsname{$toc-title$}
 $endif$
