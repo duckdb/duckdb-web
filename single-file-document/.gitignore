@@ -17,3 +17,5 @@ duckdb-docs.pdf
 *.cb2
 .*.lb
 *.fdb_latexmk
+*.synctex*
+*.xdv
