@@ -5,4 +5,6 @@ description: DuckDB Documentation. DuckDB is an embedded database designed to ex
 
 ---
 
+### [DuckDB documentation as a single PDF](/duckdb-docs.pdf)
+
 <div id="docusitemaphere"></div>
