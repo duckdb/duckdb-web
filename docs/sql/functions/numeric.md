@@ -7,7 +7,7 @@ title: Numeric Functions
 The table below shows the available mathematical operators for numeric types.
 
 | Operator | Description | Example | Result |
-|:---|:---|:---|:---|
+|:-|:---|:-|:-|
 | `+` | addition | `2 + 3` | 5 |
 | `-` | subtraction | `2 - 3` | -1 |
 | `*` | multiplication | `2 * 3` | 6 |
@@ -35,7 +35,7 @@ whereas the others are available for all numeric data types.
 The table below shows the available mathematical functions.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:---|:---|:---|:--|
 | `abs(x)` | absolute value | `abs(-17.4)` | 17.4 |
 | `acos(x)` | computes the arccosine of x | `acos(0.5)` | 1.0471975511965976 |
 | `asin(x)` | computes the arcsine of x | `asin(0.5)` | 0.5235987755982989 |

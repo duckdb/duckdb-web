@@ -40,7 +40,7 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 Below are parameters that can be passed in to the CSV reader. 
 
 | Name | Description | Type | Default |
-|:------|:--------|:---|:---|
+|:--|:-----|:-|:-|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. | bool | false |
 | `auto_detect` | Enables [auto detection of parameters](auto_detection) | bool | true |
 | `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `struct` | `(empty)` |

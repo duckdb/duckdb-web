@@ -88,7 +88,7 @@ Any option that is a boolean can be enabled or disabled in multiple ways. You ca
 The below options are applicable to all formats written with `COPY`. 
 
 | Name | Description | Type | Default |
-|:---|:---|:----|:----|
+|:--|:-----|:-|:-|
 | `allow_overwrite` | Whether or not to allow overwriting a directory if one already exists. Only has an effect when used with `partition_by`. | bool | false |
 | `format` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Available options are `CSV`, `PARQUET` and `JSON`. | varchar | auto |
 | `partition_by` | The columns to partition by using a hive partitioning scheme, see the [partitioned writes section](../../data/partitioning/partitioned_writes). | varchar[] | (empty) |
@@ -100,7 +100,7 @@ The below options are applicable to all formats written with `COPY`.
 The below options are applicable when writing `CSV` files.
 
 | Name | Description | Type | Default |
-|:---|:---|:----|:----|
+|:--|:-----|:-|:-|
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `force_quote` | The list of columns to always add quotes to, even if not required. | varchar[] | `[]` |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
@@ -117,7 +117,7 @@ The below options are applicable when writing `CSV` files.
 The below options are applicable when writing `Parquet` files.
 
 | Name | Description | Type | Default |
-|:---|:---|:----|:----|
+|:--|:-----|:-|:-|
 | `compression` | The compression format to use (uncompressed, snappy, gzip or zstd). | varchar | snappy |
 | `row_group_size` | The target size, i.e., number of rows, of each row-group. | bigint | 122880 |
 | `row_group_size_bytes` | The target size of each row-group. You can pass either a human-readable string, e.g., '2MB', or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order=false;`, otherwise it is ignored. | bigint | `row_group_size * 1024` |
@@ -154,7 +154,7 @@ TO 'my.parquet' (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}}
 The below options are applicable when writing `JSON` files.
 
 | Name | Description | Type | Default |
-|:---|:---|:----|:----|
+|:--|:-----|:-|:-|
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use gzip, `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `dateformat` | Specifies the date format to use when writing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
 | `timestampformat` | Specifies the date format to use when writing timestamps. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |

@@ -34,8 +34,8 @@ The currently implemented spatial functions can roughly be categorized into the 
 
 Convert between geometries and other formats. 
 
-| Scalar functions                  | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D          |
-|-----------------------------------|----------|----------|---------------|------------|-----------------|
+| Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
+|-----|---|--|--|--|---|
 | VARCHAR ST_AsGeoJSON(GEOMETRY)    | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
 | VARCHAR ST_AsHEXWKB(GEOMETRY)     | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
 | VARCHAR ST_AsText(GEOMETRY)       | 🧭       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
@@ -47,8 +47,8 @@ Convert between geometries and other formats.
 
 Construct new geometries from other geometries or other data.
 
-| Scalar functions                                       | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D         |
-| ------------------------------------------------------ | -------- | -------- | ------------- | ---------- | -------------- |
+| Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
+|-----|---|--|--|--|---|
 | GEOMETRY ST_Point(DOUBLE, DOUBLE)                      | 🦆        | 🦆        |               |            |                |
 | GEOMETRY ST_ConvexHull(GEOMETRY)                       | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | GEOMETRY ST_Boundary(GEOMETRY)                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
@@ -70,8 +70,8 @@ Construct new geometries from other geometries or other data.
 
 Calculate and access spatial properties of geometries.
 
-| Scalar functions                       | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D         |
-| -------------------------------------- | -------- | -------- | ------------- | ---------- | -------------- |
+| Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
+|-----|---|--|--|--|---|
 | DOUBLE ST_Area(GEOMETRY)               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
 | BOOLEAN ST_IsClosed(GEOMETRY)          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | BOOLEAN ST_IsEmpty(GEOMETRY)           | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
@@ -88,8 +88,8 @@ Calculate and access spatial properties of geometries.
 
 Compute relationships and spatial predicates between geometries.
 
-| Scalar functions                               | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D         |
-| ---------------------------------------------- | -------- | -------- | ------------- | ---------- | -------------- |
+| Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
+|-----|---|--|--|--|---|
 | BOOLEAN ST_Within(GEOMETRY, GEOMETRY)          | 🧭        | 🦆 or 🔄   | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | BOOLEAN ST_Touches(GEOMETRY, GEOMETRY)         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
 | BOOLEAN ST_Overlaps(GEOMETRY, GEOMETRY)        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
@@ -128,8 +128,8 @@ Note that GDAL is single-threaded, so this table function will not be able to ma
 
 We currently support over 50 different formats. You can generate the following table of supported GDAL drivers yourself by executing `SELECT * FROM ST_Drivers()`.
 
-| short_name     | long_name                                           | can_create | can_copy | can_open | help_url                                             |
-| -------------- | --------------------------------------------------- | ---------- | -------- | -------- | ---------------------------------------------------- |
+| short_name | long_name | can_create | can_copy | can_open | help_url |
+|--|---|-|-|-|---|
 | ESRI Shapefile | ESRI Shapefile                                      | true       | false    | true     | <https://gdal.org/drivers/vector/shapefile.html>     |
 | MapInfo File   | MapInfo File                                        | true       | false    | true     | <https://gdal.org/drivers/vector/mitab.html>         |
 | UK .NTF        | UK .NTF                                             | false      | false    | true     | <https://gdal.org/drivers/vector/ntf.html>           |

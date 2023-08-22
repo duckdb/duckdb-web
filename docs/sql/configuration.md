@@ -33,8 +33,8 @@ RESET memory_limit;
 
 Below is a list of all available settings.
 
-|                   name                   |                                                                       description                                                                       | input_type |      default_value       |
-|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------------------------|
+| name | description | input_type | default_value |
+|--|---|--|-|
 | Calendar                                 | The current calendar                                                                                                                                    | VARCHAR    | System (locale) calendar |
 | TimeZone                                 | The current time zone                                                                                                                                   | VARCHAR    | System (locale) timezone |
 | access_mode                              | Access mode of the database (**AUTOMATIC**, **READ_ONLY** or **READ_WRITE**)                                                                            | VARCHAR    | AUTOMATIC                |

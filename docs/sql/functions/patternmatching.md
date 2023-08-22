@@ -142,7 +142,7 @@ SELECT * FROM glob('*');
 ## Regular Expressions
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:---|:---|:---|:--|
 | `regexp_full_match(`*`string`*`, `*`regex`*`)`| Returns true if the entire *string* matches the *regex* | `regexp_full_match('anabanana', '(an)*')` | `false` |
 | `regexp_matches(`*`string`*`, `*`pattern`*`)` | returns `TRUE` if  *string* contains the regexp *pattern*, `FALSE` otherwise | `regexp_matches('anabanana', '(an)*')` | `true` |
 | `regexp_replace(`*`string`*`, `*`pattern`*`, `*`replacement`*`)`; | if *string* contains the regexp *pattern*, replaces the matching part with *replacement* | `select regexp_replace('hello', '[lo]', '-')` | `he-lo` |

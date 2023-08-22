@@ -39,7 +39,7 @@ For order-insensitive aggregates, this clause is parsed and applied, which is in
 The table below shows the available general aggregate functions.
 
 | Function | Description | Example | Alias(es) |
-|:---|:---|:---|:---|
+|:--|:---|:--|:--|
 | `any_value(arg)` |Returns the first _non-null_ value from arg. | `any_value(A)` | - |
 | `arg_max(arg,val)` |Finds the row with the maximum `val`. Calculates the `arg` expression at that row. | `arg_max(A,B)` | `argMax(A,B)`, `max_by(A,b)` |
 | `arg_min(arg,val)` |Finds the row with the minimum `val`. Calculates the `arg` expression at that row. | `arg_min(A,B)` | `argMin(A,B)`, `min_by(A,B)` |
@@ -71,15 +71,15 @@ The table below shows the available approximate aggregate functions.
 | Function | Description | Example |
 |:---|:---|:---|
 | `approx_count_distinct(x)` | Gives the approximate count of distinct elements using HyperLogLog. | `approx_count_distinct(A)` |
-| `approx_quantile(x,pos)` | Gives the approximate quantile using T-Digest. | `approx_quantile(A,0.5)` |
-| `reservoir_quantile(x,quantile,sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A,0.5,1024)` |
+| `approx_quantile(x, pos)` | Gives the approximate quantile using T-Digest. | `approx_quantile(A, 0.5)` |
+| `reservoir_quantile(x, quantile, sample_size=8192)` | Gives the approximate quantile using reservoir sampling, the sample size is optional and uses 8192 as a default size. | `reservoir_quantile(A, 0.5, 1024)` |
 
 ## Statistical Aggregates
 
 The table below shows the available statistical aggregate functions.
 
 | Function | Description | Formula | Alias |
-|:---|:---|:---|:---|
+|:--|:---|:--|:-|
 | `corr(y,x)` | Returns the correlation coefficient for non-null pairs in a group. | `COVAR_POP(y, x) / (STDDEV_POP(x) * STDDEV_POP(y))`| - |
 | `covar_pop(y,x)` | Returns the population covariance of input values. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / COUNT(*) ` | - |
 | `covar_samp(y,x)` | Returns the sample covariance for non-null pairs in a group. | `(SUM(x*y) - SUM(x) * SUM(y) / COUNT(*)) / (COUNT(*) - 1)` | - |

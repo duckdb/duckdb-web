@@ -29,8 +29,8 @@ SELECT * FROM duckdb_extensions();
 
 ## All available extensions
 
-| Extension name                                                                                                                      | Description                                                          | Aliases         |
-| ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------- |
+| Extension name | Description | Aliases |
+|---|-----|--|
 | autocomplete                                                                                                                        | Adds supports for autocomplete in the shell                          |                 |
 | arrow [![GitHub logo](/images/github-mark.svg)](https://github.com/duckdblabs/arrow)                                                | A zero-copy data integration between Apache Arrow and DuckDB         |                 |
 | [excel](excel)                                                                                                                      | Adds support for Excel-like format strings                           |                 |

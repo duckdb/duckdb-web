@@ -10,8 +10,8 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 <!-- This follows the order of shorthand, core/main function (list_), other list_ aliases, array_ aliases -->
 
-| Function                                          | Description                                                                                                                                                                         | Example                                  | Result            |
-|:--------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|:------------------|
+| Function | Description | Example | Result |
+|:---|:--|:---|:-|
 | *`list`*`[`*`index`*`]`                           | Bracket notation serves as an alias for `list_extract`.                                                                                                                             | `l[3]`                                   | `6`               |
 | `list_extract(`*`list`*`, `*`index`*`)`           | Extract the `index`th (1-based) value from the list.                                                                                                                                | `list_extract(l, 3)`                     | `6`               |
 | `list_element(`*`list`*`, `*`index`*`)`           | Alias for `list_extract`.                                                                                                                                                           | `list_element(l, 3)`                     | `6`               |
@@ -71,12 +71,12 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 The following operators are supported for lists:
 
-| Operator | Description                                                                               | Example                    | Result          |
-|----------|-------------------------------------------------------------------------------------------|----------------------------|-----------------|
+| Operator | Description | Example | Result |
+|-|--|---|-|
 | `&&`     | Alias for `list_intersect`                                                                | `[1,2,3,4,5] && [2,5,5,6]` | `[2,5]`         |
 | `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1,2,3,4] @> [3,4,3]`     | `true`          |
 | `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1,4] <@ [1,2,3,4]`       | `true`          |
-| `\|\|`   | Alias for `list_concat`                                                                   | `[1,2,3] \|\| [4,5,6]`     | `[1,2,3,4,5,6]` |
+| `||`     | Alias for `list_concat`                                                                   | `[1,2,3] || [4,5,6]`       | `[1,2,3,4,5,6]` |
 
 ## List Comprehension
 
@@ -91,19 +91,19 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 
 ## Struct Functions
 
-| Function | Description                                                                                                                                                                                                                | Example | Result |
-|:---|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---|:---|
-| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`.                                                                                                                                                                      | `({'i': 3, 's': 'string'}).s` | `string` |
-| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`.                                                                                                                                                                  | `({'i': 3, 's': 'string'})['s']` | `string` |
+| Function | Description | Example | Result |
+|:--|:---|:---|:--|
+| *`struct`*`.`*`entry`* | Dot notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'}).s` | `string` |
+| *`struct`*`[`*`entry`*`]` | Bracket notation serves as an alias for `struct_extract`. | `({'i': 3, 's': 'string'})['s']` | `string` |
 | `row(`*`any`*`, ...)` | Create a `STRUCT` containing the argument values. If the values are column references, the entry name will be the column name; otherwise it will be the string `'vN'` where `N` is the (1-based) position of the argument. | `row(i, i % 4, i / 4)` | `{'i': 3, 'v2': 3, 'v3': 0}`|
-| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct.                                                                                                                                                                                   | `struct_extract(s, 'i')` | `4` |
-| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name.                                                                                                                          | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
-| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s).                                                                                             | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
+| `struct_extract(`*`struct`*`, `*`'entry'`*`)` | Extract the named entry from the struct. | `struct_extract(s, 'i')` | `4` |
+| `struct_pack(`*`name := any`*`, ...)` | Create a `STRUCT` containing the argument values. The entry name will be the bound variable name. | `struct_pack(i := 4, s := 'string')` | `{'i': 3, 's': 'string'}`|
+| `struct_insert(`*`struct`*`, `*`name := any`*`, ...)` | Add field(s)/value(s) to an existing `STRUCT` with the argument values. The entry name(s) will be the bound variable name(s). | `struct_insert({'a': 1}, b := 2)`    | `{'a': 1, 'b': 2}`           |
 
 ## Map Functions
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:---|:---|:-|
 | `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | `[a]` |
 | `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `element_at(map([100, 5], [42, 43]),100);` | `[42]` |
 | `map_extract(`*`map, key`*`)` | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `map_extract(map([100, 5], [42, 43]),100);` | `[42]` |
@@ -117,7 +117,7 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 ## Union Functions
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:---|:---|:-|
 | *`union`*`.`*`tag`* | Dot notation serves as an alias for `union_extract`.| `(union_value(k := 'hello')).k` | `string` |
 | `union_extract(`*`union`*`, `*`'tag'`*`)` | Extract the value with the named tags from the union. `NULL` if the tag is not currently selected | `union_extract(s, 'k')` | `hello` |
 | `union_value(`*`tag := any`*`)` | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. | `union_value(k := 'hello')` | `'hello'::UNION(k VARCHAR)`| 

@@ -4,8 +4,8 @@ title: Enum Types
 blurb: The ENUM type represents a dictionary data structure with all possible unique values of a column.
 ---
 | Name | Description |
-|:---|:---|
-| ENUM | Dictionary Encoding representing all possible string values of a column. |
+|:--|:-----|
+| `ENUM` | Dictionary Encoding representing all possible string values of a column. |
 
 ## Enums
 
@@ -50,9 +50,9 @@ CREATE TYPE birds AS ENUM (SELECT my_varchar FROM my_inputs);
 SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
 
-| my_enum_range |
-|---------------|
-| [duck, goose] |
+|  my_enum_range  |
+|-----------------|
+| `[duck, goose]` |
 
 ### Enum Usage
 
@@ -86,7 +86,7 @@ COPY person FROM 'path/to/file.csv' (AUTO_DETECT TRUE);
 
 ```
 
-### Enum Vs. Strings
+### Enum vs. Strings
 
 DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for `ENUM` columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different `ENUM` columns, or an `ENUM` and a `VARCHAR` column.
 

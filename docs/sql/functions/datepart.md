@@ -14,7 +14,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 ### Usable as Date Part Specifiers and in Intervals
 
 | Specifier | Description | Synonyms | Example |
-|:---|:---|:---|:---|
+|:--|:--|:---|:-|
 | `'century'` | Gregorian century | `'cent'`, `'centuries'`, `'c'` | 21 |
 | `'day'` | Gregorian day | `'days'`, `'d'`, `'dayofmonth'` | 3 |
 | `'decade'` | Gregorian decade | `'dec'`, `'decades'`, `'decs'` | 202 |
@@ -31,7 +31,7 @@ The examples are the corresponding parts of the timestamp `2021-08-03 11:59:44.1
 ### Usable in Date Part Specifiers Only
 
 | Specifier | Description | Synonyms | Example |
-|:---|:---|:---|:---|
+|:--|:--|:---|:-|
 | `'dayofweek'` | Day of the week (Sunday = 0, Saturday = 6) | `'weekday'`, `'dow'` | 2 |
 | `'dayofyear'` | Day of the year (1-365/366) | `'doy'` | 215 |
 | `'epoch'` | Seconds since 1970-01-01 | | 1627991984 |
@@ -52,7 +52,7 @@ has been installed to support `TIMESTAMP WITH TIME ZONE`.
 There are dedicated extraction functions to get certain subfields:
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:--|:---|:-|
 | `century(`*`date`*`)` | Century | `century(date '1992-02-15')` | `20` |
 | `day(`*`date`*`)` | Day | `day(date '1992-02-15')` | `15` |
 | `dayofmonth(`*`date`*`)` | Day (synonym) | `dayofmonth(date '1992-02-15')` | `15` |

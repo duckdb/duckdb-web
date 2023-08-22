@@ -20,7 +20,7 @@ Since these functions do not involve binning or display,
 they are always available.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:--|:---|:--|
 | `current_timestamp` | Current date and time (start of current transaction) | `current_timestamp` | `2022-10-08 12:44:46.122-07` |
 | `get_current_timestamp()` | Current date and time (start of current transaction) | `get_current_timestamp()` | `2022-10-08 12:44:46.122-07` |
 | `greatest(`*`timestamptz`*`, `*`timestamptz`*`)` | The later of two timestamps | `greatest(TIMESTAMPTZ '1992-09-20 20:38:48', TIMESTAMPTZ '1992-03-22 01:02:03.1234')` | `1992-09-20 20:38:48-07` |
@@ -56,7 +56,7 @@ The table below shows the available mathematical operators for `TIMESTAMP WITH T
 provided by the ICU extension.
 
 | Operator | Description | Example | Result |
-|:---|:---|:---|:---|
+|:-|:--|:----|:--|
 | `+` | addition of an `INTERVAL` | `TIMESTAMPTZ '1992-03-22 01:02:03' + INTERVAL 5 DAY` | `1992-03-27 01:02:03` |
 | `-` | subtraction of `TIMESTAMPTZ`s | `TIMESTAMPTZ '1992-03-27' - TIMESTAMPTZ '1992-03-22'` | `5 days` |
 | `-` | subtraction of an `INTERVAL` | `TIMESTAMPTZ '1992-03-27 01:02:03' - INTERVAL 5 DAY` | `1992-03-22 01:02:03` |
@@ -102,7 +102,7 @@ There are also dedicated extraction functions to get the [subfields](../../sql/f
 The table below shows the available table functions for `TIMESTAMP WITH TIME ZONE` types.
 
 | Function | Description | Example |
-|:---|:---|:---|
+|:--|:---|:---|
 | `generate_series(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the closed range (including both the starting timestamp and the ending timestamp), stepping by the interval | `generate_series(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 | `range(`*`timestamptz`*`, `*`timestamptz`*`, `*`interval`*`)` | Generate a table of timestamps in the half open range (including the starting timestamp, but stopping before the ending timestamp) , stepping by the interval | `range(TIMESTAMPTZ '2001-04-10', TIMESTAMPTZ '2001-04-11', INTERVAL 30 MINUTE)` |
 
@@ -118,7 +118,7 @@ They should be used with caution because the produced values can contain gaps an
 Often the same functionality can be implemented more reliably using the `struct` variant of the `date_part` function.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:--|:---|:--|
 | `current_time()` | Returns a `TIME` whose GMT bin values correspond to local time in the current time zone. | `current_time()` | `08:47:56.497` |
 | `current_localtimestamp()` | Returns a `TIMESTAMP` whose GMT bin values correspond to local date and time in the current time zone. | `current_localtimestamp()` | `2022-12-17 08:47:56.497` |
 | `localtime` | Synonym for the `current_time()` function call. | `localtime` | `2022-12-17 08:47:56.497` |

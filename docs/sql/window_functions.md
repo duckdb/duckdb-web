@@ -30,7 +30,7 @@ Window functions can only be used in the `SELECT` clause. To share `OVER` specif
 The table below shows the available general window functions.
 
 | Function | Return Type | Description | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:--|
 | `row_number()` | `bigint` | The number of the current row within the partition, counting from 1. | `row_number()` |
 | `rank()` | `bigint` | The rank of the current row *with gaps*; same as `row_number` of its first peer. | `rank()` |
 | `dense_rank()` | `bigint` | The rank of the current row *without gaps*; this function counts peer groups. | `dense_rank()` |
@@ -55,7 +55,7 @@ All [aggregate functions](aggregates) can be used in a windowing context.
 The following functions support the `IGNORE NULLS` specification:
 
 | Function | Description | Example |
-|:---|:---|:---|
+|:---|:-|:---|:--|
 | `lag(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lag(column, 3 IGNORE NULLS)` |
 | `lead(expr any [, offset integer [, default any ]])` | Skips `NULL` values when counting. | `lead(column, 3 IGNORE NULLS)` |
 | `first_value(expr any)` | Skips leading `NULL`s | `first_value(column IGNORE NULLS)` |

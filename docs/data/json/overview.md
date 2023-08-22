@@ -43,7 +43,7 @@ Below are parameters that can be passed in to the JSON reader.
 ## Parameters
 
 | Name | Description | Type | Default |
-|:---|:---|:---|:---|
+|:--|:-----|:-|:-|
 | `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `16777216` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | bool | false |
@@ -106,11 +106,11 @@ If the JSON file contains a JSON array of objects (pretty-printed or not), `arra
 SELECT * FROM read_json_auto(array.json, format=array);
 ```
 
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
+|   key1   |   key2   |
+|----------|----------|
+| `value1` | `value1` |
+| `value2` | `value2` |
+| `value3` | `value3` |
 
 ### Format: unstructured
 
@@ -133,11 +133,11 @@ If the JSON file contains JSON that is not newline-delimited or an array, `unstr
 SELECT * FROM read_json_auto(unstructured.json, format=unstructured);
 ```
 
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
+|   key1   |   key2   |
+|----------|----------|
+| `value1` | `value1` |
+| `value2` | `value2` |
+| `value3` | `value3` |
 
 ## Examples of records settings
 
@@ -154,22 +154,22 @@ Continuing with the same example file from before:
 SELECT * FROM read_json_auto(records.json, records=true);
 ```
 
-|  key1  |  key2  |
-|--------|--------|
-| value1 | value1 |
-| value2 | value2 |
-| value3 | value3 |
+|   key1   |   key2   |
+|----------|----------|
+| `value1` | `value1` |
+| `value2` | `value2` |
+| `value3` | `value3` |
 
 When `records=false`, the JSON extension will not unpack the top-level objects, and create `STRUCT`s instead:
 ```sql
 SELECT * FROM read_json_auto(records.json, records=false);
 ```
 
-|               json               |
-|----------------------------------|
-| {'key1': value1, 'key2': value1} |
-| {'key1': value2, 'key2': value2} |
-| {'key1': value3, 'key2': value3} |
+|                json                |
+|------------------------------------|
+| `{'key1': value1, 'key2': value1}` |
+| `{'key1': value2, 'key2': value2}` |
+| `{'key1': value3, 'key2': value3}` |
 
 This is especially useful if we have non-object JSON, for example:
 ```json
@@ -181,11 +181,11 @@ This is especially useful if we have non-object JSON, for example:
 SELECT * FROM read_json_auto(arrays.json, records=false);
 ```
 
-|   json    |
-|-----------|
-| [1, 2, 3] |
-| [4, 5, 6] |
-| [7, 8, 9] |
+|    json     |
+|-------------|
+| `[1, 2, 3]` |
+| `[4, 5, 6]` |
+| `[7, 8, 9]` |
 
 ## Writing
 

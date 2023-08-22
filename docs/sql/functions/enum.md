@@ -13,8 +13,8 @@ These functions can take `NULL` or a specific value of the type as argument(s).
 With the exception of `enum_range_boundary`, the result depends only on the type of the argument and not on its value.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
-| `enum_code(`*`enum_value`*`)`                 | Returns the numeric value backing the given enum value                                                                                                                                                                                                                                             | `enum_code('happy'::mood)`                 | `2`                |
+|:--|:--|:---|:-|
+| `enum_code(`*`enum_value`*`)` | Returns the numeric value backing the given enum value | `enum_code('happy'::mood)` | `2` |
 | `enum_first(`*`enum`*`)` | Returns the first value of the input enum type. | `enum_first(null::mood)` | `sad` |
 | `enum_last(`*`enum`*`)` | Returns the last value of the input enum type. | `enum_last(null::mood)` | `anxious` |
 | `enum_range(`*`enum`*`)` | Returns all values of the input enum type as an array. | `enum_range(null::mood)` | `[sad, ok, happy, anxious]` |

@@ -9,7 +9,7 @@ This section describes functions and operators for examining and manipulating `T
 The table below shows the available mathematical operators for `TIME` types.
 
 | Operator | Description | Example | Result |
-|:---|:---|:---|:---|
+|:-|:---|:----|:--|
 | `+` | addition of an `INTERVAL` | `TIME '01:02:03' + INTERVAL 5 HOUR` | 06:02:03 |
 | `-` | subtraction of an `INTERVAL` | `TIME '06:02:03' - INTERVAL 5 HOUR'` | 01:02:03 |
 
@@ -18,7 +18,7 @@ The table below shows the available mathematical operators for `TIME` types.
 The table below shows the available scalar functions for `TIME` types.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:--|:---|:--|
 | `current_time`/`get_current_time()` | Current time (start of current transaction) | | |
 | `date_diff(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` | The number of [partition](../../sql/functions/datepart) boundaries between the times | `date_diff('hour', TIME '01:02:03', TIME '06:01:03')` | 5 |
 | `datediff(`*`part`*`, `*`starttime`*`, `*`endtime`*`)` | Alias of date_diff. The number of [partition](../../sql/functions/datepart) boundaries between the times | `datediff('hour', TIME '01:02:03', TIME '06:01:03')` | 5 |
