@@ -76,7 +76,7 @@ The following operators are supported for lists:
 | `&&`     | Alias for `list_intersect`                                                                | `[1,2,3,4,5] && [2,5,5,6]` | `[2,5]`         |
 | `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1,2,3,4] @> [3,4,3]`     | `true`          |
 | `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1,4] <@ [1,2,3,4]`       | `true`          |
-| `\|\|`   | Alias for `list_concat`                                                                   | `[1,2,3] \|\| [4,5,6]`     | `[1,2,3,4,5,6]` |
+| `||`     | Alias for `list_concat`                                                                   | `[1,2,3] || [4,5,6]`       | `[1,2,3,4,5,6]` |
 
 ## List Comprehension
 
