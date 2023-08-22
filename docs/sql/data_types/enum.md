@@ -86,7 +86,7 @@ COPY person FROM 'path/to/file.csv' (AUTO_DETECT TRUE);
 
 ```
 
-### Enum Vs. Strings
+### Enum vs. Strings
 
 DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for `ENUM` columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different `ENUM` columns, or an `ENUM` and a `VARCHAR` column.
 

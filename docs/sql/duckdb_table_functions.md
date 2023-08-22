@@ -251,7 +251,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 | Column | Description | Type |
 |:---|:---|:---|
 | `database_name` |The name of the database that contains this schema. | `VARCHAR` |
-| `database_oid` | Internal identifier of the database that contains- the data type. | `BIGINT` |
+| `database_oid` | Internal identifier of the database that contains the data type. | `BIGINT` |
 | `schema_name` |The SQL name of the schema containing the type definition. Always `main`.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object.| `BIGINT` |
 | `type_name` |The name or alias of this data type.| `VARCHAR` |
