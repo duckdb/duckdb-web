@@ -51,7 +51,7 @@ After a sequence is created, you use the function `nextval` to operate on the se
 ## Parameters
 
 | Name | Description |
-|:---|:---|
+|:--|:-----|
 | `TEMPORARY` or `TEMP` | If specified, the sequence object is created only for this session, and is automatically dropped on session exit. Existing permanent sequences with the same name are not visible (in this session) while the temporary sequence exists, unless they are referenced with schema-qualified names. |
 | name | The name (optionally schema-qualified) of the sequence to be created. |
 | `increment` | The optional clause `INCREMENT BY increment` specifies which value is added to the current sequence value to create a new value. A positive value will make an ascending sequence, a negative one a descending sequence. The default value is 1. |

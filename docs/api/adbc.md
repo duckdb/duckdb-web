@@ -19,7 +19,7 @@ In this section, we will describe the main functions that exist in ADBC, along w
 Set of functions that operate on a database.
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `DatabaseNew` | Allocate a new (but uninitialized) database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
 | `DatabaseSetOption` | Set a char* option. | `(AdbcDatabase *database, const char *key, const char *value,AdbcError *error)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` | 
 | `DatabaseInit` | Finish setting options and initialize the database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
@@ -30,7 +30,7 @@ Set of functions that operate on a database.
 A set of functions that create and destroy a connection to interact with a database.
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `ConnectionNew` | Allocate a new (but uninitialized) connection.| `(AdbcConnection*, AdbcError*)` | `AdbcConnectionNew(&adbc_connection, &adbc_error)` |
 | `ConnectionSetOption` | Options may be set before ConnectionInit.| `(AdbcConnection*, const char*, const char*, AdbcError*)` | `AdbcConnectionSetOption(&adbc_connection, ADBC_CONNECTION_OPTION_AUTOCOMMIT,ADBC_OPTION_VALUE_DISABLED, &adbc_error)` |
 | `ConnectionInit` | Finish setting options and initialize the connection. | `(AdbcConnection*, AdbcDatabase*, AdbcError*)` | `AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error)` | 
@@ -40,7 +40,7 @@ A set of functions that create and destroy a connection to interact with a datab
 A set of functions that retrieve metadata about the database. In general, these functions will return Arrow objects, specifically an ArrowArrayStream.
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table.| `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` | 
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
@@ -49,7 +49,7 @@ A set of functions that retrieve metadata about the database. In general, these 
 A set of functions with transaction semantics for the connection. By default, all connections start with auto-commit mode on, but this can be turned off via the ConnectionSetOption function.
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `ConnectionCommit` | Commit any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionCommit(&adbc_connection, &adbc_error)` |
 | `ConnectionRollback` | Rollback any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRollback(&adbc_connection, &adbc_error)` | 
 
@@ -60,7 +60,7 @@ Statements hold state related to query execution. They represent both one-off qu
 The functions used to create, destroy, and set options for a statement:
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `StatementNew` | Create a new statement for a given connection.| `(AdbcConnection*, AdbcStatement*, AdbcError*)` | `AdbcStatementNew(&adbc_connection, &adbc_statement, &adbc_error)` |
 | `StatementRelease` | Destroy a statement. | `(AdbcStatement*, AdbcError*)` | `AdbcStatementRelease(&adbc_statement, &adbc_error)` |
 | `StatementSetOption` | Set a string option on a statement. | `(AdbcStatement*, const char*, const char*, AdbcError*)` | `StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "TABLE_NAME", &adbc_error)` |
@@ -68,7 +68,7 @@ The functions used to create, destroy, and set options for a statement:
 Functions related to query execution:
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `StatementSetSqlQuery` | Set the SQL query to execute. The query can then be executed with StatementExecuteQuery.| `(AdbcStatement*, const char*, AdbcError*)` | `AdbcStatementSetSqlQuery(&adbc_statement, "SELECT * FROM TABLE", &adbc_error)` |
 | `StatementSetSubstraitPlan` | Set a substrait plan to execute. The query can then be executed with StatementExecuteQuery.| `(AdbcStatement*, const uint8_t*, size_t, AdbcError*)` | `AdbcStatementSetSubstraitPlan(&adbc_statement, substrait_plan, length, &adbc_error)` |
 | `StatementExecuteQuery` | Execute a statement and get the results.| `(AdbcStatement*, ArrowArrayStream*, int64_t*, AdbcError*)` | `AdbcStatementExecuteQuery(&adbc_statement, &arrow_stream, &rows_affected, &adbc_error)` |
@@ -77,7 +77,7 @@ Functions related to query execution:
 Functions related to binding, used for bulk insertion or in prepared statements.
 
 | Function Name | Description | Arguments | Example |
-|:---|:---|:---|:---|
+|:---|:-|:---|:----|
 | `StatementBindStream` |  Bind Arrow Stream. This can be used for bulk inserts or prepared statements.| `(AdbcStatement*, ArrowArrayStream*, AdbcError*)` | `StatementBindStream(&adbc_statement, &input_data, &adbc_error)` |
 
 ## C++ Example

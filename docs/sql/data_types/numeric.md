@@ -9,7 +9,7 @@ The types `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT` and `HUGEINT` store whole n
 The types `UTINYINT`, `USMALLINT`, `UINTEGER`, `UBIGINT` store whole unsigned numbers. Attempts to store negative numbers or values outside of the allowed range will result in an error
 
 | Name | Aliases | Min | Max |
-|:---|:---|---:|---:|
+|:--|:--|----:|----:|
 | `TINYINT` | `INT1` | -128 | 127 |
 | `SMALLINT` | `INT2`, `SHORT` | -32768 | 32767 |
 | `INTEGER` | `INT4`, `INT`, `SIGNED` | -2147483648 | 2147483647 |

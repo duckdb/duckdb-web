@@ -42,7 +42,7 @@ The following two table functions are used to read JSON:
 These functions have the following parameters:
 
 | Name | Description | Type | Default
-|:---|:---|:---|:---|
+|:--|:-----|:-|:-|
 | `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `16777216` |
 | `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | bool | false |
