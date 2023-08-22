@@ -19,9 +19,9 @@ The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific
 Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead.
 
 The executable can be configured in many ways when started. Some common configurations include: 
-- `-csv`, to set the output mode to CSV
-- `-json` to set the output mode to JSON
-- `-readonly` to open the database in read-only mode
+* `-csv`, to set the output mode to CSV
+* `-json` to set the output mode to JSON
+* `-readonly` to open the database in read-only mode
 
 To see additional command line options to use when starting the CLI, use the command `duckdb -help`.
 
