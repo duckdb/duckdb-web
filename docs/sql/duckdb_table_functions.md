@@ -41,8 +41,8 @@ The `duckdb_columns()` function provides metadata about the columns available in
 
 | Column | Description | Type |
 |:---|:---|:---|
-| `database_name` | The name of the database that contains the column object. | VARCHAR |
-| `database_oid` | Internal identifier of the database that contains the column object. | BIGINT |
+| `database_name` | The name of the database that contains the column object. | `VARCHAR` |
+| `database_oid` | Internal identifier of the database that contains the column object. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the table object that defines this column.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the table of the column.| `BIGINT` |
 | `table_name` |The SQL name of the table that defines the column.| `VARCHAR` |
@@ -62,13 +62,12 @@ The `duckdb_columns()` function provides metadata about the columns available in
 The [`information_schema.columns`](./information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
 ## duckdb_constraints
-
 The `duckdb_constraints()` function provides metadata about the constraints available in the DuckDB instance.
 
 | Column | Description | Type |
 |:---|:---|:---|
-| `database_name` | The name of the database that contains the constraint. | VARCHAR |
-| `database_oid` | Internal identifier of the database that contains the constraint. | BIGINT |
+| `database_name` | The name of the database that contains the constraint. | `VARCHAR` |
+| `database_oid` | Internal identifier of the database that contains the constraint. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the table on which the constraint is defined.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the table on which the constraint is defined.| `BIGINT` |
 | `table_name` |The SQL name of the table on which the constraint is defined.| `VARCHAR` |
@@ -87,9 +86,9 @@ Apart from the database associated at startup, the list also includes databases 
 
 | Column | Description | Type |
 |:---|:---|:---|
-| `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | VARCHAR |
-| `database_oid` | The internal identifier of the database. | VARCHAR |
-| `path` | The file path associated with the database. | VARCHAR |
+| `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | `VARCHAR` |
+| `database_oid` | The internal identifier of the database. | `VARCHAR` |
+| `path` | The file path associated with the database. | `VARCHAR` |
 | `internal` | True indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
 | `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. 
 
@@ -137,7 +136,7 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 | `varargs` |The name of the data type in case the function has a variable number of arguments, or `NULL` if the function does not have a variable number of arguments.| `VARCHAR` |
 | `macro_definition` |If this is a [macro](./statements/create_macro), the SQL expression that defines it.| `VARCHAR` |
 | `has_side_effects` |`false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`).| `BOOLEAN` |
-| `function_oid` | The internal identifier for this function | BIGINT |
+| `function_oid` | The internal identifier for this function | `BIGINT` |
 
 ## duckdb_indexes
 
@@ -146,7 +145,7 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | Column | Description | Type |
 |:---|:---|:---|
 | `database_name` |The name of the database that contains this index.| `VARCHAR` |
-| `database_oid` | Internal identifier of the database containing the index. | BIGINT |
+| `database_oid` | Internal identifier of the database containing the index. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the table with the secondary index.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object.| `BIGINT` |
 | `index_name` |The SQL name of this secondary index| `VARCHAR` |
@@ -177,7 +176,7 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 |:---|:---|:---|
 | `oid` |Internal identifier of the schema object.| `BIGINT` |
 | `database_name` |The name of the database that contains this schema.| `VARCHAR` |
-| `database_oid` | Internal identifier of the database containing the schema. | BIGINT |
+| `database_oid` | Internal identifier of the database containing the schema. | `BIGINT` |
 | `schema_name` |The SQL name of the schema.| `VARCHAR` |
 | `internal` |`true` if this is an internal (built-in) schema, `false` if this is a user-defined schema.| `BOOLEAN` |
 | `sql` |Always `NULL`| `VARCHAR` |
@@ -252,7 +251,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 | Column | Description | Type |
 |:---|:---|:---|
 | `database_name` |The name of the database that contains this schema. | `VARCHAR` |
-| `database_oid` | Internal identifier of the database that contains- the data type. | BIGINT |
+| `database_oid` | Internal identifier of the database that contains- the data type. | `BIGINT` |
 | `schema_name` |The SQL name of the schema containing the type definition. Always `main`.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object.| `BIGINT` |
 | `type_name` |The name or alias of this data type.| `VARCHAR` |
@@ -269,7 +268,7 @@ The `duckdb_views()` function provides metadata about the views available in the
 | Column | Description | Type |
 |:---|:---|:---|
 | `database_name` |The name of the database that contains this view| `VARCHAR` |
-| `database_oid` | Internal identifier of the database that contains this view. | BIGINT |
+| `database_oid` | Internal identifier of the database that contains this view. | `BIGINT` |
 | `schema_name` |The SQL name of the schema where the view resides.| `VARCHAR` |
 | `schema_oid` |Internal identifier of the schema object that contains the view.| `BIGINT` |
 | `view_name` |The SQL name of the view object.| `VARCHAR` |

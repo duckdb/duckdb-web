@@ -4,8 +4,8 @@ title: Enum Types
 blurb: The ENUM type represents a dictionary data structure with all possible unique values of a column.
 ---
 | Name | Description |
-|:---|:---|
-| ENUM | Dictionary Encoding representing all possible string values of a column. |
+|:--|:-----|
+| `ENUM` | Dictionary Encoding representing all possible string values of a column. |
 
 ## Enums
 
@@ -50,9 +50,9 @@ CREATE TYPE birds AS ENUM (SELECT my_varchar FROM my_inputs);
 SELECT enum_range(NULL::birds) AS my_enum_range;
 ```
 
-| my_enum_range |
-|---------------|
-| [duck, goose] |
+|  my_enum_range  |
+|-----------------|
+| `[duck, goose]` |
 
 ### Enum Usage
 
