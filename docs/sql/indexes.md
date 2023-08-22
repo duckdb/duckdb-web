@@ -30,7 +30,7 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 ### Parameters
 
 | Name | Description |
-|:---|:---|
+|:-|:-----|
 |`UNIQUE`|Causes the system to check for duplicate values in the table when the index is created (if data already exist) and each time data is added. Attempts to insert or update data that would result in duplicate entries will generate an error.|
 |`name`|The name of the index to be created.|
 |`table`|The name of the table to be indexed.|

@@ -9,7 +9,7 @@ The views in the `information_schema` are SQL-standard views that describe the c
 The top level catalog view is `information_schema.schemata`. It lists the catalogs and the schemas present in the database and has the following layout:
 
 | Column | Description | Type | Example |
-|:---|:---|:---|:---|
+|:--|:---|:-|:-|
 | `catalog_name` |Name of the database that the schema is contained in. | `VARCHAR` | `NULL` |
 | `schema_name` |Name of the schema. | `VARCHAR` | `'main'` |
 | `schema_owner` |Name of the owner of the schema. Not yet implemented. | `VARCHAR` | `NULL` |
@@ -23,7 +23,7 @@ The top level catalog view is `information_schema.schemata`. It lists the catalo
 The view that describes the catalog information for tables and views is `information_schema.tables`. It lists the tables present in the database and has the following layout:
 
 | Column | Description | Type | Example |
-|:---|:---|:---|:---|
+|:--|:---|:-|:-|
 | `table_catalog` |The catalog the table or view belongs to.| `VARCHAR` | `NULL` |
 | `table_schema` |The schema the table or view belongs to.| `VARCHAR` | `'main'` |
 | `table_name` |The name of the table or view.| `VARCHAR` | `'widgets'` |
@@ -42,7 +42,7 @@ The view that describes the catalog information for tables and views is `informa
 The view that describes the catalog information for columns is `information_schema.columns`. It lists the column present in the database and has the following layout:
 
 | Column | Description | Type | Example |
-|:---|:---|:---|:---|
+|:--|:---|:-|:-|
 | `table_catalog` |Name of the database containing the table.| `VARCHAR` | `NULL` |
 | `table_schema` |Name of the schema containing the table.| `VARCHAR` | `'main'` |
 | `table_name` |Name of the table.| `VARCHAR` | `'widgets'` |
@@ -62,6 +62,6 @@ The view that describes the catalog information for columns is `information_sche
 Several functions are also provided to see details about the schemas that are configured in the database.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:---|:--|:--|
 | `current_schema()` | Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'` |
 | `current_schemas(boolean)` | Return list of schemas. Pass a parameter of `True` to include implicit schemas. | `current_schemas(true)` | `['temp', 'main', 'pg_catalog']` |

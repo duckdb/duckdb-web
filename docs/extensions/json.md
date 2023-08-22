@@ -97,7 +97,7 @@ SELECT * FROM read_ndjson_objects('*.json.gz');
 DuckDB also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
-|:---|:---|
+|:----|:-------|
 | `read_json(`*`filename`*`)`   | Read JSON from **filename**, where **filename** can also be a list of files, or a glob pattern |
 | `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **format** set to `'newline_delimited'` |
 | `read_json_auto(`*`filename`*`)`   | Alias for `read_json` with all auto-detection enabled |
@@ -106,7 +106,7 @@ DuckDB also supports reading JSON as a table, using the following functions:
 Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
 
 | Name | Description | Type | Default |
-|:---|:---|:---|:---|
+|:--|:------|:-|:-|
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | struct | `(empty)` |
 | `records` | Can be one of `['auto', 'true', 'false']` | varchar | `'records'` |
 | `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | bool | `false` |
@@ -243,7 +243,7 @@ With the exception of `json_valid(`*`json`*`)`, all JSON functions produce an er
 We support two kinds of notations to describe locations within JSON: [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) and JSONPath.
 
 | Function | Description |
-|:---|:---|
+|:---|:----|
 | `json(`*`json`*`)` | Parse and minify *`json`* |
 | `json_valid(`*`json`*`)` | Return whether *`json`* is valid JSON |
 | `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of array lengths |
@@ -320,7 +320,7 @@ There are two extraction functions, which have their respective operators. The o
 These functions supports the same two location notations as the previous functions.
 
 | Function | Alias | Operator | Description |
-|:---|:---|:---|
+|:---|:---|:-|
 | `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract **JSON** from *`json`* at the given *`path`*. If *`path`* is a **LIST**, the result will be a **LIST** of **JSON** |
 | `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract **VARCHAR** from *`json`* at the given *`path`*. If *`path`* is a **LIST**, the result will be a **LIST** of **VARCHAR** |
 
@@ -356,7 +356,7 @@ SELECT j->'species'->>[0,1] FROM example;
 The following functions are used to create JSON.
 
 | Function | Description |
-|:---|:---|
+|:--|:----|
 | `to_json(`*`any`*`)` | Create **JSON** from a value of *`any`* type. Our **LIST** is converted to a JSON array, and our **STRUCT** and **MAP** are converted to a JSON object |
 | `json_quote(`*`any`*`)` | Alias for `to_json` |
 | `array_to_json(`*`list`*`)` | Alias for `to_json` that only accepts **LIST** |
@@ -388,7 +388,7 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 There are three JSON aggregate functions.
 
 | Function | Description |
-|:---|:---|
+|:---|:----|
 | `json_group_array(`*`any`*`)` | Return a JSON array with all values of *`any`* in the aggregation |
 | `json_group_object(`*`key`*`, `*`value`*`)` | Return a JSON object with all *`key`*, *`value`* pairs in the aggregation |
 | `json_group_structure(`*`json`*`)` | Return the combined `json_structure` of all *`json`* in the aggregation |
@@ -447,7 +447,7 @@ SELECT json_transform_strict(j, '{"family":"TINYINT","coolness":"DOUBLE"}') FROM
 The JSON extension also provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.
 
 | Function | Type | Description |
-|:---|:---|:---|
+|:------|:-|:---------|
 | `json_serialize_sql(`*`varchar`*`, skip_empty := `*`boolean`*`, skip_null := `*`boolean`*`, format := `*`boolean`*`)` | Scalar | Serialize a set of `;` separated select statments to an equivalent list of *`json`* serialized statements |
 | `json_deserialize_sql(`*`json`*`)` | Scalar  | Deserialize one or many *`json`* serialized statements back to an equivalent sql string |
 | `json_execute_serialized_sql(`*`varchar`*`)` | Table | Execute *`json`* serialized statements and return the resulting rows. Only one statement at a time is supported for now. |

@@ -43,7 +43,7 @@ Performance can be impacted by using too large decimals when not required. In pa
 The data types `REAL` and `DOUBLE` precision are inexact, variable-precision numeric types. In practice, these types are usually implementations of IEEE Standard 754 for Binary Floating-Point Arithmetic (single and double precision, respectively), to the extent that the underlying processor, operating system, and compiler support it.
 
 | Name | Aliases | Description |
-|:---|:---|:---|
+|:--|:--|:----|
 | `REAL` | `FLOAT4`, `FLOAT` | single precision floating-point number (4 bytes) |
 | `DOUBLE` | `FLOAT8` | double precision floating-point number (8 bytes) |
 

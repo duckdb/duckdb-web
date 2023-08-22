@@ -40,7 +40,7 @@ FROM   duckdb_views
 The `duckdb_columns()` function provides metadata about the columns available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` | The name of the database that contains the column object. | `VARCHAR` |
 | `database_oid` | Internal identifier of the database that contains the column object. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the table object that defines this column.| `VARCHAR` |
@@ -66,7 +66,7 @@ The [`information_schema.columns`](./information_schema#columns) system view pro
 The `duckdb_constraints()` function provides metadata about the constraints available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` | The name of the database that contains the constraint. | `VARCHAR` |
 | `database_oid` | Internal identifier of the database that contains the constraint. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the table on which the constraint is defined.| `VARCHAR` |
@@ -86,7 +86,7 @@ The `duckdb_databases()` function lists the databases that are accessible from w
 Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the duckdb process
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` | The name of the database, or the alias if the database was attached using an ALIAS-clause. | `VARCHAR` |
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
@@ -98,7 +98,7 @@ Apart from the database associated at startup, the list also includes databases 
 The `duckdb_dependencies()` function provides metadata about the dependencies available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:--|:------|:-|
 | `classid` |Always 0| `BIGINT` |
 | `objid` |The internal id of the object.| `BIGINT` |
 | `objsubid` |Always 0| `INTEGER` |
@@ -112,7 +112,7 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 The `duckdb_extensions()` function provides metadata about the extensions available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:--|:------|:-|
 | `extension_name` |The name of the extension.| `VARCHAR` |
 | `loaded` |`true` if the extension is loaded, `false` if it's not loaded.| `BOOLEAN` |
 | `installed` |`true` if the extension is installed, `false` if it's not installed.| `BOOLEAN` |
@@ -125,7 +125,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 The `duckdb_functions()` function provides metadata about the functions available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` |The name of the database that contains this function.| `VARCHAR` |
 | `schema_name` |The SQL name of the schema where the function resides.| `VARCHAR` |
 | `function_name` |The SQL name of the function.| `VARCHAR` |
@@ -144,7 +144,7 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 The `duckdb_indexes()` function provides metadata about secondary indexes available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` |The name of the database that contains this index.| `VARCHAR` |
 | `database_oid` | Internal identifier of the database containing the index. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the table with the secondary index.| `VARCHAR` |
@@ -165,7 +165,7 @@ Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e.
 The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `keyword_name` |The keyword.| `VARCHAR` |
 | `keyword_category` |Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
@@ -174,7 +174,7 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 The `duckdb_schemas()` function provides metadata about the schemas available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `oid` |Internal identifier of the schema object.| `BIGINT` |
 | `database_name` |The name of the database that contains this schema.| `VARCHAR` |
 | `database_oid` | Internal identifier of the database containing the schema. | `BIGINT` |
@@ -189,7 +189,7 @@ The [`information_schema.schemata`](./information_schema) system view provides a
 The `duckdb_sequences()` function provides metadata about the sequences available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` |The name of the database that contains this sequence | `VARCHAR` |
 | `database_oid` | Internal identifier of the database containing the sequence. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the sequence object.| `VARCHAR` |
@@ -214,7 +214,7 @@ Note2: If the sequence cycles, then the sequence will start over from the bounda
 The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance. 
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `name` |Name of the setting.| `VARCHAR` |
 | `value` |Current value of the setting.| `VARCHAR` |
 | `description` |A description of the setting.| `VARCHAR` |
@@ -227,7 +227,7 @@ The various settings are described in the [configuration page](./configuration).
 The `duckdb_tables()` function provides metadata about the base tables available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` |The name of the database that contains this table | `VARCHAR` |
 | `database_oid` | Internal identifier of the database containing the table. | `BIGINT` |
 | `schema_name` |The SQL name of the schema that contains the base table.| `VARCHAR` |
@@ -250,7 +250,7 @@ The [`information_schema.tables`](./information_schema#tables) system view provi
 The `duckdb_types()` function provides metadata about the data types available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` |The name of the database that contains this schema. | `VARCHAR` |
 | `database_oid` | Internal identifier of the database that contains the data type. | `BIGINT` |
 | `schema_name` |The SQL name of the schema containing the type definition. Always `main`.| `VARCHAR` |
@@ -267,7 +267,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 The `duckdb_views()` function provides metadata about the views available in the DuckDB instance.
 
 | Column | Description | Type |
-|:---|:---|:---|
+|:-|:---|:-|
 | `database_name` |The name of the database that contains this view| `VARCHAR` |
 | `database_oid` | Internal identifier of the database that contains this view. | `BIGINT` |
 | `schema_name` |The SQL name of the schema where the view resides.| `VARCHAR` |

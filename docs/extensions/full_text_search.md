@@ -17,7 +17,7 @@ create_fts_index(input_table, input_id, *input_values, stemmer='porter', stopwor
 `PRAGMA` that creates a FTS index for the specified table.
 
 | Name | Type | Description |
-|:--|:--|:--|
+|:--|:--|:----------|
 |`input_table`|`VARCHAR`|Qualified name of specified table e.g., `'table_name'` or `'main.table_name'`|
 |`input_id`|`VARCHAR`|Column name of document identifier e.g., `'document_identifier'`|
 |`\*input_values`|`VARCHAR`|Column names of the text fields to be indexed (vararg) e.g., `'text_field_1'`, `'text_field_2'`, ..., `'text_field_N'`, or `'\*'` for all columns in input_table of type `VARCHAR`|
@@ -39,7 +39,7 @@ drop_fts_index(input_table)
 Drops a FTS index for the specified table.
 
 | Name | Type | Description |
-|:--|:--|:--|
+|:--|:--|:-----------|
 |input_table|`VARCHAR`|Qualified name of input table e.g., `'table_name'` or `'main.table_name'`|
 
 ### match_bm25
@@ -50,7 +50,7 @@ match_bm25(input_id, query_string, fields := NULL, k := 1.2, b:= 0.75, conjuncti
 When an index is built, this retrieval macro is created that can be used to search the index.
 
 | Name | Type | Description |
-|:--|:--|:--|
+|:--|:--|:----------|
 |input_id|`VARCHAR`|Column name of document identifier e.g., `'document_identifier'`|
 |query_string|`VARCHAR`|The string to search the index for|
 |fields|`VARCHAR`|Comma-separarated list of fields to search in e.g., `'text_field_2,text_field_N'`. Defaults to `NULL` to search all indexed fields|
@@ -66,7 +66,7 @@ stem(input_string, stemmer)
 Reduces words to their base. Used internally by the extension.
 
 | Name | Type | Description |
-|:--|:--|:--|
+|:--|:--|:----------|
 |input_string|`VARCHAR`|The column or constant to be stemmed|
 |stemmer|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
 

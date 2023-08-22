@@ -9,7 +9,7 @@ This section describes functions and operators for examining and manipulating `I
 The table below shows the available mathematical operators for `INTERVAL` types.
 
 | Operator | Description | Example | Result |
-|:---|:---|:---|:---|
+|:-|:--|:--at--|:--|
 | `+` | addition of an `INTERVAL` | `INTERVAL 1 HOUR + INTERVAL 5 HOUR` | INTERVAL 6 HOUR |
 | `+` | addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | 1992-03-27 |
 | `+` | addition to a `TIMESTAMP` | `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` | 1992-03-27 01:02:03 |
@@ -24,7 +24,7 @@ The table below shows the available mathematical operators for `INTERVAL` types.
 The table below shows the available scalar functions for `INTERVAL` types.
 
 | Function | Description | Example | Result |
-|:---|:---|:---|:---|
+|:--|:--|:---|:--|
 | `date_part(`*`part`*`, `*`interval`*`)` | Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `date_part('year', INTERVAL '14 months')` | 1 |
 | `datepart(`*`part`*`, `*`interval`*`)` | Alias of date_part. Get [subfield](../../sql/functions/datepart) (equivalent to *extract*) | `datepart('year', INTERVAL '14 months')` | 1 |
 | `extract(`*`part`* `from` *`interval`*`)` | Get [subfield](../../sql/functions/datepart) from a date | `extract('month' FROM INTERVAL '14 months')` | 2 |
