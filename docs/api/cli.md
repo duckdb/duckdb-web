@@ -371,7 +371,7 @@ Now that the CSV has been written, a table can be created with the desired schem
 ```sql
 D .mode csv
 D .output
-D create table test_table (col_1 int, col_2 int);
+D CREATE TABLE test_table (col_1 INT, col_2 INT);
 D .import import_example.csv test_table --skip 1
 ```
 
@@ -513,8 +513,8 @@ To execute a command with SQL text passed in directly from the command line, cal
 The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
 ```text
-D install 'fts';
-D load 'fts';
+D INSTALL 'fts';
+D LOAD 'fts';
 ```
 
 <!-- SQL parameters do not appear to work -->
