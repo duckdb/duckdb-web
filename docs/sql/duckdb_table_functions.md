@@ -62,6 +62,7 @@ The `duckdb_columns()` function provides metadata about the columns available in
 The [`information_schema.columns`](./information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
 ## duckdb_constraints
+
 The `duckdb_constraints()` function provides metadata about the constraints available in the DuckDB instance.
 
 | Column | Description | Type |
