@@ -83,6 +83,13 @@ def adjust_links_in_doc_body(doc_body):
             doc_body
         )
 
+    # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
+    # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
+    doc_body = doc_body.replace("`*`, `*`", "`*`,` *`")
+
+    # replace "(`" with "(` " to allow line breaking
+    doc_body = doc_body.replace("(`", "(` ")
+
     # replace links to data sets to point to the website
     doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
 

@@ -914,6 +914,10 @@
               "url": "overview"
             },
             {
+              "page": "AutoComplete",
+              "url": "autocomplete"
+            },
+            {
               "page": "Full Text Search",
               "url": "full_text_search"
             },
