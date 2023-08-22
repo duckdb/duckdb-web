@@ -16,9 +16,9 @@ You can also get a reference to this connection by providing the special value `
 ```python
 import duckdb
 
-duckdb.execute('create table tbl as select 42 a')
+duckdb.execute('CREATE TABLE tbl AS SELECT 42 a')
 con = duckdb.connect(':default:')
-con.sql('select * from tbl')
+con.sql('SELECT * FROM tbl')
 # ┌───────┐
 # │   a   │
 # │ int32 │

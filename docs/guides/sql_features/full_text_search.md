@@ -7,13 +7,13 @@ A full text index allows for a query to quickly search for all occurrences of in
 Here's an example of building a full text index of Shakespeare's plays.
 
 ```sql
-create table corpus as
-  select * from read_parquet(
+CREATE TABLE corpus AS
+  SELECT * FROM read_parquet(
     'https://github.com/marhar/duckdb_tools/raw/main/full-text-shakespeare/shakespeare.parquet');
 ```
 
 ```sql
-describe corpus;
+DESCRIBE corpus;
 ```
 
 ```text
