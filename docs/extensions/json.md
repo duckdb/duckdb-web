@@ -78,6 +78,7 @@ With `'array'`, each array element is read, e.g.:
   {
     "goose": [1,2,3]
   }
+]
 ```
 Again, will result in two objects being read.
 
