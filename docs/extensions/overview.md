@@ -99,6 +99,9 @@ INSTALL 'httpfs.duckdb_extension';
 LOAD 'httpfs.duckdb_extension';
 ```
 
+## Extension template
+
+A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/). Note that this project is work-in-progress.
 
 ## Pages in this Section
 
