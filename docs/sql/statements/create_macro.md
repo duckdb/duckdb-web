@@ -60,7 +60,8 @@ SELECT add(1, 2);
 -- 3
 ```
 
-Macro's can have default parameters.  Unlike some languages, default parameters must be named.
+Macro's can have default parameters.  Unlike some languages, default parameters must be named
+when the macro is invoked.
 ```sql
 -- b is a default parameter
 CREATE MACRO add_default(a, b := 5) AS a + b;
