@@ -82,7 +82,7 @@ $(document).ready(function(){
 			userSelection.pack = "";
 			userSelection.platform = "";
 		}
-		if ( userSelection.version == ".master" && (userSelection.environment == ".cplusplus" || userSelection.environment == ".odbc") ) {
+		if ( userSelection.version == ".main" && (userSelection.environment == ".cplusplus" || userSelection.environment == ".odbc") ) {
 			$('.installer.select, .platform.select').addClass('inactive');
 			$('.installer.select ul li.selected, .platform.select ul li.selected').removeClass('selected');
 			userSelection.pack = "";

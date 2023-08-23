@@ -7,8 +7,8 @@
 			<li class="selected" data-id=".latest">
 				<div> {{ site.currentduckdbversion }} <span class="versioninfo">(Latest Release)</span></div>
 			</li>
-			<li data-id=".master">
-				<div>GitHub master <span class="versioninfo">(Bleeding Edge)</span></div>
+			<li data-id=".main">
+				<div>GitHub main <span class="versioninfo">(Bleeding Edge)</span></div>
 			</li>
 		</ul>
 	</div>
@@ -84,11 +84,11 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 <div class="possibleresults">
 
 	<!-- Empty Results -->
-	<div class="latest master cplusplus"></div>
-	<div class="latest master cli"></div>
-	<div class="latest master odbc"></div>
-	<div class="latest master cli binary"></div>
-	<div class="master odbc"></div>
+	<div class="latest main cplusplus"></div>
+	<div class="latest main cli"></div>
+	<div class="latest main odbc"></div>
+	<div class="latest main cli binary"></div>
+	<div class="main odbc"></div>
 	<!-- End Empty Results -->
 
 	<div class="latest julia">
@@ -106,7 +106,7 @@ con = DBInterface.connect(DuckDB.DB, ":memory:")
 DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
-	<div class="master julia">
+	<div class="main julia">
 		Not available
 	</div>
 
@@ -144,7 +144,7 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 		<br/>
 		make -j8
 	</div>
-	<div class="master cli source">
+	<div class="main cli source">
 		git clone https://github.com/duckdb/duckdb.git
 		<br/>
 		cd duckdb
@@ -201,16 +201,16 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 		./odbc_install.exe <span style="opacity: 0.5;"><font color="black">(double-click)</font>
 	</div>
 
-	<div class="master python">
+	<div class="main python">
 		{% highlight bash %}pip install duckdb --pre --upgrade{% endhighlight %}
 	</div>
 
-	<div class="master r">
+	<div class="main r">
 		{% highlight r %}install.packages('duckdb', repos=c('https://duckdb.r-universe.dev', 'https://cloud.r-project.org')){% endhighlight %}
 	</div>
 
-	<div class="master java">
-		Java master builds are available in the sonatype snapshots repository, which can be accessed with the following:
+	<div class="main java">
+		Java main builds are available in the sonatype snapshots repository, which can be accessed with the following:
 		{% highlight xml %}
 <dependency>
 	<groupId>org.duckdb</groupId>
@@ -234,36 +234,44 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 
-		<div class="master js">
+		<div class="main js">
 {% highlight bash %}npm install duckdb@next{% endhighlight %}
 	</div>
 
 
-	<div class="master cplusplus source">
+	<div class="main cplusplus source">
 		<a href="https://github.com/duckdb/duckdb" target="_blank">https://github.com/duckdb/duckdb</a>
 	</div>
 
-	<div class="master odbc">
-		<p>MacOS Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Arepository_dispatch+workflow%3AOSX" target="_blank">the "OSX" CI runs</a></p>
+	<div class="main cli binary cplusplus linux odbc">
+		Linux 64-bit: <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip</a><br/><br/>
 
-		<p>Linux Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Arepository_dispatch+workflow%3ALinuxRelease" target="_blank">the "LinuxRelease" CI runs</a></p>
+		$ wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip<br/>
+		$ curl -L https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip -o duckdb-binaries-linux.zip<br/><br/>
 
-		<p>Windows Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Arepository_dispatch+workflow%3AWindows" target="_blank">the "Windows" CI runs</a></p>
+		Linux arm64/aarch64: <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip</a><br/><br/>
+
+		$ wget https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip<br/>
+		$ curl -L https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip -o duckdb-binaries-linux-aarch64.zip
 	</div>
 
-	<div class="master cli binary macos">
-		MacOS Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Arepository_dispatch+workflow%3AOSX" target="_blank">the "OSX" CI runs</a>
+	<div class="main cli binary cplusplus macos">
+		MacOS binaries (universal): <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip</a><br/><br/>
+
+		wget https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip<br/>
+		curl -L https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip -o duckdb-binaries-osx.zip
 	</div>
 
-	<div class="master cli binary linux">
-		Linux Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Arepository_dispatch+workflow%3ALinuxRelease" target="_blank">the "LinuxRelease" CI runs</a>
+	<div class="main cli binary cplusplus win odbc">
+		Win 64-bit: <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip</a><br/><br/>
+
+		wget https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip<br/>
+		curl -L https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip -o duckdb-binaries-windows.zip
 	</div>
 
-	<div class="master cli binary win">
-		Windows Build Artifacts are available from <a href="https://github.com/duckdb/duckdb/actions?query=branch%3Amaster+event%3Arepository_dispatch+workflow%3AWindows" target="_blank">the "Windows" CI runs</a>
+	<div class="main binary macos odbc">
+		Not available
 	</div>
-
-
 
 	<div class="example python">
 {% highlight python %}
