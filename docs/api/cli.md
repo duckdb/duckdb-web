@@ -25,6 +25,8 @@ The executable can be configured in many ways when started. Some common configur
 
 To see additional command line options to use when starting the CLI, use the command `duckdb -help`.
 
+> DuckDB has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md). If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
+
 Frequently-used configurations can be stored in the file `~/.duckdbrc`. See the [Configuring the CLI](#configuring-the-cli) below for further information on these options.
 
 By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
