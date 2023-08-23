@@ -111,7 +111,7 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 
 ## Writing using the COPY statement
 
-The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the [`COPY`` statement](../../sql/statements/copy#copy-to) supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
+The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the [`COPY` statement](../../sql/statements/copy#copy-to) supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
 
 ```sql
 CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
