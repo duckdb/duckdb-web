@@ -95,6 +95,12 @@ def adjust_links_in_doc_body(doc_body):
 
     # use relative path for images
     doc_body = doc_body.replace("](/images", "](../images")
+
+    # express HUGEINT limits as powers of two (upper and lower limits are ±2^127-1)
+    doc_body = doc_body.replace("-170141183460469231731687303715884105727", "$-2^{127}-1$")
+    doc_body = doc_body.replace( "170141183460469231731687303715884105727",  "$2^{127}-1$")
+    doc_body = doc_body.replace("-170141183460469231731687303715884105728 (-1 << 127)", "$-2^{127}$")
+
     return doc_body
 
 

@@ -1,7 +1,7 @@
 data-dir: .
 input-file: duckdb-docs.md
 output-file: duckdb-docs.pdf
-from: markdown_github+header_attributes-smart
+from: markdown_github+header_attributes+tex_math_dollars-smart
 to: pdf
 metadata-file: metadata.yaml
 template: eisvogel2.tex
