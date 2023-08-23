@@ -51,7 +51,7 @@ CALL postgres_attach('dbname=myshinydb');
 `postgres_attach` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=myshinydb'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters to the function:
  * `source_schema` the name of a non-standard schema name in Postgres to get tables from. Default is `public`.
  * `overwrite` whether we should overwrite existing views in the target schema, default is `false`.
-* `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
+ * `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
 
 The tables in the database are registered as views in DuckDB, you can list them with
 ```SQL

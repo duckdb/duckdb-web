@@ -62,7 +62,7 @@ A syntax highlighter exists for [Visual Studio Code](https://marketplace.visuals
 
 A syntax highlighter is also available for [CLion](https://plugins.jetbrains.com/plugin/15295-sqltest). It can be installed directly on the IDE by searching SQLTest on the marketplace. A [github repository](https://github.com/pdet/SQLTest) is also available, with extensions and bug reports being welcome.
 
-##### Temporary Files
+#### Temporary Files
 
 For some tests (e.g. CSV/Parquet file format tests) it is necessary to create temporary files. Any temporary files should be created in the temporary testing directory. This directory can be used by placing the string `__TEST_DIR__` in a query. This string will be replaced by the path of the temporary testing directory.
 
@@ -71,7 +71,7 @@ statement ok
 COPY csv_data TO '__TEST_DIR__/output_file.csv.gz' (COMPRESSION GZIP);
 ```
 
-##### Require & Extensions
+#### Require & Extensions
 
 To avoid bloating the core system, certain functionality of DuckDB is available only as an extension. Tests can be build for those extensions by adding a `require` field in the test. If the extension is not loaded, any statements that occurs after the require field will be skipped. Examples of this are `require parquet` or `require icu`.
 

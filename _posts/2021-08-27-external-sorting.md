@@ -372,12 +372,12 @@ We see similar trends at SF10 and SF100, but for SF100, at around 12 payload col
 ClickHouse switches to an external sorting strategy, which is much slower than its in-memory strategy.
 Therefore, adding a few payload columns results in a runtime that is orders of magnitude higher.
 At 20 payload columns ClickHouse runs into the following error:
-```
+```text
 DB::Exception: Memory limit (for query) exceeded: would use 11.18 GiB (attempt to allocate chunk of 4204712 bytes), maximum: 11.18 GiB: (while reading column cs_list_price): (while reading from part ./store/523/5230c288-7ed5-45fa-9230-c2887ed595fa/all_73_108_2/ from mark 4778 with max_rows_to_read = 8192): While executing MergeTreeThread.
 ```
 
 HyPer also drops in performance before erroring out with the following message:
-```
+```text
 ERROR:  Cannot allocate 333982248 bytes of memory: The `global memory limit` limit of 12884901888 bytes was exceeded.
 ```
 As far as we are aware, HyPer uses [`mmap`](https://man7.org/linux/man-pages/man2/mmap.2.html), which creates a mapping between memory and a file.
@@ -392,7 +392,7 @@ Using swap usually slows down processing significantly, but the SSD is so fast t
 While Pandas loads the data, swap size grows to an impressive \~40 GB: Both the file and the data frame are fully in memory/swap at the same time, rather than streamed into memory.
 This goes down to \~20 GB of memory/swap when the file is done being read.
 Pandas is able to get quite far into the experiment until it crashes with the following error:
-```
+```text
 UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
 ```
 
@@ -521,7 +521,7 @@ We have set the number of threads that DuckDB and ClickHouse use to 8 because we
 
 Pandas performs comparatively worse than on the MacBook, because it has a single-threaded implementation, and this CPU has a lower single-thread performance.
 Again, Pandas crashes with an error (this machine does not dynamically increase swap):
-```
+```text
 numpy.core._exceptions.MemoryError: Unable to allocate 6.32 GiB for an array with shape (6, 141430723) and data type float64
 ```
 

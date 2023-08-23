@@ -107,7 +107,7 @@ CREATE TABLE messages(u UNION(num INT, error VARCHAR));
 INSERT INTO messages VALUES (42);
 INSERT INTO messages VALUES ('oh my globs');
 ```
-```
+```text
 SELECT * FROM messages;
 ┌─────────────┐
 │      u      │
@@ -142,7 +142,7 @@ CREATE TABLE obs(id INT, val1 INT, val2 INT);
 INSERT INTO obs VALUES (1, 10, 100), (2, 20, NULL), (3, NULL, 300);
 SELECT MIN(COLUMNS(*)), COUNT(*) from obs;
 ```
-```
+```text
 ┌─────────────┬───────────────┬───────────────┬──────────────┐
 │ min(obs.id) │ min(obs.val1) │ min(obs.val2) │ count_star() │
 ├─────────────┼───────────────┼───────────────┼──────────────┤
@@ -155,7 +155,7 @@ The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE`
 ```sql
 SELECT COLUMNS('val[0-9]+') from obs;
 ```
-```
+```text
 ┌──────┬──────┐
 │ val1 │ val2 │
 ├──────┼──────┤
@@ -170,7 +170,7 @@ SELECT COLUMNS('val[0-9]+') from obs;
 ```sql
 SELECT [x + 1 for x in [1, 2, 3]] AS l;
 ```
-```
+```text
 ┌───────────┐
 │     l     │
 ├───────────┤
@@ -211,8 +211,10 @@ The DuckDB shell also offers several improvements over the SQLite shell, such as
 
 The number of rows that are rendered can be changed by using the `.maxrows X` setting, and you can switch back to the old rendering using the `.mode box` command.
 
-```
+```sql
 D SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
+```
+```text
 ┌───────────┬─────────────────────┬─────────────────────┬───┬────────────┬──────────────┬──────────────┐
 │ vendor_id │      pickup_at      │     dropoff_at      │ … │ tip_amount │ tolls_amount │ total_amount │
 │  varchar  │      timestamp      │      timestamp      │   │   float    │    float     │    float     │
@@ -265,7 +267,7 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 **Progress Bars**. DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
-```
+```sql
 D copy lineitem to 'lineitem-big.parquet';
  32% ▕███████████████████▏                                        ▏ 
 ```
