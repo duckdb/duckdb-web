@@ -52,10 +52,6 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 
 > Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
 
-### Streaming Queries
-
-TODO
-
 ### UDF API
 
 The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
