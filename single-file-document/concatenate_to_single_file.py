@@ -59,6 +59,20 @@ def move_headers_down(doc_body):
     return re.sub(r"^##", f"##{extra_header_levels}", doc_body, flags=re.MULTILINE)
 
 
+def replace_html_code_blocks(doc_body):
+    matches = re.findall('(<div class="language-c highlighter-rouge">[^§]*?</code></pre></div></div>)', doc_body, flags=re.MULTILINE)
+    for match in matches:
+        # strip html elements
+        code_without_html_elements = re.sub("<[^>]*?>", "", match)
+        # add Markdown code block
+        code_as_markdown_block = f"""```c
+{code_without_html_elements}```
+"""
+        doc_body = doc_body.replace(match, code_as_markdown_block)
+
+    return doc_body
+
+
 def doc_path_to_page_header_header_label(doc_file_full_path):
     return doc_file_full_path \
         .replace("../docs/", "") \
@@ -176,6 +190,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
         doc_body = move_headers_down(doc_body)
+        doc_body = replace_html_code_blocks(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
         doc_body = change_link(doc_body, doc_file_path)
