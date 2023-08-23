@@ -19,7 +19,7 @@ To use DuckDB, you must first initialize a `DuckDB` instance using its construct
 With the `DuckDB` instance, you can create one or many `Connection` instances using the `Connection()` constructor. While connections should be thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection if you are in a multithreaded environment.
 
 
-```c++
+```cpp
 DuckDB db(nullptr);
 Connection con(db);
 ```
@@ -28,7 +28,7 @@ Connection con(db);
 
 Connections expose the `Query()` method to send a SQL query string to DuckDB from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
 
-```c++
+```cpp
 // create a table
 con.Query("CREATE TABLE integers(i INTEGER, j INTEGER)");
 
@@ -45,7 +45,7 @@ The `MaterializedQueryResult` instance contains firstly two fields that indicate
 
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
-```c++
+```cpp
 std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a WHERE i=$1");
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
@@ -61,7 +61,7 @@ These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner 
 
 The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a _SELECT_ statement, for instance:
 
-```c++
+```cpp
 bool bigger_than_four(int value) {
     return value > 4;
 }
@@ -73,8 +73,12 @@ connection.Query("SELECT bigger_than_four(i) FROM (VALUES(3), (5)) tbl(i)")->Pri
 
 The `CreateScalarFunction()` methods automatically creates vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
 
-**1.**`template<typename TR, typename... Args>`\
-&nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, TR (*udf_func)(Args…))`
+**1.**
+
+```cpp
+template<typename TR, typename... Args>
+void CreateScalarFunction(string name, TR (*udf_func)(Args…))
+```
 
 - template parameters:
     - **TR** is the return type of the UDF function;
@@ -95,12 +99,16 @@ This method automatically discovers from the template typenames the correspondin
 
 *In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
-**2.** `template<typename TR, typename... Args>`\
-&nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`
+**2.**
+
+```cpp
+template<typename TR, typename... Args>
+void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))
+```
 
 An example of use would be:
 
-```c++
+```cpp
 int32_t udf_date(int32_t a) {
 	return a;
 }
@@ -137,7 +145,7 @@ This function checks the template types against the SQLTypes passed as arguments
 
 The `CreateVectorizedFunction()` methods register a vectorized UDF such as:
 
-```c++
+```cpp
 /*
 * This vectorized function copies the input values to the result vector
 */
@@ -177,7 +185,7 @@ con.Query("SELECT udf_vectorized_int(i) FROM integers")->Print();
 
 The Vectorized UDF is a pointer of the type _scalar_function_t_:
 
-```c++
+```cpp
 typedef std::function<void(DataChunk &args, ExpressionState &expr, Vector &result)> scalar_function_t;
 ```
 
@@ -197,8 +205,12 @@ There are different vector types to handle in a Vectorized UDF:
 
 The general API of the `CreateVectorizedFunction()` method is as follows:
 
-**1.** `template<typename TR, typename... Args>`\
-&nbsp;&nbsp;&nbsp;`void CreateVectorizedFunction(string name, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
+**1.**
+
+```cpp
+template<typename TR, typename... Args>
+void CreateVectorizedFunction(string name, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)
+```
 
 - template parameters:
     - **TR** is the return type of the UDF function;
@@ -218,9 +230,9 @@ This method automatically discovers from the template typenames the correspondin
 - double → SQLType::DOUBLE
 - string_t → SQLType::VARCHAR
 
-**2.** `template<typename TR, typename... Args>`\
-&nbsp;&nbsp;&nbsp;`void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)`
+**2.**
 
-```c++
-// TODO
+```cpp
+template<typename TR, typename... Args>
+void CreateVectorizedFunction(string name, vector<SQLType> args, SQLType ret_type, scalar_function_t udf_func, SQLType varargs = SQLType::INVALID)
 ```
