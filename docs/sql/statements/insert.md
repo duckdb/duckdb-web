@@ -61,7 +61,7 @@ If a column name is misspelled or does not exist in the table, an error will occ
 
 This is not a problem however if columns are missing from the SELECT statement, as those will be filled with the default value.
 
-## On Conflict Clause
+## ON CONFLICT Clause
 
 An `ON CONFLICT` clause can be used to perform a certain action on conflicts that arise from `UNIQUE` or `PRIMARY KEY` constraints.
 
@@ -92,7 +92,7 @@ It updates every column of the **existing** row to the new values of the **to-be
 `INSERT OR IGNORE` is a shorter syntax alternative to `ON CONFLICT DO NOTHING`.
 
 
-### Returning Clause
+### RETURNING Clause
 
 The `RETURNING` clause may be used to return the contents of the rows that were inserted. This can be useful if some columns are calculated upon insert. For example, if the table contains an automatically incrementing primary key, then the `RETURNING` clause will include the automatically created primary key. This is also useful in the case of generated columns.
 

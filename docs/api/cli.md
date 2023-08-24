@@ -382,7 +382,7 @@ Note that the `.import` command utilizes the current `.mode` and `.separator` se
 D .import import_example.csv test_table --skip 1 --csv
 ```
 
-## Reading SQL From a File
+## Reading SQL from a File
 
 The DuckDB CLI can read both SQL commands and dot commands from an external file instead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.
 

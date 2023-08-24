@@ -29,7 +29,7 @@ COPY (SELECT * FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 COPY (FROM ontime) TO 'flights.csv' WITH (HEADER 1, DELIMITER '|');
 ```
 
-## CSV reader
+## CSV Reader
 
 CSV loading is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
@@ -67,7 +67,7 @@ Below are parameters that can be passed in to the CSV reader.
 | `types` or `dtypes` | The column types as either a list (by position) or a struct (by name). [Example here](tips#override-the-types-of-specific-columns). | varchar[] or struct | `(empty)` |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
 
-## read_csv_auto function
+## read_csv_auto Function
 
 The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
 
@@ -109,7 +109,7 @@ SELECT * FROM read_csv_auto('flights.csv', HEADER=TRUE);
 
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
-## Writing using the COPY statement
+## Writing Using the COPY Statement
 
 The `COPY` statement can be used to load data from a CSV file into a table. This statement has the same syntax as the [`COPY` statement](../../sql/statements/copy#copy-to) supported by PostgreSQL. For the `COPY` statement, we must first create a table with the correct schema to load the data into. We then specify the CSV file to load from plus any configuration options separately.
 

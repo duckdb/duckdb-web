@@ -18,7 +18,7 @@ All of these are implicitly castable to `GEOMETRY` but with a conversion cost, s
 
 `GEOMETRY` is not currently capable of storing additional geometry types, Z/M coordinates, or SRID information. These features may be added in the future. 
 
-## Spatial scalar Functions
+## Spatial Scalar Functions
 
 The spatial extension implements a large number of scalar functions and overloads. Most of these are implemented using the [GEOS](https://libgeos.org/) library, but we'd like to implement more of them natively in this extension to better utilize DuckDB's vectorized execution and memory management. The following symbols are used to indicate which implementation is used:
 
