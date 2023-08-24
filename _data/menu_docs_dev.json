@@ -181,7 +181,7 @@
               "url": "datafusion"
             },
             {
-              "page": "DuckDB with fsspec filesystems",
+              "page": "DuckDB with fsspec Filesystems",
               "url": "filesystems"
             }
           ]
