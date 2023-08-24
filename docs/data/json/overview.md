@@ -61,7 +61,7 @@ Below are parameters that can be passed in to the JSON reader.
 
 When using `read_json_auto`, every parameter that supports auto-detection is enabled.
 
-## Examples of format settings
+## Examples of Format Settings
 
 The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.  
 Here are some example JSON files and the corresponding `format` settings that should be used.
@@ -139,7 +139,7 @@ SELECT * FROM read_json_auto(unstructured.json, format=unstructured);
 | `value2` | `value2` |
 | `value3` | `value3` |
 
-## Examples of records settings
+## Examples of Records Settings
 
 The JSON extension can attempt to determine whether a JSON file contains records when setting `records=auto`.
 When `records=true`, the JSON extension expects JSON objects, and will unpack the fields of JSON objects into individual columns.
@@ -191,7 +191,7 @@ SELECT * FROM read_json_auto(arrays.json, records=false);
 
 The contents of tables or the result of queries can be written directly to a JSON file using the `COPY` statement. See the [COPY documentation](../../sql/statements/copy#copy-to) for more information.
 
-## read_json_auto function
+## read_json_auto Function
 
 The `read_json_auto` is the simplest method of loading JSON files: it automatically attempts to figure out the correct configuration of the JSON reader. It also automatically deduces types of columns.
 

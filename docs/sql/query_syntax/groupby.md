@@ -15,7 +15,7 @@ Use `GROUP BY ALL` to `GROUP BY` all columns in the `SELECT` statement that are 
 This simplifies the syntax by allowing the columns list to be maintained in a single location, and prevents bugs by keeping the `SELECT` granularity aligned to the `GROUP BY` granularity (Ex: Prevents any duplication).
 See examples below and additional examples in the [Friendlier SQL with DuckDB blog post](/2022/05/04/friendlier-sql.html#group-by-all).
 
-### Multiple dimensions
+### Multiple Dimensions
 
 Normally, the `GROUP BY` clause groups along a single dimension.
 Using the [GROUPING SETS, CUBE or ROLLUP clauses](../../sql/query_syntax/grouping_sets) it is possible to group along multiple dimensions.

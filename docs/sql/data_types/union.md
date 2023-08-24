@@ -13,7 +13,7 @@ Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simp
 
 `UNION` values can be created with the [`UNION_VALUE(tag := expr)`](../functions/nested#union-functions) function or by [casting from a member type](#casting-to-unions).
 
-### Example 
+### Example
 
 ```sql
 -- Create a table with a union column
@@ -48,7 +48,7 @@ SELECT union_tag(u) FROM tbl1;
 --    str
 ```
 
-## Union casts
+## Union Casts
 
 Compared to other nested types, `UNION`s allow a set of implicit casts to facilitate unintrusive and natural usage when working with their members as "subtypes".
 However, these casts have been designed with two principles in mind, to avoid ambiguity and to avoid casts that could lead to loss of information. This prevents `UNION`s from being completely "transparent", while still allowing `UNION` types to have a "supertype" relationship with their members.
@@ -57,7 +57,7 @@ Thus `UNION` types can't be implicitly cast to any of their member types in gene
 
 The only exception to this is when casting a `UNION` to `VARCHAR`, in which case the members will all use their corresponding `VARCHAR` casts. Since everything can be cast to `VARCHAR`, this is "safe" in a sense. 
 
-### Casting to unions
+### Casting to Unions
 
 A type can always be implicitly cast to a `UNION` if it can be implicitly cast to one of the `UNION` member types.
 
@@ -66,7 +66,7 @@ A type can always be implicitly cast to a `UNION` if it can be implicitly cast t
 
 So how do we disambiguate if we want to create a `UNION` with multiple members of the same type? By using the `union_value` function, which takes a keyword argument specifying the tag. For example, `union_value(num := 2::INT)` will create a `UNION` with a single member of type `INT` with the tag `num`. This can then be used to disambiguate in an explicit (or implicit, read on below!) `UNION` to `UNION` cast, like `CAST(union_value(b := 2) AS UNION(a INT, b INT))`.
 
-### Casting between unions
+### Casting between Unions
 
 `UNION` types can be cast between each other if the source type is a "subset" of the target type. In other words, all the tags in the source `UNION` must be present in the target `UNION`, and all the types of the matching tags must be implicitly castable between source and target. In essence, this means that `UNION` types are covariant with respect to their members.
 

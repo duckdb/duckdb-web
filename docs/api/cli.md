@@ -477,7 +477,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 ⚫◗
 ```
 
-## Non-interactive usage
+## Non-interactive Usage
 
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 
@@ -521,7 +521,7 @@ D LOAD 'fts';
 
 <!-- SQL parameters do not appear to work -->
 
-## Reading from stdin and writing to stdout
+## Reading from stdin and Writing to stdout
 
 When in a Unix environment, it can be useful to pipe data between multiple commands. 
 DuckDB is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`/dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
