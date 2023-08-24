@@ -245,14 +245,14 @@ In 2018, the Spectre and Meltdown vulnerabilities sent crippling shockwaves thro
 
 Without `SharedArrayBuffers`, WebAssembly modules can run in a dedicated web worker to unblock the main event loop but won't be able to spawn additional workers for parallel computations within the same instance. By default, we therefore cannot unleash the parallel query execution of DuckDB in the web. However, browser vendors have recently started to reenable `SharedArrayBuffers` for websites that are [cross-origin-isolated](https://web.dev/coop-coep/). A website is cross-origin-isolated if it ships the main document with the following HTTP headers:
 
-```
+```text
 Cross-Origin-Embedded-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
 
 These headers will instruct browsers to A) isolate the top-level document from other top-level documents outside its own origin and B) prevent the document from making arbitrary cross-origin requests unless the requested resource explicitly opts in. Both restrictions have far reaching implications for a website since many third-party data sources won't yet provide the headers today and the top-level isolation currently hinders the communication with, for example, OAuth pop up's ([there are plans to lift that](https://github.com/whatwg/html/issues/6364)).
 
-*We therefore assume that DuckDB-Wasm will find the majority of users on non-isolated websites. We are, however, experimenting with dedicated bundles for isolated sites using the suffix `-next-coi`) and will closely monitor the future need of our users. Share your thoughts with us [here]().*  
+*We therefore assume that DuckDB-Wasm will find the majority of users on non-isolated websites. We are, however, experimenting with dedicated bundles for isolated sites using the suffix `-next-coi`) and will closely monitor the future need of our users.*
 
 ## Web Shell
 

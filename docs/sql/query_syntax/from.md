@@ -60,7 +60,7 @@ and it just returns all the possible pairs.
 
 ```sql
 -- return all pairs of rows
-SELECT a.*, b.* FROM a CROSS JOIN b
+SELECT a.*, b.* FROM a CROSS JOIN b;
 ```
 
 #### Conditional Joins
@@ -70,19 +70,45 @@ attributes from one side to attributes from the other side.
 The conditions can be explicitly specified using an `ON` clause
 with the join (clearer) or implied by the `WHERE` clause (old-fashioned).
 
+We use the `l_regions` and the `l_nations` tables from the TPC-H schema:
+
+```sql
+CREATE TABLE l_regions(r_regionkey INTEGER NOT NULL PRIMARY KEY,
+                       r_name      CHAR(25) NOT NULL,
+                       r_comment   VARCHAR(152));
+
+CREATE TABLE l_nations (n_nationkey INTEGER NOT NULL PRIMARY KEY,
+                        n_name      CHAR(25) NOT NULL,
+                        n_regionkey INTEGER NOT NULL,
+                        n_comment   VARCHAR(152),
+                        FOREIGN KEY (n_regionkey) REFERENCES l_regions(r_regionkey));
+```
+
 ```sql
 -- return the regions for the nations
 SELECT n.*, r.*
-FROM l_nations n, JOIN l_regions r ON (n_regionkey = r_regionkey)
+FROM l_nations n JOIN l_regions r ON (n_regionkey = r_regionkey);
 ```
 
 If the column names are the same and are required to be equal,
 then the simpler `USING` syntax can be used:
 
 ```sql
+CREATE TABLE l_regions(regionkey INTEGER NOT NULL PRIMARY KEY,
+                       name      CHAR(25) NOT NULL,
+                       comment   VARCHAR(152));
+
+CREATE TABLE l_nations (nationkey INTEGER NOT NULL PRIMARY KEY,
+                        name      CHAR(25) NOT NULL,
+                        regionkey INTEGER NOT NULL,
+                        comment   VARCHAR(152),
+                        FOREIGN KEY (regionkey) REFERENCES l_regions(regionkey));
+```
+
+```sql
 -- return the regions for the nations
 SELECT n.*, r.*
-FROM l_nations n, JOIN l_regions r USING (regionkey)
+FROM l_nations n JOIN l_regions r USING (regionkey);
 ```
 
 The expressions to not have to be equalities - any predicate can be used:
@@ -134,7 +160,7 @@ Connecting them using this ordering is called a _positional join_:
 ```sql
 -- treat two data frames as a single table
 SELECT df1.*, df2.*
-FROM df1 POSITIONAL JOIN df2
+FROM df1 POSITIONAL JOIN df2;
 ```
 
 Positional joins are always `FULL OUTER` joins.
@@ -149,7 +175,7 @@ This is called an _as-of join_:
 -- attach prices to stock trades
 SELECT t.*, p.price
 FROM trades t ASOF JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when
+  ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 The `ASOF` join requires at least one inequality condition on the ordering field.
@@ -166,7 +192,7 @@ It can be specified as an `OUTER` join to find unpaired rows
 -- attach prices or NULLs to stock trades
 SELECT *
 FROM trades t ASOF LEFT JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when
+  ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
@@ -175,7 +201,7 @@ which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
-FROM trades t ASOF JOIN prices p USING (symbol, when)
+FROM trades t ASOF JOIN prices p USING (symbol, when);
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
@@ -186,7 +212,7 @@ To get the `prices` times in the example, you will need to list the columns expl
 
 ```sql
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
-FROM trades t ASOF LEFT JOIN prices p USING (symbol, when)
+FROM trades t ASOF LEFT JOIN prices p USING (symbol, when);
 ```
 
 ### Syntax

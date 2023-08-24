@@ -267,7 +267,7 @@ In addition to what has already been implemented, several other improvements hav
     - Clickhouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression) 
  - Incremental column aliases
     - Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
-- Dot operators for JSON types
+ - Dot operators for JSON types
     - The JSON extension is brand new ([see our documentation!](https://duckdb.org/docs/extensions/json)) and already implements friendly `->` and `->>` syntax
 
 Thanks for checking out DuckDB! May the Force be with you...

@@ -41,7 +41,7 @@ PRAGMA show_tables;
 
 Then you can query those views normally using SQL.
 
-## Querying individual tables
+## Querying Individual Tables
 
 If you prefer to not attach all tables, but just query a single table, that is possible using the `POSTGRES_SCAN` function, e.g.
 

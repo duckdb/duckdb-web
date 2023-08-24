@@ -29,7 +29,7 @@ duckdb.register_filesystem(filesystem('gcs'))
 duckdb.sql("select * from read_csv_auto('gcs:///bucket/file.csv')")
 ```
 
-## Potential issues
+## Potential Issues
 
 Please also note, that as these filesystems are not implemented in C++, their performance may not be comparable to the ones provided by the `httpfs` extension.
 It's also worth noting that as they are third party libraries, they may contain bugs that are beyond our control.

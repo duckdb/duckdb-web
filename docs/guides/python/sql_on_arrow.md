@@ -94,7 +94,7 @@ results = con.execute("SELECT * FROM arrow_scanner").arrow()
 
 ## Apache Arrow RecordBatchReaders
 
-[Arrow RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) are a reader for Arrow's streaming binary format and can also be queried directly as if they were tables. This streaming format is useful when sending Arrow data for tasks like interprocess communication or communicating between language runtimes.  
+[Arrow RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) are a reader for Arrow's streaming binary format and can also be queried directly as if they were tables. This streaming format is useful when sending Arrow data for tasks like interprocess communication or communicating between language runtimes.  
 ```python
 import duckdb
 import pyarrow as pa

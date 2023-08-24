@@ -83,7 +83,7 @@ nyc.filter("year > 2014 & passenger_count > 0 & trip_distance > 0.25 & fare_amou
 
 In this section, we will look at some basic examples of the code needed to read and output Arrow tables in both Python and R.
 
-#### Setup
+### Setup
 
 First we need to install DuckDB and Arrow. The installation process for both libraries in Python and R is shown below.
 ```bash

@@ -41,11 +41,13 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `) in the documentation.
+* SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
 
 ### Headers
 
 * The title of the page should be encoded in the front matter's `title` property. The body of the page should not start with a repetition of this title.
 * In the body of the page, restrict the use of headers to the following levels: h2 (`##`), h3 (`###`), and h4 (`####`).
+* Use headline capitalization as defined in the [Chicago Manual of Style](https://headlinecapitalization.com/).
 
 ### SQL style
 

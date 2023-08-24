@@ -43,7 +43,7 @@ SELECT row(x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 SELECT (x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
 ```
 
-### Adding field(s)/value(s) to Structs
+### Adding Field(s)/Value(s) to Structs
 
 ```sql
 -- Add to a Struct of integers
@@ -87,14 +87,14 @@ SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
 
 Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
 
-#### No dots
+#### No Dots
 
 ```sql
 SELECT part1 FROM tbl
 ```
 1. part1 is a column
 
-#### One dot
+#### One Dot
 
 ```sql
 SELECT part1.part2 FROM tbl
@@ -102,7 +102,7 @@ SELECT part1.part2 FROM tbl
 1. part1 is a table, part2 is a column
 2. part1 is a column, part2 is a property of that column
 
-#### Two (or more) dots
+#### Two (or more) Dots
 
 ```sql
 SELECT part1.part2.part3 FROM tbl
@@ -113,20 +113,20 @@ SELECT part1.part2.part3 FROM tbl
 
 Any extra parts (e.g., .part4.part5 etc) are always treated as properties
 
-### Creating Structs with the Row function
+### Creating Structs with the Row Function
 
 The `row` function can be used to automatically convert multiple columns to a single struct column. The name of each input column is used as a key, and the value of each column becomes the struct's value at that key.
 
 When converting multiple expressions into a `STRUCT`, the `row` function name is optional - a set of parenthesis is all that is needed.
 
-#### Example data table named t1:
+#### Example Data Table Named t1
 
 | my_column | another_column |
 |:---|:---|
 | 1 | a |
 | 2 | b |
 
-#### Row function example:
+#### Row Function Example
 
 ```sql
 SELECT 
@@ -135,7 +135,7 @@ SELECT
 FROM t1;
 ```
 
-#### Example Output:
+#### Example Output
 
 | my_struct_column | identical_struct_column |
 |:---|:---|
@@ -144,7 +144,7 @@ FROM t1;
 
 The `row` function (or simplified parenthesis syntax) may also be used with arbitrary expressions as input rather than column names. In the case of an expression, a key will be automatically generated in the format of 'vN' where N is a number that refers to its parameter location in the row function (Ex: v1, v2, etc.). This can be combined with column names as an input in the same call to the `row` function. This example uses the same input table as above.
 
-#### Row function example with a column name, a constant, and an expression as input:
+#### Row Function Example with a Column Name, a Constant, and an Expression as Input
 
 ```sql
 SELECT 
@@ -153,7 +153,7 @@ SELECT
 FROM t1;
 ```
 
-#### Example Output:
+#### Example Output
 
 | my_struct_column | identical_struct_column |
 |:---|:---|

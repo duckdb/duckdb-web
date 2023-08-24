@@ -38,7 +38,7 @@ This will let you specify an instant correctly without access to time zone infor
 For portability, `TIMESTAMPTZ` values will always be displayed using GMT offsets:
 
 ```sql
-SELECT '2022-10-08 13:13:34-07'::TIMESTAMPTZ'
+SELECT '2022-10-08 13:13:34-07'::TIMESTAMPTZ;
 -- 2022-10-08 20:13:34+00
 ```
 
@@ -47,7 +47,7 @@ and cast to a representation in the local time zone:
 
 ```sql
 SELECT '2022-10-08 13:13:34 Europe/Amsterdam'::TIMESTAMPTZ::VARCHAR;
--- 2022-10-08 04:13:34-07
+-- 2022-10-08 04:13:34-07 -- the offset will differ based on your local time zone
 ```
 
 ## ICU Timestamp With Time Zone Operators
@@ -131,9 +131,9 @@ Often the same functionality can be implemented more reliably using the `struct`
 The `AT TIME ZONE` syntax is syntactic sugar for the (two argument) `timezone` function listed above:
 
 ```sql
-timestamp '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver'
+timestamp '2001-02-16 20:38:40' AT TIME ZONE 'America/Denver';
 -- 2001-02-16 19:38:40-08
-timestamp with time zone '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver'
+timestamp with time zone '2001-02-16 20:38:40-05' AT TIME ZONE 'America/Denver';
 -- 2001-02-16 18:38:40
 ```
 

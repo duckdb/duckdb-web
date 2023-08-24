@@ -117,7 +117,7 @@ Three tildes (`~~~`) may also be used in place of the `GLOB` keyword.
 |:---|:---|
 | `GLOB` | `~~~` |
 
-### Glob function to find filenames
+### Glob Function to Find Filenames
 
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
 It accepts one parameter: the path to search (which may include glob patterns). 

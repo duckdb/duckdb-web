@@ -6,7 +6,7 @@ railroad: expressions/function.js
 Functions are ...
 <div id="rrdiagram"></div>
 
-### Query functions
+### Query Functions
 
 `duckdb_functions` table function shows the list of functions currently built into the system.
 

@@ -191,7 +191,7 @@ SELECT list_aggregate([2, 4, 8, 42], 'sum');
 SELECT list_aggregate([[1, 2], [NULL], [2, 10, 3]], 'last');
 -- [2, 10, 3]
 
-SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|')
+SELECT list_aggregate([2, 4, 8, 42], 'string_agg', '|');
 -- 2|4|8|42
 ```
 
@@ -230,17 +230,17 @@ By default if no modifiers are provided, DuckDB sorts ASC NULLS FIRST, i.e., the
 
 ```sql
 -- default sort order and default NULL sort order
-SELECT list_sort([1, 3, NULL, 5, NULL, -5])
+SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ----
 [NULL, NULL, -5, 1, 3, 5]
 
 -- only providing the sort order
-SELECT list_sort([1, 3, NULL, 2], 'ASC')
+SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ----
 [NULL, 1, 2, 3]
 
 -- providing the sort order and the NULL sort order
-SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST')
+SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ----
 [NULL, 3, 2, 1]
 ```
@@ -249,12 +249,12 @@ SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST')
 
 ```sql
 -- default NULL sort order
-SELECT list_sort([1, 3, NULL, 5, NULL, -5])
+SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ----
 [NULL, NULL, -5, 1, 3, 5]
 
 -- providing the NULL sort order
-SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST')
+SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ----
 [3, 2, 1, NULL]
 ```
@@ -279,17 +279,17 @@ Returns a list that is the result of applying the lambda function to each elemen
 
 ```sql
 -- incrementing each list element by one
-SELECT list_transform([1, 2, NULL, 3], x -> x + 1)
+SELECT list_transform([1, 2, NULL, 3], x -> x + 1);
 ----
 [2, 3, NULL, 4]
 
 -- transforming strings
-SELECT list_transform(['duck', 'a', 'b'], duck -> CONCAT(duck, 'DB'))
+SELECT list_transform(['duck', 'a', 'b'], duck -> CONCAT(duck, 'DB'));
 ----
 [duckDB, aDB, bDB]
 
 -- combining lambda functions with other functions
-SELECT list_transform([5, NULL, 6], x -> COALESCE(x, 0) + 1)
+SELECT list_transform([5, NULL, 6], x -> COALESCE(x, 0) + 1);
 ----
 [6, 1, 7]
 ```
@@ -304,17 +304,17 @@ Constructs a list from those elements of the input list for which the lambda fun
 
 ```sql
 -- filter out negative values
-SELECT list_filter([5, -6, NULL, 7], x -> x > 0)
+SELECT list_filter([5, -6, NULL, 7], x -> x > 0);
 ----
 [5, 7]
 
 -- divisible by 2 and 5
-SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0)
+SELECT list_filter(list_filter([2, 4, 3, 1, 20, 10, 3, 30], x -> x % 2 == 0), y -> y % 5 == 0);
 ----
 [20, 10, 30]
 
 -- in combination with range(...) to construct lists
-SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4)
+SELECT list_filter([1, 2, 3, 4], x -> x > #1) FROM range(4);
 ----
 [1, 2, 3, 4]
 [2, 3, 4]
@@ -327,7 +327,7 @@ Lambda functions can be arbitrarily nested.
 
 ```sql
 -- nested lambda functions to get all squares of even list elements
-SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * y)
+SELECT list_transform(list_filter([0, 1, 2, 3, 4, 5], x -> x % 2 = 0), y -> y * y);
 ----
 [0, 4, 16]
 ```

@@ -5,7 +5,7 @@ title: Types API
 
 The `DuckDBPyType` class represents a type instance of our [data types](../../sql/data_types/overview).
 
-## Converting from other types
+## Converting from Other Types
 
 To make the API as easy to use as possible, we have added implicit conversions from existing type objects to a DuckDBPyType instance.
 This means that wherever a DuckDBPyType object is expected, it is also possible to provide any of the options listed below.
@@ -41,7 +41,7 @@ The table below shows the mapping of Numpy DType to DuckDB type.
 |*`float32`*|FLOAT|
 |*`float64`*|DOUBLE|
 
-### Nested types
+### Nested Types
 
 #### *`list[child_type]`*
 

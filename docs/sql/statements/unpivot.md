@@ -20,7 +20,7 @@ UNPIVOT [dataset]
 ON [column(s)]
 INTO 
 	NAME [name-column-name]
-	VALUE [value-column-name(s)]
+	VALUE [value-column-name(s)];
 ```
 
 
@@ -256,7 +256,7 @@ FROM [dataset]
 UNPIVOT [INCLUDE NULLS] (
 	[value-column-name(s)]
 	FOR [name-column-name] IN [column(s)]
-)
+);
 ```
 
 Note that only one column can be included in the `name-column-name` expression. 
