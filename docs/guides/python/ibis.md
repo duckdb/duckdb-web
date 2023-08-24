@@ -25,7 +25,7 @@ or use mamba:
 mamba install ibis-framework
 ```
 
-## Create a database file
+## Create a Database File
 
 Ibis can work with several file types, but at its core, it connects to existing databases and interacts with the data there. You can get started with your own DuckDB databases or create a new one with example data.
 
@@ -90,13 +90,14 @@ Ibis is lazily evaluated, so instead of seeing the data, we see the schema of th
 penguins.head().to_pandas()
 ```
 
-| species | island | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex | year |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| Adelie | Torgersen | 39.1 | 18.7 | 181.0 | 3750.0 | male | 2007 |
-| Adelie | Torgersen | 39.5 | 17.4 | 186.0 | 3800.0 | female | 2007 |
-| Adelie | Torgersen | 40.3 | 18.0 | 195.0 | 3250.0 | female | 2007 |
-| Adelie | Torgersen | NaN | NaN | NaN | NaN | None | 2007 |
-| Adelie | Torgersen | 36.7 | 19.3 | 193.0 | 3450.0 | female | 2007 |
+```html
+  species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  body_mass_g     sex  year
+0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    male  2007
+1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  female  2007
+2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  female  2007
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN    None  2007
+4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  female  2007
+```
 
 `to_pandas` takes the existing lazy table expression and evaluates it. If we leave it off, you'll see the Ibis representation of the table expression that `to_pandas` will evaluate (when you're ready!).
 
@@ -121,7 +122,7 @@ Limit[r0, n=5]
 
 Ibis returns results as a pandas DataFrame using `to_pandas`, but isn't using pandas to perform any of the computation. The query is executed by DuckDB. Only when `to_pandas` is called does Ibis then pull back the results and convert them into a DataFrame.
 
-## Interactive mode
+## Interactive Mode
 
 For the rest of this intro, we'll turn on interactive mode, which partially executes queries to give users a preview of the results. There is a small difference in the way the output is formatted, but otherwise this is the same as calling `to_pandas` on the table expression with a limit of 10 result rows returned.
 
@@ -144,7 +145,7 @@ penguins.head()
 └─────────┴───────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
-## Common operations
+## Common Operations
 
 Ibis has a collection of useful table methods to manipulate and query the data in a table.
 
@@ -155,53 +156,44 @@ Ibis has a collection of useful table methods to manipulate and query the data i
 We can filter so we only have penguins of the species Adelie:
 
 ```python
-penguins.filter(penguins.species == "Adelie")
+penguins.filter(penguins.species == "Gentoo")
 ```
 
 ```html
-┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
-┃ species ┃ island    ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
-┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
-│ string  │ string    │ float64        │ float64       │ int64             │ int64       │ string │ int64 │
-├─────────┼───────────┼────────────────┼───────────────┼───────────────────┼─────────────┼────────┼───────┤
-│ Adelie  │ Torgersen │           39.1 │          18.7 │               181 │        3750 │ male   │  2007 │
-│ Adelie  │ Torgersen │           39.5 │          17.4 │               186 │        3800 │ female │  2007 │
-│ Adelie  │ Torgersen │           40.3 │          18.0 │               195 │        3250 │ female │  2007 │
-│ Adelie  │ Torgersen │            nan │           nan │              NULL │        NULL │ NULL   │  2007 │
-│ Adelie  │ Torgersen │           36.7 │          19.3 │               193 │        3450 │ female │  2007 │
-│ Adelie  │ Torgersen │           39.3 │          20.6 │               190 │        3650 │ male   │  2007 │
-│ Adelie  │ Torgersen │           38.9 │          17.8 │               181 │        3625 │ female │  2007 │
-│ Adelie  │ Torgersen │           39.2 │          19.6 │               195 │        4675 │ male   │  2007 │
-│ Adelie  │ Torgersen │           34.1 │          18.1 │               193 │        3475 │ NULL   │  2007 │
-│ Adelie  │ Torgersen │           42.0 │          20.2 │               190 │        4250 │ NULL   │  2007 │
-│ …       │ …         │              … │             … │                 … │           … │ …      │     … │
-└─────────┴───────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
+┏━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
+┃ species ┃ island ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
+┡━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
+│ string  │ string │ float64        │ float64       │ int64             │ int64       │ string │ int64 │
+├─────────┼────────┼────────────────┼───────────────┼───────────────────┼─────────────┼────────┼───────┤
+│ Gentoo  │ Biscoe │           46.1 │          13.2 │               211 │        4500 │ female │  2007 │
+│ Gentoo  │ Biscoe │           50.0 │          16.3 │               230 │        5700 │ male   │  2007 │
+│ Gentoo  │ Biscoe │           48.7 │          14.1 │               210 │        4450 │ female │  2007 │
+│ Gentoo  │ Biscoe │           50.0 │          15.2 │               218 │        5700 │ male   │  2007 │
+│ Gentoo  │ Biscoe │           47.6 │          14.5 │               215 │        5400 │ male   │  2007 │
+│ Gentoo  │ Biscoe │           46.5 │          13.5 │               210 │        4550 │ female │  2007 │
+│ Gentoo  │ Biscoe │           45.4 │          14.6 │               211 │        4800 │ female │  2007 │
+│ Gentoo  │ Biscoe │           46.7 │          15.3 │               219 │        5200 │ male   │  2007 │
+│ Gentoo  │ Biscoe │           43.3 │          13.4 │               209 │        4400 │ female │  2007 │
+│ Gentoo  │ Biscoe │           46.8 │          15.4 │               215 │        5150 │ male   │  2007 │
+│ …       │ …      │              … │             … │                 … │           … │ …      │     … │
+└─────────┴────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
 Or filter for Adelie penguins that reside on the island of Torgersen:
 
 ```python
-penguins.filter((penguins.island == "Torgersen") & (penguins.species == "Adelie"))
+penguins.filter((penguins.species == "Gentoo") & (penguins.body_mass_g > 6000))
 ```
 
 ```html
-┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
-┃ species ┃ island    ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
-┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
-│ string  │ string    │ float64        │ float64       │ int64             │ int64       │ string │ int64 │
-├─────────┼───────────┼────────────────┼───────────────┼───────────────────┼─────────────┼────────┼───────┤
-│ Adelie  │ Torgersen │           39.1 │          18.7 │               181 │        3750 │ male   │  2007 │
-│ Adelie  │ Torgersen │           39.5 │          17.4 │               186 │        3800 │ female │  2007 │
-│ Adelie  │ Torgersen │           40.3 │          18.0 │               195 │        3250 │ female │  2007 │
-│ Adelie  │ Torgersen │            nan │           nan │              NULL │        NULL │ NULL   │  2007 │
-│ Adelie  │ Torgersen │           36.7 │          19.3 │               193 │        3450 │ female │  2007 │
-│ Adelie  │ Torgersen │           39.3 │          20.6 │               190 │        3650 │ male   │  2007 │
-│ Adelie  │ Torgersen │           38.9 │          17.8 │               181 │        3625 │ female │  2007 │
-│ Adelie  │ Torgersen │           39.2 │          19.6 │               195 │        4675 │ male   │  2007 │
-│ Adelie  │ Torgersen │           34.1 │          18.1 │               193 │        3475 │ NULL   │  2007 │
-│ Adelie  │ Torgersen │           42.0 │          20.2 │               190 │        4250 │ NULL   │  2007 │
-│ …       │ …         │              … │             … │                 … │           … │ …      │     … │
-└─────────┴───────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
+┏━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
+┃ species ┃ island ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃
+┡━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
+│ string  │ string │ float64        │ float64       │ int64             │ int64       │ string │ int64 │
+├─────────┼────────┼────────────────┼───────────────┼───────────────────┼─────────────┼────────┼───────┤
+│ Gentoo  │ Biscoe │           49.2 │          15.2 │               221 │        6300 │ male   │  2007 │
+│ Gentoo  │ Biscoe │           59.6 │          17.0 │               230 │        6050 │ male   │  2007 │
+└─────────┴────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
 You can use any boolean comparison in a filter (although if you try to do something like use `<` on a string, Ibis will yell at you).
@@ -213,7 +205,7 @@ Your data analysis might not require all the columns present in a given table. `
 To select a column you can use the name of the column as a string:
 
 ```python
-penguins.select("species", "island", "year")
+penguins.select("species", "island", "year").limit(3)
 ```
 
 ```html
@@ -222,13 +214,6 @@ penguins.select("species", "island", "year")
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
 │ string  │ string    │ int64 │
 ├─────────┼───────────┼───────┤
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
@@ -239,7 +224,7 @@ penguins.select("species", "island", "year")
 Or you can use column objects directly (this can be convenient when paired with tab-completion):
 
 ```python
-penguins.select(penguins.species, penguins.island, penguins.year)
+penguins.select(penguins.species, penguins.island, penguins.year).limit(3)
 ```
 
 ```html
@@ -248,13 +233,6 @@ penguins.select(penguins.species, penguins.island, penguins.year)
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
 │ string  │ string    │ int64 │
 ├─────────┼───────────┼───────┤
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
@@ -265,7 +243,7 @@ penguins.select(penguins.species, penguins.island, penguins.year)
 Or you can mix-and-match:
 
 ```python
-penguins.select("species", "island", penguins.year)
+penguins.select("species", "island", penguins.year).limit(3)
 ```
 
 ```html
@@ -274,13 +252,6 @@ penguins.select("species", "island", penguins.year)
 ┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
 │ string  │ string    │ int64 │
 ├─────────┼───────────┼───────┤
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
@@ -297,26 +268,26 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10)
 ```
 
 ```html
-┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┓
-┃ species ┃ island    ┃ year  ┃
-┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━┩
-│ string  │ string    │ int64 │
-├─────────┼───────────┼───────┤
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ Adelie  │ Torgersen │  2007 │
-│ …       │ …         │     … │
-└─────────┴───────────┴───────┘
+┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━┓
+┃ species ┃ island    ┃ bill_length_mm ┃ bill_depth_mm ┃ flipper_length_mm ┃ body_mass_g ┃ sex    ┃ year  ┃ bill_length_cm ┃
+┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━┩
+│ string  │ string    │ float64        │ float64       │ int64             │ int64       │ string │ int64 │ float64        │
+├─────────┼───────────┼────────────────┼───────────────┼───────────────────┼─────────────┼────────┼───────┼────────────────┤
+│ Adelie  │ Torgersen │           39.1 │          18.7 │               181 │        3750 │ male   │  2007 │           3.91 │
+│ Adelie  │ Torgersen │           39.5 │          17.4 │               186 │        3800 │ female │  2007 │           3.95 │
+│ Adelie  │ Torgersen │           40.3 │          18.0 │               195 │        3250 │ female │  2007 │           4.03 │
+│ Adelie  │ Torgersen │            nan │           nan │              NULL │        NULL │ NULL   │  2007 │            nan │
+│ Adelie  │ Torgersen │           36.7 │          19.3 │               193 │        3450 │ female │  2007 │           3.67 │
+│ Adelie  │ Torgersen │           39.3 │          20.6 │               190 │        3650 │ male   │  2007 │           3.93 │
+│ Adelie  │ Torgersen │           38.9 │          17.8 │               181 │        3625 │ female │  2007 │           3.89 │
+│ Adelie  │ Torgersen │           39.2 │          19.6 │               195 │        4675 │ male   │  2007 │           3.92 │
+│ Adelie  │ Torgersen │           34.1 │          18.1 │               193 │        3475 │ NULL   │  2007 │           3.41 │
+│ Adelie  │ Torgersen │           42.0 │          20.2 │               190 │        4250 │ NULL   │  2007 │           4.20 │
+│ …       │ …         │              … │             … │                 … │           … │ …      │     … │              … │
+└─────────┴───────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┴────────────────┘
 ```
 
-Notice that the table is a little too wide to display all the columns now (depending on your screen-size). `bill_length` is now present in millimeters AND centimeters. Use a `select` to trim down the number of columns we're looking at.
+Notice that the table is a little too wide to display all the columns now (depending on your screen-size). `bill_length` is now present in millimeters _and_ centimeters. Use a `select` to trim down the number of columns we're looking at.
 
 ```python
 penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10).select(
@@ -353,7 +324,7 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10).select(
 
 ### selectors
 
-Typing out ALL of the column names _except_ one is a little annoying. Instead of doing that again, we can use a `selector` to quickly select or deselect groups of columns.
+Typing out _all_ of the column names _except_ one is a little annoying. Instead of doing that again, we can use a `selector` to quickly select or deselect groups of columns.
 
 ```python
 import ibis.selectors as s
@@ -410,7 +381,7 @@ penguins.select("island", s.numeric())
 └───────────┴────────────────┴───────────────┴───────────────────┴─────────────┴───────┘
 ```
 
-You can read more about [`selectors`](../reference/selectors.md) in the docs!
+You can read more about [`selectors`](https://ibis-project.org/reference/selectors/) in the docs!
 
 ### order_by
 
@@ -500,7 +471,7 @@ penguins.order_by(ibis.desc("flipper_length_mm")).select(
 └─────────┴────────┴───────────────────┘
 ```
 
-### aggregates
+### aggregate
 
 Ibis has several aggregate functions available to help summarize data.
 
@@ -649,7 +620,7 @@ penguins.group_by(["species", "island", "sex"]).aggregate(
 └─────────┴───────────┴────────┴──────────────────────┴────────────────────────┘
 ```
 
-## Chaining it all together
+## Chaining It All Together
 
 We've already chained some Ibis calls together. We used `mutate` to create a new column and then `select` to only view a subset of the new table. We were just chaining `group_by` with `aggregate`.
 
@@ -703,6 +674,6 @@ penguins.filter(penguins.sex == "male").group_by(["island", "year"]).aggregate(
 └───────────┴───────┴───────────────┘
 ```
 
-## Learn more
+## Learn More
 
 That's all for this quick-start guide. If you want to learn more, check out the [Ibis documentation](https://ibis-project.org).
