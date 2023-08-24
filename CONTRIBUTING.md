@@ -41,6 +41,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Quoted blocks (lines starting with `>`) are rendered as [a "Note" box](https://duckdb.org/docs/archive/0.8.1/guides/python/filesystems).
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `) in the documentation.
+* SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
 
 ### Headers
 
