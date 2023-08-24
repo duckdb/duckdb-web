@@ -68,7 +68,7 @@ orders
 
 By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a 'key'='value' pattern. This behaviour can be overridden by setting the `hive_partitioning` flag manually.
 
-#### Hive types
+#### Hive Types
 
 `hive_types` is a way to specify the logical types of the hive partitions in a struct:
 

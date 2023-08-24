@@ -91,7 +91,7 @@ print(con.fetchall())
 # [('duck', 'duck', 'goose')]
 ```
 
-## Named parameters
+## Named Parameters
 
 Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible to supply named parameters, like `$my_parameter`.  
 When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument  

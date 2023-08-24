@@ -100,7 +100,7 @@ PIVOT Cities ON Year USING SUM(Population) GROUP BY Country;
 | US      | 8579 | 8783 | 9510 |
 
 
-### IN filter for ON clause
+### IN Filter for ON Clause
 
 To only create a separate column for specific values within a column in the `ON` clause, use an optional `IN` expression.
 Let's say for example that we wanted to forget about the year 2020 for no particular reason...
@@ -114,11 +114,11 @@ PIVOT Cities ON Year IN (2000, 2010) USING SUM(Population) GROUP BY Country;
 | US      | 8579 | 8783 |
 
 
-### Multiple expressions per clause
+### Multiple Expressions per Clause
 
 Multiple columns can be specified in the `ON` and `GROUP BY` clauses, and multiple aggregate expressions can be included in the `USING` clause.
 
-#### Multiple ON columns and ON expressions
+#### Multiple ON Columns and ON Expressions
 
 Multiple columns can be pivoted out into their own columns. 
 DuckDB will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a cartesian product).
@@ -152,7 +152,7 @@ PIVOT Cities on Country || '_' || Name USING SUM(Population);
 | 2020 | 1158         | 8772             | 738        |
 
 
-#### Multiple USING expressions
+#### Multiple USING Expressions
 
 An alias may also be included for each expression in the `USING` clause. 
 It will be appended to the generated column names after an underscore (`_`).
@@ -169,7 +169,7 @@ PIVOT Cities ON Year USING SUM(Population) as total, MAX(Population) as max GROU
 | US      | 8579       | 8015     | 8783       | 8175     | 9510       | 8772     |
 
 
-#### Multiple GROUP BY columns
+#### Multiple GROUP BY Columns
 
 Multiple `GROUP BY` columns may also be provided. 
 Note that column names must be used rather than column positions (1, 2, etc.), and that expressions are not supported in the `GROUP BY` clause.
@@ -185,7 +185,7 @@ PIVOT Cities on Year USING SUM(Population) GROUP BY Country, Name;
 | US      | New York City | 8015 | 8175 | 8772 |
 
 
-### Using PIVOT within a SELECT statement
+### Using PIVOT within a SELECT Statement
 
 The `PIVOT` statement may be included within a SELECT statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
 This allows for a `PIVOT` to be used alongside other SQL logic, as well as for multiple `PIVOT`s to be used in one query.

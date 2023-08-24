@@ -96,7 +96,7 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
 
 
-### Glob function to find filenames
+### Glob Function to Find Filenames
 
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
 It accepts one parameter: the path to search (which may include glob patterns). 

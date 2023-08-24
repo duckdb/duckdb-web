@@ -41,7 +41,7 @@ The values of the partitions are automatically extracted from the data. Note tha
 
 By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
 
-#### Filename pattern
+#### Filename Pattern
 
 By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
 * `{i}` will be replaced by an index

@@ -166,7 +166,7 @@ could for example result in:
 | 1 | examplevalue1 | s3://bucket/file1.parquet
 | 2 | examplevalue1 | s3://bucket/file2.parquet
 
-#### Hive partitioning
+#### Hive Partitioning
 
 DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in
 separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file
