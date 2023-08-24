@@ -11,6 +11,7 @@ Feel free to follow along in this [Google Collaboratory Notebook](https://colab.
 ## Setup
 
 First, import duckdb and several modules from the Python standard library. 
+Note: if using Pandas, add `import pandas` at the top of the script as well (as it must be imported prior to the multi-threading). 
 Then connect to a file-backed DuckDB database and create an example table to store inserted data. 
 This table will track the name of the thread that completed the insert and automatically insert the timestamp when that insert occurred using the [`DEFAULT` expression](../../sql/statements/create_table#syntax).
 ```python
