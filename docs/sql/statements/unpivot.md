@@ -20,7 +20,7 @@ UNPIVOT [dataset]
 ON [column(s)]
 INTO 
 	NAME [name-column-name]
-	VALUE [value-column-name(s)]
+	VALUE [value-column-name(s)];
 ```
 
 
@@ -255,7 +255,7 @@ The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be s
 FROM [dataset]
 UNPIVOT [INCLUDE NULLS] (
 	[value-column-name(s)]
-	FOR [name-column-name] IN [column(s)]
+	FOR [name-column-name] IN [column(s)];
 )
 ```
 

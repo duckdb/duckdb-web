@@ -305,7 +305,7 @@ PIVOT (
         [column_2] IN ([in_list])
         ...
     GROUP BY [rows(s)]
-)
+);
 ```
 Unlike the simplified syntax, the `IN` clause must be specified for each column to be pivoted.
 If you are interested in dynamic pivoting, the simplified syntax is recommended.

@@ -41,7 +41,7 @@ GROUP BY city, street_name;
 -- Group by city and street_name to remove any duplicate values
 SELECT city, street_name
 FROM addresses
-GROUP BY ALL
+GROUP BY ALL;
 -- GROUP BY city, street_name
 ;
 
@@ -49,7 +49,7 @@ GROUP BY ALL
 -- Since income is wrapped in an aggregate function, do not include it in the GROUP BY
 SELECT city, street_name, AVG(income)
 FROM addresses
-GROUP BY ALL
+GROUP BY ALL;
 -- GROUP BY city, street_name
 ;
 

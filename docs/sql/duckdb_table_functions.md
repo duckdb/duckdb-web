@@ -9,13 +9,13 @@ The resultset returned by a `duckdb_` table function may be used just like an or
 Table functions are still functions, and you should write parenthesis after the function name to call it to obtain its returned resultset: 
 
 ```sql
-SELECT * FROM duckdb_settings()
+SELECT * FROM duckdb_settings();
 ```
 
 Alternatively, you may execute table functions also using the `CALL`-syntax:
 
 ```sql
-CALL duckdb_settings()
+CALL duckdb_settings();
 ```
 
 In this case too, the parentheses are mandatory. 
@@ -26,13 +26,9 @@ Example:
 
 ```sql
 -- duckdb_views table function: returns all views, including those marked internal
-SELECT *
-FROM   duckdb_views()
-;
+SELECT * FROM duckdb_views();
 -- duckdb_views view: returns views that are not marked as internal
-SELECT *
-FROM   duckdb_views
-;
+SELECT * FROM duckdb_views;
 ```
 
 ## duckdb_columns

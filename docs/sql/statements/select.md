@@ -39,7 +39,7 @@ HAVING group_filter
     WINDOW window_expr
     QUALIFY qualify_filter
 ORDER BY order_expr
-LIMIT n
+LIMIT n;
 ```
 
 Optionally, the `SELECT` statement can be prefixed with a [`WITH` clause](../../sql/query_syntax/with).

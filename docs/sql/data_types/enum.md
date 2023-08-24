@@ -17,10 +17,10 @@ The `ENUM` type represents a dictionary data structure with all possible unique 
 Enum types are created from either a hardcoded set of values or from a select statement that returns a single column of varchars. The set of values in the select statement will be deduplicated, but if the enum is created from a hardcoded set there may not be any duplicates.
 ```sql
 -- Create enum using hardcoded values
-CREATE TYPE ${enum_name} AS ENUM ([${value_1},${value_2},...])
+CREATE TYPE ${enum_name} AS ENUM ([${value_1},${value_2},...]);
 
 -- Create enum using a select statement that returns a single column of varchars
-CREATE TYPE ${enum_name} AS ENUM (${SELECT expression})
+CREATE TYPE ${enum_name} AS ENUM (${SELECT expression});
 ```
 For example:
 ```sql
@@ -93,7 +93,7 @@ DuckDB Enums are automatically cast to `VARCHAR` types whenever necessary. This 
 For example:
 ```sql
 -- regexp_matches is a function that takes a VARCHAR, hence current_mood is cast to VARCHAR
-SELECT regexp_matches(current_mood, '.*a.*') FROM person
+SELECT regexp_matches(current_mood, '.*a.*') FROM person;
 ----
 TRUE
 FALSE
@@ -124,19 +124,19 @@ SELECT * FROM person_2 where current_mood = past_mood;
 
 Enum types are stored in the catalog, and a catalog dependency is added to each table that uses them. It is possible to drop an Enum from the catalog using the following command:
 ```sql
-DROP TYPE ${enum_name}
+DROP TYPE ${enum_name};
 ```
 Note that any dependent must be removed before dropping the enum, or the enum must be dropped with the additional `CASCADE` parameter.
 
 For example:
 ```sql
 -- This will fail since person has a catalog dependency to the mood type
-DROP TYPE mood
+DROP TYPE mood;
 
 DROP TABLE person;
 DROP TABLE person_2;
 
 -- This successfully removes the mood type.
 -- Another option would be to DROP TYPE mood CASCADE (Drops the type and its dependents)
-DROP TYPE mood
+DROP TYPE mood;
 ```

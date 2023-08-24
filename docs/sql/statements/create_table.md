@@ -153,10 +153,10 @@ Currently only the `VIRTUAL` kind is supported, and it is also the default optio
 ```sql
 -- The simplest syntax for a generated column. 
 -- The type is derived from the expression, and the variant defaults to VIRTUAL
-CREATE TABLE t1(x FLOAT, two_x AS (2 * x))
+CREATE TABLE t1(x FLOAT, two_x AS (2 * x));
 
 -- Fully specifying the same generated column for completeness
-CREATE TABLE t1(x FLOAT, two_x FLOAT GENERATED ALWAYS AS (2 * x) VIRTUAL)
+CREATE TABLE t1(x FLOAT, two_x FLOAT GENERATED ALWAYS AS (2 * x) VIRTUAL);
 ```
 
 ### Syntax

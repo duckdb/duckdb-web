@@ -141,7 +141,7 @@ File globbing is implemented using the ListObjectV2 API call and allows to use f
 multiple files, for example:
 
 ```sql
-SELECT * FROM read_parquet('s3://bucket/*.parquet')
+SELECT * FROM read_parquet('s3://bucket/*.parquet');
 ```
 
 This query matches all files in the root of the bucket with the parquet extension.
@@ -150,7 +150,7 @@ Several features for matching are supported, such as `*` to match any number of 
 character or `[0-9]` for a single character in a range of characters:
 
 ```sql
-SELECT COUNT(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet')
+SELECT COUNT(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet');
 ```
 
 A useful feature when using globs is the `filename` option which adds a column with the file that a row originated from:

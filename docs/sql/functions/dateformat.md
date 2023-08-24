@@ -33,7 +33,7 @@ The date formats can also be specified during CSV parsing, either in the `COPY` 
 
 ```sql
 -- in COPY statement
-COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %Y - %I:%M:%S %p')
+COPY dates FROM 'test.csv' (DATEFORMAT '%d/%m/%Y', TIMESTAMPFORMAT '%A, %-d %B %Y - %I:%M:%S %p');
 
 -- in read_csv function
 SELECT * FROM read_csv('test.csv', dateformat='%m/%d/%Y');
