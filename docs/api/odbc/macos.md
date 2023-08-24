@@ -19,7 +19,7 @@ DuckDB releases the ODBC driver as asset. For MacOS, download it from <a href="h
 
 **libduckdb_odbc.dylib**: the DuckDB driver compiled to MacOS (with Intel and Apple M1 support).
 
-## Step 2: Extracting ODBC artifacts
+## Step 2: Extracting ODBC Artifacts
 
 Run unzip to extract the files to a permanent directory:
 
@@ -78,7 +78,7 @@ Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
 
 **Driver**: the absolute system file path of the DuckDB driver.
 
-## Step 4 (optionnal): Test the ODBC driver
+## Step 4 (Optional): Test the ODBC Driver
 
 After the configuration, for validate the installation, it is possible to use a odbc client. unixODBC use a command line tool called `isql`.
 

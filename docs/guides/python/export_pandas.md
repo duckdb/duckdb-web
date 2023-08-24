@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Export To Pandas
+title: Export to Pandas
 ---
 
 The result of a query can be converted to a Pandas DataFrame using the `df()` function.

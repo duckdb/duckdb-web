@@ -20,12 +20,12 @@ COPY lineitem TO 'lineitem.csv' (FORMAT CSV, DELIMITER '|', HEADER);
 COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRESSION ZSTD);
 ```
 
-## Copy Statements
+## COPY Statements
 
 `COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
 
 
-### Copy From
+### COPY FROM
 
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
@@ -54,7 +54,7 @@ COPY lineitem FROM 'lineitem.json' ( FORMAT JSON, ARRAY TRUE );
 
 <div id="rrdiagram1"></div>
 
-### Copy To
+### COPY TO
 
 `COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
@@ -79,7 +79,7 @@ COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.json' (FORMAT JSON, ARRAY TRUE);
 
 <div id="rrdiagram2"></div>
 
-#### Copy Options
+#### COPY Options
 
 Zero or more copy options may be provided as a part of the copy operation. The `WITH` specifier is optional, but if any options are specified, the parentheses are required. Parameter values can be passed in with or without wrapping in single quotes. 
 

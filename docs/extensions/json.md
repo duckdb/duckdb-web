@@ -442,7 +442,7 @@ SELECT json_transform_strict(j, '{"family":"TINYINT","coolness":"DOUBLE"}') FROM
 -- Invalid Input Error: Failed to cast value: "anatidae"
 ```
 
-## De/Serializing SQL to JSON and vice versa
+## De/Serializing SQL to JSON and Vice Versa
 
 The JSON extension also provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.
 

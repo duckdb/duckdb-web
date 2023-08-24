@@ -5,7 +5,7 @@ title: Date Format
 
 The `strftime` and `strptime` functions can be used to convert between dates/timestamps and strings. This is often required when parsing CSV files, displaying output to the user or transferring information between programs. Because there are many possible date representations, these functions accept a format string that describes how the date or timestamp should be structured.
 
-## strftime examples
+## strftime Examples
 
 `strftime(timestamp, format)` converts timestamps or dates to strings according to the specified pattern.
 
@@ -16,7 +16,7 @@ SELECT strftime(TIMESTAMP '1992-03-02 20:32:45', '%A, %-d %B %Y - %I:%M:%S %p');
 -- Monday, 2 March 1992 - 08:32:45 PM
 ```
 
-## strptime examples
+## strptime Examples
 
 `strptime(string, format)` converts strings to timestamps according to the specified pattern.
 

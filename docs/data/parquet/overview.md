@@ -54,7 +54,7 @@ Parquet files are self-describing, as such far fewer parameters are required tha
 | `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../partitioning/hive_partitioning). | bool | false |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name](../multiple_files/combining_schemas), rather than by position. | bool | false |
 
-## read_parquet function
+## read_parquet Function
 
 | Function                         | Description              | Example                                       |
 |:--|:--|:-----|
@@ -118,7 +118,7 @@ DuckDB's `EXPORT` command can be used to export an entire database to a series o
 EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
-## Installing and loading `parquet` extension
+## Installing and Loading `parquet` Extension
 
 The support for `parquet` files is enabled via extension. The extension is bundled with almost all clients. However, if your client does not bundle the Parquet extension, the extension must be installed and loaded separately.
 

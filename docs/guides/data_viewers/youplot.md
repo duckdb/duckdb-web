@@ -19,7 +19,7 @@ brew install youplot
 
 Run `uplot --help` to ensure you've installed it successfully!
 
-## Piping DuckDB queries to stdout
+## Piping DuckDB Queries to stdout
 
 By combining the [`COPY...TO`](../../sql/statements/copy#copy-to) function with a CSV output file, data can be read from any format supported by DuckDB and piped to YouPlot. There are three important steps to doing this.
 
@@ -61,7 +61,7 @@ This tells `uplot` to draw a bar plot, use a comma-seperated delimiter (`-d,`), 
 
 ![youplot-top-10](/images/guides/youplot/top-10-plot.png)
 
-## Bonus round! stdin + stdout
+## Bonus Round! stdin + stdout
 
 Maybe you're piping some data through `jq`. Maybe you're downloading a JSON file from somewhere. You can also tell DuckDB to read the data from another process by changing the filename to `/dev/stdin`.
 
@@ -74,4 +74,3 @@ curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
 ```
 
 ![github-events](/images/guides/youplot/github-events.png)
-
