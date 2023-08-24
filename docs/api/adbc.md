@@ -148,7 +148,7 @@ pip install pyarrow
 The full documentation for the `adbc_driver_manager` package can be found
 [here](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
-As with C++, we need to provide initialization options 
+As with C++, we need to provide initialization options:
 ```python
 import adbc_driver_manager.dbapi
 conn = adbc_driver_manager.dbapi.connect(
