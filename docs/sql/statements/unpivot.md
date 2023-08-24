@@ -255,8 +255,8 @@ The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be s
 FROM [dataset]
 UNPIVOT [INCLUDE NULLS] (
 	[value-column-name(s)]
-	FOR [name-column-name] IN [column(s)];
-)
+	FOR [name-column-name] IN [column(s)]
+);
 ```
 
 Note that only one column can be included in the `name-column-name` expression. 
