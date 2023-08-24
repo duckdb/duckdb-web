@@ -926,6 +926,10 @@
               "url": "httpfs"
             },
             {
+              "page": "Iceberg",
+              "url": "iceberg"
+            },
+            {
               "page": "JSON",
               "url": "json"
             },
