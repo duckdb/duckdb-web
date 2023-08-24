@@ -26,13 +26,13 @@ A table can be updated based upon values from another table. This can be done by
 
 ```sql
 CREATE OR REPLACE TABLE original AS 
-    SELECT 1 as key, 'original value' AS value 
+    SELECT 1 AS key, 'original value' AS value 
     UNION ALL 
-    SELECT 2 as key, 'original value 2' AS value;
+    SELECT 2 AS key, 'original value 2' AS value;
 CREATE OR REPLACE TABLE new AS 
-    SELECT 1 as key, 'new value' AS value 
+    SELECT 1 AS key, 'new value' AS value 
     UNION ALL 
-    SELECT 2 as key, 'new value 2' AS value;
+    SELECT 2 AS key, 'new value 2' AS value;
 
 SELECT * FROM original;
 ```

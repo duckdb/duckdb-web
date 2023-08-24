@@ -37,10 +37,10 @@ SELECT {'birds':
         };
 -- Create a struct from columns and/or expressions using the row function.
 -- This returns {'x': 1, 'v2': 2, 'y': a}
-SELECT row(x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
+SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 -- If using multiple expressions when creating a struct, the row function is optional
 -- This also returns {'x': 1, 'v2': 2, 'y': a}
-SELECT (x, x + 1, y) FROM (SELECT 1 as x, 'a' as y);
+SELECT (x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y);
 ```
 
 ### Adding Field(s)/Value(s) to Structs
@@ -56,15 +56,15 @@ Retrieving a value from a struct can be accomplished using dot notation, bracket
 ```sql
 -- Use dot notation to retrieve the value at a key's location. This returns 1
 -- The subquery generates a struct column "a", which we then query with a.x
-SELECT a.x FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
+SELECT a.x FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
 -- If key contains a space, simply wrap it in double quotes. This returns 1
 -- Note: Use double quotes not single quotes 
 -- This is because this action is most similar to selecting a column from within the struct
-SELECT a."x space" FROM (SELECT {'x space':1, 'y':2, 'z':3} as a);
+SELECT a."x space" FROM (SELECT {'x space':1, 'y':2, 'z':3} AS a);
 -- Bracket notation may also be used. This returns 1
 -- Note: Use single quotes since the goal is to specify a certain string key. 
 -- Only constant expressions may be used inside the brackets (no columns)
-SELECT a['x space'] FROM (SELECT {'x space':1, 'y':2, 'z':3} as a);
+SELECT a['x space'] FROM (SELECT {'x space':1, 'y':2, 'z':3} AS a);
 -- The struct_extract function is also equivalent. This returns 1
 SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3},'x space');
 ```
@@ -76,7 +76,7 @@ This is particularly useful when a prior operation creates a struct of unknown s
 
 ```sql
 -- All keys within a struct can be returned as separate columns using *
-SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
+SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
 ```
 
 | x | y | z |

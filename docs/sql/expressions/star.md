@@ -124,7 +124,7 @@ See the [struct](../data_types/struct) and [nested function](../functions/nested
 
 ```sql
 -- All keys within a struct can be returned as separate columns using *
-SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
+SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
 ```
 
 | x | y | z |

@@ -19,7 +19,7 @@ FROM read_json('todos.json',
                         title: 'VARCHAR',
                         completed: 'BOOLEAN'});
 -- read a JSON file from stdin, auto-infer options
-cat data/json/todos.json | duckdb -c "select * from read_json_auto('/dev/stdin')"
+cat data/json/todos.json | duckdb -c "SELECT * FROM read_json_auto('/dev/stdin')"
 
 -- read a JSON file into a table
 CREATE TABLE todos(userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);

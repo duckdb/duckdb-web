@@ -31,15 +31,15 @@ CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 
 -- TABLE MACROS
 -- create a table macro without parameters
-CREATE MACRO static_table() AS TABLE SELECT 'Hello' as column1, 'World' as column2;
+CREATE MACRO static_table() AS TABLE SELECT 'Hello' AS column1, 'World' AS column2;
 -- create a table macro with parameters (that can be of any type)
-CREATE MACRO dynamic_table(col1_value,col2_value) AS TABLE SELECT col1_value as column1, col2_value as column2;
+CREATE MACRO dynamic_table(col1_value,col2_value) AS TABLE SELECT col1_value AS column1, col2_value AS column2;
 -- create a table macro that returns multiple rows. 
 -- It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends)
 CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value,col2_value) AS TABLE 
-    SELECT col1_value as column1, col2_value as column2 
+    SELECT col1_value AS column1, col2_value AS column2 
     UNION ALL 
-    SELECT 'Hello' as col1_value, 456 as col2_value;
+    SELECT 'Hello' AS col1_value, 456 AS col2_value;
 ```
 
 ### Syntax

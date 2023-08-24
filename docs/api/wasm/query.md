@@ -34,7 +34,7 @@ await conn.close();
 // Create a new connection
 const conn = await db.connect();
 // Prepare query
-const stmt = await conn.prepare(`SELECT v + ? FROM generate_series(0, 10000) as t(v);`);
+const stmt = await conn.prepare(`SELECT v + ? FROM generate_series(0, 10000) AS t(v);`);
 // ... and run the query with materialized results
 await stmt.query(234);
 // ... or result chunks

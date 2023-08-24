@@ -154,7 +154,7 @@ UNPIVOT monthly_sales
 
 ### Using UNPIVOT within a SELECT statement
 
-The `UNPIVOT` statement may be included within a SELECT statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
+The `UNPIVOT` statement may be included within a `SELECT` statement as a CTE ([a Common Table Expression, or WITH clause](../query_syntax/with)), or a subquery.
 This allows for an `UNPIVOT` to be used alongside other SQL logic, as well as for multiple `UNPIVOT`s to be used in one query.
 
 No `SELECT` is needed within the CTE, the `UNPIVOT` keyword can be thought of as taking its place.

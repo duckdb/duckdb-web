@@ -251,9 +251,9 @@ All DuckDB clients support [querying the database schema with SQL](../sql/inform
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../sql/functions/patternmatching#like).
 
 ```sql
-D CREATE TABLE swimmers AS SELECT 'duck' as animal;
-D CREATE TABLE fliers AS SELECT 'duck' as animal;
-D CREATE TABLE walkers AS SELECT 'duck' as animal;
+D CREATE TABLE swimmers AS SELECT 'duck' AS animal;
+D CREATE TABLE fliers AS SELECT 'duck' AS animal;
+D CREATE TABLE walkers AS SELECT 'duck' AS animal;
 D .tables
 ```
 ```text
@@ -310,7 +310,7 @@ D .mode markdown
 D .output my_results.md
 D SELECT 'taking flight' AS output_column;
 D .output
-D SELECT 'back to the terminal' as displayed_column;
+D SELECT 'back to the terminal' AS displayed_column;
 ```
 
 The file my_results.md will then contain:
@@ -498,7 +498,7 @@ $
 To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
 ```sql
-./duckdb :memory: "SELECT 42 as the_answer"
+./duckdb :memory: "SELECT 42 AS the_answer"
 ```
 
 ```text

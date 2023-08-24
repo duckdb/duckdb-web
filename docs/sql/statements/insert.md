@@ -114,8 +114,8 @@ INSERT INTO t1
 -- A more complex example that includes an expression in the RETURNING clause
 CREATE TABLE t2(i INT, j INT);
 INSERT INTO t2 
-    SELECT 2 as i, 3 as j 
-    RETURNING *, i * j as i_times_j;
+    SELECT 2 AS i, 3 AS j 
+    RETURNING *, i * j AS i_times_j;
 ```
 
 | i | j | i_times_j |
@@ -128,9 +128,9 @@ This example shows a situation where the `RETURNING` clause is more helpful. Fir
 CREATE TABLE t3(i INT PRIMARY KEY, j INT);
 CREATE SEQUENCE 't3_key';
 INSERT INTO t3 
-    SELECT nextval('t3_key') as i, 42 as j 
+    SELECT nextval('t3_key') AS i, 42 AS j 
     UNION ALL
-    SELECT nextval('t3_key') as i, 43 as j
+    SELECT nextval('t3_key') AS i, 43 AS j
     RETURNING *;
 ```
 

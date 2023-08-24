@@ -22,7 +22,7 @@ SELECT * FROM range(10) t1 INTERSECT SELECT * FROM range(6) t2;
 -- the values [5..10)
 SELECT * FROM range(10) t1 EXCEPT SELECT * FROM range(5) t2;
 -- two rows, (24, NULL) and (NULL, Amsterdam)
-SELECT 24 AS id UNION ALL BY NAME SELECT 'Amsterdam' as City;
+SELECT 24 AS id UNION ALL BY NAME SELECT 'Amsterdam' AS City;
 ```
 
 ## Syntax

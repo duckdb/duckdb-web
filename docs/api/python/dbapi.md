@@ -86,7 +86,7 @@ print(con.fetchall())
 # [('laptop',), ('chainsaw',)]
 
 # query using $ notation for prepared statement and reused values
-con.execute("select $1, $1, $2", ["duck", "goose"])
+con.execute("SELECT $1, $1, $2", ["duck", "goose"])
 print(con.fetchall())
 # [('duck', 'duck', 'goose')]
 ```
@@ -100,7 +100,7 @@ An example use:
 import duckdb
 
 duckdb.execute("""
-  select
+  SELECT
     $my_param,
     $other_param,
     $also_param
