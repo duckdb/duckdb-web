@@ -60,7 +60,7 @@ and it just returns all the possible pairs.
 
 ```sql
 -- return all pairs of rows
-SELECT a.*, b.* FROM a CROSS JOIN b
+SELECT a.*, b.* FROM a CROSS JOIN b;
 ```
 
 #### Conditional Joins
@@ -160,7 +160,7 @@ Connecting them using this ordering is called a _positional join_:
 ```sql
 -- treat two data frames as a single table
 SELECT df1.*, df2.*
-FROM df1 POSITIONAL JOIN df2
+FROM df1 POSITIONAL JOIN df2;
 ```
 
 Positional joins are always `FULL OUTER` joins.
@@ -175,7 +175,7 @@ This is called an _as-of join_:
 -- attach prices to stock trades
 SELECT t.*, p.price
 FROM trades t ASOF JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when
+  ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 The `ASOF` join requires at least one inequality condition on the ordering field.
@@ -192,7 +192,7 @@ It can be specified as an `OUTER` join to find unpaired rows
 -- attach prices or NULLs to stock trades
 SELECT *
 FROM trades t ASOF LEFT JOIN prices p 
-  ON t.symbol = p.symbol AND t.when >= p.when
+  ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
 `ASOF` joins can also specify join conditions on matching column names with the `USING` syntax,
@@ -201,7 +201,7 @@ which will be greater than or equal to (`>=`):
 
 ```sql
 SELECT *
-FROM trades t ASOF JOIN prices p USING (symbol, when)
+FROM trades t ASOF JOIN prices p USING (symbol, when);
 -- Returns symbol, trades.when, price (but NOT prices.when)
 ```
 
@@ -212,7 +212,7 @@ To get the `prices` times in the example, you will need to list the columns expl
 
 ```sql
 SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
-FROM trades t ASOF LEFT JOIN prices p USING (symbol, when)
+FROM trades t ASOF LEFT JOIN prices p USING (symbol, when);
 ```
 
 ### Syntax
