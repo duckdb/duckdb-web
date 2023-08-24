@@ -9,10 +9,12 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 ### Examples
 
 ```sql
---  select all columns from the table called "table_name"
-FROM table_name;
 -- select all columns from the table called "table_name"
 SELECT * FROM table_name;
+-- select all columns from the table called "table_name" using the FROM-first syntax
+FROM table_name SELECT *;
+-- select all columns using the the FROM-first syntax and omitting the SELECT clause
+FROM table_name;
 -- select all columns from the table called "table_name" in the schema "schema_name
 SELECT * FROM schema_name.table_name;
 -- select the column "i" from the table function "range", where the first column of the range function is renamed to "i"
@@ -27,6 +29,8 @@ SELECT * FROM table_name JOIN other_table ON (table_name.key = other_table.key);
 SELECT * FROM table_name TABLESAMPLE 10%;
 -- select a sample of 10 rows from a table
 SELECT * FROM table_name TABLESAMPLE 10 ROWS;
+-- use the FROM-first syntax with WHERE clause and aggregation
+FROM range(100) AS t(i) SELECT sum(t.i) WHERE i % 2 = 0;
 ```
 
 ### Joins
