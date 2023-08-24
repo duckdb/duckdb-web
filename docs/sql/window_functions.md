@@ -128,9 +128,9 @@ The simplest window function is `ROW_NUMBER()`.
 This function just computes the 1-based row number within the partition using the query:
 
 ```sql
-SELECT "Plant", "Date", row_number() over (partition by "Plant" order by "Date") AS "Row"
+SELECT "Plant", "Date", row_number() OVER (PARTITION BY "Plant" ORDER  BY "Date") AS "Row"
 FROM "History"
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```
 
 The result will be
@@ -170,7 +170,7 @@ SELECT points,
     SUM(points) OVER (
         ROWS BETWEEN 1 PRECEDING
                  AND 1 FOLLOWING) we
-FROM results
+FROM results;
 ```
 This query computes the `SUM` of each point and the points on either side of it:
 
@@ -194,7 +194,7 @@ SELECT "Plant", "Date",
                   AND INTERVAL 3 DAYS FOLLOWING)
         AS "MWh 7-day Moving Average"
 FROM "Generation History"
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```
 
 This query partitions the data by `Plant` (to keep the different power plants' data separate),
@@ -232,7 +232,7 @@ WINDOW seven AS (
     ORDER BY "Date" ASC
     RANGE BETWEEN INTERVAL 3 DAYS PRECEDING
               AND INTERVAL 3 DAYS FOLLOWING)
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```
 
 The three window functions will also share the data layout, which will improve performance.
@@ -259,7 +259,7 @@ WINDOW
         ORDER BY "Date" ASC
         RANGE BETWEEN INTERVAL 1 DAYS PRECEDING
         AND INTERVAL 1 DAYS FOLLOWING)
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```
 
 The queries above do not use a number of clauses commonly found in select statements, like
@@ -284,5 +284,5 @@ WINDOW seven AS (
     ORDER BY "Date" ASC
     RANGE BETWEEN INTERVAL 3 DAYS PRECEDING
               AND INTERVAL 3 DAYS FOLLOWING)
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```

@@ -275,9 +275,9 @@ D .schema
 ```
 
 ```sql
-CREATE TABLE fliers(animal VARCHAR);;
-CREATE TABLE swimmers(animal VARCHAR);;
-CREATE TABLE walkers(animal VARCHAR);;
+CREATE TABLE fliers(animal VARCHAR);
+CREATE TABLE swimmers(animal VARCHAR);
+CREATE TABLE walkers(animal VARCHAR);
 ```
 
 ## Opening Database Files
@@ -452,7 +452,7 @@ Note that the duck head is built with unicode characters and does not always wor
 -- Duck head prompt
 .prompt '⚫◗ '
 -- Example SQL statement
-SELECT 'Begin quacking!' as "Ready, Set, ..."
+SELECT 'Begin quacking!' AS "Ready, Set, ...";
 ```
 
 To invoke that file on initialization, use this command:

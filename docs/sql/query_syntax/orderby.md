@@ -52,7 +52,7 @@ CREATE OR REPLACE TABLE addresses AS
     UNION ALL 
     SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111'
     UNION ALL 
-    SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001'
+    SELECT '111 Duck Duck Goose Ln', 'Duck Town', '11111-0001';
 ;
 ```
 
@@ -81,7 +81,7 @@ ORDER BY city COLLATE DE;
 -- Order from left to right (by address, then by city, then by zip) in ascending order
 SELECT *
 FROM addresses
-ORDER BY ALL
+ORDER BY ALL;
 ```
 
 |        address         |   city    |    zip     |
@@ -96,7 +96,7 @@ ORDER BY ALL
 -- Order from left to right (by address, then by city, then by zip) in descending order
 SELECT *
 FROM addresses
-ORDER BY ALL DESC
+ORDER BY ALL DESC;
 ```
 
 |        address         |   city    |    zip     |

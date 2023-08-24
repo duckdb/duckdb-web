@@ -78,7 +78,7 @@ GROUP BY course
 UNION ALL
 -- group by nothing
 SELECT NULL AS course, NULL AS type, COUNT(*)
-FROM students
+FROM students;
 ```
 
 `CUBE` and `ROLLUP` are syntactic sugar to easily produce commonly used grouping sets.
