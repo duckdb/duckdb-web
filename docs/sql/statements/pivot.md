@@ -19,6 +19,8 @@ PIVOT [dataset]
 ON [column(s)] 
 USING [value(s)] 
 GROUP BY [row(s)]
+ORDER BY [column(s)-with-order-direction(s)]
+LIMIT [number-of-rows];
 ```
 The `ON`, `USING`, and `GROUP BY` clauses are each optional, but they may not all be omitted.
 
