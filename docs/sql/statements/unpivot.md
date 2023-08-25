@@ -20,7 +20,9 @@ UNPIVOT [dataset]
 ON [column(s)]
 INTO 
 	NAME [name-column-name]
-	VALUE [value-column-name(s)];
+	VALUE [value-column-name(s)]
+ORDER BY [column(s)-with-order-direction(s)]
+LIMIT [number-of-rows];
 ```
 
 
