@@ -27,6 +27,11 @@ ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
 -- drop the default value of a column
 ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
 
+-- make a column not nullable
+ALTER TABLE t ALTER COLUMN x SET NOT NULL;
+-- drop the not null constraint
+ALTER TABLE t ALTER COLUMN x DROP NOT NULL;
+
 -- rename a table
 ALTER TABLE integers RENAME TO integers_old;
 
