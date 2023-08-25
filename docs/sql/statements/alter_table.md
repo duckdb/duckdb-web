@@ -27,6 +27,11 @@ ALTER TABLE integers ALTER COLUMN i SET DEFAULT 10;
 -- drop the default value of a column
 ALTER TABLE integers ALTER COLUMN i DROP DEFAULT;
 
+-- make a column not nullable
+ALTER TABLE t ALTER COLUMN x SET NOT NULL;
+-- drop the not null constraint
+ALTER TABLE t ALTER COLUMN x DROP NOT NULL;
+
 -- rename a table
 ALTER TABLE integers RENAME TO integers_old;
 
@@ -38,7 +43,7 @@ ALTER TABLE integers RENAME i TO j;
 
 <div id="rrdiagram"></div>
 
-`ALTER TABLE` changes the schema of an existing table. All the changes made by `ALTER TABLE` fully respect the transactional semantics - that is - they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
+`ALTER TABLE` changes the schema of an existing table. All the changes made by `ALTER TABLE` fully respect the transactional semantics, i.e., they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
 
 ### RENAME TABLE
 

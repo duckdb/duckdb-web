@@ -534,6 +534,10 @@
                   "url": "alter_table"
                 },
                 {
+                  "page": "Alter View",
+                  "url": "alter_view"
+                },
+                {
                   "page": "Attach/Detach",
                   "url": "attach"
                 },
