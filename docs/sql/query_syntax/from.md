@@ -143,6 +143,64 @@ FROM cars ANTI JOIN safety_data
 ON cars.safety_report_id = safety_data.report_id;
 ```
 
+#### Lateral Joins
+
+The `LATERAL` keyword allows subqueries in the `FROM` clause to refer to previous subqueries. This feature is also known as a _lateral join_.
+
+```sql
+SELECT *
+FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
+```
+```text
+┌───────┬───────┐
+│   i   │   j   │
+│ int64 │ int64 │
+├───────┼───────┤
+│     0 │     1 │
+│     1 │     2 │
+│     2 │     3 │
+└───────┴───────┘
+```
+
+Lateral joins are a generalization of correlated subqueries, as they can return multiple values per input value rather than only a single value.
+
+```sql
+SELECT *
+FROM generate_series(0, 1) t(i), LATERAL (SELECT i + 10 UNION ALL SELECT i + 100) t2(j);
+```
+```text
+┌───────┬───────┐
+│   i   │   j   │
+│ int64 │ int64 │
+├───────┼───────┤
+│     0 │    10 │
+│     1 │    11 │
+│     0 │   100 │
+│     1 │   101 │
+└───────┴───────┘
+```
+
+It may be helpful to think about `LATERAL` as a loop where we iterate through the rows of the first subquery and use it as input to the second (`LATERAL`) subquery.
+In the examples above, we iterate through table `t` and refer to its column `i` from the definition of table `t2`. The rows of `t2` form column `j` in the result.
+
+It is possible to refer to multiple attributes from the `LATERAL` subquery. Using the table from the first example:
+
+```sql
+CREATE TABLE t1 AS SELECT * FROM range(3) t(i), LATERAL (SELECT i + 1) t2(j);
+SELECT * FROM t1, LATERAL (SELECT i + j) t2(k);
+```
+```text
+┌───────┬───────┬───────┐
+│   i   │   j   │   k   │
+│ int64 │ int64 │ int64 │
+├───────┼───────┼───────┤
+│     0 │     1 │     1 │
+│     1 │     2 │     3 │
+│     2 │     3 │     5 │
+└───────┴───────┴───────┘
+```
+
+> DuckDB detects when `LATERAL` joins should be used, making the use of the `LATERAL` keyword optional.
 
 #### Positional Joins
 
