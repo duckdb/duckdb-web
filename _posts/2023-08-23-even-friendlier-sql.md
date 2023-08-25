@@ -192,17 +192,10 @@ SELECT
     MAX(COLUMNS(* EXCLUDE season_num))
 FROM trek_facts;
 ```
-```shell
-┌──────────────────────┬──────────────────────┬───┬──────────────────────┬──────────────────────┬──────────────────────┐
-│ max(trek_facts.epi…  │ max(trek_facts.air…  │ … │ max(trek_facts.cnt…  │ max(trek_facts.cnt…  │ max(trek_facts.boo…  │
-│        int64         │         date         │   │        int64         │        int64         │        int64         │
-├──────────────────────┼──────────────────────┼───┼──────────────────────┼──────────────────────┼──────────────────────┤
-│                   29 │ 1967-04-13           │ … │                    0 │                    3 │                    1 │
-├──────────────────────┴──────────────────────┴───┴──────────────────────┴──────────────────────┴──────────────────────┤
-│ 1 rows                                                                                          17 columns (5 shown) │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-```
+| max(trek_facts.<br>episode_num) | max(trek_facts.<br>aired_date) | max(trek_facts.<br>cnt_kirk_hookups) | ... | max(trek_facts.<br>cnt_highly_illogical_quote) |
+|:---|:---|:---|:---|:---|
+| 29                          | 1967-04-13                 | 2                                | ... | 3                                          |
 
 The `REPLACE` syntax is also useful when applied to a dynamic set of columns. In this example, we want to convert the dates into timestamps prior to finding the maximum value in each column. Previously this would have required an entire subquery or CTE to pre-process just that single column!
 
@@ -212,16 +205,9 @@ SELECT
 FROM trek_facts;
 ```
 
-```shell
-┌──────────────────────┬──────────────────────┬──────────────────────┬───┬──────────────────────┬──────────────────────┐
-│ max(trek_facts.sea…  │ max(trek_facts.epi…  │ max(aired_date := …  │ … │ max(trek_facts.cnt…  │ max(trek_facts.boo…  │
-│        int64         │        int64         │      timestamp       │   │        int64         │        int64         │
-├──────────────────────┼──────────────────────┼──────────────────────┼───┼──────────────────────┼──────────────────────┤
-│                    1 │                   29 │ 1967-04-13 00:00:00  │ … │                    3 │                    1 │
-├──────────────────────┴──────────────────────┴──────────────────────┴───┴──────────────────────┴──────────────────────┤
-│ 1 rows                                                                                          18 columns (5 shown) │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| max(trek_facts.<br>season_num) | max(trek_facts.<br>episode_num) | max(aired_date := <br>CAST(aired_date AS TIMESTAMP)) | ... | max(trek_facts.<br>cnt_im_givin_her_all_shes_got_quote) |
+|:---|:---|:---|:---|:---|
+| 1                          | 29                          | 1967-04-13 00:00:00                              | ... | 0                                                   |
 
 ### COLUMNS() with lambda functions
 
