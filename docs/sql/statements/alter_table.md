@@ -38,7 +38,7 @@ ALTER TABLE integers RENAME i TO j;
 
 <div id="rrdiagram"></div>
 
-`ALTER TABLE` changes the schema of an existing table. All the changes made by `ALTER TABLE` fully respect the transactional semantics - that is - they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
+`ALTER TABLE` changes the schema of an existing table. All the changes made by `ALTER TABLE` fully respect the transactional semantics, i.e., they will not be visible to other transactions until committed, and can be fully reverted through a rollback.
 
 ### RENAME TABLE
 
