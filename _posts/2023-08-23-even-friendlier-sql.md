@@ -14,7 +14,7 @@ TLDR; DuckDB continues to push the boundaries of SQL syntax to both simplify que
 
 Who says that SQL should stay frozen in time, chained to a 1999 version of the specification? As a comparison, do folks remember what JavaScript felt like before Promises? Those didn’t launch until 2012! It’s clear that innovation at the programming syntax layer can have a profoundly positive impact on an entire language ecosystem. 
 
-We believe there are many valid reasons for innovation in the SQL language, among them opportunities to simplify basic queries and also to make more dynamic analyses possible. Many of these features arose from community suggestions! Please let us know your SQL pain points on [Discord](​​https://discord.duckdb.org/) or [GitHub](https://github.com/duckdb/duckdb/discussions) and join us as we change what it feels like to write SQL!
+We believe there are many valid reasons for innovation in the SQL language, among them opportunities to simplify basic queries and also to make more dynamic analyses possible. Many of these features arose from community suggestions! Please let us know your SQL pain points on [Discord](https://discord.duckdb.org/) or [GitHub](https://github.com/duckdb/duckdb/discussions) and join us as we change what it feels like to write SQL!
 
 If you have not had a chance to read the first installment in this series, please take a quick look [here](https://duckdb.org/2022/05/04/friendlier-sql.html). 
 
@@ -189,7 +189,7 @@ FROM trek_facts;
 
 ### COLUMNS() with lambda functions
 
-The most flexible way to query a dynamic set of columns is through a [lambda function](​​https://duckdb.org/docs/sql/functions/nested.html#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
+The most flexible way to query a dynamic set of columns is through a [lambda function](https://duckdb.org/docs/sql/functions/nested#lambda-functions). This allows for any matching criteria to be applied to the names of the columns, not just regular expressions. See more details about lambda functions below. 
 
 For example, if using the `LIKE` syntax is more comfortable, we can select columns matching a `LIKE` pattern rather than with a regular expression.
 
@@ -313,7 +313,7 @@ FROM proverbs;
 | Revenge is a dish best served cold           | NULL                    |
 | If winning is not important, why keep score? | You will be assimilated |
 
-This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities](https://duckdb.org/docs/data/multiple_files/combining_schemas.html#union-by-name). 
+This approach has additional benefits. As seen above, not only can tables with different column orders be combined, but so can tables with different numbers of columns entirely. This is helpful as schemas migrate, and is particularly useful for DuckDB’s [multi-file reading capabilities](https://duckdb.org/docs/data/multiple_files/combining_schemas#union-by-name).
 
 ## Insert by name
 
@@ -558,6 +558,6 @@ Future work for friendlier SQL includes:
 * Improvements to file globbing
 * Your suggestions!
 
-Please let us know what areas of SQL can be improved! We welcome your feedback on [Discord](​​https://discord.duckdb.org/) or [GitHub](https://github.com/duckdb/duckdb/discussions). 
+Please let us know what areas of SQL can be improved! We welcome your feedback on [Discord](https://discord.duckdb.org/) or [GitHub](https://github.com/duckdb/duckdb/discussions).
 
 Live long and prosper! 🖖
