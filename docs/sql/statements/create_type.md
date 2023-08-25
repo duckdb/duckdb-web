@@ -25,5 +25,5 @@ CREATE TYPE x_index AS INTEGER;
 `CREATE TYPE` defines a new data type available to this duckdb instance. These new
 types can then be inspected in the `duckdb_types` table.
 
-Extending these custom types to support custom operators (such as the Postgres `&&` operator)
+Extending these custom types to support custom operators (such as the PostgreSQL `&&` operator)
 would require C++ development. But that can be done in an extension!

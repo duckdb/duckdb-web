@@ -85,7 +85,7 @@
               "url": "query_sqlite"
             },
             {
-              "page": "Postgres Import",
+              "page": "PostgreSQL Import",
               "url": "query_postgres"
             }
           ]
@@ -938,7 +938,7 @@
               "url": "json"
             },
             {
-              "page": "Postgres Scanner",
+              "page": "PostgreSQL Scanner",
               "url": "postgres_scanner"
             },
             {

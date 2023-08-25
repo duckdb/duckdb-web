@@ -7,7 +7,7 @@ title: List
 
 A `LIST` column can have values with different lengths, but they must all have the same underlying type. `LIST`s are typically used to store arrays of numbers, but can contain any uniform data type, including other `LIST`s and `STRUCT`s.
 
-`LIST`s are similar to Postgres's `ARRAY` type. DuckDB uses the `LIST` terminology, but some [array functions](../functions/nested#list-functions) are provided for Postgres compatibility.
+`LIST`s are similar to PostgreSQL's `ARRAY` type. DuckDB uses the `LIST` terminology, but some [array functions](../functions/nested#list-functions) are provided for PostgreSQL compatibility.
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
