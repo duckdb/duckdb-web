@@ -171,9 +171,9 @@ SELECT
 FROM trek_facts;
 ```
 
-| max(trek_facts.<br>episode_num) | max(trek_facts.<br>aired_date) | max(trek_facts.<br>cnt_kirk_hookups) | ... | max(trek_facts.<br>cnt_highly_illogical_quote) |
+| max(trek_facts.<br>episode_num) | max(trek_facts.<br>aired_date) | max(trek_facts.<br>cnt_kirk_hookups) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
-| 29                          | 1967-04-13                 | 2                                | ... | 3                                          |
+| 29                          | 1967-04-13                 | 2                                | ... | 1                                          |
 
 The `REPLACE` syntax is also useful when applied to a dynamic set of columns. In this example, we want to convert the dates into timestamps prior to finding the maximum value in each column. Previously this would have required an entire subquery or CTE to pre-process just that single column!
 
@@ -183,9 +183,9 @@ SELECT
 FROM trek_facts;
 ```
 
-| max(trek_facts.<br>season_num) | max(trek_facts.<br>episode_num) | max(aired_date := <br>CAST(aired_date AS TIMESTAMP)) | ... | max(trek_facts.<br>cnt_im_givin_her_all_shes_got_quote) |
+| max(trek_facts.<br>season_num) | max(trek_facts.<br>episode_num) | max(aired_date := <br>CAST(aired_date AS TIMESTAMP)) | ... | max(trek_facts.<br>bool_enterprise_saved_the_day) |
 |:---|:---|:---|:---|:---|
-| 1                          | 29                          | 1967-04-13 00:00:00                              | ... | 0                                                   |
+| 1                          | 29                          | 1967-04-13 00:00:00                              | ... | 1                                                   |
 
 ### COLUMNS() with lambda functions
 
