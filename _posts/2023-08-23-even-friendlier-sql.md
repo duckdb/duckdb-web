@@ -122,29 +122,7 @@ FROM trek_facts;
 | 1           | 0                     | 0                         |
 | 2           | 1                     | 1                         |
 | 3           | 1                     | 0                         |
-| 4           | 0                     | 0                         |
-| 5           | 0                     | 0                         |
-| 6           | 0                     | 0                         |
-| 7           | 0                     | 0                         |
-| 8           | 1                     | 1                         |
-| 9           | 1                     | 1                         |
-| 10          | 5                     | 1                         |
-| 11          | 1                     | 7                         |
-| 12          | 0                     | 0                         |
-| 13          | 1                     | 1                         |
-| 14          | 3                     | 7                         |
-| 15          | 1                     | 1                         |
-| 16          | 1                     | 1                         |
-| 17          | 2                     | 7                         |
-| 18          | 2                     | 8                         |
-| 19          | 1                     | 3                         |
-| 20          | 1                     | 1                         |
-| 21          | 0                     | 0                         |
-| 22          | 0                     | 2                         |
-| 23          | 0                     | 0                         |
-| 24          | 0                     | 0                         |
-| 25          | 1                     | 2                         |
-| 26          | 1                     | 7                         |
+| ...         | ...                   | ...                       |
 | 27          | 1                     | 1                         |
 | 28          | 0                     | 0                         |
 | 29          | 2                     | 8                         |
@@ -520,24 +498,22 @@ SELECT 5 UNION ALL
 SELECT 6 UNION ALL 
 SELECT 'First Contact';
 ```
-```shell
-┌────────────────────┐
-│       movie        │
-│      varchar       │
-├────────────────────┤
-│ The Motion Picture │
-│ 2                  │
-│ 3                  │
-│ 4                  │
-│ 5                  │
-│ 6                  │
-│ First Contact      │
-└────────────────────┘
-```
+
+|       movie        |
+|     varchar        |
+|:---|
+| The Motion Picture |
+| First Contact      |
+| 6                  |
+| 5                  |
+| 4                  |
+| 3                  |
+| 2                  |
+
 However, if a `UNION` type is used, each individual row retains its original data type. A `UNION` is defined using key-value pairs with the key as a name and the value as the data type. This also allows the specific data types to be pulled out as individual columns:
 ```sql
 CREATE TABLE movies (
-     movie UNION(numbered INT, named VARCHAR)
+     movie UNION(num INT, name VARCHAR)
 );
 INSERT INTO movies 
      VALUES ('The Motion Picture'), (2), (3), (4), (5), (6), ('First Contact');
@@ -545,24 +521,21 @@ INSERT INTO movies
 FROM movies 
 SELECT 
      movie,
-     union_tag(movie) AS type_indicator,
-     movie.named,
-     movie.numbered;
+     union_tag(movie) AS type,
+     movie.name,
+     movie.num;
 ```
-```shell
-┌────────────────────────────────────────┬────────────────┬────────────────────┬──────────┐
-│                 movie                  │ type_indicator │       named        │ numbered │
-│ union(numbered integer, named varchar) │                │      varchar       │  int32   │
-├────────────────────────────────────────┼────────────────┼────────────────────┼──────────┤
-│ The Motion Picture                     │ named          │ The Motion Picture │     NULL │
-│ 2                                      │ numbered       │ NULL               │        2 │
-│ 3                                      │ numbered       │ NULL               │        3 │
-│ 4                                      │ numbered       │ NULL               │        4 │
-│ 5                                      │ numbered       │ NULL               │        5 │
-│ 6                                      │ numbered       │ NULL               │        6 │
-│ First Contact                          │ named          │ First Contact      │     NULL │
-└────────────────────────────────────────┴────────────────┴────────────────────┴──────────┘
-```
+
+|       movie        | type |        name        | num |
+| union(num integer, name varchar) | varchar |        varchar        | int32 |
+|:---|:---|:---|:---|
+| The Motion Picture | name | The Motion Picture |     |
+| 2                  | num  |                    | 2   |
+| 3                  | num  |                    | 3   |
+| 4                  | num  |                    | 4   |
+| 5                  | num  |                    | 5   |
+| 6                  | num  |                    | 6   |
+| First Contact      | name | First Contact      |     |
 
 ## Additional friendly features
 
