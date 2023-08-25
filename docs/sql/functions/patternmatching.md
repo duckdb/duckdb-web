@@ -49,9 +49,9 @@ Additionally, the function `like_escape` has the same functionality as a `LIKE` 
 'A%c' ILIKE 'a$%c' ESCAPE '$';      --TRUE
 ```
 
-There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance Postgres compatibility.
+There are also alternative characters that can be used as keywords in place of `LIKE` expressions. These enhance PostgreSQL compatibility.
 
-| LIKE-style | Postgres-style |
+| LIKE-style | PostgreSQL-style |
 |:---|:---|
 | `LIKE` | `~~` |
 | `NOT LIKE` | `!~~` |

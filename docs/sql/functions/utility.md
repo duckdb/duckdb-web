@@ -24,7 +24,7 @@ The functions below are difficult to categorize into specific function types and
 | `icu_sort_key(`*`string`*`, `*`collator`*`)` | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed.| `icu_sort_key('ö','DE')` | 460145960106|
 | `md5(`*`string`*`)` | Return an md5 one-way hash of the *string*.| `md5('123')` | `'202cb962ac59075b964b07152d234b70'`|
 | `nextval(`*`'sequence_name'`*`)`| Return the following value of the sequence.| `nextval('my_sequence_name')`| `2` |
-| `pg_typeof(`*`expression`*`)` | Returns the lower case name of the data type of the result of the expression. For Postgres compatibility.| `pg_typeof('abc')` | `'varchar'` |
+| `pg_typeof(`*`expression`*`)` | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility.| `pg_typeof('abc')` | `'varchar'` |
 | `stats(`*`expression`*`)` | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression.| `stats(5)` | `'[Min: 5, Max: 5][Has Null: false]'` |
 | `txid_current()`| Returns the current transaction's ID (a `BIGINT`). It will assign a new one if the current transaction does not have one already.| `txid_current()` | various |
 | `typeof(`*`expression`*`)`| Returns the name of the data type of the result of the expression. | `typeof('abc')`| `'VARCHAR'` |
