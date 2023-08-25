@@ -43,6 +43,7 @@ Below are parameters that can be passed in to the CSV reader.
 |:--|:-----|:-|:-|
 | `all_varchar` | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. | bool | false |
 | `auto_detect` | Enables [auto detection of parameters](auto_detection) | bool | true |
+| `buffer_size` | The buffer size used by the CSV reader, specified in bytes. By default, it is set to 32MB or the size of the CSV file (if smaller). The buffer size must be at least as large as the longest line in the CSV file. Note: this is an advanced option that has a significant impact on performance and memory usage. | bigint | min(32000000, CSV file size) |
 | `columns` | A struct that specifies the column names and column types contained within the CSV file (e.g., `{'col1': 'INTEGER', 'col2': 'VARCHAR'}`). | `struct` | `(empty)` |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.csv.gz` will use gzip, `t.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | varchar | auto |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../../sql/functions/dateformat) | varchar | `(empty)` |
