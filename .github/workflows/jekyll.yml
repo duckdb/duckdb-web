@@ -70,8 +70,8 @@ jobs:
         run: pandoc --defaults pandoc-configuration.yaml
       - name: Move artifact
         run: |
-          mkdir -p ../_pdf
-          mv duckdb-docs.pdf ../_pdf
+          mkdir -p ../_pdf/docs
+          mv duckdb-docs.pdf ../_pdf/docs
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v3
         with:
