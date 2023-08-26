@@ -138,9 +138,23 @@ def recursive_copy(source, target, version):
             recursive_copy(source_path, target_path, version)
 
 
+def archive_single_pdf_document(version):
+    copy_file(
+        'single-file-document/duckdb-docs.pdf',
+        f'docs/archive/{version}/duckdb-docs-v{version}.pdf',
+        version,
+    )
+    with open(f"docs/archive/{version}/index.md") as sitemap_file:
+        sitemap_page = sitemap_file.read()
+        sitemap_page = sitemap_page.replace("duckdb-docs.pdf", f"duckdb-docs-v{version}.pdf")
+    with open(f"docs/archive/{version}/index.md", "w") as sitemap_file:
+        sitemap_file.write(sitemap_page)
+
+
 recursive_copy('docs', folder, version)
 copy_file(
     '_data/menu_docs_dev.json',
     '_data/menu_docs_%s.json' % (version.replace('.', ''),),
     version,
 )
+archive_single_pdf_document(version)
