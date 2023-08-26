@@ -138,9 +138,34 @@ def recursive_copy(source, target, version):
             recursive_copy(source_path, target_path, version)
 
 
+def archive_installation_page(version):
+    # get frontmatter of the proxy installation file (which includes the actual one)
+    with open(f"docs/installation/index.html") as current_installation_file:
+        current_installation_file_loaded = frontmatter.load(current_installation_file)
+        current_installation_file_loaded.content = ""
+
+    # adjust installation links to point to the old version in the archived page
+    with open(f"_includes/installation.html") as main_installation_file, open(
+        f"docs/archive/{version}/installation/index.html", "w"
+    ) as archived_installation_file:
+        installation_page = main_installation_file.read()
+        installation_page = installation_page.replace(" (Latest Release)", "")
+        installation_page = installation_page.replace(
+            "{{ site.currentduckdbversion }}", version
+        )
+        # we leave the variable "{{ site.nextjavaversion }}" as is
+        # to allow the "GitHub main (Bleeding Edge)" to move with new versions
+
+        archived_installation_file.write(
+            frontmatter.dumps(current_installation_file_loaded)
+        )
+        archived_installation_file.write(installation_page)
+
+
 recursive_copy('docs', folder, version)
 copy_file(
     '_data/menu_docs_dev.json',
     '_data/menu_docs_%s.json' % (version.replace('.', ''),),
     version,
 )
+archive_installation_page(version)
