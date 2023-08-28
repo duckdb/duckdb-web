@@ -33,8 +33,8 @@ RESET memory_limit;
 
 Below is a list of all available settings.
 
-| name | description | input_type | default_value |
-|--|---|--|-|
+|                   name                   |                                                                       description                                                                       | input_type |      default_value       |
+|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------------------------|
 | Calendar                                 | The current calendar                                                                                                                                    | VARCHAR    | System (locale) calendar |
 | TimeZone                                 | The current time zone                                                                                                                                   | VARCHAR    | System (locale) timezone |
 | access_mode                              | Access mode of the database (**AUTOMATIC**, **READ_ONLY** or **READ_WRITE**)                                                                            | VARCHAR    | AUTOMATIC                |
@@ -55,6 +55,7 @@ Below is a list of all available settings.
 | enable_profiling                         | Enables profiling, and sets the output format (**JSON**, **QUERY_TREE**, **QUERY_TREE_OPTIMIZER**)                                                      | VARCHAR    | NULL                     |
 | enable_progress_bar                      | Enables the progress bar, printing progress to the terminal for long queries                                                                            | BOOLEAN    | FALSE                    |
 | enable_progress_bar_print                | Controls the printing of the progress bar, when 'enable_progress_bar' is true                                                                           | BOOLEAN    | TRUE                     |
+| experimental_parallel_csv                | Whether or not to use the experimental parallel CSV reader                                                                                              | BOOLEAN    | NULL                     |
 | explain_output                           | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | VARCHAR    | PHYSICAL_ONLY            |
 | extension_directory                      | Set the directory to store extensions in                                                                                                                | VARCHAR    |                          |
 | external_threads                         | The number of external threads that work on DuckDB tasks.                                                                                               | BIGINT     | 0                        |
@@ -71,7 +72,7 @@ Below is a list of all available settings.
 | log_query_path                           | Specifies the path to which queries should be logged (default: empty string, queries are not logged)                                                    | VARCHAR    | NULL                     |
 | max_expression_depth                     | The maximum expression depth limit in the parser. WARNING: increasing this setting and using very deep expressions might lead to stack overflow errors. | UBIGINT    | 1000                     |
 | max_memory, memory_limit                 | The maximum memory of the system (e.g., 1GB)                                                                                                            | VARCHAR    | 75% of RAM               |
-| ordered_aggregate_threshold              | The number of rows to accumulate before sorting, used for tuning                                                                                        | UBIGINT    | 262144                   |
+| ordered_aggregate_threshold              | the number of rows to accumulate before sorting, used for tuning                                                                                        | UBIGINT    | 262144                   |
 | password                                 | The password to use. Ignored for legacy compatibility.                                                                                                  | VARCHAR    | NULL                     |
 | perfect_ht_threshold                     | Threshold in bytes for when to use a perfect hash table (default: 12)                                                                                   | BIGINT     | 12                       |
 | pivot_filter_threshold                   | The threshold to switch from using filtered aggregates to LIST with a dedicated pivot operator                                                          | BIGINT     | 10                       |

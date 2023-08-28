@@ -1237,6 +1237,18 @@
     "result": 0.9333333333333333
   },
   {
+    "struct": "JulianDayFun",
+    "name": "julian",
+    "parameters": [
+      "ts"
+    ],
+    "description": "Extract the Julian Day number from a date or timestamp",
+    "example": "julian(timestamp '2006-01-01 12:00')",
+    "type": "scalar_function_set",
+    "category": "date",
+    "result": null
+  },
+  {
     "name": "kahan_sum",
     "parameters": [
       "arg"
