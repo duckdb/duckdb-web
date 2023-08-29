@@ -24,8 +24,8 @@ These operators treat `NULL` values as equal.
 
 | Operator | Description | Example | Result |
 |:---|:---|:---|:-|
-| `IS DISTINCT FROM` | equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `TRUE` |
-| `IS NOT DISTINCT FROM` | not equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `TRUE` |
+| `IS DISTINCT FROM` | not equal, including `NULL` | `2 IS DISTINCT FROM NULL` | `TRUE` |
+| `IS NOT DISTINCT FROM` | equal, including `NULL` | `NULL IS NOT DISTINCT FROM NULL` | `TRUE` |
 
 ## BETWEEN and IS (NOT) NULL
 
