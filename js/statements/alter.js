@@ -45,6 +45,11 @@ function GenerateAlterTable(options = {}) {
 				Sequence([
 					Keyword("ADD"),
 					Optional("COLUMN"),
+					Optional(Sequence([
+						Keyword("IF"),
+						Keyword("NOT"),
+						Keyword("EXISTS")
+					]), "skip"),
 					Expression("column-name"),
 					Expression("type-name"),
 					Expandable("column-constraints", options, "column-constraints", GenerateColumnConstraints)
