@@ -351,6 +351,23 @@ SELECT j->'species'->>[0,1] FROM example;
 -- [duck, goose]
 ```
 
+If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
+```sql
+-- The following will cause the JSON to be parsed twice,
+-- resulting in a slower query that uses more memory
+SELECT json_extract(j, 'family') AS family,
+       json_extract(j, 'species') AS species
+FROM example;
+-- The following is faster and more memory efficient 
+WITH extracted AS (
+  SELECT json_extract(j, ['family', 'species']) extracted_list
+  FROM example
+)
+SELECT extracted_list[1] AS family,
+       extracted_list[2] AS species
+FROM extracted;
+```
+
 ## JSON Creation Functions
 
 The following functions are used to create JSON.
