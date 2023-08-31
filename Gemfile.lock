@@ -135,7 +135,7 @@ GEM
       jekyll (>= 3.3, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    kramdown (2.3.2)
+    kramdown (2.4.0)
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
@@ -219,7 +219,7 @@ DEPENDENCIES
   jekyll-theme-tactile (= 0.2.0)
   jekyll-theme-time-machine (= 0.2.0)
   jekyll-titles-from-headings (= 0.5.3)
-  kramdown (= 2.3.2)
+  kramdown (= 2.4.0)
   kramdown-parser-gfm (= 1.1.0)
   liquid (= 4.0.4)
   minima (= 2.5.1)
