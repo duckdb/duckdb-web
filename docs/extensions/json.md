@@ -358,7 +358,7 @@ If multiple values need to be extracted from the same JSON, it is more efficient
 SELECT json_extract(j, 'family') AS family,
        json_extract(j, 'species') AS species
 FROM example;
--- The following is faster and more memory
+-- The following is faster and more memory efficient 
 WITH extracted AS (
   SELECT json_extract(j, ['family', 'species']) extracted_list
   FROM example
