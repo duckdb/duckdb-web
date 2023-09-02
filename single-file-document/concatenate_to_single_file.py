@@ -97,6 +97,13 @@ def adjust_links_in_doc_body(doc_body):
             doc_body
         )
 
+    # replace link to the Python guides index page
+    # with a link to the Python guides section
+    doc_body = doc_body.replace(
+        "](../../guides/index#python-client)",
+        "](../../guides/python)"
+    )
+
     # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
     # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
     doc_body = doc_body.replace("`*`, `*`", "`*`,` *`")
