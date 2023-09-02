@@ -328,7 +328,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../sql/statements/copy#csv-export), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 D .mode csv
