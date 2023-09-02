@@ -15,4 +15,4 @@ The result of queries can also be directly exported to a CSV file.
 COPY (SELECT * FROM tbl) TO 'output.csv' (HEADER, DELIMITER ',');
 ```
 
-For additional options, see the [COPY statement documentation](../../sql/statements/copy#csv-export).
+For additional options, see the [`COPY` statement documentation](../../sql/statements/copy#csv-options).
