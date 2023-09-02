@@ -64,7 +64,7 @@ There are two obvious ways to go about implementing a comparator when we have mu
 
 1. Loop through the clauses: Compare columns until we find one that is not equal, or until we have compared all columns.
 This is fairly complex already, as this requires a loop with an if/else inside of it for every single row of data.
-If we have columnar storage, this comparator has to jump between columns, [causing random access in memory](https://dl.acm.org/doi/10.1145/1409360.1409380).
+If we have columnar storage, this comparator has to jump between columns, [causing random access in memory](https://ir.cwi.nl/pub/13805).
 2. Entirely sort the data by the first clause, then sort by the second clause, but only where the first clause was equal, and so on.
 This approach is especially inefficient when there are many duplicate values, as it requires multiple passes over the data.
 
