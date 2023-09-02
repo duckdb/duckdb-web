@@ -78,7 +78,7 @@ PIVOT Cities ON Year USING SUM(Population);
 In the above example, the `SUM` aggregate is always operating on a single value. 
 If we only want to change the orientation of how the data is displayed without aggregating, use the `FIRST` aggregate function.
 In this example, we are pivoting numeric values, but the `FIRST` function works very well for pivoting out a text column.
-(This is something that is difficult to do in an spreadsheet pivot table, but easy in DuckDB!)
+(This is something that is difficult to do in a spreadsheet pivot table, but easy in DuckDB!)
 
 This query produces a result that is identical to the one above:
 ```sql

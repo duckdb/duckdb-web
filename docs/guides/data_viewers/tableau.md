@@ -95,7 +95,7 @@ The last command will restart the server with the new settings.
 ### MacOS Desktop
 
 Copy the Taco file to the `/Users/[MacOS User]/Documents/My Tableau Repository/Connectors` folder.
-Then launch Tableau Desktop from the Terminal with the the command line argument to disable signature validation:
+Then launch Tableau Desktop from the Terminal with the command line argument to disable signature validation:
 
 ```sh
 $ /Applications/Tableau\ Desktop\ <year>.<quarter>.app/Contents/MacOS/Tableau -DDisableVerifyConnectorPluginSignature=true
@@ -120,7 +120,7 @@ You will need to change the application name in the script when you get upgrades
 ### Windows Desktop
 
 Copy the Taco file to the `C:\Users\[Windows User]\Documents\My Tableau Repository\Connectors` directory.
-Then launch Tableau Desktop from a shell with the the `-DDisableVerifyConnectorPluginSignature=true` argument 
+Then launch Tableau Desktop from a shell with the `-DDisableVerifyConnectorPluginSignature=true` argument 
 to disable signature validation.
 
 ## Output

@@ -13,7 +13,7 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 SELECT * FROM table_name;
 -- select all columns from the table called "table_name" using the FROM-first syntax
 FROM table_name SELECT *;
--- select all columns using the the FROM-first syntax and omitting the SELECT clause
+-- select all columns using the FROM-first syntax and omitting the SELECT clause
 FROM table_name;
 -- select all columns from the table called "table_name" in the schema "schema_name
 SELECT * FROM schema_name.table_name;
