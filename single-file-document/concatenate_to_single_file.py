@@ -126,6 +126,11 @@ def change_link(doc_body, doc_file_path):
         original_link = match[1]
         if original_link.startswith("http://") or original_link.startswith("https://"):
             continue
+        if original_link.startswith("/"):
+            full_url_link = f"https://duckdb.org{original_link}"
+            doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
+            continue
+
         link_parts = original_link.split("#")
 
         # we step up one level to navigate from the Markdown file to the directory,
