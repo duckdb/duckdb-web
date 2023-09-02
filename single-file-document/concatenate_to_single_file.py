@@ -185,7 +185,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         # add header at the beginning of the item with an accompanying label
         # e.g., for the guides/sql_features/ slug, the title is
         doc_header_label = doc_path_to_page_header_header_label(doc_file_full_path)
-        of.write(f"""{"#" * header_level} {doc_title} {{#{doc_header_label}}}\n""")
+        of.write(f"""{"#" * header_level} {doc_title} {{#{doc_header_label}}}\n\n""")
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
@@ -197,6 +197,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # write to output
         of.write(doc_body)
+        of.write("\n")
 
 
 def add_to_documentation(docs_root, data, of, chapter_title):
