@@ -20,7 +20,7 @@ CALL duckdb_settings();
 
 In this case too, the parentheses are mandatory. 
 
-Note: For some of the `duckdb_%` functions, there is also a identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view. 
+> For some of the `duckdb_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view.
 
 Example:
 
@@ -202,8 +202,10 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `sql` |The definition of this object, expressed as SQL DDL-statement.| `VARCHAR` |
 
 Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`CREATE SEQUENCE`](statements/create_sequence) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `CREATE SEQUENCE` statement.
-Note1: The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
-Note2: If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
+
+> 1. The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
+>
+> 2. If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
 
 ## duckdb_settings
 
