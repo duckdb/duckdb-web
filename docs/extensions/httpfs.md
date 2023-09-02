@@ -2,25 +2,21 @@
 layout: docu
 title: HTTPFS
 ---
-The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote
-files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension
-supports reading/writing/globbing files.
+
+The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension supports reading/writing/globbing files.
 
 Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
 Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
 
 ## HTTP(S)
 
-With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV, JSON, and
-Parquet files.
+With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV, JSON, and Parquet files.
 
 ```sql
 SELECT * FROM 'https://domain.tld/file.extension';
 ```
 
-For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For parquet
-files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the
-file that are actually required by the query. For example, the query:
+For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For parquet files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the file that are actually required by the query. For example, the query:
 
 ```sql
 SELECT column_a FROM 'https://domain.tld/file.parquet';
@@ -48,9 +44,7 @@ The __httpfs__ extension supports reading/writing/globbing files on object stora
 
 ### Requirements
 
-The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API
-should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for
-each __httpfs__ feature.
+The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each __httpfs__ feature.
 
 | Feature | Required S3 API features |
 |:---|:---|
@@ -79,19 +73,15 @@ If the endpoint is not SSL-enabled then run:
 SET s3_use_ssl=false;
 ```
 
-Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#path-style-url-ex)
-and [vhost-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#virtual-host-style-url-ex)
-urls  is possible using:
+Switching between [path-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#path-style-url-ex) and [vhost-style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#virtual-host-style-url-ex) URLs is possible using:
 
 ```sql
 SET s3_url_style='path';
 ```
 
-However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the
-endpoint to `s3.<region>.amazonaws.com`.
+However, note that this may also require updating the endpoint. For example for AWS S3 it is required to change the endpoint to `s3.<region>.amazonaws.com`.
 
-After configuring the correct endpoint and region, public files can be read. To also read private files, authentication
-credentials can be added:
+After configuring the correct endpoint and region, public files can be read. To also read private files, authentication credentials can be added:
 
 ```sql
 SET s3_access_key_id='<AWS access key id>';
@@ -106,9 +96,7 @@ SET s3_session_token='<AWS session token>';
 
 #### Per-Request Configuration
 
-Aside from the global S3 configuration described above, specific configuration values can be used on a per-request
-basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3
-URL as query parameters. All the individual configuration values listed above can be set as query parameters.
+Aside from the global S3 configuration described above, specific configuration values can be used on a per-request basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3 URL as query parameters. All the individual configuration values listed above can be set as query parameters.
 
 For instance,
 ```text
@@ -137,8 +125,7 @@ SELECT * FROM read_parquet(['s3://bucket/file1.parquet', 's3://bucket/file2.parq
 
 #### Glob
 
-File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match
-multiple files, for example:
+File globbing is implemented using the ListObjectV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT * FROM read_parquet('s3://bucket/*.parquet');
@@ -146,8 +133,7 @@ SELECT * FROM read_parquet('s3://bucket/*.parquet');
 
 This query matches all files in the root of the bucket with the parquet extension.
 
-Several features for matching are supported, such as `*` to match any number of any character, `?` for any single
-character or `[0-9]` for a single character in a range of characters:
+Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
 
 ```sql
 SELECT COUNT(*) FROM read_parquet('s3://bucket/folder*/100?/t[0-9].parquet');
@@ -161,16 +147,14 @@ SELECT * FROM read_parquet('s3://bucket/*.parquet', FILENAME = 1);
 
 could for example result in:
 
-| column_a | column_b | filename
+| column_a | column_b | filename |
 |:---|:---|:---|
-| 1 | examplevalue1 | s3://bucket/file1.parquet
-| 2 | examplevalue1 | s3://bucket/file2.parquet
+| 1 | examplevalue1 | s3://bucket/file1.parquet |
+| 2 | examplevalue1 | s3://bucket/file2.parquet |
 
 #### Hive Partitioning
 
-DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in
-separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file
-path. So for example let us consider three parquet files Hive paritioned by year:
+DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file path. So for example let us consider three parquet files Hive paritioned by year:
 
 ```text
 s3://bucket/year=2012/file.parquet
@@ -178,7 +162,7 @@ s3://bucket/year=2013/file.parquet
 s3://bucket/year=2014/file.parquet
 ```
 
-If scanning these files with the HIVE_PARTITIONING option enabled:
+If scanning these files with the `HIVE_PARTITIONING` option enabled:
 
 ```sql
 SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1);
@@ -186,15 +170,13 @@ SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1);
 
 could result in:
 
-| column_a | column_b | year
+| column_a | column_b | year |
 |:---|:---|:---|
-| 1 | examplevalue1 | 2012
-| 2 | examplevalue2 | 2013
-| 3 | examplevalue3 | 2014
+| 1 | examplevalue1 | 2012 |
+| 2 | examplevalue2 | 2013 |
+| 3 | examplevalue3 | 2014 |
 
-Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DuckDB
-however, these columns behave just like regular columns. For example, filters can be applied on Hive partition
-columns:
+Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DuckDB however, these columns behave just like regular columns. For example, filters can be applied on Hive partition columns:
 
 ```sql
 SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;
@@ -202,14 +184,13 @@ SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) 
 
 ### Writing
 
-Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3
-works for both CSV and Parquet:
+Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3 works for both CSV and Parquet:
 
 ```sql
 COPY table_name TO 's3://bucket/file.extension';
 ```
 
-Partioned copy to S3 also works:
+Partitioned copy to S3 also works:
 
 ```sql
 COPY table TO 's3://my-bucket/partitioned' (FORMAT PARQUET, PARTITION_BY (part_col_a, part_col_b));
@@ -233,6 +214,6 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 | setting | description |  
 |:---|:---|
-| s3_uploader_max_parts_per_file | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html)
-| s3_uploader_max_filesize | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html)
-| s3_uploader_thread_limit | maximum number of uploader threads
+| `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
+| `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
+| `s3_uploader_thread_limit` | maximum number of uploader threads |

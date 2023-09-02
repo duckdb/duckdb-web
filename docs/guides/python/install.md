@@ -9,7 +9,7 @@ The latest release of the Python client can be installed using `pip`.
 pip install duckdb
 ```
 
-The pre-release Python client can be installed using `--pre`;
+The pre-release Python client can be installed using `--pre`.
 
 ```bash
 pip install duckdb --upgrade --pre

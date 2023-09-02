@@ -20,7 +20,7 @@ CALL duckdb_settings();
 
 In this case too, the parentheses are mandatory. 
 
-Note: For some of the `duckdb_%` functions, there is also a identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view. 
+> For some of the `duckdb_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view.
 
 Example:
 
@@ -201,9 +201,11 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `last_value` |`null` if no value was ever drawn from the sequence using `nextval(...)`. `1` if a value was drawn.| `BIGINT` |
 | `sql` |The definition of this object, expressed as SQL DDL-statement.| `VARCHAR` |
 
-Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`create sequence`](./statements/create_sequence.html) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `create sequence` statement.
-Note1: The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
-Note2: If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
+Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`CREATE SEQUENCE`](statements/create_sequence) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `CREATE SEQUENCE` statement.
+
+> 1. The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
+>
+> 2. If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
 
 ## duckdb_settings
 
@@ -239,7 +241,7 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `check_constraint_count` |The number of check constraints active on columns within the table.| `BIGINT` |
 | `sql` |The definition of this object, expressed as SQL [`CREATE TABLE`-statement](./statements/create_table).| `VARCHAR` |
 
-The [`information_schema.tables`](./information_schema#tables) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`](./information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
 ## duckdb_types
 
@@ -275,4 +277,4 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `column_count` |The number of columns defined by this view object.| `BIGINT` |
 | `sql` |The definition of this object, expressed as SQL DDL-statement.| `VARCHAR` |
 
-The [`information_schema.tables`](./information_schema#tables) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`](./information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
