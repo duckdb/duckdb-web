@@ -37,4 +37,4 @@ A table function is used in place of a table in a `FROM` clause.
 
 | Function | Description | Example |
 |:--|:---|:-|
-| `glob(`*`search_path`*`)` | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](./patternmatching). | `glob('*')` |
+| `glob(`*`search_path`*`)` | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax](patternmatching). | `glob('*')` |
