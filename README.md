@@ -11,4 +11,4 @@ The DuckDB codebase is hosted in the [DuckDB repository](https://github.com/duck
 
 ## Contributing
 
-Please consult the [contributor's guide](CONTRIBUTING.md) for instructions on how to contribute to the documentation.
+Please consult the [contributor's guide](CONTRIBUTING.md) for instructions on how to contribute to the documentation
