@@ -47,7 +47,7 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
-    jekyll-avatar (0.7.0)
+    jekyll-avatar (0.8.0)
       jekyll (>= 3.0, < 5.0)
     jekyll-coffeescript (1.1.1)
       coffee-script (~> 2.2)
@@ -187,7 +187,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages-health-check (= 1.17.9)
   jekyll (= 3.9.3)
-  jekyll-avatar (= 0.7.0)
+  jekyll-avatar (= 0.8.0)
   jekyll-coffeescript (= 1.1.1)
   jekyll-commonmark-ghpages (= 0.4.0)
   jekyll-default-layout (= 0.1.4)
