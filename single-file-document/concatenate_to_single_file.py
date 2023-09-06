@@ -97,6 +97,13 @@ def adjust_links_in_doc_body(doc_body):
             doc_body
         )
 
+    # replace link to the Python guides index page
+    # with a link to the Python guides section
+    doc_body = doc_body.replace(
+        "](../../guides/index#python-client)",
+        "](../../guides/python)"
+    )
+
     # replace "`, `" (with its typical surroundings) with "`,` " to allow line breaking
     # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
     doc_body = doc_body.replace("`*`, `*`", "`*`,` *`")
@@ -126,6 +133,11 @@ def change_link(doc_body, doc_file_path):
         original_link = match[1]
         if original_link.startswith("http://") or original_link.startswith("https://"):
             continue
+        if original_link.startswith("/"):
+            full_url_link = f"https://duckdb.org{original_link}"
+            doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
+            continue
+
         link_parts = original_link.split("#")
 
         # we step up one level to navigate from the Markdown file to the directory,
@@ -185,7 +197,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
         # add header at the beginning of the item with an accompanying label
         # e.g., for the guides/sql_features/ slug, the title is
         doc_header_label = doc_path_to_page_header_header_label(doc_file_full_path)
-        of.write(f"""{"#" * header_level} {doc_title} {{#{doc_header_label}}}\n""")
+        of.write(f"""{"#" * header_level} {doc_title} {{#{doc_header_label}}}\n\n""")
 
         # process document body
         doc_body = reduce_clutter_in_doc(doc_body)
@@ -197,6 +209,7 @@ def concatenate_page_to_output(of, header_level, docs_root, doc_file_path):
 
         # write to output
         of.write(doc_body)
+        of.write("\n")
 
 
 def add_to_documentation(docs_root, data, of, chapter_title):

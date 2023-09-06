@@ -9,9 +9,9 @@ This section describes functions and operators for examining and manipulating st
 | *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` | |
 | *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` | |
 | *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` | |
-| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interpreted as `NULL`s. | `'DuckDB'[:4]` | `'Duck'` | |
+| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. | `'DuckDB'[:4]` | `'Duck'` |
 | `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('DuckDB', 2)` | `'u'` | `list_element`, `list_extract` |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `'DB'` | |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `'DB'` |
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` | |
 | `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` | |
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` | |

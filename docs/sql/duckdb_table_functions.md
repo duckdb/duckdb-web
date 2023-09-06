@@ -20,7 +20,7 @@ CALL duckdb_settings();
 
 In this case too, the parentheses are mandatory. 
 
-Note: For some of the `duckdb_%` functions, there is also a identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view. 
+> For some of the `duckdb_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view.
 
 Example:
 
@@ -50,12 +50,12 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `is_nullable` |`true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values.| `BOOLEAN` |
 | `data_type` |The name of the column datatype.| `VARCHAR` |
 | `data_type_id` |The internal identifier of the column data type| `BIGINT` |
-| `character_maximum_length` |Always `NULL`. DuckDB [text types](./data_types/text) do not enforce a value length restriction based on a length type parameter.| `INTEGER` |
+| `character_maximum_length` |Always `NULL`. DuckDB [text types](data_types/text) do not enforce a value length restriction based on a length type parameter.| `INTEGER` |
 | `numeric_precision` |The number of units (in the base indicated by `numeric_precision_radix`) used for storing column values. For integral and approximate numeric types, this is the number of bits. For decimal types, this is the number of digits positions.| `INTEGER` |
 | `numeric_precision_radix` |The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions.| `INTEGER` |
 | `numeric_scale` |Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
-The [`information_schema.columns`](./information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
+The [`information_schema.columns`](information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
 ## duckdb_constraints
 
@@ -131,7 +131,7 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 | `parameters` |If the function has parameters, the list of parameter names.| `VARCHAR[]` |
 | `parameter_types` |If the function has parameters, a list of logical data type names corresponding to the parameter list.| `VARCHAR[]` |
 | `varargs` |The name of the data type in case the function has a variable number of arguments, or `NULL` if the function does not have a variable number of arguments.| `VARCHAR` |
-| `macro_definition` |If this is a [macro](./statements/create_macro), the SQL expression that defines it.| `VARCHAR` |
+| `macro_definition` |If this is a [macro](statements/create_macro), the SQL expression that defines it.| `VARCHAR` |
 | `has_side_effects` |`false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`).| `BOOLEAN` |
 | `function_oid` | The internal identifier for this function | `BIGINT` |
 
@@ -154,7 +154,7 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `expressions` |Always `NULL`| `VARCHAR` |
 | `sql` |The definition of the index, expressed as a `CREATE INDEX` SQL statement.| `VARCHAR` |
   
-Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](./indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
+Note that `duckdb_indexes` only provides metadata about secondary indexes - i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys are maintained using indexes, but their details are included in the `duckdb_constraints()` function. 
 
 ## duckdb_keywords
 
@@ -178,7 +178,7 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `internal` |`true` if this is an internal (built-in) schema, `false` if this is a user-defined schema.| `BOOLEAN` |
 | `sql` |Always `NULL`| `VARCHAR` |
 
-The [`information_schema.schemata`](./information_schema) system view provides a more standardized way to obtain metadata about database schemas.
+The [`information_schema.schemata`](information_schema) system view provides a more standardized way to obtain metadata about database schemas.
 
 ## duckdb_sequences
 
@@ -201,9 +201,11 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `last_value` |`null` if no value was ever drawn from the sequence using `nextval(...)`. `1` if a value was drawn.| `BIGINT` |
 | `sql` |The definition of this object, expressed as SQL DDL-statement.| `VARCHAR` |
 
-Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`create sequence`](./statements/create_sequence.html) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `create sequence` statement.
-Note1: The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
-Note2: If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
+Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`CREATE SEQUENCE`](statements/create_sequence) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `CREATE SEQUENCE` statement.
+
+> 1. The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
+>
+> 2. If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
 
 ## duckdb_settings
 
@@ -216,7 +218,7 @@ The `duckdb_settings()` function provides metadata about the settings available 
 | `description` |A description of the setting.| `VARCHAR` |
 | `input_type` |The logical datatype of the setting's value.| `VARCHAR` |
 
-The various settings are described in the [configuration page](./configuration).
+The various settings are described in the [configuration page](configuration).
 
 ## duckdb_tables
 
@@ -237,9 +239,9 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `column_count` |The number of columns defined by this object| `BIGINT` |
 | `index_count` |The number of indexes associated with this table. This number includes all secondary indexes, as well as internal indexes generated to maintain `PRIMARY KEY` and/or `UNIQUE` constraints.| `BIGINT` |
 | `check_constraint_count` |The number of check constraints active on columns within the table.| `BIGINT` |
-| `sql` |The definition of this object, expressed as SQL [`CREATE TABLE`-statement](./statements/create_table).| `VARCHAR` |
+| `sql` |The definition of this object, expressed as SQL [`CREATE TABLE`-statement](statements/create_table).| `VARCHAR` |
 
-The [`information_schema.tables`](./information_schema#tables) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
 
 ## duckdb_types
 
@@ -275,4 +277,4 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `column_count` |The number of columns defined by this view object.| `BIGINT` |
 | `sql` |The definition of this object, expressed as SQL DDL-statement.| `VARCHAR` |
 
-The [`information_schema.tables`](./information_schema#tables) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.

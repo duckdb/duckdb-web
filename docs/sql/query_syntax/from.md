@@ -13,7 +13,7 @@ The `FROM` clause specifies the *source* of the data on which the remainder of t
 SELECT * FROM table_name;
 -- select all columns from the table called "table_name" using the FROM-first syntax
 FROM table_name SELECT *;
--- select all columns using the the FROM-first syntax and omitting the SELECT clause
+-- select all columns using the FROM-first syntax and omitting the SELECT clause
 FROM table_name;
 -- select all columns from the table called "table_name" in the schema "schema_name
 SELECT * FROM schema_name.table_name;
@@ -23,6 +23,8 @@ SELECT t.i FROM range(100) AS t(i);
 SELECT * FROM 'test.csv';
 -- select all columns from a subquery
 SELECT * FROM (SELECT * FROM table_name);
+-- select the entire row of the subquery as a struct (i.e., a single column)
+SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 -- join two tables together
 SELECT * FROM table_name JOIN other_table ON (table_name.key = other_table.key);
 -- select a 10% sample from a table

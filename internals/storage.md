@@ -51,10 +51,16 @@ with open('test/sql/storage_version/storage_version.db', 'rb') as fh:
 ## Storage version table
 
 For changes in each given release, check out the [changelog](https://github.com/duckdb/duckdb/releases) on GitHub.
-To see the commits that changed each storage version, see the [commit log](https://github.com/duckdb/duckdb/commits/main/src/storage/storage_info.cpp)
+To see the commits that changed each storage version, see the [commit log](https://github.com/duckdb/duckdb/commits/main/src/storage/storage_info.cpp).
 
 | Storage version | DuckDB versions                                             |
 |-----------------|-------------------------------------------------------------|
+| 57              | [#8752](https://github.com/duckdb/duckdb/pull/8752) onwards |
+| 56              | [#8650](https://github.com/duckdb/duckdb/pull/8650) onwards |
+| 55              | [#8513](https://github.com/duckdb/duckdb/pull/8513) onwards |
+| 54              | [#8378](https://github.com/duckdb/duckdb/pull/8378) onwards |
+| 53              | [#8323](https://github.com/duckdb/duckdb/pull/8323) onwards |
+| 52              | [#7126](https://github.com/duckdb/duckdb/pull/7126) onwards |
 | 51              | v0.8.0, v0.8.1                                              |
 | 50              | [#7270](https://github.com/duckdb/duckdb/pull/7270) onwards |
 | 49              | [#6841](https://github.com/duckdb/duckdb/pull/6841) onwards |

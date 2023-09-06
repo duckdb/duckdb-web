@@ -20,7 +20,7 @@ Under the hood, `UNION` types are implemented on top of `STRUCT` types, and simp
 CREATE TABLE tbl1(u UNION(num INT, str VARCHAR));
 
 -- Any type can be implicitly cast to a union containing the type.
--- Any union can also be implicitly cast to a another union if 
+-- Any union can also be implicitly cast to another union if 
 -- the source union members are a subset of the targets.
 -- Note: only if the cast is unambiguous! 
 -- More details in the 'Union casts' section below.
