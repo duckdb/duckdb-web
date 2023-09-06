@@ -10,62 +10,35 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 
 <!-- This follows the order of shorthand, core/main function (list_), other list_ aliases, array_ aliases -->
 
-| Function | Description | Example | Result |
-|:---|:--|:---|:-|
-| *`list`*`[`*`index`*`]`                           | Bracket notation serves as an alias for `list_extract`.                                                                                                                             | `l[3]`                                   | `6`               |
-| `list_extract(`*`list`*`, `*`index`*`)`           | Extract the `index`th (1-based) value from the list.                                                                                                                                | `list_extract(l, 3)`                     | `6`               |
-| `list_element(`*`list`*`, `*`index`*`)`           | Alias for `list_extract`.                                                                                                                                                           | `list_element(l, 3)`                     | `6`               |
-| `array_extract(`*`list`*`, `*`index`*`)`          | Alias for `list_extract`.                                                                                                                                                           | `array_extract(l, 3)`                    | `6`               |
-| *`list`*`[`*`begin`*`:`*`end`*`]`                 | Bracket notation with colon is an alias for `list_slice`. Missing arguments are interpreted as `NULL`s.                                                                             | `l[2:3]`                                 | `[5, 6]`          |
-| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`  | Extract a sublist using slice conventions. `NULL`s are interpreted as the bounds of the `LIST`. Negative values are accepted.                                                       | `list_slice(l, 2, NULL)`                 | `[5, 6]`          |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Alias for list_slice.                                                                                                                                                               | `array_slice(l, 2, NULL)`                | `[5, 6]`          |
-| `array_pop_front(`*`list`*`)`                     | Returns the list without the first element.                                                                                                                                         | `array_pop_front(l)`                     | `[5, 6]`          |
-| `array_pop_back(`*`list`*`)`                      | Returns the list without the last element.                                                                                                                                          | `array_pop_back(l)`                      | `[4, 5]`          |
-| `list_value(`*`any`*`, ...)`                      | Create a `LIST` containing the argument values.                                                                                                                                     | `list_value(4, 5, 6)`                    | `[4, 5, 6]`       |
-| `list_pack(`*`any`*`, ...)`                       | Alias for `list_value`.                                                                                                                                                             | `list_pack(4, 5, 6)`                     | `[4, 5, 6]`       |
-| `len(`*`list`*`)`                                 | Return the length of the list.                                                                                                                                                      | `len([1, 2, 3])`                         | `3`               |
-| `array_length(`*`list`*`)`                        | Alias for `len`.                                                                                                                                                                    | `array_length([1, 2, 3])`                | `3`               |
-| `unnest(`*`list`*`)`                              | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](../query_syntax/unnest) for more details.        | `unnest([1, 2, 3])`                      | `1`, `2`, `3`     |
-| `flatten(`*`list_of_lists`*`)`                    | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](nested#flatten)).                                                          | `flatten([[1, 2], [3, 4]])`              | `[1, 2, 3, 4]`    |
-| `list_concat(`*`list1`*`, `*`list2`*`)`           | Concatenates two lists.                                                                                                                                                             | `list_concat([2, 3], [4, 5, 6])`         | `[2, 3, 4, 5, 6]` |
-| `list_cat(`*`list1`*`, `*`list2`*`)`              | Alias for `list_concat`.                                                                                                                                                            | `list_cat([2, 3], [4, 5, 6])`            | `[2, 3, 4, 5, 6]` |
-| `array_concat(`*`list1`*`, `*`list2`*`)`          | Alias for `list_concat`.                                                                                                                                                            | `array_concat([2, 3], [4, 5, 6])`        | `[2, 3, 4, 5, 6]` |
-| `array_cat(`*`list1`*`, `*`list2`*`)`             | Alias for `list_concat`.                                                                                                                                                            | `array_cat([2, 3], [4, 5, 6])`           | `[2, 3, 4, 5, 6]` |
-| `list_prepend(`*`element`*`, `*`list`*`)`         | Prepends `element` to `list`.                                                                                                                                                       | `list_prepend(3, [4, 5, 6])`             | `[3, 4, 5, 6]`    |
-| `array_prepend(`*`element`*`, `*`list`*`)`        | Alias for `list_prepend`.                                                                                                                                                           | `array_prepend(3, [4, 5, 6])`            | `[3, 4, 5, 6]`    |
-| `array_push_front(`*`list`*`, `*`element`*`)`     | Alias for `list_prepend`.                                                                                                                                                           | `array_push_front(l, 3)`                 | `[3, 4, 5,6]`     |
-| `list_append(`*`list`*`, `*`element`*`)`          | Appends `element` to `list`.                                                                                                                                                        | `list_append([2, 3], 4)`                 | `[2, 3, 4]`       |
-| `array_append(`*`list`*`, `*`element`*`)`         | Alias for `list_append`.                                                                                                                                                            | `array_append([2, 3], 4)`                | `[2, 3, 4]`       |
-| `array_push_back(`*`list`*`, `*`element`*`)`      | Alias for `list_append`.                                                                                                                                                            | `array_push_back(l, 7)`                  | `[4, 5, 6, 7]`    |
-| `list_contains(`*`list`*`, `*`element`*`)`        | Returns true if the list contains the element.                                                                                                                                      | `list_contains([1, 2, NULL], 1)`         | `true`            |
-| `list_has(`*`list`*`, `*`element`*`)`             | Alias for `list_contains`.                                                                                                                                                          | `list_has([1, 2, NULL], 1)`              | `true`            |
-| `array_contains(`*`list`*`, `*`element`*`)`       | Alias for `list_contains`.                                                                                                                                                          | `array_contains([1, 2, NULL], 1)`        | `true`            |
-| `array_has(`*`list`*`, `*`element`*`)`            | Alias for `list_contains`.                                                                                                                                                          | `array_has([1, 2, NULL], 1)`             | `true`            |
-| `list_position(`*`list`*`, `*`element`*`)`        | Returns the index of the element if the list contains the element.                                                                                                                  | `list_contains([1, 2, NULL], 2)`         | `2`               |
-| `list_indexof(`*`list`*`, `*`element`*`)`         | Alias for `list_position`.                                                                                                                                                          | `list_indexof([1, 2, NULL], 2)`          | `2`               |
-| `array_position(`*`list`*`, `*`element`*`)`       | Alias for `list_position`.                                                                                                                                                          | `array_position([1, 2, NULL], 2)`        | `2`               |
-| `array_indexof(`*`list`*`, `*`element`*`)`        | Alias for `list_position`.                                                                                                                                                          | `array_indexof([1, 2, NULL], 2)`         | `2`               |
-| `list_aggregate(`*`list`*`, `*`name`*`)`          | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates](nested#list-aggregates) section for more details.                                       | `list_aggregate([1, 2, NULL], 'min')`    | `1`               |
-| `list_aggr(`*`list`*`, `*`name`*`)`               | Alias for `list_aggregate`.                                                                                                                                                         | `list_aggr([1, 2, NULL], 'min')`         | `1`               |
-| `array_aggregate(`*`list`*`, `*`name`*`)`         | Alias for `list_aggregate`.                                                                                                                                                         | `array_aggregate([1, 2, NULL], 'min')`   | `1`               |
-| `array_aggr(`*`list`*`, `*`name`*`)`              | Alias for `list_aggregate`.                                                                                                                                                         | `array_aggr([1, 2, NULL], 'min')`        | `1`               |
-| `list_sort(`*`list`*`)`                           | Sorts the elements of the list. See the [Sorting Lists](nested#sorting-lists) section for more details about the sorting order and the null sorting order.                          | `list_sort([3, 6, 1, 2])`                | `[1, 2, 3, 6]`    |
-| `array_sort(`*`list`*`)`                          | Alias for `list_sort`.                                                                                                                                                              | `array_sort([3, 6, 1, 2])`               | `[1, 2, 3, 6]`    |
-| `list_reverse_sort(`*`list`*`)`                   | Sorts the elements of the list in reverse order. See the [Sorting Lists](nested#sorting-lists) section for more details about the null sorting order.                               | `list_reverse_sort([3, 6, 1, 2])`        | `[6, 3, 2, 1]`    |
-| `array_reverse_sort(`*`list`*`)`                  | Alias for `list_reverse_sort`.                                                                                                                                                      | `array_reverse_sort([3, 6, 1, 2])`       | `[6, 3, 2, 1]`    |
-| `list_transform(`*`list`*`, `*`lambda`*`)`        | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](nested#lambda-functions) section for more details.  | `list_transform(l, x -> x + 1)`          | `[5, 6, 7]`       |
-| `array_transform(`*`list`*`, `*`lambda`*`)`       | Alias for `list_transform`.                                                                                                                                                         | `array_transform(l, x -> x + 1)`         | `[5, 6, 7]`       |
-| `list_apply(`*`list`*`, `*`lambda`*`)`            | Alias for `list_transform`.                                                                                                                                                         | `list_apply(l, x -> x + 1)`              | `[5, 6, 7]`       |
-| `array_apply(`*`list`*`, `*`lambda`*`)`           | Alias for `list_transform`.                                                                                                                                                         | `array_apply(l, x -> x + 1)`             | `[5, 6, 7]`       |
-| `list_filter(`*`list`*`, `*`lambda`*`)`           | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions](nested#lambda-functions) section for more details.   | `list_filter(l, x -> x > 4)`             | `[5, 6]`          |
-| `array_filter(`*`list`*`, `*`lambda`*`)`          | Alias for `list_filter`.                                                                                                                                                            | `array_filter(l, x -> x > 4)`            | `[5, 6]`          |
-| `list_distinct(`*`list`*`)`                       | Removes all duplicates and NULLs from a list. Does not preserve the original order.                                                                                                 | `list_distinct([1, 1, NULL, -3, 1, 5])`  | `[1, 5, -3]`      |
-| `array_distinct(`*`list`*`)`                      | Alias for `list_distinct`.                                                                                                                                                          | `array_distinct([1, 1, NULL, -3, 1, 5])` | `[1, 5, -3]`      |
-| `list_unique(`*`list`*`)`                         | Counts the unique elements of a list.                                                                                                                                               | `list_unique([1, 1, NULL, -3, 1, 5])`    | `3`               |
-| `array_unique(`*`list`*`)`                        | Alias for `list_unique`.                                                                                                                                                            | `array_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
-| `list_any_value(`*`list`*`)`                      | Returns the first non-null value in the list                                                                                                                                        | `list_any_value([NULL, -3])`             | `-3`              |
-| `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`  | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                             | `list_resize([1,2,3], 5, 0)`             | `[1, 2, 3, 0, 0]` |
-| `array_resize(`*`list`*`, `*`size`*`[, `*`value`*`])` | Alias for `list_resize`.                                                                                                                                                        | `array_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
+| Function                                                     | Aliases                                           | Description                                                                                                                                                                        | Example                                 | Result            |
+|:-------------------------------------------------------------|:--------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|:------------------|
+| *`list`*`[`*`index`*`]`                                      |                                                   | Bracket notation serves as an alias for `list_extract`.                                                                                                                            | `l[3]`                                  | `6`               |
+| `list_extract(`*`list`*`, `*`index`*`)`                      | `list_element`, `array_extract`                   | Extract the `index`th (1-based) value from the list.                                                                                                                               | `list_extract(l, 3)`                    | `6`               |
+| *`list`*`[`*`begin`*`:`*`end`*`]`                            |                                                   | Bracket notation with colon is an alias for `list_slice`.                                                                                                                          | `l[2:3]`                                | `[5, 6]`          |
+| *`list`*`[`*`begin`*`:`*`end`*`: `*`step`*`]`                |                                                   | `list_slice` in bracket notation with an added `step` feature.                                                                                                                     | `l[:-:2]`                               | `[4, 6]`          |
+| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`             | `array_slice`                                     | Extract a sublist using slice conventions. Negative values are accepted. See [slicing](nested#slicing).                                                                            | `list_slice(l, 2, 3)`                   | `[5, 6]`          |
+| `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)` | `array_slice`                                     | `list_slice` with added `step` feature.                                                                                                                                            | `list_slice(l, 1, 3, 2)`                | `[4, 6]`          |
+| `list_reverse(`*`list`*`)`                                   | `array_reverse`                                   | Reverses the list.                                                                                                                                                                 | `list_reverse(l)`                       | `[6, 5, 4]`       |
+| `array_pop_front(`*`list`*`)`                                |                                                   | Returns the list without the first element.                                                                                                                                        | `array_pop_front(l)`                    | `[5, 6]`          |
+| `array_pop_back(`*`list`*`)`                                 |                                                   | Returns the list without the last element.                                                                                                                                         | `array_pop_back(l)`                     | `[4, 5]`          |
+| `list_value(`*`any`*`, ...)`                                 | `list_pack`                                       | Create a `LIST` containing the argument values.                                                                                                                                    | `list_value(4, 5, 6)`                   | `[4, 5, 6]`       |
+| `len(`*`list`*`)`                                            | `array_length`                                    | Return the length of the list.                                                                                                                                                     | `len([1, 2, 3])`                        | `3`               |
+| `unnest(`*`list`*`)`                                         |                                                   | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [UNNEST page](../query_syntax/unnest) for more details.       | `unnest([1, 2, 3])`                     | `1`, `2`, `3`     |
+| `flatten(`*`list_of_lists`*`)`                               |                                                   | Concatenate a list of lists into a single list. This only flattens one level of the list (see [examples](nested#flatten)).                                                         | `flatten([[1, 2], [3, 4]])`             | `[1, 2, 3, 4]`    |
+| `list_concat(`*`list1`*`, `*`list2`*`)`                      | `list_cat`, `array_concat`, `array_cat`           | Concatenates two lists.                                                                                                                                                            | `list_concat([2, 3], [4, 5, 6])`        | `[2, 3, 4, 5, 6]` |
+| `list_prepend(`*`element`*`, `*`list`*`)`                    | `array_prepend`, `array_push_front`               | Prepends `element` to `list`.                                                                                                                                                      | `list_prepend(3, [4, 5, 6])`            | `[3, 4, 5, 6]`    |
+| `list_append(`*`list`*`, `*`element`*`)`                     | `array_append`, `array_push_back`                 | Appends `element` to `list`.                                                                                                                                                       | `list_append([2, 3], 4)`                | `[2, 3, 4]`       |
+| `list_contains(`*`list`*`, `*`element`*`)`                   | `list_has`, `array_contains`, `array_has`         | Returns true if the list contains the element.                                                                                                                                     | `list_contains([1, 2, NULL], 1)`        | `true`            |
+| `list_position(`*`list`*`, `*`element`*`)`                   | `list_indexof`, `array_position`, `array_indexof` | Returns the index of the element if the list contains the element.                                                                                                                 | `list_contains([1, 2, NULL], 2)`        | `2`               |
+| `list_aggregate(`*`list`*`, `*`name`*`)`                     | `list_aggr`, `array_aggregate`, `array_aggr`      | Executes the aggregate function `name` on the elements of `list`. See the [List Aggregates](nested#list-aggregates) section for more details.                                      | `list_aggregate([1, 2, NULL], 'min')`   | `1`               |
+| `list_sort(`*`list`*`)`                                      | `array_sort`                                      | Sorts the elements of the list. See the [Sorting Lists](nested#sorting-lists) section for more details about the sorting order and the null sorting order.                         | `list_sort([3, 6, 1, 2])`               | `[1, 2, 3, 6]`    |
+| `list_reverse_sort(`*`list`*`)`                              | `array_reverse_sort`                              | Sorts the elements of the list in reverse order. See the [Sorting Lists](nested#sorting-lists) section for more details about the null sorting order.                              | `list_reverse_sort([3, 6, 1, 2])`       | `[6, 3, 2, 1]`    |
+| `list_transform(`*`list`*`, `*`lambda`*`)`                   | `array_transform`, `list_apply`, `array_apply`    | Returns a list that is the result of applying the lambda function to each element of the input list. See the [Lambda Functions](nested#lambda-functions) section for more details. | `list_transform(l, x -> x + 1)`         | `[5, 6, 7]`       |
+| `list_filter(`*`list`*`, `*`lambda`*`)`                      | `array_filter`                                    | Constructs a list from those elements of the input list for which the lambda function returns true. See the [Lambda Functions](nested#lambda-functions) section for more details.  | `list_filter(l, x -> x > 4)`            | `[5, 6]`          |
+| `list_distinct(`*`list`*`)`                                  | `array_distinct`                                  | Removes all duplicates and NULLs from a list. Does not preserve the original order.                                                                                                | `list_distinct([1, 1, NULL, -3, 1, 5])` | `[1, 5, -3]`      |
+| `list_unique(`*`list`*`)`                                    | `array_unique`                                    | Counts the unique elements of a list.                                                                                                                                              | `list_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
+| `list_any_value(`*`list`*`)`                                 |                                                   | Returns the first non-null value in the list                                                                                                                                       | `list_any_value([NULL, -3])`            | `-3`              |
+| `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`         | `array_resize`                                    | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                                | `list_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
 
 ## List Operators
 
@@ -173,6 +146,57 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 │ 1992-01-01 00:00:00 │
 │ 1992-02-01 00:00:00 │
 └─────────────────────┘
+```
+
+## Slicing
+The function `list_slice` can be used to extract a sublist from a list.  The following variants exist:
+- `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
+- `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
+- `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
+- `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
+- `list[`*`begin`*`:`*`end`*`]`
+- `list[`*`begin`*`:`*`end`*`:`*`step`*`]`
+
+**`list`**
+- Is the list to be sliced
+
+**`begin`**
+- Is the index of the first element to be included in the slice
+- When `begin < 0` the index is counted from the end of the list
+- When `begin < 0` and `-begin > length`, `begin` is clamped to the beginning of the list
+- When `begin > length`, the result is an empty list
+- **Bracket Notation:** When `begin` is omitted, it defaults to the beginning of the list
+
+**`end`**
+- Is the index of the last element to be included in the slice
+- When `end < 0` the index is counted from the end of the list
+- When `end > length`, end is clamped to `length`
+- When `end < begin`, the result is an empty list
+- **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`.
+
+**`step`** *(optional)*
+- Is the step size between elements in the slice
+- When `step < 0` the slice is reversed, and `begin` and `end` are swapped
+- Must be non-zero
+
+```sql
+SELECT list_slice([1, 2, 3, 4, 5], 2, 4);
+-- [2, 3, 4]
+
+SELECT ([1, 2, 3, 4, 5])[2:4:2];
+-- [2, 4]
+
+SELECT([1, 2, 3, 4, 5])[4:2:-2];
+-- [4, 2]
+
+SELECT ([1, 2, 3, 4, 5])[:];
+-- [1, 2, 3, 4, 5]
+
+SELECT ([1, 2, 3, 4, 5])[:-:2];
+-- [1, 3, 5]
+
+SELECT ([1, 2, 3, 4, 5])[:-:-2];
+-- [5, 3, 1]
 ```
 
 ## List Aggregates
