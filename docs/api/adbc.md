@@ -82,9 +82,7 @@ Functions related to binding, used for bulk insertion or in prepared statements.
 
 ## Examples
 
-Regardless of the programming language being used, there are two database
-options which will be required to utilize ADBC with DuckDB. The first one is the `driver`, which takes a path to the DuckDB library. The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DuckDB database. If not set, a memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so
-with various different language environments.
+Regardless of the programming language being used, there are two database options which will be required to utilize ADBC with DuckDB. The first one is the `driver`, which takes a path to the DuckDB library. The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DuckDB database. If not set, an in-memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so with various different language environments.
 
 ### C++
 
@@ -98,7 +96,7 @@ AdbcStatement adbc_statement;
 ArrowArrayStream arrow_stream;
 ```
 
-We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` variables as mentioned above. Then we set the `path` option and initialize the database.
+We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. With the example below, the string `"path/to/libduckdb.dylib"` should be the path to the dynamic library for DuckDB. This will be `.dylib` on macOS, `.so` on Linux, and `.dll` on Windows.
 
 ```cpp
 AdbcDatabaseNew(&adbc_database, &adbc_error);
@@ -133,79 +131,48 @@ StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
 
 ### Python
 
-The first thing to do is to use `pip` and install the ADBC Driver manager.
+The first thing to do is to use `pip` and install the ADBC Driver manager. You will also need to install the `pyarrow` to directly access Apache Arrow formatted result sets (such as using `fetch_arrow_table`).
 
 ```shell
-pip install adbc_driver_manager
-```
-
-You will also need the `pyarrow` package to directly access Apache Arrow
-formatted result sets.
-```shell
-pip install pyarrow
+pip install adbc_driver_manager pyarrow
 ```
 
 The full documentation for the `adbc_driver_manager` package can be found
 [here](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
-As with C++, we need to provide initialization options:
-```python
-import adbc_driver_manager.dbapi
-conn = adbc_driver_manager.dbapi.connect(
-    driver="path/to/libduckdb.dylib",
-    entrypoint="duckdb_adbc_init",
-    db_kwargs={"path": "test.db"},
-)
-
-with conn.cursor() as cur:
-    pass
-
-conn.close()
-```
-
-It is also possible to leverage the duckdb Python library directly:
+As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary. 
 ```python
 import duckdb
 import adbc_driver_manager.dbapi
-conn = adbc_driver_manager.dbapi.connect(
+
+with adbc_driver_manager.dbapi.connect(
     driver=duckdb.__file__,
     entrypoint="duckdb_adbc_init",
-    db_kwargs={"path": "test.db"}
-)
+    db_kwargs={"path": "test.db"},
+  ) as conn, conn.cursor() as cur:
+  cur.execute("SELECT 42")
+  # fetch a pyarrow table
+  tbl = cur.fetch_arrow_table()
+  print(tbl)
 
-with conn.cursor() as cur:
-    pass
-
-conn.close()
 ```
 
-Now that we have a connection initialized, we can initialize a cursor
-for running queries. 
+Alongside `fetch_arrow_table`, other methods from DBApi are also implemented on the cursor, such as `fetchone` and `fetchall`. Data can also be ingested via `arrow_streams`. We just need to set options on the statement to bind the stream of data and execute the query.
 
 ```python
+import duckdb
+import adbc_driver_manager.dbapi
 import pyarrow
-...
 
-with conn.cursor() as cur:
-    cur.execute("SELECT 42")
-    # fetch as a pyarrow table
-    tbl = cur.fetch_arrow_table()
-    # alternately as a pandas dataframe
-    df = cur.fetch_df()
-    # you can also use fetchone/fetchall
-    # and fetchmany as per DBAPI (PEP 249)
-```
-
-Data can also be ingested via `arrow_streams`. We just need to set options
-on the statement to bind the stream of data and execute the query.
-
-```python
-# create db / conn
 data = pyarrow.record_batch(
     [[1, 2, 3, 4], ["a", "b", "c", "d"]],
     names=["ints", "strs"],
 )
 
-with conn.cursor() as cur:
+with adbc_driver_manager.dbapi.connect(
+    driver=duckdb.__file__,
+    entrypoint="duckdb_adbc_init",
+    db_kwargs={"path": "test.db"},
+  ) as conn, conn.cursor() as cur:
     cur.adbc_ingest("AnswerToEverything", data)        
 ```
