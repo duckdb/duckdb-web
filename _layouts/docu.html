@@ -77,8 +77,11 @@
 		{% endif %}
 		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
 			<div class="headlinebar">
-				<div>{{ page.title }}</div>
+				<div class="title">{{ page.title }}</div>
+				
+				<div class="improvethispage"><a href="{% github_edit_link %}" title="Go to GitHub">Page Source</a></div>
 
+				
 				{% if page.url contains '/docs/' %}
 				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
 				<div class="versionsidebar">
