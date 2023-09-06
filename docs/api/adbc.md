@@ -21,9 +21,9 @@ Set of functions that operate on a database.
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `DatabaseNew` | Allocate a new (but uninitialized) database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
-| `DatabaseSetOption` | Set a char* option. | `(AdbcDatabase *database, const char *key, const char *value,AdbcError *error)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` | 
+| `DatabaseSetOption` | Set a char* option. | `(AdbcDatabase *database, const char *key, const char *value,AdbcError *error)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` |
 | `DatabaseInit` | Finish setting options and initialize the database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
-| `DatabaseRelease` | Destroy the database.| `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` | 
+| `DatabaseRelease` | Destroy the database.| `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
 
 ### Connection
 
@@ -33,7 +33,7 @@ A set of functions that create and destroy a connection to interact with a datab
 |:---|:---|:---|:---|
 | `ConnectionNew` | Allocate a new (but uninitialized) connection.| `(AdbcConnection*, AdbcError*)` | `AdbcConnectionNew(&adbc_connection, &adbc_error)` |
 | `ConnectionSetOption` | Options may be set before ConnectionInit.| `(AdbcConnection*, const char*, const char*, AdbcError*)` | `AdbcConnectionSetOption(&adbc_connection, ADBC_CONNECTION_OPTION_AUTOCOMMIT,ADBC_OPTION_VALUE_DISABLED, &adbc_error)` |
-| `ConnectionInit` | Finish setting options and initialize the connection. | `(AdbcConnection*, AdbcDatabase*, AdbcError*)` | `AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error)` | 
+| `ConnectionInit` | Finish setting options and initialize the connection. | `(AdbcConnection*, AdbcDatabase*, AdbcError*)` | `AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error)` |
 | `ConnectionRelease` | Destroy this connection. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRelease(&adbc_connection, &adbc_error)` |
 
 
@@ -42,7 +42,7 @@ A set of functions that retrieve metadata about the database. In general, these 
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
-| `ConnectionGetTableSchema` | Get the Arrow schema of a table.| `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` | 
+| `ConnectionGetTableSchema` | Get the Arrow schema of a table.| `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
 
 
@@ -51,7 +51,7 @@ A set of functions with transaction semantics for the connection. By default, al
 | Function Name | Description | Arguments | Example |
 |:---|:---|:---|:---|
 | `ConnectionCommit` | Commit any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionCommit(&adbc_connection, &adbc_error)` |
-| `ConnectionRollback` | Rollback any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRollback(&adbc_connection, &adbc_error)` | 
+| `ConnectionRollback` | Rollback any pending transactions. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRollback(&adbc_connection, &adbc_error)` |
 
 ### Statement
 
@@ -123,7 +123,7 @@ arrow_stream.release(arrow_stream)
 ```
 
 Besides running queries, we can also ingest data via `arrow_streams`. For this we need to set an option with the table name we want to insert to, bind the stream and then execute the query.
-```cpp 
+```cpp
 StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "AnswerToEverything", &adbc_error);
 StatementBindStream(&adbc_statement, &arrow_stream, &adbc_error);
 StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
@@ -140,15 +140,11 @@ pip install adbc_driver_manager pyarrow
 The full documentation for the `adbc_driver_manager` package can be found
 [here](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
-As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary. 
+As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary.
 ```python
-import duckdb
-import adbc_driver_manager.dbapi
+import adbc_driver_duckdb.dbapi
 
-with adbc_driver_manager.dbapi.connect(
-    driver=duckdb.__file__,
-    entrypoint="duckdb_adbc_init",
-    db_kwargs={"path": "test.db"},
+with adbc_driver_duckdb.dbapi.connect("test.db"
   ) as conn, conn.cursor() as cur:
   cur.execute("SELECT 42")
   # fetch a pyarrow table
@@ -160,8 +156,7 @@ with adbc_driver_manager.dbapi.connect(
 Alongside `fetch_arrow_table`, other methods from DBApi are also implemented on the cursor, such as `fetchone` and `fetchall`. Data can also be ingested via `arrow_streams`. We just need to set options on the statement to bind the stream of data and execute the query.
 
 ```python
-import duckdb
-import adbc_driver_manager.dbapi
+import adbc_driver_duckdb.dbapi
 import pyarrow
 
 data = pyarrow.record_batch(
@@ -169,10 +164,7 @@ data = pyarrow.record_batch(
     names=["ints", "strs"],
 )
 
-with adbc_driver_manager.dbapi.connect(
-    driver=duckdb.__file__,
-    entrypoint="duckdb_adbc_init",
-    db_kwargs={"path": "test.db"},
+with adbc_driver_duckdb.dbapi.connect("test.db"
   ) as conn, conn.cursor() as cur:
-    cur.adbc_ingest("AnswerToEverything", data)        
+  cur.adbc_ingest("AnswerToEverything", data)
 ```
