@@ -5,12 +5,7 @@ title: Guides
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an in-depth reference see the Documentation section.
 
-## DuckDB SQL
-
-* [ASOF Join](../guides/sql_features/asof_join)
-* [Full Text Search](../guides/sql_features/full_text_search)
-
-## SQL: Data Import & Export
+## Data Import and Export
 
 ### CSV Files
 
@@ -38,13 +33,20 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to load a Parquet file directly from HTTP(s)](../guides/import/http_import)
 * [How to load a Parquet file directly from S3 or GCS](../guides/import/s3_import)
 
-## SQL: Meta Queries
+## SQL
+
+### Meta Queries
 
 * [How to list all tables](../guides/meta/list_tables)
 * [How to view the schema of the result of a query](../guides/meta/describe)
 * [How to quickly get a feel for a dataset using summarize](../guides/meta/summarize)
 * [How to view the query plan of a query](../guides/meta/explain)
 * [How to profile a query](../guides/meta/explain_analyze)
+
+### SQL Features
+
+* [ASOF Join](../guides/sql_features/asof_join)
+* [Full Text Search](../guides/sql_features/full_text_search)
 
 ## Python Client
 
@@ -77,7 +79,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to use DuckDB with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
 * [How to use DuckDB with DataFusion via Apache Arrow](../guides/python/datafusion)
 
-## SQL Editors / IDE's
+## SQL Editors and IDEs
 
 * [How to set up the DBeaver SQL IDE](../guides/sql_editors/dbeaver)
 
