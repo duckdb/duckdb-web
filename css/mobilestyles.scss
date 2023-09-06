@@ -110,6 +110,9 @@
 	body.landing .stickerbanner > div:nth-child(2){
 		text-align: right;
 	}
+	body.documentation .headlinebar > div.improvethispage{
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 780px) {
