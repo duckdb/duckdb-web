@@ -23,6 +23,8 @@ SELECT t.i FROM range(100) AS t(i);
 SELECT * FROM 'test.csv';
 -- select all columns from a subquery
 SELECT * FROM (SELECT * FROM table_name);
+-- select the entire row of the table as a struct
+SELECT t FROM t;
 -- select the entire row of the subquery as a struct (i.e., a single column)
 SELECT t FROM (SELECT unnest(generate_series(41, 43)) AS x, 'hello' AS y) t;
 -- join two tables together
