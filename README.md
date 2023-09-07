@@ -9,6 +9,10 @@ This repository hosts the source code for the [DuckDB website](https://www.duckd
 
 The DuckDB codebase is hosted in the [DuckDB repository](https://github.com/duckdb/duckdb).
 
+## Building the site
+
+To build the site with Jekyll (installed locally or run via Docker), check out our [build guide](building.md).
+
 ## Contributing
 
 Please consult the [contributor's guide](CONTRIBUTING.md) for instructions on how to contribute to the documentation
