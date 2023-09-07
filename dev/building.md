@@ -115,7 +115,7 @@ When this flag is set, the [CLI](../docs/api/cli) is built, this is usually enab
 ##### `BUILD_BENCHMARK`
 
 When this flag is set, our in-house Benchmark testing suite is built.  
-More information about this can be found [here](https://github.com/duckdb/duckdb/blob/master/benchmark/README.md).
+More information about this can be found [here](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
 
 ##### `BUILD_JDBC`
 
