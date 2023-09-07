@@ -87,7 +87,7 @@ This build is a shorthand for `release` with `BUILD_BENCHMARK=1` set.
 This creates a build and then runs [clang tidy](https://clang.llvm.org/extra/clang-tidy/) to check for issues or style violations through static analysis.  
 The CI will also run this check, causing it to fail if this check fails.
 
-##### `format-fix` | `format-changes` | `format-master`
+##### `format-fix` | `format-changes` | `format-main`
 
 This doesn't actually create a build, but uses the following format checkers to check for style issues:
 - [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to fix format issues in the code.  
