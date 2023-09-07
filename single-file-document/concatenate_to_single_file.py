@@ -161,16 +161,16 @@ def change_link(doc_body, doc_file_path):
 def adjust_headers(doc_body, doc_header_label):
     doc_body_with_new_headers = ""
     for line in doc_body.splitlines():
-        matches = re.findall(r"^(#+)( ?)(.*)$", line)
+        matches = re.findall(r"^(#+) (.*)$", line)
         if matches:
             match = matches[0]
-            header_title = match[2]
+            header_title = match[1]
             header_label = header_title \
                 .lower() \
                 .replace(" ", "-")
             header_label = re.sub("[^-_0-9a-z]", "", header_label)
 
-            new_header = f"{match[0]} {match[2]} {{#{doc_header_label}::{header_label}}}"
+            new_header = f"{match[0]} {match[1]} {{#{doc_header_label}::{header_label}}}"
             doc_body_with_new_headers += new_header + "\n"
         else:
             doc_body_with_new_headers += line + "\n"
