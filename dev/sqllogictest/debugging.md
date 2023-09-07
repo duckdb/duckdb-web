@@ -5,7 +5,7 @@ title: SQLLogicTest - Debugging
 
 The purpose of the tests is to figure out when things break. Inevitably changes made to the system will cause one of the tests to fail, and when that happens the test needs to be debugged.
 
-First, it is always recommended to run in debug mode. This can be done by compiling the system using the command `make debug`. Second, it is recommended to only run the test that breaks. This can be done by passing the filename of the breaking test to the test suite as a command line parameter (e.g. `build/debug/test/unittest test/sql/projection/test_simple_projection.test`). For more options on running a subset of the tests see the [Triggering which tests to run](#triggering-which-tests-to-run) section.
+First, it is always recommended to run in debug mode. This can be done by compiling the system using the command `make debug`. Second, it is recommended to only run the test that breaks. This can be done by passing the filename of the breaking test to the test suite as a command line parameter (e.g., `build/debug/test/unittest test/sql/projection/test_simple_projection.test`). For more options on running a subset of the tests see the [Triggering which tests to run](#triggering-which-tests-to-run) section.
 
 After that, a debugger can be attached to the program and the test can be debugged. In the sqllogictests it is normally difficult to break on a specific query, however, we have expanded the test suite so that a function called `query_break` is called with the line number `line` as parameter for every query that is run. This allows you to put a conditional breakpoint on a specific query. For example, if we want to break on line number 43 of the test file we can create the following break point:
 
@@ -16,7 +16,7 @@ lldb: break s -n query_break -c line==43
 
 You can also skip certain queries from executing by placing `mode skip` in the file, followed by an optional `mode unskip`. Any queries between the two statements will not be executed.
 
-##### Triggering which tests to run
+## Triggering Which Tests to Run
 
 When running the unittest program, by default all the fast tests are run. A specific test can be run by adding the name of the test as an argument. For the SQLLogicTests, this is the relative path to the test file.
 

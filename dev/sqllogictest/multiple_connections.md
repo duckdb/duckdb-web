@@ -18,7 +18,7 @@ statement error con2
 SELECT * FROM integers;
 ```
 
-### Concurrent Connections
+## Concurrent Connections
 
 Using connection modifiers on the statement and queries will result in testing of multiple connections, but all the queries will still be run *sequentially* on a single thread. If we want to run code from multiple connections *concurrently* over multiple threads, we can use the `concurrentloop` construct. The queries in `concurrentloop` will be run concurrently on separate threads at the same time.
 
