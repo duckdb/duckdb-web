@@ -130,6 +130,7 @@ $if(beamerarticle)$
 $endif$
 \usepackage{amsmath,amssymb}
 %% <patch for the DuckDB documentation>
+%% This patch ensures that emoji's are rendered correctly.
 \usepackage{xltxtra}
 \usepackage{newunicodechar}
 
@@ -642,8 +643,14 @@ $endif$
 \definecolor{blockquote-text}{RGB}{119,119,119}
 \usepackage{mdframed}
 \newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+%% <patch for the DuckDB documentation>
+%% This patch adds the "Note" caption to the note boxes.
+%\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+%\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
 \renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
-\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+\item\relax\color{blockquote-text}\textbf{Note.}\quad\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+%% </patch for the DuckDB documentation>
+
 
 %
 % Source Sans Pro as the default font family
@@ -1030,7 +1037,7 @@ $include-before$
 $endfor$
 $if(toc)$
 %% <patch for the DuckDB documentation>
-% add ToC to ToC
+%% This patch adds a pointer to the ToC to the ToC.
 \setuptoc{toc}{totoc}
 %% </patch for the DuckDB documentation>
 $if(toc-title)$
