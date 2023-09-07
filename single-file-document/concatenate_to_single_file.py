@@ -259,6 +259,23 @@ def add_to_documentation(docs_root, data, of, chapter_title):
                 concatenate_page_to_output(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
+def add_under_the_hood_chapter(docs_root, data, of):
+    of.write(f"# Under the Hood\n\n")
+    of.write(f"## Internals\n\n")
+    concatenate_page_to_output(of, 3, docs_root, "../internals/overview")
+    concatenate_page_to_output(of, 3, docs_root, "../internals/storage")
+    concatenate_page_to_output(of, 3, docs_root, "../internals/vector")
+    of.write(f"## Developer Guides\n\n")
+    concatenate_page_to_output(of, 3, docs_root, "../dev/building")
+    concatenate_page_to_output(of, 3, docs_root, "../dev/profiling")
+    concatenate_page_to_output(of, 3, docs_root, "../dev/testing")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/intro")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/debugging")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/result_verification")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/persistent_testing")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/loops")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/multiple_connections")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/catch")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--verbose', action='store_true')
@@ -292,6 +309,7 @@ with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.m
 
     add_to_documentation(docs_root, data, of, "Documentation")
     add_to_documentation(docs_root, data, of, "Guides")
+    add_under_the_hood_chapter(docs_root, data, of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())
