@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: SQLLogicTest
-selected: Development/Testing/SQLLogicTest
-expanded: Testing
 ---
 
 When testing DuckDB, we aim to route all the tests through SQL. We try to avoid testing components individually because that makes those components more difficult to change later on. As such, almost all of our tests can (and should) be expressed in pure SQL. There are certain exceptions to this, which we will discuss in the section "Catch Tests". However, in most cases you should write your tests in plain SQL.

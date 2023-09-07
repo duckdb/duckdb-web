@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Profiling
-selected: Documentation/Development/Profiling
-expanded: Development
 ---
 
 Profiling is important to help understand why certain queries exhibit specific performance characteristics. DuckDB contains several built-in features to enable query profiling that will be explained on this page.

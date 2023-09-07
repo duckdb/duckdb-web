@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: DuckDB Internals
-selected: Internals
 ---
 On this page is a brief description of the internals of the DuckDB engine.
 

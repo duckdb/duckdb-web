@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Release Dates
-selected: Documentation/Development/Release-Calendar
-expanded: Development
 ---
 
 The planned dates of upcoming DuckDB releases are shown below.

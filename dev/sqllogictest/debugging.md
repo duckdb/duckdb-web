@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: SQLLogicTest - Debugging
-selected: Documentation/Development/SQLLogicTest/Debugging
-expanded: Testing
 ---
 
 The purpose of the tests is to figure out when things break. Inevitably changes made to the system will cause one of the tests to fail, and when that happens the test needs to be debugged.
