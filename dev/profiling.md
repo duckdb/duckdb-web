@@ -174,13 +174,3 @@ After the query is completed, the JSON file containing the profiling output has 
 ```sql
 python scripts/generate_querygraph.py /path/to/file.json
 ```
-
-Alternatively, we can also use the Python API directly to generate the query graph file. This can be done using the following Python snippet:
-
-```python
-import duckdb_query_graph
-duckdb_query_graph.generate('/path/to/file.json', '/path/to/out.html')
-```
-
-This will show us the following query graph:
-![Example Query Graph](example-querygraph.png)
