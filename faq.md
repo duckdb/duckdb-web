@@ -1,7 +1,6 @@
 ---
 layout: docu
 title: Frequently Asked Questions
-selected: FAQ
 ---
 
 

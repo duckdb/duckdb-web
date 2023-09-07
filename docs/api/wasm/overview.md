@@ -17,7 +17,7 @@ DuckDB-Wasm offers a layered API, it can be embedded as a [JavaScript + WebAssem
 
 A great starting point is to read the [DuckDB-Wasm launch blog post](https://duckdb.org/2021/10/29/duckdb-wasm.html)!
 
-Another great resource is the [Github repository](https://github.com/duckdb/duckdb-wasm).
+Another great resource is the [GitHub repository](https://github.com/duckdb/duckdb-wasm).
 
 For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
 

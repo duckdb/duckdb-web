@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: SQLLogicTest - Multiple Connections
-selected: Development/Testing/Multiple Connections
-expanded: Testing
 ---
 
 For tests whose purpose is to verify that the transactional management or versioning of data works correctly, it is generally necessary to use multiple connections. For example, if we want to verify that the creation of tables is correctly transactional, we might want to start a transaction and create a table in `con1`, then fire a query in `con2` that checks that the table is not accessible yet until committed.
@@ -20,7 +18,7 @@ statement error con2
 SELECT * FROM integers;
 ```
 
-### Concurrent Connections
+## Concurrent Connections
 
 Using connection modifiers on the statement and queries will result in testing of multiple connections, but all the queries will still be run *sequentially* on a single thread. If we want to run code from multiple connections *concurrently* over multiple threads, we can use the `concurrentloop` construct. The queries in `concurrentloop` will be run concurrently on separate threads at the same time.
 

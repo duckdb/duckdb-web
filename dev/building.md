@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: Building DuckDB from Source
-selected: Documentation/Development/Building
-expanded: Development
 ---
 
 > DuckDB binaries are available for stable and nightly builds on the [installation page](../docs/installation).
@@ -12,7 +10,7 @@ expanded: Development
 
 DuckDB needs a C++11-compiler and CMake. Additionally, we recommend using the [Ninja build system](https://ninja-build.org/).
 
-#### Linux packages
+#### Linux Packages
 
 Install the required packages with the package manager of your distribution.
 
@@ -224,7 +222,7 @@ With this flag enabled, the sanitizers are disabled for the build.
 
 ### Troubleshooting
 
-#### Building the R package on Linux aarch64
+#### Building the R Package on Linux aarch64
 
 Building the R package on Linux running on an Arm64 architecture (aarch64) may result in the following error message:
 

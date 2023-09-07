@@ -43,6 +43,10 @@
           ]
         },
         {
+          "page": "Internals Overview",
+          "url": "/internals/overview"
+        },
+        {
           "page": "Storage Versions & Format",
           "url": "/internals/storage"
         },
