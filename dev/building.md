@@ -31,7 +31,7 @@ sudo apt-get install -y git g++ cmake ninja-build
 
 Alpine Linux:
 
-```
+```bash
 apk add g++ git make cmake ninja
 ```
 
