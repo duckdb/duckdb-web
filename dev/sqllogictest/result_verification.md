@@ -54,7 +54,7 @@ If we instead want the result *not* to contain a snippet of text, we can use the
 
 ## File
 
-As results can grow quite large, and we might want to re-use results over multiple files, it is also possible to read expected results from files using the `<FILE>` command. The expected result is read from the given file. As convention the file path should be provided as relative to the root of the Github repository.
+As results can grow quite large, and we might want to re-use results over multiple files, it is also possible to read expected results from files using the `<FILE>` command. The expected result is read from the given file. As convention the file path should be provided as relative to the root of the GitHub repository.
 
 
 ```sql

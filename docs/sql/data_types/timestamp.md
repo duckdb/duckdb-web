@@ -59,7 +59,7 @@ The built in ICU extension implements all the binning and arithmetic functions u
 
 <!-- 
     To find the ICU installation information, for Python and R look in CMakeLists.txt.
-    For JDBC/ODBC, check the Github Actions CI workflows (duckdb/.github/workflows/). 
+    For JDBC/ODBC, check the GitHub Actions CI workflows (duckdb/.github/workflows/). 
     For NodeJS, I couldn't find anything
 -->
 To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled
