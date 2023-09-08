@@ -64,13 +64,6 @@
 			"blurb": "// - division"
 		},
 		{
-			"title": ":-",
-			"text": ":- - :--",
-			"category": "Timestamptz Functions",
-			"url": "/docs/sql/functions/timestamptz",
-			"blurb": ":- - :--"
-		},
-		{
 			"title": "<<",
 			"text": "<< - bitwise shift left",
 			"category": "Numeric Functions",
