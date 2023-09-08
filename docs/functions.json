@@ -1397,6 +1397,36 @@
     "result": 1
   },
   {
+    "name": "list_cosine_similarity",
+    "parameters": [
+      "list1",
+      "list2"
+    ],
+    "description": "Compute the cosine similarity between two lists.",
+    "example": "list_cosine_similarity([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "<=>"
+    ],
+    "category": "list",
+    "result": 1.0
+  },
+  {
+    "name": "list_distance",
+    "parameters": [
+      "list1",
+      "list2"
+    ],
+    "description": "Compute the distance between two lists.",
+    "example": "list_distance([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "<->"
+    ],
+    "category": "list",
+    "result": 0.0
+  },
+  {
     "name": "list_distinct",
     "parameters": [
       "list"
@@ -1425,6 +1455,22 @@
     ],
     "category": "list",
     "result": "[5]"
+  },
+  {
+    "name": "list_inner_product",
+    "parameters": [
+      "list1",
+      "list2"
+    ],
+    "description": "Compute the inner product between two lists.",
+    "example": "list_inner_product([1, 2, 3], [1, 2, 3])",
+    "type": "scalar_function_set",
+    "aliases": [
+      "list_dot_product",
+      "<#>"
+    ],
+    "category": "list",
+    "result": 14.0
   },
   {
     "name": "list_reverse_sort",
@@ -1665,7 +1711,7 @@
     "example": "map_entries(map(['key'], ['val']))",
     "type": "scalar_function",
     "category": "map",
-    "result": "[{'k': key, 'v': val}]"
+    "result": "[{'key': key, 'value': val}]"
   },
   {
     "name": "map_extract",
@@ -2260,6 +2306,18 @@
     "parameters": [],
     "category": "random",
     "result": null
+  },
+  {
+    "name": "sha256",
+    "parameters": [
+      "value"
+    ],
+    "description": "Returns the SHA256 hash of the value",
+    "example": "sha256('hello')",
+    "type": "scalar_function",
+    "struct": "SHA256Fun",
+    "category": "string",
+    "result": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
   },
   {
     "name": "sign",
@@ -2863,7 +2921,7 @@
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",
-    "result": "v0.8.2-dev3055"
+    "result": "v0.8.2-dev4126"
   },
   {
     "name": "week",
