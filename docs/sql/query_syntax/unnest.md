@@ -11,7 +11,7 @@ SELECT UNNEST([1, 2, 3]);
 -- unnesting a struct, generating two columns (a, b)
 SELECT UNNEST({'a': 42, 'b': 84});
 -- recursive unnest of a list of structs
-SELECT UNNEST([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := True);
+SELECT UNNEST([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
 ```
 
 The `UNNEST` function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. `UNNEST` with the `recursive` parameter will unnest lists and structs of multiple levels.
@@ -52,9 +52,9 @@ SELECT UNNEST({'a': 42, 'b': {'x': 84}});
 
 ```sql
 -- unnesting a list of lists recursively, generating 5 rows (1, 2, 3, 4, 5)
-SELECT UNNEST([[1, 2, 3], [4, 5]], recursive := True);
+SELECT UNNEST([[1, 2, 3], [4, 5]], recursive := true);
 -- unnesting a list of structs recursively, generating two rows of two columns (a, b)
-SELECT UNNEST([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := True);
+SELECT UNNEST([{'a': 42, 'b': 84}, {'a': 100, 'b': NULL}], recursive := true);
 -- unnesting a struct, generating two columns (a, b)
 SELECT UNNEST({'a': [1, 2, 3], 'b': 88}, recursive := true);
 ```
