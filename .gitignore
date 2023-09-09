@@ -309,5 +309,8 @@ venv/
 node_modules/
 vendor/
 
+# zip archive of the documentation
+duckdb-docs.zip
+
 # LinkChecker output
 report.html

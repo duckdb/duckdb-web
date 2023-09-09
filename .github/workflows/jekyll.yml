@@ -40,6 +40,12 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      - name: Make zipped archive of the site available
+        run: |
+          cd _site/
+          zip -r duckdb-docs.zip * -x "docs/archive/*"
+          CURRENT_DUCKDB_VERSION=$(grep "currentduckdbversion:" _config.yml | cut -d ' ' -f 2)
+          zip -r duckdb-docs.zip docs/archive/${CURRENT_DUCKDB_VERSION}
       - name: Upload HTML artifact
         uses: actions/upload-artifact@v3
         with:
