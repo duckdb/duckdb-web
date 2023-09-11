@@ -217,3 +217,15 @@ Some additional configuration options exist for the S3 upload, though the defaul
 | `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_thread_limit` | maximum number of uploader threads |
+
+Additionally, most of the configuration options can be set via environment variables:
+
+| DuckDB setting          | Environment variable    |
+|:------------------------|:------------------------|
+|  `s3_region`            | `AWS_REGION`            |
+|  `s3_region`            | `AWS_DEFAULT_REGION`    |
+|  `s3_access_key_id`     | `AWS_ACCESS_KEY_ID`     |
+|  `s3_secret_access_key` | `AWS_SECRET_ACCESS_KEY` |
+|  `s3_session_token`     | `AWS_SESSION_TOKEN`     |
+|  `s3_endpoint`          | `DUCKDB_S3_ENDPOINT`    |
+|  `s3_use_ssl`           | `DUCKDB_S3_USE_SSL`     |
