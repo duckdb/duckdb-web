@@ -5,7 +5,7 @@ jobs:
   markdown:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Remove archive docs
         run: |
           rm -rf docs/archive
@@ -23,7 +23,7 @@ jobs:
   python:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: psf/black@stable
       with:
         options: "--check --skip-string-normalization --verbose --diff --color"
