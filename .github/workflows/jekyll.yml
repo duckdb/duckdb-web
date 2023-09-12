@@ -35,6 +35,18 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
+      - name: Checkout custom Rouge gem
+        uses: actions/checkout@v4
+        with:
+          repository: szarnyasg/rouge
+          # check out the duckdb branch
+          ref: duckdb
+          path: rouge
+      - name: Install Rouge
+        run: |
+          cd rouge
+          gem build rouge.gemspec
+          gem install rouge-3.3823.0.gem
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"

@@ -38,7 +38,7 @@ gem "kramdown-parser-gfm", "1.1.0"
 gem "kramdown", "2.4.0"
 gem "liquid", "4.0.4"
 gem "minima", "2.5.1"
-gem "rouge", "~> 3.26"
+gem "rouge", "~> 3.3823.0"
 gem "safe_yaml", "1.0.5"
 gem "sass", "3.7.4"
 
