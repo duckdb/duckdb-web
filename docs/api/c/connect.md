@@ -15,10 +15,10 @@ duckdb_database db;
 duckdb_connection con;
 
 if (duckdb_open(NULL, &db) == DuckDBError) {
-	// handle error
+    // handle error
 }
 if (duckdb_connect(db, &con) == DuckDBError) {
-	// handle error
+    // handle error
 }
 
 // run queries...

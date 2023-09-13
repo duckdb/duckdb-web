@@ -17,7 +17,7 @@ This section describes functions and operators for examining and manipulating st
 | `bit_length(`*`string`*`)`| Number of bits in a string. | `bit_length('abc')` | `24` | |
 | `chr(`*`x`*`)` | returns a character which is corresponding the ASCII code value or Unicode code point | `chr(65)` | A | |
 | `concat(`*`string`*`, ...)` | Concatenate many strings together | `concat('Hello', ' ', 'World')` | `Hello World` | |
-| `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` | `Banana,Apple,Melon` | |
+| `concat_ws(`*`separator`*`, `*`string`*`, ...)` | Concatenate strings together separated by the specified separator | `concat_ws(', ', 'Banana', 'Apple', 'Melon')` | `Banana, Apple, Melon` | |
 | `contains(`*`string`*`, `*`search_string`*`)` | Return true if *search_string* is found within *string* | `contains('abc', 'a')` | `true` | |
 | `ends_with(`*`string`*`, `*`search_string`*`)`| Return true if *string* ends with *search_string* | `ends_with('abc', 'c')` | `true` | `suffix` |
 | `format(`*`format`*`, `*`parameters`*`...)` | Formats a string using fmt syntax | `format('Benchmark "{}" took {} seconds', 'CSV', 42)` | `Benchmark "CSV" took 42 seconds` | |
