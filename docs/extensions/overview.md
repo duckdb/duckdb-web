@@ -79,7 +79,7 @@ If you are using the [Python API client](../api/python/overview), you can instal
 
 ### Ensuring the Integrity of Extensions
 
-Extensions are signed with a cryptographic key. By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
+Extensions are signed with a cryptographic key, which also simplifies distribution (this is why they are served over `http`, not `https`). By default, DuckDB uses its built-in public keys to verify the integrity of extension before loading them.
 All extensions provided by the DuckDB core team are signed.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
