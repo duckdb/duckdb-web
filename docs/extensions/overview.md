@@ -45,7 +45,7 @@ SELECT * FROM 'test.json';
 
 This will use the `json` extension to read the JSON file.
 
-> To make the DuckDB distribution lightweight, it only contains a few fundamental built-in extensions (e.g., `autocomplete`, `json`, `parquet`), which are loaded automatically upon startup.
+> To make the DuckDB distribution lightweight, it only contains a few fundamental built-in extensions (e.g., `autocomplete`, `json`, `parquet`), which are loaded automatically when the CLI client is started.
 
 #### Autoloadable Extensions
 
