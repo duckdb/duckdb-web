@@ -13,5 +13,6 @@ There are also contributed third-party DuckDB wrappers for:
 - [Go](https://github.com/marcboeker/go-duckdb), by [marcboeker](https://github.com/marcboeker)
 - [Ruby](https://github.com/suketa/ruby-duckdb), by [suketa](https://github.com/suketa)
 - [Rust](https://github.com/wangfenjin/duckdb-rs), by [wangfenjin](https://github.com/wangfenjin)
+- [Zig](https://github.com/karlseguin/zuckdb.zig), by [karlseguin](https://github.com/karlseguin)
 
 ### Pages in this Section

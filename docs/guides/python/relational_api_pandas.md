@@ -12,8 +12,8 @@ import pandas
 # connect to an in-memory database
 con = duckdb.connect()
 
-input_df = pandas.DataFrame.from_dict({'i':[1,2,3,4],
-                                       'j':["one", "two", "three", "four"]})
+input_df = pandas.DataFrame.from_dict({'i': [1, 2, 3, 4],
+                                       'j': ["one", "two", "three", "four"]})
 
 # create a DuckDB relation from a dataframe
 rel = con.from_df(input_df)

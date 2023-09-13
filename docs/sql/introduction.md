@@ -4,10 +4,10 @@ title: SQL Introduction
 ---
 Here we provide an overview of how to perform simple operations in SQL. This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL. This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
-In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI. If you build from the source tree, you can launch the CLI from the build directory ``build/release/duckdb``. Launching the shell should give you the following prompt:
+In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI. Launching the shell should give you the following prompt:
 
 ```text
-DuckDB 5fb6fe57ab
+v0.8.1 6536a77232
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.

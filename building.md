@@ -14,6 +14,10 @@ gem uninstall eventmachine
 gem install eventmachine --platform ruby
 ```
 
+### Syntax highlighter
+
+We use [a fork of the Rouge syntax highligher](https://github.com/duckdb/rouge/blob/duckdb/lib/rouge/lexers/sql.rb), which is extended with keywords not in standard SQL (e.g., `RETURNING`, `ASOF`). This is automatically installed by `bundler`.
+
 ### Serving the site using a local Jekyll installation
 
 Serve the website (latest only, archives excluded) with:

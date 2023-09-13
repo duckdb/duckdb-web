@@ -5,7 +5,7 @@ author: Pedro Holanda
 excerpt_separator: <!--more-->
 ---
 
-<img src="/images/blog/ART/pedro-art.png"
+<img src="/images/blog/ART/pedro-art.jpg"
      alt="DuckDB ART"
      width=200
  />

@@ -4,8 +4,12 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		if ($(hash).length) {
 			$('html, body').animate({
-				scrollTop: $(hash).offset().top-80
+				scrollTop: $(hash).offset().top-55
 			}, 300, 'swing');
+			if( $('.frequentlyaskedquestions').length ){
+				$('h3'+hash).toggleClass('open');
+				$('h3'+hash).next('p').slideToggle();
+			}
 		}
 	}
 	

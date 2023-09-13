@@ -53,7 +53,7 @@ When an index is built, this retrieval macro is created that can be used to sear
 |:--|:--|:----------|
 |input_id|`VARCHAR`|Column name of document identifier e.g., `'document_identifier'`|
 |query_string|`VARCHAR`|The string to search the index for|
-|fields|`VARCHAR`|Comma-separarated list of fields to search in e.g., `'text_field_2,text_field_N'`. Defaults to `NULL` to search all indexed fields|
+|fields|`VARCHAR`|Comma-separarated list of fields to search in e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields|
 |k|`DOUBLE`|Parameter _k<sub>1</sub>_ in the Okapi BM25 retrieval model. Defaults to `1.2`|
 |b|`DOUBLE`|Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75`|
 |conjunctive|`BOOLEAN`|Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved|
@@ -77,7 +77,7 @@ Reduces words to their base. Used internally by the extension.
 -- create a table and fill it with text data
 CREATE TABLE documents(document_identifier VARCHAR, text_content VARCHAR, author VARCHAR, doc_version INTEGER);
 INSERT INTO documents
-VALUES ('doc1', 'The mallard is a dabbling duck that breeds throughout the temperate.','Hannes Mühleisen', 3),
+VALUES ('doc1', 'The mallard is a dabbling duck that breeds throughout the temperate.', 'Hannes Mühleisen', 3),
        ('doc2', 'The cat is a domestic species of small carnivorous mammal.', 'Laurens Kuiper', 2);
 -- build the index (make both the 'text_content' and 'author' columns searchable)
 PRAGMA create_fts_index('documents', 'document_identifier', 'text_content', 'author');
