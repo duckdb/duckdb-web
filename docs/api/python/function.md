@@ -9,7 +9,6 @@ Just like regular [functions](../../sql/functions/overview) they need to have a 
 Example using a python function that calls a third party library.
 ```python
 import duckdb
-import duckdb
 from duckdb.typing import *
 from faker import Faker
 
@@ -181,7 +180,7 @@ def random_date():
 	fake = Faker()
 	return fake.date_between()
 
-duckdb.create_function('random_date', random_date, [], DATE)
+duckdb.create_function('random_date', random_date, [], DATE, type='native')
 res = duckdb.sql('select random_date()').fetchall()
 print(res)
 # [(datetime.date(2019, 5, 15),)]
