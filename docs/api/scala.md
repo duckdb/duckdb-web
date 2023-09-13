@@ -56,8 +56,8 @@ stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 ```scala
 val rs = stmt.executeQuery("SELECT * FROM items");
 while (rs.next()) {
-	System.out.println(rs.getString(1));
-	System.out.println(rs.getInt(3));
+    System.out.println(rs.getString(1));
+    System.out.println(rs.getInt(3));
 }
 rs.close()
 // jeans

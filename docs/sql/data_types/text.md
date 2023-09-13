@@ -17,7 +17,7 @@ If you wish to restrict the number of characters in a `VARCHAR` column for data 
 
 ```sql
 CREATE TABLE strings(
-	val VARCHAR CHECK(LENGTH(val) <= 10) -- val has a maximum length of 10 characters
+    val VARCHAR CHECK(LENGTH(val) <= 10) -- val has a maximum length of 10 characters
 );
 ```
 
