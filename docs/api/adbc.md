@@ -21,7 +21,7 @@ Set of functions that operate on a database.
 | Function Name | Description | Arguments | Example |
 |:---|:-|:---|:----|
 | `DatabaseNew` | Allocate a new (but uninitialized) database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
-| `DatabaseSetOption` | Set a char* option. | `(AdbcDatabase *database, const char *key, const char *value,AdbcError *error)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` |
+| `DatabaseSetOption` | Set a char* option. | `(AdbcDatabase *database, const char *key, const char *value, AdbcError *error)` | `AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error)` |
 | `DatabaseInit` | Finish setting options and initialize the database. | `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `DatabaseRelease` | Destroy the database.| `(AdbcDatabase *database, AdbcError *error)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
 
@@ -32,7 +32,7 @@ A set of functions that create and destroy a connection to interact with a datab
 | Function Name | Description | Arguments | Example |
 |:---|:-|:---|:----|
 | `ConnectionNew` | Allocate a new (but uninitialized) connection.| `(AdbcConnection*, AdbcError*)` | `AdbcConnectionNew(&adbc_connection, &adbc_error)` |
-| `ConnectionSetOption` | Options may be set before ConnectionInit.| `(AdbcConnection*, const char*, const char*, AdbcError*)` | `AdbcConnectionSetOption(&adbc_connection, ADBC_CONNECTION_OPTION_AUTOCOMMIT,ADBC_OPTION_VALUE_DISABLED, &adbc_error)` |
+| `ConnectionSetOption` | Options may be set before ConnectionInit.| `(AdbcConnection*, const char*, const char*, AdbcError*)` | `AdbcConnectionSetOption(&adbc_connection, ADBC_CONNECTION_OPTION_AUTOCOMMIT, ADBC_OPTION_VALUE_DISABLED, &adbc_error)` |
 | `ConnectionInit` | Finish setting options and initialize the connection. | `(AdbcConnection*, AdbcDatabase*, AdbcError*)` | `AdbcConnectionInit(&adbc_connection, &adbc_database, &adbc_error)` |
 | `ConnectionRelease` | Destroy this connection. | `(AdbcConnection*, AdbcError*)` | `AdbcConnectionRelease(&adbc_connection, &adbc_error)` |
 

@@ -14,7 +14,7 @@ First, we create a price table and sales table.
 CREATE TABLE prices AS (
     SELECT '2001-01-01 00:16:00'::TIMESTAMP + INTERVAL (v) MINUTE AS ticker_time,
         v AS unit_price
-    FROM range(0,5) vals(v)
+    FROM range(0, 5) vals(v)
 );
 
 CREATE TABLE sales(item TEXT, sale_time TIMESTAMP, quantity INT);

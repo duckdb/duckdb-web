@@ -211,8 +211,8 @@ is translated into:
 SELECT 
     empid,
     dept,
-    UNNEST(['jan','feb','mar','apr','may','jun']) as "month",
-    UNNEST(["jan","feb","mar","apr","may","jun"]) as "sales"
+    UNNEST(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) as "month",
+    UNNEST(["jan", "feb", "mar", "apr", "may", "jun"]) as "sales"
 FROM monthly_sales;
 ```
 

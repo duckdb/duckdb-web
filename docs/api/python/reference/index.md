@@ -925,7 +925,7 @@ title: Python Client API
 <span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#8594;</span> <span class="sig-return-typehint"><a class="reference internal" href="#duckdb.DuckDBPyRelation" title="duckdb.duckdb.DuckDBPyRelation"><span class="pre">duckdb.duckdb.DuckDBPyRelation</span></a></span></span><a class="headerlink" href="#duckdb.DuckDBPyRelation.describe" title="Link to this definition">&#182;</a>
 </dt>
 <dd>
-<p>Gives basic statistics (e.g., min,max) and if null exists for each column of the relation.</p>
+<p>Gives basic statistics (e.g., min, max) and if null exists for each column of the relation.</p>
 </dd>
 </dl>
 

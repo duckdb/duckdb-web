@@ -19,7 +19,7 @@ SELECT
     count(*) as total_rows,
     count(*) FILTER (WHERE i <= 5) as lte_five,
     count(*) FILTER (WHERE i % 2 = 1) as odds
-FROM generate_series(1,10) tbl(i);
+FROM generate_series(1, 10) tbl(i);
 ```
 
 | total_rows | lte_five | odds |
@@ -34,7 +34,7 @@ SELECT
     sum(i) FILTER (WHERE i <= 5) as lte_five_sum,
     median(i) FILTER (WHERE i % 2 = 1) as odds_median,
     median(i) FILTER (WHERE i % 2 = 1 AND i <= 5) as odds_lte_five_median
-FROM generate_series(1,10) tbl(i);
+FROM generate_series(1, 10) tbl(i);
 ```
 
 | lte_five_sum | odds_median | odds_lte_five_median |
@@ -58,7 +58,7 @@ CREATE TEMP TABLE stacked_data as
         SELECT 
             i, 
             count(*) over () as rows 
-        FROM generate_series(1,100000000) tbl(i)
+        FROM generate_series(1, 100000000) tbl(i)
     ) tbl;
 
 --"Pivot" the data out by year (move each year out to a separate column)

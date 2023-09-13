@@ -38,7 +38,7 @@ In the descriptions, `l` is the three element list `[4, 5, 6]`.
 | `list_distinct(`*`list`*`)`                                  | `array_distinct`                                  | Removes all duplicates and NULLs from a list. Does not preserve the original order.                                                                                                | `list_distinct([1, 1, NULL, -3, 1, 5])` | `[1, 5, -3]`      |
 | `list_unique(`*`list`*`)`                                    | `array_unique`                                    | Counts the unique elements of a list.                                                                                                                                              | `list_unique([1, 1, NULL, -3, 1, 5])`   | `3`               |
 | `list_any_value(`*`list`*`)`                                 |                                                   | Returns the first non-null value in the list                                                                                                                                       | `list_any_value([NULL, -3])`            | `-3`              |
-| `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`         | `array_resize`                                    | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                                | `list_resize([1,2,3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
+| `list_resize(`*`list`*`, `*`size`*`[, `*`value`*`])`         | `array_resize`                                    | Resizes the list to contain `size` elements. Initializes new elements with `value` or `NULL` if `value` is not set.                                                                | `list_resize([1, 2, 3], 5, 0)`            | `[1, 2, 3, 0, 0]` |
 
 ## List Operators
 
@@ -46,10 +46,10 @@ The following operators are supported for lists:
 
 | Operator | Description | Example | Result |
 |-|--|---|-|
-| `&&`     | Alias for `list_intersect`                                                                | `[1,2,3,4,5] && [2,5,5,6]` | `[2,5]`         |
-| `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1,2,3,4] @> [3,4,3]`     | `true`          |
-| `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1,4] <@ [1,2,3,4]`       | `true`          |
-| `||`     | Alias for `list_concat`                                                                   | `[1,2,3] || [4,5,6]`       | `[1,2,3,4,5,6]` |
+| `&&`     | Alias for `list_intersect`                                                                | `[1, 2, 3, 4, 5] && [2, 5, 5, 6]` | `[2, 5]`         |
+| `@>`     | Alias for `list_has_all`, where the list on the **right** of the operator is the sublist. | `[1, 2, 3, 4] @> [3, 4, 3]`     | `true`          |
+| `<@`     | Alias for `list_has_all`, where the list on the **left** of the operator is the sublist.  | `[1, 4] <@ [1, 2, 3, 4]`       | `true`          |
+| `||`     | Alias for `list_concat`                                                                   | `[1, 2, 3] || [4, 5, 6]`       | `[1, 2, 3, 4, 5, 6]` |
 
 ## List Comprehension
 
@@ -78,8 +78,8 @@ SELECT [upper(x) for x in strings if len(x)>0] FROM (VALUES (['Hello', '', 'Worl
 | Function | Description | Example | Result |
 |:--|:---|:---|:-|
 | `map[`*`entry`*`]` | Alias for `element_at` | `map([100, 5], ['a', 'b'])[100]` | `[a]` |
-| `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `element_at(map([100, 5], [42, 43]),100);` | `[42]` |
-| `map_extract(`*`map, key`*`)` | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `map_extract(map([100, 5], [42, 43]),100);` | `[42]` |
+| `element_at(`*`map, key`*`)` | Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `element_at(map([100, 5], [42, 43]), 100);` | `[42]` |
+| `map_extract(`*`map, key`*`)` | Alias of `element_at`. Return a list containing the value for a given key or an empty list if the key is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys else an error is returned. | `map_extract(map([100, 5], [42, 43]), 100);` | `[42]` |
 | `cardinality(`*`map`*`)` | Return the size of the map (or the number of entries in the map). | `cardinality( map([4, 2], ['a', 'b']) );` | `2` |
 | `map_from_entries(`*`STRUCT(k, v)[]`*`)` | Returns a map created from the entries of the array | `map_from_entries([{k: 5, v: 'val1'}, {k: 3, v: 'val2'}]);` | `{5=val1, 3=val2}` |
 | `map()` | Returns an empty map. | `map()` | `{}` |
@@ -426,7 +426,7 @@ SELECT flatten([[NULL],[NULL]]);
 The `generate_subscript(`*`arr`*`, `*`dim`*`)` function generates indexes along the `dim`th dimension of array `arr`.
 
 ```sql
-SELECT generate_subscripts([4,5,6], 1) AS i;
+SELECT generate_subscripts([4, 5, 6], 1) AS i;
 ```
 
 ```text
