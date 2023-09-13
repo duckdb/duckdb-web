@@ -12,7 +12,7 @@ DuckDB uses a vectorized query execution model.
 All operators in DuckDB are optimized to work on Vectors of a fixed size.  
 
 This fixed size is commonly referred to in the code as `STANDARD_VECTOR_SIZE`.  
-The default STANDARD_VECTOR_SIZE is 2048 tuples.
+The default `STANDARD_VECTOR_SIZE` is 2048 tuples.
 
 ## Vector Format
 
