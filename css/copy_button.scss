@@ -1,7 +1,8 @@
 ---
 ---
 
-pre.highlight > button{
+pre.highlight > button,
+.highlight button.copy{
     position: absolute;
     background-color: #f7f7f7;
     border-radius: 50px;
