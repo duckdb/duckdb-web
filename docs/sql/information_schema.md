@@ -50,7 +50,7 @@ The view that describes the catalog information for columns is `information_sche
 | `ordinal_position` |Ordinal position of the column within the table (count starts at 1). | `INTEGER` | `5` |
 | `column_default` |Default expression of the column.|`VARCHAR`| `1.99` |
 | `is_nullable` |`YES` if the column is possibly nullable, `NO` if it is known not nullable.|`VARCHAR`| `'YES'` |
-| `data_type` |Data type of the column.|`VARCHAR`| `'DECIMAL(18,2)'` |
+| `data_type` |Data type of the column.|`VARCHAR`| `'DECIMAL(18, 2)'` |
 | `character_maximum_length` |If `data_type` identifies a character or bit string type, the declared maximum length; null for all other data types or if no maximum length was declared.|`INTEGER`| `255` |
 | `character_octet_length` |If data_type identifies a character type, the maximum possible length in octets (bytes) of a datum; null for all other data types. The maximum octet length depends on the declared character maximum length (see above) and the character encoding.|`INTEGER`| `1073741824` |
 | `numeric_precision` |If data_type identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null.|`INTEGER`| `18` |

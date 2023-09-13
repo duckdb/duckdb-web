@@ -31,7 +31,7 @@ DuckDB supports the standard DBI methods to send queries and retrieve result set
 
 ```R
 # create a table
-dbExecute(con, "CREATE TABLE items(item VARCHAR, value DECIMAL(10,2), count INTEGER)")
+dbExecute(con, "CREATE TABLE items(item VARCHAR, value DECIMAL(10, 2), count INTEGER)")
 # insert two items into the table
 dbExecute(con, "INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 

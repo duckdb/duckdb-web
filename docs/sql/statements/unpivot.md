@@ -19,8 +19,8 @@ The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be sum
 UNPIVOT [dataset]
 ON [column(s)]
 INTO 
-	NAME [name-column-name]
-	VALUE [value-column-name(s)]
+    NAME [name-column-name]
+    VALUE [value-column-name(s)]
 ORDER BY [column(s)-with-order-direction(s)]
 LIMIT [number-of-rows];
 ```
@@ -211,8 +211,8 @@ is translated into:
 SELECT 
     empid,
     dept,
-    UNNEST(['jan','feb','mar','apr','may','jun']) as "month",
-    UNNEST(["jan","feb","mar","apr","may","jun"]) as "sales"
+    UNNEST(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) as "month",
+    UNNEST(["jan", "feb", "mar", "apr", "may", "jun"]) as "sales"
 FROM monthly_sales;
 ```
 
@@ -256,8 +256,8 @@ The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be s
 ```sql
 FROM [dataset]
 UNPIVOT [INCLUDE NULLS] (
-	[value-column-name(s)]
-	FOR [name-column-name] IN [column(s)]
+    [value-column-name(s)]
+    FOR [name-column-name] IN [column(s)]
 );
 ```
 

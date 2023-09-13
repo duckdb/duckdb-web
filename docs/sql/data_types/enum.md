@@ -65,10 +65,10 @@ CREATE TABLE person (
 );
 
 -- Inserts tuples in the person table
-INSERT INTO person VALUES ('Pedro','happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
+INSERT INTO person VALUES ('Pedro', 'happy'), ('Mark', NULL), ('Pagliacci', 'sad'), ('Mr. Mackey', 'ok');
 
 -- This will fail since the mood type does not have a 'quackity-quack' value.
-INSERT INTO person VALUES ('Hannes','quackity-quack');
+INSERT INTO person VALUES ('Hannes', 'quackity-quack');
 
 -- The string 'sad' is cast to the type Mood, returning a numerical reference value.
 -- This makes the comparison a numerical comparison instead of a string comparison.

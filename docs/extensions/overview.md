@@ -88,7 +88,7 @@ There are many methods to decompress gzip. Here is a Python example:
 import gzip
 import shutil
 
-with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
+with gzip.open('httpfs.duckdb_extension.gz', 'rb') as f_in:
    with open('httpfs.duckdb_extension', 'wb') as f_out:
      shutil.copyfileobj(f_in, f_out)
 ```

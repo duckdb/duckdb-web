@@ -30,7 +30,7 @@ SELECT * FROM 'test/*.parquet';
 -- read 3 parquet files and treat them as a single table
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 -- Read all parquet files from 2 specific folders
-SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
+SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 -- read all parquet files that match the glob pattern at any depth
 SELECT * FROM read_parquet('dir/**/*.parquet');
 ```
@@ -76,7 +76,7 @@ The glob syntax and the list input parameter can be combined to scan files that 
 
 ```sql
 -- Read all parquet files from 2 specific folders
-SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
+SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 ```
 
 DuckDB can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.

@@ -37,7 +37,7 @@ con.Query("INSERT INTO integers VALUES (3, 4), (5, 6), (7, NULL)");
 
 MaterializedQueryResult result = con.Query("SELECT * FROM integers");
 if (!result->success) {
-	cerr << result->error;
+    cerr << result->error;
 }
 ```
 
@@ -110,7 +110,7 @@ An example of use would be:
 
 ```cpp
 int32_t udf_date(int32_t a) {
-	return a;
+    return a;
 }
 
 con.Query("CREATE TABLE dates (d DATE)");
@@ -151,28 +151,28 @@ The `CreateVectorizedFunction()` methods register a vectorized UDF such as:
 */
 template<typename TYPE>
 static void udf_vectorized(DataChunk &args, ExpressionState &state, Vector &result) {
-	// set the result vector type
-	result.vector_type = VectorType::FLAT_VECTOR;
-	// get a raw array from the result
-	auto result_data = FlatVector::GetData<TYPE>(result);
+    // set the result vector type
+    result.vector_type = VectorType::FLAT_VECTOR;
+    // get a raw array from the result
+    auto result_data = FlatVector::GetData<TYPE>(result);
 
-	// get the solely input vector
-	auto &input = args.data[0];
-	// now get an orrified vector
-	VectorData vdata;
-	input.Orrify(args.size(), vdata);
+    // get the solely input vector
+    auto &input = args.data[0];
+    // now get an orrified vector
+    VectorData vdata;
+    input.Orrify(args.size(), vdata);
 
-	// get a raw array from the orrified input
-	auto input_data = (TYPE *)vdata.data;
+    // get a raw array from the orrified input
+    auto input_data = (TYPE *)vdata.data;
 
-	// handling the data
-	for (idx_t i = 0; i < args.size(); i++) {
-		auto idx = vdata.sel->get_index(i);
-		if ((*vdata.nullmask)[idx]) {
-			continue;
-		}
-		result_data[i] = input_data[idx];
-	}
+    // handling the data
+    for (idx_t i = 0; i < args.size(); i++) {
+        auto idx = vdata.sel->get_index(i);
+        if ((*vdata.nullmask)[idx]) {
+            continue;
+        }
+        result_data[i] = input_data[idx];
+    }
 }
 
 con.Query("CREATE TABLE integers (i INTEGER)");

@@ -23,7 +23,7 @@ SELECT * FROM 'test/*.parquet';
 -- read all files that match the glob pattern, and include a "filename" column that specifies which file each row came from
 SELECT * FROM read_parquet('test/*.parquet', filename=true);
 -- use a list of globs to read all parquet files from 2 specific folders
-SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
+SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 -- query the metadata of a parquet file
 SELECT * FROM parquet_metadata('test.parquet');
 -- query the schema of a parquet file
