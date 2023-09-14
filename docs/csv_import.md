@@ -15,9 +15,9 @@ If a list of columns is specified, `COPY` will only copy the data in the specifi
 -- Copy the contents of a comma-separated file 'test.csv' without a header into the table 'test'
 COPY test FROM 'test.csv';
 -- Copy the contents of a comma-separated file with a header into the 'category' table
-COPY category FROM 'categories.csv' ( HEADER );
+COPY category FROM 'categories.csv' (HEADER);
 -- Copy the contents of 'lineitem.tbl' into the 'lineitem' table, where the contents are delimited by a pipe character ('|')
-COPY lineitem FROM 'lineitem.tbl' ( DELIMITER '|' );
+COPY lineitem FROM 'lineitem.tbl' (DELIMITER '|');
 -- Read the contents of a comma-separated file 'names.csv' into the 'name' column of the 'category' table. Any other columns of this table are filled with their default value.
 COPY category(name) FROM 'names.csv';
 ```
@@ -34,9 +34,9 @@ The `COPY ... TO` function can be called specifying either a table name, or a qu
 
 ```sql
 -- Copy the contents of the 'lineitem' table to the file 'lineitem.tbl', where the columns are delimited by a pipe character ('|'), including a header line.
-COPY lineitem TO 'lineitem.tbl' ( DELIMITER '|', HEADER );
+COPY lineitem TO 'lineitem.tbl' (DELIMITER '|', HEADER);
 -- Copy the l_orderkey column of the 'lineitem' table to the file 'orderkey.tbl'
-COPY lineitem(l_orderkey) TO 'orderkey.tbl' ( DELIMITER '|' );
+COPY lineitem(l_orderkey) TO 'orderkey.tbl' (DELIMITER '|');
 -- Copy the result of a query to the file 'query.csv', including a header with column names
 COPY (SELECT 42 AS a, 'hello' AS b) TO 'query.csv' WITH (HEADER 1, DELIMITER ',');
 ```
