@@ -116,7 +116,7 @@ The `COPY` statement can be used to load data from a CSV file into a table. This
 
 ```sql
 CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
-COPY ontime FROM 'flights.csv' ( DELIMITER '|', HEADER );
+COPY ontime FROM 'flights.csv' (DELIMITER '|', HEADER);
 SELECT * FROM ontime;
 ```
 
@@ -130,6 +130,6 @@ If we want to use the automatic format detection, we can set `AUTO_DETECT` to `T
 
 ```sql
 CREATE TABLE ontime(flightdate DATE, uniquecarrier VARCHAR, origincityname VARCHAR, destcityname VARCHAR);
-COPY ontime FROM 'flights.csv' ( AUTO_DETECT TRUE );
+COPY ontime FROM 'flights.csv' (AUTO_DETECT TRUE);
 SELECT * FROM ontime;
 ```
