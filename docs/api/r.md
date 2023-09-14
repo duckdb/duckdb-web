@@ -124,3 +124,7 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning=1)") |>
   summarise(delay = mean(dep_time, na.rm = TRUE)) |>
   collect()
 ```
+
+## Repository
+
+The source code of the DuckDB R API is available on [GitHub](https://github.com/duckdb/duckdb-r).
