@@ -12,7 +12,7 @@ In this example, we used the [jupysql](https://github.com/ploomber/jupysql) pack
 The main difference is that `Jupysql` is well maintained, and has both newer features and bug fixes.
 
 
-This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
+This example workflow is also available as a [Google Colab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
 ## Library Installation
 

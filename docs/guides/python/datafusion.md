@@ -8,7 +8,7 @@ DataFusion can output results as Apache Arrow, and DuckDB can read those results
 DuckDB can also rapidly [output results to Apache Arrow](export_arrow), which can be easily converted to a DataFusion DataFrame.
 Due to the interoperability of Apache Arrow, workflows can alternate between DuckDB and DataFusion with ease!
 
-This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1CHe6suiu7ZdDXejqJF6OacdXbJYpJoKr?usp=sharing).
+This example workflow is also available as a [Google Colab notebook](https://colab.research.google.com/drive/1CHe6suiu7ZdDXejqJF6OacdXbJYpJoKr?usp=sharing).
 
 ## Installation
 
