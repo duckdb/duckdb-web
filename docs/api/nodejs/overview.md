@@ -102,3 +102,33 @@ var stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
   });
 });
 ```
+
+[Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+
+```js
+const arrow = require('apache-arrow');
+const db = new duckdb.Database(':memory:');
+
+const jsonData = [
+  {"userId":1,"id":1,"title":"delectus aut autem","completed":false},
+  {"userId":1,"id":2,"title":"quis ut nam facilis et officia qui","completed":false}
+];
+
+// note; doesn't work on Windows yet
+db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
+    if (err) {
+        throw err;
+    }
+
+    const arrowTable = arrow.tableFromJSON(jsonData);
+    db.register_buffer("jsonDataTable", [arrow.tableToIPC(arrowTable)], true, (err, res) => {
+        if (err) {
+            throw err;
+        }
+
+        // `SELECT * FROM jsonDataTable` would return the entries in `jsonData`
+    });
+});
+
+```
+
