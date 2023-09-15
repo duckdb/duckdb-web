@@ -26,4 +26,4 @@ CREATE TYPE x_index AS INTEGER;
 types can then be inspected in the `duckdb_types` table.
 
 Extending these custom types to support custom operators (such as the PostgreSQL `&&` operator)
-would require C++ development. To do this, create an [extension](../extensions/overview).
+would require C++ development. To do this, create an [extension](../../extensions/overview).
