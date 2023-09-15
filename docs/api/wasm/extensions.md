@@ -3,7 +3,7 @@ layout: docu
 title: Extensions
 ---
 
-Default [extensions](../../extensions/overview) currently enabled in DuckDB-Wasm are Parquet and FTS. HTTPFS is a specific re-implementation that comes bundled by default. 
+The default [extensions](../../extensions/overview) currently enabled in DuckDB-Wasm are Parquet and FTS. The [`httpfs` extension](../../extensions/httpfs) is a specific re-implementation that comes bundled by default. 
 
 JSON and Excel are build-time opt-in.
 
