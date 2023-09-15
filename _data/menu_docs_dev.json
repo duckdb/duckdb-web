@@ -922,6 +922,10 @@
               "url": "overview"
             },
             {
+              "page": "Working with Extensions",
+              "url": "working_with_extensions"
+            },
+            {
               "page": "AutoComplete",
               "url": "autocomplete"
             },

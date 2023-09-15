@@ -3,10 +3,10 @@ layout: docu
 title: DuckDB ASOF Join
 ---
 
-Problem: we have a time-based price table; Traditional joins against this table get NULL
+Problem: we have a time-based price table; traditional joins against this table get NULL
 results if there is a time which does not exactly match.
 
-Solution: "ASOF JOIN" picks a good value for "in the gap" values.
+Solution: `ASOF JOIN` picks a good value for "in the gap" values.
 
 First, we create a price table and sales table.
 
@@ -23,7 +23,7 @@ INSERT INTO sales VALUES('b', '2001-01-01 00:18:30', 20);
 INSERT INTO sales VALUES('c', '2001-01-01 00:19:00', 30);
 ```
 
-We can see that we have a unit_price defined for each hour, but not for half hours.
+We can see that we have a `unit_price` defined for each hour, but not for half hours.
 
 ```sql
 SELECT * FROM prices;
