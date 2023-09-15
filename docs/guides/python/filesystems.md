@@ -5,7 +5,7 @@ layout: docu
 
 > This feature is experimental, and is subject to change
 
-DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's `httpfs` extension does not support. `fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations). This capability is only available in DuckDB's Python client because `fsspec` is a Python library, while the `httpfs` extension is available in many DuckDB clients.
+DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's [`httpfs` extension](../../extensions/httpfs) does not support. `fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations). This capability is only available in DuckDB's Python client because `fsspec` is a Python library, while the `httpfs` extension is available in many DuckDB clients.
 
 ## Example
 
@@ -29,5 +29,5 @@ duckdb.register_filesystem(filesystem('gcs'))
 duckdb.sql("SELECT * FROM read_csv_auto('gcs:///bucket/file.csv')")
 ```
 
-> There filesystems are not implemented in C++, hence, their performance may not be comparable to the ones provided by the `httpfs` extension.
-> It's also worth noting that as they are third party libraries, they may contain bugs that are beyond our control.
+> These filesystems are not implemented in C++, hence, their performance may not be comparable to the ones provided by the `httpfs` extension.
+> It is also worth noting that as they are third party libraries, they may contain bugs that are beyond our control.

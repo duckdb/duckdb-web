@@ -55,7 +55,7 @@ Autoloadable extensions are loaded on first use.
 SELECT * FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
 ```
 
-To access files via the HTTPS protocol, DuckDB will automatically load the `httpfs` extension.
+To access files via the HTTPS protocol, DuckDB will automatically load the [`httpfs` extension](../extensions/httpfs).
 Similarly, other autoloadable extensions (`aws`, `fts`) will be loaded on-demand.
 If an extension is not already available locally, it will be installed from the official extension repository (`extensions.duckdb.org`).
 
