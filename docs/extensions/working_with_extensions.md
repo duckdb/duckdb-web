@@ -27,6 +27,8 @@ The list of supported platforms may increase over time, but the current list of 
 * linux_arm64
 * osx_amd64
 * osx_arm64
+* wasm_eh [DuckDB-Wasm's extensions](../api/wasm/extensions)
+* wasm_mvp [DuckDB-Wasm's extensions](../api/wasm/extensions)
 * windows_amd64
 * windows_amd64_rtools
 
