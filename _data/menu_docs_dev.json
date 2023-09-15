@@ -123,11 +123,11 @@
               "url": "sql_on_pandas"
             },
             {
-              "page": "Import From Pandas",
+              "page": "Import from Pandas",
               "url": "import_pandas"
             },
             {
-              "page": "Export To Pandas",
+              "page": "Export to Pandas",
               "url": "export_pandas"
             },
             {
@@ -135,11 +135,11 @@
               "url": "sql_on_arrow"
             },
             {
-              "page": "Import From Arrow",
+              "page": "Import from Arrow",
               "url": "import_arrow"
             },
             {
-              "page": "Export To Arrow",
+              "page": "Export to Arrow",
               "url": "export_arrow"
             },
             {
