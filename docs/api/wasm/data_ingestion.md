@@ -15,7 +15,7 @@ Then, the data file is imported into DuckDB using insert functions ([insertArrow
 
 ## Data Import
 
-Open & Close connection
+### Open & Close connection
 
 ```ts
 // Create a new connection
@@ -28,7 +28,7 @@ await c.close();
 
 ```
 
-Apache Arrow
+### Apache Arrow
 
 ```ts
 // Data can be inserted from an existing arrow.Table
@@ -54,7 +54,7 @@ while (true) {
 await Promise.all(streamInserts);
 ```
 
-CSV
+### CSV
 
 ```ts
 // ..., from CSV files
@@ -75,7 +75,7 @@ await db.insertCSVFromPath('data.csv', {
 });
 ```
 
-JSON
+### JSON
 
 ```ts
 // ..., from JSON documents in row-major format
@@ -106,7 +106,7 @@ await db.registerFileBuffer('file.json', new Uint8Array(await streamResponse.arr
 await c.insertJSONFromPath('file.json', { name: 'JSONContent' });
 ```
 
-Parquet
+### Parquet
 
 ```ts
 // from Parquet files
@@ -129,7 +129,7 @@ await c.query(`INSERT INTO existing_table
     VALUES (1, "foo"), (2, "bar")`);
 ```
 
-HTTPFS
+### httpfs
 
 ```ts
 // ..., by specifying URLs in the SQL text
@@ -139,7 +139,7 @@ await c.query(`
 `);
 ```
 
-Insert statement
+### Insert statement
 
 ```ts
 // ..., or by executing raw insert statements
