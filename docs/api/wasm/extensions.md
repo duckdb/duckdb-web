@@ -3,20 +3,20 @@ layout: docu
 title: Extensions
 ---
 
-DuckDB-Wasm (dynamic) extextensions loading is modeled after regular DuckDB extension loading, with a few relevant differences due to the difference in platform.
+DuckDB-Wasm (dynamic) extension loading is modeled after regular DuckDB extension loading, with a few relevant differences due to the difference in platform.
 
 ### Format
 
-Extensions in DuckDB are binaries to be dynamic loaded via dlopen. A cryptografical signature is appended to the binary.
-Extensions in DuckDB-Wasm are a regular Wasm file to be dynamic loaded via Emscripten's dlopen. A cryptografical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
-This ensures the file remanins a valid WebAssembly file. Current assumption is that this custom section has to be the last one, but this can be potentially relaxed in the future.
+Extensions in DuckDB are binaries to be dynamically loaded via dlopen. A cryptographical signature is appended to the binary.
+Extensions in DuckDB-Wasm are a regular Wasm file to be dynamically loaded via Emscripten's dlopen. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
+This ensures the file remanins a valid WebAssembly file. Currently we require this custom section to be the last one, but this can be potentially relaxed in the future.
 
 ### INSTALL and LOAD
 
 INSTALL semantic in native embeddings of DuckDB is to fetch, decompress from gzip and store data in local disk.
 LOAD semantic in native embeddings of DuckDB is to (optionally) perform signature checks AND dynamic load the binary with the main DuckDB binary.
 
-In DuckDB-Wasm, INSTALL is a no-op given there is no durable cross-session storage. LOAD will fetch (and decompress on the fly), perform signature checks AND dynamic load via Emscripten implementation of dlopen.
+In DuckDB-Wasm, INSTALL is a no-op given there is no durable cross-session storage. LOAD will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of dlopen.
 
 ### Autoloading
 
@@ -39,7 +39,7 @@ Autoloading, so the possibility for DuckDB to add extension functionality on-the
 | tpcds                                                                                                                  | Adds TPC-DS data generation and query support                                      |                 |
 | tpch                                                                                                                   | Adds TPC-H data generation and query support                                       |                 |
 
-WebAssembly is basically an additional platform, and there might be platform specific limitations that make some extension not be able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
+WebAssembly is basically an additional platform, and there might be platform specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
 
 #### HTTPFS
 
@@ -48,13 +48,13 @@ HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol
 ### Extension signing
 
 As with regular DuckDB extensions, DuckDB-Wasm extension are by default checked on LOAD to verify the signature confirm the extension has not been tampered with.
-Extension signign can be disabled via a configuration option.
+Extension signature verification can be disabled via a configuration option.
 Signing is a property of the binary itself, so copying a DuckDB extension (say to serve it from a different location) will still keep a valid signature (for example for local development).
 
 ### Fetching DuckDB-Wasm extensions
 
 DuckDB official extension are served at extensions.duckdb.org, and this is also the default value for the `default_extension_repository` option.
-On installing extensions, a relevant URL will be build that will look like `extensions.duckdb.org/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.gz`.
+On installing extensions, a relevant URL will be built that will look like `extensions.duckdb.org/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.gz`.
 
 DuckDB-Wasm extension are fetched only on load, and the URL will look like: `extensions.duckdb.org/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.
 
