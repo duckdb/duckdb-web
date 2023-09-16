@@ -10,7 +10,7 @@ import duckdb
 import pyarrow as pa
 
 # connect to an in-memory database
-my_arrow = pa.Table.from_pydict({'a':[42]})
+my_arrow = pa.Table.from_pydict({'a': [42]})
 
 # create the table "my_table" from the DataFrame "my_arrow"
 duckdb.sql("CREATE TABLE my_table AS SELECT * FROM my_arrow")
