@@ -61,10 +61,10 @@
 	<div class="installartion output">
 		<h3>Installation</h3>
 		<div class="result" id="resultselection">
-			Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a><br/><br/>
-			Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip</a><br/><br/>
-			Linux arm64/aarch64: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip</a><br/><br/>
-			Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip</a>
+			Linux (AMD64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
+			<br/><br/>
+
+			Linux (Arm64/aarch64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip</a>
 		</div>
 	</div>
 
@@ -159,35 +159,41 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="latest cplusplus binary linux">
-		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip</a><br/><br/>
-		Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-i386.zip</a><br/><br/>
-		Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-rpi.zip</a>
+		Linux (AMD64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-amd64.zip</a>
+		<br/><br/>
+
+		Linux (Arm64/aarch64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-linux-aarch64.zip</a>
 	</div>
 
 	<div class="latest cplusplus binary win">
-		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip</a><br/><br/>
-		Win 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-i386.zip</a>
+		Windows (64-bit): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/libduckdb-windows-amd64.zip</a>
 	</div>
 
 	<div class="latest cli binary macos">
-		Homebrew: brew install duckdb<br/><br/>
+		Homebrew: brew install duckdb
+		<br/><br/>
+
 		GitHub Binary: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-osx-universal.zip</a>
 	</div>
 
 	<div class="latest cli binary linux">
-		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a><br/><br/>
-		Linux 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-i386.zip</a><br/><br/>
-		Linux arm64/aarch64: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip</a><br/><br/>
-		Linux Raspberry Pi: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-rpi.zip</a>
+		Linux (AMD64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-amd64.zip</a>
+		<br/><br/>
+
+		Linux (Arm64/aarch64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-linux-aarch64.zip</a>
 	</div>
 
 	<div class="latest cli binary win">
-		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a><br/><br/>
-		Win 32-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-i386.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-i386.zip</a>
+		Windows (64-bit): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_cli-windows-amd64.zip</a>
 	</div>
 
 	<div class="latest odbc binary linux">
-		Linux 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a><br/><br/>
+		Linux (AMD64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip</a>
+		<br/><br/>
+
+		Linux (Arm64/aarch64): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip</a>
+		<br/><br/>
+
 		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
 		{% highlight bash %}./unixodbc_setup.sh --help {% endhighlight %}
 	</div>
@@ -196,7 +202,9 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="latest odbc binary win">
-		Win 64-bit: <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a><br/><br/>
+		Windows (64-bit): <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip</a>
+		<br/><br/>
+
 		./odbc_install.exe <span style="opacity: 0.5;"><font color="black">(double-click)</font>
 	</div>
 
@@ -243,17 +251,18 @@ DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)"){%- endhighlight -%}
 	</div>
 
 	<div class="main cli cplusplus binary linux odbc">
-		Linux 64-bit: <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip</a><br/><br/>
+		Linux (AMD64): <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip</a>
+		<br/><br/>
 
-		Linux arm64/aarch64: <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip</a><br/><br/>
+		Linux (Arm64/aarch64): <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip</a>
 	</div>
 
 	<div class="main cli cplusplus binary macos">
-		MacOS binaries (universal): <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip</a><br/><br/>
+		MacOS binaries (universal): <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip</a>
 	</div>
 
 	<div class="main cli cplusplus binary win odbc">
-		Win 64-bit: <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip</a><br/><br/>
+		Windows (64-bit): <a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip</a>
 	</div>
 
 	<div class="main binary macos odbc">
