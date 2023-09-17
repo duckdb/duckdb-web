@@ -91,7 +91,7 @@ You can also execute the prepared statement multiple times. This is for example 
 ```js
 con.run('CREATE TABLE a (i INTEGER)');
 const stmt = con.prepare('INSERT INTO a VALUES (?)');
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
   stmt.run(i);
 }
 stmt.finalize();
