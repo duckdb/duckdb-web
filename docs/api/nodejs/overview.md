@@ -8,9 +8,22 @@ This package provides a node.js API for [DuckDB](https://github.com/duckdb/duckd
 Load the package and create a database object:
 
 ```js
-var duckdb = require('duckdb');
+const duckdb = require('duckdb');
+const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+```
 
-var db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+All options as described on [Database configuration](https://duckdb.org/docs/sql/configuration#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
+
+```js
+const db = new duckdb.Database(':memory:', {
+    "access_mode": "READ_WRITE",
+    "max_memory": "512MB",
+    "threads": "4"
+}, (err) => {
+  if (err) {
+    console.error(err);
+  }
+});
 ```
 
 Then you can run a query:
@@ -39,7 +52,7 @@ db.all('SELECT ?::INTEGER AS fortytwo, ?::STRING AS hello', 42, 'Hello, World', 
 However, these are all shorthands for something much more elegant. A database can have multiple `Connection`s, those are created using `db.connect()`.
 
 ```js
-var con = db.connect();
+const con = db.connect();
 ```
 
 You can create multiple connections, each with their own transaction context.
@@ -59,7 +72,7 @@ con.all('SELECT 42 AS fortytwo', function(err, res) {
 From connections, you can create prepared statements (and only that) using `con.prepare()`:
 
 ```js
-var stmt = con.prepare('select ?::INTEGER as fortytwo');
+const stmt = con.prepare('select ?::INTEGER as fortytwo');
 ``` 
 
 To execute this statement, you can call for example `all()` on the `stmt` object:
@@ -77,7 +90,7 @@ You can also execute the prepared statement multiple times. This is for example 
 
 ```js
 con.run('CREATE TABLE a (i INTEGER)');
-var stmt = con.prepare('INSERT INTO a VALUES (?)');
+const stmt = con.prepare('INSERT INTO a VALUES (?)');
 for (var i = 0; i < 10; i++) {
   stmt.run(i);
 }
@@ -93,7 +106,7 @@ con.all('SELECT * FROM a', function(err, res) {
 `prepare()` can also take a callback which gets the prepared statement as an argument:
 
 ```js
-var stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
+const stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
   stmt.all(42, function(err, res) {
     if (err) {
       throw err;
