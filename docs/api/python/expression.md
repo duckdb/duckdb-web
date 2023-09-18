@@ -3,11 +3,11 @@ layout: docu
 title: Expression API
 ---
 
-The `Expression` class represents an instance of an [expression](../../sql/expressions/overview)
+The `Expression` class represents an instance of an [expression](../../sql/expressions/overview).
 
 ### Why would I use the API?
 
-Using this API makes it possible to dynamically build up expressions, these expressions are typically created by the parser from the query string.  
+Using this API makes it possible to dynamically build up expressions, which are typically created by the parser from the query string.  
 This allows you to skip that and have more fine-grained control over the used expressions.
 
 Below is a list of currently supported expressions that can be created through the API.  
