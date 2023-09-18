@@ -27,15 +27,15 @@ Autoloading, so the possibility for DuckDB to add extension functionality on-the
 | Extension name | Description | Aliases |
 |---|-----|--|
 | autocomplete                                                                                                           | Adds support for autocomplete in the shell                                         |                 |
-| [excel](excel)                                                                                                         | Adds support for Excel-like format strings                                         |                 |
-| [fts](full_text_search)                                                                                                | Adds support for Full-Text Search Indexes                                          |                 |
+| [excel](../../extensions/excel)                                                                                                         | Adds support for Excel-like format strings                                         |                 |
+| [fts](../../extensions/full_text_search)                                                                                                | Adds support for Full-Text Search Indexes                                          |                 |
 | icu                                                                                                                    | Adds support for time zones and collations using the ICU library                   |                 |
 | inet                                                                                                                   | Adds support for IP-related data types and functions                               |                 |
-| [json](json)                                                                                                           | Adds support for JSON operations                                                   |                 |
+| [json](../../extensions/json)                                                                                                           | Adds support for JSON operations                                                   |                 |
 | parquet                                                                                                                | Adds support for reading and writing parquet files                                 |                 |
-| [sqlite_scanner](sqlite_scanner) [<span class="git">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner)       | Adds support for reading SQLite database files                                     | sqlite, sqlite3 |
+| [sqlite_scanner](../../extensions/sqlite_scanner) [<span class="git">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner)       | Adds support for reading SQLite database files                                     | sqlite, sqlite3 |
 | sqlsmit      |  | |
-| [substrait](substrait) [<span class="git">GitHub</span>](https://github.com/duckdblabs/substrait)                      | Adds support for the Substrait integration                                         |                 |
+| [substrait](../../extensions/substrait) [<span class="git">GitHub</span>](https://github.com/duckdblabs/substrait)                      | Adds support for the Substrait integration                                         |                 |
 | tpcds                                                                                                                  | Adds TPC-DS data generation and query support                                      |                 |
 | tpch                                                                                                                   | Adds TPC-H data generation and query support                                       |                 |
 
