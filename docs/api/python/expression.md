@@ -141,7 +141,7 @@ The Expression class also contains many operations that can be applied to any Ex
 `.cast(type: DuckDBPyType)`  
 Applies a cast to the provided type on the expression.
 
-`.alias(name: str)`
+`.alias(name: str)`  
 Apply an alias to the expression.
 
 `.isin(*exprs: Expression)`  
