@@ -24,7 +24,10 @@ Pull requests to fix issues or to expand the documentation section on DuckDB's f
 Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb/blob/main/CONTRIBUTING.md).
 
 ### I benchmarked DuckDB and its slower than \[some other system\]
-In a departure from traditional academic systems research practise, we have at first focused our attention on correctness, not raw performance. So it is entirely possible DuckDB is slower than some other, more mature system at this point. That being said, we are now confident DuckDB produces correct query results, and are actively working to make it fast, too. So publishing benchmark numbers from the current preview releases is certainly interesting, but should not be taken as the definitive results on what the DuckDB architecture can or cannot do.
+We welcome experiments comparing DuckDB's performance to other systems.
+To ensure fair comparison, we have two recommendations.
+First, try to use the [latest (bleeding edge) DuckDB version](https://duckdb.org/docs/installation/), which often has significant performance improvements compared to the last stable release.
+Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 
 ### Does DuckDB use SIMD?
 DuckDB does not use *explicit SIMD* instructions because they greatly complicate portability and compilation. Instead, DuckDB uses *implicit SIMD*, where we go to great lengths to write our C++ code in such a way that the compiler can *auto-generate SIMD instructions* for the specific hardware. As an example why this is a good idea, porting DuckDB to the new Apple M1 architecture took 10 minutes.
