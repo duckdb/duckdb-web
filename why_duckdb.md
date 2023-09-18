@@ -56,6 +56,7 @@ DuckDB's development started while the main developers were public servants in T
 * [DuckDB: an Embeddable Analytical Database](/pdf/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
 
 ## Media
+* [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](/pdf/duckdb-pydata-amsterdam-2023.pdf)
 * [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss) (Technical talk, ca. 40min)
 * [DuckCon #3](https://www.youtube.com/watch?v=9p_sQfy8uuk&list=PLzIMXBizEZjhy6QG4Eqoe9k9NgBa-w67Y) (Latest updates and technical talks about projects using DuckDB)
 * [DuckDB keynote (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU) (Keynote presentation, ca. 10 min)
