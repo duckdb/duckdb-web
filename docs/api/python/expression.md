@@ -7,10 +7,10 @@ The `Expression` class represents an instance of an [expression](../../sql/expre
 
 ### Why would I use the API?
 
-Using this API makes it possible to dynamically build up expressions, these expressions are typically created by the parser from the query string.
+Using this API makes it possible to dynamically build up expressions, these expressions are typically created by the parser from the query string.  
 This allows you to skip that and have more fine-grained control over the used expressions.
 
-Below is a list of currently supported expressions that can be created through the API.
+Below is a list of currently supported expressions that can be created through the API.  
 
 ### Column Expression
 
@@ -74,7 +74,8 @@ print(res)
 ### Case Expression
 
 This expression contains a CASE WHEN (...) THEN (...) ELSE (...) END expression.  
-By default ELSE is NULL, more `WHEN (...) THEN (...)` conditions can be added with `.when(condition=..., value=...)`
+By default ELSE is NULL, it can be set using `.else(value=...)`  
+Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition=..., value=...)`
 
 ```py
 import duckdb
@@ -135,7 +136,7 @@ print(res)
 
 ### Common Operations
 
-The Expression class also contains many operations that can be applied to any Expression type.
+The Expression class also contains many operations that can be applied to any Expression type.  
 
 `.cast(type: DuckDBPyType)`  
 Applies a cast to the provided type on the expression.
