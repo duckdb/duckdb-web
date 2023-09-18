@@ -30,8 +30,11 @@ ignored_functions = {
     # only used in python bindings
     "pandas_scan",
     "python_map_function",
-    # only used in JDBC bindings
+    # internal functions, should not be called by end users
     "arrow_scan_dumb",
+    "seq_scan",
+    "index_scan",
+    "arrow_scan"
 }
 
 functions = duckdb.default_connection.execute(
