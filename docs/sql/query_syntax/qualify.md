@@ -7,7 +7,7 @@ blurb: The QUALIFY clause is used to filter the results of WINDOW functions.
 
 The `QUALIFY` clause is used to filter the results of [`WINDOW` functions](../../sql/window_functions). This filtering of results is similar to how a [`HAVING` clause](../../sql/query_syntax/having) filters the results of aggregate functions applied based on the [`GROUP BY` clause](../../sql/query_syntax/groupby). 
 
-The `QUALIFY` clause avoids the need for a subquery or [WITH clause](../../sql/query_syntax/with) to perform this filtering (much like `HAVING` avoids a subquery). An example using a `WITH` clause instead of `QUALIFY` is included below the `QUALIFY` examples.
+The `QUALIFY` clause avoids the need for a subquery or [`WITH` clause](../../sql/query_syntax/with) to perform this filtering (much like `HAVING` avoids a subquery). An example using a `WITH` clause instead of `QUALIFY` is included below the `QUALIFY` examples.
 
 Note that this is filtering based on [`WINDOW` functions](../../sql/window_functions), not necessarily based on the [`WINDOW` clause](../../sql/query_syntax/window). The `WINDOW` clause is optional and can be used to simplify the creation of multiple `WINDOW` function expressions. 
 
