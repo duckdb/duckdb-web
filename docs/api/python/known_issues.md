@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Known Python issues
+title: Known Python Issues
 ---
 
 Unfortunately there are some issues that are either beyond our control or are very elusive / hard to track down.  
