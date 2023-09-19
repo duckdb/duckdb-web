@@ -36,10 +36,17 @@ cmd = f'''
 .mode markdown
 INSTALL httpfs;
 LOAD httpfs;
-SELECT substr(name, 2, (LEN(name) - 2)::int) AS name, {description_replacement} description, input_type, default_value
+SELECT
+    substr(name, 2, (LEN(name) - 2)::int) AS Name,
+    {description_replacement} AS Description,
+    '`' || input_type || '`' AS "Input type",
+    default_value AS "Default value"
 FROM (
-SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
-	FIRST(CASE WHEN name='memory_limit' OR name='max_memory'
+SELECT ARRAY_AGG('`' || name || '`')::VARCHAR AS name, description, input_type,
+	FIRST(CASE
+    WHEN value = ''
+    THEN ''
+    WHEN name='memory_limit' OR name='max_memory'
 	THEN '80% of RAM'
 	WHEN name='threads' OR name='worker_threads'
 	THEN '# Cores'
@@ -48,8 +55,8 @@ SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
 	WHEN name='Calendar'
 	THEN 'System (locale) calendar'
 	WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc', 'true', 'false')
-	THEN upper(value)
-	ELSE value END) AS default_value
+	THEN '`' || upper(value) || '`'
+    ELSE '`' || value || '`' END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
 GROUP BY description, input_type
