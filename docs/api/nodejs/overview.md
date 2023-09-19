@@ -12,7 +12,7 @@ const duckdb = require('duckdb');
 const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
 ```
 
-All options as described on [Database configuration](../../../sql/configuration#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
+All options as described on [Database configuration](../../sql/configuration#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
 
 ```js
 const db = new duckdb.Database(':memory:', {
