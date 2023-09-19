@@ -9,7 +9,7 @@ The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns
 In the basic case, multiple columns are stacked into two columns: a `NAME` column (which contains the name of the source column) and a `VALUE` column (which contains the value from the source column).
 
 DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIVOT` syntax.
-Both can utilize a [`columns` expression](../expressions/star#columns) to automatically detect the columns to unpivot. 
+Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automatically detect the columns to unpivot. 
 `PIVOT_LONGER` may also be used in place of the `UNPIVOT` keyword.
 
 ## Simplified UNPIVOT Syntax
@@ -90,7 +90,7 @@ INTO
 
 In many cases, the number of columns to unpivot is not easy to predetermine ahead of time. 
 In the case of this dataset, the query above would have to change each time a new month is added. 
-The [`columns` expression](../expressions/star#columns) can be used to select all columns that are not `empid` or `dept`. 
+The [`COLUMNS` expression](../expressions/star#columns) can be used to select all columns that are not `empid` or `dept`. 
 This enables dynamic unpivoting that will work regardless of how many months are added.
 The query below returns identical results to the one above.
 
@@ -297,7 +297,7 @@ FROM monthly_sales UNPIVOT (
 
 ### SQL Standard Unpivot Dynamically using Columns Expression
 
-The [`columns` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
+The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
 This will continue to work even if additional `month` columns are added to the dataset. 
 It produces the same result as the query above.
 
