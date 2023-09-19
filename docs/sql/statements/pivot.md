@@ -11,6 +11,8 @@ The values within those new columns are calculated using an aggregate function o
 DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting. 
 `PIVOT_WIDER` may also be used in place of the `PIVOT` keyword.
 
+> The [`UNPIVOT` statement](unpivot) is the inverse of the `PIVOT` statement.
+
 ## Simplified Pivot Syntax
 
 The full syntax diagram is below, but the simplified `PIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:

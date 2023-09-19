@@ -12,6 +12,8 @@ DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIV
 Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automatically detect the columns to unpivot. 
 `PIVOT_LONGER` may also be used in place of the `UNPIVOT` keyword.
 
+> The [`PIVOT` statement](pivot) is the inverse of the `UNPIVOT` statement.
+
 ## Simplified UNPIVOT Syntax
 
 The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be summarized using spreadsheet pivot table naming conventions as:
