@@ -471,6 +471,10 @@
                 {
                   "page": "API Reference",
                   "url": "reference"
+                },
+                {
+                  "page": "Known Python Issues",
+                  "url": "known_issues"
                 }
               ]
             },
