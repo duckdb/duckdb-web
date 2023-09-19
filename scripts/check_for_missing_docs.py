@@ -30,15 +30,23 @@ ignored_functions = {
     # only used in python bindings
     "pandas_scan",
     "python_map_function",
-    # only used in JDBC bindings
+    # internal functions, should not be called by end users
     "arrow_scan_dumb",
+    "seq_scan",
+    "index_scan",
+    "arrow_scan",
 }
 
 functions = duckdb.default_connection.execute(
     "select distinct function_name from duckdb_functions() where schema_name != 'pg_catalog'",
 ).fetchall()
 
-functions = sorted(list({function for (function,) in functions} - ignored_functions))
+functions = sorted(
+    list(
+        {function for (function,) in functions if 'internal' not in function}
+        - ignored_functions
+    )
+)
 
 
 def check_function(function):
