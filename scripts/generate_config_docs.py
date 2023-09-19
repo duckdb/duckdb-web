@@ -6,7 +6,9 @@ import csv
 import io
 
 if len(sys.argv) < 2:
-    print("Expected usage: python3 scripts/generate_config_docs.py /path/to/duckdb/binary")
+    print(
+        "Expected usage: python3 scripts/generate_config_docs.py /path/to/duckdb/binary"
+    )
     exit(1)
 
 db_path = sys.argv[1]
