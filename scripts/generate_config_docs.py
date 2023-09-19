@@ -47,7 +47,9 @@ SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
 	THEN 'System (locale) timezone'
 	WHEN name='Calendar'
 	THEN 'System (locale) calendar'
-	ELSE UPPER(value) END) AS default_value
+	WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc', 'true', 'false')
+	THEN upper(value)
+	ELSE value END) AS default_value
 FROM duckdb_settings()
 WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
 GROUP BY description, input_type
