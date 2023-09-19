@@ -5,7 +5,7 @@ title: Storage
 
 The DuckDB internal storage format is currently in flux, and is expected to change with each release until we reach v1.0.0.
 
-## How to Move between Storage Formats
+## How to Move Between Storage Formats
 
 When you update DuckDB and open a database file, you might encounter an error message about incompatible storage formats, pointing to this page.
 To move your database(s) to newer format you only need the older and the newer DuckDB executable.
