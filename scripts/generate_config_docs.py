@@ -40,7 +40,7 @@ SELECT substr(name, 2, (LEN(name) - 2)::int) AS name, {description_replacement} 
 FROM (
 SELECT ARRAY_AGG(name)::VARCHAR AS name, description, input_type,
 	FIRST(CASE WHEN name='memory_limit' OR name='max_memory'
-	THEN '75% of RAM'
+	THEN '80% of RAM'
 	WHEN name='threads' OR name='worker_threads'
 	THEN '# Cores'
 	WHEN name='TimeZone'
