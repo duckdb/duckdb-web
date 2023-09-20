@@ -57,15 +57,15 @@ A DSN (_Data Source Name_) is a string that identifies a database.  It can be a 
 ### Error Handling and Diagnostics
 All functions in ODBC return a code which represents the success or failure of the function.  This allows for easy error handling, as the application can simply check the return code of each function call to determine if it was successful.  When unsuccessful, the application can then use the [`SQLGetDiagRec`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdiagrec-function?view=sql-server-ver16) function to retrieve the error information. The following table defines the [return codes](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/return-codes-odbc?view=sql-server-ver16):
 
-| Return Code             | Description                                                                                                                                  |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `SQL_SUCCESS`           | The function completed successfully.                                                                                                         |
-| `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning                                            |
-| `SQL_ERROR`             | The function failed.                                                                                                                         |
-| `SQL_INVALID_HANDLE`    | The handle provided was invalid, indicating a programming error, i.e. when a handle is not allocated before it is used, or is the wrong type |
-| `SQL_NO_DATA`           | The function completed successfully, but no more data is available                                                                           |
-| `SQL_NEED_DATA`         | More data is needed, such as when a parameter data is sent at execution time, or additional connection information is required.              |
-| `SQL_STILL_EXECUTING`   | A function that was asynchronously executed is still executing.                                                                              |
+| Return Code             | Description                                                                                                                                   |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `SQL_SUCCESS`           | The function completed successfully.                                                                                                          |
+| `SQL_SUCCESS_WITH_INFO` | The function completed successfully, but additional information is available, including a warning                                             |
+| `SQL_ERROR`             | The function failed.                                                                                                                          |
+| `SQL_INVALID_HANDLE`    | The handle provided was invalid, indicating a programming error, i.e., when a handle is not allocated before it is used, or is the wrong type |
+| `SQL_NO_DATA`           | The function completed successfully, but no more data is available                                                                            |
+| `SQL_NEED_DATA`         | More data is needed, such as when a parameter data is sent at execution time, or additional connection information is required.               |
+| `SQL_STILL_EXECUTING`   | A function that was asynchronously executed is still executing.                                                                               |
 
 ### Buffers and Binding
 A buffer is a block of memory used to store data.  Buffers are used to store data retrieved from the database, or to send data to the database.  Buffers are allocated by the application, and then bound to a column in a result set, or a parameter in a query, using the [`SQLBindCol`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindcol-function?view=sql-server-ver16) and [`SQLBindParameter`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindparameter-function?view=sql-server-ver16) functions.  When the application fetches a row from the result set, or executes a query, the data is stored in the buffer.  When the application sends a query to the database, the data in the buffer is sent to the database.
