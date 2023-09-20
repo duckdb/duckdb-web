@@ -100,7 +100,7 @@ sudo apt-get install unixodbc-dev
 sudo yum install unixODBC-devel
 ```
 
-Remember to include the header file location in your `CFLAGS`
+Remember to include the header file location in your `CFLAGS`.
 
 For `MAKEFILE`:
 ```MAKE
