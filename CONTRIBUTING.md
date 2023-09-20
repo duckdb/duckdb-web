@@ -22,9 +22,11 @@ Each new page requires at least 2 edits:
 The addition of a new guide requires one additional edit:
 * Add a link to the new page within the Guides landing page: `docs/guides/index.md`
 
-**Please test your changes using the steps listed in the [Building](building.md) guide.**
+Before creating a pull request, please perform the following steps:
+* Preview your changes in the browser the steps listed in the [Building](building.md) guide.
+* Run the linters using `scripts/lint.sh`.
 
-**When creating a PR, please check the box to "Allow edits from maintainers".**
+When creating a PR, please check the box to "Allow edits from maintainers".
 
 ## Style guide
 
