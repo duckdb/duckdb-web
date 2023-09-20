@@ -18,8 +18,8 @@ You can download the DuckDB Logo here: <br/> • Web: [png](/images/logo-dl/Duck
 You can find the guidelines for DuckDB™ [here](/trademark_guidelines).
 
 ### How can I expand the DuckDB website?
-The DuckDB Website is hosted by GitHub pages, its repository is [here](
-https://github.com/duckdb/duckdb-web).
+The DuckDB Website is hosted by GitHub Pages, its repository is at [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web).
+When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
 Pull requests to fix issues or to expand the documentation section on DuckDB's features are very welcome.
 Before opening a pull request, please consult our [Contributor Guide](https://github.com/duckdb/duckdb/blob/main/CONTRIBUTING.md).
 

@@ -23,7 +23,7 @@ Some environments require additional tweaking:
     gem install eventmachine --platform ruby
     ```
 
-* If you are using macOS running on an Apple Silicon CPU (M1, M2, etc.), you need to specify the OpenSSL version when installing Ruby.
+* If you are using macOS running on an Apple Silicon CPU (M1, M2, etc.), you need to specify the OpenSSL version when installing Ruby:
 
     ```bash
     export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig"
