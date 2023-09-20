@@ -1,4 +1,7 @@
-# ODBC 101: A Duck Themed Guide to ODBC
+---
+layout: docu
+title: "ODBC 101: A Duck Themed Guide to ODBC"
+---
 
 * [What is ODBC?](#what-is-odbc)
 * [General Concepts](#general-concepts)
