@@ -10,9 +10,9 @@ title: "ODBC 101: A Duck Themed Guide to ODBC"
 
 ## What is ODBC?
 
-[Open Database Connectivity (ODBC)](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) is a standard API for accessing databases. It is a C API, and is supported by most programming languages as well as most databases, including, of course, **DuckDB** 🦆.  Essentially ODBC acts as a middleman between the database and the application. The application uses the ODBC API to communicate with the database, and the ODBC driver translates the ODBC API calls into database specific calls.  This allows the application to be database agnostic, and the database to be application agnostic.
+[ODBC](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) which stands for Open Database Connectivity, is a standard that allows different programs to talk to different databases including, of course, **DuckDB** 🦆.  This makes it easier to build programs that work with many different databases, which saves time as developers don't have to write custom code to connect to each database. Instead, they can use the standardized ODBC interface, which reduces development time and costs, and programs are easier to maintain.  However, ODBC can be slower than other methods of connecting to a database, such as using a native driver, as it adds an extra layer of abstraction between the application and the database.  Furthermore, because DuckDB is column-based and ODBC is row-based, there can be some inefficiencies when using ODBC with DuckDB.
 
-> There are link throughout this page to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.
+> There are links throughout this page to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.
 
 ## General Concepts
 
@@ -46,16 +46,6 @@ A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/devel
 
 A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found [here](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
-<!--
-| Key | Value |
-|---|----------------|
-| `DSN`      | A DSN is a string that identifies a database.                                                                            |
-| `FILEDSN`  | The path to a file containing a DSN.                                                                                     |
-| `DRIVER`   | The name of the ODBC driver to use.  This is the name of the driver as it appears in the ODBC Data Source Administrator. |
-| `UID`      | The username to use when connecting to the database.                                                                     |
-| `PWD`      | The password to use when connecting to the database.                                                                     |
-| `SAVEFILE` | The path to a file to which the connection string should be saved.                                                       |
--->
 
 ### Error Handling and Diagnostics
 
@@ -76,6 +66,10 @@ All functions in ODBC return a code which represents the success or failure of t
 A buffer is a block of memory used to store data.  Buffers are used to store data retrieved from the database, or to send data to the database.  Buffers are allocated by the application, and then bound to a column in a result set, or a parameter in a query, using the [`SQLBindCol`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindcol-function?view=sql-server-ver16) and [`SQLBindParameter`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindparameter-function?view=sql-server-ver16) functions.  When the application fetches a row from the result set, or executes a query, the data is stored in the buffer.  When the application sends a query to the database, the data in the buffer is sent to the database.
 
 ## Setting up an Application
+
+The following is a step-by-step guide to setting up an application that uses ODBC to connect to a database, execute a query, and fetch the results in `C++`.
+
+_Note:_ To install the driver as well as anything else you will need follow these [instructions](https://duckdb.org/docs/api/odbc/overview).
 
 1. [Include the SQL Header Files](#1-include-the-sql-header-files)
 2. [Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
