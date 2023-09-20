@@ -24,7 +24,7 @@ The addition of a new guide requires one additional edit:
 
 Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser the steps listed in the [Building](building.md) guide.
-* Run the linters using `scripts/lint.sh`.
+* Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for MarkdownLint.
 
 When creating a PR, please check the box to "Allow edits from maintainers".
 
