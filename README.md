@@ -1,7 +1,6 @@
 <div align="center">
-  <img src="./images/logo-dl/DuckDB_Logo.png" height="120">
+  <img src="./images/logo-dl/DuckDB_Logo.svg" height="120">
 </div>
-<br>
 
 # DuckDB Website
 
