@@ -105,14 +105,14 @@ Remember to include the header file location in your `CFLAGS`
 For `MAKEFILE`:
 ```MAKE
 CFLAGS=-I/usr/local/include
-#or 
+# or
 CFLAGS=-/opt/homebrew/Cellar/unixodbc/2.3.11/include
 ```
 
 For `CMAKE`:
 ```CMAKE
 include_directories(/usr/local/include)
-#or
+# or
 include_directories(/opt/homebrew/Cellar/unixodbc/2.3.11/include)
 ```
 
