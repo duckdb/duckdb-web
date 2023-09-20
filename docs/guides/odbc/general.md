@@ -9,11 +9,11 @@ title: "ODBC 101: A Duck Themed Guide to ODBC"
 * [Sample Application](#sample-application)
 
 ## What is ODBC?
-[Open Database Connectivity (ODBC)](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) is a standard API for accessing databases. It is a C API, and is supported by most programming languages as well as most databases, including, of course, **DuckDB**🦆.  Essentially ODBC acts as a middleman between the database and the application. The application uses the ODBC API to communicate with the database, and the ODBC driver translates the ODBC API calls into database specific calls.  This allows the application to be database agnostic, and the database to be application agnostic.
+[Open Database Connectivity (ODBC)](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) is a standard API for accessing databases. It is a C API, and is supported by most programming languages as well as most databases, including, of course, **DuckDB** 🦆.  Essentially ODBC acts as a middleman between the database and the application. The application uses the ODBC API to communicate with the database, and the ODBC driver translates the ODBC API calls into database specific calls.  This allows the application to be database agnostic, and the database to be application agnostic.
 
-*There will be links throughout this README to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.*
+> There are link throughout this page to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.*
 
-## General Concepts:
+## General Concepts
 
 * [Handles](#handles)
 * [Connecting](#connecting)
@@ -39,23 +39,16 @@ The first step is to connect to the data source so that the application can perf
 A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source.  It is formatted as a semicolon separated list of key-value pairs, however DuckDB currently  only utilizes the DSN and ignores the rest of the parameters.
 
 #### DSN
-A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db`, and `DuckDB` are both valid DSN's. More information on DSN's can be found [here](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
+A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found [here](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
-[//]: # (| Key        | Value                                                                                                                                                                     |)
-
-[//]: # (|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|)
-
-[//]: # (| `DSN`      | A DSN is a string that identifies a database. It can be a file path, a URL, or a database name.  For example:  `C:\Users\me\duckdb.db`, and `DuckDB` are both valid DSN's |                                                     )
-
-[//]: # (| `FILEDSN`  | The path to a file containing a DSN.                                                                                                                                      |)
-
-[//]: # (| `DRIVER`   | The name of the ODBC driver to use.  This is the name of the driver as it appears in the ODBC Data Source Administrator.                                                  |)
-
-[//]: # (| `UID`      | The username to use when connecting to the database.                                                                                                                      |)
-
-[//]: # (| `PWD`      | The password to use when connecting to the database.                                                                                                                      |)
-
-[//]: # (| `SAVEFILE` | The path to a file to which the connection string should be saved.                                                                                                        |)
+| Key        | Value                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| `DSN`      | A DSN is a string that identifies a database.                                                                            |
+| `FILEDSN`  | The path to a file containing a DSN.                                                                                     |
+| `DRIVER`   | The name of the ODBC driver to use.  This is the name of the driver as it appears in the ODBC Data Source Administrator. |
+| `UID`      | The username to use when connecting to the database.                                                                     |
+| `PWD`      | The password to use when connecting to the database.                                                                     |
+| `SAVEFILE` | The path to a file to which the connection string should be saved.                                                       |
 
 ### Error Handling and Diagnostics
 All functions in ODBC return a code which represents the success or failure of the function.  This allows for easy error handling, as the application can simply check the return code of each function call to determine if it was successful.  When unsuccessful, the application can then use the [`SQLGetDiagRec`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlgetdiagrec-function?view=sql-server-ver16) function to retrieve the error information. The following table defines the [return codes](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/return-codes-odbc?view=sql-server-ver16):
