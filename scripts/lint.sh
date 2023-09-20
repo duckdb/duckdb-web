@@ -16,6 +16,11 @@ npx markdownlint-cli docs/ dev/ _posts/ --config .markdownlint.jsonc --ignore do
 
 black scripts --skip-string-normalization $check || echo 'black failed'
 
+if [[ ! -z $(which vale) ]]; then
+    echo "Vale binary not found, please install it from https://vale.sh/docs/vale-cli/installation/"
+    exit 1
+fi
+
 vale sync
 vale docs/ dev/ _posts/ --glob "!docs/archive/*"
 
