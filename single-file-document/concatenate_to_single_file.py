@@ -161,7 +161,9 @@ def change_link(doc_body, doc_file_path):
 def adjust_headers(doc_body, doc_header_label):
     doc_body_with_new_headers = ""
     for line in doc_body.splitlines():
-        matches = re.findall(r"^(#+) (.*)$", line)
+        # We leverage that pages use headers that are at least h2 (##) in depth.
+        # This allows us to avoid accidentally picking up and labeling comment lines in Bash, Python, etc.
+        matches = re.findall(r"^(##+) (.*)$", line)
         if matches:
             match = matches[0]
             header_title = match[1]
