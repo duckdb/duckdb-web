@@ -66,7 +66,7 @@ All functions in ODBC return a code which represents the success or failure of t
 ### Buffers and Binding
 A buffer is a block of memory used to store data.  Buffers are used to store data retrieved from the database, or to send data to the database.  Buffers are allocated by the application, and then bound to a column in a result set, or a parameter in a query, using the [`SQLBindCol`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindcol-function?view=sql-server-ver16) and [`SQLBindParameter`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqlbindparameter-function?view=sql-server-ver16) functions.  When the application fetches a row from the result set, or executes a query, the data is stored in the buffer.  When the application sends a query to the database, the data in the buffer is sent to the database.
 
-## Setting up an Application:
+## Setting up an Application
 1. [Include the SQL Header Files](#1-include-the-sql-header-files)
 2. [Define the ODBC Handles and Connect to the Database ](#2-define-the-odbc-handles-and-connect-to-the-database)
 3. [Adding a Query](#3-adding-a-query)
@@ -199,7 +199,7 @@ Freeing the connection and environment handles can only be done after the connec
 ## Sample Application
 The following is a sample application that includes a `cpp` file that connects to the database, executes a query, fetches the results, and prints them.  It also disconnects from the database and frees the handles, and includes a function to check the return value of ODBC functions.  It also includes a `CMakeLists.txt` file that can be used to build the application.
 
-#### Sample `.cpp` file:
+#### Sample `.cpp` file
 ```c
 #include <iostream>
 #include <sql.h>
