@@ -1,9 +1,9 @@
-# DuckDB Website
-
 <div align="center">
-  <img src="./images/duckdb_logo_dl.svg" height="50">
+  <img src="./images/logo-dl/DuckDB_Logo.png" height="120">
 </div>
-<p>&nbsp;</p>
+<br>
+
+# DuckDB Website
 
 This repository hosts the source code for the [DuckDB website](https://www.duckdb.org). Please file any questions or issues relating to the website or documentation here.
 
