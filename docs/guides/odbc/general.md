@@ -12,7 +12,7 @@ title: "ODBC 101: A Duck Themed Guide to ODBC"
 
 [Open Database Connectivity (ODBC)](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) is a standard API for accessing databases. It is a C API, and is supported by most programming languages as well as most databases, including, of course, **DuckDB** 🦆.  Essentially ODBC acts as a middleman between the database and the application. The application uses the ODBC API to communicate with the database, and the ODBC driver translates the ODBC API calls into database specific calls.  This allows the application to be database agnostic, and the database to be application agnostic.
 
-> There are link throughout this page to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.*
+> There are link throughout this page to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.
 
 ## General Concepts
 
