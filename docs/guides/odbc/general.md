@@ -46,6 +46,7 @@ A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/devel
 
 A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found [here](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
+<!--
 | Key | Value |
 |---|----------------|
 | `DSN`      | A DSN is a string that identifies a database.                                                                            |
@@ -54,6 +55,7 @@ A DSN (_Data Source Name_) is a string that identifies a database.  It can be a 
 | `UID`      | The username to use when connecting to the database.                                                                     |
 | `PWD`      | The password to use when connecting to the database.                                                                     |
 | `SAVEFILE` | The path to a file to which the connection string should be saved.                                                       |
+-->
 
 ### Error Handling and Diagnostics
 
