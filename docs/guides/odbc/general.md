@@ -182,7 +182,7 @@ SQLFetch(stmt);
 
 Now that we have the results, we can do whatever we want with them.  For example, we can print them:
 
-```c
+```cpp
 std::cout << "Value: " << int_val << std::endl;
 ```
 
@@ -217,7 +217,7 @@ The following is a sample application that includes a `cpp` file that connects t
 
 #### Sample `.cpp` file
 
-```c
+```cpp
 #include <iostream>
 #include <sql.h>
 #include <sqlext.h>
