@@ -9,8 +9,10 @@ The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns
 In the basic case, multiple columns are stacked into two columns: a `NAME` column (which contains the name of the source column) and a `VALUE` column (which contains the value from the source column).
 
 DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIVOT` syntax.
-Both can utilize a [`columns` expression](../expressions/star#columns) to automatically detect the columns to unpivot. 
+Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automatically detect the columns to unpivot. 
 `PIVOT_LONGER` may also be used in place of the `UNPIVOT` keyword.
+
+> The [`PIVOT` statement](pivot) is the inverse of the `UNPIVOT` statement.
 
 ## Simplified UNPIVOT Syntax
 
@@ -19,8 +21,8 @@ The full syntax diagram is below, but the simplified `UNPIVOT` syntax can be sum
 UNPIVOT [dataset]
 ON [column(s)]
 INTO 
-	NAME [name-column-name]
-	VALUE [value-column-name(s)]
+    NAME [name-column-name]
+    VALUE [value-column-name(s)]
 ORDER BY [column(s)-with-order-direction(s)]
 LIMIT [number-of-rows];
 ```
@@ -90,7 +92,7 @@ INTO
 
 In many cases, the number of columns to unpivot is not easy to predetermine ahead of time. 
 In the case of this dataset, the query above would have to change each time a new month is added. 
-The [`columns` expression](../expressions/star#columns) can be used to select all columns that are not `empid` or `dept`. 
+The [`COLUMNS` expression](../expressions/star#columns) can be used to select all columns that are not `empid` or `dept`. 
 This enables dynamic unpivoting that will work regardless of how many months are added.
 The query below returns identical results to the one above.
 
@@ -211,8 +213,8 @@ is translated into:
 SELECT 
     empid,
     dept,
-    UNNEST(['jan','feb','mar','apr','may','jun']) as "month",
-    UNNEST(["jan","feb","mar","apr","may","jun"]) as "sales"
+    UNNEST(['jan', 'feb', 'mar', 'apr', 'may', 'jun']) as "month",
+    UNNEST(["jan", "feb", "mar", "apr", "may", "jun"]) as "sales"
 FROM monthly_sales;
 ```
 
@@ -256,8 +258,8 @@ The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be s
 ```sql
 FROM [dataset]
 UNPIVOT [INCLUDE NULLS] (
-	[value-column-name(s)]
-	FOR [name-column-name] IN [column(s)]
+    [value-column-name(s)]
+    FOR [name-column-name] IN [column(s)]
 );
 ```
 
@@ -297,7 +299,7 @@ FROM monthly_sales UNPIVOT (
 
 ### SQL Standard Unpivot Dynamically using Columns Expression
 
-The [`columns` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
+The [`COLUMNS` expression](../expressions/star#columns) can be used to determine the `IN` list of columns dynamically. 
 This will continue to work even if additional `month` columns are added to the dataset. 
 It produces the same result as the query above.
 

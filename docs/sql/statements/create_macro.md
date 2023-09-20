@@ -33,10 +33,10 @@ CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
 -- create a table macro without parameters
 CREATE MACRO static_table() AS TABLE SELECT 'Hello' AS column1, 'World' AS column2;
 -- create a table macro with parameters (that can be of any type)
-CREATE MACRO dynamic_table(col1_value,col2_value) AS TABLE SELECT col1_value AS column1, col2_value AS column2;
+CREATE MACRO dynamic_table(col1_value, col2_value) AS TABLE SELECT col1_value AS column1, col2_value AS column2;
 -- create a table macro that returns multiple rows. 
 -- It will be replaced if it already exists, and it is temporary (will be automatically deleted when the connection ends)
-CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value,col2_value) AS TABLE 
+CREATE OR REPLACE TEMP MACRO dynamic_table(col1_value, col2_value) AS TABLE 
     SELECT col1_value AS column1, col2_value AS column2 
     UNION ALL 
     SELECT 'Hello' AS col1_value, 456 AS col2_value;
@@ -52,7 +52,7 @@ Macros allow you to create shortcuts for combinations of expressions.
 -- failure! cannot find column "b"
 CREATE MACRO add(a) AS a + b;
 -- this works
-CREATE MACRO add(a,b) AS a + b;
+CREATE MACRO add(a, b) AS a + b;
 -- error! cannot bind +(VARCHAR, INTEGER)
 SELECT add('hello', 3);
 -- success!

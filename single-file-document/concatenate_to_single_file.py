@@ -161,16 +161,16 @@ def change_link(doc_body, doc_file_path):
 def adjust_headers(doc_body, doc_header_label):
     doc_body_with_new_headers = ""
     for line in doc_body.splitlines():
-        matches = re.findall(r"^(#+)( ?)(.*)$", line)
+        matches = re.findall(r"^(#+) (.*)$", line)
         if matches:
             match = matches[0]
-            header_title = match[2]
+            header_title = match[1]
             header_label = header_title \
                 .lower() \
                 .replace(" ", "-")
             header_label = re.sub("[^-_0-9a-z]", "", header_label)
 
-            new_header = f"{match[0]} {match[2]} {{#{doc_header_label}::{header_label}}}"
+            new_header = f"{match[0]} {match[1]} {{#{doc_header_label}::{header_label}}}"
             doc_body_with_new_headers += new_header + "\n"
         else:
             doc_body_with_new_headers += line + "\n"
@@ -259,6 +259,23 @@ def add_to_documentation(docs_root, data, of, chapter_title):
                 concatenate_page_to_output(of, 4, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
 
 
+def add_under_the_hood_chapter(docs_root, data, of):
+    of.write(f"# Under the Hood\n\n")
+    of.write(f"## Internals\n\n")
+    concatenate_page_to_output(of, 3, docs_root, "../internals/overview")
+    concatenate_page_to_output(of, 3, docs_root, "../internals/storage")
+    concatenate_page_to_output(of, 3, docs_root, "../internals/vector")
+    of.write(f"## Developer Guides\n\n")
+    concatenate_page_to_output(of, 3, docs_root, "../dev/building")
+    concatenate_page_to_output(of, 3, docs_root, "../dev/profiling")
+    concatenate_page_to_output(of, 3, docs_root, "../dev/testing")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/intro")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/debugging")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/result_verification")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/persistent_testing")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/loops")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/multiple_connections")
+    concatenate_page_to_output(of, 4, docs_root, "../dev/sqllogictest/catch")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--verbose', action='store_true')
@@ -274,7 +291,7 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
     metadata_file.write(textwrap.dedent(
         f"""
           ---
-          title: DuckDB documentation
+          title: DuckDB Documentation
           subtitle: >-
             DuckDB version {config["currentsnapshotversion"]}\\newline
             Generated on {datetime.now(timezone.utc).strftime("%Y-%m-%d at %H:%M UTC")}
@@ -292,6 +309,7 @@ with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.m
 
     add_to_documentation(docs_root, data, of, "Documentation")
     add_to_documentation(docs_root, data, of, "Guides")
+    add_under_the_hood_chapter(docs_root, data, of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())

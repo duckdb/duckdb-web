@@ -1876,6 +1876,7 @@ function GenerateCommonTableExpression(options) {
 			Keyword(")")
 		]), "skip"),
 		Keyword("AS"),
+		Optional(Sequence([Optional(Keyword("NOT")), Keyword("MATERIALIZED")])),
 		Keyword("("),
 		Expression("select-node"),
 		Keyword(")")

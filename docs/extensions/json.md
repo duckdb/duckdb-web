@@ -57,7 +57,7 @@ With `'unstructured'`, the top-level JSON is read, e.g.:
   "duck": 42
 }
 {
-  "goose": [1,2,3]
+  "goose": [1, 2, 3]
 }
 ```
 Will result in two objects being read.
@@ -65,7 +65,7 @@ Will result in two objects being read.
 With `'newline_delimited'`, [NDJSON](http://ndjson.org) is read, where each JSON is separated by a newline (`\n`), e.g.:
 ```json
 {"duck": 42}
-{"goose": [1,2,3]}
+{"goose": [1, 2, 3]}
 ```
 Will also result in two objects being read.
 
@@ -76,7 +76,7 @@ With `'array'`, each array element is read, e.g.:
     "duck": 42
   },
   {
-    "goose": [1,2,3]
+    "goose": [1, 2, 3]
   }
 ]
 ```
@@ -86,7 +86,7 @@ Example usage:
 ```sql
 SELECT * FROM read_json_objects('my_file1.json');
 -- {"duck":42,"goose":[1,2,3]}
-SELECT * FROM read_json_objects(['my_file1.json','my_file2.json']);
+SELECT * FROM read_json_objects(['my_file1.json', 'my_file2.json']);
 -- {"duck":42,"goose":[1,2,3]}
 -- {"duck":43,"goose":[4,5,6],"swan":3.3}
 SELECT * FROM read_ndjson_objects('*.json.gz');
@@ -129,7 +129,7 @@ DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing
 
 ```sql
 SELECT *
-FROM read_json(['my_file1.json','my_file2.json'],
+FROM read_json(['my_file1.json', 'my_file2.json'],
                columns={duck: 'INTEGER', goose: 'INTEGER[]', swan: 'DOUBLE'});
 ```
 
@@ -186,8 +186,8 @@ If your JSON file does not contain 'records', i.e., any other type of JSON than 
 This is specified with the `records` parameter.
 The `records` parameter specifies whether the JSON contains records that should be unpacked into individual columns, i.e., reading the following file with `records`:
 ```json
-{"duck": 42, "goose": [1,2,3]}
-{"duck": 43, "goose": [4,5,6]}
+{"duck": 42, "goose": [1, 2, 3]}
+{"duck": 43, "goose": [4, 5, 6]}
 ```
 Results in two columns:
 
@@ -200,8 +200,8 @@ You can read the same file with `records` set to `'false'`, to get a single colu
 
 | json |
 |:---|
-| {'duck': 42, 'goose': [1, 2, 3]} |
- |{'duck': 43, 'goose': [4, 5, 6]} |
+| {'duck': 42, 'goose': [1,2,3]} |
+| {'duck': 43, 'goose': [4,5,6]} |
 
 For additional examples reading more complex data, please see the [Shredding Deeply Nested JSON, One Vector at a Time blog post](https://duckdb.org/2023/03/03/json.html).
 
@@ -255,25 +255,25 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 The JSONPointer syntax separates each field with a `/`.
 For example, to extract the first element of the array with key `"duck"`, you can do:
 ```sql
-SELECT json_extract('{"duck":[1,2,3]}', '/duck/0');
+SELECT json_extract('{"duck": [1, 2, 3]}', '/duck/0');
 -- 1
 ```
 
 The JSONPath syntax separates fields with a `.`, and accesses array elements with `[i]`, and always starts with `$`. Using the same example, we can do:
 ```sql
-SELECT json_extract('{"duck":[1,2,3]}', '$.duck[0]');
+SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
 -- 1
 ```
 
 JSONPath is more expressive, and can also access from the back of lists:
 ```sql
-SELECT json_extract('{"duck":[1,2,3]}', '$.duck[#-1]');
+SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[#-1]');
 -- 3
 ```
 
 JSONPath also allows escaping syntax tokens, using double quotes:
 ```sql
-SELECT json_extract('{"duck.goose":[1,2,3]}', '$."duck.goose"[1]');
+SELECT json_extract('{"duck.goose": [1, 2, 3]}', '$."duck.goose"[1]');
 -- 2
 ```
 
@@ -288,7 +288,7 @@ SELECT json_valid(j) FROM example;
 -- true
 SELECT json_valid('{');
 -- false
-SELECT json_array_length('["duck","goose","swan",null]');
+SELECT json_array_length('["duck", "goose", "swan", null]');
 -- 4
 SELECT json_array_length(j, 'species') FROM example;
 -- 4
@@ -449,13 +449,13 @@ CREATE TABLE example (j JSON);
 INSERT INTO example VALUES
   ('{"family": "anatidae", "species": ["duck", "goose"], "coolness": 42.42}'),
   ('{"family": "canidae", "species": ["labrador", "bulldog"], "hair": true}');
-SELECT json_transform(j, '{"family":"VARCHAR","coolness":"DOUBLE"}') FROM example;
+SELECT json_transform(j, '{"family": "VARCHAR", "coolness": "DOUBLE"}') FROM example;
 -- {'family': anatidae, 'coolness': 42.420000}
 -- {'family': canidae, 'coolness': NULL}
-SELECT json_transform(j, '{"family":"TINYINT","coolness":"DECIMAL(4,2)"}') FROM example;
+SELECT json_transform(j, '{"family": "TINYINT", "coolness": "DECIMAL(4, 2)"}') FROM example;
 -- {'family': NULL, 'coolness': 42.42}
 -- {'family': NULL, 'coolness': NULL}
-SELECT json_transform_strict(j, '{"family":"TINYINT","coolness":"DOUBLE"}') FROM example;
+SELECT json_transform_strict(j, '{"family": "TINYINT", "coolness": "DOUBLE"}') FROM example;
 -- Invalid Input Error: Failed to cast value: "anatidae"
 ```
 

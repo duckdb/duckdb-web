@@ -1,8 +1,6 @@
 ---
 layout: docu
 title: SQLLogicTest - Loops
-selected: Documentation/Development/SQLLogicTest/Loops
-expanded: Testing
 ---
 
 Loops can be used in sqllogictests when it is required to execute the same query many times but with slight modifications in constant values. For example, suppose we want to fire off 100 queries that check for the presence of the values `0..100` in a table:
@@ -52,7 +50,7 @@ endloop
 
 > Use large loops sparingly. Executing hundreds of thousands of SQL statements will slow down tests unnecessarily. Do not use loops for inserting data.
 
-##### Data Generation
+## Data Generation without Loops
 
 Loops should be used sparingly. While it might be tempting to use loops for inserting data using insert statements, this will considerably slow down the test cases. Instead, it is better to generate data using the built-in `range` and `repeat` functions.
 

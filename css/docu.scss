@@ -63,10 +63,20 @@ pre.highlight{
         margin-bottom: 15px;
         margin-top: 8px;
     }
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #D9D9D9;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #b5b5b5;
+    }
 }
 div.highlight{
 	width: calc(100vw - 380px);
-	max-width: 720px;
+	max-width: 1000px;
+    position: relative;
 }
 blockquote {
     margin: 0;
@@ -154,6 +164,21 @@ form {
     max-width: 640px;
     padding: 20px 10px;
     margin: 0 auto;
+}
+
+.pill, 
+a.pill,
+body.documentation main .wrap a.pill{
+    background-color: #F3F3F3;
+    font-size: 12px;
+    border-radius: 50px;
+    padding: .3em .8em;
+    text-decoration: none;
+    margin-left: 5px;
+    &:hover{
+        background: black!important;
+        color: white;
+    }
 }
 
 
@@ -331,8 +356,10 @@ div.flex{
     font-family: $fontMonoItalic;
 }
 .highlight .err {
+    /*
     color: #a61717;
     background-color: #e3d2d2;
+    */
 }
 .highlight .gd {
     color: #000000;

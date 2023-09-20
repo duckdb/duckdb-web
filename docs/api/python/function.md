@@ -9,13 +9,12 @@ Just like regular [functions](../../sql/functions/overview) they need to have a 
 Example using a python function that calls a third party library.
 ```python
 import duckdb
-import duckdb
 from duckdb.typing import *
 from faker import Faker
 
 def random_name():
-	fake = Faker()
-	return fake.name()
+    fake = Faker()
+    return fake.name()
 
 duckdb.create_function('random_name', random_name, [], VARCHAR)
 res = duckdb.sql('select random_name()').fetchall()
@@ -59,7 +58,7 @@ For example:
 import duckdb
 
 def my_function(x: int) -> str:
-	return x
+    return x
 
 duckdb.create_function('my_func', my_function)
 duckdb.sql('select my_func(42)')
@@ -83,11 +82,11 @@ import duckdb
 from duckdb.typing import *
 
 def dont_intercept_null(x):
-	return 5
+    return 5
 
 duckdb.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT)
 res = duckdb.sql("""
-	select dont_intercept(NULL)
+    select dont_intercept(NULL)
 """).fetchall()
 print(res)
 # [(None,)]
@@ -95,7 +94,7 @@ print(res)
 duckdb.remove_function('dont_intercept')
 duckdb.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT, null_handling='special')
 res = duckdb.sql("""
-	select dont_intercept(NULL)
+    select dont_intercept(NULL)
 """).fetchall()
 print(res)
 # [(5,)]
@@ -178,10 +177,10 @@ from duckdb.typing import *
 from faker import Faker
 
 def random_date():
-	fake = Faker()
-	return fake.date_between()
+    fake = Faker()
+    return fake.date_between()
 
-duckdb.create_function('random_date', random_date, [], DATE)
+duckdb.create_function('random_date', random_date, [], DATE, type='native')
 res = duckdb.sql('select random_date()').fetchall()
 print(res)
 # [(datetime.date(2019, 5, 15),)]

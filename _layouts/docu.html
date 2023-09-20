@@ -38,7 +38,7 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/DuckDB_Logo_dl.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
+					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
 					<div id="duckdbanimation" style="width: 109px; margin-top: 2px;"></div>
 				</div>
 				<div class="landingmenu">
@@ -77,8 +77,12 @@
 		{% endif %}
 		<div class="wrap{% if page.title %} {{ page.title | downcase | remove: " " }}{% endif %}">
 			<div class="headlinebar">
-				<div>{{ page.title }}</div>
-
+				<div class="title">{{ page.title }}</div>
+				
+				{% if page.url contains '/docs/' %}
+				<div class="improvethispage"><a href="{% github_edit_link %}" title="Go to GitHub">Page Source</a></div>
+				{% endif %}
+				
 				{% if page.url contains '/docs/' %}
 				<div class="version">Version <span class="selectedversion" data-current="{{versionviewed}}">{{versionviewed}}</span></div>
 				<div class="versionsidebar">

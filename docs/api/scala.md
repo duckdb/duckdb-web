@@ -48,7 +48,7 @@ DuckDB supports the standard JDBC methods to send queries and retrieve result se
 ```scala
 // create a table
 val stmt = conn.createStatement();
-stmt.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10,2), count INTEGER)");
+stmt.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)");
 // insert two items into the table
 stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)");
 ```
@@ -56,8 +56,8 @@ stmt.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
 ```scala
 val rs = stmt.executeQuery("SELECT * FROM items");
 while (rs.next()) {
-	System.out.println(rs.getString(1));
-	System.out.println(rs.getInt(3));
+    System.out.println(rs.getString(1));
+    System.out.println(rs.getInt(3));
 }
 rs.close()
 // jeans

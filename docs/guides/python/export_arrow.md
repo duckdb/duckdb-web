@@ -1,6 +1,6 @@
 ---
 layout: docu
-title: Export To Apache Arrow
+title: Export to Apache Arrow
 ---
 
 All results of a query can be exported to an [Apache Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) using the `arrow` function. Alternatively, results can be returned as a [RecordBatchReader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) using the `fetch_record_batch` function and results can be read one batch at a time. In addition, relations built using DuckDB's [Relational API](../../guides/python/relational_api_pandas) can also be exported.
@@ -11,8 +11,8 @@ All results of a query can be exported to an [Apache Arrow Table](https://arrow.
 import duckdb
 import pyarrow as pa
 
-my_arrow_table = pa.Table.from_pydict({'i':[1,2,3,4],
-                                       'j':["one", "two", "three", "four"]})
+my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
+                                       'j': ["one", "two", "three", "four"]})
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow Table
 results = duckdb.sql("SELECT * FROM my_arrow_table").arrow()
@@ -24,8 +24,8 @@ results = duckdb.sql("SELECT * FROM my_arrow_table").arrow()
 import duckdb
 import pyarrow as pa
 
-my_arrow_table = pa.Table.from_pydict({'i':[1,2,3,4],
-                                       'j':["one", "two", "three", "four"]})
+my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
+                                       'j': ["one", "two", "three", "four"]})
                                        
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow RecordBatchReader
 chunk_size = 1_000_000
@@ -52,7 +52,7 @@ import duckdb
 con = duckdb.connect()
 
 con.execute('CREATE TABLE integers (i integer)')
-con.execute('INSERT INTO integers VALUES (0),(1),(2),(3),(4),(5),(6),(7),(8),(9),(NULL)')
+con.execute('INSERT INTO integers VALUES (0), (1), (2), (3), (4), (5), (6), (7), (8), (9), (NULL)')
 
 # Create a relation from the table and export the entire relation as Arrow
 rel = con.table("integers")

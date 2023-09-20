@@ -308,3 +308,9 @@ docs/sql/functions/descriptions.txt
 venv/
 node_modules/
 vendor/
+
+# LinkChecker output
+report.html
+
+# Python pickle files
+environment.pickle

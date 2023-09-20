@@ -1,5 +1,18 @@
 $(document).ready(function(){
 	
+	if (window.location.hash) {
+		var hash = window.location.hash;
+		if ($(hash).length) {
+			$('html, body').animate({
+				scrollTop: $(hash).offset().top-55
+			}, 300, 'swing');
+			if( $('.frequentlyaskedquestions').length ){
+				$('h3'+hash).toggleClass('open');
+				$('h3'+hash).next('p').slideToggle();
+			}
+		}
+	}
+	
 	var windowWidth = $( window ).width();
 	
 	// Simple detect OS 
@@ -310,7 +323,7 @@ $(document).ready(function(){
 	}).addClass("externallink").attr('target','_blank');
 	$('.landingmenu .external a.externallink, .mainlinks a.externallink, .discord a.externallink').removeClass('externallink'); // Remove Class from header elements
 	$('.footercontent a.externallink').removeClass('externallink'); // Remove Class from footer elements
-
+	$('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); // Remove Class from GitHub Links in Table
 	
 	// FOUNDATION PAGE SCRIPTS
 	if($('body').hasClass('foundation') && $('section.form').length){
@@ -524,5 +537,7 @@ $(document).ready(function(){
 			$('body.documentation main .wrap.inactive').removeClass('inactive');
 		}
 	});
+	
+
 	
 });

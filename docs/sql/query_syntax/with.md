@@ -3,6 +3,7 @@ layout: docu
 title: WITH Clause
 railroad: query_syntax/with.js
 ---
+
 The `WITH` clause allows you to specify common table expressions (CTEs). Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query. CTEs can reference each-other and can be nested.
 
 ## Basic CTE Examples
@@ -36,7 +37,37 @@ SELECT * FROM cte2;
 └──────┘
 ```
 
-## Recursive CTE Examples
+## Materialized CTEs
+
+By default, CTEs are inlined into the main query. Inlining can result in duplicate work, because the definition is copied for each reference. Take this query for example:
+
+```sql
+WITH t(x) AS (⟨Q_t⟩)
+SELECT * FROM t AS t1,
+              t AS t2,
+              t AS t3;
+```
+
+Inlining duplicates the definition of `t` for each reference which results in the following query:
+
+```sql
+SELECT * FROM (⟨Q_t⟩) AS t1(x),
+              (⟨Q_t⟩) AS t2(x),
+              (⟨Q_t⟩) AS t3(x);
+```
+
+If `⟨Q_t⟩` is expensive, materializing it with the `MATERIALIZED` keyword can improve performance. In this case, `⟨Q_t⟩` is evaluated only once.
+
+```sql
+WITH t(x) AS MATERIALIZED (⟨Q_t⟩)
+SELECT * FROM t AS t1,
+              t AS t2,
+              t AS t3;
+```
+
+## Recursive CTEs
+
+`WITH RECURSIVE` allows the definition of CTEs which can refer to themselves. Note that the query must be formulated in a way that ensures termination, otherwise, it may run into an infinite loop.
 
 ### Tree Traversal
 

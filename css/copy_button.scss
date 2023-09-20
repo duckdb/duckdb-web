@@ -1,25 +1,37 @@
 ---
 ---
 
-@mixin hover-opacity($element) {
-    #{$element}.highlight > button {
-        opacity: 0;
-        right: 1.2rem;
-        top: 1.2rem;
-        transition: all 0.2s ease-out;
-        border-radius: 4px;
+pre.highlight > button,
+.highlight button.copy{
+    position: absolute;
+    background-color: #f7f7f7;
+    border-radius: 50px;
+    width: 25px;
+    height: 25px;
+    top: 7px;
+    right: 7px;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background .3s;
+    &:hover{
+        background-color: #D9D9D9;
     }
-
-    #{$element}.highlight:hover > button {
-        opacity: 1;
+    span.copy{
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='13' viewBox='0 0 13 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23000' d='M3.5.5h9v9h-9z'/%3E%3Cpath d='M1 4v8h8' stroke='%23000'/%3E%3C/svg%3E");
+        width: 13px;
+        height: 13px;
+        background-size: contain;
+        display: inline-block;
     }
-
-    #{$element}.highlight > button:active,
-    #{$element}.highlight > button:focus,
-    #{$element}.highlight > button:hover {
-        opacity: 1
+    span.copied{
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='10' viewBox='0 0 13 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m1 5.642 3.343 3.343 7.642-7.642' stroke='%23000'/%3E%3C/svg%3E");
+        width: 13px;
+        height: 10px;
+        background-size: contain;
+        display: inline-block;
     }
 }
-
-@include hover-opacity(pre);
-@include hover-opacity(figure);

@@ -49,7 +49,7 @@ What does Shakespeare say about butter?
 
 ```sql
 SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
-    line_id,play_name,speaker,text_entry
+    line_id, play_name, speaker, text_entry
   FROM corpus
   WHERE score IS NOT NULL
   ORDER BY score;

@@ -1,9 +1,6 @@
 ---
 layout: docu
 title: Why DuckDB
-selected: Why DuckDB
-description: Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means.
-
 ---
 
 There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](http://cs.brown.edu/research/db/publications/fits_all.pdf). All take different trade-offs to better adjust to specific use cases. DuckDB is no different. Here, we try to explain what goals DuckDB has and why and how we try to achieve those goals through technical means. To start with, DuckDB is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
@@ -59,6 +56,7 @@ DuckDB's development started while the main developers were public servants in T
 * [DuckDB: an Embeddable Analytical Database](/pdf/SIGMOD2019-demo-duckdb.pdf) (SIGMOD 2019 Demo)
 
 ## Media
+* [In-Process Analytical Data Management with DuckDB (PyData Amsterdam 2023)](/pdf/duckdb-pydata-amsterdam-2023.pdf)
 * [DuckDB: Bringing analytical SQL directly to your Python shell (EuroPython 2023)](https://www.youtube.com/watch?v=egN4TwVyJss) (Technical talk, ca. 40min)
 * [DuckCon #3](https://www.youtube.com/watch?v=9p_sQfy8uuk&list=PLzIMXBizEZjhy6QG4Eqoe9k9NgBa-w67Y) (Latest updates and technical talks about projects using DuckDB)
 * [DuckDB keynote (Data + AI Summit 2023)](https://www.youtube.com/watch?v=AKix55rQEUU) (Keynote presentation, ca. 10 min)

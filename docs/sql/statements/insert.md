@@ -52,7 +52,7 @@ The names of the column list of the SELECT statement are matched against the col
 For example:
 ```sql
 CREATE TABLE tbl(a INTEGER, b INTEGER);
-INSERT INTO tbl BY NAME (select 42 as b);
+INSERT INTO tbl BY NAME (SELECT 42 AS b);
 ```
 This will insert `42` into `b` and insert `NULL` (or its default value) into `a`.
 

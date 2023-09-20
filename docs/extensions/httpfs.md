@@ -1,16 +1,16 @@
 ---
 layout: docu
-title: HTTPFS
+title: httpfs
 ---
 
-The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For pure HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension supports reading/writing/globbing files.
+The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension supports reading/writing/globbing files.
 
 Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
 Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
 
 ## HTTP(S)
 
-With the __httpfs__ extension, it is possible to directly query files over HTTP(S). This currently works for CSV, JSON, and Parquet files.
+With the __httpfs__ extension, it is possible to directly query files over the HTTP(S) protocol. This currently works for CSV, JSON, and Parquet files.
 
 ```sql
 SELECT * FROM 'https://domain.tld/file.extension';
@@ -217,3 +217,15 @@ Some additional configuration options exist for the S3 upload, though the defaul
 | `s3_uploader_max_parts_per_file` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_max_filesize` | used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
 | `s3_uploader_thread_limit` | maximum number of uploader threads |
+
+Additionally, most of the configuration options can be set via environment variables:
+
+| DuckDB setting          | Environment variable    | Note                                     |
+|:------------------------|:------------------------|:-----------------------------------------|
+|  `s3_region`            | `AWS_REGION`            | Takes priority over `AWS_DEFAULT_REGION` |
+|  `s3_region`            | `AWS_DEFAULT_REGION`    |                                          |
+|  `s3_access_key_id`     | `AWS_ACCESS_KEY_ID`     |                                          |
+|  `s3_secret_access_key` | `AWS_SECRET_ACCESS_KEY` |                                          |
+|  `s3_session_token`     | `AWS_SESSION_TOKEN`     |                                          |
+|  `s3_endpoint`          | `DUCKDB_S3_ENDPOINT`    |                                          |
+|  `s3_use_ssl`           | `DUCKDB_S3_USE_SSL`     |                                          |

@@ -26,7 +26,7 @@ SELECT {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'};
 SELECT {'key1': 'string', 'key2': 1, 'key3': 12.345};
 -- Struct using the struct_pack function. 
 -- Note the lack of single quotes around the keys and the use of the := operator
-SELECT struct_pack(key1 := 'value1',key2 := 42);
+SELECT struct_pack(key1 := 'value1', key2 := 42);
 -- Struct of structs with NULL values
 SELECT {'birds':
             {'yes': 'duck', 'maybe': 'goose', 'huh': NULL, 'no': 'heron'},
@@ -56,17 +56,17 @@ Retrieving a value from a struct can be accomplished using dot notation, bracket
 ```sql
 -- Use dot notation to retrieve the value at a key's location. This returns 1
 -- The subquery generates a struct column "a", which we then query with a.x
-SELECT a.x FROM (SELECT {'x':1, 'y':2, 'z':3} AS a);
+SELECT a.x FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 -- If key contains a space, simply wrap it in double quotes. This returns 1
 -- Note: Use double quotes not single quotes 
 -- This is because this action is most similar to selecting a column from within the struct
-SELECT a."x space" FROM (SELECT {'x space':1, 'y':2, 'z':3} AS a);
+SELECT a."x space" FROM (SELECT {'x space': 1, 'y': 2, 'z': 3} AS a);
 -- Bracket notation may also be used. This returns 1
 -- Note: Use single quotes since the goal is to specify a certain string key. 
 -- Only constant expressions may be used inside the brackets (no columns)
-SELECT a['x space'] FROM (SELECT {'x space':1, 'y':2, 'z':3} AS a);
+SELECT a['x space'] FROM (SELECT {'x space': 1, 'y': 2, 'z': 3} AS a);
 -- The struct_extract function is also equivalent. This returns 1
-SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3},'x space');
+SELECT struct_extract({'x space': 1, 'y': 2, 'z': 3}, 'x space');
 ```
 
 #### Struct.*
@@ -164,7 +164,7 @@ FROM t1;
 
 Nested types can be compared using all the [comparison operators](../expressions/comparison_operators).
 These comparisons can be used in [logical expressions](../expressions/logical_operators)
-for both `WHERE` and `HAVING` clauses, as well as for creating [Boolean values](./boolean).
+for both `WHERE` and `HAVING` clauses, as well as for creating [Boolean values](boolean).
 
 The ordering is defined positionally in the same way that words can be ordered in a dictionary.
 `NULL` values compare greater than all other values and are considered equal to each other.

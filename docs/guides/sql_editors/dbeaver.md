@@ -7,14 +7,14 @@ title: DBeaver SQL IDE
 
 1. Install DBeaver using the download links and instructions found at their [download page](https://dbeaver.io/download/).  
 
-2. Open DBeaver and create a new connection. Either click on the "New Database Connector" button or go to Database > New Database Connection in the menu bar.  
+2. Open DBeaver and create a new connection. Either click on the "New Database Connection" button or go to Database > New Database Connection in the menu bar.  
 <img src="/images/guides/DBeaver_new_database_connection.png" alt="DBeaver New Database Connection" title="DBeaver New Database Connection"/>
 <img src="/images/guides/DBeaver_new_database_connection_menu.png" alt="DBeaver New Database Connection Menu" title="DBeaver New Database Connection Menu"/>
 
 3. Search for DuckDB, select it, and click Next.  
 <img src="/images/guides/DBeaver_select_database_driver.png" alt="DBeaver Select Database Driver" title="DBeaver Select Database Driver"/>
 
-4. Enter the path or browse to the DuckDB database file you wish to query. To use an in-memory DuckDB (useful primarily if just interested in querying parquet files, or for testing) enter ":memory:" as the path.  
+4. Enter the path or browse to the DuckDB database file you wish to query. To use an in-memory DuckDB (useful primarily if just interested in querying parquet files, or for testing) enter `:memory:` as the path.  
 <img src="/images/guides/DBeaver_connection_settings_path.png" alt="DBeaver Set Path" title="DBeaver Set Path"/>
 
 5. Click "Test Connection". This will then prompt you to install the DuckDB JDBC driver. If you are not prompted, see alternative driver installation instructions below.  

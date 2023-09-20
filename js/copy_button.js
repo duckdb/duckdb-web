@@ -6,20 +6,21 @@ $(document).ready(function() {
         copyButton.className = 'copy';
         copyButton.type = 'button';
         copyButton.ariaLabel = 'Copy code to clipboard';
-        copyButton.innerText = 'Copy';
-
+        copyButton.innerHTML = '<span class="copy"></span>';
         codeBlock.append(copyButton);
-
-        copyButton.addEventListener('click', function () {
-            var code = codeBlock.querySelector('code').innerText.trim();
-            window.navigator.clipboard.writeText(code);
-
-            copyButton.innerText = 'Copied';
-            var fourSeconds = 4000;
-
-            setTimeout(function () {
-            copyButton.innerText = 'Copy';
-            }, fourSeconds);
-        });
     });
+    
+    $('#main_content_wrap').on('click', 'button.copy', function() {
+        var elem = $(this);
+        var code = $(this).parent().find('code').text().trim();
+        
+        window.navigator.clipboard.writeText(code);
+        
+        elem.html('<span class="copied"></span>');
+        
+        setTimeout(function () {
+            elem.html('<span class="copy"></span>');
+        }, 3500);
+    });
+    
 });

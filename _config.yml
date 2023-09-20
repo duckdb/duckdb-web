@@ -38,17 +38,25 @@ plugins:
   - jekyll-seo-tag
   - jekyll-redirect-from
   - jekyll-sitemap
+  - jekyll-github-metadata
 excerpt_separator: <!--more-->
 
 twitter:
   username: DuckDB
   card: summary
+  
+github: 
+  source:
+    branch: main
+  repository_url: "https://github.com/duckdb/duckdb-web"
 
 defaults:
   - scope:
       path: ""
     values:
       image: /images/sharingduckdb.jpg
+
+repository: "duckdb/duckdb-web"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

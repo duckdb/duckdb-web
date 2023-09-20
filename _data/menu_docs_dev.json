@@ -15,20 +15,6 @@
           "url": "index"
         },
         {
-          "page": "SQL Features",
-          "slug": "sql_features",
-          "subfolderitems": [
-            {
-              "page": "ASOF JOIN",
-              "url": "asof_join"
-            },
-            {
-              "page": "Full Text Search",
-              "url": "full_text_search"
-            }
-          ]
-        },
-        {
           "page": "Data Import & Export",
           "slug": "import",
           "subfolderitems": [
@@ -147,11 +133,11 @@
               "url": "sql_on_pandas"
             },
             {
-              "page": "Import From Pandas",
+              "page": "Import from Pandas",
               "url": "import_pandas"
             },
             {
-              "page": "Export To Pandas",
+              "page": "Export to Pandas",
               "url": "export_pandas"
             },
             {
@@ -159,11 +145,11 @@
               "url": "sql_on_arrow"
             },
             {
-              "page": "Import From Arrow",
+              "page": "Import from Arrow",
               "url": "import_arrow"
             },
             {
-              "page": "Export To Arrow",
+              "page": "Export to Arrow",
               "url": "export_arrow"
             },
             {
@@ -193,6 +179,20 @@
             {
               "page": "DuckDB with fsspec Filesystems",
               "url": "filesystems"
+            }
+          ]
+        },
+        {
+          "page": "SQL Features",
+          "slug": "sql_features",
+          "subfolderitems": [
+            {
+              "page": "ASOF JOIN",
+              "url": "asof_join"
+            },
+            {
+              "page": "Full Text Search",
+              "url": "full_text_search"
             }
           ]
         },
@@ -475,8 +475,16 @@
                   "url": "types"
                 },
                 {
+                  "page": "Expression API",
+                  "url": "expression"
+                },
+                {
                   "page": "API Reference",
                   "url": "reference"
+                },
+                {
+                  "page": "Known Python Issues",
+                  "url": "known_issues"
                 }
               ]
             },
@@ -930,6 +938,10 @@
             {
               "page": "Overview",
               "url": "overview"
+            },
+            {
+              "page": "Working with Extensions",
+              "url": "working_with_extensions"
             },
             {
               "page": "AutoComplete",

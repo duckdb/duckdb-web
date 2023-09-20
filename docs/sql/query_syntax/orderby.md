@@ -4,7 +4,7 @@ title: ORDER BY Clause
 railroad: query_syntax/orderby.js
 ---
 
-`ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`](./limit) or [`OFFSET`](./limit), if present). 
+`ORDER BY` is an output modifier. Logically it is applied near the very end of the query (just prior to [`LIMIT`](limit) or [`OFFSET`](limit), if present). 
 The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order. 
 In addition, every order clause can specify whether `NULL` values should be moved to the beginning or to the end.
 
