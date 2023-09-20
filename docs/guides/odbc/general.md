@@ -91,12 +91,13 @@ The first step is to include the SQL header files:
 #include <sqlext.h>
 ```
 
-These files contain the definitions of the ODBC functions, as well as the data types used by ODBC.  In order to be able to use these header files you have to have the `unixodbc` package installed.
-Either with homebrew or with apt:
+These files contain the definitions of the ODBC functions, as well as the data types used by ODBC.  In order to be able to use these header files you have to have the `unixodbc` package installed:
 ```bash
 brew install unixodbc
-#or
+# or
 sudo apt-get install unixodbc-dev
+# or
+sudo yum install unixODBC-devel
 ```
 
 Remember to include the header file location in your `CFLAGS`
