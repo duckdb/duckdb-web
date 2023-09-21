@@ -3,7 +3,8 @@ layout: docu
 title: Create Type
 railroad: statements/createtype.js
 ---
-The `CREATE Type` statement defines a new type in the catalog.
+
+The `CREATE TYPE` statement defines a new type in the catalog.
 
 ### Examples
 

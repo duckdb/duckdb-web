@@ -3,6 +3,7 @@ layout: docu
 title: Delete Statement
 railroad: statements/delete.js
 ---
+
 The `DELETE` statement removes rows from the table identified by the table-name.
 
 ### Examples

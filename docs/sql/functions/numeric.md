@@ -2,6 +2,7 @@
 layout: docu
 title: Numeric Functions
 ---
+
 ## Numeric Operators
 
 The table below shows the available mathematical operators for numeric types.

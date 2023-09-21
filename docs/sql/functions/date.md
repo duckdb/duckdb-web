@@ -2,6 +2,7 @@
 layout: docu
 title: Date Functions
 ---
+
 This section describes functions and operators for examining and manipulating date values.
 
 ## Date Operators

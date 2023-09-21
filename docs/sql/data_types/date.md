@@ -3,6 +3,7 @@ layout: docu
 title: Date Types
 blurb: A date specifies a combination of year, month and day.
 ---
+
 | Name   | Aliases | Description                     |
 |:-------|:--------|:--------------------------------|
 | `DATE` |         | calendar date (year, month day) |

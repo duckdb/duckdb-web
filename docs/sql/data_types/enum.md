@@ -3,6 +3,7 @@ layout: docu
 title: Enum Types
 blurb: The ENUM type represents a dictionary data structure with all possible unique values of a column.
 ---
+
 | Name | Description |
 |:--|:-----|
 | `ENUM` | Dictionary Encoding representing all possible string values of a column. |

@@ -2,6 +2,7 @@
 layout: docu
 title: Text Functions
 ---
+
 This section describes functions and operators for examining and manipulating string values. The `␣` symbol denotes a space character.
 
 | Function | Description | Example | Result | Alias |

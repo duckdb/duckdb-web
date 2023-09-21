@@ -3,6 +3,7 @@ layout: docu
 title: Indexes
 railroad: statements/indexes.js
 ---
+
 ## Index Types
 
 DuckDB currently uses two index types:

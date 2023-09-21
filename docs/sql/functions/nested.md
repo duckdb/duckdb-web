@@ -2,6 +2,7 @@
 layout: docu
 title: Nested Functions
 ---
+
 This section describes functions and operators for examining and manipulating nested values. There are three nested data types: lists, structs, and maps.
 
 ## List Functions

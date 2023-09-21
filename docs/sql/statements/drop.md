@@ -3,6 +3,7 @@ layout: docu
 title: Drop Statement
 railroad: statements/drop.js
 ---
+
 The `DROP` statement removes a catalog entry added previously with the `CREATE` command.
 
 ### Examples

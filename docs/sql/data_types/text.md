@@ -3,6 +3,7 @@ layout: docu
 title: Text Types
 blurb: In DuckDB, strings can be stored in the VARCHAR field.
 ---
+
 In DuckDB, strings can be stored in the `VARCHAR` field.
 
 | Name | Aliases | Description |
