@@ -13,26 +13,24 @@ railroad: expressions/function.js
 `duckdb_functions` table function shows the list of functions currently built into the system.
 
 ```sql
-SELECT DISTINCT ON(function_name) function_name, function_type, return_type, parameters, parameter_types
+SELECT DISTINCT ON(function_name) function_name, function_type, return_type, parameters, parameter_types, description
 FROM duckdb_functions()
-WHERE function_type='scalar'
-LIMIT 10;
+WHERE function_type = 'scalar' AND function_name LIKE 'b%'
+ORDER BY function_name;
 ```
 ```text
-┌────────────────┬───────────────┬─────────────┬──────────────────────────┬──────────────────────────────────────┐
-│ function_name  │ function_type │ return_type │        parameters        │           parameter_types            │
-├────────────────┼───────────────┼─────────────┼──────────────────────────┼──────────────────────────────────────┤
-│ log10          │ scalar        │ DOUBLE      │ [col0]                   │ [DOUBLE]                             │
-│ mod            │ scalar        │ TINYINT     │ [col0, col1]             │ [TINYINT, TINYINT]                   │
-│ date_diff      │ scalar        │ BIGINT      │ [col0, col1, col2]       │ [VARCHAR, DATE, DATE]                │
-│ writefile      │ scalar        │ VARCHAR     │ []                       │ []                                   │
-│ regexp_replace │ scalar        │ VARCHAR     │ [col0, col1, col2, col3] │ [VARCHAR, VARCHAR, VARCHAR, VARCHAR] │
-│ age            │ scalar        │ INTERVAL    │ [col0]                   │ [TIMESTAMP]                          │
-│ age            │ scalar        │ INTERVAL    │ [col0, col1]             │ [TIMESTAMP, TIMESTAMP]               │
-│ datediff       │ scalar        │ BIGINT      │ [col0, col1, col2]       │ [VARCHAR, DATE, DATE]                │
-│ map            │ scalar        │ MAP         │ []                       │ []                                   │
-│ year           │ scalar        │ BIGINT      │ [col0]                   │ [TIMESTAMP WITH TIME ZONE]           │
-└────────────────┴───────────────┴─────────────┴──────────────────────────┴──────────────────────────────────────┘
+┌───────────────┬───────────────┬─────────────┬──────────────────────┬──────────────────────┬──────────────────────────────────────────┐
+│ function_name │ function_type │ return_type │      parameters      │   parameter_types    │               description                │
+│    varchar    │    varchar    │   varchar   │      varchar[]       │      varchar[]       │                 varchar                  │
+├───────────────┼───────────────┼─────────────┼──────────────────────┼──────────────────────┼──────────────────────────────────────────┤
+│ bar           │ scalar        │ VARCHAR     │ [x, min, max, width] │ [DOUBLE, DOUBLE, D…  │ Draws a band whose width is proportion…  │
+│ base64        │ scalar        │ VARCHAR     │ [blob]               │ [BLOB]               │ Converts a blob to a base64 encoded st…  │
+│ bin           │ scalar        │ VARCHAR     │ [value]              │ [VARCHAR]            │ Converts the value to binary represent…  │
+│ bit_count     │ scalar        │ TINYINT     │ [x]                  │ [TINYINT]            │ Returns the number of bits that are set  │
+│ bit_length    │ scalar        │ BIGINT      │ [col0]               │ [VARCHAR]            │                                          │
+│ bit_position  │ scalar        │ INTEGER     │ [substring, bitstr…  │ [BIT, BIT]           │ Returns first starting index of the sp…  │
+│ bitstring     │ scalar        │ BIT         │ [bitstring, length]  │ [VARCHAR, INTEGER]   │ Pads the bitstring until the specified…  │
+└───────────────┴───────────────┴─────────────┴──────────────────────┴──────────────────────┴──────────────────────────────────────────┘
 ```
 
 Currently the description and parameter names of functions are still missing.
