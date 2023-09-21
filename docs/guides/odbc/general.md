@@ -69,7 +69,7 @@ A buffer is a block of memory used to store data.  Buffers are used to store dat
 
 The following is a step-by-step guide to setting up an application that uses ODBC to connect to a database, execute a query, and fetch the results in `C++`.
 
-_Note:_ To install the driver as well as anything else you will need follow these [instructions](https://duckdb.org/docs/api/odbc/overview).
+> To install the driver as well as anything else you will need follow these [instructions](https://duckdb.org/docs/api/odbc/overview).
 
 1. [Include the SQL Header Files](#1-include-the-sql-header-files)
 2. [Define the ODBC Handles and Connect to the Database](#2-define-the-odbc-handles-and-connect-to-the-database)
