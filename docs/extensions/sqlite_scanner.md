@@ -63,7 +63,7 @@ Then you can query those views normally using SQL, e.g., using the example queri
 
 ```sql
 SELECT cat.name category_name, 
-       Sum(Ifnull(pay.amount, 0)) revenue 
+       sum(ifnull(pay.amount, 0)) revenue 
 FROM   category cat 
        LEFT JOIN film_category flm_cat 
               ON cat.category_id = flm_cat.category_id 
@@ -111,7 +111,9 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 
 As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
-> Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
+```text
+Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
+```
 
 This error can be avoided by setting the `sqlite_all_varchar` option:
 
@@ -129,6 +131,6 @@ If you want to run the `sqlite_scan` procedure more than once in the same DuckDB
 CALL sqlite_attach('sakila.db', overwrite=true);
 ```
 
-## Extra Information
+## GitHub Repository
 
-See [the repo](https://github.com/duckdblabs/sqlite_scanner) for the source code of the extension.
+[<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner)

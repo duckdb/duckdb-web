@@ -2,7 +2,9 @@
 layout: docu
 title: Spatial
 ---
+
 The `spatial` extension provides support for geospatial data processing in DuckDB.
+For an overview of the extension, see our [blog post](/2023/04/28/spatial).
 
 ## GEOMETRY type
 
@@ -26,7 +28,7 @@ The spatial extension implements a large number of scalar functions and overload
 
 🦆 - DuckDB - functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
 
-🔄 - CAST(GEOMETRY) - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
+🔄 - `CAST(GEOMETRY)` - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
 
 The currently implemented spatial functions can roughly be categorized into the following groups:
 
@@ -36,12 +38,12 @@ Convert between geometries and other formats.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
-| VARCHAR ST_AsGeoJSON(GEOMETRY)    | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
-| VARCHAR ST_AsHEXWKB(GEOMETRY)     | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
-| VARCHAR ST_AsText(GEOMETRY)       | 🧭       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
-| WKB_BLOB ST_AsWKB(GEOMETRY)       | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
-| GEOMETRY ST_GeomFromText(VARCHAR) | 🧭       | 🔄       | 🔄           | 🔄         | 🔄 (as POLYGON) |
-| GEOMETRY ST_GeomFromWKB(BLOB)     | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as POLYGON) |
+| `VARCHAR ST_AsGeoJSON(GEOMETRY)`    | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as `POLYGON`) |
+| `VARCHAR ST_AsHEXWKB(GEOMETRY)`     | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
+| `VARCHAR ST_AsText(GEOMETRY)`       | 🧭       | 🦆       | 🦆           | 🦆         | 🔄 (as `POLYGON`) |
+| `WKB_BLOB ST_AsWKB(GEOMETRY)`       | 🦆       | 🦆       | 🦆           | 🦆         | 🦆              |
+| `GEOMETRY ST_GeomFromText(VARCHAR)` | 🧭       | 🔄       | 🔄           | 🔄         | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_GeomFromWKB(BLOB)`     | 🦆       | 🦆       | 🦆           | 🦆         | 🔄 (as `POLYGON`) |
 
 ### Geometry Construction
 
@@ -49,21 +51,21 @@ Construct new geometries from other geometries or other data.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
-| GEOMETRY ST_Point(DOUBLE, DOUBLE)                      | 🦆        | 🦆        |               |            |                |
-| GEOMETRY ST_ConvexHull(GEOMETRY)                       | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_Boundary(GEOMETRY)                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_Buffer(GEOMETRY)                           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_Centroid(GEOMETRY)                         | 🧭        | 🦆        | 🦆             | 🦆          | 🦆              |
-| GEOMETRY ST_Collect(GEOMETRY[])                    | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-| GEOMETRY ST_Normalize(GEOMETRY)                        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_SimplifyPreserveTopology(GEOMETRY, DOUBLE) | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_Simplify(GEOMETRY, DOUBLE)                 | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_Union(GEOMETRY, GEOMETRY)                  | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_Intersection(GEOMETRY, GEOMETRY)           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_MakeLine(GEOMETRY[])                                   | 🦆        |          | 🦆             |            |                |
-| GEOMETRY ST_Envelope(GEOMETRY)                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GEOMETRY ST_FlipCoordinates(GEOMETRY)                  | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-| GEOMETRY ST_Transform(GEOMETRY, VARCHAR, VARCHAR)                        | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| `GEOMETRY ST_Point(DOUBLE, DOUBLE)`                      | 🦆        | 🦆        |               |            |                |
+| `GEOMETRY ST_ConvexHull(GEOMETRY)`                       | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_Boundary(GEOMETRY)`                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_Buffer(GEOMETRY)`                           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_Centroid(GEOMETRY)`                         | 🧭        | 🦆        | 🦆             | 🦆          | 🦆              |
+| `GEOMETRY ST_Collect(GEOMETRY[]) `                       | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| `GEOMETRY ST_Normalize(GEOMETRY)`                        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_SimplifyPreserveTopology(GEOMETRY, DOUBLE)` | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_Simplify(GEOMETRY, DOUBLE)`                 | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_Union(GEOMETRY, GEOMETRY)`                  | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_Intersection(GEOMETRY, GEOMETRY)`           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_MakeLine(GEOMETRY[]) `                      | 🦆        |           | 🦆             |            |                |
+| `GEOMETRY ST_Envelope(GEOMETRY)`                         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GEOMETRY ST_FlipCoordinates(GEOMETRY)`                  | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| `GEOMETRY ST_Transform(GEOMETRY, VARCHAR, VARCHAR)`      | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
 
 
 ### Spatial Properties
@@ -72,16 +74,16 @@ Calculate and access spatial properties of geometries.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
-| DOUBLE ST_Area(GEOMETRY)               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
-| BOOLEAN ST_IsClosed(GEOMETRY)          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_IsEmpty(GEOMETRY)           | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
-| BOOLEAN ST_IsRing(GEOMETRY)            | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_IsSimple(GEOMETRY)          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_IsValid(GEOMETRY)           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| DOUBLE ST_X(GEOMETRY)                  | 🧭        | 🦆        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| DOUBLE ST_Y(GEOMETRY)                  | 🧭        | 🦆        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| GeometryType ST_GeometryType(GEOMETRY) | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
-| DOUBLE ST_Length(GEOMETRY)             | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as POLYGON) |
+| `DOUBLE ST_Area(GEOMETRY)`               | 🦆        | 🦆        | 🦆             | 🦆          | 🦆              |
+| `BOOLEAN ST_IsClosed(GEOMETRY)`          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_IsEmpty(GEOMETRY)`           | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_IsRing(GEOMETRY)`            | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_IsSimple(GEOMETRY)`          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_IsValid(GEOMETRY)`           | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `DOUBLE ST_X(GEOMETRY)`                  | 🧭        | 🦆        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `DOUBLE ST_Y(GEOMETRY)`                  | 🧭        | 🦆        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `GeometryType ST_GeometryType(GEOMETRY)` | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as `POLYGON`) |
+| `DOUBLE ST_Length(GEOMETRY)`             | 🦆        | 🦆        | 🦆             | 🦆          | 🔄 (as `POLYGON`) |
 
 
 ### Spatial Relationships
@@ -90,19 +92,19 @@ Compute relationships and spatial predicates between geometries.
 
 | Scalar functions | GEOMETRY | POINT_2D | LINESTRING_2D | POLYGON_2D | BOX_2D |
 |-----|---|--|--|--|---|
-| BOOLEAN ST_Within(GEOMETRY, GEOMETRY)          | 🧭        | 🦆 or 🔄   | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Touches(GEOMETRY, GEOMETRY)         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Overlaps(GEOMETRY, GEOMETRY)        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Contains(GEOMETRY, GEOMETRY)        | 🧭        | 🔄        | 🔄             | 🦆 or 🔄     | 🔄 (as POLYGON) |
-| BOOLEAN ST_CoveredBy(GEOMETRY, GEOMETRY)       | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Covers(GEOMETRY, GEOMETRY)          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Crosses(GEOMETRY, GEOMETRY)         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Difference(GEOMETRY, GEOMETRY)      | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Disjoint(GEOMETRY, GEOMETRY)        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Intersects(GEOMETRY, GEOMETRY)      | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_Equals(GEOMETRY, GEOMETRY)          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
-| DOUBLE ST_Distance(GEOMETRY, GEOMETRY)         | 🧭        | 🦆 or 🔄   | 🦆 or 🔄        | 🔄          | 🔄 (as POLYGON) |
-| BOOLEAN ST_DWithin(GEOMETRY, GEOMETRY, DOUBLE) | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as POLYGON) |
+| `BOOLEAN ST_Within(GEOMETRY, GEOMETRY)`          | 🧭        | 🦆 or 🔄  | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Touches(GEOMETRY, GEOMETRY)`         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Overlaps(GEOMETRY, GEOMETRY)`        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Contains(GEOMETRY, GEOMETRY)`        | 🧭        | 🔄        | 🔄             | 🦆 or 🔄    | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_CoveredBy(GEOMETRY, GEOMETRY)`       | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Covers(GEOMETRY, GEOMETRY)`          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Crosses(GEOMETRY, GEOMETRY)`         | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Difference(GEOMETRY, GEOMETRY)`      | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Disjoint(GEOMETRY, GEOMETRY)`        | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Intersects(GEOMETRY, GEOMETRY)`      | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_Equals(GEOMETRY, GEOMETRY)`          | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
+| `DOUBLE ST_Distance(GEOMETRY, GEOMETRY)`         | 🧭        | 🦆 or 🔄  | 🦆 or 🔄        | 🔄          | 🔄 (as `POLYGON`) |
+| `BOOLEAN ST_DWithin(GEOMETRY, GEOMETRY, DOUBLE)` | 🧭        | 🔄        | 🔄             | 🔄          | 🔄 (as `POLYGON`) |
 
 
 ## Spatial Table Functions
@@ -116,13 +118,13 @@ CREATE TABLE <table> AS SELECT * FROM ST_Read('some/file/path/filename.json');
 ```sql
 ST_Read(VARCHAR, sequential_layer_scan : BOOLEAN, spatial_filter : WKB_BLOB, open_options : VARCHAR[], layer : VARCHAR, allowed_drivers : VARCHAR[], sibling_files : VARCHAR[], spatial_filter_box : BOX_2D)
 ```
-- `sequential_layer_scan` (default: `false`): If set to `true`, the table function will scan through all layers sequentially and return the first layer that matches the given `layer` name. This is required for some drivers to work properly, e.g., the `OSM` driver.
-- `spatial_filter` (default: `NULL`): If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.
-- `open_options` (default: `[]`): A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the `GeoJSON` driver supports a `FLATTEN_NESTED_ATTRIBUTES=YES` option to flatten nested attributes.
-- `layer` (default: `NULL`): The name of the layer to read from the file. If `NULL`, the first layer is returned. Can also be a layer index (starting at 0).
-- `allowed_drivers` (default: `[]`): A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.
-- `sibling_files` (default: `[]`): A list of sibling files that are required to open the file. E.g., the `ESRI Shapefile` driver requires a `.shx` file to be present. Although most of the time these can be discovered automatically.
-- `spatial_filter_box` (default: `NULL`): If set to a `BOX_2D`, the table function will only return rows that intersect with the given bounding box. Similar to `spatial_filter`.
+* `sequential_layer_scan` (default: `false`): If set to `true`, the table function will scan through all layers sequentially and return the first layer that matches the given `layer` name. This is required for some drivers to work properly, e.g., the `OSM` driver.
+* `spatial_filter` (default: `NULL`): If set to a WKB blob, the table function will only return rows that intersect with the given WKB geometry. Some drivers may support efficient spatial filtering natively, in which case it will be pushed down. Otherwise the filtering is done by GDAL which may be much slower.
+* `open_options` (default: `[]`): A list of key-value pairs that are passed to the GDAL driver to control the opening of the file. E.g., the `GeoJSON` driver supports a `FLATTEN_NESTED_ATTRIBUTES=YES` option to flatten nested attributes.
+* `layer` (default: `NULL`): The name of the layer to read from the file. If `NULL`, the first layer is returned. Can also be a layer index (starting at 0).
+* `allowed_drivers` (default: `[]`): A list of GDAL driver names that are allowed to be used to open the file. If empty, all drivers are allowed.
+* `sibling_files` (default: `[]`): A list of sibling files that are required to open the file. E.g., the `ESRI Shapefile` driver requires a `.shx` file to be present. Although most of the time these can be discovered automatically.
+* `spatial_filter_box` (default: `NULL`): If set to a `BOX_2D`, the table function will only return rows that intersect with the given bounding box. Similar to `spatial_filter`.
 
 Note that GDAL is single-threaded, so this table function will not be able to make full use of parallelism. We're planning to implement support for the most common vector formats natively in this extension with additional table functions in the future.
 
@@ -193,10 +195,11 @@ For example to export a table to a GeoJSON file, with generated bounding boxes, 
 COPY <table> TO 'some/file/path/filename.geojson'
 WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 ```
-- `FORMAT`: is the only required option and must be set to `GDAL` to use the GDAL based copy function.
-- `DRIVER`: is the GDAL driver to use for the export. See the table above for a list of available drivers.
-- `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
 
-## Extra Information
+* `FORMAT`: is the only required option and must be set to `GDAL` to use the GDAL based copy function.
+* `DRIVER`: is the GDAL driver to use for the export. See the table above for a list of available drivers.
+* `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
 
-See [the repo](https://github.com/duckdblabs/duckdb_spatial) for the source code of the extension, or the [blog post](/2023/04/28/spatial).
+## GitHub Repository
+
+[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_spatial)

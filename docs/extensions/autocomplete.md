@@ -2,14 +2,14 @@
 layout: docu
 title: AutoComplete
 ---
+
 This extension adds supports for autocomplete. 
 
 | Function                                | Description                                            |
 |:----------------------------------------|:-------------------------------------------------------|
 | `sql_auto_complete(`*`query_string`*`)` | Attempts autocompletion on the given *`query_string`*. |
 
-
-## Example:
+## Example
 
 ```sql
 SELECT * FROM sql_auto_complete('SEL');
@@ -39,5 +39,3 @@ Returns:
 | DEALLOCATE  |                0 |
 | UPDATE      |                0 |
 | DROP        |                0 |
-
-

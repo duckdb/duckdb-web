@@ -3,14 +3,14 @@ layout: docu
 title: httpfs
 ---
 
-The __httpfs__ extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the __httpfs__ extension supports reading/writing/globbing files.
+The `httpfs` extension is a loadable extension implementing a file system that allows reading remote/writing remote files. For plain HTTP(S), only file reading is supported. For object storage using the S3 API, the `httpfs` extension supports reading/writing/globbing files.
 
 Some clients come prebundled with this extension, in which case it's not necessary to first install or even load the extension.  
 Depending on the client you use, no action may be required, or you might have to `INSTALL httpfs` on first use and use `LOAD httpfs` at the start of every session.
 
 ## HTTP(S)
 
-With the __httpfs__ extension, it is possible to directly query files over the HTTP(S) protocol. This currently works for CSV, JSON, and Parquet files.
+With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This currently works for CSV, JSON, and Parquet files.
 
 ```sql
 SELECT * FROM 'https://domain.tld/file.extension';
@@ -40,11 +40,11 @@ SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.
 
 ## S3
 
-The __httpfs__ extension supports reading/writing/globbing files on object storage servers using the S3 API.
+The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API.
 
 ### Requirements
 
-The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each __httpfs__ feature.
+The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for each `httpfs` feature.
 
 | Feature | Required S3 API features |
 |:---|:---|

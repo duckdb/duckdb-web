@@ -2,7 +2,8 @@
 layout: docu
 title: JSON
 ---
-The __json__ extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
+
+The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
 
 ## JSON Type
 
