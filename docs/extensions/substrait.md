@@ -3,12 +3,10 @@ layout: docu
 title: Substrait
 ---
 
-The main goal of this extension is to support both production and consumption of Substrait query plans in DuckDB.
+The main goal of the `substrait` extension is to support both production and consumption of Substrait query plans in DuckDB.
 
 This extension is mainly exposed via 3 different APIs - the SQL API, the Python API, and the R API.
 Here we depict how to consume and produce Substrait query plans in each API.
-
-Additionally, see the [`substrait` repository](https://github.com/duckdblabs/substrait) for further usage details.
 
 > The Substrait integration is currently experimental. Support is currently only available on request.
 > If you have not asked for permission to ask for support, [contact us prior to opening an issue](https://duckdblabs.com/contact/).
@@ -130,3 +128,7 @@ To consume a Substrait BLOB the `duckdb_prepare_substrait(con, blob)` function m
 result <- duckdb::duckdb_prepare_substrait(con, proto_bytes)
 df <- dbFetch(result)
 ```
+
+## Source Code
+
+[<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)

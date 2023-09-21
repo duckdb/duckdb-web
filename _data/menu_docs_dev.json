@@ -930,6 +930,10 @@
               "url": "overview"
             },
             {
+              "page": "Official Extensions",
+              "url": "official_extensions"
+            },
+            {
               "page": "Working with Extensions",
               "url": "working_with_extensions"
             },

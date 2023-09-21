@@ -2,6 +2,7 @@
 layout: docu
 title: Full Text Search
 ---
+
 Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
 
 ## API
@@ -69,7 +70,6 @@ Reduces words to their base. Used internally by the extension.
 |:--|:--|:----------|
 |input_string|`VARCHAR`|The column or constant to be stemmed|
 |stemmer|`VARCHAR`|The type of stemmer to be used. One of `'arabic'`, `'basque'`, `'catalan'`, `'danish'`, `'dutch'`, `'english'`, `'finnish'`, `'french'`, `'german'`, `'greek'`, `'hindi'`, `'hungarian'`, `'indonesian'`, `'irish'`, `'italian'`, `'lithuanian'`, `'nepali'`, `'norwegian'`, `'porter'`, `'portuguese'`, `'romanian'`, `'russian'`, `'serbian'`, `'spanish'`, `'swedish'`, `'tamil'`, `'turkish'`, or `'none'` if no stemming is to be used.|
-
 
 ## Example Usage
 
