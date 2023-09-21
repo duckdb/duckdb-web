@@ -129,6 +129,6 @@ result <- duckdb::duckdb_prepare_substrait(con, proto_bytes)
 df <- dbFetch(result)
 ```
 
-## Source Code
+## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdblabs/substrait)

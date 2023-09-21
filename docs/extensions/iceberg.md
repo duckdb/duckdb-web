@@ -7,6 +7,6 @@ The `iceberg` extension is a loadable extension that implements support for the 
 
 > This extension currently only works on the `main` branch of DuckDB (bleeding edge releases).
 
-## Source Code
+## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdblabs/postgres_scanner)

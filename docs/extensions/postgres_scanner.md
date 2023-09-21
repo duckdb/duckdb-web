@@ -53,6 +53,6 @@ The `postgres_scan` function takes three string parameters, the `libpq` connecti
 
 To use `filter_pushdown` use the `postgres_scan_pushdown` function.
 
-## Source Code
+## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdblabs/postgres_scanner)

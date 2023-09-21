@@ -200,6 +200,6 @@ WITH (FORMAT GDAL, DRIVER 'GeoJSON', LAYER_CREATION_OPTIONS 'WRITE_BBOX=YES');
 * `DRIVER`: is the GDAL driver to use for the export. See the table above for a list of available drivers.
 * `LAYER_CREATION_OPTIONS`: list of options to pass to the GDAL driver. See the GDAL docs for the driver you are using for a list of available options.
 
-## Source Code
+## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_spatial)
