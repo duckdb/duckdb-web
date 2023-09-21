@@ -41,6 +41,10 @@ The guides section contains compact how-to guides that are focused on achieving 
 * [How to view the query plan of a query](../guides/meta/explain)
 * [How to profile a query](../guides/meta/explain_analyze)
 
+## ODBC
+
+* [How to set up an ODBC application (and more!)](../guides/odbc/general)
+
 ## Python Client
 
 * [How to install the Python client](../guides/python/install)

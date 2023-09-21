@@ -103,6 +103,16 @@
           ]
         },
         {
+          "page": "ODBC",
+          "slug": "odbc",
+          "subfolderitems": [
+            {
+              "page": "ODBC Application",
+              "url": "general"
+            }
+          ]
+        },
+        {
           "page": "Python",
           "slug": "python",
           "subfolderitems": [
