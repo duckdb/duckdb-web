@@ -6,7 +6,7 @@ railroad: statements/createschema.js
 
 The `CREATE SCHEMA` statement creates a schema in the catalog. The default schema is `main`.
 
-### Examples
+## Examples
 
 ```sql
 -- create a schema
@@ -20,6 +20,6 @@ CREATE TABLE s2.t(id INTEGER PRIMARY KEY, j VARCHAR);
 SELECT * FROM s1.t s1t, s2.t s2t WHERE s1t.other_id = s2t.id;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

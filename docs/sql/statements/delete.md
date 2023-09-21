@@ -6,7 +6,7 @@ railroad: statements/delete.js
 
 The `DELETE` statement removes rows from the table identified by the table-name.
 
-### Examples
+## Examples
 
 ```sql
 -- remove the rows matching the condition "i=2" from the database
@@ -15,7 +15,7 @@ DELETE FROM tbl WHERE i=2;
 DELETE FROM tbl;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 

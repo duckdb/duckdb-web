@@ -6,7 +6,7 @@ railroad: statements/createtype.js
 
 The `CREATE TYPE` statement defines a new type in the catalog.
 
-### Examples
+## Examples
 
 ```sql
 -- create a simple enum type
@@ -19,7 +19,7 @@ CREATE TYPE one_thing AS UNION(number INTEGER, string VARCHAR);
 CREATE TYPE x_index AS INTEGER;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 

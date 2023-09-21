@@ -6,7 +6,7 @@ railroad: query_syntax/groupby.js
 
 The `HAVING` clause can be used after the `GROUP BY` clause to provide filter criteria *after* the grouping has been completed. In terms of syntax the `HAVING` clause is identical to the `WHERE` clause, but while the `WHERE` clause occurs before the grouping, the `HAVING` clause occurs after the grouping.
 
-### Examples
+## Examples
 
 ```sql
 -- count the number of entries in the "addresses" table that belong to each different city
@@ -23,6 +23,6 @@ GROUP BY city, street_name
 HAVING AVG(income) > 2 * MEDIAN(income);
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

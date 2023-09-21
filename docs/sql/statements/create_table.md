@@ -6,7 +6,7 @@ railroad: statements/createtable.js
 
 The `CREATE TABLE` statement creates a table in the catalog.
 
-### Examples
+## Examples
 
 ```sql
 -- create a table with two integer columns (i and j)
@@ -25,7 +25,7 @@ CREATE TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
 CREATE TABLE t1 AS FROM read_csv_auto ('path/file.csv');
 ```
 
-### Temporary Tables
+## Temporary Tables
 
 Temporary tables can be created using a `CREATE TEMP TABLE` statement (see diagram below). 
 Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped. 
@@ -39,7 +39,7 @@ CREATE TEMP TABLE t1 AS SELECT * FROM read_csv_auto ('path/file.csv');
 SET temp_directory='/path/to/directory/';
 ```
 
-### Create or Replace
+## Create or Replace
 
 The `CREATE OR REPLACE` syntax allows a new table to be created or for an existing table to be overwritten by the new table. This is shorthand for dropping the existing table and then creating the new one.
 
@@ -48,7 +48,7 @@ The `CREATE OR REPLACE` syntax allows a new table to be created or for an existi
 CREATE OR REPLACE TABLE t1(i INTEGER, j INTEGER);
 ```
 
-### If Not Exists
+## If Not Exists
 
 The `IF NOT EXISTS` syntax will only proceed with the creation of the table if it does not already exist. If the table already exists, no action will be taken and the existing table will remain in the database. 
 
@@ -57,7 +57,7 @@ The `IF NOT EXISTS` syntax will only proceed with the creation of the table if i
 CREATE TABLE IF NOT EXISTS t1(i INTEGER, j INTEGER);
 ```
 
-### Check Constraints
+## Check Constraints
 
 A `CHECK` constraint is an expression that must be satisfied by the values of every row in the table.
 
@@ -94,7 +94,7 @@ INSERT INTO t3 VALUES (2, 5, 3);
 -- Error: Constraint Error: CHECK constraint failed: t3
 ```
 
-### Foreign Key Constraints
+## Foreign Key Constraints
 
 A `FOREIGN KEY` is a column (or set of columns) that references another table's primary key. Foreign keys check referential integrity, i.e., the referred primary key must exist in the other table upon insertion.
 
@@ -138,7 +138,7 @@ CREATE TABLE t6(id INTEGER PRIMARY KEY, t5_id INTEGER, FOREIGN KEY (t5_id) REFER
 
 > Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
 
-### Generated Columns
+## Generated Columns
 
 The `[type] [GENERATED ALWAYS] AS (expr) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
 
@@ -160,6 +160,6 @@ CREATE TABLE t1(x FLOAT, two_x AS (2 * x));
 CREATE TABLE t1(x FLOAT, two_x FLOAT GENERATED ALWAYS AS (2 * x) VIRTUAL);
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

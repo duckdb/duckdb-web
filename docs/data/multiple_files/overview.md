@@ -7,7 +7,7 @@ redirect_from:
 
 DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read. See the [combining schemas](combining_schemas) page for tips on reading files with different schemas.
 
-### CSV
+## CSV
 
 ```sql
 -- read all files with a name ending in ".csv" in the folder "dir"
@@ -22,7 +22,7 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv']);
 SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True, filename=True);
 ```
 
-### Parquet
+## Parquet
 
 ```sql
 -- read all files that match the glob pattern
@@ -36,11 +36,11 @@ SELECT * FROM read_parquet('dir/**/*.parquet');
 ```
 
 
-### Multi-File Reads and Globs
+## Multi-File Reads and Globs
 
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
-#### List Parameter
+### List Parameter
 
 The read_parquet function can accept a list of filenames as the input parameter.
 
@@ -49,7 +49,7 @@ The read_parquet function can accept a list of filenames as the input parameter.
 SELECT * FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
 
-#### Glob Syntax
+### Glob Syntax
 
 Any file name input to the read_parquet function can either be an exact filename, or use a glob syntax to read multiple files that match a pattern.
 
@@ -70,7 +70,7 @@ Here is an example that reads all the files that end with `.parquet` located in 
 SELECT * FROM read_parquet('test/*.parquet');
 ```
 
-#### List of Globs
+### List of Globs
 
 The glob syntax and the list input parameter can be combined to scan files that meet one of multiple patterns.
 
@@ -81,7 +81,7 @@ SELECT * FROM read_parquet(['folder1/*.parquet', 'folder2/*.parquet']);
 
 DuckDB can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
 
-### Filename
+## Filename
 
 The `filename` argument can be used to add an extra `filename` column to the result that indicates which row came from which file. For example:
 
@@ -96,7 +96,7 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'], union_by_name=True
 | 1988-01-03 | New York, NY   | Los Angeles, CA | AA            | flights2.csv |
 
 
-### Glob Function to Find Filenames
+## Glob Function to Find Filenames
 
 The glob pattern matching syntax can also be used to search for filenames using the `glob` table function. 
 It accepts one parameter: the path to search (which may include glob patterns). 

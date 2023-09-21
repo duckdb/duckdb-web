@@ -5,14 +5,14 @@ title: Expression API
 
 The `Expression` class represents an instance of an [expression](../../sql/expressions/overview).
 
-### Why would I use the API?
+## Why would I use the API?
 
 Using this API makes it possible to dynamically build up expressions, which are typically created by the parser from the query string.  
 This allows you to skip that and have more fine-grained control over the used expressions.
 
 Below is a list of currently supported expressions that can be created through the API.  
 
-### Column Expression
+## Column Expression
 
 This expression references a column by name.
 
@@ -28,7 +28,7 @@ print(res)
 # [(1,), (2,), (3,), (4,)]
 ```
 
-### Star Expression
+## Star Expression
 
 This expression selects all columns of the input source.  
 
@@ -51,7 +51,7 @@ print(res)
 # [(1, 42), (2, 21), (3, 13), (4, 14)]
 ```
 
-### Constant Expression
+## Constant Expression
 
 This expression contains a single value.  
 
@@ -71,7 +71,7 @@ print(res)
 # [('hello',), ('hello',), ('hello',), ('hello',)]
 ```
 
-### Case Expression
+## Case Expression
 
 This expression contains a CASE WHEN (...) THEN (...) ELSE (...) END expression.  
 By default ELSE is NULL, it can be set using `.else(value=...)`  
@@ -103,7 +103,7 @@ print(res)
 # [('hello',), ('hello',), ('world',), ('hello',)]
 ```
 
-### Function Expression
+## Function Expression
 
 This expression contains a function call.  
 It can be constructed by providing the function name and an arbitrary amount of Expressions as arguments.
@@ -134,7 +134,7 @@ print(res)
 # [(True,), (True,), (False,), (True,)]
 ```
 
-### Common Operations
+## Common Operations
 
 The Expression class also contains many operations that can be applied to any Expression type.  
 
@@ -150,7 +150,7 @@ Create a IN expression against the provided expressions as the list.
 `.isnotin(*exprs: Expression)`  
 Create a NOT IN expression against the provided expressions as the list.
 
-#### Order Operations
+### Order Operations
 
 When expressions are provided to `DuckDBPyRelation.order()` these take effect:
 

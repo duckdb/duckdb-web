@@ -9,7 +9,7 @@ railroad: query_syntax/orderby.js
 Note that while `LIMIT` can be used without an `ORDER BY` clause, the results might not be deterministic without the `ORDER BY` clause. This can still be useful, however, for example when you want to inspect a quick snapshot of the data.
 
 
-### Examples
+## Examples
 
 ```sql
 -- select the first 5 rows from the addresses table
@@ -29,6 +29,6 @@ ORDER BY population DESC
 LIMIT 5;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

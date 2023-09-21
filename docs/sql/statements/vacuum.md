@@ -6,7 +6,7 @@ railroad: statements/vacuum.js
 
 The `VACUUM` statement is primarily in place for PostgreSQL compatibility.
 
-### Examples
+## Examples
 
 ```sql
 -- No-op.
@@ -17,7 +17,7 @@ VACUUM ANALYZE;
 VACUUM ANALYZE memory.main.my_table(my_column);
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram1"></div>
 

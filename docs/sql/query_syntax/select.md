@@ -7,7 +7,7 @@ blurb: The SELECT clause specifies the list of columns that will be returned by 
 
 The `SELECT` clause specifies the list of columns that will be returned by the query. While it appears first in the clause, *logically* the expressions here are executed only at the end. The `SELECT` clause can contain arbitrary expressions that transform the output, as well as aggregates and window functions.
 
-### Examples
+## Examples
 
 ```sql
 -- select all columns from the table called "table_name"
@@ -28,15 +28,15 @@ SELECT COLUMNS('number\d+') FROM addresses;
 SELECT MIN(COLUMNS(*)) FROM addresses;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 
-### Select List
+## Select List
 
 The `SELECT` clause contains a list of expressions that specify the result of a query. The select list can refer to any columns in the `FROM` clause, and combine them using expressions. As the output of a SQL query is a table - every expression in the `SELECT` clause also has a name. The expressions can be explicitly named using the `AS` clause (e.g., `expr AS name`). If a name is not provided by the user the expressions are named automatically by the system. 
 
-#### Star Expressions
+### Star Expressions
 
 ```sql
 -- select all columns from the table called "table_name"
@@ -47,7 +47,7 @@ SELECT COLUMNS('number\d+') FROM addresses;
 
 The [star expression](../expressions/star) is a special expression that expands to *multiple expressions* based on the contents of the `FROM` clause. In the simplest case, `*` expands to **all** expressions in the `FROM` clause. Columns can also be selected using regular expressions or lambda functions. See the [star expression page](../expressions/star) for more details.
 
-#### Distinct Clause
+### Distinct Clause
 
 ```sql
 -- select all unique cities from the addresses table
@@ -58,7 +58,7 @@ The `DISTINCT` clause can be used to return **only** the unique rows in the resu
 
 > Queries starting with `SELECT DISTINCT` run deduplication, which is an expensive operation. Therefore, only use `DISTINCT` if necessary.
 
-#### Distinct On Clause
+### Distinct On Clause
 
 ```sql
 -- select only the highest population city for each country
@@ -69,7 +69,7 @@ The `DISTINCT ON` clause returns only one row per unique value in the set of exp
 
 > When querying large data sets, using `DISTINCT` on all columns can be expensive. Therefore, consider using `DISTINCT ON` on a column (or a set of columns) which guaranetees a sufficient degree of uniqueness for your results. For example, using `DISTINCT ON` on the key column(s) of a table guarantees full uniqueness.
 
-#### Aggregates
+### Aggregates
 
 ```sql
 -- return the total number of rows in the addresses table
@@ -80,7 +80,7 @@ SELECT city, COUNT(*) FROM addresses GROUP BY city;
 
 [Aggregate functions](../aggregates) are special functions that *combine* multiple rows into a single value. When aggregate functions are present in the `SELECT` clause, the query is turned into an aggregate query. In an aggregate query, **all** expressions must either be part of an aggregate function, or part of a group (as specified by the [`GROUP BY clause`](groupby)).
 
-#### Window Functions
+### Window Functions
 
 ```sql
 -- generate a "row_number" column containing incremental identifiers for each row
@@ -91,7 +91,7 @@ SELECT amount - lag(amount) OVER (ORDER BY time) FROM sales;
 
 [Window functions](../window_functions) are special functions that allow the computation of values relative to *other rows* in a result. Window functions are marked by the `OVER` clause which contains the *window specification*. The window specification defines the frame or context in which the window function is computed. See the [window functions page](../window_functions) for more information.
 
-#### Unnest
+### Unnest
 
 ```sql
 -- unnest an array by one level

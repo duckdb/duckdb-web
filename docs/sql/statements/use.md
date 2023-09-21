@@ -6,7 +6,7 @@ railroad: statements/use.js
 
 The `USE` statement selects a database and optional schema to use as the default.
 
-### Examples
+## Examples
 
 ```sql
 --- Sets the 'memory' database as the default
@@ -15,7 +15,7 @@ USE memory;
 USE duck.main;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram1"></div>
 
