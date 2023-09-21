@@ -3,7 +3,9 @@ layout: docu
 title: Functions
 railroad: expressions/function.js
 ---
-Functions are ...
+
+## Function Syntax
+
 <div id="rrdiagram"></div>
 
 ### Query Functions
