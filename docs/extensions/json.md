@@ -7,8 +7,8 @@ The `json` extension is a loadable extension that implements SQL functions that 
 
 ## JSON Type
 
-The JSON extension makes use of the **JSON** logical type.
-The **JSON** logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as **VARCHAR**, i.e., a regular string.
+The JSON extension makes use of the `JSON` logical type.
+The `JSON` logical type is interpreted as JSON, i.e., parsed, in JSON functions rather than interpreted as `VARCHAR`, i.e., a regular string.
 All JSON creation functions return values of this type.
 
 We also allow any of our types to be casted to JSON, and JSON to be casted back to any of our types, for example:
@@ -36,20 +36,20 @@ The following two table functions are used to read JSON:
 
 | Function | Description |
 |:---|:---|
-| `read_json_objects(`*`filename`*`)`   | Read 1 JSON objects from **filename**, where **filename** can also be a list of files, or a glob pattern |
-| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'newline_delimited'` |
-| `read_json_objects_auto(`*`filename`*`)` | Alias for `read_json_objects` with parameter **format** set to `'auto'` |
+| `read_json_objects(`*`filename`*`)`   | Read a JSON object from `filename`, where `filename` can also be a list of files or a glob pattern |
+| `read_ndjson_objects(`*`filename`*`)` | Alias for `read_json_objects` with parameter `format` set to `'newline_delimited'` |
+| `read_json_objects_auto(`*`filename`*`)` | Alias for `read_json_objects` with parameter `format` set to `'auto'` |
 
 These functions have the following parameters:
 
 | Name | Description | Type | Default
 |:--|:-----|:-|:-|
-| `maximum_object_size` | The maximum size of a JSON object (in bytes) | uinteger | `16777216` |
-| `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | varchar | `'array'` |
-| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | bool | false |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., **t.json.gz** will use gzip, **t.json** will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | varchar | `'auto'` |
-| `filename` | Whether or not an extra `filename` column should be included in the result. | bool | false |
-| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../data/partitioning/hive_partitioning). | bool | false |
+| `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
+| `format` | Can be one of `['auto', 'unstructured', 'newline_delimited', 'array']` | `VARCHAR` | `'array'` |
+| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `'newline_delimited'`) | `BOOL` | `false` |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `'none'`, `'gzip'`, `'zstd'`, and `'auto'`. | `VARCHAR` | `'auto'` |
+| `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
+| `hive_partitioning` | Whether or not to interpret the path as a [hive partitioned path](../data/partitioning/hive_partitioning). | `BOOL` | `false` |
 
 The `format` parameter specifies how to read the JSON from a file.
 With `'unstructured'`, the top-level JSON is read, e.g.:
@@ -99,23 +99,23 @@ DuckDB also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
 |:----|:-------|
-| `read_json(`*`filename`*`)`   | Read JSON from **filename**, where **filename** can also be a list of files, or a glob pattern |
-| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter **format** set to `'newline_delimited'` |
+| `read_json(`*`filename`*`)`   | Read JSON from `filename`, where `filename` can also be a list of files, or a glob pattern |
+| `read_ndjson(`*`filename`*`)` | Alias for `read_json` with parameter `format` set to `'newline_delimited'` |
 | `read_json_auto(`*`filename`*`)`   | Alias for `read_json` with all auto-detection enabled |
-| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter **format** set to `'newline_delimited'` |
+| `read_ndjson_auto(`*`filename`*`)` | Alias for `read_json_auto` with parameter `format` set to `'newline_delimited'` |
 
 Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
 
 | Name | Description | Type | Default |
 |:--|:------|:-|:-|
-| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | struct | `(empty)` |
-| `records` | Can be one of `['auto', 'true', 'false']` | varchar | `'records'` |
-| `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | bool | `false` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | ubigint | `20480` |
-| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | bigint | `-1` |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | varchar | `'iso'`|
-| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas). | bool | false |
+| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
+| `records` | Can be one of `['auto', 'true', 'false']` | `VARCHAR` | `'records'` |
+| `auto_detect` | Whether to auto-detect detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
+| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
+| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
+| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'` |
+| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format](../sql/functions/dateformat) | `VARCHAR` | `'iso'`|
+| `union_by_name` | Whether the schema's of multiple JSON files should be [unified](../data/multiple_files/combining_schemas). | `BOOL` | `false` |
 
 Example usage:
 ```sql
@@ -210,9 +210,9 @@ For additional examples reading more complex data, please see the [Shredding Dee
 
 When the JSON extension is installed, `FORMAT JSON` is supported for `COPY FROM`, `COPY TO`, `EXPORT DATABASE` and `IMPORT DATABASE`. See [Copy](../sql/statements/copy) and [Import/Export](../sql/statements/export).
 
-By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY TRUE`, i.e.,
+By default, `COPY` expects newline-delimited JSON. If you prefer copying data to/from a JSON array, you can specify `ARRAY true`, i.e.,
 ```sql
-COPY (SELECT * FROM range(5)) TO 'my.json' (ARRAY TRUE);
+COPY (SELECT * FROM range(5)) TO 'my.json' (ARRAY true);
 ```
 Will create the following file:
 ```json
@@ -228,12 +228,12 @@ Will create the following file:
 This can be read like so:
 ```sql
 CREATE TABLE test (range BIGINT);
-COPY test FROM 'my.json' (ARRAY TRUE);
+COPY test FROM 'my.json' (ARRAY true);
 ```
 
 The format can be detected automatically the format like so:
 ```sql
-COPY test FROM 'my.json' (AUTO_DETECT TRUE);
+COPY test FROM 'my.json' (AUTO_DETECT true);
 ```
 
 ## JSON Scalar Functions
@@ -247,9 +247,9 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 |:---|:----|
 | `json(`*`json`*`)` | Parse and minify *`json`* |
 | `json_valid(`*`json`*`)` | Return whether *`json`* is valid JSON |
-| `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of array lengths |
-| `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of **OBJECT**, **ARRAY**, **BIGINT**, **UBIGINT**, **VARCHAR**, **BOOLEAN**, **NULL**. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of types |
-| `json_keys(`*`json `*`[, `*`path`*`])` | Returns the keys of `json` as a **LIST** of **VARCHAR**, if `json` is a JSON object. If *`path`* is specified, return the keys of the JSON object at the given *`path`*. If *`path`* is a **LIST**, the result will be **LIST** of **LIST** of **VARCHAR** |
+| `json_array_length(`*`json `*`[, `*`path`*`])` | Return the number of elements in the JSON array *`json`*, or `0` if it is not a JSON array. If *`path`* is specified, return the number of elements in the JSON array at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of array lengths |
+| `json_type(`*`json `*`[, `*`path`*`])` | Return the type of the supplied *`json`*, which is one of `OBJECT`, `ARRAY`, `BIGINT`, `UBIGINT`, `VARCHAR`, `BOOLEAN`, `NULL`. If *`path`* is specified, return the type of the element at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of types |
+| `json_keys(`*`json `*`[, `*`path`*`])` | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If *`path`* is specified, return the keys of the JSON object at the given *`path`*. If *`path`* is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR` |
 | `json_structure(`*`json`*`)` | Return the structure of *`json`*. Defaults to `JSON` the structure is inconsistent (e.g., incompatible types in an array) |
 | `json_contains(`*`json_haystack`*`, `*`json_needle`*`)` | Returns `true` if *`json_needle`* is contained in *`json_haystack`*. Both parameters are of JSON type, but *`json_needle`* can also be a numeric value or a string, however the string must be wrapped in double quotes |
 
@@ -317,13 +317,13 @@ SELECT json_contains('{"top_key":{"key":"value"}}', '{"key":"value"}');
 
 ## JSON Extraction Functions
 
-There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the **JSON** logical type.
+There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
 These functions supports the same two location notations as the previous functions.
 
 | Function | Alias | Operator | Description |
 |:---|:---|:-|
-| `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract **JSON** from *`json`* at the given *`path`*. If *`path`* is a **LIST**, the result will be a **LIST** of **JSON** |
-| `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract **VARCHAR** from *`json`* at the given *`path`*. If *`path`* is a **LIST**, the result will be a **LIST** of **VARCHAR** |
+| `json_extract(`*`json`*`,`*`path`*`)` | `json_extract_path` | `->` | Extract `JSON` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `JSON` |
+| `json_extract_string(`*`json`*`,`*`path`*`)` | `json_extract_path_text` | `->>` | Extract `VARCHAR` from *`json`* at the given *`path`*. If *`path`* is a `LIST`, the result will be a `LIST` of `VARCHAR` |
 
 Examples:
 ```sql
@@ -375,10 +375,10 @@ The following functions are used to create JSON.
 
 | Function | Description |
 |:--|:----|
-| `to_json(`*`any`*`)` | Create **JSON** from a value of *`any`* type. Our **LIST** is converted to a JSON array, and our **STRUCT** and **MAP** are converted to a JSON object |
+| `to_json(`*`any`*`)` | Create `JSON` from a value of *`any`* type. Our `LIST` is converted to a JSON array, and our `STRUCT` and `MAP` are converted to a JSON object |
 | `json_quote(`*`any`*`)` | Alias for `to_json` |
-| `array_to_json(`*`list`*`)` | Alias for `to_json` that only accepts **LIST** |
-| `row_to_json(`*`list`*`)` | Alias for `to_json` that only accepts **STRUCT** |
+| `array_to_json(`*`list`*`)` | Alias for `to_json` that only accepts `LIST` |
+| `row_to_json(`*`list`*`)` | Alias for `to_json` that only accepts `STRUCT` |
 | `json_array([`*`any`*`, ...])` | Create a JSON array from *`any`* number of values |
 | `json_object([`*`key`*`,`*`value`*`, ...])` | Create a JSON object from any number of *`key`*, *`value`* pairs |
 | `json_merge_patch(`*`json`*`,`*`json`*`)` | Merge two json documents together |
@@ -431,7 +431,7 @@ SELECT json_group_structure(j) FROM example;
 ## Transforming JSON
 
 In many cases, it is inefficient to extract values from JSON one-by-one.
-Instead, we can "extract" all values at once, transforming JSON to the nested types **LIST** and **STRUCT**.
+Instead, we can "extract" all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
 | Function | Description |
 |:---|:---|
@@ -442,7 +442,7 @@ Instead, we can "extract" all values at once, transforming JSON to the nested ty
 
 The *`structure`* argument is JSON of the same form as returned by `json_structure`.
 The *`structure`* argument can be modified to transform the JSON into the desired structure and types.
-It is possible to extract fewer key/value pairs than are present in the JSON, and it is also possible to extract more: missing keys become **NULL**.
+It is possible to extract fewer key/value pairs than are present in the JSON, and it is also possible to extract more: missing keys become `NULL`.
 
 Examples:
 ```sql
