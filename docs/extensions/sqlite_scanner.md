@@ -131,6 +131,6 @@ If you want to run the `sqlite_scan` procedure more than once in the same DuckDB
 CALL sqlite_attach('sakila.db', overwrite=true);
 ```
 
-## Source Code
+## GitHub Repository
 
 [<span class="github">GitHub</span>](https://github.com/duckdblabs/sqlite_scanner)
