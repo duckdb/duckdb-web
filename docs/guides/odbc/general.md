@@ -82,7 +82,7 @@ The following is a step-by-step guide to setting up an application that uses ODB
 
 The first step is to include the SQL header files:
 
-```c
+```cpp
 #include <sql.h>
 #include <sqlext.h>
 ```
@@ -127,7 +127,7 @@ LDLIBS=-L/path/to/duckdb_odbc/libduckdb_odbc.dylib
 
 Then set up the ODBC handles, allocate them, and connect to the database.  First the environment handle is allocated, then the environment is set to ODBC version 3, then the connection handle is allocated, and finally the connection is made to the database.  The following code snippet shows how to do this:
 
-```c
+```cpp
 SQLHANDLE env;
 SQLHANDLE dbc;
 
@@ -147,14 +147,14 @@ std::cout << "Connected!" << std::endl;
 
 Now that the application is set up, we can add a query to it.  First, we need to allocate a statement handle:
 
-```c
+```cpp
 SQLHANDLE stmt;
 SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
 ```
 
 Then we can execute a query:
 
-```c
+```cpp
 SQLExecDirect(stmt, (SQLCHAR*)"SELECT * FROM integers", SQL_NTS);
 ```
 
@@ -162,7 +162,7 @@ SQLExecDirect(stmt, (SQLCHAR*)"SELECT * FROM integers", SQL_NTS);
 
 Now that we have executed a query, we can fetch the results.  First, we need to bind the columns in the result set to buffers:
 
-```c
+```cpp
 SQLLEN int_val;
 SQLLEN null_val;
 SQLBindCol(stmt, 1, SQL_C_SLONG, &int_val, 0, &null_val);
@@ -170,7 +170,7 @@ SQLBindCol(stmt, 1, SQL_C_SLONG, &int_val, 0, &null_val);
 
 Then we can fetch the results:
 
-```c
+```cpp
 SQLFetch(stmt);
 ```
 
@@ -188,19 +188,19 @@ or do any other processing we want.  As well as executing more queries and doing
 
 Finally, we need to free the handles and disconnect from the database.  First, we need to free the statement handle:
 
-```c
+```cpp
 SQLFreeHandle(SQL_HANDLE_STMT, stmt);
 ```
 
 Then we need to disconnect from the database:
 
-```c
+```cpp
 SQLDisconnect(dbc);
 ```
 
 And finally, we need to free the connection handle and the environment handle:
 
-```c
+```cpp
 SQLFreeHandle(SQL_HANDLE_DBC, dbc);
 SQLFreeHandle(SQL_HANDLE_ENV, env);
 ```
