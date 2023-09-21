@@ -72,7 +72,7 @@ Note that GET requests on the extensions needs to be [CORS enabled](https://www.
 
 ### Tooling
 
-Both DuckDB-Wasm and its extensions have been compiled using Emscripten 3.1.45.
+Both DuckDB-Wasm and its extensions have been compiled using latest packaged Emscripten toolchain.
 
 <!-- markdownlint-disable-next-line -->
 {% include iframe.html src="https://shell.duckdb.org" %}
