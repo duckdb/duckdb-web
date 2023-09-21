@@ -7,7 +7,7 @@ blurb: The FROM clause can contain a single table, a combination of multiple tab
 
 The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together using `JOIN` clauses, or another `SELECT` query inside a subquery node. DuckDB also has an optional `FROM`-first syntax which enables you to also query without a `SELECT` statement.
 
-### Examples
+## Examples
 
 ```sql
 -- select all columns from the table called "table_name"
@@ -38,7 +38,7 @@ SELECT * FROM table_name TABLESAMPLE 10 ROWS;
 FROM range(100) AS t(i) SELECT sum(t.i) WHERE i % 2 = 0;
 ```
 
-### Joins
+## Joins
 
 Joins are a fundamental relational operation used to connect two tables or relations horizontally.
 The relations are referred to as the _left_ and _right_ sides of the join
@@ -48,7 +48,7 @@ Each result row has the columns from both relations.
 A join uses a rule to match pairs of rows from each relation.
 Often this is a predicate, but there are other implied rules that may be specified.
 
-#### Outer Joins
+### Outer Joins
 
 Rows that do not have any matches can still be returned if an `OUTER` join is specified.
 Outer joins can be one of:
@@ -61,7 +61,7 @@ A join that is not `OUTER` is `INNER` (only rows that get paired are returned).
 
 When an unpaired row is returned, the attributes from the other table are set to `NULL`.
 
-#### Cross Product Joins
+### Cross Product Joins
 
 The simplest type of join is a `CROSS JOIN`. 
 There are no conditions for this type of join, 
@@ -72,7 +72,7 @@ and it just returns all the possible pairs.
 SELECT a.*, b.* FROM a CROSS JOIN b;
 ```
 
-#### Conditional Joins
+### Conditional Joins
 
 Most joins are specified by a predicate that connects 
 attributes from one side to attributes from the other side.
@@ -130,7 +130,7 @@ WHERE s1.time > s2.time
   AND s1.cost < s2.cost;
 ```
 
-#### Semi and Anti Joins
+### Semi and Anti Joins
 
 Semi joins return rows from the left table that have at least one match in the right table. Anti joins return rows from the left table that have _no_ matches in the right table. When using a semi or anti join the result will never have more rows than the left hand side table. Semi and anti joins provide the same logic as [(NOT) IN](../expressions/in) statements.
 
@@ -148,7 +148,7 @@ FROM cars ANTI JOIN safety_data
 ON cars.safety_report_id = safety_data.report_id;
 ```
 
-#### Lateral Joins
+### Lateral Joins
 
 The `LATERAL` keyword allows subqueries in the `FROM` clause to refer to previous subqueries. This feature is also known as a _lateral join_.
 
@@ -207,7 +207,7 @@ SELECT * FROM t1, LATERAL (SELECT i + j) t2(k);
 
 > DuckDB detects when `LATERAL` joins should be used, making the use of the `LATERAL` keyword optional.
 
-#### Positional Joins
+### Positional Joins
 
 When working with data frames or other embedded tables of the same size, 
 the rows may have a natural correspondence based on their physical order.
@@ -232,7 +232,7 @@ FROM df1 POSITIONAL JOIN df2;
 
 Positional joins are always `FULL OUTER` joins.
 
-#### As-Of Joins
+### As-Of Joins
 
 A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).
@@ -282,6 +282,6 @@ SELECT t.symbol, t.when AS trade_when, p.when AS price_when, price
 FROM trades t ASOF LEFT JOIN prices p USING (symbol, when);
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

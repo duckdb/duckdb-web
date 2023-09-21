@@ -7,7 +7,7 @@ railroad: query_syntax/groupby.js
 `GROUPING SETS`, `ROLLUP` and `CUBE` can be used in the `GROUP BY` clause to perform a grouping over multiple dimensions within the same query. 
 Note that this syntax is not compatible with [`GROUP BY ALL`](groupby#group-by-all).
 
-### Examples
+## Examples
 
 ```sql
 -- compute the average income along the provided four different dimensions
@@ -25,7 +25,7 @@ FROM addresses
 GROUP BY ROLLUP (city, street_name);
 ```
 
-### Description
+## Description
 
 `GROUPING SETS` perform the same aggregate across different `GROUP BY clauses` in a single query.
 
@@ -90,6 +90,6 @@ The `ROLLUP` clause will produce all "sub-groups" of a grouping set, e.g., `ROLL
 
 `GROUPING` (alias `GROUPING_ID`) is a special aggregate function that can be used in combination with grouping sets. The `GROUPING` function takes as parameters a group, and returns 0 if the group is included in the grouping for that row, or 1 otherwise. This is primarily useful because the grouping columns by which we do not aggregate return NULL, which is ambiguous with groups that are actually the value `NULL`. The `GROUPING` (or `GROUPING_ID`) function can be used to distinguish these two cases.
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

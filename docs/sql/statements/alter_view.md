@@ -5,7 +5,7 @@ title: Alter View
 
 The `ALTER VIEW` statement changes the schema of an existing view in the catalog.
 
-### Examples
+## Examples
 
 ```sql
 -- rename a view

@@ -4,7 +4,7 @@ title: Star Expression
 railroad: expressions/star.js
 ---
 
-### Examples
+## Examples
 
 ```sql
 -- select all columns present in the FROM clause
@@ -21,11 +21,11 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM addresses;
 SELECT COLUMNS('number\d+') FROM addresses;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>
 
-### Star Expression
+## Star Expression
 
 The `*` expression can be used in a `SELECT` statement to select all columns that are projected in the `FROM` clause.
 
@@ -35,7 +35,7 @@ SELECT * FROM tbl;
 
 The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 
-#### EXCLUDE Clause
+### EXCLUDE Clause
 
 `EXCLUDE` allows us to exclude specific columns from the `*` expression.
 
@@ -43,7 +43,7 @@ The `*` expression can be modified using the `EXCLUDE` and `REPLACE`.
 SELECT * EXCLUDE (col) FROM tbl;
 ```
 
-#### Replace Clause
+### Replace Clause
 
 `REPLACE` allows us to replace specific columns with different expressions.
 
@@ -51,7 +51,7 @@ SELECT * EXCLUDE (col) FROM tbl;
 SELECT * REPLACE (col / 1000 AS col) FROM tbl;
 ```
 
-### COLUMNS
+## COLUMNS
 
 The `COLUMNS` expression can be used to execute the same expression on multiple columns. Like the `*` expression, it can only be used in the `SELECT` clause.
 
@@ -88,7 +88,7 @@ SELECT COLUMNS(*) + COLUMNS(*) FROM numbers;
 | 6                         | NULL                              |
 
 
-### COLUMNS Regular Expression
+## COLUMNS Regular Expression
 
 `COLUMNS` supports passing a regex in as a string constant:
 
@@ -102,7 +102,7 @@ SELECT COLUMNS('(id|numbers?)') FROM numbers;
 | 2  | 20     |
 | 3  | NULL   |
 
-### COLUMNS Lambda Function
+## COLUMNS Lambda Function
 
 `COLUMNS` also supports passing in a lambda function. The lambda function will be evaluated for all columns present in the `FROM` clause, and only columns that match the lambda function will be returned. This allows the execution of arbitrary expressions in order to select columns.
 
@@ -116,7 +116,7 @@ SELECT COLUMNS(c -> c LIKE '%num%') FROM numbers;
 | 20     |
 | NULL   |
 
-### Struct.*
+## Struct.*
 
 The `*` expression can also be used to retrieve all keys from a struct as separate columns.
 This is particularly useful when a prior operation creates a struct of unknown shape, or if a query must handle any potential struct keys.

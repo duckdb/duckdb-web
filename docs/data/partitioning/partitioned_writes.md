@@ -3,7 +3,7 @@ layout: docu
 title: Partitioned Writes
 ---
 
-### Examples
+## Examples
 
 ```sql
 -- write a table to a hive partitioned data set of parquet files
@@ -12,7 +12,7 @@ COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 COPY orders TO 'orders' (FORMAT CSV, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE 1);
 ```
 
-### Partitioned Writes
+## Partitioned Writes
 
 When the `partition_by` clause is specified for the `COPY` statement, the files are written in a [hive partitioned](hive_partitioning) folder hierarchy. The target is the name of the root directory (in the example above: `orders`). The files are written in-order in the file hierarchy. Currently, one file is written per thread to each directory.
 
@@ -37,11 +37,11 @@ The values of the partitions are automatically extracted from the data. Note tha
 > Writing data into many small partitions is expensive. It is generally recommended to have at least  `100MB` of data per partition. 
 
 
-#### Overwriting
+### Overwriting
 
 By default the partitioned write will not allow overwriting existing directories. Use the `OVERWRITE_OR_IGNORE` option to allow overwriting an existing directory.
 
-#### Filename Pattern
+### Filename Pattern
 
 By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
 * `{i}` will be replaced by an index

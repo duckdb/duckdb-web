@@ -5,9 +5,9 @@ title: Parquet Tips
 
 Below is a collection of tips to help when dealing with Parquet files.
 
-### Tips for reading Parquet files
+## Tips for reading Parquet files
 
-#### Use `union_by_name` when loading files with different schemas
+### Use `union_by_name` when loading files with different schemas
 
 The `union_by_name` option can be used to unify the schema of files that have different or missing columns. For files that do not have certain columns, `NULL` values are filled in.  
 
@@ -15,9 +15,9 @@ The `union_by_name` option can be used to unify the schema of files that have di
 SELECT * FROM read_parquet('flights*.parquet', union_by_name=True);
 ```
 
-### Tips for writing Parquet files
+## Tips for writing Parquet files
 
-#### Enabling `per_thread_output`
+### Enabling `per_thread_output`
 
 If the final number of parquet files is not important, writing one file per thread can significantly improve performance.
 Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [hive partitioning](../partitioning/hive_partitioning) structure are good ways to transparently handle multiple files.
@@ -26,7 +26,7 @@ Using a [glob pattern](../multiple_files/overview#glob-syntax) upon read or a [h
 COPY (FROM generate_series(10000000)) TO 'test.parquet' (FORMAT PARQUET, PER_THREAD_OUTPUT TRUE);
 ```
 
-#### Selecting a `row_group_size`
+### Selecting a `row_group_size`
 
 The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB), and a default of 122880.
 A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset.

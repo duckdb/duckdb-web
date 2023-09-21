@@ -10,7 +10,7 @@ Collations provide rules for how text should be sorted or compared in the execut
 
 By default, the `BINARY` collation is used. That means that strings are ordered and compared based only on their binary contents. This makes sense for standard ASCII characters (i.e., the letters A-Z and numbers 0-9), but generally does not make much sense for special unicode characters. It is, however, by far the fastest method of performing ordering and comparisons. Hence it is recommended to stick with the `BINARY` collation unless required otherwise.
 
-### Using Collations
+## Using Collations
 
 In the stand-alone installation of DuckDB three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [here](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.
 
@@ -37,7 +37,7 @@ SELECT 'hello' COLLATE NOCASE.NOACCENT='hElLÖ';
 -- true
 ```
 
-### Default Collations
+## Default Collations
 
 The collations we have seen so far have all been specified *per expression*. It is also possible to specify a default collator, either on the global database level or on a base table column. The `PRAGMA` `default_collation` can be used to specify the global default collator. This is the collator that will be used if no other one is specified.
 
@@ -75,7 +75,7 @@ SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE=other_
 -- hännes|HÄNNES
 ```
 
-### ICU Collations
+## ICU Collations
 
 The collations we have seen so far are not region dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to include the ICU extension. This can be found in the `extension/icu` folder in the project. Using the C++ API, the extension can be loaded as follows:
 

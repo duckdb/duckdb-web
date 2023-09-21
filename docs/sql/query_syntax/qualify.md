@@ -13,7 +13,7 @@ Note that this is filtering based on [`WINDOW` functions](../../sql/window_funct
 
 The position of where to specify a `QUALIFY` clause is following the [`WINDOW` clause](../../sql/query_syntax/window) in a `SELECT` statement (`WINDOW` does not need to be specified), and before the [`ORDER BY`](../../sql/query_syntax/orderby).
 
-### Examples
+## Examples
 
 Each of the following examples produce the same output, located below.
 
@@ -82,6 +82,6 @@ WHERE
 | pg_catalog  | col_description | 1             |
 | pg_catalog  | format_pg_type  | 2             |
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram"></div>

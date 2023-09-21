@@ -3,7 +3,7 @@ layout: docu
 title: Hive Partitioning
 ---
 
-### Examples
+## Examples
 
 ```sql
 -- read data from a hive partitioned data set
@@ -14,7 +14,7 @@ SELECT * FROM parquet_scan('orders/*/*/*.parquet', hive_partitioning=1);
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
 ```
 
-### Hive Partitioning
+## Hive Partitioning
 
 Hive partitioning is a [partitioning strategy](https://en.wikipedia.org/wiki/Partition_(database)) that is used to split a table into multiple files based on **partition keys**. The files are organized into folders. Within each folder, the **partition key** has a value that is determined by the name of the folder.
 
@@ -44,7 +44,7 @@ SELECT * FROM read_parquet('orders/*/*/*.parquet', hive_partitioning=1);
 
 When we specify the `hive_partitioning` flag, the values of the columns will be read from the directories.
 
-#### Filter Pushdown
+### Filter Pushdown
 
 Filters on the partition keys are automatically pushed down into the files. This way the system skips reading files that are not necessary to answer a query. For example, consider the following query on the above dataset:
 
@@ -64,11 +64,11 @@ orders
          └── file5.parquet
 ```
 
-#### Autodetection
+### Autodetection
 
 By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The autodetection will look at the names of the folders and search for a 'key'='value' pattern. This behaviour can be overridden by setting the `hive_partitioning` flag manually.
 
-#### Hive Types
+### Hive Types
 
 `hive_types` is a way to specify the logical types of the hive partitions in a struct:
 
@@ -79,6 +79,6 @@ FROM read_parquet('dir/**/*.parquet', hive_partitioning=1, hive_types={'release'
 `hive_types` will be autodetected for the following types: `DATE`, `TIMESTAMP` and `BIGINT`. To switch off the autodetection, the flag `hive_types_autocast=0` can be set.
 
 
-#### Writing Partitioned Files
+### Writing Partitioned Files
 
 See the [Partitioned Writes](partitioned_writes) section.

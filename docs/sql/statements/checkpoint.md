@@ -7,7 +7,7 @@ railroad: statements/checkpoint.js
 The `CHECKPOINT` statement synchronizes data in the write-ahead log (WAL) to the database data file. For in-memory
 databases this statement will succeed with no effect.
 
-### Examples
+## Examples
 
 ```sql
 -- Synchronize data in the default database
@@ -18,14 +18,14 @@ CHECKPOINT file_db;
 FORCE CHECKPOINT;
 ```
 
-### Syntax
+## Syntax
 
 <div id="rrdiagram1"></div>
 
 Checkpoint operations happen automatically based on the WAL size (see [Configuration](../configuration)). This
 statement is for manual checkpoint actions.
 
-### Behavior
+## Behavior
 
 The default `CHECKPOINT` command will fail if there are any running transactions. Including `FORCE` will abort any
 transactions and execute the checkpoint operation.
