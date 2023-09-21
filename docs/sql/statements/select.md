@@ -4,6 +4,7 @@ title: Select Statement
 railroad: statements/select.js
 blurb: The SELECT statement retrieves rows from the database.
 ---
+
 The `SELECT` statement retrieves rows from the database.
 
 ### Examples

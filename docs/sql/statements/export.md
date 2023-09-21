@@ -3,6 +3,7 @@ layout: docu
 title: Export & Import Database
 railroad: statements/export.js
 ---
+
 The `EXPORT DATABASE` command allows you to export the contents of the database to a specific directory. The `IMPORT DATABASE` command allows you to then read the contents again.
 
 ### Examples

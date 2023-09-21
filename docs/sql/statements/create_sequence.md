@@ -3,6 +3,7 @@ layout: docu
 title: Create Sequence
 railroad: statements/createsequence.js
 ---
+
 The `CREATE SEQUENCE` statement creates a new sequence number generator.
 
 ### Examples

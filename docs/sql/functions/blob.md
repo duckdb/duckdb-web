@@ -2,6 +2,7 @@
 layout: docu
 title: Blob Functions
 ---
+
 This section describes functions and operators for examining and manipulating blob values.
 
 | Function | Description | Example | Result |

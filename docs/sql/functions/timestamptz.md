@@ -2,6 +2,7 @@
 layout: docu
 title: Timestamp With Time Zone Functions
 ---
+
 This section describes functions and operators for examining and manipulating `TIMESTAMP WITH TIME ZONE` values.
 
 Despite the name, these values do not store a time zone - just an instant like `TIMESTAMP`.

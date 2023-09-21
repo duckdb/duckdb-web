@@ -2,6 +2,7 @@
 layout: docu
 title: Bitstring Functions
 ---
+
 This section describes functions and operators for examining and manipulating bit values.
 Bitstrings must be of equal length when performing the bitwise operands AND, OR and XOR. When bit shifting, the original length of the string is preserved.
 

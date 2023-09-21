@@ -3,6 +3,7 @@ layout: docu
 title: Create Table
 railroad: statements/createtable.js
 ---
+
 The `CREATE TABLE` statement creates a table in the catalog.
 
 ### Examples

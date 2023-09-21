@@ -3,6 +3,7 @@ layout: docu
 title: Update Statement
 railroad: statements/update.js
 ---
+
 The `UPDATE` statement modifies the values of rows in a table.
 
 ### Examples

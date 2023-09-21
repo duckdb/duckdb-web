@@ -2,6 +2,7 @@
 layout: docu
 title: Timestamp Functions
 ---
+
 This section describes functions and operators for examining and manipulating `TIMESTAMP` values.
 
 ## Timestamp Operators

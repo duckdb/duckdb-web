@@ -2,6 +2,7 @@
 layout: docu
 title: Interval Functions
 ---
+
 This section describes functions and operators for examining and manipulating `INTERVAL` values.
 
 ## Interval Operators

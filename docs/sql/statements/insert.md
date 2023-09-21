@@ -3,6 +3,7 @@ layout: docu
 title: Insert Statement
 railroad: statements/insert.js
 ---
+
 The `INSERT` statement inserts new data into a table.
 
 ### Examples

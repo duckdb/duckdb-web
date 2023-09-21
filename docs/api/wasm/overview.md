@@ -3,8 +3,8 @@ layout: docu
 title: DuckDB Wasm
 redirect_from:
   - /docs/api/wasm
-
 ---
+
 DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
 
 <!-- markdownlint-disable-next-line -->

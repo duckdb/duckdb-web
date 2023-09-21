@@ -3,6 +3,7 @@ layout: docu
 title: Subqueries
 railroad: expressions/subqueries.js
 ---
+
 ## Scalar Subquery
 
 <div id="rrdiagram1"></div>

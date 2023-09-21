@@ -3,6 +3,7 @@ layout: docu
 title: GROUP BY Clause
 railroad: query_syntax/groupby.js
 ---
+
 The `GROUP BY` clause specifies which grouping columns should be used to perform any aggregations in the `SELECT` clause.
 If the `GROUP BY` clause is specified, the query is always an aggregate query, even if no aggregations are present in the `SELECT` clause.
 

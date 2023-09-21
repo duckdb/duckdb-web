@@ -2,6 +2,7 @@
 layout: docu
 title: Time Functions
 ---
+
 This section describes functions and operators for examining and manipulating `TIME` values.
 
 ## Time Operators
