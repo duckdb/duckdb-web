@@ -7,8 +7,8 @@ title: Official Extensions
 |---|-----|--|
 | arrow [<span class="github">GitHub</span>](https://github.com/duckdblabs/arrow)                                           | A zero-copy data integration between Apache Arrow and DuckDB                       |                 |
 | autocomplete                                                                                                              | Adds support for autocomplete in the shell                                         |                 |
-| aws                                                                                                                       | Provides features that depend on the AWS SDK                                       |                 |
-| azure                                                                                                                     | Adds a filesystem abstraction for Azure blob storage to DuckDB                     |                 |
+| aws [<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_aws)                                        | Provides features that depend on the AWS SDK                                       |                 |
+| azure [<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_azure)                                    | Adds a filesystem abstraction for Azure blob storage to DuckDB                     |                 |
 | [excel](excel)                                                                                                            | Adds support for Excel-like format strings                                         |                 |
 | [fts](full_text_search)                                                                                                   | Adds support for Full-Text Search Indexes                                          |                 |
 | [httpfs](httpfs)                                                                                                          | Adds support for reading and writing files over a HTTP(S) connection               | http, https, s3 |
