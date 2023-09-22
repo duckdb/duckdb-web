@@ -528,12 +528,12 @@ The query looks like:
 
 ```sql
 WITH win AS (
-SELECT p.k, p.t, v,
-    rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
-FROM probe p INNER JOIN build b
-  ON p.k = b.k
- AND p.t >= b.t
-QUALIFY r = 1
+  SELECT p.k, p.t, v,
+      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
+  FROM probe p INNER JOIN build b
+    ON p.k = b.k
+  AND p.t >= b.t
+  QUALIFY r = 1
 ) 
 SELECT k, t, v
 FROM win;
@@ -597,13 +597,13 @@ ORDER BY 1, 2;
 
 -- Rank
 WITH win AS (
-SELECT p.k, p.t, v,
-    rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
-FROM probe p INNER JOIN build b
-  ON p.k = b.k
- AND p.t >= b.t
-QUALIFY r = 1
-) 
+  SELECT p.k, p.t, v,
+      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
+  FROM probe p INNER JOIN build b
+    ON p.k = b.k
+  AND p.t >= b.t
+  QUALIFY r = 1
+)
 SELECT k, t, v
 FROM win
 ORDER BY 1, 2;
