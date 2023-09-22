@@ -69,7 +69,7 @@ the most recent price before the holding's timestamp by using an AsOf Join:
 SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h ASOF JOIN prices p
   ON h.ticker = p.ticker
- AND h.when >= p.when
+ AND h.when >= p.when;
 ```
 
 This attaches the value of the holding at that time to each row:
@@ -96,7 +96,7 @@ SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h ASOF LEFT JOIN prices p
   ON h.ticker = p.ticker
  AND h.when >= p.when
-ORDER BY ALL
+ORDER BY ALL;
 ```
 
 As you might expect, this will produce `NULL` prices and values instead of dropping left side rows
@@ -129,7 +129,7 @@ SELECT ticker, h.when, price * shares AS value
 FROM holdings h INNER JOIN state s
   ON h.ticker = s.ticker
  AND h.when >= s.when
- AND h.when < s.end
+ AND h.when < s.end;
 ```
 
 The default value of `infinity` is used to make sure there is an end value for the last row that can be compared.
@@ -329,7 +329,7 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING(ticker, when)
+FROM holdings h ASOF JOIN prices p USING(ticker, when);
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,
@@ -451,7 +451,7 @@ WITH state AS (
 )
 SELECT SUM(v)
 FROM probe p INNER JOIN state s 
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k
+  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
 
 This works because the planner assumes that equality conditions are more selective
@@ -498,7 +498,7 @@ WITH state AS (
 )
 SELECT SUM(v)
 FROM probe p INNER JOIN state s
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k
+  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
 
 | Algorithm | Median of 5 |
@@ -536,7 +536,7 @@ FROM probe p INNER JOIN build b
 QUALIFY r = 1
 ) 
 SELECT k, t, v
-FROM win
+FROM win;
 ```
 
 The advantage of this windowing query is that it does not require sentinel values,
@@ -590,7 +590,8 @@ SELECT p.k, p.t, v
 FROM probe p ASOF JOIN build b
   ON p.k = b.k
  AND p.t >= b.t
-ORDER BY 1, 2
+ORDER BY 1, 2;
+
 -- Rank
 WITH win AS (
 SELECT p.k, p.t, v,
@@ -602,7 +603,7 @@ QUALIFY r = 1
 ) 
 SELECT k, t, v
 FROM win
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```
 
 The results are shown here:
