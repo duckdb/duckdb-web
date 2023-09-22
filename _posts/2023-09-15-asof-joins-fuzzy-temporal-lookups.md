@@ -398,12 +398,12 @@ using a self-join where only 50% of the keys are present
 and the timestamps have been shifted to be halfway between the originals:
 
 ```sql
-CREATE TABLE build AS (
+CREATE OR REPLACE TABLE build AS (
   SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
   FROM range(0,100000) vals(v), range(0,50) keys(k)
 );
 
-CREATE TABLE probe AS (
+CREATE OR REPLACE TABLE probe AS (
   SELECT k * 2 AS k, t - INTERVAL (30) SECOND AS t
   FROM build
 );
@@ -471,12 +471,12 @@ The horrible performance of the Hash Join is caused by the long (100K) bucket ch
 The second benchmark tests the case where the probe side is about 10x smaller than the build side:
 
 ```sql
-CREATE TABLE probe AS
+CREATE OR REPLACE TABLE probe AS
   SELECT k, 
     '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
   FROM range(0, 100000) tbl(k);
 
-CREATE TABLE build AS
+CREATE OR REPLACE TABLE build AS
   SELECT r % 100000 AS k, 
     '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
     (random() * 100000)::INTEGER AS v
@@ -552,11 +552,12 @@ and two probe tables, all containing 10K integer equality keys.
 The probe tables have either 1 or 15 timestamps per key:
 
 ```sql
-CREATE TABLE probe15 AS
+CREATE OR REPLACE TABLE probe15 AS
 	SELECT k, purchase_timestamp
 	FROM range(10000) cs(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
-CREATE TABLE probe1 AS
+
+CREATE OR REPLACE TABLE probe1 AS
 	SELECT k, '2022-01-01'::TIMESTAMP + INTERVAL (customer_id) HOUR purchase_timestamp
 	FROM range(10000) cs(k);
 ```
@@ -566,17 +567,19 @@ The build tables are much larger and have approximately
 
 ```sql
 -- 10:1
-CREATE TABLE build10 AS
+CREATE OR REPLACE TABLE build10 AS
 	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
 	FROM range(10000) ks(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
+
 -- 100:1
-CREATE TABLE build100 AS
+CREATE OR REPLACE TABLE build100 AS
 	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
 	FROM range(10000) ks(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
+
 -- 1000:1
-CREATE TABLE build1000 AS
+CREATE OR REPLACE TABLE build1000 AS
 	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
 	FROM range(10000) ks(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
