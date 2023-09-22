@@ -6,6 +6,7 @@ to: pdf
 metadata-file: metadata.yaml
 template: eisvogel2.tex
 pdf-engine: xelatex
+syntax-definition: sql-duckdb.xml
 table-of-contents: true
 toc-depth: 3
 top-level-division: part
