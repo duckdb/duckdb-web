@@ -70,7 +70,7 @@ Below are parameters that can be passed in to the CSV reader.
 
 ## read_csv_auto Function
 
-The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`
+The `read_csv_auto` is the simplest method of loading CSV files: it automatically attempts to figure out the correct configuration of the CSV reader. It also automatically deduces types of columns. If the CSV file has a header, it will use the names found in that header to name the columns. Otherwise, the columns will be named `column0, column1, column2, ...`. An example with the [`flights.csv`](/data/flights.csv) file:
 
 ```sql
 SELECT * FROM read_csv_auto('flights.csv');
@@ -84,7 +84,7 @@ SELECT * FROM read_csv_auto('flights.csv');
 
 The path can either be a relative path (relative to the current working directory) or an absolute path.
 
-We can use read_csv_auto to create a persistent table as well:
+We can use `read_csv_auto` to create a persistent table as well:
 
 ```sql
 CREATE TABLE ontime AS SELECT * FROM read_csv_auto('flights.csv');

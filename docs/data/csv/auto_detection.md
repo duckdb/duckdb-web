@@ -29,9 +29,7 @@ The following dialects are considered for automatic dialect detection.
 | `escape`   | `"` `'` `\` (empty)   |
 
 
-Consider the following example file.
-
-**flights.csv**
+Consider the example file [`flights.csv`](/data/flights.csv):
 
 ```csv
 FlightDate|UniqueCarrier|OriginCityName|DestCityName
@@ -64,7 +62,7 @@ The type detection works by attempting to convert the values in each column to t
 | `TIMESTAMP` |
 | `VARCHAR`   |
 
-Note everything can be cast to `VARCHAR`. This type has the lowest priority - i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In `flights.csv` the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
+Note everything can be cast to `VARCHAR`. This type has the lowest priority - i.e., columns are converted to `VARCHAR` if they cannot be cast to anything else. In [`flights.csv`](/data/flights.csv) the `FlightDate` column will be cast to a `DATE`, while the other columns will be cast to `VARCHAR`.
 
 The detected types can be individually overridden using the `types` option. This option takes either a list of types (e.g., `types=[INT, VARCHAR, DATE]`) which overrides the types of the columns in-order of occurrence in the CSV file. Alternatively, `types` takes a `name -> type` map which overrides options of individual columns (e.g., `types={'quarter': INT}`).
 
@@ -72,7 +70,7 @@ The type detection can be entirely disabled by using the `all_varchar` option. I
 
 ## Header Detection
 
-Header detection works by checking if the candidate header row deviates from the other rows in the file in terms of types. For example, in `flights.csv`, we can see that the header row consists of only `VARCHAR` columns - whereas the values contain a `DATE` value for the `FlightDate` column. As such - the system defines the first row as the header row and extracts the column names from the header row.
+Header detection works by checking if the candidate header row deviates from the other rows in the file in terms of types. For example, in [`flights.csv`](/data/flights.csv), we can see that the header row consists of only `VARCHAR` columns - whereas the values contain a `DATE` value for the `FlightDate` column. As such - the system defines the first row as the header row and extracts the column names from the header row.
 
 In files that do not have a header row, the column names are generated as `column0`, `column1`, etc.
 
