@@ -628,7 +628,7 @@ There's nothing stopping us from putting all of these concepts together to ask q
 
 How about:
 
-- What was the largest female penguin (by body mass) on each island in the year 2008?
+* What was the largest female penguin (by body mass) on each island in the year 2008?
 
 ```python
 penguins.filter((penguins.sex == "female") & (penguins.year == 2008)).group_by(
@@ -648,7 +648,7 @@ penguins.filter((penguins.sex == "female") & (penguins.year == 2008)).group_by(
 └───────────┴──────────────────┘
 ```
 
-- What about the largest male penguin (by body mass) on each island for each year of data collection?
+* What about the largest male penguin (by body mass) on each island for each year of data collection?
 
 ```python
 penguins.filter(penguins.sex == "male").group_by(["island", "year"]).aggregate(

@@ -154,34 +154,34 @@ SELECT * FROM range(date '1992-01-01', date '1992-03-01', interval '1' month);
 
 ## Slicing
 The function `list_slice` can be used to extract a sublist from a list.  The following variants exist:
-- `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
-- `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
-- `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
-- `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
-- `list[`*`begin`*`:`*`end`*`]`
-- `list[`*`begin`*`:`*`end`*`:`*`step`*`]`
+* `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
+* `list_slice(`*`list`*`, `*`begin`*`, `*`end`*`)`
+* `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
+* `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`, `*`step`*`)`
+* `list[`*`begin`*`:`*`end`*`]`
+* `list[`*`begin`*`:`*`end`*`:`*`step`*`]`
 
 **`list`**
-- Is the list to be sliced
+* Is the list to be sliced
 
 **`begin`**
-- Is the index of the first element to be included in the slice
-- When `begin < 0` the index is counted from the end of the list
-- When `begin < 0` and `-begin > length`, `begin` is clamped to the beginning of the list
-- When `begin > length`, the result is an empty list
-- **Bracket Notation:** When `begin` is omitted, it defaults to the beginning of the list
+* Is the index of the first element to be included in the slice
+* When `begin < 0` the index is counted from the end of the list
+* When `begin < 0` and `-begin > length`, `begin` is clamped to the beginning of the list
+* When `begin > length`, the result is an empty list
+* **Bracket Notation:** When `begin` is omitted, it defaults to the beginning of the list
 
 **`end`**
-- Is the index of the last element to be included in the slice
-- When `end < 0` the index is counted from the end of the list
-- When `end > length`, end is clamped to `length`
-- When `end < begin`, the result is an empty list
-- **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`.
+* Is the index of the last element to be included in the slice
+* When `end < 0` the index is counted from the end of the list
+* When `end > length`, end is clamped to `length`
+* When `end < begin`, the result is an empty list
+* **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`
 
 **`step`** *(optional)*
-- Is the step size between elements in the slice
-- When `step < 0` the slice is reversed, and `begin` and `end` are swapped
-- Must be non-zero
+* Is the step size between elements in the slice
+* When `step < 0` the slice is reversed, and `begin` and `end` are swapped
+* Must be non-zero
 
 ```sql
 SELECT list_slice([1, 2, 3, 4, 5], 2, 4);
