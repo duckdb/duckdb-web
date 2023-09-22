@@ -1253,8 +1253,9 @@ body.documentation{
 		zoom: 1;
 	}
 	li{
-		line-height: 26px;
+		line-height: 1.2em;
 		cursor: pointer;
+		padding: 5px 0 5px 0;
 		&.active{
 			text-decoration: underline;
 			&.hasSub {
