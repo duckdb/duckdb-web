@@ -126,7 +126,9 @@ jobs:
       - run: pip install linkchecker --user
 
       - name: Link Checker on latest
-        run: linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+        run: |
+          linkchecker https://duckdb.org/ --ignore-url 'https://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}
         if: always()
