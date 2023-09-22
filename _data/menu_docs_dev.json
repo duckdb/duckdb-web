@@ -952,6 +952,14 @@
               "url": "autocomplete"
             },
             {
+              "page": "AWS",
+              "url": "aws"
+            },
+            {
+              "page": "Azure",
+              "url": "azure"
+            },
+            {
               "page": "Full Text Search",
               "url": "full_text_search"
             },
