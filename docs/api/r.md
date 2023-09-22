@@ -126,6 +126,6 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning=1)") |>
   collect()
 ```
 
-## Repository
+## GitHub Repository
 
-The source code of the DuckDB R API is available on [GitHub](https://github.com/duckdb/duckdb-r).
+[<span class="github">GitHub</span>](https://github.com/duckdb/duckdb-r)
