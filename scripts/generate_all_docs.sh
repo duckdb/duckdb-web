@@ -3,7 +3,7 @@ set -xeuo pipefail
 
 if [ "${1-}" = "" ]
 then
-    echo >&2 "usage: $0 duckdb_dir"
+    echo >&2 "Usage: $0 duckdb_dir_with_debug_duckdb"
     exit 1
 fi
 
