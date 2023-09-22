@@ -122,10 +122,11 @@ These can both be fairly expensive operations, but the query would look like thi
 
 ```sql
 WITH state AS (
-  SELECT ticker, when, price,
-    LEAD(when, 1, 'infinity') OVER (PARTITION BY ticker ORDER BY when) AS end
-),
-SELECT ticker, h.when, price * shares AS value
+  SELECT ticker, price, "when",
+    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+  FROM prices
+)
+SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h INNER JOIN state s
   ON h.ticker = s.ticker
  AND h.when >= s.when
@@ -350,9 +351,10 @@ Remember that we used this query to convert the event table to a state table:
 
 ```sql
 WITH state AS (
-  SELECT ticker, when, price,
-    LEAD(when, 1, 'infinity') OVER(PARTITION BY ticker ORDER BY when) AS end
-),
+  SELECT ticker, price, "when",
+    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+  FROM prices
+)
 ```
 The state table CTE is created by hash partitioning the table on `ticker`,
 sorting on `when` and then computing another column that is just `when` shifted down by one.
