@@ -176,7 +176,7 @@ The function `list_slice` can be used to extract a sublist from a list.  The fol
 * When `end < 0` the index is counted from the end of the list
 * When `end > length`, end is clamped to `length`
 * When `end < begin`, the result is an empty list
-* **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`.
+* **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`
 
 **`step`** *(optional)*
 * Is the step size between elements in the slice
