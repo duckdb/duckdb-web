@@ -9,4 +9,4 @@ The `iceberg` extension is a loadable extension that implements support for the 
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/duckdblabs/postgres_scanner)
+[<span class="github">GitHub</span>](https://github.com/duckdblabs/duckdb_iceberg)
