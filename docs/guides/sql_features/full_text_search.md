@@ -28,12 +28,9 @@ DESCRIBE corpus;
 └─────────────┴─────────────┴─────────┘
 ```
 
-the text of each line is in `text_entry`, and a unique key for each
-line is in `line_id`.
+The text of each line is in `text_entry`, and a unique key for each line is in `line_id`.
 
-First, we create the index, specifying the table name, the unique id
-column, and the column(s) to index.  We will just index the single column
-`text_entry`, which contains the text of the lines in the play.
+First, we create the index, specifying the table name, the unique id column, and the column(s) to index. We will just index the single column `text_entry`, which contains the text of the lines in the play.
 
 ```sql
 INSTALL 'fts';
@@ -41,9 +38,7 @@ LOAD fts;
 PRAGMA create_fts_index('corpus', 'line_id', 'text_entry');
 ```
 
-The table is now ready to query using the
-[Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25)
-ranking function.  Rows with no match return a null score.
+The table is now ready to query using the [Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) ranking function.  Rows with no match return a null score.
 
 What does Shakespeare say about butter?
 
@@ -79,8 +74,7 @@ SELECT fts_main_corpus.match_bm25(line_id, 'butter') AS score,
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-Unlike standard indexes, full text indexes don't auto-update as the underlying data is changed, so you need to
-`PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
+Unlike standard indexes, full text indexes don't auto-update as the underlying data is changed, so you need to `PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
 
 ## Note on Generating the Corpus Table
 
