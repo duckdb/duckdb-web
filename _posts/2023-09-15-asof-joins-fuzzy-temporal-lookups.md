@@ -69,7 +69,7 @@ the most recent price before the holding's timestamp by using an AsOf Join:
 SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h ASOF JOIN prices p
   ON h.ticker = p.ticker
- AND h.when >= p.when
+ AND h.when >= p.when;
 ```
 
 This attaches the value of the holding at that time to each row:
@@ -96,7 +96,7 @@ SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h ASOF LEFT JOIN prices p
   ON h.ticker = p.ticker
  AND h.when >= p.when
-ORDER BY ALL
+ORDER BY ALL;
 ```
 
 As you might expect, this will produce `NULL` prices and values instead of dropping left side rows
@@ -122,14 +122,15 @@ These can both be fairly expensive operations, but the query would look like thi
 
 ```sql
 WITH state AS (
-  SELECT ticker, when, price,
-    LEAD(when, 1, 'infinity') OVER (PARTITION BY ticker ORDER BY when) AS end
-),
-SELECT ticker, h.when, price * shares AS value
+  SELECT ticker, price, "when",
+    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+  FROM prices
+)
+SELECT h.ticker, h.when, price * shares AS value
 FROM holdings h INNER JOIN state s
   ON h.ticker = s.ticker
  AND h.when >= s.when
- AND h.when < s.end
+ AND h.when < s.end;
 ```
 
 The default value of `infinity` is used to make sure there is an end value for the last row that can be compared.
@@ -329,7 +330,7 @@ Our first query can then be written as:
 
 ```sql
 SELECT ticker, h.when, price * shares AS value
-FROM holdings h ASOF JOIN prices p USING(ticker, when)
+FROM holdings h ASOF JOIN prices p USING(ticker, when);
 ```
 
 Be aware that if you don't explicitly list the columns in the `SELECT`,
@@ -350,9 +351,10 @@ Remember that we used this query to convert the event table to a state table:
 
 ```sql
 WITH state AS (
-  SELECT ticker, when, price,
-    LEAD(when, 1, 'infinity') OVER(PARTITION BY ticker ORDER BY when) AS end
-),
+  SELECT ticker, price, "when",
+    LEAD("when", 1, 'infinity') OVER (PARTITION BY ticker ORDER BY "when") AS end
+  FROM prices
+)
 ```
 The state table CTE is created by hash partitioning the table on `ticker`,
 sorting on `when` and then computing another column that is just `when` shifted down by one.
@@ -398,12 +400,12 @@ using a self-join where only 50% of the keys are present
 and the timestamps have been shifted to be halfway between the originals:
 
 ```sql
-CREATE TABLE build AS (
+CREATE OR REPLACE TABLE build AS (
   SELECT k, '2001-01-01 00:00:00'::TIMESTAMP + INTERVAL (v) MINUTE AS t, v
   FROM range(0,100000) vals(v), range(0,50) keys(k)
 );
 
-CREATE TABLE probe AS (
+CREATE OR REPLACE TABLE probe AS (
   SELECT k * 2 AS k, t - INTERVAL (30) SECOND AS t
   FROM build
 );
@@ -451,7 +453,7 @@ WITH state AS (
 )
 SELECT SUM(v)
 FROM probe p INNER JOIN state s 
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k
+  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
 
 This works because the planner assumes that equality conditions are more selective
@@ -471,12 +473,12 @@ The horrible performance of the Hash Join is caused by the long (100K) bucket ch
 The second benchmark tests the case where the probe side is about 10x smaller than the build side:
 
 ```sql
-CREATE TABLE probe AS
+CREATE OR REPLACE TABLE probe AS
   SELECT k, 
     '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
   FROM range(0, 100000) tbl(k);
 
-CREATE TABLE build AS
+CREATE OR REPLACE TABLE build AS
   SELECT r % 100000 AS k, 
     '2021-01-01T00:00:00'::TIMESTAMP + INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
     (random() * 100000)::INTEGER AS v
@@ -498,7 +500,7 @@ WITH state AS (
 )
 SELECT SUM(v)
 FROM probe p INNER JOIN state s
-  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k
+  ON p.t >= s.begin AND p.t < s.end AND p.k = s.k;
 ```
 
 | Algorithm | Median of 5 |
@@ -528,15 +530,15 @@ The query looks like:
 
 ```sql
 WITH win AS (
-SELECT p.k, p.t, v,
-    rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
-FROM probe p INNER JOIN build b
-  ON p.k = b.k
- AND p.t >= b.t
-QUALIFY r = 1
+  SELECT p.k, p.t, v,
+      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC) AS r
+  FROM probe p INNER JOIN build b
+    ON p.k = b.k
+  AND p.t >= b.t
+  QUALIFY r = 1
 ) 
 SELECT k, t, v
-FROM win
+FROM win;
 ```
 
 The advantage of this windowing query is that it does not require sentinel values,
@@ -552,11 +554,12 @@ and two probe tables, all containing 10K integer equality keys.
 The probe tables have either 1 or 15 timestamps per key:
 
 ```sql
-CREATE TABLE probe15 AS
+CREATE OR REPLACE TABLE probe15 AS
 	SELECT k, purchase_timestamp
 	FROM range(10000) cs(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
-CREATE TABLE probe1 AS
+
+CREATE OR REPLACE TABLE probe1 AS
 	SELECT k, '2022-01-01'::TIMESTAMP + INTERVAL (customer_id) HOUR purchase_timestamp
 	FROM range(10000) cs(k);
 ```
@@ -566,17 +569,19 @@ The build tables are much larger and have approximately
 
 ```sql
 -- 10:1
-CREATE TABLE build10 AS
+CREATE OR REPLACE TABLE build10 AS
 	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
 	FROM range(10000) ks(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
+
 -- 100:1
-CREATE TABLE build100 AS
+CREATE OR REPLACE TABLE build100 AS
 	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
 	FROM range(10000) ks(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
+
 -- 1000:1
-CREATE TABLE build1000 AS
+CREATE OR REPLACE TABLE build1000 AS
 	SELECT k, t, (RANDOM() * 1000)::DECIMAL(7,2) AS v
 	FROM range(10000) ks(k), 
 	     range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
@@ -590,19 +595,20 @@ SELECT p.k, p.t, v
 FROM probe p ASOF JOIN build b
   ON p.k = b.k
  AND p.t >= b.t
-ORDER BY 1, 2
+ORDER BY 1, 2;
+
 -- Rank
 WITH win AS (
-SELECT p.k, p.t, v,
-    rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
-FROM probe p INNER JOIN build b
-  ON p.k = b.k
- AND p.t >= b.t
-QUALIFY r = 1
-) 
+  SELECT p.k, p.t, v,
+      rank() OVER (PARTITION BY p.k, p.t ORDER BY b.t DESC)  AS r
+  FROM probe p INNER JOIN build b
+    ON p.k = b.k
+  AND p.t >= b.t
+  QUALIFY r = 1
+)
 SELECT k, t, v
 FROM win
-ORDER BY 1, 2
+ORDER BY 1, 2;
 ```
 
 The results are shown here:
