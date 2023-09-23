@@ -4,19 +4,7 @@
 
 ### Prerequisites
 
-Build DuckDB in `debug` mode. Install the Python client as well as the `httpfs` and `icu` extensions:
-
-```bash
-# build the DuckDB CLI client
-GEN=ninja BUILD_HTTPFS=1 BUILD_ICU=1 OPENSSL_ROOT_DIR=/opt/homebrew/bin/ make debug
-# install extensions to the DuckDB CLI client
-build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
-build/debug/duckdb -c "INSTALL 'build/debug/extension/icu/icu.duckdb_extension';"
-
-# build the DuckDB Python client
-pip install -e tools/pythonpkg
-# extensions are shared across clients so there is no need to install them to Python
-```
+Get the DuckDB nightly build from the [installation page](https://duckdb.org/docs/installation/), available under the GitHub main (Bleeding Edge) tab.
 
 Install the NodeJS and Python dependencies:
 
@@ -30,5 +18,5 @@ pip install -r requirements.txt
 Run the script as follows:
 
 ```bash
-./scripts/generate_all_docs.sh <path_to_duckdb_dir>
+./scripts/generate_all_docs.sh <path_to_bleeding_edge_duckdb_dir>
 ```
