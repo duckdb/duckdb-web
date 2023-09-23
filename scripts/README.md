@@ -20,10 +20,11 @@ python3 -c "import duckdb; duckdb.sql(\"INSTALL 'build/debug/extension/httpfs/ht
 python3 -c "import duckdb; duckdb.sql(\"INSTALL 'build/debug/extension/icu/icu.duckdb_extension';\")"
 ```
 
-Install the NodeJS dependencies:
+Install the NodeJS and Python dependencies:
 
 ```bash
 npm install
+python -m pip install -r requirements.txt
 ```
 
 ### Running the script
