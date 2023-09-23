@@ -21,7 +21,7 @@ The functions below are difficult to categorize into specific function types and
 | `force_checkpoint(`*`database`*`)`| Synchronize WAL with file for (optional) database interrupting transactions. | `force_checkpoint(my_db)`| success boolean |
 | `gen_random_uuid()` | Alias of `uuid`. Return a random uuid similar to this: eeccb8c5-9943-b2bb-bb5e-222f4e14b687. | `gen_random_uuid()`| various |
 | `hash(`*`value`*`)` | Returns an integer with the hash of the *value*| `hash('🦆')` | `2595805878642663834` |
-| `icu_sort_key(`*`string`*`, `*`collator`*`)` | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed.| `icu_sort_key('ö', 'DE')` | 460145960106|
+| `icu_sort_key(`*`string`*`, `*`collator`*`)` | Surrogate key used to sort special characters according to the specific locale. Collator parameter is optional. Valid only when ICU extension is installed.| `icu_sort_key('ö', 'DE')` | `460145960106` |
 | `md5(`*`string`*`)` | Return an md5 one-way hash of the *string*.| `md5('123')` | `'202cb962ac59075b964b07152d234b70'`|
 | `nextval(`*`'sequence_name'`*`)`| Return the following value of the sequence.| `nextval('my_sequence_name')`| `2` |
 | `pg_typeof(`*`expression`*`)` | Returns the lower case name of the data type of the result of the expression. For PostgreSQL compatibility.| `pg_typeof('abc')` | `'varchar'` |
