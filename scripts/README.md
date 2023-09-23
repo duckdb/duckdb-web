@@ -30,5 +30,5 @@ python -m pip install -r requirements.txt
 Run the script as follows:
 
 ```bash
-scripts/generate_all_docs.sh <path_to_duckdb_dir>
+./scripts/generate_all_docs.sh <path_to_duckdb_dir>
 ```
