@@ -12,6 +12,7 @@ The functions below are difficult to categorize into specific function types and
 | `alias(`*`column`*`)` | Return the name of the column| `alias(column1)` | `'column1'` |
 | `checkpoint(`*`database`*`)`| Synchronize WAL with file for (optional) database without interrupting transactions. | `checkpoint(my_db)`| success boolean |
 | `coalesce(`*`expr`*`, `*`...`*`)` | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. | `coalesce(NULL, NULL, 'default_string')` | `'default_string'`|
+| `error(`*`message`*`)` | Throws the given error *message* | `error('access_mode')` | |
 | `ifnull(`*`expr`*`, `*`other`*`)` | A two-argument version of coalesce | `ifnull(NULL, 'default_string')` | `'default_string'`|
 | `nullif(`*`a`*`, `*`b`*`)` | Return null if a = b, else return a. Equivalent to `CASE WHEN a=b THEN NULL ELSE a END`. | `nullif(1+1, 2)` | `NULL`|
 | `current_schema()`| Return the name of the currently active schema. Default is main. | `current_schema()` | `'main'`|
