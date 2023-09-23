@@ -14,7 +14,7 @@ build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_exten
 build/debug/duckdb -c "INSTALL 'build/debug/extension/icu/icu.duckdb_extension';"
 
 # build the DuckDB Python client
-python3 tools/pythonpkg/setup.py install
+pip install -e tools/pythonpkg
 # extensions are shared across clients so there is no need to install them to Python
 ```
 
