@@ -4,11 +4,20 @@
 
 ### Prerequisites
 
-Build DuckDB in `debug` mode and install the `httpfs` and `icu` extensions:
+Build DuckDB in `debug` mode. Install the Python client as well as the `httpfs` and `icu` extensions:
 
 ```bash
-GEN=ninja BUILD_HTTPFS=1 BUILD_ICU=1 make debug
-build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension'; INSTALL 'build/debug/extension/icu/icu.duckdb_extension';"
+# build DuckDB CLI binary
+GEN=ninja BUILD_HTTPFS=1 BUILD_ICU=1 OPENSSL_ROOT_DIR=/opt/homebrew/bin/ make debug
+# install extensions to DuckDB CLI binary
+build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+build/debug/duckdb -c "INSTALL 'build/debug/extension/icu/icu.duckdb_extension';"
+
+# build DuckDB Python client
+python3 tools/pythonpkg/setup.py install
+# install extensions to Python client
+python3 -c "import duckdb; duckdb.sql(\"INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';\")"
+python3 -c "import duckdb; duckdb.sql(\"INSTALL 'build/debug/extension/icu/icu.duckdb_extension';\")"
 ```
 
 Install the NodeJS dependencies:
