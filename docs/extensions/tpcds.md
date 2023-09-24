@@ -5,9 +5,9 @@ title: TPC-DS
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).
 
-## Loading the Extension
+## Installing and Loading
 
-In order to use the `tpcds` extension it must first be installed and loaded. This can be done using the following commands:
+The `tpcds` extension is shipped in the default DuckDB build and is loaded automatically when used. If you would like to install and load it manually, run:
 
 ```sql
 INSTALL tpcds;
