@@ -110,8 +110,8 @@ $(document).ready(function(){
 		
 		var classList = userSelection.version + userSelection.environment + userSelection.pack + userSelection.platform;
 		var result = $('.possibleresults div'+classList).html();
-		$('.installartion.output .result').html(result);
-		
+		$('.installation.output .result').html(result);
+
 		var exampleResult = $('.possibleresults .example'+userSelection.environment).html();
 		$('.example.output .result').html(exampleResult);
 
